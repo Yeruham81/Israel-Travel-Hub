@@ -9,6 +9,7 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { affiliateConfig } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { christianToursHero, christianAreas, christianRoutes, christianOffers, christianFaqs, christianSiteCards, christianPlanningCards, type ChristianArea, type ChristianRelated, type ChristianOffer } from "@/data/christianToursGuide";
 
 const updatedAt="2026-11-21";
@@ -64,7 +65,7 @@ function AreaCard({area}:{area:ChristianArea}){
 }
 function Related({item}:{item:ChristianRelated}){
  return <Link to={item.to} className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
-   <img src={item.image} alt={item.alt} width={640} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
+   <img src={guideHeroPhotoForPath(String(item.to))?.src ?? item.image} alt={guideHeroPhotoForPath(String(item.to))?.alt ?? item.alt} width={640} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
    <span className="flex flex-1 flex-col p-3 sm:p-4"><strong className="text-sm leading-snug group-hover:text-primary sm:text-base">{item.title}</strong><span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.description}</span></span>
  </Link>;
 }

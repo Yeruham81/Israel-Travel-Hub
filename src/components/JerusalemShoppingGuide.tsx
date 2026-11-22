@@ -12,6 +12,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import {
   jerusalemShoppingPlaces as places, shoppingMapPoints, shoppingTopPicks, shoppingDistricts,
   type ShoppingPlace,
@@ -308,7 +309,7 @@ export function JerusalemShoppingGuide() {
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
           {related.map(item => <Link key={item.to} to={item.to}
             className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-primary">
-            <img src={item.image} alt={item.alt} loading="lazy" decoding="async" width={560} height={340}
+            <img src={guideHeroPhotoForPath(String(item.to))?.src ?? item.image} alt={guideHeroPhotoForPath(String(item.to))?.alt ?? item.alt} loading="lazy" decoding="async" width={560} height={340}
               className="aspect-[16/10] w-full object-cover" />
             <span className="flex flex-1 flex-col p-3 sm:p-4">
               <strong className="text-sm leading-snug group-hover:text-primary sm:text-base">{item.title}</strong>

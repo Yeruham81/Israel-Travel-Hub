@@ -13,6 +13,7 @@ import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { ShoreServiceCatalog } from "@/components/ShoreServiceCatalog";
 import { parseShoreServiceSearch, shoreSourceIds, type ShoreServiceSearch } from "@/lib/shore-services";
 import { SHORE_EXCURSION_UPDATED_DATE } from "@/data/shoreHub";
@@ -76,7 +77,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
       <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" role="list" aria-label="Useful guides for your day ashore">
         {port.related.map(guide => <article key={guide.to} role="listitem" className="min-w-0">
           <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
-            <img src={guide.photo.src} alt={guide.photo.alt} width={320} height={176} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+            <img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src} alt={guideHeroPhotoForPath(String(guide.to))?.alt ?? guide.photo.alt} width={320} height={176} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
             <span className="flex flex-1 flex-col p-3.5">
               <span className="text-base font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
               <span className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{guide.description}</span>

@@ -7,6 +7,7 @@ import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { seniorUpdatedAt, seniorPath, seniorHero, seniorDayTrips, seniorTransportPreferences, seniorAccessQuestions, seniorFaqs, seniorSites, seniorPlanning, type SeniorDay, type SeniorRelated } from "@/data/seniorToursGuide";
 
 const lnk="font-semibold text-primary underline underline-offset-4 hover:text-primary/80";
@@ -49,7 +50,7 @@ function External({href,children}:{href:string;children:ReactNode}){
 }
 function PhotoLink({item}:{item:SeniorRelated}){
  return <Link to={item.to} className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
-  <img src={item.image} alt={item.alt} width={640} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
+  <img src={guideHeroPhotoForPath(String(item.to))?.src ?? item.image} alt={guideHeroPhotoForPath(String(item.to))?.alt ?? item.alt} width={640} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
   <span className="flex flex-1 flex-col p-3 sm:p-4"><strong className="text-base leading-snug group-hover:text-primary">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</span></span>
  </Link>;
 }

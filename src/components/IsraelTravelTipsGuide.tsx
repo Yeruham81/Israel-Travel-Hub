@@ -17,6 +17,7 @@ import airport from "@/assets/home/ben-gurion-t3.webp";
 import train from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { TRAVEL_TIPS_TITLE, TRAVEL_TIPS_UPDATED, travelTipsFaqs, travelTipsSources, travelTipsHero } from "@/data/israelTravelTips";
 
 const linkClass = "font-semibold text-primary underline underline-offset-4 hover:text-primary/80";
@@ -85,7 +86,7 @@ function Tip({ children }: { children: ReactNode }) {
 
 function PhotoCard({ image, alt, name, description, href, cta }: { image: string; alt: string; name: string; description: string; href: string; cta: string }) {
   return <li className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
-    <img src={image} alt={alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
+    <img src={guideHeroPhotoForPath(href)?.src ?? image} alt={guideHeroPhotoForPath(href)?.alt ?? alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
     <div className="flex flex-1 flex-col p-4"><h4 className="text-lg font-bold">{name}</h4><p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p><a href={href} className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary underline underline-offset-4 hover:text-primary/80">{cta}<ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
   </li>;
 }
@@ -198,7 +199,7 @@ export function IsraelTravelTipsGuide() {
       <section id="related" className="mt-12 scroll-mt-24" aria-labelledby="related-title">
         <Heading id="related-title" intro="Dive deeper only where you need more detail. These six guides help with the next stage of planning.">Related practical Israel travel guides</Heading>
         <ul className="grid grid-cols-2 gap-4 lg:grid-cols-3" data-testid="travel-tips-related-guides">
-          {related.map(card => <li key={card.href} className="editorial-card-link min-w-0 overflow-hidden rounded-xl border bg-card"><a href={card.href} className="group flex h-full flex-col"><img src={card.image} alt={card.alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><h3 className="font-bold group-hover:text-primary">{card.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.description}</p></div></a></li>)}
+          {related.map(card => <li key={card.href} className="editorial-card-link min-w-0 overflow-hidden rounded-xl border bg-card"><a href={card.href} className="group flex h-full flex-col"><img src={guideHeroPhotoForPath(card.href)?.src ?? card.image} alt={guideHeroPhotoForPath(card.href)?.alt ?? card.alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><h3 className="font-bold group-hover:text-primary">{card.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.description}</p></div></a></li>)}
         </ul>
       </section>
 

@@ -12,6 +12,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import {
   topTenExperiences as experiences, topTenMapRegions, topTenSuggestedRoutes,
   topTenFaqs, topTenIsraelHero, type TopTenExperience,
@@ -75,7 +76,7 @@ function Tip({ children }: { children: ReactNode }) {
 }
 function GuideCard({ item }: { item: typeof related[number] | typeof planning[number] }) {
   return <Link to={item.to} className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-primary">
-    <img src={item.image} alt={item.alt} loading="lazy" decoding="async" width={560} height={350} className="aspect-[16/10] w-full object-cover" />
+    <img src={guideHeroPhotoForPath(String(item.to))?.src ?? item.image} alt={guideHeroPhotoForPath(String(item.to))?.alt ?? item.alt} loading="lazy" decoding="async" width={560} height={350} className="aspect-[16/10] w-full object-cover" />
     <span className="flex flex-1 flex-col p-3 sm:p-4">
       <strong className="text-sm leading-snug group-hover:text-primary sm:text-base">{item.title}</strong>
       <span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.desc}</span>

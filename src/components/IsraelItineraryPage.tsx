@@ -10,6 +10,7 @@ import type { GetYourGuideWidgetPage } from "@/lib/getyourguide-city-widget";
 import { guideContactCopy } from "@/lib/guide-contact";
 import type { GuidePhoto } from "@/data/travelGuides";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { isPublisherUrl } from "@/data/registry";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { AuthorCard } from "@/components/AuthorCard";
@@ -286,7 +287,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       <h2 id="related-guides-h" className="text-3xl">Related practical guides</h2>
       <div className={g.relatedGuides.length === 6 ? "mt-5 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-5 grid gap-3 sm:grid-cols-2"}>
         {g.relatedGuides.map((item) => {
-          const picture = migrationPhotos[item.image];
+          const picture = guideHeroPhotoForPath(String(item.to)) ?? migrationPhotos[item.image];
           return <article key={item.to} className="editorial-card-link overflow-hidden rounded-xl border bg-card">
             <Link to={item.to} className="group grid h-full grid-cols-1 items-start gap-3 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:grid-cols-[116px_minmax(0,1fr)]">
               <img src={picture.src} alt={picture.alt} width={220} height={180} loading="lazy" decoding="async"
@@ -307,7 +308,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       <div className="mt-5 grid gap-4 sm:grid-cols-3">
         {itineraryIds.filter((other) => other !== id).map((other) => {
           const choice = itineraries[other];
-          const choicePhoto = migrationPhotos[choice.hero];
+          const choicePhoto = guideHeroPhotoForPath(String(choice.path)) ?? migrationPhotos[choice.hero];
           return <article key={other} className="overflow-hidden rounded-xl border bg-card">
             <Link to={choice.path as LinkProps["to"]} className="group block hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <img src={choicePhoto.src} alt={choicePhoto.alt} width={440} height={300} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />

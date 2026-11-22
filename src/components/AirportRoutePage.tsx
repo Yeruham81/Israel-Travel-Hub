@@ -16,6 +16,7 @@ import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 
 function crumbsFor(id: AirportTransferRouteId) {
   const guide = getAirportRouteGuide(id);
@@ -152,7 +153,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {relatedCards.map((card) => <li key={card.title}>
             <Link to={card.to} className="editorial-card-link group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <img src={card.photo.src} alt={card.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+              <img src={guideHeroPhotoForPath(String(card.to))?.src ?? card.photo.src} alt={guideHeroPhotoForPath(String(card.to))?.alt ?? card.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug group-hover:text-primary">{card.title}</span>
                 <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{card.description}</span>
