@@ -51,8 +51,8 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
 }
 
 export function ExternalTourCard({ tour, pageId }: { tour: TourProduct; pageId: string; compact?: boolean }) {
-  const offers = offersForTour(tour.id, pageId);
-  // Use a partner offer with a documented price first, then the first approved link.
+  const offers = offersForTour(tour.id, pageId).filter(offer => offer.provider.isAffiliate);
+  // Use a partner offer with a documented price first, then the first approved Travelpayouts link.
   const primaryOffer = offers.find(offer => tourSnapshotPrice(offer)) ?? offers[0];
   if (!primaryOffer) return null;
   const price = tourSnapshotPrice(primaryOffer);
