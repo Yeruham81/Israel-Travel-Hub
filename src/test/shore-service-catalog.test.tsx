@@ -118,7 +118,7 @@ describe("port service catalog", () => {
     await pageAt("/shore-excursions/haifa/?service=guided-tour");
     const guided = cards().find((card) => card.dataset["serviceId"] === "haifa-shore-viator-haifa-jerusalem-bethlehem")!;
     expect(guided).not.toHaveTextContent("Sponsored link");
-    const link = within(guided).getByRole("link", { name: /View on Viator/ });
+    const link = within(guided).getByRole("link", { name: /^View tour: .* on Viator/ });
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
     fireEvent.click(link);
