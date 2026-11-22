@@ -1,6 +1,5 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
 import heroJerusalemLarge from "@/assets/home/hero-jerusalem-large.webp";
-import jerusalemOldCity from "@/assets/home/jerusalem-old-city.webp";
 import type { SacredHillEditorial } from "@/data/sacredHillGuides";
 
 /**
@@ -122,7 +121,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
       description: "The Jewish cemetery covers much of the western hillside and is one of Jerusalem's most significant historic burial grounds. It is part of Jewish religious tradition and continues to serve families and mourners today.",
       visit: "The panoramic terrace offers a clear view over the cemetery. If you want to visit particular graves or learn about its history, consult the Mount of Olives cemetery information before your trip.",
       tipLabel: "For a closer look",
-      image: { src: jerusalemOldCity, alt: "Jerusalem Old City with the historic Mount of Olives cemetery in the foreground" },
+      image: { src: "/images/jerusalem/mount-of-olives/jewish-cemetery.webp", alt: "Dense rows of historic Jewish graves on the Mount of Olives with Jerusalem Old City across the valley" },
     },
   ],
   transportIntro: "You can reach the upper viewpoint directly by car or bus. For an Old City visit, the most useful distinction is between transport to the upper ridge and transport to Gethsemane at its foot.",
