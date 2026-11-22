@@ -1,10 +1,12 @@
 import type { ReactNode } from "react";
-import { BusFront, CarFront, ExternalLink } from "lucide-react";
+import { BusFront, CarFront } from "lucide-react";
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
+import { tourBookingOffers, tourProducts } from "@/data/registry";
+import { tourSnapshotPrice } from "@/lib/tours";
 import { SiteLink as Link } from "@/components/SiteLink";
 import { AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip, type AttractionDestinationContent } from "@/components/AttractionDestinationPage";
 import { affiliateConfig } from "@/data/registry";
 import { recordAffiliateTourClick } from "@/lib/tour-analytics";
-import { relFor } from "@/lib/outbound";
 const lakeHero = "/images/attractions/sea-of-galilee.webp";
 import waterfront from "@/assets/tiberias/waterfront.webp";
 import sunrise from "@/assets/tiberias/sunrise.webp";
@@ -75,19 +77,19 @@ export function SeaOfGalileeTourCards() {
     {galileeTours.map(tour => {
       const href = affiliateConfig[tour.id]?.trackingUrl;
       if (!href) return null;
-      return <a key={tour.id} href={href} target="_blank" rel={relFor(true)}
+      const offer = tourBookingOffers.find(item => item.id === tour.id.split("@")[0]);
+      const product = tourProducts.find(item => item.id === offer?.productId);
+      const snapshot = offer ? tourSnapshotPrice(offer) : undefined;
+      return <ExternalProviderTourCard
+        key={tour.id}
+        image={tour.photo.src} alt={tour.photo.alt} platform={tour.provider}
+        title={tour.title} description={tour.description}
+        duration={product?.duration} location={tour.departure}
+        rating={product?.rating && { value: product.rating.value, count: product.rating.count }}
+        price={snapshot && { amount: snapshot.amount, currency: snapshot.currency, basis: snapshot.basis, maxPartySize: snapshot.maxPartySize }}
+        href={href}
         onClick={() => recordAffiliateTourClick({ pageId: "attractions-sea-of-galilee", productId: tour.id, offerId: tour.id, provider: tour.provider, linkUrl: href })}
-        className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-        <img src={tour.photo.src} alt={tour.photo.alt} width={480} height={280} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
-        <span className="flex flex-1 flex-col p-4">
-          <span className="text-xs font-semibold uppercase tracking-wide text-primary">{tour.provider}</span>
-          <span className="mt-1 text-base font-bold leading-snug">{tour.title}</span>
-          <span className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.description}</span>
-          <span className="mt-3 text-xs font-semibold text-muted-foreground">{tour.departure} · Check current dates and rates</span>
-          <span className="mt-auto flex items-center gap-1 pt-4 text-sm font-semibold text-primary">View tour details <ExternalLink className="size-3.5" aria-hidden="true" /></span>
-        </span>
-        <span className="sr-only"> (opens in a new tab)</span>
-      </a>;
+      />;
     })}
   </div>;
 }
