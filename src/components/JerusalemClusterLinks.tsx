@@ -128,8 +128,8 @@ export function JerusalemClusterLinks({ pageKey }: { pageKey: JerusalemClusterKe
     <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Find the practical guide, related place or booking options relevant to the next part of your visit.</p>
     <ul className={links.length === 6 ? "mt-5 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-5 grid gap-3 sm:grid-cols-2"}>
       {links.map(item => <li key={String(item.to)}>
-        <Link to={item.to} aria-label={item.label} className="group block h-full rounded-xl border bg-card p-4 hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-          <span className="block font-semibold leading-snug group-hover:text-primary">{item.label} <span aria-hidden="true">→</span></span>
+        <Link to={item.to} aria-label={item.label} className="editorial-card-link group block h-full rounded-xl border bg-card p-4 transition-colors hover:border-primary/60 hover:bg-secondary/30 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <span className="block font-semibold leading-snug group-hover:text-primary">{item.label}</span>
           <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">{item.why}</span>
         </Link>
       </li>)}
