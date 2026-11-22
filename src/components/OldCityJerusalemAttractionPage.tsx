@@ -107,63 +107,49 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The Old City has no single entrance ticket or unified opening schedule. You can freely explore public streets and many major religious sites, while museums, underground tours and special experiences have their own prices and access rules.</p>
-      <div className="grid gap-3 md:grid-cols-2" data-testid="jerusalem-old-city-hours-fees">
-        <article className="rounded-xl border bg-card p-4">
-          <div className="flex items-center gap-2"><Ticket className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">Free places to visit</h3></div>
-          <dl className="mt-3 space-y-2 text-sm sm:text-base">
-            <div className="flex justify-between gap-3"><dt>Old City public streets and markets</dt><dd className="font-semibold">Free</dd></div>
-            <div className="flex justify-between gap-3"><dt>Western Wall prayer plaza</dt><dd className="font-semibold">Free</dd></div>
-            <div className="flex justify-between gap-3"><dt>Church of the Holy Sepulchre</dt><dd className="font-semibold">Free</dd></div>
-            <div className="flex justify-between gap-3"><dt>Via Dolorosa public route</dt><dd className="font-semibold">Free</dd></div>
-          </dl>
-          <p className="mt-3 text-sm leading-relaxed">The Western Wall plaza is accessible 24 hours a day, while churches and individual religious compounds follow their own visiting schedules. Worship, security and religious holidays can affect entry.</p>
-          <a href={official.christianHours} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Current religious-site opening hours <ArrowUpRight className="h-4 w-4"/></a>
-        </article>
-        <article className="rounded-xl border bg-card p-4">
-          <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">Ticketed attractions</h3></div>
-          <dl className="mt-3 space-y-2 text-sm sm:text-base">
-            <div className="flex justify-between gap-3"><dt>Tower of David Museum</dt><dd className="shrink-0 font-semibold">{info.towerAdult} adult</dd></div>
-            <div className="flex justify-between gap-3"><dt>Ramparts Walk</dt><dd className="shrink-0 font-semibold">{info.rampartsAdult} adult</dd></div>
-            <div className="flex justify-between gap-3"><dt>Western Wall Tunnels</dt><dd className="shrink-0 font-semibold">By tour</dd></div>
-          </dl>
-          <p className="mt-3 text-sm leading-relaxed"><a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tower of David</a> · <a href={official.rampartsTickets} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramparts tickets</a> · <a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tunnel reservations</a></p>
-        </article>
+      <p>Explore the streets, prayer plazas and market lanes at your own pace. Use this table to compare visiting arrangements for individual landmarks and book time-specific experiences.</p>
+      <div role="region" aria-label="Old City opening hours and admission table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" data-testid="jerusalem-old-city-hours-fees">
+        <table className="w-full min-w-[830px] border-collapse text-left text-sm">
+          <caption className="sr-only">Opening hours, prices and entry information for Old City landmarks</caption>
+          <thead className="bg-secondary/60">
+            <tr>{["Site", "Visiting hours", "Admission", "Booking and entry"].map((heading,index)=><th key={heading} scope="col" className={index===0?"sticky left-0 z-10 border-b bg-secondary px-3 py-3 font-semibold":"border-b px-3 py-3 font-semibold"}>{heading}</th>)}</tr>
+          </thead>
+          <tbody>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Old City streets and markets</th><td className="px-3 py-3 align-top">Public pedestrian routes throughout the day</td><td className="px-3 py-3 align-top">Free</td><td className="px-3 py-3 align-top">Shop hours vary by quarter and day</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Western Wall plaza</th><td className="px-3 py-3 align-top">Generally open day and night</td><td className="px-3 py-3 align-top">Free</td><td className="px-3 py-3 align-top"><a href={official.westernWall} target="_blank" rel="noopener noreferrer" className={inlineLink}>Prayer and visitor guidance</a>; screening at busy times</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Church of the Holy Sepulchre</th><td className="px-3 py-3 align-top">Daily; hours vary seasonally and for services</td><td className="px-3 py-3 align-top">Free</td><td className="px-3 py-3 align-top"><a href={official.christianHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Church opening hours</a>; allow time for queues</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Via Dolorosa</th><td className="px-3 py-3 align-top">Public lanes throughout the day</td><td className="px-3 py-3 align-top">Free</td><td className="px-3 py-3 align-top">Chapels along the route have individual schedules</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Jewish Quarter & Cardo</th><td className="px-3 py-3 align-top">Public streets throughout the day</td><td className="px-3 py-3 align-top">Free public lanes</td><td className="px-3 py-3 align-top">Hurva Synagogue interiors and exhibits have separate visiting arrangements</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Temple Mount</th><td className="px-3 py-3 align-top">Non-Muslim visiting windows generally Sunday–Thursday, when permitted</td><td className="px-3 py-3 align-top">Subject to access arrangements</td><td className="px-3 py-3 align-top">Use the designated approach near the Western Wall and check current entry instructions</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Tower of David Museum</th><td className="px-3 py-3 align-top">Sun 12:00–17:00; Mon, Wed, Thu 09:00–17:00; Tue 09:00–20:00; Fri, Sat 09:00–15:00</td><td className="px-3 py-3 align-top">{info.towerAdult} adult</td><td className="px-3 py-3 align-top"><a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tickets and hours</a>; last entry one hour before closing</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Ramparts Walk</th><td className="px-3 py-3 align-top">Sat–Thu 09:00–16:00 winter / 17:00 summer; Fridays and holiday eves 09:00–14:00</td><td className="px-3 py-3 align-top">{info.rampartsAdult} adult</td><td className="px-3 py-3 align-top"><a href={official.rampartsTickets} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tickets</a>; enter at Jaffa Gate and choose north or south</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Western Wall Tunnels</th><td className="px-3 py-3 align-top">Timed guided visits by reservation</td><td className="px-3 py-3 align-top">By tour</td><td className="px-3 py-3 align-top"><a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>Choose and book a tour</a>; follow its specific meeting-point directions</td></tr>
+          </tbody>
+        </table>
       </div>
-      <section className="rounded-xl border bg-card p-4 sm:p-5" aria-labelledby="old-city-hours-heading" data-testid="jerusalem-old-city-published-hours">
-        <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 id="old-city-hours-heading" className="font-serif text-xl font-semibold">Regular opening hours at ticketed sites</h3></div>
-        <div className="mt-3 grid gap-4 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
-          <div className="rounded-lg border border-border/70 p-3">
-            <h4 className="font-semibold">Tower of David Museum</h4>
-            <p className="mt-1">Sunday 12:00–17:00; Monday, Wednesday and Thursday 09:00–17:00; Tuesday 09:00–20:00; Friday and Saturday 09:00–15:00. Last entry is one hour before closing.</p>
-            <a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>Confirm museum hours</a>
-          </div>
-          <div className="rounded-lg border border-border/70 p-3">
-            <h4 className="font-semibold">Ramparts Walk</h4>
-            <p className="mt-1">Saturday–Thursday 09:00–16:00 in winter and 09:00–17:00 in summer. Fridays and Jewish holiday eves: 09:00–14:00. On Fridays, the southern route and only the Jaffa Gate–New Gate section of the northern route are open.</p>
-            <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Confirm Ramparts hours</a>
-          </div>
+      <p className="text-sm leading-relaxed">For religious holidays and special events, check <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Israel's calendar of events</Link> and the relevant operator's opening notice.</p>
+      <section className="rounded-xl border bg-secondary/20 p-4 sm:p-5" data-testid="jerusalem-old-city-published-hours">
+        <h3 className="font-serif text-xl font-semibold">Two worthwhile paid experiences</h3>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <div><h4 className="font-semibold">Ramparts Walk</h4><p className="mt-1 text-sm leading-relaxed">The <strong>southern route</strong> runs from Jaffa Gate toward Dung Gate above the Armenian and Jewish Quarters (around 45 minutes). The <strong>northern route</strong> runs toward Lion's Gate above the Christian and Muslim Quarters (around 90 minutes). Friday access is limited to the southern route and Jaffa Gate–New Gate northern section. Both routes have stairs and elevated stone paths. <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Routes, hours and tickets</a>.</p></div>
+          <div><h4 className="font-semibold">Western Wall Tunnels</h4><p className="mt-1 text-sm leading-relaxed">Book the route that interests you: archaeological passages reveal sections of the Western Wall and historic structures beneath today's streets. Check <a href={official.tunnelsAccessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>accessibility for the individual tour</a> and the <a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>available guided sessions</a>.</p></div>
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Special dates</Link> and holidays may change these hours. Western Wall Tunnels visits run <a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>by reservation</a>; check your chosen tour time.</p>
       </section>
-      <AttractionPracticalTip>If you book a Western Wall Tunnels tour, save the confirmation and follow its exact meeting-point and arrival instructions. Navigating to the Western Wall plaza alone may not take you to your tour’s meeting place.</AttractionPracticalTip>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="jerusalem-old-city-entry">
-        <h3 className="font-serif text-xl font-semibold">Which entry gate should you use?</h3>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Jaffa Gate</strong> works well for the Tower of David, the Christian Quarter and the Armenian Quarter. <strong>Dung Gate</strong> is convenient for the Western Wall and the Jewish Quarter. <strong>Damascus Gate</strong> leads to the Muslim Quarter's markets and the Via Dolorosa.</p>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">Pedestrian access can be redirected for major holidays, ceremonies or security events. Choose the gate that fits your main destination and arrange any transport to its road-accessible approach.</p>
+        <h3 className="font-serif text-xl font-semibold">Choose the right entrance gate</h3>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">Begin at <strong>Jaffa Gate</strong> for the Tower of David and the Christian and Armenian Quarters; use <strong>Dung Gate</strong> for the Western Wall; choose <strong>Damascus Gate</strong> for the Muslim Quarter markets; or enter through <strong>Zion Gate</strong> when arriving from Mount Zion. <strong>New Gate</strong> serves the Christian Quarter, while <strong>Lion's Gate</strong> connects the eastern Old City with the Mount of Olives.</p>
+        <p className="mt-2 text-sm leading-relaxed">The <a href="#getting-there" className={inlineLink}>gate comparison and approach instructions</a> below help you plan a pickup or drop-off.</p>
       </div>
-      <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="jerusalem-old-city-access">
-        <h3 className="font-serif text-xl font-semibold">Accessibility, safety and facilities</h3>
-        <ul className="mt-3 list-disc pl-5 text-sm leading-relaxed sm:columns-2 sm:gap-x-6 sm:text-base [&>li]:mb-2 [&>li]:break-inside-avoid">
-          <li><strong>Walking:</strong> Expect stone paving, slopes, steps and narrow alleys; comfortable shoes make a difference.</li>
-          <li><strong>Accessibility:</strong> Some adapted routes and entrances are available, but many ancient buildings and elevated walks are not step-free. Use <a href={official.accessibleJlmIos} target="_blank" rel="noopener noreferrer" className={inlineLink}>Accessible JLM for iPhone</a> or <a href={official.accessibleJlmAndroid} target="_blank" rel="noopener noreferrer" className={inlineLink}>Android</a> to plan accessible walks through the Old City.</li>
-          <li><strong>Security:</strong> Screening and temporary pedestrian diversions can occur near major religious sites.</li>
-          <li><strong>Street works:</strong> Accessibility improvements along Christian Quarter Road, underway in November 2026, may temporarily change pedestrian routes. Allow for local diversions and follow signs on arrival. <a href={official.christianQuarterWorks} target="_blank" rel="noopener noreferrer" className={inlineLink}>Read about the works</a>.</li>
-          <li><strong>Dress:</strong> Wear clothing suitable for active places of worship; individual sites may have specific requirements.</li>
-          <li><strong>Photography:</strong> Observe the posted rules and avoid photographing people at prayer without consent.</li>
-          <li><strong>Facilities:</strong> Public toilets and places to buy refreshments are available in several areas; locations vary by quarter.</li>
-        </ul>
-        <p className="mt-3 text-sm leading-relaxed">For church schedules, the <a href={official.christianHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Information Center</a> maintains a practical visitor list. For the Western Wall, see the <a href={official.westernWall} target="_blank" rel="noopener noreferrer" className={inlineLink}>official visitor information</a>.</p>
+      <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="jerusalem-old-city-access">
+        <h3 className="font-serif text-xl font-semibold">Accessibility, families and practical facilities</h3>
+        <div className="mt-3 grid gap-3 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
+          <p><strong>Walking:</strong> Historic stone paving, slopes and stairs make distances feel longer. Shoes with a good grip and regular rests help on longer visits.</p>
+          <p><strong>Accessible routes:</strong> Adapted paths are available through parts of the city. The <a href={official.accessibleJlmIos} target="_blank" rel="noopener noreferrer" className={inlineLink}>Accessible JLM iPhone guide</a> and <a href={official.accessibleJlmAndroid} target="_blank" rel="noopener noreferrer" className={inlineLink}>Android app</a> can help identify suitable routes. Check specific buildings and entrances.</p>
+          <p><strong>Strollers and wheelchairs:</strong> Jaffa Gate offers a convenient arrival from Mamilla. Dung Gate is useful for approaching the Western Wall. Ramparts stairs and some historic interiors require a different visitor plan.</p>
+          <p><strong>Places of worship:</strong> Wear appropriate clothing, follow worship-area instructions and respect people at prayer. Screening and temporary pedestrian changes may occur during ceremonies and holidays.</p>
+          <p><strong>Breaks and facilities:</strong> Public toilets, food stalls and cafés are available in different quarters. Plan a rest near a market or open plaza between major stops.</p>
+          <p><strong>Current routes:</strong> Check local signs for street works and temporary diversions. <a href={official.christianQuarterWorks} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Quarter access updates</a> may help during improvement works.</p>
+        </div>
       </div>
     </div>
   ),
