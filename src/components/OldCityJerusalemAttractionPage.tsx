@@ -9,9 +9,7 @@ import { CuratedPartnerTourCard } from "@/components/CuratedPartnerTourCard";
 import { OldCityJerusalemRouteMap } from "@/components/OldCityJerusalemRouteMap";
 import { tourProducts } from "@/data/registry";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
-import oldCityTourPhoto from "@/assets/home/jerusalem-old-city-card.webp";
 import guidedTourPhoto from "@/assets/home/guided-tour-card.webp";
-import gateTourPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
 
 const featuredOldCityTours = tourProducts.filter(tour => tour.status === "published" && (tour.id === "jerusalem-old-city-walk" || tour.id === "jerusalem-private-oldcity-walk"));
 
@@ -50,8 +48,8 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   itineraryTitle: "Plan your Old City visit",
   contactIntroduction: "Tell me your hotel or pickup point, visiting date and the Old City landmarks you would like to see. I can arrange convenient private transport to a suitable entrance gate, coordinate a pickup after your walk or plan a longer Jerusalem day.",
   facts: [
-    { icon: "location", label: "Location", value: "Inside the city walls", note: "Jaffa, Damascus, Dung and Zion Gates" },
-    { icon: "duration", label: "Time needed", value: "2–3 hours to a full day", note: "Allow 4–5 hours for the main sights and a relaxed walk" },
+    { icon: "location", label: "Location", value: "Inside the city walls", note: "Six main entrance gates featured on the map" },
+    { icon: "duration", label: "Time needed", value: "2–3 hours to a full day", note: "Around 4–5 hours for a classic cross-quarter walk" },
     { icon: "admission", label: "Old City streets", value: "Free entry", note: "Museums, tours and the ramparts charge separately" },
     { icon: "hours", label: "Opening hours", value: "Vary by site", note: "Religious services and security affect access" },
     { icon: "highlights", label: "Don't miss", value: "Sacred landmarks", note: "Western Wall, Holy Sepulchre and historic lanes" },
@@ -99,7 +97,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Damascus Gate and the Muslim Quarter Markets" image={{ src: photos.damascus, alt: "Historic stone Damascus Gate at the entrance to Jerusalem's Old City" }}>
         <p>Damascus Gate leads into the lively markets of the Muslim Quarter, where you can browse traditional food shops, souks and narrow streets. The gate is also a useful approach to the early stations of the Via Dolorosa.</p>
-        <p>For panoramic views, the separate <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramparts Walk</a> starts at Jaffa Gate, not Damascus Gate. Its visitor routes have stairs, uneven paving and narrow elevated paths; they are not wheelchair accessible or suitable for baby strollers.</p>
+        <p>For panoramic views, begin the <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramparts Walk</a> at Jaffa Gate. Its north and south routes have stairs, uneven paving and elevated stone paths, which affect wheelchair and stroller access.</p>
         <p className="text-xs font-semibold text-muted-foreground">Markets and gate free; separate Ramparts Walk: {info.rampartsAdult} per adult</p>
       </AttractionHighlight>
       <AttractionPracticalTip>Following the Via Dolorosa? Save a station-by-station route before setting out. The numbered stops can be easy to miss among busy market lanes, and the final stations are inside the Church of the Holy Sepulchre.</AttractionPracticalTip>
@@ -307,11 +305,13 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
     </div>
   ),
   faqs: [
-    { q: "How long should I spend in Jerusalem's Old City?", a: "Allow 2–3 hours for a short walk with one or two major landmarks, or 4–5 hours for the Holy Sepulchre, Jewish Quarter and Western Wall at a relaxed pace. A full day is better for a museum, a booked tunnel tour or a detailed pilgrimage route." },
-    { q: "Which gate is closest to the Western Wall?", a: "Dung Gate is often the simplest approach. Jaffa Gate suits visits beginning near the Tower of David and Christian Quarter, while Damascus Gate is useful for the northern markets and Via Dolorosa." },
-    { q: "Can I visit the Old City on Saturday?", a: "Yes. Public streets and the Western Wall plaza remain accessible, and the Church of the Holy Sepulchre usually opens daily. Shops and museums follow different hours. Trains, Jerusalem’s light rail and most city buses generally stop from Friday afternoon until Saturday evening, so check opening times and your transport options in advance." },
-    { q: "Can non-Muslims visit the Dome of the Rock or Al-Aqsa Mosque?", a: "The interiors are generally not open to non-Muslim visitors. For non-Muslim visitors, Temple Mount access is normally limited to Sunday–Thursday visiting windows and is generally unavailable on Friday and Saturday. Check the current arrangements shortly before your visit." },
-    { q: "Is Jerusalem's Old City wheelchair accessible?", a: "Some adapted routes and places are accessible, but many alleys and old buildings have slopes or stairs. Contact the specific attraction and plan a suitable entry gate before travelling." },
+    { q: "How long should I spend in Jerusalem’s Old City?", a: "Allow two to three hours for a short introduction, around four to five hours for a walk through the Christian and Jewish Quarters, or a full day with a museum or guided tour." },
+    { q: "Which entrance gate is best for the Western Wall?", a: "Dung Gate is the most direct common entrance to the Western Wall plaza. Jaffa Gate is convenient for a route beginning at the Tower of David and the Christian Quarter." },
+    { q: "Which gate is best for the Via Dolorosa?", a: "Damascus Gate is useful for approaching through the Muslim Quarter markets. Lion’s Gate is closer to the early Stations of the Cross. The traditional route ends inside the Church of the Holy Sepulchre." },
+    { q: "Can I visit Jerusalem’s Old City on Saturday?", a: "Yes. The public streets and Western Wall plaza are accessible, and the Holy Sepulchre generally opens daily. Individual museums and shops have their own opening hours. Israeli trains, the light rail and most city buses generally pause during Shabbat." },
+    { q: "How can I visit the Ramparts Walk?", a: "Start at Jaffa Gate and choose the northern route towards Lion’s Gate or the southern route towards Dung Gate. Both involve stairs and elevated stone paths. Check operating hours and buy a ticket on the official East Jerusalem Development website." },
+    { q: "Can non-Muslims visit the Temple Mount?", a: "When permitted, non-Muslim visits usually use a designated approach near the Western Wall during limited Sunday–Thursday morning or midday windows. The Dome of the Rock and Al-Aqsa Mosque interiors are generally reserved for Muslim worshippers. Check current arrangements before your visit." },
+    { q: "Is Jerusalem’s Old City accessible by wheelchair?", a: "Some streets and main approaches are adapted, particularly near major gates. Other historic alleys, stairways and buildings have limited access. Choose the entrance that suits your destination and consult Accessible JLM for suitable routes." },
   ],
   nearby: [
     { label: "Mount of Olives", to: "/attractions/mount-of-olives/", note: "Jerusalem skyline views, Gethsemane and hillside churches." },
