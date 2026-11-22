@@ -166,9 +166,9 @@ describe("migrated Israel itineraries", () => {
     const cards = file("src/components/JerusalemItineraryTourOptions.tsx");
     expect(cards).toContain("<details");
     expect(cards).toContain("More day trips from Jerusalem");
-    expect(cards).toContain(">{tour.provider}</span>");
+    expect(cards).toContain("platform={tour.provider}");
     expect(cards).not.toContain("{item.area} · {tour.provider}");
-    expect(cards).toContain("rel={relFor(true)}");
+    expect(cards).toContain("<ExternalProviderTourCard");
     expect(cards).not.toContain("Affiliate links: I may earn a commission if you book.");
     expect(cards).not.toContain("indicative snapshots, not live quotes.");
     expect(cards).not.toContain("Check availability, current prices, inclusions, entry requirements");
@@ -210,7 +210,7 @@ describe("migrated Israel itineraries", () => {
     expect(footer).toContain("Some links on this page are affiliate links");
     expect(tours).toContain("Explore optional day trips from Jerusalem");
     expect(tours).not.toContain("not additional stops to fit into it");
-    expect(tours).toContain('rel={relFor(true)}');
+    expect(tours).toContain("<ExternalProviderTourCard");
     expect(tours).toContain("recordOutboundClick");
   });
 
@@ -346,7 +346,7 @@ describe("migrated Israel itineraries", () => {
     expect(tours).toContain('export function JerusalemItineraryTourOptions({ days = 3 }');
     expect(tours).toContain('itt_${days}day_');
     expect(tours).toContain('pageId: `israel-itinerary-${days}-days`');
-    expect(tours).toContain("grid gap-5 sm:grid-cols-2 xl:grid-cols-3");
+    expect(tours).toContain("grid gap-5 sm:grid-cols-2 lg:grid-cols-3");
   });
 
   it("provides a coherent seven-day route across three hotel bases with realistic transfer days", () => {
@@ -487,7 +487,7 @@ describe("migrated Israel itineraries", () => {
     expect(tours).toContain("days: 3 | 5 | 7 | 10");
     expect(tours).toContain('itt_${days}day_');
     expect(tours).toContain('pageId: `israel-itinerary-${days}-days`');
-    expect(tours).toContain("grid gap-5 sm:grid-cols-2 xl:grid-cols-3");
+    expect(tours).toContain("grid gap-5 sm:grid-cols-2 lg:grid-cols-3");
     expect(new URL(getYourGuideCityWidgetSrc("jerusalem", "7_day")).searchParams.get("shmarker")).toBe("622032.7_day");
     expect(new URL(getYourGuideCityWidgetSrc("telAviv", "7_day")).searchParams.get("iata")).toBe("TLV");
     expect(file("src/components/GetYourGuideCityWidget.tsx")).not.toContain("Optional tours and activities from GetYourGuide (affiliate).");
