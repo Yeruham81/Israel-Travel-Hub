@@ -578,7 +578,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     answer: "After landing at Terminal 3, follow the signs to passport control, collect your luggage, pass through customs and continue to the arrivals hall. Before travelling, check whether you need an ETA-IL or visa for your passport. From the arrivals hall, follow the signs to your train, bus, official taxi or pre-booked pickup. Allow extra time for passport control and baggage collection before arranging your pickup.",
     topics: ["tips", "transportation"],
     updatedAt: "2026-10-22",
-    photo: hallPhoto,
+    photo: { src: "/images/travel-blog/featured-ben-gurion-arrival.webp", alt: "Welcome to Israel sign at Ben Gurion Airport arrivals" },
     facts: [
       { label: "International arrivals", text: "Terminal 3; check current airport notices" },
       { label: "Entry documents", text: "Valid passport and visa or ETA-IL where required" },
@@ -786,8 +786,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     topics: ["transportation", "destinations", "itineraries", "tips"],
     updatedAt: "2026-11-12",
     photo: {
-      src: archivedBuses,
-      alt: "Buses waiting at a transport terminal in the Tel Aviv metropolitan area",
+      src: "/images/travel-blog/featured-getting-around-israel.webp",
+      alt: "Traffic on a busy Israeli highway in the Tel Aviv area",
     },
     facts: [
       { label: "Between cities", text: "Compare train and bus routes to your destination" },
@@ -1176,7 +1176,7 @@ telAviv: {
     answer: "For most visitors, walking and city buses are the easiest ways to explore Tel Aviv. The Red Line light rail is also useful when its stations are close to your destination. Use Israel Railways for airport and intercity journeys; its Tel Aviv stations are inland, away from the beach. Taxis are convenient for late arrivals, heavy luggage and trips during Shabbat. Regular buses and trains generally stop during Shabbat, but Tel Aviv has a free weekend bus network on selected routes.",
     updatedAt: "2026-11-12",
     topics: ["transportation", "destinations", "tips"],
-    photo: {src: telAvivDizengoff, alt: "Street scene in the Dizengoff area of Tel Aviv"},
+    photo: {src: jerusalemLightRail, alt: "Tel Aviv light rail tram on the Red Line"},
     facts: [
       { label: "Best starting point", text: "Walk locally; check buses and the Red Line light rail for cross-town trips" },
       { label: "How to pay", text: "Rav-Kav card or an authorized app; card taps are not yet universal" },
@@ -1536,7 +1536,7 @@ const guideDirectoryEntries: GuideDirectoryEntry[] = [
   ...Object.values(travelGuides).filter((guide) => !travelGuidePaths[guide.id].startsWith("/attractions/")).map((guide) => ({ id: guide.id, title: guide.title, description: guide.description, to: travelGuidePaths[guide.id], topics: guide.topics, photo: guide.photo, updatedAt: guide.updatedAt ?? "" })),
   { id: "stay-jerusalem", title: "Where to stay in Jerusalem", description: "Choose the neighbourhood and hotel style that fit your visit.", to: "/travel-blog/where-to-stay-in-jerusalem/", topics: ["destinations", "accommodation"], photo: stayEditorialHeroPhotos.jerusalem, updatedAt: cityStayGuides.jerusalem.reviewedAt ?? "" },
   { id: "stay-telaviv", title: "Where to stay in Tel Aviv", description: "Compare beachfront, Jaffa and central neighbourhoods.", to: "/travel-blog/where-to-stay-in-tel-aviv/", topics: ["destinations", "accommodation"], photo: stayEditorialHeroPhotos.telaviv, updatedAt: cityStayGuides.telaviv.reviewedAt ?? "" },
-  { id: "stay-haifa", title: "Where to stay in Haifa", description: "Understand coastal, German Colony and Carmel hotel locations.", to: "/travel-blog/best-hotels-in-haifa/", topics: ["destinations", "accommodation"], photo: haifaStayGuide.photo, updatedAt: "2026-11-19" },
+  { id: "stay-haifa", title: "Where to stay in Haifa", description: "Understand coastal, German Colony and Carmel hotel locations.", to: "/travel-blog/best-hotels-in-haifa/", topics: ["destinations", "accommodation"], photo: { src: "/images/travel-blog/featured-haifa-hotels.webp", alt: "Haifa hotels and cityscape" }, updatedAt: "2026-11-19" },
   { id: "stay-tiberias", title: "Tiberias & Sea of Galilee hotels", description: "Lakeside bases, family facilities and practical arrival checks.", to: "/travel-blog/best-hotels-in-tiberias/", topics: ["destinations", "accommodation"], photo: tiberiasStayGuide.photo, updatedAt: "2026-11-19" },
   { id: "stay-deadsea", title: "Dead Sea hotels", description: "Choose Ein Bokek, a spa stay or a family hotel on the Israeli shore.", to: "/travel-blog/best-dead-sea-hotels/", topics: ["destinations", "accommodation"], photo: deadSeaStayGuide.photo, updatedAt: "2026-11-19" },
 // ISO YYYY-MM-DD dates sort lexically. Stable sort preserves existing order for

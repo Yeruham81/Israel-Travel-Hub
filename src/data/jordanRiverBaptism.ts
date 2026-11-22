@@ -3,7 +3,7 @@ export const BAPTISM_PATH = "/travel-blog/baptism-in-the-jordan-river/";
 export const BAPTISM_TITLE = "Baptism in the Jordan River: Yardenit vs. Qasr el-Yahud";
 export const BAPTISM_DESCRIPTION = "My practical Jordan River baptism guide: compare Yardenit and Qasr el-Yahud, arrange clergy and robes, check access, and plan your Holy Land tour or private driver.";
 export const BAPTISM_UPDATED = "2026-11-21";
-export const BAPTISM_HERO = { src: "/images/attractions/jordan-river-baptism.webp", alt: "Pilgrims in white robes participating in a Jordan River baptism" } as const;
+export const BAPTISM_HERO = { src: "/images/travel-blog/featured-jordan-baptism.webp", alt: "Baptism ceremony at Yardenit on the Jordan River" } as const;
 export const baptismSources = [
   {label:"Yardenit — official baptism arrangements",url:"https://www.yardenit.com/baptism/"},
   {label:"Yardenit — questions and answers",url:"https://www.yardenit.com/qa/"},

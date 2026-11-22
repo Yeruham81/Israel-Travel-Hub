@@ -11,6 +11,7 @@ import yardenit from "@/assets/guides/yardenit.jpg";
 import qasr from "@/assets/guides/qasr-el-yahud.jpg";
 import sepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import jerusalemShabbatNight from "@/assets/travel-blog-hub/jerusalem-night-443d64981d-420.webp";
+import jerusalemShoppingFeature from "@/assets/guides/2026-11/jerusalem-old-city-market-lanes.webp";
 
 const photos = {
   hall: { src: hall, alt: "Ben Gurion Airport Terminal 3 arrivals hall", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" },
@@ -31,7 +32,7 @@ export const expandedTravelGuides = {
     answer: "Ben Gurion Airport stays open on Shabbat, but most regular trains and buses stop for part of Friday and Saturday. Limited free weekend Line 711 serves central Tel Aviv from Terminal 1, if its timetable fits your arrival. Official airport taxis run 24 hours a day, while an advance-confirmed private transfer is an alternative for a direct journey, groups or other destinations. Check the actual first Saturday-night train before deciding to wait.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-11",
-    photo: {src: jerusalemShabbatNight, alt: "Jerusalem city lights after dark, illustrating Shabbat evening travel"},
+    photo: {src: "/images/travel-blog/featured-shabbat-airport.webp", alt: "Road and airport travel during Shabbat near Ben Gurion Airport"},
     facts: [
       { label: "Free option", text: "Line 711: Terminal 1 to central Tel Aviv at limited weekend times" },
       { label: "Direct ride", text: "Authorized airport taxis operate 24/7; regulated meter and official queue" },
@@ -235,7 +236,7 @@ export const expandedTravelGuides = {
     description: "Plan a Jerusalem visit with Old City highlights, Mount of Olives, museums, markets and practical itinerary routes, hotels and day trips.",
     intro: "Plan Jerusalem by area and interest. A rewarding visit leaves time for its streets and neighbourhoods as well as the landmarks on your list.",
     answer: "For a first visit, consider two or three days as a planning starting point: an Old City day, a museum/market day and time for a hillside or neighbourhood that interests you. With one day, choose a focused route. Base yourself around the places you will visit and check Shabbat, religious-site access and reservations for your exact dates.",
-    topics: ["destinations", "attractions", "tips", "religion"], photo: photos.jerusalem,
+    topics: ["destinations", "attractions", "tips", "religion"], photo: { src: "/images/travel-blog/featured-jerusalem-travel-guide.webp", alt: "Jerusalem Old City framed by the window of Dominus Flevit Church" },
     facts: [{ label: "Planning starting point", text: "Two or three days; more for specialist interests or excursions" }, { label: "On foot", text: "Stone surfaces, hills and steps affect the route" }, { label: "Hotel choice", text: "Match neighbourhood, vehicle access and walking distance" }],
     comparison: { caption: "Choose an area for each part of your Jerusalem visit", headers: ["Area", "Why include it", "Plan around"], rows: [["Old City", "Sacred sites, historic streets and markets", "Access, worship, queues and uneven walking"], ["Mount of Olives / Kidron", "Views and Christian pilgrimage sites", "Slopes, site windows and a workable route"], ["City centre / Mahane Yehuda", "Market food and everyday city life", "Separate stall and restaurant hours"], ["Museum areas", "Art, archaeology and city history", "Reservations, interests and time inside"], ["German Colony / Ein Karem", "Neighbourhood atmosphere or a separate church visit", "Travel time beyond the Old City"]] },
     sections: [
@@ -276,7 +277,7 @@ export const expandedTravelGuides = {
     description: "My practical Jordan River baptism guide: compare Yardenit and Qasr el-Yahud, arrange clergy and robes, check access, and plan your Holy Land tour or private driver.",
     intro: "If you are planning a baptism or a Jordan River visit, I can help you compare Yardenit and Qasr el-Yahud, prepare for the ceremony and choose suitable transport.",
     answer: "Yardenit, south of the Sea of Galilee, and Qasr el-Yahud on the lower Jordan near Jericho are different places on the same river. Yardenit offers an established visitor and baptism facility; Qasr el-Yahud is associated with the traditional baptism location in the lower Jordan. Confirm access and ceremony arrangements with the chosen site and your clergy before arranging transport.",
-    topics: ["religion", "attractions", "itineraries"], photo: { src: "/images/attractions/jordan-river-baptism.webp", alt: "Pilgrims in white robes participating in a Jordan River baptism" },
+    topics: ["religion", "attractions", "itineraries"], photo: { src: "/images/travel-blog/featured-jordan-baptism.webp", alt: "Baptism ceremony at Yardenit on the Jordan River" },
     facts: [{ label: "Yardenit", text: "Galilee, beside the southern Sea of Galilee" }, { label: "Qasr el-Yahud", text: "Lower Jordan near Jericho, far from Yardenit" }, { label: "Ceremony", text: "Agree clergy, timing and site requirements separately" }],
     reviewNote: "Yardenit's own pages currently display different hour sets. Confirm your visit window and last permitted baptism directly instead of relying on one copied timetable. Historical photographs do not establish present access or water conditions.",
     comparison: { caption: "Choose the Jordan River baptism site", headers: ["Site", "Itinerary context", "Confirm"], rows: [["Yardenit", "Sea of Galilee, Tiberias or a Galilee pilgrimage", "Clergy, robe policy, ceremony window and facilities"], ["Qasr el-Yahud", "Jerusalem, Jericho or a planned lower-Jordan journey", "Current access, permitted activity and ceremony arrangements"], ["A ceremonial visit", "A dedicated appointment rather than a quick photo stop", "Your church's requirements and the complete visit duration"]] },
@@ -297,7 +298,7 @@ export const expandedTravelGuides = {
     description: "Plan Jerusalem church visits by Old City, Mount of Olives, Mount Zion and Ein Karem. Check walking routes, worship and visitor access.",
     intro: "Choose a meaningful route through living places of worship. Their geography, traditions and visitor arrangements matter as much as the number of churches on your list.",
     answer: "Group Jerusalem church visits into the Old City, Mount of Olives/Kidron Valley, Mount Zion and Ein Karem. Start with the sites important to your interests or pilgrimage, then check each site's own visitor and worship windows. Do not use one church's opening hours or one universal entrance-fee rule for every location.",
-    topics: ["religion", "attractions", "destinations"], photo: photos.sepulchre,
+    topics: ["religion", "attractions", "destinations"], photo: { src: "/images/travel-blog/featured-jerusalem-churches.webp", alt: "Jerusalem churches and religious architecture" },
     facts: [{ label: "Four clusters", text: "Old City, Mount of Olives, Mount Zion, Ein Karem" }, { label: "Worship first", text: "A visitor opening is not permission to join every service" }, { label: "Walking", text: "Allow for slopes, stairs, stone surfaces and queues" }],
     comparison: { caption: "Choose a Jerusalem church-visiting route", headers: ["Area", "Key places", "Planning issue"], rows: [["Old City", "Holy Sepulchre and Via Dolorosa", "Lanes, queues and shared worship spaces"], ["Mount of Olives / Kidron", "Gethsemane, Dominus Flevit and neighbouring churches", "Steep terrain and separate visiting windows"], ["Mount Zion", "Dormition Abbey, Cenacle and Gallicantu", "Individual access and entry arrangements"], ["Ein Karem", "Visitation and St John the Baptist", "Separate journey and hillside walking"]] },
     sections: [
@@ -320,8 +321,7 @@ export const expandedTravelGuides = {
     intro: "From Mahane Yehuda and the Old City souks to modern stores and local arts fairs, my guide will help you choose where to shop and what to combine.",
     answer: "I suggest Mahane Yehuda for food, the Old City for traditional souvenirs, Mamilla for brands, Malha for indoor shopping and Hutzot Hayotzer for artisan gifts. Check current dates for the Friday Bezalel Arts Fair.",
     topics: ["shopping", "destinations", "tips"],
-    photo: { src: "/images/jerusalem-shopping/hero.webp", alt: "Evening shopping promenade lined with fashion boutiques in Jerusalem" },
-    cardPhoto: { src: "/images/attractions/old-jerusalem-via-dolorosa.webp", alt: "Old City Jerusalem market passage and stone-paved souk" },
+    photo: { src: jerusalemShoppingFeature, alt: "Traditional market stalls along a stone passage in Jerusalem's Old City" },
     facts: [
       { label: "10 places", text: "Markets, shopping streets, workshops and a mall" },
       { label: "Central picks", text: "Mahane Yehuda, Old City, Mamilla and Ben Yehuda" },

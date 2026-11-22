@@ -48,6 +48,7 @@ import itineraryAkkoAerial from "@/assets/guides/old-city-acre-aerial.webp";
 import itineraryTenDayCover from "@/assets/home/hero-jerusalem-large.webp";
 import itineraryFiveDayCaesareaCover from "@/assets/home/caesarea-dusk.webp";
 import itineraryTenDayHaifaCover from "@/assets/home/haifa-port.webp";
+import originalTenDayIbex from "@/assets/negev/ramon-ibex.webp";
 
 
 export const migrationPhotos = {
@@ -301,4 +302,20 @@ export const migrationPhotos = {
     "src": itineraryJaffaStreets,
     "alt": "Historic streets and buildings in Old Jaffa"
   }
+  "featured-original-3day": {
+    src: "/images/travel-blog/featured-itinerary-3-days.webp",
+    alt: "Camel resting near Ein Gedi in Israel's Judean Desert",
+  },
+  "featured-original-5day": {
+    src: "/images/travel-blog/featured-itinerary-5-days.webp",
+    alt: "Five-day Israel itinerary travel scene",
+  },
+  "featured-original-7day": {
+    src: "/images/travel-blog/featured-itinerary-7-days.webp",
+    alt: "Israel travel itinerary scenery",
+  },
+  "featured-original-10day": {
+    src: originalTenDayIbex,
+    alt: "Ibex on the edge of the Ramon Crater in the Negev",
+  },
 } satisfies Record<string, GuidePhoto>;

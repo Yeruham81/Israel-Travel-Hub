@@ -11,7 +11,6 @@ import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { churchAreas, churchesSourceUrl, jerusalemChurches, type JerusalemChurch } from "@/data/jerusalemChurches";
 import { affiliateConfig } from "@/data/registry";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
-import hero from "@/assets/guides/holy-sepulchre.jpg";
 import oldCityPhoto from "@/assets/attractions-hub/card-old-city-jerusalem-420.webp";
 import olivePhoto from "@/assets/attractions-hub/card-mount-of-olives-420.webp";
 import zionPhoto from "@/assets/attractions-hub/card-mount-zion-420.webp";
@@ -129,7 +128,7 @@ export function JerusalemChurchesGuide(){
   return <main className="mx-auto max-w-5xl px-4 pb-10"><article>
     <header className="pt-6">
       <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/"}]}/>
-      <GuideHeroLayout image={<GuideHeroMedia src={hero} alt="The Church of the Holy Sepulchre in Jerusalem's Old City"/>}>
+      <GuideHeroLayout image={<GuideHeroMedia src="/images/travel-blog/featured-jerusalem-churches.webp" alt="Jerusalem churches and religious architecture"/>}>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Jerusalem · Christian heritage</p>
         <h1 className="guide-page-title mt-2">Churches in Jerusalem: What to See &amp; How to Visit</h1>
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From the Church of the Holy Sepulchre to the hillside churches of the Mount of Olives, I have organised Jerusalem's Christian sites by area to help you choose meaningful stops, understand their traditions and plan a practical visit.</p>

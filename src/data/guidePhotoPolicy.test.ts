@@ -55,6 +55,33 @@ describe("guide cards always use the destination hero image", () => {
     expect(collisions).toEqual([]);
   });
 
+  it("uses verified original WordPress featured images, not the first article image", () => {
+    const legacyFeatured = {
+      "/travel-blog/jerusalem-travel-guide/": "/images/travel-blog/featured-jerusalem-travel-guide.webp",
+      "/travel-blog/getting-around-israel/": "/images/travel-blog/featured-getting-around-israel.webp",
+      "/travel-blog/ben-gurion-airport-arrival-tips/": "/images/travel-blog/featured-ben-gurion-arrival.webp",
+      "/travel-blog/from-ben-gurion-airport-on-shabbat/": "/images/travel-blog/featured-shabbat-airport.webp",
+      "/travel-blog/baptism-in-the-jordan-river/": "/images/travel-blog/featured-jordan-baptism.webp",
+      "/travel-blog/churches-in-jerusalem/": "/images/travel-blog/featured-jerusalem-churches.webp",
+      "/travel-blog/best-hotels-in-haifa/": "/images/travel-blog/featured-haifa-hotels.webp",
+      "/travel-blog/ben-gurion-airport-to-jerusalem/": "/images/travel-blog/featured-airport-jerusalem.webp",
+      "/travel-blog/ben-gurion-airport-to-tel-aviv/": "/images/travel-blog/featured-airport-tel-aviv.webp",
+      "/travel-blog/ben-gurion-airport-to-haifa/": "/images/travel-blog/featured-airport-haifa.webp",
+      "/travel-blog/ben-gurion-airport-to-ein-bokek/": "/images/travel-blog/featured-airport-ein-bokek.webp",
+      "/travel-blog/israel-itinerary-3-days/": "/images/travel-blog/featured-itinerary-3-days.webp",
+      "/travel-blog/israel-itinerary-5-days/": "/images/travel-blog/featured-itinerary-5-days.webp",
+      "/travel-blog/israel-itinerary-7-days/": "/images/travel-blog/featured-itinerary-7-days.webp",
+    } as const;
+    for (const [path, expected] of Object.entries(legacyFeatured)) {
+      expect(guideHeroPhotoForPath(path)?.src, path).toBe(expected);
+      expect(existsSync("public" + expected), expected).toBe(true);
+    }
+    expect(guideHeroPhotoForPath("/travel-blog/shopping-in-jerusalem/")?.src)
+      .toBe(travelGuides.jerusalemShopping.photo.src);
+    expect(guideHeroPhotoForPath("/travel-blog/getting-around-tel-aviv/")?.src)
+      .toBe(travelGuides.telAviv.photo.src);
+  });
+
   it("guards the source mapping and deleted day-trip links", () => {
     const cardSource = readFileSync("src/lib/guide-card-photos.ts", "utf8");
     expect(cardSource).toContain("entry.guide.photo");

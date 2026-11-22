@@ -19,6 +19,7 @@ import {
 } from "@/data/jerusalemShopping";
 
 import oldCityPhoto from "@/assets/home/jerusalem-old-city.webp";
+import originalShoppingFeature from "@/assets/guides/2026-11/jerusalem-old-city-market-lanes.webp";
 import mahaneHotelPhoto from "@/assets/jerusalem/mahane-yehuda.webp";
 import hotelPhoto from "@/assets/jerusalem/mamilla.webp";
 import foodPhoto from "@/assets/guides/2026-10/what-to-eat-in-israel.webp";
@@ -146,8 +147,8 @@ export function JerusalemShoppingGuide() {
           { name: "Travel guides", to: "/travel-blog/" },
           { name: "Shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/" },
         ]} />
-        <GuideHeroLayout image={<GuideHeroMedia src="/images/jerusalem-shopping/hero.webp"
-          alt="Evening shopping promenade lined with fashion boutiques in Jerusalem" />}>
+        <GuideHeroLayout image={<GuideHeroMedia src={originalShoppingFeature}
+          alt="Traditional market stalls along a stone passage in Jerusalem's Old City" />}>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Jerusalem · Markets, shops & local design</p>
           <h1 className="guide-page-title mt-2">Shopping in Jerusalem: Markets, Crafts, Malls & Local Streets</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">
