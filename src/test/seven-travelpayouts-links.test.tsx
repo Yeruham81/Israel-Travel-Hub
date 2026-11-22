@@ -53,7 +53,8 @@ describe("Seven exact supplier links upgraded to Travelpayouts", () => {
         expect(unifiedCard).toContain("rel={relFor(affiliate)}");
         expect(unifiedCard).toContain("affiliate = true");
       } else {
-        expect(file).toContain('rel="sponsored noopener noreferrer"');
+        expect(file).toContain("<ExternalProviderTourCard");
+        expect(readFileSync("src/components/ExternalProviderTourCard.tsx", "utf8")).toContain("rel={relFor(affiliate)}");
       }
       expect(item.source.sources.some(source => source.url.includes(item.code))).toBe(true);
       expect(item.source.sources.some(source => source.url === item.href)).toBe(false);
