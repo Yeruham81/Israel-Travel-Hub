@@ -22,7 +22,10 @@ function renderAbout(router: Awaited<ReturnType<typeof aboutRouter>>) {
 describe("one personal About Moshe Barak page", () => {
   it("focuses on personal experience, traveler photographs, reviews and a direct contact form", async () => {
     const { container } = renderAbout(await aboutRouter());
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/^About Moshe Barak$/);
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/^Let me help you discover Israel$/);
+    expect(container.querySelector("#moshe-barak p strong")).toHaveTextContent("Moshe Barak");
+    expect(container.querySelector('a[href^="mailto:"]')).toBeNull();
+    expect(container.textContent).not.toContain("reservations@israel-taxi.com");
     expect(screen.getAllByRole("img", { name: "Moshe Barak" })).toHaveLength(1);
     expect(screen.getByRole("link", { name: "Read Reviews on TripAdvisor" })).toHaveAttribute("href", tripadvisorProfileUrl);
     expect(screen.getByRole("heading", { name: "Send me a message" })).toBeInTheDocument();
@@ -32,6 +35,9 @@ describe("one personal About Moshe Barak page", () => {
     expect(screen.getByRole("heading", { name: "Personal attention" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Professional service" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Local knowledge" })).toBeInTheDocument();
+    const services = screen.getByRole("region", { name: "How I can help you explore Israel" });
+    expect(within(services).getAllByRole("img")).toHaveLength(3);
+    expect(new Set(within(services).getAllByRole("img").map(img => img.getAttribute("src"))).size).toBe(3);
     const collage = screen.getByRole("img", { name: "Moshe Barak with clients during journeys around Israel" });
     expect(collage).toHaveAttribute("width", "681");
     expect(collage).toHaveAttribute("height", "341");

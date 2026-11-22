@@ -91,7 +91,7 @@ describe("independent author identity and page credits", () => {
   it("connects the visible local author biography to Person metadata without inventing review ratings", async () => {
     const { container } = await pageAt("/about-me/");
     expect(container.querySelector("#moshe-barak")).toHaveTextContent("Moshe Barak");
-    expect(screen.getByRole("heading", { level: 1, name: "About Moshe Barak" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "Let me help you discover Israel" })).toBeInTheDocument();
     const head = await AboutRoute.options.head?.({} as never);
     const schema = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []).find((item) => item["@type"] === "Person");
     expect(schema).toMatchObject({ name: "Moshe Barak", url: expect.stringMatching(/\/about-me\/#moshe-barak$/), sameAs: [mosheBarakAuthor.reviewsUrl] });
