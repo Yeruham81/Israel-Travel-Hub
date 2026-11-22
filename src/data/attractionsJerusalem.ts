@@ -1,5 +1,6 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
+import { viaDolorosaSite } from "@/data/viaDolorosaSite";
 import panorama from "@/assets/home/jerusalem-old-city.webp";
 import museums from "@/assets/guides/museums-in-jerusalem.jpg";
 import mountZion from "@/assets/guides/mount-zion.jpg";
@@ -18,6 +19,41 @@ export const jerusalemAttractions: Record<string, Attraction> = {
   planning:["Wear grippy shoes and carry water; polished paving becomes slippery when wet.","Allow flexibility for prayer times, security checks and festivals.","Do not plan to photograph worshippers without permission. Check photography policies indoors.","A local guide can add context, but arrange meeting point, language and exact sites in advance."],
   faqs:[{q:"Is the Old City free to enter?",a:"The public streets generally are, but selected museums, archaeological sites and experiences charge admission."},{q:"Which gate is closest to the Western Wall?",a:"Dung Gate is often the most direct approach; security arrangements can alter pedestrian access."},{q:"Can a driver take me to an Old City hotel?",a:"A car may reach an adjacent gate or road-accessible entrance; many lodging entrances require a final walk."}],
   official:[{label:"Tower of David Jerusalem Museum",url:"https://www.tod.org.il/en/"}],
+},
+"via-dolorosa": {
+  title: viaDolorosaSite.title,
+  description: viaDolorosaSite.description,
+  region: "Jerusalem",
+  image: viaDolorosaSite.hero,
+  intro: viaDolorosaSite.intro,
+  takeaway: "Begin at the first two Stations near the Flagellation compound and follow the numbered street markers west to the Church of the Holy Sepulchre. Allow time for the five indoor Stations and services.",
+  duration: "1–3 hours",
+  highlights: [
+    { name: "The first two Stations", description: "The traditional route begins at Al-Umariyya School and the Franciscan Flagellation and Condemnation chapels.", tip: "Begin by Lion's Gate and check chapel visiting hours." },
+    { name: "Ecce Homo and the Lithostrotos", description: "The historic arch, basilica and Roman-era pavement provide a glimpse into the street's layered history.", tip: "Confirm access and visiting hours at Ecce Homo." },
+    { name: "Nine street Stations", description: "The outdoor devotional route turns through Al-Wad, the market and Al-Khanqa lanes, ending near the Coptic monastery.", tip: "Look for Roman-numeral station markers at corners and doorways." },
+    { name: "Holy Sepulchre Stations", description: "The final five stations are traditionally commemorated inside the Church of the Holy Sepulchre.", tip: "Plan around the church's visiting schedule and prayer services." },
+  ],
+  arrival: [
+    "Lion's Gate provides a useful approach toward the early Stations; Damascus Gate is another way through the market.",
+    "The light rail serves northern Old City approaches near Damascus Gate; continue on foot.",
+    "Arrange a taxi pickup at a named road-accessible gate, such as Jaffa Gate or New Gate, when finishing at the Holy Sepulchre.",
+  ],
+  planning: [
+    "Allow 45–60 minutes for the outdoor section and more time for the last five indoor stations.",
+    "Wear comfortable shoes for uneven stone streets, slopes and occasional steps.",
+    "Check shrine hours and special processions before your visit.",
+    "Use the map for orientation and follow posted station markers in the streets.",
+  ],
+  faqs: [
+    { q: "Where does the Via Dolorosa start?", a: "Near Al-Umariyya School and the Church of the Flagellation, east of the Old City." },
+    { q: "Where does it end?", a: "At the Church of the Holy Sepulchre, where the last five Stations are traditionally commemorated." },
+    { q: "Is the outdoor route free?", a: "Yes. Public lanes can be visited free of charge; associated museums and some interior attractions have their own arrangements." },
+  ],
+  official: [
+    { label: "Terra Sancta Museum Stations guide", url: viaDolorosaSite.official.stations },
+    { label: "Christian Information Center opening hours", url: viaDolorosaSite.official.churchHours },
+  ],
 },
 "museums-in-jerusalem": {
  title:"Best Museums in Jerusalem",description:"My guide to 15 Jerusalem museums and cultural experiences, with admission, opening days, booking links, neighbourhoods, map and practical visitor tips.",
