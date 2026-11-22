@@ -18,9 +18,9 @@ describe("Jerusalem Old City — upgraded visitor guide", () => {
     expect(content.path).toBe("/attractions/old-city-jerusalem/");
     expect(content.title).toBe(site.title);
     expect(content.heroTitle).toBe("Jerusalem’s Old City: What to See & How to Visit");
-    expect(site.hero.src).toBe("/images/attractions/hero-jerusalem.webp");
+    expect(readFileSync("src/data/oldCityJerusalemSite.ts", "utf8")).toContain('import oldCityPanorama from "@/assets/home/jerusalem-old-city.webp"');
     expect(site.hero.src).not.toContain("via-dolorosa");
-    expect(existsSync("public" + site.hero.src)).toBe(true);
+    expect(existsSync("src/assets/home/jerusalem-old-city.webp")).toBe(true);
     expect(content.hero.src).toBe(site.hero.src);
     expect(attractionHubCards.find(card => card.to === content.path)?.photo.src).toBe(site.hero.src);
     expect((page.match(/<AttractionHighlight mobileImageFirst/g) ?? [])).toHaveLength(8);
