@@ -66,7 +66,7 @@ describe("Top 10 Israel experiences guide", () => {
     expect(page).toContain("min-w-[760px]");
     expect(page).not.toContain("hidden w-full table-fixed");
     expect(page).toContain("overflow-x-auto");
-    expect(page).toContain("Swipe the table sideways to compare all ten experiences.");
+    expect(page).not.toContain("Swipe the table sideways to compare all ten experiences.");
     expect(page.indexOf('<section id="experiences"')).toBeLessThan(page.indexOf('<section id="experience-map"'));
     expect(page).toContain("Where to Stay in Israel");
     expect(page).toContain("beach information (Hebrew)");

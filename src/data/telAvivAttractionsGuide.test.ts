@@ -143,7 +143,7 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
  it("follows the content-first mobile pattern and connects key local guides",()=>{
    const page=readFileSync(resolve(process.cwd(),"src/components/TelAvivAttractionsGuide.tsx"),"utf8");
    expect(page).toContain("grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-5");
-   expect(page).toContain("Swipe the table sideways to compare all ten attractions.");
+   expect(page).not.toContain("Swipe the table sideways to compare all ten attractions.");
    expect(page).toContain("min-w-[760px]");
    expect(page.indexOf('<section id="explore"')).toBeLessThan(page.indexOf('<section id="map"'));
    expect(page).toContain("HomeContactForm");

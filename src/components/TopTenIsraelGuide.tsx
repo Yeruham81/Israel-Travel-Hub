@@ -235,7 +235,7 @@ export function TopTenIsraelGuide() {
             onLoad={() => { if (selectedRegion !== "all") mapRef.current?.contentWindow?.postMessage({ type: "top-ten-israel-map-focus", id: selectedRegion }, window.location.origin); }}
             className="h-[360px] w-full border-0 sm:h-[460px]" />
           <div className="flex flex-wrap items-center justify-between gap-3 p-3 text-xs text-muted-foreground">
-            <span>Regional markers are for orientation, not a suggested driving route. Map data © OpenStreetMap contributors.</span>
+            <span>Map data © OpenStreetMap contributors.</span>
             {selectedRegion === "all" ?
               <OfficialLink href="https://www.google.com/maps/search/?api=1&query=Israel+travel+destinations">Explore on Google Maps</OfficialLink> :
               <OfficialLink href={"https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent((topTenMapRegions.find(region => region.id === selectedRegion)?.name || "Israel") + ", Israel")}>View this area on Google Maps</OfficialLink>}

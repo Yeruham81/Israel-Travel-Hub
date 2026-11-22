@@ -253,7 +253,7 @@ export function TelAvivAttractionsGuide(){
      </div>
      <iframe ref={frame} title="Interactive map of ten Tel Aviv and Jaffa attractions" src={mapUrl} width={900} height={470} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[340px] w-full border-0 sm:h-[470px]"
       onLoad={()=>{if(selected!=="all")frame.current?.contentWindow?.postMessage({type:"tel-aviv-attractions-map-focus",id:selected},window.location.origin);}}/>
-     <div className="flex flex-wrap items-center justify-between gap-3 p-3 text-xs text-muted-foreground"><span>Map positions are approximate orientation points, not an itinerary. © OpenStreetMap contributors.</span>
+     <div className="flex flex-wrap items-center justify-between gap-3 p-3 text-xs text-muted-foreground"><span>© OpenStreetMap contributors.</span>
        {selected==="all"?<External url="https://www.google.com/maps/search/?api=1&query=Tel+Aviv+Yafo+attractions">View Tel Aviv on Google Maps</External>:
         <MapLink label="Selected location" query={telAvivMapPoints.find(p=>p.id===selected)?.query||"Tel Aviv Yafo Israel"}/>}
      </div>
