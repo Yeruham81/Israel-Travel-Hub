@@ -5,7 +5,7 @@ import heroJerusalemLarge from "@/assets/home/hero-jerusalem-large.webp";
 export const mountOlivesSite = {
   title: "Mount of Olives, Jerusalem: Viewpoint, Churches & Visitor Guide",
   description: "Plan a visit to Jerusalem's Mount of Olives: Seven Arches panorama, Gethsemane, eight historic stops, church opening hours, admission, transport and downhill walking routes.",
-  updatedAt: "2026-11-18",
+  updatedAt: "2026-11-22",
   region: "Jerusalem",
   hero: {
     src: "/images/attractions/mount-of-olives.webp",
