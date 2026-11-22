@@ -55,9 +55,9 @@ describe("shared sidebar navigation", () => {
     }
   });
 
-  it("lists all 24 approved individual attractions in the right region, never overview guides", () => {
+  it("lists all 25 approved individual attractions in the right region, never overview guides", () => {
     const expected = [
-      { id: "jerusalem", slugs: ["old-city-jerusalem", "mount-of-olives", "mount-zion"] },
+      { id: "jerusalem", slugs: ["old-city-jerusalem", "via-dolorosa", "mount-of-olives", "mount-zion"] },
       { id: "tel-aviv-jaffa", slugs: ["jaffa"] },
       { id: "haifa-coast", slugs: ["haifa", "akko-acre", "caesarea", "rosh-hanikra"] },
       { id: "nazareth-lower-galilee", slugs: ["basilica-of-the-annunciation", "mount-tabor", "mount-precipice", "tel-megiddo"] },
