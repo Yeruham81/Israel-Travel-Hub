@@ -56,7 +56,7 @@ export function ExternalTourCard({ tour, pageId }: { tour: TourProduct; pageId: 
   const primaryOffer = offers.find(offer => tourSnapshotPrice(offer)) ?? offers[0];
   if (!primaryOffer) return null;
   const price = tourSnapshotPrice(primaryOffer);
-  const image = tourPhotos[tour.id];
+  const image = tourPhotos[tour.id]!;
   return <li id={tour.id} data-product-id={tour.id} data-testid="tour-card" className="h-full min-w-0 scroll-mt-24">
     <ExternalProviderTourCard
       image={image.src} alt={image.alt}
