@@ -17,6 +17,7 @@ const toPath = (href) => {
         url.hostname !== "www.israel-taxi.com" &&
         url.hostname !== "israel-taxi.com") return null;
     const path = url.pathname.replace(/\/+$/, "") + "/";
+    if (path === "/travel-blog/" || path === "/attractions/") return null; // Section hubs are not individual guides/attractions.
     return path.startsWith("/travel-blog/") || path.startsWith("/attractions/") ? path : null;
   } catch { return null; }
 };
