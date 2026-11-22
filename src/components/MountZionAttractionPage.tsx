@@ -244,7 +244,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     { label: "Churches in Jerusalem", to: "/travel-blog/churches-in-jerusalem/", note: "Explore churches and Christian sites across the city." },
     { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/", note: "Plan sightseeing, transport and your time in the city." },
     { label: "Museums in Jerusalem", to: "/travel-blog/museums-in-jerusalem/", note: "Discover the city’s collections and cultural history." },
-    { label: "Jerusalem guided tours", to: "/tours/jerusalem/", note: "Compare guided walks and full-day experiences." },
+    { label: "Shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/", note: "Explore markets, shopping streets and local crafts." },
   ],
   planningLinks: [
     { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", description: "Choose a base for Old City visits.", icon: "region" },
