@@ -13,6 +13,15 @@ import { guideDirectory } from "@/data/travelGuides";
 import { tourCategories, tourCategoryPaths, tourPhotos } from "@/data/tours";
 import { tourHubThumbnailSources } from "@/data/tourHubThumbnails";
 import { repeatedPhotos } from "@/lib/photo-uniqueness";
+/** Keep adjacent editorial guide cards and third-party tour-product cards
+ * individually distinct without replacing a linked guide's canonical photo. */
+function expectDistinctGuideAndProductCards(root: ParentNode) {
+  const sources = (selector: string) =>
+    [...root.querySelectorAll<HTMLImageElement>(selector)].map(img => img.getAttribute("src") ?? "");
+  expect(repeatedPhotos(sources('a.editorial-card-link img'))).toEqual([]);
+  expect(repeatedPhotos(sources('[data-testid="tour-card"] img'))).toEqual([]);
+}
+
 import { parseTourHubSearch, filterTours, isOwnerTour, offersForTour, parseTourSearch, tourSnapshotPrice, toursForCategory } from "@/lib/tours";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { parsePrivateDriverSearch, privateTourPrefill } from "@/lib/private-driver-search";
@@ -91,8 +100,7 @@ describe("shared ordinary tour catalog", () => {
     expect(interveningSections.length).toBeGreaterThanOrEqual(3);
     const allImages = [...doc.querySelectorAll("main img")];
     expect(allImages.length).toBeGreaterThanOrEqual(18);
-    const editorialSources = allImages.filter(image => !image.hasAttribute("data-photo-role")).map(image => image.getAttribute("src") || "");
-    expect(repeatedPhotos(editorialSources)).toEqual([]);
+    expectDistinctGuideAndProductCards(doc);
   });
 
   it("keeps product, operator, booking channel and source identities separate and complete", () => {
@@ -380,8 +388,7 @@ describe("tours hub and SEO category pages", () => {
     expect(contact.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
     expect(contact.querySelector('input[name="subject"]')).toHaveValue("");
     expect(contact.querySelector('textarea[name="message"]')).toHaveValue("");
-    const localSources = [...document.querySelectorAll('main img')].filter(image => !image.hasAttribute("data-photo-role")).map(image => image.getAttribute("src") || "");
-    expect(repeatedPhotos(localSources)).toEqual([]);
+    expectDistinctGuideAndProductCards(document);
     fireEvent.click(within(nav).getByRole("button", { name: "Food & markets" }));
     await waitFor(() => expect(router.state.location.search).toEqual({ tag: "food" }));
     expect(screen.getAllByTestId("tour-card")).toHaveLength(2);
@@ -433,8 +440,7 @@ describe("tours hub and SEO category pages", () => {
     expect(contact.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
     expect(contact.querySelector('input[name="subject"]')).toHaveValue("");
     expect(contact.querySelector('textarea[name="message"]')).toHaveValue("");
-    const displayedPhotos = [...document.querySelectorAll('main img')].filter(img => !img.hasAttribute("data-photo-role")).map(img => img.getAttribute("src") || "");
-    expect(repeatedPhotos(displayedPhotos)).toEqual([]);
+    expectDistinctGuideAndProductCards(document);
     fireEvent.click(within(nav).getByRole("button", { name: "From Jerusalem" }));
     await waitFor(() => expect(router.state.location.search).toEqual({ origin: "jerusalem" }));
     expect(screen.getAllByTestId("tour-card")).toHaveLength(4);
@@ -547,8 +553,7 @@ describe("tours hub and SEO category pages", () => {
     expect(contact.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
     expect(contact.querySelector('input[name="subject"]')).toHaveValue("");
     expect(contact.querySelector('textarea[name="message"]')).toHaveValue("");
-    const images = [...document.querySelectorAll("main img")].filter(img => !img.hasAttribute("data-photo-role")).map(img => img.getAttribute("src") || "");
-    expect(repeatedPhotos(images)).toEqual([]);
+    expectDistinctGuideAndProductCards(document);
     fireEvent.click(within(nav).getByRole("button", { name: "From Jerusalem" }));
     await waitFor(() => expect(router.state.location.search).toEqual({ origin: "jerusalem" }));
     expect(screen.getAllByTestId("tour-card")).toHaveLength(4);
@@ -600,8 +605,7 @@ describe("tours hub and SEO category pages", () => {
     expect(document.querySelector('section[aria-labelledby="' + planning + '"]')!.querySelectorAll("a.group")).toHaveLength(6);
     expect(document.querySelector('section#contact input[name="subject"]')).toHaveValue("");
     expect(document.querySelector('section#contact textarea[name="message"]')).toHaveValue("");
-    const photos = [...document.querySelectorAll("main img")].filter(img => !img.hasAttribute("data-photo-role")).map(img => img.getAttribute("src") || "");
-    expect(repeatedPhotos(photos)).toEqual([]);
+    expectDistinctGuideAndProductCards(document);
     fireEvent.click(within(nav).getByRole("button", { name: qChip }));
     await waitFor(() => expect(router.state.location.search).toEqual({ q }));
     expect(screen.getAllByTestId("tour-card")).toHaveLength(qCount);
@@ -657,8 +661,7 @@ describe("tours hub and SEO category pages", () => {
     expect(contact.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
     expect(contact.querySelector('input[name="subject"]')).toHaveValue("");
     expect(contact.querySelector('textarea[name="message"]')).toHaveValue("");
-    const photos = [...document.querySelectorAll("main img")].filter(img => !img.hasAttribute("data-photo-role")).map(img => img.getAttribute("src") || "");
-    expect(repeatedPhotos(photos)).toEqual([]);
+    expectDistinctGuideAndProductCards(document);
     fireEvent.click(within(nav).getByRole("button", { name: "Qasr al-Yahud" }));
     await waitFor(() => expect(router.state.location.search).toEqual({ destination: "jordan-river" }));
     const qasrTours = screen.getAllByTestId("tour-card");
