@@ -19,7 +19,7 @@ describe("Mount of Olives upgraded attraction guide", () => {
     expect(content.hero.src).toBe(mountOlivesSite.hero.src);
     expect(content.highlightsTitle).toBe("What to see on the Mount of Olives");
     expect(content.facts).toHaveLength(6);
-    expect(content.nearby).toHaveLength(4);
+    expect(content.nearby).toHaveLength(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(7);
     expect(content.sources).toHaveLength(10);
