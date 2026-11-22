@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
+      - uses: actions/checkout@v4
       - name: Read featured images from original site (read-only)
         shell: bash
         run: |
@@ -79,4 +80,49 @@ jobs:
                       print("WP_POSTS_TOTAL",len(data))
           except Exception as e:
               print("WP_API_ERROR",repr(e))
+          PY
+      - name: Compare original featured images with local image archive
+        shell: bash
+        run: |
+          python3 -m pip install -q pillow imagehash beautifulsoup4 requests
+          python3 - <<'PY'
+          import os, io, json, re, requests, concurrent.futures
+          from bs4 import BeautifulSoup
+          from PIL import Image, ImageOps
+          import imagehash
+          base="https://www.israel-taxi.com/travel-blog/"
+          r=requests.get(base,timeout=45,headers={"User-Agent":"Mozilla/5.0"});r.raise_for_status()
+          doc=BeautifulSoup(r.text,"html.parser")
+          entries=[]
+          for article in doc.select("article"):
+              h=article.select_one("h2, h3, .elementor-post__title, .entry-title")
+              a=h.find("a",href=True) if h else None
+              img=article.find("img")
+              if a and img and "/travel-blog/" in a.get("href",""):
+                  raw=img.get("data-src") or img.get("data-lazy-src") or img.get("src")
+                  if raw and raw.startswith("http") and a["href"].rstrip("/") != base.rstrip("/"):
+                      entries.append((a["href"].split("/travel-blog/")[-1].strip("/"),raw))
+          local=[]
+          for root in ("src/assets","public/images"):
+              for folder,_,files in os.walk(root):
+                  for file in files:
+                      if not file.lower().endswith((".webp",".png",".jpg",".jpeg")):continue
+                      p=os.path.join(folder,file)
+                      try:
+                          with Image.open(p) as im:
+                              local.append((p,imagehash.phash(ImageOps.exif_transpose(im).convert("RGB"))))
+                      except Exception: pass
+          print("LOCAL_IMAGES",len(local),"LEGACY_FEATURED",len(entries))
+          def inspect(entry):
+              slug,url=entry
+              try:
+                  resp=requests.get(url,timeout=35,headers={"User-Agent":"Mozilla/5.0"});resp.raise_for_status()
+                  with Image.open(io.BytesIO(resp.content)) as im:
+                      oldhash=imagehash.phash(ImageOps.exif_transpose(im).convert("RGB"))
+                  best=sorted(((oldhash-hash,path) for path,hash in local),key=lambda x:x[0])[:3]
+                  return {"slug":slug,"filename":url.split("/")[-1],"matches":[{"distance":n,"local":p} for n,p in best]}
+              except Exception as e:return {"slug":slug,"filename":url.split("/")[-1],"error":str(e)[:120]}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
+              results=list(pool.map(inspect,entries))
+          for item in results:print("PHOTO_MATCH",json.dumps(item,ensure_ascii=False))
           PY
