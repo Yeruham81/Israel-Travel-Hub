@@ -35,16 +35,23 @@ describe("Seven exact supplier links upgraded to Travelpayouts", () => {
   const viator = [
     { code: "6540P87", path: "src/components/MountOlivesAttractionPage.tsx", href: "https://viator.tpk.lv/frgpZFls", source: mountOlivesDestinationContent },
     { code: "117240P3", path: "src/components/MountOlivesAttractionPage.tsx", href: "https://viator.tpk.lv/v3Tk4hG1", source: mountOlivesDestinationContent },
+    { code: "208675P3", path: "src/components/MountOlivesAttractionPage.tsx", href: "https://viator.tpk.lv/YV4HrN5E", source: mountOlivesDestinationContent },
     { code: "5209P123", path: "src/components/MountZionAttractionPage.tsx", href: "https://viator.tpk.lv/vEqDCNy8", source: mountZionDestinationContent },
     { code: "5209TEL210", path: "src/components/MountZionAttractionPage.tsx", href: "https://viator.tpk.lv/9aphqexG", source: mountZionDestinationContent },
   ] as const;
 
-  it("uses product-specific short links for all four Viator cards but retains direct editorial citations", () => {
-    expect(new Set(viator.map(item => item.href)).size).toBe(4);
+  it("uses product-specific short links for all five Viator cards but retains direct editorial citations", () => {
+    expect(new Set(viator.map(item => item.href)).size).toBe(5);
     for (const item of viator) {
       const file = readFileSync(item.path, "utf8");
       expect(file).toContain('href: "' + item.href + '"');
-      expect(file).toContain('rel="sponsored noopener noreferrer"');
+      if (item.path.includes("MountOlives")) {
+        expect(file).toContain("<CuratedPartnerTourCard");
+        const sharedCard = readFileSync("src/components/CuratedPartnerTourCard.tsx", "utf8");
+        expect(sharedCard).toContain("rel={relFor(true)}");
+      } else {
+        expect(file).toContain('rel="sponsored noopener noreferrer"');
+      }
       expect(item.source.sources.some(source => source.url.includes(item.code))).toBe(true);
       expect(item.source.sources.some(source => source.url === item.href)).toBe(false);
     }
