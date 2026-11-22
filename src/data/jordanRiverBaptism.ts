@@ -18,7 +18,7 @@ export const baptismSources = [
  * Affiliate links live exclusively in affiliateConfig, keyed to this page.
  */
 export const baptismTourGroups=[
-  {id:"galilee-tours",title:"Nazareth, Galilee & Yardenit tours",description:"These tours advertise Yardenit as a stop. An organised sightseeing visit does not automatically include a baptism ceremony.",products:[
+  {id:"galilee-tours",title:"Nazareth, Galilee & Yardenit tours",description:"These tours list Yardenit among their stops. If you plan a baptism ceremony, arrange it separately with your officiant and the site.",products:[
     {id:"nazareth-galilee-tel-aviv",provider:"getyourguide",departure:"From Tel Aviv"},
     {id:"nazareth-galilee-jerusalem",provider:"viator",departure:"From Jerusalem"},
     {id:"nazareth-tiberias-tel-aviv",provider:"viator",departure:"From Tel Aviv"},

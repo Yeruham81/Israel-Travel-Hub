@@ -106,7 +106,7 @@ function TourSection({group}:{group:typeof baptismTourGroups[number]}) {
     </a>;
    })}
   </div>
-  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Ratings and any displayed starting price were verified against the named supplier in November 2026; they are editorial snapshots, not live offers. Prices, reviews, availability and itineraries may change. Confirm the exact river stop, access, pickup and cancellation terms with the provider. My tour cards do not automatically arrange baptism, clergy or a Qasr el-Yahud visitor reservation.</p>
+  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Check current prices, availability, the exact river stop, pickup and cancellation terms with the tour provider. Arrange any baptism ceremony, clergy or Qasr el-Yahud visitor reservation separately.</p>
  </section>;
 }
 export function JordanRiverBaptismGuidePage() {
@@ -172,7 +172,6 @@ export function JordanRiverBaptismGuidePage() {
    </div>
    <div className="mt-5 grid items-start gap-5 sm:grid-cols-2"><img src={qasrPhoto} alt="Palm trees and visitor buildings beside the Jordan River at Qasr el-Yahud" width={620} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full rounded-xl object-cover"/><div className="rounded-xl border bg-card p-4"><h3 className="font-bold">Before you go</h3><ul className="mt-3 space-y-2 text-sm leading-relaxed"><li>• Make the free advance visitor reservation</li><li>• Check any restricted access or group arrangements</li><li>• Agree the officiant, clothing and ceremony time</li><li>• Confirm pickup and the return journey</li></ul><Link to="/attractions/qasr-el-yahud/" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Read my full Qasr el-Yahud visitor guide <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link></div></div>
    <aside data-testid="qasr-access-safety" className="mt-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950"><strong>Stay on authorised roads and inside the visitor area.</strong> The surrounding monastery district included historical minefields and restricted compounds. Never go beyond fences, enter closed monastery grounds or leave marked access routes independently. Some monastery visits may be offered only as authorised guided activities; follow current park and security instructions. <a href="https://inmaa.mod.gov.il/En/OurDoingEn/MineFieldsEn/Pages/TheBaptismSite.aspx" target="_blank" rel="noopener noreferrer" className="font-semibold underline">Official mine-clearance background</a>.</aside>
-   <p className="mt-4 text-sm leading-relaxed text-muted-foreground">The opposite, Jordanian bank is home to <a href="https://whc.unesco.org/en/list/1446/" target="_blank" rel="noopener noreferrer" className={linkClass}>Bethany Beyond the Jordan (Al-Maghtas)</a>, a separate UNESCO World Heritage Site with its own entrance and border rules. A riverbank visit is not permission to cross between countries. Neither tradition nor archaeology establishes a single exact baptism spot beyond dispute.</p>
   </section>
   <section id="ceremony" className="mt-12 scroll-mt-24" aria-labelledby="ceremony-heading">
    <Heading id="ceremony" intro="A sightseeing visit and a religious ceremony are different arrangements. Build the day around what your church requires.">How to arrange a Jordan River baptism</Heading>
@@ -198,7 +197,7 @@ export function JordanRiverBaptismGuidePage() {
      <a href="https://www.google.com/maps/search/?api=1&query=Qasr%20el%20Yahud%20Baptismal%20Site%2C%20Israel" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4"><span className="inline-grid h-6 w-6 place-items-center rounded-full bg-primary text-xs text-primary-foreground">2</span> Qasr el-Yahud <ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/></a>
     </div>
    </div>
-   <p className="mt-4 text-sm leading-relaxed">For private transport, <a href="#contact" className={linkClass}>tell me your chosen site, date, departure point and ceremony time</a>. I can discuss a driver, waiting time and practical stops. Guiding and religious services are arranged separately.</p>
+   <p className="mt-4 text-sm leading-relaxed">For private transport, <a href="#contact" className={linkClass}>tell me your chosen site, date, departure point and ceremony time</a>. I can discuss a driver, waiting time and practical stops. Guiding and religious services should be arranged separately.</p>
   </section>
   {baptismTourGroups.map(group=><TourSection key={group.id} group={group}/>)}
   <section id="practical-tips" className="mt-12 scroll-mt-24" aria-labelledby="practical-tips-heading">

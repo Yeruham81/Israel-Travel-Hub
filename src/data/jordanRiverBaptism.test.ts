@@ -33,6 +33,18 @@ describe("Jordan River baptism comparison guide",()=>{
     expect(map).toContain('const locationPinMode = params.get("pinMode") === "locations"');
     expect(map).toContain('locationPinMode ? "Location" : "Stop"');
   });
+  it("uses concise, positive practical wording without unnecessary cross-border commentary",()=>{
+    const page = readFileSync("src/components/JordanRiverBaptismGuide.tsx","utf8");
+    expect(page).not.toContain("The opposite, Jordanian bank is home to");
+    expect(page).not.toContain("A riverbank visit is not permission to cross between countries");
+    expect(page).not.toContain("Neither tradition nor archaeology establishes");
+    expect(page).toContain("Guiding and religious services should be arranged separately.");
+    expect(page).not.toContain("Guiding and religious services are arranged separately.");
+    expect(page).not.toContain("editorial snapshots, not live offers");
+    expect(page).toContain("Check current prices, availability, the exact river stop");
+    expect(baptismTourGroups[0].description).toContain("arrange it separately with your officiant and the site");
+    expect(baptismTourGroups[0].description).not.toContain("does not automatically include");
+  });
   it("has three Galilee and three Qasr tours with approved Travelpayouts links",()=>{
     expect(baptismTourGroups.map(group=>group.products.length)).toEqual([3,3]);
     expect(new Set(offers.map(x=>x.id)).size).toBe(6);
