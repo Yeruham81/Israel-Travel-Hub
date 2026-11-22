@@ -155,47 +155,55 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Jerusalem's Old City is best explored on foot, but the approach matters. Choose a gate close to your first stop rather than asking a driver to reach a narrow street inside the walls.</p>
-      <div className="grid gap-3 sm:grid-cols-3" data-testid="jerusalem-old-city-gates">
-        <article className="rounded-xl border bg-card p-3">
+      <p>Choose a gate close to your first stop. The Old City is best explored on foot; private vehicles and taxis approach from the roads outside its historic walls.</p>
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3" data-testid="jerusalem-old-city-gates">
+        <article className="rounded-xl border bg-card p-3 sm:p-4">
           <h3 className="font-serif text-lg font-semibold">Jaffa Gate</h3>
-          <p className="mt-2 text-sm">Tower of David, Christian and Armenian Quarters.</p>
-          <a href={jaffaGateDirections} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Directions <ArrowUpRight className="h-3.5 w-3.5"/></a>
+          <p className="mt-2 text-sm leading-relaxed">Tower of David, Christian and Armenian Quarters. Convenient from Mamilla for car drop-offs.</p>
+          <a href={jaffaGateDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Directions <ArrowUpRight className="inline size-3.5" aria-hidden="true"/></a>
         </article>
-        <article className="rounded-xl border bg-card p-3">
+        <article className="rounded-xl border bg-card p-3 sm:p-4">
           <h3 className="font-serif text-lg font-semibold">Dung Gate</h3>
-          <p className="mt-2 text-sm">Western Wall plaza and Jewish Quarter.</p>
-          <a href={dungGateDirections} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Directions <ArrowUpRight className="h-3.5 w-3.5"/></a>
+          <p className="mt-2 text-sm leading-relaxed">Western Wall plaza and Jewish Quarter, near a road-accessible drop-off.</p>
+          <a href={dungGateDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Directions <ArrowUpRight className="inline size-3.5" aria-hidden="true"/></a>
         </article>
-        <article className="rounded-xl border bg-card p-3">
+        <article className="rounded-xl border bg-card p-3 sm:p-4">
           <h3 className="font-serif text-lg font-semibold">Damascus Gate</h3>
-          <p className="mt-2 text-sm">Muslim Quarter, markets and Via Dolorosa.</p>
-          <a href={damascusGateDirections} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Directions <ArrowUpRight className="h-3.5 w-3.5"/></a>
+          <p className="mt-2 text-sm leading-relaxed">Muslim Quarter markets and the beginning of many northern Old City walks. Steps lead down toward the gate.</p>
+          <a href={damascusGateDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Directions <ArrowUpRight className="inline size-3.5" aria-hidden="true"/></a>
+        </article>
+        <article className="rounded-xl border bg-card p-3 sm:p-4">
+          <h3 className="font-serif text-lg font-semibold">Zion Gate</h3>
+          <p className="mt-2 text-sm leading-relaxed">Armenian and Jewish Quarters; a convenient connection to <Link to="/attractions/mount-zion/" className={inlineLink}>Mount Zion</Link>.</p>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Zion%20Gate%20Jerusalem%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Directions <ArrowUpRight className="inline size-3.5" aria-hidden="true"/></a>
+        </article>
+        <article className="rounded-xl border bg-card p-3 sm:p-4">
+          <h3 className="font-serif text-lg font-semibold">Lion's Gate</h3>
+          <p className="mt-2 text-sm leading-relaxed">Eastern access to the Via Dolorosa and the walk toward the <Link to="/attractions/mount-of-olives/" className={inlineLink}>Mount of Olives</Link>.</p>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Lions%20Gate%20Jerusalem%20Israel&travelmode=walking" target="_blank" rel="noopener noreferrer" className={inlineLink}>Directions <ArrowUpRight className="inline size-3.5" aria-hidden="true"/></a>
+        </article>
+        <article className="rounded-xl border bg-card p-3 sm:p-4">
+          <h3 className="font-serif text-lg font-semibold">New Gate</h3>
+          <p className="mt-2 text-sm leading-relaxed">Direct entrance to the Christian Quarter, near the approach from Notre Dame and western Jerusalem.</p>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=New%20Gate%20Old%20City%20Jerusalem%20Israel&travelmode=walking" target="_blank" rel="noopener noreferrer" className={inlineLink}>Directions <ArrowUpRight className="inline size-3.5" aria-hidden="true"/></a>
         </article>
       </div>
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-        <div className="space-y-3">
-          <article className="rounded-xl border bg-card p-4">
-            <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By train, light rail or bus</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The intercity train terminates at Jerusalem–Yitzhak Navon, near the central bus station. Continue by light rail, bus or taxi toward the gate you need. The light rail can be convenient for the Damascus Gate area and central Jerusalem; confirm the route and operating hours using the <a href={official.jerusalemTransit} target="_blank" rel="noopener noreferrer" className={inlineLink}>public transport planner</a>.</p>
-            <p className="mt-2 text-sm leading-relaxed"><strong>Friday and Shabbat:</strong> Trains, Jerusalem’s light rail and most city buses stop operating from Friday afternoon until Saturday evening. Some local services have different schedules, so check the route you need.</p>
-          </article>
-          <article className="rounded-xl border bg-card p-4">
-            <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Most historic lanes cannot be reached by ordinary cars. Arrange a convenient drop-off near Jaffa, Dung or Damascus Gate and check parking availability outside the walls. For a private sightseeing day, <a href="#contact" className={inlineLink}>contact me</a> with your hotel location and preferred stops.</p>
-          </article>
-          <article className="rounded-xl border bg-card p-4">
-            <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary"/><h3 className="font-semibold">On foot</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Within the walls, allow more time than the map suggests. If staying nearby, ask your accommodation which gate gives the easiest approach with luggage or a stroller.</p>
-          </article>
-        </div>
-        <div className="rounded-xl border bg-card p-3" data-testid="jerusalem-old-city-map">
-          <div className="flex items-center gap-2"><MapPinned className="h-4 w-4 text-primary"/><h3 className="text-sm font-semibold">Where is Jerusalem's Old City?</h3></div>
-          <iframe title="Map of Jerusalem's Old City and its historic quarters" src={mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56"/>
-          <a href={mapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">View larger map <ArrowUpRight className="h-3.5 w-3.5"/></a>
-        </div>
+      <div className="grid gap-3 md:grid-cols-3">
+        <article className="rounded-xl border bg-card p-4">
+          <div className="flex items-center gap-2"><BusFront className="size-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By train, light rail or bus</h3></div>
+          <p className="mt-2 text-sm leading-relaxed">From Jerusalem–Yitzhak Navon railway station, continue by light rail, bus or taxi. The light rail serves approaches near the northern and western walls. Check your route with the <a href={official.jerusalemTransit} target="_blank" rel="noopener noreferrer" className={inlineLink}>official journey planner</a>.</p>
+          <p className="mt-2 text-sm leading-relaxed">Friday and Shabbat: Israeli Railways, the light rail and most Jerusalem city buses generally pause from Friday afternoon until Saturday evening. Check your travel date.</p>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <div className="flex items-center gap-2"><CarFront className="size-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By taxi or private driver</h3></div>
+          <p className="mt-2 text-sm leading-relaxed">Choose a road-accessible drop-off near Jaffa Gate, Dung Gate, Zion Gate or another suitable entrance. For a private sightseeing day with convenient pickup after your walk, <a href="#contact" className={inlineLink}>send me your preferred stops and pickup details</a>.</p>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <div className="flex items-center gap-2"><Footprints className="size-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">On foot</h3></div>
+          <p className="mt-2 text-sm leading-relaxed">Walking is the easiest way to reach most landmarks. The alleys have stairs, changing gradients and smooth stone paving; allow time for breaks and queues at major sites.</p>
+        </article>
       </div>
-      <AttractionPracticalTip>Meeting a driver after your walk? Agree on a named gate and a precise road-accessible pickup spot before entering the Old City. A pin inside the walls may lead to a pedestrian-only lane.</AttractionPracticalTip>
+      <AttractionPracticalTip>For pickup after a walking tour, agree on a named gate and a nearby road-accessible meeting point. Share the location with your driver before entering the Old City.</AttractionPracticalTip>
     </div>
   ),
   itineraryContent: (
