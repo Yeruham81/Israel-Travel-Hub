@@ -141,7 +141,7 @@ export function JerusalemChurchesGuide(){
     </header>
     <section className="mt-8 rounded-xl border border-primary/20 bg-secondary/40 p-5 sm:p-6" aria-labelledby="quick-answer">
       <h2 id="quick-answer" className="text-xl font-bold">Where I would start</h2>
-      <p className="mt-2 leading-relaxed">For a first visit, start at the <a className="font-semibold text-primary hover:underline" href="#church-holy-sepulchre">Church of the Holy Sepulchre</a> and follow part of the Via Dolorosa. If you have more time, add <a className="font-semibold text-primary hover:underline" href="#church-all-nations">Gethsemane</a> or <a className="font-semibold text-primary hover:underline" href="#church-dormition">Dormition Abbey</a>. Ein Karem is a separate journey, not a quick extension of an Old City walk.</p>
+      <p className="mt-2 leading-relaxed">For a first visit, start at the <a className="font-semibold text-primary hover:underline" href="#church-holy-sepulchre">Church of the Holy Sepulchre</a> and follow part of the <Link to="/attractions/via-dolorosa/" className="font-semibold text-primary hover:underline">Via Dolorosa</Link> with my full guide to the fourteen stations. If you have more time, add <a className="font-semibold text-primary hover:underline" href="#church-all-nations">Gethsemane</a> or <a className="font-semibold text-primary hover:underline" href="#church-dormition">Dormition Abbey</a>. Ein Karem is a separate journey, not a quick extension of an Old City walk.</p>
     </section>
     <OnThisPage sections={sections}/>
     <section id="choose" aria-labelledby="choose-heading" className="mt-10 scroll-mt-24">
