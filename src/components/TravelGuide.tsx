@@ -12,6 +12,7 @@ import { AuthorCard } from "@/components/AuthorCard";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { PageUpdated } from "@/components/PageUpdated";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { guideContactCopy, type GuideContactKind } from "@/lib/guide-contact";
 import { JerusalemJourneyOptions } from "@/components/JerusalemJourneyPlanner";
 import { BethlehemTourOptions } from "@/components/BethlehemTourOptions";
@@ -102,7 +103,7 @@ function GuideSectionPhoto({ photo }: { photo: GuidePhoto }) {
   return (
     <figure className="max-w-3xl">
       <img src={photo.src} alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
-      <GuidePhotoCredit photo={photo} />
+
     </figure>
   );
 }
@@ -257,15 +258,25 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const overviewRowAnchors = id === "telAviv"
     ? ["walking", "city-buses", "red-line", "national-rail", "taxis", "shared-taxis", "shabbat", "bikes", "driving"]
     : ["israel-trains", "israel-buses", "israel-light-rail", "israel-taxis", "israel-sherut", "israel-rentals", "israel-drivers"];
+  const creditedPhotos = [
+    { label: "Main guide image", photo: guide.photo },
+    ...guide.sections.flatMap(section => [
+      ...(section.photo ? [{ label: section.title, photo: section.photo }] : []),
+      ...(section.subsections || []).flatMap(sub => sub.photo ? [{ label: sub.title, photo: sub.photo }] : []),
+    ]),
+  ].filter(entry => hasPublicPhotoCredit(entry.photo)).map(({label, photo}) => ({
+    label,
+    credit: photo.credit,
+    sourceUrl: photo.sourceUrl && !isPublisherUrl(photo.sourceUrl) ? photo.sourceUrl : undefined,
+    licenseUrl: photo.licenseUrl,
+  }));
   return <main className="mx-auto max-w-5xl px-4 pb-8">
     <article>
       <header className="pt-6">
         <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: travelGuidePaths[id].startsWith("/attractions/") ? "Attractions" : "Travel guides", to: travelGuidePaths[id].startsWith("/attractions/") ? "/attractions/" : "/travel-blog/" }, { name: guide.title, to: travelGuidePaths[id] }]} />
         {!travelGuidePaths[id].startsWith("/attractions/") && <div className="mt-6"><GuideTags topics={guide.topics} /></div>}
         <GuideHeroLayout image={
-          <GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}>
-            <GuidePhotoCredit photo={guide.photo} />
-          </GuideHeroMedia>
+          <GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}/>
         }>
           <h1 className="guide-page-title">{guide.title}</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
@@ -396,6 +407,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {id === "jerusalemDeadSea" && <SourceList ids={sourcesFor(guide)} intro="Official transport, beach and national-park information. Confirm schedules and conditions for your travel date." />}
       {id === "bethlehem" && <SourceList ids={sourcesFor(guide)} intro="Official bus, church and entry references." />}
       {id === "esim" && <SourceList ids={sourcesFor(guide)} intro="Official provider plan pages used for these comparisons. Prices, coverage and fair-use limits can change; confirm the details for the exact package before purchase." />}
+      <PhotoCreditsDisclosure entries={creditedPhotos}/>
     </article>
   </main>;
 }
