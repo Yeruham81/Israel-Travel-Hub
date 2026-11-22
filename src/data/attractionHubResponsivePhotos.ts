@@ -60,6 +60,7 @@ import photo55 from "@/assets/eilat/waterfront.webp";
 import photo56 from "@/assets/attractions-hub/related-eilat-360.webp";
 
 export const attractionHubCardImageSets: Record<string, string> = {
+  ["/images/attractions/old-jerusalem-via-dolorosa.webp"]: "/images/attractions/old-jerusalem-via-dolorosa.webp 755w",
   ["/images/home/transfer-haifa-bahai-gardens.webp"]: ["/images/home/transfer-haifa-bahai-gardens-mobile.webp 480w", "/images/home/transfer-haifa-bahai-gardens.webp 1200w"].join(", "),
   [photo0]: [photo1 + " 420w", photo0 + " 900w"].join(", "),
   ["/images/attractions/mount-of-olives.webp"]: [photo2 + " 420w", "/images/attractions/mount-of-olives.webp" + " 755w"].join(", "),
