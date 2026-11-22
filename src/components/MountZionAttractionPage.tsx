@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, MapPinned, Ticket } from "lucide-react";
+import { ArrowUpRight, BusFront, CarFront, Footprints } from "lucide-react";
 import {
   AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
   type AttractionDestinationContent,
@@ -9,12 +9,11 @@ import { mountZionSite } from "@/data/mountZionSite";
 import guidedTourPhoto from "@/assets/home/guided-tour-card.webp";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { recordOutboundClick } from "@/lib/outbound";
+import { MountZionMap } from "@/components/MountZionMap";
 const mountZionHillsidePhoto = "/images/jerusalem/mount-zion/mount-zion-hillside.webp";
 
 const official = mountZionSite.official;
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
-const mapEmbed = "https://maps.google.com/maps?q=Zion%20Gate%20Jerusalem%20Israel&hl=en&z=16&t=m&output=embed";
-const mapLarger = "https://www.google.com/maps/search/?api=1&query=Zion%20Gate%20Jerusalem%20Israel";
 const zionGateDirections = "https://www.google.com/maps/dir/?api=1&destination=Zion%20Gate%20Jerusalem%20Israel&travelmode=driving";
 const gallicantuDirections = "https://www.google.com/maps/dir/?api=1&destination=Saint%20Peter%20in%20Gallicantu%20Jerusalem%20Israel&travelmode=driving";
 const oldCityWalk = "https://www.google.com/maps/dir/?api=1&origin=Jaffa%20Gate%20Jerusalem&destination=Zion%20Gate%20Jerusalem&travelmode=walking";
@@ -25,6 +24,9 @@ const walkingLegs = [
   { title: "Zion Gate to Gallicantu", href: gallicantuWalk, description: "Down the hillside to the separate church entrance" },
   { title: "Zion Gate to Western Wall", href: westernWallWalk, description: "Through the Jewish Quarter after your Mount Zion visit" },
 ] as const;
+
+const stopOrder = ["Zion Gate", "Dormition Abbey", "Room of the Last Supper (Cenacle)", "David's Tomb", "The Chamber of the Holocaust", "St Peter in Gallicantu", "Oskar Schindler's grave"];
+const orderedStops = [...mountZionEditorialUpdate.stops].sort((a, b) => stopOrder.indexOf(a.name) - stopOrder.indexOf(b.name));
 
 const mountZionTours = [
   {
@@ -75,7 +77,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   path: "/attractions/mount-zion/",
   placeName: "Mount Zion",
   title: mountZionSite.title,
-  heroTitle: "Mount Zion: What to See & Visitor Guide",
+  heroTitle: "Mount Zion, Jerusalem: What to See & How to Visit",
   highlightsTitle: "What to see on Mount Zion",
   region: mountZionSite.region,
   updatedAt: mountZionSite.updatedAt,
@@ -83,8 +85,9 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   intro: mountZionSite.intro,
   visitorTitle: "Opening hours, admission and accessibility",
   visitorNavLabel: "Hours & tickets",
-  historyTitle: "Mount Zion in Jerusalem's religious traditions",
-  relatedTitle: "Explore Jerusalem and day trips across Israel",
+  historyTitle: "Mount Zion: sacred traditions and Jerusalem history",
+  relatedTitle: "Continue exploring Jerusalem",
+  itineraryFirst: true,
   contactIntroduction: "Tell me when you are visiting and whether you want to explore Mount Zion alone or combine it with Jerusalem's Old City. I can help arrange transport to a convenient pickup or drop-off point.",
   facts: [
     { icon: "location", label: "Location", value: "Beside Zion Gate", note: "Just south of the Old City walls" },
@@ -98,7 +101,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <p className="text-sm leading-relaxed sm:text-base">{mountZionEditorialUpdate.stopIntro}</p>
-      {mountZionEditorialUpdate.stops.map(stop => <AttractionHighlight key={stop.name} title={stop.name} image={stop.image ? { src: stop.image.src, alt: stop.image.alt } : undefined}>
+      {orderedStops.map(stop => <AttractionHighlight key={stop.name} title={stop.name} mobileImageFirst image={stop.image ? { src: stop.image.src, alt: stop.image.alt } : undefined}>
         <p>{stop.description}</p>
         <p>{stop.visit}</p>
         {stop.link && <p><a href={stop.link.url} target="_blank" rel="noopener noreferrer" className={inlineLink}>{stop.link.label} <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></p>}
