@@ -284,7 +284,7 @@ describe("homepage marketing copy and service sections", () => {
 
     const guidesSection = document.getElementById("guides")!;
     expect(homeGuideCards.first.find(guide => guide.id === "uber")?.photo?.src).toBe(guideHeroPhotoForPath("/travel-blog/uber-in-israel/")?.src);
-    expect(within(guidesSection).querySelector('a[href="/travel-blog/uber-in-israel/"] img')).toHaveAttribute("src", guideHeroPhotoForPath("/travel-blog/uber-in-israel/")?.src);
+    expect(guidesSection.querySelector('a[href="/travel-blog/uber-in-israel/"] img')).toHaveAttribute("src", guideHeroPhotoForPath("/travel-blog/uber-in-israel/")?.src);
     const guideButton = within(guidesSection).getByRole("link", { name: /Browse all guides/i });
     expect(guideButton).toHaveAttribute("href", "/travel-blog/");
     expect(guidesSection.lastElementChild).toContainElement(guideButton);
