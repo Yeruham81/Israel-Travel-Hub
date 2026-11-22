@@ -1,3 +1,4 @@
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, Waves, Sun, Ticket, Mountain } from "lucide-react";
 import {
@@ -92,24 +93,19 @@ function EilatPartnerTours() {
   });
   if (!tours.length) return null;
   return <div data-testid="eilat-affiliate-tour-cards" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {tours.map(tour => <article key={tour.id} className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm">
-      <img src={tour.photo} alt={tour.photoAlt} width={640} height={360} loading="lazy" decoding="async" className="aspect-video w-full object-cover" />
-      <div className="flex flex-1 flex-col p-4">
-        <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">{tour.provider}</p>
-        <h3 className="mt-1 font-serif text-lg font-semibold leading-snug">{tour.title}</h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{tour.text}</p>
-        <div className="mt-3 space-y-1 text-sm">
-          <p className="flex items-center gap-1.5 font-semibold text-foreground"><Clock3 className="size-4 text-primary" aria-hidden="true"/>{tour.duration}</p>
-          {"startingPrice" in tour && tour.startingPrice && <p className="font-semibold text-foreground">{tour.startingPrice}</p>}
-          {"rating" in tour && tour.rating && <p className="text-muted-foreground" aria-label={"Rating " + tour.rating}>★ {tour.rating}</p>}
-        </div>
-        <a href={tour.href} target="_blank" rel="sponsored noopener noreferrer"
-          onClick={() => recordOutboundClick({ pageId: "attractions-eilat", productId: tour.id, offerId: tour.key })}
-          className="mt-3 inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-primary/40 px-3 py-2 text-center text-sm font-semibold text-primary transition-colors hover:bg-secondary">
-          Check tour & availability <ArrowUpRight className="h-4 w-4" aria-hidden="true"/>
-        </a>
-      </div>
-    </article>)}
+    {tours.map(tour => <ExternalProviderTourCard
+      key={tour.id} testId="eilat-partner-tour-card"
+      image={tour.photo} alt={tour.photoAlt} platform={tour.provider}
+      title={tour.title} description={tour.text} duration={tour.duration}
+      rating={"rating" in tour && tour.rating
+        ? (() => {const match = /([0-5](?:\\.\\d+)?)\\/5\\s*·\\s*(\\d+)/.exec(tour.rating); return match ? {value:Number(match[1]),count:Number(match[2])} : undefined;})()
+        : undefined}
+      price={"startingPrice" in tour && tour.startingPrice
+        ? (() => {const match = /US\\$(\\d+(?:\\.\\d+)?)/.exec(tour.startingPrice);return match ? {amount:Number(match[1]),currency:"USD" as const,basis:"per_person" as const} : undefined;})()
+        : undefined}
+      href={tour.href}
+      onClick={() => recordOutboundClick({pageId:"attractions-eilat",productId:tour.id,offerId:tour.key})}
+    />)}
   </div>;
 }
 
