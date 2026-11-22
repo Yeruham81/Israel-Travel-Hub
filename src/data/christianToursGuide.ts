@@ -5,6 +5,7 @@ import yardenitRelatedPhoto from "@/assets/guides/yardenit.jpg";
 import bethlehemTourPhoto from "@/assets/guides/bethlehem/nativity-courtyard.jpg";
 import qasrTourPhoto from "@/assets/guides/qasr-el-yahud.jpg";
 import holySepulchrePhoto from "@/assets/guides/holy-sepulchre.jpg";
+import christianToursCover from "@/assets/guides/christian-tours-hero.webp";
 import tiberiasPhoto from "@/assets/home/tiberias-lake.webp";
 import fiveDayPhoto from "@/assets/home/hero-caesarea-sm.webp";
 import sevenDayPhoto from "@/assets/home/hero-galilee-sm-optimized.webp";
@@ -13,10 +14,10 @@ import railPhoto from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import privateDriverPhoto from "@/assets/guides/taxi-cabs-israel.webp";
 
 /** The Christian Tours page and every inbound guide card share this single image.
- * Change only this source when the approved new photograph is accessible. */
+ * Use the approved photograph here so every linking card updates with the page. */
 export const christianToursHero = {
-  src: "/images/attractions/old-jerusalem-holy-sepulchre.webp",
-  alt: "Church of the Holy Sepulchre in Jerusalem",
+  src: christianToursCover,
+  alt: "Cross atop the domed Church of the Holy Sepulchre in Jerusalem",
 } as const;
 
 export type ChristianSite = { name: string; note: string; to?: LinkProps["to"]; officialUrl?: string; mapPlace?: string };

@@ -4,7 +4,7 @@ import image1 from "@/assets/guides/2026-10/what-to-eat-in-israel.webp";
 import image2 from "@/assets/guides/2026-10/calendar-of-events.webp";
 import image3 from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
 import image4 from "@/assets/guides/2026-10/museums-in-tel-aviv.webp";
-import image5 from "@/assets/guides/2026-10/museums-in-haifa.webp";
+import image5 from "@/assets/guides/haifa-museums-hero.webp";
 import image6 from "@/assets/guides/2026-10/tel-megiddo.webp";
 import image7 from "@/assets/guides/2026-10/mount-precipice.webp";
 import image8 from "@/assets/guides/2026-10/basilica-of-the-annunciation.webp";
@@ -79,7 +79,7 @@ export const migrationPhotos = {
   },
   "museums-in-haifa": {
     "src": image5,
-    "alt": "The Haifa Museum of Art building",
+    "alt": "White colonnaded building and landscaped grounds overlooking Haifa Bay",
     "sourceUrl": ""
   },
   "tel-megiddo": {

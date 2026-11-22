@@ -6,9 +6,10 @@ import masada from "@/assets/guides/dead-sea-excursions/masada-aerial.webp";
 import einGedi from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp";
 import qumran from "@/assets/guides/dead-sea-excursions/qumran-caves.webp";
 import mud from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
+import deadSeaCover from "@/assets/guides/dead-sea-attractions-hero.webp";
 
 /** One canonical image for the Dead Sea attractions guide and every inbound card. */
-export const deadSeaAttractionsHero = { src: "/images/dead-sea-attractions/nahal-bokek.webp", alt: "Nahal Bokek stream and desert gorge near the Dead Sea" } as const;
+export const deadSeaAttractionsHero = { src: deadSeaCover, alt: "Two smiling visitors covered in mineral mud beside the Dead Sea" } as const;
 
 export type DeadSeaStop = {
   id: string; title: string; shortTitle: string; area: string; kind: string;

@@ -1,4 +1,4 @@
-import roadTrip from "@/assets/home/road-trip.webp";
+import travelTipsCover from "@/assets/guides/israel-travel-tips-hero.webp";
 
 /** Shared first-time visitor content used by the page and its SEO metadata. */
 export const TRAVEL_TIPS_TITLE = "Israel Travel Tips for First-Time Visitors";
@@ -6,7 +6,7 @@ export const TRAVEL_TIPS_DESCRIPTION = "Practical Israel travel tips for first-t
 export const TRAVEL_TIPS_UPDATED = "2026-11-21";
 
 /** Shared hero for the guide and every incoming guide card. */
-export const travelTipsHero = { src: roadTrip, alt: "Scenic road through the Israeli countryside at sunset" } as const;
+export const travelTipsHero = { src: travelTipsCover, alt: "Israel travel tips for first-time visitors illustrated with Jerusalem, Tel Aviv, the Dead Sea and travel essentials" } as const;
 
 export const travelTipsFaqs = [
   { q: "Do I need an ETA-IL or visa to visit Israel?", a: "That depends on your passport and immigration status. Check the official ETA-IL and Population and Immigration Authority website before paying for nonrefundable travel. An approved ETA-IL lets eligible travelers travel to Israel, but does not guarantee admission." },
