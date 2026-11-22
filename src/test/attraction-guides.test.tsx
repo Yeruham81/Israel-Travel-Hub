@@ -11,7 +11,7 @@ import { routeTree } from "@/routeTree.gen";
 describe("18 attraction destination guides", () => {
   it("defines a complete guide at each unique route without legacy-site links", () => {
     expect(attractionIds).toHaveLength(18);
-    expect(new Set(attractionIds).size).toBe(17);
+    expect(new Set(attractionIds).size).toBe(18);
     const router = createRouter({routeTree,context:{queryClient:new QueryClient()},trailingSlash:"always"});
     for (const id of attractionIds) {
       const guide = attractionGuides[id];
