@@ -68,7 +68,7 @@ function AttractionCard({ card }: { card: AttractionHubCard }) {
         className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary"
       >
         <div className="aspect-[3/2] overflow-hidden bg-secondary">
-          <img src={photo.src} srcSet={attractionHubCardImageSets[photo.src]} sizes="(min-width: 1280px) 365px, (min-width: 640px) calc(50vw - 24px), calc(100vw - 32px)" alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+          <img src={photo.src} srcSet={attractionHubCardImageSets[photo.src]} sizes="(min-width: 1280px) 365px, (min-width: 1024px) calc(33vw - 28px), calc(50vw - 24px)" alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="h-full w-full object-cover" />
         </div>
         <div className="flex flex-1 flex-col p-4 sm:p-5">
           <h3 className="text-lg font-semibold leading-tight text-foreground sm:text-2xl">{card.title}</h3>
@@ -115,7 +115,7 @@ function Attractions() {
               <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">{region.summary}</p>
             </div>
           </div>
-          <div className={region.cards.length === 6 ? "mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-4 lg:grid-cols-3" : "mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3"}>
+          <div className="mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-4 lg:grid-cols-3">
             {region.cards.map((card) => <AttractionCard key={card.id} card={card} />)}
           </div>
           {region.relatedGuides.length > 0 && (
