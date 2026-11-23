@@ -116,7 +116,7 @@ describe("private Ben Gurion transfers", () => {
 
   it("uses the lean content order and preserves booking links, benefits, FAQ and guide navigation", async () => {
     const { container, router } = await renderAirport();
-    const sections = ["popular-destinations", "more-destinations", "benefits", "booking-steps", "request-quote", "useful-information", "booking-platforms", "faq", "compare-airport-transport", "keep-planning", "trip-planning"];
+    const sections = ["popular-destinations", "benefits", "more-destinations", "booking-steps", "request-quote", "useful-information", "booking-platforms", "faq", "compare-airport-transport", "keep-planning", "trip-planning"];
     for (let i = 1; i < sections.length; i++) expect(container.querySelector(`#${sections[i - 1]}`)!.compareDocumentPosition(container.querySelector(`#${sections[i]}`)!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect((container.querySelector("#popular-destinations")!.textContent || "") + (container.querySelector("#more-destinations")!.textContent || "")).not.toMatch(/\b(metered|taxi rank|buses)\b/i);
     expect(container.querySelector("#after-request-h")).toBeNull();
