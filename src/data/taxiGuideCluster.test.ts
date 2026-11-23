@@ -122,7 +122,7 @@ describe("intent-specific taxi guide cluster", () => {
     const { taxis, taxiFares, airportTaxis } = taxiGuideCluster;
     expect(taxis.sections.find(s => s.id === "fares")?.tables).toBeUndefined();
     expect(taxis.sections.find(s => s.id === "holidays")?.paragraphs.join(" ")).not.toMatch(/16:01|21:01/);
-    expect(taxis.sections.find(s => s.id === "airport")?.paragraphs.join(" ")).not.toContain("ride code");
+    expect(taxis.sections.find(s => s.id === "airport")?.paragraphs.join(" ")).toContain("My airport taxi guide explains ride codes");
     expect(taxiFares.sections.find(s => s.id === "estimates")?.inlineLinks?.some(l => l.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(taxiFares.sections.find(s => s.id === "extras")?.highlightedLinks).toBeUndefined();
     expect(airportTaxis.sections.find(s => s.id === "fares")?.tables?.[0]?.headers).toEqual(["Destination", "Daytime meter estimate", "Typical drive"]);
