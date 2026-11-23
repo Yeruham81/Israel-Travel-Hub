@@ -6,6 +6,7 @@ export const viaDolorosaSite = {
   region: "Jerusalem",
   hero: {
     src: "/images/attractions/old-jerusalem-via-dolorosa.webp",
+    mobileSrc: "/images/attractions/via-dolorosa-mobile.webp",
     alt: "Historic stone-paved Via Dolorosa in Jerusalem's Old City",
   },
   intro: "The Via Dolorosa winds through Jerusalem's Muslim and Christian Quarters, following the traditional Christian Stations of the Cross from the area near Lion's Gate to the Church of the Holy Sepulchre. Nine stations are marked in the streets, while the last five are inside the church. Use my station-by-station guide and map to choose a starting gate, follow the turns and plan the time you need.",
