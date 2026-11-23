@@ -388,7 +388,7 @@ describe("four independent airport transportation comparisons", () => {
       if (id === "jerusalem" || id === "tel-aviv" || id === "haifa" || id === "ein-bokek") {
         expect(callouts).toHaveLength(0);
         if (id === "jerusalem") expect(doc.querySelector('#option-rail aside[aria-label="Important Jerusalem train ticket information"]')).not.toBeNull();
-        else expect(doc.querySelectorAll('#option-rail table tbody tr')).toHaveLength(4);
+        else expect(doc.querySelectorAll('#option-rail table:not([data-testid="airport-arrival-areas"]) tbody tr')).toHaveLength(4);
       } else {
         expect(callouts, id).toHaveLength(1);
         const cta = callouts[0]!;
