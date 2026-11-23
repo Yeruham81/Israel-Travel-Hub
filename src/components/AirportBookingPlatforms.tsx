@@ -25,11 +25,11 @@ const hubOffers: Record<string, { description: string; action: string }> = {
 };
 
 /** One consistent set of booking-platform cards on the airport hub and route pages. */
-export function AirportBookingPlatforms({ pageId = "airport-private-transfers", destination, compact = false }: { pageId?: string; destination?: string; compact?: boolean }) {
+export function AirportBookingPlatforms({ pageId = "airport-private-transfers", destination, compact = false, title }: { pageId?: string; destination?: string; compact?: boolean; title?: string }) {
   const platforms = linksForPage(pageId);
   return <section id="booking-platforms" aria-labelledby="platforms-h" className={compact ? "mt-9" : "mt-16 rounded-2xl border p-5 sm:p-8"}>
     {!compact && <p className="eyebrow">More ways to arrange your ride</p>}
-    <h2 id="platforms-h" className={compact ? "text-2xl font-semibold" : "mt-2 text-3xl"}>{compact ? "Prefer to book online?" : "Prefer to book through a platform?"}</h2>
+    <h2 id="platforms-h" className={compact ? "text-2xl font-semibold" : "mt-2 text-3xl"}>{title ?? (compact ? "Prefer to book online?" : "Prefer to book through a platform?")}</h2>
     <p className={compact ? "mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground" : "mt-3 leading-relaxed text-muted-foreground"}>{compact ? (destination ? "You can also search for a private transfer to " + destination + " on one of the booking websites below." : "You can also search for an airport transfer on one of the booking websites below.") : `Explore independent booking platforms for your airport pickup${destination ? ` to ${destination}` : ""}. The starting prices on this site are for my private transfer service; each platform sets its own prices, availability and terms. Enter your exact route and trip details there.`}</p>
     <div className={compact ? "mt-4 grid gap-3 sm:grid-cols-2" : "mt-6 grid gap-4 sm:grid-cols-2"}>{platforms.map((platform) => {
       const logo = partners.find((partner) => partner.id === platform.partnerId)?.logo;
