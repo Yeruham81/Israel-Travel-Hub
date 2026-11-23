@@ -103,12 +103,16 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
           </table>
         </div>
       </div>
-      <h3 className="font-serif text-xl font-semibold">Walking connections</h3>
+      <h3 className="font-serif text-xl font-semibold">Follow the route in three walking legs</h3>
+      <p className="text-sm leading-relaxed text-muted-foreground">Open each Google Maps leg in order. The final leg follows Station VIII, turns toward Station IX by the Coptic monastery, and continues to the Holy Sepulchre. Follow the numbered wall markers at each junction.</p>
       <div className="grid gap-3 sm:grid-cols-3" data-testid="via-dolorosa-walking-connections">
-        <a href={routeDirections} target="_blank" rel="noopener noreferrer" className="rounded-xl border bg-card p-4 text-sm font-semibold text-primary hover:border-primary/50">Flagellation to Holy Sepulchre <ArrowUpRight className="inline size-4" aria-hidden="true"/></a>
-        <a href="https://www.google.com/maps/dir/?api=1&origin=Lions%20Gate%20Jerusalem&destination=Church%20of%20the%20Flagellation%20Jerusalem&travelmode=walking" target="_blank" rel="noopener noreferrer" className="rounded-xl border bg-card p-4 text-sm font-semibold text-primary hover:border-primary/50">Lion's Gate to Station I <ArrowUpRight className="inline size-4" aria-hidden="true"/></a>
-        <a href="https://www.google.com/maps/dir/?api=1&origin=Church%20of%20the%20Holy%20Sepulchre%20Jerusalem&destination=Jaffa%20Gate%20Jerusalem&travelmode=walking" target="_blank" rel="noopener noreferrer" className="rounded-xl border bg-card p-4 text-sm font-semibold text-primary hover:border-primary/50">Holy Sepulchre to Jaffa Gate <ArrowUpRight className="inline size-4" aria-hidden="true"/></a>
+        {walkingLegs.map((leg, i) => <a key={leg.title} href={walkingLegUrl(leg)} target="_blank" rel="noopener noreferrer" className="rounded-xl border bg-card p-4 text-sm hover:border-primary/50">
+          <span className="block text-xs font-bold uppercase tracking-wide text-muted-foreground">Leg {i + 1} of 3</span>
+          <span className="mt-1 block font-semibold text-primary">{leg.title} <ArrowUpRight className="inline size-4" aria-hidden="true"/></span>
+          <span className="mt-2 block leading-relaxed text-muted-foreground">{leg.detail}</span>
+        </a>)}
       </div>
+      <p className="text-sm leading-relaxed">For arrival and departure, use <a className={inlineLink} href={gateDirections} target="_blank" rel="noopener noreferrer">Lion's Gate directions</a> and <a className={inlineLink} href="https://www.google.com/maps/dir/?api=1&origin=Church%20of%20the%20Holy%20Sepulchre%20Jerusalem&destination=Jaffa%20Gate%20Jerusalem&travelmode=walking" target="_blank" rel="noopener noreferrer">Holy Sepulchre to Jaffa Gate</a>.</p>
       <AttractionPracticalTip>For the full pilgrimage walk, plan your visit around the Holy Sepulchre's visiting hours and any services taking place there. Allow more time on Fridays and religious holidays.</AttractionPracticalTip>
     </div>
   ),
@@ -123,7 +127,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
             <tr className="border-b"><th scope="row" className="px-3 py-3 align-top font-semibold">Via Dolorosa streets</th><td className="px-3 py-3 align-top">Public walking route throughout the day</td><td className="px-3 py-3 align-top">Free</td><td className="px-3 py-3 align-top">Look for station markers and shopfronts along the way</td></tr>
             <tr className="border-b"><th scope="row" className="px-3 py-3 align-top font-semibold">Church of the Flagellation</th><td className="px-3 py-3 align-top">07:00–18:00 summer / until 17:00 winter</td><td className="px-3 py-3 align-top">Check at church</td><td className="px-3 py-3 align-top"><a href={official.churchHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Current sanctuary hours</a></td></tr>
             <tr className="border-b"><th scope="row" className="px-3 py-3 align-top font-semibold">Ecce Homo Basilica & Lithostrotos</th><td className="px-3 py-3 align-top">08:00–17:00</td><td className="px-3 py-3 align-top">Confirm at entrance</td><td className="px-3 py-3 align-top"><a href={official.churchHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>CIC visiting information</a></td></tr>
-            <tr className="border-b"><th scope="row" className="px-3 py-3 align-top font-semibold">Terra Sancta Museum</th><td className="px-3 py-3 align-top">Tue–Sat 09:00–18:00 summer / 17:00 winter; Sun from 14:00</td><td className="px-3 py-3 align-top">Ticketed exhibits</td><td className="px-3 py-3 align-top"><a href={official.flagellationMuseum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Museum information</a></td></tr>
+            <tr className="border-b"><th scope="row" className="px-3 py-3 align-top font-semibold">Terra Sancta Museum</th><td className="px-3 py-3 align-top">Tue–Sun 09:00–18:00 summer / 09:00–17:00 winter; Mon 14:00–18:00 summer / 14:00–17:00 winter. Last admission 30 minutes before closing.</td><td className="px-3 py-3 align-top">₪30 Via Dolorosa Experience; ₪40 museum tour; ₪50 combined ticket (standard admission)</td><td className="px-3 py-3 align-top"><a href={official.flagellationMuseum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official hours and tickets</a></td></tr>
             <tr><th scope="row" className="px-3 py-3 align-top font-semibold">Church of the Holy Sepulchre</th><td className="px-3 py-3 align-top">Open daily, with seasonal opening times and religious services</td><td className="px-3 py-3 align-top">General entry free</td><td className="px-3 py-3 align-top"><a href={official.churchHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check current church hours</a></td></tr>
           </tbody>
         </table>
