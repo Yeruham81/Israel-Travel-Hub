@@ -106,7 +106,7 @@ export const attractionSidebarRegions: SidebarNavItem[] = attractionHubRegions.m
   })),
 }));
 
-/** Shared desktop/mobile menu; labels use sentence case, retaining proper names. */
+/** Shared desktop/mobile menu, with topic headings and their guide links. */
 export const allNavGroups: NavGroup[] = [
   {
     title: "Transportation",
@@ -141,25 +141,37 @@ export const allNavGroups: NavGroup[] = [
     title: "Travel guides",
     items: [
       { label: "All travel guides", to: "/travel-blog/" },
-      { label: "Israel itineraries", headingOnly: true, childrenLabel: "Trip lengths", children: [
-        { label: "Israel in 3 days", to: "/travel-blog/israel-itinerary-3-days/" },
-        { label: "Israel in 5 days", to: "/travel-blog/israel-itinerary-5-days/" },
-        { label: "Israel in 7 days", to: "/travel-blog/israel-itinerary-7-days/" },
-        { label: "Israel in 10 days", to: "/travel-blog/israel-itinerary-10-days/" },
-      ] },
       { label: "From Ben Gurion Airport", headingOnly: true, childrenLabel: "Ben Gurion Airport arrival guides", children: [
         { label: "How to get to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
         { label: "How to get to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
         { label: "How to get to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
         { label: "How to get to Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
+        { label: "Ben Gurion Airport Taxis", to: travelGuidePaths.airportTaxis },
+        { label: "Traveling from Ben Gurion Airport on Shabbat", to: travelGuidePaths.shabbat },
+        { label: "Sherut from Ben Gurion Airport", to: travelGuidePaths.sherut },
+        travelTips.arrival,
       ] },
-
-      { label: "Where to stay guides", headingOnly: true, childrenLabel: "Accommodation planning guides", children: [
+      { label: "Getting Around", headingOnly: true, childrenLabel: "Getting around guides", children: [
+        travelTips.gettingAround,
+        { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
+        { label: "How to get from Jerusalem to Bethlehem", to: travelGuidePaths.bethlehem },
+        { label: "How to get from Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
+        { label: "Taxis in Israel", to: travelGuidePaths.taxis },
+        { label: "Taxi fares in Israel", to: travelGuidePaths.taxiFares },
+        travelTips.uber,
+      ] },
+      { label: "Where to Stay Guides", headingOnly: true, childrenLabel: "Accommodation planning guides", children: [
         { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
         { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
         { label: "Best hotels in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
         { label: "Best hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
         { label: "Dead Sea best hotels", to: "/travel-blog/best-dead-sea-hotels/" },
+      ] },
+      { label: "Israel Itineraries", headingOnly: true, childrenLabel: "Trip lengths", children: [
+        { label: "Israel in 3 days", to: "/travel-blog/israel-itinerary-3-days/" },
+        { label: "Israel in 5 days", to: "/travel-blog/israel-itinerary-5-days/" },
+        { label: "Israel in 7 days", to: "/travel-blog/israel-itinerary-7-days/" },
+        { label: "Israel in 10 days", to: "/travel-blog/israel-itinerary-10-days/" },
       ] },
       { label: "Israel travel tips", to: travelGuidePaths.travelTips },
       { label: "Best time to visit Israel", to: travelGuidePaths.bestTime },
@@ -169,15 +181,7 @@ export const allNavGroups: NavGroup[] = [
       { label: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },
       { label: "Christian tours in Israel", to: travelGuidePaths.christianTours },
       { label: "Israel tours for seniors", to: travelGuidePaths.seniorTours },
-      { label: "How to get from Jerusalem to Bethlehem", to: travelGuidePaths.bethlehem },
-      { label: "How to get from Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
-      travelTips.gettingAround,
-      { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
-      { label: "Taxis in Israel", to: travelGuidePaths.taxis },
-      { label: "Sherut from Ben Gurion Airport", to: travelGuidePaths.sherut },
-      travelTips.uber,
       travelTips.esim,
-      travelTips.arrival,
     ],
   },
 ];

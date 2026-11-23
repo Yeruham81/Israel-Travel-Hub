@@ -161,7 +161,7 @@ describe("shared sidebar navigation", () => {
       { section: "Tours & trips", label: "Shore excursions", path: "/shore-excursions/", list: "Shore excursion ports", count: 2 },
     ];
     const guides = screen.getByRole("region", { name: "Travel guides" });
-    const nonLinkHeading = within(guides).getByText("Israel itineraries");
+    const nonLinkHeading = within(guides).getByText("Israel Itineraries");
     expect(nonLinkHeading).toHaveClass("font-semibold", "text-foreground");
 
     for (const parent of linkedParents) {
@@ -175,16 +175,21 @@ describe("shared sidebar navigation", () => {
     }
   });
 
-  it("groups the four Ben Gurion Airport arrival guides under Travel guides", async () => {
+  it("organizes airport, transport, hotel and itinerary guides into ordered topic groups", async () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const guides = screen.getByRole("region", { name: "Travel guides" });
     expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/travel-blog/");
-    for (const label of ["Israel itineraries", "From Ben Gurion Airport"]) {
+    const headings = ["From Ben Gurion Airport", "Getting Around", "Where to Stay Guides", "Israel Itineraries"];
+    for (const label of headings) {
       expect(within(guides).getByText(label)).toBeVisible();
       expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
       expect(within(guides).queryByRole("button", { name: label })).not.toBeInTheDocument();
     }
+    for (let i = 1; i < headings.length; i++) {
+      expect(within(guides).getByText(headings[i - 1]!).compareDocumentPosition(within(guides).getByText(headings[i]!)) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    }
+    expect(within(guides).getByText("Israel Itineraries").compareDocumentPosition(within(guides).getByRole("link", { name: "Israel travel tips" })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const itineraries = within(guides).getByRole("list", { name: "Trip lengths" });
     expect(within(itineraries).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual([
       ["Israel in 3 days", "/travel-blog/israel-itinerary-3-days/"],
@@ -199,8 +204,24 @@ describe("shared sidebar navigation", () => {
       ["How to get to Tel Aviv", "/travel-blog/ben-gurion-airport-to-tel-aviv/"],
       ["How to get to Haifa", "/travel-blog/ben-gurion-airport-to-haifa/"],
       ["How to get to Ein Bokek", "/travel-blog/ben-gurion-airport-to-ein-bokek/"],
+      ["Ben Gurion Airport Taxis", "/travel-blog/ben-gurion-airport-taxis/"],
+      ["Traveling from Ben Gurion Airport on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/"],
+      ["Sherut from Ben Gurion Airport", "/travel-blog/sherut-in-israel/"],
+      ["Ben Gurion arrival tips", "/travel-blog/ben-gurion-airport-arrival-tips/"],
     ];
     expect(within(airportGuides).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual(expected);
+    const gettingAround = within(guides).getByRole("list", { name: "Getting around guides" });
+    expect(within(gettingAround).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual([
+      ["Getting around Israel", "/travel-blog/getting-around-israel/"],
+      ["Getting around Tel Aviv", "/travel-blog/getting-around-tel-aviv/"],
+      ["How to get from Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/"],
+      ["How to get from Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/"],
+      ["Taxis in Israel", "/travel-blog/taxis-in-israel/"],
+      ["Taxi fares in Israel", "/travel-blog/taxi-fares-in-israel/"],
+      ["Is there Uber in Israel?", "/travel-blog/uber-in-israel/"],
+    ]);
+    const links = within(guides).getAllByRole("link").map(link => link.getAttribute("href"));
+    expect(new Set(links).size).toBe(links.length);
     expect(within(guides).getByRole("list", { name: "Trip lengths" })).toBeVisible();
   });
 
@@ -288,7 +309,7 @@ describe("shared sidebar navigation", () => {
     nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
     const guides = within(nav).getByRole("region", { name: "Travel guides" });
     expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/travel-blog/");
-    for (const label of ["Israel itineraries", "From Ben Gurion Airport"]) {
+    for (const label of ["From Ben Gurion Airport", "Getting Around", "Where to Stay Guides", "Israel Itineraries"]) {
       expect(within(guides).getByText(label)).toBeVisible();
       expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
       expect(within(guides).queryByRole("button", { name: label })).not.toBeInTheDocument();
