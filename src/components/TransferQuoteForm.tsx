@@ -44,6 +44,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
         <QuoteFormIntro
           headingId="quote-h"
           eyebrow="A local, personal service"
+          showTripadvisorReviews={allowAirportDropoff && compactHeader && !fixedDestination}
           title={compactHeader ? "Request a private transfer quote" : fixedDestination && selectedDestination ? `Request your transfer to ${destinationLabel}` : "Ask me for a personal quote"}
           description={compactHeader
             ? "Share your route, flight and passenger details for a private airport transfer quote."
