@@ -1,0 +1,42 @@
+name: Production domain preflight (build only, never publish)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/lib/site.ts"
+      - "src/test/sitemap.test.ts"
+      - "scripts/generate-sitemap.mjs"
+      - "scripts/verify-hostinger-static-export.mjs"
+      - ".github/workflows/launch-production-preflight.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  production-static-preflight:
+    name: Confirm www.israel-taxi.com production HTML without publishing
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: "https://www.israel-taxi.com"
+      VITE_INDEXABLE: "true"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install locked dependencies
+        run: bash scripts/install-ci-dependencies.sh
+      - name: Build all pages with launch-domain metadata
+        run: bash scripts/build-validated-static.sh
+      - name: Verify sitemap, robots, page canonicals and indexability
+        run: node scripts/verify-hostinger-static-export.mjs
+      - name: Confirm this workflow never uploads or changes DNS
+        run: |
+          echo "Preflight succeeded. No deployment, DNS, PHP, or .htaccess files were changed."

@@ -1,9 +1,12 @@
 import defaultSharePhoto from "@/assets/home/jerusalem-old-city.webp";
 
+/** Only the permanent www domain may be indexed, even if a preview is misconfigured. */
+export const PRODUCTION_CANONICAL_ORIGIN = "https://www.israel-taxi.com";
+
 /** Pure launch configuration: no publishing or indexing changes occur here. */
 export function siteConfig(env: { VITE_CANONICAL_ORIGIN?: string; VITE_INDEXABLE?: string }) {
   const origin = (env.VITE_CANONICAL_ORIGIN || "https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app").replace(/\/+$/, "");
-  return { origin, indexable: env.VITE_INDEXABLE === "true" };
+  return { origin, indexable: env.VITE_INDEXABLE === "true" && origin === PRODUCTION_CANONICAL_ORIGIN };
 }
 
 export const SITE_CONFIG = siteConfig({

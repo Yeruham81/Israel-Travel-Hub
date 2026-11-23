@@ -3,10 +3,24 @@ import { createRouter } from "@tanstack/react-router";
 import { QueryClient } from "@tanstack/react-query";
 import { describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
-import { CANONICAL_ORIGIN, pageMeta, siteConfig } from "@/lib/site";
+import { CANONICAL_ORIGIN, PRODUCTION_CANONICAL_ORIGIN, pageMeta, siteConfig } from "@/lib/site";
 import { collectSitemapPaths, buildSitemap, buildRobots, normalizeOrigin, DEFAULT_CANONICAL_ORIGIN } from "../../scripts/generate-sitemap.mjs";
 
 describe("generated XML sitemap and robots.txt", () => {
+  it("requires the production domain AND an explicit opt-in to enable indexing", () => {
+    const staging = siteConfig({ VITE_CANONICAL_ORIGIN: "https://saddlebrown-guanaco-454061.hostingersite.com", VITE_INDEXABLE: "true" });
+    const lovable = siteConfig({ VITE_CANONICAL_ORIGIN: DEFAULT_CANONICAL_ORIGIN, VITE_INDEXABLE: "true" });
+    const launch = siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN, VITE_INDEXABLE: "true" });
+    expect(staging.indexable).toBe(false);
+    expect(lovable.indexable).toBe(false);
+    expect(siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN, VITE_INDEXABLE: "false" }).indexable).toBe(false);
+    expect(launch.indexable).toBe(true);
+    expect(pageMeta({ title: "Test", description: "Test", path: "/" }, staging).meta)
+      .toContainEqual({ name: "robots", content: "noindex,nofollow" });
+    expect(pageMeta({ title: "Test", description: "Test", path: "/" }, launch).links)
+      .toContainEqual({ rel: "canonical", href: "https://www.israel-taxi.com/" });
+  });
+
   it("covers every static HTML route, including both the airport comparison and private-transfer pages", async () => {
     const paths = await collectSitemapPaths();
     expect(paths.length).toBeGreaterThanOrEqual(80);

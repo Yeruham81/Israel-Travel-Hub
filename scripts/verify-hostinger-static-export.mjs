@@ -17,9 +17,25 @@ assert(origin, "Set VITE_CANONICAL_ORIGIN for Hostinger");
 const canonical = new URL(origin);
 assert(canonical.protocol === "https:" && canonical.origin === origin,
   "VITE_CANONICAL_ORIGIN must be an HTTPS origin, without a trailing slash/path");
-if (canonical.hostname.endsWith(".hostingersite.com")) {
-  assert(!indexable, "Do not index the temporary Hostinger domain");
+const permanentOrigin = "https://www.israel-taxi.com";
+if (indexable) {
+  assert.equal(origin, permanentOrigin,
+    "Indexable static exports are only permitted for the permanent www.israel-taxi.com origin");
 }
+
+// Check the generated deployable files, not only the source public/ directory.
+const exportedRobots = join(root, "robots.txt");
+const exportedSitemap = join(root, "sitemap.xml");
+assert(existsSync(exportedRobots), "Missing exported robots.txt");
+assert(existsSync(exportedSitemap), "Missing exported sitemap.xml");
+const robots = readFileSync(exportedRobots, "utf8");
+assert(robots.includes("Sitemap: " + origin + "/sitemap.xml"),
+  "robots.txt must refer to the build's own sitemap");
+assert(robots.includes("User-agent: *\n") && robots.includes("Allow: /\n"),
+  "robots.txt should permit crawling of page content");
+assert(!/^Disallow:/m.test(robots), "Unexpected robots.txt Disallow directive");
+assert.equal(readFileSync(exportedSitemap, "utf8"), readFileSync("public/sitemap.xml", "utf8"),
+  "Exported sitemap differs from the generated sitemap");
 
 assert(existsSync(join(root, "index.html")), "Missing root index.html");
 const xml = readFileSync("public/sitemap.xml", "utf8");
@@ -36,6 +52,12 @@ for (const value of urlStrings) {
   assert(existsSync(file), `Missing prerendered HTML for ${url.pathname}`);
   assert(statSync(file).size > 300, `Suspiciously empty HTML for ${url.pathname}`);
   const html = readFileSync(file, "utf8");
+  const canonicalLinks = [...html.matchAll(/<link\b[^>]*\brel="canonical"[^>]*>/gi)].map(match => match[0]);
+  assert(canonicalLinks.length === 1 && canonicalLinks[0].includes('href="' + origin + url.pathname + '"'),
+    "Missing or incorrect self-canonical on " + url.pathname);
+  const expectedRobots = indexable ? "index,follow" : "noindex,nofollow";
+  assert(html.includes('name="robots" content="' + expectedRobots + '"'),
+    "Unexpected indexability on " + url.pathname);
   const retiredDestinations = new Set([
     "/travel-blog/haifa/", "/travel-blog/the-dead-sea/", "/travel-blog/sea-of-galilee/", "/tickets/",
   ]);
