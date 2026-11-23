@@ -175,12 +175,12 @@ describe("shared sidebar navigation", () => {
     }
   });
 
-  it("organizes airport, transport, hotel and itinerary guides into ordered topic groups", async () => {
+  it("organizes airport, transport, hotel, itinerary and planning guides into ordered topic groups", async () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const guides = screen.getByRole("region", { name: "Travel guides" });
     expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/travel-blog/");
-    const headings = ["From Ben Gurion Airport", "Getting Around", "Where to Stay Guides", "Israel Itineraries"];
+    const headings = ["From Ben Gurion Airport", "Getting Around", "Where to Stay Guides", "Israel Itineraries", "Planning Your Trip"];
     for (const label of headings) {
       expect(within(guides).getByText(label)).toBeVisible();
       expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
@@ -189,7 +189,15 @@ describe("shared sidebar navigation", () => {
     for (let i = 1; i < headings.length; i++) {
       expect(within(guides).getByText(headings[i - 1]!).compareDocumentPosition(within(guides).getByText(headings[i]!)) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     }
-    expect(within(guides).getByText("Israel Itineraries").compareDocumentPosition(within(guides).getByRole("link", { name: "Israel travel tips" })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    const planning = within(guides).getByRole("list", { name: "Trip planning guides" });
+    expect(planning).toBeVisible();
+    expect(within(planning).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual([
+      ["Israel travel tips", travelGuidePaths.travelTips],
+      ["Best time to visit Israel", travelGuidePaths.bestTime],
+      ["Holidays & events", travelGuidePaths.calendar],
+      ["Choosing an eSIM for Israel", travelGuidePaths.esim],
+    ]);
+    expect(planning.compareDocumentPosition(within(guides).getByRole("link", { name: "What to eat in Israel" })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const itineraries = within(guides).getByRole("list", { name: "Trip lengths" });
     expect(within(itineraries).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual([
       ["Israel in 3 days", "/travel-blog/israel-itinerary-3-days/"],
@@ -309,7 +317,7 @@ describe("shared sidebar navigation", () => {
     nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
     const guides = within(nav).getByRole("region", { name: "Travel guides" });
     expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/travel-blog/");
-    for (const label of ["From Ben Gurion Airport", "Getting Around", "Where to Stay Guides", "Israel Itineraries"]) {
+    for (const label of ["From Ben Gurion Airport", "Getting Around", "Where to Stay Guides", "Israel Itineraries", "Planning Your Trip"]) {
       expect(within(guides).getByText(label)).toBeVisible();
       expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
       expect(within(guides).queryByRole("button", { name: label })).not.toBeInTheDocument();
