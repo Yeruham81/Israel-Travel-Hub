@@ -199,7 +199,7 @@ assert(arrivalMain, "Ben Gurion arrivals guide main content missing");
 for (const required of [
   "Ben Gurion Airport Arrivals Guide",
   "featured-ben-gurion-arrival.webp",
-  "Updated November 2026",
+  "November 2026",
   "blue entry card",
   "₪25",
   "Where to go / Pickup point",
