@@ -58,7 +58,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     id: "jerusalem", city: "Jerusalem",
     path: "/travel-blog/ben-gurion-airport-to-jerusalem/",
     title: "Ben Gurion Airport to Jerusalem: Train, Taxi, Bus & Transfers",
-    description: "Compare train, metered taxi, private transfer, limited bus 485 and rental car from Ben Gurion Airport to Jerusalem, with current rail voucher rules and hotel connections.",
+    description: "Compare trains to Jerusalem–Yitzhak Navon, airport taxis, bus 485 and private transfers, including hotel connections and Shabbat travel.",
     distance: "Approximately 45–55 km by road, depending on your address",
     intro: "You can travel from Ben Gurion Airport to Jerusalem by train, taxi, private transfer or bus. The best option depends on your arrival time, luggage and where you're staying.",
     exampleJourney: {
@@ -170,7 +170,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     id: "tel-aviv", city: "Tel Aviv & Jaffa",
     path: "/travel-blog/ben-gurion-airport-to-tel-aviv/",
     title: "Ben Gurion Airport to Tel Aviv: Train, Taxi, Bus & Transfers",
-    description: "Compare trains, bus 445, official airport taxis, private transfers and free weekend Line 711 from Ben Gurion Airport to Tel Aviv, with station choice, hotel connections and updated travel tips.",
+    description: "Compare trains, bus 445, airport taxis and private transfers to Tel Aviv. Choose the right station for your hotel and check weekend line 711.",
     distance: "Approximately 20–25 km to central Tel Aviv, depending on the address",
     intro: "You can reach Tel Aviv from Ben Gurion Airport by train, bus, taxi or private transfer. The best choice depends on where you're staying, your luggage and your arrival time.",
     exampleJourney: {
@@ -294,7 +294,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     id: "haifa", city: "Haifa",
     path: "/travel-blog/ben-gurion-airport-to-haifa/",
     title: "Ben Gurion Airport to Haifa: Train, Taxi, Bus & Transfers",
-    description: "Compare the train, official airport taxis, private transfers and limited Egged bus 905 from Ben Gurion Airport to Haifa. Find the right railway station for your hotel, Mount Carmel or Haifa Port and check Shabbat options.",
+    description: "Travel from Ben Gurion Airport to Haifa by train, taxi or private transfer. Find the best station for Mount Carmel, the port and your hotel.",
     distance: "Approximately 100–110 km to central Haifa",
     intro: "You can reach Haifa from Ben Gurion Airport by train, taxi, private transfer or limited bus services. Your hotel location matters: the coastal districts, Mount Carmel and Haifa Port require different onward connections.",
     exampleJourney: {
@@ -416,7 +416,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     id: "ein-bokek", city: "Ein Bokek (Dead Sea)",
     path: "/travel-blog/ben-gurion-airport-to-ein-bokek/",
     title: "Ben Gurion Airport to Ein Bokek: Train, Bus, Taxi & Transfers",
-    description: "Compare train and bus via Jerusalem, official airport taxis, private transfers and rental cars to Ein Bokek, with bus 486/444 times, Jerusalem rail vouchers, hotel stops and Shabbat travel.",
+    description: "Reach Ein Bokek from Ben Gurion Airport by train and bus via Jerusalem, taxi or private transfer. Check buses 486/444 and Dead Sea hotel stops.",
     distance: "Approximately 155–165 km to the Ein Bokek hotel strip by road",
     intro: "There is no direct train or regular airport bus to Ein Bokek. You can travel via Jerusalem by train and bus, or reach your Dead Sea hotel by taxi, private transfer or rental car. Here's how to choose the best option for your arrival time.",
     exampleJourney: {
@@ -454,7 +454,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { title: "National Public Transport Journey Planner — current route and hotel-stop times", url: "https://bus.gov.il/en/home" },
       { title: "Israel Airports Authority — Terminal 3 rail and ground transport", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10038" },
       { title: "Gett — official airport taxi ride-code and queue instructions", url: "https://www.gett.com/il/airport-en/" },
-      { title: "Israel Police — flood warnings and road safety guidance", url: "https://www.gov.il/he/pages/police_5_11_26_weather" },
+      { title: "Israel Meteorological Service — flood and weather warnings", url: "https://ims.gov.il/en/warning" },
     ],
     privatePath: "/airport-transfers/ein-bokek/",
     privateLabel: "Request a private Ein Bokek transfer",

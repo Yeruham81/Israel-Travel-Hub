@@ -193,6 +193,26 @@ jobs:
             -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
             .output/public/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$HOSTINGER_REMOTE_PATH/"
 
+      - name: Verify four airport guides directly on Hostinger
+        if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" "HOSTINGER_REMOTE_PATH='$HOSTINGER_REMOTE_PATH' sh -s" <<'REMOTE'
+          set -eu
+          cd "$HOSTINGER_REMOTE_PATH"
+          for city in jerusalem tel-aviv haifa ein-bokek; do
+            page="travel-blog/ben-gurion-airport-to-$city/index.html"
+            test -s "$page"
+            grep -Fq 'data-testid="airport-journey-comparison"' "$page"
+            grep -Fq 'data-testid="airport-arrival-areas"' "$page"
+            grep -Fq 'data-testid="airport-related-guides"' "$page"
+            grep -Fq 'id="request-quote"' "$page"
+            echo "$page: published HTML verified"
+          done
+          REMOTE
+
       - name: Retire the removed tickets and admission page
         if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
         shell: bash

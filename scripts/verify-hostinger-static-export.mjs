@@ -108,6 +108,53 @@ for (const [retained, retired] of preservedRoutes) {
   assert(html.includes(`rel="canonical" href="${origin}${retained}"`), `Missing self-canonical: ${retained}`);
 }
 
+// Verify the four airport journey pages in the deployable HTML, including
+// mobile table parity, internal routes, in-page anchors and image assets.
+for (const city of ["jerusalem", "tel-aviv", "haifa", "ein-bokek"]) {
+  const journeyPath = "/travel-blog/ben-gurion-airport-to-" + city + "/";
+  const file = join(root, "travel-blog", "ben-gurion-airport-to-" + city, "index.html");
+  const html = readFileSync(file, "utf8");
+  const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1];
+  assert(main, "Missing airport editorial content: " + journeyPath);
+  const description = html.match(/<meta\b[^>]*name="description"[^>]*content="([^"]*)"/i)?.[1];
+  assert(description && description.length >= 105 && description.length <= 160,
+    "Airport guide SEO description length must be 105–160 characters: " + journeyPath);
+  assert.equal([...main.matchAll(/<h1\b/gi)].length, 1, "Expected one H1: " + journeyPath);
+  assert(main.includes('id="comparison"') && main.includes('id="request-quote"'),
+    "Missing comparison or contact form: " + journeyPath);
+  assert(main.includes('data-testid="airport-journey-comparison"') && main.includes('data-testid="airport-arrival-areas"'),
+    "Missing comparison or area table: " + journeyPath);
+  assert.equal([...main.matchAll(/<table\b/gi)].length, city === "jerusalem" ? 2 : 3,
+    "Unexpected table count on " + journeyPath);
+  const related = main.match(/<section\b[^>]*data-testid="airport-related-guides"[^>]*>([\s\S]*?)<\/section>/i)?.[1];
+  assert(related, "Missing related guide grid: " + journeyPath);
+  assert(related.includes("grid-cols-2") && related.includes("lg:grid-cols-3"),
+    "Incorrect mobile/desktop related card grid: " + journeyPath);
+  assert.equal([...related.matchAll(/<li\b/g)].length, 6, "Expected six cards: " + journeyPath);
+  const ids = new Set([...main.matchAll(/\bid="([^"]+)"/gi)].map(match => match[1]));
+  for (const [, raw] of main.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
+    const href = raw.replaceAll("&amp;", "&");
+    const target = new URL(href, origin + journeyPath);
+    if (target.origin !== origin) continue;
+    assert(paths.has(target.pathname.replace(/\/+$/, "") + "/"),
+      "Broken internal link " + href + " on " + journeyPath);
+    if (target.pathname === journeyPath && target.hash) {
+      const anchor = decodeURIComponent(target.hash.slice(1));
+      assert(ids.has(anchor), "Broken anchor #" + anchor + " on " + journeyPath);
+    }
+  }
+  const imgs = [...main.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/gi)].map(match => match[1].replaceAll("&amp;", "&"));
+  assert(imgs.length >= 9, "Missing illustrated guide cards or article photos: " + journeyPath);
+  for (const src of imgs) {
+    assert(src.startsWith("/"), "Unexpected remote airport-guide image: " + src);
+    const imageFile = join(root, src.split("?")[0].replace(/^\//, ""));
+    assert(existsSync(imageFile) && statSync(imageFile).size > 100,
+      "Airport-guide image missing or empty: " + src + " on " + journeyPath);
+  }
+  assert(!html.includes("police_5_11_26_weather"), "Old weather bulletin still linked on " + journeyPath);
+}
+console.log("Airport journey SEO, section anchors, internal links and mobile tables verified.");
+
 // Eilat is one destination attraction, not an independent travel-blog article.
 const retiredEilatGuidePath = "/travel-blog/" + "eilat/";
 assert(paths.has("/attractions/eilat/"), "Eilat attraction page missing from sitemap");
