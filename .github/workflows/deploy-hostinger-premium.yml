@@ -836,8 +836,8 @@ jobs:
           const canonicalLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
             .map(m => m[0]).filter(tag => /\brel=["']canonical["']/i.test(tag));
           for (const snippet of [
-            "Old Akko (Acre): Historic Attractions",
-            "Old Akko (Acre): Attractions &amp; Tickets",
+            "Old Akko (Acre): Attractions, Walking Routes",
+            "Old Akko (Acre): Attractions &amp; Walking Guide",
             "What to see in Old Akko",
             "Moat Parking (free)",
             "View official tickets and visitor information",
@@ -848,7 +848,12 @@ jobs:
             'data-testid="akko-booking"',
             'data-testid="akko-accessibility"',
             'data-testid="akko-walking-routes"',
-            'data-testid="akko-map"',
+            'data-testid="akko-arrival-map"',
+            'data-testid="akko-interactive-map"',
+            'data-testid="akko-hours-admission-table"',
+            'data-testid="akko-food-guide"',
+            'data-testid="akko-practical-tips"',
+            'data-testid="akko-gentler-walk"',
             "Templars",
             "Ramchal Synagogue",
             "Treasures in the Wall",
@@ -872,9 +877,19 @@ jobs:
             console.error("::error::Old Akko must show six related attraction cards");
             process.exit(1);
           }
-          console.log("Old Akko published content, eight highlights, related grid and canonical confirmed.");
+          if ((html.match(/data-testid="tour-card"/g) || []).length < 3) {
+            console.error("::error::Old Akko must display three Travelpayouts tour cards");
+            process.exit(1);
+          }
+          console.log("Old Akko published map, table, eight highlights, three tours, related grid and canonical confirmed.");
           NODE
           rm -f "$akko_html"
+          akko_map_html="$(mktemp)"
+          curl --retry 2 --max-time 25 -fsSL -o "$akko_map_html" "$VITE_CANONICAL_ORIGIN/maps/akko-attractions.html"
+          grep -Fq "Eight numbered Old Akko attractions visible together" "$akko_map_html" || { echo "::error::Akko eight-pin OpenStreetMap overview was not published"; exit 1; }
+          grep -Fq 'new maplibregl.Marker' "$akko_map_html" || { echo "::error::Akko numbered marker renderer is missing"; exit 1; }
+          grep -Fq './english-style.json' "$akko_map_html" || { echo "::error::Akko map style could not be identified"; exit 1; }
+          rm -f "$akko_map_html"
           for picture in akko-knights-halls.webp akko-templar-tunnel.webp akko-turkish-bath.webp akko-al-jazzar-mosque.webp akko-market.webp akko-fishing-harbour.webp akko-treasures-museum.webp akko-ramchal-synagogue.webp; do
             data="$(mktemp)"
             curl --retry 2 --max-time 20 -fsSL -o "$data" "$VITE_CANONICAL_ORIGIN/images/attractions/$picture"
