@@ -150,11 +150,11 @@ function JerusalemRailDetails({ guide }: { guide: AirportJourneyGuide }) {
       {guide.photos?.station && <figure className="mt-5 max-w-3xl">
         <img src={guide.photos.station.src} alt={guide.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
-      <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map((connection) => <li key={connection}>{connection}</li>)}</ul>
+      <ArrivalAreaTable guide={guide} />
       <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
         <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
         <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3"><span className="font-semibold text-primary">{index + 1}.</span><div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div></li>)}</ol>
-        <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {guide.exampleJourney.takeaway}</p>
+        <p className="mt-4 border-t pt-4 text-sm leading-relaxed">{guide.exampleJourney.takeaway}</p>
       </aside>
     </>
   );
@@ -183,14 +183,14 @@ function TelAvivRailDetails({ guide }: { guide: AirportJourneyGuide }) {
       {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
         <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
-      <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map(connection => <li key={connection}>{connection}</li>)}</ul>
+      <ArrivalAreaTable guide={guide} />
       <p className="mt-4 text-sm leading-relaxed">Staying in the historic port area? My <Link to="/attractions/jaffa/" className="font-semibold text-primary underline underline-offset-4">Old Jaffa guide</Link> explains the lanes, attractions and local access before you decide where a driver can leave you.</p>
       <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
         <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
         <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3">
           <span className="font-semibold text-primary">{index + 1}.</span><div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div>
         </li>)}</ol>
-        <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {guide.exampleJourney.takeaway}</p>
+        <p className="mt-4 border-t pt-4 text-sm leading-relaxed">{guide.exampleJourney.takeaway}</p>
       </aside>
     </>
   );
@@ -221,14 +221,14 @@ function HaifaRailDetails({ guide }: { guide: AirportJourneyGuide }) {
       {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
         <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
-      <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map(connection => <li key={connection}>{connection}</li>)}</ul>
+      <ArrivalAreaTable guide={guide} />
       <p className="mt-4 text-sm leading-relaxed">For specific neighborhood and hotel choices, read my <Link to="/travel-blog/best-hotels-in-haifa/" className="font-semibold text-primary underline underline-offset-4">where to stay in Haifa guide</Link>. If you are boarding a cruise, see the <Link to="/shore-excursions/haifa/" className="font-semibold text-primary underline underline-offset-4">Haifa port and shore excursions guide</Link> and verify the ship's check-in instructions.</p>
       <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
         <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
         <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3">
           <span className="font-semibold text-primary">{index + 1}.</span><div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div>
         </li>)}</ol>
-        <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {guide.exampleJourney.takeaway}</p>
+        <p className="mt-4 border-t pt-4 text-sm leading-relaxed">{guide.exampleJourney.takeaway}</p>
       </aside>
     </>
   );
@@ -262,18 +262,18 @@ function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide 
       {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
         <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
-      <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map(connection => <li key={connection}>{connection}</li>)}</ul>
+      <ArrivalAreaTable guide={guide} />
       <p className="mt-4 text-sm leading-relaxed">For the exact resort location, compare my <Link to="/travel-blog/best-dead-sea-hotels/" className="font-semibold text-primary underline underline-offset-4">Dead Sea hotels guide</Link>. If you are starting your trip in Jerusalem instead of changing trains there, consult <Link to="/travel-blog/jerusalem-to-the-dead-sea/" className="font-semibold text-primary underline underline-offset-4">Jerusalem to the Dead Sea</Link>.</p>
       <h4 className="mt-8 text-xl font-semibold">A limited alternative: bus 421 via Tel Aviv–Savidor</h4>
       <p className="mt-3 leading-relaxed">Bus 421 is another limited option from Tel Aviv–Savidor to the Dead Sea. You would first need to reach Savidor by train from the airport and reserve your bus seat separately. Use this route only if the timetable works better than travelling via Jerusalem. See my <Link to="/travel-blog/ben-gurion-airport-to-tel-aviv/" className="font-semibold text-primary underline underline-offset-4">airport-to-Tel-Aviv guide</Link> for the rail arrival leg.</p>
       <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
         <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
-        <p className="mt-2 text-sm text-muted-foreground">Example only — check current train and bus times before travelling.</p>
+        
         <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3">
           <span className="font-semibold text-primary">{index + 1}.</span>
           <div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div>
         </li>)}</ol>
-        <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {guide.exampleJourney.takeaway}</p>
+        <p className="mt-4 border-t pt-4 text-sm leading-relaxed">{guide.exampleJourney.takeaway}</p>
       </aside>
     </>
   );
@@ -379,12 +379,12 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <AuthorCard />
       </header>
       <section id="quick-answer" aria-labelledby="quick-answer-h" className="mt-8 rounded-2xl border border-primary/20 bg-secondary/60 p-6">
-        <h2 id="quick-answer-h" className="text-2xl">Quick answer: what is the best way to get there?</h2>
+        <h2 id="quick-answer-h" className="text-2xl font-semibold">Best way to reach {g.city}</h2>
         <p className="mt-3 leading-relaxed">{g.answer}</p>
         {!focusedLayout && <p className="mt-3 text-sm text-muted-foreground">Compare the total door-to-door cost to your address. Each provider confirms prices and availability.</p>}
       </section>
       <OnThisPage sections={links} />
-      <Section id="comparison" title={"Compare all ways from TLV Airport to " + g.city}>
+      <Section id="comparison" title={"Compare ways to reach " + g.city}>
         {!focusedLayout && <p>Compare the complete door-to-door journey, including transfers, total travel time and cost. Check current fares with each provider.</p>}
         <div role="region" aria-label={"Travel options to " + g.city} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border bg-card">
           {focusedLayout ? (
@@ -434,7 +434,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       {!focusedLayout && <PrivateRideCta id={id}/>}
       {!focusedLayout && stationSection}
       <section id="options" aria-labelledby="options-h" className="mt-14 scroll-mt-28">
-        <h2 id="options-h" className="text-3xl">How each transport option works</h2>
+        <h2 id="options-h" className="text-3xl">Transport options from the airport</h2>
         {!focusedLayout && <p className="mt-3 leading-relaxed">Compare each option's actual pickup, onward connection and limitations before choosing what works for your destination.</p>}
         {!focusedLayout && g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /></figure>}
         {displayOptions.map(o=><OptionSection key={o.id} option={o} guideId={id} />)}
@@ -442,19 +442,15 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <Section id="shabbat" title="Getting there on Shabbat and Jewish holidays">
         {g.weekend.map(p=><p key={p}><GuideParagraph paragraph={p} inlineLinks={g.weekendLinks} /></p>)}
         {!g.weekendLinks?.length && <p>For terminal-specific weekend travel, see my <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Ben Gurion Airport Shabbat guide</Link>.</p>}
-        {!g.weekendLinks?.some(link => link.to === "/travel-blog/calendar-of-events/") && <p>Before planning a trip during a Jewish holiday, check <Link to="/travel-blog/calendar-of-events/" className="font-medium text-primary underline underline-offset-4">Israel's holiday and special dates guide</Link> for guidance on holiday-related changes to transport and opening hours. Verify the timetable for your exact travel day.</p>}
+        {!g.weekendLinks?.some(link => link.to === "/travel-blog/calendar-of-events/") && <p>For holiday dates, see <Link to="/travel-blog/calendar-of-events/" className="font-medium text-primary underline underline-offset-4">Israel's Calendar of Events</Link>.</p>}
       </Section>
-      <Section id="tips" title="Practical tips to avoid missed connections and extra costs">
+      <Section id="tips" title="Before you travel">
         <ul className="list-disc space-y-3 pl-5">{g.advice.map(t=><li key={t}>{t}</li>)}</ul>
-        <p>For first-time arrivals, read my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">airport arrivals checklist</Link> and save the operator's contact details offline.</p>
-        {(id === "tel-aviv" || id === "haifa" || id === "ein-bokek") && <p className="mt-4 text-sm leading-relaxed">Need mobile data for maps and transport apps? See my <Link to="/travel-blog/best-esim-for-israel/" className="font-semibold text-primary underline underline-offset-4">Israel eSIM guide</Link> before you land.</p>}
+        <p>For terminal directions and arrival procedures, see my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">Ben Gurion Airport arrival guide</Link>.</p>
       </Section>
       <FaqList faqs={g.faqs}/>
       {!focusedLayout && sourceBlock}
-      {focusedLayout ? <>
-        <RelatedLinks title="Related practical guides" currentPath={g.path} items={g.related} />
-        <RelatedLinks title="Plan the next part of your trip" items={g.planNext || []} />
-      </> : <>
+      {focusedLayout ? <JourneyRelatedCards guide={g} /> : <>
         <RelatedLinks title="Related practical guides" items={[
           ...g.related,
           { label: "Taxi fares in Israel", to: "/travel-blog/taxi-fares-in-israel/" },
