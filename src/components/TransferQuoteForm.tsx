@@ -54,7 +54,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
           <form onSubmit={send} noValidate aria-label="Private airport transfer quote request" aria-busy={submission.isSending}>
             <fieldset disabled={submission.isSending} className="min-w-0">
               {errors.length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-5 rounded-xl border border-destructive p-4 text-sm text-destructive"><p className="font-semibold">Please check these details:</p><ul className="mt-2 list-disc pl-5">{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
                 {allowAirportDropoff && <fieldset className="rounded-xl border border-primary/20 bg-secondary/30 p-3 sm:p-4" aria-label="Transfer direction">
                   <legend className="px-1 text-sm font-semibold">Transfer direction</legend>
                   <div className="grid grid-cols-2 gap-2">
@@ -69,8 +69,8 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
                   <label className="min-w-0 text-sm font-medium">Phone / WhatsApp<Input name="phone" type="tel" autoComplete="tel" maxLength={50} placeholder="Include country code" value={fields.phone} onChange={(e) => update("phone", e.target.value)} className={fieldClass} /></label>
                 </div>
                 <div>
-                  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="quote-fields-arrival">
-                    <label className="min-w-0 text-sm font-medium">Flight number<Input name="flight" maxLength={30} placeholder="For example, LY123" value={fields.flight} onChange={(e) => update("flight", e.target.value)} className={fieldClass} /></label>
+                  <div className="grid gap-3 min-[380px]:grid-cols-2 sm:gap-4 xl:grid-cols-3" data-testid="quote-fields-arrival">
+                    <label className="min-w-0 text-sm font-medium min-[380px]:col-span-2 xl:col-span-1">Flight number<Input name="flight" maxLength={30} placeholder="For example, LY123" value={fields.flight} onChange={(e) => update("flight", e.target.value)} className={fieldClass} /></label>
                     <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Flight departure date *" : "Flight arrival date *"}<Input name="date" type="date" required value={fields.date} onChange={(e) => update("date", e.target.value)} className={fieldClass} /></label>
                     <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Flight departure time *" : "Flight arrival time *"}<Input name="time" type="time" required value={fields.time} onChange={(e) => update("time", e.target.value)} className={fieldClass} /></label>
                   </div>
@@ -83,10 +83,10 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
                   </div>
                   {destinationId === "other" && <label className="mt-4 block min-w-0 text-sm font-medium">{airportDropoff ? "Pickup city or area *" : "City or destination *"}<Input name="otherDestination" required maxLength={120} value={fields.otherDestination} onChange={(e) => update("otherDestination", e.target.value)} className={fieldClass} /></label>}
                 </div>
-                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="quote-fields-party">
-                  <label className="min-w-0 text-sm font-medium">Passengers *<Input name="passengers" type="number" min={1} max={99} step={1} required value={fields.passengers} onChange={(e) => update("passengers", e.target.value)} className={fieldClass} /></label>
-                  <label className="min-w-0 text-sm font-medium">Suitcases *<Input name="suitcases" type="number" min={0} max={40} step={1} required value={fields.suitcases} onChange={(e) => update("suitcases", e.target.value)} className={fieldClass} /></label>
-                  <label className="min-w-0 text-sm font-medium">Carry-ons *<Input name="carryOns" type="number" min={0} max={40} step={1} required value={fields.carryOns} onChange={(e) => update("carryOns", e.target.value)} className={fieldClass} /></label>
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-4" data-testid="quote-fields-party">
+                  <label className="min-w-0 text-xs font-medium sm:text-sm">Passengers *<Input name="passengers" type="number" min={1} max={99} step={1} required value={fields.passengers} onChange={(e) => update("passengers", e.target.value)} className={`${fieldClass} px-2 sm:px-3`} /></label>
+                  <label className="min-w-0 text-xs font-medium sm:text-sm">Suitcases *<Input name="suitcases" type="number" min={0} max={40} step={1} required value={fields.suitcases} onChange={(e) => update("suitcases", e.target.value)} className={`${fieldClass} px-2 sm:px-3`} /></label>
+                  <label className="min-w-0 text-xs font-medium sm:text-sm">Carry-ons *<Input name="carryOns" type="number" min={0} max={40} step={1} required value={fields.carryOns} onChange={(e) => update("carryOns", e.target.value)} className={`${fieldClass} px-2 sm:px-3`} /></label>
                 </div>
                 {Number(fields.passengers) > 4 && <p className="rounded-lg bg-secondary p-3 text-sm">For more than four passengers, ask for a group quote. The published car starting prices do not apply to your whole group.</p>}
                 <label className="block min-w-0 text-sm font-medium">Additional requests<Textarea name="notes" maxLength={1500} rows={3} placeholder="Children's ages, strollers, extra luggage, accessibility needs or a return-trip request" value={fields.notes} onChange={(e) => update("notes", e.target.value)} className="mt-2 w-full bg-background text-base" /></label>

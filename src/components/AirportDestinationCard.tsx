@@ -18,7 +18,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
   // changing the established layout of the four dedicated route pages.
   if (layout === "hub-featured") return <article className="flex h-full min-w-0 flex-row items-center gap-2 rounded-2xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:flex-col sm:items-stretch sm:gap-0 sm:p-3" data-testid={testId} data-destination={id}>
     {route && <Link to={route.path} className="group flex min-w-0 flex-1 items-center gap-1.5 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
-      <img src={photo.hubSrc ?? photo.src} alt={photo.alt} width={160} height={106} loading="lazy" decoding="async" className="aspect-[3/2] w-16 shrink-0 rounded-lg object-cover sm:w-40 sm:rounded-xl md:w-36 lg:w-40" />
+      <img src={photo.hubSrc ?? photo.src} alt={photo.alt} width={160} height={106} loading="lazy" decoding="async" className="aspect-[3/2] w-16 shrink-0 rounded-lg object-cover min-[380px]:w-[4.5rem] min-[440px]:w-[4.75rem] sm:w-40 sm:rounded-xl md:w-36 lg:w-40" />
       <div className="min-w-0 flex-1">
         <h3 className="text-base font-semibold leading-tight sm:text-xl sm:leading-snug">{destination}</h3>
         <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-lg">From ₪{price?.amount.toLocaleString("en-US")}</p>
@@ -27,10 +27,10 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
         <span className="mt-1 inline-block text-[11px] font-semibold text-primary group-hover:underline sm:mt-2 sm:text-sm">View transfer details</span>
       </div>
     </Link>}
-    <a href="#request-quote" onClick={() => onChoose?.(id)} aria-label="Request a quote" className={`${hubQuoteButtonClass} sm:mt-2 sm:self-end`}><span className="sm:hidden">Get quote</span><span className="hidden sm:inline">Request a quote</span></a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} aria-label="Request a quote" className={`${hubQuoteButtonClass} sm:mt-2 sm:self-end`}><span className="sm:hidden">Get a quote</span><span className="hidden sm:inline">Request a quote</span></a>
   </article>;
   if (layout === "hub-row") return <article
-    className="grid h-full min-h-[5.5rem] min-w-0 grid-cols-[3.5rem_minmax(0,1fr)_6.1rem] items-center gap-1.5 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:min-h-[7rem] sm:grid-cols-[7rem_minmax(0,1fr)_8.75rem] sm:gap-3 sm:p-3"
+    className="grid h-full min-h-[5.5rem] min-w-0 grid-cols-[3.5rem_minmax(0,1fr)_6.1rem] items-center gap-1.5 min-[380px]:grid-cols-[4rem_minmax(0,1fr)_6.5rem] rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:min-h-[7rem] sm:grid-cols-[7rem_minmax(0,1fr)_8.75rem] sm:gap-3 sm:p-3"
     data-testid={testId} data-destination={id}
   >
     <img src={photo.hubSrc ?? photo.src} alt={photo.alt} width={128} height={85} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover" />
@@ -39,7 +39,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
       {price && <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-base">From ₪{price.amount.toLocaleString("en-US")}</p>}
       {price && <div className="min-w-0"><CompactCurrencyEquivalents amount={price.amount} /></div>}
     </div>
-    <a href="#request-quote" onClick={() => onChoose?.(id)} aria-label="Request a quote" className={`${hubQuoteButtonClass} justify-self-end`}><span className="sm:hidden">Get quote</span><span className="hidden sm:inline">Request a quote</span></a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} aria-label="Request a quote" className={`${hubQuoteButtonClass} justify-self-end`}><span className="sm:hidden">Get a quote</span><span className="hidden sm:inline">Request a quote</span></a>
   </article>;
   const compact = layout === "compact";
   const image = <img src={photo.src} alt={photo.alt} width={compact ? 80 : 360} height={compact ? 80 : 240} loading="lazy" decoding="async" className={compact ? "h-20 w-20 shrink-0 rounded-lg object-cover" : "aspect-[3/2] w-full object-cover"} />;

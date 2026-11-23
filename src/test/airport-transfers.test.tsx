@@ -39,7 +39,10 @@ describe("private Ben Gurion transfers", () => {
     const quote = container.querySelector("#request-quote")!;
     const intro = within(quote as HTMLElement).getByTestId("quote-form-intro");
     expect(quote.firstElementChild?.firstElementChild).toBe(intro);
-    expect(intro).toHaveClass("bg-navy", "border-b");
+    expect(intro).toHaveClass("bg-navy", "border-b", "grid", "grid-cols-[auto_minmax(0,1fr)]", "sm:flex");
+    expect(intro.firstElementChild).toHaveClass("contents", "sm:flex");
+    expect(intro.querySelector("img[alt]")).toHaveClass("col-start-1", "row-start-1");
+    expect(intro.firstElementChild?.lastElementChild).toHaveClass("col-span-2", "row-start-2");
     const quoteReviews = within(intro).getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/i });
     const topReviews = within(screen.getByTestId("author-card")).getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/i });
     expect(quoteReviews).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
@@ -49,12 +52,17 @@ describe("private Ben Gurion transfers", () => {
     expect(quoteReviews).toHaveClass("bg-[#34E0A1]", "border-[#25996c]");
     expect(topReviews).toHaveClass("bg-[#34E0A1]", "border-[#25996c]");
     expect(quoteReviews.querySelector("img")).toHaveAttribute("src", "/images/tripadvisor-owl-black.svg");
-    expect(intro.lastElementChild).toHaveClass("justify-end", "lg:w-auto");
+    expect(intro.lastElementChild).toHaveClass("col-start-2", "row-start-1", "justify-end", "lg:w-auto");
 
     expect(within(quote as HTMLElement).getByTestId("quote-fields-contact")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
-    expect(within(quote as HTMLElement).getByTestId("quote-fields-arrival")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
+    const arrivalFields = within(quote as HTMLElement).getByTestId("quote-fields-arrival");
+    expect(arrivalFields).toHaveClass("min-[380px]:grid-cols-2", "xl:grid-cols-3");
+    expect(within(arrivalFields).getByLabelText("Flight number").closest("label")).toHaveClass("min-[380px]:col-span-2", "xl:col-span-1");
     expect(within(quote as HTMLElement).getByTestId("quote-fields-destination")).toHaveClass("sm:grid-cols-2");
-    expect(within(quote as HTMLElement).getByTestId("quote-fields-party")).toHaveClass("xl:grid-cols-3");
+    const partyFields = within(quote as HTMLElement).getByTestId("quote-fields-party");
+    expect(partyFields).toHaveClass("grid-cols-3", "gap-1.5", "sm:gap-4");
+    expect(within(partyFields).getAllByRole("spinbutton")).toHaveLength(3);
+    expect(within(partyFields).getAllByRole("spinbutton").every(input => input.className.includes("h-11") && input.className.includes("text-base"))).toBe(true);
     const popular = screen.getByRole("region", { name: "Popular private transfers" });
     expect(within(popular).getAllByTestId("airport-destination-card").map((card) => card.dataset["destination"])).toEqual(["tel-aviv", "jerusalem", "haifa", "dead-sea"]);
     expect(screen.getAllByTestId("airport-destination-card")).toHaveLength(12);
@@ -64,7 +72,7 @@ describe("private Ben Gurion transfers", () => {
       if (rate.popular) {
         expect(within(card).getByRole("img")).toHaveAttribute("src", airportHubPhotoSrc[rate.id]);
         expect(card).toHaveClass("flex-row", "sm:flex-col");
-        expect(within(card).getByRole("img")).toHaveClass("w-16", "sm:w-40", "md:w-36", "lg:w-40");
+        expect(within(card).getByRole("img")).toHaveClass("w-16", "min-[380px]:w-[4.5rem]", "min-[440px]:w-[4.75rem]", "sm:w-40", "md:w-36", "lg:w-40");
         expect(within(card).getByRole("link", { name: "Request a quote" })).toHaveClass("sm:self-end");
         expect(within(card).getByRole("heading", { level: 3 })).toHaveClass("text-base", "sm:text-xl");
         expect(within(card).getByText(`From ₪${rate.price.amount.toLocaleString("en-US")}`)).toHaveClass("text-[13px]", "font-bold");
@@ -73,6 +81,8 @@ describe("private Ben Gurion transfers", () => {
       } else expect(within(card).getByRole("img")).toHaveAttribute("src", airportDestinationCards.find(item => item.id === rate.id)!.photo.hubSrc);
       const quoteButton = within(card).getByRole("link", { name: "Request a quote" });
       expect(quoteButton).toHaveAttribute("href", "#request-quote");
+      expect(within(quoteButton).getByText("Get a quote")).toHaveClass("sm:hidden");
+      expect(within(quoteButton).getByText("Request a quote")).toHaveClass("hidden", "sm:inline");
       expect(quoteButton).toHaveClass("bg-primary", "text-primary-foreground", "whitespace-nowrap", "shadow-sm", "min-h-11", "px-2", "sm:px-3");
       expect(quoteButton).toHaveClass("min-h-11");
       expect(quoteButton).not.toHaveClass("bg-primary/10");
@@ -89,11 +99,11 @@ describe("private Ben Gurion transfers", () => {
       expect(card.children[0]?.tagName).toBe("IMG");
       expect(card.children[1]?.querySelector("h3")).not.toBeNull();
       expect(card.children[1]?.querySelector("h3")).toHaveClass("text-base");
-      expect(card.children[2]).toHaveTextContent("Request a quote");
+      expect(card.children[2]).toHaveTextContent("Get a quote");
       expect(card.children[2]).toHaveAttribute("href", "#request-quote");
       expect(card.children[2]).toHaveClass("whitespace-nowrap", "bg-primary", "text-primary-foreground", "justify-self-end");
       expect(card.children[2]).not.toHaveClass("col-span-2");
-      expect(card).toHaveClass("grid-cols-[3.5rem_minmax(0,1fr)_6.1rem]", "sm:grid-cols-[7rem_minmax(0,1fr)_8.75rem]");
+      expect(card).toHaveClass("grid-cols-[3.5rem_minmax(0,1fr)_6.1rem]", "min-[380px]:grid-cols-[4rem_minmax(0,1fr)_6.5rem]", "sm:grid-cols-[7rem_minmax(0,1fr)_8.75rem]");
       if (card.dataset["destination"] !== "other") {
         expect(card.children[1]?.querySelector("p")).toHaveClass("text-[13px]", "font-bold");
       }
