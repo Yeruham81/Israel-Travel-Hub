@@ -1166,11 +1166,15 @@ jobs:
             "Kedumim Square", "St. Peter", "Summit Garden", "Jaffa Port",
             "Ilana Goor Museum", "Na Laga", "₪45",
             'data-testid="jaffa-walking-routes"',
-            'data-testid="jaffa-visitor-essentials"',
+            'data-testid="jaffa-hours-admission-table"',
             'data-testid="jaffa-transport"',
             "Open short walking route in Google Maps",
             "Open half-day walking route in Google Maps",
-            "Tourist information near the Clock Tower",
+            "Jaffa tourist information centre",
+            'data-testid="jaffa-interactive-map"',
+            'data-testid="jaffa-tour-cards"',
+            'data-testid="jaffa-gentler-walk"',
+            'data-testid="jaffa-parking-directions"',
           ]) {
             if (!html.includes(required)) {
               console.error("::error::Jaffa public guide missing " + required);
@@ -1182,14 +1186,18 @@ jobs:
             console.error("::error::Jaffa canonical differs from published URL");
             process.exit(1);
           }
-          if ((html.match(/data-testid="attraction-highlight"/g) || []).length !== 8) {
-            console.error("::error::Jaffa must display six landmark and two cultural cards");
+          if ((html.match(/data-testid="attraction-highlight"/g) || []).length !== 10) {
+            console.error("::error::Jaffa must display eight landmark and two cultural cards");
             process.exit(1);
           }
-          console.log("Jaffa public guide, walks, museum details, eight highlights and canonical verified.");
+          if (!html.includes("viator.tpm.li/") || !html.includes("getyourguide.tpm.li/")) {
+            console.error("::error::Jaffa Travelpayouts tour cards are missing");
+            process.exit(1);
+          }
+          console.log("Jaffa walking routes, Google Maps, visitor table, 10 highlights, Travelpayouts and canonical verified.");
           NODE
           rm -f "$jaffa_html"
-          for picture in jaffa-panorama.webp jaffa-clock-tower.webp jaffa-summit-garden.webp jaffa-food.webp jaffa-ilana-goor-museum.webp; do
+          for picture in jaffa-panorama.webp jaffa-clock-tower.webp jaffa-mahmoudiya-mosque.webp jaffa-kedumim-square.webp jaffa-summit-garden.webp jaffa-port.webp jaffa-food.webp jaffa-ilana-goor-museum.webp; do
             data="$(mktemp)"
             curl --retry 2 --max-time 25 -fsSL -o "$data" "$VITE_CANONICAL_ORIGIN/images/attractions/$picture"
             node - "$data" "$picture" <<'NODE'
