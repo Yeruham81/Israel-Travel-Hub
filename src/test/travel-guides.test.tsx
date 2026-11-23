@@ -462,6 +462,9 @@ describe("migrated practical guides", () => {
       expect(container.querySelector('[data-photo-role="author-portrait"]')).not.toBeNull();
       expect(container.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
       expect(container.querySelector("#contact")).toHaveTextContent("Contact Me");
+      const source = container.querySelector("#sources");
+      expect(source).not.toBeNull();
+      expect(container.querySelector("#contact")!.compareDocumentPosition(source!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
       expect(container.querySelector('a[href="/travel-blog/ben-gurion-airport-taxis/"]') || id === "airportTaxis").toBeTruthy();
       unmount();
     }
