@@ -399,22 +399,61 @@ describe("migrated practical guides", () => {
       "arrivals-hall", "phones-money", "leave-airport", "arrival-timing", "shabbat", "assistance",
     ]);
     expect(guide.sections.filter((s) => s.photo)).toHaveLength(2);
-    expect(guide.faqs).toHaveLength(15);
-    expect(guide.sections.find((s) => s.id === "leave-airport")!.tables?.[0]?.rows).toHaveLength(5);
+    expect(guide.faqs).toHaveLength(8);
+    expect(guide.sections.find((s) => s.id === "leave-airport")!.tables?.[0]?.rows).toHaveLength(6);
     expect(guide.sourceIds).toEqual(expect.arrayContaining([
       "guide-entry", "guide-iaa-terminal-2026", "guide-customs-tourists",
       "guide-lost-property", "guide-iaa-accessibility", "guide-gett",
     ]));
-    expect(guide.sections.find((s) => s.id === "arrival-terminal")!.paragraphs.join(" ")).toMatch(/International flights currently arrive at Terminal 3.*Domestic flights from Ramon Airport arrive at Terminal 1/s);
-    expect(guide.sections.find((s) => s.id === "customs")!.paragraphs.join(" ")).toMatch(/red and green channels.*red channel and ask/s);
+    expect(guide.sections.find((s) => s.id === "arrival-terminal")!.paragraphs.join(" ")).toMatch(/International arriving flights currently use Terminal 3.*Terminal 1 serves domestic arrivals from Ramon Airport/s);
+    expect(guide.sections.find((s) => s.id === "customs")!.paragraphs.join(" ")).toMatch(/green channel.*red channel.*red channel and asking/s);
     expect(guide.sections.find((s) => s.id === "leave-airport")!.inlineLinks?.map((l) => l.to)).toEqual([
       travelGuidePaths.airportTaxis, "/airport-transfers/", travelGuidePaths.sherut, travelGuidePaths.taxiFares,
+      "/travel-blog/ben-gurion-airport-to-tel-aviv/", "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/ben-gurion-airport-to-haifa/", "/travel-blog/ben-gurion-airport-to-ein-bokek/", travelGuidePaths.israel,
     ]);
     expect(guide.sections.find((s) => s.id === "shabbat")!.inlineLinks?.[0]?.to).toBe(travelGuidePaths.shabbat);
     expect(guide.sections.find((s) => s.id === "assistance")!.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxis);
     for (const section of guide.sections) for (const link of section.inlineLinks || []) {
       expect(section.paragraphs.join(" ").split(link.text), `inline text ${link.text} must occur once`).toHaveLength(2);
     }
+  });
+
+  it("publishes the practical arrival upgrade without changing its hero image", () => {
+    const guide = travelGuides.arrival;
+    expect(guide.updatedAt).toBe("2026-11-24");
+    expect(guide.photo.src).toBe("/images/travel-blog/featured-ben-gurion-arrival.webp");
+    expect(guide.sections.filter(s => s.photo)).toHaveLength(2);
+    expect(guide.related).toHaveLength(6);
+    expect(guide.sections.find(s => s.id === "before-you-fly")!.highlightedLinks?.[0]?.href).toBe("https://israel-entry.piba.gov.il/");
+    expect(guide.sections.find(s => s.id === "before-you-fly")!.paragraphs.join(" ")).toContain("₪25");
+    expect(guide.sections.find(s => s.id === "passport-control")!.paragraphs.join(" ")).toContain("blue entry card");
+    expect(guide.sections.find(s => s.id === "baggage")!.externalLinks).toHaveLength(2);
+    expect(guide.sections.find(s => s.id === "assistance")!.highlightedLinks?.[0]?.href).toContain("iaa.gov.il");
+    const transport = guide.sections.find(s => s.id === "leave-airport")!.tables![0]!;
+    expect(transport.headers).toEqual(["Mode", "Useful when", "Where to go / Pickup point"]);
+    expect(transport.rows).toEqual(expect.arrayContaining([
+      expect.arrayContaining(["Immediate airport taxi", expect.any(String), expect.stringContaining("Exit 03")]),
+      expect.arrayContaining(["Gett taxi booked in advance", expect.any(String), expect.stringContaining("Exit 23")]),
+    ]));
+    const timing = guide.sections.find(s => s.id === "arrival-timing")!.tables![0]!;
+    expect(timing.rows).toHaveLength(3);
+    expect(timing.note).toContain("Editorial planning ranges");
+  });
+
+  it("renders short airport-arrival navigation, six photo guides and sources after the inquiry", async () => {
+    const router = await routerAt(travelGuidePaths.arrival);
+    const Page = ArrivalRoute.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    const nav = container.querySelector('nav[aria-label="On this page"]')!;
+    expect(nav.querySelectorAll("ul.grid > li")).toHaveLength(11);
+    expect(nav.querySelector('a[href="#leave-airport"]')).toHaveTextContent("Transport");
+    expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Me");
+    expect(container.querySelector('[data-testid="stay-trip-photo-grid"]')?.querySelectorAll("li")).toHaveLength(6);
+    expect(container.querySelector("#contact")).toHaveTextContent("Need a private airport pickup?");
+    const sourceSection = container.querySelector("#sources");
+    expect(sourceSection).not.toBeNull();
+    expect(container.querySelector("#contact")!.compareDocumentPosition(sourceSection!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it("renders arrival-guide links within the paragraphs where travelers need them", async () => {
