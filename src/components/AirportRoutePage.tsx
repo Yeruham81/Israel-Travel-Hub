@@ -121,6 +121,9 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <h1 className="guide-page-title mt-3">{guide.title}</h1>
           <p data-guide-intro className="mt-4 text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
           <PageUpdated date={AIRPORT_TRANSFER_UPDATED_DATE} />
+        </GuideHeroLayout>
+        <div className="mt-4 border-t pt-1" data-testid="airport-route-author-position"><AuthorCard /></div>
+        <div className="mt-5 max-w-4xl">
           <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-xl border bg-secondary/35 p-3 sm:p-4" data-testid="route-starting-rate">
             <div className="min-w-0">
               <p className="text-xs font-medium text-muted-foreground">One-way weekday airport pickup</p>
@@ -136,12 +139,11 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">The starting fare is for an airport pickup. Returns, larger vehicles and extra stops receive a personal quote.</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">I confirm the full price before booking. The ILS fare includes any applicable night, weekend or holiday surcharge; USD and EUR estimates use current exchange rates.</p>
           <a href="#request-quote" onClick={focusQuote} className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>
-        </GuideHeroLayout>
+        </div>
       </header>
-      <AuthorCard />
 
       <section id="journey-details" aria-labelledby="journey-h" className="mt-9 scroll-mt-24">
-        <h2 id="journey-h" className="text-2xl font-semibold">Your private airport transfer</h2>
+        <h2 id="journey-h" className="text-2xl font-semibold">Private transfer to {guide.city}</h2>
         <p className="mt-2 max-w-4xl text-sm leading-relaxed text-muted-foreground">Travel between Ben Gurion Airport and your hotel or address with a vehicle suited to your group and luggage. For airport pickups, I coordinate the agreed meeting point around your landing time.</p>
         <div className="mt-4 grid grid-cols-3 gap-4 rounded-2xl border bg-secondary/25 p-3 sm:gap-6 sm:p-4 lg:gap-8">
           {airportTransferBenefits.map((benefit, index) => {
