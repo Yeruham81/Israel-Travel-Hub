@@ -132,7 +132,7 @@ describe("private Ben Gurion transfers", () => {
     expect(updateLine.querySelector("time")).toHaveAttribute("datetime", "2026-11-23");
     expect(rateTerms.querySelector("time")).toBeNull();
     expect(updateLine.compareDocumentPosition(popular)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveClass("bg-primary");
+    expect(within(hubHeader).queryByRole("link", { name: "Request a personal quote" })).not.toBeInTheDocument();
   });
 
   it("uses the lean content order and preserves booking links, benefits, FAQ and guide navigation", async () => {
