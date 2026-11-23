@@ -1422,6 +1422,10 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "tour-tel-aviv-cycling-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/Yltp1iqc" },
   "tour-white-city-audio-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/B8Xodhso" },
   "tour-tel-aviv-jaffa-small-group-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/G9Lqmaft" },
+  // Page-specific Travelpayouts sub_ids for Jaffa attraction tour cards.
+  "tour-old-jaffa-walk-viator@attractions-jaffa": { trackingUrl: "https://viator.tpm.li/vgvYfl3O?sub_id=attractions_jaffa_old_jaffa" },
+  "tour-tel-aviv-jaffa-small-group-viator@attractions-jaffa": { trackingUrl: "https://viator.tpm.li/G9Lqmaft?sub_id=attractions_jaffa_small_group" },
+  "tour-jaffa-carmel-walk-getyourguide@attractions-jaffa": { trackingUrl: "https://getyourguide.tpm.li/59K2jHBH?sub_id=attractions_jaffa_carmel_walk" },
   // Exact API-generated Travelpayouts deeplinks for Masada & Dead Sea tours (project 406243; distinct SubIDs).
   // Tour details still require the visitor to check current dates, access, inclusions and prices with the provider.
   "tour-masada-dead-sea-tel-aviv-getyourguide@tours-masada-dead-sea": { trackingUrl: "https://getyourguide.tpm.li/5RL7cxpj" },
