@@ -31,8 +31,14 @@ describe("official transit links and map provider policy", () => {
     }
   });
 
-  it("never embeds OpenStreetMap resources or Leaflet in website pages", () => {
+  it("uses the approved OpenStreetMap exception only for Jaffa's twelve-pin visitor map", () => {
+    const jaffaMapPath = "public/maps/jaffa-attractions.html";
+    expect(existsSync(jaffaMapPath)).toBe(true);
+    const jaffaMap = readFileSync(jaffaMapPath, "utf8");
+    expect(jaffaMap).toContain("openstreetmap.org");
+    expect(jaffaMap).toContain("new maplibregl.Marker");
     for (const path of sourceFiles()) {
+      if (path.replace(/\\/g, "/") === jaffaMapPath) continue;
       const source = readFileSync(path, "utf8");
       expect(/openstreetmap\.org|(?:unpkg\.com\/)?leaflet(?:@|\/|\.js|\.css)/i.test(source), `Unexpected map provider in ${relative(".", path)}`).toBe(false);
     }
