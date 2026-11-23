@@ -18,19 +18,20 @@ export const emptyTransferQuote: TransferQuoteFields = {
   otherDestination: "", address: "", passengers: "2", suitcases: "2", carryOns: "0", notes: "", consent: false,
 };
 
-export function validateTransferQuote(v: TransferQuoteFields, now = new Date()) {
+export function validateTransferQuote(v: TransferQuoteFields, now = new Date(), direction: "pickup" | "dropoff" = "pickup") {
   const errors: string[] = [];
   if (!v.name.trim() || v.name.length > 120) errors.push("Enter your full name (up to 120 characters).");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()) || v.email.length > 254) errors.push("Enter a valid email address.");
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(v.date) || Number.isNaN(Date.parse(`${v.date}T00:00:00Z`)) || new Date(`${v.date}T00:00:00Z`).toISOString().slice(0, 10) !== v.date) errors.push("Choose a valid flight arrival date.");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(v.date) || Number.isNaN(Date.parse(`${v.date}T00:00:00Z`)) || new Date(`${v.date}T00:00:00Z`).toISOString().slice(0, 10) !== v.date) errors.push(direction === "pickup" ? "Choose a valid flight arrival date." : "Choose a valid flight departure date.");
   else if (v.date < israelNow(now).date) errors.push("Choose an arrival date that is not in the past in Israel.");
-  if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(v.time)) errors.push("Enter the flight arrival time in Israel local time.");
+  if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(v.time)) errors.push(direction === "pickup" ? "Enter the flight arrival time in Israel local time." : "Enter the flight departure time in Israel local time.");
   else if (v.date === israelNow(now).date) {
     const [hours = 0, minutes = 0] = v.time.split(":").map(Number);
     if (hours * 60 + minutes < israelNow(now).minutes) errors.push("That arrival time has already passed today in Israel.");
   }
   if (!airportTransferRates.some((r) => r.id === v.destinationId) && v.destinationId !== "other") errors.push("Choose your destination.");
   if (v.destinationId === "other" && !v.otherDestination.trim()) errors.push("Enter the city or destination for your request.");
+  if (direction === "dropoff" && !v.address.trim()) errors.push("Enter the hotel or address for your airport pickup.");
   for (const [key, label, min, max] of [["passengers", "passengers", 1, 99], ["suitcases", "suitcases", 0, 40], ["carryOns", "carry-ons", 0, 40]] as const) {
     const value = Number(v[key]);
     if (!v[key].trim() || !Number.isInteger(value) || value < min || value > max) errors.push(`Enter ${label} between ${min} and ${max}.`);
@@ -54,4 +55,23 @@ export function buildTransferQuoteDraft(v: TransferQuoteFields) {
     "I consent to sharing these details with Moshe Barak for this inquiry.",
   ].join("\n");
   return { subject, body, url: `mailto:${airportTransferContact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` };
+}
+
+/** Airport drop-off uses the existing, verified general-enquiry delivery contract.
+ * This keeps the Hostinger PHP mail handler compatible with established
+ * airport-pickup requests while accurately reporting the reverse journey.
+ */
+export function buildAirportDropoffMessage(v: TransferQuoteFields) {
+  const area = airportTransferRates.find((rate) => rate.id === v.destinationId)?.destination || v.otherDestination.trim();
+  const clean = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
+  return [
+    "Airport transfer: To Ben Gurion Airport (TLV)",
+    `Pickup area: ${clean(area)}`,
+    `Pickup hotel / address: ${clean(v.address)}`,
+    `Flight departure: ${v.date} at ${v.time} (Israel local time)`,
+    `Flight number: ${clean(v.flight) || "To be confirmed"}`,
+    `Passengers: ${v.passengers}`, `Suitcases: ${v.suitcases}`, `Carry-ons: ${v.carryOns}`,
+    `Phone / WhatsApp: ${clean(v.phone) || "Not supplied"}`,
+    "", "Additional requests / child seats:", v.notes.trim() || "None specified",
+  ].join("\n");
 }
