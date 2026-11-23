@@ -47,6 +47,7 @@ import { Route as AttractionsRoshHanikraRouteImport } from './routes/attractions
 import { Route as AttractionsSeaOfGalileeRouteImport } from './routes/attractions.sea-of-galilee'
 import { Route as AttractionsTabghaRouteImport } from './routes/attractions.tabgha'
 import { Route as AttractionsTelMegiddoRouteImport } from './routes/attractions.tel-megiddo'
+import { Route as AttractionsViaDolorosaRouteImport } from './routes/attractions.via-dolorosa'
 import { Route as AttractionsYardenitRouteImport } from './routes/attractions.yardenit'
 import { Route as ShoreExcursionsIndexRouteImport } from './routes/shore-excursions.index'
 import { Route as ShoreExcursionsAshdodRouteImport } from './routes/shore-excursions.ashdod'
@@ -331,6 +332,11 @@ const AttractionsTabghaRoute = AttractionsTabghaRouteImport.update({
 const AttractionsTelMegiddoRoute = AttractionsTelMegiddoRouteImport.update({
   id: '/attractions/tel-megiddo',
   path: '/attractions/tel-megiddo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AttractionsViaDolorosaRoute = AttractionsViaDolorosaRouteImport.update({
+  id: '/attractions/via-dolorosa',
+  path: '/attractions/via-dolorosa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AttractionsYardenitRoute = AttractionsYardenitRouteImport.update({
@@ -872,6 +878,7 @@ export interface FileRoutesByFullPath {
   '/attractions/sea-of-galilee': typeof AttractionsSeaOfGalileeRoute
   '/attractions/tabgha': typeof AttractionsTabghaRoute
   '/attractions/tel-megiddo': typeof AttractionsTelMegiddoRoute
+  '/attractions/via-dolorosa': typeof AttractionsViaDolorosaRoute
   '/attractions/yardenit': typeof AttractionsYardenitRoute
   '/shore-excursions/ashdod': typeof ShoreExcursionsAshdodRoute
   '/shore-excursions/haifa': typeof ShoreExcursionsHaifaRoute
@@ -999,6 +1006,7 @@ export interface FileRoutesByTo {
   '/attractions/sea-of-galilee': typeof AttractionsSeaOfGalileeRoute
   '/attractions/tabgha': typeof AttractionsTabghaRoute
   '/attractions/tel-megiddo': typeof AttractionsTelMegiddoRoute
+  '/attractions/via-dolorosa': typeof AttractionsViaDolorosaRoute
   '/attractions/yardenit': typeof AttractionsYardenitRoute
   '/shore-excursions/ashdod': typeof ShoreExcursionsAshdodRoute
   '/shore-excursions/haifa': typeof ShoreExcursionsHaifaRoute
@@ -1127,6 +1135,7 @@ export interface FileRoutesById {
   '/attractions/sea-of-galilee': typeof AttractionsSeaOfGalileeRoute
   '/attractions/tabgha': typeof AttractionsTabghaRoute
   '/attractions/tel-megiddo': typeof AttractionsTelMegiddoRoute
+  '/attractions/via-dolorosa': typeof AttractionsViaDolorosaRoute
   '/attractions/yardenit': typeof AttractionsYardenitRoute
   '/shore-excursions/ashdod': typeof ShoreExcursionsAshdodRoute
   '/shore-excursions/haifa': typeof ShoreExcursionsHaifaRoute
@@ -1256,6 +1265,7 @@ export interface FileRouteTypes {
     | '/attractions/sea-of-galilee'
     | '/attractions/tabgha'
     | '/attractions/tel-megiddo'
+    | '/attractions/via-dolorosa'
     | '/attractions/yardenit'
     | '/shore-excursions/ashdod'
     | '/shore-excursions/haifa'
@@ -1383,6 +1393,7 @@ export interface FileRouteTypes {
     | '/attractions/sea-of-galilee'
     | '/attractions/tabgha'
     | '/attractions/tel-megiddo'
+    | '/attractions/via-dolorosa'
     | '/attractions/yardenit'
     | '/shore-excursions/ashdod'
     | '/shore-excursions/haifa'
@@ -1510,6 +1521,7 @@ export interface FileRouteTypes {
     | '/attractions/sea-of-galilee'
     | '/attractions/tabgha'
     | '/attractions/tel-megiddo'
+    | '/attractions/via-dolorosa'
     | '/attractions/yardenit'
     | '/shore-excursions/ashdod'
     | '/shore-excursions/haifa'
@@ -1638,6 +1650,7 @@ export interface RootRouteChildren {
   AttractionsSeaOfGalileeRoute: typeof AttractionsSeaOfGalileeRoute
   AttractionsTabghaRoute: typeof AttractionsTabghaRoute
   AttractionsTelMegiddoRoute: typeof AttractionsTelMegiddoRoute
+  AttractionsViaDolorosaRoute: typeof AttractionsViaDolorosaRoute
   AttractionsYardenitRoute: typeof AttractionsYardenitRoute
   ShoreExcursionsAshdodRoute: typeof ShoreExcursionsAshdodRoute
   ShoreExcursionsHaifaRoute: typeof ShoreExcursionsHaifaRoute
@@ -1996,6 +2009,13 @@ declare module '@tanstack/react-router' {
       path: '/attractions/tel-megiddo'
       fullPath: '/attractions/tel-megiddo'
       preLoaderRoute: typeof AttractionsTelMegiddoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/attractions/via-dolorosa': {
+      id: '/attractions/via-dolorosa'
+      path: '/attractions/via-dolorosa'
+      fullPath: '/attractions/via-dolorosa'
+      preLoaderRoute: typeof AttractionsViaDolorosaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/attractions/yardenit': {
@@ -2647,6 +2667,7 @@ const rootRouteChildren: RootRouteChildren = {
   AttractionsSeaOfGalileeRoute: AttractionsSeaOfGalileeRoute,
   AttractionsTabghaRoute: AttractionsTabghaRoute,
   AttractionsTelMegiddoRoute: AttractionsTelMegiddoRoute,
+  AttractionsViaDolorosaRoute: AttractionsViaDolorosaRoute,
   AttractionsYardenitRoute: AttractionsYardenitRoute,
   ShoreExcursionsAshdodRoute: ShoreExcursionsAshdodRoute,
   ShoreExcursionsHaifaRoute: ShoreExcursionsHaifaRoute,

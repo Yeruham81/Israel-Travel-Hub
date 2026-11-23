@@ -59,7 +59,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
           <div className="mt-4">
             <p className="leading-relaxed">{stop.description}</p>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">{stop.tipLabel || "My tip"}:</strong> {stop.visit}</p>
-            {stop.link && <a href={stop.link.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm font-semibold text-primary underline underline-offset-4">{stop.link.label} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>}
+            {stop.link && <a href={stop.link.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm font-semibold text-primary underline underline-offset-4">{stop.link.label} <span className="sr-only"> (opens in a new tab)</span></a>}
           </div>
         </article>)}
       </div>
@@ -96,7 +96,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
         {guide.transport.map(mode => <div key={mode.title} className="border-l-2 border-primary/40 pl-4">
           <h3 className="text-lg font-semibold">{mode.title}</h3>
           <p className="mt-1 leading-relaxed">{mode.text}</p>
-          {mode.links && <p className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-sm">{mode.links.map(item => <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">{item.label} <span aria-hidden="true">↗</span></a>)}</p>}
+          {mode.links && <p className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-sm">{mode.links.map(item => <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">{item.label} </a>)}</p>}
         </div>)}
       </div>
       <SacredHillWalkingMaps id={id} />

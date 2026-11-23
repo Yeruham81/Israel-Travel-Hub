@@ -101,7 +101,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
     </Section>
     <Section id="official" title="Official visitor information">
       <p>Use the relevant attraction or managing body's current website to confirm opening hours, reservations, accessibility and seasonal restrictions.</p>
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2">{a.official.map(o=><li key={o.url}><a href={o.url} target="_blank" rel="noopener noreferrer" className="block rounded-xl border bg-card p-4 font-semibold text-primary underline underline-offset-4">{o.label} <span className="sr-only">(opens in a new tab)</span>↗</a></li>)}</ul>
+      <ul className="mt-4 grid gap-3 sm:grid-cols-2">{a.official.map(o=><li key={o.url}><a href={o.url} target="_blank" rel="noopener noreferrer" className="block rounded-xl border bg-card p-4 font-semibold text-primary underline underline-offset-4">{o.label} <span className="sr-only">(opens in a new tab)</span></a></li>)}</ul>
     </Section>
     {a.region === "Jerusalem" && <JerusalemPartnerOffers id={id} />}
     {a.region === "Jerusalem" && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}

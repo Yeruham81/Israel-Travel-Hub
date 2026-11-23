@@ -21,6 +21,18 @@ describe("car rental guide and Travelpayouts search", () => {
     for (const link of within(screen.getByRole("navigation", { name: "On this page" })).getAllByRole("link")) {
       expect(container.querySelector(link.getAttribute("href")!)).not.toBeNull();
     }
+    const documents = container.querySelector("#documents") as HTMLElement;
+    const driving = container.querySelector("#vehicle-driving") as HTMLElement;
+    expect(within(documents).getByText("Hertz Israel", { exact: true }).tagName).toBe("STRONG");
+    expect(within(documents).getByText("Eldan", { exact: true }).tagName).toBe("STRONG");
+    expect(within(driving).getByText("Hertz Israel", { exact: true }).tagName).toBe("STRONG");
+    for (const section of [documents, driving]) {
+      expect(section.querySelector('a[href*="hertz.co.il"], a[href*="eldan.co.il"]')).toBeNull();
+    }
+    const related = within(container).getByRole("region", { name: "Plan your trip around Israel" });
+    const summaries = related.querySelectorAll(".line-clamp-2");
+    expect(summaries).toHaveLength(6);
+    expect(Array.from(summaries).every(summary => (summary.textContent?.length || 0) <= 50)).toBe(true);
     const tables = screen.getAllByRole("table");
     expect(tables).toHaveLength(2);
     for (const table of tables) {

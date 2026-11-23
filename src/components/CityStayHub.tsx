@@ -146,7 +146,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
                   <a key={booking.id} href={hotelBrowseAffiliateUrl(booking, `stay-${g.id}`)} target="_blank" rel={relFor(booking.isAffiliate)}
                      onClick={() => recordOutboundClick({ pageId: `stay-${g.id}`, productId: booking.id, offerId: booking.id })}
                      className="btn btn-primary text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                    Browse more on {booking.providerName} ↗
+                    Browse more on {booking.providerName}
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 ))}

@@ -5,13 +5,12 @@ const styles = readFileSync("src/styles.css", "utf8");
 const seniors = readFileSync("src/components/SeniorToursGuide.tsx", "utf8");
 
 describe("editorial prose links", () => {
-  it("uses the same outbound-square icon for external links and hides diagonal arrows inside links", () => {
-    expect(styles).toContain("a[href^=\"http\"]");
-    expect(styles).toContain("--outgoing-link-icon");
+  it("keeps external link text without generated symbols or legacy outbound icons", () => {
+    expect(styles).not.toContain("--outgoing-link-icon");
     expect(styles).toContain("a svg:is(.lucide-external-link, .lucide-arrow-up-right");
     expect(styles).toContain("display: none !important");
-    expect(styles).toContain('a[href^="http"]:not([data-external-icon="none"]):not(:has(img, picture, figure))::after');
-    expect(styles).toContain('a[href^="http"]:not([data-external-icon="none"]):has(img, picture, figure)::after');
+    expect(styles).not.toMatch(/a\[href\^="http"\][^{]*::after/);
+    expect(readFileSync("src/components/Layout.tsx", "utf8")).not.toContain("↗");
     expect(styles).toContain("table :is(th, td).sticky.left-0:first-child");
     expect(styles).toContain("max-inline-size: 7.75rem");
   });

@@ -10,7 +10,6 @@ export function ExtLink({ href, children, className }: { href: string; children:
   return (
     <a href={href} target="_blank" rel={relFor(false)} className={className}>
       {children}
-      <span aria-hidden> ↗</span>
       <span className="sr-only"> (opens in a new tab)</span>
     </a>
   );

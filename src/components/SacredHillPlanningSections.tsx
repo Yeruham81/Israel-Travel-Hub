@@ -25,8 +25,8 @@ export function SacredHillDayPlanning({ id }: { id: SacredHillId }) {
 
 function OfficialAndMap({ source, sourceUrl, mapQuery }: { source: string; sourceUrl: string; mapQuery: string }) {
   return <div className="flex flex-wrap gap-x-3 gap-y-1 md:flex-col">
-    <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{source} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
-    <a href={mapsSearchUrl(mapQuery)} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">Find on map <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
+    <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{source} <span className="sr-only"> (opens in a new tab)</span></a>
+    <a href={mapsSearchUrl(mapQuery)} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">Find on map <span className="sr-only"> (opens in a new tab)</span></a>
   </div>;
 }
 
@@ -66,7 +66,7 @@ export function SacredHillWalkingMaps({ id }: { id: SacredHillId }) {
     <h3 id="walking-maps-h" className="text-xl font-semibold">Walking connections</h3>
     <ul className="mt-3 grid gap-3 sm:grid-cols-2">
       {planning.walks.map(leg => <li key={leg.label} className="rounded-lg bg-secondary/40 p-3">
-        <a href={mapsWalkUrl(leg.from,leg.to)} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{leg.label} <span aria-hidden="true">↗</span></a>
+        <a href={mapsWalkUrl(leg.from,leg.to)} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{leg.label} </a>
         <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{leg.detail}</p>
       </li>)}
     </ul>

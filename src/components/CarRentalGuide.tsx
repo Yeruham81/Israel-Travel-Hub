@@ -79,7 +79,7 @@ export function CarRentalGuide() {
           <li><strong>Payment card:</strong> check the card type, whose name must appear on it and the available credit needed for the deposit. A physical credit card in the main driver’s name is commonly required.</li>
           <li><strong>Booking voucher:</strong> save the collection instructions, supplier contact details and the terms you agreed to.</li>
         </ul>
-        <p>For example, <a href="https://www.hertz.co.il/en/GoodToKnow/InfoIsrael/.aspx" target="_blank" rel="noopener noreferrer" className={inline}>Hertz Israel</a> requires an international permit for a licence written in a non-Latin script, while <a href="https://www.eldan.co.il/en/detailedtermsofrental" target="_blank" rel="noopener noreferrer" className={inline}>Eldan’s terms</a> ask for one when the licence is not in English. Check your selected supplier’s requirements before paying.</p>
+        <p>For example, <strong>Hertz Israel</strong> requires an international permit for a licence written in a non-Latin script, while <strong>Eldan</strong>’s terms ask for one when the licence is not in English. Check your selected supplier’s requirements before paying.</p>
       </Section>
 
       <Section id="costs" title="Compare the whole rental cost">
@@ -108,7 +108,7 @@ export function CarRentalGuide() {
         <p><strong>Parking:</strong> check hotel parking before arrival, then follow local signs and the payment instructions at each street or car park. A booked parking space can make a city stay much easier.</p>
         <p><strong>Navigation and fuel:</strong> use your preferred navigation app, save key addresses and keep a charging cable handy. Check the fuel type and return policy at collection; plan fuel stops before longer desert journeys. My <Link to="/travel-blog/best-esim-for-israel/" className={inline}>Israel eSIM guide</Link> can help you arrange mobile data.</p>
         <p><strong>Tolls:</strong> Highway 6 uses electronic billing. Its operator explains that rental-vehicle invoices go to the registered owner, and rental companies may add handling fees. Ask your supplier how it manages <a href="https://www.kvish6.co.il/Info.aspx" target="_blank" rel="noopener noreferrer" className={inline}>Highway 6 tolls</a> and any other toll roads on your route.</p>
-        <p><strong>Permitted routes:</strong> have your supplier confirm the territory and roads covered by the agreement. <a href="https://www.hertz.co.il/en/GoodToKnow/IsraelContract/" target="_blank" rel="noopener noreferrer" className={inline}>Hertz Israel’s contract</a>, for example, excludes Area A, including Bethlehem. For a Bethlehem visit, use my <Link to="/travel-blog/jerusalem-to-bethlehem/" className={inline}>Jerusalem–Bethlehem transport guide</Link> to plan suitable transport.</p>
+        <p><strong>Permitted routes:</strong> have your supplier confirm the territory and roads covered by the agreement. <strong>Hertz Israel</strong>’s contract, for example, excludes Area A, including Bethlehem. For a Bethlehem visit, use my <Link to="/travel-blog/jerusalem-to-bethlehem/" className={inline}>Jerusalem–Bethlehem transport guide</Link> to plan suitable transport.</p>
       </Section>
 
       <Section id="road-trip-ideas" title="Where a rental car can add flexibility">
@@ -131,13 +131,13 @@ export function CarRentalGuide() {
         <h2 className="text-xl font-semibold">Prefer to leave the driving to me?</h2>
         <p className="mt-3">I can help you plan a private journey with a route and pace that suit your group. See my <Link to="/private-driver-in-israel/" className={inline}>private driver service</Link> and send your plans through the form there.</p>
       </aside>
-      <RelatedLinks title="Plan your trip around Israel" currentPath="/car-rental/" illustrated maxPhotoCards={6} items={[
-        { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/" },
-        { label: "Israel travel tips", to: "/travel-blog/israel-travel-tips/" },
-        { label: "Ben Gurion Airport arrivals", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
-        { label: "Sea of Galilee", to: "/attractions/sea-of-galilee/" },
-        { label: "The Dead Sea", to: "/attractions/dead-sea/" },
-        { label: "Mitzpe Ramon and the crater", to: "/attractions/mitzpe-ramon-crater/" },
+      <RelatedLinks title="Plan your trip around Israel" currentPath="/car-rental/" illustrated maxPhotoCards={6} descriptionLines={2} items={[
+        { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", note: "Compare trains, buses, taxis and driving." },
+        { label: "Israel travel tips", to: "/travel-blog/israel-travel-tips/", note: "Practical advice for planning your visit." },
+        { label: "Ben Gurion Airport arrivals", to: "/travel-blog/ben-gurion-airport-arrival-tips/", note: "Passport control, luggage and onward travel." },
+        { label: "Sea of Galilee", to: "/attractions/sea-of-galilee/", note: "Explore the lake and surrounding attractions." },
+        { label: "The Dead Sea", to: "/attractions/dead-sea/", note: "Beaches, floating and places to visit." },
+        { label: "Mitzpe Ramon and the crater", to: "/attractions/mitzpe-ramon-crater/", note: "Viewpoints, walks and the visitor centre." },
       ]} />
       <SourceList ids={carRentalSources.map(source => source.id)} compact intro="Official airport information and supplier terms used for this guide. Check the Rental Conditions attached to the vehicle you choose." />
     </div>

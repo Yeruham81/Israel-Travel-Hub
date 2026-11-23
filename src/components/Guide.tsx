@@ -339,7 +339,7 @@ const relatedDirectory: GuideDirectoryEntry[] = [
   })),
 ];
 
-export function RelatedLinks({ title = "Plan the rest of your trip", items, currentPath, illustrated = false, maxPhotoCards = 4 }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[]; currentPath?: string; illustrated?: boolean; maxPhotoCards?: number }) {
+export function RelatedLinks({ title = "Plan the rest of your trip", items, currentPath, illustrated = false, maxPhotoCards = 4, descriptionLines = 3 }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[]; currentPath?: string; illustrated?: boolean; maxPhotoCards?: number; descriptionLines?: 2 | 3 }) {
   // Use the same licensed, locally stored guide photographs as the taxi and Shabbat
   // recommendation cards. Only explicitly selected related links are illustrated.
   // Keep service/directory links as compact secondary navigation rather than dropping them.
@@ -368,7 +368,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
             <GuideCardPhoto photo={cardPhoto ?? null} />
             <span className="flex flex-1 flex-col p-4">
               <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
-              <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note || guide.description}</span>
+              <span className={`mt-2 flex-1 text-sm leading-relaxed text-muted-foreground ${descriptionLines === 2 ? "line-clamp-2" : "line-clamp-3"}`}>{item.note || guide.description}</span>
               
             </span>
           </Link>
