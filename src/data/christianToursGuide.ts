@@ -35,7 +35,7 @@ export const christianAreas: ChristianArea[] = [
     planning: "Allow a full day for the Old City and selected Mount of Olives or Mount Zion stops; a second day gives space for prayer, services and unhurried visits. The Old City is largely on foot, with stone steps and uneven lanes.",
     sites: [
       {name:"Church of the Holy Sepulchre",note:"Calvary and the traditional tomb of Christ",to:"/travel-blog/churches-in-jerusalem/"},
-      {name:"Via Dolorosa",note:"The traditional Stations of the Cross",to:"/attractions/old-city-jerusalem/"},
+      {name:"Via Dolorosa",note:"The traditional Stations of the Cross",to:"/attractions/via-dolorosa/"},
       {name:"Gethsemane and Church of All Nations",note:"At the foot of the Mount of Olives",to:"/attractions/mount-of-olives/"},
       {name:"Cenacle and Mount Zion",note:"Traditional Last Supper associations",to:"/attractions/mount-zion/"},
     ],
