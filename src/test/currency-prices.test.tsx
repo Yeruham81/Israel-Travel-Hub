@@ -89,7 +89,7 @@ describe("international price estimates", () => {
     }
     const other = container.querySelector('[data-destination="other"]')!;
     expect(other.querySelector('[data-testid="compact-currency-estimate"]')).toBeNull();
-    expect(screen.getByTestId("airport-fx-note")).toHaveTextContent("Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.");
+    expect(screen.getByTestId("airport-fx-note")).toHaveTextContent("I confirm the full fare, including any night, weekend or holiday surcharge, in advance in ILS. USD and EUR estimates use current exchange rates.");
     expect(screen.getAllByTestId("airport-fx-note")).toHaveLength(1);
   });
 
