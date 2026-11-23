@@ -105,7 +105,7 @@ jobs:
             [[ -n "${!name}" ]] || { echo "::error::Missing GitHub secret: $name"; exit 1; }
           done
           [[ "$HOSTINGER_REMOTE_PATH" =~ ^/home/[A-Za-z0-9_-]+/domains/[A-Za-z0-9.-]+/public_html/?$ ]] ||
-            { echo "::error::Remote path must be the exact Hostinger temporary site's /home/.../domains/.../public_html"; exit 1; }
+            { echo "::error::Remote path must be the verified site's exact /home/.../domains/.../public_html"; exit 1; }
           # The production-domain folder name is not evidence that the site is
           # WordPress or the new site; require production metadata and explicit
           # permission before the first non-dry-run upload to that directory.
