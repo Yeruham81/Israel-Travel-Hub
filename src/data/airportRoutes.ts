@@ -17,10 +17,10 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
   jerusalem: {
     city: "Jerusalem", title: "Private transfer from Ben Gurion Airport to Jerusalem",
     description: "Private Ben Gurion Airport to Jerusalem transfer: travel time, Old City hotel drop-off, luggage and weekday starting rate. Send a quote request.",
-    intro: "Arrange a private ride between Ben Gurion Airport and Jerusalem, including Mamilla and the Old City area. Share your flight, luggage and hotel address for a personal quote.",
+    intro: "Arrange a private ride between Ben Gurion Airport and Jerusalem, including Mamilla and the Old City area. Send me your flight, luggage and hotel address for a personal quote.",
     checklistTip: "For Old City accommodation, confirm a vehicle-accessible drop-off and any remaining walk or steps.",
     journeyTitle: "Driving to your Jerusalem hotel",
-    journeyText: "Allow around 45–60 minutes or more after airport pickup, depending on traffic and your hotel. Add time for passport control and baggage collection before the drive.",
+    journeyText: "Allow around 45–60 minutes or more after pickup from Ben Gurion Airport, depending on traffic and your hotel. Add time for passport control and baggage collection before the drive.",
     areasTitle: "Where in Jerusalem are you staying?",
     areas: [
       { title: "City centre, Mamilla & King David Street", text: "Include the hotel name and the entrance used for vehicle arrivals. Mamilla and King David Street hotels may have a separate luggage or reception entrance." },
@@ -50,7 +50,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     intro: "Arrange a direct private transfer between Ben Gurion Airport and your hotel in Tel Aviv or Jaffa. Send your flight, group size and luggage details for a personal quote.",
     checklistTip: "For Old Jaffa or beachfront accommodation, confirm the hotel entrance or nearest drivable drop-off.",
     journeyTitle: "Driving to Tel Aviv or Jaffa",
-    journeyText: "Allow around 20–40 minutes or more after airport pickup. The final approach depends on traffic, the beachfront hotel entrance or the streets around Old Jaffa.",
+    journeyText: "Allow around 20–40 minutes or more after pickup from Ben Gurion Airport. The final approach depends on traffic, the beachfront hotel entrance or the streets around Old Jaffa.",
     areasTitle: "Beachfront hotel, central apartment or Jaffa stay?",
     areas: [
       { title: "Beachfront hotels", text: "Provide the full hotel name and the correct vehicle entrance; some seafront properties have a separate luggage drop-off." },
@@ -80,7 +80,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     intro: "Arrange a private ride between Ben Gurion Airport and Haifa, from the waterfront to Mount Carmel. Send the hotel address or cruise details for a personal quote.",
     checklistTip: "For a cruise connection, add your ship, passenger terminal and check-in deadline, with a generous time buffer.",
     journeyTitle: "Driving to your Haifa address",
-    journeyText: "Allow about 75–110 minutes or more after airport pickup. Haifa stretches from the coast to Mount Carmel, so the final address and traffic affect the journey.",
+    journeyText: "Allow about 75–110 minutes or more after pickup from Ben Gurion Airport. Haifa stretches from the coast to Mount Carmel, so the final address and traffic affect the journey.",
     areasTitle: "Haifa's coast and hilltop hotels need different drop-offs",
     areas: [
       { title: "Downtown & the German Colony", text: "Share the exact hotel entrance; smaller streets and restored buildings may have a designated place to unload bags." },
@@ -110,7 +110,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     intro: "Arrange a private transfer between Ben Gurion Airport and your Ein Bokek hotel at the Dead Sea. Share the hotel, flight and luggage details for a personal quote.",
     checklistTip: "The starting fare covers Ein Bokek; mention Neve Zohar, Ein Gedi, Masada or other stops separately.",
     journeyTitle: "Driving to your Ein Bokek hotel",
-    journeyText: "Allow around 1 hour 45 minutes to 2 hours 30 minutes or more after airport pickup. Share your exact Dead Sea hotel so I can confirm the route and fare.",
+    journeyText: "Allow around 1 hour 45 minutes to 2 hours 30 minutes or more after pickup from Ben Gurion Airport. Share your exact Dead Sea hotel so I can confirm the route and fare.",
     areasTitle: "Choose your Dead Sea hotel location",
     areas: [
       { title: "Ein Bokek hotels", text: "The published starting fare covers Ein Bokek hotels. Include your hotel name and entrance for the confirmed fare." },
