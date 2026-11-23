@@ -1197,6 +1197,12 @@ jobs:
           console.log("Jaffa walking routes, Google Maps, visitor table, 10 highlights, Travelpayouts and canonical verified.");
           NODE
           rm -f "$jaffa_html"
+          jaffa_map_html="$(mktemp)"
+          curl --retry 2 --max-time 25 -fsSL -o "$jaffa_map_html" "$VITE_CANONICAL_ORIGIN/maps/jaffa-attractions.html"
+          grep -Fq "Twelve numbered Old Jaffa attractions visible together" "$jaffa_map_html" || { echo "::error::Jaffa shared 12-pin map is missing"; exit 1; }
+          grep -Fq 'new maplibregl.Marker' "$jaffa_map_html" || { echo "::error::Jaffa map marker renderer is missing"; exit 1; }
+          grep -Fq './english-style.json' "$jaffa_map_html" || { echo "::error::Jaffa map tiles are not configured"; exit 1; }
+          rm -f "$jaffa_map_html"
           for picture in jaffa-panorama.webp jaffa-clock-tower.webp jaffa-mahmoudiya-mosque.webp jaffa-kedumim-square.webp jaffa-summit-garden.webp jaffa-port.webp jaffa-food.webp jaffa-ilana-goor-museum.webp; do
             data="$(mktemp)"
             curl --retry 2 --max-time 25 -fsSL -o "$data" "$VITE_CANONICAL_ORIGIN/images/attractions/$picture"
