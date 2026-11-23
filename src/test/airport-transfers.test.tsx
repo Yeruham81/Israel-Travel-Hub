@@ -48,7 +48,7 @@ describe("private Ben Gurion transfers", () => {
     expect(quoteReviews).toHaveAttribute("rel", "noopener noreferrer");
     expect(quoteReviews).toHaveClass("bg-[#34E0A1]", "border-[#25996c]");
     expect(topReviews).toHaveClass("bg-[#34E0A1]", "border-[#25996c]");
-    expect(within(quoteReviews).getByRole("img", { hidden: true })).toHaveAttribute("src", "/images/tripadvisor-owl-black.svg");
+    expect(quoteReviews.querySelector("img")).toHaveAttribute("src", "/images/tripadvisor-owl-black.svg");
     expect(intro.lastElementChild).toHaveClass("justify-end", "lg:w-auto");
 
     expect(within(quote as HTMLElement).getByTestId("quote-fields-contact")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
