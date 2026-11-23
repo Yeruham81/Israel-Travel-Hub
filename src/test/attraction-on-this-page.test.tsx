@@ -18,9 +18,10 @@ describe("Attraction On this page contact labels", () => {
     expect(sacred).not.toContain('["visit-options", "Contact Moshe"]');
   });
 
-  it("uses Contact me in attraction-domain editorial pages but preserves travel-blog labels", () => {
+  it("uses first-person contact labels in travel guides", () => {
     const travelGuide = file("src/components/TravelGuide.tsx");
-    expect(travelGuide).toContain('["contact", travelGuidePaths[id].startsWith("/attractions/") ? "Contact me" : "Contact Moshe"]');
+    expect(travelGuide).toContain('["contact", "Contact Me"]');
+    expect(travelGuide).not.toContain("Contact Moshe");
     const attractionIdsInTravelGuide = ["annunciation", "magdala", "precipice", "qasr", "megiddo", "yardenit"] as const;
     for (const id of attractionIdsInTravelGuide) expect(travelGuidePaths[id].startsWith("/attractions/")).toBe(true);
     expect(travelGuidePaths.jerusalemDeadSea.startsWith("/travel-blog/")).toBe(true);
