@@ -102,7 +102,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Flea Market and Greek Market streets" image={{ src: photos.market, alt: "Antique shops and outdoor stalls in the Jaffa Flea Market area" }}>
         <p>Jaffa's flea-market district lies southeast of the Clock Tower. Antique stalls and vintage shops sit alongside cafés, restaurants and small design businesses; nearby Greek Market streets add another lively pocket to explore.</p>
-        <p><strong>Flea market visiting hours:</strong> Sunday–Thursday 09:00–17:00; Friday 09:00–14:00; closed Saturday. Check the <a href={official.fleaMarketHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>market visitor information</a> for updates. Restaurants, cafés and independent shops may keep different hours, especially around <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link>.</p>
+        <p>Visit during market trading hours to browse antique stalls and vintage shops. The <a href="#visitor-info" className={inlineLink}>visitor table</a> lists typical market hours, with a link to the <a href={official.fleaMarketHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>market website</a> for updates.</p>
       </AttractionHighlight>
       <AttractionPracticalTip>For a first-time visit, I would prioritise the hilltop old town, Summit Garden, the port and either the flea market or a museum according to your interests. Leave time for a coffee or meal rather than rushing from sight to sight.</AttractionPracticalTip>
       <h3 className="pt-3 font-serif text-xl font-semibold">More cultural experiences in Jaffa</h3>
@@ -112,7 +112,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Na Laga'at Center" image={{ src: photos.nalagaat, alt: "Na Laga'at cultural centre at the Jaffa Port complex" }}>
         <p>The <a href={official.nalagaat} target="_blank" rel="noopener noreferrer" className={inlineLink}>Na Laga'at Center</a> near Jaffa Port presents accessible cultural experiences, including theatre, workshops and dining in darkness at the BlackOut restaurant.</p>
-        <p>Check the programme and reserve the specific performance, workshop or dining experience you want. Choose your preferred session from the programme and reserve in advance.</p>
+        <p>Choose a performance, workshop or dining experience from the programme and reserve your preferred session.</p>
       </AttractionHighlight>
     </div>
   ),
@@ -123,19 +123,19 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <article className="rounded-xl border bg-card p-4 sm:p-5">
           <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">A short walk — around 2–3 hours</h3></div>
           <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base"><li>Start at Clock Tower Square and Mahmoudiya Mosque.</li><li>Climb to Summit Garden and the Wishing Bridge.</li><li>Continue to Kedumim Square and St. Peter’s Church.</li><li>Wander the zodiac alleys and galleries.</li><li>Finish at Jaffa Port.</li></ol>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Finish:</strong> The waterfront. This route suits a first introduction to Jaffa without a museum visit.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">This is a good first-time route focused on the old town and waterfront.</p>
           <a href={shortWalkMapUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open short walking route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
         </article>
         <article className="rounded-xl border bg-card p-4 sm:p-5">
           <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">A relaxed half-day — around 4–5 hours</h3></div>
           <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base"><li>Begin at the Flea Market during trading hours.</li><li>Continue via Clock Tower Square.</li><li>Visit Summit Garden and the Wishing Bridge.</li><li>Explore Kedumim Square and St. Peter’s Church.</li><li>Browse the zodiac alleys, adding an art stop if desired.</li><li>Finish at the port for a meal.</li></ol>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Art lovers can make an optional detour to the <a href={museumMapUrl} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum on Google Maps</a>. Add the museum as an optional stop on your walk.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Art lovers can add the <a href={museumMapUrl} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum on Google Maps</a>.</p>
           <a href={halfDayWalkMapUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open half-day walking route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
         </article>
       </div>
       <JaffaAttractionsMap />
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5" data-testid="jaffa-gentler-walk"><h3 className="font-serif text-xl font-semibold">A gentler option — waterfront and flea market</h3><p className="mt-2 text-sm leading-relaxed sm:text-base">Walk from Jaffa Port towards Clock Tower Square and the flea-market streets. This lower-Jaffa route avoids many of the hilltop steps. Check crossings, paving and venue entrances to plan for individual access needs.</p><a href={gentleWalkMapUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open waterfront and market route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></article>
-      <p>The Google Maps links connect the principal stops; take your time exploring the adjoining stone lanes and the Wishing Bridge between them. You can also approach Jaffa along the seafront from Tel Aviv. For a local overview, use the <a href={official.municipalWalkMapShort} target="_blank" rel="noopener noreferrer" className={inlineLink}>official Old Jaffa walking map (Hebrew PDF)</a>; the city also offers a <a href={official.municipalWalkingMap} target="_blank" rel="noopener noreferrer" className={inlineLink}>full illustrated walking booklet (Hebrew PDF)</a> and <a href={official.municipalWalkingGuide} target="_blank" rel="noopener noreferrer" className={inlineLink}>route descriptions (Hebrew)</a>.</p>
+      <p>Explore adjoining stone lanes between the route stops. You can also approach Jaffa from Tel Aviv along the seafront. For a local overview, use the <a href={official.municipalWalkMapShort} target="_blank" rel="noopener noreferrer" className={inlineLink}>official Old Jaffa walking map (Hebrew PDF)</a>; the city also offers a <a href={official.municipalWalkingMap} target="_blank" rel="noopener noreferrer" className={inlineLink}>full illustrated walking booklet (Hebrew PDF)</a> and <a href={official.municipalWalkingGuide} target="_blank" rel="noopener noreferrer" className={inlineLink}>route descriptions (Hebrew)</a>.</p>
       <AttractionPracticalTip>For late-afternoon photographs, allow time for a coastal viewpoint near sunset.</AttractionPracticalTip>
     </div>
   ),
@@ -173,7 +173,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><TrainFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">Red Line light rail and buses</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The Red Line (DAN KAL) runs along Jerusalem Boulevard in Jaffa. Bloomfield Stadium station is useful for approaching the flea market, while Shalma is another option for northern Jaffa. Check the best station for your destination. For the best stop from your accommodation, check the <a href={official.transit} target="_blank" rel="noopener noreferrer" className={inlineLink}>light rail operator</a> or <a href={official.buses} target="_blank" rel="noopener noreferrer" className={inlineLink}>official bus planner</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">The Red Line (DAN KAL) runs along Jerusalem Boulevard in Jaffa. Bloomfield Stadium station is useful for approaching the flea market, while Shalma is another option for northern Jaffa. For routes from your accommodation, consult the <a href={official.transit} target="_blank" rel="noopener noreferrer" className={inlineLink}>light rail operator</a> or <a href={official.buses} target="_blank" rel="noopener noreferrer" className={inlineLink}>official bus planner</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary"/><h3 className="font-semibold">Walk from Tel Aviv's seafront</h3></div>
