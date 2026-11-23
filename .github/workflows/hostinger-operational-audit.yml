@@ -1,0 +1,127 @@
+name: Audit Hostinger website operations (read only)
+
+# Never uploads files, sends enquiries, or changes DNS/server settings.
+# Only main branch runs receive SSH secrets.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/hostinger-operational-audit.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Check Hostinger PHP APIs and live static site
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      HOSTINGER_SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+      HOSTINGER_SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+      HOSTINGER_SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+      HOSTINGER_SSH_KNOWN_HOSTS: ${{ secrets.HOSTINGER_SSH_KNOWN_HOSTS }}
+      HOSTINGER_REMOTE_PATH: ${{ secrets.HOSTINGER_REMOTE_PATH }}
+      HOSTINGER_SSH_PORT: ${{ vars.HOSTINGER_SSH_PORT || '65002' }}
+      HOSTINGER_ORIGIN: ${{ vars.HOSTINGER_CANONICAL_ORIGIN || 'https://saddlebrown-guanaco-454061.hostingersite.com' }}
+      HOSTINGER_INDEXABLE: ${{ vars.HOSTINGER_INDEXABLE || 'false' }}
+    steps:
+      - name: Validate target without printing private settings
+        shell: bash
+        run: |
+          set -euo pipefail
+          for var in HOSTINGER_SSH_HOST HOSTINGER_SSH_USER HOSTINGER_SSH_PRIVATE_KEY HOSTINGER_SSH_KNOWN_HOSTS HOSTINGER_REMOTE_PATH; do
+            [[ -n "${!var}" ]] || { echo "::error::Missing $var"; exit 1; }
+          done
+          [[ "$HOSTINGER_REMOTE_PATH" =~ ^/home/[A-Za-z0-9_-]+/domains/[A-Za-z0-9.-]+/public_html/?$ ]] ||
+            { echo "::error::Unexpected webroot path"; exit 1; }
+          [[ "$HOSTINGER_REMOTE_PATH" != *'/domains/israel-taxi.com/'* ]] ||
+            { echo "::error::Refusing to inspect legacy WordPress"; exit 1; }
+          [[ "$HOSTINGER_SSH_PORT" =~ ^[0-9]{2,5}$ ]]
+          [[ "$HOSTINGER_SSH_HOST" =~ ^[A-Za-z0-9.:-]+$ ]]
+          [[ "$HOSTINGER_SSH_USER" =~ ^[A-Za-z0-9_-]+$ ]]
+          node - <<'NODE'
+          const origin = new URL(process.env.HOSTINGER_ORIGIN);
+          if (origin.protocol !== "https:" || origin.origin !== process.env.HOSTINGER_ORIGIN)
+            throw new Error("Canonical origin must be exact HTTPS origin");
+          if (process.env.HOSTINGER_INDEXABLE === "true" &&
+              origin.origin !== "https://www.israel-taxi.com")
+            throw new Error("Only production may be indexable");
+          NODE
+
+      - name: Read-only SSH inspection of site webroot and PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 "$HOME/.ssh"
+          key="$HOME/.ssh/ith_audit_key"
+          known="$HOME/.ssh/ith_audit_known_hosts"
+          trap 'rm -f "$HOME/.ssh/ith_audit_key" "$HOME/.ssh/ith_audit_known_hosts"' EXIT
+          printf '%s\n' "$HOSTINGER_SSH_PRIVATE_KEY" > "$key"
+          printf '%s\n' "$HOSTINGER_SSH_KNOWN_HOSTS" > "$known"
+          chmod 600 "$key" "$known"
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$key" -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$known" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "AUDIT_ROOT='$HOSTINGER_REMOTE_PATH' sh -s" <<'REMOTE'
+          set -eu
+          root="$(printf '%s' "$AUDIT_ROOT" | sed 's:/$::')"
+          test -f "$root/.ith-static-deploy-ok"
+          test -f "$root/index.html"
+          test -f "$root/.htaccess"
+          test ! -e "$root/wp-config.php"
+          test ! -L "$root/api"
+          test -f "$root/api/quote-request/index.php"
+          test -f "$root/api/exchange-rates/index.php"
+          command -v php >/dev/null
+          find "$root/api" -type f -name '*.php' -print | while IFS= read -r file; do
+            php -l "$file" >/dev/null || exit 1
+          done
+          count="$(find "$root/api" -type f -name '*.php' | wc -l | tr -d ' ')"
+          test "$count" -ge 2
+          echo "READ_ONLY_WEBROOT_OK: HTML, .htaccess, marker, both PHP endpoints"
+          echo "PHP_SYNTAX_OK: $count files (source not printed)"
+          REMOTE
+
+      - name: Verify live site and both API GET JSON responses
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          fetch() {
+            curl --http1.1 --retry 3 --retry-all-errors --retry-delay 2 \
+              --connect-timeout 12 --max-time 40 -fsSL \
+              "$HOSTINGER_ORIGIN$1" -o "$tmp/$2"
+          }
+          fetch "/" home.html
+          fetch "/robots.txt" robots.txt
+          fetch "/sitemap.xml" sitemap.xml
+          fetch "/api/quote-request/" quote.json
+          fetch "/api/exchange-rates/" exchange.json
+          node - "$tmp" <<'NODE'
+          const fs = require("node:fs");
+          const path = require("node:path");
+          const assert = require("node:assert/strict");
+          const read = p => fs.readFileSync(path.join(process.argv[2], p), "utf8");
+          const origin = process.env.HOSTINGER_ORIGIN;
+          const indexable = process.env.HOSTINGER_INDEXABLE === "true";
+          const home = read("home.html");
+          assert(home.includes('<link rel="canonical" href="' + origin + '/"'), "Wrong homepage canonical");
+          assert(home.includes(indexable ? 'name="robots" content="index,follow"' : 'name="robots" content="noindex,nofollow"'),
+            "Wrong homepage indexing directive");
+          const robots = read("robots.txt");
+          assert(robots.includes("Sitemap: " + origin + "/sitemap.xml"), "robots.txt refers to other domain");
+          const urls = [...read("sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+          assert(urls.length >= 80 && urls.every(u => u.startsWith(origin + "/")), "Sitemap incomplete or wrong domain");
+          const quote = JSON.parse(read("quote.json"));
+          assert(typeof quote.available === "boolean", "Enquiry API response is malformed");
+          assert(quote.available === true, "Enquiry service is disabled");
+          const fx = JSON.parse(read("exchange.json"));
+          assert(typeof fx.status === "string" && fx.status !== "unavailable", "Exchange rates unavailable");
+          console.log("SITE_HTML_ROBOTS_SITEMAP_OK: " + urls.length + " URLs");
+          console.log("QUOTE_API_GET_OK: enabled (no email sent)");
+          console.log("EXCHANGE_API_GET_OK: status=" + fx.status);
+          console.log("READ_ONLY_AUDIT_COMPLETE");
+          NODE
