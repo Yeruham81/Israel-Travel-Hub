@@ -85,7 +85,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         image={{ src: images.tunnel, alt: "Illuminated medieval stone passage in the Templars’ Tunnel beneath Old Akko" }}
       >
         <p>Walk through a restored underground passage linking the Templars’ former stronghold with the harbour area. The tunnel is one of the more unusual experiences in the old town and is easy to combine with the market and waterfront.</p>
-        <p><strong>Accessibility:</strong> The tunnel’s lift is currently out of service, so wheelchair access is unavailable. <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the latest notice</a> before visiting.</p>
+        <p><strong>Accessibility:</strong> The tunnel is temporarily inaccessible for wheelchair users, according to the operator. <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the latest notice</a> before visiting.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst
@@ -163,18 +163,36 @@ export const akkoDestinationContent: AttractionDestinationContent = {
           <a href={official.hours} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Check current site-by-site hours <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
         </article>
       </div>
+      <div role="region" aria-label="Old Akko attraction hours and admission" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" data-testid="akko-hours-admission-table">
+        <table className="w-full min-w-[830px] border-collapse text-left text-sm">
+          <caption className="sr-only">Old Akko attractions: published opening times, admission and visit planning</caption>
+          <thead className="bg-secondary/60"><tr>{["Attraction", "Published hours", "Admission", "Planning notes"].map((label,index) => <th key={label} scope="col" className={index===0 ? "sticky left-0 z-10 border-b bg-secondary px-3 py-3 font-semibold" : "border-b px-3 py-3 font-semibold"}>{label}</th>)}</tr></thead>
+          <tbody>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 font-semibold">Knights’ Halls</th><td className="px-3 py-3">Sun–Thu & Sat 09:00–17:00; Fri 09:00–16:00</td><td className="px-3 py-3">Combined ticket · ₪55 adult</td><td className="px-3 py-3">Allow around 60 minutes; some historic areas have steps · <a href={official.knights} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official details</a></td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 font-semibold">Templars’ Tunnel</th><td className="px-3 py-3">Sun–Thu & Sat 09:00–17:00; Fri 09:00–16:00</td><td className="px-3 py-3">Combined ticket</td><td className="px-3 py-3">Short underground visit; temporary wheelchair restriction · <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>Access updates</a></td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 font-semibold">Al-Basha Turkish Bath</th><td className="px-3 py-3">Sun–Thu & Sat 09:00–17:00; Fri 09:00–16:00</td><td className="px-3 py-3">Combined ticket</td><td className="px-3 py-3">Indoor historical presentation · <a href={official.bath} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official details</a></td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 font-semibold">Al-Jazzar Mosque</th><td className="px-3 py-3">Visitor access around prayer times</td><td className="px-3 py-3">Separate admission</td><td className="px-3 py-3">Respect worship times and dress requirements · <a href={official.mosque} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official details</a></td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 font-semibold">Old Market & Turkish Bazaar</th><td className="px-3 py-3">Individual stalls set their own hours</td><td className="px-3 py-3">Free to browse</td><td className="px-3 py-3">Food and shopping; busiest during daytime · <a href={official.market} target="_blank" rel="noopener noreferrer" className={inlineLink}>Market details</a></td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 font-semibold">Fishing harbour & sea walls</th><td className="px-3 py-3">Public outdoor waterfront</td><td className="px-3 py-3">Free</td><td className="px-3 py-3">Enjoy views and a meal · <a href={official.harbour} target="_blank" rel="noopener noreferrer" className={inlineLink}>Harbour details</a></td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 font-semibold">Treasures in the Wall</th><td className="px-3 py-3">Confirm museum opening with operator</td><td className="px-3 py-3">Combined ticket</td><td className="px-3 py-3">Ethnographic museum · <a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Museum details</a></td></tr>
+            <tr><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 font-semibold">Ramchal Synagogue & Heritage Center</th><td className="px-3 py-3">Sun–Thu 09:00–17:00; Fri 09:00–16:00; closed Sat & Jewish holidays</td><td className="px-3 py-3">Combined ticket</td><td className="px-3 py-3">Historic synagogue and small heritage center · <a href={official.ramchal} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official details</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p className="text-sm leading-relaxed">The managed sites generally close their ticket offices one hour before closing. For festival dates and <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link>, check <a href={official.hours} target="_blank" rel="noopener noreferrer" className={inlineLink}>current site-by-site hours</a> before your visit.</p>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="akko-booking">
         <h3 className="font-serif text-xl font-semibold">Where to buy tickets</h3>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">Booking online is recommended but not compulsory. You can buy the combined ticket at the Visitors Center ticket office or its ticket machines. Each heritage site has its own entrance; show your ticket when visiting the included attractions.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">You can buy the combined ticket online in advance or at the Visitors Center ticket office and machines. Each heritage site has its own entrance; show your ticket when visiting the included attractions.</p>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">The Visitors Center is at <strong>{info.centerAddress}</strong>. <a href={official.visitors} target="_blank" rel="noopener noreferrer" className={inlineLink}>Visitor center details</a>.</p>
       </div>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="akko-accessibility">
         <h3 className="font-serif text-xl font-semibold">Accessibility and visitor facilities</h3>
         <ul className="mt-3 list-disc pl-5 text-sm leading-relaxed sm:columns-2 sm:gap-x-6 sm:text-base [&>li]:mb-2 [&>li]:break-inside-avoid">
           <li><strong>Walking:</strong> Much of the old city is pedestrian-friendly, but historic stone paving, steps and narrow passages can be uneven.</li>
-          <li><strong>Wheelchair access:</strong> The operator provides accessible entrances and facilities at several managed sites, though not every historic space is accessible.</li>
-          <li><strong>Knights’ Halls:</strong> Most visitor areas have adaptations; the Prisoners Hall is not wheelchair accessible.</li>
+          <li><strong>Wheelchair access:</strong> Several managed sites have accessible entrances, lifts and ramps. Arrange a suitable sequence with the Visitors Center.</li>
+          <li><strong>Knights’ Halls:</strong> Much of the complex is accessible; the Prisoners Hall and escape tunnel have restrictions.</li>
           <li><strong>Restrooms:</strong> Accessible toilets are listed at the Enchanted Garden and the Ramchal visitor center.</li>
+          <li><strong>Alternative walk:</strong> Start with the <a href="#visit-plan" className={inlineLink}>market and waterfront route</a>, and confirm accessible street connections with the Visitors Center.</li>
           <li><strong>Religious sites:</strong> Dress respectfully and be mindful of services and prayer times.</li>
         </ul>
         <p className="mt-3 text-sm leading-relaxed">For specific accessibility arrangements, consult the <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>official access page</a> or contact the site team at <a href="tel:+97249956706" className={inlineLink} dir="ltr">{info.phone}</a>.</p>
@@ -200,11 +218,18 @@ export const akkoDestinationContent: AttractionDestinationContent = {
             <p className="mt-2 text-sm leading-relaxed">The main highlights are close enough to combine in a half-day walking visit. Pick up the operator's map at the Visitors Center or open the <a href={walkingMap} target="_blank" rel="noopener noreferrer" className={inlineLink}>official Old Akko walking map</a> on your phone.</p>
           </article>
         </div>
-        <div className="rounded-xl border bg-card p-3" data-testid="akko-map">
-          <div className="flex items-center gap-2"><MapPinned className="h-4 w-4 text-primary"/><h3 className="text-sm font-semibold">Old Akko and its historic sites</h3></div>
-          <iframe title="Map of Old Akko and its historic pedestrian attractions" src={mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56"/>
-          <a href={mapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Open the map <ArrowUpRight className="h-3.5 w-3.5"/></a>
-        </div>
+        <aside className="rounded-xl border bg-card p-4" data-testid="akko-arrival-map">
+          <h3 className="font-serif text-lg font-semibold">Arrival points on Google Maps</h3>
+          <p className="mt-2 text-sm leading-relaxed">The Visitors Center on Weizmann Street is the easiest starting point for a heritage visit. Compare nearby parking and rail access using the map.</p>
+          <iframe title="Google Maps overview of Old Akko Visitors Center and nearby car parks" src="https://maps.google.com/maps?q=Old%20Akko%20Visitors%20Center%20Weizmann%201%20Akko%20Israel&hl=en&z=15&t=m&output=embed" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-48 w-full rounded-lg border-0 sm:h-52"/>
+          <ul className="mt-3 space-y-2 text-sm leading-relaxed">
+            <li><a href={drivingDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko Visitors Center — Weizmann St 1</a></li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Moat%20Parking%20Old%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Moat car park — free parking</a></li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Eucalyptus%20Parking%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Eucalyptus car park — check local fees</a></li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Akko%20Train%20Station%20Israel" target="_blank" rel="noopener noreferrer" className={inlineLink}>Akko railway station</a></li>
+          </ul>
+          <a href={official.faq} target="_blank" rel="noopener noreferrer" className={"mt-3 inline-block text-sm " + inlineLink}>Official arrival and parking information</a>
+        </aside>
       </div>
     </div>
   ),
