@@ -234,7 +234,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "The meter adds a starting fee plus charges for both minutes and kilometres. This means traffic can increase your fare, even when the distance doesn't change.",
           "The first 10 km use the standard distance rate. After 10 km, the higher kilometre rate applies, but the per-minute charge stays the same.",
-          "These rates cover ordinary metered taxi rides. Shared sherut journeys and separately booked private transfers follow their own pricing arrangements. Eilat may have different consumer prices because of its VAT exemption.",
+          "These rates cover ordinary metered taxi rides. Pricing for shared sherut rides and separately booked private transfers follows different arrangements. Eilat may have different consumer prices because of its VAT exemption.",
         ],
         inlineLinks: [{ text: "shared sherut rides", to: travelGuidePaths.sherut }],
         sourceIds: ["taxi-fares-2026"],
@@ -247,7 +247,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "The schedule below also covers Friday evenings, Shabbat and recognized holidays. Use Israel's calendar of events for holiday dates and my airport Shabbat guide for transport alternatives.",
         ],
         inlineLinks: [
-          { text: "Israel holiday calendar", to: travelGuidePaths.calendar },
+          { text: "Israel's calendar of events", to: travelGuidePaths.calendar },
           { text: "airport Shabbat guide", to: travelGuidePaths.shabbat },
         ],
         tables: [{
@@ -282,7 +282,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           ],
           note: "Rates are based on the April 2026 regulations. Extra charges apply only when the legal conditions are met.",
         }],
-        inlineLinks: [{ text: "airport taxi pickup guide", to: travelGuidePaths.airportTaxis }],
+        inlineLinks: [{ text: "airport taxi guide", to: travelGuidePaths.airportTaxis }],
         sourceIds: ["taxi-fares-2026", "guide-gett"],
       },
       {
