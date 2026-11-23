@@ -122,7 +122,13 @@ describe("intent-specific taxi guide cluster", () => {
     expect(rows.some((row) => row[0]?.includes("Immediate taxi · Terminal 3") && row[1]?.includes("Exit 03"))).toBe(true);
     expect(rows.some((row) => row[0]?.includes("Gett ride scheduled") && row[1]?.includes("Exit 23"))).toBe(true);
     expect(rows.some((row) => row[0]?.includes("Terminal 1") && row[1]?.includes("Main arrivals exit"))).toBe(true);
-    expect(guide.sections.find((section) => section.id === "steps")!.paragraphs.join(" ")).toMatch(/does NOT provide priority/);
+    expect(guide.sections.find((section) => section.id === "steps")!.paragraphs.join(" ")).toMatch(/taxis are assigned in the order passengers reach the queue/i);
+    expect(guide.photo.src).toBe("/images/travel-blog/airport-taxi-sign.webp");
+    expect(guide.photo.alt.toLowerCase()).toContain("taxi");
+    expect(guide.updatedAt).toBe("2026-11-24");
+    expect(guide.sections.flatMap((section) => section.photo ? [section.photo.src] : [])).not.toContain(guide.photo.src);
+    expect(guide.related).toHaveLength(6);
+    expect(guide.sections.find((section) => section.id === "fares")!.paragraphs.join(" ")).toContain("₪12.46");
   });
 
   it("provides context-specific links without a conflicting guide purpose", () => {
