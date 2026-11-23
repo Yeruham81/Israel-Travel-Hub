@@ -6,6 +6,7 @@ import { viaDolorosaMeta } from "@/routes/attractions.via-dolorosa";
 import { attractionHubCards, attractionHubRegions } from "@/data/attractionsHub";
 import { attractionSidebarGuideLabels, attractionSidebarRegions } from "@/data/nav";
 import { attractionPath } from "@/data/attractionGuideTypes";
+import { affiliateConfig } from "@/data/registry";
 
 const page=readFileSync("src/components/ViaDolorosaAttractionPage.tsx","utf8");
 const map=readFileSync("src/components/ViaDolorosaRouteMap.tsx","utf8");
@@ -24,6 +25,7 @@ describe("Via Dolorosa standalone Jerusalem attraction",()=>{
     expect(site.hero.src).toBe("/images/attractions/old-jerusalem-via-dolorosa.webp");
     expect(existsSync("public"+site.hero.src)).toBe(true);
     expect(content.itineraryFirst).toBe(true);
+    expect(content.itineraryBeforeHighlights).toBe(true);
     expect(content.facts).toHaveLength(6);
     expect(content.faqs).toHaveLength(7);
     expect(content.sources).toHaveLength(8);
@@ -44,6 +46,12 @@ describe("Via Dolorosa standalone Jerusalem attraction",()=>{
     expect(page).toContain("overflow-x-auto");
     expect(page).toContain("min-w-[790px]");
     expect(page).toContain("<ViaDolorosaRouteMap />");
+    expect(page).toContain("walkingLegs.map");
+    expect(page).toContain("Stations VII–XIV");
+    expect(page).toContain("Station VIII Via Dolorosa");
+    expect(page).toContain("Station IX Via Dolorosa");
+    expect(site.stations[12].place).toContain("Our Lady of Sorrows");
+    expect(site.stations[12].note).toContain("Stone of Anointing");
     expect(map).toContain('data-testid="via-dolorosa-map"');
     expect(map).toContain('type: "via-dolorosa-map-focus"');
     expect(map).toContain('via-dolorosa-map-selected');
@@ -68,6 +76,16 @@ describe("Via Dolorosa standalone Jerusalem attraction",()=>{
     ])expect(page).toContain(text);
     expect(page).toContain("https://viator.tpk.lv/YV4HrN5E");
     expect(page).toContain("featuredWalks.map");
+    expect(page).toContain("Tue–Sun 09:00–18:00 summer");
+    expect(page).toContain("Last admission 30 minutes");
+    expect(page).toContain("₪30 Via Dolorosa Experience");
+    expect(page).toContain("₪50 combined ticket");
+    expect(site.official.flagellationMuseum).toContain("/en/visit-us/");
+    expect(page).toContain('pageId="attractions-via-dolorosa" compact');
+    expect(page).not.toContain('pageId="attractions-old-city-jerusalem" compact');
+    for (const key of ["tour-jerusalem-old-city-walk-viator@attractions-via-dolorosa", "tour-jerusalem-private-oldcity-walk-viator@attractions-via-dolorosa"]) {
+      expect(affiliateConfig[key]?.trackingUrl).toContain("sub_id=attractions_via_dolorosa_");
+    }
     expect(page).toContain("pageId=\"attractions-via-dolorosa\"");
     expect(page).not.toContain("DEMO");
   });
@@ -81,6 +99,10 @@ describe("Via Dolorosa standalone Jerusalem attraction",()=>{
     expect(menu&&"children" in menu&&menu.children?.some(item=>item.to===content.path)).toBe(true);
     expect(attractionSidebarGuideLabels["via-dolorosa"]).toBe("Via Dolorosa");
     expect(content.nearby).toHaveLength(6);
+    const hub=readFileSync("src/routes/attractions.index.tsx","utf8");
+    expect(hub).toContain('className="mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-4 lg:grid-cols-3"');
+    const christian=readFileSync("src/data/christianToursGuide.ts","utf8");
+    expect(christian).toContain('{name:"Via Dolorosa",note:"The traditional Stations of the Cross",to:"/attractions/via-dolorosa/"}');
     for(const path of [
       "/attractions/old-city-jerusalem/",
       "/attractions/mount-of-olives/",
@@ -89,7 +111,7 @@ describe("Via Dolorosa standalone Jerusalem attraction",()=>{
     ])expect(content.nearby?.some(item=>item.to===path)).toBe(true);
   });
 
-  it("has reciprocal Jerusalem links and keeps distinct photographs inside the page",()=>{
+  it("has reciprocal Jerusalem links and keeps distinct photos and station illustrations",()=>{
     for(const file of [
       "src/components/OldCityJerusalemAttractionPage.tsx",
       "src/components/MountOlivesAttractionPage.tsx",
@@ -100,7 +122,9 @@ describe("Via Dolorosa standalone Jerusalem attraction",()=>{
     const images=[site.hero.src,
       "/images/jerusalem/churches/flagellation.webp",
       "/images/jerusalem/churches/ecce-homo.webp",
-      "/images/attractions/old-jerusalem-holy-sepulchre.webp"];
+      "/images/attractions/old-jerusalem-holy-sepulchre.webp",
+      "/images/attractions/via-dolorosa-stations-3-5.svg",
+      "/images/attractions/via-dolorosa-stations-6-9.svg"];
     expect(new Set(images).size).toBe(images.length);
     for(const photo of images)expect(existsSync("public"+photo)).toBe(true);
     expect(page).toContain("mobileImageFirst");
