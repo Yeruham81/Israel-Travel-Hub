@@ -155,6 +155,40 @@ for (const city of ["jerusalem", "tel-aviv", "haifa", "ein-bokek"]) {
 }
 console.log("Airport journey SEO, section anchors, internal links and mobile tables verified.");
 
+// Keep the three taxi articles complementary: booking/use, meter regulations,
+// and airport-specific procedures. Validate the actual prerendered pages.
+for (const [slug, title, expectedPhoto, required] of [
+  ["taxis-in-israel", "Taxis in Israel: The Complete Guide for Tourists",
+    "/images/travel-blog/taxi-in-tel-aviv.webp",
+    ["Choose the right taxi booking method", "How to Find and Book a Taxi in Israel", "Questions about using taxis in Israel?"]],
+  ["taxi-fares-in-israel", "Taxi Fares in Israel: Meter Rates, Night Prices &amp; Surcharges",
+    null,
+    ["Taxi meter rates at a glance", "Taxi tariff times", "Common permitted surcharges", "Questions about a taxi journey?"]],
+]) {
+  const file = join(root, "travel-blog", slug, "index.html");
+  assert(existsSync(file), "Missing taxi guide: " + slug);
+  const html = readFileSync(file, "utf8");
+  const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1];
+  assert(main, "Missing taxi guide article: " + slug);
+  assert(main.includes(title), "Unexpected taxi guide title: " + slug);
+  assert(main.includes("Contact Me"), "Taxi guide contact link missing: " + slug);
+  assert(main.includes('id="checklist"'), "Missing taxi guide checklist: " + slug);
+  assert(main.includes('id="sources"'), "Missing taxi guide sources: " + slug);
+  assert(main.includes("Written by"), "Missing taxi guide author: " + slug);
+  if (expectedPhoto) assert(main.includes(expectedPhoto), "Taxi guide hero changed: " + slug);
+  for (const item of required) assert(main.includes(item), "Missing taxi guide content: " + slug + " / " + item);
+  const tableCount = [...main.matchAll(/<table\b/gi)].length;
+  assert(tableCount === (slug === "taxis-in-israel" ? 1 : 3),
+    "Unexpected duplicated or missing taxi pricing tables: " + slug + " (" + tableCount + ")");
+  const links = [...main.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)].map(match => match[1]);
+  for (const linkedSlug of ["taxis-in-israel", "taxi-fares-in-israel", "ben-gurion-airport-taxis"]) {
+    if (linkedSlug === slug) continue;
+    assert(links.some(href => href.includes("/travel-blog/" + linkedSlug + "/")),
+      "Missing cross-link from " + slug + " to " + linkedSlug);
+  }
+}
+console.log("General taxi and fare guides: style, intent-specific tables and cross-links verified.");
+
 // Airport taxi editorial: independently guard this page, not just the four route guides.
 const taxiPath = "/travel-blog/ben-gurion-airport-taxis/";
 const taxiFile = join(root, "travel-blog", "ben-gurion-airport-taxis", "index.html");
