@@ -19,7 +19,13 @@ const featuredWalks = tourProducts.filter(tour => tour.status === "published" &&
 ));
 const stations = info.stations;
 const gateDirections = "https://www.google.com/maps/dir/?api=1&destination=Lions%20Gate%20Jerusalem%20Israel&travelmode=walking";
-const routeDirections = "https://www.google.com/maps/dir/?api=1&origin=Church%20of%20the%20Flagellation%20Via%20Dolorosa%20Jerusalem&destination=Church%20of%20the%20Holy%20Sepulchre%20Jerusalem&waypoints=Station%20V%20Via%20Dolorosa%20Jerusalem%7CStation%20VII%20Via%20Dolorosa%20Jerusalem&travelmode=walking";
+/** Consecutive walking legs keep the detour to Stations VIII and IX explicit. */
+const walkingLegs = [
+  { title:"Stations I–V", detail:"Flagellation, Al-Wad and Stations III–V", origin:"Church of the Flagellation, Jerusalem, Israel", waypoints:["Station III Via Dolorosa, Jerusalem, Israel","Station IV Via Dolorosa, Jerusalem, Israel"], destination:"Station V Via Dolorosa, Jerusalem, Israel" },
+  { title:"Stations V–VII", detail:"Simon of Cyrene, Veronica and Khan al-Zeit", origin:"Station V Via Dolorosa, Jerusalem, Israel", waypoints:["Station VI Via Dolorosa, Jerusalem, Israel"], destination:"Station VII Via Dolorosa, Jerusalem, Israel" },
+  { title:"Stations VII–XIV", detail:"Station VIII, the detour to IX, then the Holy Sepulchre", origin:"Station VII Via Dolorosa, Jerusalem, Israel", waypoints:["Station VIII Via Dolorosa, Jerusalem, Israel","Station IX Via Dolorosa, Jerusalem, Israel"], destination:"Church of the Holy Sepulchre, Jerusalem, Israel" },
+] as const;
+const walkingLegUrl=(leg:typeof walkingLegs[number])=>"https://www.google.com/maps/dir/?api=1&travelmode=walking&origin="+encodeURIComponent(leg.origin)+"&destination="+encodeURIComponent(leg.destination)+"&waypoints="+leg.waypoints.map(encodeURIComponent).join("%7C");
 
 export const viaDolorosaDestinationContent: AttractionDestinationContent = {
   path: "/attractions/via-dolorosa/",
@@ -36,6 +42,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
   historyTitle: "The Via Dolorosa through history and tradition",
   relatedTitle: "Continue exploring Jerusalem",
   itineraryFirst: true,
+  itineraryBeforeHighlights: true,
   itineraryTitle: "How to walk the Via Dolorosa",
   contactIntroduction: "Tell me where you're staying in Jerusalem, when you plan to visit and whether you'd like to combine the Via Dolorosa with other Old City landmarks or the Mount of Olives. I can help arrange private transport to a suitable gate and a pickup after your walk.",
   facts: [
@@ -59,18 +66,18 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
         <p>The arch and pavement acquired their Christian associations over time. Their location illustrates how the traditions of the Passion became connected to Jerusalem's changing streets.</p>
         <p><a href={official.churchHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check Ecce Homo opening hours</a> before planning an interior visit.</p>
       </AttractionHighlight>
-      <AttractionHighlight mobileImageFirst title="Stations III–V: the turn at Al-Wad">
+      <AttractionHighlight mobileImageFirst title="Stations III–V: the turn at Al-Wad" image={{src:"/images/attractions/via-dolorosa-stations-3-5.svg",alt:"Illustration showing the Roman-numeral markers for Stations III to V"}}>
         <p>At the junction of Via Dolorosa and Al-Wad Street, Station III marks the traditional first fall. A Polish Catholic chapel stands nearby. A few steps farther south, Station IV recalls Jesus meeting Mary at the Armenian Catholic Church of Our Lady of Sorrows.</p>
         <p>At Station V, beside the turn back toward the west, a Franciscan oratory commemorates <strong>Simon of Cyrene</strong> carrying the cross. Watch for the Roman-numeral markers at each doorway and corner.</p>
       </AttractionHighlight>
-      <AttractionHighlight mobileImageFirst title="Stations VI–IX: market lanes and the approach to Calvary">
+      <AttractionHighlight mobileImageFirst title="Stations VI–IX: market lanes and the approach to Calvary" image={{src:"/images/attractions/via-dolorosa-stations-6-9.svg",alt:"Illustration of the market passage and Stations VI to IX, including the side-lane detour"}}>
         <p>Follow the westward lane past the traditional place where <strong>Veronica</strong> wiped Jesus' face (VI). At the Khan al-Zeit market junction, Station VII recalls the second fall. Station VIII is marked on a wall along the Al-Khanqa lane, commemorating Jesus speaking to the women of Jerusalem.</p>
         <p>Station IX is near the <strong>Coptic Orthodox monastery</strong> above the Holy Sepulchre precinct. This stop involves a short detour away from the main market passage. From there, continue toward the church entrance.</p>
         <p><a href={official.stations} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the Franciscan station descriptions</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Stations X–XIV: inside the Church of the Holy Sepulchre" image={{src:"/images/attractions/old-jerusalem-holy-sepulchre.webp",alt:"Inside the Church of the Holy Sepulchre in Jerusalem"}}>
         <p>The final five stations are commemorated inside the church: Jesus being stripped of his garments (X), nailed to the cross (XI), dying on the cross (XII), taken down from the cross (XIII), and laid in the tomb (XIV).</p>
-        <p>At <strong>Calvary</strong>, visitors climb to the elevated chapels associated with the crucifixion. The <strong>Stone of Anointing</strong> recalls preparations for burial, and the <strong>Edicule</strong> encloses the traditional tomb. Allow additional time for worship and queues.</p>
+        <p>At <strong>Calvary</strong>, visitors climb to the elevated chapels associated with the crucifixion. <strong>Station XIII</strong> is marked by the Latin altar of Our Lady of Sorrows, between the preceding stations. The nearby <strong>Stone of Anointing</strong>, downstairs, recalls preparation for burial, and the <strong>Edicule</strong> encloses the traditional tomb. Allow additional time for worship and queues.</p>
         <p><a href={official.holySepulchre} target="_blank" rel="noopener noreferrer" className={inlineLink}>Holy Sepulchre sanctuary information</a>.</p>
       </AttractionHighlight>
       <AttractionPracticalTip>Look up above shopfronts and doorways for the Roman-numeral station markers. The street section is a working market as well as a pilgrimage route.</AttractionPracticalTip>
@@ -158,9 +165,9 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>These three independently operated tours offer guided Jerusalem walking and heritage experiences. Check the operator's exact Stations of the Cross itinerary, meeting place and available dates before choosing.</p>
+      <p>These guided Jerusalem walks cover Old City heritage and sections of the Via Dolorosa. Check each operator's exact Stations of the Cross itinerary, meeting point and available dates before choosing.</p>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="via-dolorosa-tour-cards">
-        {featuredWalks.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-old-city-jerusalem" compact />)}
+        {featuredWalks.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-via-dolorosa" compact />)}
         <li className="h-full min-w-0">
           <CuratedPartnerTourCard
             title="Jerusalem Classic Tour: Mount of Olives & Old City"
