@@ -40,7 +40,7 @@ describe("four independent airport transportation comparisons", () => {
       const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id={id}/></RouterContextProvider>);
       const doc = new DOMParser().parseFromString(html, "text/html");
       expect(doc.querySelectorAll("h1")).toHaveLength(1);
-      expect(doc.querySelectorAll("table")).toHaveLength(id === "jerusalem" ? 1 : 2);
+      expect(doc.querySelectorAll("table")).toHaveLength(id === "jerusalem" ? 2 : 3);
       expect(doc.querySelector('a[href*="#request-quote"]')).not.toBeNull();
       if (id !== "jerusalem") expect(doc.querySelector('aside a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
       else expect(doc.querySelector('#option-private a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
@@ -334,7 +334,7 @@ describe("four independent airport transportation comparisons", () => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     expect(doc.querySelectorAll("h1")).toHaveLength(1);
     expect(doc.querySelectorAll("figure img")).toHaveLength(3);
-    expect(doc.querySelectorAll("table")).toHaveLength(2);
+    expect(doc.querySelectorAll("table")).toHaveLength(3);
     expect(doc.querySelector("#option-alternative")).toBeNull();
     expect(g.updatedAt).toBe("2026-11-23");
     expect(g.title).toMatch(/^Ben Gurion Airport to Ein Bokek/);
@@ -537,7 +537,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(g.options.find(o => o.id === "private")?.cost).toContain("quote");
       expect(g.options.find(o => o.id === "taxi")?.cost).toMatch(/meter/i);
     }
-    expect(airportJourneyGuides["ein-bokek"].answer).toContain("connection");
+    expect(airportJourneyGuides["ein-bokek"].answer).toContain("connect to bus");
     expect(airportJourneyGuides["tel-aviv"].options.find(o => o.id === "weekend")?.name).toContain("711");
   });
 });
