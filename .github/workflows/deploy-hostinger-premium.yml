@@ -211,6 +211,13 @@ jobs:
             grep -Fq 'id="request-quote"' "$page"
             echo "$page: published HTML verified"
           done
+          taxi_page="travel-blog/ben-gurion-airport-taxis/index.html"
+          test -s "$taxi_page"
+          grep -Fq 'data-testid="airport-taxi-booking-steps"' "$taxi_page"
+          grep -Fq 'data-testid="airport-taxi-destination-cards"' "$taxi_page"
+          grep -Fq 'airport-taxi-sign.webp' "$taxi_page"
+          grep -Fq 'Need a private airport pickup?' "$taxi_page"
+          echo "$taxi_page: published HTML verified"
           REMOTE
 
       - name: Retire the removed tickets and admission page
@@ -464,7 +471,7 @@ jobs:
           curl() {
             command curl --http1.1 --retry-all-errors "$@"
           }
-          for path in /accommodation/ /accommodation/jerusalem/ /accommodation/tel-aviv/ /accommodation/haifa/ /accommodation/tiberias/ /accommodation/dead-sea/ /accommodation/jerusalem/downtown/ /accommodation/jerusalem/mamilla-king-david/ /accommodation/jerusalem/old-city/ /accommodation/jerusalem/mahane-yehuda-nachlaot/ /accommodation/jerusalem/east-jerusalem/ /accommodation/jerusalem/german-colony-baka/ /accommodation/tel-aviv/beachfront/ /accommodation/tel-aviv/dizengoff-city-center/ /accommodation/tel-aviv/old-north-port/ /accommodation/tel-aviv/neve-tzedek/ /accommodation/tel-aviv/jaffa/ /accommodation/tel-aviv/florentin/ /accommodation/tel-aviv/kerem-hateimanim/ /accommodation/tel-aviv/rothschild-boulevard/ /accommodation/haifa/boutique/ /accommodation/haifa/family/ /accommodation/tiberias/luxury/ /accommodation/tiberias/family/ /accommodation/dead-sea/spa/ /accommodation/dead-sea/family/ / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /attractions/qasr-el-yahud/ /attractions/ein-gedi/ /attractions/mitzpe-ramon-crater/ /attractions/akko-acre/ /api/quote-request/ /api/exchange-rates/; do
+          for path in /accommodation/ /accommodation/jerusalem/ /accommodation/tel-aviv/ /accommodation/haifa/ /accommodation/tiberias/ /accommodation/dead-sea/ /accommodation/jerusalem/downtown/ /accommodation/jerusalem/mamilla-king-david/ /accommodation/jerusalem/old-city/ /accommodation/jerusalem/mahane-yehuda-nachlaot/ /accommodation/jerusalem/east-jerusalem/ /accommodation/jerusalem/german-colony-baka/ /accommodation/tel-aviv/beachfront/ /accommodation/tel-aviv/dizengoff-city-center/ /accommodation/tel-aviv/old-north-port/ /accommodation/tel-aviv/neve-tzedek/ /accommodation/tel-aviv/jaffa/ /accommodation/tel-aviv/florentin/ /accommodation/tel-aviv/kerem-hateimanim/ /accommodation/tel-aviv/rothschild-boulevard/ /accommodation/haifa/boutique/ /accommodation/haifa/family/ /accommodation/tiberias/luxury/ /accommodation/tiberias/family/ /accommodation/dead-sea/spa/ /accommodation/dead-sea/family/ / /travel-blog/ /travel-blog/uber-in-israel/ /travel-blog/ben-gurion-airport-taxis/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /attractions/qasr-el-yahud/ /attractions/ein-gedi/ /attractions/mitzpe-ramon-crater/ /attractions/akko-acre/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
