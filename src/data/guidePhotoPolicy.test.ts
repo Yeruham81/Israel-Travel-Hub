@@ -55,7 +55,7 @@ describe("guide cards always use the destination hero image", () => {
     expect(collisions).toEqual([]);
   });
 
-  it("uses verified original WordPress featured images, not the first article image", () => {
+  it("uses each guide's selected featured image, including approved replacements", () => {
     const legacyFeatured = {
       "/travel-blog/jerusalem-travel-guide/": "/images/travel-blog/featured-jerusalem-travel-guide.webp",
       "/travel-blog/getting-around-israel/": "/images/travel-blog/featured-getting-around-israel.webp",
@@ -65,7 +65,7 @@ describe("guide cards always use the destination hero image", () => {
       "/travel-blog/churches-in-jerusalem/": "/images/travel-blog/featured-jerusalem-churches.webp",
       "/travel-blog/best-hotels-in-haifa/": "/images/travel-blog/featured-haifa-hotels.webp",
       "/travel-blog/ben-gurion-airport-to-jerusalem/": "/images/travel-blog/featured-airport-jerusalem.webp",
-      "/travel-blog/ben-gurion-airport-to-tel-aviv/": "/images/travel-blog/featured-airport-tel-aviv.webp",
+      "/travel-blog/ben-gurion-airport-to-tel-aviv/": "/images/home/transfer-tel-aviv-beach-skyline.webp",
       "/travel-blog/ben-gurion-airport-to-haifa/": "/images/travel-blog/featured-airport-haifa.webp",
       "/travel-blog/ben-gurion-airport-to-ein-bokek/": "/images/travel-blog/featured-airport-ein-bokek.webp",
       "/travel-blog/israel-itinerary-3-days/": "/images/travel-blog/featured-itinerary-3-days.webp",

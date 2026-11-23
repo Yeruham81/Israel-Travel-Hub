@@ -97,7 +97,7 @@ describe("transport cluster: twelve editorial guides and four private landings",
     expect(guide.historicalPrices).toBe(false);
     expect(guide.title).toMatch(/^Ben Gurion Airport to Ein Bokek.*Train.*Bus.*Taxi/);
     expect(guide.answer).toMatch(/Jerusalem.*486.*444/s);
-    expect(guide.answer).toMatch(/voucher/);
+    expect(guide.trainIntro).toMatch(/voucher/);
     expect(guide.options.map(o => o.id)).not.toContain("alternative");
     expect(guide.options.find(o => o.id === "rail")?.paragraphs.join(" ")).not.toMatch(/\b421\b/);
     expect(guide.faqs.some(faq => faq.q.includes("bus 421"))).toBe(true);
