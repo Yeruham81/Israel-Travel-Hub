@@ -114,7 +114,15 @@ jobs:
           const robots = read("robots.txt");
           console.log("ROBOTS_SITEMAP_DIRECTIVE:", robots.split(/\r?\n/).filter(line => /^Sitemap:/i.test(line)).slice(0, 3).map(line => line.slice(0, 250)));
           console.log("ROBOTS_TXT_FIRST_500_PUBLIC_CHARS:", JSON.stringify(robots.slice(0, 500).replace(/[^\x20-\x7E\r\n]/g, "?")));
-          assert(robots.includes("Sitemap: " + origin + "/sitemap.xml"), "robots.txt refers to other domain");
+          if (indexable) {
+            assert(robots.includes("Sitemap: " + origin + "/sitemap.xml"), "Production robots.txt has the wrong sitemap or none");
+            assert(!/^Disallow:\\s*\\/\\s*$/m.test(robots), "Production robots.txt still disallows root crawling");
+          } else {
+            const trialRobots = /User-agent:\\s*Googlebot\\s*\\r?\\nDisallow:\\s*\\//i.test(robots);
+            assert(trialRobots || robots.includes("Sitemap: " + origin + "/sitemap.xml"),
+              "Staging robots.txt neither blocks Googlebot nor points to its own sitemap");
+            console.log("STAGING_ROBOTS_OK: Googlebot blocking is permitted before launch");
+          }
           const urls = [...read("sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
           assert(urls.length >= 80 && urls.every(u => u.startsWith(origin + "/")), "Sitemap incomplete or wrong domain");
           const quote = JSON.parse(read("quote.json"));
