@@ -513,22 +513,20 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "destinations", title: "Taxis from Ben Gurion Airport to popular destinations",
         paragraphs: [
-          "A taxi can take you directly to your hotel or another accessible address. Travel time and fare depend on the exact destination and traffic, so compare the full door-to-door journey rather than only the time on a train.",
-          "I've prepared individual guides for traveling to Tel Aviv, Jerusalem, Haifa and Ein Bokek at the Dead Sea. Each compares taxis with other ways of reaching the destination.",
-        ],
-        links: [
-          { label: "Traveling to Tel Aviv & Jaffa", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
-          { label: "Traveling to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
-          { label: "Traveling to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
-          { label: "Traveling to Ein Bokek & the Dead Sea", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
+          "A taxi can take you directly to your hotel or another vehicle-accessible address. The four guides below compare the full journey by taxi, train, bus and private transfer, including the final connection to your accommodation.",
         ],
       },
       {
         id: "support", title: "Receipts, lost property and Gett support",
         paragraphs: [
-          "For a lost item or a problem with your trip, keep the ride code, receipt, date, destination and taxi registration number. Contact Gett through the app or website; for journeys ordered at an airport kiosk, Gett also lists *2299 for support. For checked baggage missing at the airport, use the airline's baggage service described in my arrival guide.",
+          "For an item left in a taxi or a problem with your fare, keep the ride code, receipt, trip date and taxi registration number. Gett provides customer-service chat through its app and website. For kiosk bookings, phone *2299 using the number entered when ordering.",
+          "For a formal complaint about a licensed taxi, use the Ministry of Transport complaint service. Airline baggage missing before you leave the airport is handled by the airline; my arrival guide explains that process.",
         ],
         inlineLinks: [{ text: "arrival guide", to: travelGuidePaths.arrival }],
+        highlightedLinks: [
+          { label: "Gett airport taxi support", href: "https://www.gett.com/il/airport-en/", context: "Find Gett chat support and the kiosk help details for your ride." },
+          { label: "File a taxi complaint — Ministry of Transport", href: "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation", context: "Official complaint process for licensed taxi journeys." },
+        ],
         sourceIds: ["guide-gett", "taxi-complaints"],
       },
     ],
