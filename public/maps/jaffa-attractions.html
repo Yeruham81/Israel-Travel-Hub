@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/><meta name="referrer" content="strict-origin-when-cross-origin"/>
+<title>Jaffa attractions overview map</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous"/>
+<style>
+html,body,#map{margin:0;width:100%;height:100%}
+body{font:13px/1.4 system-ui,sans-serif;background:#edf3f7;color:#123346}
+#map{position:absolute;inset:0}
+#status{position:absolute;inset:0;z-index:5;display:grid;place-content:center;padding:20px;text-align:center;background:#edf3f7f2}
+#status[hidden]{display:none}
+#status p{margin:0 0 12px}
+a{color:#195c9e}
+.maplibregl-popup-content{font:13px/1.5 system-ui,sans-serif;max-width:245px;padding:10px 12px}
+.maplibregl-ctrl-attrib{font:10px/1.3 system-ui,sans-serif}
+.jaffa-pin{display:grid;place-items:center;width:27px;height:27px;border:2px solid #fff;border-radius:50%;background:#1d4ed8;color:white;font:bold 12px/1 system-ui,sans-serif;box-shadow:0 2px 7px #102d4080;cursor:pointer}
+.jaffa-pin[aria-pressed="true"]{background:#a34b10;outline:3px solid #082f49;outline-offset:2px;z-index:10}
+.jaffa-pin:focus-visible{outline:3px solid #082f49;outline-offset:3px}
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Twelve numbered Old Jaffa attractions visible together"></div>
+<div id="status" role="status" aria-live="polite"><p id="message">Loading all Jaffa locations…</p><a href="https://www.openstreetmap.org/#map=16/32.0542/34.7535" target="_blank" rel="noopener noreferrer">Open Jaffa in OpenStreetMap</a><noscript>Enable JavaScript to use the interactive map.</noscript></div>
+<script src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
+<script>
+(()=>{
+"use strict";
+const ids=["clock-tower","mahmoudiya","flea-market","summit-garden","wishing-bridge","kedumim","st-peter","zodiac-alleys","ilana-goor","uri-geller","jaffa-port","na-lagaat"];
+const status=document.getElementById("status"),message=document.getElementById("message");
+const bounds=[[34.7493,32.05245],[34.75735,32.05565]];
+let points;
+try {
+ const input=new URLSearchParams(location.search).get("points");
+ if(!input||input.length>6000)throw Error("Missing points");
+ points=JSON.parse(input);
+ if(!Array.isArray(points)||points.length!==12||points.some((point,i)=>
+   point.id!==ids[i]||typeof point.name!=="string"||point.name.length>80||
+   typeof point.query!=="string"||point.query.length>170||
+   !Number.isFinite(point.lat)||point.lat<32.052||point.lat>32.056||
+   !Number.isFinite(point.lon)||point.lon<34.749||point.lon>34.758))throw Error("Invalid points");
+}catch {message.textContent="Use the numbered attraction list in the guide.";return}
+if(typeof maplibregl==="undefined"){message.textContent="Use the numbered attraction list in the guide.";return}
+let map,popup,ready=false,requested="all";
+const markers=new Map();
+const overview=()=>map.fitBounds(bounds,{padding:{top:46,bottom:43,left:36,right:36},maxZoom:16.35,duration:250});
+const select=id=>{
+ if(popup){popup.remove();popup=null}
+ markers.forEach((marker,key)=>marker.setAttribute("aria-pressed",key===id?"true":"false"));
+ // Always keep all numbered points within the current map view.
+ overview();
+ if(id==="all")return;
+ const point=points.find(p=>p.id===id);
+ if(!point)return;
+ const body=document.createElement("div"),title=document.createElement("strong"),detail=document.createElement("p"),link=document.createElement("a");
+ title.textContent=point.name;
+ detail.textContent=point.detail;
+ detail.style.margin="5px 0 0";
+ link.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(point.query);
+ link.target="_blank";link.rel="noopener noreferrer";link.textContent="Directions in Google Maps";
+ link.style.display="block";link.style.marginTop="6px";
+ body.append(title,detail,link);
+ popup=new maplibregl.Popup({offset:18,maxWidth:"240px",closeButton:true}).setLngLat([point.lon,point.lat]).setDOMContent(body).addTo(map);
+};
+const focus=id=>{if(!ready){requested=id;return}select(id)};
+window.addEventListener("message",event=>{
+ if(event.origin!==location.origin||event.source!==window.parent)return;
+ if(event.data?.type!=="jaffa-map-focus"||typeof event.data.id!=="string")return;
+ if(event.data.id==="all"||ids.includes(event.data.id))focus(event.data.id);
+});
+const timeout=setTimeout(()=>{if(!ready)message.textContent="See the numbered locations and Google Maps directions in the guide.";},16000);
+try {
+ maplibregl.setWorkerCount(1);
+ map=new maplibregl.Map({
+   container:"map",style:new URL("./english-style.json",location.href).href,
+   bounds,fitBoundsOptions:{padding:{top:46,bottom:43,left:36,right:36},maxZoom:16.35},
+   cooperativeGestures:true,dragRotate:false,touchPitch:false,pitchWithRotate:false,
+   attributionControl:false,renderWorldCopies:false,maxPitch:0
+ });
+ map.touchZoomRotate.disableRotation();
+ map.addControl(new maplibregl.NavigationControl({showCompass:false}),"top-right");
+ map.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:'<a href="https://maputnik.github.io/osm-liberty/" target="_blank" rel="noopener noreferrer">OSM Liberty</a>'}));
+ map.once("load",()=>{
+   const offsets={
+     "clock-tower":[13,-13],"mahmoudiya":[-13,12],"summit-garden":[13,-5],"wishing-bridge":[-9,9],
+     "kedumim":[-13,-10],"st-peter":[13,10],"ilana-goor":[-10,-9],"uri-geller":[13,10],
+     "jaffa-port":[0,-7],"na-lagaat":[0,8]
+   };
+   points.forEach((point,index)=>{
+     const pin=document.createElement("button");
+     pin.type="button";pin.className="jaffa-pin";pin.textContent=String(index+1);
+     pin.setAttribute("aria-label","Locate "+point.name);pin.setAttribute("aria-pressed","false");
+     pin.title=point.name;
+     pin.addEventListener("click",()=>{
+       focus(point.id);
+       window.parent.postMessage({type:"jaffa-map-selected",id:point.id},location.origin);
+     });
+     new maplibregl.Marker({element:pin,offset:offsets[point.id]||[0,0]}).setLngLat([point.lon,point.lat]).addTo(map);
+     markers.set(point.id,pin);
+   });
+   ready=true;clearTimeout(timeout);status.hidden=true;
+   focus(requested);
+ });
+ map.on("error",()=>{if(!ready)message.textContent="Use the numbered location list below.";});
+ window.addEventListener("pagehide",e=>{if(!e.persisted){clearTimeout(timeout);map.remove();}});
+}catch {clearTimeout(timeout);if(map)map.remove();message.textContent="Use the numbered location list below.";}
+})();
+</script>
+</body>
+</html>
