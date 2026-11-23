@@ -27,6 +27,7 @@ import type { StayGuidePhoto } from "@/data/content";
 
 /** Last editorial update; separate from provider-rate/source verification dates. */
 export const AIRPORT_TRANSFER_UPDATED_DATE = "2026-11-15";
+export const AIRPORT_TRANSFER_HUB_UPDATED_DATE = "2026-11-23";
 
 export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
   "tel-aviv": { src: telAviv, alt: "Tel Aviv's beachfront hotels and promenade", sourceUrl: "", label: "Tel Aviv beachfront" },
@@ -76,18 +77,21 @@ export const airportTransferBenefits = [
 ];
 
 export const airportTransferChecklist = [
-  "Use your flight's landing date and time in Israel local time, including arrivals after midnight.",
-  "Provide the full drop-off address and the number of passengers, suitcases and carry-ons.",
+  "Use your flight's arrival or departure date and time in Israel local time, including journeys after midnight.",
+  "Provide your hotel or address, plus the number of passengers, suitcases and carry-ons.",
   "Request child seats or a larger vehicle in advance if you need them.",
   "Check the full price, waiting arrangements and cancellation terms before confirming.",
-  "Save your driver's contact details and the agreed airport meeting point for arrival.",
+  "Keep the driver's contact details and the agreed pickup point for your journey.",
 ];
 
 export const airportTransferFaqs = [
-  { q: "Are the displayed prices per person?", a: "No. They are my starting weekday fares per vehicle for up to four passengers. Night, weekend and holiday surcharges, when applicable, are included in the final price I confirm before booking; no extra charges are added to that agreed fare." },
+  { q: "Are the displayed prices per person?", a: "No. These are starting weekday fares from Ben Gurion Airport, per vehicle for up to four passengers. I quote journeys to the airport separately. I include any applicable night, weekend or holiday surcharges in the final price before booking." },
   { q: "Can I request a larger vehicle or child seats?", a: "Yes. Tell me about all passengers, luggage and children's ages. I'll confirm the vehicle and any requested seats before the booking is finalized." },
   { q: "Will you track my flight if it is delayed?", a: "I track the flight details you provide and coordinate the pickup around the actual landing time. Please follow the agreed meeting instructions and contact me if your arrival or baggage collection changes unexpectedly." },
   { q: "When can I cancel for free?", a: "For transfers booked directly with me, cancellation is free until 24 hours before the scheduled pickup. Ask about the terms of later cancellations when confirming the booking. Independent booking platforms have their own cancellation policies." },
+  { q: "Where will I meet my driver at Ben Gurion Airport?", a: "For an airport pickup, I'll confirm your terminal meeting point and pickup instructions with the booking details. Follow those instructions after collecting your luggage." },
+  { q: "How can I pay for my airport transfer?", a: "I'll confirm the available payment methods and when payment is due in writing before your booking is finalized." },
+  { q: "Can I arrange a transfer on Shabbat or late at night?", a: "Send your travel date and time. I'll confirm availability, the vehicle and any night, Shabbat or holiday surcharge in your personal quote." },
   { q: "When is my transfer booking confirmed?", a: "An inquiry does not reserve a vehicle. I'll confirm the full price, availability, pickup location and payment arrangements in writing before your booking is finalized." },
 ];
 

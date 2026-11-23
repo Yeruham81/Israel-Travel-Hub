@@ -6,7 +6,7 @@ import guideTaxisThumb from "@/assets/airport-transfers/guide-taxis-hub.webp";
 import guideAirportTaxisThumb from "@/assets/airport-transfers/guide-airport-taxis-hub.webp";
 import guideArrivalThumb from "@/assets/airport-transfers/guide-arrival-hub.webp";
 import { useEffect, useState } from "react";
-import { BadgeCheck, BedDouble, BookOpen, CalendarCheck, CalendarDays, CheckCircle2, Map as MapIcon, PlaneLanding, Smartphone, Sun } from "lucide-react";
+import { BadgeCheck, BedDouble, BookOpen, CalendarCheck, CalendarDays, CarFront, CheckCircle2, Map as MapIcon, PlaneLanding, Smartphone, Sun } from "lucide-react";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import airportHeroMobile from "@/assets/airport-transfers/airport-mobile.webp";
@@ -14,44 +14,69 @@ import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { AirportDestinationCard as DestinationCard } from "@/components/AirportDestinationCard";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
-import { AIRPORT_TRANSFER_UPDATED_DATE, airportDestinationCards, airportHubPhotoSrc, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
+import { AIRPORT_TRANSFER_HUB_UPDATED_DATE, airportDestinationCards, airportHubPhotoSrc, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
 import { travelGuides } from "@/data/travelGuides";
 import { travelGuidePaths } from "@/data/registry";
-import { pageMeta } from "@/lib/site";
+import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { parseAirportTransferSearch } from "@/lib/transfer-quote";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 
 const benefitIcons = [BadgeCheck, PlaneLanding, CalendarCheck] as const;
+const bookingSteps = [
+  { title: "Send your trip details", detail: "Flight, route and passengers", icon: CalendarCheck },
+  { title: "Confirm your ride", detail: "Vehicle, price and pickup", icon: BadgeCheck },
+  { title: "Meet your driver", detail: "Travel to your destination", icon: CarFront },
+] as const;
+
+const comparisonGuides = [
+  { city: "Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+  { city: "Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+  { city: "Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+  { city: "Ein Bokek & Dead Sea", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
+] as const;
+
 const planningLinks = [
-  { title: "Ben Gurion arrival tips", description: "From landing to the arrivals hall.", to: travelGuidePaths.arrival, photo: travelGuides.arrival.cardPhoto ?? travelGuides.arrival.photo, thumb: guideArrivalThumb },
-  { title: "Official airport taxis", description: "Pickup points, booking and taxi fares.", to: travelGuidePaths.airportTaxis, photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Airport taxi service sign at Ben Gurion Airport" }, thumb: guideAirportTaxisThumb },
-  { title: "Taxis in Israel", description: "Licensed taxis, apps and payments.", to: travelGuidePaths.taxis, photo: travelGuides.taxis.cardPhoto ?? travelGuides.taxis.photo, thumb: guideTaxisThumb },
-  { title: "Getting around Israel", description: "Trains, buses and longer journeys.", to: travelGuidePaths.israel, photo: travelGuides.israel.cardPhoto ?? travelGuides.israel.photo, thumb: guideIsraelThumb },
-  { title: "Getting around Tel Aviv", description: "City transport, light rail and Shabbat.", to: travelGuidePaths.telAviv, photo: travelGuides.telAviv.cardPhoto ?? travelGuides.telAviv.photo, thumb: guideTelAvivThumb },
-  { title: "Sherut in Israel", description: "Shared taxis and current airport alternatives.", to: travelGuidePaths.sherut, photo: travelGuides.sherut.cardPhoto ?? travelGuides.sherut.photo, thumb: guideSherutThumb },
+  { title: "Ben Gurion arrival tips", description: "Passport control, baggage claim, customs and meeting your driver.", to: travelGuidePaths.arrival, photo: travelGuides.arrival.cardPhoto ?? travelGuides.arrival.photo, thumb: guideArrivalThumb },
+  { title: "Official airport taxis", description: "Airport taxi queues, ride codes and regulated metered fares.", to: travelGuidePaths.airportTaxis, photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Airport taxi service sign at Ben Gurion Airport" }, thumb: guideAirportTaxisThumb },
+  { title: "Taxis in Israel", description: "Taxi apps, fares, receipts and paying for local rides.", to: travelGuidePaths.taxis, photo: travelGuides.taxis.cardPhoto ?? travelGuides.taxis.photo, thumb: guideTaxisThumb },
+  { title: "Getting around Israel", description: "Intercity trains, buses and travel between destinations.", to: travelGuidePaths.israel, photo: travelGuides.israel.cardPhoto ?? travelGuides.israel.photo, thumb: guideIsraelThumb },
+  { title: "Getting around Tel Aviv", description: "Light rail, city buses and weekend travel options.", to: travelGuidePaths.telAviv, photo: travelGuides.telAviv.cardPhoto ?? travelGuides.telAviv.photo, thumb: guideTelAvivThumb },
+  { title: "Sherut in Israel", description: "How shared taxis work and where they operate.", to: travelGuidePaths.sherut, photo: travelGuides.sherut.cardPhoto ?? travelGuides.sherut.photo, thumb: guideSherutThumb },
 ] as const;
 
 // General trip-planning ideas complement the airport-specific guides above.
 const tripPlanningLinks = [
-  { title: "Israel travel tips", description: "Practical advice before your visit.", to: travelGuidePaths.travelTips, icon: BookOpen },
-  { title: "Best time to visit", description: "Weather, seasons and trip planning.", to: travelGuidePaths.bestTime, icon: Sun },
-  { title: "Where to stay", description: "Accommodation and convenient bases.", to: "/accommodation/" as const, icon: BedDouble },
-  { title: "Travel eSIM for Israel", description: "Stay connected during your trip.", to: travelGuidePaths.esim, icon: Smartphone },
-  { title: "Israel holidays & events", description: "Plan around festivals and special dates.", to: travelGuidePaths.calendar, icon: CalendarDays },
-  { title: "Israel itinerary: 7 days", description: "A week of highlights and travel ideas.", to: "/travel-blog/israel-itinerary-7-days/" as const, icon: MapIcon },
+  { title: "Israel travel tips", description: "Money, transport, local customs and arrival essentials.", to: travelGuidePaths.travelTips, icon: BookOpen },
+  { title: "Best time to visit", description: "Choose travel dates around the weather and seasons.", to: travelGuidePaths.bestTime, icon: Sun },
+  { title: "Where to stay", description: "Find hotels and neighborhoods near your plans.", to: "/accommodation/" as const, icon: BedDouble },
+  { title: "Travel eSIM for Israel", description: "Compare mobile data plans for navigation and messages.", to: travelGuidePaths.esim, icon: Smartphone },
+  { title: "Israel holidays & events", description: "Find dates that affect transport and opening hours.", to: travelGuidePaths.calendar, icon: CalendarDays },
+  { title: "Israel itinerary: 7 days", description: "A seven-day route through Israel's main destinations.", to: "/travel-blog/israel-itinerary-7-days/" as const, icon: MapIcon },
 ] as const;
 
 export const Route = createFileRoute("/airport-transfers/")({
   validateSearch: parseAirportTransferSearch,
-  head: () => pageMeta({
-    title: "Airport transfers from Ben Gurion: private rides and prices",
-    description: "Pre-book a private TLV airport pickup to Jerusalem, Tel Aviv, Haifa or the Dead Sea. Compare weekday starting rates and request a vehicle quote.",
+  head: () => {
+    const head = pageMeta({
+    title: "Ben Gurion Airport Transfers: Private Pickup & Drop-Off",
+    description: "Arrange private airport transfers to or from Ben Gurion (TLV), including Jerusalem, Tel Aviv, Haifa and the Dead Sea. See pickup fares and request a quote.",
     path: "/airport-transfers/",
     image: airportTransferPhotos["other"]!.src,
     imageAlt: airportTransferPhotos["other"]!.alt,
     crumbs: [{ name: "Home", path: "/" }, { name: "Airport transfers", path: "/airport-transfers/" }],
-  }),
+    });
+    return { ...head, scripts: [...head.scripts, jsonLd({
+      "@context": "https://schema.org", "@type": "Service",
+      "@id": CANONICAL_ORIGIN + "/airport-transfers/#service",
+      name: "Private Ben Gurion Airport transfers",
+      description: "Private door-to-door pickups and drop-offs between Ben Gurion Airport and destinations in Israel.",
+      serviceType: "Private airport transfer",
+      provider: { "@type": "Person", name: "Moshe Barak", url: CANONICAL_ORIGIN + "/about-me/" },
+      areaServed: { "@type": "Country", name: "Israel" },
+      url: CANONICAL_ORIGIN + "/airport-transfers/",
+    })] };
+  },
   component: Airport,
 });
 
@@ -72,17 +97,17 @@ function Airport() {
   ].filter(hasPublicPhotoCredit);
   return <main className="pb-12">
     <HubHeader
-      checkedAt={AIRPORT_TRANSFER_UPDATED_DATE}
+      checkedAt={AIRPORT_TRANSFER_HUB_UPDATED_DATE}
       crumbs={[{ name: "Home", to: "/" }, { name: "Airport transfers", to: "/airport-transfers/" }]}
       title="Private airport transfers from Ben Gurion Airport"
-      intro="Arrange a private pickup from Ben Gurion Airport (TLV) to Jerusalem, Tel Aviv, Haifa, the Dead Sea or elsewhere in Israel. See my starting fares, request a quote or explore other booking platforms."
+      intro="Arrange a private, door-to-door transfer between Ben Gurion Airport (TLV) and Jerusalem, Tel Aviv, Haifa, the Dead Sea or elsewhere in Israel. Check pickup fares and request a personal quote."
       image={<GuideHeroMedia src={airportTransferPhotos["other"]!.src} mobileSrc={airportHeroMobile} alt={airportTransferPhotos["other"]!.alt} compact />}
       actions={<a href="#request-quote" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>}
     />
     <div className="mx-auto max-w-5xl px-4">
       <section id="popular-destinations" aria-labelledby="popular-h" className="mt-8 scroll-mt-24">
         <h2 id="popular-h" className="text-2xl font-semibold">Popular private transfers</h2>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Choose where you’re heading for a direct, pre-arranged ride to your hotel or address.</p>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Choose your destination to see pickup prices and request a direct transfer to your hotel or address.</p>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
           {airportDestinationCards.filter((card) => card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} layout="hub-featured" />)}
         </div>
@@ -95,9 +120,8 @@ function Airport() {
         </div>
       </section>
       <div className="mt-4 text-xs leading-relaxed text-muted-foreground" data-testid="airport-rate-terms">
-        <p>All prices are one-way weekday fares, per vehicle for up to four passengers. Night, weekend and holiday surcharges may apply.</p>
-        <p className="mt-2">Larger vehicles for groups and families can be provided, requiring a separate quote.</p>
-        <p className="mt-2" data-testid="airport-fx-note">Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.</p>
+        <p>Starting prices are for one-way weekday pickups from Ben Gurion Airport, per vehicle for up to four passengers. Larger vehicles and trips to the airport are quoted individually.</p>
+        <p className="mt-2" data-testid="airport-fx-note">I confirm the full fare, including any night, weekend or holiday surcharge, in advance in ILS. USD and EUR estimates use current exchange rates.</p>
       </div>
       <section id="benefits" aria-labelledby="benefits-h" className="mt-7 scroll-mt-24">
         <h2 id="benefits-h" className="sr-only">Private transfer benefits</h2>
@@ -109,7 +133,17 @@ function Airport() {
           </div>; })}
         </div>
       </section>
-      <TransferQuoteForm destinationId={destinationId} onDestinationChange={setDestinationId} compactHeader />
+      <section id="booking-steps" aria-labelledby="booking-steps-h" className="mt-8">
+        <h2 id="booking-steps-h" className="text-xl font-semibold">How your transfer is arranged</h2>
+        <ol className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
+          {bookingSteps.map((step, index) => { const Icon = step.icon; return <li key={step.title} className="min-w-0 rounded-xl border bg-card p-2.5 text-center sm:p-4">
+            <Icon className="mx-auto size-5 text-primary sm:size-6" aria-hidden />
+            <p className="mt-2 text-xs font-semibold leading-snug sm:text-sm">{index + 1}. {step.title}</p>
+            <p className="mt-1 text-[11px] leading-snug text-muted-foreground sm:text-xs">{step.detail}</p>
+          </li>; })}
+        </ol>
+      </section>
+      <TransferQuoteForm destinationId={destinationId} onDestinationChange={setDestinationId} compactHeader allowAirportDropoff />
       <section id="useful-information" aria-labelledby="tips-h" className="mx-auto mt-7 max-w-4xl">
         <h2 id="tips-h" className="text-xl font-semibold">Before booking your airport transfer</h2>
         <ul className="mt-3 grid gap-x-5 gap-y-2 rounded-xl border bg-card p-4 text-sm sm:grid-cols-2" aria-label="Airport transfer checklist">
@@ -121,8 +155,18 @@ function Airport() {
       </section>
       <AirportBookingPlatforms compact />
       <FaqList faqs={airportTransferFaqs} compact />
+      <section id="compare-airport-transport" aria-labelledby="compare-airport-transport-h" className="mt-9">
+        <h2 id="compare-airport-transport-h" className="text-2xl font-semibold">Compare all transport options from Ben Gurion Airport</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Explore trains, buses, taxis and private transfers to each destination.</p>
+        <ul className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {comparisonGuides.map(guide => <li key={guide.to} className="min-w-0">
+            <Link to={guide.to} className="flex h-full min-h-11 items-center justify-center rounded-lg border bg-card px-3 py-2 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">{guide.city}</Link>
+          </li>)}
+        </ul>
+      </section>
+
       <section id="keep-planning" aria-labelledby="keep-planning-h" className="mt-9">
-        <h2 id="keep-planning-h" className="text-2xl font-semibold">Related travel guides</h2>
+        <h2 id="keep-planning-h" className="text-2xl font-semibold">Airport arrival and transport guides</h2>
         <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {planningLinks.map((guide) => <li key={guide.to} className="min-w-0">
             <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
@@ -137,7 +181,7 @@ function Airport() {
         </ul>
       </section>
       <section id="trip-planning" aria-labelledby="trip-planning-h" className="mt-9">
-        <h2 id="trip-planning-h" className="text-2xl font-semibold">Plan your trip to Israel</h2>
+        <h2 id="trip-planning-h" className="text-2xl font-semibold">Plan the rest of your stay</h2>
         <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {tripPlanningLinks.map(item => {
             const Icon = item.icon;

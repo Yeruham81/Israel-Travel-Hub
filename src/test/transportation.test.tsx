@@ -19,10 +19,13 @@ async function renderPage(path: string, Page: ComponentType) {
 }
 
 describe("airport transfers and private driver separation", () => {
-  it("consolidates every airport destination and the inquiry form on one private-pickup-only page", async () => {
+  it("keeps private airport services and the inquiry form separate from editorial transport comparisons", async () => {
     const { container } = await renderPage("/airport-transfers/", TransfersRoute.options.component!);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/^Private airport transfers from Ben Gurion Airport$/);
-    expect(container.querySelector("main")!.textContent).not.toMatch(/intercity|day hire|private driver|\btrain\b|metered|taxi rank/i);
+    const bookingSections = ["#popular-destinations", "#more-destinations", "#benefits", "#booking-steps", "#request-quote"];
+    const bookingText = bookingSections.map(selector => container.querySelector(selector)?.textContent).join(" ");
+    expect(bookingText).not.toMatch(/intercity|day hire|private driver|\btrain\b|metered|taxi rank/i);
+    expect(container.querySelector("#compare-airport-transport")).toHaveTextContent("Compare all transport options");
     expect(screen.queryByTestId("provider-card")).not.toBeInTheDocument();
     expect(screen.getAllByTestId("airport-destination-card")).toHaveLength(12);
     expect(screen.getByRole("form", { name: "Private airport transfer quote request" })).toBeInTheDocument();
@@ -37,9 +40,9 @@ describe("airport transfers and private driver separation", () => {
       const card = screen.getAllByTestId("airport-destination-card").find((item) => item.dataset["destination"] === route.id)!;
       expect(within(card).getByRole("link", { name: /View transfer details/ })).toHaveAttribute("href", route.path);
     }
-    expect(screen.getByTestId("airport-rate-terms")).toHaveTextContent(/weekday.*up to four.*Night, weekend and holiday/s);
+    expect(screen.getByTestId("airport-rate-terms")).toHaveTextContent(/weekday pickups.*up to four passengers/s);
     const head = await TransfersRoute.options.head?.({} as never);
-    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }, { title: expect.stringContaining("Airport transfers") }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/airport-transfers\/$/) }] });
+    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }, { title: expect.stringContaining("Airport Transfers") }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/airport-transfers\/$/) }] });
   });
 
   it("preselects a destination directly on the consolidated page and retains contact details during selection", async () => {
