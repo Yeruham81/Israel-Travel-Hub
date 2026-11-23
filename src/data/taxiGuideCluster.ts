@@ -454,7 +454,6 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       },
       {
         id: "fares", title: "Airport taxi fares and the meter",
-        photo: { src: taxiMeterPhoto, alt: "Illuminated licensed taxi roof sign in Israel" },
         paragraphs: [
           "Authorized Ben Gurion Airport taxis run on the regulated meter. The fare depends on distance, driving time, the applicable A, B or C tariff and permitted extra charges. Traffic delays therefore affect the final amount.",
           "Under the tariff introduced in April 2026, the standard meter starts at ₪12.46 including VAT, and a ₪5 supplement applies to a journey departing Ben Gurion Airport. Toll roads can add to the fare when used. For per-kilometer rates, tariff hours and worked examples, see my taxi fares in Israel guide.",
