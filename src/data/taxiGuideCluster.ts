@@ -8,6 +8,7 @@ import type { TravelGuide } from "@/data/travelGuides";
 import { consumerFareTable, taxiFaresWithVat } from "@/data/taxiFares";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { travelGuidePaths } from "@/data/registry";
+import { airportTaxiEstimateTable } from "@/data/airportTaxiFareEstimates";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import roadTrip from "@/assets/home/road-trip.webp";
 import taxiMeterPhoto from "@/assets/guides/israeli-taxi-roof-sign.webp";
@@ -392,16 +393,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     topics: ["transportation", "tips"],
     photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Yellow taxi entrance sign inside the airport terminal" },
     updatedAt: "2026-11-24",
-    facts: [
-      { label: "Terminal 3 · immediate", text: "Ground floor, Exit 03" },
-      { label: "Terminal 3 · scheduled", text: "Level 2, Exit 23" },
-      { label: "Terminal 1 · immediate", text: "Main arrivals exit" },
-    ],
-    nextSteps: [
-      { label: "Taxi fares in Israel", to: travelGuidePaths.taxiFares },
-      { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival },
-      { label: "Arriving on Shabbat", to: travelGuidePaths.shabbat },
-    ],
+    facts: [], // Pickup comparison already gives the relevant locations.
     comparison: {
       caption: "Where to pick up your airport taxi",
       headers: ["Type of taxi", "Pickup location", "How to board"],
@@ -456,10 +448,11 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "fares", title: "Airport taxi fares and the meter",
         paragraphs: [
           "Authorized Ben Gurion Airport taxis run on the regulated meter. The fare depends on distance, driving time, the applicable A, B or C tariff and permitted extra charges. Traffic delays therefore affect the final amount.",
-          "Under the tariff introduced in April 2026, the standard meter starts at ₪12.46 including VAT, and a ₪5 supplement applies to a journey departing Ben Gurion Airport. Toll roads can add to the fare when used. For per-kilometer rates, tariff hours and worked examples, see my taxi fares in Israel guide.",
+          "Under the temporary tariff introduced in April 2026, the standard meter starts at ₪12.46 including VAT and a ₪5 addition applies when departing Ben Gurion Airport. The table below offers daytime meter estimates based on route distance and driving time. For tariff hours, per-kilometer rates and permitted extras, see my taxi fares in Israel guide.",
           "The meter is used for the official taxi queue and scheduled Gett taxis. A separately arranged private transfer follows the written quote and terms agreed with its provider.",
         ],
         inlineLinks: [{ text: "taxi fares in Israel guide", to: travelGuidePaths.taxiFares }],
+        tables: [airportTaxiEstimateTable],
         highlightedLinks: [
           { label: "Israel Ministry of Transport — official taxi tariff", href: "https://www.gov.il/BlobFolder/policy/taxi-rate-2026/he/taxi-rate-26.pdf", context: "Official fare order and regulated charging rules effective from April 2026." },
         ],
