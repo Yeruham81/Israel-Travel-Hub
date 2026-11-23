@@ -189,6 +189,45 @@ for (const [slug, title, expectedPhoto, required] of [
 }
 console.log("General taxi and fare guides: style, intent-specific tables and cross-links verified.");
 
+// Ben Gurion arrivals: guard the concrete steps and editorial hand-offs.
+const arrivalPath = "/travel-blog/ben-gurion-airport-arrival-tips/";
+const arrivalFile = join(root, "travel-blog", "ben-gurion-airport-arrival-tips", "index.html");
+assert(existsSync(arrivalFile), "Missing Ben Gurion arrival tips HTML");
+const arrivalHtml = readFileSync(arrivalFile, "utf8");
+const arrivalMain = arrivalHtml.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1];
+assert(arrivalMain, "Ben Gurion arrivals guide main content missing");
+for (const required of [
+  "Ben Gurion Airport Arrivals Guide",
+  "featured-ben-gurion-arrival.webp",
+  "Updated November 2026",
+  "blue entry card",
+  "₪25",
+  "Where to go / Pickup point",
+  "Exit 03",
+  "Exit 23",
+  "Baggage and ground-handler contacts",
+  "Estimated time from landing to the public arrivals hall",
+  'data-testid="stay-trip-photo-grid"',
+  "Need a private airport pickup?",
+]) {
+  assert(arrivalMain.includes(required), "Missing updated airport arrival component: " + required);
+}
+const arrivalRelated = arrivalMain.match(/<ul\b[^>]*data-testid="stay-trip-photo-grid"[^>]*>([\s\S]*?)<\/ul>/i)?.[1];
+assert(arrivalRelated && [...arrivalRelated.matchAll(/<li\b/g)].length === 6,
+  "Airport arrival page must include six illustrated related-guide cards");
+const arrivalSources = arrivalMain.indexOf('id="sources"');
+const arrivalContact = arrivalMain.indexOf('id="contact"');
+assert(arrivalContact > 0 && arrivalSources > arrivalContact,
+  "Airport arrivals references must appear after Contact Me");
+for (const city of ["tel-aviv", "jerusalem", "haifa", "ein-bokek"]) {
+  assert(arrivalMain.includes("/travel-blog/ben-gurion-airport-to-" + city + "/"),
+    "Arrival guide missing destination link: " + city);
+}
+const arrivalHero = join(root, "images", "travel-blog", "featured-ben-gurion-arrival.webp");
+assert(existsSync(arrivalHero) && statSync(arrivalHero).size > 1000,
+  "Ben Gurion arrivals guide hero photograph missing");
+console.log("Ben Gurion arrival guide: ETA, baggage, blue card, transport, six related cards, imagery and sources verified.");
+
 // Airport taxi editorial: independently guard this page, not just the four route guides.
 const taxiPath = "/travel-blog/ben-gurion-airport-taxis/";
 const taxiFile = join(root, "travel-blog", "ben-gurion-airport-taxis", "index.html");
