@@ -4,7 +4,8 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { AirportRoutePage, airportRouteMeta } from "@/components/AirportRoutePage";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
-import { airportTransferRates, airportTransferRoutes, getSource, linksForPage } from "@/data/registry";
+import { airportTransferRates, airportTransferRoutes, getSource, linksForPage, mosheBarakAuthor } from "@/data/registry";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { readOutboundClicks, relFor } from "@/lib/outbound";
 import { routeTree } from "@/routeTree.gen";
 
@@ -26,10 +27,10 @@ describe("four dedicated airport transfer routes", () => {
     expect(visibleBreadcrumbs).not.toHaveTextContent("Ben Gurion Airport");
     expect(container.querySelector("main")!.textContent).not.toMatch(/taxi rank|\btrain\b|\bbuses\b|live availability|guaranteed pickup/i);
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(`From ₪${guide.rate.price.amount.toLocaleString("en-US")}`);
-    expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.");
+    expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("I confirm the full fare, including any night, weekend or holiday surcharge, before booking in ILS.");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("Per vehicle · up to 4 passengers");
-    expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("One-way weekday fare");
-    expect(screen.getByTestId("airport-route-fx-note").previousElementSibling).toHaveTextContent("Larger vehicles for groups and families can be provided, requiring a separate quote.");
+    expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("One-way weekday airport pickup");
+    expect(screen.getByTestId("airport-route-fx-note").previousElementSibling).toHaveTextContent("Returns, larger vehicles and extra stops receive a personal quote.");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(route.driveTime);
     expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveAttribute("href", "#request-quote");
     expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveClass("bg-primary");
@@ -37,9 +38,18 @@ describe("four dedicated airport transfer routes", () => {
     expect(within(hero).getByTestId("guide-hero-media").querySelector("img")).toHaveAttribute("src", expect.stringMatching(/transfer-/));
     const updateLine = within(hero).getByText(/^Updated/);
     expect(updateLine).toHaveTextContent("Updated November 2026");
-    expect(updateLine.querySelector("time")).toHaveAttribute("datetime", "2026-11-15");
+    expect(updateLine.querySelector("time")).toHaveAttribute("datetime", "2026-11-23");
     expect(updateLine.compareDocumentPosition(screen.getByTestId("route-starting-rate"))).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    const pickup = screen.getByRole("region", { name: "Your private airport pickup" });
+    const routeHero = within(hero).getByTestId("guide-hero-media");
+    expect(routeHero.querySelector('source[media="(max-width: 480px)"]')).toHaveAttribute("type", "image/webp");
+    const quoteIntro = container.querySelector('#request-quote [data-testid="quote-form-intro"]')! as HTMLElement;
+    const quoteReview = within(quoteIntro).getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/i });
+    expect(quoteReview).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
+    expect(quoteReview).toHaveClass("bg-[#34E0A1]");
+    expect(within(screen.getByTestId("author-card")).getByRole("link", { name: /Read traveler reviews on Tripadvisor/i })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
+    expect(within(quoteIntro).getByRole("img", { name: /Moshe Barak seated in his vehicle/ })).toBeInTheDocument();
+    expect(within(screen.getByTestId("author-card")).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
+    const pickup = screen.getByRole("region", { name: "Your private airport transfer" });
     expect(pickup).toHaveTextContent("Agreed price, no extra charges");
     expect(pickup).toHaveTextContent("Flight tracking");
     expect(pickup).toHaveTextContent("Free cancellation up to 24 hours");
@@ -49,13 +59,23 @@ describe("four dedicated airport transfer routes", () => {
     expect(pickup).toHaveTextContent(guide.journeyText);
     const dropOff = screen.getByRole("region", { name: guide.areasTitle });
     expect(within(dropOff).getAllByRole("heading", { level: 3 })).toHaveLength(4);
-    expect(dropOff).toHaveTextContent(guide.planningText);
+    expect(dropOff).toHaveTextContent(guide.example.situation);
+    expect(dropOff).toHaveTextContent(guide.example.response);
     const checklist = screen.getByRole("list", { name: "Airport transfer checklist" });
     expect(within(checklist).getAllByRole("listitem")).toHaveLength(5);
     expect(checklist).toHaveTextContent(guide.checklistTip);
-    const related = screen.getByRole("region", { name: "Related travel guides" });
-    expect(within(related).getAllByRole("link")).toHaveLength(4);
-    expect(within(related).getAllByRole("img")).toHaveLength(4);
+    const related = screen.getByRole("region", { name: "Plan your arrival and stay" });
+    expect(within(related).getAllByRole("link")).toHaveLength(6);
+    expect(within(related).getAllByRole("img")).toHaveLength(6);
+    expect(related.querySelector("ul")).toHaveClass("grid-cols-2", "lg:grid-cols-3");
+    expect(new Set(within(related).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
+    for (const link of within(related).getAllByRole("link")) {
+      const photo = within(link).getByRole("img") as HTMLImageElement;
+      const expectedPhoto = guideHeroPhotoForPath(link.getAttribute("href")!);
+      if (expectedPhoto) expect(photo).toHaveAttribute("src", expectedPhoto.src);
+      expect(photo).toHaveClass("group-hover:scale-[1.045]");
+    }
+    expect(screen.getByRole("link", { name: /Ben Gurion Airport to .* transport guide/ })).toHaveAttribute("href", expect.stringMatching(/\/travel-blog\/ben-gurion-airport-to-/));
     const faq = screen.getByRole("region", { name: "Frequently asked questions" });
     expect(faq.querySelectorAll("details")).toHaveLength(6);
     expect(faq).toHaveTextContent("Is the starting fare per vehicle or per passenger?");
@@ -71,7 +91,7 @@ describe("four dedicated airport transfer routes", () => {
     expect(screen.getByLabelText("Destination *")).toHaveAttribute("readonly");
     expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: guide.areasTitle })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: guide.planningTitle })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: guide.example.title })).toBeInTheDocument();
     for (const area of guide.areas) expect(screen.getByRole("heading", { name: area.title })).toBeInTheDocument();
     const otherRoutes = screen.getByRole("region", { name: "Other airport transfer destinations" });
     const destinationLinks = within(otherRoutes).getAllByRole("link");
@@ -84,7 +104,7 @@ describe("four dedicated airport transfer routes", () => {
     expect(within(otherRoutes).getByRole("link", { name: /All destinations/ })).toHaveAttribute("href", "/airport-transfers/");
     expect(getSource(route.sourceId).url).toBe(""); // First-party source notes are retained internally, not linked as external references.
     expect(guide.rate).toBe(airportTransferRates.find((rate) => rate.id === route.id));
-    const platformSection = screen.getByRole("region", { name: "Prefer to book online?" });
+    const platformSection = screen.getByRole("region", { name: "Compare other transfer providers" });
     const platformLinks = linksForPage(`airport-route-${route.id}`);
     const banners = within(platformSection).getAllByTestId("airport-platform-banner");
     expect(platformLinks.map((platform) => platform.providerName)).toEqual(["Kiwitaxi", "Welcome Pickups", "Intui.travel", "GetTransfer.com"]);
@@ -125,6 +145,37 @@ describe("four dedicated airport transfer routes", () => {
     fireEvent.click(banners[0]!);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: `airport-route-${route.id}`, productId: "airport-kiwitaxi", offerId: "airport-kiwitaxi" })]);
     expect(JSON.stringify(readOutboundClicks())).not.toMatch(/Jamie|jamie\+israel|Example Hotel/);
+  });
+
+  it.each(airportTransferRoutes)("sends an outbound $id airport request with the correct local pickup and departure flight", async (route) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [route.path] }), trailingSlash: "always" });
+    await router.load();
+    render(<RouterContextProvider router={router}><AirportRoutePage id={route.id} /></RouterContextProvider>);
+    fireEvent.click(screen.getByRole("radio", { name: "To Ben Gurion Airport" }));
+    expect(screen.getByLabelText("Pickup area *")).toHaveAttribute("readonly");
+    expect(screen.getByLabelText("Pickup area *")).toHaveValue(getAirportRouteGuide(route.id).rate.destination);
+    expect(screen.getByLabelText("Flight departure date *")).toBeInTheDocument();
+    expect(screen.getByLabelText("Flight departure time *")).toBeInTheDocument();
+    expect(screen.getByLabelText("Pickup hotel or address *")).toBeRequired();
+    fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie Smith" } });
+    fireEvent.change(screen.getByLabelText("Email address *"), { target: { value: "jamie@example.com" } });
+    fireEvent.change(screen.getByLabelText("Flight number"), { target: { value: "LY555" } });
+    fireEvent.change(screen.getByLabelText("Flight departure date *"), { target: { value: "2099-11-01" } });
+    fireEvent.change(screen.getByLabelText("Flight departure time *"), { target: { value: "21:30" } });
+    fireEvent.change(screen.getByLabelText("Pickup hotel or address *"), { target: { value: "Example Hotel" } });
+    fireEvent.click(screen.getByRole("checkbox"));
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
+    fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
+    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    const body = JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body));
+    expect(body.request.kind).toBe("contact");
+    expect(body.request.fields.subject).toBe("Private transfer to Ben Gurion Airport");
+    expect(body.request.fields.message).toContain("Pickup area: " + route.rate.destination);
+    expect(body.request.fields.message).toContain("Pickup hotel / address: Example Hotel");
+    expect(body.request.fields.message).toContain("Flight departure: 2099-11-01 at 21:30");
+    expect(body.request.fields.message).not.toContain("Pickup: Ben Gurion Airport");
+    fireEvent.click(screen.getByRole("radio", { name: "From Ben Gurion Airport" }));
+    expect(screen.getByLabelText("Flight arrival date *")).toBeInTheDocument();
   });
 
   it("keeps the scope to four distinct guides and separates the Ein Bokek rate from other Dead Sea destinations", () => {
