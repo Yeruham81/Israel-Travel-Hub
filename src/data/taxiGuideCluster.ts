@@ -55,9 +55,8 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "Licensed taxis in Israel carry a roof sign marked monit (מונית) and taxi identification details. Most are white; verify the licence information inside the vehicle and keep the taxi number if you need help after the journey.",
           "If you have booked through an app, match the license plate and driver information shown in your booking. At an airport or major transport hub, follow the official taxi signage instead of accepting an unsolicited approach inside a terminal.",
-          "For journeys involving the West Bank, confirm in advance that the driver and vehicle are allowed to complete your route. Entry and vehicle restrictions vary by area. For other transport modes, see my getting around Israel guide.",
+          "For journeys involving the West Bank, confirm in advance that the driver and vehicle are allowed to complete your route. Entry and vehicle restrictions vary by area.",
         ],
-        inlineLinks: [{ text: "getting around Israel guide", to: travelGuidePaths.israel }],
         sourceIds: ["taxi-passenger-rights"],
       },
       {
@@ -87,10 +86,8 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "apps", title: "Taxi Apps in Israel: Gett, Yango and Uber",
         paragraphs: [
           "Gett and Yango let you book licensed taxis in supported areas, depending on driver availability. You can use the official Gett and Yango Israel rider websites linked below to learn about the services or get their apps. Set up your payment method, check the pickup location and have a backup option if no driver accepts your request.",
-          "Uber passenger rides are not currently available in Israel. Gett and Yango are local taxi-booking alternatives; the separate Uber guide compares their practical use, while this article covers how licensed taxis operate.",
-          "At Ben Gurion Airport, Gett uses a ride code and an official taxi queue. See my airport taxi guide for pickup instructions.",
+          "Uber passenger rides are not currently available in Israel. Gett and Yango are local taxi-booking apps; compare their coverage, pickup details and payment options for your city.",
         ],
-        inlineLinks: [{ text: "separate Uber guide", to: travelGuidePaths.uber }, { text: "airport taxi guide", to: travelGuidePaths.airportTaxis }],
         externalLinks: [{ label: "Gett Israel — official website and app", href: "https://www.gett.com/il/" }, { label: "Yango Israel — official rider information", href: "https://appli.taxi/rider/" }],
         highlightedLinks: [
           { label: "Gett Israel — official app and service information", href: "https://www.gett.com/il/", context: "Check how to set up the app and request a licensed taxi before your trip." },
@@ -121,9 +118,9 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "sherut", title: "Are Shared Sherut Taxis Available from the Airport?",
         paragraphs: [
           "A sherut is a shared taxi or minibus operating on a set route. Local sherut services still run on some routes in Israel, while the former regular airport shared-taxi services to Jerusalem and Haifa have ended.",
-          "For an airport-to-city journey, use an available train or bus, an authorized taxi or a pre-booked private transfer. The free airport terminal shuttle connects airport facilities. My sherut guide covers current shared-taxi options around Israel.",
+          "For an airport-to-city journey, use an available train or bus, an authorized taxi or a pre-booked private transfer. The free airport terminal shuttle connects airport facilities. My airport sherut guide explains which shared-taxi routes have ended and what alternatives remain.",
         ],
-        inlineLinks: [{ text: "sherut guide", to: travelGuidePaths.sherut }],
+        inlineLinks: [{ text: "airport sherut guide", to: travelGuidePaths.sherut }],
         sourceIds: ["guide-iaa"],
       },
       {
@@ -299,12 +296,13 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "estimates", title: "Metered taxis, app estimates and pre-booked transfers",
         paragraphs: [
           "Taxi apps may display an estimated amount before the ride, while a metered journey is settled according to the regulated taxi meter and any permitted additions. Check the pricing terms when booking and keep the final receipt. My taxis in Israel guide explains booking methods; the Uber alternatives guide compares available apps.",
-          "A separately arranged private transfer can offer a confirmed written price, vehicle type and meeting instructions. Compare the quoted inclusions, waiting time, tolls and cancellation terms. My Ben Gurion Airport taxis guide also includes illustrative fare ranges for four popular destinations.",
+          "A separately arranged private transfer can offer a confirmed written price, vehicle type and meeting instructions. Compare the quoted inclusions, waiting time, tolls and cancellation terms. My Ben Gurion Airport taxis guide includes illustrative fares to four destinations. For a wider comparison of taxis with trains and buses, see my getting around Israel guide.",
         ],
         inlineLinks: [
           { text: "taxis in Israel guide", to: travelGuidePaths.taxis },
           { text: "Uber alternatives guide", to: travelGuidePaths.uber },
           { text: "Ben Gurion Airport taxis guide", to: travelGuidePaths.airportTaxis },
+          { text: "getting around Israel guide", to: travelGuidePaths.israel },
         ],
         sourceIds: ["guide-gett", "taxi-fares-2026"],
       },
@@ -425,8 +423,9 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "pay", title: "Paying for your airport taxi",
         paragraphs: [
           "Gett allows payment directly to the driver in cash or by card, and supports in-app payment for eligible orders. Choose the method when ordering and confirm it before you set off. Taxi fares are charged in Israeli shekels.",
-          "Ask for a receipt and retain your ride code in case you need help with the journey or something left in the vehicle. Tipping is optional.",
+          "Ask for a receipt and retain your ride code in case you need help with the journey or something left in the vehicle. Tipping is optional. For booking and paying for taxis elsewhere in Israel, see my taxis in Israel guide.",
         ],
+        inlineLinks: [{ text: "taxis in Israel guide", to: travelGuidePaths.taxis }],
         sourceIds: ["guide-gett"],
       },
       {
@@ -445,11 +444,12 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "weekend", title: "Airport taxis on Shabbat and holidays",
         paragraphs: [
           "Authorized taxis operate at Ben Gurion Airport 24 hours a day, including Shabbat. Waiting times can be longer when fewer drivers are available, particularly at busy arrival periods. Night, Shabbat and holiday tariff rules can also affect the meter.",
-          "When train and regular bus services are limited, taxis and pre-arranged transfers may be the most practical door-to-door options. My airport Shabbat transport guide explains the alternatives; Israel's calendar of events helps you plan around major holidays, including Yom Kippur.",
+          "When train and regular bus services are limited, taxis and pre-arranged transfers may be the most practical door-to-door options. My airport Shabbat transport guide explains the alternatives, and Israel's calendar of events helps you plan around major holidays, including Yom Kippur. For older shared-taxi routes and current alternatives, see my airport sherut guide.",
         ],
         inlineLinks: [
           { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat },
           { text: "Israel's calendar of events", to: "/travel-blog/calendar-of-events/" },
+          { text: "airport sherut guide", to: travelGuidePaths.sherut },
         ],
         sourceIds: ["guide-iaa", "taxi-fares-2026"],
       },
@@ -457,7 +457,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "versus-transfer", title: "Official airport taxi or pre-booked private transfer?",
         paragraphs: [
           "For an ordinary arrival with manageable luggage, an authorized metered taxi is a practical choice. I recommend considering a pre-booked private transfer for a larger group, a particular vehicle, several suitcases or a long journey where you prefer the pickup and price arrangements agreed ahead of time.",
-          "Private transfers are booked with their own operator and have a confirmed meeting place, vehicle class and waiting terms. Use the meeting instructions on that booking rather than the Gett taxi queue. You can compare my private airport transfer service and request a quote.",
+          "Private transfers are booked with their own operator and have a confirmed meeting place, vehicle class and waiting terms. Use the meeting instructions on that booking rather than the Gett taxi queue. You can compare my private airport transfer service and request a quote. For taxi apps elsewhere in Israel, my Uber in Israel guide explains Gett, Yango and current ride-hailing options.",
         ],
         tables: [{
           caption: "Compare your airport pickup options",
@@ -470,14 +470,15 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
             ["Changes", "According to Gett or taxi service rules", "According to the operator's waiting and cancellation policy"],
           ],
         }],
-        inlineLinks: [{ text: "private airport transfer service", to: "/airport-transfers/" }],
+        inlineLinks: [{ text: "private airport transfer service", to: "/airport-transfers/" }, { text: "Uber in Israel guide", to: travelGuidePaths.uber }],
         sourceIds: ["guide-gett"],
       },
       {
         id: "destinations", title: "Taxis from Ben Gurion Airport to popular destinations",
         paragraphs: [
-          "A taxi can take you directly to your hotel or another vehicle-accessible address. The four guides below compare the full journey by taxi, train, bus and private transfer, including the final connection to your accommodation.",
+          "A taxi can take you directly to your hotel or another vehicle-accessible address. The four guides below compare the full journey by taxi, train, bus and private transfer, including the final connection to your accommodation. For travel across the country, my getting around Israel guide compares transport choices more broadly.",
         ],
+        inlineLinks: [{ text: "getting around Israel guide", to: travelGuidePaths.israel }],
       },
       {
         id: "support", title: "Receipts, lost property and Gett support",
