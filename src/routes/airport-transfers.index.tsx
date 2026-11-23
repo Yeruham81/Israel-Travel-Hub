@@ -14,7 +14,7 @@ import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { AirportDestinationCard as DestinationCard } from "@/components/AirportDestinationCard";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
-import { AIRPORT_TRANSFER_UPDATED_DATE, airportDestinationCards, airportHubPhotoSrc, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
+import { AIRPORT_TRANSFER_HUB_UPDATED_DATE, airportDestinationCards, airportHubPhotoSrc, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
 import { travelGuides } from "@/data/travelGuides";
 import { travelGuidePaths } from "@/data/registry";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
@@ -97,10 +97,10 @@ function Airport() {
   ].filter(hasPublicPhotoCredit);
   return <main className="pb-12">
     <HubHeader
-      checkedAt={AIRPORT_TRANSFER_UPDATED_DATE}
+      checkedAt={AIRPORT_TRANSFER_HUB_UPDATED_DATE}
       crumbs={[{ name: "Home", to: "/" }, { name: "Airport transfers", to: "/airport-transfers/" }]}
       title="Private airport transfers from Ben Gurion Airport"
-      intro="Arrange a private, door-to-door transfer between Ben Gurion Airport (TLV) and Jerusalem, Tel Aviv, Haifa, the Dead Sea or elsewhere in Israel. See my starting fares for airport pickups and request a personal quote."
+      intro="Arrange a private, door-to-door transfer between Ben Gurion Airport (TLV) and Jerusalem, Tel Aviv, Haifa, the Dead Sea or elsewhere in Israel. Check pickup fares and request a personal quote."
       image={<GuideHeroMedia src={airportTransferPhotos["other"]!.src} mobileSrc={airportHeroMobile} alt={airportTransferPhotos["other"]!.alt} compact />}
       actions={<a href="#request-quote" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>}
     />
