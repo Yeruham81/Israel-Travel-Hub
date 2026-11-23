@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Lightbulb } from "lucide-react";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
 import { GuideParagraph } from "@/components/TravelGuide";
 import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
@@ -78,16 +79,51 @@ function PrivateRideCta({ id }: { id: AirportJourneyId }) {
 function UsefulJourneyLink({ label, href, context }: { label: string; href: string; context: string }) {
   const external = /^https?:\/\//.test(href);
   return (
-    <aside aria-label={label} data-testid="useful-journey-link" className="mt-5 flex items-start gap-3 rounded-xl border border-amber-300/60 bg-amber-50/60 p-4 dark:border-amber-700/40 dark:bg-amber-950/20">
-      <Lightbulb aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 fill-amber-200/70 text-amber-600 dark:fill-amber-500/25 dark:text-amber-400" />
-      <div className="min-w-0">
-        <p className="text-sm leading-relaxed">
-          <a href={href} className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80" {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{label}</a>
-        </p>
-        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{context}</p>
-      </div>
-    </aside>
+    <p data-testid="useful-journey-link" className="mt-4 text-sm leading-relaxed">
+      <a href={href} className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80" {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{label}</a>
+      {context && <span className="text-muted-foreground"> — {context}</span>}
+    </p>
   );
+}
+
+function ArrivalAreaTable({ guide }: { guide: AirportJourneyGuide }) {
+  return (
+    <div role="region" aria-label={"Arrival connections in " + guide.city} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border">
+      <table className="w-full min-w-[610px] text-left text-sm" data-testid="airport-arrival-areas">
+        <caption className="sr-only">Suggested arrival stations or stops for destinations in {guide.city}</caption>
+        <thead className="bg-secondary">
+          <tr><th scope="col" className="p-3">Area</th><th scope="col" className="p-3">Arrival station or stop</th><th scope="col" className="p-3">Last connection</th></tr>
+        </thead>
+        <tbody className="divide-y">{guide.arrivalAreas.map(area => <tr key={area.area}>
+          <th scope="row" className="p-3 font-semibold">{area.area}</th>
+          <td className="p-3">{area.station}</td>
+          <td className="p-3">{area.onward}</td>
+        </tr>)}</tbody>
+      </table>
+    </div>
+  );
+}
+
+function JourneyRelatedCards({ guide }: { guide: AirportJourneyGuide }) {
+  return <section aria-label="Related practical guides" data-testid="airport-related-guides" className="mt-12">
+    <h2 className="text-2xl font-semibold">Continue exploring {guide.city}</h2>
+    <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
+      {guide.featuredRelated.map(item => {
+        const photo = guideHeroPhotoForPath(String(item.to));
+        return <li key={String(item.to)} className="min-w-0">
+          <Link to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/60 hover:bg-secondary/20 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            {photo && <span className="aspect-[3/2] overflow-hidden bg-secondary/30">
+              <img src={photo.src} alt={photo.alt} width={480} height={320} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]" />
+            </span>}
+            <span className="flex flex-1 flex-col p-3 sm:p-4">
+              <span className="text-sm font-semibold leading-snug text-foreground group-hover:text-primary sm:text-base">{item.label}</span>
+              <span className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.note}</span>
+            </span>
+          </Link>
+        </li>;
+      })}
+    </ul>
+  </section>;
 }
 
 /** Keep the complete Jerusalem train journey, voucher, station exit and hotel leg together. */
