@@ -148,6 +148,41 @@ describe("intent-specific taxi guide cluster", () => {
     expect(guide.sections.find((section) => section.id === "fares")!.paragraphs.join(" ")).toContain("₪12.46");
   });
 
+  it("links to adjacent transport guides in the most relevant paragraphs", () => {
+    const { taxis, taxiFares, airportTaxis } = taxiGuideCluster;
+    const hasLink = (guide: typeof taxis, sectionId: string, target: string) =>
+      guide.sections.find(section => section.id === sectionId)?.inlineLinks?.some(link => link.to === target) ?? false;
+
+    expect(hasLink(taxis, "booking", travelGuidePaths.uber)).toBe(true);
+    expect(hasLink(taxis, "sherut", travelGuidePaths.sherut)).toBe(true);
+    expect(hasLink(taxis, "holidays", travelGuidePaths.shabbat)).toBe(true);
+    expect(hasLink(taxis, "intercity", travelGuidePaths.israel)).toBe(true);
+
+    expect(hasLink(taxiFares, "time-distance", travelGuidePaths.sherut)).toBe(true);
+    expect(hasLink(taxiFares, "tariff-hours", travelGuidePaths.shabbat)).toBe(true);
+    expect(hasLink(taxiFares, "estimates", travelGuidePaths.uber)).toBe(true);
+    expect(hasLink(taxiFares, "estimates", travelGuidePaths.israel)).toBe(true);
+
+    expect(hasLink(airportTaxis, "pay", travelGuidePaths.taxis)).toBe(true);
+    expect(hasLink(airportTaxis, "weekend", travelGuidePaths.shabbat)).toBe(true);
+    expect(hasLink(airportTaxis, "weekend", travelGuidePaths.sherut)).toBe(true);
+    expect(hasLink(airportTaxis, "versus-transfer", travelGuidePaths.uber)).toBe(true);
+    expect(hasLink(airportTaxis, "destinations", travelGuidePaths.israel)).toBe(true);
+
+    for (const guide of [taxis, taxiFares, airportTaxis]) {
+      for (const section of guide.sections) {
+        for (const link of section.inlineLinks ?? []) {
+          expect(section.paragraphs.join(" ").split(link.text),
+            `Inline link phrase ${link.text} in ${guide.id}/${section.id} must occur exactly once`).toHaveLength(2);
+        }
+      }
+    }
+    // The page hero images are approved and must not be replaced during link edits.
+    expect(taxis.photo.src).toBe("/images/travel-blog/taxi-in-tel-aviv.webp");
+    expect(taxiFares.photo.alt).toContain("taxi roof sign");
+    expect(airportTaxis.photo.src).toBe("/images/travel-blog/airport-taxi-sign.webp");
+  });
+
   it("provides context-specific links without a conflicting guide purpose", () => {
     expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "fares")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxiFares);
     expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "airport")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
