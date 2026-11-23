@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" role="img">
+<title>Stations VI to IX, Via Dolorosa</title><desc>Original illustration of the market route and the side-street detour to stations VIII and IX.</desc>
+<defs><linearGradient id="street" x2="0" y2="1"><stop stop-color="#afc5ca"/><stop offset="1" stop-color="#edd5ae"/></linearGradient><pattern id="brick" width="132" height="72" patternUnits="userSpaceOnUse"><path d="M0 0H132M0 36H132M66 0V36M0 36V72M132 36V72" fill="none" stroke="#ecd4ae" stroke-width="3"/></pattern></defs>
+<rect width="960" height="720" fill="url(#street)"/>
+<path d="M0 110H300L365 720H0Z" fill="#bc966b"/><path d="M960 110H645L583 720H960Z" fill="#aa815c"/><path d="M0 110H300L365 720H0Z M960 110H645L583 720H960Z" fill="url(#brick)" opacity=".75"/>
+<path d="M367 190 590 190 710 720H250Z" fill="#ead7b7"/><path d="M475 190 477 720" stroke="#b39570" stroke-width="7"/><path d="M331 340h300m-345 125h388m-431 135h472" stroke="#c6a780" stroke-width="7"/>
+<path d="M680 330 960 320v290l-330-85Z" fill="#d8bd98" opacity=".9"/><path d="M715 350l200-10M700 410l210-15M680 480l225-20" stroke="#806c54" stroke-width="9" opacity=".4"/>
+<g fill="#faf1db" stroke="#5d4b3a" stroke-width="8" font-family="Georgia,serif" font-weight="bold" text-anchor="middle">
+<rect x="56" y="220" width="165" height="144" rx="12"/><text x="139" y="313" font-size="70" fill="#27495a" stroke="none">VI</text>
+<rect x="60" y="442" width="170" height="144" rx="12"/><text x="145" y="534" font-size="70" fill="#27495a" stroke="none">VII</text>
+<rect x="729" y="225" width="165" height="144" rx="12"/><text x="810" y="317" font-size="70" fill="#27495a" stroke="none">VIII</text>
+<rect x="717" y="443" width="180" height="144" rx="12"/><text x="807" y="535" font-size="70" fill="#27495a" stroke="none">IX</text>
+</g>
+<path d="m365 568 120-70 90-145 92-20" fill="none" stroke="#28627b" stroke-width="16" stroke-linecap="round" stroke-dasharray="25 19"/><path d="m630 305 40 25-41 28" fill="none" stroke="#28627b" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+<rect width="960" height="100" fill="#243f50" opacity=".94"/><text x="46" y="61" font-family="Arial,sans-serif" font-size="36" font-weight="700" fill="#fff">STATIONS VI–IX</text><text x="915" y="62" text-anchor="end" font-family="Arial,sans-serif" font-size="24" fill="#e2ebed">Market &amp; side lane</text>
+<text x="480" y="677" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#453727">Illustrative wayfinding artwork</text></svg>
