@@ -439,7 +439,7 @@ describe("migrated practical guides", () => {
     const airportJump = nav.querySelector('a[href="#airport"].chip');
     expect(airportJump).toHaveTextContent("Airport taxis");
     expect(airportJump).toHaveAttribute("aria-label", "Taking a Taxi from Ben Gurion Airport");
-    expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Moshe");
+    expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Me");
     const jumpItems = Array.from(nav.querySelectorAll("ul.grid > li"));
     expect(jumpItems).toHaveLength(15);
     expect(jumpItems.slice(0, 10).every((item) => !item.classList.contains("hidden"))).toBe(true);
