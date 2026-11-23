@@ -1,20 +1,24 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, MapPinned, Ticket } from "lucide-react";
+import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, Ticket } from "lucide-react";
 import {
   AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { akkoSite } from "@/data/akkoSite";
-import akkoTourPhoto from "@/assets/shore-excursions/akko-port.jpg";
-import haifaCoastPhoto from "@/assets/home/haifa-port-card.webp";
+import { AkkoAttractionsMap } from "@/components/AkkoAttractionsMap";
+import { ExternalTourCard } from "@/components/TourCatalog";
+import { tourProducts } from "@/data/registry";
 
 const official = akkoSite.official;
 const info = akkoSite.visitor;
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
-const mapEmbed = "https://maps.google.com/maps?q=Old%20City%20Acre%20Akko%20Israel&hl=en&z=15&t=m&output=embed";
-const mapLarger = "https://www.google.com/maps/search/?api=1&query=Old%20City%20Akko%20Israel";
 const drivingDirections = "https://www.google.com/maps/dir/?api=1&destination=Old%20Akko%20Visitors%20Center%2C%20Weizmann%201%2C%20Akko%2C%20Israel&travelmode=driving";
 const walkingMap = "https://www.akko.org.il/wp-content/uploads/2021/12/old-akko-eng.-map.pdf";
+const mapRoute = (origin: string, waypoints: string[], destination: string) => "https://www.google.com/maps/dir/?api=1&travelmode=walking&origin=" + encodeURIComponent(origin) + "&destination=" + encodeURIComponent(destination) + "&waypoints=" + encodeURIComponent(waypoints.join("|"));
+const shortWalk = mapRoute("Old Akko Visitors Center Weizmann 1 Acre Israel",["Knights Halls Acre Israel","Old Akko Market Israel","Templars Tunnel Asher 37 Akko Israel"],"Akko Fishing Port Israel");
+const fullWalk = mapRoute("Old Akko Visitors Center Weizmann 1 Acre Israel",["Knights Halls Acre Israel","Al Basha Turkish Bath Acre Israel","Al Jazzar Mosque Acre Israel","Old Akko Market Israel","Ramchal Synagogue Acre Israel"],"Akko Fishing Port Israel");
+const gentleWalk = mapRoute("Old Akko Visitors Center Acre Israel",["Old Akko Market Israel"],"Akko Fishing Port Israel");
+const featuredAkkoTours = ["north-coast-small-group", "caesarea-haifa-akko", "coast-coach-tel-aviv"].map(id => tourProducts.find(tour => tour.id === id)!);
 const images = {
   knights: "/images/attractions/akko-knights-halls.webp",
   tunnel: "/images/attractions/akko-templar-tunnel.webp",
@@ -30,16 +34,32 @@ export const akkoDestinationContent: AttractionDestinationContent = {
   path: "/attractions/akko-acre/",
   placeName: "Old Akko",
   title: akkoSite.title,
-  heroTitle: "Old Akko (Acre): Attractions & Tickets",
+  heroTitle: "Old Akko (Acre): Attractions & Walking Guide",
   highlightsTitle: "What to see in Old Akko",
   region: akkoSite.region,
   updatedAt: akkoSite.updatedAt,
   hero: akkoSite.hero,
   intro: akkoSite.intro,
-  visitorTitle: "Combined tickets, opening hours and accessibility",
+  itineraryBeforeHighlights: true,
+  itineraryTitle: "Walking routes & map of Old Akko",
+  visitorTitle: "Tickets, opening hours and accessibility",
   visitorNavLabel: "Tickets & hours",
   historyTitle: "Crusader and Ottoman heritage",
   relatedTitle: "Explore northern Israel",
+  navigationSections: [
+    ["visit-plan", "Walking routes & map"],
+    ["highlights", "What to see"],
+    ["visitor-info", "Tickets & hours"],
+    ["getting-there", "Getting there"],
+    ["food", "Food & markets"],
+    ["practical", "Practical tips"],
+    ["history", "History"],
+    ["tours", "Guided tours"],
+    ["faq", "Questions"],
+    ["nearby", "Explore the north"],
+    ["trip-planning", "Plan your trip"],
+    ["contact", "Contact me"],
+  ],
   contactIntroduction: "Tell me your travel date, where you're staying and which historic sites interest you most. I'll be happy to help arrange a private visit to Akko and nearby attractions.",
   facts: [
     { icon: "location", label: "Location", value: "Old Akko (Acre)", note: "Walled Mediterranean old town, north of Haifa" },
@@ -52,7 +72,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
   glanceNote: <>I recommend starting at the <a href={official.visitors} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko Visitors Center</a> (Weizmann Street 1), where you can pick up a walking map. The ticketed heritage sites are close together, and you can explore the market and harbour freely between visits.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
-      <AttractionHighlight
+      <AttractionHighlight mobileImageFirst
         title="Knights’ Halls — the Hospitaller Fortress"
         image={{ src: images.knights, alt: "Stone arches and vaulted Crusader halls in the Hospitaller Fortress of Old Akko" }}
       >
@@ -60,7 +80,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         <p>The self-guided visit includes an audio guide in several languages. Allow around an hour if you enjoy history and want to explore the rooms without rushing. <a href={official.knights} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official Knights’ Halls information</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket</p>
       </AttractionHighlight>
-      <AttractionHighlight
+      <AttractionHighlight mobileImageFirst
         title="Templars’ Tunnel"
         image={{ src: images.tunnel, alt: "Illuminated medieval stone passage in the Templars’ Tunnel beneath Old Akko" }}
       >
@@ -68,7 +88,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         <p><strong>Accessibility:</strong> The tunnel’s lift is currently out of service, so wheelchair access is unavailable. <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the latest notice</a> before visiting.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket</p>
       </AttractionHighlight>
-      <AttractionHighlight
+      <AttractionHighlight mobileImageFirst
         title="Al-Basha Turkish Bath"
         image={{ src: images.bath, alt: "Historic domed bathing chambers inside Al-Basha Turkish Bath in Old Akko" }}
       >
@@ -76,7 +96,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         <p>It is a good addition after the Crusader sites, especially if you prefer shorter indoor visits. <a href={official.bath} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the official Turkish Bath guide</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket</p>
       </AttractionHighlight>
-      <AttractionHighlight
+      <AttractionHighlight mobileImageFirst
         title="Al-Jazzar Mosque"
         image={{ src: images.mosque, alt: "Green dome, minaret and courtyard of Al-Jazzar Mosque in Old Akko" }}
       >
@@ -84,7 +104,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         <p>Visitors should dress respectfully and check access around prayer times. Admission is <strong>separate</strong> from the heritage-site ticket. <a href={official.mosque} target="_blank" rel="noopener noreferrer" className={inlineLink}>Learn about Akko’s historic mosques</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Separate admission</p>
       </AttractionHighlight>
-      <AttractionHighlight
+      <AttractionHighlight mobileImageFirst
         title="Old market, Turkish Bazaar and lanes"
         image={{ src: images.market, alt: "Traditional street market and shops in the narrow lanes of Old Akko" }}
       >
@@ -92,7 +112,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         <p>I would leave room for a food stop instead of trying to visit every museum in one afternoon. <a href={official.market} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko market information</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free entry</p>
       </AttractionHighlight>
-      <AttractionHighlight
+      <AttractionHighlight mobileImageFirst
         title="The fishing harbour, sea walls and waterfront"
         image={{ src: images.harbour, alt: "Fishing boats and historic stone waterfront buildings in the harbour of Old Akko" }}
       >
@@ -100,7 +120,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         <p>Look for the historic Khan al-Umdan nearby, a landmark caravanserai associated with the port. Some heritage buildings are best viewed from outside, so check access before planning an interior visit. <a href={official.harbour} target="_blank" rel="noopener noreferrer" className={inlineLink}>Port and marina history</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free entry</p>
       </AttractionHighlight>
-      <AttractionHighlight
+      <AttractionHighlight mobileImageFirst
         title="Treasures in the Wall Museum"
         image={{ src: images.museum, alt: "Collection of antique metal padlocks on display at the Treasures in the Wall Museum in Old Akko" }}
       >
@@ -108,7 +128,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         <p><a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official museum details</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket</p>
       </AttractionHighlight>
-      <AttractionHighlight
+      <AttractionHighlight mobileImageFirst
         title="Ramchal Synagogue and Jewish Heritage Center"
         image={{ src: images.ramchal, alt: "Historic Ramchal Synagogue in the heart of Old Akko" }}
       >
@@ -117,7 +137,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket; check opening days</p>
       </AttractionHighlight>
       <AttractionPracticalTip>
-        If you have extra time, consider the small Okashi Art Museum, which is also included in the heritage ticket. For a first visit, I would prioritise the Knights’ Halls, one or two other ticketed sites, the market and the harbour.
+        For a first visit, I would prioritise the Knights’ Halls, one or two other heritage sites from this guide, then spend some time in the market and along the harbour.
       </AttractionPracticalTip>
     </div>
   ),
@@ -190,16 +210,40 @@ export const akkoDestinationContent: AttractionDestinationContent = {
   ),
   itineraryContent: (
     <div className="mt-4 space-y-4">
-      <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="akko-walking-routes">
-        <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Choose your walking route</h3></div>
-        <div className="mt-3 space-y-3 text-sm leading-relaxed sm:text-base">
-          <p><strong>A shorter visit (around 3 hours):</strong> Start with the Knights’ Halls, explore the market and its side streets, walk through the Templars’ Tunnel and finish beside the fishing harbour.</p>
-          <p><strong>A fuller visit (5–6 hours):</strong> Add the Al-Basha Turkish Bath and Al-Jazzar Mosque, then choose either Treasures in the Wall or the Ramchal Heritage Center according to your interests and opening times.</p>
-          <p><strong>If you are visiting on Shabbat:</strong> Plan around the closure of the Ramchal site and any changes to public transport services.</p>
-        </div>
-        <p className="mt-3 text-sm leading-relaxed sm:text-base">These are flexible walking suggestions. I would choose three or four main stops, leave some time for a meal and use the <a href={official.oldCityRoute} target="_blank" rel="noopener noreferrer" className={inlineLink}>official classic route</a> to find your way between the historic entrances.</p>
+      <p>Old Akko is compact enough to explore on foot. Choose a route that matches your time and the heritage sites you want to enter.</p>
+      <div className="grid gap-3 md:grid-cols-2" data-testid="akko-walking-routes">
+        <article className="rounded-xl border bg-card p-4 sm:p-5">
+          <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">Historic highlights — around 3 hours</h3></div>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
+            <li>Start at <strong>Old Akko Visitors Center</strong> on Weizmann Street 1 and arrange your combined ticket.</li>
+            <li>Explore the <strong>Knights’ Halls</strong> and Crusader vaults.</li>
+            <li>Continue through the <strong>Old Market</strong> and surrounding lanes.</li>
+            <li>Visit the <strong>Templars’ Tunnel</strong> using the entrance indicated on your ticket.</li>
+            <li>Finish by the <strong>fishing harbour</strong> and sea walls.</li>
+          </ol>
+          <a href={shortWalk} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open short route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
+        </article>
+        <article className="rounded-xl border bg-card p-4 sm:p-5">
+          <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">A fuller historic visit — 5–6 hours</h3></div>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
+            <li>Begin at the <strong>Visitors Center and Knights’ Halls</strong>.</li>
+            <li>Explore the <strong>Al-Basha Turkish Bath</strong> and Ottoman heritage.</li>
+            <li>Continue to <strong>Al-Jazzar Mosque</strong> when visitor access permits.</li>
+            <li>Enjoy the <strong>Old Market</strong> and a food break.</li>
+            <li>Choose <strong>Treasures in the Wall</strong> or the <strong>Ramchal Synagogue</strong> according to their opening hours.</li>
+            <li>Walk towards the <strong>harbour</strong>; add the Templars’ Tunnel if time permits.</li>
+          </ol>
+          <a href={fullWalk} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open fuller route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
+        </article>
       </div>
-      <AttractionPracticalTip>For a full day in the north, Akko can be paired with <Link to="/attractions/rosh-hanikra/" className={inlineLink}>Rosh Hanikra</Link> or a separate stop in <Link to="/attractions/haifa/" className={inlineLink}>Haifa</Link>. Allow enough time for travelling between them rather than squeezing too many attractions into a short outing.</AttractionPracticalTip>
+      <AkkoAttractionsMap />
+      <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5" data-testid="akko-gentler-walk">
+        <h3 className="font-serif text-xl font-semibold">A gentler option — market and waterfront</h3>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">Begin near the Visitors Center, browse the Old Market and continue towards the harbour. This outdoor option offers flexibility for shorter breaks and avoids several underground attractions. Historic paving and some slopes remain; contact the <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>site accessibility team</a> to arrange a suitable route.</p>
+        <a href={gentleWalk} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open market and harbour route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
+      </article>
+      <p>Use the <a href={official.oldCityRoute} target="_blank" rel="noopener noreferrer" className={inlineLink}>official classic route</a> or the <a href={walkingMap} target="_blank" rel="noopener noreferrer" className={inlineLink}>official Old Akko walking map (PDF)</a> for local entrances and street connections.</p>
+      <AttractionPracticalTip>For a full day in the north, Akko combines well with <Link to="/attractions/rosh-hanikra/" className={inlineLink}>Rosh Hanikra</Link> or a separate stop in <Link to="/attractions/haifa/" className={inlineLink}>Haifa</Link>. Allow extra travel time between destinations.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (
