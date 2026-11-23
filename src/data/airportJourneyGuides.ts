@@ -27,9 +27,11 @@ export type AirportJourneyGuide = {
   privatePath: LinkProps["to"]; privateLabel: string; photo: StayGuidePhoto & { credit?: string; licenseUrl?: string };
   options: JourneyOption[];
   stations: { name: string; time: string; usefulFor: string }[];
+  arrivalAreas: { area: string; station: string; onward: string }[];
   connections: string[]; weekend: string[]; advice: string[]; faqs: { q: string; a: string }[];
   related: { label: string; to: LinkProps["to"] }[];
   planNext?: { label: string; to: LinkProps["to"]; note?: string }[];
+  featuredRelated: { label: string; to: LinkProps["to"]; note: string }[];
   photos?: { station: Pick<StayGuidePhoto, "src" | "alt">; onward: Pick<StayGuidePhoto, "src" | "alt"> };
   stationLinks?: { text: string; to: LinkProps["to"] }[];
   weekendLinks?: { text: string; to: LinkProps["to"] }[];
@@ -69,7 +71,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ],
       takeaway: "The train works well for many central Jerusalem hotels. A taxi or private transfer may be easier with heavy luggage or accommodation inside the Old City.",
     },
-    answer: "When running, the direct train is usually the quickest affordable way to reach central Jerusalem, taking about 26–30 minutes. For a ride straight to your address, take an official metered taxi or arrange a private transfer. Bus 485 runs infrequently, so check its timetable before relying on it.",
+    answer: "The direct train reaches Jerusalem–Yitzhak Navon in about 26–30 minutes when operating. From there, take the light rail or a taxi to your hotel. For a direct ride from the airport, use an official metered taxi or arrange a private transfer.",
     trainIntro: "Jerusalem–Yitzhak Navon is a deep underground station beside the central bus station and Jaffa Road light rail. Once you reach street level, continue to your hotel by light rail, taxi or on foot. The train does not stop at Mamilla or the Old City. For the steps before boarding at the airport, see my Ben Gurion Airport arrival guide.",
     photo: { src: "/images/travel-blog/featured-airport-jerusalem.webp", alt: "Tower of David in Jerusalem near Jaffa Gate", label: "Jerusalem Tower of David", sourceUrl: "" },
     updatedAt: "2026-11-23",
@@ -110,6 +112,12 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ], inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }], checklist: ["Check permitted parking at your accommodation.", "Compare city collection after a few days instead of airport collection.", "Verify rental operating hours for your arrival day."] },
     ],
     stations: [{ name: "Jerusalem–Yitzhak Navon", time: "Around 26–30 min from TLV", usefulFor: "Central bus station and Jaffa Road light rail; connect to your actual hotel." }],
+    arrivalAreas: [
+      { area: "Downtown / Jaffa Road", station: "Jerusalem–Yitzhak Navon", onward: "Use the light rail along Jaffa Road or take a short taxi ride to your address." },
+      { area: "Mamilla", station: "Jerusalem–Yitzhak Navon", onward: "Take the light rail toward the city centre and walk the final stretch, or use a taxi with luggage." },
+      { area: "Old City / Jaffa Gate", station: "Jerusalem–Yitzhak Navon", onward: "Continue toward City Hall and Jaffa Gate. Confirm the closest accessible gate with your accommodation." },
+      { area: "Mount Scopus / East Jerusalem", station: "Jerusalem–Yitzhak Navon", onward: "Choose a local bus or taxi for the final journey to your exact address." },
+    ],
     connections: [
       "For Downtown/Mamilla, choose the best light-rail stop or a taxi from Navon, and check the walking distance with luggage. Not every property is directly on the light rail.",
       "For the Old City, know which gate is closest to your accommodation. Even a short walk can be difficult with luggage because of steps and steep streets.",
@@ -137,6 +145,14 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Does bus 485 still run directly to Jerusalem?", a: "The airport still lists it from Terminal 3, Level 2, Exit 21, but scheduled departures are very limited. Confirm an actual departure and final stop on your date before relying on it." },
       { q: "Do trains run to Jerusalem on Shabbat or late at night?", a: "Trains usually stop during the main Shabbat break, while some late-night or Saturday-evening departures may be scheduled. Always check your exact date, including timetable revisions and voucher rules." },
       { q: "Should I book a taxi or a private transfer for an Old City hotel?", a: "An authorized taxi runs on the regulated meter. A private ride requires a confirmed quote and agreed vehicle. For either one, ask your accommodation for its nearest vehicle-accessible entrance or gate." },
+    ],
+    featuredRelated: [
+      { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Choose a neighbourhood and hotel location." },
+      { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/", note: "Plan your visit and key sights." },
+      { label: "Jerusalem Old City", to: "/attractions/old-city-jerusalem/", note: "Find the gates and walking approaches." },
+      { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", note: "Understand rail, bus and ticketing." },
+      { label: "Airport taxis and pickup", to: "/travel-blog/ben-gurion-airport-taxis/", note: "Find the official taxi departure point." },
+      { label: "Airport transport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/", note: "Compare arrivals during the weekend." },
     ],
     related: [
       { label: "Ben Gurion Airport taxis and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" },
@@ -169,9 +185,9 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ],
       takeaway: "For a light-bag daytime arrival, train plus local transport may work well. For Old Jaffa, family luggage or late arrivals, compare the whole door-to-door journey.",
     },
-    answer: "When it runs, the train from Terminal 3 is usually the quickest low-cost choice. Choose the Tel Aviv railway station—HaHagana, HaShalom, Savidor Center or University—that offers the best onward connection to your address. Kavim bus 445 leaves Terminal 3, Level 2, Exit 21 and can suit hotels near its stops. An official metered taxi or confirmed private transfer takes you directly to an accessible address. On Shabbat, regular trains stop and free Line 711 runs only at limited times via Terminal 1.",
+    answer: "The train is usually the fastest low-cost choice during operating hours. Choose the station that works best for your hotel, then continue by bus or taxi. Bus 445 may serve a more convenient city stop; an official taxi or private transfer goes directly to an accessible address.",
     trainIntro: "The airport railway station is below Terminal 3; follow the train signs after customs. If you arrive at Terminal 1, take the free internal shuttle to Terminal 3 first. Buy a train ticket at the station or use an accepted Rav-Kav or payment app. Check the current fare before travelling. Tel Aviv has four mainline stations: HaHagana, HaShalom, Savidor Center and University. None is directly on the beachfront, so plan the last bus, taxi, walk or light-rail connection to your hotel. The Ben Gurion Airport arrival guide explains the airport sequence; the getting around Tel Aviv guide covers the city connections.",
-    photo: { src: "/images/travel-blog/featured-airport-tel-aviv.webp", alt: "Tel Aviv railway station and platforms", label: "Tel Aviv train station", sourceUrl: "" },
+    photo: { src: "/images/home/transfer-tel-aviv-beach-skyline.webp", alt: "Tel Aviv Mediterranean beachfront and skyline", label: "Tel Aviv beachfront", sourceUrl: "" },
     updatedAt: "2026-11-23",
     historicalPrices: false,
     photos: {
@@ -220,6 +236,13 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { name: "Tel Aviv–Savidor Center", time: "≈ 20–25 min", usefulFor: "Arlozorov, northern/central onward buses." },
       { name: "Tel Aviv–University", time: "Up to ≈ 30 min", usefulFor: "Ramat Aviv, university and Expo Tel Aviv." },
     ],
+    arrivalAreas: [
+      { area: "Florentin / Neve Tzedek", station: "Tel Aviv–HaHagana", onward: "Continue by local bus or taxi; check the final walk with luggage." },
+      { area: "Rothschild / Sarona", station: "HaHagana or HaShalom", onward: "Choose by the street address, then use a local bus, taxi or walk." },
+      { area: "Beachfront / Dizengoff", station: "HaShalom or Savidor Center", onward: "Continue by bus or taxi toward the promenade or hotel." },
+      { area: "Old Jaffa", station: "Tel Aviv–HaHagana", onward: "Take a local bus or taxi to the nearest vehicle-accessible entrance." },
+      { area: "Ramat Aviv / Expo", station: "Tel Aviv–University", onward: "Use a local bus, taxi or walk according to the destination." },
+    ],
     connections: [
       "Beachfront accommodation: the station is usually inland; compare a local bus or taxi for the last leg, especially with luggage.",
       "Old Jaffa: historic lanes, pedestrian areas and steps can make a precise drop-off important. Check the nearest road-accessible entrance.",
@@ -248,6 +271,14 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "How do I pay for a train or bus to Tel Aviv?", a: "Check the current fare and valid ticket or payment method before travel. Rav-Kav and supported ticketing apps are common; do not assume that an overseas credit card can be tapped on every bus or at any rail gate." },
       { q: "Can I get an Uber from Ben Gurion Airport to Tel Aviv?", a: "No. Uber passenger rides are not currently available in Israel. Use the authorized Gett airport taxi system or a separately confirmed private transfer." },
       { q: "Do trains run from the airport late at night?", a: "Some trains run late at night, but not every service stops at every Tel Aviv station. Check the timetable for your arrival time." },
+    ],
+    featuredRelated: [
+      { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Choose a hotel area that fits your arrival." },
+      { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/", note: "Continue from the station by bus or light rail." },
+      { label: "Old Jaffa visitor guide", to: "/attractions/jaffa/", note: "Find the old port and historic streets." },
+      { label: "Tel Aviv attractions", to: "/travel-blog/attractions-in-tel-aviv/", note: "Explore places to visit across the city." },
+      { label: "Airport taxis and pickup", to: "/travel-blog/ben-gurion-airport-taxis/", note: "Find the official taxi departure point." },
+      { label: "Airport transport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/", note: "Check weekend travel choices." },
     ],
     related: [
       { label: "Official airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" },
@@ -280,7 +311,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ],
       takeaway: "Choose the station with the easiest route to your hotel, not simply the one that looks closest on the map.",
     },
-    answer: "When it operates, the train from Terminal 3 is usually the best low-cost way to reach Haifa. Choose the Haifa railway station—Hof HaCarmel, Bat Galim, Center HaShmona or HaMifratz Central—that offers the easiest onward connection to your hotel. The line runs along the coast, so Mount Carmel accommodation often requires an uphill bus or taxi. An authorized metered airport taxi or confirmed private transfer is more convenient door to door; Published listings show bus 905 on a limited Saturday-night and early-Sunday timetable; verify that a departure actually runs on your date.",
+    answer: "The train is usually the best low-cost option when running. Choose a station near your destination: Hof HaCarmel for southern Haifa, Bat Galim for the coast or Center HaShmona for downtown. Hotels on Mount Carmel generally need an uphill bus or taxi; a direct taxi or private transfer avoids that change.",
     trainIntro: "The Ben Gurion Airport railway station is below Terminal 3. Follow the train signs after customs; passengers using Terminal 1 first need the free internal shuttle to Terminal 3. Direct trains commonly serve Haifa, with approximately 80–100 minutes to key stations depending on the service. Buy a single ticket at the station or use a valid Rav-Kav or supported payment app, and check the current fare and the stops of the actual train. The railway runs near the coast, so a Mount Carmel hotel may require an additional uphill bus or taxi. My Ben Gurion Airport arrival guide explains the terminal steps; the getting around Israel guide explains onward public transport.",
     photo: { src: "/images/travel-blog/featured-airport-haifa.webp", alt: "Route to Haifa from Ben Gurion Airport", label: "Airport to Haifa", sourceUrl: "" },
     updatedAt: "2026-11-23",
@@ -329,6 +360,13 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { name: "Haifa Center HaShmona", time: "About 90–100 min", usefulFor: "Downtown, German Colony, the port district and lower Bahá’í Gardens." },
       { name: "HaMifratz Central (Lev HaMifratz)", time: "Check train stops", usefulFor: "Haifa Bay, intercity buses, the Krayot and northern connections." },
     ],
+    arrivalAreas: [
+      { area: "Southern Haifa / MATAM", station: "Haifa Hof HaCarmel", onward: "Use local transport for the nearby business district or beach." },
+      { area: "Bat Galim / Rambam", station: "Haifa Bat Galim", onward: "Walk or take a short taxi ride to the address." },
+      { area: "Downtown / German Colony", station: "Haifa Center HaShmona", onward: "Walk or take a short taxi ride toward Ben Gurion Boulevard." },
+      { area: "Carmel Center / hilltop hotels", station: "Haifa Center HaShmona", onward: "Connect to an uphill bus or taxi; allow for the steep climb." },
+      { area: "Haifa Port / cruise terminal", station: "Haifa Center HaShmona", onward: "Check your ship's passenger entrance and check-in time before continuing." },
+    ],
     connections: [
       "Downtown, German Colony and lower Bahá’í Gardens: Center HaShmona is often a practical station, but check the walk and your hotel entrance.",
       "Carmel Center and hilltop accommodation: plan an uphill bus or taxi. A nearby coastal station may still require a steep climb.",
@@ -358,6 +396,14 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "How do I get from Ben Gurion Airport to Haifa's cruise terminal?", a: "You can take the train and arrange the final journey from the station, or book a direct vehicle. Confirm your ship's passenger entrance and check-in deadline, and allow time for luggage, traffic and possible delays." },
       { q: "Which Haifa railway station should I use for a Mount Carmel hotel?", a: "The rail corridor is on the coast; most Mount Carmel hotels require an onward uphill bus or taxi. Compare the actual hotel address and a practical connection." },
       { q: "Can I get an Uber from Ben Gurion Airport to Haifa?", a: "No. Uber passenger rides are not available in Israel as of November 2026. Use an official airport taxi or a confirmed private transfer." },
+    ],
+    featuredRelated: [
+      { label: "Haifa attractions", to: "/attractions/haifa/", note: "Explore the German Colony, coast and Carmel." },
+      { label: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/", note: "Compare hotel locations on the coast and hill." },
+      { label: "Haifa museums", to: "/travel-blog/museums-in-haifa/", note: "Plan museums in the city." },
+      { label: "Akko (Acre) visitor guide", to: "/attractions/akko-acre/", note: "Explore the nearby walled port city." },
+      { label: "Caesarea visitor guide", to: "/attractions/caesarea/", note: "Plan another coastal stop." },
+      { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", note: "Plan rail, bus and onward connections." },
     ],
     related: [
       { label: "Official airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" },
@@ -390,7 +436,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ],
       takeaway: "The train and bus are separate services, so allow plenty of time between them. If you cannot catch the last bus, arrange another way to reach your hotel.",
     },
-    answer: "The cheapest practical option is usually the train to Jerusalem, followed by Egged bus 486 or 444 to Ein Bokek. Bus 444 requires an advance seat reservation. Allow roughly 3–4 hours or more for both legs and the connection; check the last southbound bus, the separate Jerusalem train voucher and seat reservations before travelling. An official metered taxi or confirmed private transfer takes you directly to the hotel and is more practical after the last bus, on Shabbat or with substantial luggage.",
+    answer: "For a lower-cost journey, take the train to Jerusalem and connect to bus 486 or reserved-seat bus 444. Allow roughly 3–4 hours or more and check the last bus before boarding the train. A metered taxi or confirmed private transfer goes straight to the hotel.",
     trainIntro: "Ben Gurion Airport railway station is directly below Terminal 3; follow the train signs after customs. Passengers arriving at Terminal 1 need the airport's free internal shuttle to Terminal 3. The train to Jerusalem–Yitzhak Navon usually takes about 26–30 minutes. You can buy a single train ticket at the station or use an accepted Rav-Kav or payment app. Check the actual timetable, price and the additional free personal voucher currently required on the Jerusalem line. My airport arrival guide covers the terminal steps, and the getting around Israel guide explains public-transport ticketing.",
     photo: { src: "/images/travel-blog/featured-airport-ein-bokek.webp", alt: "Road and scenery approaching Ein Bokek at the Dead Sea", label: "Airport to Ein Bokek", sourceUrl: "" },
     updatedAt: "2026-11-23",
@@ -459,6 +505,11 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { name: "Egged bus 486 → Ein Bokek", time: "About 1h 45m–2h 15m", usefulFor: "Check the last southbound departure and the stop nearest your hotel." },
       { name: "Egged bus 444 → Ein Bokek", time: "Check actual itinerary", usefulFor: "Reserved-seat Jerusalem–Eilat bus; book in advance and verify the hotel stop." },
     ],
+    arrivalAreas: [
+      { area: "Ein Bokek hotel strip", station: "Bus 486 or 444 from Jerusalem", onward: "Use the stop nearest your named hotel and allow for the final walk." },
+      { area: "Hamei Zohar / Neve Zohar", station: "Bus serving the specific resort stop", onward: "Check the hotel name and stop before boarding in Jerusalem." },
+      { area: "Ein Gedi / Masada", station: "Separate Dead Sea destination", onward: "Use a journey plan for the specific site rather than an Ein Bokek hotel stop." },
+    ],
     connections: [
       "Ein Bokek has multiple hotel-area bus stops. Enter your full hotel name in the journey planner and confirm the exact stop, walking distance and direction before boarding.",
       "Neve Zohar and Hamei Zohar hotels may have different stops from central Ein Bokek. Masada and Ein Gedi are separate destinations farther north; use their own journey plans.",
@@ -492,6 +543,14 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Is the Ein Bokek bus stop outside every hotel?", a: "Not always. Several bus stops serve the Ein Bokek hotel area, and some hotels require a further walk. Search using the full hotel name and check the remaining walk." },
       { q: "Is Ein Gedi the same as Ein Bokek?", a: "No. Ein Gedi, Masada, Neve Zohar and the Ein Bokek hotel area are distinct places and stops. Confirm the precise destination in your route plan or transfer request." },
       { q: "Should I choose an airport taxi or a private transfer?", a: "An official airport taxi is ordered on arrival through the authorized process and charged by the regulated meter. A private transfer is arranged in advance and needs a confirmed vehicle, meeting point and written total; compare the full terms for your party." },
+    ],
+    featuredRelated: [
+      { label: "Where to stay at the Dead Sea", to: "/travel-blog/best-dead-sea-hotels/", note: "Choose the right resort area." },
+      { label: "The Dead Sea visitor guide", to: "/attractions/dead-sea/", note: "Learn about beaches and resort access." },
+      { label: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Plan sights along the shore." },
+      { label: "Masada visitor guide", to: "/attractions/masada/", note: "Plan a visit to the mountain fortress." },
+      { label: "Ein Gedi visitor guide", to: "/attractions/ein-gedi/", note: "Find the nature reserve and visitor access." },
+      { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/", note: "Plan the bus and road journey." },
     ],
     related: [
       { label: "Jerusalem to the Dead Sea by bus, taxi or car", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
