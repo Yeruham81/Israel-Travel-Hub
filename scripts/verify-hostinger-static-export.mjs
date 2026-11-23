@@ -155,6 +155,38 @@ for (const city of ["jerusalem", "tel-aviv", "haifa", "ein-bokek"]) {
 }
 console.log("Airport journey SEO, section anchors, internal links and mobile tables verified.");
 
+// Airport taxi editorial: independently guard this page, not just the four route guides.
+const taxiPath = "/travel-blog/ben-gurion-airport-taxis/";
+const taxiFile = join(root, "travel-blog", "ben-gurion-airport-taxis", "index.html");
+assert(existsSync(taxiFile), "Missing Ben Gurion airport taxis guide HTML");
+const taxiHtml = readFileSync(taxiFile, "utf8");
+const taxiMain = taxiHtml.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1];
+assert(taxiMain, "Airport taxi guide has no main content");
+for (const required of [
+  "Ben Gurion Airport Taxis: Booking, Pickup Points",
+  "airport-taxi-sign.webp",
+  'data-testid="airport-taxi-booking-steps"',
+  'data-testid="airport-taxi-destination-cards"',
+  "Estimated daytime fares from Ben Gurion Airport",
+  "Need a private airport pickup?",
+  "Contact Me",
+  "Accessible taxis at Terminal 3",
+  "Ministry of Transport",
+]) {
+  assert(taxiMain.includes(required), "Airport taxi guide missing: " + required);
+}
+assert(!taxiMain.includes("Contact Moshe"), "Outdated airport taxi contact label returned");
+const taxiCards = taxiMain.match(/<nav\b[^>]*data-testid="airport-taxi-destination-cards"[^>]*>([\s\S]*?)<\/nav>/i)?.[1];
+assert(taxiCards && [...taxiCards.matchAll(/<li\b/g)].length === 4, "Expected four airport taxi destination cards");
+for (const city of ["tel-aviv", "jerusalem", "haifa", "ein-bokek"]) {
+  assert(taxiCards.includes("/travel-blog/ben-gurion-airport-to-" + city + "/"),
+    "Airport taxi destination card missing: " + city);
+}
+const taxiHero = join(root, "images", "travel-blog", "airport-taxi-sign.webp");
+assert(existsSync(taxiHero) && statSync(taxiHero).size > 1000, "Airport taxi main photo missing");
+console.log("Airport taxi pricing, photo, card links, accessibility and contact verified.");
+
+
 // Eilat is one destination attraction, not an independent travel-blog article.
 const retiredEilatGuidePath = "/travel-blog/" + "eilat/";
 assert(paths.has("/attractions/eilat/"), "Eilat attraction page missing from sitemap");
