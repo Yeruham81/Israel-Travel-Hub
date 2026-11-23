@@ -130,8 +130,9 @@ describe("Jaffa multi-stop city attractions guide", () => {
     const products = ["old-jaffa-walk", "tel-aviv-jaffa-small-group", "jaffa-carmel-walk"].map(id => tourProducts.find(tour => tour.id === id)!);
     expect(products.map(tour => tour.rating?.value)).toEqual([4.1, 4.6, 4.8]);
     expect(products.map(tour => tour.rating?.count)).toEqual([16, 9, 62]);
-    expect(tourSnapshotPrice(offersForTour("old-jaffa-walk", "attractions-jaffa")[0]!)?.amount).toBe(60);
-    expect(tourSnapshotPrice(offersForTour("tel-aviv-jaffa-small-group", "attractions-jaffa")[0]!)?.amount).toBe(169);
+    const reviewedOn = new Date("2026-11-23T12:00:00Z");
+    expect(tourSnapshotPrice(offersForTour("old-jaffa-walk", "attractions-jaffa")[0]!, reviewedOn)?.amount).toBe(60);
+    expect(tourSnapshotPrice(offersForTour("tel-aviv-jaffa-small-group", "attractions-jaffa")[0]!, reviewedOn)?.amount).toBe(169);
     expect(tourSnapshotPrice(offersForTour("jaffa-carmel-walk", "attractions-jaffa")[0]!)).toBeUndefined();
   });
 });
