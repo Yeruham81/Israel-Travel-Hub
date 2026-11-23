@@ -629,7 +629,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         highlightedLinks: [{
           label: "Airport shuttle — official stops and timetable",
           href: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/",
-          context: "Rשות שדות התעופה lists the current Terminal 1–Terminal 3 shuttle stops, approximately 15-minute service and other airport transport.",
+          context: "The airport authority lists the current Terminal 1–Terminal 3 shuttle stops, approximately 15-minute service and airport transport information.",
         }],
         sourceIds: ["guide-iaa-terminal-2026", "guide-iaa", "guide-iaa-shuttle"],
       },
