@@ -2,7 +2,7 @@ import roadPhoto from "@/assets/guides/car-rental-israel-road.webp";
 import type { SourceReference } from "@/data/registry";
 
 export const CAR_RENTAL_UPDATED = "2026-11-22";
-export const carRentalHero = { src: roadPhoto, alt: "A blue car travelling along a winding paved road through wooded hills in Israel" };
+export const carRentalHero = { src: roadPhoto, alt: "Cars travelling beside Jerusalem’s Old City walls on a sunny day under a clear blue sky" };
 export const carRentalTitle = "Car Rental in Israel: My Practical Guide for Visitors";
 export const carRentalDescription = "Plan a self-drive trip in Israel: compare car rentals, airport and city pickup, documents, insurance, deposits, costs and practical driving tips.";
 
