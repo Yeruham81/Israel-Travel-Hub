@@ -13,7 +13,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
   const destinationLabel = fixedDestinationLabel || selectedDestination?.destination;
   const [fields, setFields] = useState(emptyTransferQuote);
   const [direction, setDirection] = useState<"pickup" | "dropoff">("pickup");
-  const airportDropoff = allowAirportDropoff && !fixedDestination && direction === "dropoff";
+  const airportDropoff = allowAirportDropoff && direction === "dropoff";
   const [errors, setErrors] = useState<string[]>([]);
   const submission = useQuoteSubmission();
   const { reset } = submission;
@@ -44,7 +44,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
         <QuoteFormIntro
           headingId="quote-h"
           eyebrow="A local, personal service"
-          showTripadvisorReviews={allowAirportDropoff && compactHeader && !fixedDestination}
+          showTripadvisorReviews={allowAirportDropoff && compactHeader}
           title={compactHeader ? "Request a private transfer quote" : fixedDestination && selectedDestination ? `Request your transfer to ${destinationLabel}` : "Ask me for a personal quote"}
           description={compactHeader
             ? "Share your route, flight and passenger details for a private airport transfer quote."
@@ -55,11 +55,11 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
             <fieldset disabled={submission.isSending} className="min-w-0">
               {errors.length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-5 rounded-xl border border-destructive p-4 text-sm text-destructive"><p className="font-semibold">Please check these details:</p><ul className="mt-2 list-disc pl-5">{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
               <div className="space-y-5">
-                {allowAirportDropoff && !fixedDestination && <fieldset className="rounded-xl border border-primary/20 bg-secondary/30 p-3 sm:p-4" aria-label="Transfer direction">
+                {allowAirportDropoff && <fieldset className="rounded-xl border border-primary/20 bg-secondary/30 p-3 sm:p-4" aria-label="Transfer direction">
                   <legend className="px-1 text-sm font-semibold">Transfer direction</legend>
                   <div className="grid grid-cols-2 gap-2">
                     {([{ id: "pickup", label: "From Ben Gurion Airport" }, { id: "dropoff", label: "To Ben Gurion Airport" }] as const).map(option => <label key={option.id} className={`flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg border px-2 py-2 text-center text-xs font-semibold leading-snug sm:text-sm ${direction === option.id ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-foreground hover:border-primary/50"}`}>
-                      <input type="radio" name="transferDirection" value={option.id} checked={direction === option.id} onChange={() => { setDirection(option.id); submission.reset(); }} className={direction === option.id ? "accent-white" : "accent-primary"} />{option.label}
+                      <input type="radio" name="transferDirection" value={option.id} checked={direction === option.id} onChange={() => { setDirection(option.id); setErrors([]); submission.reset(); }} className={direction === option.id ? "accent-white" : "accent-primary"} />{option.label}
                     </label>)}
                   </div>
                 </fieldset>}
@@ -78,8 +78,8 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
                 </div>
                 <div>
                   <div className="grid gap-4 sm:grid-cols-2" data-testid="quote-fields-destination">
-                    <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Pickup area *" : "Destination *"}{fixedDestination && selectedDestination ? <Input name="destination" readOnly value={destinationLabel} className={`${fieldClass} bg-secondary/40`} /> : <select name="destination" required value={destinationId} onChange={(e) => { onDestinationChange?.(e.target.value); submission.reset(); }} className="mt-2 h-11 w-full min-w-0 rounded-md border border-input bg-background px-3 text-base"><option value="">Choose your destination</option>{airportTransferRates.map((rate) => <option key={rate.id} value={rate.id}>{rate.destination}</option>)}<option value="other">Another destination</option></select>}</label>
-                    <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Pickup hotel or address *" : "Drop-off hotel or address"}<Input name="address" required={airportDropoff} maxLength={250} placeholder="Hotel name or full address, if known" value={fields.address} onChange={(e) => update("address", e.target.value)} className={fieldClass} /></label>
+                    <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Pickup area *" : "Destination *"}{fixedDestination && selectedDestination ? <Input name="destination" readOnly value={destinationLabel} className={`${fieldClass} bg-secondary/40`} /> : <select name="destination" required value={destinationId} onChange={(e) => { onDestinationChange?.(e.target.value); submission.reset(); }} className="mt-2 h-11 w-full min-w-0 rounded-md border border-input bg-background px-3 text-base"><option value="">{airportDropoff ? "Choose your pickup area" : "Choose your destination"}</option>{airportTransferRates.map((rate) => <option key={rate.id} value={rate.id}>{rate.destination}</option>)}<option value="other">Another destination</option></select>}</label>
+                    <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Pickup hotel or address *" : "Drop-off hotel or address"}<Input name="address" required={airportDropoff} maxLength={250} placeholder={airportDropoff ? "Pickup hotel or full address" : "Hotel name or full address, if known"} value={fields.address} onChange={(e) => update("address", e.target.value)} className={fieldClass} /></label>
                   </div>
                   {destinationId === "other" && <label className="mt-4 block min-w-0 text-sm font-medium">{airportDropoff ? "Pickup city or area *" : "City or destination *"}<Input name="otherDestination" required maxLength={120} value={fields.otherDestination} onChange={(e) => update("otherDestination", e.target.value)} className={fieldClass} /></label>}
                 </div>
