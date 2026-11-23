@@ -42,6 +42,10 @@ describe("four dedicated airport transfer routes", () => {
     expect(updateLine).toHaveTextContent("Updated November 2026");
     expect(updateLine.querySelector("time")).toHaveAttribute("datetime", "2026-11-23");
     expect(updateLine.compareDocumentPosition(screen.getByTestId("route-starting-rate"))).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    const byline = screen.getByTestId("airport-route-author-position");
+    expect(within(byline).getByText(/Written by/)).toBeInTheDocument();
+    expect(Boolean(updateLine.compareDocumentPosition(byline) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(true);
+    expect(Boolean(byline.compareDocumentPosition(screen.getByTestId("route-starting-rate")) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(true);
     const routeHero = within(hero).getByTestId("guide-hero-media");
     expect(routeHero.querySelector('source[media="(max-width: 480px)"]')).toHaveAttribute("type", "image/webp");
     const quoteIntro = container.querySelector('#request-quote [data-testid="quote-form-intro"]')! as HTMLElement;
@@ -59,7 +63,7 @@ describe("four dedicated airport transfer routes", () => {
     expect(screen.getByTestId("quote-fields-party")).toHaveClass("grid-cols-3", "gap-1.5");
 
     expect(within(screen.getByTestId("author-card")).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
-    const pickup = screen.getByRole("region", { name: "Your private airport transfer" });
+    const pickup = screen.getByRole("region", { name: `Private transfer to ${guide.city}` });
     expect(pickup).toHaveTextContent("Agreed price, no extra charges");
     expect(pickup).toHaveTextContent("Flight tracking");
     expect(pickup).toHaveTextContent("Free cancellation up to 24 hours");

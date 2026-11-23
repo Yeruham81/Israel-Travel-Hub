@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Fragment } from "react";
 import { Lightbulb } from "lucide-react";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
@@ -376,7 +377,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
           {focusedLayout ? <PageUpdated date={g.updatedAt || PUBLISHED_REVIEW} /> : <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>}
         </GuideHeroLayout>
-        <AuthorCard />
+        <div className="mt-4 border-t pt-1" data-testid="airport-journey-author-position"><AuthorCard /></div>
       </header>
       <section id="quick-answer" aria-labelledby="quick-answer-h" className="mt-8 rounded-2xl border border-primary/20 bg-secondary/60 p-6">
         <h2 id="quick-answer-h" className="text-2xl font-semibold">Best way to reach {g.city}</h2>
@@ -389,36 +390,35 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <div role="region" aria-label={"Travel options to " + g.city} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border bg-card">
           {focusedLayout ? (
             <table className="w-full min-w-[840px] text-left text-sm" data-testid="airport-journey-comparison">
-              <caption className="sr-only">Airport to {g.city}: travel time, price basis, suitability, hotel drop-off and service availability</caption>
-              <thead className="bg-secondary"><tr>{["Option", "Travel time", "Cost", "Best for", "To hotel?", "Availability"].map(t => <th key={t} scope="col" className="p-3 font-semibold">{t}</th>)}</tr></thead>
+              <caption className="sr-only">Airport to {g.city}: travel time, fare, suitability and service availability</caption>
+              <thead className="bg-secondary"><tr>{["Option", "Travel time", "Cost", "Best for", "Availability"].map(t => <th key={t} scope="col" className="p-3 font-semibold">{t}</th>)}</tr></thead>
               <tbody className="divide-y">{displayOptions.map(option => <tr key={option.id}>
                 <th scope="row" className="p-3 font-semibold"><a href={"#" + sectionId(option.id)} className="text-primary underline underline-offset-2">{option.name}</a></th>
                 <td className="p-3 whitespace-nowrap">{option.time}</td>
                 <td className="p-3">{option.id === "private" ? `From ₪${privateRate.amount.toLocaleString("en-US")}/vehicle` : option.id === "taxi" ? "Regulated meter" : option.comparison?.cost ?? option.cost}</td>
                 <td className="p-3">{option.bestFor}</td>
-                <td className="p-3">{option.doorToDoor}</td>
                 <td className="p-3">{option.availability}</td>
               </tr>)}</tbody>
             </table>
           ) : (
           <table className="min-w-[760px] w-full text-left text-sm">
-            <caption className="sr-only">Compare estimated duration, fare basis, suitability and door-to-door service</caption>
+            <caption className="sr-only">Compare duration, fare, suitability and service availability</caption>
             <thead className="bg-secondary">
-              <tr>{["Option", "Typical time", "Indicative cost", "Best for", "To your door?", "Service"].map(t=><th key={t} scope="col" className="p-3 font-semibold">{t}</th>)}</tr>
+              <tr>{["Option", "Typical time", "Indicative cost", "Best for", "Service"].map(t=><th key={t} scope="col" className="p-3 font-semibold">{t}</th>)}</tr>
             </thead>
             <tbody className="divide-y">{g.options.map(option=>(
               <tr key={option.id}>
                 <th scope="row" className="p-3 font-semibold"><a href={"#" + sectionId(option.id)} className="text-primary underline underline-offset-2">{option.name}</a></th>
                 <td className="p-3">{option.time}</td>
                 <td className="p-3">{option.id === "private" ? <span>From ₪{privateRate.amount.toLocaleString("en-US")}/vehicle on weekdays; written quote required</span> : option.cost}</td>
-                <td className="p-3">{option.bestFor}</td><td className="p-3">{option.doorToDoor}</td><td className="p-3">{option.availability}</td>
+                <td className="p-3">{option.bestFor}</td><td className="p-3">{option.availability}</td>
               </tr>
             ))}</tbody>
           </table>
           )}
         </div>
         {focusedLayout ? (
-          <p className="mt-3 text-sm text-muted-foreground">Taxi fares are metered; check current rail and bus prices with each operator. My private-transfer starting price is one way, on weekdays, per vehicle for up to four passengers; I confirm extras in writing. Journey times are estimates and exclude airport arrival formalities and onward connections unless noted.</p>
+          <p className="mt-3 text-sm text-muted-foreground">Public-transport fares shown are standard adult one-way prices reviewed in November 2026. <a href="https://www.gov.il/he/pages/prices_update_2025" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">Public transport fare bands</a>. Taxis use the regulated meter; my private-transfer starting rate is per vehicle for up to four passengers, with the final price confirmed in writing.</p>
         ) : (        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> {g.historicalPrices === false ? "The train and bus prices must be checked in the official planner for your travel date; this guide does not quote an unverified current fare. " : "₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. "}Train and bus prices are per passenger; official taxis use the regulated meter, and rental totals depend on dates. My displayed starting price is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers with possible extra charges. All schedules can change. Check the operator and any written quote before you travel.</p>)}
         {focusedLayout && <aside aria-label={"Pre-booked airport transfer to " + g.city} data-testid="airport-journey-private-links" className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/20 bg-secondary/30 p-4">
           <div className="min-w-0 flex-1">
@@ -434,12 +434,17 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       {!focusedLayout && <PrivateRideCta id={id}/>}
       {!focusedLayout && stationSection}
       <section id="options" aria-labelledby="options-h" className="mt-14 scroll-mt-28">
-        <h2 id="options-h" className="text-3xl">Transport options from the airport</h2>
+        <h2 id="options-h" className="text-3xl">Traveling to {g.city} from Ben Gurion Airport</h2>
         {!focusedLayout && <p className="mt-3 leading-relaxed">Compare each option's actual pickup, onward connection and limitations before choosing what works for your destination.</p>}
         {!focusedLayout && g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /></figure>}
-        {displayOptions.map(o=><OptionSection key={o.id} option={o} guideId={id} />)}
+        {displayOptions.map((o, index) => <Fragment key={o.id}>
+          <OptionSection option={o} guideId={id} />
+          {index === 1 && g.destinationPhoto && <figure className="my-8 max-w-3xl" data-testid="airport-journey-destination-photo">
+            <img src={g.destinationPhoto.src} alt={g.destinationPhoto.alt} width={960} height={540} loading="lazy" decoding="async" className="aspect-[16/9] max-h-[340px] w-full rounded-xl object-cover" />
+          </figure>}
+        </Fragment>)}
       </section>
-      <Section id="shabbat" title="Getting there on Shabbat and Jewish holidays">
+      <Section id="shabbat" title={"Traveling to " + g.city + " on Shabbat and holidays"}>
         {g.weekend.map(p=><p key={p}><GuideParagraph paragraph={p} inlineLinks={g.weekendLinks} /></p>)}
         {!g.weekendLinks?.length && <p>For terminal-specific weekend travel, see my <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Ben Gurion Airport Shabbat guide</Link>.</p>}
         {!g.weekendLinks?.some(link => link.to === "/travel-blog/calendar-of-events/") && <p>For holiday dates, see <Link to="/travel-blog/calendar-of-events/" className="font-medium text-primary underline underline-offset-4">Israel's Calendar of Events</Link>.</p>}
