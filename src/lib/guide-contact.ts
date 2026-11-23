@@ -2,7 +2,7 @@
  * No form submission constitutes a confirmed booking.
  */
 export type GuideContactKind = "transport" | "airport" | "shabbat" | "sherut" | "attraction" | "itinerary" | "accommodation" | "connectivity" | "general";
-export type GuideContactCopy = { heading: string; introduction: string; subject: string; placeholder: string };
+export type GuideContactCopy = { eyebrow?: string; heading: string; introduction: string; subject: string; placeholder: string };
 
 export function guideContactCopy(_title: string, kind: GuideContactKind, place?: string): GuideContactCopy {
   const destination = place?.trim() || "Israel";

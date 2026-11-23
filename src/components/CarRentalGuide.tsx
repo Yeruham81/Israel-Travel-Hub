@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { CarFront, Check, CreditCard, Luggage, MapPin } from "lucide-react";
 import { GuideHeader, OnThisPage, FaqList, RelatedLinks, SourceList } from "@/components/Guide";
+import { HomeContactForm } from "@/components/HomeContactForm";
 import { DiscoverCarsSearchWidget, RentalComparisonLink } from "@/components/DiscoverCarsSearchWidget";
 import { CAR_RENTAL_UPDATED, carRentalHero, carRentalTitle, rentalDecisionRows, rentalCostRows, rentalChecklists, carRentalFaqs, carRentalSources } from "@/data/carRentalGuide";
 
@@ -11,7 +12,7 @@ const sections = [
   ["pickup", "Airport or city pickup"], ["documents", "Documents & drivers"],
   ["costs", "Rental costs"], ["insurance", "Insurance & deposit"],
   ["vehicle-driving", "Choosing & driving"], ["road-trip-ideas", "Road trip ideas"],
-  ["checklists", "Pickup & return"], ["faq", "Common questions"],
+  ["checklists", "Pickup & return"], ["faq", "Common questions"], ["contact", "Contact me"],
 ] as const;
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
@@ -129,8 +130,15 @@ export function CarRentalGuide() {
       <FaqList faqs={carRentalFaqs} />
       <aside className="mt-10 rounded-xl border border-primary/20 bg-secondary/40 p-5 leading-relaxed" aria-label="A private driver alternative">
         <h2 className="text-xl font-semibold">Prefer to leave the driving to me?</h2>
-        <p className="mt-3">I can help you plan a private journey with a route and pace that suit your group. See my <Link to="/private-driver-in-israel/" className={inline}>private driver service</Link> and send your plans through the form there.</p>
+        <p className="mt-3">I can help you plan a private journey with a route and pace that suit your group. Tell me about your plans using the form below.</p>
       </aside>
+      <HomeContactForm guide={{
+        eyebrow: "Contact me",
+        heading: "Plan a private journey with me",
+        introduction: "Tell me your travel date, pickup point, group size and the places you would like to visit. I’ll reply personally and help you plan a private journey that suits your group.",
+        subject: "",
+        placeholder: "Travel date, pickup point, number of travellers, places you would like to visit…",
+      }} />
       <RelatedLinks title="Plan your trip around Israel" currentPath="/car-rental/" illustrated maxPhotoCards={6} descriptionLines={2} items={[
         { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", note: "Compare trains, buses, taxis and driving for travel around Israel." },
         { label: "Israel travel tips", to: "/travel-blog/israel-travel-tips/", note: "Plan entry requirements, money, Shabbat travel and everyday essentials." },

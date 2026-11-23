@@ -52,7 +52,20 @@ describe("car rental guide and Travelpayouts search", () => {
       expect(link.rel).toContain("sponsored");
     }
     expect(container).not.toHaveTextContent("Tips only");
-    expect(container.querySelector("form")).toBeNull();
+    const alternative = screen.getByRole("complementary", { name: "A private driver alternative" });
+    const contactSection = container.querySelector("#contact") as HTMLElement;
+    const form = screen.getByRole("form", { name: "Guide contact message" });
+    expect(container.querySelectorAll("form")).toHaveLength(1);
+    expect(alternative.nextElementSibling).toBe(contactSection);
+    expect(contactSection.nextElementSibling).toBe(related);
+    expect(within(alternative).queryByRole("link")).not.toBeInTheDocument();
+    expect(within(contactSection).getByRole("heading", { name: "Plan a private journey with me" })).toBeInTheDocument();
+    expect(within(form).getByRole("textbox", { name: "Your name *" })).toBeRequired();
+    expect(within(form).getByRole("textbox", { name: "Email address *" })).toBeRequired();
+    expect(within(form).getByRole("textbox", { name: "Subject *" })).toHaveValue("");
+    expect(within(form).getByRole("textbox", { name: "Your message *" })).toBeRequired();
+    expect(within(form).getByRole("button", { name: "Send message" })).toBeInTheDocument();
+    expect(form).toHaveTextContent("All bookings require confirmation.");
   });
 
   it("uses the official campaign, publisher and airport default inside an isolated local frame", () => {
