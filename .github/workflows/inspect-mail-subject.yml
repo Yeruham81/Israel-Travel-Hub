@@ -1,0 +1,40 @@
+name: Inspect Hostinger email subject (read only)
+on:
+  push:
+    branches: [diagnostics/mail-subject-20261123]
+    paths: [.github/workflows/inspect-mail-subject.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      HOSTINGER_SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+      HOSTINGER_SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+      HOSTINGER_SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+      HOSTINGER_SSH_KNOWN_HOSTS: ${{ secrets.HOSTINGER_SSH_KNOWN_HOSTS }}
+      HOSTINGER_REMOTE_PATH: ${{ secrets.HOSTINGER_REMOTE_PATH }}
+      HOSTINGER_SSH_PORT: ${{ vars.HOSTINGER_SSH_PORT || '65002' }}
+    steps:
+      - name: Read only redacted subject construction from PHP
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$HOSTINGER_SSH_PRIVATE_KEY" > "$HOME/.ssh/subject_audit_key"
+          printf '%s\n' "$HOSTINGER_SSH_KNOWN_HOSTS" > "$HOME/.ssh/subject_audit_known_hosts"
+          chmod 600 "$HOME/.ssh/subject_audit_key" "$HOME/.ssh/subject_audit_known_hosts"
+          python - <<'PY'
+          import os, pathlib, shlex, subprocess
+          code = "\n$root = rtrim($argv[1], \"/\");\nif (!is_file($root . \"/.ith-static-deploy-ok\") || !is_file($root . \"/api/quote-request/index.php\") || is_file($root . \"/wp-config.php\")) { fwrite(STDERR, \"Unexpected website root\\n\"); exit(2); }\n$files = [];\n$it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root . \"/api\", FilesystemIterator::SKIP_DOTS));\nforeach ($it as $file) {\n  $p = $file->getRealPath();\n  if ($file->isFile() && $file->getExtension() === \"php\" && $file->getSize() < 1000000 && strpos($p, $root . \"/api/\") === 0) $files[] = $p;\n  if (count($files) > 100) { fwrite(STDERR, \"Unexpected file count\\n\"); exit(3); }\n}\nforeach ([$root, dirname($root), dirname($root, 2)] as $dir) {\n  $p = $dir . \"/ith-hostinger-config.php\";\n  if (is_file($p) && filesize($p) < 1000000) $files[] = $p;\n}\nfunction safe_token($t) {\n  if (!is_array($t)) return $t;\n  [$id, $v] = $t;\n  if ($id === T_WHITESPACE) return $v;\n  if (in_array($id, [T_COMMENT, T_DOC_COMMENT], true)) return \"\";\n  if (in_array($id, [T_CONSTANT_ENCAPSED_STRING, T_ENCAPSED_AND_WHITESPACE], true)) {\n    $s = trim($v, \"\\\"'\");\n    if (preg_match('/^(?:subject|name|sourceTitle|sourcePath|site_name|site_title|email_subject|subject_prefix|MAIL_SUBJECT_PREFIX|SITE_NAME|SITE_TITLE)$/i', $s)) return \"'\" . $s . \"'\";\n    if (strlen($s) < 180 && preg_match('/Moshe Barak|Private Taxi Service|Israel Taxi & Travel/i', $s) && preg_match('/^[\\x20-\\x7e]+$/', $s)) return \"'\" . $s . \"'\";\n    return \"'<redacted string>'\";\n  }\n  if (in_array($id, [T_LNUMBER, T_DNUMBER], true)) return \"<number>\";\n  return $v;\n}\nforeach (array_unique($files) as $p) {\n  $code = file_get_contents($p);\n  $relative = strpos($p, $root . \"/\") === 0 ? substr($p, strlen($root) + 1) : \"[private-config]/\" . basename($p);\n  $sanitized = \"\";\n  foreach (token_get_all($code) as $t) $sanitized .= safe_token($t);\n  $lines = explode(\"\\n\", $sanitized);\n  $shown = 0;\n  foreach ($lines as $i => $line) {\n    if (preg_match('/subject|private taxi service|israel taxi & travel|moshe barak/i', $line)) {\n      echo json_encode([\"file\"=>$relative,\"line\"=>$i+1,\"code\"=>substr(trim($line),0,650)], JSON_UNESCAPED_SLASHES) . \"\\n\";\n      if (++$shown >= 40) break;\n    }\n  }\n  if (basename($p) === \"index.php\" && strpos($relative, \"quote-request/\") !== false) {\n    preg_match_all('/(?:require|include)(?:_once)?[^;]{0,180}/', $sanitized, $m);\n    foreach ($m[0] as $s) echo json_encode([\"file\"=>$relative,\"include_structure\"=>$s], JSON_UNESCAPED_SLASHES) . \"\\n\";\n  }\n}\necho \"READ_ONLY_SUBJECT_AUDIT_COMPLETE\\n\";\n"
+          root = os.environ["HOSTINGER_REMOTE_PATH"].rstrip("/")
+          if not root.startswith("/home/") or not root.endswith("/public_html"):
+              raise SystemExit("Unexpected website root")
+          command = "php -r " + shlex.quote(code) + " -- " + shlex.quote(root)
+          opts = ["ssh", "-p", os.environ["HOSTINGER_SSH_PORT"], "-i", str(pathlib.Path.home()/".ssh/subject_audit_key"), "-o", "BatchMode=yes", "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile="+str(pathlib.Path.home()/".ssh/subject_audit_known_hosts"), os.environ["HOSTINGER_SSH_USER"]+"@"+os.environ["HOSTINGER_SSH_HOST"], command]
+          subprocess.run(opts, check=True, timeout=90)
+          PY
+      - name: Remove temporary runner credentials
+        if: always()
+        run: rm -f "$HOME/.ssh/subject_audit_key" "$HOME/.ssh/subject_audit_known_hosts"
