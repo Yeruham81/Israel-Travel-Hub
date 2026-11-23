@@ -101,7 +101,7 @@ describe("transport cluster: twelve editorial guides and four private landings",
     expect(guide.options.map(o => o.id)).not.toContain("alternative");
     expect(guide.options.find(o => o.id === "rail")?.paragraphs.join(" ")).not.toMatch(/\b421\b/);
     expect(guide.faqs.some(faq => faq.q.includes("bus 421"))).toBe(true);
-    expect(guide.options.find(o => o.id === "rail")?.cost).not.toContain("₪");
+    expect(guide.options.find(o => o.id === "rail")?.cost).toContain("₪40");
     expect(guide.options.find(o => o.id === "taxi")?.cost).toMatch(/meter/i);
     expect(guide.options.every(option => (option.inlineLinks?.length || 0) > 0)).toBe(true);
     expect(guide.photos?.station.alt).toContain("Terminal 3");
