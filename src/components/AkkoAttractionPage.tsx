@@ -210,7 +210,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Use the car parks near the Visitors Center instead of driving into the old-town lanes. The official visitor information lists <strong>Moat Parking (free)</strong> and the <strong>Eucalyptus car park (paid parking)</strong>. For a private transfer or multi-stop day out, <a href="#contact" className={inlineLink}>contact me</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Use car parks near the Visitors Center and enjoy the historic lanes on foot. The official visitor information lists <strong>Moat Parking (free)</strong> and the <strong>Eucalyptus car park (paid parking)</strong>. For a private transfer or multi-stop day out, <a href="#contact" className={inlineLink}>contact me</a>.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Directions to the Visitors Center <ArrowUpRight className="h-3.5 w-3.5"/></a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -271,6 +271,31 @@ export const akkoDestinationContent: AttractionDestinationContent = {
       <AttractionPracticalTip>For a full day in the north, Akko combines well with <Link to="/attractions/rosh-hanikra/" className={inlineLink}>Rosh Hanikra</Link> or a separate stop in <Link to="/attractions/haifa/" className={inlineLink}>Haifa</Link>. Allow extra travel time between destinations.</AttractionPracticalTip>
     </div>
   ),
+  foodContent: (
+    <div className="mt-4 space-y-3" data-testid="akko-food-guide">
+      <p>I like leaving time for a meal in Old Akko. The market lanes offer hummus, fresh pita, spices, pastries and Arabic sweets, while the streets nearer the harbour have fish restaurants and cafés overlooking the water.</p>
+      <div className="grid gap-3 md:grid-cols-2">
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="font-serif text-lg font-semibold">Market snacks and local flavours</h3>
+          <p className="mt-2 text-sm leading-relaxed">Follow the market towards the port, stopping for hummus, falafel, fresh breads or baklava. Visit during daytime trading hours for the widest selection.</p>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="font-serif text-lg font-semibold">Waterfront lunch or coffee</h3>
+          <p className="mt-2 text-sm leading-relaxed">After visiting the historic sites, relax near the fishing harbour. Fish, seafood and Mediterranean dishes are popular, and each restaurant sets its own opening times.</p>
+        </article>
+      </div>
+      <p>For more local food ideas, see my <Link to="/travel-blog/what-to-eat-in-israel/" className={inlineLink}>guide to what to eat in Israel</Link> and the <a href={official.market} target="_blank" rel="noopener noreferrer" className={inlineLink}>official Old Akko markets guide</a>.</p>
+    </div>
+  ),
+  practicalContent: (
+    <div className="mt-4 space-y-3" data-testid="akko-practical-tips">
+      <AttractionPracticalTip><strong>Best starting point:</strong> Begin at the Visitors Center on Weizmann Street 1, where tickets and official walking maps are available.</AttractionPracticalTip>
+      <AttractionPracticalTip><strong>Historic paving:</strong> Choose comfortable shoes with good grip for narrow stone lanes, steps and underground passages.</AttractionPracticalTip>
+      <AttractionPracticalTip><strong>Ticket timing:</strong> Allow enough time for your chosen heritage site before the ticket office closes one hour before the published closing time.</AttractionPracticalTip>
+      <AttractionPracticalTip><strong>Religious holidays and worship:</strong> Plan the Ramchal visit for Sunday–Friday and check visitor access at Al-Jazzar Mosque around prayers.</AttractionPracticalTip>
+      <AttractionPracticalTip><strong>Weather:</strong> Bring water and sun protection for the harbour and exposed sea walls, and use the indoor sites for breaks on warmer days.</AttractionPracticalTip>
+    </div>
+  ),
   historyContent: (
     <div className="mt-4 space-y-3">
       <p>Old Akko is a UNESCO World Heritage Site whose streets preserve an unusual layering of history. The Crusaders developed it into an important Mediterranean port, while the Hospitaller and Templar orders left some of the underground monuments that can be visited today.</p>
@@ -279,25 +304,11 @@ export const akkoDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>A guided heritage walk can help connect the Crusader halls, Ottoman buildings and everyday life of the old city. You can also explore independently with the site audio guides and the historic walking map.</p>
-      <div className="grid gap-3 sm:grid-cols-2" data-testid="akko-tour-cards">
-        <Link to="/tours/caesarea-haifa-acre/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
-          <img src={akkoTourPhoto} alt="Fishing boats and old stone buildings on Akko's Mediterranean waterfront" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
-          <div className="min-w-0 flex-1">
-            <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Akko, Haifa and Caesarea tours</h3>
-            <p className="mt-1 text-sm text-muted-foreground">Browse guided visits and north-coast heritage excursions.</p>
-            <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore tours <ArrowUpRight className="h-4 w-4"/></span>
-          </div>
-        </Link>
-        <a href="#contact" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
-          <img src={haifaCoastPhoto} alt="Mediterranean harbour and northern coastal scenery near Haifa" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
-          <div className="min-w-0 flex-1">
-            <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Plan a private Akko visit</h3>
-            <p className="mt-1 text-sm text-muted-foreground">Choose historic sites, your pickup location and nearby coastal stops.</p>
-            <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Send an inquiry <ArrowUpRight className="h-4 w-4"/></span>
-          </div>
-        </a>
-      </div>
+      <p>These guided day trips include Old Akko alongside Caesarea, Haifa or northern-coast highlights. Compare departure cities, the time allocated to Akko and ticket inclusions when choosing a tour.</p>
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="akko-tour-cards">
+        {featuredAkkoTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-akko-acre" />)}
+      </ul>
+      <p className="text-sm leading-relaxed">See more options in my <Link to="/tours/caesarea-haifa-acre/" className={inlineLink}>northern coast tours</Link> guide. For a customized private transfer or a day with a driver, <a href="#contact" className={inlineLink}>contact me</a>.</p>
     </div>
   ),
   faqs: [
