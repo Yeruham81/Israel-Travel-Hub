@@ -55,6 +55,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
       intro="From hotel-to-hotel transfers to a full day exploring Israel, I'll help arrange a private driver around your route and group. Tell me what you have in mind, and I'll prepare a personal quote."
       checkedAt={PRIVATE_DRIVER_CHECK_DATE}
       image={<GuideHeroMedia src={privateDriverHero.src} alt={privateDriverHero.alt} />}
+      imageLayout="guide"
       actions={<a href="#request-quote" onClick={focusQuote} className="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>}
     />
 
