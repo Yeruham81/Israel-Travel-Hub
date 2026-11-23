@@ -74,7 +74,7 @@ describe("owner voice throughout the public site", () => {
     }
     expect(source("src/components/HomeContactForm.tsx")).toContain("Tell me how I can help");
     expect(source("src/routes/private-driver-in-israel.tsx")).toContain("Tell me what you have in mind");
-    expect(source("src/routes/airport-transfers.index.tsx")).toContain("Request a personal quote");
+    expect(source("src/routes/airport-transfers.index.tsx")).not.toContain("Request a personal quote");
     expect(source("src/routes/terms-of-use.tsx")).toContain("contact me at {email}");
     expect(source("src/components/AirportRoutePage.tsx")).toContain("I confirm the full price before booking.");
     expect(source("src/components/PortPage.tsx")).toContain("<ShoreQuoteForm");
