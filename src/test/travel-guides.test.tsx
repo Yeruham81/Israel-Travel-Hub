@@ -379,7 +379,7 @@ describe("migrated practical guides", () => {
   });
 
   it("keeps current airport pickup distinctions and attributes uncertain operator status", () => {
-    expect(travelGuides.arrival.sections.find((section) => section.id === "leave-airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*separate pickup instructions/);
+    expect(travelGuides.arrival.sections.find((section) => section.id === "leave-airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
