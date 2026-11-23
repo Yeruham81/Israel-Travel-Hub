@@ -116,9 +116,9 @@ jobs:
           console.log("ROBOTS_TXT_FIRST_500_PUBLIC_CHARS:", JSON.stringify(robots.slice(0, 500).replace(/[^\x20-\x7E\r\n]/g, "?")));
           if (indexable) {
             assert(robots.includes("Sitemap: " + origin + "/sitemap.xml"), "Production robots.txt has the wrong sitemap or none");
-            assert(!/^Disallow:\\s*\\/\\s*$/m.test(robots), "Production robots.txt still disallows root crawling");
+            assert(!/^Disallow:\s*\/\s*$/m.test(robots), "Production robots.txt still disallows root crawling");
           } else {
-            const trialRobots = /User-agent:\\s*Googlebot\\s*\\r?\\nDisallow:\\s*\\//i.test(robots);
+            const trialRobots = /User-agent:\s*Googlebot\s*\r?\nDisallow:\s*\//i.test(robots);
             assert(trialRobots || robots.includes("Sitemap: " + origin + "/sitemap.xml"),
               "Staging robots.txt neither blocks Googlebot nor points to its own sitemap");
             console.log("STAGING_ROBOTS_OK: Googlebot blocking is permitted before launch");
