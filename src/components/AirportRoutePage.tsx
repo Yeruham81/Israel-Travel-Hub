@@ -107,8 +107,9 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
     { q: "Can I arrange a transfer on Shabbat or late at night?", a: "Share the journey date and flight time. I'll check availability and confirm the full fare, including any applicable night, weekend or holiday surcharge." },
   ];
   const checklist = [...airportTransferChecklist.slice(0, 4), guide.checklistTip];
-  const creditedPhotos = [guide.photo, airportTransferPhotos["moshe"]!, ...relatedCards.map((card) => card.photo)]
-    .filter(hasPublicPhotoCredit);
+  const creditedPhotos = [guide.photo, airportTransferPhotos["moshe"]!, ...relatedCards.map(({ photo }) => ({
+    ...photo, sourceUrl: "sourceUrl" in photo && typeof photo.sourceUrl === "string" ? photo.sourceUrl : "",
+  }))].filter(hasPublicPhotoCredit);
   return (
     <main className="mx-auto max-w-5xl px-4 pb-12">
       <div className="pt-6">
