@@ -25,9 +25,11 @@ describe("four dedicated airport transfer routes", () => {
     expect(within(visibleBreadcrumbs).getAllByRole("link").map((link) => [link.textContent, link.getAttribute("href")])).toEqual([["Home", "/"], ["Airport transfers", "/airport-transfers/"]]);
     expect(within(visibleBreadcrumbs).getByText(guide.city)).toHaveAttribute("aria-current", "page");
     expect(visibleBreadcrumbs).not.toHaveTextContent("Ben Gurion Airport");
-    expect(container.querySelector("main")!.textContent).not.toMatch(/taxi rank|\btrain\b|\bbuses\b|live availability|guaranteed pickup/i);
+    const bookingCopy = ["header", "#journey-details", "#drop-off", "#request-quote"].map(selector => container.querySelector(selector)?.textContent).join(" ");
+    expect(bookingCopy).not.toMatch(/taxi rank|\btrain\b|\bbuses\b|live availability|guaranteed pickup/i);
+    expect(container.querySelector("main")).toHaveTextContent("Want to compare trains, buses and taxis for this route?");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(`From ₪${guide.rate.price.amount.toLocaleString("en-US")}`);
-    expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("I confirm the full fare, including any night, weekend or holiday surcharge, before booking in ILS.");
+    expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("I confirm the full price before booking.");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("Per vehicle · up to 4 passengers");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("One-way weekday airport pickup");
     expect(screen.getByTestId("airport-route-fx-note").previousElementSibling).toHaveTextContent("Returns, larger vehicles and extra stops receive a personal quote.");
