@@ -80,8 +80,9 @@ describe("four dedicated airport transfer routes", () => {
     expect(screen.getByRole("link", { name: /Ben Gurion Airport to .* transport guide/ })).toHaveAttribute("href", expect.stringMatching(/\/travel-blog\/ben-gurion-airport-to-/));
     const faq = screen.getByRole("region", { name: "Frequently asked questions" });
     expect(faq.querySelectorAll("details")).toHaveLength(6);
-    expect(faq).toHaveTextContent("Is the starting fare per vehicle or per passenger?");
-    expect(faq).toHaveTextContent("Can I cancel my airport transfer free of charge?");
+    expect(faq).toHaveTextContent("Where will I meet my driver at Ben Gurion Airport?");
+    expect(faq).toHaveTextContent("How can I pay for my transfer?");
+    expect(faq).toHaveTextContent("Can I arrange a transfer on Shabbat or late at night?");
     expect(container.querySelector("#taxi-or-transfer")).toBeNull();
     expect(container.querySelector("#ready-h")).toBeNull();
     expect(container.querySelector("main > .fixed")).toBeNull();
