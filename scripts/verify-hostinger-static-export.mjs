@@ -31,7 +31,7 @@ assert(existsSync(exportedSitemap), "Missing exported sitemap.xml");
 const robots = readFileSync(exportedRobots, "utf8");
 assert(robots.includes("Sitemap: " + origin + "/sitemap.xml"),
   "robots.txt must refer to the build's own sitemap");
-assert(/^User-agent: \\*\\s*$/m.test(robots) && /^Allow: \\/\\s*$/m.test(robots),
+assert(robots.includes("User-agent: *\n") && robots.includes("Allow: /\n"),
   "robots.txt should permit crawling of page content");
 assert(!/^Disallow:/m.test(robots), "Unexpected robots.txt Disallow directive");
 assert.equal(readFileSync(exportedSitemap, "utf8"), readFileSync("public/sitemap.xml", "utf8"),
@@ -52,7 +52,7 @@ for (const value of urlStrings) {
   assert(existsSync(file), `Missing prerendered HTML for ${url.pathname}`);
   assert(statSync(file).size > 300, `Suspiciously empty HTML for ${url.pathname}`);
   const html = readFileSync(file, "utf8");
-  const canonicalLinks = [...html.matchAll(/<link\\b[^>]*\\brel="canonical"[^>]*>/gi)].map(match => match[0]);
+  const canonicalLinks = [...html.matchAll(/<link\b[^>]*\brel="canonical"[^>]*>/gi)].map(match => match[0]);
   assert(canonicalLinks.length === 1 && canonicalLinks[0].includes('href="' + origin + url.pathname + '"'),
     "Missing or incorrect self-canonical on " + url.pathname);
   const expectedRobots = indexable ? "index,follow" : "noindex,nofollow";
