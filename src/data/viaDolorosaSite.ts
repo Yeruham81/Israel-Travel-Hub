@@ -16,7 +16,7 @@ export const viaDolorosaSite = {
     procession: "https://www.cicts.org/catholic-masses/",
     holySepulchre: "https://www.custodia.org/en/sanctuaries/basilica-of-the-holy-sepulchre/",
     ecceHomo: "https://www.eccehomopilgrimhouse.com/",
-    flagellationMuseum: "https://www.terrasanctamuseum.org/en/",
+    flagellationMuseum: "https://www.terrasanctamuseum.org/en/visit-us/",
     cityGuide: "https://www.cicts.org/jerusalem-tour/",
     mobility: "https://60.jerusalemfoundation.org/via-dolorosa-restoration-and-accessibility/",
     transit: "https://bus.gov.il/en/home",
@@ -35,7 +35,7 @@ export const viaDolorosaSite = {
     { n: 10, name: "Jesus is stripped of his garments", place: "Church of the Holy Sepulchre — Calvary area", note: "The last five stations are commemorated inside the church." },
     { n: 11, name: "Jesus is nailed to the cross", place: "Holy Sepulchre — Calvary", note: "Within the elevated Calvary chapels." },
     { n: 12, name: "Jesus dies on the cross", place: "Holy Sepulchre — Calvary", note: "The main Calvary altar is a major prayer site." },
-    { n: 13, name: "Jesus is taken down from the cross", place: "Holy Sepulchre — Stone of Anointing tradition", note: "The church contains traditions associated with taking Jesus down from the cross." },
+    { n: 13, name: "Jesus is taken down from the cross", place: "Holy Sepulchre — Latin altar of Our Lady of Sorrows, on Calvary", note: "Station XIII is at the altar between the crucifixion chapels. The Stone of Anointing, downstairs, commemorates preparing Jesus' body for burial." },
     { n: 14, name: "Jesus is laid in the tomb", place: "Holy Sepulchre — Edicule", note: "Expect a queue to enter the tomb shrine." },
   ],
 } as const;
