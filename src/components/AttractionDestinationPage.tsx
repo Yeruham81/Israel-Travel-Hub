@@ -61,6 +61,8 @@ export type AttractionDestinationContent = {
   transportTitle?: string;
   itineraryContent?: ReactNode;
   itineraryFirst?: boolean;
+  /** Put an interactive route plan before the landmark descriptions for walking guides. */
+  itineraryBeforeHighlights?: boolean;
   itineraryTitle?: string;
   foodContent?: ReactNode;
   practicalContent?: ReactNode;
@@ -144,11 +146,12 @@ export function destinationSectionHeadings(placeName: string) {
 export function AttractionDestinationPage({ content }: { content: AttractionDestinationContent }) {
   const destinationHeadings = destinationSectionHeadings(content.placeName);
   const sections: [string, string][] = [
+    ...(content.itineraryBeforeHighlights && content.itineraryContent ? [["visit-plan", content.itineraryTitle ?? "Plan your visit"] as [string, string]] : []),
     ["highlights", "What to see"],
-    ...(content.itineraryFirst && content.itineraryContent ? [["visit-plan", content.itineraryTitle ?? "Plan your visit"] as [string, string]] : []),
+    ...(content.itineraryFirst && !content.itineraryBeforeHighlights && content.itineraryContent ? [["visit-plan", content.itineraryTitle ?? "Plan your visit"] as [string, string]] : []),
     ...(content.visitorContent ? [["visitor-info", content.visitorNavLabel ?? "Opening hours & tickets"] as [string, string]] : []),
     ...(content.transportContent ? [["getting-there", "How to get there"] as [string, string]] : []),
-    ...(!content.itineraryFirst && content.itineraryContent ? [["visit-plan", content.itineraryTitle ?? "Plan your visit"] as [string, string]] : []),
+    ...(!content.itineraryFirst && !content.itineraryBeforeHighlights && content.itineraryContent ? [["visit-plan", content.itineraryTitle ?? "Plan your visit"] as [string, string]] : []),
     ...(content.foodContent ? [["food", "Food and cafés"] as [string, string]] : []),
     ...(content.practicalContent ? [["practical", "Practical tips"] as [string, string]] : []),
     ...(content.historyContent ? [["history", "History and significance"] as [string, string]] : []),
@@ -176,13 +179,14 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       </header>
       <AtAGlance placeName={content.placeName} facts={content.facts} note={content.glanceNote} title={content.factsTitle} />
       <OnThisPage sections={content.navigationSections ?? sections} />
+      {content.itineraryBeforeHighlights && content.itineraryContent && <Section id="visit-plan" title={content.itineraryTitle ?? "How to plan your visit"}>{content.itineraryContent}</Section>}
       <Section id="highlights" title={content.highlightsTitle ?? "What to see at " + content.placeName} className="mt-9">
         {content.highlightContent}
       </Section>
-      {content.itineraryFirst && content.itineraryContent && <Section id="visit-plan" title={content.itineraryTitle ?? "How to plan your visit"}>{content.itineraryContent}</Section>}
+      {content.itineraryFirst && !content.itineraryBeforeHighlights && content.itineraryContent && <Section id="visit-plan" title={content.itineraryTitle ?? "How to plan your visit"}>{content.itineraryContent}</Section>}
       {content.visitorContent && <Section id="visitor-info" title={content.visitorTitle ?? "Opening hours, tickets and practical information"}>{content.visitorContent}</Section>}
       {content.transportContent && <Section id="getting-there" title={content.transportTitle ?? "How to get to " + content.placeName}>{content.transportContent}</Section>}
-      {!content.itineraryFirst && content.itineraryContent && <Section id="visit-plan" title={content.itineraryTitle ?? "How to plan your visit"}>{content.itineraryContent}</Section>}
+      {!content.itineraryFirst && !content.itineraryBeforeHighlights && content.itineraryContent && <Section id="visit-plan" title={content.itineraryTitle ?? "How to plan your visit"}>{content.itineraryContent}</Section>}
       {content.foodContent && <Section id="food" title={destinationHeadings.food}>{content.foodContent}</Section>}
       {content.practicalContent && <Section id="practical" title={destinationHeadings.practical}>{content.practicalContent}</Section>}
       {content.historyContent && <Section id="history" title={content.historyTitle ?? "History and significance"}>{content.historyContent}</Section>}
