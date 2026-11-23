@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Route as AirportRoute } from "@/routes/airport-transfers.index";
 import { routeTree } from "@/routeTree.gen";
-import { airportTransferRates, airportTransferRoutes, affiliateConfig, linksForPage, partners } from "@/data/registry";
+import { airportTransferRates, airportTransferRoutes, affiliateConfig, linksForPage, mosheBarakAuthor, partners } from "@/data/registry";
 import { airportDestinationCards, airportHubPhotoSrc, airportTransferPhotos } from "@/data/airportTransfers";
 import { emptyTransferQuote, buildAirportDropoffMessage, buildTransferQuoteDraft, validateTransferQuote } from "@/lib/transfer-quote";
 import { readOutboundClicks } from "@/lib/outbound";
@@ -40,6 +40,17 @@ describe("private Ben Gurion transfers", () => {
     const intro = within(quote as HTMLElement).getByTestId("quote-form-intro");
     expect(quote.firstElementChild?.firstElementChild).toBe(intro);
     expect(intro).toHaveClass("bg-navy", "border-b");
+    const quoteReviews = within(intro).getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/i });
+    const topReviews = within(screen.getByTestId("author-card")).getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/i });
+    expect(quoteReviews).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
+    expect(quoteReviews.getAttribute("href")).toBe(topReviews.getAttribute("href"));
+    expect(quoteReviews).toHaveAttribute("target", "_blank");
+    expect(quoteReviews).toHaveAttribute("rel", "noopener noreferrer");
+    expect(quoteReviews).toHaveClass("bg-[#34E0A1]", "border-[#25996c]");
+    expect(topReviews).toHaveClass("bg-[#34E0A1]", "border-[#25996c]");
+    expect(within(quoteReviews).getByRole("img", { hidden: true })).toHaveAttribute("src", "/images/tripadvisor-owl-black.svg");
+    expect(intro.lastElementChild).toHaveClass("justify-end", "lg:w-auto");
+
     expect(within(quote as HTMLElement).getByTestId("quote-fields-contact")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
     expect(within(quote as HTMLElement).getByTestId("quote-fields-arrival")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
     expect(within(quote as HTMLElement).getByTestId("quote-fields-destination")).toHaveClass("sm:grid-cols-2");
