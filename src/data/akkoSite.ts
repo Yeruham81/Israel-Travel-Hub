@@ -2,10 +2,10 @@ import akkoHero from "@/assets/guides/old-city-acre-aerial.webp";
 
 /** Current published visitor facts and authoritative links for the Old Akko historic attractions. */
 export const akkoSite = {
-  title: "Old Akko (Acre): Historic Attractions, Tickets & Visitor Guide",
-  description: "Plan a walking visit to Old Akko: Knights’ Halls, Templars’ Tunnel, Al-Basha Turkish Bath, Al-Jazzar Mosque, markets, museums, harbour and combined tickets.",
+  title: "Old Akko (Acre): Attractions, Walking Routes & Visitor Guide",
+  description: "Plan an Old Akko visit with eight historic attractions, a numbered map, walking routes, opening hours, combined tickets, food stops and transport tips.",
   region: "Haifa & northern coast",
-  updatedAt: "2026-11-18",
+  updatedAt: "2026-11-23",
   hero: {
     src: akkoHero,
     alt: "Aerial view of the historic stone buildings, walls and Mediterranean harbour of Old Akko",
