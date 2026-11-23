@@ -170,7 +170,7 @@ describe("four dedicated airport transfer routes", () => {
     const body = JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body));
     expect(body.request.kind).toBe("contact");
     expect(body.request.fields.subject).toBe("Private transfer to Ben Gurion Airport");
-    expect(body.request.fields.message).toContain("Pickup area: " + route.rate.destination);
+    expect(body.request.fields.message).toContain("Pickup area: " + getAirportRouteGuide(route.id).rate.destination);
     expect(body.request.fields.message).toContain("Pickup hotel / address: Example Hotel");
     expect(body.request.fields.message).toContain("Flight departure: 2099-11-01 at 21:30");
     expect(body.request.fields.message).not.toContain("Pickup: Ben Gurion Airport");
