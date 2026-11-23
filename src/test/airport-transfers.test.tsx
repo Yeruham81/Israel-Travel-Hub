@@ -239,7 +239,7 @@ describe("private Ben Gurion transfers", () => {
     const section = container.querySelector("#compare-airport-transport")!;
     const paths = ["/travel-blog/ben-gurion-airport-to-jerusalem/", "/travel-blog/ben-gurion-airport-to-tel-aviv/", "/travel-blog/ben-gurion-airport-to-haifa/", "/travel-blog/ben-gurion-airport-to-ein-bokek/"];
     expect(within(section as HTMLElement).getAllByRole("link").map(a => a.getAttribute("href"))).toEqual(paths);
-    for (const path of paths) expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path);
+    for (const path of paths) expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path.replace(/\/$/, ""));
     expect(container.querySelector("#booking-steps")?.querySelectorAll("li")).toHaveLength(3);
     expect(container.querySelector("#keep-planning")?.querySelectorAll("li")).toHaveLength(6);
     expect(container.querySelector("#trip-planning")?.querySelectorAll("li")).toHaveLength(6);
