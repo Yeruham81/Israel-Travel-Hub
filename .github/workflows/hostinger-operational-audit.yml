@@ -113,6 +113,7 @@ jobs:
             "Wrong homepage indexing directive");
           const robots = read("robots.txt");
           console.log("ROBOTS_SITEMAP_DIRECTIVE:", robots.split(/\r?\n/).filter(line => /^Sitemap:/i.test(line)).slice(0, 3).map(line => line.slice(0, 250)));
+          console.log("ROBOTS_TXT_FIRST_500_PUBLIC_CHARS:", JSON.stringify(robots.slice(0, 500).replace(/[^\x20-\x7E\r\n]/g, "?")));
           assert(robots.includes("Sitemap: " + origin + "/sitemap.xml"), "robots.txt refers to other domain");
           const urls = [...read("sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
           assert(urls.length >= 80 && urls.every(u => u.startsWith(origin + "/")), "Sitemap incomplete or wrong domain");
