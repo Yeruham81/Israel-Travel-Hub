@@ -488,6 +488,48 @@ describe("four independent airport transportation comparisons", () => {
     }
   });
 
+  it("keeps destination-area tables and six linked featured-image cards on all four guides", async () => {
+    for (const id of airportJourneyIds) {
+      const guide = airportJourneyGuides[id];
+      expect(guide.arrivalAreas.length).toBeGreaterThanOrEqual(3);
+      expect(guide.featuredRelated).toHaveLength(6);
+      const router = createRouter({
+        routeTree, context: { queryClient: new QueryClient() },
+        history: createMemoryHistory({ initialEntries: [guide.path] }),
+        trailingSlash: "always",
+      });
+      await router.load();
+      const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id={id} /></RouterContextProvider>);
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      expect(doc.querySelector('header figure img')?.getAttribute("src")).toBe(guide.photo.src);
+      const arrival = doc.querySelector<HTMLTableElement>('#option-rail table[data-testid="airport-arrival-areas"]');
+      expect(arrival, id + ": missing area connections").not.toBeNull();
+      expect(arrival!.querySelectorAll("tbody tr")).toHaveLength(guide.arrivalAreas.length);
+      expect(arrival!.closest('[role="region"]')?.className).toContain("overflow-x-auto");
+
+      const related = doc.querySelector('[data-testid="airport-related-guides"]')!;
+      const grid = related.querySelector("ul")!;
+      expect(grid.className).toContain("grid-cols-2");
+      expect(grid.className).toContain("lg:grid-cols-3");
+      const cards = [...grid.querySelectorAll("li > a")];
+      expect(cards).toHaveLength(6);
+      const cardPhotos = cards.map((card, i) => {
+        const linked = guide.featuredRelated[i]!;
+        expect(card.getAttribute("href")).toBe(linked.to);
+        const pageHero = guideHeroPhotoForPath(String(linked.to));
+        expect(pageHero, id + ": missing featured image for " + linked.to).toBeDefined();
+        const img = card.querySelector("img");
+        expect(img?.getAttribute("src")).toBe(pageHero?.src);
+        expect(img?.getAttribute("alt")).toBe(pageHero?.alt);
+        return img?.getAttribute("src") || "";
+      });
+      expect(repeatedPhotos(cardPhotos), id).toEqual([]);
+      expect(new Set(cardPhotos).size).toBe(6);
+      expect(doc.body.textContent).not.toContain("Practical choice:");
+      expect(doc.body.textContent).not.toContain("Example only — check");
+    }
+  }, 30000);
+
   it("does not invent live transport fares or claim rail on Shabbat", () => {
     for (const id of airportJourneyIds) {
       const g = airportJourneyGuides[id];
