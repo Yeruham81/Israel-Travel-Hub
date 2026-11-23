@@ -469,10 +469,14 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "special", title: "Luggage, child seats and accessible taxis",
         paragraphs: [
-          "A regular taxi is usually suitable for a small party with ordinary luggage. If you have several large cases, a stroller or more than four passengers, request a vehicle with enough seats and luggage space before you travel.",
-          "Arrange a child seat, wheelchair-accessible vehicle or specific boarding assistance in advance with the operator. Gett or the airport assistance service can explain the available arrangements for your needs.",
+          "For several large cases, a stroller or more than four passengers, arrange a taxi with enough luggage space and seats. Tell the operator what you are carrying before your pickup.",
+          "At Terminal 3, ramp-equipped wheelchair-accessible taxis can be requested in the Gett app, at the terminal's self-service taxi kiosks or through the dispatcher at the official queue near Exit 03. For specific wheelchair space or boarding needs, arrange assistance in advance.",
+          "If a child restraint is required, request the correct seat for your child's age and size before your journey. Airline or airport assistance inside the terminal is arranged separately from the taxi ride.",
         ],
-        sourceIds: ["guide-gett", "guide-iaa"],
+        highlightedLinks: [
+          { label: "Accessible taxis at Terminal 3 — Access Israel", href: "https://aisrael.org/wp-content/uploads/2026/02/Neg.-Terminal-A5-12_25-Eng-1.pdf", context: "English accessibility guide explaining how to request a taxi equipped with a wheelchair ramp." },
+        ],
+        sourceIds: ["guide-gett", "guide-iaa", "guide-accessible-airport"],
       },
       {
         id: "weekend", title: "Airport taxis on Shabbat and holidays",
