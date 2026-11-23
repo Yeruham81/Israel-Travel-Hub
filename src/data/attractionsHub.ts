@@ -3,6 +3,7 @@ import type { LinkProps } from "@tanstack/react-router";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import { viaDolorosaSite } from "@/data/viaDolorosaSite";
 import { jaffaSite } from "@/data/jaffaSite";
+import { akkoSite } from "@/data/akkoSite";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
 import { travelGuides, type GuidePhoto } from "@/data/travelGuides";
@@ -51,7 +52,7 @@ const attraction = (id: AttractionId, title: string, description: string, fallba
   const item = attractionGuides[id];
   return {
     id, title, description, to: attractionPath(id),
-    photo: id === "old-city-jerusalem" ? oldCityJerusalemSite.hero : id === "via-dolorosa" ? viaDolorosaSite.hero : id === "jaffa" ? jaffaSite.hero : item.image ?? photoOverride ?? { src: fallback, alt: title },
+    photo: id === "old-city-jerusalem" ? oldCityJerusalemSite.hero : id === "via-dolorosa" ? viaDolorosaSite.hero : id === "jaffa" ? jaffaSite.hero : id === "akko-acre" ? akkoSite.hero : item.image ?? photoOverride ?? { src: fallback, alt: title },
   };
 };
 const editorialAttraction = (id: TravelGuideId, title: string, description: string, photoOverride?: { src: string; alt: string }): AttractionHubCard => ({
