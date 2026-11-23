@@ -351,7 +351,15 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       </nav>}
       {guide.sections.filter((section) => !(id === "bethlehem" && section.id === "entry-rules")).map((section) => <Fragment key={section.id}><section id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>
         <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
-          {section.paragraphs.map((paragraph, paragraphIndex) => (
+          {id === "airportTaxis" && section.id === "steps" ? (
+            <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="airport-taxi-booking-steps">
+              {section.paragraphs.map((step, index) => <li key={index} className="rounded-2xl border bg-card p-5 shadow-sm">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-base font-bold text-primary">{index + 1}</span>
+                <h3 className="mt-3 text-lg font-semibold">{["Order a taxi", "Save the ride code", "Join the official line"][index]}</h3>
+                <p className="mt-2 text-sm leading-relaxed">{step.replace(/^\d+\.\s*/, "")}</p>
+              </li>)}
+            </ol>
+          ) : section.paragraphs.map((paragraph, paragraphIndex) => (
             <Fragment key={paragraphIndex}>
               <p>{section.richParagraphs?.[paragraphIndex] ? <GuideRichParagraph spans={section.richParagraphs[paragraphIndex]} /> : id === "esim" ? esimRecommendation(paragraph, providers) : <GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} />}</p>
               {id === "esim" && section.id === "unlimited" && paragraphIndex === 0 && <EsimUnlimitedComparison guide={guide} providers={providers} />}
