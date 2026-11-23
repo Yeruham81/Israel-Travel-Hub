@@ -80,21 +80,23 @@ describe("intent-specific taxi guide cluster", () => {
   it("retains useful standalone answers and original images in the general taxi guide", () => {
     const guide = taxiGuideCluster.taxis;
     expect(guide.photo.src).toBe("/images/travel-blog/taxi-in-tel-aviv.webp");
-    expect(guide.sections.find((s) => s.id === "fares")?.tables?.[0]?.rows[0]).toEqual(["Starting meter (initial charge)", "₪12.46", "₪12.46", "₪12.46"]);
+    expect(guide.sections.find((s) => s.id === "fares")?.tables).toBeUndefined();
+    expect(guide.sections.find((s) => s.id === "fares")?.paragraphs.join(" ")).toContain("₪12.46");
     expect(guide.sections.find((s) => s.id === "airport")?.paragraphs.join(" ")).toContain("Exit 23");
     expect(guide.sections.find((s) => s.id === "airport")?.paragraphs.join(" ")).toContain("Exit 03");
-    expect(guide.sections.find((s) => s.id === "sherut")?.paragraphs.join(" ")).toContain("no regular airport sherut");
+    expect(guide.sections.find((s) => s.id === "sherut")?.paragraphs.join(" ")).toContain("former regular airport shared-taxi services");
     expect(guide.sections.find((s) => s.id === "payment")?.paragraphs.join(" ")).toContain("luggage");
     expect(guide.sections.find((s) => s.id === "intercity")?.paragraphs.join(" ")).toContain("Mitzpe Ramon");
   });
   it("preserves the final editorial refinements and verified official help links", () => {
     const guide = taxiGuideCluster.taxis;
-    expect(guide.updatedAt).toBe("2026-11-11");
+    expect(guide.updatedAt).toBe("2026-11-24");
     const apps = guide.sections.find((section) => section.id === "apps")!;
     expect(apps.externalLinks?.map((link) => link.href)).toEqual(["https://www.gett.com/il/", "https://appli.taxi/rider/"]);
-    expect(guide.sections.find((section) => section.id === "airport")?.paragraphs.join(" ")).toContain("at least two hours");
-    expect(guide.sections.find((section) => section.id === "airport")?.paragraphs.join(" ")).toContain("permitted airport departure fee");
-    expect(guide.sections.find((section) => section.id === "holidays")?.paragraphs.join(" ")).toContain("16:01");
+    expect(guide.sections.find((section) => section.id === "airport")?.paragraphs.join(" ")).not.toContain("at least two hours");
+    expect(guide.sections.find((section) => section.id === "airport")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
+    expect(guide.sections.find((section) => section.id === "holidays")?.paragraphs.join(" ")).not.toContain("16:01");
+    expect(guide.sections.find((section) => section.id === "holidays")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxiFares);
     expect(guide.sections.find((section) => section.id === "intercity")?.paragraphs.join(" ")).toContain("pedestrian crossing");
     expect(guide.sections.find((section) => section.id === "safety")?.externalLinks?.[0]?.href).toContain("complaint_about_conduct_in_public_transportation");
     expect(guide.services[0]?.label).toContain("Request a quote");
@@ -114,6 +116,21 @@ describe("intent-specific taxi guide cluster", () => {
     ]);
     for (const link of contextualLinks) expect(paragraph.split(link.text)).toHaveLength(2);
     expect(paragraph).toContain("To compare transport choices");
+  });
+
+  it("separates the three taxi guide intents without repeating full tariff and airport procedures", () => {
+    const { taxis, taxiFares, airportTaxis } = taxiGuideCluster;
+    expect(taxis.sections.find(s => s.id === "fares")?.tables).toBeUndefined();
+    expect(taxis.sections.find(s => s.id === "holidays")?.paragraphs.join(" ")).not.toMatch(/16:01|21:01/);
+    expect(taxis.sections.find(s => s.id === "airport")?.paragraphs.join(" ")).not.toContain("ride code");
+    expect(taxiFares.sections.find(s => s.id === "estimates")?.inlineLinks?.some(l => l.to === travelGuidePaths.airportTaxis)).toBe(true);
+    expect(taxiFares.sections.find(s => s.id === "extras")?.highlightedLinks).toBeUndefined();
+    expect(airportTaxis.sections.find(s => s.id === "fares")?.tables?.[0]?.headers).toEqual(["Destination", "Daytime meter estimate", "Typical drive"]);
+    for (const id of ["taxis", "taxiFares", "airportTaxis"] as const) {
+      expect(taxiGuideCluster[id].updatedAt).toBe("2026-11-24");
+      expect(taxiGuideCluster[id].related).toHaveLength(6);
+      expect(taxiGuideCluster[id].photo.src).toBeTruthy();
+    }
   });
 
   it("differentiates Gett on-demand, scheduled and Terminal 1 pickup points", () => {
