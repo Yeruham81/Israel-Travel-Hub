@@ -1404,6 +1404,9 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   // with a distinct pageId for outbound click attribution.
   "tour-jerusalem-old-city-walk-viator@attractions-old-city-jerusalem": { trackingUrl: "https://viator.tpm.li/NfTH03Dg" },
   "tour-jerusalem-private-oldcity-walk-viator@attractions-old-city-jerusalem": { trackingUrl: "https://viator.tpm.li/WFfLsF8z" },
+  // Distinct approved provider links and SubIDs for the Via Dolorosa page.
+  "tour-jerusalem-old-city-walk-viator@attractions-via-dolorosa": { trackingUrl: "https://viator.tpm.li/NfTH03Dg?sub_id=attractions_via_dolorosa_old_city" },
+  "tour-jerusalem-private-oldcity-walk-viator@attractions-via-dolorosa": { trackingUrl: "https://viator.tpm.li/WFfLsF8z?sub_id=attractions_via_dolorosa_private_walk" },
   "tour-jerusalem-beyond-walls-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/UWEBkSk3" },
   "tour-jerusalem-day-tel-aviv-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/qw5niivo" },
   "tour-jerusalem-bethlehem-private-getyourguide@tours-jerusalem": { trackingUrl: "https://getyourguide.tpm.li/uIfr7roD" },
