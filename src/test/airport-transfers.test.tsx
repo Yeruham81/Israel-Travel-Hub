@@ -56,8 +56,8 @@ describe("private Ben Gurion transfers", () => {
 
     expect(within(quote as HTMLElement).getByTestId("quote-fields-contact")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
     const arrivalFields = within(quote as HTMLElement).getByTestId("quote-fields-arrival");
-    expect(arrivalFields).toHaveClass("min-[400px]:grid-cols-2", "xl:grid-cols-3");
-    expect(within(arrivalFields).getByLabelText("Flight number").closest("label")).toHaveClass("min-[400px]:col-span-2", "xl:col-span-1");
+    expect(arrivalFields).toHaveClass("min-[380px]:grid-cols-2", "xl:grid-cols-3");
+    expect(within(arrivalFields).getByLabelText("Flight number").closest("label")).toHaveClass("min-[380px]:col-span-2", "xl:col-span-1");
     expect(within(quote as HTMLElement).getByTestId("quote-fields-destination")).toHaveClass("sm:grid-cols-2");
     const partyFields = within(quote as HTMLElement).getByTestId("quote-fields-party");
     expect(partyFields).toHaveClass("grid-cols-3", "gap-1.5", "sm:gap-4");
