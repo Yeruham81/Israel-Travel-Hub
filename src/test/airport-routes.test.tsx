@@ -54,8 +54,8 @@ describe("four dedicated airport transfer routes", () => {
     expect(quoteIntro.querySelector("img[alt]")).toHaveClass("col-start-1", "row-start-1");
     expect(quoteIntro.firstElementChild?.lastElementChild).toHaveClass("col-span-2", "row-start-2");
     expect(quoteIntro.lastElementChild).toHaveClass("col-start-2", "row-start-1", "lg:w-auto");
-    expect(screen.getByTestId("quote-fields-arrival")).toHaveClass("min-[400px]:grid-cols-2", "xl:grid-cols-3");
-    expect(screen.getByLabelText("Flight number").closest("label")).toHaveClass("min-[400px]:col-span-2", "xl:col-span-1");
+    expect(screen.getByTestId("quote-fields-arrival")).toHaveClass("min-[380px]:grid-cols-2", "xl:grid-cols-3");
+    expect(screen.getByLabelText("Flight number").closest("label")).toHaveClass("min-[380px]:col-span-2", "xl:col-span-1");
     expect(screen.getByTestId("quote-fields-party")).toHaveClass("grid-cols-3", "gap-1.5");
 
     expect(within(screen.getByTestId("author-card")).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
