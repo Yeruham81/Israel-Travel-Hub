@@ -258,7 +258,7 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
       {guideId === "ein-bokek" && option.id === "rail" && <EinBokekPublicTransportDetails guide={airportJourneyGuides["ein-bokek"]} />}
       {guideId === "jerusalem" && option.id === "taxi" && <UsefulJourneyLink label="Official airport taxi pickup instructions" href="https://www.gett.com/il/airport-en/" context="Check the ride-code procedure and the pickup point for your terminal." />}
       {guideId === "jerusalem" && option.id === "bus" && <UsefulJourneyLink label="Check bus 485 departures" href="https://bus.gov.il/en/home" context="Find the actual timetable and boarding stop for your travel date." />}
-      {inlinePrivate && <UsefulJourneyLink label="Send me a message using the form below" href="#request-quote" context="Share your flight, destination and luggage details. I'll confirm availability and the price before you book." />}
+      {inlinePrivate && <p className="mt-4 text-sm leading-relaxed">For a personal quote, <a href="#request-quote" className="font-semibold text-primary underline underline-offset-4">send me your flight, hotel and luggage details</a>.</p>}
       {guideId === "tel-aviv" && option.id === "rail" && <UsefulJourneyLink label="Check train times and fares" href="https://www.rail.co.il/" context="Choose the station with the easiest connection to your hotel, and check train times for your arrival date." />}
       {guideId === "tel-aviv" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi instructions" href="https://www.gett.com/il/airport-en/" context="Get your ride code and confirm the correct taxi queue at the terminal." />}
       {guideId === "tel-aviv" && option.id === "bus" && <UsefulJourneyLink label="Check bus 445 stops and departures" href="https://bus.gov.il/en/home" context="Find the actual route, fare and closest stop to your hotel; board at Terminal 3, Level 2, Exit 21." />}
@@ -321,7 +321,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
 
   const sourceBlock = (
   <SourcesDisclosure>
-          <p className="mt-3 text-sm text-muted-foreground">Check official schedules, fares and pickup points for your travel date. {id === "jerusalem" ? "Train and taxi figures are indicative estimates; check the live train fare, voucher and regulated metered tariff before travelling." : g.historicalPrices === false ? "Displayed rail and bus costs are not price quotes; verify current prices before travel." : "Cost ranges are historical August 2026 editorial estimates, not verified current fares."}</p>
+          <p className="mt-3 text-sm text-muted-foreground">Check the linked operators for fares, dated timetables and pickup points before travelling. {id === "jerusalem" || id === "ein-bokek" ? "If taking the Jerusalem train, check the current personal-voucher rule as well." : ""}</p>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
   
           </ul>
@@ -352,15 +352,16 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         {!focusedLayout && <p>Compare the complete door-to-door journey, including transfers, total travel time and cost. Check current fares with each provider.</p>}
         <div role="region" aria-label={"Travel options to " + g.city} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border bg-card">
           {focusedLayout ? (
-            <table className="min-w-[660px] w-full text-left text-sm">
-              <caption className="sr-only">Airport to {g.city}: travel time, estimated cost, advantages and drawbacks</caption>
-              <thead className="bg-secondary"><tr>{["Option", "Travel time", "Estimated cost", "Advantages", "Drawbacks"].map(t => <th key={t} scope="col" className="p-3 font-semibold">{t}</th>)}</tr></thead>
+            <table className="w-full min-w-[840px] text-left text-sm" data-testid="airport-journey-comparison">
+              <caption className="sr-only">Airport to {g.city}: travel time, price basis, suitability, hotel drop-off and service availability</caption>
+              <thead className="bg-secondary"><tr>{["Option", "Travel time", "Cost", "Best for", "To hotel?", "Availability"].map(t => <th key={t} scope="col" className="p-3 font-semibold">{t}</th>)}</tr></thead>
               <tbody className="divide-y">{displayOptions.map(option => <tr key={option.id}>
                 <th scope="row" className="p-3 font-semibold"><a href={"#" + sectionId(option.id)} className="text-primary underline underline-offset-2">{option.name}</a></th>
                 <td className="p-3 whitespace-nowrap">{option.time}</td>
-                <td className="p-3 whitespace-nowrap">{option.id === "private" ? `From ₪${privateRate.amount.toLocaleString("en-US")}` : option.comparison?.cost}</td>
-                <td className="p-3">{option.comparison?.advantages}</td>
-                <td className="p-3">{option.comparison?.drawbacks}</td>
+                <td className="p-3">{option.id === "private" ? `From ₪${privateRate.amount.toLocaleString("en-US")}/vehicle` : option.id === "taxi" ? "Regulated meter" : option.comparison?.cost ?? option.cost}</td>
+                <td className="p-3">{option.bestFor}</td>
+                <td className="p-3">{option.doorToDoor}</td>
+                <td className="p-3">{option.availability}</td>
               </tr>)}</tbody>
             </table>
           ) : (
@@ -381,8 +382,18 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
           )}
         </div>
         {focusedLayout ? (
-          <p className="mt-3 text-sm text-muted-foreground">Taxi fares are metered, and public transport schedules and prices can change. Check current fares and departure times before travelling. My private-transfer starting price is per vehicle, one way, on weekdays for up to four passengers; extra charges may apply.</p>
+          <p className="mt-3 text-sm text-muted-foreground">Taxi fares are metered; check current rail and bus prices with each operator. My private-transfer starting price is one way, on weekdays, per vehicle for up to four passengers; I confirm extras in writing. Journey times are estimates and exclude airport arrival formalities and onward connections unless noted.</p>
         ) : (        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> {g.historicalPrices === false ? "The train and bus prices must be checked in the official planner for your travel date; this guide does not quote an unverified current fare. " : "₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. "}Train and bus prices are per passenger; official taxis use the regulated meter, and rental totals depend on dates. My displayed starting price is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers with possible extra charges. All schedules can change. Check the operator and any written quote before you travel.</p>)}
+        {focusedLayout && <aside aria-label={"Pre-booked airport transfer to " + g.city} data-testid="airport-journey-private-links" className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/20 bg-secondary/30 p-4">
+          <div className="min-w-0 flex-1">
+            <p className="font-semibold">Prefer an arranged airport pickup?</p>
+            <p className="mt-1 text-sm text-muted-foreground">See vehicle and starting-price details, or request a personal quote for your flight and hotel.</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link to={g.privatePath} className="inline-flex min-h-11 items-center rounded-lg border border-primary/35 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary">Private transfer details</Link>
+            <a href="#request-quote" className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90">Request a quote</a>
+          </div>
+        </aside>}
       </Section>
       {!focusedLayout && <PrivateRideCta id={id}/>}
       {!focusedLayout && stationSection}

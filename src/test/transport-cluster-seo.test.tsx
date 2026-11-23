@@ -93,7 +93,7 @@ describe("transport cluster: twelve editorial guides and four private landings",
 
   it("retains Ein Bokek's Jerusalem-first route, current-fare caution and full guide design", () => {
     const guide = airportJourneyGuides["ein-bokek"];
-    expect(guide.updatedAt).toBe("2026-11-12");
+    expect(guide.updatedAt).toBe("2026-11-23");
     expect(guide.historicalPrices).toBe(false);
     expect(guide.title).toMatch(/^Ben Gurion Airport to Ein Bokek.*Train.*Bus.*Taxi/);
     expect(guide.answer).toMatch(/Jerusalem.*486.*444/s);
