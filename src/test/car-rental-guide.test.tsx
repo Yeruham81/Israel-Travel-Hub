@@ -32,7 +32,7 @@ describe("car rental guide and Travelpayouts search", () => {
     const related = within(container).getByRole("region", { name: "Plan your trip around Israel" });
     const summaries = related.querySelectorAll(".line-clamp-2");
     expect(summaries).toHaveLength(6);
-    expect(Array.from(summaries).every(summary => (summary.textContent?.length || 0) <= 50)).toBe(true);
+    expect(Array.from(summaries).every(summary => (summary.textContent?.length || 0) <= 80)).toBe(true);
     const tables = screen.getAllByRole("table");
     expect(tables).toHaveLength(2);
     for (const table of tables) {

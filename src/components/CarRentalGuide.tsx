@@ -132,12 +132,12 @@ export function CarRentalGuide() {
         <p className="mt-3">I can help you plan a private journey with a route and pace that suit your group. See my <Link to="/private-driver-in-israel/" className={inline}>private driver service</Link> and send your plans through the form there.</p>
       </aside>
       <RelatedLinks title="Plan your trip around Israel" currentPath="/car-rental/" illustrated maxPhotoCards={6} descriptionLines={2} items={[
-        { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", note: "Compare trains, buses, taxis and driving." },
-        { label: "Israel travel tips", to: "/travel-blog/israel-travel-tips/", note: "Practical advice for planning your visit." },
-        { label: "Ben Gurion Airport arrivals", to: "/travel-blog/ben-gurion-airport-arrival-tips/", note: "Passport control, luggage and onward travel." },
-        { label: "Sea of Galilee", to: "/attractions/sea-of-galilee/", note: "Explore the lake and surrounding attractions." },
-        { label: "The Dead Sea", to: "/attractions/dead-sea/", note: "Beaches, floating and places to visit." },
-        { label: "Mitzpe Ramon and the crater", to: "/attractions/mitzpe-ramon-crater/", note: "Viewpoints, walks and the visitor centre." },
+        { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", note: "Compare trains, buses, taxis and driving for travel around Israel." },
+        { label: "Israel travel tips", to: "/travel-blog/israel-travel-tips/", note: "Plan entry requirements, money, Shabbat travel and everyday essentials." },
+        { label: "Ben Gurion Airport arrivals", to: "/travel-blog/ben-gurion-airport-arrival-tips/", note: "Plan passport control, baggage collection and your onward journey." },
+        { label: "Sea of Galilee", to: "/attractions/sea-of-galilee/", note: "Explore lakeside towns, historic sites and places to stop around the lake." },
+        { label: "The Dead Sea", to: "/attractions/dead-sea/", note: "Choose beaches, plan a floating stop and explore nearby desert sights." },
+        { label: "Mitzpe Ramon and the crater", to: "/attractions/mitzpe-ramon-crater/", note: "Find crater viewpoints, short walks and practical tips for a desert visit." },
       ]} />
       <SourceList ids={carRentalSources.map(source => source.id)} compact intro="Official airport information and supplier terms used for this guide. Check the Rental Conditions attached to the vehicle you choose." />
     </div>
