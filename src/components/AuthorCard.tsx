@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import portrait from "@/assets/airport-transfers/moshe.webp";
 import { mosheBarakAuthor } from "@/data/registry";
+import { TripadvisorReviewsButton } from "@/components/TripadvisorReviewsButton";
 
 /** Compact site-wide author attribution. Tripadvisor is an independent review platform, not an endorsement. */
 export function AuthorCard({ introduction = false }: { introduction?: boolean }) {
@@ -12,15 +13,6 @@ export function AuthorCard({ introduction = false }: { introduction?: boolean })
       <p className="mt-0.5 text-xs font-medium leading-snug text-muted-foreground">{author.role}</p>
       <p className="mt-1 text-xs leading-snug text-muted-foreground">{author.experience}{author.bio ? ` ${author.bio}` : ""}</p>
     </div>
-    <a href={author.reviewsUrl} target="_blank" rel="noopener noreferrer" aria-label="Read traveler reviews on Tripadvisor for Moshe Barak (opens in new tab)" className="col-start-2 mt-0.5 inline-flex w-fit max-w-full min-w-0 items-center gap-2.5 rounded-lg border border-[#25996c] bg-[#34E0A1] px-3 py-2 text-xs font-semibold text-[#123a2a] transition-colors hover:border-[#217c59] hover:bg-[#2dd795] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:col-start-3 lg:row-start-1 lg:mt-0">
-      <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[#34E0A1]">
-        <img src="/images/tripadvisor-owl-black.svg" alt="" width={28} height={28} loading="lazy" decoding="async" className="h-7 w-7 object-contain" />
-      </span>
-      <span className="flex flex-col items-start whitespace-nowrap leading-tight">
-        <span>Read Reviews on</span>
-        <span className="text-sm font-bold">TripAdvisor</span>
-      </span>
-      <span className="sr-only"> (opens in a new tab)</span>
-    </a>
+    <TripadvisorReviewsButton className="col-start-2 mt-0.5 lg:col-start-3 lg:row-start-1 lg:mt-0" />
   </aside>;
 }
