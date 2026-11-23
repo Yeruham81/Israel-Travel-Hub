@@ -112,7 +112,8 @@ jobs:
           assert(home.includes(indexable ? 'name="robots" content="index,follow"' : 'name="robots" content="noindex,nofollow"'),
             "Wrong homepage indexing directive");
           const robots = read("robots.txt");
-          console.log("ROBOTS_SITEMAP_DIRECTIVE:", robots.split(/\\r?\\n/).filter(line => /^Sitemap:/i.test(line)).slice(0, 3).map(line => line.slice(0, 250)));\n          assert(robots.includes("Sitemap: " + origin + "/sitemap.xml"), "robots.txt refers to other domain");
+          console.log("ROBOTS_SITEMAP_DIRECTIVE:", robots.split(/\r?\n/).filter(line => /^Sitemap:/i.test(line)).slice(0, 3).map(line => line.slice(0, 250)));
+          assert(robots.includes("Sitemap: " + origin + "/sitemap.xml"), "robots.txt refers to other domain");
           const urls = [...read("sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
           assert(urls.length >= 80 && urls.every(u => u.startsWith(origin + "/")), "Sitemap incomplete or wrong domain");
           const quote = JSON.parse(read("quote.json"));
