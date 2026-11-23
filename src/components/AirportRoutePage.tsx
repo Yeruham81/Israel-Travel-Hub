@@ -1,11 +1,11 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, BadgeCheck, CalendarCheck, CheckCircle2, LayoutGrid, MapPin, PlaneLanding } from "lucide-react";
+import { BadgeCheck, CalendarCheck, CheckCircle2, PlaneLanding } from "lucide-react";
 import { Breadcrumbs, FaqList } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
-import { AIRPORT_TRANSFER_UPDATED_DATE, airportHomepageRoutePhotos, airportTransferBenefits, airportTransferChecklist, airportTransferPhotos } from "@/data/airportTransfers";
-import { travelGuides } from "@/data/travelGuides";
+import { AIRPORT_TRANSFER_UPDATED_DATE, airportHomepageRoutePhotos, airportHubPhotoSrc, airportTransferBenefits, airportTransferChecklist, airportTransferPhotos } from "@/data/airportTransfers";
+import { getShorePort } from "@/data/shoreExcursions";
 import { airportTransferNav } from "@/data/nav";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { airportTransferRoutes, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
@@ -45,44 +45,85 @@ export function airportRouteMeta(id: AirportTransferRouteId) {
 const benefitIcons = [BadgeCheck, PlaneLanding, CalendarCheck] as const;
 const focusQuote = () => requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
 
-type RelatedCard = { title: string; description: string; to: LinkProps["to"]; photo: { src: string; alt: string; sourceUrl?: string; licenseUrl?: string; credit?: string } };
+type RelatedCard = { title: string; description: string; to: LinkProps["to"] };
+
+const transportComparisons: Record<AirportTransferRouteId, LinkProps["to"]> = {
+  jerusalem: "/travel-blog/ben-gurion-airport-to-jerusalem/",
+  "tel-aviv": "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+  haifa: "/travel-blog/ben-gurion-airport-to-haifa/",
+  "dead-sea": "/travel-blog/ben-gurion-airport-to-ein-bokek/",
+};
+
+/** Exactly six useful destination-specific guides, each with its own featured photograph. */
+const routeReading: Record<AirportTransferRouteId, RelatedCard[]> = {
+  jerusalem: [
+    { title: "Ben Gurion Airport arrival tips", description: "Arrival formalities, luggage collection and meeting your driver.", to: travelGuidePaths.arrival },
+    { title: "Where to stay in Jerusalem", description: "Choose between Mamilla, the Old City and residential districts.", to: "/travel-blog/where-to-stay-in-jerusalem/" },
+    { title: "Jerusalem Old City", description: "Explore the gates, walking routes and historic sites.", to: "/attractions/old-city-jerusalem/" },
+    { title: "Jerusalem travel guide", description: "Plan neighborhoods, attractions and sightseeing days.", to: travelGuidePaths.jerusalem },
+    { title: "Airport travel on Shabbat", description: "Understand weekend and holiday transport choices.", to: travelGuidePaths.shabbat },
+    { title: "Getting around Israel", description: "Continue your journey between cities and regions.", to: travelGuidePaths.israel },
+  ],
+  "tel-aviv": [
+    { title: "Ben Gurion Airport arrival tips", description: "Terminal arrival steps and meeting your driver.", to: travelGuidePaths.arrival },
+    { title: "Where to stay in Tel Aviv", description: "Compare beach, central-city and Jaffa neighborhoods.", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
+    { title: "Explore Old Jaffa", description: "See the port, stone lanes and nearby sights.", to: "/attractions/jaffa/" },
+    { title: "Getting around Tel Aviv", description: "Light rail, buses and local transport after check-in.", to: travelGuidePaths.telAviv },
+    { title: "Tel Aviv beaches", description: "Choose the right stretch of waterfront for your stay.", to: travelGuidePaths.telAvivBeaches },
+    { title: "Official airport taxis", description: "Learn about airport taxi pickup and fare arrangements.", to: travelGuidePaths.airportTaxis },
+  ],
+  haifa: [
+    { title: "Ben Gurion Airport arrival tips", description: "Plan baggage collection and your driver meeting point.", to: travelGuidePaths.arrival },
+    { title: "Where to stay in Haifa", description: "Compare Lower City, German Colony and Carmel hotels.", to: "/travel-blog/best-hotels-in-haifa/" },
+    { title: "Haifa attractions", description: "Explore the gardens, waterfront and Carmel viewpoints.", to: "/attractions/haifa/" },
+    { title: "Haifa shore excursions", description: "Plan a visit around your cruise and port schedule.", to: "/shore-excursions/haifa/" },
+    { title: "Getting around Israel", description: "Continue your journey through northern Israel.", to: travelGuidePaths.israel },
+    { title: "Official airport taxis", description: "See how official airport taxi pickups work.", to: travelGuidePaths.airportTaxis },
+  ],
+  "dead-sea": [
+    { title: "Ben Gurion Airport arrival tips", description: "From passport control to the driver meeting point.", to: travelGuidePaths.arrival },
+    { title: "Dead Sea hotels", description: "Find your exact Ein Bokek or Neve Zohar hotel area.", to: "/travel-blog/best-dead-sea-hotels/" },
+    { title: "Dead Sea attractions", description: "Plan beaches, viewpoints and desert highlights.", to: "/attractions/dead-sea/" },
+    { title: "Visit Masada", description: "Plan the fortress visit, cable car and site access.", to: "/attractions/masada/" },
+    { title: "Jerusalem to the Dead Sea", description: "Explore further journeys and stops around the region.", to: travelGuidePaths.jerusalemDeadSea },
+    { title: "Getting around Israel", description: "Plan onward road and public-transport connections.", to: travelGuidePaths.israel },
+  ],
+};
 
 export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
   const guide = getAirportRouteGuide(id);
   const { price } = guide.rate;
   const heroPhoto = airportHomepageRoutePhotos[id] ?? guide.photo;
-  const localGuide = id === "tel-aviv"
-    ? { title: "Getting around Tel Aviv", description: "Plan transport once you reach the city.", to: travelGuidePaths.telAviv, photo: travelGuides.telAviv.cardPhoto ?? travelGuides.telAviv.photo }
-    : { title: "Getting around Israel", description: "Plan your onward journeys.", to: travelGuidePaths.israel, photo: travelGuides.israel.cardPhoto ?? travelGuides.israel.photo };
-  const relatedCards: RelatedCard[] = [
-    { title: "Ben Gurion Airport arrival tips", description: "What to expect after landing.", to: travelGuidePaths.arrival, photo: travelGuides.arrival.cardPhoto ?? travelGuides.arrival.photo },
-    { title: "Official airport taxis", description: "Taxi pickup points and metered fares.", to: travelGuidePaths.airportTaxis, photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Ben Gurion Airport taxi service sign" } },
-    localGuide,
-    { title: guide.related[0]?.label ?? "Explore hotels", description: "Choose the right area for your stay.", to: guide.related[0]?.to ?? "/accommodation/", photo: guide.photo },
-  ];
+  const relatedCards = routeReading[id].map((card) => {
+    const photo = guideHeroPhotoForPath(String(card.to)) ??
+      (card.to === "/shore-excursions/haifa/" ? getShorePort("haifa").photo : undefined);
+    if (!photo) throw new Error(`Missing featured image for airport guide: ${card.to}`);
+    return { ...card, photo };
+  });
   const faqs = [
     ...guide.faqs,
-    { q: "Is the starting fare per vehicle or per passenger?", a: "The displayed weekday fare is per vehicle for up to four passengers, not per person. Night, weekend and holiday surcharges may apply, and luggage or a larger vehicle can affect the quote. I confirm the full price before booking." },
-    { q: "What happens if my flight is delayed?", a: "I can monitor the flight details you provide and coordinate the agreed pickup around the actual landing time. Confirm the meeting point and any waiting arrangements with me before booking, and message me if your plans change." },
-    { q: "Can I cancel my airport transfer free of charge?", a: "For a transfer booked directly with me, cancellation is free up to 24 hours before the scheduled pickup. Please check the terms for later cancellations in your booking confirmation. External booking platforms set their own policies." },
+    { q: "Where will I meet my driver at Ben Gurion Airport?", a: "For airport pickups, I'll confirm the terminal meeting point and collection instructions with your booking. Follow the agreed details after collecting your luggage." },
+    { q: "How can I pay for my transfer?", a: "I'll confirm the available payment methods and when payment is due before the booking is finalized." },
+    { q: "Can I arrange a transfer on Shabbat or late at night?", a: "Share the journey date and flight time. I'll check availability and confirm the full fare, including any applicable night, weekend or holiday surcharge." },
   ];
   const checklist = [...airportTransferChecklist.slice(0, 4), guide.checklistTip];
-  const creditedPhotos = [guide.photo, airportTransferPhotos["moshe"]!, ...relatedCards.map((card) => card.photo)]
-    .filter(hasPublicPhotoCredit);
+  const creditedPhotos = [guide.photo, airportTransferPhotos["moshe"]!, ...relatedCards.map(({ photo }) => ({
+    ...photo, sourceUrl: "sourceUrl" in photo && typeof photo.sourceUrl === "string" ? photo.sourceUrl : "",
+  }))].filter(hasPublicPhotoCredit);
   return (
     <main className="mx-auto max-w-5xl px-4 pb-12">
       <div className="pt-6">
         <Breadcrumbs items={crumbsFor(id).map((crumb) => ({ name: crumb.name, to: crumb.path }))} />
       </div>
       <header>
-        <GuideHeroLayout image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}>
+        <GuideHeroLayout image={<GuideHeroMedia src={heroPhoto.src} mobileSrc={airportHubPhotoSrc[id]} alt={heroPhoto.alt} compact />}>
           <p className="eyebrow">Private airport transfer · TLV</p>
           <h1 className="guide-page-title mt-3">{guide.title}</h1>
           <p data-guide-intro className="mt-4 text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
           <PageUpdated date={AIRPORT_TRANSFER_UPDATED_DATE} />
           <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-xl border bg-secondary/35 p-3 sm:p-4" data-testid="route-starting-rate">
             <div className="min-w-0">
-              <p className="text-xs font-medium text-muted-foreground">One-way weekday fare</p>
+              <p className="text-xs font-medium text-muted-foreground">One-way weekday airport pickup</p>
               <p className="mt-1 text-3xl font-semibold tabular-nums text-foreground">From ₪{price.amount.toLocaleString("en-US")}</p>
               <CompactCurrencyEquivalents amount={price.amount} />
             </div>
@@ -92,17 +133,16 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
               <p className="mt-1 text-xs text-muted-foreground">Per vehicle · up to 4 passengers</p>
             </div>
           </div>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Night, weekend and holiday surcharges may apply.</p>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Larger vehicles for groups and families can be provided, requiring a separate quote.</p>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">The starting fare is for an airport pickup. Returns, larger vehicles and extra stops receive a personal quote.</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">I confirm the full price before booking. The ILS fare includes any applicable night, weekend or holiday surcharge; USD and EUR estimates use current exchange rates.</p>
           <a href="#request-quote" onClick={focusQuote} className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>
         </GuideHeroLayout>
       </header>
       <AuthorCard />
 
       <section id="journey-details" aria-labelledby="journey-h" className="mt-9 scroll-mt-24">
-        <h2 id="journey-h" className="text-2xl font-semibold">Your private airport pickup</h2>
-        <p className="mt-2 max-w-4xl text-sm leading-relaxed text-muted-foreground">I can arrange a vehicle matched to your party and luggage, with an agreed meeting point and hotel or address drop-off. Send your flight details so pickup can be coordinated with your landing time.</p>
+        <h2 id="journey-h" className="text-2xl font-semibold">Your private airport transfer</h2>
+        <p className="mt-2 max-w-4xl text-sm leading-relaxed text-muted-foreground">Travel between Ben Gurion Airport and your hotel or address with a vehicle suited to your group and luggage. For airport pickups, I coordinate the agreed meeting point around your landing time.</p>
         <div className="mt-4 grid grid-cols-3 gap-4 rounded-2xl border bg-secondary/25 p-3 sm:gap-6 sm:p-4 lg:gap-8">
           {airportTransferBenefits.map((benefit, index) => {
             const Icon = benefitIcons[index]!;
@@ -113,6 +153,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
             </div>;
           })}
         </div>
+        <p className="mt-4 max-w-4xl text-sm leading-relaxed text-muted-foreground">For airport pickups, I send the agreed terminal meeting point and collection instructions with your booking confirmation. You can also read my <Link to={travelGuidePaths.arrival} className="font-semibold text-primary underline-offset-2 hover:underline">Ben Gurion Airport arrival tips</Link> before your flight.</p>
         <div className="mt-5 max-w-4xl">
           <h3 className="text-lg font-semibold">{guide.journeyTitle}</h3>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{guide.journeyText}</p>
@@ -127,13 +168,13 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{area.text}</p>
           </article>)}
         </div>
-        <aside className="mt-3 rounded-xl border-l-4 border-primary bg-secondary/30 px-4 py-3">
-          <h3 className="text-sm font-semibold">{guide.planningTitle}</h3>
-          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{guide.planningText}</p>
+        <aside className="mt-3 rounded-xl border-l-4 border-primary bg-secondary/30 px-4 py-3" aria-label="Practical example">
+          <h3 className="text-base font-semibold">{guide.example.title}</h3>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{guide.example.situation} {guide.example.response}</p>
         </aside>
       </section>
 
-      <TransferQuoteForm destinationId={id} fixedDestination compactHeader />
+      <TransferQuoteForm destinationId={id} fixedDestination compactHeader allowAirportDropoff />
 
       <section id="before-booking" aria-labelledby="checklist-h" className="mx-auto mt-7 max-w-4xl">
         <h2 id="checklist-h" className="text-xl font-semibold">Before booking your transfer</h2>
@@ -145,19 +186,21 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
         </ul>
       </section>
 
-      <AirportBookingPlatforms pageId={"airport-route-" + id} destination={guide.city} compact />
+      <AirportBookingPlatforms pageId={"airport-route-" + id} destination={guide.city} compact title="Compare other transfer providers" />
       <FaqList faqs={faqs} compact />
+      <p className="mt-6 rounded-xl border bg-secondary/20 px-4 py-3 text-sm leading-relaxed">Want to compare trains, buses and taxis for this route? Read my <Link to={transportComparisons[id]} className="font-semibold text-primary underline-offset-2 hover:underline">Ben Gurion Airport to {guide.city} transport guide</Link>.</p>
 
       <section id="related-travel-guides" aria-labelledby="related-guides-h" className="mt-9">
-        <h2 id="related-guides-h" className="text-2xl font-semibold">Related travel guides</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          {relatedCards.map((card) => <li key={card.title}>
-            <Link to={card.to} className="editorial-card-link group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <img src={guideHeroPhotoForPath(String(card.to))?.src ?? card.photo.src} alt={guideHeroPhotoForPath(String(card.to))?.alt ?? card.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
-              <span className="min-w-0 flex-1">
+        <h2 id="related-guides-h" className="text-2xl font-semibold">Plan your arrival and stay</h2>
+        <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
+          {relatedCards.map((card) => <li key={card.to} className="min-w-0">
+            <Link to={card.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card p-2.5 transition-[border-color,background-color,box-shadow] hover:border-primary/50 hover:bg-secondary/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <span className="block w-full overflow-hidden rounded-lg">
+                <img src={card.photo.src} alt={card.photo.alt} width={320} height={192} loading="lazy" decoding="async" className="aspect-[5/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.045]" />
+              </span>
+              <span className="mt-2 block min-w-0 px-0.5 pb-1">
                 <span className="block text-sm font-semibold leading-snug group-hover:text-primary">{card.title}</span>
                 <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{card.description}</span>
-                
               </span>
             </Link>
           </li>)}
@@ -165,28 +208,12 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       </section>
       <section id="other-routes" aria-labelledby="other-routes-h" className="mt-9">
         <h2 id="other-routes-h" className="text-xl font-semibold">Other airport transfer destinations</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        <ul className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-4">
           {airportTransferRoutes.filter((route) => route.id !== id).map((route) => <li key={route.id} className="min-w-0">
-            <Link to={route.path} className="group flex h-full min-h-24 min-w-0 items-center gap-3 rounded-xl border bg-card p-3 shadow-sm transition-[border-color,background-color,box-shadow] hover:border-primary/55 hover:bg-secondary/25 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary"><MapPin className="size-5" aria-hidden /></span>
-              <span className="min-w-0 flex-1">
-                <span className="block text-xs text-muted-foreground">From Ben Gurion Airport</span>
-                <span className="mt-0.5 block font-semibold leading-snug text-foreground group-hover:text-primary">{getAirportRouteGuide(route.id).city}</span>
-                <span className="mt-1 block text-xs text-muted-foreground">Starting fare &amp; route details</span>
-              </span>
-              <ArrowRight className="size-4 shrink-0 text-primary" aria-hidden />
-            </Link>
+            <Link to={route.path} className="flex h-full min-h-14 min-w-0 items-center justify-center rounded-xl border bg-card px-3 py-2 text-center text-sm font-semibold text-primary shadow-sm transition-colors hover:border-primary/55 hover:bg-secondary/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">{getAirportRouteGuide(route.id).city}</Link>
           </li>)}
           <li className="min-w-0">
-            <Link to="/airport-transfers/" className="group flex h-full min-h-24 min-w-0 items-center gap-3 rounded-xl border bg-secondary/30 p-3 shadow-sm transition-[border-color,background-color,box-shadow] hover:border-primary/55 hover:bg-secondary/55 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary"><LayoutGrid className="size-5" aria-hidden /></span>
-              <span className="min-w-0 flex-1">
-                <span className="block text-xs text-muted-foreground">Explore more routes</span>
-                <span className="mt-0.5 block font-semibold leading-snug text-foreground group-hover:text-primary">All destinations</span>
-                <span className="mt-1 block text-xs text-muted-foreground">Browse transfers and request a quote</span>
-              </span>
-              <ArrowRight className="size-4 shrink-0 text-primary" aria-hidden />
-            </Link>
+            <Link to="/airport-transfers/" className="flex h-full min-h-14 min-w-0 items-center justify-center rounded-xl border bg-secondary/30 px-3 py-2 text-center text-sm font-semibold text-primary shadow-sm transition-colors hover:border-primary/55 hover:bg-secondary/55 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">All destinations</Link>
           </li>
         </ul>
       </section>

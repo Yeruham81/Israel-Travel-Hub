@@ -26,7 +26,7 @@ import { airportTransferRates, travelGuidePaths } from "@/data/registry";
 import type { StayGuidePhoto } from "@/data/content";
 
 /** Last editorial update; separate from provider-rate/source verification dates. */
-export const AIRPORT_TRANSFER_UPDATED_DATE = "2026-11-15";
+export const AIRPORT_TRANSFER_UPDATED_DATE = "2026-11-23";
 export const AIRPORT_TRANSFER_HUB_UPDATED_DATE = "2026-11-23";
 
 export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
