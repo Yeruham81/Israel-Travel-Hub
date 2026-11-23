@@ -28,7 +28,6 @@ const clockDirections = "https://www.google.com/maps/dir/?api=1&destination=Jaff
 /** Three ordered waypoints per route work on both mobile and desktop Google Maps. */
 const shortWalkMapUrl = "https://www.google.com/maps/dir/?api=1&origin=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel&destination=Jaffa%20Port%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=walking&waypoints=HaPisga%20Garden%2C%20Old%20Jaffa%2C%20Israel%7CKedumim%20Square%2C%20Tel%20Aviv-Yafo%2C%20Israel%7CMazal%20Dagim%20Street%2C%20Old%20Jaffa%2C%20Israel";
 const halfDayWalkMapUrl = "https://www.google.com/maps/dir/?api=1&origin=Jaffa%20Flea%20Market%2C%20Tel%20Aviv-Yafo%2C%20Israel&destination=Jaffa%20Port%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=walking&waypoints=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel%7CHaPisga%20Garden%2C%20Old%20Jaffa%2C%20Israel%7CKedumim%20Square%2C%20Tel%20Aviv-Yafo%2C%20Israel";
-const museumMapUrl = "https://www.google.com/maps/search/?api=1&query=Ilana%20Goor%20Museum%2C%204%20Mazal%20Dagim%2C%20Old%20Jaffa%2C%20Israel";
 const gentleWalkMapUrl = "https://www.google.com/maps/dir/?api=1&origin=Jaffa%20Port%2C%20Tel%20Aviv-Yafo%2C%20Israel&destination=Jaffa%20Flea%20Market%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=walking&waypoints=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel";
 const jaffaTours = ["old-jaffa-walk", "tel-aviv-jaffa-small-group", "jaffa-carmel-walk"].map(id => tourProducts.find(tour => tour.id === id)!);
 
@@ -129,7 +128,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <article className="rounded-xl border bg-card p-4 sm:p-5">
           <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">A relaxed half-day — around 4–5 hours</h3></div>
           <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base"><li>Begin at the Flea Market during trading hours.</li><li>Continue via Clock Tower Square.</li><li>Visit Summit Garden and the Wishing Bridge.</li><li>Explore Kedumim Square and St. Peter’s Church.</li><li>Browse the zodiac alleys, adding an art stop if desired.</li><li>Finish at the port for a meal.</li></ol>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Art lovers can add the <a href={museumMapUrl} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum on Google Maps</a>.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Art lovers can add the <a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum</a>.</p>
           <a href={halfDayWalkMapUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open half-day walking route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
         </article>
       </div>
@@ -191,7 +190,8 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         </div>
         <aside className="rounded-xl border bg-card p-4" data-testid="jaffa-parking-directions">
           <h3 className="font-serif text-lg font-semibold">Arrival points on Google Maps</h3>
-          <p className="mt-2 text-sm leading-relaxed">Choose a central drop-off or a car park near your route. Parking fees and availability can change.</p>
+          <p className="mt-2 text-sm leading-relaxed">See the arrival area below and choose a central drop-off or car park near your route.</p>
+          <iframe title="Google Maps overview of the Jaffa Clock Tower, historic hill and nearby parking areas" src="https://maps.google.com/maps?q=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel&hl=en&z=15&t=m&output=embed" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-48 w-full rounded-lg border-0 sm:h-52" />
           <ul className="mt-3 space-y-3 text-sm leading-relaxed">
             <li><a href="https://www.google.com/maps/dir/?api=1&destination=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel" target="_blank" rel="noopener noreferrer" className={inlineLink}>Clock Tower Square</a> — central starting point</li>
             <li><a href="https://www.google.com/maps/dir/?api=1&destination=15a%20HaTzorfim%20Street%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Tzorfim car park</a> — 15A HaTzorfim St</li>
@@ -231,7 +231,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>These independently operated guided walks explore Old Jaffa or combine the old town with Tel Aviv neighbourhoods and markets. Compare meeting points, walking distances and inclusions.</p>
+      <p>These independently operated guided walks explore Old Jaffa or combine the old town with Tel Aviv neighbourhoods and markets. Compare meeting points, walking distances and inclusions. Prices and review scores shown on tour cards are recently checked snapshots; confirm the current details with each booking provider.</p>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="jaffa-tour-cards">
         {jaffaTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-jaffa" />)}
       </ul>
