@@ -313,7 +313,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         : isJerusalemDayJourney
         ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Me"]]
         : isTaxiFareGuide
-          ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
+          ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Before you go"], ["faq", "FAQ"], ["contact", "Contact Me"], ["sources", "Sources"]]
           : id === "esim"
           ? [...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact Me"]]
           : id === "airportTaxis"
@@ -392,7 +392,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         {id === "shabbat" && section.id === "shabbat-hours" && <ShabbatTimesLink />}{id === "shabbat" && section.id === "weekend-711" && <ShabbatBusLinks />}{id === "shabbat" && section.id === "terminal-transfer" && <ShabbatTerminalSteps />}{id === "shabbat" && section.id === "restart" && <ShabbatPublicTransportLinks />}</Fragment>)}
       {id === "jerusalemDeadSea" && <JerusalemJourneyOptions id={id} />}
       
-      {!isTaxiFareGuide && <section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24"><Checklist title={id === "bethlehem" ? "Travel checklist" : "Before you go"} items={guide.checklist} /></section>}
+      {<section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24"><Checklist title={id === "bethlehem" ? "Travel checklist" : "Before you go"} items={guide.checklist} /></section>}
       
       {id !== "jerusalemDeadSea" && id !== "bethlehem" && <JerusalemPartnerOffers id={id} />}
       {isJerusalemCluster && id !== "jerusalemDeadSea" && id !== "bethlehem" && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
@@ -412,8 +412,8 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       ]} />}
       {id === "shabbat" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
-      {id === "taxis" && <HomeContactForm context="taxis" />}
-      {id !== "taxis" && <HomeContactForm key={id} showTripadvisorBesidePortraitMobile={id === "airportTaxis"} guide={id === "airportTaxis" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight, destination, passengers and luggage. I'll reply personally about arranging a confirmed pickup.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
+      {id === "taxis" && <HomeContactForm context="taxis" showTripadvisorBesidePortraitMobile />}
+      {id !== "taxis" && <HomeContactForm key={id} showTripadvisorBesidePortraitMobile={id === "airportTaxis" || id === "taxiFares"} guide={id === "airportTaxis" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight, destination, passengers and luggage. I'll reply personally about arranging a confirmed pickup.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "taxiFares" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Questions about a taxi journey?", introduction: "Tell me where and when you plan to travel. I can help you understand the available options or discuss a separately arranged private ride.", placeholder: "Route, travel date, passengers, luggage or your question…" } : guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
       {id === "airportTaxis" && <SourceList ids={sourcesFor(guide)} intro="Official Gett, Israel Airports Authority and Ministry of Transport information for airport taxi booking, pickup and fares." />}
       {isTransportOverview && <SourceList ids={sourcesFor(guide)} intro="Official operator and government references checked on the indicated dates. Routes, fares, ticket rules and accessibility can change; verify your exact journey before departure." />}
       {isTaxiFareGuide && <SourceList ids={sourcesFor(guide)} intro="Official taxi tariffs, applicable times and passenger-rights references." />}
