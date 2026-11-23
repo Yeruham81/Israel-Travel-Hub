@@ -24,6 +24,8 @@ describe("Via Dolorosa standalone Jerusalem attraction",()=>{
     expect(content.hero.src).toBe(site.hero.src);
     expect(site.hero.src).toBe("/images/attractions/old-jerusalem-via-dolorosa.webp");
     expect(existsSync("public"+site.hero.src)).toBe(true);
+    expect(site.hero.mobileSrc).toBe("/images/attractions/via-dolorosa-mobile.webp");
+    expect(existsSync("public"+site.hero.mobileSrc)).toBe(true);
     expect(content.itineraryFirst).toBe(true);
     expect(content.itineraryBeforeHighlights).toBe(true);
     expect(content.facts).toHaveLength(6);
