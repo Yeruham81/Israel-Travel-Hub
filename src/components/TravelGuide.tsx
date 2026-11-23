@@ -65,7 +65,7 @@ const taxiNavCompactLabels: Readonly<Record<string, string>> = {
   checklist: "Checklist",
   faq: "FAQ",
   sources: "Sources",
-  contact: "Contact Moshe",
+  contact: "Contact Me",
 };
 
 export function travelGuideMeta(id: TravelGuideId) {
@@ -113,6 +113,7 @@ function GuideSectionPhoto({ photo }: { photo: GuidePhoto }) {
 function showSectionReferences(guideId: TravelGuideId, sectionId: string) {
   if (guideId === "shabbat") return ["terminal-transfer", "taxis-transfers", "practical"].includes(sectionId);
   if (guideId === "taxis") return ["fares", "airport", "sherut", "safety"].includes(sectionId);
+  if (guideId === "airportTaxis") return false; // Highlighted official links and consolidated sources replace repetitive footnotes.
   if (guideId === "esim") return false; // Provider names link directly to the offers; do not repeat references.
   if (guideId === "taxiFares") return false; // Single authoritative list at the end, not repeated under each paragraph.
   if (guideId === "jerusalemDeadSea") return false; // Official links sit beside advice; a single full source list follows the contact form.
@@ -309,12 +310,14 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         : id === "bethlehem"
         ? [["entry-rules", "Area A & entry rules"], ["at-a-glance", "Compare travel options"], ...guide.sections.filter((section) => section.id !== "entry-rules").map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
         : isJerusalemDayJourney
-        ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]]
+        ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Me"]]
         : isTaxiFareGuide
           ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
           : id === "esim"
           ? [...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact Me"]]
-          : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Moshe"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", travelGuidePaths[id].startsWith("/attractions/") ? "Contact me" : "Contact Moshe"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
+          : id === "airportTaxis"
+          ? [["at-a-glance", "Pickup points"], ["steps", "How to book"], ["terminal3", "Terminal 3"], ["scheduled", "Advance booking"], ["fares", "Taxi fares"], ["versus-transfer", "Taxi or transfer"], ["faq", "FAQ"], ["contact", "Contact Me"]]
+          : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Me"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", "Contact Me"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
       {bethlehemEntryRules && <section id={bethlehemEntryRules.id} aria-labelledby="entry-rules-h" className="mt-10 scroll-mt-24">
         <h2 id="entry-rules-h" className="text-3xl">{bethlehemEntryRules.title}</h2>
         <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
@@ -387,8 +390,8 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       <FaqList faqs={guide.faqs} {...(isTransportOverview && guide.faqGroups ? { groups: guide.faqGroups } : {})} />
       {id === "jerusalemDeadSea" && <DeadSeaGuideFollowUps />}
       {id === "bethlehem" && <BethlehemGuideFollowUps />}
-      {!isTransportOverview && !isTaxiFareGuide && id !== "esim" && id !== "jerusalemDeadSea" && id !== "bethlehem" && (id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Official airport, public-transport and taxi-tariff references. Confirm timetables, charges and pickup instructions for your date." /> : <SourceList ids={sourcesFor(guide)} />)}
-      {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} illustrated={id === "esim"} maxPhotoCards={id === "esim" ? 6 : 4} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
+      {!isTransportOverview && !isTaxiFareGuide && id !== "esim" && id !== "jerusalemDeadSea" && id !== "bethlehem" && (id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Official airport, public-transport and taxi-tariff references. Confirm timetables, charges and pickup instructions for your date." /> : id === "airportTaxis" ? <SourceList ids={sourcesFor(guide)} intro="Official Gett, Israel Airports Authority and Ministry of Transport information for airport taxi booking, pickup and fares." /> : <SourceList ids={sourcesFor(guide)} />)}
+      {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} illustrated={id === "esim" || id === "airportTaxis"} maxPhotoCards={id === "esim" || id === "airportTaxis" ? 6 : 4} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
       {!isJerusalemCluster && id !== "shabbat" && id !== "jerusalemDeadSea" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
       {id === "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths.shabbat} items={[
         { label: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
@@ -401,7 +404,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {id === "shabbat" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
       {id === "taxis" && <HomeContactForm context="taxis" />}
-      {id !== "taxis" && <HomeContactForm key={id} guide={guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
+      {id !== "taxis" && <HomeContactForm key={id} guide={id === "airportTaxis" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Contact Me", introduction: "Would you like to arrange a private airport pickup or ask about a specific journey? Tell me your flight date, destination, passengers and luggage, and I will reply personally.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
       {isTransportOverview && <SourceList ids={sourcesFor(guide)} intro="Official operator and government references checked on the indicated dates. Routes, fares, ticket rules and accessibility can change; verify your exact journey before departure." />}
       {isTaxiFareGuide && <SourceList ids={sourcesFor(guide)} intro="Official taxi tariffs, applicable times and passenger-rights references." />}
       {id === "jerusalemDeadSea" && <SourceList ids={sourcesFor(guide)} intro="Official transport, beach and national-park information. Confirm schedules and conditions for your travel date." />}
