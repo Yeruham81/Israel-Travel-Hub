@@ -36,8 +36,13 @@ jobs:
           done
           [[ "$HOSTINGER_REMOTE_PATH" =~ ^/home/[A-Za-z0-9_-]+/domains/[A-Za-z0-9.-]+/public_html/?$ ]] ||
             { echo "::error::Unexpected webroot path"; exit 1; }
-          [[ "$HOSTINGER_REMOTE_PATH" != *'/domains/israel-taxi.com/'* ]] ||
-            { echo "::error::Refusing to inspect legacy WordPress"; exit 1; }
+          # Read-only inspection may follow the new site after Hostinger's
+          # rebind, but production-domain roots must be configured as production.
+          if [[ "$HOSTINGER_REMOTE_PATH" == *'/domains/israel-taxi.com/public_html'* ||
+                "$HOSTINGER_REMOTE_PATH" == *'/domains/www.israel-taxi.com/public_html'* ]]; then
+            [[ "$HOSTINGER_ORIGIN" == "https://www.israel-taxi.com" ]] ||
+              { echo "::error::Production root requires production canonical origin"; exit 1; }
+          fi
           [[ "$HOSTINGER_SSH_PORT" =~ ^[0-9]{2,5}$ ]]
           [[ "$HOSTINGER_SSH_HOST" =~ ^[A-Za-z0-9.:-]+$ ]]
           [[ "$HOSTINGER_SSH_USER" =~ ^[A-Za-z0-9_-]+$ ]]
@@ -71,6 +76,9 @@ jobs:
           test -f "$root/index.html"
           test -f "$root/.htaccess"
           test ! -e "$root/wp-config.php"
+          test ! -e "$root/wp-load.php"
+          test ! -d "$root/wp-admin"
+          test ! -d "$root/wp-includes"
           test ! -L "$root/api"
           test -f "$root/api/quote-request/index.php"
           test -f "$root/api/exchange-rates/index.php"
