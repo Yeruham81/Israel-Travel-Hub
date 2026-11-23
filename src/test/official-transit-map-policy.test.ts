@@ -31,14 +31,21 @@ describe("official transit links and map provider policy", () => {
     }
   });
 
-  it("uses the approved OpenStreetMap exception only for Jaffa's twelve-pin visitor map", () => {
-    const jaffaMapPath = "public/maps/jaffa-attractions.html";
-    expect(existsSync(jaffaMapPath)).toBe(true);
-    const jaffaMap = readFileSync(jaffaMapPath, "utf8");
-    expect(jaffaMap).toContain("openstreetmap.org");
-    expect(jaffaMap).toContain("new maplibregl.Marker");
+  it("allows only the explicitly requested all-pins OpenStreetMap guides for Jaffa and Akko", () => {
+    const allowed = [
+      { path: "public/maps/jaffa-attractions.html", pins: 12 },
+      { path: "public/maps/akko-attractions.html", pins: 8 },
+    ];
+    for (const { path, pins } of allowed) {
+      expect(existsSync(path), path).toBe(true);
+      const map = readFileSync(path, "utf8");
+      expect(map).toContain("openstreetmap.org");
+      expect(map).toContain("new maplibregl.Marker");
+      expect(map).toContain(`points.length!==${pins}`);
+    }
+    const approved = new Set(allowed.map(x => x.path));
     for (const path of sourceFiles()) {
-      if (path.replace(/\\/g, "/") === jaffaMapPath) continue;
+      if (approved.has(path.replace(/\\/g, "/"))) continue;
       const source = readFileSync(path, "utf8");
       expect(/openstreetmap\.org|(?:unpkg\.com\/)?leaflet(?:@|\/|\.js|\.css)/i.test(source), `Unexpected map provider in ${relative(".", path)}`).toBe(false);
     }
