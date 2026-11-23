@@ -142,26 +142,27 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   visitorContent: (
     <div className="mt-4 space-y-4">
       <p>Jaffa is a historic port city and part of modern Tel Aviv–Yafo. Its old streets, public viewpoints, gardens and harbour can be explored without an admission ticket. Museums, cultural performances and optional tours set their own prices and opening schedules.</p>
-      <div className="grid gap-3 md:grid-cols-2" data-testid="jaffa-visitor-essentials">
-        <article className="rounded-xl border bg-card p-4">
-          <div className="flex items-center gap-2"><Ticket className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Free walks and paid visits</h3></div>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Free public spaces:</strong> Clock Tower Square, the historic lanes, Summit Garden and public parts of the port and flea-market streets.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Separate admission or booking:</strong> museums, pre-booked experiences and performances. See the Ilana Goor Museum details above, or consult the <a href={official.nalagaat} target="_blank" rel="noopener noreferrer" className={inlineLink}>Na Laga'at programme</a> for activities on your dates.</p>
-        </article>
-        <article className="rounded-xl border bg-card p-4">
-          <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Opening times vary</h3></div>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">The public outdoor areas are generally accessible throughout the day. Galleries, places of worship, visitor centres, shops and museums may have limited or changing hours.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">On <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link> and holiday eves, venues may change their schedules; verify the activities you specifically want to attend.</p>
-        </article>
+      <div role="region" aria-label="Jaffa opening hours and admission table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" data-testid="jaffa-hours-admission-table">
+        <table className="w-full min-w-[810px] border-collapse text-left text-sm">
+          <caption className="sr-only">Typical opening hours, prices and admission arrangements for Jaffa attractions</caption>
+          <thead className="bg-secondary/60"><tr>{["Site", "Opening hours", "Admission", "Booking and access"].map((heading,index) => <th key={heading} scope="col" className={index === 0 ? "sticky left-0 z-10 border-b bg-secondary px-3 py-3 font-semibold" : "border-b px-3 py-3 font-semibold"}>{heading}</th>)}</tr></thead>
+          <tbody>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Old Jaffa streets, Clock Tower and Summit Garden</th><td className="px-3 py-3 align-top">Public outdoor areas throughout the day</td><td className="px-3 py-3 align-top">Free</td><td className="px-3 py-3 align-top">Historic steps, slopes and stone paving</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Jaffa Port waterfront</th><td className="px-3 py-3 align-top">Public quays throughout the day</td><td className="px-3 py-3 align-top">Free</td><td className="px-3 py-3 align-top">Restaurants and activities set individual schedules</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Jaffa Flea Market</th><td className="px-3 py-3 align-top">Sun–Thu 09:00–17:00; Fri 09:00–14:00; stalls closed Saturday</td><td className="px-3 py-3 align-top">Free to browse</td><td className="px-3 py-3 align-top"><a href={official.fleaMarketHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Market information</a>; cafés may differ</td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">St. Peter's Church</th><td className="px-3 py-3 align-top">Access depends on services</td><td className="px-3 py-3 align-top">Free when open for visitors</td><td className="px-3 py-3 align-top"><a href={official.church} target="_blank" rel="noopener noreferrer" className={inlineLink}>Church visitor information</a></td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Ilana Goor Museum</th><td className="px-3 py-3 align-top">Sun–Thu & Sat 10:00–16:00; Fri 10:00–14:00</td><td className="px-3 py-3 align-top">₪45 adult</td><td className="px-3 py-3 align-top"><a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Museum admission, discounts and updates</a></td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Uri Geller Museum</th><td className="px-3 py-3 align-top">Advance reservations</td><td className="px-3 py-3 align-top">By booked visit</td><td className="px-3 py-3 align-top"><a href={official.uriGeller} target="_blank" rel="noopener noreferrer" className={inlineLink}>Arrange guided visit</a></td></tr>
+            <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Na Laga'at Center</th><td className="px-3 py-3 align-top">By programme</td><td className="px-3 py-3 align-top">By activity</td><td className="px-3 py-3 align-top"><a href={official.nalagaat} target="_blank" rel="noopener noreferrer" className={inlineLink}>Performances, workshops and dining</a></td></tr>
+            <tr><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Jaffa tourist information centre</th><td className="px-3 py-3 align-top">Sun–Thu 09:00–17:30; Fri 09:00–16:00; Sat 10:00–16:00</td><td className="px-3 py-3 align-top">Free visitor information</td><td className="px-3 py-3 align-top">2 Marzouk & Azar St · +972 3-681-4466 · <a href={official.touristInformation} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official details</a></td></tr>
+          </tbody>
+        </table>
       </div>
+      <p className="text-sm leading-relaxed">On <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>religious holidays and special dates</Link>, check the venue's published schedule before visiting.</p>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Accessibility and family visits</h3>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">The port promenade and parts of the surrounding streets offer relatively level approaches, while the historic hill has slopes, stone paving, steps and narrow passages. A stroller or wheelchair user may need an adapted route rather than the full route through every alley.</p>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">For a booked Na Laga'at activity, consult the centre's <a href={official.nalagaatAccess} target="_blank" rel="noopener noreferrer" className={inlineLink}>accessibility arrangements</a> in advance.</p>
-      </article>
-      <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
-        <h3 className="font-serif text-xl font-semibold">Tourist information near the Clock Tower</h3>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">The municipal visitor website lists a Jaffa tourist information centre at <strong>2 Marzouk and Azar Street</strong>, near Clock Tower Square, offering advice in English and Hebrew on sights, tours and events. Check the <a href={official.touristInformation} target="_blank" rel="noopener noreferrer" className={inlineLink}>city's visitor information page</a> for contact details and current hours before visiting.</p>
       </article>
     </div>
   ),
@@ -172,7 +173,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><TrainFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">Red Line light rail and buses</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The Red Line (DAN KAL) runs along Jerusalem Boulevard in Jaffa. Shalma is one useful station for the historic area, followed by a walk towards the flea market or Clock Tower. For the best stop from your accommodation, check the <a href={official.transit} target="_blank" rel="noopener noreferrer" className={inlineLink}>light rail operator</a> or <a href={official.buses} target="_blank" rel="noopener noreferrer" className={inlineLink}>official bus planner</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">The Red Line (DAN KAL) runs along Jerusalem Boulevard in Jaffa. Bloomfield Stadium station is useful for approaching the flea market, while Shalma is another option for northern Jaffa. Check the best station for your destination. For the best stop from your accommodation, check the <a href={official.transit} target="_blank" rel="noopener noreferrer" className={inlineLink}>light rail operator</a> or <a href={official.buses} target="_blank" rel="noopener noreferrer" className={inlineLink}>official bus planner</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary"/><h3 className="font-semibold">Walk from Tel Aviv's seafront</h3></div>
@@ -188,11 +189,17 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
             <a href={clockDirections} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Walking directions to the Clock Tower <ArrowUpRight className="h-3.5 w-3.5"/></a>
           </article>
         </div>
-        <div className="rounded-xl border bg-card p-3">
-          <div className="flex items-center gap-2"><MapPinned className="h-4 w-4 text-primary"/><h3 className="text-sm font-semibold">Old Jaffa and its harbour</h3></div>
-          <iframe title="Map of Old Jaffa, its harbour and surrounding streets" src={mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56"/>
-          <a href={mapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Open the map <ArrowUpRight className="h-3.5 w-3.5"/></a>
-        </div>
+        <aside className="rounded-xl border bg-card p-4" data-testid="jaffa-parking-directions">
+          <h3 className="font-serif text-lg font-semibold">Arrival points on Google Maps</h3>
+          <p className="mt-2 text-sm leading-relaxed">Choose a central drop-off or a car park near your route. Parking fees and availability can change.</p>
+          <ul className="mt-3 space-y-3 text-sm leading-relaxed">
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel" target="_blank" rel="noopener noreferrer" className={inlineLink}>Clock Tower Square</a> — central starting point</li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=15a%20HaTzorfim%20Street%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Tzorfim car park</a> — 15A HaTzorfim St</li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=46%20Jaffa%20Port%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Jaffa Port car park</a> — Jaffa Port 46</li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=4%20Rabbi%20Pinchas%20Street%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Flea Market car park</a> — Rabbi Pinchas 4</li>
+          </ul>
+          <p className="mt-4 text-xs text-muted-foreground">Official parking information: <a href={official.tzorfimParking} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tzorfim</a> and <a href={official.jaffaPortParking} target="_blank" rel="noopener noreferrer" className={inlineLink}>Jaffa Port</a>.</p>
+        </aside>
       </div>
     </div>
   ),
@@ -262,6 +269,8 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
     { label: "Tel Aviv–Yafo municipality — Old Jaffa walking route (Hebrew)", url: official.municipalWalkingGuide },
     { label: "Tel Aviv–Yafo municipality — walking-route booklet (Hebrew PDF)", url: official.municipalWalkingMap },
     { label: "Old Jaffa — arrival directions and parking (Hebrew)", url: official.oldJaffaArrival },
+    { label: "Old Jaffa — Tzorfim parking information (Hebrew)", url: official.tzorfimParking },
+    { label: "Old Jaffa — Jaffa Port parking information (Hebrew)", url: official.jaffaPortParking },
     { label: "Jaffa Flea Market — visitor information and trading hours", url: official.fleaMarketHours },
     { label: "Tel Aviv–Yafo municipality — Naim BaSofash weekend buses (Hebrew)", url: official.weekendBuses },
     { label: "Visit Tel Aviv — Jaffa tourist information centre (English)", url: official.touristInformation },
