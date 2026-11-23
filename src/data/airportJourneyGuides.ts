@@ -42,16 +42,15 @@ export type AirportJourneyGuide = {
 };
 
 const commonTaxi = [
-  "To take an official airport taxi, order through Gett or use a self-service kiosk. Follow the instructions to the authorized taxi queue at Terminal 3, Exit 03, or the main arrivals exit at Terminal 1. A Gett ride booked in advance has a different pickup point: Terminal 3, Level 2, Exit 23.",
-  "Official airport taxis charge by the regulated meter. The final fare depends on distance, traffic, time of day and permitted extra charges. Keep your ride code and receipt, and confirm luggage space before boarding.",
+  "Order an official taxi using Gett or the airport kiosk. Follow the authorized queue signs at Terminal 3, Exit 03, or the arrivals exit at Terminal 1. For a Gett ride booked in advance, use Terminal 3, Level 2, Exit 23.",
+  "The regulated meter sets the fare. Keep the ride code and receipt, and check luggage space before boarding.",
 ];
 const commonTransfer = [
-  "A private transfer is booked in advance. Confirm the vehicle, hotel address, total price, meeting point, waiting time and cancellation terms before travelling.",
-  "Sending a request does not confirm a booking. I'll confirm the vehicle, availability and total price in writing, including any additional charges.",
+  "I can arrange a vehicle for your party and luggage, with a meeting point and hotel drop-off agreed in advance.",
+  "I'll confirm the total price, waiting time and cancellation terms in writing. All bookings require confirmation.",
 ];
 const commonRental = [
-  "Renting a car may be useful if you're visiting several destinations. Check the total price, insurance deductible, deposit, fuel, parking, tolls and pickup hours.",
-  "If you're staying in one city, traffic and parking may make a rental car more trouble than it's worth. Check whether your hotel offers parking and whether the rental desk will be open when you land.",
+  "Compare the rental rate, insurance excess, deposit, fuel, parking and pickup hours. Check the collection desk's hours for your arrival date.",
 ];
 
 const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
@@ -130,12 +129,10 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "For holiday-related travel planning, see Israel\'s holiday and special dates guide."
     ],
     advice: [
-      "Compare the total from landing to hotel: immigration and baggage, getting to the station, the train and the final leg.",
-      "Save the hotel address in English and Hebrew if possible, plus the vehicle entrance or nearest Old City gate.",
-      "If you're travelling with several large suitcases, confirm that your vehicle has enough luggage space.",
-      "Check the train section for ticket and voucher instructions before committing to a rail connection.",
-      "Expect limited bus 485 departures and check your actual day; keep a rail or confirmed taxi alternative.",
-      "Consider a private pickup when a fixed quote or an agreed larger vehicle matters more than the lowest individual fare.",
+      "Allow time for baggage collection and the journey from Yitzhak Navon station to your hotel.",
+      "Keep the full hotel address and nearest Old City gate handy, especially if arriving after dark.",
+      "For several suitcases or a family group, check luggage space and any child-seat requirements.",
+      "On Fridays and holiday eves, check the last train before choosing public transport.",
     ],
     faqs: [
       { q: "What is the cheapest way from Ben Gurion Airport to Jerusalem?", a: "When running, the direct train is usually the lowest-cost practical option. Check the current Israel Railways fare per passenger, allow for any onward city transport and obtain the additional free personal voucher required on the Jerusalem line." },
@@ -254,11 +251,9 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "Check Saturday-evening train departures and holiday changes in the dedicated airport Shabbat guide."
     ],
     advice: [
-      "Make your station choice based on the hotel address and not only the train's station name.",
-      "For a family or group, compare the cost of public transport and the final taxi ride with the price of a private vehicle.",
-      "Check how your group will reach a beachfront or Jaffa entrance with suitcases after dark.",
-      "On Shabbat, free line 711 serves Terminal 1; verify the actual stop, direction and departure.",
-      "Have a backup transport option in case your flight or baggage is delayed.",
+      "For a family, compare train tickets plus the final taxi ride with one direct vehicle.",
+      "Save the hotel's exact entrance if you're staying in Old Jaffa or on a pedestrian street.",
+      "For a late arrival, check the last train and the next available alternative.",
     ],
     faqs: [
       { q: "Is there a sherut from Ben Gurion Airport to Tel Aviv?", a: "No regular walk-up shared airport sherut serves Tel Aviv. The free terminal shuttle, weekend Line 711 and separately booked transfers are different services." },
@@ -378,12 +373,9 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "Older airport shared-taxi listings may no longer be valid. Check the Sherut in Israel guide and airport Shabbat transport guide for current options."
     ],
     advice: [
-      "Choose your station based on your hotel's location and the easiest onward bus or taxi connection.",
-      "If connecting to a cruise, avoid a narrow margin between airport arrival and ship check-in.",
-      "Review the number of bags and passenger count before choosing a standard taxi.",
-      "If you're touring northern Israel, compare the cost of renting a car with using trains and occasional taxis or private rides.",
-      "For bus 905, check the actual terminal stop, departure and Haifa destination instead of relying on an old timetable.",
-      "Arrange mobile data for live timetables, payment apps and driver communications if you need it after landing."
+      "For a cruise departure, allow a generous margin between landing and ship check-in.",
+      "Confirm luggage space and child seats if booking a standard taxi or private vehicle.",
+      "If Haifa is your base for northern day trips, compare rental-car costs with rail and taxis.",
     ],
     faqs: [
       { q: "Can I buy a train ticket at the airport without a Rav-Kav?", a: "Normally yes. You can buy a single journey ticket at the station beneath Terminal 3; a Rav-Kav or supported app can be convenient for further travel. Check the current fare and accepted methods." },
@@ -521,12 +513,10 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "For a self-drive option, check that the car-rental counter is open for your arrival and that desert road access is safe on that date.",
     ],
     advice: [
-      "Work backwards from the final bus; check its operating date, destination direction, seat rules and named hotel stop.",
-      "Bring water for any outdoor transfer and consider daytime desert heat when estimating a walk with bags.",
-      "If you miss the last bus, a long-distance metered taxi may cost far more than your original train-plus-bus plan.",
-      "For any private or rental vehicle, confirm the actual hotel address, luggage space and any itinerary detours or restrictions.",
-      "If you use bus 444 or the limited bus 421 from Tel Aviv, check the seat-reservation system and arrive at the boarding stop early.",
-      "Check Route 90 and desert weather warnings before an onward drive; flash floods can affect roads even when it is not raining at the hotel."
+      "Work backward from the last bus serving your hotel's stop.",
+      "Carry drinking water for any outdoor walk between a bus stop and your hotel.",
+      "Check Route 90 closures and desert flood warnings before driving.",
+      "A missed final bus can mean a costly long-distance taxi from Jerusalem.",
     ],
     faqs: [
       { q: "Do I need to reserve a seat on bus 444 or 421?", a: "Egged lists routes 444 and 421 as reserved-seat services. Check availability and the current reservation instructions before travel, and allow time to reach the correct departure platform." },
