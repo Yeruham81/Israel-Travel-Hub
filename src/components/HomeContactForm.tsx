@@ -39,9 +39,9 @@ export function HomeContactForm({ context = "homepage", guide, showPortrait = tr
           <img src={airportTransferPhotos["moshe"]!.src} alt={airportTransferPhotos["moshe"]!.alt} data-photo-role="contact-portrait" width={150} height={200} loading="lazy" decoding="async" className="h-24 w-20 shrink-0 rounded-xl object-cover" />
           {showTripadvisorBesidePortraitMobile && <div className="min-w-0 md:hidden"><TripadvisorReviewsButton /></div>}
         </div>}
-        <p className={`${showPortrait ? "mt-5 " : ""}text-xs font-semibold uppercase tracking-widest opacity-80`}>{guide ? guide.eyebrow ?? "Ask Moshe Barak" : context === "taxis" ? "Travel help in Israel" : "Get in Touch"}</p>
-        <h2 id={headingId} className="mt-3 text-3xl">{guide?.heading ?? (context === "taxis" ? "Ask me about your journey in Israel" : "Send me a message")}</h2>
-        <p className="mt-4 leading-relaxed opacity-90">{guide?.introduction ?? (context === "taxis" ? "Have a question about taxis, an airport pickup or a longer journey? Tell me where and when you plan to travel. I'll reply personally and can help arrange a private vehicle when appropriate." : "Have a question about airport transfers, private journeys or your visit to Israel? Tell me a little about your plans, and I’ll reply personally.")}</p>
+        <p className={`${showPortrait ? "mt-5 " : ""}text-xs font-semibold uppercase tracking-widest opacity-80`}>{guide ? guide.eyebrow ?? "Ask Moshe Barak" : context === "taxis" ? "Contact Me" : "Get in Touch"}</p>
+        <h2 id={headingId} className="mt-3 text-3xl">{guide?.heading ?? (context === "taxis" ? "Questions about using taxis in Israel?" : "Send me a message")}</h2>
+        <p className="mt-4 leading-relaxed opacity-90">{guide?.introduction ?? (context === "taxis" ? "Tell me where and when you plan to travel, and I can answer questions about getting around or discuss a suitable private vehicle." : "Have a question about airport transfers, private journeys or your visit to Israel? Tell me a little about your plans, and I’ll reply personally.")}</p>
       </div>
       <div className="p-5 sm:p-8">
         <form onSubmit={send} noValidate className="mt-6" aria-label={guide ? "Guide contact message" : context === "about" ? "Contact me" : context === "taxis" ? "Taxi guide contact message" : "Homepage contact message"} aria-busy={submission.isSending}>
