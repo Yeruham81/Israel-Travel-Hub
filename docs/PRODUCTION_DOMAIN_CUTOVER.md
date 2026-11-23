@@ -19,9 +19,17 @@ PHP redirects. All prelaunch work must leave the live site unchanged.
 - `.github/workflows/launch-production-preflight.yml`: performs a full
   production-configuration prerender and validation **without deployment**.
 - `.github/workflows/deploy-hostinger-premium.yml`: the deployed directory
-  must have a marker, no WordPress `wp-config.php`, and both PHP API endpoints.
-  Its rsync excludes PHP, `/api/`, `.htaccess`, `.well-known` and does not
-  delete files. It does not update the server-managed redirect rules.
+  must have a marker, no WordPress entrypoints/admin directories, and both PHP API
+  endpoints. Its rsync excludes PHP, `/api/`, `.htaccess`, `.well-known` and
+  does not delete files. It does not update server-managed redirect rules.
+- `HOSTINGER_CUTOVER_FREEZE=true` stops automatic publishing and refuses
+  real manual uploads while allowing manual `dry_run=true` checks. This must
+  be set **before** changing a Hostinger domain binding.
+- Publishing to a webroot under `/domains/israel-taxi.com/` or
+  `/domains/www.israel-taxi.com/` additionally requires production metadata,
+  the normal webroot marker/API/WordPress safety checks, and
+  `HOSTINGER_PRODUCTION_DEPLOY_APPROVED=true` for non-dry-run uploads.
+  Production approval is never inferred from a directory name.
 
 ## Before switching the domain (manual verification)
 
@@ -51,36 +59,73 @@ PHP redirects. All prelaunch work must leave the live site unchanged.
    widgets, performance, accessibility, security headers, and error monitoring.
    These need an implementation/verification pass before a public cutover.
 
-## Launch window
+## Hostinger domain swap: reviewed sequence
 
-1. Associate the production domain with the new Hostinger website/webroot and
-   install valid TLS for `www.israel-taxi.com` and `israel-taxi.com`.
-   Do **not** upload over the old WordPress installation.
-2. Arrange 301 for apex -> www (and HTTP -> HTTPS), preserving the existing
-   page-level redirects. Be careful about redirect rule order.
-3. Ensure staging/temporary hostname is not independently indexable once
-   production HTML is published (prefer host-specific 301 to www; otherwise
-   a host-specific `X-Robots-Tag: noindex`). Remove any server-level production
-   `noindex` or `X-Robots-Tag` header before allowing indexing.
-4. Only after the production webroot/domain is confirmed, set repository
-   Actions variables:
-   - `HOSTINGER_CANONICAL_ORIGIN=https://www.israel-taxi.com`
-   - `HOSTINGER_INDEXABLE=true`
-   - `HOSTINGER_REMOTE_PATH`: keep its existing secret if the verified new
-     site still serves the same webroot; otherwise update only to a verified,
-     non-WordPress webroot carrying `.ith-static-deploy-ok` and the PHP APIs.
-5. Trigger **Deploy static website to Hostinger Premium** manually with
-   `dry_run=true`, inspect the planned remote path and uploaded files. Then
-   run with `dry_run=false` only after reviewing safety checks. Automatic
-   deployment may remain disabled until production health tests pass.
-6. Confirm a real public 200 response and correct HTML canonical/meta robots
-   on the home page and sampled routes. Verify `/robots.txt`,
-   `/sitemap.xml`, important 301 redirects, `/privacy-policy/`,
-   `/terms-of-use/`, CSS/images/fonts, widgets and both PHP APIs.
-7. Verify enquiry delivery **end to end** again on the final production host;
-   a status 200 alone does not prove inbox delivery.
-8. Submit `https://www.israel-taxi.com/sitemap.xml` in the existing
-   Search Console property; inspect indexing/404s and GA4 real-time events.
+The domain's DNS remains managed by **QUIC.cloud**. Do **not** transfer the
+registration or change nameservers. Domain assignment in Hostinger and DNS
+record updates in QUIC.cloud are separate operations; changing a hostname
+may change the absolute website folder or available backups.
+
+1. Confirm completed UpdraftPlus and separately saved webroot/redirect/API
+   backups. Previous WordPress contents must remain restorable.
+2. In GitHub repository **Settings → Secrets and variables → Actions →
+   Variables**, set `HOSTINGER_CUTOVER_FREEZE=true` and
+   `HOSTINGER_AUTO_DEPLOY=false`. Leave
+   `HOSTINGER_PRODUCTION_DEPLOY_APPROVED=false`. Verify that no deployment is
+   in progress. An unconfigured freeze flag defaults to false.
+3. In Hostinger **Websites**, use the old WordPress site's **Change domain**
+   option to move that website to a temporary domain. Ensure the website
+   remains present under the replacement domain. Hostinger may change its
+   filesystem location and temporary-domain URLs.
+4. In Hostinger **Websites**, use **Connect domain** for the NEW PHP/HTML site
+   and connect `israel-taxi.com`. Never select deletion or overwrite of the
+   WordPress website.
+5. Using Hostinger's **File Manager → All hosting files** (or SSH), copy the
+   **actual** new-site webroot path, then verify it contains
+   `.ith-static-deploy-ok`, `index.html`, `.htaccess`,
+   `api/quote-request/index.php`, `api/exchange-rates/index.php` and
+   `api/_internal/`; verify **no** `wp-config.php`, `wp-load.php`,
+   `wp-admin/`, or `wp-includes/`. Find the original WordPress webroot
+   separately and do not deploy into it. If the PHP files or the reviewed
+   301 redirect rules were not preserved, restore them in the correct site
+   before permitting an upload.
+6. Check DNS for both `israel-taxi.com` and `www.israel-taxi.com`. Adjust
+   only necessary **web** records in QUIC.cloud, based on Hostinger's actual
+   instructions. Keep MX, SPF, DKIM, DMARC, mail verification records and
+   nameservers unchanged. Verify HTTPS certificates for both hostnames.
+7. Update the GitHub **repository secret**
+   `HOSTINGER_REMOTE_PATH` **only if** the new site's verified webroot
+   changed. Never use the old WordPress path. Set repository variables
+   `HOSTINGER_CANONICAL_ORIGIN=https://www.israel-taxi.com` and
+   `HOSTINGER_INDEXABLE=true`. Keep `HOSTINGER_CUTOVER_FREEZE=true`.
+8. Run the **Production domain preflight (build only, never publish)** action;
+   it must pass. Then run **Deploy static website to Hostinger Premium**
+   manually with `dry_run=true`. Check its remote-path guard and rsync plan;
+   it must show no uploaded files and must identify the NEW site.
+9. After verifying the webroot, set
+   `HOSTINGER_PRODUCTION_DEPLOY_APPROVED=true` **if and only if** the new root
+   is now inside `/domains/israel-taxi.com/` or
+   `/domains/www.israel-taxi.com/`. Set
+   `HOSTINGER_CUTOVER_FREEZE=false`, keep `HOSTINGER_AUTO_DEPLOY=false`,
+   and run the deploy workflow manually with `dry_run=false`.
+10. Run **Audit Hostinger website operations (read only)**. Confirm actual
+    `https://www.israel-taxi.com/` returns the newly published pages,
+    production canonicals and robots, the new Sitemap and both API JSON GET
+    responses. Check no host-level Googlebot block or `X-Robots-Tag: noindex`,
+    including QUIC.cloud's cached response. Inspect a representative sample
+    of approved old-route 301 redirects for no loop or staging target;
+    test website images, scripts, forms, affiliate widgets, TLS, and apex→www.
+11. A single end-to-end enquiry on the new production hostname should arrive
+    in the established Zoho mailbox. Previous successful tests on the
+    temporary domain do **not** need repeating before cutover.
+12. Only after production passes all checks, set
+    `HOSTINGER_AUTO_DEPLOY=true` and keep
+    `HOSTINGER_CUTOVER_FREEZE=false`. Submit the canonical sitemap to the
+    existing Search Console property and monitor routing and email delivery.
+
+**DNS/webroot caveat:** moving two websites between Hostinger domains can
+leave the old and new websites on the same hosting IP yet change their
+document roots; do not assume an unchanged IP implies a valid domain mapping.
 
 ## Rollback
 
