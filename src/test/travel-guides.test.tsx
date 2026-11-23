@@ -452,10 +452,26 @@ describe("migrated practical guides", () => {
     expect(within(disclosure! as HTMLElement).getByText("All sections", { exact: false })).toBeInTheDocument();
     expect(disclosure?.querySelectorAll("a[href^='#']")).toHaveLength(15);
     expect(container.querySelector("#booking > div")).toHaveClass("text-foreground");
-    expect(within(container).getByRole("heading", { name: "Ask me about your journey in Israel" })).toBeInTheDocument();
+    expect(within(container).getByRole("heading", { name: "Questions about using taxis in Israel?" })).toBeInTheDocument();
     expect(within(container).getByRole("form", { name: "Taxi guide contact message" })).toBeInTheDocument();
     expect(within(container).getByRole("textbox", { name: /Subject/ })).toHaveValue("");
     expect(within(container).queryByText("Explore more Israel travel guides")).not.toBeInTheDocument();
+  });
+
+  it("keeps all three taxi guides on the same contact and navigation design", async () => {
+    for (const [id, route] of [["taxis", TaxiRoute], ["taxiFares", TaxiFaresRoute], ["airportTaxis", AirportTaxisRoute]] as const) {
+      const router = await routerAt(travelGuidePaths[id]);
+      const Page = route.options.component!;
+      const { container, unmount } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+      const nav = container.querySelector('nav[aria-label="On this page"]') as HTMLElement;
+      expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Me");
+      expect(container.querySelector("#checklist")).not.toBeNull();
+      expect(container.querySelector('[data-photo-role="author-portrait"]')).not.toBeNull();
+      expect(container.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
+      expect(container.querySelector("#contact")).toHaveTextContent("Contact Me");
+      expect(container.querySelector('a[href="/travel-blog/ben-gurion-airport-taxis/"]') || id === "airportTaxis").toBeTruthy();
+      unmount();
+    }
   });
 
   it("applies the readable taxi-guide layout and personal inquiry footer to other guides", async () => {
