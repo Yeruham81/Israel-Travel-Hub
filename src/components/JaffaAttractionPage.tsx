@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, MapPinned, TrainFront, Ticket } from "lucide-react";
+import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, TrainFront } from "lucide-react";
 import {
   AttractionDestinationPage, AttractionHighlight, AttractionContentImage, AttractionPracticalTip,
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { jaffaSite } from "@/data/jaffaSite";
-import tourPhoto from "@/assets/shore-hub/guide-jaffa.webp";
-import promenadePhoto from "@/assets/shore-hub/jaffa-route.webp";
+import { JaffaAttractionsMap } from "@/components/JaffaAttractionsMap";
+import { ExternalTourCard } from "@/components/TourCatalog";
+import { tourProducts } from "@/data/registry";
 
 const official = jaffaSite.official;
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
@@ -23,13 +24,13 @@ const photos = {
   nalagaat: "/images/attractions/jaffa-nalagaat-center.webp",
   food: "/images/attractions/jaffa-food.webp",
 } as const;
-const mapEmbed = "https://maps.google.com/maps?q=Old%20Jaffa%2C%20Tel%20Aviv-Yafo%2C%20Israel&hl=en&z=15&t=m&output=embed";
-const mapLarger = "https://www.google.com/maps/search/?api=1&query=Old%20Jaffa%2C%20Tel%20Aviv-Yafo%2C%20Israel";
 const clockDirections = "https://www.google.com/maps/dir/?api=1&destination=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=walking";
 /** Three ordered waypoints per route work on both mobile and desktop Google Maps. */
 const shortWalkMapUrl = "https://www.google.com/maps/dir/?api=1&origin=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel&destination=Jaffa%20Port%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=walking&waypoints=HaPisga%20Garden%2C%20Old%20Jaffa%2C%20Israel%7CKedumim%20Square%2C%20Tel%20Aviv-Yafo%2C%20Israel%7CMazal%20Dagim%20Street%2C%20Old%20Jaffa%2C%20Israel";
 const halfDayWalkMapUrl = "https://www.google.com/maps/dir/?api=1&origin=Jaffa%20Flea%20Market%2C%20Tel%20Aviv-Yafo%2C%20Israel&destination=Jaffa%20Port%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=walking&waypoints=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel%7CHaPisga%20Garden%2C%20Old%20Jaffa%2C%20Israel%7CKedumim%20Square%2C%20Tel%20Aviv-Yafo%2C%20Israel";
 const museumMapUrl = "https://www.google.com/maps/search/?api=1&query=Ilana%20Goor%20Museum%2C%204%20Mazal%20Dagim%2C%20Old%20Jaffa%2C%20Israel";
+const gentleWalkMapUrl = "https://www.google.com/maps/dir/?api=1&origin=Jaffa%20Port%2C%20Tel%20Aviv-Yafo%2C%20Israel&destination=Jaffa%20Flea%20Market%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=walking&waypoints=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel";
+const jaffaTours = ["old-jaffa-walk", "tel-aviv-jaffa-small-group", "jaffa-carmel-walk"].map(id => tourProducts.find(tour => tour.id === id)!);
 
 
 export const jaffaDestinationContent: AttractionDestinationContent = {
@@ -43,19 +44,24 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   hero: jaffaSite.hero,
   intro: jaffaSite.intro,
   itineraryFirst: true,
+  itineraryBeforeHighlights: true,
   itineraryTitle: "Suggested walking routes in Jaffa",
   visitorTitle: "Visiting Jaffa: entrance, hours and accessibility",
   visitorNavLabel: "Visitor essentials",
   historyTitle: "Jaffa's history and cultural heritage",
   relatedTitle: "Explore Tel Aviv further",
   navigationSections: [
+    ["visit-plan", "Walking routes & map"],
     ["highlights", "What to see"],
-    ["visit-plan", "Walking routes"],
-    ["visitor-info", "Visitor essentials"],
+    ["visitor-info", "Hours & admission"],
     ["getting-there", "Getting there"],
     ["food", "Food & cafés"],
-    ["tours", "Tours"],
+    ["practical", "Practical tips"],
+    ["history", "History"],
+    ["tours", "Guided tours"],
     ["faq", "Questions"],
+    ["nearby", "Explore Tel Aviv"],
+    ["trip-planning", "Plan your trip"],
     ["contact", "Contact me"],
   ],
   contactIntroduction: "Planning a visit to Jaffa or a longer trip around Tel Aviv? Tell me your dates, pickup point and the places you would like to see. I can help with a private transfer, a driver for the day or practical trip planning.",
@@ -70,61 +76,67 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   glanceNote: <>I suggest combining the old town, its hilltop viewpoints and the port in one walk. Add the flea market or a museum when you have more time, and leave room for a relaxed meal.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
-      <AttractionHighlight title="Clock Tower Square & Mahmoudiya Mosque" image={{ src: photos.clock, alt: "The Ottoman Clock Tower at the entrance to historic Jaffa" }}>
-        <p><strong>Clock Tower Square</strong> is a natural starting point for a Jaffa walk, connecting the old town, harbour and flea-market streets. The Ottoman-era tower dates from the early twentieth century, around 1902–1903.</p>
-        <p><strong>Mahmoudiya Mosque</strong> is a short walk from the tower and one of Jaffa's important Ottoman landmarks. Its minaret, ornate entrances and courtyard walls are part of the historic streetscape. As the mosque remains a place of worship, admire its exterior respectfully and follow any on-site instructions if visiting the interior.</p>
+      <AttractionHighlight mobileImageFirst title="Clock Tower Square" image={{ src: photos.clock, alt: "The Ottoman Clock Tower at the entrance to historic Jaffa" }}>
+        <p>The Ottoman-era Clock Tower, dating from around 1902–1903, is a natural starting point for a Jaffa walk. The square links the old town, harbour and flea-market streets.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Kedumim Square & St. Peter's Church" image={{ src: photos.church, alt: "St. Peter's Church in the historic hilltop area beside Kedumim Square" }}>
-        <p><strong>Kedumim Square</strong> lies at the heart of the old hilltop city, close to the galleries, historic lanes and sea-facing viewpoints. The Visitors Center beneath the square has presented Jaffa's archaeological history; check the <a href={official.oldJaffa} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Jaffa website (Hebrew)</a> for any available visitor activities.</p>
-        <p><strong>St. Peter's Church</strong>, overlooking the harbour, is one of Jaffa's defining landmarks and is connected to the Christian traditions about Peter in Joppa. It is an active Franciscan church, so access can vary during services and religious holidays. Dress respectfully and consult the <a href={official.church} target="_blank" rel="noopener noreferrer" className={inlineLink}>local church information (Hebrew)</a> before planning to enter.</p>
+      <AttractionHighlight mobileImageFirst title="Mahmoudiya Mosque" image={{ src: photos.mosque, alt: "Historic stone architecture of the Mahmoudiya Mosque in Jaffa" }}>
+        <p>Mahmoudiya Mosque is one of Jaffa's most important Ottoman landmarks, recognised by its minaret and decorated entrances. Admire the exterior and follow the visiting arrangements of this active place of worship.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Zodiac Alleys and artists' galleries" image={{ src: photos.alleys, alt: "Narrow historic stone alleyway in the artists' quarter of Old Jaffa" }}>
+      <AttractionHighlight mobileImageFirst title="Kedumim Square" image={{ src: photos.square, alt: "Kedumim Square on Old Jaffa's historic hill" }}>
+        <p>The hilltop square sits beside galleries, historic lanes and sea-facing viewpoints. The Visitors Center beneath it has presented Jaffa's archaeological history; check the <a href={official.oldJaffa} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Jaffa website (Hebrew)</a> for current visitor activities.</p>
+      </AttractionHighlight>
+      <AttractionHighlight mobileImageFirst title="St. Peter's Church" image={{ src: photos.church, alt: "St. Peter's Church overlooking Jaffa's harbour" }}>
+        <p>St. Peter's Church is a Franciscan landmark associated with Christian traditions about Peter in Joppa. It is an active church; dress respectfully and check <a href={official.church} target="_blank" rel="noopener noreferrer" className={inlineLink}>visiting arrangements (Hebrew)</a> around services and holidays.</p>
+      </AttractionHighlight>
+      <AttractionHighlight mobileImageFirst title="Zodiac Alleys and artists' galleries" image={{ src: photos.alleys, alt: "Narrow historic stone alleyway in the artists' quarter of Old Jaffa" }}>
         <p>The winding alleys named after signs of the zodiac are among the best places to wander without a rigid schedule. You will find restored stone buildings, studios, small art galleries and quiet corners between the busier squares.</p>
-        <p>I recommend taking time to explore several adjoining lanes instead of following only the most direct route to the port. Some have steps and uneven surfaces, so comfortable shoes are useful.</p>
+        <p>Explore several adjoining lanes to discover the artists’ quarter; comfortable shoes help on steps and uneven historic paving.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Summit Garden and Wishing Bridge" image={{ src: photos.garden, alt: "The wooden Wishing Bridge leads into the green slopes of Gan HaPisga in Old Jaffa" }}>
+      <AttractionHighlight mobileImageFirst title="Summit Garden and Wishing Bridge" image={{ src: photos.garden, alt: "The wooden Wishing Bridge leads into the green slopes of Gan HaPisga in Old Jaffa" }}>
         <p>Summit Garden (Gan HaPisga, also called Abrasha Park) offers one of the best views north towards Tel Aviv's coastline. Its open spaces, sculptures and Wishing Bridge are close to the old town's main walking route.</p>
         <p>The bridge has bronze plaques depicting the twelve zodiac signs. Local tradition invites visitors to touch their own sign, look towards the sea and make a wish. I particularly like the view from the garden in the late afternoon.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Jaffa Port and the waterfront" image={{ src: photos.port, alt: "Fishing boats and waterfront buildings around Jaffa Port" }}>
+      <AttractionHighlight mobileImageFirst title="Jaffa Port and the waterfront" image={{ src: photos.port, alt: "Fishing boats and waterfront buildings around Jaffa Port" }}>
         <p>Jaffa's old harbour is still associated with fishing boats, waterfront restaurants and maritime history. The quay is an enjoyable contrast to the narrow lanes above, with open views out to the Mediterranean.</p>
         <p>Look towards the offshore rocks associated with the legend of Andromeda, or spend time by the waterfront before a meal. Boat activities, when operating, are separate commercial experiences and should be checked directly.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Flea Market and Greek Market streets" image={{ src: photos.market, alt: "Antique shops and outdoor stalls in the Jaffa Flea Market area" }}>
+      <AttractionHighlight mobileImageFirst title="Flea Market and Greek Market streets" image={{ src: photos.market, alt: "Antique shops and outdoor stalls in the Jaffa Flea Market area" }}>
         <p>Jaffa's flea-market district lies southeast of the Clock Tower. Antique stalls and vintage shops sit alongside cafés, restaurants and small design businesses; nearby Greek Market streets add another lively pocket to explore.</p>
-        <p><strong>Typical flea-market trading hours:</strong> Sunday–Thursday 09:00–17:00; Friday 09:00–14:00; closed Saturday. Check the <a href={official.fleaMarketHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>market visitor information</a> for updates. Restaurants, cafés and independent shops may keep different hours, especially around <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link>.</p>
+        <p><strong>Flea market visiting hours:</strong> Sunday–Thursday 09:00–17:00; Friday 09:00–14:00; closed Saturday. Check the <a href={official.fleaMarketHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>market visitor information</a> for updates. Restaurants, cafés and independent shops may keep different hours, especially around <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link>.</p>
       </AttractionHighlight>
       <AttractionPracticalTip>For a first-time visit, I would prioritise the hilltop old town, Summit Garden, the port and either the flea market or a museum according to your interests. Leave time for a coffee or meal rather than rushing from sight to sight.</AttractionPracticalTip>
       <h3 className="pt-3 font-serif text-xl font-semibold">More cultural experiences in Jaffa</h3>
-      <AttractionHighlight title="Ilana Goor Museum and local art" image={{ src: photos.museum, alt: "Historic stone building of the Ilana Goor Museum in Old Jaffa", position: "38% center" }}>
-        <p>The <a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum</a>, at 4 Mazal Dagim Street, combines an eclectic art collection with a historic building and sea views. The museum currently lists <strong>₪45 adult admission</strong> and visiting hours of <strong>10:00–16:00 Sunday–Thursday and Saturday, 10:00–14:00 Friday</strong>. Check its website for holiday changes and discounts before you go.</p>
-        <p>Other small galleries and studios are scattered throughout the old town. The <a href={official.uriGeller} target="_blank" rel="noopener noreferrer" className={inlineLink}>Uri Geller Museum</a> at 7 Mazal Arieh Street offers pre-booked guided group or private visits. <strong>There is no walk-in admission</strong>; tours must be reserved in advance and are not suitable for children under six.</p>
+      <AttractionHighlight mobileImageFirst title="Ilana Goor Museum and local art" image={{ src: photos.museum, alt: "Historic stone building of the Ilana Goor Museum in Old Jaffa", position: "38% center" }}>
+        <p>The <a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum</a>, at 4 Mazal Dagim Street, combines an eclectic art collection with a historic building and sea views. See the <a href="#visitor-info" className={inlineLink}>visitor table</a> for published hours, adult admission and official discounts.</p>
+        <p>Other small galleries and studios are scattered throughout the old town. The <a href={official.uriGeller} target="_blank" rel="noopener noreferrer" className={inlineLink}>Uri Geller Museum</a> at 7 Mazal Arieh Street offers pre-booked guided group or private visits. Tours require <strong>advance reservations</strong>; check age guidance when booking.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Na Laga'at Center" image={{ src: photos.nalagaat, alt: "Na Laga'at cultural centre at the Jaffa Port complex" }}>
+      <AttractionHighlight mobileImageFirst title="Na Laga'at Center" image={{ src: photos.nalagaat, alt: "Na Laga'at cultural centre at the Jaffa Port complex" }}>
         <p>The <a href={official.nalagaat} target="_blank" rel="noopener noreferrer" className={inlineLink}>Na Laga'at Center</a> near Jaffa Port presents accessible cultural experiences, including theatre, workshops and dining in darkness at the BlackOut restaurant.</p>
-        <p>Check the programme and reserve the specific performance, workshop or dining experience you want. This is an optional booked activity rather than a drop-in sightseeing stop.</p>
+        <p>Check the programme and reserve the specific performance, workshop or dining experience you want. Choose your preferred session from the programme and reserve in advance.</p>
       </AttractionHighlight>
     </div>
   ),
   itineraryContent: (
     <div className="mt-4 space-y-4">
-      <p>Jaffa is especially rewarding on foot. I recommend choosing a route according to the time available, then adding one or two optional stops rather than trying to cover every venue.</p>
+      <p>Jaffa is especially rewarding on foot. Choose a highlights walk or a relaxed half-day, and add cultural stops to suit your interests.</p>
       <div className="grid gap-3 md:grid-cols-2" data-testid="jaffa-walking-routes">
         <article className="rounded-xl border bg-card p-4 sm:p-5">
           <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">A short walk — around 2–3 hours</h3></div>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Start:</strong> Clock Tower Square, with a look at Mahmoudiya Mosque nearby. Walk up to Gan HaPisga, cross the Wishing Bridge to Kedumim Square and St. Peter's Church, wander along the zodiac-named streets, then descend to Jaffa Port.</p>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base"><li>Start at Clock Tower Square and Mahmoudiya Mosque.</li><li>Climb to Summit Garden and the Wishing Bridge.</li><li>Continue to Kedumim Square and St. Peter’s Church.</li><li>Wander the zodiac alleys and galleries.</li><li>Finish at Jaffa Port.</li></ol>
           <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Finish:</strong> The waterfront. This route suits a first introduction to Jaffa without a museum visit.</p>
           <a href={shortWalkMapUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open short walking route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
         </article>
         <article className="rounded-xl border bg-card p-4 sm:p-5">
           <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">A relaxed half-day — around 4–5 hours</h3></div>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Begin at the flea market during trading hours, continue via Clock Tower Square and the historic hill to Gan HaPisga and the Wishing Bridge. Explore Kedumim Square, St. Peter's Church and the adjoining zodiac streets, then descend to the port for a meal.</p>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Art lovers can make an optional detour to the <a href={museumMapUrl} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum on Google Maps</a>. This detour is not included in the main walking-route link.</p>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base"><li>Begin at the Flea Market during trading hours.</li><li>Continue via Clock Tower Square.</li><li>Visit Summit Garden and the Wishing Bridge.</li><li>Explore Kedumim Square and St. Peter’s Church.</li><li>Browse the zodiac alleys, adding an art stop if desired.</li><li>Finish at the port for a meal.</li></ol>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Art lovers can make an optional detour to the <a href={museumMapUrl} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum on Google Maps</a>. Add the museum as an optional stop on your walk.</p>
           <a href={halfDayWalkMapUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open half-day walking route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
         </article>
       </div>
+      <JaffaAttractionsMap />
+      <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5" data-testid="jaffa-gentler-walk"><h3 className="font-serif text-xl font-semibold">A gentler option — waterfront and flea market</h3><p className="mt-2 text-sm leading-relaxed sm:text-base">Walk from Jaffa Port towards Clock Tower Square and the flea-market streets. This lower-Jaffa route avoids many of the hilltop steps. Check crossings, paving and venue entrances to plan for individual access needs.</p><a href={gentleWalkMapUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open waterfront and market route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></article>
       <p>The Google Maps links connect the principal stops; take your time exploring the adjoining stone lanes and the Wishing Bridge between them. You can also approach Jaffa along the seafront from Tel Aviv. For a local overview, use the <a href={official.municipalWalkMapShort} target="_blank" rel="noopener noreferrer" className={inlineLink}>official Old Jaffa walking map (Hebrew PDF)</a>; the city also offers a <a href={official.municipalWalkingMap} target="_blank" rel="noopener noreferrer" className={inlineLink}>full illustrated walking booklet (Hebrew PDF)</a> and <a href={official.municipalWalkingGuide} target="_blank" rel="noopener noreferrer" className={inlineLink}>route descriptions (Hebrew)</a>.</p>
-      <AttractionPracticalTip>To finish near sunset, leave the harbour or Summit Garden for the end of your walk. Allow extra time for a restaurant stop, especially on busy evenings.</AttractionPracticalTip>
+      <AttractionPracticalTip>For late-afternoon photographs, allow time for a coastal viewpoint near sunset.</AttractionPracticalTip>
     </div>
   ),
   visitorContent: (
@@ -197,7 +209,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   practicalContent: (
     <div className="mt-4 space-y-4">
       <p>Most visits are straightforward, but a few small planning decisions can make the walk more comfortable.</p>
-      <AttractionPracticalTip><strong>Shoes and slopes:</strong> Wear comfortable footwear for the stepped alleys and historic stone surfaces. If you prefer fewer hills, concentrate on the market and the port.</AttractionPracticalTip>
+      <AttractionPracticalTip><strong>Shoes and slopes:</strong> Choose shoes with good grip for the historic stone paving. The <a href="#visit-plan" className={inlineLink}>waterfront and market walk</a> offers a gentler alternative.</AttractionPracticalTip>
       <AttractionPracticalTip><strong>Sunny days:</strong> Parts of the garden, quay and market streets are exposed to direct sun. Bring water and plan a shady café break on hot afternoons.</AttractionPracticalTip>
       <AttractionPracticalTip><strong>Churches and neighbourhoods:</strong> Dress respectfully at religious sites and be considerate when photographing people, worshippers and residential doors.</AttractionPracticalTip>
       <p>Jaffa works well as part of a larger Tel Aviv visit. If you have additional time, combine it with the southern beachfront or <Link to="/travel-blog/beaches-in-tel-aviv/" className={inlineLink}>Tel Aviv's beaches</Link>, rather than crossing the city repeatedly.</p>
@@ -212,25 +224,11 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>You can enjoy the public sights independently, or join a guided heritage walk to hear more about the people, buildings and changing neighbourhoods. For a fuller day, Jaffa also combines naturally with other Tel Aviv highlights.</p>
-      <div className="grid gap-3 sm:grid-cols-2" data-testid="jaffa-tour-cards">
-        <Link to="/tours/tel-aviv-jaffa/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
-          <img src={tourPhoto} alt="Stone buildings and a walking route through Old Jaffa" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
-          <div className="min-w-0 flex-1">
-            <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Tel Aviv and Jaffa guided tours</h3>
-            <p className="mt-1 text-sm text-muted-foreground">Browse city walks, cultural experiences and guided sightseeing.</p>
-            <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore tours <ArrowUpRight className="h-4 w-4"/></span>
-          </div>
-        </Link>
-        <a href="#contact" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
-          <img src={promenadePhoto} alt="Coastal walkway and historic Jaffa scenery" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
-          <div className="min-w-0 flex-1">
-            <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Plan a private Tel Aviv visit</h3>
-            <p className="mt-1 text-sm text-muted-foreground">Ask about a transfer or private driver for a customised day.</p>
-            <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Send an inquiry <ArrowUpRight className="h-4 w-4"/></span>
-          </div>
-        </a>
-      </div>
+      <p>These independently operated guided walks explore Old Jaffa or combine the old town with Tel Aviv neighbourhoods and markets. Compare meeting points, walking distances and inclusions.</p>
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="jaffa-tour-cards">
+        {jaffaTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-jaffa" />)}
+      </ul>
+      <p className="text-sm leading-relaxed">For more options, <Link to="/tours/tel-aviv-jaffa/" className={inlineLink}>browse guided tours of Tel Aviv and Jaffa</Link>. For a customized driving day or transfer, <a href="#contact" className={inlineLink}>contact me</a>.</p>
     </div>
   ),
   faqs: [
