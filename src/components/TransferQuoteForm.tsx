@@ -69,8 +69,8 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
                   <label className="min-w-0 text-sm font-medium">Phone / WhatsApp<Input name="phone" type="tel" autoComplete="tel" maxLength={50} placeholder="Include country code" value={fields.phone} onChange={(e) => update("phone", e.target.value)} className={fieldClass} /></label>
                 </div>
                 <div>
-                  <div className="grid gap-3 min-[400px]:grid-cols-2 sm:gap-4 xl:grid-cols-3" data-testid="quote-fields-arrival">
-                    <label className="min-w-0 text-sm font-medium min-[400px]:col-span-2 xl:col-span-1">Flight number<Input name="flight" maxLength={30} placeholder="For example, LY123" value={fields.flight} onChange={(e) => update("flight", e.target.value)} className={fieldClass} /></label>
+                  <div className="grid gap-3 min-[380px]:grid-cols-2 sm:gap-4 xl:grid-cols-3" data-testid="quote-fields-arrival">
+                    <label className="min-w-0 text-sm font-medium min-[380px]:col-span-2 xl:col-span-1">Flight number<Input name="flight" maxLength={30} placeholder="For example, LY123" value={fields.flight} onChange={(e) => update("flight", e.target.value)} className={fieldClass} /></label>
                     <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Flight departure date *" : "Flight arrival date *"}<Input name="date" type="date" required value={fields.date} onChange={(e) => update("date", e.target.value)} className={fieldClass} /></label>
                     <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Flight departure time *" : "Flight arrival time *"}<Input name="time" type="time" required value={fields.time} onChange={(e) => update("time", e.target.value)} className={fieldClass} /></label>
                   </div>
