@@ -23,7 +23,7 @@ const gateDirections = "https://www.google.com/maps/dir/?api=1&destination=Lions
 const walkingLegs = [
   { title:"Stations I–V", detail:"Flagellation, Al-Wad and Stations III–V", origin:"Church of the Flagellation, Jerusalem, Israel", waypoints:["Station III Via Dolorosa, Jerusalem, Israel","Station IV Via Dolorosa, Jerusalem, Israel"], destination:"Station V Via Dolorosa, Jerusalem, Israel" },
   { title:"Stations V–VII", detail:"Simon of Cyrene, Veronica and Khan al-Zeit", origin:"Station V Via Dolorosa, Jerusalem, Israel", waypoints:["Station VI Via Dolorosa, Jerusalem, Israel"], destination:"Station VII Via Dolorosa, Jerusalem, Israel" },
-  { title:"Stations VII–XIV", detail:"Station VIII, the detour to IX, then the Holy Sepulchre", origin:"Station VII Via Dolorosa, Jerusalem, Israel", waypoints:["Station VIII Via Dolorosa, Jerusalem, Israel","Station IX Via Dolorosa, Jerusalem, Israel"], destination:"Church of the Holy Sepulchre, Jerusalem, Israel" },
+  { title:"Stations VII–XIV", detail:"Station VIII, back through the VII junction, up to IX, then the Holy Sepulchre", origin:"Station VII Via Dolorosa, Jerusalem, Israel", waypoints:["Station VIII Via Dolorosa, Jerusalem, Israel","Station VII Via Dolorosa, Jerusalem, Israel","Station IX Via Dolorosa, Jerusalem, Israel"], destination:"Church of the Holy Sepulchre, Jerusalem, Israel" },
 ] as const;
 const walkingLegUrl=(leg:typeof walkingLegs[number])=>"https://www.google.com/maps/dir/?api=1&travelmode=walking&origin="+encodeURIComponent(leg.origin)+"&destination="+encodeURIComponent(leg.destination)+"&waypoints="+leg.waypoints.map(encodeURIComponent).join("%7C");
 
@@ -104,7 +104,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
         </div>
       </div>
       <h3 className="font-serif text-xl font-semibold">Follow the route in three walking legs</h3>
-      <p className="text-sm leading-relaxed text-muted-foreground">Open each Google Maps leg in order. The final leg follows Station VIII, turns toward Station IX by the Coptic monastery, and continues to the Holy Sepulchre. Follow the numbered wall markers at each junction.</p>
+      <p className="text-sm leading-relaxed text-muted-foreground">Open each Google Maps leg in order. The final leg visits Station VIII, returns to the Station VII market junction, then follows the steps toward Station IX by the Coptic monastery before continuing to the Holy Sepulchre. Follow the numbered wall markers at each junction.</p>
       <div className="grid gap-3 sm:grid-cols-3" data-testid="via-dolorosa-walking-connections">
         {walkingLegs.map((leg, i) => <a key={leg.title} href={walkingLegUrl(leg)} target="_blank" rel="noopener noreferrer" className="rounded-xl border bg-card p-4 text-sm hover:border-primary/50">
           <span className="block text-xs font-bold uppercase tracking-wide text-muted-foreground">Leg {i + 1} of 3</span>
