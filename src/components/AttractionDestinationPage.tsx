@@ -44,7 +44,7 @@ export type AttractionDestinationContent = {
   highlightsTitle?: string;
   region: string;
   intro: string;
-  hero: { src: string; alt: string };
+  hero: { src: string; alt: string; mobileSrc?: string };
   updatedAt: string;
   facts: AttractionFact[];
   /** Optional grammar-safe heading for place names beginning with an article. */
@@ -169,7 +169,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
           { name: "Attractions", to: "/attractions/" },
           { name: content.heroTitle ?? content.title, to: content.path },
         ]} />
-        <GuideHeroLayout image={<GuideHeroMedia src={content.hero.src} alt={content.hero.alt} />}>
+        <GuideHeroLayout image={<GuideHeroMedia src={content.hero.src} alt={content.hero.alt} mobileSrc={content.hero.mobileSrc} />}>
           <p className="eyebrow">{content.region} · Attractions</p>
           <h1 className="guide-page-title mt-3">{content.heroTitle ?? content.title}</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{content.intro}</p>
