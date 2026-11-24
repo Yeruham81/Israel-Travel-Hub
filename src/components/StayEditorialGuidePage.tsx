@@ -7,7 +7,7 @@ import { GuideHeader, OnThisPage, Section, FaqList, SourceList } from "@/compone
 
 const sections = [["overview", "Choosing a base"], ["areas", "Compare areas"], ["tips", "Practical tips"], ["hotels", "Find hotels"], ["faq", "FAQ"]] as const;
 
-/** Planning guides do not reproduce individual Expedia hotel cards. */
+/** Editorial planning guides link to the destination hotel pages and their Travelpayouts-supported booking options. */
 export function StayEditorialGuidePage({ guide, id }: { guide: CityStayGuide | HotelStayDestination; id: AccommodationEditorialId }) {
  const info = accommodationEditorial[id];
  const isCity = "city" in guide;
@@ -42,7 +42,7 @@ export function StayEditorialGuidePage({ guide, id }: { guide: CityStayGuide | H
    <section id="hotels" aria-labelledby="hotels-h" className="mt-12 scroll-mt-32">
     <div className="rounded-2xl border bg-secondary/40 p-5 sm:p-7">
      <p className="eyebrow">Ready to compare properties?</p><h2 id="hotels-h" className="mt-2 text-2xl sm:text-3xl">Explore hotels in {name}</h2>
-     <p className="mt-3 leading-relaxed text-muted-foreground">My accommodation pages group specific hotels by neighborhood or stay style, with Expedia links for current room rates, availability and booking terms.</p>
+     <p className="mt-3 leading-relaxed text-muted-foreground">My accommodation pages compare selected hotels by neighborhood or stay style. Follow a hotel's booking link or use the hotel search to check current rates, availability and booking terms.</p>
      <Link to={guide.path as LinkProps["to"]} className="btn btn-primary mt-5 inline-flex items-center gap-2">Browse {name} hotels <ArrowRight className="h-4 w-4" aria-hidden/></Link>
     </div>
     <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{options.map(o => <Link key={o.path} to={o.path as LinkProps["to"]} className="group flex h-full flex-col rounded-xl border bg-card p-5 transition-colors hover:border-primary">
