@@ -119,13 +119,13 @@ describe("transport cluster: twelve editorial guides and four private landings",
     const guide = travelGuides.telAviv;
     expect(guide.title).toMatch(/^Getting Around Tel Aviv: Buses, Red Line/);
     expect(guide.title).not.toMatch(/2026|2027/);
-    expect(guide.updatedAt).toBe("2026-11-12");
+    expect(guide.updatedAt).toBe("2026-11-24");
     expect(guide.sections.map(section => section.id)).toEqual([
-      "choose", "paying", "walking", "city-buses", "red-line", "national-rail",
-      "taxis", "shared-taxis", "bikes", "shabbat", "driving", "accessibility",
+      "choose", "paying", "red-line", "national-rail",
+      "taxis", "bikes", "shabbat", "accessibility",
     ]);
     expect(guide.sections.filter(section => (section.inlineLinks?.length || 0) > 0).length).toBeGreaterThanOrEqual(5);
-    expect(guide.faqs).toHaveLength(15);
+    expect(guide.faqs).toHaveLength(8);
     expect(guide.sections.find(section => section.id === "national-rail")?.inlineLinks).toEqual(expect.arrayContaining([
       { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
     ]));
