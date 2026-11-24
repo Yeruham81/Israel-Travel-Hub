@@ -93,7 +93,8 @@ describe("independent author identity and page credits", () => {
     expect(container.querySelector("#moshe-barak")).toHaveTextContent("Moshe Barak");
     expect(screen.getByRole("heading", { level: 1, name: "Let me help you discover Israel" })).toBeInTheDocument();
     const head = await AboutRoute.options.head?.({} as never);
-    const schema = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []).find((item) => item["@type"] === "Person");
+    const schemas = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
+    const schema = schemas.flatMap(item => Array.isArray(item["@graph"]) ? item["@graph"] : [item]).find((item) => item["@type"] === "Person");
     expect(schema).toMatchObject({ name: "Moshe Barak", url: expect.stringMatching(/\/about-me\/#moshe-barak$/), sameAs: [mosheBarakAuthor.reviewsUrl] });
     expect(schema.aggregateRating).toBeUndefined();
     expect(schema.review).toBeUndefined();
