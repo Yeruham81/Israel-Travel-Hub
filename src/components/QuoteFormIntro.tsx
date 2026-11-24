@@ -10,7 +10,7 @@ type QuoteFormIntroProps = {
 };
 
 /** Compact full-width introduction for detailed inquiry forms. */
-export function QuoteFormIntro({ headingId, eyebrow, title, description, showTripadvisorReviews = false }: QuoteFormIntroProps) {
+export function QuoteFormIntro({ headingId, eyebrow, title, description, showTripadvisorReviews = true }: QuoteFormIntroProps) {
   const photo = airportTransferPhotos["moshe"]!;
   return (
     <div data-testid="quote-form-intro" className={`${showTripadvisorReviews ? "grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-3 sm:flex sm:flex-wrap sm:gap-5" : "flex flex-wrap gap-4 sm:gap-5"} items-start border-b bg-navy px-5 py-5 text-navy-foreground sm:items-center sm:px-7 sm:py-6`}>
