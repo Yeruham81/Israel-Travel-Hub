@@ -1,3 +1,4 @@
+const { allowEditorialMaps } = require("./consent-audit-fixture.cjs");
 /**
  * Published-site read-only Chromium audit of the evergreen Israel holiday guide.
  * Run only after Hostinger reports a successful deployment of the same commit.
@@ -88,6 +89,7 @@ async function inspect(page,label,isDesktop) {
     // Use one successful document load and resize the SAME page for each
     // viewport instead of issuing three full site requests.
     const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1,reducedMotion:"reduce"});
+      await allowEditorialMaps(page);
     const exceptions=[];page.on("pageerror",e=>exceptions.push(e.message));
     try {
       const response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:70000});

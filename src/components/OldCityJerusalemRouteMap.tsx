@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink, MapPin } from "lucide-react";
 
@@ -45,7 +46,7 @@ export function OldCityJerusalemRouteMap() {
       <p className="mt-1.5 text-sm text-muted-foreground">Select a landmark or an entrance gate to locate it on the map. Blue numbers mark landmarks; gold letters mark gates.</p>
     </div>
     <div className="grid lg:grid-cols-[minmax(0,1.48fr)_minmax(0,1fr)]">
-      <iframe ref={frame} title="Map showing eight Old City landmarks and six entrance gates together" src={overviewUrl} width={900} height={530} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[365px] w-full border-0 sm:h-[460px] lg:h-full lg:min-h-[720px]" />
+      <ConsentIframe ref={frame} title="Map showing eight Old City landmarks and six entrance gates together" src={overviewUrl} width={900} height={530} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[365px] w-full border-0 sm:h-[460px] lg:h-full lg:min-h-[720px]" />
       <div className="border-t p-3 lg:border-l lg:border-t-0">
         <div className="mb-2 flex items-center justify-between gap-3 px-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Find a place</p>

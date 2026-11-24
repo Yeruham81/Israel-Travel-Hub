@@ -1,3 +1,4 @@
+const { allowEditorialMaps } = require("./consent-audit-fixture.cjs");
 /* Read-only production-browser regression of the published Jerusalem planning hub. */
 const {chromium}=require("playwright");
 const fs=require("node:fs");
@@ -102,6 +103,7 @@ async function snapshot(page,label,desktop){
  try{
   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
   const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:"reduce"});
+      await allowEditorialMaps(page);
   const jsErrors=[];page.on("pageerror",e=>jsErrors.push(e.message));
   const failedResponses=[];
   page.on("response",r=>{if(r.status()>=400)failedResponses.push({status:r.status(),url:r.url().slice(0,160)})});

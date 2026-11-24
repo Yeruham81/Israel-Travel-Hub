@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { useEffect, useRef, useState } from "react";
 import { carRentalAffiliateUrl, DISCOVERCARS_WIDGET_FRAME_SRC } from "@/lib/car-rental-affiliate";
 import { recordOutboundClick } from "@/lib/outbound";
@@ -32,7 +33,7 @@ export function DiscoverCarsSearchWidget() {
   }, []);
 
   return <div className="mt-5 min-w-0 rounded-2xl border bg-card sm:p-5" data-testid="discovercars-search-widget">
-    <iframe ref={frameRef} src={DISCOVERCARS_WIDGET_FRAME_SRC} title="DiscoverCars car rental search"
+    <ConsentIframe category="marketing" ref={frameRef} src={DISCOVERCARS_WIDGET_FRAME_SRC} title="DiscoverCars car rental search"
       loading="lazy" width="100%" height={height} className="block w-full border-0"
       sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
       onError={() => setFailed(true)} />

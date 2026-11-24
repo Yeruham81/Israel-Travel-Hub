@@ -1,3 +1,4 @@
+import { hasCookieConsent } from "@/lib/cookie-consent";
 /**
  * Anonymous outbound click events (preview demonstration only).
  * These are CLICKS, not bookings. No contact details or flight data are stored.
@@ -13,6 +14,7 @@ export interface OutboundClickEvent {
 const KEY = "itt_outbound_clicks_v1";
 
 export function recordOutboundClick(e: Omit<OutboundClickEvent, "event" | "at">) {
+  if (!hasCookieConsent("analytics")) return;
   if (typeof window === "undefined") return;
   try {
     const list: OutboundClickEvent[] = JSON.parse(localStorage.getItem(KEY) || "[]");
@@ -24,6 +26,7 @@ export function recordOutboundClick(e: Omit<OutboundClickEvent, "event" | "at">)
 }
 
 export function readOutboundClicks(): OutboundClickEvent[] {
+  if (!hasCookieConsent("analytics")) return [];
   try {
     return JSON.parse(localStorage.getItem(KEY) || "[]");
   } catch {

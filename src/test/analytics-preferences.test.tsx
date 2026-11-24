@@ -1,50 +1,62 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { Analytics, AnalyticsPreferencesLink } from "@/components/Analytics";
+import { COOKIE_CONSENT_KEY, NECESSARY_ONLY, ALL_CATEGORIES, readStoredConsent, saveCookieConsent } from "@/lib/cookie-consent";
 import { routeTree } from "@/routeTree.gen";
-
-const mocks = vi.hoisted(() => ({ eligible: vi.fn(), choice: vi.fn(), setChoice: vi.fn(), page: vi.fn() }));
-vi.mock("@/lib/analytics", async importOriginal => ({
-  ...await importOriginal<typeof import("@/lib/analytics")>(),
-  analyticsEligible: mocks.eligible, getAnalyticsChoice: mocks.choice,
-  setAnalyticsChoice: mocks.setChoice, trackPageView: mocks.page,
-}));
-beforeEach(() => { mocks.eligible.mockReturnValue(true); mocks.choice.mockReturnValue("unknown"); });
-afterEach(() => { cleanup(); vi.clearAllMocks(); });
-
+vi.mock("@/lib/analytics", async original => ({ ...await original<typeof import("@/lib/analytics")>(), trackPageView: vi.fn(), refreshAnalyticsChoice: vi.fn() }));
+beforeEach(() => { saveCookieConsent(NECESSARY_ONLY); localStorage.clear(); window.dispatchEvent(new StorageEvent("storage", { key: COOKIE_CONSENT_KEY })); });
+afterEach(() => { cleanup(); localStorage.clear(); window.history.replaceState(null, "", "/"); vi.clearAllMocks(); });
 async function showPreferences() {
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() },
     history: createMemoryHistory({ initialEntries: ["/car-rental/"] }), trailingSlash: "always" });
   await router.load();
   render(<RouterContextProvider router={router}><Analytics /><AnalyticsPreferencesLink /></RouterContextProvider>);
 }
-
-it("offers equal allow/decline choices and reopens from the footer", async () => {
+it("offers all three choices on preview too and reopens settings after necessary only", async () => {
   await showPreferences();
-  expect(screen.getByRole("dialog", { name: "Google Analytics preferences" })).toBeVisible();
-  const allow = screen.getByRole("button", { name: "Allow analytics" });
-  const decline = screen.getByRole("button", { name: "Decline analytics" });
-  expect(allow.className).toBe(decline.className);
-  fireEvent.click(decline);
-  expect(mocks.setChoice).toHaveBeenLastCalledWith("denied");
+  expect(screen.getByRole("dialog", { name: "Your cookie choices" })).toBeVisible();
+  const all = screen.getByRole("button", { name: "Accept all" });
+  const necessary = screen.getByRole("button", { name: "Necessary only" });
+  expect(all.className).toBe(necessary.className);
+  fireEvent.click(necessary);
+  expect(readStoredConsent(localStorage)?.categories).toEqual(NECESSARY_ONLY);
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-  fireEvent.click(screen.getByRole("button", { name: "Analytics preferences" }));
-  fireEvent.click(screen.getByRole("button", { name: "Allow analytics" }));
-  expect(mocks.setChoice).toHaveBeenLastCalledWith("granted");
+  fireEvent.click(screen.getByRole("button", { name: "Cookie settings" }));
+  fireEvent.click(screen.getByRole("button", { name: "Accept all" }));
+  expect(readStoredConsent(localStorage)?.categories).toEqual(ALL_CATEGORIES);
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 });
+it("saves independent category choices and keeps necessary storage always on", async () => {
+  await showPreferences();
+  fireEvent.click(screen.getByRole("button", { name: "Choose categories" }));
+  expect(screen.getByText(/Always on/)).toBeVisible();
+  const boxes = screen.getAllByRole("checkbox");
+  expect(boxes).toHaveLength(3);
+  boxes.forEach(box => expect(box).not.toBeChecked());
+  fireEvent.click(boxes[1]!);
+  fireEvent.click(screen.getByRole("button", { name: "Save my choices" }));
+  expect(readStoredConsent(localStorage)?.categories).toEqual({ analytics: false, external: true, marketing: false });
+  fireEvent.click(screen.getByRole("button", { name: "Cookie settings" }));
+  expect(screen.getAllByRole("checkbox")[1]).toBeChecked();
+  fireEvent.click(screen.getByRole("button", { name: "Necessary only" }));
+  expect(readStoredConsent(localStorage)?.categories).toEqual(NECESSARY_ONLY);
+});
+it("respects a saved choice and refreshes after another tab changes it", async () => {
+  saveCookieConsent(NECESSARY_ONLY);
+  await showPreferences();
+  expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  act(() => { localStorage.removeItem(COOKIE_CONSENT_KEY); window.dispatchEvent(new StorageEvent("storage", { key: COOKIE_CONSENT_KEY })); });
+  expect(screen.getByRole("dialog")).toBeVisible();
+});
 
-it("leaves the preview unchanged and respects a saved production choice", async () => {
-  mocks.eligible.mockReturnValue(false);
+it("opens a direct Cookie settings link once and closes after saving", async () => {
+  saveCookieConsent(ALL_CATEGORIES);
+  window.history.replaceState(null, "", "/#cookie-settings");
   await showPreferences();
+  expect(screen.getByRole("dialog")).toBeVisible();
+  expect(screen.getAllByRole("checkbox").every(box => (box as HTMLInputElement).checked)).toBe(true);
+  fireEvent.click(screen.getByRole("button", { name: "Necessary only" }));
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-  expect(screen.queryByRole("button", { name: "Analytics preferences" })).not.toBeInTheDocument();
-  cleanup();
-  mocks.eligible.mockReturnValue(true);
-  mocks.choice.mockReturnValue("granted");
-  await showPreferences();
-  expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-  expect(screen.getByRole("button", { name: "Analytics preferences" })).toBeVisible();
 });

@@ -1,3 +1,4 @@
+import "@/test/consent-fixture";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -129,12 +130,13 @@ describe("Accommodation booking hub",()=>{
     expect(url.searchParams.get("trs")).toBe("406243");
     expect(url.searchParams.get("shmarker")).toBe("622032.accommodation_hub_widget");
     expect(url.searchParams.get("powered_by")).toBe("false");
-    // jsdom has no IntersectionObserver: each widget loads immediately.
-    const script = mount.querySelector("script");
-    expect(script).not.toBeNull();
-    expect(script?.src).toBe(widget.scriptUrl);
-    expect(script?.async).toBe(true);
-    expect(script?.charset).toBe("utf-8");
+    // The approved widget runs in a disposable document, never the parent page.
+    const frame = mount.querySelector("iframe");
+    expect(frame).not.toBeNull();
+    const doc = new DOMParser().parseFromString(frame!.getAttribute("srcdoc")!, "text/html");
+    const script = doc.querySelector("script[src]");
+    expect(script?.getAttribute("src")).toBe(widget.scriptUrl);
+    expect(mount.querySelector("script")).toBeNull();
   }
 
   const booking = new URL(hotelSearchWidgets.find((widget) => widget.id === "booking")!.scriptUrl);

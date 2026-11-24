@@ -1,3 +1,4 @@
+const { allowEditorialMaps } = require("./consent-audit-fixture.cjs");
 /* Read-only checks and screenshots of the published senior-tours guide. No form submissions. */
 const {chromium}=require("playwright");
 const fs=require("node:fs");
@@ -80,6 +81,7 @@ async function snapshot(page,label){
  try{
   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
   const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:"reduce"});
+      await allowEditorialMaps(page);
   page.on("pageerror",e=>jsErrors.push(e.message));
   page.on("response",res=>{if(res.status()>=400)issues.push({status:res.status(),url:res.url().slice(0,180)})});
   const response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:90000});

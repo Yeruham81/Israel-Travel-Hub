@@ -1,3 +1,4 @@
+import "@/test/consent-fixture";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";

@@ -1,3 +1,4 @@
+import { BookingWidgetFrame } from "@/components/BookingWidgetFrame";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -22,40 +23,11 @@ function HotelSearchWidget({ widget, visible }: {
   widget: (typeof hotelSearchWidgets)[number];
   visible: boolean;
 }) {
-  const mountRef = useRef<HTMLDivElement>(null);
-  const [failed, setFailed] = useState(false);
-
-  useEffect(() => {
-    const mount = mountRef.current;
-    if (!visible || !mount) return;
-
-    const script = document.createElement("script");
-    script.src = widget.scriptUrl;
-    script.async = true;
-    script.charset = "utf-8";
-    script.onerror = () => setFailed(true);
-    // Third-party widgets own the children of this element, not React.
-    mount.appendChild(script);
-
-    return () => {
-      script.onerror = null;
-      mount.replaceChildren();
-    };
-  }, [visible, widget.scriptUrl]);
-
-  return (
-    <div className="min-w-0 rounded-2xl border bg-card p-4 sm:p-6" data-testid={`${widget.id}-hotel-search-widget`}>
-      <div
-        ref={mountRef}
-        className="min-h-52 min-w-0 max-w-full overflow-x-auto [&_iframe]:max-w-full"
-        aria-label={widget.title}
-        data-testid={`${widget.id}-hotel-widget-mount`}
-      />
-      {failed && <p role="status" className="mt-2 text-sm text-muted-foreground">
-        This search is temporarily unavailable. You can still explore the hotel guides above.
-      </p>}
+  return <div className="min-w-0 rounded-2xl border bg-card p-4 sm:p-6" data-testid={`${widget.id}-hotel-search-widget`}>
+    <div className="min-h-52 min-w-0 max-w-full overflow-x-auto" aria-label={widget.title} data-testid={`${widget.id}-hotel-widget-mount`}>
+      {visible && <BookingWidgetFrame scriptUrl={widget.scriptUrl} title={widget.title} />}
     </div>
-  );
+  </div>;
 }
 
 /**

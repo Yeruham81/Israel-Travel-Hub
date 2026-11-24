@@ -1,6 +1,7 @@
+import { ALL_CATEGORIES, saveCookieConsent } from "@/lib/cookie-consent";
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, isRedirect, RouterContextProvider } from "@tanstack/react-router";
-import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { renderToString } from "react-dom/server";
 import { afterEach, describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
@@ -731,6 +732,7 @@ describe("tours hub and SEO category pages", () => {
   });
 
   it("tracks the product and offer separately on external booking clicks", async () => {
+    act(() => saveCookieConsent(ALL_CATEGORIES));
     await renderPage("/tours/eilat-red-sea/");
     const card = screen.getAllByTestId("tour-card").find(card => card.getAttribute("data-product-id") === "eilat-glass-bottom-boat")!;
     fireEvent.click(within(card).getByRole("link", { name: /^View tour:/ }));

@@ -1,3 +1,4 @@
+import { hasCookieConsent } from "@/lib/cookie-consent";
 import { useRouterState } from "@tanstack/react-router";
 import { MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -17,6 +18,7 @@ function findContactTarget(): HTMLElement | null {
 }
 
 function recordContactClick(pagePath: string, destination: string) {
+  if (!hasCookieConsent("analytics")) return;
   // This emits only when the site has installed its consent-aware analytics.
   // Do not inject an analytics script, GA ID, or personally identifying data.
   const analytics = window as Window & {

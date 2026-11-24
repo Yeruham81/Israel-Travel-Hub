@@ -1,3 +1,4 @@
+import "@/test/consent-fixture";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { HotelStyleEditorialGuide } from "@/components/HotelStyleEditorialGuide";

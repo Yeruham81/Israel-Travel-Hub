@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { MapPin, ExternalLink } from "lucide-react";
 import type { NeighborhoodStayGuide } from "@/data/content";
 import { isPublisherUrl } from "@/data/registry";
@@ -12,7 +13,7 @@ export function AreaMap({ area, compact = false, provider = "google", googleZoom
   const externalUrl = provider === "google" ? `https://www.google.com/maps/search/?api=1&query=${query}` : localUrl;
   return (
     <figure className={`min-w-0 overflow-hidden rounded-xl border bg-muted ${stretch ? "flex h-full flex-col" : ""}`}>
-      <iframe
+      <ConsentIframe
         title={provider === "google" ? `Google Maps view of ${area.name} — ${reference}` : `English map of ${area.name} — ${reference}`}
         src={mapUrl}
         width="600"

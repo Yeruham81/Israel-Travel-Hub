@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
@@ -230,7 +231,7 @@ export function TopTenIsraelGuide() {
             <button type="button" onClick={() => focusMap("all")} disabled={selectedRegion === "all"}
               className="min-h-11 w-full rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:opacity-40 sm:w-auto">Show all regions</button>
           </div>
-          <iframe ref={mapRef} title="Interactive map of eight regions for Israel's ten recommended experiences" src={mapUrl}
+          <ConsentIframe ref={mapRef} title="Interactive map of eight regions for Israel's ten recommended experiences" src={mapUrl}
             width={900} height={460} loading="lazy" referrerPolicy="strict-origin-when-cross-origin"
             onLoad={() => { if (selectedRegion !== "all") mapRef.current?.contentWindow?.postMessage({ type: "top-ten-israel-map-focus", id: selectedRegion }, window.location.origin); }}
             className="h-[360px] w-full border-0 sm:h-[460px]" />

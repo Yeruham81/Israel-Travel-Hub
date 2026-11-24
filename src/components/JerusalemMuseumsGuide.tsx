@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
@@ -131,7 +132,7 @@ function MuseumMap() {
       </div>
       {selected&&<p className="mt-2 text-xs text-muted-foreground">{selected.address}, Israel{selected.closureNote?" · "+selected.closureNote:""}</p>}
     </div>
-    <iframe ref={frame} title="Fifteen Jerusalem museums and cultural experiences" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={museumMapUrl} onLoad={()=>{
+    <ConsentIframe ref={frame} title="Fifteen Jerusalem museums and cultural experiences" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={museumMapUrl} onLoad={()=>{
       if(selectedId!=="all")frame.current?.contentWindow?.postMessage({type:"jerusalem-museum-map-focus",id:selectedId},window.location.origin);
     }} width={900} height={440} className="h-[360px] w-full border-0 sm:h-[440px]"/>
     <div className="flex flex-wrap items-center justify-between gap-3 p-3 text-xs text-muted-foreground"><span>Map data © OpenStreetMap contributors.</span>{selected&&<OfficialLink href={"https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(selected.name+", "+selected.address+", Israel")}>Get directions on Google Maps</OfficialLink>}</div>

@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { BusFront, CarFront, Sun, Waves } from "lucide-react";
 import type { ReactNode } from "react";
 import { SiteLink as Link } from "@/components/SiteLink";
@@ -176,7 +177,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-lg font-semibold">Dead Sea area map</h3>
         <p className="mt-1 text-sm text-muted-foreground">The map is centred on the Ein Bokek resort area. Use the individual location links above for each beach.</p>
-        <iframe title="Map of Ein Bokek and the southern Dead Sea in Israel" src="https://maps.google.com/maps?q=Ein%20Bokek%2C%20Israel&hl=en&z=11&t=m&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="mt-3 h-64 w-full rounded-lg border sm:h-80" />
+        <ConsentIframe title="Map of Ein Bokek and the southern Dead Sea in Israel" src="https://maps.google.com/maps?q=Ein%20Bokek%2C%20Israel&hl=en&z=11&t=m&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="mt-3 h-64 w-full rounded-lg border sm:h-80" />
         <div className="mt-3"><External href={maps.hotelArea}>Open the resort area in Google Maps</External></div>
       </div>
     </div>

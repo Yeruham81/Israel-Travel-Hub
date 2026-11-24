@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, TrainFront } from "lucide-react";
 import {
@@ -191,7 +192,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <aside className="rounded-xl border bg-card p-4" data-testid="jaffa-parking-directions">
           <h3 className="font-serif text-lg font-semibold">Arrival points on Google Maps</h3>
           <p className="mt-2 text-sm leading-relaxed">See the arrival area below and choose a central drop-off or car park near your route.</p>
-          <iframe title="Google Maps overview of the Jaffa Clock Tower, historic hill and nearby parking areas" src="https://maps.google.com/maps?q=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel&hl=en&z=15&t=m&output=embed" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-48 w-full rounded-lg border-0 sm:h-52" />
+          <ConsentIframe title="Google Maps overview of the Jaffa Clock Tower, historic hill and nearby parking areas" src="https://maps.google.com/maps?q=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel&hl=en&z=15&t=m&output=embed" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-48 w-full rounded-lg border-0 sm:h-52" />
           <ul className="mt-3 space-y-3 text-sm leading-relaxed">
             <li><a href="https://www.google.com/maps/dir/?api=1&destination=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel" target="_blank" rel="noopener noreferrer" className={inlineLink}>Clock Tower Square</a> — central starting point</li>
             <li><a href="https://www.google.com/maps/dir/?api=1&destination=15a%20HaTzorfim%20Street%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Tzorfim car park</a> — 15A HaTzorfim St</li>
