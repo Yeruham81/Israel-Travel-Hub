@@ -669,7 +669,7 @@ describe("migrated practical guides", () => {
     expect(payment.subsections?.map(sub => sub.id)).toEqual(["israel-ravkav", "israel-ticket-rules"]);
     expect(payment.tables?.[0]?.rows).toHaveLength(3);
     expect(payment.paragraphs.join(" ")).toMatch(/₪8.*90-minute/s);
-    expect(payment.subsections![1].paragraphs.join(" ")).toMatch(/international Visa and Mastercard.*Eilat, Jerusalem and metropolitan Haifa/s);
+    expect(payment.subsections!.find(sub => sub.id === "israel-ticket-rules")!.paragraphs.join(" ")).toMatch(/international Visa and Mastercard.*Eilat, Jerusalem and metropolitan Haifa/s);
     expect(guide.sections.find(section => section.id === "destinations")?.subsections?.map(sub => sub.id)).toEqual([
       "israel-tel-aviv", "israel-jerusalem", "israel-haifa", "israel-galilee", "israel-eilat",
     ]);
