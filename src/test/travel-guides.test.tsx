@@ -640,166 +640,125 @@ describe("migrated practical guides", () => {
     expect(container.querySelector('#sources details:not([open])')).not.toBeNull();
   });
 
-  it("makes Getting Around Israel a usable national transport guide with eight chapters and a complete payment comparison", () => {
+  it("keeps Getting Around Israel concise and up to date without changing its hero image", () => {
     const guide = travelGuides.israel;
-    expect(guide.updatedAt).toBe("2026-11-12");
+    expect(guide.updatedAt).toBe("2026-11-24");
     expect(guide.title).toMatch(/^Getting Around Israel: Trains, Buses, Taxis/);
-    expect(guide.title).not.toMatch(/2026|2027/);
+    expect(guide.photo.src).toBe("/images/travel-blog/featured-getting-around-israel.webp");
+    expect(guide.photo.alt).toBe("Traffic on a busy Israeli highway in the Tel Aviv area");
     expect(guide.sections.map(section => section.id)).toEqual([
-      "choose-transport", "public-transport", "paying", "taxis-and-sherut",
-      "destinations", "rental-car", "weekends", "planning",
+      "public-transport", "paying", "taxis-and-sherut", "destinations",
+      "rental-car", "weekends", "planning",
     ]);
-    expect(guide.comparison.headers).toEqual(["Transport", "Best for", "Cost level", "On Shabbat?", "Main limitation"]);
+    expect(guide.comparison.headers).toEqual([
+      "Transport", "Best for", "Fare basis", "Shabbat service", "Useful detail",
+    ]);
     expect(guide.comparison.rows).toHaveLength(7);
+    expect(guide.comparison.rows.every(row => row.length === 5)).toBe(true);
     expect(guide.facts).toHaveLength(3);
-    expect(guide.intro).toContain("some destinations require more planning");
-    expect(guide.intro).not.toMatch(/renting a car/);
-    expect(guide.facts.find(fact => fact.label === "How to pay")?.text).toContain("Rav-Kav card");
+    expect(guide.facts.find(fact => fact.label === "Local fares")?.text).toContain("₪8");
+    const transport = guide.sections.find(section => section.id === "public-transport")!;
+    const rail = transport.subsections!.find(sub => sub.id === "israel-trains")!;
+    expect(rail.paragraphs.join(" ")).toMatch(/free personal travel voucher.*72 hours/s);
+    expect(rail.steps).toBeUndefined();
+    expect(rail.highlightedLinks?.some(link => link.href.includes("vouchers-jerusalem"))).toBe(true);
+    const lightRail = transport.subsections!.find(sub => sub.id === "israel-light-rail")!;
+    expect(lightRail.paragraphs.join(" ")).toMatch(/Green Line L3.*November.*Damascus Gate/s);
+    expect(lightRail.sourceIds).toContain("jerusalem-light-rail-updates");
     const payment = guide.sections.find(section => section.id === "paying")!;
+    expect(payment.subsections?.map(sub => sub.id)).toEqual(["israel-ravkav", "israel-ticket-rules"]);
     expect(payment.tables?.[0]?.rows).toHaveLength(3);
-    expect(payment.subsections?.map(sub => sub.id)).toEqual(["israel-ravkav", "israel-payment-apps", "israel-ticket-rules"]);
+    expect(payment.paragraphs.join(" ")).toMatch(/₪8.*90-minute/s);
+    expect(payment.subsections![1].paragraphs.join(" ")).toMatch(/international Visa and Mastercard.*Eilat, Jerusalem and metropolitan Haifa/s);
     expect(guide.sections.find(section => section.id === "destinations")?.subsections?.map(sub => sub.id)).toEqual([
       "israel-tel-aviv", "israel-jerusalem", "israel-haifa", "israel-galilee", "israel-eilat",
     ]);
-    expect(guide.sections.find(section => section.id === "planning")?.subsections?.some(sub => sub.id === "israel-accessibility")).toBe(true);
-    expect(guide.sections.find(section => section.id === "weekends")?.inlineLinks).toEqual(expect.arrayContaining([
-      { text: "Israel's holiday and special dates guide", to: "/travel-blog/calendar-of-events/" },
-      { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat },
-    ]));
-    expect(guide.faqs).toHaveLength(18);
-    expect(guide.faqGroups).toHaveLength(3);
-    expect(guide.faqGroups!.flatMap(group => group.indexes).sort((a, b) => a - b)).toEqual([...Array(18).keys()]);
-    expect(guide.photo.src).toBe("/images/travel-blog/featured-getting-around-israel.webp");
-    expect(guide.photo.licenseUrl).toBeUndefined();
-    expect(guide.photo.sourceUrl).toBeUndefined();
-    const rail = guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-trains")!;
-    expect(rail.paragraphs.join(" ")).toContain("Check the current timetable for your route");
-    expect(rail.paragraphs.join(" ")).not.toMatch(/November 14, 2026/);
-    expect(rail.paragraphs.join(" ")).toContain("my airport arrival guide");
-    expect(rail.steps).toHaveLength(3);
-    expect(rail.steps!.join(" ")).toMatch(/72 hours.*SMS verification.*valid rail ticket/s);
-    const bankCard = payment.subsections!.find(sub => sub.id === "israel-ticket-rules")!;
-    expect(bankCard.paragraphs.join(" ")).toMatch(/Eilat, Jerusalem and metropolitan Haifa/);
-    expect(bankCard.paragraphs.join(" ")).toMatch(/international Visa and Mastercard/);
-    expect(bankCard.paragraphs.join(" ")).toContain("not available across the entire bus network");
-    const airport = guide.sections.find(section => section.id === "taxis-and-sherut")!.subsections!.find(sub => sub.id === "israel-airport-options")!;
-    expect(airport.paragraphs.join(" ")).toContain("my airport arrival guide");
-    expect(airport.paragraphs.join(" ")).toContain("my Ben Gurion Airport taxi guide");
-    expect(bankCard.sourceIds).toContain("guide-egged-card-payment-2026");
+    expect(guide.sections.find(section => section.id === "rental-car")?.subsections?.find(sub => sub.id === "israel-rentals")?.paragraphs.join(" ")).toContain("Area A");
+    expect(guide.sections.find(section => section.id === "weekends")?.inlineLinks).toContainEqual({
+      text: "Israel's Calendar of Events", to: "/travel-blog/calendar-of-events/",
+    });
     const popular = guide.sections.find(section => section.id === "planning")!.subsections!.find(sub => sub.id === "israel-popular-journeys")!;
     expect(popular.tables?.[0]?.rowLinks).toHaveLength(4);
+    expect(guide.faqs).toHaveLength(8);
+    expect(guide.faqGroups).toBeUndefined();
+    expect(guide.checklist).toHaveLength(7);
     expect(guide.related).toHaveLength(6);
-    expect(guide.services).toHaveLength(4);
+    expect(guide.services.map(x => x.to)).toEqual([
+      "/airport-transfers/", "/private-driver-in-israel/", "/car-rental/",
+      "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/ben-gurion-airport-to-haifa/", travelGuidePaths.esim,
+    ]);
     expect(guide.sourceIds).toEqual(expect.arrayContaining([
       "guide-ravkav-2026", "guide-rental-territory", "guide-egged-accessibility",
-      "guide-jerusalem-train-voucher", "guide-weekend-network",
+      "guide-jerusalem-train-voucher", "guide-weekend-network", "jerusalem-light-rail-updates",
     ]));
-    const subsections = guide.sections.flatMap(section => section.subsections || []);
-    const links = [...guide.sections, ...subsections].flatMap(section => section.inlineLinks || []);
-    for (const link of links) {
-      const section = [...guide.sections, ...subsections].find(section => section.inlineLinks?.includes(link))!;
-      expect(section.paragraphs.join(" ").split(link.text), link.text).toHaveLength(2);
+    for (const section of guide.sections.flatMap(section => [section, ...(section.subsections ?? [])])) {
+      for (const link of section.inlineLinks ?? []) {
+        expect(section.paragraphs.join(" ").split(link.text), section.id + "/" + link.text).toHaveLength(2);
+      }
     }
-    expect(links.map(link => link.to)).toEqual(expect.arrayContaining([
-      travelGuidePaths.telAviv, travelGuidePaths.taxis, travelGuidePaths.uber,
-      travelGuidePaths.taxiFares, travelGuidePaths.sherut, travelGuidePaths.airportTaxis,
-      travelGuidePaths.arrival, travelGuidePaths.shabbat, travelGuidePaths.esim,
-      "/car-rental/", "/private-driver-in-israel/", "/tours/",
-      "/travel-blog/ben-gurion-airport-to-tel-aviv/",
-      "/travel-blog/ben-gurion-airport-to-jerusalem/",
-      "/travel-blog/ben-gurion-airport-to-haifa/",
-      "/travel-blog/ben-gurion-airport-to-ein-bokek/",
-    ]));
   });
 
-  it("keeps both transport guides concise without losing safety, payment and visitor guidance", () => {
-    const national = travelGuides.israel;
-    const telAviv = travelGuides.telAviv;
-    expect(national.intro).toContain("pay for public transport");
-    expect(national.sections.find(section => section.id === "public-transport")?.subsections?.find(sub => sub.id === "israel-trains")?.steps).toHaveLength(3);
+  it("keeps the national and Tel Aviv transport guides practical without duplicating specialist content", () => {
+    const national = travelGuides.israel, telAviv = travelGuides.telAviv;
+    expect(national.intro).toContain("practical advice on fares");
     expect(national.sections.find(section => section.id === "paying")?.subsections?.find(sub => sub.id === "israel-ticket-rules")?.paragraphs.join(" ")).toContain("contactless");
-    expect(national.sections.find(section => section.id === "rental-car")?.subsections?.find(sub => sub.id === "israel-rentals")?.paragraphs.join(" ")).toContain("Area A");
+    expect(national.sections.find(section => section.id === "planning")?.subsections?.find(sub => sub.id === "israel-accessibility")?.paragraphs.join(" ")).toContain("Station lifts");
     expect(telAviv.sections.find(section => section.id === "red-line")?.subsections?.find(sub => sub.id === "ta-redline-validation")?.paragraphs.join(" ")).toContain("before boarding");
     expect(telAviv.sections.find(section => section.id === "bikes")?.paragraphs.join(" ")).toContain("passengers");
     expect(telAviv.sections.find(section => section.id === "shabbat")?.paragraphs.join(" ")).toContain("Terminal 1");
     expect(telAviv.sections.find(section => section.id === "shared-taxis")?.paragraphs.join(" ")).not.toContain("should not be presented");
     expect(telAviv.sections.find(section => section.id === "national-rail")?.paragraphs.join(" ")).not.toContain("planned for November 2026");
-    expect(telAviv.faqs.find(faq => faq.q === "Can I use a foreign Visa or Mastercard on Dan buses?")?.a).not.toContain("NIS 8");
-    for (const guide of [national, telAviv]) {
-      for (const section of guide.sections.flatMap(section => [section, ...(section.subsections ?? [])])) {
-        for (const link of section.inlineLinks ?? []) {
-          expect(section.paragraphs.join(" ").split(link.text), guide.id + "/" + section.id + "/" + link.text).toHaveLength(2);
-        }
-      }
-    }
   });
 
-  it("renders national transport subchapters, linked comparisons, relevant images, guide cards and bottom sources", async () => {
+  it("renders national transport tables, icon links, contact form, and sources without repetitive instructions", async () => {
     const router = await routerAt(travelGuidePaths.israel);
     const Page = IsraelRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     const guide = travelGuides.israel;
     expect(container.querySelector('section[aria-label="Transport planning essentials"]')?.children).toHaveLength(3);
     expect(container.querySelector('header figure img')?.getAttribute("src")).toBe(guide.photo.src);
-    expect(container.querySelector('header figure img[src^="https://"]')).toBeNull();
-    const modePhotos = guide.sections.flatMap(section => section.subsections || []).flatMap(section => section.photo ? [section.photo.src] : []);
-    expect(modePhotos).toContain(guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-light-rail")!.photo!.src);
-    expect(modePhotos.every(src => /^\/(?:src\/)?assets\//.test(src))).toBe(true);
-    const topicsNav = container.querySelector('nav[aria-label="Quick transport topics"]')!;
-    expect(topicsNav.querySelectorAll('a[href^="#"]')).toHaveLength(4);
-    expect(topicsNav).toHaveTextContent("Jump to a popular topic");
-    expect(topicsNav).not.toHaveTextContent("Jump to a practical topic");
-    for (const link of topicsNav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
-      expect(container.querySelector(link.getAttribute("href")!)).not.toBeNull();
-    }
-    const voucher = container.querySelector('#israel-trains [aria-label="Step-by-step instructions"]')!;
-    expect(voucher.querySelectorAll("ol > li")).toHaveLength(3);
-    expect(voucher.textContent).toMatch(/72 hours/);
-    const routeTable = container.querySelector('[aria-label="Common trips: the first option to compare"]')!;
-    expect(routeTable.querySelectorAll("tbody th a")).toHaveLength(4);
-    expect(container.querySelectorAll('[role="region"] table th.sticky').length).toBeGreaterThanOrEqual(2);
-    expect(container.querySelectorAll('.sm\\:hidden')).not.toHaveLength(0);
-    const faq = container.querySelector("#faq")!;
-    expect(faq.querySelectorAll("h3")).toHaveLength(3);
-    expect(faq.querySelectorAll("details")).toHaveLength(18);
-    const table = screen.getByRole("table", { name: guide.comparison.caption });
-    expect(within(table).getAllByRole("columnheader")).toHaveLength(5);
-    expect(within(table).getAllByRole("row")).toHaveLength(8);
-    const tableLinks = [...table.querySelectorAll('tbody th a[href^="#"]')];
-    expect(tableLinks).toHaveLength(7);
-    for (const anchor of tableLinks) expect(container.querySelector(anchor.getAttribute("href")!)).not.toBeNull();
+    expect(container.querySelector('nav[aria-label="Quick transport topics"]')).toBeNull();
+    expect(container.querySelector('a[href="#paying"]')).not.toBeNull();
+    expect(container.textContent).not.toContain("Swipe horizontally");
+    expect(container.querySelector('#israel-trains [aria-label="Step-by-step instructions"]')).toBeNull();
+    expect(container.querySelector('#israel-trains a[href*="vouchers-jerusalem"]')).not.toBeNull();
+    const main = within(container).getByRole("table", { name: guide.comparison.caption });
+    expect(within(main).getAllByRole("columnheader")).toHaveLength(5);
+    expect(within(main).getAllByRole("row")).toHaveLength(8);
+    expect(main.querySelectorAll('tbody th.sticky')).toHaveLength(7);
+    const destinations = container.querySelector('[aria-label="Four common journeys in Israel"]')!;
+    expect(destinations.querySelectorAll('tbody th a')).toHaveLength(4);
+    const payment = container.querySelector('[aria-label="Rav-Kav, ticketing apps and contactless cards"]')!;
+    expect(payment.querySelector('tbody th.sticky')).not.toBeNull();
     for (const section of guide.sections) {
-      const el = container.querySelector(`#${section.id}`)! as HTMLElement;
-      expect(el).toBeTruthy();
-      for (const sub of section.subsections || []) {
-        const subEl = el.querySelector(`#${sub.id}`)! as HTMLElement;
-        expect(subEl, sub.id).not.toBeNull();
-        expect(subEl.querySelector("h3")?.nextElementSibling?.firstElementChild?.tagName).toBe("P");
-        if (sub.photo) {
-          const first = subEl.querySelector(":scope > div")!;
-          expect(first.children[1]?.tagName).toBe("FIGURE");
-          expect(subEl.querySelector("figure img")?.getAttribute("src")).toBe(sub.photo.src);
-        }
-        for (const link of sub.inlineLinks || []) {
-          const elink = within(subEl).getByRole("link", { name: link.text });
-          expect(elink).toHaveAttribute("href", link.to);
-          expect(elink.closest("p")).toBeTruthy();
+      const el = container.querySelector(`#${section.id}`)!;
+      expect(el).not.toBeNull();
+      for (const sub of section.subsections ?? []) {
+        const child = el.querySelector(`#${sub.id}`)!;
+        expect(child).not.toBeNull();
+        if (sub.photo) expect(child.querySelector("figure img")?.getAttribute("src")).toBe(sub.photo.src);
+        for (const link of sub.inlineLinks ?? []) {
+          expect(within(child as HTMLElement).getByRole("link", { name: link.text })).toHaveAttribute("href", link.to);
         }
       }
     }
-    const related = container.querySelector('section[aria-label="Related practical guides"]')!;
+    expect(container.querySelector('#faq')?.querySelectorAll('details')).toHaveLength(8);
+    const related = within(container).getByRole("region", { name: "Related practical guides" });
     expect(related.querySelectorAll(":scope > ul > li")).toHaveLength(6);
-    expect(related.querySelector("ul")?.classList.contains("lg:grid-cols-3")).toBe(true);
-    expect(repeatedPhotos([...related.querySelectorAll("li img")].map(img => img.getAttribute("src") || ""))).toEqual([]);
-    const next = container.querySelector('section[aria-label="Plan the next part of your trip"]')!;
-    expect(next.querySelectorAll(":scope > ul > li")).toHaveLength(4);
+    const next = within(container).getByRole("region", { name: "Plan the next part of your trip" });
+    expect(next.querySelectorAll(":scope > ul > li")).toHaveLength(6);
+    expect(next.querySelectorAll("li svg")).toHaveLength(6);
     const form = container.querySelector('form[aria-label="Guide contact message"]')!;
     expect(form).not.toBeNull();
+    expect(within(container).getByRole("heading", { name: "Need a Private Transfer or Driver in Israel?" })).toBeInTheDocument();
+    expect(container.querySelector('[data-testid="contact-reviews-row"]')?.className).toContain("flex-nowrap");
     expect(related.compareDocumentPosition(next) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(next.compareDocumentPosition(form) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(container.querySelector("article")?.lastElementChild?.id).toBe("sources");
     expect(container.querySelector('#sources details:not([open])')).not.toBeNull();
     expect(container.querySelector('#sources a[href="https://www.hertz.co.il/en/GoodToKnow/IsraelContract/"]')).not.toBeNull();
+    expect(container.textContent).not.toContain("References:");
   });
 
   it("keeps Uber's current status with concise, helpful alternatives", () => {
