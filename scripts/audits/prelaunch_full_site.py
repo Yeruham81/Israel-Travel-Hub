@@ -159,6 +159,17 @@ def audit_page(u):
         "robots":d.robots,"widget_signals":bool(re.search(r"travelpayouts|booking|agoda|getyourguide|viator",page,re.I)),
         "featured_hero":bool(re.search(r"(?:hero|featured|cover)",page[:250000],re.I)),
     }
+    # Contextual snippets distinguish real editorial issues from
+    # shared footer or decorational-image false positives.
+    record["text_flags"]=[]
+    patterns={
+      "placeholder": r"check current fare|check the current fare|coming soon|under construction|lorem ipsum|demo (?:price|content)|sample (?:price|content)",
+      "house_style": r"\\buseful links?\\b|\\bnot a checklist\\b|\\beditorial snapshots?\\b|\\bask moshe\\b",
+    }
+    for flag, pattern in patterns.items():
+        for match in list(re.finditer(pattern,full_text,re.I))[:4]:
+            record["text_flags"].append({"kind":flag,"match":match.group()[:80],"around":full_text[max(0,match.start()-65):match.end()+90]})
+    record["empty_alt_imgs"]=[(i.get("src") or i.get("data-src") or "")[:250] for i in imgs if not (i.get("alt") or "").strip()][:15]
     record["warnings"]=sorted(set(record["warnings"]))
     return record
 
@@ -213,6 +224,8 @@ def main():
     for x in pages:
         compact={"path":x["path"],"http":x["status"],"errors":x["errors"],"warnings":x["warnings"],**x["signals"]}
         print("PAGE_AUDIT",json.dumps(compact,ensure_ascii=False,separators=(",",":")))
+        if x.get("text_flags") or x.get("empty_alt_imgs"):
+            print("FLAG_CONTEXT",json.dumps({"path":x["path"],"flags":x.get("text_flags"),"empty_alts":x.get("empty_alt_imgs")},ensure_ascii=False,separators=(",",":")))
     print("AUDIT_COMPLETE",json.dumps({"pages":len(pages),"errors":sum(errors.values()),
       "warnings":sum(issues.values()),"badlinks":len(badlinks),"badimages":len(badimages),
       "distinct_link_targets_checked":len(link_checks),"distinct_image_assets_checked":len(image_checks)}))
