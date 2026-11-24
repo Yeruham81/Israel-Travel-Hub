@@ -25,7 +25,7 @@ permissions:
 jobs:
   affiliate-link-audit:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
         with:
@@ -39,6 +39,9 @@ jobs:
       - name: Install site dependencies
         run: bun install --frozen-lockfile
       - name: Start isolated full-site preview
+        env:
+          VITE_CANONICAL_ORIGIN: http://127.0.0.1:4173
+          VITE_INDEXABLE: "false"
         run: |
           node scripts/generate-sitemap.mjs --mode development
           nohup ./node_modules/.bin/vite dev --host 127.0.0.1 --port 4173 > /tmp/travelpayouts-vite.log 2>&1 &
@@ -57,6 +60,20 @@ jobs:
           NODE_PATH: /tmp/travelpayouts-audit/node_modules
           SITE_AUDIT_ORIGIN: http://127.0.0.1:4173
         run: node scripts/audit-travelpayouts-only.cjs --published
+      - name: Verify five updated guide regressions in isolated desktop/mobile preview
+        env:
+          NODE_PATH: /tmp/travelpayouts-audit/node_modules
+          BAPTISM_AUDIT_ORIGIN: http://127.0.0.1:4173
+          JERUSALEM_HUB_AUDIT_ORIGIN: http://127.0.0.1:4173
+          SENIOR_TOURS_AUDIT_ORIGIN: http://127.0.0.1:4173
+          JERUSALEM_CHURCHES_AUDIT_ORIGIN: http://127.0.0.1:4173
+          HOLIDAY_GUIDE_ORIGIN: http://127.0.0.1:4173
+        run: |
+          node scripts/audit-jerusalem-churches-published.cjs
+          node scripts/audit-jerusalem-hub-published.cjs
+          node scripts/audit-senior-tours-published.cjs
+          node scripts/audit-jordan-baptism-guide-published.cjs
+          node scripts/audit-israel-holiday-guide-published.cjs
       - name: Save audit evidence
         if: always()
         uses: actions/upload-artifact@v4
