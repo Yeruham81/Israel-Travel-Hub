@@ -116,7 +116,10 @@ export function createAnalytics(win: Window, config: LaunchConfig) {
       if (!eligible) return;
       try {
         win.localStorage.setItem(ANALYTICS_CONSENT_KEY, JSON.stringify({ choice: next, expiresAt: Date.now() + CONSENT_LIFETIME }));
-      } catch { /* Still respect the choice for this document. */ }
+      } catch {
+        // A failed write must not leave an older grant active on the next visit.
+        try { win.localStorage.removeItem(ANALYTICS_CONSENT_KEY); } catch { /* Storage is unavailable. */ }
+      }
       applyChoice(next);
     },
     refreshChoice() { applyChoice(readChoice()); return choice; },

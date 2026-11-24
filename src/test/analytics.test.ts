@@ -4,7 +4,9 @@ import { ANALYTICS_CONSENT_KEY, GA4_MEASUREMENT_ID, createAnalytics } from "@/li
 const production = { origin: "https://www.israel-taxi.com", indexable: true };
 type Browser = Window & { dataLayer?: IArguments[]; gtag?: (...args: unknown[]) => void };
 function browser(origin = production.origin) {
-  return { location: new URL(origin + "/?email=visitor%40example.com#contact"), document, localStorage } as unknown as Browser;
+  const location = new URL(origin);
+  if (!location.search) { location.search = "?email=visitor%40example.com"; location.hash = "contact"; }
+  return { location, document, localStorage } as unknown as Browser;
 }
 function commands(win: Browser) { return (win.dataLayer ?? []).map(value => Array.from(value)); }
 function views(win: Browser) { return commands(win).filter(value => value[0] === "event" && value[1] === "page_view"); }
@@ -126,5 +128,15 @@ describe("single GA4 installation and page-view owner", () => {
     const leads = commands(win).filter(value => value[0] === "event" && value[1] === "generate_lead");
     expect(leads).toEqual([["event", "generate_lead", { send_to: GA4_MEASUREMENT_ID, form_type: "contact" }]]);
     expect(JSON.stringify(commands(win))).not.toContain("private-reference");
+  });
+
+  it("does not revive an old grant when saving a later rejection fails", () => {
+    const win = browser();
+    const analytics = createAnalytics(win, production);
+    analytics.setChoice("granted");
+    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => { throw new Error("Storage full"); });
+    analytics.setChoice("denied");
+    expect(analytics.getChoice()).toBe("denied");
+    expect(createAnalytics(browser(), production).getChoice()).toBe("unknown");
   });
 });
