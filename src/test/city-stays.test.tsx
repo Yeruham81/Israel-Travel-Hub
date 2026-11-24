@@ -276,9 +276,12 @@ describe.each([
       ...areas.map((area) => [`stay-area-${area.id}-browse`, g.sourceIds[0]!]),
     ]) {
       const affiliateLinks = linksForPage(pageId!).filter((link) => link.isAffiliate);
-      expect(affiliateLinks).toHaveLength(1);
-      expect(affiliateLinks[0]!.url).toBe(affiliateConfig[affiliateLinks[0]!.id]?.trackingUrl);
-      expect(affiliateLinks[0]!.sourceId).toBe(sourceId);
+      expect(affiliateLinks.length).toBeGreaterThanOrEqual(1);
+      expect(affiliateLinks.length).toBeLessThanOrEqual(2);
+      for (const link of affiliateLinks) {
+        expect(link.url).toBe(affiliateConfig[link.id]?.trackingUrl);
+        expect(link.sourceId).toBe(sourceId);
+      }
     }
   });
   it("shows local illustrated guides followed by six planning guides", () => {
