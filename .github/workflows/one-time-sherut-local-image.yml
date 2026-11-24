@@ -1,0 +1,73 @@
+name: One-time Sherut local image import
+
+# Temporary asset import: save the public-domain Sherut photograph to Git,
+# then remove this workflow once the image is committed.
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/one-time-sherut-local-image.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  import-sherut-image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check out current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Set up Python and Pillow
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check pillow==11.3.0
+      - name: Download historical public-domain Sherut photograph and optimize it
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p src/assets/guides
+          curl -fLSs --retry 3 --retry-delay 2 \
+            -A "IsraelTravelHub/1.0 (editorial image import)" \
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Sherut.JPG/1280px-Sherut.JPG" \
+            -o /tmp/sherut-source.jpg
+          python - <<'PY'
+          from PIL import Image, ImageOps
+          from pathlib import Path
+          src = ImageOps.exif_transpose(Image.open('/tmp/sherut-source.jpg')).convert('RGB')
+          if src.width < 1000 or src.height < 500:
+              raise RuntimeError(f'Unexpected Wikimedia Sherut image dimensions: {src.size}')
+          target = Path('src/assets/guides/sherut-local-taxis.webp')
+          w = min(src.width, 1000)
+          src = src.resize((w, round(src.height * w / src.width)), Image.Resampling.LANCZOS)
+          src.save(target, format='WEBP', quality=65, method=6)
+          if target.stat().st_size < 10000 or target.stat().st_size > 150000:
+              raise RuntimeError(f'Unexpected image filesize: {target.stat().st_size}')
+          print(f'Local image prepared: {target}, {src.width}x{src.height}, {target.stat().st_size} bytes')
+          PY
+      - name: Commit local asset to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/guides/sherut-local-taxis.webp
+          if git diff --cached --quiet; then
+            echo "Local image already tracked; no changes needed."
+            exit 0
+          fi
+          git commit -m "Add local optimized public-domain sherut minibuses photo"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              echo "Local sherut image committed and pushed."
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "::error::Unable to push local sherut image to main"
+          exit 1
