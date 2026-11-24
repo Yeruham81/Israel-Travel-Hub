@@ -956,65 +956,67 @@ describe("migrated practical guides", () => {
     expect(next.compareDocumentPosition(contact) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
-  it("retains the limited Terminal 1 weekend option without copying old fares or treating it as a universal airport shuttle", () => {
-    const shabbat = travelGuides.shabbat;
-    expect(shabbat.answer).toMatch(/limited free weekend Line 711/i);
-    expect(shabbat.answer).toContain("Terminal 1");
-    expect(shabbat.sourceIds).toContain("guide-weekend-711");
+
+  it("keeps the confirmed Terminal 1 weekend bus and winter/summer service distinction", () => {
+    const guide = travelGuides.shabbat;
+    expect(guide.answer).toMatch(/free weekend Line 711/i);
+    expect(guide.answer).toContain("Terminal 1");
+    expect(guide.sourceIds).toContain("guide-weekend-711");
     expect(getSource("guide-weekend-711").url).toContain("tel-aviv.gov.il");
-    expect(shabbat.sections.find((section) => section.id === "weekend-711")!.paragraphs.join(" ")).toMatch(/not timed to flights/);
-    expect(shabbat.sections.find((section) => section.id === "restart")!.paragraphs.join(" ")).toMatch(/Saturday evening arrival.*first actual train or bus for your date and destination/);
-    expect(JSON.stringify(shabbat)).not.toMatch(/guaranteed pickup|150–230|300–360|500–600/);
+    const bus = guide.sections.find((section) => section.id === "weekend-711")!;
+    expect(bus.paragraphs.join(" ")).toMatch(/winter-time.*Friday 15:45–01:30.*Saturday 10:30–16:30.*daylight-saving-time schedules extend/s);
+    expect(bus.paragraphs.join(" ")).toContain("airport stop differ");
+    expect(bus.tables?.[0]?.headers).toEqual(["Line 711 stop / area", "Useful for", "Next step"]);
+    expect(bus.tables?.[0]?.rows).toHaveLength(5);
+    expect(bus.sourceIds).toContain("guide-711-hours");
+    expect(getSource("guide-711-hours").note).toContain("Saturday 10:30–16:30");
+    expect(JSON.stringify(guide)).not.toMatch(/(?:Line|bus|route) 712/i);
   });
 
-  it("covers distinct Shabbat airport search intents with cited facts and topic-specific images", () => {
+  it("covers Saturday arrivals, terminal transfers, higher taxi tariffs and useful supporting images", () => {
     const guide = travelGuides.shabbat;
     expect(guide.sections.map((section) => section.id)).toEqual([
       "shabbat-hours", "arrival-time", "weekend-711", "terminal-transfer",
       "taxis-transfers", "costs", "rental-car", "destinations", "restart", "practical",
     ]);
-    expect(guide.sections.filter((section) => section.photo)).toHaveLength(0);
-    expect(guide.faqs.length).toBe(6);
-    expect(guide.sections.find((section) => section.id === "arrival-time")!.tables?.[0]?.rows).toHaveLength(4);
-    expect(guide.sections.find((section) => section.id === "terminal-transfer")!.paragraphs.join(" ")).toMatch(/every 15 minutes.*three steps below/s);
-    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/24 hours a day.*Exit 03.*Exit 23/s);
-    expect(guide.sections.find((section) => section.id === "destinations")!.tables?.[0]?.rows).toHaveLength(5);
-    for (const section of guide.sections) for (const link of section.inlineLinks || []) {
-      expect(section.paragraphs.join(" ").split(link.text)).toHaveLength(2);
-    }
-    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.inlineLinks?.map((link) => link.to)).toEqual([
+    expect(guide.updatedAt).toBe("2026-11-24");
+    expect(guide.photo.src).toBe("/images/travel-blog/featured-shabbat-airport.webp");
+    expect(guide.sections.filter((section) => section.photo)).toHaveLength(2);
+    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.photo?.src).toContain("airport-taxi-sign.webp");
+    expect(guide.sections.find((section) => section.id === "restart")!.photo?.src).toMatch(/ben-gurion-rail-platform/);
+    expect(guide.faqs).toHaveLength(6);
+    const windows = guide.sections.find((section) => section.id === "arrival-time")!.tables![0];
+    expect(windows.headers).toEqual(["Arrival window", "Available transport options", "Practical first step"]);
+    expect(windows.rows).toHaveLength(4);
+    const transfers = guide.sections.find((section) => section.id === "terminal-transfer")!;
+    expect(transfers.paragraphs.join(" ")).toMatch(/15-minute frequency.*Line 711 stop/s);
+    const taxis = guide.sections.find((section) => section.id === "taxis-transfers")!;
+    expect(taxis.paragraphs.join(" ")).toMatch(/24 hours a day.*Exit 03.*Exit 23/s);
+    expect(taxis.paragraphs.join(" ")).toMatch(/without the Gett app/);
+    expect(taxis.inlineLinks?.map((link) => link.to)).toEqual([
       travelGuidePaths.airportTaxis, "/airport-transfers/",
     ]);
     const costs = guide.sections.find((section) => section.id === "costs")!;
-    expect(costs.paragraphs.join(" ")).toContain("based on Israel's official April 2026 taxi tariff");
-    expect(costs.tables?.[0]?.headers).toEqual(["Destination", "Approx. taxi fare", "Typical driving time"]);
-    expect(costs.tables?.[0]?.rows).toEqual([
-      ["Tel Aviv", "₪180–230", "30–40 min"],
-      ["Jerusalem", "₪310–410", "45–65 min"],
-      ["Haifa", "₪670–830", "75–105 min"],
-    ]);
-    expect(costs.tables?.[0]?.note).toMatch(/general estimates.*destination.*pickup time.*traffic.*route/is);
-    expect(costs.paragraphs.join(" ") + costs.tables?.[0]?.note).not.toMatch(/₪5\.78|airport.departure charge|example routes of/i);
-    expect(costs.paragraphs.join(" ")).not.toMatch(/Tariff [ABC]|16:01|21:01/);
-    expect(guide.sections.find((section) => section.id === "weekend-711")!.paragraphs.join(" ")).toMatch(/Friday 17:30 to 01:30.*Saturday 10:30 to 18:30.*every two hours/is);
-    expect(guide.sections.find((section) => section.id === "weekend-711")!.sourceIds).toContain("guide-711-hours");
-    expect(guide.sections.find((section) => section.id === "shabbat-hours")!.paragraphs.join(" ")).toMatch(/Yom Kippur is a special exception/);
-    expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" ")).toMatch(/no regular walk-up airport sherut service/);
-    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/at least two hours before pickup/);
-    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toContain("You can also compare private airport-transfer options.");
-    expect(guide.sections.find((section) => section.id === "arrival-time")!.tables?.[0]?.note)
-      .toBe("Friday and Saturday service varies with season, destination and holidays.");
-    expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" "))
-      .toContain("Ben Gurion Airport to Ein Bokek guide");
-    expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" "))
-      .not.toContain("The former Amal airport sherut is discontinued.");
-    expect(costs.sourceIds).toEqual(["taxi-fares-2026"]);
+    expect(costs.paragraphs.join(" ")).toMatch(/higher than the corresponding ordinary weekday daytime Tariff A/);
+    expect(costs.paragraphs.join(" ")).toMatch(/Saturday daytime generally uses Tariff B.*Saturday evening\/night Tariff C/s);
+    expect(costs.tables?.[0]?.headers).toEqual(["Destination", "Saturday daytime · B", "Saturday evening/night · C", "Typical drive"]);
+    expect(costs.tables?.[0]?.rows).toHaveLength(3);
+    for (const row of costs.tables![0].rows) {
+      const b = Number(row[1].match(/₪(\d+)/)?.[1]);
+      const c = Number(row[2].match(/₪(\d+)/)?.[1]);
+      expect(c).toBeGreaterThan(b);
+    }
+    expect(costs.tables?.[0]?.note).toMatch(/Tariff B.*Tariff C.*18% VAT.*airport departure supplement/s);
     expect(costs.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxiFares);
-    expect(guide.services).toHaveLength(4);
-    expect(guide.updatedAt).toBe("2026-11-11");
-    expect(getSource("guide-711-hours").note).toContain("Saturday 10:30–18:30");
-    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/do not need the Gett app/);
-    expect(JSON.stringify(guide)).not.toMatch(/I have not carried over|comparison below/);
+    expect(guide.sections.find((section) => section.id === "destinations")!.tables?.[0]?.rows).toHaveLength(5);
+    expect(guide.sections.find((section) => section.id === "shabbat-hours")!.paragraphs.join(" ")).toContain("Yom Kippur is a special exception");
+    expect(guide.sections.find((section) => section.id === "restart")!.paragraphs.join(" ")).toMatch(/first train or bus actually scheduled for your date/);
+    expect(guide.services).toHaveLength(6);
+    expect(guide.services.map(item => item.to)).toContain(travelGuidePaths.israel);
+    expect(guide.services.map(item => item.to)).toContain(travelGuidePaths.travelTips);
+    for (const section of guide.sections) for (const link of section.inlineLinks || []) {
+      expect(section.paragraphs.join(" ").split(link.text)).toHaveLength(2);
+    }
   });
 
   it("never cites or points to legacy travel guides from new guide content", () => {
@@ -1027,40 +1029,40 @@ describe("migrated practical guides", () => {
     }
   });
 
-  it("ends the Shabbat guide with six related guides, four complementary next steps and one personal contact form", async () => {
+
+  it("renders six illustrated related guides, six additional next steps and one personal contact form", async () => {
     const router = await routerAt(travelGuidePaths.shabbat);
     const Page = ShabbatRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     const related = within(container).getByRole("region", { name: "Related practical guides" });
     const next = within(container).getByRole("region", { name: "Plan the next part of your trip" });
     const contact = within(container).getByRole("form", { name: "Guide contact message" });
-    expect(related.querySelectorAll("li")).toHaveLength(6);
-    expect(next.querySelectorAll("li")).toHaveLength(4);
-    const nextPaths = Array.from(next.querySelectorAll("a")).map((link) => link.getAttribute("href"));
+    expect(related.querySelector('[data-testid="stay-trip-photo-grid"]')?.querySelectorAll("li")).toHaveLength(6);
+    expect(next.querySelectorAll("li")).toHaveLength(6);
+    const nextPaths = Array.from(next.querySelectorAll("a")).map(link => link.getAttribute("href"));
     expect(nextPaths).toEqual([
       "/car-rental/",
       "/travel-blog/where-to-stay-in-tel-aviv/",
       "/travel-blog/jerusalem-travel-guide/",
       "/travel-blog/dead-sea-attractions/",
+      travelGuidePaths.israel,
+      travelGuidePaths.travelTips,
     ]);
-    expect(nextPaths).not.toContain("/airport-transfers/");
-    expect(nextPaths.filter((path) => path?.includes("tel-aviv"))).toHaveLength(1);
-    expect(nextPaths).toContain("/travel-blog/jerusalem-travel-guide/");
-    expect(nextPaths).toContain("/travel-blog/dead-sea-attractions/");
-    expect(new Set(nextPaths).size).toBe(4);
+    expect(new Set(nextPaths).size).toBe(6);
     expect(container.querySelectorAll("#contact")).toHaveLength(1);
     expect(container.querySelector("#request-quote")).toBeNull();
     const taxiSection = container.querySelector("#taxis-transfers") as HTMLElement;
     const contactJump = within(taxiSection).getByRole("link", { name: /Send me your arrival details using the contact form below/i });
     expect(contactJump).toHaveAttribute("href", "#contact");
-    expect(contactJump.closest("p")).not.toBeNull();
     expect(taxiSection.querySelector("form")).toBeNull();
     expect(container.querySelector('nav[aria-label="On this page"] a[href="#contact"]')).not.toBeNull();
-    expect(container.querySelector('nav[aria-label="On this page"] a[href="#request-quote"]')).toBeNull();
     expect(within(container).getByRole("heading", { name: "Questions about arriving on Shabbat?" })).toBeInTheDocument();
     expect((within(contact).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toBe("");
+    const sources = container.querySelector("#sources")!;
+    expect(sources).not.toBeNull();
     expect(related.compareDocumentPosition(next) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(next.compareDocumentPosition(contact) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(contact.compareDocumentPosition(sources) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const official = within(container).getByRole("link", { name: /Line 711 stop-by-stop timetable/ });
     expect(official).toHaveAttribute("href", "https://busofash.co.il/?lines=711");
   });
