@@ -104,15 +104,17 @@ jobs:
             while(todo.length){const n=todo.pop();if(keep.has(n))continue;keep.add(n);todo.push(...refs(n,n===stmt?head:undefined));}
             const remove=[...candidates].filter(n=>!keep.has(n));
             const basename=path.basename(file.fileName,".tsx");
-            const companion="-stage5-head-"+basename+".tsx";
+            const companion=basename+".head.tsx";
+            const companionDir=path.resolve("src/stage5-route-heads");
+            fs.mkdirSync(companionDir,{recursive:true});
             const headImports=file.statements.filter(n=>isImport(n)&&deps.has(n));
             const headDecls=file.statements.filter(n=>deps.has(n)&&!isImport(n)&&n!==stmt);
-            const routeImport=refs(init).has(stmt)||headDecls.some(n=>refs(n).has(stmt))?'import { Route } from "./'+basename+'";\n':"";
-            const companionText=[...headImports.map(n=>n.getText(file)),routeImport,...headDecls.map(n=>n.getText(file)),"export const routeHead = "+init.getText(file)+";"].join("\n");
-            const edits=[{start:init.getStart(file),end:init.end,text:'async (ctx) => { const { routeHead } = await import("./'+companion.replace(/\.tsx$/,"")+'"); return Reflect.apply(routeHead, undefined, [ctx]); }'},...remove.map(n=>({start:n.getStart(file),end:n.end,text:""}))];
+            const routeImport=refs(init).has(stmt)||headDecls.some(n=>refs(n).has(stmt))?'import { Route } from "../routes/'+basename+'";\n':"";
+            const companionText=[...headImports.map(n=>{const text=n.getText(file);const spec=n.moduleSpecifier;if(spec&&ts.isStringLiteral(spec)&&spec.text.startsWith("./"))return text.replace(spec.getText(file),JSON.stringify("../routes/"+spec.text.slice(2)));return text;}),routeImport,...headDecls.map(n=>n.getText(file)),"export const routeHead = "+init.getText(file)+";"].join("\n");
+            const edits=[{start:init.getStart(file),end:init.end,text:'async (ctx) => { const { routeHead } = await import("../stage5-route-heads/'+companion.replace(/\.tsx$/,"")+'"); return Reflect.apply(routeHead, undefined, [ctx]); }'},...remove.map(n=>({start:n.getStart(file),end:n.end,text:""}))];
             let changed=source;
             for(const edit of edits.sort((a,b)=>b.start-a.start))changed=changed.slice(0,edit.start)+edit.text+changed.slice(edit.end);
-            plans.push({file:file.fileName,companion:path.join(path.dirname(file.fileName),companion),changed,companionText,removed:remove.length});
+            plans.push({file:file.fileName,companion:path.join(companionDir,companion),changed,companionText,removed:remove.length});
           }
           for(const p of plans){fs.writeFileSync(p.file,p.changed);fs.writeFileSync(p.companion,p.companionText);}
           fs.writeFileSync("stage5-js-audit/route-plan.json",JSON.stringify(plans.map(p=>({file:path.relative(process.cwd(),p.file),companion:path.relative(process.cwd(),p.companion),removed:p.removed})),null,2));
@@ -121,12 +123,14 @@ jobs:
           JS
           node stage5-split-heads.mjs
           echo "Inspect installed router head API before experiment"
-          grep -n -A 12 'head?:' node_modules/@tanstack/router-core/src/route.ts | head -30 || true
+          grep -n -A 24 'head?:' node_modules/@tanstack/router-core/src/route.ts | head -30 || true
       - name: Build route-head experiment
         run: bash scripts/build-validated-static.sh
       - name: Verify experimental static export
         run: node scripts/verify-hostinger-static-export.mjs
       - name: Compare metadata, body text, links and original images on every prerendered page
+        id: parity
+        continue-on-error: true
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -173,6 +177,7 @@ jobs:
           print("PAGE_PARITY",json.dumps({"pages":len(pages),"mismatches":mismatches}))
           Path("stage5-js-audit/page-parity.json").write_text(json.dumps({"pages":len(pages),"mismatches":mismatches},indent=2))
           assert len(pages)>=120
+          assert not mismatches, "Experimental HTML differs from baseline"
           PY
       - name: Compare compiled static JS closures
         run: |
@@ -197,6 +202,7 @@ jobs:
           fs.writeFileSync("stage5-js-audit/split-graph.json",JSON.stringify(rows,null,2));
           JS
       - name: TypeScript check for candidate (retain diagnostics)
+        id: types
         run: bun x tsc --noEmit
         continue-on-error: true
       - name: Install audit browser
@@ -249,6 +255,12 @@ jobs:
           })().catch(e=>{console.error(e);process.exitCode=1});
           JS
           node /tmp/stage5fix/compare.cjs
+      - name: Require HTML parity and TypeScript validity before considering this approach
+        if: always()
+        env:
+          PARITY: ${{ steps.parity.outcome }}
+          TYPES: ${{ steps.types.outcome }}
+        run: test "$PARITY" = success && test "$TYPES" = success
       - uses: actions/upload-artifact@v4
         if: always()
         with:
