@@ -1,3 +1,4 @@
+const { allowEditorialMaps } = require("./consent-audit-fixture.cjs");
 /* Read-only published-page verification for the Jordan River baptism guide. */
 const {chromium}=require("playwright");
 const fs=require("node:fs");
@@ -99,6 +100,7 @@ async function snapshot(page,label,desktop){
  try{
   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
   const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:"reduce"});
+      await allowEditorialMaps(page);
   const jsErrors=[];page.on("pageerror",e=>jsErrors.push(e.message));
   const failedResponses=[];
   page.on("response",response=>{if(response.status()>=400)failedResponses.push({status:response.status(),url:response.url().slice(0,220)});});

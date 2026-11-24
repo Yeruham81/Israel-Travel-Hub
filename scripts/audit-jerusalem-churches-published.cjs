@@ -1,3 +1,4 @@
+const { allowEditorialMaps } = require("./consent-audit-fixture.cjs");
 /**
  * Read-only browser audit of the published Jerusalem churches guide.
  * Runs after successful Hostinger deployment. Tests 1440px desktop and 390/360px mobile.
@@ -96,6 +97,7 @@ async function inspect(page, viewportName, desktop) {
     browser = await chromium.launch({ headless:true, args:["--no-sandbox"] });
     for (const [label,width,height] of [["desktop-1440",1440,900],["mobile-390",390,844],["mobile-360",360,780]]) {
       const page = await browser.newPage({ viewport:{width,height}, deviceScaleFactor:1, reducedMotion:"reduce" });
+      await allowEditorialMaps(page);
       const errors = [];
       page.on("pageerror", err => errors.push(err.message));
       try {
