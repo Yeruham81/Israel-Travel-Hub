@@ -430,7 +430,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
   "5": {
     id: "5", days: 5, path: "/travel-blog/israel-itinerary-5-days/",
     title: "Israel in 5 Days: Jerusalem, Dead Sea, Tel Aviv & Haifa",
-    description: "Explore Israel in five days: Jerusalem, Masada, the Dead Sea, Tel Aviv–Jaffa, Caesarea and Haifa, with practical transport choices, hotel bases and day-by-day highlights.",
+    description: "Explore Israel in five days: Jerusalem, Masada, the Dead Sea, Tel Aviv, Caesarea and Haifa, with hotel bases, transport options and daily highlights.",
     intro: "With five full days in Israel, this route brings together Jerusalem’s historic quarters, Masada and the Dead Sea, Tel Aviv–Jaffa and the northern coast. A second Jerusalem day and a choice of excursions offer room for different interests and travel styles.",
     idealFor: "First-time visitors who enjoy historic sites, the desert and Mediterranean cities",
     reality: "This itinerary works best with five usable sightseeing days and arrival before Day 1. The desert outing and the Caesarea–Haifa journey each deserve their own full day; an evening flight on Day 5 calls for a shorter coastal programme.",
@@ -565,7 +565,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
   "7": {
     id: "7", days: 7, path: "/travel-blog/israel-itinerary-7-days/",
     title: "Israel in 7 Days: Jerusalem, Dead Sea, Galilee & Tel Aviv",
-    description: "Plan seven full days in Israel with Jerusalem, Masada and the Dead Sea, Nazareth, the Sea of Galilee, Haifa, Caesarea and Tel Aviv–Jaffa, including hotel bases and travel options.",
+    description: "Plan a seven-day Israel itinerary covering Jerusalem, the Dead Sea, Masada, Nazareth, Galilee, Haifa, Caesarea and Tel Aviv, with transport and hotels.",
     intro: "A week in Israel offers time for Jerusalem’s historic quarters, a desert excursion and two nights in the Galilee before returning south along the Mediterranean coast. The route balances memorable sights with practical transfers and room to choose the experiences that matter most to you.",
     idealFor: "First-time visitors with seven full sightseeing days, an interest in history and regional travel, and time for a northern hotel base",
     reality: "Seven full sightseeing days are realistic when you arrive before Day 1 and fly on Day 8 or later. A flight on Day 7 shortens the final day, sometimes leaving no time for sightseeing. Days 4 and 6 are hotel transfer days, so transport and stop selection matter.",
@@ -732,7 +732,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
   "10": {
     id: "10", days: 10, path: "/travel-blog/israel-itinerary-10-days/",
     title: "Israel in 10 Days: Jerusalem, Galilee, Coast & Tel Aviv",
-    description: "Plan ten days in Israel with Jerusalem, Masada and the Dead Sea, Nazareth, the Galilee, Akko, Haifa, Caesarea and Tel Aviv, including hotel bases, transport and a separate Eilat alternative.",
+    description: "Plan ten days in Israel: Jerusalem, Masada, Dead Sea, Galilee, Akko, Haifa, Caesarea and Tel Aviv, with hotel bases, travel tips and an Eilat option.",
     intro: "Ten days in Israel allow time for Jerusalem, a Dead Sea excursion, three nights in the Galilee and a journey south along the Mediterranean coast. This route finishes in Tel Aviv, with practical hotel and transport choices; Eilat and Timna form a separate southern alternative, not extra stops to squeeze into the same trip.",
     idealFor: "First-time visitors who want a broader route with heritage sites, the Galilee and the coast, without changing hotels every night",
     reality: "Ten full sightseeing days work best if you arrive before Day 1 and fly on Day 11 or later. A flight on Day 10 shortens the final day, sometimes leaving no time for sightseeing. Days 4, 7 and 8 involve hotel transfers; the core route stays in central and northern Israel.",
