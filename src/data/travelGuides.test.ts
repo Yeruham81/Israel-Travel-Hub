@@ -58,7 +58,7 @@ describe("travel guide topic filters and prerender safety", () => {
     const photos = ["3", "5", "10"].map(byId);
     expect(new Set(photos.map((photo) => photo.src)).size).toBe(3);
     expect(byId("3").alt).toMatch(/Camel.*Ein Gedi/);
-    expect(byId("5").alt).toMatch(/Five-day Israel itinerary/);
+    expect(byId("5").alt).toMatch(/camel.*Jerusalem.*Dome of the Rock/i);
     expect(byId("10").alt).toMatch(/Ibex.*Ramon Crater/);
     expect(itineraries["3"].hero).toBe("featured-original-3day");
     expect(itineraries["5"].hero).toBe("featured-original-5day");
