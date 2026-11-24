@@ -1,4 +1,4 @@
-name: Referrer-Policy live verification (read only)
+name: Prelaunch technical SEO audit (read only)
 on:
   pull_request:
     branches: [main]
@@ -9,95 +9,193 @@ concurrency:
   group: one-time-prelaunch-crawl
   cancel-in-progress: true
 jobs:
-  public-server:
+  seo:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
+    name: SEO audit - ${{ matrix.mode }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 6
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [production-build, live-preview]
     env:
-      ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: https://www.israel-taxi.com
+      VITE_INDEXABLE: "true"
+      AUDIT_MODE: ${{ matrix.mode }}
+      PREVIEW_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
     steps:
-      - name: Verify corrected Referrer-Policy and preserve existing protections
+      - uses: actions/checkout@v4
+        with:
+          ref: 333f87d224c42e17dcd63960c2fdf1b81029f50b
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install locked dependencies
+        run: bash scripts/install-ci-dependencies.sh
+      - name: Build production HTML without deployment
+        if: matrix.mode == 'production-build'
+        run: bash scripts/build-validated-static.sh
+      - name: Existing production export assertions
+        if: matrix.mode == 'production-build'
+        run: node scripts/verify-hostinger-static-export.mjs
+      - name: Collect live preview HTML sequentially
+        if: matrix.mode == 'live-preview'
         run: |
           python3 -u - <<'PY'
-          import subprocess, tempfile, os, json, time, re, pathlib
-          from urllib.parse import urlsplit, urljoin
-          origin=os.environ['ORIGIN']
-          results={}; findings=[]
+          import pathlib, json, time, os, urllib.request, urllib.error, xml.etree.ElementTree as ET
+          from urllib.parse import urlsplit
+          root=pathlib.Path('/tmp/seo-live');root.mkdir(exist_ok=True)
+          origin=os.environ['PREVIEW_ORIGIN']
+          report={};stopped=False
           def save():
-              pathlib.Path('server-security-audit.json').write_text(json.dumps({'results':results,'findings':findings},indent=2))
-          save()
-          allow={'strict-transport-security','content-security-policy','content-security-policy-report-only','x-content-type-options','x-frame-options','referrer-policy','permissions-policy','cache-control','x-robots-tag','access-control-allow-origin','access-control-allow-credentials'}
-          def probe(key,path,method='GET',extra=None,base=origin,body=False):
+              (root/'http.json').write_text(json.dumps(report,indent=2))
+          def fetch(p,dest):
+              global stopped
+              if stopped:return
               for attempt in range(2):
                   time.sleep(2)
-                  with tempfile.TemporaryDirectory() as tmp:
-                      hdr=tmp+'/headers'; data=tmp+'/body'
-                      cmd=['curl','--silent','--show-error','--connect-timeout','5','--max-time','10','--max-filesize','2000000','--user-agent','IsraelTravelHub-PrelaunchAudit/1.0','-D',hdr,'-o',data,'-w','%{http_code} %{ssl_verify_result}',base+path]
-                      if method=='HEAD':cmd+=['--head']
-                      if extra:cmd+=['-H',extra]
-                      try:
-                          p=subprocess.run(cmd,capture_output=True,text=True,timeout=13)
-                          fields=p.stdout.strip().split()
-                          status=int(fields[0]) if fields and fields[0].isdigit() else None
-                          h={}
-                          if os.path.exists(hdr):
-                              for line in pathlib.Path(hdr).read_text(errors='replace').splitlines():
-                                  if ':' in line:
-                                      k,v=line.split(':',1);k=k.lower();h[k]=h[k]+', '+v.strip() if k in h and k in allow else v.strip()
-                          if status==429:
-                              findings.append({'type':'rate_limit','probe':key,'attempt':attempt+1});save()
-                              delay=h.get('retry-after','')
-                              if attempt==0 and (not delay.isdigit() or int(delay)<=60):
-                                  time.sleep(max(35,int(delay)) if delay.isdigit() else 35);continue
-                              raise RuntimeError('Persistent rate limit; stopped')
-                          r={'status':status,'curlExit':p.returncode,'sslVerifyResult':fields[1] if len(fields)>1 else None,'contentType':h.get('content-type'),'headers':{k:v for k,v in h.items() if k in allow}}
-                          r['location']=h.get('location')
-                          if key=='http_redirect':r['httpsDestination']=h.get('location','').startswith(origin+'/') or h.get('location')==origin
-                          raw=pathlib.Path(data).read_bytes() if body and os.path.exists(data) and status==200 else b''
-                          if key=='food':
-                              r['fixedAnchor']=bool(re.search(rb'href=["\x27]#knafeh["\x27]',raw)) and bool(re.search(rb'id=["\x27]knafeh["\x27]',raw)) and not bool(re.search(rb'href=["\x27]#kanafeh["\x27]',raw))
-                          if key in ('quote','exchange'):
-                              try:
-                                  x=json.loads(raw)
-                                  r['jsonKeys']=sorted(x.keys())
-                                  if key=='quote':r['available']=x.get('available') is True
-                                  else:r['exchangeStatus']=x.get('status') if x.get('status') in ('fresh','cached','unavailable') else 'unexpected'
-                              except Exception:r['validJson']=False
-                          results[key]=r;save()
-                          print(key,json.dumps(r),flush=True)
-                          return
-                      except subprocess.TimeoutExpired:
-                          results[key]={'timeout':True};save();print(key,'timeout',flush=True);return
-          try:
-              probe('home','/')
-              probe('food','/travel-blog/what-to-eat-in-israel/',body=True)
-              probe('airport','/airport-transfers/')
-              probe('http_redirect','/',base='http://'+urlsplit(origin).hostname)
-              probe('quote','/api/quote-request/',body=True)
-              probe('exchange','/api/exchange-rates/',body=True)
-              for key in ('home','food','airport'):
-                  r=results[key];h=r.get('headers',{})
-                  if r.get('status')!=200 or r.get('curlExit')!=0:findings.append({'type':'page_http','key':key})
-                  for k,v in {'x-content-type-options':'nosniff','x-frame-options':'SAMEORIGIN','referrer-policy':'strict-origin-when-cross-origin','permissions-policy':'camera=(), microphone=()','x-robots-tag':'noindex, nofollow'}.items():
-                      if h.get(k,'').lower().replace(' ','')!=v.lower().replace(' ',''):findings.append({'type':'header_mismatch','key':key,'header':k,'actual':h.get(k)})
-              if not results['food'].get('fixedAnchor'):findings.append({'type':'food_anchor'})
-              if results['http_redirect'].get('status')!=301 or not results['http_redirect'].get('httpsDestination'):findings.append({'type':'https_redirect'})
-              for key in ('quote','exchange'):
-                  r=results[key];h=r.get('headers',{})
-                  if r.get('status')!=200 or 'application/json' not in (r.get('contentType') or ''):findings.append({'type':'api_http','key':key})
-                  if h.get('referrer-policy')!='no-referrer':findings.append({'type':'api_referrer_policy','key':key,'actual':h.get('referrer-policy')})
-              if not results['quote'].get('available') or 'no-store' not in results['quote'].get('headers',{}).get('cache-control',''):findings.append({'type':'quote_availability_or_cache'})
-              if results['exchange'].get('exchangeStatus') not in ('fresh','cached'):findings.append({'type':'exchange_status'})
-              save()
-          except RuntimeError as e:findings.append({'type':'stopped','reason':str(e)})
-          finally:
-              save()
-              print('PUBLIC_FINAL',json.dumps({'results':results,'findings':findings}),flush=True)
-          if findings: raise SystemExit(1)
+                  try:
+                      req=urllib.request.Request(origin+p,headers={'User-Agent':'IsraelTravelHub-PrelaunchAudit/1.0'})
+                      with urllib.request.urlopen(req,timeout=12) as res:
+                          data=res.read(5000001)
+                          if len(data)>5000000:raise ValueError('response too large')
+                          report[p]={'status':res.status,'final':res.url,'robots':res.headers.get_all('X-Robots-Tag',[]),'type':res.headers.get('Content-Type','')}
+                          dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(data)
+                      save();return
+                  except urllib.error.HTTPError as e:
+                      report[p]={'status':e.code};save()
+                      if e.code==429:
+                          delay=e.headers.get('Retry-After','')
+                          if attempt==0 and (not delay.isdigit() or int(delay)<=90):
+                              time.sleep(max(35,int(delay)) if delay.isdigit() else 35);continue
+                          stopped=True
+                      return
+                  except Exception as e:
+                      report[p]={'error':type(e).__name__};save();return
+          fetch('/sitemap.xml',root/'sitemap.xml')
+          fetch('/robots.txt',root/'robots.txt')
+          paths=set()
+          for file in [pathlib.Path('public/sitemap.xml'),root/'sitemap.xml']:
+              if file.exists():
+                  try:
+                      for node in ET.parse(file).getroot().iter():
+                          if node.tag.endswith('}loc'):
+                              u=urlsplit(node.text or '')
+                              if u.path.startswith('/') and '..' not in u.path.split('/') and not u.query and not u.fragment:paths.add(u.path)
+                  except ET.ParseError:pass
+          for p in sorted(paths):
+              if stopped:break
+              fetch(p,root/p.strip('/')/'index.html')
+              if len(report)%20==0:print('Fetched',len(report),flush=True)
+          fetch('/__seo_audit_missing_20261124__/',root/'missing.html')
+          save()
+          print('LIVE_COLLECTION',json.dumps({'expectedPages':len(paths),'responses':len(report),'rateLimitStop':stopped}),flush=True)
           PY
-      - uses: actions/upload-artifact@v4
+      - name: Inspect metadata, JSON-LD, headings, links and image SEO
         if: always()
+        run: |
+          cat > .temporary-seo-audit.mjs <<'JS'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import {JSDOM} from 'jsdom';
+          const live=process.env.AUDIT_MODE==='live-preview';
+          const origin=live?process.env.PREVIEW_ORIGIN:process.env.VITE_CANONICAL_ORIGIN;
+          const root=live?'/tmp/seo-live':'.output/public';
+          const out=process.env.RUNNER_TEMP+'/seo-report';
+          fs.mkdirSync(out,{recursive:true});
+          const critical=[],review=[],pages=[],incoming=new Map(),edges=new Map(),titles=new Map(),descs=new Map(),schemas={},images=new Set();
+          const note=(severity,page,type,detail)=>{(severity==='critical'?critical:review).push({page,type,detail});};
+          const get=p=>fs.existsSync(p)?fs.readFileSync(p,'utf8'):'';
+          const urls=xml=>[...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&'));
+          const norm=p=>p==='/'?p:p.replace(/\/+$/,'')+'/';
+          const sourcePaths=new Set(urls(get('public/sitemap.xml')).map(v=>new URL(v).pathname));
+          const locs=urls(get(path.join(root,'sitemap.xml')));
+          const inventory=new Set();
+          for(const v of locs){try{const u=new URL(v);if(u.origin!==origin||u.search||u.hash||norm(u.pathname)!==u.pathname)note('critical','/sitemap.xml','invalid_location',v);if(inventory.has(u.pathname))note('critical','/sitemap.xml','duplicate_location',u.pathname);inventory.add(u.pathname);}catch{note('critical','/sitemap.xml','invalid_url',v);}}
+          for(const p of sourcePaths)if(!inventory.has(p))note('critical','/sitemap.xml','missing_route',p);
+          for(const p of inventory)if(!sourcePaths.has(p))note('review','/sitemap.xml','extra_route',p);
+          if(!locs.length)note('critical','/sitemap.xml','empty_or_missing','No URLs');
+          const robots=get(path.join(root,'robots.txt'));
+          if(!robots.includes('Sitemap: '+origin+'/sitemap.xml'))note('critical','/robots.txt','sitemap_reference','Missing exact sitemap URL');
+          if(!live&&/^Disallow:\s*\S/m.test(robots))note('critical','/robots.txt','production_disallow','Review rules');
+          if(live&&/^Disallow:\s*\//m.test(robots))note('review','/robots.txt','preview_crawl_rule','Check on cutover');
+          let http={};try{http=JSON.parse(get(root+'/http.json')||'{}');}catch{}
+          if(live&&![404,410].includes(http['/__seo_audit_missing_20261124__/']?.status))note('critical','/','missing_page_status',http['/__seo_audit_missing_20261124__/']||'not checked');
+          const allPaths=new Set([...sourcePaths,...inventory]);
+          for(const p of allPaths){
+            const file=path.join(root,p.replace(/^\/|\/$/g,''),'index.html');
+            if(live){
+              const h=http[p];if(h?.status!==200||h?.final!==origin+p||!h?.type?.includes('text/html'))note('critical',p,'live_response',h||'not checked');
+              if(h?.status===200&&!h?.robots?.some(v=>/\bnoindex\b/i.test(v)))note('critical',p,'preview_header_noindex','Missing X-Robots-Tag noindex');
+            }
+            if(!fs.existsSync(file)){note('critical',p,'missing_html','No static document');continue;}
+            const dom=new JSDOM(get(file),{url:origin+p});const d=dom.window.document;
+            const query=s=>[...d.head.querySelectorAll(s)];
+            const meta=(k,attr='name')=>query('meta['+attr+'="'+k+'"]').map(e=>(e.getAttribute('content')||'').trim());
+            const exact=(label,values,expected)=>{if(values.length!==1||!values[0]||(expected!==undefined&&values[0]!==expected))note('critical',p,label,{values,expected});return values[0]||'';};
+            const title=exact('title',query('title').map(e=>e.textContent.trim()));
+            const desc=exact('description',meta('description'));
+            const canonical=exact('canonical',query('link[rel="canonical"]').map(e=>e.getAttribute('href')),origin+p);
+            const robot=exact('robots',meta('robots').map(x=>x.toLowerCase().replace(/\s/g,'')),live?'noindex,nofollow':'index,follow');
+            if(!live&&meta('googlebot').some(v=>/\bnoindex\b/i.test(v)))note('critical',p,'googlebot_noindex','Unexpected directive');
+            if(!d.documentElement.lang)note('review',p,'html_lang','Missing lang');
+            exact('og_title',meta('og:title','property'),title);
+            exact('og_description',meta('og:description','property'),desc);
+            exact('og_url',meta('og:url','property'),origin+p);
+            const og=meta('og:image','property'),tw=meta('twitter:image');
+            if(og.length!==1||!og[0])note('review',p,'og_image','Missing or multiple');
+            if(!tw[0]||tw[0]!==og[0])note('review',p,'twitter_image','Missing or differs from OG');
+            if(!meta('twitter:card')[0])note('review',p,'twitter_card','Missing');
+            if(og[0])try{const u=new URL(og[0]);images.add(u.href);if(u.protocol!=='https:'||u.origin!==origin)note('review',p,'og_image_origin',u.href);else if(!live&&!fs.existsSync(path.join(root,decodeURIComponent(u.pathname).replace(/^\//,''))))note('critical',p,'missing_og_asset',u.pathname);}catch{note('review',p,'invalid_og_image',og[0]);}
+            if(title){if(titles.has(title))note('critical',p,'duplicate_title',titles.get(title));titles.set(title,p);if(title.length<27||title.length>75)note('review',p,'title_length',title.length);}
+            if(desc){if(descs.has(desc))note('review',p,'duplicate_description',descs.get(desc));descs.set(desc,p);if(desc.length<90||desc.length>165)note('review',p,'description_length',desc.length);}
+            const main=d.querySelector('main')||d.querySelector('#main'),h1=[...d.querySelectorAll('h1')];
+            if(h1.length!==1||!h1[0]?.textContent.trim())note('critical',p,'h1_count',h1.length);
+            const headings=[...(main||d).querySelectorAll('h1,h2,h3,h4,h5,h6')];let level=0;
+            for(const h of headings){const next=Number(h.tagName[1]);if(level&&next>level+1)note('review',p,'heading_level_jump',{from:level,to:next,text:h.textContent.trim().slice(0,100)});level=next;}
+            const words=(main?.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+            if(!main||words<30)note('critical',p,'thin_static_content',words);
+            const blocks=[...d.querySelectorAll('script[type="application/ld+json"]')];let breadcrumbs=0;
+            const walk=x=>{if(Array.isArray(x)){x.forEach(walk);return;}if(!x||typeof x!=='object')return;
+              for(const t of [].concat(x['@type']||[])){schemas[t]=(schemas[t]||0)+1;if(t==='BreadcrumbList'){breadcrumbs++;const list=x.itemListElement;if(!Array.isArray(list)||!list.length)note('critical',p,'breadcrumb_empty','No items');else for(const [i,item] of list.entries()){if(item.position!==i+1||!item.name)note('review',p,'breadcrumb_item',i+1);if(item.item&&typeof item.item==='string'){try{const u=new URL(item.item);if(u.origin!==origin)note('critical',p,'breadcrumb_origin',item.item);else if(!allPaths.has(norm(u.pathname)))note('review',p,'breadcrumb_unknown_route',u.pathname);}catch{note('review',p,'breadcrumb_invalid_url',item.item);}}}}}
+              for(const v of Object.values(x))if(typeof v==='object')walk(v);
+            };
+            for(const b of blocks){try{walk(JSON.parse(b.textContent));}catch{note('critical',p,'invalid_jsonld','JSON parse failure');}}
+            if(p!=='/'&&!breadcrumbs)note('review',p,'missing_breadcrumb_schema','No BreadcrumbList');
+            let missingAlt=0,emptyAlt=0,imageCount=0;
+            for(const img of d.querySelectorAll('img')){imageCount++;if(!img.hasAttribute('alt'))missingAlt++;else if(!img.getAttribute('alt').trim())emptyAlt++;
+              const src=img.getAttribute('src');if(!src)continue;
+              try{const u=new URL(src,origin+p);if(u.origin===origin&&!live&&!fs.existsSync(path.join(root,decodeURIComponent(u.pathname).replace(/^\//,''))))note('critical',p,'missing_image_file',u.pathname);}catch{}
+            }
+            if(missingAlt)note('review',p,'missing_alt_attribute',missingAlt);
+            const linked=new Set();
+            for(const a of d.querySelectorAll('a[href]')){try{const u=new URL(a.getAttribute('href'),origin+p);if(u.origin!==origin)continue;const target=norm(u.pathname);if(allPaths.has(target)&&target!==p){linked.add(target);if(!incoming.has(target))incoming.set(target,new Set());incoming.get(target).add(p);}else if(!allPaths.has(target)&&!/\.[a-z0-9]{2,6}\/?$/i.test(u.pathname)&&!/^\/(?:api|maps|widgets|assets)\//.test(u.pathname))note('review',p,'internal_link_outside_sitemap',u.pathname);}catch{}}
+            edges.set(p,linked);
+            pages.push({path:p,title,description:desc,canonical,robots:robot,h1:h1[0]?.textContent.trim(),staticWords:words,jsonLdBlocks:blocks.length,breadcrumbs,ogImage:og[0]||null,imageCount,missingAlt,emptyAlt,internalDestinations:linked.size});
+            dom.window.close();
+          }
+          const reached=new Set(['/']),queue=['/'];while(queue.length){for(const t of edges.get(queue.shift())||[]){if(!reached.has(t)){reached.add(t);queue.push(t);}}}
+          if(pages.length===allPaths.size)for(const p of allPaths){if(p!=='/'&&!incoming.get(p)?.size)note('critical',p,'orphan_page','No incoming link in scanned HTML');if(!reached.has(p))note('review',p,'unreachable_from_home','No static link path from home');}
+          const dedupe=a=>[...new Map(a.map(x=>[JSON.stringify(x),x])).values()];
+          const c=dedupe(critical),r=dedupe(review);
+          const summary={mode:process.env.AUDIT_MODE,sourcePages:sourcePaths.size,sitemapPages:inventory.size,parsedPages:pages.length,uniqueTitles:titles.size,uniqueDescriptions:descs.size,ogImagePages:pages.filter(x=>x.ogImage).length,uniqueOgImages:images.size,jsonLdPages:pages.filter(x=>x.jsonLdBlocks).length,breadcrumbPages:pages.filter(x=>x.breadcrumbs).length,schemas,images:pages.reduce((s,x)=>s+x.imageCount,0),missingAlt:pages.reduce((s,x)=>s+x.missingAlt,0),emptyAlt:pages.reduce((s,x)=>s+x.emptyAlt,0),reachableFromHome:reached.size,critical:c.length,review:r.length};
+          fs.writeFileSync(out+'/seo-report.json',JSON.stringify({summary,critical:c,review:r,pages,robots,http},null,2));
+          console.log('SEO_SUMMARY',JSON.stringify(summary));
+          for(const x of c.slice(0,100))console.log('SEO_CRITICAL',JSON.stringify(x));
+          for(const x of r.slice(0,100))console.log('SEO_REVIEW',JSON.stringify(x));
+          if(c.length)process.exitCode=1;
+          JS
+          node .temporary-seo-audit.mjs
+      - name: Save SEO findings
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: bounded-public-security-audit
-          path: server-security-audit.json
+          name: seo-${{ matrix.mode }}
+          path: ${{ runner.temp }}/seo-report/
           if-no-files-found: warn
