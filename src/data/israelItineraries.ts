@@ -430,7 +430,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
   "5": {
     id: "5", days: 5, path: "/travel-blog/israel-itinerary-5-days/",
     title: "Israel in 5 Days: Jerusalem, Dead Sea, Tel Aviv & Haifa",
-    description: "Explore Israel in five days: Jerusalem, Masada, the Dead Sea, Tel Aviv, Caesarea and Haifa, with hotel bases, transport options and daily highlights.",
+    description: "Explore Israel in five days: Jerusalem, Masada, Dead Sea, Tel Aviv, Caesarea and Haifa, with hotel bases, transport options and day-by-day highlights.",
     intro: "With five full days in Israel, this route brings together Jerusalem’s historic quarters, Masada and the Dead Sea, Tel Aviv–Jaffa and the northern coast. A second Jerusalem day and a choice of excursions offer room for different interests and travel styles.",
     idealFor: "First-time visitors who enjoy historic sites, the desert and Mediterranean cities",
     reality: "This itinerary works best with five usable sightseeing days and arrival before Day 1. The desert outing and the Caesarea–Haifa journey each deserve their own full day; an evening flight on Day 5 calls for a shorter coastal programme.",
