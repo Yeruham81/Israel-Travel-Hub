@@ -118,7 +118,8 @@ describe("travel guide topic filters and prerender safety", () => {
 
   it("uses the real former Nesher sherut image in its historical context and no generic airport pickup artwork", () => {
     const sherut = travelGuides.sherut;
-    expect(sherut.sections.find(section => section.id === "nesher-amal")?.photo?.src).toContain("sherut-nesher-airport");
+    expect(sherut.photo.src).toContain("sherut-nesher-airport");
+    expect(sherut.sections.every(section => !section.photo), "Avoid repeating the hero or hotlinking a section image").toBe(true);
     expect(sherut.sections.find(section => section.id === "official-taxi")?.photo).toBeUndefined();
     for (const guide of Object.values(travelGuides)) {
       const photos = [guide.photo, guide.cardPhoto, ...guide.sections.flatMap(section =>
