@@ -7,7 +7,7 @@ const read = (path: string) => readFileSync(path, "utf8");
  * Real booking, contact and outbound provider buttons remain separate links. */
 const editorialCardFiles = [
   "src/components/Guide.tsx",
-  "src/components/TravelGuide.tsx",
+  "src/components/GuideCard.tsx",
   "src/components/BestTimeIsraelGuide.tsx",
   "src/components/IsraelHolidayVisitorGuide.tsx",
   "src/components/IsraelFoodGuide.tsx",
@@ -52,7 +52,7 @@ describe("whole-card editorial navigation without redundant CTA footers", () => 
     }
     const generic = read("src/components/Guide.tsx");
     expect(generic).not.toContain('className="mt-3 text-sm font-semibold text-primary">Read more</span>');
-    const directory = read("src/components/TravelGuide.tsx");
+    const directory = read("src/components/GuideCard.tsx");
     expect(directory).not.toContain(">Read more{showReadMoreArrow");
   });
 
