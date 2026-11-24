@@ -3,6 +3,8 @@ import { TRAVEL_TIPS_TITLE, TRAVEL_TIPS_DESCRIPTION, TRAVEL_TIPS_UPDATED, travel
 import { jerusalemShoppingPlaces as shoppingPlaces } from "@/data/jerusalemShopping";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { travelGuidePaths } from "@/data/registry";
+import { shabbatAirportTaxiFareTable } from "@/data/shabbatAirportTaxiFares";
+import airportRailPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import hall from "@/assets/home/ben-gurion-t3.webp";
 import panorama from "@/assets/home/jerusalem-old-city.webp";
 import market from "@/assets/jerusalem/mahane-yehuda.webp";
@@ -20,33 +22,29 @@ const photos = {
   masada: { src: masada, alt: "Masada plateau and the surrounding Dead Sea desert", credit: "Godot13 · CC BY-SA 4.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Israel-2013-Aerial_13-Masada.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
   yardenit: { src: yardenit, alt: "Visitors at the designated baptism areas at Yardenit, south of the Sea of Galilee", sourceUrl: "", credit: "Photo from the publisher's travel image archive." },
   qasr: { src: qasr, alt: "A baptism gathering at Qasr el-Yahud on the lower Jordan near Jericho", sourceUrl: "", credit: "Photo from the publisher's travel image archive." },
-  sepulchre: { src: sepulchre, alt: "Courtyard and facade of the Church of the Holy Sepulchre in Jerusalem", sourceUrl: "", credit: "Photo from the publisher's travel image archive." },
-} satisfies Record<string, GuidePhoto>;
-
-export const expandedTravelGuides = {
-  shabbat: {
+  sepulchre: { src: sepulchre, alt: "Courtyard and facade of the Church of the Holy Sepulchre in  shabbat: {
     id: "shabbat",
     title: "How to Get from Ben Gurion Airport on Shabbat",
     description: "Arriving at Ben Gurion Airport on Shabbat? Compare free bus 711, official taxis, private transfers and Saturday-night trains, with practical pickup tips.",
-    intro: "Landing on Friday or Saturday? Here is how to leave Ben Gurion Airport when regular public transport is limited, where to find the free weekend bus and what to arrange before your flight.",
-    answer: "Ben Gurion Airport stays open on Shabbat, but most regular trains and buses stop for part of Friday and Saturday. Limited free weekend Line 711 serves central Tel Aviv from Terminal 1, if its timetable fits your arrival. Official airport taxis run 24 hours a day, while an advance-confirmed private transfer is an alternative for a direct journey, groups or other destinations. Check the actual first Saturday-night train before deciding to wait.",
+    intro: "Landing at Ben Gurion Airport on Friday or Saturday? I explain the free weekend bus to Tel Aviv, the terminal transfer, licensed taxis and private pickups, and when trains resume.",
+    answer: "When regular trains and buses pause for Shabbat, free weekend Line 711 can take you from Terminal 1 to central Tel Aviv at limited times. International arrivals use Terminal 3, so first take the free airport shuttle to Terminal 1. Licensed airport taxis run around the clock, and you can arrange a confirmed private pickup. On Saturday evening, compare your arrival time with the first actual train for your destination.",
     topics: ["transportation", "tips"],
-    updatedAt: "2026-11-11",
+    updatedAt: "2026-11-24",
     photo: {src: "/images/travel-blog/featured-shabbat-airport.webp", alt: "Road and airport travel during Shabbat near Ben Gurion Airport"},
     facts: [
-      { label: "Free option", text: "Line 711: Terminal 1 to central Tel Aviv at limited weekend times" },
+      { label: "Free weekend bus", text: "Line 711 from Terminal 1 to central Tel Aviv; winter service ends earlier on Saturdays" },
       { label: "Direct ride", text: "Authorized airport taxis operate 24/7; regulated meter and official queue" },
       { label: "After Shabbat", text: "Look up the first actual train or bus for your route and date" },
     ],
     comparison: {
       caption: "Shabbat transport options at a glance",
-      headers: ["Option", "Best for", "Cost and limitation"],
+      headers: ["Option", "Best for", "Practical details"],
       rows: [
-        ["Free bus 711", "Flexible travelers staying near a central Tel Aviv stop", "Free; limited departures, Terminal 1 only, not door to door"],
-        ["Official airport taxi", "Direct travel without advance arrangements", "Regulated metered fare; queues and vehicle availability vary"],
-        ["Pre-booked private transfer", "Families, larger groups, extra bags or longer journeys", "Written quote; vehicle and pickup must be confirmed"],
-        ["Rental car", "Beginning a road trip", "Rental, fuel and parking; verify Saturday collection in writing"],
-        ["Wait for trains or buses", "Saturday evening arrivals with a workable connection", "Regular ticket fare; check first actual departure and last-mile travel"],
+        ["Free bus 711", "Flexible travellers heading to central Tel Aviv", "Board at Terminal 1; winter and summer schedules differ; choose your final stop"],
+        ["Official airport taxi", "Direct travel to your final address", "Gett or airport kiosk, Terminal 3 Exit 03; Shabbat meter tariffs apply"],
+        ["Pre-booked private transfer", "Families, groups, luggage or longer distances", "Confirmed vehicle, price, waiting terms and meeting point"],
+        ["Rental car", "Starting a multi-stop road trip", "Check Saturday counter hours, vehicle collection and full costs"],
+        ["Train or regular bus after Shabbat", "Saturday evening arrivals", "Check the first departure for your route and your hotel connection"],
       ],
     },
     sections: [
@@ -54,9 +52,9 @@ export const expandedTravelGuides = {
         id: "shabbat-hours",
         title: "What changes at Ben Gurion Airport on Shabbat?",
         paragraphs: [
-          "Flights continue during an ordinary Shabbat, but Israel Railways and most regular buses stop before Shabbat on Friday and resume on different schedules on Saturday evening. Shabbat times change every week, and a Friday flight landing before sunset may still arrive too late for the last train.",
-          "This guide also helps plan ground transport around many Jewish holidays, but service arrangements can differ by holiday and should not be assumed to match the Saturday timetable. Yom Kippur is a special exception, with major restrictions on airport flight operations; check the Israel Airports Authority and your airline before planning any Yom Kippur travel.",
-          "Plan from the time you expect to clear passport control, collect your luggage and leave the terminal, not only from your scheduled landing. See my Ben Gurion Airport arrival tips for those steps. You can check local Shabbat start and end times using the link below, but those are not railway operating times.",
+          "On an ordinary Shabbat, most regular trains and buses stop on Friday and resume on Saturday evening. The last Friday departure and the first Saturday-night service depend on the date and route. Compare your expected exit from the airport with the published transport schedule.",
+          "Jewish holidays can follow different ground-transport schedules. Yom Kippur is a special exception with major restrictions on airport flight operations, so consult the Israel Airports Authority and your airline when planning travel on that date. My calendar of Jewish holidays explains dates and their effect on visitors.",
+          "Allow time for passport control, baggage claim and customs before your next connection. My Ben Gurion Airport arrival tips explain each step. The Shabbat-times link below helps you understand the weekly calendar; use the transport timetables for actual train and bus departures.",
         ],
         inlineLinks: [{ text: "Jewish holidays", to: "/travel-blog/calendar-of-events/" }, { text: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival }],
         sourceIds: ["israel-rail", "guide-iaa"],
@@ -65,16 +63,16 @@ export const expandedTravelGuides = {
         id: "arrival-time",
         title: "Which option suits your arrival time?",
         paragraphs: [
-          "Your arrival window matters as much as your destination. If you land late on Saturday, waiting for a confirmed public-transport departure might make sense; on Friday evening or Saturday daytime, the options are different. Always check the exact timetable for your own date.",
+          "Use your estimated time out of the arrivals hall when choosing an option. The table below shows what is usually available at different points on Friday and Saturday; match any public-transport connection to the actual timetable for your date.",
         ],
         tables: [{
           caption: "Plan by when your flight arrives",
-          headers: ["Arrival window", "First thing to check"],
+          headers: ["Arrival window", "Available transport options", "Practical first step"],
           rows: [
-            ["Friday, before Shabbat", "The final train or regular bus after allowing for immigration, bags and walking to the stop"],
-            ["Friday evening or late night", "Whether Line 711 serves your Terminal 1 stop at a useful time; otherwise a taxi or booked transfer"],
-            ["Saturday morning or afternoon", "Line 711 for central Tel Aviv, or a direct ride to your destination"],
-            ["Saturday evening", "The first actual train or regular bus and the last connection to your accommodation"],
+            ["Friday before regular service stops", "Train or scheduled bus, licensed taxi, private transfer", "Check the last service after allowing time for arrivals"],
+            ["Friday evening and overnight", "Free Line 711 when scheduled, licensed taxi, confirmed private transfer", "Compare the bus departure at Terminal 1 with your exit time"],
+            ["Saturday daytime", "Free Line 711 when scheduled, licensed taxi, confirmed private transfer, arranged rental", "Check the seasonal Saturday bus timetable"],
+            ["Saturday evening", "First trains or regular buses as they restart, taxis or pre-booked transfers", "Check the first actual service and the last leg to your hotel"],
           ],
           note: "Friday and Saturday service varies with season, destination and holidays.",
         }],
@@ -84,28 +82,41 @@ export const expandedTravelGuides = {
         id: "weekend-711",
         title: "Free weekend bus 711: Ben Gurion Airport to Tel Aviv",
         paragraphs: [
-          "The free Na'im Besofash Line 711 connects Shoham and central Tel Aviv via Ben Gurion Airport Terminal 1. The current published route-wide hours are Friday 17:30 to 01:30 overnight and Saturday 10:30 to 18:30, roughly every two hours. Winter and summer operating hours may differ. These are not departures from the airport stop: check the current Line 711 timetable for Terminal 1 in the Tel Aviv-bound direction on your actual date.",
-          "The airport stop is Ben Gurion Airport / Terminal 1 (stop 34609). In Tel Aviv, the route serves areas around HaRakevet Street, Rothschild Boulevard, Habima Square, Dizengoff Center and the Tel Aviv Museum. Choose the stop closest to your accommodation.",
-          "Line 711 is not timed to flights or door to door; leave time for bags, the terminal transfer and any final ride or walk. Holiday schedules may differ from the usual Friday and Saturday service.",
+          "The free Na’im Besofash Line 711 connects Shoham with central Tel Aviv via Ben Gurion Airport Terminal 1. The November 2026 winter-time route listing shows Friday 15:45–01:30 and Saturday 10:30–16:30, about every two hours. Saturday service ends earlier during Israel’s winter time; daylight-saving-time schedules extend service later in the day. Departure times at the airport stop differ from the route-wide operating window.",
+          "At the airport, use Ben Gurion Airport / Terminal 1, stop 34609, in the Tel Aviv-bound direction. The line serves HaRakevet Street, Rothschild Boulevard, Habima Square, Dizengoff Center and the Tel Aviv Museum. The stop guide below helps you choose the part of the city closest to your accommodation.",
+          "Allow time for passport control, baggage collection and the shuttle from Terminal 3 to Terminal 1. Select the stop closest to your hotel and plan the remaining walk or local ride. For holidays and summer travel, use the operator’s current timetable for the exact date and direction.",
         ],
+        tables: [{
+          caption: "Where to get off Line 711 in Tel Aviv",
+          headers: ["Line 711 stop / area", "Useful for", "Next step"],
+          rows: [
+            ["HaRakevet Street", "Southern city centre and nearby streets", "Use your accommodation address to select the nearest stop"],
+            ["Rothschild Boulevard", "Hotels and apartments along Rothschild", "Check which stop on the boulevard best matches your address"],
+            ["Habima Square", "Central Tel Aviv and the cultural district", "Continue to your hotel on foot or by a suitable local ride"],
+            ["Dizengoff Center", "Dizengoff and surrounding central streets", "Check your hotel’s position north or south of the centre"],
+            ["Tel Aviv Museum", "The museum and nearby city-centre streets", "Plan the last connection for your actual address"],
+          ],
+          note: "These are route areas, not exact walking-time claims. Check the stop-by-stop timetable for the current direction and stop names.",
+        }],
         sourceIds: ["guide-weekend-711", "guide-weekend-timetable", "guide-711-hours"],
       },
       {
         id: "terminal-transfer",
         title: "How to reach bus 711 from Terminal 3",
         paragraphs: [
-          "The airport's free inter-terminal shuttle operates approximately every 15 minutes, around the clock including Shabbat, according to the Israel Airports Authority. If you arrive at Terminal 3, allow time for the transfer to Terminal 1; the three steps below show where to go.",
-          "The internal shuttle and city-bound Line 711 are different services with separate stops. If the airport bus departure is too close to your expected time out of arrivals, have a backup.",
+          "For international arrivals at Terminal 3, take the airport’s free inter-terminal shuttle to Terminal 1. The Israel Airports Authority lists an approximately 15-minute frequency around the clock, including Shabbat. Follow the three steps below from arrivals to the Line 711 stop.",
+          "The internal shuttle connects the two airport terminals; Line 711 then travels toward Tel Aviv. Include the shuttle wait, ride and short walk to bus stop 34609 when planning the connection.",
         ],
         sourceIds: ["guide-iaa", "guide-weekend-711"],
       },
       {
         id: "taxis-transfers",
-        title: "Official taxis and private transfers on Shabbat",
+        title: "Licensed airport taxis and private transfers on Shabbat",
+        photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Official taxi sign at Ben Gurion Airport" },
         paragraphs: [
-          "Authorized airport taxis operate 24 hours a day on Shabbat and use the regulated meter. For an immediate taxi, obtain a ride code through Gett or an airport self-service kiosk, then join the official queue at Terminal 3 ground-floor Exit 03 (or the main arrivals exit at Terminal 1). You do not need the Gett app if you use the kiosk, and the code does not let you skip the queue. My official Ben Gurion Airport taxi guide explains the pickup procedure.",
-          "Gett lists cash, card and in-app payment for its authorized airport taxis. A scheduled Gett ride is separate from the on-demand queue: book through the app at least two hours before pickup and follow the confirmation to Terminal 3 Level 2, Exit 23.",
-          "A separately booked private transfer has its own agreed meeting point, vehicle and price. When contacting me, include your flight number, final address, passenger count, luggage and any child-seat or accessibility needs. Ask about waiting, payment and cancellation before confirming. You can also compare private airport-transfer options.",
+          "Licensed airport taxis operate 24 hours a day, including Shabbat. For an immediate ride, get a ride code through Gett or an airport taxi kiosk and join the official queue at Terminal 3 ground-floor Exit 03 (or follow the official Terminal 1 pickup signs). A kiosk can issue the code without the Gett app; the same queue procedure applies. My Ben Gurion Airport taxi guide explains the steps.",
+          "Gett lists cash, card and in-app payment options for airport taxis. For a Gett taxi booked in advance, book in the app at least two hours before pickup and follow the separate meeting instructions at Terminal 3 Level 2, Exit 23.",
+          "A pre-booked private transfer can provide a confirmed vehicle, meeting point and price. Tell me your flight number, full destination address, number of travellers, luggage and any child-seat or accessibility needs. I will explain the waiting, payment and cancellation terms before a booking is confirmed. You can compare private airport-transfer options.",
         ],
         inlineLinks: [
           { text: "official Ben Gurion Airport taxi guide", to: travelGuidePaths.airportTaxis },
@@ -115,20 +126,11 @@ export const expandedTravelGuides = {
       },
       {
         id: "costs",
-        title: "How much does it cost to leave the airport on Shabbat?",
+        title: "Estimated airport taxi fares on Shabbat",
         paragraphs: [
-          "Line 711 is free. The estimated taxi prices below are based on Israel's official April 2026 taxi tariff and reflect typical travel during Shabbat. They are not fixed quotes for every pickup hour or address. For detailed meter rules and possible extra charges, see my Israeli taxi fares guide.",
+          "Line 711 is free. The table below uses the regulated Shabbat taxi meter tariffs, which are higher than the corresponding ordinary weekday daytime Tariff A. Saturday daytime generally uses Tariff B (06:00–19:00) and Saturday evening/night Tariff C (19:00–06:00). Friday uses B from 16:00 and C from 21:00. These are estimated meter journeys for planning; for the exact rules and permitted additions, see my Israeli taxi fares guide.",
         ],
-        tables: [{
-          caption: "Approximate taxi prices and travel times from Ben Gurion Airport",
-          headers: ["Destination", "Approx. taxi fare", "Typical driving time"],
-          rows: [
-            ["Tel Aviv", "₪180–230", "30–40 min"],
-            ["Jerusalem", "₪310–410", "45–65 min"],
-            ["Haifa", "₪670–830", "75–105 min"],
-          ],
-          note: "These are general estimates, not fixed fares. The final price and driving time can vary with your destination, pickup time, traffic and route.",
-        }],
+        tables: [shabbatAirportTaxiFareTable],
         inlineLinks: [{ text: "Israeli taxi fares guide", to: travelGuidePaths.taxiFares }],
         sourceIds: ["taxi-fares-2026"],
       },
@@ -146,8 +148,8 @@ export const expandedTravelGuides = {
         id: "destinations",
         title: "Getting to Tel Aviv, Jerusalem, Haifa and the Dead Sea",
         paragraphs: [
-          "Line 711 serves central Tel Aviv, but not individual hotels. For the last leg, see my Ben Gurion Airport to Tel Aviv guide. The table below compares options during the main Shabbat transport break; my Ben Gurion Airport to Jerusalem guide, Ben Gurion Airport to Haifa guide and Ben Gurion Airport to Ein Bokek guide explain those routes in more detail.",
-          "There is no regular walk-up airport sherut service to Tel Aviv, Jerusalem or Haifa. The former Nesher and Amal airport services are no longer offered as regular walk-up connections, although outdated references remain online. My sherut guide covers other shared-taxi routes in Israel.",
+          "Line 711 serves central Tel Aviv; choose the bus stop that best matches your hotel and consult my Ben Gurion Airport to Tel Aviv guide for onward travel. The table below compares destinations during the main Shabbat transport break. My Ben Gurion Airport to Jerusalem guide, Ben Gurion Airport to Haifa guide and Ben Gurion Airport to Ein Bokek guide cover longer journeys.",
+          "For direct travel to Jerusalem, Haifa or other destinations beyond the Line 711 route, consider an official airport taxi or a confirmed private transfer. My sherut guide explains current shared-taxi alternatives elsewhere in Israel.",
         ],
         inlineLinks: [
           { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
@@ -171,10 +173,11 @@ export const expandedTravelGuides = {
       },
       {
         id: "restart",
-        title: "When do trains and regular buses restart on Saturday?",
+        title: "When do trains and regular buses resume on Saturday?",
+        photo: { src: airportRailPlatform, alt: "Train platform at Ben Gurion Airport railway station" },
         paragraphs: [
-          "For a Saturday evening arrival, check the first actual train or bus for your date and destination, not a general time after sunset. Allow for immigration, luggage and the final connection to your accommodation. If that connection is too tight, a taxi or confirmed transfer may be simpler. The official timetable links are below, and my getting around Israel guide explains the wider network.",
-          "Traveling to Ben Gurion Airport for a Saturday flight? Reverse the same checks. Line 711 toward Shoham can serve Terminal 1 on its published limited timetable; the free airport shuttle connects to Terminal 3. Leave enough margin for airline check-in and security.",
+          "On Saturday evening, check the first train or bus actually scheduled for your date, direction and destination. Include time for arrivals and your final connection to the hotel. The official timetable links appear below, and my getting around Israel guide explains the wider network.",
+          "Travelling to Ben Gurion Airport for a Saturday flight? Line 711 toward Shoham serves Terminal 1 when scheduled; the free airport shuttle then connects to Terminal 3. Plan enough time for airline check-in and security.",
         ],
         inlineLinks: [{ text: "getting around Israel guide", to: travelGuidePaths.israel }],
         sourceIds: ["israel-rail", "guide-weekend-711", "guide-iaa"],
@@ -183,7 +186,7 @@ export const expandedTravelGuides = {
         id: "practical",
         title: "Practical tips before you leave arrivals",
         paragraphs: [
-          "Keep your hotel's full address saved offline, preferably in both English and Hebrew, along with your booking reference and pickup instructions. Ben Gurion Airport offers free Wi-Fi, but it is sensible to have working mobile data or consider an Israel eSIM for the journey after you leave the terminal. If you arrive late, check that your accommodation can admit you at that hour.",
+          "Save your hotel’s address in English and Hebrew, your booking reference and any driver instructions offline. Ben Gurion Airport offers free Wi-Fi, and an Israel eSIM can help with navigation and messages after you leave the terminal. Confirm late check-in with your accommodation when relevant.",
           "Families with strollers or several large suitcases should think about every transfer between vehicles and the space available in a regular car. For an accessible Line 711 journey, Na'im Besofash asks passengers to coordinate with its service center at 03-7313911 at least three hours before the desired pickup. The airport's internal shuttle is described as accessible; check your complete onward route and ask about the specific vehicle you need.",
         ],
         inlineLinks: [{ text: "Israel eSIM", to: travelGuidePaths.esim }],
@@ -214,6 +217,10 @@ export const expandedTravelGuides = {
       { label: "Choose where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Plan your neighbourhood and the final journey from your Line 711 stop." },
       { label: "Plan a visit to Jerusalem", to: "/travel-blog/jerusalem-travel-guide/", note: "Explore the capital’s main sights and plan a visit after your airport arrival." },
       { label: "Discover Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Explore natural sights and activities beyond the airport for a longer Israel trip." },
+      { label: "Getting around Israel", to: travelGuidePaths.israel, note: "Plan trains, buses, local taxis and connections after the airport journey." },
+      { label: "Israel travel tips", to: travelGuidePaths.travelTips, note: "Practical advice for a smooth first day and the rest of your visit." },
+    ],
+  },ead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Explore natural sights and activities beyond the airport for a longer Israel trip." },
     ],
   },
   travelTips: {
