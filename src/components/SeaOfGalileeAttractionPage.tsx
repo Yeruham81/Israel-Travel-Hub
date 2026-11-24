@@ -153,19 +153,19 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-lg font-semibold">Tzemach Beach</h3>
         <p className="mt-2 text-sm"><strong>Southern shore · Free entry</strong></p>
         <p className="mt-2 text-sm leading-relaxed">A designated quiet beach with accessible facilities. The authority lists supervised bathing during its swimming season, normally 09:00–17:00. Camping is prohibited here.</p>
-        <div className="mt-3 space-y-1 text-sm"><External href={sources.tzemach}>Beach rules and facilities</External><div><External href={maps.tzemach}>Get directions</External></div></div>
+        <div className="mt-3 space-y-2 text-sm"><External href={sources.tzemach}>Beach rules and facilities</External><div><External href={maps.tzemach}>Get directions</External></div></div>
       </article>
       <article className="rounded-xl border bg-card p-4">
         <h3 className="font-serif text-lg font-semibold">Hukok North</h3>
         <p className="mt-2 text-sm"><strong>Northwestern shore · Free on foot</strong></p>
         <p className="mt-2 text-sm leading-relaxed">A family-oriented quiet beach with shaded areas and camping facilities. Vehicle parking and some optional services are charged separately.</p>
-        <div className="mt-3 space-y-1 text-sm"><External href={sources.hukok}>Beach rules and facilities</External><div><External href={maps.hukok}>Get directions</External></div></div>
+        <div className="mt-3 space-y-2 text-sm"><External href={sources.hukok}>Beach rules and facilities</External><div><External href={maps.hukok}>Get directions</External></div></div>
       </article>
       <article className="rounded-xl border bg-card p-4">
         <h3 className="font-serif text-lg font-semibold">Kursi Beach</h3>
         <p className="mt-2 text-sm"><strong>Eastern shore · Free on foot</strong></p>
         <p className="mt-2 text-sm leading-relaxed">A quieter managed shoreline with shade, showers and accessible bathing equipment. Parking is charged by the beach authority.</p>
-        <div className="mt-3 space-y-1 text-sm"><External href={sources.kursi}>Beach rules and facilities</External><div><External href={maps.kursi}>Get directions</External></div></div>
+        <div className="mt-3 space-y-2 text-sm"><External href={sources.kursi}>Beach rules and facilities</External><div><External href={maps.kursi}>Get directions</External></div></div>
       </article>
     </div>
     <AttractionPracticalTip>Swimming is permitted only in the designated area when lifeguards are working. Check seasonal notices, water-quality alerts and weather before entering. Unsupervised shores are not a substitute, even when the gate or promenade is open.</AttractionPracticalTip>
