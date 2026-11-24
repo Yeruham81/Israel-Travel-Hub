@@ -38,7 +38,7 @@ describe("shared sidebar navigation", () => {
     );
     expect(within(section).getAllByRole("link")).toHaveLength(1);
     for (const region of attractionHubRegions) {
-      const button = within(section).getByRole("button", { name: `Toggle ${region.title} attractions` });
+      const button = within(section).getByRole("button", { name: `Toggle ${region.navLabel ?? region.title} attractions` });
       expect(button).toHaveAttribute("aria-expanded", "false");
       fireEvent.click(button);
       expect(button).toHaveAttribute("aria-expanded", "true");
@@ -282,7 +282,7 @@ describe("shared sidebar navigation", () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><SiteHeader /></RouterContextProvider>);
     const trigger = screen.getByRole("button", { name: "Menu" });
-    const brand = screen.getByRole("link", { name: "Israel Taxi & Travel Moshe Barak – home" });
+    const brand = screen.getByRole("link", { name: /Israel Taxi\s*&\s*Travel\s*Moshe Barak\s*\(home\)/i });
     expect(brand).toHaveAttribute("href", "/");
     expect(brand.querySelector("span.font-serif.whitespace-nowrap")).toHaveTextContent("Israel Taxi & Travel");
     const byline = within(brand).getByTestId("wordmark-byline");
