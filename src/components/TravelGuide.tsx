@@ -1,7 +1,7 @@
 import { Link as RouterLink, type LinkProps } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
 import { Fragment, type ReactNode } from "react";
-import { BookOpen, Lightbulb } from "lucide-react";
+import { BedDouble, BookOpen, CarFront, Landmark, Lightbulb, TrainFront, Waves, type LucideIcon } from "lucide-react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderNameLink, RelatedLinks, SourceList } from "@/components/Guide";
 import { guideTopics, travelGuides, type GuideDirectoryEntry, type GuidePhoto, type GuideTopicId, type GuideSection, type GuideInlineSpan, type GuideTable, type TravelGuide } from "@/data/travelGuides";
 import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
@@ -24,6 +24,16 @@ import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 import { ShabbatBusLinks, ShabbatTerminalSteps, ShabbatTimesLink, ShabbatPublicTransportLinks } from "@/components/ShabbatGuideExtras";
 import { UsefulLinkCallout } from "@/components/UsefulLinkCallout";
 import { AirportTaxiDestinationCards } from "@/components/AirportTaxiDestinationCards";
+import { IconTripPlanningLinks } from "@/components/IconTripPlanningLinks";
+
+const shabbatPlanningIcons: Record<string, LucideIcon> = {
+  "/car-rental/": CarFront,
+  "/travel-blog/where-to-stay-in-tel-aviv/": BedDouble,
+  "/travel-blog/jerusalem-travel-guide/": Landmark,
+  "/travel-blog/dead-sea-attractions/": Waves,
+  [travelGuidePaths.israel]: TrainFront,
+  [travelGuidePaths.travelTips]: BookOpen,
+};
 
 function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds, ...guide.sections.flatMap(section => [...(section.sourceIds || []), ...(section.subsections || []).flatMap(sub => sub.sourceIds || [])])])]; }
 
@@ -416,7 +426,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         { label: "Official airport taxi pickup", to: travelGuidePaths.airportTaxis },
         { label: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival },
       ]} />}
-      {id === "shabbat" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
+      {id === "shabbat" && <IconTripPlanningLinks title="Plan the next part of your trip" id="shabbat-trip-planning" className="mt-12" items={guide.services.map(item => ({ title: item.label, description: item.note ?? "", to: item.to, icon: shabbatPlanningIcons[String(item.to)] ?? BookOpen }))} />}
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
       {id === "taxis" && <HomeContactForm context="taxis" showTripadvisorBesidePortraitMobile />}
       {id !== "taxis" && <HomeContactForm key={id} showTripadvisorBesidePortraitMobile={id === "airportTaxis" || id === "taxiFares" || id === "arrival" || id === "shabbat"} guide={id === "airportTaxis" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight, destination, passengers and luggage. I'll reply personally about arranging a confirmed pickup.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "taxiFares" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Questions about a taxi journey?", introduction: "Tell me where and when you plan to travel. I can help you understand the available options or discuss a separately arranged private ride.", placeholder: "Route, travel date, passengers, luggage or your question…" } : id === "arrival" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight number, destination, passenger count and luggage. I can discuss a suitable confirmed airport transfer and meeting arrangement.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "shabbat" ? { ...guideContactCopy(guide.title, "shabbat"), eyebrow: "Contact Me" } : guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
