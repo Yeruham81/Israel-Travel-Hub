@@ -251,7 +251,7 @@ export function FaqList({
   );
 }
 
-export function SourceList({ ids, intro = "“Checked” dates refer to the facts on these pages only. Provider prices, availability and inventory were not verified.", compact = false }: { ids: string[]; intro?: string; compact?: boolean }) {
+export function SourceList({ ids, intro = "“Checked” dates refer to the facts on these pages only. Provider prices, availability and inventory were not verified.", compact = false, linksOnly = false }: { ids: string[]; intro?: string; compact?: boolean; linksOnly?: boolean }) {
   const sources = publicSources(ids);
   if (!sources.length) return null;
   return (
@@ -261,8 +261,8 @@ export function SourceList({ ids, intro = "“Checked” dates refer to the fact
         {sources.map((s) => (
           <li key={s.id} className={compact ? "min-w-0 rounded-lg border bg-card p-3 text-sm" : "rounded-xl border bg-card p-4 text-sm"}>
             <ExtLink href={s.url} className="font-semibold text-primary">{compact ? s.title : `${s.publisher}: ${s.title}`}</ExtLink>
-            {(!compact || !s.id.startsWith("hotel-")) && <p className="mt-1 text-muted-foreground">{s.note}</p>}
-            <p className="mt-1 text-xs text-muted-foreground">{s.checkedAt ? `Checked ${formatCheckDate(s.checkedAt)}` : "Linked for reference"}</p>
+            {!linksOnly && (!compact || !s.id.startsWith("hotel-")) && <p className="mt-1 text-muted-foreground">{s.note}</p>}
+            {!linksOnly && <p className="mt-1 text-xs text-muted-foreground">{s.checkedAt ? `Checked ${formatCheckDate(s.checkedAt)}` : "Linked for reference"}</p>}
           </li>
         ))}
       </ul>
