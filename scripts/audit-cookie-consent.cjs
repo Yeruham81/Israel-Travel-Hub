@@ -19,12 +19,12 @@ const consentKey = "ith:cookie-consent:v1";
   const settle = () => page.waitForTimeout(700);
   async function settings() {
     await page.locator("footer").getByRole("button", { name: "Cookie settings", exact: true }).click();
-    await page.getByRole("dialog", { name: "Your cookie choices" }).waitFor();
+    await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
   }
-  async function necessary() { await page.getByRole("button", { name: "Necessary only", exact: true }).click(); await settle(); assert.equal(await page.getByRole("dialog", { name: "Your cookie choices" }).count(), 0); }
+  async function necessary() { await page.getByRole("button", { name: "Reject all", exact: true }).click(); await settle(); assert.equal(await page.getByRole("dialog", { name: "Cookie preferences" }).count(), 0); }
   for (const path of ["/car-rental/", "/accommodation/", "/attractions/mount-of-olives/"]) {
     await page.goto(base + path, { waitUntil: "networkidle" });
-    await page.getByRole("dialog", { name: "Your cookie choices" }).waitFor();
+    await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
     assert.equal(requests.length, 0, "No provider request before consent at " + path + ": " + requests.join(","));
     await necessary();
     await page.locator("footer").scrollIntoViewIfNeeded();
@@ -34,21 +34,21 @@ const consentKey = "ith:cookie-consent:v1";
     await page.evaluate(key => localStorage.removeItem(key), consentKey);
   }
   await page.goto(base + "/car-rental/", { waitUntil: "networkidle" });
-  await page.getByRole("button", { name: "Choose categories" }).click();
+  await page.getByRole("button", { name: "Customize" }).click();
   const boxes = page.getByRole("dialog").getByRole("checkbox");
   assert.equal(await boxes.count(), 4, "Advertising has its own category");
   await boxes.nth(3).check();
-  await page.getByRole("button", { name: "Save my choices" }).click();
+  await page.getByRole("button", { name: "Save preferences" }).click();
   await page.locator("footer").scrollIntoViewIfNeeded(); await settle();
   assert.equal(requests.length, 0, "An advertising preference cannot start inactive ads or booking widgets");
   assert.equal(await page.locator('iframe[src],iframe[srcdoc]').count(), 0);
   await settings(); await boxes.nth(3).uncheck();
   await boxes.nth(1).check();
-  await page.getByRole("button", { name: "Save my choices" }).click();
+  await page.getByRole("button", { name: "Save preferences" }).click();
   await page.locator("footer").scrollIntoViewIfNeeded(); await settle();
   assert(!requests.some(url => url.includes("tpwgt.com")), "Map consent cannot enable booking widgets");
   await settings(); await boxes.nth(1).uncheck(); await boxes.nth(2).check();
-  await page.getByRole("button", { name: "Save my choices" }).click();
+  await page.getByRole("button", { name: "Save preferences" }).click();
   await page.locator('iframe[title="DiscoverCars car rental search"][src]').scrollIntoViewIfNeeded();
   await settle();
   assert(requests.some(url => url.includes("tpwgt.com") && url.includes("campaign_id=117")), "DiscoverCars loads after booking consent");
@@ -61,14 +61,14 @@ const consentKey = "ith:cookie-consent:v1";
   // Functional and commercial categories enable different provider documents.
   await page.goto(base + "/attractions/mount-of-olives/", { waitUntil: "networkidle" });
   await settings(); await boxes.nth(1).check();
-  await page.getByRole("button", { name: "Save my choices" }).click();
+  await page.getByRole("button", { name: "Save preferences" }).click();
   await page.locator('iframe[data-cookie-category="external"][src]').first().scrollIntoViewIfNeeded();
   await settle();
   assert(requests.some(url => /unpkg\.com|maps\.google\.com/.test(url)), "External content enables map resources");
   await settings(); await necessary();
   await page.goto(base + "/accommodation/", { waitUntil: "networkidle" });
   await settings(); await boxes.nth(2).check();
-  await page.getByRole("button", { name: "Save my choices" }).click();
+  await page.getByRole("button", { name: "Save preferences" }).click();
   await page.locator('#hotel-search-booking').scrollIntoViewIfNeeded();
   await page.locator('#hotel-search-booking iframe[srcdoc]').waitFor();
   await settle();
@@ -89,8 +89,8 @@ const consentKey = "ith:cookie-consent:v1";
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(base + "/car-rental/#cookie-settings", { waitUntil: "networkidle" });
-  await page.getByRole("dialog", { name: "Your cookie choices" }).waitFor();
-  for (const label of ["Accept all", "Necessary only", "Choose categories"]) {
+  await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
+  for (const label of ["Accept all", "Reject all", "Customize"]) {
     const box = await page.getByRole("button", { name: label, exact: true }).boundingBox();
     assert(box && box.x >= 0 && box.x + box.width <= 390 && box.y >= 0 && box.y + box.height <= 844, "Mobile choice visible: " + label);
   }

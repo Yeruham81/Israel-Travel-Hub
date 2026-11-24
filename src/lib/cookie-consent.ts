@@ -8,10 +8,10 @@ export type CookieConsent = { version: 2; categories: CookieCategories; expiresA
 export const NECESSARY_ONLY: CookieCategories = { analytics: false, external: false, marketing: false, advertising: false };
 export const ALL_CATEGORIES: CookieCategories = { analytics: true, external: true, marketing: true, advertising: true };
 export const COOKIE_CATEGORIES = [
-  { id: "analytics", title: "Analytics", description: "Google Analytics and local interaction records help me understand how visitors use my site." },
-  { id: "external", title: "External content", description: "Interactive maps from Google Maps and map providers load content from outside this website." },
-  { id: "marketing", title: "Booking widgets", description: "Travelpayouts widgets for Booking.com, Agoda, GetYourGuide and DiscoverCars can use cookies and referral tracking." },
-  { id: "advertising", title: "Advertising", description: "Services such as Google AdSense may use cookies and identifiers to show and measure ads. Advertising is currently inactive." },
+  { id: "analytics", title: "Analytics", description: "Measures website traffic and visitor interactions." },
+  { id: "external", title: "External content", description: "Enables embedded content and interactive features." },
+  { id: "marketing", title: "Booking widgets", description: "Supports booking tools and referral tracking." },
+  { id: "advertising", title: "Advertising", description: "Supports advertising, ad measurement and personalization." },
 ] as const;
 
 export function readStoredConsent(storage: Pick<Storage, "getItem">, now = Date.now()): CookieConsent | null {
