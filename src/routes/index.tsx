@@ -360,7 +360,7 @@ function Home() {
       <div className="home-offscreen mx-auto mt-10 max-w-6xl px-4"><AuthorCard introduction /></div>
       <div className="home-offscreen mx-auto mt-14 max-w-6xl px-4"><HomeContactForm showPortrait={false} /></div>
       <details className="mx-auto mb-10 mt-10 max-w-6xl px-4 text-sm text-muted-foreground">
-        <summary className="inline-block cursor-pointer rounded px-1 font-medium hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Photo credits</summary>
+        <summary className="inline-block min-h-8 cursor-pointer rounded px-1 py-1.5 font-medium hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Photo credits</summary>
         <ul className="mt-3 space-y-1.5">
           {photoCredits.filter((credit) => !isPublisherUrl(credit.sourceUrl)).map((c) => (
             <li key={c.asset}>
