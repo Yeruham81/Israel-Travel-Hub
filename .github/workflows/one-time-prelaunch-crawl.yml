@@ -223,7 +223,9 @@ jobs:
             s=exact(s,'item.image ?? photoOverride','image ?? photoOverride');
             s=s.replace(/travelGuides(\[[^\]]+\]|\.\w+)\.photo/g,"travelGuidePhotos$1");
             s=exact(s,'attractionGuides["sea-of-galilee"].image!','attractionGuidePhotos["sea-of-galilee"]!');
-            if(/\b(?:travelGuides|attractionGuides)\s*(?:\[|\.)/.test(s))throw Error("Unconverted full-data references");
+            s=exact(s,'attractionGuides.haifa.image!','attractionGuidePhotos.haifa!');
+            const remaining=s.split("\n").filter(line=>/\b(?:travelGuides|attractionGuides)\s*(?:\[|\.)/.test(line));
+            if(remaining.length)throw Error("Unconverted full-data references in attractionsHub.ts: "+remaining.join(" | "));
             return s;
           });
           change("src/lib/guide-hero-photos.ts",s=>{
