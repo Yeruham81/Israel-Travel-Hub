@@ -217,12 +217,12 @@ export const expandedTravelGuides = {
     sourceIds: ["guide-weekend-711", "guide-weekend-timetable", "guide-gett", "guide-iaa", "israel-rail", "taxi-fares-2026"],
     related: ["airportTaxis", "taxiFares", "arrival", "sherut"],
     services: [
-      { label: "Explore car rental options", to: "/car-rental/", note: "Check Saturday counter hours and collection arrangements before paying." },
-      { label: "Choose where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Plan your neighbourhood and the final journey from your Line 711 stop." },
-      { label: "Plan a visit to Jerusalem", to: "/travel-blog/jerusalem-travel-guide/", note: "Explore the capital’s main sights and plan a visit after your airport arrival." },
-      { label: "Discover Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Explore natural sights and activities beyond the airport for a longer Israel trip." },
-      { label: "Getting around Israel", to: travelGuidePaths.israel, note: "Plan trains, buses, local taxis and connections after the airport journey." },
-      { label: "Israel travel tips", to: travelGuidePaths.travelTips, note: "Practical advice for a smooth first day and the rest of your visit." },
+      { label: "Explore car rental options", to: "/car-rental/", note: "Rental options and Saturday pickup arrangements." },
+      { label: "Choose where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Find a neighbourhood that suits your plans." },
+      { label: "Plan a visit to Jerusalem", to: "/travel-blog/jerusalem-travel-guide/", note: "Explore sights, routes and city highlights." },
+      { label: "Discover Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Beaches, Masada and desert experiences." },
+      { label: "Getting around Israel", to: travelGuidePaths.israel, note: "Trains, buses and journeys between cities." },
+      { label: "Israel travel tips", to: travelGuidePaths.travelTips, note: "Essential advice for your visit to Israel." },
     ],
   },
   travelTips: {
