@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
@@ -186,7 +187,7 @@ export function JordanRiverBaptismGuidePage() {
    </div>
    <div data-testid="baptism-comparison-map" className="mt-5 overflow-hidden rounded-xl border bg-card">
     <div className="px-4 pt-4"><h3 className="font-bold">Compare both sites on one map</h3></div>
-    <iframe title="Map showing Yardenit and Qasr el-Yahud as two locations" src={baptismComparisonMapUrl} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-[290px] w-full border-0 sm:h-[350px]"/>
+    <ConsentIframe title="Map showing Yardenit and Qasr el-Yahud as two locations" src={baptismComparisonMapUrl} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-[290px] w-full border-0 sm:h-[350px]"/>
     <div className="flex flex-wrap items-center gap-x-5 gap-y-2 px-4 py-3 text-sm">
      <a href="https://www.google.com/maps/search/?api=1&query=Yardenit%20Baptismal%20Site%2C%20Kibbutz%20Kinneret%2C%20Israel" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4"><span className="inline-grid h-6 w-6 place-items-center rounded-full bg-primary text-xs text-primary-foreground">1</span> Yardenit <ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/></a>
      <a href="https://www.google.com/maps/search/?api=1&query=Qasr%20el%20Yahud%20Baptismal%20Site%2C%20Israel" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4"><span className="inline-grid h-6 w-6 place-items-center rounded-full bg-primary text-xs text-primary-foreground">2</span> Qasr el-Yahud <ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/></a>

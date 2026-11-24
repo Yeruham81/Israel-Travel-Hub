@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { recordOutboundClick } from "@/lib/outbound";
 import { Link } from "@tanstack/react-router";
@@ -121,7 +122,7 @@ function ChurchMap(){
         <div aria-label="Church areas and map colours" className="space-y-2 text-sm">{churchAreas.map(a=><div key={a.id} className="flex items-center gap-2"><span className="h-3.5 w-3.5 shrink-0 rounded-sm" style={{backgroundColor:a.color}} aria-hidden="true"/>{a.title}</div>)}</div>
         <div className="space-y-2"><label htmlFor="church-map-focus" className="block text-sm font-semibold">Find a church</label><select id="church-map-focus" className="min-h-11 w-full rounded-lg border bg-background p-2 text-sm" value={selected} onChange={e=>focus(e.target.value)}><option value="all">All churches</option>{churchAreas.map(a=><optgroup key={a.id} label={a.title}>{jerusalemChurches.filter(c=>c.area===a.id).map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</optgroup>)}</select></div>
       </div>
-      <iframe ref={frame} title="Interactive map of 20 churches and Christian heritage sites in Jerusalem" src={mapUrl} width={900} height={445} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[390px] w-full border-0 sm:h-[445px]" onLoad={()=>{if(selected!=="all")frame.current?.contentWindow?.postMessage({type:"jerusalem-church-map-focus",id:selected},window.location.origin);}}/>
+      <ConsentIframe ref={frame} title="Interactive map of 20 churches and Christian heritage sites in Jerusalem" src={mapUrl} width={900} height={445} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[390px] w-full border-0 sm:h-[445px]" onLoad={()=>{if(selected!=="all")frame.current?.contentWindow?.postMessage({type:"jerusalem-church-map-focus",id:selected},window.location.origin);}}/>
       <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 text-xs text-muted-foreground"><span>Map data © OpenStreetMap contributors. Locations are for orientation.</span>{focused&&<OutLink href={`https://www.google.com/maps/dir/?api=1&destination=${focused.lat}%2C${focused.lon}`}>Directions to selected church</OutLink>}</div>
     </div>
   </section>;

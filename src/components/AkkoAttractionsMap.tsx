@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { useEffect, useRef, useState } from "react";
 import { MapPin } from "lucide-react";
 
@@ -42,7 +43,7 @@ export function AkkoAttractionsMap() {
       <p className="mt-2 text-sm leading-relaxed">All eight numbered attractions are shown together. Select a place to highlight its location.</p>
     </div>
     <div className="grid lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
-      <iframe ref={frame} title="OpenStreetMap overview with eight numbered Akko attractions on one map" src={overviewUrl} width={900} height={600} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[345px] w-full border-0 sm:h-[460px] lg:h-full lg:min-h-[690px]"/>
+      <ConsentIframe ref={frame} title="OpenStreetMap overview with eight numbered Akko attractions on one map" src={overviewUrl} width={900} height={600} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[345px] w-full border-0 sm:h-[460px] lg:h-full lg:min-h-[690px]"/>
       <div className="border-t p-3 lg:border-l lg:border-t-0">
         <div className="mb-2 flex items-center justify-between gap-2 px-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Find a place</p>

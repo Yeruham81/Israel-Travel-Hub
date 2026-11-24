@@ -1,3 +1,4 @@
+import { hasCookieConsent } from "@/lib/cookie-consent";
 import { recordOutboundClick } from "@/lib/outbound";
 
 /**
@@ -11,7 +12,7 @@ export function recordAffiliateTourClick({
   pageId: string; productId: string; offerId: string; provider: string; linkUrl: string;
 }) {
   recordOutboundClick({ pageId, productId, offerId });
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || !hasCookieConsent("analytics")) return;
 
   const analytics = window as Window & {
     gtag?: (...args: unknown[]) => void;

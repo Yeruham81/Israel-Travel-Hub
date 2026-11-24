@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex,nofollow" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>Area map in English</title>
-    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous" />
+    <link rel="stylesheet" data-consent-href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous" />
     <style>
       html, body, #map { width: 100%; height: 100%; margin: 0; }
       body { font: 14px/1.5 system-ui, sans-serif; background: #edf2ee; color: #173648; }
@@ -19,7 +19,8 @@
       .route-pin { display: grid; place-content: center; width: 27px; height: 27px; border: 2px solid white; border-radius: 50%; background: #155e75; color: white; box-shadow: 0 1px 5px #17364866; font: bold 12px system-ui,sans-serif; cursor: help; }
       .maplibregl-ctrl-attrib a { color: #173648; }
     </style>
-  </head>
+  <script defer src="/consent-embed.js" data-category="external"></script>
+</head>
   <body>
     <div id="map" role="region" aria-label="Interactive area map in English"></div>
     <div id="status" role="status" aria-live="polite">
@@ -27,8 +28,8 @@
       <a id="fallback" href="https://www.google.com/maps/?hl=en" target="_blank" rel="noopener noreferrer">View the location on Google Maps</a>
       <noscript><p>Enable JavaScript to use this interactive map.</p></noscript>
     </div>
-    <script src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
-    <script id="map-viewer">
+    <script type="application/x-consent" data-consent-src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
+    <script type="application/x-consent" id="map-viewer">
       (() => {
         const status = document.getElementById("status");
         const message = document.getElementById("message");

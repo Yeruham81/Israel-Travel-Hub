@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink, MapPin } from "lucide-react";
 import { jerusalemChurches } from "@/data/jerusalemChurches";
@@ -44,7 +45,7 @@ export function MountOlivesRouteMap() {
       <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">Map key: Blue pins mark sites along the upper ridge, green pins indicate the hillside and lower sites, and the gold pin marks Lion’s Gate.</p>
     </div>
     <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
-      <iframe ref={frame} title="Interactive map with eight Mount of Olives and Old City stops" src={mapUrl} width={900} height={445} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[345px] w-full border-0 sm:h-[405px] lg:h-full lg:min-h-[455px]"/>
+      <ConsentIframe ref={frame} title="Interactive map with eight Mount of Olives and Old City stops" src={mapUrl} width={900} height={445} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[345px] w-full border-0 sm:h-[405px] lg:h-full lg:min-h-[455px]"/>
       <div className="border-t p-3 lg:border-l lg:border-t-0">
         <div className="mb-2 flex items-center justify-between gap-3 px-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Select a place</p>

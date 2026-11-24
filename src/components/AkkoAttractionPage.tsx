@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, Ticket } from "lucide-react";
 import {
@@ -221,7 +222,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         <aside className="rounded-xl border bg-card p-4" data-testid="akko-arrival-map">
           <h3 className="font-serif text-lg font-semibold">Arrival points on Google Maps</h3>
           <p className="mt-2 text-sm leading-relaxed">The Visitors Center on Weizmann Street is the easiest starting point for a heritage visit. Compare nearby parking and rail access using the map.</p>
-          <iframe title="Google Maps overview of Old Akko Visitors Center and nearby car parks" src="https://maps.google.com/maps?q=Old%20Akko%20Visitors%20Center%20Weizmann%201%20Akko%20Israel&hl=en&z=15&t=m&output=embed" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-48 w-full rounded-lg border-0 sm:h-52"/>
+          <ConsentIframe title="Google Maps overview of Old Akko Visitors Center and nearby car parks" src="https://maps.google.com/maps?q=Old%20Akko%20Visitors%20Center%20Weizmann%201%20Akko%20Israel&hl=en&z=15&t=m&output=embed" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-48 w-full rounded-lg border-0 sm:h-52"/>
           <ul className="mt-3 space-y-2 text-sm leading-relaxed">
             <li><a href={drivingDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko Visitors Center — Weizmann St 1</a></li>
             <li><a href="https://www.google.com/maps/dir/?api=1&destination=Moat%20Parking%20Old%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Moat car park — free parking</a></li>

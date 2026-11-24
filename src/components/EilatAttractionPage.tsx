@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, Waves, Sun, Ticket, Mountain } from "lucide-react";
@@ -267,7 +268,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       </article>
     </div>
     <div className="overflow-hidden rounded-xl border bg-secondary/10" data-testid="eilat-city-map">
-      <iframe title="Map of Eilat, southern beaches and nearby roads" src={maps.city} width="100%" height="320" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="block w-full border-0" />
+      <ConsentIframe title="Map of Eilat, southern beaches and nearby roads" src={maps.city} width="100%" height="320" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="block w-full border-0" />
     </div>
   </div>,
   foodContent: <div className="mt-4 space-y-3">

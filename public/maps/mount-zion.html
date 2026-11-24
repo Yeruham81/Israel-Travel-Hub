@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex,nofollow" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Mount Zion visitor map</title>
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous" />
+  <link rel="stylesheet" data-consent-href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous" />
   <style>
     html,body,#map{margin:0;width:100%;height:100%}
     body{font:13px/1.4 system-ui,sans-serif;background:#ecf3f8;color:#123346}
@@ -24,6 +24,7 @@
     .zion-pin[aria-pressed="true"]{outline:3px solid #082f49;outline-offset:2px;z-index:10}
     .zion-pin:focus-visible{outline:3px solid #082f49;outline-offset:3px}
   </style>
+<script defer src="/consent-embed.js" data-category="external"></script>
 </head>
 <body>
   <div id="map" role="region" aria-label="Interactive map showing seven Mount Zion sites together"></div>
@@ -32,8 +33,8 @@
     <a href="https://www.google.com/maps/search/?api=1&amp;query=Mount%20Zion%20Jerusalem" target="_blank" rel="noopener noreferrer">See Mount Zion on Google Maps</a>
     <noscript>Enable JavaScript for the interactive map.</noscript>
   </div>
-  <script src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
-  <script>
+  <script type="application/x-consent" data-consent-src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
+  <script type="application/x-consent">
     (() => {
       "use strict";
       const status=document.getElementById("status");

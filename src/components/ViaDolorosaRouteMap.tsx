@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink, MapPin } from "lucide-react";
 
@@ -40,7 +41,7 @@ export function ViaDolorosaRouteMap() {
       <p className="mt-1.5 text-sm text-muted-foreground">Blue pins mark the nine outdoor stations. The gold pin marks the Church of the Holy Sepulchre, home to Stations X–XIV.</p>
     </div>
     <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
-      <iframe ref={frame} title="Interactive map with nine street Stations of the Cross and the Holy Sepulchre" src={mapUrl} width={900} height={520} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[360px] w-full border-0 sm:h-[410px] lg:h-full lg:min-h-[610px]"/>
+      <ConsentIframe ref={frame} title="Interactive map with nine street Stations of the Cross and the Holy Sepulchre" src={mapUrl} width={900} height={520} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[360px] w-full border-0 sm:h-[410px] lg:h-full lg:min-h-[610px]"/>
       <div className="border-t p-3 lg:border-l lg:border-t-0">
         <div className="mb-2 flex items-center justify-between gap-2 px-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Select a station</p>

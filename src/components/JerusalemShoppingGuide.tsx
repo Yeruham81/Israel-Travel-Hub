@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -225,7 +226,7 @@ export function JerusalemShoppingGuide() {
             <button type="button" onClick={() => focusMap("all")} disabled={chosenPlace === "all"}
               className="min-h-11 w-full rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:opacity-40 sm:w-auto">Show all places</button>
           </div>
-          <iframe ref={mapRef} title="Interactive map of ten Jerusalem shopping locations"
+          <ConsentIframe ref={mapRef} title="Interactive map of ten Jerusalem shopping locations"
             loading="lazy" referrerPolicy="strict-origin-when-cross-origin"
             src={mapUrl} width={900} height={440}
             onLoad={() => { if (chosenPlace !== "all") mapRef.current?.contentWindow?.postMessage({ type: "jerusalem-shopping-map-focus", id: chosenPlace }, window.location.origin); }}

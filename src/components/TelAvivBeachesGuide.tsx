@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
@@ -236,7 +237,7 @@ export function TelAvivBeachesGuide() {
             <button type="button" onClick={() => focusMap("all")} disabled={mapBeach === "all"}
               className="min-h-11 w-full rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:cursor-default disabled:opacity-40 sm:w-auto">Show all beaches</button>
           </div>
-          <iframe ref={beachMapRef} title="Interactive map of Tel Aviv's thirteen listed beaches"
+          <ConsentIframe ref={beachMapRef} title="Interactive map of Tel Aviv's thirteen listed beaches"
             loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={beachMapUrl} width={900} height={440}
             onLoad={() => { if (mapBeach !== "all") beachMapRef.current?.contentWindow?.postMessage({ type: "tel-aviv-beach-map-focus", id: mapBeach }, window.location.origin); }}
             className="h-[340px] w-full border-0 sm:h-[440px]" />

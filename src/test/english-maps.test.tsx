@@ -5,7 +5,7 @@ import { AreaMap } from "@/components/AreaMap";
 import { jerusalemAreaGuides, telAvivAreaGuides, deadSeaStayGuide, tiberiasStayGuide, haifaStayGuide } from "@/data/content";
 
 const html = readFileSync("public/maps/area.html", "utf8");
-const viewerScript = html.match(/<script id="map-viewer">([\s\S]*?)<\/script>/)![1]!;
+const viewerScript = html.match(/<script type="application\\/x-consent" id="map-viewer">([\s\S]*?)<\/script>/)![1]!;
 const style = JSON.parse(readFileSync("public/maps/english-style.json", "utf8"));
 const areas = [...jerusalemAreaGuides, ...telAvivAreaGuides, deadSeaStayGuide, tiberiasStayGuide, haifaStayGuide];
 

@@ -1,9 +1,9 @@
+import { COOKIE_CONSENT_KEY, CONSENT_LIFETIME, readStoredConsent, getCookieConsent, saveCookieConsent } from "@/lib/cookie-consent";
 import { PRODUCTION_CANONICAL_ORIGIN, SITE_CONFIG } from "@/lib/site";
 
 export const GA4_MEASUREMENT_ID = "G-N5ZDWXDZ1P";
-export const ANALYTICS_CONSENT_KEY = "ith:google-analytics-consent:v1";
+export const ANALYTICS_CONSENT_KEY = COOKIE_CONSENT_KEY;
 export const ANALYTICS_PREFERENCES_EVENT = "ith:analytics-preferences";
-const CONSENT_LIFETIME = 180 * 24 * 60 * 60 * 1000;
 const SCRIPT_ID = "ith-ga4";
 export type AnalyticsChoice = "unknown" | "granted" | "denied";
 type Gtag = (...args: unknown[]) => void;
@@ -32,9 +32,8 @@ export function createAnalytics(win: Window, config: LaunchConfig) {
   function readChoice(): AnalyticsChoice {
     if (!eligible) return "unknown";
     try {
-      const value = JSON.parse(win.localStorage.getItem(ANALYTICS_CONSENT_KEY) || "null");
-      if (value && (value.choice === "granted" || value.choice === "denied")
-        && typeof value.expiresAt === "number" && value.expiresAt > Date.now()) return value.choice;
+      const value = win === globalThis.window ? getCookieConsent() : readStoredConsent(win.localStorage);
+      if (value) return value.categories.analytics ? "granted" : "denied";
     } catch { /* A storage restriction leaves optional analytics off. */ }
     return "unknown";
   }
@@ -115,7 +114,8 @@ export function createAnalytics(win: Window, config: LaunchConfig) {
     setChoice(next: "granted" | "denied") {
       if (!eligible) return;
       try {
-        win.localStorage.setItem(ANALYTICS_CONSENT_KEY, JSON.stringify({ choice: next, expiresAt: Date.now() + CONSENT_LIFETIME }));
+        if (win === globalThis.window) saveCookieConsent({ ...(getCookieConsent()?.categories ?? { external: false, marketing: false }), analytics: next === "granted" });
+        else win.localStorage.setItem(ANALYTICS_CONSENT_KEY, JSON.stringify({ version: 1, categories: { analytics: next === "granted", external: false, marketing: false }, expiresAt: Date.now() + CONSENT_LIFETIME }));
       } catch {
         // A failed write must not leave an older grant active on the next visit.
         try { win.localStorage.removeItem(ANALYTICS_CONSENT_KEY); } catch { /* Storage is unavailable. */ }
@@ -148,7 +148,7 @@ export const analyticsEligible = () => client()?.eligible ?? false;
 export const getAnalyticsChoice = () => client()?.getChoice() ?? "unknown";
 export const setAnalyticsChoice = (choice: "granted" | "denied") => client()?.setChoice(choice);
 export const refreshAnalyticsChoice = () => client()?.refreshChoice() ?? "unknown";
-export const trackPageView = (path: string, title: string) => client()?.page(path, title);
+export const trackPageView = (path: string, title: string) => { try { client()?.page(path, title); } catch { /* Measurement must not interrupt browsing. */ } };
 export const trackAcceptedEnquiry = (kind: "transfer" | "driver" | "contact" | "shore", requestId: string) => {
   try { client()?.lead(kind, requestId); }
   catch { /* Analytics must never affect delivery or its success message. */ }

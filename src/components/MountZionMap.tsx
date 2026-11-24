@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink, MapPin } from "lucide-react";
 
@@ -40,7 +41,7 @@ export function MountZionMap() {
       <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">Gold marks Zion Gate, blue marks the central landmarks, and green marks the lower hillside sites.</p>
     </div>
     <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
-      <iframe
+      <ConsentIframe
         ref={frame}
         title="Interactive map of all seven Mount Zion visitor sites"
         src={mapUrl}

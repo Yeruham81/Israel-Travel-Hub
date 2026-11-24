@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, MapPinned, TrainFront, Ticket, TramFront } from "lucide-react";
@@ -326,7 +327,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
         </div>
         <div className="h-fit rounded-xl border bg-card p-3">
           <div className="flex items-center gap-2"><MapPinned className="h-4 w-4 text-primary"/><h3 className="text-sm font-semibold">Haifa: the Carmel, Lower City and coast</h3></div>
-          <iframe src={mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" title="Map of Haifa and the adjoining Mount Carmel and Mediterranean coast" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-64 lg:h-72" />
+          <ConsentIframe src={mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" title="Map of Haifa and the adjoining Mount Carmel and Mediterranean coast" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-64 lg:h-72" />
           <a href={placeMap("Haifa, Israel")} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Open Haifa in Google Maps <ArrowUpRight className="h-3.5 w-3.5"/></a>
         </div>
       </div>

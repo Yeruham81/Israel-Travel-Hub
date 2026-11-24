@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
@@ -250,7 +251,7 @@ export function DeadSeaAttractionsGuide() {
             </label>
             <button type="button" onClick={()=>focusMap("all")} disabled={selectedPoint==="all"} className="min-h-11 rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:opacity-40">Show all locations</button>
           </div>
-          <iframe ref={mapRef} title="Interactive map of representative Dead Sea attractions" src={mapUrl} width={900} height={450} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[330px] w-full border-0 sm:h-[450px]"
+          <ConsentIframe ref={mapRef} title="Interactive map of representative Dead Sea attractions" src={mapUrl} width={900} height={450} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[330px] w-full border-0 sm:h-[450px]"
             onLoad={()=>{if(selectedPoint!=="all")mapRef.current?.contentWindow?.postMessage({type:"dead-sea-attractions-map-focus",id:selectedPoint},window.location.origin);}}/>
           <div className="flex flex-wrap items-center justify-between gap-3 p-3 text-xs text-muted-foreground">
             <span>Markers are for regional orientation; confirm the exact entrance or trailhead before travelling. Map data © OpenStreetMap contributors.</span>

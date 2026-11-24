@@ -1,3 +1,4 @@
+import { ConsentIframe } from "@/components/ConsentIframe";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, CarFront, BusFront, Footprints } from "lucide-react";
 import {
@@ -115,7 +116,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="mount-precipice-location-map">
           <h3 className="text-sm font-semibold">Where is Mount Precipice?</h3>
-          <iframe title="Google Maps location of Mount Precipice lookout near Nazareth" src={mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56" />
+          <ConsentIframe title="Google Maps location of Mount Precipice lookout near Nazareth" src={mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56" />
           <a href={mapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">View larger map <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </div>
       </div>
