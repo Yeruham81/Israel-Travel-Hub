@@ -169,7 +169,7 @@ jobs:
             return "{"+Object.entries(value).filter(([,v])=>v!==undefined).map(([k,v])=>JSON.stringify(k)+":"+serialize(v)).join(",")+"}";
           }
           const values=Object.entries(snapshot).map(([k,v])=>({k,code:serialize(v)}));
-          const types={guideDirectory:"GuideDirectoryEntry[]",travelGuidePhotos:"Record<TravelGuideId, GuidePhoto>",attractionGuidePhotos:"Record<AttractionId, GuidePhoto | null>"};
+          const types={guideDirectory:"DirectoryEntry[]",travelGuidePhotos:"Record<TravelGuideId, DirectoryPhoto>",attractionGuidePhotos:"Record<AttractionId, DirectoryPhoto | null>"};
           const output=[
             "// Generated from the original editorial data for this build; do not hand edit.",
             'import type { GuideDirectoryEntry, GuidePhoto } from "@/data/travelGuides";',
@@ -177,6 +177,8 @@ jobs:
             'import type { AttractionId } from "@/data/attractionGuideTypes";',
             'import { guideTopics, type GuideTopicId } from "@/data/guide-topics";',
             'export { guideTopics, type GuideTopicId } from "@/data/guide-topics";',
+            'type DirectoryPhoto = GuidePhoto & { label?: string; mobileSrc?: string };',
+            'type DirectoryEntry = Omit<GuideDirectoryEntry, "photo"> & { photo?: DirectoryPhoto };',
             ...[...assets].map(([p,id])=>"import "+id+" from "+JSON.stringify("@/"+p.slice(4))+";"),
             ...values.map(({k,code})=>"export const "+k+": "+types[k]+" = "+code+";"),
           ];
