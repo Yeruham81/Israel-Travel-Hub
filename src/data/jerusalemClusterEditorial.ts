@@ -23,7 +23,7 @@ type Upgrade = {
 const articles: Partial<Record<TravelGuideId, Upgrade>> = {
   jerusalem: {
     title: "Jerusalem Travel Guide: What to See, Where to Stay & How to Plan",
-    description: "Plan your Jerusalem visit with my guide to the Old City, Mount of Olives, museums, food markets, how many days to stay, best neighbourhoods, local transport and day trips.",
+    description: "Plan your Jerusalem visit: Old City, Mount of Olives, museums, markets, neighborhoods, how many days to stay, local transport and day trips.",
     intro: "Jerusalem is easiest to explore in clusters rather than as one long list of landmarks. I suggest choosing an Old City gate for your first day, setting aside a separate half-day for the Mount of Olives or a museum, and keeping space for the markets and neighbourhoods that give the city its everyday character.",
     answer: "For a first visit, plan two to three days if possible. Give the Old City its own focused day; add the Mount of Olives or Mount Zion according to your interests, then choose between museums, Mahane Yehuda and another neighbourhood. With a single day, concentrate on one walk and one nearby addition. Hotel location, religious-site access, Shabbat services and your actual departure point matter more than fitting every landmark into one itinerary.",
     sections: [
