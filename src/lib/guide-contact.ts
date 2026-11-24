@@ -10,9 +10,9 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
   const base = { subject: "" };
   switch (kind) {
     case "sherut":
-      return { ...base, heading: "Questions about leaving Ben Gurion Airport?",
-        introduction: "Found an old airport sherut listing or need help choosing another way to your destination? Tell me your arrival date, flight, address, passengers and luggage. I'll reply personally and can discuss a confirmed private pickup when appropriate.",
-        placeholder: "Landing date, flight, destination, passengers, luggage or your question…" };
+      return { ...base, eyebrow: "Contact Me", heading: "Need a Private Airport Transfer?",
+        introduction: "Tell me your flight details, destination, travel date, passengers and luggage. I'll reply personally about arranging your private pickup.",
+        placeholder: "Flight details, destination, date, passengers and luggage…" };
     case "shabbat":
       return { ...base, heading: "Need a private airport transfer on Shabbat?",
         introduction: "Share your flight, destination, passengers and luggage. I'll reply personally about arranging your private airport pickup.",
