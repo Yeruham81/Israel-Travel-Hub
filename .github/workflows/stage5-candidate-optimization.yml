@@ -1,0 +1,226 @@
+name: Stage 5 candidate optimization and verification
+on:
+  pull_request:
+    branches: [main]
+    paths: ['.github/workflows/stage5-candidate-optimization.yml']
+permissions:
+  contents: read
+jobs:
+  candidate:
+    if: github.head_ref == 'perf/stage5-prelaunch-fixes-20261124' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      VITE_INDEXABLE: "false"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: perf/stage5-prelaunch-fixes-20261124
+          persist-credentials: true
+      - name: Ensure checkout matches reviewed candidate
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
+      - name: Generate optimized responsive assets and lightweight imports
+        run: |
+          python scripts/optimize_stage5_images.py
+          python scripts/refactor_stage5_lightweight_imports.py
+      - name: Preserve generated candidate in isolated branch (never main)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src public/images/stage5-responsive docs/STAGE5_IMAGE_OPTIMIZATION.json
+          git diff --cached --stat
+          git diff --cached --check
+          if ! git diff --cached --quiet; then
+            git commit -m "Optimize audited photos and separate lightweight shared modules"
+            git push origin HEAD:perf/stage5-prelaunch-fixes-20261124
+          fi
+          echo "CANDIDATE_COMMIT $(git rev-parse HEAD)"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - run: bash scripts/build-validated-static.sh
+      - name: TypeScript check
+        run: bun x tsc --noEmit
+      - name: Full regression suite
+        run: bun run test
+        continue-on-error: true
+      - name: Verify static export
+        run: node scripts/verify-hostinger-static-export.mjs
+        continue-on-error: true
+      - name: Install audit browser
+        run: |
+          npm install --prefix /tmp/stage5fix --no-save playwright@1.56.1 axe-core@4.10.3 lighthouse@12
+          /tmp/stage5fix/node_modules/.bin/playwright install --with-deps chromium
+      - name: Start compressed static preview
+        run: |
+          cat > /tmp/stage5-server.py <<'PY'
+          import gzip, http.server, os, mimetypes
+          from pathlib import Path
+          from urllib.parse import urlsplit,unquote
+          class Handler(http.server.SimpleHTTPRequestHandler):
+              def do_GET(self):
+                  if urlsplit(self.path).path=="/api/exchange-rates/":
+                      body=b'{"rates":null,"status":"unavailable"}'
+                      self.send_response(200);self.send_header("Content-Type","application/json");self.send_header("Content-Length",str(len(body)));self.end_headers();self.wfile.write(body);return
+                  return super().do_GET()
+              def send_head(self):
+                  p=Path(self.translate_path(self.path))
+                  if p.is_dir() and self.path.endswith("/"):p=p/"index.html"
+                  if p.is_file() and p.suffix in (".html",".js",".css",".json",".svg",".xml",".txt") and "gzip" in self.headers.get("Accept-Encoding",""):
+                      import io
+                      data=gzip.compress(p.read_bytes(),compresslevel=6,mtime=0)
+                      self.send_response(200);self.send_header("Content-Type",self.guess_type(str(p)));self.send_header("Content-Encoding","gzip");self.send_header("Vary","Accept-Encoding");self.send_header("Content-Length",str(len(data)));self.end_headers()
+                      return io.BytesIO(data)
+                  return super().send_head()
+          os.chdir(".output/public")
+          http.server.ThreadingHTTPServer(("127.0.0.1",4173),Handler).serve_forever()
+          PY
+          nohup python /tmp/stage5-server.py >/tmp/stage5-server.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Targeted accessibility, keyboard, and image delivery regressions
+        env:
+          NODE_PATH: /tmp/stage5fix/node_modules
+        run: |
+          cat > .stage5-fixed.cjs <<'JS'
+          const fs=require("node:fs"),path=require("node:path");
+          const {chromium}=require("playwright");
+          const axe=require("axe-core");
+          const origin="http://127.0.0.1:4173",out=[];
+          const paths=["/","/accommodation/","/accommodation/tel-aviv/","/attractions/sea-of-galilee/","/travel-blog/churches-in-jerusalem/","/travel-blog/museums-in-haifa/","/travel-blog/museums-in-jerusalem/","/travel-blog/museums-in-tel-aviv/","/shore-excursions/haifa/","/travel-blog/","/tours/golan-heights/","/tours/caesarea-haifa-acre/","/tours/jerusalem/","/travel-blog/israel-itinerary-10-days/"];
+          const rules=["target-size","aria-prohibited-attr","aria-allowed-role","definition-list","dlitem","label-content-name-mismatch"];
+          (async()=>{
+            const browser=await chromium.launch();
+            try{
+              for(const width of [390,1365]){
+                for(const p of paths){
+                  const ctx=await browser.newContext({viewport:{width,height:width===390?844:900},deviceScaleFactor:1});
+                  await ctx.route("**/*",r=>r.request().url().startsWith(origin+"/")?r.continue():r.abort());
+                  const page=await ctx.newPage(),files=new Map(),errors=[];
+                  page.on("pageerror",e=>errors.push(e.message));
+                  page.on("response",r=>{if(!r.url().startsWith(origin+"/"))return;const u=new URL(r.url());try{const file=path.join(".output/public",u.pathname.endsWith("/")?u.pathname.slice(1)+"index.html":u.pathname.slice(1));files.set(u.pathname,{bytes:fs.statSync(file).size,type:r.request().resourceType()});}catch{}});
+                  let result={path:p,width};
+                  try{
+                    await page.goto(origin+p,{waitUntil:"load"});
+                    await page.getByRole("button",{name:"Accept necessary",exact:true}).click();
+                    await page.waitForTimeout(350);
+                    const initial=[...files.values()];
+                    await page.addScriptTag({content:axe.source});
+                    const audit=await page.evaluate(rules=>axe.run(document,{runOnly:{type:"rule",values:rules},resultTypes:["violations"]}),rules);
+                    const dom=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,optimized:[...document.images].filter(i=>i.currentSrc.includes("/stage5-responsive/")).map(i=>i.currentSrc.split("/").pop()),invalidDescriptions:[...document.querySelectorAll("dl > div > div > dt")].length}));
+                    const initialBytes={js:initial.filter(x=>x.type==="script").reduce((s,x)=>s+x.bytes,0),images:initial.filter(x=>x.type==="image").reduce((s,x)=>s+x.bytes,0),total:initial.reduce((s,x)=>s+x.bytes,0)};
+                    result={...result,initialBytes,...dom,errors,violations:audit.violations.map(v=>({id:v.id,nodes:v.nodes.length,examples:v.nodes.slice(0,3).map(n=>({target:n.target,html:n.html.slice(0,250)}))}))};
+                    if(p==="/"&&width===390){
+                      const menu=page.locator('header button[aria-haspopup="dialog"]');
+                      await menu.focus();await page.keyboard.press("Enter");
+                      const dialog=page.getByRole("dialog",{name:"Explore Israel"});
+                      await dialog.waitFor({timeout:8000});await page.keyboard.press("Escape");await dialog.waitFor({state:"hidden",timeout:8000});
+                      await page.waitForFunction(()=>document.activeElement===document.querySelector('header button[aria-haspopup="dialog"]'),{},{timeout:5000});
+                      result.keyboardMenu="passed";
+                    }
+                  }catch(e){result.error=String(e).slice(0,500);}
+                  finally{await ctx.close();out.push(result);fs.writeFileSync("stage5-fixed.json",JSON.stringify(out,null,2));console.log("FIXED_RESULT",JSON.stringify(result));}
+                }
+              }
+            }finally{await browser.close();}
+            if(out.some(r=>r.error||r.errors?.length||r.overflow>3||r.invalidDescriptions||r.violations?.length))process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
+          node .stage5-fixed.cjs
+        continue-on-error: true
+      - name: Lighthouse on compressed candidate (key templates)
+        run: |
+          mkdir -p stage5-candidate-lighthouse
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import {spawnSync} from "node:child_process";
+          const results=[];
+          for(const device of ["mobile","desktop"])for(const p of ["/","/travel-blog/","/tours/golan-heights/","/accommodation/"]){
+            const file="stage5-candidate-lighthouse/"+device+"-"+(p==="/"?"home":p.replace(/^\/|\/$/g,"").replaceAll("/","_"))+".json";
+            const args=["http://127.0.0.1:4173"+p,"--only-categories=performance,accessibility","--output=json","--output-path="+file,"--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=30000","--quiet"];
+            if(device==="desktop")args.push("--preset=desktop");
+            const r=spawnSync("/tmp/stage5fix/node_modules/.bin/lighthouse",args,{encoding:"utf8",timeout:105000,maxBuffer:2*1024*1024});
+            let row;
+            try{
+              const a=JSON.parse(fs.readFileSync(file,"utf8"));
+              if(a.runtimeError)throw Error(a.runtimeError.message);
+              row={device,path:p,performance:Math.round(a.categories.performance.score*100),accessibility:Math.round(a.categories.accessibility.score*100),lcpMs:a.audits["largest-contentful-paint"].numericValue,cls:a.audits["cumulative-layout-shift"].numericValue,tbtMs:a.audits["total-blocking-time"].numericValue,transferBytes:a.audits["total-byte-weight"].numericValue};
+            }catch(e){row={device,path:p,error:String(e).slice(0,300),exit:r.status};}
+            results.push(row);console.log("CANDIDATE_LIGHTHOUSE",JSON.stringify(row));fs.writeFileSync("stage5-candidate-lighthouse/summary.json",JSON.stringify(results,null,2));
+          }
+          if(results.some(x=>x.error))process.exitCode=1;
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage5-candidate-evidence
+          path: |
+            docs/STAGE5_IMAGE_OPTIMIZATION.json
+            stage5-fixed.json
+            stage5-candidate-lighthouse/
+          if-no-files-found: warn
+  live-lighthouse-baseline:
+    if: github.head_ref == 'perf/stage5-prelaunch-fixes-20261124'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm install --prefix /tmp/stage5live --no-save lighthouse@12
+      - name: Sequential live Hostinger Lighthouse sample without accepting optional cookies
+        run: |
+          mkdir -p stage5-live-lighthouse
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import {spawnSync} from "node:child_process";
+          const origin="https://saddlebrown-guanaco-454061.hostingersite.com",results=[];
+          let stop=false;
+          for(const device of ["mobile","desktop"]){
+            if(stop)break;
+            for(const p of ["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"]){
+              const file="stage5-live-lighthouse/"+device+"-"+(p==="/"?"home":p.replace(/^\/|\/$/g,"").replaceAll("/","_"))+".json";
+              const args=[origin+p,"--only-categories=performance,accessibility","--output=json","--output-path="+file,"--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=35000","--quiet"];
+              if(device==="desktop")args.push("--preset=desktop");
+              const r=spawnSync("/tmp/stage5live/node_modules/.bin/lighthouse",args,{encoding:"utf8",timeout:110000,maxBuffer:2*1024*1024});
+              let row;
+              try{
+                const a=JSON.parse(fs.readFileSync(file,"utf8")),network=a.audits?.["network-requests"]?.details?.items||[];
+                const limited=network.some(n=>n.statusCode===429);
+                if(limited)stop=true;
+                if(a.runtimeError)throw Error(a.runtimeError.message);
+                const first=network.find(n=>n.resourceType==="Document"&&n.url===origin+p);
+                if(!first||first.statusCode!==200||limited)throw Error("Live document unverified or rate limited");
+                row={device,path:p,documentStatus:first.statusCode,performance:Math.round(a.categories.performance.score*100),accessibility:Math.round(a.categories.accessibility.score*100),lcpMs:a.audits["largest-contentful-paint"].numericValue,cls:a.audits["cumulative-layout-shift"].numericValue,tbtMs:a.audits["total-blocking-time"].numericValue,transferBytes:a.audits["total-byte-weight"].numericValue};
+              }catch(e){row={device,path:p,error:String(e).slice(0,300),exit:r.status};if(/429|rate.limit/i.test(row.error))stop=true;}
+              results.push(row);console.log("LIVE_LIGHTHOUSE",JSON.stringify(row));fs.writeFileSync("stage5-live-lighthouse/summary.json",JSON.stringify(results,null,2));
+              if(stop)break;
+              await new Promise(r=>setTimeout(r,8000));
+            }
+          }
+          if(results.some(x=>x.error)||results.length!==12)process.exitCode=1;
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage5-live-lighthouse
+          path: stage5-live-lighthouse/
+          if-no-files-found: warn
