@@ -50,10 +50,10 @@ const routes = {
     ],
     detailsTitle: "Which stop do you actually need?",
     details: [
-      { title: "Masada", tag: "Ancient fortress", description: "Explore Masada's ancient fortress and desert views. Take the cable car, or choose a hiking trail if it's open and suitable for the conditions.", href: "https://en.parks.org.il/reserve-park/masada-national-park/", link: "Plan a Masada visit" },
-      { title: "Ein Gedi", tag: "Desert oasis", description: "Discover Ein Gedi's desert oasis, waterfalls, walking trails and wildlife. Check which trails are open before visiting.", href: "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/", link: "Plan an Ein Gedi visit" },
-      { title: "Qumran", tag: "Dead Sea Scrolls", description: "Visit the archaeological remains near the caves associated with the Dead Sea Scrolls, north of Ein Gedi.", href: "https://en.parks.org.il/reserve-park/qumran-park", link: "Visit Qumran National Park" },
-      { title: "Qasr al-Yahud", tag: "Jordan River baptism site", description: "Visit the historic baptism site at Qasr al-Yahud on the Jordan River. Allow time for the detour and check current entry and registration arrangements.", href: "https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/", link: "Plan a Qasr al-Yahud visit" },
+      { title: "Masada", to: "/attractions/masada/", tag: "Ancient fortress", description: "Visit the ancient fortress from the eastern entrance. Check cable-car times and heat-related Snake Path restrictions.", href: "https://en.parks.org.il/reserve-park/masada-national-park/", link: "Plan a Masada visit" },
+      { title: "Ein Gedi", to: "/attractions/ein-gedi/", tag: "Desert oasis", description: "Explore an oasis and desert trails. Recent floods affected routes; check currently accessible trails before setting off.", href: "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/", link: "Plan an Ein Gedi visit" },
+      { title: "Qumran", to: null, tag: "Dead Sea Scrolls", description: "Visit the archaeological remains near the caves associated with the Dead Sea Scrolls, north of Ein Gedi.", href: "https://en.parks.org.il/reserve-park/qumran-park", link: "Visit Qumran National Park" },
+      { title: "Qasr al-Yahud", to: "/attractions/qasr-el-yahud/", tag: "Jordan River baptism site", description: "Visit the historic baptism site at Qasr al-Yahud on the Jordan River. Allow time for the detour and check current entry and registration arrangements.", href: "https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/", link: "Plan a Qasr al-Yahud visit" },
     ],
     footnote: "Check the correct bus stop for your destination and the last departure back to Jerusalem.",
     resourceHeading: "Check the journey and site access",
@@ -88,26 +88,19 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
     <div className="mt-4 grid gap-3 sm:grid-cols-2" data-testid="journey-stop-cards">
       {route.details.map(item => {
         const photo = deadSeaStopPhotos[item.title];
-        return <a
-          key={item.title}
-          href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex min-w-0 overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          data-testid="deadsea-attraction-card"
-        >
+        const className = "group flex min-w-0 overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+        const card = <>
           {photo && <img src={photo.src} alt={photo.alt} width={180} height={180} loading="lazy" decoding="async" className="h-auto min-h-40 w-28 shrink-0 object-cover sm:w-32" />}
-          <div className="flex min-w-0 flex-1 flex-col justify-between gap-2 p-3.5">
-            <div>
-              <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{item.tag}</span>
-              <h3 className="mt-0.5 text-lg font-semibold text-foreground group-hover:text-primary">{item.title}</h3>
-              <p className="mt-1.5 text-sm leading-snug text-muted-foreground">{item.description}</p>
-            </div>
-            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">{item.link}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /></span>
+          <div className="flex min-w-0 flex-1 flex-col justify-center gap-2 p-3.5">
+            <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{item.tag}</span>
+            <h3 className="text-lg font-semibold text-foreground group-hover:text-primary">{item.title}</h3>
+            <p className="text-sm leading-snug text-muted-foreground">{item.description}</p>
           </div>
-          <span className="sr-only"> (opens in a new tab)</span>
-        </a>;
-      })}
+        </>;
+        return item.to
+          ? <Link key={item.title} to={item.to} className={className} data-testid="deadsea-attraction-card">{card}</Link>
+          : <a key={item.title} href={item.href} target="_blank" rel="noopener noreferrer" className={className} data-testid="deadsea-attraction-card">{card}<span className="sr-only"> (opens in a new tab)</span></a>;
+      })}}
     </div>
   </section>;
   return <>
