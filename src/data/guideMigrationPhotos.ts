@@ -308,11 +308,11 @@ export const migrationPhotos = {
   },
   "featured-original-5day": {
     src: "/images/travel-blog/featured-itinerary-5-days.webp",
-    alt: "Five-day Israel itinerary travel scene",
+    alt: "Close-up of a camel with Jerusalem and the golden Dome of the Rock in the background",
   },
   "featured-original-7day": {
     src: "/images/travel-blog/featured-itinerary-7-days.webp",
-    alt: "Israel travel itinerary scenery",
+    alt: "Two camels facing each other beside the sea in Israel",
   },
   "featured-original-10day": {
     src: originalTenDayIbex,
