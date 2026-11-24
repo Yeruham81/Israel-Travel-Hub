@@ -1,4 +1,4 @@
-name: Stage 5 JavaScript dependency and preload diagnosis
+name: Stage 5 route metadata lazy-loading experiment
 on:
   pull_request:
     branches: [main]
@@ -9,7 +9,7 @@ jobs:
   graph:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
       CI: "true"
       HOSTINGER_STATIC_BUILD: "true"
@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 4ca68799155af3e05c8d6b7b6cec308d8945fc9f
+          ref: 7e52921585697bb0ac92f0bdb1c2a8bb57b8b12b
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -53,110 +53,205 @@ jobs:
           p.write_text(s.replace(old,'import { stage5AuditPlugin } from "./stage5-audit-plugin.mjs";\n\n'+old+'\n  vite: { plugins: [stage5AuditPlugin()] },'))
           PY
       - run: bash scripts/build-validated-static.sh
-      - name: Map physical chunks and preload references for all six routes
+      - name: Preserve unmodified baseline output
+        run: |
+          mv .output/public /tmp/stage5-baseline-public
+          mkdir -p stage5-js-audit/baseline
+          mv stage5-js-audit/*.json stage5-js-audit/baseline/
+      - name: Extract route-specific head computations into async imports (experiment only)
+        run: |
+          cat > stage5-split-heads.mjs <<'JS'
+          import fs from "node:fs";
+          import path from "node:path";
+          import ts from "typescript";
+          const cfg=ts.readConfigFile("tsconfig.json",ts.sys.readFile);
+          const parsed=ts.parseJsonConfigFileContent(cfg.config,ts.sys,process.cwd());
+          const program=ts.createProgram(parsed.fileNames,parsed.options),checker=program.getTypeChecker();
+          const routes=program.getSourceFiles().filter(f=>f.fileName.includes("/src/routes/")&&f.fileName.endsWith(".tsx")&&!f.fileName.includes("/-")&&!/\/(__root|api\.)/.test(f.fileName));
+          const plans=[];
+          for(const file of routes){
+            const source=file.getFullText(),stmt=file.statements.find(s=>ts.isVariableStatement(s)&&s.declarationList.declarations.some(d=>d.name.getText(file)==="Route"));
+            if(!stmt)continue;
+            const decl=stmt.declarationList.declarations.find(d=>d.name.getText(file)==="Route");
+            const options=decl.initializer?.arguments?.[0];
+            if(!options||!ts.isObjectLiteralExpression(options))continue;
+            const head=options.properties.find(p=>ts.isPropertyAssignment(p)&&p.name.getText(file)==="head");
+            if(!head)continue;
+            const init=head.initializer;
+            if((ts.isArrowFunction(init)||ts.isFunctionExpression(init))&&init.parameters.length)continue;
+            if(!ts.isArrowFunction(init)&&!ts.isFunctionExpression(init)&&!ts.isIdentifier(init))continue;
+            const topFor=node=>{let n=node;while(n?.parent&&n.parent!==file)n=n.parent;return n?.parent===file?n:null;};
+            function refs(node,skip){
+              const found=new Set();
+              const visit=n=>{
+                if(n===skip)return;
+                if(ts.isIdentifier(n)){
+                  const sym=checker.getSymbolAtLocation(n);
+                  for(const d of sym?.declarations||[]){if(d.getSourceFile()===file){const top=topFor(d);if(top)found.add(top);}}
+                }
+                ts.forEachChild(n,visit);
+              };
+              visit(node);return found;
+            }
+            const deps=new Set(),stack=[...refs(init)];
+            while(stack.length){const n=stack.pop();if(deps.has(n)||n===stmt)continue;deps.add(n);stack.push(...refs(n));}
+            const isImport=n=>ts.isImportDeclaration(n)||ts.isImportEqualsDeclaration(n);
+            const isExport=n=>n.modifiers?.some(m=>m.kind===ts.SyntaxKind.ExportKeyword);
+            const pureDeclaration=n=>ts.isVariableStatement(n)||ts.isFunctionDeclaration(n)||ts.isTypeAliasDeclaration(n)||ts.isInterfaceDeclaration(n);
+            const candidates=new Set([...deps].filter(n=>!isImport(n)&&!isExport(n)&&pureDeclaration(n)));
+            const keep=new Set(),todo=[];
+            for(const n of file.statements)if(!candidates.has(n)&&!isImport(n))todo.push(...refs(n,head));
+            while(todo.length){const n=todo.pop();if(keep.has(n))continue;keep.add(n);todo.push(...refs(n,n===stmt?head:undefined));}
+            const remove=[...candidates].filter(n=>!keep.has(n));
+            const basename=path.basename(file.fileName,".tsx");
+            const companion="-stage5-head-"+basename+".tsx";
+            const headImports=file.statements.filter(n=>isImport(n)&&deps.has(n));
+            const headDecls=file.statements.filter(n=>deps.has(n)&&!isImport(n)&&n!==stmt);
+            const routeImport=refs(init).has(stmt)||headDecls.some(n=>refs(n).has(stmt))?'import { Route } from "./'+basename+'";\n':"";
+            const companionText=[...headImports.map(n=>n.getText(file)),routeImport,...headDecls.map(n=>n.getText(file)),"export const routeHead = "+init.getText(file)+";"].join("\n");
+            const edits=[{start:init.getStart(file),end:init.end,text:'async (ctx) => { const { routeHead } = await import("./'+companion.replace(/\.tsx$/,"")+'"); return Reflect.apply(routeHead, undefined, [ctx]); }'},...remove.map(n=>({start:n.getStart(file),end:n.end,text:""}))];
+            let changed=source;
+            for(const edit of edits.sort((a,b)=>b.start-a.start))changed=changed.slice(0,edit.start)+edit.text+changed.slice(edit.end);
+            plans.push({file:file.fileName,companion:path.join(path.dirname(file.fileName),companion),changed,companionText,removed:remove.length});
+          }
+          for(const p of plans){fs.writeFileSync(p.file,p.changed);fs.writeFileSync(p.companion,p.companionText);}
+          fs.writeFileSync("stage5-js-audit/route-plan.json",JSON.stringify(plans.map(p=>({file:path.relative(process.cwd(),p.file),companion:path.relative(process.cwd(),p.companion),removed:p.removed})),null,2));
+          console.log("ROUTES_SPLIT",plans.length,"removed declarations",plans.reduce((s,p)=>s+p.removed,0));
+          if(plans.length<20)throw Error("Insufficient routes for meaningful experiment");
+          JS
+          node stage5-split-heads.mjs
+          echo "Inspect installed router head API before experiment"
+          grep -n -A 12 'head?:' node_modules/@tanstack/router-core/src/route.ts | head -30 || true
+      - name: Build route-head experiment
+        run: bash scripts/build-validated-static.sh
+      - name: Verify experimental static export
+        run: node scripts/verify-hostinger-static-export.mjs
+      - name: Compare metadata, body text, links and original images on every prerendered page
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import json,re
+          class Snapshot(HTMLParser):
+              def __init__(self,html):
+                  super().__init__(convert_charrefs=True)
+                  self.tags=[];self.text=[];self.seo=[];self.ld=[];self.links=[];self.images=[];self.forms=[];self.active=None;self.skip=0;self.in_body=False
+                  self.feed(html)
+              def handle_starttag(self,tag,attrs):
+                  a=dict(attrs)
+                  if tag=="body":self.in_body=True
+                  if tag=="title":self.active="title"
+                  if tag=="meta":self.seo.append((tag,a))
+                  if tag=="link" and a.get("rel") in ("canonical","alternate"):self.seo.append((tag,a))
+                  if tag=="script":
+                      self.skip+=1
+                      if a.get("type")=="application/ld+json":self.active="ld"
+                  if tag=="style":self.skip+=1
+                  if tag=="a":self.links.append((a.get("href"),a.get("rel"),a.get("target")))
+                  if tag=="img":self.images.append((a.get("src"),a.get("alt"),a.get("srcset"),a.get("sizes")))
+                  if tag in ("form","input","select","textarea","button"):self.forms.append((tag,a.get("name"),a.get("type"),a.get("aria-label")))
+              def handle_endtag(self,tag):
+                  if tag=="body":self.in_body=False
+                  if tag in ("script","style"):self.skip=max(0,self.skip-1)
+                  if tag in ("script","title"):self.active=None
+              def handle_data(self,data):
+                  if self.active=="title":self.seo.append(("title",data))
+                  elif self.active=="ld":
+                      try:self.ld.append(json.loads(data))
+                      except ValueError:self.ld.append(data)
+                  elif self.in_body and not self.skip and data.strip():self.text.append(data.strip())
+              def result(self):
+                  return {k:getattr(self,k) for k in ("text","seo","ld","links","images","forms")}
+          base=Path("/tmp/stage5-baseline-public");after=Path(".output/public")
+          pages=sorted(p.relative_to(base) for p in base.rglob("index.html") if not str(p.relative_to(base)).startswith(("assets/","maps/","api/")))
+          mismatches=[]
+          for p in pages:
+              if not (after/p).is_file():mismatches.append({"page":str(p),"missing":True});continue
+              a=Snapshot((base/p).read_text()).result();b=Snapshot((after/p).read_text()).result()
+              diff=[k for k in a if a[k]!=b[k]]
+              if diff:mismatches.append({"page":str(p),"fields":diff})
+          print("PAGE_PARITY",json.dumps({"pages":len(pages),"mismatches":mismatches}))
+          Path("stage5-js-audit/page-parity.json").write_text(json.dumps({"pages":len(pages),"mismatches":mismatches},indent=2))
+          assert len(pages)>=120
+          PY
+      - name: Compare compiled static JS closures
         run: |
           node --input-type=module <<'JS'
           import fs from "node:fs";
-          import {gzipSync} from "node:zlib";
-          const dir="stage5-js-audit",root=".output/public";
-          const graphs=fs.readdirSync(dir).filter(f=>f.endsWith(".json")).map(f=>JSON.parse(fs.readFileSync(dir+"/"+f)));
-          const client=graphs.sort((a,b)=>b.chunks.filter(x=>fs.existsSync(root+"/"+x.file)).length-a.chunks.filter(x=>fs.existsSync(root+"/"+x.file)).length)[0];
-          if(!client||!client.chunks.some(x=>fs.existsSync(root+"/"+x.file)))throw Error("Client graph not found");
-          const map=new Map(client.chunks.map(x=>[x.file,x]));
-          const visit=(start)=>{const seen=new Set(),stack=[...start];while(stack.length){const k=stack.pop();if(seen.has(k)||!map.has(k))continue;seen.add(k);stack.push(...map.get(k).imports);}return seen;};
-          const paths=["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"];
+          const dirs=[["baseline","stage5-js-audit/baseline","/tmp/stage5-baseline-public"],["experiment","stage5-js-audit",".output/public"]];
           const rows=[];
-          for(const p of paths){
-            const html=fs.readFileSync(root+p+"index.html","utf8");
-            const links=[...html.matchAll(/<link\b[^>]*>/g)].map(x=>x[0]),scripts=[...html.matchAll(/<script\b[^>]*>/g)].map(x=>x[0]);
-            const href=t=>t.match(/(?:href|src)="([^"]+)"/)?.[1]?.replace(/^\//,"");
-            const preloads=links.filter(t=>/rel="modulepreload"/.test(t)).map(href).filter(Boolean);
-            const entry=scripts.filter(t=>/type="module"/.test(t)).map(href).filter(Boolean);
-            const imports=[...html.matchAll(/\bimport\s*(?:\(\s*)?["'](\/assets\/[^"']+\.js)["']/g)].map(x=>x[1].slice(1));
-            const reach=visit([...entry,...imports]);
-            const preReach=visit(preloads);
-            const sum=set=>[...set].reduce((n,x)=>n+(map.get(x)?.gzip||0),0);
-            const row={path:p,entry,inlineImports:imports,preloads:preloads.length,preloadBytes:sum(preReach),staticClosure:reach.size,staticGzip:sum(reach),onlyPreload:[...preReach].filter(x=>!reach.has(x)).length,preloadFiles:preloads};
-            rows.push(row);console.log("HTML_GRAPH",JSON.stringify({...row,preloadFiles:preloads.slice(0,10)}));
+          for(const [mode,dir,root] of dirs){
+            const graphs=fs.readdirSync(dir).filter(f=>f.startsWith("client-")||f.startsWith("ssr-")).map(f=>JSON.parse(fs.readFileSync(dir+"/"+f)));
+            const client=graphs.sort((a,b)=>b.chunks.filter(x=>fs.existsSync(root+"/"+x.file)).length-a.chunks.filter(x=>fs.existsSync(root+"/"+x.file)).length)[0];
+            if(!client?.chunks.some(x=>fs.existsSync(root+"/"+x.file)))throw Error("Missing client graph");
+            const map=new Map(client.chunks.map(x=>[x.file,x]));
+            const visit=(start)=>{const seen=new Set(),stack=[...start];while(stack.length){const k=stack.pop();if(seen.has(k)||!map.has(k))continue;seen.add(k);stack.push(...map.get(k).imports);}return seen;};
+            for(const p of ["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"]){
+              const html=fs.readFileSync(root+p+"index.html","utf8"),href=t=>t.match(/(?:href|src)="([^"]+)"/)?.[1]?.replace(/^\//,"");
+              const entry=[...html.matchAll(/<script\b[^>]*>/g)].map(x=>x[0]).filter(t=>/type="module"/.test(t)).map(href).filter(Boolean);
+              const pre=[...html.matchAll(/<link\b[^>]*>/g)].map(x=>x[0]).filter(t=>/rel="modulepreload"/.test(t)).map(href).filter(Boolean);
+              const a=visit(entry),b=visit(pre),sum=set=>[...set].reduce((n,x)=>n+(map.get(x)?.gzip||0),0);
+              const row={mode,path:p,staticCount:a.size,staticGzip:sum(a),preloads:pre.length,preloadGzip:sum(b),entry};rows.push(row);console.log("SPLIT_GRAPH",JSON.stringify(row));
+            }
           }
-          const largest=client.chunks.filter(x=>fs.existsSync(root+"/"+x.file)).sort((a,b)=>b.gzip-a.gzip).slice(0,15).map(x=>({file:x.file,bytes:x.bytes,gzip:x.gzip,imports:x.imports,modules:x.modules.sort((a,b)=>b.rendered-a.rendered).slice(0,15).map(m=>({id:m.id,rendered:m.rendered}))}));
-          const report={client:client.label,rows,largest};fs.writeFileSync(dir+"/graph-summary.json",JSON.stringify(report,null,2));
-          for(const x of largest)console.log("LARGE_CHUNK",JSON.stringify(x));
+          fs.writeFileSync("stage5-js-audit/split-graph.json",JSON.stringify(rows,null,2));
           JS
+      - name: TypeScript check for candidate (retain diagnostics)
+        run: bun x tsc --noEmit
+        continue-on-error: true
       - name: Install audit browser
         run: |
-          npm install --prefix /tmp/stage5fix --no-save playwright@1.56.1 lighthouse@12.8.2
+          npm install --prefix /tmp/stage5fix --no-save playwright@1.56.1
           /tmp/stage5fix/node_modules/.bin/playwright install --with-deps chromium
-      - name: Start compressed static preview
+      - name: Compare initial requests on baseline and experiment in same runner
         run: |
-          cat > /tmp/stage5-server.py <<'PY'
-          import gzip, http.server, os, mimetypes
+          cat > /tmp/stage5-compare-server.py <<'PY'
+          import gzip,http.server,os,io
           from pathlib import Path
-          from urllib.parse import urlsplit,unquote
+          from urllib.parse import urlsplit
           class Handler(http.server.SimpleHTTPRequestHandler):
               def do_GET(self):
                   if urlsplit(self.path).path=="/api/exchange-rates/":
-                      body=b'{"rates":null,"status":"unavailable"}'
-                      self.send_response(200);self.send_header("Content-Type","application/json");self.send_header("Content-Length",str(len(body)));self.end_headers();self.wfile.write(body);return
+                      body=b'{"rates":null,"status":"unavailable"}';self.send_response(200);self.send_header("Content-Type","application/json");self.send_header("Content-Length",str(len(body)));self.end_headers();self.wfile.write(body);return
                   return super().do_GET()
               def send_head(self):
                   p=Path(self.translate_path(self.path))
                   if p.is_dir() and self.path.endswith("/"):p=p/"index.html"
                   if p.is_file() and p.suffix in (".html",".js",".css",".json",".svg",".xml",".txt") and "gzip" in self.headers.get("Accept-Encoding",""):
-                      import io
-                      data=gzip.compress(p.read_bytes(),compresslevel=6,mtime=0)
-                      self.send_response(200);self.send_header("Content-Type",self.guess_type(str(p)));self.send_header("Content-Encoding","gzip");self.send_header("Vary","Accept-Encoding");self.send_header("Content-Length",str(len(data)));self.end_headers()
-                      return io.BytesIO(data)
+                      data=gzip.compress(p.read_bytes(),compresslevel=6,mtime=0);self.send_response(200);self.send_header("Content-Type",self.guess_type(str(p)));self.send_header("Content-Encoding","gzip");self.send_header("Content-Length",str(len(data)));self.end_headers();return io.BytesIO(data)
                   return super().send_head()
-          os.chdir(".output/public")
-          http.server.ThreadingHTTPServer(("127.0.0.1",4173),Handler).serve_forever()
+          os.chdir(os.environ["STATIC_ROOT"])
+          http.server.ThreadingHTTPServer(("127.0.0.1",int(os.environ["PORT"])),Handler).serve_forever()
           PY
-          nohup python /tmp/stage5-server.py >/tmp/stage5-server.log 2>&1 &
-          for i in $(seq 1 30); do
-            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
-            sleep 1
-          done
-          exit 1
-      - name: Compare normal HTML and removal of modulepreload hints only
-        run: |
+          STATIC_ROOT=/tmp/stage5-baseline-public PORT=4173 nohup python /tmp/stage5-compare-server.py >/tmp/stage5-base.log 2>&1 &
+          STATIC_ROOT=.output/public PORT=4174 nohup python /tmp/stage5-compare-server.py >/tmp/stage5-exp.log 2>&1 &
+          for p in 4173 4174; do for i in $(seq 1 20); do curl -fsS http://127.0.0.1:$p/ >/dev/null && break; sleep 1; done; done
           cat > /tmp/stage5fix/compare.cjs <<'JS'
-          const {chromium}=require("playwright"),fs=require("fs"),zlib=require("zlib");
-          const origin="http://127.0.0.1:4173",paths=["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"];
-          (async()=>{const browser=await chromium.launch();const all=[];
-            try{
-              for(const mode of ["normal","no-modulepreload","no-js"])for(const p of paths){
-                const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,javaScriptEnabled:mode!=="no-js"});
-                await ctx.route("**/*",async r=>{
-                  const url=r.request().url();
-                  if(!url.startsWith(origin+"/"))return r.abort();
-                  if(mode==="no-modulepreload"&&r.request().isNavigationRequest()){
-                    const res=await r.fetch();let html=await res.text();
-                    const filtered=html.replace(/<link\b(?=[^>]*\brel=["']modulepreload["'])[^>]*>/gi,"");
-                    return r.fulfill({status:res.status(),contentType:"text/html; charset=utf-8",body:filtered});
-                  }
-                  return r.continue();
-                });
-                const page=await ctx.newPage(),cdp=await ctx.newCDPSession(page),requests=new Map(),errors=[];
-                await cdp.send("Network.enable");await cdp.send("Network.setCacheDisabled",{cacheDisabled:true});
-                cdp.on("Network.requestWillBeSent",e=>requests.set(e.requestId,{url:e.request.url,type:e.type,initiator:e.initiator.type,source:e.initiator.url||e.initiator.stack?.callFrames?.[0]?.url,priority:e.request.initialPriority,time:e.timestamp}));
-                cdp.on("Network.loadingFinished",e=>{const r=requests.get(e.requestId);if(r)r.transferred=e.encodedDataLength});
-                page.on("pageerror",e=>errors.push(e.message));
-                try{
-                  await page.goto(origin+p,{waitUntil:"load",timeout:45000});
-                  await page.waitForTimeout(600);
-                  const dom=await page.evaluate(()=>({title:document.title,h1:document.querySelector("h1")?.textContent,overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,preloads:document.querySelectorAll('link[rel="modulepreload"]').length,paint:performance.getEntriesByType("paint").map(x=>({name:x.name,time:x.startTime}))}));
-                  const scripts=[...requests.values()].filter(r=>r.type==="Script"&&r.url.startsWith(origin));
-                  const row={mode,path:p,dom,errors,scriptCount:scripts.length,scriptBytes:scripts.reduce((s,x)=>s+(x.transferred||0),0),scripts:scripts.map(x=>({...x,url:x.url.replace(origin,""),source:x.source?.replace(origin,"")}))};all.push(row);console.log("PRELOAD_EXPERIMENT",JSON.stringify({...row,scripts:row.scripts.slice(0,5)}));
-                }catch(e){all.push({mode,path:p,error:String(e)});console.log("PRELOAD_ERROR",mode,p,String(e));}finally{await ctx.close();}
-              }
-            }finally{await browser.close();fs.writeFileSync("stage5-js-audit/browser-comparison.json",JSON.stringify(all,null,2));}
-            if(all.length!==18||all.some(x=>x.error||x.errors?.length))process.exitCode=1;
+          const {chromium}=require("playwright"),fs=require("fs");
+          const paths=["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"];
+          (async()=>{const browser=await chromium.launch(),rows=[];
+            try{for(const p of paths)for(const [mode,port] of [["baseline",4173],["experiment",4174]]){
+              const origin="http://127.0.0.1:"+port;
+              const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1});
+              await ctx.route("**/*",r=>r.request().url().startsWith(origin+"/")?r.continue():r.abort());
+              const page=await ctx.newPage(),cdp=await ctx.newCDPSession(page),requests=new Map(),errors=[];
+              await cdp.send("Network.enable");await cdp.send("Network.setCacheDisabled",{cacheDisabled:true});
+              cdp.on("Network.requestWillBeSent",e=>requests.set(e.requestId,{url:e.request.url,type:e.type}));
+              cdp.on("Network.loadingFinished",e=>{const q=requests.get(e.requestId);if(q)q.bytes=e.encodedDataLength;});
+              page.on("pageerror",e=>errors.push(e.message));
+              try{await page.goto(origin+p,{waitUntil:"load",timeout:45000});await page.waitForTimeout(1000);
+                const dom=await page.evaluate(()=>({title:document.title,h1:document.querySelector("h1")?.textContent,canonical:document.querySelector('link[rel=canonical]')?.href,overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth}));
+                const scripts=[...requests.values()].filter(x=>x.type==="Script"&&x.url.startsWith(origin));
+                const row={mode,path:p,dom,errors,scripts:scripts.length,bytes:scripts.reduce((s,x)=>s+(x.bytes||0),0)};rows.push(row);console.log("SPLIT_BROWSER",JSON.stringify(row));
+              }catch(e){rows.push({mode,path:p,error:String(e)});}finally{await ctx.close();}
+            }}finally{await browser.close();fs.writeFileSync("stage5-js-audit/split-browser.json",JSON.stringify(rows,null,2));}
+            if(rows.length!==12||rows.some(x=>x.error||x.errors?.length||x.dom?.overflow>3))process.exitCode=1;
           })().catch(e=>{console.error(e);process.exitCode=1});
           JS
           node /tmp/stage5fix/compare.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: stage5-js-audit
+          name: stage5-route-split-experiment
           path: stage5-js-audit/
           if-no-files-found: error
