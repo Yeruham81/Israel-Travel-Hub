@@ -254,7 +254,7 @@ describe("migrated practical guides", () => {
     const authorCard = screen.getByRole("complementary", { name: "About the author" });
     expect(authorCard).toHaveTextContent("Written by Moshe Barak");
     expect(authorCard).toHaveTextContent("Over 20 years");
-    expect(within(authorCard).getByRole("link", { name: /reviews on Tripadvisor/ })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
+    expect(within(authorCard).getByRole("link", { name: /reviews on tripadvisor/i })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
     expect(authorCard.compareDocumentPosition(screen.getByRole("region", { name: "Quick answer" }))).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(container.textContent).not.toMatch(/editorial team|Adapted from|Source checks and limitations below|Image from the original publisher/);
     expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
