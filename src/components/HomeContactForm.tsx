@@ -10,7 +10,7 @@ import type { GuideContactCopy } from "@/lib/guide-contact";
 import { TripadvisorReviewsButton } from "@/components/TripadvisorReviewsButton";
 
 // A bottom-of-page contact portrait may repeat a separated introductory author portrait.
-export function HomeContactForm({ context = "homepage", guide, showPortrait = true }: { context?: "homepage" | "about" | "taxis"; guide?: GuideContactCopy; showPortrait?: boolean; showTripadvisorBesidePortraitMobile?: boolean }) {
+export function HomeContactForm({ context = "homepage", guide, showPortrait = true, showTripadvisorBesidePortraitMobile = false }: { context?: "homepage" | "about" | "taxis"; guide?: GuideContactCopy; showPortrait?: boolean; showTripadvisorBesidePortraitMobile?: boolean }) {
   const headingId = guide ? "guide-contact-h" : context === "about" ? "about-contact-h" : context === "taxis" ? "taxis-contact-h" : "home-contact-h";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,8 +35,8 @@ export function HomeContactForm({ context = "homepage", guide, showPortrait = tr
   return <section id="contact" aria-labelledby={headingId} className={`${guide || context === "taxis" ? "mt-12 " : ""}scroll-mt-24 overflow-hidden rounded-2xl border bg-card shadow-sm`}>
     <div className="grid md:grid-cols-[0.85fr_1.5fr]">
       <div className="bg-navy p-6 text-navy-foreground sm:p-8">
-        <div className="flex flex-wrap items-start justify-between gap-3" data-testid="contact-reviews-row">
-          {showPortrait && <img src={airportTransferPhotos["moshe"]!.src} alt={airportTransferPhotos["moshe"]!.alt} data-photo-role="contact-portrait" width={150} height={200} loading="lazy" decoding="async" className="h-24 w-20 shrink-0 rounded-xl object-cover" />}
+        <div className={`flex items-start justify-between gap-3 ${showTripadvisorBesidePortraitMobile ? "flex-nowrap" : "flex-wrap"}`} data-testid="contact-reviews-row">
+          {showPortrait && <img src={airportTransferPhotos["moshe"]!.src} alt={airportTransferPhotos["moshe"]!.alt} data-photo-role="contact-portrait" width={150} height={200} loading="lazy" decoding="async" className={`${showTripadvisorBesidePortraitMobile ? "h-20 w-16 sm:h-24 sm:w-20" : "h-24 w-20"} shrink-0 rounded-xl object-cover`} />}
           <div className="min-w-0" data-testid="contact-tripadvisor-reviews"><TripadvisorReviewsButton /></div>
         </div>
         <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-80">{guide?.eyebrow && !/ask moshe/i.test(guide.eyebrow) ? guide.eyebrow : "Contact me"}</p>
