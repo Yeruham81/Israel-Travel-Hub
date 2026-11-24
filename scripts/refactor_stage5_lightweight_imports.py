@@ -40,7 +40,7 @@ import { isPublisherUrl } from "@/data/site-identity";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 '''
 if "stage5PhotoSrcSet" in card:card_imports+='import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";\n'
-Path("src/components/GuideCard.tsx").write_text(card_imports+"\n"+tags_and_credit+card)
+Path("src/components/GuideCard.tsx").write_text((card_imports+"\n"+tags_and_credit+card).rstrip()+"\n")
 guide.write_text('import { GuideTags, GuidePhotoCredit, GuideCard } from "@/components/GuideCard";\nexport { GuideTags, GuidePhotoCredit, GuideCard } from "@/components/GuideCard";\n'+s)
 # Move imports of ONLY lightweight names. Mixed imports remain compatible through re-exports.
 sets={
