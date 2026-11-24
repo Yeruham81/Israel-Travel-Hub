@@ -1,7 +1,5 @@
-import { tourCategories, tourCategoryPaths } from "@/data/tours";
-import { attractionHubRegions } from "@/data/attractionsHub";
 import type { LinkProps } from "@tanstack/react-router";
-import { airportTransferRates, airportTransferRoutes, travelGuidePaths } from "@/data/registry";
+import { travelGuidePaths } from "@/data/travel-guide-paths";
 
 export type NavItem = { label: string; to: LinkProps["to"] };
 export type SidebarNavItem =
@@ -14,10 +12,10 @@ export const airportTransferNav = {
   label: "Airport transfers", to: "/airport-transfers/" as const,
   childrenLabel: "Airport transfer destinations", alwaysExpanded: true,
   children: [
-    ...airportTransferRoutes.map((route) => ({
-      label: route.id === "dead-sea" ? "To Ein Bokek at the Dead Sea" : `To ${airportTransferRates.find((rate) => rate.id === route.id)!.destination}`,
-      to: route.path,
-    })),
+    { label: "To Jerusalem", to: "/airport-transfers/jerusalem/" },
+    { label: "To Tel Aviv & Jaffa", to: "/airport-transfers/tel-aviv/" },
+    { label: "To Haifa", to: "/airport-transfers/haifa/" },
+    { label: "To Ein Bokek at the Dead Sea", to: "/airport-transfers/ein-bokek/" },
     { label: "To other destinations", to: "/airport-transfers/" },
   ],
 } satisfies SidebarNavItem;
@@ -94,15 +92,162 @@ export const attractionSidebarGuideLabels: Record<string, string> = {
   eilat: "Eilat",
 };
 
-export const attractionSidebarRegions: SidebarNavItem[] = attractionHubRegions.map((region) => ({
-  label: region.navLabel ?? region.title,
-  to: "/attractions/" as const, // The heading toggles; only "All attractions" navigates to this URL.
+// Navigation is deliberately lightweight. A parity test verifies every menu
+// label, order and destination against the complete editorial catalogs.
+const attractionNavigation = [
+  [
+    "Jerusalem",
+    "Jerusalem",
+    [
+      [
+        "old-city-jerusalem",
+        "old-city-jerusalem"
+      ],
+      [
+        "via-dolorosa",
+        "via-dolorosa"
+      ],
+      [
+        "mount-of-olives",
+        "mount-of-olives"
+      ],
+      [
+        "mount-zion",
+        "mount-zion"
+      ]
+    ]
+  ],
+  [
+    "Tel Aviv & Jaffa",
+    "Tel Aviv & Jaffa",
+    [
+      [
+        "jaffa",
+        "jaffa"
+      ]
+    ]
+  ],
+  [
+    "Haifa & Coast",
+    "Haifa & the Mediterranean coast",
+    [
+      [
+        "haifa",
+        "haifa"
+      ],
+      [
+        "akko-acre",
+        "akko-acre"
+      ],
+      [
+        "caesarea",
+        "caesarea"
+      ],
+      [
+        "rosh-hanikra",
+        "rosh-hanikra"
+      ]
+    ]
+  ],
+  [
+    "Nazareth & Galilee",
+    "Nazareth & Galilee",
+    [
+      [
+        "annunciation",
+        "basilica-of-the-annunciation"
+      ],
+      [
+        "mount-tabor",
+        "mount-tabor"
+      ],
+      [
+        "precipice",
+        "mount-precipice"
+      ],
+      [
+        "megiddo",
+        "tel-megiddo"
+      ]
+    ]
+  ],
+  [
+    "Sea of Galilee & Jordan River",
+    "Sea of Galilee & the Jordan River",
+    [
+      [
+        "sea-of-galilee",
+        "sea-of-galilee"
+      ],
+      [
+        "capernaum",
+        "capernaum"
+      ],
+      [
+        "tabgha",
+        "tabgha"
+      ],
+      [
+        "mount-of-beatitudes",
+        "mount-of-beatitudes"
+      ],
+      [
+        "magdala",
+        "magdala"
+      ],
+      [
+        "yardenit",
+        "yardenit"
+      ]
+    ]
+  ],
+  [
+    "Dead Sea & Masada",
+    "Dead Sea & Masada",
+    [
+      [
+        "dead-sea",
+        "dead-sea"
+      ],
+      [
+        "masada",
+        "masada"
+      ],
+      [
+        "ein-gedi",
+        "ein-gedi"
+      ],
+      [
+        "qasr",
+        "qasr-el-yahud"
+      ]
+    ]
+  ],
+  [
+    "Negev & Eilat",
+    "Negev Desert & Eilat",
+    [
+      [
+        "mitzpe-ramon-crater",
+        "mitzpe-ramon-crater"
+      ],
+      [
+        "eilat",
+        "eilat"
+      ]
+    ]
+  ]
+] as const;
+
+export const attractionSidebarRegions: SidebarNavItem[] = attractionNavigation.map(([label, title, cards]) => ({
+  label,
+  to: "/attractions/" as const,
   toggleOnly: true,
-  childrenLabel: `${region.title} attractions`,
-  toggleLabel: `Toggle ${region.title} attractions`,
-  children: region.cards.map((card) => ({
-    label: attractionSidebarGuideLabels[card.id] ?? card.title,
-    to: card.to,
+  childrenLabel: `${title} attractions`,
+  toggleLabel: `Toggle ${label} attractions`,
+  children: cards.map(([id, slug]) => ({
+    label: attractionSidebarGuideLabels[id]!,
+    to: `/attractions/${slug}/` as LinkProps["to"],
   })),
 }));
 
@@ -119,7 +264,18 @@ export const allNavGroups: NavGroup[] = [
   {
     title: "Tours & trips",
     items: [
-      { label: "Tours & day trips", to: "/tours/", childrenLabel: "Tour categories", alwaysExpanded: true, children: tourCategories.map(category => ({ label: category.shortTitle, to: tourCategoryPaths[category.id] })) },
+      { label: "Tours & day trips", to: "/tours/", childrenLabel: "Tour categories", alwaysExpanded: true, children: [
+        { label: "Jerusalem", to: "/tours/jerusalem/" },
+        { label: "Tel Aviv & Jaffa", to: "/tours/tel-aviv-jaffa/" },
+        { label: "Masada & the Dead Sea", to: "/tours/masada-dead-sea/" },
+        { label: "Bethlehem, Jericho & Qasr al-Yahud", to: "/tours/bethlehem-jericho-jordan-river/" },
+        { label: "Nazareth & Sea of Galilee", to: "/tours/nazareth-sea-of-galilee/" },
+        { label: "Caesarea, Haifa & Acre", to: "/tours/caesarea-haifa-acre/" },
+        { label: "Negev & Ramon Crater", to: "/tours/negev-desert-ramon-crater/" },
+        { label: "Golan Heights", to: "/tours/golan-heights/" },
+        { label: "Food & markets", to: "/tours/food-market-tours/" },
+        { label: "Eilat & the Red Sea", to: "/tours/eilat-red-sea/" },
+      ] },
       { label: "Shore excursions", to: "/shore-excursions/", childrenLabel: "Shore excursion ports", alwaysExpanded: true, children: [
         { label: "From Haifa Port", to: "/shore-excursions/haifa/" },
         { label: "From Ashdod Port", to: "/shore-excursions/ashdod/" },
