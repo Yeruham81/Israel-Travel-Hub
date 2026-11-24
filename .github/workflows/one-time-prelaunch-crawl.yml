@@ -45,6 +45,10 @@ jobs:
               }};
           }
           JS
+          cat > stage5-audit-plugin.d.mts <<'TS'
+          import type { Plugin } from "vite";
+          export function stage5AuditPlugin(): Plugin;
+          TS
           python3 - <<'PY'
           from pathlib import Path
           p=Path("vite.config.ts");s=p.read_text()
@@ -205,9 +209,13 @@ jobs:
         id: types
         run: bun x tsc --noEmit
         continue-on-error: true
+      - name: Full regression suite for experimental code
+        id: regression
+        run: bun run test
+        continue-on-error: true
       - name: Install audit browser
         run: |
-          npm install --prefix /tmp/stage5fix --no-save playwright@1.56.1
+          npm install --prefix /tmp/stage5fix --no-save playwright@1.56.1 lighthouse@12.8.2
           /tmp/stage5fix/node_modules/.bin/playwright install --with-deps chromium
       - name: Compare initial requests on baseline and experiment in same runner
         run: |
@@ -255,12 +263,51 @@ jobs:
           })().catch(e=>{console.error(e);process.exitCode=1});
           JS
           node /tmp/stage5fix/compare.cjs
-      - name: Require HTML parity and TypeScript validity before considering this approach
+      - name: Compare mobile Lighthouse baseline and experiment on same runner
+        id: lighthouse
+        run: |
+          # Start both local previews again; previous step processes may have exited.
+          for p in 4173 4174; do
+            if ! curl -fsS http://127.0.0.1:$p/ >/dev/null; then
+              if [ "$p" = 4173 ]; then root=/tmp/stage5-baseline-public; else root=.output/public; fi
+              STATIC_ROOT="$root" PORT="$p" nohup python /tmp/stage5-compare-server.py >/tmp/stage5-lh-$p.log 2>&1 &
+            fi
+          done
+          for p in 4173 4174; do for i in $(seq 1 20); do curl -fsS http://127.0.0.1:$p/ >/dev/null && break; sleep 1; done; done
+          mkdir -p stage5-js-audit/lighthouse
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import {spawnSync} from "node:child_process";
+          const paths=["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"];
+          const rows=[];
+          for(const [i,p] of paths.entries()){
+            const order=i%2===0?[["baseline",4173],["experiment",4174]]:[["experiment",4174],["baseline",4173]];
+            for(const [mode,port] of order){
+              const url="http://127.0.0.1:"+port+p;
+              const file="stage5-js-audit/lighthouse/"+mode+"-"+i+".json";
+              const r=spawnSync("/tmp/stage5fix/node_modules/.bin/lighthouse",[url,"--only-categories=performance,accessibility","--output=json","--output-path="+file,"--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=35000","--quiet"],{encoding:"utf8",timeout:125000,maxBuffer:2*1024*1024});
+              let row;
+              try{
+                const a=JSON.parse(fs.readFileSync(file,"utf8")),u=a.audits;
+                if(a.runtimeError)throw Error(a.runtimeError.message);
+                const net=u["network-requests"].details.items,doc=net.find(n=>n.resourceType==="Document"&&n.url===url);
+                if(!doc||doc.statusCode!==200)throw Error("Document not verified");
+                row={mode,path:p,performance:Math.round(a.categories.performance.score*100),accessibility:Math.round(a.categories.accessibility.score*100),lcp:u["largest-contentful-paint"].numericValue,fcp:u["first-contentful-paint"].numericValue,cls:u["cumulative-layout-shift"].numericValue,tbt:u["total-blocking-time"].numericValue,bytes:u["total-byte-weight"].numericValue,scripts:net.filter(n=>n.resourceType==="Script").length,scriptBytes:net.filter(n=>n.resourceType==="Script").reduce((s,n)=>s+(n.transferSize||0),0),benchmark:a.environment.benchmarkIndex};
+              }catch(e){row={mode,path:p,error:String(e),exit:r.status};}
+              rows.push(row);console.log("SPLIT_LIGHTHOUSE",JSON.stringify(row));
+            }
+          }
+          fs.writeFileSync("stage5-js-audit/lighthouse-summary.json",JSON.stringify(rows,null,2));
+          if(rows.length!==12||rows.some(x=>x.error))process.exitCode=1;
+          JS
+      - name: Require HTML parity, TypeScript and full regression success
         if: always()
         env:
           PARITY: ${{ steps.parity.outcome }}
           TYPES: ${{ steps.types.outcome }}
-        run: test "$PARITY" = success && test "$TYPES" = success
+          REGRESSION: ${{ steps.regression.outcome }}
+          LIGHTHOUSE: ${{ steps.lighthouse.outcome }}
+        run: test "$PARITY" = success && test "$TYPES" = success && test "$REGRESSION" = success && test "$LIGHTHOUSE" = success
       - uses: actions/upload-artifact@v4
         if: always()
         with:
