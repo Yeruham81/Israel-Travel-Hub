@@ -31,17 +31,16 @@ async function scrollAndDecode(page) {
 async function snapshot(page,label,desktop){
  const data=await page.evaluate(()=>{
   const all=selector=>[...document.querySelectorAll(selector)];
-  const cardImages=[...all("#attractions [data-testid],#related [data-testid]")];
   const photos=all("#attractions .grid>a img, #related .grid>a img");
   const related=all("#related .grid>a");
   const attractions=all("#attractions .grid>a");
-  const tours=all('a[data-testid="baptism-tour-card"]');
+  const tours=all('[data-testid="baptism-tour-card"]');
   const hero=document.querySelector('[data-testid="guide-hero-media"] img');
   const structured=all('script[type="application/ld+json"]').map(el=>el.textContent||"").join(" ");
   const contact=document.querySelector("#contact");
   const source=document.querySelector("#sources");
-  const compareDesktop=document.querySelector('[data-testid="baptism-desktop-comparison"]');
-  const compareMobile=document.querySelector('[data-testid="baptism-mobile-comparison"]');
+  const comparisonRegion=document.querySelector('[data-testid="baptism-site-comparison"]');
+  const comparisonTable=comparisonRegion?.querySelector("table");
   return {
    h1:all("h1").map(x=>x.textContent.trim()),
    canonical:document.querySelector('link[rel="canonical"]')?.href,
@@ -49,8 +48,12 @@ async function snapshot(page,label,desktop){
    date:document.querySelector("main time")?.getAttribute("datetime"),
    robots:document.querySelector('meta[name="robots"]')?.content,
    sections:["compare-sites","yardenit","qasr","ceremony","getting-there","galilee-tours","jordan-valley-tours","practical-tips","faq","attractions","related","contact","sources"].filter(x=>document.getElementById(x)),
-   comparison:{desktopVisible:compareDesktop?getComputedStyle(compareDesktop).display!=="none":false,mobileVisible:compareMobile?getComputedStyle(compareMobile).display!=="none":false,rows:all("#compare-sites tbody tr").length},
-   tours:tours.map(el=>({href:el.href,site:el.getAttribute("data-site"),img:el.querySelector("img")?.currentSrc,loaded:!!(el.querySelector("img")?.naturalWidth>0)})),
+   comparison:{hasTable:!!comparisonTable,visible:!!comparisonTable&&getComputedStyle(comparisonTable).display!=="none",scrollable:!!comparisonRegion&&getComputedStyle(comparisonRegion).overflowX==="auto",rows:all("#compare-sites tbody tr").length},
+   tours:tours.map(el=>({href:el.querySelector('article a[href*="tpm.li"]')?.href||"",site:el.getAttribute("data-site"),img:el.querySelector("img")?.currentSrc,loaded:!!(el.querySelector("img")?.naturalWidth>0),
+     title:el.querySelector("article h3")?.textContent?.trim()||"",
+     ratingValid:!!el.querySelector('[aria-label^="Rated "]')||el.textContent.includes("Check reviews on provider"),
+     priceValid:el.textContent.includes("Check current price")||/US\$[\d,.]+|€[\d,.]+|₪[\d,.]+/.test(el.textContent||""),
+   })),
    attractions:attractions.length,related:related.length,
    linkedPages:[...attractions,...related].map(a=>a.getAttribute("href")),
    photos:photos.map(img=>({src:img.getAttribute("src"),loaded:img.complete&&img.naturalWidth>0,alt:img.getAttribute("alt")})),
@@ -60,8 +63,7 @@ async function snapshot(page,label,desktop){
    safety:document.querySelector('[data-testid="qasr-access-safety"]')?.textContent,
    yardenitRules:document.getElementById("yardenit")?.textContent,
    relatedChristian:!!document.querySelector('#related a[href="/travel-blog/christian-tours-in-israel/"]'),
-   ratingCount:all('[data-testid="baptism-tour-rating"]').length,
-   pricedTours:all('a[data-testid="baptism-tour-card"]').filter(el=>el.textContent?.includes("US$471.43")).length,
+   tripadvisor:!!contact?.querySelector('[data-testid="contact-tripadvisor-reviews"] a[href*="tripadvisor"]'),
    contactForm:!!contact?.querySelector("form"),portrait:!!contact?.querySelector('[data-photo-role="contact-portrait"]'),
    sourcesAfterContact:!!(contact&&source&&(contact.compareDocumentPosition(source)&Node.DOCUMENT_POSITION_FOLLOWING)),
    missingAlt:all("main img:not([alt])").map(el=>el.getAttribute("src")),
@@ -72,9 +74,9 @@ async function snapshot(page,label,desktop){
  verify(data.canonical===url,label+": preserved URL and canonical",data.canonical);
  verify(data.date==="2026-11-21",label+": updated editorial date",String(data.date));
  verify(data.robots?.includes("noindex"),label+": staging remains noindex");
- verify(data.hero.loaded&&data.hero.src?.includes("jordan-river-baptism"),label+": primary hero loads");
+ verify(data.hero.loaded&&data.hero.src?.includes("featured-jordan-baptism.webp"),label+": primary hero loads");
  verify(data.sections.length===13,label+": all guide sections",String(data.sections.length));
- verify(data.comparison.rows===6&&data.comparison.desktopVisible===desktop&&data.comparison.mobileVisible!==desktop,label+": responsive comparison table and cards");
+ verify(data.comparison.rows===6&&data.comparison.hasTable&&data.comparison.visible&&data.comparison.scrollable,label+": one accessible scrollable comparison table on desktop and mobile");
  verify(data.tours.length===6&&data.tours.filter(t=>t.site==="galilee-tours").length===3&&data.tours.filter(t=>t.site==="jordan-valley-tours").length===3,label+": six grouped tours");
  verify(data.tours.every(t=>/^https:\/\/(viator|getyourguide)\.tpm\.li\/[A-Za-z0-9]+\?sub_id=baptism_/.test(t.href)),label+": all booking links are page-scoped Travelpayouts");
  verify(data.tours.every(t=>t.loaded),label+": all six bookable tour photos load");
@@ -82,13 +84,13 @@ async function snapshot(page,label,desktop){
  verify(data.photos.length===12&&data.photos.every(x=>x.loaded&&x.alt)&&new Set(data.photos.map(x=>x.src)).size===12,label+": twelve distinct, loaded editorial hero photos",JSON.stringify(data.photos.filter(x=>!x.loaded||!x.alt)));
  verify(data.linkedPages.includes("/attractions/yardenit/")&&data.linkedPages.includes("/attractions/qasr-el-yahud/"),label+": exact site links");
  verify(data.faq===10&&data.structuredFAQ&&data.structuredArticle,label+": FAQ and Article structured data");
- verify(data.map?.includes("maps.google.com/maps?")&&data.map.includes("Yardenit")&&data.map.includes("Qasr"),label+": two-site map and directions");
+ verify(data.map?.includes("/maps/area.html?")&&data.map.includes("waypoints="),label+": embedded two-site pin map with directions");
  verify(data.reservation?.includes("en.parks.org.il")&&data.reservation?.includes("qasr-al-yahud"),label+": official free visit reservation CTA");
  verify(data.safety?.includes("minefields")&&data.safety?.includes("authorised")&&data.safety?.includes("fences"),label+": precise monastery-area safety guidance");
  verify(data.yardenitRules?.includes("up to 40 people")&&data.yardenitRules?.includes("larger than 40"),label+": Yardenit advance coordination split");
  verify(data.relatedChristian,label+": Christian Tours guide card replaces Haifa");
- verify(data.ratingCount===6&&data.pricedTours===1,label+": six sourced supplier ratings and one verified USD price",JSON.stringify({ratings:data.ratingCount,verifiedPrices:data.pricedTours}));
- verify(data.contactForm&&data.portrait&&data.sourcesAfterContact,label+": author contact form and footer sources");
+ verify(data.tours.every(t=>t.title&&t.ratingValid&&t.priceValid),label+": consistent tour cards show verified details or provider lookups, without invented ratings or prices");
+ verify(data.contactForm&&data.portrait&&data.tripadvisor&&data.sourcesAfterContact,label+": personal contact, TripAdvisor reviews and footer sources");
  verify(data.missingAlt.length===0&&data.width<=data.viewport+8,label+": accessible photos and no horizontal overflow",JSON.stringify({missingAlt:data.missingAlt,width:data.width,viewport:data.viewport}));
  return data;
 }
