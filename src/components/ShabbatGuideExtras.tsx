@@ -6,7 +6,7 @@ export function ShabbatBusLinks() {
     <UsefulLinkCallout
       label="Line 711 stop-by-stop timetable"
       href="https://busofash.co.il/?lines=711"
-      context="Check Terminal 1 stop 34609 in the Tel Aviv-bound direction for your actual travel date. Route-wide operating hours are not departure times at the airport."
+      context="Choose Terminal 1 stop 34609 toward Tel Aviv. Check the actual stop departure for your date: winter and daylight-saving-time schedules differ."
     />
     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
       For accessibility arrangements and service changes, see the <a className="font-medium text-primary underline underline-offset-4" href="https://busofash.co.il/" target="_blank" rel="noopener noreferrer">weekend bus operator updates<span className="sr-only"> (opens in a new tab)</span></a>.
@@ -20,15 +20,15 @@ export function ShabbatTerminalSteps() {
     <ol className="mt-4 grid gap-3 sm:grid-cols-3">
       <li className="rounded-lg bg-secondary/50 p-3">
         <span className="text-xs font-bold uppercase tracking-wider text-primary">1 · Terminal 3</span>
-        <p className="mt-1 text-sm">Leave arrivals and find the free shuttle on Level G near Gate 01.</p>
+        <p className="mt-1 text-sm">After arrivals, follow signs to the free Terminal 1 shuttle on Level G near Gate 01.</p>
       </li>
       <li className="rounded-lg bg-secondary/50 p-3">
         <span className="text-xs font-bold uppercase tracking-wider text-primary">2 · Internal shuttle</span>
-        <p className="mt-1 text-sm">Travel to Terminal 1; allow for the wait and the ride.</p>
+        <p className="mt-1 text-sm">Ride to Terminal 1 and leave the shuttle by the stop opposite Gate 4.</p>
       </li>
       <li className="rounded-lg bg-secondary/50 p-3">
         <span className="text-xs font-bold uppercase tracking-wider text-primary">3 · Bus 711</span>
-        <p className="mt-1 text-sm">Find airport stop 34609 and check the Tel Aviv-bound departure.</p>
+        <p className="mt-1 text-sm">Find stop 34609, check the Tel Aviv-bound direction and match the departure to the seasonal timetable.</p>
       </li>
     </ol>
   </div>;
