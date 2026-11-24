@@ -15,7 +15,7 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
       const guide = travelGuides[id];
       expect(guide.id).toBe(id);
       expect(travelGuidePaths[id]).toMatch(/^\/travel-blog\/.+\/$/);
-      expect(guide.updatedAt).toBe(id === "jerusalemChurches" || id === "jerusalem" ? "2026-11-21" : id === "jerusalemShopping" ? "2026-11-20" : id === "jerusalemDeadSea" || id === "bethlehem" ? "2026-11-13" : "2026-11-21");
+      expect(guide.updatedAt).toBe(id === "jerusalemChurches" || id === "jerusalem" ? "2026-11-21" : id === "jerusalemShopping" ? "2026-11-20" : id === "jerusalemDeadSea" ? "2026-11-24" : id === "bethlehem" ? "2026-11-13" : "2026-11-21");
       expect(new Set(guide.sections.map(section => section.id)).size).toBe(guide.sections.length);
       expect(guide.sections.length).toBeGreaterThanOrEqual(id === "jerusalemDeadSea" ? 5 : 6);
       expect(jerusalemConnections[id].length).toBeGreaterThanOrEqual(3);
