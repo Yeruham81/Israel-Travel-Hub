@@ -207,7 +207,7 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
           <a href={hotelAffiliateUrl(booking, pageId, hotel.id)} target="_blank" rel={relFor(booking.isAffiliate)}
              onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-4 py-2.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-             aria-label={`${booking.ctaLabel} for ${hotel.name}`}>
+             aria-label={`Check rooms & rates on ${booking.providerName} for ${hotel.name} (opens in a new tab)`}>
             Check rooms & rates <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
