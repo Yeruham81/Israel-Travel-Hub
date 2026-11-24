@@ -209,6 +209,51 @@ jobs:
         id: types
         run: bun x tsc --noEmit
         continue-on-error: true
+      - name: Adapt only identified route-source assertions to actual linked head modules
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          helper=Path("src/test-utils/read-route-source.ts")
+          helper.parent.mkdir(exist_ok=True)
+          helper.write_text('''import { readFileSync } from "node:fs";
+          import { dirname, resolve } from "node:path";
+
+          /** Inspect the route plus its explicitly imported SEO module, not unrelated files. */
+          export function readRouteSource(file: string): string {
+            const route = readFileSync(file, "utf8");
+            const matches = [...route.matchAll(/await import\\("([^"]*\\/stage5-route-heads\\/[^"]+)"\\)/g)];
+            if (!matches.length) return route;
+            if (matches.length !== 1) throw new Error("Ambiguous route head: " + file);
+            const head = resolve(dirname(file), matches[0]![1]! + ".tsx");
+            return route + "\\n" + readFileSync(head, "utf8");
+          }
+          ''')
+          exact={
+            "src/data/bestTimeIsrael.test.ts": [('readFileSync("src/routes/travel-blog.best-time-to-visit-israel.tsx","utf8")','readRouteSource("src/routes/travel-blog.best-time-to-visit-israel.tsx")')],
+            "src/data/israelFoodExplorer.test.ts": [('readFileSync("src/routes/travel-blog.what-to-eat-in-israel.tsx","utf8")','readRouteSource("src/routes/travel-blog.what-to-eat-in-israel.tsx")')],
+            "src/data/israelHolidayVisitorGuide.test.ts": [('readFileSync("src/routes/travel-blog.calendar-of-events.tsx", "utf8")','readRouteSource("src/routes/travel-blog.calendar-of-events.tsx")')],
+            "src/data/israelItineraries.test.ts": [('expect(file('+chr(96)+'src/routes/travel-blog.israel-itinerary-\x24{id}-days.tsx'+chr(96)+'))','expect(readRouteSource('+chr(96)+'src/routes/travel-blog.israel-itinerary-\x24{id}-days.tsx'+chr(96)+'))')],
+            "src/test/accommodation-paths.test.ts": [('readFileSync("src/routes/accommodation.index.tsx", "utf8")','readRouteSource("src/routes/accommodation.index.tsx")')],
+            "src/test/annunciation-feature.test.tsx": [('readFileSync("src/routes/attractions.basilica-of-the-annunciation.tsx", "utf8")','readRouteSource("src/routes/attractions.basilica-of-the-annunciation.tsx")')],
+            "src/test/haifa-city-guide.test.tsx": [('readFileSync("src/routes/travel-blog.haifa.tsx", "utf8")','readRouteSource("src/routes/travel-blog.haifa.tsx")')],
+            "src/test/home-mobile-performance.test.ts": [('it("provides a head preload for the exact LCP image variant, not every slide", () => {\n    const page = read("src/routes/index.tsx");','it("provides a head preload for the exact LCP image variant, not every slide", () => {\n    const page = readRouteSource("src/routes/index.tsx");')],
+            "src/test/israel-travel-tips-guide.test.tsx": [('readFileSync("src/routes/travel-blog.israel-travel-tips.tsx", "utf8")','readRouteSource("src/routes/travel-blog.israel-travel-tips.tsx")')],
+            "src/test/mount-precipice-feature.test.tsx": [('readFileSync("src/routes/attractions.mount-precipice.tsx", "utf8")','readRouteSource("src/routes/attractions.mount-precipice.tsx")')],
+            "src/test/rosh-hanikra-feature.test.tsx": [('readFileSync("src/routes/attractions.rosh-hanikra.tsx", "utf8")','readRouteSource("src/routes/attractions.rosh-hanikra.tsx")')],
+            "src/test/senior-tours-guide.test.tsx": [('readFileSync("src/routes/travel-blog.israel-tours-for-seniors.tsx","utf8")','readRouteSource("src/routes/travel-blog.israel-tours-for-seniors.tsx")')],
+            "src/test/shore-hub-layout.test.ts": [('readFileSync(resolve(process.cwd(), "src/routes/shore-excursions.index.tsx"), "utf-8")','readRouteSource("src/routes/shore-excursions.index.tsx")')],
+            "src/test/stay-editorial-hero-parity.test.ts": [('readFileSync("src/routes/travel-blog.where-to-stay-in-" + (key === "jerusalem" ? "jerusalem" : "tel-aviv") + ".tsx", "utf8")','readRouteSource("src/routes/travel-blog.where-to-stay-in-" + (key === "jerusalem" ? "jerusalem" : "tel-aviv") + ".tsx")')],
+            "src/test/tel-megiddo-feature.test.tsx": [('readFileSync("src/routes/attractions.tel-megiddo.tsx", "utf8")','readRouteSource("src/routes/attractions.tel-megiddo.tsx")')],
+          }
+          for name,replacements in exact.items():
+              p=Path(name);src=p.read_text()
+              for old,new in replacements:
+                  assert src.count(old)==1,(name,old,src.count(old))
+                  src=src.replace(old,new)
+              p.write_text('import { readRouteSource } from "@/test-utils/read-route-source";\n'+src)
+          print("SOURCE_ASSERTION_ADAPTATIONS",len(exact))
+          PY
+          bun x tsc --noEmit
       - name: Full regression suite for experimental code
         id: regression
         run: bun run test
@@ -300,6 +345,54 @@ jobs:
           fs.writeFileSync("stage5-js-audit/lighthouse-summary.json",JSON.stringify(rows,null,2));
           if(rows.length!==12||rows.some(x=>x.error))process.exitCode=1;
           JS
+      - name: Verify client navigation updates route metadata and keeps interactive content
+        id: navigation
+        run: |
+          for p in 4173 4174; do
+            if ! curl -fsS http://127.0.0.1:$p/ >/dev/null; then
+              if [ "$p" = 4173 ]; then root=/tmp/stage5-baseline-public; else root=.output/public; fi
+              STATIC_ROOT="$root" PORT="$p" nohup python /tmp/stage5-compare-server.py >/tmp/stage5-nav-$p.log 2>&1 &
+            fi
+          done
+          cat > /tmp/stage5fix/navigation.cjs <<'JS'
+          const {chromium}=require("playwright"),fs=require("fs");
+          const paths=["/airport-transfers/","/travel-blog/","/travel-blog/israel-itinerary-3-days/","/travel-blog/israel-itinerary-5-days/","/travel-blog/israel-itinerary-7-days/","/travel-blog/israel-itinerary-10-days/","/accommodation/","/"];
+          (async()=>{const browser=await chromium.launch(),rows=[];
+            try{
+              for(const [mode,port] of [["baseline",4173],["experiment",4174]]){
+                const origin="http://127.0.0.1:"+port;
+                const ctx=await browser.newContext({viewport:{width:1365,height:900}});
+                await ctx.route("**/*",r=>r.request().url().startsWith(origin+"/")?r.continue():r.abort());
+                const page=await ctx.newPage(),errors=[];
+                page.on("pageerror",e=>errors.push(e.message));
+                await page.goto(origin+"/",{waitUntil:"networkidle"});
+                for(const target of paths){
+                  const expected=await ctx.request.get(origin+target);
+                  if(expected.status()!==200)throw Error("Expected document unavailable "+target);
+                  await expected.body();
+                  const canonical="https://saddlebrown-guanaco-454061.hostingersite.com"+target;
+                  // Use an actual internal anchor if visible; otherwise exercise an existing
+                  // anchor in the navigation by DOM click without modifying router internals.
+                  const links=page.locator('a[href="'+target+'"]');
+                  if(!await links.count()){await page.goto(origin+"/travel-blog/",{waitUntil:"networkidle"});}
+                  if(!await links.count()){await page.goto(origin+"/",{waitUntil:"networkidle"});}
+                  if(!await links.count())throw Error("No existing link to "+target+" from "+page.url());
+                  const visible=links.filter({visible:true});
+                  if(await visible.count())await visible.first().click({timeout:10000});
+                  else await links.first().evaluate(el=>el.click());
+                  await page.waitForURL(origin+target,{timeout:30000});
+                  await page.waitForFunction(c=>document.querySelector('link[rel=canonical]')?.href===c,canonical,{timeout:30000});
+                  const row=await page.evaluate(()=>({title:document.title,h1:document.querySelector("h1")?.textContent,canonical:document.querySelector('link[rel=canonical]')?.href,ld:[...document.querySelectorAll('script[type="application/ld+json"]')].map(el=>JSON.parse(el.textContent)),forms:document.querySelectorAll("form").length,overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth}));
+                  if(!row.title||!row.h1||row.overflow>3||errors.length)throw Error(JSON.stringify({mode,target,row,errors}));
+                  rows.push({mode,target,...row});console.log("ROUTE_NAV",JSON.stringify({mode,target,title:row.title,canonical:row.canonical,h1:row.h1,forms:row.forms,schemas:row.ld.length}));
+                }
+                await ctx.close();
+              }
+              for(const p of paths){const a=rows.find(r=>r.mode==="baseline"&&r.target===p),b=rows.find(r=>r.mode==="experiment"&&r.target===p);for(const k of ["title","h1","canonical","ld","forms"])if(JSON.stringify(a?.[k])!==JSON.stringify(b?.[k]))throw Error("Navigation mismatch "+p+" "+k);}
+            }finally{await browser.close();fs.writeFileSync("stage5-js-audit/navigation.json",JSON.stringify(rows,null,2));}
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
+          node /tmp/stage5fix/navigation.cjs
       - name: Require HTML parity, TypeScript and full regression success
         if: always()
         env:
@@ -307,7 +400,8 @@ jobs:
           TYPES: ${{ steps.types.outcome }}
           REGRESSION: ${{ steps.regression.outcome }}
           LIGHTHOUSE: ${{ steps.lighthouse.outcome }}
-        run: test "$PARITY" = success && test "$TYPES" = success && test "$REGRESSION" = success && test "$LIGHTHOUSE" = success
+          NAVIGATION: ${{ steps.navigation.outcome }}
+        run: test "$PARITY" = success && test "$TYPES" = success && test "$REGRESSION" = success && test "$LIGHTHOUSE" = success && test "$NAVIGATION" = success
       - uses: actions/upload-artifact@v4
         if: always()
         with:
