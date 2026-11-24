@@ -100,9 +100,9 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
         return item.to
           ? <Link key={item.title} to={item.to} className={className} data-testid="deadsea-attraction-card">{card}</Link>
           : <a key={item.title} href={item.href} target="_blank" rel="noopener noreferrer" className={className} data-testid="deadsea-attraction-card">{card}<span className="sr-only"> (opens in a new tab)</span></a>;
-      })}}
+      })}
     </div>
-  </section>;
+  </section>
   return <>
     <section id="journey-options" aria-labelledby="journey-options-h" className="mt-10 scroll-mt-28">
       <h2 id="journey-options-h" className="text-3xl">{route.heading}</h2>
