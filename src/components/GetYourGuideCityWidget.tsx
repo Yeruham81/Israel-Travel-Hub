@@ -31,7 +31,7 @@ export function GetYourGuideCityWidget({
     <div className="min-w-0 border-t px-4 pb-4 pt-3">
       <div
         className="mt-3 min-w-0 max-w-full overflow-hidden"
-        aria-label={`GetYourGuide activities in ${config.name}`}
+        role="group" aria-label={`GetYourGuide activities in ${config.name}`}
         data-testid="gyg-third-party-mount"
       >{active && <BookingWidgetFrame scriptUrl={getYourGuideCityWidgetSrc(city, page)} title={`GetYourGuide activities in ${config.name}`} />}</div>
       <p className="mt-3 text-sm">
