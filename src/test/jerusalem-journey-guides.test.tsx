@@ -128,25 +128,25 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.getByRole("heading", { name: /Jerusalem to the Dead Sea: ways to travel/ })).toBeInTheDocument();
     expect(screen.getByRole("table", { name: /Jerusalem to the Dead Sea: ways to travel/ })).toBeInTheDocument();
     expect(screen.getByText(/If you have extra time, consider adding Masada/)).toBeInTheDocument();
-    expect(screen.getByText(/Discover Ein Gedi's desert oasis, waterfalls/)).toBeInTheDocument();
+    expect(screen.getByText(/Explore an oasis and desert trails/)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Qumran" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Qasr al-Yahud" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Where to go for a Dead Sea beach day" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Add a stop to your Dead Sea day" })).toBeInTheDocument();
     expect(container.querySelector("#day-plan")).toBeNull();
     expect(screen.queryByText("Optional stops to add to your Dead Sea day trip")).not.toBeInTheDocument();
-    expect(screen.getByText(/Parking near the central beach is paid/)).toBeInTheDocument();
+    expect(screen.getByText(/Blue-and-white parking near the central beach is paid/)).toBeInTheDocument();
     const beachSection = container.querySelector("#beach");
     expect(beachSection).not.toBeNull();
-    expect(beachSection).toHaveTextContent("Northern beaches such as Kalia are closer to Jerusalem");
+    expect(beachSection).toHaveTextContent("hotel-operated public beaches");
     expect(beachSection).toHaveTextContent("I recommend Ein Bokek");
-    expect(within(beachSection as HTMLElement).getByRole("link", { name: /Kalia Beach — admission and facilities/ }))
-      .toHaveAttribute("href", "https://kaliadeadsea.com/en/kalia-beach-en/");
+    expect(within(beachSection as HTMLElement).getByRole("link", { name: /Tamar Regional Council — hotel-beach equipment rules/ }))
+      .toHaveAttribute("href", "https://www.deadsea.co.il/attractions/the-hotel-beaches/?lang=en/");
     expect(screen.getByRole("heading", { name: "By public bus: Egged 486 and 444" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "By taxi or private driver: direct travel from your hotel" })).toBeInTheDocument();
     expect(screen.getAllByText(/Egged 486/).length).toBeGreaterThanOrEqual(1);
 
-    const drivingPhoto = within(container.querySelector("#driving") as HTMLElement).getByRole("img", { name: /Turquoise Dead Sea water and white salt formations/ });
+    const drivingPhoto = within(container.querySelector("#driving") as HTMLElement).getByRole("img", { name: /Route 90 curving beside the Dead Sea/ });
     const einBokekPhoto = within(container.querySelector("#beach") as HTMLElement).getByRole("img", { name: /Ein Bokek shoreline/ });
     expect(drivingPhoto.getAttribute("src")).not.toBe(einBokekPhoto.getAttribute("src"));
     const mainPhoto = container.querySelector("header figure img");
@@ -155,19 +155,21 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const stopCards = screen.getAllByTestId("deadsea-attraction-card");
     expect(stopCards).toHaveLength(4);
     expect(new Set(stopCards.map(card => within(card).getByRole("img").getAttribute("src"))).size).toBe(4);
-    for (const stopCard of stopCards) {
-      expect(stopCard.tagName).toBe("A");
-      expect(stopCard).toHaveAttribute("href", expect.stringMatching(/^https:\/\//));
+    expect(stopCards.every(card => card.tagName === "A")).toBe(true);
+    for (const href of ["/attractions/masada/", "/attractions/ein-gedi/", "/attractions/qasr-el-yahud/"]) {
+      expect(stopCards.some(card => card.getAttribute("href") === href)).toBe(true);
     }
+    expect(stopCards.find(card => card.getAttribute("href")?.includes("qumran"))?.getAttribute("target")).toBe("_blank");
     const tourSection = container.querySelector("#tours");
     expect(tourSection).not.toBeNull();
     expect(within(tourSection as HTMLElement).queryByTestId("deadsea-moshe-tour")).not.toBeInTheDocument();
     expect(within(tourSection as HTMLElement).queryByRole("link", { name: /Moshe Barak|private Masada/i })).not.toBeInTheDocument();
     const privateSection = container.querySelector("#private");
     expect(privateSection).not.toBeNull();
-    const privateTourLink = within(privateSection as HTMLElement).getByRole("link", { name: "private Masada and Dead Sea tour" });
+    const privateTourLink = within(privateSection as HTMLElement).getByRole("link", { name: "Masada and Dead Sea tours" });
     expect(privateTourLink).toHaveAttribute("href", "/tours/masada-dead-sea/");
-    expect(privateSection).toHaveTextContent("₪2,100 per vehicle");
+    expect(privateSection).toHaveTextContent("I'll reply personally with a quote");
+    expect(privateSection).not.toHaveTextContent("₪2,100");
     expect(tourSection).not.toHaveTextContent("The tours below offer different combinations of sightseeing and beach time.");
     const cards = within(tourSection as HTMLElement).getAllByTestId("deadsea-bookable-tour");
     expect(cards).toHaveLength(6);
@@ -202,7 +204,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(new Set(allTourPhotos).size).toBe(6);
     expect(allTourPhotos.every(photo => !stopCards.some(stop => within(stop).getByRole("img").getAttribute("src") === photo))).toBe(true);
     expect(container.querySelector("#journey-booking")).toBeNull();
-    expect(screen.getAllByRole("note")).toHaveLength(2);
+    expect(screen.queryAllByRole("note")).toHaveLength(0);
     expect(container.querySelector('#beach p a[href="/attractions/dead-sea/"]')).toBeInTheDocument();
     expect(container.querySelector('#driving p a[href="/car-rental/"]')).toBeInTheDocument();
     expect(container.querySelector("#driving")).not.toHaveTextContent("(affiliate link)");
@@ -212,7 +214,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(within(relatedGuides).getByRole("img", { name: /Waterfall tumbling through green vegetation and rocky cliffs in Ein Gedi Nature Reserve/ })).toBeInTheDocument();
     expect(new Set(within(relatedGuides).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
     const nextSteps = screen.getByTestId("deadsea-next-steps");
-    expect(within(nextSteps).getAllByRole("link")).toHaveLength(4);
+    expect(within(nextSteps).getAllByRole("link")).toHaveLength(6);
+    expect(nextSteps.querySelectorAll("li svg")).toHaveLength(6);
     expect(within(nextSteps).getByRole("link", { name: /Israel's Calendar of Events/ }))
       .toHaveAttribute("href", "/travel-blog/calendar-of-events/");
     expect(nextSteps).not.toHaveTextContent("Arriving from Ben Gurion Airport?");
@@ -222,8 +225,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(contact).not.toBeNull();
     expect(sources).not.toBeNull();
     expect(contact!.compareDocumentPosition(sources!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(screen.getByRole("link", { name: /Plan an Ein Gedi visit/ }))
-      .toHaveAttribute("href", "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/");
+    expect(screen.getByRole("link", { name: /Ein Gedi.*Explore an oasis/i }))
+      .toHaveAttribute("href", "/attractions/ein-gedi/");
     const compare = container.querySelector("#at-a-glance")!;
     const bus = container.querySelector("#bus")!;
     const attractions = container.querySelector("#journey-destinations")!;
@@ -250,17 +253,17 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(bus.paragraphs.join(" ")).not.toContain("Line 231 passes through the Bab al-Zaqaq");
     expect(visit.paragraphs[1]).toContain("12:30–14:30");
     expect(weekend.paragraphs.join(" ")).not.toContain("11:00 to 15:00");
-    expect(deadSea.answer).toContain("reserved-seat bus 444");
-    expect(deadSea.sections.find(section => section.id === "beach")?.tip).toContain("I recommend Ein Bokek");
-    expect(deadSea.sections.find(section => section.id === "private")?.paragraphs.join(" ")).toContain("₪2,100");
-    expect(deadSea.sections.find(section => section.id === "driving")?.paragraphs.join(" ")).toContain("Winter rain can trigger flash floods");
-    expect(deadSea.sections.find(section => section.id === "bus")?.paragraphs.join(" ")).toContain("Bus 444 also serves the area");
+    expect(deadSea.answer).toContain("line 444 requires an advance seat reservation");
+    expect(deadSea.sections.find(section => section.id === "beach")?.tip).toBeUndefined();
+    expect(deadSea.sections.find(section => section.id === "private")?.paragraphs.join(" ")).not.toContain("₪2,100");
+    expect(deadSea.sections.find(section => section.id === "driving")?.paragraphs.join(" ")).toContain("Desert rain can cause sudden flash floods");
+    expect(deadSea.sections.find(section => section.id === "bus")?.paragraphs.join(" ")).toContain("Line 444 continues towards Eilat");
   });
 
   it("retains original SEO URLs, updated metadata and real source references", async () => {
     for (const [id, route] of [["bethlehem", BethlehemRoute], ["jerusalemDeadSea", DeadSeaRoute]] as const) {
       const guide = travelGuides[id];
-      expect(guide.updatedAt).toBe("2026-11-13");
+      expect(guide.updatedAt).toBe(id === "jerusalemDeadSea" ? "2026-11-24" : "2026-11-13");
       if (id === "jerusalemDeadSea") {
         expect(guide.faqs).toHaveLength(5);
         expect(guide.faqs.some(faq => faq.q === "Is the public beach at Ein Bokek wheelchair-accessible?")).toBe(true);
