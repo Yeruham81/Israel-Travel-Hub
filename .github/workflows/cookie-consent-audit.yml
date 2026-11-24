@@ -1,0 +1,41 @@
+name: Cookie consent audit
+
+on:
+  push:
+    branches: [codex/global-cookie-consent-20261124]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Inventory optional resources and browser storage
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, shutil, subprocess
+          pattern = r"iframe|<script|createElement.*script|localStorage|sessionStorage|document\.cookie|sendBeacon|captureException|__lovable|gtag|dataLayer|<video|<audio"
+          if shutil.which("rg"):
+              result = subprocess.run(["rg", "-n", "-i", pattern, "src", "public",
+                  "--glob", "*.ts", "--glob", "*.tsx", "--glob", "*.html", "--glob", "*.js",
+                  "--glob", "!**/*.test.*", "--glob", "!src/test/**",
+                  "--glob", "!**/routeTree.gen.ts"], text=True, stdout=subprocess.PIPE)
+              for line in result.stdout.splitlines():
+                  print(line[:500])
+          else:
+              matcher = re.compile(pattern, re.I)
+              for root in ("src", "public"):
+                  for path in pathlib.Path(root).rglob("*"):
+                      if not path.is_file() or path.suffix not in (".ts", ".tsx", ".html", ".js") or "src/test" in str(path) or ".test." in path.name or path.name == "routeTree.gen.ts":
+                          continue
+                      for number, line in enumerate(path.read_text().splitlines(), 1):
+                          if matcher.search(line):
+                              print(f"{path}:{number}:{line[:500]}")
+          PY
