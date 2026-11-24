@@ -1,4 +1,4 @@
-name: Stage 5 post-deployment Lighthouse and release verification
+name: Stage 5 repeated controlled mobile Lighthouse measurements
 on:
   pull_request:
     branches: [main]
@@ -9,12 +9,12 @@ jobs:
   live-lighthouse-after:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: 60
     steps:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - run: npm install --prefix /tmp/stage5live --no-save lighthouse@12
+      - run: npm install --prefix /tmp/stage5live --no-save lighthouse@12.8.2
       - name: Verify merged release is public before measuring
         run: |
           python3 -u - <<'PY'
@@ -58,49 +58,43 @@ jobs:
           assert status==200 and len(data)==43240 and data[:4]==b"RIFF" and data[8:12]==b"WEBP"
           print("LIVE_RESPONSIVE_ASSET",json.dumps({"path":asset,"bytes":len(data),"http":status}))
           PY
-      - name: Sequential live Hostinger Lighthouse sample without accepting optional cookies
+      - name: Repeat mobile measurements with two throttling methods
         run: |
           mkdir -p stage5-live-lighthouse
           node --input-type=module <<'JS'
           import fs from "node:fs";
           import {spawnSync} from "node:child_process";
           const origin="https://saddlebrown-guanaco-454061.hostingersite.com",results=[];
+          const paths=["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"];
+          const baseline=[{"device":"mobile","path":"/","documentStatus":200,"performance":74,"accessibility":96,"lcpMs":5584.507,"cls":0,"tbtMs":3,"transferBytes":1491882},{"device":"mobile","path":"/airport-transfers/","documentStatus":200,"performance":79,"accessibility":100,"lcpMs":5375.4165,"cls":0,"tbtMs":87.00000000000023,"transferBytes":1179152},{"device":"mobile","path":"/travel-blog/","documentStatus":200,"performance":100,"accessibility":100,"lcpMs":1413.243,"cls":0,"tbtMs":18,"transferBytes":1223415},{"device":"mobile","path":"/tours/golan-heights/","documentStatus":200,"performance":98,"accessibility":100,"lcpMs":1844.414,"cls":0,"tbtMs":27.5,"transferBytes":1558577},{"device":"mobile","path":"/accommodation/","documentStatus":200,"performance":76,"accessibility":96,"lcpMs":6343.5715,"cls":0,"tbtMs":8,"transferBytes":1951993},{"device":"mobile","path":"/attractions/old-city-jerusalem/","documentStatus":200,"performance":98,"accessibility":100,"lcpMs":1855.55,"cls":0,"tbtMs":31,"transferBytes":1439659}];
           let stop=false;
-          for(const device of ["mobile","desktop"]){
+          for(const [method,rounds] of [["simulate",3],["devtools",1]]){
             if(stop)break;
-            for(const p of ["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"]){
-              const file="stage5-live-lighthouse/"+device+"-"+(p==="/"?"home":p.replace(/^\/|\/$/g,"").replaceAll("/","_"))+".json";
-              const args=[origin+p,"--only-categories=performance,accessibility","--output=json","--output-path="+file,"--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=35000","--quiet"];
-              if(device==="desktop")args.push("--preset=desktop");
-              const r=spawnSync("/tmp/stage5live/node_modules/.bin/lighthouse",args,{encoding:"utf8",timeout:110000,maxBuffer:2*1024*1024});
-              let row;
-              try{
-                const a=JSON.parse(fs.readFileSync(file,"utf8")),network=a.audits?.["network-requests"]?.details?.items||[];
-                const limited=network.some(n=>n.statusCode===429);
-                if(limited)stop=true;
-                if(a.runtimeError)throw Error(a.runtimeError.message);
-                const first=network.find(n=>n.resourceType==="Document"&&n.url===origin+p);
-                if(!first||first.statusCode!==200||limited)throw Error("Live document unverified or rate limited");
-                row={device,path:p,documentStatus:first.statusCode,performance:Math.round(a.categories.performance.score*100),accessibility:Math.round(a.categories.accessibility.score*100),lcpMs:a.audits["largest-contentful-paint"].numericValue,cls:a.audits["cumulative-layout-shift"].numericValue,tbtMs:a.audits["total-blocking-time"].numericValue,transferBytes:a.audits["total-byte-weight"].numericValue};
-              }catch(e){row={device,path:p,error:String(e).slice(0,300),exit:r.status};if(/429|rate.limit/i.test(row.error))stop=true;}
-              results.push(row);console.log("LIVE_LIGHTHOUSE",JSON.stringify(row));fs.writeFileSync("stage5-live-lighthouse/summary.json",JSON.stringify(results,null,2));
-              if(stop)break;
-              await new Promise(r=>setTimeout(r,8000));
+            for(let round=1;round<=rounds&&!stop;round++){
+              for(const p of paths){
+                const file="stage5-live-lighthouse/"+method+"-"+round+"-"+(p==="/"?"home":p.replace(/^\/+|\/+$/g,"").replaceAll("/","_"))+".json";
+                const args=[origin+p,"--throttling-method="+method,"--only-categories=performance,accessibility","--output=json","--output-path="+file,"--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=35000","--quiet"];
+                const r=spawnSync("/tmp/stage5live/node_modules/.bin/lighthouse",args,{encoding:"utf8",timeout:125000,maxBuffer:2*1024*1024});
+                let row;
+                try{
+                  const a=JSON.parse(fs.readFileSync(file,"utf8")),u=a.audits,net=u["network-requests"].details.items,m=u.metrics.details.items[0];
+                  if(net.some(n=>n.statusCode===429)){stop=true;throw Error("429 rate limit; stop");}
+                  if(a.runtimeError)throw Error(a.runtimeError.message);
+                  const doc=net.find(n=>n.resourceType==="Document"&&n.url===origin+p);
+                  if(!doc||doc.statusCode!==200)throw Error("Document not verified");
+                  row={method,round,path:p,performance:Math.round(a.categories.performance.score*100),accessibility:Math.round(a.categories.accessibility.score*100),lcpMs:u["largest-contentful-paint"].numericValue,fcpMs:u["first-contentful-paint"].numericValue,observedLcp:m.observedLargestContentfulPaint,observedFcp:m.observedFirstContentfulPaint,cls:u["cumulative-layout-shift"].numericValue,tbtMs:u["total-blocking-time"].numericValue,bytes:u["total-byte-weight"].numericValue,scriptBytes:net.filter(x=>x.resourceType==="Script").reduce((s,x)=>s+x.transferSize,0),requests:net.length,scriptRequests:net.filter(x=>x.resourceType==="Script").length,benchmark:a.environment.benchmarkIndex,rtt:u["network-rtt"].numericValue,serverLatency:u["network-server-latency"].numericValue,version:a.lighthouseVersion,throttling:a.configSettings.throttling,accessibilityFailures:a.categories.accessibility.auditRefs.filter(x=>u[x.id]?.score===0).map(x=>({id:x.id,nodes:u[x.id].details?.items?.map(n=>n.node?.snippet).filter(Boolean)}))};
+                }catch(e){row={method,round,path:p,error:String(e).slice(0,300),exit:r.status};if(/429|rate.limit/i.test(row.error))stop=true;}
+                results.push(row);console.log("REPEAT_MOBILE",JSON.stringify(row));fs.writeFileSync("stage5-live-lighthouse/repeated-summary.json",JSON.stringify(results,null,2));
+                if(stop)break;
+                await new Promise(r=>setTimeout(r,8000));
+              }
             }
           }
-          if(results.some(x=>x.error)||results.length!==12)process.exitCode=1;
-          JS
-      - name: Compare with original live measurements
-        if: always()
-        run: |
-          node --input-type=module <<'JS'
-          import fs from "node:fs";
-          const before=[{"device":"mobile","path":"/","documentStatus":200,"performance":74,"accessibility":96,"lcpMs":5584.507,"cls":0,"tbtMs":3,"transferBytes":1491882},{"device":"mobile","path":"/airport-transfers/","documentStatus":200,"performance":79,"accessibility":100,"lcpMs":5375.4165,"cls":0,"tbtMs":87.00000000000023,"transferBytes":1179152},{"device":"mobile","path":"/travel-blog/","documentStatus":200,"performance":100,"accessibility":100,"lcpMs":1413.243,"cls":0,"tbtMs":18,"transferBytes":1223415},{"device":"mobile","path":"/tours/golan-heights/","documentStatus":200,"performance":98,"accessibility":100,"lcpMs":1844.414,"cls":0,"tbtMs":27.5,"transferBytes":1558577},{"device":"mobile","path":"/accommodation/","documentStatus":200,"performance":76,"accessibility":96,"lcpMs":6343.5715,"cls":0,"tbtMs":8,"transferBytes":1951993},{"device":"mobile","path":"/attractions/old-city-jerusalem/","documentStatus":200,"performance":98,"accessibility":100,"lcpMs":1855.55,"cls":0,"tbtMs":31,"transferBytes":1439659},{"device":"desktop","path":"/","documentStatus":200,"performance":96,"accessibility":96,"lcpMs":1431.805,"cls":0.007563068249988136,"tbtMs":0,"transferBytes":3331975},{"device":"desktop","path":"/airport-transfers/","documentStatus":200,"performance":98,"accessibility":100,"lcpMs":1099.416,"cls":0.00885408698836889,"tbtMs":0,"transferBytes":1212073},{"device":"desktop","path":"/travel-blog/","documentStatus":200,"performance":82,"accessibility":100,"lcpMs":991.663,"cls":0.3345350292769945,"tbtMs":0,"transferBytes":1963006},{"device":"desktop","path":"/tours/golan-heights/","documentStatus":200,"performance":100,"accessibility":100,"lcpMs":421.612,"cls":0.05425250739945855,"tbtMs":0,"transferBytes":4222376},{"device":"desktop","path":"/accommodation/","documentStatus":200,"performance":96,"accessibility":96,"lcpMs":1392.69,"cls":0.01595385370247506,"tbtMs":0,"transferBytes":1951931},{"device":"desktop","path":"/attractions/old-city-jerusalem/","documentStatus":200,"performance":94,"accessibility":100,"lcpMs":464.314,"cls":0.1510817718886534,"tbtMs":0,"transferBytes":1800282}];
-          const after=fs.existsSync("stage5-live-lighthouse/summary.json")?JSON.parse(fs.readFileSync("stage5-live-lighthouse/summary.json","utf8")):[];
-          const comparison=after.filter(x=>!x.error).map(a=>{const b=before.find(x=>x.device===a.device&&x.path===a.path);return {device:a.device,path:a.path,before:b,after:a,delta:{performance:a.performance-b.performance,accessibility:a.accessibility-b.accessibility,lcpMs:Math.round(a.lcpMs-b.lcpMs),cls:a.cls-b.cls,transferBytes:a.transferBytes-b.transferBytes}}});
-          fs.mkdirSync("stage5-live-lighthouse",{recursive:true});
-          fs.writeFileSync("stage5-live-lighthouse/comparison.json",JSON.stringify(comparison,null,2));
-          for(const c of comparison)console.log("LIVE_COMPARISON",JSON.stringify(c));
+          const median=v=>{const s=[...v].sort((a,b)=>a-b);return s.length?s[Math.floor(s.length/2)]:null};
+          const comparison=paths.map(path=>{const rows=results.filter(x=>x.path===path&&x.method==="simulate"&&!x.error),direct=results.find(x=>x.path===path&&x.method==="devtools"&&!x.error);const med=Object.fromEntries(["performance","accessibility","lcpMs","fcpMs","observedLcp","observedFcp","cls","tbtMs","bytes","scriptBytes","requests","scriptRequests","benchmark","rtt"].map(k=>[k,median(rows.map(x=>x[k]))]));return {path,before:baseline.find(x=>x.path===path),count:rows.length,median:med,range:{score:rows.map(x=>x.performance),lcp:rows.map(x=>x.lcpMs)},devtools:direct}});
+          fs.writeFileSync("stage5-live-lighthouse/repeated-comparison.json",JSON.stringify(comparison,null,2));
+          for(const row of comparison)console.log("REPEAT_COMPARISON",JSON.stringify(row));
+          if(results.length!==24||results.some(x=>x.error))process.exitCode=1;
           JS
       - uses: actions/upload-artifact@v4
         if: always()
