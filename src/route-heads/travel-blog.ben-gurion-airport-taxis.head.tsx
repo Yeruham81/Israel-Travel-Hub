@@ -1,0 +1,3 @@
+import { TravelGuidePage, travelGuideMeta } from "@/components/TravelGuide";
+
+export const routeHead = () => travelGuideMeta("airportTaxis");

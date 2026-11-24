@@ -40,6 +40,6 @@ export function seaOfGalileeMeta() {
 }
 
 export const Route = createFileRoute("/attractions/sea-of-galilee")({
-  head: seaOfGalileeMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.sea-of-galilee.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: SeaOfGalileeAttractionPage,
 });

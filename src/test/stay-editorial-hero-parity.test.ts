@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { stayEditorialHeroPhotos } from "@/data/stayEditorialHeroPhotos";
@@ -17,7 +18,7 @@ describe("Where to Stay card and page hero parity", () => {
     expect(guideHeroPhotoForPath(path)).toEqual(hero);
     const page = readFileSync("src/components/CityNeighborhoodEditorial.tsx", "utf8");
     expect(page).toContain("const hero = stayEditorialHeroPhotos[cityId]");
-    const route = readFileSync("src/routes/travel-blog.where-to-stay-in-" + (key === "jerusalem" ? "jerusalem" : "tel-aviv") + ".tsx", "utf8");
+    const route = readRouteSource("src/routes/travel-blog.where-to-stay-in-" + (key === "jerusalem" ? "jerusalem" : "tel-aviv") + ".tsx");
     expect(route).toContain("hotelEditorialMeta(g,");
     expect(route).toContain("stayEditorialHeroPhotos." + key + ".src");
   });

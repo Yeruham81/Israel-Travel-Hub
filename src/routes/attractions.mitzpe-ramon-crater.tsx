@@ -41,6 +41,6 @@ export function ramonCraterMeta() {
 }
 
 export const Route = createFileRoute("/attractions/mitzpe-ramon-crater")({
-  head: ramonCraterMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.mitzpe-ramon-crater.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: RamonCraterAttractionPage,
 });

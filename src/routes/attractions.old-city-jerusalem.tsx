@@ -41,6 +41,6 @@ export function oldCityJerusalemMeta() {
 }
 
 export const Route = createFileRoute("/attractions/old-city-jerusalem")({
-  head: oldCityJerusalemMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.old-city-jerusalem.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: OldCityJerusalemAttractionPage,
 });

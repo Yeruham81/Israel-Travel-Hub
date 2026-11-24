@@ -41,6 +41,6 @@ export function mountZionMeta() {
 }
 
 export const Route = createFileRoute("/attractions/mount-zion")({
-  head: mountZionMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.mount-zion.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: MountZionAttractionPage,
 });

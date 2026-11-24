@@ -4,7 +4,8 @@ import { BookOpen, CalendarDays, MapPinned, Smartphone, Sun, TrainFront } from "
 import { GuideCard, GuidePhotoCredit } from "@/components/GuideCard";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { HubHeader } from "@/components/Guide";
-import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, type GuideTopicId } from "@/data/travelGuides";
+
+import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, type GuideTopicId } from "@/data/generated/guide-directory";
 import { pageMeta } from "@/lib/site";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 import { travelGuidePaths } from "@/data/travel-guide-paths";
@@ -49,7 +50,7 @@ const guideFilterLabels: Record<GuideTopicId, string> = {
 
 export const Route = createFileRoute("/travel-blog/")({
   validateSearch: (search: Record<string, unknown>): { topic?: GuideTopicId } => isGuideTopic(search["topic"]) ? { topic: search["topic"] } : {},
-  head: () => pageMeta({ title: "Israel travel guides: transport, destinations and trip planning", description: "Browse guides to Israel's airport arrivals, taxis, public transport, hotel areas, Jerusalem, the Dead Sea, attractions and day trips.", path: "/travel-blog/", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/travel-blog/" }] }),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/travel-blog.index.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: Guides,
 });
 

@@ -4,18 +4,6 @@ import { CAR_RENTAL_UPDATED, carRentalTitle, carRentalDescription, carRentalHero
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/car-rental")({
-  head: () => {
-    const head = pageMeta({ title: carRentalTitle, description: carRentalDescription, path: "/car-rental/",
-      image: carRentalHero.src, imageAlt: carRentalHero.alt,
-      crumbs: [{ name: "Home", path: "/" }, { name: "Car rental", path: "/car-rental/" }],
-    });
-    return { ...head, scripts: [...head.scripts, jsonLd({
-      "@context": "https://schema.org", "@type": "Article", headline: carRentalTitle,
-      description: carRentalDescription, dateModified: CAR_RENTAL_UPDATED,
-      mainEntityOfPage: `${CANONICAL_ORIGIN}/car-rental/`,
-      image: new URL(carRentalHero.src, CANONICAL_ORIGIN).href,
-      author: { "@type": "Person", name: "Moshe Barak", url: `${CANONICAL_ORIGIN}/about-me/` },
-    })] };
-  },
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/car-rental.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: CarRentalGuide,
 });

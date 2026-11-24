@@ -5,6 +5,6 @@ import { hotelSubguideMeta } from "@/lib/landing-schema";
 const guide = hotelCategoryGuides.find(g => g.path === "/accommodation/haifa/family/")!;
 const destination = haifaStayGuide;
 export const Route = createFileRoute("/accommodation/haifa/family")({
- head: () => hotelSubguideMeta(guide, destination, guide.shortTitle, guide.photo.src),
+ head: async (ctx) => { const { routeHead } = await import("../route-heads/accommodation.haifa.family.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
  component: () => <HotelCategoryPage guide={guide} destination={destination} />,
 });

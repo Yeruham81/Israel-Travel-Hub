@@ -6,6 +6,6 @@ import { hotelEditorialMeta } from "@/lib/hotel-editorial-meta";
 
 const g = cityStayGuides.jerusalem;
 export const Route = createFileRoute("/travel-blog/where-to-stay-in-jerusalem")({
- head: () => hotelEditorialMeta(g, "jerusalem", stayEditorialHeroPhotos.jerusalem.src),
+ head: async (ctx) => { const { routeHead } = await import("../route-heads/travel-blog.where-to-stay-in-jerusalem.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
  component: () => <CityNeighborhoodEditorial guide={g} />,
 });

@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { mountPrecipiceDestinationContent as content } from "@/components/MountPrecipiceAttractionPage";
@@ -9,7 +10,7 @@ import { publicSources } from "@/data/registry";
 
 describe("Mount Precipice attraction guide", () => {
   it("uses the shared destination page with synchronized metadata and a single hub card", () => {
-    const route = readFileSync("src/routes/attractions.mount-precipice.tsx", "utf8");
+    const route = readRouteSource("src/routes/attractions.mount-precipice.tsx");
     const shell = readFileSync("src/components/AttractionDestinationPage.tsx", "utf8");
     expect(route).toContain("component: MountPrecipiceAttractionPage");
     expect(route).toContain('travelGuideMeta("precipice")');

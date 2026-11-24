@@ -41,6 +41,6 @@ export function haifaMeta() {
 }
 
 export const Route = createFileRoute("/attractions/haifa")({
-  head: haifaMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.haifa.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: HaifaAttractionPage,
 });

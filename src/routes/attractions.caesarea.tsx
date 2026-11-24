@@ -42,6 +42,6 @@ export function caesareaMeta() {
 }
 
 export const Route = createFileRoute("/attractions/caesarea")({
-  head: caesareaMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.caesarea.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: CaesareaAttractionPage,
 });

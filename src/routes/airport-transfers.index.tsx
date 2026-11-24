@@ -16,7 +16,7 @@ import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { IconTripPlanningLinks } from "@/components/IconTripPlanningLinks";
 import { GuidePhotoCredit } from "@/components/GuideCard";
 import { AIRPORT_TRANSFER_HUB_UPDATED_DATE, airportDestinationCards, airportHubPhotoSrc, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
-import { travelGuides } from "@/data/travelGuides";
+import { travelGuidePhotos, travelGuideCardPhotos } from "@/data/generated/guide-directory";
 import { travelGuidePaths } from "@/data/travel-guide-paths";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { parseAirportTransferSearch } from "@/lib/transfer-quote";
@@ -38,12 +38,12 @@ const comparisonGuides = [
 ] as const;
 
 const planningLinks = [
-  { title: "Ben Gurion arrival tips", description: "Passport control, baggage claim, customs and meeting your driver.", to: travelGuidePaths.arrival, photo: travelGuides.arrival.cardPhoto ?? travelGuides.arrival.photo, thumb: guideArrivalThumb },
+  { title: "Ben Gurion arrival tips", description: "Passport control, baggage claim, customs and meeting your driver.", to: travelGuidePaths.arrival, photo: travelGuideCardPhotos.arrival, thumb: guideArrivalThumb },
   { title: "Official airport taxis", description: "Airport taxi queues, ride codes and regulated metered fares.", to: travelGuidePaths.airportTaxis, photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Airport taxi service sign at Ben Gurion Airport" }, thumb: guideAirportTaxisThumb },
-  { title: "Taxis in Israel", description: "Taxi apps, fares, receipts and paying for local rides.", to: travelGuidePaths.taxis, photo: travelGuides.taxis.cardPhoto ?? travelGuides.taxis.photo, thumb: guideTaxisThumb },
-  { title: "Getting around Israel", description: "Intercity trains, buses and travel between destinations.", to: travelGuidePaths.israel, photo: travelGuides.israel.cardPhoto ?? travelGuides.israel.photo, thumb: guideIsraelThumb },
-  { title: "Getting around Tel Aviv", description: "Light rail, city buses and weekend travel options.", to: travelGuidePaths.telAviv, photo: travelGuides.telAviv.cardPhoto ?? travelGuides.telAviv.photo, thumb: guideTelAvivThumb },
-  { title: "Sherut in Israel", description: "How shared taxis work and where they operate.", to: travelGuidePaths.sherut, photo: travelGuides.sherut.cardPhoto ?? travelGuides.sherut.photo, thumb: guideSherutThumb },
+  { title: "Taxis in Israel", description: "Taxi apps, fares, receipts and paying for local rides.", to: travelGuidePaths.taxis, photo: travelGuideCardPhotos.taxis, thumb: guideTaxisThumb },
+  { title: "Getting around Israel", description: "Intercity trains, buses and travel between destinations.", to: travelGuidePaths.israel, photo: travelGuideCardPhotos.israel, thumb: guideIsraelThumb },
+  { title: "Getting around Tel Aviv", description: "Light rail, city buses and weekend travel options.", to: travelGuidePaths.telAviv, photo: travelGuideCardPhotos.telAviv, thumb: guideTelAvivThumb },
+  { title: "Sherut in Israel", description: "How shared taxis work and where they operate.", to: travelGuidePaths.sherut, photo: travelGuideCardPhotos.sherut, thumb: guideSherutThumb },
 ] as const;
 
 // General trip-planning ideas complement the airport-specific guides above.
@@ -58,26 +58,7 @@ const tripPlanningLinks = [
 
 export const Route = createFileRoute("/airport-transfers/")({
   validateSearch: parseAirportTransferSearch,
-  head: () => {
-    const head = pageMeta({
-    title: "Ben Gurion Airport Transfers: Private Pickup & Drop-Off",
-    description: "Arrange private airport transfers to or from Ben Gurion (TLV), including Jerusalem, Tel Aviv, Haifa and the Dead Sea. See pickup fares and request a quote.",
-    path: "/airport-transfers/",
-    image: airportTransferPhotos["other"]!.src,
-    imageAlt: airportTransferPhotos["other"]!.alt,
-    crumbs: [{ name: "Home", path: "/" }, { name: "Airport transfers", path: "/airport-transfers/" }],
-    });
-    return { ...head, scripts: [...head.scripts, jsonLd({
-      "@context": "https://schema.org", "@type": "Service",
-      "@id": CANONICAL_ORIGIN + "/airport-transfers/#service",
-      name: "Private Ben Gurion Airport transfers",
-      description: "Private door-to-door pickups and drop-offs between Ben Gurion Airport and destinations in Israel.",
-      serviceType: "Private airport transfer",
-      provider: { "@type": "Person", name: "Moshe Barak", url: CANONICAL_ORIGIN + "/about-me/" },
-      areaServed: { "@type": "Country", name: "Israel" },
-      url: CANONICAL_ORIGIN + "/airport-transfers/",
-    })] };
-  },
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/airport-transfers.index.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: Airport,
 });
 
@@ -91,10 +72,10 @@ function Airport() {
   };
   const creditedPhotos = [
     ...Object.values(airportTransferPhotos),
-    travelGuides.arrival.photo,
-    travelGuides.israel.photo,
-    travelGuides.telAviv.photo,
-    travelGuides.sherut.cardPhoto ?? travelGuides.sherut.photo,
+    travelGuidePhotos.arrival,
+    travelGuidePhotos.israel,
+    travelGuidePhotos.telAviv,
+    travelGuideCardPhotos.sherut,
   ].filter(hasPublicPhotoCredit);
   return <main className="pb-12">
     <HubHeader

@@ -4,6 +4,6 @@ import { tiberiasStayGuide } from "@/data/content";
 import { hotelGuideMeta } from "@/lib/landing-schema";
 const g = tiberiasStayGuide;
 export const Route = createFileRoute("/accommodation/tiberias/")({
- head: () => hotelGuideMeta(g, g.name, g.photo.src),
+ head: async (ctx) => { const { routeHead } = await import("../route-heads/accommodation.tiberias.index.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
  component: () => <HotelDestinationPage guide={g} />,
 });

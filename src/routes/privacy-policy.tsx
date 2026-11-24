@@ -4,7 +4,7 @@ import { LegalPage, legalPageMeta, type LegalSection } from "@/components/LegalP
 import { airportTransferContact } from "@/data/registry";
 
 export const Route = createFileRoute("/privacy-policy")({
-  head: () => legalPageMeta("Privacy Policy", "/privacy-policy/", "How Moshe Barak handles travel enquiries, website data, cookies, analytics, advertising, external providers and payments, and how to contact him about your privacy."),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/privacy-policy.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: PrivacyPolicy,
 });
 

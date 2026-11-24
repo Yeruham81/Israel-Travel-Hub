@@ -4,7 +4,7 @@ import { parseTourSearch } from "@/lib/tours";
 
 export const Route = createFileRoute("/tours/caesarea-haifa-acre")({
   validateSearch: parseTourSearch,
-  head: () => tourCategoryMeta("northern-coast"),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/tours.caesarea-haifa-acre.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: CategoryRoute,
 });
 

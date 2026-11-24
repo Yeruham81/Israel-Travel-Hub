@@ -47,6 +47,6 @@ export function jaffaMeta() {
 }
 
 export const Route = createFileRoute("/attractions/jaffa")({
-  head: jaffaMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.jaffa.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: JaffaAttractionPage,
 });

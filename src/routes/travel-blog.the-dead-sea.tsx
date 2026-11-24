@@ -12,9 +12,6 @@ function LegacyDeadSeaRedirect() {
   </main>;
 }
 export const Route = createFileRoute("/travel-blog/the-dead-sea")({
-  head: () => {
-    const current = deadSeaMeta();
-    return { ...current, meta: [...current.meta, { name: "robots", content: "noindex,follow" }] };
-  },
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/travel-blog.the-dead-sea.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: LegacyDeadSeaRedirect,
 });

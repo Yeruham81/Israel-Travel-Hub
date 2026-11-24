@@ -48,41 +48,7 @@ const practicalGuides = [
 ] as const;
 
 export const Route = createFileRoute("/shore-excursions/")({
-  head: () => {
-    const meta = pageMeta({
-      title: "Israel shore excursions from Ashdod & Haifa cruise ports",
-      description: shoreHubDescription,
-      path: "/shore-excursions/",
-      crumbs: [...crumbs],
-      image: heroPhoto.src,
-      imageAlt: heroPhoto.alt,
-    });
-    return {
-      ...meta,
-      scripts: [...meta.scripts, jsonLd({
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        name: shoreHubTitle,
-        description: shoreHubDescription,
-        url: CANONICAL_ORIGIN + "/shore-excursions/",
-        inLanguage: "en",
-        dateModified: SHORE_EXCURSION_UPDATED_DATE,
-        author: authorLd(),
-        publisher: { "@type": "Organization", name: SITE_NAME },
-        image: new URL(heroPhoto.src, CANONICAL_ORIGIN).href,
-        mainEntity: {
-          "@type": "ItemList",
-          name: "Israel cruise-port excursion guides",
-          itemListElement: portIds.map((id, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            item: { "@type": "WebPage", name: getShorePort(id).title, url: CANONICAL_ORIGIN + shorePorts[id].path },
-          })),
-        },
-        citation: publicSources(shoreHubSourceIds).map(source => source.url),
-      })],
-    };
-  },
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/shore-excursions.index.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: Shore,
 });
 

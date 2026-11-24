@@ -13,12 +13,6 @@ function LegacySeaOfGalileeAlias() {
   </main>;
 }
 export const Route = createFileRoute("/travel-blog/sea-of-galilee")({
-  head: () => {
-    const current = seaOfGalileeMeta();
-    return {
-      ...current,
-      meta: [...current.meta.filter(item => !("name" in item && item.name === "robots")), { name: "robots", content: "noindex,follow" }],
-    };
-  },
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/travel-blog.sea-of-galilee.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: LegacySeaOfGalileeAlias,
 });

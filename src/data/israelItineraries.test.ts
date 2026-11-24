@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { QueryClient } from "@tanstack/react-query";
@@ -24,7 +25,7 @@ describe("migrated Israel itineraries", () => {
       const guide = itineraries[id];
       expect(guide.days).toBe(Number(id));
       expect(guide.path).toBe(`/travel-blog/israel-itinerary-${id}-days/`);
-      expect(file(`src/routes/travel-blog.israel-itinerary-${id}-days.tsx`)).toContain(`itineraryMeta("${id}")`);
+      expect(readRouteSource(`src/routes/travel-blog.israel-itinerary-${id}-days.tsx`)).toContain(`itineraryMeta("${id}")`);
       expect(guide.daysPlan).toHaveLength(guide.days);
       expect(new Set(guide.daysPlan.map(d => d.name)).size).toBe(guide.days);
       expect(guide.description.length).toBeGreaterThan(95);

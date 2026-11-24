@@ -2,6 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AirportRoutePage, airportRouteMeta } from "@/components/AirportRoutePage";
 
 export const Route = createFileRoute("/airport-transfers/haifa")({
-  head: () => airportRouteMeta("haifa"),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/airport-transfers.haifa.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: () => <AirportRoutePage id="haifa" />,
 });

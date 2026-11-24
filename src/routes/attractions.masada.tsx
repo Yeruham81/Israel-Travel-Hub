@@ -41,6 +41,6 @@ export function masadaMeta() {
 }
 
 export const Route = createFileRoute("/attractions/masada")({
-  head: masadaMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.masada.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: MasadaAttractionPage,
 });

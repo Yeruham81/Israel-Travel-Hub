@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { seniorDayTrips, seniorTransportPreferences, seniorAccessQuestions, seniorFaqs, seniorHero, seniorSites, seniorPlanning, seniorPath, seniorUpdatedAt } from "@/data/seniorToursGuide";
@@ -13,7 +14,7 @@ describe("Israel tours for seniors: private transport guide",()=>{
   expect(seniorPath).toBe("/travel-blog/israel-tours-for-seniors/");
   expect(travelGuidePaths.seniorTours).toBe(seniorPath);
   expect(existsSync("src/routes/travel-blog.israel-tours-for-seniors.tsx")).toBe(true);
-  expect(readFileSync("src/routes/travel-blog.israel-tours-for-seniors.tsx","utf8")).toContain('travelGuideMeta("seniorTours")');
+  expect(readRouteSource("src/routes/travel-blog.israel-tours-for-seniors.tsx")).toContain('travelGuideMeta("seniorTours")');
   expect(guideDirectory.filter(entry=>entry.to===seniorPath)).toHaveLength(1);
   expect(travelGuides.seniorTours.title).toMatch(/^Israel Tours for Seniors/);
   expect(travelGuides.seniorTours.updatedAt).toBe(seniorUpdatedAt);

@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -38,7 +39,7 @@ describe("Accommodation URL and deleted Destinations directory", () => {
 
   it("has one live Accommodation hub in the route tree", () => {
     const routeTree = readFileSync("src/routeTree.gen.ts", "utf8");
-    const source = readFileSync("src/routes/accommodation.index.tsx", "utf8");
+    const source = readRouteSource("src/routes/accommodation.index.tsx");
     expect(routeTree).toMatch(/Accommodation(?:Index)?Route/);
     expect(routeTree).not.toMatch(/\bHotelsRoute\b/);
     expect(routeTree).not.toContain("DestinationsRoute");

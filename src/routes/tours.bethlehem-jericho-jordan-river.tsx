@@ -4,7 +4,7 @@ import { parseTourSearch } from "@/lib/tours";
 
 export const Route = createFileRoute("/tours/bethlehem-jericho-jordan-river")({
   validateSearch: parseTourSearch,
-  head: () => tourCategoryMeta("bethlehem-jericho"),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/tours.bethlehem-jericho-jordan-river.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: CategoryRoute,
 });
 

@@ -4,7 +4,7 @@ import { parseTourSearch } from "@/lib/tours";
 
 export const Route = createFileRoute("/tours/golan-heights")({
   validateSearch: parseTourSearch,
-  head: () => tourCategoryMeta("golan-heights"),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/tours.golan-heights.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: CategoryRoute,
 });
 
