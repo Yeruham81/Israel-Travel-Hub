@@ -40,6 +40,6 @@ export function DeadSeaTourOptions({ selectedIds, pageId = "jslm_dead_sea" }: { 
         />;
       })}
     </div>
-    <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">These tours are offered by independent third-party operators, who determine their terms and arrangements at their sole discretion. Tour details, prices and availability may change at any time. Please review the full itinerary, inclusions, cancellation policy and booking terms carefully before making a reservation.</p>
+    <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">These tours are operated by independent providers and booked through their own platforms. Tour details, availability, prices and booking conditions are set by the operators and may change. Before booking, check the departure date and location, itinerary, guiding, walking requirements, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider.</p>
   </>;
 }
