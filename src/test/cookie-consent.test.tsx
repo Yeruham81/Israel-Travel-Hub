@@ -8,6 +8,24 @@ import { recordOutboundClick, readOutboundClicks } from "@/lib/outbound";
 beforeEach(() => { saveCookieConsent(NECESSARY_ONLY); localStorage.clear(); window.dispatchEvent(new StorageEvent("storage", { key: COOKIE_CONSENT_KEY })); });
 afterEach(() => { cleanup(); vi.restoreAllMocks(); localStorage.clear(); });
 describe("whole-site consent", () => {
+  it("migrates a former Accept all without inferring advertising consent or extending expiry", () => {
+    const expiresAt = Date.now() + 3600000;
+    const previous = JSON.stringify({ version: 1, categories: { analytics: true, external: true, marketing: true }, expiresAt });
+    localStorage.setItem(COOKIE_CONSENT_KEY, previous);
+    expect(readStoredConsent(localStorage)).toEqual({ version: 2, expiresAt, categories: { ...ALL_CATEGORIES, advertising: false } });
+    expect(localStorage.getItem(COOKIE_CONSENT_KEY)).toBe(previous);
+  });
+  it("does not accept a new-schema record without an explicit advertising choice", () => {
+    localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ version: 2, categories: { analytics: true, external: true, marketing: true }, expiresAt: Date.now() + 3600000 }));
+    expect(readStoredConsent(localStorage)).toBeNull();
+  });
+  it("keeps advertising separate from analytics, maps and booking widgets", () => {
+    const { container } = render(<><ConsentIframe src="https://maps.google.com/maps?output=embed" title="Map" /><BookingWidgetFrame title="Hotel search" scriptUrl="https://tpwgt.com/content?campaign_id=84" /></>);
+    act(() => saveCookieConsent({ ...NECESSARY_ONLY, advertising: true }));
+    expect(readStoredConsent(localStorage)?.categories).toEqual({ ...NECESSARY_ONLY, advertising: true });
+    expect(container.querySelector('iframe[src],iframe[srcdoc]')).toBeNull();
+    expect(hasCookieConsent("analytics")).toBe(false);
+  });
   it("fails closed for absent, legacy, malformed, expired and invalid category records", () => {
     for (const value of [null, "oops", { choice: "granted", expiresAt: Date.now() + 10000 }, { version: 1, categories: ALL_CATEGORIES, expiresAt: Date.now() - 1 }, { version: 1, categories: { analytics: true }, expiresAt: Date.now() + 10000 }, { version: 1, categories: ALL_CATEGORIES, expiresAt: Date.now() + CONSENT_LIFETIME * 2 }]) {
       localStorage.setItem(COOKIE_CONSENT_KEY, typeof value === "string" ? value : JSON.stringify(value));
@@ -25,11 +43,11 @@ describe("whole-site consent", () => {
   });
   it("enables only the selected category and destroys its browsing context on withdrawal", () => {
     const { container } = render(<><ConsentIframe src="https://maps.google.com/maps?output=embed" title="Map" /><BookingWidgetFrame title="Hotel search" scriptUrl="https://tpwgt.com/content?campaign_id=84" /></>);
-    act(() => saveCookieConsent({ analytics: false, external: true, marketing: false }));
+    act(() => saveCookieConsent({ ...NECESSARY_ONLY, external: true }));
     const activeMap = container.querySelector('iframe[src]')!;
     expect(activeMap).toHaveAttribute("title", "Map");
     expect(container.querySelector('iframe[srcdoc]')).toBeNull();
-    act(() => saveCookieConsent({ analytics: false, external: false, marketing: true }));
+    act(() => saveCookieConsent({ ...NECESSARY_ONLY, marketing: true }));
     expect(activeMap.isConnected).toBe(false);
     expect(container.querySelector('iframe[src]')).toBeNull();
     const widget = container.querySelector('iframe[srcdoc]')!;

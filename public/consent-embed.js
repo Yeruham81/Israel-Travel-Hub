@@ -9,8 +9,10 @@
   function stored() {
     try {
       const value = JSON.parse(localStorage.getItem(key) || "null");
-      return value?.version === 1 && Number.isFinite(value.expiresAt) && value.expiresAt > Date.now() && value.expiresAt <= Date.now() + 180 * 86400000 + 60000
+      return [1, 2].includes(value?.version) && Number.isFinite(value.expiresAt) && value.expiresAt > Date.now() && value.expiresAt <= Date.now() + 180 * 86400000 + 60000
         && ["analytics", "external", "marketing"].every(key => typeof value.categories?.[key] === "boolean")
+        && (value.version === 1 || typeof value.categories.advertising === "boolean")
+        && ["external", "marketing"].includes(category)
         && value.categories?.[category] === true ? value : null;
     } catch { return null; }
   }
@@ -21,7 +23,7 @@
     if (started && !stored()) location.reload();
   }
   async function start() {
-    if (started) return;
+    if (started || !["external", "marketing"].includes(category)) return;
     started = true;
     message.remove();
     for (const link of document.querySelectorAll("link[data-consent-href]")) link.href = link.dataset.consentHref;

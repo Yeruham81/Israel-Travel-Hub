@@ -1,5 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ANALYTICS_CONSENT_KEY, GA4_MEASUREMENT_ID, createAnalytics } from "@/lib/analytics";
+import { NECESSARY_ONLY } from "@/lib/cookie-consent";
+import { GOOGLE_AD_CONSENT_DENIED } from "@/lib/advertising-consent";
 
 const production = { origin: "https://www.israel-taxi.com", indexable: true };
 type Browser = Window & { dataLayer?: IArguments[]; gtag?: (...args: unknown[]) => void };
@@ -15,6 +17,23 @@ beforeEach(() => { localStorage.clear(); document.querySelectorAll("#ith-ga4").f
 afterEach(() => { vi.restoreAllMocks(); localStorage.clear(); document.querySelectorAll("#ith-ga4").forEach(node => node.remove()); });
 
 describe("single GA4 installation and page-view owner", () => {
+  it("does not initialize GA4 for an advertising-only preference", () => {
+    localStorage.setItem(ANALYTICS_CONSENT_KEY, JSON.stringify({ version: 2, categories: { ...NECESSARY_ONLY, advertising: true }, expiresAt: Date.now() + 3600000 }));
+    const win = browser();
+    createAnalytics(win, production).page("/", "Home");
+    expect(win.dataLayer).toBeUndefined();
+    expect(document.getElementById("ith-ga4")).toBeNull();
+  });
+  it("keeps all three Google advertising signals denied when GA4 is accepted", () => {
+    const win = browser();
+    const analytics = createAnalytics(win, production);
+    analytics.setChoice("granted");
+    analytics.page("/", "Home");
+    analytics.setChoice("denied");
+    const consent = commands(win).filter(command => command[0] === "consent");
+    expect(consent.length).toBeGreaterThan(1);
+    for (const command of consent) expect(command[2]).toMatchObject(GOOGLE_AD_CONSENT_DENIED);
+  });
   it.each([
     ["https://saddlebrown-guanaco-454061.hostingersite.com", production],
     ["http://localhost:5173", production],
