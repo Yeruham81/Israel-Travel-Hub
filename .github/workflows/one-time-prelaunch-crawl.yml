@@ -5,166 +5,263 @@ on:
     paths: ['.github/workflows/one-time-prelaunch-crawl.yml']
 permissions:
   contents: read
+concurrency:
+  group: one-time-prelaunch-crawl
+  cancel-in-progress: true
 jobs:
-  crawl:
+  local:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
+    env:
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      VITE_INDEXABLE: "false"
+      CI: "true"
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: 1fd1d4f3b5346d4c617ff22e9e7fb1c727b98243
           persist-credentials: false
-      - name: Install temporary browser
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Build the exact reviewed main revision
+        run: |
+          git rev-parse HEAD
+          bash scripts/build-validated-static.sh
+      - name: Audit all exported HTML and assets
+        run: |
+          cat > .one-time-static-audit.cjs <<'NODE'
+          const fs=require('node:fs'), path=require('node:path'), {JSDOM}=require('jsdom');
+          const root=path.resolve('.output/public'), origin=process.env.VITE_CANONICAL_ORIGIN;
+          const routes=[...fs.readFileSync(path.join(root,'sitemap.xml'),'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
+          const docs=new Map(), assets=new Map(), links=[], issues=[];
+          const note=(page,type,detail)=>issues.push({page,type,detail});
+          const normalize=p=>p==='/'?'/':p.replace(/\/+$/,'')+'/';
+          const findFile=p=>{
+            let decoded;
+            try{decoded=decodeURIComponent(p)}catch{return null}
+            const f=path.resolve(root,'.'+decoded);
+            if(f!==root&&!f.startsWith(root+path.sep))return null;
+            for(const candidate of [f,path.join(f,'index.html')]){try{if(fs.statSync(candidate).isFile())return candidate}catch{}}
+            return null;
+          };
+          for(const route of routes){
+            const file=findFile(route);
+            if(!file){note(route,'missing_html',route);continue}
+            const dom=new JSDOM(fs.readFileSync(file,'utf8'),{url:origin+route});
+            const d=dom.window.document;
+            const ids=new Set([...d.querySelectorAll('[id],a[name]')].map(e=>e.id||e.getAttribute('name')));
+            docs.set(route,ids);
+            if(!d.querySelector('main h1,h1')||d.body.textContent.trim().length<80)note(route,'missing_content',route);
+            for(const a of d.querySelectorAll('a[href]')){
+              const raw=a.getAttribute('href');
+              try{const u=new URL(raw,origin+route);if(u.origin===origin)links.push({page:route,url:u.href});}catch{note(route,'invalid_link',raw)}
+            }
+            for(const e of d.querySelectorAll('img,source,script[src],link[rel="stylesheet"],link[rel="preload"],link[rel="modulepreload"],link[rel="icon"],iframe[src],iframe[data-consent-src]')){
+              const refs=['src','href','data-consent-src'].map(a=>e.getAttribute(a)).filter(Boolean);
+              if(e.getAttribute('srcset')&&!e.getAttribute('srcset').startsWith('data:'))for(const s of e.getAttribute('srcset').split(','))refs.push(s.trim().split(/\s+/)[0]);
+              for(const raw of refs){try{const u=new URL(raw,origin+route);if(u.origin===origin){const ref=assets.get(u.pathname)||{pages:new Set(),kind:e.tagName};ref.pages.add(route);assets.set(u.pathname,ref)}}catch{note(route,'invalid_asset',raw)}}
+            }
+            dom.window.close();
+          }
+          const seen=new Set();
+          for(const l of links){
+            if(seen.has(l.page+' '+l.url))continue;seen.add(l.page+' '+l.url);
+            const u=new URL(l.url), target=normalize(u.pathname), ids=docs.get(target);
+            if(!ids){if(!findFile(u.pathname))note(l.page,'unresolved_static_link',u.pathname+u.hash);else note(l.page,'link_outside_sitemap',u.pathname);continue}
+            if(u.hash&&u.hash!=='#cookie-settings'){let id;try{id=decodeURIComponent(u.hash.slice(1))}catch{id=u.hash.slice(1)}if(id&&!ids.has(id))note(l.page,'missing_static_anchor',u.pathname+u.hash)}
+          }
+          for(const [p,m] of assets){if(!findFile(p))note([...m.pages][0],'missing_static_asset',p+' ('+m.pages.size+' source pages)')}
+          const out={sitemapPages:routes.length,parsedPages:docs.size,internalLinkOccurrences:seen.size,uniqueAssets:assets.size,issues};
+          fs.writeFileSync('static-audit.json',JSON.stringify(out,null,2));
+          console.log(JSON.stringify(out,null,2));
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'## Static export\n'+JSON.stringify({...out,issues:issues.length})+'\n');
+          NODE
+          node .one-time-static-audit.cjs
+      - name: Install isolated local browser
         run: |
           npm install --prefix /tmp/ith-crawl --no-save playwright@1.56.1
           /tmp/ith-crawl/node_modules/.bin/playwright install --with-deps chromium
-      - name: Read-only public site crawl
+      - name: Browser audit on local static export
         env:
           NODE_PATH: /tmp/ith-crawl/node_modules
-          ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
         run: |
-          cat > /tmp/ith-crawl/audit.cjs <<'NODE'
-          const { chromium, request } = require('playwright');
-          const fs = require('node:fs');
-          const origin = process.env.ORIGIN;
-          const issues = [], pages = new Map(), assets = new Map();
-          const issue = (page, type, detail) => issues.push({page,type,detail:String(detail).slice(0,500)});
-          const pathname = u => new URL(u).pathname;
-          const normalize = p => p === '/' ? '/' : p.replace(/\/+$/, '') + '/';
-          const extract = xml => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => new URL(m[1].replaceAll('&amp;','&')));
-          const save = (extra = {}) => {
-            const data = {origin, ...extra, checkedPages:pages.size, checkedAssets:assets.size, issues, pages:[...pages], assets:[...assets]};
-            fs.writeFileSync('prelaunch-crawl.json', JSON.stringify(data,null,2));
-            const counts = {};
-            for (const x of issues) counts[x.type]=(counts[x.type]||0)+1;
-            const md = ['# One-time prelaunch crawl', '', 'Pages checked: '+pages.size, 'Assets checked: '+assets.size, 'Findings: '+issues.length, '', ...Object.entries(counts).map(([k,v])=>'- '+k+': '+v), '', ...issues.slice(0,150).map(x=>'- '+x.type+' | '+x.page+' | '+x.detail.replace(/[\r\n]/g,' '))].join('\n');
-            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,md+'\n');
-            console.log(md);
-          };
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory .output/public > /tmp/ith-http.log 2>&1 &
+          cat > /tmp/ith-local.cjs <<'NODE'
+          const {chromium}=require('playwright'),fs=require('node:fs');
+          const local='http://127.0.0.1:4173', canonical=process.env.VITE_CANONICAL_ORIGIN;
+          const routes=[...fs.readFileSync('.output/public/sitemap.xml','utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
+          const issues=[],results=[];
           (async()=>{
-            const http=await request.newContext({timeout:20000});
-            const expected=extract(fs.readFileSync('public/sitemap.xml','utf8')).map(u=>normalize(u.pathname));
-            let live=[];
-            try {
-              const res=await http.get(origin+'/sitemap.xml');
-              if(!res.ok()) throw Error('HTTP '+res.status());
-              live=extract(await res.text());
-              if(!live.length) throw Error('No sitemap locations');
-            } catch(e){issue('/sitemap.xml','sitemap_fetch',e.message);}
-            const urls=new Set([...expected,...live.map(u=>normalize(u.pathname))]);
-            if(live.length){
-              const livePaths=new Set(live.map(u=>normalize(u.pathname)));
-              for(const p of expected) if(!livePaths.has(p)) issue(p,'missing_from_live_sitemap',p);
-              for(const u of live) {
-                if(u.origin!==origin) issue(u.pathname,'sitemap_origin',u.href);
-                if(!expected.includes(normalize(u.pathname))) issue(u.pathname,'extra_live_sitemap',u.href);
-              }
+            const b=await chromium.launch(), ctx=await b.newContext({viewport:{width:1366,height:900},serviceWorkers:'block'});
+            await ctx.route('**/*',r=>{
+              const u=new URL(r.request().url());
+              if(u.origin===local&&u.pathname==='/api/exchange-rates/')return r.fulfill({status:503,contentType:'application/json',body:'{"status":"unavailable"}'});
+              return (u.origin===local||!['http:','https:'].includes(u.protocol))&&['GET','HEAD'].includes(r.request().method())?r.continue():r.abort();
+            });
+            const page=await ctx.newPage();let current='';
+            const note=(type,detail)=>issues.push({page:current,type,detail:String(detail).slice(0,800)});
+            page.on('pageerror',e=>note('javascript_exception',e.message));
+            page.on('console',m=>{if(m.type()==='error'&&/hydration|hydrating|Minified React error|uncaught|chunkloaderror/i.test(m.text()))note('browser_console',m.text())});
+            page.on('response',r=>{if(r.url().startsWith(local+'/')&&!r.url().includes('/api/')&&r.status()>=400)note('local_resource_http',r.status()+' '+r.url())});
+            page.on('requestfailed',r=>{if(r.url().startsWith(local+'/')&&!r.url().includes('/api/')&&!/ERR_ABORTED/.test(r.failure()?.errorText||''))note('local_request_failed',r.url()+' '+r.failure()?.errorText)});
+            for(const route of routes){
+              current=route;
+              try{
+                const response=await page.goto(local+route,{waitUntil:'load',timeout:20000});
+                await page.waitForTimeout(350);
+                const h1=await page.locator('h1').allTextContents();
+                if(response?.status()!==200||!h1.length||h1.some(s=>/^404$|^Page not found$|^This page didn't load$/i.test(s)))note('local_page_content',JSON.stringify({status:response?.status(),h1}));
+                results.push({route,status:response?.status(),h1});
+              }catch(e){note('local_navigation_failure',e.message);results.push({route,error:e.message})}
             }
-            const browser=await chromium.launch({headless:true});
-            const queue=[...urls];
-            const links=[];
-            async function worker(){
-              const ctx=await browser.newContext({viewport:{width:1366,height:900},serviceWorkers:'block'});
-              // Do not accept cookies, send enquiries or contact third-party hosts.
-              await ctx.route('**/*',r=>{
-                const u=new URL(r.request().url());
-                return (u.origin===origin || !['http:','https:'].includes(u.protocol)) && ['GET','HEAD'].includes(r.request().method()) ? r.continue() : r.abort();
-              });
-              while(queue.length){
-                const p=queue.shift();
-                const page=await ctx.newPage();
-                const track = (type, detail)=>issue(p,type,detail);
-                page.on('pageerror',e=>track('javascript_exception',e.message));
-                page.on('console',m=>{if(m.type()==='error' && /hydration|hydrating|Minified React error|uncaught|chunkloaderror/i.test(m.text())) track('browser_console',m.text());});
-                page.on('requestfailed',r=>{if(r.url().startsWith(origin+'/') && !/ERR_ABORTED/.test(r.failure()?.errorText||'')) track('request_failed',r.url()+' '+r.failure()?.errorText);});
-                page.on('response',r=>{if(r.url().startsWith(origin+'/') && r.status()>=400) track('http_resource_error',r.status()+' '+r.url());});
-                try {
-                  const response=await page.goto(origin+p,{waitUntil:'load',timeout:35000});
-                  if(!response || response.status()!==200) track('page_http_status',response?.status());
-                  if(normalize(pathname(page.url()))!==p || !page.url().startsWith(origin+'/')) track('unexpected_redirect',page.url());
-                  await page.waitForTimeout(350);
-                  const d=await page.evaluate(()=>{
-                    const a=[...document.querySelectorAll('a[href]')].map(e=>e.getAttribute('href'));
-                    const ids=[...document.querySelectorAll('[id],a[name]')].map(e=>e.id||e.getAttribute('name'));
-                    const resources=[];
-                    for(const e of document.querySelectorAll('img,source,script[src],link[rel="stylesheet"],link[rel="preload"],link[rel="modulepreload"],link[rel="icon"],iframe[data-consent-src],iframe[src]')){
-                      for(const attr of ['src','href','data-consent-src']) if(e.getAttribute(attr)) resources.push({url:e.getAttribute(attr),kind:e.tagName.toLowerCase()});
-                      if(e.getAttribute('srcset')) for(const s of e.getAttribute('srcset').split(',')) resources.push({url:s.trim().split(/\s+/)[0],kind:'srcset'});
-                    }
-                    return {a,ids,resources,title:document.title,h1:[...document.querySelectorAll('main h1,h1')].map(x=>x.textContent.trim()),bodyLength:document.body.innerText.length};
-                  });
-                  if(!d.h1.length || d.bodyLength<80 || d.h1.some(x=>/^404$|^page not found$|^this page didn't load$/i.test(x))) track('possible_soft_404',d.h1.join(' | '));
-                  pages.set(p,{status:response?.status(),title:d.title,ids:d.ids});
-                  for(const raw of d.a) {
-                    try {
-                      const u=new URL(raw,origin+p);
-                      if(u.origin===origin) links.push({source:p,url:u.href});
-                    } catch {track('invalid_link',raw);}
-                  }
-                  for(const r of d.resources){
-                    try {
-                      const u=new URL(r.url,origin+p);
-                      if(u.origin===origin && !assets.has(u.href)) assets.set(u.href,{source:p,kind:r.kind});
-                    } catch {track('invalid_resource',r.url);}
-                  }
-                  // One reload per template family is sufficient to test direct reload.
-                  if(p==='/' || /^\/(accommodation|attractions|travel-blog|airport-transfers|tours|shore-excursions)\/$/.test(p)){
-                    const rr=await page.reload({waitUntil:'domcontentloaded',timeout:30000});
-                    if(rr?.status()!==200) track('reload_error',rr?.status());
-                  }
-                }catch(e){track('navigation_failure',e.message);pages.set(p,{error:e.message,ids:[]});}
-                finally {await page.close();}
-              }
-              await ctx.close();
-            }
-            await Promise.all(Array.from({length:4},worker));
-            const seenLinks=new Set();
-            for(const l of links){
-              if(seenLinks.has(l.source+' '+l.url)) continue;
-              seenLinks.add(l.source+' '+l.url);
-              const u=new URL(l.url);
-              const p=normalize(u.pathname);
-              if(pages.has(p)){
-                if(u.hash && u.hash!=='#' && u.hash!=='#cookie-settings'){
-                  let id;try{id=decodeURIComponent(u.hash.slice(1));}catch{id=u.hash.slice(1);}
-                  if(!pages.get(p).error&&!pages.get(p).ids.includes(id)) issue(l.source,'missing_anchor',u.pathname+u.hash);
-                }
-              }else if(!assets.has(u.origin+u.pathname+u.search)) assets.set(u.origin+u.pathname+u.search,{source:l.source,kind:'internal_link'});
-            }
-            const assetQueue=[...assets];
-            async function assetWorker(){
-              while(assetQueue.length){
-                const [url,meta]=assetQueue.shift();
-                try{
-                  const r=await http.get(url,{maxRedirects:5,timeout:18000});
-                  const ct=r.headers()['content-type']||'';
-                  const kind=meta.kind;
-                  const status=r.status();
-                  if(!r.ok()) issue(meta.source,kind==='internal_link'?'broken_internal_link':'broken_asset',status+' '+url);
-                  else if(['img','srcset','source'].includes(kind)&&!ct.startsWith('image/')&&!ct.includes('octet-stream')) issue(meta.source,'unexpected_asset_type',ct+' '+url);
-                  else if(kind==='script'&&ct.includes('text/html')) issue(meta.source,'unexpected_asset_type',ct+' '+url);
-                  else if(kind==='internal_link'&&ct.includes('text/html')){
-                    const body=await r.text();
-                    if(/<h1[^>]*>\s*(404|Page not found)\s*<\/h1>/i.test(body)) issue(meta.source,'broken_internal_link','soft 404 '+url);
-                    else issue(meta.source,'internal_link_outside_sitemap',url+' -> '+r.url());
-                  }
-                  assets.set(url,{...meta,status,contentType:ct});
-                  await r.dispose();
-                }catch(e){issue(meta.source,'asset_fetch_failure',url+' '+e.message);}
-              }
-            }
-            await Promise.all(Array.from({length:8},assetWorker));
-            const notFound=await http.get(origin+'/__ith_prelaunch_missing_20261124__/');
-            if(notFound.status()!==404 && notFound.status()!==410) issue('/__ith_prelaunch_missing_20261124__/','missing_page_status',notFound.status());
-            await browser.close();await http.dispose();
-            save({sourceSitemapPages:expected.length,liveSitemapPages:live.length,internalLinks:seenLinks.size,missingPageStatus:notFound.status()});
-          })().catch(e=>{issue('/','audit_error',e.stack||e);save();process.exitCode=1;});
+            await b.close();
+            const out={routes:routes.length,attempted:results.length,results,issues};
+            fs.writeFileSync('local-browser-audit.json',JSON.stringify(out,null,2));
+            console.log('LOCAL_BROWSER_SUMMARY',JSON.stringify({routes:routes.length,attempted:results.length,issues:issues.length}));
+            console.log(JSON.stringify(issues,null,2));
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'## Local browser\n'+JSON.stringify({routes:routes.length,attempted:results.length,issues:issues.length})+'\n');
+          })().catch(e=>{console.error(e);process.exitCode=1});
           NODE
-          node /tmp/ith-crawl/audit.cjs
-      - name: Upload one-time findings
+          node /tmp/ith-local.cjs
+      - name: Save local audit results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: prelaunch-crawl-findings
-          path: prelaunch-crawl.json
+          name: controlled-local-audit
+          path: |
+            static-audit.json
+            local-browser-audit.json
+          if-no-files-found: warn
+  live:
+    if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 1fd1d4f3b5346d4c617ff22e9e7fb1c727b98243
+          persist-credentials: false
+      - name: Sequential HTTP crawl with bounded retry and no subresource bursts
+        run: |
+          cat > /tmp/ith-live.py <<'PY'
+          import urllib.request, urllib.error, urllib.parse, time, json, re, os
+          from html.parser import HTMLParser
+          from xml.etree import ElementTree as ET
+          origin=os.environ['ORIGIN']
+          issues=[]; results=[]; assets={}; docs={}; links=[]; stopped=False
+          headers={'User-Agent':'IsraelTravelHub-PrelaunchAudit/1.0 (owner-authorized QA)'}
+          class Parser(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.ids=set(); self.links=[]; self.assets=[]; self.h1=0
+              def handle_starttag(self,tag,attrs):
+                  a=dict(attrs)
+                  if a.get('id'): self.ids.add(a['id'])
+                  if tag=='a':
+                      if a.get('name'):self.ids.add(a['name'])
+                      if a.get('href'):self.links.append(a['href'])
+                  if tag=='h1':self.h1+=1
+                  if tag in ('img','source','script','iframe') or (tag=='link' and a.get('rel') in ('stylesheet','preload','modulepreload','icon')):
+                      self.assets.extend(a[x] for x in ('src','href','data-consent-src') if a.get(x))
+                      if a.get('srcset') and not a['srcset'].startswith('data:'):
+                          self.assets.extend(s.strip().split()[0] for s in a['srcset'].split(',') if s.strip())
+          def get(url,method='GET',read=True):
+              global stopped
+              if stopped:return None
+              for attempt in range(2):
+                  time.sleep(2)
+                  try:
+                      with urllib.request.urlopen(urllib.request.Request(url,headers=headers,method=method),timeout=20) as r:
+                          return (r.status,r.geturl(),dict(r.headers),r.read(2500000) if read else b'')
+                  except urllib.error.HTTPError as e:
+                      if e.code==429:
+                          issues.append({'type':'rate_limited','url':url,'attempt':attempt+1,'retryAfter':e.headers.get('Retry-After')})
+                          if attempt==0:
+                              retry=e.headers.get('Retry-After','')
+                              delay=max(35,int(retry)) if retry.isdigit() else 35
+                              if delay>120:stopped=True;return None
+                              time.sleep(delay);continue
+                          stopped=True;return None
+                      return (e.code,e.geturl(),dict(e.headers),b'')
+                  except Exception as e:
+                      issues.append({'type':'network_error','url':url,'detail':str(e)});return None
+              return None
+          def locs(data):
+              return [urllib.parse.urlsplit(x.text).path for x in ET.fromstring(data).iter() if x.tag.endswith('}loc') and x.text]
+          def norm(p):return p.rstrip('/')+'/' if p!='/' else '/'
+          def same(u):return urllib.parse.urlsplit(u).netloc==urllib.parse.urlsplit(origin).netloc and urllib.parse.urlsplit(u).scheme=='https'
+          source=locs(open('public/sitemap.xml','rb').read())
+          live=get(origin+'/sitemap.xml')
+          live_routes=[]
+          if live and live[0]==200:
+              try:
+                  live_routes=locs(live[3])
+                  for p in sorted(set(source)-set(live_routes)):issues.append({'type':'missing_live_sitemap','page':p})
+                  for p in sorted(set(live_routes)-set(source)):issues.append({'type':'extra_live_sitemap','page':p})
+              except Exception as e:issues.append({'type':'sitemap_parse','detail':str(e)})
+          else:issues.append({'type':'sitemap_unavailable','status':live[0] if live else None})
+          routes=list(dict.fromkeys(source+live_routes))
+          for p in routes:
+              if stopped:break
+              r=get(origin+p)
+              if r is None:
+                  results.append({'page':p,'status':None});continue
+              status,final,h,data=r
+              results.append({'page':p,'status':status,'final':final})
+              if status!=200:
+                  issues.append({'type':'page_http_status','page':p,'status':status});continue
+              if not same(final) or norm(urllib.parse.urlsplit(final).path)!=norm(p):
+                  issues.append({'type':'unexpected_redirect','page':p,'target':final})
+              parser=Parser()
+              try:parser.feed(data.decode('utf-8','replace'))
+              except Exception as e:issues.append({'type':'parse_error','page':p,'detail':str(e)});continue
+              if not parser.h1:issues.append({'type':'missing_h1','page':p})
+              docs[norm(p)]=parser.ids
+              for raw in parser.links:
+                  u=urllib.parse.urljoin(origin+p,raw)
+                  if same(u):links.append((p,u))
+              for raw in parser.assets:
+                  u=urllib.parse.urljoin(origin+p,raw)
+                  if same(u):assets.setdefault(u,p)
+              if len(results)%20==0:print('HTTP crawl:',len(results),'/',len(routes),flush=True)
+          distinct=set(links)
+          for p,u in sorted(distinct):
+              parsed=urllib.parse.urlsplit(u); target=norm(parsed.path)
+              if target in docs and parsed.fragment and parsed.fragment!='cookie-settings' and urllib.parse.unquote(parsed.fragment) not in docs[target]:
+                  issues.append({'type':'missing_live_static_anchor','page':p,'target':u})
+              elif target not in routes and target not in docs:
+                  issues.append({'type':'link_outside_live_inventory','page':p,'target':u})
+          # Sample assets across classes instead of issuing hundreds of extra requests.
+          selected=[]
+          for pattern in [r'\.js(?:\?|$)',r'\.css(?:\?|$)',r'\.woff2?(?:\?|$)',r'\.webp(?:\?|$)',r'\.(?:jpg|png|svg)(?:\?|$)',r'/maps/',r'/widgets/']:
+              selected.extend([u for u in sorted(assets) if re.search(pattern,u,re.I)][:3])
+          samples=[]
+          for u in dict.fromkeys(selected):
+              if stopped:break
+              r=get(u,method='HEAD',read=False)
+              samples.append({'url':u,'status':r[0] if r else None})
+              if r and r[0] not in (200,405):issues.append({'type':'asset_http_status','page':assets[u],'url':u,'status':r[0]})
+          missing=get(origin+'/__ith_prelaunch_missing_20261124__/') if not stopped else None
+          if missing and missing[0] not in (404,410):issues.append({'type':'missing_page_status','status':missing[0]})
+          out={'sourcePages':len(source),'liveSitemapPages':len(live_routes),'attempted':len(results),'parsedPages':len(docs),'rateLimitStop':stopped,'pageResults':results,'uniqueAssetReferences':len(assets),'sampledAssets':samples,'internalLinkOccurrences':len(distinct),'missingPageStatus':missing[0] if missing else None,'issues':issues}
+          open('controlled-live-audit.json','w').write(json.dumps(out,indent=2))
+          summary={k:v for k,v in out.items() if k not in ('issues','pageResults','sampledAssets')};summary['issues']=len(issues);summary['sampledAssets']=len(samples)
+          print('LIVE_HTTP_SUMMARY',json.dumps(summary));print(json.dumps(issues[:150],indent=2))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write('## Controlled public HTTP crawl\n'+json.dumps(summary)+'\n')
+          PY
+          python3 /tmp/ith-live.py
+      - name: Save live audit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: controlled-live-audit
+          path: controlled-live-audit.json
           if-no-files-found: warn
