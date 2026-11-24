@@ -28,7 +28,7 @@ export function TripadvisorReviewsSection({ personal = false }: { personal?: boo
       </div>
       <TripadvisorReviewCarousel />
       <div className="flex justify-center px-4 pb-4 sm:px-6">
-        <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring">
+        <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center gap-1.5 py-1.5 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring">
           {personal ? "Read all my Tripadvisor reviews" : "Read all Tripadvisor reviews"} <ExternalLink size={13} aria-hidden />
         </a>
       </div>
