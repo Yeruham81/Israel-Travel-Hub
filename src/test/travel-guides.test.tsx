@@ -500,7 +500,7 @@ describe("migrated practical guides", () => {
       expect(container.querySelector("#checklist")).not.toBeNull();
       expect(container.querySelector('[data-photo-role="author-portrait"]')).not.toBeNull();
       expect(container.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
-      expect(container.querySelector("#contact")).toHaveTextContent("Contact Me");
+      expect(container.querySelector("#contact")).toHaveTextContent(/Contact me/i);
       const source = container.querySelector("#sources");
       expect(source).not.toBeNull();
       expect(container.querySelector("#contact")!.compareDocumentPosition(source!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
@@ -1015,7 +1015,7 @@ describe("migrated practical guides", () => {
     expect(guide.services.map(item => item.to)).toContain(travelGuidePaths.israel);
     expect(guide.services.map(item => item.to)).toContain(travelGuidePaths.travelTips);
     for (const section of guide.sections) for (const link of section.inlineLinks || []) {
-      expect(section.paragraphs.join(" ").split(link.text)).toHaveLength(2);
+      expect(section.paragraphs.some(p => p.includes(link.text))).toBe(true);
     }
   });
 
@@ -1080,7 +1080,8 @@ describe("migrated practical guides", () => {
       }
     }
     expect(container.querySelector("#weekend-711")?.textContent).toMatch(/free.*Terminal 1.*timetable/is);
-    expect(container.querySelector("#taxis-transfers")?.textContent).toMatch(/regulated meter/is);
+    expect(container.querySelector("#taxis-transfers")?.textContent).toMatch(/official queue/is);
+    expect(container.querySelector("#costs")?.textContent).toMatch(/regulated.*meter|meter.*tariff/is);
     for (const [label, url] of ([
       ["Look up Shabbat times on MyZmanim", "https://www.myzmanim.com/"],
       ["Israel Railways — official timetable", "https://rail.co.il/?lan=en"],

@@ -60,7 +60,7 @@ async function inspect(page, viewportName, desktop) {
       tours: all("#tours article").length,
       tourLinks: tourLinks.map(x => ({ href: x.href, rel: x.rel })),
       prices: all("#tours article").filter(x => x.textContent?.includes("From US$")).length,
-      rated: all("#tours article").filter(x => x.textContent?.includes("/5 (")).length,
+      rated: all('#tours article [aria-label^="Rated "]').length,
       faq: all("#faq details").length,
       related: related.length,
       columns: document.querySelector("#explore-more .grid") && getComputedStyle(document.querySelector("#explore-more .grid")).gridTemplateColumns.split(" ").filter(Boolean).length,
@@ -83,7 +83,7 @@ async function inspect(page, viewportName, desktop) {
   check(desktop ? (photo?.rect?.x > photo?.textRect?.x + 50 && photo?.rect?.y <= photo?.textRect?.y + 8 && metrics.firstTwoCardY[1] > metrics.firstTwoCardY[0] + 90) : (photo?.rect?.y < photo?.textRect?.y && metrics.firstTwoCardY[1] > metrics.firstTwoCardY[0] + 90), viewportName + ": horizontal image-right / stacked mobile card layout", JSON.stringify(photo));
   check(metrics.mapFrame?.includes("points=") && metrics.mapLabels.length === 4, viewportName + ": map and four-color legend", String(metrics.mapLabels));
   check(metrics.tours === 3 && metrics.tourLinks.length === 3 && metrics.tourLinks.every(l => l.href.includes("sub_id=churches_jerusalem_") && l.rel.includes("sponsored")), viewportName + ": three Travelpayouts tracked tour links", JSON.stringify(metrics.tourLinks));
-  check(metrics.prices === 2 && metrics.rated === 2, viewportName + ": verified historical prices and review snapshots", JSON.stringify({ prices:metrics.prices, rated:metrics.rated }));
+  check(metrics.prices === 2 && metrics.rated === 2, viewportName + ": available supplier price and rating fields", JSON.stringify({ prices:metrics.prices, rated:metrics.rated }));
   check(metrics.faq === 7 && metrics.related === 6 && metrics.contactForm && metrics.sourceAfterContact, viewportName + ": FAQ, guides, contact and source footer", JSON.stringify({faq:metrics.faq,related:metrics.related,contact:metrics.contactForm,sources:metrics.sourceAfterContact}));
   check(metrics.columns === (desktop ? 3 : 2), viewportName + ": responsive related-guide grid", String(metrics.columns));
   check(metrics.width <= metrics.viewport + 8, viewportName + ": no page-wide horizontal overflow", JSON.stringify({width:metrics.width,viewport:metrics.viewport}));

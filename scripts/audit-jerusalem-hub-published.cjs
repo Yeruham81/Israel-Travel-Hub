@@ -29,7 +29,7 @@ async function scrollAndDecode(page){
 async function snapshot(page,label,desktop){
  const data=await page.evaluate(()=>{
   const all=selector=>[...document.querySelectorAll(selector)];
-  const tourCards=all('a[data-testid="jerusalem-hub-tour-card"]');
+  const tourCards=all('[data-testid="jerusalem-hub-tour-card"]');
   const editorialPhotos=all("#choose .grid > a img,#day-trips .grid > a img,#explore-more .grid > a img");
   const source=document.getElementById("sources");
   const contact=document.getElementById("contact");
@@ -59,7 +59,7 @@ async function snapshot(page,label,desktop){
    relatedCards:all("#explore-more .grid > a").length,
    allGuideLinks,
    editorialPhotos:editorialPhotos.map(photo),
-   allTourLinks:tourCards.map(a=>a.href),
+   allTourLinks:tourCards.map(card=>card.querySelector('a[href*="tpm.li"]')?.href||""),
    tours:tourCards.map(a=>({group:a.getAttribute("data-group"),image:photo(a.querySelector("img")),title:a.querySelector("strong")?.textContent})),
    faq:all("#faq details").length,
    articleLd:scripts.find(s=>s["@type"]==="Article"),

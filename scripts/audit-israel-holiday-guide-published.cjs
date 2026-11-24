@@ -60,12 +60,12 @@ async function inspect(page,label,isDesktop) {
       viewport:innerWidth,docWidth:document.documentElement.scrollWidth,
     };
   });
-  assert(data.h1.length===1&&data.h1[0]==="Holidays in Israel: A Practical Guide for Visitors",label+": single guide H1",JSON.stringify(data.h1));
+  assert(data.h1.length===1&&data.h1[0]==="Israel's Calendar of events: A practical guide for visitors",label+": single guide H1",JSON.stringify(data.h1));
   assert(data.canonical===url,label+": preserved canonical",data.canonical);
   assert(data.robots?.includes("noindex"),label+": staging noindex",data.robots);
-  assert(data.date==="2026-11-21",label+": correct editorial update date",data.date);
-  assert(data.articleLd.includes("Holidays in Israel: A Practical Guide for Visitors")&&data.articleLd.includes("2026-11-21"),label+": Article metadata and date");
-  assert(data.hero?.includes("/images/holiday-guide/jewish-holiday-celebration.webp"),label+": authentic holiday hero",data.hero);
+  assert(data.date==="2026-11-22",label+": correct editorial update date",data.date);
+  assert(data.articleLd.includes("Israel's Calendar of events: A practical guide for visitors")&&data.articleLd.includes("2026-11-22"),label+": Article metadata and date");
+  assert(data.hero?.includes("/images/holiday-guide/israel-calendar-of-events.webp"),label+": approved calendar guide hero",data.hero);
   assert(data.cards===19&&new Set(data.cardIds).size===19,label+": 19 holiday explanations",String(data.cards));
   assert(data.lagBaOmer && data.schoolCalendar,label+": Lag BaOmer and school calendar guidance");
   assert(JSON.stringify(data.holidaySections)===JSON.stringify([["weekly",1],["jewish-major",5],["other-jewish",4],["national",4],["other-traditions",5]]),label+": five editorial holiday groups",JSON.stringify(data.holidaySections));
