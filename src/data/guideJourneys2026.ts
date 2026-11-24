@@ -739,13 +739,13 @@ export const journeyDestinationGuides = {
           "title": "By rental car: the most flexible option",
           "paragraphs": [
             "A rental car gives you flexibility for several Dead Sea stops. The usual drive follows Highway 1 east and Highway 90 south. Navigate to the exact hotel, beach or park entrance: Masada's eastern visitor entrance is accessed from Route 90.",
-            "Driving lets you start early and combine attractions, but allow time for collecting the car, parking and returning to Jerusalem. My car rental comparison guide covers insurance, fuel conditions, pickup hours and restrictions on permitted roads.",
+            "Driving lets you start early and combine attractions, but allow time for collecting the car, parking and returning to Jerusalem. See my car rental guide for details on insurance, fuel policies, pickup hours and permitted roads.",
             "Desert rain can cause sudden flash floods and road closures even when Jerusalem is dry. Check weather warnings and Route 90 status before departure, and use marked beach and parking access points."
           ],
           "photo": { "src": deadSeaRouteRoadPhoto, "alt": "Route 90 curving beside the Dead Sea and Judean Desert cliffs" },
           "inlineLinks": [
             {
-              "text": "DiscoverCars' Israel rental comparison",
+              "text": "car rental guide",
               "to": "/car-rental/"
             }
           ],
