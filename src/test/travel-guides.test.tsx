@@ -384,7 +384,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.intro).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
-    expect(travelGuides.sherut.answer).toMatch(/former Nesher route to Jerusalem or Amal route to Haifa/);
+    expect(travelGuides.sherut.answer).toMatch(/Regular Nesher sherut rides to Jerusalem and Amal shared taxis to Haifa no longer operate/);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/A data-only eSIM lets you browse, navigate and use WhatsApp/s);
     expect(travelGuides.esim.answer).toMatch(/Saily.*Airalo.*GigSky/s);
   });
@@ -860,14 +860,16 @@ describe("migrated practical guides", () => {
     expect(uber.faqs.find(faq => faq.q.includes("foreign credit card"))?.a).toContain("foreign-issued card");
     expect(sherut.intro).toContain("Nesher and Amal shared taxis");
     expect(sherut.sections.find(section => section.id === "official-taxi")?.paragraphs.join(" ")).not.toContain("without repeating those details here");
-    const destinations = sherut.sections.find(section => section.id === "where-to-go")!;
+    const destinations = sherut.sections.find(section => section.id === "airport-alternatives")!;
     expect(destinations.inlineLinks?.map(link => link.to)).toEqual([
       "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/ben-gurion-airport-to-tel-aviv/",
       "/travel-blog/ben-gurion-airport-to-haifa/",
+      "/travel-blog/ben-gurion-airport-to-ein-bokek/",
       travelGuidePaths.shabbat,
     ]);
-    expect(destinations.tables?.[0]?.rows.find(row => row[0] === "Dead Sea / Ein Bokek")?.[1]).toContain("Train and bus via Jerusalem");
-    expect(sherut.faqs).toHaveLength(7);
+    expect(destinations.tables?.[0]?.rows.find(row => row[0] === "Dead Sea / Ein Bokek")?.[1]).toContain("Bus connection via Jerusalem");
+    expect(sherut.faqs).toHaveLength(5);
     for (const guide of [uber, sherut]) {
       for (const section of guide.sections) for (const link of section.inlineLinks ?? []) {
         expect(section.paragraphs.join(" ").split(link.text), guide.id + " / " + section.id + " / " + link.text).toHaveLength(2);
@@ -902,41 +904,62 @@ describe("migrated practical guides", () => {
     expect(contactForm!.compareDocumentPosition(container.querySelector("#sources")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
-  it("keeps the Sherut guide focused on former airport routes, not the companies themselves", () => {
+  it("keeps the Sherut guide focused on current transport and practical shared taxis", () => {
     const guide = travelGuides.sherut;
     expect(guide.title).toMatch(/sherut.*Ben Gurion Airport/i);
     expect(guide.title).not.toMatch(/2026|2027/);
-    expect(guide.updatedAt).toBe("2026-11-11");
-    expect(guide.answer).toContain("No regular airport sherut currently operates");
-    expect(guide.answer).toContain("Local sherut taxis and separately booked shared shuttles are different services");
-    expect(guide.sections.map((section) => section.id)).toEqual([
-      "nesher-amal", "what-is-sherut", "airport-alternatives", "where-to-go", "official-taxi",
-      "airport-shuttle", "local-sherut", "booked-shared", "weekend",
+    expect(guide.updatedAt).toBe("2026-11-24");
+    expect(guide.answer).toContain("Regular Nesher sherut rides to Jerusalem and Amal shared taxis to Haifa no longer operate");
+    expect(guide.answer).toContain("Local sherut minibuses still operate");
+    expect(guide.sections.map(section => section.id)).toEqual([
+      "nesher-amal", "local-sherut", "airport-alternatives", "official-taxi", "weekend", "booked-shared",
     ]);
-    expect(guide.sections.filter((section) => section.photo)).toHaveLength(1);
-    expect(guide.sections.find((section) => section.id === "airport-alternatives")!.photo).toBeUndefined();
-    expect(guide.faqs).toHaveLength(7);
-    expect(guide.sections.find((s) => s.id === "where-to-go")!.tables?.[0]?.rows).toHaveLength(4);
-    expect(guide.comparison.rows).toHaveLength(6);
-    expect(guide.sections.find((s) => s.id === "official-taxi")!.inlineLinks?.map((link) => link.to)).toEqual([
-      travelGuidePaths.airportTaxis, travelGuidePaths.taxiFares,
+    expect(guide.sections.filter(section => section.photo)).toHaveLength(1);
+    const localPhoto = guide.sections.find(section => section.id === "local-sherut")!.photo!;
+    expect(localPhoto.src).not.toBe(guide.photo.src);
+    expect(localPhoto.sourceUrl).toContain("commons.wikimedia.org/wiki/File:Sherut.JPG");
+    expect(guide.sections.find(section => section.id === "nesher-amal")!.photo).toBeUndefined();
+    expect(guide.comparison.rows).toHaveLength(4);
+    expect(guide.comparison.headers).toEqual(["Ride type", "How it works", "When it is useful"]);
+    expect(guide.comparison.rows.every(row => row.length === 3)).toBe(true);
+    const destinations = guide.sections.find(section => section.id === "airport-alternatives")!;
+    expect(destinations.tables?.[0]?.rows).toHaveLength(4);
+    expect(destinations.tables?.[0]?.rows.map(row => row[0])).toEqual([
+      "Jerusalem", "Tel Aviv", "Haifa", "Dead Sea / Ein Bokek",
     ]);
-    expect(guide.sections.find((s) => s.id === "weekend")!.inlineLinks?.[0]?.to).toBe(travelGuidePaths.shabbat);
-    expect(guide.sections.find((s) => s.id === "local-sherut")!.inlineLinks?.map((link) => link.to)).toEqual([
+    expect(destinations.tables?.[0]?.rowLinks?.map(link => link && "to" in link ? link.to : null)).toEqual([
+      "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+      "/travel-blog/ben-gurion-airport-to-haifa/",
+      "/travel-blog/ben-gurion-airport-to-ein-bokek/",
+    ]);
+    expect(destinations.inlineLinks?.map(link => link.to)).toEqual([
+      "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+      "/travel-blog/ben-gurion-airport-to-haifa/",
+      "/travel-blog/ben-gurion-airport-to-ein-bokek/",
+      travelGuidePaths.shabbat,
+    ]);
+    expect(guide.sections.find(s => s.id === "official-taxi")!.paragraphs.join(" ")).toMatch(/Exit 03.*Gate 23.*Gate 01/s);
+    expect(guide.sections.find(s => s.id === "official-taxi")!.inlineLinks?.map(link => link.to)).toEqual([
+      travelGuidePaths.airportTaxis, travelGuidePaths.taxiFares, travelGuidePaths.arrival,
+    ]);
+    expect(guide.sections.find(s => s.id === "weekend")!.paragraphs.join(" ")).toMatch(/Line 711.*Terminal 1.*winter and summer/s);
+    expect(guide.sections.find(s => s.id === "weekend")!.inlineLinks?.some(link => link.to === travelGuidePaths.shabbat)).toBe(true);
+    expect(guide.sections.find(s => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/pay for one seat.*fare.*suitcases/s);
+    expect(guide.sections.find(s => s.id === "local-sherut")!.inlineLinks?.map(link => link.to)).toEqual([
       travelGuidePaths.israel, travelGuidePaths.telAviv,
     ]);
-    expect(guide.sections.find((s) => s.id === "where-to-go")!.inlineLinks?.map((link) => link.to)).toEqual([
-      "/travel-blog/ben-gurion-airport-to-jerusalem/", "/travel-blog/ben-gurion-airport-to-haifa/", travelGuidePaths.shabbat,
+    expect(guide.faqs).toHaveLength(5);
+    expect(guide.services.map(item => item.to)).toEqual([
+      "/airport-transfers/", "/private-driver-in-israel/",
+      "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+      "/travel-blog/ben-gurion-airport-to-haifa/", travelGuidePaths.esim,
     ]);
-    expect(guide.sections.find((s) => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/pay separately.*Shabbat/s);
-    expect(guide.services.map((item) => item.to)).toEqual([
-      "/car-rental/", "/travel-blog/where-to-stay-in-jerusalem/", "/attractions/haifa/", travelGuidePaths.esim,
-    ]);
+    expect(guide.services.every(item => Boolean(item.note))).toBe(true);
     expect(guide.sourceIds).toContain("guide-sherut-regulation");
     expect(getSource("guide-sherut-regulation").url).toContain("gov.il");
-    const allText = [guide.title, guide.description, guide.intro, guide.answer,
-      ...guide.sections.flatMap((section) => section.paragraphs), ...guide.faqs.map((item) => item.a)].join(" ");
-    expect(allText).not.toMatch(/companies (?:themselves|still)|businesses (?:themselves|still)|their companies/i);
     for (const section of guide.sections) for (const link of section.inlineLinks || []) {
       expect(section.paragraphs.join(" ").split(link.text), `link text ${link.text} must occur once`).toHaveLength(2);
     }
@@ -944,7 +967,7 @@ describe("migrated practical guides", () => {
     expect(guide.related).toContain("airportTaxis");
   });
 
-  it("renders Sherut links, four complementary planning cards and one contextual contact form", async () => {
+  it("renders Sherut tables, six planning cards, concise sources and the private pickup contact form", async () => {
     const router = await routerAt(travelGuidePaths.sherut);
     const Page = SherutRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
@@ -956,23 +979,35 @@ describe("migrated practical guides", () => {
         expect(a.closest("p")).toBeTruthy();
       }
     }
-    expect(container.querySelector("#nesher-amal")?.textContent).toMatch(/Nesher.*Amal.*have ended/s);
     const alternativeSection = container.querySelector("#airport-alternatives") as HTMLElement;
-    const contactLink = within(alternativeSection).getByRole("link", { name: /Ask me about your airport journey using the contact form below/ });
+    const contactLink = within(alternativeSection).getByRole("link", { name: /ask me about a private airport pickup/i });
     expect(contactLink).toHaveAttribute("href", "#contact");
     expect(alternativeSection.querySelector("form")).toBeNull();
+    const destinationTable = within(alternativeSection).getByRole("table", { name: "Ben Gurion Airport transport by destination" });
+    expect(destinationTable.querySelectorAll("tbody tr")).toHaveLength(4);
+    expect(destinationTable.querySelectorAll("tbody th a")).toHaveLength(4);
+    const mainTable = within(container).getByRole("table", { name: "Sherut, shuttle, taxi or private transfer?" });
+    expect(mainTable.querySelectorAll("tbody tr")).toHaveLength(4);
+    const localSection = container.querySelector("#local-sherut")!;
+    expect(localSection.querySelector("figure img")?.getAttribute("src")).toContain("upload.wikimedia.org");
     const related = within(container).getByRole("region", { name: "Related practical guides" });
     const next = within(container).getByRole("region", { name: "Plan the next part of your trip" });
     const contact = within(container).getByRole("form", { name: "Guide contact message" });
     expect(related.querySelectorAll("li")).toHaveLength(6);
-    expect(next.querySelectorAll("li")).toHaveLength(4);
+    expect(next.querySelectorAll("li")).toHaveLength(6);
+    expect(next.querySelectorAll("li svg")).toHaveLength(6);
     expect(container.querySelectorAll('form[aria-label="Guide contact message"]')).toHaveLength(1);
-    expect(within(container).getByRole("heading", { name: "Questions about leaving Ben Gurion Airport?" })).toBeInTheDocument();
+    expect(within(container).getByRole("heading", { name: "Need a Private Airport Transfer?" })).toBeInTheDocument();
     expect((within(contact).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toBe("");
     expect(related.compareDocumentPosition(next) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(next.compareDocumentPosition(contact) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    const sources = container.querySelector("#sources")!;
+    expect(sources).not.toBeNull();
+    expect(contact.compareDocumentPosition(sources) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.textContent).not.toContain("References:");
+    const reviewsRow = container.querySelector('[data-testid="contact-reviews-row"]')!;
+    expect(reviewsRow.className).toContain("flex-nowrap");
   });
-
 
   it("keeps the confirmed Terminal 1 weekend bus and winter/summer service distinction", () => {
     const guide = travelGuides.shabbat;
@@ -1226,7 +1261,7 @@ describe("migrated practical guides", () => {
       expect(card.querySelectorAll("p")).toHaveLength(2);
     }
     if (id === "sherut") {
-      expect(container.querySelector("header p.text-lg")?.textContent).toMatch(/^The regular Nesher and Amal shared taxis from Ben Gurion Airport no longer operate/);
+      expect(container.querySelector("header p.text-lg")?.textContent).toMatch(/^The former Nesher and Amal shared taxis from Ben Gurion Airport have ended/);
       expect(container.querySelector("#airport-alternatives")?.querySelectorAll('[data-testid="highlighted-useful-link"]')).toHaveLength(2);
     }
     if (id === "shabbat") {
