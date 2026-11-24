@@ -47,8 +47,11 @@ describe("one-step direct form delivery", () => {
     const send = vi.fn().mockResolvedValue(undefined);
     const fetch = connectServer(createQuoteDeliveryService({ environment: enabled, send, now }));
     const { path, title } = await contactForm(context);
-    // Shared forms retain the portrait by default; only the actual home page suppresses it.
-    expect(document.getElementById("contact")?.querySelector("img")).not.toBeNull();
+    // The shared blue contact panel keeps my portrait and the same Tripadvisor link on desktop and mobile.
+    expect(document.getElementById("contact")?.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
+    expect(document.getElementById("contact")?.querySelector('[data-testid="contact-reviews-row"]')).not.toBeNull();
+    expect(document.getElementById("contact")?.querySelectorAll('[data-testid="contact-tripadvisor-reviews"] a[href]')).toHaveLength(1);
+    expect(screen.getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/ })).toHaveAttribute("href", expect.stringMatching(/tripadvisor/i));
     expect(screen.getByLabelText("Subject *")).toHaveValue("");
     expect(fetch).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
