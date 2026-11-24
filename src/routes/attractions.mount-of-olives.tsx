@@ -41,6 +41,6 @@ export function mountOlivesMeta() {
 }
 
 export const Route = createFileRoute("/attractions/mount-of-olives")({
-  head: mountOlivesMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.mount-of-olives.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: MountOlivesAttractionPage,
 });

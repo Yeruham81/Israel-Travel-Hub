@@ -41,6 +41,6 @@ export function viaDolorosaMeta() {
 }
 
 export const Route = createFileRoute("/attractions/via-dolorosa")({
-  head: viaDolorosaMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.via-dolorosa.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: ViaDolorosaAttractionPage,
 });

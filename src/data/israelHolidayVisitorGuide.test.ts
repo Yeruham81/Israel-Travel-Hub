@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { holidayGuideGroups, holidayGuideSources, schoolCalendarPlanning } from "@/data/israelHolidayVisitorGuide";
@@ -19,7 +20,7 @@ describe("Israel holidays visitor guide", () => {
     expect(travelGuides.calendar.title).toBe(HOLIDAY_GUIDE_TITLE);
     expect(travelGuides.calendar.updatedAt).toBe("2026-11-22");
     const page = readFileSync("src/components/IsraelHolidayVisitorGuide.tsx", "utf8");
-    const route = readFileSync("src/routes/travel-blog.calendar-of-events.tsx", "utf8");
+    const route = readRouteSource("src/routes/travel-blog.calendar-of-events.tsx");
     expect(page).toContain('{name:"Calendar of events",to:HOLIDAY_GUIDE_PATH}');
     expect(route).toContain('{name:"Calendar of events",path:HOLIDAY_GUIDE_PATH}');
     expect(page).not.toContain("Holidays in Israel: A Practical Guide for Visitors");

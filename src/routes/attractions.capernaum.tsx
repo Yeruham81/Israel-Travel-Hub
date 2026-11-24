@@ -3,6 +3,6 @@ import { CapernaumAttractionPage } from "@/components/CapernaumAttractionPage";
 import { attractionMeta } from "@/components/AttractionGuidePage";
 
 export const Route = createFileRoute("/attractions/capernaum")({
-  head: () => attractionMeta("capernaum"),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.capernaum.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: CapernaumAttractionPage,
 });

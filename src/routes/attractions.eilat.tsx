@@ -41,6 +41,6 @@ export function eilatMeta() {
 }
 
 export const Route = createFileRoute("/attractions/eilat")({
-  head: eilatMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.eilat.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: EilatAttractionPage,
 });

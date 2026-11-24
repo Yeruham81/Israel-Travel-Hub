@@ -7,7 +7,7 @@ import { tourCategories, tourCategoryPaths, toursHubHero, toursHubDescription, t
 import { travelGuidePaths } from "@/data/travel-guide-paths";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 
-const hero = toursHubHero;
+
 const planningLinks = [
   { title: "Getting around Israel", description: "Transport options between destinations.", to: travelGuidePaths.israel, icon: TrainFront },
   { title: "Best time to visit", description: "Weather, seasons and trip planning.", to: travelGuidePaths.bestTime, icon: Sun },
@@ -18,13 +18,7 @@ const planningLinks = [
 ] as const;
 
 export const Route = createFileRoute("/tours/")({
-  head: () => {
-    const meta = pageMeta({ title: `${toursHubTitle} | Israel Taxi & Travel`, description: toursHubDescription, path: "/tours/", image: hero.src, imageAlt: hero.alt,
-      crumbs: [{ name: "Home", path: "/" }, { name: "Tours & day trips", path: "/tours/" }] });
-    return { ...meta, scripts: [...meta.scripts, jsonLd({ "@context": "https://schema.org", "@type": "CollectionPage", name: toursHubTitle, description: toursHubDescription, url: CANONICAL_ORIGIN + "/tours/",
-      author: { "@type": "Person", name: "Moshe Barak", url: CANONICAL_ORIGIN + "/about-me/" },
-      mainEntity: { "@type": "ItemList", itemListElement: tourCategories.map((category, index) => ({ "@type": "ListItem", position: index + 1, name: category.title, url: CANONICAL_ORIGIN + tourCategoryPaths[category.id] })) } })] };
-  },
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/tours.index.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: Tours,
 });
 

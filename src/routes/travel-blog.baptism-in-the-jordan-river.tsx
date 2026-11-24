@@ -8,28 +8,6 @@ import {
 import { JordanRiverBaptismGuidePage } from "@/components/JordanRiverBaptismGuide";
 
 export const Route = createFileRoute("/travel-blog/baptism-in-the-jordan-river")({
-  head: () => {
-    const meta = pageMeta({
-      title:BAPTISM_TITLE,description:BAPTISM_DESCRIPTION,path:BAPTISM_PATH,
-      type:"article",image:BAPTISM_HERO.src,imageAlt:BAPTISM_HERO.alt,
-      crumbs:[{name:"Home",path:"/"},{name:"Travel guides",path:"/travel-blog/"},{name:"Jordan River baptism",path:BAPTISM_PATH}],
-    });
-    return {...meta,scripts:[
-      ...meta.scripts,
-      jsonLd({
-        "@context":"https://schema.org","@type":"Article",
-        "@id":CANONICAL_ORIGIN+BAPTISM_PATH+"#article",headline:BAPTISM_TITLE,
-        description:BAPTISM_DESCRIPTION,mainEntityOfPage:CANONICAL_ORIGIN+BAPTISM_PATH,
-        inLanguage:"en",dateModified:BAPTISM_UPDATED,author:authorLd(),
-        publisher:{"@type":"Organization",name:SITE_NAME,url:CANONICAL_ORIGIN},
-        image:new URL(BAPTISM_HERO.src,CANONICAL_ORIGIN).href,
-        citation:baptismSources.map(source=>source.url),
-      }),
-      jsonLd({
-        "@context":"https://schema.org","@type":"FAQPage",
-        mainEntity:baptismFaqs.map(faq=>({"@type":"Question",name:faq.q,acceptedAnswer:{"@type":"Answer",text:faq.a}})),
-      }),
-    ]};
-  },
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/travel-blog.baptism-in-the-jordan-river.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component:JordanRiverBaptismGuidePage,
 });

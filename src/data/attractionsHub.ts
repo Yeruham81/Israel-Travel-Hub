@@ -4,9 +4,10 @@ import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import { viaDolorosaSite } from "@/data/viaDolorosaSite";
 import { jaffaSite } from "@/data/jaffaSite";
 import { akkoSite } from "@/data/akkoSite";
-import { attractionGuides } from "@/data/attractionGuides";
+
 import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
-import { travelGuides, type GuidePhoto } from "@/data/travelGuides";
+import type { GuidePhoto } from "@/data/travelGuides";
+import { travelGuidePhotos, attractionGuidePhotos } from "@/data/generated/guide-directory";
 import { travelGuidePaths, type TravelGuideId } from "@/data/travel-guide-paths";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import caesareaPhoto from "@/assets/home/caesarea-dusk.webp";
@@ -49,15 +50,15 @@ export const attractionHubPhotos = {
 } as const;
 
 const attraction = (id: AttractionId, title: string, description: string, fallback: string, photoOverride?: { src: string; alt: string }): AttractionHubCard => {
-  const item = attractionGuides[id];
+  const image = attractionGuidePhotos[id];
   return {
     id, title, description, to: attractionPath(id),
-    photo: id === "old-city-jerusalem" ? oldCityJerusalemSite.hero : id === "via-dolorosa" ? viaDolorosaSite.hero : id === "jaffa" ? jaffaSite.hero : id === "akko-acre" ? akkoSite.hero : item.image ?? photoOverride ?? { src: fallback, alt: title },
+    photo: id === "old-city-jerusalem" ? oldCityJerusalemSite.hero : id === "via-dolorosa" ? viaDolorosaSite.hero : id === "jaffa" ? jaffaSite.hero : id === "akko-acre" ? akkoSite.hero : image ?? photoOverride ?? { src: fallback, alt: title },
   };
 };
 const editorialAttraction = (id: TravelGuideId, title: string, description: string, photoOverride?: { src: string; alt: string }): AttractionHubCard => ({
   id, title, description, to: travelGuidePaths[id],
-  photo: travelGuides[id].photo,
+  photo: travelGuidePhotos[id],
 });
 
 export const attractionHubRegions: AttractionHubRegion[] = [
@@ -182,7 +183,7 @@ export const attractionRelatedGuides: {
     title: "Jerusalem travel guide",
     description: "Old City highlights, neighbourhoods and memorable viewpoints.",
     to: travelGuidePaths.jerusalem,
-    photo: travelGuides.jerusalem.photo,
+    photo: travelGuidePhotos.jerusalem,
   },
   {
     title: "Discover Tel Aviv & Jaffa",
@@ -194,19 +195,19 @@ export const attractionRelatedGuides: {
     title: "Haifa visitor guide",
     description: "Gardens, hilltop views and northern coastal experiences.",
     to: "/attractions/haifa/",
-    photo: attractionGuides.haifa.image!,
+    photo: attractionGuidePhotos.haifa!,
   },
   {
     title: "Sea of Galilee travel guide",
     description: "Lakeside towns, heritage sites and beautiful scenery.",
     to: "/attractions/sea-of-galilee/",
-    photo: attractionGuides["sea-of-galilee"].image!,
+    photo: attractionGuidePhotos["sea-of-galilee"]!,
   },
   {
     title: "Explore the Dead Sea",
     description: "Saltwater beaches, desert landscapes and nearby sights.",
     to: travelGuidePaths.deadSea,
-    photo: travelGuides.deadSea.photo,
+    photo: travelGuidePhotos.deadSea,
   },
   {
     title: "Eilat: Red Sea attractions",

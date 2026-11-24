@@ -3,6 +3,6 @@ import { travelGuideMeta } from "@/components/TravelGuide";
 import { TelAvivBeachesGuide } from "@/components/TelAvivBeachesGuide";
 
 export const Route = createFileRoute("/travel-blog/beaches-in-tel-aviv")({
-  head: () => travelGuideMeta("telAvivBeaches"),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/travel-blog.beaches-in-tel-aviv.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: TelAvivBeachesGuide,
 });

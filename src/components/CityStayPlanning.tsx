@@ -1,6 +1,7 @@
 import { type LinkProps } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
-import { guideDirectory } from "@/data/travelGuides";
+
+import { guideDirectory } from "@/data/generated/guide-directory";
 import { isPublisherUrl } from "@/data/site-identity";
 import type { CityStayGuide } from "@/data/content";
 import roadTrip from "@/assets/home/road-trip.webp";

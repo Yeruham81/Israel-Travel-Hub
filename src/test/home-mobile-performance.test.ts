@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { readFileSync, statSync } from "node:fs";
 import { resolve } from "node:path";
@@ -68,7 +69,7 @@ describe("home mobile performance optimizations", () => {
   });
 
   it("provides a head preload for the exact LCP image variant, not every slide", () => {
-    const page = read("src/routes/index.tsx");
+    const page = readRouteSource("src/routes/index.tsx");
     for (const key of ["lcpHeroMobile", "lcpHeroMedium", "lcpHeroLarge"]) {
       expect(page).toContain(`href: ${key}`);
     }

@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { telMegiddoDestinationContent as content } from "@/components/TelMegiddoAttractionPage";
@@ -9,7 +10,7 @@ import { publicSources } from "@/data/registry";
 
 describe("Tel Megiddo attraction guide", () => {
   it("uses the shared attraction page with synchronized SEO and no obsolete guide", () => {
-    const route = readFileSync("src/routes/attractions.tel-megiddo.tsx", "utf8");
+    const route = readRouteSource("src/routes/attractions.tel-megiddo.tsx");
     const shell = readFileSync("src/components/AttractionDestinationPage.tsx", "utf8");
     expect(route).toContain("component: TelMegiddoAttractionPage");
     expect(route).toContain('travelGuideMeta("megiddo")');

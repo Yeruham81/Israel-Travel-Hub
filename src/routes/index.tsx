@@ -51,53 +51,15 @@ import mountTaborPhoto from "@/assets/guides/mount-tabor.jpg";
 import { photoCredits } from "@/data/photoCredits";
 import { GuideCard } from "@/components/GuideCard";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
-import { guideDirectory } from "@/data/travelGuides";
+
+import { guideDirectory } from "@/data/generated/guide-directory";
 import { isPublisherUrl } from "@/data/site-identity";
 import { AuthorCard } from "@/components/AuthorCard";
 import { TripadvisorReviewsSection, PersonalTestimonialsSection } from "@/components/HomeTestimonials";
 import { HomeContactForm } from "@/components/HomeContactForm";
 
 export const Route = createFileRoute("/")({
-  head: () => {
-    const meta = pageMeta({
-      title: "Israel Travel Guides: Airport Transfers, Tours, Hotels & Attractions",
-      description: "Plan Israel airport transfers, tours, shore excursions, accommodation and attractions with practical local travel guides and clear booking options.",
-      path: "/",
-    });
-    // HTML head discovery rather than waiting for the <picture> far below the
-    // global navigation. The media constraints match HeroCarousel's sources:
-    // the browser fetches ONE asset at the viewport's appropriate size.
-    return {
-      ...meta,
-      scripts: [...meta.scripts, jsonLd({
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "WebSite",
-            "@id": CANONICAL_ORIGIN + "/#website",
-            url: CANONICAL_ORIGIN + "/",
-            name: SITE_NAME,
-            inLanguage: "en",
-            publisher: { "@id": CANONICAL_ORIGIN + "/#organization" },
-          },
-          {
-            "@type": "Organization",
-            "@id": CANONICAL_ORIGIN + "/#organization",
-            name: SITE_NAME,
-            url: CANONICAL_ORIGIN + "/",
-            description: "Private airport transfers, travel planning and practical Israel travel guides.",
-          },
-          authorLd(),
-        ],
-      })],
-      links: [
-        ...meta.links,
-        { rel: "preload", as: "image", type: "image/webp", href: lcpHeroMobile, media: "(max-width: 767px)", fetchPriority: "high" },
-        { rel: "preload", as: "image", type: "image/webp", href: lcpHeroMedium, media: "(min-width: 768px) and (max-width: 1800px)", fetchPriority: "high" },
-        { rel: "preload", as: "image", type: "image/webp", href: lcpHeroLarge, media: "(min-width: 1801px)", fetchPriority: "high" },
-      ],
-    };
-  },
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/index.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: Home,
 });
 

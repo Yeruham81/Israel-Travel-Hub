@@ -5,6 +5,6 @@ import { hotelEditorialMeta } from "@/lib/hotel-editorial-meta";
 
 const g = { ...haifaStayGuide, photo: { ...haifaStayGuide.photo, src: "/images/travel-blog/featured-haifa-hotels.webp", alt: "Haifa hotels and cityscape" } };
 export const Route = createFileRoute("/travel-blog/best-hotels-in-haifa")({
- head: () => hotelEditorialMeta(g, "haifa", g.photo.src),
+ head: async (ctx) => { const { routeHead } = await import("../route-heads/travel-blog.best-hotels-in-haifa.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
  component: () => <StayEditorialGuidePage guide={g} id="haifa" />,
 });

@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
@@ -9,7 +10,7 @@ import { attractionHubCards } from "@/data/attractionsHub";
 
 describe("Rosh Hanikra attraction guide", () => {
   it("uses the shared destination layout with correct SEO, contact, sources and recommendations", () => {
-    const route = readFileSync("src/routes/attractions.rosh-hanikra.tsx", "utf8");
+    const route = readRouteSource("src/routes/attractions.rosh-hanikra.tsx");
     const shell = readFileSync("src/components/AttractionDestinationPage.tsx", "utf8");
     expect(route).toContain("component: RoshHanikraAttractionPage");
     expect(route).toContain('attractionMeta("rosh-hanikra")');

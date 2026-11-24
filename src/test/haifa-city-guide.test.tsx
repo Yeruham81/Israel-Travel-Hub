@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { haifaDestinationContent as content } from "@/components/HaifaAttractionPage";
@@ -55,7 +56,7 @@ describe("Haifa city-attractions guide", () => {
     const nav = attractionSidebarRegions.find(g => g.label === "Haifa & Coast");
     expect(nav && "children" in nav).toBeTruthy();
     if(nav && "children" in nav) expect(nav.children?.find(x => x.label === "Haifa")?.to).toBe("/attractions/haifa/");
-    const old = readFileSync("src/routes/travel-blog.haifa.tsx", "utf8");
+    const old = readRouteSource("src/routes/travel-blog.haifa.tsx");
     expect(old).toContain('<Navigate to="/attractions/haifa/" replace />');
     expect(old).toContain("noindex,follow");
   });

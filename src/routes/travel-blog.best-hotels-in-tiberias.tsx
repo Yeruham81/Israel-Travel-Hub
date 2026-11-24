@@ -5,6 +5,6 @@ import { hotelEditorialMeta } from "@/lib/hotel-editorial-meta";
 
 const g = { ...tiberiasStayGuide, reviewedAt: "2026-11-19" };
 export const Route = createFileRoute("/travel-blog/best-hotels-in-tiberias")({
- head: () => hotelEditorialMeta(g, "tiberias", g.photo.src),
+ head: async (ctx) => { const { routeHead } = await import("../route-heads/travel-blog.best-hotels-in-tiberias.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
  component: () => <TiberiasHotelEditorialGuide guide={g} />,
 });

@@ -4,7 +4,7 @@ import { parseTourSearch } from "@/lib/tours";
 
 export const Route = createFileRoute("/tours/negev-desert-ramon-crater")({
   validateSearch: parseTourSearch,
-  head: () => tourCategoryMeta("negev-ramon"),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/tours.negev-desert-ramon-crater.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: CategoryRoute,
 });
 

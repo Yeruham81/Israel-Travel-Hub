@@ -2,8 +2,9 @@ import { carRentalHero } from "@/data/carRentalGuide";
 import telAvivTourHero from "@/assets/home/hero-tel-aviv-large.webp";
 import deadSeaHero from "@/assets/dead-sea/landscape.webp";
 
-import { guideDirectory } from "@/data/travelGuides";
-import { attractionGuides } from "@/data/attractionGuides";
+
+import { guideDirectory } from "@/data/generated/guide-directory";
+import { attractionGuidePhotos } from "@/data/generated/guide-directory";
 import { attractionIds, attractionPath } from "@/data/attractionGuideTypes";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import { jaffaSite } from "@/data/jaffaSite";
@@ -47,5 +48,5 @@ export function guideHeroPhotoForPath(to: string): GuideHeroPhoto | undefined {
   const guide = guideDirectory.find(entry => normalized(String(entry.to)) === path);
   if (guide?.photo) return guide.photo;
   const attractionId = attractionIds.find(id => normalized(attractionPath(id)) === path);
-  return attractionId ? attractionGuides[attractionId].image : undefined;
+  return attractionId ? attractionGuidePhotos[attractionId] ?? undefined : undefined;
 }

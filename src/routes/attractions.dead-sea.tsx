@@ -40,6 +40,6 @@ export function deadSeaMeta() {
 }
 
 export const Route = createFileRoute("/attractions/dead-sea")({
-  head: deadSeaMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.dead-sea.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: DeadSeaAttractionPage,
 });

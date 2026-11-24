@@ -1,4 +1,5 @@
-import { guideDirectory } from "./travelGuides";
+
+import { guideDirectory } from "@/data/generated/guide-directory";
 
 /** Explicitly chosen contextual readings for visitors browsing Israel events. */
 const related = [

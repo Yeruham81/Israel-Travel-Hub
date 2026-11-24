@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { travelGuidePaths } from "@/data/registry";
@@ -6,7 +7,7 @@ import { itineraries } from "@/data/israelItineraries";
 import { travelTipsFaqs, travelTipsSources } from "@/data/israelTravelTips";
 
 const source = readFileSync("src/components/IsraelTravelTipsGuide.tsx", "utf8");
-const route = readFileSync("src/routes/travel-blog.israel-travel-tips.tsx", "utf8");
+const route = readRouteSource("src/routes/travel-blog.israel-travel-tips.tsx");
 
 describe("Israel travel tips — first-time visitor guide", () => {
   it("keeps the existing canonical route with refreshed metadata and dedicated content", () => {

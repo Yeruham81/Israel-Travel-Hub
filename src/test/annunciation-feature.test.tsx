@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
@@ -10,7 +11,7 @@ import { publicSources } from "@/data/registry";
 
 describe("Basilica of the Annunciation attraction guide", () => {
   it("uses the shared attraction layout and synchronized metadata", () => {
-    const route = readFileSync("src/routes/attractions.basilica-of-the-annunciation.tsx", "utf8");
+    const route = readRouteSource("src/routes/attractions.basilica-of-the-annunciation.tsx");
     const shell = readFileSync("src/components/AttractionDestinationPage.tsx", "utf8");
     expect(route).toContain("component: AnnunciationAttractionPage");
     expect(route).toContain('travelGuideMeta("annunciation")');

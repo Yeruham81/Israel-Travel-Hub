@@ -4,7 +4,7 @@ import { parseShoreServiceSearch } from "@/lib/shore-services";
 
 export const Route = createFileRoute("/shore-excursions/ashdod")({
   validateSearch: parseShoreServiceSearch,
-  head: () => shorePortMeta("ashdod"),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/shore-excursions.ashdod.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: AshdodShorePage,
 });
 

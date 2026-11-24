@@ -3,6 +3,6 @@ import { attractionMeta } from "@/components/AttractionGuidePage";
 import { RoshHanikraAttractionPage } from "@/components/RoshHanikraAttractionPage";
 
 export const Route = createFileRoute("/attractions/rosh-hanikra")({
-  head: () => attractionMeta("rosh-hanikra"),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.rosh-hanikra.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: RoshHanikraAttractionPage,
 });

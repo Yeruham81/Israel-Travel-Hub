@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { bestTimeGuide, monthFits, seasonalFits, suitabilityColumns, regionalRecommendations, seasonDetails } from "./bestTimeIsrael";
@@ -14,7 +15,7 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     expect(bestTimeGuide.title).toBe("Best Time to Visit Israel: Weather & Seasons");
     expect(bestTimeGuide.updatedAt).toBe("2026-11-21");
     expect(travelGuides.bestTime).toBe(bestTimeGuide);
-    const route=readFileSync("src/routes/travel-blog.best-time-to-visit-israel.tsx","utf8");
+    const route=readRouteSource("src/routes/travel-blog.best-time-to-visit-israel.tsx");
     expect(route).toContain('travelGuideMeta("bestTime")');
     expect(route).toContain("component: BestTimeIsraelGuide");
     expect(route).not.toContain('<TravelGuidePage id="bestTime"');

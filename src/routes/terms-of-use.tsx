@@ -3,7 +3,7 @@ import { LegalPage, legalPageMeta, type LegalSection } from "@/components/LegalP
 import { airportTransferContact } from "@/data/registry";
 
 export const Route = createFileRoute("/terms-of-use")({
-  head: () => legalPageMeta("Terms of Use", "/terms-of-use/", "Website terms for Israel Taxi & Travel: transport enquiries, bookings, prices, cancellations and use of third-party services and affiliate links."),
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/terms-of-use.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: TermsOfUse,
 });
 

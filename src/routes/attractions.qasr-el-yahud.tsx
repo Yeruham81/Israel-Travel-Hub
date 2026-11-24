@@ -41,6 +41,6 @@ export function qasrElYahudMeta() {
 }
 
 export const Route = createFileRoute("/attractions/qasr-el-yahud")({
-  head: qasrElYahudMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.qasr-el-yahud.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: QasrElYahudAttractionPage,
 });

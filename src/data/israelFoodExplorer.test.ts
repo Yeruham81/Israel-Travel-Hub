@@ -1,3 +1,4 @@
+import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import {
@@ -8,7 +9,7 @@ import { travelGuides } from "./travelGuides";
 import { migrationPhotos } from "./guideMigrationPhotos";
 import { publicSources, affiliateConfig } from "./registry";
 
-const route=()=>readFileSync("src/routes/travel-blog.what-to-eat-in-israel.tsx","utf8");
+const route=()=>readRouteSource("src/routes/travel-blog.what-to-eat-in-israel.tsx");
 const ui=()=>readFileSync("src/components/IsraelFoodGuide.tsx","utf8");
 
 describe("What to Eat in Israel — beginner visitor guide",()=>{

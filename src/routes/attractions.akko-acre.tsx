@@ -41,6 +41,6 @@ export function akkoMeta() {
 }
 
 export const Route = createFileRoute("/attractions/akko-acre")({
-  head: akkoMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.akko-acre.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: AkkoAttractionPage,
 });

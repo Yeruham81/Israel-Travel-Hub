@@ -41,6 +41,6 @@ export function einGediMeta() {
 }
 
 export const Route = createFileRoute("/attractions/ein-gedi")({
-  head: einGediMeta,
+  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.ein-gedi.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
   component: EinGediAttractionPage,
 });

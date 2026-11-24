@@ -5,6 +5,6 @@ import { hotelSubguideMeta } from "@/lib/landing-schema";
 const guide = hotelCategoryGuides.find(g => g.path === "/accommodation/dead-sea/spa/")!;
 const destination = deadSeaStayGuide;
 export const Route = createFileRoute("/accommodation/dead-sea/spa")({
- head: () => hotelSubguideMeta(guide, destination, guide.shortTitle, guide.photo.src),
+ head: async (ctx) => { const { routeHead } = await import("../route-heads/accommodation.dead-sea.spa.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
  component: () => <HotelCategoryPage guide={guide} destination={destination} />,
 });
