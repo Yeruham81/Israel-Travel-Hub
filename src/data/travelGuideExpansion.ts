@@ -123,7 +123,7 @@ export const expandedTravelGuides = {
           "A pre-booked private transfer can provide a confirmed vehicle, meeting point and price. Tell me your flight number, full destination address, number of travellers, luggage and any child-seat or accessibility needs. I will explain the waiting, payment and cancellation terms before a booking is confirmed. You can compare private airport-transfer options.",
         ],
         inlineLinks: [
-          { text: "official Ben Gurion Airport taxi guide", to: travelGuidePaths.airportTaxis },
+          { text: "Ben Gurion Airport taxi guide", to: travelGuidePaths.airportTaxis },
           { text: "private airport-transfer options", to: "/airport-transfers/" },
         ],
         sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026"],
