@@ -161,7 +161,7 @@ export function TelAvivHotelBrowser() {
             className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2 px-6 py-2.5 text-center"
           >
             Browse all Tel Aviv hotels <ArrowRight className="h-4 w-4" aria-hidden />
-            <span className="sr-only"> (opens in a new tab)</span>
+            <span className="sr-only"> for {hotel.name} on {booking.providerName} (opens in a new tab)</span>
           </a>
         </div>
       )}
@@ -207,8 +207,7 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
         <div className={verticalLayout ? "mt-auto border-t bg-secondary/20 px-3 py-3 sm:px-4" : "border-t bg-secondary/20 px-3 py-3 sm:col-start-2 sm:px-4"}>
           <a href={hotelAffiliateUrl(booking, pageId, hotel.id)} target="_blank" rel={relFor(booking.isAffiliate)}
              onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
-             className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-4 py-2.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-             aria-label={`Check rooms & rates for ${hotel.name} on ${booking.providerName}`}>
+             className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-4 py-2.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             Check rooms & rates <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
