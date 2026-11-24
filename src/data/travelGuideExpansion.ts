@@ -224,8 +224,6 @@ export const expandedTravelGuides = {
       { label: "Getting around Israel", to: travelGuidePaths.israel, note: "Plan trains, buses, local taxis and connections after the airport journey." },
       { label: "Israel travel tips", to: travelGuidePaths.travelTips, note: "Practical advice for a smooth first day and the rest of your visit." },
     ],
-  },ead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Explore natural sights and activities beyond the airport for a longer Israel trip." },
-    ],
   },
   travelTips: {
     id: "travelTips", title: TRAVEL_TIPS_TITLE,
