@@ -1,41 +1,52 @@
-name: Cookie consent audit
-
+name: Cookie consent browser audit
 on:
   push:
     branches: [codex/global-cookie-consent-20261124]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-
+concurrency:
+  group: cookie-audit-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  inventory:
+  browser:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 12
+    env:
+      CI: "true"
+      VITE_INDEXABLE: "false"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - name: Inventory optional resources and browser storage
-        shell: bash
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Install headless Chromium
         run: |
-          python3 - <<'PY'
-          import pathlib, re, shutil, subprocess
-          pattern = r"iframe|<script|createElement.*script|localStorage|sessionStorage|document\.cookie|sendBeacon|captureException|__lovable|gtag|dataLayer|<video|<audio"
-          if shutil.which("rg"):
-              result = subprocess.run(["rg", "-n", "-i", pattern, "src", "public",
-                  "--glob", "*.ts", "--glob", "*.tsx", "--glob", "*.html", "--glob", "*.js",
-                  "--glob", "!**/*.test.*", "--glob", "!src/test/**",
-                  "--glob", "!**/routeTree.gen.ts"], text=True, stdout=subprocess.PIPE)
-              for line in result.stdout.splitlines():
-                  print(line[:500])
-          else:
-              matcher = re.compile(pattern, re.I)
-              for root in ("src", "public"):
-                  for path in pathlib.Path(root).rglob("*"):
-                      if not path.is_file() or path.suffix not in (".ts", ".tsx", ".html", ".js") or "src/test" in str(path) or ".test." in path.name or path.name == "routeTree.gen.ts":
-                          continue
-                      for number, line in enumerate(path.read_text().splitlines(), 1):
-                          if matcher.search(line):
-                              print(f"{path}:{number}:{line[:500]}")
-          PY
+          npm install --prefix /tmp/cookie-audit --no-save playwright@1.56.1
+          /tmp/cookie-audit/node_modules/.bin/playwright install --with-deps chromium
+      - name: Start local website
+        run: |
+          node scripts/generate-sitemap.mjs --mode development
+          nohup ./node_modules/.bin/vite dev --host 127.0.0.1 --port 4173 > /tmp/cookie-vite.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS --max-time 4 http://127.0.0.1:4173/car-rental/ > /dev/null; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/cookie-vite.log
+          exit 1
+      - name: Verify actual browser requests and consent changes
+        env:
+          NODE_PATH: /tmp/cookie-audit/node_modules
+        run: node scripts/audit-cookie-consent.cjs
+      - name: Show preview diagnostics on failure
+        if: failure()
+        run: tail -100 /tmp/cookie-vite.log

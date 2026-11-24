@@ -14,9 +14,9 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
         introduction: "Found an old airport sherut listing or need help choosing another way to your destination? Tell me your arrival date, flight, address, passengers and luggage. I'll reply personally and can discuss a confirmed private pickup when appropriate.",
         placeholder: "Landing date, flight, destination, passengers, luggage or your question…" };
     case "shabbat":
-      return { ...base, heading: "Questions about arriving on Shabbat?",
-        introduction: "Landing at Ben Gurion Airport on Friday evening or Saturday? Tell me your flight, destination and any luggage or accessibility needs, or ask about Line 711 and onward transport. I'll reply personally and can discuss an arranged airport pickup where appropriate.",
-        placeholder: "Flight date and time, destination, passengers, bags or your question…" };
+      return { ...base, heading: "Need a private airport transfer on Shabbat?",
+        introduction: "Share your flight, destination, passengers and luggage. I'll reply personally about arranging your private airport pickup.",
+        placeholder: "Flight date and number, destination, passengers and luggage…" };
     case "airport":
       return { ...base, heading: "Questions about your airport arrival?",
         introduction: "Have a question about Ben Gurion Airport, your onward journey or an airport pickup? Tell me your arrival date, destination and what you'd like to clarify. I'll reply personally and can discuss private transport when appropriate.",

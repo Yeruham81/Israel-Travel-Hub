@@ -17,7 +17,7 @@ const sections: [string, string, string][] = [
   ["src/routes/attractions.index.tsx", 'id="attractions-related"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
   ["src/routes/attractions.index.tsx", 'id="attractions-trip-planning"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
   ["src/routes/airport-transfers.index.tsx", 'id="keep-planning"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
-  ["src/routes/airport-transfers.index.tsx", 'id="trip-planning"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
+  ["src/components/IconTripPlanningLinks.tsx", 'data-testid="icon-trip-planning-links"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
   ["src/routes/private-driver-in-israel.tsx", 'id="travel-guides"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
   ["src/routes/private-driver-in-israel.tsx", 'id="next-steps"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
   ["src/routes/shore-excursions.index.tsx", 'id="shore-related-guides"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
@@ -34,6 +34,16 @@ describe("editorial six-card grid responsive parity", () => {
     const index = source.indexOf(marker);
     expect(index).toBeGreaterThanOrEqual(0);
     expect(source.slice(Math.max(0, index - 160), index + 4500)).toContain(classes);
+  });
+
+  it("reuses the identical six-icon planning card layout in the airport hub and Shabbat guide", () => {
+    const hub = read("src/routes/airport-transfers.index.tsx");
+    const guide = read("src/components/TravelGuide.tsx");
+    const shared = read("src/components/IconTripPlanningLinks.tsx");
+    expect(hub).toContain('<IconTripPlanningLinks title="Plan the rest of your stay" items={tripPlanningLinks} />');
+    expect(guide).toContain('<IconTripPlanningLinks title="Plan the next part of your trip"');
+    expect(shared).toContain('className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3"');
+    expect(shared).toContain('size-5 shrink-0 text-primary');
   });
 
   it("uses the same grid rule in the shared attraction and related-guide components", () => {

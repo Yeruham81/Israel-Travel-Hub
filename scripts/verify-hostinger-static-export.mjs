@@ -77,10 +77,10 @@ assert(!paths.has("/tickets/"), "Removed tickets page must not appear in sitemap
 assert(!existsSync(join(root, "tickets", "index.html")), "Removed tickets HTML must not be exported");
 const rentalHtml = readFileSync(join(root, "car-rental", "index.html"), "utf8");
 assert(rentalHtml.includes("My Practical Guide for Visitors"), "Car rental guide was not prerendered");
-assert(rentalHtml.includes('src="/widgets/discovercars.html"'), "Missing DiscoverCars search frame");
+assert(rentalHtml.includes('data-consent-src="/widgets/discovercars.html"'), "Missing DiscoverCars search frame");
 assert((rentalHtml.match(/<table\b/g) || []).length === 2, "Car rental planning tables are missing");
 const rentalWidget = readFileSync(join(root, "widgets", "discovercars.html"), "utf8");
-const rentalWidgetSrc = rentalWidget.match(/<script\b[^>]*src="([^"]+)"/)?.[1];
+const rentalWidgetSrc = rentalWidget.match(/<script\b[^>]*data-consent-src="([^"]+)"/)?.[1];
 assert(rentalWidgetSrc, "Missing official Travelpayouts DiscoverCars script");
 const widgetUrl = new URL(rentalWidgetSrc.replaceAll("&amp;", "&"));
 assert(widgetUrl.origin === "https://tpwgt.com", "DiscoverCars widget must use Travelpayouts");
@@ -219,9 +219,19 @@ assert(!/\b(?:Line|route|bus)\s+712\b/i.test(shabbatMain),
 const shabbatPhotoGrid = shabbatMain.match(/<ul\b[^>]*data-testid="stay-trip-photo-grid"[^>]*>([\s\S]*?)<\/ul>/i)?.[1];
 assert(shabbatPhotoGrid && [...shabbatPhotoGrid.matchAll(/<li\b/g)].length === 6,
   "Shabbat page must render six illustrated related guides");
-const nextSection = shabbatMain.match(/<section\b[^>]*aria-label="Plan the next part of your trip"[^>]*>([\s\S]*?)<\/section>/i)?.[1];
+const nextSection = shabbatMain.match(/<section\b[^>]*data-testid="icon-trip-planning-links"[^>]*>([\s\S]*?)<\/section>/i)?.[1];
 assert(nextSection && [...nextSection.matchAll(/<li\b/g)].length === 6,
   "Shabbat page must retain exactly six Plan the next part of your trip links");
+assert([...nextSection.matchAll(/<svg\b/g)].length === 6,
+  "Shabbat next-trip links must have six destination-specific icons");
+assert(nextSection.includes("Rental options and Saturday pickup arrangements."),
+  "Shabbat next-trip links must show concise descriptions");
+assert(shabbatMain.includes("Need a private airport transfer on Shabbat?") &&
+  shabbatMain.includes("Share your flight, destination, passengers and luggage.") &&
+  shabbatMain.includes("private airport pickup."),
+  "Shabbat contact copy must focus on private airport transfers");
+assert(!shabbatMain.includes("or ask about Line 711 and onward transport"),
+  "Shabbat contact copy must not solicit generic public transport questions");
 const shabbatSourceIndex = shabbatMain.indexOf('id="sources"');
 const shabbatContactIndex = shabbatMain.indexOf('id="contact"');
 assert(shabbatContactIndex > 0 && shabbatSourceIndex > shabbatContactIndex,

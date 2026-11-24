@@ -14,7 +14,7 @@ describe("map embedding intent across attraction and travel guides", () => {
       const page = readFileSync(file, "utf8");
       expect(page, file).not.toMatch(/maps\.google\.com\/maps\?saddr=|google\.com\/maps\/embed\/v1\/directions/i);
       // Check each actual iframe source, rather than banning useful outbound Directions links.
-      for (const frame of page.matchAll(/<iframe\b[\s\S]*?\bsrc\s*=\s*(?:"[^"]*"|\{[^}]*\})/g)) {
+      for (const frame of page.matchAll(/<(?:iframe|ConsentIframe)\b[\s\S]*?\bsrc\s*=\s*(?:"[^"]*"|\{[^}]*\})/g)) {
         expect(frame[0], file).not.toMatch(/(?:maps\/dir|saddr=|daddr=|travelmode=driving|travelmode=walking)/i);
       }
     }
