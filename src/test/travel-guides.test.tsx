@@ -478,7 +478,7 @@ describe("migrated practical guides", () => {
     const nav = within(container).getByRole("navigation", { name: "On this page" });
     const airportJump = nav.querySelector('a[href="#airport"].chip');
     expect(airportJump).toHaveTextContent("Airport taxis");
-    expect(airportJump).toHaveAttribute("aria-label", "Taking a Taxi from Ben Gurion Airport");
+    expect(airportJump).toHaveAttribute("aria-label", "Airport taxis: Taking a Taxi from Ben Gurion Airport");
     expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Me");
     const jumpItems = Array.from(nav.querySelectorAll("ul.grid > li"));
     expect(jumpItems).toHaveLength(10);
