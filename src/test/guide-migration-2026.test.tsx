@@ -43,7 +43,7 @@ describe("October planning, city and heritage guide migration", () => {
     expect(guide.sections.length).toBeGreaterThanOrEqual(4);
     expect(new Set(guide.sections.map(section => section.id)).size).toBe(guide.sections.length);
     expect(guide.photo.alt.length).toBeGreaterThan(15);
-    expect(article.querySelector("header img")).toHaveAttribute("src", guide.photo.src);
+    expect(article.querySelector("header figure img")).toHaveAttribute("src", guide.photo.src);
     for (const sourceId of guide.sourceIds) expect(getSource(sourceId)?.url).toMatch(/^https:\/\//);
     expect(publicSources(guide.sourceIds).length).toBeGreaterThan(1);
     for (const anchor of article.querySelectorAll("a[href]")) {
