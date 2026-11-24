@@ -1,7 +1,7 @@
 /** Via Dolorosa visitor facts based on the Franciscan Terra Sancta Museum and Christian Information Center, November 2026. */
 export const viaDolorosaSite = {
   title: "Via Dolorosa, Jerusalem: 14 Stations of the Cross & Walking Guide",
-  description: "Walk the Via Dolorosa in Jerusalem: all 14 Stations of the Cross, an interactive map, starting point, route, Friday procession, church hours and practical visiting tips.",
+  description: "Walk Jerusalem's Via Dolorosa: all 14 Stations of the Cross, route map, starting point, Friday procession and practical visiting tips.",
   updatedAt: "2026-11-23",
   region: "Jerusalem",
   hero: {
