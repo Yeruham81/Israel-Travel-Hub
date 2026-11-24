@@ -276,7 +276,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                 <JerusalemItineraryTourOptions days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3} />
               </div>
             )}
-            {g.activityWidgets?.filter(widget => widget.day === index + 1).map(widget =>
+            {g.activityWidgets?.filter(widget => widget.day === index + 1 && !(id === "7" && widget.day === 7)).map(widget =>
               <div key={widget.city} className="border-t bg-secondary/10 px-5 py-4 sm:px-7">
                 <GetYourGuideCityWidget city={widget.city} page={`${id}_day` as GetYourGuideWidgetPage} />
               </div>
@@ -285,6 +285,12 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         })}
       </div>
     </section>
+    {id === "7" && g.activityWidgets?.filter(widget => widget.day === 7).map(widget =>
+      <section key={widget.city} className="mt-8 rounded-2xl border bg-card p-5 sm:p-6" aria-label="Optional Tel Aviv activities beyond the main itinerary">
+        <h2 className="text-xl font-semibold">Extra time in Tel Aviv?</h2>
+        <p className="mt-2 text-sm text-muted-foreground">Explore additional activities when your flight and transport plans leave enough time.</p>
+        <div className="mt-4"><GetYourGuideCityWidget city={widget.city} page={`${id}_day` as GetYourGuideWidgetPage} /></div>
+      </section>)}
     <section id="transport" aria-labelledby="transport-h" className="mt-14 scroll-mt-28">
       <h2 id="transport-h" className="text-3xl">{g.beforeYouGo?.length ? "My practical planning tips" : "Tips for transport and hotel planning"}</h2>
       <p className="mt-3 leading-relaxed">{g.noCarAdvice}</p>
@@ -320,17 +326,16 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     <FaqList faqs={g.faqs} />
     {g.relatedGuides?.length ? <section id="related-guides" aria-labelledby="related-guides-h" className="mt-14 scroll-mt-28">
       <h2 id="related-guides-h" className="text-3xl">Related practical guides</h2>
-      <div className={g.relatedGuides.length === 6 ? "mt-5 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-5 grid gap-3 sm:grid-cols-2"}>
+      <div className={"mt-5 grid grid-cols-2 gap-3 lg:grid-cols-3"}>
         {g.relatedGuides.map((item) => {
           const picture = guideHeroPhotoForPath(String(item.to)) ?? migrationPhotos[item.image];
-          return <article key={item.to} className="editorial-card-link overflow-hidden rounded-xl border bg-card">
-            <Link to={item.to} className="group grid h-full grid-cols-1 items-start gap-3 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:grid-cols-[116px_minmax(0,1fr)]">
-              <img src={picture.src} alt={picture.alt} width={220} height={180} loading="lazy" decoding="async"
-                className="aspect-[3/2] h-auto w-full object-cover sm:aspect-auto sm:h-full sm:min-h-28" />
-              <span className="min-w-0 px-3 pb-3 sm:py-3 sm:pl-0 sm:pr-3">
-                <span className="block text-sm font-semibold text-primary underline-offset-2 group-hover:underline">{item.title}</span>
-                <span className="mt-1.5 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>
-                
+          return <article key={item.to} className="editorial-card-link min-w-0 overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:bg-secondary/30 hover:shadow-md">
+            <Link to={item.to} className="group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <span className="overflow-hidden"><img src={picture.src} alt={picture.alt} width={500} height={333} loading="lazy" decoding="async"
+                className="aspect-[3/2] w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]" /></span>
+              <span className="flex flex-1 flex-col p-3.5 sm:p-4">
+                <span className="text-sm font-bold leading-snug text-foreground group-hover:text-primary sm:text-base">{item.title}</span>
+                <span className="mt-1.5 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.description}</span>
               </span>
             </Link>
           </article>;
@@ -356,7 +361,13 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         })}
       </div>
     </section>
-    <HomeContactForm key={id} guide={guideContactCopy(g.title, "itinerary")} />
+    <HomeContactForm key={id} showTripadvisorBesidePortraitMobile guide={{
+      ...guideContactCopy(g.title, "itinerary"),
+      eyebrow: "Contact Me",
+      heading: "Need a Private Driver for Your Israel Trip?",
+      introduction: "Tell me your travel dates, pickup location, destinations and number of passengers. I'll reply personally about arranging private transport for your journey.",
+      placeholder: "Travel dates, pickup point, destinations, passengers and luggage…",
+    }} />
     <SourcesDisclosure>
       <p className="text-sm leading-relaxed text-muted-foreground">Official planning references for this itinerary. Verify schedules, entry conditions and openings for your exact dates; these sources do not imply live availability.</p>
       <ul className="mt-3 space-y-2">
