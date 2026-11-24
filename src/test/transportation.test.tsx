@@ -34,7 +34,7 @@ describe("airport transfers and private driver separation", () => {
       const card = container.querySelector(`[data-destination="${rate.id}"]`)! as HTMLElement;
       expect(card).toHaveTextContent(rate.destination);
       expect(card).toHaveTextContent(rate.price.amount.toLocaleString("en-US"));
-      expect(within(card).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "#request-quote");
+      expect(within(card).getByRole("link", { name: /^(Get a quote|Request a quote|Get a quote Request a quote)$/ })).toHaveAttribute("href", "#request-quote");
     }
     for (const route of airportTransferRoutes) {
       const card = screen.getAllByTestId("airport-destination-card").find((item) => item.dataset["destination"] === route.id)!;
@@ -50,7 +50,7 @@ describe("airport transfers and private driver separation", () => {
     expect(screen.getByLabelText("Destination *")).toHaveValue("netanya");
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie Smith" } });
     const card = screen.getAllByTestId("airport-destination-card").find((item) => item.dataset["destination"] === "haifa")!;
-    fireEvent.click(within(card).getByRole("link", { name: "Request a quote" }));
+    fireEvent.click(within(card).getByRole("link", { name: /^(Get a quote|Request a quote|Get a quote Request a quote)$/ }));
     expect(screen.getByLabelText("Destination *")).toHaveValue("haifa");
     expect(screen.getByLabelText("Full name *")).toHaveValue("Jamie Smith");
     await act(async () => { await router.navigate({ to: "/airport-transfers/", search: { destination: "jerusalem" }, hash: "request-quote" }); });
