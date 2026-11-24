@@ -555,7 +555,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     ],
     relatedGuides: [
       { title: "Jerusalem Old City", description: "Historic quarters, gates and practical walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Where to stay in Tel Aviv", description: "Compare neighbourhoods and hotels for the coastal part of the trip.", to: "/travel-blog/where-to-stay-in-tel-aviv/", image: "itinerary-jaffa-streets" },
+      { title: "Where to stay in Tel Aviv", description: "Compare neighbourhoods and hotels for the coastal part of the trip.", to: "/travel-blog/where-to-stay-in-tel-aviv/", image: "beaches-in-tel-aviv" },
       { title: "Dead Sea attractions", description: "Where to float and how to plan desert stops.", to: "/travel-blog/dead-sea-attractions/", image: "itinerary-dead-sea-shore" },
       { title: "Jerusalem to Bethlehem", description: "Crossing arrangements and travel options explained.", to: "/travel-blog/jerusalem-to-bethlehem/", image: "jerusalem-to-bethlehem" },
       { title: "Old Jaffa", description: "Port views, historic lanes and neighbourhood walks.", to: "/attractions/jaffa/", image: "itinerary-jaffa-streets" },
@@ -722,7 +722,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     ],
     relatedGuides: [
       { title: "Jerusalem Old City", description: "Historic quarters, gates and practical walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Hotels in Tiberias", description: "Find a convenient base for two nights around the Sea of Galilee.", to: "/travel-blog/best-hotels-in-tiberias/", image: "itinerary-7day-capernaum" },
+      { title: "Hotels in Tiberias", description: "Find a convenient base for two nights around the Sea of Galilee.", to: "/travel-blog/best-hotels-in-tiberias/", image: "itinerary-tiberias-hotels" },
       { title: "Magdala and its archaeological remains", description: "A rewarding historical stop on the Galilee shore.", to: "/attractions/magdala/", image: "magdala-archaeology" },
       { title: "Haifa city highlights", description: "Viewpoints, the Bahá’í Gardens and museums.", to: "/attractions/haifa/", image: "museums-in-haifa" },
       { title: "Getting around Israel", description: "Rail, buses and connections between major regions.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
@@ -935,7 +935,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     ],
     relatedGuides: [
       { title: "Jerusalem Old City", description: "Gates, historic quarters and walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Hotels in Tiberias", description: "Choose a Galilee base for the longer northern stay.", to: "/travel-blog/best-hotels-in-tiberias/", image: "itinerary-7day-capernaum" },
+      { title: "Hotels in Tiberias", description: "Choose a Galilee base for the longer northern stay.", to: "/travel-blog/best-hotels-in-tiberias/", image: "itinerary-tiberias-hotels" },
       { title: "Sea of Galilee", description: "Lakeside stops and heritage-site connections.", to: "/attractions/sea-of-galilee/", image: "magdala-archaeology" },
       { title: "Akko Old City", description: "Crusader halls, markets and harbour heritage.", to: "/attractions/akko-acre/", image: "itinerary-10day-akko-aerial" },
       { title: "Haifa", description: "Bahá’í Gardens viewpoints and coastal sights.", to: "/attractions/haifa/", image: "EXISTING:haifa" },
