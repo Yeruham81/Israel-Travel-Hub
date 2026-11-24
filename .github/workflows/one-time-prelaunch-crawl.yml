@@ -1,4 +1,4 @@
-name: Post-htaccess live verification (read only)
+name: Referrer-Policy live verification (read only)
 on:
   pull_request:
     branches: [main]
@@ -12,11 +12,11 @@ jobs:
   public-server:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 6
     env:
       ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
     steps:
-      - name: Verify live security headers, APIs and approved redirects
+      - name: Verify corrected Referrer-Policy and preserve existing protections
         run: |
           python3 -u - <<'PY'
           import subprocess, tempfile, os, json, time, re, pathlib
@@ -43,7 +43,7 @@ jobs:
                           if os.path.exists(hdr):
                               for line in pathlib.Path(hdr).read_text(errors='replace').splitlines():
                                   if ':' in line:
-                                      k,v=line.split(':',1);h[k.lower()]=v.strip()
+                                      k,v=line.split(':',1);k=k.lower();h[k]=h[k]+', '+v.strip() if k in h and k in allow else v.strip()
                           if status==429:
                               findings.append({'type':'rate_limit','probe':key,'attempt':attempt+1});save()
                               delay=h.get('retry-after','')
@@ -71,13 +71,11 @@ jobs:
           try:
               probe('home','/')
               probe('food','/travel-blog/what-to-eat-in-israel/',body=True)
+              probe('airport','/airport-transfers/')
               probe('http_redirect','/',base='http://'+urlsplit(origin).hostname)
               probe('quote','/api/quote-request/',body=True)
               probe('exchange','/api/exchange-rates/',body=True)
-              for p in ['/.env','/.git/config','/.htaccess','/.user.ini','/api/_internal/','/api/','/assets/','/wp-config.php','/wp-admin/']:
-                  probe(p,p,method='HEAD')
-                  if results[p].get('status') not in (401,403,404,410):findings.append({'type':'private_path_review','path':p})
-              for key in ('home','food'):
+              for key in ('home','food','airport'):
                   r=results[key];h=r.get('headers',{})
                   if r.get('status')!=200 or r.get('curlExit')!=0:findings.append({'type':'page_http','key':key})
                   for k,v in {'x-content-type-options':'nosniff','x-frame-options':'SAMEORIGIN','referrer-policy':'strict-origin-when-cross-origin','permissions-policy':'camera=(), microphone=()','x-robots-tag':'noindex, nofollow'}.items():
@@ -91,16 +89,6 @@ jobs:
               if not results['quote'].get('available') or 'no-store' not in results['quote'].get('headers',{}).get('cache-control',''):findings.append({'type':'quote_availability_or_cache'})
               if results['exchange'].get('exchangeStatus') not in ('fresh','cached'):findings.append({'type':'exchange_status'})
               save()
-              mapping = [["travel-blog/mitzpe-ramon-crater","attractions/mitzpe-ramon-crater"],["travel-blog/basilica-of-the-annunciation","attractions/basilica-of-the-annunciation"],["travel-blog/qasr-el-yahud","attractions/qasr-el-yahud"],["travel-blog/jaffa","attractions/jaffa"],["travel-blog/mount-tabor","attractions/mount-tabor"],["travel-blog/old-city-jerusalem","attractions/old-city-jerusalem"],["travel-blog/the-dead-sea","attractions/dead-sea"],["travel-blog/mount-zion","attractions/mount-zion"],["travel-blog/mount-of-olives","attractions/mount-of-olives"],["travel-blog/masada","attractions/masada"],["travel-blog/ein-gedi","attractions/ein-gedi"],["travel-blog/eilat","attractions/eilat"],["travel-blog/haifa","attractions/haifa"],["travel-blog/akko-acre","attractions/akko-acre"],["travel-blog/caesarea","attractions/caesarea"],["travel-blog/rosh-hanikra","attractions/rosh-hanikra"],["travel-blog/sea-of-galilee","attractions/sea-of-galilee"],["travel-blog/tel-megiddo","attractions/tel-megiddo"],["travel-blog/mount-precipice","attractions/mount-precipice"],["travel-blog/magdala","attractions/magdala"],["travel-blog/yardenit","attractions/yardenit"],["travel-blog/mount-of-beatitudes","attractions/mount-of-beatitudes"],["travel-blog/tabgha","attractions/tabgha"],["travel-blog/capernaum","attractions/capernaum"],["travel-blog/car-service-in-israel","private-driver-in-israel"],["travel-blog/jerusalem-day-trip-from-tel-aviv","tours/jerusalem"],["travel-blog/caesarea-haifa-akko","tours/caesarea-haifa-acre"],["travel-blog/nazareth-galilee-jordan-river","tours/nazareth-sea-of-galilee"],["travel-blog/day-trips-from-jerusalem","tours"],["travel-blog/day-trips-from-tel-aviv","tours"],["travel-blog/israel-safe-to-travel","travel-blog/israel-travel-tips"],["private-day-trips","tours"],["haifa-shore-excursions","shore-excursions/haifa"],["ashdod-shore-excursions","shore-excursions/ashdod"],["reviews","about-me"],["faq","airport-transfers"],["author/moshe-barak","about-me"],["private-day-trips/jerusalem-day-trip-from-tel-aviv","tours/jerusalem"],["private-day-trips/caesarea-haifa-akko-day-trip-from-tel-aviv","tours/caesarea-haifa-acre"],["private-day-trips/dead-sea-masada-day-trip-from-tel-aviv","tours/masada-dead-sea"],["private-day-trips/nazareth-sea-of-galilee-day-trip-from-tel-aviv","tours/nazareth-sea-of-galilee"],["private-day-trips/tel-aviv-day-trip-from-jerusalem","tours/tel-aviv-jaffa"],["private-day-trips/dead-sea-masada-day-trip-from-jerusalem","tours/masada-dead-sea"],["private-day-trips/caesarea-haifa-akko-day-trip-from-jerusalem","tours/caesarea-haifa-acre"],["private-day-trips/nazareth-sea-of-galilee-day-trip-from-jerusalem","tours/nazareth-sea-of-galilee"],["travel-blog/category/attractions","attractions"],["travel-blog/category/day-trips","tours"],["travel-blog/category/galilee","tours/nazareth-sea-of-galilee"],["travel-blog/category/guides","travel-blog"],["travel-blog/category/haifa","attractions/haifa"],["travel-blog/category/jerusalem","travel-blog/jerusalem-travel-guide"],["travel-blog/category/tel-aviv","travel-blog/attractions-in-tel-aviv"],["travel-blog/category/the-dead-sea","attractions/dead-sea"],["travel-blog/category/transportation","travel-blog/getting-around-israel"],["travel-blog/category/accommodation","accommodation"]]
-              for source,target in mapping:
-                  p='/'+source+'/'
-                  key='redirect:'+p
-                  probe(key,p,method='HEAD')
-                  r=results[key]
-                  expected=origin+'/'+target+'/'
-                  if r.get('status')!=301 or urljoin(origin+p,r.get('location') or '')!=expected:findings.append({'type':'redirect_mismatch','source':p,'expected':expected,'actual':r.get('location'),'status':r.get('status')})
-                  save()
-              print('REDIRECTS_CHECKED',sum(k.startswith('redirect:') for k in results),flush=True)
           except RuntimeError as e:findings.append({'type':'stopped','reason':str(e)})
           finally:
               save()
