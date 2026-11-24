@@ -1,4 +1,4 @@
-name: Stage 5 repeated controlled mobile Lighthouse measurements
+name: Stage 5 JavaScript dependency and preload diagnosis
 on:
   pull_request:
     branches: [main]
@@ -6,99 +6,157 @@ on:
 permissions:
   contents: read
 jobs:
-  live-lighthouse-after:
+  graph:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 30
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      VITE_INDEXABLE: "false"
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 4ca68799155af3e05c8d6b7b6cec308d8945fc9f
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - run: npm install --prefix /tmp/stage5live --no-save lighthouse@12.8.2
-      - name: Verify merged release is public before measuring
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Instrument Vite bundle locally without modifying main
         run: |
-          python3 -u - <<'PY'
-          import urllib.request,urllib.error,time,json,re
-          origin="https://saddlebrown-guanaco-454061.hostingersite.com"
-          checks=[
-            ("/tours/golan-heights/",[r"/images/stage5-responsive/nimrod-fortress-132d143b45-384\.webp",r"/images/stage5-responsive/banias-waterfall-557cb95c29-384\.webp"]),
-            ("/",[r"min-h-8 items-center gap-1\.5 py-1\.5",r"Read all Tripadvisor reviews"]),
-            ("/travel-blog/israel-itinerary-10-days/",[r'mt-4 min-w-0 max-w-full overflow-x-auto',r'Southern ten-day alternative at a glance']),
-            ("/accommodation/tel-aviv/",[r"booking\.tpk\.lv/uFvoGvgK",r"for Carlton Tel Aviv on Expedia"]),
-          ]
-          def get(p):
-              req=urllib.request.Request(origin+p,headers={"User-Agent":"IsraelTravelHub-PrelaunchAudit/1.0","Cache-Control":"no-cache","Accept-Encoding":"identity"})
-              with urllib.request.urlopen(req,timeout=15) as r:
-                  return r.status,r.read()
-          for attempt in range(21):
-              try:
-                  status,data=get(checks[0][0])
-                  if status==200 and all(re.search(pattern,data.decode("utf-8")) for pattern in checks[0][1]):
-                      print("New Golan responsive markup detected")
-                      break
-                  print("Release not yet visible",attempt+1,flush=True)
-              except urllib.error.HTTPError as e:
-                  if e.code==429:raise RuntimeError("Hostinger rate limit; stopping without further requests")
-                  print("Readiness HTTP",e.code,flush=True)
-              if attempt==20:raise RuntimeError("Merged release not confirmed; no Lighthouse comparison performed")
-              time.sleep(30)
-          report=[]
-          for p,patterns in checks:
-              status,data=get(p)
-              # React SSR inserts HTML comments between adjacent dynamic text nodes.
-              # Normalize only those comments, not the actual expected text.
-              html=re.sub(r"<!--.*?-->", "", data.decode("utf-8"), flags=re.S)
-              row={"path":p,"http":status,"markers":[bool(re.search(pattern,html)) for pattern in patterns],"noindex":bool(re.search(r'<meta[^>]+name="robots"[^>]+content="[^"]*noindex',html))}
-              report.append(row)
-              print("LIVE_RELEASE_CHECK",json.dumps(row),flush=True)
-              assert status==200 and all(row["markers"]) and row["noindex"],p
-              time.sleep(2)
-          asset="/images/stage5-responsive/nimrod-fortress-132d143b45-384.webp"
-          status,data=get(asset)
-          assert status==200 and len(data)==43240 and data[:4]==b"RIFF" and data[8:12]==b"WEBP"
-          print("LIVE_RESPONSIVE_ASSET",json.dumps({"path":asset,"bytes":len(data),"http":status}))
+          mkdir -p stage5-js-audit
+          cat > stage5-audit-plugin.mjs <<'JS'
+          import fs from "node:fs";
+          import path from "node:path";
+          import {gzipSync} from "node:zlib";
+          export function stage5AuditPlugin(){
+            let config;
+            return {name:"stage5-audit-graph",apply:"build",configResolved(c){config=c;},
+              generateBundle(options,bundle){
+                const chunks=Object.values(bundle).filter(x=>x.type==="chunk").map(c=>({file:c.fileName,name:c.name,entry:c.isEntry,dynamicEntry:c.isDynamicEntry,facade:c.facadeModuleId,imports:c.imports,dynamicImports:c.dynamicImports,bytes:Buffer.byteLength(c.code),gzip:gzipSync(c.code).length,modules:Object.entries(c.modules).map(([id,m])=>({id:id.replace(process.cwd()+"/",""),rendered:m.renderedLength,original:m.originalLength,imports:this.getModuleInfo(id)?.importedIds.map(x=>x.replace(process.cwd()+"/","")),dynamic:this.getModuleInfo(id)?.dynamicallyImportedIds.map(x=>x.replace(process.cwd()+"/",""))}))}));
+                const label=String(config.build?.ssr?"ssr":"client")+"-"+String(config.environments?Object.keys(config.environments).join("-"):"vite");
+                fs.writeFileSync(path.join(process.cwd(),"stage5-js-audit",label+"-"+Date.now()+".json"),JSON.stringify({label,outDir:config.build.outDir,options:{format:options.format,dir:options.dir},chunks},null,2));
+                console.log("BUNDLE_GRAPH",label,chunks.length,chunks.reduce((s,x)=>s+x.bytes,0));
+              }};
+          }
+          JS
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("vite.config.ts");s=p.read_text()
+          old='export default defineConfig({'
+          assert s.count(old)==1
+          p.write_text(s.replace(old,'import { stage5AuditPlugin } from "./stage5-audit-plugin.mjs";\n\n'+old+'\n  vite: { plugins: [stage5AuditPlugin()] },'))
           PY
-      - name: Repeat mobile measurements with two throttling methods
+      - run: bash scripts/build-validated-static.sh
+      - name: Map physical chunks and preload references for all six routes
         run: |
-          mkdir -p stage5-live-lighthouse
           node --input-type=module <<'JS'
           import fs from "node:fs";
-          import {spawnSync} from "node:child_process";
-          const origin="https://saddlebrown-guanaco-454061.hostingersite.com",results=[];
+          import {gzipSync} from "node:zlib";
+          const dir="stage5-js-audit",root=".output/public";
+          const graphs=fs.readdirSync(dir).filter(f=>f.endsWith(".json")).map(f=>JSON.parse(fs.readFileSync(dir+"/"+f)));
+          const client=graphs.sort((a,b)=>b.chunks.filter(x=>fs.existsSync(root+"/"+x.file)).length-a.chunks.filter(x=>fs.existsSync(root+"/"+x.file)).length)[0];
+          if(!client||!client.chunks.some(x=>fs.existsSync(root+"/"+x.file)))throw Error("Client graph not found");
+          const map=new Map(client.chunks.map(x=>[x.file,x]));
+          const visit=(start)=>{const seen=new Set(),stack=[...start];while(stack.length){const k=stack.pop();if(seen.has(k)||!map.has(k))continue;seen.add(k);stack.push(...map.get(k).imports);}return seen;};
           const paths=["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"];
-          const baseline=[{"device":"mobile","path":"/","documentStatus":200,"performance":74,"accessibility":96,"lcpMs":5584.507,"cls":0,"tbtMs":3,"transferBytes":1491882},{"device":"mobile","path":"/airport-transfers/","documentStatus":200,"performance":79,"accessibility":100,"lcpMs":5375.4165,"cls":0,"tbtMs":87.00000000000023,"transferBytes":1179152},{"device":"mobile","path":"/travel-blog/","documentStatus":200,"performance":100,"accessibility":100,"lcpMs":1413.243,"cls":0,"tbtMs":18,"transferBytes":1223415},{"device":"mobile","path":"/tours/golan-heights/","documentStatus":200,"performance":98,"accessibility":100,"lcpMs":1844.414,"cls":0,"tbtMs":27.5,"transferBytes":1558577},{"device":"mobile","path":"/accommodation/","documentStatus":200,"performance":76,"accessibility":96,"lcpMs":6343.5715,"cls":0,"tbtMs":8,"transferBytes":1951993},{"device":"mobile","path":"/attractions/old-city-jerusalem/","documentStatus":200,"performance":98,"accessibility":100,"lcpMs":1855.55,"cls":0,"tbtMs":31,"transferBytes":1439659}];
-          let stop=false;
-          for(const [method,rounds] of [["simulate",3],["devtools",1]]){
-            if(stop)break;
-            for(let round=1;round<=rounds&&!stop;round++){
-              for(const p of paths){
-                const file="stage5-live-lighthouse/"+method+"-"+round+"-"+(p==="/"?"home":p.replace(/^\/+|\/+$/g,"").replaceAll("/","_"))+".json";
-                const args=[origin+p,"--throttling-method="+method,"--only-categories=performance,accessibility","--output=json","--output-path="+file,"--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=35000","--quiet"];
-                const r=spawnSync("/tmp/stage5live/node_modules/.bin/lighthouse",args,{encoding:"utf8",timeout:125000,maxBuffer:2*1024*1024});
-                let row;
-                try{
-                  const a=JSON.parse(fs.readFileSync(file,"utf8")),u=a.audits,net=u["network-requests"].details.items,m=u.metrics.details.items[0];
-                  if(net.some(n=>n.statusCode===429)){stop=true;throw Error("429 rate limit; stop");}
-                  if(a.runtimeError)throw Error(a.runtimeError.message);
-                  const doc=net.find(n=>n.resourceType==="Document"&&n.url===origin+p);
-                  if(!doc||doc.statusCode!==200)throw Error("Document not verified");
-                  row={method,round,path:p,performance:Math.round(a.categories.performance.score*100),accessibility:Math.round(a.categories.accessibility.score*100),lcpMs:u["largest-contentful-paint"].numericValue,fcpMs:u["first-contentful-paint"].numericValue,observedLcp:m.observedLargestContentfulPaint,observedFcp:m.observedFirstContentfulPaint,cls:u["cumulative-layout-shift"].numericValue,tbtMs:u["total-blocking-time"].numericValue,bytes:u["total-byte-weight"].numericValue,scriptBytes:net.filter(x=>x.resourceType==="Script").reduce((s,x)=>s+x.transferSize,0),requests:net.length,scriptRequests:net.filter(x=>x.resourceType==="Script").length,benchmark:a.environment.benchmarkIndex,rtt:u["network-rtt"].numericValue,serverLatency:u["network-server-latency"].numericValue,version:a.lighthouseVersion,throttling:a.configSettings.throttling,accessibilityFailures:a.categories.accessibility.auditRefs.filter(x=>u[x.id]?.score===0).map(x=>({id:x.id,nodes:u[x.id].details?.items?.map(n=>n.node?.snippet).filter(Boolean)}))};
-                }catch(e){row={method,round,path:p,error:String(e).slice(0,300),exit:r.status};if(/429|rate.limit/i.test(row.error))stop=true;}
-                results.push(row);console.log("REPEAT_MOBILE",JSON.stringify(row));fs.writeFileSync("stage5-live-lighthouse/repeated-summary.json",JSON.stringify(results,null,2));
-                if(stop)break;
-                await new Promise(r=>setTimeout(r,8000));
-              }
-            }
+          const rows=[];
+          for(const p of paths){
+            const html=fs.readFileSync(root+p+"index.html","utf8");
+            const links=[...html.matchAll(/<link\b[^>]*>/g)].map(x=>x[0]),scripts=[...html.matchAll(/<script\b[^>]*>/g)].map(x=>x[0]);
+            const href=t=>t.match(/(?:href|src)="([^"]+)"/)?.[1]?.replace(/^\//,"");
+            const preloads=links.filter(t=>/rel="modulepreload"/.test(t)).map(href).filter(Boolean);
+            const entry=scripts.filter(t=>/type="module"/.test(t)).map(href).filter(Boolean);
+            const imports=[...html.matchAll(/\bimport\s*(?:\(\s*)?["'](\/assets\/[^"']+\.js)["']/g)].map(x=>x[1].slice(1));
+            const reach=visit([...entry,...imports]);
+            const preReach=visit(preloads);
+            const sum=set=>[...set].reduce((n,x)=>n+(map.get(x)?.gzip||0),0);
+            const row={path:p,entry,inlineImports:imports,preloads:preloads.length,preloadBytes:sum(preReach),staticClosure:reach.size,staticGzip:sum(reach),onlyPreload:[...preReach].filter(x=>!reach.has(x)).length,preloadFiles:preloads};
+            rows.push(row);console.log("HTML_GRAPH",JSON.stringify({...row,preloadFiles:preloads.slice(0,10)}));
           }
-          const median=v=>{const s=[...v].sort((a,b)=>a-b);return s.length?s[Math.floor(s.length/2)]:null};
-          const comparison=paths.map(path=>{const rows=results.filter(x=>x.path===path&&x.method==="simulate"&&!x.error),direct=results.find(x=>x.path===path&&x.method==="devtools"&&!x.error);const med=Object.fromEntries(["performance","accessibility","lcpMs","fcpMs","observedLcp","observedFcp","cls","tbtMs","bytes","scriptBytes","requests","scriptRequests","benchmark","rtt"].map(k=>[k,median(rows.map(x=>x[k]))]));return {path,before:baseline.find(x=>x.path===path),count:rows.length,median:med,range:{score:rows.map(x=>x.performance),lcp:rows.map(x=>x.lcpMs)},devtools:direct}});
-          fs.writeFileSync("stage5-live-lighthouse/repeated-comparison.json",JSON.stringify(comparison,null,2));
-          for(const row of comparison)console.log("REPEAT_COMPARISON",JSON.stringify(row));
-          if(results.length!==24||results.some(x=>x.error))process.exitCode=1;
+          const largest=client.chunks.filter(x=>fs.existsSync(root+"/"+x.file)).sort((a,b)=>b.gzip-a.gzip).slice(0,15).map(x=>({file:x.file,bytes:x.bytes,gzip:x.gzip,imports:x.imports,modules:x.modules.sort((a,b)=>b.rendered-a.rendered).slice(0,15).map(m=>({id:m.id,rendered:m.rendered}))}));
+          const report={client:client.label,rows,largest};fs.writeFileSync(dir+"/graph-summary.json",JSON.stringify(report,null,2));
+          for(const x of largest)console.log("LARGE_CHUNK",JSON.stringify(x));
           JS
+      - name: Install audit browser
+        run: |
+          npm install --prefix /tmp/stage5fix --no-save playwright@1.56.1 lighthouse@12.8.2
+          /tmp/stage5fix/node_modules/.bin/playwright install --with-deps chromium
+      - name: Start compressed static preview
+        run: |
+          cat > /tmp/stage5-server.py <<'PY'
+          import gzip, http.server, os, mimetypes
+          from pathlib import Path
+          from urllib.parse import urlsplit,unquote
+          class Handler(http.server.SimpleHTTPRequestHandler):
+              def do_GET(self):
+                  if urlsplit(self.path).path=="/api/exchange-rates/":
+                      body=b'{"rates":null,"status":"unavailable"}'
+                      self.send_response(200);self.send_header("Content-Type","application/json");self.send_header("Content-Length",str(len(body)));self.end_headers();self.wfile.write(body);return
+                  return super().do_GET()
+              def send_head(self):
+                  p=Path(self.translate_path(self.path))
+                  if p.is_dir() and self.path.endswith("/"):p=p/"index.html"
+                  if p.is_file() and p.suffix in (".html",".js",".css",".json",".svg",".xml",".txt") and "gzip" in self.headers.get("Accept-Encoding",""):
+                      import io
+                      data=gzip.compress(p.read_bytes(),compresslevel=6,mtime=0)
+                      self.send_response(200);self.send_header("Content-Type",self.guess_type(str(p)));self.send_header("Content-Encoding","gzip");self.send_header("Vary","Accept-Encoding");self.send_header("Content-Length",str(len(data)));self.end_headers()
+                      return io.BytesIO(data)
+                  return super().send_head()
+          os.chdir(".output/public")
+          http.server.ThreadingHTTPServer(("127.0.0.1",4173),Handler).serve_forever()
+          PY
+          nohup python /tmp/stage5-server.py >/tmp/stage5-server.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Compare normal HTML and removal of modulepreload hints only
+        run: |
+          cat > /tmp/stage5fix/compare.cjs <<'JS'
+          const {chromium}=require("playwright"),fs=require("fs"),zlib=require("zlib");
+          const origin="http://127.0.0.1:4173",paths=["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"];
+          (async()=>{const browser=await chromium.launch();const all=[];
+            try{
+              for(const mode of ["normal","no-modulepreload","no-js"])for(const p of paths){
+                const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,javaScriptEnabled:mode!=="no-js"});
+                await ctx.route("**/*",async r=>{
+                  const url=r.request().url();
+                  if(!url.startsWith(origin+"/"))return r.abort();
+                  if(mode==="no-modulepreload"&&r.request().isNavigationRequest()){
+                    const res=await r.fetch();let html=await res.text();
+                    const filtered=html.replace(/<link\b(?=[^>]*\brel=["']modulepreload["'])[^>]*>/gi,"");
+                    return r.fulfill({status:res.status(),contentType:"text/html; charset=utf-8",body:filtered});
+                  }
+                  return r.continue();
+                });
+                const page=await ctx.newPage(),cdp=await ctx.newCDPSession(page),requests=new Map(),errors=[];
+                await cdp.send("Network.enable");await cdp.send("Network.setCacheDisabled",{cacheDisabled:true});
+                cdp.on("Network.requestWillBeSent",e=>requests.set(e.requestId,{url:e.request.url,type:e.type,initiator:e.initiator.type,source:e.initiator.url||e.initiator.stack?.callFrames?.[0]?.url,priority:e.request.initialPriority,time:e.timestamp}));
+                cdp.on("Network.loadingFinished",e=>{const r=requests.get(e.requestId);if(r)r.transferred=e.encodedDataLength});
+                page.on("pageerror",e=>errors.push(e.message));
+                try{
+                  await page.goto(origin+p,{waitUntil:"load",timeout:45000});
+                  await page.waitForTimeout(600);
+                  const dom=await page.evaluate(()=>({title:document.title,h1:document.querySelector("h1")?.textContent,overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,preloads:document.querySelectorAll('link[rel="modulepreload"]').length,paint:performance.getEntriesByType("paint").map(x=>({name:x.name,time:x.startTime}))}));
+                  const scripts=[...requests.values()].filter(r=>r.type==="Script"&&r.url.startsWith(origin));
+                  const row={mode,path:p,dom,errors,scriptCount:scripts.length,scriptBytes:scripts.reduce((s,x)=>s+(x.transferred||0),0),scripts:scripts.map(x=>({...x,url:x.url.replace(origin,""),source:x.source?.replace(origin,"")}))};all.push(row);console.log("PRELOAD_EXPERIMENT",JSON.stringify({...row,scripts:row.scripts.slice(0,5)}));
+                }catch(e){all.push({mode,path:p,error:String(e)});console.log("PRELOAD_ERROR",mode,p,String(e));}finally{await ctx.close();}
+              }
+            }finally{await browser.close();fs.writeFileSync("stage5-js-audit/browser-comparison.json",JSON.stringify(all,null,2));}
+            if(all.length!==18||all.some(x=>x.error||x.errors?.length))process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
+          node /tmp/stage5fix/compare.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: stage5-live-lighthouse
-          path: stage5-live-lighthouse/
-          if-no-files-found: warn
+          name: stage5-js-audit
+          path: stage5-js-audit/
+          if-no-files-found: error
