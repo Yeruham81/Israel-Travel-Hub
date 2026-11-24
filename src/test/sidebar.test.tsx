@@ -7,9 +7,9 @@ import { routeTree } from "@/routeTree.gen";
 import { Route as HotelsRoute } from "@/routes/accommodation.index";
 import { accommodationDestinations } from "@/data/content";
 import { tourCategories, tourCategoryPaths } from "@/data/tours";
-import { travelGuidePaths } from "@/data/registry";
+import { travelGuidePaths, airportTransferRoutes, airportTransferRates } from "@/data/registry";
 import { attractionHubRegions } from "@/data/attractionsHub";
-import { allNavGroups, attractionSidebarGuideLabels, attractionSidebarRegions } from "@/data/nav";
+import { allNavGroups, attractionSidebarGuideLabels, attractionSidebarRegions, airportTransferNav } from "@/data/nav";
 
 afterEach(cleanup);
 
@@ -25,6 +25,20 @@ async function navigationRouter(path = "/") {
 }
 
 describe("shared sidebar navigation", () => {
+  it("keeps the lightweight global menu synchronized with the authoritative catalogs", () => {
+    expect(airportTransferNav.children.slice(0,-1)).toEqual(airportTransferRoutes.map(route => ({
+      label: route.id === "dead-sea" ? "To Ein Bokek at the Dead Sea" : `To ${airportTransferRates.find(rate => rate.id === route.id)!.destination}`,
+      to: route.path,
+    })));
+    const tours = allNavGroups.find(group => group.title === "Tours & trips")!.items[0]!;
+    expect("children" in tours && tours.children).toEqual(tourCategories.map(category => ({label:category.shortTitle,to:tourCategoryPaths[category.id]})));
+    expect(attractionSidebarRegions).toEqual(attractionHubRegions.map(region => ({
+      label: region.navLabel ?? region.title, to: "/attractions/", toggleOnly: true,
+      childrenLabel: `${region.title} attractions`, toggleLabel: `Toggle ${region.navLabel ?? region.title} attractions`,
+      children: region.cards.map(card => ({label: attractionSidebarGuideLabels[card.id] ?? card.title, to:card.to})),
+    })));
+  });
+
   it("shows All attractions and exactly seven collapsible geographic areas", async () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
@@ -38,7 +52,7 @@ describe("shared sidebar navigation", () => {
     );
     expect(within(section).getAllByRole("link")).toHaveLength(1);
     for (const region of attractionHubRegions) {
-      const button = within(section).getByRole("button", { name: `Toggle ${region.title} attractions` });
+      const button = within(section).getByRole("button", { name: `Toggle ${region.navLabel ?? region.title} attractions` });
       expect(button).toHaveAttribute("aria-expanded", "false");
       fireEvent.click(button);
       expect(button).toHaveAttribute("aria-expanded", "true");
@@ -282,7 +296,7 @@ describe("shared sidebar navigation", () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><SiteHeader /></RouterContextProvider>);
     const trigger = screen.getByRole("button", { name: "Menu" });
-    const brand = screen.getByRole("link", { name: "Israel Taxi & Travel home" });
+    const brand = screen.getByRole("link", { name: /Israel Taxi\s*&\s*Travel\s*Moshe Barak\s*\(home\)/i });
     expect(brand).toHaveAttribute("href", "/");
     expect(brand.querySelector("span.font-serif.whitespace-nowrap")).toHaveTextContent("Israel Taxi & Travel");
     const byline = within(brand).getByTestId("wordmark-byline");

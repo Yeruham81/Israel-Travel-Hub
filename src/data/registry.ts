@@ -1,3 +1,9 @@
+import { mosheBarakAuthor, isPublisherUrl } from "@/data/site-identity";
+import { referenceFxSource, referenceFxConfig, initialReferenceFx, type ExchangeRateSnapshot, type ForeignDisplayCurrency } from "@/data/reference-fx";
+import { travelGuidePaths, type TravelGuideId } from "@/data/travel-guide-paths";
+export { mosheBarakAuthor, isPublisherUrl, type AuthorProfile } from "@/data/site-identity";
+export { referenceFxSource, referenceFxConfig, initialReferenceFx, type ExchangeRateSnapshot, type ForeignDisplayCurrency } from "@/data/reference-fx";
+export { travelGuidePaths, type TravelGuideId } from "@/data/travel-guide-paths";
 /**
  * Typed content registry. Every record here is shaped like a future database row
  * so it can be swapped for DB-backed queries without changing page components.
@@ -113,102 +119,9 @@ export const TELAVIV_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const DEAD_SEA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const TIBERIAS_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const HAIFA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
-export interface AuthorProfile {
-  name: string;
-  role: string;
-  experience: string;
-  bio: string;
-  reviewsUrl: string;
-  sourceIds: string[];
-}
-export const mosheBarakAuthor: AuthorProfile = {
-  name: "Moshe Barak",
-  role: "Private transport operator & local travel expert",
-  experience: "Over 20 years helping travelers get around Israel, discover its highlights, and plan the perfect trip.",
-  bio: "",
-  reviewsUrl: "https://www.tripadvisor.com/Attraction_Review-g293984-d14803612-Reviews-Moshe_Barak-Tel_Aviv_Tel_Aviv_District.html",
-  sourceIds: ["moshe-author-profile"],
-};
-
-/** Keep migration provenance in the registry without publishing legacy-site referrals. */
-export function isPublisherUrl(url?: string) {
-  if (!url) return false;
-  try { return new URL(url).hostname.replace(/^www\./, "") === "israel-taxi.com"; }
-  catch { return false; }
-}
 export const AIRPORT_TRANSFER_CHECK_DATE: ISODate = "2026-10-17";
 export const TRAVEL_GUIDE_CHECK_DATE: ISODate = "2026-10-17";
 export const SHORE_EXCURSION_CHECK_DATE: ISODate = "2026-10-21";
-
-export const referenceFxSource: SourceReference = {
-  id: "fx-bank-of-israel", title: "Representative exchange rates", publisher: "Bank of Israel",
-  url: "https://www.boi.org.il/en/economic-roles/financial-markets/explanatory-notes-to-the-representative-exchange-rates/",
-  checkedAt: "2026-10-17", note: "Official reference rates are published on foreign-currency business days. Payment is in ILS; USD/EUR equivalents are approximate estimates only. Daily API refreshes record their own publication/check times.",
-};
-export const referenceFxConfig = {
-  upstreamUrl: "https://www.boi.org.il/PublicApi/GetExchangeRates?asXml=false",
-  // The owner's separately maintained Hostinger PHP endpoint is a verified
-  // server-side fallback when another hosting runtime cannot reach Bank of Israel.
-  // Update this URL if the Hostinger staging domain is retired.
-  fallbackUrl: "https://saddlebrown-guanaco-454061.hostingersite.com/api/exchange-rates/",
-  // Browser-readable official-rate snapshot, refreshed independently by GitHub Actions.
-  // This avoids relying on server-to-server access from Lovable's runtime.
-  publicSnapshotUrl: "https://raw.githubusercontent.com/Yeruham81/Israel-Travel-Hub/main/public/data/boi-exchange-rates.json",
-  localSnapshotUrl: "/data/boi-exchange-rates.json",
-  endpoint: "/api/exchange-rates/", refreshMs: 24 * 60 * 60 * 1000,
-  retryMs: 15 * 60 * 1000, maxAgeMs: 7 * 24 * 60 * 60 * 1000,
-  timeoutMs: 6000, storageKey: "ith_reference_fx_v1",
-} as const;
-export type ForeignDisplayCurrency = "USD" | "EUR";
-export interface ExchangeRateSnapshot {
-  sourceId: typeof referenceFxSource.id;
-  publishedAt: ISODate;
-  checkedAt: string;
-  ilsPerUnit: Record<ForeignDisplayCurrency, number>;
-}
-/** Verified bootstrap/failure fallback, fetched from the official API; runtime updates replace it. */
-export const initialReferenceFx: ExchangeRateSnapshot = {
-  sourceId: "fx-bank-of-israel", publishedAt: "2026-10-16", checkedAt: "2026-10-17T19:10:55Z",
-  ilsPerUnit: { USD: 3.089, EUR: 3.4769 },
-};
-
-export const travelGuidePaths = {
-  bestTime: "/travel-blog/best-time-to-visit-israel/",
-  food: "/travel-blog/what-to-eat-in-israel/",
-  calendar: "/travel-blog/calendar-of-events/",
-  telAvivBeaches: "/travel-blog/beaches-in-tel-aviv/",
-  telAvivMuseums: "/travel-blog/museums-in-tel-aviv/",
-  haifaMuseums: "/travel-blog/museums-in-haifa/",
-  megiddo: "/attractions/tel-megiddo/",
-  precipice: "/attractions/mount-precipice/",
-  annunciation: "/attractions/basilica-of-the-annunciation/",
-  magdala: "/attractions/magdala/",
-  yardenit: "/attractions/yardenit/",
-  qasr: "/attractions/qasr-el-yahud/",
-  deadSea: "/attractions/dead-sea/",
-  bethlehem: "/travel-blog/jerusalem-to-bethlehem/",
-  topTen: "/travel-blog/top-10-things-to-do-in-israel/",
-
-  uber: "/travel-blog/uber-in-israel/",
-  sherut: "/travel-blog/sherut-in-israel/",
-  esim: "/travel-blog/best-esim-for-israel/",
-  arrival: "/travel-blog/ben-gurion-airport-arrival-tips/",
-  israel: "/travel-blog/getting-around-israel/",
-  telAviv: "/travel-blog/getting-around-tel-aviv/",
-  taxis: "/travel-blog/taxis-in-israel/",
-  taxiFares: "/travel-blog/taxi-fares-in-israel/",
-  airportTaxis: "/travel-blog/ben-gurion-airport-taxis/",
-  shabbat: "/travel-blog/from-ben-gurion-airport-on-shabbat/",
-  travelTips: "/travel-blog/israel-travel-tips/",
-  jerusalem: "/travel-blog/jerusalem-travel-guide/",
-  jerusalemDeadSea: "/travel-blog/jerusalem-to-the-dead-sea/",
-  baptism: "/travel-blog/baptism-in-the-jordan-river/",
-  christianTours: "/travel-blog/christian-tours-in-israel/",
-  seniorTours: "/travel-blog/israel-tours-for-seniors/",
-  jerusalemChurches: "/travel-blog/churches-in-jerusalem/",
-  jerusalemShopping: "/travel-blog/shopping-in-jerusalem/",
-} as const;
-export type TravelGuideId = keyof typeof travelGuidePaths;
 
 const travelGuideSources: SourceReference[] = [
   ...([

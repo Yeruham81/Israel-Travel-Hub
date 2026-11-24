@@ -44,8 +44,8 @@ describe("private Ben Gurion transfers", () => {
     expect(intro.firstElementChild).toHaveClass("contents", "sm:flex");
     expect(intro.querySelector("img[alt]")).toHaveClass("col-start-1", "row-start-1");
     expect(intro.firstElementChild?.lastElementChild).toHaveClass("col-span-2", "row-start-2");
-    const quoteReviews = within(intro).getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/i });
-    const topReviews = within(screen.getByTestId("author-card")).getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/i });
+    const quoteReviews = within(intro).getByRole("link", { name: /Read Reviews on TripAdvisor for Moshe Barak/i });
+    const topReviews = within(screen.getByTestId("author-card")).getByRole("link", { name: /Read Reviews on TripAdvisor for Moshe Barak/i });
     expect(quoteReviews).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
     expect(quoteReviews.getAttribute("href")).toBe(topReviews.getAttribute("href"));
     expect(quoteReviews).toHaveAttribute("target", "_blank");

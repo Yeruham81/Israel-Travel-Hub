@@ -1,0 +1,1851 @@
+{
+  "originals": [
+    {
+      "source": "src/assets/home/jerusalem-old-city.webp",
+      "auditedUrl": "/assets/jerusalem-old-city-DWSaog3b.webp",
+      "originalBytes": 142198,
+      "width": 900,
+      "height": 600,
+      "sha256": "a2980e553afe95ad71166c4e6fd5a38db19ef277eaf63267154b0b2761f090d5",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/jerusalem-old-city-a2980e553a-384.webp",
+          "width": 384,
+          "bytes": 33964,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/jerusalem-old-city-a2980e553a-768.webp",
+          "width": 768,
+          "bytes": 96162,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/haifa/panorama.webp",
+      "auditedUrl": "/assets/panorama-CKrYchtp.webp",
+      "originalBytes": 105990,
+      "width": 1200,
+      "height": 414,
+      "sha256": "99eb388f357ed12753d7741c227f0326e86773bbde0e036ae33765cd662373a4",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/panorama-99eb388f35-384.webp",
+          "width": 384,
+          "bytes": 13860,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/panorama-99eb388f35-768.webp",
+          "width": 768,
+          "bytes": 50996,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/tiberias/waterfront.webp",
+      "auditedUrl": "/assets/waterfront-_H4cCrgS.webp",
+      "originalBytes": 160932,
+      "width": 1022,
+      "height": 674,
+      "sha256": "80b530709fb0ee31f4073f232c4a3ea4293ff24bae8ce5cbac828c9997a7c1e0",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/waterfront-80b530709f-384.webp",
+          "width": 384,
+          "bytes": 32508,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/waterfront-80b530709f-768.webp",
+          "width": 768,
+          "bytes": 95850,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/old-jerusalem-via-dolorosa.webp",
+      "auditedUrl": "/images/attractions/old-jerusalem-via-dolorosa.webp",
+      "originalBytes": 119712,
+      "width": 755,
+      "height": 503,
+      "sha256": "2b029f9eaa3875a56e3bdf1757276cafd855c13c7c20ae4918565de38f7916cf",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/old-jerusalem-via-dolorosa-2b029f9eaa-384.webp",
+          "width": 384,
+          "bytes": 35258,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/old-jerusalem-via-dolorosa-2b029f9eaa-755.webp",
+          "width": 755,
+          "bytes": 96292,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/tel-aviv/kerem-hateimanim.webp",
+      "auditedUrl": "/assets/kerem-hateimanim-PR926WCz.webp",
+      "originalBytes": 100428,
+      "width": 755,
+      "height": 566,
+      "sha256": "3297b1bf6251f0743b5e73b8ae9bfb3417d32d023c5b119404da170814d6a8d9",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/kerem-hateimanim-3297b1bf62-384.webp",
+          "width": 384,
+          "bytes": 36212,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/haifa-coast.webp",
+      "auditedUrl": "/images/attractions/haifa-coast.webp",
+      "originalBytes": 105726,
+      "width": 755,
+      "height": 503,
+      "sha256": "0925623566b2892aa552b05831ca66c44ffc0625a0388928cda9405716d163dd",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/haifa-coast-0925623566-384.webp",
+          "width": 384,
+          "bytes": 34274,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/haifa-coast-0925623566-755.webp",
+          "width": 755,
+          "bytes": 94338,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/negev/ramon-panorama.webp",
+      "auditedUrl": "/assets/ramon-panorama-CKBacpm4.webp",
+      "originalBytes": 110806,
+      "width": 755,
+      "height": 503,
+      "sha256": "ac940439bf2c7164358c46e9b5caac4ece3bc727ffa60ec35819dc1f2804271d",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/ramon-panorama-ac940439bf-384.webp",
+          "width": 384,
+          "bytes": 36252,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/ramon-panorama-ac940439bf-755.webp",
+          "width": 755,
+          "bytes": 96798,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/2026-11/jerusalem-old-city-market-lanes.webp",
+      "auditedUrl": "/assets/jerusalem-old-city-market-lanes-B5_ffu5m.webp",
+      "originalBytes": 116376,
+      "width": 732,
+      "height": 487,
+      "sha256": "aca741ba77a08960993d4791c1fdc4edf1687a79dd665db05b617a64401d7f5e",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/jerusalem-old-city-market-lanes-aca741ba77-384.webp",
+          "width": 384,
+          "bytes": 40170,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/jerusalem-old-city-market-lanes-aca741ba77-732.webp",
+          "width": 732,
+          "bytes": 91188,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/old-jerusalem-western-wall.webp",
+      "auditedUrl": "/images/attractions/old-jerusalem-western-wall.webp",
+      "originalBytes": 111382,
+      "width": 755,
+      "height": 503,
+      "sha256": "dcffce08d54df4dc62f74123dbbc0bce79682defcc45107ae4dae99361c77b9c",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/old-jerusalem-western-wall-dcffce08d5-384.webp",
+          "width": 384,
+          "bytes": 34704,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/old-jerusalem-western-wall-dcffce08d5-755.webp",
+          "width": 755,
+          "bytes": 97872,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/tel-aviv/neve-tzedek.webp",
+      "auditedUrl": "/assets/neve-tzedek-Dhw-6pD4.webp",
+      "originalBytes": 100758,
+      "width": 755,
+      "height": 503,
+      "sha256": "573669ded0f9ba048f811f3e952fb5df489c2da8c4d710bf2832ecfa764be9da",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/neve-tzedek-573669ded0-384.webp",
+          "width": 384,
+          "bytes": 33134,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/old-jerusalem-holy-sepulchre.webp",
+      "auditedUrl": "/images/attractions/old-jerusalem-holy-sepulchre.webp",
+      "originalBytes": 105062,
+      "width": 755,
+      "height": 566,
+      "sha256": "708c36163e690fd24366aa1e0b14b30b9afbe274cafc90a87b4b1f840f014a4d",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/old-jerusalem-holy-sepulchre-708c36163e-384.webp",
+          "width": 384,
+          "bytes": 36586,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/old-jerusalem-holy-sepulchre-708c36163e-755.webp",
+          "width": 755,
+          "bytes": 97550,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp",
+      "auditedUrl": "/assets/ein-gedi-waterfall-Cex66LJB.webp",
+      "originalBytes": 125264,
+      "width": 755,
+      "height": 503,
+      "sha256": "70d0d86cba490c113b95b36c8caf053c2f4bf258591df03e48382915ffbad9ec",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/ein-gedi-waterfall-70d0d86cba-384.webp",
+          "width": 384,
+          "bytes": 40376,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/ein-gedi-waterfall-70d0d86cba-755.webp",
+          "width": 755,
+          "bytes": 102378,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-tel-aviv-large.webp",
+      "auditedUrl": "/assets/hero-tel-aviv-large-DaOE9dv-.webp",
+      "originalBytes": 141776,
+      "width": 1920,
+      "height": 872,
+      "sha256": "1161ff80b4610f028873fbafa09b311ee18d880ca6ebbe1f97f6993a74a1f51c",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-tel-aviv-large-1161ff80b4-384.webp",
+          "width": 384,
+          "bytes": 11458,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-tel-aviv-large-1161ff80b4-768.webp",
+          "width": 768,
+          "bytes": 39218,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-tel-aviv-large-1161ff80b4-1152.webp",
+          "width": 1152,
+          "bytes": 84706,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-jerusalem-sm-optimized.webp",
+      "auditedUrl": "/assets/hero-jerusalem-sm-optimized-J_bF4z8d.webp",
+      "originalBytes": 110944,
+      "width": 900,
+      "height": 600,
+      "sha256": "76143f359a53dbee0569b5aaa9702adc31ec8acf2a9ab57e473091bc0b95c429",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-jerusalem-sm-optimized-76143f359a-384.webp",
+          "width": 384,
+          "bytes": 33932,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-jerusalem-sm-optimized-76143f359a-768.webp",
+          "width": 768,
+          "bytes": 98098,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "public/images/city-stays/jerusalem-downtown.webp",
+      "auditedUrl": "/images/city-stays/jerusalem-downtown.webp",
+      "originalBytes": 101144,
+      "width": 738,
+      "height": 553,
+      "sha256": "874c023a4638b9471e443458f77dd1302aa958ed842962b457d16bd5444559ec",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/jerusalem-downtown-874c023a46-384.webp",
+          "width": 384,
+          "bytes": 33066,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-tel-aviv.webp",
+      "auditedUrl": "/assets/hero-tel-aviv-LkB5rqMC.webp",
+      "originalBytes": 150768,
+      "width": 1920,
+      "height": 872,
+      "sha256": "96bc09852913cb327080b893dc6ab28f47ce8e51a48c791a7228af21a0a89942",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-tel-aviv-96bc098529-384.webp",
+          "width": 384,
+          "bytes": 11536,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-tel-aviv-96bc098529-768.webp",
+          "width": 768,
+          "bytes": 40940,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-tel-aviv-96bc098529-1152.webp",
+          "width": 1152,
+          "bytes": 87650,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-refresh-tel-aviv-coastline-medium.webp",
+      "auditedUrl": "/assets/hero-refresh-tel-aviv-coastline-medium-C5OUytn0.webp",
+      "originalBytes": 100556,
+      "width": 1536,
+      "height": 512,
+      "sha256": "0af8b080b2b89760a67c57d0bc4d65d03accdaf9396a392a62a93978afaab505",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-refresh-tel-aviv-coastline-medium-0af8b080b2-384.webp",
+          "width": 384,
+          "bytes": 8722,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-tel-aviv-coastline-medium-0af8b080b2-768.webp",
+          "width": 768,
+          "bytes": 29936,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-tel-aviv-coastline-medium-0af8b080b2-1152.webp",
+          "width": 1152,
+          "bytes": 59604,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-refresh-jaffa-port-v4-medium.webp",
+      "auditedUrl": "/assets/hero-refresh-jaffa-port-v4-medium-CxQYRkRM.webp",
+      "originalBytes": 218244,
+      "width": 1600,
+      "height": 800,
+      "sha256": "2af1e7180c0af22d975095496cd1a5c18b64078896c391ef5a375ecb3b192925",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-refresh-jaffa-port-v4-medium-2af1e7180c-384.webp",
+          "width": 384,
+          "bytes": 19704,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-jaffa-port-v4-medium-2af1e7180c-768.webp",
+          "width": 768,
+          "bytes": 79402,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-jaffa-port-v4-medium-2af1e7180c-1152.webp",
+          "width": 1152,
+          "bytes": 172330,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "public/images/hotel-cards/tlv-vera.webp",
+      "auditedUrl": "/images/hotel-cards/tlv-vera.webp",
+      "originalBytes": 116840,
+      "width": 755,
+      "height": 503,
+      "sha256": "c8fc14759f96eb323d15390185a27abd0f063906c0169bdba295cd37294ea120",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/tlv-vera-c8fc14759f-384.webp",
+          "width": 384,
+          "bytes": 39652,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/tlv-vera-c8fc14759f-755.webp",
+          "width": 755,
+          "bytes": 93394,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/tel-aviv-coast.webp",
+      "auditedUrl": "/assets/tel-aviv-coast-DoOYPGBU.webp",
+      "originalBytes": 133428,
+      "width": 1200,
+      "height": 675,
+      "sha256": "88fa8dd08ecf33680c70b3c9184dddc9b9df46219ee2621028c09e16c3baa33f",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/tel-aviv-coast-88fa8dd08e-384.webp",
+          "width": 384,
+          "bytes": 16532,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/tel-aviv-coast-88fa8dd08e-768.webp",
+          "width": 768,
+          "bytes": 71254,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/mount-of-olives.webp",
+      "auditedUrl": "/images/attractions/mount-of-olives.webp",
+      "originalBytes": 126000,
+      "width": 755,
+      "height": 503,
+      "sha256": "76ab4626d86facbc2505d0641b061f2a83aaed1ede4129c8e831583ea16aab6a",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/mount-of-olives-76ab4626d8-384.webp",
+          "width": 384,
+          "bytes": 40212,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/mount-of-olives-76ab4626d8-755.webp",
+          "width": 755,
+          "bytes": 101060,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/tiberias-lake.webp",
+      "auditedUrl": "/assets/tiberias-lake-B5pZWD95.webp",
+      "originalBytes": 141838,
+      "width": 1200,
+      "height": 900,
+      "sha256": "f7aa7a62c07392cd5e84a4080fabcdd319fb43dd073d51a666deb8570c2b5477",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/tiberias-lake-f7aa7a62c0-384.webp",
+          "width": 384,
+          "bytes": 22146,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/tiberias-lake-f7aa7a62c0-768.webp",
+          "width": 768,
+          "bytes": 83002,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/haifa-port.webp",
+      "auditedUrl": "/assets/haifa-port-BsXYAJjx.webp",
+      "originalBytes": 116518,
+      "width": 900,
+      "height": 600,
+      "sha256": "7016928b5dd33b65425c6b5ad3440829838c0a67cd3ff0d83b774160f54b688d",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/haifa-port-7016928b5d-384.webp",
+          "width": 384,
+          "bytes": 32174,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/haifa-port-7016928b5d-768.webp",
+          "width": 768,
+          "bytes": 91552,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/bethlehem/nativity-courtyard.jpg",
+      "auditedUrl": "/assets/nativity-courtyard-B866hSHz.jpg",
+      "originalBytes": 153369,
+      "width": 1200,
+      "height": 799,
+      "sha256": "e0671378a98cdfb19435ff9bebc6ff0cf9459f75e7ed3625e700a9b62654ee99",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/nativity-courtyard-e0671378a9-384.webp",
+          "width": 384,
+          "bytes": 18140,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/nativity-courtyard-e0671378a9-768.webp",
+          "width": 768,
+          "bytes": 53234,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/nativity-courtyard-e0671378a9-1152.webp",
+          "width": 1152,
+          "bytes": 92894,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/museums-in-jerusalem.jpg",
+      "auditedUrl": "/assets/museums-in-jerusalem-tVV2lwTb.jpg",
+      "originalBytes": 131642,
+      "width": 717,
+      "height": 477,
+      "sha256": "d6173ae1ed2912d97e28ffa7fa3538cdb146c2182aa0f922dd8b930b71f69202",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/museums-in-jerusalem-d6173ae1ed-384.webp",
+          "width": 384,
+          "bytes": 20258,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/museums-in-jerusalem-d6173ae1ed-717.webp",
+          "width": 717,
+          "bytes": 68398,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp",
+      "auditedUrl": "/assets/jerusalem-jewish-quarter-stone-lane-7Hc_KYLa.webp",
+      "originalBytes": 143066,
+      "width": 755,
+      "height": 503,
+      "sha256": "4a55c71c9c2f6e9327f80177e94b4aa0e7eb71f1d0eed3845b92314f205c6dcc",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/jerusalem-jewish-quarter-stone-lane-4a55c71c9c-384.webp",
+          "width": 384,
+          "bytes": 40534,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/jerusalem-jewish-quarter-stone-lane-4a55c71c9c-755.webp",
+          "width": 755,
+          "bytes": 121336,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/about/moshe-barak-with-clients.webp",
+      "auditedUrl": "/assets/moshe-barak-with-clients-B0rCnhfX.webp",
+      "originalBytes": 113716,
+      "width": 681,
+      "height": 341,
+      "sha256": "29be2761c192289cc5a01b084e389aed1c52cf83bb80993551d4cce689f8134e",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/moshe-barak-with-clients-29be2761c1-384.webp",
+          "width": 384,
+          "bytes": 28226,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/moshe-barak-with-clients-29be2761c1-681.webp",
+          "width": 681,
+          "bytes": 75244,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp",
+      "auditedUrl": "/assets/hero-refresh-jerusalem-jaffa-gate-v4-medium-D2Df7ZNq.webp",
+      "originalBytes": 239512,
+      "width": 1600,
+      "height": 800,
+      "sha256": "a28c8577b2200ea1691a01306b83e82dafea8cc4e961636cbf6c75f0f89428a5",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-refresh-jerusalem-jaffa-gate-v4-medium-a28c8577b2-384.webp",
+          "width": 384,
+          "bytes": 22088,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-jerusalem-jaffa-gate-v4-medium-a28c8577b2-768.webp",
+          "width": 768,
+          "bytes": 83722,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-jerusalem-jaffa-gate-v4-medium-a28c8577b2-1152.webp",
+          "width": 1152,
+          "bytes": 164788,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "source": "public/images/hotel-cards/jlm-ibis-styles.webp",
+      "auditedUrl": "/images/hotel-cards/jlm-ibis-styles.webp",
+      "originalBytes": 114518,
+      "width": 732,
+      "height": 487,
+      "sha256": "10c3655be8d263f155814952362e28889234d78325906fd5924a6f4f5b93c31f",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/jlm-ibis-styles-10c3655be8-384.webp",
+          "width": 384,
+          "bytes": 40116,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/jlm-ibis-styles-10c3655be8-732.webp",
+          "width": 732,
+          "bytes": 98026,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/jerusalem/east-jerusalem.webp",
+      "auditedUrl": "/assets/east-jerusalem-B-s3g6VK.webp",
+      "originalBytes": 196260,
+      "width": 1200,
+      "height": 800,
+      "sha256": "bc94b83cf8a3f81e6e2aebc3862c7607190bc1be0f489f153ce19b2b1daf00a5",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/east-jerusalem-bc94b83cf8-384.webp",
+          "width": 384,
+          "bytes": 26280,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/east-jerusalem-bc94b83cf8-768.webp",
+          "width": 768,
+          "bytes": 95928,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/east-jerusalem-bc94b83cf8-1152.webp",
+          "width": 1152,
+          "bytes": 162350,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "source": "public/images/jerusalem/mount-zion/mount-zion-hillside.webp",
+      "auditedUrl": "/images/jerusalem/mount-zion/mount-zion-hillside.webp",
+      "originalBytes": 136316,
+      "width": 755,
+      "height": 503,
+      "sha256": "adec1b0f80f978311abe784c6d8b421703d6181641371d892366513750e474ea",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/mount-zion-hillside-adec1b0f80-384.webp",
+          "width": 384,
+          "bytes": 34994,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/mount-zion-hillside-adec1b0f80-755.webp",
+          "width": 755,
+          "bytes": 110182,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "public/images/hotel-cards/jlm-little-house-baka.webp",
+      "auditedUrl": "/images/hotel-cards/jlm-little-house-baka.webp",
+      "originalBytes": 103616,
+      "width": 755,
+      "height": 424,
+      "sha256": "0ff50b45bfbec8650889599d75c1df7f2b386518c848e59065450a357bd47712",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/jlm-little-house-baka-0ff50b45bf-384.webp",
+          "width": 384,
+          "bytes": 31214,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/jlm-little-house-baka-0ff50b45bf-755.webp",
+          "width": 755,
+          "bytes": 91620,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/2026-10/food-7.webp",
+      "auditedUrl": "/assets/food-7-qM5Lhdfc.webp",
+      "originalBytes": 131094,
+      "width": 755,
+      "height": 503,
+      "sha256": "3884592e4ee538ef59203be2220a11f27ca2901aaf0c08b1a5a68e255bcc0cde",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/food-7-3884592e4e-384.webp",
+          "width": 384,
+          "bytes": 43588,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/food-7-3884592e4e-755.webp",
+          "width": 755,
+          "bytes": 99546,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "public/images/hotel-cards/bezalel.webp",
+      "auditedUrl": "/images/hotel-cards/bezalel.webp",
+      "originalBytes": 126638,
+      "width": 755,
+      "height": 503,
+      "sha256": "07e09064487af16f0c79debd1e00201c5a77c9cf72772157aac390eb900ec912",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/bezalel-07e0906448-384.webp",
+          "width": 384,
+          "bytes": 43640,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/bezalel-07e0906448-755.webp",
+          "width": 755,
+          "bytes": 100650,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "public/images/hotel-cards/jlm-hashimi.webp",
+      "auditedUrl": "/images/hotel-cards/jlm-hashimi.webp",
+      "originalBytes": 106634,
+      "width": 755,
+      "height": 503,
+      "sha256": "b8390822c6cc1d61bd13a13f145309ca8a78d5c99f21400372821ba0cb0197a2",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/jlm-hashimi-b8390822c6-384.webp",
+          "width": 384,
+          "bytes": 37756,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/jlm-hashimi-b8390822c6-755.webp",
+          "width": 755,
+          "bytes": 94208,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-refresh-tel-aviv-sarona-v4-medium.webp",
+      "auditedUrl": "/assets/hero-refresh-tel-aviv-sarona-v4-medium-HenEM5oK.webp",
+      "originalBytes": 239782,
+      "width": 1600,
+      "height": 800,
+      "sha256": "4fa829edeacc168fd5b2f18360bff08a0c8113d9b959a41f9ea153caf369037a",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-refresh-tel-aviv-sarona-v4-medium-4fa829edea-384.webp",
+          "width": 384,
+          "bytes": 24196,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-tel-aviv-sarona-v4-medium-4fa829edea-768.webp",
+          "width": 768,
+          "bytes": 95612,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-tel-aviv-sarona-v4-medium-4fa829edea-1152.webp",
+          "width": 1152,
+          "bytes": 165568,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "public/images/hotel-cards/tlv-carmel-beach-house.jpg",
+      "auditedUrl": "/images/hotel-cards/tlv-carmel-beach-house.jpg",
+      "originalBytes": 119418,
+      "width": 755,
+      "height": 503,
+      "sha256": "ef88cf84ff6c397e7485eadee63ebae7fcdd1c26acc71dba420f413dfa8637c9",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/tlv-carmel-beach-house-ef88cf84ff-384.webp",
+          "width": 384,
+          "bytes": 40340,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/tlv-carmel-beach-house-ef88cf84ff-755.webp",
+          "width": 755,
+          "bytes": 93668,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-refresh-tel-aviv-sarona-medium.webp",
+      "auditedUrl": "/assets/hero-refresh-tel-aviv-sarona-medium-D3BxKIwH.webp",
+      "originalBytes": 217012,
+      "width": 1280,
+      "height": 720,
+      "sha256": "40b3343b3730578883d4be8896d3486b6fcb98a3f5e7e6b84e68318f64faa784",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-refresh-tel-aviv-sarona-medium-40b3343b37-384.webp",
+          "width": 384,
+          "bytes": 26170,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-tel-aviv-sarona-medium-40b3343b37-768.webp",
+          "width": 768,
+          "bytes": 88660,
+          "quality": 82
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-tel-aviv-sarona-medium-40b3343b37-1152.webp",
+          "width": 1152,
+          "bytes": 173942,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/annunciation-marian-mosaics.webp",
+      "auditedUrl": "/images/attractions/annunciation-marian-mosaics.webp",
+      "originalBytes": 117698,
+      "width": 738,
+      "height": 553,
+      "sha256": "fd37ea86b16f39a50f797d2d7ecaeb163c29ea3cd257d49374ccb9cb099cfbe5",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/annunciation-marian-mosaics-fd37ea86b1-384.webp",
+          "width": 384,
+          "bytes": 34854,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/annunciation-marian-mosaics-fd37ea86b1-738.webp",
+          "width": 738,
+          "bytes": 94332,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/annunciation-grotto.webp",
+      "auditedUrl": "/images/attractions/annunciation-grotto.webp",
+      "originalBytes": 101206,
+      "width": 738,
+      "height": 553,
+      "sha256": "396cbdef0bfb230ef71b06658f16a6f28c40cbf89565a5106f53a57d365b48e8",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/annunciation-grotto-396cbdef0b-384.webp",
+          "width": 384,
+          "bytes": 33682,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/caesarea-theatre.webp",
+      "auditedUrl": "/assets/caesarea-theatre-D3tI-09n.webp",
+      "originalBytes": 152230,
+      "width": 1200,
+      "height": 803,
+      "sha256": "4a96b0dba4ba80022c28fbbf25850b2df1039b6510979fb71a034c896aa815f9",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/caesarea-theatre-4a96b0dba4-384.webp",
+          "width": 384,
+          "bytes": 17638,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/caesarea-theatre-4a96b0dba4-768.webp",
+          "width": 768,
+          "bytes": 78390,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/capernaum-peters-house.webp",
+      "auditedUrl": "/images/attractions/capernaum-peters-house.webp",
+      "originalBytes": 131758,
+      "width": 738,
+      "height": 553,
+      "sha256": "fb03ade74c584fd6c181e296af93ec8dbd9e50aeab2620a44cd4a14315a54b57",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/capernaum-peters-house-fb03ade74c-384.webp",
+          "width": 384,
+          "bytes": 37994,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/capernaum-peters-house-fb03ade74c-738.webp",
+          "width": 738,
+          "bytes": 108584,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/capernaum-synagogue-aerial.webp",
+      "auditedUrl": "/images/attractions/capernaum-synagogue-aerial.webp",
+      "originalBytes": 114444,
+      "width": 1100,
+      "height": 733,
+      "sha256": "00c233154995ef058deb4c337dfd60d0e2fd161d4e30c88f9381d406f1dc1661",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/capernaum-synagogue-aerial-00c2331549-384.webp",
+          "width": 384,
+          "bytes": 32958,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/capernaum-synagogue-aerial-00c2331549-768.webp",
+          "width": 768,
+          "bytes": 90664,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp",
+      "auditedUrl": "/assets/ein-gedi-oasis-BarI1YSt.webp",
+      "originalBytes": 149530,
+      "width": 755,
+      "height": 503,
+      "sha256": "e05db961d3c8f9c6a06fa13e1dbb796c708f9b921144ce1c5251f0f414df20f7",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/ein-gedi-oasis-e05db961d3-384.webp",
+          "width": 384,
+          "bytes": 38500,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/ein-gedi-oasis-e05db961d3-755.webp",
+          "width": 755,
+          "bytes": 122124,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/magdala-first-century-synagogue.webp",
+      "auditedUrl": "/images/attractions/magdala-first-century-synagogue.webp",
+      "originalBytes": 109634,
+      "width": 760,
+      "height": 570,
+      "sha256": "4d8c507f019c76126e079e0d63c17dd6c4cde422a52ab9abe5ecb53863eef937",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/magdala-first-century-synagogue-4d8c507f01-384.webp",
+          "width": 384,
+          "bytes": 36456,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/magdala-first-century-synagogue-4d8c507f01-760.webp",
+          "width": 760,
+          "bytes": 98518,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-masada-large.webp",
+      "auditedUrl": "/assets/hero-masada-large-su00s0ks.webp",
+      "originalBytes": 153804,
+      "width": 1920,
+      "height": 872,
+      "sha256": "1423454251a15ff501d439c16a341840e7ed010f137359d49cae2f76a66545e7",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-masada-large-1423454251-384.webp",
+          "width": 384,
+          "bytes": 10606,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-masada-large-1423454251-768.webp",
+          "width": 768,
+          "bytes": 40684,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-masada-large-1423454251-1152.webp",
+          "width": 1152,
+          "bytes": 90042,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/2026-10/mount-precipice.webp",
+      "auditedUrl": "/assets/mount-precipice-DX-m2xpj.webp",
+      "originalBytes": 102696,
+      "width": 755,
+      "height": 503,
+      "sha256": "29dc5a5cfb1f6056593c7a8a2c79b78571fc18810e0d7622f4266ec443385964",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/mount-precipice-29dc5a5cfb-384.webp",
+          "width": 384,
+          "bytes": 26078,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/mount-precipice-29dc5a5cfb-755.webp",
+          "width": 755,
+          "bytes": 89838,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/mount-tabor-mosaic.webp",
+      "auditedUrl": "/images/attractions/mount-tabor-mosaic.webp",
+      "originalBytes": 102150,
+      "width": 741,
+      "height": 577,
+      "sha256": "27025eba43d704bbb14212383f38dcab99868e0ae1f8d5c3bd6fd67016cefe61",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/mount-tabor-mosaic-27025eba43-384.webp",
+          "width": 384,
+          "bytes": 30404,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/mount-tabor-mosaic-27025eba43-741.webp",
+          "width": 741,
+          "bytes": 90868,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "public/images/jerusalem/mount-zion/zion-gate.webp",
+      "auditedUrl": "/images/jerusalem/mount-zion/zion-gate.webp",
+      "originalBytes": 174034,
+      "width": 800,
+      "height": 600,
+      "sha256": "0276ac685ba338d235ad6f5e5a65553bedf564ac8e9555c75b4bfebc9f8a6dc8",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/zion-gate-0276ac685b-384.webp",
+          "width": 384,
+          "bytes": 43154,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/zion-gate-0276ac685b-768.webp",
+          "width": 768,
+          "bytes": 125446,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/dead-sea-excursions/qasr-el-yahud-river-deck.jpg",
+      "auditedUrl": "/assets/qasr-el-yahud-river-deck-DblcDzHf.jpg",
+      "originalBytes": 283319,
+      "width": 1200,
+      "height": 799,
+      "sha256": "1c9f141ebd9b10f5d41f3b47a27d6e38a1ad6c84e00c75c18585408b49882ef7",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/qasr-el-yahud-river-deck-1c9f141ebd-384.webp",
+          "width": 384,
+          "bytes": 38688,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/qasr-el-yahud-river-deck-1c9f141ebd-768.webp",
+          "width": 768,
+          "bytes": 91166,
+          "quality": 78
+        },
+        {
+          "url": "/images/stage5-responsive/qasr-el-yahud-river-deck-1c9f141ebd-1152.webp",
+          "width": 1152,
+          "bytes": 178808,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp",
+      "auditedUrl": "/assets/jordan-river-qasr-al-yahud-BNWqrRJ2.webp",
+      "originalBytes": 115342,
+      "width": 755,
+      "height": 503,
+      "sha256": "161ff2e4e353ebe18043bb75e31091089ddcb0121b1b7e2a1d9fad288c6d8ab1",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/jordan-river-qasr-al-yahud-161ff2e4e3-384.webp",
+          "width": 384,
+          "bytes": 34268,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/jordan-river-qasr-al-yahud-161ff2e4e3-755.webp",
+          "width": 755,
+          "bytes": 94294,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/tabgha-loaves-fishes-mosaic.webp",
+      "auditedUrl": "/images/attractions/tabgha-loaves-fishes-mosaic.webp",
+      "originalBytes": 118680,
+      "width": 722,
+      "height": 542,
+      "sha256": "cb261a4c7f9af8190ea2d5367effc7d7c7fb42cdb4b6f49bd8480cb650cbb403",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/tabgha-loaves-fishes-mosaic-cb261a4c7f-384.webp",
+          "width": 384,
+          "bytes": 42790,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/tabgha-loaves-fishes-mosaic-cb261a4c7f-722.webp",
+          "width": 722,
+          "bytes": 95622,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/2026-10/tel-megiddo.webp",
+      "auditedUrl": "/assets/tel-megiddo-DZhXmdN5.webp",
+      "originalBytes": 112658,
+      "width": 760,
+      "height": 508,
+      "sha256": "e2cc24e0148b53b4a1ec3fbc75797d35d2b2dd133720e2d217c539f86256cd29",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/tel-megiddo-e2cc24e014-384.webp",
+          "width": 384,
+          "bytes": 29522,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/tel-megiddo-e2cc24e014-760.webp",
+          "width": 760,
+          "bytes": 99170,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "source": "public/images/attractions/jordan-river-baptism.webp",
+      "auditedUrl": "/images/attractions/jordan-river-baptism.webp",
+      "originalBytes": 154098,
+      "width": 1000,
+      "height": 632,
+      "sha256": "a52e186909292c417b644af1b538737e5d07e56e24afbd10b814945a6dd9a748",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/jordan-river-baptism-a52e186909-384.webp",
+          "width": 384,
+          "bytes": 31344,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/jordan-river-baptism-a52e186909-768.webp",
+          "width": 768,
+          "bytes": 97544,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "source": "src/assets/road-to-jerusalem.jpg",
+      "auditedUrl": "/assets/road-to-jerusalem-B-sMhzMg.jpg",
+      "originalBytes": 212335,
+      "width": 1600,
+      "height": 912,
+      "sha256": "e5b616e7228dabaa64296e7527f19bdd4e920c81b32838d8bcffe1708e24167b",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/road-to-jerusalem-e5b616e722-384.webp",
+          "width": 384,
+          "bytes": 17722,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/road-to-jerusalem-e5b616e722-768.webp",
+          "width": 768,
+          "bytes": 59050,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/road-to-jerusalem-e5b616e722-1152.webp",
+          "width": 1152,
+          "bytes": 117410,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/road-trip.webp",
+      "auditedUrl": "/assets/road-trip-DdXqGLkh.webp",
+      "originalBytes": 106618,
+      "width": 1400,
+      "height": 882,
+      "sha256": "216bac96360bb1246cf738340f754d30ecd0e419d0e301a407742cc855decd6d",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/road-trip-216bac9636-384.webp",
+          "width": 384,
+          "bytes": 19356,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/road-trip-216bac9636-768.webp",
+          "width": 768,
+          "bytes": 56944,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/road-trip-216bac9636-1152.webp",
+          "width": 1152,
+          "bytes": 100390,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/2026-10/annunciation-interior.webp",
+      "auditedUrl": "/assets/annunciation-interior-Bd6kycUA.webp",
+      "originalBytes": 111892,
+      "width": 738,
+      "height": 553,
+      "sha256": "40c612a0e1b347a24e7f8bf89509a896592c5eb033c179f0f3797e40e3f9aded",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/annunciation-interior-40c612a0e1-384.webp",
+          "width": 384,
+          "bytes": 31668,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/annunciation-interior-40c612a0e1-738.webp",
+          "width": 738,
+          "bytes": 96456,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-haifa.webp",
+      "auditedUrl": "/assets/hero-haifa-CnVqX9FW.webp",
+      "originalBytes": 372460,
+      "width": 1920,
+      "height": 872,
+      "sha256": "4deaed04154b5de632b604559b95d5acf76c03242d9d13afb60271c81debe8d6",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-haifa-4deaed0415-384.webp",
+          "width": 384,
+          "bytes": 22936,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-haifa-4deaed0415-768.webp",
+          "width": 768,
+          "bytes": 89044,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-haifa-4deaed0415-1152.webp",
+          "width": 1152,
+          "bytes": 174540,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/caesarea-dusk.webp",
+      "auditedUrl": "/assets/caesarea-dusk-BhUSmS9O.webp",
+      "originalBytes": 107542,
+      "width": 1200,
+      "height": 715,
+      "sha256": "e480bd87b7d40798bddd0374236f8bf15cbe61f5ed7012b40e733d94fce5849e",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/caesarea-dusk-e480bd87b7-384.webp",
+          "width": 384,
+          "bytes": 18332,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/caesarea-dusk-e480bd87b7-768.webp",
+          "width": 768,
+          "bytes": 64642,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/timna-park-feature.jpg",
+      "auditedUrl": "/assets/timna-park-feature-DpYN0SkN.jpg",
+      "originalBytes": 238937,
+      "width": 755,
+      "height": 503,
+      "sha256": "9d17f197bf49cf137ec36356be77a698ddfac9de9bd8d3910fe7cd0872955b58",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/timna-park-feature-9d17f197bf-384.webp",
+          "width": 384,
+          "bytes": 28930,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/timna-park-feature-9d17f197bf-755.webp",
+          "width": 755,
+          "bytes": 91150,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/golan/nimrod-fortress.jpg",
+      "auditedUrl": "/assets/nimrod-fortress-DAU3gXYx.jpg",
+      "originalBytes": 521939,
+      "width": 1280,
+      "height": 853,
+      "sha256": "132d143b45ab4af0f3876c3145b2ab3bde1c4be1ec4dfcfd5a20fedd4d8744d6",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/nimrod-fortress-132d143b45-384.webp",
+          "width": 384,
+          "bytes": 43240,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/nimrod-fortress-132d143b45-768.webp",
+          "width": 768,
+          "bytes": 118492,
+          "quality": 74
+        },
+        {
+          "url": "/images/stage5-responsive/nimrod-fortress-132d143b45-1152.webp",
+          "width": 1152,
+          "bytes": 262504,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/golan/banias-waterfall.jpg",
+      "auditedUrl": "/assets/banias-waterfall-DpahZ7xK.jpg",
+      "originalBytes": 472556,
+      "width": 1280,
+      "height": 860,
+      "sha256": "557cb95c2951e24194cf5d1576b9b852bd625669fd0a523766bc5fee08941192",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/banias-waterfall-557cb95c29-384.webp",
+          "width": 384,
+          "bytes": 44002,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/banias-waterfall-557cb95c29-768.webp",
+          "width": 768,
+          "bytes": 120640,
+          "quality": 74
+        },
+        {
+          "url": "/images/stage5-responsive/banias-waterfall-557cb95c29-1152.webp",
+          "width": 1152,
+          "bytes": 251278,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/golan/el-al-waterfall.jpg",
+      "auditedUrl": "/assets/el-al-waterfall-DG9tulJv.jpg",
+      "originalBytes": 428101,
+      "width": 1280,
+      "height": 860,
+      "sha256": "e93a7ac4779229cc430f7cade5acf65b3899711695e3f8e199b32fcc32780260",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/el-al-waterfall-e93a7ac477-384.webp",
+          "width": 384,
+          "bytes": 39908,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/el-al-waterfall-e93a7ac477-768.webp",
+          "width": 768,
+          "bytes": 105076,
+          "quality": 74
+        },
+        {
+          "url": "/images/stage5-responsive/el-al-waterfall-e93a7ac477-1152.webp",
+          "width": 1152,
+          "bytes": 212410,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/golan/bental-view.jpg",
+      "auditedUrl": "/assets/bental-view-P7ro8nm5.jpg",
+      "originalBytes": 388352,
+      "width": 1280,
+      "height": 960,
+      "sha256": "7dcc9681caf0cc86bd1d608928894db0842daa0bb78422e649bdec3d9bddb4f6",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/bental-view-7dcc9681ca-384.webp",
+          "width": 384,
+          "bytes": 27516,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/bental-view-7dcc9681ca-768.webp",
+          "width": 768,
+          "bytes": 88908,
+          "quality": 78
+        },
+        {
+          "url": "/images/stage5-responsive/bental-view-7dcc9681ca-1152.webp",
+          "width": 1152,
+          "bytes": 178842,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/golan/bental-hill.jpg",
+      "auditedUrl": "/assets/bental-hill-DbbOdbWr.jpg",
+      "originalBytes": 257635,
+      "width": 1280,
+      "height": 721,
+      "sha256": "f119a4052ecc9c2d49349ebe4e327ab4c0d9a11d591909a07c8915c1617e3ecd",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/bental-hill-f119a4052e-384.webp",
+          "width": 384,
+          "bytes": 17200,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/bental-hill-f119a4052e-768.webp",
+          "width": 768,
+          "bytes": 72884,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/bental-hill-f119a4052e-1152.webp",
+          "width": 1152,
+          "bytes": 168896,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/golan/golan-landscape.jpg",
+      "auditedUrl": "/assets/golan-landscape-CCpxU5mx.jpg",
+      "originalBytes": 254070,
+      "width": 1280,
+      "height": 962,
+      "sha256": "24b8e17beb5af9d188dca163b1d3416240e70b312c1310b5e2d0278e67811bdf",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/golan-landscape-24b8e17beb-384.webp",
+          "width": 384,
+          "bytes": 32260,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/golan-landscape-24b8e17beb-768.webp",
+          "width": 768,
+          "bytes": 88556,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/golan-landscape-24b8e17beb-1152.webp",
+          "width": 1152,
+          "bytes": 155448,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/golan/katzrin.jpg",
+      "auditedUrl": "/assets/katzrin-DVUkxn8R.jpg",
+      "originalBytes": 217889,
+      "width": 1280,
+      "height": 710,
+      "sha256": "4dcc3cbfcb88931a24c3a27cb5f391214596bdfac9cc2a40a4bc1ede3fe49e52",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/katzrin-4dcc3cbfcb-384.webp",
+          "width": 384,
+          "bytes": 18360,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/katzrin-4dcc3cbfcb-768.webp",
+          "width": 768,
+          "bytes": 66962,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/katzrin-4dcc3cbfcb-1152.webp",
+          "width": 1152,
+          "bytes": 139280,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "public/images/jerusalem/hutzot-hayotzer.webp",
+      "auditedUrl": "/images/jerusalem/hutzot-hayotzer.webp",
+      "originalBytes": 104696,
+      "width": 717,
+      "height": 479,
+      "sha256": "f3f28aeae723a339cabd9162a3a2f926c4a6f3f70553573e711ce783944813c6",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hutzot-hayotzer-f3f28aeae7-384.webp",
+          "width": 384,
+          "bytes": 39898,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hutzot-hayotzer-f3f28aeae7-717.webp",
+          "width": 717,
+          "bytes": 92106,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-masada.webp",
+      "auditedUrl": "/assets/hero-masada-iV1APxoK.webp",
+      "originalBytes": 166100,
+      "width": 1920,
+      "height": 872,
+      "sha256": "d2f841497a2333e6d7a29c8e82c8bbb71b4b143d20766a1cce3f64d4115db4e6",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-masada-d2f841497a-384.webp",
+          "width": 384,
+          "bytes": 10722,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-masada-d2f841497a-768.webp",
+          "width": 768,
+          "bytes": 41874,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-masada-d2f841497a-1152.webp",
+          "width": 1152,
+          "bytes": 94190,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/masada-dead-sea.webp",
+      "auditedUrl": "/assets/masada-dead-sea-C8irfkzK.webp",
+      "originalBytes": 122226,
+      "width": 1200,
+      "height": 879,
+      "sha256": "bf9f54ce6b706d80b1d4a8a9c043e4cb6752e4b0ef6b3d47f59057b8babd6998",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/masada-dead-sea-bf9f54ce6b-384.webp",
+          "width": 384,
+          "bytes": 15880,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/masada-dead-sea-bf9f54ce6b-768.webp",
+          "width": 768,
+          "bytes": 64446,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/dead-sea-excursions/masada-aerial.webp",
+      "auditedUrl": "/assets/masada-aerial-Dj4UhinE.webp",
+      "originalBytes": 103502,
+      "width": 755,
+      "height": 503,
+      "sha256": "f92520125914c689da7c073c35955acace4ad4ad2798518e836b15a241db52e0",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/masada-aerial-f925201259-384.webp",
+          "width": 384,
+          "bytes": 34584,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/masada-aerial-f925201259-755.webp",
+          "width": 755,
+          "bytes": 91434,
+          "quality": 78
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-galilee.webp",
+      "auditedUrl": "/assets/hero-galilee-BzIc6mGU.webp",
+      "originalBytes": 189302,
+      "width": 1920,
+      "height": 872,
+      "sha256": "a0df463fb69c60e351317ea93cd6785180f728c12017bea703849d12d2f8fa5a",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-galilee-a0df463fb6-384.webp",
+          "width": 384,
+          "bytes": 15640,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-galilee-a0df463fb6-768.webp",
+          "width": 768,
+          "bytes": 60712,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-galilee-a0df463fb6-1152.webp",
+          "width": 1152,
+          "bytes": 129536,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/ben-gurion-t3.webp",
+      "auditedUrl": "/assets/ben-gurion-t3-l-7GEofm.webp",
+      "originalBytes": 233340,
+      "width": 1200,
+      "height": 900,
+      "sha256": "a8d7208f6ff8bd344daeb82011c5e48c4bcc797a3fe4c4ecab704897c8a1b6b4",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/ben-gurion-t3-a8d7208f6f-384.webp",
+          "width": 384,
+          "bytes": 31144,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/ben-gurion-t3-a8d7208f6f-768.webp",
+          "width": 768,
+          "bytes": 85498,
+          "quality": 78
+        },
+        {
+          "url": "/images/stage5-responsive/ben-gurion-t3-a8d7208f6f-1152.webp",
+          "width": 1152,
+          "bytes": 162526,
+          "quality": 74
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hero-refresh-dead-sea-salt-v4-medium.webp",
+      "auditedUrl": "/assets/hero-refresh-dead-sea-salt-v4-medium-CIrlMuuj.webp",
+      "originalBytes": 122120,
+      "width": 1280,
+      "height": 640,
+      "sha256": "3f66964ca71024a5e024a821facd1b2ab9a8edbceb54aa53507de5b1499350ae",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hero-refresh-dead-sea-salt-v4-medium-3f66964ca7-384.webp",
+          "width": 384,
+          "bytes": 18610,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-dead-sea-salt-v4-medium-3f66964ca7-768.webp",
+          "width": 768,
+          "bytes": 60928,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hero-refresh-dead-sea-salt-v4-medium-3f66964ca7-1152.webp",
+          "width": 1152,
+          "bytes": 114556,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/home/hotel-room.webp",
+      "auditedUrl": "/assets/hotel-room-CQfQKE63.webp",
+      "originalBytes": 108792,
+      "width": 1400,
+      "height": 882,
+      "sha256": "20727cf9de42158e4ad4c55cbdd613b2f47af485a81e5e41aa370da9e0915ade",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/hotel-room-20727cf9de-384.webp",
+          "width": 384,
+          "bytes": 18348,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hotel-room-20727cf9de-768.webp",
+          "width": 768,
+          "bytes": 55322,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/hotel-room-20727cf9de-1152.webp",
+          "width": 1152,
+          "bytes": 101982,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/2026-11/tel-aviv-light-rail.webp",
+      "auditedUrl": "/assets/tel-aviv-light-rail-CHHdqxoj.webp",
+      "originalBytes": 108848,
+      "width": 1200,
+      "height": 900,
+      "sha256": "2a53521f88217d9a30864af0c6ee252c3e097630b4df15bfc27e71b5a437a187",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/tel-aviv-light-rail-2a53521f88-384.webp",
+          "width": 384,
+          "bytes": 21340,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/tel-aviv-light-rail-2a53521f88-768.webp",
+          "width": 768,
+          "bytes": 56916,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/tel-aviv-light-rail-2a53521f88-1152.webp",
+          "width": 1152,
+          "bytes": 95520,
+          "quality": 86
+        }
+      ]
+    },
+    {
+      "source": "src/assets/guides/2026-11/where-to-stay-jerusalem-drive.webp",
+      "auditedUrl": "/assets/where-to-stay-jerusalem-drive-C-zy2KTS.webp",
+      "originalBytes": 127630,
+      "width": 755,
+      "height": 503,
+      "sha256": "2c4d065ab80cd4ae7189e9617a327f712ede480597aa58b8cf529f3717490ed3",
+      "variants": [
+        {
+          "url": "/images/stage5-responsive/where-to-stay-jerusalem-drive-2c4d065ab8-384.webp",
+          "width": 384,
+          "bytes": 42532,
+          "quality": 86
+        },
+        {
+          "url": "/images/stage5-responsive/where-to-stay-jerusalem-drive-2c4d065ab8-755.webp",
+          "width": 755,
+          "bytes": 103850,
+          "quality": 74
+        }
+      ]
+    }
+  ],
+  "skipped": [],
+  "components": [
+    "src/components/ExternalProviderTourCard.tsx",
+    "src/components/AccommodationCard.tsx",
+    "src/components/CityStayHub.tsx",
+    "src/components/StayHotelCard.tsx",
+    "src/components/TelAvivHotelBrowser.tsx",
+    "src/components/Guide.tsx",
+    "src/components/PortPage.tsx",
+    "src/components/ShoreReadingGuides.tsx",
+    "src/components/TourCategoryPage.tsx",
+    "src/components/TourCatalog.tsx",
+    "src/components/TravelGuide.tsx",
+    "src/components/GuideHeroMedia.tsx"
+  ]
+}

@@ -8,15 +8,16 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "
  * cold mobile homepage visit where the user may never open the menu.
  */
 export default function MobileNavigationSheet({
-  open, onOpenChange, children,
+  open, onOpenChange, children, onCloseAutoFocus,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   children: ReactNode;
+  onCloseAutoFocus?: (event: Event) => void;
 }) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="left" className="w-[85vw] max-w-sm overflow-y-auto">
+      <SheetContent {...(onCloseAutoFocus ? { onCloseAutoFocus } : {})} side="left" className="w-[85vw] max-w-sm overflow-y-auto">
         <SheetHeader className="mb-4 text-left">
           <SheetTitle className="font-serif text-2xl">Explore Israel</SheetTitle>
           <SheetDescription>Transportation, tours, accommodation, attractions and travel tips for your trip.</SheetDescription>

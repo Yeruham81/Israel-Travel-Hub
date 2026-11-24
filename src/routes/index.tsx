@@ -49,10 +49,10 @@ import ramonCraterPhoto from "@/assets/guides/mitzpe-ramon-crater.jpg";
 import capernaumPhoto from "@/assets/guides/capernaum.jpg";
 import mountTaborPhoto from "@/assets/guides/mount-tabor.jpg";
 import { photoCredits } from "@/data/photoCredits";
-import { GuideCard } from "@/components/TravelGuide";
+import { GuideCard } from "@/components/GuideCard";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { guideDirectory } from "@/data/travelGuides";
-import { isPublisherUrl } from "@/data/registry";
+import { isPublisherUrl } from "@/data/site-identity";
 import { AuthorCard } from "@/components/AuthorCard";
 import { TripadvisorReviewsSection, PersonalTestimonialsSection } from "@/components/HomeTestimonials";
 import { HomeContactForm } from "@/components/HomeContactForm";
@@ -223,7 +223,7 @@ function CompactCard({ c }: { c: Card }) {
 function AirportTransferCard({ c }: { c: Card }) {
   return (
     <li className="min-h-0">
-      <Link to={c.to} aria-label={c.label} className="group relative block aspect-[16/9] min-w-0 overflow-hidden rounded-lg bg-primary shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring lg:aspect-auto lg:h-full">
+      <Link to={c.to} className="group relative block aspect-[16/9] min-w-0 overflow-hidden rounded-lg bg-primary shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring lg:aspect-auto lg:h-full">
         <picture className="absolute inset-0 block">
           {!guideHeroPhotoForPath(String(c.to)) && c.img.mobile && <source media="(max-width: 767px)" srcSet={c.img.mobile} type="image/webp" />}
           <img src={guideHeroPhotoForPath(String(c.to))?.src ?? c.img.src} alt={guideHeroPhotoForPath(String(c.to))?.alt ?? c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -237,7 +237,7 @@ function AirportTransferCard({ c }: { c: Card }) {
 /** Compact destination tile shared by the homepage tours and attractions sections. */
 function DestinationImageCard({ c }: { c: Card }) {
   return (
-    <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-primary shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
+    <Link to={c.to} className="group relative block min-w-0 overflow-hidden rounded-lg bg-primary shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
       <picture className="block">
         {!guideHeroPhotoForPath(String(c.to)) && c.img.mobile && <source media="(max-width: 767px)" srcSet={c.img.mobile} type="image/webp" />}
         <img src={guideHeroPhotoForPath(String(c.to))?.src ?? c.img.thumb ?? c.img.src} alt={guideHeroPhotoForPath(String(c.to))?.alt ?? c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />

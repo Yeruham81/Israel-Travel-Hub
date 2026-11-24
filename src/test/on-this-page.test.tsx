@@ -97,7 +97,7 @@ describe("compact On this page navigation", () => {
     for (const [id, full, short] of pairs) {
       const chip = nav.querySelector(`ul.grid a[href="#${id}"]`);
       expect(chip).toHaveTextContent(short);
-      expect(chip).toHaveAttribute("aria-label", full);
+      expect(chip).toHaveAttribute("aria-label", `${short}: ${full}`);
       expect(chip).toHaveAttribute("title", full);
     }
     expect(container.querySelector("ul.grid")).not.toHaveClass("overflow-x-auto");

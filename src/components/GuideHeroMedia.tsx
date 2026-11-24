@@ -1,3 +1,4 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { useLayoutEffect, useRef, type ReactNode } from "react";
 
 export function introFitsFourLines(height: number, lineHeight: number): boolean {
@@ -105,8 +106,8 @@ export function GuideHeroMedia({
         <source media="(max-width: 480px)" srcSet={mobileSrc} type="image/webp" />
       <img
         src={src}
-        srcSet={srcSet}
-        sizes={sizes}
+        srcSet={srcSet ?? stage5PhotoSrcSet(src)}
+        sizes={sizes ?? ((srcSet ?? stage5PhotoSrcSet(src)) ? "(min-width: 1024px) 420px, (min-width: 640px) 600px, calc(100vw - 34px)" : undefined)}
         alt={alt}
         width={width}
         height={height}
@@ -117,8 +118,8 @@ export function GuideHeroMedia({
       </picture> : (
       <img
         src={src}
-        srcSet={srcSet}
-        sizes={sizes}
+        srcSet={srcSet ?? stage5PhotoSrcSet(src)}
+        sizes={sizes ?? ((srcSet ?? stage5PhotoSrcSet(src)) ? "(min-width: 1024px) 420px, (min-width: 640px) 600px, calc(100vw - 34px)" : undefined)}
         alt={alt}
         width={width}
         height={height}

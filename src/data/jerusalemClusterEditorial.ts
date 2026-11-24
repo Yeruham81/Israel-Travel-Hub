@@ -1,7 +1,7 @@
 import type { TravelGuide, GuideSection } from "@/data/travelGuides";
-import type { TravelGuideId } from "@/data/registry";
+import type { TravelGuideId } from "@/data/travel-guide-paths";
 import type { Attraction, AttractionId } from "@/data/attractionGuideTypes";
-import { travelGuidePaths } from "@/data/registry";
+import { travelGuidePaths } from "@/data/travel-guide-paths";
 
 /**
  * 2026 Jerusalem editorial refresh.  Supplements the existing material rather

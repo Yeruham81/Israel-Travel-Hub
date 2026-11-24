@@ -24,7 +24,7 @@ function HotelSearchWidget({ widget, visible }: {
   visible: boolean;
 }) {
   return <div className="min-w-0 rounded-2xl border bg-card p-4 sm:p-6" data-testid={`${widget.id}-hotel-search-widget`}>
-    <div className="min-h-52 min-w-0 max-w-full overflow-x-auto" aria-label={widget.title} data-testid={`${widget.id}-hotel-widget-mount`}>
+    <div className="min-h-52 min-w-0 max-w-full overflow-x-auto" role="group" aria-label={widget.title} data-testid={`${widget.id}-hotel-widget-mount`}>
       {visible && <BookingWidgetFrame scriptUrl={widget.scriptUrl} title={widget.title} />}
     </div>
   </div>;

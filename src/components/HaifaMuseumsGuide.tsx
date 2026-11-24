@@ -64,10 +64,10 @@ function MuseumCard({museum}:{museum:MuseumEntry}) {
     </div>
     <div className="border-t px-4 py-4 sm:px-5 lg:px-6">
       <dl className="grid gap-3 rounded-xl bg-secondary/40 p-3.5 text-sm sm:grid-cols-2">
-        <div className="flex min-w-0 items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Allow</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.duration}</dd></div></div>
-        <div className="flex min-w-0 items-start gap-2"><Ticket className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Admission</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.admission}</dd></div></div>
-        <div className="flex min-w-0 items-start gap-2"><CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Usual opening</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.openingDays}</dd></div></div>
-        <div className="flex min-w-0 items-start gap-2"><CalendarCheck2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Booking</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.booking}</dd></div></div>
+        <div className="relative min-w-0 pl-6"><dt className="font-semibold">Allow<Clock3 className="absolute left-0 top-0.5 h-4 w-4 text-primary" aria-hidden="true"/></dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.duration}</dd></div>
+        <div className="relative min-w-0 pl-6"><dt className="font-semibold">Admission<Ticket className="absolute left-0 top-0.5 h-4 w-4 text-primary" aria-hidden="true"/></dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.admission}</dd></div>
+        <div className="relative min-w-0 pl-6"><dt className="font-semibold">Usual opening<CalendarDays className="absolute left-0 top-0.5 h-4 w-4 text-primary" aria-hidden="true"/></dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.openingDays}</dd></div>
+        <div className="relative min-w-0 pl-6"><dt className="font-semibold">Booking<CalendarCheck2 className="absolute left-0 top-0.5 h-4 w-4 text-primary" aria-hidden="true"/></dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.booking}</dd></div>
       </dl>
     </div>
     <div className="grid gap-4 border-t px-4 py-4 sm:px-5 lg:grid-cols-2 lg:gap-6 lg:px-6">

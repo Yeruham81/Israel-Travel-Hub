@@ -2,7 +2,7 @@ import type { GuidePhoto, TravelGuide } from "@/data/travelGuides";
 import { TRAVEL_TIPS_TITLE, TRAVEL_TIPS_DESCRIPTION, TRAVEL_TIPS_UPDATED, travelTipsFaqs, travelTipsHero } from "@/data/israelTravelTips";
 import { jerusalemShoppingPlaces as shoppingPlaces } from "@/data/jerusalemShopping";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import { travelGuidePaths } from "@/data/registry";
+import { travelGuidePaths } from "@/data/travel-guide-paths";
 import { shabbatAirportTaxiFareTable } from "@/data/shabbatAirportTaxiFares";
 import airportRailPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import hall from "@/assets/home/ben-gurion-t3.webp";

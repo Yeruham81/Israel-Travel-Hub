@@ -254,7 +254,7 @@ describe("migrated practical guides", () => {
     const authorCard = screen.getByRole("complementary", { name: "About the author" });
     expect(authorCard).toHaveTextContent("Written by Moshe Barak");
     expect(authorCard).toHaveTextContent("Over 20 years");
-    expect(within(authorCard).getByRole("link", { name: /reviews on Tripadvisor/ })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
+    expect(within(authorCard).getByRole("link", { name: /reviews on tripadvisor/i })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
     expect(authorCard.compareDocumentPosition(screen.getByRole("region", { name: "Quick answer" }))).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(container.textContent).not.toMatch(/editorial team|Adapted from|Source checks and limitations below|Image from the original publisher/);
     expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
@@ -478,7 +478,7 @@ describe("migrated practical guides", () => {
     const nav = within(container).getByRole("navigation", { name: "On this page" });
     const airportJump = nav.querySelector('a[href="#airport"].chip');
     expect(airportJump).toHaveTextContent("Airport taxis");
-    expect(airportJump).toHaveAttribute("aria-label", "Taking a Taxi from Ben Gurion Airport");
+    expect(airportJump).toHaveAttribute("aria-label", "Airport taxis: Taking a Taxi from Ben Gurion Airport");
     expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Me");
     const jumpItems = Array.from(nav.querySelectorAll("ul.grid > li"));
     expect(jumpItems).toHaveLength(10);

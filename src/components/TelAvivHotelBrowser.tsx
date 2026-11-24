@@ -1,3 +1,4 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, ExternalLink, RotateCcw } from "lucide-react";
@@ -187,12 +188,12 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
       : "group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:grid sm:grid-cols-[160px_minmax(0,1fr)] sm:grid-rows-[1fr_auto]"
     } data-testid={showArea ? "tel-aviv-hotel-card" : "hotel-recommendation"}>
       <div className={verticalLayout ? "relative w-full overflow-hidden bg-muted" : "relative overflow-hidden bg-muted sm:row-span-2"}>
-        <img src={image.src} alt={image.alt} onError={() => { if (!photoFailed) setPhotoFailed(true); }}
+        <img src={image.src} srcSet={stage5PhotoSrcSet(image.src)} sizes="(min-width: 1024px) 340px, (min-width: 640px) 50vw, calc(100vw - 34px)" alt={image.alt} onError={() => { if (!photoFailed) setPhotoFailed(true); }}
              width={755} height={503} loading="lazy" decoding="async" data-testid="hotel-illustration"
              className={verticalLayout ? "aspect-[16/9] w-full object-cover" : "aspect-[16/9] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[215px]"} />
         {(showArea || showNearbyArea) && <Link to={area.path as LinkProps["to"]}
               className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2 py-1 text-[11px] font-medium leading-tight text-foreground shadow-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              aria-label={`Explore ${area.shortName} area guide`}>
+              aria-label={`${showNearbyArea ? `Nearby · ${area.shortName}` : area.shortName} – area guide`}>
           {showNearbyArea ? `Nearby · ${area.shortName}` : area.shortName}
         </Link>}
       </div>
@@ -206,10 +207,9 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
         <div className={verticalLayout ? "mt-auto border-t bg-secondary/20 px-3 py-3 sm:px-4" : "border-t bg-secondary/20 px-3 py-3 sm:col-start-2 sm:px-4"}>
           <a href={hotelAffiliateUrl(booking, pageId, hotel.id)} target="_blank" rel={relFor(booking.isAffiliate)}
              onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
-             className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-4 py-2.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-             aria-label={`${booking.ctaLabel} for ${hotel.name}`}>
+             className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-4 py-2.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             Check rooms & rates <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
-            <span className="sr-only"> (opens in a new tab)</span>
+            <span className="sr-only"> for {hotel.name} on {booking.providerName} (opens in a new tab)</span>
           </a>
         </div>
       )}

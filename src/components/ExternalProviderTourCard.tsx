@@ -1,3 +1,4 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { Clock3, ExternalLink, Star } from "lucide-react";
 import { relFor } from "@/lib/outbound";
 
@@ -49,7 +50,7 @@ export function ExternalProviderTourCard({
         : "per group";
   const validRating = rating && rating.value > 0 && rating.value <= 5 && rating.count >= 0;
   return <article data-testid={testId} className={`group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/70 hover:shadow-md ${className}`}>
-    <img src={image} alt={alt} width={720} height={405} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+    <img src={image} srcSet={stage5PhotoSrcSet(image)} sizes="(min-width: 1024px) 340px, (min-width: 768px) 50vw, calc(100vw - 34px)" alt={alt} width={720} height={405} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
     <div className="flex min-w-0 flex-1 flex-col p-4">
       <p className="text-xs font-semibold uppercase tracking-wide text-primary"><span className="sr-only">Booking platform: </span>{platform}</p>
       <h3 className="mt-1.5 text-base font-semibold leading-snug text-foreground">{title}</h3>

@@ -1,4 +1,4 @@
-import { referenceFxConfig, referenceFxSource, type ExchangeRateSnapshot, type ForeignDisplayCurrency } from "@/data/registry";
+import { referenceFxConfig, referenceFxSource, type ExchangeRateSnapshot, type ForeignDisplayCurrency } from "@/data/reference-fx";
 
 export type ExchangeRateResult = { rates: ExchangeRateSnapshot | null; status: "fresh" | "cached" | "unavailable" };
 export const displayCurrencies: ForeignDisplayCurrency[] = ["USD", "EUR"];

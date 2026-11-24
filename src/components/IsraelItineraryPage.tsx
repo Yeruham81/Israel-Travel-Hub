@@ -11,7 +11,7 @@ import { guideContactCopy } from "@/lib/guide-contact";
 import type { GuidePhoto } from "@/data/travelGuides";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
-import { isPublisherUrl } from "@/data/registry";
+import { isPublisherUrl } from "@/data/site-identity";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { AuthorCard } from "@/components/AuthorCard";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
@@ -316,11 +316,11 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     {g.alternatives.length > 0 && (
     <section id="alternatives" aria-labelledby="alternatives-h" className="mt-14 scroll-mt-28">
       <h2 id="alternatives-h" className="text-3xl">Adjust this itinerary to your trip</h2>
-      <div className="mt-5 grid gap-4 md:grid-cols-2">{g.alternatives.map((item) => <article key={item.title} className="rounded-xl border bg-card p-5">
+      <div className="mt-5 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">{g.alternatives.map((item) => <article key={item.title} className="min-w-0 rounded-xl border bg-card p-5">
         <h3 className="text-lg font-semibold">{item.title}</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
         {item.title.includes("Eilat and Timna") && g.southernRouteOverview?.length ? (
-          <div role="region" aria-label="Southern ten-day alternative at a glance" tabIndex={0} className="mt-4 overflow-x-auto rounded-lg border focus-visible:outline-2 focus-visible:outline-primary">
+          <div role="region" aria-label="Southern ten-day alternative at a glance" tabIndex={0} className="mt-4 min-w-0 max-w-full overflow-x-auto rounded-lg border focus-visible:outline-2 focus-visible:outline-primary">
             <table className="min-w-[550px] w-full text-left text-xs sm:text-sm">
               <caption className="sr-only">Southern ten-day route replacing the Galilee and northern coast</caption>
               <thead className="bg-secondary"><tr>

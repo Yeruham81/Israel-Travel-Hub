@@ -5,7 +5,7 @@ import type { ShoreReadingGuide } from "@/data/shoreReading";
 import { migrationPhotos as migration } from "@/data/guideMigrationPhotos";
 import { airportTransferPhotos as airport } from "@/data/airportTransfers";
 import { jerusalemAreaGuides, telAvivAreaGuides } from "@/data/content";
-import { travelGuidePaths } from "@/data/registry";
+import { travelGuidePaths } from "@/data/travel-guide-paths";
 import jaffa from "@/assets/tel-aviv/jaffa.webp";
 import neveTzedek from "@/assets/tel-aviv/neve-tzedek.webp";
 import telAvivBeachfront from "@/assets/tel-aviv/beachfront.webp";

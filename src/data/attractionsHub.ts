@@ -7,7 +7,7 @@ import { akkoSite } from "@/data/akkoSite";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
 import { travelGuides, type GuidePhoto } from "@/data/travelGuides";
-import { travelGuidePaths, type TravelGuideId } from "@/data/registry";
+import { travelGuidePaths, type TravelGuideId } from "@/data/travel-guide-paths";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import caesareaPhoto from "@/assets/home/caesarea-dusk.webp";
 import { telAvivAttractionsHero } from "@/data/telAvivAttractionsGuide";

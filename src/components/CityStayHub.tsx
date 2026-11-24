@@ -1,3 +1,4 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
@@ -52,7 +53,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
           {quickPicks.map(({ area, label, description }) => area && (
             <li key={label} className="min-w-0">
               <Link to={area.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                {quickPickPhotos[area.id] && <img src={quickPickPhotos[area.id]!.src} alt={quickPickPhotos[area.id]!.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />}
+                {quickPickPhotos[area.id] && <img src={quickPickPhotos[area.id]!.src} srcSet={stage5PhotoSrcSet(quickPickPhotos[area.id]!.src)} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, calc(100vw - 34px)" alt={quickPickPhotos[area.id]!.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />}
                 <span className="flex flex-1 flex-col p-4">
                   <span className="eyebrow">{label}</span>
                   <span className="mt-2 text-lg font-semibold text-foreground">{area.shortName}</span>
@@ -81,7 +82,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
                 <div className="grid min-w-0 items-start lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.25fr)]">
                   <div className="p-3 sm:p-4 lg:p-5">
                     <Link to={area.path as LinkProps["to"]} tabIndex={-1} aria-hidden="true" className="group block overflow-hidden rounded-2xl bg-muted">
-                      <img src={area.photo.src} alt={area.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-[1.025]" />
+                      <img src={area.photo.src} srcSet={stage5PhotoSrcSet(area.photo.src)} sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, calc(100vw - 34px)" alt={area.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-[1.025]" />
                     </Link>
                   </div>
                   <div className="flex min-w-0 flex-col px-5 pb-5 sm:px-6 sm:pb-6 lg:py-6 lg:pl-0">
@@ -99,7 +100,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
                     </div>
                     <p className="mt-4 text-sm"><span className="font-semibold">Stay style:</span> {area.priceLevel}</p>
                     <p className="mt-3 rounded-xl bg-secondary/70 px-4 py-3 text-sm leading-relaxed text-muted-foreground"><span className="font-semibold text-foreground">Keep in mind:</span> {area.watch}</p>
-                    <Link to={area.path as LinkProps["to"]} className="mt-4 inline-flex w-fit items-center gap-2 rounded-lg font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" aria-label={`Explore ${area.name}: area guide and hotel recommendations`}>
+                    <Link to={area.path as LinkProps["to"]} className="mt-4 inline-flex w-fit items-center gap-2 rounded-lg font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" aria-label={`Explore Area & Hotels: ${area.name}`}>
                       Explore Area & Hotels <ArrowRight className="h-4 w-4" aria-hidden />
                     </Link>
                   </div>

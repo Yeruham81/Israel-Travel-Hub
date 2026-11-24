@@ -51,7 +51,7 @@ describe("one-step direct form delivery", () => {
     expect(document.getElementById("contact")?.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
     expect(document.getElementById("contact")?.querySelector('[data-testid="contact-reviews-row"]')).not.toBeNull();
     expect(document.getElementById("contact")?.querySelectorAll('[data-testid="contact-tripadvisor-reviews"] a[href]')).toHaveLength(1);
-    expect(screen.getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/ })).toHaveAttribute("href", expect.stringMatching(/tripadvisor/i));
+    expect(screen.getByRole("link", { name: /Read Reviews on TripAdvisor for Moshe Barak/ })).toHaveAttribute("href", expect.stringMatching(/tripadvisor/i));
     expect(screen.getByLabelText("Subject *")).toHaveValue("");
     expect(fetch).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));

@@ -1,3 +1,4 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { type LinkProps } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
@@ -181,9 +182,10 @@ export function OnThisPage({ sections, sticky = false, compactLabels, fullLabels
       <ul className="grid min-w-0 grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {visibleSections.map(([id, label], index) => {
           const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 10 ? "hidden lg:block" : "";
+          const visibleLabel = fullLabels ? label : (compactLabels?.[id] ?? compactOnThisPageLabel(id, label));
           return <li key={id} className={`min-w-0 ${visibility}`}>
-            <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full min-w-0">
-              <span className="block min-w-0">{fullLabels ? label : (compactLabels?.[id] ?? compactOnThisPageLabel(id, label))}</span>
+            <a href={`#${id}`} title={label} aria-label={visibleLabel === label ? label : `${visibleLabel}: ${label}`} className="chip chip-dense w-full min-w-0">
+              <span className="block min-w-0">{visibleLabel}</span>
             </a>
           </li>;
         })}
@@ -317,7 +319,7 @@ export function ProviderSection({ id = "book", title, intro, links, pageId }: { 
 
 function GuideCardPhoto({ photo }: { photo?: { src: string; alt: string } | null }) {
   return photo
-    ? <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
+    ? <img src={photo.src} srcSet={stage5PhotoSrcSet(photo.src)} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 45vw" alt={photo.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
     : <span aria-hidden="true" className="flex aspect-[16/9] w-full items-center justify-center bg-secondary/50 text-muted-foreground"><BookOpen className="h-10 w-10 opacity-50" /></span>;
 }
 

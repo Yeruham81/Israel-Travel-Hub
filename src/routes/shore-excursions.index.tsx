@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Anchor, CalendarDays, CarFront, CheckCircle2, Compass, Smartphone, Sun, TrainFront } from "lucide-react";
 import { FaqList, HubHeader, SourceList } from "@/components/Guide";
-import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { GuidePhotoCredit } from "@/components/GuideCard";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { getShorePort } from "@/data/shoreExcursions";
 import { shoreHubGuides } from "@/data/shoreReading";

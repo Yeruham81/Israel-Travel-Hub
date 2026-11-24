@@ -1,6 +1,6 @@
 import { useRouterState } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
-import { lazy, Suspense, useEffect, useId, useState, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { ChevronDown, Compass } from "lucide-react";
 
 import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, legalNav, type NavItem, type SidebarNavItem } from "@/data/nav";
@@ -18,7 +18,7 @@ export function ExtLink({ href, children, className }: { href: string; children:
 
 export function Wordmark() {
   return (
-    <Link to="/" className="flex shrink-0 items-center gap-1.5 sm:gap-2" aria-label="Israel Taxi & Travel home">
+    <Link to="/" className="flex shrink-0 items-center gap-1.5 sm:gap-2">
       <span aria-hidden className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-navy font-serif text-sm italic text-navy-foreground sm:h-8 sm:w-8 sm:text-base">i</span>
       <span className="flex flex-col gap-1">
         <span className="whitespace-nowrap font-serif font-semibold text-[0.9rem] leading-none min-[375px]:text-base sm:text-xl">
@@ -29,6 +29,7 @@ export function Wordmark() {
           <span>Moshe Barak</span>
         </span>
       </span>
+      <span className="sr-only"> (home)</span>
     </Link>
   );
 }
@@ -80,7 +81,7 @@ function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate:
     return <>
       <button
         type="button"
-        aria-label={item.toggleLabel ?? `Toggle ${item.label} guides`}
+        aria-label={`Toggle ${item.label} attractions`}
         aria-expanded={expanded}
         aria-controls={id}
         onClick={() => setExpanded((open) => !open)}
@@ -141,6 +142,7 @@ const MobileNavigationSheet = lazy(() => import("@/components/MobileNavigationSh
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [hasOpened, setHasOpened] = useState(false);
+  const menuTrigger = useRef<HTMLButtonElement>(null);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   useEffect(() => setOpen(false), [pathname]);
   return (
@@ -154,12 +156,12 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <button type="button" onClick={() => { setHasOpened(true); setOpen(true); }} className="btn shrink-0 whitespace-nowrap gap-1 bg-navy px-3 py-2 text-sm text-navy-foreground hover:bg-navy/85 lg:hidden" aria-haspopup="dialog" aria-expanded={open}>
+        <button ref={menuTrigger} type="button" onClick={() => { setHasOpened(true); setOpen(true); }} className="btn shrink-0 whitespace-nowrap gap-1 bg-navy px-3 py-2 text-sm text-navy-foreground hover:bg-navy/85 lg:hidden" aria-haspopup="dialog" aria-expanded={open}>
           <Compass className="h-4 w-4" aria-hidden /> Menu
         </button>
         <Suspense fallback={null}>
           {hasOpened && (
-            <MobileNavigationSheet open={open} onOpenChange={setOpen}>
+            <MobileNavigationSheet open={open} onOpenChange={setOpen} onCloseAutoFocus={(event) => { event.preventDefault(); menuTrigger.current?.focus(); }}>
               <GlobalNav onNavigate={() => setOpen(false)} />
             </MobileNavigationSheet>
           )}

@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type { MouseEvent } from "react";
 import { BookOpen, CalendarDays, MapPinned, Smartphone, Sun, TrainFront } from "lucide-react";
-import { GuideCard, GuidePhotoCredit } from "@/components/TravelGuide";
+import { GuideCard, GuidePhotoCredit } from "@/components/GuideCard";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { HubHeader } from "@/components/Guide";
 import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, type GuideTopicId } from "@/data/travelGuides";
 import { pageMeta } from "@/lib/site";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
-import { travelGuidePaths } from "@/data/registry";
+import { travelGuidePaths } from "@/data/travel-guide-paths";
 import { travelBlogHubImageSets, travelBlogExploreImageSets } from "@/data/travelBlogHubResponsivePhotos";
 import attractionsPhoto from "@/assets/home/caesarea-dusk-card.webp";
 import toursPhoto from "@/assets/home/guided-tour-card.webp";

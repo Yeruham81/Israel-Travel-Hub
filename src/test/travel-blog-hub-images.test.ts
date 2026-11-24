@@ -40,12 +40,12 @@ describe("travel-blog index responsive WebP delivery", () => {
 
   it("keeps originals, card aspect ratios, unique-photo assignment, filter UI and URLs intact", () => {
     const source = readFileSync("src/routes/travel-blog.index.tsx","utf8");
-    const component = readFileSync("src/components/TravelGuide.tsx","utf8");
+    const component = readFileSync("src/components/GuideCard.tsx","utf8");
     expect(source).toContain('uniqueGuideCardPhotos(guides.map(guide => ({ guide })))');
     expect(source).toContain('responsiveSrcSet={travelBlogHubImageSets[cardPhoto?.src ?? ""]}');
     expect(source).toContain('srcSet={travelBlogExploreImageSets[item.photo.src]}');
     expect(source).toContain('href={topicHref(item.id)}');
-    expect(component).toContain("src={displayedPhoto.src} srcSet={responsiveSrcSet}");
+    expect(component).toContain("src={displayedPhoto.src} srcSet={responsiveSrcSet ?? stage5PhotoSrcSet(displayedPhoto.src)}");
     expect(component).toContain("aspect-[3/2] w-full object-cover");
     expect(source).toContain("GuidePhotoCredit");
     expect(source).toContain("guideDirectory.flatMap");

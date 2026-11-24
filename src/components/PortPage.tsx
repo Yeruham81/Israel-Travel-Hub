@@ -1,8 +1,9 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { Link } from "@tanstack/react-router";
 import { CalendarDays, Compass, Smartphone, TrainFront, CarFront, CloudSun } from "lucide-react";
 import { useState } from "react";
 import { Breadcrumbs, FaqList, SourceList } from "@/components/Guide";
-import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { GuidePhotoCredit } from "@/components/GuideCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { ShoreQuoteForm } from "@/components/ShoreQuoteForm";
 import { airportTransferPhotos } from "@/data/airportTransfers";
@@ -74,18 +75,18 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
     <section aria-labelledby="shore-local-h" className="mt-12">
       <h2 id="shore-local-h" className="text-2xl font-semibold">Explore destinations from {port.name} further</h2>
       <p className="mt-2 text-sm text-muted-foreground">Discover the places you can include in your day ashore.</p>
-      <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" role="list" aria-label="Useful guides for your day ashore">
-        {port.related.map(guide => <article key={guide.to} role="listitem" className="min-w-0">
+      <ul className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" aria-label="Useful guides for your day ashore">
+        {port.related.map(guide => <li key={guide.to} className="min-w-0">
           <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
-            <img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src} alt={guideHeroPhotoForPath(String(guide.to))?.alt ?? guide.photo.alt} width={320} height={176} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+            <img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src} srcSet={stage5PhotoSrcSet(guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src)} sizes="(min-width: 1024px) 340px, 45vw" alt={guideHeroPhotoForPath(String(guide.to))?.alt ?? guide.photo.alt} width={320} height={176} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
             <span className="flex flex-1 flex-col p-3.5">
               <span className="text-base font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
               <span className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
               
             </span>
           </Link>
-        </article>)}
-      </div>
+        </li>)}
+      </ul>
     </section>
     <section aria-labelledby="shore-practical-h" className="mt-12">
       <h2 id="shore-practical-h" className="text-2xl font-semibold">Practical guides for your trip to Israel</h2>

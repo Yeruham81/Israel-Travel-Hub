@@ -1,4 +1,4 @@
-import { initialReferenceFx, referenceFxConfig, type ExchangeRateSnapshot } from "@/data/registry";
+import { initialReferenceFx, referenceFxConfig, type ExchangeRateSnapshot } from "@/data/reference-fx";
 import { isUsableExchangeRates, parseBoiRates, parseExchangeRateResult, type ExchangeRateResult } from "@/lib/exchange-rates";
 
 /** One shared refresh per running server instance; no customer data or API key is needed. */

@@ -2,7 +2,7 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import { BadgeCheck, CalendarCheck, CheckCircle2, PlaneLanding } from "lucide-react";
 import { Breadcrumbs, FaqList } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
-import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { GuidePhotoCredit } from "@/components/GuideCard";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
 import { AIRPORT_TRANSFER_UPDATED_DATE, airportHomepageRoutePhotos, airportHubPhotoSrc, airportTransferBenefits, airportTransferChecklist, airportTransferPhotos } from "@/data/airportTransfers";
 import { getShorePort } from "@/data/shoreExcursions";

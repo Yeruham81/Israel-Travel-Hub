@@ -7,7 +7,7 @@
 import type { TravelGuide } from "@/data/travelGuides";
 import { consumerFareTable, taxiFaresWithVat } from "@/data/taxiFares";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
-import { travelGuidePaths } from "@/data/registry";
+import { travelGuidePaths } from "@/data/travel-guide-paths";
 import { airportTaxiEstimateTable } from "@/data/airportTaxiFareEstimates";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import roadTrip from "@/assets/home/road-trip.webp";
