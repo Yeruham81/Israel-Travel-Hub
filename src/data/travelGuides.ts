@@ -256,120 +256,51 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   sherut: {
     id: "sherut",
     title: "Is There Still a Sherut from Ben Gurion Airport? Current Options",
-    description: "Airport sherut guide: learn the current alternatives to former Nesher and Amal routes, and how shared taxis, airport shuttles and private transfers differ.",
-    intro: "The regular Nesher and Amal shared taxis from Ben Gurion Airport no longer operate. Here's how to reach Jerusalem, Haifa or Tel Aviv instead, and how local sherut taxis differ from airport shuttles.",
-    answer: "No regular airport sherut currently operates on the former Nesher route to Jerusalem or Amal route to Haifa. Use a train, suitable bus, official airport taxi or private transfer instead. Local sherut taxis and separately booked shared shuttles are different services.",
+    description: "Are sherut taxis still running in Israel? Understand local shared taxis, the end of Nesher and Amal airport services, Ben Gurion alternatives and Shabbat transport.",
+    intro: "The former Nesher and Amal shared taxis from Ben Gurion Airport have ended. Here's how local sherut minibuses work in Israel and which transport options now serve airport arrivals.",
+    answer: "Regular Nesher sherut rides to Jerusalem and Amal shared taxis to Haifa no longer operate from Ben Gurion Airport. Today, choose a train, suitable bus, licensed airport taxi or confirmed private transfer. Local sherut minibuses still operate on some routes elsewhere in Israel; commercial shared shuttles are booked separately.",
     topics: ["transportation", "tips"],
-    updatedAt: "2026-11-11",
-    photo: { src: sherutNesherCardPhoto, alt: "Former Nesher yellow-and-white shared shuttle van at Ben Gurion Airport" },
+    updatedAt: "2026-11-24",
+    photo: { src: sherutNesherCardPhoto, alt: "Former Nesher shared airport shuttle van in Israel" },
     facts: [
-      { label: "Former Nesher airport sherut", text: "Former airport service to Jerusalem — discontinued" },
-      { label: "Former Amal airport sherut", text: "Former airport service to Haifa — discontinued" },
-      { label: "Plan a current connection", text: "Check rail or bus departures, authorized taxis, or a confirmed private pickup" },
+      { label: "Nesher & Amal airport sherut", text: "Former scheduled shared rides to Jerusalem and Haifa — ended" },
+      { label: "Local sherut minibuses", text: "Route-based shared taxis remain on some routes outside the airport" },
+      { label: "Airport arrivals today", text: "Train, scheduled bus, authorized taxi or private transfer" },
     ],
     comparison: {
-      caption: "Sherut, shuttle, taxi or transfer: which is which?",
-      headers: ["Type of service", "How it works", "What it means for airport arrivals"],
+      caption: "Sherut, shuttle, taxi or private transfer?",
+      headers: ["Ride type", "How it works", "When it is useful"],
       rows: [
-        ["Former Nesher / Amal airport sherut", "Former shared airport rides to Jerusalem and Haifa", "Discontinued. Don't follow older pickup instructions"],
-        ["Local monit sherut", "Passengers share a vehicle and pay for their own seats", "Some local routes may run elsewhere, but they do not replace the former airport services"],
-        ["Free airport shuttle", "Airport-operated bus between terminals or parking areas", "Free internal connection only; not transport into a city"],
-        ["Commercial shared shuttle", "Seats may be sold on a specific pre-booked departure", "Book only after the operator confirms your route and departure"],
-        ["Authorized airport taxi", "Licensed metered taxi arranged via the airport system", "On-demand service with official pickup procedures, 24 hours a day"],
-        ["Private transfer", "Dedicated vehicle booked for your party", "Confirm the vehicle, pickup location, price and booking terms"],
+        ["Local sherut (monit sherut)", "Shared minibus on a set route; each passenger pays for a seat", "Short trips along a local route when that service is running"],
+        ["Pre-booked shared shuttle", "Operator confirms an available departure and sells individual places", "Travellers whose dates, luggage and pickup match an actual confirmed service"],
+        ["Licensed airport taxi", "Exclusive taxi for your party, ordered via Gett or an airport kiosk", "Direct airport travel without sharing the vehicle"],
+        ["Private transfer", "Dedicated vehicle arranged in advance for your group", "Flight arrivals, luggage-heavy journeys and a confirmed meeting arrangement"],
       ],
     },
     sections: [
       {
         id: "nesher-amal",
-        title: "Do the old Nesher and Amal airport sherut routes still operate?",
-        photo: { src: sherutNesherCardPhoto, alt: "Historic yellow-and-white Nesher airport sherut serving Jerusalem" },
+        title: "What happened to the Nesher and Amal airport sheruts?",
         paragraphs: [
-          "The regular Nesher service to Jerusalem and Amal service to Haifa have ended. You can no longer board these shared airport taxis after landing.",
-          "Older travel guides may still list pickup points and fares for these services. For your journey today, check current train or bus services, take an official airport taxi or book a private transfer."
+          "The regular Nesher shared taxi service from Ben Gurion Airport to Jerusalem and the former Amal service to Haifa have ended. Visitors arriving today use the current rail, bus and taxi services or arrange a private pickup.",
+          "Older airport guides may still show collection points for these former services. The practical alternatives for Jerusalem, Haifa, Tel Aviv and Ein Bokek are compared below.",
         ],
-        sourceIds: ["guide-iaa"],
-      },
-      {
-        id: "what-is-sherut",
-        title: "What does monit sherut mean in Israel?",
-        paragraphs: [
-          "A monit sherut (מונית שירות) is a shared taxi or minibus that follows a set route. Each passenger pays separately rather than hiring the whole vehicle. Where you can get on and off depends on the route.",
-          "The word shuttle can describe different services, from the airport's free terminal bus to a shared ride booked in advance. These are not necessarily traditional sherut taxis."
-        ],
-        sourceIds: ["guide-sherut-regulation"],
-      },
-      {
-        id: "airport-alternatives",
-        title: "What can I use instead of an airport sherut?",
-        paragraphs: [
-          "The train from Terminal 3 is a convenient option for cities served by rail when trains are running. Check your destination station and how to reach your hotel from there. Buses may also be useful, depending on your route and arrival time.",
-          "For a direct journey, take an official airport taxi or book a private transfer. A pre-booked vehicle may be easier if you're travelling with children, large suitcases or arriving late. For weekend and holiday travel, see my guide to airport travel on Shabbat."
-        ],
-        inlineLinks: [
-          { text: "guide to airport travel on Shabbat", to: travelGuidePaths.shabbat },
-        ],
-        highlightedLinks: [
-          { label: "Israel Railways — check train times", href: "https://www.rail.co.il/", context: "Enter your travel date and destination, and check the final leg from the station." },
-          { label: "National public transport journey planner", href: "https://bus.gov.il/en/home", context: "Check available bus routes and connections for the day you arrive." },
-        ],
-        sourceIds: ["guide-iaa", "israel-rail", "guide-gett"],
-      },
-      {
-        id: "where-to-go",
-        title: "Which transport options fit Jerusalem, Haifa or Tel Aviv?",
-        paragraphs: [
-          "Choose your transport based on your destination, arrival time and luggage. Remember to include the journey from the railway station to your hotel. My airport-to-Jerusalem guide and airport-to-Haifa guide explain those routes; the Shabbat guide covers weekend options.",
-        ],
-        inlineLinks: [
-          { text: "airport-to-Jerusalem guide", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
-          { text: "airport-to-Haifa guide", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
-          { text: "Shabbat guide", to: travelGuidePaths.shabbat },
-        ],
-        tables: [{
-          caption: "Practical Ben Gurion Airport options by destination",
-          headers: ["Destination", "Useful choices", "Check before you go"],
-          rows: [
-            ["Jerusalem", "Train to Jerusalem–Yitzhak Navon, official taxi or private transfer", "Check how to reach your hotel from the station"],
-            ["Haifa and the north", "Train to Haifa, official taxi or private transfer", "Choose the station with the easiest connection to your destination"],
-            ["Tel Aviv", "Train, suitable bus, official taxi or private transfer", "Check which station or stop is closest to your hotel"],
-            ["Dead Sea / Ein Bokek", "Train and bus via Jerusalem, taxi, private transfer or rental car", "Check the last bus to your hotel before planning the journey"],
-          ],
-          note: "Check schedules and prices before travelling.",
-        }],
-        sourceIds: ["guide-iaa", "israel-rail"],
-      },
-      {
-        id: "official-taxi",
-        title: "How do official airport taxis work instead?",
-        paragraphs: [
-          "Unlike a sherut, an official airport taxi is for your party only. Order through Gett or an airport kiosk, obtain your ride code and join the taxi queue. At Terminal 3, the queue is on the ground floor at Exit 03. Official taxis charge by the meter.",
-          "Pre-booked Gett rides may have a different meeting point. See my Ben Gurion Airport taxis guide for pickup instructions and the taxi fares in Israel guide for fare information."
-        ],
-        inlineLinks: [
-          { text: "Ben Gurion Airport taxis guide", to: travelGuidePaths.airportTaxis },
-          { text: "taxi fares in Israel guide", to: travelGuidePaths.taxiFares },
-        ],
-        highlightedLinks: [{ label: "Gett — official airport taxi instructions", href: "https://www.gett.com/il/airport-en/", context: "Check how to obtain a ride code and where to join the authorized taxi queue." }],
-        sourceIds: ["guide-gett", "guide-iaa"],
-      },
-      {
-        id: "airport-shuttle",
-        title: "Is the free airport shuttle a sherut into the city?",
-        paragraphs: [
-          "No. The free airport shuttle connects terminals and airport facilities. It does not travel to Jerusalem, Haifa or Tel Aviv. Check the current shuttle schedule if you need to change terminals.",
-          "At Terminal 3, follow the shuttle signs to Level G, near Gate 01. See my Ben Gurion Airport arrival guide for more terminal information."
-        ],
-        inlineLinks: [{ text: "Ben Gurion Airport arrival guide", to: travelGuidePaths.arrival }],
         sourceIds: ["guide-iaa"],
       },
       {
         id: "local-sherut",
-        title: "How do local sherut taxis work, and are any still available?",
+        title: "How local sherut taxis work in Israel",
         paragraphs: [
-          "Some local sherut routes still connect neighbourhoods and cities in Israel. Passengers usually pay separately, but stops, fares and payment methods vary by route. Check the route, stops and fare before travelling.",
-          "Some local sheruts operate during Shabbat, but not all. Check the timetable, last departure, luggage rules and payment before relying on one. For other options, see my getting around Israel guide or getting around Tel Aviv guide."
+          "A monit sherut (מונית שירות) is usually a yellow shared minibus travelling along a numbered route. Look for its route number and destination on the front windshield. You pay for one seat rather than hiring the vehicle.",
+          "At a safe, permitted place along the route, signal to a driver to stop and tell them where you would like to get off. The driver follows the designated route, and pickup or drop-off arrangements vary. Ask about the fare and whether to pay cash or another way before boarding.",
+          "Local sherut services remain in selected areas, including parts of Tel Aviv, but a listed route is not a promise of a departure at your chosen time. Space for large suitcases, prams and other equipment can be limited. For wider city and intercity transport choices, see my getting around Israel guide and getting around Tel Aviv guide.",
         ],
+        photo: {
+          src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Sherut.JPG/800px-Sherut.JPG",
+          alt: "Yellow shared sherut minibuses on a street in Tel Aviv",
+          credit: "Leineabstiegsschleuse · Wikimedia Commons · public domain",
+          sourceUrl: "https://commons.wikimedia.org/wiki/File:Sherut.JPG",
+        },
         inlineLinks: [
           { text: "getting around Israel guide", to: travelGuidePaths.israel },
           { text: "getting around Tel Aviv guide", to: travelGuidePaths.telAviv },
@@ -377,51 +308,107 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         sourceIds: ["guide-sherut-regulation", "guide-telaviv-transit"],
       },
       {
-        id: "booked-shared",
-        title: "What if I find a bookable shared airport shuttle?",
+        id: "airport-alternatives",
+        title: "Getting from Ben Gurion Airport to your destination",
         paragraphs: [
-          "Some companies advertise shared airport shuttles that must be booked in advance. These are separate from the former Nesher and Amal services. Always confirm that a departure is available for your travel date.",
-          "Before booking, confirm the operator, departure time, pickup and drop-off points, total price, luggage allowance, flight-delay policy and cancellation terms. Get written booking confirmation. If the service cannot confirm your trip, consider a dedicated airport transfer instead."
+          "The train station at Terminal 3 serves useful connections when rail services are operating. For Jerusalem, Haifa and Tel Aviv, choose the station nearest your destination and include the final connection to your hotel. For a direct journey, compare the licensed airport taxi queue with a confirmed private transfer.",
+          "My airport-to-Jerusalem guide, airport-to-Tel Aviv guide, airport-to-Haifa guide and airport-to-Ein Bokek guide provide route-specific advice. For Friday and Saturday journeys, my airport Shabbat guide explains the available transport.",
+        ],
+        inlineLinks: [
+          { text: "airport-to-Jerusalem guide", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+          { text: "airport-to-Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+          { text: "airport-to-Haifa guide", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+          { text: "airport-to-Ein Bokek guide", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
+          { text: "airport Shabbat guide", to: travelGuidePaths.shabbat },
+        ],
+        tables: [{
+          caption: "Ben Gurion Airport transport by destination",
+          headers: ["Destination", "Transport choices", "Arrival and onward connection"],
+          rows: [
+            ["Jerusalem", "Train, authorized taxi or private transfer", "Jerusalem–Yitzhak Navon station; continue to the hotel by light rail or local transport"],
+            ["Tel Aviv", "Train, suitable bus, authorized taxi or private transfer", "Choose Tel Aviv HaHagana, HaShalom, Savidor Center or University according to your address"],
+            ["Haifa", "Train, authorized taxi or private transfer", "Choose Haifa Hof HaCarmel, Bat Galim or HaMerkaz HaShmona for your final destination"],
+            ["Dead Sea / Ein Bokek", "Bus connection via Jerusalem, authorized taxi, private transfer or rental car", "A public-transport trip typically requires a change in Jerusalem and a final bus towards Ein Bokek"],
+          ],
+          rowLinks: [
+            { to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+            { to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+            { to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+            { to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
+          ],
+        }],
+        highlightedLinks: [
+          { label: "Israel Railways — journey planner", href: "https://www.rail.co.il/", context: "Timetables, stations and rail connections." },
+          { label: "National public transport journey planner", href: "https://bus.gov.il/en/home", context: "Current bus routes and departures for your travel day." },
+        ],
+        sourceIds: ["guide-iaa", "israel-rail", "guide-gett"],
+      },
+      {
+        id: "official-taxi",
+        title: "Licensed airport taxis and the free terminal shuttle",
+        paragraphs: [
+          "For an immediate licensed taxi, request your ride code through Gett or an airport self-service kiosk. At Terminal 3, the authorized taxi queue is on the ground floor by Exit 03. At Terminal 1, use the main arrivals exit. A licensed taxi carries your own party and operates under the regulated taxi fare system.",
+          "A Gett taxi scheduled at least two hours ahead has a different Terminal 3 collection point: Level 2, Gate 23. My Ben Gurion Airport taxis guide explains the pickup procedures, and the taxi fares in Israel guide covers regulated charges.",
+          "The free airport shuttle is a separate internal bus connecting Terminal 1 and Terminal 3 and airport facilities. From Terminal 3, find it on Level G near Gate 01. It serves the airport rather than transporting travellers to Tel Aviv, Jerusalem or Haifa. See my Ben Gurion Airport arrival guide for terminal guidance.",
+        ],
+        inlineLinks: [
+          { text: "Ben Gurion Airport taxis guide", to: travelGuidePaths.airportTaxis },
+          { text: "taxi fares in Israel guide", to: travelGuidePaths.taxiFares },
+          { text: "Ben Gurion Airport arrival guide", to: travelGuidePaths.arrival },
+        ],
+        highlightedLinks: [
+          { label: "Gett — official airport taxi pickup instructions", href: "https://www.gett.com/il/airport-en/", context: "Where to join the taxi queue and meet pre-booked Gett drivers." },
+        ],
+        sourceIds: ["guide-gett", "guide-iaa"],
+      },
+      {
+        id: "weekend",
+        title: "Sherut and airport transport on Shabbat",
+        paragraphs: [
+          "Some local shared-taxi routes operate during Shabbat and Jewish holidays, but their availability depends on the particular line. The former regular Nesher and Amal airport services are no longer available, and trains and most ordinary buses pause for much of Shabbat.",
+          "Free weekend Line 711 links Shoham with central Tel Aviv via Ben Gurion Airport Terminal 1 on limited Friday and Saturday departures. Its operating window changes between winter and summer schedules. The airport Shabbat transport guide explains the timetable, Terminal 3 connections and taxi alternatives.",
+        ],
+        inlineLinks: [
+          { text: "Jewish holidays", to: "/travel-blog/calendar-of-events/" },
+          { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat },
+        ],
+        sourceIds: ["guide-weekend-711", "guide-weekend-timetable", "guide-iaa"],
+      },
+      {
+        id: "booked-shared",
+        title: "Booking a shared airport shuttle in advance",
+        paragraphs: [
+          "A commercially booked shared shuttle is a separate service from a numbered local sherut route. A company may offer individual seats on a specific departure; check that a confirmed service matches your arrival date, flight and destination.",
+          "Before paying, confirm the operator and departure, exact pickup and drop-off points, total price per seat, luggage allowance, child-seat or accessibility needs, flight-delay arrangements and cancellation terms. Keep the written confirmation. You can also request a dedicated airport transfer for your own group.",
         ],
         inlineLinks: [{ text: "dedicated airport transfer", to: "/airport-transfers/" }],
         sourceIds: [],
       },
-      {
-        id: "weekend",
-        title: "What if I arrive during Shabbat or a holiday?",
-        paragraphs: [
-          "Regular trains and most buses do not operate during much of Shabbat. Don't assume a local sherut will take you from the airport; check your travel date and available alternatives.",
-          "Limited free bus 711 runs between Terminal 1 and central Tel Aviv on selected Friday and Saturday departures. Check the timetable and how to reach Terminal 1, or arrange an official taxi or private transfer. See my airport Shabbat transport guide for details."
-        ],
-        inlineLinks: [{ text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat }],
-        sourceIds: ["guide-weekend-711", "guide-weekend-timetable", "guide-iaa"],
-      },
     ],
     checklist: [
-      "Check current airport transport options rather than following old sherut pickup instructions",
-      "Check your landing date, terminal and full accommodation address",
-      "Compare the actual rail or bus journey with an authorized taxi",
-      "Confirm luggage, children’s equipment and accessibility requirements",
-      "For a shared shuttle, verify the operator, per-seat price, timetable and written confirmation",
-      "Check public transport and Line 711 separately for Shabbat or holidays",
-      "Keep pickup details and your destination available offline",
+      "Choose your current airport route instead of an old Nesher or Amal pickup",
+      "Keep your arrival terminal, flight details and full destination address handy",
+      "Compare rail or bus connections with an official airport taxi or private transfer",
+      "For local sherut rides, check the route number, boarding location, fare and payment method",
+      "Confirm space for luggage, child seats or accessibility equipment before booking",
+      "On Friday or Saturday, check the seasonal Line 711 timetable and terminal connections",
     ],
     faqs: [
-      { q: "Do regular Nesher and Amal airport sheruts still run?", a: "No. The former Nesher service to Jerusalem and Amal service to Haifa have ended. Use current train, taxi or private-transfer options instead." },
-      { q: "Can I buy a seat on a shared shuttle from Ben Gurion Airport?", a: "Possibly, through a separate commercial operator. Confirm the departure, pickup point, price, luggage allowance and cancellation terms before paying." },
-      { q: "Are local monit sherut taxis still available in Israel?", a: "Yes, some local sherut routes still operate in Israel. Check the specific route, timetable and payment options before travelling." },
-      { q: "How do passengers pay for a local sherut?", a: "Passengers usually pay for their own seats. Fares and payment methods depend on the route." },
-      { q: "Is the free shuttle between the airport terminals a sherut?", a: "No. It is the airport's internal bus service between terminals, not a shared ride to a city." },
-      { q: "Can I use a sherut or airport bus on Shabbat?", a: "There is no regular airport sherut to rely on. Limited bus 711 may be an option on selected weekend departures from Terminal 1. Check the airport Shabbat guide for current details." },
-      { q: "What is the alternative to a former airport sherut for Jerusalem or Haifa?", a: "Check the actual train journey, the authorized airport taxi queue or a confirmed private pickup to your exact destination." },
+      { q: "How do I pay for a local sherut ride?", a: "You pay for your own seat. Fares and accepted payment methods depend on the route, so ask the driver about the fare and payment before boarding." },
+      { q: "Can I reserve a seat on a sherut or shared shuttle?", a: "A local route-based sherut usually accepts passengers along its route as space allows. A separate commercial shared shuttle may require advance booking and written confirmation for a specific departure." },
+      { q: "Can I bring large suitcases on a sherut?", a: "Capacity in shared minibuses can be limited. For large cases, prams or specialist equipment, confirm the available space and consider a vehicle arranged for your group." },
+      { q: "Does a sherut or airport bus run on Shabbat?", a: "Some local sherut routes operate, but the former regular airport sheruts have ended. Free weekend Line 711 serves Terminal 1 on selected departures, with seasonal operating hours." },
+      { q: "What's the difference between a sherut and a pre-booked shared shuttle?", a: "A local sherut normally follows a numbered public route and takes passengers along that line. A booked shared shuttle is a specific commercial service with its own departure time, reservation and terms." },
     ],
-    sourceIds: ["guide-iaa", "guide-gett", "israel-rail", "guide-weekend-711", "guide-sherut-regulation"],
+    sourceIds: ["guide-iaa", "guide-gett", "israel-rail", "guide-weekend-711", "guide-weekend-timetable", "guide-sherut-regulation", "guide-telaviv-transit"],
     related: ["shabbat", "airportTaxis", "taxis", "arrival", "israel", "taxiFares"],
     services: [
-      { label: "Explore car rental options", to: "/car-rental/", note: "Check collection hours and whether driving makes sense for your trip." },
-      { label: "Choose where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Compare areas for a convenient first stay in the capital." },
-      { label: "Discover Haifa and northern Israel", to: "/attractions/haifa/", note: "Explore the city and ideas for continuing your journey north." },
-      { label: "Choose an Israel eSIM", to: travelGuidePaths.esim, note: "Keep maps and booking messages working after you land." },
+      { label: "Airport Transfers", to: "/airport-transfers/", note: "Arrange a confirmed pickup from Ben Gurion." },
+      { label: "Private Driver Service", to: "/private-driver-in-israel/", note: "Travel in a vehicle reserved for your group." },
+      { label: "Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", note: "Train, taxi and private transfer options." },
+      { label: "Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/", note: "Compare stations and arrival choices." },
+      { label: "Airport to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/", note: "Choose rail, taxi or direct pickup." },
+      { label: "Israel eSIM", to: travelGuidePaths.esim, note: "Use maps and booking details after landing." },
     ],
   },
   esim: {
