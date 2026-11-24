@@ -1080,7 +1080,8 @@ describe("migrated practical guides", () => {
       }
     }
     expect(container.querySelector("#weekend-711")?.textContent).toMatch(/free.*Terminal 1.*timetable/is);
-    expect(container.querySelector("#taxis-transfers")?.textContent).toMatch(/regulated meter/is);
+    expect(container.querySelector("#taxis-transfers")?.textContent).toMatch(/official queue/is);
+    expect(container.querySelector("#costs")?.textContent).toMatch(/regulated.*meter|meter.*tariff/is);
     for (const [label, url] of ([
       ["Look up Shabbat times on MyZmanim", "https://www.myzmanim.com/"],
       ["Israel Railways — official timetable", "https://rail.co.il/?lan=en"],
