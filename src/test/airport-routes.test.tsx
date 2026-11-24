@@ -53,7 +53,7 @@ describe("four dedicated airport transfer routes", () => {
     const quoteReview = within(quoteIntro).getByRole("link", { name: /Read Reviews on TripAdvisor for Moshe Barak/i });
     expect(quoteReview).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
     expect(quoteReview).toHaveClass("bg-[#34E0A1]");
-    expect(within(screen.getByTestId("author-card")).getByRole("link", { name: /Read traveler reviews on Tripadvisor/i })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
+    expect(within(screen.getByTestId("author-card")).getByRole("link", { name: /Read Reviews on TripAdvisor/i })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
     expect(within(quoteIntro).getByRole("img", { name: /Moshe Barak seated in his vehicle/ })).toBeInTheDocument();
     expect(quoteIntro).toHaveClass("grid", "grid-cols-[auto_minmax(0,1fr)]", "sm:flex");
     expect(quoteIntro.querySelector("img[alt]")).toHaveClass("col-start-1", "row-start-1");
