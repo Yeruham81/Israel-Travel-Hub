@@ -143,9 +143,9 @@ jobs:
           (async()=>{
             const browser=await chromium.launch();
             try{
-              for(const width of [390,1365]){
-                for(const p of paths){
-                  const ctx=await browser.newContext({viewport:{width,height:width===390?844:900},deviceScaleFactor:1});
+              for(const width of [360,390,1365]){
+                for(const p of (width===360?["/travel-blog/israel-itinerary-10-days/","/","/accommodation/tel-aviv/"]:paths)){
+                  const ctx=await browser.newContext({viewport:{width,height:width<500?844:900},deviceScaleFactor:1});
                   await ctx.route("**/*",r=>r.request().url().startsWith(origin+"/")?r.continue():r.abort());
                   const page=await ctx.newPage(),files=new Map(),errors=[];
                   page.on("pageerror",e=>errors.push(e.message));
@@ -162,6 +162,16 @@ jobs:
                     const dom=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,optimized:[...document.images].filter(i=>i.currentSrc.includes("/stage5-responsive/")).map(i=>i.currentSrc.split("/").pop()),invalidDescriptions:[...document.querySelectorAll("dl > div > div > dt")].length}));
                     const initialBytes={js:initial.filter(x=>x.type==="script").reduce((s,x)=>s+x.bytes,0),images:initial.filter(x=>x.type==="image").reduce((s,x)=>s+x.bytes,0),total:initial.reduce((s,x)=>s+x.bytes,0)};
                     result={...result,initialBytes,...dom,errors,violations:audit.violations.map(v=>({id:v.id,nodes:v.nodes.length,examples:v.nodes.slice(0,20).map(n=>({target:n.target,html:n.html.slice(0,600),summary:n.failureSummary}))}))};
+                    if(p==="/travel-blog/israel-itinerary-10-days/"){
+                      const table=page.getByRole("region",{name:"Southern ten-day alternative at a glance"});
+                      await table.scrollIntoViewIfNeeded();
+                      result.southernTable=await table.evaluate(el=>({clientWidth:el.clientWidth,scrollWidth:el.scrollWidth,overflowX:getComputedStyle(el).overflowX,table:!!el.querySelector("table")}));
+                      if(!result.southernTable.table||result.southernTable.overflowX!=="auto"||(width<500&&result.southernTable.scrollWidth<=result.southernTable.clientWidth))throw Error("Southern alternative table must remain a horizontally scrollable table on mobile");
+                      fs.mkdirSync("stage5-screenshots",{recursive:true});
+                      await table.screenshot({path:"stage5-screenshots/itinerary-table-"+width+".png"});
+                      result.overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+                    }
+                    if(result.overflow>3)result.overflowElements=await page.evaluate(()=>[...document.querySelectorAll("main *")].filter(e=>{const r=e.getBoundingClientRect();return r.right>innerWidth+3&&!e.closest('[class*="overflow-x-auto"]')}).slice(0,12).map(e=>({tag:e.tagName,classes:e.getAttribute("class"),right:Math.round(e.getBoundingClientRect().right)})));
                     if(p==="/"&&width===390){
                       const menu=page.locator('header button[aria-haspopup="dialog"]');
                       await menu.focus();await page.keyboard.press("Enter");
@@ -211,6 +221,7 @@ jobs:
             stage5-fixed.json
             stage5-candidate-lighthouse/
             stage5-photo-review/
+            stage5-screenshots/
           if-no-files-found: warn
       - name: Require every validation gate to pass
         if: always()
