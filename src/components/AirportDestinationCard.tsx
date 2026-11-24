@@ -27,7 +27,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
         <span className="mt-1 inline-block text-[11px] font-semibold text-primary group-hover:underline sm:mt-2 sm:text-sm">View transfer details</span>
       </div>
     </Link>}
-    <a href="#request-quote" onClick={() => onChoose?.(id)} aria-label="Request a quote" className={`${hubQuoteButtonClass} sm:mt-2 sm:self-end`}><span className="sm:hidden">Get a quote</span><span className="hidden sm:inline">Request a quote</span></a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${hubQuoteButtonClass} sm:mt-2 sm:self-end`}><span className="sm:hidden">Get a quote</span><span className="hidden sm:inline">Request a quote</span></a>
   </article>;
   if (layout === "hub-row") return <article
     className="grid h-full min-h-[5.5rem] min-w-0 grid-cols-[3.5rem_minmax(0,1fr)_6.1rem] items-center gap-1.5 min-[380px]:grid-cols-[4rem_minmax(0,1fr)_6.5rem] rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:min-h-[7rem] sm:grid-cols-[7rem_minmax(0,1fr)_8.75rem] sm:gap-3 sm:p-3"
@@ -39,7 +39,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
       {price && <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-base">From ₪{price.amount.toLocaleString("en-US")}</p>}
       {price && <div className="min-w-0"><CompactCurrencyEquivalents amount={price.amount} /></div>}
     </div>
-    <a href="#request-quote" onClick={() => onChoose?.(id)} aria-label="Request a quote" className={`${hubQuoteButtonClass} justify-self-end`}><span className="sm:hidden">Get a quote</span><span className="hidden sm:inline">Request a quote</span></a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${hubQuoteButtonClass} justify-self-end`}><span className="sm:hidden">Get a quote</span><span className="hidden sm:inline">Request a quote</span></a>
   </article>;
   const compact = layout === "compact";
   const image = <img src={photo.src} alt={photo.alt} width={compact ? 80 : 360} height={compact ? 80 : 240} loading="lazy" decoding="async" className={compact ? "h-20 w-20 shrink-0 rounded-lg object-cover" : "aspect-[3/2] w-full object-cover"} />;
