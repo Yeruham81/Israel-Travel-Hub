@@ -118,7 +118,7 @@ export const expandedTravelGuides = {
         title: "Licensed airport taxis and private transfers on Shabbat",
         photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Official taxi sign at Ben Gurion Airport" },
         paragraphs: [
-          "Licensed airport taxis operate 24 hours a day, including Shabbat. For an immediate ride, get a ride code through Gett or an airport taxi kiosk and join the official queue at Terminal 3 ground-floor Exit 03 (or follow the official Terminal 1 pickup signs). A kiosk can issue the code without the Gett app; the same queue procedure applies. My Ben Gurion Airport taxi guide explains the steps.",
+          "Licensed airport taxis operate 24 hours a day, including Shabbat, and charge a regulated meter fare at the applicable Shabbat tariff. For an immediate ride, get a ride code through Gett or an airport taxi kiosk and join the official queue at Terminal 3 ground-floor Exit 03 (or follow the official Terminal 1 pickup signs). A kiosk can issue the code without the Gett app; the same queue procedure applies. My Ben Gurion Airport taxi guide explains the steps.",
           "Gett lists cash, card and in-app payment options for airport taxis. For a Gett taxi booked in advance, book in the app at least two hours before pickup and follow the separate meeting instructions at Terminal 3 Level 2, Exit 23.",
           "A pre-booked private transfer can provide a confirmed vehicle, meeting point and price. Tell me your flight number, full destination address, number of travellers, luggage and any child-seat or accessibility needs. I will explain the waiting, payment and cancellation terms before a booking is confirmed. You can compare private airport-transfer options.",
         ],
