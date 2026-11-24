@@ -45,7 +45,7 @@ describe("local-only image asset policy", () => {
       lines.forEach((line, index) => {
         // An explicitly loaded GA4 JavaScript file is a script resource, not an image hotlink.
         const isGa4ScriptLoader = /\bscript\.src\s*=/.test(line) && line.includes("googletagmanager.com/gtag/js");
-        if (remoteImagePatterns.some(regex => regex.test(line)) && !isGa4ScriptLoader && !(/<iframe\b/.test(line) && /https:\/\/maps\.google\.com\//.test(line))) {
+        if (remoteImagePatterns.some(regex => regex.test(line)) && !isGa4ScriptLoader && !(/<(?:iframe|ConsentIframe)\b/.test(line) && /https:\/\/maps\.google\.com\//.test(line))) {
           violations.push(`${relative(process.cwd(), file)}:${index + 1}`);
         }
       });

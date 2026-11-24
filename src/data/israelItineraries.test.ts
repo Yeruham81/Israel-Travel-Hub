@@ -112,7 +112,8 @@ describe("migrated Israel itineraries", () => {
     }
     const widgetComponent = file("src/components/GetYourGuideCityWidget.tsx");
     expect(widgetComponent).toContain("onToggle");
-    expect(widgetComponent).toContain("document.createElement(\"script\")");
+    expect(widgetComponent).toContain("<BookingWidgetFrame");
+    expect(file("src/components/BookingWidgetFrame.tsx")).toContain('category="marketing"');
     expect(widgetComponent).not.toContain("GetYourGuide (affiliate)");
     expect(widgetComponent).not.toContain("I may earn a commission");
     const guideComponent = file("src/components/IsraelItineraryPage.tsx");

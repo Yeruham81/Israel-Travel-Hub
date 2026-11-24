@@ -1,3 +1,4 @@
+import "@/test/consent-fixture";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { recordAffiliateTourClick } from "@/lib/tour-analytics";
 
