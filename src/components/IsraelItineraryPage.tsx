@@ -319,6 +319,25 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       <div className="mt-5 grid gap-4 md:grid-cols-2">{g.alternatives.map((item) => <article key={item.title} className="rounded-xl border bg-card p-5">
         <h3 className="text-lg font-semibold">{item.title}</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+        {item.title.includes("Eilat and Timna") && g.southernRouteOverview?.length ? (
+          <div role="region" aria-label="Southern ten-day alternative at a glance" tabIndex={0} className="mt-4 overflow-x-auto rounded-lg border focus-visible:outline-2 focus-visible:outline-primary">
+            <table className="min-w-[550px] w-full text-left text-xs sm:text-sm">
+              <caption className="sr-only">Southern ten-day route replacing the Galilee and northern coast</caption>
+              <thead className="bg-secondary"><tr>
+                <th className="sticky left-0 bg-secondary px-3 py-2 font-semibold" scope="col">Days</th>
+                <th className="px-3 py-2 font-semibold" scope="col">Main focus</th>
+                <th className="px-3 py-2 font-semibold" scope="col">Hotel base</th>
+              </tr></thead>
+              <tbody className="divide-y">
+                {g.southernRouteOverview.map(row => <tr key={row.days}>
+                  <th className="sticky left-0 bg-card px-3 py-3 font-semibold" scope="row">{row.days}</th>
+                  <td className="px-3 py-3">{row.focus}</td>
+                  <td className="px-3 py-3 text-muted-foreground">{row.base}</td>
+                </tr>)}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
         {item.to && item.label && <Link to={item.to} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline">{item.label} <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>}
       </article>)}</div>
     </section>
