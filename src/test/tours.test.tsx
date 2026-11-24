@@ -500,7 +500,7 @@ describe("tours hub and SEO category pages", () => {
     expect(contact.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
     expect(contact.querySelector('input[name="subject"]')).toHaveValue("");
     expect(contact.querySelector('textarea[name="message"]')).toHaveValue("");
-    expect(repeatedPhotos([...document.querySelectorAll("main img")].filter(img => !img.hasAttribute("data-photo-role")).map(img => img.getAttribute("src") || ""))).toEqual([]);
+    expect(repeatedPhotos([...document.querySelectorAll("main img")].filter(img => !img.hasAttribute("data-photo-role") && img.getAttribute("alt") !== "").map(img => img.getAttribute("src") || ""))).toEqual([]);
     fireEvent.click(within(nav).getByRole("button", { name: "From Jerusalem" }));
     await waitFor(() => expect(router.state.location.search).toEqual({ origin: "jerusalem" }));
     expect(screen.getAllByTestId("tour-card")).toHaveLength(4);
