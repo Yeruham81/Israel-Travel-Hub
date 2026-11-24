@@ -46,7 +46,7 @@ export function Analytics() {
     <p id="cookie-preferences-description" className="mt-2 text-sm leading-relaxed">This website uses cookies and similar technologies to improve your experience, analyze traffic and support marketing.{" "}<Link to="/privacy-policy/" hash="analytics-advertising" className="font-semibold text-primary underline">Privacy policy</Link></p>
     <div className="mt-4 grid gap-2 sm:grid-cols-3">
       <button type="button" onClick={() => choose(ALL_CATEGORIES)} className={buttonClass}>Accept all</button>
-      <button type="button" onClick={() => choose(NECESSARY_ONLY)} className={buttonClass}>Reject all</button>
+      <button type="button" onClick={() => choose(NECESSARY_ONLY)} className={buttonClass}>Accept necessary</button>
       <button type="button" aria-expanded={customize} aria-controls="cookie-categories" onClick={() => { setSelection({ ...(consent?.categories ?? NECESSARY_ONLY) }); setCustomize(true); }} className={buttonClass}>Customize</button>
     </div>
     {customize && <div id="cookie-categories" className="mt-4 space-y-3 border-t pt-4">

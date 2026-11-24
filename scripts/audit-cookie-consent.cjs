@@ -21,7 +21,7 @@ const consentKey = "ith:cookie-consent:v1";
     await page.locator("footer").getByRole("button", { name: "Cookie settings", exact: true }).click();
     await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
   }
-  async function necessary() { await page.getByRole("button", { name: "Reject all", exact: true }).click(); await settle(); assert.equal(await page.getByRole("dialog", { name: "Cookie preferences" }).count(), 0); }
+  async function necessary() { await page.getByRole("button", { name: "Accept necessary", exact: true }).click(); await settle(); assert.equal(await page.getByRole("dialog", { name: "Cookie preferences" }).count(), 0); }
   for (const path of ["/car-rental/", "/accommodation/", "/attractions/mount-of-olives/"]) {
     await page.goto(base + path, { waitUntil: "networkidle" });
     await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
@@ -90,7 +90,7 @@ const consentKey = "ith:cookie-consent:v1";
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(base + "/car-rental/#cookie-settings", { waitUntil: "networkidle" });
   await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
-  for (const label of ["Accept all", "Reject all", "Customize"]) {
+  for (const label of ["Accept all", "Accept necessary", "Customize"]) {
     const box = await page.getByRole("button", { name: label, exact: true }).boundingBox();
     assert(box && box.x >= 0 && box.x + box.width <= 390 && box.y >= 0 && box.y + box.height <= 844, "Mobile choice visible: " + label);
   }

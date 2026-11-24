@@ -18,7 +18,7 @@ it("offers all three choices on preview too and reopens settings after necessary
   await showPreferences();
   expect(screen.getByRole("dialog", { name: "Cookie preferences" })).toBeVisible();
   const all = screen.getByRole("button", { name: "Accept all" });
-  const necessary = screen.getByRole("button", { name: "Reject all" });
+  const necessary = screen.getByRole("button", { name: "Accept necessary" });
   expect(all.className).toBe(necessary.className);
   fireEvent.click(necessary);
   expect(readStoredConsent(localStorage)?.categories).toEqual(NECESSARY_ONLY);
@@ -40,7 +40,7 @@ it("saves independent category choices and keeps necessary storage always on", a
   expect(readStoredConsent(localStorage)?.categories).toEqual({ ...NECESSARY_ONLY, external: true });
   fireEvent.click(screen.getByRole("button", { name: "Cookie settings" }));
   expect(screen.getAllByRole("checkbox")[1]).toBeChecked();
-  fireEvent.click(screen.getByRole("button", { name: "Reject all" }));
+  fireEvent.click(screen.getByRole("button", { name: "Accept necessary" }));
   expect(readStoredConsent(localStorage)?.categories).toEqual(NECESSARY_ONLY);
 });
 it("can save advertising alone without granting booking or analytics permission", async () => {
@@ -64,6 +64,6 @@ it("opens a direct Cookie settings link once and closes after saving", async () 
   await showPreferences();
   expect(screen.getByRole("dialog")).toBeVisible();
   expect(screen.getAllByRole("checkbox").every(box => (box as HTMLInputElement).checked)).toBe(true);
-  fireEvent.click(screen.getByRole("button", { name: "Reject all" }));
+  fireEvent.click(screen.getByRole("button", { name: "Accept necessary" }));
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 });
