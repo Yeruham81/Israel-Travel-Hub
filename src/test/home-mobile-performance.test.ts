@@ -18,7 +18,8 @@ describe("home mobile performance optimizations", () => {
       expect(css).toContain(`./assets/fonts/${filename}`);
       expect(css).not.toContain(`url("/fonts/${filename}")`);
     }
-    expect(css).toMatch(/font-display:\s*swap/);
+    expect(css).toMatch(/font-display:\s*optional/);
+    expect(root).toContain('rel: "preload", href: siteSerifSemiboldUrl');
     expect(bytes("public/fonts/LICENSE-instrument-sans.txt")).toBeGreaterThan(100);
     expect(bytes("public/fonts/LICENSE-newsreader.txt")).toBeGreaterThan(100);
   });
