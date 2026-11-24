@@ -985,7 +985,7 @@ describe("migrated practical guides", () => {
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.photo?.src).toContain("airport-taxi-sign.webp");
     expect(guide.sections.find((section) => section.id === "restart")!.photo?.src).toMatch(/ben-gurion-rail-platform/);
     expect(guide.faqs).toHaveLength(6);
-    const windows = guide.sections.find((section) => section.id === "arrival-time")!.tables![0];
+    const windows = guide.sections.find((section) => section.id === "arrival-time")!.tables![0]!;
     expect(windows.headers).toEqual(["Arrival window", "Available transport options", "Practical first step"]);
     expect(windows.rows).toHaveLength(4);
     const transfers = guide.sections.find((section) => section.id === "terminal-transfer")!;
@@ -1001,9 +1001,9 @@ describe("migrated practical guides", () => {
     expect(costs.paragraphs.join(" ")).toMatch(/Saturday daytime generally uses Tariff B.*Saturday evening\/night Tariff C/s);
     expect(costs.tables?.[0]?.headers).toEqual(["Destination", "Saturday daytime · B", "Saturday evening/night · C", "Typical drive"]);
     expect(costs.tables?.[0]?.rows).toHaveLength(3);
-    for (const row of costs.tables![0].rows) {
-      const b = Number(row[1].match(/₪(\d+)/)?.[1]);
-      const c = Number(row[2].match(/₪(\d+)/)?.[1]);
+    for (const row of costs.tables![0]!.rows) {
+      const b = Number(row[1]!.match(/₪(\d+)/)?.[1]);
+      const c = Number(row[2]!.match(/₪(\d+)/)?.[1]);
       expect(c).toBeGreaterThan(b);
     }
     expect(costs.tables?.[0]?.note).toMatch(/Tariff B.*Tariff C.*18% VAT.*airport departure supplement/s);
