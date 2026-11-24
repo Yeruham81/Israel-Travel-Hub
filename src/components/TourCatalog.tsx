@@ -1,3 +1,4 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { Link } from "@tanstack/react-router";
 import { Clock3, MapPin, Users } from "lucide-react";
 import type { TourProduct } from "@/data/tourTypes";
@@ -18,7 +19,7 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
     <ul className={compact ? "mt-4 grid auto-rows-fr gap-3" : "mt-5 grid auto-rows-fr gap-5 sm:grid-cols-2"} aria-label="My private day trips">
       {tours.map(tour => compact ? <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="h-full min-w-0 scroll-mt-24 overflow-hidden rounded-xl border bg-card">
         <article className="flex h-full min-w-0 flex-col sm:flex-row sm:items-stretch">
-          <div className="relative h-36 w-full shrink-0 overflow-hidden bg-secondary/20 sm:h-auto sm:w-48 lg:w-56"><img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={320} height={180} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" /></div>
+          <div className="relative h-36 w-full shrink-0 overflow-hidden bg-secondary/20 sm:h-auto sm:w-48 lg:w-56"><img src={tourPhotos[tour.id]!.src} srcSet={stage5PhotoSrcSet(tourPhotos[tour.id]!.src)} sizes="(min-width: 1024px) 340px, (min-width: 768px) 50vw, calc(100vw - 34px)" alt={tourPhotos[tour.id]!.alt} width={320} height={180} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" /></div>
           <div className="flex min-w-0 flex-1 flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-5 lg:px-5">
             <div className="min-w-0 flex-1">
               <h3 className="text-base font-semibold leading-snug">{tour.title}</h3>
@@ -29,7 +30,7 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
           </div>
         </article>
       </li> : <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex h-full min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card">
-        <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+        <img src={tourPhotos[tour.id]!.src} srcSet={stage5PhotoSrcSet(tourPhotos[tour.id]!.src)} sizes="(min-width: 1024px) 340px, (min-width: 768px) 50vw, calc(100vw - 34px)" alt={tourPhotos[tour.id]!.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
         <article className="flex flex-1 flex-col p-4">
           <h3 className="text-xl font-semibold leading-snug text-foreground">{tour.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>

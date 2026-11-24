@@ -50,7 +50,7 @@ describe("four dedicated airport transfer routes", () => {
     const routeHero = within(hero).getByTestId("guide-hero-media");
     expect(routeHero.querySelector('source[media="(max-width: 480px)"]')).toHaveAttribute("type", "image/webp");
     const quoteIntro = container.querySelector('#request-quote [data-testid="quote-form-intro"]')! as HTMLElement;
-    const quoteReview = within(quoteIntro).getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/i });
+    const quoteReview = within(quoteIntro).getByRole("link", { name: /Read Reviews on TripAdvisor for Moshe Barak/i });
     expect(quoteReview).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
     expect(quoteReview).toHaveClass("bg-[#34E0A1]");
     expect(within(screen.getByTestId("author-card")).getByRole("link", { name: /Read traveler reviews on Tripadvisor/i })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);

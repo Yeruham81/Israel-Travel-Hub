@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
 import { ArrowUpRight, BedDouble, BookOpen, CalendarDays, Smartphone, Sun, TrainFront, type LucideIcon } from "lucide-react";
 import { HubHeader } from "@/components/Guide";
-import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { GuidePhotoCredit } from "@/components/GuideCard";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, attractionRelatedGuides, type AttractionHubCard } from "@/data/attractionsHub";

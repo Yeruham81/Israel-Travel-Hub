@@ -282,7 +282,7 @@ describe("shared sidebar navigation", () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><SiteHeader /></RouterContextProvider>);
     const trigger = screen.getByRole("button", { name: "Menu" });
-    const brand = screen.getByRole("link", { name: "Israel Taxi & Travel home" });
+    const brand = screen.getByRole("link", { name: "Israel Taxi & Travel Moshe Barak – home" });
     expect(brand).toHaveAttribute("href", "/");
     expect(brand.querySelector("span.font-serif.whitespace-nowrap")).toHaveTextContent("Israel Taxi & Travel");
     const byline = within(brand).getByTestId("wordmark-byline");

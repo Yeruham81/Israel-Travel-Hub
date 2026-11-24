@@ -1,6 +1,6 @@
 import { ProviderCard } from "@/components/Guide";
 import { linksForPage } from "@/data/registry";
-import type { TravelGuideId } from "@/data/registry";
+import type { TravelGuideId } from "@/data/travel-guide-paths";
 import type { AttractionId } from "@/data/attractionGuideTypes";
 type JerusalemOfferTarget = TravelGuideId | AttractionId;
 

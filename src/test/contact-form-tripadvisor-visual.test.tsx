@@ -17,7 +17,7 @@ describe("personal inquiry intro matches the approved TripAdvisor layout", () =>
     );
     const intro = view.container.querySelector('[data-testid="quote-form-intro"]')!;
     const photo = intro.querySelector("img")!;
-    const reviews = screen.getByRole("link", { name: /Read traveler reviews on Tripadvisor for Moshe Barak/ });
+    const reviews = screen.getByRole("link", { name: /Read Reviews on TripAdvisor for Moshe Barak/ });
     expect(photo.getAttribute("alt")).toBeTruthy();
     expect(reviews).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
     expect(reviews).toHaveAttribute("target", "_blank");

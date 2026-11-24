@@ -1,3 +1,4 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, ExternalLink, RotateCcw } from "lucide-react";
@@ -187,7 +188,7 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
       : "group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:grid sm:grid-cols-[160px_minmax(0,1fr)] sm:grid-rows-[1fr_auto]"
     } data-testid={showArea ? "tel-aviv-hotel-card" : "hotel-recommendation"}>
       <div className={verticalLayout ? "relative w-full overflow-hidden bg-muted" : "relative overflow-hidden bg-muted sm:row-span-2"}>
-        <img src={image.src} alt={image.alt} onError={() => { if (!photoFailed) setPhotoFailed(true); }}
+        <img src={image.src} srcSet={stage5PhotoSrcSet(image.src)} sizes="(min-width: 1024px) 340px, (min-width: 640px) 50vw, calc(100vw - 34px)" alt={image.alt} onError={() => { if (!photoFailed) setPhotoFailed(true); }}
              width={755} height={503} loading="lazy" decoding="async" data-testid="hotel-illustration"
              className={verticalLayout ? "aspect-[16/9] w-full object-cover" : "aspect-[16/9] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[215px]"} />
         {(showArea || showNearbyArea) && <Link to={area.path as LinkProps["to"]}

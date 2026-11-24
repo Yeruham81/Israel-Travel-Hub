@@ -1,3 +1,5 @@
+import { guideTopics, type GuideTopicId } from "@/data/guide-topics";
+export { guideTopics, type GuideTopicId } from "@/data/guide-topics";
 import { itineraries, itineraryIds } from "@/data/israelItineraries";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import type { LinkProps } from "@tanstack/react-router";
@@ -34,18 +36,6 @@ import { seniorFaqs, seniorHero, seniorUpdatedAt } from "@/data/seniorToursGuide
 import { deadSeaAttractionsUpdatedAt } from "@/data/deadSeaAttractionsGuide";
 import { telAvivAttractionsUpdatedAt } from "@/data/telAvivAttractionsGuide";
 
-export const guideTopics = [
-  { id: "transportation", label: "Transportation" },
-  { id: "destinations", label: "Destinations" },
-  { id: "attractions", label: "Attractions" },
-  { id: "itineraries", label: "Itineraries & day trips" },
-  { id: "tips", label: "Travel tips" },
-  { id: "accommodation", label: "Accommodation" },
-  { id: "connectivity", label: "Mobile & connectivity" },
-  { id: "religion", label: "Religion & heritage" },
-  { id: "shopping", label: "Shopping & markets" },
-] as const;
-export type GuideTopicId = typeof guideTopics[number]["id"];
 export type GuidePhoto = { src: string; alt: string; sourceUrl?: string; credit?: string; licenseUrl?: string };
 export type GuideTable = { caption: string; headers: string[]; rows: string[][]; note?: string; rowLinks?: ({ to: LinkProps["to"]; label?: string } | { href: string; label?: string } | null)[] };
 export type GuideInlineSpan = { text: string; to?: LinkProps["to"]; href?: string; marks?: ("strong" | "em" | "underline" | "code")[] };

@@ -1,3 +1,4 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { type LinkProps } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
@@ -317,7 +318,7 @@ export function ProviderSection({ id = "book", title, intro, links, pageId }: { 
 
 function GuideCardPhoto({ photo }: { photo?: { src: string; alt: string } | null }) {
   return photo
-    ? <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
+    ? <img src={photo.src} srcSet={stage5PhotoSrcSet(photo.src)} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 45vw" alt={photo.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
     : <span aria-hidden="true" className="flex aspect-[16/9] w-full items-center justify-center bg-secondary/50 text-muted-foreground"><BookOpen className="h-10 w-10 opacity-50" /></span>;
 }
 

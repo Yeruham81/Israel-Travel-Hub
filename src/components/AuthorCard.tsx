@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import portrait from "@/assets/airport-transfers/moshe.webp";
-import { mosheBarakAuthor } from "@/data/registry";
+import { mosheBarakAuthor } from "@/data/site-identity";
 import { TripadvisorReviewsButton } from "@/components/TripadvisorReviewsButton";
 
 /** Compact site-wide author attribution. Tripadvisor is an independent review platform, not an endorsement. */

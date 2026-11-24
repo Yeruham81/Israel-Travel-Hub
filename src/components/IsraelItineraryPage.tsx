@@ -11,7 +11,7 @@ import { guideContactCopy } from "@/lib/guide-contact";
 import type { GuidePhoto } from "@/data/travelGuides";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
-import { isPublisherUrl } from "@/data/registry";
+import { isPublisherUrl } from "@/data/site-identity";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { AuthorCard } from "@/components/AuthorCard";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";

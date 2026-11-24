@@ -1,3 +1,4 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { useState } from "react";
 import { Building2, ExternalLink } from "lucide-react";
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
@@ -14,7 +15,7 @@ export function StayHotelCard({ hotel, booking, pageId, editorial, compact = fal
     return (
       <li id={`hotel-${hotel.id}`} className="flex min-w-0 scroll-mt-32 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/60" data-testid="hotel-recommendation">
         {photo && <div className="overflow-hidden bg-muted">
-          <img src={imageFailed ? fallbackPhoto?.src || photo.src : photo.src} alt={imageFailed ? fallbackPhoto?.alt || photo.alt : photo.alt}
+          <img src={imageFailed ? fallbackPhoto?.src || photo.src : photo.src} srcSet={stage5PhotoSrcSet(imageFailed ? fallbackPhoto?.src || photo.src : photo.src)} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, calc(100vw - 34px)" alt={imageFailed ? fallbackPhoto?.alt || photo.alt : photo.alt}
                loading="lazy" decoding="async" width={755} height={503}
                onError={() => { if (!imageFailed) setImageFailed(true); }}
                data-testid="hotel-illustration"
@@ -42,7 +43,7 @@ export function StayHotelCard({ hotel, booking, pageId, editorial, compact = fal
   return (
     <li id={`hotel-${hotel.id}`} className="scroll-mt-32 overflow-hidden rounded-2xl border bg-card" data-testid="hotel-recommendation">
       {photo && <figure className="overflow-hidden bg-muted">
-        <img src={imageFailed ? fallbackPhoto?.src || photo.src : photo.src}
+        <img src={imageFailed ? fallbackPhoto?.src || photo.src : photo.src} srcSet={stage5PhotoSrcSet(imageFailed ? fallbackPhoto?.src || photo.src : photo.src)} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, calc(100vw - 34px)"
              alt={imageFailed ? fallbackPhoto?.alt || photo.alt : photo.alt}
              width={755} height={503} loading="lazy" decoding="async"
              onError={() => { if (!imageFailed) setImageFailed(true); }}

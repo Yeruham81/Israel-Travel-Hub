@@ -4,7 +4,7 @@ import type { HotelCategoryGuide, StayGuidePhoto } from "@/data/content";
 import { deadSeaHotelRecommendations, tiberiasHotelRecommendations, haifaHotelRecommendations, providerLinks, type ResortHotelFacts, type ProviderLink } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
-import { isPublisherUrl } from "@/data/registry";
+import { isPublisherUrl } from "@/data/site-identity";
 
 const resortHotels = [...deadSeaHotelRecommendations, ...tiberiasHotelRecommendations, ...haifaHotelRecommendations];
 export const resortHotel = (id: string) => resortHotels.find((hotel) => hotel.id === id)!;

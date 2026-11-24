@@ -1,4 +1,4 @@
-import { mosheBarakAuthor } from "@/data/registry";
+import { mosheBarakAuthor } from "@/data/site-identity";
 
 /** The same approved reviews link and visual treatment across the site. */
 export function TripadvisorReviewsButton({ className = "" }: { className?: string }) {

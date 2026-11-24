@@ -1,4 +1,4 @@
-import { isPublisherUrl } from "@/data/registry";
+import { isPublisherUrl } from "@/data/site-identity";
 
 /** Only show public-source and legally relevant attributions; avoid decorative captions for illustrations. */
 export function hasPublicPhotoCredit(photo: { sourceUrl?: string; licenseUrl?: string; credit?: string }) {

@@ -1,3 +1,4 @@
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import type { AccommodationDestinationCard } from "@/data/content";
@@ -14,7 +15,7 @@ export function AccommodationCard({
   const content = <>
     <span className="block aspect-[16/10] w-full shrink-0 overflow-hidden bg-muted lg:aspect-auto lg:w-40 xl:w-44">
       <img
-        src={d.photo.src} alt={d.photo.alt}
+        src={d.photo.src} srcSet={stage5PhotoSrcSet(d.photo.src)} sizes="(min-width: 1024px) 176px, 45vw" alt={d.photo.alt}
         width={755} height={503} loading="lazy" decoding="async"
         className="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]"
       />

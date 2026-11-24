@@ -4,7 +4,7 @@ import { FaqList, HubHeader } from "@/components/Guide";
 import { TourCategoryExplorer, TourCruiseCallout } from "@/components/TourDiscovery";
 import { TourPhotoCredits } from "@/components/TourCategoryPage";
 import { tourCategories, tourCategoryPaths, toursHubHero, toursHubDescription, toursHubFaqs, toursHubTitle } from "@/data/tours";
-import { travelGuidePaths } from "@/data/registry";
+import { travelGuidePaths } from "@/data/travel-guide-paths";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 
 const hero = toursHubHero;

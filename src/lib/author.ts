@@ -1,4 +1,4 @@
-import { mosheBarakAuthor } from "@/data/registry";
+import { mosheBarakAuthor } from "@/data/site-identity";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 
 export function authorLd() {

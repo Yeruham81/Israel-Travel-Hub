@@ -1,7 +1,7 @@
 import { ConsentIframe } from "@/components/ConsentIframe";
 import { MapPin, ExternalLink } from "lucide-react";
 import type { NeighborhoodStayGuide } from "@/data/content";
-import { isPublisherUrl } from "@/data/registry";
+import { isPublisherUrl } from "@/data/site-identity";
 
 /** Google Maps is the default for all accommodation maps. Older local maps remain available only when explicitly requested. */
 export function AreaMap({ area, compact = false, provider = "google", googleZoom = 14, showExternalLink = true, stretch = false }: { area: Pick<NeighborhoodStayGuide, "name" | "map">; compact?: boolean; provider?: "local" | "google"; googleZoom?: number; showExternalLink?: boolean; stretch?: boolean }) {

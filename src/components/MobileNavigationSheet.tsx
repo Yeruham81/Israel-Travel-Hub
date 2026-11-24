@@ -17,7 +17,7 @@ export default function MobileNavigationSheet({
 }) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent onCloseAutoFocus={onCloseAutoFocus} side="left" className="w-[85vw] max-w-sm overflow-y-auto">
+      <SheetContent {...(onCloseAutoFocus ? { onCloseAutoFocus } : {})} side="left" className="w-[85vw] max-w-sm overflow-y-auto">
         <SheetHeader className="mb-4 text-left">
           <SheetTitle className="font-serif text-2xl">Explore Israel</SheetTitle>
           <SheetDescription>Transportation, tours, accommodation, attractions and travel tips for your trip.</SheetDescription>

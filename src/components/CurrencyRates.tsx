@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { initialReferenceFx, referenceFxConfig, type ForeignDisplayCurrency } from "@/data/registry";
+import { initialReferenceFx, referenceFxConfig, type ForeignDisplayCurrency } from "@/data/reference-fx";
 import { convertedAmount, displayCurrencies, isUsableExchangeRates, parseExchangeRateResult, type ExchangeRateResult } from "@/lib/exchange-rates";
 
 type CurrencyState = ExchangeRateResult & { loading: boolean };
