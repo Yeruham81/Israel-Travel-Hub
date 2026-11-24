@@ -1,0 +1,159 @@
+name: Stage 5 final published release and repeated Lighthouse audit
+on:
+  pull_request:
+    branches: [main]
+    paths: ['.github/workflows/stage5-final-published-audit.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  live-lighthouse-after:
+    if: github.head_ref == 'audit/stage5-final-published-20261125' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 70
+    env:
+      CI: 'true'
+      HOSTINGER_STATIC_BUILD: 'true'
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      VITE_INDEXABLE: 'false'
+      EXPECTED_RELEASE: '701d8ccf205e70471ac5b5452fb52b5246cda4ba'
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm install --prefix /tmp/stage5live --no-save lighthouse@12.8.2
+      - uses: actions/checkout@v4
+        with:
+          ref: 701d8ccf205e70471ac5b5452fb52b5246cda4ba
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Build exact release for public asset and content verification
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_RELEASE"
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs
+      - name: Verify successful Hostinger deployment of exact merged commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p stage5-live-lighthouse
+          for i in $(seq 1 60); do
+            state="$(gh api "repos/$GITHUB_REPOSITORY/branches/main" --jq '.commit.sha')"
+            test "$state" = "$EXPECTED_RELEASE" || { echo "::error::main changed; do not misattribute measurements"; exit 1; }
+            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-hostinger-premium.yml/runs?head_sha=$EXPECTED_RELEASE&per_page=10" > /tmp/stage5-deploy-runs.json
+            outcome="$(jq -r '[.workflow_runs[] | select(.head_sha==env.EXPECTED_RELEASE and .event=="workflow_run")][0] | if .==null then "pending" elif .status=="completed" then .conclusion else .status end' /tmp/stage5-deploy-runs.json)"
+            echo "DEPLOY_READINESS $i $outcome"
+            if [ "$outcome" = success ]; then
+              id="$(jq -r '[.workflow_runs[]|select(.head_sha==env.EXPECTED_RELEASE and .event=="workflow_run")][0].id' /tmp/stage5-deploy-runs.json)"
+              gh api "repos/$GITHUB_REPOSITORY/actions/runs/$id/jobs" > stage5-live-lighthouse/deploy-jobs.json
+              jq -e '.jobs | any(.conclusion=="success" and (.steps|any(.name|test("upload|sync|publish|deploy";"i"))))' stage5-live-lighthouse/deploy-jobs.json >/dev/null
+              echo "DEPLOYMENT_VERIFIED $id $EXPECTED_RELEASE"
+              exit 0
+            fi
+            case "$outcome" in failure|cancelled|skipped|action_required|timed_out) echo "::error::Deployment did not complete successfully"; exit 1;; esac
+            sleep 20
+          done
+          echo "::error::Exact release deployment not confirmed"; exit 1
+      - name: Match live HTML entry and preloads against exact release, including all itineraries
+        run: |
+          python3 -u - <<'PY'
+          import hashlib, json, re, time, urllib.request, urllib.error
+          from html.parser import HTMLParser
+          from pathlib import Path
+          origin="https://saddlebrown-guanaco-454061.hostingersite.com"
+          paths=["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"]+[f"/travel-blog/israel-itinerary-{d}-days/" for d in (3,5,7,10)]
+          class Snapshot(HTMLParser):
+              def __init__(self,html):
+                  super().__init__(convert_charrefs=True);self.assets=set();self.title=[];self.h1=[];self.active=None;self.canonical=None;self.robots=None;self.feed(html)
+              def handle_starttag(self,tag,attrs):
+                  a=dict(attrs)
+                  if tag in ("title","h1"):self.active=tag
+                  if tag=="script" and a.get("type")=="module" and a.get("src"):self.assets.add(a["src"])
+                  if tag=="link" and a.get("rel")=="modulepreload":self.assets.add(a.get("href"))
+                  if tag=="link" and a.get("rel")=="canonical":self.canonical=a.get("href")
+                  if tag=="meta" and a.get("name")=="robots":self.robots=a.get("content")
+              def handle_endtag(self,tag):
+                  if tag==self.active:self.active=None
+              def handle_data(self,data):
+                  if self.active:getattr(self,self.active).append(data)
+          def get(p):
+              req=urllib.request.Request(origin+p,headers={"User-Agent":"IsraelTravelHub-PrelaunchAudit/1.0","Cache-Control":"no-cache","Accept-Encoding":"identity"})
+              with urllib.request.urlopen(req,timeout=25) as r:
+                  if r.status!=200:raise RuntimeError(f"HTTP {r.status}: {p}")
+                  return r.read()
+          expected={p:Snapshot((Path(".output/public")/p.strip("/")/"index.html").read_text()) for p in paths}
+          for i in range(20):
+              try:
+                  live=Snapshot(get("/").decode())
+                  if live.assets and live.assets==expected["/"].assets:break
+                  print("EDGE_RELEASE_PENDING",i+1,flush=True)
+              except urllib.error.HTTPError as e:
+                  if e.code==429:raise
+                  print("EDGE_HTTP",e.code)
+              time.sleep(20)
+          else:raise RuntimeError("Published homepage does not match exact release module assets")
+          rows=[]
+          for p in paths:
+              local=expected[p];live=Snapshot(get(p).decode())
+              assert local.assets and local.assets==live.assets,("module assets mismatch",p,sorted(local.assets-live.assets),sorted(live.assets-local.assets))
+              assert local.title==live.title and local.h1==live.h1 and local.canonical==live.canonical and local.robots==live.robots,(p,"metadata mismatch")
+              row={"path":p,"http":200,"title":"".join(live.title),"h1":"".join(live.h1),"canonical":live.canonical,"moduleAssets":len(live.assets)}
+              rows.append(row);print("LIVE_RELEASE_CHECK",json.dumps(row),flush=True)
+              time.sleep(1)
+          entries=sorted(expected["/"].assets)
+          entry=next((x for x in entries if re.search(r'/assets/index-[^/]+\.js$',x)),None)
+          assert entry,("Expected entry missing",entries)
+          digest=lambda b:hashlib.sha256(b).hexdigest()
+          assert digest(get(entry))==digest((Path(".output/public")/entry.lstrip("/")).read_bytes()),"Live entry digest mismatch"
+          print("LIVE_ENTRY_VERIFIED",entry)
+          Path("stage5-live-lighthouse/release-check.json").write_text(json.dumps({"entry":entry,"pages":rows},indent=2))
+          PY
+      - name: Repeat mobile measurements with two throttling methods
+        run: |
+          mkdir -p stage5-live-lighthouse
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import {spawnSync} from "node:child_process";
+          const origin="https://saddlebrown-guanaco-454061.hostingersite.com",results=[];
+          const paths=["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"];
+          // Prior published median of three simulated mobile rounds, run 45495100208.
+          const baseline=[{"path":"/","performance":68,"accessibility":100,"lcpMs":5766.961,"fcpMs":4561.3805,"bytes":1498727,"scriptBytes":803511,"scriptRequests":168},{"path":"/airport-transfers/","performance":69,"accessibility":100,"lcpMs":5452.126,"fcpMs":4112.433,"bytes":1195067,"scriptBytes":800241,"scriptRequests":167},{"path":"/travel-blog/","performance":70,"accessibility":100,"lcpMs":5017.465,"fcpMs":4567.465,"bytes":1263195,"scriptBytes":804629,"scriptRequests":171},{"path":"/tours/golan-heights/","performance":74,"accessibility":100,"lcpMs":4380.702,"fcpMs":4380.702,"bytes":1620935,"scriptBytes":795565,"scriptRequests":167},{"path":"/accommodation/","performance":69,"accessibility":100,"lcpMs":5310.136,"fcpMs":4560.136,"bytes":1629611,"scriptBytes":801541,"scriptRequests":168},{"path":"/attractions/old-city-jerusalem/","performance":72,"accessibility":100,"lcpMs":4634.332,"fcpMs":4559.332,"bytes":1400213,"scriptBytes":795899,"scriptRequests":167}];
+          let stop=false;
+          for(const [method,rounds] of [["simulate",3],["devtools",1],["desktop",1]]){
+            if(stop)break;
+            for(let round=1;round<=rounds&&!stop;round++){
+              for(const p of paths){
+                const file="stage5-live-lighthouse/"+method+"-"+round+"-"+(p==="/"?"home":p.replace(/^\/+|\/+$/g,"").replaceAll("/","_"))+".json";
+                const args=[origin+p,...(method==="desktop"?["--preset=desktop","--throttling-method=simulate"]:["--throttling-method="+method]),"--only-categories=performance,accessibility","--output=json","--output-path="+file,"--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=35000","--quiet"];
+                const r=spawnSync("/tmp/stage5live/node_modules/.bin/lighthouse",args,{encoding:"utf8",timeout:125000,maxBuffer:2*1024*1024});
+                let row;
+                try{
+                  const a=JSON.parse(fs.readFileSync(file,"utf8")),u=a.audits,net=u["network-requests"].details.items,m=u.metrics.details.items[0];
+                  if(net.some(n=>n.statusCode===429)){stop=true;throw Error("429 rate limit; stop");}
+                  if(a.runtimeError)throw Error(a.runtimeError.message);
+                  const doc=net.find(n=>n.resourceType==="Document"&&n.url===origin+p);
+                  if(!doc||doc.statusCode!==200)throw Error("Document not verified");
+                  row={method,round,path:p,performance:Math.round(a.categories.performance.score*100),accessibility:Math.round(a.categories.accessibility.score*100),lcpMs:u["largest-contentful-paint"].numericValue,fcpMs:u["first-contentful-paint"].numericValue,observedLcp:m.observedLargestContentfulPaint,observedFcp:m.observedFirstContentfulPaint,cls:u["cumulative-layout-shift"].numericValue,tbtMs:u["total-blocking-time"].numericValue,bytes:u["total-byte-weight"].numericValue,scriptBytes:net.filter(x=>x.resourceType==="Script").reduce((s,x)=>s+x.transferSize,0),requests:net.length,scriptRequests:net.filter(x=>x.resourceType==="Script").length,benchmark:a.environment.benchmarkIndex,rtt:u["network-rtt"].numericValue,serverLatency:u["network-server-latency"].numericValue,version:a.lighthouseVersion,throttling:a.configSettings.throttling,accessibilityFailures:a.categories.accessibility.auditRefs.filter(x=>u[x.id]?.score===0).map(x=>({id:x.id,nodes:u[x.id].details?.items?.map(n=>n.node?.snippet).filter(Boolean)}))};
+                }catch(e){row={method,round,path:p,error:String(e).slice(0,300),exit:r.status};if(/429|rate.limit/i.test(row.error))stop=true;}
+                results.push(row);console.log("REPEAT_MOBILE",JSON.stringify(row));fs.writeFileSync("stage5-live-lighthouse/repeated-summary.json",JSON.stringify(results,null,2));
+                if(stop)break;
+                await new Promise(r=>setTimeout(r,8000));
+              }
+            }
+          }
+          const median=v=>{const s=[...v].sort((a,b)=>a-b);return s.length?s[Math.floor(s.length/2)]:null};
+          const comparison=paths.map(path=>{const rows=results.filter(x=>x.path===path&&x.method==="simulate"&&!x.error),direct=results.find(x=>x.path===path&&x.method==="devtools"&&!x.error);const med=Object.fromEntries(["performance","accessibility","lcpMs","fcpMs","observedLcp","observedFcp","cls","tbtMs","bytes","scriptBytes","requests","scriptRequests","benchmark","rtt"].map(k=>[k,median(rows.map(x=>x[k]))]));return {path,before:baseline.find(x=>x.path===path),count:rows.length,median:med,desktop:results.find(x=>x.path===path&&x.method==="desktop"&&!x.error),range:{score:rows.map(x=>x.performance),lcp:rows.map(x=>x.lcpMs)},devtools:direct}});
+          fs.writeFileSync("stage5-live-lighthouse/repeated-comparison.json",JSON.stringify(comparison,null,2));
+          for(const row of comparison)console.log("REPEAT_COMPARISON",JSON.stringify(row));
+          if(results.length!==30||results.some(x=>x.error))process.exitCode=1;
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage5-final-published-lighthouse
+          path: stage5-live-lighthouse/
+          if-no-files-found: warn
