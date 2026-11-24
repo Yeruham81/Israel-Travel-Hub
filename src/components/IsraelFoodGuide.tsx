@@ -119,7 +119,7 @@ function FoodDay({onPickFood}:{onPickFood:PickFood}){
   {when:"Breakfast",title:"Bakery or café",text:"Pick up a warm boureka or order shakshuka with bread. Choose one, not both, if you want room for lunch.",anchor:"shakshuka"},
   {when:"Lunch",title:"A hummus shop or pita stand",text:"Try a bowl of hummus, a falafel pita or sabich. Ask how big the serving is.",anchor:"hummus"},
   {when:"Afternoon",title:"Wander one food district",text:"Browse a market, look at spices and pickles, and choose a small drink or tasting stop.",anchor:"markets"},
-  {when:"After dinner",title:"Share something sweet",text:"Finish with malabi or warm Knafeh. Ask about dairy and nuts before ordering.",anchor:"kanafeh"}
+  {when:"After dinner",title:"Share something sweet",text:"Finish with malabi or warm Knafeh. Ask about dairy and nuts before ordering.",anchor:"knafeh"}
  ] as const;
  return <section id="food-day" aria-labelledby="food-day-heading" className="mt-12 scroll-mt-24">
    <SectionHeading id="food-day" title="A simple first food day" intro="Try these four food stops in one city for a relaxed introduction to local flavours."/>
