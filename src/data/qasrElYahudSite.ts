@@ -3,7 +3,7 @@ import qasrHero from "@/assets/guides/dead-sea-excursions/qasr-el-yahud-river-de
 /** Direct operator information and visitor references for the Qasr el-Yahud guide. */
 export const qasrElYahudSite = {
   title: "Qasr el-Yahud: Jordan River Baptism Site & Visitor Guide",
-  description: "Visit Qasr el-Yahud near Jericho: free admission, mandatory advance registration, opening hours, baptism rules, the renovated riverbank, accessibility and directions.",
+  description: "Visit Qasr el-Yahud near Jericho: free entry, advance registration, baptism arrangements, opening hours, access and directions to the Jordan River.",
   region: "Jordan Valley & Dead Sea" as const,
   updatedAt: "2026-11-17",
   intro: "On the lower Jordan River near Jericho, Qasr el-Yahud brings visitors to a place closely associated with the baptism of Jesus. You can visit the riverbank, watch ceremonies and spend a quiet moment by the water. I recommend checking the site's reservation and access arrangements before setting out, even for a short stop.",

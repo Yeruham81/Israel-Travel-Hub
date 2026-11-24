@@ -232,7 +232,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   {
     id: "east-jerusalem", cityId: "jerusalem", name: "East Jerusalem", shortName: "East Jerusalem",
     path: "/accommodation/jerusalem/east-jerusalem/",
-    title: "Hotels in East Jerusalem",
+    title: "Hotels in East Jerusalem: Near Damascus Gate",
     metaDescription: "Compare hotels near Damascus Gate and Nablus Road, including heritage stays, Old City entrances and practical airport drop-offs.",
     summary: "This guide covers the Nablus Road and Damascus Gate hotel district, not all of East Jerusalem. Check the exact address when choosing access to the northern Old City gates.",
     bestFor: "Christian sites & Palestinian heritage", suits: ["heritage", "first-visit", "car-free"], priceLevel: "Guesthouses to landmark luxury",

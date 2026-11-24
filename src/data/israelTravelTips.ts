@@ -2,7 +2,7 @@ import travelTipsCover from "@/assets/guides/israel-travel-tips-hero.webp";
 
 /** Shared first-time visitor content used by the page and its SEO metadata. */
 export const TRAVEL_TIPS_TITLE = "Israel Travel Tips for First-Time Visitors";
-export const TRAVEL_TIPS_DESCRIPTION = "Practical Israel travel tips for first-time visitors: entry and ETA-IL, travel insurance, safety resources, Shabbat transport, where to stay, payments and local customs.";
+export const TRAVEL_TIPS_DESCRIPTION = "Practical Israel travel tips: ETA-IL entry rules, insurance, safety resources, Shabbat transport, accommodation, payments and local customs.";
 export const TRAVEL_TIPS_UPDATED = "2026-11-21";
 
 /** Shared hero for the guide and every incoming guide card. */

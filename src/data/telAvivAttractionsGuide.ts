@@ -171,7 +171,7 @@ export const telAvivFaqs=[
 ];
 export const telAvivEditorialOverview: Attraction={
   title:"Best Things to Do in Tel Aviv: Attractions & Local Experiences",
-  description:"Explore ten Tel Aviv and Jaffa attractions, from Old Jaffa, beaches and markets to Bauhaus streets, museums, Sarona and the northern waterfront, with maps and local planning tips.",
+  description:"Explore ten Tel Aviv and Jaffa attractions: Old Jaffa, beaches, markets, Bauhaus streets, museums, Sarona and waterfront, with maps and local tips.",
   region:"Tel Aviv & Jaffa",
   image:telAvivAttractionsHero,
   duration:"One to three days",

@@ -1,7 +1,7 @@
 /** Jerusalem's editorial planning hub. Each topic card delegates to its own canonical guide. */
 export const JERUSALEM_HUB_PATH = "/travel-blog/jerusalem-travel-guide/";
 export const JERUSALEM_HUB_TITLE = "Jerusalem Travel Guide: What to See, Where to Stay & How to Plan";
-export const JERUSALEM_HUB_DESCRIPTION = "Plan your Jerusalem visit with my guide to the Old City, Mount of Olives, museums, food markets, how many days to stay, best neighbourhoods, local transport and day trips.";
+export const JERUSALEM_HUB_DESCRIPTION = "Plan your Jerusalem visit: Old City, Mount of Olives, museums, markets, neighborhoods, how many days to stay, local transport and day trips.";
 export const JERUSALEM_HUB_UPDATED = "2026-11-21";
 
 export const jerusalemTopicCards = [

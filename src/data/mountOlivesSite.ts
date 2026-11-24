@@ -4,7 +4,7 @@ import heroJerusalemLarge from "@/assets/home/hero-jerusalem-large.webp";
  * City of David's Mount of Olives visitor guidance. Each compound has its own rules. */
 export const mountOlivesSite = {
   title: "Mount of Olives, Jerusalem: Viewpoint, Churches & Visitor Guide",
-  description: "Plan a visit to Jerusalem's Mount of Olives: Seven Arches panorama, Gethsemane, eight historic stops, church opening hours, admission, transport and downhill walking routes.",
+  description: "Explore the Mount of Olives in Jerusalem: Seven Arches viewpoint, Gethsemane, historic churches, opening hours and downhill walking routes.",
   updatedAt: "2026-11-22",
   region: "Jerusalem",
   hero: {

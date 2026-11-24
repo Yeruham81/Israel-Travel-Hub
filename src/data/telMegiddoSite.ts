@@ -3,7 +3,7 @@ import telMegiddoHero from "@/assets/guides/2026-10/tel-megiddo.webp";
 /** Facts shared by the Tel Megiddo visitor page and SEO registry. */
 export const telMegiddoSite = {
   title: "Tel Megiddo National Park: Ancient City, Water System & Armageddon",
-  description: "Plan a visit to Tel Megiddo National Park in the Jezreel Valley: Canaanite gates, ancient city layers, the underground water system, opening hours, admission, accessible routes and nearby attractions.",
+  description: "Visit Tel Megiddo National Park: Canaanite gates, ancient city layers, underground water system, opening hours, tickets and access in the Jezreel Valley.",
   region: "Jezreel Valley & Lower Galilee" as const,
   updatedAt: "2026-11-17",
   intro: "At Tel Megiddo, the remains of many ancient cities rise above the Jezreel Valley. I recommend taking time to follow the archaeological trail through the gates, temples and stables, then visiting the famous underground water system if its stairs and tunnel suit you. This guide will help you plan a comfortable visit and understand the site's Armageddon connection.",

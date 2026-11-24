@@ -2,7 +2,7 @@ import capernaumPhoto from "@/assets/guides/capernaum.jpg";
 
 export const capernaumSite = {
   title: "Capernaum (Kfar Nahum): Visitor Guide",
-  description: "Plan a visit to Capernaum: ancient synagogue, traditional Peter's house, Franciscan opening hours and admission, Orthodox monastery and access near the Sea of Galilee.",
+  description: "Visit Capernaum on the Sea of Galilee: ancient synagogue, Peter's House, Franciscan admission and hours, Orthodox monastery and practical access tips.",
   region: "Sea of Galilee" as const,
   duration: "60–90 minutes at the Franciscan archaeological site",
   intro: "On the northwestern shore of the Sea of Galilee, Capernaum preserves the remains of a Jewish village closely associated with Jesus' ministry. Visit the ancient synagogue and the traditional site of Peter's house, then discover the nearby Greek Orthodox monastery and Kfar Nahum National Park along the lakeshore.",

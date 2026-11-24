@@ -73,7 +73,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   seniorTours: {
     id: "seniorTours",
     title: "Israel Tours for Seniors: Private Day Trips at Your Own Pace",
-    description: "Plan private Israel tours for seniors with Moshe Barak: flexible sightseeing, lower-walking itineraries, personalized transport, Jerusalem, Masada, Galilee and coastal day trips.",
+    description: "Plan comfortable Israel tours for seniors with private transport, flexible sightseeing and day trips to Jerusalem, Masada, the Galilee and coast.",
     intro: "My personal guide to unhurried, carefully planned day trips for older visitors who appreciate private transport, manageable walks and the freedom to choose their own pace.",
     answer: "Private sightseeing with a driver can connect key sites with flexible pickups, shorter walking segments and rest breaks. Choose realistic stops and confirm any essential accessibility or specialist vehicle requirements before booking.",
     updatedAt: seniorUpdatedAt,
@@ -91,7 +91,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   christianTours: {
     id: "christianTours",
     title: "Christian Tours in Israel: Biblical Sites & Pilgrimage Routes",
-    description: "Plan Christian tours in Israel and the Holy Land: Jerusalem, Bethlehem, Nazareth, Sea of Galilee, Jordan River baptism sites, practical itineraries and guided day trips.",
+    description: "Plan Christian tours in Israel: Jerusalem, Bethlehem, Nazareth, Sea of Galilee and Jordan River baptism sites, with itinerary tips and guided day trips.",
     intro: "My practical introduction to Christian pilgrimage and biblical heritage sites in Jerusalem, Bethlehem, Nazareth and Galilee, with suggested journeys and trusted resources.",
     answer: "Begin with Jerusalem, then choose Bethlehem and/or Galilee based on your time, interests and current transport arrangements. Group sites by area, and check church access and guided-tour details before travelling.",
     updatedAt: "2026-11-21",
@@ -271,7 +271,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   sherut: {
     id: "sherut",
     title: "Is There Still a Sherut from Ben Gurion Airport? Current Options",
-    description: "The former Nesher and Amal shared airport taxis to Jerusalem and Haifa no longer run as regular airport sherut routes. Learn the difference between sherut and shuttle and which alternatives to use.",
+    description: "Airport sherut guide: learn the current alternatives to former Nesher and Amal routes, and how shared taxis, airport shuttles and private transfers differ.",
     intro: "The regular Nesher and Amal shared taxis from Ben Gurion Airport no longer operate. Here's how to reach Jerusalem, Haifa or Tel Aviv instead, and how local sherut taxis differ from airport shuttles.",
     answer: "No regular airport sherut currently operates on the former Nesher route to Jerusalem or Amal route to Haifa. Use a train, suitable bus, official airport taxi or private transfer instead. Local sherut taxis and separately booked shared shuttles are different services.",
     topics: ["transportation", "tips"],

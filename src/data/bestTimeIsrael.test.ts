@@ -11,7 +11,7 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
   it("keeps the current hero photograph unchanged and preserves guide metadata",()=>{
     expect(bestTimeGuide.photo.src).toBe(migrationPhotos["best-time-to-visit-israel"].src);
     expect(bestTimeGuide.photo.alt).toBe(migrationPhotos["best-time-to-visit-israel"].alt);
-    expect(bestTimeGuide.title).toBe("Best Time to Visit Israel");
+    expect(bestTimeGuide.title).toBe("Best Time to Visit Israel: Weather & Seasons");
     expect(bestTimeGuide.updatedAt).toBe("2026-11-21");
     expect(travelGuides.bestTime).toBe(bestTimeGuide);
     const route=readFileSync("src/routes/travel-blog.best-time-to-visit-israel.tsx","utf8");

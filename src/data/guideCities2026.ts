@@ -78,7 +78,7 @@ export const cityCultureGuides = {
     id: "telAvivMuseums",
     updatedAt: "2026-11-19",
     title: "Best Museums in Tel Aviv & Jaffa",
-    description: "Explore museums in Tel Aviv and Jaffa, from art and natural history to architecture and historic houses, with visitor prices, booking advice and practical neighbourhood routes.",
+    description: "Explore Tel Aviv and Jaffa museums: art, natural history, architecture and historic houses, with admission, opening hours and practical route advice.",
     intro: "Discover Tel Aviv and Jaffa's museums through my guide to choosing the right collection, planning a manageable itinerary and checking tickets and opening days.",
     answer: "My first choices are Tel Aviv Museum of Art for exhibitions, ANU for Jewish culture and the Steinhardt Museum for natural history. Bialik Square is ideal for a walk between smaller venues. Check admission, current exhibitions and temporary closure notices before visiting.",
     topics: ["attractions", "destinations", "tips"],

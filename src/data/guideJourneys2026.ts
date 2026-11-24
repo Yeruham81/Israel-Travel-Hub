@@ -576,7 +576,7 @@ export const journeyDestinationGuides = {
     id: "topTen",
     updatedAt: "2026-11-20",
     title: "Top 10 Things to Do in Israel",
-    description: "Explore my ten favourite Israel experiences, from Jerusalem and Tel Aviv to Masada, the Dead Sea, the Galilee, Haifa, Eilat and stargazing at Ramon Crater. Compare, map and plan your visit.",
+    description: "Discover my top ten experiences in Israel: Jerusalem, Tel Aviv, Masada, the Dead Sea, Galilee, Haifa, Eilat and Ramon Crater, with maps and planning tips.",
     intro: "From Jerusalem's Old City to Tel Aviv's coast, the Dead Sea and desert stars, these ten experiences are a starting point for planning your own Israel trip.",
     answer: "I recommend combining Jerusalem, time on the Mediterranean coast and one regional excursion for a first visit. With more time, add the Galilee or a southern journey to the Negev and Eilat.",
     topics: ["attractions", "destinations", "itineraries", "tips"],
@@ -627,7 +627,7 @@ export const journeyDestinationGuides = {
       "id": "jerusalemDeadSea",
       "updatedAt": "2026-11-13",
       "title": "How to Get from Jerusalem to the Dead Sea: Bus, Taxi, Tours & Car",
-      "description": "How to travel from Jerusalem to the Dead Sea by bus 486/444, taxi, private driver, group tour or rental car. Compare costs, convenience, return trips and useful stops.",
+      "description": "Jerusalem to the Dead Sea: compare buses 486/444, taxi, private driver, group tours and rental cars, with fares, return journeys and useful stops.",
       "intro": "The Dead Sea is one of the most popular day trips from Jerusalem. You can travel by bus, taxi, private driver, organised tour or rental car. The best option depends on whether you're visiting a beach or combining several attractions.",
       "answer": "For a budget-friendly trip, take Egged bus 486 or reserved-seat bus 444 from Jerusalem. Allow around 1½–2 hours to reach the Ein Bokek hotel area. A taxi or private driver takes you directly to your destination. An organised tour includes planned stops, while a rental car lets you explore at your own pace. For swimming, head to the free public beach at Ein Bokek. Check your return journey before setting out.",
       "topics": [

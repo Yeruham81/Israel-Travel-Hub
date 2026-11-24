@@ -397,7 +397,7 @@ export const tourCategories: TourCategory[] = [
   },
   {
     id: "bethlehem-jericho", title: "Bethlehem, Jericho & Qasr al-Yahud tours", shortTitle: "Bethlehem, Jericho & Qasr al-Yahud",
-    description: "Compare Bethlehem, Jericho and Qasr al-Yahud day tours and guided visits from Jerusalem and Tel Aviv, with clear routes, entry requirements and local guiding details.",
+    description: "Compare Bethlehem, Jericho and Qasr al-Yahud tours from Jerusalem and Tel Aviv, with routes, entry requirements and licensed guiding options.",
     intro: "Explore Bethlehem, the ancient city of Jericho and Qasr al-Yahud, the Jordan River baptismal site near Jericho. Compare Bethlehem-only visits with full-day tours that include Jericho and the baptismal site, departing from Jerusalem or Tel Aviv.",
     photo: migration["jerusalem-to-bethlehem"], match: { destinations: ["bethlehem", "jericho"] },
     paragraphs: [
@@ -421,7 +421,7 @@ export const tourCategories: TourCategory[] = [
   },
   {
     id: "nazareth-galilee", title: "Nazareth & Sea of Galilee tours", shortTitle: "Nazareth & Sea of Galilee",
-    description: "Compare verified Nazareth and Sea of Galilee day tours from Tel Aviv and Jerusalem, guided Christian heritage visits and private itineraries via the Galilee's major sites.",
+    description: "Compare Nazareth and Sea of Galilee tours from Tel Aviv and Jerusalem, including biblical sites, guided day trips and private Galilee routes.",
     intro: "Discover Nazareth's historic churches and the lakeside sites where the Gospel stories unfolded. Compare guided day trips and private tours from Jerusalem or Tel Aviv, or ask me to arrange your own private transport around the Galilee.",
     photo: migration["EXISTING:galilee"], match: { destinations: ["nazareth", "galilee"] },
     paragraphs: [
@@ -445,7 +445,7 @@ export const tourCategories: TourCategory[] = [
   },
   {
     id: "northern-coast", title: "Caesarea, Haifa & Acre tours", shortTitle: "Caesarea, Haifa & Acre",
-    description: "Compare guided day tours from Tel Aviv and Jerusalem to Caesarea, Haifa and Akko (Acre), from shared coach trips and small groups to licensed private guides and private transport.",
+    description: "Compare Caesarea, Haifa and Acre day tours from Tel Aviv and Jerusalem, including group excursions, private guides and flexible transport.",
     intro: "Follow Israel’s Mediterranean coast from Roman Caesarea through Haifa’s hillside viewpoints to the historic harbour and markets of Akko (Acre). Compare guided group trips and private experiences from Tel Aviv or Jerusalem, or arrange a flexible day with your own driver.",
     photo: airport["caesarea"]!, match: { destinations: ["caesarea", "haifa", "akko"] },
     paragraphs: [
@@ -581,7 +581,7 @@ export const toursHubGuides = [
   { ...reading.galilee, photo: { src: "/images/attractions/sea-of-galilee.webp", alt: "View of the Sea of Galilee" } },
 ];
 export const toursHubTitle = "Tours & day trips in Israel";
-export const toursHubDescription = "Explore Israel tours by destination and interest: Jerusalem, Tel Aviv, Masada, Galilee, food tours and Eilat. Find guided day trips, private experiences, food walks and Red Sea activities.";
+export const toursHubDescription = "Compare Israel tours and day trips in Jerusalem, Tel Aviv, the Galilee, Masada and Eilat, including guided excursions, private tours and food walks.";
 export const toursHubFaqs = [
   { q: "What's the difference between a guided tour and a private driver?", a: "A guided tour includes guiding only where it is explicitly listed. My private driver service provides transportation and agreed stops; licensed guiding is a separate service to arrange if needed." },
   { q: "Where do tours start, and is hotel pickup included?", a: "Departure locations vary by tour and operator. Some experiences offer hotel pickup, while others start at a designated meeting point. Always check the departure city, meeting place and pickup inclusions before booking." },

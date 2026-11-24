@@ -263,7 +263,7 @@ export const expandedTravelGuides = {
   },
   jerusalemDeadSea: {
     id: "jerusalemDeadSea", title: "Jerusalem to the Dead Sea: bus, car, tour or private driver?",
-    description: "How to get from Jerusalem to the Dead Sea: compare buses, tours, rentals and drivers, with Ein Bokek, Ein Gedi and Masada as distinct stops.",
+    description: "Jerusalem to the Dead Sea: compare buses, tours, rental cars and private drivers to Ein Bokek, Ein Gedi and Masada, with return-trip tips.",
     intro: "The Dead Sea is a region, not one destination. Start with the beach or hotel you actually want, then decide how to reach it and get back.",
     answer: "For a Jerusalem-to-Dead-Sea trip, choose the exact beach, hotel or attraction before comparing a tour, private driver, public bus or rental. Northern-shore stops and Ein Bokek are different journeys; Ein Gedi Nature Reserve and Masada are separate visits. Check access, facilities, date-specific transport and the return before committing to a day plan.",
     topics: ["transportation", "destinations", "itineraries"], photo: airportTransferPhotos["dead-sea"]!,

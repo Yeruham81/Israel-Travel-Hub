@@ -133,7 +133,7 @@ const sharedFaqs = [
 const portDetails: Record<ShorePortId, PortDetails> = {
   ashdod: {
     title: "Ashdod shore excursions: tours & private day trips",
-    description: "Make the most of your Ashdod port call with Jerusalem, Tel Aviv and Jaffa, Masada or the Dead Sea. Compare guided excursions and flexible private day trips with port pickup and return.",
+    description: "Compare shore excursions from Ashdod Port to Jerusalem, Tel Aviv, Jaffa, Masada and the Dead Sea, with guided tours or a private driver and port return.",
     intro: "From Ashdod Port, choose between a coastal visit to Jaffa and Tel Aviv, a walking-intensive day in Jerusalem, or a longer desert route to Masada and the Dead Sea. The best fit depends on when you can actually leave the ship, how much time you want at the sites and the all-aboard deadline.",
     answer: "A private car and driver lets you agree the stops and walking pace; licensed guiding and admission are separate unless stated. Guided tours follow the operator's published itinerary and inclusions. Before booking any option, verify its Ashdod Port meeting point, return arrangements and fit with your ship's deadline.",
     photo: { src: ashdod, alt: "Aerial view of Ashdod Port and its Mediterranean breakwater", credit: "Amos Meron · CC BY-SA 3.0 · cropped and resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ashdod_Port_Aerial_View.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
@@ -164,7 +164,7 @@ const portDetails: Record<ShorePortId, PortDetails> = {
   },
   haifa: {
     title: "Haifa shore excursions: tours & private day trips",
-    description: "Discover Akko, Nazareth and the Sea of Galilee, Tel Aviv or Jerusalem from Haifa Port. Compare guided excursions and flexible private day trips with port pickup and return.",
+    description: "Compare Haifa Port shore excursions to Akko, Nazareth, Galilee, Tel Aviv and Jerusalem, with guided tours or a private driver and confirmed return.",
     intro: "Haifa Port is a practical starting point for Akko or selected sites in Nazareth and the Galilee. Jerusalem and Tel Aviv require a longer southbound journey, reducing time at the destination. Compare each route against your actual hours ashore and the return deadline, not just the advertised sightseeing stops.",
     answer: "Akko generally allows more time near Haifa than a long-distance Jerusalem day. Choose a private driver for an agreed route and pace, or a guided tour when site interpretation is central to your visit. Confirm guiding, admission, the port meeting point and the return policy in the specific offer.",
     photo: { src: haifa, alt: "Haifa Port and Mediterranean waterfront from an elevated viewpoint", sourceUrl: "" },
