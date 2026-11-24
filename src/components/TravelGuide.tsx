@@ -1,7 +1,7 @@
 import { Link as RouterLink, type LinkProps } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
 import { Fragment, type ReactNode } from "react";
-import { BedDouble, BookOpen, CarFront, Landmark, Lightbulb, TrainFront, Waves, type LucideIcon } from "lucide-react";
+import { BedDouble, BookOpen, CarFront, Landmark, Lightbulb, TrainFront, Waves, Plane, Car, ReceiptText, MapPinned, Smartphone, type LucideIcon } from "lucide-react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderNameLink, RelatedLinks, SourceList } from "@/components/Guide";
 import { guideTopics, travelGuides, type GuideDirectoryEntry, type GuidePhoto, type GuideTopicId, type GuideSection, type GuideInlineSpan, type GuideTable, type TravelGuide } from "@/data/travelGuides";
 import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
@@ -33,6 +33,15 @@ const shabbatPlanningIcons: Record<string, LucideIcon> = {
   "/travel-blog/dead-sea-attractions/": Waves,
   [travelGuidePaths.israel]: TrainFront,
   [travelGuidePaths.travelTips]: BookOpen,
+};
+
+const uberPlanningIcons: Record<string, LucideIcon> = {
+  "/airport-transfers/": Plane,
+  "/private-driver-in-israel/": Car,
+  [travelGuidePaths.taxis]: CarFront,
+  [travelGuidePaths.taxiFares]: ReceiptText,
+  [travelGuidePaths.israel]: MapPinned,
+  [travelGuidePaths.esim]: Smartphone,
 };
 
 function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds, ...guide.sections.flatMap(section => [...(section.sourceIds || []), ...(section.subsections || []).flatMap(sub => sub.sourceIds || [])])])]; }
@@ -122,7 +131,7 @@ function GuideSectionPhoto({ photo }: { photo: GuidePhoto }) {
 /** Show links beside time-sensitive claims without repeating every reference
  * under each Shabbat paragraph; all cited sources remain in the source list. */
 function showSectionReferences(guideId: TravelGuideId, sectionId: string) {
-  if (guideId === "shabbat") return false; // Place all source references after Contact Me, avoiding repeated footnotes.
+  if (guideId === "shabbat" || guideId === "uber") return false; // A single compact source list follows the contact form.
   if (guideId === "taxis") return ["fares", "airport", "sherut", "safety"].includes(sectionId);
   if (guideId === "airportTaxis") return false; // Highlighted official links and consolidated sources replace repetitive footnotes.
   if (guideId === "esim") return false; // Provider names link directly to the offers; do not repeat references.
@@ -293,8 +302,9 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
           <h1 className="guide-page-title">{guide.title}</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
           <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
+          {id === "uber" && <AuthorCard />}
         </GuideHeroLayout>
-        <AuthorCard />
+        {id !== "uber" && <AuthorCard />}
       </header>
       <section id="quick-answer" aria-labelledby="answer-h" className="mt-8 scroll-mt-24 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-7">
         <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{id === "esim" ? emphasizeEsimNames(guide.answer) : guide.answer}</p>
@@ -332,7 +342,9 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
           ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Before you go"], ["faq", "FAQ"], ["contact", "Contact Me"], ["sources", "Sources"]]
           : id === "esim"
           ? [...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact Me"]]
-          : id === "airportTaxis"
+          : id === "uber"
+          ? [["at-a-glance", "Compare ride options"], ...guide.sections.map(section => [section.id, section.title] as const), ["checklist", "Before you go"], ["faq", "FAQ"], ["contact", "Contact Me"]]
+        : id === "airportTaxis"
           ? [["at-a-glance", "Pickup points"], ["steps", "How to book"], ["terminal3", "Terminal 3"], ["terminal1", "Terminal 1"], ["scheduled", "Advance booking"], ["fares", "Taxi fares"], ["weekend", "Shabbat & holidays"], ["destinations", "Popular destinations"], ["faq", "FAQ"], ["contact", "Contact Me"]]
           : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Me"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", "Contact Me"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
       {bethlehemEntryRules && <section id={bethlehemEntryRules.id} aria-labelledby="entry-rules-h" className="mt-10 scroll-mt-24">
@@ -349,7 +361,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
         {isTransportOverview && <p className="mt-3 max-w-3xl leading-relaxed">Compare the entire trip to your final address. Cost labels are relative, not live fares; operating hours depend on your date and route.</p>}
         {isTransportOverview && <p className="mt-3 text-xs text-muted-foreground sm:hidden">Swipe horizontally to view all five columns.</p>}
-        <div role="region" aria-label="Transport comparison table" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"><table className={isTransportOverview ? "w-full min-w-[860px] text-left text-sm" : id === "jerusalemDeadSea" ? "w-full min-w-[780px] text-left text-sm" : isTaxiFareGuide ? "w-full min-w-[640px] text-left text-sm" : "w-full min-w-[560px] text-left text-sm"}><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className={"p-4 font-semibold " + ((isTransportOverview || isTaxiFareGuide) && heading === guide.comparison.headers[0] ? "sticky left-0 z-10 bg-secondary" : "")}>{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className={"p-4 font-medium " + ((isTransportOverview || isTaxiFareGuide) ? "sticky left-0 z-10 bg-card" : "")}>{isTransportOverview ? <a href={"#" + (overviewRowAnchors[index] || "choose")} className="text-primary underline underline-offset-4">{cell}</a> : cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
+        <div role="region" aria-label="Transport comparison table" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"><table className={isTransportOverview ? "w-full min-w-[860px] text-left text-sm" : id === "jerusalemDeadSea" ? "w-full min-w-[780px] text-left text-sm" : id === "uber" ? "w-full min-w-[760px] text-left text-sm" : isTaxiFareGuide ? "w-full min-w-[640px] text-left text-sm" : "w-full min-w-[560px] text-left text-sm"}><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className={"p-4 font-semibold " + ((isTransportOverview || isTaxiFareGuide || id === "uber") && heading === guide.comparison.headers[0] ? "sticky left-0 z-10 bg-secondary" : "")}>{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className={"p-4 font-medium " + ((isTransportOverview || isTaxiFareGuide || id === "uber") ? "sticky left-0 z-10 bg-card" : "")}>{isTransportOverview ? <a href={"#" + (overviewRowAnchors[index] || "choose")} className="text-primary underline underline-offset-4">{cell}</a> : cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
         {isTaxiFareGuide && <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">Rates effective April 2026, specified through March 2027 unless amended. All amounts above include 18% VAT outside Eilat; the official regulation lists amounts before VAT.</p>}
       </section>}
       {isTransportOverview && <nav aria-label="Quick transport topics" className="mt-4 rounded-xl border bg-secondary/30 p-3">
@@ -415,9 +427,9 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       <FaqList faqs={guide.faqs} {...(isTransportOverview && guide.faqGroups ? { groups: guide.faqGroups } : {})} />
       {id === "jerusalemDeadSea" && <DeadSeaGuideFollowUps />}
       {id === "bethlehem" && <BethlehemGuideFollowUps />}
-      {!isTransportOverview && !isTaxiFareGuide && id !== "esim" && id !== "jerusalemDeadSea" && id !== "bethlehem" && id !== "airportTaxis" && id !== "taxis" && id !== "arrival" && id !== "shabbat" && <SourceList ids={sourcesFor(guide)} />}
+      {!isTransportOverview && !isTaxiFareGuide && id !== "esim" && id !== "jerusalemDeadSea" && id !== "bethlehem" && id !== "airportTaxis" && id !== "taxis" && id !== "arrival" && id !== "shabbat" && id !== "uber" && <SourceList ids={sourcesFor(guide)} />}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} illustrated={id === "esim" || id === "airportTaxis" || id === "arrival"} maxPhotoCards={id === "esim" || id === "airportTaxis" || id === "arrival" ? 6 : 4} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
-      {!isJerusalemCluster && id !== "shabbat" && id !== "jerusalemDeadSea" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
+      {!isJerusalemCluster && id !== "shabbat" && id !== "jerusalemDeadSea" && id !== "uber" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
       {id === "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths.shabbat} illustrated maxPhotoCards={6} items={[
         { label: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
         { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
@@ -426,10 +438,12 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         { label: "Official airport taxi pickup", to: travelGuidePaths.airportTaxis },
         { label: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival },
       ]} />}
+      {id === "uber" && <IconTripPlanningLinks title="Plan the next part of your trip" id="uber-trip-planning" className="mt-12" items={guide.services.map(item => ({ title: item.label, description: item.note ?? "", to: item.to, icon: uberPlanningIcons[String(item.to)] ?? BookOpen }))} />}
       {id === "shabbat" && <IconTripPlanningLinks title="Plan the next part of your trip" id="shabbat-trip-planning" className="mt-12" items={guide.services.map(item => ({ title: item.label, description: item.note ?? "", to: item.to, icon: shabbatPlanningIcons[String(item.to)] ?? BookOpen }))} />}
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
       {id === "taxis" && <HomeContactForm context="taxis" showTripadvisorBesidePortraitMobile />}
-      {id !== "taxis" && <HomeContactForm key={id} showTripadvisorBesidePortraitMobile={id === "airportTaxis" || id === "taxiFares" || id === "arrival" || id === "shabbat"} guide={id === "airportTaxis" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight, destination, passengers and luggage. I'll reply personally about arranging a confirmed pickup.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "taxiFares" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Questions about a taxi journey?", introduction: "Tell me where and when you plan to travel. I can help you understand the available options or discuss a separately arranged private ride.", placeholder: "Route, travel date, passengers, luggage or your question…" } : id === "arrival" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight number, destination, passenger count and luggage. I can discuss a suitable confirmed airport transfer and meeting arrangement.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "shabbat" ? { ...guideContactCopy(guide.title, "shabbat"), eyebrow: "Contact Me" } : guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
+      {id !== "taxis" && <HomeContactForm key={id} showTripadvisorBesidePortraitMobile={id === "airportTaxis" || id === "taxiFares" || id === "arrival" || id === "shabbat" || id === "uber"} guide={id === "uber" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer in Israel?", introduction: "Tell me your pickup location, destination, travel date and passenger details. I\u0027ll reply personally with an option suited to your journey.", placeholder: "Pickup, destination, date, passengers and luggage…" } : id === "airportTaxis" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight, destination, passengers and luggage. I'll reply personally about arranging a confirmed pickup.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "taxiFares" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Questions about a taxi journey?", introduction: "Tell me where and when you plan to travel. I can help you understand the available options or discuss a separately arranged private ride.", placeholder: "Route, travel date, passengers, luggage or your question…" } : id === "arrival" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight number, destination, passenger count and luggage. I can discuss a suitable confirmed airport transfer and meeting arrangement.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "shabbat" ? { ...guideContactCopy(guide.title, "shabbat"), eyebrow: "Contact Me" } : guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
+      {id === "uber" && <SourceList ids={["guide-uber-availability", "guide-lyft-cities", "guide-ridesharing-bill-2026", "guide-gett-app", "guide-yango-israel", "guide-iaa", "taxi-fares-2026"]} intro="Official information on ride apps, taxi regulations and airport pickup." compact linksOnly />}
       {id === "taxis" && <SourceList ids={sourcesFor(guide)} intro="Official taxi service, passenger rights and public transport sources for this guide." />}
       {id === "airportTaxis" && <SourceList ids={sourcesFor(guide)} intro="Official Gett, Israel Airports Authority and Ministry of Transport information for airport taxi booking, pickup and fares." />}
       {id === "arrival" && <SourceList ids={sourcesFor(guide)} intro="Official entry, airport, customs, baggage and transport information for planning your arrival." />}
