@@ -383,7 +383,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.arrival.sections.find((section) => section.id === "leave-airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
-    expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
+    expect(travelGuides.uber.intro).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
     expect(travelGuides.sherut.answer).toMatch(/former Nesher route to Jerusalem or Amal route to Haifa/);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/A data-only eSIM lets you browse, navigate and use WhatsApp/s);
     expect(travelGuides.esim.answer).toMatch(/Saily.*Airalo.*GigSky/s);
@@ -802,51 +802,62 @@ describe("migrated practical guides", () => {
     expect(container.querySelector('#sources a[href="https://www.hertz.co.il/en/GoodToKnow/IsraelContract/"]')).not.toBeNull();
   });
 
-  it("keeps the current Uber and Lyft status with useful licensed-taxi alternatives", () => {
+  it("keeps Uber's current status with concise, helpful alternatives", () => {
     const guide = travelGuides.uber;
     expect(guide.title).toMatch(/Uber.*Israel.*Gett.*Yango/);
     expect(guide.title).not.toMatch(/2026|2027/);
-    expect(guide.updatedAt).toBe("2026-11-11");
-    expect(guide.answer).toMatch(/^Uber and Lyft do not currently offer passenger rides in Israel/);
-    expect(guide.answer).toContain("Lyft");
+    expect(guide.updatedAt).toBe("2026-11-24");
+    expect(guide.intro).toMatch(/^Uber and Lyft do not currently offer passenger rides in Israel/);
+    expect(guide.answer).toMatch(/^For app-based taxi booking, try Gett or Yango/);
     expect(guide.sourceIds).toContain("guide-uber-availability");
     expect(getSource("guide-uber-availability").url).toBe("https://www.uber.com/il/en/");
     expect(guide.sections.map((section) => section.id)).toEqual([
-      "uber-status", "gett", "yango", "booking-without-app", "prices-payments",
-      "airport", "locations", "setup-backups", "shabbat",
+      "uber-status", "taxi-apps", "fares-options", "airport", "shabbat", "practical-tips",
     ]);
     expect(guide.sections.filter((section) => section.photo)).toHaveLength(1);
-    expect(guide.sections.find((s) => s.id === "gett")!.photo).toBeUndefined();
-    expect(guide.faqs).toHaveLength(7);
+    expect(guide.sections.find((s) => s.id === "taxi-apps")!.photo).toBeUndefined();
+    expect(guide.comparison.headers).toEqual(["Service", "How it works", "Pricing", "Best for"]);
     expect(guide.comparison.rows.map((row) => row[0])).toEqual([
-      "Gett", "Yango", "Licensed taxi or hotel dispatcher", "Confirmed private transfer",
+      "Gett", "Yango", "Licensed taxi or hotel dispatcher", "Pre-booked private transfer",
     ]);
-    expect(guide.sections.find((s) => s.id === "prices-payments")!.inlineLinks?.some((link) => link.to === travelGuidePaths.taxiFares)).toBe(true);
-    expect(guide.sections.find((s) => s.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
-    expect(guide.sections.find((s) => s.id === "shabbat")!.inlineLinks?.some((link) => link.to === travelGuidePaths.shabbat)).toBe(true);
+    expect(guide.comparison.rows.every(row => row.length === 4)).toBe(true);
+    expect(guide.faqs).toHaveLength(4);
+    expect(guide.faqs.some(faq => faq.q.includes("foreign credit card"))).toBe(true);
+    expect(guide.faqs.some(faq => faq.q.includes("accessible vehicle"))).toBe(true);
+    expect(guide.sections.find((s) => s.id === "fares-options")!.inlineLinks?.some(link => link.to === travelGuidePaths.taxiFares)).toBe(true);
+    expect(guide.sections.find((s) => s.id === "airport")!.inlineLinks?.some(link => link.to === travelGuidePaths.airportTaxis)).toBe(true);
+    expect(guide.sections.find((s) => s.id === "shabbat")!.inlineLinks?.some(link => link.to === travelGuidePaths.shabbat)).toBe(true);
+    expect(guide.sections.find(s => s.id === "airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*Exit 23/);
     for (const section of guide.sections) for (const link of section.inlineLinks || []) {
-      expect(section.paragraphs.join(" ").split(link.text), `link text ${link.text} should occur once`).toHaveLength(2);
+      expect(section.paragraphs.join(" ").split(link.text), "Each internal link phrase should occur once").toHaveLength(2);
     }
-    expect(guide.sections.find((s) => s.id === "uber-status")!.paragraphs.join(" ")).toContain("first Knesset reading in March 2026");
+    expect(guide.sections.find((s) => s.id === "uber-status")!.paragraphs.join(" ")).toContain("24 March 2026");
     expect(guide.sourceIds).toEqual(expect.arrayContaining(["guide-lyft-cities", "guide-ridesharing-bill-2026"]));
     expect(getSource("guide-lyft-cities").url).toBe("https://www.lyft.com/rider/cities");
     expect(getSource("guide-ridesharing-bill-2026").url).toContain("main.knesset.gov.il");
-    expect(guide.services.map((service) => service.to)).toEqual([
-      travelGuidePaths.esim, "/car-rental/", travelGuidePaths.jerusalem, "/travel-blog/where-to-stay-in-tel-aviv/",
+    expect(guide.services.map(service => service.to)).toEqual([
+      "/airport-transfers/", "/private-driver-in-israel/", travelGuidePaths.taxis,
+      travelGuidePaths.taxiFares, travelGuidePaths.israel, travelGuidePaths.esim,
     ]);
-    expect(guide.sections.find((s) => s.id === "gett")!.externalLinks?.[0]?.href).toBe("https://www.gett.com/il/");
-    expect(guide.sections.find((s) => s.id === "yango")!.externalLinks?.[0]?.href).toBe("https://appli.taxi/rider/");
+    expect(guide.services.every(service => Boolean(service.note))).toBe(true);
+    const stores = guide.sections.find(s => s.id === "taxi-apps")!.externalLinks?.map(link => link.href) ?? [];
+    expect(stores).toEqual([
+      "https://apps.apple.com/il/app/id412802326",
+      "https://play.google.com/store/apps/details?id=com.gettaxi.android",
+      "https://apps.apple.com/il/app/id1437157286",
+      "https://play.google.com/store/apps/details?id=com.yandex.yango",
+    ]);
     expect(travelGuides.taxis.sections.find((s) => s.id === "apps")!.paragraphs.join(" ")).toContain("Uber passenger rides are not currently available in Israel.");
   });
 
   it("keeps updated Uber and Sherut wording focused, linked and actionable", () => {
     const uber = travelGuides.uber;
     const sherut = travelGuides.sherut;
-    expect(uber.intro).toContain("Uber and Lyft aren't currently available");
+    expect(uber.intro).toContain("Uber and Lyft do not currently offer");
     expect(uber.sections.find(section => section.id === "shabbat")?.paragraphs.join(" ")).not.toContain("no need to repeat");
-    expect(uber.checklist.some(item => item.includes("Install and verify your preferred taxi app"))).toBe(true);
-    expect(uber.faqs.some(faq => faq.q === "Are there plans to bring Uber to Israel?")).toBe(true);
-    expect(uber.faqs.find(faq => faq.q.includes("foreign cards"))?.a).toContain("foreign-issued cards");
+    expect(uber.checklist.some(item => item.includes("Install and verify a taxi app"))).toBe(true);
+    expect(uber.faqs.some(faq => faq.q === "Can I pay with a foreign credit card?")).toBe(true);
+    expect(uber.faqs.find(faq => faq.q.includes("foreign credit card"))?.a).toContain("foreign-issued card");
     expect(sherut.intro).toContain("Nesher and Amal shared taxis");
     expect(sherut.sections.find(section => section.id === "official-taxi")?.paragraphs.join(" ")).not.toContain("without repeating those details here");
     const destinations = sherut.sections.find(section => section.id === "where-to-go")!;
@@ -864,7 +875,7 @@ describe("migrated practical guides", () => {
     }
   });
 
-  it("renders Uber alternatives with relevant inline article links", async () => {
+  it("renders the focused Uber guide, official apps, airport instructions and six icon links", async () => {
     const router = await routerAt(travelGuidePaths.uber);
     const Page = UberRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
@@ -876,14 +887,19 @@ describe("migrated practical guides", () => {
         expect(a.closest("p")).toBeTruthy();
       }
     }
-    expect(container.querySelector("#uber-status")?.textContent).toContain("Uber does not currently offer passenger rides in Israel");
+    expect(container.querySelector("#uber-status")?.textContent).toContain("Uber and Lyft currently have no passenger ride-booking service");
     const next = within(container).getByRole("region", { name: "Plan the next part of your trip" });
-    expect(next.querySelectorAll("li")).toHaveLength(4);
-    expect(Array.from(next.querySelectorAll("a")).map((link) => link.getAttribute("href"))).not.toContain("/airport-transfers/");
-    for (const [id, url] of [["gett", "https://www.gett.com/il/"], ["yango", "https://appli.taxi/rider/"]] as const) {
-      expect(container.querySelector(`#${id} a[href="${url}"]`)).not.toBeNull();
-    }
-    expect(container.querySelector("#airport")?.textContent).toContain("Terminal 3");
+    expect(next.querySelectorAll("li")).toHaveLength(6);
+    expect(Array.from(next.querySelectorAll("a")).map(link => link.getAttribute("href"))).toContain("/airport-transfers/");
+    expect(next.querySelectorAll("li svg")).toHaveLength(6);
+    expect(container.querySelector('#taxi-apps a[href="https://apps.apple.com/il/app/id412802326"]')).not.toBeNull();
+    expect(container.querySelector('#taxi-apps a[href="https://play.google.com/store/apps/details?id=com.yandex.yango"]')).not.toBeNull();
+    expect(container.querySelector("#airport")?.textContent).toMatch(/Exit 03.*Exit 23/);
+    expect(container.querySelector("#sources")).not.toBeNull();
+    expect(container.textContent).not.toContain("References:");
+    const contactForm = container.querySelector('form[aria-label="Guide contact message"]');
+    expect(contactForm).not.toBeNull();
+    expect(contactForm!.compareDocumentPosition(container.querySelector("#sources")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it("keeps the Sherut guide focused on former airport routes, not the companies themselves", () => {
@@ -1194,7 +1210,7 @@ describe("migrated practical guides", () => {
   });
   it.each([
     { id: "taxis", route: TaxiRoute, count: 3 },
-    { id: "uber", route: UberRoute, count: 2 },
+    { id: "uber", route: UberRoute, count: 1 },
     { id: "sherut", route: SherutRoute, count: 3 },
     { id: "shabbat", route: ShabbatRoute, count: 3 },
   ] as const)("renders descriptive lightbulb links on $id without generic labels", async ({ id, route, count }) => {
