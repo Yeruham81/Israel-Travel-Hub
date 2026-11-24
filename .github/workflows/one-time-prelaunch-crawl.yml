@@ -1,67 +1,280 @@
-name: Stage 4 - verify corrected Tel Aviv hotel link
+name: Stage 5 - performance mobile and accessibility audit
 on:
   pull_request:
     branches: [main]
     paths: ['.github/workflows/one-time-prelaunch-crawl.yml']
 permissions:
   contents: read
+concurrency:
+  group: stage5-prelaunch-audit
+  cancel-in-progress: true
 jobs:
-  verify:
+  responsive:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
+    name: Responsive and accessibility - ${{ matrix.width }} px
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        width: [360, 390, 1365]
     env:
       CI: "true"
       HOSTINGER_STATIC_BUILD: "true"
       VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
       VITE_INDEXABLE: "false"
+      AUDIT_WIDTH: ${{ matrix.width }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: a54457eaa109e1195d8a12417027f12b11ace05d
+          ref: 758527f3a2180964947bdd7ade6b530b14bd6bcb
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - name: Confirm exact newly generated destination with one clickout
-        run: |
-          node --input-type=module <<'JS'
-          let current="https://booking.tpk.lv/uFvoGvgK";
-          for(let i=0;i<6;i++){
-            const u=new URL(current);
-            if(u.protocol!=="https:"||u.username||u.password)throw Error("Unexpected redirect protocol");
-            if(u.hostname==="booking.com"||u.hostname.endsWith(".booking.com")){
-              if(u.pathname!=="/city/il/tel-aviv.html")throw Error("Wrong destination: "+u.pathname);
-              console.log("BOOKING_REDIRECT_VERIFIED",u.origin+u.pathname);process.exit(0);
-            }
-            const response=await fetch(current,{redirect:"manual",headers:{"User-Agent":"Mozilla/5.0 (compatible; IsraelTravelHubQA/1.0)"},signal:AbortSignal.timeout(12000)});
-            const location=response.headers.get("location");
-            await response.body?.cancel();
-            if(response.status<300||response.status>=400||!location)throw Error("Redirect unconfirmed: HTTP "+response.status);
-            current=new URL(location,u).href;
-          }
-          throw Error("Redirect chain limit");
-          JS
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.4.4"
       - run: bash scripts/install-ci-dependencies.sh
-      - name: Regression test exact supplier mapping
-        run: bunx --no-install vitest run src/test/seven-travelpayouts-links.test.tsx
       - run: bash scripts/build-validated-static.sh
-      - name: Check rendered button and preserved sponsored attributes
+      - name: Install isolated audit tools
         run: |
-          node --input-type=module <<'JS'
-          import fs from "node:fs";
-          import assert from "node:assert/strict";
-          import {JSDOM} from "jsdom";
-          const dom=new JSDOM(fs.readFileSync(".output/public/accommodation/tel-aviv/index.html","utf8"));
-          const d=dom.window.document;
-          const links=[...d.querySelectorAll("a[href]")].filter(a=>a.textContent.includes("Browse more on Booking.com"));
-          assert.equal(links.length,1);
-          const link=links[0];assert.equal(link.getAttribute("href"),"https://booking.tpk.lv/uFvoGvgK");
-          assert(link.rel.split(/\s+/).includes("sponsored"));
-          assert.equal(link.target,"_blank");
-          console.log("BOOKING_CTA_VERIFIED",JSON.stringify({href:link.getAttribute("href"),rel:link.rel,target:link.target}));
-          dom.window.close();
+          npm install --prefix /tmp/stage5 --no-save playwright@1.56.1 axe-core@4.10.3
+          /tmp/stage5/node_modules/.bin/playwright install --with-deps chromium
+      - name: Serve actual static build locally
+        run: |
+          nohup python3 -m http.server 4173 --bind 127.0.0.1 --directory .output/public >/tmp/stage5-http.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Scan every rendered route
+        env:
+          NODE_PATH: /tmp/stage5/node_modules
+        run: |
+          cat > .stage5-browser.cjs <<'JS'
+          const {chromium}=require("playwright");
+          const axe=require("axe-core"),fs=require("node:fs"),path=require("node:path");
+          const origin="http://127.0.0.1:4173", width=Number(process.env.AUDIT_WIDTH);
+          const routes=[...fs.readFileSync(".output/public/sitemap.xml","utf8").matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
+          const results=[], issues=[], assets=new Map(), out="stage5-responsive.json";
+          const save=()=>fs.writeFileSync(out,JSON.stringify({width,expected:routes.length,results,issues,assets:[...assets.values()]},null,2));
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            try{
+              for(const routePath of routes){
+                const context=await browser.newContext({viewport:{width,height:width<500?844:900},deviceScaleFactor:1,isMobile:width<500,hasTouch:width<500,serviceWorkers:"block"});
+                const page=await context.newPage(),errors=[],failed=[],external=[],requests=new Map();
+                await context.route("**/*",async route=>{
+                  const u=new URL(route.request().url());
+                  if(u.origin===origin||!/^https?:$/.test(u.protocol))return route.continue();
+                  external.push({host:u.hostname,type:route.request().resourceType()});
+                  return route.abort("blockedbyclient");
+                });
+                page.on("pageerror",e=>errors.push(e.message.slice(0,300)));
+                page.on("requestfailed",r=>{if(r.url().startsWith(origin+"/"))failed.push({url:r.url().slice(origin.length),error:r.failure()?.errorText});});
+                page.on("response",r=>{
+                  if(!r.url().startsWith(origin+"/"))return;
+                  const pathname=new URL(r.url()).pathname;
+                  if(r.status()>=400)failed.push({url:pathname,status:r.status()});
+                  const file=path.join(".output/public",pathname.endsWith("/")?pathname.slice(1)+"index.html":pathname.slice(1));
+                  try{const bytes=fs.statSync(file).size;requests.set(pathname,{bytes,type:r.request().resourceType()});assets.set(pathname,{path:pathname,bytes,type:r.request().resourceType()});}catch{}
+                });
+                let record={path:routePath,status:"unconfirmed"};
+                try{
+                  const response=await page.goto(origin+routePath,{waitUntil:"load",timeout:30000});
+                  await page.waitForTimeout(350);
+                  const dialog=page.getByRole("dialog",{name:"Cookie preferences"});
+                  await dialog.waitFor({timeout:7000});
+                  const banner=await dialog.evaluate(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,scrollHeight:el.scrollHeight,height:el.clientHeight,buttons:[...el.querySelectorAll("button")].map(b=>{const r=b.getBoundingClientRect();return {text:b.textContent.trim(),w:r.width,h:r.height,x:r.x,right:r.right};})};});
+                  await page.getByRole("button",{name:"Accept necessary",exact:true}).click({timeout:5000});
+                  await page.waitForTimeout(150);
+                  await page.evaluate(async()=>{if(document.fonts)await Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]);});
+                  const m=await page.evaluate(()=>{
+                    const d=document, vw=d.documentElement.clientWidth, sw=d.documentElement.scrollWidth;
+                    const rect=el=>el.getBoundingClientRect();
+                    const visible=el=>{const r=rect(el),s=getComputedStyle(el);return r.width>0&&r.height>0&&s.visibility!=="hidden"&&s.display!=="none";};
+                    const label=el=>(el.getAttribute("aria-label")||el.getAttribute("title")||el.textContent||"").trim().replace(/\s+/g," ").slice(0,90);
+                    const identify=el=>({tag:el.tagName.toLowerCase(),id:el.id||null,testid:el.getAttribute("data-testid"),label:label(el),className:String(el.className?.baseVal??el.className??"").slice(0,150)});
+                    const clipped=el=>{for(let p=el.parentElement;p&&p!==d.body&&p!==d.documentElement;p=p.parentElement){if(/auto|scroll|hidden|clip/.test(getComputedStyle(p).overflowX))return true;}return false;};
+                    const overflow=[];
+                    if(sw>vw+3)for(const el of d.querySelectorAll("main *,header *,footer *")){
+                      if(!visible(el)||clipped(el))continue;const r=rect(el);
+                      if(r.right>vw+4||r.left< -4)overflow.push({...identify(el),left:Math.round(r.left),right:Math.round(r.right)});
+                      if(overflow.length>=12)break;
+                    }
+                    const images=[...d.images].map(im=>({src:im.currentSrc||im.getAttribute("src"),loading:im.loading||"eager/default",width:im.getAttribute("width"),height:im.getAttribute("height"),aboveFold:rect(im).top<innerHeight&&rect(im).bottom>0,visible:visible(im),loaded:im.complete&&im.naturalWidth>0,naturalWidth:im.naturalWidth,renderWidth:Math.round(rect(im).width),altPresent:im.hasAttribute("alt"),altEmpty:im.getAttribute("alt")===""}));
+                    const small=[...d.querySelectorAll("button,input:not([type=hidden]),select,textarea,a[href],[role=button]")].filter(el=>visible(el)&&!el.closest("p,li:not([class]),td,th")&&!clipped(el)).map(el=>({...identify(el),w:Math.round(rect(el).width),h:Math.round(rect(el).height)})).filter(el=>el.w<24||el.h<24);
+                    return {viewport:vw,scrollWidth:sw,overflow,mainCount:d.querySelectorAll("main").length,images,smallControls:small.slice(0,30),smallControlCount:small.length,forms:d.forms.length,tables:d.querySelectorAll("table").length,headingCount:d.querySelectorAll("h1").length};
+                  });
+                  const initial=[...requests.entries()].map(([url,v])=>({url,...v}));
+                  let violations=[],axeError=null;
+                  if(width!==360){
+                    try{
+                      await page.addScriptTag({content:axe.source});
+                      const a=await page.evaluate(async()=>await axe.run(document,{runOnly:{type:"tag",values:["wcag2a","wcag2aa","wcag21a","wcag21aa","wcag22aa"]},resultTypes:["violations"]}));
+                      violations=a.violations.map(v=>({id:v.id,impact:v.impact,description:v.description,nodes:v.nodes.length,examples:v.nodes.slice(0,4).map(n=>({target:n.target,summary:n.failureSummary?.slice(0,350),html:n.html.slice(0,280)}))}));
+                    }catch(e){axeError=String(e).slice(0,300);}
+                  }
+                  // Trigger lazy images sequentially, without contacting third parties.
+                  const broken=await page.evaluate(async()=>{
+                    const imgs=[...document.images].filter(im=>{const r=im.getBoundingClientRect();return r.width>0&&r.height>0;});
+                    for(const im of imgs)if(im.loading==="lazy")im.loading="eager";
+                    await Promise.race([Promise.allSettled(imgs.map(im=>im.decode())),new Promise(r=>setTimeout(r,4500))]);
+                    return imgs.filter(im=>im.complete&&!im.naturalWidth).map(im=>({src:im.currentSrc||im.getAttribute("src"),alt:im.alt})).slice(0,20);
+                  });
+                  const total=(type)=>initial.filter(x=>!type||x.type===type).reduce((s,x)=>s+x.bytes,0);
+                  const heavyImages=m.images.filter(im=>im.src?.startsWith(origin+"/")).map(im=>({...im,bytes:assets.get(new URL(im.src).pathname)?.bytes??null})).filter(im=>im.bytes>=100000&&im.visible).sort((a,b)=>b.bytes-a.bytes).slice(0,12);
+                  record={path:routePath,status:"ok",http:response?.status(),...m,images:undefined,imageCount:m.images.length,missingAlt:m.images.filter(im=>!im.altPresent).length,emptyAlt:m.images.filter(im=>im.altEmpty).length,missingImageDimensions:m.images.filter(im=>!im.width||!im.height).length,aboveFoldLazy:m.images.filter(im=>im.aboveFold&&im.loading==="lazy").map(im=>im.src),heavyImages,initialBytes:{total:total(),images:total("image"),js:total("script"),css:total("stylesheet"),fonts:total("font"),html:total("document")},initialRequests:initial.length,banner,violations,axeError,broken,errors,failed,external};
+                  if(response?.status()!==200)issues.push({page:routePath,type:"http",status:response?.status()});
+                  if(m.scrollWidth>m.viewport+3)issues.push({page:routePath,type:"page_overflow",width:m.scrollWidth,viewport:m.viewport,examples:m.overflow});
+                  if(m.mainCount!==1||m.headingCount!==1)issues.push({page:routePath,type:"landmark_or_h1",main:m.mainCount,h1:m.headingCount});
+                  if(banner.x< -2||banner.right>width+2||banner.y< -2||banner.bottom>(width<500?844:900)+2)issues.push({page:routePath,type:"cookie_banner_bounds",banner});
+                  if(errors.length||failed.length||broken.length)issues.push({page:routePath,type:"resource_or_js",errors,failed,broken});
+                  if(axeError)issues.push({page:routePath,type:"axe_scan_failed",error:axeError});
+                }catch(e){record={path:routePath,status:"failed",error:String(e).slice(0,500),errors,failed};issues.push({page:routePath,type:"scan_failed",error:record.error});}
+                finally{results.push(record);save();await context.close();}
+                if(results.length%15===0)console.log("RESPONSIVE_PROGRESS",width,results.length,"/",routes.length);
+              }
+              // Keyboard-only smoke test: first Tab, skip link, mobile menu and Escape.
+              const context=await browser.newContext({viewport:{width,height:width<500?844:900}});
+              await context.route("**/*",r=>r.request().url().startsWith(origin+"/")?r.continue():r.abort());
+              const page=await context.newPage();
+              try{
+                await page.goto(origin+"/");await page.getByRole("button",{name:"Accept necessary",exact:true}).click();
+                await page.keyboard.press("Tab");
+                const keyboard=await page.evaluate(()=>({firstFocus:document.activeElement?.outerHTML.slice(0,350),skipLinks:[...document.querySelectorAll('a[href="#main"],a[href="#main-content"]')].map(a=>a.textContent.trim())}));
+                if(width<500){
+                  const menu=page.getByRole("button",{name:"Menu",exact:true});
+                  if(await menu.count()===1){await menu.focus();await page.keyboard.press("Enter");await page.waitForTimeout(250);keyboard.menuOpened=await page.getByRole("dialog").count()>0;await page.keyboard.press("Escape");await page.waitForTimeout(250);keyboard.menuClosed=await page.getByRole("dialog").count()===0;keyboard.focusRestored=await menu.evaluate(el=>document.activeElement===el);}
+                }
+                console.log("KEYBOARD_SAMPLE",JSON.stringify(keyboard));fs.writeFileSync("stage5-keyboard.json",JSON.stringify(keyboard,null,2));
+              }catch(e){console.log("KEYBOARD_SAMPLE",JSON.stringify({error:String(e)}));}
+              finally{await context.close();}
+            }finally{await browser.close();save();}
+            const good=results.filter(x=>x.status==="ok");
+            const byRule={};for(const p of good)for(const v of p.violations||[]){const x=byRule[v.id]??={pages:0,nodes:0,impact:v.impact};x.pages++;x.nodes+=v.nodes;}
+            const top=(key)=>good.slice().sort((a,b)=>b.initialBytes[key]-a.initialBytes[key]).slice(0,8).map(p=>({path:p.path,bytes:p.initialBytes[key]}));
+            const summary={width,expected:routes.length,scanned:good.length,failed:results.length-good.length,axePages:width===360?0:good.filter(p=>!p.axeError).length,axeRules:byRule,overflowPages:good.filter(p=>p.scrollWidth>p.viewport+3).length,issueCount:issues.length,smallControlPages:good.filter(p=>p.smallControlCount).length,missingAlt:good.reduce((s,p)=>s+p.missingAlt,0),emptyAlt:good.reduce((s,p)=>s+p.emptyAlt,0),heavyInitial:top("total"),heavyJS:top("js"),heavyImages:top("images"),distinctLocalResources:assets.size};
+            console.log("STAGE5_SUMMARY",JSON.stringify(summary));
+            for(const item of issues.slice(0,60))console.log("STAGE5_ISSUE",JSON.stringify(item));
+            for(const p of good.filter(p=>p.violations?.length).slice(0,15))console.log("AXE_SAMPLE",JSON.stringify({path:p.path,violations:p.violations}));
+            if(good.length!==routes.length||good.some(p=>p.axeError))process.exitCode=1;
+          })().catch(e=>{console.error(e);save();process.exitCode=1});
           JS
+          node .stage5-browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage5-responsive-${{ matrix.width }}
+          path: |
+            stage5-responsive.json
+            stage5-keyboard.json
+          if-no-files-found: warn
+  lighthouse:
+    if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
+    name: Lighthouse lab - ${{ matrix.device }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [mobile, desktop]
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      VITE_INDEXABLE: "false"
+      DEVICE: ${{ matrix.device }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 758527f3a2180964947bdd7ade6b530b14bd6bcb
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - run: bash scripts/build-validated-static.sh
+      - name: Install isolated Lighthouse
+        run: npm install --prefix /tmp/stage5-lh --no-save lighthouse@12
+      - name: Serve actual static build
+        run: |
+          nohup python3 -m http.server 4173 --bind 127.0.0.1 --directory .output/public >/tmp/lh-http.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Audit representative templates
+        run: |
+          mkdir -p stage5-lighthouse
+          cat > .stage5-lh.mjs <<'JS'
+          import fs from "node:fs";
+          import {spawnSync} from "node:child_process";
+          const paths=["/","/about-me/","/airport-transfers/","/airport-transfers/jerusalem/","/private-driver-in-israel/","/shore-excursions/haifa/","/tours/","/tours/jerusalem/","/accommodation/","/accommodation/tel-aviv/","/accommodation/tel-aviv/beachfront/","/attractions/","/attractions/old-city-jerusalem/","/travel-blog/","/travel-blog/jerusalem-travel-guide/","/travel-blog/israel-itinerary-7-days/","/car-rental/"];
+          const results=[],device=process.env.DEVICE;
+          for(const p of paths){
+            const filename="stage5-lighthouse/"+(p==="/"?"home":p.replace(/^\/|\/$/g,"").replaceAll("/","_"))+".json";
+            const args=["http://127.0.0.1:4173"+p,"--only-categories=performance,accessibility","--output=json","--output-path="+filename,"--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=30000","--quiet"];
+            if(device==="desktop")args.push("--preset=desktop");
+            const r=spawnSync("/tmp/stage5-lh/node_modules/.bin/lighthouse",args,{encoding:"utf8",timeout:105000,maxBuffer:3*1024*1024});
+            try{
+              const a=JSON.parse(fs.readFileSync(filename,"utf8")),audits=a.audits;
+              if(a.runtimeError)throw Error(a.runtimeError.message);
+              const n=k=>audits[k]?.numericValue??null;
+              const row={path:p,device,performance:Math.round(a.categories.performance.score*100),accessibility:Math.round(a.categories.accessibility.score*100),lcpMs:n("largest-contentful-paint"),cls:n("cumulative-layout-shift"),tbtMs:n("total-blocking-time"),fcpMs:n("first-contentful-paint"),speedIndexMs:n("speed-index"),transferBytes:n("total-byte-weight"),mainThreadMs:n("mainthread-work-breakdown"),opportunities:Object.values(audits).filter(x=>x.details?.type==="opportunity"&&x.details.overallSavingsMs>100).map(x=>({id:x.id,savingsMs:x.details.overallSavingsMs})).sort((a,b)=>b.savingsMs-a.savingsMs).slice(0,8),accessibilityFailures:a.categories.accessibility.auditRefs.filter(x=>audits[x.id]?.score===0).map(x=>x.id)};
+              results.push(row);console.log("LIGHTHOUSE_RESULT",JSON.stringify(row));
+            }catch(e){const row={path:p,device,error:String(e).slice(0,300),exit:r.status,stderr:r.stderr?.slice(-400)};results.push(row);console.log("LIGHTHOUSE_RESULT",JSON.stringify(row));}
+            fs.writeFileSync("stage5-lighthouse/summary.json",JSON.stringify(results,null,2));
+          }
+          if(results.some(r=>r.error))process.exitCode=1;
+          JS
+          node .stage5-lh.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage5-lighthouse-${{ matrix.device }}
+          path: stage5-lighthouse/
+          if-no-files-found: warn
+  live-hostinger:
+    if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Sample live HTTPS timing, transfer size and cache headers
+        run: |
+          python3 -u - <<'PY'
+          import subprocess,json,time,tempfile,pathlib
+          origin="https://saddlebrown-guanaco-454061.hostingersite.com"
+          paths=["/","/airport-transfers/","/airport-transfers/jerusalem/","/private-driver-in-israel/","/shore-excursions/haifa/","/tours/","/accommodation/","/accommodation/tel-aviv/","/attractions/old-city-jerusalem/","/travel-blog/jerusalem-travel-guide/","/travel-blog/israel-itinerary-7-days/","/car-rental/"]
+          out=[]
+          for p in paths:
+              time.sleep(2)
+              with tempfile.TemporaryDirectory() as tmp:
+                  header=pathlib.Path(tmp)/"header"
+                  r=subprocess.run(["curl","-sS","--compressed","--connect-timeout","6","--max-time","15","-A","IsraelTravelHub-PrelaunchAudit/1.0","-D",str(header),"-o","/dev/null","-w","%{json}",origin+p],capture_output=True,text=True,timeout=20)
+                  try: m=json.loads(r.stdout)
+                  except: m={}
+                  h={}
+                  if header.exists():
+                      for line in header.read_text(errors="replace").splitlines():
+                          if ":" in line:
+                              k,v=line.split(":",1)
+                              if k.lower() in ["cache-control","content-encoding","vary","age","x-litespeed-cache","x-qc-cache","server","content-type"]:h[k.lower()]=v.strip()
+                  row={"path":p,"exit":r.returncode,"status":m.get("http_code"),"ttfbMs":round(m.get("time_starttransfer",0)*1000),"totalMs":round(m.get("time_total",0)*1000),"downloadBytes":m.get("size_download"),"headers":h}
+                  out.append(row);print("HOSTINGER_SAMPLE",json.dumps(row),flush=True)
+                  pathlib.Path("hostinger-timing.json").write_text(json.dumps(out,indent=2))
+                  if row["status"]==429:
+                      print("Rate limit encountered; stop without further requests")
+                      break
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage5-hostinger-timing
+          path: hostinger-timing.json
