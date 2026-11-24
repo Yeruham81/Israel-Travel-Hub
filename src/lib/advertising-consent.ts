@@ -28,7 +28,8 @@ export function resolveAdvertisingConsent(
   const validSignals = signals && [signals.ad_storage, signals.ad_user_data, signals.ad_personalization]
     .every(value => value === "granted" || value === "denied");
   if (!integration.enabled || !integration.certifiedCmpConfigured ||
-    choice?.categories.advertising !== true || provider?.status !== "ready" || provider.mayRequestAds !== true || !validSignals) {
+    choice?.version !== 2 || !Number.isFinite(choice.expiresAt) || choice.expiresAt <= Date.now() ||
+    choice.categories.advertising !== true || provider?.status !== "ready" || provider.mayRequestAds !== true || !validSignals) {
     return { mayRequestAds: false, googleConsent: GOOGLE_AD_CONSENT_DENIED };
   }
   return { mayRequestAds: true, googleConsent: {

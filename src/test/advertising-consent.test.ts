@@ -22,6 +22,11 @@ describe("future advertising integration", () => {
     expect(resolveAdvertisingConsent(choice(NECESSARY_ONLY), permitted, ready)).toEqual(blocked);
     expect(resolveAdvertisingConsent(null, permitted, ready)).toEqual(blocked);
   });
+  it("rejects expired, invalid or legacy consent snapshots at the ad-request boundary", () => {
+    expect(resolveAdvertisingConsent({ ...choice(), expiresAt: Date.now() - 1 }, permitted, ready)).toEqual(blocked);
+    expect(resolveAdvertisingConsent({ ...choice(), expiresAt: NaN }, permitted, ready)).toEqual(blocked);
+    expect(resolveAdvertisingConsent({ ...choice(), version: 1 } as unknown as CookieConsent, permitted, ready)).toEqual(blocked);
+  });
   it("requires a configured CMP and its explicit ready decision", () => {
     expect(resolveAdvertisingConsent(choice(), permitted, { ...ready, enabled: false })).toEqual(blocked);
     expect(resolveAdvertisingConsent(choice(), permitted, { ...ready, certifiedCmpConfigured: false })).toEqual(blocked);
