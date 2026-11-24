@@ -3,7 +3,7 @@ import annunciationHero from "@/assets/guides/2026-11/basilica-annunciation-cour
 /** Shared visitor facts for the Basilica of the Annunciation in Nazareth. */
 export const annunciationSite = {
   title: "Basilica of the Annunciation in Nazareth: Visitor Guide",
-  description: "Plan a visit to the Basilica of the Annunciation in Nazareth: the Grotto, upper church, Marian mosaics, opening hours, free admission, accessibility and nearby Galilee sites.",
+  description: "Visit Nazareth's Basilica of the Annunciation: the Grotto, upper church, Marian mosaics, free admission, opening hours and nearby Christian sites.",
   region: "Nazareth & Lower Galilee" as const,
   updatedAt: "2026-11-17",
   intro: "The Basilica of the Annunciation stands in the heart of Nazareth, above the grotto traditionally associated with the angel Gabriel's message to Mary. I recommend making time for both the quiet lower sanctuary and the bright upper church, as well as the remarkable Marian artworks from around the world.",
