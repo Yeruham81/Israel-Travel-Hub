@@ -85,7 +85,7 @@ export const seasonDetails = [
 export const bestTimeGuide: TravelGuide = {
   id:"bestTime",
   updatedAt:"2026-11-21",
-  title:"Best Time to Visit Israel",
+  title:"Best Time to Visit Israel: Weather & Seasons",
   description:"Choose the best month to visit Israel. Compare all 12 months, spring to winter, regional weather, beach trips, desert heat and Jewish holidays.",
   intro:"For a first visit with city walks and sightseeing, I usually start with spring or autumn. If you want Mediterranean beaches or desert landscapes, the answer changes. Use my month-by-month comparison to find dates that fit your itinerary.",
   answer:"March–April and October–November are useful starting points for a varied sightseeing trip, while May–September often suits Mediterranean beach plans. November–March tends to be more comfortable for exposed Dead Sea and desert sightseeing. Your best choice depends on the regions, holiday dates and forecast.",
