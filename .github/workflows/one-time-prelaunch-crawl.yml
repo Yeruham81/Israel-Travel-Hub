@@ -16,7 +16,7 @@ jobs:
     env:
       ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
     steps:
-      - name: Bounded sequential public checks; persist each result
+      - name: Verify the deployed food anchor; persist each result
         run: |
           python3 -u - <<'PY'
           import subprocess, tempfile, os, json, time, re, pathlib
@@ -70,13 +70,6 @@ jobs:
           try:
               probe('home','/')
               probe('food','/travel-blog/what-to-eat-in-israel/',body=True)
-              probe('http_redirect','/',base='http://'+urlsplit(origin).hostname)
-              probe('quote','/api/quote-request/',body=True)
-              probe('exchange','/api/exchange-rates/',body=True)
-              probe('quote_cors','/api/quote-request/',extra='Origin: https://example.invalid')
-              probe('exchange_cors','/api/exchange-rates/',extra='Origin: https://example.invalid')
-              for p in ['/.env','/.git/config','/.htaccess','/.user.ini','/api/_internal/','/api/','/assets/','/wp-config.php','/wp-admin/']:
-                  probe(p,p,method='HEAD')
           except RuntimeError as e:findings.append({'type':'stopped','reason':str(e)})
           finally:
               save()
@@ -100,7 +93,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: efce939ff7036f7998559eff8757e845a8a9e033
+          ref: 70057ff31529a9ade04f06b81c5e03f2a4889d18
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -115,10 +108,11 @@ jobs:
           const p=JSON.parse(fs.readFileSync('package.json','utf8'));
           p.dependencies.zod='4.6.6';
           p.devDependencies.vitest='4.1.12';
-          p.overrides={...p.overrides,seroval:'1.6.11','seroval-plugins':'1.6.11','brace-expansion@1.1.20':'1.1.21','brace-expansion@5.0.11':'5.0.12','minimatch@10.2.6':'11.0.1'};
+          p.overrides={...p.overrides,zod:'4.6.6',seroval:'1.6.11','seroval-plugins':'1.6.11','brace-expansion@1.1.20':'1.1.21','brace-expansion@5.0.11':'5.0.12','minimatch@10.2.6':'11.0.1'};
           fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n');
           NODE
           bun install
+          bun install --frozen-lockfile
           git diff --stat -- package.json bun.lock
           mkdir -p /tmp/dependency-candidate
           cp package.json bun.lock /tmp/dependency-candidate/
@@ -129,6 +123,10 @@ jobs:
           set -e
           echo "CANDIDATE_AUDIT_EXIT=$code"
           cat /tmp/dependency-candidate/dependency-audit.json
+          bun pm ls --all | grep -E 'zod@|seroval@|vitest@|mocker@|brace-expansion@|minimatch@' || true
+          printf '%s\n' "$code" > /tmp/dependency-candidate/audit-exit.txt
+      - name: Build for generated route types
+        run: bun run build
       - name: TypeScript compatibility
         run: bunx --no-install tsc --noEmit
       - name: Unit tests
@@ -139,6 +137,8 @@ jobs:
         run: |
           bash scripts/build-validated-static.sh
           node scripts/verify-hostinger-static-export.mjs
+      - name: Require zero reported dependency vulnerabilities
+        run: test "$(cat /tmp/dependency-candidate/audit-exit.txt)" = 0
       - name: Save candidate files even if compatibility fails
         if: always()
         uses: actions/upload-artifact@v4
@@ -146,3 +146,48 @@ jobs:
           name: dependency-update-candidate
           path: /tmp/dependency-candidate/
           if-no-files-found: warn
+
+  baseline:
+    if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      CI: "true"
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      VITE_INDEXABLE: "false"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 70057ff31529a9ade04f06b81c5e03f2a4889d18
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install unchanged locked dependencies
+        run: bash scripts/install-ci-dependencies.sh
+      - name: Build for generated route types
+        run: bun run build
+      - name: TypeScript compatibility
+        run: bunx --no-install tsc --noEmit
+      - name: Unit tests
+        run: bun run test
+      - name: Sanity adapter tests
+        run: node --test scripts/sanity/uber-adapter.test.mjs
+      - name: Verify baseline static build and corrected anchor
+        env:
+          HOSTINGER_STATIC_BUILD: "true"
+        run: |
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          html=Path('.output/public/travel-blog/what-to-eat-in-israel/index.html').read_text()
+          assert re.search(r'href=["\x27]#knafeh["\x27]',html)
+          assert re.search(r'id=["\x27]knafeh["\x27]',html)
+          assert not re.search(r'href=["\x27]#kanafeh["\x27]',html)
+          print('KNAFEH_ANCHOR_BUILD_OK')
+          PY
