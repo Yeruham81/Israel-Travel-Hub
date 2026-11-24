@@ -188,7 +188,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
               {showTravel && <td className="px-4 py-3 align-top text-muted-foreground">{g.overviewRows?.[index]?.travel}</td>}
               <td className="px-4 py-3 align-top text-muted-foreground">
                 {g.overviewRows?.[index]?.night ?? day.overnight}
-                {presentation.transferDays.includes(index + 1) && <span className="ml-2 inline-block rounded-md border border-primary/30 bg-secondary px-2 py-0.5 text-xs font-semibold text-foreground">Hotel transfer</span>}
+                {presentation.transferDays.includes(index + 1) && <span className="ml-2 inline-block rounded-md border border-primary/30 bg-secondary px-2 py-0.5 text-xs font-semibold text-foreground">{id === "3" ? "Intercity travel" : "Hotel transfer"}</span>}
                 {index + 1 === g.days && <span className="ml-2 inline-block rounded-md border px-2 py-0.5 text-xs font-semibold text-foreground">Flight date matters</span>}
               </td>
             </tr>)}
