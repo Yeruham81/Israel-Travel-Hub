@@ -1,4 +1,4 @@
-name: Stage 5 route metadata lazy-loading experiment
+name: Stage 5 lightweight guide directory experiment
 on:
   pull_request:
     branches: [main]
@@ -7,7 +7,7 @@ permissions:
   contents: read
 jobs:
   graph:
-    if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
+    if: github.head_ref == 'audit/stage5-lightweight-directory-20261125'
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
@@ -128,7 +128,126 @@ jobs:
           node stage5-split-heads.mjs
           echo "Inspect installed router head API before experiment"
           grep -n -A 24 'head?:' node_modules/@tanstack/router-core/src/route.ts | head -30 || true
-      - name: Build route-head experiment
+      - name: Generate compact directory from current editorial sources and isolate photo lookups
+        run: |
+          cat > stage5-directory-entry.ts <<'TS'
+          import { guideDirectory, travelGuides } from "@/data/travelGuides";
+          import { attractionGuides } from "@/data/attractionGuides";
+          export const snapshot = {
+            guideDirectory,
+            travelGuidePhotos: Object.fromEntries(Object.entries(travelGuides).map(([id,g])=>[id,g.photo])),
+            attractionGuidePhotos: Object.fromEntries(Object.entries(attractionGuides).map(([id,g])=>[id,g.image??null])),
+          };
+          TS
+          cat > stage5-generate-directory.mjs <<'JS'
+          import {build} from "vite";
+          import fs from "node:fs";
+          import path from "node:path";
+          import {pathToFileURL} from "node:url";
+          const root=process.cwd();
+          const marker="__STAGE5_IMPORTED_ASSET__:";
+          await build({configFile:false,root,resolve:{alias:{"@":path.join(root,"src")}},ssr:{noExternal:true},plugins:[{
+            name:"snapshot-assets-as-source-identifiers",enforce:"pre",
+            load(id){
+              const p=id.split("?")[0];
+              if(!p.startsWith(root+"/src/")||!/\.(?:webp|jpe?g|png|svg|gif|avif|ico|woff2?)$/i.test(p))return;
+              return "export default "+JSON.stringify(marker+path.relative(root,p).replaceAll("\\","/"))+";";
+            }
+          }],build:{ssr:path.join(root,"stage5-directory-entry.ts"),outDir:path.join(root,".stage5-snapshot"),emptyOutDir:true,minify:false,rollupOptions:{output:{entryFileNames:"snapshot.mjs"}}}});
+          const {snapshot}=await import(pathToFileURL(path.join(root,".stage5-snapshot/snapshot.mjs")).href);
+          if(!Array.isArray(snapshot.guideDirectory)||snapshot.guideDirectory.length<30)throw Error("Incomplete directory");
+          const assets=new Map();
+          function serialize(value){
+            if(typeof value==="string"&&value.startsWith(marker)){
+              const file=value.slice(marker.length);
+              if(!fs.existsSync(path.join(root,file)))throw Error("Missing asset "+file);
+              if(!assets.has(file))assets.set(file,"photo"+assets.size);
+              return assets.get(file);
+            }
+            if(value===null||typeof value!=="object")return JSON.stringify(value)??"undefined";
+            if(Array.isArray(value))return "["+value.map(serialize).join(",")+"]";
+            return "{"+Object.entries(value).filter(([,v])=>v!==undefined).map(([k,v])=>JSON.stringify(k)+":"+serialize(v)).join(",")+"}";
+          }
+          const values=Object.entries(snapshot).map(([k,v])=>({k,code:serialize(v)}));
+          const types={guideDirectory:"GuideDirectoryEntry[]",travelGuidePhotos:"Record<TravelGuideId, GuidePhoto>",attractionGuidePhotos:"Record<AttractionId, GuidePhoto | null>"};
+          const output=[
+            "// Generated from the original editorial data for this build; do not hand edit.",
+            'import type { GuideDirectoryEntry, GuidePhoto } from "@/data/travelGuides";',
+            'import type { TravelGuideId } from "@/data/travel-guide-paths";',
+            'import type { AttractionId } from "@/data/attractionGuideTypes";',
+            'import { guideTopics, type GuideTopicId } from "@/data/guide-topics";',
+            'export { guideTopics, type GuideTopicId } from "@/data/guide-topics";',
+            ...[...assets].map(([p,id])=>"import "+id+" from "+JSON.stringify("@/"+p.slice(4))+";"),
+            ...values.map(({k,code})=>"export const "+k+": "+types[k]+" = "+code+";"),
+          ];
+          // Reuse exact filtering implementation rather than maintain a duplicate.
+          const original=fs.readFileSync("src/data/travelGuides.ts","utf8");
+          const start=original.indexOf("export function isGuideTopic(");
+          if(start<0)throw Error("Missing directory filters");
+          output.push(original.slice(start));
+          fs.mkdirSync("src/data/generated",{recursive:true});
+          fs.writeFileSync("src/data/generated/stage5-lightweight-directory.ts",output.join("\n")+"\n");
+          console.log("DIRECTORY_SNAPSHOT",JSON.stringify({entries:snapshot.guideDirectory.length,guidePhotos:Object.keys(snapshot.travelGuidePhotos).length,attractionPhotos:Object.keys(snapshot.attractionGuidePhotos).length,importedAssets:assets.size,bytes:Buffer.byteLength(output.join("\n"))}));
+          JS
+          node stage5-generate-directory.mjs
+          cat > stage5-rewire-directory.mjs <<'JS'
+          import fs from "node:fs";
+          import path from "node:path";
+          import ts from "typescript";
+          const generated="@/data/generated/stage5-lightweight-directory";
+          const light=new Set(["guideDirectory","isGuideTopic","getGuideTopicLabel","filterGuides","guideTopics","GuideTopicId"]);
+          const files=[];
+          function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,e.name);if(e.isDirectory())walk(p);else if(/\.[jt]sx?$/.test(p)&&!/\.(?:test|spec)\.[jt]sx?$/.test(p))files.push(p);}}
+          walk("src");
+          const changes=[];
+          for(const p of files){
+            if(p.endsWith("travelGuides.ts")||p.includes("stage5-lightweight-directory"))continue;
+            const s=fs.readFileSync(p,"utf8"),ast=ts.createSourceFile(p,s,ts.ScriptTarget.Latest,true,p.endsWith("tsx")?ts.ScriptKind.TSX:ts.ScriptKind.TS),edits=[];
+            for(const n of ast.statements){
+              if(!ts.isImportDeclaration(n)||!ts.isStringLiteral(n.moduleSpecifier)||!n.moduleSpecifier.text.endsWith("/travelGuides"))continue;
+              const clause=n.importClause,b=clause?.namedBindings;
+              if(!clause||clause.isTypeOnly||!b||!ts.isNamedImports(b)||clause.name)continue;
+              const yes=b.elements.filter(e=>light.has((e.propertyName??e.name).text)),no=b.elements.filter(e=>!yes.includes(e));
+              if(!yes.length)continue;
+              const imp=(list,spec)=>list.length?"import { "+list.map(e=>e.getText(ast)).join(", ")+" } from "+JSON.stringify(spec)+";":"";
+              edits.push({start:n.getStart(ast),end:n.end,text:imp(no,n.moduleSpecifier.text)+"\n"+imp(yes,generated)});
+            }
+            if(edits.length){let out=s;for(const e of edits.sort((a,b)=>b.start-a.start))out=out.slice(0,e.start)+e.text+out.slice(e.end);fs.writeFileSync(p,out);changes.push(p);}
+          }
+          function change(p,fn){const s=fs.readFileSync(p,"utf8"),out=fn(s);if(s===out)throw Error("No expected changes "+p);fs.writeFileSync(p,out);changes.push(p);}
+          function exact(s,a,b){if(s.split(a).length!==2)throw Error("Expected single occurrence "+a);return s.replace(a,b);}
+          change("src/data/attractionsHub.ts",s=>{
+            s=exact(s,'import { travelGuides, type GuidePhoto } from "@/data/travelGuides";','import type { GuidePhoto } from "@/data/travelGuides";\nimport { travelGuidePhotos, attractionGuidePhotos } from "'+generated+'";');
+            s=exact(s,'import { attractionGuides } from "@/data/attractionGuides";','');
+            s=exact(s,'const item = attractionGuides[id];','const image = attractionGuidePhotos[id];');
+            s=exact(s,'item.image ?? photoOverride','image ?? photoOverride');
+            s=s.replace(/travelGuides(\[[^\]]+\]|\.\w+)\.photo/g,"travelGuidePhotos$1");
+            s=exact(s,'attractionGuides["sea-of-galilee"].image!','attractionGuidePhotos["sea-of-galilee"]!');
+            if(/\b(?:travelGuides|attractionGuides)\s*(?:\[|\.)/.test(s))throw Error("Unconverted full-data references");
+            return s;
+          });
+          change("src/lib/guide-hero-photos.ts",s=>{
+            s=exact(s,'import { attractionGuides } from "@/data/attractionGuides";','import { attractionGuidePhotos } from "'+generated+'";');
+            return exact(s,'attractionGuides[attractionId].image : undefined','attractionGuidePhotos[attractionId] ?? undefined : undefined');
+          });
+          fs.writeFileSync("stage5-js-audit/directory-rewire.json",JSON.stringify([...new Set(changes)],null,2));
+          console.log("DIRECTORY_REWIRE",JSON.stringify([...new Set(changes)]));
+          JS
+          node stage5-rewire-directory.mjs
+          cat > src/data/stage5-lightweight-directory.test.ts <<'TS'
+          import { expect, it } from "vitest";
+          import { guideDirectory as original, travelGuides, filterGuides as originalFilter } from "@/data/travelGuides";
+          import { attractionGuides } from "@/data/attractionGuides";
+          import { guideDirectory, travelGuidePhotos, attractionGuidePhotos, filterGuides } from "@/data/generated/stage5-lightweight-directory";
+          it("retains exact editorial directory, ordering, original hero images and filter behavior",()=>{
+            expect(guideDirectory).toEqual(original);
+            expect(travelGuidePhotos).toEqual(Object.fromEntries(Object.entries(travelGuides).map(([id,g])=>[id,g.photo])));
+            expect(attractionGuidePhotos).toEqual(Object.fromEntries(Object.entries(attractionGuides).map(([id,g])=>[id,g.image??null])));
+            for(const q of ["","Jerusalem","airport","hotel","Shabbat","Galilee","unknown"])for(const topic of [undefined,"transportation","accommodation","itineraries","unknown"])expect(filterGuides(q,topic)).toEqual(originalFilter(q,topic));
+          });
+          TS
+          rm -f stage5-directory-entry.ts
+      - name: Build combined route-head and lightweight-directory experiment
         run: bash scripts/build-validated-static.sh
       - name: Verify experimental static export
         run: node scripts/verify-hostinger-static-export.mjs
