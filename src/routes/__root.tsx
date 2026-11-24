@@ -19,6 +19,7 @@ import { SiteHeader, SiteFooter, SiteSidebar } from "@/components/Layout";
 import { HomeHero } from "@/components/HomeHero";
 import { CurrencyRatesProvider } from "@/components/CurrencyRates";
 import { FloatingContactButton } from "@/components/FloatingContactButton";
+import { Analytics } from "@/components/Analytics";
 
 function NotFoundComponent() {
   return (
@@ -143,6 +144,7 @@ function RootComponent() {
       </Content>
       <SiteFooter />
       <FloatingContactButton />
+      <Analytics />
       </CurrencyRatesProvider>
     </QueryClientProvider>
   );

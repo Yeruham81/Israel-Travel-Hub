@@ -12,19 +12,20 @@ export function legalPageMeta(title: string, path: string, description: string) 
   return pageMeta({ title: `${title} | ${SITE_NAME}`, description, path, crumbs: [{ name: "Home", path: "/" }, { name: title, path }] });
 }
 
-export function LegalPage({ title, path, intro, sections, otherDocument }: {
+export function LegalPage({ title, path, intro, sections, otherDocument, updatedAt = LEGAL_UPDATED_AT }: {
   title: string;
   path: LinkProps["to"];
   intro: ReactNode;
   sections: LegalSection[];
   otherDocument: { title: string; to: LinkProps["to"] };
+  updatedAt?: string;
 }) {
   return <main className="mx-auto max-w-4xl px-4 pb-16 pt-6">
     <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: title, to: path }]} />
     <header className="pt-8">
       <p className="eyebrow">Website &amp; services</p>
       <h1 className="mt-3 text-4xl leading-tight md:text-5xl">{title}</h1>
-      <p className="mt-4 text-sm text-muted-foreground">Last updated: <time dateTime={LEGAL_UPDATED_AT}>13 November 2026</time></p>
+      <p className="mt-4 text-sm text-muted-foreground">Last updated: <time dateTime={updatedAt}>{new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${updatedAt}T00:00:00Z`))}</time></p>
       <div className="prose-guide mt-5 text-muted-foreground">{intro}</div>
     </header>
     <OnThisPage sections={sections.map(section => [section.id, section.title] as const)} fullLabels />

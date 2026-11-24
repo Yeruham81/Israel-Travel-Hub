@@ -43,9 +43,9 @@ describe("local-only image asset policy", () => {
     for (const file of sourceFiles(srcRoot)) {
       const lines = readFileSync(file, "utf8").split(/\r?\n/);
       lines.forEach((line, index) => {
-        // Loading GA4's external JavaScript is not hotlinking an image.
-        if (/\bscript\.src\s*=/.test(line)) return;
-        if (remoteImagePatterns.some(regex => regex.test(line)) && !(/<iframe\b/.test(line) && /https:\/\/maps\.google\.com\//.test(line))) {
+        // An explicitly loaded GA4 JavaScript file is a script resource, not an image hotlink.
+        const isGa4ScriptLoader = /\bscript\.src\s*=/.test(line) && line.includes("googletagmanager.com/gtag/js");
+        if (remoteImagePatterns.some(regex => regex.test(line)) && !isGa4ScriptLoader && !(/<iframe\b/.test(line) && /https:\/\/maps\.google\.com\//.test(line))) {
           violations.push(`${relative(process.cwd(), file)}:${index + 1}`);
         }
       });

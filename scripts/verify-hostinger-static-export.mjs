@@ -189,6 +189,45 @@ for (const [slug, title, expectedPhoto, required] of [
 }
 console.log("General taxi and fare guides: style, intent-specific tables and cross-links verified.");
 
+// Shabbat airport travel: protect seasonal bus hours, B/C meter fares and both six-item link groups.
+const shabbatFile = join(root, "travel-blog", "from-ben-gurion-airport-on-shabbat", "index.html");
+assert(existsSync(shabbatFile), "Missing Ben Gurion Shabbat guide HTML");
+const shabbatHtml = readFileSync(shabbatFile, "utf8");
+const shabbatMain = shabbatHtml.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1];
+assert(shabbatMain, "Ben Gurion Shabbat guide has no main content");
+for (const required of [
+  "How to Get from Ben Gurion Airport on Shabbat",
+  "featured-shabbat-airport.webp",
+  "Friday 15:45",
+  "Saturday 10:30",
+  "daylight-saving-time schedules",
+  "Where to get off Line 711 in Tel Aviv",
+  "Saturday daytime",
+  "Saturday evening/night",
+  "Tariff B",
+  "Tariff C",
+  "Terminal 1",
+  "airport-taxi-sign.webp",
+  "ben-gurion-rail-platform",
+  "Contact Me",
+  "Plan the next part of your trip",
+]) {
+  assert(shabbatMain.includes(required), "Missing Shabbat airport update: " + required);
+}
+assert(!/\b(?:Line|route|bus)\s+712\b/i.test(shabbatMain),
+  "Airport Shabbat guide must not direct readers to Line 712");
+const shabbatPhotoGrid = shabbatMain.match(/<ul\b[^>]*data-testid="stay-trip-photo-grid"[^>]*>([\s\S]*?)<\/ul>/i)?.[1];
+assert(shabbatPhotoGrid && [...shabbatPhotoGrid.matchAll(/<li\b/g)].length === 6,
+  "Shabbat page must render six illustrated related guides");
+const nextSection = shabbatMain.match(/<section\b[^>]*aria-label="Plan the next part of your trip"[^>]*>([\s\S]*?)<\/section>/i)?.[1];
+assert(nextSection && [...nextSection.matchAll(/<li\b/g)].length === 6,
+  "Shabbat page must retain exactly six Plan the next part of your trip links");
+const shabbatSourceIndex = shabbatMain.indexOf('id="sources"');
+const shabbatContactIndex = shabbatMain.indexOf('id="contact"');
+assert(shabbatContactIndex > 0 && shabbatSourceIndex > shabbatContactIndex,
+  "Shabbat sources must appear below the contact form");
+console.log("Shabbat airport guide: seasonal bus, Saturday B/C fares, no 712, six illustrated guides, six next links and contact verified.");
+
 // Ben Gurion arrivals: guard the concrete steps and editorial hand-offs.
 const arrivalPath = "/travel-blog/ben-gurion-airport-arrival-tips/";
 const arrivalFile = join(root, "travel-blog", "ben-gurion-airport-arrival-tips", "index.html");
