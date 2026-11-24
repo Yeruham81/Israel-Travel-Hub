@@ -2,8 +2,7 @@ import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { BedDouble, BookOpen, CalendarDays, CarFront, Landmark, Plane, type LucideIcon } from "lucide-react";
 import deadSeaBeach from "@/assets/dead-sea/beach.webp";
-import masada from "@/assets/home/masada-dead-sea.webp";
-import { einGediCardPhoto } from "@/data/einGediCardPhoto";
+import bestTimeGuidePhoto from "@/assets/guides/2026-10/best-time-to-visit-israel.webp";
 import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
 import deadSeaHotelPool from "@/assets/dead-sea/pool.webp";
 import jerusalemOldCity from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
@@ -27,18 +26,18 @@ const related: {
     alt: "Dead Sea beach and water",
   },
   {
-    title: "Visiting Masada",
-    description: "Plan the park entrance, opening hours and cable car.",
-    to: "/attractions/masada/",
-    photo: masada,
-    alt: "Masada plateau above the Dead Sea",
+    title: "Getting around Israel",
+    description: "Compare transport options for the next leg of your journey.",
+    to: "/travel-blog/getting-around-israel/",
+    photo: "/images/travel-blog/featured-getting-around-israel.webp",
+    alt: "Traffic on a busy Israeli highway in the Tel Aviv area",
   },
   {
-    title: "Ein Gedi Nature Reserve",
-    description: "Discover the reserve's waterfalls, green trails and desert wildlife.",
-    to: "/attractions/ein-gedi/",
-    photo: einGediCardPhoto.src,
-    alt: einGediCardPhoto.alt,
+    title: "Best time to visit Israel",
+    description: "Plan around seasonal heat, outdoor conditions and the time of year.",
+    to: "/travel-blog/best-time-to-visit-israel/",
+    photo: bestTimeGuidePhoto,
+    alt: "Seasonal travel scenery in Israel",
   },
   {
     title: "Dead Sea attractions",
