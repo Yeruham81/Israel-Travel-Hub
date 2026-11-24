@@ -28,14 +28,15 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.queryByTestId("journey-stop-cards")).not.toBeInTheDocument();
     const comparison = screen.getByRole("table", { name: /Compare ways to reach Bethlehem/ });
     expect(comparison).toBeInTheDocument();
-    expect(within(comparison).getByRole("rowheader", { name: "Bus 231" })).toBeInTheDocument();
+    expect(within(comparison).getByRole("rowheader", { name: "Bus 231" })).toHaveClass("sticky");
+    expect(within(comparison).getAllByRole("columnheader")[0]).toHaveClass("sticky");
     const buses = container.querySelector("#buses");
     expect(buses).not.toBeNull();
     expect(buses).toHaveTextContent("Bab al-Zaqaq");
     expect(buses).toHaveTextContent("Checkpoint 300");
-    expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses' routes and timetables/ }))
+    expect(within(buses as HTMLElement).getByRole("link", { name: /return timetable for your journey/ }))
       .toHaveAttribute("href", "https://south-buses.com/lines-and-stations/?lang=en");
-    expect(within(buses as HTMLElement).getByRole("link", { name: /fares and payment information/ }))
+    expect(within(buses as HTMLElement).getByRole("link", { name: /publishes an ₪8 standard cash fare/ }))
       .toHaveAttribute("href", "https://south-buses.com/?lang=en");
     expect(within(buses as HTMLElement).getByRole("link", { name: /Christian Information Center's East Jerusalem bus guide/ }))
       .toHaveAttribute("href", "https://www.cicts.org/en/east-jerusalem-bus-lines");
@@ -66,7 +67,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(localTaxi.querySelector('a[href="/private-driver-in-israel/"]')).toBeNull();
     expect((container.querySelector("#visit-return") as HTMLElement).querySelectorAll("p")[0]).not.toHaveTextContent("Manger Square");
     expect((container.querySelector("#bethlehem-sites") as HTMLElement)).toHaveTextContent("Manger Square");
-    expect(screen.getByTestId("bethlehem-tour-options")).toHaveTextContent("Prices and availability can change");
+    expect(screen.getByTestId("bethlehem-tour-options")).toHaveTextContent("These tours are operated by independent providers");
     expect(within(container.querySelector("#private-taxi") as HTMLElement)
       .getByRole("img", { name: /Yellow Palestinian taxi/ })).toBeInTheDocument();
     expect(within(container.querySelector("#visit-return") as HTMLElement)
@@ -84,9 +85,9 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(container.textContent).not.toContain("Compare organised Bethlehem tours");
     expect(container.textContent).not.toContain("Prices, reviews and itinerary details are snapshots");
     expect(container.textContent).not.toContain("Starting prices and ratings were checked");
-    expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses' routes and timetables/ }).closest("p")).toHaveTextContent("departures and return services");
-    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /published notice/ })).toHaveAttribute("href", "https://www.cicts.org/bethlehem-basilica-of-the-nativity-cts/");
-    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /published notice/ }).closest("p")).toHaveTextContent("12:30–14:30");
+    expect(within(buses as HTMLElement).getByRole("link", { name: /return timetable for your journey/ }).closest("p")).toHaveTextContent("₪8");
+    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /Grotto of the Nativity has separate visiting hours/ })).toHaveAttribute("href", "https://www.cicts.org/bethlehem-basilica-of-the-nativity-cts/");
+    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /Grotto of the Nativity has separate visiting hours/ }).closest("p")).toHaveTextContent("12:30–14:30");
     expect(container.querySelector("#shabbat")).toHaveTextContent("Check both the bus timetable and church visiting hours");
     expect(container.querySelector("#checklist")?.querySelectorAll("li")).toHaveLength(4);
     expect(within(container.querySelector("#checklist") as HTMLElement).getByRole("heading", { name: "Travel checklist" })).toBeInTheDocument();
@@ -116,6 +117,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(nextBethlehem.querySelectorAll("li svg")).toHaveLength(6);
     expect(within(related).getByRole("link", { name: /Christian Tours in Israel/i })).toHaveAttribute("href", "/travel-blog/christian-tours-in-israel/");
     expect(within(related).queryByRole("link", { name: /Masada National Park/i })).not.toBeInTheDocument();
+    expect(container.querySelector("#contact")).toHaveTextContent("Need a Private Transfer To or From Jerusalem?");
+    expect(container.querySelector("#contact")).toHaveTextContent("private transport to or from Jerusalem");
     const faq = container.querySelector("#faq")!;
     const contact = container.querySelector("#contact")!;
     const sources = container.querySelector("#sources")!;
