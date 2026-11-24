@@ -1039,6 +1039,10 @@ describe("migrated practical guides", () => {
     const contact = within(container).getByRole("form", { name: "Guide contact message" });
     expect(related.querySelector('[data-testid="stay-trip-photo-grid"]')?.querySelectorAll("li")).toHaveLength(6);
     expect(next.querySelectorAll("li")).toHaveLength(6);
+    expect(next).toHaveAttribute("data-testid", "icon-trip-planning-links");
+    expect(within(next).getAllByRole("link").every(link => link.querySelector("svg") !== null)).toBe(true);
+    expect(within(next).getAllByRole("link").every(link => link.querySelectorAll("span").length >= 3)).toBe(true);
+    expect(within(next).getByText("Rental options and Saturday pickup arrangements.")).toBeInTheDocument();
     const nextPaths = Array.from(next.querySelectorAll("a")).map(link => link.getAttribute("href"));
     expect(nextPaths).toEqual([
       "/car-rental/",
@@ -1056,7 +1060,9 @@ describe("migrated practical guides", () => {
     expect(contactJump).toHaveAttribute("href", "#contact");
     expect(taxiSection.querySelector("form")).toBeNull();
     expect(container.querySelector('nav[aria-label="On this page"] a[href="#contact"]')).not.toBeNull();
-    expect(within(container).getByRole("heading", { name: "Questions about arriving on Shabbat?" })).toBeInTheDocument();
+    expect(within(container).getByRole("heading", { name: "Need a private airport transfer on Shabbat?" })).toBeInTheDocument();
+    expect(within(container).getByText("Share your flight, destination, passengers and luggage. I\'ll reply personally about arranging your private airport pickup.")).toBeInTheDocument();
+    expect(container.querySelector("#contact")?.textContent).not.toContain("Line 711");
     expect((within(contact).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toBe("");
     const sources = container.querySelector("#sources")!;
     expect(sources).not.toBeNull();
