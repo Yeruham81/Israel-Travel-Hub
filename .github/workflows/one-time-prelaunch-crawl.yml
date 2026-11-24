@@ -12,104 +12,83 @@ jobs:
   public-server:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 8
     env:
       ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
     steps:
-      - name: Inspect public responses without sending enquiries
+      - name: Bounded sequential public checks; persist each result
         run: |
-          python3 - <<'PY'
-          import urllib.request, urllib.error, urllib.parse, json, time, ssl, socket, datetime, re
-          origin=__import__('os').environ['ORIGIN']
-          host=urllib.parse.urlsplit(origin).hostname
+          python3 -u - <<'PY'
+          import subprocess, tempfile, os, json, time, re, pathlib
+          from urllib.parse import urlsplit
+          origin=os.environ['ORIGIN']
           results={}; findings=[]
-          class NoRedirect(urllib.request.HTTPRedirectHandler):
-              def redirect_request(self,*args,**kwargs):return None
-          opener=urllib.request.build_opener(NoRedirect)
-          def probe(path,method='GET',extra=None,base=origin,read=False):
-              time.sleep(2)
-              req=urllib.request.Request(base+path,method=method,headers={'User-Agent':'IsraelTravelHub-PrelaunchAudit/1.0 (owner-authorized QA)',**(extra or {})})
+          def save():
+              pathlib.Path('server-security-audit.json').write_text(json.dumps({'results':results,'findings':findings},indent=2))
+          save()
+          allow={'strict-transport-security','content-security-policy','content-security-policy-report-only','x-content-type-options','x-frame-options','referrer-policy','permissions-policy','cache-control','x-robots-tag','access-control-allow-origin','access-control-allow-credentials'}
+          def probe(key,path,method='GET',extra=None,base=origin,body=False):
               for attempt in range(2):
-                  try:
-                      with opener.open(req,timeout=20) as r:
-                          return r.status, {k.lower():v for k,v in r.headers.items()}, r.read(2000000) if read else b''
-                  except urllib.error.HTTPError as e:
-                      if e.code==429 and attempt==0:
-                          delay=e.headers.get('Retry-After','')
-                          delay=max(35,int(delay)) if delay.isdigit() else 35
-                          if delay>120:raise RuntimeError('Rate limit; audit stopped')
-                          time.sleep(delay);continue
-                      if e.code==429:raise RuntimeError('Persistent rate limit; audit stopped')
-                      return e.code,{k.lower():v for k,v in e.headers.items()},b''
-                  except urllib.error.URLError as e:
-                      findings.append({'type':'network_error','path':path,'reason':str(e.reason)})
-                      return None,{},b''
-          try:
-              with socket.create_connection((host,443),timeout=15) as raw:
-                  with ssl.create_default_context().wrap_socket(raw,server_hostname=host) as tls:
-                      cert=tls.getpeercert()
-                      remaining=(ssl.cert_time_to_seconds(cert['notAfter'])-time.time())/86400
-                      results['tls']={'valid':True,'protocol':tls.version(),'daysRemaining':round(remaining,1)}
-                      if remaining<14:findings.append({'type':'certificate_expiry','days':round(remaining,1)})
-          except Exception as e:
-              results['tls']={'valid':False,'error':type(e).__name__}
-              findings.append({'type':'tls_failed'})
-          try:
-              status,h,_=probe('/',base='http://'+host)
-              loc=h.get('location','')
-              results['httpRedirect']={'status':status,'httpsDestination':loc.startswith(origin+'/') or loc==origin}
-              if status not in (301,302,307,308) or not results['httpRedirect']['httpsDestination']:findings.append({'type':'http_redirect_review'})
-              headers=['strict-transport-security','content-security-policy','content-security-policy-report-only','x-content-type-options','x-frame-options','referrer-policy','permissions-policy','cache-control','x-robots-tag']
-              for p in ['/','/travel-blog/what-to-eat-in-israel/','/api/quote-request/','/api/exchange-rates/']:
-                  status,h,data=probe(p,read=True)
-                  r={'status':status,'contentType':h.get('content-type'),'headers':{k:h[k] for k in headers if k in h},'cookieCount':int('set-cookie' in h)}
-                  if p.startswith('/api/'):
+                  time.sleep(2)
+                  with tempfile.TemporaryDirectory() as tmp:
+                      hdr=tmp+'/headers'; data=tmp+'/body'
+                      cmd=['curl','--silent','--show-error','--connect-timeout','5','--max-time','10','--max-filesize','2000000','--user-agent','IsraelTravelHub-PrelaunchAudit/1.0','-D',hdr,'-o',data,'-w','%{http_code} %{ssl_verify_result}',base+path]
+                      if method=='HEAD':cmd+=['--head']
+                      if extra:cmd+=['-H',extra]
                       try:
-                          payload=json.loads(data)
-                          r['validJson']=isinstance(payload,dict)
-                          r['jsonKeys']=sorted(payload.keys()) if isinstance(payload,dict) else []
-                          if p=='/api/quote-request/':
-                              r['available']=payload.get('available') is True
-                              r['unexpectedJsonKeys']=sorted(set(payload)-{'available'})
-                              if not r['available'] or r['unexpectedJsonKeys']:findings.append({'type':'quote_api_review'})
-                          else:
-                              r['exchangeStatus']=payload.get('status') if payload.get('status') in ('fresh','cached','unavailable') else 'unexpected'
-                              if r['exchangeStatus'] not in ('fresh','cached'):findings.append({'type':'exchange_api_review'})
-                      except Exception:r['validJson']=False;findings.append({'type':'api_json_invalid','path':p})
-                      if status!=200 or 'application/json' not in (r['contentType'] or ''):findings.append({'type':'api_http_review','path':p,'status':status})
-                      if p=='/api/quote-request/' and 'no-store' not in h.get('cache-control','').lower():findings.append({'type':'quote_cache_review'})
-                  elif p.endswith('what-to-eat-in-israel/'):
-                      r['fixedKnafehAnchor']=bool(re.search(rb'href=["\x27]#knafeh["\x27]',data)) and bool(re.search(rb'id=["\x27]knafeh["\x27]',data)) and not bool(re.search(rb'href=["\x27]#kanafeh["\x27]',data))
-                      if not r['fixedKnafehAnchor']:findings.append({'type':'anchor_deployment_not_confirmed'})
-                  results[p]=r
-              # Single safe GET with a foreign Origin; no POST, email, or authentication attempt.
-              for p in ['/api/quote-request/','/api/exchange-rates/']:
-                  status,h,_=probe(p,extra={'Origin':'https://example.invalid'})
-                  results[p]['foreignOrigin']={'status':status,'allowOrigin':h.get('access-control-allow-origin'),'allowCredentials':h.get('access-control-allow-credentials')}
-                  if p=='/api/quote-request/' and h.get('access-control-allow-origin') in ('*','https://example.invalid'):findings.append({'type':'quote_cors_review'})
-              # HEAD only for private paths; never retrieve or log their contents.
+                          p=subprocess.run(cmd,capture_output=True,text=True,timeout=13)
+                          fields=p.stdout.strip().split()
+                          status=int(fields[0]) if fields and fields[0].isdigit() else None
+                          h={}
+                          if os.path.exists(hdr):
+                              for line in pathlib.Path(hdr).read_text(errors='replace').splitlines():
+                                  if ':' in line:
+                                      k,v=line.split(':',1);h[k.lower()]=v.strip()
+                          if status==429:
+                              findings.append({'type':'rate_limit','probe':key,'attempt':attempt+1});save()
+                              delay=h.get('retry-after','')
+                              if attempt==0 and (not delay.isdigit() or int(delay)<=60):
+                                  time.sleep(max(35,int(delay)) if delay.isdigit() else 35);continue
+                              raise RuntimeError('Persistent rate limit; stopped')
+                          r={'status':status,'curlExit':p.returncode,'sslVerifyResult':fields[1] if len(fields)>1 else None,'contentType':h.get('content-type'),'headers':{k:v for k,v in h.items() if k in allow}}
+                          if key=='http_redirect':r['httpsDestination']=h.get('location','').startswith(origin+'/') or h.get('location')==origin
+                          raw=pathlib.Path(data).read_bytes() if body and os.path.exists(data) and status==200 else b''
+                          if key=='food':
+                              r['fixedAnchor']=bool(re.search(rb'href=["\x27]#knafeh["\x27]',raw)) and bool(re.search(rb'id=["\x27]knafeh["\x27]',raw)) and not bool(re.search(rb'href=["\x27]#kanafeh["\x27]',raw))
+                          if key in ('quote','exchange'):
+                              try:
+                                  x=json.loads(raw)
+                                  r['jsonKeys']=sorted(x.keys())
+                                  if key=='quote':r['available']=x.get('available') is True
+                                  else:r['exchangeStatus']=x.get('status') if x.get('status') in ('fresh','cached','unavailable') else 'unexpected'
+                              except Exception:r['validJson']=False
+                          results[key]=r;save()
+                          print(key,json.dumps(r),flush=True)
+                          return
+                      except subprocess.TimeoutExpired:
+                          results[key]={'timeout':True};save();print(key,'timeout',flush=True);return
+          try:
+              probe('home','/')
+              probe('food','/travel-blog/what-to-eat-in-israel/',body=True)
+              probe('http_redirect','/',base='http://'+urlsplit(origin).hostname)
+              probe('quote','/api/quote-request/',body=True)
+              probe('exchange','/api/exchange-rates/',body=True)
+              probe('quote_cors','/api/quote-request/',extra='Origin: https://example.invalid')
+              probe('exchange_cors','/api/exchange-rates/',extra='Origin: https://example.invalid')
               for p in ['/.env','/.git/config','/.htaccess','/.user.ini','/api/_internal/','/api/','/assets/','/wp-config.php','/wp-admin/']:
-                  status,h,_=probe(p,method='HEAD')
-                  results[p]={'status':status,'contentType':h.get('content-type')}
-                  if status not in (401,403,404,405,410):findings.append({'type':'private_path_or_listing_review','path':p,'status':status})
-              for p in ['/','/travel-blog/what-to-eat-in-israel/']:
-                  h=results[p]['headers']
-                  for k in ['strict-transport-security','x-content-type-options','referrer-policy']:
-                      if k not in h:findings.append({'type':'header_missing_review','page':p,'header':k})
-                  if 'content-security-policy' not in h:findings.append({'type':'csp_missing_review','page':p})
-                  if 'x-frame-options' not in h and 'frame-ancestors' not in h.get('content-security-policy',''):findings.append({'type':'frame_policy_missing_review','page':p})
-          except RuntimeError as e:findings.append({'type':'audit_stopped','reason':str(e)})
-          out={'results':results,'findings':findings}
-          open('server-security-audit.json','w').write(json.dumps(out,indent=2))
-          print(json.dumps(out,indent=2))
+                  probe(p,p,method='HEAD')
+          except RuntimeError as e:findings.append({'type':'stopped','reason':str(e)})
+          finally:
+              save()
+              print('PUBLIC_FINAL',json.dumps({'results':results,'findings':findings}),flush=True)
           PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: server-security-audit
+          name: bounded-public-security-audit
           path: server-security-audit.json
           if-no-files-found: warn
-  repository:
+  dependency-candidate:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -121,7 +100,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 9152c174a48cab441a6c63b4f4d598a81e0d0ef8
+          ref: efce939ff7036f7998559eff8757e845a8a9e033
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -129,64 +108,41 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.4.4"
-      - run: bash scripts/install-ci-dependencies.sh
-      - name: Check locked dependencies (no upgrades)
+      - name: Prepare narrow dependency update candidate
         run: |
-          set +e
-          bun audit --json > dependency-audit.json 2> dependency-audit.stderr
-          result=$?
-          set -e
-          echo "BUN_AUDIT_EXIT=$result"
-          node - <<'NODE'
-          const fs=require('fs');
-          try {
-            const data=JSON.parse(fs.readFileSync('dependency-audit.json','utf8'));
-            console.log(JSON.stringify(data,null,2).slice(0,24000));
-          } catch {console.log('Dependency audit did not produce parseable JSON; inspect artifact.');}
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const p=JSON.parse(fs.readFileSync('package.json','utf8'));
+          p.dependencies.zod='4.6.6';
+          p.devDependencies.vitest='4.1.12';
+          p.overrides={...p.overrides,seroval:'1.6.11','seroval-plugins':'1.6.11','brace-expansion@1.1.20':'1.1.21','brace-expansion@5.0.11':'5.0.12','minimatch@10.2.6':'11.0.1'};
+          fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n');
           NODE
-      - name: Build and verify static output
+          bun install
+          git diff --stat -- package.json bun.lock
+          mkdir -p /tmp/dependency-candidate
+          cp package.json bun.lock /tmp/dependency-candidate/
+          git diff -- package.json bun.lock > /tmp/dependency-candidate/candidate.patch
+          set +e
+          bun audit --json > /tmp/dependency-candidate/dependency-audit.json 2> /tmp/dependency-candidate/dependency-audit.stderr
+          code=$?
+          set -e
+          echo "CANDIDATE_AUDIT_EXIT=$code"
+          cat /tmp/dependency-candidate/dependency-audit.json
+      - name: TypeScript compatibility
+        run: bunx --no-install tsc --noEmit
+      - name: Unit tests
+        run: bun run test
+      - name: Sanity adapter tests
+        run: node --test scripts/sanity/uber-adapter.test.mjs
+      - name: Static build and verification
         run: |
-          git rev-parse HEAD
           bash scripts/build-validated-static.sh
           node scripts/verify-hostinger-static-export.mjs
-      - name: Check tracked files and public output for potential secrets
-        run: |
-          python3 - <<'PY'
-          import pathlib, subprocess, re, json
-          tracked=subprocess.check_output(['git','ls-files','-z']).decode().split('\0')
-          sensitive=[]
-          for name in tracked:
-              p=pathlib.PurePosixPath(name)
-              if not name:continue
-              if (p.name.startswith('.env') and p.name!='.env.example') or p.suffix.lower() in ('.pem','.key','.p12','.pfx','.sql') or p.name in ('id_rsa','id_ed25519','wp-config.php','credentials.json','.dev.vars'):
-                  sensitive.append(name)
-          patterns={
-              'private_key':rb'-----BEGIN (?:RSA |EC |OPENSSH |DSA |ENCRYPTED )?PRIVATE KEY-----',
-              'brevo_key':rb'xkeysib-[A-Za-z0-9_-]{35,}',
-              'github_token':rb'(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})',
-              'aws_access_key':rb'(?:AKIA|ASIA)[A-Z0-9]{16}',
-              'sanity_token_candidate':rb'\bsk[a-zA-Z0-9]{90,}\b',
-          }
-          root=pathlib.Path('.output/public')
-          hits=[]
-          for file in root.rglob('*'):
-              if not file.is_file() or file.suffix.lower() not in ('.html','.js','.mjs','.json','.css','.map','.txt','.xml'):continue
-              if file.stat().st_size>25_000_000:continue
-              data=file.read_bytes()
-              for kind,pat in patterns.items():
-                  if re.search(pat,data):hits.append({'file':str(file.relative_to(root)),'pattern':kind})
-          maps=[str(f.relative_to(root)) for f in root.rglob('*.map')]
-          html=(root/'travel-blog/what-to-eat-in-israel/index.html').read_text()
-          out={'trackedSensitiveFilenameCandidates':sensitive,'publicOutputSecretPatternCandidates':hits,'sourceMapCount':len(maps),'fixedAnchorInBuild':bool(re.search(r'href=["\x27]#knafeh["\x27]',html)) and bool(re.search(r'id=["\x27]knafeh["\x27]',html)) and not bool(re.search(r'href=["\x27]#kanafeh["\x27]',html))}
-          pathlib.Path('repository-security-audit.json').write_text(json.dumps(out,indent=2))
-          print(json.dumps(out,indent=2))
-          PY
-      - uses: actions/upload-artifact@v4
+      - name: Save candidate files even if compatibility fails
         if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: repository-security-audit
-          path: |
-            dependency-audit.json
-            dependency-audit.stderr
-            repository-security-audit.json
+          name: dependency-update-candidate
+          path: /tmp/dependency-candidate/
           if-no-files-found: warn
