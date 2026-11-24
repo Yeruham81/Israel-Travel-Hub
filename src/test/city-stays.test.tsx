@@ -67,8 +67,8 @@ describe.each([
       expect(card.querySelector("iframe")).toBeNull();
       expect(card.querySelector("img")).toHaveClass("aspect-[16/10]", "object-cover");
       expect(card.querySelector("img")).toHaveAttribute("width", "755");
-      expect(within(card).getByRole("link", { name: `Explore ${area.name}: area guide and hotel recommendations` })).toHaveAttribute("href", area.path);
-      expect(within(card).getByRole("link", { name: `Explore ${area.name}: area guide and hotel recommendations` })).toHaveTextContent(/(?:Discover|Browse|Explore|Find)/);
+      expect(within(card).getByRole("link", { name: `Explore Area & Hotels: ${area.name}` })).toHaveAttribute("href", area.path);
+      expect(within(card).getByRole("link", { name: `Explore Area & Hotels: ${area.name}` })).toHaveTextContent(/(?:Discover|Browse|Explore|Find)/);
       expect(within(card).queryByText("Explore Area & Hotels")).toBeNull();
       expect(card.textContent).not.toMatch(/Area guide & [0-9]+ hotel picks/);
     }
@@ -163,7 +163,7 @@ describe.each([
         expect(hotel.cityId).toBe(g.id);
         const booking = linksForPage(`stay-area-${area.id}`).find((link) => link.id === `hotel-${hotel.id}-expedia`)!;
         expect(getSource(hotel.sourceId).url).toMatch(/^https:\/\//);
-        const link = screen.getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
+        const link = screen.getByRole("link", { name: g.id === "telaviv" ? `Check rooms & rates for ${hotel.name} on ${booking.providerName}` : `${booking.ctaLabel} for ${hotel.name}` });
         expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, `stay-area-${area.id}`, hotel.id));
         expect(link).toHaveAttribute("target", "_blank");
         if (booking.isAffiliate) {
@@ -326,7 +326,7 @@ describe("Five Tel Aviv neighborhood hotels and compact maps", () => {
       const offer = linksForPage(`stay-area-${hotel.areaId}`).find((item) => item.id === `hotel-${hotel.id}-expedia`)!;
       expect(offer).toBeDefined();
       expect(offer.isAffiliate).toBe(true);
-      expect(within(nearby).getByRole("link", { name: `${offer.ctaLabel} for ${hotel.name}` }))
+      expect(within(nearby).getByRole("link", { name: `Check rooms & rates for ${hotel.name} on ${offer.providerName}` }))
         .toHaveAttribute("href", hotelAffiliateUrl(offer, `stay-area-${area.id}`, hotel.id));
       expect(new Set(cards.map((card) => within(card).getByTestId("hotel-illustration").getAttribute("src"))).size).toBe(5);
       unmount();
@@ -354,7 +354,7 @@ describe("Tel Aviv direct hotel catalog", () => {
       const booking = linksForPage(`stay-area-${hotel.areaId}`).find((link) => link.id === `hotel-${hotel.id}-expedia`)!;
       expect(booking, hotel.name).toBeDefined();
       const card = cards.find((item) => item.querySelector("h3")?.textContent === hotel.name)!;
-      const link = within(card).getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
+      const link = within(card).getByRole("link", { name: `Check rooms & rates for ${hotel.name} on ${booking.providerName}` });
       expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, "stay-telaviv", hotel.id));
       expect(link).toHaveAttribute("target", "_blank");
       expect(link.getAttribute("rel")).toContain(booking.isAffiliate ? "sponsored" : "noopener");
@@ -362,7 +362,7 @@ describe("Tel Aviv direct hotel catalog", () => {
       expect(card).toBeDefined();
       expect(within(card).getByRole("heading", { name: hotel.name, level: 3 })).toBeInTheDocument();
       const area = telAvivAreaGuides.find((item) => item.id === hotel.areaId)!;
-      expect(within(card).getByRole("link", { name: `Explore ${area.shortName} area guide` })).toHaveAttribute("href", area.path);
+      expect(within(card).getByRole("link", { name: `${area.shortName} – area guide` })).toHaveAttribute("href", area.path);
       expect(within(card).getByTestId("hotel-short-description")).toHaveTextContent((hotelTileCopy[hotel.id] || { description: hotel.summary }).description);
       expect(within(card).getByTestId("hotel-best-for")).toHaveTextContent(`Best for: ${(hotelTileCopy[hotel.id] || { bestFor: hotel.bestFor }).bestFor}`);
       expect((hotelTileCopy[hotel.id]?.bestFor || hotel.bestFor).split(" ").length).toBeLessThanOrEqual(6);
@@ -436,7 +436,7 @@ describe("Tel Aviv direct hotel catalog", () => {
     const catalog = container.querySelector("#book") as HTMLElement;
     const hotel = telAvivHotelCatalog[0]!;
     const offer = linksForPage(`stay-area-${hotel.areaId}`).find((item) => item.id === `hotel-${hotel.id}-expedia`)!;
-    const target = within(catalog).getByRole("link", { name: `${offer.ctaLabel} for ${hotel.name}` });
+    const target = within(catalog).getByRole("link", { name: `Check rooms & rates for ${hotel.name} on ${offer.providerName}` });
     fireEvent.click(target);
     expect(readOutboundClicks()).toContainEqual(expect.objectContaining({ event: "outbound_click", pageId: "stay-telaviv", productId: hotel.id, offerId: offer.id }));
   });
