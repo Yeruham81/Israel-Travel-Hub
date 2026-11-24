@@ -42,6 +42,7 @@ import itineraryDeadSeaShore from "@/assets/guides/dead-sea-ein-bokek-shore.webp
 import itineraryJaffaStreets from "@/assets/tel-aviv/jaffa.webp";
 import itineraryChurchHolySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import itineraryCapernaumSynagogue from "@/assets/guides/capernaum.jpg";
+import itineraryTiberiasWaterfront from "@/assets/tiberias/waterfront.webp";
 import itineraryCaesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import itineraryAkkoPort from "@/assets/shore-excursions/akko-port.jpg";
 import itineraryAkkoAerial from "@/assets/guides/old-city-acre-aerial.webp";
@@ -234,6 +235,10 @@ export const migrationPhotos = {
     "src": image34,
     "alt": "Desert cliffs and the landscape of Ramon Crater"
   },
+  "itinerary-tiberias-hotels": {
+    src: itineraryTiberiasWaterfront,
+    alt: "Tiberias waterfront and the Sea of Galilee",
+  },
   "itinerary-7day-capernaum": {
     "src": itineraryCapernaumSynagogue,
     "alt": "Archaeological remains at Capernaum on the northern Sea of Galilee shore"
@@ -308,11 +313,11 @@ export const migrationPhotos = {
   },
   "featured-original-5day": {
     src: "/images/travel-blog/featured-itinerary-5-days.webp",
-    alt: "Five-day Israel itinerary travel scene",
+    alt: "Close-up of a camel with Jerusalem and the golden Dome of the Rock in the background",
   },
   "featured-original-7day": {
     src: "/images/travel-blog/featured-itinerary-7-days.webp",
-    alt: "Israel travel itinerary scenery",
+    alt: "Two camels facing each other beside the sea in Israel",
   },
   "featured-original-10day": {
     src: originalTenDayIbex,

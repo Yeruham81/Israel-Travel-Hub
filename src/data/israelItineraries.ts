@@ -40,6 +40,7 @@ export type ItineraryGuide = {
   relatedGuides?: { title: string; description: string; to: InternalPath; image: keyof typeof migrationPhotos }[];
   jerusalemTourOptionsDay?: number;
   activityWidgets?: { day: number; city: GetYourGuideWidgetCity }[];
+  southernRouteOverview?: { days: string; focus: string; base: string }[];
 };
 
 const L = (label: string, to: InternalPath): ItineraryLink => ({ label, to });
@@ -330,6 +331,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     route: ["Jerusalem", "Masada & Dead Sea", "Tel Aviv–Jaffa"],
     map: { center: [31.55, 35.04], bounds: [34.57, 30.97, 35.69, 32.37], points: [{ name: "Jerusalem", lat: 31.78, lon: 35.23 }, { name: "Masada", lat: 31.31, lon: 35.35 }, { name: "Ein Bokek", lat: 31.2, lon: 35.36 }, { name: "Tel Aviv–Jaffa", lat: 32.065, lon: 34.76 }] },
     daysPlan: days3,
+    reviewedAt: "2026-11-24",
     dayTipHeadings: [
       "Old City access and walking",
       "Desert-day essentials",
@@ -363,7 +365,6 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { index: 2, phrase: "rental cars in Israel", to: "/car-rental/" },
       { index: 3, phrase: "Israel transport options", to: "/travel-blog/getting-around-israel/" },
     ],
-    reviewedAt: "2026-11-13",
     overviewRows: [
       { focus: "Jerusalem Old City", travel: "Walk / short local ride", night: "Jerusalem · night 1" },
       { focus: "Masada and Ein Bokek", travel: "Tour / car / driver", night: "Jerusalem · night 2" },
@@ -404,7 +405,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     ],
     relatedGuides: [
       { title: "Jerusalem Old City", description: "Choose a practical walking route through the historic quarters.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Visiting Masada", description: "Entrances, cable car, hiking and visiting conditions.", to: "/attractions/masada/", image: "itinerary-masada-car" },
+      { title: "Where to stay in Jerusalem", description: "Choose a practical hotel base for the Old City and desert departure.", to: "/travel-blog/where-to-stay-in-jerusalem/", image: "EXISTING:jerusalem" },
       { title: "Dead Sea attractions", description: "Where to stop, float and plan a desert outing.", to: "/travel-blog/dead-sea-attractions/", image: "itinerary-dead-sea-shore" },
       { title: "Old Jaffa", description: "Historic lanes, port views and neighborhood walks.", to: "/attractions/jaffa/", image: "itinerary-jaffa-streets" },
       { title: "Getting around Israel", description: "Compare rail, buses, taxis and longer day trips.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
@@ -439,7 +440,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     route: ["Jerusalem Old City", "Masada & Dead Sea", "Jerusalem or regional excursion", "Tel Aviv–Jaffa", "Caesarea & Haifa"],
     map: { center: [31.78, 35.05], bounds: [34.57, 30.97, 35.69, 33.08], points: [{ name: "Jerusalem", lat: 31.78, lon: 35.23 }, { name: "Masada", lat: 31.31, lon: 35.35 }, { name: "Tel Aviv–Jaffa", lat: 32.065, lon: 34.76 }, { name: "Caesarea", lat: 32.5, lon: 34.89 }, { name: "Haifa", lat: 32.8, lon: 34.99 }] },
     daysPlan: days5,
-    reviewedAt: "2026-11-14",
+    reviewedAt: "2026-11-24",
     overviewRows: [
       { focus: "Old City of Jerusalem", travel: "Walk / short local ride", night: "Jerusalem · after Day 1" },
       { focus: "Masada & Ein Bokek", travel: "Tour / car / private driver", night: "Jerusalem · after Day 2" },
@@ -487,8 +488,8 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
         { heading: "Take a regional day trip", text: "Choose a dedicated tour to Bethlehem or the Jericho–Jordan Valley area, with a separate route and travel arrangements." },
       ] },
       { day: 5, options: [
-        { heading: "A full coastal day", text: "Explore Caesarea and Haifa, with time for the journey between them and the return south." },
-        { heading: "Flying home on Day 5?", text: "An early flight may leave no time for the coastal excursion. For a later flight, choose a shorter plan—perhaps Tel Aviv or Caesarea alone—and allow plenty of time for the airport journey, security and check-in." },
+        { heading: "Full coastal excursion · flight on Day 6 or later", text: "Use Day 5 for Caesarea and Haifa, allowing time for the two sites, the road between them and your return to Tel Aviv. Keep your flight for the following day." },
+        { heading: "Departing on Day 5", text: "For a morning or midday flight, go straight to Ben Gurion Airport. With a late flight, choose a short stop in Tel Aviv or Caesarea only if the journey, security and check-in allow it; skip the full Haifa and Caesarea circuit." },
       ] },
     ],
     dayInlineLinks: [
@@ -554,7 +555,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     ],
     relatedGuides: [
       { title: "Jerusalem Old City", description: "Historic quarters, gates and practical walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Masada National Park", description: "Entrances, cable car, trails and visitor conditions.", to: "/attractions/masada/", image: "itinerary-masada-car" },
+      { title: "Where to stay in Tel Aviv", description: "Compare neighbourhoods and hotels for the coastal part of the trip.", to: "/travel-blog/where-to-stay-in-tel-aviv/", image: "beaches-in-tel-aviv" },
       { title: "Dead Sea attractions", description: "Where to float and how to plan desert stops.", to: "/travel-blog/dead-sea-attractions/", image: "itinerary-dead-sea-shore" },
       { title: "Jerusalem to Bethlehem", description: "Crossing arrangements and travel options explained.", to: "/travel-blog/jerusalem-to-bethlehem/", image: "jerusalem-to-bethlehem" },
       { title: "Old Jaffa", description: "Port views, historic lanes and neighbourhood walks.", to: "/attractions/jaffa/", image: "itinerary-jaffa-streets" },
@@ -574,7 +575,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     route: ["Jerusalem Old City", "Jerusalem or regional excursion", "Masada & Dead Sea", "Nazareth & Sea of Galilee", "Capernaum & lakeside sites", "Haifa & Caesarea", "Tel Aviv–Jaffa"],
     map: { center: [32.03, 35.07], bounds: [34.52, 30.96, 35.84, 33.22], points: [{ name: "Jerusalem", lat: 31.78, lon: 35.23 }, { name: "Masada", lat: 31.31, lon: 35.35 }, { name: "Nazareth", lat: 32.7, lon: 35.3 }, { name: "Tiberias", lat: 32.79, lon: 35.54 }, { name: "Haifa", lat: 32.8, lon: 34.99 }, { name: "Caesarea", lat: 32.5, lon: 34.89 }, { name: "Tel Aviv", lat: 32.08, lon: 34.78 }] },
     daysPlan: days7,
-    reviewedAt: "2026-11-14",
+    reviewedAt: "2026-11-24",
     overviewRows: [
       { focus: "Jerusalem Old City", travel: "Walk / short local ride", night: "Jerusalem · after Day 1" },
       { focus: "Jerusalem or regional excursion", travel: "Walk / local ride or booked tour", night: "Jerusalem · after Day 2" },
@@ -641,7 +642,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       ] },
       { day: 6, options: [
         { heading: "Travelling by car or with a driver?", text: "Haifa and Caesarea can both fit on the transfer south with an early start and planned visiting times." },
-        { heading: "Using trains and buses?", text: "Choose Haifa or Caesarea for a simpler day and allow time for luggage and station-to-attraction travel." },
+        { heading: "Using trains and buses?", text: "Choose only Haifa or Caesarea as your main sightseeing stop, and decide in advance where to store or carry luggage between your Galilee hotel and Tel Aviv accommodation." },
       ] },
       { day: 7, options: [
         { heading: "A full day in Tel Aviv", text: "Enjoy Jaffa, Neve Tzedek and the promenade at an unhurried pace when flying the following day." },
@@ -721,7 +722,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     ],
     relatedGuides: [
       { title: "Jerusalem Old City", description: "Historic quarters, gates and practical walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Masada and the Dead Sea", description: "Desert sites, bathing advice and travel choices.", to: "/attractions/masada/", image: "itinerary-dead-sea-shore" },
+      { title: "Hotels in Tiberias", description: "Find a convenient base for two nights around the Sea of Galilee.", to: "/travel-blog/best-hotels-in-tiberias/", image: "itinerary-tiberias-hotels" },
       { title: "Magdala and its archaeological remains", description: "A rewarding historical stop on the Galilee shore.", to: "/attractions/magdala/", image: "magdala-archaeology" },
       { title: "Haifa city highlights", description: "Viewpoints, the Bahá’í Gardens and museums.", to: "/attractions/haifa/", image: "museums-in-haifa" },
       { title: "Getting around Israel", description: "Rail, buses and connections between major regions.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
@@ -741,7 +742,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     route: ["Jerusalem Old City", "Jerusalem or regional excursion", "Masada & Dead Sea", "Nazareth & Galilee", "Sea of Galilee sites", "Galilee nature or heritage", "Akko & Haifa", "Haifa & Caesarea", "Tel Aviv–Jaffa", "Tel Aviv / departure"],
     map: { center: [32.05, 35.05], bounds: [34.52, 30.96, 35.84, 33.22], points: [{ name: "Jerusalem", lat: 31.78, lon: 35.23 }, { name: "Masada", lat: 31.31, lon: 35.35 }, { name: "Nazareth", lat: 32.7, lon: 35.3 }, { name: "Tiberias", lat: 32.79, lon: 35.54 }, { name: "Akko", lat: 32.93, lon: 35.08 }, { name: "Haifa", lat: 32.8, lon: 34.99 }, { name: "Caesarea", lat: 32.5, lon: 34.89 }, { name: "Tel Aviv", lat: 32.08, lon: 34.78 }] },
     daysPlan: days10,
-    reviewedAt: "2026-11-14",
+    reviewedAt: "2026-11-24",
     overviewRows: [
       { focus: "Jerusalem Old City", travel: "Walk / short local rides", night: "Jerusalem · after Day 1" },
       { focus: "Jerusalem or regional excursion", travel: "Walk / local rides or booked tour", night: "Jerusalem · after Day 2" },
@@ -828,8 +829,8 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
         { heading: "Prefer heritage or a slower day?", text: "Visit Mount Tabor or spend more time beside the Sea of Galilee, without adding a border-area trip." },
       ] },
       { day: 7, options: [
-        { heading: "Stay in Haifa tonight", text: "After exploring Akko, continue to Haifa for the night. This makes tomorrow's gardens and Caesarea visit a logical southbound route." },
-        { heading: "Avoid another hotel change", text: "Continue to Tel Aviv after Akko instead. Skip Haifa on Day 8 and choose Caesarea alone or a quieter city day without backtracking north." },
+        { heading: "Four-base option: stay in Haifa", text: "After exploring Akko, stay in Haifa for the night. The next day combines a Bahá’í Gardens viewpoint and Caesarea on the way to Tel Aviv." },
+        { heading: "Three-base option: continue to Tel Aviv", text: "After Akko, continue to Tel Aviv and sleep there on Days 7–9. On Day 8 choose Caesarea alone or a quieter Tel Aviv day; the four-base option instead stays in Haifa on Day 7." },
       ] },
       { day: 8, options: [
         { heading: "Starting from Haifa?", text: "Visit one Bahá’í Gardens viewpoint, then continue south to Caesarea and Tel Aviv. Guided terrace tours require a reservation." },
@@ -885,8 +886,15 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 9, city: "telAviv" },
     ],
     jerusalemTourOptionsDay: 3,
+    southernRouteOverview: [
+      { days: "Days 1–3", focus: "Jerusalem, Masada and the Dead Sea", base: "Jerusalem" },
+      { days: "Days 4–5", focus: "Tel Aviv–Jaffa, with an optional nearby coastal visit", base: "Tel Aviv" },
+      { days: "Days 6–8", focus: "Transfer south, explore Eilat and allow a dedicated Timna Park day", base: "Eilat" },
+      { days: "Day 9", focus: "Return to central Israel; allow a full transfer day", base: "Tel Aviv or near Ben Gurion Airport" },
+      { days: "Day 10", focus: "Airport departure or a short local visit if flying later", base: "Departure" },
+    ],
     alternatives: [
-      { title: "Prefer Eilat and Timna? Choose a southern 10-day route", text: "Do not add Eilat onto this Galilee itinerary. Instead spend Days 1–3 in Jerusalem and at the Dead Sea, Days 4–5 in Tel Aviv or on a short coastal trip, Days 6–8 based in Eilat (including a dedicated Timna Park day), and Day 9 returning to central Israel ahead of your Day 10 departure. Allow a full travel day for each long transfer and verify operating routes and hotel nights.", to: "/attractions/eilat/", label: "Eilat travel guide" },
+      { title: "Prefer Eilat and Timna? Choose a southern 10-day route", text: "This is a separate 10-day route replacing the northern Galilee and Haifa programme. Allow a full transfer day to Eilat and another for the return; choose your hotel bases and transport before booking.", to: "/attractions/eilat/", label: "Eilat attractions and visitor information" },
       { title: "Prefer the Negev and Ramon Crater?", text: "Replace several Galilee and coastal days with a planned overnight in Mitzpe Ramon and a separate desert sightseeing day. This is a different route with different transport and hotel needs, not a quick detour between Jerusalem and Tel Aviv.", to: "/attractions/mitzpe-ramon-crater/", label: "Ramon Crater guide" },
     ],
     logistics: [
@@ -927,7 +935,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     ],
     relatedGuides: [
       { title: "Jerusalem Old City", description: "Gates, historic quarters and walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Masada and the Dead Sea", description: "Desert sites, bathing precautions and access.", to: "/attractions/masada/", image: "itinerary-dead-sea-shore" },
+      { title: "Hotels in Tiberias", description: "Choose a Galilee base for the longer northern stay.", to: "/travel-blog/best-hotels-in-tiberias/", image: "itinerary-tiberias-hotels" },
       { title: "Sea of Galilee", description: "Lakeside stops and heritage-site connections.", to: "/attractions/sea-of-galilee/", image: "magdala-archaeology" },
       { title: "Akko Old City", description: "Crusader halls, markets and harbour heritage.", to: "/attractions/akko-acre/", image: "itinerary-10day-akko-aerial" },
       { title: "Haifa", description: "Bahá’í Gardens viewpoints and coastal sights.", to: "/attractions/haifa/", image: "EXISTING:haifa" },

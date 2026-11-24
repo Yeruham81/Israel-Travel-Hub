@@ -80,8 +80,9 @@ describe("editorial six-card grid responsive parity", () => {
     expect(category).toContain('localCards.length === 6 ? "mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3"');
     expect(category).toContain('jerusalemTourPlanningCards.length === 6 ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3"');
     const itinerary = read("src/components/IsraelItineraryPage.tsx");
-    expect(itinerary).toContain('g.relatedGuides.length === 6 ? "mt-5 grid grid-cols-2 gap-3 lg:grid-cols-3"');
-    expect(itinerary).toContain("grid-cols-1 items-start gap-3");
+    expect(itinerary).toContain('className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-3"');
+    expect(itinerary).toContain("group flex h-full flex-col");
+    expect(itinerary).toContain("group-hover:scale-[1.04]");
     const hub = read("src/routes/attractions.index.tsx");
     expect(hub).toContain('className="mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-4 lg:grid-cols-3"');
     expect(hub).not.toContain('region.cards.length === 6 ?');
