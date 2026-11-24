@@ -581,7 +581,7 @@ export const toursHubGuides = [
   { ...reading.galilee, photo: { src: "/images/attractions/sea-of-galilee.webp", alt: "View of the Sea of Galilee" } },
 ];
 export const toursHubTitle = "Tours & day trips in Israel";
-export const toursHubDescription = "Explore Israel tours by destination and interest: Jerusalem, Tel Aviv, Masada, Galilee, food tours and Eilat. Find guided day trips, private experiences, food walks and Red Sea activities.";
+export const toursHubDescription = "Compare Israel tours and day trips in Jerusalem, Tel Aviv, the Galilee, Masada and Eilat, including guided excursions, private tours and food walks.";
 export const toursHubFaqs = [
   { q: "What's the difference between a guided tour and a private driver?", a: "A guided tour includes guiding only where it is explicitly listed. My private driver service provides transportation and agreed stops; licensed guiding is a separate service to arrange if needed." },
   { q: "Where do tours start, and is hotel pickup included?", a: "Departure locations vary by tour and operator. Some experiences offer hotel pickup, while others start at a designated meeting point. Always check the departure city, meeting place and pickup inclusions before booking." },
