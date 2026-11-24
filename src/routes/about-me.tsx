@@ -2,7 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { Clock3, HeartHandshake, MapPinned } from "lucide-react";
 import portrait from "@/assets/airport-transfers/moshe.webp";
 import clientCollage from "@/assets/about/moshe-barak-with-clients.webp";
-import { pageMeta } from "@/lib/site";
+import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { privateDriverHero } from "@/data/privateDriver";
@@ -17,8 +17,24 @@ export const Route = createFileRoute("/about-me")({
       title: "About Moshe Barak | Private Driver & Airport Transfers in Israel",
       description: "Get to know Moshe Barak: more than 20 years helping travelers explore Israel, personal service, local knowledge and first-hand reviews from my clients.",
       path: "/about-me/",
+      crumbs: [{ name: "Home", path: "/" }, { name: "About me", path: "/about-me/" }],
     });
-    return { ...meta, scripts: [...meta.scripts, { type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", ...authorLd() }).replaceAll("<", "\\u003c") }] };
+    const person = authorLd();
+    return { ...meta, scripts: [...meta.scripts, jsonLd({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "AboutPage",
+          "@id": CANONICAL_ORIGIN + "/about-me/#webpage",
+          url: CANONICAL_ORIGIN + "/about-me/",
+          name: "About Moshe Barak",
+          inLanguage: "en",
+          isPartOf: { "@id": CANONICAL_ORIGIN + "/#website" },
+          mainEntity: { "@id": person["@id"] },
+        },
+        { ...person, image: new URL(portrait, CANONICAL_ORIGIN).href },
+      ],
+    })] };
   },
   component: MosheAbout,
 });

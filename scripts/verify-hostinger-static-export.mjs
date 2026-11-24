@@ -505,6 +505,40 @@ console.log("Wide editorial card layout verified in static export: " + verifiedH
 const privateApi = join(root, "api");
 // Never deploy compiled API: Hostinger's manually configured PHP endpoints
 // are excluded by rsync, and server-side Vite JS cannot run as static files.
+// Verify the actual JSON-LD emitted for both the homepage and the author page.
+function structuredNodes(route) {
+  const rel = route === "/" ? "index.html" : route.slice(1) + "index.html";
+  const html = readFileSync(join(root, rel), "utf8");
+  return [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
+    .flatMap((m) => {
+      const value = JSON.parse(m[1]);
+      return Array.isArray(value["@graph"]) ? value["@graph"] : [value];
+    });
+}
+const homeSchema = structuredNodes("/");
+const aboutSchema = structuredNodes("/about-me/");
+const findSchema = (nodes, type) => {
+  const found = nodes.filter((node) => node["@type"] === type);
+  assert.equal(found.length, 1, "Expected exactly one " + type + " schema node");
+  return found[0];
+};
+const website = findSchema(homeSchema, "WebSite");
+const organization = findSchema(homeSchema, "Organization");
+const about = findSchema(aboutSchema, "AboutPage");
+const person = findSchema(aboutSchema, "Person");
+const crumbs = findSchema(aboutSchema, "BreadcrumbList");
+assert.equal(website.url, origin + "/");
+assert.equal(organization.url, origin + "/");
+assert.equal(website.publisher["@id"], organization["@id"]);
+assert.equal(about.url, origin + "/about-me/");
+assert.equal(about.isPartOf["@id"], website["@id"]);
+assert.equal(about.mainEntity["@id"], person["@id"]);
+assert.equal(findSchema(homeSchema, "Person")["@id"], person["@id"]);
+assert.equal(person["@id"], origin + "/about-me/#moshe-barak");
+assert.equal(new URL(person.image).origin, origin);
+assert.deepEqual(crumbs.itemListElement.map((item) => item.item), [origin + "/", origin + "/about-me/"]);
+console.log("Homepage and AboutPage structured data verified.");
+
 verifyEditorialCardHeroes({ root, paths });
 auditSiteMeta({ root, paths });
 console.log(`Hostinger prerender verified: ${paths.size}/${paths.size} sitemap pages.`);

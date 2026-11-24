@@ -39,7 +39,8 @@ import masadaTile from "@/assets/home/masada-dead-sea-tile.webp";
 import caesareaTile from "@/assets/home/caesarea-aqueduct-tile.webp";
 import haifaTile from "@/assets/haifa/panorama-tile.webp";
 import deadSeaTile from "@/assets/dead-sea/beach-tile.webp";
-import { pageMeta } from "@/lib/site";
+import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
+import { authorLd } from "@/lib/author";
 import { tourCategoryPaths } from "@/data/tours";
 import bethlehemTourPhoto from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";
 import bethlehemTourPhotoMobile from "@/assets/guides/2026-10/jerusalem-to-bethlehem-mobile.webp";
@@ -68,6 +69,27 @@ export const Route = createFileRoute("/")({
     // the browser fetches ONE asset at the viewport's appropriate size.
     return {
       ...meta,
+      scripts: [...meta.scripts, jsonLd({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": CANONICAL_ORIGIN + "/#website",
+            url: CANONICAL_ORIGIN + "/",
+            name: SITE_NAME,
+            inLanguage: "en",
+            publisher: { "@id": CANONICAL_ORIGIN + "/#organization" },
+          },
+          {
+            "@type": "Organization",
+            "@id": CANONICAL_ORIGIN + "/#organization",
+            name: SITE_NAME,
+            url: CANONICAL_ORIGIN + "/",
+            description: "Private airport transfers, travel planning and practical Israel travel guides.",
+          },
+          authorLd(),
+        ],
+      })],
       links: [
         ...meta.links,
         { rel: "preload", as: "image", type: "image/webp", href: lcpHeroMobile, media: "(max-width: 767px)", fetchPriority: "high" },
