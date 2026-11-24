@@ -265,7 +265,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                 {additionalDayLinks.length > 0 && <nav aria-label={`Additional guides for day ${index + 1}`} className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-2 text-sm">
                   <span className="text-muted-foreground">Further planning:</span>
                   {additionalDayLinks.map(link => <Link key={link.label} to={link.to} className="font-semibold text-primary underline underline-offset-2">{link.label}</Link>)}
-                </nav>
+                </nav>}
               </div>
               <figure className="order-first self-start lg:order-last"><img src={image.src} alt={image.alt} width={500} height={375}
                 loading="lazy" decoding="async" className="aspect-[16/9] w-full rounded-xl object-cover sm:aspect-[4/3]" />
