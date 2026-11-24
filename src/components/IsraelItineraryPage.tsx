@@ -345,7 +345,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     <FaqList faqs={g.faqs} />
     {g.relatedGuides?.length ? <section id="related-guides" aria-labelledby="related-guides-h" className="mt-14 scroll-mt-28">
       <h2 id="related-guides-h" className="text-3xl">Related practical guides</h2>
-      <div className={"mt-5 grid grid-cols-2 gap-3 lg:grid-cols-3"}>
+      <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-3">
         {g.relatedGuides.map((item) => {
           const picture = guideHeroPhotoForPath(String(item.to)) ?? migrationPhotos[item.image];
           return <article key={item.to} className="editorial-card-link min-w-0 overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:bg-secondary/30 hover:shadow-md">
