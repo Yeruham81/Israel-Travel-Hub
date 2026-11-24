@@ -42,4 +42,4 @@ export const shabbatAirportTaxiFareTable = {
     route.label, route.daytimeB.range, route.eveningC.range, route.drive,
   ]),
   note: "Indicative 2026 meter estimates calculated with Saturday Tariff B (06:00–19:00) and Tariff C (19:00–06:00), route-specific distances and driving times. Friday tariff periods differ: B from 16:00 and C from 21:00. All estimates include 18% VAT and the ₪5 airport departure supplement, but exclude tolls, optional dispatch additions and unexpected traffic. Actual meter fares vary by address, journey and pickup time; these are planning ranges rather than fixed offers.",
-} as const;
+};
