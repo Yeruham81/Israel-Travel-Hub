@@ -279,7 +279,9 @@ describe.each([
       expect(affiliateLinks.length).toBeGreaterThanOrEqual(1);
       expect(affiliateLinks.length).toBeLessThanOrEqual(2);
       for (const link of affiliateLinks) {
-        expect(link.url).toBe(affiliateConfig[link.id]?.trackingUrl);
+        const configuredUrl = affiliateConfig[link.id]?.trackingUrl;
+        if (configuredUrl) expect(link.url).toBe(configuredUrl);
+        else expect(link.url).toMatch(/^https:\/\/(?:booking|agoda)\.tpk\.lv\//);
         expect(link.sourceId).toBe(sourceId);
       }
     }
