@@ -1,4 +1,4 @@
-name: Stage 4 follow-up - exact Booking link and widget audit
+name: Stage 4 - verify corrected Tel Aviv hotel link
 on:
   pull_request:
     branches: [main]
@@ -6,189 +6,62 @@ on:
 permissions:
   contents: read
 jobs:
-  generate-booking:
-    if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124' && github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-      - name: Generate exact Tel Aviv Booking city affiliate link
-        env:
-          TRAVELPAYOUTS_API_TOKEN: ${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
-        run: |
-          node --input-type=module <<'JS'
-          const url="https://www.booking.com/city/il/tel-aviv.html", sub_id="itt_stay_telaviv_hotels_telaviv_booking";
-          const token=process.env.TRAVELPAYOUTS_API_TOKEN;
-          if(!token)throw Error("Travelpayouts token is not configured");
-          const response=await fetch("https://api.travelpayouts.com/links/v1/create",{
-            method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json","X-Access-Token":token},
-            body:JSON.stringify({trs:406243,marker:622032,shorten:true,links:[{url,sub_id}]}),
-            redirect:"error",signal:AbortSignal.timeout(25000)
-          });
-          if(!response.ok)throw Error("Travelpayouts HTTP "+response.status);
-          const data=await response.json(),record=data?.result?.links?.find(x=>x.url===url);
-          if(data?.code!=="success"||record?.code!=="success"||typeof record.partner_url!=="string")throw Error("Exact city conversion unavailable");
-          const link=new URL(record.partner_url);
-          if(link.protocol!=="https:"||link.username||link.password||!["booking.tpk.lv","booking.tpm.li","tp.st","tp.media"].includes(link.hostname))throw Error("Unexpected affiliate domain");
-          const result={destination:url,sub_id,affiliate_url:link.href,trs:406243,marker:622032};
-          console.log("BOOKING_LINK",JSON.stringify(result));
-          const fs=await import("node:fs");fs.writeFileSync("booking-link.json",JSON.stringify(result,null,2));
-          JS
-      - uses: actions/upload-artifact@v4
-        if: success()
-        with:
-          name: tel-aviv-booking-link
-          path: booking-link.json
-  sample-redirects:
-    if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 6
-    steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-      - name: Verify small sample of provider destinations without booking
-        run: |
-          node --input-type=module <<'JS'
-          import fs from "node:fs";
-          const sample=[
-            {provider:"Booking.com",url:"https://booking.tpk.lv/tsl5okP9",host:"booking.com",match:/tiberias/i},
-            {provider:"Expedia",url:"https://expedia.tpk.lv/wdsf1D6t",host:"expedia.com",match:/paamonim/i},
-            {provider:"Viator",url:"https://viator.tpk.lv/frgpZFls",host:"viator.com",match:/6540P87/i},
-            {provider:"GetYourGuide",url:"https://getyourguide.tpm.li/59K2jHBH",host:"getyourguide.com",match:/203290/i},
-            {provider:"DiscoverCars",url:"https://discovercars.tpm.li/w2RwEsmb",host:"discovercars.com",match:/\/israel(?:\/|$)/i}
-          ];
-          const results=[];
-          for(const item of sample){
-            let current=item.url,hops=[],status="unconfirmed";
-            for(let i=0;i<8;i++){
-              const u=new URL(current);
-              if(u.protocol!=="https:"||u.username||u.password){status="unexpected_redirect";break;}
-              if(u.hostname===item.host||u.hostname.endsWith("."+item.host)){
-                status=item.match.test(decodeURIComponent(u.pathname))?"destination_confirmed":"provider_reached_review_path";
-                hops.push({host:u.hostname,path:u.pathname});break;
-              }
-              try{
-                const res=await fetch(current,{redirect:"manual",headers:{"User-Agent":"Mozilla/5.0 (compatible; IsraelTravelHubQA/1.0)","Accept":"text/html"},signal:AbortSignal.timeout(12000)});
-                const loc=res.headers.get("location");hops.push({host:u.hostname,status:res.status});
-                await res.body?.cancel();
-                if(res.status>=300&&res.status<400&&loc){current=new URL(loc,u).href;continue;}
-                status=[403,429].includes(res.status)?"provider_blocked":"no_http_redirect";break;
-              }catch(e){status="network_error";break;}
-            }
-            const result={provider:item.provider,status,hops};results.push(result);
-            console.log("REDIRECT_SAMPLE",JSON.stringify(result));
-            await new Promise(r=>setTimeout(r,2000));
-          }
-          fs.writeFileSync("redirect-sample.json",JSON.stringify(results,null,2));
-          JS
-      - uses: actions/upload-artifact@v4
-        with:
-          name: redirect-sample
-          path: redirect-sample.json
-  widgets:
+  verify:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
       VITE_INDEXABLE: "false"
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: d76feae120641e8de775557a7ee80e5ba95e52db
+          ref: a54457eaa109e1195d8a12417027f12b11ace05d
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
+      - name: Confirm exact newly generated destination with one clickout
+        run: |
+          node --input-type=module <<'JS'
+          let current="https://booking.tpk.lv/uFvoGvgK";
+          for(let i=0;i<6;i++){
+            const u=new URL(current);
+            if(u.protocol!=="https:"||u.username||u.password)throw Error("Unexpected redirect protocol");
+            if(u.hostname==="booking.com"||u.hostname.endsWith(".booking.com")){
+              if(u.pathname!=="/city/il/tel-aviv.html")throw Error("Wrong destination: "+u.pathname);
+              console.log("BOOKING_REDIRECT_VERIFIED",u.origin+u.pathname);process.exit(0);
+            }
+            const response=await fetch(current,{redirect:"manual",headers:{"User-Agent":"Mozilla/5.0 (compatible; IsraelTravelHubQA/1.0)"},signal:AbortSignal.timeout(12000)});
+            const location=response.headers.get("location");
+            await response.body?.cancel();
+            if(response.status<300||response.status>=400||!location)throw Error("Redirect unconfirmed: HTTP "+response.status);
+            current=new URL(location,u).href;
+          }
+          throw Error("Redirect chain limit");
+          JS
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.4.4"
       - run: bash scripts/install-ci-dependencies.sh
-      - run: |
-          npm install --prefix /tmp/widget-audit --no-save playwright@1.56.1
-          /tmp/widget-audit/node_modules/.bin/playwright install --with-deps chromium
-      - run: |
-          node scripts/generate-sitemap.mjs --mode development
-          nohup ./node_modules/.bin/vite dev --host 127.0.0.1 --port 4173 >/tmp/widget-vite.log 2>&1 &
-          for i in $(seq 1 60); do
-            if curl -fsS --max-time 4 http://127.0.0.1:4173/accommodation/ >/dev/null; then exit 0; fi
-            sleep 2
-          done
-          tail -80 /tmp/widget-vite.log
-          exit 1
-      - name: Verify Agoda and all nine itinerary widgets on desktop and mobile
-        env:
-          NODE_PATH: /tmp/widget-audit/node_modules
+      - name: Regression test exact supplier mapping
+        run: bunx --no-install vitest run src/test/seven-travelpayouts-links.test.tsx
+      - run: bash scripts/build-validated-static.sh
+      - name: Check rendered button and preserved sponsored attributes
         run: |
-          cat > .widget-audit.cjs <<'JS'
-          const {chromium}=require("playwright");
-          const assert=require("node:assert/strict");
-          const fs=require("node:fs");
-          const origin="http://127.0.0.1:4173",results=[];
-          const pages=[{path:"/accommodation/",widgets:[{selector:'[data-testid="agoda-hotel-search-widget"]',campaign:"104",promo:"8303",marker:"622032.accommodation_hub_widget"}]},
-            ...[[3,["jerusalem","telAviv"]],[5,["jerusalem","telAviv"]],[7,["jerusalem","telAviv"]],[10,["jerusalem","haifa","telAviv"]]].map(([days,cities])=>({path:"/travel-blog/israel-itinerary-"+days+"-days/",widgets:cities.map(city=>({selector:'[data-testid="gyg-city-widget-'+city+'"]',campaign:"108",promo:"4040",marker:"622032."+days+"_day",iata:{jerusalem:"JRS",telAviv:"TLV",haifa:"HFA"}[city]}))}))];
-          (async()=>{
-            const browser=await chromium.launch();
-            try{
-              for(const viewport of [{width:1365,height:900},{width:390,height:844}]){
-                for(const spec of pages){
-                  const ctx=await browser.newContext({viewport});
-                  const requests=[];
-                  await ctx.route("**/*",async route=>{
-                    const u=new URL(route.request().url());
-                    if(u.origin===origin||!/^https?:$/.test(u.protocol))return route.continue();
-                    requests.push(u.href);
-                    return route.fulfill({status:200,contentType:u.hostname==="tpwgt.com"?"application/javascript":"text/plain",body:u.hostname==="tpwgt.com"?'document.body.insertAdjacentHTML("beforeend","<p style=\\"height:280px\\">Mock widget ready</p>");':""});
-                  });
-                  const page=await ctx.newPage();
-                  const settle=()=>page.waitForTimeout(650);
-                  const settings=async()=>{await page.locator("footer").getByRole("button",{name:"Cookie settings",exact:true}).click();await page.getByRole("dialog",{name:"Cookie preferences"}).waitFor();};
-                  const necessary=async()=>{await page.getByRole("button",{name:"Accept necessary",exact:true}).click();await settle();};
-                  const activate=async()=>{for(const w of spec.widgets){const container=page.locator(w.selector);await container.scrollIntoViewIfNeeded();const disclosure=container.locator("summary");if(await disclosure.count()&&!(await container.getAttribute("open")!==null))await disclosure.click();await settle();}};
-                  const marketingRequests=()=>requests.filter(s=>new URL(s).hostname==="tpwgt.com");
-                  try{
-                    await page.goto(origin+spec.path,{waitUntil:"networkidle"});
-                    await page.getByRole("dialog",{name:"Cookie preferences"}).waitFor();
-                    assert.equal(marketingRequests().length,0,"Before consent");
-                    await necessary();await activate();
-                    assert.equal(marketingRequests().length,0,"Necessary only");
-                    assert.equal(await page.locator('iframe[srcdoc]').count(),0);
-                    await settings();await page.getByRole("button",{name:"Customize"}).click();
-                    const boxes=page.getByRole("dialog").getByRole("checkbox");
-                    await boxes.nth(1).check();await page.getByRole("button",{name:"Save preferences"}).click();await activate();
-                    assert.equal(marketingRequests().length,0,"External maps consent cannot load commercial widgets");
-                    await settings();await page.getByRole("button",{name:"Customize"}).click();
-                    await boxes.nth(1).uncheck();await boxes.nth(2).check();await page.getByRole("button",{name:"Save preferences"}).click();
-                    for(const w of spec.widgets){
-                      const frame=page.locator(w.selector).locator("iframe[srcdoc]");
-                      await frame.scrollIntoViewIfNeeded();await frame.waitFor();
-                      await page.waitForFunction(({campaign,promo,marker,iata,selector})=>{
-                        const f=document.querySelector(selector+" iframe[srcdoc]");
-                        if(!f)return false;
-                        return f.getAttribute("height")!=="320"&&f.contentDocument?.body?.textContent?.includes("Mock widget ready");
-                      },w);
-                      const match=marketingRequests().map(s=>new URL(s)).some(u=>u.searchParams.get("campaign_id")===w.campaign&&u.searchParams.get("promo_id")===w.promo&&u.searchParams.get("trs")==="406243"&&u.searchParams.get("shmarker")===w.marker&&(!w.iata||u.searchParams.get("iata")===w.iata));
-                      assert(match,"Correct provider attribution "+JSON.stringify(w));
-                    }
-                    assert.equal(await page.locator('script[src*="tpwgt.com"]').count(),0);
-                    await settings();await necessary();
-                    assert.equal(await page.locator('iframe[srcdoc]').count(),0,"Consent withdrawal removes frames");
-                    const result={path:spec.path,viewport:viewport.width,widgets:spec.widgets.length,status:"passed"};results.push(result);console.log("WIDGET_RESULT",JSON.stringify(result));
-                  }catch(e){const result={path:spec.path,viewport:viewport.width,status:"failed",error:String(e)};results.push(result);console.log("WIDGET_RESULT",JSON.stringify(result));}
-                  finally{await ctx.close();}
-                }
-              }
-            }finally{await browser.close();fs.writeFileSync("widget-audit.json",JSON.stringify(results,null,2));}
-            if(results.some(x=>x.status!=="passed"))process.exitCode=1;
-          })().catch(e=>{console.error(e);process.exitCode=1});
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import assert from "node:assert/strict";
+          import {JSDOM} from "jsdom";
+          const dom=new JSDOM(fs.readFileSync(".output/public/accommodation/tel-aviv/index.html","utf8"));
+          const d=dom.window.document;
+          const links=[...d.querySelectorAll("a[href]")].filter(a=>a.textContent.includes("Browse more on Booking.com"));
+          assert.equal(links.length,1);
+          const link=links[0];assert.equal(link.getAttribute("href"),"https://booking.tpk.lv/uFvoGvgK");
+          assert(link.rel.split(/\s+/).includes("sponsored"));
+          assert.equal(link.target,"_blank");
+          console.log("BOOKING_CTA_VERIFIED",JSON.stringify({href:link.getAttribute("href"),rel:link.rel,target:link.target}));
+          dom.window.close();
           JS
-          node .widget-audit.cjs
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: widget-audit
-          path: widget-audit.json
-          if-no-files-found: warn
