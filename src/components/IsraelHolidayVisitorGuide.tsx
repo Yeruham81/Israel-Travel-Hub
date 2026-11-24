@@ -13,7 +13,7 @@ import { holidayGuideGroups, holidayGuideSources, holidayImpactLevels, schoolCal
 
 export const HOLIDAY_GUIDE_PATH = "/travel-blog/calendar-of-events/";
 export const HOLIDAY_GUIDE_TITLE = "Israel's Calendar of events: A practical guide for visitors";
-export const HOLIDAY_GUIDE_DESCRIPTION = "Plan your visit around Israel's calendar of events: Shabbat, religious holidays, national remembrance days, school breaks and local celebrations that can affect transport, opening hours and crowds.";
+export const HOLIDAY_GUIDE_DESCRIPTION = "Plan your trip around Shabbat, religious holidays, national events and school breaks in Israel, with practical transport, opening-hour and crowd advice.";
 export const HOLIDAY_GUIDE_UPDATED = "2026-11-22";
 export const HOLIDAY_GUIDE_PHOTO = {src:"/images/holiday-guide/israel-calendar-of-events.webp",alt:"Close-up of a wall calendar with highlighted dates"};
 
