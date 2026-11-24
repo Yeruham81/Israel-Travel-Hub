@@ -261,7 +261,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     answer: "Regular Nesher sherut rides to Jerusalem and Amal shared taxis to Haifa no longer operate from Ben Gurion Airport. Today, choose a train, suitable bus, licensed airport taxi or confirmed private transfer. Local sherut minibuses still operate on some routes elsewhere in Israel; commercial shared shuttles are booked separately.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-24",
-    photo: { src: sherutNesherCardPhoto, alt: "Former Nesher shared airport shuttle van in Israel" },
+    photo: { src: sherutNesherCardPhoto, alt: "Former Nesher yellow-and-white shared shuttle van at Ben Gurion Airport" },
     facts: [
       { label: "Nesher & Amal airport sherut", text: "Former scheduled shared rides to Jerusalem and Haifa — ended" },
       { label: "Local sherut minibuses", text: "Route-based shared taxis remain on some routes outside the airport" },
@@ -295,12 +295,6 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "At a safe, permitted place along the route, signal to a driver to stop and tell them where you would like to get off. The driver follows the designated route, and pickup or drop-off arrangements vary. Ask about the fare and whether to pay cash or another way before boarding.",
           "Local sherut services remain in selected areas, including parts of Tel Aviv, but a listed route is not a promise of a departure at your chosen time. Space for large suitcases, prams and other equipment can be limited. For wider city and intercity transport choices, see my getting around Israel guide and getting around Tel Aviv guide.",
         ],
-        photo: {
-          src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Sherut.JPG/800px-Sherut.JPG",
-          alt: "Yellow shared sherut minibuses on a street in Tel Aviv",
-          credit: "Leineabstiegsschleuse · Wikimedia Commons · public domain",
-          sourceUrl: "https://commons.wikimedia.org/wiki/File:Sherut.JPG",
-        },
         inlineLinks: [
           { text: "getting around Israel guide", to: travelGuidePaths.israel },
           { text: "getting around Tel Aviv guide", to: travelGuidePaths.telAviv },
