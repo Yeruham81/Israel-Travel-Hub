@@ -134,7 +134,7 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
               onClick={() => go(i)}
               aria-label={`Show ${s.caption}`}
               aria-current={i === index}
-              className="grid h-7 w-5 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-white"
+              className="grid h-7 w-7 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-white"
             >
               <span aria-hidden className={`block h-1.5 rounded-full bg-white/80 transition-all duration-200 md:h-2 ${i === index ? "w-3 opacity-90" : "w-1.5 opacity-45 md:w-2"}`} />
             </button>
