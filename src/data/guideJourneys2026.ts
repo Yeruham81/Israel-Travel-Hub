@@ -576,7 +576,7 @@ export const journeyDestinationGuides = {
     id: "topTen",
     updatedAt: "2026-11-20",
     title: "Top 10 Things to Do in Israel",
-    description: "Explore my ten favourite Israel experiences, from Jerusalem and Tel Aviv to Masada, the Dead Sea, the Galilee, Haifa, Eilat and stargazing at Ramon Crater. Compare, map and plan your visit.",
+    description: "Discover my top ten experiences in Israel: Jerusalem, Tel Aviv, Masada, the Dead Sea, Galilee, Haifa, Eilat and Ramon Crater, with maps and planning tips.",
     intro: "From Jerusalem's Old City to Tel Aviv's coast, the Dead Sea and desert stars, these ten experiences are a starting point for planning your own Israel trip.",
     answer: "I recommend combining Jerusalem, time on the Mediterranean coast and one regional excursion for a first visit. With more time, add the Galilee or a southern journey to the Negev and Eilat.",
     topics: ["attractions", "destinations", "itineraries", "tips"],
