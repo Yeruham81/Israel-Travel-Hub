@@ -111,7 +111,11 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(within(oldCityGuideCard).getByRole("img").getAttribute("src")).toBe(oldCityJerusalemSite.hero.src);
     expect(within(related).getAllByRole("img").map(img => img.getAttribute("src")).join(" ")).not.toContain("old-city-BJwjTGND");
     expect(new Set(within(related).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
-    expect(within(screen.getByTestId("bethlehem-next-steps")).getAllByRole("link")).toHaveLength(4);
+    const nextBethlehem = screen.getByTestId("bethlehem-next-steps");
+    expect(within(nextBethlehem).getAllByRole("link")).toHaveLength(6);
+    expect(nextBethlehem.querySelectorAll("li svg")).toHaveLength(6);
+    expect(within(related).getByRole("link", { name: /Christian Tours in Israel/i })).toHaveAttribute("href", "/travel-blog/christian-tours-in-israel/");
+    expect(within(related).queryByRole("link", { name: /Masada National Park/i })).not.toBeInTheDocument();
     const faq = container.querySelector("#faq")!;
     const contact = container.querySelector("#contact")!;
     const sources = container.querySelector("#sources")!;
@@ -211,7 +215,9 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const relatedGuides = screen.getByTestId("deadsea-related-guides");
     expect(relatedGuides.children).toHaveLength(6);
     expect(within(relatedGuides).getAllByRole("img")).toHaveLength(6);
-    expect(within(relatedGuides).getByRole("img", { name: /Waterfall tumbling through green vegetation and rocky cliffs in Ein Gedi Nature Reserve/ })).toBeInTheDocument();
+    expect(within(relatedGuides).getByRole("link", { name: /Getting around Israel/i })).toHaveAttribute("href", "/travel-blog/getting-around-israel/");
+    expect(within(relatedGuides).getByRole("link", { name: /Best time to visit Israel/i })).toHaveAttribute("href", "/travel-blog/best-time-to-visit-israel/");
+    expect(within(relatedGuides).queryByRole("link", { name: /Ein Gedi Nature Reserve/i })).not.toBeInTheDocument();
     expect(new Set(within(relatedGuides).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
     const nextSteps = screen.getByTestId("deadsea-next-steps");
     expect(within(nextSteps).getAllByRole("link")).toHaveLength(6);
@@ -263,7 +269,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
   it("retains original SEO URLs, updated metadata and real source references", async () => {
     for (const [id, route] of [["bethlehem", BethlehemRoute], ["jerusalemDeadSea", DeadSeaRoute]] as const) {
       const guide = travelGuides[id];
-      expect(guide.updatedAt).toBe(id === "jerusalemDeadSea" ? "2026-11-24" : "2026-11-13");
+      expect(guide.updatedAt).toBe("2026-11-24");
       if (id === "jerusalemDeadSea") {
         expect(guide.faqs).toHaveLength(5);
         expect(guide.faqs.some(faq => faq.q === "Is the public beach at Ein Bokek wheelchair-accessible?")).toBe(true);
