@@ -1137,12 +1137,72 @@ describe("migrated practical guides", () => {
     }
   });
 
+  it("keeps the Jerusalem to Dead Sea guide practical, internally linked and quote-driven without a published private price", async () => {
+    const guide = travelGuides.jerusalemDeadSea;
+    expect(guide.updatedAt).toBe("2026-11-24");
+    expect(guide.title).toBe("How to Get from Jerusalem to the Dead Sea: Bus, Taxi, Tours & Car");
+    expect(guide.comparison.headers).toEqual(["Transport", "Best for", "Journey time or fare", "Booking and planning"]);
+    expect(guide.comparison.rows).toHaveLength(4);
+    expect(guide.sections.map(section => section.id)).toEqual([
+      "destinations", "bus", "private", "tours", "driving", "beach",
+    ]);
+    const destinations = guide.sections[0]!;
+    expect(destinations.tables?.[0]?.rows).toHaveLength(5);
+    expect(destinations.tables?.[0]?.rowLinks).toHaveLength(5);
+    expect(destinations.tables?.[0]?.rows.map(row => row[0])).toEqual([
+      "Kalia / northern shore", "Qumran", "Ein Gedi Nature Reserve", "Masada — east entrance", "Ein Bokek Central Beach",
+    ]);
+    const privateSection = guide.sections.find(section => section.id === "private")!;
+    expect(privateSection.paragraphs.join(" ")).toMatch(/contact form.*personally with a quote/s);
+    expect(JSON.stringify(privateSection)).not.toMatch(/2,100|2100|₪\s*2[,.]?100/);
+    const bus = guide.sections.find(section => section.id === "bus")!;
+    expect(bus.externalLinks?.some(link => link.href.includes("tickets-information"))).toBe(true);
+    const driving = guide.sections.find(section => section.id === "driving")!;
+    expect(driving.photo?.src).toContain("dead-sea-route-road");
+    expect(driving.photo?.src).not.toBe(guide.photo.src);
+    expect(guide.sections.find(section => section.id === "beach")!.paragraphs.join(" ")).toMatch(/chairs and umbrellas.*free.*hotel-operated/s);
+
+    const router = await routerAt(travelGuidePaths.jerusalemDeadSea);
+    const Page = DeadSeaRoute.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    expect(container.querySelector('a[href="#destinations"]')).not.toBeNull();
+    const main = within(container).getByRole("table", { name: guide.comparison.caption });
+    expect(main.querySelectorAll("tbody th.sticky")).toHaveLength(4);
+    const table = container.querySelector('[aria-label="Driving times from Jerusalem to Dead Sea destinations"]')!;
+    expect(table.querySelectorAll("tbody th.sticky")).toHaveLength(5);
+    expect(table.querySelectorAll("tbody th a")).toHaveLength(5);
+    expect(table.querySelector('a[href="/attractions/masada/"]')).not.toBeNull();
+    const stops = [...container.querySelectorAll('[data-testid="deadsea-attraction-card"]')];
+    expect(stops).toHaveLength(4);
+    for (const href of ["/attractions/masada/", "/attractions/ein-gedi/", "/attractions/qasr-el-yahud/"]) {
+      expect(stops.some(a => a.getAttribute("href") === href)).toBe(true);
+    }
+    expect(stops.find(a => a.getAttribute("href")?.includes("qumran"))?.getAttribute("target")).toBe("_blank");
+    expect(container.querySelectorAll('[data-testid="deadsea-bookable-tour"]')).toHaveLength(6);
+    expect(container.querySelectorAll('[data-testid="deadsea-related-guides"] > li')).toHaveLength(6);
+    const next = container.querySelector('[data-testid="deadsea-next-steps"]')!;
+    expect(next.querySelectorAll("li")).toHaveLength(6);
+    expect(next.querySelectorAll("li svg")).toHaveLength(6);
+    expect(next.querySelectorAll('a[href^="/"]')).toHaveLength(6);
+    expect(next.textContent).not.toContain("Explore Israel's events");
+    expect(container.textContent).not.toContain("₪2,100");
+    const contact = container.querySelector('form[aria-label="Guide contact message"]')!;
+    expect(contact).not.toBeNull();
+    expect(screen.getByRole("heading", { name: "Need a Private Transfer or Driver to the Dead Sea?" })).toBeInTheDocument();
+    expect(container.querySelector('[data-testid="contact-reviews-row"]')?.className).toContain("flex-nowrap");
+    expect(container.querySelector('header time')).toHaveAttribute("datetime", "2026-11-24");
+    const source = container.querySelector("#sources")!;
+    expect(source).not.toBeNull();
+    expect(contact.compareDocumentPosition(source) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.textContent).not.toContain("References:");
+  });
+
   it("distinguishes baptism sites, church clusters and region-specific Dead Sea planning without blanket operating claims", () => {
     expect(travelGuides.baptism.answer).toMatch(/Yardenit.*Sea of Galilee.*Qasr el-Yahud.*near Jericho/s);
     expect(travelGuides.baptism.reviewNote).toMatch(/different hour sets|differing hour|different hours/i);
     expect(travelGuides.baptism.sections.find((section) => section.id === "qasr-visit")!.photo?.alt).toContain("Qasr el-Yahud");
     expect(travelGuides.jerusalemChurches.comparison.rows.map((row) => row[0])).toEqual(["Old City", "Mount of Olives / Kidron", "Mount Zion", "Ein Karem"]);
-    expect(travelGuides.jerusalemDeadSea.sections.find(section => section.id === "beach")!.paragraphs.join(" ")).toContain("free access, showers, changing rooms");
+    expect(travelGuides.jerusalemDeadSea.sections.find(section => section.id === "beach")!.paragraphs.join(" ")).toMatch(/free public entry.*showers.*changing rooms|public entry, showers, changing rooms/);
     expect(travelGuides.jerusalemShopping.sections.find((section) => section.id === "shop-bezalel")!.paragraphs.join(" ")).toContain("Friday arts fair");
     expect(JSON.stringify(travelGuides.jerusalemChurches)).not.toMatch(/10-20 ILS|50-80 ILS|open daily.*8:00/i);
   });
