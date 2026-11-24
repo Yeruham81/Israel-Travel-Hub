@@ -625,11 +625,11 @@ export const journeyDestinationGuides = {
   },
     "jerusalemDeadSea": {
       "id": "jerusalemDeadSea",
-      "updatedAt": "2026-11-13",
+      "updatedAt": "2026-11-24",
       "title": "How to Get from Jerusalem to the Dead Sea: Bus, Taxi, Tours & Car",
-      "description": "Jerusalem to the Dead Sea: compare buses 486/444, taxi, private driver, group tours and rental cars, with fares, return journeys and useful stops.",
-      "intro": "The Dead Sea is one of the most popular day trips from Jerusalem. You can travel by bus, taxi, private driver, organised tour or rental car. The best option depends on whether you're visiting a beach or combining several attractions.",
-      "answer": "For a budget-friendly trip, take Egged bus 486 or reserved-seat bus 444 from Jerusalem. Allow around 1½–2 hours to reach the Ein Bokek hotel area. A taxi or private driver takes you directly to your destination. An organised tour includes planned stops, while a rental car lets you explore at your own pace. For swimming, head to the free public beach at Ein Bokek. Check your return journey before setting out.",
+      "description": "Jerusalem to the Dead Sea: bus 486 or 444, taxi, private driver, tours or rental car, with driving times, destination stops, beach access and return travel.",
+      "intro": "Travelling from Jerusalem to the Dead Sea? First choose your destination: a northern beach, Ein Gedi, Masada or the Ein Bokek hotel area. Then compare public buses, a private ride, an organised tour and a rental car.",
+      "answer": "Egged bus 486 is a good budget choice for one Dead Sea destination; line 444 requires an advance seat reservation. For several stops or a flexible return, choose an organised tour, private driver or rental car. Allow roughly 90–110 minutes to drive from central Jerusalem to Ein Bokek, where the council's central public beach is free to enter. Confirm your return journey before leaving.",
       "topics": [
         "transportation",
         "destinations",
@@ -637,55 +637,48 @@ export const journeyDestinationGuides = {
       ],
       "photo": P["jerusalem-to-the-dead-sea"],
       "facts": [
-        {
-          "label": "Public bus",
-          "text": "Egged 486 or reserved-seat bus 444"
-        },
-        {
-          "label": "Beach day",
-          "text": "Free public beach in the Ein Bokek hotel district"
-        },
-        {
-          "label": "Multiple stops",
-          "text": "Tour, private driver or permitted rental car"
-        }
+        { "label": "Drive to Ein Bokek", "text": "Around 90–110 minutes from central Jerusalem in normal conditions" },
+        { "label": "Public buses", "text": "Egged 486; advance seat reservation on 444" },
+        { "label": "Beach access", "text": "Ein Bokek Central Beach is free to enter" }
       ],
       "comparison": {
         "caption": "Jerusalem to the Dead Sea: ways to travel",
-        "headers": [
-          "Transport",
-          "Why choose it",
-          "Main drawback",
-          "Good to know"
-        ],
+        "headers": ["Transport", "Best for", "Journey time or fare", "Booking and planning"],
         "rows": [
-          [
-            "Egged bus 486 / 444",
-            "The cheapest option for a single destination",
-            "Limited departures and difficult connections between attractions",
-            "Board at Jerusalem Central Bus Station; check your destination stop and the final bus back"
-          ],
-          [
-            "Taxi or private driver",
-            "Direct hotel pickup, comfort and flexible stops",
-            "More expensive than a bus, especially for one or two people",
-            "Confirm whether you're booking a one-way ride or a full day with waiting and return transport"
-          ],
-          [
-            "Organised day tour",
-            "Transport and sightseeing in one booking; useful for Masada and Ein Gedi",
-            "Fixed itinerary, group pace and a beach stop chosen by the operator",
-            "Check Jerusalem pickup, attractions, admission and how much beach time is included"
-          ],
-          [
-            "Rental car",
-            "Choose your own departure time, beach and sightseeing stops",
-            "Driving, parking and rental conditions are your responsibility",
-            "Allow time to collect the car, and check road and weather conditions"
-          ]
+          ["Egged buses 486 / 444", "One destination on a budget", "Fare depends on destination; Ein Bokek bus ride takes about 1¾–2 hours", "Check your stop and return; reserve a seat on line 444"],
+          ["Taxi or private driver", "Direct pickup and flexible sightseeing", "Approx. 90–110 minutes by road to Ein Bokek; request a quote", "Specify one-way or return, waiting time and group size"],
+          ["Organised day tour", "Combining Masada, Ein Gedi and beach time", "Full-day itinerary; price depends on selected tour", "Confirm Jerusalem departure, beach, admissions and return"],
+          ["Rental car", "Several independent stops and a flexible day", "Approx. 90–110 minutes to Ein Bokek, plus stops", "Check route access, parking and weather conditions"]
         ]
       },
             "sections": [
+        {
+          "id": "destinations",
+          "title": "Choose your Dead Sea destination",
+          "paragraphs": [
+            "The northern beaches, Qumran, Ein Gedi, Masada and Ein Bokek are separate stops along Route 90. Choose the exact entrance or beach before deciding how to travel.",
+            "These are approximate one-way driving times from central Jerusalem via Routes 1 and 90, in normal conditions. Public buses can take longer, with departure times depending on the stop."
+          ],
+          "tables": [{
+            "caption": "Driving times from Jerusalem to Dead Sea destinations",
+            "headers": ["Destination", "Approximate drive", "What to visit"],
+            "rows": [
+              ["Kalia / northern shore", "35–50 minutes", "Northern beaches with paid facilities"],
+              ["Qumran", "40–55 minutes", "Archaeological park and Dead Sea Scrolls history"],
+              ["Ein Gedi Nature Reserve", "60–80 minutes", "Desert trails; check current access"],
+              ["Masada — east entrance", "75–95 minutes", "Cable car and national-park visitor entrance"],
+              ["Ein Bokek Central Beach", "90–110 minutes", "Free public beach, promenade and hotels"]
+            ],
+            "rowLinks": [
+              { "href": "https://kaliadeadsea.com/en/kalia-beach-en/" },
+              { "href": "https://en.parks.org.il/reserve-park/qumran-park" },
+              { "to": "/attractions/ein-gedi/" },
+              { "to": "/attractions/masada/" },
+              { "to": "/attractions/dead-sea/" }
+            ]
+          }],
+          "sourceIds": ["m26-ein-bokek", "inpa-masada", "guide-ein-gedi"]
+        },
         {
           "id": "bus",
           "title": "By public bus: Egged 486 and 444",
