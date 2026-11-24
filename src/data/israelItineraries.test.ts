@@ -410,10 +410,10 @@ describe("migrated Israel itineraries", () => {
     const tourComponent = file("src/components/JerusalemItineraryTourOptions.tsx");
     const itineraryComponent = file("src/components/IsraelItineraryPage.tsx");
 
-    expect(tourComponent).toContain('days >= 7 ? "Alternative day tours from Jerusalem"');
+    expect(tourComponent).toContain("<span>Alternative day tours from Jerusalem</span>");
     expect(tourComponent).toContain("These tours replace a planned excursion");
     expect(tourComponent).toContain("in place of the independent Day 3 desert plan");
-    expect(itineraryComponent).toContain('id === "7" && (index === 3 || index === 5)');
+    expect(itineraryComponent).toContain("presentation.transferDays.includes(index + 1)");
     expect(itineraryComponent).toContain("The times shown are for sightseeing only.");
     expect(g.daySequences?.[2]?.steps[0]?.stop).toBe("Masada plateau");
     expect(g.daySequences?.[5]?.steps[0]?.stop).toBe("Haifa's German Colony viewpoint");
