@@ -1,4 +1,5 @@
-import { COOKIE_CONSENT_KEY, CONSENT_LIFETIME, readStoredConsent, getCookieConsent, saveCookieConsent } from "@/lib/cookie-consent";
+import { COOKIE_CONSENT_KEY, CONSENT_LIFETIME, NECESSARY_ONLY, readStoredConsent, getCookieConsent, saveCookieConsent } from "@/lib/cookie-consent";
+import { GOOGLE_AD_CONSENT_DENIED } from "@/lib/advertising-consent";
 import { PRODUCTION_CANONICAL_ORIGIN, SITE_CONFIG } from "@/lib/site";
 
 export const GA4_MEASUREMENT_ID = "G-N5ZDWXDZ1P";
@@ -66,10 +67,9 @@ export function createAnalytics(win: Window, config: LaunchConfig) {
       if (choice === "granted" || args[0] === "consent") layer.push(arguments);
     };
     browser.gtag("consent", "default", {
-      analytics_storage: "denied", ad_storage: "denied",
-      ad_user_data: "denied", ad_personalization: "denied",
+      analytics_storage: "denied", ...GOOGLE_AD_CONSENT_DENIED,
     });
-    browser.gtag("consent", "update", { analytics_storage: "granted" });
+    browser.gtag("consent", "update", { analytics_storage: "granted", ...GOOGLE_AD_CONSENT_DENIED });
     browser.gtag("js", new Date());
     browser.gtag("config", GA4_MEASUREMENT_ID, {
       ...campaign,
@@ -104,7 +104,7 @@ export function createAnalytics(win: Window, config: LaunchConfig) {
     choice = next;
     if (!eligible) return;
     disable(next !== "granted");
-    if (initialized) browser.gtag?.("consent", "update", { analytics_storage: next === "granted" ? "granted" : "denied" });
+    if (initialized) browser.gtag?.("consent", "update", { analytics_storage: next === "granted" ? "granted" : "denied", ...GOOGLE_AD_CONSENT_DENIED });
     if (next === "granted") sendCurrentPage();
   }
 
@@ -114,8 +114,8 @@ export function createAnalytics(win: Window, config: LaunchConfig) {
     setChoice(next: "granted" | "denied") {
       if (!eligible) return;
       try {
-        if (win === globalThis.window) saveCookieConsent({ ...(getCookieConsent()?.categories ?? { external: false, marketing: false }), analytics: next === "granted" });
-        else win.localStorage.setItem(ANALYTICS_CONSENT_KEY, JSON.stringify({ version: 1, categories: { analytics: next === "granted", external: false, marketing: false }, expiresAt: Date.now() + CONSENT_LIFETIME }));
+        if (win === globalThis.window) saveCookieConsent({ ...(getCookieConsent()?.categories ?? NECESSARY_ONLY), analytics: next === "granted" });
+        else win.localStorage.setItem(ANALYTICS_CONSENT_KEY, JSON.stringify({ version: 2, categories: { ...NECESSARY_ONLY, analytics: next === "granted" }, expiresAt: Date.now() + CONSENT_LIFETIME }));
       } catch {
         // A failed write must not leave an older grant active on the next visit.
         try { win.localStorage.removeItem(ANALYTICS_CONSENT_KEY); } catch { /* Storage is unavailable. */ }

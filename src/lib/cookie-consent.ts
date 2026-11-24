@@ -2,24 +2,33 @@ export const COOKIE_CONSENT_KEY = "ith:cookie-consent:v1";
 export const COOKIE_SETTINGS_EVENT = "ith:cookie-settings";
 export const COOKIE_CONSENT_EVENT = "ith:cookie-consent-change";
 export const CONSENT_LIFETIME = 180 * 24 * 60 * 60 * 1000;
-export type OptionalCookieCategory = "analytics" | "external" | "marketing";
+export type OptionalCookieCategory = "analytics" | "external" | "marketing" | "advertising";
 export type CookieCategories = Record<OptionalCookieCategory, boolean>;
-export type CookieConsent = { version: 1; categories: CookieCategories; expiresAt: number };
-export const NECESSARY_ONLY: CookieCategories = { analytics: false, external: false, marketing: false };
-export const ALL_CATEGORIES: CookieCategories = { analytics: true, external: true, marketing: true };
+export type CookieConsent = { version: 2; categories: CookieCategories; expiresAt: number };
+export const NECESSARY_ONLY: CookieCategories = { analytics: false, external: false, marketing: false, advertising: false };
+export const ALL_CATEGORIES: CookieCategories = { analytics: true, external: true, marketing: true, advertising: true };
 export const COOKIE_CATEGORIES = [
   { id: "analytics", title: "Analytics", description: "Google Analytics and local interaction records help me understand how visitors use my site." },
   { id: "external", title: "External content", description: "Interactive maps from Google Maps and map providers load content from outside this website." },
-  { id: "marketing", title: "Booking & marketing", description: "Travelpayouts widgets for Booking.com, Agoda, GetYourGuide and DiscoverCars can use cookies and referral tracking." },
+  { id: "marketing", title: "Booking widgets", description: "Travelpayouts widgets for Booking.com, Agoda, GetYourGuide and DiscoverCars can use cookies and referral tracking." },
+  { id: "advertising", title: "Advertising", description: "Services such as Google AdSense may use cookies and identifiers to show and measure ads. Advertising is currently inactive." },
 ] as const;
 
 export function readStoredConsent(storage: Pick<Storage, "getItem">, now = Date.now()): CookieConsent | null {
   try {
     const value = JSON.parse(storage.getItem(COOKIE_CONSENT_KEY) || "null");
-    if (value?.version !== 1 || !Number.isFinite(value.expiresAt) || value.expiresAt <= now ||
+    if (![1, 2].includes(value?.version) || !Number.isFinite(value.expiresAt) || value.expiresAt <= now ||
       value.expiresAt > now + CONSENT_LIFETIME + 60000 ||
-      !["analytics", "external", "marketing"].every(key => typeof value.categories?.[key] === "boolean")) return null;
-    return value;
+      !["analytics", "external", "marketing"].every(key => typeof value.categories?.[key] === "boolean") ||
+      (value.version === 2 && typeof value.categories.advertising !== "boolean")) return null;
+    // An earlier Accept all covered maps, analytics and booking widgets only.
+    // Preserve those choices and their original expiry, without granting ads.
+    return { version: 2, expiresAt: value.expiresAt, categories: {
+      analytics: value.categories.analytics,
+      external: value.categories.external,
+      marketing: value.categories.marketing,
+      advertising: value.version === 2 && value.categories.advertising === true,
+    } };
   } catch { return null; }
 }
 
@@ -65,7 +74,7 @@ function notify() {
   window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
 }
 export function saveCookieConsent(categories: CookieCategories) {
-  const next: CookieConsent = { version: 1, categories: { analytics: categories.analytics === true, external: categories.external === true, marketing: categories.marketing === true }, expiresAt: Date.now() + CONSENT_LIFETIME };
+  const next: CookieConsent = { version: 2, categories: { analytics: categories.analytics === true, external: categories.external === true, marketing: categories.marketing === true, advertising: categories.advertising === true }, expiresAt: Date.now() + CONSENT_LIFETIME };
   try { window.localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(next)); memoryOnly = undefined; }
   catch {
     memoryOnly = next;

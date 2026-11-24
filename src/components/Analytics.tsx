@@ -43,7 +43,7 @@ export function Analytics() {
   return <section role="dialog" aria-labelledby="cookie-preferences-title" aria-describedby="cookie-preferences-description"
     className="fixed inset-x-3 bottom-3 z-[80] max-h-[85dvh] overflow-y-auto rounded-2xl border bg-card p-5 text-card-foreground shadow-xl sm:left-5 sm:right-auto sm:w-[32rem] sm:max-w-[calc(100vw-2.5rem)]">
     <h2 id="cookie-preferences-title" className="text-lg font-semibold">Your cookie choices</h2>
-    <p id="cookie-preferences-description" className="mt-2 text-sm leading-relaxed">I use necessary storage to run this website. With your permission, I also use analytics, interactive maps and booking widgets that may use cookies or other tracking. Choose which optional categories to allow.</p>
+    <p id="cookie-preferences-description" className="mt-2 text-sm leading-relaxed">I use necessary storage to run this website. With your permission, I also use analytics, interactive maps and booking widgets that may use cookies or other tracking. You can choose each category separately, including future advertising services. Advertising is currently inactive.</p>
     <p className="mt-2 text-sm"><Link to="/privacy-policy/" hash="analytics-advertising" className="font-semibold text-primary underline">Privacy policy</Link></p>
     <div className="mt-4 grid gap-2 sm:grid-cols-3">
       <button type="button" onClick={() => choose(ALL_CATEGORIES)} className={buttonClass}>Accept all</button>
