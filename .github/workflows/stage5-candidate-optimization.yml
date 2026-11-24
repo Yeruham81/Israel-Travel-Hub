@@ -178,7 +178,7 @@ jobs:
             stage5-candidate-lighthouse/
           if-no-files-found: warn
   live-lighthouse-baseline:
-    if: github.head_ref == 'perf/stage5-prelaunch-fixes-20261124'
+    if: github.head_ref == 'perf/stage5-prelaunch-fixes-20261124' && github.event.action == 'opened'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
