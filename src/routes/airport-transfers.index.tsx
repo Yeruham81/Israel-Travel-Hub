@@ -13,6 +13,7 @@ import airportHeroMobile from "@/assets/airport-transfers/airport-mobile.webp";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { AirportDestinationCard as DestinationCard } from "@/components/AirportDestinationCard";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
+import { IconTripPlanningLinks } from "@/components/IconTripPlanningLinks";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { AIRPORT_TRANSFER_HUB_UPDATED_DATE, airportDestinationCards, airportHubPhotoSrc, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
 import { travelGuides } from "@/data/travelGuides";
@@ -179,23 +180,7 @@ function Airport() {
           </li>)}
         </ul>
       </section>
-      <section id="trip-planning" aria-labelledby="trip-planning-h" className="mt-9">
-        <h2 id="trip-planning-h" className="text-2xl font-semibold">Plan the rest of your stay</h2>
-        <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
-          {tripPlanningLinks.map(item => {
-            const Icon = item.icon;
-            return <li key={item.to}>
-              <Link to={item.to} className="group flex h-full items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
-                <span className="min-w-0">
-                  <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{item.title}</span>
-                  <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>
-                </span>
-              </Link>
-            </li>;
-          })}
-        </ul>
-      </section>
+      <IconTripPlanningLinks title="Plan the rest of your stay" items={tripPlanningLinks} />
       {creditedPhotos.length > 0 && <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground"><summary className="cursor-pointer font-semibold">Photo credits</summary>
         <ul className="mt-3 space-y-3">{[...new Map(creditedPhotos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><GuidePhotoCredit photo={photo} /></li>)}</ul>
       </details>}
