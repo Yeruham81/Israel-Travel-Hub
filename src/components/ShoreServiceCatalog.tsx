@@ -91,7 +91,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
                     <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
                     <p className="mt-2 text-xs text-muted-foreground">{service.duration} · Private car &amp; driver · From {port.name} Port</p>
                   </div>
-                  <a href="#request-quote" onClick={() => onSelectItinerary(itinerary.id)} className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center" aria-label={"Request " + itinerary.destination + " from " + port.name}>Request a quote</a>
+                  <a href="#request-quote" onClick={() => onSelectItinerary(itinerary.id)} className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center" aria-label={"Request a quote: " + itinerary.destination + " from " + port.name}>Request a quote</a>
                 </div>
               </article>
             </li>;
