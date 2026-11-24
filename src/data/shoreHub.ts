@@ -4,7 +4,7 @@ import { type ShoreDestinationId, type ShorePortId } from "@/data/registry";
 export const SHORE_EXCURSION_UPDATED_DATE = "2026-11-17";
 
 export const shoreHubTitle = "Shore excursions from Israel's cruise ports";
-export const shoreHubDescription = "Explore Israel shore excursions from Ashdod and Haifa. Compare Jerusalem, Galilee, Masada and coastal day trips, private drivers and guided tours with port pickup and return.";
+export const shoreHubDescription = "Compare shore excursions from Ashdod and Haifa to Jerusalem, the Galilee, Masada and the coast, with guided tours or private drivers and port return.";
 
 export const shoreHubPorts: Record<ShorePortId, {
   location: string;
