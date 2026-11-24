@@ -365,7 +365,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
           : id === "uber" || id === "sherut"
           ? [["at-a-glance", id === "uber" ? "Compare ride options" : "Compare travel options"], ...guide.sections.map(section => [section.id, section.title] as const), ["checklist", "Before you go"], ["faq", "FAQ"], ["contact", "Contact Me"]]
         : id === "israel"
-          ? [["at-a-glance", "Choosing transport"], ["public-transport", "Public transport"], ["paying", "Tickets & payment"], ["taxis-and-sherut", "Taxis & transfers"], ["destinations", "Cities & regions"], ["rental-car", "Car rental & day trips"], ["weekends", "Shabbat & travel tips"]]
+          ? [["at-a-glance", "Choosing transport"], ["public-transport", "Public transport"], ["paying", "Tickets & payment"], ["taxis-and-sherut", "Taxis & transfers"], ["destinations", "Cities & regions"], ["rental-car", "Car rental & day trips"], ["weekends", "Shabbat & travel tips"], ["contact", "Contact Me"]]
         : id === "airportTaxis"
           ? [["at-a-glance", "Pickup points"], ["steps", "How to book"], ["terminal3", "Terminal 3"], ["terminal1", "Terminal 1"], ["scheduled", "Advance booking"], ["fares", "Taxi fares"], ["weekend", "Shabbat & holidays"], ["destinations", "Popular destinations"], ["faq", "FAQ"], ["contact", "Contact Me"]]
           : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Me"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", "Contact Me"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
