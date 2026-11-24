@@ -880,7 +880,7 @@ describe("migrated practical guides", () => {
     expect(localPhoto.src).not.toBe(guide.photo.src);
     expect(localPhoto.sourceUrl).toBe("https://commons.wikimedia.org/wiki/File:Sherut.JPG");
     expect(localPhoto.credit).toContain("public domain");
-    expect(localPhoto.src).not.toMatch(/^https?:\\/\\//);
+    expect(localPhoto.src).not.toMatch(/^https?:/);
     expect(guide.sections.find(section => section.id === "nesher-amal")!.photo).toBeUndefined();
     expect(guide.comparison.rows).toHaveLength(4);
     expect(guide.comparison.headers).toEqual(["Ride type", "How it works", "When it is useful"]);
@@ -953,7 +953,7 @@ describe("migrated practical guides", () => {
     expect(mainTable.querySelectorAll("tbody tr")).toHaveLength(4);
     const localSection = container.querySelector("#local-sherut")!;
     expect(localSection.querySelector("figure img")?.getAttribute("src")).toContain("sherut-local-taxis");
-    expect(localSection.querySelector("figure img")?.getAttribute("src")).not.toMatch(/^https?:\\/\\//);
+    expect(localSection.querySelector("figure img")?.getAttribute("src")).not.toMatch(/^https?:/);
     expect(container.querySelector('[aria-label="Photo credits and licences"] a[href="https://commons.wikimedia.org/wiki/File:Sherut.JPG"]')).not.toBeNull();
     const related = within(container).getByRole("region", { name: "Related practical guides" });
     const next = within(container).getByRole("region", { name: "Plan the next part of your trip" });
