@@ -4,7 +4,7 @@ import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
 import palestinianTaxiPhoto from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
 import mangerSquarePhoto from "@/assets/guides/bethlehem/manger-square.jpg";
 import milkGrottoPhoto from "@/assets/guides/bethlehem/milk-grotto.jpg";
-import deadSeaSaltIslandPhoto from "@/assets/guides/dead-sea-salt-island.webp";
+import deadSeaRouteRoadPhoto from "@/assets/guides/dead-sea-route-road.webp";
 import einBokekShorePhoto from "@/assets/guides/dead-sea-ein-bokek-shore.webp";
 
 export const journeyDestinationGuides = {
@@ -623,7 +623,7 @@ export const journeyDestinationGuides = {
       { label: "Best time to visit", to: "/travel-blog/best-time-to-visit-israel/" },
     ],
   },
-    "jerusalemDeadSea": {
+      "jerusalemDeadSea": {
       "id": "jerusalemDeadSea",
       "updatedAt": "2026-11-24",
       "title": "How to Get from Jerusalem to the Dead Sea: Bus, Taxi, Tours & Car",
@@ -683,9 +683,9 @@ export const journeyDestinationGuides = {
           "id": "bus",
           "title": "By public bus: Egged 486 and 444",
           "paragraphs": [
-            "Bus 486 leaves Jerusalem Central Bus Station and stops at several Dead Sea destinations, including Ein Gedi, Masada and Ein Bokek. Bus 444 also serves the area on its way to Eilat but requires an advance seat reservation. Both are affordable options for visiting a single destination.",
-            "For a beach day, choose the stop nearest Ein Bokek's public beach. Check the departure platform, fare and timetable before travelling. There is no train to the Dead Sea. Some bus stops are far from beaches and attractions, so check your exact destination.",
-            "Buses between Dead Sea attractions can be infrequent, and the last return bus to Jerusalem may leave early. Friday, Shabbat and holiday timetables are especially restrictive. If you're visiting several attractions, a guided tour or private driver may save considerable travel and waiting time."
+            "Egged line 486 departs from Jerusalem Central Bus Station along the Dead Sea corridor, serving stops including Ein Gedi, Masada and Ein Bokek. Line 444 continues towards Eilat and requires an advance seat reservation. Choose the bus stop nearest your actual attraction or hotel.",
+            "For a beach day, choose the bus stop closest to Ein Bokek Central Beach or your named hotel. The operator's journey planner displays the fare for your destination and date. Check the platform, return departure and final walk from the stop. Israel Railways does not serve the Dead Sea.",
+            "Buses between individual Dead Sea attractions are infrequent, and the last bus back to Jerusalem may leave early. Friday and holiday timetables are shorter, while ordinary buses generally pause for Shabbat. Plan the return from the exact stop you intend to use."
           ],
           "sourceIds": [
             "m26-egged",
@@ -699,21 +699,25 @@ export const journeyDestinationGuides = {
             {
               "label": "National public transport planner",
               "href": "https://bus.gov.il/en/home"
+            },
+            {
+              "label": "Egged — line 444 seat reservations",
+              "href": "https://www.egged.co.il/en/information-for-passengers/tickets-information"
             }
           ],
-          "tip": "Check the last bus back to Jerusalem from your chosen stop before planning the day's activities."
+
         },
         {
           "id": "private",
           "title": "By taxi or private driver: direct travel from your hotel",
           "paragraphs": [
-            "A taxi or pre-booked transfer takes you directly from your Jerusalem hotel to your chosen Dead Sea destination. This is particularly convenient for families, travellers with luggage and visitors travelling when buses are unavailable.",
-            "Book a one-way transfer if you only need a drop-off. For sightseeing at several locations, arrange a driver who can wait and take you back to Jerusalem. Confirm the total price, including stops, waiting time and return transport. Guiding and attraction tickets may cost extra.",
-            "Private transport costs more, but sharing the price can make it worthwhile for a family or small group. For a full-day option, see my private Masada and Dead Sea tour, starting at ₪2,100 per vehicle for up to four travellers. Admission and guiding cost extra. For a customised trip, send me your pickup location, group size, preferred stops and return time through my private driver service."
+            "A taxi or pre-booked private transfer takes you from your Jerusalem pickup address to the chosen Dead Sea hotel, beach or attraction. This suits travellers with luggage, families and visitors travelling outside normal bus hours.",
+            "For a one-way ride, confirm the drop-off address. For a day trip with sightseeing, agree on the stops, driver waiting time and return to Jerusalem. Guiding and attraction admission should be arranged separately.",
+            "For a private Masada and Dead Sea day trip, send me your pickup location in Jerusalem, travel date, passengers, planned stops and return time using the contact form. I'll reply personally with a quote. You can also browse my Masada and Dead Sea tours or read about my private driver service."
           ],
           "inlineLinks": [
             {
-              "text": "private Masada and Dead Sea tour",
+              "text": "Masada and Dead Sea tours",
               "to": "/tours/masada-dead-sea/"
             },
             {
@@ -727,18 +731,18 @@ export const journeyDestinationGuides = {
           "title": "By organised tour: transport plus sightseeing",
           "paragraphs": [
             "An organised tour is a convenient way to combine the Dead Sea with attractions such as Masada or Ein Gedi. Transport and sightseeing stops are arranged in advance, so you don't need to coordinate several buses.",
-            "Tours follow a fixed schedule, with limited time at each stop. Some excursions focus entirely on swimming; others spend much of the day at archaeological or nature sites. A beach stop may be at a paid northern-shore facility rather than the free public beach at Ein Bokek."
+            "Excursions follow different itineraries. Some concentrate on a Dead Sea beach, while others allocate much of the day to Masada and Ein Gedi. Confirm that the tour departs from Jerusalem, its return point, the precise beach, time spent there and whether park admission or cable-car tickets are included."
           ],
         },
         {
           "id": "driving",
           "title": "By rental car: the most flexible option",
           "paragraphs": [
-            "A rental car lets you leave Jerusalem at your preferred time and visit Ein Bokek or other Dead Sea attractions independently. The usual route follows Highway 1 east and Highway 90 south. Enter your exact beach, hotel or attraction into your navigation app.",
-            "Driving is useful for an early start or several stops, but you'll need to arrange parking and handle the return journey yourself. Compare rental prices using DiscoverCars' Israel rental comparison, including insurance, permitted roads, fuel policies and pickup hours.",
-            "Winter rain can trigger flash floods and close desert roads even when Jerusalem is dry. Check weather and road alerts before driving, never cross flowing floodwater, and avoid unregulated shoreline areas with sinkhole risks."
+            "A rental car gives you flexibility for several Dead Sea stops. The usual drive follows Highway 1 east and Highway 90 south. Navigate to the exact hotel, beach or park entrance: Masada's eastern visitor entrance is accessed from Route 90.",
+            "Driving lets you start early and combine attractions, but allow time for collecting the car, parking and returning to Jerusalem. My car rental comparison guide covers insurance, fuel conditions, pickup hours and restrictions on permitted roads.",
+            "Desert rain can cause sudden flash floods and road closures even when Jerusalem is dry. Check weather warnings and Route 90 status before departure, and use marked beach and parking access points."
           ],
-          "photo": { "src": deadSeaSaltIslandPhoto, "alt": "Turquoise Dead Sea water and white salt formations along the shoreline" },
+          "photo": { "src": deadSeaRouteRoadPhoto, "alt": "Route 90 curving beside the Dead Sea and Judean Desert cliffs" },
           "inlineLinks": [
             {
               "text": "DiscoverCars' Israel rental comparison",
@@ -756,9 +760,9 @@ export const journeyDestinationGuides = {
           "id": "beach",
           "title": "Where to go for a Dead Sea beach day",
           "paragraphs": [
-            "For swimming and floating, I recommend the free public beach at Ein Bokek. The beach offers free access, showers, changing rooms, toilets and shaded areas. Chairs and umbrellas are also available, with drinking-water fountains, cafés and shops along the nearby promenade.",
-            "Parking near the central beach is paid, and spaces can fill up quickly on busy days. Float only while lifeguards are on duty; supervised beach hours are shorter in winter. Northern beaches such as Kalia are closer to Jerusalem but charge an entrance fee, sometimes with additional costs for facilities. Check the exact beach in any organised tour itinerary.",
-            "Bring water, sun protection, swimwear and a towel. Float gently, keep the very salty water away from your eyes, and see my Dead Sea visitor guide for more beach and safety advice."
+            "For swimming and floating, I recommend Ein Bokek Central Beach, where public entry, showers, changing rooms, toilets, shaded areas and council-provided chairs and umbrellas are free. The promenade has drinking-water fountains, cafés and shops.",
+            "Blue-and-white parking near the central beach is paid, with additional parking above the hotel area. The council-run central beach is different from hotel-operated public beaches, where chairs and umbrellas may cost extra for non-guests. Use the marked, supervised swimming area; lifeguard hours vary by season.",
+            "Bring drinking water, sun protection and a towel. Ein Bokek Central Beach has an accessible approach and beach wheelchairs available through the lifeguard station. My Dead Sea visitor guide explains bathing and accessibility in more detail."
           ],
           "photo": { "src": einBokekShorePhoto, "alt": "Ein Bokek shoreline and the Dead Sea landscape" },
           "inlineLinks": [
@@ -777,11 +781,15 @@ export const journeyDestinationGuides = {
               "href": "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en"
             },
             {
-              "label": "Kalia Beach — admission and facilities",
-              "href": "https://kaliadeadsea.com/en/kalia-beach-en/"
+              "label": "Tamar Regional Council — hotel-beach equipment rules",
+              "href": "https://www.deadsea.co.il/attractions/the-hotel-beaches/?lang=en/"
+            },
+            {
+              "label": "Google Maps — Ein Bokek Central Beach",
+              "href": "https://www.google.com/maps/search/?api=1&query=Ein+Bokek+Central+Beach"
             }
           ],
-          "tip": "Northern beaches are closer to Jerusalem, but most charge admission. If you prefer free beach access, showers and a hotel-area promenade, I recommend Ein Bokek."
+
         },
 
       ],
@@ -793,7 +801,7 @@ export const journeyDestinationGuides = {
       "faqs": [
         {
           "q": "How long does it take to reach the Dead Sea from Jerusalem?",
-          "a": "The northern shore is closer, but allow roughly 1½–2 hours to Ein Bokek, depending on traffic and your starting point. Add time if you plan to visit Masada or another attraction."
+          "a": "Allow approximately 35–50 minutes by car to a northern beach, 60–80 minutes to Ein Gedi, 75–95 minutes to the Masada east entrance or 90–110 minutes to Ein Bokek. Public buses take longer."
         },
         {
           "q": "Is the public beach at Ein Bokek wheelchair-accessible?",
@@ -809,7 +817,7 @@ export const journeyDestinationGuides = {
         },
         {
           "q": "Can I combine Masada, Ein Gedi, Qumran and Qasr al-Yahud in one day?",
-          "a": "Visiting all four in one day would be too rushed. Choose one major attraction with the beach, or two shorter stops if you have suitable transport and an early start."
+          "a": "For a relaxed day trip from Jerusalem, combine a beach visit with Masada or Ein Gedi if park access is available. Qumran and Qasr al-Yahud can fit a northern-shore itinerary."
         }
       ],
       "related": [
