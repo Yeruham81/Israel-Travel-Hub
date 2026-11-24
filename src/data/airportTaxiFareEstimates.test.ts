@@ -40,7 +40,7 @@ describe("Ben Gurion airport taxi guide", () => {
     for (const [id, guide] of Object.entries(airportJourneyGuides)) {
       const train = guide.options.find(option => option.id === "rail");
       expect(train, id).toBeDefined();
-      expect(train!.cost, id).toMatch(/₪\\d+/);
+      expect(train!.cost, id).toMatch(/₪\d+/);
       expect(train!.cost, id).not.toMatch(/check current fare|TBD|coming soon/i);
       expect(guide.sources?.some(source => /rail\.co\.il/.test(source.url)), id).toBe(true);
       expect(guide.options.find(option => option.id === "taxi")?.cost, id).toMatch(/meter/i);
