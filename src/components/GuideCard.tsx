@@ -8,7 +8,7 @@ import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 
 export function GuideTags({ topics, compact = false }: { topics: GuideTopicId[]; compact?: boolean }) {
-  return <ul className={compact ? "flex flex-wrap gap-x-1.5 gap-y-1.5" : "flex flex-wrap gap-2"} aria-label="Guide topics">{topics.map((id) => <li key={id}><RouterLink to="/travel-blog/" search={{ topic: id }} className={compact ? "inline-block rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium text-primary hover:bg-secondary" : "inline-block rounded-full border bg-background px-3 py-1 text-xs font-medium text-primary hover:bg-secondary"}>{guideTopics.find((topic) => topic.id === id)!.label}</RouterLink></li>)}</ul>;
+  return <ul className={compact ? "flex flex-wrap gap-x-1.5 gap-y-1.5" : "flex flex-wrap gap-2"} aria-label="Guide topics">{topics.map((id) => <li key={id}><RouterLink to="/travel-blog/" search={{ topic: id }} className={compact ? "inline-flex min-h-6 items-center rounded-full border bg-background px-2.5 py-0.5 text-xs font-medium text-primary hover:bg-secondary" : "inline-flex min-h-6 items-center rounded-full border bg-background px-3 py-1 text-xs font-medium text-primary hover:bg-secondary"}>{guideTopics.find((topic) => topic.id === id)!.label}</RouterLink></li>)}</ul>;
 }
 
 export function GuidePhotoCredit({ photo, insideDisclosure = false }: { photo: GuidePhoto; insideDisclosure?: boolean }) {
