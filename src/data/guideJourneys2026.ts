@@ -197,11 +197,11 @@ export const journeyDestinationGuides = {
   },
   "bethlehem": {
   "id": "bethlehem",
-  "updatedAt": "2026-11-13",
+  "updatedAt": "2026-11-24",
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
   "description": "Compare bus 231 and 234, licensed private drivers, taxis to Checkpoint 300 and Bethlehem tours. Plan your final stop, documents and the return to Jerusalem.",
   "intro": "Bethlehem is only a short distance from Jerusalem, but getting there requires some planning. Here's how to travel by bus, taxi or organised tour, and what to check before you leave.",
-  "answer": "For independent travellers, bus 231 is generally the easier way to reach central Bethlehem. Bus 234 goes towards Checkpoint 300, where you cross on foot and continue by local transport. A guided tour or an authorised private driver can simplify the return journey.",
+  "answer": "For independent travellers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers may use the pedestrian crossing and onward local transport. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
   "topics": [
     "transportation",
     "destinations",
@@ -220,7 +220,7 @@ export const journeyDestinationGuides = {
     },
     {
       "label": "Bus 234",
-      "text": "Checkpoint 300 approach; the pedestrian crossing and onward ride are separate"
+      "text": "Checkpoint 300 approach; check current crossing arrangements and onward transport"
     }
   ],
   "comparison": {
@@ -234,12 +234,12 @@ export const journeyDestinationGuides = {
       [
         "Bus 231",
         "Independent visitors seeking a lower-cost route towards central Bethlehem",
-        "Ask where to get off near Bab al-Zaqaq, then walk or take a local taxi to the centre"
+        "About 20–30 minutes by bus in normal traffic to Bab al-Zaqaq / Beit Jala Road; continue to Manger Square on foot or by local taxi"
       ],
       [
         "Bus 234",
         "Visitors deliberately using the Checkpoint 300 route",
-        "Pedestrian crossing, possible checks, and a Palestinian taxi or arranged pickup"
+        "About 15–20 minutes by bus to Checkpoint 300, then the authorised crossing and onward travel"
       ],
       [
         "Authorised private driver",
@@ -269,7 +269,8 @@ export const journeyDestinationGuides = {
       "title": "Before you go: Area A, entry rules and checkpoints",
       "paragraphs": [
         "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Not every driver or vehicle is permitted to make the journey.",
-        "Bring your original passport and any required entry documents. If you're travelling on a US passport, check the State Department's travel advice for current entry and security information."
+        "Bring your original passport and any required entry documents. If you're travelling on a US passport, check the State Department's travel advice for current entry and security information.",
+        "A 22 November 2026 announcement reported that Checkpoint 300 would reopen to authorised vehicles and tourist coaches from 23 November. Crossing eligibility, operating hours and security restrictions may still change; confirm your actual route and vehicle permission with the operator before travel."
       ],
       "richParagraphs": [
         [
@@ -288,6 +289,18 @@ export const journeyDestinationGuides = {
           {
             "text": " for current entry and security information."
           }
+        ],
+        [
+          {
+            "text": "A 22 November 2026 announcement "
+          },
+          {
+            "text": "reported that Checkpoint 300 would reopen to authorised vehicles and tourist coaches",
+            "href": "https://palsawa.com/en/palestinian-news/2026/11/22/bethlehem-crossing-reopens-to-vehicles-and-tour-buses-after-10-month-closure"
+          },
+          {
+            "text": " from 23 November. Crossing eligibility, operating hours and security restrictions may still change; confirm your actual route and vehicle permission with the operator before travel."
+          }
         ]
       ],
       "sourceIds": [
@@ -299,7 +312,7 @@ export const journeyDestinationGuides = {
       "title": "By bus: choose line 231 or 234",
       "paragraphs": [
         "Buses to Bethlehem leave from the East Jerusalem bus station near Damascus Gate, not Jerusalem Central Bus Station. The Christian Information Center's East Jerusalem bus guide identifies the boarding area.",
-        "Check South Buses' routes and timetables for departures and return services, and its fares and payment information for ticket prices and payment options."
+        "South Buses currently publishes an ₪8 standard cash fare and an ₪8 Rav-Kav fare for trips of up to 15 km. With Rav-Kav, tap in on every ride; the operator describes 90-minute transfers under the ticket rules. Check the exact distance-based fare and return timetable for your trip."
       ],
       "richParagraphs": [
         [
@@ -316,21 +329,21 @@ export const journeyDestinationGuides = {
         ],
         [
           {
-            "text": "Check "
+            "text": "South Buses "
           },
           {
-            "text": "South Buses' routes and timetables",
-            "href": "https://south-buses.com/lines-and-stations/?lang=en"
-          },
-          {
-            "text": " for departures and return services, and its "
-          },
-          {
-            "text": "fares and payment information",
+            "text": "publishes an ₪8 standard cash fare and an ₪8 Rav-Kav fare for journeys up to 15 km",
             "href": "https://south-buses.com/?lang=en"
           },
           {
-            "text": " for ticket prices and payment options."
+            "text": ". Rav-Kav passengers must validate on each ride; the operator also describes 90-minute transfers under the ticket rules. Check the exact fare and "
+          },
+          {
+            "text": "return timetable for your journey",
+            "href": "https://south-buses.com/lines-and-stations/?lang=en"
+          },
+          {
+            "text": "."
           }
         ]
       ],
@@ -339,16 +352,16 @@ export const journeyDestinationGuides = {
           "id": "bus-231",
           "title": "Bus 231: via Beit Jala towards central Bethlehem",
           "paragraphs": [
-            "Bus 231 passes through the Bab al-Zaqaq area near Beit Jala, making it a more convenient option for central Bethlehem.",
-            "Ask the driver where to get off for the Church of the Nativity. From there, you may need to walk or take a short taxi ride to Manger Square."
+            "Bus 231 serves the Bab al-Zaqaq / Beit Jala Road stop, closer to central Bethlehem than Checkpoint 300. Journey planners estimate around 20–30 minutes from the East Jerusalem terminal in ordinary traffic; allow more at busy times.",
+            "Get off at Bab al-Zaqaq / Beit Jala Road. Manger Square and the Church of the Nativity are roughly 1 km away, so continue on foot if comfortable or take a short local taxi ride."
           ]
         },
         {
           "id": "bus-234",
           "title": "Bus 234: via Checkpoint 300",
           "paragraphs": [
-            "Bus 234 takes you towards Checkpoint 300, not directly to Manger Square. If you're eligible to cross and the checkpoint is open, follow the pedestrian route, complete any required checks and arrange a local taxi or pickup on the Bethlehem side.",
-            "Agree on a meeting point with your driver or guide and discuss what happens if the checkpoint is delayed or closed. Allow extra time to cross back before catching your bus to Jerusalem."
+            "Bus 234 travels from Nevi'im Terminal to Checkpoint 300 / Bethlehem Road, taking about 15–20 minutes in normal traffic. For an independent trip, eligible passengers can use the pedestrian crossing when it is operating, then arrange a local taxi or pickup for Manger Square. The bus itself does not go to the church.",
+            "The reported reopening to authorised vehicles and tourist coaches does not make this public-bus route a through service. Agree a meeting point with your local driver or guide, and leave extra time for checks and your return bus to Jerusalem."
           ]
         }
       ],
@@ -364,7 +377,7 @@ export const journeyDestinationGuides = {
       "paragraphs": [
         "An appropriately authorised and insured Palestinian taxi may be able to take eligible visitors from Jerusalem to Bethlehem and back, with waiting time for sightseeing. Confirm that both the driver and vehicle are permitted to complete the journey.",
         "Before booking, confirm the pickup point, permitted route, insurance, sightseeing stops, waiting time and total price, including the return. Remember that a driver may not be a licensed guide.",
-        "An Israeli taxi can take you towards Checkpoint 300, but it will not normally continue into Bethlehem. Eligible visitors can cross on foot when permitted and arrange a Palestinian taxi or guide on the other side."
+        "An Israeli taxi can take eligible travellers towards Checkpoint 300, but a through-trip needs specific driver and vehicle permissions and appropriate insurance. An independent visitor using the pedestrian crossing can arrange a Palestinian taxi or guide on the Bethlehem side."
       ],
       "photo": {
         "src": palestinianTaxiPhoto,
@@ -421,7 +434,7 @@ export const journeyDestinationGuides = {
       "title": "Plan a half-day visit and the journey back",
       "paragraphs": [
         "Half a day is usually enough to see Bethlehem's main central sites. Allow extra time for church queues, transport and any additional stops.",
-        "The Church of the Nativity is a UNESCO World Heritage site. During restoration, the Christian Information Center's published notice lists grotto visiting hours as 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday. These hours apply to the grotto, not the whole basilica. Check for updates before visiting.",
+        "The Church of the Nativity is a UNESCO World Heritage site. The Christian Information Center currently lists temporary basilica opening hours of 05:00–17:00. The Grotto of the Nativity has separate visiting hours during restoration: 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday. Check both schedules before travelling.",
         "Agree on your return pickup time and location in advance. Allow extra time for checkpoints and transport connections."
       ],
       "richParagraphs": [
@@ -432,14 +445,21 @@ export const journeyDestinationGuides = {
         ],
         [
           {
-            "text": "The Church of the Nativity is a UNESCO World Heritage site. During restoration, the "
+            "text": "The Church of the Nativity is a UNESCO World Heritage site. The Christian Information Center lists "
           },
           {
-            "text": "Christian Information Center's published notice",
+            "text": "temporary basilica hours of 05:00–17:00",
+            "href": "https://www.cicts.org/our-services/"
+          },
+          {
+            "text": ". The "
+          },
+          {
+            "text": "Grotto of the Nativity has separate visiting hours during restoration",
             "href": "https://www.cicts.org/bethlehem-basilica-of-the-nativity-cts/"
           },
           {
-            "text": " lists grotto visiting hours as 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday. These hours apply to the grotto, not the whole basilica. Check for updates before visiting."
+            "text": ": 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday. Check both schedules before travelling."
           }
         ],
         [
@@ -513,11 +533,11 @@ export const journeyDestinationGuides = {
     "faqs": [
     {
       "q": "What is the cheapest way to travel from Jerusalem to Bethlehem?",
-      "a": "An East Jerusalem bus is normally the lowest-cost option. Line 231 serves the Bab al-Zaqaq area towards central Bethlehem; line 234 ends at Checkpoint 300 and usually requires an onward ride."
+      "a": "An East Jerusalem bus is normally the lowest-cost option. South Buses currently publishes an ₪8 fare for journeys up to 15 km; confirm the fare for your exact ride. Line 231 goes towards Bab al-Zaqaq, while line 234 ends at Checkpoint 300 and requires onward travel."
     },
     {
       "q": "Is bus 231 or bus 234 better for the Church of the Nativity?",
-      "a": "Line 231 travels toward the Bab al-Zaqaq / Beit Jala area and generally gets you closer to central Bethlehem. Line 234 serves Checkpoint 300, requiring a pedestrian crossing and onward transport when permitted. Neither bus stops directly at the church."
+      "a": "Line 231 stops at Bab al-Zaqaq / Beit Jala Road, about 1 km from Manger Square. Line 234 ends at Checkpoint 300, where eligible visitors arrange the crossing and onward transport. Neither bus stops at the Church of the Nativity."
     },
     {
       "q": "Where do buses to Bethlehem leave from in Jerusalem?",
@@ -529,7 +549,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Can an Israeli taxi take me directly into Bethlehem?",
-      "a": "An Israeli taxi will not normally take you directly into Bethlehem. Eligible visitors can travel to Checkpoint 300, cross on foot when permitted and arrange onward transport."
+      "a": "Through-travel into Bethlehem depends on the driver's and vehicle's permits and insurance. Israeli taxis generally stop before Checkpoint 300; eligible visitors can use the pedestrian crossing when operating and arrange local transport."
     },
     {
       "q": "Do I need a passport to visit Bethlehem?",
@@ -553,7 +573,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Is the Grotto of the Nativity open to visitors?",
-      "a": "Yes, but visits to the grotto may be restricted during restoration. Check the Christian Information Center's current notice for visiting hours before you go."
+      "a": "Yes, with temporary separate hours: the Christian Information Center lists the basilica at 05:00–17:00 and grotto visits at 12:30–14:30 Monday–Saturday or 11:00–15:00 Sunday during restoration. Check for updates before visiting."
     }
   ],
   "related": [
