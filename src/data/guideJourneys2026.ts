@@ -312,7 +312,7 @@ export const journeyDestinationGuides = {
       "title": "By bus: choose line 231 or 234",
       "paragraphs": [
         "Buses to Bethlehem leave from the East Jerusalem bus station near Damascus Gate, not Jerusalem Central Bus Station. The Christian Information Center's East Jerusalem bus guide identifies the boarding area.",
-        "South Buses currently publishes an ₪8 standard cash fare and an ₪8 Rav-Kav fare for trips of up to 15 km. With Rav-Kav, tap in on every ride; the operator describes 90-minute transfers under the ticket rules. Check the exact distance-based fare and return timetable for your trip."
+        "South Buses publishes an ₪8 standard cash fare and an ₪8 Rav-Kav fare for journeys up to 15 km. Rav-Kav passengers must validate on each ride; the operator also describes 90-minute transfers under the ticket rules. Check the exact fare and return timetable for your journey."
       ],
       "richParagraphs": [
         [
@@ -434,7 +434,7 @@ export const journeyDestinationGuides = {
       "title": "Plan a half-day visit and the journey back",
       "paragraphs": [
         "Half a day is usually enough to see Bethlehem's main central sites. Allow extra time for church queues, transport and any additional stops.",
-        "The Church of the Nativity is a UNESCO World Heritage site. The Christian Information Center currently lists temporary basilica opening hours of 05:00–17:00. The Grotto of the Nativity has separate visiting hours during restoration: 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday. Check both schedules before travelling.",
+        "The Church of the Nativity is a UNESCO World Heritage site. The Christian Information Center lists temporary basilica hours of 05:00–17:00. The Grotto of the Nativity has separate visiting hours during restoration: 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday. Check both schedules before travelling.",
         "Agree on your return pickup time and location in advance. Allow extra time for checkpoints and transport connections."
       ],
       "richParagraphs": [
