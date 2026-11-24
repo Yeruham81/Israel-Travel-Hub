@@ -873,10 +873,8 @@ describe("migrated practical guides", () => {
     expect(guide.sections.map(section => section.id)).toEqual([
       "nesher-amal", "local-sherut", "airport-alternatives", "official-taxi", "weekend", "booked-shared",
     ]);
-    expect(guide.sections.filter(section => section.photo)).toHaveLength(1);
-    const localPhoto = guide.sections.find(section => section.id === "local-sherut")!.photo!;
-    expect(localPhoto.src).not.toBe(guide.photo.src);
-    expect(localPhoto.sourceUrl).toContain("commons.wikimedia.org/wiki/File:Sherut.JPG");
+    expect(guide.photo.src).toContain("sherut-nesher-airport.webp");
+    expect(guide.sections.filter(section => section.photo)).toHaveLength(0);
     expect(guide.sections.find(section => section.id === "nesher-amal")!.photo).toBeUndefined();
     expect(guide.comparison.rows).toHaveLength(4);
     expect(guide.comparison.headers).toEqual(["Ride type", "How it works", "When it is useful"]);
@@ -948,7 +946,7 @@ describe("migrated practical guides", () => {
     const mainTable = within(container).getByRole("table", { name: "Sherut, shuttle, taxi or private transfer?" });
     expect(mainTable.querySelectorAll("tbody tr")).toHaveLength(4);
     const localSection = container.querySelector("#local-sherut")!;
-    expect(localSection.querySelector("figure img")?.getAttribute("src")).toContain("upload.wikimedia.org");
+    expect(localSection.querySelector("figure img")).toBeNull();
     const related = within(container).getByRole("region", { name: "Related practical guides" });
     const next = within(container).getByRole("region", { name: "Plan the next part of your trip" });
     const contact = within(container).getByRole("form", { name: "Guide contact message" });
