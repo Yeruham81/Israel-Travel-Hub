@@ -1,0 +1,26 @@
+name: Prelaunch read-only sitemap + every page audit
+
+on:
+  push:
+    branches: [audit/prelaunch-full-site-20261124]
+    paths:
+      - ".github/workflows/prelaunch-full-site-audit.yml"
+      - "scripts/audits/prelaunch_full_site.py"
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    name: Check all published routes and internal links without mutation
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch sitemap and inspect every published route, links and images
+        run: python scripts/audits/prelaunch_full_site.py
