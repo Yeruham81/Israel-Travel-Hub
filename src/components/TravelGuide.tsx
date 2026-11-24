@@ -35,6 +35,8 @@ const shabbatPlanningIcons: Record<string, LucideIcon> = {
   [travelGuidePaths.travelTips]: BookOpen,
 };
 
+const uberSourceIds = ["guide-uber-availability", "guide-lyft-cities", "guide-ridesharing-bill-2026", "guide-gett-app", "guide-yango-israel", "guide-iaa", "taxi-fares-2026"];
+
 const uberPlanningIcons: Record<string, LucideIcon> = {
   "/airport-transfers/": Plane,
   "/private-driver-in-israel/": Car,
@@ -98,7 +100,7 @@ export function travelGuideMeta(id: TravelGuideId) {
   return { ...meta, scripts: [...meta.scripts, jsonLd(
     { "@context": "https://schema.org", "@type": "Article", "@id": `${CANONICAL_ORIGIN}${path}#article`, headline: guide.title, description: guide.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${path}`, inLanguage: "en", dateModified: updatedAt,
       author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      about: guide.topics.map((topic) => guideTopics.find((item) => item.id === topic)!.label), citation: publicSources(sourcesFor(guide)).map((source) => source.url), image: imageUrl,
+      about: guide.topics.map((topic) => guideTopics.find((item) => item.id === topic)!.label), citation: publicSources(id === "uber" ? uberSourceIds : sourcesFor(guide)).map((source) => source.url), image: imageUrl,
     })] };
 }
 
@@ -443,7 +445,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
       {id === "taxis" && <HomeContactForm context="taxis" showTripadvisorBesidePortraitMobile />}
       {id !== "taxis" && <HomeContactForm key={id} showTripadvisorBesidePortraitMobile={id === "airportTaxis" || id === "taxiFares" || id === "arrival" || id === "shabbat" || id === "uber"} guide={id === "uber" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer in Israel?", introduction: "Tell me your pickup location, destination, travel date and passenger details. I\u0027ll reply personally with an option suited to your journey.", placeholder: "Pickup, destination, date, passengers and luggage…" } : id === "airportTaxis" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight, destination, passengers and luggage. I'll reply personally about arranging a confirmed pickup.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "taxiFares" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Questions about a taxi journey?", introduction: "Tell me where and when you plan to travel. I can help you understand the available options or discuss a separately arranged private ride.", placeholder: "Route, travel date, passengers, luggage or your question…" } : id === "arrival" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight number, destination, passenger count and luggage. I can discuss a suitable confirmed airport transfer and meeting arrangement.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "shabbat" ? { ...guideContactCopy(guide.title, "shabbat"), eyebrow: "Contact Me" } : guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
-      {id === "uber" && <SourceList ids={["guide-uber-availability", "guide-lyft-cities", "guide-ridesharing-bill-2026", "guide-gett-app", "guide-yango-israel", "guide-iaa", "taxi-fares-2026"]} intro="Official information on ride apps, taxi regulations and airport pickup." compact linksOnly />}
+      {id === "uber" && <SourceList ids={uberSourceIds} intro="Official information on ride apps, taxi regulations and airport pickup." compact linksOnly />}
       {id === "taxis" && <SourceList ids={sourcesFor(guide)} intro="Official taxi service, passenger rights and public transport sources for this guide." />}
       {id === "airportTaxis" && <SourceList ids={sourcesFor(guide)} intro="Official Gett, Israel Airports Authority and Ministry of Transport information for airport taxi booking, pickup and fares." />}
       {id === "arrival" && <SourceList ids={sourcesFor(guide)} intro="Official entry, airport, customs, baggage and transport information for planning your arrival." />}
