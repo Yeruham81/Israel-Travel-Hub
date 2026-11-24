@@ -193,7 +193,7 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
              className={verticalLayout ? "aspect-[16/9] w-full object-cover" : "aspect-[16/9] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[215px]"} />
         {(showArea || showNearbyArea) && <Link to={area.path as LinkProps["to"]}
               className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2 py-1 text-[11px] font-medium leading-tight text-foreground shadow-sm hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              aria-label={`Explore ${area.shortName} area guide`}>
+              aria-label={`${showNearbyArea ? `Nearby · ${area.shortName}` : area.shortName} – area guide`}>
           {showNearbyArea ? `Nearby · ${area.shortName}` : area.shortName}
         </Link>}
       </div>
@@ -208,7 +208,7 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
           <a href={hotelAffiliateUrl(booking, pageId, hotel.id)} target="_blank" rel={relFor(booking.isAffiliate)}
              onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-4 py-2.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-             aria-label={`Check rooms & rates on ${booking.providerName} for ${hotel.name} (opens in a new tab)`}>
+             aria-label={`Check rooms & rates for ${hotel.name} on ${booking.providerName}`}>
             Check rooms & rates <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
