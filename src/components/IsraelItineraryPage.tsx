@@ -208,6 +208,9 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       <div className="mt-7 space-y-10">
         {g.daysPlan.map((day, index) => {
           const image = migrationPhotos[day.image];
+          const dayNumber = index + 1;
+          const inlineDestinations = new Set((g.dayInlineLinks ?? []).filter(link => link.day === dayNumber).map(link => String(link.to)));
+          const additionalDayLinks = day.links.filter(link => !inlineDestinations.has(String(link.to)));
           return <article key={index} id={`day-${index + 1}`} className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card">
             <header className="border-b bg-secondary/40 px-5 py-5 sm:px-7">
               <p className="eyebrow">Day {index + 1} · {day.region}</p>
@@ -228,21 +231,11 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                         </li>
                       ))}
                     </ul>
-                    {((id === "7" && (index === 3 || index === 5)) || (id === "10" && (index === 3 || index === 6 || index === 7))) && (
+                    {(presentation.transferDays.includes(index + 1) || index + 1 === g.days) && (
                       <p className="mt-3 text-xs leading-relaxed text-muted-foreground" data-testid="seven-day-transfer-times-note">
                         The times shown are for sightseeing only. Allow extra time for travel between stops, hotel check-in and luggage, especially when using public transport.
                       </p>
                     )}
-                  </div>
-                )}
-                {g.dayChoices?.find(choice => choice.day === index + 1) && (
-                  <div className="mt-5 grid gap-4 border-t pt-4 sm:grid-cols-2" data-testid={`day-${index + 1}-route-choices`}>
-                    {g.dayChoices.find(choice => choice.day === index + 1)!.options.map(option => (
-                      <div key={option.heading} className="min-w-0 text-sm leading-relaxed">
-                        <h4 className="font-semibold">{option.heading}</h4>
-                        <p className="mt-1 text-muted-foreground">{option.text}</p>
-                      </div>
-                    ))}
                   </div>
                 )}
                 <dl className="space-y-5">
@@ -250,20 +243,29 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                   <div><dt className="text-sm font-semibold text-primary">Afternoon</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.afternoon} links={dayTextLinks(g, index + 1, "afternoon")} /></dd></div>
                   <div><dt className="text-sm font-semibold text-primary">Evening</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.evening} links={dayTextLinks(g, index + 1, "evening")} /></dd></div>
                 </dl>
+                {g.dayChoices?.find(choice => choice.day === index + 1) && (
+                  <section aria-label={`Day ${index + 1} options`} className="mt-5 rounded-xl border border-primary/25 bg-secondary/30 p-4" data-testid={`day-${index + 1}-route-choices`}>
+                    <h4 className="text-sm font-semibold">Choose a route for this day</h4>
+                    <p className="mt-1 text-xs text-muted-foreground">Choose the option that fits your trip in place of the other plan.</p>
+                    <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                      {g.dayChoices.find(choice => choice.day === index + 1)!.options.map(option => (
+                        <div key={option.heading} className="min-w-0 text-sm leading-relaxed">
+                          <h5 className="font-semibold">{option.heading}</h5>
+                          <p className="mt-1 text-muted-foreground">{option.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
                 <div className="mt-6 border-l-4 border-primary bg-secondary/50 px-4 py-3">
                   <h4 className="font-semibold">{g.dayTipHeadings?.[index] ?? "Worth knowing"}</h4>
                   <p className="mt-1 text-sm leading-relaxed"><LinkedCopy value={day.practical} links={dayTextLinks(g, index + 1, "practical")} /></p>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed"><strong>Where to stay:</strong> <LinkedCopy value={day.overnight} links={dayTextLinks(g, index + 1, "overnight")} /></p>
-                {index + 1 === 3 && g.day3Options?.length ? <div className="mt-5 grid gap-3 border-t pt-4 sm:grid-cols-2" data-testid="departure-scenarios">
-                  {g.day3Options.map(option => <div key={option.heading} className="text-sm leading-relaxed">
-                    <h4 className="font-semibold">{option.heading}</h4>
-                    <p className="mt-1 text-muted-foreground">{option.text}</p>
-                  </div>)}
-                </div> : null}
-                {!g.dayInlineLinks?.some(link => link.day === index + 1) && <nav aria-label={`Read more about day ${index + 1}`} className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
-                  {day.links.map((link) => <Link key={link.label} to={link.to} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-2">{link.label} <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>)}
-                </nav>}
+                {additionalDayLinks.length > 0 && <nav aria-label={`Additional guides for day ${index + 1}`} className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-2 text-sm">
+                  <span className="text-muted-foreground">Further planning:</span>
+                  {additionalDayLinks.map(link => <Link key={link.label} to={link.to} className="font-semibold text-primary underline underline-offset-2">{link.label}</Link>)}
+                </nav>
               </div>
               <figure className="order-first self-start lg:order-last"><img src={image.src} alt={image.alt} width={500} height={375}
                 loading="lazy" decoding="async" className="aspect-[16/9] w-full rounded-xl object-cover sm:aspect-[4/3]" />
