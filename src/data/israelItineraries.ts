@@ -365,7 +365,6 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { index: 2, phrase: "rental cars in Israel", to: "/car-rental/" },
       { index: 3, phrase: "Israel transport options", to: "/travel-blog/getting-around-israel/" },
     ],
-    reviewedAt: "2026-11-13",
     overviewRows: [
       { focus: "Jerusalem Old City", travel: "Walk / short local ride", night: "Jerusalem · night 1" },
       { focus: "Masada and Ein Bokek", travel: "Tour / car / driver", night: "Jerusalem · night 2" },
