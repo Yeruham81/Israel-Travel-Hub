@@ -22,7 +22,11 @@ const photos = {
   masada: { src: masada, alt: "Masada plateau and the surrounding Dead Sea desert", credit: "Godot13 · CC BY-SA 4.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Israel-2013-Aerial_13-Masada.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
   yardenit: { src: yardenit, alt: "Visitors at the designated baptism areas at Yardenit, south of the Sea of Galilee", sourceUrl: "", credit: "Photo from the publisher's travel image archive." },
   qasr: { src: qasr, alt: "A baptism gathering at Qasr el-Yahud on the lower Jordan near Jericho", sourceUrl: "", credit: "Photo from the publisher's travel image archive." },
-  sepulchre: { src: sepulchre, alt: "Courtyard and facade of the Church of the Holy Sepulchre in  shabbat: {
+  sepulchre: { src: sepulchre, alt: "Courtyard and facade of the Church of the Holy Sepulchre in Jerusalem", sourceUrl: "", credit: "Photo from the publisher's travel image archive." },
+} satisfies Record<string, GuidePhoto>;
+
+export const expandedTravelGuides = {
+  shabbat: {
     id: "shabbat",
     title: "How to Get from Ben Gurion Airport on Shabbat",
     description: "Arriving at Ben Gurion Airport on Shabbat? Compare free bus 711, official taxis, private transfers and Saturday-night trains, with practical pickup tips.",
@@ -219,8 +223,6 @@ const photos = {
       { label: "Discover Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Explore natural sights and activities beyond the airport for a longer Israel trip." },
       { label: "Getting around Israel", to: travelGuidePaths.israel, note: "Plan trains, buses, local taxis and connections after the airport journey." },
       { label: "Israel travel tips", to: travelGuidePaths.travelTips, note: "Practical advice for a smooth first day and the rest of your visit." },
-    ],
-  },ead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Explore natural sights and activities beyond the airport for a longer Israel trip." },
     ],
   },
   travelTips: {
