@@ -1,5 +1,6 @@
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link, type LinkProps } from "@tanstack/react-router";
+import { BedDouble, BookOpen, CalendarDays, CarFront, Landmark, Plane, type LucideIcon } from "lucide-react";
 import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
 import { einGediCardPhoto } from "@/data/einGediCardPhoto";
@@ -62,31 +63,13 @@ const related: {
   },
 ];
 
-const nextSteps: { title: string; description: string; to: LinkProps["to"]; action: string }[] = [
-  {
-    title: "Israel's Calendar of Events",
-    description: "Check festivals, holidays and events that may shape your travel plans.",
-    to: "/travel-blog/calendar-of-events/",
-    action: "Explore Israel's events",
-  },
-  {
-    title: "When is the best time to visit Israel?",
-    description: "Plan around seasonal weather, holidays and major travel periods.",
-    to: "/travel-blog/best-time-to-visit-israel/",
-    action: "Israel travel seasons",
-  },
-  {
-    title: "Plan more of Jerusalem",
-    description: "Find places to visit before or after your Dead Sea excursion.",
-    to: "/travel-blog/jerusalem-travel-guide/",
-    action: "Read Jerusalem guide",
-  },
-  {
-    title: "Choose a Jerusalem hotel area",
-    description: "Consider where to stay for an early departure or late return.",
-    to: "/travel-blog/where-to-stay-in-jerusalem/",
-    action: "Where to stay in Jerusalem",
-  },
+const nextSteps: { title: string; description: string; to: LinkProps["to"]; icon: LucideIcon }[] = [
+  { title: "Private Driver", description: "Request a quote for a flexible Dead Sea day trip.", to: "/private-driver-in-israel/", icon: CarFront },
+  { title: "Masada & Dead Sea Tours", description: "Compare guided excursions and sightseeing trips.", to: "/tours/masada-dead-sea/", icon: Landmark },
+  { title: "Dead Sea Hotels", description: "Choose a hotel area for an overnight visit.", to: "/travel-blog/best-dead-sea-hotels/", icon: BedDouble },
+  { title: "Airport to Ein Bokek", description: "Plan direct transport from Ben Gurion Airport.", to: "/airport-transfers/ein-bokek/", icon: Plane },
+  { title: "Jerusalem Travel Guide", description: "Explore the capital before or after your trip.", to: "/travel-blog/jerusalem-travel-guide/", icon: BookOpen },
+  { title: "Israel's Calendar of Events", description: "Check holidays and local events for your dates.", to: "/travel-blog/calendar-of-events/", icon: CalendarDays },
 ];
 
 export function DeadSeaGuideFollowUps() {
@@ -109,12 +92,12 @@ export function DeadSeaGuideFollowUps() {
     <section aria-labelledby="deadsea-next-h" className="mt-12" data-testid="deadsea-next-steps">
       <h2 id="deadsea-next-h" className="text-2xl font-bold leading-tight sm:text-3xl">Plan the next part of your trip</h2>
 
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-        {nextSteps.map(item => <li key={String(item.to)}>
-          <Link to={item.to} className="group flex h-full flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-            <span className="font-semibold text-foreground group-hover:text-primary">{item.title}</span>
-            <span className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{item.description}</span>
-            <span className="mt-3 text-sm font-semibold text-primary">{item.action} →</span>
+      <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
+        {nextSteps.map(({ title, description, to, icon: Icon }) => <li key={String(to)} className="min-w-0">
+          <Link to={to} className="group flex h-full flex-col gap-2 rounded-xl border bg-card p-3.5 transition-all hover:-translate-y-0.5 hover:border-primary hover:bg-secondary/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-4">
+            <Icon className="h-5 w-5 shrink-0 text-primary" aria-hidden />
+            <span className="text-sm font-semibold leading-snug text-foreground group-hover:text-primary sm:text-base">{title}</span>
+            <span className="text-xs leading-relaxed text-muted-foreground sm:text-sm">{description}</span>
           </Link>
         </li>)}
       </ul>
