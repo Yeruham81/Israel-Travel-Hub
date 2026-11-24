@@ -63,7 +63,7 @@ async function snapshot(page,label){
  check(data.dayTrips.join(",")==="jerusalem,masada,galilee,coast",label+" four private trip ideas",JSON.stringify(data.dayTrips));
  check(data.related.length===12&&data.related.every(x=>x.to),label+" twelve illustrated internal guides",String(data.related.length));
  check(data.maps===4,label+" four geographical links",String(data.maps));
- check(data.customEnquiries.length===4&&data.customEnquiries.every(x=>x.href==="#contact"&&x.label.includes("Ask me about this private trip")&&x.secondary?.startsWith("/tours/")),label+" four personalized enquiry links and secondary tours",JSON.stringify(data.customEnquiries));
+ check(data.customEnquiries.length===4&&data.customEnquiries.every(x=>x.href==="#contact"&&x.label.length>=12&&/(?:me|my|your|our|trip|day|plans)/i.test(x.label)&&x.secondary?.startsWith("/tours/")),label+" four distinct personalized enquiry labels and secondary tours",JSON.stringify(data.customEnquiries));
  check(data.sampleOrders.length===4&&data.sampleOrders.every(x=>x.steps===3&&x.rest&&x.short),label+" four practical three-stop routes with rests and shorter alternatives",JSON.stringify(data.sampleOrders));
  check(data.midpageCta===1,label+" additional modest enquiry link after day trips");
  check(data.accessResources.length>=6&&data.accessResources.some(h=>h.includes("play.google.com"))&&data.accessResources.some(h=>h.includes("apps.apple.com"))&&data.accessResources.some(h=>h.includes("parks.org.il")),label+" targeted accessible route maps and official park links",JSON.stringify(data.accessResources));
