@@ -25,7 +25,7 @@ const tourPhotos = {
 export function BethlehemTourOptions() {
   return <section aria-labelledby="bethlehem-tour-options-h" className="mt-6 scroll-mt-24" data-testid="bethlehem-tour-options">
     <h3 id="bethlehem-tour-options-h" className="text-2xl font-semibold">Compare tours starting in Jerusalem</h3>
-    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Prices and availability can change. Before booking, confirm your departure point, itinerary, what's included and cancellation terms.</p>
+    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Compare half-day, private and combined excursions. Some listings on different platforms are supplied by the same local tour operator, so compare the actual stops and Jerusalem meeting points.</p>
     <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {bethlehemTourCards.map(tour => {
         const url = affiliateConfig[tour.id]?.trackingUrl;
@@ -43,6 +43,7 @@ export function BethlehemTourOptions() {
         />;
       })}
     </div>
+    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These tours are operated by independent providers and booked through their own platforms. Tour details, availability, prices and booking conditions are set by the operators and may change. Before booking, check the departure date and location, itinerary, guiding, walking requirements, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider.</p>
     <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
       Shepherds’ Field Chapel photo: <a href="https://commons.wikimedia.org/wiki/File:Shepherds_Field_Chapel,_Roman_Catholic_(Beit_Sahour)-interior_(2).jpg" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Armineaghayan / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">CC BY-SA 4.0</a> (resized).
     </p>
