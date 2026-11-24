@@ -72,7 +72,7 @@ describe("car rental guide and Travelpayouts search", () => {
     render(<DiscoverCarsSearchWidget />);
     expect(screen.getByTitle("DiscoverCars car rental search")).toHaveAttribute("src", "/widgets/discovercars.html");
     const html = new DOMParser().parseFromString(readFileSync("public/widgets/discovercars.html", "utf8"), "text/html");
-    const src = new URL(html.querySelector<HTMLScriptElement>("script[src]")!.src);
+    const src = new URL(html.querySelector<HTMLScriptElement>("script[data-consent-src]")!.dataset.consentSrc!);
     expect(src.origin).toBe("https://tpwgt.com");
     expect(Object.fromEntries(src.searchParams)).toMatchObject({ campaign_id: "117", promo_id: "3873", trs: "406243", shmarker: "622032.car_rental_widget", location: "israel/tel-aviv/tlv", locale: "en" });
     expect(html.querySelector('meta[name="robots"]')?.getAttribute("content")).toBe("noindex,nofollow");

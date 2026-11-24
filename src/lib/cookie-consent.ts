@@ -27,6 +27,12 @@ let cached: CookieConsent | null = null;
 let cachedValue = "";
 let memoryOnly: CookieConsent | null | undefined;
 const listeners = new Set<() => void>();
+let expiryTimer: ReturnType<typeof setTimeout> | undefined;
+function scheduleExpiry() {
+  clearTimeout(expiryTimer);
+  const value = getCookieConsent();
+  if (value && listeners.size) expiryTimer = setTimeout(notify, Math.min(2147483647, Math.max(1, value.expiresAt - Date.now() + 1)));
+}
 export function getCookieConsent(): CookieConsent | null {
   if (typeof window === "undefined") return null;
   if (memoryOnly !== undefined) return memoryOnly && memoryOnly.expiresAt > Date.now() ? memoryOnly : null;
@@ -54,6 +60,7 @@ function clearOptionalRecords() {
 }
 function notify() {
   clearOptionalRecords();
+  scheduleExpiry();
   listeners.forEach(listener => listener());
   window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
 }
@@ -77,11 +84,11 @@ export function subscribeCookieConsent(listener: () => void) {
     window.addEventListener("storage", refresh);
     window.addEventListener("focus", refreshOnFocus);
   }
-  const timer = window.setInterval(() => { if (!getCookieConsent()) notify(); }, 60000);
+  scheduleExpiry();
   return () => {
     listeners.delete(listener);
-    window.clearInterval(timer);
     if (!listeners.size) {
+      clearTimeout(expiryTimer);
       window.removeEventListener("storage", refresh);
       window.removeEventListener("focus", refreshOnFocus);
     }

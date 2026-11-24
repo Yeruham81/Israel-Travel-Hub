@@ -57,8 +57,8 @@ describe("current legal documents", () => {
     expect(doc.getElementById("storage")?.textContent).toContain("does not upload the record");
     expect(doc.getElementById("storage")?.textContent).toContain("continuing to browse, is not a substitute");
     const planned = doc.getElementById("analytics-advertising")?.textContent || "";
-    expect(planned).toContain("I use Google Analytics after you choose Allow analytics");
-    expect(planned).toContain("does not load its Google Analytics tag");
+    expect(planned).toContain("Cookie settings cover all optional services");
+    expect(planned).toContain("only after you approve their category");
     expect(planned).toContain("The website may include outbound booking links");
     expect(planned).toContain("when it loads");
     expect(planned).toContain("change or withdraw");
