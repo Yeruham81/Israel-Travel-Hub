@@ -1,5 +1,14 @@
 name: Verify all affiliate links use Travelpayouts
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "scripts/audit-travelpayouts-only.cjs"
+      - "src/data/registry.ts"
+      - "src/components/StayEditorialGuidePage.tsx"
+      - "src/components/TravelpayoutsHotelWidgets.tsx"
+      - "src/components/**"
+      - ".github/workflows/audit-travelpayouts-only.yml"
   push:
     branches: [main]
     paths:
@@ -24,8 +33,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - name: Scan source affiliate URLs
-        continue-on-error: true
+      - name: Enforce Travelpayouts-only source links
         run: node scripts/audit-travelpayouts-only.cjs
       - uses: oven-sh/setup-bun@v2
       - name: Install site dependencies
