@@ -65,8 +65,8 @@ jobs:
           NODE_PATH: /tmp/travelpayouts-audit/node_modules
           BAPTISM_AUDIT_ORIGIN: http://127.0.0.1:4173
           JERUSALEM_HUB_AUDIT_ORIGIN: http://127.0.0.1:4173
-          SENIOR_TOURS_AUDIT_ORIGIN: http://127.0.0.1:4173
-          JERUSALEM_CHURCHES_AUDIT_ORIGIN: http://127.0.0.1:4173
+          SENIORS_AUDIT_ORIGIN: http://127.0.0.1:4173
+          CHURCHES_AUDIT_ORIGIN: http://127.0.0.1:4173
           HOLIDAY_GUIDE_ORIGIN: http://127.0.0.1:4173
         run: |
           node scripts/audit-jerusalem-churches-published.cjs
