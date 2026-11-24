@@ -32,6 +32,15 @@ describe("Seven exact supplier links upgraded to Travelpayouts", () => {
     expect(genericTiberias?.isAffiliate).toBe(false);
   });
 
+  it("routes the Tel Aviv hotel hub Booking.com CTA to the exact city affiliate link", () => {
+    const id = "hotels-telaviv-booking";
+    const expected = "https://booking.tpk.lv/uFvoGvgK";
+    expect(affiliateConfig[id + "@stay-telaviv"]?.trackingUrl).toBe(expected);
+    const links = linksForPage("stay-telaviv").filter(link => link.id === id);
+    expect(links).toHaveLength(1);
+    expect(links[0]).toMatchObject({ providerName: "Booking.com", partnerId: "booking", url: expected, isAffiliate: true });
+  });
+
   const viator = [
     { code: "6540P87", path: "src/components/MountOlivesAttractionPage.tsx", href: "https://viator.tpk.lv/frgpZFls", source: mountOlivesDestinationContent },
     { code: "117240P3", path: "src/components/MountOlivesAttractionPage.tsx", href: "https://viator.tpk.lv/v3Tk4hG1", source: mountOlivesDestinationContent },
