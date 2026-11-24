@@ -123,7 +123,7 @@ describe("travel guide topic filters and prerender safety", () => {
     expect(sectionPhotos).toHaveLength(1);
     expect(sectionPhotos[0]!.src).toContain("sherut-local-taxis");
     expect(sectionPhotos[0]!.src).not.toBe(sherut.photo.src);
-    expect(sectionPhotos[0]!.src).not.toMatch(/^https?:\\/\\//);
+    expect(sectionPhotos[0]!.src).not.toMatch(/^https?:/);
     expect(sherut.sections.find(section => section.id === "official-taxi")?.photo).toBeUndefined();
     for (const guide of Object.values(travelGuides)) {
       const photos = [guide.photo, guide.cardPhoto, ...guide.sections.flatMap(section =>
