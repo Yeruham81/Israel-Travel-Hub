@@ -21,7 +21,13 @@ import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 
-const REVIEWED_AT = "2026-10-23";
+const REVIEWED_AT = "2026-11-24";
+const itineraryPresentation: Record<ItineraryId, { bases: string; transport: string; transferDays: number[] }> = {
+  "3": { bases: "Jerusalem base · Tel Aviv optional", transport: "One full desert excursion", transferDays: [3] },
+  "5": { bases: "Jerusalem + Tel Aviv bases", transport: "Desert and coast excursions", transferDays: [4] },
+  "7": { bases: "Jerusalem + Galilee + Tel Aviv", transport: "Galilee and coastal transfer days", transferDays: [4, 6] },
+  "10": { bases: "Four bases · or three without Haifa", transport: "Galilee and coastal transfer days", transferDays: [4, 7, 8] },
+};
 const internal = (to: LinkProps["to"]) => to;
 
 export function itineraryMeta(id: ItineraryId) {
@@ -92,7 +98,11 @@ function LinkedCopy({ value, links = [] }: { value: string; links?: CopyLink[] |
 const guideSections = (g: ItineraryGuide): [string, string][] => [
   ["overview", "Trip overview"],
   ["days", "Daily itinerary"],
-  ...g.daysPlan.map((_, index): [string, string] => [`day-${index + 1}`, `Day ${index + 1}`]),
+  ...(g.id === "10"
+    ? [["day-1", "Days 1–3"], ["day-4", "Days 4–6"], ["day-7", "Days 7–10"]]
+    : g.id === "7"
+      ? [["day-1", "Days 1–3"], ["day-4", "Days 4–7"]]
+      : g.daysPlan.map((_, index): [string, string] => [`day-${index + 1}`, `Day ${index + 1}`])) as [string, string][],
   ["transport", g.beforeYouGo?.length ? "Planning tips" : "Transport & hotels"],
   ...(g.alternatives.length ? [["alternatives", "Adjust the route"] as [string, string]] : []),
   ["faq", "FAQ"],
@@ -104,7 +114,8 @@ const guideSections = (g: ItineraryGuide): [string, string][] => [
 export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
   const g = itineraries[id];
   const photo = migrationPhotos[g.hero];
-  const compactOverview = id === "3" || id === "5" || id === "7" || id === "10";
+  const compactOverview = true;
+  const presentation = itineraryPresentation[id];
   const showTravel = g.overviewRows?.some(row => Boolean(row.travel));
   const shownImages: { label: string; photo: GuidePhoto }[] = [
     { label: "Cover", photo },
@@ -127,13 +138,23 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
         <div className="mt-5 flex flex-wrap gap-2 text-xs font-medium">
           <span className="rounded-full bg-secondary px-3 py-2">{g.days} full sightseeing days</span>
-          <span className="rounded-full bg-secondary px-3 py-2">Realistic hotel bases</span>
-          <span className="rounded-full bg-secondary px-3 py-2">Public / private transport choices</span>
+          <span className="rounded-full bg-secondary px-3 py-2">{presentation.bases}</span>
+          <span className="rounded-full bg-secondary px-3 py-2">{presentation.transport}</span>
         </div>
         <PageUpdated date={g.reviewedAt ?? REVIEWED_AT} />
       </GuideHeroLayout>
       <AuthorCard />
     </header>
+    <nav aria-label="Choose your Israel trip length" className="mt-6 rounded-xl border bg-card p-3 shadow-sm" data-testid="itinerary-duration-switcher">
+      <p className="mb-2 text-sm font-semibold text-foreground">Choose your itinerary length</p>
+      <div className="grid grid-cols-4 gap-2">
+        {itineraryIds.map(other => <Link key={other} to={itineraries[other].path as LinkProps["to"]}
+          aria-current={other === id ? "page" : undefined}
+          className={`rounded-lg border px-2 py-2.5 text-center text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${other === id ? "border-primary bg-primary text-primary-foreground" : "bg-secondary/40 text-foreground hover:border-primary hover:bg-secondary"}`}>
+          {other} days
+        </Link>)}
+      </div>
+    </nav>
     <OnThisPage sections={guideSections(g)} />
     <section id="overview" aria-labelledby="overview-h" className="mt-10 scroll-mt-28">
       <h2 id="overview-h" className="text-3xl">The route at a glance</h2>
@@ -160,14 +181,26 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
           </thead>
           <tbody className="divide-y">
             {g.daysPlan.map((day, index) => <tr key={index}>
-              <th scope="row" className="sticky left-0 z-10 bg-card px-4 py-3 align-top font-semibold">{index + 1}</th>
+              <th scope="row" className="sticky left-0 z-10 bg-card px-4 py-3 align-top font-semibold">
+                <a href={`#day-${index + 1}`} className="rounded-sm text-primary underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-primary">Day {index + 1}</a>
+              </th>
               <td className="px-4 py-3 align-top">{g.overviewRows?.[index]?.focus ?? day.name}</td>
               {showTravel && <td className="px-4 py-3 align-top text-muted-foreground">{g.overviewRows?.[index]?.travel}</td>}
-              <td className="px-4 py-3 align-top text-muted-foreground">{g.overviewRows?.[index]?.night ?? day.overnight}</td>
+              <td className="px-4 py-3 align-top text-muted-foreground">
+                {g.overviewRows?.[index]?.night ?? day.overnight}
+                {presentation.transferDays.includes(index + 1) && <span className="ml-2 inline-block rounded-md border border-primary/30 bg-secondary px-2 py-0.5 text-xs font-semibold text-foreground">Hotel transfer</span>}
+                {index + 1 === g.days && <span className="ml-2 inline-block rounded-md border px-2 py-0.5 text-xs font-semibold text-foreground">Flight date matters</span>}
+              </td>
             </tr>)}
           </tbody>
         </table>
       </div>
+      {id === "3" && g.day3Options?.length ? <div className="mt-5 grid gap-3 sm:grid-cols-2" data-testid="departure-scenarios">
+        {g.day3Options.map(option => <div key={option.heading} className="rounded-xl border bg-card p-4 text-sm leading-relaxed">
+          <h3 className="font-semibold">{option.heading}</h3>
+          <p className="mt-1 text-muted-foreground">{option.text}</p>
+        </div>)}
+      </div> : null}
     </section>
     <section id="days" aria-labelledby="days-h" className="mt-14 scroll-mt-28">
       <h2 id="days-h" className="text-3xl">Your {g.days}-day itinerary, day by day</h2>
