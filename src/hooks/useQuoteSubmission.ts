@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import { knownDeliveryErrorCode, quoteRequestEndpoint, type DeliveryErrorCode, type QuoteRequest, type QuoteRequestPayload } from "@/lib/quote-request";
+import { trackAcceptedEnquiry } from "@/lib/analytics";
 
 type SubmissionResult = { state: "idle" | "sending" | "sent" | "unavailable" | "failed"; requestId?: string; error?: string; deliveryCode?: DeliveryErrorCode; httpStatus?: number };
 
@@ -57,6 +58,7 @@ export function useQuoteSubmission() {
         return;
       }
       attempt.current!.accepted = true;
+      trackAcceptedEnquiry(request.kind, requestId);
       setResult({ state: "sent", requestId });
     } catch {
       setResult({ state: "failed", ...(attempt.current ? { requestId: attempt.current.requestId } : {}), deliveryCode: controller.signal.aborted ? "REQUEST_TIMEOUT" : "REQUEST_NETWORK", error: "Email delivery could not be confirmed. Please contact me before sending the same message again." });

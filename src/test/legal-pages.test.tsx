@@ -26,7 +26,7 @@ describe("current legal documents", () => {
     const { doc, route } = await legalDocument(path);
     expect(doc.querySelectorAll("h1")).toHaveLength(1);
     expect(doc.querySelector("h1")?.textContent).toBe(title);
-    expect(doc.querySelector("time")?.getAttribute("datetime")).toBe("2026-11-13");
+    expect(doc.querySelector("time")?.getAttribute("datetime")).toBe(path === "/privacy-policy/" ? "2026-11-24" : "2026-11-13");
     expect(doc.querySelector(`a[href="${other}"]`)).not.toBeNull();
     expect(doc.querySelector(`a[href="mailto:${airportTransferContact.email}"]`)).not.toBeNull();
     const contents = doc.querySelectorAll('nav[aria-label="On this page"] a');
@@ -57,11 +57,12 @@ describe("current legal documents", () => {
     expect(doc.getElementById("storage")?.textContent).toContain("does not upload the record");
     expect(doc.getElementById("storage")?.textContent).toContain("continuing to browse, is not a substitute");
     const planned = doc.getElementById("analytics-advertising")?.textContent || "";
-    expect(planned).toContain("Google Analytics is planned");
+    expect(planned).toContain("I use Google Analytics after you choose Allow analytics");
+    expect(planned).toContain("does not load its Google Analytics tag");
     expect(planned).toContain("The website may include outbound booking links");
     expect(planned).toContain("when it loads");
     expect(planned).toContain("change or withdraw");
-    expect(planned).toContain("Google Fonts is currently used");
+    expect(planned).toContain("fonts used for this website are served locally");
     expect(doc.getElementById("payments")?.textContent).toContain("does not currently process online payments");
     expect(doc.getElementById("payments")?.textContent).toContain("If online payment facilities are enabled later");
     expect(doc.getElementById("rights")?.textContent).toContain("request access or correction");

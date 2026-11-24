@@ -4,6 +4,7 @@ import { lazy, Suspense, useEffect, useId, useState, type ReactNode } from "reac
 import { ChevronDown, Compass } from "lucide-react";
 
 import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, legalNav, type NavItem, type SidebarNavItem } from "@/data/nav";
+import { AnalyticsPreferencesLink } from "@/components/Analytics";
 import { relFor } from "@/lib/outbound";
 
 export function ExtLink({ href, children, className }: { href: string; children: ReactNode; className?: string }) {
@@ -210,6 +211,7 @@ export function SiteFooter() {
         <nav aria-label="Legal" className="border-t border-white/20 pt-6 text-sm md:col-span-4">
           <ul className="flex flex-wrap gap-x-6 gap-y-3">
             {legalNav.map((item) => <li key={item.label}><Link to={item.to} className="underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4">{item.label}</Link></li>)}
+            <AnalyticsPreferencesLink />
           </ul>
         </nav>
       </div>
