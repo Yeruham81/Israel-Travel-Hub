@@ -1,4 +1,4 @@
-name: Stage 5 lightweight guide directory experiment
+name: Stage 5 registry and content separation experiment
 on:
   pull_request:
     branches: [main]
@@ -7,7 +7,7 @@ permissions:
   contents: read
 jobs:
   graph:
-    if: github.head_ref == 'audit/stage5-lightweight-directory-20261125'
+    if: github.head_ref == 'audit/stage5-registry-content-20261125'
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
@@ -56,12 +56,6 @@ jobs:
           assert s.count(old)==1
           p.write_text(s.replace(old,'import { stage5AuditPlugin } from "./stage5-audit-plugin.mjs";\n\n'+old+'\n  vite: { plugins: [stage5AuditPlugin()] },'))
           PY
-      - run: bash scripts/build-validated-static.sh
-      - name: Preserve unmodified baseline output
-        run: |
-          mv .output/public /tmp/stage5-baseline-public
-          mkdir -p stage5-js-audit/baseline
-          mv stage5-js-audit/*.json stage5-js-audit/baseline/
       - name: Extract route-specific head computations into async imports (experiment only)
         run: |
           cat > stage5-split-heads.mjs <<'JS'
@@ -251,7 +245,188 @@ jobs:
           });
           TS
           rm -f stage5-directory-entry.ts
-      - name: Build combined route-head and lightweight-directory experiment
+      - name: Build verified two-optimization baseline
+        run: bash scripts/build-validated-static.sh
+      - name: Preserve two-optimization baseline output
+        run: |
+          mv .output/public /tmp/stage5-baseline-public
+          mkdir -p stage5-js-audit/baseline
+          mv stage5-js-audit/*.json stage5-js-audit/baseline/
+      - name: Split registry by responsibility and isolate airport card photo lookups
+        run: |
+          cat > stage5-split-registry.mjs <<'JS'
+          import fs from "node:fs";
+          import path from "node:path";
+          import ts from "typescript";
+          const target=path.resolve("src/data/registry.ts");
+          const cfg=ts.readConfigFile("tsconfig.json",ts.sys.readFile);
+          const opts=ts.parseJsonConfigFileContent(cfg.config,ts.sys,process.cwd());
+          const program=ts.createProgram(opts.fileNames,opts.options),checker=program.getTypeChecker();
+          const file=program.getSourceFile(target);
+          if(!file)throw Error("Registry source missing");
+          const groupOf=n=>{
+            if(/^(?:INFO_CHECK_DATE|.*_CHECK_DATE|.*_REVIEW_DATE|formatCheckDate)$/.test(n))return "dates";
+            if(/^(?:SourceReference|ISODate|Operator|PartnerCapability|BookingPartner|PriceBasis|IndicativePrice|OfferCategory|BookingMode|Offer|RouteRecord|Relationship|ProviderLink|ResortHotelFacts|HotelRecommendation|AirportTransferRate|ShoreExcursionRate|ShoreTourProduct|ShoreServiceRecord)$/.test(n))return "types";
+            if(/^(?:travelGuideSources|.*HotelSources|ownerDayTripSources|sourceCatalog|sources|getSource|publicSources)$/.test(n))return "sources";
+            if(/^(?:affiliateConfig|AIRALO_.*|partners|operators)$/.test(n))return "partners";
+            if(/^(?:airportTransfer.*|AirportTransferRouteId|tlvToJerusalem|commonConfirm|offers|routeFaqs)$/.test(n))return "airport";
+            if(/^(?:privateDriver.*|PrivateDriverServiceId)$/.test(n))return "private";
+            if(/^(?:shore.*|Shore.*)$/.test(n))return "shore";
+            if(/^(?:tourProducts|tourBookingOffers|ownerDayTripRate)$/.test(n))return "tours";
+            if(/^(?:.*HotelRecommendations|hotelRecommendations|hotelsForArea)$/.test(n))return "hotels";
+            if(/^(?:moshe|providerLinks|linksForPage)$/.test(n))return "links";
+            throw Error("Unclassified declaration "+n);
+          };
+          const modules=new Map(),own=new Map(),imported=new Map(),exportMap=new Map(),reexports=[];
+          const add=(name,symbol,group,node,typeOnly,isPublic)=>{
+            if(!symbol||own.has(symbol))throw Error("Unexpected duplicate/missing registry symbol "+name);
+            own.set(symbol,{name,group,typeOnly});
+            if(isPublic)exportMap.set(name,"@/data/stage5-registry-"+group);
+            if(!modules.has(group))modules.set(group,[]);
+            modules.get(group).push(node);
+          };
+          const hasExport=n=>n.modifiers?.some(m=>m.kind===ts.SyntaxKind.ExportKeyword);
+          for(const n of file.statements){
+            if(ts.isImportDeclaration(n)){
+              const c=n.importClause;if(!c)throw Error("Unexpected side-effect import");
+              const names=[...(c.name?[c.name]:[]),...(c.namedBindings?(ts.isNamedImports(c.namedBindings)?c.namedBindings.elements.map(e=>e.name):[c.namedBindings.name]):[])];
+              for(const name of names)imported.set(checker.getSymbolAtLocation(name),n);
+              continue;
+            }
+            if(ts.isExportDeclaration(n)){
+              if(!n.exportClause||!ts.isNamedExports(n.exportClause)||!n.moduleSpecifier||!ts.isStringLiteral(n.moduleSpecifier))throw Error("Unexpected registry reexport");
+              for(const e of n.exportClause.elements){
+                if(e.propertyName)throw Error("Aliased reexport not handled");
+                exportMap.set(e.name.text,n.moduleSpecifier.text);reexports.push(e.name.text);
+              }
+              continue;
+            }
+            let name,typeOnly=false;
+            if(ts.isVariableStatement(n)&&n.declarationList.declarations.length===1){name=n.declarationList.declarations[0].name;}
+            else if(ts.isFunctionDeclaration(n)||ts.isInterfaceDeclaration(n)||ts.isTypeAliasDeclaration(n)){name=n.name;typeOnly=ts.isInterfaceDeclaration(n)||ts.isTypeAliasDeclaration(n);}
+            if(!name||!ts.isIdentifier(name))throw Error("Unsupported registry declaration "+n.getText(file).slice(0,100));
+            add(name.text,checker.getSymbolAtLocation(name),groupOf(name.text),n,typeOnly,hasExport(n));
+          }
+          const plan=[];
+          for(const [group,nodes] of modules){
+            const external=new Set(),cross=new Map();
+            const walk=n=>{
+              if(ts.isIdentifier(n)){
+                const sym=ts.isShorthandPropertyAssignment(n.parent)&&n.parent.name===n?checker.getShorthandAssignmentValueSymbol(n.parent):checker.getSymbolAtLocation(n);
+                if(imported.has(sym))external.add(imported.get(sym));
+                const dep=own.get(sym);
+                if(dep&&dep.group!==group)cross.set(dep.name,dep);
+              }
+              ts.forEachChild(n,walk);
+            };
+            nodes.forEach(walk);
+            const imports=[...external].sort((a,b)=>a.pos-b.pos).map(n=>n.getText(file));
+            for(const dep of cross.values())imports.push("import "+(dep.typeOnly?"type ":"")+"{ "+dep.name+" } from "+JSON.stringify("./stage5-registry-"+dep.group)+";");
+            const body=nodes.map(n=>(hasExport(n)?"":"export ")+n.getText(file)).join("\n\n");
+            const output=imports.join("\n")+"\n\n"+body+"\n";
+            fs.writeFileSync("src/data/stage5-registry-"+group+".ts",output);
+            plan.push({group,statements:nodes.length,bytes:Buffer.byteLength(output),dependencies:[...cross.values()].map(d=>({name:d.name,group:d.group,typeOnly:d.typeOnly}))});
+          }
+          const changed=[];
+          function walkDir(dir){
+            for(const e of fs.readdirSync(dir,{withFileTypes:true})){
+              const p=path.join(dir,e.name);
+              if(e.isDirectory()){walkDir(p);continue;}
+              if(!/\.[jt]sx?$/.test(p)||/\.(?:test|spec)\.[jt]sx?$/.test(p)||p===path.relative(process.cwd(),target)||p.includes("stage5-registry-")||p.includes("/test/")||p.includes("/test-utils/"))continue;
+              let src=fs.readFileSync(p,"utf8");
+              const ast=ts.createSourceFile(p,src,ts.ScriptTarget.Latest,true,p.endsWith("tsx")?ts.ScriptKind.TSX:ts.ScriptKind.TS),edits=[];
+              for(const n of ast.statements){
+                if(!(ts.isImportDeclaration(n)||ts.isExportDeclaration(n))||!n.moduleSpecifier||!ts.isStringLiteral(n.moduleSpecifier)||!n.moduleSpecifier.text.endsWith("/registry"))continue;
+                const isImport=ts.isImportDeclaration(n);
+                const clause=isImport?n.importClause:n;
+                const bindings=isImport?clause?.namedBindings:n.exportClause;
+                if(!clause||!bindings||!(isImport?ts.isNamedImports(bindings):ts.isNamedExports(bindings))||(isImport&&clause.name))throw Error("Unsupported registry consumer "+p+": "+n.getText(ast));
+                const grouped=new Map();
+                for(const e of bindings.elements){
+                  const name=(e.propertyName??e.name).text,mod=exportMap.get(name);
+                  if(!mod)throw Error("Unknown registry export "+name+" in "+p);
+                  if(!grouped.has(mod))grouped.set(mod,[]);
+                  grouped.get(mod).push(e.getText(ast));
+                }
+                const keyword=isImport?"import":"export";
+                const out=[...grouped].map(([mod,items])=>keyword+(clause.isTypeOnly?" type":"")+" { "+items.join(", ")+" } from "+JSON.stringify(mod)+";").join("\n");
+                edits.push({start:n.getStart(ast),end:n.end,out});
+              }
+              if(edits.length){for(const e of edits.sort((a,b)=>b.start-a.start))src=src.slice(0,e.start)+e.out+src.slice(e.end);fs.writeFileSync(p,src);changed.push(p);}
+            }
+          }
+          walkDir("src");
+          if(changed.length<10)throw Error("Insufficient registry consumers "+changed.length);
+          const runtimeExports=[...own.values()].filter(x=>!x.typeOnly&&exportMap.has(x.name));
+          const imports=runtimeExports.map((x,i)=>"import { "+x.name+" as candidate"+i+" } from "+JSON.stringify(exportMap.get(x.name))+";");
+          const test=[
+            'import { expect, it } from "vitest";',
+            'import * as original from "@/data/registry";',
+            ...imports,
+            'it("preserves every registry value",()=>{',
+            ...runtimeExports.map((x,i)=>"if(typeof original."+x.name+' === "function")expect(typeof candidate'+i+').toBe("function");else expect(candidate'+i+").toEqual(original."+x.name+");"),
+            '});',
+            'import { getSource, publicSources } from "@/data/stage5-registry-sources";',
+            'import { hotelsForArea } from "@/data/stage5-registry-hotels";',
+            'import { linksForPage } from "@/data/stage5-registry-links";',
+            'import { formatCheckDate } from "@/data/stage5-registry-dates";',
+            'it("preserves registry lookups and affiliate links",()=>{',
+            'for(const source of original.sources)expect(getSource(source.id)).toEqual(original.getSource(source.id));',
+            'expect(publicSources(original.sources.map(s=>s.id))).toEqual(original.publicSources(original.sources.map(s=>s.id)));',
+            'for(const h of original.hotelRecommendations)expect(hotelsForArea(h.areaId,h.cityId)).toEqual(original.hotelsForArea(h.areaId,h.cityId));',
+            'for(const id of new Set(original.providerLinks.flatMap(l=>l.pageIds)))expect(linksForPage(id)).toEqual(original.linksForPage(id));',
+            'expect(formatCheckDate(original.INFO_CHECK_DATE)).toBe(original.formatCheckDate(original.INFO_CHECK_DATE));',
+            '});'
+          ].join("\n");
+          fs.writeFileSync("src/data/stage5-registry-parity.test.ts",test);
+          fs.writeFileSync("stage5-js-audit/registry-plan.json",JSON.stringify({plan,changed,reexports},null,2));
+          console.log("REGISTRY_SPLIT",JSON.stringify({groups:plan.map(x=>({group:x.group,statements:x.statements,bytes:x.bytes})),consumers:changed.length}));
+          JS
+          node stage5-split-registry.mjs
+          # Extend the existing compact photo index from the original editorial data.
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("stage5-generate-directory.mjs")
+          s=p.read_text()
+          # Generate the original snapshot again with the additional card variants.
+          p=Path("stage5-directory-entry.ts")
+          p.write_text('''import { guideDirectory, travelGuides } from "@/data/travelGuides";
+          import { attractionGuides } from "@/data/attractionGuides";
+          export const snapshot = {
+            guideDirectory,
+            travelGuidePhotos: Object.fromEntries(Object.entries(travelGuides).map(([id,g])=>[id,g.photo])),
+            attractionGuidePhotos: Object.fromEntries(Object.entries(attractionGuides).map(([id,g])=>[id,g.image??null])),
+            travelGuideCardPhotos: Object.fromEntries(Object.entries(travelGuides).map(([id,g])=>[id,g.cardPhoto??g.photo])),
+          };
+          ''')
+          p=Path("stage5-generate-directory.mjs");s=p.read_text()
+          old='attractionGuidePhotos:"Record<AttractionId, DirectoryPhoto | null>"}'
+          assert s.count(old)==1
+          p.write_text(s.replace(old,'attractionGuidePhotos:"Record<AttractionId, DirectoryPhoto | null>",travelGuideCardPhotos:"Record<TravelGuideId, DirectoryPhoto>"}'))
+          PY
+          node stage5-generate-directory.mjs
+          rm -f stage5-directory-entry.ts
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path("src/routes/airport-transfers.index.tsx");s=p.read_text()
+          old='import { travelGuides } from "@/data/travelGuides";'
+          assert s.count(old)==1
+          s=s.replace(old,'import { travelGuidePhotos, travelGuideCardPhotos } from "@/data/generated/stage5-lightweight-directory";')
+          s,n=re.subn(r'travelGuides\.(\w+)\.cardPhoto \?\? travelGuides\.\1\.photo',r'travelGuideCardPhotos.\1',s)
+          assert n==6,n
+          s,n=re.subn(r'travelGuides\.(\w+)\.photo',r'travelGuidePhotos.\1',s)
+          assert n==3,n
+          assert not re.search(r'\btravelGuides\b',s)
+          p.write_text(s)
+          p=Path("src/data/stage5-lightweight-directory.test.ts");s=p.read_text()
+          old='attractionGuidePhotos, filterGuides }'
+          assert s.count(old)==1
+          s=s.replace(old,'attractionGuidePhotos, travelGuideCardPhotos, filterGuides }')
+          s+='\nit("preserves all original card-photo fallbacks",()=>{expect(travelGuideCardPhotos).toEqual(Object.fromEntries(Object.entries(travelGuides).map(([id,g])=>[id,g.cardPhoto??g.photo])));});\n'
+          p.write_text(s)
+          PY
+      - name: Build registry separation candidate
         run: bash scripts/build-validated-static.sh
       - name: Verify experimental static export
         run: node scripts/verify-hostinger-static-export.mjs
@@ -528,6 +703,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: stage5-route-split-experiment
+          name: stage5-registry-split-experiment
           path: stage5-js-audit/
           if-no-files-found: error
