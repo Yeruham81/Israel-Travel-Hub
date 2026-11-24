@@ -67,6 +67,7 @@ jobs:
           printf '%s\n' "$HOSTINGER_SSH_KNOWN_HOSTS" > "$known"
           chmod 600 "$key" "$known"
           ssh -p "$HOSTINGER_SSH_PORT" -i "$key" -o BatchMode=yes \
+            -o ConnectTimeout=15 -o ServerAliveInterval=10 -o ServerAliveCountMax=2 \
             -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$known" \
             "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
             "AUDIT_ROOT='$HOSTINGER_REMOTE_PATH' sh -s" <<'REMOTE'
@@ -90,6 +91,19 @@ jobs:
           test "$count" -ge 2
           echo "READ_ONLY_WEBROOT_OK: HTML, .htaccess, marker, both PHP endpoints"
           echo "PHP_SYNTAX_OK: $count files (source not printed)"
+          echo "PHP_CLI_VERSION: $(php -r 'echo PHP_VERSION;')"
+          # Report only counts, never configuration contents, paths or credentials.
+          echo "WORLD_WRITABLE_FILE_COUNT: $(find "$root" -type f -perm -0002 | wc -l | tr -d ' ')"
+          echo "WORLD_WRITABLE_DIRECTORY_COUNT: $(find "$root" -type d -perm -0002 | wc -l | tr -d ' ')"
+          echo "PUBLIC_SYMLINK_COUNT: $(find "$root" -type l | wc -l | tr -d ' ')"
+          echo "POTENTIALLY_SENSITIVE_FILENAME_COUNT: $(find "$root" -type f \
+            \( -name '.env' -o -name '.env.*' -o -name '*.pem' -o -name '*.key' -o -name '*.sql' -o -name '*.log' -o -name '*.bak' -o -name '*.old' -o -name '*.zip' -o -name '*.tar.gz' \) | wc -l | tr -d ' ')"
+          if test -d "$root/api/_internal"; then
+            echo "INTERNAL_API_DIRECTORY_PRESENT"
+            if test -f "$root/api/_internal/.htaccess"; then
+              echo "INTERNAL_API_HTACCESS_PRESENT"
+            fi
+          fi
           REMOTE
 
       - name: Verify live site and both API GET JSON responses
