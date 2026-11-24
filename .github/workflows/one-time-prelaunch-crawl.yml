@@ -45,11 +45,13 @@ jobs:
           report=[]
           for p,patterns in checks:
               status,data=get(p)
-              html=data.decode("utf-8")
+              # React SSR inserts HTML comments between adjacent dynamic text nodes.
+              # Normalize only those comments, not the actual expected text.
+              html=re.sub(r"<!--.*?-->", "", data.decode("utf-8"), flags=re.S)
               row={"path":p,"http":status,"markers":[bool(re.search(pattern,html)) for pattern in patterns],"noindex":bool(re.search(r'<meta[^>]+name="robots"[^>]+content="[^"]*noindex',html))}
               report.append(row)
               print("LIVE_RELEASE_CHECK",json.dumps(row),flush=True)
-              assert status==200 and all(row["markers"]),p
+              assert status==200 and all(row["markers"]) and row["noindex"],p
               time.sleep(2)
           asset="/images/stage5-responsive/nimrod-fortress-132d143b45-384.webp"
           status,data=get(asset)
