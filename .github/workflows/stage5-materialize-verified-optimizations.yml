@@ -319,7 +319,7 @@ jobs:
           source=source.replace('path.join(root,"stage5-directory-entry.ts")','path.join(root,"scripts/guide-directory-entry.ts")')
           source=source.replace('path.join(root,".stage5-snapshot")','temporary')
           source=source.replace('path.join(root,".stage5-snapshot/snapshot.mjs")','path.join(temporary,"snapshot.mjs")')
-          source=source.replace('fs.writeFileSync("src/data/generated/guide-directory.ts",output.join("\\n")+"\\n");','const target="src/data/generated/guide-directory.ts";\nconst generated=output.join("\\n")+"\\n";\nif(!fs.existsSync(target)||fs.readFileSync(target,"utf8")!==generated)fs.writeFileSync(target,generated);')
+          source=source.replace('fs.writeFileSync("src/data/generated/guide-directory.ts",output.join("\\n")+"\\n");','const target="src/data/generated/guide-directory.ts";\nconst generated=output.join("\\n").trimEnd()+"\\n";\nif(!fs.existsSync(target)||fs.readFileSync(target,"utf8")!==generated)fs.writeFileSync(target,generated);')
           source+='\n} finally { fs.rmSync(temporary,{recursive:true,force:true}); }\n'
           Path("scripts/generate-guide-directory.mjs").write_text(source)
           Path("scripts/guide-directory-entry.ts").write_text('''import { guideDirectory, travelGuides } from "@/data/travelGuides";
@@ -354,6 +354,7 @@ jobs:
           cp src/data/generated/guide-directory.ts /tmp/stage5-generated-first.ts
           node scripts/generate-guide-directory.mjs
           cmp /tmp/stage5-generated-first.ts src/data/generated/guide-directory.ts
+          node --input-type=module -e 'import fs from "node:fs"; const s=fs.readFileSync("src/data/generated/guide-directory.ts","utf8"); if (!s.endsWith("\n") || s.endsWith("\n\n")) throw Error("Generated file must end in exactly one newline")'
           git diff --exit-code -- src/data/registry.ts
       - name: Build permanent optimized candidate
         run: bash scripts/build-validated-static.sh
