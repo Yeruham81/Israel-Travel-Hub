@@ -1365,6 +1365,7 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "hotels-haifa-booking@stay-haifa-family-browse": { trackingUrl: "https://booking.tpk.lv/IMJh6Qxg" },
   "hotels-haifa-booking@stay-haifa-boutique-browse": { trackingUrl: "https://booking.tpk.lv/9d6zS3gn" },
   "hotels-tiberias-booking@stay-tiberias-browse": { trackingUrl: "https://booking.tpk.lv/tsl5okP9" },
+  "hotels-telaviv-booking@stay-telaviv": { trackingUrl: "https://booking.tpk.lv/uFvoGvgK" },
   // Page-specific Travelpayouts tracking for the Jerusalem churches guide.
   "churches-jerusalem-old-city-walk-viator": { trackingUrl: "https://viator.tpm.li/NfTH03Dg?sub_id=churches_jerusalem_old_city" },
   "churches-jerusalem-private-oldcity-viator": { trackingUrl: "https://viator.tpm.li/WFfLsF8z?sub_id=churches_jerusalem_private" },
