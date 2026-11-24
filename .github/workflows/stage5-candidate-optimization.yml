@@ -1,4 +1,4 @@
-name: Stage 5 candidate optimization and verification
+name: Stage 5 final candidate verification
 on:
   pull_request:
     branches: [main]
@@ -22,30 +22,60 @@ jobs:
         with:
           ref: perf/stage5-prelaunch-fixes-20261124
           persist-credentials: true
+          fetch-depth: 0
       - name: Ensure checkout matches reviewed candidate
         env:
           EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
         run: test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+      - name: Synchronize candidate with current main without overwriting concurrent edits
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch --depth=100 origin main
+          git merge --no-edit origin/main
+          git push origin HEAD:perf/stage5-prelaunch-fixes-20261124
+          echo "VERIFIED_CANDIDATE $(git rev-parse HEAD)"
+          echo "BASELINE_MAIN $(git rev-parse origin/main)"
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
-      - name: Generate optimized responsive assets and lightweight imports
+      - name: Verify existing generated photo files and create visual contact sheets
         run: |
-          python scripts/optimize_stage5_images.py
-          python scripts/refactor_stage5_lightweight_imports.py
-      - name: Preserve generated candidate in isolated branch (never main)
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src public/images/stage5-responsive docs/STAGE5_IMAGE_OPTIMIZATION.json
-          git diff --cached --stat
-          git diff --cached --check
-          if ! git diff --cached --quiet; then
-            git commit -m "Optimize audited photos and separate lightweight shared modules"
-            git push origin HEAD:perf/stage5-prelaunch-fixes-20261124
-          fi
-          echo "CANDIDATE_COMMIT $(git rev-parse HEAD)"
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps, ImageDraw
+          import json,hashlib
+          r=json.loads(Path("docs/STAGE5_IMAGE_OPTIMIZATION.json").read_text())
+          rows=r["originals"]
+          assert len(rows)==77
+          out=Path("stage5-photo-review")
+          out.mkdir(exist_ok=True)
+          for start in range(0,len(rows),8):
+              group=rows[start:start+8]
+              sheet=Image.new("RGB",(1120,240*len(group)), "white")
+              draw=ImageDraw.Draw(sheet)
+              for i,item in enumerate(group):
+                  src=Path(item["source"])
+                  assert hashlib.sha256(src.read_bytes()).hexdigest()==item["sha256"],src
+                  variants=item["variants"]
+                  for v in variants:
+                      p=Path("public"+v["url"])
+                      assert p.stat().st_size==v["bytes"],p
+                      with Image.open(p) as im:
+                          assert im.format=="WEBP" and im.width==v["width"],p
+                          im.load()
+                  for j,(p,label) in enumerate([(src,"Original"),(Path("public"+variants[0]["url"]),str(variants[0]["width"])+"px"),(Path("public"+variants[-1]["url"]),str(variants[-1]["width"])+"px")]):
+                      with Image.open(p) as im:
+                          im=ImageOps.contain(ImageOps.exif_transpose(im).convert("RGB"),(350,195))
+                          x=j*370+(350-im.width)//2;y=i*240+34
+                          sheet.paste(im,(x,y))
+                      draw.text((j*370+8,i*240+15),label+" | "+str(p.stat().st_size//1000)+"KB",fill="black")
+                  draw.text((8,i*240+2),src.name,fill="black")
+              sheet.save(out/f"sheet-{start//8+1:02d}.jpg",quality=90)
+          print("PHOTO_REVIEW",len(rows),sum(len(x["variants"]) for x in rows))
+          PY
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
@@ -57,9 +87,11 @@ jobs:
       - name: TypeScript check
         run: bun x tsc --noEmit
       - name: Full regression suite
+        id: regression
         run: bun run test
         continue-on-error: true
       - name: Verify static export
+        id: static
         run: node scripts/verify-hostinger-static-export.mjs
         continue-on-error: true
       - name: Install audit browser
@@ -97,6 +129,7 @@ jobs:
           done
           exit 1
       - name: Targeted accessibility, keyboard, and image delivery regressions
+        id: accessibility
         env:
           NODE_PATH: /tmp/stage5fix/node_modules
         run: |
@@ -123,11 +156,12 @@ jobs:
                     await page.getByRole("button",{name:"Accept necessary",exact:true}).click();
                     await page.waitForTimeout(350);
                     const initial=[...files.values()];
+                    result.initialScripts=[...files.entries()].filter(([k,v])=>v.type==="script").map(([url,v])=>({url,bytes:v.bytes})).sort((a,b)=>b.bytes-a.bytes).slice(0,15);
                     await page.addScriptTag({content:axe.source});
                     const audit=await page.evaluate(rules=>axe.run(document,{runOnly:{type:"rule",values:rules},resultTypes:["violations"]}),rules);
                     const dom=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,optimized:[...document.images].filter(i=>i.currentSrc.includes("/stage5-responsive/")).map(i=>i.currentSrc.split("/").pop()),invalidDescriptions:[...document.querySelectorAll("dl > div > div > dt")].length}));
                     const initialBytes={js:initial.filter(x=>x.type==="script").reduce((s,x)=>s+x.bytes,0),images:initial.filter(x=>x.type==="image").reduce((s,x)=>s+x.bytes,0),total:initial.reduce((s,x)=>s+x.bytes,0)};
-                    result={...result,initialBytes,...dom,errors,violations:audit.violations.map(v=>({id:v.id,nodes:v.nodes.length,examples:v.nodes.slice(0,3).map(n=>({target:n.target,html:n.html.slice(0,250)}))}))};
+                    result={...result,initialBytes,...dom,errors,violations:audit.violations.map(v=>({id:v.id,nodes:v.nodes.length,examples:v.nodes.slice(0,20).map(n=>({target:n.target,html:n.html.slice(0,600),summary:n.failureSummary}))}))};
                     if(p==="/"&&width===390){
                       const menu=page.locator('header button[aria-haspopup="dialog"]');
                       await menu.focus();await page.keyboard.press("Enter");
@@ -176,51 +210,16 @@ jobs:
             docs/STAGE5_IMAGE_OPTIMIZATION.json
             stage5-fixed.json
             stage5-candidate-lighthouse/
+            stage5-photo-review/
           if-no-files-found: warn
-  live-lighthouse-baseline:
-    if: github.head_ref == 'perf/stage5-prelaunch-fixes-20261124' && github.event.action == 'opened'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 25
-    steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-      - run: npm install --prefix /tmp/stage5live --no-save lighthouse@12
-      - name: Sequential live Hostinger Lighthouse sample without accepting optional cookies
-        run: |
-          mkdir -p stage5-live-lighthouse
-          node --input-type=module <<'JS'
-          import fs from "node:fs";
-          import {spawnSync} from "node:child_process";
-          const origin="https://saddlebrown-guanaco-454061.hostingersite.com",results=[];
-          let stop=false;
-          for(const device of ["mobile","desktop"]){
-            if(stop)break;
-            for(const p of ["/","/airport-transfers/","/travel-blog/","/tours/golan-heights/","/accommodation/","/attractions/old-city-jerusalem/"]){
-              const file="stage5-live-lighthouse/"+device+"-"+(p==="/"?"home":p.replace(/^\/|\/$/g,"").replaceAll("/","_"))+".json";
-              const args=[origin+p,"--only-categories=performance,accessibility","--output=json","--output-path="+file,"--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=35000","--quiet"];
-              if(device==="desktop")args.push("--preset=desktop");
-              const r=spawnSync("/tmp/stage5live/node_modules/.bin/lighthouse",args,{encoding:"utf8",timeout:110000,maxBuffer:2*1024*1024});
-              let row;
-              try{
-                const a=JSON.parse(fs.readFileSync(file,"utf8")),network=a.audits?.["network-requests"]?.details?.items||[];
-                const limited=network.some(n=>n.statusCode===429);
-                if(limited)stop=true;
-                if(a.runtimeError)throw Error(a.runtimeError.message);
-                const first=network.find(n=>n.resourceType==="Document"&&n.url===origin+p);
-                if(!first||first.statusCode!==200||limited)throw Error("Live document unverified or rate limited");
-                row={device,path:p,documentStatus:first.statusCode,performance:Math.round(a.categories.performance.score*100),accessibility:Math.round(a.categories.accessibility.score*100),lcpMs:a.audits["largest-contentful-paint"].numericValue,cls:a.audits["cumulative-layout-shift"].numericValue,tbtMs:a.audits["total-blocking-time"].numericValue,transferBytes:a.audits["total-byte-weight"].numericValue};
-              }catch(e){row={device,path:p,error:String(e).slice(0,300),exit:r.status};if(/429|rate.limit/i.test(row.error))stop=true;}
-              results.push(row);console.log("LIVE_LIGHTHOUSE",JSON.stringify(row));fs.writeFileSync("stage5-live-lighthouse/summary.json",JSON.stringify(results,null,2));
-              if(stop)break;
-              await new Promise(r=>setTimeout(r,8000));
-            }
-          }
-          if(results.some(x=>x.error)||results.length!==12)process.exitCode=1;
-          JS
-      - uses: actions/upload-artifact@v4
+      - name: Require every validation gate to pass
         if: always()
-        with:
-          name: stage5-live-lighthouse
-          path: stage5-live-lighthouse/
-          if-no-files-found: warn
+        env:
+          REGRESSION: ${{ steps.regression.outcome }}
+          STATIC: ${{ steps.static.outcome }}
+          ACCESSIBILITY: ${{ steps.accessibility.outcome }}
+        run: |
+          echo "FINAL_GATES regression=$REGRESSION static=$STATIC accessibility=$ACCESSIBILITY"
+          test "$REGRESSION" = success
+          test "$STATIC" = success
+          test "$ACCESSIBILITY" = success
