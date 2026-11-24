@@ -12,6 +12,7 @@ import navonPlatform from "@/assets/airport-journeys/jerusalem-navon-platform.we
 import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
 import archivedBuses from "@/assets/guides/2026-11/buses-in-tel-aviv.webp";
 import sherutNesherCardPhoto from "@/assets/guides/sherut-nesher-airport.webp";
+import sherutLocalTaxisPhoto from "@/assets/guides/sherut-local-taxis.webp";
 import jerusalemLightRail from "@/assets/guides/2026-11/jerusalem-light-rail.webp";
 import esimPhoto from "@/assets/guides/esim-israel.jpeg";
 import tiberias from "@/assets/home/tiberias-lake.webp";
@@ -290,6 +291,12 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "local-sherut",
         title: "How local sherut taxis work in Israel",
+        photo: {
+          src: sherutLocalTaxisPhoto,
+          alt: "Two yellow-and-white shared sherut minibus taxis parked on a street in Tel Aviv",
+          credit: "Leineabstiegsschleuse · Wikimedia Commons · public domain",
+          sourceUrl: "https://commons.wikimedia.org/wiki/File:Sherut.JPG",
+        },
         paragraphs: [
           "A monit sherut (מונית שירות) is usually a yellow shared minibus travelling along a numbered route. Look for its route number and destination on the front windshield. You pay for one seat rather than hiring the vehicle.",
           "At a safe, permitted place along the route, signal to a driver to stop and tell them where you would like to get off. The driver follows the designated route, and pickup or drop-off arrangements vary. Ask about the fare and whether to pay cash or another way before boarding.",
