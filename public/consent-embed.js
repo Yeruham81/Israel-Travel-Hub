@@ -9,7 +9,8 @@
   function stored() {
     try {
       const value = JSON.parse(localStorage.getItem(key) || "null");
-      return value?.version === 1 && Number.isFinite(value.expiresAt) && value.expiresAt > Date.now()
+      return value?.version === 1 && Number.isFinite(value.expiresAt) && value.expiresAt > Date.now() && value.expiresAt <= Date.now() + 180 * 86400000 + 60000
+        && ["analytics", "external", "marketing"].every(key => typeof value.categories?.[key] === "boolean")
         && value.categories?.[category] === true ? value : null;
     } catch { return null; }
   }
@@ -46,7 +47,8 @@
     const value = stored();
     if (value) {
       start();
-      timer = setTimeout(checkWithdrawal, Math.min(2147483647, value.expiresAt - Date.now() + 1));
+      const expire = () => { checkWithdrawal(); const current = stored(); if (current) timer = setTimeout(expire, Math.min(2147483647, current.expiresAt - Date.now() + 1)); };
+      timer = setTimeout(expire, Math.min(2147483647, value.expiresAt - Date.now() + 1));
     } else document.body.appendChild(message);
   }
   addEventListener("message", event => {

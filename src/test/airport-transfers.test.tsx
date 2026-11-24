@@ -1,6 +1,7 @@
+import { ALL_CATEGORIES, saveCookieConsent } from "@/lib/cookie-consent";
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Route as AirportRoute } from "@/routes/airport-transfers.index";
 import { routeTree } from "@/routeTree.gen";
@@ -322,6 +323,7 @@ describe("private Ben Gurion transfers", () => {
     expect(providerSection).toHaveTextContent("Each provider sets its own prices and terms.");
     expect(screen.getByTestId("airport-external-providers-note")).toHaveTextContent("Please review all details carefully before booking.");
     expect(banners.every(banner => Boolean(banner.querySelector(".self-center")))).toBe(true);
+    act(() => saveCookieConsent(ALL_CATEGORIES));
     fireEvent.click(banners[0]!);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "airport-private-transfers", productId: "airport-kiwitaxi", offerId: "airport-kiwitaxi" })]);
     expect(JSON.stringify(readOutboundClicks())).not.toContain("email");

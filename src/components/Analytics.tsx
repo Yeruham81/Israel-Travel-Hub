@@ -4,7 +4,7 @@ import { refreshAnalyticsChoice, trackPageView } from "@/lib/analytics";
 import { useCookieConsent } from "@/hooks/use-cookie-consent";
 import {
   ALL_CATEGORIES, NECESSARY_ONLY, COOKIE_CATEGORIES, COOKIE_SETTINGS_EVENT,
-  openCookieSettings, saveCookieConsent, type CookieCategories,
+  getCookieConsent, openCookieSettings, saveCookieConsent, type CookieCategories,
 } from "@/lib/cookie-consent";
 
 /** One navigation owner for GA4; the global preference applies to every optional provider. */
@@ -19,14 +19,14 @@ export function Analytics() {
   useEffect(() => {
     setReady(true);
     const show = () => {
-      setSelection({ ...(consent?.categories ?? NECESSARY_ONLY) });
+      setSelection({ ...(getCookieConsent()?.categories ?? NECESSARY_ONLY) });
       setCustomize(true);
       setOpened(true);
     };
     window.addEventListener(COOKIE_SETTINGS_EVENT, show);
     if (window.location.hash === "#cookie-settings") show();
     return () => window.removeEventListener(COOKIE_SETTINGS_EVENT, show);
-  }, [consent]);
+  }, []);
 
   useEffect(() => {
     refreshAnalyticsChoice();
