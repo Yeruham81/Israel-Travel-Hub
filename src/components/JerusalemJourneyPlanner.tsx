@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { ArrowRight, ExternalLink, Bus, CarFront, MapPinned, Route, Users } from "lucide-react";
 import { affiliateConfig, tourBookingOffers, tourProducts } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import masadaAerial from "@/assets/guides/dead-sea-excursions/masada-aerial.webp";
 import einGediWaterfall from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp";
 import qumranCaves from "@/assets/guides/dead-sea-excursions/qumran-caves.webp";
@@ -87,7 +88,7 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
     <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">If you have extra time, consider adding Masada, Ein Gedi, Qumran or Qasr al-Yahud. These attractions are spread across the Dead Sea region, so choose stops that fit your route and travel time. A car, driver or organised tour is usually easier than connecting buses.</p>
     <div className="mt-4 grid gap-3 sm:grid-cols-2" data-testid="journey-stop-cards">
       {routes.jerusalemDeadSea.details.map(item => {
-        const photo = deadSeaStopPhotos[item.title];
+        const photo = (item.to ? guideHeroPhotoForPath(item.to) : undefined) ?? deadSeaStopPhotos[item.title];
         const className = "group flex min-w-0 overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
         const card = <>
           {photo && <img src={photo.src} alt={photo.alt} width={180} height={180} loading="lazy" decoding="async" className="h-auto min-h-40 w-28 shrink-0 object-cover sm:w-32" />}
