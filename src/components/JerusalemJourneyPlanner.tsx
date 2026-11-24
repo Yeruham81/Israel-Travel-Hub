@@ -86,7 +86,7 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
     <h2 id="journey-destinations-h" className="text-2xl font-semibold">Add a stop to your Dead Sea day</h2>
     <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">If you have extra time, consider adding Masada, Ein Gedi, Qumran or Qasr al-Yahud. These attractions are spread across the Dead Sea region, so choose stops that fit your route and travel time. A car, driver or organised tour is usually easier than connecting buses.</p>
     <div className="mt-4 grid gap-3 sm:grid-cols-2" data-testid="journey-stop-cards">
-      {route.details.map(item => {
+      {routes.jerusalemDeadSea.details.map(item => {
         const photo = deadSeaStopPhotos[item.title];
         const className = "group flex min-w-0 overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
         const card = <>
