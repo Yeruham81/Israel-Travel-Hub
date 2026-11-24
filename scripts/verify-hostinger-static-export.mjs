@@ -219,9 +219,18 @@ assert(!/\b(?:Line|route|bus)\s+712\b/i.test(shabbatMain),
 const shabbatPhotoGrid = shabbatMain.match(/<ul\b[^>]*data-testid="stay-trip-photo-grid"[^>]*>([\s\S]*?)<\/ul>/i)?.[1];
 assert(shabbatPhotoGrid && [...shabbatPhotoGrid.matchAll(/<li\b/g)].length === 6,
   "Shabbat page must render six illustrated related guides");
-const nextSection = shabbatMain.match(/<section\b[^>]*aria-label="Plan the next part of your trip"[^>]*>([\s\S]*?)<\/section>/i)?.[1];
+const nextSection = shabbatMain.match(/<section\b[^>]*data-testid="icon-trip-planning-links"[^>]*>([\s\S]*?)<\/section>/i)?.[1];
 assert(nextSection && [...nextSection.matchAll(/<li\b/g)].length === 6,
   "Shabbat page must retain exactly six Plan the next part of your trip links");
+assert([...nextSection.matchAll(/<svg\b/g)].length === 6,
+  "Shabbat next-trip links must have six destination-specific icons");
+assert(nextSection.includes("Rental options and Saturday pickup arrangements."),
+  "Shabbat next-trip links must show concise descriptions");
+assert(shabbatMain.includes("Need a private airport transfer on Shabbat?") &&
+  shabbatMain.includes("I'll reply personally about arranging your private airport pickup."),
+  "Shabbat contact copy must focus on private airport transfers");
+assert(!shabbatMain.includes("or ask about Line 711 and onward transport"),
+  "Shabbat contact copy must not solicit generic public transport questions");
 const shabbatSourceIndex = shabbatMain.indexOf('id="sources"');
 const shabbatContactIndex = shabbatMain.indexOf('id="contact"');
 assert(shabbatContactIndex > 0 && shabbatSourceIndex > shabbatContactIndex,
