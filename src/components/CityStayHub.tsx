@@ -99,7 +99,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
                     </div>
                     <p className="mt-4 text-sm"><span className="font-semibold">Stay style:</span> {area.priceLevel}</p>
                     <p className="mt-3 rounded-xl bg-secondary/70 px-4 py-3 text-sm leading-relaxed text-muted-foreground"><span className="font-semibold text-foreground">Keep in mind:</span> {area.watch}</p>
-                    <Link to={area.path as LinkProps["to"]} className="mt-4 inline-flex w-fit items-center gap-2 rounded-lg font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" aria-label={`Explore ${area.name}: area guide and hotel recommendations`}>
+                    <Link to={area.path as LinkProps["to"]} className="mt-4 inline-flex w-fit items-center gap-2 rounded-lg font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" aria-label={`Explore Area & Hotels: ${area.name}`}>
                       Explore Area & Hotels <ArrowRight className="h-4 w-4" aria-hidden />
                     </Link>
                   </div>
