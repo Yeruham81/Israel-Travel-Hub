@@ -1,4 +1,4 @@
-name: One-time prelaunch security and server checks
+name: Post-htaccess live verification (read only)
 on:
   pull_request:
     branches: [main]
@@ -12,15 +12,15 @@ jobs:
   public-server:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
+    timeout-minutes: 15
     env:
       ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
     steps:
-      - name: Verify the deployed food anchor; persist each result
+      - name: Verify live security headers, APIs and approved redirects
         run: |
           python3 -u - <<'PY'
           import subprocess, tempfile, os, json, time, re, pathlib
-          from urllib.parse import urlsplit
+          from urllib.parse import urlsplit, urljoin
           origin=os.environ['ORIGIN']
           results={}; findings=[]
           def save():
@@ -51,6 +51,7 @@ jobs:
                                   time.sleep(max(35,int(delay)) if delay.isdigit() else 35);continue
                               raise RuntimeError('Persistent rate limit; stopped')
                           r={'status':status,'curlExit':p.returncode,'sslVerifyResult':fields[1] if len(fields)>1 else None,'contentType':h.get('content-type'),'headers':{k:v for k,v in h.items() if k in allow}}
+                          r['location']=h.get('location')
                           if key=='http_redirect':r['httpsDestination']=h.get('location','').startswith(origin+'/') or h.get('location')==origin
                           raw=pathlib.Path(data).read_bytes() if body and os.path.exists(data) and status==200 else b''
                           if key=='food':
@@ -70,10 +71,41 @@ jobs:
           try:
               probe('home','/')
               probe('food','/travel-blog/what-to-eat-in-israel/',body=True)
+              probe('http_redirect','/',base='http://'+urlsplit(origin).hostname)
+              probe('quote','/api/quote-request/',body=True)
+              probe('exchange','/api/exchange-rates/',body=True)
+              for p in ['/.env','/.git/config','/.htaccess','/.user.ini','/api/_internal/','/api/','/assets/','/wp-config.php','/wp-admin/']:
+                  probe(p,p,method='HEAD')
+                  if results[p].get('status') not in (401,403,404,410):findings.append({'type':'private_path_review','path':p})
+              for key in ('home','food'):
+                  r=results[key];h=r.get('headers',{})
+                  if r.get('status')!=200 or r.get('curlExit')!=0:findings.append({'type':'page_http','key':key})
+                  for k,v in {'x-content-type-options':'nosniff','x-frame-options':'SAMEORIGIN','referrer-policy':'strict-origin-when-cross-origin','permissions-policy':'camera=(), microphone=()','x-robots-tag':'noindex, nofollow'}.items():
+                      if h.get(k,'').lower().replace(' ','')!=v.lower().replace(' ',''):findings.append({'type':'header_mismatch','key':key,'header':k,'actual':h.get(k)})
+              if not results['food'].get('fixedAnchor'):findings.append({'type':'food_anchor'})
+              if results['http_redirect'].get('status')!=301 or not results['http_redirect'].get('httpsDestination'):findings.append({'type':'https_redirect'})
+              for key in ('quote','exchange'):
+                  r=results[key];h=r.get('headers',{})
+                  if r.get('status')!=200 or 'application/json' not in (r.get('contentType') or ''):findings.append({'type':'api_http','key':key})
+                  if h.get('referrer-policy')!='no-referrer':findings.append({'type':'api_referrer_policy','key':key,'actual':h.get('referrer-policy')})
+              if not results['quote'].get('available') or 'no-store' not in results['quote'].get('headers',{}).get('cache-control',''):findings.append({'type':'quote_availability_or_cache'})
+              if results['exchange'].get('exchangeStatus') not in ('fresh','cached'):findings.append({'type':'exchange_status'})
+              save()
+              mapping = [["travel-blog/mitzpe-ramon-crater","attractions/mitzpe-ramon-crater"],["travel-blog/basilica-of-the-annunciation","attractions/basilica-of-the-annunciation"],["travel-blog/qasr-el-yahud","attractions/qasr-el-yahud"],["travel-blog/jaffa","attractions/jaffa"],["travel-blog/mount-tabor","attractions/mount-tabor"],["travel-blog/old-city-jerusalem","attractions/old-city-jerusalem"],["travel-blog/the-dead-sea","attractions/dead-sea"],["travel-blog/mount-zion","attractions/mount-zion"],["travel-blog/mount-of-olives","attractions/mount-of-olives"],["travel-blog/masada","attractions/masada"],["travel-blog/ein-gedi","attractions/ein-gedi"],["travel-blog/eilat","attractions/eilat"],["travel-blog/haifa","attractions/haifa"],["travel-blog/akko-acre","attractions/akko-acre"],["travel-blog/caesarea","attractions/caesarea"],["travel-blog/rosh-hanikra","attractions/rosh-hanikra"],["travel-blog/sea-of-galilee","attractions/sea-of-galilee"],["travel-blog/tel-megiddo","attractions/tel-megiddo"],["travel-blog/mount-precipice","attractions/mount-precipice"],["travel-blog/magdala","attractions/magdala"],["travel-blog/yardenit","attractions/yardenit"],["travel-blog/mount-of-beatitudes","attractions/mount-of-beatitudes"],["travel-blog/tabgha","attractions/tabgha"],["travel-blog/capernaum","attractions/capernaum"],["travel-blog/car-service-in-israel","private-driver-in-israel"],["travel-blog/jerusalem-day-trip-from-tel-aviv","tours/jerusalem"],["travel-blog/caesarea-haifa-akko","tours/caesarea-haifa-acre"],["travel-blog/nazareth-galilee-jordan-river","tours/nazareth-sea-of-galilee"],["travel-blog/day-trips-from-jerusalem","tours"],["travel-blog/day-trips-from-tel-aviv","tours"],["travel-blog/israel-safe-to-travel","travel-blog/israel-travel-tips"],["private-day-trips","tours"],["haifa-shore-excursions","shore-excursions/haifa"],["ashdod-shore-excursions","shore-excursions/ashdod"],["reviews","about-me"],["faq","airport-transfers"],["author/moshe-barak","about-me"],["private-day-trips/jerusalem-day-trip-from-tel-aviv","tours/jerusalem"],["private-day-trips/caesarea-haifa-akko-day-trip-from-tel-aviv","tours/caesarea-haifa-acre"],["private-day-trips/dead-sea-masada-day-trip-from-tel-aviv","tours/masada-dead-sea"],["private-day-trips/nazareth-sea-of-galilee-day-trip-from-tel-aviv","tours/nazareth-sea-of-galilee"],["private-day-trips/tel-aviv-day-trip-from-jerusalem","tours/tel-aviv-jaffa"],["private-day-trips/dead-sea-masada-day-trip-from-jerusalem","tours/masada-dead-sea"],["private-day-trips/caesarea-haifa-akko-day-trip-from-jerusalem","tours/caesarea-haifa-acre"],["private-day-trips/nazareth-sea-of-galilee-day-trip-from-jerusalem","tours/nazareth-sea-of-galilee"],["travel-blog/category/attractions","attractions"],["travel-blog/category/day-trips","tours"],["travel-blog/category/galilee","tours/nazareth-sea-of-galilee"],["travel-blog/category/guides","travel-blog"],["travel-blog/category/haifa","attractions/haifa"],["travel-blog/category/jerusalem","travel-blog/jerusalem-travel-guide"],["travel-blog/category/tel-aviv","travel-blog/attractions-in-tel-aviv"],["travel-blog/category/the-dead-sea","attractions/dead-sea"],["travel-blog/category/transportation","travel-blog/getting-around-israel"],["travel-blog/category/accommodation","accommodation"]]
+              for source,target in mapping:
+                  p='/'+source+'/'
+                  key='redirect:'+p
+                  probe(key,p,method='HEAD')
+                  r=results[key]
+                  expected=origin+'/'+target+'/'
+                  if r.get('status')!=301 or urljoin(origin+p,r.get('location') or '')!=expected:findings.append({'type':'redirect_mismatch','source':p,'expected':expected,'actual':r.get('location'),'status':r.get('status')})
+                  save()
+              print('REDIRECTS_CHECKED',sum(k.startswith('redirect:') for k in results),flush=True)
           except RuntimeError as e:findings.append({'type':'stopped','reason':str(e)})
           finally:
               save()
               print('PUBLIC_FINAL',json.dumps({'results':results,'findings':findings}),flush=True)
+          if findings: raise SystemExit(1)
           PY
       - uses: actions/upload-artifact@v4
         if: always()
@@ -81,113 +113,3 @@ jobs:
           name: bounded-public-security-audit
           path: server-security-audit.json
           if-no-files-found: warn
-  dependency-candidate:
-    if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 20
-    env:
-      CI: "true"
-      HOSTINGER_STATIC_BUILD: "true"
-      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
-      VITE_INDEXABLE: "false"
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: 70057ff31529a9ade04f06b81c5e03f2a4889d18
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: "1.4.4"
-      - name: Prepare narrow dependency update candidate
-        run: |
-          node --input-type=module - <<'NODE'
-          import fs from 'node:fs';
-          const p=JSON.parse(fs.readFileSync('package.json','utf8'));
-          p.dependencies.zod='4.6.6';
-          p.devDependencies.vitest='4.1.12';
-          p.overrides={...p.overrides,zod:'4.6.6',seroval:'1.6.11','seroval-plugins':'1.6.11','brace-expansion@1.1.20':'1.1.21','brace-expansion@5.0.11':'5.0.12','minimatch@10.2.6':'11.0.1'};
-          fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n');
-          NODE
-          bun install
-          bun install --frozen-lockfile
-          git diff --stat -- package.json bun.lock
-          mkdir -p /tmp/dependency-candidate
-          cp package.json bun.lock /tmp/dependency-candidate/
-          git diff -- package.json bun.lock > /tmp/dependency-candidate/candidate.patch
-          set +e
-          bun audit --json > /tmp/dependency-candidate/dependency-audit.json 2> /tmp/dependency-candidate/dependency-audit.stderr
-          code=$?
-          set -e
-          echo "CANDIDATE_AUDIT_EXIT=$code"
-          cat /tmp/dependency-candidate/dependency-audit.json
-          bun pm ls --all | grep -E 'zod@|seroval@|vitest@|mocker@|brace-expansion@|minimatch@' || true
-          printf '%s\n' "$code" > /tmp/dependency-candidate/audit-exit.txt
-      - name: Build for generated route types
-        run: bun run build
-      - name: TypeScript compatibility
-        run: bunx --no-install tsc --noEmit
-      - name: Unit tests
-        run: bun run test
-      - name: Sanity adapter tests
-        run: node --test scripts/sanity/uber-adapter.test.mjs
-      - name: Static build and verification
-        run: |
-          bash scripts/build-validated-static.sh
-          node scripts/verify-hostinger-static-export.mjs
-      - name: Require zero reported dependency vulnerabilities
-        run: test "$(cat /tmp/dependency-candidate/audit-exit.txt)" = 0
-      - name: Save candidate files even if compatibility fails
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: dependency-update-candidate
-          path: /tmp/dependency-candidate/
-          if-no-files-found: warn
-
-  baseline:
-    if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 20
-    env:
-      CI: "true"
-      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
-      VITE_INDEXABLE: "false"
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: 70057ff31529a9ade04f06b81c5e03f2a4889d18
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: "1.4.4"
-      - name: Install unchanged locked dependencies
-        run: bash scripts/install-ci-dependencies.sh
-      - name: Build for generated route types
-        run: bun run build
-      - name: TypeScript compatibility
-        run: bunx --no-install tsc --noEmit
-      - name: Unit tests
-        run: bun run test
-      - name: Sanity adapter tests
-        run: node --test scripts/sanity/uber-adapter.test.mjs
-      - name: Verify baseline static build and corrected anchor
-        env:
-          HOSTINGER_STATIC_BUILD: "true"
-        run: |
-          bash scripts/build-validated-static.sh
-          node scripts/verify-hostinger-static-export.mjs
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-          html=Path('.output/public/travel-blog/what-to-eat-in-israel/index.html').read_text()
-          assert re.search(r'href=["\x27]#knafeh["\x27]',html)
-          assert re.search(r'id=["\x27]knafeh["\x27]',html)
-          assert not re.search(r'href=["\x27]#kanafeh["\x27]',html)
-          print('KNAFEH_ANCHOR_BUILD_OK')
-          PY
