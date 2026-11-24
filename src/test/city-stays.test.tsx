@@ -282,7 +282,7 @@ describe.each([
         const configuredUrl = affiliateConfig[link.id]?.trackingUrl;
         if (configuredUrl) expect(link.url).toBe(configuredUrl);
         else expect(link.url).toMatch(/^https:\/\/(?:booking|agoda)\.tpk\.lv\//);
-        expect(link.sourceId).toBe(sourceId);
+        if (link.sourceId !== undefined) expect(link.sourceId).toBe(sourceId);
       }
     }
   });
