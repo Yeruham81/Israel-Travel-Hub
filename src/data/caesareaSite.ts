@@ -1,7 +1,7 @@
 /** Shared visitor information for the upgraded Caesarea National Park attraction guide. */
 export const caesareaSite = {
   title: "Caesarea National Park: Roman Ruins, Harbor & Visitor Guide",
-  description: "Explore Caesarea National Park's Roman theater, hippodrome, ancient harbor, Crusader walls and nearby aqueduct, with updated ticket prices, hours, accessibility and practical visit tips.",
+  description: "Visit Caesarea National Park: Roman theater, hippodrome, ancient harbor, Crusader walls and aqueduct, with tickets, hours and practical access tips.",
   region: "Haifa & northern coast" as const,
   updatedAt: "2026-11-17",
   intro: "At Caesarea, Roman ruins stretch along the Mediterranean shore, from an ancient theater and chariot-racing arena to the harbor built by King Herod. I recommend allowing a few hours to explore the archaeological park on foot, with extra time for the harbor and its visitors' center.",
