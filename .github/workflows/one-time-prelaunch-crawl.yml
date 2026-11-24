@@ -1,24 +1,27 @@
-name: SEO follow-up - structured data and robots
+name: Prelaunch commercial components audit (read only)
 on:
   pull_request:
     branches: [main]
     paths: ['.github/workflows/one-time-prelaunch-crawl.yml']
 permissions:
   contents: read
+concurrency:
+  group: one-time-prelaunch-crawl
+  cancel-in-progress: true
 jobs:
-  production:
+  commercial:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
       CI: "true"
       HOSTINGER_STATIC_BUILD: "true"
-      VITE_CANONICAL_ORIGIN: https://www.israel-taxi.com
-      VITE_INDEXABLE: "true"
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      VITE_INDEXABLE: "false"
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 8f969591f2c2cd3b905faec8da8559088fd2452e
+          ref: c69b288abce661fb7bb7c4474a9f7e73507e4b64
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -28,59 +31,122 @@ jobs:
           bun-version: "1.4.4"
       - run: bash scripts/install-ci-dependencies.sh
       - run: bash scripts/build-validated-static.sh
-      - run: node scripts/verify-hostinger-static-export.mjs
-  robots-live:
+      - name: Inventory rendered commercial links and embeds without opening providers
+        run: |
+          cat > .commercial-audit.mjs <<'JS'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import {JSDOM} from 'jsdom';
+          const root='.output/public', origin=process.env.VITE_CANONICAL_ORIGIN;
+          const xml=fs.readFileSync(root+'/sitemap.xml','utf8');
+          const paths=[...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
+          const issues=[],links=[],embeds=[],pages=[],helpers=[];
+          const hosts={booking:['booking.com'],agoda:['agoda.com'],expedia:['expedia.com'],viator:['viator.com'],getyourguide:['getyourguide.com'],discovercars:['discovercars.com'],kiwitaxi:['kiwitaxi.com'],welcome:['welcomepickups.com'],intui:['intui.travel'],gettransfer:['gettransfer.com'],airalo:['airalo.com'],saily:['saily.com'],yesim:['yesim.app'],gigsky:['gigsky.com'],drimsim:['drimsim.com']};
+          const on=(host,domain)=>host===domain||host.endsWith('.'+domain);
+          const tp=h=>['tpm.li','tpk.lv','tpwgt.com','travelpayouts.com','travelpayouts.com','tp.media','travelpayouts.net'].some(x=>on(h,x));
+          const provider=h=>Object.entries(hosts).find(([k,ds])=>ds.some(d=>on(h,d)))?.[0]||null;
+          const note=(level,page,type,detail)=>issues.push({level,page,type,detail});
+          function analyzeResource(page,e,attribute,raw,helper=false){
+            if(!raw||raw.startsWith('data:')||raw.startsWith('blob:'))return;
+            let u;try{u=new URL(raw,origin+page)}catch{return;}
+            const local=u.origin===origin, commercial=tp(u.hostname)||provider(u.hostname);
+            const widget=local&&u.pathname.startsWith('/widgets/');
+            if(!commercial&&!widget)return;
+            const info={page,element:e.tagName.toLowerCase(),attribute,url:u.href,category:e.getAttribute('data-cookie-category'),scriptType:e.getAttribute('type'),campaign:u.searchParams.get('campaign_id'),project:u.searchParams.get('trs'),marker:u.searchParams.get('shmarker')};
+            embeds.push(info);
+            if(widget&&!fs.existsSync(path.join(root,u.pathname.slice(1))))note('critical',page,'missing_widget_file',u.pathname);
+            if(!local&&u.protocol!=='https:')note('critical',page,'insecure_widget_url',u.href);
+            if(commercial&&!local&&!tp(u.hostname))note('review',page,'direct_commercial_resource',info);
+            if(commercial&&!local&&attribute==='src'&&['SCRIPT','IFRAME'].includes(e.tagName)&&e.getAttribute('type')!=='application/x-consent')note('critical',page,'active_commercial_resource_before_consent',info);
+            if(u.hostname==='tpwgt.com'){
+              if(u.searchParams.get('trs')!=='406243'||!/^622032(?:\.|$)/.test(u.searchParams.get('shmarker')||''))note('review',page,'widget_attribution_parameters',info);
+              if(!info.campaign)note('review',page,'widget_missing_campaign',info);
+            }
+          }
+          for(const p of paths){
+            const file=path.join(root,p==='/'?'index.html':p.slice(1)+'index.html');
+            if(!fs.existsSync(file)){note('critical',p,'missing_page',file);continue;}
+            const dom=new JSDOM(fs.readFileSync(file,'utf8'),{url:origin+p});const d=dom.window.document;
+            let n=0;
+            for(const a of d.querySelectorAll('a[href]')){
+              let u;try{u=new URL(a.getAttribute('href'),origin+p)}catch{continue;}
+              if(!/^https?:$/.test(u.protocol)||u.origin===origin)continue;
+              const isTp=tp(u.hostname),brand=provider(u.hostname),rel=(a.getAttribute('rel')||'').toLowerCase().split(/\s+/),text=(a.innerText||a.textContent||a.getAttribute('aria-label')||'').trim().replace(/\s+/g,' ').slice(0,180);
+              const sponsored=rel.includes('sponsored');
+              const bookingCta=/\b(book|reserve|check (?:rates|prices|availability|plans)|view (?:on|deal|offer)|browse (?:more|all|hotels)|search (?:cars|hotels)|compare (?:prices|rates|deals))\b/i.test(text);
+              if(!isTp&&!brand&&!sponsored)continue;
+              n++;const item={page:p,url:u.href,brand:brand||u.hostname.split('.')[0],tp:isTp,sponsored,rel:rel.filter(Boolean),text,bookingCta,target:a.getAttribute('target'),subId:u.searchParams.get('sub_id')};links.push(item);
+              if(u.protocol!=='https:')note('critical',p,'insecure_commercial_link',item);
+              if(sponsored&&!isTp)note('critical',p,'sponsored_non_travelpayouts',item);
+              if(isTp&&!sponsored)note('review',p,'tracking_link_missing_sponsored',item);
+              if(!isTp&&brand&&bookingCta)note('review',p,'direct_provider_booking_cta',item);
+              else if(!isTp&&brand)note('info',p,'direct_provider_reference',item);
+              if(item.target==='_blank'&&!rel.includes('noopener')&&!rel.includes('noreferrer'))note('review',p,'external_target_rel',item);
+            }
+            for(const e of d.querySelectorAll('script[src],script[data-consent-src],iframe[src],iframe[data-consent-src],iframe[data-src],img[src]')){
+              for(const attr of ['src','data-consent-src','data-src'])if(e.hasAttribute(attr))analyzeResource(p,e,attr,e.getAttribute(attr));
+            }
+            if(d.querySelectorAll('iframe[srcdoc]').length)note('review',p,'initial_srcdoc_frame','Review consent gating');
+            pages.push({path:p,commercialLinks:n});dom.window.close();
+          }
+          const wd=path.join(root,'widgets');
+          if(fs.existsSync(wd))for(const name of fs.readdirSync(wd).filter(n=>n.endsWith('.html'))){
+            const p='/widgets/'+name,dom=new JSDOM(fs.readFileSync(path.join(wd,name),'utf8'),{url:origin+p}),d=dom.window.document;
+            const guarded=!!d.querySelector('script[src="/consent-embed.js"][data-category="marketing"]');
+            helpers.push({page:p,guarded});
+            if(!guarded)note('review',p,'widget_helper_consent_guard','No shared marketing consent guard');
+            for(const e of d.querySelectorAll('script[src],script[data-consent-src],iframe[src],iframe[data-consent-src]'))for(const attr of ['src','data-consent-src'])if(e.hasAttribute(attr))analyzeResource(p,e,attr,e.getAttribute(attr),true);
+            dom.window.close();
+          }
+          const count=(arr,key)=>Object.fromEntries([...new Set(arr.map(x=>x[key]))].map(k=>[k,arr.filter(x=>x[key]===k).length]));
+          const summary={sitemapPages:paths.length,parsedPages:pages.length,pagesWithCommercialLinks:pages.filter(p=>p.commercialLinks).length,commercialLinkOccurrences:links.length,uniqueCommercialUrls:new Set(links.map(x=>x.url)).size,tpLinkOccurrences:links.filter(x=>x.tp).length,uniqueTpUrls:new Set(links.filter(x=>x.tp).map(x=>x.url)).size,providerCounts:count(links.filter(x=>x.tp),'brand'),directProviderOccurrences:links.filter(x=>!x.tp).length,embedOccurrences:embeds.length,helperDocuments:helpers.length,issueCounts:count(issues,'type'),critical:issues.filter(x=>x.level==='critical').length,review:issues.filter(x=>x.level==='review').length};
+          fs.writeFileSync('commercial-audit.json',JSON.stringify({summary,pages,links,embeds,helpers,issues},null,2));
+          console.log('COMMERCIAL_SUMMARY',JSON.stringify(summary));
+          for(const x of issues.filter(x=>x.level!=='info').slice(0,100))console.log('COMMERCIAL_FINDING',JSON.stringify(x));
+          if(summary.critical)process.exitCode=1;
+          JS
+          node .commercial-audit.mjs
+      - name: Save inventory and findings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: commercial-audit
+          path: commercial-audit.json
+          if-no-files-found: warn
+  consent-browser:
     if: github.head_ref == 'audit/one-time-prelaunch-crawl-20261124'
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 15
     env:
-      ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      CI: "true"
+      VITE_INDEXABLE: "false"
     steps:
-      - name: Compare live robots responses and sample schema
-        run: |
-          python3 -u - <<'PY'
-          import subprocess,os,tempfile,pathlib,json,re,time
-          from html.parser import HTMLParser
-          origin=os.environ['ORIGIN']
-          result={}
-          def get(key,p,extra=[]):
-              time.sleep(2)
-              with tempfile.TemporaryDirectory() as t:
-                  h=pathlib.Path(t)/'h'; b=pathlib.Path(t)/'b'
-                  cmd=['curl','-sS','--connect-timeout','5','--max-time','12','--max-filesize','2000000','-A','IsraelTravelHub-PrelaunchAudit/1.0','-D',str(h),'-o',str(b),'-w','%{http_code}',*extra,origin+p]
-                  r=subprocess.run(cmd,capture_output=True,text=True,timeout=16)
-                  headers={}
-                  if h.exists():
-                      for x in h.read_text(errors='replace').splitlines():
-                          if ':' in x:
-                              k,v=x.split(':',1)
-                              if k.lower() in ('cache-control','age','x-litespeed-cache','x-qc-cache','x-robots-tag','content-type','via','cf-cache-status'):headers[k.lower()]=v.strip()
-                  body=b.read_text(errors='replace') if b.exists() else ''
-                  result[key]={'status':r.stdout,'exit':r.returncode,'headers':headers}
-                  if key.startswith('robots'):
-                      result[key]['body']=body[:4000]
-                      result[key]['sitemapCorrect']=('Sitemap: '+origin+'/sitemap.xml') in body
-                  else:
-                      types=[]
-                      for block in re.findall(r'<script\b[^>]*type="application/ld\+json"[^>]*>(.*?)</script>',body,re.S|re.I):
-                          try:
-                              obj=json.loads(block)
-                              for node in obj.get('@graph',[obj]):types.append(node.get('@type'))
-                          except Exception:types.append('INVALID_JSON')
-                      result[key]['schemaTypes']=types
-                  print(key,json.dumps(result[key]),flush=True)
-                  pathlib.Path('seo-followup.json').write_text(json.dumps(result,indent=2))
-                  if r.stdout=='429':raise SystemExit('Rate limited; no further requests')
-          get('robots_normal','/robots.txt')
-          get('robots_revalidate','/robots.txt',['-H','Cache-Control: no-cache','-H','Pragma: no-cache'])
-          get('robots_query','/robots.txt?seo-audit=20261124',['-H','Cache-Control: no-cache'])
-          get('home','/')
-          get('about','/about-me/')
-          print('SEO_FOLLOWUP',json.dumps(result),flush=True)
-          if not result['robots_normal']['sitemapCorrect']:raise SystemExit('Live robots sitemap reference differs')
-          PY
-      - uses: actions/upload-artifact@v4
-        if: always()
+      - uses: actions/checkout@v4
         with:
-          name: seo-followup
-          path: seo-followup.json
+          ref: c69b288abce661fb7bb7c4474a9f7e73507e4b64
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Install headless Chromium
+        run: |
+          npm install --prefix /tmp/cookie-audit --no-save playwright@1.56.1
+          /tmp/cookie-audit/node_modules/.bin/playwright install --with-deps chromium
+      - name: Start local website
+        run: |
+          node scripts/generate-sitemap.mjs --mode development
+          nohup ./node_modules/.bin/vite dev --host 127.0.0.1 --port 4173 > /tmp/cookie-vite.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS --max-time 4 http://127.0.0.1:4173/car-rental/ > /dev/null; then exit 0; fi
+            sleep 2
+          done
+          tail -80 /tmp/cookie-vite.log
+          exit 1
+      - name: Test actual browser behavior with external requests intercepted
+        env:
+          NODE_PATH: /tmp/cookie-audit/node_modules
+        run: node scripts/audit-cookie-consent.cjs
