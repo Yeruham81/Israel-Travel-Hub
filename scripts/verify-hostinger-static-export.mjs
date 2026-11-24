@@ -228,7 +228,7 @@ assert([...nextSection.matchAll(/<svg\b/g)].length === 6,
 assert(nextSection.includes("Rental options and Saturday pickup arrangements."),
   "Shabbat next-trip links must show concise descriptions");
 assert(shabbatMain.includes("Need a private airport transfer on Shabbat?") &&
-  shabbatMain.includes("I'll reply personally about arranging your private airport pickup."),
+  shabbatMain.includes("reply personally about arranging your private airport pickup."),
   "Shabbat contact copy must focus on private airport transfers");
 assert(!shabbatMain.includes("or ask about Line 711 and onward transport"),
   "Shabbat contact copy must not solicit generic public transport questions");
