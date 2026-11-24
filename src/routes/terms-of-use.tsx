@@ -3,7 +3,7 @@ import { LegalPage, legalPageMeta, type LegalSection } from "@/components/LegalP
 import { airportTransferContact } from "@/data/registry";
 
 export const Route = createFileRoute("/terms-of-use")({
-  head: () => legalPageMeta("Terms of Use", "/terms-of-use/", "Terms for using Israel Taxi & Travel, requesting transport from Moshe Barak, understanding prices and cancellation, and using external booking, advertising and payment services."),
+  head: () => legalPageMeta("Terms of Use", "/terms-of-use/", "Website terms for Israel Taxi & Travel: transport enquiries, bookings, prices, cancellations and use of third-party services and affiliate links."),
   component: TermsOfUse,
 });
 
