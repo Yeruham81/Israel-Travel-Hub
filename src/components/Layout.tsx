@@ -18,7 +18,7 @@ export function ExtLink({ href, children, className }: { href: string; children:
 
 export function Wordmark() {
   return (
-    <Link to="/" className="flex shrink-0 items-center gap-1.5 sm:gap-2" aria-label="Israel Taxi & Travel Moshe Barak – home">
+    <Link to="/" className="flex shrink-0 items-center gap-1.5 sm:gap-2">
       <span aria-hidden className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-navy font-serif text-sm italic text-navy-foreground sm:h-8 sm:w-8 sm:text-base">i</span>
       <span className="flex flex-col gap-1">
         <span className="whitespace-nowrap font-serif font-semibold text-[0.9rem] leading-none min-[375px]:text-base sm:text-xl">
@@ -29,6 +29,7 @@ export function Wordmark() {
           <span>Moshe Barak</span>
         </span>
       </span>
+      <span className="sr-only"> (home)</span>
     </Link>
   );
 }
