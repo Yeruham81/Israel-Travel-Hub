@@ -60,7 +60,7 @@ describe("car rental guide and Travelpayouts search", () => {
     expect(alternative.nextElementSibling).toBe(contactSection);
     expect(contactSection.nextElementSibling).toBe(related);
     expect(within(alternative).queryByRole("link")).not.toBeInTheDocument();
-    expect(within(contactSection).getByRole("heading", { name: "Plan a private journey with me" })).toBeInTheDocument();
+    expect(within(contactSection).getByRole("heading", { name: "Need a private driver for your Israel journey?" })).toBeInTheDocument();
     expect(within(form).getByRole("textbox", { name: "Your name *" })).toBeRequired();
     expect(within(form).getByRole("textbox", { name: "Email address *" })).toBeRequired();
     expect(within(form).getByRole("textbox", { name: "Subject *" })).toHaveValue("");
