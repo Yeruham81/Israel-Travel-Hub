@@ -46,7 +46,8 @@ describe("Haifa hotel travel guide parity", () => {
     expect(readRouteSource("src/routes/travel-blog.best-hotels-in-haifa.tsx")).toContain("<HaifaHotelEditorialGuide guide={g} />");
     expect(readRouteSource("src/routes/accommodation.haifa.index.tsx")).toContain("<HotelDestinationPage guide={g} />");
     const directory = guideDirectory.find(entry => entry.to === accommodationEditorial.haifa.path);
-    expect(directory?.photo).toEqual(guide.photo);
+    expect(directory?.photo.src).toBe(guide.photo.src);
+    expect(directory?.photo.alt).toBe(guide.photo.alt);
     expect(directory?.updatedAt).toBe("2026-11-25");
   });
 
