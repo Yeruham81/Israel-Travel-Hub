@@ -303,7 +303,7 @@ export function TelAvivAttractionsGuide(){
     <Heading id="plan" title="Plan the next part of your Israel trip" intro={<>Choose an itinerary or an onward connection. For other bases across Israel, see my <Link to="/accommodation/" className="font-semibold text-primary hover:underline">Where to Stay in Israel</Link> guide.</>}/>
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{planning.map(item=><GuideCard key={item.to} item={item}/>)}</div>
   </section>
-  <HomeContactForm guide={{
+  <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
     heading:"Need a private transfer or day trip in Tel Aviv?",
     introduction:"I'm Moshe Barak. I arrange private airport transfers, private rides and day trips with a driver in Israel. Tell me your dates, pickup point, group size and where you would like to go, and I'll reply personally about transport options.",
     subject:"",
