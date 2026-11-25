@@ -89,8 +89,15 @@ for (const [key, value] of Object.entries({ campaign_id: "117", promo_id: "3873"
   assert(widgetUrl.searchParams.get(key) === value, `Unexpected DiscoverCars widget ${key}`);
 }
 assert(!existsSync(join(root, "qa-car-rental-mobile.html")), "Local-only mobile harness must never be deployed");
-for (const alias of ["/travel-blog/haifa/", "/travel-blog/the-dead-sea/", "/travel-blog/sea-of-galilee/"]) {
-  assert(!paths.has(alias), `Regional alias must not appear in sitemap: ${alias}`);
+for (const [retired, target] of [
+  ["/travel-blog/haifa/", "/attractions/haifa/"],
+  ["/travel-blog/sea-of-galilee/", "/attractions/sea-of-galilee/"],
+  ["/travel-blog/the-dead-sea/", "/attractions/dead-sea/"],
+]) {
+  assert(!paths.has(retired), `Retired guide must not appear in sitemap: ${retired}`);
+  assert(!existsSync(join(root, retired.slice(1), "index.html")), `Retired guide HTML must not be exported: ${retired}`);
+  assert(paths.has(target), `Canonical attraction missing from sitemap: ${target}`);
+  assert(existsSync(join(root, target.slice(1), "index.html")), `Canonical attraction HTML missing: ${target}`);
 }
 // Preserve established public URLs; titles do not require new slugs.
 const preservedRoutes = [
