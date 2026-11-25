@@ -165,7 +165,7 @@ export function IsraelHolidayVisitorGuidePage(){
     </section>
     <FaqList faqs={faq}/>
     <RelatedGuides/>
-    <HomeContactForm guide={guideContactCopy(HOLIDAY_GUIDE_TITLE,"itinerary")}/>
+    <HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy(HOLIDAY_GUIDE_TITLE,"itinerary")}/>
     <SourcesDisclosure>
       <p className="mb-3 text-sm leading-relaxed">I use Israeli public transport and holiday guidance to explain the usual patterns, not to guarantee an individual opening time, price or train departure. Check dates and arrangements with the relevant operator before travelling.</p>
       <ul className="space-y-2 text-sm">{holidayGuideSources.map(source=><li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">{source.label}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/></a></li>)}</ul>
