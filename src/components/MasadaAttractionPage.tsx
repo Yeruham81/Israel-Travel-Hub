@@ -34,7 +34,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
   visitorNavLabel: "Tickets & hours",
   historyTitle: "Herod's fortress and the Roman siege",
   relatedTitle: "Explore the Dead Sea and beyond",
-  contactIntroduction: "Tell me when you'd like to visit Masada, where you'll be staying and whether you're interested in the Dead Sea or other nearby stops. I'll be happy to help plan a private trip.",
+  contactIntroduction: "Tell me your travel date, pickup point, number of passengers and whether you would like to combine Masada with the Dead Sea. I can arrange a private driver for the journey.",
   facts: [
     { icon: "location", label: "Location", value: "Judean Desert", note: "Above the Dead Sea, between Ein Gedi and Ein Bokek" },
     { icon: "duration", label: "Time needed", value: "2–3 hours", note: "On the plateau; extra time for hiking or the museum" },
