@@ -94,7 +94,7 @@ export function JerusalemCityHubPage(){
       <GuideHeroLayout image={<GuideHeroMedia src={hero.src} alt={hero.alt} width={640} height={400}/>}>
         <p className="text-xs font-bold uppercase tracking-wide text-primary">My guide to planning Jerusalem</p>
         <h1 className="guide-page-title mt-2">{JERUSALEM_HUB_TITLE}</h1>
-        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">I recommend planning Jerusalem by area and interest rather than trying to see every landmark in a single walk. Use this guide to choose what matters to you, decide how many days to stay, and find my detailed Jerusalem guides, tours and transport advice.</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">I recommend exploring Jerusalem one area at a time, choosing the sites that interest you most. Use this guide to choose what matters to you, decide how many days to stay, and find my detailed Jerusalem guides, tours and transport advice.</p>
         <PageUpdated date={JERUSALEM_HUB_UPDATED}/>
       </GuideHeroLayout>
       <AuthorCard/>
@@ -188,7 +188,7 @@ export function JerusalemCityHubPage(){
       <Heading id="practical" title="My practical Jerusalem planning tips" intro="A handful of considerations will affect your day more than a rigid list of attractions."/>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="jerusalem-practical-tips">
         {[
-          {title:"Plan for hills and uneven ground",description:"Old City cobbles, stairways and steep approaches on the Mount of Olives can make short map distances deceptive. Ask about accessible entrances rather than assuming each route is level."},
+          {title:"Plan for hills and uneven ground",description:"Old City cobbles, stairways and steep approaches on the Mount of Olives can make short map distances deceptive. Ask about accessible entrances, steps and steep sections along your route."},
           {title:"Treat worship sites respectfully",description:"Cover shoulders and knees where required, keep voices low and respect prayers, security checks and local photography rules. Different religious compounds set their own visitor access."},
           {title:"Check the calendar, not just the season",description:"Shabbat, Jewish holidays and Christian or Muslim festivals affect services, shopping and visitor hours in different ways. Use the actual travel dates before making a detailed plan."},
           {title:"Check museum and attraction details",description:"Individual museums, tours and historic sites use their own tickets, visiting windows and reservations. Follow the dedicated guide to confirm the operator's current information."},

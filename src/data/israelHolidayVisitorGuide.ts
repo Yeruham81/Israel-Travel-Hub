@@ -22,7 +22,7 @@ export const holidayImpactLevels:Record<HolidayVisitorImpact,{label:string;summa
 };
 export const schoolCalendarPlanning = {
   title: "School holidays and the September return to school",
-  body: "July and August are usually Israel's main summer school-break months, so family attractions, beaches and popular hotels can be busy even while ordinary weekday public transport continues. Most state schools typically reopen around the beginning of September, which can ease some daytime family crowds, but calendars vary by community and school. Sukkot, Hanukkah and Passover school breaks can bring domestic visitors back to popular sites. Check the current Ministry of Education school calendar and individual opening times rather than treating a school vacation as a nationwide transport shutdown."
+  body: "July and August are usually Israel's main summer school-break months, so family attractions, beaches and popular hotels can be busy even while ordinary weekday public transport continues. Most state schools typically reopen around the beginning of September, which can ease some daytime family crowds, but calendars vary by community and school. Sukkot, Hanukkah and Passover school breaks can bring domestic visitors back to popular sites. School vacations follow the Ministry of Education calendar. Check individual opening times and transport schedules."
 } as const;
 
 export const holidayGuideGroups:HolidayGuideGroup[] = [

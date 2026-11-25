@@ -97,7 +97,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     faqs: [
       { q: "How long should I allow for a private transfer to Haifa?", a: "Allow about 75–110 minutes as a planning estimate or more after pickup. The Haifa neighbourhood and traffic matter, and time in the airport is additional. Avoid a tight onward connection based only on that estimate." },
       { q: "Can I request a hotel on Mount Carmel?", a: "Yes. Include the full hotel or apartment address and any entrance instructions. Explain steps or mobility needs so I can confirm a practical drop-off and suitable vehicle." },
-      { q: "Is a Haifa Port drop-off the same as a city hotel transfer?", a: "No. Include the exact passenger terminal, ship and required arrival time. Ask me to confirm the route, access and final price rather than assuming a general Haifa quote includes every port entrance." },
+      { q: "Is a Haifa Port drop-off the same as a city hotel transfer?", a: "No. Include the exact passenger terminal, ship and required arrival time. Send me your exact port entrance so I can confirm access, the route and the final price." },
     ],
     related: [
       { label: "Choose where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },

@@ -18,7 +18,7 @@ export const seniorDayTrips:SeniorDay[] = [
   {
     id:"jerusalem",title:"Jerusalem at a comfortable pace",duration:"Half-day or full-day",
     sampleOrder:[
-      "Begin near an agreed Old City drop-off, and choose just one suitable historic route rather than trying to cover every quarter.",
+      "Begin near an agreed Old City drop-off and follow one suitable historic route.",
       "Spend time at one priority site, such as the Tower of David Museum or the Western Wall, after checking its actual accessible entrance.",
       "Finish with a scenic viewpoint or a comfortable return toward your agreed pickup location.",
     ],
@@ -29,7 +29,7 @@ export const seniorDayTrips:SeniorDay[] = [
       {label:"Old City accessible-route map app — iPhone",url:"https://apps.apple.com/il/app/accessible-jlm/id1434672106"},
     ],
     image:"/images/attractions/old-jerusalem-western-wall.webp",alt:"Western Wall in Jerusalem's Old City",
-    intro:"Choose one part of Jerusalem rather than trying to see the Old City, museums and hillside churches in a single day. A private driver can connect hotel pickup, an agreed drop-off point and another area later in the day.",
+    intro:"Spend the day in one part of Jerusalem, such as the Old City or the museum district. A private driver can connect hotel pickup, an agreed drop-off point and another area later in the day.",
     easy:"Try a scenic city viewpoint plus one museum or a short selected Old City route. Leave room for a seated lunch and longer stops.",
     watchFor:"Plan for stone paving, steps, slopes and controlled vehicle access in the Old City. Agree on a convenient permitted drop-off and check the accessibility of your exact route.",
     suggestedStops:[{label:"Old City",to:"/attractions/old-city-jerusalem/"},{label:"Mount of Olives",to:"/attractions/mount-of-olives/"},{label:"Jerusalem travel guide",to:"/travel-blog/jerusalem-travel-guide/"}],

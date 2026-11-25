@@ -128,7 +128,7 @@ const groupCopy: Record<string, { title: string; eyebrow: string; advice: string
   budget: {
     title: "Independent & budget-minded stays",
     eyebrow: "Simple rooms and local character",
-    advice: "Port Inn and Loui Talpiot offer different lower-city and Hadar settings. Compare private facilities, arrival arrangements and room totals rather than assuming fixed budget prices.",
+    advice: "Port Inn and Loui Talpiot offer different lower-city and Hadar settings. Compare room facilities, arrival arrangements and the total price.",
   },
 };
 

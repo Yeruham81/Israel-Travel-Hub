@@ -168,7 +168,7 @@ function Practical(){
   {title:"Ingredients and allergies",text:"Sesame (tahini), wheat, eggs, dairy and nuts appear frequently. Tell the person taking the order what you must avoid, including sauces, toppings and shared preparation."},
   {title:"Kosher, halal and plant-based",text:"These are different dietary questions. A kosher certificate is not the same as halal certification; a vegetarian description does not guarantee a vegan dish or allergen-safe preparation."},
   {title:"Portions and prices",text:"Check whether your order is a pita, laffa or full plate, and whether salads, extra dips, drinks or desserts cost more. Bakery items can be priced by weight."},
-  {title:"Shabbat and holidays",text:"Many market stalls close ahead of Shabbat or holiday evenings. Other cafés and restaurants may remain open. Check the hours of the specific business rather than assuming every venue behaves alike."},
+  {title:"Shabbat and holidays",text:"Many market stalls close ahead of Shabbat or holiday evenings. Other cafés and restaurants may remain open. Check opening hours with your chosen restaurant or shop."},
   {title:"Payment and service",text:"Prices are usually listed in Israeli shekels (ILS). Cards are common but a backup payment option is useful at small stalls. For table service, around 10–15% tipping is customary; check the bill."},
   {title:"A few easy ordering words",text:"Pita = pocket bread; laffa = wrap; charif = spicy; bli = without; bevakasha = please. If you need exact dietary control, ask for the full ingredient details."}
  ];
