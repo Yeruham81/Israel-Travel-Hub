@@ -1,3 +1,4 @@
+import { ESIM_UPDATED, esimProviders, esimPicks, esimFixedPlans, esimUnlimitedPlans, esimFairUse, esimFeatureRows, esimUsd, esimPriceEvidence, drimsimEurPerMb, type EsimPlan } from "@/data/esimIsraelPlans";
 import { GuideTags, GuidePhotoCredit, GuideCard } from "@/components/GuideCard";
 export { GuideTags, GuidePhotoCredit, GuideCard } from "@/components/GuideCard";
 import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
@@ -234,40 +235,68 @@ function esimRecommendation(paragraph: string, providers: ReturnType<typeof link
     <ProviderNameLink link={provider} pageId="guide-esim">{match[3]}</ProviderNameLink>{match[4]}</>;
 }
 
-function EsimPickCards({ facts, providers }: { facts: TravelGuide["facts"]; providers: ReturnType<typeof linksForPage> }) {
-  const recommendedNames = ["Saily", "Saily", "GigSky"];
-  return <section aria-label="Choose your eSIM by trip type" className="mt-5 grid gap-3 sm:grid-cols-3">
-    {facts.map((fact, index) => {
-      const provider = providers.find((item) => item.providerName === recommendedNames[index]);
-      return <article key={fact.label} className="flex h-full flex-col rounded-xl border bg-card px-4 py-4 sm:px-5 sm:py-5">
-        <h3 className="text-sm font-semibold text-foreground">{fact.label}</h3>
-        <p className="mt-2 text-base font-semibold leading-snug">{fact.text}</p>
-        {provider && <p className="mt-auto pt-4 text-sm"><strong>My choice:</strong>{" "}
-          <ProviderNameLink link={provider} pageId="guide-esim">{provider.providerName} · See plans</ProviderNameLink>
-        </p>}
+function EsimProviderLink({ name, providers, children }: { name: string; providers: ReturnType<typeof linksForPage>; children?: ReactNode }) {
+  const provider = providers.find(item => item.providerName === name);
+  return provider ? <ProviderNameLink link={provider} pageId="guide-esim">{children ?? name}</ProviderNameLink> : <>{children ?? name}</>;
+}
+
+function EsimPrice({ plan, showDays = true }: {plan: EsimPlan; showDays?: boolean}) {
+  return <span className="block tabular-nums"><strong>{esimUsd(plan.usd)}</strong>{plan.regularUsd !== undefined && <del className="ml-1 text-xs text-muted-foreground">{esimUsd(plan.regularUsd)}</del>}{showDays && <span className="block text-xs text-muted-foreground">{plan.days} days</span>}{esimPriceEvidence(plan) && <span className="block text-xs text-muted-foreground">{esimPriceEvidence(plan)}</span>}</span>;
+}
+function EsimPickCards({ providers }: { providers: ReturnType<typeof linksForPage> }) {
+  const icons = [Plane, BedDouble, Smartphone, Waves];
+  return <section aria-label="Choose your eSIM by trip type" className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+    {esimPicks.map(({label,plan,reason},index) => {
+      const Icon = icons[index]!;
+      return <article key={label} className="flex min-w-0 flex-col rounded-xl border bg-card p-3 sm:p-5">
+        <Icon className="size-5 text-primary" aria-hidden />
+        <h3 className="mt-2 text-sm font-semibold">{label}</h3>
+        <p className="mt-2 text-xl font-bold">{plan.gb === "Unlimited" ? "Unlimited" : plan.gb + " GB"}</p>
+        <EsimPrice plan={plan}/>
+        <p className="mt-2 flex-1 text-xs text-muted-foreground">{reason}</p>
+        <p className="mt-3 text-sm font-semibold">{plan.provider}</p>
+        <div className="mt-2 rounded-lg border border-primary/30 px-2 py-2 text-center text-sm"><EsimProviderLink name={plan.provider} providers={providers}>View plans <span className="sr-only">on {plan.provider}</span></EsimProviderLink></div>
       </article>;
     })}
   </section>;
 }
-
-/** Compare only genuine 30-day unlimited plans; Drimsim is disclosed as unavailable. */
-function EsimUnlimitedComparison({ guide, providers }: { guide: TravelGuide; providers: ReturnType<typeof linksForPage> }) {
-  const unlimited = guide.comparison.rows.filter((row) => row[0] !== "Drimsim");
-  const drimsim = guide.comparison.rows.find((row) => row[0] === "Drimsim");
-  return <section aria-label="Compare 30-day unlimited eSIM plans" className="mt-5">
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-      {unlimited.map(([name, price, allowance]) => {
-        const provider = providers.find((item) => item.providerName === name);
-        return <article key={name} className={"flex min-w-0 flex-col rounded-xl border bg-card p-4 " + (name === "GigSky" ? "border-primary/60" : "")}>
-          <h3 className="text-sm font-semibold">{provider ? <ProviderNameLink link={provider} pageId="guide-esim">{name}</ProviderNameLink> : name}</h3>
-          <p className="mt-2 text-xl font-semibold tabular-nums">{price}</p>
-          <p className="text-xs text-muted-foreground">Unlimited · 30 days</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{allowance}</p>
-        </article>;
-      })}
-    </div>
-    {drimsim && <p className="mt-3 text-sm text-muted-foreground"><strong>{drimsim[0]}:</strong> no unlimited plan. Its published Israel pay-as-you-go rate is €0.01 per MB; review activation fees and total usage costs before choosing it.</p>}
-  </section>;
+function EsimComparisonTable({ caption, headers, rows }: {caption: string; headers: ReactNode[]; rows: ReactNode[][]}) {
+  return <div role="region" aria-label={caption} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
+    <table className="w-full min-w-[640px] text-left text-sm">
+      <caption className="sr-only">{caption}</caption>
+      <thead className="bg-secondary"><tr>{headers.map((head,i)=><th key={i} scope="col" className={"p-3 font-semibold " + (i===0?"sticky left-0 z-10 bg-secondary":"")}>{head}</th>)}</tr></thead>
+      <tbody className="divide-y">{rows.map((row,i)=><tr key={i} className="bg-card">{row.map((cell,j)=>j===0?<th scope="row" key={j} className="sticky left-0 z-10 bg-card p-3 font-medium">{cell}</th>:<td key={j} className="p-3 align-top">{cell}</td>)}</tr>)}</tbody>
+    </table>
+  </div>;
+}
+function EsimFixedComparison({ providers }: { providers: ReturnType<typeof linksForPage> }) {
+  return <><EsimComparisonTable caption="Prepaid eSIM data plans" headers={["Data",...esimProviders.map(name=><EsimProviderLink key={name} name={name} providers={providers}/>)]} rows={[1,3,5,10,20,30,50].map(gb=>[gb+" GB",...esimProviders.map(name=>{
+    const plans=esimFixedPlans.filter(p=>p.provider===name&&p.gb===gb);
+    return plans.length?<div className="space-y-2">{plans.map(plan=><EsimPrice key={plan.days} plan={plan}/>)}</div>:"—";
+  })])}/>
+  <p className="mt-2 text-xs text-muted-foreground">Dash: no matching offer in this comparison. GigSky's promotional fixed prices were checked by the publisher; prices marked Price index are dated third-party listings rather than confirmed checkout quotes.</p></>;
+}
+function EsimUnlimitedComparison({ providers }: {providers: ReturnType<typeof linksForPage>}) {
+  return <><EsimComparisonTable caption="Unlimited eSIM plans by duration" headers={["Provider","7 days","15 days","30 days","Daily high-speed data"]} rows={esimProviders.map(name=>[<EsimProviderLink name={name} providers={providers}/>,...[7,15,30].map(days=>{const plan=esimUnlimitedPlans.find(p=>p.provider===name&&p.days===days);return plan?<EsimPrice plan={plan} showDays={false}/>:"Price not verified";}),esimFairUse[name]])}/>
+    <p className="mt-2 text-xs text-muted-foreground">Saily's earlier 30-day price and the GigSky and Yesim index prices are reference prices; check the current offer before choosing. The daily allowance is separate from the length of the plan.</p></>;
+}
+function EsimFeatures({ providers }: {providers: ReturnType<typeof linksForPage>}) {
+  return <EsimComparisonTable caption="eSIM provider features" headers={["Provider","Network / speed","Hotspot","Top-up","Calls & SMS","Activation","Support"]} rows={esimFeatureRows.map(([name,...features])=>[<EsimProviderLink name={name!} providers={providers}/>,...features])}/>;
+}
+function EsimUsage() {
+  const items = [{icon:MapPinned,title:"Light use",amount:"1–3 GB",text:"Maps, messages and email for a short visit."},{icon:Smartphone,title:"Moderate use",amount:"5–10 GB",text:"Navigation, social media and photos over one to three weeks."},{icon:Waves,title:"Heavy use",amount:"20–50 GB+",text:"Video calls, streaming or sharing data with a laptop."}];
+  return <div className="mt-5 grid gap-3 sm:grid-cols-3">{items.map(({icon:Icon,title,amount,text})=><article key={title} className="rounded-xl border bg-card p-4"><Icon className="size-5 text-primary" aria-hidden/><h3 className="mt-2 font-semibold">{title}</h3><p className="mt-1 text-xl font-bold">{amount}</p><p className="mt-2 text-sm text-muted-foreground">{text}</p></article>)}<p className="text-xs text-muted-foreground sm:col-span-3">Estimates for the whole trip. Video quality, travel duration and Wi-Fi availability affect usage. Download offline maps and keep automatic updates on Wi-Fi to save data.</p></div>;
+}
+function EsimPayg({providers}: {providers: ReturnType<typeof linksForPage>}) {
+  return <><EsimComparisonTable caption="Drimsim pay-as-you-go data costs" headers={["Data used","Estimated data charge"]} rows={[100,500,1000,5000].map(mb=>[mb.toLocaleString("en-US")+" MB","€"+(mb*drimsimEurPerMb).toFixed(2)])}/><p className="mt-3 text-sm">Data only; compare the purchase and balance requirements too. <EsimProviderLink name="Drimsim" providers={providers}>View Drimsim plans and rates</EsimProviderLink>.</p></>;
+}
+function EsimSetup() {
+  const steps = [
+    {title:"Before your flight",text:"On iPhone, open Settings > Cellular / Mobile Data > Add eSIM. On Android, open Settings > SIMs or SIM manager > Add eSIM. Follow the app or QR-code instructions; menus vary by device."},
+    {title:"On arrival in Israel",text:"Turn on the travel eSIM, choose it for mobile data and enable roaming on that line if required. Keep your original SIM's data roaming off."},
+    {title:"If you cannot connect",text:"Check the active plan and selected data line, toggle airplane mode or restart the phone. Follow the provider's APN and network instructions; contact its support before deleting the eSIM."},
+  ];
+  return <ol className="mt-5 grid gap-3 sm:grid-cols-3">{steps.map((step,i)=><li key={step.title} className="rounded-xl border bg-card p-4"><span className="grid size-8 place-items-center rounded-full bg-secondary font-semibold text-primary">{i+1}</span><h3 className="mt-2 font-semibold">{step.title}</h3><p className="mt-2 text-sm leading-relaxed">{step.text}</p></li>)}</ol>;
 }
 
 export function TravelGuidePage({ id }: { id: TravelGuideId }) {
@@ -306,15 +335,15 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
           <h1 className="guide-page-title">{guide.title}</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
           <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
-          {(id === "uber" || id === "sherut" || id === "israel" || id === "telAviv" || id === "jerusalemDeadSea") && <AuthorCard />}
+          {(id === "esim" || id === "uber" || id === "sherut" || id === "israel" || id === "telAviv" || id === "jerusalemDeadSea") && <AuthorCard />}
         </GuideHeroLayout>
-        {id !== "uber" && id !== "sherut" && id !== "israel" && id !== "telAviv" && id !== "jerusalemDeadSea" && <AuthorCard />}
+        {id !== "esim" && id !== "uber" && id !== "sherut" && id !== "israel" && id !== "telAviv" && id !== "jerusalemDeadSea" && <AuthorCard />}
       </header>
       <section id="quick-answer" aria-labelledby="answer-h" className="mt-8 scroll-mt-24 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-7">
         <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{id === "esim" ? emphasizeEsimNames(guide.answer) : guide.answer}</p>
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
-      {id === "esim" && <><EsimPickCards facts={guide.facts} providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Plan prices checked 15 November 2026 (USD unless otherwise stated). Prices, discounts, taxes and package terms can change; confirm the final amount and allowance with the provider before buying. Providers may display prices in your local currency.</p></>}
+      {id === "esim" && <><EsimPickCards providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Prices reviewed {new Date(ESIM_UPDATED + "T12:00:00Z").toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric",timeZone:"UTC"})} (USD except where marked). Dated reference prices are labelled. Providers may display prices in your local currency.</p></>}
       {isTransportOverview && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-3">
         {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p>
@@ -399,7 +428,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
           ) : section.paragraphs.map((paragraph, paragraphIndex) => (
             <Fragment key={paragraphIndex}>
               <p>{section.richParagraphs?.[paragraphIndex] ? <GuideRichParagraph spans={section.richParagraphs[paragraphIndex]} /> : id === "esim" ? esimRecommendation(paragraph, providers) : <GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} />}</p>
-              {id === "esim" && section.id === "unlimited" && paragraphIndex === 0 && <EsimUnlimitedComparison guide={guide} providers={providers} />}
+              {id === "esim" && paragraphIndex === 0 && <>{section.id === "short-trip" && <EsimFixedComparison providers={providers}/>} {section.id === "unlimited" && <EsimUnlimitedComparison providers={providers}/>} {section.id === "features" && <EsimFeatures providers={providers}/>} {section.id === "long-trip" && <EsimUsage/>} {section.id === "payg" && <EsimPayg providers={providers}/>} {section.id === "setup" && <EsimSetup/>}</>}
               {paragraphIndex === 0 && section.photo && <GuideSectionPhoto photo={section.photo} />}
             </Fragment>
           ))}
@@ -437,7 +466,8 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {id === "bethlehem" && <BethlehemGuideFollowUps />}
       {!isTransportOverview && !isTaxiFareGuide && id !== "esim" && id !== "jerusalemDeadSea" && id !== "bethlehem" && id !== "airportTaxis" && id !== "taxis" && id !== "arrival" && id !== "shabbat" && id !== "uber" && id !== "sherut" && <SourceList ids={sourcesFor(guide)} />}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} illustrated={id === "israel" || id === "telAviv" || id === "esim" || id === "airportTaxis" || id === "arrival"} maxPhotoCards={id === "israel" || id === "telAviv" || id === "esim" || id === "airportTaxis" || id === "arrival" ? 6 : 4} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
-      {!isJerusalemCluster && id !== "shabbat" && id !== "jerusalemDeadSea" && id !== "uber" && id !== "sherut" && id !== "israel" && id !== "telAviv" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
+      {id === "esim" && <IconTripPlanningLinks title="Plan the next part of your trip" items={guide.services.map((service,index)=>({title:service.label,description:service.note ?? "",to:service.to,icon:[Plane,MapPinned,BedDouble,BookOpen,CarFront,Landmark][index] ?? BookOpen}))} />}
+      {!isJerusalemCluster && id !== "esim" && id !== "shabbat" && id !== "jerusalemDeadSea" && id !== "uber" && id !== "sherut" && id !== "israel" && id !== "telAviv" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
       {id === "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths.shabbat} illustrated maxPhotoCards={6} items={[
         { label: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
         { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
@@ -453,7 +483,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {id === "shabbat" && <IconTripPlanningLinks title="Plan the next part of your trip" id="shabbat-trip-planning" className="mt-12" items={guide.services.map(item => ({ title: item.label, description: item.note ?? "", to: item.to, icon: shabbatPlanningIcons[String(item.to)] ?? BookOpen }))} />}
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
       {id === "taxis" && <HomeContactForm context="taxis" showTripadvisorBesidePortraitMobile />}
-      {id !== "taxis" && <HomeContactForm key={id} showTripadvisorBesidePortraitMobile guide={id === "uber" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer in Israel?", introduction: "Tell me your pickup location, destination, travel date and passengers. I can arrange a private transfer with a driver and will reply personally about your journey.", placeholder: "Pickup, destination, date, passengers and luggage…" } : id === "airportTaxis" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight, destination, passengers and luggage. I'll reply personally about arranging a confirmed pickup.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "taxiFares" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a private transfer for your journey?", introduction: "I arrange private transfers and city-to-city journeys with a driver. Tell me your pickup point, destination, date and passengers, and I'll reply personally about your private ride.", placeholder: "Route, travel date, passengers, luggage or your question…" } : id === "arrival" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight number, destination, passenger count and luggage. I can discuss a suitable confirmed airport transfer and meeting arrangement.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "shabbat" ? { ...guideContactCopy(guide.title, "shabbat"), eyebrow: "Contact Me" } : id === "bethlehem" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer To or From Jerusalem?", introduction: "Tell me your pickup location, destination, travel date, passengers and luggage. I\u0027ll reply personally about arranging private transport to or from Jerusalem.", placeholder: "Pickup, destination, date, passengers and luggage…" } : id === "jerusalemDeadSea" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer or Driver to the Dead Sea?", introduction: "Tell me your pickup location in Jerusalem, travel date, destinations, passengers and planned return time. I'll reply personally about arranging your private journey.", placeholder: "Jerusalem pickup, date, Dead Sea stops, passengers and return time…" } : id === "telAviv" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer or Driver in Tel Aviv?", introduction: "Tell me your pickup point, destination, travel date and number of passengers. I\u0027ll reply personally about arranging your private journey.", placeholder: "Pickup point, destination, date and passengers…" } : id === "israel" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer or Driver in Israel?", introduction: "Tell me your travel date, pickup point, destinations and number of passengers. I\u0027ll reply personally about arranging a suitable private journey.", placeholder: "Travel date, pickup, destinations and passengers…" } : guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
+      {id !== "taxis" && <HomeContactForm key={id} showTripadvisorBesidePortraitMobile guide={id === "esim" ? { ...guideContactCopy(guide.title, "connectivity"), eyebrow:"Contact Me", heading:"Need a private airport transfer or driver in Israel?", introduction:"I arrange private airport pickups and day trips with a driver. Tell me your pickup point, travel date, destinations and passengers, and I’ll reply personally.", placeholder:"Pickup point, destination, date, passengers and luggage…" } : id === "uber" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer in Israel?", introduction: "Tell me your pickup location, destination, travel date and passengers. I can arrange a private transfer with a driver and will reply personally about your journey.", placeholder: "Pickup, destination, date, passengers and luggage…" } : id === "airportTaxis" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight, destination, passengers and luggage. I'll reply personally about arranging a confirmed pickup.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "taxiFares" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a private transfer for your journey?", introduction: "I arrange private transfers and city-to-city journeys with a driver. Tell me your pickup point, destination, date and passengers, and I'll reply personally about your private ride.", placeholder: "Route, travel date, passengers, luggage or your question…" } : id === "arrival" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact Me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight number, destination, passenger count and luggage. I can discuss a suitable confirmed airport transfer and meeting arrangement.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "shabbat" ? { ...guideContactCopy(guide.title, "shabbat"), eyebrow: "Contact Me" } : id === "bethlehem" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer To or From Jerusalem?", introduction: "Tell me your pickup location, destination, travel date, passengers and luggage. I\u0027ll reply personally about arranging private transport to or from Jerusalem.", placeholder: "Pickup, destination, date, passengers and luggage…" } : id === "jerusalemDeadSea" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer or Driver to the Dead Sea?", introduction: "Tell me your pickup location in Jerusalem, travel date, destinations, passengers and planned return time. I'll reply personally about arranging your private journey.", placeholder: "Jerusalem pickup, date, Dead Sea stops, passengers and return time…" } : id === "telAviv" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer or Driver in Tel Aviv?", introduction: "Tell me your pickup point, destination, travel date and number of passengers. I\u0027ll reply personally about arranging your private journey.", placeholder: "Pickup point, destination, date and passengers…" } : id === "israel" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact Me", heading: "Need a Private Transfer or Driver in Israel?", introduction: "Tell me your travel date, pickup point, destinations and number of passengers. I\u0027ll reply personally about arranging a suitable private journey.", placeholder: "Travel date, pickup, destinations and passengers…" } : guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
       {id === "uber" && <SourceList ids={uberSourceIds} intro="Official information on ride apps, taxi regulations and airport pickup." compact linksOnly />}
       {id === "sherut" && <SourceList ids={sourcesFor(guide)} intro="Official information on airport pickup, public transport and local sherut services." compact linksOnly />}
       {id === "taxis" && <SourceList ids={sourcesFor(guide)} intro="Official taxi service, passenger rights and public transport sources for this guide." />}
@@ -464,7 +494,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {isTaxiFareGuide && <SourceList ids={sourcesFor(guide)} intro="Official taxi tariffs, applicable times and passenger-rights references." />}
       {id === "jerusalemDeadSea" && <SourceList ids={sourcesFor(guide)} intro="Official bus, beach and national-park information." compact linksOnly />}
       {id === "bethlehem" && <SourceList ids={sourcesFor(guide)} intro="Official bus, church and entry references." />}
-      {id === "esim" && <SourceList ids={sourcesFor(guide)} intro="Official provider plan pages used for these comparisons. Prices, coverage and fair-use limits can change; confirm the details for the exact package before purchase." />}
+      {id === "esim" && <SourceList ids={sourcesFor(guide)} intro="Provider plan pages, fair-use policies and dated price references used in this guide." />}
       <PhotoCreditsDisclosure entries={creditedPhotos}/>
     </article>
   </main>;
