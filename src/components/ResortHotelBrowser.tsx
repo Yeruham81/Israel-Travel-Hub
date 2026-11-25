@@ -82,7 +82,7 @@ export function ResortHotelBrowser({ guide: g }: { guide: HotelStayDestination }
           <p className="text-sm font-semibold">Hotel style</p>
           <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label={`Filter ${g.name} hotels by style`}>
             <button type="button" className="chip" aria-pressed={style === "all"} onClick={() => { setStyle("all"); setExpanded(false); }}>All styles</button>
-            {g.groups.map((group) => <button key={group.id} type="button" className="chip" aria-pressed={style === group.id}
+            {g.groups.map((group) => <button key={group.id} id={group.id} type="button" className="chip scroll-mt-28" aria-pressed={style === group.id}
               onClick={() => { setStyle(group.id); setExpanded(false); }}>{styleLabels[group.id] || group.title}</button>)}
           </div>
         </div>
@@ -114,7 +114,7 @@ export function ResortHotelBrowser({ guide: g }: { guide: HotelStayDestination }
         </p>}
       </div>
       {visible.length ? (
-        <ul className="mt-5 grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="regional-hotel-grid">
+        <ul id="regional-hotel-grid" className="mt-5 grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="regional-hotel-grid">
           {visible.map((id) => <StayHotelCard key={id} hotel={resortHotel(id)} booking={hotelBooking(id)}
             pageId={`stay-${g.id}`} tile photo={resortHotelPhoto(id)} />)}
         </ul>
