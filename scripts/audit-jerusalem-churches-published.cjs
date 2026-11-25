@@ -99,26 +99,37 @@ async function inspect(page, viewportName, desktop) {
       const page = await browser.newPage({ viewport:{width,height}, deviceScaleFactor:1, reducedMotion:"reduce" });
       await allowEditorialMaps(page);
       const errors = [];
+      const mapNetworkErrors = [];
+      const mapRequest = url => /maplibre|\/maps\/|tiles|glyphs|sprite/i.test(url);
       page.on("pageerror", err => errors.push(err.message));
+      page.on("requestfailed", request => { if(mapRequest(request.url())) mapNetworkErrors.push({url:request.url(),error:request.failure()?.errorText}); });
+      page.on("response", response => { if(mapRequest(response.url()) && response.status()>=400) mapNetworkErrors.push({url:response.url(),status:response.status()}); });
       try {
         const response = await page.goto(url, { waitUntil:"domcontentloaded", timeout:70000 });
         check(response?.status() === 200, label + ": published page HTTP 200", String(response?.status()));
-        await page.waitForTimeout(1000);
+        // Wait for the consent-gated React iframe to hydrate and enter the viewport.
+        // A fixed delay may sample the SSR placeholder or leave a lazy iframe unloaded.
+        const mapIframe = page.locator('iframe[src^="/maps/jerusalem-churches.html"]');
+        await page.locator("#church-map").scrollIntoViewIfNeeded();
+        await mapIframe.waitFor({state:"visible",timeout:30000});
+        await mapIframe.scrollIntoViewIfNeeded();
         data[label] = await inspect(page,label,width>=1000);
+        await mapIframe.scrollIntoViewIfNeeded();
+        const frame = page.frameLocator('iframe[src^="/maps/jerusalem-churches.html"]');
         await page.locator("#church-map-focus").selectOption("ecce-homo");
         check(await page.locator("#church-map-focus").inputValue() === "ecce-homo", label + ": select a map point");
-        const frame = page.frameLocator('iframe[src^="/maps/jerusalem-churches.html"]');
         try {
+          await frame.locator("#status").waitFor({state:"hidden",timeout:35000});
           await frame.locator(".maplibregl-popup-content").filter({ hasText:"Ecce Homo Basilica" }).waitFor({timeout:22000});
           check(true,label + ": embedded map reacts to parent selection and opens accurate pin");
         } catch (e) {
-          const status = await frame.locator("#message").textContent().catch(() => "");
-          check(false,label + ": embedded map responds to parent selection",String(status).slice(0,200));
+          const status = await frame.locator("#message").textContent({timeout:3000}).catch(() => "");
+          check(false,label + ": embedded map responds to parent selection",JSON.stringify({status,mapNetworkErrors,error:e.message}).slice(0,3000));
         }
         await page.screenshot({ path:path.join(output,label+".png"),fullPage:true,animations:"disabled" });
         check(errors.length===0,label + ": no uncaught page errors",JSON.stringify(errors));
       } catch (e) {
-        check(false,label + ": browser audit completed",e.message);
+        check(false,label + ": browser audit completed",JSON.stringify({error:e.message,mapNetworkErrors}).slice(0,3000));
       } finally { await page.close(); }
     }
   } catch (e) {

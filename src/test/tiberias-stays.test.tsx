@@ -115,7 +115,9 @@ describe("Tiberias destination and distinct hotel intents", () => {
   it("distinguishes current full board from all-inclusive and excludes age-restricted luxury stays from the young-family shortlist", () => {
     const guide = categories.find((g) => g.id === "family")!;
     const { container } = render(<HotelCategoryPage guide={guide} destination={destination} />);
-    expect(container.querySelector("#hotel-tib-leonardo-club")).toHaveTextContent("full board instead of all-inclusive");
+    const leonardo = container.querySelector("#hotel-tib-leonardo-club");
+    expect(leonardo).toHaveTextContent("currently describes the package as full board");
+    expect(leonardo).toHaveTextContent("An all-inclusive package has different inclusions");
     expect(container.querySelector("#hotel-tib-caesar")).toHaveTextContent("thermal mineral pool is reserved for guests aged 18 and over");
     expect(container.querySelector("#hotel-tib-galei-kinneret")).toBeNull();
     expect(container.querySelector("#hotel-tib-scots")).toBeNull();

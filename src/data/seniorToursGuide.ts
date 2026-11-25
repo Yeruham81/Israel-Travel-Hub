@@ -79,7 +79,7 @@ export const seniorDayTrips:SeniorDay[] = [
       "Finish at a Haifa viewpoint; add Akko's waterfront only when energy and the remaining travel time permit.",
     ],
     restStop:"A relaxed meal near Caesarea Harbor or Haifa's German Colony can provide a comfortable break between stops.",
-    shortenDay:"Leave Akko for a separate visit.",
+    shortenDay:"Leave Akko for a separate visit and allow more time for the coastal stops.",
     accessInfo:[
       {label:"Caesarea National Park official accessibility details",url:"https://en.parks.org.il/reserve-park/caesarea-national-park/"},
       {label:"Accessible national parks and sites map",url:"https://en.parks.org.il/accessibility/"},
