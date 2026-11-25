@@ -217,7 +217,7 @@ export function BestTimeIsraelGuide(){
       <SectionHeading id="next-trip" title="Plan the rest of your Israel trip" intro="Once you've chosen a season, use my itineraries, holiday information and transport advice to build a realistic visit."/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{planning.map(item=><GuideCard key={item.to} item={item}/>)}</div>
     </section>
-    <HomeContactForm key="best-time-to-visit-israel" guide={{
+    <HomeContactForm key="best-time-to-visit-israel" showTripadvisorBesidePortraitMobile guide={{
       heading:"Planning your trip to Israel?",
       introduction:"I'm Moshe Barak. Tell me your travel dates and the places you want to see. I can discuss an airport transfer, private sightseeing with a driver or a day trip that suits your itinerary and the season.",
       subject:"",
