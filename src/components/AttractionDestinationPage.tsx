@@ -214,7 +214,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
           })}
         </ul>
       </nav>}
-      <HomeContactForm key={String(content.path)} guide={{ ...guideContactCopy(content.title, "attraction", content.placeName), ...(content.contactIntroduction ? { introduction: content.contactIntroduction } : {}) }} />
+      <HomeContactForm key={String(content.path)} showTripadvisorBesidePortraitMobile guide={{ ...guideContactCopy(content.title, "attraction", content.placeName), ...(content.contactIntroduction ? { introduction: content.contactIntroduction } : {}) }} />
       <SourcesDisclosure>
         <p className="mb-3 leading-relaxed">Official information checked {new Date(content.updatedAt + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" })}. Visiting rules and access can change; check the relevant operator's latest notices for your date.</p>
         <ul className="space-y-3">
