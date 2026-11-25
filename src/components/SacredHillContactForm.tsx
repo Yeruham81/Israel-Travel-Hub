@@ -57,7 +57,7 @@ export function SacredHillContactForm({ id }: { id: SacredHillId }) {
             </div>
             <label className="block text-sm font-medium">Subject *<Input name="subject" required maxLength={160} value={topic} onChange={e => change(setTopic, e.target.value)} className="mt-2 h-11 bg-background" /></label>
             <label className="block text-sm font-medium">Your message *<Textarea name="message" required maxLength={4000} rows={5} value={message} onChange={e => change(setMessage, e.target.value)} placeholder="Travel date, pickup area, destinations, passengers and any mobility needs…" className="mt-2 bg-background" /></label>
-            <label className="flex items-start gap-3 text-sm leading-relaxed"><input type="checkbox" name="consent" checked={consent} onChange={e => { setConsent(e.target.checked); setErrors([]); submission.reset(); }} className="mt-1 size-4 shrink-0 accent-primary" required /><span>I agree to share these details with Moshe Barak so he can respond to my enquiry. <PrivacyInformationLink />.</span></label>
+            <label className="flex items-start gap-3 text-sm leading-relaxed"><input type="checkbox" name="consent" checked={consent} onChange={e => { setConsent(e.target.checked); setErrors([]); submission.reset(); }} className="mt-0.5 size-7 shrink-0 cursor-pointer accent-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" required /><span>I agree to share these details with Moshe Barak so he can respond to my enquiry. <PrivacyInformationLink />.</span></label>
             <QuoteSubmissionControls submission={submission} label="Send message" message />
           </fieldset>
         </form>
