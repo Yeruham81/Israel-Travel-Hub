@@ -194,8 +194,8 @@ const groupPlanningTips: Record<string, { title: string; points: readonly [strin
 };
 
 const hotelFacilityNotices: Record<string, string> = {
-  "ds-herods": "As of November 2026, the spa Jacuzzi is temporarily out of service.",
-  "ds-leonardo-club": "As of November 2026, the water park is temporarily closed. Ask the hotel about reopening before planning your stay.",
+  "ds-herods": "As of November 2026, the operator lists the spa Jacuzzi and hotel gym as temporarily closed for upgrades.",
+  "ds-leonardo-club": "As of November 2026, the operator lists the water park and thermal mineral pools as temporarily closed. Confirm their status for your travel dates.",
 };
 
 const browseLabels: Record<string, string> = {
@@ -284,13 +284,13 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
         <p className="eyebrow">Choose the holiday, then the hotel</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Dead Sea stay suits you?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">I usually start by asking what matters most: time on an operating beach, a spa break, activities for children or a comfortable hotel at the right total price. The main resorts are in Ein Bokek and the southern hotel district; Ein Gedi is a different, nature-focused choice.</p>
-        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3" data-testid="deadsea-category-grid">
+        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-2" data-testid="deadsea-category-grid">
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
             const photo = group.id === "value"
               ? { src: deadSeaValueImage, alt: "Visitor relaxing in the shallow turquoise waters of the Dead Sea" }
               : group.id === "family"
-                ? { src: "/images/home/accommodation-dead-sea-ai.webp", alt: "Illustrative Dead Sea hotels along the shore below the desert cliffs" }
+                ? group.photo
                 : group.id === "spa"
                   ? { src: deadSeaSpaImage, alt: "Sunset over the mineral-rich Dead Sea shoreline" }
                   : group.photo;
@@ -396,7 +396,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
       </section>
 
       <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
-        <h2 id="location-h" className="text-3xl">Where are the hotels?</h2>
+        <h2 id="location-h" className="text-3xl">Dead Sea hotel areas & access</h2>
         <p className="mt-3 leading-relaxed">Most resort hotels are concentrated around Ein Bokek and the southern district near Neve Zohar. Ein Gedi is farther north and works better as a base for nature outings. Use the map for orientation, then check the precise hotel address before arranging transport.</p>
         <div className="mt-5"><AreaMap area={{ name: "Dead Sea hotel region", map: guide.map }} provider="google" googleZoom={9} /></div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
