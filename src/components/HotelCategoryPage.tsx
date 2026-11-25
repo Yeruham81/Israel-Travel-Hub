@@ -16,7 +16,7 @@ import { StayComparison, StayBookingDisclosure, StayPhotoCredits, resortHotel, h
 export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCategoryGuide; destination: HotelStayDestination }) {
   const pageId = `stay-${destination.id}-${g.id}`;
   const practicalExample = categoryDecisionExamples[`${destination.id}:${g.id}`];
-  const sections = [["overview", "How to choose"], ["compare", "Compare hotels"], ["details", g.detailNavLabel], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact Moshe"], ["sources", "Sources"]] as const;
+  const sections = [["overview", "How to choose"], ["compare", "Compare hotels"], ["book", "Hotel picks"], ["details", g.detailNavLabel], ["checklist", "Booking tips"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact me"], ["sources", "Sources"]] as const;
   const otherGuides = hotelCategoryGuides.filter((guide) => guide.destinationId === destination.id && guide.id !== g.id);
   const editorialPath = accommodationEditorial[destination.id as "haifa" | "tiberias" | "deadsea"].path;
   return (
@@ -38,8 +38,8 @@ export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCateg
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{practicalExample.decision}</p>
         </aside>}</Section>
         <Section id="compare" title={`Compare ${g.picks.length} ${destination.name} ${g.shortTitle.toLowerCase()}`} className="scroll-mt-32"><StayComparison hotelIds={g.picks.map((pick) => pick.hotelId)} columns={g.comparison} caption={`${destination.name} ${g.shortTitle.toLowerCase()}: practical comparison`} /></Section>
-        <Section id="details" title={g.detailTitle} className="scroll-mt-32">{g.details.map((detail) => <div key={detail.title} className="mt-6"><h3 className="text-2xl">{detail.title}</h3><p>{detail.text}</p></div>)}<p><Link to={destination.path as LinkProps["to"]} hash="location">{destination.locationLinkText}</Link></p></Section>
         <section id="book" aria-labelledby="book-h" className="mt-14 scroll-mt-32"><p className="eyebrow">A shortlist for your trip</p><h2 id="book-h" className="mt-2 text-3xl">{g.shortTitle}: which stay suits you?</h2><StayBookingDisclosure /><ul className="mt-6 space-y-5">{g.picks.map((pick) => <StayHotelCard key={pick.hotelId} hotel={resortHotel(pick.hotelId)} booking={hotelBooking(pick.hotelId)} pageId={pageId} editorial={pick} photo={resortHotelPhoto(pick.hotelId)} />)}</ul></section>
+        <Section id="details" title={g.detailTitle} className="scroll-mt-32">{g.details.map((detail) => <div key={detail.title} className="mt-6"><h3 className="text-2xl">{detail.title}</h3><p>{detail.text}</p></div>)}<p><Link to={destination.path as LinkProps["to"]} hash="location">{destination.locationLinkText}</Link></p></Section>
         <Section id="checklist" title="Confirm before paying" className="scroll-mt-32"><StayBookingChecklist groups={[{ title: g.checklistTitle, items: g.checklist.slice(0, 3) }, { title: "The total & the travel dates", items: g.checklist.slice(3) }]} /></Section>
         <ProviderSection id="more-stays" title={`Browse more ${g.shortTitle.toLowerCase()}`} intro="Check the hotel’s location, room and package before booking." links={linksForPage(`${pageId}-browse`)} pageId={pageId} />
         <nav aria-label="Other accommodation styles" className="mt-10 border-t pt-6">
