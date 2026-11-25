@@ -154,7 +154,7 @@ const portDetails: Record<ShorePortId, PortDetails> = {
         "Ashdod is a secure commercial port, not a pedestrian city-center terminal. The port's passenger guidance restricts walking within the port and ordinary private-vehicle entry. For a visiting cruise ship, follow your cruise line's current instructions about any internal shuttle and the authorized shore-excursion meeting area.",
         "When arranging an independent driver, share the ship's name, disembarkation instructions and all-aboard deadline. Confirm whether the pickup is inside an authorized area or outside the port after a shuttle: those are not interchangeable locations.",
       ],
-      source: { title: "Ashdod Port — passenger and cruise access guidance", url: "https://www.ashdodport.co.il/serviceslist/passengers/Pages/passengers-cruises.aspx" },
+      source: { title: "Ashdod Port - passenger and cruise access guidance", url: "https://www.ashdodport.co.il/serviceslist/passengers/Pages/passengers-cruises.aspx" },
     },
     routeFit: [
       { route: "Tel Aviv and Old Jaffa", goodFor: "A city-and-coast day with flexibility for lunch and shorter walks", constraint: "Old Jaffa's lanes may require walking away from the vehicle; road traffic still needs a return margin." },
@@ -183,10 +183,10 @@ const portDetails: Record<ShorePortId, PortDetails> = {
     portAccess: {
       heading: "Haifa Port: the pedestrian bridge and the driver meeting point",
       paragraphs: [
-        "Haifa Port's public passenger-terminal entrance connects to downtown by a pedestrian-only bridge near 65 HaAtsmaut Street, close to Haifa Center HaShmona railway station. The bridge is pedestrian-only. Arrange your driver's meeting point outside the port.",
+        "Haifa Port's public passenger-terminal entrance connects to downtown by a pedestrian-only bridge near 65 HaAtsmaut Street, close to Haifa Center HaShmona railway station. Confirm your driver's meeting point for your ship and port access arrangements.",
         "Your cruise company may specify a different disembarkation or tour-group meeting arrangement. Follow that instruction first, then agree with your driver exactly which side of the terminal access route to meet on and when to return.",
       ],
-      source: { title: "Haifa Port — passenger terminal and downtown access", url: "https://www.haifaport.co.il/en/terminal/" },
+      source: { title: "Haifa Port - passenger terminal and downtown access", url: "https://www.haifaport.co.il/en/terminal/" },
     },
     routeFit: [
       { route: "Akko (Acre) and Haifa", goodFor: "More sightseeing time close to the northern port", constraint: "Akko's historic streets are walked on foot, and any Rosh Hanikra extension needs a separate operating-status check." },

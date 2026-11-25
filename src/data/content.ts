@@ -413,7 +413,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
       { name: "Charles Clore Park & the southern promenade", text: "The nearby coast offers a route toward Jaffa and a break from the enclosed neighborhood streets." },
     ],
     gettingAround: [
-      "The southern promenade is roughly 10–15 minutes on foot from many parts of Neve Tzedek, with a different walk from hotels on its eastern edges. Rothschild and Florentin are nearby; Jaffa is farther south. ",
+      "The southern promenade is roughly 10–15 minutes on foot from many parts of Neve Tzedek, with a different walk from hotels on its eastern edges. Rothschild and Florentin are nearby; Jaffa is farther south.",
       "Much of the appeal is exploring on foot. For luggage, a late arrival or an airport transfer, ask where a car can legally stop and which doorway is yours. If bringing a car, arrange a specific parking option before arrival instead of relying on a space in the historic lanes.",
     ],
     arrivalTips: ["Check whether your hotel is inside Neve Tzedek or on its eastern edge.", "Ask about steps and lifts in converted historic buildings.", "Arrange the drop-off and any independent check-in instructions before a late arrival."],

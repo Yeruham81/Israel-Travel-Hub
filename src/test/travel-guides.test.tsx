@@ -1128,8 +1128,8 @@ describe("migrated practical guides", () => {
     expect(container.querySelector("#costs")?.textContent).toMatch(/regulated.*meter|meter.*tariff/is);
     for (const [label, url] of ([
       ["Look up Shabbat times on MyZmanim", "https://www.myzmanim.com/"],
-      ["Israel Railways — official timetable", "https://rail.co.il/?lan=en"],
-      ["National Public Transport Authority — route planner", "https://bus.gov.il/en/home"],
+      ["Israel Railways - official timetable", "https://rail.co.il/?lan=en"],
+      ["National Public Transport Authority - route planner", "https://bus.gov.il/en/home"],
     ] as const)) {
       const link = within(container).getByRole("link", { name: new RegExp(label) });
       expect(link).toHaveAttribute("href", url);
@@ -1150,7 +1150,7 @@ describe("migrated practical guides", () => {
     expect(destinations.tables?.[0]?.rows).toHaveLength(5);
     expect(destinations.tables?.[0]?.rowLinks).toHaveLength(5);
     expect(destinations.tables?.[0]?.rows.map(row => row[0])).toEqual([
-      "Kalia / northern shore", "Qumran", "Ein Gedi Nature Reserve", "Masada — east entrance", "Ein Bokek Central Beach",
+      "Kalia / northern shore", "Qumran", "Ein Gedi Nature Reserve", "Masada - east entrance", "Ein Bokek Central Beach",
     ]);
     const privateSection = guide.sections.find(section => section.id === "private")!;
     expect(privateSection.paragraphs.join(" ")).toMatch(/contact form.*personally with a quote/s);

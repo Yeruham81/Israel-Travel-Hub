@@ -182,7 +182,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     exampleJourney: {
       title: "Example: a hotel on the central beachfront",
       steps: [
-        { label: "Choose the rail service", detail: "From Terminal 3, choose the train stop at HaHagana, HaShalom or Savidor Center closest to your hotel." },
+        { label: "Choose the rail service", detail: "From Terminal 3, choose HaHagana, HaShalom or Savidor Center according to the easiest connection to your hotel." },
         { label: "Get from the station to the beach or hotel", detail: "Tel Aviv's railway stations are inland. Check how to reach your hotel by bus, taxi or on foot, especially if you're staying near the beach." },
         { label: "Recheck a Friday or Saturday arrival", detail: "Regular rail service stops for much of Shabbat. The limited weekend Line 711 runs via Terminal 1, with its own stops and timetable; it is not a direct replacement for the rail service." },
       ],
