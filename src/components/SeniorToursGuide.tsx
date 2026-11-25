@@ -182,8 +182,8 @@ export function SeniorToursGuide(){
    </section>
 
    <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
-     heading:"Send me your trip details",
-     introduction:"Planning a comfortable private day trip in Israel? Send me your dates, destinations and any walking or vehicle needs. I'll reply personally.",
+     heading:"Need a private driver for a comfortable day trip?",
+     introduction:"I arrange comfortable private day trips with a driver in Israel. Send me your dates, pickup location, destinations and any walking or vehicle needs, and I'll reply personally.",
      subject:"",
      placeholder:"Your dates, hotel or pickup, passengers, places you hope to visit, walking preferences, mobility equipment and preferred duration…",
    }}/>
