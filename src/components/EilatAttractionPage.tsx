@@ -133,7 +133,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     ["faq", "Questions"],
     ["contact", "Contact me"],
   ],
-  contactIntroduction: "Planning a trip to Eilat or a journey through southern Israel? Tell me your travel date, starting point, passengers and the places you would like to see. I can help arrange a private transfer or a customised trip with a driver; I do not book accommodation or sell admission tickets.",
+  contactIntroduction: "Tell me your date, starting point, group size and the places you would like to see in southern Israel. I can arrange a private transfer or a sightseeing journey with a driver to or from Eilat.",
   facts: [
     { icon: "location", label: "Location", value: "Israel's Red Sea coast", note: "Southern tip of the country" },
     { icon: "duration", label: "Time to allow", value: "2–3 days", note: "A full day for the sea, another for the desert" },
