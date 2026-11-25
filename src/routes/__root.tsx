@@ -21,6 +21,7 @@ import { HomeHero } from "@/components/HomeHero";
 import { CurrencyRatesProvider } from "@/components/CurrencyRates";
 import { FloatingContactButton } from "@/components/FloatingContactButton";
 import { Analytics } from "@/components/Analytics";
+import { PageContentSharePanel } from "@/components/PageContentSharePanel";
 
 function NotFoundComponent() {
   return (
@@ -141,6 +142,7 @@ function RootComponent() {
           <div className="min-w-0 flex-1">
             {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
             <Outlet />
+            <PageContentSharePanel />
           </div>
         </div>
       </Content>
