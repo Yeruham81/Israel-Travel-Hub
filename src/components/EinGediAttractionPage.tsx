@@ -38,7 +38,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
   visitorNavLabel: "Trails & tickets",
   historyTitle: "A desert oasis with a long human history",
   relatedTitle: "Explore the Dead Sea and beyond",
-  contactIntroduction: "Planning a day trip to Ein Gedi and the Dead Sea? Tell me where you're staying, your travel date and the places you'd like to visit. I'll be happy to help you plan a private trip.",
+  contactIntroduction: "Tell me your travel date, pickup point, passengers and the Dead Sea stops you have in mind. I can arrange private transport or a day trip with a driver to Ein Gedi and nearby sites.",
   facts: [
     { icon: "location", label: "Location", value: "Western Dead Sea", note: "Route 90, close to Kibbutz Ein Gedi" },
     { icon: "duration", label: "Time needed", value: "30 min–4+ hours", note: "Depends on the trail and current access" },
