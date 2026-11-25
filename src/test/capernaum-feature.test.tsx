@@ -111,9 +111,9 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(article).toContain('to="/attractions/sea-of-galilee/"');
     expect(article).not.toContain("The Franciscan ruins, Orthodox monastery and national park are close");
     expect(article).not.toContain("There are three different places to enter");
-    expect(content.contactIntroduction).toMatch(/^Tell me when you’re planning to visit/);
+    expect(content.contactIntroduction).toMatch(/^Tell me when you plan to visit/);
     expect(content.contactIntroduction).not.toContain("?");
-    expect(content.contactIntroduction).toContain("I’ll be happy to help arrange a private day trip"); 
+    expect(content.contactIntroduction).toContain("I can arrange a private day trip with a driver"); 
     expect(article).toContain('<AttractionContentImage src="/images/attractions/capernaum-peter-memorial-interior.webp"');
     expect(article).toContain("lg:grid-cols-[minmax(0,1fr)_260px]");
     expect(shell).toContain('className="aspect-[4/3] h-auto w-full rounded-lg object-cover"');
