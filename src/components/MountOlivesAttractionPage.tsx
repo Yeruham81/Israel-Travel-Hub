@@ -82,7 +82,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   relatedTitle: "Continue exploring Jerusalem",
   itineraryFirst: true,
   itineraryTitle: "How to plan your Mount of Olives visit",
-  contactIntroduction: "Tell me where you're staying, when you'd like to visit and whether you prefer the panorama, the churches or a longer Jerusalem day. I can help arrange a practical drop-off and pickup for your plans.",
+  contactIntroduction: "Tell me your date, pickup point, passenger count and the Mount of Olives sites you plan to visit. I can arrange private transport with a driver to a suitable drop-off point and a pickup after your visit.",
   facts: [
     { icon: "location", label: "Location", value: "East of the Old City", note: "Across the Kidron Valley" },
     { icon: "duration", label: "Time needed", value: "30 min–half day", note: "About 2–3 hours for the lookout and selected churches" },
