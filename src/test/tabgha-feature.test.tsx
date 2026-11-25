@@ -109,7 +109,7 @@ describe("Tabgha visitor guide follows the individual-attraction template", () =
     expect(article).not.toContain("Worth knowing:");
     expect(article).not.toContain("Map: OpenStreetMap contributors");
     expect(article).not.toContain("These are options, not a checklist");
-    expect(content.contactIntroduction).toMatch(/^Tell me when you’re visiting/);
+    expect(content.contactIntroduction).toMatch(/^Tell me your date, pickup point/);
     expect(content.faqs?.length).toBeGreaterThanOrEqual(6);
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
