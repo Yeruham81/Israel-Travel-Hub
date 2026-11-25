@@ -1,4 +1,3 @@
-import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { haifaDestinationContent as content } from "@/components/HaifaAttractionPage";
@@ -49,16 +48,15 @@ describe("Haifa city-attractions guide", () => {
     expect(page).toContain("tour-coast-private-rosh-hanikra-viator@tours-northern-coast");
     expect(page).toContain("tour-caesarea-haifa-akko-getyourguide@tours-northern-coast");
   });
-  it("appears in Attractions hub and Haifa & Coast sidebar with a legacy redirect", () => {
+  it("appears in Attractions hub and Haifa & Coast sidebar without the retired alias", () => {
     const hub = attractionHubRegions.find(r => r.id === "haifa-coast");
     expect(hub?.cards.filter(c => c.id === "haifa")).toHaveLength(1);
     expect(hub?.cards.find(c => c.id === "haifa")?.to).toBe("/attractions/haifa/");
     const nav = attractionSidebarRegions.find(g => g.label === "Haifa & Coast");
     expect(nav && "children" in nav).toBeTruthy();
     if(nav && "children" in nav) expect(nav.children?.find(x => x.label === "Haifa")?.to).toBe("/attractions/haifa/");
-    const old = readRouteSource("src/routes/travel-blog.haifa.tsx");
-    expect(old).toContain('<Navigate to="/attractions/haifa/" replace />');
-    expect(old).toContain("noindex,follow");
+    expect(existsSync("src/routes/travel-blog.haifa.tsx")).toBe(false);
+    expect(existsSync("src/routes/attractions.haifa.tsx")).toBe(true);
   });
   it("has canonical metadata, researched references and cached photos", () => {
     const meta = haifaMeta();
