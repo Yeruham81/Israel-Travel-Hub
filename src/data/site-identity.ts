@@ -9,7 +9,7 @@ export interface AuthorProfile {
 export const mosheBarakAuthor: AuthorProfile = {
   name: "Moshe Barak",
   role: "Private transport operator & local travel expert",
-  experience: "Over 20 years helping visitors with airport transfers, private day trips and travel around Israel.",
+  experience: "Over 20 years helping travelers get around Israel, discover its highlights, and plan the perfect trip.",
   bio: "",
   reviewsUrl: "https://www.tripadvisor.com/Attraction_Review-g293984-d14803612-Reviews-Moshe_Barak-Tel_Aviv_Tel_Aviv_District.html",
   sourceIds: ["moshe-author-profile"],

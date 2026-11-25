@@ -84,7 +84,7 @@ const days3: ItineraryDay[] = [
     morning: "Take the train from Jerusalem Yitzhak Navon station to Tel Aviv when services are running, then continue to Old Jaffa by bus or taxi. Check the Israel Railways journey planner for your date; plan a different transfer if no trains run. Walk through Jaffa’s historic hill, lanes and port, with the flea-market district nearby when its shops are open.",
     afternoon: "Continue toward Neve Tzedek and the seafront promenade, or pause at the beaches in Tel Aviv. If art and culture matter more than the coast, choose Tel Aviv museums instead. Carmel Market is another alternative on its operating days; do not squeeze every option into a short afternoon.",
     evening: "Enjoy dinner in Tel Aviv if staying overnight. If flying out today, reserve the evening for your journey to the airport.",
-    practical: "Before leaving Jerusalem, confirm where you can store and collect your luggage in Tel Aviv, including opening hours and transport from the storage location to the airport. Arrange luggage storage in advance. Consult Ben Gurion Airport connections before deciding how late to sightsee.",
+    practical: "Before leaving Jerusalem, confirm where you can store and collect your luggage in Tel Aviv, including opening hours and transport from the storage location to the airport. Confirm that your chosen station or storage facility offers luggage storage. Consult Ben Gurion Airport connections before deciding how late to sightsee.",
     overnight: "If extending your trip, compare where to stay in Tel Aviv; otherwise, no additional hotel is needed.",
     links: [telaviv, telavivHotels, L("Tel Aviv and Ben Gurion Airport connection", "/travel-blog/ben-gurion-airport-to-tel-aviv/")],
   },

@@ -168,7 +168,7 @@ describe("migrated Israel itineraries", () => {
     const cards = file("src/components/JerusalemItineraryTourOptions.tsx");
     expect(cards).toContain("<details");
     expect(cards).toContain("Alternative day tours from Jerusalem");
-    expect(cards).toContain("These tours are operated by independent providers");
+    expect(cards).toContain("Book these tours with the individual providers.");
     expect(cards).toContain("platform={tour.provider}");
     expect(cards).not.toContain("{item.area} · {tour.provider}");
     expect(cards).toContain("<ExternalProviderTourCard");
@@ -187,7 +187,7 @@ describe("migrated Israel itineraries", () => {
     const messageCopy = file("src/lib/guide-contact.ts");
     const footer = file("src/components/Layout.tsx");
 
-    expect(view).toContain("Each day offers a different side of Israel");
+    expect(view).not.toContain("Each day offers a different side of Israel");
     expect(view).not.toContain("Each day distinguishes a workable core");
     expect(view).toContain('{g.dayTipHeadings?.[index] ?? "Worth knowing"}');
     expect(itineraries["3"].dayTipHeadings).toEqual([
@@ -211,7 +211,7 @@ describe("migrated Israel itineraries", () => {
     expect(widget).not.toContain("I may earn a commission if you book through this widget.");
     expect(widget).toContain("getYourGuideCityWidgetSrc(city, page)");
     expect(footer).toContain("Some links on this page are affiliate links");
-    expect(tours).toContain("These tours replace part or all of a planned sightseeing day");
+    expect(tours).toContain("Use a guided Masada and Dead Sea tour for your desert day");
     expect(tours).not.toContain("not additional stops to fit into it");
     expect(tours).toContain("<ExternalProviderTourCard");
     expect(tours).toContain("recordOutboundClick");
@@ -412,8 +412,8 @@ describe("migrated Israel itineraries", () => {
     const itineraryComponent = file("src/components/IsraelItineraryPage.tsx");
 
     expect(tourComponent).toContain("<span>Alternative day tours from Jerusalem</span>");
-    expect(tourComponent).toContain("These tours replace a planned excursion");
-    expect(tourComponent).toContain("in place of the independent Day 3 desert plan");
+    expect(tourComponent).toContain("Each replaces that day's planned sightseeing.");
+    expect(tourComponent).toContain("a guided Masada and Dead Sea trip for Day 3");
     expect(itineraryComponent).toContain("presentation.transferDays.includes(index + 1)");
     expect(itineraryComponent).toContain("The times shown are for sightseeing only.");
     expect(g.daySequences?.[2]?.steps[0]?.stop).toBe("Masada plateau");
@@ -554,7 +554,7 @@ describe("migrated Israel itineraries", () => {
     expect(g.daysPlan[9]?.afternoon).toContain("If flying on Day 11");
     expect(g.relatedGuides?.find(item => item.title === "Akko Old City")?.image).toBe("itinerary-10day-akko-aerial");
     expect(g.relatedGuides?.find(item => item.title === "Akko Old City")?.image).not.toBe(g.daysPlan[6]?.image);
-    expect(g.daysPlan[7]?.afternoon).toContain("rather than travelling back to Haifa");
+    expect(g.daysPlan[7]?.afternoon).toContain("spend Day 8 in the city or take a separate trip to Caesarea");
     expect(g.daysPlan[9]?.morning).toContain("skip sightseeing");
     expect(g.daySequences?.map(day => day.day)).toEqual([1,2,3,4,5,6,7,8,9,10]);
     for (const sequence of g.daySequences ?? []) {
@@ -573,7 +573,7 @@ describe("migrated Israel itineraries", () => {
     ]);
     expect(getYourGuideCityWidgetSrc("haifa", "10_day")).toContain("shmarker=622032.10_day");
     expect(tours).toContain("days?: 3 | 5 | 7 | 10");
-    expect(tours).toContain("These day tours are alternatives to the independent itinerary");
+    expect(tours).toContain("Set aside Day 2 for Bethlehem or Jericho");
     expect(view).toContain("presentation.transferDays.includes(index + 1)");
     expect(view).toContain("const compactOverview = true");
     expect(g.alternatives).toHaveLength(2);
@@ -661,7 +661,7 @@ describe("migrated Israel itineraries", () => {
     expect(guide.day3Options?.map(option => option.heading)).toEqual([
       "Flying home on Day 3?", "Staying another night?",
     ]);
-    expect(guide.daysPlan[2]?.practical).toBe("Before leaving Jerusalem, confirm where you can store and collect your luggage in Tel Aviv, including opening hours and transport from the storage location to the airport. Do not assume every rail station has lockers. Consult Ben Gurion Airport connections before deciding how late to sightsee.");
+    expect(guide.daysPlan[2]?.practical).toBe("Before leaving Jerusalem, confirm where you can store and collect your luggage in Tel Aviv, including opening hours and transport from the storage location to the airport. Confirm that your chosen station or storage facility offers luggage storage. Consult Ben Gurion Airport connections before deciding how late to sightsee.");
     expect(guide.day3Options?.[0]?.text).toContain("arrange luggage storage in advance");
     expect(guide.daysPlan[2]?.morning).toMatch(/no trains run/i);
     for (const id of ["7", "10"] as const) expect(itineraries[id].day3Options).toBeUndefined();
