@@ -16,11 +16,8 @@ import { hotelTileCopy } from "@/components/TelAvivHotelBrowser";
 import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
 import { jerusalemHotelCatalog, jerusalemHotelTileCopy } from "@/components/JerusalemHotelBrowser";
 import { jerusalemHotelPhotos } from "@/data/jerusalemHotelPhotos";
-import { jerusalemStayCardPhotos } from "@/data/jerusalemStayCardPhotos";
 import jerusalemEditorialHero from "@/assets/guides/2026-11/where-to-stay-jerusalem-drive.webp";
-import jewishQuarterLanePhoto from "@/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp";
 import downtownCardPhoto from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.webp";
-import eastJerusalemHousePhoto from "@/assets/jerusalem/east-jerusalem-house.webp";
 import { routeTree } from "@/routeTree.gen";
 
 // Keep router matching real, while making isolated page renders independent of
@@ -52,23 +49,13 @@ describe.each([
       const card = cards.find((card) => within(card).queryByRole("heading", { name: area.name }))!;
       expect(card).toBeDefined();
       const image = card.querySelector("img")!;
-      const expectedSrc = g.id === "jerusalem" && area.id === "old-city"
-        ? jewishQuarterLanePhoto
-        : g.id === "jerusalem" && area.id === "east-jerusalem"
-          ? eastJerusalemHousePhoto
-          : area.photo.src;
-      expect(image.getAttribute("src")).toBe(expectedSrc);
-      if (g.id === "jerusalem" && area.id === "old-city") {
-        expect(image.getAttribute("alt")).toContain("Jewish Quarter");
-      }
-      if (g.id === "jerusalem" && area.id === "east-jerusalem") {
-        expect(image.getAttribute("alt")).toContain("stone house");
-      }
+      expect(image.getAttribute("src")).toBe(area.photo.src);
+      expect(image.getAttribute("alt")).toBe(area.photo.alt);
       expect(card.querySelector("iframe")).toBeNull();
       expect(card.querySelector("img")).toHaveClass("aspect-[16/10]", "object-cover");
       expect(card.querySelector("img")).toHaveAttribute("width", "755");
       expect(within(card).getByRole("link", { name: `Explore ${area.name}: area guide and hotel recommendations` })).toHaveAttribute("href", area.path);
-      expect(within(card).getByRole("link", { name: `Explore ${area.name}: area guide and hotel recommendations` })).toHaveTextContent(/(?:Discover|Browse|Explore|Find)/);
+      expect(within(card).getByRole("link", { name: `Explore ${area.name}: area guide and hotel recommendations` })).not.toHaveTextContent(/Explore hotels in this area/);
       expect(within(card).queryByText("Explore Area & Hotels")).toBeNull();
       expect(card.textContent).not.toMatch(/Area guide & [0-9]+ hotel picks/);
     }
@@ -101,7 +88,7 @@ describe.each([
       expect(new Set(imageUrls).size).toBe(expectedHotels);
       expect(screen.getByTestId("neighborhood-hotel-photo-credits")).toBeInTheDocument();
       expect(within(container.querySelector("#book") as HTMLElement).getByRole("heading", {
-        name: /^Popular hotels/i,
+        name: /^Selected hotels/i,
       })).toBeInTheDocument();
       if (g.id === "jerusalem") {
         expect(within(container.querySelector("#book") as HTMLElement).queryByText(/Explore my selected hotels/)).toBeNull();
@@ -111,8 +98,8 @@ describe.each([
         if (g.id === "jerusalem") expect(within(hotelSection).getAllByTestId("jerusalem-hotel-booking-cta")).toHaveLength(expectedHotels);
         expect(within(hotelSection).getAllByRole("link", { name: /^(Check rooms|View hotel)/ })).toHaveLength(expectedHotels);
         expect(within(hotelSection).queryByText(/Check rooms on Expedia|View hotel on Expedia/)).not.toBeInTheDocument();
-        expect(within(container.querySelector("#other-areas") as HTMLElement).getAllByRole("link")).toHaveLength(areas.length);
-        expect(within(container.querySelector("#other-areas") as HTMLElement).getByRole("link", { name: /All .* neighborhoods/ })).toHaveAttribute("href", g.path);
+        expect(within(container.querySelector("#other-areas") as HTMLElement).getAllByRole("link")).toHaveLength(6);
+        expect(within(container.querySelector("#other-areas") as HTMLElement).getByRole("link", { name: /All .* hotels/ })).toHaveAttribute("href", g.path);
         expect(screen.getByRole("link", { name: /Compare neighborhoods/ })).toHaveAttribute("href", g.id === "jerusalem" ? "/travel-blog/where-to-stay-in-jerusalem/" : "/travel-blog/where-to-stay-in-tel-aviv/");
         expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#location")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
@@ -203,8 +190,8 @@ describe.each([
       const area = jerusalemAreaGuides.find((item) => item.id === id)!;
       const link = areaLinks.querySelector(`a[href="${area.path}"]`);
       expect(link).toBeInTheDocument();
-      expect(link?.querySelector("img")).toHaveAttribute("src", jerusalemStayCardPhotos[id]!.src);
-      expect(link?.querySelector("img")).toHaveAttribute("alt", jerusalemStayCardPhotos[id]!.alt);
+      expect(link?.querySelector("img")).toHaveAttribute("src", area.photo.src);
+      expect(link?.querySelector("img")).toHaveAttribute("alt", area.photo.alt);
     }
     const ibis = cityHotelPhoto(jerusalemHotelCatalog.find((hotel) => hotel.id === "jlm-ibis")!);
     const styles = cityHotelPhoto(jerusalemHotelCatalog.find((hotel) => hotel.id === "jlm-ibis-styles")!);
