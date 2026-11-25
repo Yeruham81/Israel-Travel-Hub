@@ -61,7 +61,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
     ["trip-planning", "Plan your trip"],
     ["contact", "Contact me"],
   ],
-  contactIntroduction: "Tell me your travel date, where you're staying and which historic sites interest you most. I'll be happy to help arrange a private visit to Akko and nearby attractions.",
+  contactIntroduction: "Tell me your travel date, pickup point, passenger count and the historic sites you want to see. I can arrange private transport or a day trip with a driver to Akko and nearby attractions.",
   facts: [
     { icon: "location", label: "Location", value: "Old Akko (Acre)", note: "Walled Mediterranean old town, north of Haifa" },
     { icon: "duration", label: "Time needed", value: "3–6 hours", note: "Choose a shorter or fuller walking route" },
