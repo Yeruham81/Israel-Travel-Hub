@@ -2,7 +2,7 @@
 
 The new individual attraction guide is at /attractions/dead-sea/. It replaces the previous general Dead Sea page /travel-blog/the-dead-sea/ without replacing the distinct regional roundup /travel-blog/dead-sea-attractions/.
 
-The trial website keeps the old path as a noindex client-side navigation alias to the new page. **That is not an HTTP 301**.
+The old route and its client-side alias have been removed from the new website. Its obsolete published HTML is retired by the Hostinger deployment only after the replacement attraction page is present, and backed up outside `public_html`. The 301 belongs in the old-domain server configuration; it has **not** been enabled by the GitHub deployment.
 
 At main-domain launch, add this rule ABOVE catch-all rules in the main domain's actual Apache .htaccess (not the trial hosting deployment, which intentionally excludes .htaccess):
 
