@@ -216,7 +216,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       </nav>}
       <HomeContactForm key={String(content.path)} showTripadvisorBesidePortraitMobile guide={{ ...guideContactCopy(content.title, "attraction", content.placeName), ...(content.contactIntroduction ? { introduction: content.contactIntroduction } : {}) }} />
       <SourcesDisclosure>
-        <p className="mb-3 leading-relaxed">Official information checked {new Date(content.updatedAt + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" })}. Visiting rules and access can change; check the relevant operator's latest notices for your date.</p>
+        <p className="mb-3 leading-relaxed">Official information checked {new Date(content.updatedAt + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" })}.</p>
         <ul className="space-y-3">
           {content.sources.map(source => <li key={source.url}>
             <a href={source.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4">

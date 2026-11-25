@@ -34,7 +34,7 @@ describe("travel guide topic filters and prerender safety", () => {
     expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("$56.24");
     expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("50GB");
     expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("$39");
-    expect(guide.sections.find((section) => section.id === "long-trip")?.paragraphs.join(" ")).toContain("one-cent difference");
+    expect(guide.sections.find((section) => section.id === "long-trip")?.paragraphs.join(" ")).toContain("Saily costs $7.99 for 30 days, compared with $8 for the same period from Airalo.");
     expect(guide.sections.find((section) => section.id === "setup")?.paragraphs.join(" ")).toContain("data roaming on your home SIM");
     expect(guide.checklist.some((item) => item.includes("travel eSIM for mobile data"))).toBe(true);
     expect(guide.sections.find((section) => section.id === "regional")?.externalLinks?.[0]?.href).toBe(AIRALO_MENA_AFFILIATE_URL);

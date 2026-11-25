@@ -214,7 +214,7 @@ function HotelCard({ id, pageId }: { id: string; pageId: string }) {
       <p className="mt-3 text-sm leading-relaxed">{info.summary}</p>
       <p className="mt-3 text-sm leading-relaxed"><strong>Best for:</strong> {info.bestFor}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Lake access:</strong> {info.beach}</p>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Keep in mind:</strong> {info.consider}</p>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Before booking:</strong> {info.consider}</p>
       {hotelFacilityNotices[id] && <p className="mt-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50/80 p-3 text-xs leading-relaxed text-foreground dark:border-amber-900/60 dark:bg-amber-950/20" data-testid="tiberias-hotel-facility-notice">
         <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" aria-hidden />
         <span>{hotelFacilityNotices[id]}</span>

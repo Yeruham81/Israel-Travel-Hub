@@ -190,6 +190,7 @@
           status.hidden = true;
           if (requestedId && requestedId !== "all") focus(requestedId);
           else showAll();
+          window.parent.postMessage({type:"jerusalem-church-map-ready"},location.origin);
         });
         map.on("error", () => {if (!ready) unavailable();});
         window.addEventListener("pagehide", event => {

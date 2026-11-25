@@ -51,7 +51,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
         image={{ src: "/images/attractions/beatitudes-colonnade-lake.webp", alt: "Arched stone colonnade at the Church of the Beatitudes opening towards gardens and the Sea of Galilee" }}
       >
         <p>Walk around the arches encircling the church. They frame lovely views towards the lake and offer shade while you take in the hillside setting.</p>
-        <p>I recommend allowing a few extra minutes here rather than rushing straight back to the car.</p>
+        <p>I recommend spending a few extra minutes enjoying the peaceful surroundings.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Gardens and views over the Sea of Galilee">
         <p>Walk through the landscaped gardens to enjoy the quiet setting and views over the lake. Some outdoor areas are reserved for organised prayer and services, so give groups their space.</p>

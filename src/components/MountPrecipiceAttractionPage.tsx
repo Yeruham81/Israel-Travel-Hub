@@ -66,7 +66,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Mount Precipice is an open-air viewpoint rather than a church or ticketed archaeological park. The short walk from the parking area is suitable for a scenic stop during a Nazareth visit.</p>
+      <p>Mount Precipice is an open-air viewpoint. The short walk from the parking area is suitable for a scenic stop during a Nazareth visit.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="mount-precipice-visitor-cards">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Entry, parking and a short visit</h3>
@@ -89,7 +89,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         <ul className="mt-3 grid list-disc gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
           <li><strong>Weather:</strong> Visibility over the valley is clearer on some days than others; exposed areas can be windy.</li>
           <li><strong>Footwear:</strong> Comfortable walking shoes are enough for the paved lookout; choose sturdier shoes for unpaved trails.</li>
-          <li><strong>Facilities:</strong> Take drinking water with you rather than assuming refreshments will be available at the lookout.</li>
+          <li><strong>Facilities:</strong> Bring drinking water for your visit to the lookout.</li>
           <li><strong>Walking further:</strong> The Gospel Trail leads away from the summit; it is a separate hike, not the short lookout circuit.</li>
         </ul>
       </div>
@@ -102,16 +102,16 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Approach Nazareth via Route 60 and Route 75, then follow the brown signs marked Mount Precipice to the parking area near the summit. Set your navigation for the <strong>Mount Precipice lookout</strong>, rather than central Nazareth. The paved walk begins near the car park.</p>
+            <p className="mt-2 text-sm leading-relaxed">Approach Nazareth via Route 60 and Route 75, then follow the brown signs marked Mount Precipice to the parking area near the summit. Set your navigation to the <strong>Mount Precipice lookout</strong>. The paved walk begins near the car park.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Driving directions to the lookout <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">A useful nearby bus stop to look up is <strong>Beit Al-Hikma School / Al-Qafza (בי״ס בית אל-חכמה/אל-קפזה)</strong>, on the southern side of Nazareth. The walk from this stop to Mount Precipice is not the same as the short paved path from the hilltop car park: check the uphill route, pavements and return journey before setting out. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to confirm a suitable service for your date. For several regional stops, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing guided tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Look for the nearby bus stop <strong>Beit Al-Hikma School / Al-Qafza (בי״ס בית אל-חכמה/אל-קפזה)</strong>, on the southern side of Nazareth. The walk from this stop to Mount Precipice is not the same as the short paved path from the hilltop car park: check the uphill route, pavements and return journey before setting out. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to confirm a suitable service for your date. For several regional stops, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing guided tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">On foot</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The easy option is the paved lookout path from the hilltop car park. The longer <strong>Gospel Trail</strong> descends from Mount Precipice towards the Kesullot Valley. It is a proper hike rather than a shortcut into the old city; check the trail route and arrange a pickup or return before setting out.</p>
+            <p className="mt-2 text-sm leading-relaxed">The easy option is the paved lookout path from the hilltop car park. The longer <strong>Gospel Trail</strong> descends from Mount Precipice towards the Kesullot Valley. Allow time for a proper hike; check the trail route and arrange a pickup or return before setting out.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="mount-precipice-location-map">
@@ -127,14 +127,14 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Choose the visit that suits your day</h3>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li><strong>30–45 minutes — main lookout:</strong> Park near the summit, follow the paved path to the Three Faiths Lookout and enjoy the Jezreel Valley panorama.</li>
-          <li><strong>About 1–2 hours — extended hilltop walk:</strong> Continue towards the Forester's House viewpoint, take time for the ridge views and return to the parking area.</li>
+          <li><strong>Main lookout (30–45 minutes):</strong> Park near the summit, follow the paved path to the Three Faiths Lookout and enjoy the Jezreel Valley panorama.</li>
+          <li><strong>Extended hilltop walk (about 1–2 hours):</strong> Continue towards the Forester's House viewpoint, take time for the ridge views and return to the parking area.</li>
           <li><strong>Longer one-way hike towards Iksal:</strong> The Gospel Trail leaves the hilltop and descends towards Iksal. This is a separate hike, so plan the route, walking conditions and return transport in advance.</li>
         </ul>
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Combine Mount Precipice with Nazareth or Lower Galilee</h3>
-        <p className="mt-3 text-sm leading-relaxed sm:text-base">For a full day, I suggest choosing three to five stops that suit your interests and starting point. A good Nazareth visit leaves enough time for the city itself, rather than rushing between viewpoints.</p>
+        <p className="mt-3 text-sm leading-relaxed sm:text-base">For a full day, I suggest choosing three to five stops that suit your interests and starting point. Allow plenty of time to explore Nazareth itself as well as its viewpoints.</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Nazareth:</strong> Visit the <Link to="/attractions/basilica-of-the-annunciation/" className={inlineLink}>Basilica of the Annunciation</Link>, then explore the old city at your own pace.</li>
           <li><strong>Lower Galilee:</strong> Add <Link to="/attractions/mount-tabor/" className={inlineLink}>Mount Tabor</Link> for its Church of the Transfiguration or <Link to="/attractions/tel-megiddo/" className={inlineLink}>Tel Megiddo</Link> for archaeology.</li>
@@ -152,7 +152,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Mount Precipice is an easy scenic addition to a Nazareth day, but not every organised Galilee tour includes it. Look carefully at the itinerary and whether the lookout is an actual stop.</p>
+      <p>Mount Precipice offers a scenic addition to a Nazareth day. Choose a tour that specifically includes the lookout. Look carefully at the itinerary and whether the lookout is an actual stop.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
           <img src="/images/attractions/nazareth-galilee.webp" alt="Religious artwork in Nazareth on a northern Israel sightseeing route" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

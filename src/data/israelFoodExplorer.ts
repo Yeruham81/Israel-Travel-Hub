@@ -66,7 +66,7 @@ export const foodDishes:FoodDish[] = [
   {id:"jachnun",name:"Jachnun",pronunciation:"jahkh-NOON",kind:"bakery",
     summary:"Slow-cooked, rich rolled dough with a slightly sweet taste, usually served with tomato, hard-boiled egg and spicy zhug.",
     order:"Look for a weekend breakfast or brunch serving; share a portion if you also want other tastes.",
-    note:"Usually wheat-based and commonly served with egg; do not assume the accompaniments are included.",
+    note:"Usually wheat-based and commonly served with egg. Ask which accompaniments are included.",
     roots:"A well-loved Yemenite-Jewish food tradition.",
     photo:photos["food-8"]},
   {id:"malabi",name:"Malabi",pronunciation:"mah-LAH-bee",kind:"sweets",
@@ -101,7 +101,7 @@ export const foodExtras = [
 
 export const foodMarkets = [
   {id:"jerusalem",title:"Mahane Yehuda Market",place:"Jerusalem",mood:"Market stalls, bakeries and hearty home-style dishes",
-    why:"A useful place to taste pastries, spices, filled sandwiches and cooked meals in one walk. The nearby streets also have evening venues.",
+    why:"Taste pastries, spices, filled sandwiches and cooked meals in one walk. The nearby streets also have evening venues.",
     tip:"Friday shopping can be busy and many stalls close for Shabbat; verify the particular vendor's hours.",
     image:"/images/food-guide/mahane-yehuda-food-stalls.webp",alt:"Crowds and food stalls inside Jerusalem’s Mahane Yehuda Market",
     guide:"/travel-blog/shopping-in-jerusalem/",
@@ -145,11 +145,11 @@ export const foodTours = [
 ];
 
 export const foodFAQs = [
- {q:"What should I eat first on a trip to Israel?",a:"For an easy start, try a falafel pita, hummus as a meal or shakshuka for breakfast. If you enjoy meat, shawarma is another widely available option. Add a bakery stop or one shared dessert rather than attempting everything in one day."},
+ {q:"What should I eat first on a trip to Israel?",a:"For an easy start, try a falafel pita, hummus as a meal or shakshuka for breakfast. If you enjoy meat, shawarma is another widely available option. Add a bakery stop or share a dessert."},
  {q:"What are the best vegetarian foods to try?",a:"Falafel, hummus, bourekas, sabich and shakshuka are common choices, although some contain egg or dairy. Ask about each preparation, tahini and cross-contact if you follow a strict diet."},
- {q:"Are these foods originally Israeli?",a:"Not all of them. Many dishes are part of shared Arab, Palestinian, Levantine, North African, Balkan, Turkish and Jewish-diaspora food histories. The guide focuses on what a visitor will encounter in Israel, not on claiming exclusive origins."},
+ {q:"Are these foods originally Israeli?",a:"Many dishes are part of shared Arab, Palestinian, Levantine, North African, Balkan, Turkish and Jewish-diaspora food histories. The guide focuses on what a visitor will encounter in Israel, not on claiming exclusive origins."},
  {q:"Is kosher food the same as halal food?",a:"No. Kosher and halal are different religious dietary frameworks; one certification does not automatically establish the other. If certification matters, check the specific establishment and the requirements you follow."},
- {q:"Do food markets close on Shabbat or Jewish holidays?",a:"Stalls and restaurants do not all follow the same schedule. Many traditional market vendors close before Shabbat, while some restaurants elsewhere remain open. Always confirm the specific venue's Friday, Saturday and holiday hours."},
+ {q:"Do food markets close on Shabbat or Jewish holidays?",a:"Opening hours vary among market stalls and restaurants. Many traditional market vendors close before Shabbat, while some restaurants elsewhere remain open. Always confirm the specific venue's Friday, Saturday and holiday hours."},
  {q:"What should I ask when ordering at a street-food stall?",a:"Check the filling, any spicy sauce, allergenic ingredients, the portion size, and whether salads, sides or drinks are included. For bakeries, confirm whether the price is per piece or by weight."},
  {q:"Is it necessary to book a guided food tour?",a:"No. A self-guided tasting walk can be rewarding. A food tour is most useful if you want a guide to explain the traditions, help you visit several stalls and arrange tastings. Confirm the menu, meeting point and any dietary needs before booking."},
  {q:"What is a typical tip in a restaurant?",a:"For table service, about 10–15% is customary according to Tel Aviv's official visitor information; a tip is not ordinarily expected for every self-service takeaway purchase. Check your bill for any service charge."}

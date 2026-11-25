@@ -154,7 +154,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By taxi or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">A taxi to Seven Arches avoids climbing up from the Kidron Valley. If you plan to walk down, arrange pickup near Gethsemane rather than at the summit. For a visit without the steep downhill walk, I can help arrange separate drop-offs at the viewpoint and near Gethsemane; <a href="#contact" className={inlineLink}>send me your preferred date and pickup location</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">A taxi to Seven Arches avoids climbing up from the Kidron Valley. If you plan to walk downhill, arrange pickup near Gethsemane. For a visit without the steep downhill walk, I can help arrange separate drop-offs at the viewpoint and near Gethsemane; <a href="#contact" className={inlineLink}>send me your preferred date and pickup location</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">On foot from the Old City</h3></div>
@@ -210,7 +210,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   historyContent: (
     <div className="mt-4 space-y-3">
       {mountOlivesEditorialUpdate.history.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-      <p>Jerusalem’s eastern landscape also has a long Muslim and Arab history. The hillside neighbourhood of At-Tur, the surrounding roads and the city’s religious landmarks are part of a living community, not simply a sequence of pilgrimage stops. I recommend visiting with respect for local residents, worshippers and the different traditions associated with the area.</p>
+      <p>Jerusalem’s eastern landscape also has a long Muslim and Arab history. The hillside neighbourhood of At-Tur and the surrounding religious landmarks are part of a living community. I recommend visiting with respect for local residents, worshippers and the different traditions associated with the area.</p>
       <p>For a deeper look at the hill’s history, see the <a href={official.cemeteryGraves} target="_blank" rel="noopener noreferrer" className={inlineLink}>Mount of Olives cemetery heritage project</a> and my <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Jerusalem churches guide</Link>.</p>
     </div>
   ),
@@ -266,16 +266,16 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   ],
   photoCredits: <p>Jewish cemetery photograph: <a href="https://commons.wikimedia.org/wiki/File:Jerusalem_Mount_of_Olives_BW_2010-09-20_07-57-31.JPG" target="_blank" rel="noopener noreferrer" className={inlineLink}>Berthold Werner / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 3.0</a> · resized and compressed to WebP.</p>,
   sources: [
-    { label: "Christian Information Center — Holy Land church hours and fees", url: official.churchHours },
-    { label: "City of David — Mount of Olives visitor access and buses", url: official.cemetery },
-    { label: "City of David — cemetery mapping and grave locator", url: official.graveLocator },
+    { label: "Christian Information Center - Holy Land church hours and fees", url: official.churchHours },
+    { label: "City of David - Mount of Olives visitor access and buses", url: official.cemetery },
+    { label: "City of David - cemetery mapping and grave locator", url: official.graveLocator },
     { label: "Mount of Olives cemetery information", url: official.cemeteryGraves },
     { label: "Israel public transportation planner", url: official.transit },
-    { label: "City of David — Jerusalem Trail route", url: official.jerusalemWalk },
-    { label: "Enjoy Jerusalem — Mount of Olives walking route", url: official.trailGuide },
-    { label: "Viator — Jerusalem Mount of Olives Tour", url: mountOlivesTours[0].sourceUrl },
-    { label: "Viator — Ascension Chapel to Gethsemane guided walk", url: mountOlivesTours[1].sourceUrl },
-    { label: "Viator — Jerusalem Classic Tour, Mount of Olives & Old City", url: mountOlivesTours[2].sourceUrl },
+    { label: "City of David - Jerusalem Trail route", url: official.jerusalemWalk },
+    { label: "Enjoy Jerusalem - Mount of Olives walking route", url: official.trailGuide },
+    { label: "Viator - Jerusalem Mount of Olives Tour", url: mountOlivesTours[0].sourceUrl },
+    { label: "Viator - Ascension Chapel to Gethsemane guided walk", url: mountOlivesTours[1].sourceUrl },
+    { label: "Viator - Jerusalem Classic Tour, Mount of Olives & Old City", url: mountOlivesTours[2].sourceUrl },
   ],
 };
 

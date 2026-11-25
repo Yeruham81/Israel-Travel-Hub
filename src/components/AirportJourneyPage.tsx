@@ -82,7 +82,7 @@ function UsefulJourneyLink({ label, href, context }: { label: string; href: stri
   return (
     <p data-testid="useful-journey-link" className="mt-4 text-sm leading-relaxed">
       <a href={href} className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80" {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{label}</a>
-      {context && <span className="text-muted-foreground"> — {context}</span>}
+      {context && <span className="text-muted-foreground"> - {context}</span>}
     </p>
   );
 }
@@ -207,7 +207,7 @@ function HaifaRailDetails({ guide }: { guide: AirportJourneyGuide }) {
         <img src={guide.photos.station.src} alt={guide.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
       <h4 className="mt-8 text-xl font-semibold">Which Haifa railway station should you use?</h4>
-      <p className="mt-3 leading-relaxed">Haifa's main railway stations serve very different neighborhoods. Check where your train actually stops, then compare the final bus, taxi or walk to your accommodation rather than choosing the first station with “Haifa” in its name.</p>
+      <p className="mt-3 leading-relaxed">Haifa's main railway stations serve very different neighborhoods. Choose the station with the easiest onward bus, taxi or walk to your accommodation.</p>
       <div role="region" aria-label="Haifa railway station comparison" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border">
         <table className="w-full min-w-[580px] text-left text-sm">
           <caption className="sr-only">Ben Gurion Airport to Haifa train stations and onward destinations</caption>
@@ -257,7 +257,7 @@ function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide 
         </table>
       </div>
       <UsefulJourneyLink label="Check the last 486 or 444 bus to the Dead Sea" href="https://bus.gov.il/en/home" context="Check the last bus to your hotel, then choose an airport train that leaves enough time for the connection." />
-      <UsefulJourneyLink label="Egged — reserve seats on bus 444 (or limited 421)" href="https://www.egged.co.il/en/information-for-passengers/tickets-information" context="The operator lists these as reserved-seat services. Check seat availability and the correct departure stop before depending on either route." />
+      <UsefulJourneyLink label="Egged - reserve seats on bus 444 (or limited 421)" href="https://www.egged.co.il/en/information-for-passengers/tickets-information" context="The operator lists these as reserved-seat services. Check seat availability and the correct departure stop before depending on either route." />
       <h4 className="mt-8 text-xl font-semibold">Step 3: Get off at the correct Dead Sea hotel stop</h4>
       <p className="mt-3 leading-relaxed">Ein Bokek, Hamei Zohar and Neve Zohar have different stops along the hotel area; Ein Gedi and Masada are separate destinations. Confirm the exact stop for your hotel and the final walk with luggage, especially during the hottest hours of the day.</p>
       {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
@@ -299,12 +299,12 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
       {guideId === "tel-aviv" && option.id === "rail" && <UsefulJourneyLink label="Check train times and fares" href="https://www.rail.co.il/" context="Choose the station with the easiest connection to your hotel, and check train times for your arrival date." />}
       {guideId === "tel-aviv" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi instructions" href="https://www.gett.com/il/airport-en/" context="Get your ride code and confirm the correct taxi queue at the terminal." />}
       {guideId === "tel-aviv" && option.id === "bus" && <UsefulJourneyLink label="Check bus 445 stops and departures" href="https://bus.gov.il/en/home" context="Find the actual route, fare and closest stop to your hotel; board at Terminal 3, Level 2, Exit 21." />}
-      {guideId === "tel-aviv" && option.id === "weekend" && <UsefulJourneyLink label="Free Line 711 — stop-by-stop timetable" href="https://busofash.co.il/?lines=711" context="Check Terminal 1 stop 34609 and the Tel Aviv-bound departure on your Friday or Saturday." />}
-      {guideId === "haifa" && option.id === "rail" && <UsefulJourneyLink label="Israel Railways — check trains and fares" href="https://www.rail.co.il/" context="Check the Haifa station, ticket price and train service for your travel date." />}
+      {guideId === "tel-aviv" && option.id === "weekend" && <UsefulJourneyLink label="Free Line 711 - stop-by-stop timetable" href="https://busofash.co.il/?lines=711" context="Check Terminal 1 stop 34609 and the Tel Aviv-bound departure on your Friday or Saturday." />}
+      {guideId === "haifa" && option.id === "rail" && <UsefulJourneyLink label="Israel Railways - check trains and fares" href="https://www.rail.co.il/" context="Check the Haifa station, ticket price and train service for your travel date." />}
       {guideId === "haifa" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi pickup" href="https://www.gett.com/il/airport-en/" context="Get the ride code and follow the authorized taxi queue: Terminal 3 Exit 03, or the main arrivals exit at Terminal 1." />}
       {guideId === "haifa" && option.id === "bus" && <UsefulJourneyLink label="Verify Egged bus 905 departures" href="https://bus.gov.il/en/home" context="Check the dated Saturday-night or early-Sunday timetable, Terminal 3 Level 2 or Terminal 1 stop, and your Haifa drop-off." />}
       {guideId === "ein-bokek" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi pickup instructions" href="https://www.gett.com/il/airport-en/" context="Get your ride code at the airport and follow the official queue; ask the driver to confirm the exact Ein Bokek or Neve Zohar hotel." />}
-      {guideId === "ein-bokek" && option.id === "rental" && <UsefulJourneyLink label="Israel Meteorological Service — flood and weather warnings" href="https://ims.gov.il/en/warning" context="Check warnings for the Judean Desert and Dead Sea, plus official road closures, before driving on Route 90. Do not drive through flooded roads." />}
+      {guideId === "ein-bokek" && option.id === "rental" && <UsefulJourneyLink label="Israel Meteorological Service - flood and weather warnings" href="https://ims.gov.il/en/warning" context="Check warnings for the Judean Desert and Dead Sea, plus official road closures, before driving on Route 90. Do not drive through flooded roads." />}
       {!conciseGuide && <div className="mt-4 rounded-xl bg-secondary/50 p-5">
         <h4 className="font-semibold">Before choosing this option</h4>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">

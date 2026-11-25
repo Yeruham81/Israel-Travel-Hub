@@ -34,7 +34,7 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
         <Section id="compare" title={`Compare all ${hotelIds.length} places to stay`} className="scroll-mt-32">
           <p>{g.comparisonIntro}</p>
           <StayComparison hotelIds={hotelIds} columns={g.comparison} caption={`${g.name} hotels in Israel: practical comparison`} />
-          <p className="text-sm! text-muted-foreground">Select a hotel name for its summary and booking link below. This is an editorial comparison, with no live room rates or availability.</p>
+          <p className="text-sm! text-muted-foreground">Select a hotel name for its summary and booking link.</p>
         </Section>
         <Section id="location" title="Where to stay: map & arrival" className="scroll-mt-32">
           <div className="mt-5"><AreaMap area={{ name: `${g.name} hotel region`, map: g.map }} /></div>
@@ -56,7 +56,7 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
           {group.browsePageId && <StayBrowseLink link={linksForPage(group.browsePageId)[0]} pageId={pageId} />}
         </section>)}
         <Section id="checklist" title={`Before you book your ${g.name} stay`} className="scroll-mt-32"><div className="mt-5 grid gap-4 sm:grid-cols-2"><Checklist title="Location, rooms & guest ages" items={g.checklist.slice(0, 3)} /><Checklist title="Facilities & the final total" items={g.checklist.slice(3)} /></div></Section>
-        <ProviderSection id="more-stays" title={`Browse more ${g.name} stays`} intro="Check the exact location, room offer and cancellation terms on the booking site. Enter your dates and all guests there; no booking is made on this page." links={linksForPage(`stay-${g.id}-browse`)} pageId={pageId} />
+        <ProviderSection id="more-stays" title={`Browse more ${g.name} stays`} intro="Enter your dates and all guests on the booking website." links={linksForPage(`stay-${g.id}-browse`)} pageId={pageId} />
         <FaqList faqs={g.faqs} />
         <StayTripLinks region={g.id} currentPath={g.path} />
         <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.name)} />

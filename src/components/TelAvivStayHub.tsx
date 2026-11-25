@@ -116,7 +116,7 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
 
         <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-28">
           <h2 id="compare-h" className="text-2xl font-semibold sm:text-3xl">Compare areas in Tel Aviv</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Compare each neighborhood’s advantages, arrival options and practical considerations to find the right base for your stay.</p>
+          <p className="mt-2 text-sm text-muted-foreground">Compare the beachfront, city center, Jaffa and other neighborhoods by location and transport.</p>
           <div className="mt-4 overflow-hidden rounded-2xl border bg-card">
             <div className="overflow-x-auto" role="region" aria-label="Tel Aviv neighborhood comparison" tabIndex={0}>
               <table className="w-full min-w-[680px] text-left text-sm">

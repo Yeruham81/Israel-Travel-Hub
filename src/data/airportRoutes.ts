@@ -67,7 +67,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     faqs: [
       { q: "How long does an airport transfer to Tel Aviv take?", a: "Allow around 20–40 minutes as a planning estimate or more after pickup. Traffic and the exact Tel Aviv or Jaffa address can add time. Allow separately for immigration, baggage and reaching the meeting point." },
       { q: "Does the request form cover Jaffa too?", a: "Yes. Tel Aviv & Jaffa is preselected. Enter your actual Jaffa hotel or apartment address so I can confirm the final price and a suitable vehicle drop-off." },
-      { q: "Will four passengers and all our suitcases fit?", a: "Do not assume that passenger capacity also guarantees luggage space. List every suitcase, carry-on and stroller. I will need to confirm the vehicle and whether a larger option changes the quote." },
+      { q: "Will four passengers and all our suitcases fit?", a: "Passenger capacity and luggage capacity are separate considerations. List every suitcase, carry-on and stroller. I will need to confirm the vehicle and whether a larger option changes the quote." },
     ],
     related: [
       { label: "Find your Tel Aviv hotel area", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
@@ -97,7 +97,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     faqs: [
       { q: "How long should I allow for a private transfer to Haifa?", a: "Allow about 75–110 minutes as a planning estimate or more after pickup. The Haifa neighbourhood and traffic matter, and time in the airport is additional. Avoid a tight onward connection based only on that estimate." },
       { q: "Can I request a hotel on Mount Carmel?", a: "Yes. Include the full hotel or apartment address and any entrance instructions. Explain steps or mobility needs so I can confirm a practical drop-off and suitable vehicle." },
-      { q: "Is a Haifa Port drop-off the same as a city hotel transfer?", a: "No. Include the exact passenger terminal, ship and required arrival time. Ask me to confirm the route, access and final price rather than assuming a general Haifa quote includes every port entrance." },
+      { q: "Is a Haifa Port drop-off the same as a city hotel transfer?", a: "No. Include the exact passenger terminal, ship and required arrival time. Send me your exact port entrance so I can confirm access, the route and the final price." },
     ],
     related: [
       { label: "Choose where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },

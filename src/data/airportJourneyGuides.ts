@@ -88,12 +88,12 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     stationLinks: [{ text: "Ben Gurion Airport arrival guide", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }],
     weekendLinks: [{ text: "airport Shabbat transport guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { text: "Sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" }, { text: "Israel\'s holiday and special dates guide", to: "/travel-blog/calendar-of-events/" }],
     sources: [
-      { title: "Israel Railways — official route and current train fare", url: "https://www.rail.co.il/" },
-      { title: "Israel Railways — free personal voucher for Jerusalem line (August 2026 notice)", url: "https://rail.co.il/?lan=en&page=vouchers-jerusalem" },
-      { title: "Israel Airports Authority — route 485, airport rail and taxi directions", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" },
-      { title: "Gett — authorized taxi queue and ride-code process", url: "https://www.gett.com/il/airport-en/" },
-      { title: "National public transport planner — bus 485 service dates", url: "https://bus.gov.il/en/home" },
-      { title: "Israel Railways — timetable changes from November 14, 2026", url: "https://rail.co.il/?page=new-schedule-141126" },
+      { title: "Israel Railways - official route and current train fare", url: "https://www.rail.co.il/" },
+      { title: "Israel Railways - free personal voucher for Jerusalem line (August 2026 notice)", url: "https://rail.co.il/?lan=en&page=vouchers-jerusalem" },
+      { title: "Israel Airports Authority - route 485, airport rail and taxi directions", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" },
+      { title: "Gett - authorized taxi queue and ride-code process", url: "https://www.gett.com/il/airport-en/" },
+      { title: "National public transport planner - bus 485 service dates", url: "https://bus.gov.il/en/home" },
+      { title: "Israel Railways - timetable changes from November 14, 2026", url: "https://rail.co.il/?page=new-schedule-141126" },
     ],
     privatePath: "/airport-transfers/jerusalem/",
     privateLabel: "Request a private Jerusalem transfer",
@@ -106,7 +106,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         ...commonTaxi, "If you're staying in or near the Old City, ask your hotel where a vehicle can drop you off. You may need to walk the final stretch with your luggage. See the official airport taxi guide for pickup instructions and the taxi fares in Israel guide for metered prices."
       ], inlineLinks: [{ text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" }, { text: "taxi fares in Israel guide", to: "/travel-blog/taxi-fares-in-israel/" }], checklist: ["Order with Gett or use the airport kiosk, then follow the queue instructions.", "Confirm payment and the regulated meter.", "For Old City lodging, save the recommended drop-off point."] },
       { id: "private", name: "Private transfer arranged ahead", time: "45–60+ min", cost: "Written quote; published weekday starting rate on booking page", bestFor: "Family, groups and special pickup needs", doorToDoor: "To agreed vehicle-accessible point", availability: "By confirmation", comparison: { advantages: "Pre-arranged pickup and vehicle choice", drawbacks: "Book ahead; extras may apply" }, heading: "When is a pre-booked private pickup worthwhile?", paragraphs: [
-        ...commonTransfer, "It can be especially helpful when you are arriving with children, multiple suitcases or a late-night hotel check-in. Confirm an Old City meeting/drop-off point rather than assuming the vehicle can enter every historic lane. The separate private transfer to Jerusalem page covers the quoted vehicle, included service and booking request."
+        ...commonTransfer, "It can be especially helpful when you are arriving with children, multiple suitcases or a late-night hotel check-in. Arrange a road-accessible meeting or drop-off point near your Old City accommodation. The separate private transfer to Jerusalem page covers the quoted vehicle, included service and booking request."
       ], inlineLinks: [{ text: "private transfer to Jerusalem page", to: "/airport-transfers/jerusalem/" }], checklist: ["Request the vehicle size and child seats that you actually need.", "Share the hotel entrance and flight number.", "Check waiting time and flight-delay terms in writing."] },
       { id: "bus", name: "Bus 485 (very limited)", time: "55–60+ min", cost: "About ₪14.50 per adult (when operating)", bestFor: "Only if its timetable fits your flight", doorToDoor: "No", availability: "Sparse departures; confirm date and operator", comparison: { cost: "≈₪14.50", advantages: "Public-transport alternative", drawbacks: "Very limited departures" }, heading: "Is there a direct bus from the airport to Jerusalem?", paragraphs: [
         "The Israel Airports Authority still lists bus 485 to Jerusalem at Terminal 3, Level 2, Exit 21. Bus 485 runs infrequently, so check whether a departure suits your arrival time in the official national public-transport planner.",
@@ -114,7 +114,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ], inlineLinks: [{ text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" }], checklist: ["Confirm line 485's actual operation with the national journey planner.", "Check the terminal and boarding area.", "Have rail or a confirmed ride as your fallback."] },
       { id: "rental", name: "Rental car", time: "45–60+ min", cost: "Rental + insurance, fuel and parking", bestFor: "Onward multi-city road trip", doorToDoor: "Yes, where driving is allowed", availability: "Depends on collection hours", comparison: { cost: "Varies", advantages: "Useful for onward travel", drawbacks: "Parking and traffic in Jerusalem" }, heading: "Should you rent a car for a stay in Jerusalem?", paragraphs: [
         ...commonRental, "Jerusalem's Old City, pedestrian areas and central parking restrictions can make a car inconvenient during a city-focused stay. Compare collection and vehicle options on DiscoverCars."
-      ], inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }], checklist: ["Check permitted parking at your accommodation.", "Compare city collection after a few days instead of airport collection.", "Verify rental operating hours for your arrival day."] },
+      ], inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }], checklist: ["Check permitted parking at your accommodation.", "Compare airport collection with picking up your rental car in the city after a few days.", "Verify rental operating hours for your arrival day."] },
     ],
     stations: [{ name: "Jerusalem–Yitzhak Navon", time: "Around 26–30 min from TLV", usefulFor: "Central bus station and Jaffa Road light rail; connect to your actual hotel." }],
     arrivalAreas: [
@@ -124,12 +124,12 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { area: "Mount Scopus / East Jerusalem", station: "Jerusalem–Yitzhak Navon", onward: "Choose a local bus or taxi for the final journey to your exact address." },
     ],
     connections: [
-      "For Downtown/Mamilla, choose the best light-rail stop or a taxi from Navon, and check the walking distance with luggage. Not every property is directly on the light rail.",
+      "For Downtown/Mamilla, choose the best light-rail stop or a taxi from Navon, and check the walking distance with luggage. Allow time for the final walk to your accommodation.",
       "For the Old City, know which gate is closest to your accommodation. Even a short walk can be difficult with luggage because of steps and steep streets.",
       "For accommodation outside central Jerusalem, check the complete journey from Yitzhak Navon station to your address."
     ],
     weekend: [
-      "Israel Railways and most regular buses normally stop during the main Shabbat period and many Jewish holidays. The exact last/first departure depends on the date, so check the journey planner rather than assuming Saturday night trains start at a fixed time.",
+      "Israel Railways and most regular buses normally stop during the main Shabbat period and many Jewish holidays. Check the journey planner for the last departure before Shabbat and the first Saturday-night service.",
       "For an arrival without a usable rail connection, compare the airport's authorized metered taxi with a confirmed private transfer. A rental car is another possibility only if collection is operating.",
       "The regular Nesher airport-to-Jerusalem shared-taxi route described in older guides no longer runs. Do not rely on old pickup details. My Sherut in Israel guide explains the distinction, and the airport Shabbat transport guide covers current weekend options.",
       "For holiday-related travel planning, see Israel\'s holiday and special dates guide."
@@ -182,7 +182,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     exampleJourney: {
       title: "Example: a hotel on the central beachfront",
       steps: [
-        { label: "Choose the rail service", detail: "From the Terminal 3 railway, compare the actual stops at HaHagana, HaShalom and Savidor Center rather than assuming the first Tel Aviv stop is best." },
+        { label: "Choose the rail service", detail: "From Terminal 3, choose HaHagana, HaShalom or Savidor Center according to the easiest connection to your hotel." },
         { label: "Get from the station to the beach or hotel", detail: "Tel Aviv's railway stations are inland. Check how to reach your hotel by bus, taxi or on foot, especially if you're staying near the beach." },
         { label: "Recheck a Friday or Saturday arrival", detail: "Regular rail service stops for much of Shabbat. The limited weekend Line 711 runs via Terminal 1, with its own stops and timetable; it is not a direct replacement for the rail service." },
       ],
@@ -201,19 +201,19 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     stationLinks: [{ text: "Ben Gurion Airport arrival guide", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }, { text: "getting around Tel Aviv guide", to: "/travel-blog/getting-around-tel-aviv/" }],
     weekendLinks: [{ text: "dedicated airport Shabbat guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },],
     sources: [
-      { title: "Israel Railways — check trains and ticket prices", url: "https://www.rail.co.il/" },
-      { title: "Israel Railways — revised timetable from November 14, 2026", url: "https://rail.co.il/?lan=en&page=new-schedule-141126" },
-      { title: "Israel Airports Authority — Line 445, taxis and internal shuttle", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" },
-      { title: "Tel Aviv visitor information — four railway stations and airport transport", url: "https://visit.tel-aviv.gov.il/move/airport" },
-      { title: "Na’im Busofash — weekend Line 711 and Terminal 1 stop", url: "https://busofash.co.il/?lines=711" },
-      { title: "Gett — official airport taxi ordering and pickup", url: "https://www.gett.com/il/airport-en/" },
-      { title: "National public transport planner — bus 445 timetable", url: "https://bus.gov.il/en/home" },
+      { title: "Israel Railways - check trains and ticket prices", url: "https://www.rail.co.il/" },
+      { title: "Israel Railways - revised timetable from November 14, 2026", url: "https://rail.co.il/?lan=en&page=new-schedule-141126" },
+      { title: "Israel Airports Authority - Line 445, taxis and internal shuttle", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" },
+      { title: "Tel Aviv visitor information - four railway stations and airport transport", url: "https://visit.tel-aviv.gov.il/move/airport" },
+      { title: "Na’im Busofash - weekend Line 711 and Terminal 1 stop", url: "https://busofash.co.il/?lines=711" },
+      { title: "Gett - official airport taxi ordering and pickup", url: "https://www.gett.com/il/airport-en/" },
+      { title: "National public transport planner - bus 445 timetable", url: "https://bus.gov.il/en/home" },
     ],
     privatePath: "/airport-transfers/tel-aviv/",
     privateLabel: "Request a private Tel Aviv or Jaffa transfer",
     options: [
       { id: "rail", name: "Train to Tel Aviv", time: "About 11–30 min to a station", cost: "₪11.50 per adult (one way)", bestFor: "Quick, lower-cost weekday arrival", doorToDoor: "No", availability: "Not during the main Shabbat break", comparison: { cost: "₪11.50", advantages: "Quick, low-cost and avoids traffic", drawbacks: "Train stops inland; hotel connection often required" }, heading: "Train from Ben Gurion Airport to Tel Aviv", paragraphs: [
-        "Take the airport train to a Tel Aviv station that works for your hotel address. Compare the onward bus, taxi or walk rather than automatically choosing the first station; the station table below will help you decide.",
+        "Take the airport train to a Tel Aviv station that works for your hotel address. Use the station table below to compare onward buses, taxis and walking routes.",
         "For hotels near the beach, Old Jaffa or Neve Tzedek, my where to stay in Tel Aviv guide explains the neighborhoods, and the getting around Tel Aviv guide covers local connections."
       ], inlineLinks: [{ text: "where to stay in Tel Aviv guide", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { text: "getting around Tel Aviv guide", to: "/travel-blog/getting-around-tel-aviv/" }], checklist: ["Use the full hotel address when choosing the station.", "Check the last train and late-night stopping pattern.", "Include the onward fare and bags in the total comparison."] },
       { id: "bus", name: "Bus 445", time: "About 40–70+ min, depending on stop", cost: "₪8–14.50 per adult, depending on stop", bestFor: "Addresses near its city stops", doorToDoor: "No", availability: "Timetable dependent; Shabbat restrictions", comparison: { cost: "₪8–14.50", advantages: "May reach central or beachfront stops", drawbacks: "Slower; timetable and stop dependent" }, heading: "Bus 445: another route into central Tel Aviv", paragraphs: [
@@ -231,7 +231,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         "If arriving at Terminal 3, take the free internal shuttle from Level G near Gate 01 to Terminal 1. Bus 711 serves airport stop 34609 on its limited timetable; check the Tel Aviv-bound direction and final walk. The dedicated airport Shabbat guide explains the interchange and Saturday-night train restart."
       ], inlineLinks: [{ text: "dedicated airport Shabbat guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }], checklist: ["Check the city weekend route planner, not a weekday bus schedule.", "Allow time between Terminal 3 and Terminal 1.", "Confirm your last city connection or walk."] },
       { id: "rental", name: "Rental car", time: "About 20–40+ min plus collection", cost: "Rental + parking, insurance and fuel", bestFor: "Journey beyond Tel Aviv", doorToDoor: "Yes, where permitted", availability: "Desk-hours dependent", comparison: { cost: "Rental + extras", advantages: "Flexible for an onward road trip", drawbacks: "Collection time, traffic and city parking" }, heading: "Should you rent a car at the airport?", paragraphs: [
-        ...commonRental, "Central Tel Aviv and Jaffa have limited and potentially expensive parking. If you intend to spend the first few days walking around the city, consider renting only when you leave. Compare vehicle options on DiscoverCars."
+        ...commonRental, "Parking in central Tel Aviv and Jaffa is limited and can be expensive. If you intend to spend the first few days walking around the city, consider renting only when you leave. Compare vehicle options on DiscoverCars."
       ], inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }], checklist: ["Check your hotel's parking arrangements.", "Compare city and airport pickup costs.", "Confirm any toll or one-way charges."] },
     ],
     stations: [
@@ -253,7 +253,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "For Dizengoff Street or Rothschild Boulevard, compare nearby bus stops before choosing a train station.",
     ],
     weekend: [
-      "Standard trains and most regular buses do not run during the main Shabbat break. Tel Aviv’s free weekend bus 711 serves Terminal 1 on a limited timetable, not every arriving flight. Check whether its actual stop and departure suit your destination.",
+      "Standard trains and most regular buses do not run during the main Shabbat break. Tel Aviv’s free weekend bus 711 serves Terminal 1 on a limited timetable. Check whether its actual stop and departure suit your destination.",
       "An authorized taxi or confirmed private transfer may be a more practical choice when the 711 does not match your flight, when arriving late or when carrying large bags.",
       "Check Saturday-evening train departures and holiday changes in the dedicated airport Shabbat guide."
     ],
@@ -272,7 +272,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Will the airport train take me straight to the hotel?", a: "No. It serves four railway stations. Most hotels need a further walk or local connection." },
       { q: "How do I pay for a train or bus to Tel Aviv?", a: "A standard adult train ticket costs ₪11.50. Bus 445 starts at ₪8 and costs up to ₪14.50 for longer stops. Pay with a loaded Rav-Kav or a supported public-transport payment app." },
       { q: "Can I get an Uber from Ben Gurion Airport to Tel Aviv?", a: "No. Uber passenger rides are not currently available in Israel. Use the authorized Gett airport taxi system or a separately confirmed private transfer." },
-      { q: "Do trains run from the airport late at night?", a: "Some trains run late at night, but not every service stops at every Tel Aviv station. Check the timetable for your arrival time." },
+      { q: "Do trains run from the airport late at night?", a: "Some trains run late at night, with stops varying by service. Check the timetable for your arrival time and destination station." },
     ],
     featuredRelated: [
       { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Choose a hotel area that fits your arrival." },
@@ -311,7 +311,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         { label: "Mount Carmel hotel", detail: "Trains run along the coast, while Carmel Center is uphill. You'll usually need a bus or taxi from the station." },
         { label: "Cruise connection", detail: "Haifa's passenger terminal is a different destination from a city hotel. Confirm the ship, terminal instructions, boarding deadline and how you will reach the pedestrian entrance." },
       ],
-      takeaway: "Choose the station with the easiest route to your hotel, not simply the one that looks closest on the map.",
+      takeaway: "Choose the station with the easiest onward route to your hotel.",
     },
     answer: "The train is usually the best low-cost option when running. Choose a station near your destination: Hof HaCarmel for southern Haifa, Bat Galim for the coast or Center HaShmona for downtown. Hotels on Mount Carmel generally need an uphill bus or taxi; a direct taxi or private transfer avoids that change.",
     trainIntro: "The Ben Gurion Airport railway station is below Terminal 3. Follow the train signs after customs; passengers using Terminal 1 first need the free internal shuttle to Terminal 3. Direct trains commonly serve Haifa, with approximately 80–100 minutes to key stations depending on the service. Buy a single ticket at the station or use a valid Rav-Kav or supported payment app, and check the current fare and the stops of the actual train. The railway runs near the coast, so a Mount Carmel hotel may require an additional uphill bus or taxi. My Ben Gurion Airport arrival guide explains the terminal steps; the getting around Israel guide explains onward public transport.",
@@ -329,12 +329,12 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { text: "Sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" },
     ],
     sources: [
-      { title: "Israel Railways — current Haifa departures and ticket prices", url: "https://www.rail.co.il/" },
-      { title: "Israel Railways — timetable changes starting November 14, 2026", url: "https://rail.co.il/?lan=en&page=new-schedule-141126" },
-      { title: "Egged bus 905 — current stop list and limited operation", url: "https://moovitapp.com/index/en/public_transit-line-905-Israel-1-1-81823102-0" },
-      { title: "Israel Airports Authority — train, taxis and terminal directions", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10038" },
-      { title: "Gett — official airport taxi booking", url: "https://www.gett.com/il/airport-en/" },
-      { title: "National public transport journey planner — actual 905 departures and ticketing", url: "https://bus.gov.il/en/home" },
+      { title: "Israel Railways - current Haifa departures and ticket prices", url: "https://www.rail.co.il/" },
+      { title: "Israel Railways - timetable changes starting November 14, 2026", url: "https://rail.co.il/?lan=en&page=new-schedule-141126" },
+      { title: "Egged bus 905 - current stop list and limited operation", url: "https://moovitapp.com/index/en/public_transit-line-905-Israel-1-1-81823102-0" },
+      { title: "Israel Airports Authority - train, taxis and terminal directions", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10038" },
+      { title: "Gett - official airport taxi booking", url: "https://www.gett.com/il/airport-en/" },
+      { title: "National public transport journey planner - actual 905 departures and ticketing", url: "https://bus.gov.il/en/home" },
     ],
     privatePath: "/airport-transfers/haifa/",
     privateLabel: "Request a private Haifa transfer",
@@ -455,15 +455,15 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { text: "taxis in Israel guide", to: "/travel-blog/taxis-in-israel/" },
     ],
     sources: [
-      { title: "Israel Railways — train times, fares and service notices", url: "https://www.rail.co.il/" },
-      { title: "Israel Railways — free Jerusalem-line travel voucher notice (19 August 2026)", url: "https://rail.co.il/?lan=en&page=vouchers-jerusalem" },
-      { title: "Israel Railways — timetable changes starting 14 November 2026", url: "https://rail.co.il/?lan=en&page=new-schedule-141126" },
-      { title: "Tamar Regional Council — Dead Sea public transport lines 444, 486 and 421", url: "https://www.deadsea.co.il/on-the-map/?lang=en" },
-      { title: "Egged — reserved-seat lines including buses 444 and 421", url: "https://www.egged.co.il/en/information-for-passengers/tickets-information" },
-      { title: "National Public Transport Journey Planner — current route and hotel-stop times", url: "https://bus.gov.il/en/home" },
-      { title: "Israel Airports Authority — Terminal 3 rail and ground transport", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10038" },
-      { title: "Gett — official airport taxi ride-code and queue instructions", url: "https://www.gett.com/il/airport-en/" },
-      { title: "Israel Meteorological Service — flood and weather warnings", url: "https://ims.gov.il/en/warning" },
+      { title: "Israel Railways - train times, fares and service notices", url: "https://www.rail.co.il/" },
+      { title: "Israel Railways - free Jerusalem-line travel voucher notice (19 August 2026)", url: "https://rail.co.il/?lan=en&page=vouchers-jerusalem" },
+      { title: "Israel Railways - timetable changes starting 14 November 2026", url: "https://rail.co.il/?lan=en&page=new-schedule-141126" },
+      { title: "Tamar Regional Council - Dead Sea public transport lines 444, 486 and 421", url: "https://www.deadsea.co.il/on-the-map/?lang=en" },
+      { title: "Egged - reserved-seat lines including buses 444 and 421", url: "https://www.egged.co.il/en/information-for-passengers/tickets-information" },
+      { title: "National Public Transport Journey Planner - current route and hotel-stop times", url: "https://bus.gov.il/en/home" },
+      { title: "Israel Airports Authority - Terminal 3 rail and ground transport", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10038" },
+      { title: "Gett - official airport taxi ride-code and queue instructions", url: "https://www.gett.com/il/airport-en/" },
+      { title: "Israel Meteorological Service - flood and weather warnings", url: "https://ims.gov.il/en/warning" },
     ],
     privatePath: "/airport-transfers/ein-bokek/",
     privateLabel: "Request a private Ein Bokek transfer",
@@ -478,7 +478,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { id: "taxi", name: "Official airport taxi", time: "About 1h 45m–2h 30m+ after pickup", cost: "Regulated meter; check current tariff", bestFor: "On-arrival direct ride to a resort", doorToDoor: "To accessible hotel entrance", availability: "Subject to available licensed taxis", comparison: { cost: "Regulated meter", advantages: "Direct airport-to-hotel ride, including Shabbat", drawbacks: "High and variable long-distance meter fare" }, heading: "Official airport taxi to Ein Bokek or Neve Zohar", paragraphs: [
         ...commonTaxi,
         "The total on this longer journey depends on the regulated tariff, time, distance and permitted extras. See my official airport taxi guide for pickup instructions and the taxi fares in Israel guide for how metered fares are calculated.",
-        "Give the driver your complete hotel name, not just “Dead Sea”: Ein Bokek, Hamei Zohar, Neve Zohar and Ein Gedi are not interchangeable drop-offs. Check luggage space, payment, any planned stop and hotel access before leaving the airport. There is no Uber passenger-car service in Israel; my Uber alternatives guide explains available apps."
+        "Give the driver your complete hotel name: Ein Bokek, Hamei Zohar, Neve Zohar and Ein Gedi are distinct destinations. Check luggage space, payment, any planned stop and hotel access before leaving the airport. There is no Uber passenger-car service in Israel; my Uber alternatives guide explains available apps."
       ], inlineLinks: [
         { text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" },
         { text: "taxi fares in Israel guide", to: "/travel-blog/taxi-fares-in-israel/" },
@@ -509,7 +509,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     arrivalAreas: [
       { area: "Ein Bokek hotel strip", station: "Bus 486 or 444 from Jerusalem", onward: "Use the stop nearest your named hotel and allow for the final walk." },
       { area: "Hamei Zohar / Neve Zohar", station: "Bus serving the specific resort stop", onward: "Check the hotel name and stop before boarding in Jerusalem." },
-      { area: "Ein Gedi / Masada", station: "Separate Dead Sea destination", onward: "Use a journey plan for the specific site rather than an Ein Bokek hotel stop." },
+      { area: "Ein Gedi / Masada", station: "Separate Dead Sea destination", onward: "Plan your journey to the specific site you intend to visit." },
     ],
     connections: [
       "Ein Bokek has multiple hotel-area bus stops. Enter your full hotel name in the journey planner and confirm the exact stop, walking distance and direction before boarding.",
@@ -539,7 +539,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Can I reach Ein Bokek after an evening flight?", a: "Only if an actual onward bus still runs after you clear the airport and reach Jerusalem Central Bus Station. Check the last bus before depending on public transport; a late train does not guarantee a Dead Sea connection." },
       { q: "Do buses or trains run to Ein Bokek on Shabbat?", a: "Regular train and intercity-bus connections generally stop during the main Shabbat period. Check the precise holiday/weekend schedules, and compare a confirmed taxi, pre-booked transfer or car rental if there is no usable service." },
       { q: "Do I need a voucher for the train to Jerusalem?", a: "Check whether a free personal voucher is required in addition to your train ticket for travel to Jerusalem. Follow the current Israel Railways instructions before boarding." },
-      { q: "Is the Ein Bokek bus stop outside every hotel?", a: "Not always. Several bus stops serve the Ein Bokek hotel area, and some hotels require a further walk. Search using the full hotel name and check the remaining walk." },
+      { q: "Is the Ein Bokek bus stop outside every hotel?", a: "Several bus stops serve the Ein Bokek hotel area, and some hotels require a further walk. Search using the full hotel name and check the remaining walk." },
       { q: "Is Ein Gedi the same as Ein Bokek?", a: "No. Ein Gedi, Masada, Neve Zohar and the Ein Bokek hotel area are distinct places and stops. Confirm the precise destination in your route plan or transfer request." },
       { q: "Should I choose an airport taxi or a private transfer?", a: "An official airport taxi is ordered on arrival through the authorized process and charged by the regulated meter. A private transfer is arranged in advance and needs a confirmed vehicle, meeting point and written total; compare the full terms for your party." },
     ],

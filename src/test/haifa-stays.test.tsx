@@ -120,8 +120,11 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     expect(container.querySelector("#hotel-haifa-botanica")).toBeNull();
     expect(container.querySelector("#hotel-haifa-schumacher")).toBeNull();
     expect(container.querySelector("#hotel-haifa-leonardo-plaza")).toHaveTextContent("weekends, holidays and July–August");
-    expect(container.querySelector("#hotel-haifa-crowne-plaza")).toHaveTextContent("Do not assume a children's activity club");
-    expect(container.querySelector("#hotel-haifa-dan-carmel")).toHaveTextContent("not mean every room or executive category fits the same party");
+    expect(container.querySelector("#hotel-haifa-crowne-plaza")).toHaveTextContent("Check whether the hotel offers a children's activity club");
+    const danCarmel = container.querySelector("#hotel-haifa-dan-carmel");
+    expect(danCarmel).toHaveTextContent("selected room categories accommodate two adults and two children");
+    expect(danCarmel).toHaveTextContent("Room occupancy and executive-category rules vary.");
+    expect(danCarmel).toHaveTextContent("Certain executive rooms and lounge access have age restrictions separate from family admission.");
   });
 
   it("identifies the Bay View/Nof name difference and makes limited Port Inn verification explicit", () => {

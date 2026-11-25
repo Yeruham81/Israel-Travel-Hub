@@ -55,7 +55,7 @@ const dishVisual = {street:{label:"Street food",icon:Flame},plates:{label:"Break
 type PickFood = (event:MouseEvent<HTMLAnchorElement>,dishId:string)=>void;
 function QuickStart({onPickFood}:{onPickFood:PickFood}){
   return <section id="quick-start" aria-labelledby="quick-start-heading" className="mt-12 scroll-mt-24">
-    <SectionHeading id="quick-start" title="New to Israeli food? Start here" intro="You do not need a complicated tasting itinerary. These are four easy ways to choose your first bite — in a market, bakery, café or hummus shop."/>
+    <SectionHeading id="quick-start" title="New to Israeli food? Start here" intro="Start with a visit to a market, bakery, café or hummus shop. Here are four easy ways to try Israeli food."/>
     <div className="grid gap-4 sm:grid-cols-2">
       {foodStarterIdeas.map((idea,index)=><article key={idea.title} className="rounded-xl border bg-card p-4 sm:p-5">
         <div className="flex items-start gap-3"><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary text-sm font-bold text-primary">{index+1}</span><div>
@@ -111,7 +111,7 @@ function FoodWords(){
  return <section id="food-words" aria-labelledby="food-words-heading" className="mt-12 scroll-mt-24">
    <SectionHeading id="food-words" title="Six useful food words" intro="You will see these on menus and at food stalls. Knowing a few makes it much easier to choose the bread, sauces and accompaniments."/>
    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{foodExtras.map(item=><article key={item.name} className="rounded-xl border bg-card p-4"><h3 className="font-bold">{item.name}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p></article>)}</div>
-   <Tip>Prefer mild food? You can say <strong>“Lo charif, bevakasha”</strong> (“Not spicy, please”). If you have an allergy, explain the exact ingredient rather than relying on one general phrase.</Tip>
+   <Tip>Prefer mild food? You can say <strong>“Lo charif, bevakasha”</strong> (“Not spicy, please”). If you have an allergy, identify the exact ingredient and confirm it with the restaurant staff.</Tip>
  </section>;
 }
 function FoodDay({onPickFood}:{onPickFood:PickFood}){
@@ -168,7 +168,7 @@ function Practical(){
   {title:"Ingredients and allergies",text:"Sesame (tahini), wheat, eggs, dairy and nuts appear frequently. Tell the person taking the order what you must avoid, including sauces, toppings and shared preparation."},
   {title:"Kosher, halal and plant-based",text:"These are different dietary questions. A kosher certificate is not the same as halal certification; a vegetarian description does not guarantee a vegan dish or allergen-safe preparation."},
   {title:"Portions and prices",text:"Check whether your order is a pita, laffa or full plate, and whether salads, extra dips, drinks or desserts cost more. Bakery items can be priced by weight."},
-  {title:"Shabbat and holidays",text:"Many market stalls close ahead of Shabbat or holiday evenings. Other cafés and restaurants may remain open. Check the hours of the specific business rather than assuming every venue behaves alike."},
+  {title:"Shabbat and holidays",text:"Many market stalls close ahead of Shabbat or holiday evenings. Other cafés and restaurants may remain open. Check opening hours with your chosen restaurant or shop."},
   {title:"Payment and service",text:"Prices are usually listed in Israeli shekels (ILS). Cards are common but a backup payment option is useful at small stalls. For table service, around 10–15% tipping is customary; check the bill."},
   {title:"A few easy ordering words",text:"Pita = pocket bread; laffa = wrap; charif = spicy; bli = without; bevakasha = please. If you need exact dietary control, ask for the full ingredient details."}
  ];

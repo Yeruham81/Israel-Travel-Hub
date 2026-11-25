@@ -78,7 +78,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Summer, Friday:</strong> {telMegiddoSite.hours.summerFriday}.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Winter, Sunday–Thursday and Saturday:</strong> {telMegiddoSite.hours.winterRegular}.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Winter, Friday:</strong> {telMegiddoSite.hours.winterFriday}.</p>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Last admission is one hour before closing.</strong> On some holiday eves, including Yom Kippur eve, the park lists an earlier <strong>13:00 closing time</strong>. Holiday-eve hours are not necessarily the same as Friday hours; confirm the schedule for your date on the official park page.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Last admission is one hour before closing.</strong> On some holiday eves, including Yom Kippur eve, the park lists an earlier <strong>13:00 closing time</strong>. Holiday-eve opening hours can differ from Friday hours; confirm the schedule for your date on the official park page.</p>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Admission and contact</h3>
@@ -102,7 +102,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>The national park is on <strong>Road 66</strong>, roughly 2 km northwest of Megiddo Junction between Megiddo and Yokneam. Navigate to <strong>Tel Megiddo National Park</strong> rather than the general Megiddo area or the junction itself.</p>
+      <p>The national park is on <strong>Road 66</strong>, roughly 2 km northwest of Megiddo Junction between Megiddo and Yokneam. Set your navigation to <strong>Tel Megiddo National Park</strong>.</p>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">

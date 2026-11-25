@@ -39,7 +39,7 @@ export const privateDriverHero = {
   label: "Scenic road to Jerusalem",
 };
 export const privateDriverBenefits = [
-  { title: "A route that fits your plans", text: "Choose your pickup, drop-off and favourite stops rather than following a fixed itinerary." },
+  { title: "A route that fits your plans", text: "Choose your pickup, drop-off and favourite stops for a personalised itinerary." },
   { title: "Space for your group", text: "Tell me how many people and bags are coming so I can check a suitable vehicle." },
   { title: "A clear quote before booking", text: "I'll confirm the itinerary, vehicle, total price and arrangements before you decide." },
 ];

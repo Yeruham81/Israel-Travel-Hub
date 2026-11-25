@@ -58,7 +58,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
         image={{ src: ruinsPhoto, alt: "Excavated stone rooms, walls and archaeological remains on the Masada plateau" }}
       >
         <p>Walk among the stone storerooms, residential structures and the synagogue associated with the Jewish rebel occupation. Together they reveal how a remote hilltop fortress supported a large population during the Roman siege.</p>
-        <p>I recommend taking a little time with the archaeological signs rather than rushing only between the famous viewpoints.</p>
+        <p>I recommend allowing time to read the archaeological signs and enjoy the famous viewpoints.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Roman siege camps and ramp">
         <p>From the western side and several viewpoints, you can still make out the Roman siege ramp and the outlines of military camps in the desert below. They help explain the engineering effort behind Rome's assault on the fortress.</p>
@@ -114,7 +114,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
         </article>
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="masada-cable-prices">
-        <div className="flex items-center gap-2"><CableCar className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">Cable-car tickets — Masada East</h3></div>
+        <div className="flex items-center gap-2"><CableCar className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">Cable-car tickets - Masada East</h3></div>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">Cable-car tickets are <strong>additional to the entrance fee</strong>. The cable car does not reach the western entrance.</p>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
           <div>
@@ -168,12 +168,12 @@ export const masadaDestinationContent: AttractionDestinationContent = {
       <p>Most visitors arriving from the Dead Sea use <strong>Masada East</strong>. Choose <strong>Masada West</strong> if you plan to climb the Roman Ramp or attend the evening show. The approaches and facilities differ.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="masada-two-entrances">
         <article className="rounded-xl border bg-card p-4">
-          <h3 className="font-serif text-xl font-semibold">Masada East — Route 90</h3>
+          <h3 className="font-serif text-xl font-semibold">Masada East - Route 90</h3>
           <p className="mt-2 text-sm leading-relaxed sm:text-base">Cable car, Snake Path, visitor center and Yigael Yadin Museum. This is the usual entrance when arriving from Ein Bokek, Ein Gedi or the Dead Sea Highway.</p>
           <a href={eastDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Directions to Masada East <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
         </article>
         <article className="rounded-xl border bg-card p-4">
-          <h3 className="font-serif text-xl font-semibold">Masada West — Road 3199</h3>
+          <h3 className="font-serif text-xl font-semibold">Masada West - Road 3199</h3>
           <p className="mt-2 text-sm leading-relaxed sm:text-base">Roman Ramp Trail, west campground and night show. Approach from Arad; there is <strong>no direct road connection</strong> to the eastern entrance.</p>
           <a href={westDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Directions to Masada West <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
         </article>
@@ -216,7 +216,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
       </div>
       <figure className="overflow-hidden rounded-xl border bg-card" data-testid="masada-wide-panorama">
         <img src={panoramaPhoto} alt="Wide panoramic view of Masada and the surrounding Judean Desert descending toward the Dead Sea" width={1400} height={790} loading="lazy" decoding="async" className="h-52 w-full object-cover object-center sm:h-64 lg:h-72"/>
-        <figcaption className="px-3 py-2 text-xs text-muted-foreground">Masada above the desert and Dead Sea — the views are a highlight of the visit.</figcaption>
+        <figcaption className="px-3 py-2 text-xs text-muted-foreground">Views of the desert and Dead Sea from Masada.</figcaption>
       </figure>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <div className="flex items-center gap-2"><Sun className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Sunrise and hiking plans</h3></div>
@@ -284,14 +284,14 @@ export const masadaDestinationContent: AttractionDestinationContent = {
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Seasonal weather and practical advice.", icon: "seasons" },
   ],
   sources: [
-    { label: "Israel Nature and Parks Authority — Masada National Park", url: official.park, note: "Admission, seasonal hours, access, heat restrictions and visitor information." },
-    { label: "Israel Nature and Parks Authority — official price list", url: official.fees, note: "Standard entrance fees and visitor concessions." },
-    { label: "Israel Nature and Parks Authority — Masada cable car", url: official.cableCar, note: "Cable-car travel, access and separate ticketing." },
-    { label: "Israel Nature and Parks Authority — Snake Path", url: official.snakePath, note: "Route, ascent time and early closures during hot weather." },
-    { label: "Israel Nature and Parks Authority — Roman Ramp", url: official.romanRamp, note: "Western approach, accessibility and hiking conditions." },
-    { label: "Israel Nature and Parks Authority — Yigael Yadin Museum", url: official.museum, note: "Included admission, separate reservations and museum hours." },
-    { label: "Israel Nature and Parks Authority — Masada night show", url: official.nightShow, note: "Western location, seasonal show times and tickets." },
-    { label: "Israel Nature and Parks Authority — access to Masada's visitor areas", url: official.complexAccess, note: "Differences between the eastern and western entrances." },
+    { label: "Israel Nature and Parks Authority - Masada National Park", url: official.park, note: "Admission, seasonal hours, access, heat restrictions and visitor information." },
+    { label: "Israel Nature and Parks Authority - official price list", url: official.fees, note: "Standard entrance fees and visitor concessions." },
+    { label: "Israel Nature and Parks Authority - Masada cable car", url: official.cableCar, note: "Cable-car travel, access and separate ticketing." },
+    { label: "Israel Nature and Parks Authority - Snake Path", url: official.snakePath, note: "Route, ascent time and early closures during hot weather." },
+    { label: "Israel Nature and Parks Authority - Roman Ramp", url: official.romanRamp, note: "Western approach, accessibility and hiking conditions." },
+    { label: "Israel Nature and Parks Authority - Yigael Yadin Museum", url: official.museum, note: "Included admission, separate reservations and museum hours." },
+    { label: "Israel Nature and Parks Authority - Masada night show", url: official.nightShow, note: "Western location, seasonal show times and tickets." },
+    { label: "Israel Nature and Parks Authority - access to Masada's visitor areas", url: official.complexAccess, note: "Differences between the eastern and western entrances." },
   ],
 };
 

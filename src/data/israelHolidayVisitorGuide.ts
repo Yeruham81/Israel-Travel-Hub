@@ -22,7 +22,7 @@ export const holidayImpactLevels:Record<HolidayVisitorImpact,{label:string;summa
 };
 export const schoolCalendarPlanning = {
   title: "School holidays and the September return to school",
-  body: "July and August are usually Israel's main summer school-break months, so family attractions, beaches and popular hotels can be busy even while ordinary weekday public transport continues. Most state schools typically reopen around the beginning of September, which can ease some daytime family crowds, but calendars vary by community and school. Sukkot, Hanukkah and Passover school breaks can bring domestic visitors back to popular sites. Check the current Ministry of Education school calendar and individual opening times rather than treating a school vacation as a nationwide transport shutdown."
+  body: "July and August are usually Israel's main summer school-break months, so family attractions, beaches and popular hotels can be busy even while ordinary weekday public transport continues. Most state schools typically reopen around the beginning of September, which can ease some daytime family crowds, but calendars vary by community and school. Sukkot, Hanukkah and Passover school breaks can bring domestic visitors back to popular sites. School vacations follow the Ministry of Education calendar. Check individual opening times and transport schedules."
 } as const;
 
 export const holidayGuideGroups:HolidayGuideGroup[] = [
@@ -96,7 +96,7 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "why": "Shavuot commemorates the giving of the Torah and is traditionally associated with harvest and dairy foods.",
         "transport": "Regular intercity trains and many buses do not operate during the festival, with earlier finishes on the eve.",
         "visitor": "Many shops close on the holiday. Religious learning gatherings and family visits may affect particular areas.",
-        "tip": "In Israel Shavuot is a one-day holiday; do not automatically apply two-day calendars intended for communities abroad."
+        "tip": "In Israel Shavuot is a one-day holiday; Jewish communities abroad may observe it for two days."
       }
     ]
   },
@@ -180,7 +180,7 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "why": "A public holiday marked by gatherings, ceremonies, picnics and celebrations, with events often starting on the eve.",
         "transport": "Public transport runs on altered holiday schedules that differ by route and year; evening festivities and road closures also affect access.",
         "visitor": "Parks and beaches can be busy. Some museums and stores close; other leisure venues open with special hours.",
-        "tip": "Check both the eve's traffic restrictions and the holiday-day transport schedule rather than assuming ordinary weekday service."
+        "tip": "Check traffic restrictions on the holiday eve and the transport schedule for the holiday itself."
       },
       {
         "id": "jerusalem-day",
@@ -215,7 +215,7 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "season": "Islamic lunar calendar · dates vary and may be confirmed near the holiday",
         "impact": "local",
         "why": "Eid al-Fitr marks the end of Ramadan; Eid al-Adha is a major festival associated with the Hajj period.",
-        "transport": "Expect possible altered business hours and heavier local traffic in Muslim communities; do not assume a nationwide train closure solely because of Eid.",
+        "transport": "Expect possible altered business hours and heavier local traffic in Muslim communities. Eid-related changes are primarily local; check the train timetable for your travel date.",
         "visitor": "Shops may close while leisure and family attractions become very busy, especially in mixed cities and Arab towns.",
         "tip": "Check restaurant, guided-visit and transport arrangements for the specific city or neighbourhood."
       },
@@ -237,7 +237,7 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "why": "Holy Week, Good Friday and Easter bring important services and processions to churches, especially in Jerusalem's Old City.",
         "transport": "Local road controls, crowd management and changes to pickup points are possible; there is no automatic nationwide rail closure.",
         "visitor": "Church of the Holy Sepulchre access can be tightly managed during major services. Pilgrim demand may increase hotel and tour prices.",
-        "tip": "Plan church visits around religious schedules, and check security, ticketing and entry requirements where applicable."
+        "tip": "Plan church visits around religious schedules and check each site's security, ticketing and entry requirements."
       },
       {
         "id": "druze",
@@ -247,17 +247,17 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "why": "The Nabi Shu'ayb pilgrimage near Tiberias is one of the principal Druze religious observances.",
         "transport": "Traffic and access near the shrine and Druze communities may change locally; unrelated parts of Israel generally continue normally.",
         "visitor": "Specific sites may host religious gatherings; respectful conduct and locally published visiting arrangements matter.",
-        "tip": "Do not assume a community religious holiday applies to every city or business in Israel."
+        "tip": "Religious holidays can affect opening hours differently across cities, neighbourhoods and businesses."
       }
     ]
   }
 ];
 export const holidayGuideSources = [
-{label:"Ministry of Tourism — holidays in Israel",url:"https://data.gov.il/he/datasets/ministry_of_tourism/holidaysinisrael/38a82e1f-2800-452f-bf70-20c1f4439924"},
-{label:"Israel Railways — trains on holidays",url:"https://rail.co.il/?lan=en&page=holidays-information"},
-{label:"Israeli government — weekly rest and statutory holiday guidance",url:"https://www.gov.il/BlobFolder/generalpage/employment_guides/en/employment_en.pdf"},
-{label:"Israel Airports Authority — Ben Gurion Airport",url:"https://www.iaa.gov.il/en/airports/ben-gurion/"},
-{label:"Hebcal — Israel Jewish holiday dates",url:"https://www.hebcal.com/holidays/?i=on"},
-{label:"Time and Date — holidays and observances",url:"https://www.timeanddate.com/holidays/israel/"},
+{label:"Ministry of Tourism - holidays in Israel",url:"https://data.gov.il/he/datasets/ministry_of_tourism/holidaysinisrael/38a82e1f-2800-452f-bf70-20c1f4439924"},
+{label:"Israel Railways - trains on holidays",url:"https://rail.co.il/?lan=en&page=holidays-information"},
+{label:"Israeli government - weekly rest and statutory holiday guidance",url:"https://www.gov.il/BlobFolder/generalpage/employment_guides/en/employment_en.pdf"},
+{label:"Israel Airports Authority - Ben Gurion Airport",url:"https://www.iaa.gov.il/en/airports/ben-gurion/"},
+{label:"Hebcal - Israel Jewish holiday dates",url:"https://www.hebcal.com/holidays/?i=on"},
+{label:"Time and Date - holidays and observances",url:"https://www.timeanddate.com/holidays/israel/"},
 {label:"Israel Nature and Parks Authority",url:"https://www.parks.org.il/en/"},
 ] as const;

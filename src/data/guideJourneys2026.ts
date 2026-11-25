@@ -686,7 +686,7 @@ export const journeyDestinationGuides = {
               ["Kalia / northern shore", "35–50 minutes", "Northern beaches with paid facilities"],
               ["Qumran", "40–55 minutes", "Archaeological park and Dead Sea Scrolls history"],
               ["Ein Gedi Nature Reserve", "60–80 minutes", "Desert trails; check current access"],
-              ["Masada — east entrance", "75–95 minutes", "Cable car and national-park visitor entrance"],
+              ["Masada - east entrance", "75–95 minutes", "Cable car and national-park visitor entrance"],
               ["Ein Bokek Central Beach", "90–110 minutes", "Free public beach, promenade and hotels"]
             ],
             "rowLinks": [
@@ -713,7 +713,7 @@ export const journeyDestinationGuides = {
           ],
           "externalLinks": [
             {
-              "label": "Egged — plan your bus trip",
+              "label": "Egged - plan your bus trip",
               "href": "https://www.egged.co.il/en"
             },
             {
@@ -721,7 +721,7 @@ export const journeyDestinationGuides = {
               "href": "https://bus.gov.il/en/home"
             },
             {
-              "label": "Egged — line 444 seat reservations",
+              "label": "Egged - line 444 seat reservations",
               "href": "https://www.egged.co.il/en/information-for-passengers/tickets-information"
             }
           ],
@@ -771,7 +771,7 @@ export const journeyDestinationGuides = {
           ],
           "externalLinks": [
             {
-              "label": "Israel Meteorological Service — warnings",
+              "label": "Israel Meteorological Service - warnings",
               "href": "https://ims.gov.il/en"
             }
           ],
@@ -797,15 +797,15 @@ export const journeyDestinationGuides = {
           ],
           "externalLinks": [
             {
-              "label": "Tamar Regional Council — free Ein Bokek public beach",
+              "label": "Tamar Regional Council - free Ein Bokek public beach",
               "href": "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en"
             },
             {
-              "label": "Tamar Regional Council — hotel-beach equipment rules",
+              "label": "Tamar Regional Council - hotel-beach equipment rules",
               "href": "https://www.deadsea.co.il/attractions/the-hotel-beaches/?lang=en/"
             },
             {
-              "label": "Google Maps — Ein Bokek Central Beach",
+              "label": "Google Maps - Ein Bokek Central Beach",
               "href": "https://www.google.com/maps/search/?api=1&query=Ein+Bokek+Central+Beach"
             }
           ],
@@ -815,7 +815,7 @@ export const journeyDestinationGuides = {
       ],
             "checklist": [
         "Pack a bag for wet swimwear and a change of clothes for your return to Jerusalem.",
-        "Wear sturdy walking shoes rather than beach sandals if you plan to explore Masada or Ein Gedi.",
+        "Wear sturdy walking shoes to explore Masada or Ein Gedi.",
         "Have a payment card available for national-park admission and regulated parking."
       ],
       "faqs": [

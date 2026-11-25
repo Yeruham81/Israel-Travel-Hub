@@ -124,7 +124,7 @@ function MuseumMap() {
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label htmlFor="jerusalem-museum-select" className="min-w-0 flex-1 text-sm font-semibold">Focus on a museum
           <select id="jerusalem-museum-select" value={selectedId} onChange={e=>focus(e.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
-            <option value="all">All museums — city overview</option>
+            <option value="all">All museums - city overview</option>
             {museumAreas.map(area=><optgroup key={area.id} label={area.name}>{museums.filter(m=>m.area===area.id).map(m=><option key={m.id} value={m.id}>{museums.findIndex(x=>x.id===m.id)+1}. {m.name}{m.id==="rockefeller"?" (restricted entry)":""}</option>)}</optgroup>)}
           </select>
         </label>
@@ -145,7 +145,7 @@ const faqs=[
   {q:"Which Jerusalem museums are best for children?",a:"The Bloomfield Science Museum is particularly interactive, while Time Elevator is a multimedia attraction for older children. Ask about minimum ages, languages and booked time slots."},
   {q:"Which museums are close enough to combine?",a:"The Israel Museum and Bible Lands Museum are close together, and the city-centre museums around Nahalat Shiva and Hillel Street are walkable. Yad Vashem and the Old City need separate travel arrangements."},
   {q:"Are Jerusalem museums open on Shabbat and Jewish holidays?",a:"Some open on Saturdays, including the Israel Museum and Museum for Islamic Art, while others close. Fridays and holiday eves often have shorter hours. Check the official museum calendar before visiting."},
-  {q:"Is the Time Elevator a museum?",a:"It is a separate, immersive audiovisual attraction rather than a collection-based museum. I include it because it can be an entertaining history stop, particularly for families."},
+  {q:"Is the Time Elevator a museum?",a:"It is a separate, immersive audiovisual attraction. I include it because it can be an entertaining history stop, particularly for families."},
 ];
 export function JerusalemMuseumsGuide(){
   const featured=museums.filter(m=>["israel","yad","tower","science","tolerance","begin"].includes(m.id));
@@ -167,7 +167,7 @@ export function JerusalemMuseumsGuide(){
     </section>
     <OnThisPage sections={jump}/>
     <section id="top-picks" aria-labelledby="top-picks-heading" className="mt-10 scroll-mt-24">
-      <SectionHeading id="top-picks" title="My top museum picks" intro="Six places worth considering for different interests. Choose what matters most to you."/>
+      <SectionHeading id="top-picks" title="My top museum picks" intro="Six museums for different interests. Choose what matters most to you."/>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{featured.map(m=><a key={m.id} href={"#museum-"+m.id} className="editorial-card-link group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
         <span className="text-[11px] font-bold uppercase tracking-wide text-primary">{m.theme}</span>
         <strong className="mt-2 text-base leading-snug">{m.name}</strong>
@@ -218,7 +218,7 @@ export function JerusalemMuseumsGuide(){
       ].map(item=><a key={item.label} href={item.href} className="rounded-xl border bg-card p-4 hover:border-primary/40 hover:bg-secondary/25"><h3 className="font-bold text-primary">{item.label}</h3><p className="mt-2 text-sm leading-relaxed">{item.text}</p></a>)}</div>
     </section>
     <section id="museum-routes" aria-labelledby="museum-routes-heading" className="mt-12 scroll-mt-24">
-      <SectionHeading id="museum-routes" title="Plan a museum day in Jerusalem" intro="Three realistic ways to group museums, depending on your interests."/>
+      <SectionHeading id="museum-routes" title="Plan a museum day in Jerusalem" intro="Three suggested museum itineraries for different interests."/>
       <div className="grid gap-4 md:grid-cols-3">{[
         {title:"Museum Row: art and archaeology",time:"Half to full day",steps:["Israel Museum – choose two or three highlights","Bible Lands Museum if time and energy permit","Relax with a café break"],note:"Bloomfield is an alternative to a second traditional museum for families."},
         {title:"Jaffa Gate and the Old City",time:"Around half a day",steps:["Tower of David Jerusalem Museum","Walk through Jaffa Gate into the Old City","Optional Time Elevator show in Mamilla"],note:"The show is a separate, timed ticketed attraction."},
@@ -233,7 +233,7 @@ export function JerusalemMuseumsGuide(){
         <div className="rounded-xl border p-5"><h3 className="font-bold">Shabbat and holidays</h3><p className="mt-2 text-sm leading-relaxed">Friday hours can be short and Saturday opening differs by museum. <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Jewish holidays and holiday eves</Link> may affect visitor hours and public transport.</p></div>
         <div className="rounded-xl border p-5"><h3 className="font-bold">Age guidance and accessibility</h3><p className="mt-2 text-sm leading-relaxed">The Holocaust History Museum at Yad Vashem is for ages 10+. Certain Museum of Tolerance exhibitions are for ages 16+. Check accessible entrances and walking distances directly with each operator.</p></div>
       </div>
-      <div className="mt-5"><PlanningTip>I generally prefer one substantial museum and time to enjoy its surrounding neighbourhood. Yad Vashem deserves a calm visit rather than a packed sightseeing schedule.</PlanningTip></div>
+      <div className="mt-5"><PlanningTip>I generally prefer one substantial museum and time to enjoy its surrounding neighbourhood. Set aside time for a calm, unhurried visit to Yad Vashem.</PlanningTip></div>
       <MuseumMap/>
     </section>
     <FaqList faqs={faqs}/>

@@ -40,13 +40,13 @@ export const christianAreas: ChristianArea[] = [
       {name:"Cenacle and Mount Zion",note:"Traditional Last Supper associations",to:"/attractions/mount-zion/"},
     ],
     mapPlace:"Church of the Holy Sepulchre, Jerusalem, Israel",
-    related:{label:"Churches in Jerusalem — my detailed guide",to:"/travel-blog/churches-in-jerusalem/"},
+    related:{label:"Churches in Jerusalem - my detailed guide",to:"/travel-blog/churches-in-jerusalem/"},
   },
   {
     id:"bethlehem",name:"Bethlehem",title:"Bethlehem: the Nativity and the shepherds' fields",
     image:bethlehemPhoto,alt:"The Church of the Nativity in Bethlehem",
     intro:"Bethlehem is a Palestinian city in the West Bank, south of Jerusalem. The Church of the Nativity is a UNESCO-listed pilgrimage landmark built around the site traditionally associated with Jesus' birth. Nearby Manger Square and Beit Sahour add context to the Nativity story.",
-    planning:"Plan Bethlehem as a separate half- or full-day visit. Entry and checkpoint arrangements may differ by nationality, vehicle and conditions on your travel date; an Israeli private driver cannot simply be assumed to enter Palestinian Authority areas.",
+    planning:"Plan Bethlehem as a separate half- or full-day visit. Entry and checkpoint arrangements may differ by nationality, vehicle and conditions on your travel date. Confirm your driver's eligibility to enter Palestinian Authority areas.",
     sites:[
       {name:"Church of the Nativity",note:"Traditional birthplace of Jesus",officialUrl:"https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/",mapPlace:"Church of the Nativity, Manger Square, Bethlehem, West Bank"},
       {name:"Milk Grotto",note:"A small chapel close to the Nativity Church",officialUrl:"https://bethlehem-city.org/en/milkgrotto",mapPlace:"Milk Grotto Chapel, Bethlehem, West Bank"},
@@ -130,8 +130,8 @@ export const christianRoutes = [
     steps:["Day 1: Nazareth's Annunciation churches; optional Cana and Mount Tabor","Stay near Nazareth or the lake","Day 2: Capernaum, Tabgha and the Mount of Beatitudes","Consider Magdala or Yardenit if your schedule permits"],
     advice:"An overnight stay helps you avoid spending both days driving back and forth to central Israel.",
     mapLegs:[
-      {label:"Day 1 — Nazareth & Mount Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:["Cana Wedding Church, Kafr Kanna, Israel"],destination:"Church of the Transfiguration, Mount Tabor, Israel",mode:"driving"},
-      {label:"Day 2 — Lakeside churches",origin:"Magdala, Israel",waypoints:["Capernaum, Israel","Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
+      {label:"Day 1 - Nazareth & Mount Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:["Cana Wedding Church, Kafr Kanna, Israel"],destination:"Church of the Transfiguration, Mount Tabor, Israel",mode:"driving"},
+      {label:"Day 2 - Lakeside churches",origin:"Magdala, Israel",waypoints:["Capernaum, Israel","Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
     ],
   },
   {
@@ -139,10 +139,10 @@ export const christianRoutes = [
     steps:["Day 1: Jerusalem Old City, Via Dolorosa and Holy Sepulchre","Day 2: Mount of Olives or Bethlehem, with separate travel arrangements","Day 3: Nazareth and optional Mount Tabor","Day 4: Capernaum, Tabgha, Mount of Beatitudes and the lake"],
     advice:"Bethlehem travel requires its own eligibility and crossing plan; confirm access before treating it as a fixed stop.",
     mapLegs:[
-      {label:"Day 1 — Jerusalem on foot",origin:"Via Dolorosa, Jerusalem, Israel",waypoints:[],destination:"Church of the Holy Sepulchre, Jerusalem, Israel",mode:"walking"},
-      {label:"Day 2 — Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
-      {label:"Day 3 — Nazareth & Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:[],destination:"Mount Tabor, Israel",mode:"driving"},
-      {label:"Day 4 — Sea of Galilee",origin:"Capernaum, Israel",waypoints:["Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
+      {label:"Day 1 - Jerusalem on foot",origin:"Via Dolorosa, Jerusalem, Israel",waypoints:[],destination:"Church of the Holy Sepulchre, Jerusalem, Israel",mode:"walking"},
+      {label:"Day 2 - Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
+      {label:"Day 3 - Nazareth & Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:[],destination:"Mount Tabor, Israel",mode:"driving"},
+      {label:"Day 4 - Sea of Galilee",origin:"Capernaum, Israel",waypoints:["Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
     ],
   },
   {
@@ -150,11 +150,11 @@ export const christianRoutes = [
     steps:["Days 1–2: Jerusalem Old City, Mount of Olives and Mount Zion","Day 3: Bethlehem and Beit Sahour, subject to current arrangements","Day 4: lower Jordan baptismal site or optional Jericho visit","Day 5: Nazareth, Cana and Mount Tabor","Days 6–7: Sea of Galilee churches, Magdala and optional Haifa/Carmel"],
     advice:"This is a flexible regional outline. Arrival, luggage, road travel, religious services and any West Bank access require extra time.",
     mapLegs:[
-      {label:"Days 1–2 — Jerusalem churches",origin:"Gethsemane, Jerusalem, Israel",waypoints:["Via Dolorosa, Jerusalem, Israel"],destination:"Mount Zion, Jerusalem, Israel",mode:"walking"},
-      {label:"Day 3 — Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
-      {label:"Day 4 — Lower Jordan (check access)",origin:"Jerusalem, Israel",waypoints:[],destination:"Qasr al-Yahud Baptism Site, West Bank",mode:"driving"},
-      {label:"Day 5 — Nazareth & Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:["Kafr Kanna, Israel"],destination:"Mount Tabor, Israel",mode:"driving"},
-      {label:"Days 6–7 — Galilee churches",origin:"Magdala, Israel",waypoints:["Capernaum, Israel","Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
+      {label:"Days 1–2 - Jerusalem churches",origin:"Gethsemane, Jerusalem, Israel",waypoints:["Via Dolorosa, Jerusalem, Israel"],destination:"Mount Zion, Jerusalem, Israel",mode:"walking"},
+      {label:"Day 3 - Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
+      {label:"Day 4 - Lower Jordan (check access)",origin:"Jerusalem, Israel",waypoints:[],destination:"Qasr al-Yahud Baptism Site, West Bank",mode:"driving"},
+      {label:"Day 5 - Nazareth & Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:["Kafr Kanna, Israel"],destination:"Mount Tabor, Israel",mode:"driving"},
+      {label:"Days 6–7 - Galilee churches",origin:"Magdala, Israel",waypoints:["Capernaum, Israel","Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
     ],
   },
 ] as const;
@@ -203,14 +203,14 @@ export const christianOffers: ChristianOffer[] = [
 
 export const christianFaqs = [
   {q:"How many days do I need for the main Christian sites?",a:"Three or four days can introduce Jerusalem, Bethlehem and the Galilee, but you will travel frequently. Five to seven days makes it easier to keep visits at a comfortable pace and allow for services and longer stays at individual churches."},
-  {q:"Can I visit Bethlehem from Jerusalem?",a:"Potentially, but Bethlehem is a Palestinian city in the West Bank. Check entry eligibility, current checkpoint conditions, operator instructions and the need for a separate Palestinian driver or guide. Do not assume your Israeli rental car or Israeli private driver can enter."},
+  {q:"Can I visit Bethlehem from Jerusalem?",a:"Visits to Bethlehem, a Palestinian city in the West Bank, depend on entry eligibility and current access conditions. Check entry eligibility, current checkpoint conditions, operator instructions and the need for a separate Palestinian driver or guide. Confirm whether your Israeli rental car or private driver is permitted to enter."},
   {q:"Where was Jesus traditionally baptized?",a:"Christian tradition associates the baptism of Jesus with the lower Jordan near Qasr al-Yahud. Yardenit, at the southern end of the Sea of Galilee, is a modern designated baptism site and a different location."},
-  {q:"Do I need a licensed tour guide for Christian sightseeing?",a:"You can visit many sites independently. A licensed guide can add interpretation, context and help with an organised itinerary; a private driver supplies transport and does not automatically provide professional guiding."},
+  {q:"Do I need a licensed tour guide for Christian sightseeing?",a:"You can visit many sites independently. A licensed guide can add interpretation, context and help with an organised itinerary. I provide private transportation; professional guiding should be arranged separately."},
   {q:"Can tourists visit churches on Sundays?",a:"Often yes, but Sunday services and local worship have priority and some areas may be temporarily restricted. Check the particular church's schedule and whether a service is open to visitors."},
   {q:"What should I wear when visiting churches?",a:"Modest clothing covering shoulders and knees is a sensible default. Some monasteries and sacred spaces have stricter rules; carry a scarf or additional layer and follow the site's signs."},
   {q:"Can I see Christian sites without renting a car?",a:"Yes. Jerusalem's Old City is mostly on foot, and organised day trips serve major regions. Public transport can cover some connections, but isolated church sites, steep approaches and changes of schedule may justify a driver or guided tour."},
   {q:"What is the best season for a Holy Land pilgrimage?",a:"Spring and autumn are often pleasant for walking, although religious holidays bring crowds and special schedules. Summer can be very hot, particularly around the Jordan Valley. Check each church's calendar and your preferred travel dates."},
-  {q:"Is a baptism ceremony included in a Jordan River tour?",a:"Not automatically. Visiting a river site differs from arranging a religious ceremony. Confirm whether clergy, robes, changing facilities, group bookings and any fees are included."},
+  {q:"Is a baptism ceremony included in a Jordan River tour?",a:"A visit to the river site may be sightseeing only. Arrange your ceremony and confirm clergy, robes, changing facilities, group bookings and any fees."},
   {q:"Are Christian tours appropriate for visitors who are not religious?",a:"Yes. Churches, archaeological sites and biblical landscapes are part of the region's shared cultural and historical heritage. Choose tours with an emphasis on history, architecture and archaeology if that is your interest."},
 ];
 

@@ -13,7 +13,7 @@ export const jerusalemMuseumAreas: {id:JerusalemMuseumArea;name:string;intro:str
   {
     "id": "west",
     "name": "Museum Row & western Jerusalem",
-    "intro": "The Israel Museum, Bible Lands Museum and Science Museum are in the broader Givat Ram area, while Yad Vashem sits farther west on Mount of Remembrance. Plan travel between them rather than assuming a single walk."
+    "intro": "The Israel Museum, Bible Lands Museum and Science Museum are in the broader Givat Ram area, while Yad Vashem sits farther west on Mount of Remembrance. Allow time for travel between the museums."
   },
   {
     "id": "old",
@@ -211,7 +211,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "admission": "Regular ticket ₪58; online price advertised at ₪49",
     "openingDays": "Show times vary; generally Sun–Fri, closed Sat",
     "booking": "Book a timed performance; arrange English audio by phone",
-    "intro": "A motion-seat multimedia show takes visitors through chapters of Jerusalem's past. It is an indoor experience rather than a collection-based museum.",
+    "intro": "A motion-seat multimedia show takes visitors through chapters of Jerusalem's past. It is an indoor experience built around an audiovisual presentation.",
     "highlights": [
       "Immersive film and moving-seat effects",
       "Visual storytelling about Jerusalem's history"

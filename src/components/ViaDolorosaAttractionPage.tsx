@@ -141,7 +141,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
         <div className="mt-3 grid gap-3 text-sm leading-relaxed sm:grid-cols-2">
           <p><strong>Underfoot:</strong> Expect uneven or polished stone paving, steps, sloping lanes and busy market intersections. Use comfortable shoes and allow time for pauses.</p>
           <p><strong>Wheelchairs and strollers:</strong> Some street segments are more manageable than others. Narrow chapel entrances, the Station IX approach and the raised Calvary chapels may require adapted plans.</p>
-          <p><strong>With children:</strong> A shorter route focusing on the major visible stations and the church exterior can work well, with breaks in the Christian Quarter.</p>
+          <p><strong>With children:</strong> Choose a shorter route focusing on the major visible stations and the church exterior, with breaks in the Christian Quarter.</p>
           <p><strong>Prayer spaces:</strong> Respect services and posted photography instructions. Groups should coordinate private prayer or religious services separately where necessary.</p>
         </div>
         <p className="mt-3 text-sm"><Link to="/attractions/old-city-jerusalem/" className={inlineLink}>My Old City guide</Link> explains entrance gates, accessible approaches and nearby facilities.</p>
@@ -218,14 +218,14 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
     {label:"Private driver in Israel",to:"/private-driver-in-israel/",description:"Arrange convenient drop-off and pickup for an Old City visit.",icon:"transport"},
   ],
   sources: [
-    {label:"Franciscan Terra Sancta Museum — the fourteen Stations of the Sorrowful Way",url:official.stations},
-    {label:"Enjoy Jerusalem — Via Dolorosa Stations I–IX",url:official.walk},
-    {label:"Christian Information Center — shrine opening hours",url:official.churchHours},
-    {label:"Christian Information Center — Friday procession schedule",url:official.procession},
-    {label:"Custody of the Holy Land — Holy Sepulchre sanctuary",url:official.holySepulchre},
-    {label:"Terra Sancta Museum — museum and exhibition information",url:official.flagellationMuseum},
-    {label:"Christian Information Center — Jerusalem pilgrimage walk",url:official.cityGuide},
-    {label:"The Jerusalem Foundation — Via Dolorosa access restoration",url:official.mobility},
+    {label:"Franciscan Terra Sancta Museum - the fourteen Stations of the Sorrowful Way",url:official.stations},
+    {label:"Enjoy Jerusalem - Via Dolorosa Stations I–IX",url:official.walk},
+    {label:"Christian Information Center - shrine opening hours",url:official.churchHours},
+    {label:"Christian Information Center - Friday procession schedule",url:official.procession},
+    {label:"Custody of the Holy Land - Holy Sepulchre sanctuary",url:official.holySepulchre},
+    {label:"Terra Sancta Museum - museum and exhibition information",url:official.flagellationMuseum},
+    {label:"Christian Information Center - Jerusalem pilgrimage walk",url:official.cityGuide},
+    {label:"The Jerusalem Foundation - Via Dolorosa access restoration",url:official.mobility},
   ],
 };
 

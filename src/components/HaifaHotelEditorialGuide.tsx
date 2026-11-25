@@ -128,7 +128,7 @@ const groupCopy: Record<string, { title: string; eyebrow: string; advice: string
   budget: {
     title: "Independent & budget-minded stays",
     eyebrow: "Simple rooms and local character",
-    advice: "Port Inn and Loui Talpiot offer different lower-city and Hadar settings. Compare private facilities, arrival arrangements and room totals rather than assuming fixed budget prices.",
+    advice: "Port Inn and Loui Talpiot offer different lower-city and Hadar settings. Compare room facilities, arrival arrangements and the total price.",
   },
 };
 
@@ -155,7 +155,7 @@ const groupTips: Record<string, { title: string; points: readonly [string, strin
     ],
   },
   "mid-range": {
-    title: "Compare daily travel, not just rates",
+    title: "Compare hotel rates and daily transport",
     points: [
       "Include the climb between downtown and the Carmel in your transport plan.",
       "If you book Nof under the Haifa Bay View name, confirm the address.",
@@ -222,7 +222,7 @@ function HotelCard({ id, pageId }: { id: string; pageId: string }) {
       <p className="mt-3 text-sm leading-relaxed">{note.summary}</p>
       <p className="mt-3 text-sm leading-relaxed"><strong>Best for:</strong> {note.bestFor}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Beach access:</strong> {note.beach}</p>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Keep in mind:</strong> {note.consider}</p>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Before booking:</strong> {note.consider}</p>
       {booking?.isAffiliate ? <a href={hotelAffiliateUrl(booking, pageId, hotel.id)}
         target="_blank" rel={relFor(booking.isAffiliate)}
         onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
@@ -390,7 +390,7 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
         </div>
         <h3 className="mt-8 text-xl font-semibold">Getting to your hotel and around Haifa</h3>
         <p className="mt-3 leading-relaxed">If you arrive by train, choose the station and onward connection for your actual hotel. The <a href="https://www.carmelithaifa.com/carmelit-haifa/carmelit-haifa-about/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-2">Carmelit</a> connects the lower city with Carmel Center, but you may still need a bus, taxi or uphill walk for the final section. For airport arrivals, see my <Link to="/travel-blog/ben-gurion-airport-to-haifa/" className="font-semibold text-primary underline underline-offset-2">Ben Gurion Airport to Haifa guide</Link>.</p>
-        <p className="mt-3 leading-relaxed">If you plan to visit the Bahá'í Gardens, check the entrance and visiting arrangements for the part you want to see. For shore excursions, confirm your cruise terminal and ship schedule rather than relying only on a hotel's distance from the port. You can combine Haifa with Acre, Caesarea or the Galilee by tour or private driver.</p>
+        <p className="mt-3 leading-relaxed">If you plan to visit the Bahá'í Gardens, check the entrance and visiting arrangements for the part you want to see. For shore excursions, confirm your cruise terminal, ship schedule and the route from your hotel. You can combine Haifa with Acre, Caesarea or the Galilee by tour or private driver.</p>
       </section>
 
       <section id="tips" className="mt-14 scroll-mt-32" aria-labelledby="tips-h">

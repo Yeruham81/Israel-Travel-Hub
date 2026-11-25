@@ -219,12 +219,12 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
             <div>
               <p className="text-xs font-bold uppercase tracking-wide text-primary">More options</p>
               <h3 className="mt-2 text-lg font-semibold">Explore more tours</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">See the complete selection for this destination, including different dates, departure points and interests.</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Compare departure points, dates and itineraries.</p>
             </div>
             <button type="button" onClick={() => onChange({})} className="mt-4 inline-flex min-h-10 items-center justify-center rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-secondary">Show all tours</button>
           </li>}
         </ul>
-        <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Before booking, check the current departure date and location, itinerary, guiding, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider. Each tour is subject to the operator's own terms and conditions.</p>
+        <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Check the operator's booking page for available dates, pickup and return arrangements, guiding, admissions, final prices and cancellation terms.</p>
       </section>}
       {compact && <OwnerTourSection tours={owner} compact />}
     </>}

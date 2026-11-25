@@ -142,7 +142,7 @@ const travelGuideSources: SourceReference[] = [
     ["guide-telaviv-transit", "Public transport and weekend services", "Tel Aviv-Yafo Municipality", "https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/PublicTransportaiton.aspx", "Municipal information on Rav-Kav and the free weekend network. Routes and operating hours must be checked for the travel date."],
     ["guide-red-line", "Tel Aviv light rail", "Tel Aviv-Yafo Municipality", "https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/lightrail.aspx", "The operating Red Line is distinguished from future lines. Use the operator's current map and timetable rather than a future-network map."],
     ["guide-esim-airalo", "Israel eSIM plans and setup", "Airalo", "https://www.airalo.com/israel-esim", "Published Israel plans and installation guidance. Check the exact package for data, validity, voice/text inclusions and activation conditions. No local speed test was performed."],
-    ["guide-esim-saily", "Israel plans, hotspot and optional calling", "Saily", "https://saily.com/esim-israel/", "Current Israel product page includes data packages and optional phone-number/call/text products. Its phone-number product uses a US number; an eSIM does not automatically supply an Israeli number."],
+    ["guide-esim-saily", "Israel plans, hotspot and optional calling", "Saily", "https://saily.com/esim-israel/", "Current Israel product page includes data packages and optional phone-number/call/text products. Its phone-number product uses a US number. For an Israeli number, choose a service that explicitly includes one."],
     ["guide-esim-yesim", "Israel fixed and unlimited plans", "Yesim", "https://yesim.app/country/israel/", "Israel packages include fixed and unlimited options; the provider explains fair-use speed limitations. Unlimited does not guarantee continuous maximum speed."],
     ["guide-esim-gigsky", "Israel mobile-data plans", "GigSky", "https://www.gigsky.com/country/esim-in-israel", "Country, regional and other coverage options are separate products. Confirm Israel and every other destination in the exact package's country list."],
     ["guide-esim-drimsim", "Israel pay-as-you-use SIM and eSIM", "Drimsim", "https://drimsim.com/en/country/israel", "The country page lists usage-based data for physical SIM and eSIM. Compare the current per-unit rate and any setup or balance terms with a fixed package."],
@@ -631,7 +631,7 @@ const jerusalemHotelSources: SourceReference[] = [
 ].map(([id, name, url]): SourceReference => ({
   id: `hotel-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: JERUSALEM_STAY_REVIEW_DATE,
-  note: "Property identity, location and general accommodation style cross-checked with the hotel's own information. Room availability, rates, specific amenities and booking conditions must be reconfirmed for your dates.",
+  note: "",
 }));
 
 const telAvivHotelSources: SourceReference[] = [
@@ -654,7 +654,7 @@ const telAvivHotelSources: SourceReference[] = [
 ].map(([id, name, url]): SourceReference => ({
   id: `hotel-tlv-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: TELAVIV_STAY_REVIEW_DATE,
-  note: "Property identity, location and general accommodation style checked against the property's own information. Reconfirm rooms, services, access, minimum stays and booking conditions for your dates.",
+  note: "",
 }));
 
 const deadSeaHotelSources: SourceReference[] = [
@@ -672,7 +672,7 @@ const deadSeaHotelSources: SourceReference[] = [
 ].map(([id, name, url]): SourceReference => ({
   id: `hotel-ds-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
-  note: "Property identity, location and general facilities checked against the operator's own information. Confirm current operation, beach access, room occupancy, age limits, meal-plan inclusions and seasonal facilities for your dates; rates and inventory are not live.",
+  note: "",
 }));
 
 const tiberiasHotelSources: SourceReference[] = [
@@ -690,8 +690,8 @@ const tiberiasHotelSources: SourceReference[] = [
   id: `hotel-tib-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: TIBERIAS_STAY_REVIEW_DATE,
   note: id === "tiberia"
-    ? "The hotel website lists 17 HaNoter Street. Confirm your room facilities and arrival arrangements directly. Rates and inventory are not live."
-    : "Identity, location and relevant facilities or policies checked against primary operator information. Reconfirm operation, guest and facility age limits, seasonal pools, beach arrangements and the exact meal plan for your dates. No live rates or availability are supplied.",
+    ? "Address: 17 HaNoter Street, as listed on the hotel website. Confirm room facilities and arrival arrangements directly."
+    : "",
 }));
 
 const haifaHotelSources: SourceReference[] = [
@@ -709,8 +709,8 @@ const haifaHotelSources: SourceReference[] = [
   id: `hotel-haifa-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: HAIFA_STAY_REVIEW_DATE,
   note: id === "port-inn"
-    ? "The indexed operator public profile supports the name and downtown address only; a full current facilities page could not be retrieved. Confirm room type, bathroom, meals and arrival arrangements directly. No detailed amenities or live inventory are asserted."
-    : "Property identity, location and relevant facilities or policies checked against primary operator information. Confirm current operation, room occupancy, age restrictions, seasonal pools, meals and parking for your dates. Rates and inventory are not live.",
+    ? "Port Inn's public profile lists the name and downtown address only. Contact Port Inn directly for room types, bathrooms, meals and arrival arrangements."
+    : "",
 }));
 
 /** Ordinary tours use one product identity across all destination/topic pages.
@@ -958,14 +958,14 @@ export const tourBookingOffers: TourBookingOffer[] = ([
 const sourceCatalog: SourceReference[] = [
   ...neighborhoodHotelSources,
   ...ownerDayTripSources,
-  ...tourBookingOffers.map((offer): SourceReference => ({ id: offer.id, title: tourProducts.find((tour) => tour.id === offer.productId)!.title, publisher: offer.partnerId === "viator" ? "Viator" : "GetYourGuide", url: offer.publicUrl, checkedAt: offer.checkedAt, note: "Product identity, operator, advertised itinerary and duration reviewed. No date-specific availability is confirmed. Starting prices, when present, are short-lived editorial snapshots, not live quotes. Confirm pickup, inclusions, access and cancellation with the booking provider." })),
+  ...tourBookingOffers.map((offer): SourceReference => ({ id: offer.id, title: tourProducts.find((tour) => tour.id === offer.productId)!.title, publisher: offer.partnerId === "viator" ? "Viator" : "GetYourGuide", url: offer.publicUrl, checkedAt: offer.checkedAt, note: "" })),
   { id: "shore-haifa-terminal", title: "Haifa Port cruise terminal", publisher: "Haifa Port", url: "https://www.haifaport.co.il/en/terminal/", checkedAt: null, note: "Official passenger-terminal information and downtown access. Consult the port, cruise line and operator for the arrangements applying to your ship; no current sailing schedule or dockside vehicle access is asserted." },
   { id: "shore-ashdod-terminal", title: "Ashdod Port passenger cruises", publisher: "Ashdod Port Company", url: "https://www.ashdodport.co.il/english/aboutashdodport/pages/passengers-cruises.aspx", checkedAt: null, note: "Official passenger-terminal information. Confirm the terminal, meeting point and any shuttle arrangements for the actual port call; no current cruise schedule or general access permission is asserted." },
   { id: "shore-viator-ashdod-jerusalem-bethlehem-usd", title: "Ashdod Jerusalem & Bethlehem — USD starting-price option", publisher: "Viator", url: "https://www.viator.com/es-CL/tours/Ashdod/Ashdod-Port-Shore-Excursion-Jerusalem-and-Bethlehem-Day-Tour-from-Ashdod-Port/d4470-5209P131", checkedAt: SHORE_EXCURSION_CHECK_DATE, note: "The official Spanish-language listing for the same 5209P131 product shows an English-tour option from US$120 per person. An indicative checked starting price only; dates, travelers, options and final checkout currency change the total." },
   ...shoreTourProducts.map((product): SourceReference => ({
     id: product.id, title: product.title, publisher: product.partnerId === "getyourguide" ? "GetYourGuide product listing" : product.partnerId === "viator" ? "Viator product listing" : product.operatorId === "tourist-israel" ? "Tourist Israel" : "Compass Travel Israel",
     url: product.publicUrl, checkedAt: product.checkedAt || SHORE_EXCURSION_CHECK_DATE,
-    note: `Product identity, named operator, itinerary and pickup/return at ${product.portIds.map((id) => shorePorts[id].name).join(" / ")} Port checked. ${product.seasonNote ? "The operator currently advertises a 2027 cruise program. " : ""}${product.operatorId === "rent-a-guide" ? "The title mentions both ports, but the detailed return/inclusions specify Ashdod; listed here only for Ashdod. " : ""}${product.listedPrice ? "The displayed USD starting price and per-person/per-group basis were checked as an indicative snapshot, not a quote for selected dates. " : ""}No sailing-date availability, live price, port-access permission or return guarantee is verified by this portal. Confirm all arrangements before booking.`,
+    note: `Pickup and return: ${product.portIds.map((id) => shorePorts[id].name).join(" / ")} Port. ${product.seasonNote ? "The operator advertises a 2027 cruise program. " : ""}${product.operatorId === "rent-a-guide" ? "The itinerary and inclusions specify pickup and return at Ashdod. " : ""}Confirm availability for your sailing date, total price, port access and return arrangements with the operator.`,
   })),
   { id: "moshe-author-profile", title: "Moshe Barak biography", publisher: "Moshe Barak", url: "", checkedAt: "2026-10-18", note: "Publisher biography supports over 20 years in private transport, local route knowledge and tailored journeys for international visitors. Tripadvisor is linked to the owner-supplied profile only; no live score, count or review text is reproduced." },
   referenceFxSource,
@@ -990,7 +990,7 @@ const sourceCatalog: SourceReference[] = [
   {
     id: "haifa-botanica-facilities", title: "Botanica — rooftop plunge pool and facilities", publisher: "Leonardo Hotels",
     url: "https://www.leonardo-hotels.com/haifa/hotel-botanica-haifa/facilities", checkedAt: HAIFA_STAY_REVIEW_DATE,
-    note: "The operator describes a rooftop plunge pool, rather than a full-size swimming pool. Confirm the seasonal calendar and spa inclusions separately from the room offer.",
+    note: "The operator describes the rooftop facility as a small plunge pool. Confirm the seasonal calendar and spa inclusions separately from the room offer.",
   },
   {
     id: "haifa-dan-carmel-rooms", title: "Dan Carmel — room layouts and occupancy", publisher: "Dan Hotels",
@@ -1010,7 +1010,7 @@ const sourceCatalog: SourceReference[] = [
   {
     id: "ds-noga-spa", title: "Esprit Spa — Noga: facilities and minimum age", publisher: "Isrotel",
     url: "https://www.isrotel.com/eventsmain/hangouts/attraction/dead-sea/isrotel-ganim-attractions/esprit-spa/", checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
-    note: "The operator states spa entry is for guests aged 16 and over, with treatments charged separately. This restriction applies to the spa rather than the whole hotel.",
+    note: "The operator states spa entry is for guests aged 16 and over, with treatments charged separately. The restriction applies specifically to the spa.",
   },
   {
     id: "ds-herods-spa", title: "Vitalis Spa — Herods Dead Sea", publisher: "Leonardo Hotels",
@@ -1696,7 +1696,7 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
   },
   {
     id: "ds-nevo", cityId: "deadsea", areaId: "deadsea", name: "Nevo by Isrotel Collection", style: "Full-service resort with Esprit Spa",
-    summary: "A substantial Ein Bokek resort combining the Esprit Spa, pools and access to nearby beach services. It is a useful all-round choice when different members of the party want hotel facilities as well as time beside the water.",
+    summary: "A substantial Ein Bokek resort combining the Esprit Spa, pools and access to nearby beach services. It suits groups combining time by the water with hotel facilities.",
     bestFor: "First visits and mixed-interest groups looking for a broad resort experience.",
     watch: "Confirm the route to the beach, the spa access included in your room rate and charges for treatments or specific facilities.", sourceId: "hotel-ds-nevo-official",
     resortFacts: { location: "Ein Bokek", beach: "Beach beside the hotel; confirm the access route", spa: "Esprit Spa, mineral-water pools and treatments", agePolicy: "Hotel accepts families; confirm spa age limits", children: "Kids' club and pool facilities; schedules vary", meals: "Meals depend on the selected booking offer" },
@@ -1720,11 +1720,11 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
     summary: "An AFI resort by the Ein Bokek promenade with beach access, pools, a spa and children's facilities. It suits families who want a hotel base near the central resort area and prefer choosing their meal plan.",
     bestFor: "Families combining beach time, hotel facilities and central Ein Bokek convenience.",
     watch: "Check the exact room layout, connecting-room confirmation, club schedule and meal plan. A family-hotel label does not mean an all-inclusive rate.", sourceId: "hotel-ds-vert-official",
-    resortFacts: { location: "Ein Bokek promenade", beach: "Hotel access to the adjacent beach", spa: "Indoor mineral-water pool, spa and treatments", agePolicy: "Families welcome; check spa age restrictions", children: "Children's club and pool facilities", meals: "Compare the selected meal plan; do not assume all-inclusive" },
+    resortFacts: { location: "Ein Bokek promenade", beach: "Hotel access to the adjacent beach", spa: "Indoor mineral-water pool, spa and treatments", agePolicy: "Families welcome; check spa age restrictions", children: "Children's club and pool facilities", meals: "Check which meals and drinks the rate includes" },
   },
   {
     id: "ds-noga", cityId: "deadsea", areaId: "deadsea", name: "Noga by Isrotel Collection", style: "Ein Bokek hotel with mineral-water pools",
-    summary: "An Ein Bokek hotel near the beach, combining the Esprit Spa with a more straightforward resort format. Consider it when comparing the facilities you will use rather than paying primarily for a luxury room or a direct beachfront address.",
+    summary: "An Ein Bokek hotel near the beach, combining the Esprit Spa with a more straightforward resort format. Consider it if the facilities you plan to use matter more to you than a luxury room or a beachfront location.",
     bestFor: "Couples and families comparing wellness facilities with the total cost of a stay.",
     watch: "The spa is for guests aged 16+, and treatments cost extra. Confirm the beach walk, children's facilities and room occupancy for your dates.", sourceId: "hotel-ds-noga-official",
     resortFacts: { location: "Ein Bokek", beach: "Short walk to the beach", spa: "Two Dead Sea pools; treatments charged separately", agePolicy: "Spa entry 16+; the hotel itself accepts families", children: "Children's activities; verify seasonal programming", meals: "Check your chosen room offer and meal plan" },
@@ -1738,7 +1738,7 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
   },
   {
     id: "ds-ein-gedi", cityId: "deadsea", areaId: "deadsea", name: "Ein Gedi Hotel", style: "Inland nature stay with Synergy Spa",
-    summary: "A hotel in the Ein Gedi kibbutz setting, with gardens and the Synergy Spa. It is an alternative for travelers who want a nature-focused stay rather than the Ein Bokek beachfront resort district.",
+    summary: "A hotel in the Ein Gedi kibbutz setting, with gardens and the Synergy Spa. It is an alternative to Ein Bokek for travelers seeking a nature-focused stay.",
     bestFor: "Visitors prioritizing gardens, the Ein Gedi area and an inland spa retreat.",
     watch: "Do not assume a room overlooking the Dead Sea includes nearby sea bathing. Plan a separate journey to an operating beach and check nature-reserve access for your dates.", sourceId: "hotel-ds-ein-gedi-official",
     resortFacts: { location: "Ein Gedi, north of the main hotel district", beach: "Separate journey to an operating beach", spa: "Synergy Spa with a Dead Sea water pool", agePolicy: "Confirm age rules for the hotel and spa separately", children: "Check room layout and the facilities your family needs", meals: "Check the offer and outside dining options" },
@@ -1776,7 +1776,7 @@ export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts:
   },
   {
     id: "tib-gai-beach", cityId: "tiberias", areaId: "tiberias", name: "Gai Beach Hotel", style: "Lakeside family hotel with a water park",
-    summary: "A southern-shore hotel combining a declared swimming beach with a water park. The operator advertises water-park entry for hotel guests, making it a useful family comparison when slides and time by the water are central to the holiday.",
+    summary: "A southern-shore hotel combining a declared swimming beach with a water park. The operator advertises water-park entry for hotel guests, an appealing feature for families who enjoy slides and time by the water.",
     bestFor: "Families planning to spend substantial time at the hotel, beach and water park.",
     watch: "Confirm the current water-park calendar, separate-swimming sessions, slide restrictions and which facilities operate during your stay. Do not assume year-round water-park opening.", sourceId: "hotel-tib-gai-beach-official",
     resortFacts: { location: "Southern lakeshore, beyond the central promenade", beach: "Declared beach beside the water park; check operation", spa: "Hotel spa; confirm entry ages and charges", agePolicy: "Families accepted; water attractions have separate rules", children: "Water park with slides and children's areas; seasonal calendar", meals: "Compare the exact breakfast or other board package" },
@@ -1785,7 +1785,7 @@ export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts:
     id: "tib-leonardo-club", cityId: "tiberias", areaId: "tiberias", name: "Leonardo Club Tiberias", style: "Central family hotel · check the current board basis",
     summary: "A central hotel with children's and teens' clubs, pools and seasonal water slides. Although marketed as all-inclusive, the operator currently posts a notice that it is running on full board instead; confirm the exact package before booking.",
     bestFor: "Families who want on-site activities and meals while staying near the town and promenade.",
-    watch: "Full board does not automatically include all drinks and snacks. Confirm the meal basis in writing, pool and slide opening, club ages and your room's occupancy. This is not a private-beach hotel.", sourceId: "hotel-tib-leonardo-club-official",
+    watch: "Full-board inclusions for drinks and snacks vary. Confirm the meal basis in writing, pool and slide opening, club ages and your room's occupancy. This is not a private-beach hotel.", sourceId: "hotel-tib-leonardo-club-official",
     operatingNotice: { message: "Operator notice, checked 17 October 2026: the pool is scheduled to close on 25–27 October 2026 for enclosure maintenance. Confirm any change directly before booking those dates.", expiresOn: "2026-10-27" },
     resortFacts: { location: "Central Tiberias, a walk from the promenade", beach: "No private beach; plan swimming separately", spa: "Check which wellness facilities are currently available", agePolicy: "Families accepted; confirm slide and club ages", children: "Children's and teens' clubs; seasonal water slides", meals: "Marketed all-inclusive, but current operator notice says full board; confirm" },
   },
@@ -1980,7 +1980,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-embassy", cityId: "telaviv", areaId: "telaviv-beachfront", name: "Embassy Hotel Tel Aviv", style: "Retro-inspired boutique hotel near the beach",
-    summary: "A smaller hotel on Shalom Aleichem Street at HaYarkon, close to the central promenade. Its retro-inspired interiors offer a different format from the large beachfront hotels, with the sea nearby rather than a resort setting.",
+    summary: "A smaller hotel on Shalom Aleichem Street at HaYarkon, close to the central promenade. Its retro-inspired interiors and location near the sea offer an alternative to a large beachfront resort.",
     bestFor: "Independent travelers who want central beach access and a smaller hotel atmosphere.",
     watch: "Check the room's outlook and size. A location near the coast does not guarantee a sea view or the facilities of a large resort.", sourceId: "hotel-tlv-embassy-official",
   },
@@ -1998,7 +1998,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-port-tower", cityId: "telaviv", areaId: "telaviv-old-north", name: "Port Tower by Isrotel Design", style: "Contemporary tower hotel near Tel Aviv Port",
-    summary: "Isrotel's modern hotel at the northern end of HaYarkon Street is a useful option for time around the port and northern waterfront. Its tower format offers a different stay from the smaller boutique properties farther south in the Old North.",
+    summary: "Isrotel's modern hotel at the northern end of HaYarkon Street offers easy access to the port and northern waterfront. Its tower format offers a different stay from the smaller boutique properties farther south in the Old North.",
     bestFor: "Visitors focused on the port, northern coast and a contemporary hotel setting.",
     watch: "Check your room's actual view and the walk to your preferred beach. Confirm any pool, meal and parking conditions for your dates.", sourceId: "hotel-tlv-port-tower-official",
   },
@@ -2010,7 +2010,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-elkonin", cityId: "telaviv", areaId: "telaviv-neve-tzedek", name: "Elkonin Tel Aviv – MGallery", style: "Restored heritage hotel near Neve Tzedek",
-    summary: "A restored historic hotel on Lilienblum Street, on the eastern approach to Neve Tzedek and near the southern end of Rothschild. It combines a heritage building with a contemporary hotel setting, rather than placing you deep within Shabazi's residential lanes.",
+    summary: "A restored historic hotel on Lilienblum Street, on the eastern approach to Neve Tzedek and near the southern end of Rothschild. It combines a heritage building with a contemporary hotel setting near Shabazi's residential lanes.",
     bestFor: "Couples seeking an upscale heritage stay with access to both Neve Tzedek and the southern center.",
     watch: "Confirm your room's building and outlook, and check any spa, pool, breakfast or restaurant arrangements for the dates you book.", sourceId: "hotel-tlv-elkonin-official",
   },
@@ -2034,13 +2034,13 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-albi-florentin", cityId: "telaviv", areaId: "telaviv-florentin", name: "Albi Florentin", style: "Small hotel with digital self check-in",
-    summary: "A Florentin property with a technology-led arrival format, described by its operator as using self check-in. Consider it for a more independent stay focused on the neighborhood rather than a conventional staffed hotel experience.",
+    summary: "A Florentin property with a technology-led arrival format, described by its operator as using self check-in. Consider it for a more independent neighbourhood stay; check the staffing and services you need.",
     bestFor: "Travelers comfortable with digital arrival instructions and a small urban property.",
     watch: "Obtain check-in instructions before arrival and confirm support availability, luggage storage and the room's noise exposure.", sourceId: "hotel-tlv-albi-florentin-official",
   },
   {
     id: "tlv-florentin-house", cityId: "telaviv", areaId: "telaviv-florentin", name: "Florentin House by HOMY", style: "Neighborhood stay on Florentin Street",
-    summary: "A small-property option on Florentin Street listed by HOMY, placing you within the neighborhood's everyday café and nightlife setting. Compare the current room descriptions rather than relying on older accounts of the building's accommodation format.",
+    summary: "A small-property option on Florentin Street listed by HOMY, placing you within the neighborhood's everyday café and nightlife setting. Check the current room descriptions and accommodation format.",
     bestFor: "Independent visitors who want Florentin itself as their base for the southern city.",
     watch: "Confirm the exact room or unit, private facilities, check-in process and sound insulation. Do not assume an older hostel listing describes the current offer.", sourceId: "hotel-tlv-florentin-house-official",
   },

@@ -86,8 +86,8 @@ describe.each([
     expect(screen.getAllByTestId("neighborhood-card")).toHaveLength(areas.length);
   });
 
-  it("each area presents hotels prominently with working booking links and useful location guidance", () => {
-    for (const area of areas) {
+  for (const area of areas) {
+    it(`${area.name}: presents hotels prominently with working booking links and useful location guidance`, () => {
       const { container, unmount } = render(<NeighborhoodStayPage area={area} />);
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(area.title);
       expect(container.querySelectorAll("main")).toHaveLength(1);
@@ -133,7 +133,7 @@ describe.each([
           expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#area-guide")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         }
         expect(within(container.querySelector("#location") as HTMLElement).getByText(/Arriving with luggage:/)).toBeInTheDocument();
-        expect(within(hotelSection).getByText(/Hotel stays are provided by independent properties/)).toBeInTheDocument();
+        expect(within(hotelSection).getByText(/Book your hotel directly through the booking website/)).toBeInTheDocument();
         for (const src of imageUrls) expect(src).not.toBe(area.photo.src);
         if (g.id === "jerusalem") {
           for (const card of cards) {
@@ -184,8 +184,8 @@ describe.each([
         expect(within(card).getAllByRole("link")).toHaveLength(1);
       }
       unmount();
-    }
-  }, 20000);
+    }, 20000);
+  }
 
   it("places five hotel cards and one compact map consistently across every Jerusalem neighborhood", () => {
     const { container } = render(<NeighborhoodStayPage area={jerusalemAreaGuides.find((area) => area.id === "downtown")!} />);
@@ -552,7 +552,7 @@ describe("Jerusalem direct hotel catalog", () => {
     const secondTip = within(neighborhoodSection).getByText("Check your dates.").closest("div")!;
     expect(neighborhoodCards.compareDocumentPosition(firstTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(firstTip.compareDocumentPosition(secondTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(within(comparison as HTMLElement).getByText(/Compare each neighborhood’s advantages/)).toBeInTheDocument();
+    expect(within(comparison as HTMLElement).getByText(/Compare walking distances to the Old City/)).toBeInTheDocument();
     expect(screen.getByTestId("stay-local-photo-grid").querySelectorAll("a")).toHaveLength(6);
     expect(screen.getByRole("img", { name: "Jaffa Gate and Jerusalem Old City walls" })).toBeInTheDocument();
     const firstCard = within(catalog).getAllByTestId("jerusalem-hotel-card")[0]!;

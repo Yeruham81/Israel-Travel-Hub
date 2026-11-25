@@ -152,7 +152,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     </AttractionHighlight>
     <AttractionHighlight title="Underwater Observatory Marine Park" image={{ src: photos.observatory, alt: "Distinctive white underwater observatory tower on a pier in Eilat" }}>
       <p>The observatory's viewing rooms let you look at the natural reef below the surface without entering the water. Additional exhibits focus on Red Sea marine life. It is an attractive alternative for non-swimmers, families and very hot afternoons.</p>
-      <p>Allow time for a genuine park visit rather than treating it as a quick photo stop. The operator recommends around three to four hours; check {sourcesLink(official.underwaterObservatory, "current park hours, ticket types and attractions")}.</p>
+      <p>Allow time to explore the park and its trails. The operator recommends around three to four hours; check {sourcesLink(official.underwaterObservatory, "current park hours, ticket types and attractions")}.</p>
       {placeLink("Underwater Observatory Marine Park, Eilat, Israel")}
     </AttractionHighlight>
     <AttractionHighlight title="Dolphin Reef" image={{ src: photos.dolphin, alt: "Dolphin swimming alongside a diver at Dolphin Reef in Eilat" }}>
@@ -162,7 +162,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     </AttractionHighlight>
     <AttractionHighlight title="North Beach, the promenade and marina" image={{ src: "/images/attractions/eilat-at-dusk.webp", alt: "Eilat marina and North Beach waterfront illuminated at dusk" }}>
       <p>The central beachfront and promenade are easy options for an unstructured morning or evening: waterfront walks, cafés, hotel-area beaches and views towards the surrounding mountains. This is the most straightforward area if you are staying in central Eilat without a car.</p>
-      <p>Not every beach has a lifeguard or identical facilities. Look for signs at the specific beach before swimming, and do not assume that every water-sports kiosk is operating year-round.</p>
+      <p>Not every beach has a lifeguard or identical facilities. Follow the signs at your chosen beach before swimming. Check seasonal opening hours for water-sports kiosks.</p>
       {placeLink("Eilat North Beach, Israel")}
     </AttractionHighlight>
     <h3 className="pt-3 font-serif text-xl font-semibold">Which Eilat beach should you choose?</h3>
@@ -182,14 +182,14 @@ export const eilatDestinationContent: AttractionDestinationContent = {
         <div className="mt-3">{placeLink(beach.query)}</div>
       </article>)}
     </div>
-    <AttractionPracticalTip>A beach with a café or deck chairs is not necessarily a supervised bathing beach. Check for an active lifeguard and follow the flags and on-site signs before swimming.</AttractionPracticalTip>
+    <AttractionPracticalTip>Look for a designated bathing beach with an operating lifeguard station; beach cafés and deck chairs are separate facilities. Check for an active lifeguard and follow the flags and on-site signs before swimming.</AttractionPracticalTip>
     <AttractionHighlight title="Snorkeling, diving, water sports and boat trips" image={{ src: photos.glassBottom, alt: "Glass-bottom sightseeing boat on the Red Sea off Eilat" }}>
       <p>Eilat offers guided snorkeling and introductory diving around its Red Sea reefs, alongside kayaking, stand-up paddling and boat cruises. Choose an activity that suits your swimming skills, age, comfort in the water and the operator's safety procedures.</p>
       <p>Visitors who prefer to stay dry can choose a sightseeing cruise or a glass-bottom boat, which offers views below the water without snorkeling. Availability and visibility depend on weather, sea conditions and the operator's programme.</p>
       <p>Keep your distance from marine life, never stand on or touch coral, and do not feed fish. Confirm the departure point, age restrictions, equipment, weather-cancellation policy and total price before booking. <Link to="/tours/eilat-red-sea/" className={inlineLink}>Explore Eilat sea activities and tours</Link>.</p>
     </AttractionHighlight>
     <AttractionHighlight title="Timna Park" image={{ src: timnaPhoto, alt: "Sandstone cliffs and sculpted formations in Timna Park north of Eilat" }}>
-      <p>Timna is a desert landscape of sandstone formations, archaeological copper-mining sites and dramatic viewpoints, a short drive north of the city. The park is extensive; many visitors combine short walks and drives between major stops rather than hiking the entire park.</p>
+      <p>Timna is a desert landscape of sandstone formations, archaeological copper-mining sites and dramatic viewpoints, a short drive north of the city. The park is extensive; many visitors combine short walks with drives between its main sites.</p>
       <p>It has its own entry fee, opening rules and trail restrictions. Check {sourcesLink(official.timna, "visitor information")} and {sourcesLink(official.timnaNavigation, "navigation guidance")} before you leave Eilat. Carry plenty of water and avoid strenuous hiking in midday heat.</p>
       {placeLink("Timna Park, Eilot, Israel")}
     </AttractionHighlight>
@@ -209,12 +209,12 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <AttractionPracticalTip>My first-visit priorities would be one reef experience, one non-water activity and an early desert outing. Do not try to fit Timna Park, Red Canyon, the observatory and a full beach afternoon into a single day.</AttractionPracticalTip>
   </div>,
   itineraryContent: <div className="mt-4 space-y-4" data-testid="eilat-suggested-itineraries">
-    <p>The best plan depends on whether you want mostly beach time or a mix of Red Sea and desert scenery. These are flexible outlines rather than fixed-hour tours.</p>
+    <p>The best plan depends on whether you want mostly beach time or a mix of Red Sea and desert scenery. Adapt the suggested days to your pace.</p>
     <div className="grid gap-4 md:grid-cols-3">
       <article className="rounded-xl border bg-card p-4">
         <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">One day: the Red Sea</h3></div>
         <p className="mt-3 text-sm leading-relaxed">Start with Coral Beach Nature Reserve <strong>or</strong> Dolphin Reef. If you choose Coral Beach, continue to the Underwater Observatory farther south, then return to the North Beach promenade for an evening walk. The sample map follows the Coral Beach option only.</p>
-        <p className="mt-2 text-xs text-muted-foreground">Choose two main paid stops rather than rushing between all three.</p>
+        <p className="mt-2 text-xs text-muted-foreground">Choose two main paid attractions for a relaxed day.</p>
         <a href={maps.marine} target="_blank" rel="noopener noreferrer" className={inlineLink}>View sample Coral Beach–Observatory–North Beach route</a>
       </article>
       <article className="rounded-xl border bg-card p-4">
@@ -254,7 +254,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <AttractionPracticalTip>Book the attraction you most care about before filling the rest of the day. If a reef activity or desert tour is weather-dependent, keep a flexible alternative such as the Underwater Observatory or a relaxed city visit.</AttractionPracticalTip>
   </div>,
   transportContent: <div className="mt-4 space-y-4" data-testid="eilat-transport">
-    <p>Eilat is long and spread along the coast. The central hotel area and promenade are walkable, but Coral Beach, Dolphin Reef, the Underwater Observatory, Timna and the Red Canyon are not all within a pleasant city walk of one another.</p>
+    <p>Eilat is long and spread along the coast. Walk around the central hotel area and promenade, and plan transport to Coral Beach, Dolphin Reef, the Underwater Observatory, Timna and the Red Canyon as needed.</p>
     <div className="grid gap-3 md:grid-cols-2">
       <article className="rounded-xl border bg-card p-4">
         <h3 className="flex items-center gap-2 font-serif text-xl font-semibold"><BusFront className="size-5 text-primary"/>Local buses and airport arrival</h3>
@@ -272,7 +272,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     </div>
   </div>,
   foodContent: <div className="mt-4 space-y-3">
-    <p>Restaurants and cafés are concentrated around the North Beach hotel district, marina and shopping areas, while some quieter beach cafés sit farther south. Prices, kosher supervision and Friday-evening opening vary by business, so check the specific venue rather than assuming one rule applies citywide.</p>
+    <p>Restaurants and cafés are concentrated around the North Beach hotel district, marina and shopping areas, while some quieter beach cafés sit farther south. Check prices, kosher supervision and Friday-evening opening hours with your chosen venue.</p>
     <p>For an introduction to Israeli food before your visit, see my <Link to="/travel-blog/what-to-eat-in-israel/" className={inlineLink}>guide to what to eat in Israel</Link>. A leisurely dinner on the waterfront makes a natural finish to a beach or boat day.</p>
   </div>,
   practicalContent: <div className="mt-4 space-y-4">
@@ -298,8 +298,8 @@ export const eilatDestinationContent: AttractionDestinationContent = {
   tourContent: <div className="mt-4 space-y-4">
     <p>Prefer a booked activity? These are three different ways to experience Eilat, selected from existing Viator and GetYourGuide listings. They are provided by independent operators, not by me. Availability, exact meeting points and whether the activity is running must be confirmed with the provider.</p>
     <EilatPartnerTours/>
-    <p className="text-xs leading-relaxed text-muted-foreground">Prices and ratings, where shown, are published provider snapshots checked November 2026, not live quotes. Confirm current availability, inclusions, cancellation terms, reviews and the total before purchasing.</p>
-    <p>For a wider choice, <Link to="/tours/eilat-red-sea/" className={inlineLink}>explore all Eilat & Red Sea tours</Link>. If your priority is transport to several attractions rather than an organised group activity, use the inquiry form below.</p>
+    <p className="text-xs leading-relaxed text-muted-foreground">Check current prices, reviews, available dates, inclusions and cancellation terms on the booking website.</p>
+    <p>For a wider choice, <Link to="/tours/eilat-red-sea/" className={inlineLink}>explore all Eilat & Red Sea tours</Link>. Contact me below to arrange private transport between attractions.</p>
   </div>,
   faqs: [
     { q: "How many days should I spend in Eilat?", a: "Two or three days allow for marine attractions, the waterfront and at least one desert excursion. A single day can cover a limited set of highlights, but not everything comfortably." },
@@ -334,19 +334,19 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     {" "}These three Wikimedia Commons photos were cropped, resized and converted to WebP; their adapted image files retain their stated Creative Commons licenses. Other location photographs are from the publisher's existing image archive.
   </p>,
   sources: [
-    { label: "INPA — Eilat Coral Beach Nature Reserve", url: official.coralReserve },
+    { label: "INPA - Eilat Coral Beach Nature Reserve", url: official.coralReserve },
     { label: "Eilat beach directory", url: official.beaches },
-    { label: "Underwater Observatory — visiting the park", url: official.underwaterObservatory },
-    { label: "Dolphin Reef — visitor information", url: official.dolphinReef },
-    { label: "Dolphin Reef — swimming and suitability rules", url: official.dolphinSwim },
-    { label: "Timna Park — know before your visit", url: official.timna },
-    { label: "Timna Park — navigation and access", url: official.timnaNavigation },
-    { label: "INPA — Eilat Mountains Nature Reserve", url: official.eilatMountains },
-    { label: "INPA — Red Canyon trail guide", url: official.redCanyon },
-    { label: "Eilat Birdwatching Park — official visitor information", url: official.birds },
-    { label: "Eilat Botanical Garden — official information", url: official.botanical },
-    { label: "Israel Airports Authority — Ramon Airport transport", url: official.airport },
-    { label: "Egged — Eilat and Ramon Airport bus routes", url: official.egged },
+    { label: "Underwater Observatory - visiting the park", url: official.underwaterObservatory },
+    { label: "Dolphin Reef - visitor information", url: official.dolphinReef },
+    { label: "Dolphin Reef - swimming and suitability rules", url: official.dolphinSwim },
+    { label: "Timna Park - know before your visit", url: official.timna },
+    { label: "Timna Park - navigation and access", url: official.timnaNavigation },
+    { label: "INPA - Eilat Mountains Nature Reserve", url: official.eilatMountains },
+    { label: "INPA - Red Canyon trail guide", url: official.redCanyon },
+    { label: "Eilat Birdwatching Park - official visitor information", url: official.birds },
+    { label: "Eilat Botanical Garden - official information", url: official.botanical },
+    { label: "Israel Airports Authority - Ramon Airport transport", url: official.airport },
+    { label: "Egged - Eilat and Ramon Airport bus routes", url: official.egged },
     { label: "National public transport journey planner", url: official.transportPlanner },
   ],
 };

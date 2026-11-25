@@ -51,7 +51,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Streets, marketplace and ritual baths">
         <p>Beyond the synagogue, the excavated town reveals shops, domestic buildings and ancient <em>mikvaot</em> (ritual baths). Together, these remains help explain how people lived and worked beside the lake.</p>
-        <p>I recommend taking your time here rather than treating Magdala as just a quick church stop.</p>
+        <p>I recommend allowing time for the archaeological site as well as the church.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="Duc In Altum and the Boat Chapel"
@@ -116,7 +116,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or with a driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">From Tiberias, drive north on Route 90 towards Migdal and follow the signs for Magdala. Use the archaeological park or visitor centre as your destination rather than a general address in Migdal.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Tiberias, drive north on Route 90 towards Migdal and follow the signs for Magdala. Set your navigation to the archaeological park or visitor centre.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">Driving directions to Magdala</a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -162,7 +162,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Guided Galilee trips can make it easier to combine Magdala with lakeside churches and other nearby stops. Check the actual itinerary before booking: not every tour includes both the archaeological park and Duc In Altum.</p>
+      <p>Guided Galilee trips can make it easier to combine Magdala with lakeside churches and other nearby stops. Choose an itinerary that includes both the archaeological park and Duc In Altum if you want to visit both.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="magdala-galilee-tours-card">
           <img src="/images/attractions/sea-of-galilee.webp" alt="Landscape of the Sea of Galilee on a northern Israel guided tour route" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

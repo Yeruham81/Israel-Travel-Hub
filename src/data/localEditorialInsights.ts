@@ -13,8 +13,8 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
   downtown: {
     heading: "Jaffa Road convenience or a quieter base?",
     choose: "A room near Zion Square suits visitors who want cafés, the light rail and central walking routes without hiring a car every day.",
-    compare: "Mamilla is a stronger comparison when Jaffa Gate is your main destination; the German Colony is worth considering when a residential evening matters more than the central shopping streets.",
-    arrival: "Jaffa Road has pedestrian stretches. When arriving with bags, use the hotel's advised vehicle-accessible street, not simply a map pin in the pedestrian mall.",
+    compare: "Choose Mamilla for access to Jaffa Gate or the German Colony for quieter residential evenings.",
+    arrival: "Jaffa Road has pedestrian stretches. When arriving with bags, ask the hotel which vehicle-accessible street to use.",
   },
   mamilla: {
     heading: "Beside Mamilla Avenue or farther down King David Street?",
@@ -24,15 +24,15 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
   },
   "old-city": {
     heading: "Choose the gate before the hotel transfer",
-    choose: "For Christian and Armenian Quarter stays, Jaffa Gate may be a useful reference; Damascus Gate serves northern approaches, while other quarters can require a different gate.",
+    choose: "Jaffa Gate serves many Christian and Armenian Quarter stays; Damascus Gate serves northern approaches. Ask about access to your particular accommodation.",
     compare: "Mamilla or the hotel district north of Damascus Gate may work better if steps, a stroller or door-to-door unloading matter more than sleeping inside the walls.",
-    arrival: "Ask your accommodation to specify the gate, permitted drop-off, remaining walk and any luggage help. The nearest gate on a map is not always the best practical access point.",
+    arrival: "Ask your accommodation to specify the gate, permitted drop-off, remaining walk and any luggage help. Allow for street access, steps and the route to your accommodation.",
   },
   "mahane-yehuda": {
     heading: "Market frontage or a Nachlaot side lane?",
     choose: "An Agripas Street or market-facing stay keeps stalls and evening venues close, but the room may hear deliveries as well as nightlife.",
     compare: "An inner Nachlaot lane usually feels more residential. Downtown offers more conventional city-hotel options and easier access to central transport corridors.",
-    arrival: "Friday market activity and Shabbat alter the area considerably. For an apartment, check the actual entrance and key collection rather than relying on the neighborhood name.",
+    arrival: "Friday market activity and Shabbat alter the area considerably. For an apartment, confirm the street entrance and key collection arrangements.",
   },
   "east-jerusalem": {
     heading: "Near Damascus Gate is a specific location",
@@ -101,12 +101,12 @@ export const destinationBaseChoices: Record<string, BaseChoice[]> = {
   deadsea: [
     { visitor: "Want to walk between a resort and nearby services", base: "Ein Bokek", reason: "The central resort strip has managed beach areas and more hotel-to-promenade choices, although the beach route still varies by property." },
     { visitor: "Planning to spend most of the stay inside a resort", base: "Southern hotel district / Neve Zohar", reason: "The resort-led setting makes meal plans and on-site facilities particularly important; outside dining is less convenient." },
-    { visitor: "Prioritizing nature and inland scenery", base: "Ein Gedi", reason: "This is not a substitute for a beachfront Ein Bokek booking. Plan separate transport if a managed bathing beach is a main goal." },
+    { visitor: "Prioritizing nature and inland scenery", base: "Ein Gedi", reason: "Ein Gedi suits a nature-focused stay. Plan separate transport if a managed bathing beach is a main goal." },
   ],
   tiberias: [
     { visitor: "Arriving without a car and visiting the town", base: "Lower town / promenade", reason: "Restaurants and some waterfront walks are closer together, though lakeside location does not guarantee a private swimming beach." },
     { visitor: "Wanting a view and less time in central streets", base: "Hillside hotels", reason: "Expect a climb on the return from the waterfront and allow for a taxi when traveling with luggage or mobility limitations." },
-    { visitor: "Building the trip around water activities", base: "A lakeside hotel with verified swimming facilities", reason: "Check the exact beach, pool or water-park access rather than assuming that every room overlooking the lake includes swimming." },
+    { visitor: "Building the trip around water activities", base: "A lakeside hotel with verified swimming facilities", reason: "Check whether your room rate includes access to a bathing beach, pool or water park." },
   ],
   haifa: [
     { visitor: "Exploring downtown restaurants and history", base: "German Colony / Lower City", reason: "A lower-city base works for the historic boulevard, Akko outings and some rail connections, without the daily climb to a Carmel hotel." },
@@ -119,7 +119,7 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   "deadsea:spa": {
     heading: "Example: two guests with different spa priorities",
     situation: "One guest wants mineral-water facilities and treatments; the other mainly wants a comfortable hotel and beach time.",
-    decision: "Compare the room-plus-spa entitlement separately for each guest. A hotel's spa branding does not mean treatments are included, and a mineral pool inside the building is different from supervised beach access.",
+    decision: "Compare the room-plus-spa entitlement separately for each guest. Compare the treatments included in your package, indoor mineral-pool facilities and access to a supervised beach separately.",
   },
   "deadsea:family": {
     heading: "Example: a toddler and an older child",
@@ -129,7 +129,7 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   "tiberias:family": {
     heading: "Example: a family dividing time between the hotel and Galilee trips",
     situation: "A water-park stay and a central promenade stay are very different when mornings are spent visiting sites around the lake.",
-    decision: "Decide how many full days will be spent at the hotel's own facilities before paying for an activity-heavy format. At Leonardo Club, check the current written meal plan rather than relying solely on the all-inclusive name.",
+    decision: "Decide how many full days will be spent at the hotel's own facilities before paying for an activity-heavy format. At Leonardo Club, check the meals and drinks listed in the current written package.",
   },
   "tiberias:luxury": {
     heading: "Example: a multigenerational celebration",
@@ -139,11 +139,11 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   "haifa:boutique": {
     heading: "Example: a couple choosing between two heritage stays",
     situation: "A preserved facade can hide different room layouts and access arrangements between older and newer wings.",
-    decision: "Compare the exact room within the building and available lift access, not only the hotel's style. Adults-only or minimum-age policies should be checked before a family reservation.",
+    decision: "Compare the room location, hotel style and available lift access. Adults-only or minimum-age policies should be checked before a family reservation.",
   },
   "haifa:family": {
     heading: "Example: a family spending half the trip at the beach",
-    situation: "A Carmel hotel with an indoor pool can be a good city base but still requires travel to and from the actual shore.",
+    situation: "A Carmel hotel with an indoor pool offers a hilltop city base; allow travel time to and from the beach.",
     decision: "Compare total travel effort as well as pool facilities: a seafront hotel may be easier for beach days, while Carmel works better when the family plans viewpoints and city outings.",
   },
 };

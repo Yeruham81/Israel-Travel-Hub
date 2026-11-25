@@ -109,7 +109,7 @@ function MuseumMap() {
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label htmlFor="haifa-museum-map-select" className="min-w-0 flex-1 text-sm font-semibold">Focus on a museum
           <select id="haifa-museum-map-select" value={selectedId} onChange={e=>focus(e.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
-            <option value="all">All ten museums — Haifa overview</option>
+            <option value="all">All ten museums - Haifa overview</option>
             {museumAreas.map(area=><optgroup key={area.id} label={area.name}>{museums.filter(m=>m.area===area.id).map(m=><option key={m.id} value={m.id}>{museums.findIndex(x=>x.id===m.id)+1}. {m.name}{m.closureNote?" (closed)":""}</option>)}</optgroup>)}
           </select>
         </label>
@@ -130,7 +130,7 @@ function MuseumMap() {
 const faqs=[
  {q:"Which Haifa museums would you prioritise on a first visit?",a:"For families, MadaTech is often my first choice. For art, start with Haifa Museum of Art or Tikotin. For archaeology and history, consider Hecht Museum or the National Maritime Museum. You do not need to cover them all."},
  {q:"Are the two maritime museums in Haifa the same place?",a:"No. The National Maritime Museum focuses on maritime archaeology and the history of seafaring. The separate Clandestine Immigration and Naval Museum explores immigration under the British Mandate and Israel's navy. Both are on Allenby Road, but tickets and visiting arrangements differ."},
- {q:"Is there a ticket covering all of Haifa's museums?",a:"Haifa Museums advertises a seven-day combined ticket for its municipal museums. MadaTech, Hecht, the Railway Museum and the Ministry of Defense naval museum are different operators and are not automatically included. Check eligibility and price on the official Haifa Museums website."},
+ {q:"Is there a ticket covering all of Haifa's museums?",a:"Haifa Museums advertises a seven-day combined ticket for its municipal museums. MadaTech, Hecht, the Railway Museum and the Ministry of Defense naval museum have separate operators and admission arrangements. Check eligibility and price on the official Haifa Museums website."},
  {q:"Which museums in Haifa are best for children?",a:"MadaTech is the clearest choice for hands-on science. The Railway Museum and vessels at the naval museum also appeal to children, but age limits, accessibility and admission rules differ. Check facilities and schedules before going."},
  {q:"Can I visit the museums without a car?",a:"Yes, though the city's elevation matters. Pair nearby downtown or Allenby Road museums on foot where practical; reach Hadar, the Carmel Centre and University of Haifa by bus, taxi or another local connection. Allow time for hill climbs."},
  {q:"Are Haifa museums open on Saturdays and holidays?",a:"Several Haifa Museums venues operate on Saturdays, but the Railway Museum and naval museum normally do not. Hermann Struck is also closed Saturday. Jewish holidays, special events and exhibition changes can alter normal hours."},
@@ -160,7 +160,7 @@ export function HaifaMuseumsGuide() {
     </section>
     <OnThisPage sections={jump}/>
     <section id="top-picks" aria-labelledby="top-picks-heading" className="mt-10 scroll-mt-24">
-      <SectionHeading id="top-picks" title="My top museum picks" intro="Six different experiences worth considering first. Pick the subject that interests you most."/>
+      <SectionHeading id="top-picks" title="My top museum picks" intro="Six museums for a range of interests. Pick the subject that interests you most."/>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {featured.map(m=><a href={"#museum-"+m.id} key={m.id} className="editorial-card-link group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
           <span className="text-[11px] font-bold uppercase tracking-wide text-primary">{m.theme}</span>
@@ -193,7 +193,7 @@ export function HaifaMuseumsGuide() {
         <h3 className="text-2xl font-semibold">{area.name}</h3>
         <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
         <div className="mt-5 grid gap-5">{museums.filter(m=>m.area===area.id).map(m=><MuseumCard key={m.id} museum={m}/>)}</div>
-        {index===2&&<div className="mt-5"><PlanningTip>The Mané-Katz Museum is closed for renovation, but works from its collection may be shown at other Haifa Museums venues. Check the current exhibitions rather than making a trip to a closed door.</PlanningTip></div>}
+        {index===2&&<div className="mt-5"><PlanningTip>The Mané-Katz Museum is closed for renovation, but works from its collection may be shown at other Haifa Museums venues. Check the current exhibitions and opening hours before setting out.</PlanningTip></div>}
         {index===3&&<div className="mt-5"><PlanningTip>The two Allenby Road maritime museums are separate. I recommend checking each institution's last entry time and ticket rules before planning a combined visit.</PlanningTip></div>}
       </section>)}
       <div className="mt-8 rounded-xl border bg-card p-4">
@@ -220,7 +220,7 @@ export function HaifaMuseumsGuide() {
       </div>
     </section>
     <section id="museum-routes" aria-labelledby="museum-routes-heading" className="mt-12 scroll-mt-24">
-      <SectionHeading id="museum-routes" title="Plan a museum day in Haifa" intro="Choose a realistic local cluster instead of spending the day repeatedly crossing the Carmel slopes."/>
+      <SectionHeading id="museum-routes" title="Plan a museum day in Haifa" intro="Group nearby museums into one outing to reduce travel across the Carmel slopes."/>
       <div className="grid gap-4 md:grid-cols-3">{[
         {title:"A downtown art & heritage walk",time:"Half a day",steps:["Haifa Museum of Art in Wadi Nisnas","Haifa City Museum in the German Colony","Walk along Ben Gurion Avenue"],note:"Check the City Museum exhibition calendar before going."},
         {title:"Science & Hadar",time:"Half to full day",steps:["MadaTech: allow about three hours","Optional Hermann Struck Museum if open","Allow time for the hillside streets"],note:"The smaller museum is a separate stop, not an attraction inside MadaTech."},
@@ -236,7 +236,7 @@ export function HaifaMuseumsGuide() {
       <SectionHeading id="practical" title="My practical museum-planning tips"/>
       <div className="grid gap-4 md:grid-cols-2">
         <div className="rounded-xl border p-5"><h3 className="font-bold">Tickets & combinations</h3><p className="mt-2 text-sm leading-relaxed">The municipal <OfficialLink href="https://www.hms.org.il/eng/Bundle_ticket">Haifa Museums combined ticket</OfficialLink> applies to participating museums, not every institution in the city. MadaTech, the naval museum, Israel Railways and the university museum have their own arrangements.</p></div>
-        <div className="rounded-xl border p-5"><h3 className="font-bold">Haifa's hills & transport</h3><p className="mt-2 text-sm leading-relaxed">Downtown, Hadar, the Carmel Centre and the university are at different elevations. Check realistic journeys with public transport, taxi or the Carmelit where suitable, rather than relying on walking distance alone.</p></div>
+        <div className="rounded-xl border p-5"><h3 className="font-bold">Haifa's hills & transport</h3><p className="mt-2 text-sm leading-relaxed">Downtown, Hadar, the Carmel Centre and the university are at different elevations. Use public transport, taxis or the Carmelit to travel between districts at different elevations.</p></div>
         <div className="rounded-xl border p-5"><h3 className="font-bold">Weekends & Jewish holidays</h3><p className="mt-2 text-sm leading-relaxed">Some municipal museums open on Saturdays, while the Railway Museum and naval museum typically do not. <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Jewish holidays and holiday eves</Link> can change opening times.</p></div>
         <div className="rounded-xl border p-5"><h3 className="font-bold">Accessibility & cruise visitors</h3><p className="mt-2 text-sm leading-relaxed">Historic homes and vessels may involve stairs or restricted access. Cruise visitors should leave generous time to return to Haifa Port. Check the actual museum entrance and last admission.</p></div>
       </div>
@@ -268,7 +268,7 @@ export function HaifaMuseumsGuide() {
       <div className="mt-4 border-t pt-3 text-xs leading-relaxed text-muted-foreground">
         <p>Photo credits (cropped, resized and converted to WebP):</p>
         <ul className="mt-2 space-y-1">{haifaMuseumPhotoCredits.map(photo=><li key={photo.id}>
-          <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{photo.label}</a> — {photo.author} · <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{photo.license}</a>
+          <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{photo.label}</a> - {photo.author} · <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{photo.license}</a>
         </li>)}</ul>
       </div>
     </SourcesDisclosure>

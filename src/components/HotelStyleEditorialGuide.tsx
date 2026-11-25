@@ -124,7 +124,7 @@ const deadSeaHotelNotes: Record<string, HotelEditorNote> = {
 
 const bookingTips = [
   { title: "Check the real beach route", text: "A beachfront label may mean direct access, a short walk, a pathway or a hotel shuttle." },
-  { title: "Separate hotel and spa age rules", text: "Minimum guest ages and spa or mineral-pool age restrictions are not always the same." },
+  { title: "Separate hotel and spa age rules", text: "Hotels may apply separate minimum ages to accommodation, spa access and mineral pools." },
   { title: "Compare pool types", text: "Freshwater, Dead Sea mineral-water and sulphur pools are different facilities, with different access rules." },
   { title: "Read the meal plan", text: "Confirm breakfast, half-board or all-inclusive details, including drinks and snacks where relevant." },
   { title: "Check family facilities", text: "Ask about the dates, hours and age limits for children's clubs, slides and outdoor pools." },
@@ -164,7 +164,7 @@ const groupCaptions: Record<string, { title: string; eyebrow: string; advice: st
 /** Practical prompts that occupy the third column where a category has two hotels. */
 const groupPlanningTips: Record<string, { title: string; points: readonly [string, string] }> = {
   spa: {
-    title: "Make the most of your spa break",
+    title: "Planning your Dead Sea spa break",
     points: [
       "Reserve treatments ahead of your visit, especially for weekends and holiday periods.",
       "Check spa opening times and which mineral pools are included in your room rate.",
@@ -240,7 +240,7 @@ function HotelCard({ id, pageId }: { id: string; pageId: string }) {
       <p className="mt-3 text-sm leading-relaxed">{info.summary}</p>
       <p className="mt-3 text-sm leading-relaxed"><strong>Best for:</strong> {info.bestFor}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Beach:</strong> {info.beach}</p>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Keep in mind:</strong> {info.consider}</p>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Before booking:</strong> {info.consider}</p>
       {hotelFacilityNotices[id] && <p className="mt-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50/80 p-3 text-xs leading-relaxed text-foreground dark:border-amber-900/60 dark:bg-amber-950/20" data-testid="deadsea-hotel-facility-notice">
         <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" aria-hidden />
         <span>{hotelFacilityNotices[id]}</span>

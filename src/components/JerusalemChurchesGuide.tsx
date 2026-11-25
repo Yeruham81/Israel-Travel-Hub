@@ -48,11 +48,11 @@ const tours = [
 ];
 const faqs = [
   {q:"Which churches are essential on a first visit to Jerusalem?",a:"For most first visits, I would prioritise the Church of the Holy Sepulchre and selected stops along the Via Dolorosa. Add Gethsemane on the Mount of Olives or Dormition Abbey on Mount Zion if your time and interests allow."},
-  {q:"Can I visit all the major churches in one day?",a:"Not comfortably. The sites lie in four distinct areas, and opening windows, religious services, queues and steep paths affect visits. Choose one or two nearby clusters rather than trying to see every church."},
+  {q:"Can I visit all the major churches in one day?",a:"Not comfortably. The sites lie in four distinct areas, and opening windows, religious services, queues and steep paths affect visits. Focus on one or two nearby clusters of churches."},
   {q:"Are Jerusalem churches free to enter?",a:"Many offer free general entry, but some compounds, archaeological areas and towers charge separately. St Anne, Pater Noster, the Chapel of the Ascension and the Redeemer tower have published admission charges."},
   {q:"Is the Garden Tomb the same place as the Church of the Holy Sepulchre?",a:"No. They are separate places. The Holy Sepulchre is the traditional site of the crucifixion and resurrection for numerous historic churches; the Garden Tomb is a different site popular with some Protestant visitors."},
   {q:"Is the Mount of Olives walk accessible to everyone?",a:"No. The slope is steep, paths can be uneven and some compounds have stairs. A drive to an upper viewpoint can avoid the uphill climb, but the descent may still be difficult. Confirm accessibility for specific sites."},
-  {q:"Can tourists attend a religious service or arrange group prayer?",a:"Visitor opening hours do not automatically authorise worship participation, private ceremonies or group services. Contact the church or responsible community before arranging group prayer."},
+  {q:"Can tourists attend a religious service or arrange group prayer?",a:"Visitor opening hours apply to sightseeing. Contact the church or responsible community about worship participation, private ceremonies or group prayer."},
   {q:"Do holidays affect church opening times?",a:"Yes. Christian feast days, Holy Week, worship services, Jewish holidays and special events may change access. Check the relevant church and Israel's events calendar before travelling."},
 ];
 
@@ -102,15 +102,23 @@ const mapUrl="/maps/jerusalem-churches.html?points="+encodeURIComponent(JSON.str
 function ChurchMap(){
   const [selected,setSelected]=useState("all");
   const frame=useRef<HTMLIFrameElement>(null);
+  const selectedRef=useRef("all");
   const focused=jerusalemChurches.find(c=>c.id===selected);
   const focus=(id:string)=>{
+    selectedRef.current=id;
     setSelected(id);
     frame.current?.contentWindow?.postMessage({type:"jerusalem-church-map-focus",id},window.location.origin);
   };
   useEffect(()=>{
     const receive=(event:MessageEvent)=>{
       if(event.origin!==window.location.origin||event.source!==frame.current?.contentWindow)return;
-      if(event.data?.type==="jerusalem-church-map-selected"&&jerusalemChurches.some(c=>c.id===event.data.id))setSelected(event.data.id);
+      if(event.data?.type==="jerusalem-church-map-ready"){
+        frame.current?.contentWindow?.postMessage({type:"jerusalem-church-map-focus",id:selectedRef.current},window.location.origin);
+      }
+      if(event.data?.type==="jerusalem-church-map-selected"&&jerusalemChurches.some(c=>c.id===event.data.id)){
+        selectedRef.current=event.data.id;
+        setSelected(event.data.id);
+      }
     };
     window.addEventListener("message",receive);
     return ()=>window.removeEventListener("message",receive);
@@ -122,7 +130,7 @@ function ChurchMap(){
         <div aria-label="Church areas and map colours" className="space-y-2 text-sm">{churchAreas.map(a=><div key={a.id} className="flex items-center gap-2"><span className="h-3.5 w-3.5 shrink-0 rounded-sm" style={{backgroundColor:a.color}} aria-hidden="true"/>{a.title}</div>)}</div>
         <div className="space-y-2"><label htmlFor="church-map-focus" className="block text-sm font-semibold">Find a church</label><select id="church-map-focus" className="min-h-11 w-full rounded-lg border bg-background p-2 text-sm" value={selected} onChange={e=>focus(e.target.value)}><option value="all">All churches</option>{churchAreas.map(a=><optgroup key={a.id} label={a.title}>{jerusalemChurches.filter(c=>c.area===a.id).map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</optgroup>)}</select></div>
       </div>
-      <ConsentIframe ref={frame} title="Interactive map of 20 churches and Christian heritage sites in Jerusalem" src={mapUrl} width={900} height={445} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[390px] w-full border-0 sm:h-[445px]" onLoad={()=>{if(selected!=="all")frame.current?.contentWindow?.postMessage({type:"jerusalem-church-map-focus",id:selected},window.location.origin);}}/>
+      <ConsentIframe ref={frame} title="Interactive map of 20 churches and Christian heritage sites in Jerusalem" src={mapUrl} width={900} height={445} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[390px] w-full border-0 sm:h-[445px]" onLoad={()=>{frame.current?.contentWindow?.postMessage({type:"jerusalem-church-map-focus",id:selectedRef.current},window.location.origin);}}/>
       <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 text-xs text-muted-foreground"><span>Map data © OpenStreetMap contributors. Locations are for orientation.</span>{focused&&<OutLink href={`https://www.google.com/maps/dir/?api=1&destination=${focused.lat}%2C${focused.lon}`}>Directions to selected church</OutLink>}</div>
     </div>
   </section>;
@@ -200,7 +208,7 @@ export function JerusalemChurchesGuide(){
         />)}
       </div>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Check current prices, availability, recent reviews, meeting points and inclusions with the booking provider before paying. The Bethlehem option is a separate excursion outside Jerusalem.</p>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">For more guided options, browse my <Link to="/tours/jerusalem/" className="font-semibold text-primary underline">Jerusalem tours</Link>. My <Link to="/private-driver-in-israel/" className="font-semibold text-primary underline">private driver service</Link> is transport, not automatically a licensed guiding service.</p>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">For more guided options, browse my <Link to="/tours/jerusalem/" className="font-semibold text-primary underline">Jerusalem tours</Link>. My <Link to="/private-driver-in-israel/" className="font-semibold text-primary underline">private driver service</Link> covers transportation between churches and other sites. Licensed guiding should be arranged separately.</p>
     </section>
     <FaqList faqs={faqs}/>
     <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
@@ -211,11 +219,11 @@ export function JerusalemChurchesGuide(){
     <SourcesDisclosure>
       <p className="mb-3 text-sm leading-relaxed">Visiting hours and admission information: Christian Information Center shrine listing updated 15 September 2026, supplemented by church operators. These times are published guidance, not real-time opening guarantees.</p>
       <ul className="space-y-2 text-sm">
-        <li><OutLink href={churchesSourceUrl}>Christian Information Center — church hours and entrance information</OutLink></li>
-        <li><OutLink href="https://www.dormitio.net/">Dormition Abbey — official website</OutLink></li>
-        <li><OutLink href="https://www.stpeter-gallicantu.org/Practical-Information.html?lang=en">St Peter in Gallicantu — practical information</OutLink></li>
-        <li><OutLink href="https://www.custodia.org/en/">Custody of the Holy Land — Franciscan sites</OutLink></li>
-        <li><OutLink href="https://www.seetheholyland.net/">See the Holy Land — historical context</OutLink></li>
+        <li><OutLink href={churchesSourceUrl}>Christian Information Center - church hours and entrance information</OutLink></li>
+        <li><OutLink href="https://www.dormitio.net/">Dormition Abbey - official website</OutLink></li>
+        <li><OutLink href="https://www.stpeter-gallicantu.org/Practical-Information.html?lang=en">St Peter in Gallicantu - practical information</OutLink></li>
+        <li><OutLink href="https://www.custodia.org/en/">Custody of the Holy Land - Franciscan sites</OutLink></li>
+        <li><OutLink href="https://www.seetheholyland.net/">See the Holy Land - historical context</OutLink></li>
       </ul>
     </SourcesDisclosure>
     <PhotoCreditsDisclosure entries={jerusalemChurches.filter(church=>church.photo && (church.photoCredit || church.photoSourceUrl || church.photoLicenseUrl)).map(church=>({

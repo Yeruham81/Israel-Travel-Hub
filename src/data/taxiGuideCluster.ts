@@ -54,7 +54,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "recognize", title: "How to Recognize a Licensed Taxi in Israel",
         paragraphs: [
           "Licensed taxis in Israel carry a roof sign marked monit (מונית) and taxi identification details. Most are white; verify the licence information inside the vehicle and keep the taxi number if you need help after the journey.",
-          "If you have booked through an app, match the license plate and driver information shown in your booking. At an airport or major transport hub, follow the official taxi signage instead of accepting an unsolicited approach inside a terminal.",
+          "If you have booked through an app, match the license plate and driver information shown in your booking. At an airport or major transport hub, follow the official taxi signage and decline unsolicited ride offers inside the terminal.",
           "For journeys involving the West Bank, confirm in advance that the driver and vehicle are allowed to complete your route. Entry and vehicle restrictions vary by area.",
         ],
         sourceIds: ["taxi-passenger-rights"],
@@ -88,10 +88,10 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "Gett and Yango let you book licensed taxis in supported areas, depending on driver availability. You can use the official Gett and Yango Israel rider websites linked below to learn about the services or get their apps. Set up your payment method, check the pickup location and have a backup option if no driver accepts your request.",
           "Uber passenger rides are not currently available in Israel. Gett and Yango are local taxi-booking apps; compare their coverage, pickup details and payment options for your city.",
         ],
-        externalLinks: [{ label: "Gett Israel — official website and app", href: "https://www.gett.com/il/" }, { label: "Yango Israel — official rider information", href: "https://appli.taxi/rider/" }],
+        externalLinks: [{ label: "Gett Israel - official website and app", href: "https://www.gett.com/il/" }, { label: "Yango Israel - official rider information", href: "https://appli.taxi/rider/" }],
         highlightedLinks: [
-          { label: "Gett Israel — official app and service information", href: "https://www.gett.com/il/", context: "Check how to set up the app and request a licensed taxi before your trip." },
-          { label: "Yango Israel — rider information", href: "https://appli.taxi/rider/", context: "Review service details, payments and availability for your pickup location." },
+          { label: "Gett Israel - official app and service information", href: "https://www.gett.com/il/", context: "Check how to set up the app and request a licensed taxi before your trip." },
+          { label: "Yango Israel - rider information", href: "https://appli.taxi/rider/", context: "Review service details, payments and availability for your pickup location." },
         ],
         sourceIds: ["guide-gett-app", "guide-yango-israel"],
       },
@@ -154,8 +154,8 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "intercity", title: "Long-Distance Taxis and Remote Destinations",
         photo: migrationPhotos["jerusalem-to-the-dead-sea"],
         paragraphs: [
-          "A taxi can take you directly to a hotel or attraction, but a train or bus may be much cheaper when service is available. Compare the whole door-to-door route, not only a railway-station journey; the getting around Israel guide compares the options.",
-          "The Dead Sea and Ein Bokek, Mitzpe Ramon, the Golan Heights, desert nature reserves and the crossings to Jordan and Egypt may have limited taxi availability. For remote destinations, arrange your return journey in advance rather than relying on finding another taxi.",
+          "A taxi can take you directly to a hotel or attraction, but a train or bus may be much cheaper when service is available. Compare the door-to-door journey; the getting around Israel guide explains your transport options.",
+          "The Dead Sea and Ein Bokek, Mitzpe Ramon, the Golan Heights, desert nature reserves and the crossings to Jordan and Egypt may have limited taxi availability. Arrange your return taxi in advance when visiting remote destinations.",
           "Getting from Jerusalem to Bethlehem may require a change of vehicle near Checkpoint 300 (Rachel Crossing): if the crossing is open for your journey, you may need to leave your Israeli taxi, complete the pedestrian crossing with the required travel documents and take a local Palestinian taxi on the other side. Israeli-plated taxis generally cannot enter Palestinian Authority Area A without authorization. Check the current security situation, opening arrangements and your eligibility to cross before setting out; see the Jerusalem to Bethlehem guide.",
           "If you are traveling to the Dead Sea, consider reserving both directions or arranging a driver for several stops. The Jerusalem to the Dead Sea guide explains practical choices.",
         ],
@@ -175,8 +175,8 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "If you're overcharged or have a problem with the driver, you can file a complaint with the Ministry of Transport using the official link below. Keep the receipt, vehicle registration or license number, date, route, driver or owner details and any booking messages. The taxi fares guide explains lawful meter charges and extras.",
         ],
         inlineLinks: [{ text: "taxi fares guide", to: travelGuidePaths.taxiFares }],
-        externalLinks: [{ label: "File a taxi-service complaint — Ministry of Transport", href: "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation" }],
-        highlightedLinks: [{ label: "File a taxi complaint — Ministry of Transport", href: "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation", context: "Use the official complaint service if you have a fare, refusal-of-service or driver-conduct issue. Keep your receipt and vehicle details." }],
+        externalLinks: [{ label: "File a taxi-service complaint - Ministry of Transport", href: "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation" }],
+        highlightedLinks: [{ label: "File a taxi complaint - Ministry of Transport", href: "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation", context: "Use the official complaint service if you have a fare, refusal-of-service or driver-conduct issue. Keep your receipt and vehicle details." }],
         sourceIds: ["taxi-passenger-rights", "taxi-complaints"],
       },
     ],
@@ -268,7 +268,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "Permitted tolls and passenger-requested waiting can add to the total. Traffic delays are reflected in the meter's time charge. Luggage and the number of passengers within the vehicle's licensed capacity carry no general extra charge.",
         ],
         tables: [{
-          caption: "Common permitted surcharges — VAT included where applicable",
+          caption: "Common permitted surcharges (VAT included where applicable)",
           headers: ["Surcharge or fee", "Amount or rule"],
           rows: [
             ["Taxi ordered to pick you up", "₪5.78, if the regulated dispatch surcharge applies"],
@@ -338,7 +338,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     sourceIds: ["taxi-fares-2026", "taxi-tariff-hours", "taxi-passenger-rights", "taxi-complaints", "guide-gett"],
     related: ["taxis", "airportTaxis", "uber", "sherut", "shabbat", "arrival"],
     services: [
-      { label: "Compare pre-booked airport transfers", to: "/airport-transfers/", note: "Choose a planned airport pickup with a confirmed provider price and meeting point instead of an on-arrival metered taxi." },
+      { label: "Compare pre-booked airport transfers", to: "/airport-transfers/", note: "Arrange a pickup in advance with a confirmed provider price and meeting point." },
       { label: "Request a private driver quote", to: "/private-driver-in-israel/", note: "Arrange a longer intercity journey, multi-stop route or group vehicle to suit your itinerary." },
       { label: "Compare car rentals in Israel", to: "/car-rental/", note: "For a multi-day itinerary with stops beyond the main cities, compare rental options and choose a pickup location that suits your route." },
       { label: "Compare trains, buses and taxis around Israel", to: travelGuidePaths.israel, note: "Find less expensive public-transport options and decide when a taxi is worth the extra cost." },
@@ -373,7 +373,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "3. Join the authorized queue at your arrival terminal and show the code when your turn comes. The code identifies your ride; taxis are assigned in the order passengers reach the queue.",
         ],
         highlightedLinks: [
-          { label: "Gett — official airport taxi instructions", href: "https://www.gett.com/il/airport-en/", context: "See the three ordering steps, kiosk option and official pickup points." },
+          { label: "Gett - official airport taxi instructions", href: "https://www.gett.com/il/airport-en/", context: "See the three ordering steps, kiosk option and official pickup points." },
         ],
         sourceIds: ["guide-gett"],
       },
@@ -382,7 +382,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         photo: terminalHallPhoto,
         paragraphs: [
           "After passport control, collecting your bags and passing through customs, follow the signs to the taxi queue on the ground floor at Exit 03. Have your ride code ready for the dispatcher. My Ben Gurion arrival guide covers the earlier arrival steps.",
-          "The pickup at Level 2, Exit 23 is for Gett rides scheduled in advance, so use the ground-floor queue when you want an immediate taxi. Choose the official taxi line rather than accepting unsolicited rides inside the terminal.",
+          "The pickup at Level 2, Exit 23 is for Gett rides scheduled in advance, so use the ground-floor queue when you want an immediate taxi. Choose the official taxi line and decline unsolicited rides inside the terminal.",
         ],
         inlineLinks: [{ text: "Ben Gurion arrival guide", to: travelGuidePaths.arrival }],
         sourceIds: ["guide-gett", "guide-iaa"],
@@ -415,7 +415,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         inlineLinks: [{ text: "taxi fares in Israel guide", to: travelGuidePaths.taxiFares }],
         tables: [airportTaxiEstimateTable],
         highlightedLinks: [
-          { label: "Israel Ministry of Transport — official taxi tariff", href: "https://www.gov.il/BlobFolder/policy/taxi-rate-2026/he/taxi-rate-26.pdf", context: "Official fare order and regulated charging rules effective from April 2026." },
+          { label: "Israel Ministry of Transport - official taxi tariff", href: "https://www.gov.il/BlobFolder/policy/taxi-rate-2026/he/taxi-rate-26.pdf", context: "Official fare order and regulated charging rules effective from April 2026." },
         ],
         sourceIds: ["guide-gett", "taxi-fares-2026"],
       },
@@ -436,7 +436,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "If a child restraint is required, request the correct seat for your child's age and size before your journey. Airline or airport assistance inside the terminal is arranged separately from the taxi ride.",
         ],
         highlightedLinks: [
-          { label: "Accessible taxis at Terminal 3 — Access Israel", href: "https://aisrael.org/wp-content/uploads/2026/02/Neg.-Terminal-A5-12_25-Eng-1.pdf", context: "English accessibility guide explaining how to request a taxi equipped with a wheelchair ramp." },
+          { label: "Accessible taxis at Terminal 3 - Access Israel", href: "https://aisrael.org/wp-content/uploads/2026/02/Neg.-Terminal-A5-12_25-Eng-1.pdf", context: "English accessibility guide explaining how to request a taxi equipped with a wheelchair ramp." },
         ],
         sourceIds: ["guide-gett", "guide-iaa", "guide-accessible-airport"],
       },
@@ -457,7 +457,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "versus-transfer", title: "Official airport taxi or pre-booked private transfer?",
         paragraphs: [
           "For an ordinary arrival with manageable luggage, an authorized metered taxi is a practical choice. I recommend considering a pre-booked private transfer for a larger group, a particular vehicle, several suitcases or a long journey where you prefer the pickup and price arrangements agreed ahead of time.",
-          "Private transfers are booked with their own operator and have a confirmed meeting place, vehicle class and waiting terms. Use the meeting instructions on that booking rather than the Gett taxi queue. You can compare my private airport transfer service and request a quote. For taxi apps elsewhere in Israel, my Uber in Israel guide explains Gett, Yango and current ride-hailing options.",
+          "Private transfers are booked with their own operator and have a confirmed meeting place, vehicle class and waiting terms. Follow the meeting instructions in your booking confirmation. You can compare my private airport transfer service and request a quote. For taxi apps elsewhere in Israel, my Uber in Israel guide explains Gett, Yango and current ride-hailing options.",
         ],
         tables: [{
           caption: "Compare your airport pickup options",
@@ -489,7 +489,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         inlineLinks: [{ text: "arrival guide", to: travelGuidePaths.arrival }],
         highlightedLinks: [
           { label: "Gett airport taxi support", href: "https://www.gett.com/il/airport-en/", context: "Find Gett chat support and the kiosk help details for your ride." },
-          { label: "File a taxi complaint — Ministry of Transport", href: "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation", context: "Official complaint process for licensed taxi journeys." },
+          { label: "File a taxi complaint - Ministry of Transport", href: "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation", context: "Official complaint process for licensed taxi journeys." },
         ],
         sourceIds: ["guide-gett", "taxi-complaints"],
       },

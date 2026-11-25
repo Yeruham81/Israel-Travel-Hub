@@ -29,7 +29,7 @@ export const monthFits: MonthFit[] = [
   {month:"September",season:"autumn",city:"variable",swimming:"favourable",north:"variable",deadSea:"challenging",desert:"challenging",insight:"Often still feels like summer; Jewish holiday dates shift by year."},
   {month:"October",season:"autumn",city:"favourable",swimming:"variable",north:"favourable",deadSea:"variable",desert:"variable",insight:"Mixed itineraries become more appealing, but late heat and early storms are possible."},
   {month:"November",season:"autumn",city:"variable",swimming:"challenging",north:"variable",deadSea:"favourable",desert:"favourable",insight:"Plan for shorter days and returning rain; desert travel needs forecast checks."},
-  {month:"December",season:"winter",city:"variable",swimming:"challenging",north:"variable",deadSea:"favourable",desert:"favourable",insight:"City museums and warmer southern days can work well; check rain and road conditions."}
+  {month:"December",season:"winter",city:"variable",swimming:"challenging",north:"variable",deadSea:"favourable",desert:"favourable",insight:"Explore city museums and warmer southern destinations; check rain and road conditions."}
 ];
 
 export const suitabilityColumns = [
@@ -66,14 +66,14 @@ export const regionalRecommendations: RegionalRecommendation[] = [
 export const seasonDetails = [
   {id:"spring",label:"Spring",months:"March–May",title:"Spring: heritage walks, flowers and the green north",summary:"My first choice for combining Jerusalem, northern scenery and open-air archaeology.",paragraphs:[
     "March and April are often rewarding for mixed itineraries: city walks, Galilee viewpoints and archaeological sites can fit in the same trip. The landscape may still be green after winter rain. By May, daytime heat can make exposed sites less comfortable.",
-    "I would build a spring trip around two or three regions instead of racing across the whole country. Passover and Easter dates can change accommodation demand, religious-site visits and operating hours."
+    "I would build a spring trip around two or three regions, with time to explore each one. Passover and Easter dates can change accommodation demand, religious-site visits and operating hours."
   ],tip:"On a spring sightseeing day, pack a light layer and rain option as well as sun protection; check the forecast for both your morning and afternoon stops.",links:[{label:"Jerusalem walking ideas",to:"/travel-blog/jerusalem-travel-guide/"},{label:"Galilee attractions",to:"/attractions/sea-of-galilee/"}]},
   {id:"summer",label:"Summer",months:"June–August",title:"Summer: the Mediterranean coast and early starts",summary:"Best suited to a beach-led stay with shaded urban stops and air-conditioned breaks.",paragraphs:[
     "For summer trips, I normally put the Mediterranean coast first. Tel Aviv's beaches and promenade are attractive options, but the coast can be humid and inland or desert sites may be much hotter.",
     "If you include historic sights or outdoor activities, start early, shorten exposed visits and plan an indoor alternative for the middle of the day. Children’s school holidays can raise local demand without guaranteeing any particular hotel price."
   ],tip:"For swimming, use a designated beach during lifeguard hours, follow the flags and check the sea forecast. Avoid treating midday desert hiking as a normal summer sightseeing option.",links:[{label:"Tel Aviv beaches",to:"/travel-blog/beaches-in-tel-aviv/"},{label:"Tel Aviv museums",to:"/travel-blog/museums-in-tel-aviv/"}]},
   {id:"autumn",label:"Autumn",months:"September–November",title:"Autumn: a gradual shift back to sightseeing",summary:"October and November often suit varied touring better than early September.",paragraphs:[
-    "September can still feel like high summer, so I would not automatically treat every autumn date as mild. Later in the season, city walks, the Galilee and southern sightseeing often become easier to combine.",
+    "September can still feel like high summer, with milder weather generally arriving later in autumn. Later in the season, city walks, the Galilee and southern sightseeing often become easier to combine.",
     "Rosh Hashanah, Yom Kippur and Sukkot move against the Gregorian calendar and can significantly affect public transport, opening hours and demand. Rain returns unevenly as autumn progresses."
   ],tip:"Before booking an autumn journey, check the exact holiday calendar for your year and your hotel’s opening and cancellation terms.",links:[{label:"Israeli holidays guide",to:"/travel-blog/calendar-of-events/"},{label:"Discover Masada",to:"/attractions/masada/"}]},
   {id:"winter",label:"Winter",months:"December–February",title:"Winter: museums, cities and the southern landscape",summary:"A flexible winter visit can combine culture with carefully chosen southern excursions.",paragraphs:[
@@ -110,7 +110,7 @@ export const bestTimeGuide: TravelGuide = {
   checklist:[
     "Choose the regions and experiences before the month",
     "Compare holiday dates for the specific travel year",
-    "Check each day's local forecast, not only the coastal forecast",
+    "Check the local forecast for each day's destinations",
     "Plan indoor alternatives for heat or rain",
     "Check desert flood and park-closure warnings",
     "Compare complete trip costs, arrival day and Shabbat transport"

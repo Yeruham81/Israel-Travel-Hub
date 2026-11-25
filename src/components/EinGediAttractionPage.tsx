@@ -50,12 +50,12 @@ export const einGediDestinationContent: AttractionDestinationContent = {
   glanceNote: <><strong>Trail update (November 2026):</strong> Following the October floods, Nahal David has a shortened waterfall walk; Nahal Arugot and the upper paths have different conditions and difficulty levels. <a href={official.overview} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the latest site-by-site status</a> and reserve each entrance you plan to use.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
-      <AttractionHighlight title="Nahal David — the short waterfall approach" image={{ src: oasisPhoto, alt: "Freshwater and lush greenery in the Nahal David area of Ein Gedi oasis" }}>
+      <AttractionHighlight title="Nahal David - the short waterfall approach" image={{ src: oasisPhoto, alt: "Freshwater and lush greenery in the Nahal David area of Ein Gedi oasis" }}>
         <p>For a short nature visit, I would start at Nahal David. After the October 2026 floods, the park authority describes a <strong>walk of around ten minutes to the first waterfall</strong>. The pool below it currently has no water because of flood debris; the former longer waterfall circuit should not be assumed open.</p>
         <p>There are accessibility features on the approach, but the section available on your visit may be shorter than the usual paved route. <a href={official.david} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the official Nahal David route update</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight
-        title="Nahal Arugot — the wilder canyon"
+        title="Nahal Arugot - the wilder canyon"
         image={{ src: rockGorgePhoto, alt: "Rocky water-carved gorge within Ein Gedi Nature Reserve" }}
       >
         <p>South of Nahal David, Nahal Arugot offers a more demanding canyon hike. The route towards the Hidden Waterfall has been modified after flooding and is currently intended for <strong>experienced hikers</strong>. The red-marked trail follows the drier northern bank; the blue-marked option includes sections in the stream bed.</p>
@@ -81,7 +81,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
         note={<>Mosaic photo: <a href="https://commons.wikimedia.org/wiki/File:Ein_Gedi_synagogue058.JPG" target="_blank" rel="noopener noreferrer" className={inlineLink}>Stéphanie Gromann / Wikimedia Commons</a> (attribution license).</>}
       >
         <p>Just south of the Nahal David entrance, Ein Gedi Antiquities National Park preserves a late-antique synagogue and mosaic floor, offering a different perspective on the oasis's history.</p>
-        <p>This archaeological site has a separate, lower-priced entrance ticket if visited on its own. It can be a good addition to a shorter nature walk, and the synagogue itself is accessible.</p>
+        <p>This archaeological site has a separate, lower-priced entrance ticket if visited on its own. Combine a shorter nature walk with a visit to the accessible ancient synagogue.</p>
         <a href={official.antiquities} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official ancient synagogue visitor information</a>
       </AttractionHighlight>
     </div>
@@ -119,9 +119,9 @@ export const einGediDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-xl font-semibold">Check your route and reserve the correct entrance</h3>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">Nahal David and Nahal Arugot require <strong>separate visit reservations</strong>. The official links below open each site's information and visit-coordination page; continue to its reservation system to choose an available time. The antiquities-only ticket is separate.</p>
         <div className="mt-3 flex flex-wrap gap-3 text-sm">
-          <a href={official.david} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4">Nahal David — information & reservations <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
-          <a href={official.arugot} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4">Nahal Arugot — information & reservations <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
-          <a href={official.antiquities} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4">Ancient synagogue — information & reservations <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
+          <a href={official.david} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4">Nahal David - information & reservations <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
+          <a href={official.arugot} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4">Nahal Arugot - information & reservations <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
+          <a href={official.antiquities} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4">Ancient synagogue - information & reservations <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
         </div>
         <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Antiquities-only tickets:</strong> adult {info.antiquitiesAdult}, child {info.antiquitiesChild}, Israeli senior citizen {info.antiquitiesSenior}. The ancient synagogue is on a separate archaeological site.</p>
       </div>
@@ -167,7 +167,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By bus</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Some intercity buses between Jerusalem and the Dead Sea serve Ein Gedi-area stops on Route 90. Check the correct stop for your chosen entrance and the last return bus in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. Do not assume the bus stop is beside the trail gate.</p>
+            <p className="mt-2 text-sm leading-relaxed">Some intercity buses between Jerusalem and the Dead Sea serve Ein Gedi-area stops on Route 90. Check the correct stop for your chosen entrance and the last return bus in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. Allow time for the walk between the bus stop and the trail entrance.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Moving between the entrances</h3></div>
@@ -255,11 +255,11 @@ export const einGediDestinationContent: AttractionDestinationContent = {
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Weather and seasons for desert travel.", icon: "seasons" },
   ],
   sources: [
-    { label: "Nature and Parks Authority — En Gedi Nature Reserve", url: official.english },
-    { label: "Nature and Parks Authority — current visitor areas", url: official.overview },
-    { label: "Nature and Parks Authority — Nahal David", url: official.david },
-    { label: "Nature and Parks Authority — Nahal Arugot", url: official.arugot },
-    { label: "Nature and Parks Authority — Ein Gedi Antiquities", url: official.antiquities },
+    { label: "Nature and Parks Authority - En Gedi Nature Reserve", url: official.english },
+    { label: "Nature and Parks Authority - current visitor areas", url: official.overview },
+    { label: "Nature and Parks Authority - Nahal David", url: official.david },
+    { label: "Nature and Parks Authority - Nahal Arugot", url: official.arugot },
+    { label: "Nature and Parks Authority - Ein Gedi Antiquities", url: official.antiquities },
   ],
 };
 

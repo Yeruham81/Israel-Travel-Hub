@@ -104,7 +104,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <p>Jaffa's flea-market district lies southeast of the Clock Tower. Antique stalls and vintage shops sit alongside cafés, restaurants and small design businesses; nearby Greek Market streets add another lively pocket to explore.</p>
         <p>Visit during market trading hours to browse antique stalls and vintage shops. The <a href="#visitor-info" className={inlineLink}>visitor table</a> lists typical market hours, with a link to the <a href={official.fleaMarketHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>market website</a> for updates.</p>
       </AttractionHighlight>
-      <AttractionPracticalTip>For a first-time visit, I would prioritise the hilltop old town, Summit Garden, the port and either the flea market or a museum according to your interests. Leave time for a coffee or meal rather than rushing from sight to sight.</AttractionPracticalTip>
+      <AttractionPracticalTip>For a first-time visit, I would prioritise the hilltop old town, Summit Garden, the port and either the flea market or a museum according to your interests. Allow time to enjoy a coffee or meal along the way.</AttractionPracticalTip>
       <h3 className="pt-3 font-serif text-xl font-semibold">More cultural experiences in Jaffa</h3>
       <AttractionHighlight mobileImageFirst title="Ilana Goor Museum and local art" image={{ src: photos.museum, alt: "Historic stone building of the Ilana Goor Museum in Old Jaffa", position: "38% center" }}>
         <p>The <a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum</a>, at 4 Mazal Dagim Street, combines an eclectic art collection with a historic building and sea views. See the <a href="#visitor-info" className={inlineLink}>visitor table</a> for published hours, adult admission and official discounts.</p>
@@ -161,7 +161,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       <p className="text-sm leading-relaxed">On <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>religious holidays and special dates</Link>, check the venue's published schedule before visiting.</p>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Accessibility and family visits</h3>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">The port promenade and parts of the surrounding streets offer relatively level approaches, while the historic hill has slopes, stone paving, steps and narrow passages. A stroller or wheelchair user may need an adapted route rather than the full route through every alley.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">The port promenade and parts of the surrounding streets offer relatively level approaches, while the historic hill has slopes, stone paving, steps and narrow passages. Visitors using a stroller or wheelchair may need a route adapted to their mobility needs.</p>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">For a booked Na Laga'at activity, consult the centre's <a href={official.nalagaatAccess} target="_blank" rel="noopener noreferrer" className={inlineLink}>accessibility arrangements</a> in advance.</p>
       </article>
     </div>
@@ -194,10 +194,10 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
           <p className="mt-2 text-sm leading-relaxed">See the arrival area below and choose a central drop-off or car park near your route.</p>
           <ConsentIframe title="Google Maps overview of the Jaffa Clock Tower, historic hill and nearby parking areas" src="https://maps.google.com/maps?q=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel&hl=en&z=15&t=m&output=embed" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-48 w-full rounded-lg border-0 sm:h-52" />
           <ul className="mt-3 space-y-3 text-sm leading-relaxed">
-            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel" target="_blank" rel="noopener noreferrer" className={inlineLink}>Clock Tower Square</a> — central starting point</li>
-            <li><a href="https://www.google.com/maps/dir/?api=1&destination=15a%20HaTzorfim%20Street%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Tzorfim car park</a> — 15A HaTzorfim St</li>
-            <li><a href="https://www.google.com/maps/dir/?api=1&destination=46%20Jaffa%20Port%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Jaffa Port car park</a> — Jaffa Port 46</li>
-            <li><a href="https://www.google.com/maps/dir/?api=1&destination=4%20Rabbi%20Pinchas%20Street%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Flea Market car park</a> — Rabbi Pinchas 4</li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel" target="_blank" rel="noopener noreferrer" className={inlineLink}>Clock Tower Square</a> - central starting point</li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=15a%20HaTzorfim%20Street%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Tzorfim car park</a> - 15A HaTzorfim St</li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=46%20Jaffa%20Port%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Jaffa Port car park</a> - Jaffa Port 46</li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=4%20Rabbi%20Pinchas%20Street%2C%20Tel%20Aviv-Yafo%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Flea Market car park</a> - Rabbi Pinchas 4</li>
           </ul>
           <p className="mt-4 text-xs text-muted-foreground">Official parking information: <a href={official.tzorfimParking} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tzorfim</a> and <a href={official.jaffaPortParking} target="_blank" rel="noopener noreferrer" className={inlineLink}>Jaffa Port</a>.</p>
         </aside>
@@ -220,7 +220,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       <AttractionPracticalTip><strong>Shoes and slopes:</strong> Choose shoes with good grip for the historic stone paving. The <a href="#visit-plan" className={inlineLink}>waterfront and market walk</a> offers a gentler alternative.</AttractionPracticalTip>
       <AttractionPracticalTip><strong>Sunny days:</strong> Parts of the garden, quay and market streets are exposed to direct sun. Bring water and plan a shady café break on hot afternoons.</AttractionPracticalTip>
       <AttractionPracticalTip><strong>Churches and neighbourhoods:</strong> Dress respectfully at religious sites and be considerate when photographing people, worshippers and residential doors.</AttractionPracticalTip>
-      <p>Jaffa works well as part of a larger Tel Aviv visit. If you have additional time, combine it with the southern beachfront or <Link to="/travel-blog/beaches-in-tel-aviv/" className={inlineLink}>Tel Aviv's beaches</Link>, rather than crossing the city repeatedly.</p>
+      <p>Jaffa works well as part of a larger Tel Aviv visit. If you have additional time, combine it with the southern beachfront or <Link to="/travel-blog/beaches-in-tel-aviv/" className={inlineLink}>Tel Aviv's beaches</Link> for a relaxed outing.</p>
     </div>
   ),
   historyContent: (
@@ -232,7 +232,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>These independently operated guided walks explore Old Jaffa or combine the old town with Tel Aviv neighbourhoods and markets. Compare meeting points, walking distances and inclusions. Prices and review scores shown on tour cards are recently checked snapshots; confirm the current details with each booking provider.</p>
+      <p>These guided walks explore Old Jaffa or combine the old town with Tel Aviv neighbourhoods and markets. Compare meeting points, walking distances and inclusions. Check current prices and reviews on the booking website.</p>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="jaffa-tour-cards">
         {jaffaTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-jaffa" />)}
       </ul>
@@ -265,21 +265,21 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   ],
   photoCredits: <p>Wishing Bridge photograph: <a href="https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_14029_Wishing_Bridge_in_Old_Jaffa.JPG" target="_blank" rel="noopener noreferrer" className={inlineLink}>Dr. Avishai Teicher / PikiWiki Israel</a>, licensed under <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY 2.5</a>; resized and converted to WebP.</p>,
   sources: [
-    { label: "Old Jaffa development authority — attractions and visitors (Hebrew)", url: official.oldJaffa },
-    { label: "Tel Aviv–Yafo municipality — short Old Jaffa route map (Hebrew PDF)", url: official.municipalWalkMapShort },
-    { label: "Tel Aviv–Yafo municipality — Old Jaffa walking route (Hebrew)", url: official.municipalWalkingGuide },
-    { label: "Tel Aviv–Yafo municipality — walking-route booklet (Hebrew PDF)", url: official.municipalWalkingMap },
-    { label: "Old Jaffa — arrival directions and parking (Hebrew)", url: official.oldJaffaArrival },
-    { label: "Old Jaffa — Tzorfim parking information (Hebrew)", url: official.tzorfimParking },
-    { label: "Old Jaffa — Jaffa Port parking information (Hebrew)", url: official.jaffaPortParking },
-    { label: "Jaffa Flea Market — visitor information and trading hours", url: official.fleaMarketHours },
-    { label: "Tel Aviv–Yafo municipality — Naim BaSofash weekend buses (Hebrew)", url: official.weekendBuses },
-    { label: "Visit Tel Aviv — Jaffa tourist information centre (English)", url: official.touristInformation },
-    { label: "Old Jaffa — St. Peter's Church (Hebrew)", url: official.church },
-    { label: "Ilana Goor Museum — visiting information", url: official.museum },
-    { label: "Uri Geller Museum — arranged visits", url: official.uriGeller },
-    { label: "Na Laga'at — performances and experiences", url: official.nalagaat },
-    { label: "DAN KAL — Red Line information", url: official.transit },
+    { label: "Old Jaffa development authority - attractions and visitors (Hebrew)", url: official.oldJaffa },
+    { label: "Tel Aviv–Yafo municipality - short Old Jaffa route map (Hebrew PDF)", url: official.municipalWalkMapShort },
+    { label: "Tel Aviv–Yafo municipality - Old Jaffa walking route (Hebrew)", url: official.municipalWalkingGuide },
+    { label: "Tel Aviv–Yafo municipality - walking-route booklet (Hebrew PDF)", url: official.municipalWalkingMap },
+    { label: "Old Jaffa - arrival directions and parking (Hebrew)", url: official.oldJaffaArrival },
+    { label: "Old Jaffa - Tzorfim parking information (Hebrew)", url: official.tzorfimParking },
+    { label: "Old Jaffa - Jaffa Port parking information (Hebrew)", url: official.jaffaPortParking },
+    { label: "Jaffa Flea Market - visitor information and trading hours", url: official.fleaMarketHours },
+    { label: "Tel Aviv–Yafo municipality - Naim BaSofash weekend buses (Hebrew)", url: official.weekendBuses },
+    { label: "Visit Tel Aviv - Jaffa tourist information centre (English)", url: official.touristInformation },
+    { label: "Old Jaffa - St. Peter's Church (Hebrew)", url: official.church },
+    { label: "Ilana Goor Museum - visiting information", url: official.museum },
+    { label: "Uri Geller Museum - arranged visits", url: official.uriGeller },
+    { label: "Na Laga'at - performances and experiences", url: official.nalagaat },
+    { label: "DAN KAL - Red Line information", url: official.transit },
   ],
 };
 

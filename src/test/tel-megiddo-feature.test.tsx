@@ -69,7 +69,7 @@ describe("Tel Megiddo attraction guide", () => {
     expect(article).toContain("https://www.parks.org.il/category/megiddo-trip-talk/");
     expect(article).toContain("stop 55407");
     expect(article).toContain("13:00 closing time");
-    expect(article).toContain("Holiday-eve hours are not necessarily the same as Friday hours");
+    expect(article).toContain("Holiday-eve opening hours can differ from Friday hours");
     expect(article).not.toContain("<AttractionPracticalTip>");
     expect(article.split("183 steps down").length - 1).toBe(1);
     expect(article).toContain("183 steps down");

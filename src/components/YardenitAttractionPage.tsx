@@ -92,7 +92,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or with a driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">From Tiberias, follow Route 90 south towards Kibbutz Kinneret and the Jordan River outlet. Set your navigation to Yardenit Baptismal Site rather than a general location in the kibbutz.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Tiberias, follow Route 90 south towards Kibbutz Kinneret and the Jordan River outlet. Set your navigation to Yardenit Baptismal Site.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">Driving directions to Yardenit</a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -134,7 +134,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Some guided Galilee tours stop at Yardenit, while others focus on the northern churches and archaeological sites. Check the stops before booking, especially if you want time for a baptism rather than a short sightseeing visit.</p>
+      <p>Some guided Galilee tours stop at Yardenit, while others focus on the northern churches and archaeological sites. Check the itinerary before booking, especially if you need time for a baptism ceremony.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
           <img src="/images/attractions/sea-of-galilee.webp" alt="Sea of Galilee landscape on a guided northern Israel tour" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

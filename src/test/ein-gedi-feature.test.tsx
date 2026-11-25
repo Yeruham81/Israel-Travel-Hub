@@ -52,8 +52,8 @@ describe("Ein Gedi upgraded attraction guide", () => {
     expect(article).toContain("Nahal Arugot");
     expect(article).toContain("three hours before closing");
     expect(article).toContain("separate visit reservations");
-    expect(article).toContain("Nahal David — information & reservations");
-    expect(article).toContain("Nahal Arugot — information & reservations");
+    expect(article).toContain("Nahal David - information & reservations");
+    expect(article).toContain("Nahal Arugot - information & reservations");
     expect(article).not.toContain("Book Nahal David");
     expect(article).toContain("antiquities-only");
     expect(article).toContain("accessible");

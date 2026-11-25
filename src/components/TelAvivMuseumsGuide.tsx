@@ -145,7 +145,7 @@ function MuseumMap() {
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label htmlFor="museum-map-select" className="min-w-0 flex-1 text-sm font-semibold">Focus on a museum
           <select id="museum-map-select" value={selectedId} onChange={e => focus(e.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
-            <option value="all">All museums — city overview</option>
+            <option value="all">All museums - city overview</option>
             {museumAreas.map(area => <optgroup key={area.id} label={area.name}>{museums.filter(museum => museum.area === area.id).map(museum => <option key={museum.id} value={museum.id}>{museums.findIndex(item => item.id === museum.id) + 1}. {museum.name}{museum.id === "independence" ? " (closed)" : ""}</option>)}</optgroup>)}
           </select>
         </label>
@@ -202,7 +202,7 @@ export function TelAvivMuseumsGuide() {
       <OnThisPage sections={jump} />
 
       <section id="top-picks" aria-labelledby="top-picks-heading" className="mt-10 scroll-mt-24">
-        <SectionHeading id="top-picks" title="My top museum picks" intro="A few very different places worth considering first. Choose according to your interests instead of trying to visit all of them." />
+        <SectionHeading id="top-picks" title="My top museum picks" intro="Museums for art, history and other interests. Choose the museums that interest you most." />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map(museum => <a key={museum.id} href={"#museum-" + museum.id} className="editorial-card-link group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
             <span className="text-[11px] font-bold uppercase tracking-wide text-primary">{museum.theme}</span>
@@ -232,7 +232,7 @@ export function TelAvivMuseumsGuide() {
       </section>
 
       <section id="by-area" aria-labelledby="by-area-heading" className="mt-12 scroll-mt-24">
-        <SectionHeading id="by-area" title="Explore museums by area" intro="These clusters make it easier to choose what to visit together. I recommend two or three nearby stops rather than racing across the city." />
+        <SectionHeading id="by-area" title="Explore museums by area" intro="I recommend grouping two or three nearby museums into a single outing." />
         {museumAreas.map((area, index) => <section key={area.id} id={"area-" + area.id} aria-label={area.name} className="mt-9 scroll-mt-24">
           <h3 className="text-2xl font-semibold">{area.name}</h3>
           <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
@@ -307,7 +307,7 @@ export function TelAvivMuseumsGuide() {
       <HomeContactForm showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy("Tel Aviv")} />
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use official museum and operator pages for visitor arrangements. Opening hours, temporary closures, admission and exhibitions may change. Please confirm the details with the venue for your visit date.</p>
-        <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Photo credits for the four added museum photographs (resized and compressed to WebP): <a href="https://commons.wikimedia.org/wiki/File:Bauhaus_Center_Tel_Aviv.JPG" target="_blank" rel="noopener noreferrer" className="underline">Bauhaus Center — Itzuvit, CC BY-SA 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Bialik_Bldg.jpg" target="_blank" rel="noopener noreferrer" className="underline">Bialik House — Ori Lubin</a>; <a href="https://commons.wikimedia.org/wiki/File:Bauhaus_Tel-Aviv_museum.jpg" target="_blank" rel="noopener noreferrer" className="underline">Bauhaus-era building — Talmoryair, CC BY 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Rubin_Museum_Tel_Aviv,_Room_39.jpg" target="_blank" rel="noopener noreferrer" className="underline">Rubin Museum — Yoram Shoval, CC BY-SA 4.0</a>. The historic Bauhaus Museum photograph illustrates the White City architecture discussed in the Liebling Haus entry.</p>
+        <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Photo credits for the four added museum photographs (resized and compressed to WebP): <a href="https://commons.wikimedia.org/wiki/File:Bauhaus_Center_Tel_Aviv.JPG" target="_blank" rel="noopener noreferrer" className="underline">Bauhaus Center - Itzuvit, CC BY-SA 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Bialik_Bldg.jpg" target="_blank" rel="noopener noreferrer" className="underline">Bialik House - Ori Lubin</a>; <a href="https://commons.wikimedia.org/wiki/File:Bauhaus_Tel-Aviv_museum.jpg" target="_blank" rel="noopener noreferrer" className="underline">Bauhaus-era building - Talmoryair, CC BY 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Rubin_Museum_Tel_Aviv,_Room_39.jpg" target="_blank" rel="noopener noreferrer" className="underline">Rubin Museum - Yoram Shoval, CC BY-SA 4.0</a>. The historic Bauhaus Museum photograph illustrates the White City architecture discussed in the Liebling Haus entry.</p>
         <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
           {museums.map(museum => <li key={museum.id}><OfficialLink href={museum.url}>{museum.name}</OfficialLink></li>)}
         </ul>

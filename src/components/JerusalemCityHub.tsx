@@ -94,7 +94,7 @@ export function JerusalemCityHubPage(){
       <GuideHeroLayout image={<GuideHeroMedia src={hero.src} alt={hero.alt} width={640} height={400}/>}>
         <p className="text-xs font-bold uppercase tracking-wide text-primary">My guide to planning Jerusalem</p>
         <h1 className="guide-page-title mt-2">{JERUSALEM_HUB_TITLE}</h1>
-        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">I recommend planning Jerusalem by area and interest rather than trying to see every landmark in a single walk. Use this guide to choose what matters to you, decide how many days to stay, and find my detailed Jerusalem guides, tours and transport advice.</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">I recommend exploring Jerusalem one area at a time, choosing the sites that interest you most. Use this guide to choose what matters to you, decide how many days to stay, and find my detailed Jerusalem guides, tours and transport advice.</p>
         <PageUpdated date={JERUSALEM_HUB_UPDATED}/>
       </GuideHeroLayout>
       <AuthorCard/>
@@ -166,8 +166,8 @@ export function JerusalemCityHubPage(){
     </section>
 
     <section id="getting-around" aria-labelledby="getting-around-h" className="mt-12 scroll-mt-24">
-      <Heading id="getting-around" title="Getting to and around Jerusalem" intro="Plan the entire journey to your actual hotel or attraction, not just the train station or a point labelled “Jerusalem”."/>
-      <p className="max-w-4xl leading-relaxed">The fast intercity train reaches <strong>Jerusalem–Yitzhak Navon</strong>, near the central bus station—not the Old City. From there you may need light rail, a bus, a taxi or a final walk with your bags. Most of the Old City's historic lanes are pedestrian routes; a driver can help between road-accessible stops but cannot drive through the quarters. Check <Link to="/travel-blog/calendar-of-events/" className={linkClass}>Jewish holidays and special dates</Link> before relying on a regular weekday timetable.</p>
+      <Heading id="getting-around" title="Getting to and around Jerusalem" intro="Plan your door-to-door journey to the hotel or attraction you intend to visit."/>
+      <p className="max-w-4xl leading-relaxed">The fast intercity train reaches <strong>Jerusalem–Yitzhak Navon</strong>, beside the central bus station. From there, continue to the Old City or your hotel by light rail, bus, taxi or on foot. Most of the Old City's historic lanes are pedestrian routes; a driver can help between road-accessible stops but cannot drive through the quarters. Check <Link to="/travel-blog/calendar-of-events/" className={linkClass}>Jewish holidays and special dates</Link> before relying on a regular weekday timetable.</p>
       <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">For current rail changes and service notices, consult <a className={linkClass} href="https://rail.co.il/?lan=en&page=updates" target="_blank" rel="noopener noreferrer">Israel Railways</a>. For official visitor information about Jerusalem, check the <a className={linkClass} href="https://www.gov.il/en/government-service-branches/jerusalem-tourism-office" target="_blank" rel="noopener noreferrer">Jerusalem tourism office</a>.</p>
       <div className="mt-5 grid gap-3 sm:grid-cols-2" data-testid="jerusalem-transport-links">
         {[
@@ -188,15 +188,15 @@ export function JerusalemCityHubPage(){
       <Heading id="practical" title="My practical Jerusalem planning tips" intro="A handful of considerations will affect your day more than a rigid list of attractions."/>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="jerusalem-practical-tips">
         {[
-          {title:"Plan for hills and uneven ground",description:"Old City cobbles, stairways and steep approaches on the Mount of Olives can make short map distances deceptive. Ask about accessible entrances rather than assuming each route is level."},
+          {title:"Plan for hills and uneven ground",description:"Old City cobbles, stairways and steep approaches on the Mount of Olives can make short map distances deceptive. Ask about accessible entrances, steps and steep sections along your route."},
           {title:"Treat worship sites respectfully",description:"Cover shoulders and knees where required, keep voices low and respect prayers, security checks and local photography rules. Different religious compounds set their own visitor access."},
-          {title:"Check the calendar, not just the season",description:"Shabbat, Jewish holidays and Christian or Muslim festivals affect services, shopping and visitor hours in different ways. Use the actual travel dates before making a detailed plan."},
+          {title:"Check holidays and local events",description:"Shabbat, Jewish holidays and Christian or Muslim festivals affect services, shopping and visitor hours in different ways. Use the actual travel dates before making a detailed plan."},
           {title:"Check museum and attraction details",description:"Individual museums, tours and historic sites use their own tickets, visiting windows and reservations. Follow the dedicated guide to confirm the operator's current information."},
-          {title:"Prepare for warm afternoons and cool evenings",description:"Jerusalem's elevation brings seasonal variation. Carry water, comfortable shoes and a weather-appropriate layer rather than planning exclusively around a forecast average."},
+          {title:"Prepare for warm afternoons and cool evenings",description:"Jerusalem's elevation brings seasonal variation. Carry water, wear comfortable shoes and bring a layer suited to the local weather."},
           {title:"Check current travel advice",description:"Conditions can change. Review the relevant official travel advisories, local guidance and your insurer's terms before travelling; avoid treating old reassurance as a current safety assessment."},
         ].map(item=><article key={item.title} className="rounded-xl border bg-card p-4"><h3 className="font-bold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p></article>)}
       </div>
-      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">For specific church visiting arrangements, the <a className={linkClass} href="https://www.cicts.org/our-services/" target="_blank" rel="noopener noreferrer">Christian Information Center</a> is a useful starting point. Always confirm admission and worship arrangements with the relevant site before you travel.</p>
+      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">For specific church visiting arrangements, the <a className={linkClass} href="https://www.cicts.org/our-services/" target="_blank" rel="noopener noreferrer">Christian Information Center</a> publishes information about church visits. Confirm admission and worship arrangements with the relevant site before you travel.</p>
       <Tip>If your plans include a private day trip, I'd set the main destination and realistic walking time first, then add optional stops. A private driver handles transport; licensed guiding and entrance tickets are separate unless specifically arranged.</Tip>
     </section>
 

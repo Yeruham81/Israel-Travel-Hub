@@ -48,7 +48,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     admission: "Adult ₪30 on the municipal price list; check exhibition and ticket availability.",
     openingDays: "Usually Sun, Tue–Wed, Sat 10:00–16:00; Thu 10:00–18:00; Fri 10:00–14:00. Mon closed, but may close for exhibition installation.",
     booking: "Check that an exhibition is open before travelling; temporary changeovers can close the building.",
-    intro: "The City Museum occupies a restored Templer-era building in the German Colony. Its exhibitions explore Haifa's different communities and evolving urban identity rather than following a single permanent chronological display.",
+    intro: "The City Museum occupies a restored Templer-era building in the German Colony. Its exhibitions explore Haifa's different communities and evolving urban identity.",
     highlights: ["Changing exhibitions about the city's architecture, people and social history.", "A convenient pairing with Ben Gurion Avenue and views towards the Bahá'í terraces."],
     tip: "Make this part of a German Colony walk; the museum sometimes closes between exhibitions, so check the day's programme before setting out.",
     url: "https://www.hcm.org.il/eng", featured: false
@@ -76,7 +76,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     intro: "MadaTech fills the historic Technion campus with interactive exhibitions, science demonstrations and outdoor installations. It is one of the strongest choices for families, but also rewarding for adults who enjoy science.",
     highlights: ["Hands-on science and technology experiences across several exhibition areas.", "The outdoor science park and programmes that change throughout the year."],
     highlightsForFamilies: "Plan around a three-hour visit, allow more time with younger children, and bring spare clothes if the water activities are operating.",
-    tip: "I would make MadaTech the main event rather than squeeze it between several other museums. The outdoor science garden is especially useful when the weather is good.",
+    tip: "I would make MadaTech the main event of a museum day. The outdoor science garden is especially useful when the weather is good.",
     url: "https://www.madatech.org.il/en/", ticketUrl: "https://tickets.madatech.org.il/en/", featured: true
   },
   {
@@ -100,7 +100,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     booking: "General visits usually do not require booking; check workshops and special events separately.",
     intro: "A dedicated museum of Japanese art on the Carmel ridge, Tikotin shows prints, ceramics, textiles and other works through changing exhibitions. It offers a different cultural experience from Haifa's history and maritime collections.",
     highlights: ["Japanese prints, decorative arts and thoughtfully curated temporary displays.", "Japanese cultural events and workshops on selected dates."],
-    tip: "Pair it with a Carmel Centre walk and a viewpoint rather than rushing downhill to the port. Check if a special workshop is scheduled during your stay.",
+    tip: "Pair it with a Carmel Centre walk and a viewpoint. Check if a special workshop is scheduled during your stay.",
     url: "https://www.tmja.org.il/eng", featured: true
   },
   {
@@ -113,7 +113,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     intro: "The museum is dedicated to the painter Mané-Katz and the collection he left to Haifa. Works from the collection may be shown elsewhere while the historic museum undergoes renovation.",
     highlights: ["Mané-Katz paintings and works relating to the School of Paris.", "Jewish ceremonial objects and the artist's personal collection when the museum reopens."],
     tip: "For now, treat the building as a possible exterior landmark only. The official Haifa Museums site is the best place to follow reopening notices.",
-    url: "https://www.mkm.org.il/eng", closureNote: "Closed for renovation — interior visits unavailable"
+    url: "https://www.mkm.org.il/eng", closureNote: "Closed for renovation (interior visits unavailable)"
   },
   {
     id: "hecht", mapLocation: {lat:32.76322,lon:35.01806}, name: "Hecht Museum", area: "carmel", neighbourhood: "University of Haifa, Mount Carmel",

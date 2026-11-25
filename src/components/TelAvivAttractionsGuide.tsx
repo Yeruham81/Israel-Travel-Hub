@@ -284,8 +284,8 @@ export function TelAvivAttractionsGuide(){
   <section id="tips" aria-labelledby="tips-h" className="mt-12 scroll-mt-24">
     <Heading id="tips" title="My practical tips for sightseeing in Tel Aviv" intro="A little planning goes a long way in a coastal city where outdoor activities, cultural hours and weekend transport can differ."/>
     <div className="grid gap-4 md:grid-cols-2">
-      <div className="rounded-xl border bg-card p-5"><Footprints aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Plan by neighbourhood</h3><p className="mt-2 text-sm leading-relaxed">Jaffa, Neve Tzedek and Carmel Market fit naturally together. The port and northern park are farther away. Choose a few clusters rather than switching repeatedly across town.</p></div>
-      <div className="rounded-xl border bg-card p-5"><Waves aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Check beach safety</h3><p className="mt-2 text-sm leading-relaxed">Use designated swimming areas with active lifeguard services and follow flags and sea conditions. A public boardwalk is not automatically a swimming zone. <Link to="/travel-blog/beaches-in-tel-aviv/" className="font-semibold text-primary hover:underline">Compare beach facilities</Link>.</p></div>
+      <div className="rounded-xl border bg-card p-5"><Footprints aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Plan by neighbourhood</h3><p className="mt-2 text-sm leading-relaxed">Jaffa, Neve Tzedek and Carmel Market fit naturally together. The port and northern park are farther away. Group nearby sights into the same outing.</p></div>
+      <div className="rounded-xl border bg-card p-5"><Waves aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Check beach safety</h3><p className="mt-2 text-sm leading-relaxed">Use designated swimming areas with active lifeguard services and follow flags and sea conditions. <Link to="/travel-blog/beaches-in-tel-aviv/" className="font-semibold text-primary hover:underline">Compare beach facilities</Link>.</p></div>
       <div className="rounded-xl border bg-card p-5"><CalendarDays aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Look at the calendar</h3><p className="mt-2 text-sm leading-relaxed">Carmel Market and many shops change their hours before Shabbat; museums and performances have separate schedules. My <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Israel calendar of events</Link> explains holidays and special dates.</p></div>
       <div className="rounded-xl border bg-card p-5"><Train aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Choose transport for the actual route</h3><p className="mt-2 text-sm leading-relaxed">Buses, the Red Line light rail, taxis and walking can work better than a car in central Tel Aviv. On Fridays and Saturdays the free <External url="https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/PublicTransportaiton.aspx">Na'im BeSofash weekend shuttle</External> serves parts of the metropolitan area; check current routes and schedules before relying on it. Rail stations are inland. See my <Link to="/travel-blog/getting-around-tel-aviv/" className="font-semibold text-primary hover:underline">transport guide</Link>.</p></div>
       <div className="rounded-xl border bg-card p-5"><ShieldCheck aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Plan for sun and access</h3><p className="mt-2 text-sm leading-relaxed">Carry drinking water, dress for heat and use sun protection. Old Jaffa has steep and uneven sections, while beach-access arrangements differ. Check accessibility for your chosen route.</p></div>
@@ -312,15 +312,15 @@ export function TelAvivAttractionsGuide(){
   <SourcesDisclosure>
     <p className="mb-3 text-sm leading-relaxed">For the latest admission details, lifeguard services, exhibitions and special dates, I recommend checking the relevant authority or operator shortly before you visit.</p>
     <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
-     <li><External url="https://www.tel-aviv.gov.il/en/Visit/Top10Places/Pages/default.aspx">Tel Aviv–Yafo Municipality — key places</External></li>
+     <li><External url="https://www.tel-aviv.gov.il/en/Visit/Top10Places/Pages/default.aspx">Tel Aviv–Yafo Municipality - key places</External></li>
      <li><External url="https://www.tel-aviv.gov.il/Visitors/Jaffa/Pages/oldjaffatour.aspx">Old Jaffa municipal walking route (Hebrew)</External></li>
      <li><External url="https://www.tel-aviv.gov.il/en/visit/beaches/pages/default.aspx">Municipal beach information (English)</External></li>
      <li><External url="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx">Beach conditions and lifeguard services (Hebrew)</External></li>
-     <li><External url="https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/PublicTransportaiton.aspx">Free weekend public transport — municipality</External></li>
-     <li><External url="https://whc.unesco.org/en/list/1096/">UNESCO — White City of Tel Aviv</External></li>
-     <li><External url="https://www.tamuseum.org.il/en/visit/">Tel Aviv Museum of Art — visitor information</External></li>
+     <li><External url="https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/PublicTransportaiton.aspx">Free weekend public transport - municipality</External></li>
+     <li><External url="https://whc.unesco.org/en/list/1096/">UNESCO - White City of Tel Aviv</External></li>
+     <li><External url="https://www.tamuseum.org.il/en/visit/">Tel Aviv Museum of Art - visitor information</External></li>
      <li><External url="https://nachalatbinyamin-tlv.com/en/">Nahalat Binyamin Arts & Crafts Fair</External></li>
-     <li><External url="https://suzannedellal.org.il/en/neve-tzedek/">Neve Tzedek history — Suzanne Dellal Centre</External></li>
+     <li><External url="https://suzannedellal.org.il/en/neve-tzedek/">Neve Tzedek history - Suzanne Dellal Centre</External></li>
      <li><External url="https://www.tel-aviv.gov.il/en/Pages/HomePage.aspx">Tel Aviv–Yafo Municipality</External></li>
      <li><External url="https://www.rail.co.il/en">Israel Railways</External></li>
     </ul>

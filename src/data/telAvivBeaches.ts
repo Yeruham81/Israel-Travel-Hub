@@ -33,7 +33,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "tzuk-south", name: "South Tzuk Beach", area: "Northern coast",
-    bestFor: "Room away from the centre", summary: "A northern beach stretch with a more open setting than the city centre. It suits visitors who want to make the beach itself the main outing rather than combine it with central sightseeing.",
+    bestFor: "Room away from the centre", summary: "A northern beach stretch with a more open setting than the city centre. It suits visitors planning a dedicated beach outing.",
     tip: "North and South Tzuk are distinct access points; confirm which entrance and lifeguard station you plan to use.",
     access: "Northern Tel Aviv; plan a return ride and check the precise entrance.",
     accessShort: "Far north", highlights: "Northern beach · Paid parking", lat: 32.135, lon: 34.783,
@@ -111,7 +111,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   {
     id: "geula", name: "Geula Beach", area: "Central seafront",
     bestFor: "Central promenade & markets", summary: "Geula is another named, declared beach between the central promenade and the southern beachfront. It can be useful if your accommodation is near Geula Street or the Carmel Market area.",
-    tip: "Check the active lifeguard station and posted flags at Geula itself rather than relying on conditions at a neighbouring beach.",
+    tip: "Check the active lifeguard station and posted flags at Geula itself.",
     access: "Near the end of Geula Street, south of Jerusalem Beach.",
     accessShort: "Geula Street", highlights: "Shade · Volleyball", lat: 32.0669, lon: 34.7589,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Geula.aspx"

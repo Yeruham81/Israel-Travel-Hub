@@ -141,7 +141,7 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Combine Rosh Hanikra with the Western Galilee</h3>
-        <p className="mt-3 text-sm leading-relaxed sm:text-base">For a full day, I recommend choosing a manageable two or three stops along the coast rather than spending most of your time in transit.</p>
+        <p className="mt-3 text-sm leading-relaxed sm:text-base">For a full day, I recommend two or three nearby coastal stops with time to enjoy each one.</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Classic Western Galilee day:</strong> Combine Rosh Hanikra and Achziv Beach with <Link to="/attractions/akko-acre/" className={inlineLink}>Old Akko</Link>, its markets, harbour and Crusader history.</li>
           <li><strong>Nearby coastal stop:</strong> Enjoy Nahariya and its seafront for a shorter, relaxed route.</li><li><strong>Continue towards Haifa:</strong> Explore the <Link to="/attractions/haifa/" className={inlineLink}>Bahá’í Gardens viewpoints and German Colony</Link> if you are heading south.</li>

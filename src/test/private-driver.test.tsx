@@ -50,7 +50,7 @@ describe("private driver page and inquiry", () => {
     expect(serviceOverview).toHaveTextContent("couples, families with children");
     expect(serviceOverview).toHaveTextContent("business visitors");
     expect(serviceOverview).toHaveTextContent("licensed tour guiding");
-    expect(serviceOverview).toHaveTextContent("entrance tickets");
+    expect(serviceOverview).toHaveTextContent(/entrance tickets/i);
     expect(serviceOverview.compareDocumentPosition(container.querySelector("#journeys")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getAllByTestId("driver-journey-card")).toHaveLength(3);
     const dayHire = privateDriverJourneys.find(journey => journey.id === "day-hire");

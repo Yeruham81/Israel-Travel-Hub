@@ -96,7 +96,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
         <p className="text-xs font-semibold text-muted-foreground">Ticketed guided tour; advance booking recommended</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Damascus Gate and the Muslim Quarter Markets" image={{ src: photos.damascus, alt: "Historic stone Damascus Gate at the entrance to Jerusalem's Old City" }}>
-        <p>Damascus Gate leads into the lively markets of the Muslim Quarter, where you can browse traditional food shops, souks and narrow streets. The gate is also a useful approach to the early stations of the Via Dolorosa.</p>
+        <p>Damascus Gate leads into the lively markets of the Muslim Quarter, where you can browse traditional food shops, souks and narrow streets. Damascus Gate also offers access to the early stations of the Via Dolorosa.</p>
         <p>For panoramic views, begin the <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramparts Walk</a> at Jaffa Gate. Its north and south routes have stairs, uneven paving and elevated stone paths, which affect wheelchair and stroller access.</p>
         <p className="text-xs font-semibold text-muted-foreground">Markets and gate free; separate Ramparts Walk: {info.rampartsAdult} per adult</p>
       </AttractionHighlight>
@@ -331,14 +331,14 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
     { label: "3-day Israel itinerary", to: "/travel-blog/israel-itinerary-3-days/", description: "Fit Jerusalem into a short visit.", icon: "itinerary" },
   ],
   sources: [
-    { label: "UNESCO — Old City of Jerusalem and its Walls", url: official.unesco },
-    { label: "Christian Information Center — church hours and religious-site access", url: official.christianHours },
-    { label: "Western Wall Heritage Foundation — visitor information", url: official.westernWall },
-    { label: "Western Wall Heritage Foundation — tunnel tours and booking", url: official.tunnels },
-    { label: "Tower of David Jerusalem Museum — tickets and visiting", url: official.tower },
-    { label: "Tower of David Jerusalem Museum — entrance and directions", url: official.towerEntrance },
-    { label: "East Jerusalem Development — Ramparts Walk", url: official.ramparts },
-    { label: "Viator — Jerusalem Classic Tour: Mount of Olives & Old City", url: "https://www.viator.com/tours/Jerusalem/jerusalem-daily-tour/d921-208675P3" },
+    { label: "UNESCO - Old City of Jerusalem and its Walls", url: official.unesco },
+    { label: "Christian Information Center - church hours and religious-site access", url: official.christianHours },
+    { label: "Western Wall Heritage Foundation - visitor information", url: official.westernWall },
+    { label: "Western Wall Heritage Foundation - tunnel tours and booking", url: official.tunnels },
+    { label: "Tower of David Jerusalem Museum - tickets and visiting", url: official.tower },
+    { label: "Tower of David Jerusalem Museum - entrance and directions", url: official.towerEntrance },
+    { label: "East Jerusalem Development - Ramparts Walk", url: official.ramparts },
+    { label: "Viator - Jerusalem Classic Tour: Mount of Olives & Old City", url: "https://www.viator.com/tours/Jerusalem/jerusalem-daily-tour/d921-208675P3" },
   ],
 };
 

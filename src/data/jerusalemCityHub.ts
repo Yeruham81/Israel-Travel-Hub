@@ -9,7 +9,7 @@ export const jerusalemTopicCards = [
   {title:"Mount of Olives",to:"/attractions/mount-of-olives/",description:"Plan panoramic viewpoints, hillside churches and a realistic downhill walk.",cta:"Visit the Mount of Olives"},
   {title:"Mount Zion",to:"/attractions/mount-zion/",description:"Explore the Cenacle, Dormition Abbey and sacred places near Zion Gate.",cta:"Explore Mount Zion"},
   {title:"Museums in Jerusalem",to:"/travel-blog/museums-in-jerusalem/",description:"Choose the Israel Museum, Yad Vashem, Tower of David and more.",cta:"Compare Jerusalem museums"},
-  {title:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/",description:"Find meaningful pilgrimage visits by area, not just a long list.",cta:"Plan church visits"},
+  {title:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/",description:"Find pilgrimage sites grouped by neighbourhood.",cta:"Plan church visits"},
   {title:"Shopping & markets",to:"/travel-blog/shopping-in-jerusalem/",description:"Discover Mahane Yehuda, Old City markets, crafts and downtown streets.",cta:"Discover markets and shops"},
 ] as const;
 
@@ -61,7 +61,7 @@ export const jerusalemTourGroups = [
 
 export const jerusalemHubFaqs = [
   {q:"Can I visit Jerusalem in just one day?",a:"Yes, if you choose a focused route. I suggest one Old City entrance and the sights most important to you, with perhaps one nearby area. A day trip is not the right moment to see every museum, church and quarter."},
-  {q:"How many days should I stay in Jerusalem?",a:"I suggest two or three days as a useful starting point for a first visit, with more time if you enjoy museums, pilgrimage visits or unhurried neighbourhood walks. An excursion to the Dead Sea or Bethlehem deserves its own travel allowance."},
+  {q:"How many days should I stay in Jerusalem?",a:"I suggest two or three days for a first visit, with more time if you enjoy museums, pilgrimage visits or unhurried neighbourhood walks. An excursion to the Dead Sea or Bethlehem deserves its own travel allowance."},
   {q:"What is the best area to stay for a first visit?",a:"If the Old City is your priority, compare Mamilla or the area around Jaffa Gate. Downtown suits light-rail access and dining, while Mahane Yehuda suits market life. Your final hotel's actual entrance and luggage access matter as much as its area name."},
   {q:"Can I drive inside Jerusalem's Old City?",a:"Not through most of its historic pedestrian lanes. Cars and private drivers can take you to an accessible nearby drop-off, but the last part is normally on foot. Check the correct gate and steps with your hotel or guide."},
   {q:"Do I need a rental car while sightseeing in Jerusalem?",a:"Not for most central sightseeing. Walking, city buses, light rail and taxis are often more practical; a private driver is useful for a tailored route or several widely separated stops. A rental may suit a wider road trip."},
@@ -71,9 +71,9 @@ export const jerusalemHubFaqs = [
 ] as const;
 
 export const jerusalemHubSources=[
-  {label:"Israel Ministry of Tourism — Jerusalem visitor information",url:"https://www.gov.il/en/government-service-branches/jerusalem-tourism-office"},
-  {label:"Israel Railways — official planner and service notices",url:"https://rail.co.il/?lan=en&page=updates"},
-  {label:"Israel Ministry of Tourism — entry and visitor information",url:"https://www.gov.il/en/departments/topics/tourist-and-travelers-info"},
-  {label:"Jerusalem Convention & Visitors Bureau — sights and neighbourhoods",url:"https://www.jerusalemcvb.com/explore-the-city/see-and-do/"},
-  {label:"Christian Information Center — holy sites and visitor instructions",url:"https://www.cicts.org/our-services/"},
+  {label:"Israel Ministry of Tourism - Jerusalem visitor information",url:"https://www.gov.il/en/government-service-branches/jerusalem-tourism-office"},
+  {label:"Israel Railways - official planner and service notices",url:"https://rail.co.il/?lan=en&page=updates"},
+  {label:"Israel Ministry of Tourism - entry and visitor information",url:"https://www.gov.il/en/departments/topics/tourist-and-travelers-info"},
+  {label:"Jerusalem Convention & Visitors Bureau - sights and neighbourhoods",url:"https://www.jerusalemcvb.com/explore-the-city/see-and-do/"},
+  {label:"Christian Information Center - holy sites and visitor instructions",url:"https://www.cicts.org/our-services/"},
 ] as const;

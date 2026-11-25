@@ -20,16 +20,16 @@ const slug="/travel-blog/christian-tours-in-israel/";
 const link="font-semibold text-primary underline underline-offset-4 hover:text-primary/80";
 const nav=[["start","How to plan"],["destinations","Christian destinations"],["itineraries","Sample itineraries"],["tours","Guided tours"],["practical","Visiting advice"],["other-places","Other biblical places"],["faq","FAQ"],["more-sites","Related Christian guides"],["plan-trip","Plan your visit"],["contact","Contact Moshe"]] as const;
 const sources=[
- {title:"Christian Information Center — shrine opening hours",url:"https://www.cicts.org/our-services/"},
- {title:"Christian Information Center — Masses and services",url:"https://www.cicts.org/masses-services/"},
- {title:"Custody of the Holy Land — pilgrimage sanctuaries",url:"https://www.custodia.org/en/"},
- {title:"UNESCO — Church of the Nativity in Bethlehem",url:"https://whc.unesco.org/en/list/1433/"},
- {title:"Israel Nature and Parks Authority — Qasr al-Yahud",url:"https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/"},
- {title:"Yardenit — baptism visit information",url:"https://www.yardenit.com/baptism/"},
- {title:"Custody of the Holy Land — Church of the Nativity",url:"https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/"},
- {title:"Bethlehem Municipality — Milk Grotto",url:"https://bethlehem-city.org/en/milkgrotto"},
- {title:"Custody of the Holy Land — Shepherds' Field",url:"https://www.custodia.org/en/sanctuaries/bethlehem-the-shepherds-field-and-grotto/"},
- {title:"Discalced Carmelites — Stella Maris and Muhraqa",url:"https://www.carmelholylanddco.org/who-we-are/the-discalced-carmelites-in-the-holy-land/"},
+ {title:"Christian Information Center - shrine opening hours",url:"https://www.cicts.org/our-services/"},
+ {title:"Christian Information Center - Masses and services",url:"https://www.cicts.org/masses-services/"},
+ {title:"Custody of the Holy Land - pilgrimage sanctuaries",url:"https://www.custodia.org/en/"},
+ {title:"UNESCO - Church of the Nativity in Bethlehem",url:"https://whc.unesco.org/en/list/1433/"},
+ {title:"Israel Nature and Parks Authority - Qasr al-Yahud",url:"https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/"},
+ {title:"Yardenit - baptism visit information",url:"https://www.yardenit.com/baptism/"},
+ {title:"Custody of the Holy Land - Church of the Nativity",url:"https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/"},
+ {title:"Bethlehem Municipality - Milk Grotto",url:"https://bethlehem-city.org/en/milkgrotto"},
+ {title:"Custody of the Holy Land - Shepherds' Field",url:"https://www.custodia.org/en/sanctuaries/bethlehem-the-shepherds-field-and-grotto/"},
+ {title:"Discalced Carmelites - Stella Maris and Muhraqa",url:"https://www.carmelholylanddco.org/who-we-are/the-discalced-carmelites-in-the-holy-land/"},
 ] as const;
 
 function External({href,children}:{href:string;children:ReactNode}){
@@ -51,7 +51,7 @@ function AreaCard({area}:{area:ChristianArea}){
        <h3 id={area.id+"-heading"} className="font-serif text-xl font-semibold sm:text-2xl">{area.title}</h3>
        <p className="mt-3 text-sm leading-relaxed sm:text-base">{area.intro}</p>
        <ul className="mt-4 space-y-3">{area.sites.map(site=><li key={site.name} className="text-sm leading-relaxed">
-         <strong>{site.to?<Link to={site.to} className={link}>{site.name}</Link>:site.name}</strong><span className="text-muted-foreground"> — {site.note}</span>
+         <strong>{site.to?<Link to={site.to} className={link}>{site.name}</Link>:site.name}</strong><span className="text-muted-foreground"> - {site.note}</span>
          {(site.officialUrl||site.mapPlace)&&<span className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs">
            {site.officialUrl&&<External href={site.officialUrl}>Official information</External>}
            {site.mapPlace&&<a href={"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(site.mapPlace)} className="font-semibold text-primary hover:underline" target="_blank" rel="noopener noreferrer">Google Maps <MapPin className="inline h-3 w-3" aria-hidden="true"/></a>}
@@ -90,7 +90,7 @@ function TourCard({tour,url}:{tour:ChristianOffer;url:string}){
 
 const practical=[
  {title:"Opening hours and services",text:"Prayer takes priority over sightseeing. Sundays, feast days, Holy Week and local services can change church access. Verify current opening times and entrance conditions directly."},
- {title:"Dress and behaviour",text:"Cover shoulders and knees as a useful default. Follow photography, silence, group-prayer and worship instructions."},
+ {title:"Dress and behaviour",text:"Cover your shoulders and knees at religious sites. Follow photography, silence, group-prayer and worship instructions."},
  {title:"Walking and accessibility",text:"Jerusalem's Old City has uneven paving, the Mount of Olives is steep and many churches have steps. Check access needs with each site."},
  {title:"Bethlehem and Jericho access",text:"These are West Bank destinations. Confirm nationality restrictions, checkpoints, insurance and any requirement to change to local transport or guiding."},
  {title:"Realistic travel distances",text:"Jerusalem, Nazareth, the lake and the lower Jordan are separate regions. Allow time for parking, walking, meals, queues and unexpected restrictions."},
@@ -130,17 +130,17 @@ export function ChristianToursGuide(){
    <OnThisPage sections={nav}/>
 
    <section id="start" aria-labelledby="start-heading" className="mt-12 scroll-mt-24">
-     <Heading id="start" title="How to plan a Christian tour" intro="First decide which traditions and places matter most, then build a route by area rather than trying to fit every stop into one day."/>
+     <Heading id="start" title="How to plan a Christian tour" intro="Choose the traditions and places that matter most to you, then group visits by area."/>
      <div className="grid gap-4 sm:grid-cols-3">{[
        {number:"01",title:"Choose your focus",text:"Jerusalem's Passion sites, the Nativity in Bethlehem, the ministry in Galilee or a river baptism visit."},
        {number:"02",title:"Group sites geographically",text:"A Jerusalem walking day differs from a Galilee road trip. An overnight stay in the north can cut long return journeys."},
        {number:"03",title:"Confirm practical details",text:"Check religious services, opening hours, mobility, borders, departure points and cancellation conditions before booking."},
      ].map(item=><div key={item.number} className="rounded-xl border bg-card p-4"><p className="text-xs font-bold text-primary">{item.number}</p><h3 className="mt-2 font-semibold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p></div>)}</div>
-     <div className="mt-5"><Tip>Want to attend Mass, prayer or a liturgy? Check <External href="https://www.cicts.org/masses-services/">Christian Information Center service details</External> and contact the responsible church. A sightseeing tour does not automatically include a religious ceremony.</Tip></div>
+     <div className="mt-5"><Tip>Want to attend Mass, prayer or a liturgy? Check <External href="https://www.cicts.org/masses-services/">Christian Information Center service details</External> and contact the responsible church. Arrange any religious ceremony separately.</Tip></div>
    </section>
 
    <section id="destinations" aria-labelledby="destinations-heading" className="mt-12 scroll-mt-24">
-     <Heading id="destinations" title="The main Christian pilgrimage destinations" intro="Seven regional overviews with links to my detailed attraction and transport guides. The sites follow different Christian traditions and are not all within one continuous route."/>
+     <Heading id="destinations" title="The main Christian pilgrimage destinations" intro="Seven regional overviews with links to my detailed attraction and transport guides. The sites follow different Christian traditions and are grouped into regional visits."/>
      <div className="mb-6 grid grid-cols-2 gap-2 rounded-xl border bg-secondary/20 p-3 sm:grid-cols-4">{christianAreas.map(area=><a key={area.id} href={"#"+area.id} className="flex min-h-10 items-center gap-1 rounded-lg border bg-card px-3 py-2 text-sm font-semibold text-primary hover:border-primary/40 hover:bg-secondary">{area.name}<ArrowUpRight className="ml-auto h-3.5 w-3.5 shrink-0" aria-hidden="true"/></a>)}</div>
      <div className="space-y-6">{christianAreas.map(area=><AreaCard key={area.id} area={area}/>)}</div>
      <div className="mt-5"><Tip><strong>Two distinct Jordan River sites:</strong> Qasr al-Yahud near Jericho is traditionally associated with Jesus' baptism, while Yardenit is an organised modern visitor site near the Sea of Galilee. Read my <Link to="/travel-blog/baptism-in-the-jordan-river/" className={link}>baptism site comparison</Link> before choosing.</Tip></div>
@@ -174,7 +174,7 @@ export function ChristianToursGuide(){
      <h3 className="mb-3 mt-8 font-serif text-xl font-semibold">Nazareth, Galilee &amp; Jordan River</h3>
      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-christian-tour-group="north">{offers.filter(o=>o.tour.group==="north").map(o=><TourCard key={o.tour.id} tour={o.tour} url={o.url}/>)}</div>
      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Prices, ratings, reviews and availability are shown by the booking provider, not updated live on this page. Confirm the product name, tour itinerary, final price, included stops, date and West Bank eligibility before paying.</p>
-     <p className="mt-3 text-sm leading-relaxed">For more options, see my <Link to="/tours/jerusalem/" className={link}>Jerusalem tours</Link>, <Link to="/tours/bethlehem-jericho-jordan-river/" className={link}>Bethlehem and Jordan River tours</Link> and <Link to="/tours/nazareth-sea-of-galilee/" className={link}>Galilee tours</Link>. My <Link to="/private-driver-in-israel/" className={link}>private driver service</Link> is transport, not automatically licensed guiding.</p>
+     <p className="mt-3 text-sm leading-relaxed">For more options, see my <Link to="/tours/jerusalem/" className={link}>Jerusalem tours</Link>, <Link to="/tours/bethlehem-jericho-jordan-river/" className={link}>Bethlehem and Jordan River tours</Link> and <Link to="/tours/nazareth-sea-of-galilee/" className={link}>Galilee tours</Link>. My <Link to="/private-driver-in-israel/" className={link}>private driver service</Link> covers transportation. Licensed guiding should be arranged separately.</p>
    </section>
 
    <section id="practical" aria-labelledby="practical-heading" className="mt-12 scroll-mt-24">
@@ -182,12 +182,12 @@ export function ChristianToursGuide(){
      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{practical.map(item=><div key={item.title} className="rounded-xl border bg-card p-4"><h3 className="font-bold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p></div>)}</div>
      <div className="mt-5 space-y-4">
        <Tip>Use the <External href="https://www.cicts.org/our-services/">Christian Information Center's current shrine information</External> and my <Link to="/travel-blog/calendar-of-events/" className={link}>Israel calendar of holidays and special dates</Link> to plan around services and public holidays.</Tip>
-       <p className="text-sm leading-relaxed">If your trip includes Bethlehem, Jericho or Qasr al-Yahud, read my <Link to="/travel-blog/jerusalem-to-bethlehem/" className={link}>Bethlehem transport and crossing guide</Link>. Entry eligibility, local transport rules and rental-car insurance differ; do not assume the same driver and vehicle can cover every destination.</p>
+       <p className="text-sm leading-relaxed">If your trip includes Bethlehem, Jericho or Qasr al-Yahud, read my <Link to="/travel-blog/jerusalem-to-bethlehem/" className={link}>Bethlehem transport and crossing guide</Link>. Entry eligibility, local transport rules and rental-car insurance differ. Confirm that your driver and vehicle can serve each destination.</p>
      </div>
    </section>
 
    <section id="other-places" aria-labelledby="other-places-heading" className="mt-12 scroll-mt-24">
-     <Heading id="other-places" title="Other biblical places worth considering" intro="These are useful additions for a longer itinerary or an interest in the history and archaeology of the New Testament."/>
+     <Heading id="other-places" title="More biblical sites to visit" intro="Add these sites to a longer itinerary exploring the history and archaeology of the New Testament."/>
      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{extras.map(site=><article key={site.title} className="flex flex-col rounded-xl border bg-card p-4"><h3 className="font-semibold">{site.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{site.text}</p><Link to={site.to} className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-semibold text-primary hover:underline">Read related guide<ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link></article>)}</div>
    </section>
    <FaqList faqs={christianFaqs}/>

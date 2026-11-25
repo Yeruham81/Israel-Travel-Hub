@@ -15,7 +15,7 @@ export type MuseumEntry = {
 
 export const museumAreas: { id: MuseumArea; name: string; intro: string }[] = [
   { id: "central", name: "City centre & Bialik Square", intro: "Art and small heritage buildings are spread across the centre. The Bialik Square museums form the most convenient walking cluster; allow a separate journey to the main Tel Aviv Museum of Art." },
-  { id: "north", name: "Ramat Aviv & Tel Aviv University", intro: "The university and northern museums offer some of the city's largest collections. Choose one major museum or two carefully timed visits; these are not all next door to one another." },
+  { id: "north", name: "Ramat Aviv & Tel Aviv University", intro: "The university and northern museums offer some of the city's largest collections. Choose one major museum or two carefully timed visits, allowing travel time between them." },
   { id: "south", name: "Neve Tzedek & the southern seafront", intro: "A smaller artist museum and a separate military-history museum can complement a walk towards the waterfront, with different entrances and booking arrangements." },
   { id: "jaffa", name: "Old Jaffa", intro: "Historic stone lanes, a striking artist-house museum and specialist guided visits. Allow time for steep streets and the walk between venues." },
 ];
@@ -89,7 +89,7 @@ export const museums: MuseumEntry[] = [
     openingDays: "Sun–Fri (closed Sat); check holiday schedule",
     priceNis: 0,
     admission: "Gallery entry free; self-guided audio tour ₪90; guided tours priced separately", booking: "Check dates for guided White City tours or choose the self-guided audio walk",
-    intro: "A gallery, bookshop and starting point for guided and self-guided White City architecture walks, rather than a conventional large museum.",
+    intro: "A gallery, bookshop and starting point for guided and self-guided White City architecture walks.",
     highlights: ["Design exhibitions", "Bauhaus and International Style context", "Guided walks and self-guided audio tours"],
     tip: "Check with the centre in advance that your chosen guided walk or self-guided activity is running on your visit date.",
     url: "https://bauhaus-center.com/", ticketUrl: "https://bauhaus-center.com/tel-aviv-white-city-tours/",
@@ -167,7 +167,7 @@ export const museums: MuseumEntry[] = [
     highlightsForFamilies: "Children under 18 enter free.",
     intro: "A small museum devoted to the painter, illustrator and author Nahum Gutman. Its Neve Tzedek setting makes it particularly enjoyable as part of a neighbourhood walk.",
     highlights: ["Works by Nahum Gutman", "Israeli art and illustration", "Historic Neve Tzedek setting"],
-    tip: "Spend time exploring Neve Tzedek afterwards; allow extra walking time to Jaffa instead of treating it as the next door attraction.",
+    tip: "Spend time exploring Neve Tzedek afterwards; allow extra walking time if you continue to Jaffa.",
     url: "https://www.gutmanmuseum.co.il/en/useful-info/",
     ticketUrl: "https://www.gutmanmuseum.co.il/en/product/entry-tickets/",
   },

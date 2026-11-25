@@ -50,7 +50,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight title="Ramon Crater Visitor Center">
-        <p>Start at the visitor center on the crater rim. Its exhibitions combine the story of Israeli astronaut Ilan Ramon with the geology, wildlife and natural history of the makhtesh. The center is a useful introduction before you head outside.</p>
+        <p>Start at the visitor center on the crater rim. Its exhibitions combine the story of Israeli astronaut Ilan Ramon with the geology, wildlife and natural history of the makhtesh. The exhibitions provide context for the landscapes you will see outside.</p>
         <p>Allow roughly an hour for the indoor experience and reserve an entry time. You can enjoy many of the surrounding viewpoints without a visitor-center ticket. <a href={official.center} target="_blank" rel="noopener noreferrer" className={inlineLink}>Visitor information and reservations</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Camel Hill and the crater-rim viewpoints" image={{ src: camelHillPhoto, alt: "Rocky viewpoint at Camel Hill overlooking the Negev landscape" }}>
@@ -236,14 +236,14 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
     { label: "Israel travel tips", to: "/travel-blog/israel-travel-tips/", description: "Practical advice for your journey.", icon: "region" },
   ],
   sources: [
-    { label: "Israel Nature and Parks Authority — Ramon Visitor Center", url: official.center },
-    { label: "Israel Nature and Parks Authority — Ramon Colors", url: official.colors },
-    { label: "Israel Nature and Parks Authority — HaMinsara walk", url: official.minsara },
-    { label: "Israel Nature and Parks Authority — Nahal Ardon trail", url: official.ardon },
-    { label: "Israel Nature and Parks Authority — Hai Ramon status", url: official.haiRamon },
-    { label: "DarkSky International — Ramon Crater Dark Sky Park", url: official.darkSky },
-    { label: "Photo credit — HaMinsara columns (Yuvalr, CC BY-SA 3.0; resized)", url: "https://commons.wikimedia.org/wiki/File:Sandy_rectangular_and_hexagonal_prisms_at_the_centre_of_Makhtesh_Ramon_-_Ha-Minsara_(The_Carpentry_Shop),_Israel.jpg" },
-    { label: "Photo credit — fat sand rat (SuperJew, CC BY-SA 3.0; resized)", url: "https://commons.wikimedia.org/wiki/File:Fat_Sand_Rat.jpg" },
+    { label: "Israel Nature and Parks Authority - Ramon Visitor Center", url: official.center },
+    { label: "Israel Nature and Parks Authority - Ramon Colors", url: official.colors },
+    { label: "Israel Nature and Parks Authority - HaMinsara walk", url: official.minsara },
+    { label: "Israel Nature and Parks Authority - Nahal Ardon trail", url: official.ardon },
+    { label: "Israel Nature and Parks Authority - Hai Ramon status", url: official.haiRamon },
+    { label: "DarkSky International - Ramon Crater Dark Sky Park", url: official.darkSky },
+    { label: "Photo credit - HaMinsara columns (Yuvalr, CC BY-SA 3.0; resized)", url: "https://commons.wikimedia.org/wiki/File:Sandy_rectangular_and_hexagonal_prisms_at_the_centre_of_Makhtesh_Ramon_-_Ha-Minsara_(The_Carpentry_Shop),_Israel.jpg" },
+    { label: "Photo credit - fat sand rat (SuperJew, CC BY-SA 3.0; resized)", url: "https://commons.wikimedia.org/wiki/File:Fat_Sand_Rat.jpg" },
   ],
 };
 

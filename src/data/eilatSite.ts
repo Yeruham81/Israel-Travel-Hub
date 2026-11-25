@@ -12,7 +12,7 @@ export const eilatSite = {
     src: eilatWaterfrontHero,
     alt: "Eilat Red Sea shoreline, North Beach promenade and palm trees in daylight",
   },
-  intro: "Eilat is more than a beach resort. Its Red Sea shoreline is known for coral reefs and marine attractions, while the Eilat Mountains and Timna Park offer a completely different desert landscape. I would plan your stay around two areas rather than rush between them: choose the beaches and marine sights for one day, then leave another morning for the desert. This guide covers the places worth prioritising, transport between them and practical choices for first-time visitors.",
+  intro: "Eilat is more than a beach resort. Its Red Sea shoreline is known for coral reefs and marine attractions, while the Eilat Mountains and Timna Park offer a completely different desert landscape. I would devote one day to the beaches and marine sights, then spend another morning exploring the desert. This guide covers the places worth prioritising, transport between them and practical choices for first-time visitors.",
   official: {
     coralReserve: "https://en.parks.org.il/reserve-park/eilat-coral-beach-nature-reserve-2/",
     beaches: "https://eilat.city/en/list/beaches",
