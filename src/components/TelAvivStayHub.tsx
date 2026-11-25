@@ -60,7 +60,7 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
         <section id="areas" aria-labelledby="areas-h" className="mt-12 scroll-mt-28">
           <h2 id="areas-h" className="text-2xl font-semibold sm:text-3xl">Choose your Tel Aviv neighborhood</h2>
           <p className="mt-3 w-full text-pretty leading-relaxed text-muted-foreground">
-            {g.areaIntro}
+            Browse eight Tel Aviv hotel districts, from the central beaches to Jaffa and Rothschild Boulevard. Filter the neighborhoods below, or use my hotel catalog above to compare individual properties and booking options.
           </p>
           <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Choose areas by travel style">
             <button
@@ -180,7 +180,7 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
 
         <FaqList faqs={g.faqs} compact />
         <StayTripLinks region="telaviv" currentPath={g.path} />
-        <HomeContactForm guide={guideContactCopy(g.title, "accommodation", g.city)} />
+        <HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy(g.title, "accommodation", g.city)} />
         <SourceList ids={g.sourceIds} />
         <AreaPhotoCredit areas={areas} />
         <CityHotelPhotoCredits city="telaviv" />
