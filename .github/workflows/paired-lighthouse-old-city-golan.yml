@@ -1,0 +1,95 @@
+name: Paired Lighthouse diagnosis - Old City and Golan
+on:
+  pull_request:
+    branches: [main]
+    paths: [".github/workflows/paired-lighthouse-old-city-golan.yml"]
+permissions:
+  contents: read
+jobs:
+  paired:
+    if: github.head_ref == 'audit/paired-lighthouse-old-city-golan-20261126' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      VITE_INDEXABLE: "false"
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - uses: actions/checkout@v4
+        with:
+          ref: 701d8ccf205e70471ac5b5452fb52b5246cda4ba
+          path: baseline
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: 2afc458d5e338b2e46c401b8cb6a15a64fcedb40
+          path: current
+          persist-credentials: false
+      - name: Build both exact releases with identical runner and settings
+        run: |
+          set -euo pipefail
+          for release in baseline current; do
+            (cd "$release"; git rev-parse HEAD; bash scripts/install-ci-dependencies.sh; bash scripts/build-validated-static.sh; node scripts/verify-hostinger-static-export.mjs)
+          done
+          npm install --prefix /tmp/paired-lh --no-save lighthouse@12.8.2
+      - name: Compare the two affected routes under paired mobile conditions
+        run: |
+          set -euo pipefail
+          mkdir -p paired-results
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory baseline/.output/public >/tmp/paired-base.log 2>&1 &
+          a=$!
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory current/.output/public >/tmp/paired-current.log 2>&1 &
+          b=$!
+          trap 'kill "$a" "$b" || true' EXIT
+          for port in 8765 8766; do
+            curl --retry 5 --retry-connrefused --max-time 10 -fsS "http://127.0.0.1:$port/" >/dev/null
+          done
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import {spawnSync} from "node:child_process";
+          const paths=["/attractions/old-city-jerusalem/","/tours/golan-heights/"], results=[];
+          const ports={baseline:8765,current:8766};
+          for (const method of ["simulate","devtools"]) {
+            for (let round=1; round<=(method==="simulate"?3:1); round++) {
+              for (const path of paths) {
+                for (const release of (round%2?["baseline","current"]:["current","baseline"])) {
+                  const url="http://127.0.0.1:"+ports[release]+path;
+                  const name=[method,round,release,path.split("/").filter(Boolean).join("-")].join("-");
+                  const file="paired-results/"+name+".json";
+                  const r=spawnSync("/tmp/paired-lh/node_modules/.bin/lighthouse",[url,"--throttling-method="+method,"--only-categories=performance,accessibility","--output=json","--output-path="+file,"--save-assets","--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=35000","--quiet"],{encoding:"utf8",timeout:125000,maxBuffer:4*1024*1024});
+                  let row={method,round,release,path};
+                  try {
+                    const a=JSON.parse(fs.readFileSync(file,"utf8")),u=a.audits,net=u["network-requests"].details.items,m=u.metrics.details.items[0];
+                    if(a.runtimeError)throw Error(a.runtimeError.message);
+                    if(!net.some(n=>n.resourceType==="Document"&&n.url===url&&n.statusCode===200))throw Error("Document not verified");
+                    const broken=net.filter(n=>n.url.startsWith("http://127.0.0.1:")&&n.statusCode>=400);
+                    if(broken.length)throw Error("Local resource failures: "+JSON.stringify(broken.map(n=>[n.url,n.statusCode])));
+                    row={...row,performance:Math.round(a.categories.performance.score*100),accessibility:Math.round(a.categories.accessibility.score*100),lcpMs:u["largest-contentful-paint"].numericValue,fcpMs:u["first-contentful-paint"].numericValue,observedLcp:m.observedLargestContentfulPaint,cls:u["cumulative-layout-shift"].numericValue,tbtMs:u["total-blocking-time"].numericValue,bytes:u["total-byte-weight"].numericValue,scriptBytes:net.filter(n=>n.resourceType==="Script").reduce((s,n)=>s+n.transferSize,0),scriptRequests:net.filter(n=>n.resourceType==="Script").length,benchmark:a.environment.benchmarkIndex,lcpElement:u["largest-contentful-paint-element"]?.details,mainThread:u["mainthread-work-breakdown"]?.details,bootup:u["bootup-time"]?.details,diagnostics:u["diagnostics"]?.details,preload:u["prioritize-lcp-image"]?.details,longTasks:u["long-tasks"]?.details};
+                  }catch(e){row={...row,error:String(e),exit:r.status};}
+                  results.push(row);
+                  fs.writeFileSync("paired-results/measurements.json",JSON.stringify(results,null,2));
+                  console.log("PAIRED_MEASUREMENT",JSON.stringify({...row,lcpElement:undefined,mainThread:undefined,bootup:undefined,diagnostics:undefined,preload:undefined,longTasks:undefined}));
+                }
+              }
+            }
+          }
+          const median=v=>{const s=[...v].sort((a,b)=>a-b);return s.length?s[Math.floor(s.length/2)]:null;};
+          const keys=["performance","accessibility","lcpMs","fcpMs","observedLcp","cls","tbtMs","bytes","scriptBytes","scriptRequests","benchmark"];
+          const summary=paths.map(path=>({path,...Object.fromEntries(["baseline","current"].map(release=>{const rows=results.filter(x=>x.path===path&&x.release===release&&x.method==="simulate"&&!x.error);return [release,{count:rows.length,median:Object.fromEntries(keys.map(k=>[k,median(rows.map(x=>x[k]))])),scores:rows.map(x=>x.performance)}];}))}));
+          fs.writeFileSync("paired-results/comparison.json",JSON.stringify(summary,null,2));
+          for(const s of summary)console.log("PAIRED_COMPARISON",JSON.stringify(s));
+          if(results.length!==16||results.some(x=>x.error))process.exitCode=1;
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: paired-lighthouse-old-city-golan
+          path: paired-results/
+          if-no-files-found: warn
