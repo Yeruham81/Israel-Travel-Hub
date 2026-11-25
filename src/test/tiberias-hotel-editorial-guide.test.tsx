@@ -32,7 +32,7 @@ describe("Tiberias hotel editorial", () => {
     expect(screen.getByRole("heading", { level: 1, name: "The best hotels in Tiberias: where to stay" })).toBeInTheDocument();
     const categories = screen.getAllByTestId("tiberias-category-card");
     expect(categories).toHaveLength(4);
-    expect(screen.getByTestId("tiberias-category-grid")).toHaveClass("min-[360px]:grid-cols-2", "lg:grid-cols-3");
+    expect(screen.getByTestId("tiberias-category-grid")).toHaveClass("min-[360px]:grid-cols-2", "lg:grid-cols-2");
     expect(categories.map(card => card.getAttribute("href"))).toEqual(["#group-luxury", "#group-family", "#group-central", "#group-budget"]);
     expect(new Set(categories.map(card => card.querySelector("img")?.getAttribute("src"))).size).toBe(4);
     const groups = screen.getAllByTestId("tiberias-hotel-group");
@@ -60,7 +60,7 @@ describe("Tiberias hotel editorial", () => {
     expect(screen.getAllByTestId("tiberias-hotel-facility-notice")).toHaveLength(3);
     expect(container).toHaveTextContent("The private beach closed on October 4, 2026");
     expect(container).toHaveTextContent("The seasonal outdoor pool is closed from November 1, 2026");
-    expect(container).toHaveTextContent("currently advertises full board instead of all-inclusive");
+    expect(container).toHaveTextContent("currently says stays run on a full-board basis rather than all-inclusive");
     expect(container).not.toHaveTextContent("Select a hotel name to jump");
   });
 
