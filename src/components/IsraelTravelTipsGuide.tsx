@@ -208,7 +208,7 @@ export function IsraelTravelTipsGuide() {
         </ul>
       </section>
 
-      <HomeContactForm guide={{
+      <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
         heading: "Need a private driver for your Israel trip?",
         introduction: "I'm Moshe Barak. I arrange private airport transfers, city-to-city journeys and personalized day trips with a driver. Tell me your travel dates, pickup point, destinations, passengers and luggage, and I'll reply personally about private transport options.",
         subject: "",
