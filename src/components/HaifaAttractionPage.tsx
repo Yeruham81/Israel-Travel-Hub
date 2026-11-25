@@ -174,7 +174,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
     ["faq", "Questions"],
     ["contact", "Contact me"],
   ],
-  contactIntroduction: "Planning a visit to Haifa, arriving at the port or travelling around northern Israel? Tell me your dates, pickup point and the places you would like to visit. I can help arrange a private transfer, a driver for the day or a customised sightseeing route.",
+  contactIntroduction: "Tell me your date, pickup point, passenger count and preferred Haifa or northern coast stops. I can arrange a private transfer, port pickup or sightseeing day with a driver.",
   facts: [
     { icon: "location", label: "Location", value: "Northern coast", note: "From Haifa Bay up Mount Carmel" },
     { icon: "duration", label: "Time needed", value: "Half-day to 2 days", note: "Choose a city walk or full itinerary" },
