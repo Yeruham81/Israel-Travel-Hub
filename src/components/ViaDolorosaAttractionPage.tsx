@@ -44,7 +44,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
   itineraryFirst: true,
   itineraryBeforeHighlights: true,
   itineraryTitle: "How to walk the Via Dolorosa",
-  contactIntroduction: "Tell me where you're staying in Jerusalem, when you plan to visit and whether you'd like to combine the Via Dolorosa with other Old City landmarks or the Mount of Olives. I can help arrange private transport to a suitable gate and a pickup after your walk.",
+  contactIntroduction: "Tell me your Jerusalem pickup point, travel date, passengers and whether you want to combine the Via Dolorosa with other Old City landmarks. I can arrange private transport with a driver to a suitable gate and pickup after your walk.",
   facts: [
     { icon: "location", label: "Location", value: "Jerusalem's Old City", note: "Muslim and Christian Quarters" },
     { icon: "duration", label: "Time needed", value: "1–3 hours", note: "Allow longer for prayer and church interiors" },
