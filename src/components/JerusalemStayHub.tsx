@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, Lightbulb } from "lucide-react";
+import { Lightbulb } from "lucide-react";
 import {
   type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels,
 } from "@/data/content";
