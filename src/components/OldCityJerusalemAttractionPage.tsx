@@ -46,7 +46,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   relatedTitle: "Continue exploring Jerusalem",
   itineraryFirst: true,
   itineraryTitle: "Plan your Old City visit",
-  contactIntroduction: "Tell me your hotel or pickup point, visiting date and the Old City landmarks you would like to see. I can arrange convenient private transport to a suitable entrance gate, coordinate a pickup after your walk or plan a longer Jerusalem day.",
+  contactIntroduction: "Tell me your hotel or pickup point, visiting date, passengers and the Old City landmarks you want to see. I can arrange private transport with a driver to a suitable entrance gate and pickup after your walk.",
   facts: [
     { icon: "location", label: "Location", value: "Inside the city walls", note: "Six main entrance gates featured on the map" },
     { icon: "duration", label: "Time needed", value: "2–3 hours to a full day", note: "Around 4–5 hours for a classic cross-quarter walk" },
