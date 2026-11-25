@@ -709,7 +709,7 @@ const haifaHotelSources: SourceReference[] = [
   id: `hotel-haifa-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: HAIFA_STAY_REVIEW_DATE,
   note: id === "port-inn"
-    ? "For room types, bathrooms, meals and arrival arrangements, contact Port Inn directly."
+    ? "Port Inn's public profile lists the name and downtown address only. Contact Port Inn directly for room types, bathrooms, meals and arrival arrangements."
     : "",
 }));
 

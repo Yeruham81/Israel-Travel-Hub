@@ -53,6 +53,8 @@ jobs:
           path: /tmp/editorial-baseline
       - name: Compare focused style patterns without penalizing ordinary vocabulary
         run: node scripts/compare-editorial-style.mjs /tmp/editorial-baseline/pages editorial-audit/pages
+      - name: Verify all 21 reviewed high-priority issues and retained visitor facts
+        run: node scripts/verify-editorial-round2.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

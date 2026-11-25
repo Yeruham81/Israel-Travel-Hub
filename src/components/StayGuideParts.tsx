@@ -35,7 +35,7 @@ export function StayCategoryCard({ guide }: { guide: HotelCategoryGuide }) {
 }
 
 export function StayBookingDisclosure() {
-  return <div className="mt-5 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed"><p>I compare hotels by location, travel style and facilities, using information from the properties themselves.</p><p className="mt-2">Check prices and availability on the booking site for your dates and guests. Confirm room occupancy, age limits, meals and seasonal facilities with the hotel.</p></div>;
+  return <div className="mt-5 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed"><p>I compare hotels by location, travel style and facilities, using information from the properties themselves.</p><p className="mt-2">Check room prices, availability and cancellation terms on the booking site. Ask the hotel about occupancy, guest and facility age limits, meals, seasonal pools, beach access and parking where relevant.</p></div>;
 }
 
 export function StayBrowseLink({ link, pageId }: { link: ProviderLink | undefined; pageId: string }) {
