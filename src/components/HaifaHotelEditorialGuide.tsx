@@ -9,6 +9,7 @@ import { StayTripLinks } from "@/components/StayTripLinks";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { resortHotel, hotelBooking } from "@/components/StayGuideParts";
 import { linksForPage } from "@/data/registry";
+import { accommodationEditorial } from "@/data/accommodationEditorial";
 import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { hotelGoogleMapsUrl } from "@/lib/hotel-google-maps";
@@ -79,7 +80,7 @@ const hotelNotes: Record<string, HotelNote> = {
     summary: "A modern hotel near the German Colony and downtown, convenient for urban sightseeing and dining.",
     bestFor: "Visitors prioritizing a lower-city base",
     consider: "Check parking, room outlook and the route to your train station or cruise terminal.",
-    beach: "Urban location; not a swimming beach",
+    beach: "Urban hotel; travel to the coast",
   },
   "haifa-nof": {
     kind: "Carmel city hotel",
@@ -188,7 +189,7 @@ function trackedExpediaBrowseLink(pageKey: string) {
 
 const bookingTips = [
   { title: "Choose the right elevation", text: "A nearby point on the map may be up a steep slope. Check walks, steps and the Carmelit or bus connection." },
-  { title: "Confirm your beach plan", text: "A view of Haifa Bay is not a beachfront location. For beach days, compare the southern seafront and its transport connections." },
+  { title: "Confirm your beach plan", text: "For beach days, choose the southern seafront. Mount Carmel hotels offer bay views with a separate journey to the shore." },
   { title: "Match the room to your party", text: "Check all guest ages, bed arrangements, connecting rooms and any adults-only policy before paying." },
   { title: "Compare actual facilities", text: "Pools, plunge pools, spa treatments and children's activities can have different seasons or access rules." },
   { title: "Check transport and parking", text: "Confirm train station, parking charges and the exact drop-off point, particularly for a late arrival or cruise." },
@@ -236,7 +237,7 @@ function HotelCard({ id, pageId }: { id: string; pageId: string }) {
 }
 
 export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestination }) {
-  const pageId = "stay-haifa";
+  const pageId = "guide-best-hotels-in-haifa";
   const groups = guide.groups;
   const mainGroups = groups.filter(group => group.id !== "budget");
   const budgetGroup = groups.find(group => group.id === "budget");
@@ -246,8 +247,8 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
 
   return <main className="pb-10" data-testid="haifa-style-editorial">
     <GuideHeader
-      crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }, { name: "Haifa", to: guide.path as LinkProps["to"] }]}
-      eyebrow="Accommodation guide · Haifa"
+      crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: accommodationEditorial.haifa.title, to: accommodationEditorial.haifa.path as LinkProps["to"] }]}
+      eyebrow="Travel guide · Haifa"
       title={guide.title}
       intro={guide.intro}
       image={guide.photo}
@@ -258,8 +259,8 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
       <section id="choose" className="mt-10 scroll-mt-32" aria-labelledby="choose-h">
         <p className="eyebrow">Choose the location, then the hotel</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Haifa stay suits you?</h2>
-        <p className="mt-4 max-w-4xl leading-relaxed">I recommend starting with the neighborhood. The German Colony suits restaurants and historic streets, the Carmel is good for viewpoints and city hotels, and the southern waterfront makes beach time easier. Hadar and downtown offer other practical bases for exploring Haifa.</p>
-        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3" data-testid="haifa-category-grid">
+        <p className="mt-4 max-w-4xl leading-relaxed">I recommend choosing your Haifa neighborhood before comparing rooms. The German Colony puts restaurants and historic streets close by; Mount Carmel suits viewpoints and upper-city dining; and the southern waterfront is convenient for beach days. Downtown and Hadar offer lively urban bases, including independent places to stay.</p>
+        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-2" data-testid="haifa-category-grid">
           {mainGroups.map(group => {
             const copy = groupCopy[group.id];
             return <a key={group.id} href={"#group-" + group.id}
@@ -287,7 +288,7 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
         )}
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
-          <p>A room with a beautiful bay view can be high above the shore. Check the actual journey to the beach, the Bahá'í Gardens and your planned daily stops before deciding.</p>
+          <p>For a beach holiday, start with the southern seafront. For viewpoints and restaurants on Mount Carmel, compare hotels in the upper city. The German Colony is a useful base for historic streets and the lower Bahá'í Gardens.</p>
         </aside>
       </section>
 
@@ -364,6 +365,7 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
             </section>;
           })}
         </div>
+        <p className="mt-5 text-sm leading-relaxed">For a destination overview and focused family or boutique comparisons, see the <Link to="/accommodation/haifa/" className="font-semibold text-primary underline underline-offset-2">Haifa accommodation guide</Link>.</p>
         {allHotelsAffiliate && <div className="mt-3 flex flex-col items-start gap-3 rounded-2xl border bg-secondary/30 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
           <h3 className="text-lg font-semibold">Looking for more hotels in Haifa?</h3>
           <a href={hotelBrowseAffiliateUrl(allHotelsAffiliate, pageId)}
@@ -378,7 +380,7 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
       </section>
 
       <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
-        <h2 id="location-h" className="text-3xl">Where are the hotels?</h2>
+        <h2 id="location-h" className="text-3xl">Haifa hotel areas & getting around</h2>
         <p className="mt-3 leading-relaxed">Haifa stretches from the port and German Colony up to the Carmel and along the southern beachfront. Use the map to orient yourself, and the individual hotel links above to find each entrance.</p>
         <div className="mt-5"><AreaMap area={{ name: "Haifa hotel areas", map: guide.map }} provider="google" googleZoom={12} /></div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
@@ -388,9 +390,9 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{location.text}</p>
           </article>)}
         </div>
-        <h3 className="mt-8 text-xl font-semibold">Getting to your hotel and around Haifa</h3>
-        <p className="mt-3 leading-relaxed">If you arrive by train, choose the station and onward connection for your actual hotel. The <a href="https://www.carmelithaifa.com/carmelit-haifa/carmelit-haifa-about/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-2">Carmelit</a> connects the lower city with Carmel Center, but you may still need a bus, taxi or uphill walk for the final section. For airport arrivals, see my <Link to="/travel-blog/ben-gurion-airport-to-haifa/" className="font-semibold text-primary underline underline-offset-2">Ben Gurion Airport to Haifa guide</Link>.</p>
-        <p className="mt-3 leading-relaxed">If you plan to visit the Bahá'í Gardens, check the entrance and visiting arrangements for the part you want to see. For shore excursions, confirm your cruise terminal, ship schedule and the route from your hotel. You can combine Haifa with Acre, Caesarea or the Galilee by tour or private driver.</p>
+        <h3 className="mt-8 text-xl font-semibold">Arriving by train, cruise ship or airport transfer</h3>
+        <p className="mt-3 leading-relaxed">Haifa Center–HaShmona station is a useful arrival point for the lower city and German Colony; Haifa Hof HaCarmel serves the southern beach area. For Carmel Center hotels, plan an onward journey uphill. The <a href="https://www.carmelithaifa.com/carmelit-haifa/carmelit-haifa-about/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-2">Carmelit</a> links downtown, Hadar and Carmel Center, with the final walk depending on your hotel. My <Link to="/travel-blog/ben-gurion-airport-to-haifa/" className="font-semibold text-primary underline underline-offset-2">Ben Gurion Airport to Haifa guide</Link> covers longer-distance arrival options.</p>
+        <p className="mt-3 leading-relaxed">For the Bahá'í Gardens, choose the entrance that serves the area you plan to visit. Haifa Center–HaShmona railway station is close to the port passenger area, while cruise access depends on your ship and terminal. I also offer private journeys combining Haifa with <Link to="/attractions/akko-acre/" className="font-semibold text-primary underline underline-offset-2">Acre</Link>, <Link to="/attractions/caesarea/" className="font-semibold text-primary underline underline-offset-2">Caesarea</Link> or the Galilee.</p>
       </section>
 
       <section id="tips" className="mt-14 scroll-mt-32" aria-labelledby="tips-h">
@@ -403,11 +405,11 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>Travel dates can affect hotel services and transport. My <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> helps you plan around Jewish holidays and special dates.</p>
         </aside>
-        <p className="mt-5 text-sm leading-relaxed text-muted-foreground">Hotels and booking websites are independent providers. Check the exact room, full price, guest policy and cancellation terms before confirming.</p>
+        <p className="mt-5 text-sm leading-relaxed text-muted-foreground">Room prices, guest policies and cancellation terms appear on the booking provider when you select your dates.</p>
       </section>
 
       <FaqList faqs={guide.faqs} />
-      <StayTripLinks region={guide.id} currentPath={guide.path} presentation="guide" />
+      <StayTripLinks region={guide.id} currentPath={accommodationEditorial.haifa.path} presentation="guide" />
       <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
         ...guideContactCopy(guide.title, "accommodation", guide.name),
         heading: "Need a private transfer to Haifa?" ,
