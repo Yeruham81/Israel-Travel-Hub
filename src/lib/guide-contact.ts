@@ -18,32 +18,32 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
         introduction: "Share your flight, destination, passengers and luggage. I'll reply personally about arranging your private airport pickup.",
         placeholder: "Flight date and number, destination, passengers and luggage…" };
     case "airport":
-      return { ...base, heading: "Questions about your airport arrival?",
-        introduction: "Have a question about Ben Gurion Airport, your onward journey or an airport pickup? Tell me your arrival date, destination and what you'd like to clarify. I'll reply personally and can discuss private transport when appropriate.",
+      return { ...base, heading: "Need a private airport pickup?",
+        introduction: "I'm Moshe Barak. I arrange private airport pickups and transfers from Ben Gurion Airport. Tell me your flight date, destination, passengers and luggage, and I'll reply personally about your transfer.",
         placeholder: "Arrival date, destination, travellers, luggage or your question…" };
     case "transport":
-      return { ...base, heading: "Questions about getting around Israel?",
-        introduction: "Have a question about the transport choices in this guide? Tell me where and when you plan to travel and which option you are considering. I'll reply personally and can discuss private transport where suitable.",
+      return { ...base, heading: "Need a private transfer or driver in Israel?",
+        introduction: "I'm Moshe Barak. I arrange private transfers, city-to-city rides and day trips with a driver. Tell me your pickup point, destinations, travel date and group size, and I'll reply personally.",
         placeholder: "Starting point, destination, travel date, passengers or your question…" };
     case "attraction":
-      return { ...base, heading: `Planning a visit to ${destination}?`,
-        introduction: `Have a question about visiting ${destination}? Tell me when you plan to go, where you'll be staying and what interests you most. I'll reply personally and can discuss transport arrangements where relevant.`,
+      return { ...base, heading: `Need a private driver to visit ${destination}?`,
+        introduction: `I'm Moshe Barak. I arrange private transfers and day trips with a driver to ${destination} and nearby places. Tell me your travel date, pickup point, destinations and passenger count, and I'll reply personally.`,
         placeholder: "Travel date, starting point, places of interest or your question…" };
     case "itinerary":
-      return { ...base, subject: "", heading: "Questions about planning your Israel itinerary?",
-        introduction: "Have a question about your itinerary, or need to arrange an airport transfer or private journey in Israel? Send me a message and I'll reply personally.",
+      return { ...base, subject: "", heading: "Need private transport for your Israel itinerary?",
+        introduction: "I'm Moshe Barak. I arrange airport transfers, private journeys between cities and sightseeing days with a driver. Send me your travel dates, pickup point, destinations and number of passengers, and I'll reply personally.",
         placeholder: "Dates, number of days, destinations, transport needs or your question…" };
     case "accommodation":
       return { ...base, heading: `Need a private transfer to or from ${destination}?`,
         introduction: `I'm Moshe Barak. I arrange private airport transfers, city-to-city rides and private day trips in Israel. Tell me your pickup point, destination, travel date and group size, and I'll reply personally about your transport options.`,
         placeholder: "Pickup point, destination, date, passengers, luggage or your question…" };
     case "connectivity":
-      return { ...base, heading: "Planning a trip to Israel?",
-        introduction: "Have a question about planning your visit, getting from the airport or arranging a private journey? Send me your travel dates, destinations and what you would like help with. I'll reply personally.",
+      return { ...base, heading: "Need a private transfer during your Israel trip?",
+        introduction: "I'm Moshe Barak. I arrange private airport transfers and day trips with a driver in Israel. Tell me your travel dates, pickup location, destinations and number of passengers, and I'll reply personally.",
         placeholder: "Travel dates, destinations, number of travellers or your question…" };
     default:
-      return { ...base, heading: "Ask me about your visit to Israel",
-        introduction: "Have a question about the practical advice in this guide? Tell me where and when you plan to visit and what you'd like to clarify. I'll reply personally and can help with transport planning where relevant.",
+      return { ...base, heading: "Need a private driver for your Israel trip?",
+        introduction: "I'm Moshe Barak. I arrange private transfers and sightseeing journeys with a driver in Israel. Tell me your pickup point, travel dates, destinations and group size, and I'll reply personally.",
         placeholder: "Travel dates, places you plan to visit or your question…" };
   }
 }
@@ -54,7 +54,7 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
 export function neighborhoodTripContactCopy(city: "Jerusalem" | "Tel Aviv" | "Haifa"): GuideContactCopy {
   return {
     subject: "",
-    heading: `Planning a trip to ${city}?`,
+    heading: `Need a private driver or transfer in ${city}?`,
     introduction: city === "Jerusalem"
       ? "I'm Moshe Barak. Need an airport transfer to Jerusalem, a private driver for sightseeing or a day trip beyond the city? Tell me your dates, pickup point and group size, and I'll reply personally."
       : city === "Tel Aviv"
