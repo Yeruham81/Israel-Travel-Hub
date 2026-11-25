@@ -32,7 +32,7 @@ describe("Israel travel tips — first-time visitor guide", () => {
     expect(travelTipsFaqs).toHaveLength(8);
     expect(source).toContain('data-testid="travel-tips-related-guides"');
     expect((source.match(/title: "(?:Best Time to Visit|Israel.s Calendar|Ben Gurion Airport Arrival|Getting Around Israel|What to Eat|7-Day Israel Itinerary)/g) || [])).toHaveLength(6);
-    expect(source).toContain("<HomeContactForm guide=");
+    expect(source).toContain("<HomeContactForm showTripadvisorBesidePortraitMobile guide=");
     expect(source).toContain("<SourcesDisclosure>");
     expect(source).toContain("<AuthorCard/>");
   });
