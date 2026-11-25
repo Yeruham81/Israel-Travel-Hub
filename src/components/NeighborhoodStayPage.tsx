@@ -165,8 +165,9 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   );
 
   const overviewSection = (
-        <Section id="overview" title={`What is it like to stay in ${area.name}?`} className="scroll-mt-32">
-          {area.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        <Section id="overview" title={`Choosing a hotel in ${area.shortName}`} className="scroll-mt-32">
+          {/* The destination-wide Where to Stay article already covers overview paragraphs 1–2. */}
+          {area.overview.slice(2).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           {localInsight && <aside className="mt-6 rounded-2xl border bg-secondary/30 p-4 sm:p-5">
             <h3 className="text-lg font-semibold">{localInsight.heading}</h3>
             <p className="mt-2 text-sm leading-relaxed">{localInsight.choose}</p>
