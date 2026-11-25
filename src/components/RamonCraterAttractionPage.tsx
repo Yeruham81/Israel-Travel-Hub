@@ -37,7 +37,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
   visitorNavLabel: "Tickets & hours",
   historyTitle: "How Makhtesh Ramon was formed",
   relatedTitle: "Explore the desert and beyond",
-  contactIntroduction: "Tell me your travel date, where you're staying and whether you prefer viewpoints, easy walks or a longer desert outing. I'll be happy to help plan a private trip.",
+  contactIntroduction: "Tell me your date, pickup point, group size and the viewpoints or desert sites you would like to visit. I can arrange a private driver for a trip to Mitzpe Ramon and the Negev.",
   facts: [
     { icon: "location", label: "Location", value: "Negev Highlands", note: "Mitzpe Ramon, on Route 40" },
     { icon: "duration", label: "Time needed", value: "1 hour–full day", note: "Longer for a serious hike or overnight stay" },
