@@ -88,7 +88,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   historyTitle: "Mount Zion: sacred traditions and Jerusalem history",
   relatedTitle: "Continue exploring Jerusalem",
   itineraryFirst: true,
-  contactIntroduction: "Tell me when you are visiting and whether you want to explore Mount Zion alone or combine it with Jerusalem's Old City. I can help arrange transport to a convenient pickup or drop-off point.",
+  contactIntroduction: "Tell me your date, pickup point, group size and whether you want to combine Mount Zion with the Old City. I can arrange private transport with a driver to a suitable drop-off or pickup point.",
   facts: [
     { icon: "location", label: "Location", value: "Beside Zion Gate", note: "Just south of the Old City walls" },
     { icon: "duration", label: "Time needed", value: "1–3 hours", note: "Allow more time for Gallicantu or the cemetery" },
