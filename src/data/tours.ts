@@ -265,7 +265,7 @@ export const golanTourLocalCards = [
   { to: "/attractions/sea-of-galilee/", cta: "Explore the lake", title: "Sea of Galilee travel guide", description: "Plan the region below the Golan plateau and its waterfront towns.", photo: { src: tiberiasWaterfront, alt: "Tiberias waterfront on the Sea of Galilee" } },
   { to: "/attractions/capernaum/", cta: "Explore Capernaum", title: "Capernaum archaeological site", description: "Discover a major lakeside heritage stop near the Golan approach roads.", photo: { src: capernaum, alt: "Ancient synagogue ruins at Capernaum" } },
   { to: "/attractions/mount-of-beatitudes/", cta: "Explore a viewpoint", title: "Mount of Beatitudes", description: "A nearby Galilee hillside destination for a separate day in the north.", photo: { src: mountBeatitudes, alt: "Church on the Mount of Beatitudes near the Sea of Galilee" } },
-  { to: "/attractions/tabgha/", cta: "Explore Tabgha", title: "Tabgha churches", description: "A complementary lakeside historic site, not an automatic Golan-tour stop.", photo: { src: tabgha, alt: "Church and grounds at Tabgha beside the lake" } },
+  { to: "/attractions/tabgha/", cta: "Explore Tabgha", title: "Tabgha churches", description: "A lakeside church and pilgrimage site west of the Golan Heights.", photo: { src: tabgha, alt: "Church and grounds at Tabgha beside the lake" } },
   { to: "/attractions/mount-tabor/", cta: "Visit Mount Tabor", title: "Mount Tabor guide", description: "Another northern Israel viewpoint and heritage destination for a different itinerary.", photo: { src: mountTabor, alt: "Mount Tabor rising above the Galilee landscape" } },
   { to: "/travel-blog/best-hotels-in-tiberias/", cta: "Compare nearby hotels", title: "Where to stay in Tiberias", description: "Choose a base for local northbound day trips and lake visits.", photo: { src: tiberiasHeritage, alt: "Historic stone buildings in Tiberias" } },
 ] as const;
@@ -379,7 +379,7 @@ export const tourCategories: TourCategory[] = [
     photo: migration["EXISTING:masada"], match: { destinations: ["masada", "dead-sea", "ein-gedi"] },
     paragraphs: [
       "Choose your departure city first. Classic tours usually pair a guided visit to Masada with time at a designated Dead Sea beach. Sunrise options begin very early and often involve the steep Snake Path hike, while Dead Sea-only trips leave more time for relaxing by the water.",
-      "Look carefully at what is actually included: national-park and cable-car tickets, reserve admission, Dead Sea beach access, meals and any guided visits can be charged separately. An English-speaking host or driver does not necessarily provide professional guiding at the sites.",
+      "Look carefully at what is actually included: national-park and cable-car tickets, reserve admission, Dead Sea beach access, meals and any guided visits can be charged separately. If you want professional guiding at the sites, check whether a licensed guide is included.",
       "Ein Gedi's walking routes have changed following flood damage, and some advertised itineraries may visit an alternative location. Check the current accessible trails with the park authority and confirm the precise stop with the tour operator. For a flexible private day, I can arrange transport from Jerusalem or Tel Aviv, with your stops and return time agreed in advance.",
     ],
     choices: [
@@ -425,7 +425,7 @@ export const tourCategories: TourCategory[] = [
     intro: "Discover Nazareth's historic churches and the lakeside sites where the Gospel stories unfolded. Compare guided day trips and private tours from Jerusalem or Tel Aviv, or ask me to arrange your own private transport around the Galilee.",
     photo: migration["EXISTING:galilee"], match: { destinations: ["nazareth", "galilee"] },
     paragraphs: [
-      "A typical full-day route connects Nazareth’s Basilica of the Annunciation with selected sites around the Sea of Galilee, such as Capernaum, Tabgha and the Mount of Beatitudes. Different tours make different stops, and some drive past Cana or Mount Tabor without allowing time for a visit. Check the listed itinerary rather than assuming every landmark is included.",
+      "A typical full-day route connects Nazareth’s Basilica of the Annunciation with selected sites around the Sea of Galilee, such as Capernaum, Tabgha and the Mount of Beatitudes. Different tours make different stops, and some drive past Cana or Mount Tabor without allowing time for a visit. Check which sites are included as actual visits.",
       "Travel from Jerusalem normally takes longer than from Tel Aviv. On a shared group tour, compare the confirmed pickup location, time available at each site, guiding language, entrance tickets and return arrangements. A private guided tour is different from my own private car-and-driver service: licensed guiding is not automatically included in a transport-only quote.",
       "Some Galilee tours also stop at Yardenit, the baptismal site on the Jordan River near the southern end of the lake. The river stop is optional or absent on many products, and visiting the site does not mean a baptism ceremony is included. Confirm religious-site opening hours, modest dress, site access and any ceremony requirements before booking.",
     ],
@@ -460,7 +460,7 @@ export const tourCategories: TourCategory[] = [
     ],
     faqs: [
       { q: "Can I depart from Jerusalem as well as Tel Aviv?", a: "Yes. The catalog lists options from both cities. Journeys from Jerusalem are normally longer; select the correct departure and verify the meeting point, pickup arrangements and duration on the booking page." },
-      { q: "Do all tours visit Caesarea, Haifa and Akko?", a: "These three cities are the core destinations, but time on site, guided walking and stops within each city vary between products. Confirm the current itinerary rather than relying on the title alone." },
+      { q: "Do all tours visit Caesarea, Haifa and Akko?", a: "These three cities are the core destinations, but time on site, guided walking and stops within each city vary between products. Check the listed stops and visit durations." },
       { q: "Is entry to the Bahá’í Gardens included?", a: "Many tours stop at an outside viewpoint with a view of the terraces. A panoramic stop is not a guided visit inside the gardens. Check official garden visiting rules and the operator's exact plans." },
       { q: "Can I visit the Rosh Hanikra grottos on the same day?", a: "Some advertised coastal tours include Rosh Hanikra, but its access and operating arrangements near the northern border can change. Do not assume the grottos are open; confirm current access and an alternative plan before booking." },
       { q: "Are entry tickets for Caesarea and Akko included?", a: "Inclusions vary. Some shared tours include national-park and Crusader-attraction tickets, while small-group and private options may charge separately. Compare the included admissions shown by each operator." },

@@ -48,7 +48,7 @@ const tours = [
 ];
 const faqs = [
   {q:"Which churches are essential on a first visit to Jerusalem?",a:"For most first visits, I would prioritise the Church of the Holy Sepulchre and selected stops along the Via Dolorosa. Add Gethsemane on the Mount of Olives or Dormition Abbey on Mount Zion if your time and interests allow."},
-  {q:"Can I visit all the major churches in one day?",a:"Not comfortably. The sites lie in four distinct areas, and opening windows, religious services, queues and steep paths affect visits. Choose one or two nearby clusters rather than trying to see every church."},
+  {q:"Can I visit all the major churches in one day?",a:"Not comfortably. The sites lie in four distinct areas, and opening windows, religious services, queues and steep paths affect visits. Focus on one or two nearby clusters of churches."},
   {q:"Are Jerusalem churches free to enter?",a:"Many offer free general entry, but some compounds, archaeological areas and towers charge separately. St Anne, Pater Noster, the Chapel of the Ascension and the Redeemer tower have published admission charges."},
   {q:"Is the Garden Tomb the same place as the Church of the Holy Sepulchre?",a:"No. They are separate places. The Holy Sepulchre is the traditional site of the crucifixion and resurrection for numerous historic churches; the Garden Tomb is a different site popular with some Protestant visitors."},
   {q:"Is the Mount of Olives walk accessible to everyone?",a:"No. The slope is steep, paths can be uneven and some compounds have stairs. A drive to an upper viewpoint can avoid the uphill climb, but the descent may still be difficult. Confirm accessibility for specific sites."},
@@ -211,11 +211,11 @@ export function JerusalemChurchesGuide(){
     <SourcesDisclosure>
       <p className="mb-3 text-sm leading-relaxed">Visiting hours and admission information: Christian Information Center shrine listing updated 15 September 2026, supplemented by church operators. These times are published guidance, not real-time opening guarantees.</p>
       <ul className="space-y-2 text-sm">
-        <li><OutLink href={churchesSourceUrl}>Christian Information Center — church hours and entrance information</OutLink></li>
-        <li><OutLink href="https://www.dormitio.net/">Dormition Abbey — official website</OutLink></li>
-        <li><OutLink href="https://www.stpeter-gallicantu.org/Practical-Information.html?lang=en">St Peter in Gallicantu — practical information</OutLink></li>
-        <li><OutLink href="https://www.custodia.org/en/">Custody of the Holy Land — Franciscan sites</OutLink></li>
-        <li><OutLink href="https://www.seetheholyland.net/">See the Holy Land — historical context</OutLink></li>
+        <li><OutLink href={churchesSourceUrl}>Christian Information Center - church hours and entrance information</OutLink></li>
+        <li><OutLink href="https://www.dormitio.net/">Dormition Abbey - official website</OutLink></li>
+        <li><OutLink href="https://www.stpeter-gallicantu.org/Practical-Information.html?lang=en">St Peter in Gallicantu - practical information</OutLink></li>
+        <li><OutLink href="https://www.custodia.org/en/">Custody of the Holy Land - Franciscan sites</OutLink></li>
+        <li><OutLink href="https://www.seetheholyland.net/">See the Holy Land - historical context</OutLink></li>
       </ul>
     </SourcesDisclosure>
     <PhotoCreditsDisclosure entries={jerusalemChurches.filter(church=>church.photo && (church.photoCredit || church.photoSourceUrl || church.photoLicenseUrl)).map(church=>({

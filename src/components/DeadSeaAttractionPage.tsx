@@ -90,7 +90,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Salt scenery, desert cliffs and the promenade" image={{ src: saltFormationPhoto, alt: "White salt formations rising from the turquoise Dead Sea" }}>
         <p>The contrast between pale salt, blue-green water and the dry desert hills is part of the appeal. Allow time for a short walk along an established promenade and a few photographs before or after your beach visit.</p>
-        <p>Stay on marked public paths. Sections of the northern shore are unstable because of sinkholes, and a beautiful-looking roadside patch of salt is not necessarily safe to approach.</p>
+        <p>Stay on marked public paths. Sinkholes make sections of the northern shore unstable. Keep to designated access areas and bathing beaches.</p>
       </AttractionHighlight>
       <AttractionHighlight title="A hotel spa or an overnight stay">
         <p>Hotels around Ein Bokek offer spa treatments, pools and overnight accommodation. A spa day can be attractive in hot or cool weather, but access, opening hours and inclusions depend on the property and its current offer.</p>
@@ -147,7 +147,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
         <article className="rounded-xl border bg-card p-4">
           <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><BusFront className="size-5 text-primary" aria-hidden="true" />By public transport</h3>
           <p className="mt-2 text-sm leading-relaxed">Egged operates intercity buses along the Dead Sea corridor, including services from Jerusalem. Frequencies vary, and service can be limited on weekends and holidays. Check the exact route and return journey for your travel date.</p>
-          <p className="mt-2 text-sm leading-relaxed">There is no railway station at Ein Bokek. Use <External href={links.egged}>Egged's current timetable and route planner</External> rather than relying on old bus numbers, fares or departure times.</p>
+          <p className="mt-2 text-sm leading-relaxed">There is no railway station at Ein Bokek. Use <External href={links.egged}>Egged's current timetable and route planner</External> for bus numbers, fares and departure times.</p>
         </article>
       </div>
       <p className="text-sm leading-relaxed">Arriving from Ben Gurion Airport? My <Link to="/airport-transfers/ein-bokek/" className={inlineLink}>airport-to-Ein-Bokek transfer guide</Link> explains the journey, while the <Link to="/travel-blog/jerusalem-to-the-dead-sea/" className={inlineLink}>Jerusalem to the Dead Sea guide</Link> compares options from the city.</p>
@@ -173,7 +173,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
           </ol>
         </article>
       </div>
-      <AttractionPracticalTip>For a comfortable day, choose <strong>two principal stops</strong>—usually Masada and the beach. If you also want to hike in Ein Gedi, check its current route access and start early; the reserve may limit entry after floods.</AttractionPracticalTip>
+      <AttractionPracticalTip>For a comfortable day, choose <strong>two principal stops</strong>, usually Masada and the beach. If you also want to hike in Ein Gedi, check its current route access and start early; the reserve may limit entry after floods.</AttractionPracticalTip>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-lg font-semibold">Dead Sea area map</h3>
         <p className="mt-1 text-sm text-muted-foreground">The map is centred on the Ein Bokek resort area. Use the individual location links above for each beach.</p>
@@ -251,15 +251,15 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
     { label: "Private driver in Israel", to: "/private-driver-in-israel/", icon: "itinerary", description: "A flexible day at your own pace" },
   ],
   sources: [
-    { label: "Tamar Regional Council — Ein Bokek Central Beach", url: links.einBokek },
-    { label: "Tamar Regional Council — Hamei Zohar Central Beach", url: links.hameiZohar },
-    { label: "Dead Sea Land — hotel beach facilities", url: links.hotelBeaches },
-    { label: "Israel Ministry of Interior — safe sea bathing rules", url: links.bathingRules },
-    { label: "Egged — official bus schedules", url: links.egged },
-    { label: "Israel Nature and Parks Authority — Masada", url: links.masada },
-    { label: "Israel Nature and Parks Authority — Ein Gedi", url: links.einGedi },
-    { label: "Israel Nature and Parks Authority — Qumran", url: links.qumran },
-    { label: "Geological Survey of Israel — Dead Sea", url: links.geology },
+    { label: "Tamar Regional Council - Ein Bokek Central Beach", url: links.einBokek },
+    { label: "Tamar Regional Council - Hamei Zohar Central Beach", url: links.hameiZohar },
+    { label: "Dead Sea Land - hotel beach facilities", url: links.hotelBeaches },
+    { label: "Israel Ministry of Interior - safe sea bathing rules", url: links.bathingRules },
+    { label: "Egged - official bus schedules", url: links.egged },
+    { label: "Israel Nature and Parks Authority - Masada", url: links.masada },
+    { label: "Israel Nature and Parks Authority - Ein Gedi", url: links.einGedi },
+    { label: "Israel Nature and Parks Authority - Qumran", url: links.qumran },
+    { label: "Geological Survey of Israel - Dead Sea", url: links.geology },
   ],
 };
 

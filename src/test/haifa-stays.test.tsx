@@ -120,7 +120,7 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     expect(container.querySelector("#hotel-haifa-botanica")).toBeNull();
     expect(container.querySelector("#hotel-haifa-schumacher")).toBeNull();
     expect(container.querySelector("#hotel-haifa-leonardo-plaza")).toHaveTextContent("weekends, holidays and July–August");
-    expect(container.querySelector("#hotel-haifa-crowne-plaza")).toHaveTextContent("Do not assume a children's activity club");
+    expect(container.querySelector("#hotel-haifa-crowne-plaza")).toHaveTextContent("Check whether the hotel offers a children's activity club");
     expect(container.querySelector("#hotel-haifa-dan-carmel")).toHaveTextContent("not mean every room or executive category fits the same party");
   });
 

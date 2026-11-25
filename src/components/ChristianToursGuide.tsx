@@ -20,16 +20,16 @@ const slug="/travel-blog/christian-tours-in-israel/";
 const link="font-semibold text-primary underline underline-offset-4 hover:text-primary/80";
 const nav=[["start","How to plan"],["destinations","Christian destinations"],["itineraries","Sample itineraries"],["tours","Guided tours"],["practical","Visiting advice"],["other-places","Other biblical places"],["faq","FAQ"],["more-sites","Related Christian guides"],["plan-trip","Plan your visit"],["contact","Contact Moshe"]] as const;
 const sources=[
- {title:"Christian Information Center — shrine opening hours",url:"https://www.cicts.org/our-services/"},
- {title:"Christian Information Center — Masses and services",url:"https://www.cicts.org/masses-services/"},
- {title:"Custody of the Holy Land — pilgrimage sanctuaries",url:"https://www.custodia.org/en/"},
- {title:"UNESCO — Church of the Nativity in Bethlehem",url:"https://whc.unesco.org/en/list/1433/"},
- {title:"Israel Nature and Parks Authority — Qasr al-Yahud",url:"https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/"},
- {title:"Yardenit — baptism visit information",url:"https://www.yardenit.com/baptism/"},
- {title:"Custody of the Holy Land — Church of the Nativity",url:"https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/"},
- {title:"Bethlehem Municipality — Milk Grotto",url:"https://bethlehem-city.org/en/milkgrotto"},
- {title:"Custody of the Holy Land — Shepherds' Field",url:"https://www.custodia.org/en/sanctuaries/bethlehem-the-shepherds-field-and-grotto/"},
- {title:"Discalced Carmelites — Stella Maris and Muhraqa",url:"https://www.carmelholylanddco.org/who-we-are/the-discalced-carmelites-in-the-holy-land/"},
+ {title:"Christian Information Center - shrine opening hours",url:"https://www.cicts.org/our-services/"},
+ {title:"Christian Information Center - Masses and services",url:"https://www.cicts.org/masses-services/"},
+ {title:"Custody of the Holy Land - pilgrimage sanctuaries",url:"https://www.custodia.org/en/"},
+ {title:"UNESCO - Church of the Nativity in Bethlehem",url:"https://whc.unesco.org/en/list/1433/"},
+ {title:"Israel Nature and Parks Authority - Qasr al-Yahud",url:"https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/"},
+ {title:"Yardenit - baptism visit information",url:"https://www.yardenit.com/baptism/"},
+ {title:"Custody of the Holy Land - Church of the Nativity",url:"https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/"},
+ {title:"Bethlehem Municipality - Milk Grotto",url:"https://bethlehem-city.org/en/milkgrotto"},
+ {title:"Custody of the Holy Land - Shepherds' Field",url:"https://www.custodia.org/en/sanctuaries/bethlehem-the-shepherds-field-and-grotto/"},
+ {title:"Discalced Carmelites - Stella Maris and Muhraqa",url:"https://www.carmelholylanddco.org/who-we-are/the-discalced-carmelites-in-the-holy-land/"},
 ] as const;
 
 function External({href,children}:{href:string;children:ReactNode}){
@@ -51,7 +51,7 @@ function AreaCard({area}:{area:ChristianArea}){
        <h3 id={area.id+"-heading"} className="font-serif text-xl font-semibold sm:text-2xl">{area.title}</h3>
        <p className="mt-3 text-sm leading-relaxed sm:text-base">{area.intro}</p>
        <ul className="mt-4 space-y-3">{area.sites.map(site=><li key={site.name} className="text-sm leading-relaxed">
-         <strong>{site.to?<Link to={site.to} className={link}>{site.name}</Link>:site.name}</strong><span className="text-muted-foreground"> — {site.note}</span>
+         <strong>{site.to?<Link to={site.to} className={link}>{site.name}</Link>:site.name}</strong><span className="text-muted-foreground"> - {site.note}</span>
          {(site.officialUrl||site.mapPlace)&&<span className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs">
            {site.officialUrl&&<External href={site.officialUrl}>Official information</External>}
            {site.mapPlace&&<a href={"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(site.mapPlace)} className="font-semibold text-primary hover:underline" target="_blank" rel="noopener noreferrer">Google Maps <MapPin className="inline h-3 w-3" aria-hidden="true"/></a>}

@@ -1,0 +1,63 @@
+name: Editorial integration final audit
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  editorial-candidate:
+    if: github.head_ref == 'integration/editorial-final-20261125' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      CI: 'true'
+      HOSTINGER_STATIC_BUILD: 'true'
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      VITE_INDEXABLE: 'false'
+      EDITORIAL_LOCAL_ONLY: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Build and verify static routes
+        run: |
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs
+      - name: Repeat unchanged baseline editorial scoring on candidate
+        run: node scripts/audit-editorial-natural-voice.mjs
+      - name: Compare with baseline and verify coverage
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const now=JSON.parse(fs.readFileSync('editorial-audit/summary.json','utf8'));
+          const before={scanned:120,unique:2840,occurrences:3410,severity:{high:21,medium:503,"protect/review":483,low:1833},repeatedSentences:315,category:{"editorial-instruction":12,"negative-qualification":721,"generic-promotional":16,"generic-planning":561,"verify-without-help":193,"unnecessary-negation":476,"long-dash":1023,hedging:141,"owner-voice":1}};
+          if(now.scanned!==before.scanned||now.sitemap!==120||now.exports!==120)throw Error('Route coverage changed');
+          const comparison={before,after:now};
+          fs.writeFileSync('editorial-audit/baseline-comparison.json',JSON.stringify(comparison,null,2));
+          console.log('EDITORIAL_COMPARISON',JSON.stringify(comparison));
+          JS
+      - name: Retrieve frozen baseline corpus
+        uses: actions/download-artifact@v4
+        with:
+          name: editorial-natural-voice-audit
+          run-id: 45634686350
+          github-token: ${{ github.token }}
+          path: /tmp/editorial-baseline
+      - name: Compare focused style patterns without penalizing ordinary vocabulary
+        run: node scripts/compare-editorial-style.mjs /tmp/editorial-baseline/pages editorial-audit/pages
+      - name: Verify all 21 reviewed high-priority issues and retained visitor facts
+        run: node scripts/verify-editorial-round2.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: editorial-integration-final
+          path: editorial-audit/
+          if-no-files-found: warn

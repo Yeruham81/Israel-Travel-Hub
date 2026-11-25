@@ -256,11 +256,11 @@ const page: AttractionDestinationContent = {
     { label: "Arrival tips at Ben Gurion Airport", to: "/travel-blog/ben-gurion-airport-arrival-tips/", description: "Practical first steps on arrival.", icon: "arrival" },
   ],
   sources: [
-    { label: "Israel Nature and Parks Authority — Hebrew visitor information", url: visitSources.parkHebrew, note: "Official notice about free marine-terminal access and national-park visitor rules." },
-    { label: "Christian Information Center — Capernaum entrance and opening hours", url: visitSources.franciscan, note: "Franciscan compound: published entrance fee, last-admission times and holiday exceptions." },
-    { label: "Custody of the Holy Land — Capernaum archaeology and history", url: visitSources.archaeology, note: "Historical background, excavation history, synagogue dating and traditional Peter's house." },
-    { label: "Greek Orthodox Monastery of the Twelve Apostles — visitor arrangements", url: visitSources.orthodox, note: "Official advance-contact requirement and monastery details." },
-    { label: "Israel Nature and Parks Authority — Kfar Nahum National Park", url: visitSources.park, note: "Separate visitor area, marine terminal, accessibility information, navigation and park rules." },
+    { label: "Israel Nature and Parks Authority - Hebrew visitor information", url: visitSources.parkHebrew, note: "Official notice about free marine-terminal access and national-park visitor rules." },
+    { label: "Christian Information Center - Capernaum entrance and opening hours", url: visitSources.franciscan, note: "Franciscan compound: published entrance fee, last-admission times and holiday exceptions." },
+    { label: "Custody of the Holy Land - Capernaum archaeology and history", url: visitSources.archaeology, note: "Historical background, excavation history, synagogue dating and traditional Peter's house." },
+    { label: "Greek Orthodox Monastery of the Twelve Apostles - visitor arrangements", url: visitSources.orthodox, note: "Official advance-contact requirement and monastery details." },
+    { label: "Israel Nature and Parks Authority - Kfar Nahum National Park", url: visitSources.park, note: "Separate visitor area, marine terminal, accessibility information, navigation and park rules." },
   ],
 };
 

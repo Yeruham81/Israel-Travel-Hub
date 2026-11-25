@@ -32,7 +32,7 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
     heading: "Market frontage or a Nachlaot side lane?",
     choose: "An Agripas Street or market-facing stay keeps stalls and evening venues close, but the room may hear deliveries as well as nightlife.",
     compare: "An inner Nachlaot lane usually feels more residential. Downtown offers more conventional city-hotel options and easier access to central transport corridors.",
-    arrival: "Friday market activity and Shabbat alter the area considerably. For an apartment, check the actual entrance and key collection rather than relying on the neighborhood name.",
+    arrival: "Friday market activity and Shabbat alter the area considerably. For an apartment, confirm the street entrance and key collection arrangements.",
   },
   "east-jerusalem": {
     heading: "Near Damascus Gate is a specific location",
@@ -106,7 +106,7 @@ export const destinationBaseChoices: Record<string, BaseChoice[]> = {
   tiberias: [
     { visitor: "Arriving without a car and visiting the town", base: "Lower town / promenade", reason: "Restaurants and some waterfront walks are closer together, though lakeside location does not guarantee a private swimming beach." },
     { visitor: "Wanting a view and less time in central streets", base: "Hillside hotels", reason: "Expect a climb on the return from the waterfront and allow for a taxi when traveling with luggage or mobility limitations." },
-    { visitor: "Building the trip around water activities", base: "A lakeside hotel with verified swimming facilities", reason: "Check the exact beach, pool or water-park access rather than assuming that every room overlooking the lake includes swimming." },
+    { visitor: "Building the trip around water activities", base: "A lakeside hotel with verified swimming facilities", reason: "Check whether your room rate includes access to a bathing beach, pool or water park." },
   ],
   haifa: [
     { visitor: "Exploring downtown restaurants and history", base: "German Colony / Lower City", reason: "A lower-city base works for the historic boulevard, Akko outings and some rail connections, without the daily climb to a Carmel hotel." },

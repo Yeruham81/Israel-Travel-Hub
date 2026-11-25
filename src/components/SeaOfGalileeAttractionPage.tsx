@@ -183,7 +183,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
       <article className="rounded-xl border bg-card p-4">
         <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><BusFront className="size-5 text-primary" aria-hidden="true" />By public bus</h3>
         <p className="mt-2 text-sm leading-relaxed">Tiberias is the area's principal bus hub. Intercity buses connect it with other parts of Israel, but not every lakeside church, viewpoint or beach has a convenient connection or return service.</p>
-        <p className="mt-2 text-sm leading-relaxed">There is no passenger railway station at Tiberias. Check <External href={sources.egged}>current bus schedules</External>, the exact nearest stop, and your return trip—especially on Fridays and Jewish holidays.</p>
+        <p className="mt-2 text-sm leading-relaxed">There is no passenger railway station at Tiberias. Check <External href={sources.egged}>current bus schedules</External>, the nearest stop and your return trip, especially on Fridays and Jewish holidays.</p>
       </article>
     </div>
     <p className="text-sm">For an organised excursion that starts outside the region, browse <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>Nazareth & Sea of Galilee day tours</Link>.</p>
@@ -279,14 +279,14 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     { label: "Private driver in Israel", to: "/private-driver-in-israel/", icon: "itinerary", description: "Arrange flexible road transport" },
   ],
   sources: [
-    { label: "Kinneret Cities Association — official beach directory", url: sources.beaches },
-    { label: "Kinneret Cities Association — Tzemach Beach", url: sources.tzemach },
-    { label: "Kinneret Cities Association — Hukok North Beach", url: sources.hukok },
-    { label: "Kinneret Cities Association — Kursi Beach", url: sources.kursi },
-    { label: "Kinneret Cities Association — Nahal Amud estuary (bathing prohibited)", url: sources.unsafeShore },
-    { label: "Kinneret Cities Association — visitor notices", url: sources.lakeAuthority },
-    { label: "Israel Nature and Parks Authority — Arbel National Park", url: sources.arbel },
-    { label: "Egged — official bus and route planning", url: sources.egged },
+    { label: "Kinneret Cities Association - official beach directory", url: sources.beaches },
+    { label: "Kinneret Cities Association - Tzemach Beach", url: sources.tzemach },
+    { label: "Kinneret Cities Association - Hukok North Beach", url: sources.hukok },
+    { label: "Kinneret Cities Association - Kursi Beach", url: sources.kursi },
+    { label: "Kinneret Cities Association - Nahal Amud estuary (bathing prohibited)", url: sources.unsafeShore },
+    { label: "Kinneret Cities Association - visitor notices", url: sources.lakeAuthority },
+    { label: "Israel Nature and Parks Authority - Arbel National Park", url: sources.arbel },
+    { label: "Egged - official bus and route planning", url: sources.egged },
   ],
 };
 

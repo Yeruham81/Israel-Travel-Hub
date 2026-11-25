@@ -109,7 +109,7 @@ function MuseumMap() {
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label htmlFor="haifa-museum-map-select" className="min-w-0 flex-1 text-sm font-semibold">Focus on a museum
           <select id="haifa-museum-map-select" value={selectedId} onChange={e=>focus(e.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
-            <option value="all">All ten museums — Haifa overview</option>
+            <option value="all">All ten museums - Haifa overview</option>
             {museumAreas.map(area=><optgroup key={area.id} label={area.name}>{museums.filter(m=>m.area===area.id).map(m=><option key={m.id} value={m.id}>{museums.findIndex(x=>x.id===m.id)+1}. {m.name}{m.closureNote?" (closed)":""}</option>)}</optgroup>)}
           </select>
         </label>
@@ -236,7 +236,7 @@ export function HaifaMuseumsGuide() {
       <SectionHeading id="practical" title="My practical museum-planning tips"/>
       <div className="grid gap-4 md:grid-cols-2">
         <div className="rounded-xl border p-5"><h3 className="font-bold">Tickets & combinations</h3><p className="mt-2 text-sm leading-relaxed">The municipal <OfficialLink href="https://www.hms.org.il/eng/Bundle_ticket">Haifa Museums combined ticket</OfficialLink> applies to participating museums, not every institution in the city. MadaTech, the naval museum, Israel Railways and the university museum have their own arrangements.</p></div>
-        <div className="rounded-xl border p-5"><h3 className="font-bold">Haifa's hills & transport</h3><p className="mt-2 text-sm leading-relaxed">Downtown, Hadar, the Carmel Centre and the university are at different elevations. Check realistic journeys with public transport, taxi or the Carmelit where suitable, rather than relying on walking distance alone.</p></div>
+        <div className="rounded-xl border p-5"><h3 className="font-bold">Haifa's hills & transport</h3><p className="mt-2 text-sm leading-relaxed">Downtown, Hadar, the Carmel Centre and the university are at different elevations. Use public transport, taxis or the Carmelit to travel between districts at different elevations.</p></div>
         <div className="rounded-xl border p-5"><h3 className="font-bold">Weekends & Jewish holidays</h3><p className="mt-2 text-sm leading-relaxed">Some municipal museums open on Saturdays, while the Railway Museum and naval museum typically do not. <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Jewish holidays and holiday eves</Link> can change opening times.</p></div>
         <div className="rounded-xl border p-5"><h3 className="font-bold">Accessibility & cruise visitors</h3><p className="mt-2 text-sm leading-relaxed">Historic homes and vessels may involve stairs or restricted access. Cruise visitors should leave generous time to return to Haifa Port. Check the actual museum entrance and last admission.</p></div>
       </div>
@@ -268,7 +268,7 @@ export function HaifaMuseumsGuide() {
       <div className="mt-4 border-t pt-3 text-xs leading-relaxed text-muted-foreground">
         <p>Photo credits (cropped, resized and converted to WebP):</p>
         <ul className="mt-2 space-y-1">{haifaMuseumPhotoCredits.map(photo=><li key={photo.id}>
-          <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{photo.label}</a> — {photo.author} · <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{photo.license}</a>
+          <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{photo.label}</a> - {photo.author} · <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{photo.license}</a>
         </li>)}</ul>
       </div>
     </SourcesDisclosure>

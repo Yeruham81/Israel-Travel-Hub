@@ -113,7 +113,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     intro: "The museum is dedicated to the painter Mané-Katz and the collection he left to Haifa. Works from the collection may be shown elsewhere while the historic museum undergoes renovation.",
     highlights: ["Mané-Katz paintings and works relating to the School of Paris.", "Jewish ceremonial objects and the artist's personal collection when the museum reopens."],
     tip: "For now, treat the building as a possible exterior landmark only. The official Haifa Museums site is the best place to follow reopening notices.",
-    url: "https://www.mkm.org.il/eng", closureNote: "Closed for renovation — interior visits unavailable"
+    url: "https://www.mkm.org.il/eng", closureNote: "Closed for renovation (interior visits unavailable)"
   },
   {
     id: "hecht", mapLocation: {lat:32.76322,lon:35.01806}, name: "Hecht Museum", area: "carmel", neighbourhood: "University of Haifa, Mount Carmel",

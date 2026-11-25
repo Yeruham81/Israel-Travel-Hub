@@ -133,7 +133,7 @@ describe.each([
           expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#area-guide")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         }
         expect(within(container.querySelector("#location") as HTMLElement).getByText(/Arriving with luggage:/)).toBeInTheDocument();
-        expect(within(hotelSection).getByText(/Hotel stays are provided by independent properties/)).toBeInTheDocument();
+        expect(within(hotelSection).getByText(/Book your hotel directly through the booking website/)).toBeInTheDocument();
         for (const src of imageUrls) expect(src).not.toBe(area.photo.src);
         if (g.id === "jerusalem") {
           for (const card of cards) {
@@ -552,7 +552,7 @@ describe("Jerusalem direct hotel catalog", () => {
     const secondTip = within(neighborhoodSection).getByText("Check your dates.").closest("div")!;
     expect(neighborhoodCards.compareDocumentPosition(firstTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(firstTip.compareDocumentPosition(secondTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(within(comparison as HTMLElement).getByText(/Compare each neighborhood’s advantages/)).toBeInTheDocument();
+    expect(within(comparison as HTMLElement).getByText(/Compare walking distances to the Old City/)).toBeInTheDocument();
     expect(screen.getByTestId("stay-local-photo-grid").querySelectorAll("a")).toHaveLength(6);
     expect(screen.getByRole("img", { name: "Jaffa Gate and Jerusalem Old City walls" })).toBeInTheDocument();
     const firstCard = within(catalog).getAllByTestId("jerusalem-hotel-card")[0]!;

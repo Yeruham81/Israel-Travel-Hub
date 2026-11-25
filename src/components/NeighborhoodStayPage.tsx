@@ -130,9 +130,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         </ul>
       </div>
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-        Hotel stays are provided by independent properties and booked through external booking websites.
-        Prices, availability, room details and booking conditions may change. Before booking, check the
-        hotel address, exact room offer, total price and cancellation terms directly with the booking provider.
+        Book your hotel directly through the booking website. Check room details and minimum stays, and ask the hotel about accessibility and facilities.
       </p>
       {browseOffers.map((booking) => (
         <div className="mt-6 flex justify-center" key={booking.id}>
@@ -242,7 +240,6 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         {checklistSection}
         <section id="other-areas" aria-labelledby="other-areas-h" className="mt-14 scroll-mt-32">
           <h2 id="other-areas-h" className="text-3xl">Explore Other Areas to Stay</h2>
-          <p className="mt-2 text-muted-foreground">Compare a different side of {city.city} before you decide.</p>
           <ul className={`mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3`}>{otherAreas.map((other) => <li key={other.id} className="min-w-0">
             <Link to={other.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary">
               <img src={isJerusalem ? (jerusalemStayCardPhotos[other.id]?.src ?? other.photo.src) : other.photo.src} alt={isJerusalem ? (jerusalemStayCardPhotos[other.id]?.alt ?? other.photo.alt) : other.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />

@@ -298,14 +298,14 @@ export function TopTenIsraelGuide() {
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use official park, venue and local-authority information for visitor access, nature areas and safety. Check current opening hours, weather and reservations for your dates.</p>
         <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
-          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx">Tel Aviv municipality — beach information (Hebrew)</OfficialLink></li>
-          <li><OfficialLink href="https://en.parks.org.il/reserve-park/masada-national-park/">Israel Nature & Parks Authority — Masada</OfficialLink></li>
-          <li><OfficialLink href="https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en">Tamar Regional Council — Ein Bokek beach</OfficialLink></li>
-          <li><OfficialLink href="https://ganbahai.org.il/visit-us-haifa/">Bahá'í Gardens — official visitor information</OfficialLink></li>
-          <li><OfficialLink href="https://en.parks.org.il/reserve-park/eilat-coral-beach-nature-reserve-2/">Israel Nature & Parks Authority — Coral Beach</OfficialLink></li>
-          <li><OfficialLink href="https://darksky.org/places/ramon-crater-nature-reserve-dark-sky-park/">DarkSky International — Ramon Crater</OfficialLink></li>
-          <li><OfficialLink href="https://en.parks.org.il/reserve-park/makhtesh-ramon-nature-reserve-and-visitors-center/">Israel Nature & Parks Authority — Ramon Crater</OfficialLink></li>
-          <li><OfficialLink href="https://ims.gov.il/en">Israel Meteorological Service — forecast and warnings</OfficialLink></li>
+          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx">Tel Aviv municipality - beach information (Hebrew)</OfficialLink></li>
+          <li><OfficialLink href="https://en.parks.org.il/reserve-park/masada-national-park/">Israel Nature & Parks Authority - Masada</OfficialLink></li>
+          <li><OfficialLink href="https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en">Tamar Regional Council - Ein Bokek beach</OfficialLink></li>
+          <li><OfficialLink href="https://ganbahai.org.il/visit-us-haifa/">Bahá'í Gardens - official visitor information</OfficialLink></li>
+          <li><OfficialLink href="https://en.parks.org.il/reserve-park/eilat-coral-beach-nature-reserve-2/">Israel Nature & Parks Authority - Coral Beach</OfficialLink></li>
+          <li><OfficialLink href="https://darksky.org/places/ramon-crater-nature-reserve-dark-sky-park/">DarkSky International - Ramon Crater</OfficialLink></li>
+          <li><OfficialLink href="https://en.parks.org.il/reserve-park/makhtesh-ramon-nature-reserve-and-visitors-center/">Israel Nature & Parks Authority - Ramon Crater</OfficialLink></li>
+          <li><OfficialLink href="https://ims.gov.il/en">Israel Meteorological Service - forecast and warnings</OfficialLink></li>
         </ul>
       </SourcesDisclosure>
     </article>

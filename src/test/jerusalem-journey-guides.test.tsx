@@ -147,7 +147,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(beachSection).not.toBeNull();
     expect(beachSection).toHaveTextContent("hotel-operated public beaches");
     expect(beachSection).toHaveTextContent("I recommend Ein Bokek");
-    expect(within(beachSection as HTMLElement).getByRole("link", { name: /Tamar Regional Council — hotel-beach equipment rules/ }))
+    expect(within(beachSection as HTMLElement).getByRole("link", { name: /Tamar Regional Council - hotel-beach equipment rules/ }))
       .toHaveAttribute("href", "https://www.deadsea.co.il/attractions/the-hotel-beaches/?lang=en/");
     expect(screen.getByRole("heading", { name: "By public bus: Egged 486 and 444" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "By taxi or private driver: direct travel from your hotel" })).toBeInTheDocument();

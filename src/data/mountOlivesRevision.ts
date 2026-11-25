@@ -91,7 +91,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     {
       name: "Dominus Flevit",
       description: "The teardrop-shaped Franciscan church marks the Gospel tradition of Jesus weeping over Jerusalem. Architect Antonio Barluzzi designed its altar window to frame a view of the Old City. The small garden and setting invite a quieter pause.",
-      visit: "I recommend leaving enough time to go inside rather than treating this as a photo stop. The window behind the altar is one of the memorable views on the walk.",
+      visit: "I recommend allowing time to visit the interior. The window behind the altar is one of the memorable views on the walk.",
       tipLabel: "Worth making time for",
       image: { src: "/images/jerusalem/mount-of-olives/dominus-flevit.webp", alt: "Teardrop-shaped Dominus Flevit Church amid trees on Jerusalem's Mount of Olives" },
     },

@@ -33,7 +33,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"Use the Red Line light rail or a suitable bus and walk from the Clock Tower area. Arrange drop-off close to an accessible entrance if needed.",
     image:{src:jaffa,alt:"Old stone buildings and picturesque streets in historic Jaffa"},
     guide:{label:"My detailed guide to Old Jaffa",to:"/attractions/jaffa/"},
-    official:{label:"Old Jaffa sightseeing route — municipality (Hebrew)",url:"https://www.tel-aviv.gov.il/Visitors/Jaffa/Pages/oldjaffatour.aspx",note:"Hebrew"},
+    official:{label:"Old Jaffa sightseeing route - municipality (Hebrew)",url:"https://www.tel-aviv.gov.il/Visitors/Jaffa/Pages/oldjaffatour.aspx",note:"Hebrew"},
     mapLinks:[{label:"Jaffa Clock Tower",query:"Jaffa Clock Tower Tel Aviv Yafo Israel"},{label:"Kedumim Square",query:"Kedumim Square Old Jaffa Israel"},{label:"Jaffa Port",query:"Jaffa Port Tel Aviv Israel"}]
   },
   {
@@ -45,7 +45,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"Walk or cycle along the beachfront; buses and taxis serve parallel streets. Train stations are inland, so allow a final local connection.",
     image:{src:beaches,alt:"Sandy Mediterranean bathing beach and blue sea in Tel Aviv"},
     guide:{label:"My complete Tel Aviv beach guide",to:"/travel-blog/beaches-in-tel-aviv/"},
-    official:{label:"Tel Aviv beach information — municipality",url:"https://www.tel-aviv.gov.il/en/visit/beaches/pages/default.aspx"},
+    official:{label:"Tel Aviv beach information - municipality",url:"https://www.tel-aviv.gov.il/en/visit/beaches/pages/default.aspx"},
     additionalOfficial:{label:"Live municipal beach and lifeguard information (Hebrew)",url:"https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx",note:"Hebrew"},
     mapLinks:[{label:"Gordon Beach",query:"Gordon Beach Tel Aviv Israel"},{label:"Frishman Beach",query:"Frishman Beach Tel Aviv Israel"}]
   },
@@ -58,8 +58,8 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"Best approached on foot from central Tel Aviv, the seafront or Allenby Street; parking nearby can be difficult.",
     image:{src:"/images/tel-aviv-attractions/carmel-market.webp",alt:"Carmel Market in central Tel Aviv"},
     mapLinks:[{label:"Carmel Market",query:"Carmel Market Tel Aviv Yafo Israel"},{label:"Nahalat Binyamin Arts Fair",query:"Nahalat Binyamin Arts and Crafts Fair Tel Aviv Israel"}],
-    official:{label:"Carmel Market — municipal page (Hebrew)",url:"https://www.tel-aviv.gov.il/Residents/Development/Pages/CarmelMarket.aspx",note:"Hebrew"},
-    additionalOfficial:{label:"Nahalat Binyamin Arts & Crafts Fair — official website",url:"https://nachalatbinyamin-tlv.com/en/"}
+    official:{label:"Carmel Market - municipal page (Hebrew)",url:"https://www.tel-aviv.gov.il/Residents/Development/Pages/CarmelMarket.aspx",note:"Hebrew"},
+    additionalOfficial:{label:"Nahalat Binyamin Arts & Crafts Fair - official website",url:"https://nachalatbinyamin-tlv.com/en/"}
   },
   {
     id:"neve-tzedek",title:"Explore Neve Tzedek's historic lanes",shortTitle:"Neve Tzedek",area:"South-central Tel Aviv",category:"Architecture & neighbourhoods",
@@ -70,7 +70,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"Walk from Jaffa or the southern centre. Nearby Red Line stops and buses can shorten the approach.",
     image:{src:neve,alt:"Restored historic houses and intimate streets of Neve Tzedek"},
     mapLinks:[{label:"Suzanne Dellal Centre",query:"Suzanne Dellal Centre Neve Tzedek Tel Aviv Israel"},{label:"Neve Tzedek",query:"Neve Tzedek Tel Aviv Israel"}],
-    official:{label:"Neve Tzedek heritage — Suzanne Dellal Centre",url:"https://suzannedellal.org.il/en/neve-tzedek/"}
+    official:{label:"Neve Tzedek heritage - Suzanne Dellal Centre",url:"https://suzannedellal.org.il/en/neve-tzedek/"}
   },
   {
     id:"white-city",title:"Follow Rothschild Boulevard through the White City",shortTitle:"Rothschild & White City",area:"Central Tel Aviv",category:"Bauhaus architecture & city life",
@@ -87,12 +87,12 @@ export const telAvivExperiences: TelAvivExperience[]=[
     id:"tel-aviv-art-museum",title:"Visit the Tel Aviv Museum of Art",shortTitle:"Art museum",area:"Cultural district",category:"Museums & exhibitions",
     bestFor:"Art, architecture and an indoor alternative",time:"2–3 hours",entry:"Museum admission applies; some events require separate booking",
     description:"The Tel Aviv Museum of Art combines Israeli and international modern and contemporary works with striking architecture and rotating exhibitions. It is my first choice for an indoor culture stop when a hot day or changeable weather calls for a break from outdoor sightseeing.",
-    practical:"Check the exhibition programme, current opening hours, ticket rules and last-entry time directly with the museum. Special exhibitions and guided tours may have separate conditions; do not assume a particular show is running on your date.",
+    practical:"Check the exhibition programme, current opening hours, ticket rules and last-entry time directly with the museum. Check exhibition dates and any separate admission or guided-tour arrangements.",
     tip:"I'd reserve an unhurried couple of hours and explore the surrounding cultural district only if you still have energy.",
     transport:"The museum is east of the beachfront around Shaul HaMelech Boulevard. Use a bus, taxi or a longer walk from the central neighbourhoods.",
     image:{src:"/images/tel-aviv-attractions/tel-aviv-museum-of-art.webp",alt:"Entrance façade and sculpture outside Tel Aviv Museum of Art"},
     guide:{label:"My museums in Tel Aviv guide",to:"/travel-blog/museums-in-tel-aviv/"},
-    official:{label:"Tel Aviv Museum of Art — official visitor information",url:"https://www.tamuseum.org.il/en/visit/"},
+    official:{label:"Tel Aviv Museum of Art - official visitor information",url:"https://www.tamuseum.org.il/en/visit/"},
     mapLinks:[{label:"Tel Aviv Museum of Art",query:"Tel Aviv Museum of Art 27 Shaul Hamelech Tel Aviv Israel"}]
   },
   {
@@ -109,7 +109,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     id:"sarona",title:"Combine Sarona's historic houses and food market",shortTitle:"Sarona Market",area:"East-central Tel Aviv",category:"Food & heritage",
     bestFor:"Food stalls, restored buildings and a relaxed break",time:"1–2 hours",entry:"Public compound free; food purchases extra",
     description:"Sarona blends restored nineteenth-century buildings and landscaped pedestrian paths with a modern indoor food market. It is an easy food-focused stop, with a different atmosphere from the bustle of Carmel Market and convenient access from the eastern city centre.",
-    practical:"The open-air heritage compound and the indoor market are different spaces; individual stalls, businesses and exhibitions have their own opening hours. If dining is the priority, verify the market's current schedule rather than assuming every vendor is open.",
+    practical:"The open-air heritage compound and the indoor market are different spaces; individual stalls, businesses and exhibitions have their own opening hours. For a food-focused visit, check when the market's food stalls are open.",
     tip:"I'd plan Sarona as a lunch or early-evening stop near the museum or business district, not as a replacement for the street-market atmosphere at Carmel.",
     transport:"The complex is east of Rothschild and close to the Azrieli and Hashalom area; walking, buses and taxis are practical depending on your starting point.",
     image:{src:"/images/tel-aviv-attractions/sarona-market.webp",alt:"Glass entrance to Sarona Market in Tel Aviv"},
@@ -129,7 +129,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     id:"tel-aviv-port",title:"Walk through Tel Aviv Port and the northern waterfront",shortTitle:"Tel Aviv Port",area:"Northern waterfront",category:"Waterfront & recreation",
     bestFor:"Families, casual dining and seaside walks",time:"1½–3 hours",entry:"Public waterfront free; businesses and activities charge",
     description:"The redeveloped Tel Aviv Port, often called Namal Tel Aviv, offers broad seafront boardwalks, cafés and shops. Nearby Yarkon Park has greener routes, open spaces and recreational areas that contrast with the dense city centre.",
-    practical:"The port's open waterfront is not necessarily a supervised swimming beach. Choose a designated beach for entering the sea. Activities and equipment hire in the park are operated separately, with their own booking conditions.",
+    practical:"For swimming, choose a designated beach with lifeguard service. Choose a designated beach for entering the sea. Activities and equipment hire in the park are operated separately, with their own booking conditions.",
     tip:"I'd save the port and nearby Yarkon Park for a second day or a relaxed family afternoon rather than adding them to an already full Jaffa–Carmel walking itinerary.",
     transport:"The port is north of the central beachfront. Use a bus, taxi, bicycle or a longer promenade walk depending on your starting point.",
     image:{src:"/images/tel-aviv-attractions/tel-aviv-port.webp",alt:"Aerial view of Tel Aviv Port's boardwalk, buildings and the mouth of the Yarkon River"},

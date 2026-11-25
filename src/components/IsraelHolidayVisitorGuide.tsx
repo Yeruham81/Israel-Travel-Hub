@@ -49,7 +49,7 @@ const planning=[
 ];
 const faq=[
   {q:"Does Israel shut down for every Jewish holiday?",a:"No. Shabbat and the main Jewish festival days often bring major transport and business-hour changes, while Hanukkah, Purim and intermediate festival days have different rules. In non-Jewish neighbourhoods, many services can follow another schedule."},
-  {q:"Do trains and buses operate on Shabbat?",a:"Israel Railways and most regular bus routes generally stop for Shabbat, but some limited weekend municipal and local services exist. Check the actual route; do not assume a city weekend service also connects to the airport."},
+  {q:"Do trains and buses operate on Shabbat?",a:"Israel Railways and most regular bus routes generally stop for Shabbat, but some limited weekend municipal and local services exist. Check whether the weekend service connects to the airport."},
   {q:"Can I fly into or out of Israel on Yom Kippur?",a:"Normal flight operations at Ben Gurion Airport are suspended for the observance. Check the Israeli Airports Authority and your airline for precise times; do not plan a flight or connection based on the day before or after without confirmation."},
   {q:"Why do Jewish holiday dates change each year?",a:"The Hebrew calendar is lunisolar, so festivals move across the Gregorian calendar. Jewish holidays normally begin at sunset on the preceding civil evening. Some dates also differ between Israel and communities abroad."},
   {q:"What is Chol HaMoed?",a:"Chol HaMoed means the intermediate days of Passover or Sukkot. They are not the same as the major festival days for transport and business closures, but school holidays and domestic tourism can make attractions and hotels crowded."},

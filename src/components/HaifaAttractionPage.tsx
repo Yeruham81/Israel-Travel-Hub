@@ -135,7 +135,7 @@ function HaifaPartnerTours() {
           />
         </div>
       ))}
-      <p className="col-span-full text-xs leading-relaxed text-muted-foreground">Prices and ratings are published provider snapshots checked November 2026, not live quotes. Verify availability, inclusions, reviews and final costs on the booking platform.</p>
+      <p className="col-span-full text-xs leading-relaxed text-muted-foreground">Check available dates, current prices, inclusions and reviews on the booking website.</p>
     </div>
   );
 }
@@ -208,7 +208,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       <AttractionHighlight title="Wadi Nisnas: market and neighbourhood art"
         image={{ src: pictures.wadi, alt: "Stone buildings and street life in the Wadi Nisnas neighbourhood of Haifa", mobileContain: true }}>
         <p>Wadi Nisnas is a lived-in Arab neighbourhood known for its market lanes, small food businesses and outdoor art. It offers a different side of Haifa from the manicured gardens and waterfront.</p>
-        <p>I would browse the market during the day, try a local pastry or hummus and look for the artwork along the streets. Respect residential entrances and ask before photographing people. Market stalls have independent hours; do not assume everything is open on Sunday.</p>
+        <p>I would browse the market during the day, try a local pastry or hummus and look for the artwork along the streets. Respect residential entrances and ask before photographing people. Market stalls have independent opening hours, including on Sundays.</p>
         {directions("Wadi Nisnas Market, Haifa, Israel")}
       </AttractionHighlight>
       <AttractionHighlight title="Downtown Haifa and the Turkish Market"
@@ -226,7 +226,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       <AttractionHighlight title="Bat Galim promenade and waterfront"
         image={{ src: pictures.batGalim, alt: "Bat Galim seaside neighbourhood and Haifa Bay by the Mediterranean" }}>
         <p>Bat Galim feels unlike the hillside districts: its promenade, cafés and sea views reward an easy waterfront stroll. The lower station of the Stella Maris tourist cable car is here, so you can combine the coast with the monastery if the ride is operating.</p>
-        <p>The nearby <strong>Elijah's Cave</strong> is another optional visit for those interested in religious traditions. Allow enough time to move between the sites rather than assuming all coastal stops are directly adjacent.</p>
+        <p>The nearby <strong>Elijah's Cave</strong> is another optional visit for those interested in religious traditions. Allow travel time between the coastal sites.</p>
         {directions("Bat Galim Promenade, Haifa, Israel")}
       </AttractionHighlight>
       <AttractionHighlight title="Dado–Zamir Beach and the southern coast"
@@ -353,7 +353,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
           {directions("Turkish Market, Haifa, Israel", "Find the Turkish Market")}
         </article>
       </div>
-      <p>For dishes to look out for across the country, see my <Link to="/travel-blog/what-to-eat-in-israel/" className={inlineLink}>guide to Israeli food</Link>. I would choose one area for a meal rather than cross the city several times just to visit restaurants.</p>
+      <p>For dishes to look out for across the country, see my <Link to="/travel-blog/what-to-eat-in-israel/" className={inlineLink}>guide to Israeli food</Link>. I would choose a restaurant in the neighbourhood you are visiting.</p>
     </div>
   ),
   practicalContent: (
@@ -417,18 +417,18 @@ export const haifaDestinationContent: AttractionDestinationContent = {
     <p>Additional Haifa neighbourhood photographs used under Creative Commons licences, resized and converted to WebP: <a href="https://commons.wikimedia.org/wiki/File:150421_haifa_-_ben_gurion_boulevard_PikiWiki_Israel.jpg" className={inlineLink} target="_blank" rel="noopener noreferrer">Lizzy Shaanan / PikiWiki Israel (German Colony)</a>, <a href="https://commons.wikimedia.org/wiki/File:Street_Scene_-_Wadi_Nisnas_Neighborhood_-_Haifa_-_Israel_-_01_(5690594824).jpg" className={inlineLink} target="_blank" rel="noopener noreferrer">Adam Jones (Wadi Nisnas)</a>, <a href="https://commons.wikimedia.org/wiki/File:110861_haifa_-_the_turkish_market_PikiWiki_Israel.jpg" className={inlineLink} target="_blank" rel="noopener noreferrer">Shlomo Roded / PikiWiki Israel (Turkish Market)</a>, <a href="https://commons.wikimedia.org/wiki/File:111718_haifa,_a_view_of_the_bat_galim_neighborhood_PikiWiki_Israel.jpg" className={inlineLink} target="_blank" rel="noopener noreferrer">Michal Freiman / PikiWiki Israel (Bat Galim)</a>. Licences: <a href="https://creativecommons.org/licenses/by/2.5/" className={inlineLink} target="_blank" rel="noopener noreferrer">CC BY 2.5</a> for PikiWiki photographs and <a href="https://creativecommons.org/licenses/by-sa/2.0/" className={inlineLink} target="_blank" rel="noopener noreferrer">CC BY-SA 2.0</a> for Adam Jones's photograph. The original photo rights of the site's legacy archive remain under separate review.</p>
   ),
   sources: [
-    { label: "Bahá’í World Centre — official Haifa visitor entrances, hours and guided tours", url: official.bahai },
-    { label: "Bahá’í World Centre — official Upper Terraces guided tour reservation", url: official.bahaiBooking },
-    { label: "Bahá’í World Centre — accessibility information", url: official.bahaiAccess },
-    { label: "Haifa Municipality — things to see and do (Hebrew)", url: official.haifaAttractions },
-    { label: "Haifa Municipality — Carmel and neighbourhood walking routes (Hebrew)", url: official.haifaWalkingTrails },
-    { label: "Haifa Municipality — nature trails (Hebrew)", url: official.haifaNatureTrails },
-    { label: "Haifa Municipality — Carmelit funicular (Hebrew)", url: official.carmelit },
-    { label: "Haifa Municipality — Stella Maris tourist cable car (Hebrew)", url: official.touristCableCar },
-    { label: "Haifa Municipality — public beaches and safety notices (Hebrew)", url: official.haifaBeaches },
-    { label: "Israel Railways — train information", url: official.rail },
-    { label: "Ministry of Transport — official bus route planner", url: official.buses },
-    { label: "Haifa Museums — official museum programme", url: official.haifaMuseums },
+    { label: "Bahá’í World Centre - official Haifa visitor entrances, hours and guided tours", url: official.bahai },
+    { label: "Bahá’í World Centre - official Upper Terraces guided tour reservation", url: official.bahaiBooking },
+    { label: "Bahá’í World Centre - accessibility information", url: official.bahaiAccess },
+    { label: "Haifa Municipality - things to see and do (Hebrew)", url: official.haifaAttractions },
+    { label: "Haifa Municipality - Carmel and neighbourhood walking routes (Hebrew)", url: official.haifaWalkingTrails },
+    { label: "Haifa Municipality - nature trails (Hebrew)", url: official.haifaNatureTrails },
+    { label: "Haifa Municipality - Carmelit funicular (Hebrew)", url: official.carmelit },
+    { label: "Haifa Municipality - Stella Maris tourist cable car (Hebrew)", url: official.touristCableCar },
+    { label: "Haifa Municipality - public beaches and safety notices (Hebrew)", url: official.haifaBeaches },
+    { label: "Israel Railways - train information", url: official.rail },
+    { label: "Ministry of Transport - official bus route planner", url: official.buses },
+    { label: "Haifa Museums - official museum programme", url: official.haifaMuseums },
   ],
 };
 

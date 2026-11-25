@@ -30,11 +30,11 @@ const sections=[
  ["contact","Contact Moshe"],
 ] as const;
 const references=[
- {title:"Israel Nature and Parks Authority — accessibility of national parks",url:"https://en.parks.org.il/accessibility/"},
- {title:"Israel Nature and Parks Authority — Masada visitor information",url:"https://en.parks.org.il/reserve-park/masada-national-park/"},
- {title:"Israel Nature and Parks Authority — Masada cable car access",url:"https://en.parks.org.il/article/the-masada-cable-car/"},
- {title:"Israel Nature and Parks Authority — Caesarea visitor information",url:"https://en.parks.org.il/reserve-park/caesarea-national-park/"},
- {title:"Access Israel — visiting the Old City of Jerusalem",url:"https://aisrael.org/en/useful-info/accessible-tourism/the-old-city-of-jerusalem/"},
+ {title:"Israel Nature and Parks Authority - accessibility of national parks",url:"https://en.parks.org.il/accessibility/"},
+ {title:"Israel Nature and Parks Authority - Masada visitor information",url:"https://en.parks.org.il/reserve-park/masada-national-park/"},
+ {title:"Israel Nature and Parks Authority - Masada cable car access",url:"https://en.parks.org.il/article/the-masada-cable-car/"},
+ {title:"Israel Nature and Parks Authority - Caesarea visitor information",url:"https://en.parks.org.il/reserve-park/caesarea-national-park/"},
+ {title:"Access Israel - visiting the Old City of Jerusalem",url:"https://aisrael.org/en/useful-info/accessible-tourism/the-old-city-of-jerusalem/"},
  {title:"Accessible JLM map app — Android",url:"https://play.google.com/store/apps/details?id=pami.accessibility.sayyes"},
  {title:"Accessible JLM map app — iPhone",url:"https://apps.apple.com/il/app/accessible-jlm/id1434672106"},
 ] as const;

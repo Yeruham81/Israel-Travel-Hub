@@ -92,7 +92,7 @@ export const topTenExperiences: TopTenExperience[] = [
     id: "masada", title: "Discover Masada's story and desert views", shortTitle: "Masada",
     tagline: "Ancient ruins above a dramatic desert landscape", region: "Judean Desert",
     bestFor: "Archaeology, views & history", visitTime: "Allow several hours on site", visitStyle: "National park",
-    description: "Masada's archaeological remains and sweeping views over the Judean Desert make it a compelling experience. Visit the plateau at a comfortable pace, learn the site's history and enjoy the landscape rather than treating the ascent as the whole attraction.",
+    description: "Masada's archaeological remains and sweeping views over the Judean Desert make it a compelling experience. Take time to explore the plateau, learn about Masada's history and enjoy the desert views.",
     practical: "The eastern entrance has a cable car; hiking options depend on the trail, the chosen entrance and the weather. Extreme heat can affect trail access. Check the Israel Nature and Parks Authority's current route notices, reservations and last entry before travelling.",
     gettingThere: "Most visitors come by car, organised tour or arranged transfer from Jerusalem or the Dead Sea. The western Roman Ramp entrance is reached by a different road from the eastern cable-car entrance.",
     tip: "I would decide between the cable car and walking only after checking the actual weather and trail status for your day.",

@@ -89,7 +89,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         <ul className="mt-3 grid list-disc gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
           <li><strong>Weather:</strong> Visibility over the valley is clearer on some days than others; exposed areas can be windy.</li>
           <li><strong>Footwear:</strong> Comfortable walking shoes are enough for the paved lookout; choose sturdier shoes for unpaved trails.</li>
-          <li><strong>Facilities:</strong> Take drinking water with you rather than assuming refreshments will be available at the lookout.</li>
+          <li><strong>Facilities:</strong> Bring drinking water for your visit to the lookout.</li>
           <li><strong>Walking further:</strong> The Gospel Trail leads away from the summit; it is a separate hike, not the short lookout circuit.</li>
         </ul>
       </div>
@@ -127,8 +127,8 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Choose the visit that suits your day</h3>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li><strong>30–45 minutes — main lookout:</strong> Park near the summit, follow the paved path to the Three Faiths Lookout and enjoy the Jezreel Valley panorama.</li>
-          <li><strong>About 1–2 hours — extended hilltop walk:</strong> Continue towards the Forester's House viewpoint, take time for the ridge views and return to the parking area.</li>
+          <li><strong>Main lookout (30–45 minutes):</strong> Park near the summit, follow the paved path to the Three Faiths Lookout and enjoy the Jezreel Valley panorama.</li>
+          <li><strong>Extended hilltop walk (about 1–2 hours):</strong> Continue towards the Forester's House viewpoint, take time for the ridge views and return to the parking area.</li>
           <li><strong>Longer one-way hike towards Iksal:</strong> The Gospel Trail leaves the hilltop and descends towards Iksal. This is a separate hike, so plan the route, walking conditions and return transport in advance.</li>
         </ul>
       </div>

@@ -74,7 +74,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight mobileImageFirst
-        title="Knights’ Halls — the Hospitaller Fortress"
+        title="Knights’ Halls - the Hospitaller Fortress"
         image={{ src: images.knights, alt: "Stone arches and vaulted Crusader halls in the Hospitaller Fortress of Old Akko" }}
       >
         <p>I recommend starting here. Beneath the later Ottoman citadel lies an extensive Crusader complex of vaulted halls, columns and courtyards that brings the medieval port city to life.</p>
@@ -224,9 +224,9 @@ export const akkoDestinationContent: AttractionDestinationContent = {
           <p className="mt-2 text-sm leading-relaxed">The Visitors Center on Weizmann Street is the easiest starting point for a heritage visit. Compare nearby parking and rail access using the map.</p>
           <ConsentIframe title="Google Maps overview of Old Akko Visitors Center and nearby car parks" src="https://maps.google.com/maps?q=Old%20Akko%20Visitors%20Center%20Weizmann%201%20Akko%20Israel&hl=en&z=15&t=m&output=embed" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-48 w-full rounded-lg border-0 sm:h-52"/>
           <ul className="mt-3 space-y-2 text-sm leading-relaxed">
-            <li><a href={drivingDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko Visitors Center — Weizmann St 1</a></li>
-            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Moat%20Parking%20Old%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Moat car park — free parking</a></li>
-            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Eucalyptus%20Parking%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Eucalyptus car park — check local fees</a></li>
+            <li><a href={drivingDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko Visitors Center - Weizmann St 1</a></li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Moat%20Parking%20Old%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Moat car park - free parking</a></li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Eucalyptus%20Parking%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Eucalyptus car park - check local fees</a></li>
             <li><a href="https://www.google.com/maps/dir/?api=1&destination=Akko%20Train%20Station%20Israel" target="_blank" rel="noopener noreferrer" className={inlineLink}>Akko railway station</a></li>
           </ul>
           <a href={official.faq} target="_blank" rel="noopener noreferrer" className={"mt-3 inline-block text-sm " + inlineLink}>Official arrival and parking information</a>
@@ -239,7 +239,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
       <p>Old Akko is compact enough to explore on foot. Choose a route that matches your time and the heritage sites you want to enter.</p>
       <div className="grid gap-3 md:grid-cols-2" data-testid="akko-walking-routes">
         <article className="rounded-xl border bg-card p-4 sm:p-5">
-          <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">Historic highlights — around 3 hours</h3></div>
+          <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">Historic highlights - around 3 hours</h3></div>
           <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
             <li>Start at <strong>Old Akko Visitors Center</strong> on Weizmann Street 1 and arrange your combined ticket.</li>
             <li>Explore the <strong>Knights’ Halls</strong> and Crusader vaults.</li>
@@ -250,7 +250,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
           <a href={shortWalk} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open short route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
         </article>
         <article className="rounded-xl border bg-card p-4 sm:p-5">
-          <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">A fuller historic visit — 5–6 hours</h3></div>
+          <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">A fuller historic visit - 5–6 hours</h3></div>
           <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
             <li>Begin at the <strong>Visitors Center and Knights’ Halls</strong>.</li>
             <li>Explore the <strong>Al-Basha Turkish Bath</strong> and Ottoman heritage.</li>
@@ -264,7 +264,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
       </div>
       <AkkoAttractionsMap />
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5" data-testid="akko-gentler-walk">
-        <h3 className="font-serif text-xl font-semibold">A gentler option — market and waterfront</h3>
+        <h3 className="font-serif text-xl font-semibold">A gentler option - market and waterfront</h3>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">Begin near the Visitors Center, browse the Old Market and continue towards the harbour. This outdoor option offers flexibility for shorter breaks and avoids several underground attractions. Historic paving and some slopes remain; contact the <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>site accessibility team</a> to arrange a suitable route.</p>
         <a href={gentleWalk} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open market and harbour route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
       </article>
@@ -336,22 +336,22 @@ export const akkoDestinationContent: AttractionDestinationContent = {
     { label: "Israel travel tips", to: "/travel-blog/israel-travel-tips/", description: "Useful advice before your visit.", icon: "region" },
   ],
   sources: [
-    { label: "Old Akko — official attractions and ticket packages", url: official.attractions },
-    { label: "Old Akko — published opening hours", url: official.hours },
-    { label: "Old Akko — FAQ, ticket inclusions and arrival", url: official.faq },
-    { label: "Old Akko — accessibility", url: official.accessibility },
-    { label: "Old Akko — classic walking route", url: official.oldCityRoute },
-    { label: "UNESCO — Old City of Acre", url: official.unesco },
+    { label: "Old Akko - official attractions and ticket packages", url: official.attractions },
+    { label: "Old Akko - published opening hours", url: official.hours },
+    { label: "Old Akko - FAQ, ticket inclusions and arrival", url: official.faq },
+    { label: "Old Akko - accessibility", url: official.accessibility },
+    { label: "Old Akko - classic walking route", url: official.oldCityRoute },
+    { label: "UNESCO - Old City of Acre", url: official.unesco },
   ],
   photoCredits: <p>
     <strong>Photographs:</strong>{" "}
-    <a href="https://commons.wikimedia.org/wiki/File:108248_el_basha_hammam_in_acre_PikiWiki_Israel.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Zeev Stein / PikiWiki Israel (Turkish Bath)</a>{" — "}
+    <a href="https://commons.wikimedia.org/wiki/File:108248_el_basha_hammam_in_acre_PikiWiki_Israel.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Zeev Stein / PikiWiki Israel (Turkish Bath)</a>{" - "}
     <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY 2.5</a>;{" "}
-    <a href="https://commons.wikimedia.org/wiki/File:The_market_in_Acre_(Akko)_(373226896).jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Yaniv Ben-Arie (market)</a>{" — "}
+    <a href="https://commons.wikimedia.org/wiki/File:The_market_in_Acre_(Akko)_(373226896).jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Yaniv Ben-Arie (market)</a>{" - "}
     <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 2.0</a>;{" "}
-    <a href="https://commons.wikimedia.org/wiki/File:Antique_Padlocks_-_Treasures_in_the_Wall_Museum_-_Akko_(Acre)_-_Israel.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Adam Jones (museum collection)</a>{" — "}
+    <a href="https://commons.wikimedia.org/wiki/File:Antique_Padlocks_-_Treasures_in_the_Wall_Museum_-_Akko_(Acre)_-_Israel.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Adam Jones (museum collection)</a>{" - "}
     <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 2.0</a>;{" "}
-    <a href="https://commons.wikimedia.org/wiki/File:Acco_Ramhal_Synagogue_IMG_0281.JPG" target="_blank" rel="noopener noreferrer" className={inlineLink}>Deror Avi (Ramchal Synagogue)</a>{" — "}
+    <a href="https://commons.wikimedia.org/wiki/File:Acco_Ramhal_Synagogue_IMG_0281.JPG" target="_blank" rel="noopener noreferrer" className={inlineLink}>Deror Avi (Ramchal Synagogue)</a>{" - "}
     <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 3.0</a>.
     {" "}Images resized and converted to WebP. The image files retain their original Creative Commons licenses.
   </p>,

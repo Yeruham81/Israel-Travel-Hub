@@ -218,14 +218,14 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
     {label:"Private driver in Israel",to:"/private-driver-in-israel/",description:"Arrange convenient drop-off and pickup for an Old City visit.",icon:"transport"},
   ],
   sources: [
-    {label:"Franciscan Terra Sancta Museum — the fourteen Stations of the Sorrowful Way",url:official.stations},
-    {label:"Enjoy Jerusalem — Via Dolorosa Stations I–IX",url:official.walk},
-    {label:"Christian Information Center — shrine opening hours",url:official.churchHours},
-    {label:"Christian Information Center — Friday procession schedule",url:official.procession},
-    {label:"Custody of the Holy Land — Holy Sepulchre sanctuary",url:official.holySepulchre},
-    {label:"Terra Sancta Museum — museum and exhibition information",url:official.flagellationMuseum},
-    {label:"Christian Information Center — Jerusalem pilgrimage walk",url:official.cityGuide},
-    {label:"The Jerusalem Foundation — Via Dolorosa access restoration",url:official.mobility},
+    {label:"Franciscan Terra Sancta Museum - the fourteen Stations of the Sorrowful Way",url:official.stations},
+    {label:"Enjoy Jerusalem - Via Dolorosa Stations I–IX",url:official.walk},
+    {label:"Christian Information Center - shrine opening hours",url:official.churchHours},
+    {label:"Christian Information Center - Friday procession schedule",url:official.procession},
+    {label:"Custody of the Holy Land - Holy Sepulchre sanctuary",url:official.holySepulchre},
+    {label:"Terra Sancta Museum - museum and exhibition information",url:official.flagellationMuseum},
+    {label:"Christian Information Center - Jerusalem pilgrimage walk",url:official.cityGuide},
+    {label:"The Jerusalem Foundation - Via Dolorosa access restoration",url:official.mobility},
   ],
 };
 

@@ -20,13 +20,13 @@ export const travelTipsFaqs = [
 ] as const;
 
 export const travelTipsSources = [
-  { label: "Population and Immigration Authority — official ETA-IL information", href: "https://israel-entry.piba.gov.il/" },
-  { label: "Ministry of Tourism — Emergency Information for Tourists (PDF)", href: "https://www.gov.il/BlobFolder/generalpage/emergency-information-for-tourists-in-israel/en/emergency-information-for-tourists-in-israel-new.pdf" },
-  { label: "Ministry of Tourism — current visitor information", href: "https://www.gov.il/en/departments/topics/tourist-and-travelers-info" },
-  { label: "Home Front Command — official emergency instructions", href: "https://www.oref.org.il/eng" },
-  { label: "Israel Airports Authority — Ben Gurion Airport security and arrival advice", href: "https://www.iaa.gov.il/en/airports/ben-gurion/securitybgn/" },
-  { label: "Israel Railways — current journey planner", href: "https://rail.co.il/?lan=en" },
-  { label: "National Public Transportation Authority — routes and fares", href: "https://bus.gov.il/en/home" },
-  { label: "Tel Aviv-Yafo Municipality — weekend transportation", href: "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" },
-  { label: "Bank of Israel — exchange rates", href: "https://www.boi.org.il/en/" },
+  { label: "Population and Immigration Authority - official ETA-IL information", href: "https://israel-entry.piba.gov.il/" },
+  { label: "Ministry of Tourism - Emergency Information for Tourists (PDF)", href: "https://www.gov.il/BlobFolder/generalpage/emergency-information-for-tourists-in-israel/en/emergency-information-for-tourists-in-israel-new.pdf" },
+  { label: "Ministry of Tourism - current visitor information", href: "https://www.gov.il/en/departments/topics/tourist-and-travelers-info" },
+  { label: "Home Front Command - official emergency instructions", href: "https://www.oref.org.il/eng" },
+  { label: "Israel Airports Authority - Ben Gurion Airport security and arrival advice", href: "https://www.iaa.gov.il/en/airports/ben-gurion/securitybgn/" },
+  { label: "Israel Railways - current journey planner", href: "https://rail.co.il/?lan=en" },
+  { label: "National Public Transportation Authority - routes and fares", href: "https://bus.gov.il/en/home" },
+  { label: "Tel Aviv-Yafo Municipality - weekend transportation", href: "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" },
+  { label: "Bank of Israel - exchange rates", href: "https://www.boi.org.il/en/" },
 ] as const;

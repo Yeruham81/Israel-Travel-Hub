@@ -41,7 +41,7 @@ export const deadSeaStops: DeadSeaStop[] = [
       "alt": "Public bathing beach and blue Dead Sea water at Ein Bokek"
     },
     "official": {
-      "label": "Ein Bokek Central Beach — Tamar Regional Council",
+      "label": "Ein Bokek Central Beach - Tamar Regional Council",
       "href": "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en"
     },
     "guide": {
@@ -66,14 +66,14 @@ export const deadSeaStops: DeadSeaStop[] = [
     "access": "Paid national-park entry; cable car costs extra",
     "description": "Masada stands above the Judean Desert and the Dead Sea, preserving Herod's palace complex, ancient fortifications and the history of the Jewish revolt against Rome. The sweeping views are as memorable as the archaeological remains.",
     "practical": "The eastern cable-car entrance and western Roman Ramp entrance are reached by different roads. Admission, cable-car tickets and optional experiences have separate conditions; check current prices and reservations with the park. Walking routes may close during heat alerts.",
-    "gettingThere": "For the conventional Dead Sea approach, navigate to Masada National Park — eastern entrance / cable car. Do not use the western ramp unless that is your planned approach.",
+    "gettingThere": "From the Dead Sea, navigate to the eastern entrance of Masada National Park for the cable car. The western ramp is reached from Arad.",
     "tip": "I'd reserve enough time for the plateau itself. Choose a hike only after checking the day's trail status and weather.",
     "image": {
       "src": masada,
       "alt": "Aerial view of the archaeological plateau of Masada above the Judean Desert"
     },
     "official": {
-      "label": "Masada National Park — official access and tickets",
+      "label": "Masada National Park - official access and tickets",
       "href": "https://en.parks.org.il/reserve-park/masada-national-park/"
     },
     "guide": {
@@ -101,7 +101,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "allow": "Varies by currently open trail; some walks take around 3 hours",
     "access": "Paid reserve; entry and reservations vary by trail",
     "description": "Ein Gedi is an oasis of springs, vegetation and wildlife beside the desert escarpment. Its stream valleys and resident ibex make a striking contrast with the bare slopes around the Dead Sea.",
-    "practical": "Flood and rockfall damage have restricted or changed access to Nahal David and Nahal Arugot. Some available routes are strenuous and require early entry or advance registration, while the archaeological site has separate arrangements. Check the exact trail status, entry window, and reservations for your date on the park's official site. Do not assume the former waterfall circuit is open.",
+    "practical": "Flood and rockfall damage have restricted or changed access to Nahal David and Nahal Arugot. Some available routes are strenuous and require early entry or advance registration, while the archaeological site has separate arrangements. Check the exact trail status, entry window, and reservations for your date on the park's official site. Check which waterfall trails are currently open.",
     "gettingThere": "Ein Gedi sits on Route 90, north of Masada and Ein Bokek. Follow directions to the specific park entrance listed on your booking, not to Ein Gedi Kibbutz or the hotel.",
     "tip": "I would choose the route only after checking the official trail update and whether the walking time, heat exposure and difficulty match your group.",
     "image": {
@@ -109,7 +109,7 @@ export const deadSeaStops: DeadSeaStop[] = [
       "alt": "Natural waterfall and greenery in the Ein Gedi oasis near the Dead Sea"
     },
     "official": {
-      "label": "Ein Gedi Nature Reserve — routes and reservation information",
+      "label": "Ein Gedi Nature Reserve - routes and reservation information",
       "href": "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/"
     },
     "guide": {
@@ -141,7 +141,7 @@ export const deadSeaStops: DeadSeaStop[] = [
       "alt": "Desert cliffs and caves beside the Qumran archaeological landscape"
     },
     "official": {
-      "label": "Qumran National Park — Israel Nature & Parks Authority",
+      "label": "Qumran National Park - Israel Nature & Parks Authority",
       "href": "https://en.parks.org.il/reserve-park/qumran-park"
     },
     "mapLinks": [
@@ -165,7 +165,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "gettingThere": "Navigate to the Nahal Bokek trailhead at the designated hikers' parking by the Sonol station in Ein Bokek; the waterfront beach is a different destination.",
     "tip": "I'd take water shoes and dry footwear for afterwards, and choose a cooler period of the day. A wet canyon walk needs proper grip even if it is described as family-friendly.",
     "official": {
-      "label": "Nahal Bokek trail — Tamar Regional Council",
+      "label": "Nahal Bokek trail - Tamar Regional Council",
       "href": "https://www.deadsea.co.il/tracks/ein-bokek/?lang=en"
     },
     "mapLinks": [
@@ -193,7 +193,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "gettingThere": "The reserve is along Route 90, a few kilometres south of Kibbutz Kalia. It fits a northern Dead Sea day with Qumran.",
     "tip": "I'd consider this stop when travelling with children who enjoy nature, while keeping a separate supervised Ein Bokek beach visit for the classic Dead Sea float.",
     "official": {
-      "label": "Einot Tsukim Nature Reserve — official information",
+      "label": "Einot Tsukim Nature Reserve - official information",
       "href": "https://en.parks.org.il/reserve-park/enot-tsukim-nature-reserve/"
     },
     "mapLinks": [
@@ -225,12 +225,12 @@ export const deadSeaStops: DeadSeaStop[] = [
       "alt": "Hikers on a pale salt ridge at Mount Sodom overlooking the Dead Sea"
     },
     "official": {
-      "label": "Southern Dead Sea activities — regional tourism website",
+      "label": "Southern Dead Sea activities - regional tourism website",
       "href": "https://www.deadsea.co.il/attractions/?lang=en"
     },
     "mapLinks": [
       {
-        "label": "Mount Sedom Lookout — geographical pin",
+        "label": "Mount Sedom Lookout - geographical pin",
         "query": "31.08550,35.38864"
       },
       {

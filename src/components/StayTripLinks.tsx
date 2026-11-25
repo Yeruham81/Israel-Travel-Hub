@@ -202,12 +202,10 @@ export function StayTripLinks({
   return <div data-testid="stay-trip-planning" className="space-y-12">
     {local.length > 0 && <section id="explore" aria-labelledby="stay-explore-h" className="mt-14 scroll-mt-32">
       <h2 id="stay-explore-h" className="text-2xl font-bold sm:text-3xl">Explore more around {set.name}</h2>
-      {!isEditorial && <p className="mt-2 text-muted-foreground">Explore places and practical guides directly related to {set.name}.</p>}
       {renderCards(local, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" || region === "haifa" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
     </section>}
     {onward.length > 0 && <section id="trip-planning" aria-labelledby="stay-planning-h" className="scroll-mt-32">
       <h2 id="stay-planning-h" className="text-2xl font-bold sm:text-3xl">Plan the rest of your trip</h2>
-      {!(isEditorial && region === "jerusalem") && <p className="mt-2 text-muted-foreground">{isEditorial ? "Explore transport options, day trips and practical travel advice." : "Plan your arrivals, excursions and onward travel after choosing your hotel."}</p>}
       {renderCards(onward, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" || region === "haifa" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-3", "stay-trip-photo-grid")}
     </section>}
   </div>;

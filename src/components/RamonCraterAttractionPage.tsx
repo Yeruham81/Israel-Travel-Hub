@@ -236,14 +236,14 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
     { label: "Israel travel tips", to: "/travel-blog/israel-travel-tips/", description: "Practical advice for your journey.", icon: "region" },
   ],
   sources: [
-    { label: "Israel Nature and Parks Authority — Ramon Visitor Center", url: official.center },
-    { label: "Israel Nature and Parks Authority — Ramon Colors", url: official.colors },
-    { label: "Israel Nature and Parks Authority — HaMinsara walk", url: official.minsara },
-    { label: "Israel Nature and Parks Authority — Nahal Ardon trail", url: official.ardon },
-    { label: "Israel Nature and Parks Authority — Hai Ramon status", url: official.haiRamon },
-    { label: "DarkSky International — Ramon Crater Dark Sky Park", url: official.darkSky },
-    { label: "Photo credit — HaMinsara columns (Yuvalr, CC BY-SA 3.0; resized)", url: "https://commons.wikimedia.org/wiki/File:Sandy_rectangular_and_hexagonal_prisms_at_the_centre_of_Makhtesh_Ramon_-_Ha-Minsara_(The_Carpentry_Shop),_Israel.jpg" },
-    { label: "Photo credit — fat sand rat (SuperJew, CC BY-SA 3.0; resized)", url: "https://commons.wikimedia.org/wiki/File:Fat_Sand_Rat.jpg" },
+    { label: "Israel Nature and Parks Authority - Ramon Visitor Center", url: official.center },
+    { label: "Israel Nature and Parks Authority - Ramon Colors", url: official.colors },
+    { label: "Israel Nature and Parks Authority - HaMinsara walk", url: official.minsara },
+    { label: "Israel Nature and Parks Authority - Nahal Ardon trail", url: official.ardon },
+    { label: "Israel Nature and Parks Authority - Hai Ramon status", url: official.haiRamon },
+    { label: "DarkSky International - Ramon Crater Dark Sky Park", url: official.darkSky },
+    { label: "Photo credit - HaMinsara columns (Yuvalr, CC BY-SA 3.0; resized)", url: "https://commons.wikimedia.org/wiki/File:Sandy_rectangular_and_hexagonal_prisms_at_the_centre_of_Makhtesh_Ramon_-_Ha-Minsara_(The_Carpentry_Shop),_Israel.jpg" },
+    { label: "Photo credit - fat sand rat (SuperJew, CC BY-SA 3.0; resized)", url: "https://commons.wikimedia.org/wiki/File:Fat_Sand_Rat.jpg" },
   ],
 };
 

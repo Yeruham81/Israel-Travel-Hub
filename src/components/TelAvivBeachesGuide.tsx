@@ -196,7 +196,7 @@ export function TelAvivBeachesGuide() {
       </section>
 
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
-        <Heading id="compare" title="Tel Aviv beaches at a glance" intro="Compare the municipality's 13 listed beaches from north to south. The table describes their general appeal, not live bathing status." />
+        <Heading id="compare" title="Tel Aviv beaches at a glance" intro="Compare the municipality's 13 listed beaches from north to south. Check the current bathing conditions and lifeguard service before swimming." />
         
         <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
           <table className="w-full min-w-[800px] table-fixed border-collapse text-left text-sm">
@@ -342,12 +342,12 @@ export function TelAvivBeachesGuide() {
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use the city's official beach descriptions for the municipal beach list, safety, accessibility and separate-bathing rules, and the Israel Nature and Parks Authority for Palmahim. Lifeguard operation, flags, sea conditions, facilities and park fees can change; confirm the details for your visit.</p>
         <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
-          <li><OfficialLink href={officialTelAvivBeaches}>Municipality — current lifeguards and sea conditions (Hebrew)</OfficialLink></li>
-          <li><OfficialLink href={officialBeachFacilities}>Municipality — facilities, accessibility and dog areas (Hebrew)</OfficialLink></li>
-          <li><OfficialLink href={officialBeachPrices}>Municipality — beach rental prices (Hebrew)</OfficialLink></li>
-          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Nordau.aspx">Nordau separate beach — official schedule</OfficialLink></li>
-          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Charles.aspx">Charles Clore — beach facilities</OfficialLink></li>
-          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Hatzuk.aspx">North Tzuk — accessibility and facilities</OfficialLink></li>
+          <li><OfficialLink href={officialTelAvivBeaches}>Municipality - current lifeguards and sea conditions (Hebrew)</OfficialLink></li>
+          <li><OfficialLink href={officialBeachFacilities}>Municipality - facilities, accessibility and dog areas (Hebrew)</OfficialLink></li>
+          <li><OfficialLink href={officialBeachPrices}>Municipality - beach rental prices (Hebrew)</OfficialLink></li>
+          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Nordau.aspx">Nordau separate beach - official schedule</OfficialLink></li>
+          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Charles.aspx">Charles Clore - beach facilities</OfficialLink></li>
+          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Hatzuk.aspx">North Tzuk - accessibility and facilities</OfficialLink></li>
           <li><OfficialLink href="https://en.parks.org.il/reserve-park/palmahim-beach-national-park/">Palmahim Beach National Park</OfficialLink></li>
         </ul>
       </SourcesDisclosure>

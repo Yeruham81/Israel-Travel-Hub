@@ -5,13 +5,13 @@ export const BAPTISM_DESCRIPTION = "My practical Jordan River baptism guide: com
 export const BAPTISM_UPDATED = "2026-11-21";
 export const BAPTISM_HERO = { src: "/images/travel-blog/featured-jordan-baptism.webp", alt: "Baptism ceremony at Yardenit on the Jordan River" } as const;
 export const baptismSources = [
-  {label:"Yardenit — official baptism arrangements",url:"https://www.yardenit.com/baptism/"},
-  {label:"Yardenit — questions and answers",url:"https://www.yardenit.com/qa/"},
-  {label:"Yardenit — contact and visitor information",url:"https://www.yardenit.com/contact/"},
-  {label:"Qasr el-Yahud — official park and reservations",url:"https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/"},
-  {label:"Qasr el-Yahud — current official site reservation system",url:"https://en.parks.org.il/%D7%94%D7%96%D7%9E%D7%A0%D7%95%D7%AA-%D7%9C%D7%90%D7%AA%D7%A8%D7%99%D7%9D/"},
-  {label:"Qasr el-Yahud — official mine-clearance background",url:"https://inmaa.mod.gov.il/En/OurDoingEn/MineFieldsEn/Pages/TheBaptismSite.aspx"},
-  {label:"UNESCO — Bethany Beyond the Jordan / Al-Maghtas",url:"https://whc.unesco.org/en/list/1446/"},
+  {label:"Yardenit - official baptism arrangements",url:"https://www.yardenit.com/baptism/"},
+  {label:"Yardenit - questions and answers",url:"https://www.yardenit.com/qa/"},
+  {label:"Yardenit - contact and visitor information",url:"https://www.yardenit.com/contact/"},
+  {label:"Qasr el-Yahud - official park and reservations",url:"https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/"},
+  {label:"Qasr el-Yahud - current official site reservation system",url:"https://en.parks.org.il/%D7%94%D7%96%D7%9E%D7%A0%D7%95%D7%AA-%D7%9C%D7%90%D7%AA%D7%A8%D7%99%D7%9D/"},
+  {label:"Qasr el-Yahud - official mine-clearance background",url:"https://inmaa.mod.gov.il/En/OurDoingEn/MineFieldsEn/Pages/TheBaptismSite.aspx"},
+  {label:"UNESCO - Bethany Beyond the Jordan / Al-Maghtas",url:"https://whc.unesco.org/en/list/1446/"},
 ] as const;
 
 /** Products and exact booking destinations are sourced from the existing tour catalog.

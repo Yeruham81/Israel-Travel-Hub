@@ -39,9 +39,6 @@ export function CityStayPlanning({ city }: { city: CityStayGuide["id"] }) {
     <section aria-labelledby="city-planning-h" className="mt-14">
       <p className="eyebrow">After choosing your hotel</p>
       <h2 id="city-planning-h" className="mt-2 text-3xl md:text-4xl">Plan the rest of your trip</h2>
-      <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
-        The right hotel is only one part of an easy visit. Explore transport, day trips and practical guides that help you spend more time seeing the city and less time organising logistics.
-      </p>
       <ul className="mt-6 grid grid-cols-2 gap-5 lg:grid-cols-3">
         {selected.map((item) => (
           <li key={item.to} className="min-w-0">
@@ -59,7 +56,7 @@ export function CityStayPlanning({ city }: { city: CityStayGuide["id"] }) {
       {credited.length > 0 && <details className="mt-6 rounded-xl border bg-card p-4 text-xs text-muted-foreground">
         <summary className="cursor-pointer font-semibold">Planning card photo credits</summary>
         <ul className="mt-3 space-y-2">{credited.map((item) => (
-          <li key={item.to}><a href={item.credit!.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{item.title} — {item.credit?.credit || "Photo source"}</a>
+          <li key={item.to}><a href={item.credit!.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{item.title} - {item.credit?.credit || "Photo source"}</a>
           {item.credit?.licenseUrl && <> · <a href={item.credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline">License</a></>}</li>
         ))}</ul>
       </details>}

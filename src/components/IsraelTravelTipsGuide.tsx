@@ -151,7 +151,7 @@ export function IsraelTravelTipsGuide() {
       </section>
 
       <section id="arriving" className="mt-12 scroll-mt-24" aria-labelledby="arrival-title">
-        <Heading id="arrival-title" intro="Plan the journey to your actual hotel address—not just to the nearest city.">Arriving in Israel</Heading>
+        <Heading id="arrival-title" intro="Plan your airport transfer all the way to your hotel.">Arriving in Israel</Heading>
         <Topic title="Prepare for Ben Gurion Airport">
           <p>At Ben Gurion Airport, allow time for border procedures, baggage and customs before an onward connection. Decide in advance whether the train, an official taxi or a confirmed <Link to="/airport-transfers/" className={linkClass}>private airport transfer</Link> suits your destination, luggage and arrival hour.</p>
           <p>For your return flight, the <a href="https://www.iaa.gov.il/en/airports/ben-gurion/securitybgn/" target="_blank" rel="noopener noreferrer" className={linkClass}>Israel Airports Authority</a> advises arriving three hours before departure for security procedures; follow any more specific airline instructions and confirm your departure terminal.</p>
@@ -159,7 +159,7 @@ export function IsraelTravelTipsGuide() {
         </Topic>
         <Topic id="shabbat" title="Plan around Shabbat and Jewish holidays">
           <p>Shabbat begins on Friday evening and ends on Saturday evening, with times changing through the year. Trains and most regular bus services usually stop during this period; many businesses and attractions also close or reduce hours. Transport can stop well before sunset on Friday and resume after Shabbat ends.</p>
-          <p>This does not mean every service is unavailable. Some communities have limited weekend shuttle networks, including the <a href="https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" target="_blank" rel="noopener noreferrer" className={linkClass}>Tel Aviv-area Na'im Busofash service</a>. Taxis and private drivers may operate, subject to availability. These networks are not substitutes for regular national rail or bus service.</p>
+          <p>Some communities have limited weekend shuttle networks, including the <a href="https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" target="_blank" rel="noopener noreferrer" className={linkClass}>Tel Aviv-area Na'im Busofash service</a>. Taxis and private drivers may operate, subject to availability. These networks are not substitutes for regular national rail or bus service.</p>
           <p>When arriving or changing hotels on Friday or Saturday, verify your exact route, opening hours, luggage needs and check-in arrangements. My <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className={linkClass}>airport travel on Shabbat guide</Link> explains the options, while <Link to="/travel-blog/calendar-of-events/" className={linkClass}>Israel's calendar of events</Link> helps with holiday dates.</p>
         </Topic>
         <Tip>For Friday arrivals, check your flight's scheduled landing time against the final train or bus and any transfer to your hotel. The final part of the journey is easy to overlook.</Tip>
