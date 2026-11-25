@@ -53,7 +53,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
   visitorTitle: "Opening hours and visitor information",
   visitorNavLabel: "Opening hours & visits",
   relatedTitle: "Explore more around the Sea of Galilee",
-  contactIntroduction: "Tell me when you’re visiting, where you’ll be starting from and which Galilee sites you’d love to see. I’ll be happy to help put together a private day trip for you.",
+  contactIntroduction: "Tell me your date, pickup point, number of passengers and the Galilee sites you want to see. I can arrange a private day trip with a driver to Tabgha and nearby attractions.",
   facts: [
     { icon: "location", label: "Location", value: "Northwest Sea of Galilee", note: "Along Route 87, near Capernaum" },
     { icon: "duration", label: "Time needed", value: "About 1 hour", note: "For both churches at a relaxed pace" },
