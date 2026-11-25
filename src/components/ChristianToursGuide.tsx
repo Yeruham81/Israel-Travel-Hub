@@ -201,7 +201,7 @@ export function ChristianToursGuide(){
    </section>
    <section id="contact" aria-labelledby="contact-heading" className="mt-12 scroll-mt-24">
      <h2 id="contact-heading" className="sr-only">Ask Moshe Barak about private transport for your Christian heritage trip</h2>
-     <HomeContactForm guide={{
+     <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
        heading:"Need transport between Christian sites?",
        introduction:"I'm Moshe Barak. Tell me your travel dates, pickup location and group size if you want a private airport transfer, a multi-stop sightseeing day or a driver for your journey between Jerusalem, Nazareth and the Galilee. Guiding and West Bank arrangements must be confirmed separately.",
        subject:"",
