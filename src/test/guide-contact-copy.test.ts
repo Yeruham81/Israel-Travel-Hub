@@ -40,7 +40,7 @@ describe("attraction contact introductions promote transport instead of generic 
 
   it.each(pages)("%s offers a private transfer or day trip with a driver", page => {
     const src = readFileSync(`src/components/${page}AttractionPage.tsx`, "utf8");
-    const contact = src.match(/contactIntroduction: "([^"\\n]+)"/)?.[1];
+    const contact = src.match(/contactIntroduction: "([^"\n]+)"/)?.[1];
     expect(contact, page).toBeTruthy();
     expect(contact, page).toMatch(/private (?:transfer|transport|driver|day trip|journey)|day trip with a driver|transport with a driver/i);
     expect(contact, page).not.toMatch(/general planning information|have a question about visiting/i);
