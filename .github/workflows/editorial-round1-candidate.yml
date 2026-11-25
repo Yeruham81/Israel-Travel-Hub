@@ -4,6 +4,7 @@ on:
     branches: [main]
 permissions:
   contents: read
+  actions: read
 jobs:
   editorial-candidate:
     if: github.head_ref == 'editorial/round1-shared-home-itineraries-20261125' && github.event.pull_request.head.repo.full_name == github.repository
@@ -43,6 +44,15 @@ jobs:
           fs.writeFileSync('editorial-audit/baseline-comparison.json',JSON.stringify(comparison,null,2));
           console.log('EDITORIAL_COMPARISON',JSON.stringify(comparison));
           JS
+      - name: Retrieve frozen baseline corpus
+        uses: actions/download-artifact@v4
+        with:
+          name: editorial-natural-voice-audit
+          run-id: 45634686350
+          github-token: ${{ github.token }}
+          path: /tmp/editorial-baseline
+      - name: Compare focused style patterns without penalizing ordinary vocabulary
+        run: node scripts/compare-editorial-style.mjs /tmp/editorial-baseline/pages editorial-audit/pages
       - uses: actions/upload-artifact@v4
         if: always()
         with:
