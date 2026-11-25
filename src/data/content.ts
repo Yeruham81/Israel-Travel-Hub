@@ -130,7 +130,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     faqs: [
       { q: "Is Downtown the same as Jerusalem's Old City?", a: "No. Downtown is outside the walls, mainly around Jaffa Road and Ben Yehuda Street. You walk east toward Jaffa Gate to enter the Old City." },
       { q: "Is this a good area without a rental car?", a: "Yes, it is a practical base for walking and the light rail. Check current timetables and plan Friday-evening and Saturday journeys separately." },
-      { q: "Which part is quieter?", a: "Noise varies by street and room orientation. Ask the hotel about bars, deliveries and whether a higher-floor or inward-facing room is available rather than assuming all of Downtown is equally lively." },
+      { q: "Which part is quieter?", a: "Noise varies by street and room orientation. Ask the hotel about nearby bars and deliveries. A higher-floor or inward-facing room may be quieter." },
     ],
   },
   {
@@ -155,7 +155,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     ],
     gettingAround: [
       "Most hotels in this district are roughly 5–15 minutes on foot from Jaffa Gate, with the exact distance depending on how far south you stay. Measure the route to the gate rather than a straight line to an attraction inside the walls.",
-      "Hotel entrances outside the walls generally make an arrival with luggage simpler than a stay deep inside the Old City. Still, confirm the entrance and parking arrangements, particularly during holidays, events or road closures. Do not assume the light rail stops directly outside your hotel.",
+      "Hotel entrances outside the walls generally make an arrival with luggage simpler than a stay deep inside the Old City. Still, confirm the entrance and parking arrangements, particularly during holidays, events or road closures. Check the distance from your hotel to the nearest light-rail stop.",
     ],
     arrivalTips: ["Use the hotel's street entrance for the airport transfer, rather than a point inside the pedestrian mall.", "If traveling with children, check how the walk to Jaffa Gate works with a stroller.", "Confirm Friday-evening and Saturday check-in and meal arrangements directly."],
     bookingTips: ["Book an explicitly described view category if an Old City view is essential.", "Check pool opening dates, children's access and whether spa treatments cost extra."],
@@ -218,11 +218,11 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
       { name: "Jaffa Road & Davidka Square", text: "Useful orientation points for light-rail connections and walking toward the city center." },
     ],
     gettingAround: [
-      "Allow roughly 20–30 minutes to walk toward Jaffa Gate from much of this area. Another option is the light rail toward City Hall followed by a walk, when service is operating. Check your accommodation's exact position rather than relying on a broad 'near the market' description.",
+      "Allow roughly 20–30 minutes to walk toward Jaffa Gate from much of this area. Another option is the light rail toward City Hall followed by a walk, when service is operating. Check your accommodation's walking route from the market.",
       "Parking and driving through nearby lanes can be awkward. Ask where a taxi can stop and how to reach the entrance with suitcases. Many market businesses close from Friday afternoon for Shabbat, so confirm opening times and arrange food and transport for your actual dates.",
     ],
     arrivalTips: ["Ask whether the room faces the market, a main road or an internal courtyard.", "Arrange apartment access and key collection before a late or Shabbat arrival.", "Check both evening noise and early-morning deliveries when choosing a room."],
-    bookingTips: ["For an apartment, confirm the kitchen equipment, cleaning schedule and any separate cleaning fee.", "Read recent room-specific feedback for noise, stairs and access rather than relying on the neighbourhood name."],
+    bookingTips: ["For an apartment, confirm the kitchen equipment, cleaning schedule and any separate cleaning fee.", "Read recent room-specific reviews for noise, stairs and access."],
     faqs: [
       { q: "Should I stay beside the market or inside Nachlaot?", a: "Beside the market is convenient for food and nightlife. A side street in Nachlaot can feel more residential, but access and noise still depend on the specific building and room." },
       { q: "Is the market open throughout Shabbat?", a: "Do not plan on normal market trading from Friday afternoon through Saturday. Individual restaurants and bars keep their own hours; check the businesses you intend to use." },
@@ -242,7 +242,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     overview: [
       "For this accommodation guide, East Jerusalem means the hotel cluster just north and northeast of the Old City: Damascus Gate, Nablus Road, Salah ad-Din Street, St. George's Cathedral and the American Colony area. It does not mean that every hotel advertised as 'East Jerusalem' is equally close to the Old City.",
       "Palestinian restaurants, bakeries, shops and heritage buildings give these streets a character distinct from western Downtown. The Garden Tomb and northern Old City entrances make the district useful for Christian pilgrims, while smaller heritage hotels offer a different experience from a large conventional property.",
-      "The area has considerable variety. Busy commercial streets near Damascus Gate feel different from quieter gardens and hotel grounds farther north. Compare the exact hotel location, current access and your itinerary rather than treating this large part of the city as one uniform neighbourhood. It is less convenient for travelers who mainly want western Downtown's bars or Mahane Yehuda.",
+      "The area has considerable variety. Busy commercial streets near Damascus Gate feel different from quieter gardens and hotel grounds farther north. Choose a hotel according to its location, access and proximity to the sights you plan to visit. It is less convenient for travelers who mainly want western Downtown's bars or Mahane Yehuda.",
     ],
     highlights: [
       { name: "Damascus Gate", text: "A major northern entrance to the Old City's market lanes and the Muslim and Christian quarters." },
@@ -254,7 +254,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
       "Ask the hotel for the street name and entrance your driver should use. The Damascus Gate light-rail area can be useful when service operates, although the walk to the stop varies by property. Businesses here may keep different Saturday hours from West Jerusalem; confirm meals, transfers and site access individually.",
     ],
     arrivalTips: ["Share the exact hotel map location and entrance with your transfer provider.", "Check the route to the Old City gate you actually intend to use.", "Ask the hotel about current access and local conditions shortly before arrival."],
-    bookingTips: ["Do not assume a Mount of Olives or outer-neighbourhood listing is beside Damascus Gate.", "For heritage buildings, compare the room category and accessibility rather than expecting identical rooms."],
+    bookingTips: ["Allow more travel time from the Mount of Olives and outlying neighborhoods to Damascus Gate.", "For heritage buildings, compare the room category and accessibility rather than expecting identical rooms."],
     faqs: [
       { q: "Does every East Jerusalem hotel have easy Old City access?", a: "No. The name covers a large area. This guide focuses on the northern Old City hotel district; properties on the Mount of Olives or farther out can involve substantially different journeys." },
       { q: "Is this area convenient for Christian pilgrims?", a: "The northern hotel district is useful for the Garden Tomb, Damascus Gate and several Christian institutions. The best base still depends on the specific churches and sites in your itinerary." },
@@ -274,7 +274,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     overview: [
       "The German Colony and Baka are neighboring residential areas south of central Jerusalem. Emek Refaim is the German Colony's main café and shopping street, while Baka extends farther south and east around Bethlehem Road. A hotel at the northern end of the German Colony has a different relationship to the Old City from a suite deep inside Baka.",
       "This is an appealing base for families, repeat visitors and longer stays. Historic stone buildings, neighbourhood cafés and residential side streets give you a place to return to after sightseeing, rather than placing you in the busiest tourist or market streets. The accommodation mix includes a large luxury hotel and apartment-style properties with more independent living space.",
-      "Distance is the tradeoff. Plan to use buses or taxis for some journeys, particularly from southern Baka, and do not assume that every important attraction is a short walk away. Ask the hotel about current construction near Emek Refaim and the First Station, including noise, pedestrian routes and vehicle access.",
+      "Distance is the tradeoff. Use buses or taxis for longer journeys to the sights, particularly from southern Baka. Ask the hotel about current construction near Emek Refaim and the First Station, including noise, pedestrian routes and vehicle access.",
     ],
     highlights: [
       { name: "Emek Refaim", text: "Cafés, restaurants and historic stone buildings form the main neighbourhood spine." },
@@ -283,7 +283,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     ],
     gettingAround: [
       "From the northern German Colony, the walk toward Jaffa Gate can be roughly 15–25 minutes, depending on the hotel and route. Accommodation farther into Baka generally adds distance and is better treated as a bus-or-taxi base. Hills and a stroller can change what feels comfortably walkable.",
-      "For an airport transfer, get the hotel's current recommended approach and precise entrance. Street works can change access around Emek Refaim and nearby roads. Check current bus stops and service rather than assuming an advertised future light-rail line is already operating, especially for a Shabbat arrival.",
+      "For an airport transfer, get the hotel's current recommended approach and precise entrance. Street works can change access around Emek Refaim and nearby roads. Check current bus and light-rail services, especially for a Shabbat arrival.",
     ],
     arrivalTips: ["Ask about street works, room orientation and the latest vehicle approach shortly before arrival.", "For Baka, plan transport to central sights as part of your daily budget.", "Arrange late apartment check-in and confirm the exact entrance, which may be on a side street."],
     bookingTips: ["For a family suite, confirm separate bedrooms, sofa beds, kitchen equipment and maximum occupancy.", "Check parking terms and any seasonal pool restrictions for the exact property and date."],
@@ -335,7 +335,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     metaDescription: "Stay by Dizengoff Square, the White City and central cafés. Compare boutique hotel options, beach walks and transport without a car.",
     summary: "Dizengoff Square has central cafés, boutiques and city walks; the sea is farther west. A hotel farther along Dizengoff Street may be well away from the square.",
     bestFor: "First visits, cafés & exploring on foot", suits: ["first-visit", "car-free", "nightlife", "history"], priceLevel: "Mid-range to upscale",
-    watch: "Dizengoff Street is long. Check the address rather than assuming every hotel is beside the square.",
+    watch: "Dizengoff Street is long. Check the hotel's distance from Dizengoff Square.",
     photo: { src: dizengoffPhoto, alt: "The fountain and pedestrian plaza at Dizengoff Square in Tel Aviv", sourceUrl: "" },
     map: { lat: 32.0773, lon: 34.7737, bounds: [34.7664, 32.0705, 34.783, 32.0858], reference: "Dizengoff Square" },
     overview: [
@@ -349,7 +349,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
       { name: "Meir Park & Dizengoff Center", text: "A park and shopping landmark to the south help orient your route toward the wider city center." },
     ],
     gettingAround: [
-      "The beach is roughly 10–15 minutes on foot from the square, with extra time from hotels farther east or north. For Jaffa, the port or an airport station, plan a longer walk or a bus or taxi rather than treating every Tel Aviv sight as immediately nearby.",
+      "The beach is roughly 10–15 minutes on foot from the square, with extra time from hotels farther east or north. For Jaffa, the port or a railway station, plan a longer walk or take a bus or taxi.",
       "This is a practical base without a rental car. Check the walking route from your bus stop and the hotel's vehicle entrance, particularly if the address faces a pedestrian space. Friday-evening and Saturday transport has different service patterns; verify your exact journey before arrival.",
     ],
     arrivalTips: ["Confirm the hotel is near Dizengoff Square if that is the location you want.", "Ask for the nearest taxi stopping point and how to reach reception with luggage.", "Light sleepers should ask about room orientation, nearby bars and street works."],
@@ -388,7 +388,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     bookingTips: ["For a family stay, confirm the actual sleeping arrangement and maximum occupancy.", "Check the distance to your preferred beach and whether advertised leisure facilities are available for your dates."],
     faqs: [
       { q: "Is the Old North the same as Tel Aviv Port?", a: "No. The Old North is a broader residential district. The port is its northern waterfront destination; a hotel described as Old North may be a walk away from it." },
-      { q: "Is this a useful area for families?", a: "It can be, because of the parks, waterfront and northern beaches. Check the hotel's room layout and the route to the places you will use rather than relying on the district label alone." },
+      { q: "Is this a useful area for families?", a: "It can be, because of the parks, waterfront and northern beaches. Check the hotel's room layout and walking routes to the parks and beaches you plan to visit." },
       { q: "Is it convenient for exploring Jaffa every day?", a: "Jaffa is at the other end of the coastal city. A stay here works best if you are comfortable using transport for southern outings; choose Jaffa or the southern center if those are your main focus." },
     ],
   },
@@ -413,7 +413,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
       { name: "Charles Clore Park & the southern promenade", text: "The nearby coast offers a route toward Jaffa and a break from the enclosed neighborhood streets." },
     ],
     gettingAround: [
-      "The southern promenade is roughly 10–15 minutes on foot from many parts of Neve Tzedek, with a different walk from hotels on its eastern edges. Rothschild and Florentin are nearby; Jaffa is farther south. Plot the actual route rather than assuming all southern districts meet at your hotel.",
+      "The southern promenade is roughly 10–15 minutes on foot from many parts of Neve Tzedek, with a different walk from hotels on its eastern edges. Rothschild and Florentin are nearby; Jaffa is farther south. ",
       "Much of the appeal is exploring on foot. For luggage, a late arrival or an airport transfer, ask where a car can legally stop and which doorway is yours. If bringing a car, arrange a specific parking option before arrival instead of relying on a space in the historic lanes.",
     ],
     arrivalTips: ["Check whether your hotel is inside Neve Tzedek or on its eastern edge.", "Ask about steps and lifts in converted historic buildings.", "Arrange the drop-off and any independent check-in instructions before a late arrival."],
@@ -510,10 +510,10 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     ],
     gettingAround: [
       "The beach is around 10–15 minutes on foot from many addresses, sometimes closer from the western lanes. Check your actual route: an apartment on Nachalat Binyamin is east of the residential quarter, while a place closer to the sea gives a different starting point.",
-      "Narrow lanes, pedestrian sections and limited parking make this easier as a walking base than a driving base. Ask for a vehicle-accessible meeting point and the last stretch with luggage. Confirm transport and arrival instructions for the exact day rather than assuming the market's schedule applies to your hotel.",
+      "Narrow lanes, pedestrian sections and limited parking make this easier as a walking base than a driving base. Ask for a vehicle-accessible meeting point and the last stretch with luggage. Confirm your hotel's arrival arrangements and transport for the day you arrive.",
     ],
     arrivalTips: ["Confirm whether your stay is in the quarter or on the Carmel Market / Nachalat Binyamin edge.", "Ask how far the taxi stop is from your entrance, especially in pedestrian streets.", "Check lift access and any early-morning delivery or nightlife noise near your room."],
-    bookingTips: ["For an apartment, confirm the exact unit, minimum stay, cleaning and on-site support.", "Compare the room's actual outlook and included services rather than treating every nearby listing as a quiet neighborhood stay."],
+    bookingTips: ["For an apartment, confirm the exact unit, minimum stay, cleaning and on-site support.", "For a quieter stay, check room orientation, street noise and included services."],
     faqs: [
       { q: "Is Kerem HaTeimanim the same as Carmel Market?", a: "No. The Yemenite Quarter is the residential neighborhood toward the sea from the market. Listings around the market and Nachalat Binyamin can be nearby without being within its inner lanes." },
       { q: "Can I combine market visits and beach time on foot?", a: "Yes, that is one of the area's main attractions. Many addresses are roughly 10–15 minutes from the coast, but check the exact route from the property you choose." },
@@ -544,7 +544,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
       "Allow roughly 15–30 minutes to reach the coast from different parts of the boulevard, and check the route from your exact hotel. The distance between its ends also matters: a property near Habima offers a different starting point from one near the southern nightlife streets.",
       "Walking is useful locally, with buses or taxis for farther trips and the airport-station connection. For a transfer, give the precise entrance address, especially for a property on a side street. If renting a car, confirm the parking location and total cost before committing to a city-center stay.",
     ],
-    arrivalTips: ["Check whether the hotel is directly on Rothschild or on a nearby street.", "Ask about room orientation and nearby restaurants or bars if you prefer quieter evenings.", "Get the exact parking or taxi entrance rather than relying on the boulevard name."],
+    arrivalTips: ["Check whether the hotel is directly on Rothschild or on a nearby street.", "Ask about room orientation and nearby restaurants or bars if you prefer quieter evenings.", "Ask for the hotel's exact parking or taxi entrance."],
     bookingTips: ["Compare the property's facilities and the selected room category; the district includes very different hotel formats.", "For a special stay, confirm any terrace, view, breakfast or leisure access explicitly in your booking."],
     faqs: [
       { q: "Is Rothschild Boulevard a beachfront location?", a: "No. It is inland. A walk to the coast can take around 15–30 minutes depending on the hotel and route, so choose it for the city atmosphere rather than immediate beach access." },
@@ -768,7 +768,7 @@ export const deadSeaStayGuide: HotelStayDestination = {
   overview: [
     "A Dead Sea hotel is often a large part of the holiday itself. Beach access, freshwater pools, spa entry, children's facilities and meals can matter more than choosing a particular street. This guide covers the Israeli side of the Dead Sea, with the main resort hotels around Ein Bokek and the southern district near Neve Zohar.",
     "Start with the tradeoff that matters to your party. Nevo offers a broad resort-and-spa format; Oasis Spa Club has an age-restricted spa focus. Leonardo Club is a family option marketed as all-inclusive, while VERT combines a central Ein Bokek setting with a more conventional resort stay. Kayma, Herods and Milos offer different styles of upscale accommodation.",
-    "The comparison also includes Ein Gedi Hotel and HI Ein Gedi Hostel as inland alternatives. A Dead Sea view or a mineral-water pool does not establish access to an operating beach. Check the actual route to the water and the facilities included in the room offer, rather than relying on a 'spa' or 'beachfront' label.",
+    "The comparison also includes Ein Gedi Hotel and HI Ein Gedi Hostel as inland alternatives. A Dead Sea view or a mineral-water pool does not establish access to an operating beach. Check the walking route to the beach and which spa facilities your room rate includes.",
     "For a family or all-inclusive stay, compare the exact meal plan, child ages and seasonal pool or kids-club access. For a spa holiday, check whether admission is included with your room and whether age restrictions apply to the hotel, particular spa facilities or both. Details can vary between room offers.",
   ],
   map: { lat: 31.1997, lon: 35.3634, bounds: [35.325, 31.13, 35.405, 31.49], reference: "Ein Bokek reference point; map also covers the southern district and Ein Gedi" },
@@ -801,7 +801,7 @@ export const deadSeaStayGuide: HotelStayDestination = {
     { q: "Should I choose Ein Bokek or the southern hotel district?", a: "Ein Bokek is useful if you want the promenade, shops and outside dining within easier reach. The southern resorts suit a stay centered on the hotel's own beach, meals and facilities. Choose the actual property and arrival route rather than the area name alone." },
     { q: "Which Dead Sea hotel has an all-inclusive format?", a: "Leonardo Club Dead Sea is marketed by its operator as all-inclusive. Check the exact package, drinks, meal times and activity inclusions. Other hotels' breakfast or half-board rates are different products; the family guide explains how to compare them." },
     { q: "Does having a spa mean the hotel is adults-only?", a: "No. A hotel can accept families while restricting spa entry to older guests. Noga, for example, lists spa entry from age 16. Oasis Spa Club has a separate age-restricted hotel policy. Check the hotel's admission rules and each facility's age limit separately." },
-    { q: "Can I choose Ein Gedi for a beachfront holiday?", a: "Treat Ein Gedi as a nature-focused base rather than assuming beach access beside your hotel. A view of the water and a Dead Sea water spa pool are different from an operating beach. Confirm your beach plan and transport before booking." },
+    { q: "Can I choose Ein Gedi for a beachfront holiday?", a: "Choose Ein Gedi for a nature-focused stay. A view of the water and a Dead Sea water spa pool are different from an operating beach. Confirm your beach plan and transport before booking." },
   ],
   sourceIds: ["owner-hotels-deadsea", "ds-nevo-spa", "ds-noga-spa", "ds-herods-spa", "ds-ein-gedi-spa"],
   related: [
@@ -842,7 +842,7 @@ export const tiberiasStayGuide: HotelStayDestination = {
     { name: "Lakeside hotel edges", text: "U Boutique is toward the northern edge of the central waterfront; Galei Kinneret and Gai Beach are to the south. Compare the hotel's own beach and facilities, then consider journeys to dinner or sightseeing outside the property." },
   ],
   arrival: [
-    "Give your driver the exact property and entrance. The waterfront, upper streets and southern hotels have different arrival routes. If you arrive by bus, check the final walk with luggage, reception hours and any hills. Arrange late check-in with smaller hotels and the hostel rather than assuming a staffed desk all night.",
+    "Give your driver the exact property and entrance. The waterfront, upper streets and southern hotels have different arrival routes. If you arrive by bus, check the final walk with luggage, reception hours and any hills. Arrange late check-in in advance with smaller hotels and the hostel.",
     "If you will drive around the Galilee, compare parking availability, charges and access at the hotel. Without a car, plan your northern sightseeing through the tours or transport pages and check date-specific services, especially around Shabbat and holidays. Book suitable child seats when arranging family transport.",
   ],
   groups: [
@@ -880,7 +880,7 @@ const tiberiasCategoryGuides: HotelCategoryGuide[] = [
     overviewTitle: "Match the hotel to your children's ages and your days out", detailNavLabel: "Meals & rooms", checklistTitle: "Children, rooms & swimming",
     overview: [
       "Start with how your family will spend the day. Gai Beach is a comparison for beach time and the water park, Leonardo Club for children's activities near the town, and Caesar Premier for a central hotel beside the promenade. The most useful choice depends on whether hotel activities or Galilee outings will fill most of your time.",
-      "A family-hotel label does not confirm a cot, separate sleeping area or suitable slides for every child. Enter every child's age, inspect the actual room layout and check seasonal operation. If you need two rooms with an internal connection, ask for that connection to be confirmed rather than relying on a request field.",
+      "A family-hotel label does not confirm a cot, separate sleeping area or suitable slides for every child. Enter every child's age, inspect the actual room layout and check seasonal operation. If you need connecting rooms, ask the hotel to confirm their availability directly.",
       "Meal-plan descriptions need particular attention here. Leonardo Club Tiberias is still marketed as all-inclusive, but the operator's current notice says full board instead. Treat the exact written offer as the basis for comparing meals and drinks. Caesar's 18+ thermal-pool rule is a facility restriction, not a ban on children staying at the hotel.",
     ],
     decisions: [
@@ -904,7 +904,7 @@ const tiberiasCategoryGuides: HotelCategoryGuide[] = [
     ],
     checklist: ["Enter every child's age and confirm beds, cots and maximum room occupancy", "Ask about slide rules, club ages, supervision and the current pool calendar", "Check the actual swimming-beach arrangement and route with a stroller", "Get the current meal basis and drinks or snack inclusions in writing", "Include parking, outside meals and Galilee transport in the family total", "Confirm child seats, arrival timing and the cancellation deadline"],
     faqs: [
-      { q: "Which hotel in this shortlist has a water park?", a: "Gai Beach advertises a water park with guest entry, and Leonardo Club lists seasonal water slides. They are different facilities. Confirm the calendar, entry terms and each child's eligibility rather than assuming all attractions operate throughout the year." },
+      { q: "Which hotel in this shortlist has a water park?", a: "Gai Beach advertises a water park with guest entry, and Leonardo Club lists seasonal water slides. They are different facilities. Check seasonal opening dates, entry terms and age or height restrictions for each child." },
       { q: "Can I book Leonardo Club Tiberias as all-inclusive?", a: "Check the exact current offer. The operator notice reviewed on 17 October 2026 says full board instead of all-inclusive. Ask the hotel to confirm meals, drinks, snacks and other inclusions before paying." },
       { q: "Can children stay at Caesar Premier?", a: "Yes, it is a family-hotel comparison. Its 18+ thermal mineral-pool restriction is separate from hotel admission. Check the outdoor pool and children's facilities for your dates and the ages of your children." },
       { q: "Are all three hotels on a private swimming beach?", a: "No. Gai Beach advertises a declared beach by its water park. Leonardo Club is a town hotel, and Caesar's promenade position does not establish a private beach. Confirm the actual swimming arrangement before deciding." },
@@ -949,7 +949,7 @@ const tiberiasCategoryGuides: HotelCategoryGuide[] = [
       { q: "Which hotels advertise private beach access?", a: "U Boutique Kinneret and Galei Kinneret advertise private beach areas. Check current operation and the route to the water. The Scots Hotel's lakefront gardens do not establish a swimming beach." },
       { q: "Is The Scots Hotel a good choice for a historic setting?", a: "It is the heritage-focused comparison here, with restored hospital buildings, basalt-stone architecture and gardens on the central waterfront. Compare the exact building and room category with your accessibility and space needs." },
       { q: "Does a luxury room include spa treatments?", a: "Only if the specific offer says so. Confirm basic spa access separately from massages and other treatments, along with age limits and advance-booking requirements." },
-      { q: "Should I pay extra for a lake-view room?", a: "It depends on how much time you plan to spend in the room and the confirmed outlook. Compare the actual room description and any balcony rather than assuming every room in a waterfront hotel faces the lake." },
+      { q: "Should I pay extra for a lake-view room?", a: "It depends on how much time you plan to spend in the room and the confirmed outlook. Check whether the room and balcony face the lake." },
     ],
     sourceIds: [],
   },
@@ -983,7 +983,7 @@ export const haifaStayGuide: HotelStayDestination = {
   map: { lat: 32.8191, lon: 34.9884, bounds: [34.951, 32.785, 35.017, 32.837], reference: "German Colony reference point; map also covers Carmel Center, Hadar and the southern beachfront" },
   locations: [
     { name: "German Colony & lower city", text: "Historic streets and restaurants below the Bahá'í Gardens, with downtown and the port district nearby. Botanica, Schumacher, Colony and Golden Crown are comparisons here; Port Inn is a lower-city option. Check the actual port entrance and station route if arriving with luggage." },
-    { name: "Carmel Center & Hadar", text: "Dan Carmel, Crowne Plaza and Nof occupy the higher Carmel area. Loui Talpiot is in the market neighborhood of Hadar, on a different level. Map distance can hide steep climbs, so compare the route and transport rather than assuming every nearby point is an easy walk." },
+    { name: "Carmel Center & Hadar", text: "Dan Carmel, Crowne Plaza and Nof occupy the higher Carmel area. Loui Talpiot is in the market neighborhood of Hadar, on a different level. Haifa's steep hills can make short walks demanding. Check the walking route and public transport." },
     { name: "Southern beachfront", text: "Leonardo Plaza suits time on the beach and promenade. It is a different base from the German Colony and Carmel viewpoints. Include journeys into town and to your planned attractions when deciding whether to stay by the shore." },
   ],
   arrival: [
@@ -1028,7 +1028,7 @@ const haifaCategoryGuides: HotelCategoryGuide[] = [
     overview: [
       "Haifa's German Colony is a useful place to begin a boutique-hotel search if restaurants, historic architecture and an urban base matter to you. The Schumacher and The Colony Hotel offer different heritage settings. Botanica is included as a larger, contemporary luxury alternative for visitors who put design and wellness facilities ahead of a small property size.",
       "A boutique label does not establish a pool, a restaurant, a balcony or an adults-only policy. Compare your actual room and the way you plan to spend the day. Schumacher's garden and sun terrace, Colony's historic boulevard setting and Botanica's spa and seasonal plunge pool create different stays within the same broad neighborhood.",
-      "Guest ages need a separate check. Schumacher's own site describes adults-only stays; Botanica's operator lists an age restriction from 16. Confirm the exact eligibility for your dates and party rather than treating all boutique properties as interchangeable. Families with younger children should start with the dedicated family guide.",
+      "Guest ages need a separate check. Schumacher's own site describes adults-only stays; Botanica's operator lists an age restriction from 16. Check the minimum guest age for your chosen hotel and travel dates. Families with younger children should start with the dedicated family guide.",
     ],
     decisions: [
       { title: "Preserved building or contemporary design?", text: "Compare Schumacher's restored Templer building and modern wing with Colony's historic boulevard building. Botanica offers a contemporary design-led alternative and a larger hotel format." },
@@ -1038,7 +1038,7 @@ const haifaCategoryGuides: HotelCategoryGuide[] = [
     ],
     comparison: [{ key: "location", label: "Neighborhood setting" }, { key: "spa", label: "Leisure facilities" }, { key: "agePolicy", label: "Guest policy" }],
     picks: [
-      { hotelId: "haifa-schumacher", summary: "Choose The Schumacher when a preserved building, garden and smaller neighborhood-hotel format are central to the trip. Its combination of historic and modern wings gives another room choice within the German Colony. The operator's own site says adults-only, making the admission policy part of the decision rather than a detail to check after booking.", bestFor: "Couples and independent adults seeking heritage character, design and a German Colony base.", watch: "Confirm the exact minimum age, building, room layout and step-free route if needed. Ask where breakfast is served and how treatments and parking work; do not assume a full resort facilities package." },
+      { hotelId: "haifa-schumacher", summary: "Choose The Schumacher when a preserved building, garden and smaller neighborhood-hotel format are central to the trip. Its combination of historic and modern wings gives another room choice within the German Colony. The operator's own site says adults-only, making the admission policy part of the decision rather than a detail to check after booking.", bestFor: "Couples and independent adults seeking heritage character, design and a German Colony base.", watch: "Confirm the exact minimum age, building, room layout and step-free route if needed. Ask where breakfast is served and whether treatments and parking are available." },
       { hotelId: "haifa-colony", summary: "The Colony Hotel is the comparison for a preserved building directly on Ben Gurion Boulevard. Its location makes the neighborhood's restaurants and architecture part of the stay, with the lower Bahá'í Gardens as a nearby landmark. Choose the room and outlook as carefully as the historic exterior.", bestFor: "Visitors wanting a heritage hotel on the main German Colony boulevard and a city break focused on walking and dining.", watch: "Ask about your room's view, street noise, accessibility and maximum occupancy. Check breakfast and spa-treatment inclusions separately, along with parking and arrival arrangements." },
       { hotelId: "haifa-botanica", summary: "Botanica is the contemporary luxury alternative in this comparison. Its botanical design, spa and seasonal rooftop plunge pool suit a stay where the hotel experience matters alongside the German Colony location. It is larger than the two heritage boutiques, so choose it for the experience rather than expecting an intimate guesthouse.", bestFor: "Couples and eligible older guests prioritizing contemporary design and wellness facilities.", watch: "Confirm the operator's 16+ guest policy and exact eligibility. The rooftop facility is a plunge pool, not a full-size swimming pool; check its season, spa access, treatments and the room's actual outlook." },
     ],
@@ -1080,17 +1080,17 @@ const haifaCategoryGuides: HotelCategoryGuide[] = [
     comparison: [{ key: "children", label: "Family facilities" }, { key: "beach", label: "Beach & daily journeys" }, { key: "meals", label: "Meals to check" }],
     picks: [
       { hotelId: "haifa-leonardo-plaza", summary: "Choose Leonardo Plaza when the beach and promenade are part of your daily routine. Its operator advertises a main pool covered and heated in colder seasons, children's pools and a club with a date-dependent schedule. The beachfront setting is a different choice from the hilltop hotels, especially if you expect to spend substantial time by the water.", bestFor: "Families prioritizing immediate access to the beach area, pools and a coastal holiday setting.", watch: "Confirm the suite's actual bedrooms, beds, balcony and outlook. Check pool and beach operation; the operator lists children's club activity on weekends, holidays and July–August. Arrange transport for outings away from the beachfront." },
-      { hotelId: "haifa-crowne-plaza", summary: "Crowne Plaza suits a family city break based near Carmel Center, with a heated indoor pool as a practical leisure option. Compare it when you plan to combine hotel time with viewpoints, restaurants and outings, allowing for transport to the beach and lower city.", bestFor: "Families who prefer a Carmel base and want to check an indoor swimming option for their travel dates.", watch: "Confirm child access to the pool and health club, maximum room occupancy and any extra bed. Do not assume a children's activity club. If a dining promotion affects your choice, check its specific age, adult-meal and rate conditions." },
+      { hotelId: "haifa-crowne-plaza", summary: "Crowne Plaza suits a family city break based near Carmel Center, with a heated indoor pool as a practical leisure option. Compare it when you plan to combine hotel time with viewpoints, restaurants and outings, allowing for transport to the beach and lower city.", bestFor: "Families who prefer a Carmel base and want to check an indoor swimming option for their travel dates.", watch: "Confirm child access to the pool and health club, maximum room occupancy and any extra bed. Check whether the hotel offers a children's activity club. If a dining promotion affects your choice, check its specific age, adult-meal and rate conditions." },
       { hotelId: "haifa-dan-carmel", summary: "Dan Carmel is the upscale comparison for families who want hotel gardens and pools alongside a hilltop city base. The operator lists a separate children's pool, and selected room categories accommodate two adults and two children. That does not mean every room or executive category fits the same party.", bestFor: "Families who value a substantial hotel setting, outdoor pool time and the Carmel location.", watch: "Confirm the exact room's occupancy and beds, pool opening and any essential connection. Certain executive rooms and lounge access have age restrictions separate from family admission. Include meals, paid parking and beach journeys in the total." },
     ],
     detailTitle: "Swimming dates, family-room layouts & the real trip total",
     details: [
       { title: "Check the facilities for the dates, not just the photograph", text: "Ask about current pool opening, children's access, adult supervision and any maintenance. Leonardo Plaza's published children's club schedule covers weekends, holidays and July–August; verify the actual dates and age groups. Crowne Plaza's indoor pool does not imply a children's club, while Dan Carmel's outdoor and children's pools need a seasonal check." },
       { title: "Book the right room category for every child", text: "Enter all adults and every child's age on the booking site. Compare a single family room, a suite and connecting rooms as different layouts. Dan Carmel's published room categories have different occupancy limits, and lounge or executive-floor restrictions are separate. Get an essential internal connection or cot confirmed in writing." },
-      { title: "Include Haifa's hills in the plan", text: "A Carmel hotel can suit viewpoints and outings while requiring transport for beach time. A beachfront hotel creates the opposite tradeoff for visits to the German Colony or higher city. Check the route with a stroller, hotel parking and child seats for a booked driver rather than assuming map proximity means an easy walk." },
+      { title: "Include Haifa's hills in the plan", text: "A Carmel hotel can suit viewpoints and outings while requiring transport for beach time. A beachfront hotel creates the opposite tradeoff for visits to the German Colony or higher city. Check walking routes with a stroller, hotel parking and child-seat arrangements with your driver." },
       { title: "Compare meals and outings in the family total", text: "Read the actual meal basis and any children's dining promotion. A breakfast rate, a conditional dining offer and a broader package are different products. Add parking, transport, lunches and other meals to compare the same dates and cancellation conditions fairly." },
     ],
-    checklist: ["Enter all adults and each child's age; confirm the actual beds and capacity", "Ask about pool access, supervision, opening and maintenance for your dates", "Confirm club dates and age groups rather than assuming daily programming", "Check cots, a separate bedroom or any essential connecting doorway", "Include meals, parking, child seats and daily transport in the total", "Confirm arrival arrangements, cancellation terms and access needs"],
+    checklist: ["Enter all adults and each child's age; confirm the actual beds and capacity", "Ask about pool access, supervision, opening and maintenance for your dates", "Check club dates and age groups", "Check cots, a separate bedroom or any essential connecting doorway", "Include meals, parking, child seats and daily transport in the total", "Confirm arrival arrangements, cancellation terms and access needs"],
     faqs: [
       { q: "Which hotel in this family shortlist is on the beach?", a: "Leonardo Plaza is the beachfront comparison, with access from the pool area to the shore. Crowne Plaza and Dan Carmel are Carmel bases; a sea view there does not establish immediate beach access." },
       { q: "Which Haifa hotel should I compare for an indoor pool?", a: "Crowne Plaza advertises a heated indoor pool. Leonardo Plaza describes its main pool as covered and heated during colder seasons. Confirm current operation and children's access directly for your dates." },
@@ -1158,7 +1158,7 @@ export const hotelCategoryGuides: HotelCategoryGuide[] = [
     summary: "Compare five Dead Sea spa stays by mineral-water facilities, beach arrangements, guest-age rules and whether spa entry or treatments are part of the room rate.",
     photo: deadSeaPhotos.sunbeds,
     overview: [
-      "Start by separating the hotel stay from the spa experience. A property may advertise mineral-water pools and treatment rooms while charging separately for massages, sulfur pools or particular access packages. A cheaper room is not necessarily better value once you add the facilities you intend to use.",
+      "Start by separating the hotel stay from the spa experience. A property may advertise mineral-water pools and treatment rooms while charging separately for massages, sulfur pools or particular access packages. Compare the total cost including the facilities you plan to use.",
       "The shortlist below compares different settings rather than awarding one universal winner. Nevo combines a broad resort format with the Esprit Spa; Oasis Spa Club focuses on an age-restricted wellness stay. Herods adds a southern beachfront setting, Milos offers a low-rise design format, and Noga is an alternative with two Dead Sea water pools.",
       "A spa hotel can still welcome families. Check whole-hotel guest ages separately from access to mineral pools, saunas, gyms and treatments. The same distinction matters for beach access: a saltwater pool inside the hotel is different from an operating beach on the shore.",
     ],
@@ -1173,7 +1173,7 @@ export const hotelCategoryGuides: HotelCategoryGuide[] = [
       { hotelId: "ds-nevo", summary: "Choose Nevo when the spa is one part of a broader resort holiday. Its Esprit Spa and mineral-water facilities sit alongside the services of a substantial hotel in Ein Bokek, so companions with different priorities have more to compare than a treatment menu alone.", bestFor: "A first spa-and-resort stay, or couples and groups who want facilities beyond the spa.", watch: "Ask for the spa inclusions attached to your exact room offer. Confirm any charges for treatments or particular pools and the minimum age for each facility." },
       { hotelId: "ds-oasis", summary: "Oasis Spa Club is the shortlist's most explicitly age-restricted wellness format, with a Moroccan-inspired spa, indoor mineral-water facilities and a beach reached on foot. The operator currently states hotel and spa entry from 16, with an adult-accompaniment rule and minimum check-in age of 18.", bestFor: "Adults seeking a spa-focused atmosphere rather than a children's activity resort.", watch: "Confirm the current policy directly for any 16–17-year-old. Check which treatments are extra and whether the short beach walk suits your mobility requirements." },
       { hotelId: "ds-herods", summary: "Choose Herods if you want a substantial spa and an adjoining beach in the southern hotel district. It suits spending much of the stay at the resort; that setting is less convenient for frequent walks to Ein Bokek's shops and restaurants.", bestFor: "A resort-focused couples' break combining the Vitalis Spa with beach time.", watch: "Verify the Vitalis facilities and entry included in your rate. Check treatment availability, spa age limits and the exact room outlook before paying." },
-      { hotelId: "ds-milos", summary: "Milos offers a design-focused alternative to a large hotel tower. Its low-rise setting in Ein Bokek combines beach access with a spa advertising mineral-water and sulfur pools, a hammam and treatments. Compare the actual room and facilities rather than assuming every offer includes private outdoor space.", bestFor: "Couples who want hotel design and beach access alongside a spa break.", watch: "Check spa admission ages, pool operation and treatment charges. Confirm any private pool or terrace explicitly in the room category you select." },
+      { hotelId: "ds-milos", summary: "Milos offers a design-focused alternative to a large hotel tower. Its low-rise setting in Ein Bokek combines beach access with a spa advertising mineral-water and sulfur pools, a hammam and treatments. Check which room categories include private outdoor space.", bestFor: "Couples who want hotel design and beach access alongside a spa break.", watch: "Check spa admission ages, pool operation and treatment charges. Confirm any private pool or terrace explicitly in the room category you select." },
       { hotelId: "ds-noga", summary: "Noga is worth comparing when you want mineral-water facilities without making luxury-room design the main priority. Its Esprit Spa advertises two Dead Sea pools, and its Ein Bokek position places the beach a short walk away rather than making it a direct beachfront stay.", bestFor: "Travelers comparing a practical Ein Bokek base and the facilities they will actually use.", watch: "Spa entry is listed for guests aged 16+, and treatments are charged separately. Compare the final room-and-meals total with other hotels for the same dates." },
     ],
     detailTitle: "Spa access, treatments & age restrictions",
@@ -1222,11 +1222,11 @@ export const hotelCategoryGuides: HotelCategoryGuide[] = [
       { title: "What all-inclusive means here", text: "Leonardo Club Dead Sea is marketed by its operator as all-inclusive, with meals, drinks and activities forming part of the resort format. Check the exact offer for meal times, drink selections, snacks, activities and exclusions. A spa treatment or every special service should not be assumed included." },
       { title: "When another meal plan may work better", text: "If your family plans excursions or wants outside dining, compare breakfast or half board with the all-inclusive total. Central Ein Bokek and a self-contained southern resort provide different outside options. Count lunch, drinks, snacks and local transport in the comparison." },
       { title: "Use the right party details", text: "Enter the ages of all children and the true number of adults on the booking site. Compare the same dates and cancellation conditions. A cot, extra bed, separate bedroom or connecting room is available only if the hotel confirms it for the room you choose." },
-      { title: "Plan around freshwater pools and activities", text: "Check the actual children's pools and activity timetable rather than treating a Dead Sea beachfront as a substitute for a family swimming program. Ask about shaded areas, the walk between facilities and any age or height restrictions before choosing the hotel." },
+      { title: "Plan around freshwater pools and activities", text: "Check children's swimming pools and activity schedules; the Dead Sea itself is unsuitable for ordinary swimming. Ask about shaded areas, the walk between facilities and any age or height restrictions before choosing the hotel." },
     ],
     checklist: ["Enter every adult and each child's age on the booking site", "Confirm beds, maximum occupancy, cots and any essential connecting doorway", "Check pool and water-park operation for the travel dates", "Ask about club age groups, staffing and adult-attendance rules", "Compare meals, snacks, drinks, parking and transport in the final family total", "Arrange child seats and check the hotel's arrival and cancellation terms"],
     faqs: [
-      { q: "Which hotel in this shortlist offers all-inclusive?", a: "Leonardo Club Dead Sea is marketed as all-inclusive. The other shortlisted hotels offer different room and meal-plan choices. Check each exact offer rather than assuming every family resort is all-inclusive." },
+      { q: "Which hotel in this shortlist offers all-inclusive?", a: "Leonardo Club Dead Sea is marketed as all-inclusive. The other shortlisted hotels offer different room and meal-plan choices. Check which meals, drinks and activities are included in your room rate." },
       { q: "Is a water park guaranteed to be open on our dates?", a: "No. Confirm current operation directly with the hotel, along with slide height or age restrictions and weather or maintenance limitations. Do the same for children's pools and activity clubs." },
       { q: "Can children use all the spa pools?", a: "Do not assume so. Spa and mineral-pool age limits are separate from a hotel's family policy. Noga's spa, for example, is listed for guests aged 16 and over. Ask about the freshwater pools and activities appropriate for your children." },
       { q: "Is a family room the same as two connecting rooms?", a: "No. A family room may put everyone in one space, while connecting rooms require two rooms with an internal doorway. Check the actual layout and get a connection confirmed in writing if you need it." },

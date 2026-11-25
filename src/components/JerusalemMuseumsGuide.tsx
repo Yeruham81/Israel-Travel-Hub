@@ -124,7 +124,7 @@ function MuseumMap() {
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label htmlFor="jerusalem-museum-select" className="min-w-0 flex-1 text-sm font-semibold">Focus on a museum
           <select id="jerusalem-museum-select" value={selectedId} onChange={e=>focus(e.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
-            <option value="all">All museums — city overview</option>
+            <option value="all">All museums - city overview</option>
             {museumAreas.map(area=><optgroup key={area.id} label={area.name}>{museums.filter(m=>m.area===area.id).map(m=><option key={m.id} value={m.id}>{museums.findIndex(x=>x.id===m.id)+1}. {m.name}{m.id==="rockefeller"?" (restricted entry)":""}</option>)}</optgroup>)}
           </select>
         </label>

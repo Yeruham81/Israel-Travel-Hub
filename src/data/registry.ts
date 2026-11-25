@@ -1720,7 +1720,7 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
     summary: "An AFI resort by the Ein Bokek promenade with beach access, pools, a spa and children's facilities. It suits families who want a hotel base near the central resort area and prefer choosing their meal plan.",
     bestFor: "Families combining beach time, hotel facilities and central Ein Bokek convenience.",
     watch: "Check the exact room layout, connecting-room confirmation, club schedule and meal plan. A family-hotel label does not mean an all-inclusive rate.", sourceId: "hotel-ds-vert-official",
-    resortFacts: { location: "Ein Bokek promenade", beach: "Hotel access to the adjacent beach", spa: "Indoor mineral-water pool, spa and treatments", agePolicy: "Families welcome; check spa age restrictions", children: "Children's club and pool facilities", meals: "Compare the selected meal plan; do not assume all-inclusive" },
+    resortFacts: { location: "Ein Bokek promenade", beach: "Hotel access to the adjacent beach", spa: "Indoor mineral-water pool, spa and treatments", agePolicy: "Families welcome; check spa age restrictions", children: "Children's club and pool facilities", meals: "Check which meals and drinks the rate includes" },
   },
   {
     id: "ds-noga", cityId: "deadsea", areaId: "deadsea", name: "Noga by Isrotel Collection", style: "Ein Bokek hotel with mineral-water pools",

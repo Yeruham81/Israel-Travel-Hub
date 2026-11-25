@@ -106,7 +106,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         ...commonTaxi, "If you're staying in or near the Old City, ask your hotel where a vehicle can drop you off. You may need to walk the final stretch with your luggage. See the official airport taxi guide for pickup instructions and the taxi fares in Israel guide for metered prices."
       ], inlineLinks: [{ text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" }, { text: "taxi fares in Israel guide", to: "/travel-blog/taxi-fares-in-israel/" }], checklist: ["Order with Gett or use the airport kiosk, then follow the queue instructions.", "Confirm payment and the regulated meter.", "For Old City lodging, save the recommended drop-off point."] },
       { id: "private", name: "Private transfer arranged ahead", time: "45–60+ min", cost: "Written quote; published weekday starting rate on booking page", bestFor: "Family, groups and special pickup needs", doorToDoor: "To agreed vehicle-accessible point", availability: "By confirmation", comparison: { advantages: "Pre-arranged pickup and vehicle choice", drawbacks: "Book ahead; extras may apply" }, heading: "When is a pre-booked private pickup worthwhile?", paragraphs: [
-        ...commonTransfer, "It can be especially helpful when you are arriving with children, multiple suitcases or a late-night hotel check-in. Confirm an Old City meeting/drop-off point rather than assuming the vehicle can enter every historic lane. The separate private transfer to Jerusalem page covers the quoted vehicle, included service and booking request."
+        ...commonTransfer, "It can be especially helpful when you are arriving with children, multiple suitcases or a late-night hotel check-in. Arrange a road-accessible meeting or drop-off point near your Old City accommodation. The separate private transfer to Jerusalem page covers the quoted vehicle, included service and booking request."
       ], inlineLinks: [{ text: "private transfer to Jerusalem page", to: "/airport-transfers/jerusalem/" }], checklist: ["Request the vehicle size and child seats that you actually need.", "Share the hotel entrance and flight number.", "Check waiting time and flight-delay terms in writing."] },
       { id: "bus", name: "Bus 485 (very limited)", time: "55–60+ min", cost: "About ₪14.50 per adult (when operating)", bestFor: "Only if its timetable fits your flight", doorToDoor: "No", availability: "Sparse departures; confirm date and operator", comparison: { cost: "≈₪14.50", advantages: "Public-transport alternative", drawbacks: "Very limited departures" }, heading: "Is there a direct bus from the airport to Jerusalem?", paragraphs: [
         "The Israel Airports Authority still lists bus 485 to Jerusalem at Terminal 3, Level 2, Exit 21. Bus 485 runs infrequently, so check whether a departure suits your arrival time in the official national public-transport planner.",
@@ -129,7 +129,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "For accommodation outside central Jerusalem, check the complete journey from Yitzhak Navon station to your address."
     ],
     weekend: [
-      "Israel Railways and most regular buses normally stop during the main Shabbat period and many Jewish holidays. The exact last/first departure depends on the date, so check the journey planner rather than assuming Saturday night trains start at a fixed time.",
+      "Israel Railways and most regular buses normally stop during the main Shabbat period and many Jewish holidays. Check the journey planner for the last departure before Shabbat and the first Saturday-night service.",
       "For an arrival without a usable rail connection, compare the airport's authorized metered taxi with a confirmed private transfer. A rental car is another possibility only if collection is operating.",
       "The regular Nesher airport-to-Jerusalem shared-taxi route described in older guides no longer runs. Do not rely on old pickup details. My Sherut in Israel guide explains the distinction, and the airport Shabbat transport guide covers current weekend options.",
       "For holiday-related travel planning, see Israel\'s holiday and special dates guide."
@@ -182,7 +182,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     exampleJourney: {
       title: "Example: a hotel on the central beachfront",
       steps: [
-        { label: "Choose the rail service", detail: "From the Terminal 3 railway, compare the actual stops at HaHagana, HaShalom and Savidor Center rather than assuming the first Tel Aviv stop is best." },
+        { label: "Choose the rail service", detail: "From Terminal 3, choose the train stop at HaHagana, HaShalom or Savidor Center closest to your hotel." },
         { label: "Get from the station to the beach or hotel", detail: "Tel Aviv's railway stations are inland. Check how to reach your hotel by bus, taxi or on foot, especially if you're staying near the beach." },
         { label: "Recheck a Friday or Saturday arrival", detail: "Regular rail service stops for much of Shabbat. The limited weekend Line 711 runs via Terminal 1, with its own stops and timetable; it is not a direct replacement for the rail service." },
       ],

@@ -82,7 +82,7 @@ function UsefulJourneyLink({ label, href, context }: { label: string; href: stri
   return (
     <p data-testid="useful-journey-link" className="mt-4 text-sm leading-relaxed">
       <a href={href} className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80" {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{label}</a>
-      {context && <span className="text-muted-foreground"> — {context}</span>}
+      {context && <span className="text-muted-foreground"> - {context}</span>}
     </p>
   );
 }
@@ -207,7 +207,7 @@ function HaifaRailDetails({ guide }: { guide: AirportJourneyGuide }) {
         <img src={guide.photos.station.src} alt={guide.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
       <h4 className="mt-8 text-xl font-semibold">Which Haifa railway station should you use?</h4>
-      <p className="mt-3 leading-relaxed">Haifa's main railway stations serve very different neighborhoods. Check where your train actually stops, then compare the final bus, taxi or walk to your accommodation rather than choosing the first station with “Haifa” in its name.</p>
+      <p className="mt-3 leading-relaxed">Haifa's main railway stations serve very different neighborhoods. Choose the station with the easiest onward bus, taxi or walk to your accommodation.</p>
       <div role="region" aria-label="Haifa railway station comparison" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border">
         <table className="w-full min-w-[580px] text-left text-sm">
           <caption className="sr-only">Ben Gurion Airport to Haifa train stations and onward destinations</caption>

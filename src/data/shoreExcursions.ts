@@ -105,7 +105,7 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
   },
   "haifa-galilee": {
     photo: airportTransferPhotos["nazareth"]!,
-    description: "Combine Nazareth with selected Sea of Galilee sites. Share the religious or landscape stops you care about, rather than assuming every church and lakeside site fits one day.",
+    description: "Combine Nazareth with selected Sea of Galilee sites. Choose the churches and lakeside sites that matter most to you.",
     bestFor: "Christian heritage and Galilee landscapes",
     planningNote: "Agree the precise sites, opening hours, admissions and walking needs. Licensed guiding is not included in the car-and-driver starting rate.",
     highlights: ["Nazareth", "Sea of Galilee", "Selected heritage sites"],
@@ -124,8 +124,8 @@ const sharedFaqs = [
   { q: "Are the starting prices per person or per vehicle?", a: "My starting rates in ILS cover a full-day return car-and-driver service for up to four passengers on weekdays. External excursions are priced per person or per group, as indicated on each card. Confirm the total price for your date, group and chosen options before booking." },
   { q: "Is a licensed guide included?", a: "My car-and-driver starting rates cover private transportation and a driver, with licensed guiding, admission, meals and tips extra. Request a guide separately for interpretation or guided visits inside sites. External guided excursions have their own inclusions, shown on the booking page; confirm the guide, language and admission arrangements before booking." },
   { q: "Can the itinerary be customized?", a: "Yes, request different priorities, a slower pace or another destination. The operator must confirm that the route fits your hours ashore, site access and return buffer. Changes can alter the price." },
-  { q: "Can I request a van, child seats or an accessible vehicle?", a: "Include all passengers, children's ages, mobility needs and any equipment in the inquiry. Vans and minibuses are available by request, subject to confirmation. Do not assume a suitable vehicle or seat is reserved until the operator confirms it." },
-  { q: "Where will I meet the driver?", a: "Agree the precise meeting point for your ship, berth and port procedures in writing. Ask whether a terminal transfer or port shuttle is needed; do not assume every driver can wait beside the ship." },
+  { q: "Can I request a van, child seats or an accessible vehicle?", a: "Include all passengers, children's ages, mobility needs and any equipment in the inquiry. Vans and minibuses are available by request, subject to confirmation. Ask the operator to confirm the suitable vehicle or seat reservation." },
+  { q: "Where will I meet the driver?", a: "Agree the precise meeting point for your ship, berth and port procedures in writing. Ask whether you need a terminal transfer or port shuttle to reach the driver." },
   { q: "What happens if the ship is delayed or cancels the port call?", a: "Send any schedule change to the operator promptly. Ask for written confirmation of the cancellation cutoff, any deposit refund, missed-call policy and revised itinerary. Other operators have their own terms. No return-to-ship guarantee is made by this portal." },
   { q: "How do I request your car-and-driver day trip?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Press Send excursion request to email the details directly and wait for the on-page confirmation. The excursion is booked only after the operator confirms availability, price, payment and terms. External guided-tour cards open their booking page on GetYourGuide or Viator." },
 ];
@@ -183,14 +183,14 @@ const portDetails: Record<ShorePortId, PortDetails> = {
     portAccess: {
       heading: "Haifa Port: the pedestrian bridge and the driver meeting point",
       paragraphs: [
-        "Haifa Port's public passenger-terminal entrance connects to downtown by a pedestrian-only bridge near 65 HaAtsmaut Street, close to Haifa Center HaShmona railway station. Vehicles cannot enter the bridge; do not assume that a driver can meet you at the ship's gangway.",
+        "Haifa Port's public passenger-terminal entrance connects to downtown by a pedestrian-only bridge near 65 HaAtsmaut Street, close to Haifa Center HaShmona railway station. The bridge is pedestrian-only. Arrange your driver's meeting point outside the port.",
         "Your cruise company may specify a different disembarkation or tour-group meeting arrangement. Follow that instruction first, then agree with your driver exactly which side of the terminal access route to meet on and when to return.",
       ],
       source: { title: "Haifa Port — passenger terminal and downtown access", url: "https://www.haifaport.co.il/en/terminal/" },
     },
     routeFit: [
       { route: "Akko (Acre) and Haifa", goodFor: "More sightseeing time close to the northern port", constraint: "Akko's historic streets are walked on foot, and any Rosh Hanikra extension needs a separate operating-status check." },
-      { route: "Nazareth and Sea of Galilee", goodFor: "Christian heritage with selected northern landscape stops", constraint: "The sites are spread around the region; choose a few rather than assuming all churches and lake stops fit." },
+      { route: "Nazareth and Sea of Galilee", goodFor: "Christian heritage with selected northern landscape stops", constraint: "Choose a few churches and lakeside stops to allow time for travel between them." },
       { route: "Jerusalem or Tel Aviv–Jaffa", goodFor: "A specific must-see destination on a generously timed call", constraint: "The long southbound journey reduces time at the destination; agree a selective itinerary and return margin." },
     ],
   },

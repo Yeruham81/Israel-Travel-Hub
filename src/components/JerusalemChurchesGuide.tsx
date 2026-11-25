@@ -48,7 +48,7 @@ const tours = [
 ];
 const faqs = [
   {q:"Which churches are essential on a first visit to Jerusalem?",a:"For most first visits, I would prioritise the Church of the Holy Sepulchre and selected stops along the Via Dolorosa. Add Gethsemane on the Mount of Olives or Dormition Abbey on Mount Zion if your time and interests allow."},
-  {q:"Can I visit all the major churches in one day?",a:"Not comfortably. The sites lie in four distinct areas, and opening windows, religious services, queues and steep paths affect visits. Choose one or two nearby clusters rather than trying to see every church."},
+  {q:"Can I visit all the major churches in one day?",a:"Not comfortably. The sites lie in four distinct areas, and opening windows, religious services, queues and steep paths affect visits. Focus on one or two nearby clusters of churches."},
   {q:"Are Jerusalem churches free to enter?",a:"Many offer free general entry, but some compounds, archaeological areas and towers charge separately. St Anne, Pater Noster, the Chapel of the Ascension and the Redeemer tower have published admission charges."},
   {q:"Is the Garden Tomb the same place as the Church of the Holy Sepulchre?",a:"No. They are separate places. The Holy Sepulchre is the traditional site of the crucifixion and resurrection for numerous historic churches; the Garden Tomb is a different site popular with some Protestant visitors."},
   {q:"Is the Mount of Olives walk accessible to everyone?",a:"No. The slope is steep, paths can be uneven and some compounds have stairs. A drive to an upper viewpoint can avoid the uphill climb, but the descent may still be difficult. Confirm accessibility for specific sites."},
