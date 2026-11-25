@@ -64,8 +64,8 @@ describe("Israel tours for seniors: private transport guide",()=>{
   expect(component).not.toContain("How private day trips work");
   expect(component).not.toContain("Ask about my private driver service");
   expect(component).not.toContain("The private driver provides transportation and agreed stops");
-  expect(component).toContain('heading:"Send me your trip details"');
-  expect(component).toContain("Send me your dates, destinations and any walking or vehicle needs");
+  expect(component).toContain('heading:"Need a private driver for a comfortable day trip?"');
+  expect(component).toContain("I arrange comfortable private day trips with a driver in Israel");
   expect(component).toContain("A suggested, unhurried visit");
   expect(component).toContain("If you prefer a shorter day:");
   for(const trip of seniorDayTrips){
