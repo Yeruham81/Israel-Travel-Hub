@@ -25,7 +25,7 @@ import { Route as ChurchesRoute } from "@/routes/travel-blog.churches-in-jerusal
 import { Route as ShoppingRoute } from "@/routes/travel-blog.shopping-in-jerusalem";
 import { Route as TopTenRoute } from "@/routes/travel-blog.top-10-things-to-do-in-israel";
 import { filterGuides, guideDirectory, guideTopics, travelGuides } from "@/data/travelGuides";
-import { AIRALO_COMPATIBILITY_AFFILIATE_URL, AIRALO_MENA_AFFILIATE_URL, affiliateConfig, getSource, isPublisherUrl, linksForPage, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
+import { AIRALO_COMPATIBILITY_AFFILIATE_URL, AIRALO_MENA_AFFILIATE_URL, affiliateConfig, getSource, isPublisherUrl, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
 import { readOutboundClicks } from "@/lib/outbound";
 import { repeatedPhotos } from "@/lib/photo-uniqueness";
 

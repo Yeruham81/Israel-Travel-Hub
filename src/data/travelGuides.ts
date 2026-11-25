@@ -492,8 +492,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "setup",
         title: "How to install and activate your eSIM",
         paragraphs: [
-          "Buy and install your travel eSIM before flying, while you have reliable Wi-Fi. Installation and activation may occur at different times. Check the provider's activation rules to time your plan's validity for your trip.",
-          "When you arrive, select the travel eSIM as your phone's mobile-data line and enable data roaming on that line if the provider instructs you to. Disable data roaming on your home SIM and, where available, automatic mobile-data switching to avoid unexpected roaming charges. You can generally keep your home number active for calls and verification messages.",
+          "Install your eSIM over Wi-Fi before departure. Start the plan according to its activation rules, and keep your home number active if you need verification texts. Ordinary calls and texts on your home line can still incur roaming fees.",
         ],
         sourceIds: ["guide-esim-airalo", "guide-esim-saily"],
       },

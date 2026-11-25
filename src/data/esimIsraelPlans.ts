@@ -34,7 +34,10 @@ export const esimPlan = (provider: EsimProvider, gb: EsimPlan["gb"], days: numbe
   if (!result) throw new Error("Missing eSIM recommendation: "+provider+" "+gb+" "+days);
   return result;
 };
-export const esimPriceEvidence = (plan: EsimPlan) => plan.evidence === "comparison" ? "Price index · 21 Nov" : plan.evidence === "previous" ? "Previous price · 15 Nov" : "";
+export const esimPriceEvidence = (plan: EsimPlan) => {
+  const date = new Date(plan.checkedAt + "T12:00:00Z").toLocaleDateString("en-GB",{day:"numeric",month:"short",timeZone:"UTC"});
+  return plan.evidence === "comparison" ? "Price index · " + date : plan.evidence === "previous" ? "Previous price · " + date : "";
+};
 export const esimPicks = [
   {label:"Short trip",plan:esimPlan("Saily",3,30),reason:"Maps and messages for a week"},
   {label:"Regular holiday",plan:esimPlan("Saily",5,30),reason:"Navigation and everyday browsing"},

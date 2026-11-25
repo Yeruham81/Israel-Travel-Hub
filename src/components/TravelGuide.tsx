@@ -262,7 +262,7 @@ function EsimPickCards({ providers }: { providers: ReturnType<typeof linksForPag
 }
 function EsimComparisonTable({ caption, headers, rows }: {caption: string; headers: ReactNode[]; rows: ReactNode[][]}) {
   return <div role="region" aria-label={caption} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
-    <table className="w-full min-w-[640px] text-left text-sm">
+    <table className={"w-full text-left text-sm " + (headers.length > 2 ? "min-w-[640px]" : "min-w-[280px]")}>
       <caption className="sr-only">{caption}</caption>
       <thead className="bg-secondary"><tr>{headers.map((head,i)=><th key={i} scope="col" className={"p-3 font-semibold " + (i===0?"sticky left-0 z-10 bg-secondary":"")}>{head}</th>)}</tr></thead>
       <tbody className="divide-y">{rows.map((row,i)=><tr key={i} className="bg-card">{row.map((cell,j)=>j===0?<th scope="row" key={j} className="sticky left-0 z-10 bg-card p-3 font-medium">{cell}</th>:<td key={j} className="p-3 align-top">{cell}</td>)}</tr>)}</tbody>
@@ -343,7 +343,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{id === "esim" ? emphasizeEsimNames(guide.answer) : guide.answer}</p>
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
-      {id === "esim" && <><EsimPickCards providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Prices reviewed {new Date(ESIM_UPDATED + "T12:00:00Z").toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric",timeZone:"UTC"})} (USD except where marked). Dated reference prices are labelled. Providers may display prices in your local currency.</p></>}
+      {id === "esim" && <><EsimPickCards providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Prices reviewed {new Date(ESIM_UPDATED + "T12:00:00Z").toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric",timeZone:"UTC"})} (USD except where marked). Dated reference prices are labelled; promotions and checkout totals may vary. Providers may display prices in your local currency.</p></>}
       {isTransportOverview && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-3">
         {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p>
