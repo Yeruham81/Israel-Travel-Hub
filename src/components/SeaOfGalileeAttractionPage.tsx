@@ -113,7 +113,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
   itineraryTitle: "Plan a day at the Sea of Galilee",
   historyTitle: "Why the Sea of Galilee matters",
   relatedTitle: "Explore the Sea of Galilee and Jordan",
-  contactIntroduction: "Planning a private day trip around the Sea of Galilee, Tiberias or Nazareth? Tell me your starting point, travel date and the places you'd like to visit. I'll reply personally about private transport and a route that fits your day.",
+  contactIntroduction: "Tell me your date, pickup point, group size and the places you want to visit around the Sea of Galilee, Tiberias or Nazareth. I can arrange a private transfer or day trip with a driver.",
   facts: [
     { icon: "location", label: "Region", value: "Northern Israel", note: "The lake lies below sea level in the Jordan Rift Valley" },
     { icon: "duration", label: "Time needed", value: "1–2 days", note: "Half a day for a beach; longer to explore the lake" },
