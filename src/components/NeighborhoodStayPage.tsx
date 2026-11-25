@@ -83,7 +83,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
     "telaviv-jaffa": "Selected hotels in Jaffa",
     "telaviv-florentin": "Selected hotels in Florentin",
     "telaviv-kerem": "Selected hotels near Kerem HaTeimanim & Carmel Market",
-    "telaviv-rothschild": "Popular hotels along Rothschild Boulevard",
+    "telaviv-rothschild": "Selected hotels along Rothschild Boulevard",
   };
   const arrivalIntroductions: Record<string, string> = {
     downtown: "A central address is convenient, but your hotel entrance, room location and arrival time can make a real difference.",
