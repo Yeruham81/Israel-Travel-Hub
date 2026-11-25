@@ -485,7 +485,7 @@ describe("migrated practical guides", () => {
     expect(jumpItems.every((item) => !item.classList.contains("hidden"))).toBe(true);
     expect(nav.querySelector("details")).toBeNull();
     expect(container.querySelector("#booking > div")).toHaveClass("text-foreground");
-    expect(within(container).getByRole("heading", { name: "Questions about using taxis in Israel?" })).toBeInTheDocument();
+    expect(within(container).getByRole("heading", { name: "Need a private transfer or driver in Israel?" })).toBeInTheDocument();
     expect(within(container).getByRole("form", { name: "Taxi guide contact message" })).toBeInTheDocument();
     expect(within(container).getByRole("textbox", { name: /Subject/ })).toHaveValue("");
     expect(within(container).queryByText("Explore more Israel travel guides")).not.toBeInTheDocument();
