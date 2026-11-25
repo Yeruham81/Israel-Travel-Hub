@@ -262,17 +262,17 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     <a href="https://commons.wikimedia.org/wiki/File:Chamber_of_the_Holocaust_-_Outside_King_David%27s_Tomb_-_Jerusalem_-_Israel_-_02_(5676110809).jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Chamber of the Holocaust</a> — Adam Jones, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 2.0</a>. Source: Wikimedia Commons.
   </p>,
   sources: [
-    { label: "Christian Information Center — holy site visiting hours", url: official.cicHours },
-    { label: "Dormition Abbey — official opening hours", url: official.dormition },
-    { label: "St Peter in Gallicantu — visiting hours and accessibility", url: official.gallicantu },
-    { label: "Window to Mount Zion — local heritage and walking context", url: official.mountZionHeritage },
-    { label: "Window to Mount Zion — detailed site map (PDF)", url: official.mountZionMap },
-    { label: "Mount Zion Catholic Cemetery — Oskar Schindler's grave", url: official.catholicCemetery },
-    { label: "Chamber of the Holocaust — hours and group visits", url: official.holocaustChamber },
+    { label: "Christian Information Center - holy site visiting hours", url: official.cicHours },
+    { label: "Dormition Abbey - official opening hours", url: official.dormition },
+    { label: "St Peter in Gallicantu - visiting hours and accessibility", url: official.gallicantu },
+    { label: "Window to Mount Zion - local heritage and walking context", url: official.mountZionHeritage },
+    { label: "Window to Mount Zion - detailed site map (PDF)", url: official.mountZionMap },
+    { label: "Mount Zion Catholic Cemetery - Oskar Schindler's grave", url: official.catholicCemetery },
+    { label: "Chamber of the Holocaust - hours and group visits", url: official.holocaustChamber },
     { label: "Israel public transport planner", url: official.busPlanner },
-    { label: "Viator — Jerusalem Old City Day Tour", url: mountZionTours[0].sourceUrl },
-    { label: "Viator — Jerusalem Highlights from Tel Aviv", url: mountZionTours[1].sourceUrl },
-    { label: "Viator — Jerusalem Classic Tour", url: mountZionTours[2].sourceUrl },
+    { label: "Viator - Jerusalem Old City Day Tour", url: mountZionTours[0].sourceUrl },
+    { label: "Viator - Jerusalem Highlights from Tel Aviv", url: mountZionTours[1].sourceUrl },
+    { label: "Viator - Jerusalem Classic Tour", url: mountZionTours[2].sourceUrl },
   ],
 };
 

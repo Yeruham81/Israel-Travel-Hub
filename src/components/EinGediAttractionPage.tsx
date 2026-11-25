@@ -255,11 +255,11 @@ export const einGediDestinationContent: AttractionDestinationContent = {
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Weather and seasons for desert travel.", icon: "seasons" },
   ],
   sources: [
-    { label: "Nature and Parks Authority — En Gedi Nature Reserve", url: official.english },
-    { label: "Nature and Parks Authority — current visitor areas", url: official.overview },
-    { label: "Nature and Parks Authority — Nahal David", url: official.david },
-    { label: "Nature and Parks Authority — Nahal Arugot", url: official.arugot },
-    { label: "Nature and Parks Authority — Ein Gedi Antiquities", url: official.antiquities },
+    { label: "Nature and Parks Authority - En Gedi Nature Reserve", url: official.english },
+    { label: "Nature and Parks Authority - current visitor areas", url: official.overview },
+    { label: "Nature and Parks Authority - Nahal David", url: official.david },
+    { label: "Nature and Parks Authority - Nahal Arugot", url: official.arugot },
+    { label: "Nature and Parks Authority - Ein Gedi Antiquities", url: official.antiquities },
   ],
 };
 

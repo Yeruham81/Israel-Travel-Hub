@@ -279,14 +279,14 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     { label: "Private driver in Israel", to: "/private-driver-in-israel/", icon: "itinerary", description: "Arrange flexible road transport" },
   ],
   sources: [
-    { label: "Kinneret Cities Association — official beach directory", url: sources.beaches },
-    { label: "Kinneret Cities Association — Tzemach Beach", url: sources.tzemach },
-    { label: "Kinneret Cities Association — Hukok North Beach", url: sources.hukok },
-    { label: "Kinneret Cities Association — Kursi Beach", url: sources.kursi },
-    { label: "Kinneret Cities Association — Nahal Amud estuary (bathing prohibited)", url: sources.unsafeShore },
-    { label: "Kinneret Cities Association — visitor notices", url: sources.lakeAuthority },
-    { label: "Israel Nature and Parks Authority — Arbel National Park", url: sources.arbel },
-    { label: "Egged — official bus and route planning", url: sources.egged },
+    { label: "Kinneret Cities Association - official beach directory", url: sources.beaches },
+    { label: "Kinneret Cities Association - Tzemach Beach", url: sources.tzemach },
+    { label: "Kinneret Cities Association - Hukok North Beach", url: sources.hukok },
+    { label: "Kinneret Cities Association - Kursi Beach", url: sources.kursi },
+    { label: "Kinneret Cities Association - Nahal Amud estuary (bathing prohibited)", url: sources.unsafeShore },
+    { label: "Kinneret Cities Association - visitor notices", url: sources.lakeAuthority },
+    { label: "Israel Nature and Parks Authority - Arbel National Park", url: sources.arbel },
+    { label: "Egged - official bus and route planning", url: sources.egged },
   ],
 };
 

@@ -326,14 +326,14 @@ export function JerusalemShoppingGuide() {
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use destination and venue information for the markets, shopping venues and tax guidance. Check current event dates and individual shop opening times before visiting.</p>
         <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
-          <li><OfficialLink href="https://en.machne.co.il/">Mahane Yehuda — independent market visitor guide</OfficialLink></li>
-          <li><OfficialLink href="https://edisonhafakot.co.il/he/fairline/3">Bezalel Arts Fair — organiser and Friday schedule (Hebrew)</OfficialLink></li>
-          <li><OfficialLink href="https://alrovmamilla.com/en/">Alrov Mamilla Avenue — official shops and hours</OfficialLink></li>
-          <li><OfficialLink href="https://azrieligroup.com/properties/azrieli-mall-jerusalem/">Azrieli Jerusalem Mall — official mall information</OfficialLink></li>
-          <li><OfficialLink href="https://artistscolony.co.il/">Hutzot Hayotzer — artists' colony website</OfficialLink></li>
-          <li><OfficialLink href="https://www.firststation.co.il/en/shopping-at-the-first-station/">The First Station — shopping hours</OfficialLink></li>
-          <li><OfficialLink href="https://www.firststation.co.il/en/saturdays-at-the-first-station/">The First Station — Saturday dining and activities</OfficialLink></li>
-          <li><OfficialLink href="https://www.gov.il/en/pages/vat-refund-guide-for-tourists?chapterIndex=1">Israel Tax Authority — tourist VAT refund rules</OfficialLink></li>
+          <li><OfficialLink href="https://en.machne.co.il/">Mahane Yehuda - independent market visitor guide</OfficialLink></li>
+          <li><OfficialLink href="https://edisonhafakot.co.il/he/fairline/3">Bezalel Arts Fair - organiser and Friday schedule (Hebrew)</OfficialLink></li>
+          <li><OfficialLink href="https://alrovmamilla.com/en/">Alrov Mamilla Avenue - official shops and hours</OfficialLink></li>
+          <li><OfficialLink href="https://azrieligroup.com/properties/azrieli-mall-jerusalem/">Azrieli Jerusalem Mall - official mall information</OfficialLink></li>
+          <li><OfficialLink href="https://artistscolony.co.il/">Hutzot Hayotzer - artists' colony website</OfficialLink></li>
+          <li><OfficialLink href="https://www.firststation.co.il/en/shopping-at-the-first-station/">The First Station - shopping hours</OfficialLink></li>
+          <li><OfficialLink href="https://www.firststation.co.il/en/saturdays-at-the-first-station/">The First Station - Saturday dining and activities</OfficialLink></li>
+          <li><OfficialLink href="https://www.gov.il/en/pages/vat-refund-guide-for-tourists?chapterIndex=1">Israel Tax Authority - tourist VAT refund rules</OfficialLink></li>
         </ul>
       </SourcesDisclosure>
     </article>
