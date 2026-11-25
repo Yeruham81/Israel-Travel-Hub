@@ -7,9 +7,16 @@ The new page is the individual lake visitor attraction, using the same shared
 destination layout as the Dead Sea page. Capernaum, Tabgha, Magdala, Yardenit
 and other heritage sites retain their own dedicated pages.
 
-The old path stays as a noindex client navigation alias on the Hostinger trial
-site. No HTTP 301 has been enabled. A server-side 301 should be considered
-only at the main-domain launch and must be checked separately.
+The old `/travel-blog/sea-of-galilee/` route and its noindex client alias have been removed from the new site. The Hostinger publishing workflow retires its obsolete HTML file after confirming the canonical attraction page is present, with a private backup outside `public_html`.
+
+On the **old site's** Apache server, keep an HTTP 301 above any WordPress or catch-all rewrite rules:
+
+```apache
+RewriteEngine On
+RewriteRule ^travel-blog/sea-of-galilee/?$ /attractions/sea-of-galilee/ [R=301,L,NC]
+```
+
+The new site's GitHub deployment does **not** write `.htaccess`. Install and verify the rule separately on the actual old-domain server. Confirm both slash variations return HTTP 301, the `Location` is correct, and the destination returns HTTP 200. Do not describe this redirect as live until verified.
 
 Beach policies are researched from the Kinneret Cities Association. A free
 pedestrian entrance does not imply free vehicle parking or supervised bathing
