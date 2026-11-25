@@ -338,7 +338,7 @@ export function TelAvivBeachesGuide() {
           </Link>)}
         </div>
       </section>
-      <HomeContactForm guide={neighborhoodTripContactCopy("Tel Aviv")} />
+      <HomeContactForm showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy("Tel Aviv")} />
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use the city's official beach descriptions for the municipal beach list, safety, accessibility and separate-bathing rules, and the Israel Nature and Parks Authority for Palmahim. Lifeguard operation, flags, sea conditions, facilities and park fees can change; confirm the details for your visit.</p>
         <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
