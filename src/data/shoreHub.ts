@@ -68,7 +68,7 @@ export const shoreTourFormats = [
 ];
 
 export const shorePlanningSteps = [
-  { title: "Start with the real hours ashore", description: "Use the expected disembarkation time and all-aboard deadline, not only your docking and sailing times." },
+  { title: "Start with the real hours ashore", description: "Plan around your expected disembarkation time and all-aboard deadline as well as docking and sailing times." },
   { title: "Choose one main experience", description: "Allow time for driving, walking and queues; keep your route manageable." },
   { title: "Agree pickup and the return plan", description: "Confirm the port meeting point, any shuttle, the return buffer and your operator's contact details." },
   { title: "Match the day to your party", description: "Share your group size and accessibility needs; check vehicle capacity and cancellation terms." },

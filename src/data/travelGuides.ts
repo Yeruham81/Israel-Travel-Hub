@@ -441,7 +441,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "long-trip",
         title: "Best eSIM for a longer trip",
         paragraphs: [
-          "For one to three weeks of navigation, messaging and browsing, 5GB should suit many visitors. Saily costs $7.99 for 30 days, compared with $8 for the same period from Airalo. Both are good-value options; compare network coverage, app features and installation instructions rather than deciding by price alone. Yesim costs $9.90 and GigSky $18.89. My choice: Saily.",
+          "For one to three weeks of navigation, messaging and browsing, 5GB should suit many visitors. Saily costs $7.99 for 30 days, compared with $8 for the same period from Airalo. Both offer good value. Compare prices, network coverage, app features and installation instructions. Yesim costs $9.90 and GigSky $18.89. My choice: Saily.",
           "For frequent photo uploads, social media and video calls, consider 10GB instead. Airalo costs $11.50 for 30 days, just below Saily at $11.99; Yesim costs $16.50. My choice: Airalo.",
         ],
         sourceIds: ["guide-esim-saily", "guide-esim-saily-usd-price-nov26", "guide-esim-airalo", "guide-esim-yesim", "guide-esim-gigsky"],
@@ -484,7 +484,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Do you need calls, SMS or an Israeli number?",
         paragraphs: [
           "A data-only eSIM lets you browse, navigate and use WhatsApp or FaceTime calls. It does not automatically include ordinary phone calls, SMS or an Israeli mobile number.",
-          "Airalo also offers some Israel plans with data, call minutes and SMS. Saily sells optional calls and texts with a US number, not an Israeli number. If you need standard mobile calls, compare the actual minutes and number included rather than choosing a data-only plan.",
+          "Airalo also offers some Israel plans with data, call minutes and SMS. Saily sells optional calls and texts with a US number, not an Israeli number. If you need standard mobile calls, choose a plan that includes them and compare the included minutes and phone number.",
           "You can usually keep your home SIM active for WhatsApp and verification messages while using the travel eSIM for data. For a local Israeli number, look for a plan that specifically provides one or consider a local operator.",
         ],
         sourceIds: ["guide-esim-airalo", "guide-esim-saily"],
@@ -762,7 +762,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { q: "What is the blue entry card and should I keep it?", a: "A blue entry card is normally issued to arriving foreign visitors at passport control. Keep it with your passport; it documents your entry and may be needed for a tourist VAT-refund request on departure." },
       { q: "What if my checked luggage does not arrive?", a: "Go to your airline's baggage or ground-handling desk before leaving baggage reclaim. Report the missing bag, keep the claim tags and obtain a reference number for follow-up or delivery." },
       { q: "Which terminal will my flight arrive at?", a: "International flights currently arrive at Terminal 3. Domestic flights from Ramon use Terminal 1. Verify your flight and terminal before travel, especially for an onward pickup." },
-      { q: "How early should I arrange a driver after landing?", a: "Share your flight number and agree the pickup meeting procedure rather than relying only on scheduled landing time. Passport control and baggage collection may add considerable time; check the arrival-time planning table above." },
+      { q: "How early should I arrange a driver after landing?", a: "Share your flight number and agree on the pickup meeting procedure in advance. Passport control and baggage collection may add considerable time; check the arrival-time planning table above." },
       { q: "What if I have goods to declare at customs?", a: "Follow the red customs channel and keep receipts or supporting documents ready. Israel's Tax Authority recommends using the red channel if you are uncertain whether an item needs declaration." },
       { q: "Can I arrange wheelchair or other arrival assistance?", a: "Request help from your airline before departure. Its ground-handling provider supports arriving passengers, and you should arrange any wheelchair-accessible taxi or private vehicle separately for the onward journey." },
       { q: "How can I leave the airport on Shabbat?", a: "Authorized taxis and confirmed private transfers can operate during Shabbat. Free weekend Line 711 runs to parts of Tel Aviv from Terminal 1 on a limited timetable; the airport Shabbat guide covers the journey and terminal shuttle." },

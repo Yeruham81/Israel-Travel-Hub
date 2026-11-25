@@ -139,7 +139,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     </AttractionHighlight>
     <AttractionHighlight title="Boat trips and lake views" image={{ src: sunrise, alt: "Sunlight reflecting across Lake Kinneret at Tiberias" }}>
       <p>Boat excursions can offer a different perspective on the surrounding hills and villages. Cruises depart from designated jetties, including in the Tiberias area, but routes and departure schedules depend on operators and season.</p>
-      <p>If your preference is a lookout rather than a cruise, <External href={sources.arbel}>Arbel National Park</External> overlooks the lake from the west. Cliff-edge routes can be steep and may close in unsuitable weather; a short viewpoint visit is different from the full hike.</p>
+      <p>For a panoramic viewpoint, <External href={sources.arbel}>Arbel National Park</External> overlooks the lake from the west. Cliff-edge routes can be steep and may close in unsuitable weather; a short viewpoint visit is different from the full hike.</p>
     </AttractionHighlight>
     <AttractionHighlight title="The Jordan River and Yardenit" image={{ src: lakeView, alt: "Green hills and lake scenery of the Galilee region" }}>
       <p>The Jordan River flows out of the southern end of the Sea of Galilee. <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> is a managed baptismal visitor site south of the lake, while <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link> on the western shore combines archaeology with a modern pilgrimage centre.</p>
@@ -258,7 +258,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     { q: "Can I visit Capernaum and Tabgha in one day?", a: "Yes. Capernaum, Tabgha and the Mount of Beatitudes form a practical cluster on the northwestern shore when their opening hours allow." },
     { q: "Can I reach the Sea of Galilee without a car?", a: "Tiberias has intercity bus services, but many lakeside sights need further transport. Check routes and the last return bus before committing to a multi-stop day." },
     { q: "Do the boat cruises operate every day?", a: "Not necessarily. Operators set their own schedules and departure points, so confirm current availability directly before arranging the rest of your itinerary." },
-    { q: "Can I see Nazareth and the Sea of Galilee in a day?", a: "Yes, but a guided excursion or private driver can help because the sites are spread out. Choose the highlights most important to you rather than every possible stop." },
+    { q: "Can I see Nazareth and the Sea of Galilee in a day?", a: "Yes, but a guided excursion or private driver can help because the sites are spread out. Choose a few highlights that interest you most." },
     { q: "Is Yardenit beside the Sea of Galilee?", a: "Yardenit is at the southern end of the area, on the Jordan River downstream from the lake. A baptismal ceremony is separate from simply visiting the site." },
     { q: "Which beach is best for families?", a: "Choose a declared beach with staffed lifeguards, shade, toilets and accessible facilities for your group. Tzemach, Hukok North and Kursi are three options to compare using the authority's beach guide." },
   ],

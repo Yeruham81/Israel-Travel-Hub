@@ -165,11 +165,11 @@ const portDetails: Record<ShorePortId, PortDetails> = {
   haifa: {
     title: "Haifa shore excursions: tours & private day trips",
     description: "Compare Haifa Port shore excursions to Akko, Nazareth, Galilee, Tel Aviv and Jerusalem, with guided tours or a private driver and confirmed return.",
-    intro: "Haifa Port is a practical starting point for Akko or selected sites in Nazareth and the Galilee. Jerusalem and Tel Aviv require a longer southbound journey, reducing time at the destination. Compare each route against your actual hours ashore and the return deadline, not just the advertised sightseeing stops.",
+    intro: "Haifa Port is a practical starting point for Akko or selected sites in Nazareth and the Galilee. Jerusalem and Tel Aviv require a longer southbound journey, reducing time at the destination. Compare each route's sightseeing stops with your actual hours ashore and return deadline.",
     answer: "Akko generally allows more time near Haifa than a long-distance Jerusalem day. Choose a private driver for an agreed route and pace, or a guided tour when site interpretation is central to your visit. Confirm guiding, admission, the port meeting point and the return policy in the specific offer.",
     photo: { src: haifa, alt: "Haifa Port and Mediterranean waterfront from an elevated viewpoint", sourceUrl: "" },
     overview: [
-      "Choose the north if you want more of the day around Akko, the Galilee or the Carmel rather than on the road to Jerusalem. Akko's old harbour suits a coastal day; Nazareth and selected lakeside sites offer a different route for Christian heritage and Galilee scenery.",
+      "Choose a northern route to spend more of your day exploring Akko, the Galilee or the Carmel. Akko's old harbour suits a coastal day; Nazareth and selected lakeside sites offer a different route for Christian heritage and Galilee scenery.",
       "If adding Rosh Hanikra, verify current site access before including it in the itinerary. For Jerusalem or Tel Aviv, account for the long return drive before deciding how many stops fit.",
     ],
     faqs: [

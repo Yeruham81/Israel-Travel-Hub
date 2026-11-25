@@ -14,7 +14,7 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
     heading: "Jaffa Road convenience or a quieter base?",
     choose: "A room near Zion Square suits visitors who want cafés, the light rail and central walking routes without hiring a car every day.",
     compare: "Mamilla is a stronger comparison when Jaffa Gate is your main destination; the German Colony is worth considering when a residential evening matters more than the central shopping streets.",
-    arrival: "Jaffa Road has pedestrian stretches. When arriving with bags, use the hotel's advised vehicle-accessible street, not simply a map pin in the pedestrian mall.",
+    arrival: "Jaffa Road has pedestrian stretches. When arriving with bags, ask the hotel which vehicle-accessible street to use.",
   },
   mamilla: {
     heading: "Beside Mamilla Avenue or farther down King David Street?",
@@ -129,7 +129,7 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   "tiberias:family": {
     heading: "Example: a family dividing time between the hotel and Galilee trips",
     situation: "A water-park stay and a central promenade stay are very different when mornings are spent visiting sites around the lake.",
-    decision: "Decide how many full days will be spent at the hotel's own facilities before paying for an activity-heavy format. At Leonardo Club, check the current written meal plan rather than relying solely on the all-inclusive name.",
+    decision: "Decide how many full days will be spent at the hotel's own facilities before paying for an activity-heavy format. At Leonardo Club, check the meals and drinks listed in the current written package.",
   },
   "tiberias:luxury": {
     heading: "Example: a multigenerational celebration",
@@ -139,7 +139,7 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   "haifa:boutique": {
     heading: "Example: a couple choosing between two heritage stays",
     situation: "A preserved facade can hide different room layouts and access arrangements between older and newer wings.",
-    decision: "Compare the exact room within the building and available lift access, not only the hotel's style. Adults-only or minimum-age policies should be checked before a family reservation.",
+    decision: "Compare the room location, hotel style and available lift access. Adults-only or minimum-age policies should be checked before a family reservation.",
   },
   "haifa:family": {
     heading: "Example: a family spending half the trip at the beach",

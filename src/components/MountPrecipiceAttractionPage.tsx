@@ -66,7 +66,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Mount Precipice is an open-air viewpoint rather than a church or ticketed archaeological park. The short walk from the parking area is suitable for a scenic stop during a Nazareth visit.</p>
+      <p>Mount Precipice is an open-air viewpoint. The short walk from the parking area is suitable for a scenic stop during a Nazareth visit.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="mount-precipice-visitor-cards">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Entry, parking and a short visit</h3>
@@ -102,7 +102,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Approach Nazareth via Route 60 and Route 75, then follow the brown signs marked Mount Precipice to the parking area near the summit. Set your navigation for the <strong>Mount Precipice lookout</strong>, rather than central Nazareth. The paved walk begins near the car park.</p>
+            <p className="mt-2 text-sm leading-relaxed">Approach Nazareth via Route 60 and Route 75, then follow the brown signs marked Mount Precipice to the parking area near the summit. Set your navigation to the <strong>Mount Precipice lookout</strong>. The paved walk begins near the car park.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Driving directions to the lookout <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -134,7 +134,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Combine Mount Precipice with Nazareth or Lower Galilee</h3>
-        <p className="mt-3 text-sm leading-relaxed sm:text-base">For a full day, I suggest choosing three to five stops that suit your interests and starting point. A good Nazareth visit leaves enough time for the city itself, rather than rushing between viewpoints.</p>
+        <p className="mt-3 text-sm leading-relaxed sm:text-base">For a full day, I suggest choosing three to five stops that suit your interests and starting point. Allow plenty of time to explore Nazareth itself as well as its viewpoints.</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Nazareth:</strong> Visit the <Link to="/attractions/basilica-of-the-annunciation/" className={inlineLink}>Basilica of the Annunciation</Link>, then explore the old city at your own pace.</li>
           <li><strong>Lower Galilee:</strong> Add <Link to="/attractions/mount-tabor/" className={inlineLink}>Mount Tabor</Link> for its Church of the Transfiguration or <Link to="/attractions/tel-megiddo/" className={inlineLink}>Tel Megiddo</Link> for archaeology.</li>

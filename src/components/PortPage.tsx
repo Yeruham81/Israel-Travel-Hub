@@ -67,7 +67,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
         <p>{port.answer}</p>
         <p>{port.overview[0]}</p>
         <p><strong className="text-foreground">Port pickup:</strong> {port.portAccess.paragraphs[0]} <a href={port.portAccess.source.url} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-2">Official {port.name} Port information</a>.</p>
-        <p><strong className="text-foreground">Returning to the ship:</strong> Plan from the time you can actually disembark, not just the scheduled arrival. Confirm the pickup point, any shuttle, road-traffic allowance and return buffer before the all-aboard deadline. Ask what happens if your port call changes.</p>
+        <p><strong className="text-foreground">Returning to the ship:</strong> Plan from the time you can actually disembark. Confirm the pickup point, any shuttle, road-traffic allowance and return buffer before the all-aboard deadline. Ask what happens if your port call changes.</p>
         {id === "ashdod" && <p>For Masada, check <a href="https://en.parks.org.il/reserve-park/masada-national-park" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-2">official park and cable-car information</a> before planning your beach stop and return journey.</p>}
       </div>
     </section>

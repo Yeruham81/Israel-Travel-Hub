@@ -111,7 +111,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The old-city streets can be narrow and busy. If travelling with a driver, use <strong>Casa Nova Street</strong> as a landmark and agree on a suitable nearby drop-off, rather than expecting to park at the church gate. Drivers should use an authorised stopping place. Allow time for the final walk to the entrance.</p>
+            <p className="mt-2 text-sm leading-relaxed">The old-city streets can be narrow and busy. If travelling with a driver, use <strong>Casa Nova Street</strong> as a landmark and arrange a suitable nearby drop-off. Drivers should use an authorised stopping place. Allow time for the final walk to the entrance.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Driving directions to the basilica <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
           </article>
           <article className="rounded-xl border bg-card p-4">

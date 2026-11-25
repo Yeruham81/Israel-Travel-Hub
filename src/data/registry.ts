@@ -1724,7 +1724,7 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
   },
   {
     id: "ds-noga", cityId: "deadsea", areaId: "deadsea", name: "Noga by Isrotel Collection", style: "Ein Bokek hotel with mineral-water pools",
-    summary: "An Ein Bokek hotel near the beach, combining the Esprit Spa with a more straightforward resort format. Consider it when comparing the facilities you will use rather than paying primarily for a luxury room or a direct beachfront address.",
+    summary: "An Ein Bokek hotel near the beach, combining the Esprit Spa with a more straightforward resort format. Consider it if the facilities you plan to use matter more to you than a luxury room or a beachfront location.",
     bestFor: "Couples and families comparing wellness facilities with the total cost of a stay.",
     watch: "The spa is for guests aged 16+, and treatments cost extra. Confirm the beach walk, children's facilities and room occupancy for your dates.", sourceId: "hotel-ds-noga-official",
     resortFacts: { location: "Ein Bokek", beach: "Short walk to the beach", spa: "Two Dead Sea pools; treatments charged separately", agePolicy: "Spa entry 16+; the hotel itself accepts families", children: "Children's activities; verify seasonal programming", meals: "Check your chosen room offer and meal plan" },
@@ -1738,7 +1738,7 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
   },
   {
     id: "ds-ein-gedi", cityId: "deadsea", areaId: "deadsea", name: "Ein Gedi Hotel", style: "Inland nature stay with Synergy Spa",
-    summary: "A hotel in the Ein Gedi kibbutz setting, with gardens and the Synergy Spa. It is an alternative for travelers who want a nature-focused stay rather than the Ein Bokek beachfront resort district.",
+    summary: "A hotel in the Ein Gedi kibbutz setting, with gardens and the Synergy Spa. It is an alternative to Ein Bokek for travelers seeking a nature-focused stay.",
     bestFor: "Visitors prioritizing gardens, the Ein Gedi area and an inland spa retreat.",
     watch: "Do not assume a room overlooking the Dead Sea includes nearby sea bathing. Plan a separate journey to an operating beach and check nature-reserve access for your dates.", sourceId: "hotel-ds-ein-gedi-official",
     resortFacts: { location: "Ein Gedi, north of the main hotel district", beach: "Separate journey to an operating beach", spa: "Synergy Spa with a Dead Sea water pool", agePolicy: "Confirm age rules for the hotel and spa separately", children: "Check room layout and the facilities your family needs", meals: "Check the offer and outside dining options" },

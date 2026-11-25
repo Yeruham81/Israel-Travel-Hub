@@ -58,7 +58,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
         image={{ src: ruinsPhoto, alt: "Excavated stone rooms, walls and archaeological remains on the Masada plateau" }}
       >
         <p>Walk among the stone storerooms, residential structures and the synagogue associated with the Jewish rebel occupation. Together they reveal how a remote hilltop fortress supported a large population during the Roman siege.</p>
-        <p>I recommend taking a little time with the archaeological signs rather than rushing only between the famous viewpoints.</p>
+        <p>I recommend allowing time to read the archaeological signs and enjoy the famous viewpoints.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Roman siege camps and ramp">
         <p>From the western side and several viewpoints, you can still make out the Roman siege ramp and the outlines of military camps in the desert below. They help explain the engineering effort behind Rome's assault on the fortress.</p>

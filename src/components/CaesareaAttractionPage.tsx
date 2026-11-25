@@ -52,7 +52,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="The hippodrome and promontory palace">
         <p>The long arena beside the sea hosted horse and chariot races in Roman times. Nearby, the remains of the promontory palace stretch out towards the waves, showing how closely royal life and the coastline were linked.</p>
-        <p>Allow time to walk the sea-facing route between these remains rather than viewing everything from the entrance.</p>
+        <p>Allow time to walk the sea-facing route between these remains.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The ancient harbor and Crusader walls"
@@ -115,7 +115,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
         </article>
       </div>
       <AttractionPracticalTip>
-        <strong>Plan the hours for the park, not just the harbor.</strong> The harbor area remains lively after the archaeological park closes, but that does not extend the last entry time for the paid ruins. The visitors' center normally opens at 08:30 and stops entry 30 minutes before its published closing time. <a href={sources.harborHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>See harbor and visitor-center hours</a>.
+        <strong>Allow time for the entire archaeological park, including the harbor.</strong> The harbor area remains lively after the archaeological park closes, but that does not extend the last entry time for the paid ruins. The visitors' center normally opens at 08:30 and stops entry 30 minutes before its published closing time. <a href={sources.harborHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>See harbor and visitor-center hours</a>.
       </AttractionPracticalTip>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="caesarea-visitor-essentials">
         <h3 className="font-serif text-xl font-semibold">Useful things to know before visiting</h3>

@@ -200,7 +200,7 @@ export function JerusalemChurchesGuide(){
         />)}
       </div>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Check current prices, availability, recent reviews, meeting points and inclusions with the booking provider before paying. The Bethlehem option is a separate excursion outside Jerusalem.</p>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">For more guided options, browse my <Link to="/tours/jerusalem/" className="font-semibold text-primary underline">Jerusalem tours</Link>. My <Link to="/private-driver-in-israel/" className="font-semibold text-primary underline">private driver service</Link> is transport, not automatically a licensed guiding service.</p>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">For more guided options, browse my <Link to="/tours/jerusalem/" className="font-semibold text-primary underline">Jerusalem tours</Link>. My <Link to="/private-driver-in-israel/" className="font-semibold text-primary underline">private driver service</Link> covers transportation between churches and other sites. Licensed guiding should be arranged separately.</p>
     </section>
     <FaqList faqs={faqs}/>
     <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">

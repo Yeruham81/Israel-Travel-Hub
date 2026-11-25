@@ -166,7 +166,7 @@ export function JerusalemCityHubPage(){
     </section>
 
     <section id="getting-around" aria-labelledby="getting-around-h" className="mt-12 scroll-mt-24">
-      <Heading id="getting-around" title="Getting to and around Jerusalem" intro="Plan the entire journey to your actual hotel or attraction, not just the train station or a point labelled “Jerusalem”."/>
+      <Heading id="getting-around" title="Getting to and around Jerusalem" intro="Plan your door-to-door journey to the hotel or attraction you intend to visit."/>
       <p className="max-w-4xl leading-relaxed">The fast intercity train reaches <strong>Jerusalem–Yitzhak Navon</strong>, beside the central bus station. From there, continue to the Old City or your hotel by light rail, bus, taxi or on foot. Most of the Old City's historic lanes are pedestrian routes; a driver can help between road-accessible stops but cannot drive through the quarters. Check <Link to="/travel-blog/calendar-of-events/" className={linkClass}>Jewish holidays and special dates</Link> before relying on a regular weekday timetable.</p>
       <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">For current rail changes and service notices, consult <a className={linkClass} href="https://rail.co.il/?lan=en&page=updates" target="_blank" rel="noopener noreferrer">Israel Railways</a>. For official visitor information about Jerusalem, check the <a className={linkClass} href="https://www.gov.il/en/government-service-branches/jerusalem-tourism-office" target="_blank" rel="noopener noreferrer">Jerusalem tourism office</a>.</p>
       <div className="mt-5 grid gap-3 sm:grid-cols-2" data-testid="jerusalem-transport-links">
@@ -192,7 +192,7 @@ export function JerusalemCityHubPage(){
           {title:"Treat worship sites respectfully",description:"Cover shoulders and knees where required, keep voices low and respect prayers, security checks and local photography rules. Different religious compounds set their own visitor access."},
           {title:"Check holidays and local events",description:"Shabbat, Jewish holidays and Christian or Muslim festivals affect services, shopping and visitor hours in different ways. Use the actual travel dates before making a detailed plan."},
           {title:"Check museum and attraction details",description:"Individual museums, tours and historic sites use their own tickets, visiting windows and reservations. Follow the dedicated guide to confirm the operator's current information."},
-          {title:"Prepare for warm afternoons and cool evenings",description:"Jerusalem's elevation brings seasonal variation. Carry water, comfortable shoes and a weather-appropriate layer rather than planning exclusively around a forecast average."},
+          {title:"Prepare for warm afternoons and cool evenings",description:"Jerusalem's elevation brings seasonal variation. Carry water, wear comfortable shoes and bring a layer suited to the local weather."},
           {title:"Check current travel advice",description:"Conditions can change. Review the relevant official travel advisories, local guidance and your insurer's terms before travelling; avoid treating old reassurance as a current safety assessment."},
         ].map(item=><article key={item.title} className="rounded-xl border bg-card p-4"><h3 className="font-bold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p></article>)}
       </div>

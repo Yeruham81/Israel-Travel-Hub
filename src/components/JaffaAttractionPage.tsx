@@ -104,7 +104,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <p>Jaffa's flea-market district lies southeast of the Clock Tower. Antique stalls and vintage shops sit alongside cafés, restaurants and small design businesses; nearby Greek Market streets add another lively pocket to explore.</p>
         <p>Visit during market trading hours to browse antique stalls and vintage shops. The <a href="#visitor-info" className={inlineLink}>visitor table</a> lists typical market hours, with a link to the <a href={official.fleaMarketHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>market website</a> for updates.</p>
       </AttractionHighlight>
-      <AttractionPracticalTip>For a first-time visit, I would prioritise the hilltop old town, Summit Garden, the port and either the flea market or a museum according to your interests. Leave time for a coffee or meal rather than rushing from sight to sight.</AttractionPracticalTip>
+      <AttractionPracticalTip>For a first-time visit, I would prioritise the hilltop old town, Summit Garden, the port and either the flea market or a museum according to your interests. Allow time to enjoy a coffee or meal along the way.</AttractionPracticalTip>
       <h3 className="pt-3 font-serif text-xl font-semibold">More cultural experiences in Jaffa</h3>
       <AttractionHighlight mobileImageFirst title="Ilana Goor Museum and local art" image={{ src: photos.museum, alt: "Historic stone building of the Ilana Goor Museum in Old Jaffa", position: "38% center" }}>
         <p>The <a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum</a>, at 4 Mazal Dagim Street, combines an eclectic art collection with a historic building and sea views. See the <a href="#visitor-info" className={inlineLink}>visitor table</a> for published hours, adult admission and official discounts.</p>
@@ -220,7 +220,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       <AttractionPracticalTip><strong>Shoes and slopes:</strong> Choose shoes with good grip for the historic stone paving. The <a href="#visit-plan" className={inlineLink}>waterfront and market walk</a> offers a gentler alternative.</AttractionPracticalTip>
       <AttractionPracticalTip><strong>Sunny days:</strong> Parts of the garden, quay and market streets are exposed to direct sun. Bring water and plan a shady café break on hot afternoons.</AttractionPracticalTip>
       <AttractionPracticalTip><strong>Churches and neighbourhoods:</strong> Dress respectfully at religious sites and be considerate when photographing people, worshippers and residential doors.</AttractionPracticalTip>
-      <p>Jaffa works well as part of a larger Tel Aviv visit. If you have additional time, combine it with the southern beachfront or <Link to="/travel-blog/beaches-in-tel-aviv/" className={inlineLink}>Tel Aviv's beaches</Link>, rather than crossing the city repeatedly.</p>
+      <p>Jaffa works well as part of a larger Tel Aviv visit. If you have additional time, combine it with the southern beachfront or <Link to="/travel-blog/beaches-in-tel-aviv/" className={inlineLink}>Tel Aviv's beaches</Link> for a relaxed outing.</p>
     </div>
   ),
   historyContent: (

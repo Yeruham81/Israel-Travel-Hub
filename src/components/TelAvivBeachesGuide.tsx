@@ -324,7 +324,7 @@ export function TelAvivBeachesGuide() {
           <div className="rounded-xl border bg-card p-5"><h3 className="text-lg font-semibold">Ga'ash Beach</h3><p className="mt-2 text-sm leading-relaxed">A more natural coastal setting, where cliff edges and access conditions deserve extra care. Never treat an unguarded stretch as a swimming beach.</p><p className="mt-4 text-xs"><OfficialLink href="https://www.google.com/maps/search/?api=1&query=Gaash+Beach+Israel">View location</OfficialLink></p></div>
           <div className="rounded-xl border bg-card p-5"><h3 className="text-lg font-semibold">Palmahim Beach</h3><p className="mt-2 text-sm leading-relaxed">A protected natural shoreline south of the city. Pedestrian access is free; vehicles may incur entry or parking charges, and swimming arrangements follow park notices.</p><p className="mt-4 text-xs"><OfficialLink href="https://en.parks.org.il/reserve-park/palmahim-beach-national-park/">Official park information</OfficialLink></p></div>
         </div>
-        <p className="mt-3 text-sm text-muted-foreground">For a longer coastal sightseeing day, I would plan separately around <Link to="/attractions/caesarea/" className="font-semibold text-primary hover:underline">Caesarea</Link> rather than treat its beaches as a nearby Tel Aviv stop.</p>
+        <p className="mt-3 text-sm text-muted-foreground">For a longer coastal sightseeing day, I recommend a separate outing to <Link to="/attractions/caesarea/" className="font-semibold text-primary hover:underline">Caesarea</Link> and its beaches.</p>
       </section>
 
       <FaqList faqs={faqs} />

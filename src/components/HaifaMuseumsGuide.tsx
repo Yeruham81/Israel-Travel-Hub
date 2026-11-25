@@ -193,7 +193,7 @@ export function HaifaMuseumsGuide() {
         <h3 className="text-2xl font-semibold">{area.name}</h3>
         <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
         <div className="mt-5 grid gap-5">{museums.filter(m=>m.area===area.id).map(m=><MuseumCard key={m.id} museum={m}/>)}</div>
-        {index===2&&<div className="mt-5"><PlanningTip>The Mané-Katz Museum is closed for renovation, but works from its collection may be shown at other Haifa Museums venues. Check the current exhibitions rather than making a trip to a closed door.</PlanningTip></div>}
+        {index===2&&<div className="mt-5"><PlanningTip>The Mané-Katz Museum is closed for renovation, but works from its collection may be shown at other Haifa Museums venues. Check the current exhibitions and opening hours before setting out.</PlanningTip></div>}
         {index===3&&<div className="mt-5"><PlanningTip>The two Allenby Road maritime museums are separate. I recommend checking each institution's last entry time and ticket rules before planning a combined visit.</PlanningTip></div>}
       </section>)}
       <div className="mt-8 rounded-xl border bg-card p-4">

@@ -134,7 +134,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "access": "Paid national park; verify opening times",
     "description": "At Qumran, archaeological remains help tell the story of the community associated with the Dead Sea Scrolls. Visitors can examine the excavations and look towards the cliffs and caves where manuscripts were discovered.",
     "practical": "The archaeological park is the visitor attraction. The famous scroll caves are not an open-access cave tour, so I would avoid planning around entering them. Bring sun protection; much of the visit is exposed.",
-    "gettingThere": "Qumran is in the northern Dead Sea area near Kibbutz Kalia, well north of Ein Bokek. It combines naturally with other northern stops rather than a rushed southern resort day.",
+    "gettingThere": "Qumran is in the northern Dead Sea area near Kibbutz Kalia, well north of Ein Bokek. Combine it with other sites along the northern Dead Sea.",
     "tip": "If the scrolls interest you, leave time to read the interpretation at the archaeological site instead of treating it as a photo stop.",
     "image": {
       "src": qumran,
@@ -250,7 +250,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "access": "Promenade free; mud treatments and spa access may cost extra",
     "description": "The Dead Sea experience is about more than floating. Ein Bokek's promenade is a pleasant place to walk between the beach, gardens and cafés, while nearby resorts offer optional mud treatments and spa facilities.",
     "practical": "Natural mud is not guaranteed to be available or supplied free at every beach. Check the spa's treatment menu, age rules and fees before booking. Avoid applying mud to irritated skin, wounds or the eyes, and skip exaggerated claims about detoxification or medical results.",
-    "gettingThere": "This works best around Ein Bokek's central beach and hotel district. Walk locally rather than driving between the promenade and adjacent beach.",
+    "gettingThere": "This works best around Ein Bokek's central beach and hotel district. The promenade and adjacent beach are within walking distance.",
     "tip": "I'd save this for the latter part of the day and choose a spa based on the facilities you will actually use.",
     "image": {
       "src": mud,
@@ -282,7 +282,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "access": "Guided admission by advance booking",
     "description": "The restored historic potash-workers' camp at Sdom tells the story of early Dead Sea industry and the people who worked here. It adds a human and industrial-history perspective to a region better known for beaches and desert ruins.",
     "practical": "Admission is by a pre-booked guided tour. Choose your date and time in the official Hebrew booking calendar, and arrive about 15 minutes early. The operator's public pages show differing opening hours, so rely on the available booking times for your visit rather than a generic timetable.",
-    "gettingThere": "The centre is in the southern Dead Sea near Sdom, a separate drive from Ein Bokek. Navigate to the visitor centre itself rather than to industrial facilities.",
+    "gettingThere": "The centre is in the southern Dead Sea near Sdom, a separate drive from Ein Bokek. Set your navigation to the visitor centre itself.",
     "tip": "I'd choose an available guided time on the official website first, arrive 15 minutes early, and then plan the other southern Dead Sea stops around it.",
     "official": {
       "label": "Official visitor information and booking (Hebrew)",
@@ -311,7 +311,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "description": "Choose a daylight guided jeep outing or specialist canyon adventure for dramatic desert terrain, or book a separate evening stargazing experience when the sky is clear. These are different types of activity: select one that fits your interests, group and schedule.",
     "practical": "Daytime jeep drives and canyon trips need a qualified operator and route-specific instructions. Rappelling and cave visits require suitable equipment and careful supervision. For night stargazing, ask about moonlight, cloud cover, transport and warm clothing; a star-filled sky is never guaranteed.",
     "gettingThere": "Operators may depart from Ein Bokek, Neve Zohar or other meeting points. Confirm the exact pickup and return transport before booking.",
-    "tip": "I'd book an organised daylight jeep outing for scenery, or choose an evening stargazing tour for a quieter experience, rather than trying to combine unrelated activities.",
+    "tip": "I'd book a daylight jeep outing for desert scenery or an evening stargazing tour for a quieter experience.",
     "image": {
       "src": jeep,
       "alt": "Four-wheel-drive jeep excursion on rugged desert terrain in southern Israel"
@@ -426,7 +426,7 @@ export const deadSeaRouteIdeas = [
       "nahal-bokek",
       "mud-spa"
     ],
-    "tip": "Choose between the walk and a longer spa session rather than trying to squeeze everything into a hot afternoon.",
+    "tip": "Choose either the walk or a longer spa session for a comfortable afternoon.",
     "timeBudget": "Allow roughly 5–7 hours around Ein Bokek, depending on hiking and spa time.",
     "travel": "Stay locally or drive between the hotel area and the designated canyon parking; avoid midday hiking in hot weather."
   },

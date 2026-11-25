@@ -237,7 +237,7 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "why": "Holy Week, Good Friday and Easter bring important services and processions to churches, especially in Jerusalem's Old City.",
         "transport": "Local road controls, crowd management and changes to pickup points are possible; there is no automatic nationwide rail closure.",
         "visitor": "Church of the Holy Sepulchre access can be tightly managed during major services. Pilgrim demand may increase hotel and tour prices.",
-        "tip": "Plan church visits around religious schedules, and check security, ticketing and entry requirements where applicable."
+        "tip": "Plan church visits around religious schedules and check each site's security, ticketing and entry requirements."
       },
       {
         "id": "druze",

@@ -102,7 +102,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>The national park is on <strong>Road 66</strong>, roughly 2 km northwest of Megiddo Junction between Megiddo and Yokneam. Navigate to <strong>Tel Megiddo National Park</strong> rather than the general Megiddo area or the junction itself.</p>
+      <p>The national park is on <strong>Road 66</strong>, roughly 2 km northwest of Megiddo Junction between Megiddo and Yokneam. Set your navigation to <strong>Tel Megiddo National Park</strong>.</p>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">

@@ -84,7 +84,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     {
       name: "Chapel of the Ascension",
       description: "This small domed chapel in At-Tur is a traditional site of the Ascension of Jesus. It stands within a modest walled enclosure, a short distance from Pater Noster; other Christian denominations also maintain Ascension traditions on the hill.",
-      visit: "The small stone-domed chapel is within a walled compound near Pater Noster. It is a short, contemplative visit rather than a long church tour; allow a little time to find the entrance.",
+      visit: "The small stone-domed chapel is within a walled compound near Pater Noster. Allow time to find the entrance and enjoy a short, contemplative visit.",
       tipLabel: "Good to pair with",
       image: { src: "/images/jerusalem/mount-of-olives/chapel-of-ascension.webp", alt: "Small stone-domed Chapel of the Ascension in a walled courtyard on the Mount of Olives" },
     },

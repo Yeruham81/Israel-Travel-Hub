@@ -213,7 +213,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     privateLabel: "Request a private Tel Aviv or Jaffa transfer",
     options: [
       { id: "rail", name: "Train to Tel Aviv", time: "About 11–30 min to a station", cost: "₪11.50 per adult (one way)", bestFor: "Quick, lower-cost weekday arrival", doorToDoor: "No", availability: "Not during the main Shabbat break", comparison: { cost: "₪11.50", advantages: "Quick, low-cost and avoids traffic", drawbacks: "Train stops inland; hotel connection often required" }, heading: "Train from Ben Gurion Airport to Tel Aviv", paragraphs: [
-        "Take the airport train to a Tel Aviv station that works for your hotel address. Compare the onward bus, taxi or walk rather than automatically choosing the first station; the station table below will help you decide.",
+        "Take the airport train to a Tel Aviv station that works for your hotel address. Use the station table below to compare onward buses, taxis and walking routes.",
         "For hotels near the beach, Old Jaffa or Neve Tzedek, my where to stay in Tel Aviv guide explains the neighborhoods, and the getting around Tel Aviv guide covers local connections."
       ], inlineLinks: [{ text: "where to stay in Tel Aviv guide", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { text: "getting around Tel Aviv guide", to: "/travel-blog/getting-around-tel-aviv/" }], checklist: ["Use the full hotel address when choosing the station.", "Check the last train and late-night stopping pattern.", "Include the onward fare and bags in the total comparison."] },
       { id: "bus", name: "Bus 445", time: "About 40–70+ min, depending on stop", cost: "₪8–14.50 per adult, depending on stop", bestFor: "Addresses near its city stops", doorToDoor: "No", availability: "Timetable dependent; Shabbat restrictions", comparison: { cost: "₪8–14.50", advantages: "May reach central or beachfront stops", drawbacks: "Slower; timetable and stop dependent" }, heading: "Bus 445: another route into central Tel Aviv", paragraphs: [
@@ -231,7 +231,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         "If arriving at Terminal 3, take the free internal shuttle from Level G near Gate 01 to Terminal 1. Bus 711 serves airport stop 34609 on its limited timetable; check the Tel Aviv-bound direction and final walk. The dedicated airport Shabbat guide explains the interchange and Saturday-night train restart."
       ], inlineLinks: [{ text: "dedicated airport Shabbat guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }], checklist: ["Check the city weekend route planner, not a weekday bus schedule.", "Allow time between Terminal 3 and Terminal 1.", "Confirm your last city connection or walk."] },
       { id: "rental", name: "Rental car", time: "About 20–40+ min plus collection", cost: "Rental + parking, insurance and fuel", bestFor: "Journey beyond Tel Aviv", doorToDoor: "Yes, where permitted", availability: "Desk-hours dependent", comparison: { cost: "Rental + extras", advantages: "Flexible for an onward road trip", drawbacks: "Collection time, traffic and city parking" }, heading: "Should you rent a car at the airport?", paragraphs: [
-        ...commonRental, "Central Tel Aviv and Jaffa have limited and potentially expensive parking. If you intend to spend the first few days walking around the city, consider renting only when you leave. Compare vehicle options on DiscoverCars."
+        ...commonRental, "Parking in central Tel Aviv and Jaffa is limited and can be expensive. If you intend to spend the first few days walking around the city, consider renting only when you leave. Compare vehicle options on DiscoverCars."
       ], inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }], checklist: ["Check your hotel's parking arrangements.", "Compare city and airport pickup costs.", "Confirm any toll or one-way charges."] },
     ],
     stations: [
@@ -311,7 +311,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         { label: "Mount Carmel hotel", detail: "Trains run along the coast, while Carmel Center is uphill. You'll usually need a bus or taxi from the station." },
         { label: "Cruise connection", detail: "Haifa's passenger terminal is a different destination from a city hotel. Confirm the ship, terminal instructions, boarding deadline and how you will reach the pedestrian entrance." },
       ],
-      takeaway: "Choose the station with the easiest route to your hotel, not simply the one that looks closest on the map.",
+      takeaway: "Choose the station with the easiest onward route to your hotel.",
     },
     answer: "The train is usually the best low-cost option when running. Choose a station near your destination: Hof HaCarmel for southern Haifa, Bat Galim for the coast or Center HaShmona for downtown. Hotels on Mount Carmel generally need an uphill bus or taxi; a direct taxi or private transfer avoids that change.",
     trainIntro: "The Ben Gurion Airport railway station is below Terminal 3. Follow the train signs after customs; passengers using Terminal 1 first need the free internal shuttle to Terminal 3. Direct trains commonly serve Haifa, with approximately 80–100 minutes to key stations depending on the service. Buy a single ticket at the station or use a valid Rav-Kav or supported payment app, and check the current fare and the stops of the actual train. The railway runs near the coast, so a Mount Carmel hotel may require an additional uphill bus or taxi. My Ben Gurion Airport arrival guide explains the terminal steps; the getting around Israel guide explains onward public transport.",
@@ -509,7 +509,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     arrivalAreas: [
       { area: "Ein Bokek hotel strip", station: "Bus 486 or 444 from Jerusalem", onward: "Use the stop nearest your named hotel and allow for the final walk." },
       { area: "Hamei Zohar / Neve Zohar", station: "Bus serving the specific resort stop", onward: "Check the hotel name and stop before boarding in Jerusalem." },
-      { area: "Ein Gedi / Masada", station: "Separate Dead Sea destination", onward: "Use a journey plan for the specific site rather than an Ein Bokek hotel stop." },
+      { area: "Ein Gedi / Masada", station: "Separate Dead Sea destination", onward: "Plan your journey to the specific site you intend to visit." },
     ],
     connections: [
       "Ein Bokek has multiple hotel-area bus stops. Enter your full hotel name in the journey planner and confirm the exact stop, walking distance and direction before boarding.",

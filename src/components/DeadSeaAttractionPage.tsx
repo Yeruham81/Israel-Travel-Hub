@@ -136,7 +136,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>For a beach visit, use <strong>Ein Bokek Central Beach</strong> as your destination rather than simply entering “Dead Sea” in the map. The shoreline is long, and northern and southern beaches are not interchangeable.</p>
+      <p>For a beach visit, set your navigation to <strong>Ein Bokek Central Beach</strong>. The shoreline is long, and northern and southern beaches are not interchangeable.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><CarFront className="size-5 text-primary" aria-hidden="true" />By car or private driver</h3>

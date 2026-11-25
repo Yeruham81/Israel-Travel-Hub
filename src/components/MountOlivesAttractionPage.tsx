@@ -154,7 +154,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By taxi or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">A taxi to Seven Arches avoids climbing up from the Kidron Valley. If you plan to walk down, arrange pickup near Gethsemane rather than at the summit. For a visit without the steep downhill walk, I can help arrange separate drop-offs at the viewpoint and near Gethsemane; <a href="#contact" className={inlineLink}>send me your preferred date and pickup location</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">A taxi to Seven Arches avoids climbing up from the Kidron Valley. If you plan to walk downhill, arrange pickup near Gethsemane. For a visit without the steep downhill walk, I can help arrange separate drop-offs at the viewpoint and near Gethsemane; <a href="#contact" className={inlineLink}>send me your preferred date and pickup location</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">On foot from the Old City</h3></div>
@@ -210,7 +210,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   historyContent: (
     <div className="mt-4 space-y-3">
       {mountOlivesEditorialUpdate.history.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-      <p>Jerusalem’s eastern landscape also has a long Muslim and Arab history. The hillside neighbourhood of At-Tur, the surrounding roads and the city’s religious landmarks are part of a living community, not simply a sequence of pilgrimage stops. I recommend visiting with respect for local residents, worshippers and the different traditions associated with the area.</p>
+      <p>Jerusalem’s eastern landscape also has a long Muslim and Arab history. The hillside neighbourhood of At-Tur and the surrounding religious landmarks are part of a living community. I recommend visiting with respect for local residents, worshippers and the different traditions associated with the area.</p>
       <p>For a deeper look at the hill’s history, see the <a href={official.cemeteryGraves} target="_blank" rel="noopener noreferrer" className={inlineLink}>Mount of Olives cemetery heritage project</a> and my <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Jerusalem churches guide</Link>.</p>
     </div>
   ),

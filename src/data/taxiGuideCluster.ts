@@ -154,7 +154,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "intercity", title: "Long-Distance Taxis and Remote Destinations",
         photo: migrationPhotos["jerusalem-to-the-dead-sea"],
         paragraphs: [
-          "A taxi can take you directly to a hotel or attraction, but a train or bus may be much cheaper when service is available. Compare the whole door-to-door route, not only a railway-station journey; the getting around Israel guide compares the options.",
+          "A taxi can take you directly to a hotel or attraction, but a train or bus may be much cheaper when service is available. Compare the door-to-door journey; the getting around Israel guide explains your transport options.",
           "The Dead Sea and Ein Bokek, Mitzpe Ramon, the Golan Heights, desert nature reserves and the crossings to Jordan and Egypt may have limited taxi availability. Arrange your return taxi in advance when visiting remote destinations.",
           "Getting from Jerusalem to Bethlehem may require a change of vehicle near Checkpoint 300 (Rachel Crossing): if the crossing is open for your journey, you may need to leave your Israeli taxi, complete the pedestrian crossing with the required travel documents and take a local Palestinian taxi on the other side. Israeli-plated taxis generally cannot enter Palestinian Authority Area A without authorization. Check the current security situation, opening arrangements and your eligibility to cross before setting out; see the Jerusalem to Bethlehem guide.",
           "If you are traveling to the Dead Sea, consider reserving both directions or arranging a driver for several stops. The Jerusalem to the Dead Sea guide explains practical choices.",
@@ -268,7 +268,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "Permitted tolls and passenger-requested waiting can add to the total. Traffic delays are reflected in the meter's time charge. Luggage and the number of passengers within the vehicle's licensed capacity carry no general extra charge.",
         ],
         tables: [{
-          caption: "Common permitted surcharges — VAT included where applicable",
+          caption: "Common permitted surcharges (VAT included where applicable)",
           headers: ["Surcharge or fee", "Amount or rule"],
           rows: [
             ["Taxi ordered to pick you up", "₪5.78, if the regulated dispatch surcharge applies"],
@@ -457,7 +457,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "versus-transfer", title: "Official airport taxi or pre-booked private transfer?",
         paragraphs: [
           "For an ordinary arrival with manageable luggage, an authorized metered taxi is a practical choice. I recommend considering a pre-booked private transfer for a larger group, a particular vehicle, several suitcases or a long journey where you prefer the pickup and price arrangements agreed ahead of time.",
-          "Private transfers are booked with their own operator and have a confirmed meeting place, vehicle class and waiting terms. Use the meeting instructions on that booking rather than the Gett taxi queue. You can compare my private airport transfer service and request a quote. For taxi apps elsewhere in Israel, my Uber in Israel guide explains Gett, Yango and current ride-hailing options.",
+          "Private transfers are booked with their own operator and have a confirmed meeting place, vehicle class and waiting terms. Follow the meeting instructions in your booking confirmation. You can compare my private airport transfer service and request a quote. For taxi apps elsewhere in Israel, my Uber in Israel guide explains Gett, Yango and current ride-hailing options.",
         ],
         tables: [{
           caption: "Compare your airport pickup options",

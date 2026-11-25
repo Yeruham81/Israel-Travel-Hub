@@ -116,7 +116,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or with a driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">From Tiberias, drive north on Route 90 towards Migdal and follow the signs for Magdala. Use the archaeological park or visitor centre as your destination rather than a general address in Migdal.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Tiberias, drive north on Route 90 towards Migdal and follow the signs for Magdala. Set your navigation to the archaeological park or visitor centre.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">Driving directions to Magdala</a>
           </article>
           <article className="rounded-xl border bg-card p-4">

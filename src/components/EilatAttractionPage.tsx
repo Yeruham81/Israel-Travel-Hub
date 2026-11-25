@@ -189,7 +189,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       <p>Keep your distance from marine life, never stand on or touch coral, and do not feed fish. Confirm the departure point, age restrictions, equipment, weather-cancellation policy and total price before booking. <Link to="/tours/eilat-red-sea/" className={inlineLink}>Explore Eilat sea activities and tours</Link>.</p>
     </AttractionHighlight>
     <AttractionHighlight title="Timna Park" image={{ src: timnaPhoto, alt: "Sandstone cliffs and sculpted formations in Timna Park north of Eilat" }}>
-      <p>Timna is a desert landscape of sandstone formations, archaeological copper-mining sites and dramatic viewpoints, a short drive north of the city. The park is extensive; many visitors combine short walks and drives between major stops rather than hiking the entire park.</p>
+      <p>Timna is a desert landscape of sandstone formations, archaeological copper-mining sites and dramatic viewpoints, a short drive north of the city. The park is extensive; many visitors combine short walks with drives between its main sites.</p>
       <p>It has its own entry fee, opening rules and trail restrictions. Check {sourcesLink(official.timna, "visitor information")} and {sourcesLink(official.timnaNavigation, "navigation guidance")} before you leave Eilat. Carry plenty of water and avoid strenuous hiking in midday heat.</p>
       {placeLink("Timna Park, Eilot, Israel")}
     </AttractionHighlight>
@@ -214,7 +214,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       <article className="rounded-xl border bg-card p-4">
         <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">One day: the Red Sea</h3></div>
         <p className="mt-3 text-sm leading-relaxed">Start with Coral Beach Nature Reserve <strong>or</strong> Dolphin Reef. If you choose Coral Beach, continue to the Underwater Observatory farther south, then return to the North Beach promenade for an evening walk. The sample map follows the Coral Beach option only.</p>
-        <p className="mt-2 text-xs text-muted-foreground">Choose two main paid stops rather than rushing between all three.</p>
+        <p className="mt-2 text-xs text-muted-foreground">Choose two main paid attractions for a relaxed day.</p>
         <a href={maps.marine} target="_blank" rel="noopener noreferrer" className={inlineLink}>View sample Coral Beach–Observatory–North Beach route</a>
       </article>
       <article className="rounded-xl border bg-card p-4">

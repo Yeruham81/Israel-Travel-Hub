@@ -130,7 +130,7 @@ export function ChristianToursGuide(){
    <OnThisPage sections={nav}/>
 
    <section id="start" aria-labelledby="start-heading" className="mt-12 scroll-mt-24">
-     <Heading id="start" title="How to plan a Christian tour" intro="First decide which traditions and places matter most, then build a route by area rather than trying to fit every stop into one day."/>
+     <Heading id="start" title="How to plan a Christian tour" intro="Choose the traditions and places that matter most to you, then group visits by area."/>
      <div className="grid gap-4 sm:grid-cols-3">{[
        {number:"01",title:"Choose your focus",text:"Jerusalem's Passion sites, the Nativity in Bethlehem, the ministry in Galilee or a river baptism visit."},
        {number:"02",title:"Group sites geographically",text:"A Jerusalem walking day differs from a Galilee road trip. An overnight stay in the north can cut long return journeys."},
@@ -174,7 +174,7 @@ export function ChristianToursGuide(){
      <h3 className="mb-3 mt-8 font-serif text-xl font-semibold">Nazareth, Galilee &amp; Jordan River</h3>
      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-christian-tour-group="north">{offers.filter(o=>o.tour.group==="north").map(o=><TourCard key={o.tour.id} tour={o.tour} url={o.url}/>)}</div>
      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Prices, ratings, reviews and availability are shown by the booking provider, not updated live on this page. Confirm the product name, tour itinerary, final price, included stops, date and West Bank eligibility before paying.</p>
-     <p className="mt-3 text-sm leading-relaxed">For more options, see my <Link to="/tours/jerusalem/" className={link}>Jerusalem tours</Link>, <Link to="/tours/bethlehem-jericho-jordan-river/" className={link}>Bethlehem and Jordan River tours</Link> and <Link to="/tours/nazareth-sea-of-galilee/" className={link}>Galilee tours</Link>. My <Link to="/private-driver-in-israel/" className={link}>private driver service</Link> is transport, not automatically licensed guiding.</p>
+     <p className="mt-3 text-sm leading-relaxed">For more options, see my <Link to="/tours/jerusalem/" className={link}>Jerusalem tours</Link>, <Link to="/tours/bethlehem-jericho-jordan-river/" className={link}>Bethlehem and Jordan River tours</Link> and <Link to="/tours/nazareth-sea-of-galilee/" className={link}>Galilee tours</Link>. My <Link to="/private-driver-in-israel/" className={link}>private driver service</Link> covers transportation. Licensed guiding should be arranged separately.</p>
    </section>
 
    <section id="practical" aria-labelledby="practical-heading" className="mt-12 scroll-mt-24">
