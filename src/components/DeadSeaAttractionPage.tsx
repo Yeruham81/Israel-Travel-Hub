@@ -59,7 +59,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
   itineraryTitle: "How to plan your Dead Sea day",
   historyTitle: "What makes the Dead Sea special?",
   relatedTitle: "Explore the Dead Sea and beyond",
-  contactIntroduction: "Planning a day at the Dead Sea or a private trip to Masada and Ein Gedi? Tell me where you're starting, your travel date and the stops you have in mind. I'll be happy to help with private transport and a practical itinerary.",
+  contactIntroduction: "Tell me your date, pickup point, passengers and the Dead Sea sites you want to visit. I can arrange a private transfer or a sightseeing day with a driver to the Dead Sea, Masada and Ein Gedi.",
   facts: [
     { icon: "location", label: "Location", value: "Judean Desert", note: "Between Israel and Jordan; Ein Bokek is the main resort area" },
     { icon: "duration", label: "Time needed", value: "2–4 hours", note: "Beach visit; a full day with Masada" },
