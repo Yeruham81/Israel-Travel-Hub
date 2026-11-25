@@ -26,7 +26,7 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
   visitorTitle: "Opening hours, admission and visitor information",
   visitorNavLabel: "Hours & visits",
   relatedTitle: "Explore more in Lower Galilee and the Sea of Galilee",
-  contactIntroduction: "Tell me your travel date, pickup location and which Galilee sites you would like to visit. I'll be happy to help plan a private day trip that includes Mount Tabor.",
+  contactIntroduction: "Tell me your date, pickup point, number of passengers and the Galilee sites you would like to visit. I can arrange private transport or a day trip with a driver to Mount Tabor.",
   facts: [
     { icon: "location", label: "Location", value: "Lower Galilee", note: "Above the Jezreel Valley, east of Nazareth" },
     { icon: "duration", label: "Time needed", value: "60–90 minutes", note: "At the summit; allow time for the ascent" },
