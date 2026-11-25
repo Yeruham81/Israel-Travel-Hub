@@ -1,11 +1,13 @@
 import { StayBookingChecklist } from "@/components/StayBookingChecklist";
+import { HomeContactForm } from "@/components/HomeContactForm";
+import { guideContactCopy } from "@/lib/guide-contact";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 import { accommodationEditorial, type AccommodationEditorialId } from "@/data/accommodationEditorial";
 import { hotelCategoryGuides, neighborhoodGuidesForCity, type CityStayGuide, type HotelStayDestination } from "@/data/content";
 import { GuideHeader, OnThisPage, Section, FaqList, SourceList } from "@/components/Guide";
 
-const sections = [["overview", "Choosing a base"], ["areas", "Compare areas"], ["tips", "Practical tips"], ["hotels", "Find hotels"], ["faq", "FAQ"]] as const;
+const sections = [["overview", "Choosing a base"], ["areas", "Compare areas"], ["tips", "Practical tips"], ["hotels", "Find hotels"], ["faq", "FAQ"], ["contact", "Contact me"]] as const;
 
 /** Editorial planning guides link to the destination hotel pages and their Travelpayouts-supported booking options. */
 export function StayEditorialGuidePage({ guide, id }: { guide: CityStayGuide | HotelStayDestination; id: AccommodationEditorialId }) {
@@ -52,6 +54,13 @@ export function StayEditorialGuidePage({ guide, id }: { guide: CityStayGuide | H
     </Link>)}</div>
    </section>
    <FaqList faqs={guide.faqs.slice(0,4)}/>
+   <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
+     ...guideContactCopy(info.title, "accommodation", name),
+     eyebrow: "Contact Me",
+     heading: `Need a Private Transfer To or From ${name}?`,
+     introduction: `Tell me your travel dates, pickup location, destination and number of passengers. I'll reply personally about arranging a private transfer or day trip with a driver to or from ${name}.`,
+     placeholder: "Travel dates, pickup location, destinations, passengers and luggage…",
+   }} />
    <SourceList ids={guide.sourceIds}/>
   </article>
  </main>;
