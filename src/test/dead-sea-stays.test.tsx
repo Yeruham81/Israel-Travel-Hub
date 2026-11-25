@@ -76,7 +76,7 @@ describe("Dead Sea destination → travel intent → booking", () => {
     expect(screen.getAllByTestId("stay-comparison-row")).toHaveLength(guide.picks.length);
     for (const column of guide.comparison) expect(screen.getByRole("columnheader", { name: column.label })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: guide.detailTitle })).toBeInTheDocument();
-    expect(container.querySelector("#details")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#details")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: "Dead Sea" })).toHaveAttribute("href", deadSeaStayGuide.path);
     expect(screen.getByRole("link", { name: /See the map and compare/ })).toHaveAttribute("href", `${deadSeaStayGuide.path}#location`);
     const sibling = categories.find((g) => g.id !== guide.id)!;
