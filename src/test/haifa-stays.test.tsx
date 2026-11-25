@@ -78,7 +78,7 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     for (const column of guide.comparison) expect(screen.getByRole("columnheader", { name: column.label })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: guide.overviewTitle })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: guide.detailTitle })).toBeInTheDocument();
-    expect(container.querySelector("#details")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#details")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: "Haifa" })).toHaveAttribute("href", destination.path);
     expect(screen.getByRole("link", { name: /See the map and compare/ })).toHaveAttribute("href", `${destination.path}#location`);
     expect(screen.getByRole("link", { name: categories.find((other) => other.id !== guide.id)!.title })).toBeInTheDocument();
