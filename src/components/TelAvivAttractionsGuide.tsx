@@ -312,15 +312,15 @@ export function TelAvivAttractionsGuide(){
   <SourcesDisclosure>
     <p className="mb-3 text-sm leading-relaxed">For the latest admission details, lifeguard services, exhibitions and special dates, I recommend checking the relevant authority or operator shortly before you visit.</p>
     <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
-     <li><External url="https://www.tel-aviv.gov.il/en/Visit/Top10Places/Pages/default.aspx">Tel Aviv–Yafo Municipality — key places</External></li>
+     <li><External url="https://www.tel-aviv.gov.il/en/Visit/Top10Places/Pages/default.aspx">Tel Aviv–Yafo Municipality - key places</External></li>
      <li><External url="https://www.tel-aviv.gov.il/Visitors/Jaffa/Pages/oldjaffatour.aspx">Old Jaffa municipal walking route (Hebrew)</External></li>
      <li><External url="https://www.tel-aviv.gov.il/en/visit/beaches/pages/default.aspx">Municipal beach information (English)</External></li>
      <li><External url="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx">Beach conditions and lifeguard services (Hebrew)</External></li>
-     <li><External url="https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/PublicTransportaiton.aspx">Free weekend public transport — municipality</External></li>
-     <li><External url="https://whc.unesco.org/en/list/1096/">UNESCO — White City of Tel Aviv</External></li>
-     <li><External url="https://www.tamuseum.org.il/en/visit/">Tel Aviv Museum of Art — visitor information</External></li>
+     <li><External url="https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/PublicTransportaiton.aspx">Free weekend public transport - municipality</External></li>
+     <li><External url="https://whc.unesco.org/en/list/1096/">UNESCO - White City of Tel Aviv</External></li>
+     <li><External url="https://www.tamuseum.org.il/en/visit/">Tel Aviv Museum of Art - visitor information</External></li>
      <li><External url="https://nachalatbinyamin-tlv.com/en/">Nahalat Binyamin Arts & Crafts Fair</External></li>
-     <li><External url="https://suzannedellal.org.il/en/neve-tzedek/">Neve Tzedek history — Suzanne Dellal Centre</External></li>
+     <li><External url="https://suzannedellal.org.il/en/neve-tzedek/">Neve Tzedek history - Suzanne Dellal Centre</External></li>
      <li><External url="https://www.tel-aviv.gov.il/en/Pages/HomePage.aspx">Tel Aviv–Yafo Municipality</External></li>
      <li><External url="https://www.rail.co.il/en">Israel Railways</External></li>
     </ul>

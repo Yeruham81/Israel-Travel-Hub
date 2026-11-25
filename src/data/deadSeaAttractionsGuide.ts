@@ -41,7 +41,7 @@ export const deadSeaStops: DeadSeaStop[] = [
       "alt": "Public bathing beach and blue Dead Sea water at Ein Bokek"
     },
     "official": {
-      "label": "Ein Bokek Central Beach — Tamar Regional Council",
+      "label": "Ein Bokek Central Beach - Tamar Regional Council",
       "href": "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en"
     },
     "guide": {
@@ -73,7 +73,7 @@ export const deadSeaStops: DeadSeaStop[] = [
       "alt": "Aerial view of the archaeological plateau of Masada above the Judean Desert"
     },
     "official": {
-      "label": "Masada National Park — official access and tickets",
+      "label": "Masada National Park - official access and tickets",
       "href": "https://en.parks.org.il/reserve-park/masada-national-park/"
     },
     "guide": {
@@ -109,7 +109,7 @@ export const deadSeaStops: DeadSeaStop[] = [
       "alt": "Natural waterfall and greenery in the Ein Gedi oasis near the Dead Sea"
     },
     "official": {
-      "label": "Ein Gedi Nature Reserve — routes and reservation information",
+      "label": "Ein Gedi Nature Reserve - routes and reservation information",
       "href": "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/"
     },
     "guide": {
@@ -141,7 +141,7 @@ export const deadSeaStops: DeadSeaStop[] = [
       "alt": "Desert cliffs and caves beside the Qumran archaeological landscape"
     },
     "official": {
-      "label": "Qumran National Park — Israel Nature & Parks Authority",
+      "label": "Qumran National Park - Israel Nature & Parks Authority",
       "href": "https://en.parks.org.il/reserve-park/qumran-park"
     },
     "mapLinks": [
@@ -165,7 +165,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "gettingThere": "Navigate to the Nahal Bokek trailhead at the designated hikers' parking by the Sonol station in Ein Bokek; the waterfront beach is a different destination.",
     "tip": "I'd take water shoes and dry footwear for afterwards, and choose a cooler period of the day. A wet canyon walk needs proper grip even if it is described as family-friendly.",
     "official": {
-      "label": "Nahal Bokek trail — Tamar Regional Council",
+      "label": "Nahal Bokek trail - Tamar Regional Council",
       "href": "https://www.deadsea.co.il/tracks/ein-bokek/?lang=en"
     },
     "mapLinks": [
@@ -193,7 +193,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "gettingThere": "The reserve is along Route 90, a few kilometres south of Kibbutz Kalia. It fits a northern Dead Sea day with Qumran.",
     "tip": "I'd consider this stop when travelling with children who enjoy nature, while keeping a separate supervised Ein Bokek beach visit for the classic Dead Sea float.",
     "official": {
-      "label": "Einot Tsukim Nature Reserve — official information",
+      "label": "Einot Tsukim Nature Reserve - official information",
       "href": "https://en.parks.org.il/reserve-park/enot-tsukim-nature-reserve/"
     },
     "mapLinks": [
@@ -225,12 +225,12 @@ export const deadSeaStops: DeadSeaStop[] = [
       "alt": "Hikers on a pale salt ridge at Mount Sodom overlooking the Dead Sea"
     },
     "official": {
-      "label": "Southern Dead Sea activities — regional tourism website",
+      "label": "Southern Dead Sea activities - regional tourism website",
       "href": "https://www.deadsea.co.il/attractions/?lang=en"
     },
     "mapLinks": [
       {
-        "label": "Mount Sedom Lookout — geographical pin",
+        "label": "Mount Sedom Lookout - geographical pin",
         "query": "31.08550,35.38864"
       },
       {

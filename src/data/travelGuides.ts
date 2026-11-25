@@ -575,7 +575,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Check your arrival terminal and flight status with your airline or the airport before departure. For a private pickup, share your flight number and the local calendar date of arrival in Israel, especially after midnight.",
         ],
         highlightedLinks: [{
-          label: "Apply for ETA-IL — official Israeli government portal",
+          label: "Apply for ETA-IL - official Israeli government portal",
           href: "https://israel-entry.piba.gov.il/",
           context: "Check eligibility for your passport, apply for ETA-IL and pay the published ₪25 fee directly to the Population and Immigration Authority.",
         }],
@@ -591,7 +591,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "The free airport shuttle connects the terminals and airport facilities. For transport to a hotel or city, use the train, public buses, official taxis or an arranged transfer.",
         ],
         highlightedLinks: [{
-          label: "Airport shuttle — official stops and timetable",
+          label: "Airport shuttle - official stops and timetable",
           href: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/",
           context: "The airport authority lists the current Terminal 1–Terminal 3 shuttle stops, approximately 15-minute service and airport transport information.",
         }],
@@ -606,7 +606,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "International visitors normally receive a small blue entry card at passport control. Keep it with your passport throughout the trip: it documents your entry and may be requested for a tourist VAT refund when departing Israel.",
         ],
         highlightedLinks: [{
-          label: "Blue entry card — Population and Immigration Authority",
+          label: "Blue entry card - Population and Immigration Authority",
           href: "https://www.iaa.gov.il/en/companies/government-offices/population-and-immigration-authority-%D7%A8%D7%A9%D7%95%D7%AA-%D7%94%D7%90%D7%95%D7%9B%D7%9C%D7%95%D7%A1%D7%99%D7%9F-%D7%95%D7%94%D7%94%D7%92%D7%99%D7%A8%D7%94/",
           context: "Official airport immigration information on the blue entry card and using it for a VAT-refund request.",
         }],
@@ -635,7 +635,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Keep receipts and supporting documents ready for anything you need to declare. Allow time for any customs checks when arranging your pickup.",
         ],
         highlightedLinks: [{
-          label: "Customs rules for visitors — Israel Tax Authority",
+          label: "Customs rules for visitors - Israel Tax Authority",
           href: "https://www.gov.il/en/pages/guide-tourist-customs?chapterIndex=1",
           context: "Official guidance on the red and green channels, duty-free allowances and declarations.",
         }],
@@ -741,7 +741,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           { text: "airport taxi guide", to: travelGuidePaths.airportTaxis },
         ],
         highlightedLinks: [{
-          label: "Accessibility and passenger assistance — Israel Airports Authority",
+          label: "Accessibility and passenger assistance - Israel Airports Authority",
           href: "https://www.iaa.gov.il/en/airports/ben-gurion/accessibility/",
           context: "Official guidance about airline-arranged assistance, accessible airport facilities and the free accessible shuttle.",
         }],

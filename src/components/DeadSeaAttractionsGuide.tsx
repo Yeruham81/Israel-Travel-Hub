@@ -369,7 +369,7 @@ export function DeadSeaAttractionsGuide() {
           <ul className="mt-3 space-y-2 text-xs leading-relaxed">
             {deadSeaPhotoCredits.map(credit=><li key={credit.id}>
               <a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">{credit.id==="nahal-bokek"?"Nahal Bokek":credit.id==="einot-tsukim"?"Einot Tsukim":"Moshe Novomeysky Visitor Center"}</a>
-              {" — photograph by "+credit.author+", "}
+              {" - photograph by "+credit.author+", "}
               <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">{credit.license}</a>
               {". Cropped to fit the layout."}
             </li>)}

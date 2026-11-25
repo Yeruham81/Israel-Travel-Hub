@@ -51,7 +51,7 @@ function AreaCard({area}:{area:ChristianArea}){
        <h3 id={area.id+"-heading"} className="font-serif text-xl font-semibold sm:text-2xl">{area.title}</h3>
        <p className="mt-3 text-sm leading-relaxed sm:text-base">{area.intro}</p>
        <ul className="mt-4 space-y-3">{area.sites.map(site=><li key={site.name} className="text-sm leading-relaxed">
-         <strong>{site.to?<Link to={site.to} className={link}>{site.name}</Link>:site.name}</strong><span className="text-muted-foreground"> — {site.note}</span>
+         <strong>{site.to?<Link to={site.to} className={link}>{site.name}</Link>:site.name}</strong><span className="text-muted-foreground"> - {site.note}</span>
          {(site.officialUrl||site.mapPlace)&&<span className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs">
            {site.officialUrl&&<External href={site.officialUrl}>Official information</External>}
            {site.mapPlace&&<a href={"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(site.mapPlace)} className="font-semibold text-primary hover:underline" target="_blank" rel="noopener noreferrer">Google Maps <MapPin className="inline h-3 w-3" aria-hidden="true"/></a>}

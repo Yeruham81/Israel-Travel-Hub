@@ -162,7 +162,7 @@ function showSectionReferences(guideId: TravelGuideId, sectionId: string) {
 function SectionReferences({ ids }: { ids: string[] }) {
   const sources = publicSources(ids);
   if (!sources.length) return null;
-  return <p className="mt-4 text-xs text-muted-foreground">References: {sources.map((source, index) => <span key={source.id}>{index > 0 && " · "}<a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">{source.publisher}<span className="sr-only"> (opens in a new tab)</span></a></span>)}</p>;
+  return <p className="mt-4 text-xs text-muted-foreground">References: {sources.map((source, index) => <span key={source.id}>{index > 0 && " · "}<a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">{source.publisher.replaceAll(" — ", " - ")}<span className="sr-only"> (opens in a new tab)</span></a></span>)}</p>;
 }
 
 function GuideDataTable({ table, nested = false, mobileGuidance = false }: { table: GuideTable; nested?: boolean; mobileGuidance?: boolean }) {

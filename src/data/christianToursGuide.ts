@@ -40,7 +40,7 @@ export const christianAreas: ChristianArea[] = [
       {name:"Cenacle and Mount Zion",note:"Traditional Last Supper associations",to:"/attractions/mount-zion/"},
     ],
     mapPlace:"Church of the Holy Sepulchre, Jerusalem, Israel",
-    related:{label:"Churches in Jerusalem — my detailed guide",to:"/travel-blog/churches-in-jerusalem/"},
+    related:{label:"Churches in Jerusalem - my detailed guide",to:"/travel-blog/churches-in-jerusalem/"},
   },
   {
     id:"bethlehem",name:"Bethlehem",title:"Bethlehem: the Nativity and the shepherds' fields",
@@ -130,8 +130,8 @@ export const christianRoutes = [
     steps:["Day 1: Nazareth's Annunciation churches; optional Cana and Mount Tabor","Stay near Nazareth or the lake","Day 2: Capernaum, Tabgha and the Mount of Beatitudes","Consider Magdala or Yardenit if your schedule permits"],
     advice:"An overnight stay helps you avoid spending both days driving back and forth to central Israel.",
     mapLegs:[
-      {label:"Day 1 — Nazareth & Mount Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:["Cana Wedding Church, Kafr Kanna, Israel"],destination:"Church of the Transfiguration, Mount Tabor, Israel",mode:"driving"},
-      {label:"Day 2 — Lakeside churches",origin:"Magdala, Israel",waypoints:["Capernaum, Israel","Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
+      {label:"Day 1 - Nazareth & Mount Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:["Cana Wedding Church, Kafr Kanna, Israel"],destination:"Church of the Transfiguration, Mount Tabor, Israel",mode:"driving"},
+      {label:"Day 2 - Lakeside churches",origin:"Magdala, Israel",waypoints:["Capernaum, Israel","Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
     ],
   },
   {
@@ -139,10 +139,10 @@ export const christianRoutes = [
     steps:["Day 1: Jerusalem Old City, Via Dolorosa and Holy Sepulchre","Day 2: Mount of Olives or Bethlehem, with separate travel arrangements","Day 3: Nazareth and optional Mount Tabor","Day 4: Capernaum, Tabgha, Mount of Beatitudes and the lake"],
     advice:"Bethlehem travel requires its own eligibility and crossing plan; confirm access before treating it as a fixed stop.",
     mapLegs:[
-      {label:"Day 1 — Jerusalem on foot",origin:"Via Dolorosa, Jerusalem, Israel",waypoints:[],destination:"Church of the Holy Sepulchre, Jerusalem, Israel",mode:"walking"},
-      {label:"Day 2 — Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
-      {label:"Day 3 — Nazareth & Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:[],destination:"Mount Tabor, Israel",mode:"driving"},
-      {label:"Day 4 — Sea of Galilee",origin:"Capernaum, Israel",waypoints:["Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
+      {label:"Day 1 - Jerusalem on foot",origin:"Via Dolorosa, Jerusalem, Israel",waypoints:[],destination:"Church of the Holy Sepulchre, Jerusalem, Israel",mode:"walking"},
+      {label:"Day 2 - Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
+      {label:"Day 3 - Nazareth & Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:[],destination:"Mount Tabor, Israel",mode:"driving"},
+      {label:"Day 4 - Sea of Galilee",origin:"Capernaum, Israel",waypoints:["Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
     ],
   },
   {
@@ -150,11 +150,11 @@ export const christianRoutes = [
     steps:["Days 1–2: Jerusalem Old City, Mount of Olives and Mount Zion","Day 3: Bethlehem and Beit Sahour, subject to current arrangements","Day 4: lower Jordan baptismal site or optional Jericho visit","Day 5: Nazareth, Cana and Mount Tabor","Days 6–7: Sea of Galilee churches, Magdala and optional Haifa/Carmel"],
     advice:"This is a flexible regional outline. Arrival, luggage, road travel, religious services and any West Bank access require extra time.",
     mapLegs:[
-      {label:"Days 1–2 — Jerusalem churches",origin:"Gethsemane, Jerusalem, Israel",waypoints:["Via Dolorosa, Jerusalem, Israel"],destination:"Mount Zion, Jerusalem, Israel",mode:"walking"},
-      {label:"Day 3 — Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
-      {label:"Day 4 — Lower Jordan (check access)",origin:"Jerusalem, Israel",waypoints:[],destination:"Qasr al-Yahud Baptism Site, West Bank",mode:"driving"},
-      {label:"Day 5 — Nazareth & Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:["Kafr Kanna, Israel"],destination:"Mount Tabor, Israel",mode:"driving"},
-      {label:"Days 6–7 — Galilee churches",origin:"Magdala, Israel",waypoints:["Capernaum, Israel","Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
+      {label:"Days 1–2 - Jerusalem churches",origin:"Gethsemane, Jerusalem, Israel",waypoints:["Via Dolorosa, Jerusalem, Israel"],destination:"Mount Zion, Jerusalem, Israel",mode:"walking"},
+      {label:"Day 3 - Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
+      {label:"Day 4 - Lower Jordan (check access)",origin:"Jerusalem, Israel",waypoints:[],destination:"Qasr al-Yahud Baptism Site, West Bank",mode:"driving"},
+      {label:"Day 5 - Nazareth & Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:["Kafr Kanna, Israel"],destination:"Mount Tabor, Israel",mode:"driving"},
+      {label:"Days 6–7 - Galilee churches",origin:"Magdala, Israel",waypoints:["Capernaum, Israel","Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
     ],
   },
 ] as const;

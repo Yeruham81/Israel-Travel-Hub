@@ -33,7 +33,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"Use the Red Line light rail or a suitable bus and walk from the Clock Tower area. Arrange drop-off close to an accessible entrance if needed.",
     image:{src:jaffa,alt:"Old stone buildings and picturesque streets in historic Jaffa"},
     guide:{label:"My detailed guide to Old Jaffa",to:"/attractions/jaffa/"},
-    official:{label:"Old Jaffa sightseeing route — municipality (Hebrew)",url:"https://www.tel-aviv.gov.il/Visitors/Jaffa/Pages/oldjaffatour.aspx",note:"Hebrew"},
+    official:{label:"Old Jaffa sightseeing route - municipality (Hebrew)",url:"https://www.tel-aviv.gov.il/Visitors/Jaffa/Pages/oldjaffatour.aspx",note:"Hebrew"},
     mapLinks:[{label:"Jaffa Clock Tower",query:"Jaffa Clock Tower Tel Aviv Yafo Israel"},{label:"Kedumim Square",query:"Kedumim Square Old Jaffa Israel"},{label:"Jaffa Port",query:"Jaffa Port Tel Aviv Israel"}]
   },
   {
@@ -45,7 +45,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"Walk or cycle along the beachfront; buses and taxis serve parallel streets. Train stations are inland, so allow a final local connection.",
     image:{src:beaches,alt:"Sandy Mediterranean bathing beach and blue sea in Tel Aviv"},
     guide:{label:"My complete Tel Aviv beach guide",to:"/travel-blog/beaches-in-tel-aviv/"},
-    official:{label:"Tel Aviv beach information — municipality",url:"https://www.tel-aviv.gov.il/en/visit/beaches/pages/default.aspx"},
+    official:{label:"Tel Aviv beach information - municipality",url:"https://www.tel-aviv.gov.il/en/visit/beaches/pages/default.aspx"},
     additionalOfficial:{label:"Live municipal beach and lifeguard information (Hebrew)",url:"https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx",note:"Hebrew"},
     mapLinks:[{label:"Gordon Beach",query:"Gordon Beach Tel Aviv Israel"},{label:"Frishman Beach",query:"Frishman Beach Tel Aviv Israel"}]
   },
@@ -58,8 +58,8 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"Best approached on foot from central Tel Aviv, the seafront or Allenby Street; parking nearby can be difficult.",
     image:{src:"/images/tel-aviv-attractions/carmel-market.webp",alt:"Carmel Market in central Tel Aviv"},
     mapLinks:[{label:"Carmel Market",query:"Carmel Market Tel Aviv Yafo Israel"},{label:"Nahalat Binyamin Arts Fair",query:"Nahalat Binyamin Arts and Crafts Fair Tel Aviv Israel"}],
-    official:{label:"Carmel Market — municipal page (Hebrew)",url:"https://www.tel-aviv.gov.il/Residents/Development/Pages/CarmelMarket.aspx",note:"Hebrew"},
-    additionalOfficial:{label:"Nahalat Binyamin Arts & Crafts Fair — official website",url:"https://nachalatbinyamin-tlv.com/en/"}
+    official:{label:"Carmel Market - municipal page (Hebrew)",url:"https://www.tel-aviv.gov.il/Residents/Development/Pages/CarmelMarket.aspx",note:"Hebrew"},
+    additionalOfficial:{label:"Nahalat Binyamin Arts & Crafts Fair - official website",url:"https://nachalatbinyamin-tlv.com/en/"}
   },
   {
     id:"neve-tzedek",title:"Explore Neve Tzedek's historic lanes",shortTitle:"Neve Tzedek",area:"South-central Tel Aviv",category:"Architecture & neighbourhoods",
@@ -70,7 +70,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"Walk from Jaffa or the southern centre. Nearby Red Line stops and buses can shorten the approach.",
     image:{src:neve,alt:"Restored historic houses and intimate streets of Neve Tzedek"},
     mapLinks:[{label:"Suzanne Dellal Centre",query:"Suzanne Dellal Centre Neve Tzedek Tel Aviv Israel"},{label:"Neve Tzedek",query:"Neve Tzedek Tel Aviv Israel"}],
-    official:{label:"Neve Tzedek heritage — Suzanne Dellal Centre",url:"https://suzannedellal.org.il/en/neve-tzedek/"}
+    official:{label:"Neve Tzedek heritage - Suzanne Dellal Centre",url:"https://suzannedellal.org.il/en/neve-tzedek/"}
   },
   {
     id:"white-city",title:"Follow Rothschild Boulevard through the White City",shortTitle:"Rothschild & White City",area:"Central Tel Aviv",category:"Bauhaus architecture & city life",
@@ -92,7 +92,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"The museum is east of the beachfront around Shaul HaMelech Boulevard. Use a bus, taxi or a longer walk from the central neighbourhoods.",
     image:{src:"/images/tel-aviv-attractions/tel-aviv-museum-of-art.webp",alt:"Entrance façade and sculpture outside Tel Aviv Museum of Art"},
     guide:{label:"My museums in Tel Aviv guide",to:"/travel-blog/museums-in-tel-aviv/"},
-    official:{label:"Tel Aviv Museum of Art — official visitor information",url:"https://www.tamuseum.org.il/en/visit/"},
+    official:{label:"Tel Aviv Museum of Art - official visitor information",url:"https://www.tamuseum.org.il/en/visit/"},
     mapLinks:[{label:"Tel Aviv Museum of Art",query:"Tel Aviv Museum of Art 27 Shaul Hamelech Tel Aviv Israel"}]
   },
   {

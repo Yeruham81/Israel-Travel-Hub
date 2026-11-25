@@ -256,10 +256,10 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   ],
   photoCredits: <p>
     Photographs (resized and cropped to WebP):{" "}
-    <a href="https://commons.wikimedia.org/wiki/File:The_cenotaph_of_David%27s_Tomb.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>David’s Tomb</a> — Jacek555, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 3.0</a>;{" "}
+    <a href="https://commons.wikimedia.org/wiki/File:The_cenotaph_of_David%27s_Tomb.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>David’s Tomb</a> - Jacek555, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 3.0</a>;{" "}
     <a href="https://commons.wikimedia.org/wiki/File:Jerusalem_-_Zion_gate.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Zion Gate</a> and{" "}
-    <a href="https://commons.wikimedia.org/wiki/File:Jerusalem_-_Oskar_Schindler%27s_Grave.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Oskar Schindler’s grave</a> — Marco Plassio, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 3.0</a>;{" "}
-    <a href="https://commons.wikimedia.org/wiki/File:Chamber_of_the_Holocaust_-_Outside_King_David%27s_Tomb_-_Jerusalem_-_Israel_-_02_(5676110809).jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Chamber of the Holocaust</a> — Adam Jones, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 2.0</a>. Source: Wikimedia Commons.
+    <a href="https://commons.wikimedia.org/wiki/File:Jerusalem_-_Oskar_Schindler%27s_Grave.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Oskar Schindler’s grave</a> - Marco Plassio, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 3.0</a>;{" "}
+    <a href="https://commons.wikimedia.org/wiki/File:Chamber_of_the_Holocaust_-_Outside_King_David%27s_Tomb_-_Jerusalem_-_Israel_-_02_(5676110809).jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Chamber of the Holocaust</a> - Adam Jones, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 2.0</a>. Source: Wikimedia Commons.
   </p>,
   sources: [
     { label: "Christian Information Center - holy site visiting hours", url: official.cicHours },
