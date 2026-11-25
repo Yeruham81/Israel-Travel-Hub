@@ -27,7 +27,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
   visitorTitle: "Opening hours, tickets and visitor information",
   visitorNavLabel: "Hours & tickets",
   relatedTitle: "Explore more around the Sea of Galilee",
-  contactIntroduction: "Tell me your travel date, pickup location and the Galilee places you would like to see. I'll be happy to help plan a private day trip that includes Magdala.",
+  contactIntroduction: "Tell me your date, pickup point and the Galilee places you would like to see. I can arrange a private day trip with a driver that includes Magdala.",
   facts: [
     { icon: "location", label: "Location", value: "Western Sea of Galilee", note: "Near Migdal and Tiberias" },
     { icon: "duration", label: "Time needed", value: "60–90 minutes", note: "Archaeology and Duc In Altum" },
