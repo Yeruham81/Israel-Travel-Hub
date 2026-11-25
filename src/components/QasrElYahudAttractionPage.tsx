@@ -30,7 +30,7 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
   visitorNavLabel: "Visit information",
   historyTitle: "A sacred place on the lower Jordan",
   relatedTitle: "Explore the Jordan Valley, Dead Sea and Jerusalem",
-  contactIntroduction: "Planning a visit to Qasr el-Yahud? Tell me your date, departure point, group size and whether you'd like to visit other places along the Dead Sea or around Jerusalem. I'll be happy to help arrange a suitable private journey.",
+  contactIntroduction: "Tell me your date, departure point, group size and whether you want other Dead Sea or Jordan Valley stops. I can arrange a private driver for a suitable journey to Qasr el-Yahud.",
   facts: [
     { icon: "location", label: "Location", value: "Lower Jordan River", note: "Near Jericho, north of the Dead Sea" },
     { icon: "duration", label: "Time needed", value: visit.visitorTime, note: "Longer if joining a baptism ceremony" },
