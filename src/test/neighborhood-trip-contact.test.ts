@@ -12,7 +12,7 @@ describe("Neighborhood contact panels focus on travel services, not hotel select
 
   it.each(["Jerusalem", "Tel Aviv"] as const)("offers trip planning and private transport in %s", (city) => {
     const copy = neighborhoodTripContactCopy(city);
-    expect(copy.heading).toBe(`Planning a trip to ${city}?`);
+    expect(copy.heading).toBe(`Need a private driver or transfer in ${city}?`);
     expect(copy.introduction).toMatch(/airport transfer/i);
     expect(copy.introduction).toMatch(/private (driver|ride)/i);
     expect(copy.introduction).toMatch(/day trip/i);
