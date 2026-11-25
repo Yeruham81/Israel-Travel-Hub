@@ -1,4 +1,4 @@
-import { ESIM_UPDATED, esimProviders, esimPicks, esimFixedPlans, esimUnlimitedPlans, esimFairUse, esimFeatureRows, esimUsd, esimPriceEvidence, drimsimEurPerMb, type EsimPlan } from "@/data/esimIsraelPlans";
+import { ESIM_UPDATED, esimProviders, esimPicks, esimFixedPlans, esimUnlimitedPlans, esimFairUse, esimFeatureRows, esimUsd, esimPlanPrice, drimsimEurPerMb, type EsimPlan } from "@/data/esimIsraelPlans";
 import { GuideTags, GuidePhotoCredit, GuideCard } from "@/components/GuideCard";
 export { GuideTags, GuidePhotoCredit, GuideCard } from "@/components/GuideCard";
 import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
@@ -241,7 +241,7 @@ function EsimProviderLink({ name, providers, children }: { name: string; provide
 }
 
 function EsimPrice({ plan, showDays = true }: {plan: EsimPlan; showDays?: boolean}) {
-  return <span className="block tabular-nums"><strong>{esimUsd(plan.usd)}</strong>{plan.regularUsd !== undefined && <del className="ml-1 text-xs text-muted-foreground">{esimUsd(plan.regularUsd)}</del>}{showDays && <span className="block text-xs text-muted-foreground">{plan.days} days</span>}{esimPriceEvidence(plan) && <span className="block text-xs text-muted-foreground">{esimPriceEvidence(plan)}</span>}</span>;
+  return <span className="block tabular-nums"><strong>{esimPlanPrice(plan)}</strong>{plan.regularUsd !== undefined && <del className="ml-1 text-xs text-muted-foreground">{esimUsd(plan.regularUsd)}</del>}{showDays && <span className="block text-xs text-muted-foreground">{plan.days} days</span>}</span>;
 }
 function EsimPickCards({ providers }: { providers: ReturnType<typeof linksForPage> }) {
   const icons = [Plane, BedDouble, Smartphone, Waves];
@@ -274,11 +274,11 @@ function EsimFixedComparison({ providers }: { providers: ReturnType<typeof links
     const plans=esimFixedPlans.filter(p=>p.provider===name&&p.gb===gb);
     return plans.length?<div className="space-y-2">{plans.map(plan=><EsimPrice key={plan.days} plan={plan}/>)}</div>:"—";
   })])}/>
-  <p className="mt-2 text-xs text-muted-foreground">Dash: no matching offer in this comparison. GigSky's promotional fixed prices were checked by the publisher; prices marked Price index are dated third-party listings rather than confirmed checkout quotes.</p></>;
+  <p className="mt-2 text-xs text-muted-foreground">— = no matching offer listed. Prices shown in USD.</p></>;
 }
 function EsimUnlimitedComparison({ providers }: {providers: ReturnType<typeof linksForPage>}) {
-  return <><EsimComparisonTable caption="Unlimited eSIM plans by duration" headers={["Provider","7 days","15 days","30 days","Daily high-speed data"]} rows={esimProviders.map(name=>[<EsimProviderLink name={name} providers={providers}/>,...[7,15,30].map(days=>{const plan=esimUnlimitedPlans.find(p=>p.provider===name&&p.days===days);return plan?<EsimPrice plan={plan} showDays={false}/>:"Price not verified";}),esimFairUse[name]])}/>
-    <p className="mt-2 text-xs text-muted-foreground">Saily's earlier 30-day price and the GigSky and Yesim index prices are reference prices; check the current offer before choosing. The daily allowance is separate from the length of the plan.</p></>;
+  return <><EsimComparisonTable caption="Unlimited eSIM plans by duration" headers={["Provider","7 days","15 days","30 days","Daily high-speed data"]} rows={esimProviders.map(name=>[<EsimProviderLink name={name} providers={providers}/>,...[7,15,30].map(days=>{const plan=esimUnlimitedPlans.find(p=>p.provider===name&&p.days===days);return plan?<EsimPrice plan={plan} showDays={false}/>:"—";}),esimFairUse[name]])}/>
+    <p className="mt-2 text-xs text-muted-foreground">— = no matching offer listed. Prices shown in USD ($) or EUR (€).</p></>;
 }
 function EsimFeatures({ providers }: {providers: ReturnType<typeof linksForPage>}) {
   return <EsimComparisonTable caption="eSIM provider features" headers={["Provider","Network / speed","Hotspot","Top-up","Calls & SMS","Activation","Support"]} rows={esimFeatureRows.map(([name,...features])=>[<EsimProviderLink name={name!} providers={providers}/>,...features])}/>;
@@ -343,7 +343,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{id === "esim" ? emphasizeEsimNames(guide.answer) : guide.answer}</p>
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
-      {id === "esim" && <><EsimPickCards providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Prices reviewed {new Date(ESIM_UPDATED + "T12:00:00Z").toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric",timeZone:"UTC"})} (USD except where marked). Dated reference prices are labelled; promotions and checkout totals may vary. Providers may display prices in your local currency.</p></>}
+      {id === "esim" && <><EsimPickCards providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Prices reviewed {new Date(ESIM_UPDATED + "T12:00:00Z").toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric",timeZone:"UTC"})} (USD except where marked). Providers may display prices in your local currency.</p></>}
       {isTransportOverview && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-3">
         {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p>

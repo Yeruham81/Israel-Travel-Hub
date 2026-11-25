@@ -14,14 +14,16 @@ describe("travel guide topic filters and prerender safety", () => {
     expect(guide.sections.map(s=>s.id)).toEqual(["short-trip","unlimited","features","long-trip","payg","regional","compatibility","calling","coverage","setup"]);
     expect(guide.facts).toHaveLength(4);
     expect(guide.comparison.rows).toHaveLength(4);
-    expect(esimPicks.map(p=>p.plan)).toEqual([esimPlan("Saily",3,30),esimPlan("Saily",5,30),esimPlan("Airalo",10,30),esimPlan("GigSky","Unlimited",30)]);
-    expect(esimFixedPlans.filter(p=>p.provider==="GigSky").map(p=>[p.gb,p.days,p.usd])).toEqual([[1,7,4.99],[3,15,10.79],[5,30,16.79],[10,30,29.19]]);
+    expect(esimPicks.map(p=>p.plan)).toEqual([esimPlan("Saily",3,30),esimPlan("Saily",5,30),esimPlan("Airalo",10,30),esimPlan("Airalo","Unlimited",30)]);
+    expect(esimFixedPlans.filter(p=>p.provider==="GigSky").map(p=>[p.gb,p.days,p.amount])).toEqual([[1,7,4.99],[3,15,10.79],[5,30,16.79],[10,30,29.19]]);
     expect(esimPlan("GigSky",5,30).regularUsd).toBe(20.99);
-    expect(esimUnlimitedPlans.filter(p=>p.provider==="GigSky").every(p=>p.evidence==="comparison")).toBe(true);
+    expect(esimUnlimitedPlans.filter(p=>p.provider==="GigSky"||p.provider==="Saily")).toHaveLength(0);
+    expect(esimUnlimitedPlans.filter(p=>p.provider==="Yesim").map(p=>[p.days,p.amount,p.currency])).toEqual([[7,21.7,"EUR"],[15,35,"EUR"],[30,55,"EUR"]]);
+    expect(guide.comparison.rows.filter(row=>row[0]==="Saily"||row[0]==="GigSky").flatMap(row=>row.slice(1,4))).toEqual(["—","—","—","—","—","—"]);
     expect(esimUnlimitedPlans.filter(p=>p.provider==="Airalo").map(p=>p.days)).toEqual([3,5,7,10,15,30]);
     const plans=[...esimFixedPlans,...esimUnlimitedPlans];
     expect(new Set(plans.map(p=>[p.provider,p.gb,p.days].join("/"))).size).toBe(plans.length);
-    expect(plans.every(p=>p.usd>0&&p.days>0&&p.checkedAt<=ESIM_UPDATED&&p.sourceId.startsWith("guide-esim-"))).toBe(true);
+    expect(plans.every(p=>p.amount>0&&p.days>0&&p.checkedAt<=ESIM_UPDATED&&p.sourceId.startsWith("guide-esim-"))).toBe(true);
     expect(guide.sections.find(s=>s.id==="compatibility")?.externalLinks?.[0]?.href).toBe(AIRALO_COMPATIBILITY_AFFILIATE_URL);
     expect(guide.sections.find(s=>s.id==="regional")?.externalLinks?.[0]?.href).toBe(AIRALO_MENA_AFFILIATE_URL);
     for(const link of [AIRALO_COMPATIBILITY_AFFILIATE_URL,AIRALO_MENA_AFFILIATE_URL]){
