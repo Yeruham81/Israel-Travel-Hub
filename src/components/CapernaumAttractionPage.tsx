@@ -49,7 +49,7 @@ const page: AttractionDestinationContent = {
   historyTitle: "History and biblical significance",
   relatedTitle: "Explore related sites",
   updatedAt: capernaumSite.updatedAt,
-  contactIntroduction: "Tell me when you’re planning to visit, where you’d like to start and which places interest you most. I’ll be happy to help arrange a private day trip around your plans.",
+  contactIntroduction: "Tell me when you plan to visit, where you are starting and which Galilee sites interest you. I can arrange a private day trip with a driver including Capernaum.",
   hero: capernaumSite.hero,
   intro: capernaumSite.intro,
   facts: [
