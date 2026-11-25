@@ -560,7 +560,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
   jerusalem: {
     id: "jerusalem",
     city: "Jerusalem",
-    reviewedAt: "2026-11-18",
+    reviewedAt: "2026-11-26",
     areaIntro: "For a first visit, Downtown is a practical starting point. Mamilla puts luxury hotels close to Jaffa Gate; the Old City offers the most immersive historic stay. Choose the market for food and nightlife, the northern East Jerusalem hotel district for Damascus Gate, or the German Colony and Baka for a more residential base.",
     quickPicks: [
       { areaId: "downtown", label: "Best for a first visit", description: "Restaurants, light rail and walkable sights" },
@@ -568,8 +568,8 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       { areaId: "german-colony", label: "Best for a residential stay", description: "Neighbourhood cafés and quieter streets" },
     ],
     path: "/accommodation/jerusalem/",
-    title: "Hotels in Jerusalem: my picks by neighborhood",
-    metaDescription: "Where to stay in Jerusalem: compare Downtown, Mamilla, the Old City and quieter areas for sightseeing, hotel choice and luggage access.",
+    title: "Hotels in Jerusalem: My Picks by Neighborhood",
+    metaDescription: "Browse my selected Jerusalem hotels in Downtown, Mamilla, the Old City and other areas. Filter hotel picks by neighborhood and check booking options.",
     intro: "Jerusalem offers very different places to stay, from lively Downtown and Mamilla to the historic Old City and quieter residential neighborhoods. Explore my hotel picks and find the right base for your visit.",
     overview: [
       "Most first-time visitors want to be within walking distance of the Old City gates. The western city centre gives that plus restaurants and the light rail; staying inside the walls is atmospheric but involves stairs, cobbles and limited vehicle access.",
@@ -602,7 +602,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
   telaviv: {
     id: "telaviv",
     city: "Tel Aviv",
-    reviewedAt: "2026-11-18",
+    reviewedAt: "2026-11-26",
     areaIntro: "Start with the beachfront for sea and promenade time, or Dizengoff for a central café base. Choose the Old North for parks and northern beaches, Neve Tzedek or Jaffa for historic character, Florentin for nightlife, Kerem HaTeimanim for food and the coast, or Rothschild for architecture and restaurants.",
     quickPicks: [
       { areaId: "telaviv-beachfront", label: "Sea & a first visit", description: "Central beaches and the Mediterranean promenade" },
@@ -610,8 +610,8 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       { areaId: "telaviv-jaffa", label: "A historic stay", description: "Old Jaffa, the port and flea-market evenings" },
     ],
     path: "/accommodation/tel-aviv/",
-    title: "Tel Aviv hotels: browse by neighborhood",
-    metaDescription: "Where to stay in Tel Aviv: compare beachfront hotels, Dizengoff, Jaffa and quieter areas for beach access, nightlife and arrival.",
+    title: "Tel Aviv Hotels: Browse by Neighborhood",
+    metaDescription: "Browse selected Tel Aviv hotels across eight neighborhoods, from the beaches to Jaffa. Filter my hotel picks and explore room booking options.",
     intro: "Eight Tel Aviv hotel districts offer different tradeoffs: beachfront access, central walking routes, southern markets, Jaffa's historic streets and nightlife.",
     overview: [
       "Use the coast to orient yourself, then choose between a beachfront hotel, a boutique property near Dizengoff or a stay in Jaffa. Compare the actual street, the places you will visit and the room's outlook before choosing.",

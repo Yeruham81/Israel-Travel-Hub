@@ -59,7 +59,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
         <section id="areas" aria-labelledby="areas-h" className="mt-12 scroll-mt-28">
           <h2 id="areas-h" className="text-2xl font-semibold sm:text-3xl">Choose your Jerusalem neighborhood</h2>
           <p className="mt-3 w-full text-pretty leading-relaxed text-muted-foreground">
-            {g.areaIntro}
+            Browse hotel shortlists in six Jerusalem neighborhoods. Use the travel-style filters to find an area, then open its hotel page to compare properties and booking options.
           </p>
           <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Choose areas by travel style">
             <button
@@ -115,24 +115,22 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
 
         <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-28">
           <h2 id="compare-h" className="text-2xl font-semibold sm:text-3xl">Compare areas in Jerusalem</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Compare walking distances to the Old City, public transport and hotel access in each neighborhood.</p>
+          <p className="mt-2 text-sm text-muted-foreground">Compare the accommodation range and luggage access, then open the matching hotel shortlist. My Where to Stay guide covers the neighborhoods in greater detail.</p>
           <div className="mt-4 overflow-hidden rounded-2xl border bg-card">
             <div className="overflow-x-auto" role="region" aria-label="Jerusalem neighborhood comparison" tabIndex={0}>
               <table className="w-full min-w-[680px] text-left text-sm">
                 <caption className="sr-only">Jerusalem neighborhoods, ideal guests, arrival considerations and tradeoffs</caption>
                 <thead className="bg-secondary">
                   <tr>
-                    {["Area", "Best for", "Arriving with bags", "Keep in mind"].map((label) => <th key={label} scope="col" className="px-4 py-3 font-semibold">{label}</th>)}
+                    {["Area", "Accommodation", "Arriving with bags", "Hotels"].map((label) => <th key={label} scope="col" className="px-4 py-3 font-semibold">{label}</th>)}
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   {areas.map((area) => <tr key={area.id}>
-                    <th scope="row" className="px-4 py-3 font-semibold">
-                      <Link to={area.path as LinkProps["to"]} className="text-primary underline underline-offset-2">{area.shortName}</Link>
-                    </th>
-                    <td className="px-4 py-3">{area.bestFor}</td>
+                    <th scope="row" className="px-4 py-3 font-semibold">{area.shortName}</th>
+                    <td className="px-4 py-3">{area.priceLevel}</td>
                     <td className="max-w-60 px-4 py-3">{areaArrivalSignals[area.id] || area.arrivalTips[0]}</td>
-                    <td className="max-w-60 px-4 py-3 text-muted-foreground">{area.watch}</td>
+                    <td className="px-4 py-3"><Link to={area.path as LinkProps["to"]} className="font-semibold text-primary underline underline-offset-2">Browse hotels</Link></td>
                   </tr>)}
                 </tbody>
               </table>
@@ -160,7 +158,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
 
         <FaqList faqs={g.faqs} compact />
         <StayTripLinks region="jerusalem" currentPath={g.path} />
-        <HomeContactForm guide={guideContactCopy(g.title, "accommodation", g.city)} />
+        <HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy(g.title, "accommodation", g.city)} />
         <SourceList ids={g.sourceIds} />
         <AreaPhotoCredit areas={areas} />
         <CityHotelPhotoCredits city="jerusalem" />
