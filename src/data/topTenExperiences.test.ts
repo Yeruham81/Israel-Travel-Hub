@@ -74,7 +74,7 @@ describe("Top 10 Israel experiences guide", () => {
     expect(page).toContain("related.map");
     expect(page).toContain("planning.map");
     expect(page).toContain('ref={mapRef}');
-    expect(page).toContain("HomeContactForm guide={guideContactCopy");
+    expect(page).toContain('<HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy("Top 10 Things to Do in Israel", "itinerary", "Israel")} />');
     expect(page.indexOf("<HomeContactForm")).toBeLessThan(page.indexOf("<SourcesDisclosure>"));
     expect(page).not.toContain("israel-taxi.com");
     expect(page).not.toContain("20" + "27");

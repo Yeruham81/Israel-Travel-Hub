@@ -9,7 +9,7 @@ export const jerusalemTopicCards = [
   {title:"Mount of Olives",to:"/attractions/mount-of-olives/",description:"Plan panoramic viewpoints, hillside churches and a realistic downhill walk.",cta:"Visit the Mount of Olives"},
   {title:"Mount Zion",to:"/attractions/mount-zion/",description:"Explore the Cenacle, Dormition Abbey and sacred places near Zion Gate.",cta:"Explore Mount Zion"},
   {title:"Museums in Jerusalem",to:"/travel-blog/museums-in-jerusalem/",description:"Choose the Israel Museum, Yad Vashem, Tower of David and more.",cta:"Compare Jerusalem museums"},
-  {title:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/",description:"Find meaningful pilgrimage visits by area, not just a long list.",cta:"Plan church visits"},
+  {title:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/",description:"Find pilgrimage sites grouped by neighbourhood.",cta:"Plan church visits"},
   {title:"Shopping & markets",to:"/travel-blog/shopping-in-jerusalem/",description:"Discover Mahane Yehuda, Old City markets, crafts and downtown streets.",cta:"Discover markets and shops"},
 ] as const;
 

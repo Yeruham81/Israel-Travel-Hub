@@ -123,7 +123,7 @@ function RegionCards(){
 }
 function SeasonSections(){
   return <section id="seasons" aria-labelledby="seasons-heading" className="mt-12 scroll-mt-24">
-    <SectionHeading id="seasons" title="Israel through the four seasons" intro="Each season can work for a different kind of trip. Here is how I would plan the activities, not just the packing list."/>
+    <SectionHeading id="seasons" title="Israel through the four seasons" intro="Here is how I would plan sightseeing and outdoor activities in each season."/>
     <div className="space-y-10">
       {seasonDetails.map((season,i)=>{
         const photo=photoBySeason[season.id];
@@ -152,7 +152,7 @@ function HolidayAndWeather(){
         <div className="mt-4 text-sm"><Link className="font-semibold text-primary hover:underline" to="/travel-blog/calendar-of-events/">Israel’s calendar of events</Link></div>
       </article>
       <article className="rounded-xl border bg-card p-4 sm:p-5">
-        <h3 className="text-lg font-bold">Check your whole journey, not just the air temperature</h3>
+        <h3 className="text-lg font-bold">Plan for regional weather and daylight</h3>
         <p className="mt-2 text-sm leading-relaxed">A Jerusalem morning may call for a jacket while a stop near the Dead Sea needs sun protection. Rain, sea conditions and wind can matter as much as temperature. In winter, shorter daylight affects opening hours and how many outdoor stops you can enjoy.</p>
         <p className="mt-3 text-sm leading-relaxed">Hotel prices depend on location, events, demand and school holidays. I recommend comparing the total trip cost, including flights and accommodation.</p>
         <p className="mt-3 text-sm"><External href="https://ims.gov.il/en/ClimateAtlas">Official climate information</External></p>

@@ -125,7 +125,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
       "From the eastern side of Downtown, allow roughly 10–15 minutes to walk to Jaffa Gate; hotels farther west take longer. Mahane Yehuda is usually a walk of about 10–20 minutes or a short light-rail journey. These are orientation estimates, not timed routes from every hotel.",
       "Arriving from Jerusalem–Yitzhak Navon station normally involves a separate ride or light-rail journey to your hotel. Many central streets are pedestrianized, so confirm the nearest permitted taxi stop. For a Shabbat arrival, check the actual transport service and your hotel's check-in instructions in advance.",
     ],
-    arrivalTips: ["Ask for the closest vehicle-accessible entrance, not just a postal address.", "Check the walking route from your light-rail stop with luggage.", "Light sleepers should ask about inward-facing rooms and nearby bars."],
+    arrivalTips: ["Ask for the closest vehicle-accessible entrance.", "Check the walking route from your light-rail stop with luggage.", "Light sleepers should ask about inward-facing rooms and nearby bars."],
     bookingTips: ["Check whether breakfast is included in the room rate you choose.", "If you have a car, get the car park's exact location and total charge in writing."],
     faqs: [
       { q: "Is Downtown the same as Jerusalem's Old City?", a: "No. Downtown is outside the walls, mainly around Jaffa Road and Ben Yehuda Street. You walk east toward Jaffa Gate to enter the Old City." },
@@ -778,7 +778,7 @@ export const deadSeaStayGuide: HotelStayDestination = {
     { name: "Ein Gedi", text: "An inland nature-focused alternative north of the resort strip. Choose it for the surrounding landscape and local outings; plan a separate journey if you want to visit an operating Dead Sea beach." },
   ],
   arrival: [
-    "Arrange the journey to the exact hotel, not simply to 'the Dead Sea'. Hotels around Ein Bokek, the southern resort district and Ein Gedi are different destinations. If arriving by bus, check the stop and the final walk with luggage; for a driver, confirm the entrance and return pickup.",
+    "Arrange transport to your exact hotel. Hotels around Ein Bokek, the southern resort district and Ein Gedi are different destinations. If arriving by bus, check the stop and the final walk with luggage; for a driver, confirm the entrance and return pickup.",
     "A car or a booked driver is useful for combining your stay with Masada and other sites along Route 90. Check current transport services, attraction access and hotel check-in for your travel date, especially Friday evening, Saturday and holidays. Reserve child seats or accessible transport where needed.",
   ],
   groups: [
@@ -798,7 +798,7 @@ export const deadSeaStayGuide: HotelStayDestination = {
   ],
   faqs: [
     { q: "Does this guide include hotels in Jordan?", a: "No. It covers hotels on the Israeli side of the Dead Sea, including Ein Bokek, the southern hotel district near Neve Zohar and alternatives near Ein Gedi. Confirm the country and exact property on any booking platform." },
-    { q: "Should I choose Ein Bokek or the southern hotel district?", a: "Ein Bokek is useful if you want the promenade, shops and outside dining within easier reach. The southern resorts suit a stay centered on the hotel's own beach, meals and facilities. Choose the actual property and arrival route rather than the area name alone." },
+    { q: "Should I choose Ein Bokek or the southern hotel district?", a: "Ein Bokek is useful if you want the promenade, shops and outside dining within easier reach. The southern resorts suit a stay centered on the hotel's own beach, meals and facilities. Compare the individual hotels and their arrival routes." },
     { q: "Which Dead Sea hotel has an all-inclusive format?", a: "Leonardo Club Dead Sea is marketed by its operator as all-inclusive. Check the exact package, drinks, meal times and activity inclusions. Other hotels' breakfast or half-board rates are different products; the family guide explains how to compare them." },
     { q: "Does having a spa mean the hotel is adults-only?", a: "No. A hotel can accept families while restricting spa entry to older guests. Noga, for example, lists spa entry from age 16. Oasis Spa Club has a separate age-restricted hotel policy. Check the hotel's admission rules and each facility's age limit separately." },
     { q: "Can I choose Ein Gedi for a beachfront holiday?", a: "Choose Ein Gedi for a nature-focused stay. A view of the water and a Dead Sea water spa pool are different from an operating beach. Confirm your beach plan and transport before booking." },
@@ -1085,7 +1085,7 @@ const haifaCategoryGuides: HotelCategoryGuide[] = [
     ],
     detailTitle: "Swimming dates, family-room layouts & the real trip total",
     details: [
-      { title: "Check the facilities for the dates, not just the photograph", text: "Ask about current pool opening, children's access, adult supervision and any maintenance. Leonardo Plaza's published children's club schedule covers weekends, holidays and July–August; verify the actual dates and age groups. Crowne Plaza's indoor pool does not imply a children's club, while Dan Carmel's outdoor and children's pools need a seasonal check." },
+      { title: "Check family facilities for your travel dates", text: "Ask about current pool opening, children's access, adult supervision and any maintenance. Leonardo Plaza's published children's club schedule covers weekends, holidays and July–August; verify the actual dates and age groups. Crowne Plaza's indoor pool does not imply a children's club, while Dan Carmel's outdoor and children's pools need a seasonal check." },
       { title: "Book the right room category for every child", text: "Enter all adults and every child's age on the booking site. Compare a single family room, a suite and connecting rooms as different layouts. Dan Carmel's published room categories have different occupancy limits, and lounge or executive-floor restrictions are separate. Get an essential internal connection or cot confirmed in writing." },
       { title: "Include Haifa's hills in the plan", text: "A Carmel hotel can suit viewpoints and outings while requiring transport for beach time. A beachfront hotel creates the opposite tradeoff for visits to the German Colony or higher city. Check walking routes with a stroller, hotel parking and child-seat arrangements with your driver." },
       { title: "Compare meals and outings in the family total", text: "Read the actual meal basis and any children's dining promotion. A breakfast rate, a conditional dining offer and a broader package are different products. Add parking, transport, lunches and other meals to compare the same dates and cancellation conditions fairly." },
@@ -1159,7 +1159,7 @@ export const hotelCategoryGuides: HotelCategoryGuide[] = [
     photo: deadSeaPhotos.sunbeds,
     overview: [
       "Start by separating the hotel stay from the spa experience. A property may advertise mineral-water pools and treatment rooms while charging separately for massages, sulfur pools or particular access packages. Compare the total cost including the facilities you plan to use.",
-      "The shortlist below compares different settings rather than awarding one universal winner. Nevo combines a broad resort format with the Esprit Spa; Oasis Spa Club focuses on an age-restricted wellness stay. Herods adds a southern beachfront setting, Milos offers a low-rise design format, and Noga is an alternative with two Dead Sea water pools.",
+      "Nevo combines a broad resort format with the Esprit Spa; Oasis Spa Club focuses on an age-restricted wellness stay. Herods adds a southern beachfront setting, Milos offers a low-rise design format, and Noga is an alternative with two Dead Sea water pools.",
       "A spa hotel can still welcome families. Check whole-hotel guest ages separately from access to mineral pools, saunas, gyms and treatments. The same distinction matters for beach access: a saltwater pool inside the hotel is different from an operating beach on the shore.",
     ],
     decisions: [

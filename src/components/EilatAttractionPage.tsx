@@ -209,7 +209,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <AttractionPracticalTip>My first-visit priorities would be one reef experience, one non-water activity and an early desert outing. Do not try to fit Timna Park, Red Canyon, the observatory and a full beach afternoon into a single day.</AttractionPracticalTip>
   </div>,
   itineraryContent: <div className="mt-4 space-y-4" data-testid="eilat-suggested-itineraries">
-    <p>The best plan depends on whether you want mostly beach time or a mix of Red Sea and desert scenery. These are flexible outlines rather than fixed-hour tours.</p>
+    <p>The best plan depends on whether you want mostly beach time or a mix of Red Sea and desert scenery. Adapt the suggested days to your pace.</p>
     <div className="grid gap-4 md:grid-cols-3">
       <article className="rounded-xl border bg-card p-4">
         <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">One day: the Red Sea</h3></div>
@@ -299,7 +299,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <p>Prefer a booked activity? These are three different ways to experience Eilat, selected from existing Viator and GetYourGuide listings. They are provided by independent operators, not by me. Availability, exact meeting points and whether the activity is running must be confirmed with the provider.</p>
     <EilatPartnerTours/>
     <p className="text-xs leading-relaxed text-muted-foreground">Check current prices, reviews, available dates, inclusions and cancellation terms on the booking website.</p>
-    <p>For a wider choice, <Link to="/tours/eilat-red-sea/" className={inlineLink}>explore all Eilat & Red Sea tours</Link>. If your priority is transport to several attractions rather than an organised group activity, use the inquiry form below.</p>
+    <p>For a wider choice, <Link to="/tours/eilat-red-sea/" className={inlineLink}>explore all Eilat & Red Sea tours</Link>. Contact me below to arrange private transport between attractions.</p>
   </div>,
   faqs: [
     { q: "How many days should I spend in Eilat?", a: "Two or three days allow for marine attractions, the waterfront and at least one desert excursion. A single day can cover a limited set of highlights, but not everything comfortably." },

@@ -110,7 +110,7 @@ export const bestTimeGuide: TravelGuide = {
   checklist:[
     "Choose the regions and experiences before the month",
     "Compare holiday dates for the specific travel year",
-    "Check each day's local forecast, not only the coastal forecast",
+    "Check the local forecast for each day's destinations",
     "Plan indoor alternatives for heat or rain",
     "Check desert flood and park-closure warnings",
     "Compare complete trip costs, arrival day and Shabbat transport"

@@ -353,7 +353,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
           {directions("Turkish Market, Haifa, Israel", "Find the Turkish Market")}
         </article>
       </div>
-      <p>For dishes to look out for across the country, see my <Link to="/travel-blog/what-to-eat-in-israel/" className={inlineLink}>guide to Israeli food</Link>. I would choose one area for a meal rather than cross the city several times just to visit restaurants.</p>
+      <p>For dishes to look out for across the country, see my <Link to="/travel-blog/what-to-eat-in-israel/" className={inlineLink}>guide to Israeli food</Link>. I would choose a restaurant in the neighbourhood you are visiting.</p>
     </div>
   ),
   practicalContent: (
