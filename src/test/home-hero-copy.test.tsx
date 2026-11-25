@@ -62,7 +62,7 @@ describe("homepage marketing copy and service sections", () => {
       "What Travelers Say",
       "Practical Israel Travel Guides",
       "Personal Messages from Past Clients",
-      "Send me a message",
+      "Need a private transfer or day trip in Israel?",
     ];
     const actualHeadings = screen.getAllByRole("heading", { level: 2 }).map(heading => heading.textContent);
     expect(actualHeadings).toEqual(sectionHeadings);
