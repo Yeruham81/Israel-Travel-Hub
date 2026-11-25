@@ -232,7 +232,7 @@ export function TelAvivMuseumsGuide() {
       </section>
 
       <section id="by-area" aria-labelledby="by-area-heading" className="mt-12 scroll-mt-24">
-        <SectionHeading id="by-area" title="Explore museums by area" intro="These clusters make it easier to choose what to visit together. I recommend two or three nearby stops rather than racing across the city." />
+        <SectionHeading id="by-area" title="Explore museums by area" intro="I recommend grouping two or three nearby museums into a single outing." />
         {museumAreas.map((area, index) => <section key={area.id} id={"area-" + area.id} aria-label={area.name} className="mt-9 scroll-mt-24">
           <h3 className="text-2xl font-semibold">{area.name}</h3>
           <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
