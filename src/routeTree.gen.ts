@@ -86,7 +86,6 @@ import { Route as TravelBlogDeadSeaAttractionsRouteImport } from './routes/trave
 import { Route as TravelBlogFromBenGurionAirportOnShabbatRouteImport } from './routes/travel-blog.from-ben-gurion-airport-on-shabbat'
 import { Route as TravelBlogGettingAroundIsraelRouteImport } from './routes/travel-blog.getting-around-israel'
 import { Route as TravelBlogGettingAroundTelAvivRouteImport } from './routes/travel-blog.getting-around-tel-aviv'
-import { Route as TravelBlogHaifaRouteImport } from './routes/travel-blog.haifa'
 import { Route as TravelBlogIsraelItinerary10DaysRouteImport } from './routes/travel-blog.israel-itinerary-10-days'
 import { Route as TravelBlogIsraelItinerary3DaysRouteImport } from './routes/travel-blog.israel-itinerary-3-days'
 import { Route as TravelBlogIsraelItinerary5DaysRouteImport } from './routes/travel-blog.israel-itinerary-5-days'
@@ -99,12 +98,10 @@ import { Route as TravelBlogJerusalemTravelGuideRouteImport } from './routes/tra
 import { Route as TravelBlogMuseumsInHaifaRouteImport } from './routes/travel-blog.museums-in-haifa'
 import { Route as TravelBlogMuseumsInJerusalemRouteImport } from './routes/travel-blog.museums-in-jerusalem'
 import { Route as TravelBlogMuseumsInTelAvivRouteImport } from './routes/travel-blog.museums-in-tel-aviv'
-import { Route as TravelBlogSeaOfGalileeRouteImport } from './routes/travel-blog.sea-of-galilee'
 import { Route as TravelBlogSherutInIsraelRouteImport } from './routes/travel-blog.sherut-in-israel'
 import { Route as TravelBlogShoppingInJerusalemRouteImport } from './routes/travel-blog.shopping-in-jerusalem'
 import { Route as TravelBlogTaxiFaresInIsraelRouteImport } from './routes/travel-blog.taxi-fares-in-israel'
 import { Route as TravelBlogTaxisInIsraelRouteImport } from './routes/travel-blog.taxis-in-israel'
-import { Route as TravelBlogTheDeadSeaRouteImport } from './routes/travel-blog.the-dead-sea'
 import { Route as TravelBlogTop10ThingsToDoInIsraelRouteImport } from './routes/travel-blog.top-10-things-to-do-in-israel'
 import { Route as TravelBlogUberInIsraelRouteImport } from './routes/travel-blog.uber-in-israel'
 import { Route as TravelBlogWhatToEatInIsraelRouteImport } from './routes/travel-blog.what-to-eat-in-israel'
@@ -554,11 +551,6 @@ const TravelBlogGettingAroundTelAvivRoute =
     path: '/travel-blog/getting-around-tel-aviv',
     getParentRoute: () => rootRouteImport,
   } as any)
-const TravelBlogHaifaRoute = TravelBlogHaifaRouteImport.update({
-  id: '/travel-blog/haifa',
-  path: '/travel-blog/haifa',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TravelBlogIsraelItinerary10DaysRoute =
   TravelBlogIsraelItinerary10DaysRouteImport.update({
     id: '/travel-blog/israel-itinerary-10-days',
@@ -631,11 +623,6 @@ const TravelBlogMuseumsInTelAvivRoute =
     path: '/travel-blog/museums-in-tel-aviv',
     getParentRoute: () => rootRouteImport,
   } as any)
-const TravelBlogSeaOfGalileeRoute = TravelBlogSeaOfGalileeRouteImport.update({
-  id: '/travel-blog/sea-of-galilee',
-  path: '/travel-blog/sea-of-galilee',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TravelBlogSherutInIsraelRoute =
   TravelBlogSherutInIsraelRouteImport.update({
     id: '/travel-blog/sherut-in-israel',
@@ -657,11 +644,6 @@ const TravelBlogTaxiFaresInIsraelRoute =
 const TravelBlogTaxisInIsraelRoute = TravelBlogTaxisInIsraelRouteImport.update({
   id: '/travel-blog/taxis-in-israel',
   path: '/travel-blog/taxis-in-israel',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TravelBlogTheDeadSeaRoute = TravelBlogTheDeadSeaRouteImport.update({
-  id: '/travel-blog/the-dead-sea',
-  path: '/travel-blog/the-dead-sea',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TravelBlogTop10ThingsToDoInIsraelRoute =
@@ -914,7 +896,6 @@ export interface FileRoutesByFullPath {
   '/travel-blog/from-ben-gurion-airport-on-shabbat': typeof TravelBlogFromBenGurionAirportOnShabbatRoute
   '/travel-blog/getting-around-israel': typeof TravelBlogGettingAroundIsraelRoute
   '/travel-blog/getting-around-tel-aviv': typeof TravelBlogGettingAroundTelAvivRoute
-  '/travel-blog/haifa': typeof TravelBlogHaifaRoute
   '/travel-blog/israel-itinerary-10-days': typeof TravelBlogIsraelItinerary10DaysRoute
   '/travel-blog/israel-itinerary-3-days': typeof TravelBlogIsraelItinerary3DaysRoute
   '/travel-blog/israel-itinerary-5-days': typeof TravelBlogIsraelItinerary5DaysRoute
@@ -927,12 +908,10 @@ export interface FileRoutesByFullPath {
   '/travel-blog/museums-in-haifa': typeof TravelBlogMuseumsInHaifaRoute
   '/travel-blog/museums-in-jerusalem': typeof TravelBlogMuseumsInJerusalemRoute
   '/travel-blog/museums-in-tel-aviv': typeof TravelBlogMuseumsInTelAvivRoute
-  '/travel-blog/sea-of-galilee': typeof TravelBlogSeaOfGalileeRoute
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/taxi-fares-in-israel': typeof TravelBlogTaxiFaresInIsraelRoute
   '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
-  '/travel-blog/the-dead-sea': typeof TravelBlogTheDeadSeaRoute
   '/travel-blog/top-10-things-to-do-in-israel': typeof TravelBlogTop10ThingsToDoInIsraelRoute
   '/travel-blog/uber-in-israel': typeof TravelBlogUberInIsraelRoute
   '/travel-blog/what-to-eat-in-israel': typeof TravelBlogWhatToEatInIsraelRoute
@@ -1042,7 +1021,6 @@ export interface FileRoutesByTo {
   '/travel-blog/from-ben-gurion-airport-on-shabbat': typeof TravelBlogFromBenGurionAirportOnShabbatRoute
   '/travel-blog/getting-around-israel': typeof TravelBlogGettingAroundIsraelRoute
   '/travel-blog/getting-around-tel-aviv': typeof TravelBlogGettingAroundTelAvivRoute
-  '/travel-blog/haifa': typeof TravelBlogHaifaRoute
   '/travel-blog/israel-itinerary-10-days': typeof TravelBlogIsraelItinerary10DaysRoute
   '/travel-blog/israel-itinerary-3-days': typeof TravelBlogIsraelItinerary3DaysRoute
   '/travel-blog/israel-itinerary-5-days': typeof TravelBlogIsraelItinerary5DaysRoute
@@ -1055,12 +1033,10 @@ export interface FileRoutesByTo {
   '/travel-blog/museums-in-haifa': typeof TravelBlogMuseumsInHaifaRoute
   '/travel-blog/museums-in-jerusalem': typeof TravelBlogMuseumsInJerusalemRoute
   '/travel-blog/museums-in-tel-aviv': typeof TravelBlogMuseumsInTelAvivRoute
-  '/travel-blog/sea-of-galilee': typeof TravelBlogSeaOfGalileeRoute
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/taxi-fares-in-israel': typeof TravelBlogTaxiFaresInIsraelRoute
   '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
-  '/travel-blog/the-dead-sea': typeof TravelBlogTheDeadSeaRoute
   '/travel-blog/top-10-things-to-do-in-israel': typeof TravelBlogTop10ThingsToDoInIsraelRoute
   '/travel-blog/uber-in-israel': typeof TravelBlogUberInIsraelRoute
   '/travel-blog/what-to-eat-in-israel': typeof TravelBlogWhatToEatInIsraelRoute
@@ -1171,7 +1147,6 @@ export interface FileRoutesById {
   '/travel-blog/from-ben-gurion-airport-on-shabbat': typeof TravelBlogFromBenGurionAirportOnShabbatRoute
   '/travel-blog/getting-around-israel': typeof TravelBlogGettingAroundIsraelRoute
   '/travel-blog/getting-around-tel-aviv': typeof TravelBlogGettingAroundTelAvivRoute
-  '/travel-blog/haifa': typeof TravelBlogHaifaRoute
   '/travel-blog/israel-itinerary-10-days': typeof TravelBlogIsraelItinerary10DaysRoute
   '/travel-blog/israel-itinerary-3-days': typeof TravelBlogIsraelItinerary3DaysRoute
   '/travel-blog/israel-itinerary-5-days': typeof TravelBlogIsraelItinerary5DaysRoute
@@ -1184,12 +1159,10 @@ export interface FileRoutesById {
   '/travel-blog/museums-in-haifa': typeof TravelBlogMuseumsInHaifaRoute
   '/travel-blog/museums-in-jerusalem': typeof TravelBlogMuseumsInJerusalemRoute
   '/travel-blog/museums-in-tel-aviv': typeof TravelBlogMuseumsInTelAvivRoute
-  '/travel-blog/sea-of-galilee': typeof TravelBlogSeaOfGalileeRoute
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/taxi-fares-in-israel': typeof TravelBlogTaxiFaresInIsraelRoute
   '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
-  '/travel-blog/the-dead-sea': typeof TravelBlogTheDeadSeaRoute
   '/travel-blog/top-10-things-to-do-in-israel': typeof TravelBlogTop10ThingsToDoInIsraelRoute
   '/travel-blog/uber-in-israel': typeof TravelBlogUberInIsraelRoute
   '/travel-blog/what-to-eat-in-israel': typeof TravelBlogWhatToEatInIsraelRoute
@@ -1301,7 +1274,6 @@ export interface FileRouteTypes {
     | '/travel-blog/from-ben-gurion-airport-on-shabbat'
     | '/travel-blog/getting-around-israel'
     | '/travel-blog/getting-around-tel-aviv'
-    | '/travel-blog/haifa'
     | '/travel-blog/israel-itinerary-10-days'
     | '/travel-blog/israel-itinerary-3-days'
     | '/travel-blog/israel-itinerary-5-days'
@@ -1314,12 +1286,10 @@ export interface FileRouteTypes {
     | '/travel-blog/museums-in-haifa'
     | '/travel-blog/museums-in-jerusalem'
     | '/travel-blog/museums-in-tel-aviv'
-    | '/travel-blog/sea-of-galilee'
     | '/travel-blog/sherut-in-israel'
     | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/taxi-fares-in-israel'
     | '/travel-blog/taxis-in-israel'
-    | '/travel-blog/the-dead-sea'
     | '/travel-blog/top-10-things-to-do-in-israel'
     | '/travel-blog/uber-in-israel'
     | '/travel-blog/what-to-eat-in-israel'
@@ -1429,7 +1399,6 @@ export interface FileRouteTypes {
     | '/travel-blog/from-ben-gurion-airport-on-shabbat'
     | '/travel-blog/getting-around-israel'
     | '/travel-blog/getting-around-tel-aviv'
-    | '/travel-blog/haifa'
     | '/travel-blog/israel-itinerary-10-days'
     | '/travel-blog/israel-itinerary-3-days'
     | '/travel-blog/israel-itinerary-5-days'
@@ -1442,12 +1411,10 @@ export interface FileRouteTypes {
     | '/travel-blog/museums-in-haifa'
     | '/travel-blog/museums-in-jerusalem'
     | '/travel-blog/museums-in-tel-aviv'
-    | '/travel-blog/sea-of-galilee'
     | '/travel-blog/sherut-in-israel'
     | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/taxi-fares-in-israel'
     | '/travel-blog/taxis-in-israel'
-    | '/travel-blog/the-dead-sea'
     | '/travel-blog/top-10-things-to-do-in-israel'
     | '/travel-blog/uber-in-israel'
     | '/travel-blog/what-to-eat-in-israel'
@@ -1557,7 +1524,6 @@ export interface FileRouteTypes {
     | '/travel-blog/from-ben-gurion-airport-on-shabbat'
     | '/travel-blog/getting-around-israel'
     | '/travel-blog/getting-around-tel-aviv'
-    | '/travel-blog/haifa'
     | '/travel-blog/israel-itinerary-10-days'
     | '/travel-blog/israel-itinerary-3-days'
     | '/travel-blog/israel-itinerary-5-days'
@@ -1570,12 +1536,10 @@ export interface FileRouteTypes {
     | '/travel-blog/museums-in-haifa'
     | '/travel-blog/museums-in-jerusalem'
     | '/travel-blog/museums-in-tel-aviv'
-    | '/travel-blog/sea-of-galilee'
     | '/travel-blog/sherut-in-israel'
     | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/taxi-fares-in-israel'
     | '/travel-blog/taxis-in-israel'
-    | '/travel-blog/the-dead-sea'
     | '/travel-blog/top-10-things-to-do-in-israel'
     | '/travel-blog/uber-in-israel'
     | '/travel-blog/what-to-eat-in-israel'
@@ -1686,7 +1650,6 @@ export interface RootRouteChildren {
   TravelBlogFromBenGurionAirportOnShabbatRoute: typeof TravelBlogFromBenGurionAirportOnShabbatRoute
   TravelBlogGettingAroundIsraelRoute: typeof TravelBlogGettingAroundIsraelRoute
   TravelBlogGettingAroundTelAvivRoute: typeof TravelBlogGettingAroundTelAvivRoute
-  TravelBlogHaifaRoute: typeof TravelBlogHaifaRoute
   TravelBlogIsraelItinerary10DaysRoute: typeof TravelBlogIsraelItinerary10DaysRoute
   TravelBlogIsraelItinerary3DaysRoute: typeof TravelBlogIsraelItinerary3DaysRoute
   TravelBlogIsraelItinerary5DaysRoute: typeof TravelBlogIsraelItinerary5DaysRoute
@@ -1699,12 +1662,10 @@ export interface RootRouteChildren {
   TravelBlogMuseumsInHaifaRoute: typeof TravelBlogMuseumsInHaifaRoute
   TravelBlogMuseumsInJerusalemRoute: typeof TravelBlogMuseumsInJerusalemRoute
   TravelBlogMuseumsInTelAvivRoute: typeof TravelBlogMuseumsInTelAvivRoute
-  TravelBlogSeaOfGalileeRoute: typeof TravelBlogSeaOfGalileeRoute
   TravelBlogSherutInIsraelRoute: typeof TravelBlogSherutInIsraelRoute
   TravelBlogShoppingInJerusalemRoute: typeof TravelBlogShoppingInJerusalemRoute
   TravelBlogTaxiFaresInIsraelRoute: typeof TravelBlogTaxiFaresInIsraelRoute
   TravelBlogTaxisInIsraelRoute: typeof TravelBlogTaxisInIsraelRoute
-  TravelBlogTheDeadSeaRoute: typeof TravelBlogTheDeadSeaRoute
   TravelBlogTop10ThingsToDoInIsraelRoute: typeof TravelBlogTop10ThingsToDoInIsraelRoute
   TravelBlogUberInIsraelRoute: typeof TravelBlogUberInIsraelRoute
   TravelBlogWhatToEatInIsraelRoute: typeof TravelBlogWhatToEatInIsraelRoute
@@ -2284,13 +2245,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogGettingAroundTelAvivRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/travel-blog/haifa': {
-      id: '/travel-blog/haifa'
-      path: '/travel-blog/haifa'
-      fullPath: '/travel-blog/haifa'
-      preLoaderRoute: typeof TravelBlogHaifaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/travel-blog/israel-itinerary-10-days': {
       id: '/travel-blog/israel-itinerary-10-days'
       path: '/travel-blog/israel-itinerary-10-days'
@@ -2375,13 +2329,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogMuseumsInTelAvivRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/travel-blog/sea-of-galilee': {
-      id: '/travel-blog/sea-of-galilee'
-      path: '/travel-blog/sea-of-galilee'
-      fullPath: '/travel-blog/sea-of-galilee'
-      preLoaderRoute: typeof TravelBlogSeaOfGalileeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/travel-blog/sherut-in-israel': {
       id: '/travel-blog/sherut-in-israel'
       path: '/travel-blog/sherut-in-israel'
@@ -2408,13 +2355,6 @@ declare module '@tanstack/react-router' {
       path: '/travel-blog/taxis-in-israel'
       fullPath: '/travel-blog/taxis-in-israel'
       preLoaderRoute: typeof TravelBlogTaxisInIsraelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/travel-blog/the-dead-sea': {
-      id: '/travel-blog/the-dead-sea'
-      path: '/travel-blog/the-dead-sea'
-      fullPath: '/travel-blog/the-dead-sea'
-      preLoaderRoute: typeof TravelBlogTheDeadSeaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/travel-blog/top-10-things-to-do-in-israel': {
@@ -2710,7 +2650,6 @@ const rootRouteChildren: RootRouteChildren = {
     TravelBlogFromBenGurionAirportOnShabbatRoute,
   TravelBlogGettingAroundIsraelRoute: TravelBlogGettingAroundIsraelRoute,
   TravelBlogGettingAroundTelAvivRoute: TravelBlogGettingAroundTelAvivRoute,
-  TravelBlogHaifaRoute: TravelBlogHaifaRoute,
   TravelBlogIsraelItinerary10DaysRoute: TravelBlogIsraelItinerary10DaysRoute,
   TravelBlogIsraelItinerary3DaysRoute: TravelBlogIsraelItinerary3DaysRoute,
   TravelBlogIsraelItinerary5DaysRoute: TravelBlogIsraelItinerary5DaysRoute,
@@ -2723,12 +2662,10 @@ const rootRouteChildren: RootRouteChildren = {
   TravelBlogMuseumsInHaifaRoute: TravelBlogMuseumsInHaifaRoute,
   TravelBlogMuseumsInJerusalemRoute: TravelBlogMuseumsInJerusalemRoute,
   TravelBlogMuseumsInTelAvivRoute: TravelBlogMuseumsInTelAvivRoute,
-  TravelBlogSeaOfGalileeRoute: TravelBlogSeaOfGalileeRoute,
   TravelBlogSherutInIsraelRoute: TravelBlogSherutInIsraelRoute,
   TravelBlogShoppingInJerusalemRoute: TravelBlogShoppingInJerusalemRoute,
   TravelBlogTaxiFaresInIsraelRoute: TravelBlogTaxiFaresInIsraelRoute,
   TravelBlogTaxisInIsraelRoute: TravelBlogTaxisInIsraelRoute,
-  TravelBlogTheDeadSeaRoute: TravelBlogTheDeadSeaRoute,
   TravelBlogTop10ThingsToDoInIsraelRoute:
     TravelBlogTop10ThingsToDoInIsraelRoute,
   TravelBlogUberInIsraelRoute: TravelBlogUberInIsraelRoute,
