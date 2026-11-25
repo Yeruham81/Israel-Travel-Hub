@@ -46,6 +46,11 @@ describe.each(allAreas)("Neighborhood subpage: $name", (area) => {
     expect(container.querySelector("#overview")).toBeInTheDocument();
     expect(container.querySelector("#area-guide")).toBeInTheDocument();
     expect(container.querySelector("#location")).toBeInTheDocument();
+    const overview = container.querySelector("#overview") as HTMLElement;
+    expect(within(overview).getByRole("heading", { name: `Choosing a hotel in ${area.shortName}` })).toBeInTheDocument();
+    expect(within(overview).getByText(area.overview[2]!)).toBeInTheDocument();
+    expect(within(overview).queryByText(area.overview[0]!)).toBeNull();
+    expect(within(overview).queryByText(area.overview[1]!)).toBeNull();
     expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const hotelGrid = within(container.querySelector("#book") as HTMLElement).getByTestId("neighborhood-hotel-grid");
     expect(hotelGrid).toHaveClass("min-[360px]:grid-cols-2", "xl:grid-cols-3");
