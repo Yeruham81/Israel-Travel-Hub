@@ -77,6 +77,7 @@ describe("all travel-guide contact layouts", () => {
     "IsraelTravelTipsGuide",
     "IsraelFoodGuide",
     "StayEditorialGuidePage",
+    "HaifaHotelEditorialGuide",
   ] as const;
 
   it.each(sharedGuideComponents)("%s places TripAdvisor reviews next to the portrait on mobile", component => {
@@ -86,11 +87,11 @@ describe("all travel-guide contact layouts", () => {
 
   it("adds the missing contact form to the Haifa hotels editorial page", () => {
     const route = readFileSync("src/routes/travel-blog.best-hotels-in-haifa.tsx", "utf8");
-    const page = readFileSync("src/components/StayEditorialGuidePage.tsx", "utf8");
-    expect(route).toContain('<StayEditorialGuidePage guide={g} id="haifa" />');
+    const page = readFileSync("src/components/HaifaHotelEditorialGuide.tsx", "utf8");
+    expect(route).toContain('<HaifaHotelEditorialGuide guide={g} />');
     expect(page).toContain('["contact", "Contact me"]');
     expect(page).toContain("HomeContactForm showTripadvisorBesidePortraitMobile");
-    expect(page).toContain("Need a Private Transfer To or From");
+    expect(page).toContain("Need a private transfer to Haifa?");
     expect(page).toContain("I'll reply personally");
     expect(page).not.toContain("hotel advice");
   });

@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { StayEditorialGuidePage } from "@/components/StayEditorialGuidePage";
+import { HaifaHotelEditorialGuide } from "@/components/HaifaHotelEditorialGuide";
+import { accommodationEditorial } from "@/data/accommodationEditorial";
 import { haifaStayGuide } from "@/data/content";
 import { hotelEditorialMeta } from "@/lib/hotel-editorial-meta";
 
-const g = { ...haifaStayGuide, photo: { ...haifaStayGuide.photo, src: "/images/travel-blog/featured-haifa-hotels.webp", alt: "Haifa hotels and cityscape" } };
+const g = { ...haifaStayGuide, title: accommodationEditorial.haifa.title, intro: accommodationEditorial.haifa.intro, reviewedAt: "2026-11-25", photo: { ...haifaStayGuide.photo, src: "/images/travel-blog/featured-haifa-hotels.webp", alt: "Haifa hotels and cityscape" } };
 export const Route = createFileRoute("/travel-blog/best-hotels-in-haifa")({
  head: async (ctx) => { const { routeHead } = await import("../route-heads/travel-blog.best-hotels-in-haifa.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
- component: () => <StayEditorialGuidePage guide={g} id="haifa" />,
+ component: () => <HaifaHotelEditorialGuide guide={g} />,
 });
