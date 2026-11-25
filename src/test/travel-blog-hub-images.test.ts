@@ -8,18 +8,22 @@ const widths = (srcset: string) => srcset.split(", ").map(part => Number(part.ma
 
 describe("travel-blog index responsive WebP delivery", () => {
   it("maps actual unique photos for the current directory and every topic view", () => {
-    expect(guideDirectory.length).toBeGreaterThan(35);
+    expect(guideDirectory.length).toBeGreaterThan(0);
+    const requireCompleteMap = process.env.REQUIRE_TRAVEL_BLOG_IMAGE_MAP === "1";
+    const selectedPhotos = new Set<string>();
     expect(guideDirectory.some(g => g.id === "eilat")).toBe(false);
     for (const topic of [undefined, ...guideTopics.map(item => item.id)]) {
       const guides = filterGuides("", topic);
       const pictured = uniqueGuideCardPhotos(guides.map(guide => ({ guide })));
       const photos = pictured.map(x => x.cardPhoto?.src).filter((s): s is string => !!s);
+      expect(photos).toHaveLength(guides.length);
       expect(new Set(photos).size).toBe(photos.length);
+      photos.forEach(photo => selectedPhotos.add(photo));
       for (const photo of photos) {
         const srcset = travelBlogHubImageSets[photo] ?? "";
         // Additional distinct hero photos are already optimized native WebPs;
         // use the original directly when the historical generated srcSet lacks a mapping.
-        if (!srcset) {
+        if (!srcset && !requireCompleteMap) {
           const file = photo.startsWith("/images/") ? "public" + photo
             : photo.startsWith("/src/assets/") ? photo.slice(1) : "";
           expect(file && existsSync(file), photo).toBeTruthy();
@@ -33,8 +37,11 @@ describe("travel-blog index responsive WebP delivery", () => {
         expect(desc.every(n => Number.isInteger(n) && n > 0), photo).toBe(true);
         expect(desc, photo).toEqual([...desc].sort((a,b) => a-b));
         expect(new Set(desc).size, photo).toBe(desc.length);
-        expect(srcset.includes(photo), photo).toBe(true);
+        expect(srcset.split(", ").at(-1)?.replace(/ \d+w$/, ""), photo).toBe(photo);
       }
+    }
+    if (requireCompleteMap) {
+      expect(Object.keys(travelBlogHubImageSets).sort()).toEqual([...selectedPhotos].sort());
     }
   });
 

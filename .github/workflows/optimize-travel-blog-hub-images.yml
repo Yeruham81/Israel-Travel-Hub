@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - "src/test/travel-blog-photo-manifest.test.ts"
+      - "scripts/test_optimize_travel_blog_hub_images.py"
+      - "src/test/travel-blog-hub-images.test.ts"
       - "scripts/optimize_travel_blog_hub_images.py"
       - ".github/workflows/optimize-travel-blog-hub-images.yml"
   workflow_dispatch:
@@ -49,7 +50,10 @@ jobs:
       - name: Install Pillow
         run: python -m pip install --disable-pip-version-check "Pillow>=11,<13"
 
-      - name: Generate visually verified responsive cover variants and JSX
+      - name: Test dynamic manifest validation
+        run: python -m unittest discover -s scripts -p test_optimize_travel_blog_hub_images.py
+
+      - name: Generate high-fidelity responsive cover variants and image maps
         run: python scripts/optimize_travel_blog_hub_images.py
 
       - name: Independently verify original photos, crop and PSNR quality
@@ -61,10 +65,13 @@ jobs:
           import json
           r=json.loads(Path('docs/TRAVEL_BLOG_HUB_IMAGE_DELIVERY_REPORT.json').read_text())
           assert r['nativeSourceFilesPreserved']
-          assert r['numberOfGuides']==49
-          assert r['uniqueCoverSources']>=42
+          m=json.loads(Path('docs/TRAVEL_BLOG_HUB_PHOTO_MANIFEST.json').read_text())
+          assert r['numberOfGuides']==m['directorySize']==m['topicCounts']['all']>0
+          assert r['topicCounts']==m['topicCounts']
+          assert r['uniqueCoverSources']==len(m['sources'])==m['directorySize']
+          assert {src for src, details in r['photos'].items() if details['group']=='directory'} == {row['src'] for row in m['sources']}
           assert r['qualityThresholdPSNRdB']>=36
-          assert r['oneXPotentialSavingsBytes']>400000
+          assert r['oneXPotentialSavingsBytes']>=400000
           count=0
           for src,details in r['photos'].items():
               original=Path('public'+src) if src.startswith('/images/') else Path(src.lstrip('/'))
@@ -94,6 +101,8 @@ jobs:
         run: bun run build
 
       - name: Test guide cards, topic filters and source uniqueness
+        env:
+          REQUIRE_TRAVEL_BLOG_IMAGE_MAP: "1"
         run: bun x vitest run src/test/travel-blog-hub-images.test.ts src/test/travel-guides.test.tsx src/data/travelGuides.test.ts src/test/photo-uniqueness.test.ts
 
       - name: Verify TypeScript
@@ -107,9 +116,6 @@ jobs:
           git add -A \
             src/assets/travel-blog-hub/ \
             src/data/travelBlogHubResponsivePhotos.ts \
-            src/components/TravelGuide.tsx \
-            src/routes/travel-blog.index.tsx \
-            src/test/travel-blog-hub-images.test.ts \
             docs/TRAVEL_BLOG_HUB_PHOTO_MANIFEST.json \
             docs/TRAVEL_BLOG_HUB_IMAGE_DELIVERY_REPORT.json
           if git diff --cached --quiet; then
@@ -118,17 +124,11 @@ jobs:
             git commit -m "Serve high-fidelity responsive photos on travel guides index"
             # Keep regenerated files unrelated to this page out of the image commit.
             git reset --hard HEAD
-            for attempt in 1 2 3 4 5; do
-              git fetch origin main
-              git rebase origin/main
-              if git push origin HEAD:main; then
-                echo "Verified travel-guide images safely pushed to main"
-                break
-              fi
-              if [[ "$attempt" == "5" ]]; then
-                echo "::error::Unable to safely update main"
-                exit 1
-              fi
-              sleep 2
-            done
+            git fetch origin main
+            if [[ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD^)" ]]; then
+              echo "::error::Main advanced after verification; rerun against the current main"
+              exit 1
+            fi
+            git push origin HEAD:main
+            echo "Verified travel-guide images safely pushed to main"
           fi
