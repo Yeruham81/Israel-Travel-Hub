@@ -71,9 +71,9 @@ export const jerusalemHubFaqs = [
 ] as const;
 
 export const jerusalemHubSources=[
-  {label:"Israel Ministry of Tourism — Jerusalem visitor information",url:"https://www.gov.il/en/government-service-branches/jerusalem-tourism-office"},
-  {label:"Israel Railways — official planner and service notices",url:"https://rail.co.il/?lan=en&page=updates"},
-  {label:"Israel Ministry of Tourism — entry and visitor information",url:"https://www.gov.il/en/departments/topics/tourist-and-travelers-info"},
-  {label:"Jerusalem Convention & Visitors Bureau — sights and neighbourhoods",url:"https://www.jerusalemcvb.com/explore-the-city/see-and-do/"},
-  {label:"Christian Information Center — holy sites and visitor instructions",url:"https://www.cicts.org/our-services/"},
+  {label:"Israel Ministry of Tourism - Jerusalem visitor information",url:"https://www.gov.il/en/government-service-branches/jerusalem-tourism-office"},
+  {label:"Israel Railways - official planner and service notices",url:"https://rail.co.il/?lan=en&page=updates"},
+  {label:"Israel Ministry of Tourism - entry and visitor information",url:"https://www.gov.il/en/departments/topics/tourist-and-travelers-info"},
+  {label:"Jerusalem Convention & Visitors Bureau - sights and neighbourhoods",url:"https://www.jerusalemcvb.com/explore-the-city/see-and-do/"},
+  {label:"Christian Information Center - holy sites and visitor instructions",url:"https://www.cicts.org/our-services/"},
 ] as const;

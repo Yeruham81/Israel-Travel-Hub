@@ -226,10 +226,10 @@ export function BestTimeIsraelGuide(){
     <SourcesDisclosure>
       <p className="leading-relaxed">Seasonal recommendations describe typical patterns, not precise forecasts. I recommend checking these official resources for your dates:</p>
       <ul className="mt-2 list-disc space-y-1 pl-5">
-        <li><External href="https://ims.gov.il/en/ClimateAtlas">Israel Meteorological Service — climate atlas</External></li>
-        <li><External href="https://ims.gov.il/en/warning">Israel Meteorological Service — current warnings</External></li>
-        <li><External href="https://en.parks.org.il/">Israel Nature and Parks Authority — park notices and visitor information</External></li>
-        <li><External href="https://visit.tel-aviv.gov.il/info/shabbat">Tel Aviv official visitor information — Shabbat</External></li>
+        <li><External href="https://ims.gov.il/en/ClimateAtlas">Israel Meteorological Service - climate atlas</External></li>
+        <li><External href="https://ims.gov.il/en/warning">Israel Meteorological Service - current warnings</External></li>
+        <li><External href="https://en.parks.org.il/">Israel Nature and Parks Authority - park notices and visitor information</External></li>
+        <li><External href="https://visit.tel-aviv.gov.il/info/shabbat">Tel Aviv official visitor information - Shabbat</External></li>
       </ul>
     </SourcesDisclosure>
   </article></main>;

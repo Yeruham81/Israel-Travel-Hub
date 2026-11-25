@@ -328,7 +328,7 @@ function Home() {
             <li key={c.asset}>
               {c.sourceUrl ? <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">{c.subject}</a> : c.subject}
               {c.author && <> by {c.author}</>}
-              {c.asset === "accommodation-destination-illustrations" ? ": " : " — "}
+              {c.asset === "accommodation-destination-illustrations" ? ": " : " - "}
               {c.licenseUrl ? <a href={c.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">{c.license}</a> : c.license}
               {"."}{c.changes && <> {c.changes}.</>}
             </li>
