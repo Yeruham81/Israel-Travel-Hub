@@ -7,11 +7,11 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { HotelDestinationPage } from "@/components/HotelDestinationPage";
 import { HotelCategoryPage } from "@/components/HotelCategoryPage";
 import { haifaStayGuide as destination, hotelCategoryGuides } from "@/data/content";
-import { affiliateConfig, getSource, providerLinks, haifaHotelRecommendations as hotels } from "@/data/registry";
+import { affiliateConfig, getSource, linksForPage, providerLinks, haifaHotelRecommendations as hotels } from "@/data/registry";
 import { hotelNav } from "@/data/nav";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";
-import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
+import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { routeTree } from "@/routeTree.gen";
 import { Route as DestinationRoute } from "@/routes/accommodation.haifa.index";
 import { Route as FamilyRoute } from "@/routes/accommodation.haifa.family";
@@ -103,13 +103,21 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
         fireEvent.click(link);
         expect(readOutboundClicks().at(-1)).toMatchObject({ event: "outbound_click", pageId: page.pageId, productId: id, offerId: booking.id });
       }
-      const browse = within(container.querySelector("#more-stays") as HTMLElement).getByRole("link", { name: /Check prices on Booking.com/ });
-      const bookingAffiliates: Record<string, string> = {
-        "stay-haifa-family": "https://booking.tpk.lv/IMJh6Qxg",
-        "stay-haifa-boutique": "https://booking.tpk.lv/9d6zS3gn",
-      };
-      expect(browse).toHaveAttribute("href", bookingAffiliates[page.pageId] ?? "https://www.booking.com/city/il/haifa.html");
-      expect(browse).toHaveAttribute("rel", bookingAffiliates[page.pageId] ? "sponsored noopener noreferrer" : "noopener noreferrer");
+      const browseSection = within(container.querySelector("#more-stays") as HTMLElement);
+      if (page.pageId === "stay-haifa") {
+        // No direct Booking.com CTA: the city-wide offer must be a tracked Travelpayouts link.
+        expect(browseSection.queryByRole("link", { name: /Check prices on Booking.com/ })).toBeNull();
+        const tracked = linksForPage("stay-haifa-browse").find((link) => link.id === "hotels-haifa-expedia")!;
+        const browse = browseSection.getByRole("link", { name: /Browse stays on Expedia/ });
+        expect(browse).toHaveAttribute("href", hotelBrowseAffiliateUrl(tracked, page.pageId));
+        expect(browse).toHaveAttribute("rel", "sponsored noopener noreferrer");
+      } else {
+        const browse = browseSection.getByRole("link", { name: /Check prices on Booking.com/ });
+        const trackedBooking = page.pageId === "stay-haifa-family"
+          ? "https://booking.tpk.lv/IMJh6Qxg" : "https://booking.tpk.lv/9d6zS3gn";
+        expect(browse).toHaveAttribute("href", trackedBooking);
+        expect(browse).toHaveAttribute("rel", "sponsored noopener noreferrer");
+      }
       unmount();
     }
   });
