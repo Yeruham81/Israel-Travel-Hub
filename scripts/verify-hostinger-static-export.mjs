@@ -396,7 +396,7 @@ const seniorGuideHtml = readFileSync(seniorGuideFile, "utf8");
 for (const required of [
   "Israel Tours for Seniors",
   "Plan your day with me",
-  "Send me your trip details",
+  "Need a private driver for a comfortable day trip?",
   "data-senior-midpage-cta",
   "data-senior-trip-enquiry",
   'id="contact"',
