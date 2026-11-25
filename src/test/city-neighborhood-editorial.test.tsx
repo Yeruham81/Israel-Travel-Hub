@@ -34,6 +34,9 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
   it.each(["jerusalem", "telaviv"] as const)("shows %s maps, image captions and hotel links without technical explanations", (region) => {
     const { container } = render(<CityNeighborhoodEditorial guide={cityStayGuides[region]} />);
     const areas = neighborhoodGuidesForCity(region);
+    const catalogLink = screen.getByTestId(`${region}-all-hotels-link`);
+    expect(catalogLink).toHaveAttribute("href", cityStayGuides[region].path);
+    expect(catalogLink).toHaveTextContent(`Browse all ${region === "jerusalem" ? "Jerusalem" : "Tel Aviv"} hotels`);
     const sections = within(screen.getByTestId("city-neighborhood-editorial")).getAllByTestId("editorial-neighborhood");
     expect(sections).toHaveLength(region === "jerusalem" ? 6 : 8);
     expect(container.querySelectorAll('iframe[src^="https://maps.google.com/maps?"]')).toHaveLength(areas.length);

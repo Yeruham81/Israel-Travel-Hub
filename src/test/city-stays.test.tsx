@@ -339,6 +339,24 @@ describe("Five Tel Aviv neighborhood hotels and compact maps", () => {
   });
 });
 
+describe("Accommodation hubs keep booking tools distinct from planning articles", () => {
+  it.each([
+    { guide: cityStayGuides.jerusalem, areaCount: 6, editorialPath: "/travel-blog/where-to-stay-in-jerusalem/" },
+    { guide: cityStayGuides.telaviv, areaCount: 8, editorialPath: "/travel-blog/where-to-stay-in-tel-aviv/" },
+  ])("$guide.city keeps the hotel browser before neighborhood cards and a clear editorial guide link", ({ guide, areaCount, editorialPath }) => {
+    const { container } = render(<CityStayPage g={guide} />);
+    const hotelCatalog = container.querySelector("#book");
+    const neighborhoods = container.querySelector("#areas");
+    expect(hotelCatalog).toBeInTheDocument();
+    expect(neighborhoods).toBeInTheDocument();
+    expect(hotelCatalog!.compareDocumentPosition(neighborhoods!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(within(neighborhoods as HTMLElement).getAllByTestId("neighborhood-card")).toHaveLength(areaCount);
+    expect(screen.getByRole("link", { name: "Compare neighborhoods" })).toHaveAttribute("href", editorialPath);
+    expect(container.querySelector("#area-guide")).toBeInTheDocument();
+    expect(container.querySelector("#compare table")).toBeInTheDocument();
+  });
+});
+
 describe("Tel Aviv direct hotel catalog", () => {
   it("shows all 32 neighborhood hotels with booking links and area-specific copy", () => {
     expect(telAvivHotelCatalog).toHaveLength(32);
@@ -552,7 +570,8 @@ describe("Jerusalem direct hotel catalog", () => {
     const secondTip = within(neighborhoodSection).getByText("Check your dates.").closest("div")!;
     expect(neighborhoodCards.compareDocumentPosition(firstTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(firstTip.compareDocumentPosition(secondTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(within(comparison as HTMLElement).getByText(/Compare walking distances to the Old City/)).toBeInTheDocument();
+    expect(within(comparison as HTMLElement).getByText(/Compare the accommodation range and luggage access/)).toBeInTheDocument();
+    expect(within(comparison as HTMLElement).getAllByRole("link", { name: "Browse hotels" })).toHaveLength(6);
     expect(screen.getByTestId("stay-local-photo-grid").querySelectorAll("a")).toHaveLength(6);
     expect(screen.getByRole("img", { name: "Jaffa Gate and Jerusalem Old City walls" })).toBeInTheDocument();
     const firstCard = within(catalog).getAllByTestId("jerusalem-hotel-card")[0]!;
