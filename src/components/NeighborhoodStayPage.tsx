@@ -17,7 +17,6 @@ import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import jerusalemAreaGuidePhoto from "@/assets/home/jerusalem-old-city-tile.webp";
-import { jerusalemStayCardPhotos } from "@/data/jerusalemStayCardPhotos";
 import telAvivAreaGuidePhoto from "@/assets/home/tel-aviv-coast.webp";
 
 const sections = [
@@ -69,21 +68,21 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   const isJerusalem = area.cityId === "jerusalem";
   const isDowntown = isJerusalem && area.id === "downtown";
   const jerusalemHotelHeadings: Record<string, string> = {
-    downtown: "Popular hotels in Jerusalem's Downtown",
-    mamilla: "Popular hotels in Mamilla & King David Street",
-    "old-city": "Popular hotels in Jerusalem's Old City",
-    "mahane-yehuda": "Popular hotels near Mahane Yehuda & Nachlaot",
-    "east-jerusalem": "Popular hotels in East Jerusalem",
-    "german-colony": "Popular hotels in German Colony & Baka",
+    downtown: "Selected hotels in Jerusalem's Downtown",
+    mamilla: "Selected hotels in Mamilla & King David Street",
+    "old-city": "Selected hotels in Jerusalem's Old City",
+    "mahane-yehuda": "Selected hotels near Mahane Yehuda & Nachlaot",
+    "east-jerusalem": "Selected hotels in East Jerusalem",
+    "german-colony": "Selected hotels in German Colony & Baka",
   };
   const telAvivHotelHeadings: Record<string, string> = {
-    "telaviv-beachfront": "Popular hotels by Tel Aviv's central beaches",
-    "telaviv-dizengoff": "Popular hotels near Dizengoff Square & City Center",
-    "telaviv-old-north": "Popular hotels in the Old North & Port area",
-    "telaviv-neve-tzedek": "Popular hotels in and around Neve Tzedek",
-    "telaviv-jaffa": "Popular hotels in Jaffa",
-    "telaviv-florentin": "Popular hotels in Florentin",
-    "telaviv-kerem": "Popular hotels near Kerem HaTeimanim & Carmel Market",
+    "telaviv-beachfront": "Selected hotels by Tel Aviv's central beaches",
+    "telaviv-dizengoff": "Selected hotels near Dizengoff Square & City Center",
+    "telaviv-old-north": "Selected hotels in the Old North & Port area",
+    "telaviv-neve-tzedek": "Selected hotels in and around Neve Tzedek",
+    "telaviv-jaffa": "Selected hotels in Jaffa",
+    "telaviv-florentin": "Selected hotels in Florentin",
+    "telaviv-kerem": "Selected hotels near Kerem HaTeimanim & Carmel Market",
     "telaviv-rothschild": "Popular hotels along Rothschild Boulevard",
   };
   const arrivalIntroductions: Record<string, string> = {
@@ -108,7 +107,22 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   const nearbyHotel = nearbyHotelId ? hotelsInCityCatalog("telaviv").find((hotel) => hotel.id === nearbyHotelId) : undefined;
   const hotels = nearbyHotel && !areaHotels.some((hotel) => hotel.id === nearbyHotel.id)
     ? [...areaHotels, nearbyHotel] : areaHotels;
-  const otherAreas = neighborhoodGuidesForCity(area.cityId).filter((other) => other.id !== area.id);
+  // Five relevant alternatives plus the city hotel catalog keep six related cards on every page.
+  const relatedTelAvivAreas: Record<string, readonly string[]> = {
+    "telaviv-beachfront": ["telaviv-dizengoff", "telaviv-old-north", "telaviv-kerem", "telaviv-rothschild", "telaviv-neve-tzedek"],
+    "telaviv-dizengoff": ["telaviv-beachfront", "telaviv-old-north", "telaviv-rothschild", "telaviv-kerem", "telaviv-florentin"],
+    "telaviv-old-north": ["telaviv-beachfront", "telaviv-dizengoff", "telaviv-rothschild", "telaviv-kerem", "telaviv-neve-tzedek"],
+    "telaviv-neve-tzedek": ["telaviv-rothschild", "telaviv-jaffa", "telaviv-florentin", "telaviv-kerem", "telaviv-beachfront"],
+    "telaviv-jaffa": ["telaviv-neve-tzedek", "telaviv-florentin", "telaviv-rothschild", "telaviv-kerem", "telaviv-beachfront"],
+    "telaviv-florentin": ["telaviv-jaffa", "telaviv-neve-tzedek", "telaviv-rothschild", "telaviv-kerem", "telaviv-dizengoff"],
+    "telaviv-kerem": ["telaviv-beachfront", "telaviv-rothschild", "telaviv-neve-tzedek", "telaviv-dizengoff", "telaviv-jaffa"],
+    "telaviv-rothschild": ["telaviv-neve-tzedek", "telaviv-florentin", "telaviv-dizengoff", "telaviv-kerem", "telaviv-beachfront"],
+  };
+  const cityAreas = neighborhoodGuidesForCity(area.cityId);
+  const relatedIds = relatedTelAvivAreas[area.id];
+  const otherAreas = relatedIds
+    ? relatedIds.map((id) => cityAreas.find((other) => other.id === id)!).filter(Boolean)
+    : cityAreas.filter((other) => other.id !== area.id).slice(0, 5);
   const pageId = `stay-area-${area.id}`;
   const airportGuide = city.related.find((item) => item.label.startsWith("Ben Gurion Airport"));
   const browseOffers = linksForPage(`stay-area-${area.id}-browse`);
@@ -120,7 +134,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
       </h2>
       {nearbyHotel && <p className="mt-2 text-sm leading-relaxed text-muted-foreground">My shortlist includes four stays in {area.shortName} and one nearby alternative in {neighborhoodGuidesForCity("telaviv").find((a) => a.id === nearbyHotel.areaId)?.shortName}. Check the exact address for your plans.</p>}
       <div className="mt-5" data-testid={isJerusalem ? "jerusalem-hotels-with-map" : "tel-aviv-hotels-with-map"}>
-        <ul className="grid min-w-0 auto-rows-fr items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="neighborhood-hotel-grid">
+        <ul className="grid min-w-0 grid-cols-1 auto-rows-fr items-stretch gap-3 min-[360px]:grid-cols-2 sm:gap-4 xl:grid-cols-3" data-testid="neighborhood-hotel-grid">
           {hotels.map((hotel) => isJerusalem
             ? <JerusalemHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} stacked />
             : <TelAvivHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} showNearbyArea={hotel.id === nearbyHotel?.id} stacked />)}
@@ -226,7 +240,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
       />
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
-        <Link to={city.path as LinkProps["to"]} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"><ArrowLeft className="h-4 w-4" aria-hidden /> Compare all {city.city} areas</Link>
+        <Link to={city.path as LinkProps["to"]} className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary"><ArrowLeft className="h-4 w-4" aria-hidden /> Browse all {city.city} hotels</Link>
         <dl className="mt-5 grid gap-3 rounded-2xl border bg-card p-4 sm:grid-cols-3 sm:gap-4 sm:p-5">
           <div><dt className="eyebrow">Best for</dt><dd className="mt-2 text-sm font-medium">{area.bestFor}</dd></div>
           <div><dt className="eyebrow">Stay options</dt><dd className="mt-2 text-sm font-medium">{area.priceLevel}</dd></div>
@@ -239,10 +253,10 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         {locationSection}
         {checklistSection}
         <section id="other-areas" aria-labelledby="other-areas-h" className="mt-14 scroll-mt-32">
-          <h2 id="other-areas-h" className="text-3xl">Explore Other Areas to Stay</h2>
-          <ul className={`mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3`}>{otherAreas.map((other) => <li key={other.id} className="min-w-0">
+          <h2 id="other-areas-h" className="text-2xl font-semibold sm:text-3xl">Explore other {city.city} neighborhoods</h2>
+          <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3" data-testid="related-neighborhood-grid">{otherAreas.map((other) => <li key={other.id} className="min-w-0">
             <Link to={other.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary">
-              <img src={isJerusalem ? (jerusalemStayCardPhotos[other.id]?.src ?? other.photo.src) : other.photo.src} alt={isJerusalem ? (jerusalemStayCardPhotos[other.id]?.alt ?? other.photo.alt) : other.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
+              <img src={other.photo.src} alt={other.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
               <span className="flex flex-1 items-center justify-between gap-3 p-4">
                 <span><span className="block text-xl font-semibold">{other.shortName}</span><span className="mt-1 block text-xs text-muted-foreground">{other.bestFor}</span></span>
                 <ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden />
@@ -261,7 +275,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         </section>
         <FaqList faqs={area.faqs} />
         <StayTripLinks region={area.cityId} currentPath={area.path} />
-        <HomeContactForm key={area.id} guide={neighborhoodTripContactCopy(isJerusalem ? "Jerusalem" : "Tel Aviv")} />
+        <HomeContactForm key={area.id} showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy(isJerusalem ? "Jerusalem" : "Tel Aviv")} />
         <AreaPhotoCredit areas={[area]} />
         <div className="mt-5"><details className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="neighborhood-hotel-photo-credits">
             <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
