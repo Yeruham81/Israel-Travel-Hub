@@ -1,6 +1,6 @@
 # Haifa guide: main-domain redirect and final QA
 
-The Hostinger CI deployment intentionally excludes `/.htaccess` and will not modify the existing live `israel-taxi.com` hosting configuration. When the main domain is migrated, add this rule **above catch-all rules** in its Apache .htaccess, preserving its existing PHP and security rules:
+The `/travel-blog/haifa/` client navigation alias has been removed from the new site; the Hostinger deployment safely retires any obsolete HTML file after confirming `/attractions/haifa/` is present. The static deployment intentionally excludes `/.htaccess` and does not modify the old `israel-taxi.com` hosting configuration. Keep this rule **above catch-all/WordPress rules** in the old domain's Apache `.htaccess`, preserving PHP and security rules:
 
 ```apache
 RewriteEngine On
