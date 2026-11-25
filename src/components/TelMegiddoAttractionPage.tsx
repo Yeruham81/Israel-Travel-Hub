@@ -25,7 +25,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
   visitorNavLabel: "Hours & tickets",
   historyTitle: "Megiddo through history and the Armageddon tradition",
   relatedTitle: "Explore more in the Jezreel Valley and Lower Galilee",
-  contactIntroduction: "Tell me your travel date, pickup location and the northern Israel places you'd like to visit. I'll be happy to help plan a private day trip that includes Tel Megiddo.",
+  contactIntroduction: "Tell me your travel date, pickup point, group size and the northern sites you want to visit. I can arrange a private day trip with a driver including Tel Megiddo.",
   facts: [
     { icon: "location", label: "Location", value: "Road 66, Jezreel Valley", note: "About 2 km northwest of Megiddo Junction" },
     { icon: "duration", label: "Time needed", value: "1.5–2 hours", note: "Longer with the film and full water-system route" },
