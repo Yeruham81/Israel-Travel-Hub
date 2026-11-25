@@ -181,7 +181,7 @@ export function SeniorToursGuide(){
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{seniorPlanning.map(item=><PhotoLink key={item.to} item={item}/>)}</div>
    </section>
 
-   <HomeContactForm guide={{
+   <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
      heading:"Send me your trip details",
      introduction:"Planning a comfortable private day trip in Israel? Send me your dates, destinations and any walking or vehicle needs. I'll reply personally.",
      subject:"",
