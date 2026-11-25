@@ -284,6 +284,9 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
         <p className="eyebrow">Choose the holiday, then the hotel</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Dead Sea stay suits you?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">I usually start by asking what matters most: time on an operating beach, a spa break, activities for children or a comfortable hotel at the right total price. The main resorts are in Ein Bokek and the southern hotel district; Ein Gedi is a different, nature-focused choice.</p>
+        <Link to="/accommodation/dead-sea/" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary" data-testid="editorial-all-hotels-link">
+          Browse all Dead Sea hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+        </Link>
         <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-2" data-testid="deadsea-category-grid">
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
