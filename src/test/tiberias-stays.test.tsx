@@ -100,6 +100,7 @@ describe("Tiberias destination and distinct hotel intents", () => {
     const pages = [{ element: <HotelDestinationPage guide={destination} />, ids: hotels.map((hotel) => hotel.id), pageId: "stay-tiberias" }, ...categories.map((guide) => ({ element: <HotelCategoryPage guide={guide} destination={destination} />, ids: guide.picks.map((pick) => pick.hotelId), pageId: `stay-tiberias-${guide.id}` }))];
     for (const page of pages) {
       const { unmount } = render(page.element);
+      if (page.pageId === "stay-tiberias") fireEvent.click(screen.getByTestId("regional-hotel-expand"));
       for (const id of page.ids) {
         const booking = providerLinks.find((link) => link.id === `hotel-${id}-expedia`)!;
         const card = screen.getAllByTestId("hotel-recommendation").find((card) => card.id === `hotel-${id}`)!;
