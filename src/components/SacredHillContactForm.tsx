@@ -43,9 +43,9 @@ export function SacredHillContactForm({ id }: { id: SacredHillId }) {
           <img src={airportTransferPhotos["moshe"]!.src} alt={airportTransferPhotos["moshe"]!.alt} data-photo-role="contact-portrait" width={150} height={200} loading="lazy" decoding="async" className="h-24 w-20 shrink-0 rounded-xl object-cover" />
           <div className="min-w-0" data-testid="contact-tripadvisor-reviews"><TripadvisorReviewsButton /></div>
         </div>
-        <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-80">Plan a Jerusalem visit</p>
-        <h3 id="sacred-hill-contact-heading" className="mt-3 text-2xl leading-tight sm:text-3xl">Send me a message</h3>
-        <p className="mt-3 leading-relaxed opacity-90">Have a question about visiting {id === "mount-zion" ? "Mount Zion" : "the Mount of Olives"}? Share your travel date, pickup area and the places you hope to see. I'll reply personally and help you plan what works for your visit.</p>
+        <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-80">Contact me</p>
+        <h3 id="sacred-hill-contact-heading" className="mt-3 text-2xl leading-tight sm:text-3xl">Need a private driver for your Jerusalem visit?</h3>
+        <p className="mt-3 leading-relaxed opacity-90">I'm Moshe Barak. I arrange private transfers and sightseeing journeys with a driver in Jerusalem, including pickup and drop-off near {id === "mount-zion" ? "Mount Zion" : "the Mount of Olives"}. Tell me your travel date, pickup point, passengers and planned stops, and I'll reply personally.</p>
       </div>
       <div className="p-5 sm:p-7">
         <form onSubmit={send} noValidate aria-label={`Message Moshe about ${id === "mount-zion" ? "Mount Zion" : "the Mount of Olives"}`} aria-busy={submission.isSending}>
@@ -56,7 +56,7 @@ export function SacredHillContactForm({ id }: { id: SacredHillId }) {
               <label className="text-sm font-medium">Email address *<Input name="email" type="email" autoComplete="email" required maxLength={254} value={email} onChange={e => change(setEmail, e.target.value)} className="mt-2 h-11 bg-background" /></label>
             </div>
             <label className="block text-sm font-medium">Subject *<Input name="subject" required maxLength={160} value={topic} onChange={e => change(setTopic, e.target.value)} className="mt-2 h-11 bg-background" /></label>
-            <label className="block text-sm font-medium">Your message *<Textarea name="message" required maxLength={4000} rows={5} value={message} onChange={e => change(setMessage, e.target.value)} placeholder="Travel date, group size, pickup area, sites you want to visit, or anything you'd like to ask…" className="mt-2 bg-background" /></label>
+            <label className="block text-sm font-medium">Your message *<Textarea name="message" required maxLength={4000} rows={5} value={message} onChange={e => change(setMessage, e.target.value)} placeholder="Travel date, pickup area, destinations, passengers and any mobility needs…" className="mt-2 bg-background" /></label>
             <label className="flex items-start gap-3 text-sm leading-relaxed"><input type="checkbox" name="consent" checked={consent} onChange={e => { setConsent(e.target.checked); setErrors([]); submission.reset(); }} className="mt-1 size-4 shrink-0 accent-primary" required /><span>I agree to share these details with Moshe Barak so he can respond to my enquiry. <PrivacyInformationLink />.</span></label>
             <QuoteSubmissionControls submission={submission} label="Send message" message />
           </fieldset>
