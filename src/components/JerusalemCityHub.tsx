@@ -203,7 +203,7 @@ export function JerusalemCityHubPage(){
     <FaqList faqs={[...jerusalemHubFaqs]}/>
     <CardGrid id="explore-more" title="Plan the next part of your Israel trip" intro="Jerusalem may be the centre of your visit or one stop on a wider route. These guides help with time, holidays and practical preparation." items={jerusalemMoreGuides}/>
 
-    <HomeContactForm guide={{
+    <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
       heading:"Planning a trip to Jerusalem?",
       introduction:"I'm Moshe Barak. I offer private airport transfers, day trips with a driver and tailored journeys within Jerusalem and around Israel. Tell me your date, pickup point, number of passengers, preferred stops and any luggage or mobility needs. I'll reply personally about transport and a practical route. Licensed guiding and entrance tickets are separate arrangements.",
       subject:"",
