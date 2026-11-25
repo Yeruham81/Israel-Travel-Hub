@@ -198,7 +198,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # rsync has no --delete. Back up only these three approved old HTML files.
+          # Only the three approved obsolete HTML files are backed up and retired.
           for slug in haifa sea-of-galilee the-dead-sea; do
             case "$slug" in
               haifa) target=haifa ;;
