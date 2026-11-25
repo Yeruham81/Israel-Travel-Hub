@@ -101,7 +101,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "allow": "Varies by currently open trail; some walks take around 3 hours",
     "access": "Paid reserve; entry and reservations vary by trail",
     "description": "Ein Gedi is an oasis of springs, vegetation and wildlife beside the desert escarpment. Its stream valleys and resident ibex make a striking contrast with the bare slopes around the Dead Sea.",
-    "practical": "Flood and rockfall damage have restricted or changed access to Nahal David and Nahal Arugot. Some available routes are strenuous and require early entry or advance registration, while the archaeological site has separate arrangements. Check the exact trail status, entry window, and reservations for your date on the park's official site. Do not assume the former waterfall circuit is open.",
+    "practical": "Flood and rockfall damage have restricted or changed access to Nahal David and Nahal Arugot. Some available routes are strenuous and require early entry or advance registration, while the archaeological site has separate arrangements. Check the exact trail status, entry window, and reservations for your date on the park's official site. Check which waterfall trails are currently open.",
     "gettingThere": "Ein Gedi sits on Route 90, north of Masada and Ein Bokek. Follow directions to the specific park entrance listed on your booking, not to Ein Gedi Kibbutz or the hotel.",
     "tip": "I would choose the route only after checking the official trail update and whether the walking time, heat exposure and difficulty match your group.",
     "image": {

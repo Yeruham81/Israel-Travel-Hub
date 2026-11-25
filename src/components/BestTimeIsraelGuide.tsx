@@ -154,7 +154,7 @@ function HolidayAndWeather(){
       <article className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="text-lg font-bold">Check your whole journey, not just the air temperature</h3>
         <p className="mt-2 text-sm leading-relaxed">A Jerusalem morning may call for a jacket while a stop near the Dead Sea needs sun protection. Rain, sea conditions and wind can matter as much as temperature. In winter, shorter daylight affects opening hours and how many outdoor stops you can enjoy.</p>
-        <p className="mt-3 text-sm leading-relaxed">Hotel prices depend on location, events, demand and school holidays. I would compare the cost of the full trip rather than treating any season as automatically cheaper or quieter.</p>
+        <p className="mt-3 text-sm leading-relaxed">Hotel prices depend on location, events, demand and school holidays. I recommend comparing the total trip cost, including flights and accommodation.</p>
         <p className="mt-3 text-sm"><External href="https://ims.gov.il/en/ClimateAtlas">Official climate information</External></p>
       </article>
     </div>

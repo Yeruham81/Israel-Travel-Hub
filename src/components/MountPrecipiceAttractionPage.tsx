@@ -89,7 +89,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         <ul className="mt-3 grid list-disc gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
           <li><strong>Weather:</strong> Visibility over the valley is clearer on some days than others; exposed areas can be windy.</li>
           <li><strong>Footwear:</strong> Comfortable walking shoes are enough for the paved lookout; choose sturdier shoes for unpaved trails.</li>
-          <li><strong>Facilities:</strong> Take drinking water with you rather than assuming refreshments will be available at the lookout.</li>
+          <li><strong>Facilities:</strong> Bring drinking water for your visit to the lookout.</li>
           <li><strong>Walking further:</strong> The Gospel Trail leads away from the summit; it is a separate hike, not the short lookout circuit.</li>
         </ul>
       </div>

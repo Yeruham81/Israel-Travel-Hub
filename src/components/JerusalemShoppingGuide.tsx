@@ -56,7 +56,7 @@ const faqs = [
   { q: "Where should I go shopping on a rainy day?", a: "Malha Mall is a practical indoor choice. You can also visit enclosed shops in central Jerusalem, but a day at Malha is a separate journey from the Old City." },
   { q: "Can I shop in Jerusalem on Shabbat?", a: "Many city-centre shops and Mahane Yehuda market stalls close for Shabbat. The First Station hosts food and cultural activities on Saturdays, but its published shopping hours are 18:00–22:00. Check the business or event you want before setting out." },
   { q: "Can tourists get a VAT refund on purchases in Israel?", a: "Eligible tourists can apply for a VAT refund on qualifying goods bought at participating businesses, subject to the Israel Tax Authority's rules and documentation. Ask the retailer for the required paperwork and check the official procedure before departure." },
-  { q: "Should I bargain in Jerusalem's markets?", a: "In some traditional market stalls polite bargaining is welcome; fixed-price shops, galleries and chain stores work differently. Confirm the total price before paying rather than assuming there is a standard discount." },
+  { q: "Should I bargain in Jerusalem's markets?", a: "In some traditional market stalls polite bargaining is welcome; fixed-price shops, galleries and chain stores work differently. Confirm the final price before paying." },
   { q: "When does the Bezalel Arts Fair take place?", a: "The arts fair is associated with Friday mornings in the Bezalel and Shatz pedestrian-street area. Dates, hours and the programme may change with weather or special events, so I recommend checking the current organiser listing before going." },
 ];
 
@@ -251,7 +251,7 @@ export function JerusalemShoppingGuide() {
               <PlaceCard key={place.id} place={place} index={places.indexOf(place)} />)}
           </div>
           {index === 0 && <div className="mt-5"><Tip>If you want both the traditional market and Mamilla, choose an Old City gate that suits your walking route. The Cardo is inside the Jewish Quarter, with steps and uneven paving on some approaches.</Tip></div>}
-          {index === 1 && <div className="mt-5"><Tip>Mahane Yehuda is best for food shopping earlier in the day. The Bezalel Arts Fair is a Friday event, so check its current schedule rather than assuming the same stalls will be there every day.</Tip></div>}
+          {index === 1 && <div className="mt-5"><Tip>Mahane Yehuda is best for food shopping earlier in the day. The Bezalel Arts Fair takes place on Fridays. Check the current schedule before visiting.</Tip></div>}
         </section>)}
       </section>
 

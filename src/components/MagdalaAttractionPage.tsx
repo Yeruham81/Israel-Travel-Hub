@@ -51,7 +51,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Streets, marketplace and ritual baths">
         <p>Beyond the synagogue, the excavated town reveals shops, domestic buildings and ancient <em>mikvaot</em> (ritual baths). Together, these remains help explain how people lived and worked beside the lake.</p>
-        <p>I recommend taking your time here rather than treating Magdala as just a quick church stop.</p>
+        <p>I recommend allowing time for the archaeological site as well as the church.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="Duc In Altum and the Boat Chapel"

@@ -231,7 +231,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     faqs: [
       { q: "Can I pay with a foreign credit card?", a: "A foreign-issued card may work, but acceptance varies by app and transaction. Check your chosen app's payment options before requesting a taxi and keep a backup payment method." },
       { q: "Can I get a taxi without a smartphone?", a: "Yes. Use a licensed taxi stand, a local dispatcher or a hotel-booked taxi. Ben Gurion Airport also has self-service kiosks for the authorized on-demand queue." },
-      { q: "Can I request child seats, a minivan or an accessible vehicle?", a: "Some providers can arrange special equipment or a suitable vehicle with advance notice. Confirm the request directly rather than assuming a standard taxi will have it." },
+      { q: "Can I request child seats, a minivan or an accessible vehicle?", a: "Some providers can arrange special equipment or a suitable vehicle with advance notice. Confirm your equipment or accessibility request directly when booking a taxi." },
       { q: "Are taxi apps available on Shabbat?", a: "Licensed taxis can operate during Shabbat and holidays, but local driver availability varies. Plan important pickups ahead." },
     ],
     sourceIds: ["guide-uber-availability", "guide-lyft-cities", "guide-ridesharing-bill-2026", "guide-gett-app", "guide-yango-israel", "guide-gett", "guide-iaa", "taxi-fares-2026"],
@@ -494,7 +494,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Will it work throughout Israel?",
         paragraphs: [
           "Coverage is generally easier to find in Tel Aviv, Jerusalem and other major cities than in remote areas of the Negev, Galilee and Dead Sea region. Your eSIM's local network also affects reception.",
-          "Visiting Bethlehem, Jericho or other parts of the West Bank? An Israel eSIM does not necessarily include access to Palestinian mobile networks. Coverage may differ across the area, so confirm the relevant network before you go.",
+          "Visiting Bethlehem, Jericho or other parts of the West Bank? Check whether your Israel eSIM includes Palestinian mobile networks if you plan to visit areas served by them. Coverage may differ across the area, so confirm the relevant network before you go.",
         ],
         sourceIds: ["guide-esim-yesim", "guide-esim-airalo"],
       },
@@ -632,7 +632,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "After baggage claim, follow the customs signs. The green channel is for travellers with nothing requiring declaration; use the red channel for goods or amounts that must be declared under Israel's customs rules.",
           "Check restrictions and declaration limits if you are carrying cash, valuable goods or regulated items. The Israel Tax Authority recommends using the red channel and asking a customs officer when you are unsure.",
-          "Keep receipts and supporting documents ready for anything you need to declare. Factor additional customs processing into your pickup arrangements if applicable.",
+          "Keep receipts and supporting documents ready for anything you need to declare. Allow time for any customs checks when arranging your pickup.",
         ],
         highlightedLinks: [{
           label: "Customs rules for visitors — Israel Tax Authority",
