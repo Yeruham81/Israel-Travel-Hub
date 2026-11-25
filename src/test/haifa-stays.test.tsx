@@ -93,6 +93,7 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     const pages = [{ element: <HotelDestinationPage guide={destination} />, ids: hotels.map((hotel) => hotel.id), pageId: "stay-haifa" }, ...categories.map((guide) => ({ element: <HotelCategoryPage guide={guide} destination={destination} />, ids: guide.picks.map((pick) => pick.hotelId), pageId: `stay-haifa-${guide.id}` }))];
     for (const page of pages) {
       const { container, unmount } = render(page.element);
+      if (page.pageId === "stay-haifa") fireEvent.click(screen.getByTestId("regional-hotel-expand"));
       for (const id of page.ids) {
         const hotel = hotels.find((hotel) => hotel.id === id)!;
         const booking = providerLinks.find((link) => link.id === `hotel-${id}-expedia`)!;
@@ -140,6 +141,7 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
 
   it("identifies the Bay View/Nof name difference and makes limited Port Inn verification explicit", () => {
     const { container } = render(<HotelDestinationPage guide={destination} />);
+    fireEvent.click(screen.getByTestId("regional-hotel-expand"));
     expect(container.querySelector("#hotel-haifa-nof")).toHaveTextContent("Nof Hotel (Haifa Bay View)");
     expect(container.querySelector("#hotel-haifa-nof")).toHaveTextContent("now presented by Nara Hotels as Nof Hotel");
     expect(getSource("hotel-haifa-nof-official").url).toBe("https://www.nara-hotels.com/nof");
