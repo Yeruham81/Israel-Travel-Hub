@@ -130,7 +130,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         </ul>
       </div>
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-        Book your hotel directly through the booking website. Check room details, minimum stays and any access or facilities you need.
+        Book your hotel directly through the booking website. Check room details and minimum stays, and ask the hotel about accessibility and facilities.
       </p>
       {browseOffers.map((booking) => (
         <div className="mt-6 flex justify-center" key={booking.id}>
