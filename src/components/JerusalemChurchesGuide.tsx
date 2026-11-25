@@ -207,7 +207,7 @@ export function JerusalemChurchesGuide(){
       <Heading id="explore-more" title="Explore Jerusalem further" intro="More of my practical guides for planning your days in and around Jerusalem."/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=><Link key={item.to} to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">{guideHeroPhotoForPath(item.to) && <img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>}<span className="flex flex-1 flex-col p-4"><strong>{item.title}</strong><span className="mt-2 text-sm text-muted-foreground">{item.text}</span></span></Link>)}</div>
     </section>
-    <HomeContactForm guide={neighborhoodTripContactCopy("Jerusalem")}/>
+    <HomeContactForm showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy("Jerusalem")}/>
     <SourcesDisclosure>
       <p className="mb-3 text-sm leading-relaxed">Visiting hours and admission information: Christian Information Center shrine listing updated 15 September 2026, supplemented by church operators. These times are published guidance, not real-time opening guarantees.</p>
       <ul className="space-y-2 text-sm">
