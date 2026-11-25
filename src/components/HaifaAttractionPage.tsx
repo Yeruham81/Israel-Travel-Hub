@@ -135,7 +135,7 @@ function HaifaPartnerTours() {
           />
         </div>
       ))}
-      <p className="col-span-full text-xs leading-relaxed text-muted-foreground">Prices and ratings are published provider snapshots checked November 2026, not live quotes. Verify availability, inclusions, reviews and final costs on the booking platform.</p>
+      <p className="col-span-full text-xs leading-relaxed text-muted-foreground">Check available dates, current prices, inclusions and reviews on the booking website.</p>
     </div>
   );
 }

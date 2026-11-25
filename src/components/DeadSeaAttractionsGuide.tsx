@@ -324,7 +324,7 @@ export function DeadSeaAttractionsGuide() {
             </a>;
           })}
         </div>
-        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Starting prices, ratings and review counts are previously checked provider snapshots, not live availability. Check the current booking terms and Ein Gedi access conditions before reserving.</p>
+        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Check current prices, reviews and booking terms with the tour provider, and confirm Ein Gedi access for your travel date.</p>
         <div className="mt-5 flex justify-center">
           <Link to="/tours/masada-dead-sea/" className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-secondary/35 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-secondary">Explore all Masada & Dead Sea tours <ChevronRight aria-hidden className="h-4 w-4"/></Link>
         </div>

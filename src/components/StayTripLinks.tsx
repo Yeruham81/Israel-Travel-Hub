@@ -207,7 +207,6 @@ export function StayTripLinks({
     </section>}
     {onward.length > 0 && <section id="trip-planning" aria-labelledby="stay-planning-h" className="scroll-mt-32">
       <h2 id="stay-planning-h" className="text-2xl font-bold sm:text-3xl">Plan the rest of your trip</h2>
-      {!(isEditorial && region === "jerusalem") && <p className="mt-2 text-muted-foreground">{isEditorial ? "Explore transport options, day trips and practical travel advice." : "Plan your arrivals, excursions and onward travel after choosing your hotel."}</p>}
       {renderCards(onward, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" || region === "haifa" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-3", "stay-trip-photo-grid")}
     </section>}
   </div>;

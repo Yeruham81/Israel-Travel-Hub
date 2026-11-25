@@ -254,12 +254,12 @@ export function FaqList({
   );
 }
 
-export function SourceList({ ids, intro = "For current room prices and availability, use the hotel booking links.", compact = false, linksOnly = false }: { ids: string[]; intro?: string; compact?: boolean; linksOnly?: boolean }) {
+export function SourceList({ ids, intro = "", compact = false, linksOnly = false }: { ids: string[]; intro?: string; compact?: boolean; linksOnly?: boolean }) {
   const sources = publicSources(ids);
   if (!sources.length) return null;
   return (
     <SourcesDisclosure>
-      <p className="mt-2 text-sm text-muted-foreground">{intro}</p>
+      {intro && <p className="mt-2 text-sm text-muted-foreground">{intro}</p>}
       <ul className={compact ? "mt-4 grid gap-2 sm:grid-cols-2" : "mt-4 space-y-3"}>
         {sources.map((s) => (
           <li key={s.id} className={compact ? "min-w-0 rounded-lg border bg-card p-3 text-sm" : "rounded-xl border bg-card p-4 text-sm"}>
