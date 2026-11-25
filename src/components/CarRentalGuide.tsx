@@ -134,8 +134,8 @@ export function CarRentalGuide() {
       </aside>
       <HomeContactForm guide={{
         eyebrow: "Contact me",
-        heading: "Plan a private journey with me",
-        introduction: "Tell me your travel date, pickup point, group size and the places you would like to visit. I’ll reply personally and help you plan a private journey that suits your group.",
+        heading: "Need a private driver for your Israel journey?",
+        introduction: "Tell me your travel date, pickup point, group size and the places you would like to visit. I’ll reply personally about arranging a private vehicle and driver that suit your group.",
         subject: "",
         placeholder: "Travel date, pickup point, number of travellers, places you would like to visit…",
       }} />
