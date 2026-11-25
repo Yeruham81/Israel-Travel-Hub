@@ -12,11 +12,11 @@ afterEach(cleanup);
 describe("homepage marketing copy and service sections", () => {
   it("shows a welcoming hero introduction without redundant marketing buttons", () => {
     const { container } = render(<HomeHero />);
-    expect(screen.getByRole("heading", { level: 1, name: "Discover Israel, Travel Smarter" })).toBeInTheDocument();
-    expect(screen.getByText("Your journey starts here")).toBeInTheDocument();
-    expect(container.textContent).toContain("From airport arrivals and getting around to memorable day trips");
+    expect(screen.getByRole("heading", { level: 1, name: "Plan Your Trip to Israel" })).toBeInTheDocument();
+    expect(screen.getByText("Local advice & private transport")).toBeInTheDocument();
+    expect(container.textContent).toContain("Find out how to get from Ben Gurion Airport to your hotel");
     expect(container.textContent).toContain("make the most of your time in Israel.");
-    const headline = screen.getByRole("heading", { level: 1, name: "Discover Israel, Travel Smarter" });
+    const headline = screen.getByRole("heading", { level: 1, name: "Plan Your Trip to Israel" });
     expect(headline).toHaveClass("md:text-5xl", "lg:max-w-none", "lg:whitespace-nowrap");
     expect(headline.nextElementSibling).toHaveClass("mt-3");
     const caption = screen.getByText("Jerusalem Old City from the Mount of Olives");
@@ -60,7 +60,7 @@ describe("homepage marketing copy and service sections", () => {
       "Where to Stay in Israel",
       "Attractions & Experiences",
       "What Travelers Say",
-      "Practical Israel Travel Guides",
+      "Israel Travel Guides",
       "Personal Messages from Past Clients",
       "Send me a message",
     ];

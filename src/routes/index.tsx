@@ -88,8 +88,8 @@ export const accommodationDestinationCards: Card[] = [
 
 export const services: Service[] = [
   {
-    id: "transfers", eyebrow: "Airport Transfers", tagline: "Plan a Smooth Arrival in Israel", title: "Airport Transfers",
-    text: "Start your visit to Israel with a smooth, comfortable arrival. Arrange a private transfer from Ben Gurion Airport to Jerusalem, Tel Aviv, Haifa, or any other destination across the country.",
+    id: "transfers", eyebrow: "Airport Transfers", tagline: "From Ben Gurion Airport to Your Hotel", title: "Airport Transfers",
+    text: "I arrange private transfers from Ben Gurion Airport to Jerusalem, Tel Aviv, Haifa and other destinations across Israel.",
     feature: { src: benGurionApronPhoto, mobile: benGurionApronPhotoMobile, alt: "Parked aircraft at Ben Gurion Airport with the terminal sign reading BEN GURION AIRPORT" },
     cards: [
       { label: "To Jerusalem", to: "/airport-transfers/jerusalem/", img: { src: "/images/home/transfer-jerusalem-tower-of-david.webp", mobile: "/images/home/transfer-jerusalem-tower-of-david-mobile.webp", alt: "Tower of David citadel beside Jerusalem’s Old City" } },
@@ -100,8 +100,8 @@ export const services: Service[] = [
     hub: { label: "Explore all airport transfers", to: "/airport-transfers/" },
   },
   {
-    id: "tours", eyebrow: "Tours & Day Trips", tagline: "See the Best of Israel in a Day", title: "Tours & Day Trips",
-    text: "Explore Israel’s top destinations with guided tours and day trips, and find the experiences that best match your interests and travel style.",
+    id: "tours", eyebrow: "Tours & Day Trips", tagline: "Day Trips Across Israel", title: "Tours & Day Trips",
+    text: "Compare guided tours and private day trips to Jerusalem, the Galilee, Masada and the Dead Sea.",
     feature: { src: guidedTour, mobile: guidedTourMobile, alt: "Illustrative small group on a guided walk through old stone streets" },
     cards: [
       { label: "Jerusalem", to: tourCategoryPaths.jerusalem, img: { src: "/images/attractions/jerusalem.webp", mobile: "/images/attractions/jerusalem-mobile.webp", alt: "Jerusalem’s Old City and the Dome of the Rock" } },
@@ -114,8 +114,8 @@ export const services: Service[] = [
     hub: { label: "Explore all tours & day trips", to: "/tours/" },
   },
   {
-    id: "shore-excursions", eyebrow: "Shore Excursions", tagline: "Make the Most of Your Time Ashore", title: "Shore Excursions",
-    text: "Make the most of your time ashore with excursions from Israel’s cruise ports, from historic landmarks and cultural highlights to unforgettable day trips.",
+    id: "shore-excursions", eyebrow: "Shore Excursions", tagline: "Day Trips from Haifa and Ashdod", title: "Shore Excursions",
+    text: "From Ashdod, visit Jerusalem or the Dead Sea. Haifa is a convenient starting point for Akko, Nazareth and the Galilee.",
     feature: { src: cruisePort, alt: "Illustrative cruise passengers walking along a harbour quay toward a waiting minivan (not a specific ship or operator)" },
     cards: [
       { label: "From Ashdod Port", text: "Explore Jerusalem, Tel Aviv–Jaffa, Masada or the Dead Sea from Ashdod.", cta: "Explore Ashdod excursions", to: "/shore-excursions/ashdod/", img: { src: ashdodPort, alt: "Aerial view of Ashdod Port" } },
@@ -124,14 +124,14 @@ export const services: Service[] = [
     hub: { label: "Explore all shore excursions", to: "/shore-excursions/" },
   },
   {
-    id: "accommodation", eyebrow: "Accommodation", tagline: "Find Your Perfect Base", title: "Where to Stay in Israel",
-    text: "Choose a base that suits your trip, from historic Jerusalem and Tel Aviv's beachfront to lakeside Galilee hotels and Dead Sea resorts.",
+    id: "accommodation", eyebrow: "Accommodation", tagline: "Hotels by City and Neighborhood", title: "Where to Stay in Israel",
+    text: "Compare hotel areas in Jerusalem and Tel Aviv, lakeside stays in Tiberias, and resorts at Ein Bokek on the Dead Sea.",
     cards: accommodationDestinationCards,
     hub: { label: "Explore all accommodation", to: "/accommodation/" },
   },
   {
-    id: "attractions", eyebrow: "Attractions & Experiences", tagline: "Discover Israel’s Must-See Places", title: "Attractions & Experiences",
-    text: "Discover Israel’s most memorable attractions, from ancient landmarks and historic cities to breathtaking natural wonders.",
+    id: "attractions", eyebrow: "Attractions & Experiences", tagline: "Places to Visit Across Israel", title: "Attractions & Experiences",
+    text: "Find visitor information for Jerusalem’s Old City, the Sea of Galilee, Masada, Caesarea and other sites.",
     feature: { src: timnaParkFeature, alt: "Sandstone rock formations and desert landscape at Timna Park near Eilat" },
     cards: [
       { label: "Rosh Hanikra", to: "/attractions/rosh-hanikra/", img: { src: roshHanikraPhoto, alt: "Sea grottoes and white limestone cliffs at Rosh Hanikra" } },
@@ -310,7 +310,7 @@ function Home() {
 
       <div className="home-offscreen home-offscreen-tripadvisor"><TripadvisorReviewsSection /></div>
       <section id="guides" aria-labelledby="guides-h" className="home-offscreen mx-auto mt-12 max-w-6xl scroll-mt-6 px-4">
-        <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Plan your trip with practical local advice on transportation, travel essentials and exploring Israel with confidence.</p></div>
+        <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Read about airport arrivals, public transport, Shabbat, local customs and planning your route.</p></div>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="home-guide-grid">
           {[...homeGuideCards.first, ...homeGuideCards.second].map((guide) => (
             <GuideCard key={guide.id} guide={guide} headingLevel={3} showReadMoreArrow={false} compactHomeLayout />

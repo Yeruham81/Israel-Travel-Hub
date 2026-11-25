@@ -204,7 +204,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     </section>
     <section id="days" aria-labelledby="days-h" className="mt-14 scroll-mt-28">
       <h2 id="days-h" className="text-3xl">Your {g.days}-day itinerary, day by day</h2>
-      <p className="mt-3 text-muted-foreground">Each day offers a different side of Israel, with memorable sights and room for personal interests, whether that means more history, time by the sea or a slower pace.</p>
       <div className="mt-7 space-y-10">
         {g.daysPlan.map((day, index) => {
           const image = migrationPhotos[day.image];
@@ -388,7 +387,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       placeholder: "Travel dates, pickup point, destinations, passengers and luggage…",
     }} />
     <SourcesDisclosure>
-      <p className="text-sm leading-relaxed text-muted-foreground">Official planning references for this itinerary. Verify schedules, entry conditions and openings for your exact dates; these sources do not imply live availability.</p>
+      <p className="text-sm leading-relaxed text-muted-foreground">Check opening hours, entry requirements and transport schedules before your trip.</p>
       <ul className="mt-3 space-y-2">
         {itinerarySourcesByGuide[id].map((source) => <li key={source.url}>
           <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-primary underline underline-offset-2">{source.label}<span className="sr-only"> (opens in a new tab)</span></a>

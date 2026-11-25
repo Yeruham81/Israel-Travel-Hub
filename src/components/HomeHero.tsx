@@ -56,10 +56,10 @@ export function HomeHero() {
     <section aria-labelledby="home-title">
       <HeroCarousel slides={heroSlides}>
         <div className="max-w-5xl px-6 pb-8 pt-16 text-white md:px-12 md:pb-8 md:pt-16" style={{ textShadow: "0 2px 6px rgba(0,0,0,0.76), 0 4px 18px rgba(0,0,0,0.45)" }}>
-          <p className="text-xs font-semibold uppercase tracking-[0.17em] opacity-95">Your journey starts here</p>
-          <h1 id="home-title" className="mt-4 max-w-2xl text-4xl leading-[1.08] md:text-5xl lg:max-w-none lg:whitespace-nowrap lg:text-[clamp(3rem,3.65vw,3.25rem)]">Discover Israel, Travel Smarter</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.17em] opacity-95">Local advice & private transport</p>
+          <h1 id="home-title" className="mt-4 max-w-2xl text-4xl leading-[1.08] md:text-5xl lg:max-w-none lg:whitespace-nowrap lg:text-[clamp(3rem,3.65vw,3.25rem)]">Plan Your Trip to Israel</h1>
           <p className="mt-3 max-w-2xl text-lg font-medium leading-relaxed opacity-100 md:text-xl">
-            From airport arrivals and getting around to memorable day trips, places to stay and must-see sights, find practical local advice to make the most of your time in Israel.
+            Find out how to get from Ben Gurion Airport to your hotel, where to stay, and how to visit Jerusalem, the Dead Sea and the Galilee.
           </p>
         </div>
       </HeroCarousel>

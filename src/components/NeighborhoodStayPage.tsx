@@ -130,9 +130,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         </ul>
       </div>
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-        Hotel stays are provided by independent properties and booked through external booking websites.
-        Prices, availability, room details and booking conditions may change. Before booking, check the
-        hotel address, exact room offer, total price and cancellation terms directly with the booking provider.
+        Book your hotel directly through the booking website, where you can check room details, the total price and cancellation terms.
       </p>
       {browseOffers.map((booking) => (
         <div className="mt-6 flex justify-center" key={booking.id}>

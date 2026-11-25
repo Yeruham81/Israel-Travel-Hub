@@ -254,7 +254,7 @@ export function FaqList({
   );
 }
 
-export function SourceList({ ids, intro = "“Checked” dates refer to the facts on these pages only. Provider prices, availability and inventory were not verified.", compact = false, linksOnly = false }: { ids: string[]; intro?: string; compact?: boolean; linksOnly?: boolean }) {
+export function SourceList({ ids, intro = "For current room prices and availability, use the hotel booking links.", compact = false, linksOnly = false }: { ids: string[]; intro?: string; compact?: boolean; linksOnly?: boolean }) {
   const sources = publicSources(ids);
   if (!sources.length) return null;
   return (

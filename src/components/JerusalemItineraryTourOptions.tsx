@@ -55,10 +55,10 @@ export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 | 7 |
     <div className="min-w-0 border-t px-4 pb-4 pt-3">
       <p className="text-sm leading-relaxed text-muted-foreground">
         {days === 7
-          ? "These tours replace a planned excursion; they are not extra stops to add to an already full day. For example, choose a Bethlehem or Jericho outing instead of the Jerusalem programme on Day 2, or a Masada and Dead Sea tour in place of the independent Day 3 desert plan."
+          ? "Choose a Bethlehem or Jericho tour for Day 2 or a guided Masada and Dead Sea trip for Day 3. Each replaces that day's planned sightseeing."
           : days === 10
-          ? "These day tours are alternatives to the independent itinerary, not additional sightseeing stops. Choose a Bethlehem or Jericho excursion in place of Jerusalem sightseeing on Day 2, or a Masada and Dead Sea tour instead of the self-planned desert day on Day 3."
-          : "These tours replace part or all of a planned sightseeing day; they are not additional stops. For example, a Masada and Dead Sea tour replaces your independent desert programme, while a Bethlehem or Jericho visit needs a separate Jerusalem day. Compare routes, meeting points and time at the sites."}
+          ? "Set aside Day 2 for Bethlehem or Jericho if you choose one of these tours. A guided Masada and Dead Sea trip can cover your Day 3 desert excursion."
+          : "Use a guided Masada and Dead Sea tour for your desert day, or set aside one of your Jerusalem days for Bethlehem or Jericho. Compare routes, meeting points and time at the sites."}
       </p>
       <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {threeDayJerusalemTourSelections.map(item => {
@@ -78,7 +78,7 @@ export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 | 7 |
         })}
       </div>
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-        These tours are operated by independent providers and booked through their own platforms. Tour details, availability, prices and booking conditions are set by the operators and may change. Before booking, check the departure date and location, itinerary, guiding, walking requirements, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider.
+        Book these tours with the individual providers. Check dates, meeting and return arrangements, guiding, walking requirements, admissions, final prices and cancellation terms.
       </p>
     </div>
   </details>;
