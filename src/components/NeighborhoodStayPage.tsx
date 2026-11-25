@@ -107,22 +107,9 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   const nearbyHotel = nearbyHotelId ? hotelsInCityCatalog("telaviv").find((hotel) => hotel.id === nearbyHotelId) : undefined;
   const hotels = nearbyHotel && !areaHotels.some((hotel) => hotel.id === nearbyHotel.id)
     ? [...areaHotels, nearbyHotel] : areaHotels;
-  // Five relevant alternatives plus the city hotel catalog keep six related cards on every page.
-  const relatedTelAvivAreas: Record<string, readonly string[]> = {
-    "telaviv-beachfront": ["telaviv-dizengoff", "telaviv-old-north", "telaviv-kerem", "telaviv-rothschild", "telaviv-neve-tzedek"],
-    "telaviv-dizengoff": ["telaviv-beachfront", "telaviv-old-north", "telaviv-rothschild", "telaviv-kerem", "telaviv-florentin"],
-    "telaviv-old-north": ["telaviv-beachfront", "telaviv-dizengoff", "telaviv-rothschild", "telaviv-kerem", "telaviv-neve-tzedek"],
-    "telaviv-neve-tzedek": ["telaviv-rothschild", "telaviv-jaffa", "telaviv-florentin", "telaviv-kerem", "telaviv-beachfront"],
-    "telaviv-jaffa": ["telaviv-neve-tzedek", "telaviv-florentin", "telaviv-rothschild", "telaviv-kerem", "telaviv-beachfront"],
-    "telaviv-florentin": ["telaviv-jaffa", "telaviv-neve-tzedek", "telaviv-rothschild", "telaviv-kerem", "telaviv-dizengoff"],
-    "telaviv-kerem": ["telaviv-beachfront", "telaviv-rothschild", "telaviv-neve-tzedek", "telaviv-dizengoff", "telaviv-jaffa"],
-    "telaviv-rothschild": ["telaviv-neve-tzedek", "telaviv-florentin", "telaviv-dizengoff", "telaviv-kerem", "telaviv-beachfront"],
-  };
-  const cityAreas = neighborhoodGuidesForCity(area.cityId);
-  const relatedIds = relatedTelAvivAreas[area.id];
-  const otherAreas = relatedIds
-    ? relatedIds.map((id) => cityAreas.find((other) => other.id === id)!).filter(Boolean)
-    : cityAreas.filter((other) => other.id !== area.id).slice(0, 5);
+  // Show every other neighborhood, followed by the full city catalog:
+  // Jerusalem has 5 + 1 = 6 cards; Tel Aviv has 7 + 1 = 8 cards.
+  const otherAreas = neighborhoodGuidesForCity(area.cityId).filter((other) => other.id !== area.id);
   const pageId = `stay-area-${area.id}`;
   const airportGuide = city.related.find((item) => item.label.startsWith("Ben Gurion Airport"));
   const browseOffers = linksForPage(`stay-area-${area.id}-browse`);
@@ -255,7 +242,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         {checklistSection}
         <section id="other-areas" aria-labelledby="other-areas-h" className="mt-12 scroll-mt-32">
           <h2 id="other-areas-h" className="text-2xl font-semibold sm:text-3xl">Explore other {city.city} neighborhoods</h2>
-          <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3" data-testid="related-neighborhood-grid">
+          <ul className={`mt-5 grid grid-cols-2 gap-3 sm:gap-4 ${isJerusalem ? "lg:grid-cols-3" : "lg:grid-cols-4"}`} data-testid="related-neighborhood-grid">
             {otherAreas.map((other) => <li key={other.id} className="min-w-0">
               <Link to={other.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60 hover:bg-secondary/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                 <div className="overflow-hidden bg-muted">
