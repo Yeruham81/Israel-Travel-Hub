@@ -64,7 +64,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
     ["trip-planning", "Plan your trip"],
     ["contact", "Contact me"],
   ],
-  contactIntroduction: "Planning a visit to Jaffa or a longer trip around Tel Aviv? Tell me your dates, pickup point and the places you would like to see. I can help with a private transfer, a driver for the day or practical trip planning.",
+  contactIntroduction: "Tell me your date, pickup point, group size and the places you would like to see in Tel Aviv or Jaffa. I can arrange a private transfer or a sightseeing day with a driver.",
   facts: [
     { icon: "location", label: "Location", value: "South Tel Aviv–Yafo", note: "Historic hill, harbour and surrounding streets" },
     { icon: "duration", label: "Time needed", value: "2–5 hours", note: "Choose a short walk or relaxed half-day" },
