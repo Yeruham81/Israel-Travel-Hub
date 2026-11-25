@@ -26,8 +26,8 @@ function assertMobileReviewsPanel(container: HTMLElement) {
   const reviewsRow = within(contact).getByTestId("contact-reviews-row");
   expect(reviewsRow).toHaveClass("flex", "flex-nowrap", "md:flex-wrap");
   const portrait = reviewsRow.querySelector('img[data-photo-role="contact-portrait"]');
-  expect(portrait).toHaveAttribute("src", airportTransferPhotos.moshe.src);
-  expect(portrait).toHaveAttribute("alt", airportTransferPhotos.moshe.alt);
+  expect(portrait).toHaveAttribute("src", airportTransferPhotos["moshe"]!.src);
+  expect(portrait).toHaveAttribute("alt", airportTransferPhotos["moshe"]!.alt);
   const reviews = within(reviewsRow).getByRole("link", { name: /Read Reviews on.*TripAdvisor/i });
   expect(reviews).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
   expect(reviews).toHaveClass("bg-[#34E0A1]");
