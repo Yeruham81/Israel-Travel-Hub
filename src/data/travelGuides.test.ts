@@ -97,7 +97,8 @@ describe("travel guide topic filters and prerender safety", () => {
       expect(dates).toEqual([...dates].sort((a, b) => b.localeCompare(a)));
     };
     checkRecency(guideDirectory);
-    expect(guideDirectory[0]?.updatedAt).toBe("2026-11-24");
+    expect(guideDirectory[0]?.updatedAt).toBe("2026-11-25");
+    expect(guideDirectory.find((entry) => entry.id === "stay-haifa")?.updatedAt).toBe("2026-11-25");
     for (const topic of guideTopics) {
       checkRecency(filterGuides("", topic.id));
     }
