@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { guideContactCopy, type GuideContactKind } from "@/lib/guide-contact";
 
@@ -25,5 +26,34 @@ describe("contextual personal guide contact", () => {
 
   it("does not populate the subject even when a guide title is long", () => {
     expect(guideContactCopy("a".repeat(240), "general").subject).toBe("");
+  });
+});
+
+describe("attraction contact introductions promote transport instead of generic visitor advice", () => {
+  const pages = [
+    "Akko", "Annunciation", "Caesarea", "Capernaum", "DeadSea", "Eilat", "EinGedi",
+    "Haifa", "Jaffa", "Magdala", "Masada", "MountBeatitudes", "MountOlives",
+    "MountPrecipice", "MountTabor", "MountZion", "OldCityJerusalem", "QasrElYahud",
+    "RamonCrater", "RoshHanikra", "SeaOfGalilee", "Tabgha", "TelMegiddo",
+    "ViaDolorosa", "Yardenit",
+  ] as const;
+
+  it.each(pages)("%s offers a private transfer or day trip with a driver", page => {
+    const src = readFileSync(`src/components/${page}AttractionPage.tsx`, "utf8");
+    const contact = src.match(/contactIntroduction: "([^"\\n]+)"/)?.[1];
+    expect(contact, page).toBeTruthy();
+    expect(contact, page).toMatch(/private (?:transfer|transport|driver|day trip|journey)|day trip with a driver|transport with a driver/i);
+    expect(contact, page).not.toMatch(/general planning information|have a question about visiting/i);
+  });
+
+  it("keeps the dedicated inquiry templates focused on Moshe's private transport services", () => {
+    const files = ["HomeContactForm", "TourCategoryPage", "SacredHillContactForm", "TransferQuoteForm", "PrivateDriverQuoteForm", "ShoreQuoteForm"];
+    for (const name of files) {
+      const src = readFileSync(`src/components/${name}.tsx`, "utf8");
+      expect(src, name).toMatch(/private (?:transfer|transport|driver|journey|ride|vehicle|day trip)|private airport|driver/i);
+    }
+    const tours = readFileSync("src/components/TourCategoryPage.tsx", "utf8");
+    expect(tours).not.toContain("I can offer general planning information");
+    expect(tours).toContain("I arrange private transfers and day trips with a driver");
   });
 });
