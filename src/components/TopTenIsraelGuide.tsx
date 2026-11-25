@@ -293,7 +293,7 @@ export function TopTenIsraelGuide() {
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{planning.map(item => <GuideCard key={item.to} item={item} />)}</div>
       </section>
 
-      <HomeContactForm guide={guideContactCopy("Top 10 Things to Do in Israel", "itinerary", "Israel")} />
+      <HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy("Top 10 Things to Do in Israel", "itinerary", "Israel")} />
 
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use official park, venue and local-authority information for visitor access, nature areas and safety. Check current opening hours, weather and reservations for your dates.</p>
