@@ -168,10 +168,10 @@ console.log("Airport journey SEO, section anchors, internal links and mobile tab
 for (const [slug, title, expectedPhoto, required] of [
   ["taxis-in-israel", "Taxis in Israel: The Complete Guide for Tourists",
     "/images/travel-blog/taxi-in-tel-aviv.webp",
-    ["Choose the right taxi booking method", "How to Find and Book a Taxi in Israel", "Questions about using taxis in Israel?"]],
+    ["Choose the right taxi booking method", "How to Find and Book a Taxi in Israel", "Need a private transfer or driver in Israel?"]],
   ["taxi-fares-in-israel", "Taxi Fares in Israel: Meter Rates, Night Prices &amp; Surcharges",
     null,
-    ["Taxi meter rates at a glance", "Taxi tariff times", "Common permitted surcharges", "Questions about a taxi journey?"]],
+    ["Taxi meter rates at a glance", "Taxi tariff times", "Common permitted surcharges", "Need a private transfer for your journey?"]],
 ]) {
   const file = join(root, "travel-blog", slug, "index.html");
   assert(existsSync(file), "Missing taxi guide: " + slug);
