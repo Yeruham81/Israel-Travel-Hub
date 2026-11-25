@@ -34,7 +34,7 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(screen.getByRole("heading", { level: 1, name: "Best Dead Sea hotels: where to stay" })).toBeInTheDocument();
     const categories = screen.getAllByTestId("deadsea-category-card");
     expect(categories).toHaveLength(4);
-    expect(screen.getByTestId("deadsea-category-grid")).toHaveClass("min-[360px]:grid-cols-2", "lg:grid-cols-3");
+    expect(screen.getByTestId("deadsea-category-grid")).toHaveClass("min-[360px]:grid-cols-2", "lg:grid-cols-2");
     expect(categories.map(a => a.getAttribute("href"))).toEqual(["#group-luxury", "#group-spa", "#group-family", "#group-value"]);
     expect(categories.every(a => a.querySelector("img")?.getAttribute("src"))).toBe(true);
     const categoryImages = categories.map(card => card.querySelector("img")!.getAttribute("src"));
@@ -82,8 +82,8 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(resortHotelPhoto("ds-oasis").src).not.toBe(resortHotelPhoto("ds-noga").src);
     expect(container).not.toHaveTextContent("Compare other properties on the booking provider");
     expect(screen.getAllByTestId("deadsea-hotel-facility-notice")).toHaveLength(2);
-    expect(container).toHaveTextContent("As of November 2026, the water park is temporarily closed");
-    expect(container).toHaveTextContent("As of November 2026, the spa Jacuzzi is temporarily out of service.");
+    expect(container).toHaveTextContent("As of November 2026, the operator lists the water park and thermal mineral pools as temporarily closed");
+    expect(container).toHaveTextContent("As of November 2026, the operator lists the spa Jacuzzi and hotel gym as temporarily closed for upgrades.");
     expect(container).not.toHaveTextContent("Select a hotel name to jump");
     expect(container).not.toHaveTextContent("Current room prices and availability are checked on the booking provider");
     expect(new Set(cards.map(card => card.querySelector("img")?.getAttribute("src"))).size).toBe(11);
