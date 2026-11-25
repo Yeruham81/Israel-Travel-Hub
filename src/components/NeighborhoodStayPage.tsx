@@ -252,26 +252,32 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         {highlightsSection}
         {locationSection}
         {checklistSection}
-        <section id="other-areas" aria-labelledby="other-areas-h" className="mt-14 scroll-mt-32">
+        <section id="other-areas" aria-labelledby="other-areas-h" className="mt-12 scroll-mt-32">
           <h2 id="other-areas-h" className="text-2xl font-semibold sm:text-3xl">Explore other {city.city} neighborhoods</h2>
-          <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3" data-testid="related-neighborhood-grid">{otherAreas.map((other) => <li key={other.id} className="min-w-0">
-            <Link to={other.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary">
-              <img src={other.photo.src} alt={other.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
-              <span className="flex flex-1 items-center justify-between gap-3 p-4">
-                <span><span className="block text-xl font-semibold">{other.shortName}</span><span className="mt-1 block text-xs text-muted-foreground">{other.bestFor}</span></span>
-                <ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden />
-              </span>
-            </Link>
-          </li>)}
-            {<li className="min-w-0">
-              <Link to={city.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary">
-                <img src={isJerusalem ? jerusalemAreaGuidePhoto : telAvivAreaGuidePhoto} alt={isJerusalem ? "Jerusalem Old City skyline and surrounding neighborhoods" : "Tel Aviv coastline and neighborhoods"} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
-                <span className="flex flex-1 items-center justify-between gap-3 p-4">
-                  <span><span className="block text-xl font-semibold">All {city.city} neighborhoods</span><span className="mt-1 block text-xs text-muted-foreground">Compare areas and hotel choices across the city</span></span>
-                  <ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden />
+          <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3" data-testid="related-neighborhood-grid">
+            {otherAreas.map((other) => <li key={other.id} className="min-w-0">
+              <Link to={other.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60 hover:bg-secondary/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <div className="overflow-hidden bg-muted">
+                  <img src={other.photo.src} alt={other.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" />
+                </div>
+                <span className="flex flex-1 flex-col p-3 sm:p-4">
+                  <span className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-lg">{other.shortName}</span>
+                  <span className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{other.bestFor}</span>
                 </span>
               </Link>
-            </li>}</ul>
+            </li>)}
+            <li className="min-w-0">
+              <Link to={city.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60 hover:bg-secondary/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <div className="overflow-hidden bg-muted">
+                  <img src={isJerusalem ? jerusalemAreaGuidePhoto : telAvivAreaGuidePhoto} alt={isJerusalem ? "Jerusalem Old City skyline and surrounding neighborhoods" : "Tel Aviv coastline and neighborhoods"} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" />
+                </div>
+                <span className="flex flex-1 flex-col p-3 sm:p-4">
+                  <span className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-lg">All {city.city} hotels</span>
+                  <span className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">Browse the complete city hotel selection</span>
+                </span>
+              </Link>
+            </li>
+          </ul>
         </section>
         <FaqList faqs={area.faqs} />
         <StayTripLinks region={area.cityId} currentPath={area.path} />
