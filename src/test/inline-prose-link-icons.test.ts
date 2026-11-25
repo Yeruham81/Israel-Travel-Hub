@@ -30,7 +30,7 @@ describe("editorial prose links", () => {
       "I cannot assume or guarantee an accessible vehicle",
     ]) expect(seniors).not.toContain(text);
     expect(seniors).toContain('href="#contact"');
-    expect(seniors).toContain('heading:"Send me your trip details"');
-    expect(seniors).toContain("Send me your dates, destinations and any walking or vehicle needs");
+    expect(seniors).toContain('heading:"Need a private driver for a comfortable day trip?"');
+    expect(seniors).toContain("I arrange comfortable private day trips with a driver in Israel");
   });
 });
