@@ -260,6 +260,9 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
         <p className="eyebrow">Choose the location, then the hotel</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Haifa stay suits you?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">I recommend choosing your Haifa neighborhood before comparing rooms. The German Colony puts restaurants and historic streets close by; Mount Carmel suits viewpoints and upper-city dining; and the southern waterfront is convenient for beach days. Downtown and Hadar offer lively urban bases, including independent places to stay.</p>
+        <Link to="/accommodation/haifa/" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary" data-testid="editorial-all-hotels-link">
+          Browse all Haifa hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+        </Link>
         <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-2" data-testid="haifa-category-grid">
           {mainGroups.map(group => {
             const copy = groupCopy[group.id];

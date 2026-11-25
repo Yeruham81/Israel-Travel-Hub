@@ -49,9 +49,12 @@ describe("Dead Sea destination → travel intent → booking", () => {
   it("the destination is a useful complete guide with every property, category photos and a real map before booking", () => {
     const { container } = render(<HotelDestinationPage guide={deadSeaStayGuide} />);
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
-    expect(screen.getAllByTestId("stay-hotel-group")).toHaveLength(5);
+    expect(screen.getByTestId("regional-hotel-browser")).toBeInTheDocument();
+    expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(6);
+    expect(screen.queryByTestId("stay-comparison-row")).toBeNull();
+    expect(screen.getByTestId("regional-hotel-count")).toHaveTextContent("Showing 6 of 11 hotels");
+    fireEvent.click(screen.getByTestId("regional-hotel-expand"));
     expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(11);
-    expect(screen.getAllByTestId("stay-comparison-row")).toHaveLength(11);
     const categoryCards = screen.getAllByTestId("stay-category-card");
     expect(categoryCards).toHaveLength(2);
     for (const guide of categories) {
@@ -61,7 +64,7 @@ describe("Dead Sea destination → travel intent → booking", () => {
     }
     const map = container.querySelector("#location iframe")!;
     expect(new URL(map.getAttribute("src")!, "https://example.test").hostname).toBe("maps.google.com");
-    expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#location")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(container.querySelectorAll("main")).toHaveLength(1);
     for (const hotel of deadSeaHotelRecommendations) expect(container.querySelectorAll(`#hotel-${hotel.id}`)).toHaveLength(1);
   });

@@ -53,9 +53,12 @@ describe("Tiberias destination and distinct hotel intents", () => {
   it("the parent compares all ten stays, provides a real town map and explains locations before booking", () => {
     const { container } = render(<HotelDestinationPage guide={destination} />);
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
-    expect(screen.getAllByTestId("stay-hotel-group")).toHaveLength(4);
+    expect(screen.getByTestId("regional-hotel-browser")).toBeInTheDocument();
+    expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(6);
+    expect(screen.queryByTestId("stay-comparison-row")).toBeNull();
+    expect(screen.getByTestId("regional-hotel-count")).toHaveTextContent("Showing 6 of 10 hotels");
+    fireEvent.click(screen.getByTestId("regional-hotel-expand"));
     expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(10);
-    expect(screen.getAllByTestId("stay-comparison-row")).toHaveLength(10);
     for (const h of hotels) expect(container.querySelectorAll(`#hotel-${h.id}`)).toHaveLength(1);
     const cards = screen.getAllByTestId("stay-category-card");
     expect(cards).toHaveLength(2);
@@ -67,7 +70,7 @@ describe("Tiberias destination and distinct hotel intents", () => {
     expect(map.hostname).toBe("maps.google.com");
     expect(map.searchParams.get("q")).toBe(`${destination.map.lat},${destination.map.lon}`);
     expect(map.searchParams.get("output")).toBe("embed");
-    expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#location")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     const cityBrowse = within(container.querySelector("#more-stays") as HTMLElement).getByRole("link", { name: /Check prices on Booking.com/ });
     expect(cityBrowse).toHaveAttribute("href", "https://booking.tpk.lv/tsl5okP9");
     expect(cityBrowse).toHaveAttribute("rel", "sponsored noopener noreferrer");
@@ -97,6 +100,7 @@ describe("Tiberias destination and distinct hotel intents", () => {
     const pages = [{ element: <HotelDestinationPage guide={destination} />, ids: hotels.map((hotel) => hotel.id), pageId: "stay-tiberias" }, ...categories.map((guide) => ({ element: <HotelCategoryPage guide={guide} destination={destination} />, ids: guide.picks.map((pick) => pick.hotelId), pageId: `stay-tiberias-${guide.id}` }))];
     for (const page of pages) {
       const { unmount } = render(page.element);
+      if (page.pageId === "stay-tiberias") fireEvent.click(screen.getByTestId("regional-hotel-expand"));
       for (const id of page.ids) {
         const booking = providerLinks.find((link) => link.id === `hotel-${id}-expedia`)!;
         const card = screen.getAllByTestId("hotel-recommendation").find((card) => card.id === `hotel-${id}`)!;

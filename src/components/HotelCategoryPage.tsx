@@ -2,6 +2,7 @@ import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { hotelCategoryGuides, type HotelStayDestination, type HotelCategoryGuide } from "@/data/content";
+import { accommodationEditorial } from "@/data/accommodationEditorial";
 import { categoryDecisionExamples } from "@/data/localEditorialInsights";
 import { linksForPage } from "@/data/registry";
 import { GuideHeader, OnThisPage, Section, FaqList, ProviderSection, SourceList } from "@/components/Guide";
@@ -17,12 +18,20 @@ export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCateg
   const practicalExample = categoryDecisionExamples[`${destination.id}:${g.id}`];
   const sections = [["overview", "How to choose"], ["compare", "Compare hotels"], ["details", g.detailNavLabel], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact Moshe"], ["sources", "Sources"]] as const;
   const otherGuides = hotelCategoryGuides.filter((guide) => guide.destinationId === destination.id && guide.id !== g.id);
+  const editorialPath = accommodationEditorial[destination.id as "haifa" | "tiberias" | "deadsea"].path;
   return (
     <main className="pb-8">
       <GuideHeader crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }, { name: destination.name, to: destination.path as LinkProps["to"] }, { name: g.shortTitle, to: g.path as LinkProps["to"] }]} eyebrow={`${destination.name}, Israel · ${g.shortTitle}`} title={g.title} intro={g.summary} image={g.photo} checkedAt={destination.reviewedAt} />
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
-        <Link to={destination.path as LinkProps["to"]} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"><ArrowLeft className="h-4 w-4" aria-hidden /> Compare all {destination.name} stays</Link>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Link to={destination.path as LinkProps["to"]} className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary">
+            <ArrowLeft className="h-4 w-4" aria-hidden /> Browse all {destination.name} hotels
+          </Link>
+          <Link to={editorialPath as LinkProps["to"]} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-primary underline underline-offset-2">
+            Read my full {destination.name} hotel comparison <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
         <Section id="overview" title={g.overviewTitle} className="scroll-mt-32">{g.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}<div className="mt-5 grid gap-4 sm:grid-cols-2">{g.decisions.map((decision) => <div key={decision.title} className="rounded-2xl border bg-card p-5"><h3 className="text-xl">{decision.title}</h3><p className="mt-2 text-sm! leading-relaxed text-muted-foreground">{decision.text}</p></div>)}</div>{practicalExample && <aside className="mt-6 rounded-xl border-l-4 border-primary bg-secondary/40 p-5">
           <h3 className="text-lg font-semibold">{practicalExample.heading}</h3>
           <p className="mt-2 text-sm leading-relaxed">{practicalExample.situation}</p>
@@ -42,7 +51,7 @@ export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCateg
         </nav>
         <FaqList faqs={g.faqs} />
         <StayTripLinks region={destination.id} currentPath={g.path} />
-        <HomeContactForm key={pageId} guide={guideContactCopy(g.title, "accommodation", destination.name)} />
+        <HomeContactForm key={pageId} showTripadvisorBesidePortraitMobile guide={guideContactCopy(g.title, "accommodation", destination.name)} />
         <SourceList ids={[...new Set([destination.sourceIds[0]!, ...g.sourceIds, ...g.picks.map((pick) => resortHotel(pick.hotelId).sourceId)])]} />
         <StayPhotoCredits photos={[g.photo]} />
       </article>
