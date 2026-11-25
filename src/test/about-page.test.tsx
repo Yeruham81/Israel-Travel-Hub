@@ -28,9 +28,9 @@ describe("one personal About Moshe Barak page", () => {
     expect(container.textContent).not.toContain("reservations@israel-taxi.com");
     expect(screen.getAllByRole("img", { name: "Moshe Barak" })).toHaveLength(1);
     expect(screen.getByRole("link", { name: "Read Reviews on TripAdvisor" })).toHaveAttribute("href", tripadvisorProfileUrl);
-    expect(screen.getByRole("heading", { name: "Send me a message" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Need a private transfer or day trip in Israel?" })).toBeInTheDocument();
     expect(screen.getByRole("form", { name: "Contact me" })).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Tell me how I can help…")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Travel date, pickup point, destinations, passengers and luggage…")).toBeInTheDocument();
 
     expect(screen.getByRole("heading", { name: "Personal attention" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Professional service" })).toBeInTheDocument();
