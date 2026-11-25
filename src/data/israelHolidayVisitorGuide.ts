@@ -180,7 +180,7 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "why": "A public holiday marked by gatherings, ceremonies, picnics and celebrations, with events often starting on the eve.",
         "transport": "Public transport runs on altered holiday schedules that differ by route and year; evening festivities and road closures also affect access.",
         "visitor": "Parks and beaches can be busy. Some museums and stores close; other leisure venues open with special hours.",
-        "tip": "Check both the eve's traffic restrictions and the holiday-day transport schedule rather than assuming ordinary weekday service."
+        "tip": "Check traffic restrictions on the holiday eve and the transport schedule for the holiday itself."
       },
       {
         "id": "jerusalem-day",

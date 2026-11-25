@@ -89,7 +89,7 @@ export const museums: MuseumEntry[] = [
     openingDays: "Sun–Fri (closed Sat); check holiday schedule",
     priceNis: 0,
     admission: "Gallery entry free; self-guided audio tour ₪90; guided tours priced separately", booking: "Check dates for guided White City tours or choose the self-guided audio walk",
-    intro: "A gallery, bookshop and starting point for guided and self-guided White City architecture walks, rather than a conventional large museum.",
+    intro: "A gallery, bookshop and starting point for guided and self-guided White City architecture walks.",
     highlights: ["Design exhibitions", "Bauhaus and International Style context", "Guided walks and self-guided audio tours"],
     tip: "Check with the centre in advance that your chosen guided walk or self-guided activity is running on your visit date.",
     url: "https://bauhaus-center.com/", ticketUrl: "https://bauhaus-center.com/tel-aviv-white-city-tours/",

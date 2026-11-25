@@ -145,7 +145,7 @@ const faqs=[
   {q:"Which Jerusalem museums are best for children?",a:"The Bloomfield Science Museum is particularly interactive, while Time Elevator is a multimedia attraction for older children. Ask about minimum ages, languages and booked time slots."},
   {q:"Which museums are close enough to combine?",a:"The Israel Museum and Bible Lands Museum are close together, and the city-centre museums around Nahalat Shiva and Hillel Street are walkable. Yad Vashem and the Old City need separate travel arrangements."},
   {q:"Are Jerusalem museums open on Shabbat and Jewish holidays?",a:"Some open on Saturdays, including the Israel Museum and Museum for Islamic Art, while others close. Fridays and holiday eves often have shorter hours. Check the official museum calendar before visiting."},
-  {q:"Is the Time Elevator a museum?",a:"It is a separate, immersive audiovisual attraction rather than a collection-based museum. I include it because it can be an entertaining history stop, particularly for families."},
+  {q:"Is the Time Elevator a museum?",a:"It is a separate, immersive audiovisual attraction. I include it because it can be an entertaining history stop, particularly for families."},
 ];
 export function JerusalemMuseumsGuide(){
   const featured=museums.filter(m=>["israel","yad","tower","science","tolerance","begin"].includes(m.id));

@@ -815,7 +815,7 @@ export const journeyDestinationGuides = {
       ],
             "checklist": [
         "Pack a bag for wet swimwear and a change of clothes for your return to Jerusalem.",
-        "Wear sturdy walking shoes rather than beach sandals if you plan to explore Masada or Ein Gedi.",
+        "Wear sturdy walking shoes to explore Masada or Ein Gedi.",
         "Have a payment card available for national-park admission and regulated parking."
       ],
       "faqs": [

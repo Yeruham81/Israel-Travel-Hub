@@ -39,5 +39,5 @@ export const baptismFaqs=[
  {q:"What clothing should I bring?",a:"Yardenit requires a white baptism robe for entering the river, available to rent or buy. At Qasr el-Yahud follow the site's modest-clothing and river-access instructions. Bring a towel, a change of clothes and suitable shoes."},
  {q:"Can I visit without being baptized?",a:"Yes. Visitors may observe the designated riverside, pray and reflect when the sites are open. Give worshippers space and ask before photographing ceremonies."},
  {q:"Are the baptismal waters wheelchair-accessible?",a:"Facilities and viewpoints may be accessible, but actual entry into the river may involve steps, uneven ground and changing water conditions. Contact the chosen operator about specific mobility needs."},
- {q:"Does a tour or private transfer include a baptism ceremony?",a:"Not unless the provider explicitly confirms it. My private-driver service covers transport rather than clergy. Confirm the religious arrangements, visitor admission, guiding and transportation separately."},
+ {q:"Does a tour or private transfer include a baptism ceremony?",a:"Not unless the provider explicitly confirms it. My private-driver service covers transportation. Arrange clergy and religious services separately. Confirm the religious arrangements, visitor admission, guiding and transportation separately."},
 ] as const;

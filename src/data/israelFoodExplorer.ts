@@ -145,7 +145,7 @@ export const foodTours = [
 ];
 
 export const foodFAQs = [
- {q:"What should I eat first on a trip to Israel?",a:"For an easy start, try a falafel pita, hummus as a meal or shakshuka for breakfast. If you enjoy meat, shawarma is another widely available option. Add a bakery stop or one shared dessert rather than attempting everything in one day."},
+ {q:"What should I eat first on a trip to Israel?",a:"For an easy start, try a falafel pita, hummus as a meal or shakshuka for breakfast. If you enjoy meat, shawarma is another widely available option. Add a bakery stop or share a dessert."},
  {q:"What are the best vegetarian foods to try?",a:"Falafel, hummus, bourekas, sabich and shakshuka are common choices, although some contain egg or dairy. Ask about each preparation, tahini and cross-contact if you follow a strict diet."},
  {q:"Are these foods originally Israeli?",a:"Not all of them. Many dishes are part of shared Arab, Palestinian, Levantine, North African, Balkan, Turkish and Jewish-diaspora food histories. The guide focuses on what a visitor will encounter in Israel, not on claiming exclusive origins."},
  {q:"Is kosher food the same as halal food?",a:"No. Kosher and halal are different religious dietary frameworks; one certification does not automatically establish the other. If certification matters, check the specific establishment and the requirements you follow."},

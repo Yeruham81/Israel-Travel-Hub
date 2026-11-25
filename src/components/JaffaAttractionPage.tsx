@@ -161,7 +161,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       <p className="text-sm leading-relaxed">On <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>religious holidays and special dates</Link>, check the venue's published schedule before visiting.</p>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Accessibility and family visits</h3>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">The port promenade and parts of the surrounding streets offer relatively level approaches, while the historic hill has slopes, stone paving, steps and narrow passages. A stroller or wheelchair user may need an adapted route rather than the full route through every alley.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">The port promenade and parts of the surrounding streets offer relatively level approaches, while the historic hill has slopes, stone paving, steps and narrow passages. Visitors using a stroller or wheelchair may need a route adapted to their mobility needs.</p>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">For a booked Na Laga'at activity, consult the centre's <a href={official.nalagaatAccess} target="_blank" rel="noopener noreferrer" className={inlineLink}>accessibility arrangements</a> in advance.</p>
       </article>
     </div>

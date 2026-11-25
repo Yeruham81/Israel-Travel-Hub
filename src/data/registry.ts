@@ -990,7 +990,7 @@ const sourceCatalog: SourceReference[] = [
   {
     id: "haifa-botanica-facilities", title: "Botanica — rooftop plunge pool and facilities", publisher: "Leonardo Hotels",
     url: "https://www.leonardo-hotels.com/haifa/hotel-botanica-haifa/facilities", checkedAt: HAIFA_STAY_REVIEW_DATE,
-    note: "The operator describes a rooftop plunge pool, rather than a full-size swimming pool. Confirm the seasonal calendar and spa inclusions separately from the room offer.",
+    note: "The operator describes the rooftop facility as a small plunge pool. Confirm the seasonal calendar and spa inclusions separately from the room offer.",
   },
   {
     id: "haifa-dan-carmel-rooms", title: "Dan Carmel — room layouts and occupancy", publisher: "Dan Hotels",
@@ -1010,7 +1010,7 @@ const sourceCatalog: SourceReference[] = [
   {
     id: "ds-noga-spa", title: "Esprit Spa — Noga: facilities and minimum age", publisher: "Isrotel",
     url: "https://www.isrotel.com/eventsmain/hangouts/attraction/dead-sea/isrotel-ganim-attractions/esprit-spa/", checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
-    note: "The operator states spa entry is for guests aged 16 and over, with treatments charged separately. This restriction applies to the spa rather than the whole hotel.",
+    note: "The operator states spa entry is for guests aged 16 and over, with treatments charged separately. The restriction applies specifically to the spa.",
   },
   {
     id: "ds-herods-spa", title: "Vitalis Spa — Herods Dead Sea", publisher: "Leonardo Hotels",
@@ -1980,7 +1980,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-embassy", cityId: "telaviv", areaId: "telaviv-beachfront", name: "Embassy Hotel Tel Aviv", style: "Retro-inspired boutique hotel near the beach",
-    summary: "A smaller hotel on Shalom Aleichem Street at HaYarkon, close to the central promenade. Its retro-inspired interiors offer a different format from the large beachfront hotels, with the sea nearby rather than a resort setting.",
+    summary: "A smaller hotel on Shalom Aleichem Street at HaYarkon, close to the central promenade. Its retro-inspired interiors and location near the sea offer an alternative to a large beachfront resort.",
     bestFor: "Independent travelers who want central beach access and a smaller hotel atmosphere.",
     watch: "Check the room's outlook and size. A location near the coast does not guarantee a sea view or the facilities of a large resort.", sourceId: "hotel-tlv-embassy-official",
   },
@@ -2010,7 +2010,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-elkonin", cityId: "telaviv", areaId: "telaviv-neve-tzedek", name: "Elkonin Tel Aviv – MGallery", style: "Restored heritage hotel near Neve Tzedek",
-    summary: "A restored historic hotel on Lilienblum Street, on the eastern approach to Neve Tzedek and near the southern end of Rothschild. It combines a heritage building with a contemporary hotel setting, rather than placing you deep within Shabazi's residential lanes.",
+    summary: "A restored historic hotel on Lilienblum Street, on the eastern approach to Neve Tzedek and near the southern end of Rothschild. It combines a heritage building with a contemporary hotel setting near Shabazi's residential lanes.",
     bestFor: "Couples seeking an upscale heritage stay with access to both Neve Tzedek and the southern center.",
     watch: "Confirm your room's building and outlook, and check any spa, pool, breakfast or restaurant arrangements for the dates you book.", sourceId: "hotel-tlv-elkonin-official",
   },
@@ -2034,13 +2034,13 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-albi-florentin", cityId: "telaviv", areaId: "telaviv-florentin", name: "Albi Florentin", style: "Small hotel with digital self check-in",
-    summary: "A Florentin property with a technology-led arrival format, described by its operator as using self check-in. Consider it for a more independent stay focused on the neighborhood rather than a conventional staffed hotel experience.",
+    summary: "A Florentin property with a technology-led arrival format, described by its operator as using self check-in. Consider it for a more independent neighbourhood stay; check the staffing and services you need.",
     bestFor: "Travelers comfortable with digital arrival instructions and a small urban property.",
     watch: "Obtain check-in instructions before arrival and confirm support availability, luggage storage and the room's noise exposure.", sourceId: "hotel-tlv-albi-florentin-official",
   },
   {
     id: "tlv-florentin-house", cityId: "telaviv", areaId: "telaviv-florentin", name: "Florentin House by HOMY", style: "Neighborhood stay on Florentin Street",
-    summary: "A small-property option on Florentin Street listed by HOMY, placing you within the neighborhood's everyday café and nightlife setting. Compare the current room descriptions rather than relying on older accounts of the building's accommodation format.",
+    summary: "A small-property option on Florentin Street listed by HOMY, placing you within the neighborhood's everyday café and nightlife setting. Check the current room descriptions and accommodation format.",
     bestFor: "Independent visitors who want Florentin itself as their base for the southern city.",
     watch: "Confirm the exact room or unit, private facilities, check-in process and sound insulation. Do not assume an older hostel listing describes the current offer.", sourceId: "hotel-tlv-florentin-house-official",
   },

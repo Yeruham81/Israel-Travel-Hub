@@ -111,7 +111,7 @@ function FoodWords(){
  return <section id="food-words" aria-labelledby="food-words-heading" className="mt-12 scroll-mt-24">
    <SectionHeading id="food-words" title="Six useful food words" intro="You will see these on menus and at food stalls. Knowing a few makes it much easier to choose the bread, sauces and accompaniments."/>
    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{foodExtras.map(item=><article key={item.name} className="rounded-xl border bg-card p-4"><h3 className="font-bold">{item.name}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p></article>)}</div>
-   <Tip>Prefer mild food? You can say <strong>“Lo charif, bevakasha”</strong> (“Not spicy, please”). If you have an allergy, explain the exact ingredient rather than relying on one general phrase.</Tip>
+   <Tip>Prefer mild food? You can say <strong>“Lo charif, bevakasha”</strong> (“Not spicy, please”). If you have an allergy, identify the exact ingredient and confirm it with the restaurant staff.</Tip>
  </section>;
 }
 function FoodDay({onPickFood}:{onPickFood:PickFood}){

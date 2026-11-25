@@ -282,7 +282,7 @@ export function TelAvivBeachesGuide() {
       <section id="season" aria-labelledby="season-h" className="mt-12 scroll-mt-24">
         <Heading id="season" title="When is the best time to visit?" />
         <p className="leading-relaxed">I like the coast in spring and autumn for comfortable walks and less intense midday heat. Summer is the busiest season for sunbathing and beach life; arrive earlier, bring water and protect yourself from the sun. In winter, the promenade can still be lovely, but rain, wind and rough seas can change your plans.</p>
-        <p className="mt-3 leading-relaxed">The city operates some lifeguard stations outside the main bathing season. Check <OfficialLink href={officialTelAvivBeaches}>current municipal beach and lifeguard information</OfficialLink> on the day you plan to swim, rather than relying on a fixed annual closing date.</p>
+        <p className="mt-3 leading-relaxed">The city operates some lifeguard stations outside the main bathing season. Check <OfficialLink href={officialTelAvivBeaches}>current municipal beach and lifeguard information</OfficialLink> on the day you plan to swim.</p>
       </section>
 
       <section id="practical" aria-labelledby="practical-h" className="mt-12 scroll-mt-24">
@@ -318,7 +318,7 @@ export function TelAvivBeachesGuide() {
       </section>
 
       <section id="beyond" aria-labelledby="beyond-h" className="mt-12 scroll-mt-24">
-        <Heading id="beyond" title="Beaches beyond Tel Aviv" intro="If you have more time, these are different coastal outings rather than extra stops on the central Tel Aviv promenade." />
+        <Heading id="beyond" title="Beaches beyond Tel Aviv" intro="Set aside a separate coastal outing for these beaches beyond Tel Aviv." />
         <div className="grid gap-4 md:grid-cols-3">
           <div className="rounded-xl border bg-card p-5"><h3 className="text-lg font-semibold">Sidna Ali, Herzliya</h3><p className="mt-2 text-sm leading-relaxed">A northern shore with cliffs and a different landscape from Tel Aviv. Check the specific access route, safe bathing zone and any local restrictions.</p><p className="mt-4 text-xs"><OfficialLink href="https://www.google.com/maps/search/?api=1&query=Sidna+Ali+Beach+Herzliya">View location</OfficialLink></p></div>
           <div className="rounded-xl border bg-card p-5"><h3 className="text-lg font-semibold">Ga'ash Beach</h3><p className="mt-2 text-sm leading-relaxed">A more natural coastal setting, where cliff edges and access conditions deserve extra care. Never treat an unguarded stretch as a swimming beach.</p><p className="mt-4 text-xs"><OfficialLink href="https://www.google.com/maps/search/?api=1&query=Gaash+Beach+Israel">View location</OfficialLink></p></div>

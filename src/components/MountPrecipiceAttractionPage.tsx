@@ -111,7 +111,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">On foot</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The easy option is the paved lookout path from the hilltop car park. The longer <strong>Gospel Trail</strong> descends from Mount Precipice towards the Kesullot Valley. It is a proper hike rather than a shortcut into the old city; check the trail route and arrange a pickup or return before setting out.</p>
+            <p className="mt-2 text-sm leading-relaxed">The easy option is the paved lookout path from the hilltop car park. The longer <strong>Gospel Trail</strong> descends from Mount Precipice towards the Kesullot Valley. Allow time for a proper hike; check the trail route and arrange a pickup or return before setting out.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="mount-precipice-location-map">

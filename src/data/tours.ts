@@ -476,7 +476,7 @@ export const tourCategories: TourCategory[] = [
     paragraphs: [
       "Most of these experiences meet or offer pickup in Mitzpe Ramon, not Tel Aviv or Jerusalem. The booking platform may classify them under Sde Boker, even when the actual meeting point is in Mitzpe Ramon. Arrange your intercity journey separately unless the specific product clearly includes it.",
       "Shorter jeep and geology tours explore the crater's multicoloured rock, dry riverbeds and viewpoints; longer combinations may include hiking, and selected offers focus on a sunset experience or rappelling. Conditions are physically different: check age limits, accessibility, equipment, minimum group size and exact duration.",
-      "The Negev is exposed to heat and flash-flood risks even when local weather looks clear. Check current Israel Nature and Parks Authority warnings, trail closures, weather forecasts and the operator's safety and cancellation guidance. Desert outings and stargazing are subject to conditions rather than guaranteed access or skies.",
+      "The Negev is exposed to heat and flash-flood risks even when local weather looks clear. Check current Israel Nature and Parks Authority warnings, trail closures, weather forecasts and the operator's safety and cancellation guidance. Desert access and stargazing depend on weather and local conditions.",
     ],
     choices: [
       { title: "2-hour crater jeep safari", text: "See the highlights of the makhtesh and geology without committing a full day." },
@@ -526,7 +526,7 @@ export const tourCategories: TourCategory[] = [
     photo: migration["what-to-eat-in-israel"], match: { tags: ["food"] },
     paragraphs: [
       "Choose your city and the kind of experience you want. Jerusalem's Mahane Yehuda tours concentrate on the stalls and food traditions of one bustling market; Tel Aviv options range from Levinsky and Carmel Market tastings to a longer Jaffa-to-Carmel walk and a hands-on cooking workshop.",
-      "A focused market walk generally takes two to three hours. A multi-neighbourhood tour may be longer and devote some of its time to history, architecture or walking rather than tasting. A private culinary guide offers flexibility, but check the exact itinerary and whether drinks or a full meal are included.",
+      "A focused market walk generally takes two to three hours. A multi-neighbourhood tour may be longer and divide its time between tastings, history, architecture and walking. A private culinary guide offers flexibility, but check the exact itinerary and whether drinks or a full meal are included.",
       "Markets and independent stalls follow different Friday, Shabbat and holiday schedules. Tell the supplier about allergies, vegetarian options, kosher needs and any other restrictions before booking; not every food stop can offer substitutions. Most listings start at a city meeting point, not a hotel."
     ],
     choices: [

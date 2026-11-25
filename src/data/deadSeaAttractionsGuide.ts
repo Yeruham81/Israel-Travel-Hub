@@ -281,7 +281,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "allow": "About 1½ hours for the tour; arrive 15 minutes early",
     "access": "Guided admission by advance booking",
     "description": "The restored historic potash-workers' camp at Sdom tells the story of early Dead Sea industry and the people who worked here. It adds a human and industrial-history perspective to a region better known for beaches and desert ruins.",
-    "practical": "Admission is by a pre-booked guided tour. Choose your date and time in the official Hebrew booking calendar, and arrive about 15 minutes early. The operator's public pages show differing opening hours, so rely on the available booking times for your visit rather than a generic timetable.",
+    "practical": "Admission is by a pre-booked guided tour. Choose your date and time in the official Hebrew booking calendar, and arrive about 15 minutes early. The operator's public pages show differing opening hours; use the available booking times for your visit.",
     "gettingThere": "The centre is in the southern Dead Sea near Sdom, a separate drive from Ein Bokek. Set your navigation to the visitor centre itself.",
     "tip": "I'd choose an available guided time on the official website first, arrive 15 minutes early, and then plan the other southern Dead Sea stops around it.",
     "official": {

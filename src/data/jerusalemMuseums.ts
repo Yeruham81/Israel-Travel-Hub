@@ -211,7 +211,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "admission": "Regular ticket ₪58; online price advertised at ₪49",
     "openingDays": "Show times vary; generally Sun–Fri, closed Sat",
     "booking": "Book a timed performance; arrange English audio by phone",
-    "intro": "A motion-seat multimedia show takes visitors through chapters of Jerusalem's past. It is an indoor experience rather than a collection-based museum.",
+    "intro": "A motion-seat multimedia show takes visitors through chapters of Jerusalem's past. It is an indoor experience built around an audiovisual presentation.",
     "highlights": [
       "Immersive film and moving-seat effects",
       "Visual storytelling about Jerusalem's history"

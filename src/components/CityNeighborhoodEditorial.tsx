@@ -81,7 +81,7 @@ const jerusalemPractical: Record<string, { consider: string; gettingAround: stri
   },
   mamilla: {
     consider: "Room rates are often higher than Downtown, and an Old City view is only guaranteed when the chosen room category explicitly includes it.",
-    gettingAround: "Jaffa Gate is often roughly 5–15 minutes on foot from hotels in this district. King David Street extends south, adding walking time. Ask your driver to use the hotel entrance rather than the pedestrian avenue.",
+    gettingAround: "Jaffa Gate is often roughly 5–15 minutes on foot from hotels in this district. King David Street extends south, adding walking time. Ask your driver to use the hotel's vehicle-accessible entrance.",
   },
   "old-city": {
     consider: "Historic guesthouses vary greatly in facilities and accessibility. A lift inside the building does not make the cobbled approach from the gate step-free.",

@@ -189,7 +189,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
           <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><Waves className="size-5 text-primary" aria-hidden="true" />Floating safely</h3>
           <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed">
             <li>Keep your head and face above the water; never dive or try to swim underwater.</li>
-            <li>Move gently rather than splashing other bathers, and avoid swallowing the water.</li>
+            <li>Move gently, avoid splashing other bathers and avoid swallowing the water.</li>
             <li>Wear water shoes; salt crystals and hot sand can be sharp or uncomfortable.</li>
             <li>Rinse thoroughly after bathing and protect phones and jewellery from salt.</li>
           </ul>

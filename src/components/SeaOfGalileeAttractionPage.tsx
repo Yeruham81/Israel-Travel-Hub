@@ -236,7 +236,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
         </ul>
       </article>
     </div>
-    <AttractionPracticalTip>Water levels, storm conditions and seasonal beach operations can affect access. Confirm the current status of the specific beach or trail on the day you visit rather than assuming all of the lake is open for swimming or walking.</AttractionPracticalTip>
+    <AttractionPracticalTip>Water levels, storm conditions and seasonal beach operations can affect access. Confirm the current status of your chosen beach or trail on the day you visit.</AttractionPracticalTip>
   </div>,
   historyContent: <div className="mt-4 space-y-3 leading-relaxed">
     <p>Despite its English name, the Sea of Galilee is a freshwater lake. It is also known as Lake Kinneret and Lake Tiberias. Its water level varies over time, and the lake is an important part of Israel's northern landscape and water history.</p>

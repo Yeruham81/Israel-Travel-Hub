@@ -382,7 +382,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         photo: terminalHallPhoto,
         paragraphs: [
           "After passport control, collecting your bags and passing through customs, follow the signs to the taxi queue on the ground floor at Exit 03. Have your ride code ready for the dispatcher. My Ben Gurion arrival guide covers the earlier arrival steps.",
-          "The pickup at Level 2, Exit 23 is for Gett rides scheduled in advance, so use the ground-floor queue when you want an immediate taxi. Choose the official taxi line rather than accepting unsolicited rides inside the terminal.",
+          "The pickup at Level 2, Exit 23 is for Gett rides scheduled in advance, so use the ground-floor queue when you want an immediate taxi. Choose the official taxi line and decline unsolicited rides inside the terminal.",
         ],
         inlineLinks: [{ text: "Ben Gurion arrival guide", to: travelGuidePaths.arrival }],
         sourceIds: ["guide-gett", "guide-iaa"],

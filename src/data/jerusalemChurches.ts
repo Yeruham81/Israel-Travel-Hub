@@ -267,7 +267,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "highlight": "Lord's Prayer plaques and Eleona cave",
     "hours": "Temporary schedule: Tue and Thu 09:00–12:00 (published regular hours differ)",
     "admission": "₪12; students ₪10",
-    "tip": "Use the temporary schedule rather than assuming daily opening.",
+    "tip": "Check the temporary opening schedule for your visit.",
     "lat": 31.778095,
     "lon": 35.245078,
     "photo": "/images/jerusalem/mount-of-olives/pater-noster.webp",
