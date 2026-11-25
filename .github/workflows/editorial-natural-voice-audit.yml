@@ -1,0 +1,40 @@
+name: Editorial natural voice and full-site copy audit
+on:
+  pull_request:
+    branches: [main]
+    paths: ['.github/workflows/editorial-natural-voice-audit.yml','scripts/audit-editorial-natural-voice.mjs']
+permissions:
+  contents: read
+jobs:
+  editorial-audit:
+    if: github.head_ref == 'audit/editorial-natural-voice-20261125' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      CI: 'true'
+      HOSTINGER_STATIC_BUILD: 'true'
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      VITE_INDEXABLE: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Build verified complete static corpus
+        run: |
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs
+      - name: Review rendered copy and compare with published pages
+        run: node scripts/audit-editorial-natural-voice.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: editorial-natural-voice-audit
+          path: editorial-audit/
+          if-no-files-found: warn
