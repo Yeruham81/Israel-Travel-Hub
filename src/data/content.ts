@@ -757,10 +757,10 @@ export const deadSeaPhotos = {
 
 export const deadSeaStayGuide: HotelStayDestination = {
   id: "deadsea", name: "Dead Sea", path: "/accommodation/dead-sea/",
-  title: "Dead Sea hotels: spa, family & resort stays",
-  metaDescription: "Compare Dead Sea hotels in Ein Bokek, Neve Zohar and Ein Gedi: spa or family resorts, beach access, age policies and room inclusions.",
-  intro: "Ein Bokek resort hotels, the southern district and inland Ein Gedi stays are distinct choices. Beach access, mineral pools, children's facilities and spa rules differ by property.",
-  reviewedAt: "2026-10-17", photo: deadSeaPhotos.beach,
+  title: "Dead Sea Hotels: Explore Resorts & Spa Stays",
+  metaDescription: "Browse 11 selected Dead Sea hotels in Ein Bokek, Neve Zohar and Ein Gedi. Filter by spa, family, luxury and location, then check room options.",
+  intro: "Browse my selected Dead Sea hotels in Ein Bokek, Neve Zohar and Ein Gedi. Filter by resort style or location and check the individual hotel booking options.",
+  reviewedAt: "2026-11-26", photo: deadSeaPhotos.beach,
   categoryIntro: "Open a focused guide for a different set of comparisons: spa facilities and age policies, or children's activities, rooms and meal plans.",
   comparisonIntro: "Compare locations and access before room rates. The table includes nine resort hotels and two Ein Gedi alternatives; a sea view, a mineral-water pool and an operating beach are different features.",
   comparison: [{ key: "location", label: "Location" }, { key: "beach", label: "Beach arrangement" }, { key: "agePolicy", label: "Guest & spa ages" }],
@@ -822,10 +822,10 @@ export const tiberiasPhotos = {
 
 export const tiberiasStayGuide: HotelStayDestination = {
   id: "tiberias", name: "Tiberias", path: "/accommodation/tiberias/",
-  title: "Best hotels in Tiberias: lakefront, family and luxury stays",
-    metaDescription: "Compare hotels in Tiberias by Sea of Galilee location, lake access, family activities and luxury options. Plan your Galilee travel base.",
-  intro: "Tiberias hotels range from promenade bases to hillside and lakeside properties. A lake-view room, a swimming beach and an on-site water park are different features.",
-  reviewedAt: "2026-10-17", photo: tiberiasPhotos.waterfront,
+  title: "Hotels in Tiberias: Browse by Location & Style",
+    metaDescription: "Browse 10 selected Tiberias hotels by lakeside location, family stays, luxury or budget. Filter the shortlist and check room booking options.",
+  intro: "Find my selected Tiberias hotels by the promenade, on the lakeshore and above the town. Filter by hotel style and location to browse room options.",
+  reviewedAt: "2026-11-26", photo: tiberiasPhotos.waterfront,
   categoryIntro: "Explore two focused comparisons: water parks, children's facilities and meal plans for families; or beach access, heritage settings and guest ages for a luxury or couples' break. Central and budget options remain in the complete guide below.",
   comparisonIntro: "All ten places below are in Tiberias. Compare a private swimming beach, a walk to the promenade and a room with a lake view as different features. The wider Sea of Galilee also has rural stays, but those are a different location choice from these town hotels.",
   comparison: [{ key: "location", label: "Location" }, { key: "beach", label: "Lake & beach access" }, { key: "agePolicy", label: "Guest & facility ages" }],
@@ -967,10 +967,10 @@ export const haifaPhotos = {
 
 export const haifaStayGuide: HotelStayDestination = {
   id: "haifa", name: "Haifa", path: "/accommodation/haifa/",
-  title: "Best hotels in Haifa: where to stay from Carmel to the coast",
-    metaDescription: "Where to stay in Haifa: compare German Colony boutique hotels, Mount Carmel views, beachside family stays and the transport tradeoffs.",
-  intro: "Haifa's steep geography makes hotel location decisive: the German Colony, Mount Carmel and the southern beachfront require different daily transport and offer different experiences.",
-  reviewedAt: "2026-10-17", photo: haifaPhotos.panorama,
+  title: "Hotels in Haifa: Browse by Area & Style",
+    metaDescription: "Browse 10 selected Haifa hotels in the German Colony, Mount Carmel and along the coast. Filter luxury, boutique, family and budget stays.",
+  intro: "Browse my selected Haifa hotels in the German Colony, Mount Carmel, the lower city and along the coast. Filter by location and hotel style.",
+  reviewedAt: "2026-11-26", photo: haifaPhotos.panorama,
   categoryIntro: "Open a focused boutique comparison for design, heritage and guest-age policies, or a family guide for pools, room layouts and the choice between the beach and Mount Carmel. Luxury, mid-range and independent options are also covered in the complete guide below.",
   comparisonIntro: "Haifa's elevation changes the daily experience. A room with a bay view on the Carmel is different from a hotel beside a swimming beach; the German Colony and downtown offer another urban base. Compare locations and facilities before looking at the final room total.",
   comparison: [{ key: "location", label: "City setting" }, { key: "beach", label: "Beach access" }, { key: "agePolicy", label: "Guest & facility ages" }],
