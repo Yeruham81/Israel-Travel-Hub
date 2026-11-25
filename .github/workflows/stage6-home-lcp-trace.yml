@@ -1,0 +1,115 @@
+name: Stage 6 homepage LCP trace and resource diagnosis
+on:
+  pull_request:
+    branches: [main]
+    paths: ['.github/workflows/stage6-home-lcp-trace.yml']
+permissions:
+  contents: read
+jobs:
+  diagnosis:
+    if: github.head_ref == 'audit/stage6-home-lcp-trace-20261125' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+      EXPECTED_ENTRY: /assets/index-CitqniW5.js
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --prefix /tmp/home-lcp --no-save lighthouse@12.8.2 playwright@1.56.1
+      - name: Confirm live release and capture cache headers
+        run: |
+          mkdir -p stage6-home-traces
+          python3 -u - <<'PY'
+          import urllib.request,json,re
+          from pathlib import Path
+          import os
+          origin=os.environ["ORIGIN"]
+          def get(path):
+              req=urllib.request.Request(origin+path,headers={"User-Agent":"IsraelTravelHub-ReadOnlyAudit/1.0","Accept-Encoding":"identity"})
+              with urllib.request.urlopen(req,timeout=30) as r:
+                  return r.status,dict(r.headers),r.read()
+          status,headers,html=get("/")
+          assert status==200 and os.environ["EXPECTED_ENTRY"] in html.decode(),"Wrong published release"
+          paths=["/",os.environ["EXPECTED_ENTRY"],"/assets/styles-BLDX8xoV.css","/assets/hero-jerusalem-psi-mobile-CffR5mhX.webp","/assets/hero-tel-aviv-large-DaOE9dv-.webp","/images/attractions/haifa-coast-mobile.webp","/robots.txt"]
+          rows=[]
+          for p in paths:
+              status,h,b=get(p);h={k.lower():v for k,v in h.items()}
+              row={"path":p,"status":status,"bytes":len(b),"headers":{k:h.get(k) for k in ("cache-control","expires","age","etag","last-modified","content-type","vary","server","x-litespeed-cache","x-qc-cache")}}
+              rows.append(row);print("CACHE_HEADER",json.dumps(row),flush=True)
+          Path("stage6-home-traces/cache-headers.json").write_text(json.dumps(rows,indent=2))
+          PY
+      - name: Capture repeated Lighthouse traces and summarize critical interval
+        run: |
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import {spawnSync} from "node:child_process";
+          const out="stage6-home-traces",origin=process.env.ORIGIN,rows=[];
+          for(const method of ["simulate","devtools"]){
+            for(let round=1;round<=2;round++){
+              const prefix=out+"/"+method+"-"+round;
+              const args=[origin+"/","--throttling-method="+method,"--only-categories=performance,accessibility","--output=json","--output-path="+prefix+".json","--save-assets","--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage","--max-wait-for-load=35000","--quiet"];
+              const r=spawnSync("/tmp/home-lcp/node_modules/.bin/lighthouse",args,{encoding:"utf8",timeout:150000,maxBuffer:4*1024*1024});
+              if(r.status!==0||!fs.existsSync(prefix+".json"))throw Error("Lighthouse failed "+String(r.stderr).slice(-1200));
+              const a=JSON.parse(fs.readFileSync(prefix+".json","utf8")),u=a.audits,net=u["network-requests"].details.items;
+              if(a.runtimeError||net.some(x=>x.statusCode===429))throw Error("Lighthouse runtime error or 429, stop");
+              const doc=net.find(n=>n.resourceType==="Document"&&n.url===origin+"/");
+              if(doc?.statusCode!==200)throw Error("Homepage document not confirmed");
+              const phases=u["lcp-breakdown-insight"]?.details?.items?.[0]?.items??[];
+              const lcpNode=u["lcp-breakdown-insight"]?.details?.items?.[1];
+              const hero=net.find(n=>n.url.includes("/hero-jerusalem-psi-mobile-"));
+              const traceFile=fs.readdirSync(out).find(n=>n.startsWith(method+"-"+round)&&n.endsWith(".trace.json"));
+              if(!traceFile)throw Error("Missing raw trace");
+              const trace=JSON.parse(fs.readFileSync(out+"/"+traceFile,"utf8"));
+              const events=Array.isArray(trace)?trace:trace.traceEvents;
+              const candidates=events.filter(e=>/largestContentfulPaint::Candidate/i.test(e.name??"")).sort((a,b)=>a.ts-b.ts);
+              const candidate=candidates.at(-1);
+              const paintDelay=phases.find(p=>p.subpart==="elementRenderDelay")?.duration??0;
+              const intervalStart=(candidate?.ts??0)-paintDelay*1000;
+              const relevant=events.filter(e=>e.ph==="X"&&e.pid===candidate?.pid&&e.tid===candidate?.tid&&e.ts<=(candidate?.ts??0)&&e.ts+(e.dur??0)>=intervalStart&&/RunTask|EvaluateScript|FunctionCall|UpdateLayoutTree|Layout|Paint|Decode|Raster|Commit|ParseHTML|ParseAuthorStyleSheet/i.test(e.name??"")).map(e=>({name:e.name,ms:(e.dur??0)/1000,offsetFromLcpMs:(e.ts-(candidate?.ts??0))/1000})).sort((a,b)=>b.ms-a.ms).slice(0,20);
+              const row={method,round,performance:Math.round(a.categories.performance.score*100),lcpMs:u["largest-contentful-paint"].numericValue,phases,lcpNode,hero,discovery:u["lcp-discovery-insight"]?.details,renderBlocking:u["render-blocking-insight"]?.details,images:u["image-delivery-insight"]?.details?.items?.slice(0,15),cache:u["cache-insight"]?.displayValue,networkTree:u["network-dependency-tree-insight"]?.details?.items?.[0],mainThread:u["mainthread-work-breakdown"]?.details?.items,trace:{file:traceFile,candidateCount:candidates.length,candidate:candidate?{ts:candidate.ts,pid:candidate.pid,tid:candidate.tid,args:candidate.args}:null,intervalEvents:relevant}};
+              rows.push(row);fs.writeFileSync(out+"/trace-summary.json",JSON.stringify(rows,null,2));
+              console.log("HOME_TRACE",JSON.stringify(row));
+              await new Promise(r=>setTimeout(r,8000));
+            }
+          }
+          JS
+      - name: Identify actual image elements, loaded sizes and style at LCP
+        run: |
+          /tmp/home-lcp/node_modules/.bin/playwright install chromium
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import {chromium} from "/tmp/home-lcp/node_modules/playwright/index.mjs";
+          const browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
+          try{
+            const page=await browser.newPage({viewport:{width:412,height:823},deviceScaleFactor:1.75,isMobile:true,hasTouch:true});
+            const session=await page.context().newCDPSession(page);
+            await session.send("Network.enable");
+            await session.send("Network.setCacheDisabled",{cacheDisabled:true});
+            await session.send("Network.emulateNetworkConditions",{offline:false,latency:150,downloadThroughput:1638.4*1024/8,uploadThroughput:675*1024/8});
+            await session.send("Emulation.setCPUThrottlingRate",{rate:4});
+            const errors=[];page.on("pageerror",e=>errors.push(String(e)));
+            let limited=false;page.on("response",r=>{if(r.status()===429)limited=true});
+            await page.addInitScript(()=>{
+              window.__lcpAudit=[];
+              new PerformanceObserver(list=>{for(const e of list.getEntries()){const el=e.element,cs=el?getComputedStyle(el):null;window.__lcpAudit.push({startTime:e.startTime,renderTime:e.renderTime,loadTime:e.loadTime,url:e.url,size:e.size,tag:el?.tagName,alt:el?.getAttribute("alt"),currentSrc:el?.currentSrc,opacity:cs?.opacity,visibility:cs?.visibility,decoding:el?.decoding,parentOpacity:el?.parentElement?.parentElement?getComputedStyle(el.parentElement.parentElement).opacity:null})}}).observe({type:"largest-contentful-paint",buffered:true});
+            });
+            const res=await page.goto(process.env.ORIGIN+"/",{waitUntil:"domcontentloaded",timeout:60000});
+            if(res?.status()!==200)throw Error("Bad document response");
+            await page.waitForTimeout(5000);
+            if(limited)throw Error("429 rate limit");
+            const data=await page.evaluate(()=>({lcp:window.__lcpAudit,images:[...document.images].filter(i=>i.currentSrc&&i.complete&&i.naturalWidth).map(i=>{const r=i.getBoundingClientRect();return{src:i.currentSrc,alt:i.alt,width:i.naturalWidth,height:i.naturalHeight,displayWidth:r.width,displayHeight:r.height,y:r.y,link:i.closest("a")?.getAttribute("href"),loading:i.loading,priority:i.fetchPriority,resource:performance.getEntriesByName(i.currentSrc).map(e=>({start:e.startTime,end:e.responseEnd,transfer:e.transferSize}))}}),css:[...document.querySelectorAll('link[rel="stylesheet"]')].map(l=>l.href),fonts:[...document.fonts].map(f=>({family:f.family,status:f.status,style:f.style,weight:f.weight})),navigation:performance.getEntriesByType("navigation")[0]?.toJSON()}));
+            fs.writeFileSync("stage6-home-traces/browser-observation.json",JSON.stringify({...data,errors},null,2));
+            console.log("BROWSER_LCP",JSON.stringify(data.lcp));
+            console.log("BROWSER_IMAGES",JSON.stringify(data.images.filter(i=>i.src.includes("hero-tel-aviv-large")||i.src.includes("hero-jerusalem-psi")||i.y<2200)));
+            console.log("BROWSER_ERRORS",JSON.stringify(errors));
+            await page.screenshot({path:"stage6-home-traces/mobile-viewport.png"});
+          }finally{await browser.close()}
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage6-home-lcp-traces
+          path: stage6-home-traces/
+          if-no-files-found: warn
