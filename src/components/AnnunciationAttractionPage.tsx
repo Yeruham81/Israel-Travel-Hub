@@ -25,7 +25,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
   visitorNavLabel: "Hours & visiting",
   historyTitle: "The Annunciation tradition and history of the basilica",
   relatedTitle: "Explore more around Nazareth and Lower Galilee",
-  contactIntroduction: "Tell me your travel date, starting point and the sites you would like to visit around Nazareth. I'll be happy to help arrange a private driver for your day.",
+  contactIntroduction: "Tell me your date, pickup point, group size and the places you want to see around Nazareth. I can arrange private transport or a day trip with a driver to the Basilica of the Annunciation and nearby sites.",
   facts: [
     { icon: "location", label: "Location", value: "Central Nazareth", note: "Catholic basilica near the old city" },
     { icon: "duration", label: "Time needed", value: "60–90 minutes", note: "Allow longer during worship services" },
