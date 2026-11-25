@@ -81,7 +81,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
         note={<>Mosaic photo: <a href="https://commons.wikimedia.org/wiki/File:Ein_Gedi_synagogue058.JPG" target="_blank" rel="noopener noreferrer" className={inlineLink}>Stéphanie Gromann / Wikimedia Commons</a> (attribution license).</>}
       >
         <p>Just south of the Nahal David entrance, Ein Gedi Antiquities National Park preserves a late-antique synagogue and mosaic floor, offering a different perspective on the oasis's history.</p>
-        <p>This archaeological site has a separate, lower-priced entrance ticket if visited on its own. It can be a good addition to a shorter nature walk, and the synagogue itself is accessible.</p>
+        <p>This archaeological site has a separate, lower-priced entrance ticket if visited on its own. Combine a shorter nature walk with a visit to the accessible ancient synagogue.</p>
         <a href={official.antiquities} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official ancient synagogue visitor information</a>
       </AttractionHighlight>
     </div>

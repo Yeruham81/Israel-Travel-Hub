@@ -50,7 +50,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight title="Ramon Crater Visitor Center">
-        <p>Start at the visitor center on the crater rim. Its exhibitions combine the story of Israeli astronaut Ilan Ramon with the geology, wildlife and natural history of the makhtesh. The center is a useful introduction before you head outside.</p>
+        <p>Start at the visitor center on the crater rim. Its exhibitions combine the story of Israeli astronaut Ilan Ramon with the geology, wildlife and natural history of the makhtesh. The exhibitions provide context for the landscapes you will see outside.</p>
         <p>Allow roughly an hour for the indoor experience and reserve an entry time. You can enjoy many of the surrounding viewpoints without a visitor-center ticket. <a href={official.center} target="_blank" rel="noopener noreferrer" className={inlineLink}>Visitor information and reservations</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Camel Hill and the crater-rim viewpoints" image={{ src: camelHillPhoto, alt: "Rocky viewpoint at Camel Hill overlooking the Negev landscape" }}>

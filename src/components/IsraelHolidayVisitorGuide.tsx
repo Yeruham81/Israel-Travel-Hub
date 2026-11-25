@@ -55,7 +55,7 @@ const faq=[
   {q:"What is Chol HaMoed?",a:"Chol HaMoed means the intermediate days of Passover or Sukkot. They are not the same as the major festival days for transport and business closures, but school holidays and domestic tourism can make attractions and hotels crowded."},
   {q:"Are hotels and tours more expensive during holidays?",a:"They can be. Demand often rises around Passover, Sukkot, long school breaks and important pilgrimage dates. No fixed holiday markup applies to every hotel or tour, so compare the actual total and booking terms for your dates."},
   {q:"Do Christmas and Easter close transport nationwide?",a:"No automatic nationwide shutdown is associated with those Christian observances. Church visiting hours, processions, road access and accommodation demand may change in particular places such as Jerusalem, Nazareth and Bethlehem."},
-  {q:"Will Ramadan affect a visit to Jerusalem?",a:"It can affect meal hours, mosque access, Old City crowds and local traffic, particularly near Friday prayers and at iftar. Normal nationwide public transport does not automatically stop because Ramadan has begun. Verify local arrangements and be respectful around worshippers."},
+  {q:"Will Ramadan affect a visit to Jerusalem?",a:"It can affect meal hours, mosque access, Old City crowds and local traffic, particularly near Friday prayers and at iftar. Nationwide public transport generally follows its regular schedule during Ramadan. Verify local arrangements and be respectful around worshippers."},
   {q:"Are Muslim holiday dates fixed in advance?",a:"Some dates depend on religious and local confirmation, so published dates can shift by a day. Check an updated holiday calendar close to your visit."},
 ];
 const related=[
@@ -143,7 +143,7 @@ export function IsraelHolidayVisitorGuidePage(){
         <h3 className="font-bold">{schoolCalendarPlanning.title}</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{schoolCalendarPlanning.body}</p>
       </div>
-      <div className="mt-5"><MyTip>A day marked as a holiday on a calendar does not automatically mean all shops close. Always check the specific place and whether it is the holiday's eve, a full festival day or an intermediate day.</MyTip></div>
+      <div className="mt-5"><MyTip>Shop opening hours vary by location and by the stage of the holiday: the eve, a full festival day or an intermediate day. Check the opening hours of the places you plan to visit.</MyTip></div>
     </section>
     {holidayGuideGroups.map(group=><section key={group.id} id={group.id} className="mt-12 scroll-mt-24" aria-labelledby={group.id+"-heading"}>
       <Heading id={group.id} intro={group.intro}>{group.title}</Heading>

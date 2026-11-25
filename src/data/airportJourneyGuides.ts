@@ -114,7 +114,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ], inlineLinks: [{ text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" }], checklist: ["Confirm line 485's actual operation with the national journey planner.", "Check the terminal and boarding area.", "Have rail or a confirmed ride as your fallback."] },
       { id: "rental", name: "Rental car", time: "45–60+ min", cost: "Rental + insurance, fuel and parking", bestFor: "Onward multi-city road trip", doorToDoor: "Yes, where driving is allowed", availability: "Depends on collection hours", comparison: { cost: "Varies", advantages: "Useful for onward travel", drawbacks: "Parking and traffic in Jerusalem" }, heading: "Should you rent a car for a stay in Jerusalem?", paragraphs: [
         ...commonRental, "Jerusalem's Old City, pedestrian areas and central parking restrictions can make a car inconvenient during a city-focused stay. Compare collection and vehicle options on DiscoverCars."
-      ], inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }], checklist: ["Check permitted parking at your accommodation.", "Compare city collection after a few days instead of airport collection.", "Verify rental operating hours for your arrival day."] },
+      ], inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }], checklist: ["Check permitted parking at your accommodation.", "Compare airport collection with picking up your rental car in the city after a few days.", "Verify rental operating hours for your arrival day."] },
     ],
     stations: [{ name: "Jerusalem–Yitzhak Navon", time: "Around 26–30 min from TLV", usefulFor: "Central bus station and Jaffa Road light rail; connect to your actual hotel." }],
     arrivalAreas: [
@@ -124,7 +124,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { area: "Mount Scopus / East Jerusalem", station: "Jerusalem–Yitzhak Navon", onward: "Choose a local bus or taxi for the final journey to your exact address." },
     ],
     connections: [
-      "For Downtown/Mamilla, choose the best light-rail stop or a taxi from Navon, and check the walking distance with luggage. Not every property is directly on the light rail.",
+      "For Downtown/Mamilla, choose the best light-rail stop or a taxi from Navon, and check the walking distance with luggage. Allow time for the final walk to your accommodation.",
       "For the Old City, know which gate is closest to your accommodation. Even a short walk can be difficult with luggage because of steps and steep streets.",
       "For accommodation outside central Jerusalem, check the complete journey from Yitzhak Navon station to your address."
     ],
@@ -253,7 +253,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "For Dizengoff Street or Rothschild Boulevard, compare nearby bus stops before choosing a train station.",
     ],
     weekend: [
-      "Standard trains and most regular buses do not run during the main Shabbat break. Tel Aviv’s free weekend bus 711 serves Terminal 1 on a limited timetable, not every arriving flight. Check whether its actual stop and departure suit your destination.",
+      "Standard trains and most regular buses do not run during the main Shabbat break. Tel Aviv’s free weekend bus 711 serves Terminal 1 on a limited timetable. Check whether its actual stop and departure suit your destination.",
       "An authorized taxi or confirmed private transfer may be a more practical choice when the 711 does not match your flight, when arriving late or when carrying large bags.",
       "Check Saturday-evening train departures and holiday changes in the dedicated airport Shabbat guide."
     ],
@@ -272,7 +272,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Will the airport train take me straight to the hotel?", a: "No. It serves four railway stations. Most hotels need a further walk or local connection." },
       { q: "How do I pay for a train or bus to Tel Aviv?", a: "A standard adult train ticket costs ₪11.50. Bus 445 starts at ₪8 and costs up to ₪14.50 for longer stops. Pay with a loaded Rav-Kav or a supported public-transport payment app." },
       { q: "Can I get an Uber from Ben Gurion Airport to Tel Aviv?", a: "No. Uber passenger rides are not currently available in Israel. Use the authorized Gett airport taxi system or a separately confirmed private transfer." },
-      { q: "Do trains run from the airport late at night?", a: "Some trains run late at night, but not every service stops at every Tel Aviv station. Check the timetable for your arrival time." },
+      { q: "Do trains run from the airport late at night?", a: "Some trains run late at night, with stops varying by service. Check the timetable for your arrival time and destination station." },
     ],
     featuredRelated: [
       { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Choose a hotel area that fits your arrival." },
@@ -478,7 +478,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { id: "taxi", name: "Official airport taxi", time: "About 1h 45m–2h 30m+ after pickup", cost: "Regulated meter; check current tariff", bestFor: "On-arrival direct ride to a resort", doorToDoor: "To accessible hotel entrance", availability: "Subject to available licensed taxis", comparison: { cost: "Regulated meter", advantages: "Direct airport-to-hotel ride, including Shabbat", drawbacks: "High and variable long-distance meter fare" }, heading: "Official airport taxi to Ein Bokek or Neve Zohar", paragraphs: [
         ...commonTaxi,
         "The total on this longer journey depends on the regulated tariff, time, distance and permitted extras. See my official airport taxi guide for pickup instructions and the taxi fares in Israel guide for how metered fares are calculated.",
-        "Give the driver your complete hotel name, not just “Dead Sea”: Ein Bokek, Hamei Zohar, Neve Zohar and Ein Gedi are not interchangeable drop-offs. Check luggage space, payment, any planned stop and hotel access before leaving the airport. There is no Uber passenger-car service in Israel; my Uber alternatives guide explains available apps."
+        "Give the driver your complete hotel name: Ein Bokek, Hamei Zohar, Neve Zohar and Ein Gedi are distinct destinations. Check luggage space, payment, any planned stop and hotel access before leaving the airport. There is no Uber passenger-car service in Israel; my Uber alternatives guide explains available apps."
       ], inlineLinks: [
         { text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" },
         { text: "taxi fares in Israel guide", to: "/travel-blog/taxi-fares-in-israel/" },
@@ -539,7 +539,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Can I reach Ein Bokek after an evening flight?", a: "Only if an actual onward bus still runs after you clear the airport and reach Jerusalem Central Bus Station. Check the last bus before depending on public transport; a late train does not guarantee a Dead Sea connection." },
       { q: "Do buses or trains run to Ein Bokek on Shabbat?", a: "Regular train and intercity-bus connections generally stop during the main Shabbat period. Check the precise holiday/weekend schedules, and compare a confirmed taxi, pre-booked transfer or car rental if there is no usable service." },
       { q: "Do I need a voucher for the train to Jerusalem?", a: "Check whether a free personal voucher is required in addition to your train ticket for travel to Jerusalem. Follow the current Israel Railways instructions before boarding." },
-      { q: "Is the Ein Bokek bus stop outside every hotel?", a: "Not always. Several bus stops serve the Ein Bokek hotel area, and some hotels require a further walk. Search using the full hotel name and check the remaining walk." },
+      { q: "Is the Ein Bokek bus stop outside every hotel?", a: "Several bus stops serve the Ein Bokek hotel area, and some hotels require a further walk. Search using the full hotel name and check the remaining walk." },
       { q: "Is Ein Gedi the same as Ein Bokek?", a: "No. Ein Gedi, Masada, Neve Zohar and the Ein Bokek hotel area are distinct places and stops. Confirm the precise destination in your route plan or transfer request." },
       { q: "Should I choose an airport taxi or a private transfer?", a: "An official airport taxi is ordered on arrival through the authorized process and charged by the regulated meter. A private transfer is arranged in advance and needs a confirmed vehicle, meeting point and written total; compare the full terms for your party." },
     ],

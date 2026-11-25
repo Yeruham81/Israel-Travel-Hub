@@ -154,7 +154,7 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>A guided northern Israel trip can combine Mount Tabor with Nazareth and other Galilee sites. Check the route before booking: not every Galilee tour visits Mount Tabor, and a stop at the bottom of the mountain is different from visiting the basilica.</p>
+      <p>A guided northern Israel trip can combine Mount Tabor with Nazareth and other Galilee sites. If Mount Tabor is a priority, choose a Galilee tour that includes the basilica at the summit.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="mount-tabor-galilee-tours-card">
           <img src="/images/attractions/sea-of-galilee.webp" alt="Sea of Galilee landscape on a guided northern Israel day trip" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

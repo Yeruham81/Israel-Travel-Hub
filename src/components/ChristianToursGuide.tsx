@@ -90,7 +90,7 @@ function TourCard({tour,url}:{tour:ChristianOffer;url:string}){
 
 const practical=[
  {title:"Opening hours and services",text:"Prayer takes priority over sightseeing. Sundays, feast days, Holy Week and local services can change church access. Verify current opening times and entrance conditions directly."},
- {title:"Dress and behaviour",text:"Cover shoulders and knees as a useful default. Follow photography, silence, group-prayer and worship instructions."},
+ {title:"Dress and behaviour",text:"Cover your shoulders and knees at religious sites. Follow photography, silence, group-prayer and worship instructions."},
  {title:"Walking and accessibility",text:"Jerusalem's Old City has uneven paving, the Mount of Olives is steep and many churches have steps. Check access needs with each site."},
  {title:"Bethlehem and Jericho access",text:"These are West Bank destinations. Confirm nationality restrictions, checkpoints, insurance and any requirement to change to local transport or guiding."},
  {title:"Realistic travel distances",text:"Jerusalem, Nazareth, the lake and the lower Jordan are separate regions. Allow time for parking, walking, meals, queues and unexpected restrictions."},
@@ -136,7 +136,7 @@ export function ChristianToursGuide(){
        {number:"02",title:"Group sites geographically",text:"A Jerusalem walking day differs from a Galilee road trip. An overnight stay in the north can cut long return journeys."},
        {number:"03",title:"Confirm practical details",text:"Check religious services, opening hours, mobility, borders, departure points and cancellation conditions before booking."},
      ].map(item=><div key={item.number} className="rounded-xl border bg-card p-4"><p className="text-xs font-bold text-primary">{item.number}</p><h3 className="mt-2 font-semibold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p></div>)}</div>
-     <div className="mt-5"><Tip>Want to attend Mass, prayer or a liturgy? Check <External href="https://www.cicts.org/masses-services/">Christian Information Center service details</External> and contact the responsible church. A sightseeing tour does not automatically include a religious ceremony.</Tip></div>
+     <div className="mt-5"><Tip>Want to attend Mass, prayer or a liturgy? Check <External href="https://www.cicts.org/masses-services/">Christian Information Center service details</External> and contact the responsible church. Arrange any religious ceremony separately.</Tip></div>
    </section>
 
    <section id="destinations" aria-labelledby="destinations-heading" className="mt-12 scroll-mt-24">
@@ -187,7 +187,7 @@ export function ChristianToursGuide(){
    </section>
 
    <section id="other-places" aria-labelledby="other-places-heading" className="mt-12 scroll-mt-24">
-     <Heading id="other-places" title="Other biblical places worth considering" intro="These are useful additions for a longer itinerary or an interest in the history and archaeology of the New Testament."/>
+     <Heading id="other-places" title="More biblical sites to visit" intro="Add these sites to a longer itinerary exploring the history and archaeology of the New Testament."/>
      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{extras.map(site=><article key={site.title} className="flex flex-col rounded-xl border bg-card p-4"><h3 className="font-semibold">{site.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{site.text}</p><Link to={site.to} className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-semibold text-primary hover:underline">Read related guide<ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link></article>)}</div>
    </section>
    <FaqList faqs={christianFaqs}/>

@@ -29,7 +29,7 @@ export const monthFits: MonthFit[] = [
   {month:"September",season:"autumn",city:"variable",swimming:"favourable",north:"variable",deadSea:"challenging",desert:"challenging",insight:"Often still feels like summer; Jewish holiday dates shift by year."},
   {month:"October",season:"autumn",city:"favourable",swimming:"variable",north:"favourable",deadSea:"variable",desert:"variable",insight:"Mixed itineraries become more appealing, but late heat and early storms are possible."},
   {month:"November",season:"autumn",city:"variable",swimming:"challenging",north:"variable",deadSea:"favourable",desert:"favourable",insight:"Plan for shorter days and returning rain; desert travel needs forecast checks."},
-  {month:"December",season:"winter",city:"variable",swimming:"challenging",north:"variable",deadSea:"favourable",desert:"favourable",insight:"City museums and warmer southern days can work well; check rain and road conditions."}
+  {month:"December",season:"winter",city:"variable",swimming:"challenging",north:"variable",deadSea:"favourable",desert:"favourable",insight:"Explore city museums and warmer southern destinations; check rain and road conditions."}
 ];
 
 export const suitabilityColumns = [
@@ -66,7 +66,7 @@ export const regionalRecommendations: RegionalRecommendation[] = [
 export const seasonDetails = [
   {id:"spring",label:"Spring",months:"March–May",title:"Spring: heritage walks, flowers and the green north",summary:"My first choice for combining Jerusalem, northern scenery and open-air archaeology.",paragraphs:[
     "March and April are often rewarding for mixed itineraries: city walks, Galilee viewpoints and archaeological sites can fit in the same trip. The landscape may still be green after winter rain. By May, daytime heat can make exposed sites less comfortable.",
-    "I would build a spring trip around two or three regions instead of racing across the whole country. Passover and Easter dates can change accommodation demand, religious-site visits and operating hours."
+    "I would build a spring trip around two or three regions, with time to explore each one. Passover and Easter dates can change accommodation demand, religious-site visits and operating hours."
   ],tip:"On a spring sightseeing day, pack a light layer and rain option as well as sun protection; check the forecast for both your morning and afternoon stops.",links:[{label:"Jerusalem walking ideas",to:"/travel-blog/jerusalem-travel-guide/"},{label:"Galilee attractions",to:"/attractions/sea-of-galilee/"}]},
   {id:"summer",label:"Summer",months:"June–August",title:"Summer: the Mediterranean coast and early starts",summary:"Best suited to a beach-led stay with shaded urban stops and air-conditioned breaks.",paragraphs:[
     "For summer trips, I normally put the Mediterranean coast first. Tel Aviv's beaches and promenade are attractive options, but the coast can be humid and inland or desert sites may be much hotter.",

@@ -96,7 +96,7 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "why": "Shavuot commemorates the giving of the Torah and is traditionally associated with harvest and dairy foods.",
         "transport": "Regular intercity trains and many buses do not operate during the festival, with earlier finishes on the eve.",
         "visitor": "Many shops close on the holiday. Religious learning gatherings and family visits may affect particular areas.",
-        "tip": "In Israel Shavuot is a one-day holiday; do not automatically apply two-day calendars intended for communities abroad."
+        "tip": "In Israel Shavuot is a one-day holiday; Jewish communities abroad may observe it for two days."
       }
     ]
   },

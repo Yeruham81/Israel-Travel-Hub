@@ -341,7 +341,7 @@ export const tourCategories: TourCategory[] = [
     description: "Compare Jerusalem tours, Old City visits and guided day trips from Tel Aviv, including private and combined Jerusalem–Bethlehem itineraries.",
     intro: "Discover Jerusalem's historic quarters, sacred landmarks and panoramic viewpoints. Choose a guided walking tour, a full-day experience or a private journey tailored to your interests.",
     photo: migration["EXISTING:jerusalem"], match: { destinations: ["jerusalem"] },
-    paragraphs: ["Jerusalem's Old City is best explored on foot, with uneven lanes, busy landmarks and plenty to discover between stops. Choose a tour departing from Jerusalem to spend more time in the city, or one from Tel Aviv if you need return transport.", "A city-focused tour can be a good choice for a first visit. Jerusalem–Bethlehem itineraries involve more travel and crossing arrangements; check the operator's current requirements. Private guided tours include a guide, while my private-driver option provides transport only."],
+    paragraphs: ["Jerusalem's Old City is best explored on foot, with uneven lanes, busy landmarks and plenty to discover between stops. Choose a tour departing from Jerusalem to spend more time in the city, or one from Tel Aviv if you need return transport.", "For a first visit, I recommend a tour focused on the city. Jerusalem–Bethlehem itineraries involve more travel and crossing arrangements; check the operator's current requirements. Private guided tours include a guide, while my private-driver option provides transport only."],
     choices: [
       { title: "Jerusalem in a day", text: "A broad introduction for first-time visitors, with viewpoints, Old City walking and transport from the advertised departure city." },
       { title: "Jerusalem & Bethlehem", text: "Two important heritage destinations in one itinerary. Allow for less time in each place and confirm crossing requirements." },
@@ -401,8 +401,8 @@ export const tourCategories: TourCategory[] = [
     intro: "Explore Bethlehem, the ancient city of Jericho and Qasr al-Yahud, the Jordan River baptismal site near Jericho. Compare Bethlehem-only visits with full-day tours that include Jericho and the baptismal site, departing from Jerusalem or Tel Aviv.",
     photo: migration["jerusalem-to-bethlehem"], match: { destinations: ["bethlehem", "jericho"] },
     paragraphs: [
-      "Not every tour visits all three locations. Short Bethlehem trips usually focus on the Church of the Nativity, Manger Square and Shepherds' Field. Longer day tours can add Jericho's archaeological and biblical sites and, on selected routes, a stop at Qasr al-Yahud on the lower Jordan River.",
-      "Check the detailed itinerary and the named baptismal site: choose a tour that explicitly includes Qasr al-Yahud if that is an essential stop. A Jordan River visit does not automatically include a baptism ceremony. Visits to the Church of the Nativity and its grotto can be affected by services, restoration and queues.",
+      "Tours vary in their choice of destinations. Short Bethlehem trips usually focus on the Church of the Nativity, Manger Square and Shepherds' Field. Longer day tours can add Jericho's archaeological and biblical sites and, on selected routes, a stop at Qasr al-Yahud on the lower Jordan River.",
+      "Check the detailed itinerary and the named baptismal site: choose a tour that explicitly includes Qasr al-Yahud if that is an essential stop. Arrange any baptism ceremony separately with the supplier. Visits to the Church of the Nativity and its grotto can be affected by services, restoration and queues.",
       "Bethlehem and parts of Jericho are in Palestinian Authority-administered areas, and entry rules, passport eligibility, checkpoints, local guide and vehicle arrangements depend on the visitor and itinerary. Some operators restrict participation by nationality. Confirm eligibility and permitted access directly with the operator before paying; published tours are not guarantees of access or operation for your travel date.",
     ],
     choices: [
@@ -415,7 +415,7 @@ export const tourCategories: TourCategory[] = [
       { q: "Which Jordan River baptismal site is relevant to these itineraries?", a: "Qasr al-Yahud (also written Kasr el-Yahud), the baptismal site on the lower Jordan River near Jericho. Only select a tour for this purpose when its advertised itinerary identifies that location." },
       { q: "Can I depart from Jerusalem or Tel Aviv?", a: "Yes, but not every tour offers both cities. Use the departure filters and confirm the exact meeting point, pickup eligibility and return city with the provider." },
       { q: "Can every traveler enter Bethlehem and Jericho?", a: "No. Entry and transit depend on nationality, travel documents, current security measures and the route. Some booking products explicitly restrict Israeli passport holders. Confirm your circumstances with the operator and current official guidance before purchasing." },
-      { q: "Is baptism or entry to the Nativity Grotto guaranteed?", a: "No. A stop at Qasr al-Yahud is not necessarily a baptism ceremony; any ceremony needs separate confirmation. Grotto entry depends on religious services, restoration work, queues and available time." },
+      { q: "Is baptism or entry to the Nativity Grotto guaranteed?", a: "No. A stop at Qasr al-Yahud can be a sightseeing visit. Confirm any baptism ceremony separately. Grotto entry depends on religious services, restoration work, queues and available time." },
       { q: "Do tours use local guides or change vehicles at checkpoints?", a: "Sometimes. Bethlehem trips may involve locally licensed guides, a vehicle change or a checkpoint handover. The arrangements differ by operator, traveler eligibility and date. Ask the provider to confirm the complete pickup, guiding and return plan." },
     ], reading: ["bethlehem", "baptism", "jerusalem", "tips"],
   },
@@ -426,7 +426,7 @@ export const tourCategories: TourCategory[] = [
     photo: migration["EXISTING:galilee"], match: { destinations: ["nazareth", "galilee"] },
     paragraphs: [
       "A typical full-day route connects Nazareth’s Basilica of the Annunciation with selected sites around the Sea of Galilee, such as Capernaum, Tabgha and the Mount of Beatitudes. Different tours make different stops, and some drive past Cana or Mount Tabor without allowing time for a visit. Check which sites are included as actual visits.",
-      "Travel from Jerusalem normally takes longer than from Tel Aviv. On a shared group tour, compare the confirmed pickup location, time available at each site, guiding language, entrance tickets and return arrangements. A private guided tour is different from my own private car-and-driver service: licensed guiding is not automatically included in a transport-only quote.",
+      "Travel from Jerusalem normally takes longer than from Tel Aviv. On a shared group tour, compare the confirmed pickup location, time available at each site, guiding language, entrance tickets and return arrangements. My private car-and-driver service covers transportation. Arrange licensed guiding separately.",
       "Some Galilee tours also stop at Yardenit, the baptismal site on the Jordan River near the southern end of the lake. The river stop is optional or absent on many products, and visiting the site does not mean a baptism ceremony is included. Confirm religious-site opening hours, modest dress, site access and any ceremony requirements before booking.",
     ],
     choices: [
@@ -527,7 +527,7 @@ export const tourCategories: TourCategory[] = [
     paragraphs: [
       "Choose your city and the kind of experience you want. Jerusalem's Mahane Yehuda tours concentrate on the stalls and food traditions of one bustling market; Tel Aviv options range from Levinsky and Carmel Market tastings to a longer Jaffa-to-Carmel walk and a hands-on cooking workshop.",
       "A focused market walk generally takes two to three hours. A multi-neighbourhood tour may be longer and divide its time between tastings, history, architecture and walking. A private culinary guide offers flexibility, but check the exact itinerary and whether drinks or a full meal are included.",
-      "Markets and independent stalls follow different Friday, Shabbat and holiday schedules. Tell the supplier about allergies, vegetarian options, kosher needs and any other restrictions before booking; not every food stop can offer substitutions. Most listings start at a city meeting point, not a hotel."
+      "Markets and independent stalls follow different Friday, Shabbat and holiday schedules. Tell the supplier about allergies, vegetarian options, kosher needs and any other restrictions before booking. Ask which food stops can offer suitable substitutions. Most listings start at a city meeting point, not a hotel."
     ],
     choices: [
       { title: "Jerusalem market tastings", text: "A concentrated walk through Mahane Yehuda with local food and stories; confirm the meeting address." },

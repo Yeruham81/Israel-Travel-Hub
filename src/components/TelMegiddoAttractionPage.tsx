@@ -78,7 +78,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Summer, Friday:</strong> {telMegiddoSite.hours.summerFriday}.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Winter, Sunday–Thursday and Saturday:</strong> {telMegiddoSite.hours.winterRegular}.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Winter, Friday:</strong> {telMegiddoSite.hours.winterFriday}.</p>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Last admission is one hour before closing.</strong> On some holiday eves, including Yom Kippur eve, the park lists an earlier <strong>13:00 closing time</strong>. Holiday-eve hours are not necessarily the same as Friday hours; confirm the schedule for your date on the official park page.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Last admission is one hour before closing.</strong> On some holiday eves, including Yom Kippur eve, the park lists an earlier <strong>13:00 closing time</strong>. Holiday-eve opening hours can differ from Friday hours; confirm the schedule for your date on the official park page.</p>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Admission and contact</h3>

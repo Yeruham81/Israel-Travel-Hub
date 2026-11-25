@@ -167,7 +167,7 @@ export function JerusalemMuseumsGuide(){
     </section>
     <OnThisPage sections={jump}/>
     <section id="top-picks" aria-labelledby="top-picks-heading" className="mt-10 scroll-mt-24">
-      <SectionHeading id="top-picks" title="My top museum picks" intro="Six places worth considering for different interests. Choose what matters most to you."/>
+      <SectionHeading id="top-picks" title="My top museum picks" intro="Six museums for different interests. Choose what matters most to you."/>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{featured.map(m=><a key={m.id} href={"#museum-"+m.id} className="editorial-card-link group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
         <span className="text-[11px] font-bold uppercase tracking-wide text-primary">{m.theme}</span>
         <strong className="mt-2 text-base leading-snug">{m.name}</strong>

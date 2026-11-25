@@ -202,7 +202,7 @@ export function TelAvivMuseumsGuide() {
       <OnThisPage sections={jump} />
 
       <section id="top-picks" aria-labelledby="top-picks-heading" className="mt-10 scroll-mt-24">
-        <SectionHeading id="top-picks" title="My top museum picks" intro="A few very different places worth considering first. Choose according to your interests instead of trying to visit all of them." />
+        <SectionHeading id="top-picks" title="My top museum picks" intro="Museums for art, history and other interests. Choose the museums that interest you most." />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map(museum => <a key={museum.id} href={"#museum-" + museum.id} className="editorial-card-link group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
             <span className="text-[11px] font-bold uppercase tracking-wide text-primary">{museum.theme}</span>

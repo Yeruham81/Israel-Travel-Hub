@@ -46,7 +46,7 @@ export const christianAreas: ChristianArea[] = [
     id:"bethlehem",name:"Bethlehem",title:"Bethlehem: the Nativity and the shepherds' fields",
     image:bethlehemPhoto,alt:"The Church of the Nativity in Bethlehem",
     intro:"Bethlehem is a Palestinian city in the West Bank, south of Jerusalem. The Church of the Nativity is a UNESCO-listed pilgrimage landmark built around the site traditionally associated with Jesus' birth. Nearby Manger Square and Beit Sahour add context to the Nativity story.",
-    planning:"Plan Bethlehem as a separate half- or full-day visit. Entry and checkpoint arrangements may differ by nationality, vehicle and conditions on your travel date; an Israeli private driver cannot simply be assumed to enter Palestinian Authority areas.",
+    planning:"Plan Bethlehem as a separate half- or full-day visit. Entry and checkpoint arrangements may differ by nationality, vehicle and conditions on your travel date. Confirm your driver's eligibility to enter Palestinian Authority areas.",
     sites:[
       {name:"Church of the Nativity",note:"Traditional birthplace of Jesus",officialUrl:"https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/",mapPlace:"Church of the Nativity, Manger Square, Bethlehem, West Bank"},
       {name:"Milk Grotto",note:"A small chapel close to the Nativity Church",officialUrl:"https://bethlehem-city.org/en/milkgrotto",mapPlace:"Milk Grotto Chapel, Bethlehem, West Bank"},
@@ -210,7 +210,7 @@ export const christianFaqs = [
   {q:"What should I wear when visiting churches?",a:"Modest clothing covering shoulders and knees is a sensible default. Some monasteries and sacred spaces have stricter rules; carry a scarf or additional layer and follow the site's signs."},
   {q:"Can I see Christian sites without renting a car?",a:"Yes. Jerusalem's Old City is mostly on foot, and organised day trips serve major regions. Public transport can cover some connections, but isolated church sites, steep approaches and changes of schedule may justify a driver or guided tour."},
   {q:"What is the best season for a Holy Land pilgrimage?",a:"Spring and autumn are often pleasant for walking, although religious holidays bring crowds and special schedules. Summer can be very hot, particularly around the Jordan Valley. Check each church's calendar and your preferred travel dates."},
-  {q:"Is a baptism ceremony included in a Jordan River tour?",a:"Not automatically. Visiting a river site differs from arranging a religious ceremony. Confirm whether clergy, robes, changing facilities, group bookings and any fees are included."},
+  {q:"Is a baptism ceremony included in a Jordan River tour?",a:"A visit to the river site may be sightseeing only. Arrange your ceremony and confirm clergy, robes, changing facilities, group bookings and any fees."},
   {q:"Are Christian tours appropriate for visitors who are not religious?",a:"Yes. Churches, archaeological sites and biblical landscapes are part of the region's shared cultural and historical heritage. Choose tours with an emphasis on history, architecture and archaeology if that is your interest."},
 ];
 

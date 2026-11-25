@@ -85,7 +85,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
         <p>The <External href={links.einBokek}>regional tourism authority's beach page</External> explains the public facilities, including accessible beach equipment. <External href={maps.einBokek}>Find Ein Bokek Central Beach on Google Maps</External>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Hamei Zohar Central Beach" image={{ src: sunbedsPhoto, alt: "Sun loungers and shade at the southern Dead Sea beaches" }}>
-        <p>South of the main Ein Bokek hotel strip, Hamei Zohar is another free public bathing choice, with managed beach facilities and a more spread-out coastal setting. It can work well if your hotel or driving route brings you farther south.</p>
+        <p>South of the main Ein Bokek hotel strip, Hamei Zohar is another free public bathing choice, with managed beach facilities and a more spread-out coastal setting. I recommend considering Hamei Zohar if your hotel or driving route brings you farther south.</p>
         <p>See the <External href={links.hameiZohar}>official Hamei Zohar beach information</External> and <External href={maps.hameiZohar}>location on Google Maps</External>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Salt scenery, desert cliffs and the promenade" image={{ src: saltFormationPhoto, alt: "White salt formations rising from the turquoise Dead Sea" }}>

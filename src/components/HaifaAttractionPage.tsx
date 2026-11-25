@@ -202,7 +202,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       <AttractionHighlight title="The German Colony"
         image={{ src: pictures.colony, alt: "Ben Gurion Boulevard and the Bahá’í Gardens rising behind Haifa's German Colony" }}>
         <p>Ben Gurion Boulevard is lined with nineteenth-century Templer-era buildings, restaurants and cafés, with the Bahá’í terraces rising above its eastern end. In the evening, the neighbourhood becomes a pleasant setting for a meal with the illuminated garden axis in view.</p>
-        <p>The <Link to="/travel-blog/museums-in-haifa/" className={inlineLink}>Haifa City Museum</Link> occupies a restored historic building nearby, and the lower garden viewpoint at 21 Hagefen Street is a short walk away. This is a useful base for a compact walking route into Wadi Nisnas.</p>
+        <p>The <Link to="/travel-blog/museums-in-haifa/" className={inlineLink}>Haifa City Museum</Link> occupies a restored historic building nearby, and the lower garden viewpoint at 21 Hagefen Street is a short walk away. Start here for a short walking route into Wadi Nisnas.</p>
         {directions("Ben Gurion Boulevard, German Colony, Haifa, Israel")}
       </AttractionHighlight>
       <AttractionHighlight title="Wadi Nisnas: market and neighbourhood art"
@@ -240,7 +240,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       <div className="grid gap-3 sm:grid-cols-2">
         <article className="rounded-xl border bg-card p-4">
           <h4 className="font-serif text-lg font-semibold">Museums and family activities</h4>
-          <p className="mt-2 text-sm leading-relaxed">Madatech's hands-on science exhibitions, the Haifa Museum of Art, the National Maritime Museum and the Haifa City Museum are all worth considering. Opening days, ticket prices and exhibitions differ. Start with my <Link to="/travel-blog/museums-in-haifa/" className={inlineLink}>Haifa museums guide</Link> or the <a href={official.haifaMuseums} target="_blank" rel="noopener noreferrer" className={inlineLink}>Haifa Museums network</a>.</p>
+          <p className="mt-2 text-sm leading-relaxed">Choose between MadaTech's hands-on science exhibitions, the Haifa Museum of Art, the National Maritime Museum and the Haifa City Museum. Opening days, ticket prices and exhibitions differ. Start with my <Link to="/travel-blog/museums-in-haifa/" className={inlineLink}>Haifa museums guide</Link> or the <a href={official.haifaMuseums} target="_blank" rel="noopener noreferrer" className={inlineLink}>Haifa Museums network</a>.</p>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h4 className="font-serif text-lg font-semibold">Carmel nature and city trails</h4>
@@ -395,7 +395,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
     { q: "Can I walk from the top of the Bahá’í Gardens to the German Colony through the terraces?", a: "No. The public viewpoints are separate; the terraces are not an unrestricted top-to-bottom public walkway. A reserved guided tour follows an authorised route with its own meeting and exit points." },
     { q: "Is Haifa easy to visit without a car?", a: "Yes, especially if you choose nearby sites within each district and use rail, the Carmelit, buses or taxis between hillside and coastal locations. Do not plan a single long walking loop across the mountain and harbour." },
     { q: "What can I do in Haifa on Saturday?", a: "Public promenades, viewpoints and some food businesses can be good options, though opening hours vary. Some city buses and Metronit services operate on Saturdays, while Israel Railways and the Carmelit have different weekend schedules. Check the exact service and venue." },
-    { q: "Which Haifa activities work well for families?", a: "The Bat Galim waterfront, southern beaches in lifeguard season, Madatech and short Carmel lookouts are useful choices. For strollers, choose accessible garden areas instead of the guided terrace descent and check access notes for each site." },
+    { q: "Which Haifa activities work well for families?", a: "The Bat Galim waterfront, southern beaches in lifeguard season, Madatech and short Carmel lookouts are useful choices. With a stroller, choose accessible garden areas and check the access arrangements for each site; the guided terrace descent involves steps." },
   ],
   nearby: [
     { label: "Old Akko (Acre)", to: "/attractions/akko-acre/", note: "Crusader halls, Ottoman lanes, markets and harbour views." },

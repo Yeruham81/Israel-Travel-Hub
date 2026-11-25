@@ -13,7 +13,7 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
   downtown: {
     heading: "Jaffa Road convenience or a quieter base?",
     choose: "A room near Zion Square suits visitors who want cafés, the light rail and central walking routes without hiring a car every day.",
-    compare: "Mamilla is a stronger comparison when Jaffa Gate is your main destination; the German Colony is worth considering when a residential evening matters more than the central shopping streets.",
+    compare: "Choose Mamilla for access to Jaffa Gate or the German Colony for quieter residential evenings.",
     arrival: "Jaffa Road has pedestrian stretches. When arriving with bags, ask the hotel which vehicle-accessible street to use.",
   },
   mamilla: {
@@ -24,9 +24,9 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
   },
   "old-city": {
     heading: "Choose the gate before the hotel transfer",
-    choose: "For Christian and Armenian Quarter stays, Jaffa Gate may be a useful reference; Damascus Gate serves northern approaches, while other quarters can require a different gate.",
+    choose: "Jaffa Gate serves many Christian and Armenian Quarter stays; Damascus Gate serves northern approaches. Ask about access to your particular accommodation.",
     compare: "Mamilla or the hotel district north of Damascus Gate may work better if steps, a stroller or door-to-door unloading matter more than sleeping inside the walls.",
-    arrival: "Ask your accommodation to specify the gate, permitted drop-off, remaining walk and any luggage help. The nearest gate on a map is not always the best practical access point.",
+    arrival: "Ask your accommodation to specify the gate, permitted drop-off, remaining walk and any luggage help. Allow for street access, steps and the route to your accommodation.",
   },
   "mahane-yehuda": {
     heading: "Market frontage or a Nachlaot side lane?",
@@ -101,7 +101,7 @@ export const destinationBaseChoices: Record<string, BaseChoice[]> = {
   deadsea: [
     { visitor: "Want to walk between a resort and nearby services", base: "Ein Bokek", reason: "The central resort strip has managed beach areas and more hotel-to-promenade choices, although the beach route still varies by property." },
     { visitor: "Planning to spend most of the stay inside a resort", base: "Southern hotel district / Neve Zohar", reason: "The resort-led setting makes meal plans and on-site facilities particularly important; outside dining is less convenient." },
-    { visitor: "Prioritizing nature and inland scenery", base: "Ein Gedi", reason: "This is not a substitute for a beachfront Ein Bokek booking. Plan separate transport if a managed bathing beach is a main goal." },
+    { visitor: "Prioritizing nature and inland scenery", base: "Ein Gedi", reason: "Ein Gedi suits a nature-focused stay. Plan separate transport if a managed bathing beach is a main goal." },
   ],
   tiberias: [
     { visitor: "Arriving without a car and visiting the town", base: "Lower town / promenade", reason: "Restaurants and some waterfront walks are closer together, though lakeside location does not guarantee a private swimming beach." },
@@ -143,7 +143,7 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   },
   "haifa:family": {
     heading: "Example: a family spending half the trip at the beach",
-    situation: "A Carmel hotel with an indoor pool can be a good city base but still requires travel to and from the actual shore.",
+    situation: "A Carmel hotel with an indoor pool offers a hilltop city base; allow travel time to and from the beach.",
     decision: "Compare total travel effort as well as pool facilities: a seafront hotel may be easier for beach days, while Carmel works better when the family plans viewpoints and city outings.",
   },
 };

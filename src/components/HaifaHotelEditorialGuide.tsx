@@ -222,7 +222,7 @@ function HotelCard({ id, pageId }: { id: string; pageId: string }) {
       <p className="mt-3 text-sm leading-relaxed">{note.summary}</p>
       <p className="mt-3 text-sm leading-relaxed"><strong>Best for:</strong> {note.bestFor}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Beach access:</strong> {note.beach}</p>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Keep in mind:</strong> {note.consider}</p>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Before booking:</strong> {note.consider}</p>
       {booking?.isAffiliate ? <a href={hotelAffiliateUrl(booking, pageId, hotel.id)}
         target="_blank" rel={relFor(booking.isAffiliate)}
         onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}

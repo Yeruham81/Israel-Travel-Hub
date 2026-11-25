@@ -126,13 +126,13 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
   highlightContent: <div className="mt-4 space-y-3">
     <AttractionHighlight title="Walk along the Tiberias waterfront" image={{ src: waterfront, alt: "Tiberias waterfront and the Sea of Galilee" }}>
       <p>Tiberias is the region's most convenient base, with lakeside views, hotels, restaurants and bus connections. Start at the promenade for a relaxed introduction, then explore the town or continue to a supervised beach.</p>
-      <p>For a longer stay, my <Link to="/accommodation/tiberias/" className={inlineLink}>Tiberias accommodation guide</Link> helps you compare hotel styles and locations. A hotel with a lake view does not necessarily have its own swimming beach.</p>
+      <p>For a longer stay, my <Link to="/accommodation/tiberias/" className={inlineLink}>Tiberias accommodation guide</Link> helps you compare hotel styles and locations. Check whether your lakeside hotel offers access to a designated swimming beach.</p>
     </AttractionHighlight>
     <AttractionHighlight title="Enjoy a designated lakeside beach">
       <p>Unlike the Dead Sea, Lake Kinneret is freshwater, and swimming feels much more like an ordinary lake. Facilities, lifeguard shifts, parking, camping and entry policies vary considerably between beaches.</p>
       <p>Good places to investigate include <External href={sources.tzemach}>Tzemach Beach</External> on the southern shore, <External href={sources.hukok}>Hukok North</External> on the northwest, and <External href={sources.kursi}>Kursi</External> to the east. Check the beach authority's notices before setting out.</p>
     </AttractionHighlight>
-    <AttractionPracticalTip><strong>Not every shoreline is a swimming beach.</strong> Some scenic or freely accessible stretches are officially unrecognised for bathing. For example, the <External href={sources.unsafeShore}>Nahal Amud estuary</External> is a natural shoreline where the authorities prohibit swimming.</AttractionPracticalTip>
+    <AttractionPracticalTip><strong>Swim at designated bathing beaches with operating lifeguard services.</strong> Some scenic or freely accessible stretches are officially unrecognised for bathing. For example, the <External href={sources.unsafeShore}>Nahal Amud estuary</External> is a natural shoreline where the authorities prohibit swimming.</AttractionPracticalTip>
     <AttractionHighlight title="See Capernaum, Tabgha and the Mount of Beatitudes">
       <p>The northwestern shore is especially rewarding for visitors interested in New Testament history. <Link to="/attractions/capernaum/" className={inlineLink}>Capernaum</Link> has lakeside archaeological remains, <Link to="/attractions/tabgha/" className={inlineLink}>Tabgha</Link> is associated with the multiplication of the loaves and fishes, and the <Link to="/attractions/mount-of-beatitudes/" className={inlineLink}>Mount of Beatitudes</Link> offers a hilltop sanctuary with lake views.</p>
       <p>Choose two or three nearby sites, allowing time for separate entrances, religious services and local opening arrangements. The sites are not a single admission complex.</p>
@@ -182,7 +182,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
       </article>
       <article className="rounded-xl border bg-card p-4">
         <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><BusFront className="size-5 text-primary" aria-hidden="true" />By public bus</h3>
-        <p className="mt-2 text-sm leading-relaxed">Tiberias is the area's principal bus hub. Intercity buses connect it with other parts of Israel, but not every lakeside church, viewpoint or beach has a convenient connection or return service.</p>
+        <p className="mt-2 text-sm leading-relaxed">Tiberias is the area's principal bus hub. Intercity buses connect it with other parts of Israel. Check the onward connection and return service for your chosen lakeside church, viewpoint or beach.</p>
         <p className="mt-2 text-sm leading-relaxed">There is no passenger railway station at Tiberias. Check <External href={sources.egged}>current bus schedules</External>, the nearest stop and your return trip, especially on Fridays and Jewish holidays.</p>
       </article>
     </div>
@@ -244,7 +244,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     <p>If religious heritage is your main interest, start with the dedicated <Link to="/attractions/capernaum/" className={inlineLink}>Capernaum</Link> and <Link to="/attractions/tabgha/" className={inlineLink}>Tabgha</Link> guides; the lake itself also rewards time simply spent enjoying the setting.</p>
   </div>,
   tourContent: <div className="mt-4 space-y-3">
-    <p>These existing Viator and GetYourGuide partner tours offer organised ways to explore parts of the Galilee from Jerusalem or Tel Aviv. Operators select different stops; not every tour includes a boat ride, swimming, or a Jordan River baptism ceremony.</p>
+    <p>These existing Viator and GetYourGuide partner tours offer organised ways to explore parts of the Galilee from Jerusalem or Tel Aviv. Tour itineraries vary; check whether your chosen tour includes a boat ride, swimming or a Jordan River baptism ceremony.</p>
     <SeaOfGalileeTourCards />
     <p className="text-xs leading-relaxed text-muted-foreground">Check current prices, departure times, ratings, entrance tickets and cancellation terms on the booking provider before paying.</p>
     <p>For additional routes and departure choices, see <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>all Nazareth & Sea of Galilee tours</Link>. For a flexible private car-and-driver itinerary, <a href="#contact" className={inlineLink}>contact me</a>.</p>

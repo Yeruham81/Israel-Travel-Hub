@@ -107,7 +107,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">A useful nearby bus stop to look up is <strong>Beit Al-Hikma School / Al-Qafza (בי״ס בית אל-חכמה/אל-קפזה)</strong>, on the southern side of Nazareth. The walk from this stop to Mount Precipice is not the same as the short paved path from the hilltop car park: check the uphill route, pavements and return journey before setting out. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to confirm a suitable service for your date. For several regional stops, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing guided tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Look for the nearby bus stop <strong>Beit Al-Hikma School / Al-Qafza (בי״ס בית אל-חכמה/אל-קפזה)</strong>, on the southern side of Nazareth. The walk from this stop to Mount Precipice is not the same as the short paved path from the hilltop car park: check the uphill route, pavements and return journey before setting out. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to confirm a suitable service for your date. For several regional stops, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing guided tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">On foot</h3></div>
@@ -152,7 +152,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Mount Precipice is an easy scenic addition to a Nazareth day, but not every organised Galilee tour includes it. Look carefully at the itinerary and whether the lookout is an actual stop.</p>
+      <p>Mount Precipice offers a scenic addition to a Nazareth day. Choose a tour that specifically includes the lookout. Look carefully at the itinerary and whether the lookout is an actual stop.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
           <img src="/images/attractions/nazareth-galilee.webp" alt="Religious artwork in Nazareth on a northern Israel sightseeing route" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

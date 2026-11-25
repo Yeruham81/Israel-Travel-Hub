@@ -1696,7 +1696,7 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
   },
   {
     id: "ds-nevo", cityId: "deadsea", areaId: "deadsea", name: "Nevo by Isrotel Collection", style: "Full-service resort with Esprit Spa",
-    summary: "A substantial Ein Bokek resort combining the Esprit Spa, pools and access to nearby beach services. It is a useful all-round choice when different members of the party want hotel facilities as well as time beside the water.",
+    summary: "A substantial Ein Bokek resort combining the Esprit Spa, pools and access to nearby beach services. It suits groups combining time by the water with hotel facilities.",
     bestFor: "First visits and mixed-interest groups looking for a broad resort experience.",
     watch: "Confirm the route to the beach, the spa access included in your room rate and charges for treatments or specific facilities.", sourceId: "hotel-ds-nevo-official",
     resortFacts: { location: "Ein Bokek", beach: "Beach beside the hotel; confirm the access route", spa: "Esprit Spa, mineral-water pools and treatments", agePolicy: "Hotel accepts families; confirm spa age limits", children: "Kids' club and pool facilities; schedules vary", meals: "Meals depend on the selected booking offer" },
@@ -1776,7 +1776,7 @@ export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts:
   },
   {
     id: "tib-gai-beach", cityId: "tiberias", areaId: "tiberias", name: "Gai Beach Hotel", style: "Lakeside family hotel with a water park",
-    summary: "A southern-shore hotel combining a declared swimming beach with a water park. The operator advertises water-park entry for hotel guests, making it a useful family comparison when slides and time by the water are central to the holiday.",
+    summary: "A southern-shore hotel combining a declared swimming beach with a water park. The operator advertises water-park entry for hotel guests, an appealing feature for families who enjoy slides and time by the water.",
     bestFor: "Families planning to spend substantial time at the hotel, beach and water park.",
     watch: "Confirm the current water-park calendar, separate-swimming sessions, slide restrictions and which facilities operate during your stay. Do not assume year-round water-park opening.", sourceId: "hotel-tib-gai-beach-official",
     resortFacts: { location: "Southern lakeshore, beyond the central promenade", beach: "Declared beach beside the water park; check operation", spa: "Hotel spa; confirm entry ages and charges", agePolicy: "Families accepted; water attractions have separate rules", children: "Water park with slides and children's areas; seasonal calendar", meals: "Compare the exact breakfast or other board package" },
@@ -1785,7 +1785,7 @@ export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts:
     id: "tib-leonardo-club", cityId: "tiberias", areaId: "tiberias", name: "Leonardo Club Tiberias", style: "Central family hotel · check the current board basis",
     summary: "A central hotel with children's and teens' clubs, pools and seasonal water slides. Although marketed as all-inclusive, the operator currently posts a notice that it is running on full board instead; confirm the exact package before booking.",
     bestFor: "Families who want on-site activities and meals while staying near the town and promenade.",
-    watch: "Full board does not automatically include all drinks and snacks. Confirm the meal basis in writing, pool and slide opening, club ages and your room's occupancy. This is not a private-beach hotel.", sourceId: "hotel-tib-leonardo-club-official",
+    watch: "Full-board inclusions for drinks and snacks vary. Confirm the meal basis in writing, pool and slide opening, club ages and your room's occupancy. This is not a private-beach hotel.", sourceId: "hotel-tib-leonardo-club-official",
     operatingNotice: { message: "Operator notice, checked 17 October 2026: the pool is scheduled to close on 25–27 October 2026 for enclosure maintenance. Confirm any change directly before booking those dates.", expiresOn: "2026-10-27" },
     resortFacts: { location: "Central Tiberias, a walk from the promenade", beach: "No private beach; plan swimming separately", spa: "Check which wellness facilities are currently available", agePolicy: "Families accepted; confirm slide and club ages", children: "Children's and teens' clubs; seasonal water slides", meals: "Marketed all-inclusive, but current operator notice says full board; confirm" },
   },
@@ -1998,7 +1998,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-port-tower", cityId: "telaviv", areaId: "telaviv-old-north", name: "Port Tower by Isrotel Design", style: "Contemporary tower hotel near Tel Aviv Port",
-    summary: "Isrotel's modern hotel at the northern end of HaYarkon Street is a useful option for time around the port and northern waterfront. Its tower format offers a different stay from the smaller boutique properties farther south in the Old North.",
+    summary: "Isrotel's modern hotel at the northern end of HaYarkon Street offers easy access to the port and northern waterfront. Its tower format offers a different stay from the smaller boutique properties farther south in the Old North.",
     bestFor: "Visitors focused on the port, northern coast and a contemporary hotel setting.",
     watch: "Check your room's actual view and the walk to your preferred beach. Confirm any pool, meal and parking conditions for your dates.", sourceId: "hotel-tlv-port-tower-official",
   },

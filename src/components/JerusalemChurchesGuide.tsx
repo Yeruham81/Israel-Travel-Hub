@@ -52,7 +52,7 @@ const faqs = [
   {q:"Are Jerusalem churches free to enter?",a:"Many offer free general entry, but some compounds, archaeological areas and towers charge separately. St Anne, Pater Noster, the Chapel of the Ascension and the Redeemer tower have published admission charges."},
   {q:"Is the Garden Tomb the same place as the Church of the Holy Sepulchre?",a:"No. They are separate places. The Holy Sepulchre is the traditional site of the crucifixion and resurrection for numerous historic churches; the Garden Tomb is a different site popular with some Protestant visitors."},
   {q:"Is the Mount of Olives walk accessible to everyone?",a:"No. The slope is steep, paths can be uneven and some compounds have stairs. A drive to an upper viewpoint can avoid the uphill climb, but the descent may still be difficult. Confirm accessibility for specific sites."},
-  {q:"Can tourists attend a religious service or arrange group prayer?",a:"Visitor opening hours do not automatically authorise worship participation, private ceremonies or group services. Contact the church or responsible community before arranging group prayer."},
+  {q:"Can tourists attend a religious service or arrange group prayer?",a:"Visitor opening hours apply to sightseeing. Contact the church or responsible community about worship participation, private ceremonies or group prayer."},
   {q:"Do holidays affect church opening times?",a:"Yes. Christian feast days, Holy Week, worship services, Jewish holidays and special events may change access. Check the relevant church and Israel's events calendar before travelling."},
 ];
 

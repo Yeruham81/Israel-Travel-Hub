@@ -196,7 +196,7 @@ export function JerusalemCityHubPage(){
           {title:"Check current travel advice",description:"Conditions can change. Review the relevant official travel advisories, local guidance and your insurer's terms before travelling; avoid treating old reassurance as a current safety assessment."},
         ].map(item=><article key={item.title} className="rounded-xl border bg-card p-4"><h3 className="font-bold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p></article>)}
       </div>
-      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">For specific church visiting arrangements, the <a className={linkClass} href="https://www.cicts.org/our-services/" target="_blank" rel="noopener noreferrer">Christian Information Center</a> is a useful starting point. Always confirm admission and worship arrangements with the relevant site before you travel.</p>
+      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">For specific church visiting arrangements, the <a className={linkClass} href="https://www.cicts.org/our-services/" target="_blank" rel="noopener noreferrer">Christian Information Center</a> publishes information about church visits. Confirm admission and worship arrangements with the relevant site before you travel.</p>
       <Tip>If your plans include a private day trip, I'd set the main destination and realistic walking time first, then add optional stops. A private driver handles transport; licensed guiding and entrance tickets are separate unless specifically arranged.</Tip>
     </section>
 

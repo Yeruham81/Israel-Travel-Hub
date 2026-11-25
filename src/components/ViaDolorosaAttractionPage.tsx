@@ -141,7 +141,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
         <div className="mt-3 grid gap-3 text-sm leading-relaxed sm:grid-cols-2">
           <p><strong>Underfoot:</strong> Expect uneven or polished stone paving, steps, sloping lanes and busy market intersections. Use comfortable shoes and allow time for pauses.</p>
           <p><strong>Wheelchairs and strollers:</strong> Some street segments are more manageable than others. Narrow chapel entrances, the Station IX approach and the raised Calvary chapels may require adapted plans.</p>
-          <p><strong>With children:</strong> A shorter route focusing on the major visible stations and the church exterior can work well, with breaks in the Christian Quarter.</p>
+          <p><strong>With children:</strong> Choose a shorter route focusing on the major visible stations and the church exterior, with breaks in the Christian Quarter.</p>
           <p><strong>Prayer spaces:</strong> Respect services and posted photography instructions. Groups should coordinate private prayer or religious services separately where necessary.</p>
         </div>
         <p className="mt-3 text-sm"><Link to="/attractions/old-city-jerusalem/" className={inlineLink}>My Old City guide</Link> explains entrance gates, accessible approaches and nearby facilities.</p>

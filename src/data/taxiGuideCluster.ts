@@ -54,7 +54,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "recognize", title: "How to Recognize a Licensed Taxi in Israel",
         paragraphs: [
           "Licensed taxis in Israel carry a roof sign marked monit (מונית) and taxi identification details. Most are white; verify the licence information inside the vehicle and keep the taxi number if you need help after the journey.",
-          "If you have booked through an app, match the license plate and driver information shown in your booking. At an airport or major transport hub, follow the official taxi signage instead of accepting an unsolicited approach inside a terminal.",
+          "If you have booked through an app, match the license plate and driver information shown in your booking. At an airport or major transport hub, follow the official taxi signage and decline unsolicited ride offers inside the terminal.",
           "For journeys involving the West Bank, confirm in advance that the driver and vehicle are allowed to complete your route. Entry and vehicle restrictions vary by area.",
         ],
         sourceIds: ["taxi-passenger-rights"],
@@ -338,7 +338,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     sourceIds: ["taxi-fares-2026", "taxi-tariff-hours", "taxi-passenger-rights", "taxi-complaints", "guide-gett"],
     related: ["taxis", "airportTaxis", "uber", "sherut", "shabbat", "arrival"],
     services: [
-      { label: "Compare pre-booked airport transfers", to: "/airport-transfers/", note: "Choose a planned airport pickup with a confirmed provider price and meeting point instead of an on-arrival metered taxi." },
+      { label: "Compare pre-booked airport transfers", to: "/airport-transfers/", note: "Arrange a pickup in advance with a confirmed provider price and meeting point." },
       { label: "Request a private driver quote", to: "/private-driver-in-israel/", note: "Arrange a longer intercity journey, multi-stop route or group vehicle to suit your itinerary." },
       { label: "Compare car rentals in Israel", to: "/car-rental/", note: "For a multi-day itinerary with stops beyond the main cities, compare rental options and choose a pickup location that suits your route." },
       { label: "Compare trains, buses and taxis around Israel", to: travelGuidePaths.israel, note: "Find less expensive public-transport options and decide when a taxi is worth the extra cost." },

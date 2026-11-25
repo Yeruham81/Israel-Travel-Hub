@@ -182,7 +182,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
         <div className="mt-3">{placeLink(beach.query)}</div>
       </article>)}
     </div>
-    <AttractionPracticalTip>A beach with a café or deck chairs is not necessarily a supervised bathing beach. Check for an active lifeguard and follow the flags and on-site signs before swimming.</AttractionPracticalTip>
+    <AttractionPracticalTip>Look for a designated bathing beach with an operating lifeguard station; beach cafés and deck chairs are separate facilities. Check for an active lifeguard and follow the flags and on-site signs before swimming.</AttractionPracticalTip>
     <AttractionHighlight title="Snorkeling, diving, water sports and boat trips" image={{ src: photos.glassBottom, alt: "Glass-bottom sightseeing boat on the Red Sea off Eilat" }}>
       <p>Eilat offers guided snorkeling and introductory diving around its Red Sea reefs, alongside kayaking, stand-up paddling and boat cruises. Choose an activity that suits your swimming skills, age, comfort in the water and the operator's safety procedures.</p>
       <p>Visitors who prefer to stay dry can choose a sightseeing cruise or a glass-bottom boat, which offers views below the water without snorkeling. Availability and visibility depend on weather, sea conditions and the operator's programme.</p>

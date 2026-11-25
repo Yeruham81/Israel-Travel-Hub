@@ -110,7 +110,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         image={{ src: images.market, alt: "Traditional street market and shops in the narrow lanes of Old Akko" }}
       >
         <p>The market is where the historic setting feels most alive. Walk between spice shops, bakeries, small food stalls and stone passageways, and take time to enjoy the local atmosphere.</p>
-        <p>I would leave room for a food stop instead of trying to visit every museum in one afternoon. <a href={official.market} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko market information</a>.</p>
+        <p>I would leave time for a food stop between museum visits. <a href={official.market} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko market information</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free entry</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst

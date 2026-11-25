@@ -101,7 +101,7 @@ export const foodExtras = [
 
 export const foodMarkets = [
   {id:"jerusalem",title:"Mahane Yehuda Market",place:"Jerusalem",mood:"Market stalls, bakeries and hearty home-style dishes",
-    why:"A useful place to taste pastries, spices, filled sandwiches and cooked meals in one walk. The nearby streets also have evening venues.",
+    why:"Taste pastries, spices, filled sandwiches and cooked meals in one walk. The nearby streets also have evening venues.",
     tip:"Friday shopping can be busy and many stalls close for Shabbat; verify the particular vendor's hours.",
     image:"/images/food-guide/mahane-yehuda-food-stalls.webp",alt:"Crowds and food stalls inside Jerusalem’s Mahane Yehuda Market",
     guide:"/travel-blog/shopping-in-jerusalem/",

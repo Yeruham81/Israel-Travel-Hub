@@ -63,7 +63,7 @@ const guidedTourPhotos: Record<string, GuidePhoto> = {
 const itineraryDetails: Record<string, ItineraryDetails> = {
   "ashdod-tel-aviv": {
     photo: airportTransferPhotos["tel-aviv"]!,
-    description: "Combine Old Jaffa's stone lanes and harbour with Tel Aviv's Mediterranean promenade. Discuss a market, neighborhood walk or beachside lunch instead of a tightly packed checklist.",
+    description: "Combine Old Jaffa's stone lanes and harbour with Tel Aviv's Mediterranean promenade. Choose time at a market, a neighborhood walk or a beachside lunch.",
     bestFor: "Coastal scenery, city life and a gentler pace",
     planningNote: "Choose the walking and lunch stops around your time ashore; this is a shorter coastal journey than the desert options.",
     highlights: ["Old Jaffa", "Tel Aviv seafront", "Flexible city stops"],

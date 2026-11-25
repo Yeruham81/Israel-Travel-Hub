@@ -160,7 +160,7 @@ export function HaifaMuseumsGuide() {
     </section>
     <OnThisPage sections={jump}/>
     <section id="top-picks" aria-labelledby="top-picks-heading" className="mt-10 scroll-mt-24">
-      <SectionHeading id="top-picks" title="My top museum picks" intro="Six different experiences worth considering first. Pick the subject that interests you most."/>
+      <SectionHeading id="top-picks" title="My top museum picks" intro="Six museums for a range of interests. Pick the subject that interests you most."/>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {featured.map(m=><a href={"#museum-"+m.id} key={m.id} className="editorial-card-link group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
           <span className="text-[11px] font-bold uppercase tracking-wide text-primary">{m.theme}</span>
@@ -220,7 +220,7 @@ export function HaifaMuseumsGuide() {
       </div>
     </section>
     <section id="museum-routes" aria-labelledby="museum-routes-heading" className="mt-12 scroll-mt-24">
-      <SectionHeading id="museum-routes" title="Plan a museum day in Haifa" intro="Choose a realistic local cluster instead of spending the day repeatedly crossing the Carmel slopes."/>
+      <SectionHeading id="museum-routes" title="Plan a museum day in Haifa" intro="Group nearby museums into one outing to reduce travel across the Carmel slopes."/>
       <div className="grid gap-4 md:grid-cols-3">{[
         {title:"A downtown art & heritage walk",time:"Half a day",steps:["Haifa Museum of Art in Wadi Nisnas","Haifa City Museum in the German Colony","Walk along Ben Gurion Avenue"],note:"Check the City Museum exhibition calendar before going."},
         {title:"Science & Hadar",time:"Half to full day",steps:["MadaTech: allow about three hours","Optional Hermann Struck Museum if open","Allow time for the hillside streets"],note:"The smaller museum is a separate stop, not an attraction inside MadaTech."},

@@ -167,7 +167,7 @@ export const museums: MuseumEntry[] = [
     highlightsForFamilies: "Children under 18 enter free.",
     intro: "A small museum devoted to the painter, illustrator and author Nahum Gutman. Its Neve Tzedek setting makes it particularly enjoyable as part of a neighbourhood walk.",
     highlights: ["Works by Nahum Gutman", "Israeli art and illustration", "Historic Neve Tzedek setting"],
-    tip: "Spend time exploring Neve Tzedek afterwards; allow extra walking time to Jaffa instead of treating it as the next door attraction.",
+    tip: "Spend time exploring Neve Tzedek afterwards; allow extra walking time if you continue to Jaffa.",
     url: "https://www.gutmanmuseum.co.il/en/useful-info/",
     ticketUrl: "https://www.gutmanmuseum.co.il/en/product/entry-tickets/",
   },

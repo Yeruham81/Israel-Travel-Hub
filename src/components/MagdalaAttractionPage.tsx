@@ -162,7 +162,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Guided Galilee trips can make it easier to combine Magdala with lakeside churches and other nearby stops. Check the actual itinerary before booking: not every tour includes both the archaeological park and Duc In Altum.</p>
+      <p>Guided Galilee trips can make it easier to combine Magdala with lakeside churches and other nearby stops. Choose an itinerary that includes both the archaeological park and Duc In Altum if you want to visit both.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="magdala-galilee-tours-card">
           <img src="/images/attractions/sea-of-galilee.webp" alt="Landscape of the Sea of Galilee on a northern Israel guided tour route" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

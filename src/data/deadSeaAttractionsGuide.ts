@@ -34,7 +34,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "access": "Free public beach; supervised bathing areas only",
     "description": "The best place to begin a Dead Sea visit is often Ein Bokek's maintained public beachfront. Floating in its highly saline water, then relaxing along the promenade, makes an easy introduction even if you have no plans to visit a hotel spa.",
     "practical": "Public showers, shade and visitor facilities are available in the central beach area. Enter the water slowly, keep your face and eyes clear, avoid swallowing the water, and rinse thoroughly afterwards. Follow lifeguard instructions; do not enter the sea outside permitted bathing zones.",
-    "gettingThere": "Navigate to Ein Bokek Central Beach, not simply 'Dead Sea'. The public beach is beside the hotel strip; check parking conditions and the last transport connection.",
+    "gettingThere": "Set your navigation to Ein Bokek Central Beach. The public beach is beside the hotel strip; check parking conditions and the last transport connection.",
     "tip": "I'd give the beach its own unhurried slot after sightseeing. Fresh water, sandals and a towel make the visit much more comfortable.",
     "image": {
       "src": beach,
@@ -135,7 +135,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "description": "At Qumran, archaeological remains help tell the story of the community associated with the Dead Sea Scrolls. Visitors can examine the excavations and look towards the cliffs and caves where manuscripts were discovered.",
     "practical": "The archaeological park is the visitor attraction. The famous scroll caves are not an open-access cave tour, so I would avoid planning around entering them. Bring sun protection; much of the visit is exposed.",
     "gettingThere": "Qumran is in the northern Dead Sea area near Kibbutz Kalia, well north of Ein Bokek. Combine it with other sites along the northern Dead Sea.",
-    "tip": "If the scrolls interest you, leave time to read the interpretation at the archaeological site instead of treating it as a photo stop.",
+    "tip": "If the scrolls interest you, allow time to read the interpretation at the archaeological site.",
     "image": {
       "src": qumran,
       "alt": "Desert cliffs and caves beside the Qumran archaeological landscape"

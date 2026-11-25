@@ -38,7 +38,7 @@ const headings = [
 const pickIcons = [Waves, Users, Heart, Compass, TreePalm, Sun];
 const areas = [
   { name: "Northern coast" as const, intro: "From the northernmost Tzuk beaches to Hilton, these stretches are more spread out. Some work best as a dedicated beach trip, while those closer to the port are easier to combine with a walk." },
-  { name: "Central seafront" as const, intro: "If you're staying in the centre, these neighbouring beaches are usually the simplest options. I suggest picking the access point closest to your hotel instead of spending time moving between nearly identical stretches." },
+  { name: "Central seafront" as const, intro: "If you're staying in the centre, these neighbouring beaches are usually the simplest options. I suggest using the beach access point closest to your hotel." },
   { name: "Southern coast and Jaffa" as const, intro: "South of the central hotel strip, the beaches and parks lead towards Jaffa. Choose a supervised beach for swimming, then make time for the waterfront and neighbourhoods nearby." },
 ];
 const related = [

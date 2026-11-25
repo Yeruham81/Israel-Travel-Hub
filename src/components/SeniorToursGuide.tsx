@@ -134,7 +134,7 @@ export function SeniorToursGuide(){
    </section>
 
    <section id="day-trips" aria-labelledby="day-trips-heading" className="mt-12 scroll-mt-24">
-    <Heading id="day-trips" title="Four private day-trip ideas for senior travelers" intro="These are examples you can customize. I would usually recommend fewer stops and more time at each place instead of a crowded, fixed itinerary."/>
+    <Heading id="day-trips" title="Four private day-trip ideas for senior travelers" intro="Customize these day trips to your interests and mobility needs. I recommend choosing a few stops and allowing plenty of time at each."/>
     <div className="grid gap-5" data-testid="senior-detailed-trip-cards">{seniorDayTrips.map(item=><TripCard key={item.id} item={item}/>)}</div>
     <div data-senior-midpage-cta className="mt-6 flex flex-col gap-3 rounded-xl border p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-5">
      <div><h3 className="font-semibold">Would you prefer a different pace or route?</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">Tell me which places matter most and how much walking feels comfortable. I can discuss an individual private transport plan.</p></div>
