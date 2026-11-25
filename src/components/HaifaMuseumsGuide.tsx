@@ -256,7 +256,7 @@ export function HaifaMuseumsGuide() {
         </Link>;
       })}</div>
     </section>
-    <HomeContactForm guide={neighborhoodTripContactCopy("Haifa")}/>
+    <HomeContactForm showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy("Haifa")}/>
     <SourcesDisclosure>
       <p className="mb-3 text-sm leading-relaxed">Museum admission, opening days, current closures and booking advice were checked against official operator information in November 2026. Exhibitions and visitor arrangements may change. Always check the individual museum for your travel dates.</p>
       <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
