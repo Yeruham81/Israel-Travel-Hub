@@ -259,8 +259,8 @@ export function IsraelFoodGuide(){
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{planningCards.map(item=><RelatedCard key={item.to} item={item}/>)}</div>
    </section>
    <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
-     heading:"Planning a trip around Israel?",
-     introduction:"I'm Moshe Barak. Tell me your travel dates, destinations and group size if you need an airport transfer, a private sightseeing day or a driver to help you explore more of Israel. I can also help you plan realistic stops along your route.",
+     heading:"Need a private driver for your trip around Israel?",
+     introduction:"I'm Moshe Barak. Tell me your travel dates, destinations and group size if you need an airport transfer, a private sightseeing day or a driver to help you explore more of Israel. I can arrange transport between your chosen stops and plan a practical driving route.",
      subject:"",
      placeholder:"Travel dates, destinations, number of passengers, pickup location or your question…"
    }}/>
