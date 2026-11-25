@@ -65,14 +65,17 @@ describe.each(allAreas)("Neighborhood subpage: $name", (area) => {
       expect(local).toHaveLength(5);
     }
     const relatedGrid = within(container.querySelector("#other-areas") as HTMLElement).getByTestId("related-neighborhood-grid");
-    expect(relatedGrid).toHaveClass("grid-cols-2", "lg:grid-cols-3");
+    expect(relatedGrid).toHaveClass("grid-cols-2", area.cityId === "jerusalem" ? "lg:grid-cols-3" : "lg:grid-cols-4");
     const links = within(relatedGrid).getAllByRole("link");
-    expect(links).toHaveLength(6);
-    expect(new Set(links.map((link) => link.getAttribute("href"))).size).toBe(6);
-    const city = area.cityId === "jerusalem" ? "/accommodation/jerusalem/" : "/accommodation/tel-aviv/";
-    expect(links[5]).toHaveAttribute("href", city);
     const siblings = neighborhoodGuidesForCity(area.cityId);
-    for (const link of links.slice(0, 5)) {
+    expect(links).toHaveLength(siblings.length);
+    expect(new Set(links.map((link) => link.getAttribute("href"))).size).toBe(siblings.length);
+    const city = area.cityId === "jerusalem" ? "/accommodation/jerusalem/" : "/accommodation/tel-aviv/";
+    expect(links[links.length - 1]).toHaveAttribute("href", city);
+    expect(links.slice(0, -1).map((link) => link.getAttribute("href"))).toEqual(
+      siblings.filter((item) => item.id !== area.id).map((item) => item.path)
+    );
+    for (const link of links.slice(0, -1)) {
       const target = siblings.find((item) => item.path === link.getAttribute("href"));
       expect(target).toBeDefined();
       expect(target!.id).not.toBe(area.id);
