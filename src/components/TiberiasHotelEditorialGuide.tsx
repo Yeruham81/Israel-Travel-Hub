@@ -14,7 +14,6 @@ import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { hotelGoogleMapsUrl } from "@/lib/hotel-google-maps";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
-import tiberiasLuxuryPhoto from "@/assets/tiberias/sunrise.webp";
 import tiberiasCentralPhoto from "@/assets/travel-blog-hub/waterfront-441b1003dd-420.webp";
 import tiberiasBudgetPhoto from "@/assets/home/hotel-room.webp";
 
@@ -168,9 +167,9 @@ const groupPlanningTips: Record<string, { title: string; points: readonly [strin
 };
 
 const hotelFacilityNotices: Record<string, string> = {
-  "tib-galei-kinneret": "The private beach closed on October 4, 2026 for the season. It is expected to reopen for the next swimming season.",
-  "tib-scots": "The seasonal outdoor pool is closed from November 1, 2026 to April 1, 2027.",
-  "tib-leonardo-club": "The water slides are closed for the winter season. The hotel currently advertises full board instead of all-inclusive.",
+  "tib-galei-kinneret": "The private beach closed on October 4, 2026. The operator expects it to reopen for the next swimming season.",
+  "tib-scots": "The seasonal outdoor pool is closed from November 1, 2026, to April 1, 2027.",
+  "tib-leonardo-club": "The water slides are closed for winter. The operator currently says stays run on a full-board basis rather than all-inclusive.",
 };
 
 const browseLabels: Record<string, string> = {
@@ -257,16 +256,14 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
         <p className="eyebrow">Choose your Tiberias stay</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Tiberias hotel suits you?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">I recommend choosing a hotel around the kind of holiday you want: a luxurious lakeside break, family activities, a convenient central base or simple accommodation for exploring the Galilee.</p>
-        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3" data-testid="tiberias-category-grid">
+        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-2" data-testid="tiberias-category-grid">
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
-            const photo = group.id === "luxury"
-              ? { src: tiberiasLuxuryPhoto, alt: "Sunrise across the Sea of Galilee" }
-              : group.id === "family"
-                ? { src: "/images/home/accommodation-tiberias-galilee-ai.webp", alt: "Illustrative lakeshore resort hotels in Tiberias" }
-                : group.id === "central"
-                  ? { src: tiberiasCentralPhoto, alt: "Tiberias town and shoreline from a hilltop viewpoint" }
-                  : { src: tiberiasBudgetPhoto, alt: "Bright and comfortable hotel room" };
+            const photo = group.id === "central"
+              ? { src: tiberiasCentralPhoto, alt: "Tiberias town and shoreline from a hilltop viewpoint" }
+              : group.id === "budget"
+                ? { src: tiberiasBudgetPhoto, alt: "Bright and comfortable hotel room" }
+                : group.photo;
             return <a key={group.id} href={"#group-" + group.id} className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md" data-testid="tiberias-category-card">
               <img src={photo.src} alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
               <span className="flex min-w-0 flex-1 flex-col p-3 sm:p-4">
@@ -361,7 +358,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
       </section>
 
       <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
-        <h2 id="location-h" className="text-3xl">Where are the hotels?</h2>
+        <h2 id="location-h" className="text-3xl">Tiberias hotel areas & getting around</h2>
         <p className="mt-3 leading-relaxed">Hotels range from the lower town and promenade to hillside streets and lakeside properties at the north and south edges. Consider the elevation as well as walking distance when choosing your base.</p>
         <div className="mt-5"><AreaMap area={{ name: "Tiberias and the Sea of Galilee waterfront", map: guide.map }} provider="google" googleZoom={13} /></div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
