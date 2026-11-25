@@ -90,7 +90,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Salt scenery, desert cliffs and the promenade" image={{ src: saltFormationPhoto, alt: "White salt formations rising from the turquoise Dead Sea" }}>
         <p>The contrast between pale salt, blue-green water and the dry desert hills is part of the appeal. Allow time for a short walk along an established promenade and a few photographs before or after your beach visit.</p>
-        <p>Stay on marked public paths. Sections of the northern shore are unstable because of sinkholes, and a beautiful-looking roadside patch of salt is not necessarily safe to approach.</p>
+        <p>Stay on marked public paths. Sinkholes make sections of the northern shore unstable. Keep to designated access areas and bathing beaches.</p>
       </AttractionHighlight>
       <AttractionHighlight title="A hotel spa or an overnight stay">
         <p>Hotels around Ein Bokek offer spa treatments, pools and overnight accommodation. A spa day can be attractive in hot or cool weather, but access, opening hours and inclusions depend on the property and its current offer.</p>

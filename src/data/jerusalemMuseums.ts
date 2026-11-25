@@ -13,7 +13,7 @@ export const jerusalemMuseumAreas: {id:JerusalemMuseumArea;name:string;intro:str
   {
     "id": "west",
     "name": "Museum Row & western Jerusalem",
-    "intro": "The Israel Museum, Bible Lands Museum and Science Museum are in the broader Givat Ram area, while Yad Vashem sits farther west on Mount of Remembrance. Plan travel between them rather than assuming a single walk."
+    "intro": "The Israel Museum, Bible Lands Museum and Science Museum are in the broader Givat Ram area, while Yad Vashem sits farther west on Mount of Remembrance. Allow time for travel between the museums."
   },
   {
     "id": "old",

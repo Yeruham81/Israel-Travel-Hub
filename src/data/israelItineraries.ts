@@ -63,7 +63,7 @@ const baptism = L("Qasr el-Yahud visit guide", "/attractions/qasr-el-yahud/");
 const days3: ItineraryDay[] = [
   {
     name: "Jerusalem: one well-planned Old City day", region: "Jerusalem", image: "itinerary-3day-holy-sepulchre",
-    morning: "Enter Jerusalem’s Old City through Jaffa Gate. Walk through the Christian Quarter to the Church of the Holy Sepulchre, then continue toward the Jewish Quarter and Western Wall if time and access permit. Allow time for the churches, markets and prayer sites along your route.",
+    morning: "Enter Jerusalem’s Old City through Jaffa Gate. Walk through the Christian Quarter to the Church of the Holy Sepulchre. If time and access allow, continue to the Jewish Quarter and Western Wall. Allow time for the churches, markets and prayer sites along your route.",
     afternoon: "Spend the afternoon exploring more of the Old City, or visit the Israel Museum as a separate trip across town. Allow time for travel and exhibitions; see Jerusalem museums for other options.",
     evening: "Explore Jaffa Road or eat around Mahane Yehuda. For local shops and market streets, see shopping in Jerusalem; Friday and Saturday opening patterns differ from an ordinary weekday.",
     practical: "Old City streets have steps and uneven surfaces. Check religious-service times and the restricted visiting hours for the Temple Mount/Haram al-Sharif.",
@@ -164,7 +164,7 @@ const days5: ItineraryDay[] = [
 const days7: ItineraryDay[] = [
   { ...days5[0]!,
     name: "Jerusalem's Old City: historic quarters and sacred sites",
-    afternoon: "Continue through the Jewish Quarter towards the Western Wall if time and access permit, then wander the markets or a favourite section of the Old City. With a full second Jerusalem day ahead, there is no need to add the museums or cross-city viewpoints today.",
+    afternoon: "If time and access allow, continue through the Jewish Quarter to the Western Wall, then wander the markets or a favourite section of the Old City. With a full second Jerusalem day ahead, there is no need to add the museums or cross-city viewpoints today.",
     practical: "The Old City has steps, uneven stone streets and differing religious-site opening arrangements. Check which gate gives practical vehicle access if your accommodation is inside the walls, especially with luggage.",
     overnight: "Jerusalem after Day 1. Keep the same room for the following two nights.",
     links: [jerusalem, jerusalemHotels, L("Jerusalem shopping and markets", "/travel-blog/shopping-in-jerusalem/")],
@@ -229,7 +229,7 @@ const days10: ItineraryDay[] = [
   {
     name: "Jerusalem's Old City: historic quarters and sacred sites", region: "Jerusalem", image: "itinerary-3day-holy-sepulchre",
     morning: "Start at Jaffa Gate and follow a manageable route through the Christian Quarter to the Church of the Holy Sepulchre. The Old City guide explains the gates, walking routes and access to religious sites.",
-    afternoon: "Choose the Jewish Quarter and Western Wall if time and access permit, then enjoy the markets or a favourite stretch of the Old City. Keep the Israel Museum and cross-city viewpoints for tomorrow.",
+    afternoon: "Visit the Jewish Quarter and Western Wall if time and access allow, then enjoy the markets or a favourite stretch of the Old City. Keep the Israel Museum and cross-city viewpoints for tomorrow.",
     evening: "Enjoy dinner near Jaffa Road or Mahane Yehuda, depending on opening hours and where you are staying.",
     practical: "Old City streets include steps and uneven stone surfaces. Check visiting arrangements at religious sites, especially around services, holidays and restricted areas. Arrange a practical luggage drop-off if staying inside the walls.",
     overnight: "Jerusalem after Day 1. Stay at the same hotel for the following two nights.",
