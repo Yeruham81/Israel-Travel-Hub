@@ -55,7 +55,7 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
       }
     }
     expect(screen.getAllByTestId("deadsea-category-tip")).toHaveLength(4);
-    expect(screen.getByText("Make the most of your spa break")).toBeInTheDocument();
+    expect(screen.getByText("Planning your Dead Sea spa break")).toBeInTheDocument();
     expect(screen.getByText("Plan a family-friendly stay")).toBeInTheDocument();
     expect(screen.getByText("Find the best overall value")).toBeInTheDocument();
     expect(screen.getByText("Plan your Ein Gedi outings")).toBeInTheDocument();

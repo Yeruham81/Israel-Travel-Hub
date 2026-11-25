@@ -137,7 +137,7 @@ export function IsraelHolidayVisitorGuidePage(){
       <div className="mt-5 grid gap-4 md:grid-cols-3">
         <div className="rounded-xl border bg-card p-4"><Clock3 className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Dates begin at sunset</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Jewish festivals start the evening before the main civil date. Last buses and trains may leave well before sunset.</p></div>
         <div className="rounded-xl border bg-card p-4"><Train className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Main festival days vs. intermediate days</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">On Passover and Sukkot, the first and final festival days differ from Chol HaMoed for work and transport.</p></div>
-        <div className="rounded-xl border bg-card p-4"><MapPinned className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Different cities, different rhythms</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Jerusalem, Tel Aviv, Haifa, Nazareth and other communities do not all follow the same business hours or customs.</p></div>
+        <div className="rounded-xl border bg-card p-4"><MapPinned className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Different cities, different rhythms</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Business hours and holiday customs vary among Jerusalem, Tel Aviv, Haifa, Nazareth and other communities.</p></div>
       </div>
       <div className="mt-5 rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-bold">{schoolCalendarPlanning.title}</h3>

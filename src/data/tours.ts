@@ -413,7 +413,7 @@ export const tourCategories: TourCategory[] = [
     faqs: [
       { q: "Do all tours on this page visit Bethlehem, Jericho and Qasr al-Yahud?", a: "No. Some focus exclusively on Bethlehem; others combine Bethlehem with Jericho and the Qasr al-Yahud baptismal site. Check each product's actual stop list before booking." },
       { q: "Which Jordan River baptismal site is relevant to these itineraries?", a: "Qasr al-Yahud (also written Kasr el-Yahud), the baptismal site on the lower Jordan River near Jericho. Only select a tour for this purpose when its advertised itinerary identifies that location." },
-      { q: "Can I depart from Jerusalem or Tel Aviv?", a: "Yes, but not every tour offers both cities. Use the departure filters and confirm the exact meeting point, pickup eligibility and return city with the provider." },
+      { q: "Can I depart from Jerusalem or Tel Aviv?", a: "Tours depart from Jerusalem or Tel Aviv, depending on the itinerary. Use the departure filters and confirm the exact meeting point, pickup eligibility and return city with the provider." },
       { q: "Can every traveler enter Bethlehem and Jericho?", a: "No. Entry and transit depend on nationality, travel documents, current security measures and the route. Some booking products explicitly restrict Israeli passport holders. Confirm your circumstances with the operator and current official guidance before purchasing." },
       { q: "Is baptism or entry to the Nativity Grotto guaranteed?", a: "No. A stop at Qasr al-Yahud can be a sightseeing visit. Confirm any baptism ceremony separately. Grotto entry depends on religious services, restoration work, queues and available time." },
       { q: "Do tours use local guides or change vehicles at checkpoints?", a: "Sometimes. Bethlehem trips may involve locally licensed guides, a vehicle change or a checkpoint handover. The arrangements differ by operator, traveler eligibility and date. Ask the provider to confirm the complete pickup, guiding and return plan." },
@@ -427,7 +427,7 @@ export const tourCategories: TourCategory[] = [
     paragraphs: [
       "A typical full-day route connects Nazareth’s Basilica of the Annunciation with selected sites around the Sea of Galilee, such as Capernaum, Tabgha and the Mount of Beatitudes. Different tours make different stops, and some drive past Cana or Mount Tabor without allowing time for a visit. Check which sites are included as actual visits.",
       "Travel from Jerusalem normally takes longer than from Tel Aviv. On a shared group tour, compare the confirmed pickup location, time available at each site, guiding language, entrance tickets and return arrangements. My private car-and-driver service covers transportation. Arrange licensed guiding separately.",
-      "Some Galilee tours also stop at Yardenit, the baptismal site on the Jordan River near the southern end of the lake. The river stop is optional or absent on many products, and visiting the site does not mean a baptism ceremony is included. Confirm religious-site opening hours, modest dress, site access and any ceremony requirements before booking.",
+      "Some Galilee tours also stop at Yardenit, the baptismal site on the Jordan River near the southern end of the lake. Yardenit is an optional stop on many itineraries. Arrange any baptism ceremony separately. Confirm religious-site opening hours, modest dress, site access and any ceremony requirements before booking.",
     ],
     choices: [
       { title: "Nazareth and lakeside churches", text: "Combine the Annunciation, Capernaum, Tabgha and selected viewpoints in one guided day." },
@@ -437,7 +437,7 @@ export const tourCategories: TourCategory[] = [
     faqs: [
       { q: "Can I join a Nazareth and Sea of Galilee day tour from Jerusalem or Tel Aviv?", a: "Yes. Both departure cities appear in the tour catalog, although each product has its own pickup options and total duration. Select the correct departure on the booking page and confirm the actual pickup point." },
       { q: "Do all the tours visit Capernaum, Tabgha and the Mount of Beatitudes?", a: "No. Some tours include guided visits, others offer viewpoints or drive past certain sites. Check the stops and ticket inclusions for the product and date you choose." },
-      { q: "Do Galilee tours include a Jordan River baptism?", a: "Not automatically. Some routes stop at Yardenit, near the southern end of the Sea of Galilee. A stop at Yardenit is not the same as booking a baptism ceremony, which requires separate confirmation." },
+      { q: "Do Galilee tours include a Jordan River baptism?", a: "Some routes stop at Yardenit, near the southern end of the Sea of Galilee. Arrange a baptism ceremony separately with the provider." },
       { q: "What is the difference between a private guided tour and a private driver?", a: "An externally listed private guided tour includes the guiding described in that product. My own private car-and-driver service provides transport and an itinerary agreed with you; licensed guiding, admission fees and meals are separate." },
       { q: "Can I see Nazareth and the Sea of Galilee in one day?", a: "Yes, although the schedule can be long, especially when starting in Jerusalem. Prioritise the sites most important to you and allow for travel, security or access changes and queues at churches." },
       { q: "Are these the same as Haifa Port shore excursions?", a: "No. Standard day trips do not guarantee cruise terminal pickup or return before sailing. For a cruise visit, use the dedicated Haifa shore-excursion options and confirm the ship's schedule with the operator." },
@@ -512,7 +512,7 @@ export const tourCategories: TourCategory[] = [
     faqs: [
       { q: "Is this category limited to the Golan Heights?", a: "Yes. It focuses on destinations in the Golan. Some tours approach the plateau via the Sea of Galilee or Tel Dan, but the main sightseeing is in the Golan region." },
       { q: "Can I depart from Jerusalem or Tel Aviv?", a: "Yes. Several tours list pickup from those cities; others meet locally in northern Israel. Check each booking page for the actual departure and return plan." },
-      { q: "Are Mount Bental and Katzrin included on every tour?", a: "They are common stops, but not all products visit both. Private routes and jeep tours can focus on different parts of the Golan. Read the detailed stop list." },
+      { q: "Are Mount Bental and Katzrin included on every tour?", a: "Both are common stops; itineraries vary. Private routes and jeep tours can focus on different parts of the Golan. Read the detailed stop list." },
       { q: "Can I visit Banias waterfalls or Nimrod Fortress?", a: "Only when the operator lists them and access is permitted. Some trips instead offer viewpoints, and admissions may be separate. Current park and security restrictions can change." },
       { q: "Is it safe to leave marked routes?", a: "No. Some areas have unexploded ordnance or minefield hazards, and there are military restrictions near the border. Stay on approved roads and paths and follow official warnings and tour-operator instructions." },
       { q: "Do these listings guarantee a tour is operating?", a: "No. Published product pages do not confirm a particular travel date is available. Verify the departure, sites, security restrictions and cancellation terms directly before paying." },
@@ -586,7 +586,7 @@ export const toursHubFaqs = [
   { q: "What's the difference between a guided tour and a private driver?", a: "A guided tour includes guiding only where it is explicitly listed. My private driver service provides transportation and agreed stops; licensed guiding is a separate service to arrange if needed." },
   { q: "Where do tours start, and is hotel pickup included?", a: "Departure locations vary by tour and operator. Some experiences offer hotel pickup, while others start at a designated meeting point. Always check the departure city, meeting place and pickup inclusions before booking." },
   { q: "How can I check tour prices and availability?", a: "Open the individual tour's booking page to check current dates, prices, group sizes and inclusions with the operator. Any starting price shown on this site is indicative, not a live booking offer. I provide quotes for my private transport directly." },
-  { q: "Are there tours for cruise passengers?", a: "Yes. Visit the dedicated Haifa or Ashdod shore-excursion pages. Check port pickup and return arrangements against your ship's schedule; an ordinary city tour does not automatically include cruise-port transport." },
+  { q: "Are there tours for cruise passengers?", a: "Yes. Visit the dedicated Haifa or Ashdod shore-excursion pages. Choose a tour that confirms cruise-port pickup and return arrangements compatible with your ship's schedule." },
 ];
 
 export const tourPlanningGuides: ShoreReadingGuide[] = [

@@ -249,7 +249,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "allow": "1–3 hours, or a spa session",
     "access": "Promenade free; mud treatments and spa access may cost extra",
     "description": "The Dead Sea experience is about more than floating. Ein Bokek's promenade is a pleasant place to walk between the beach, gardens and cafés, while nearby resorts offer optional mud treatments and spa facilities.",
-    "practical": "Natural mud is not guaranteed to be available or supplied free at every beach. Check the spa's treatment menu, age rules and fees before booking. Avoid applying mud to irritated skin, wounds or the eyes, and skip exaggerated claims about detoxification or medical results.",
+    "practical": "Natural mud availability and prices vary by beach. Check the spa's treatment menu, age rules and fees before booking. Avoid applying mud to irritated skin, wounds or the eyes, and skip exaggerated claims about detoxification or medical results.",
     "gettingThere": "This works best around Ein Bokek's central beach and hotel district. The promenade and adjacent beach are within walking distance.",
     "tip": "I'd save this for the latter part of the day and choose a spa based on the facilities you will actually use.",
     "image": {

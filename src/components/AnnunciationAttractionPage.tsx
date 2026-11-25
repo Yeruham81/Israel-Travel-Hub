@@ -72,7 +72,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The Catholic basilica is an active place of worship, and the upper church and lower grotto do not always have the same arrangements during religious services. The <a href={annunciationSite.sources.cic} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Information Center</a> publishes the regular visitor hours.</p>
+      <p>The Catholic basilica is an active place of worship. Access to the upper church and lower grotto can differ during religious services. The <a href={annunciationSite.sources.cic} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Information Center</a> publishes the regular visitor hours.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="annunciation-visitor-hours">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Opening hours and entry</h3>

@@ -77,7 +77,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionPracticalTip>Bring water shoes, a towel and plenty of drinking water. A small cut or freshly shaved skin can sting surprisingly strongly in the salty water; rinse off after your float.</AttractionPracticalTip>
       <AttractionHighlight title="Dead Sea mud and mineral treatments">
-        <p>Mineral-rich Dead Sea mud is a famous part of the spa tradition here. For a simple experience, look for packaged mud in local shops or ask a hotel spa what is included. Mud is not guaranteed to be available naturally at the managed Ein Bokek beaches.</p>
+        <p>Mineral-rich Dead Sea mud is a famous part of the spa tradition here. For a simple experience, look for packaged mud in local shops or ask a hotel spa what is included. Natural mud availability varies at the managed Ein Bokek beaches.</p>
         <p>Avoid putting mud on broken or irritated skin and keep it away from your eyes. Rinse off with fresh water afterwards, and never enter an unmarked shoreline or sinkhole zone in search of natural mud.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Ein Bokek Central Beach" image={{ src: beachPhoto, alt: "The public beach and blue waters of the Dead Sea at Ein Bokek" }}>
@@ -136,7 +136,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>For a beach visit, set your navigation to <strong>Ein Bokek Central Beach</strong>. The shoreline is long, and northern and southern beaches are not interchangeable.</p>
+      <p>For a beach visit, set your navigation to <strong>Ein Bokek Central Beach</strong>. The northern and southern beaches are well separated along the shoreline.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><CarFront className="size-5 text-primary" aria-hidden="true" />By car or private driver</h3>
@@ -217,7 +217,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
   tourContent: (
     <div className="mt-4 space-y-3">
       <p>Guided day trips are useful if you'd rather not drive. These sample tours depart from Jerusalem and range from a relaxed beach excursion to a Masada-and-Dead-Sea combination.</p>
-      <AttractionPracticalTip>Tour operators may use different Dead Sea beaches, including northern-shore beaches rather than Ein Bokek or Hamei Zohar. Check the exact beach stop, entrance fees, admissions and pickup point before booking.</AttractionPracticalTip>
+      <AttractionPracticalTip>Tour itineraries may include a northern-shore beach, Ein Bokek or Hamei Zohar; check the beach named by the operator. Check the exact beach stop, entrance fees, admissions and pickup point before booking.</AttractionPracticalTip>
       <DeadSeaTourOptions selectedIds={["jslm-deadsea-beach-viator", "jslm-deadsea-masada-viator", "jslm-deadsea-masada-gyg"]} pageId="attractions-dead-sea" />
       <p className="text-sm">For more departure options, including Tel Aviv, explore my <Link to="/tours/masada-dead-sea/" className={inlineLink}>Masada & Dead Sea tours</Link>. For a flexible route with a private driver, <a href="#contact" className={inlineLink}>send me your plans</a>.</p>
     </div>

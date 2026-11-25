@@ -133,7 +133,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "uber-status",
         title: "Is Uber available in Israel?",
         paragraphs: [
-          "Uber and Lyft currently have no passenger ride-booking service in Israel. An installed app does not mean you can order a car locally.",
+          "Uber and Lyft currently have no passenger ride-booking service in Israel. For local ride booking, use an operator that serves Israel.",
           "On 24 March 2026, a proposal concerning app-based rides in private cars passed its first reading in the Knesset. That was a legislative step rather than approval for Uber to begin service. See the Knesset's official announcement for the proposal's recorded status.",
         ],
         externalLinks: [
@@ -450,7 +450,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "unlimited",
         title: "Best eSIM for unlimited data",
         paragraphs: [
-          "Four of the five providers offer 30-day unlimited plans for Israel. Unlimited does not mean unlimited full-speed data: the daily high-speed allowance and fair-use rules vary. Compare the published prices and limits below. Drimsim has no unlimited package.",
+          "Four of the five providers offer 30-day unlimited plans for Israel. Unlimited plans differ in daily high-speed data allowances and fair-use rules. Compare the published prices and limits below. Drimsim has no unlimited package.",
           "At the checked price of $56.24, GigSky is the cheapest of these four 30-day unlimited plans, with 3.5GB of high-speed data per day before speeds are reduced. Saily costs $71.99 but offers 5GB at full speed per day, which may suit heavier daily use. The reduced speed and fair-use rules can affect streaming and video calls. My choice: GigSky.",
           "Not sure you need unlimited? Airalo also lists a fixed 50GB plan for 30 days at $39, which may be better value if you use less than 50GB. Unlike unlimited plans, it has a fixed overall allowance.",
         ],
@@ -460,7 +460,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "regional",
         title: "Best eSIM for a Middle East trip",
         paragraphs: [
-          "Combining Israel with Jordan, Egypt or other countries? Airalo's Middle East & North Africa regional eSIM can cover several destinations with one plan. A listed option is 5GB for 30 days at $18. Check that Israel and each additional destination are included in the exact package before buying; West Bank or Palestinian-network access is not guaranteed. My choice: Airalo.",
+          "Combining Israel with Jordan, Egypt or other countries? Airalo's Middle East & North Africa regional eSIM can cover several destinations with one plan. A listed option is 5GB for 30 days at $18. Before buying, confirm coverage for Israel and each additional destination, including access to Palestinian networks if your trip includes the West Bank. My choice: Airalo.",
         ],
         externalLinks: [
           { label: "View Airalo's Middle East & North Africa plans", href: AIRALO_MENA_AFFILIATE_URL },

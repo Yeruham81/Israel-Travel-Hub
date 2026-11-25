@@ -4,13 +4,13 @@ import { filterGuides, guideDirectory, guideTopics } from "@/data/travelGuides";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 
 /**
- * Generates the exact set of photos that /travel-blog/ can render after
+ * Validates and optionally exports the exact set of photos that /travel-blog/ can render after
  * unique-image assignment, including every selectable topic filter.
  * This intentionally runs inside Vite/Vitest to resolve the site's real
  * bundled image imports, rather than guessing filenames from its TS source.
  */
 describe("capture travel blog hub image sources", () => {
-  it.skipIf(process.env["WRITE_TRAVEL_BLOG_MANIFEST"] !== "1")("collects default and filtered guide card photos", () => {
+  it("validates default and filtered guide card photos and optionally writes the manifest", () => {
     const selected = new Map<string, { src: string; guideIds: Set<string>; views: Set<string> }>();
     const sizes: Record<string, number> = {};
     const topics = [{ id: "all" }, ...guideTopics];
@@ -42,8 +42,10 @@ describe("capture travel blog hub image sources", () => {
     const invalid = paths.filter(p => !p.src.startsWith("/src/assets/") && !p.src.startsWith("/images/"));
     expect(invalid).toEqual([]);
     const manifest = { directorySize: guideDirectory.length, topicCounts: sizes, sources: paths };
-    mkdirSync("docs", { recursive: true });
-    writeFileSync("docs/TRAVEL_BLOG_HUB_PHOTO_MANIFEST.json", JSON.stringify(manifest, null, 2) + "\n");
+    if (process.env["WRITE_TRAVEL_BLOG_MANIFEST"] === "1") {
+      mkdirSync("docs", { recursive: true });
+      writeFileSync("docs/TRAVEL_BLOG_HUB_PHOTO_MANIFEST.json", JSON.stringify(manifest, null, 2) + "\n");
+    }
     console.log("Travel-blog renderable photo sources:", paths.length);
     console.log("All-guide cards:", sizes["all"], "filter counts:", sizes);
   });

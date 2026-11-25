@@ -147,7 +147,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     </AttractionHighlight>
   </div>,
   visitorContent: <div className="mt-4 space-y-4">
-    <p>The Sea of Galilee has both municipal and regional-authority beaches. Free entry on foot at some managed beaches does not mean free parking, guaranteed facilities or supervised swimming at all hours. The <External href={sources.beaches}>official Kinneret beach guide</External> is the best place to check the beach that matches your route.</p>
+    <p>The Sea of Galilee has both municipal and regional-authority beaches. Some managed beaches offer free entry on foot. Check parking charges, available facilities and lifeguard hours separately. The <External href={sources.beaches}>official Kinneret beach guide</External> is the best place to check the beach that matches your route.</p>
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="galilee-beaches">
       <article className="rounded-xl border bg-card p-4">
         <h3 className="font-serif text-lg font-semibold">Tzemach Beach</h3>

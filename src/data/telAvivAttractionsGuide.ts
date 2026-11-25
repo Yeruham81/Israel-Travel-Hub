@@ -65,7 +65,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     id:"neve-tzedek",title:"Explore Neve Tzedek's historic lanes",shortTitle:"Neve Tzedek",area:"South-central Tel Aviv",category:"Architecture & neighbourhoods",
     bestFor:"Historic streets, boutiques and relaxed cafés",time:"1–2 hours",entry:"Neighbourhood streets free; exhibitions and performances vary",
     description:"Neve Tzedek developed outside old Jaffa before Tel Aviv was founded. Its restored houses, colourful doorways, galleries and pedestrian-friendly side streets invite a slower wander. The Suzanne Dellal Centre adds a cultural landmark in the heart of the area.",
-    practical:"This is a residential neighbourhood as well as a visitor destination. Please respect local privacy. Galleries, shops, the Suzanne Dellal programme and the old railway-station compound set their own schedules; an open street does not mean an exhibition or performance is available.",
+    practical:"This is a residential neighbourhood as well as a visitor destination. Please respect local privacy. Galleries, shops, the Suzanne Dellal programme and the old railway-station compound set their own schedules. Plan exhibition or performance visits around their opening times.",
     tip:"I'd combine Neve Tzedek with Jaffa, the old railway-station area or a food stop at Carmel Market.",
     transport:"Walk from Jaffa or the southern centre. Nearby Red Line stops and buses can shorten the approach.",
     image:{src:neve,alt:"Restored historic houses and intimate streets of Neve Tzedek"},
@@ -150,7 +150,7 @@ export const telAvivMapPoints=[
 ] as const;
 export const telAvivRoutes=[
  {title:"First time in Tel Aviv",kind:"Old Jaffa, neighbourhoods & the sea",allow:"Full day, around 7–9 hours including breaks",ids:["old-jaffa","neve-tzedek","carmel-market","beaches"],text:"Start in Old Jaffa, wander through Neve Tzedek and Carmel Market, then finish with a central beach or sunset promenade walk. Allow extra time if exploring museums inside Jaffa.",tip:"I'd avoid adding the northern port to this walking day. The route is more enjoyable with time for food and a rest."},
- {title:"Architecture, cafés and art",kind:"A central city culture day",allow:"About 5–7 hours depending on museum time",ids:["white-city","dizengoff","tel-aviv-art-museum","sarona"],text:"Explore Rothschild's International Style buildings, have a coffee near Dizengoff, visit the museum, and consider Sarona for food afterwards.",tip:"The places are not all directly adjacent; choose the most convenient transport for the museum and Sarona section."},
+ {title:"Architecture, cafés and art",kind:"A central city culture day",allow:"About 5–7 hours depending on museum time",ids:["white-city","dizengoff","tel-aviv-art-museum","sarona"],text:"Explore Rothschild's International Style buildings, have a coffee near Dizengoff, visit the museum, and consider Sarona for food afterwards.",tip:"Allow travel time between the museum, Sarona and the earlier stops."},
  {title:"Markets and local culture",kind:"Food & street art",allow:"Half to full day, depending on tastings",ids:["carmel-market","neve-tzedek","florentin"],text:"Begin at Carmel Market, head southwest to Neve Tzedek, then finish farther east in Florentin and Levinsky Market. A guided food or street-art experience can replace part of the self-guided walk.",tip:"Choose a weekday when food markets are active. On Friday, allow for earlier closures before Shabbat. The route can also be walked in reverse."}
 ] as const;
 

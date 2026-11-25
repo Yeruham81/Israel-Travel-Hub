@@ -119,7 +119,7 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   "deadsea:spa": {
     heading: "Example: two guests with different spa priorities",
     situation: "One guest wants mineral-water facilities and treatments; the other mainly wants a comfortable hotel and beach time.",
-    decision: "Compare the room-plus-spa entitlement separately for each guest. A hotel's spa branding does not mean treatments are included, and a mineral pool inside the building is different from supervised beach access.",
+    decision: "Compare the room-plus-spa entitlement separately for each guest. Compare the treatments included in your package, indoor mineral-pool facilities and access to a supervised beach separately.",
   },
   "deadsea:family": {
     heading: "Example: a toddler and an older child",

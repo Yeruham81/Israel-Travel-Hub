@@ -66,7 +66,7 @@ export const jerusalemShoppingPlaces: ShoppingPlace[] = [
     bestFor: "Food, spices, produce & market atmosphere", area: "Jaffa Road / Agripas",
     when: "Morning for produce; Friday early", highlights: "Food stalls · Spices · Street food",
     description: "Mahane Yehuda is where I would send food lovers first. The market is full of produce sellers, spices, baked goods, specialty food stalls and places to eat. Its evening restaurant and bar scene is quite different from daytime food shopping.",
-    practical: "Visit earlier if you want the grocery-market experience, especially on Friday. Restaurants and tasting tours have their own hours and menus; evening activity does not mean the produce stalls are open.",
+    practical: "Visit earlier if you want the grocery-market experience, especially on Friday. Restaurants and tasting tours have their own hours and menus. Visit produce stalls during daytime market hours.",
     gettingThere: "Near the Mahane Yehuda light-rail stop on Jaffa Road; Agripas Street is another useful approach.",
     lat: 31.7848, lon: 35.2118,
     photo: { src: images + "mahane-yehuda.webp", alt: "Produce and market stalls at Jerusalem's Mahane Yehuda Market" },

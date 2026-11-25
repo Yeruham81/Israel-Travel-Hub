@@ -254,7 +254,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <AttractionPracticalTip>Book the attraction you most care about before filling the rest of the day. If a reef activity or desert tour is weather-dependent, keep a flexible alternative such as the Underwater Observatory or a relaxed city visit.</AttractionPracticalTip>
   </div>,
   transportContent: <div className="mt-4 space-y-4" data-testid="eilat-transport">
-    <p>Eilat is long and spread along the coast. The central hotel area and promenade are walkable, but Coral Beach, Dolphin Reef, the Underwater Observatory, Timna and the Red Canyon are not all within a pleasant city walk of one another.</p>
+    <p>Eilat is long and spread along the coast. Walk around the central hotel area and promenade, and plan transport to Coral Beach, Dolphin Reef, the Underwater Observatory, Timna and the Red Canyon as needed.</p>
     <div className="grid gap-3 md:grid-cols-2">
       <article className="rounded-xl border bg-card p-4">
         <h3 className="flex items-center gap-2 font-serif text-xl font-semibold"><BusFront className="size-5 text-primary"/>Local buses and airport arrival</h3>
