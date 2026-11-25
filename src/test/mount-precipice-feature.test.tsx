@@ -61,8 +61,8 @@ describe("Mount Precipice attraction guide", () => {
     expect(article).toContain("300 metres");
     expect(article).toContain("Beit Al-Hikma School / Al-Qafza");
     expect(article).toContain("בי״ס בית אל-חכמה/אל-קפזה");
-    expect(article).toContain("30–45 minutes — main lookout");
-    expect(article).toContain("About 1–2 hours — extended hilltop walk");
+    expect(article).toContain("Main lookout (30–45 minutes)");
+    expect(article).toContain("Extended hilltop walk (about 1–2 hours)");
     expect(article).toContain("Longer one-way hike towards Iksal");
     expect(site.hero.alt).toContain("small central building");
     expect(article).toContain("Gospel Trail");
