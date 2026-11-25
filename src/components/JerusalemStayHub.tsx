@@ -23,14 +23,6 @@ const pageSections = [
   ["trip-planning", "Trip planning"], ["contact", "Contact me"],
 ] as const;
 
-const neighborhoodCta: Record<string, string> = {
-  downtown: "Discover Downtown hotels",
-  mamilla: "Browse Mamilla hotels",
-  "old-city": "Find an Old City stay",
-  "mahane-yehuda": "Explore market-area hotels",
-  "east-jerusalem": "Discover East Jerusalem stays",
-  "german-colony": "Browse German Colony & Baka hotels",
-};
 
 export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: NeighborhoodStayGuide[] }) {
   const [preference, setPreference] = useState<StayPreference | null>(null);
@@ -74,12 +66,12 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
             {visibleAreas.length} {visibleAreas.length === 1 ? "area" : "areas"}
             {preference ? " for " + preferenceLabels[preference].toLowerCase() : " to explore"}
           </p>
-          <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-4 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
             {visibleAreas.map((area) => <li key={area.id} data-testid="neighborhood-card" className="min-w-0">
               <Link
                 to={area.path as LinkProps["to"]}
                 aria-label={"Explore " + area.name + ": area guide and hotel recommendations"}
-                className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60 hover:bg-secondary/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 <span className="block min-w-0 overflow-hidden bg-muted">
                   <img
@@ -93,9 +85,6 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
                   <span className="text-xs font-medium text-muted-foreground">{area.bestFor}</span>
                   <h3 className="mt-1 text-base font-semibold leading-snug sm:text-lg">{area.name}</h3>
                   <span className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{area.summary}</span>
-                  <span className="mt-auto inline-flex min-h-8 items-center gap-1 pt-3 text-xs font-semibold text-primary group-hover:underline sm:text-sm">
-                    {neighborhoodCta[area.id] || "Explore hotels in this area"} <ArrowRight className="h-4 w-4" aria-hidden />
-                  </span>
                 </span>
               </Link>
             </li>)}
