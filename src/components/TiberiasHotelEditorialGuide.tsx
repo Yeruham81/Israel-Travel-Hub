@@ -256,6 +256,9 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
         <p className="eyebrow">Choose your Tiberias stay</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Tiberias hotel suits you?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">I recommend choosing a hotel around the kind of holiday you want: a luxurious lakeside break, family activities, a convenient central base or simple accommodation for exploring the Galilee.</p>
+        <Link to="/accommodation/tiberias/" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary" data-testid="editorial-all-hotels-link">
+          Browse all Tiberias hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+        </Link>
         <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-2" data-testid="tiberias-category-grid">
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
