@@ -40,7 +40,7 @@ describe("attraction contact panels share the approved mobile TripAdvisor layout
 
   it.each(attractions)("%s enables the photo-and-reviews row on mobile", path => {
     const source = readFileSync(path, "utf8");
-    expect(source).toMatch(/<HomeContactForm\\b[^>]*\\bshowTripadvisorBesidePortraitMobile\\b/);
+    expect(source).toMatch(/<HomeContactForm\b[^>]*\bshowTripadvisorBesidePortraitMobile\b/);
   });
 
   it("keeps the shared contact description below the photo and reviews, without forcing desktop nowrap", () => {
