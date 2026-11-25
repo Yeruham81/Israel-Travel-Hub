@@ -55,3 +55,52 @@ describe("attraction contact panels share the approved mobile TripAdvisor layout
     expect(source).toContain("<TripadvisorReviewsButton />");
   });
 });
+
+describe("all travel-guide contact layouts", () => {
+  const sharedGuideComponents = [
+    "TravelGuide",
+    "JordanRiverBaptismGuide",
+    "ChristianToursGuide",
+    "JerusalemChurchesGuide",
+    "TelAvivBeachesGuide",
+    "JerusalemCityHub",
+    "HaifaMuseumsGuide",
+    "JerusalemMuseumsGuide",
+    "TelAvivMuseumsGuide",
+    "JerusalemShoppingGuide",
+    "HotelStyleEditorialGuide",
+    "TiberiasHotelEditorialGuide",
+    "CityNeighborhoodEditorial",
+    "BestTimeIsraelGuide",
+    "IsraelHolidayVisitorGuide",
+    "SeniorToursGuide",
+    "IsraelTravelTipsGuide",
+    "IsraelFoodGuide",
+    "StayEditorialGuidePage",
+  ] as const;
+
+  it.each(sharedGuideComponents)("%s places TripAdvisor reviews next to the portrait on mobile", component => {
+    const source = readFileSync(`src/components/${component}.tsx`, "utf8");
+    expect(source).toMatch(/<HomeContactForm\b[^>]*\bshowTripadvisorBesidePortraitMobile\b/);
+  });
+
+  it("adds the missing contact form to the Haifa hotels editorial page", () => {
+    const route = readFileSync("src/routes/travel-blog.best-hotels-in-haifa.tsx", "utf8");
+    const page = readFileSync("src/components/StayEditorialGuidePage.tsx", "utf8");
+    expect(route).toContain('<StayEditorialGuidePage guide={g} id="haifa" />');
+    expect(page).toContain('["contact", "Contact me"]');
+    expect(page).toContain("HomeContactForm showTripadvisorBesidePortraitMobile");
+    expect(page).toContain("Need a Private Transfer To or From");
+    expect(page).toContain("I'll reply personally");
+    expect(page).not.toContain("hotel advice");
+  });
+
+  it("keeps the reviews link on every airport journey's quote form", () => {
+    const route = readFileSync("src/components/AirportJourneyPage.tsx", "utf8");
+    const quote = readFileSync("src/components/TransferQuoteForm.tsx", "utf8");
+    const intro = readFileSync("src/components/QuoteFormIntro.tsx", "utf8");
+    expect(route).toContain("<TransferQuoteForm");
+    expect(quote).toContain("showTripadvisorReviews");
+    expect(intro).toContain("<TripadvisorReviewsButton />");
+  });
+});
