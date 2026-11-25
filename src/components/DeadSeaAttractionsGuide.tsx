@@ -342,7 +342,7 @@ export function DeadSeaAttractionsGuide() {
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{planning.map(item=><GuideCard key={item.to} item={item}/>)}</div>
       </section>
 
-      <HomeContactForm guide={{
+      <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
         heading:"Need a private transfer or day trip to the Dead Sea?",
         introduction:"I'm Moshe Barak. I arrange private airport transfers and customised trips in Israel. Tell me your travel dates, pickup point, group size and the Dead Sea sites you would like to visit, and I'll reply personally about transport options.",
         subject:"",
