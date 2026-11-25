@@ -9,7 +9,7 @@ const widths = (srcset: string) => srcset.split(", ").map(part => Number(part.ma
 describe("travel-blog index responsive WebP delivery", () => {
   it("maps actual unique photos for the current directory and every topic view", () => {
     expect(guideDirectory.length).toBeGreaterThan(0);
-    const requireCompleteMap = process.env.REQUIRE_TRAVEL_BLOG_IMAGE_MAP === "1";
+    const requireCompleteMap = process.env["REQUIRE_TRAVEL_BLOG_IMAGE_MAP"] === "1";
     const selectedPhotos = new Set<string>();
     expect(guideDirectory.some(g => g.id === "eilat")).toBe(false);
     for (const topic of [undefined, ...guideTopics.map(item => item.id)]) {
