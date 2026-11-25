@@ -25,7 +25,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
   visitorNavLabel: "Hours & baptism",
   historyTitle: "Yardenit and the Jordan River baptism tradition",
   relatedTitle: "Explore more around the Sea of Galilee",
-  contactIntroduction: "Tell me your travel date, starting point, group size and the Galilee places you would like to visit. I'll be happy to help arrange a private driver for your day.",
+  contactIntroduction: "Tell me your visit date, pickup point, group size and whether you want to combine Yardenit with other Galilee sites. I can arrange private transport or a day trip with a driver to Yardenit and nearby attractions.",
   facts: [
     { icon: "location", label: "Location", value: "Southern Sea of Galilee", note: "Near Kibbutz Kinneret" },
     { icon: "duration", label: "Time needed", value: "30–60 minutes", note: "For a riverside visit; allow longer for baptism" },
