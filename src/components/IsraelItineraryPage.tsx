@@ -245,7 +245,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                 {g.dayChoices?.find(choice => choice.day === index + 1) && (
                   <section aria-label={`Day ${index + 1} options`} className="mt-5 rounded-xl border border-primary/25 bg-secondary/30 p-4" data-testid={`day-${index + 1}-route-choices`}>
                     <h4 className="text-sm font-semibold">Choose a route for this day</h4>
-                    <p className="mt-1 text-xs text-muted-foreground">Choose the option that fits your trip in place of the other plan.</p>
                     <div className="mt-3 grid gap-4 sm:grid-cols-2">
                       {g.dayChoices.find(choice => choice.day === index + 1)!.options.map(option => (
                         <div key={option.heading} className="min-w-0 text-sm leading-relaxed">

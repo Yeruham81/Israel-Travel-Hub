@@ -79,8 +79,8 @@ describe("Masada upgraded attraction guide", () => {
     expect(page).toContain("best planned as a separate day trip");
     expect(page).toContain("regular park admission");
     expect(page).toContain("time reservation is required");
-    expect(page).toContain("Masada East — Route 90");
-    expect(page).toContain("Masada West — Road 3199");
+    expect(page).toContain("Masada East - Route 90");
+    expect(page).toContain("Masada West - Road 3199");
     expect(page).toContain("no direct road connection");
     expect(page).toContain("during extreme summer heat");
     expect(page).toContain("special sunrise cable-car departures");
