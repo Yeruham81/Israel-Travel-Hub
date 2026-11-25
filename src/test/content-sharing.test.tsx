@@ -166,8 +166,8 @@ it("offers a selected manual link when clipboard access is blocked", async () =>
   fireEvent.click(screen.getByRole("button", { name: "Copy link" }));
   const input = (await screen.findByRole("textbox", { name: "Page link" })) as HTMLInputElement;
   expect(input).toHaveValue(`${CANONICAL_ORIGIN}${path}`);
-  expect(input).toHaveFocus();
-  expect(input.selectionStart).toBe(0);
+  await waitFor(() => expect(input).toHaveFocus());
+  await waitFor(() => expect(input.selectionStart).toBe(0));
   expect(input.selectionEnd).toBe(input.value.length);
   expect(screen.queryByText("Copied!")).toBeNull();
 });
