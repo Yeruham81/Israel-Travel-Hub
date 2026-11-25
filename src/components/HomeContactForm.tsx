@@ -40,8 +40,8 @@ export function HomeContactForm({ context = "homepage", guide, showPortrait = tr
           <div className="min-w-0" data-testid="contact-tripadvisor-reviews"><TripadvisorReviewsButton /></div>
         </div>
         <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-80">{guide?.eyebrow && !/ask moshe/i.test(guide.eyebrow) ? guide.eyebrow : "Contact me"}</p>
-        <h2 id={headingId} className="mt-3 text-3xl">{guide?.heading ?? (context === "taxis" ? "Questions about using taxis in Israel?" : "Send me a message")}</h2>
-        <p className="mt-4 leading-relaxed opacity-90">{guide?.introduction ?? (context === "taxis" ? "Tell me where and when you plan to travel, and I can answer questions about getting around or discuss a suitable private vehicle." : "Have a question about airport transfers, private journeys or your visit to Israel? Tell me a little about your plans, and I’ll reply personally.")}</p>
+        <h2 id={headingId} className="mt-3 text-3xl">{guide?.heading ?? (context === "taxis" ? "Need a private transfer or driver in Israel?" : "Need a private transfer or day trip in Israel?")}</h2>
+        <p className="mt-4 leading-relaxed opacity-90">{guide?.introduction ?? (context === "taxis" ? "I’m Moshe Barak. I arrange private transfers, city-to-city rides and day trips with a driver. Share your route, date and number of passengers, and I’ll reply personally." : "I’m Moshe Barak. I arrange airport transfers, private journeys and sightseeing days with a driver in Israel. Tell me your pickup location, travel date, destinations and passenger details, and I’ll reply personally.")}</p>
       </div>
       <div className="p-5 sm:p-8">
         <form onSubmit={send} noValidate className="mt-6" aria-label={guide ? "Guide contact message" : context === "about" ? "Contact me" : context === "taxis" ? "Taxi guide contact message" : "Homepage contact message"} aria-busy={submission.isSending}>
@@ -52,7 +52,7 @@ export function HomeContactForm({ context = "homepage", guide, showPortrait = tr
             <label className="text-sm font-medium">Email address *<Input name="email" type="email" autoComplete="email" required maxLength={254} value={email} onChange={e => update(setEmail, e.target.value)} className="mt-2 h-11 bg-background" /></label>
           </div>
           <label className="block text-sm font-medium">Subject *<Input name="subject" required maxLength={160} value={subject} onChange={e => update(setSubject, e.target.value)} placeholder="What would you like to ask?" className="mt-2 h-11 bg-background" /></label>
-          <label className="block text-sm font-medium">Your message *<Textarea name="message" required maxLength={4000} rows={5} value={message} onChange={e => update(setMessage, e.target.value)} placeholder={guide?.placeholder ?? (context === "taxis" ? "Your route, travel date, passengers, luggage or question…" : "Tell me how I can help…")} className="mt-2 bg-background" /></label>
+          <label className="block text-sm font-medium">Your message *<Textarea name="message" required maxLength={4000} rows={5} value={message} onChange={e => update(setMessage, e.target.value)} placeholder={guide?.placeholder ?? (context === "taxis" ? "Your route, travel date, passengers, luggage or question…" : "Travel date, pickup point, destinations, passengers and luggage…")} className="mt-2 bg-background" /></label>
           <label className="flex items-start gap-3 text-sm leading-relaxed"><input type="checkbox" name="consent" checked={consent} onChange={e => { setConsent(e.target.checked); submission.reset(); }} required className="mt-1 size-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak to respond to my enquiry. <PrivacyInformationLink />.</span></label>
           <QuoteSubmissionControls submission={submission} label="Send message" message />
           <p className="text-xs text-muted-foreground">All bookings require confirmation.</p>
