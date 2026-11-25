@@ -386,7 +386,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.uber.intro).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
     expect(travelGuides.sherut.answer).toMatch(/Regular Nesher sherut rides to Jerusalem and Amal shared taxis to Haifa no longer operate/);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/A data-only eSIM lets you browse, navigate and use WhatsApp/s);
-    expect(travelGuides.esim.answer).toMatch(/Saily.*Airalo.*Yesim/s);
+    expect(travelGuides.esim.answer).toMatch(/Saily.*Airalo.*GigSky/s);
   });
 
   it("covers the complete airport arrival sequence without duplicating specialty transport guides", () => {
@@ -1225,13 +1225,13 @@ describe("migrated practical guides", () => {
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     const cards = [...screen.getByRole("region",{name:"Choose your eSIM by trip type"}).querySelectorAll("article")];
     expect(cards).toHaveLength(4);
-    const ids = ["esim-saily","esim-saily","esim-airalo","esim-airalo"] as const;
+    const ids = ["esim-saily","esim-saily","esim-airalo","esim-gigsky"] as const;
     cards.forEach((card,i)=>{const link=within(card as HTMLElement).getByRole("link");expect(link).toHaveAttribute("href",expected[ids[i]!]);expect(link).toHaveAttribute("rel","sponsored noopener noreferrer");});
     const fixed = screen.getByRole("table",{name:"Prepaid eSIM data plans"});
     for (const price of ["$4.99","$10.79","$16.79","$20.99","$29.19"]) expect(fixed).toHaveTextContent(price);
     expect(fixed.querySelector("del")).toHaveTextContent("$20.99");
     const unlimited=screen.getByRole("table",{name:"Unlimited eSIM plans by duration"});
-    for(const label of ["7 days","15 days","30 days","€21.70","€35.00","€55.00","$69.00","—"]) expect(unlimited).toHaveTextContent(label);
+    for(const label of ["7 days","15 days","30 days","€21.70","€35.00","€55.00","$69.00","$18.79","$33.99","$49.99","—"]) expect(unlimited).toHaveTextContent(label);
     expect(screen.getByRole("table",{name:"eSIM provider features"})).toBeInTheDocument();
     expect(screen.getByRole("table",{name:"Drimsim pay-as-you-go data costs"})).toHaveTextContent("€50.00");
     for(const table of [fixed,unlimited,screen.getByRole("table",{name:"eSIM provider features"})]) expect(table.parentElement).toHaveClass("overflow-x-auto");

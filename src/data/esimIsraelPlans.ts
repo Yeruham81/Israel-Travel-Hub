@@ -7,7 +7,7 @@ export type EsimPlan = { provider: EsimProvider; gb: number | "Unlimited"; days:
 const p = (provider: EsimProvider, gb: EsimPlan["gb"], days: number, usd: number, checkedAt: string, evidence: Evidence, sourceId: string, regularUsd?: number, currency: EsimPlan["currency"] = "USD"): EsimPlan => ({provider,gb,days,amount:usd,currency,checkedAt,evidence,sourceId,...(regularUsd === undefined ? {} : {regularUsd})});
 const direct = (provider: EsimProvider, gb: EsimPlan["gb"], days: number, usd: number, sourceId: string) => p(provider,gb,days,usd,ESIM_UPDATED,"provider",sourceId);
 const saily = (gb: number, days: number, usd: number) => direct("Saily",gb,days,usd,"guide-esim-saily-usd-price-nov26");
-const gig = (gb: number, days: number, usd: number, regularUsd?: number) => p("GigSky",gb,days,usd,ESIM_UPDATED,"publisher","guide-esim-gigsky",regularUsd);
+const gig = (gb: EsimPlan["gb"], days: number, usd: number, regularUsd?: number) => p("GigSky",gb,days,usd,ESIM_UPDATED,"publisher","guide-esim-gigsky",regularUsd);
 const yesimUnlimited = (days: number, eur: number) => p("Yesim","Unlimited",days,eur,ESIM_UPDATED,"provider","guide-esim-yesim-"+days,undefined,"EUR");
 export const esimFixedPlans: EsimPlan[] = [
   saily(1,7,3.99),saily(3,30,5.99),saily(5,30,7.99),saily(10,30,11.99),saily(20,30,16.99),
@@ -18,6 +18,7 @@ export const esimFixedPlans: EsimPlan[] = [
 export const esimUnlimitedPlans: EsimPlan[] = [
   ...([[3,12.5],[5,18],[7,26.5],[10,34],[15,48],[30,69]] as const).map(([days,usd])=>direct("Airalo","Unlimited",days,usd,"guide-esim-airalo")),
   yesimUnlimited(7,21.7),yesimUnlimited(15,35),yesimUnlimited(30,55),
+  gig("Unlimited",7,18.79),gig("Unlimited",15,33.99),gig("Unlimited",30,49.99),
 ];
 export const esimFairUse: Record<EsimProvider,string> = {
   Saily: "—",
@@ -37,7 +38,7 @@ export const esimPicks = [
   {label:"Short trip",plan:esimPlan("Saily",3,30),reason:"Maps and messages for a week"},
   {label:"Regular holiday",plan:esimPlan("Saily",5,30),reason:"Navigation and everyday browsing"},
   {label:"Frequent data use",plan:esimPlan("Airalo",10,30),reason:"Photos, social media and calls"},
-  {label:"Heavy data use",plan:esimPlan("Airalo","Unlimited",30),reason:"3 GB of high-speed data per day"},
+  {label:"Heavy data use",plan:esimPlan("GigSky","Unlimited",30),reason:"3.5 GB of high-speed data per day"},
 ];
 export const esimFacts = esimPicks.map(({label,plan})=>({label,text:esimDataLabel(plan.gb)+" · "+plan.days+" days · "+esimPlanPrice(plan)}));
 export const esimComparison = {caption:"Compare unlimited eSIM plans",headers:["Provider","7 days","15 days","30 days","High-speed data"],rows:esimProviders.map(provider=>[provider,...[7,15,30].map(days=>{const plan=esimUnlimitedPlans.find(p=>p.provider===provider&&p.days===days);return plan?esimPlanPrice(plan):"—";}),esimFairUse[provider]])};

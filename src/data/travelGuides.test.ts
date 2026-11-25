@@ -14,12 +14,14 @@ describe("travel guide topic filters and prerender safety", () => {
     expect(guide.sections.map(s=>s.id)).toEqual(["short-trip","unlimited","features","long-trip","payg","regional","compatibility","calling","coverage","setup"]);
     expect(guide.facts).toHaveLength(4);
     expect(guide.comparison.rows).toHaveLength(4);
-    expect(esimPicks.map(p=>p.plan)).toEqual([esimPlan("Saily",3,30),esimPlan("Saily",5,30),esimPlan("Airalo",10,30),esimPlan("Airalo","Unlimited",30)]);
+    expect(esimPicks.map(p=>p.plan)).toEqual([esimPlan("Saily",3,30),esimPlan("Saily",5,30),esimPlan("Airalo",10,30),esimPlan("GigSky","Unlimited",30)]);
     expect(esimFixedPlans.filter(p=>p.provider==="GigSky").map(p=>[p.gb,p.days,p.amount])).toEqual([[1,7,4.99],[3,15,10.79],[5,30,16.79],[10,30,29.19]]);
     expect(esimPlan("GigSky",5,30).regularUsd).toBe(20.99);
-    expect(esimUnlimitedPlans.filter(p=>p.provider==="GigSky"||p.provider==="Saily")).toHaveLength(0);
+    expect(esimUnlimitedPlans.filter(p=>p.provider==="Saily")).toHaveLength(0);
+    expect(esimUnlimitedPlans.filter(p=>p.provider==="GigSky").map(p=>[p.days,p.amount,p.currency,p.evidence])).toEqual([[7,18.79,"USD","publisher"],[15,33.99,"USD","publisher"],[30,49.99,"USD","publisher"]]);
     expect(esimUnlimitedPlans.filter(p=>p.provider==="Yesim").map(p=>[p.days,p.amount,p.currency])).toEqual([[7,21.7,"EUR"],[15,35,"EUR"],[30,55,"EUR"]]);
-    expect(guide.comparison.rows.filter(row=>row[0]==="Saily"||row[0]==="GigSky").flatMap(row=>row.slice(1,4))).toEqual(["—","—","—","—","—","—"]);
+    expect(guide.comparison.rows.find(row=>row[0]==="Saily")?.slice(1,4)).toEqual(["—","—","—"]);
+    expect(guide.comparison.rows.find(row=>row[0]==="GigSky")?.slice(1,4)).toEqual(["$18.79","$33.99","$49.99"]);
     expect(esimUnlimitedPlans.filter(p=>p.provider==="Airalo").map(p=>p.days)).toEqual([3,5,7,10,15,30]);
     const plans=[...esimFixedPlans,...esimUnlimitedPlans];
     expect(new Set(plans.map(p=>[p.provider,p.gb,p.days].join("/"))).size).toBe(plans.length);

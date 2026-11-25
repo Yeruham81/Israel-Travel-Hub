@@ -409,7 +409,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     title: "Best eSIM for Israel: Prices, Providers & My Picks",
     description: "Compare Israel eSIM prices for short trips, longer stays and heavy data use. My picks for 3GB, 5GB, 10GB and unlimited travel plans.",
     intro: "Choosing an eSIM for Israel? Here are my picks for a short break, a longer holiday and travellers who need unlimited data.",
-    answer: "I would start with Saily for a short trip or everyday use and Airalo for 10GB over 30 days. For unlimited data, I would compare Airalo and Yesim by duration and daily high-speed allowances.",
+    answer: "I would start with Saily for a short trip or everyday use and Airalo for 10GB over 30 days. For unlimited data, I would choose GigSky, with 3.5GB of high-speed data per day.",
     updatedAt: ESIM_UPDATED,
     topics: ["connectivity", "tips"],
     photo: { src: esimPhoto, alt: "A phone displaying an eSIM graphic in front of a blurred city background", sourceUrl: "", credit: "Illustrative eSIM screen." },
@@ -425,7 +425,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "unlimited",
         title: "Compare unlimited eSIM plans",
-        paragraphs: ["Choose the number of days that covers your whole trip. Unlimited plans still have high-speed limits or operator fair-use policies. For a month, Airalo offers a clear daily high-speed allowance. My choice: Airalo.", "Airalo also lists a fixed 50GB plan for 30 days at " + esimUsd(esimPlan("Airalo",50,30).amount) + ". If that covers your needs, it can be a practical alternative to daily speed limits."],
+        paragraphs: ["Choose the number of days that covers your whole trip. Unlimited plans still have high-speed limits or operator fair-use policies. For heavy daily use, GigSky combines competitive prices with a 3.5GB daily high-speed allowance. My choice: GigSky.", "Airalo also lists a fixed 50GB plan for 30 days at " + esimUsd(esimPlan("Airalo",50,30).amount) + ". If that covers your needs, it can be a practical alternative to daily speed limits."],
         sourceIds: ["guide-esim-airalo", "guide-esim-airalo-fup", "guide-esim-saily", "guide-esim-saily-fup", "guide-esim-yesim", "guide-esim-yesim-15", "guide-esim-gigsky", "guide-esim-gigsky-fup", "guide-esim-yesim-7", "guide-esim-yesim-30"],
       },
       {
