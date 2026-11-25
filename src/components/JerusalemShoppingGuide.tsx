@@ -322,7 +322,7 @@ export function JerusalemShoppingGuide() {
         </div>
       </section>
 
-      <HomeContactForm guide={neighborhoodTripContactCopy("Jerusalem")} />
+      <HomeContactForm showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy("Jerusalem")} />
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use destination and venue information for the markets, shopping venues and tax guidance. Check current event dates and individual shop opening times before visiting.</p>
         <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
