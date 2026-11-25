@@ -26,7 +26,7 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
   visitorNavLabel: "Tickets & hours",
   historyTitle: "The sea caves and the old coastal railway",
   relatedTitle: "More stops for a northern Israel journey",
-  contactIntroduction: "Tell me your travel date, pickup location and the coastal towns or sites that interest you. I'll be happy to help plan a private day trip to Rosh Hanikra and the Western Galilee.",
+  contactIntroduction: "Tell me your travel date, pickup point, passengers and the coastal stops you would like to include. I can arrange a private day trip with a driver to Rosh Hanikra and the Western Galilee.",
   facts: [
     { icon: "location", label: "Location", value: "Northern Mediterranean coast", note: "End of Route 4, near the Lebanese border" },
     { icon: "duration", label: "Time needed", value: "60–90 minutes", note: "Cable car, grottoes and viewpoint; excluding travel" },
