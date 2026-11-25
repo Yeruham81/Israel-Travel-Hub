@@ -167,7 +167,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By bus</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Some intercity buses between Jerusalem and the Dead Sea serve Ein Gedi-area stops on Route 90. Check the correct stop for your chosen entrance and the last return bus in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. Do not assume the bus stop is beside the trail gate.</p>
+            <p className="mt-2 text-sm leading-relaxed">Some intercity buses between Jerusalem and the Dead Sea serve Ein Gedi-area stops on Route 90. Check the correct stop for your chosen entrance and the last return bus in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. Allow time for the walk between the bus stop and the trail entrance.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Moving between the entrances</h3></div>

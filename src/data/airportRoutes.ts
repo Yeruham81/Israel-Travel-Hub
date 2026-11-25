@@ -67,7 +67,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     faqs: [
       { q: "How long does an airport transfer to Tel Aviv take?", a: "Allow around 20–40 minutes as a planning estimate or more after pickup. Traffic and the exact Tel Aviv or Jaffa address can add time. Allow separately for immigration, baggage and reaching the meeting point." },
       { q: "Does the request form cover Jaffa too?", a: "Yes. Tel Aviv & Jaffa is preselected. Enter your actual Jaffa hotel or apartment address so I can confirm the final price and a suitable vehicle drop-off." },
-      { q: "Will four passengers and all our suitcases fit?", a: "Do not assume that passenger capacity also guarantees luggage space. List every suitcase, carry-on and stroller. I will need to confirm the vehicle and whether a larger option changes the quote." },
+      { q: "Will four passengers and all our suitcases fit?", a: "Passenger capacity and luggage capacity are separate considerations. List every suitcase, carry-on and stroller. I will need to confirm the vehicle and whether a larger option changes the quote." },
     ],
     related: [
       { label: "Find your Tel Aviv hotel area", to: "/travel-blog/where-to-stay-in-tel-aviv/" },

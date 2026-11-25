@@ -182,7 +182,7 @@ export function ChristianToursGuide(){
      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{practical.map(item=><div key={item.title} className="rounded-xl border bg-card p-4"><h3 className="font-bold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p></div>)}</div>
      <div className="mt-5 space-y-4">
        <Tip>Use the <External href="https://www.cicts.org/our-services/">Christian Information Center's current shrine information</External> and my <Link to="/travel-blog/calendar-of-events/" className={link}>Israel calendar of holidays and special dates</Link> to plan around services and public holidays.</Tip>
-       <p className="text-sm leading-relaxed">If your trip includes Bethlehem, Jericho or Qasr al-Yahud, read my <Link to="/travel-blog/jerusalem-to-bethlehem/" className={link}>Bethlehem transport and crossing guide</Link>. Entry eligibility, local transport rules and rental-car insurance differ; do not assume the same driver and vehicle can cover every destination.</p>
+       <p className="text-sm leading-relaxed">If your trip includes Bethlehem, Jericho or Qasr al-Yahud, read my <Link to="/travel-blog/jerusalem-to-bethlehem/" className={link}>Bethlehem transport and crossing guide</Link>. Entry eligibility, local transport rules and rental-car insurance differ. Confirm that your driver and vehicle can serve each destination.</p>
      </div>
    </section>
 

@@ -86,8 +86,8 @@ describe.each([
     expect(screen.getAllByTestId("neighborhood-card")).toHaveLength(areas.length);
   });
 
-  it("each area presents hotels prominently with working booking links and useful location guidance", () => {
-    for (const area of areas) {
+  for (const area of areas) {
+    it(`${area.name}: presents hotels prominently with working booking links and useful location guidance`, () => {
       const { container, unmount } = render(<NeighborhoodStayPage area={area} />);
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(area.title);
       expect(container.querySelectorAll("main")).toHaveLength(1);
@@ -184,8 +184,8 @@ describe.each([
         expect(within(card).getAllByRole("link")).toHaveLength(1);
       }
       unmount();
-    }
-  }, 20000);
+    }, 20000);
+  }
 
   it("places five hotel cards and one compact map consistently across every Jerusalem neighborhood", () => {
     const { container } = render(<NeighborhoodStayPage area={jerusalemAreaGuides.find((area) => area.id === "downtown")!} />);

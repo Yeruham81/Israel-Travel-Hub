@@ -201,7 +201,7 @@ const days7: ItineraryDay[] = [
     morning: "Visit Capernaum and, if it suits your interests, the Mount of Beatitudes. The lakeside heritage sites and their entrances are spread out, so allow for short drives and different visitor arrangements. The official Kfar Nahum National Park page covers one of the visitor areas at Capernaum.",
     afternoon: "Visit the lakeside churches at Tabgha, explore Magdala's archaeological site, or take a break by the Sea of Galilee. Two or three well-chosen visits leave more room for the setting than a rush through every stop.",
     evening: "Return to the same Galilee accommodation and enjoy the lakeside atmosphere or dinner in Tiberias.",
-    practical: "A car, prearranged driver or suitable guided tour simplifies the separate lakeside stops. For a nature-focused alternative, replace the heritage route with a specific, currently accessible trail; do not assume sites near border areas are suitable without checking official advice.",
+    practical: "A car, prearranged driver or suitable guided tour simplifies the separate lakeside stops. For a nature-focused alternative, replace the heritage route with a specific, currently accessible trail. Check official advice before visiting sites near border areas.",
     overnight: "Tiberias or the Galilee after Day 5, for a second night at the same hotel.",
     links: [L("Capernaum", "/attractions/capernaum/"), L("Tabgha", "/attractions/tabgha/"), lake],
   },

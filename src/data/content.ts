@@ -323,7 +323,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     arrivalTips: ["Give your driver the hotel's entrance address, which may differ from the promenade frontage.", "Check the current train or bus service for your arrival date, especially Friday evening and Saturday.", "Ask how far you will carry bags from the drop-off, and whether the route has steps."],
     bookingTips: ["Choose a room explicitly described as full sea view if that is essential; do not infer it from the hotel's location.", "Confirm which pool, breakfast and beach-related services are included for your dates."],
     faqs: [
-      { q: "Does a beachfront hotel have its own beach?", a: "Do not assume so. Tel Aviv's central beaches are public, and hotel arrangements vary. Confirm any advertised beach services directly and check whether a road separates your hotel from the sand." },
+      { q: "Does a beachfront hotel have its own beach?", a: "Tel Aviv's central beaches are public, and hotel arrangements vary. Confirm any advertised beach services directly and check whether a road separates your hotel from the sand." },
       { q: "Is the beachfront convenient for a first visit?", a: "Yes, particularly if you want beach time alongside city sightseeing. The central strip gives access to the promenade and inland cafés; Jaffa and the northern port still require a longer walk or a ride." },
       { q: "What is the difference between full and side sea view?", a: "A full view normally faces the sea more directly, while a side view may be angled or partly obstructed. The property's own room description and photos should define what your selected category includes." },
     ],
@@ -1094,7 +1094,7 @@ const haifaCategoryGuides: HotelCategoryGuide[] = [
     faqs: [
       { q: "Which hotel in this family shortlist is on the beach?", a: "Leonardo Plaza is the beachfront comparison, with access from the pool area to the shore. Crowne Plaza and Dan Carmel are Carmel bases; a sea view there does not establish immediate beach access." },
       { q: "Which Haifa hotel should I compare for an indoor pool?", a: "Crowne Plaza advertises a heated indoor pool. Leonardo Plaza describes its main pool as covered and heated during colder seasons. Confirm current operation and children's access directly for your dates." },
-      { q: "Is Leonardo Plaza's children's club open every day?", a: "Do not assume so. The operator lists Fridays, Saturdays, holidays and July–August. Reconfirm the timetable, age groups and supervision arrangements for the stay you intend to book." },
+      { q: "Is Leonardo Plaza's children's club open every day?", a: "The operator lists children's club sessions on Fridays, Saturdays, holidays and during July–August. Reconfirm the timetable, age groups and supervision arrangements for the stay you intend to book." },
       { q: "Can every Dan Carmel room fit two adults and two children?", a: "No. Published occupancy varies by room category, with some rooms accommodating that party and other categories having different limits. Enter the actual guests and ages, and confirm the room's sleeping arrangement before paying." },
       { q: "Are Botanica and Schumacher included as young-family options?", a: "No. Their guest-age policies make them different choices from these family hotels. Check the boutique guide for those policies; this shortlist focuses on Leonardo Plaza, Crowne Plaza and Dan Carmel." },
     ],
@@ -1228,7 +1228,7 @@ export const hotelCategoryGuides: HotelCategoryGuide[] = [
     faqs: [
       { q: "Which hotel in this shortlist offers all-inclusive?", a: "Leonardo Club Dead Sea is marketed as all-inclusive. The other shortlisted hotels offer different room and meal-plan choices. Check which meals, drinks and activities are included in your room rate." },
       { q: "Is a water park guaranteed to be open on our dates?", a: "No. Confirm current operation directly with the hotel, along with slide height or age restrictions and weather or maintenance limitations. Do the same for children's pools and activity clubs." },
-      { q: "Can children use all the spa pools?", a: "Do not assume so. Spa and mineral-pool age limits are separate from a hotel's family policy. Noga's spa, for example, is listed for guests aged 16 and over. Ask about the freshwater pools and activities appropriate for your children." },
+      { q: "Can children use all the spa pools?", a: "Spa and mineral-pool age limits are separate from a hotel's family policy. Noga's spa, for example, is listed for guests aged 16 and over. Ask about the freshwater pools and activities appropriate for your children." },
       { q: "Is a family room the same as two connecting rooms?", a: "No. A family room may put everyone in one space, while connecting rooms require two rooms with an internal doorway. Check the actual layout and get a connection confirmed in writing if you need it." },
       { q: "Should families choose Ein Bokek or the southern resorts?", a: "Ein Bokek gives easier access to the promenade and outside shops and dining. Southern resorts can work well when you plan to use the hotel's own facilities and meals. Compare the actual beach route, room and children's program before deciding." },
     ],

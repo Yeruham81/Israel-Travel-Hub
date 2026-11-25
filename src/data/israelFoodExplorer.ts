@@ -66,7 +66,7 @@ export const foodDishes:FoodDish[] = [
   {id:"jachnun",name:"Jachnun",pronunciation:"jahkh-NOON",kind:"bakery",
     summary:"Slow-cooked, rich rolled dough with a slightly sweet taste, usually served with tomato, hard-boiled egg and spicy zhug.",
     order:"Look for a weekend breakfast or brunch serving; share a portion if you also want other tastes.",
-    note:"Usually wheat-based and commonly served with egg; do not assume the accompaniments are included.",
+    note:"Usually wheat-based and commonly served with egg. Ask which accompaniments are included.",
     roots:"A well-loved Yemenite-Jewish food tradition.",
     photo:photos["food-8"]},
   {id:"malabi",name:"Malabi",pronunciation:"mah-LAH-bee",kind:"sweets",

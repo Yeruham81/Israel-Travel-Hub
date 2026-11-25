@@ -215,7 +215,7 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "season": "Islamic lunar calendar · dates vary and may be confirmed near the holiday",
         "impact": "local",
         "why": "Eid al-Fitr marks the end of Ramadan; Eid al-Adha is a major festival associated with the Hajj period.",
-        "transport": "Expect possible altered business hours and heavier local traffic in Muslim communities; do not assume a nationwide train closure solely because of Eid.",
+        "transport": "Expect possible altered business hours and heavier local traffic in Muslim communities. Eid-related changes are primarily local; check the train timetable for your travel date.",
         "visitor": "Shops may close while leisure and family attractions become very busy, especially in mixed cities and Arab towns.",
         "tip": "Check restaurant, guided-visit and transport arrangements for the specific city or neighbourhood."
       },
@@ -247,7 +247,7 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "why": "The Nabi Shu'ayb pilgrimage near Tiberias is one of the principal Druze religious observances.",
         "transport": "Traffic and access near the shrine and Druze communities may change locally; unrelated parts of Israel generally continue normally.",
         "visitor": "Specific sites may host religious gatherings; respectful conduct and locally published visiting arrangements matter.",
-        "tip": "Do not assume a community religious holiday applies to every city or business in Israel."
+        "tip": "Religious holidays can affect opening hours differently across cities, neighbourhoods and businesses."
       }
     ]
   }

@@ -75,7 +75,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "highlight": "Bell tower and Jerusalem rooftop views",
     "hours": "Verify before visiting: the church operator lists Tue–Sat 11:00–15:00 for visitor facilities but currently says the archaeological park is closed",
     "admission": "Church entry and tower: confirm current access and charges; archaeological park reported closed",
-    "tip": "The official website lists a temporary archaeological-park closure; do not assume the tower or exhibition is open without checking.",
+    "tip": "The official website lists a temporary archaeological-park closure. Check current opening arrangements for the tower and exhibition before visiting.",
     "lat": 31.777846,
     "lon": 35.230419,
     "photo": "/images/jerusalem/churches/redeemer.webp",
