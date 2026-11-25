@@ -570,7 +570,8 @@ describe("Jerusalem direct hotel catalog", () => {
     const secondTip = within(neighborhoodSection).getByText("Check your dates.").closest("div")!;
     expect(neighborhoodCards.compareDocumentPosition(firstTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(firstTip.compareDocumentPosition(secondTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(within(comparison as HTMLElement).getByText(/Compare walking distances to the Old City/)).toBeInTheDocument();
+    expect(within(comparison as HTMLElement).getByText(/Compare the accommodation range and luggage access/)).toBeInTheDocument();
+    expect(within(comparison as HTMLElement).getAllByRole("link", { name: "Browse hotels" })).toHaveLength(6);
     expect(screen.getByTestId("stay-local-photo-grid").querySelectorAll("a")).toHaveLength(6);
     expect(screen.getByRole("img", { name: "Jaffa Gate and Jerusalem Old City walls" })).toBeInTheDocument();
     const firstCard = within(catalog).getAllByTestId("jerusalem-hotel-card")[0]!;
