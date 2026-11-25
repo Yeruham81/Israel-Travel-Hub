@@ -51,9 +51,12 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
   it("the parent covers all ten properties, five categories and a real map before hotel referrals", () => {
     const { container } = render(<HotelDestinationPage guide={destination} />);
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
-    expect(screen.getAllByTestId("stay-hotel-group")).toHaveLength(5);
+    expect(screen.getByTestId("regional-hotel-browser")).toBeInTheDocument();
+    expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(6);
+    expect(screen.queryByTestId("stay-comparison-row")).toBeNull();
+    expect(screen.getByTestId("regional-hotel-count")).toHaveTextContent("Showing 6 of 10 hotels");
+    fireEvent.click(screen.getByTestId("regional-hotel-expand"));
     expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(10);
-    expect(screen.getAllByTestId("stay-comparison-row")).toHaveLength(10);
     for (const hotel of hotels) expect(container.querySelectorAll(`#hotel-${hotel.id}`)).toHaveLength(1);
     const cards = screen.getAllByTestId("stay-category-card");
     expect(cards).toHaveLength(2);
@@ -62,7 +65,7 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     expect(map.hostname).toBe("maps.google.com");
     expect(map.searchParams.get("q")).toBe(`${destination.map.lat},${destination.map.lon}`);
     expect(map.searchParams.get("output")).toBe("embed");
-    expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#location")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(container.querySelector('#explore a[href="/shore-excursions/haifa/"]')).toBeInTheDocument();
     expect(container.querySelectorAll("main")).toHaveLength(1);
   });
