@@ -25,7 +25,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
   visitorNavLabel: "Visitor information",
   historyTitle: "Mount Precipice and its history",
   relatedTitle: "Explore more around Nazareth and Lower Galilee",
-  contactIntroduction: "Tell me when you're visiting, where you'd like to start and which Nazareth or Galilee places interest you. I'll be happy to help plan a private day trip.",
+  contactIntroduction: "Tell me your travel date, pickup point and the Nazareth or Galilee places you would like to see. I can arrange a private day trip with a driver including Mount Precipice.",
   facts: [
     { icon: "location", label: "Location", value: "South of Nazareth", note: "Above the Jezreel Valley" },
     { icon: "duration", label: "Time needed", value: "30–45 minutes", note: "For the lookout; 1–2 hours with a longer ridge walk" },
