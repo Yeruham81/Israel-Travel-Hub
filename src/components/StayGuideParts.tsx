@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type { HotelCategoryGuide, StayGuidePhoto } from "@/data/content";
 import { deadSeaHotelRecommendations, tiberiasHotelRecommendations, haifaHotelRecommendations, providerLinks, type ResortHotelFacts, type ProviderLink } from "@/data/registry";
@@ -27,9 +27,9 @@ export function StayComparison({ hotelIds, columns, caption }: { hotelIds: strin
 
 export function StayCategoryCard({ guide }: { guide: HotelCategoryGuide }) {
   return (
-    <Link to={guide.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary" data-testid="stay-category-card">
-      <img src={guide.photo.src} alt={guide.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-      <div className="flex flex-1 flex-col p-5 sm:p-6"><p className="eyebrow">A guide for your travel style</p><h3 className="mt-2 text-3xl">{guide.shortTitle}</h3><p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.summary}</p><span className="mt-5 inline-flex items-center gap-2 font-semibold text-primary">Explore the comparison <ArrowRight className="h-4 w-4" aria-hidden /></span></div>
+    <Link to={guide.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60 hover:bg-secondary/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="stay-category-card">
+      <div className="overflow-hidden bg-muted"><img src={guide.photo.src} alt={guide.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" /></div>
+      <div className="flex flex-1 flex-col p-4 sm:p-5"><p className="eyebrow">Hotel comparison</p><h3 className="mt-2 text-xl font-semibold group-hover:text-primary sm:text-2xl">{guide.shortTitle}</h3><p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.summary}</p></div>
     </Link>
   );
 }
