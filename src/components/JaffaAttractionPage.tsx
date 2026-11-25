@@ -232,7 +232,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>These independently operated guided walks explore Old Jaffa or combine the old town with Tel Aviv neighbourhoods and markets. Compare meeting points, walking distances and inclusions. Prices and review scores shown on tour cards are recently checked snapshots; confirm the current details with each booking provider.</p>
+      <p>These guided walks explore Old Jaffa or combine the old town with Tel Aviv neighbourhoods and markets. Compare meeting points, walking distances and inclusions. Check current prices and reviews on the booking website.</p>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="jaffa-tour-cards">
         {jaffaTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-jaffa" />)}
       </ul>

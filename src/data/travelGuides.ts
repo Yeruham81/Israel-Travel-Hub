@@ -703,7 +703,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Planning the time from landing to the arrivals hall",
         paragraphs: [
           "Your landing time and the time you reach the public arrivals hall are different. Allow for taxiing, leaving the aircraft, walking to passport control, queues, baggage collection and any customs processing.",
-          "The ranges below are practical planning allowances from landing to the public arrivals hall, based on typical passenger experience rather than official airport guarantees. A busy arrival period, a remote aircraft stand or further border checks can extend any of them.",
+          "These estimates are based on typical passenger experience from landing to the public arrivals hall. A busy arrival period, a remote aircraft stand or further border checks can extend the journey.",
           "Give a pre-booked driver your flight number and agree how the meeting time, free waiting allowance and delay charges work. When possible, coordinate the final meeting after you have collected your bags.",
         ],
         tables: [{
@@ -714,7 +714,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             ["Checked luggage", "Allow roughly 60–120 minutes or more", "Leave time for your carousel and any baggage delay"],
             ["Wheelchair or additional arrival assistance", "Confirm an individual allowance with your airline", "Arrange ground-handler help in advance and tell the driver about the extra coordination"],
           ],
-          note: "Editorial planning ranges, not airport-reported waiting times or a promise of exit time. Allow additional time for security, immigration or baggage delays.",
+          note: "Allow additional time for security, immigration or baggage delays.",
         }],
         sourceIds: ["guide-iaa"],
       },

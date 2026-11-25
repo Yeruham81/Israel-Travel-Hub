@@ -264,7 +264,7 @@ export function SourceList({ ids, intro = "", compact = false, linksOnly = false
         {sources.map((s) => (
           <li key={s.id} className={compact ? "min-w-0 rounded-lg border bg-card p-3 text-sm" : "rounded-xl border bg-card p-4 text-sm"}>
             <ExtLink href={s.url} className="font-semibold text-primary">{compact ? s.title : `${s.publisher}: ${s.title}`}</ExtLink>
-            {!linksOnly && (!compact || !s.id.startsWith("hotel-")) && <p className="mt-1 text-muted-foreground">{s.note}</p>}
+            {!linksOnly && s.note && (!compact || !s.id.startsWith("hotel-")) && <p className="mt-1 text-muted-foreground">{s.note}</p>}
             {!linksOnly && <p className="mt-1 text-xs text-muted-foreground">{s.checkedAt ? `Checked ${formatCheckDate(s.checkedAt)}` : "Linked for reference"}</p>}
           </li>
         ))}

@@ -34,7 +34,7 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
         <Section id="compare" title={`Compare all ${hotelIds.length} places to stay`} className="scroll-mt-32">
           <p>{g.comparisonIntro}</p>
           <StayComparison hotelIds={hotelIds} columns={g.comparison} caption={`${g.name} hotels in Israel: practical comparison`} />
-          <p className="text-sm! text-muted-foreground">Select a hotel name for its summary and booking link below. This is an editorial comparison, with no live room rates or availability.</p>
+          <p className="text-sm! text-muted-foreground">Select a hotel name for its summary and booking link.</p>
         </Section>
         <Section id="location" title="Where to stay: map & arrival" className="scroll-mt-32">
           <div className="mt-5"><AreaMap area={{ name: `${g.name} hotel region`, map: g.map }} /></div>

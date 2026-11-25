@@ -120,7 +120,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
       <MoreTourCategories currentId={id} />
       <TourCruiseCallout />
     </>}
-    <SourceList ids={sourceIds} intro={id === "bethlehem-jericho" ? "These product listings describe published itineraries, not live availability or confirmed entry permissions. Check nationality eligibility, official access, meeting arrangements and the exact Qasr al-Yahud stop directly with the booking operator." : "Product listings were reviewed for advertised itinerary, operator and duration. Confirm the date, availability, full price and arrangements with me for my private days, or with the booking provider for external tours."} />
+    <SourceList ids={sourceIds} intro={id === "bethlehem-jericho" ? "Before booking, confirm available dates, entry eligibility for your nationality, official access, meeting arrangements and the exact Qasr al-Yahud stop with the tour operator." : "Contact me for private day trip prices and arrangements. For guided tours, check dates, availability and the total price on the booking website."} />
     <TourPhotoCredits photos={[category.photo, ...products.map(tour => tourPhotos[tour.id]!), ...(!isCityTemplate ? [tourCruisePhoto, ...tourCategories.map(item => item.photo), ...guides.map(guide => guide.photo)] : []), ...(isCityTemplate ? localCards.map(card => card.photo) : [])]} />
   </main>;
 }

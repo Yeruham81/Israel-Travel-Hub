@@ -105,7 +105,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
       </div>
     </section>
     <ShoreQuoteForm key={id} portId={id} itineraryId={itineraryId} onItineraryChange={setItineraryId} />
-    <SourceList ids={shoreSourceIds(id)} intro="Excursion listings describe published itineraries, not confirmed availability or live prices. My published ILS rates cover private transportation only. Confirm final prices, inclusions and port-return conditions with the operator." />
+    <SourceList ids={shoreSourceIds(id)} intro="My rates in ILS cover private transportation only. For external excursions, confirm availability, final prices, inclusions and return arrangements with the operator." />
     <details className="mt-10 rounded-xl border p-4 text-sm">
       <summary className="cursor-pointer font-semibold">Image credits</summary>
       <div className="mt-3 space-y-3">{[...new Map(photos.map(photo => [photo.src, photo])).values()].map(photo => <GuidePhotoCredit key={photo.src} photo={photo} insideDisclosure />)}</div>

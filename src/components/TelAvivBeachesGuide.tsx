@@ -196,7 +196,7 @@ export function TelAvivBeachesGuide() {
       </section>
 
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
-        <Heading id="compare" title="Tel Aviv beaches at a glance" intro="Compare the municipality's 13 listed beaches from north to south. The table describes their general appeal, not live bathing status." />
+        <Heading id="compare" title="Tel Aviv beaches at a glance" intro="Compare the municipality's 13 listed beaches from north to south. Check the current bathing conditions and lifeguard service before swimming." />
         
         <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
           <table className="w-full min-w-[800px] table-fixed border-collapse text-left text-sm">

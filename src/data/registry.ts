@@ -631,7 +631,7 @@ const jerusalemHotelSources: SourceReference[] = [
 ].map(([id, name, url]): SourceReference => ({
   id: `hotel-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: JERUSALEM_STAY_REVIEW_DATE,
-  note: "Property identity, location and general accommodation style cross-checked with the hotel's own information. Room availability, rates, specific amenities and booking conditions must be reconfirmed for your dates.",
+  note: "",
 }));
 
 const telAvivHotelSources: SourceReference[] = [
@@ -654,7 +654,7 @@ const telAvivHotelSources: SourceReference[] = [
 ].map(([id, name, url]): SourceReference => ({
   id: `hotel-tlv-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: TELAVIV_STAY_REVIEW_DATE,
-  note: "Property identity, location and general accommodation style checked against the property's own information. Reconfirm rooms, services, access, minimum stays and booking conditions for your dates.",
+  note: "",
 }));
 
 const deadSeaHotelSources: SourceReference[] = [
@@ -672,7 +672,7 @@ const deadSeaHotelSources: SourceReference[] = [
 ].map(([id, name, url]): SourceReference => ({
   id: `hotel-ds-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
-  note: "Property identity, location and general facilities checked against the operator's own information. Confirm current operation, beach access, room occupancy, age limits, meal-plan inclusions and seasonal facilities for your dates; rates and inventory are not live.",
+  note: "",
 }));
 
 const tiberiasHotelSources: SourceReference[] = [
@@ -690,8 +690,8 @@ const tiberiasHotelSources: SourceReference[] = [
   id: `hotel-tib-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: TIBERIAS_STAY_REVIEW_DATE,
   note: id === "tiberia"
-    ? "The hotel website lists 17 HaNoter Street. Confirm your room facilities and arrival arrangements directly. Rates and inventory are not live."
-    : "Identity, location and relevant facilities or policies checked against primary operator information. Reconfirm operation, guest and facility age limits, seasonal pools, beach arrangements and the exact meal plan for your dates. No live rates or availability are supplied.",
+    ? "Address: 17 HaNoter Street, as listed on the hotel website. Confirm room facilities and arrival arrangements directly."
+    : "",
 }));
 
 const haifaHotelSources: SourceReference[] = [
@@ -709,8 +709,8 @@ const haifaHotelSources: SourceReference[] = [
   id: `hotel-haifa-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: HAIFA_STAY_REVIEW_DATE,
   note: id === "port-inn"
-    ? "The indexed operator public profile supports the name and downtown address only; a full current facilities page could not be retrieved. Confirm room type, bathroom, meals and arrival arrangements directly. No detailed amenities or live inventory are asserted."
-    : "Property identity, location and relevant facilities or policies checked against primary operator information. Confirm current operation, room occupancy, age restrictions, seasonal pools, meals and parking for your dates. Rates and inventory are not live.",
+    ? "For room types, bathrooms, meals and arrival arrangements, contact Port Inn directly."
+    : "",
 }));
 
 /** Ordinary tours use one product identity across all destination/topic pages.
@@ -965,7 +965,7 @@ const sourceCatalog: SourceReference[] = [
   ...shoreTourProducts.map((product): SourceReference => ({
     id: product.id, title: product.title, publisher: product.partnerId === "getyourguide" ? "GetYourGuide product listing" : product.partnerId === "viator" ? "Viator product listing" : product.operatorId === "tourist-israel" ? "Tourist Israel" : "Compass Travel Israel",
     url: product.publicUrl, checkedAt: product.checkedAt || SHORE_EXCURSION_CHECK_DATE,
-    note: `Product identity, named operator, itinerary and pickup/return at ${product.portIds.map((id) => shorePorts[id].name).join(" / ")} Port checked. ${product.seasonNote ? "The operator currently advertises a 2027 cruise program. " : ""}${product.operatorId === "rent-a-guide" ? "The title mentions both ports, but the detailed return/inclusions specify Ashdod; listed here only for Ashdod. " : ""}${product.listedPrice ? "The displayed USD starting price and per-person/per-group basis were checked as an indicative snapshot, not a quote for selected dates. " : ""}No sailing-date availability, live price, port-access permission or return guarantee is verified by this portal. Confirm all arrangements before booking.`,
+    note: `Pickup and return: ${product.portIds.map((id) => shorePorts[id].name).join(" / ")} Port. ${product.seasonNote ? "The operator advertises a 2027 cruise program. " : ""}${product.operatorId === "rent-a-guide" ? "The itinerary and inclusions specify pickup and return at Ashdod. " : ""}Confirm availability for your sailing date, total price, port access and return arrangements with the operator.`,
   })),
   { id: "moshe-author-profile", title: "Moshe Barak biography", publisher: "Moshe Barak", url: "", checkedAt: "2026-10-18", note: "Publisher biography supports over 20 years in private transport, local route knowledge and tailored journeys for international visitors. Tripadvisor is linked to the owner-supplied profile only; no live score, count or review text is reproduced." },
   referenceFxSource,
