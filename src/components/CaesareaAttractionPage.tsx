@@ -31,7 +31,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
   visitorTitle: "Tickets, opening hours and visitor information",
   visitorNavLabel: "Tickets & hours",
   relatedTitle: "More places along the Mediterranean coast",
-  contactIntroduction: "Tell me your travel date, pickup location and the coastal sites you'd most like to visit. I'll be happy to help plan a private day trip that includes Caesarea.",
+  contactIntroduction: "Tell me your date, pickup point, group size and the coastal stops you would like to make. I can arrange a private transfer or day trip with a driver to Caesarea and nearby sites.",
   facts: [
     { icon: "location", label: "Location", value: "Mediterranean coast", note: "Between Tel Aviv and Haifa" },
     { icon: "duration", label: "Time needed", value: "2–3 hours", note: "Plus time for the aqueduct or a harbor meal" },
