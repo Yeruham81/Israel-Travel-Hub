@@ -55,7 +55,7 @@ const dishVisual = {street:{label:"Street food",icon:Flame},plates:{label:"Break
 type PickFood = (event:MouseEvent<HTMLAnchorElement>,dishId:string)=>void;
 function QuickStart({onPickFood}:{onPickFood:PickFood}){
   return <section id="quick-start" aria-labelledby="quick-start-heading" className="mt-12 scroll-mt-24">
-    <SectionHeading id="quick-start" title="New to Israeli food? Start here" intro="You do not need a complicated tasting itinerary. These are four easy ways to choose your first bite — in a market, bakery, café or hummus shop."/>
+    <SectionHeading id="quick-start" title="New to Israeli food? Start here" intro="Start with a visit to a market, bakery, café or hummus shop. Here are four easy ways to try Israeli food."/>
     <div className="grid gap-4 sm:grid-cols-2">
       {foodStarterIdeas.map((idea,index)=><article key={idea.title} className="rounded-xl border bg-card p-4 sm:p-5">
         <div className="flex items-start gap-3"><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary text-sm font-bold text-primary">{index+1}</span><div>

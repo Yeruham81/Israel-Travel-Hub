@@ -623,7 +623,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       "Check the walk to the beach or promenade on a map",
       "Confirm what 'sea view' means for the room you book",
       "Ask about noise if you're on a nightlife street",
-      "Check parking availability and cost — street parking is tight",
+      "Street parking is limited. Check parking availability and cost.",
       "Plan Friday-evening and Saturday transport in advance",
       "Read the cancellation deadline and whether taxes are included",
     ],
@@ -658,7 +658,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       { name: "Around the lake (kibbutz and country guesthouses)", suits: ["family", "quiet", "views"], text: "Rural settings near beaches and sites on the north, east or south shores.", watch: "A car or driver is usually essential; evening dining options are limited." },
     ],
     checklist: [
-      "Decide whether you'll have a car — it changes which area works",
+      "Decide whether you'll have a car before choosing a neighborhood.",
       "Check air-conditioning and pool access for summer stays",
       "Confirm parking if staying in town",
       "Ask about Shabbat check-in and meal arrangements",

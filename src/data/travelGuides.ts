@@ -441,7 +441,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "long-trip",
         title: "Best eSIM for a longer trip",
         paragraphs: [
-          "For one to three weeks of navigation, messaging and browsing, 5GB should suit many visitors. Saily costs $7.99 for 30 days, almost identical to Airalo at $8 for 30 days — just a one-cent difference. Both are good-value options; compare network coverage, app features and installation instructions rather than deciding by price alone. Yesim costs $9.90 and GigSky $18.89. My choice: Saily.",
+          "For one to three weeks of navigation, messaging and browsing, 5GB should suit many visitors. Saily costs $7.99 for 30 days, compared with $8 for the same period from Airalo. Both are good-value options; compare network coverage, app features and installation instructions rather than deciding by price alone. Yesim costs $9.90 and GigSky $18.89. My choice: Saily.",
           "For frequent photo uploads, social media and video calls, consider 10GB instead. Airalo costs $11.50 for 30 days, just below Saily at $11.99; Yesim costs $16.50. My choice: Airalo.",
         ],
         sourceIds: ["guide-esim-saily", "guide-esim-saily-usd-price-nov26", "guide-esim-airalo", "guide-esim-yesim", "guide-esim-gigsky"],
@@ -452,7 +452,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "Four of the five providers offer 30-day unlimited plans for Israel. Unlimited does not mean unlimited full-speed data: the daily high-speed allowance and fair-use rules vary. Compare the published prices and limits below. Drimsim has no unlimited package.",
           "At the checked price of $56.24, GigSky is the cheapest of these four 30-day unlimited plans, with 3.5GB of high-speed data per day before speeds are reduced. Saily costs $71.99 but offers 5GB at full speed per day, which may suit heavier daily use. The reduced speed and fair-use rules can affect streaming and video calls. My choice: GigSky.",
-          "Not sure you need unlimited? Airalo also lists a fixed 50GB plan for 30 days at $39 — potentially better value if your total data use stays below 50GB. Unlike unlimited plans, it has a fixed overall allowance.",
+          "Not sure you need unlimited? Airalo also lists a fixed 50GB plan for 30 days at $39, which may be better value if you use less than 50GB. Unlike unlimited plans, it has a fixed overall allowance.",
         ],
         sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-drimsim"],
       },

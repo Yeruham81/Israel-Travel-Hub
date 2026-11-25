@@ -173,7 +173,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
           </ol>
         </article>
       </div>
-      <AttractionPracticalTip>For a comfortable day, choose <strong>two principal stops</strong>—usually Masada and the beach. If you also want to hike in Ein Gedi, check its current route access and start early; the reserve may limit entry after floods.</AttractionPracticalTip>
+      <AttractionPracticalTip>For a comfortable day, choose <strong>two principal stops</strong>, usually Masada and the beach. If you also want to hike in Ein Gedi, check its current route access and start early; the reserve may limit entry after floods.</AttractionPracticalTip>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-lg font-semibold">Dead Sea area map</h3>
         <p className="mt-1 text-sm text-muted-foreground">The map is centred on the Ein Bokek resort area. Use the individual location links above for each beach.</p>

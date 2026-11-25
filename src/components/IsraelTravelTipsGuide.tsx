@@ -151,7 +151,7 @@ export function IsraelTravelTipsGuide() {
       </section>
 
       <section id="arriving" className="mt-12 scroll-mt-24" aria-labelledby="arrival-title">
-        <Heading id="arrival-title" intro="Plan the journey to your actual hotel address—not just to the nearest city.">Arriving in Israel</Heading>
+        <Heading id="arrival-title" intro="Plan your airport transfer all the way to your hotel.">Arriving in Israel</Heading>
         <Topic title="Prepare for Ben Gurion Airport">
           <p>At Ben Gurion Airport, allow time for border procedures, baggage and customs before an onward connection. Decide in advance whether the train, an official taxi or a confirmed <Link to="/airport-transfers/" className={linkClass}>private airport transfer</Link> suits your destination, luggage and arrival hour.</p>
           <p>For your return flight, the <a href="https://www.iaa.gov.il/en/airports/ben-gurion/securitybgn/" target="_blank" rel="noopener noreferrer" className={linkClass}>Israel Airports Authority</a> advises arriving three hours before departure for security procedures; follow any more specific airline instructions and confirm your departure terminal.</p>

@@ -66,7 +66,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "access": "Paid national-park entry; cable car costs extra",
     "description": "Masada stands above the Judean Desert and the Dead Sea, preserving Herod's palace complex, ancient fortifications and the history of the Jewish revolt against Rome. The sweeping views are as memorable as the archaeological remains.",
     "practical": "The eastern cable-car entrance and western Roman Ramp entrance are reached by different roads. Admission, cable-car tickets and optional experiences have separate conditions; check current prices and reservations with the park. Walking routes may close during heat alerts.",
-    "gettingThere": "For the conventional Dead Sea approach, navigate to Masada National Park — eastern entrance / cable car. Do not use the western ramp unless that is your planned approach.",
+    "gettingThere": "From the Dead Sea, navigate to the eastern entrance of Masada National Park for the cable car. The western ramp is reached from Arad.",
     "tip": "I'd reserve enough time for the plateau itself. Choose a hike only after checking the day's trail status and weather.",
     "image": {
       "src": masada,

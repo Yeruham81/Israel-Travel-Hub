@@ -127,8 +127,8 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Choose the visit that suits your day</h3>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li><strong>30–45 minutes — main lookout:</strong> Park near the summit, follow the paved path to the Three Faiths Lookout and enjoy the Jezreel Valley panorama.</li>
-          <li><strong>About 1–2 hours — extended hilltop walk:</strong> Continue towards the Forester's House viewpoint, take time for the ridge views and return to the parking area.</li>
+          <li><strong>Main lookout (30–45 minutes):</strong> Park near the summit, follow the paved path to the Three Faiths Lookout and enjoy the Jezreel Valley panorama.</li>
+          <li><strong>Extended hilltop walk (about 1–2 hours):</strong> Continue towards the Forester's House viewpoint, take time for the ridge views and return to the parking area.</li>
           <li><strong>Longer one-way hike towards Iksal:</strong> The Gospel Trail leaves the hilltop and descends towards Iksal. This is a separate hike, so plan the route, walking conditions and return transport in advance.</li>
         </ul>
       </div>

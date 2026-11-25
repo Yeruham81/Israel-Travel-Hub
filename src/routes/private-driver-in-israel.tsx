@@ -65,7 +65,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
 
       <section id="journeys" aria-labelledby="journeys-h" className="mt-8 scroll-mt-24">
         <h2 id="journeys-h" className="text-2xl font-semibold">Choose the journey that suits you</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">A direct transfer, a day out or several stops along the way — choose a starting point and I'll help with the details.</p>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Whether you need a direct transfer, a day out or several stops along the way, choose a starting point and I'll help with the details.</p>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {privateDriverJourneys.map(journey => <article key={journey.id} className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/40" data-testid="driver-journey-card">
             <img src={journey.photo.src} alt={journey.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[16/9] h-auto w-full object-cover" />

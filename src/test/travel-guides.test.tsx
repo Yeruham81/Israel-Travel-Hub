@@ -439,7 +439,7 @@ describe("migrated practical guides", () => {
     ]));
     const timing = guide.sections.find(s => s.id === "arrival-timing")!.tables![0]!;
     expect(timing.rows).toHaveLength(3);
-    expect(timing.note).toContain("Editorial planning ranges");
+    expect(timing.note).toContain("Allow additional time for security, immigration or baggage delays.");
   });
 
   it("renders short airport-arrival navigation, six photo guides and sources after the inquiry", async () => {

@@ -76,7 +76,7 @@ const days3: ItineraryDay[] = [
     afternoon: "Continue to a designated bathing beach at Ein Bokek. Allow roughly one to two hours for changing, floating and showering, plus the transfer from Masada and the journey back to Jerusalem. The Dead Sea visitor guide explains bathing precautions; see Dead Sea attractions if you want to swap the beach for a different stop.",
     evening: "Head back to Jerusalem after the beach stop. Leave enough time for the drive back to Jerusalem.",
     practical: "Carry water and sun protection, and check the last cable-car ascent and trail restrictions. If you prefer not to drive, compare Masada and Dead Sea day tours that cover both stops. For a hiking alternative, consider Ein Gedi and check which trails are open.",
-    overnight: "Jerusalem, night 2 — same hotel.",
+    overnight: "Jerusalem, second night at the same hotel.",
     links: [masada, L("Jerusalem to Dead Sea travel options", "/travel-blog/jerusalem-to-the-dead-sea/"), L("Masada & Dead Sea day tours", "/tours/masada-dead-sea/")],
   },
   {
@@ -127,7 +127,7 @@ const days5: ItineraryDay[] = [
     afternoon: "Continue to a designated bathing area at Ein Bokek for about one to two hours of changing, floating and showering. The Dead Sea visitor guide covers bathing precautions, while the Dead Sea attractions guide describes other stops. Ein Gedi Nature Reserve works as an alternative outing when relevant trails and access are open.",
     evening: "Return to your Jerusalem hotel and enjoy a relaxed evening after the desert excursion.",
     practical: "Bring drinking water, sun protection and suitable footwear. Masada and Dead Sea day tours, a rental car and a private driver offer different levels of flexibility; for self-drive planning, see how to get from Jerusalem to the Dead Sea.",
-    overnight: "Jerusalem after Day 2 — same hotel.",
+    overnight: "Jerusalem after Day 2, at the same hotel.",
     links: [masada, deadSea, L("Jerusalem to Dead Sea transport", "/travel-blog/jerusalem-to-the-dead-sea/")],
   },
   { ...fiveExtra[0]!,
@@ -137,7 +137,7 @@ const days5: ItineraryDay[] = [
     afternoon: "Continue exploring your chosen part of Jerusalem, perhaps with a neighbourhood walk, a market or a café. Choose one district for the afternoon and allow time to reach it.",
     evening: "Enjoy your final Jerusalem evening around the centre or hotel district, ready for the move to Tel Aviv the following morning.",
     practical: "A Bethlehem visit or an outing to Jericho requires arrangements separate from city sightseeing. Check current travel advice, eligibility to enter the planned areas, the operator’s itinerary and the return journey.",
-    overnight: "Jerusalem after Day 3 — the last planned night in the city.",
+    overnight: "Jerusalem after Day 3, your last night in the city.",
     links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Mount of Olives", "/attractions/mount-of-olives/"), L("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/")],
   },
   { ...days3[2]!,
@@ -175,7 +175,7 @@ const days7: ItineraryDay[] = [
     afternoon: "Leave room for a neighbourhood walk, a market or a quiet café after your chosen city visit. You can dedicate this day to Bethlehem or Jericho in place of Jerusalem sightseeing.",
     evening: "Enjoy another evening in Jerusalem without packing for a hotel change; the desert outing starts early tomorrow.",
     practical: "A Bethlehem or Jericho day trip needs separate route and crossing arrangements. Check current travel advice, entry eligibility, the tour operator's actual itinerary and return travel.",
-    overnight: "Jerusalem after Day 2 — same hotel.",
+    overnight: "Jerusalem after Day 2, at the same hotel.",
     links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Mount of Olives", "/attractions/mount-of-olives/"), L("Jerusalem to Bethlehem travel options", "/travel-blog/jerusalem-to-bethlehem/")],
   },
   { ...days5[1]!,
@@ -184,7 +184,7 @@ const days7: ItineraryDay[] = [
     afternoon: "Continue to a designated bathing beach at Ein Bokek, accounting for the transfer, changing facilities and showers as well as time in the water. The Dead Sea visitor guide covers bathing precautions. For a hiking alternative, consider Ein Gedi.",
     evening: "Return to Jerusalem and enjoy a restful evening before the longer northbound journey tomorrow.",
     practical: "Carry drinking water and sun protection and confirm current Masada operating conditions. Compare Masada and Dead Sea tours, a rental car or a private driver; the Jerusalem to Dead Sea guide covers self-directed travel options.",
-    overnight: "Jerusalem after Day 3 — the final planned night before moving north.",
+    overnight: "Jerusalem after Day 3, your last night before moving north.",
     links: [masada, deadSea, L("Jerusalem to Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/")],
   },
   {
@@ -193,7 +193,7 @@ const days7: ItineraryDay[] = [
     afternoon: "Continue towards the Sea of Galilee. If your arrival time permits, stop at Magdala for its archaeological remains, or enjoy a shorter lakeside visit before checking in. Check the official Magdala visitor information for opening hours before planning your stop.",
     evening: "Check into your hotel in Tiberias or elsewhere in the Galilee and enjoy a relaxed evening after the journey north.",
     practical: "This is a hotel-transfer day as well as a sightseeing day. A self-drive route or private driver can connect Nazareth and a lakeside stop directly; public transport may mean changing services and arranging a separate local transfer, especially with luggage.",
-    overnight: "Tiberias or the Galilee after Day 4 — the first of two nights in the north.",
+    overnight: "Tiberias or the Galilee after Day 4, for the first of two nights in the north.",
     links: [nazareth, L("Magdala travel guide", "/attractions/magdala/"), tiberiasHotels],
   },
   {
@@ -202,7 +202,7 @@ const days7: ItineraryDay[] = [
     afternoon: "Visit the lakeside churches at Tabgha, explore Magdala's archaeological site, or take a break by the Sea of Galilee. Two or three well-chosen visits leave more room for the setting than a rush through every stop.",
     evening: "Return to the same Galilee accommodation and enjoy the lakeside atmosphere or dinner in Tiberias.",
     practical: "A car, prearranged driver or suitable guided tour simplifies the separate lakeside stops. For a nature-focused alternative, replace the heritage route with a specific, currently accessible trail; do not assume sites near border areas are suitable without checking official advice.",
-    overnight: "Tiberias or the Galilee after Day 5 — second night at the same base.",
+    overnight: "Tiberias or the Galilee after Day 5, for a second night at the same hotel.",
     links: [L("Capernaum", "/attractions/capernaum/"), L("Tabgha", "/attractions/tabgha/"), lake],
   },
   {
@@ -211,7 +211,7 @@ const days7: ItineraryDay[] = [
     afternoon: "Travel onwards to Caesarea National Park for the Roman theatre, historic harbour and archaeological remains. The park is not beside an intercity railway station, so plan your final local connection and check the official Caesarea park page for closing and last-entry times before leaving Haifa.",
     evening: "Continue south to Tel Aviv, check into your hotel and keep the evening light after a day of intercity travel and visits.",
     practical: "This is a transfer day with luggage. A guided coastal excursion, rental car or private driver makes a two-stop Haifa–Caesarea route easier. On rail and buses, Haifa or Caesarea alone may be more relaxing because both include extra station-to-attraction connections.",
-    overnight: "Tel Aviv after Day 6 — the planned final hotel base.",
+    overnight: "Tel Aviv after Day 6, your final hotel base.",
     links: [haifa, caesarea, telavivHotels],
   },
   { ...days5[3]!,
@@ -232,7 +232,7 @@ const days10: ItineraryDay[] = [
     afternoon: "Choose the Jewish Quarter and Western Wall if time and access permit, then enjoy the markets or a favourite stretch of the Old City. Keep the Israel Museum and cross-city viewpoints for tomorrow.",
     evening: "Enjoy dinner near Jaffa Road or Mahane Yehuda, depending on opening hours and where you are staying.",
     practical: "Old City streets include steps and uneven stone surfaces. Check visiting arrangements at religious sites, especially around services, holidays and restricted areas. Arrange a practical luggage drop-off if staying inside the walls.",
-    overnight: "Jerusalem after Day 1 — stay at the same hotel for the following two nights.",
+    overnight: "Jerusalem after Day 1. Stay at the same hotel for the following two nights.",
     links: [jerusalem, jerusalemHotels, L("Shopping in Jerusalem", "/travel-blog/shopping-in-jerusalem/")],
   },
   {
@@ -241,7 +241,7 @@ const days10: ItineraryDay[] = [
     afternoon: "Continue with your chosen Jerusalem experience and allow time for a neighbourhood walk or café. A Bethlehem or Jericho excursion replaces the city programme and needs a separately planned itinerary.",
     evening: "Explore Mahane Yehuda or enjoy a quieter evening near your hotel before the early desert outing.",
     practical: "If choosing Bethlehem or Jericho, check current travel advice, entry eligibility, crossing arrangements and the tour operator's actual route. Confirm where your driver is permitted to enter and whether a vehicle change is required.",
-    overnight: "Jerusalem after Day 2 — second night at the same hotel.",
+    overnight: "Jerusalem after Day 2, for a second night at the same hotel.",
     links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Mount of Olives", "/attractions/mount-of-olives/"), L("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/")],
   },
   {
@@ -250,7 +250,7 @@ const days10: ItineraryDay[] = [
     afternoon: "Continue to a designated Ein Bokek bathing beach for floating, changing and showering. The Dead Sea visitor guide covers bathing precautions. Ein Gedi Nature Reserve is an alternative nature outing, not another stop to add automatically.",
     evening: "Return to Jerusalem and allow time to rest before tomorrow's longer drive north.",
     practical: "Bring water, sun protection and suitable shoes. Compare Masada and Dead Sea day tours, a rental car or a private driver; the Jerusalem to Dead Sea guide explains independent transport choices.",
-    overnight: "Jerusalem after Day 3 — final planned night before changing regions.",
+    overnight: "Jerusalem after Day 3, your last night before leaving the region.",
     links: [masada, deadSea, L("Jerusalem to Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/")],
   },
   {
@@ -259,7 +259,7 @@ const days10: ItineraryDay[] = [
     afternoon: "Continue towards the Sea of Galilee. If the journey permits, choose Magdala's archaeological site or a short lakeside stop before checking in. Check Magdala’s visiting hours before adding this stop.",
     evening: "Check into accommodation in Tiberias or another convenient Galilee base and enjoy a relaxed dinner after the intercity journey.",
     practical: "This is a hotel-transfer day with luggage, not a full day at the attractions. A car or private driver can connect the stops; buses may require changes and additional local rides, particularly between Nazareth and the lake.",
-    overnight: "Tiberias or the Galilee after Day 4 — first of three nights in the north.",
+    overnight: "Tiberias or the Galilee after Day 4, for the first of three nights in the north.",
     links: [nazareth, L("Magdala guide", "/attractions/magdala/"), tiberiasHotels],
   },
   {
@@ -268,7 +268,7 @@ const days10: ItineraryDay[] = [
     afternoon: "Choose the churches at Tabgha, Magdala's archaeology or a relaxed break beside the lake. Choose one or two additional lakeside stops and allow time for short drives and separate entrances.",
     evening: "Return to your Galilee hotel for a relaxed evening without moving luggage or changing accommodation.",
     practical: "A car, prearranged driver or suitable guided tour is useful for dispersed lakeside sites. Check worship schedules, access and official travel advice before visiting, and use designated swimming areas if entering the water.",
-    overnight: "Tiberias or the Galilee after Day 5 — second night at the same base.",
+    overnight: "Tiberias or the Galilee after Day 5, for a second night at the same hotel.",
     links: [L("Capernaum", "/attractions/capernaum/"), L("Tabgha", "/attractions/tabgha/"), lake],
   },
   {
@@ -277,7 +277,7 @@ const days10: ItineraryDay[] = [
     afternoon: "Spend the afternoon in the same area. Check trail status, opening times and local travel advice before setting off, and leave room for return travel.",
     evening: "Enjoy a third evening at the same Galilee hotel, with time for dinner and an easy start tomorrow.",
     practical: "Nature sites can have seasonal restrictions and different entrances. Choose a currently accessible destination in the same region if your first choice is closed; border-area routes require particular care and up-to-date official advice.",
-    overnight: "Tiberias or the Galilee after Day 6 — third night at the same base.",
+    overnight: "Tiberias or the Galilee after Day 6, for a third night at the same hotel.",
     links: [lake, L("Mount Tabor guide", "/attractions/mount-tabor/"), L("Israel travel advice", "/travel-blog/israel-travel-tips/")],
   },
   {
@@ -295,7 +295,7 @@ const days10: ItineraryDay[] = [
     afternoon: "Travel south to Caesarea National Park for the Roman theatre, archaeological remains and historic harbour. Check the official Caesarea park page for opening and last-entry times. If you stayed in Tel Aviv after Day 7, spend Day 8 in the city or take a separate trip to Caesarea.",
     evening: "Continue to Tel Aviv, check into your hotel and keep the evening flexible after the coastal journey.",
     practical: "A car, guided coastal excursion or private driver makes a Haifa–Caesarea transfer simpler. Rail travellers need local connections to the gardens and the national park; the site entrances are not at the stations.",
-    overnight: "Tel Aviv after Day 8 — the first of two planned nights at this base.",
+    overnight: "Tel Aviv after Day 8, for the first of two nights in the city.",
     links: [haifa, caesarea, telavivHotels],
   },
   {
@@ -304,7 +304,7 @@ const days10: ItineraryDay[] = [
     afternoon: "Continue towards Neve Tzedek, Rothschild Boulevard or the seafront promenade. Spend the afternoon at the beach or at Carmel Market.",
     evening: "Enjoy dinner in Tel Aviv or an evening along the promenade, with your hotel within practical reach.",
     practical: "Jaffa, the beachfront and Rothschild Boulevard are different areas; allow time between them and check local public transport and market opening days.",
-    overnight: "Tel Aviv after Day 9 — the second planned night at the same hotel.",
+    overnight: "Tel Aviv after Day 9, for a second night at the same hotel.",
     links: [telaviv, telavivHotels, L("Tel Aviv beaches", "/travel-blog/beaches-in-tel-aviv/")],
   },
   {
