@@ -16,7 +16,6 @@ import { guideContactCopy } from "@/lib/guide-contact";
 import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
 import { AreaPhotoCredit } from "@/components/AreaMap";
 import jerusalemHeroPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
-import { jerusalemStayCardPhotos } from "@/data/jerusalemStayCardPhotos";
 
 const pageSections = [
   ["book", "Hotels"], ["areas", "Neighborhoods"], ["compare", "Compare areas"],
@@ -84,8 +83,8 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
               >
                 <span className="block min-w-0 overflow-hidden bg-muted">
                   <img
-                    src={jerusalemStayCardPhotos[area.id]?.src ?? area.photo.src}
-                    alt={jerusalemStayCardPhotos[area.id]?.alt ?? area.photo.alt}
+                    src={area.photo.src}
+                    alt={area.photo.alt}
                     width={755} height={503} loading="lazy" decoding="async"
                     className="aspect-[16/10] w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]"
                   />
