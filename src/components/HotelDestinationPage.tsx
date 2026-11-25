@@ -34,7 +34,7 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
         <Section id="compare" title={`Compare all ${hotelIds.length} places to stay`} className="scroll-mt-32">
           <p>{g.comparisonIntro}</p>
           <StayComparison hotelIds={hotelIds} columns={g.comparison} caption={`${g.name} hotels in Israel: practical comparison`} />
-          <p className="text-sm! text-muted-foreground">Select a hotel name for its summary and booking link.</p>
+          
         </Section>
         <Section id="location" title="Where to stay: map & arrival" className="scroll-mt-32">
           <div className="mt-5"><AreaMap area={{ name: `${g.name} hotel region`, map: g.map }} /></div>
@@ -59,7 +59,7 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
         <ProviderSection id="more-stays" title={`Browse more ${g.name} stays`} intro="Enter your dates and all guests on the booking website." links={linksForPage(`stay-${g.id}-browse`)} pageId={pageId} />
         <FaqList faqs={g.faqs} />
         <StayTripLinks region={g.id} currentPath={g.path} />
-        <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.name)} />
+        <HomeContactForm key={g.id} showTripadvisorBesidePortraitMobile guide={guideContactCopy(g.title, "accommodation", g.name)} />
         <SourceList ids={[...new Set([...g.sourceIds, ...hotelIds.map((id) => resortHotel(id).sourceId)])]} />
         <StayPhotoCredits photos={[g.photo, ...g.groups.map((group) => group.photo)]} />
       </article>
