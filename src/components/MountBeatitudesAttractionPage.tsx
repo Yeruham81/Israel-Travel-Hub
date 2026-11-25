@@ -28,7 +28,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
   visitorTitle: "Opening hours, admission and visitor information",
   visitorNavLabel: "Hours & admission",
   relatedTitle: "Explore more around the Sea of Galilee",
-  contactIntroduction: "Tell me when you're visiting, where you'll be starting from and which Galilee sites you'd like to include. I'll be happy to help arrange a private day trip around your plans.",
+  contactIntroduction: "Tell me your date, pickup point, passengers and the Galilee sites you want to include. I can arrange a private day trip with a driver to the Mount of Beatitudes and nearby sites.",
   facts: [
     { icon: "location", label: "Location", value: "Above the Sea of Galilee", note: "Near Tabgha and Capernaum" },
     { icon: "duration", label: "Time needed", value: "45–60 minutes", note: "Church, gardens and viewpoint" },
