@@ -258,7 +258,7 @@ export function IsraelFoodGuide(){
       <SectionHeading id="plan-trip" title="Plan the rest of your Israel trip" intro="Use the food stops as a starting point, then match them with your dates, destinations and transport options."/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{planningCards.map(item=><RelatedCard key={item.to} item={item}/>)}</div>
    </section>
-   <HomeContactForm guide={{
+   <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
      heading:"Planning a trip around Israel?",
      introduction:"I'm Moshe Barak. Tell me your travel dates, destinations and group size if you need an airport transfer, a private sightseeing day or a driver to help you explore more of Israel. I can also help you plan realistic stops along your route.",
      subject:"",
