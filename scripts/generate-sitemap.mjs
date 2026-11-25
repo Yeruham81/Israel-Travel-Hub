@@ -51,9 +51,6 @@ export async function collectSitemapPaths(dir = routesDir) {
     const route = match[1];
     // API handlers, path parameters and catchalls should never appear in XML.
     if (route.startsWith("/api/") || /[$*]/.test(route)) continue;
-    // Legacy regional aliases remain navigable but only their attraction targets
-    // belong in the sitemap; Hostinger handles the approved permanent redirects.
-    if (["/travel-blog/haifa", "/travel-blog/the-dead-sea", "/travel-blog/sea-of-galilee"].includes(route)) continue;
     // A route that only redirects has no page document; guarded content routes
     // still belong in the sitemap when they declare a component.
     if (/\bbeforeLoad\s*:/.test(contents) && /\b(?:throw|return)\s+redirect\s*\(/.test(contents) && !/\bcomponent\s*[:,]/.test(contents)) continue;
