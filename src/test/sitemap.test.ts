@@ -80,6 +80,15 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).not.toContain("/travel-blog/haifa/");
     expect(paths).not.toContain("/travel-blog/the-dead-sea/");
     expect(paths).not.toContain("/travel-blog/sea-of-galilee/");
+    for (const [oldPath, canonicalPath] of [
+      ["/travel-blog/haifa", "/attractions/haifa/"],
+      ["/travel-blog/sea-of-galilee", "/attractions/sea-of-galilee/"],
+      ["/travel-blog/the-dead-sea", "/attractions/dead-sea/"],
+    ]) {
+      expect(paths).not.toContain(oldPath + "/");
+      expect(paths).toContain(canonicalPath);
+      expect(Object.values(createRouter({ routeTree, context: { queryClient: new QueryClient() } }).routesById).some(route => route.fullPath === oldPath)).toBe(false);
+    }
     for (const slug of ["old-city-jerusalem", "mount-of-olives", "mount-zion", "jaffa", "akko-acre", "rosh-hanikra", "mount-tabor", "capernaum", "tabgha", "mount-of-beatitudes", "magdala", "yardenit", "basilica-of-the-annunciation", "mount-precipice", "tel-megiddo", "masada", "dead-sea", "sea-of-galilee", "ein-gedi", "qasr-el-yahud", "mitzpe-ramon-crater"]) {
       expect(paths).toContain(`/attractions/${slug}/`);
       expect(paths).not.toContain(`/travel-blog/${slug}/`);
