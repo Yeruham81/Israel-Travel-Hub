@@ -352,16 +352,16 @@ export function DeadSeaAttractionsGuide() {
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">Official site pages are useful for current reservations, entry arrangements and weather-sensitive changes. I recommend checking the specific date before you travel.</p>
         <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
-          <li><OfficialLink href="https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en">Tamar Regional Council — Ein Bokek Central Beach</OfficialLink></li>
-          <li><OfficialLink href="https://www.deadsea.co.il/tracks/ein-bokek/?lang=en">Tamar Regional Council — Nahal Bokek</OfficialLink></li>
-          <li><OfficialLink href="https://en.parks.org.il/reserve-park/masada-national-park/">Israel Nature & Parks Authority — Masada</OfficialLink></li>
-          <li><OfficialLink href="https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/">Israel Nature & Parks Authority — Ein Gedi</OfficialLink></li>
-          <li><OfficialLink href="https://en.parks.org.il/reserve-park/qumran-park">Israel Nature & Parks Authority — Qumran</OfficialLink></li>
-          <li><OfficialLink href="https://en.parks.org.il/reserve-park/enot-tsukim-nature-reserve/">Israel Nature & Parks Authority — Einot Tsukim</OfficialLink></li>
-          <li><OfficialLink href="https://www.deadseanovo.co.il/">Moshe Novomeysky Visitor Center — booking (Hebrew)</OfficialLink></li>
-          <li><OfficialLink href="https://www.deadsea.co.il/attractions/?lang=en">Dead Sea regional tourism — activities</OfficialLink></li>
-          <li><OfficialLink href="https://ims.gov.il/en">Israel Meteorological Service — forecast and warnings</OfficialLink></li>
-          <li><OfficialLink href="https://en.parks.org.il/">Israel Nature & Parks Authority — parks and access</OfficialLink></li>
+          <li><OfficialLink href="https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en">Tamar Regional Council - Ein Bokek Central Beach</OfficialLink></li>
+          <li><OfficialLink href="https://www.deadsea.co.il/tracks/ein-bokek/?lang=en">Tamar Regional Council - Nahal Bokek</OfficialLink></li>
+          <li><OfficialLink href="https://en.parks.org.il/reserve-park/masada-national-park/">Israel Nature & Parks Authority - Masada</OfficialLink></li>
+          <li><OfficialLink href="https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/">Israel Nature & Parks Authority - Ein Gedi</OfficialLink></li>
+          <li><OfficialLink href="https://en.parks.org.il/reserve-park/qumran-park">Israel Nature & Parks Authority - Qumran</OfficialLink></li>
+          <li><OfficialLink href="https://en.parks.org.il/reserve-park/enot-tsukim-nature-reserve/">Israel Nature & Parks Authority - Einot Tsukim</OfficialLink></li>
+          <li><OfficialLink href="https://www.deadseanovo.co.il/">Moshe Novomeysky Visitor Center - booking (Hebrew)</OfficialLink></li>
+          <li><OfficialLink href="https://www.deadsea.co.il/attractions/?lang=en">Dead Sea regional tourism - activities</OfficialLink></li>
+          <li><OfficialLink href="https://ims.gov.il/en">Israel Meteorological Service - forecast and warnings</OfficialLink></li>
+          <li><OfficialLink href="https://en.parks.org.il/">Israel Nature & Parks Authority - parks and access</OfficialLink></li>
         </ul>
         <div className="mt-5 border-t pt-4">
           <h3 className="text-sm font-semibold text-foreground">Photograph credits</h3>

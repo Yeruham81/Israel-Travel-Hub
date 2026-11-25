@@ -224,9 +224,9 @@ export const akkoDestinationContent: AttractionDestinationContent = {
           <p className="mt-2 text-sm leading-relaxed">The Visitors Center on Weizmann Street is the easiest starting point for a heritage visit. Compare nearby parking and rail access using the map.</p>
           <ConsentIframe title="Google Maps overview of Old Akko Visitors Center and nearby car parks" src="https://maps.google.com/maps?q=Old%20Akko%20Visitors%20Center%20Weizmann%201%20Akko%20Israel&hl=en&z=15&t=m&output=embed" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-48 w-full rounded-lg border-0 sm:h-52"/>
           <ul className="mt-3 space-y-2 text-sm leading-relaxed">
-            <li><a href={drivingDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko Visitors Center — Weizmann St 1</a></li>
-            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Moat%20Parking%20Old%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Moat car park — free parking</a></li>
-            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Eucalyptus%20Parking%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Eucalyptus car park — check local fees</a></li>
+            <li><a href={drivingDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko Visitors Center - Weizmann St 1</a></li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Moat%20Parking%20Old%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Moat car park - free parking</a></li>
+            <li><a href="https://www.google.com/maps/dir/?api=1&destination=Eucalyptus%20Parking%20Akko%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className={inlineLink}>Eucalyptus car park - check local fees</a></li>
             <li><a href="https://www.google.com/maps/dir/?api=1&destination=Akko%20Train%20Station%20Israel" target="_blank" rel="noopener noreferrer" className={inlineLink}>Akko railway station</a></li>
           </ul>
           <a href={official.faq} target="_blank" rel="noopener noreferrer" className={"mt-3 inline-block text-sm " + inlineLink}>Official arrival and parking information</a>
@@ -336,12 +336,12 @@ export const akkoDestinationContent: AttractionDestinationContent = {
     { label: "Israel travel tips", to: "/travel-blog/israel-travel-tips/", description: "Useful advice before your visit.", icon: "region" },
   ],
   sources: [
-    { label: "Old Akko — official attractions and ticket packages", url: official.attractions },
-    { label: "Old Akko — published opening hours", url: official.hours },
-    { label: "Old Akko — FAQ, ticket inclusions and arrival", url: official.faq },
-    { label: "Old Akko — accessibility", url: official.accessibility },
-    { label: "Old Akko — classic walking route", url: official.oldCityRoute },
-    { label: "UNESCO — Old City of Acre", url: official.unesco },
+    { label: "Old Akko - official attractions and ticket packages", url: official.attractions },
+    { label: "Old Akko - published opening hours", url: official.hours },
+    { label: "Old Akko - FAQ, ticket inclusions and arrival", url: official.faq },
+    { label: "Old Akko - accessibility", url: official.accessibility },
+    { label: "Old Akko - classic walking route", url: official.oldCityRoute },
+    { label: "UNESCO - Old City of Acre", url: official.unesco },
   ],
   photoCredits: <p>
     <strong>Photographs:</strong>{" "}

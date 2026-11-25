@@ -253,11 +253,11 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
   }
 ];
 export const holidayGuideSources = [
-{label:"Ministry of Tourism — holidays in Israel",url:"https://data.gov.il/he/datasets/ministry_of_tourism/holidaysinisrael/38a82e1f-2800-452f-bf70-20c1f4439924"},
-{label:"Israel Railways — trains on holidays",url:"https://rail.co.il/?lan=en&page=holidays-information"},
-{label:"Israeli government — weekly rest and statutory holiday guidance",url:"https://www.gov.il/BlobFolder/generalpage/employment_guides/en/employment_en.pdf"},
-{label:"Israel Airports Authority — Ben Gurion Airport",url:"https://www.iaa.gov.il/en/airports/ben-gurion/"},
-{label:"Hebcal — Israel Jewish holiday dates",url:"https://www.hebcal.com/holidays/?i=on"},
-{label:"Time and Date — holidays and observances",url:"https://www.timeanddate.com/holidays/israel/"},
+{label:"Ministry of Tourism - holidays in Israel",url:"https://data.gov.il/he/datasets/ministry_of_tourism/holidaysinisrael/38a82e1f-2800-452f-bf70-20c1f4439924"},
+{label:"Israel Railways - trains on holidays",url:"https://rail.co.il/?lan=en&page=holidays-information"},
+{label:"Israeli government - weekly rest and statutory holiday guidance",url:"https://www.gov.il/BlobFolder/generalpage/employment_guides/en/employment_en.pdf"},
+{label:"Israel Airports Authority - Ben Gurion Airport",url:"https://www.iaa.gov.il/en/airports/ben-gurion/"},
+{label:"Hebcal - Israel Jewish holiday dates",url:"https://www.hebcal.com/holidays/?i=on"},
+{label:"Time and Date - holidays and observances",url:"https://www.timeanddate.com/holidays/israel/"},
 {label:"Israel Nature and Parks Authority",url:"https://www.parks.org.il/en/"},
 ] as const;

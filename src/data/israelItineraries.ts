@@ -947,11 +947,11 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
 
 export const itineraryIds: ItineraryId[] = ["3", "5", "7", "10"];
 export const itinerarySources = [
-  { label: "Masada National Park — access and visiting rules", url: "https://en.parks.org.il/reserve-park/masada-national-park/" },
-  { label: "Bahá’í Gardens Haifa — visiting arrangements", url: "https://ganbahai.org.il/visit-us-haifa/" },
-  { label: "Israel Railways — services and schedules", url: "https://www.rail.co.il/" },
+  { label: "Masada National Park - access and visiting rules", url: "https://en.parks.org.il/reserve-park/masada-national-park/" },
+  { label: "Bahá’í Gardens Haifa - visiting arrangements", url: "https://ganbahai.org.il/visit-us-haifa/" },
+  { label: "Israel Railways - services and schedules", url: "https://www.rail.co.il/" },
   { label: "Israel public transport trip planner", url: "https://bus.gov.il/en/home" },
-  { label: "Israel Nature and Parks Authority — nature reserve conditions", url: "https://en.parks.org.il/" },
+  { label: "Israel Nature and Parks Authority - nature reserve conditions", url: "https://en.parks.org.il/" },
 ];
 
 /** Keep official references relevant to each actual route, not every destination in the series. */
@@ -961,31 +961,31 @@ export const itinerarySourcesByGuide: Record<ItineraryId, { label: string; url: 
     itinerarySources[2]!,
     itinerarySources[3]!,
     itinerarySources[4]!,
-    { label: "Israel Population and Immigration Authority — ETA-IL entry rules", url: "https://www.gov.il/en/departments/topics/eta-il/govil-landing-page" },
+    { label: "Israel Population and Immigration Authority - ETA-IL entry rules", url: "https://www.gov.il/en/departments/topics/eta-il/govil-landing-page" },
   ],
   "5": [
     itinerarySources[0]!, itinerarySources[1]!, itinerarySources[2]!, itinerarySources[3]!, itinerarySources[4]!,
-    { label: "Caesarea National Park — opening hours and access", url: "https://en.parks.org.il/reserve-park/caesarea-national-park/" },
-    { label: "Israel Population and Immigration Authority — ETA-IL", url: "https://www.gov.il/en/departments/topics/eta-il/govil-landing-page" },
+    { label: "Caesarea National Park - opening hours and access", url: "https://en.parks.org.il/reserve-park/caesarea-national-park/" },
+    { label: "Israel Population and Immigration Authority - ETA-IL", url: "https://www.gov.il/en/departments/topics/eta-il/govil-landing-page" },
   ],
   "7": [
     itinerarySources[0]!, itinerarySources[1]!, itinerarySources[2]!, itinerarySources[3]!, itinerarySources[4]!,
-    { label: "Basilica of the Annunciation — Franciscan sanctuary", url: "https://www.custodia.org/en/sanctuaries/nazareth-basilica-of-the-annunciation/" },
-    { label: "Magdala archaeological park — visitor information", url: "https://www.magdala.org/plan-your-visit" },
-    { label: "Kfar Nahum (Capernaum) National Park — visitor information", url: "https://en.parks.org.il/reserve-park/kfar-nahum-capernaum-national-park/" },
-    { label: "Caesarea National Park — opening hours and access", url: "https://en.parks.org.il/reserve-park/caesarea-national-park/" },
+    { label: "Basilica of the Annunciation - Franciscan sanctuary", url: "https://www.custodia.org/en/sanctuaries/nazareth-basilica-of-the-annunciation/" },
+    { label: "Magdala archaeological park - visitor information", url: "https://www.magdala.org/plan-your-visit" },
+    { label: "Kfar Nahum (Capernaum) National Park - visitor information", url: "https://en.parks.org.il/reserve-park/kfar-nahum-capernaum-national-park/" },
+    { label: "Caesarea National Park - opening hours and access", url: "https://en.parks.org.il/reserve-park/caesarea-national-park/" },
     { label: "Israel entry and ETA-IL information", url: "https://www.gov.il/en/departments/topics/eta-il/govil-landing-page" },
   ],
   "10": [
     itinerarySources[0]!, itinerarySources[1]!, itinerarySources[2]!, itinerarySources[3]!, itinerarySources[4]!,
-    { label: "Basilica of the Annunciation — Franciscan visiting details", url: "https://www.custodia.org/en/sanctuaries/nazareth-basilica-of-the-annunciation/" },
-    { label: "Magdala — archaeological park visitor information", url: "https://www.magdala.org/plan-your-visit" },
-    { label: "Capernaum National Park — visitor information", url: "https://en.parks.org.il/reserve-park/kfar-nahum-capernaum-national-park/" },
-    { label: "Arbel National Park — viewpoint and hiking route access", url: "https://en.parks.org.il/reserve-park/arbel-national-park-and-nature-reserve/" },
-    { label: "Old Akko — heritage-site opening times", url: "https://www.akko.org.il/en/activity-time/" },
-    { label: "Haifa Bahá’í Gardens — self-guided viewpoints and guided tours", url: "https://ganbahai.org.il/visit-us-haifa/" },
-    { label: "Caesarea National Park — opening and last-entry times", url: "https://en.parks.org.il/reserve-park/caesarea-national-park/" },
-    { label: "Timna Park — visitor transport and access", url: "https://parktimna.co.il/en/know-before-your-visit/navigating-timna-park/" },
+    { label: "Basilica of the Annunciation - Franciscan visiting details", url: "https://www.custodia.org/en/sanctuaries/nazareth-basilica-of-the-annunciation/" },
+    { label: "Magdala - archaeological park visitor information", url: "https://www.magdala.org/plan-your-visit" },
+    { label: "Capernaum National Park - visitor information", url: "https://en.parks.org.il/reserve-park/kfar-nahum-capernaum-national-park/" },
+    { label: "Arbel National Park - viewpoint and hiking route access", url: "https://en.parks.org.il/reserve-park/arbel-national-park-and-nature-reserve/" },
+    { label: "Old Akko - heritage-site opening times", url: "https://www.akko.org.il/en/activity-time/" },
+    { label: "Haifa Bahá’í Gardens - self-guided viewpoints and guided tours", url: "https://ganbahai.org.il/visit-us-haifa/" },
+    { label: "Caesarea National Park - opening and last-entry times", url: "https://en.parks.org.il/reserve-park/caesarea-national-park/" },
+    { label: "Timna Park - visitor transport and access", url: "https://parktimna.co.il/en/know-before-your-visit/navigating-timna-park/" },
     { label: "Israel entry and ETA-IL information", url: "https://www.gov.il/en/departments/topics/eta-il/govil-landing-page" },
   ],
 };

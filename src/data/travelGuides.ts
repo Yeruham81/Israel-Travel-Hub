@@ -137,8 +137,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "On 24 March 2026, a proposal concerning app-based rides in private cars passed its first reading in the Knesset. That was a legislative step rather than approval for Uber to begin service. See the Knesset's official announcement for the proposal's recorded status.",
         ],
         externalLinks: [
-          { label: "Uber — official Israel information", href: "https://www.uber.com/il/en/" },
-          { label: "Knesset — March 2026 legislative announcement", href: "https://main.knesset.gov.il/News/PressReleases/pages/press24032026p.aspx" },
+          { label: "Uber - official Israel information", href: "https://www.uber.com/il/en/" },
+          { label: "Knesset - March 2026 legislative announcement", href: "https://main.knesset.gov.il/News/PressReleases/pages/press24032026p.aspx" },
         ],
         sourceIds: ["guide-uber-availability", "guide-lyft-cities", "guide-ridesharing-bill-2026"],
       },
@@ -186,7 +186,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           { text: "private airport transfer", to: "/airport-transfers/" },
         ],
         highlightedLinks: [
-          { label: "Gett — official Ben Gurion Airport taxi instructions", href: "https://www.gett.com/il/airport-en/", context: "On-demand queue, ride codes and advance-booked pickup points." },
+          { label: "Gett - official Ben Gurion Airport taxi instructions", href: "https://www.gett.com/il/airport-en/", context: "On-demand queue, ride codes and advance-booked pickup points." },
         ],
         sourceIds: ["guide-gett", "guide-iaa"],
       },
@@ -330,7 +330,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           ],
         }],
         highlightedLinks: [
-          { label: "Israel Railways — journey planner", href: "https://www.rail.co.il/", context: "Timetables, stations and rail connections." },
+          { label: "Israel Railways - journey planner", href: "https://www.rail.co.il/", context: "Timetables, stations and rail connections." },
           { label: "National public transport journey planner", href: "https://bus.gov.il/en/home", context: "Current bus routes and departures for your travel day." },
         ],
         sourceIds: ["guide-iaa", "israel-rail", "guide-gett"],
@@ -349,7 +349,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           { text: "Ben Gurion Airport arrival guide", to: travelGuidePaths.arrival },
         ],
         highlightedLinks: [
-          { label: "Gett — official airport taxi pickup instructions", href: "https://www.gett.com/il/airport-en/", context: "Where to join the taxi queue and meet pre-booked Gett drivers." },
+          { label: "Gett - official airport taxi pickup instructions", href: "https://www.gett.com/il/airport-en/", context: "Where to join the taxi queue and meet pre-booked Gett drivers." },
         ],
         sourceIds: ["guide-gett", "guide-iaa"],
       },
@@ -621,8 +621,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "For follow-up on checked baggage or items left on an aircraft, contact the airline or its ground handler using the airport's lost-property directory. For belongings lost in the public terminal, use the airport's separate lost-and-found form.",
         ],
         externalLinks: [
-          { label: "Baggage and ground-handler contacts — Israel Airports Authority", href: "https://www.iaa.gov.il/en/airports/ben-gurion/lost-found/" },
-          { label: "Report an item lost in the terminal — airport form", href: "https://www.iaa.gov.il/en/airports/ben-gurion/lost-and-found/" },
+          { label: "Baggage and ground-handler contacts - Israel Airports Authority", href: "https://www.iaa.gov.il/en/airports/ben-gurion/lost-found/" },
+          { label: "Report an item lost in the terminal - airport form", href: "https://www.iaa.gov.il/en/airports/ben-gurion/lost-and-found/" },
         ],
         sourceIds: ["guide-lost-property"],
       },
@@ -826,8 +826,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             inlineLinks: [{ text: "my airport arrival guide", to: travelGuidePaths.arrival }],
             photo: { src: navonPlatform, alt: "Platforms at Jerusalem–Yitzhak Navon railway station" },
             highlightedLinks: [
-              { label: "Israel Railways — journeys, fares and departures", href: "https://www.rail.co.il/", context: "Choose stations and travel date, and check train changes and disruption notices." },
-              { label: "Jerusalem line — free train travel voucher", href: "https://rail.co.il/?lan=en&page=vouchers-jerusalem", context: "Official information and instructions for the currently required advance voucher." },
+              { label: "Israel Railways - journeys, fares and departures", href: "https://www.rail.co.il/", context: "Choose stations and travel date, and check train changes and disruption notices." },
+              { label: "Jerusalem line - free train travel voucher", href: "https://rail.co.il/?lan=en&page=vouchers-jerusalem", context: "Official information and instructions for the currently required advance voucher." },
             ],
             sourceIds: ["israel-rail", "guide-train-nov-2026", "guide-jerusalem-train-voucher"],
           },
@@ -848,7 +848,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Use the fare and validation method accepted by your service. For light rail, validate before boarding.",
             ],
             photo: { src: jerusalemLightRail, alt: "Jerusalem light rail train by a city station" },
-            highlightedLinks: [{ label: "Jerusalem light rail — official service updates", href: "https://j-lrt.co.il/updates/", context: "Operating lines, stations, service notices and planned extensions." }],
+            highlightedLinks: [{ label: "Jerusalem light rail - official service updates", href: "https://j-lrt.co.il/updates/", context: "Operating lines, stations, service notices and planned extensions." }],
             sourceIds: ["jerusalem-light-rail-updates", "guide-red-line", "guide-urban-transit-validation", "guide-haifa-carmelit"],
           },
         ],
@@ -876,7 +876,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Approved apps including Moovit and Rav-Pass can validate eligible journeys. Set up your payment method before travelling and follow the instructions on buses, at rail gates and on light rail. For mobile data during your visit, see my Israel eSIM guide.",
             ],
             inlineLinks: [{ text: "my Israel eSIM guide", to: travelGuidePaths.esim }],
-            highlightedLinks: [{ label: "Rav-Kav Online — visitor instructions", href: "https://ravkavonline.co.il/en/public-transport-in-israel", context: "Where to obtain, load and use Rav-Kav, including fare and transfer guidance." }],
+            highlightedLinks: [{ label: "Rav-Kav Online - visitor instructions", href: "https://ravkavonline.co.il/en/public-transport-in-israel", context: "Where to obtain, load and use Rav-Kav, including fare and transfer guidance." }],
             sourceIds: ["guide-ravkav-2026", "guide-ravkav-visitor", "guide-public-transport-payments"],
           },
           {
@@ -885,7 +885,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "The standard ₪8 fare applies to journeys up to 15 km under the current distance-based system. Eligible city bus and light-rail journeys can include transfers within 90 minutes, provided each leg is correctly validated. For several daily journeys, compare a day pass with individual fares; longer journeys have different prices.",
               "Since January 2026, Egged has accepted contactless international Visa and Mastercard cards and digital wallets on selected services in Eilat, Jerusalem and metropolitan Haifa. This is not a nationwide payment method: it generally covers a full-fare single journey, without the ordinary Rav-Kav or app transfer and discount benefits. For children and reduced-fare tickets, check passenger eligibility and validation rules.",
             ],
-            highlightedLinks: [{ label: "Egged — supported credit-card payment routes", href: "https://www.egged.co.il/en/information-for-passengers/rav-kav-and-payment-apps", context: "The pilot locations, accepted cards and single-ride limitations." }],
+            highlightedLinks: [{ label: "Egged - supported credit-card payment routes", href: "https://www.egged.co.il/en/information-for-passengers/rav-kav-and-payment-apps", context: "The pilot locations, accepted cards and single-ride limitations." }],
             sourceIds: ["guide-select-card-payment", "guide-egged-card-payment-2026", "guide-urban-transit-validation", "guide-ravkav-2026"],
           },
         ],
@@ -991,7 +991,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Compare the total cost of rental, insurance, deposits, fuel, parking and tolls. Check collection hours, especially for Shabbat, and whether the contract covers all intended roads and destinations. Rental terms may restrict entry into some Palestinian Authority areas, including Area A. My car rental guide has the booking details.",
             ],
             inlineLinks: [{ text: "car rental guide", to: "/car-rental/" }],
-            highlightedLinks: [{ label: "Example rental conditions — Hertz Israel", href: "https://www.hertz.co.il/en/GoodToKnow/IsraelContract/", context: "Check your own provider's territorial restrictions and insurance exclusions." }],
+            highlightedLinks: [{ label: "Example rental conditions - Hertz Israel", href: "https://www.hertz.co.il/en/GoodToKnow/IsraelContract/", context: "Check your own provider's territorial restrictions and insurance exclusions." }],
             sourceIds: ["guide-rental-territory"],
           },
           {
@@ -1016,7 +1016,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           { text: "Israel's Calendar of Events", to: "/travel-blog/calendar-of-events/" },
           { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat },
         ],
-        highlightedLinks: [{ label: "Na'im Busofash — weekend network", href: "https://busofash.co.il/", context: "Participating communities, Friday and Saturday stops and schedules." }],
+        highlightedLinks: [{ label: "Na'im Busofash - weekend network", href: "https://busofash.co.il/", context: "Participating communities, Friday and Saturday stops and schedules." }],
         sourceIds: ["guide-weekend-network", "guide-telaviv-transit", "israel-rail"],
       },
       {
@@ -1052,7 +1052,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             paragraphs: [
               "Station lifts, bus equipment, wheelchair places and step-free routes vary. Some intercity accessible services require advance arrangements. Check the actual departure and boarding point, and confirm child seats or luggage capacity with your chosen taxi or private-transfer provider.",
             ],
-            highlightedLinks: [{ label: "Egged — accessibility arrangements", href: "https://www.egged.co.il/en/accessibility-statement", context: "Accessible vehicles, reservation requirements and passenger assistance." }],
+            highlightedLinks: [{ label: "Egged - accessibility arrangements", href: "https://www.egged.co.il/en/accessibility-statement", context: "Accessible vehicles, reservation requirements and passenger assistance." }],
             sourceIds: ["guide-egged-accessibility"],
           },
         ],
@@ -1176,7 +1176,7 @@ telAviv: {
               "Validate each bus boarding and before entering the Red Line, even when a transfer or pass covers the fare. The getting around Israel guide explains wider national fares and day passes.",
             ],
             inlineLinks: [{ text: "getting around Israel guide", to: travelGuidePaths.israel }],
-            externalLinks: [{ label: "Rav-Kav Online — visitor information", href: "https://ravkavonline.co.il/en/public-transport-in-israel" }],
+            externalLinks: [{ label: "Rav-Kav Online - visitor information", href: "https://ravkavonline.co.il/en/public-transport-in-israel" }],
             sourceIds: ["guide-public-transport-payments", "guide-redline-tickets", "guide-ravkav-2026"],
           },
           {
@@ -1185,7 +1185,7 @@ telAviv: {
               "On participating Dan buses, a supported contactless Visa or Mastercard, including eligible foreign cards and digital wallets, pays the published ₪8 fare for one passenger.",
               "This full-fare single journey carries no ordinary 90-minute transfer benefit or personal discounts. A Dan bank-card tap does not cover travel on the Red Line.",
             ],
-            externalLinks: [{ label: "Dan — official card payment rules", href: "https://www.dan.co.il/faq/credit-card-ride-validation" }],
+            externalLinks: [{ label: "Dan - official card payment rules", href: "https://www.dan.co.il/faq/credit-card-ride-validation" }],
             sourceIds: ["guide-dan-bank-card-2026"],
           },
         ],
@@ -1219,8 +1219,8 @@ telAviv: {
             "A bank-card tap on a Dan bus does not provide a valid light-rail ticket. Follow the accepted Red Line ticketing instructions for your journey.",
           ],
           externalLinks: [
-            { label: "NTA — Red Line services and stations", href: "https://www.nta.co.il/en/light-rail/red-line/" },
-            { label: "NTA — buying and validating tickets", href: "https://www.nta.co.il/en/buying-tickets-and-validation-machines/" },
+            { label: "NTA - Red Line services and stations", href: "https://www.nta.co.il/en/light-rail/red-line/" },
+            { label: "NTA - buying and validating tickets", href: "https://www.nta.co.il/en/buying-tickets-and-validation-machines/" },
           ],
           sourceIds: ["guide-red-line-stations-2026", "guide-urban-transit-validation"],
         }],
@@ -1243,7 +1243,7 @@ telAviv: {
           ],
         }],
         inlineLinks: [{ text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" }],
-        externalLinks: [{ label: "Israel Railways — stations and timetables", href: "https://www.rail.co.il/" }],
+        externalLinks: [{ label: "Israel Railways - stations and timetables", href: "https://www.rail.co.il/" }],
         sourceIds: ["israel-rail", "guide-train-nov-2026"],
       },
       {
@@ -1269,7 +1269,7 @@ telAviv: {
           "A rental car is rarely needed for central Tel Aviv sightseeing, but can be useful for trips outside the city. Blue-and-white street parking may require payment or a permit. Check the parking signs and rental desk hours. See my car rental guide for options beyond the city.",
         ],
         inlineLinks: [{ text: "car rental guide", to: "/car-rental/" }],
-        externalLinks: [{ label: "Tel Aviv municipality — bicycle and scooter rules", href: "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/BicycleEnforcement.aspx" }],
+        externalLinks: [{ label: "Tel Aviv municipality - bicycle and scooter rules", href: "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/BicycleEnforcement.aspx" }],
         sourceIds: ["guide-telaviv-bicycle-rules", "guide-telaviv-transit"],
       },
       {
@@ -1292,8 +1292,8 @@ telAviv: {
           ],
         }],
         externalLinks: [
-          { label: "Na'im Busofash — official timetable and routes", href: "https://busofash.co.il/" },
-          { label: "Tel Aviv municipality — weekend network", href: "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" },
+          { label: "Na'im Busofash - official timetable and routes", href: "https://busofash.co.il/" },
+          { label: "Tel Aviv municipality - weekend network", href: "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" },
         ],
         sourceIds: ["guide-weekend-network", "guide-telaviv-weekend-hours", "guide-weekend-711"],
       },
@@ -1306,7 +1306,7 @@ telAviv: {
         inlineLinks: [{ text: "getting around Israel guide", to: travelGuidePaths.israel }],
         externalLinks: [
           { label: "National public transport planner", href: "https://bus.gov.il/en/home" },
-          { label: "Israel Railways — station and service notices", href: "https://www.rail.co.il/" },
+          { label: "Israel Railways - station and service notices", href: "https://www.rail.co.il/" },
         ],
         sourceIds: ["guide-bus-planner", "israel-rail", "guide-egged-accessibility", "guide-red-line-stations-2026"],
       }
