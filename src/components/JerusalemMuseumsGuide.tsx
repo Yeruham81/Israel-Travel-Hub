@@ -241,7 +241,7 @@ export function JerusalemMuseumsGuide(){
       <SectionHeading id="explore-more" title="Explore more of Jerusalem" intro="Continue planning with my Jerusalem city guides, neighbourhoods and day trips."/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=><Link key={item.to} to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20"><img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span></span></Link>)}</div>
     </section>
-    <HomeContactForm guide={neighborhoodTripContactCopy("Jerusalem")}/>
+    <HomeContactForm showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy("Jerusalem")}/>
     <SourcesDisclosure>
       <p className="mb-3 text-sm leading-relaxed">Visitor information is based on official museum and operator pages checked in November 2026. Ticket prices, opening hours, guided-tour schedules and access arrangements may change; confirm details for your dates.</p>
       <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">{museums.map(m=><li key={m.id}><OfficialLink href={m.url}>{m.name}</OfficialLink></li>)}</ul>
