@@ -326,7 +326,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         }]
         : [...decisionNotes.telaviv.faqs]} />
       <StayTripLinks region={cityId} currentPath={info.path} presentation="guide" />
-      <HomeContactForm guide={guideContactCopy(info.title, "accommodation", cityName)} />
+      <HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy(info.title, "accommodation", cityName)} />
       <SourceList
         ids={cityId === "jerusalem" ? [...guide.sourceIds, ...jerusalemStaySourceIds] : guide.sourceIds}
         intro={cityId === "jerusalem" ? "Transport and access information for planning your stay." : "Neighbourhood and accommodation information for planning your stay."}
