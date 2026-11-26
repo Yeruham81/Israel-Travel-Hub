@@ -67,7 +67,7 @@ describe("shared guide hero layout", () => {
       "src/components/TravelGuide.tsx",
       "src/components/AirportJourneyPage.tsx",
       "src/components/AirportRoutePage.tsx",
-      "src/components/AttractionGuidePage.tsx",
+      "src/components/AttractionDestinationPage.tsx",
       "src/components/IsraelItineraryPage.tsx",
       "src/components/PortPage.tsx",
       "src/components/TourCategoryPage.tsx",

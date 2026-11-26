@@ -4,7 +4,7 @@ import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionIds, attractionPath, isRegionalOverview } from "@/data/attractionGuideTypes";
 import { attractionHubCards } from "@/data/attractionsHub";
-import { attractionMeta } from "@/components/AttractionGuidePage";
+import { attractionMeta } from "@/lib/attraction-meta";
 import { filterGuides, guideDirectory } from "@/data/travelGuides";
 import { routeTree } from "@/routeTree.gen";
 

@@ -6,16 +6,11 @@ import { travelGuidePaths } from "@/data/registry";
 const file = (path: string) => readFileSync(path, "utf8");
 
 describe("Attraction On this page contact labels", () => {
-  it("uses Contact me in the shared destination and legacy attraction guides", () => {
+  it("uses Contact me in the shared destination attraction guide", () => {
     const destination = file("src/components/AttractionDestinationPage.tsx");
-    const general = file("src/components/AttractionGuidePage.tsx");
-    const sacred = file("src/components/SacredHillGuideContent.tsx");
     expect(destination).toContain('["contact", "Contact me"]');
-    expect(general).toContain('["contact","Contact me"]');
-    expect(sacred).toContain('["visit-options", "Contact me"]');
     expect(destination).not.toContain('["contact", "Contact"]');
-    expect(general).not.toContain('["contact","Contact Moshe"]');
-    expect(sacred).not.toContain('["visit-options", "Contact Moshe"]');
+    expect(destination).not.toContain('["contact", "Contact Moshe"]');
   });
 
   it("uses first-person contact labels in travel guides", () => {
