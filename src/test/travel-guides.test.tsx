@@ -930,7 +930,7 @@ describe("migrated practical guides", () => {
     ]);
     expect(guide.sections.find(s => s.id === "weekend")!.paragraphs.join(" ")).toMatch(/Line 711.*Terminal 1.*winter and summer/s);
     expect(guide.sections.find(s => s.id === "weekend")!.inlineLinks?.some(link => link.to === travelGuidePaths.shabbat)).toBe(true);
-    expect(guide.sections.find(s => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/pay for one seat.*fare.*suitcases/s);
+    expect(guide.sections.find(s => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/Each passenger pays an individual fare.*fare.*suitcases/s);
     expect(guide.sections.find(s => s.id === "local-sherut")!.inlineLinks?.map(link => link.to)).toEqual([
       travelGuidePaths.israel, travelGuidePaths.telAviv,
     ]);
