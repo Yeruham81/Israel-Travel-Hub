@@ -44,25 +44,25 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
     heading: "Emek Refaim or deeper into Baka?",
     choose: "The German Colony around Emek Refaim suits guests who want cafés and restaurant choices within walking distance of their accommodation.",
     compare: "A property farther south in Baka can feel more residential but usually requires more travel to the Old City and central museums.",
-    arrival: "A hotel on the northern edge and an apartment in southern Baka are not interchangeable taxi destinations. Confirm the entrance and the transport needed for your daily sightseeing.",
+    arrival: "Travel times and taxi drop-off points vary between northern and southern Baka. Confirm the entrance and the transport needed for your daily sightseeing.",
   },
   "telaviv-beachfront": {
-    heading: "A beachfront address does not describe the room",
+    heading: "Beachfront location and room views",
     choose: "HaYarkon Street and the central beach corridor work well for morning swims and walks along the promenade.",
-    compare: "Smaller properties one or two streets inland can provide a different street atmosphere and room format, without a guaranteed sea outlook.",
-    arrival: "Check whether the hotel's door is on HaYarkon Street or a side street. The public beach, road crossings and the exact view category matter more than a generic 'beachfront' filter.",
+    compare: "Smaller hotels a street or two inland offer a different neighborhood atmosphere. Check the room description if you'd like a sea view.",
+    arrival: "Check whether the hotel's door is on HaYarkon Street or a side street. Check the hotel's distance from the beach, road crossings and available sea-view rooms.",
   },
   "telaviv-dizengoff": {
-    heading: "Dizengoff Square is not the whole of Dizengoff Street",
+    heading: "Staying near Dizengoff Square",
     choose: "The square and its nearby blocks make a convenient walking base for cafés, city architecture and routes toward the central beach.",
     compare: "A hotel much farther north on Dizengoff serves a different set of neighborhoods; a central beachfront stay is better for visitors who want the sand immediately nearby.",
-    arrival: "Match the actual house number to the square, not the street name alone. The airport railway stations are inland, so the final connection still needs planning.",
+    arrival: "Check your hotel's street number and its distance from Dizengoff Square. From the airport train station, continue to your hotel by bus or taxi.",
   },
   "telaviv-old-north": {
     heading: "Residential Old North or the lively port?",
     choose: "Side streets in the Old North suit longer stays and access to northern beaches and the Yarkon corridor.",
     compare: "Accommodation beside the port can be lively into the evening. Southern-city sights around Carmel Market and Jaffa take a longer onward journey from the northern waterfront.",
-    arrival: "The port complex is not one hotel entrance. Give the actual street and building number for drop-off, particularly when traveling with children or bulky luggage.",
+    arrival: "Give your driver the full hotel address, particularly when traveling with children or bulky luggage.",
   },
   "telaviv-neve-tzedek": {
     heading: "Historic lanes versus the district's edges",
@@ -74,7 +74,7 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
     heading: "Sleep on Old Jaffa's hill or beside the flea market?",
     choose: "The historic hill offers stone lanes and a different setting near the old port; it can require slopes and steps with luggage.",
     compare: "Near the Clock Tower and flea market, cafés and evening restaurants are closer to many accommodation entrances, but noise can last later.",
-    arrival: "Ask whether a taxi can stop at the actual entrance or whether you must walk uphill through pedestrian lanes. A sea view is room-specific, not a feature of every Jaffa address.",
+    arrival: "Ask whether a taxi can stop at the actual entrance or whether you must walk uphill through pedestrian lanes. Book a sea-view room if you'd like to overlook the Mediterranean.",
   },
   "telaviv-florentin": {
     heading: "The same neighborhood has very different nights",
@@ -86,7 +86,7 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
     heading: "Inside the Yemenite Quarter or on the market edge?",
     choose: "The smaller residential streets of Kerem HaTeimanim put the beach and Carmel Market within the same broader walking district.",
     compare: "Listings on Allenby or Nachalat Binyamin may be more exposed to main-road traffic, market deliveries and evening venues than inner-quarter properties.",
-    arrival: "Find the actual entrance on a street map: a short distance from the market can still involve pedestrian sections and an extra walk with luggage.",
+    arrival: "Locate your accommodation's entrance on a map: a short distance from the market can still involve pedestrian sections and an extra walk with luggage.",
   },
   "telaviv-rothschild": {
     heading: "Which end of Rothschild fits your itinerary?",
@@ -119,7 +119,7 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   "deadsea:spa": {
     heading: "Example: two guests with different spa priorities",
     situation: "One guest wants mineral-water facilities and treatments; the other mainly wants a comfortable hotel and beach time.",
-    decision: "Compare the room-plus-spa entitlement separately for each guest. Compare the treatments included in your package, indoor mineral-pool facilities and access to a supervised beach separately.",
+    decision: "Check which spa facilities and treatments are included for each guest. Compare the treatments included in your package, indoor mineral-pool facilities and access to a supervised beach separately.",
   },
   "deadsea:family": {
     heading: "Example: a toddler and an older child",
@@ -129,7 +129,7 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   "tiberias:family": {
     heading: "Example: a family dividing time between the hotel and Galilee trips",
     situation: "A water-park stay and a central promenade stay are very different when mornings are spent visiting sites around the lake.",
-    decision: "Decide how many full days will be spent at the hotel's own facilities before paying for an activity-heavy format. At Leonardo Club, check the meals and drinks listed in the current written package.",
+    decision: "Consider how much time your family plans to spend at the hotel before booking a resort with extensive leisure facilities. At Leonardo Club, check the meals and drinks listed in the current written package.",
   },
   "tiberias:luxury": {
     heading: "Example: a multigenerational celebration",
@@ -144,7 +144,7 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   "haifa:family": {
     heading: "Example: a family spending half the trip at the beach",
     situation: "A Carmel hotel with an indoor pool offers a hilltop city base; allow travel time to and from the beach.",
-    decision: "Compare total travel effort as well as pool facilities: a seafront hotel may be easier for beach days, while Carmel works better when the family plans viewpoints and city outings.",
+    decision: "Consider the hotel's location, travel times and swimming facilities: a seafront hotel may be easier for beach days, while Carmel works better when the family plans viewpoints and city outings.",
   },
 };
 
