@@ -9,20 +9,20 @@ export const carRentalDescription = "Plan a self-drive trip in Israel: compare c
 export const rentalDecisionRows = [
   ["A stay in central Tel Aviv or Jerusalem", "Walking, public transport and occasional taxis", "Collect a car when you leave the city for your next destination."],
   ["Several days around the Galilee or the Negev", "A rental car for independent exploring", "Choose accommodation with parking and group nearby stops together."],
-  ["One day visiting several attractions", "A rental, an organised tour or a private driver", "Compare the full rental day, collection time, fuel and parking with the alternatives."],
-  ["An airport arrival followed by a road trip", "Airport collection", "Allow time for arrival formalities and confirm collection arrangements for your flight."],
-  ["A relaxed trip with someone else driving", "A private driver or guided tour", "Choose the service that fits your route, pace and need for guiding."],
+  ["One day visiting several attractions", "A rental, an organised tour or a private driver", "Compare the total cost of renting a car, including fuel and parking, with the price of a tour or private driver."],
+  ["An airport arrival followed by a road trip", "Airport collection", "Allow time for passport control and baggage collection, and confirm your rental car pickup time."],
+  ["A relaxed trip with someone else driving", "A private driver or guided tour", "Choose a private driver for flexible transport or a guided tour to learn more about the places you visit."],
 ];
 
 export const rentalCostRows = [
   ["Rental period", "The total for your collection and return times", "Check the charge for a late return or an extra rental day."],
-  ["Included cover", "Damage, theft and third-party cover; the remaining excess", "Read exclusions and compare any optional protection separately."],
-  ["Security deposit", "The amount held on your card", "Keep enough available credit alongside your travel spending."],
-  ["Pickup, return and one-way fees", "Airport charges, another return branch and out-of-hours service", "Compare the final total for the exact locations you choose."],
+  ["Included cover", "Damage and theft protection, third-party insurance and your excess", "Read exclusions and compare any optional protection separately."],
+  ["Security deposit", "The amount held on your card", "Make sure your credit card has enough available credit for the deposit and your travel expenses."],
+  ["Pickup, return and one-way fees", "Airport fees, one-way rental fees and pickup or return outside opening hours", "Compare the total rental cost for your chosen pickup and return locations."],
   ["Mileage and fuel", "Mileage allowance and the fuel-return policy", "Plan your route and check the rate for extra kilometres."],
   ["Drivers and equipment", "Additional or young drivers, child seats and other extras", "Include every driver and essential item in the quotation."],
-  ["Parking, tolls and administration", "Hotel parking, paid car parks and road tolls", "Ask how the supplier bills tolls and what handling fees apply."],
-  ["Taxes and cancellation", "The tax treatment and cancellation terms of your offer", "Keep your entry permit; confirm any tourist VAT exemption and the refund method."],
+  ["Parking, tolls and administration", "Hotel parking, paid car parks and road tolls", "Ask how the rental company charges for toll roads and any additional administrative fees."],
+  ["Taxes and cancellation", "Applicable taxes and cancellation policy", "Keep your entry permit; confirm any tourist VAT exemption and the refund method."],
 ];
 
 export const rentalChecklists = {
@@ -37,7 +37,7 @@ export const rentalChecklists = {
     "Follow your supplier’s return directions and allow time for any airport shuttle.",
     "Return the agreed fuel level and keep your refuelling receipt.",
     "Photograph the parked car, mileage and fuel gauge at handover.",
-    "Take your belongings and obtain the return record or confirmation of the key-drop procedure.",
+    "Collect your belongings and ask for written confirmation that you've returned the car. If you're returning it outside opening hours, follow the key-drop instructions.",
     "Keep the final invoice and check the deposit release with your card issuer and supplier.",
   ],
 };

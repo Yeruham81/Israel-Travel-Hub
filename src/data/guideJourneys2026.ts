@@ -13,8 +13,8 @@ export const journeyDestinationGuides = {
     "updatedAt": "2026-10-20",
     "title": "The Dead Sea: beaches, floating and a practical visitor guide",
     "description": "Plan a Dead Sea visit around Ein Bokek, a managed beach, hotels and desert attractions. Compare northern and southern destinations and arrange the return journey.",
-    "intro": "The Dead Sea combines a hypersaline lake, desert scenery, managed beaches and nearby archaeological sites. The practical choice is not simply whether to visit “the Dead Sea”, but which beach or hotel district you mean. A day at Ein Bokek, a northern beach facility and a Masada-focused outing require different journeys and tickets.",
-    "answer": "For a first independent beach visit, compare the managed public-beach area at Ein Bokek with a named private beach or hotel day package. Use designated supervised access, check current facilities and plan the complete return. The northern shore, Ein Gedi, Masada and the southern hotel district are separate stops, not one walkable attraction.",
+    "intro": "The Dead Sea is famous for its exceptionally salty water, desert scenery, bathing beaches and nearby archaeological sites. Start by choosing which beach or hotel area you'd like to visit. Ein Bokek, the northern beaches and Masada offer different day-trip options.",
+    "answer": "For a first independent beach visit, compare the managed public-beach area at Ein Bokek with a named private beach or hotel day package. Visit a designated beach with lifeguards, check its facilities and arrange your return transport. The northern shore, Ein Gedi, Masada and the southern hotel district are separate stops, not one walkable attraction.",
     "topics": [
       "attractions",
       "destinations",
@@ -71,15 +71,15 @@ export const journeyDestinationGuides = {
         "title": "Understand the lake and the shore",
         "paragraphs": [
           "The Dead Sea lies in the Jordan Rift landscape far below Mediterranean sea level. Its high salt concentration creates the buoyancy for which it is famous. The scenery and shoreline have changed over time, so old photographs and a map pin are not a reliable guide to a safe or currently managed water entrance.",
-          "This guide focuses on visits approached from Jerusalem and destinations on the western side. A trip to the Jordanian shore is a separate country and border itinerary. The hotel and beach facilities around Ein Bokek are also distinct from the northern lake landscape."
+          "This guide focuses on visits approached from Jerusalem and destinations on the western side. The hotel and beach facilities around Ein Bokek are also distinct from the northern lake landscape."
         ]
       },
       {
         "id": "ein-bokek",
         "title": "Ein Bokek: a practical base for a beach day",
         "paragraphs": [
-          "Ein Bokek’s managed public-beach area and promenade sit beside the southern hotel district. Public beach access is different from using a hotel’s pool, changing facilities or spa. Check the exact facilities you intend to use and any parking or equipment charges.",
-          "A nearby hotel does not automatically make its entire beachfront private, nor does public beach access grant use of hotel amenities. For a day package, read which changing room, towel, pool, spa or meal is included. For an overnight stay, compare location and the actual route to the water."
+          "Ein Bokek’s managed public-beach area and promenade sit beside the southern hotel district. Hotel pools, changing facilities and spas may require a separate payment. Check the exact facilities you intend to use and any parking or equipment charges.",
+          "A nearby hotel does not automatically make its entire beachfront private, nor does public beach access grant use of hotel amenities. For a day package, read which changing room, towel, pool, spa or meal is included. If you're staying overnight, consider how far your hotel is from the beach."
         ],
         "links": [
           {
@@ -96,7 +96,7 @@ export const journeyDestinationGuides = {
         "id": "floating",
         "title": "Enjoy the water through designated facilities",
         "paragraphs": [
-          "Use a designated beach while supervision is operating and follow the staff’s instructions. Enter slowly, keep the water away from your face and avoid splashing or diving. Use the provided showers to rinse off. The water experience is different from swimming laps in an ordinary sea.",
+          "Swim only at designated beaches while lifeguards are on duty, and follow their instructions. Enter slowly, keep the water away from your face and avoid splashing or diving. Use the provided showers to rinse off. The Dead Sea is ideal for floating on your back. Avoid swimming on your stomach.",
           "Do not walk onto an unregulated shore or look for an informal mud pool. Unstable ground and sinkholes affect parts of the region. A hotel spa or packaged mud treatment is a separately offered amenity; choose it by the facility and included service rather than expecting the same experience at every beach."
         ]
       },
@@ -105,7 +105,7 @@ export const journeyDestinationGuides = {
         "title": "Add one clear attraction priority",
         "paragraphs": [
           "Masada offers archaeology and a plateau setting, with cable-car and trail arrangements that need their own check. Ein Gedi is a nature reserve with route-specific opening conditions, not a generic swim stop. Qumran adds another archaeological focus, while Qasr el-Yahud is a separate lower-Jordan pilgrimage destination.",
-          "Choose the stop most important to your interests and leave real time for it. An outing that includes a park, a ceremony and a beach may need fewer extra stops rather than a longer list. Admissions and operating windows are separate."
+          "Choose the stop most important to your interests and leave real time for it. An outing that includes a park, a ceremony and a beach may need fewer extra stops rather than a longer list. Each attraction has its own admission fees and opening hours."
         ],
         "links": [
           {
