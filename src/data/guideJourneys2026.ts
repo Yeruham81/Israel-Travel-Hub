@@ -336,7 +336,7 @@ export const journeyDestinationGuides = {
             "href": "https://south-buses.com/?lang=en"
           },
           {
-            "text": ". Rav-Kav passengers must validate on each ride; the operator also describes 90-minute transfers under the ticket rules. "Check your bus fare and "
+            "text": ". Rav-Kav passengers must validate on each ride; the operator also describes 90-minute transfers under the ticket rules. Check your bus fare and "
           },
           {
             "text": "return departure times",
