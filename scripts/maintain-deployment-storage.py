@@ -122,19 +122,22 @@ def maintain_verified(root, run, now):
 
     reachable = set()
     if candidates:
-        for directory, dirs, files in os.walk(root, followlinks=False):
-            base = Path(directory)
-            if any((base / d).is_symlink() for d in dirs):
-                raise ValueError("symlink directory; asset cleanup aborted")
-            for name in files:
-                path = base / name
-                if path.suffix.lower() not in TEXT:
-                    continue
-                if base == assets and name in candidates:
-                    continue
-                if not regular(path):
-                    raise ValueError("unsafe reference source")
-                reachable.update(references(path))
+        # Also protect dependencies of rollback HTML and scripts in the
+        # three retained backups, including the version preceding the oldest.
+        for source in [root] + retained:
+            for directory, dirs, files in os.walk(source, followlinks=False):
+                base = Path(directory)
+                if any((base / d).is_symlink() for d in dirs):
+                    raise ValueError("symlink directory; asset cleanup aborted")
+                for name in files:
+                    path = base / name
+                    if path.suffix.lower() not in TEXT:
+                        continue
+                    if base == assets and name in candidates:
+                        continue
+                    if not regular(path):
+                        raise ValueError("unsafe reference source")
+                    reachable.update(references(path))
         todo = list(reachable)
         while todo:
             n = todo.pop()
