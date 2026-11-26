@@ -62,8 +62,8 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
         <p><a href={official.churchHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the Flagellation church visiting hours</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Ecce Homo Arch and the Lithostrotos" image={{src:"/images/jerusalem/churches/ecce-homo.webp",alt:"Ecce Homo Basilica along Jerusalem's traditional Via Dolorosa route"}}>
-        <p>Continue past the historic <strong>Ecce Homo Arch</strong>. The Sisters of Notre Dame de Sion maintain the nearby Ecce Homo Basilica and the ancient pavement known as the <em>Lithostrotos</em>. These Roman-era remains add archaeological context to the pilgrimage route.</p>
-        <p>The arch and pavement acquired their Christian associations over time. Their location illustrates how the traditions of the Passion became connected to Jerusalem's changing streets.</p>
+        <p>Continue past the historic <strong>Ecce Homo Arch</strong>. The Sisters of Notre Dame de Sion maintain the nearby Ecce Homo Basilica and the ancient pavement known as the <em>Lithostrotos</em>. These remains offer a glimpse of Jerusalem during the Roman period.</p>
+        <p>The arch and pavement acquired their Christian associations over time.</p>
         <p><a href={official.churchHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check Ecce Homo opening hours</a> before planning an interior visit.</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Stations III–V: the turn at Al-Wad" image={{src:"/images/attractions/via-dolorosa-stations-3-5.svg",alt:"Illustration showing the Roman-numeral markers for Stations III to V"}}>
@@ -72,7 +72,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Stations VI–IX: market lanes and the approach to Calvary" image={{src:"/images/attractions/via-dolorosa-stations-6-9.svg",alt:"Illustration of the market passage and Stations VI to IX, including the side-lane detour"}}>
         <p>Follow the westward lane past the traditional place where <strong>Veronica</strong> wiped Jesus' face (VI). At the Khan al-Zeit market junction, Station VII recalls the second fall. Station VIII is marked on a wall along the Al-Khanqa lane, commemorating Jesus speaking to the women of Jerusalem.</p>
-        <p>Station IX is near the <strong>Coptic Orthodox monastery</strong> above the Holy Sepulchre precinct. This stop involves a short detour away from the main market passage. From there, continue toward the church entrance.</p>
+        <p>Station IX is near the <strong>Coptic Orthodox monastery</strong> above the Church of the Holy Sepulchre. A short detour from the market street leads to this station. From there, continue toward the church entrance.</p>
         <p><a href={official.stations} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the Franciscan station descriptions</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Stations X–XIV: inside the Church of the Holy Sepulchre" image={{src:"/images/attractions/old-jerusalem-holy-sepulchre.webp",alt:"Inside the Church of the Holy Sepulchre in Jerusalem"}}>
@@ -85,7 +85,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
   ),
   itineraryContent: (
     <div className="mt-4 space-y-4">
-      <p>The traditional walk follows approximately 600 metres of Old City lanes, with turns, slopes and individual station markers. These visiting options allow time to pause at the landmarks and enter the Holy Sepulchre.</p>
+      <p>The traditional walk follows approximately 600 metres of Old City lanes, with turns, slopes and individual station markers.</p>
       <div className="grid gap-3 md:grid-cols-3" data-testid="via-dolorosa-visit-choices">
         <article className="rounded-xl border bg-card p-4"><p className="text-xs font-bold uppercase tracking-wide text-primary">About 45–60 minutes</p><h3 className="mt-2 text-lg font-semibold">Walk the street stations</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Start near Al-Umariyya School, follow Stations I–IX through the market streets, and reach the Holy Sepulchre entrance.</p></article>
         <article className="rounded-xl border bg-card p-4"><p className="text-xs font-bold uppercase tracking-wide text-primary">About 1.5–2 hours</p><h3 className="mt-2 text-lg font-semibold">All fourteen stations</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Follow the outside stations and continue into Calvary and the Holy Sepulchre, allowing time for brief pauses and the tomb shrine.</p></article>
@@ -140,9 +140,9 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-xl font-semibold">Accessibility and families</h3>
         <div className="mt-3 grid gap-3 text-sm leading-relaxed sm:grid-cols-2">
           <p><strong>Underfoot:</strong> Expect uneven or polished stone paving, steps, sloping lanes and busy market intersections. Use comfortable shoes and allow time for pauses.</p>
-          <p><strong>Wheelchairs and strollers:</strong> Some street segments are more manageable than others. Narrow chapel entrances, the Station IX approach and the raised Calvary chapels may require adapted plans.</p>
+          <p><strong>Wheelchairs and strollers:</strong> Some streets are easier to navigate with a wheelchair or stroller. Narrow chapel entrances and steps near Station IX and Calvary can make wheelchair access difficult.</p>
           <p><strong>With children:</strong> Choose a shorter route focusing on the major visible stations and the church exterior, with breaks in the Christian Quarter.</p>
-          <p><strong>Prayer spaces:</strong> Respect services and posted photography instructions. Groups should coordinate private prayer or religious services separately where necessary.</p>
+          <p><strong>Prayer spaces:</strong> Respect services and posted photography instructions. Groups wishing to arrange private prayer or religious services should contact the relevant church in advance.</p>
         </div>
         <p className="mt-3 text-sm"><Link to="/attractions/old-city-jerusalem/" className={inlineLink}>My Old City guide</Link> explains entrance gates, accessible approaches and nearby facilities.</p>
       </div>
@@ -150,7 +150,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Begin near the eastern end of Via Dolorosa by Lion's Gate and the Flagellation church. Damascus Gate also offers an approach through the Muslim Quarter markets. For a private drop-off, agree on the closest road-accessible gate.</p>
+      <p>Begin near the eastern end of Via Dolorosa by Lion's Gate and the Flagellation church. Damascus Gate also offers an approach through the Muslim Quarter markets. If you're arriving by taxi or private transfer, arrange to be dropped off near the most convenient Old City gate.</p>
       <div className="grid gap-3 md:grid-cols-3" data-testid="via-dolorosa-arrival">
         <article className="rounded-xl border bg-card p-4"><div className="flex items-center gap-2"><Footprints className="size-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">On foot</h3></div><p className="mt-2 text-sm leading-relaxed">From Lion's Gate, walk west toward the Flagellation church and Station I. From Damascus Gate, walk through the market lanes toward the eastern Via Dolorosa.</p></article>
         <article className="rounded-xl border bg-card p-4"><div className="flex items-center gap-2"><BusFront className="size-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Public transport</h3></div><p className="mt-2 text-sm leading-relaxed">Jerusalem's light rail serves the northern approaches near Damascus Gate. Use the <a href={official.transit} target="_blank" rel="noopener noreferrer" className={inlineLink}>journey planner</a> to choose your station and continue on foot.</p></article>
@@ -162,7 +162,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
   historyContent: (
     <div className="mt-4 space-y-3">
       <p><strong>Via Dolorosa</strong> means the “Sorrowful Way.” The traditional fourteen Stations of the Cross commemorate episodes in the Christian accounts and devotional retellings of Jesus' path to crucifixion, death and burial.</p>
-      <p>Christian pilgrims have followed changing routes across Jerusalem for many centuries. Franciscan devotion helped establish the station tradition, while the familiar itinerary and its markers developed gradually through medieval and later periods. The streets and buildings visible today belong to several chapters of Jerusalem's history.</p>
+      <p>Christian pilgrims have followed changing routes across Jerusalem for many centuries. Franciscan devotion helped establish the station tradition, while the familiar itinerary and its markers developed gradually through medieval and later periods. Today's streets and buildings date from different periods in Jerusalem's history.</p>
       <p>The route's meaning is principally devotional: the exact first-century path and the location of Pilate's judgment cannot be identified with certainty from the present street pattern. The Franciscan <a href={official.stations} target="_blank" rel="noopener noreferrer" className={inlineLink}>Terra Sancta Museum station guide</a> explains the history and associated chapels in detail.</p>
       <p>The <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Jerusalem churches guide</Link> places the Via Dolorosa beside other Christian sites across the city, while my <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Old City visitor guide</Link> covers the surrounding quarters and markets.</p>
     </div>

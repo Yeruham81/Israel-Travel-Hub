@@ -23,10 +23,10 @@ export const mountOlivesAttractionUpdate: Partial<Attraction> = {
     { q: "Where is the best Mount of Olives viewpoint?", a: "The familiar panoramic terrace is beside the Seven Arches Hotel, overlooking the Jewish cemetery and Jerusalem's Old City." },
     { q: "How long do I need on the Mount of Olives?", a: "Allow 30–45 minutes for the panorama alone, or around two to three hours for the lookout, Dominus Flevit and Gethsemane with selected church interiors. A longer pilgrimage route takes more time." },
     { q: "Is it free to visit the Mount of Olives?", a: "The outdoor viewpoint is generally free. Pater Noster and the Chapel of the Ascension charge small entrance fees; other churches have their own visiting arrangements. Check the admission table before you go." },
-    { q: "Can I visit the churches on a Sunday?", a: "Some sites have Sunday or limited-day visiting hours. Pater Noster is currently closed on Sundays, and St Mary Magdalene generally welcomes sightseeing visitors on selected weekday and Saturday mornings. The panorama and Gethsemane can still be part of your visit." },
+    { q: "Can I visit the churches on a Sunday?", a: "Some churches are open to visitors only on certain days of the week. Pater Noster is currently closed on Sundays, and St Mary Magdalene generally welcomes sightseeing visitors on selected weekday and Saturday mornings. The panorama and Gethsemane can still be part of your visit." },
     { q: "Can I walk from the Mount of Olives to the Old City?", a: "Yes. From Gethsemane at the foot of the hill you can continue towards Lion's Gate. If you start at the upper lookout, follow the marked downhill route and allow for the slope and church detours." },
     { q: "Is the walk suitable for visitors with limited mobility?", a: "The traditional descent includes steep sections and uneven paths. A comfortable alternative is to reach the upper viewpoint by vehicle and, if you wish, make a separate stop near Gethsemane." },
-    { q: "Can I explore the Mount of Olives without a guided tour?", a: "Yes. The public viewpoint and most church visiting areas can be explored independently during their public hours. A guided tour can add context; a private driver can help arrange transport and pickup locations." },
+    { q: "Can I explore the Mount of Olives without a guided tour?", a: "Yes. The public viewpoint and most church visiting areas can be explored independently during their public hours. A guided tour can help you learn more about the history of the sites, while a private driver can make getting around easier." },
   ],
 };
 
@@ -38,14 +38,14 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     { label: "Combine with", value: "Lion's Gate, Gethsemane and the Old City" },
     { label: "Bus connections", value: "84, 255 or 275, depending on your starting point" },
   ],
-  routeIntro: "You can enjoy the panorama on its own, or make the Mount of Olives the beginning of a day in Jerusalem's Old City. For church visits, it helps to decide in advance whether you want the upper sites near At-Tur as well as those below the lookout.",
+  routeIntro: "You can enjoy the panorama on its own, or make the Mount of Olives the beginning of a day in Jerusalem's Old City. If you're visiting the churches, consider starting with Pater Noster and the Chapel of the Ascension near At-Tur before walking downhill.",
   routes: [
     {
       name: "From the viewpoint to the Old City",
       time: "Around 2–3 hours on the hill, plus Old City time",
       bestFor: "First-time visitors, panoramas and the main Christian sites",
       steps: [
-        "Start at the Seven Arches lookout for a wide view of the Old City. This is an ideal moment to orient yourself before walking into Jerusalem.",
+        "Start at the Seven Arches lookout for a wide view of the Old City. From here, you can identify the main landmarks of the Old City before exploring its streets.",
         "Take the historic Palm Sunday road toward Dominus Flevit, the small church recalling Jesus' tears over Jerusalem.",
         "Continue to Gethsemane and the Church of All Nations at the foot of the hill. The nearby Tomb of Mary is an optional addition.",
         "Cross toward Lion's Gate to continue into the Old City, where you can follow the Via Dolorosa or explore the Christian Quarter.",
@@ -65,7 +65,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
       note: "Pater Noster and St Mary Magdalene are not open every day. Choose your visit day around those two sites if they are important to you.",
     },
   ],
-  stopIntro: "From the open-air terrace to the churches along the slope, each stop has a different character. These are the places I would consider first when planning a visit.",
+  stopIntro: "These are the places I would consider first when planning a visit.",
   stops: [
     {
       name: "The panoramic viewpoint",
@@ -84,13 +84,13 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     {
       name: "Chapel of the Ascension",
       description: "This small domed chapel in At-Tur is a traditional site of the Ascension of Jesus. It stands within a modest walled enclosure, a short distance from Pater Noster; other Christian denominations also maintain Ascension traditions on the hill.",
-      visit: "The small stone-domed chapel is within a walled compound near Pater Noster. Allow time to find the entrance and enjoy a short, contemplative visit.",
+      visit: "The small stone-domed chapel is within a walled compound near Pater Noster. Allow a few minutes to visit the chapel and its courtyard.",
       tipLabel: "Good to pair with",
       image: { src: "/images/jerusalem/mount-of-olives/chapel-of-ascension.webp", alt: "Small stone-domed Chapel of the Ascension in a walled courtyard on the Mount of Olives" },
     },
     {
       name: "Dominus Flevit",
-      description: "The teardrop-shaped Franciscan church marks the Gospel tradition of Jesus weeping over Jerusalem. Architect Antonio Barluzzi designed its altar window to frame a view of the Old City. The small garden and setting invite a quieter pause.",
+      description: "The teardrop-shaped Franciscan church marks the Gospel tradition of Jesus weeping over Jerusalem. Architect Antonio Barluzzi designed its altar window to frame a view of the Old City. The small garden is a peaceful place to enjoy the view.",
       visit: "I recommend allowing time to visit the interior. The window behind the altar is one of the memorable views on the walk.",
       tipLabel: "Worth making time for",
       image: { src: "/images/jerusalem/mount-of-olives/dominus-flevit.webp", alt: "Teardrop-shaped Dominus Flevit Church amid trees on Jerusalem's Mount of Olives" },
@@ -105,14 +105,14 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     {
       name: "Garden of Gethsemane & Church of All Nations",
       description: "At the foot of the hill, Gethsemane is remembered as the place where Jesus prayed before his arrest. The garden's ancient olive trees stand beside the Church of All Nations, also known as the Basilica of the Agony, with its richly decorated façade and atmospheric interior.",
-      visit: "This is a natural final stop before crossing to Lion's Gate. Allow time inside the basilica as well as at the garden railings; services may take place during the day.",
+      visit: "I recommend finishing your Mount of Olives walk at Gethsemane before continuing to Lion's Gate. Allow time inside the basilica as well as at the garden railings; services may take place during the day.",
       tipLabel: "Onward route",
       image: { src: "/images/jerusalem/church-of-all-nations.webp", alt: "Church of All Nations beside the Garden of Gethsemane" },
     },
     {
       name: "Tomb of the Virgin Mary",
       description: "Near Gethsemane, a long stone stairway leads down to the traditional Tomb of Mary, an important pilgrimage church in Eastern Christian tradition. Lamps, icons and the underground setting give it a different atmosphere from the basilica nearby.",
-      visit: "It is only a short addition to a Gethsemane visit. The staircase is substantial, so visitors who prefer to stay at street level may want to enjoy the adjacent sites instead.",
+      visit: "It is only a short addition to a Gethsemane visit. A long staircase leads down to the tomb. Visitors with walking difficulties may prefer to visit Gethsemane and the nearby basilica.",
       tipLabel: "Nearby",
       image: { src: "/images/jerusalem/mount-of-olives/tomb-of-virgin-mary.webp", alt: "Ancient stone staircase leading down to the Tomb of the Virgin Mary near Gethsemane" },
     },
@@ -146,7 +146,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
   practical: [
     { title: "Choose your church day", text: "Pater Noster and St Mary Magdalene have fewer public visiting sessions than the other major stops. If either is important to you, plan around its opening day first and build the rest of the route around it." },
     { title: "Walking comfort", text: "Allow for the slope between the ridge and Gethsemane. The lookout can be enjoyed separately by anyone who would rather travel between upper and lower stops by vehicle." },
-    { title: "Dress and services", text: "Modest clothing is appropriate for the churches. Worship services may take priority over sightseeing, so leave a little flexibility in a tightly timed programme." },
+    { title: "Dress and services", text: "Modest clothing is appropriate for the churches. Allow extra time for church visits, as religious services may limit access." },
     { title: "The view in different light", text: "Morning light illuminates the Old City from the east. Late afternoon can be atmospheric too, especially if the viewpoint is your final stop after a city tour." },
   ],
   historyTitle: "The Mount of Olives in Christian and Jewish tradition",
