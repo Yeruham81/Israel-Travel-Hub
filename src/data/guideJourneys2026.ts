@@ -201,7 +201,7 @@ export const journeyDestinationGuides = {
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
   "description": "Compare bus 231 and 234, licensed private drivers, taxis to Checkpoint 300 and Bethlehem tours. Learn where to get off, which travel documents to bring and how to return to Jerusalem.",
   "intro": "Bethlehem is only a short distance from Jerusalem, but getting there requires some planning. Here's how to travel by bus, taxi or organised tour, and what to check before you leave.",
-  "answer": "For independent travellers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers may use the pedestrian crossing and onward local transport. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
+  "answer": "For independent travellers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers can cross on foot when the checkpoint is open and continue by local taxi. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
   "topics": [
     "transportation",
     "destinations",
@@ -270,7 +270,7 @@ export const journeyDestinationGuides = {
       "paragraphs": [
         "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Drivers and vehicles must have the appropriate permission to enter Bethlehem.",
         "Bring your original passport and any required entry documents. If you're travelling on a US passport, check the State Department's travel advice for current entry and security information.",
-        "A 22 November 2026 announcement reported that Checkpoint 300 would reopen to authorised vehicles and tourist coaches from 23 November. Crossing eligibility, operating hours and security restrictions may still change; confirm your actual route and vehicle permission with the operator before travel."
+        "A 22 November 2026 announcement reported that Checkpoint 300 would reopen to authorised vehicles and tourist coaches from 23 November. Crossing eligibility, operating hours and security restrictions may still change; confirm the crossing arrangements and vehicle permits with your tour or transport operator before travelling."
       ],
       "richParagraphs": [
         [
@@ -299,7 +299,7 @@ export const journeyDestinationGuides = {
             "href": "https://palsawa.com/en/palestinian-news/2026/11/22/bethlehem-crossing-reopens-to-vehicles-and-tour-buses-after-10-month-closure"
           },
           {
-            "text": " from 23 November. Crossing eligibility, operating hours and security restrictions may still change; confirm your actual route and vehicle permission with the operator before travel."
+            "text": " from 23 November. Crossing eligibility, operating hours and security restrictions may still change; confirm the crossing arrangements and vehicle permits with your tour or transport operator before travelling."
           }
         ]
       ],
@@ -312,7 +312,7 @@ export const journeyDestinationGuides = {
       "title": "By bus: choose line 231 or 234",
       "paragraphs": [
         "Buses to Bethlehem leave from the East Jerusalem bus station near Damascus Gate, not Jerusalem Central Bus Station. The Christian Information Center's East Jerusalem bus guide identifies the boarding area.",
-        "South Buses publishes an ₪8 standard cash fare and an ₪8 Rav-Kav fare for journeys up to 15 km. Rav-Kav passengers must validate on each ride; the operator also describes 90-minute transfers under the ticket rules. Check the exact fare and return timetable for your journey."
+        "South Buses publishes an ₪8 standard cash fare and an ₪8 Rav-Kav fare for journeys up to 15 km. Rav-Kav passengers must validate on each ride; the operator also describes 90-minute transfers under the ticket rules. Check your bus fare and return departure times."
       ],
       "richParagraphs": [
         [
@@ -336,10 +336,10 @@ export const journeyDestinationGuides = {
             "href": "https://south-buses.com/?lang=en"
           },
           {
-            "text": ". Rav-Kav passengers must validate on each ride; the operator also describes 90-minute transfers under the ticket rules. Check the exact fare and "
+            "text": ". Rav-Kav passengers must validate on each ride; the operator also describes 90-minute transfers under the ticket rules. "Check your bus fare and "
           },
           {
-            "text": "return timetable for your journey",
+            "text": "return departure times",
             "href": "https://south-buses.com/lines-and-stations/?lang=en"
           },
           {

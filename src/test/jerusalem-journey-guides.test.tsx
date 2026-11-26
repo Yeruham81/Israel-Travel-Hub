@@ -34,7 +34,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(buses).not.toBeNull();
     expect(buses).toHaveTextContent("Bab al-Zaqaq");
     expect(buses).toHaveTextContent("Checkpoint 300");
-    expect(within(buses as HTMLElement).getByRole("link", { name: /return timetable for your journey/ }))
+    expect(within(buses as HTMLElement).getByRole("link", { name: /return departure times/ }))
       .toHaveAttribute("href", "https://south-buses.com/lines-and-stations/?lang=en");
     expect(within(buses as HTMLElement).getByRole("link", { name: /publishes an ₪8 standard cash fare/ }))
       .toHaveAttribute("href", "https://south-buses.com/?lang=en");
@@ -85,7 +85,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(container.textContent).not.toContain("Compare organised Bethlehem tours");
     expect(container.textContent).not.toContain("Prices, reviews and itinerary details are snapshots");
     expect(container.textContent).not.toContain("Starting prices and ratings were checked");
-    expect(within(buses as HTMLElement).getByRole("link", { name: /return timetable for your journey/ }).closest("p")).toHaveTextContent("₪8");
+    expect(within(buses as HTMLElement).getByRole("link", { name: /return departure times/ }).closest("p")).toHaveTextContent("₪8");
     expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /Grotto of the Nativity has separate visiting hours/ })).toHaveAttribute("href", "https://www.cicts.org/bethlehem-basilica-of-the-nativity-cts/");
     expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /Grotto of the Nativity has separate visiting hours/ }).closest("p")).toHaveTextContent("12:30–14:30");
     expect(container.querySelector("#shabbat")).toHaveTextContent("Check both the bus timetable and church visiting hours");
