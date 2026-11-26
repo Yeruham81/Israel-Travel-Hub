@@ -47,8 +47,8 @@ describe("private driver page and inquiry", () => {
     const serviceOverview = screen.getByTestId("driver-service-overview");
     expect(within(serviceOverview).getByRole("heading", { name: "Private driver service in Israel: travel on your own terms" })).toBeInTheDocument();
     expect(within(serviceOverview).getByRole("heading", { name: "Who is a private driver suitable for?" })).toBeInTheDocument();
-    expect(serviceOverview).toHaveTextContent("couples, families with children");
-    expect(serviceOverview).toHaveTextContent("business visitors");
+    expect(serviceOverview).toHaveTextContent("couples, families, groups of friends");
+    expect(serviceOverview).toHaveTextContent("business travellers");
     expect(serviceOverview).toHaveTextContent("licensed tour guiding");
     expect(serviceOverview).toHaveTextContent(/entrance tickets/i);
     expect(serviceOverview.compareDocumentPosition(container.querySelector("#journeys")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
