@@ -907,7 +907,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-sherut", title: "Shared taxis on local routes",
             paragraphs: [
-              "Local sherut minibuses charge individual fares on designated routes. Stops, luggage capacity, payment and Shabbat operation vary. Check the exact route before using one for your journey.",
+              "Local sherut minibuses charge individual fares on designated routes. Stops, luggage capacity, payment and Shabbat operation vary. Check the sherut route and stops before boarding.",
             ],
             sourceIds: ["guide-sherut-regulation"],
           },
@@ -922,7 +922,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-tel-aviv", title: "Tel Aviv and Old Jaffa",
             paragraphs: [
-              "Walk, cycle on suitable routes, or use buses and the Red Line. The railway stations are inland from the beach, so plan the final journey to your hotel. My getting around Tel Aviv guide covers stations, local tickets and weekend buses.",
+              "Walk, cycle on suitable routes, or use buses and the Red Line. Tel Aviv's railway stations are inland, with buses and taxis connecting them to beachfront hotels. My getting around Tel Aviv guide covers stations, local tickets and weekend buses.",
             ],
             photo: { src: telAvivDizengoff, alt: "Dizengoff neighbourhood streets in Tel Aviv" },
             inlineLinks: [{ text: "getting around Tel Aviv guide", to: travelGuidePaths.telAviv }],
@@ -999,7 +999,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "weekends", title: "Shabbat and Jewish holiday travel",
         paragraphs: [
-          "Most regular trains and buses pause before Shabbat begins on Friday and resume after Saturday evening; some holidays have similar service restrictions. Check the exact last and first departures for your route.",
+          "Most regular trains and buses pause before Shabbat begins on Friday and resume after Saturday evening; some holidays have similar service restrictions. Check the last Friday departure and the first service after Shabbat.",
           "Tel Aviv's free Na'im Busofash network operates selected Friday and Saturday routes, while some local sheruts and licensed taxis may be available. See Israel's Calendar of Events for holiday dates and my airport Shabbat transport guide for Line 711 at Terminal 1 and airport taxi alternatives.",
         ],
         inlineLinks: [
@@ -1012,13 +1012,13 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "planning", title: "Popular journeys and practical travel tips",
         paragraphs: [
-          "Plan from your real departure address to the final hotel or attraction, including any walking and transfers. Save the last return trip and your route offline, especially before travel to rural areas, parks or during major events.",
+          "Plan your journey from your starting address to your hotel or attraction, including walking and transfers. Save your route and the last return departure time on your phone, especially before travel to rural areas, parks or during major events.",
         ],
         subsections: [
           {
             id: "israel-popular-journeys", title: "Common intercity routes",
             paragraphs: [
-              "Compare the first practical service for each journey, then open the linked route guide or official planner for the precise travel date.",
+              "Use the route guides and official transport planners to compare travel options for your dates.",
             ],
             tables: [{
               caption: "Four common journeys in Israel",
@@ -1027,7 +1027,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
                 ["Tel Aviv ↔ Jerusalem", "Train or direct intercity bus", "Jerusalem–Yitzhak Navon and onward light rail or bus to the hotel"],
                 ["Ben Gurion Airport → Haifa", "Direct train when running", "Choose the Haifa station nearest your address"],
                 ["Jerusalem → Ein Bokek", "Scheduled Dead Sea bus", "Confirm the resort stop and last return service"],
-                ["Tel Aviv → Tiberias", "Intercity bus", "Confirm the terminal, final stop and return bus"],
+                ["Tel Aviv → Tiberias", "Intercity bus", "Check the departure terminal, destination stop and return timetable"],
               ],
               rowLinks: [
                 { href: "https://bus.gov.il/en/home", label: "Plan Tel Aviv to Jerusalem on the national public transport planner" },
@@ -1040,7 +1040,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-accessibility", title: "Luggage, accessibility and children",
             paragraphs: [
-              "Station lifts, bus equipment, wheelchair places and step-free routes vary. Some intercity accessible services require advance arrangements. Check the actual departure and boarding point, and confirm child seats or luggage capacity with your chosen taxi or private-transfer provider.",
+              "Station lifts, bus equipment, wheelchair places and step-free routes vary. Some intercity accessible services require advance arrangements. Check your departure time and boarding location, and confirm child seats or luggage capacity with your chosen taxi or private-transfer provider.",
             ],
             highlightedLinks: [{ label: "Egged - accessibility arrangements", href: "https://www.egged.co.il/en/accessibility-statement", context: "Accessible vehicles, reservation requirements and passenger assistance." }],
             sourceIds: ["guide-egged-accessibility"],
@@ -1058,8 +1058,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       "For rural travel, review weather, attraction access and offline directions.",
     ],
     faqs: [
-      { q: "Can I travel around Israel without renting a car?", a: "Yes. Trains, buses and light rail serve most major cities, with taxis for final connections. A rental car, arranged tour or private driver is more useful for remote sites and several rural stops." },
-      { q: "Is the train or bus better between Tel Aviv and Jerusalem?", a: "Both are useful. The train arrives at Jerusalem–Yitzhak Navon, outside the Old City, so compare the onward connection to your destination with the direct bus route." },
+      { q: "Can I travel around Israel without renting a car?", a: "Yes. Trains and buses connect major cities, while local buses, light rail and taxis help you reach hotels and attractions. A rental car, arranged tour or private driver is more useful for remote sites and several rural stops." },
+      { q: "Is the train or bus better between Tel Aviv and Jerusalem?", a: "Both are convenient options for travelling between Tel Aviv and Jerusalem. The train arrives at Jerusalem–Yitzhak Navon, outside the Old City, so compare the total journey time to your hotel by train and bus." },
       { q: "Do tourists need an Israeli ID for a Rav-Kav card?", a: "An anonymous Rav-Kav generally requires no Israeli ID or photograph. Buy and load it at a supported point before you travel." },
       { q: "Can I use a foreign credit card on every bus?", a: "No. Contactless Visa or Mastercard payments are accepted on selected Egged buses in Eilat, Jerusalem and metropolitan Haifa. Use a loaded Rav-Kav or approved app for wider network access." },
       { q: "How do ₪8 fares and 90-minute transfers work?", a: "A standard journey up to 15 km costs ₪8. Eligible bus and light-rail transfers within 90 minutes are included when you validate correctly; longer journeys and special products use other fare rules." },
@@ -1081,7 +1081,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { label: "Private Driver", to: "/private-driver-in-israel/", note: "Plan flexible multi-stop journeys." },
       { label: "Car Rental", to: "/car-rental/", note: "Compare vehicles for regional trips." },
       { label: "Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", note: "Rail, taxi and private travel choices." },
-      { label: "Airport to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/", note: "Plan the station and final connection." },
+      { label: "Airport to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/", note: "Choose the closest railway station to your hotel." },
       { label: "Israel eSIM", to: travelGuidePaths.esim, note: "Use maps and tickets on arrival." },
     ],
   },
@@ -1096,7 +1096,7 @@ telAviv: {
     photo: {src: telAvivLightRail, alt: "Tel Aviv light rail tram on the Red Line"},
     facts: [
       { label: "Standard local fare", text: "₪8 up to 15 km, with eligible 90-minute transfers" },
-      { label: "Tel Aviv rail stations", text: "Four inland stations; choose the easiest final connection" },
+      { label: "Tel Aviv rail stations", text: "Four railway stations serving different parts of the city" },
       { label: "Free weekend buses", text: "Na'im Busofash operates selected Friday and Saturday routes", link: { text: "Na'im Busofash", href: "https://busofash.co.il/" } },
     ],
     comparison: {
@@ -1120,7 +1120,7 @@ telAviv: {
         paragraphs: [
           "For central sightseeing, walk between nearby attractions and use buses or light rail for longer connections. Choose a hotel near the areas you will explore most often; my where to stay in Tel Aviv guide explains convenient neighbourhoods.",
           "Old Jaffa and its port, Neve Tzedek and Rothschild Boulevard, and the Carmel Market area each work well as walking clusters. Tel Aviv Port, the northern museums and Old Jaffa are farther apart. See my Jaffa attraction guide and Tel Aviv beaches guide when planning individual stops.",
-          "Allow for summer heat, shade, crossings and step-free access. A taxi is useful with heavy luggage or a long final connection.",
+          "In summer, choose shaded walking routes and check accessibility if needed. Consider a taxi if you're carrying heavy luggage or staying far from the station.",
         ],
         photo: { src: telAvivDizengoff, alt: "Pedestrian-friendly streets in Tel Aviv's Dizengoff area" },
         inlineLinks: [
@@ -1144,7 +1144,7 @@ telAviv: {
       {
         id: "paying", title: "City buses, fares and payment",
         paragraphs: [
-          "City buses cover more Tel Aviv neighbourhoods than the Red Line, connecting beaches, museums, markets and hotels. Check the number and direction at the bus stop, the final walk and the last return service on Fridays.",
+          "City buses cover more Tel Aviv neighbourhoods than the Red Line, connecting beaches, museums, markets and hotels. Check the bus number, direction, walking distance to your destination and last Friday departure.",
           "A standard journey of up to 15 km costs ₪8. With an appropriately validated Rav-Kav or approved mobile payment app, eligible bus and light-rail transfers can be included within 90 minutes. Longer trips and daily passes follow separate fare rules.",
           "Load a Rav-Kav card or register an approved ticketing app before boarding, and validate each journey. Cash to the driver is generally unavailable. Use the national public transport planner for exact stops and departures.",
         ],
@@ -1219,8 +1219,8 @@ telAviv: {
       {
         id: "national-rail", title: "Which Tel Aviv railway station should you use?",
         paragraphs: [
-          "Israel Railways connects Tel Aviv with Ben Gurion Airport and other major cities. All four Tel Aviv mainline stations are inland; choose the one with the best onward route to your destination.",
-          "My Ben Gurion Airport to Tel Aviv guide covers airport connections and the final journey to your hotel.",
+          "Israel Railways connects Tel Aviv with Ben Gurion Airport and other major cities. Choose the Tel Aviv railway station with the most convenient bus or taxi connection to your destination.",
+          "My Ben Gurion Airport to Tel Aviv guide explains how to reach your hotel by train, bus, taxi or private transfer.",
         ],
         tables: [{
           caption: "Tel Aviv railway stations, south to north",
