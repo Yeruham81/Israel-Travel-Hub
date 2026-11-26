@@ -274,7 +274,7 @@ describe("port service catalog", () => {
     expect(cards()).toHaveLength(filterShoreServices(port, { destination: "jerusalem" }).length);
     expect(new Set(cards().map(card => card.dataset["serviceKind"]))).toEqual(new Set(["guided-tour", "private-driver"]));
     expect(screen.queryByRole("navigation", { name: "Filter port services by type" })).not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole("link", { name: "All destinations", exact: true }));
+    fireEvent.click(screen.getByRole("link", { name: /^All destinations$/ }));
     await waitFor(() => expect(router.state.location.search).toEqual({}));
     expect(cards()).toHaveLength(catalogSizes[port]);
   });
