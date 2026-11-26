@@ -1,5 +1,5 @@
 // Public reference rates, refreshed in GitHub Actions without rebuilding or
-// republishing the Lovable site. Never store credentials or customer data here.
+// republishing the website. Never store credentials or customer data here.
 import { readFile, writeFile } from "node:fs/promises";
 
 const officialUrl = "https://www.boi.org.il/PublicApi/GetExchangeRates?asXml=false";

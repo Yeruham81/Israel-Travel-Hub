@@ -1,5 +1,5 @@
 # Search intent review — remaining editorial and commercial landing pages
-Date: 2026-10-18. GitHub-only changes; no Lovable agent or credits.
+Date: 2026-10-18. GitHub-only changes; No external editor agent or credits.
 
 ## Method & evidentiary limits
 - Audited the page templates and source copy in the repository to distinguish destination hub, hotel-area, hotel-category, practical guide, booking/service and attraction intents.
@@ -77,4 +77,4 @@ Date: 2026-10-18. GitHub-only changes; no Lovable agent or credits.
 ## Next verification
 - GitHub Actions full TypeScript, test suite and build success on the final commit.
 - After launch (separate approval), inspect actual SERPs, GSC queries and CTR by URL and device, compare impressions for overlapping title clusters, and revisit each guide for deeper content additions based on measured demand.
-- No site indexing settings, live destination hub design, quote submission, domain changes or Lovable agent activity were included.
+- No site indexing settings, live destination hub design, quote submission, domain changes or external editor-agent activity were included.

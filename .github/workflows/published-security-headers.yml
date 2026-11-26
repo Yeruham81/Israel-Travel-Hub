@@ -9,6 +9,11 @@ on:
     paths:
       - ".github/workflows/published-security-headers.yml"
 
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/published-security-headers.yml"
+
 permissions:
   contents: read
 
@@ -26,11 +31,11 @@ jobs:
           from urllib.error import HTTPError, URLError
           from urllib.parse import urlparse
 
-          origin = "https://israel-taxi-travel.lovable.app"
+          origin = "https://www.israel-taxi.com"
           failures = []
           expected = ["x-content-type-options", "referrer-policy", "permissions-policy"]
 
-          for path, label in [("/", "home SSR"), ("/api/quote-request/", "quote API GET")]:
+          for path, label in [("/", "production home HTML"), ("/api/quote-request/", "quote API GET")]:
               url = origin + path
               req = Request(url, headers={"Accept": "text/html" if path == "/" else "application/json", "User-Agent": "IsraelTravelHub-security-header-check/1.0"})
               try:
@@ -48,17 +53,21 @@ jobs:
                   print(f"{label}: HTTP {status}, host={urlparse(final_url).hostname}")
                   for key in [*expected, "cache-control", "x-frame-options", "content-security-policy", "content-type"]:
                       print(f"  {key}: {headers.get(key, '[missing]')}")
-                  if urlparse(final_url).hostname != "israel-taxi-travel.lovable.app":
+                  if urlparse(final_url).scheme != "https" or urlparse(final_url).netloc != "www.israel-taxi.com":
                       failures.append(f"{label}: unexpected redirect host")
                   for key in expected:
                       if key not in headers:
                           failures.append(f"{label}: missing {key}")
                   if headers.get("x-content-type-options", "").lower() != "nosniff":
                       failures.append(f"{label}: nosniff not set")
-                  if path == "/" and "base-uri 'self'; object-src 'none'" not in headers.get("content-security-policy", ""):
-                      failures.append("Home SSR is missing the non-disruptive baseline CSP")
-                  if path == "/" and "x-frame-options" in headers:
-                      failures.append("Lovable preview must remain embeddable (unexpected X-Frame-Options)")
+                  if path == "/":
+                      csp = {tuple(d.strip().split()) for d in headers.get("content-security-policy", "").split(";") if d.strip()}
+                      if ("base-uri", "'self'") not in csp and ("base-uri", "'none'") not in csp:
+                          failures.append("Production home is missing the baseline base-uri CSP")
+                      if ("object-src", "'none'") not in csp:
+                          failures.append("Production home is missing the baseline object-src CSP")
+                      if headers.get("x-frame-options", "").strip().upper() not in ("SAMEORIGIN", "DENY"):
+                          failures.append("Production home is missing frame protection")
                   if path.startswith("/api/"):
                       if "no-store" not in headers.get("cache-control", ""):
                           failures.append("Quote endpoint GET response must not be publicly cached")

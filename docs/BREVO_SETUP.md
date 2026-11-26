@@ -1,5 +1,7 @@
 # Brevo transactional form email · 21 October 2026
 
+The DNS observations and original integration notes below are historical. Production is now served by Hostinger PHP; keep the deployed endpoint and private configuration intact.
+
 ## Current implementation
 
 All ten contact/quote form pages use the shared same-origin `POST /api/quote-request/` and the server-only Brevo HTTPS API. The existing field validation, required consent, source capture and direct Send action remain. Filling fields does not transmit them. No Nodemailer, SMTP socket, marketing-list subscription, visitor acknowledgement email or Brevo website tracker is used.
@@ -13,15 +15,15 @@ The server builds both readable plain text and escaped HTML, with the source hea
 | From display name | Sanitized name entered by the visitor |
 | Reply-To | Validated visitor email |
 | Sending domain | `israel-taxi.com` |
-| Receiving mailbox | Existing Hostinger Email mailbox |
+| Receiving mailbox | Existing reservations mailbox (verify current email provider separately) |
 
-The server authenticates in the `api-key` request header. Only HTTP 201 with a nonempty `messageId` counts as provider acceptance. That does not guarantee inbox receipt or a booking. Provider bodies, messages, keys and message IDs are not logged or returned. Manual redirects prevent forwarding credentials or enquiry data to another URL and are compatible with Cloudflare Workers.
+The server authenticates in the `api-key` request header. Only HTTP 201 with a nonempty `messageId` counts as provider acceptance. That does not guarantee inbox receipt or a booking. Provider bodies, messages, keys and message IDs are not logged or returned. Manual redirects prevent forwarding credentials or enquiry data to another URL.
 
 ## Brevo account and domain
 
 1. Under **Settings → Senders, Domains, IPs → Domains**, authenticate **israel-taxi.com**, matching the From address. The temporary website domain does not need authentication. A marketing subdomain is optional for a future separate use.
 2. Add the exact account-specific Brevo-code and DKIM records to the authoritative DNS zone, then check authentication in Brevo. Under **Senders**, verify `reservations@israel-taxi.com`; complete any mailbox challenge requested by Brevo. Confirm transactional sending is active and quota is available. No campaign, mailing list, template or embedded form is required.
-3. Under **Settings → SMTP & API → API Keys & MCP**, create a normal API key for this website. Use an API key rather than an SMTP key or MCP key. Store it only in the website's secure runtime Secrets dialog. Never commit it, prefix it with `VITE_`, or paste it into chat/screenshots.
+3. Under **Settings → SMTP & API → API Keys & MCP**, create a normal API key for this website. Use an API key rather than an SMTP key or MCP key. Store it only in the private server-side runtime configuration, outside the public webroot. Never commit it, prefix it with `VITE_`, or paste it into chat/screenshots.
 
 ### DNS verification
 
@@ -37,7 +39,7 @@ The owner added the records in QUIC.cloud. Public DNS on 21 October 2026 showed:
 | MX | `5 mx1.hostinger.com`, `10 mx2.hostinger.com` |
 | Existing SPF TXT | `v=spf1 include:_spf.mail.hostinger.com ~all` |
 
-Both DKIM CNAME targets resolved to public keys. The latest resolver checks show the DMARC policy above without a reporting tag; if Brevo requests its `rua` reporting destination, merge the account-provided tag into that existing policy. Public DNS is not proof that the Brevo account's authentication check has completed. While those nameservers remain authoritative, edits belong in **QUIC.cloud → DNS Zones → israel-taxi.com**. Keep the Hostinger mailbox, MX and existing SPF. Ordinary Brevo shared-IP authentication does not require changing MX/SPF. Do not add a second SPF/DMARC policy or move website records/nameservers. Merge a requested reporting tag into the existing DMARC policy rather than replacing another configured policy.
+Both DKIM CNAME targets resolved to public keys. The latest resolver checks show the DMARC policy above without a reporting tag; if Brevo requests its `rua` reporting destination, merge the account-provided tag into that existing policy. Public DNS is not proof that the Brevo account's authentication check has completed. While those nameservers remain authoritative, edits belong in **QUIC.cloud → DNS Zones → israel-taxi.com**. Preserve the current mail provider's working MX, SPF and DMARC records; the table above records the historical DNS state. Ordinary Brevo shared-IP authentication does not require changing MX/SPF. Do not add a second SPF/DMARC policy or move website records/nameservers. Merge a requested reporting tag into the existing DMARC policy rather than replacing another configured policy.
 
 ## Runtime activation
 
@@ -46,13 +48,13 @@ Both DKIM CNAME targets resolved to public keys. The latest resolver checks show
 | `BREVO_API_KEY` | Normal Brevo API key, server-side only |
 | `QUOTE_DELIVERY_ENABLED` | Exact string `true`; `false` pauses delivery |
 
-Both secret names were previously listed in the project. A listing does not verify their values or validity. `SMTP_PASSWORD` is no longer used by this website. Repository/Actions secrets do not automatically configure managed website runtime secrets. No new backend, hosting migration or Lovable AI prompt is required for this integration.
+SMTP_PASSWORD is no longer used. For the production PHP endpoint, keep the existing private server configuration and secret names required by that implementation; GitHub Actions secrets do not automatically configure the deployed runtime. Do not expose the key in client variables or change working mail settings during static deployments.
 
-`GET /api/quote-request/` returns only `available`. True means the running server can see the key and enabled switch; it does not check account activation, API authorization, sender/domain verification or quota. An authenticated preview may reject anonymous external requests. Public production can serve an older snapshot until the owner publishes updates through the normal deployment controls.
+`GET /api/quote-request/` returns only `available`. True means the running server can see the key and enabled switch; it does not check account activation, API authorization, sender/domain verification or quota. The production PHP endpoint must be verified separately from the SSR implementation and static build.
 
 ## The Authorized IP warning
 
-IP blocking is an additional account-level security restriction: requests must have a valid API key and come from an approved source IP. The request originates at the website server, not the visitor's/home browser IP. There is no confirmed fixed egress IP for the current managed hosting, so **leave optional IP blocking inactive during setup**. Enabling it with an incomplete list can block genuine form delivery. Do not guess IP addresses or authorize broad shared networks.
+IP blocking is an additional account-level security restriction: requests must have a valid API key and come from an approved source IP. The request originates at the website server, not the visitor's/home browser IP. There is no confirmed fixed egress IP for the current production hosting, so **leave optional IP blocking inactive during setup**. Enabling it with an incomplete list can block genuine form delivery. Do not guess IP addresses or authorize broad shared networks.
 
 Brevo documents an initial API learning phase. After 30 days without newly detected IPs, blocking can activate automatically; monitor its security notices and review the learned list. A strict allowlist is appropriate after all actual server egress addresses are confirmed, preferably fixed egress. The list is shared across API/SMTP keys, so account-wide changes can affect other integrations. Store/rotate the key securely and observe its expiry/inactivity policy.
 
@@ -79,4 +81,3 @@ The current verification results are in BUILD_STATUS.md. Tests use mocked Brevo 
 - [API keys](https://help.brevo.com/hc/en-us/articles/209467485-Create-and-manage-your-API-keys)
 - [Authorized IP security](https://help.brevo.com/hc/en-us/articles/5740111683858-Authorize-and-block-IP-addresses-for-API-and-SMTP-security)
 - [QUIC.cloud DNS](https://docs.quic.cloud/cdn/dns/)
-- [Lovable secrets](https://docs.lovable.dev/features/secrets)
