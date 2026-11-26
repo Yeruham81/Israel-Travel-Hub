@@ -1694,7 +1694,7 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
     id: "ds-kayma", cityId: "deadsea", areaId: "deadsea", name: "Kayma by Isrotel Exclusive", style: "Intimate luxury resort · guests aged 10+",
     summary: "A smaller luxury resort in the southern hotel district, with an infinity pool and direct access to the beach. Choose it for a more intimate hotel experience, keeping its minimum guest age in mind.",
     bestFor: "Couples and travelers seeking a quieter luxury stay; guests must be at least ten.",
-    watch: "Confirm the minimum age for every guest, your exact room category and meal inclusions. It is not an option for families with younger children.", sourceId: "hotel-ds-kayma-official",
+    watch: "Confirm the minimum age for every guest, your exact room category and meal inclusions.", sourceId: "hotel-ds-kayma-official",
     resortFacts: { location: "Southern hotel district", beach: "Direct beach access", spa: "Confirm the wellness facilities in your offer", agePolicy: "Hotel welcomes guests aged 10+", children: "Not suitable for children under ten", meals: "Confirm the selected room rate and meal plan" },
   },
   {
@@ -1715,7 +1715,7 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
     id: "ds-nevo", cityId: "deadsea", areaId: "deadsea", name: "Nevo by Isrotel Collection", style: "Full-service resort with Esprit Spa",
     summary: "A substantial Ein Bokek resort combining the Esprit Spa, pools and access to nearby beach services. It suits groups combining time by the water with hotel facilities.",
     bestFor: "First visits and mixed-interest groups looking for a broad resort experience.",
-    watch: "Confirm the route to the beach, the spa access included in your room rate and charges for treatments or specific facilities.", sourceId: "hotel-ds-nevo-official",
+    watch: "Check beach access, which spa facilities your room rate includes and the cost of additional treatments.", sourceId: "hotel-ds-nevo-official",
     resortFacts: { location: "Ein Bokek", beach: "Beach beside the hotel; confirm the access route", spa: "Esprit Spa, mineral-water pools and treatments", agePolicy: "Hotel accepts families; confirm spa age limits", children: "Kids' club and pool facilities; schedules vary", meals: "Meals depend on the selected booking offer" },
   },
   {
@@ -1736,7 +1736,7 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
     id: "ds-vert", cityId: "deadsea", areaId: "deadsea", name: "VERT Dead Sea", style: "Beachfront resort in central Ein Bokek",
     summary: "An AFI resort by the Ein Bokek promenade with beach access, pools, a spa and children's facilities. It suits families who want a hotel base near the central resort area and prefer choosing their meal plan.",
     bestFor: "Families combining beach time, hotel facilities and central Ein Bokek convenience.",
-    watch: "Check the exact room layout, connecting-room confirmation, club schedule and meal plan. A family-hotel label does not mean an all-inclusive rate.", sourceId: "hotel-ds-vert-official",
+    watch: "Check the exact room layout, connecting-room confirmation, club schedule and meal plan. Check whether your booking includes breakfast, half board, full board or an all-inclusive package.", sourceId: "hotel-ds-vert-official",
     resortFacts: { location: "Ein Bokek promenade", beach: "Hotel access to the adjacent beach", spa: "Indoor mineral-water pool, spa and treatments", agePolicy: "Families welcome; check spa age restrictions", children: "Children's club and pool facilities", meals: "Check which meals and drinks the rate includes" },
   },
   {
@@ -1748,24 +1748,24 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
   },
   {
     id: "ds-leonardo-plaza", cityId: "deadsea", areaId: "deadsea", name: "Leonardo Plaza Dead Sea", style: "Southern resort with family-room options",
-    summary: "A resort near Neve Zohar offering family rooms and hotel activities in a more self-contained setting. Compare it when its total rate and room configuration suit your party, allowing for the separate route to the beach.",
+    summary: "A resort near Neve Zohar offering family rooms and hotel activities in a more self-contained setting. Consider this hotel for its family rooms and leisure facilities, and allow time to reach the beach.",
     bestFor: "Families and groups who prioritize room arrangements and a resort-based stay.",
-    watch: "The beach is reached by a pathway or shuttle rather than immediately from the room block. Confirm shuttle hours, connecting rooms, meals and children's activities.", sourceId: "hotel-ds-leonardo-plaza-official",
+    watch: "You can reach the beach on foot or by hotel shuttle. Confirm shuttle hours, connecting rooms, meals and children's activities.", sourceId: "hotel-ds-leonardo-plaza-official",
     resortFacts: { location: "Neve Zohar / southern hotel district", beach: "Pathway or hotel shuttle to the beach", spa: "Hotel spa; check inclusions and minimum ages", agePolicy: "Family hotel; spa rules are separate", children: "Family and connecting rooms; children's activities", meals: "Confirm the meal plan for the selected rate" },
   },
   {
     id: "ds-ein-gedi", cityId: "deadsea", areaId: "deadsea", name: "Ein Gedi Hotel", style: "Inland nature stay with Synergy Spa",
     summary: "A hotel in the Ein Gedi kibbutz setting, with gardens and the Synergy Spa. It is an alternative to Ein Bokek for travelers seeking a nature-focused stay.",
     bestFor: "Visitors prioritizing gardens, the Ein Gedi area and an inland spa retreat.",
-    watch: "Do not assume a room overlooking the Dead Sea includes nearby sea bathing. Plan a separate journey to an operating beach and check nature-reserve access for your dates.", sourceId: "hotel-ds-ein-gedi-official",
+    watch: "For swimming in the Dead Sea, arrange transport to a designated beach. Plan a separate journey to an operating beach and check nature-reserve access for your dates.", sourceId: "hotel-ds-ein-gedi-official",
     resortFacts: { location: "Ein Gedi, north of the main hotel district", beach: "Separate journey to an operating beach", spa: "Synergy Spa with a Dead Sea water pool", agePolicy: "Confirm age rules for the hotel and spa separately", children: "Check room layout and the facilities your family needs", meals: "Check the offer and outside dining options" },
   },
   {
     id: "ds-hi-ein-gedi", cityId: "deadsea", areaId: "deadsea", name: "HI Ein Gedi Hostel", style: "Simple hostel stay near the nature reserve",
-    summary: "An Israel Youth Hostels Association property near Ein Gedi, with private-room options for travelers and groups. It is a practical accommodation alternative for a nature-focused itinerary, with a simpler format than a spa resort.",
+    summary: "An Israel Youth Hostels Association property near Ein Gedi, with private-room options for travelers and groups. A simple accommodation option for travellers planning to explore the Ein Gedi Nature Reserve and surrounding desert.",
     bestFor: "Hikers, independent visitors and groups comparing simpler accommodation.",
-    watch: "This is not a beachfront spa resort. Confirm the room format, reception arrangements, meals and transport to any beach or attraction you intend to visit.", sourceId: "hotel-ds-hi-ein-gedi-official",
-    resortFacts: { location: "Ein Gedi nature-reserve area", beach: "Separate journey to an operating beach", spa: "No resort spa advertised", agePolicy: "Confirm room and group arrangements", children: "Private-room options; no resort activity format", meals: "Confirm breakfast and any additional meals" },
+    watch: "Confirm the room format, reception arrangements, meals and transport to any beach or attraction you intend to visit.", sourceId: "hotel-ds-hi-ein-gedi-official",
+    resortFacts: { location: "Ein Gedi nature-reserve area", beach: "Separate journey to an operating beach", spa: "No resort spa advertised", agePolicy: "Confirm room and group arrangements", children: "Private rooms for independent travellers and families", meals: "Confirm breakfast and any additional meals" },
   },
 ];
 
@@ -1774,15 +1774,15 @@ export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts:
     id: "tib-u-boutique", cityId: "tiberias", areaId: "tiberias", name: "U Boutique Kinneret", style: "Contemporary lakefront boutique hotel",
     summary: "A smaller lakefront hotel with a private beach area, seasonal outdoor pool and spa facilities. It combines a resort setting with a boutique format, and accepts families as well as couples.",
     bestFor: "Couples who want lake access and a contemporary hotel, or families comparing a smaller upscale stay.",
-    watch: "Confirm beach and pool operation, your room's actual outlook, spa access and the meal plan. Lake-view rooms and particular facilities are not implied by every rate.", sourceId: "hotel-tib-u-boutique-official",
+    watch: "Confirm beach and pool operation, your room's actual outlook, spa access and the meal plan. Choose your preferred room view and check which hotel facilities are included in the rate.", sourceId: "hotel-tib-u-boutique-official",
     resortFacts: { location: "Northern edge of the central waterfront", beach: "Private beach area; confirm seasonal access", spa: "Spa facilities; check access and treatment extras", agePolicy: "Families accepted; check individual spa age limits", children: "Seasonal outdoor pool and shallow children's pool", meals: "Check the selected room's meal plan" },
   },
   {
     id: "tib-galei-kinneret", cityId: "tiberias", areaId: "tiberias", name: "Galei Kinneret", style: "Luxury lakeside hotel · guests aged 12+",
-    summary: "A luxury hotel on the southern waterfront with a private beach, pool and spa. Its minimum guest age of 12 makes it a different choice from a resort designed around younger children's activities.",
+    summary: "A luxury hotel on the southern waterfront with a private beach, pool and spa. The hotel welcomes guests aged 12 and over.",
     bestFor: "Couples and eligible older families prioritizing a lakeside hotel and wellness break.",
     watch: "The operator states guests must be 12 or older. Confirm seasonal beach access, spa inclusions, treatments and the exact room category.", sourceId: "hotel-tib-galei-kinneret-official",
-    resortFacts: { location: "Southern waterfront, near the town", beach: "Private beach; seasonal operation", spa: "Spa and pool; confirm access inclusions", agePolicy: "Hotel guests 12+", children: "Not a young-child resort; minimum age 12", meals: "Check meals and dining reservations in the offer" },
+    resortFacts: { location: "Southern waterfront, near the town", beach: "Private beach; seasonal operation", spa: "Spa and pool; confirm access inclusions", agePolicy: "Hotel guests 12+", children: "Minimum guest age: 12", meals: "Check meals and dining reservations in the offer" },
   },
   {
     id: "tib-scots", cityId: "tiberias", areaId: "tiberias", name: "The Scots Hotel", style: "Heritage hotel in restored hospital buildings",
@@ -1795,7 +1795,7 @@ export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts:
     id: "tib-gai-beach", cityId: "tiberias", areaId: "tiberias", name: "Gai Beach Hotel", style: "Lakeside family hotel with a water park",
     summary: "A southern-shore hotel combining a declared swimming beach with a water park. The operator advertises water-park entry for hotel guests, an appealing feature for families who enjoy slides and time by the water.",
     bestFor: "Families planning to spend substantial time at the hotel, beach and water park.",
-    watch: "Confirm the current water-park calendar, separate-swimming sessions, slide restrictions and which facilities operate during your stay. Do not assume year-round water-park opening.", sourceId: "hotel-tib-gai-beach-official",
+    watch: "Confirm the current water-park calendar, separate-swimming sessions, slide restrictions and which facilities operate during your stay. Check the water park's seasonal opening dates before booking.", sourceId: "hotel-tib-gai-beach-official",
     resortFacts: { location: "Southern lakeshore, beyond the central promenade", beach: "Declared beach beside the water park; check operation", spa: "Hotel spa; confirm entry ages and charges", agePolicy: "Families accepted; water attractions have separate rules", children: "Water park with slides and children's areas; seasonal calendar", meals: "Compare the exact breakfast or other board package" },
   },
   {
@@ -1810,35 +1810,35 @@ export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts:
     id: "tib-caesar", cityId: "tiberias", areaId: "tiberias", name: "Caesar Premier Tiberias", style: "Full-service hotel by the promenade",
     summary: "A central promenade hotel with family facilities, an outdoor pool and a spa with a thermal mineral pool. It suits visitors combining hotel time with walks in town; the thermal pool is for guests aged 18 and over.",
     bestFor: "Families and couples seeking a central waterfront base with conventional hotel facilities.",
-    watch: "The 18+ restriction applies to the thermal mineral pool, not the whole hotel. Check outdoor-pool operation, children's facilities, room layout, meals and parking availability.", sourceId: "hotel-tib-caesar-official",
+    watch: "The hotel welcomes families, while the thermal mineral pool is reserved for guests aged 18 and over. Check outdoor-pool operation, children's facilities, room layout, meals and parking availability.", sourceId: "hotel-tib-caesar-official",
     resortFacts: { location: "On the central promenade", beach: "Promenade location; no private beach assumed", spa: "Spa and thermal mineral pool; mineral pool 18+", agePolicy: "Family hotel; thermal mineral pool 18+", children: "Outdoor pool, children's playroom and family-room options", meals: "Check the selected room and board basis" },
   },
   {
     id: "tib-sofia", cityId: "tiberias", areaId: "tiberias", name: "Sofia Hotel Tiberias", style: "City hotel with history, spa and lake views",
     summary: "A hotel on Palmach Street above the lower waterfront, with a historic setting and spa. Compare it when you want a city base with a lake outlook, allowing for the uphill return from the promenade.",
     bestFor: "Couples and city-break visitors who value the hotel's setting and do not need an adjoining beach.",
-    watch: "Ask which rooms actually face the lake, about the walking route and steps, and which spa facilities your rate includes. A lake view is not direct beach access.", sourceId: "hotel-tib-sofia-official",
+    watch: "Ask which rooms actually face the lake, about the walking route and steps, and which spa facilities your rate includes. The hotel is uphill from the waterfront.", sourceId: "hotel-tib-sofia-official",
     resortFacts: { location: "Palmach Street, above the lower waterfront", beach: "Walk down to the shore; no adjoining swimming beach assumed", spa: "Hotel spa; check access, age limits and treatments", agePolicy: "Confirm guest and facility policies for your party", children: "Check room occupancy and facilities for your children's ages", meals: "Compare the selected dining package" },
   },
   {
     id: "tib-emily", cityId: "tiberias", areaId: "tiberias", name: "Emily's Hotel", style: "Small hotel near central Tiberias",
     summary: "A smaller hotel within walking reach of downtown, useful as a base for time in town and trips around the Galilee. Its operator describes a bed-and-breakfast format, with other meals available by advance arrangement at extra cost.",
-    bestFor: "Travelers comparing a smaller base rather than a large activity resort.",
+    bestFor: "Travellers seeking a small hotel near central Tiberias.",
     watch: "Confirm parking availability, the exact room, pool operation if important and the walk to your planned outings. Do not treat proximity to the lake as a private beach.", sourceId: "hotel-tib-emily-official",
     resortFacts: { location: "Near the southern side of downtown", beach: "Near the shore; no private beach assumed", spa: "No resort-spa package assumed; confirm any required facilities", agePolicy: "Check room and guest policies for your party", children: "Confirm room capacity; no large resort activity program assumed", meals: "B&B format; lunch/dinner by advance arrangement at extra cost" },
   },
   {
     id: "tib-tiberia", cityId: "tiberias", areaId: "tiberias", name: "Tiberia Hotel", style: "Small central hotel in a restored building",
-    summary: "A smaller central-hotel option in a restored historic building. Compare the final room total with larger hotels and hostels; being in this group is not a promise of the lowest price.",
+    summary: "A smaller central-hotel option in a restored historic building. Compare the total price of your stay with nearby hotels and hostels.",
     bestFor: "Independent visitors who need a simple town base and can confirm the room's essential facilities.",
     watch: "The primary source is the operator's public profile. Confirm reception and late arrival, bathroom, accessibility, parking and all required facilities directly; a pool or spa is not assumed.", sourceId: "hotel-tib-tiberia-official",
     resortFacts: { location: "Central Tiberias", beach: "Town base; arrange swimming separately", spa: "No spa or pool assumed; confirm required facilities", agePolicy: "Confirm with the property for the selected room", children: "Check occupancy and sleeping arrangements directly", meals: "Confirm whether any meals are included" },
   },
   {
     id: "tib-hostel", cityId: "tiberias", areaId: "tiberias", name: "Tiberias Hostel", style: "Independent hostel · private and shared-room options",
-    summary: "A central hostel between the bus station and waterfront, with a shared kitchen, luggage storage and rooftop space. Compare a private room with a dorm bed as different products, checking the bathroom arrangement for each.",
+    summary: "A central hostel between the bus station and waterfront, with a shared kitchen, luggage storage and rooftop space. Choose between private rooms and dormitory beds, and check the bathroom facilities.",
     bestFor: "Independent travelers prioritizing a central base, shared facilities and flexible self-catering.",
-    watch: "Check private versus shared room and bathroom, reception hours and late-arrival arrangements. Do not assume every room is en suite or that reception operates around the clock.", sourceId: "hotel-tib-hostel-official",
+    watch: "Check private versus shared room and bathroom, reception hours and late-arrival arrangements.", sourceId: "hotel-tib-hostel-official",
     resortFacts: { location: "Central town, between the bus station and lake", beach: "Walk to the waterfront; no private beach", spa: "Hostel facilities, not a spa resort", agePolicy: "Check dorm and private-room policies for your party", children: "Private-room capacity and suitability need confirmation", meals: "Shared kitchen; do not assume a meal package" },
   },
 ];
@@ -1846,14 +1846,14 @@ export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts:
 export const haifaHotelRecommendations: (HotelRecommendation & { resortFacts: ResortHotelFacts })[] = [
   {
     id: "haifa-botanica", cityId: "haifa", areaId: "haifa", name: "Hotel Botanica Haifa", style: "Design-led luxury hotel · operator lists 16+",
-    summary: "A contemporary hotel beside the lower Bahá'í Gardens in the German Colony, with a botanical design theme, spa and seasonal rooftop plunge pool. It is an age-restricted city stay, rather than a family swimming resort.",
+    summary: "A contemporary hotel beside the lower Bahá'í Gardens in the German Colony, with a botanical design theme, spa and seasonal rooftop plunge pool. A stylish city hotel for guests aged 16 and over.",
     bestFor: "Couples and eligible older guests seeking design, dining and a German Colony base.",
-    watch: "Confirm the minimum guest age for your party, your room's outlook and spa inclusions. The rooftop plunge pool is for a dip and relaxation, not a full-size swimming pool; check seasonal operation.", sourceId: "hotel-haifa-botanica-official",
+    watch: "Confirm the minimum guest age for your party, your room's outlook and spa inclusions. The rooftop plunge pool is ideal for cooling off and relaxing. Check its seasonal opening hours.", sourceId: "hotel-haifa-botanica-official",
     resortFacts: { location: "German Colony, beside the lower Bahá'í Gardens", beach: "City location; transport needed for a beach day", spa: "Spa and seasonal rooftop plunge pool; confirm inclusions", agePolicy: "Operator describes guests aged 16+; reconfirm eligibility", children: "Not a young-family hotel; age-restricted admission", meals: "Check breakfast and any other dining inclusions" },
   },
   {
     id: "haifa-dan-carmel", cityId: "haifa", areaId: "haifa", name: "Dan Carmel Haifa", style: "Classic luxury hotel on Mount Carmel",
-    summary: "A substantial hilltop hotel by the Louis Promenade, with gardens, an outdoor pool and a separate children's pool. Choose it for the Carmel setting and hotel facilities; a panoramic bay view does not put the beach beside the hotel.",
+    summary: "A substantial hilltop hotel by the Louis Promenade, with gardens, an outdoor pool and a separate children's pool. Choose it for its Mount Carmel location, panoramic views and hotel facilities. Allow travel time to Haifa's beaches.",
     bestFor: "Couples and families who want an upscale Carmel base and time at the hotel between outings.",
     watch: "Room occupancy differs by category. Confirm beds for every child, pool operation, your exact view, meals and paid parking. Some executive rooms and lounge access have additional age restrictions.", sourceId: "hotel-haifa-dan-carmel-official",
     resortFacts: { location: "Carmel Center, by the Louis Promenade", beach: "Hilltop location; separate journey to the shore", spa: "Outdoor pool, children's pool and wellness facilities; check operation", agePolicy: "Family hotel; certain room floors and lounge access have separate rules", children: "Separate children's pool; selected rooms accommodate families", meals: "Compare the specific breakfast or other board offer" },
@@ -1862,8 +1862,8 @@ export const haifaHotelRecommendations: (HotelRecommendation & { resortFacts: Re
     id: "haifa-schumacher", cityId: "haifa", areaId: "haifa", name: "The Schumacher Hotel", style: "Adults-only heritage boutique hotel",
     summary: "A preserved Templer building and a newer wing in the German Colony, with design-focused rooms, a garden and rooftop sun terrace. The hotel's own site describes it as adults-only.",
     bestFor: "Couples and independent adults prioritizing historic character and a neighborhood hotel.",
-    watch: "Confirm the precise minimum age, building, room layout and any steps. Check where breakfast is served, treatment bookings and parking arrangements rather than assuming full-service resort facilities.", sourceId: "hotel-haifa-schumacher-official",
-    resortFacts: { location: "German Colony, on Lohamei HaGeta'ot Street", beach: "Urban neighborhood base; not a beachfront hotel", spa: "Treatment room and rooftop sun terrace; confirm services", agePolicy: "Operator's own site says adults-only; confirm minimum age", children: "Excluded from the young-family shortlist", meals: "Check breakfast inclusion and where it is served" },
+    watch: "Confirm the precise minimum age, building, room layout and any steps. Check breakfast arrangements, spa treatments and parking availability before booking.", sourceId: "hotel-haifa-schumacher-official",
+    resortFacts: { location: "German Colony, on Lohamei HaGeta'ot Street", beach: "German Colony location, with transport to the beach", spa: "Treatment room and rooftop sun terrace; confirm services", agePolicy: "Operator's own site says adults-only; confirm minimum age", children: "Adults-only hotel", meals: "Check breakfast inclusion and where it is served" },
   },
   {
     id: "haifa-colony", cityId: "haifa", areaId: "haifa", name: "The Colony Hotel Haifa", style: "Historic boutique hotel on Ben Gurion Boulevard",
@@ -1876,35 +1876,35 @@ export const haifaHotelRecommendations: (HotelRecommendation & { resortFacts: Re
     id: "haifa-crowne-plaza", cityId: "haifa", areaId: "haifa", name: "Crowne Plaza Haifa", style: "Carmel hotel with a heated indoor pool",
     summary: "A hotel on Yefe Nof Street near Carmel Center, with a heated indoor pool and health-club facilities. It is a family comparison for visitors who want a hilltop city base and an indoor swimming option.",
     bestFor: "Families and couples prioritizing Carmel Center and indoor-pool facilities over immediate beach access.",
-    watch: "Confirm children's pool-access rules and the exact room or extra-bed arrangement. Check any meal promotions against their terms; do not assume a children's club or play program is included.", sourceId: "hotel-haifa-crowne-plaza-official",
+    watch: "Confirm children's pool-access rules and the exact room or extra-bed arrangement. Check children's meal offers and available activities for your travel dates.", sourceId: "hotel-haifa-crowne-plaza-official",
     resortFacts: { location: "Yefe Nof Street, near Carmel Center", beach: "Hilltop base; arrange transport to the beach", spa: "Heated indoor pool and health club; check facility ages", agePolicy: "Families accepted; minimum check-in age and facility ages differ", children: "Indoor pool; confirm child access and room occupancy", meals: "Check the actual rate; children's dining offers have conditions" },
   },
   {
     id: "haifa-leonardo-plaza", cityId: "haifa", areaId: "haifa", name: "Leonardo Plaza Haifa", style: "Beachfront hotel with family suites",
     summary: "A hotel on Haifa's southern beachfront, with access to the beach from the pool area. The operator lists a pool covered and heated in colder seasons, children's pools and a children's club with a date-dependent schedule.",
     bestFor: "Families who want the promenade, beach and swimming facilities to be a central part of the holiday.",
-    watch: "Confirm the suite layout, balcony or sea view, pool operation and children's club dates. The operator lists club activity on weekends, holidays and in July–August, rather than every day all year.", sourceId: "hotel-haifa-leonardo-plaza-official",
+    watch: "Confirm the suite layout, balcony or sea view, pool operation and children's club dates. The children's club operates on weekends, holidays and during July and August, according to the hotel.", sourceId: "hotel-haifa-leonardo-plaza-official",
     resortFacts: { location: "Southern beachfront, by the beach promenade", beach: "Beach access from the pool area; confirm current swimming arrangements", spa: "Main pool covered and heated in colder seasons; confirm operation", agePolicy: "Family hotel; pool and club rules need age-specific confirmation", children: "Children's pools; club on weekends, holidays and July–August", meals: "Compare breakfast and any other board basis in the offer" },
   },
   {
     id: "haifa-golden-crown", cityId: "haifa", areaId: "haifa", name: "Golden Crown Haifa", style: "Modern lower-city hotel near the German Colony",
-    summary: "A city hotel on Derech Yafo near the German Colony and lower town, useful for restaurants, business and time around the port district. Compare it as a practical urban base rather than a beach resort.",
+    summary: "A city hotel on Derech Yafo near the German Colony and lower town, useful for restaurants, business and time around the port district. A convenient base for exploring downtown Haifa and the German Colony.",
     bestFor: "Couples, independent visitors and business travelers prioritizing a lower-city location.",
-    watch: "Confirm your room's outlook, occupancy, breakfast and parking availability. Check the exact route to your station, port entrance or meeting; being near the port does not establish terminal access.", sourceId: "hotel-haifa-golden-crown-official",
-    resortFacts: { location: "Derech Yafo, near the German Colony and lower city", beach: "Port-district location; not a swimming-beach hotel", spa: "Gym advertised; no resort-spa or pool package assumed", agePolicy: "Confirm the selected room's guest policy", children: "Check room capacity; no children's resort program assumed", meals: "Breakfast offered; verify inclusion in the selected rate" },
+    watch: "Confirm your room's outlook, occupancy, breakfast and parking availability. Check the route from the hotel to your railway station, cruise terminal or pickup point.", sourceId: "hotel-haifa-golden-crown-official",
+    resortFacts: { location: "Derech Yafo, near the German Colony and lower city", beach: "Near the port and downtown Haifa", spa: "Gym advertised; no resort-spa or pool package assumed", agePolicy: "Confirm the selected room's guest policy", children: "Check room capacity; no children's resort program assumed", meals: "Breakfast offered; verify inclusion in the selected rate" },
   },
   {
     id: "haifa-nof", cityId: "haifa", areaId: "haifa", name: "Nof Hotel (Haifa Bay View)", style: "Carmel hotel overlooking Haifa Bay",
-    summary: "Also known as Haifa Bay View, this property is now presented by Nara Hotels as Nof Hotel. Its Carmel location and bay outlook suit an urban sightseeing base, rather than a stay beside a swimming beach.",
+    summary: "Also known as Haifa Bay View, this property is now presented by Nara Hotels as Nof Hotel. Its Mount Carmel location and panoramic bay views make it a convenient base for sightseeing in Haifa.",
     bestFor: "Visitors comparing a Carmel address and bay views with larger full-service hotels.",
     watch: "The booking site may retain the Bay View name. Confirm the property at 101 Hanassi Avenue, the room, meals and parking, and ask directly about any leisure facility essential to your stay.", sourceId: "hotel-haifa-nof-official",
     resortFacts: { location: "101 Hanassi Avenue, Carmel Center", beach: "Bay outlook from the hill; separate journey to the beach", spa: "Gym advertised; confirm any other required leisure facilities", agePolicy: "Confirm room and facility policies for your party", children: "Check the exact room's occupancy and sleeping arrangements", meals: "Check breakfast or dining inclusions in the selected rate" },
   },
   {
-    id: "haifa-port-inn", cityId: "haifa", areaId: "haifa", name: "Port Inn Haifa", style: "Downtown guesthouse · confirm the room format",
-    summary: "A smaller downtown accommodation option on Derech Yafo. Compare its exact room and total with conventional hotels, checking private versus shared facilities and the arrival arrangements directly.",
+    id: "haifa-port-inn", cityId: "haifa", areaId: "haifa", name: "Port Inn Haifa", style: "Downtown guesthouse",
+    summary: "A smaller downtown accommodation option on Derech Yafo. Compare room prices and facilities with nearby hotels, and check the bathroom and check-in arrangements.",
     bestFor: "Independent visitors seeking a lower-city base and willing to verify the room's essential details.",
-    watch: "Current primary information is limited to the operator's indexed public profile. Confirm bathroom, room capacity, meals, accessibility and late arrival; detailed facilities and a permanently low price are not assumed.", sourceId: "hotel-haifa-port-inn-official",
+    watch: "Confirm bathroom facilities, room capacity, meals, accessibility and late check-in before booking.", sourceId: "hotel-haifa-port-inn-official",
     resortFacts: { location: "34 Derech Yafo, lower city", beach: "Downtown base; arrange beach visits separately", spa: "No resort-spa or pool facilities assumed", agePolicy: "Confirm the chosen room's guest policy directly", children: "Confirm capacity and room suitability with the property", meals: "Confirm whether any meals or kitchen access are included" },
   },
   {
@@ -1919,7 +1919,7 @@ export const haifaHotelRecommendations: (HotelRecommendation & { resortFacts: Re
 export const hotelRecommendations: HotelRecommendation[] = [
   {
     id: "herbert-samuel", cityId: "jerusalem", areaId: "downtown", name: "Herbert Samuel Jerusalem", style: "Upscale city hotel",
-    summary: "An upscale base around Shamai Street and Zion Square, close to Ben Yehuda and Jaffa Road. Consider it if you want a substantial hotel in the center rather than moving to the Mamilla luxury district.",
+    summary: "An upscale base around Shamai Street and Zion Square, close to Ben Yehuda and Jaffa Road. A good choice for visitors seeking an upscale hotel in the heart of Jerusalem.",
     bestFor: "Couples and first-time visitors who want an upscale Downtown base.",
     watch: "Confirm the entrance for your taxi, room orientation and which leisure facilities are included in your selected rate.", sourceId: "hotel-herbert-samuel-official",
   },
@@ -1927,17 +1927,17 @@ export const hotelRecommendations: HotelRecommendation[] = [
     id: "arthur", cityId: "jerusalem", areaId: "downtown", name: "Arthur Hotel", style: "Boutique hotel",
     summary: "An Atlas boutique hotel on Dorot Rishonim Street beside the Ben Yehuda pedestrian area. Its period-inspired design and central setting suit travelers who prefer an intimate property and a neighborhood to explore on foot.",
     bestFor: "Couples and independent visitors who value character and a central walking location.",
-    watch: "The pedestrian setting can mean a walk from the car. Ask about noise, parking arrangements and the specific room category.", sourceId: "hotel-arthur-official",
+    watch: "You may need to walk a short distance from the taxi drop-off point to the hotel. Ask about noise, parking arrangements and the specific room category.", sourceId: "hotel-arthur-official",
   },
   {
     id: "mamilla", cityId: "jerusalem", areaId: "mamilla", name: "Mamilla Hotel", style: "Contemporary luxury",
-    summary: "A contemporary luxury hotel beside Mamilla Avenue and the approach to Jaffa Gate. It suits visitors who want to combine Old City sightseeing with a modern hotel setting rather than sleep inside the historic walls.",
+    summary: "A contemporary luxury hotel beside Mamilla Avenue and the approach to Jaffa Gate. Ideal for exploring Jerusalem's Old City while enjoying modern hotel facilities near Jaffa Gate.",
     bestFor: "Couples and short luxury stays focused on Jaffa Gate and the Old City.",
     watch: "Book a view category explicitly if it matters. Confirm breakfast, wellness access and any extra charges for the room offer.", sourceId: "hotel-mamilla-official",
   },
   {
     id: "king-david", cityId: "jerusalem", areaId: "mamilla", name: "King David Jerusalem", style: "Historic landmark luxury",
-    summary: "Dan Hotels' landmark on King David Street combines a historic grand-hotel atmosphere with an outlook toward the Old City. Consider it when the hotel itself is part of your Jerusalem experience, rather than simply a place to sleep.",
+    summary: "Dan Hotels' landmark on King David Street combines a historic grand-hotel atmosphere with an outlook toward the Old City. Choose it for its historic atmosphere, elegant surroundings and views toward the Old City.",
     bestFor: "Travelers who enjoy historic hotels, traditional public spaces and a landmark setting.",
     watch: "Room outlooks vary. Check the walk from the exact entrance and any seasonal restrictions on the facilities you plan to use.", sourceId: "hotel-king-david-official",
   },
@@ -1949,7 +1949,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "sephardic-house", cityId: "jerusalem", areaId: "old-city", name: "The Sephardic House", style: "Jewish Quarter heritage stay",
-    summary: "A heritage hotel on Batei Mahase Street in the Jewish Quarter, close to the Hurva Synagogue and routes toward the Western Wall. Different wings and accommodation categories make the specific room choice important.",
+    summary: "A heritage hotel on Batei Mahase Street in the Jewish Quarter, close to the Hurva Synagogue and routes toward the Western Wall. Compare room categories and locations within the hotel before booking.",
     bestFor: "Jewish heritage trips, pilgrimages and visitors spending substantial time in the Jewish Quarter.",
     watch: "Confirm your wing, room category, arrival gate and the whole walking route with luggage. The surrounding streets may include steps.", sourceId: "hotel-sephardic-house-official",
   },
@@ -1963,7 +1963,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
     id: "market-courtyard", cityId: "jerusalem", areaId: "mahane-yehuda", name: "The Market Courtyard", style: "Apartment-style accommodation",
     summary: "Furnished apartments and suites around a Jerusalem-stone courtyard on HaCarmel Street, beside the market and Nachlaot. It is an alternative to a conventional hotel for travelers who want an independent base and space to settle in.",
     bestFor: "Longer stays and travelers who prefer an apartment-style setting near the market.",
-    watch: "Confirm the exact unit, cooking equipment, stairs, access instructions and any cleaning charge. Market-facing units may have a different noise level.", sourceId: "hotel-market-courtyard-official",
+    watch: "Check your apartment's kitchen equipment, accessibility, check-in instructions and cleaning fees. Apartments facing the market may be noisier.", sourceId: "hotel-market-courtyard-official",
   },
   {
     id: "american-colony", cityId: "jerusalem", areaId: "east-jerusalem", name: "The American Colony Hotel", style: "Historic luxury hotel",
@@ -1985,21 +1985,21 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "rafael-residence", cityId: "jerusalem", areaId: "german-colony", name: "Rafael Residence", style: "Suite-style aparthotel in Baka",
-    summary: "Suites on Bethlehem Road in Baka with separate living space and kitchen facilities described by the property. It is a practical alternative for visitors who want a residential base and more independence over a longer stay.",
+    summary: "Suites on Bethlehem Road in Baka with separate living space and kitchen facilities described by the property. A convenient option for longer stays in a residential Jerusalem neighborhood.",
     bestFor: "Families and longer visits where living space and preparing some meals matter.",
     watch: "Confirm the exact suite layout, kitchen equipment, parking and late check-in arrangements. Plan buses or taxis for some trips to central attractions.", sourceId: "hotel-rafael-residence-official",
   },
   {
     id: "tlv-carlton", cityId: "telaviv", areaId: "telaviv-beachfront", name: "Carlton Tel Aviv", style: "Luxury hotel by the northern central beaches",
-    summary: "A substantial seafront hotel near Gordon Beach and the marina, suited to visitors who want the coast to be central to their stay. Its different room categories include different outlooks, so choosing the hotel and choosing a sea-facing room are separate decisions.",
-    bestFor: "Couples and visitors seeking a full-service coastal hotel rather than a small inland boutique stay.",
+    summary: "A substantial seafront hotel near Gordon Beach and the marina, suited to visitors who want the coast to be central to their stay. Choose a sea-facing room if you'd like to enjoy Mediterranean views from your hotel.",
+    bestFor: "Couples and visitors seeking a full-service beachfront hotel.",
     watch: "Compare full, side and other room outlooks. Confirm breakfast, parking and leisure access for the exact offer.", sourceId: "hotel-tlv-carlton-official",
   },
   {
     id: "tlv-embassy", cityId: "telaviv", areaId: "telaviv-beachfront", name: "Embassy Hotel Tel Aviv", style: "Retro-inspired boutique hotel near the beach",
     summary: "A smaller hotel on Shalom Aleichem Street at HaYarkon, close to the central promenade. Its retro-inspired interiors and location near the sea offer an alternative to a large beachfront resort.",
     bestFor: "Independent travelers who want central beach access and a smaller hotel atmosphere.",
-    watch: "Check the room's outlook and size. A location near the coast does not guarantee a sea view or the facilities of a large resort.", sourceId: "hotel-tlv-embassy-official",
+    watch: "Check the room's outlook and size. Check available room views and hotel facilities before booking.", sourceId: "hotel-tlv-embassy-official",
   },
   {
     id: "tlv-backstage", cityId: "telaviv", areaId: "telaviv-dizengoff", name: "Backstage Hotel", style: "Theater-inspired boutique hotel",
@@ -2009,15 +2009,15 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-cinema", cityId: "telaviv", areaId: "telaviv-dizengoff", name: "Cinema Hotel", style: "Historic cinema building on Dizengoff Square",
-    summary: "An Atlas hotel in the former Esther cinema beside Dizengoff Square. Film memorabilia and the building's architecture make it a characterful central base, particularly for visitors who want the square itself as their point of orientation.",
+    summary: "An Atlas hotel in the former Esther cinema beside Dizengoff Square. Film memorabilia and the building's historic architecture create a distinctive hotel experience in the heart of Tel Aviv.",
     bestFor: "Architecture and film enthusiasts, and first-time visitors seeking a recognizable central location.",
     watch: "Check the room's size, outlook and noise exposure. Confirm where a taxi can stop and any rooftop opening arrangements.", sourceId: "hotel-tlv-cinema-official",
   },
   {
     id: "tlv-port-tower", cityId: "telaviv", areaId: "telaviv-old-north", name: "Port Tower by Isrotel Design", style: "Contemporary tower hotel near Tel Aviv Port",
-    summary: "Isrotel's modern hotel at the northern end of HaYarkon Street offers easy access to the port and northern waterfront. Its tower format offers a different stay from the smaller boutique properties farther south in the Old North.",
+    summary: "Isrotel's modern hotel at the northern end of HaYarkon Street offers easy access to the port and northern waterfront.",
     bestFor: "Visitors focused on the port, northern coast and a contemporary hotel setting.",
-    watch: "Check your room's actual view and the walk to your preferred beach. Confirm any pool, meal and parking conditions for your dates.", sourceId: "hotel-tlv-port-tower-official",
+    watch: "Check your room's view and the walking distance to your preferred beach. Confirm any pool, meal and parking conditions for your dates.", sourceId: "hotel-tlv-port-tower-official",
   },
   {
     id: "tlv-melody", cityId: "telaviv", areaId: "telaviv-old-north", name: "Melody Hotel", style: "Boutique hotel near Independence Park",
@@ -2033,7 +2033,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-ruby", cityId: "telaviv", areaId: "telaviv-neve-tzedek", name: "Ruby", style: "Small independent stay near Neve Tzedek",
-    summary: "A small property in the Yehuda HaLevi area near Neve Tzedek, with a more independent, house-like format than a large full-service hotel. Its position connects the historic neighborhood with the streets around lower Rothschild.",
+    summary: "A small, intimate property in the Yehuda HaLevi area near Neve Tzedek, suited to independent travellers. Its position connects the historic neighborhood with the streets around lower Rothschild.",
     bestFor: "Independent travelers who enjoy a smaller property and exploring nearby cafés and neighborhoods.",
     watch: "Check the current arrival process, staff availability, shared facilities and your room layout. Confirm the exact entrance before a late arrival.", sourceId: "hotel-tlv-ruby-official",
   },
@@ -2051,33 +2051,33 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   {
     id: "tlv-albi-florentin", cityId: "telaviv", areaId: "telaviv-florentin", name: "Albi Florentin", style: "Small hotel with digital self check-in",
-    summary: "A Florentin property with a technology-led arrival format, described by its operator as using self check-in. Consider it for a more independent neighbourhood stay; check the staffing and services you need.",
-    bestFor: "Travelers comfortable with digital arrival instructions and a small urban property.",
+    summary: "A small hotel in Florentin offering digital self check-in. Consider it for a more independent neighbourhood stay; check the staffing and services you need.",
+    bestFor: "Independent travellers who prefer a small hotel with self check-in.",
     watch: "Obtain check-in instructions before arrival and confirm support availability, luggage storage and the room's noise exposure.", sourceId: "hotel-tlv-albi-florentin-official",
   },
   {
     id: "tlv-florentin-house", cityId: "telaviv", areaId: "telaviv-florentin", name: "Florentin House by HOMY", style: "Neighborhood stay on Florentin Street",
     summary: "A small-property option on Florentin Street listed by HOMY, placing you within the neighborhood's everyday café and nightlife setting. Check the current room descriptions and accommodation format.",
     bestFor: "Independent visitors who want Florentin itself as their base for the southern city.",
-    watch: "Confirm the exact room or unit, private facilities, check-in process and sound insulation. Do not assume an older hostel listing describes the current offer.", sourceId: "hotel-tlv-florentin-house-official",
+    watch: "Confirm the exact room or unit, private facilities, check-in process and sound insulation. Check the property's current room descriptions before booking.", sourceId: "hotel-tlv-florentin-house-official",
   },
   {
     id: "tlv-poli-house", cityId: "telaviv", areaId: "telaviv-kerem", name: "Poli House by AFI Hotels", style: "Design hotel by the Carmel Market district",
     summary: "An AFI design hotel by the Allenby and Nachalat Binyamin market-side streets. It offers access to Carmel Market and the Yemenite Quarter, while its busier edge location differs from a room within the quarter's small residential lanes.",
     bestFor: "Couples and city-break visitors who want design and nearby market food and nightlife.",
-    watch: "Some room categories are compact. Confirm the exact size, balcony if offered, noise exposure and any rooftop or leisure access included.", sourceId: "hotel-tlv-poli-house-official",
+    watch: "Some room categories are compact. Check room size, balcony availability, noise levels and access to rooftop facilities.", sourceId: "hotel-tlv-poli-house-official",
   },
   {
     id: "tlv-assemblage", cityId: "telaviv", areaId: "telaviv-kerem", name: "Assemblage Boutique", style: "Historic boutique stay on the quarter's northern edge",
     summary: "A small property in a preserved building at 48 Allenby Street, near the northern edge of Kerem HaTeimanim. Its rooms, studios and suites offer different layouts, with access toward both the beach and Carmel Market from a busy central street.",
     bestFor: "Couples and independent visitors who enjoy historic buildings and a central market-and-beach base.",
-    watch: "The operator states that the building has no lift. Confirm stairs, the self-service check-in process, exact room layout and street-facing versus courtyard outlook.", sourceId: "hotel-tlv-assemblage-official",
+    watch: "The operator states that the building has no lift. Check the stairs, self check-in arrangements, room layout and whether your room faces the street or courtyard.", sourceId: "hotel-tlv-assemblage-official",
   },
   {
     id: "tlv-the-norman", cityId: "telaviv", areaId: "telaviv-rothschild", name: "The Norman Tel Aviv", style: "Luxury heritage hotel off Rothschild",
-    summary: "A luxury property in restored buildings on Nachmani Street, near Rothschild Boulevard rather than directly on it. The historic setting suits visitors who want a distinctive hotel alongside access to the central city's restaurants and architecture.",
+    summary: "A luxury hotel in restored historic buildings on Nachmani Street, a short walk from Rothschild Boulevard. The historic setting suits visitors who want a distinctive hotel alongside access to the central city's restaurants and architecture.",
     bestFor: "Couples and luxury city stays where the property itself is part of the trip.",
-    watch: "Confirm the exact building and room category, and check breakfast, leisure access and any additional charges in your selected offer.", sourceId: "hotel-tlv-the-norman-official",
+    watch: "Check your room's location, breakfast, access to leisure facilities and any additional charges.", sourceId: "hotel-tlv-the-norman-official",
   },
   {
     id: "tlv-65-rothschild", cityId: "telaviv", areaId: "telaviv-rothschild", name: "65 Hotel Rothschild", style: "Boutique hotel directly on Rothschild Boulevard",
@@ -2231,15 +2231,15 @@ export const routeFaqs: { q: string; a: string }[] = [
   },
   {
     q: "We are more than four people with lots of luggage. What should I book?",
-    a: "Ask for a group quote and state the exact number of passengers, suitcases and any oversized items such as strollers or golf bags. Don't assume a standard car fits; confirm the vehicle type in writing.",
+    a: "Send me your passenger count, number of suitcases and details of any large items such as strollers or golf bags. I'll confirm a suitable vehicle for your group and luggage.",
   },
   {
     q: "Can I travel on Shabbat or holidays?",
-    a: "Check Israel Railways' current service for your exact date before relying on the train. For a transfer or taxi, confirm the provider's availability and any night, weekend or holiday charges for your arrival time.",
+    a: "Check Israel Railways' timetable for your travel date. For a transfer or taxi, confirm the provider's availability and any night, weekend or holiday charges for your arrival time.",
   },
   {
     q: "Is there a train instead?",
-    a: "Yes, Israel Railways serves the airport and Jerusalem. Schedules and fares change, so check the official Israel Railways site for your travel date and consider the extra step from the station to your accommodation.",
+    a: "Yes, Israel Railways serves the airport and Jerusalem. Check train times and fares on the Israel Railways website, and plan the journey from the station to your hotel.",
   },
 ];
 
@@ -2289,13 +2289,13 @@ export const providerLinks: ProviderLink[] = [
       relationship: partner ? "booking_platform" : "independent_operator", operatorId: operator.id, ...(partner ? { partnerId: partner.id } : {}),
       mode: "provider_redirect", title: product.title, summary: product.summary,
       ctaLabel: `View on ${partner?.name || operator.name}`, url: trackingUrl || product.publicUrl, isAffiliate: Boolean(trackingUrl), sourceId: product.id,
-      reentryNote: "Select your actual sailing date and party on the booking site. Confirm the port and return arrangements before booking.",
-      confirm: ["Actual sailing date and port-call times", "Exact port meeting point", "Guide, group format and inclusions", "Site access and admission fees", "Return arrangements and cancellation terms"],
+      reentryNote: "Enter your cruise date and number of passengers on the booking site. Confirm the port and return arrangements before booking.",
+      confirm: ["Cruise date and hours in port", "Exact port meeting point", "Guide, group format and inclusions", "Site access and admission fees", "Return arrangements and cancellation terms"],
     };
   }),
   ...([
-    ["airalo", "Airalo", "Compare Israel package sizes, validity and the inclusions of the exact plan."],
-    ["saily", "Saily", "Compare data packages and any optional call/text product separately; check the number's country."],
+    ["airalo", "Airalo", "Compare data allowances, validity periods and included services."],
+    ["saily", "Saily", "Compare data plans, optional calls and SMS, and the country of any included phone number."],
     ["yesim", "Yesim", "Compare fixed data with unlimited packages and read the fair-use speed conditions."],
     ["gigsky", "GigSky", "Choose Israel in the app or site; check country coverage if considering a regional or wider-travel package."],
     ["drimsim", "Drimsim", "Compare pay-as-you-use data costs and setup terms with a fixed-data travel package."],
@@ -2304,7 +2304,7 @@ export const providerLinks: ProviderLink[] = [
     const trackingUrl = affiliateConfig[id]?.trackingUrl;
     return { id, pageIds: ["guide-esim"], providerName, relationship: "booking_platform", partnerId, mode: "provider_redirect", title: `${providerName} for Israel`, summary,
       ctaLabel: `Check plans on ${providerName}`, url: trackingUrl || travelGuideSources.find((source) => source.id === `guide-esim-${partnerId}`)!.url, isAffiliate: Boolean(trackingUrl), sourceId: `guide-esim-${partnerId}`,
-      confirm: ["Exact device compatibility", "Country coverage and activation", "Data and validity", "Hotspot and fair-use rules", "Final price and refund terms"], reentryNote: "Choose and purchase the plan on the provider's site. No live price, network speed or completed purchase is verified here." };
+      confirm: ["Exact device compatibility", "Country coverage and activation", "Data and validity", "Hotspot and fair-use rules", "Final price and refund terms"], reentryNote: "Choose your preferred plan and check the latest prices and terms on the provider's website." };
   }),
   ...([
     ["kiwitaxi", "Kiwitaxi", "kiwitaxi-airport", "Choose your destination and vehicle on Kiwitaxi's Ben Gurion Airport page."],
@@ -2317,7 +2317,7 @@ export const providerLinks: ProviderLink[] = [
     return { id, pageIds: ["airport-private-transfers", ...airportTransferRoutes.map((route) => `airport-route-${route.id}`)], providerName, relationship: "booking_platform", partnerId, mode: "provider_redirect",
       title: `${providerName} airport transfers`, summary, ctaLabel: `Check transfers on ${providerName}`,
       url: trackingUrl || sources.find((source) => source.id === sourceId)!.url, isAffiliate: Boolean(trackingUrl),
-      reentryNote: "Enter Ben Gurion Airport, your exact destination, date, passengers and luggage on the provider's site.",
+      reentryNote: "Enter your airport pickup, destination, travel date, passenger count and luggage details.",
       confirm: ["Route and pickup time", "Vehicle and luggage allowance", "Total price and waiting policy", "Cancellation terms"], sourceId };
   }),
   ...[...hotelRecommendations, ...neighborhoodHotelAdditions].map((hotel): ProviderLink => {

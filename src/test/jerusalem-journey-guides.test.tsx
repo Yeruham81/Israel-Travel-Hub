@@ -91,7 +91,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(container.querySelector("#shabbat")).toHaveTextContent("Check both the bus timetable and church visiting hours");
     expect(container.querySelector("#checklist")?.querySelectorAll("li")).toHaveLength(4);
     expect(within(container.querySelector("#checklist") as HTMLElement).getByRole("heading", { name: "Travel checklist" })).toBeInTheDocument();
-    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("note")).toHaveTextContent("allow time for the queue");
+    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("note")).toHaveTextContent("allowing extra time for queues");
     expect(container.textContent).not.toContain("return later if your schedule allows");
     const bodyPhotos = [...container.querySelectorAll("#private-taxi img, #visit-return img")].map(img => img.getAttribute("src"));
     expect(cards.some(card => bodyPhotos.includes(within(card).getByRole("img").getAttribute("src")))).toBe(false);

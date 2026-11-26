@@ -115,7 +115,7 @@ describe("intent-specific taxi guide cluster", () => {
       "/airport-transfers/",
     ]);
     for (const link of contextualLinks) expect(paragraph.split(link.text)).toHaveLength(2);
-    expect(paragraph).toContain("To compare transport choices");
+    expect(paragraph).toContain("To find the best way to reach your destination");
   });
 
   it("separates the three taxi guide intents without repeating full tariff and airport procedures", () => {

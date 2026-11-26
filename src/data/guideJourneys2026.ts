@@ -14,7 +14,7 @@ export const journeyDestinationGuides = {
     "title": "The Dead Sea: beaches, floating and a practical visitor guide",
     "description": "Plan a Dead Sea visit around Ein Bokek, a managed beach, hotels and desert attractions. Compare northern and southern destinations and arrange the return journey.",
     "intro": "The Dead Sea is famous for its exceptionally salty water, desert scenery, bathing beaches and nearby archaeological sites. Start by choosing which beach or hotel area you'd like to visit. Ein Bokek, the northern beaches and Masada offer different day-trip options.",
-    "answer": "For a first independent beach visit, compare the managed public-beach area at Ein Bokek with a named private beach or hotel day package. Visit a designated beach with lifeguards, check its facilities and arrange your return transport. The northern shore, Ein Gedi, Masada and the southern hotel district are separate stops, not one walkable attraction.",
+    "answer": "For a first independent beach visit, compare the managed public-beach area at Ein Bokek with a named private beach or hotel day package. Visit a designated beach with lifeguards, check its facilities and arrange your return transport. Allow travel time between the northern shore, Ein Gedi, Masada and the southern hotel district.",
     "topics": [
       "attractions",
       "destinations",
@@ -104,8 +104,8 @@ export const journeyDestinationGuides = {
         "id": "attractions",
         "title": "Add one clear attraction priority",
         "paragraphs": [
-          "Masada offers archaeology and a plateau setting, with cable-car and trail arrangements that need their own check. Ein Gedi is a nature reserve with route-specific opening conditions, not a generic swim stop. Qumran adds another archaeological focus, while Qasr el-Yahud is a separate lower-Jordan pilgrimage destination.",
-          "Choose the stop most important to your interests and leave real time for it. An outing that includes a park, a ceremony and a beach may need fewer extra stops rather than a longer list. Each attraction has its own admission fees and opening hours."
+          "Visit Masada for its ancient fortress and panoramic desert views. Check cable-car hours and hiking trail conditions before visiting. Ein Gedi Nature Reserve offers desert hiking trails and waterfalls, with access depending on trail conditions and opening hours. Visit Qumran for its archaeological ruins and connection to the Dead Sea Scrolls, or Qasr el-Yahud for its religious significance as a baptism site.",
+          "Prioritize the attractions you'd most like to visit and allow enough time to explore them. If you're combining a nature reserve, a religious ceremony and a beach visit, allow enough time for each activity. Each attraction has its own admission fees and opening hours."
         ],
         "links": [
           {
@@ -130,8 +130,8 @@ export const journeyDestinationGuides = {
         "id": "transport-season",
         "title": "Arrival, season and the return journey",
         "paragraphs": [
-          "From Jerusalem, the final destination determines whether a northern beach or the southern hotel strip suits your day. Public transport may work for a defined stop; a driver, rental or organised excursion can fit other combinations. Include the journey to the departure stop and the return after your beach or park closes.",
-          "The area can be very hot. Choose the timing and amount of outdoor walking around the local forecast, and check weather and road notices before a desert outing. Use your actual beach or hotel address when asking for a transfer, rather than a broad lake name."
+          "From Jerusalem, the final destination determines whether a northern beach or the southern hotel strip suits your day. Buses are convenient for visiting one destination. A private driver, rental car or organised tour offers more flexibility for several stops. Include the journey to the departure stop and the return after your beach or park closes.",
+          "The area can be very hot. Choose the timing and amount of outdoor walking around the local forecast, and check weather and road notices before a desert outing. Include the name and address of your Dead Sea beach or hotel when requesting a transfer."
         ],
         "links": [
           {
@@ -168,7 +168,7 @@ export const journeyDestinationGuides = {
       },
       {
         "q": "Does a hotel spa package include everything?",
-        "a": "Read the actual package. Beach, pool, spa, changing facilities, towels and meals can be separate inclusions or charges."
+        "a": "Check whether your day package includes beach access, pools, spa facilities, changing rooms, towels and meals."
       }
     ],
     "related": [
@@ -199,7 +199,7 @@ export const journeyDestinationGuides = {
   "id": "bethlehem",
   "updatedAt": "2026-11-24",
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
-  "description": "Compare bus 231 and 234, licensed private drivers, taxis to Checkpoint 300 and Bethlehem tours. Plan your final stop, documents and the return to Jerusalem.",
+  "description": "Compare bus 231 and 234, licensed private drivers, taxis to Checkpoint 300 and Bethlehem tours. Learn where to get off, which travel documents to bring and how to return to Jerusalem.",
   "intro": "Bethlehem is only a short distance from Jerusalem, but getting there requires some planning. Here's how to travel by bus, taxi or organised tour, and what to check before you leave.",
   "answer": "For independent travellers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers may use the pedestrian crossing and onward local transport. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
   "topics": [
@@ -268,14 +268,14 @@ export const journeyDestinationGuides = {
       "id": "entry-rules",
       "title": "Before you go: Area A, entry rules and checkpoints",
       "paragraphs": [
-        "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Not every driver or vehicle is permitted to make the journey.",
+        "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Drivers and vehicles must have the appropriate permission to enter Bethlehem.",
         "Bring your original passport and any required entry documents. If you're travelling on a US passport, check the State Department's travel advice for current entry and security information.",
         "A 22 November 2026 announcement reported that Checkpoint 300 would reopen to authorised vehicles and tourist coaches from 23 November. Crossing eligibility, operating hours and security restrictions may still change; confirm your actual route and vehicle permission with the operator before travel."
       ],
       "richParagraphs": [
         [
           {
-            "text": "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Not every driver or vehicle is permitted to make the journey."
+            "text": "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Drivers and vehicles must have the appropriate permission to enter Bethlehem."
           }
         ],
         [
@@ -485,7 +485,7 @@ export const journeyDestinationGuides = {
           }
         }
       ],
-      "tip": "If the grotto is your priority, allow time for the queue and plan nearby visits around its opening hours.",
+      "tip": "Plan your visit to the Grotto of the Nativity around its opening hours, allowing extra time for queues.",
       "sourceIds": [
         "m26-cicts-grotto-hours",
         "m26-custodia-nativity-restoration",
@@ -528,12 +528,12 @@ export const journeyDestinationGuides = {
     "Carry your original passport and any immigration entry documents.",
     "Save the bus timetable or your driver's contact details for offline use.",
     "Carry some small cash for a local taxi if you are crossing at Checkpoint 300.",
-    "Allow time for the return crossing and onward journey before evening plans."
+    "Allow enough time to cross the checkpoint and return to Jerusalem before your evening plans."
   ],
     "faqs": [
     {
       "q": "What is the cheapest way to travel from Jerusalem to Bethlehem?",
-      "a": "An East Jerusalem bus is normally the lowest-cost option. South Buses currently publishes an ₪8 fare for journeys up to 15 km; confirm the fare for your exact ride. Line 231 goes towards Bab al-Zaqaq, while line 234 ends at Checkpoint 300 and requires onward travel."
+      "a": "An East Jerusalem bus is normally the lowest-cost option. South Buses currently publishes an ₪8 fare for journeys up to 15 km; confirm the fare for your exact ride. Line 231 stops at Bab al-Zaqaq, while eligible passengers on line 234 continue from Checkpoint 300 after crossing."
     },
     {
       "q": "Is bus 231 or bus 234 better for the Church of the Nativity?",
@@ -541,7 +541,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Where do buses to Bethlehem leave from in Jerusalem?",
-      "a": "The Arab bus station just outside Damascus Gate in East Jerusalem, rather than the western Central Bus Station."
+      "a": "Buses depart from the Arab bus station near Damascus Gate in East Jerusalem."
     },
     {
       "q": "Can a Palestinian driver pick me up in Jerusalem?",
@@ -561,11 +561,11 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Is there a train from Jerusalem to Bethlehem?",
-      "a": "No. There is no passenger-train service between Jerusalem and Bethlehem; consider an East Jerusalem bus, a permitted private arrangement or an organised tour."
+      "a": "Bethlehem has no passenger railway service. Travel by bus from East Jerusalem, an authorised private vehicle or an organised tour."
     },
     {
       "q": "Can I visit Bethlehem on Saturday?",
-      "a": "East Jerusalem buses may operate on Saturdays; line 231 and 234 departure schedules are published by South Buses. Bethlehem's church visiting hours are separate from the bus timetable."
+      "a": "East Jerusalem buses may operate on Saturdays; line 231 and 234 departure schedules are published by South Buses. Check church opening hours as well as Saturday bus departures."
     },
     {
       "q": "Can I drive an Israeli rental car into Bethlehem?",
@@ -603,7 +603,7 @@ export const journeyDestinationGuides = {
     photo: topTenIsraelHero,
     facts: [
       { label: "Ten experiences", text: "Coast, heritage, food, nature and night sky" },
-      { label: "Eight regions", text: "Geographical map to choose a realistic route" },
+      { label: "Eight regions", text: "Explore Israel's regions and plan your itinerary" },
       { label: "Start planning", text: "Pick priorities, then fit them to your dates" },
     ],
     comparison: {
@@ -703,7 +703,7 @@ export const journeyDestinationGuides = {
           "id": "bus",
           "title": "By public bus: Egged 486 and 444",
           "paragraphs": [
-            "Egged line 486 departs from Jerusalem Central Bus Station along the Dead Sea corridor, serving stops including Ein Gedi, Masada and Ein Bokek. Line 444 continues towards Eilat and requires an advance seat reservation. Choose the bus stop nearest your actual attraction or hotel.",
+            "Egged line 486 departs from Jerusalem Central Bus Station along the Dead Sea corridor, serving stops including Ein Gedi, Masada and Ein Bokek. Line 444 continues towards Eilat and requires an advance seat reservation. Get off at the bus stop closest to your hotel or the attraction you plan to visit.",
             "For a beach day, choose the bus stop closest to Ein Bokek Central Beach or your named hotel. The operator's journey planner displays the fare for your destination and date. Check the platform, return departure and final walk from the stop. Israel Railways does not serve the Dead Sea.",
             "Buses between individual Dead Sea attractions are infrequent, and the last bus back to Jerusalem may leave early. Friday and holiday timetables are shorter, while ordinary buses generally pause for Shabbat. Plan the return from the exact stop you intend to use."
           ],

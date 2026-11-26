@@ -65,7 +65,7 @@ const related = [
   { title: "Ben Gurion Airport Arrival Tips", description: "A smoother arrival and airport transfer", image: airport, alt: "Ben Gurion Airport Terminal 3", href: "/travel-blog/ben-gurion-airport-arrival-tips/" },
   { title: "Getting Around Israel", description: "Trains, buses, taxis and private journeys", image: train, alt: "Jerusalem Yitzhak Navon railway station platform", href: "/travel-blog/getting-around-israel/" },
   { title: "What to Eat in Israel", description: "Popular dishes and practical food-market tips", image: migrationPhotos["what-to-eat-in-israel"].src, alt: "Israeli foods served together", href: "/travel-blog/what-to-eat-in-israel/" },
-  { title: "7-Day Israel Itinerary", description: "A realistic introduction to key destinations", image: masada, alt: "Masada overlooking the Dead Sea", href: "/travel-blog/israel-itinerary-7-days/" },
+  { title: "7-Day Israel Itinerary", description: "Explore Jerusalem, Tel Aviv, the Dead Sea and northern Israel in seven days.", image: masada, alt: "Masada overlooking the Dead Sea", href: "/travel-blog/israel-itinerary-7-days/" },
 ] as const;
 
 
@@ -153,7 +153,7 @@ export function IsraelTravelTipsGuide() {
       <section id="arriving" className="mt-12 scroll-mt-24" aria-labelledby="arrival-title">
         <Heading id="arrival-title" intro="Plan your airport transfer all the way to your hotel.">Arriving in Israel</Heading>
         <Topic title="Prepare for Ben Gurion Airport">
-          <p>At Ben Gurion Airport, allow time for border procedures, baggage and customs before an onward connection. Decide in advance whether the train, an official taxi or a confirmed <Link to="/airport-transfers/" className={linkClass}>private airport transfer</Link> suits your destination, luggage and arrival hour.</p>
+          <p>Allow extra time for passport control, baggage collection and customs before leaving Ben Gurion Airport. Decide in advance whether the train, an official taxi or a confirmed <Link to="/airport-transfers/" className={linkClass}>private airport transfer</Link> suits your destination, luggage and arrival hour.</p>
           <p>For your return flight, the <a href="https://www.iaa.gov.il/en/airports/ben-gurion/securitybgn/" target="_blank" rel="noopener noreferrer" className={linkClass}>Israel Airports Authority</a> advises arriving three hours before departure for security procedures; follow any more specific airline instructions and confirm your departure terminal.</p>
           <p>See my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className={linkClass}>Ben Gurion Airport arrival tips</Link> and <Link to="/travel-blog/ben-gurion-airport-taxis/" className={linkClass}>official airport taxi guide</Link> for practical instructions.</p>
         </Topic>
@@ -179,7 +179,7 @@ export function IsraelTravelTipsGuide() {
           </ul>
         </div>
         <Topic id="getting-around" title="Choose transport by journey, not by habit">
-          <p>Israel Railways connects major destinations, while buses cover many additional towns and sights. Jerusalem and Tel Aviv also have local transit and light rail. Check actual date-specific connections with <a href="https://rail.co.il/?lan=en" target="_blank" rel="noopener noreferrer" className={linkClass}>Israel Railways</a> and the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={linkClass}>national public transport planner</a>, especially on Fridays, holidays and late evenings.</p>
+          <p>Israel Railways connects major destinations, while buses cover many additional towns and sights. Jerusalem and Tel Aviv also have local transit and light rail. Check transport schedules for your travel dates with <a href="https://rail.co.il/?lan=en" target="_blank" rel="noopener noreferrer" className={linkClass}>Israel Railways</a> and the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={linkClass}>national public transport planner</a>, especially on Fridays, holidays and late evenings.</p>
           <p>Use a <strong>Rav-Kav card or an authorized payment app</strong> for ordinary public transport where supported. Some bus operators accept contactless bank cards on selected routes, but it is not a universal replacement. Validate each trip as required, including before boarding light rail.</p>
           <p>Licensed taxis are helpful for shorter rides and luggage; a <Link to="/private-driver-in-israel/" className={linkClass}>private driver</Link> can suit multi-stop days, families or travellers needing an easier pace. Rental cars are useful in some rural areas but can add parking and traffic hassles in major city centers. Review my <Link to="/travel-blog/getting-around-israel/" className={linkClass}>getting around Israel guide</Link> and <Link to="/travel-blog/sherut-in-israel/" className={linkClass}>sherut guide</Link> before relying on an old shared-taxi route.</p>
         </Topic>
@@ -187,7 +187,7 @@ export function IsraelTravelTipsGuide() {
       </section>
 
       <section id="everyday" className="mt-12 scroll-mt-24" aria-labelledby="everyday-title">
-        <Heading id="everyday-title" intro="These small details make it easier to navigate once you arrive.">Everyday travel tips</Heading>
+        <Heading id="everyday-title">Everyday travel tips</Heading>
         <div className="grid gap-5 md:grid-cols-2">
           <div className="rounded-xl border bg-card p-5"><h3 className="text-lg font-bold">Stay connected</h3><p className="mt-2 text-sm leading-relaxed">Check roaming prices or arrange a local SIM/eSIM for navigation, booking messages and transport updates. Confirm that your phone is unlocked and compatible. Download offline maps, bookings and hotel addresses, and keep a charging cable and power bank handy.</p><p className="mt-3 text-sm"><Link to="/travel-blog/best-esim-for-israel/" className={linkClass}>Compare Israel eSIM options</Link></p></div>
           <div className="rounded-xl border bg-card p-5"><h3 className="text-lg font-bold">Money and payment</h3><p className="mt-2 text-sm leading-relaxed">The currency is the Israeli new shekel (ILS/NIS, ₪). Cards are widely accepted, but a little cash is useful in markets and small businesses. Check ATM fees and avoid unfavorable home-currency conversion at card terminals. A restaurant tip of around 10–15% is customary when service is not included.</p><p className="mt-3 text-sm">Check <a href="https://www.boi.org.il/en/" target="_blank" rel="noopener noreferrer" className={linkClass}>Bank of Israel exchange rates</a> for reference.</p></div>

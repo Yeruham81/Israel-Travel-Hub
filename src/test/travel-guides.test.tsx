@@ -930,7 +930,7 @@ describe("migrated practical guides", () => {
     ]);
     expect(guide.sections.find(s => s.id === "weekend")!.paragraphs.join(" ")).toMatch(/Line 711.*Terminal 1.*winter and summer/s);
     expect(guide.sections.find(s => s.id === "weekend")!.inlineLinks?.some(link => link.to === travelGuidePaths.shabbat)).toBe(true);
-    expect(guide.sections.find(s => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/pay for one seat.*fare.*suitcases/s);
+    expect(guide.sections.find(s => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/Each passenger pays an individual fare.*fare.*suitcases/s);
     expect(guide.sections.find(s => s.id === "local-sherut")!.inlineLinks?.map(link => link.to)).toEqual([
       travelGuidePaths.israel, travelGuidePaths.telAviv,
     ]);
@@ -958,9 +958,9 @@ describe("migrated practical guides", () => {
     for (const section of travelGuides.sherut.sections) {
       const element = container.querySelector(`#${section.id}`)! as HTMLElement;
       for (const link of section.inlineLinks || []) {
-        const a = within(element).getByRole("link", { name: link.text });
-        expect(a).toHaveAttribute("href", link.to);
-        expect(a.closest("p")).toBeTruthy();
+        const proseLinks = within(element).getAllByRole("link", { name: link.text }).filter((a) => a.closest("p"));
+        expect(proseLinks).toHaveLength(1);
+        expect(proseLinks[0]).toHaveAttribute("href", link.to);
       }
     }
     const alternativeSection = container.querySelector("#airport-alternatives") as HTMLElement;
