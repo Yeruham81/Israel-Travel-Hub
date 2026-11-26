@@ -56,10 +56,10 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
       <section id="service-overview" aria-labelledby="service-overview-h" className="mt-9 scroll-mt-24" data-testid="driver-service-overview">
         <h2 id="service-overview-h" className="text-2xl font-semibold sm:text-3xl">Private driver service in Israel: travel on your own terms</h2>
         <div className="mt-3 max-w-4xl space-y-4 text-[15px] leading-7 sm:text-base">
-          <p>I arrange private car-and-driver journeys across Israel, from direct hotel transfers to full days of sightseeing and longer trips with stops along the way. Choose your pickup, preferred stops and final destination, and I'll help plan the timing.</p>
+          <p>Explore Israel with a private car and driver, at your own pace and according to your own schedule. Choose your pickup location, sightseeing stops and final destination. I arrange direct hotel transfers, full days of sightseeing and longer trips with stops along the way, and I'll help plan the timing.</p>
           <h3 className="pt-1 text-lg font-semibold">Who is a private driver suitable for?</h3>
           <p>My private driver service is available for couples, families, groups of friends, business travellers and anyone moving between hotels with luggage. If you prefer a slower pace or need help with mobility, tell me what you need so I can check the vehicle and arrangements in advance.</p>
-          <p><strong>What is included?</strong> Your quote will describe the agreed transport, route, vehicle, pickup arrangements and any included waiting time. I provide private transportation. Entrance tickets, licensed tour guiding and other extras should be arranged separately unless specifically confirmed. Share your dates, destinations, number of passengers and any special requests, and I'll reply with the options and relevant booking terms.</p>
+          <p><strong>What is included?</strong> Your personal quote will include the route, vehicle, pickup details, agreed waiting time and total price. I provide private transportation. Entrance tickets, licensed tour guiding and other extras should be arranged separately unless specifically confirmed. Share your dates, destinations, number of passengers and any special requests, and I'll reply with the options and relevant booking terms.</p>
         </div>
       </section>
 
