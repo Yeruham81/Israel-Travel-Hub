@@ -303,7 +303,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "airport-alternatives",
         title: "Getting from Ben Gurion Airport to your destination",
         paragraphs: [
-          "Trains from Terminal 3 connect Ben Gurion Airport with several major cities. For Jerusalem, Haifa and Tel Aviv, choose the station nearest your destination and include the final connection to your hotel. For a direct journey, compare the licensed airport taxi queue with a confirmed private transfer.",
+          "Trains from Terminal 3 connect Ben Gurion Airport with several major cities. Choose the station with the most convenient connection to your hotel. For a direct journey, compare the licensed airport taxi queue with a confirmed private transfer.",
           "My guides to Jerusalem, Tel Aviv, Haifa and Ein Bokek explain the transport options from Ben Gurion Airport. For Friday and Saturday journeys, my airport Shabbat guide explains the available transport.",
         ],
         inlineLinks: [
