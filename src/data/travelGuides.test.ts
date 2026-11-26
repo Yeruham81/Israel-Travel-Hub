@@ -1,3 +1,4 @@
+import { ESIM_UPDATED, esimFixedPlans, esimUnlimitedPlans, esimPicks, esimPlan } from "@/data/esimIsraelPlans";
 import { describe, expect, it } from "vitest";
 import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, travelGuides } from "@/data/travelGuides";
 import { AIRALO_COMPATIBILITY_AFFILIATE_URL, AIRALO_MENA_AFFILIATE_URL, formatCheckDate } from "@/data/registry";
@@ -6,51 +7,38 @@ import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 
 describe("travel guide topic filters and prerender safety", () => {
-  it("keeps eSIM buying guidance prominent without a troubleshooting manual", () => {
+  it("keeps eSIM recommendations consistent with dated plan records and tracked resources", () => {
     const guide = travelGuides.esim;
     expect(guide.title).toContain("Prices, Providers & My Picks");
-    expect(guide.sections.map((section) => section.id)).toEqual(["short-trip", "long-trip", "unlimited", "regional", "compatibility", "calling", "coverage", "setup"]);
-    expect(guide.comparison.rows).toHaveLength(5);
-    expect(guide.comparison.rows.map(row => row[0])).toEqual(["GigSky", "Yesim", "Airalo", "Saily", "Drimsim"]);
-    expect(guide.comparison.rows[0]?.[1]).toBe("$56.24");
-    expect(guide.comparison.rows[1]?.[1]).toBe("$66.00");
-    expect(guide.comparison.rows[2]?.[1]).toBe("$69.00");
-    expect(guide.comparison.rows[3]?.[1]).toBe("$71.99");
-    expect(guide.comparison.rows[4]?.[1]).toBe("Not offered");
-    expect(guide.facts.map(fact => fact.label)).toEqual(["Short trip", "Longer trip", "Heavy data use"]);
-    expect(guide.sections.find((section) => section.id === "short-trip")?.paragraphs.join(" ")).toContain("$5.99");
-    expect(guide.sections.find((section) => section.id === "long-trip")?.paragraphs.join(" ")).toContain("$11.50");
-    for (const section of guide.sections.filter(section => ["short-trip", "long-trip", "unlimited", "regional"].includes(section.id))) {
-      expect(section.paragraphs.some(paragraph => /My choice: (Saily|Airalo|GigSky)\./.test(paragraph))).toBe(true);
+    expect(guide.updatedAt).toBe(ESIM_UPDATED);
+    expect(guide.sections.map(s=>s.id)).toEqual(["short-trip","unlimited","features","long-trip","payg","regional","compatibility","calling","coverage","setup"]);
+    expect(guide.facts).toHaveLength(4);
+    expect(guide.comparison.rows).toHaveLength(4);
+    expect(esimPicks.map(p=>p.plan)).toEqual([esimPlan("Saily",3,30),esimPlan("Saily",5,30),esimPlan("Airalo",10,30),esimPlan("GigSky","Unlimited",30)]);
+    expect(esimFixedPlans.filter(p=>p.provider==="GigSky").map(p=>[p.gb,p.days,p.amount])).toEqual([[1,7,4.99],[3,15,10.79],[5,30,16.79],[10,30,29.19]]);
+    expect(esimPlan("GigSky",5,30).regularUsd).toBe(20.99);
+    expect(esimUnlimitedPlans.filter(p=>p.provider==="Saily").map(p=>[p.days,p.amount,p.currency,p.evidence])).toEqual([[7,26.99,"USD","publisher"],[15,48.99,"USD","publisher"],[30,71.99,"USD","publisher"]]);
+    expect(esimUnlimitedPlans.filter(p=>p.provider==="GigSky").map(p=>[p.days,p.amount,p.currency,p.evidence])).toEqual([[7,18.79,"USD","publisher"],[15,33.99,"USD","publisher"],[30,49.99,"USD","publisher"]]);
+    expect(esimUnlimitedPlans.filter(p=>p.provider==="Yesim").map(p=>[p.days,p.amount,p.currency])).toEqual([[7,21.7,"EUR"],[15,35,"EUR"],[30,55,"EUR"]]);
+    expect(guide.comparison.rows.find(row=>row[0]==="Saily")?.slice(1,4)).toEqual(["$26.99","$48.99","$71.99"]);
+    expect(guide.comparison.rows.find(row=>row[0]==="GigSky")?.slice(1,4)).toEqual(["$18.79","$33.99","$49.99"]);
+    expect(esimUnlimitedPlans.filter(p=>p.provider==="Airalo").map(p=>p.days)).toEqual([3,5,7,10,15,30]);
+    const plans=[...esimFixedPlans,...esimUnlimitedPlans];
+    expect(new Set(plans.map(p=>[p.provider,p.gb,p.days].join("/"))).size).toBe(plans.length);
+    expect(plans.every(p=>p.amount>0&&p.days>0&&p.checkedAt<=ESIM_UPDATED&&p.sourceId.startsWith("guide-esim-"))).toBe(true);
+    expect(guide.sections.find(s=>s.id==="compatibility")?.externalLinks?.[0]?.href).toBe(AIRALO_COMPATIBILITY_AFFILIATE_URL);
+    expect(guide.sections.find(s=>s.id==="regional")?.externalLinks?.[0]?.href).toBe(AIRALO_MENA_AFFILIATE_URL);
+    for(const link of [AIRALO_COMPATIBILITY_AFFILIATE_URL,AIRALO_MENA_AFFILIATE_URL]){
+      const url=new URL(link);
+      expect(url.origin).toBe("https://tp.media");
+      expect(url.searchParams.get("marker")).toBe("622032");
+      expect(url.searchParams.get("trs")).toBe("406243");
     }
-    expect(guide.sections.find(section => section.id === "compatibility")?.externalLinks?.[0]?.href).toBe(AIRALO_COMPATIBILITY_AFFILIATE_URL);
-    const deepLink = new URL(AIRALO_COMPATIBILITY_AFFILIATE_URL);
-    expect(deepLink.origin).toBe("https://tp.media");
-    expect(deepLink.searchParams.get("marker")).toBe("622032");
-    expect(deepLink.searchParams.get("trs")).toBe("406243");
-    expect(deepLink.searchParams.get("p")).toBe("8310");
-    expect(deepLink.searchParams.get("campaign_id")).toBe("541");
-    expect(deepLink.searchParams.get("u")).toBe("https://www.airalo.com/how-airalo-works/device-compatibility");
-    expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("$56.24");
-    expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("50GB");
-    expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("$39");
-    expect(guide.sections.find((section) => section.id === "long-trip")?.paragraphs.join(" ")).toContain("Saily costs $7.99 for 30 days, compared with $8 for the same period from Airalo.");
-    expect(guide.sections.find((section) => section.id === "setup")?.paragraphs.join(" ")).toContain("data roaming on your home SIM");
-    expect(guide.checklist.some((item) => item.includes("travel eSIM for mobile data"))).toBe(true);
-    expect(guide.sections.find((section) => section.id === "regional")?.externalLinks?.[0]?.href).toBe(AIRALO_MENA_AFFILIATE_URL);
-    const regionalLink = new URL(AIRALO_MENA_AFFILIATE_URL);
-    expect(regionalLink.searchParams.get("marker")).toBe("622032");
-    expect(regionalLink.searchParams.get("trs")).toBe("406243");
-    expect(regionalLink.searchParams.get("u")).toBe("https://www.airalo.com/middle-east-and-north-africa-esim/mena-30days-5gb");
-    expect(guide.faqs).toHaveLength(6);
-    expect(guide.faqs.some(faq => /WhatsApp number/.test(faq.q))).toBe(true);
-    expect(guide.faqs.some(faq => /Bethlehem or Jericho/.test(faq.q))).toBe(true);
-    expect(guide.related).toHaveLength(6);
-    expect(guide.sections.find((section) => section.id === "setup")?.paragraphs.length).toBeLessThanOrEqual(2);
-    expect(guide.sections.some((section) => /troubleshoot|technical support/i.test(section.title))).toBe(false);
     expect(guide.providerPageId).toBe("guide-esim");
-    expect(guide.services).toHaveLength(4);
-    expect(guide.services.every((service) => Boolean(service.note))).toBe(true);
+    expect(guide.services).toHaveLength(6);
+    expect(guide.related).toHaveLength(6);
+    expect(guide.faqs).toHaveLength(6);
+    expect(guide.checklist.some(item=>item.includes("travel eSIM for mobile data"))).toBe(true);
   });
 
   it("uses the distinct original featured images in the 3-, 5- and 10-day itinerary directory cards", () => {

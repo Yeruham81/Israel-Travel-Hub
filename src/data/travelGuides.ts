@@ -1,3 +1,4 @@
+import { ESIM_UPDATED, esimFacts, esimComparison, esimRegional, esimUsd, esimPlan } from "@/data/esimIsraelPlans";
 import { guideTopics, type GuideTopicId } from "@/data/guide-topics";
 export { guideTopics, type GuideTopicId } from "@/data/guide-topics";
 import { itineraries, itineraryIds } from "@/data/israelItineraries";
@@ -408,64 +409,53 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     title: "Best eSIM for Israel: Prices, Providers & My Picks",
     description: "Compare Israel eSIM prices for short trips, longer stays and heavy data use. My picks for 3GB, 5GB, 10GB and unlimited travel plans.",
     intro: "Choosing an eSIM for Israel? Here are my picks for a short break, a longer holiday and travellers who need unlimited data.",
-    answer: "For a short visit or a longer trip with moderate data use, I would start with Saily. For 10GB, consider Airalo. For unlimited data, GigSky has the lowest listed 30-day price of the four plans compared below. Check the daily high-speed limits before choosing.",
-    updatedAt: "2026-11-15",
+    answer: "I would start with Saily for a short trip or everyday use and Airalo for 10GB over 30 days. For unlimited data, I would choose GigSky, with 3.5GB of high-speed data per day.",
+    updatedAt: ESIM_UPDATED,
     topics: ["connectivity", "tips"],
     photo: { src: esimPhoto, alt: "A phone displaying an eSIM graphic in front of a blurred city background", sourceUrl: "", credit: "Illustrative eSIM screen." },
-    facts: [
-      { label: "Short trip", text: "3GB · 30 days · $5.99" },
-      { label: "Longer trip", text: "5GB · 30 days · $7.99" },
-      { label: "Heavy data use", text: "Unlimited · 30 days · $56.24" },
-    ],
-    comparison: {
-      caption: "Compare 30-day unlimited eSIM plans",
-      headers: ["Provider", "30-day price", "High-speed data"],
-      rows: [
-        ["GigSky", "$56.24", "3.5GB of high-speed data per day, then reduced speed"],
-        ["Yesim", "$66.00", "Fair-use limits apply; check the plan for speed restrictions"],
-        ["Airalo", "$69.00", "3GB of high-speed data per day, then up to 1 Mbps"],
-        ["Saily", "$71.99", "5GB of high-speed data per day, then up to 1 Mbps"],
-        ["Drimsim", "Not offered", "Pay-as-you-go data only"],
-      ],
-    },
+    facts: esimFacts,
+    comparison: esimComparison,
     sections: [
       {
         id: "short-trip",
-        title: "Best eSIM for a short trip",
-        paragraphs: [
-          "For a week of maps, WhatsApp and light browsing, 3GB is a sensible starting point. Saily costs $5.99 for 3GB valid for 30 days, while Airalo costs $6 for 3GB valid for seven days. For almost the same price, Saily gives you more flexibility if your plans change. My choice: Saily.",
-        ],
-        sourceIds: ["guide-esim-saily", "guide-esim-airalo"],
-      },
-      {
-        id: "long-trip",
-        title: "Best eSIM for a longer trip",
-        paragraphs: [
-          "For one to three weeks of navigation, messaging and browsing, 5GB should suit many visitors. Saily costs $7.99 for 30 days, compared with $8 for the same period from Airalo. Both offer good value. Compare prices, network coverage, app features and installation instructions. Yesim costs $9.90 and GigSky $18.89. My choice: Saily.",
-          "For frequent photo uploads, social media and video calls, consider 10GB instead. Airalo costs $11.50 for 30 days, just below Saily at $11.99; Yesim costs $16.50. My choice: Airalo.",
-        ],
-        sourceIds: ["guide-esim-saily", "guide-esim-saily-usd-price-nov26", "guide-esim-airalo", "guide-esim-yesim", "guide-esim-gigsky"],
+        title: "Compare prepaid eSIM data plans",
+        paragraphs: ["For a week of maps, messaging and light browsing, I would choose a small data package with enough days of validity. The table includes different durations where the same data allowance is available. My choice: Saily."],
+        sourceIds: ["guide-esim-saily", "guide-esim-airalo-fixed", "guide-esim-yesim", "guide-esim-gigsky"],
       },
       {
         id: "unlimited",
-        title: "Best eSIM for unlimited data",
-        paragraphs: [
-          "Four of the five providers offer 30-day unlimited plans for Israel. Unlimited plans differ in daily high-speed data allowances and fair-use rules. Compare the published prices and limits below. Drimsim has no unlimited package.",
-          "At the checked price of $56.24, GigSky is the cheapest of these four 30-day unlimited plans, with 3.5GB of high-speed data per day before speeds are reduced. Saily costs $71.99 but offers 5GB at full speed per day, which may suit heavier daily use. The reduced speed and fair-use rules can affect streaming and video calls. My choice: GigSky.",
-          "Not sure you need unlimited? Airalo also lists a fixed 50GB plan for 30 days at $39, which may be better value if you use less than 50GB. Unlike unlimited plans, it has a fixed overall allowance.",
-        ],
-        sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-drimsim"],
+        title: "Compare unlimited eSIM plans",
+        paragraphs: ["Choose the number of days that covers your whole trip. Unlimited plans still have high-speed limits or operator fair-use policies. For heavy daily use, GigSky combines competitive prices with a 3.5GB daily high-speed allowance. My choice: GigSky.", "Airalo also lists a fixed 50GB plan for 30 days at " + esimUsd(esimPlan("Airalo",50,30).amount) + ". If that covers your needs, it can be a practical alternative to daily speed limits."],
+        sourceIds: ["guide-esim-airalo", "guide-esim-airalo-fup", "guide-esim-saily", "guide-esim-saily-fup", "guide-esim-yesim", "guide-esim-yesim-15", "guide-esim-gigsky", "guide-esim-gigsky-fup", "guide-esim-yesim-7", "guide-esim-yesim-30"],
+      },
+      {
+        id: "features",
+        title: "Compare eSIM provider features",
+        paragraphs: ["I compare the network, data sharing, top-ups and activation rules as well as price. The table compares published features of each provider."],
+        sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-drimsim", "guide-esim-gigsky-activation"],
+      },
+      {
+        id: "long-trip",
+        title: "How much data do you need in Israel?",
+        paragraphs: ["For one to three weeks of navigation and browsing, 5GB is a reasonable starting point. If you frequently upload photos or make video calls, consider 10GB or more. For a month with 10GB, my choice is Airalo."],
+        sourceIds: ["guide-esim-airalo-fixed", "guide-esim-saily"],
+      },
+      {
+        id: "payg",
+        title: "Pay-as-you-go eSIM for Israel",
+        paragraphs: ["Drimsim charges according to data usage. It may suit occasional use or a backup connection, while a prepaid package can be more economical for daily navigation and social media."],
+        sourceIds: ["guide-esim-drimsim"],
       },
       {
         id: "regional",
         title: "Best eSIM for a Middle East trip",
         paragraphs: [
-          "Combining Israel with Jordan, Egypt or other countries? Airalo's Middle East & North Africa regional eSIM can cover several destinations with one plan. A listed option is 5GB for 30 days at $18. Before buying, confirm coverage for Israel and each additional destination, including access to Palestinian networks if your trip includes the West Bank. My choice: Airalo.",
+          "Combining Israel with Jordan, Egypt or other countries? Airalo's Middle East & North Africa regional eSIM can cover several destinations with one plan. A listed option is " + esimRegional.gb + "GB for " + esimRegional.days + " days at " + esimUsd(esimRegional.usd).replace(/\.00$/, "") + ". Before buying, confirm coverage for Israel and each additional destination, including access to Palestinian networks if your trip includes the West Bank. My choice: Airalo.",
         ],
         externalLinks: [
           { label: "View Airalo's Middle East & North Africa plans", href: AIRALO_MENA_AFFILIATE_URL },
         ],
-        sourceIds: ["guide-esim-airalo"],
+        sourceIds: ["guide-esim-airalo-mena"],
       },
       {
         id: "compatibility",
@@ -500,10 +490,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       },
       {
         id: "setup",
-        title: "When should you buy your eSIM?",
+        title: "How to install and activate your eSIM",
         paragraphs: [
-          "Buy and install your travel eSIM before flying, while you have reliable Wi-Fi. Installation and activation may occur at different times. Check the provider's activation rules to time your plan's validity for your trip.",
-          "When you arrive, select the travel eSIM as your phone's mobile-data line and enable data roaming on that line if the provider instructs you to. Disable data roaming on your home SIM and, where available, automatic mobile-data switching to avoid unexpected roaming charges. You can generally keep your home number active for calls and verification messages.",
+          "Install your eSIM over Wi-Fi before departure. Start the plan according to its activation rules, and keep your home number active if you need verification texts. Ordinary calls and texts on your home line can still incur roaming fees.",
         ],
         sourceIds: ["guide-esim-airalo", "guide-esim-saily"],
       },
@@ -531,6 +520,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { label: "Tours & day trips", to: "/tours/", note: "Explore city tours, day trips and private sightseeing options." },
       { label: "Where to stay in Israel", to: "/accommodation/", note: "Find suitable areas and accommodation guides." },
       { label: "Israel itinerary: 7 days", to: "/travel-blog/israel-itinerary-7-days/", note: "See a practical first-time route through the country." },
+      { label: "Private driver in Israel", to: "/private-driver-in-israel/", note: "Arrange a private ride or sightseeing day." },
+      { label: "Israel travel tips", to: travelGuidePaths.travelTips, note: "Prepare for your arrival and everyday travel." },
     ],
     providerPageId: "guide-esim",
   },
