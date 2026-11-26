@@ -11,7 +11,7 @@ import { travelGuidePaths } from "@/data/travel-guide-paths";
  * never sourced from old articles.
  */
 type Upgrade = {
-  sections: GuideSection[];
+  sections?: GuideSection[];
   related?: TravelGuideId[];
   services?: TravelGuide["services"];
   reading?: TravelGuide["reading"];
@@ -108,55 +108,6 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
     related: ["jerusalem", "bethlehem"],
   },
   jerusalemShopping: {
-    sections: [
-      {
-        id: "artists-colony",
-        title: "Hutzot Hayotzer artists' workshops and craft shopping",
-        photo: { src: "/images/jerusalem/hutzot-hayotzer.webp", alt: "Art and craft displays at Hutzot Hayotzer artists' colony in Jerusalem" },
-        paragraphs: [
-          "Hutzot Hayotzer, the artists' colony by the Old City walls, has long been associated with pottery, metalwork, painting and local craft studios. It is not interchangeable with the Old City souvenir market: come here if you want to look closely at the maker and the object, rather than simply purchase a memento.",
-          "Individual workshops and cultural events are not open on one shared timetable. Before making a special trip, confirm the specific studio or fair. The seasonal arts-and-crafts festival is a separate event with its own dates and admission, so check the Jerusalem events calendar rather than assuming a workshop is running.",
-        ],
-        inlineLinks: [{ text: "Jerusalem events calendar", to: travelGuidePaths.calendar }],
-      },
-      {
-        id: "bezalel-independent-design",
-        title: "Bezalel Street, independent designers and temporary fairs",
-        paragraphs: [
-          "The Bezalel Street area, downtown studios and occasional arts fairs can be good for handmade jewellery, prints and contemporary design. Older accounts mention a Friday artists’ fair, but its current location and schedule require verification; do not plan around a past schedule without an organiser's current announcement.",
-          "For an easy city-centre browse, combine Ben Yehuda's pedestrian streets with shops on Jaffa Road. If shopping is secondary to sightseeing, Mamilla is a logical stop before or after Jaffa Gate, whereas Mahane Yehuda is a more food-focused experience.",
-        ],
-      },
-      {
-        id: "shopping-cardo-and-first-station",
-        title: "The Cardo and the First Station: two very different stops",
-        photo: { src: "/images/jerusalem/first-station.webp", alt: "The restored First Station in Jerusalem, with shops and restaurants" },
-        paragraphs: [
-          "The Cardo in the Jewish Quarter is an archaeological street with small shops and galleries. Combine it with the Jewish Quarter and Western Wall rather than visiting as a standalone modern shopping centre. For crafts and religious gifts, ask about provenance, materials, packaging and how delicate purchases will travel.",
-          "The First Station is a restored railway complex for restaurants, events and occasional small businesses; it is not a substitute for a large indoor mall. Emek Refaim nearby has a slower neighbourhood shopping-and-café feel. Each venue's Friday and Saturday schedule varies independently.",
-        ],
-        inlineLinks: [{ text: "Jewish Quarter", to: "/attractions/old-city-jerusalem/" }],
-      },
-      {
-        id: "shopping-weekend-and-purchases",
-        title: "Payment, bargaining, opening days and getting purchases home",
-        paragraphs: [
-          "Ask the price and currency before buying. Fixed-price shops and branded stores are different from stalls where negotiation may be welcome; there is no reliable percentage by which every market price should be reduced. Check return policies, tax receipts, materials and authenticity for more expensive pieces.",
-          "Many shops close early on Friday or for Shabbat, while restaurants, fairs and some venues may have different arrangements. For groceries at Mahane Yehuda, arrive earlier rather than assuming the evening dining scene means produce stalls are open. Use a taxi or light rail for bulky bags instead of planning a long walk across Jerusalem.",
-        ],
-      },
-      {
-        id: "shopping-market-tours",
-        title: "Food walks and market tours",
-        paragraphs: [
-          "If you want to taste local food rather than shop for it, choose a focused Mahane Yehuda food walk and check whether tastings, guide language and dietary requests are included. The food-and-market tours directory lists experiences from independent providers. For neighbourhood context, my guide to Mahane Yehuda and Nachlaot hotels explains what it is like to stay beside the market.",
-        ],
-        inlineLinks: [
-          { text: "food-and-market tours", to: "/tours/food-market-tours/" },
-          { text: "Mahane Yehuda and Nachlaot hotels", to: "/accommodation/jerusalem/mahane-yehuda-nachlaot/" },
-        ],
-      },
-    ],
     related: ["jerusalem", "food", "calendar"],
     services: [
       { label: "Food and market tours", to: "/tours/food-market-tours/" },
@@ -175,9 +126,7 @@ export function applyJerusalemGuideEditorial(guides: Record<TravelGuideId, Trave
     if (!changes) continue;
     const guide = guides[id];
     if (!guide) throw new Error("Jerusalem editorial guide missing: " + id);
-    // The dedicated shopping guide now has one authoritative 10-place registry.
-    // Avoid appending older generic shopping sections that duplicate its locations.
-    if (id !== "jerusalemShopping") {
+    if (changes.sections) {
       guide.sections = [...guide.sections, ...changes.sections.filter(section => !guide.sections.some(existing => existing.id === section.id))];
     }
     if (changes.related) guide.related = [...new Set([...guide.related, ...changes.related])].filter(other => other !== id);

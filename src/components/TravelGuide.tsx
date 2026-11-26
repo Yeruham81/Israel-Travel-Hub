@@ -395,24 +395,10 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       </section>}
       {id !== "esim" && (!isJerusalemDayJourney || id === "jerusalemDeadSea" || id === "bethlehem") && <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
-        {isTransportOverview && <p className="mt-3 max-w-3xl leading-relaxed">{id === "israel" ? "Compare fares, the complete journey to your final address and availability for your travel date." : id === "telAviv" ? "Choose the option that suits your destination, fare and day of travel." : "Compare the entire trip to your final address. Cost labels are relative, not live fares; operating hours depend on your date and route."}</p>}
+        {isTransportOverview && <p className="mt-3 max-w-3xl leading-relaxed">{id === "israel" ? "Compare fares, the complete journey to your final address and availability for your travel date." : "Choose the option that suits your destination, fare and day of travel."}</p>}
         <div role="region" aria-label="Transport comparison table" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"><table className={isTransportOverview ? "w-full min-w-[860px] text-left text-sm" : (id === "jerusalemDeadSea" || id === "bethlehem") ? "w-full min-w-[780px] text-left text-sm" : id === "uber" || id === "sherut" ? "w-full min-w-[760px] text-left text-sm" : isTaxiFareGuide ? "w-full min-w-[640px] text-left text-sm" : "w-full min-w-[560px] text-left text-sm"}><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className={"p-4 font-semibold " + ((isTransportOverview || isTaxiFareGuide || id === "uber" || id === "sherut" || id === "jerusalemDeadSea" || id === "bethlehem") && heading === guide.comparison.headers[0] ? "sticky left-0 z-10 bg-secondary" : "")}>{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className={"p-4 font-medium " + ((isTransportOverview || isTaxiFareGuide || id === "uber" || id === "sherut" || id === "jerusalemDeadSea" || id === "bethlehem") ? "sticky left-0 z-10 bg-card" : "")}>{isTransportOverview ? <a href={"#" + (overviewRowAnchors[index] || "choose")} className="text-primary underline underline-offset-4">{cell}</a> : cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
         {isTaxiFareGuide && <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">Rates effective April 2026, specified through March 2027 unless amended. All amounts above include 18% VAT outside Eilat; the official regulation lists amounts before VAT.</p>}
       </section>}
-      {isTransportOverview && id !== "israel" && id !== "telAviv" && <nav aria-label="Quick transport topics" className="mt-4 rounded-xl border bg-secondary/30 p-3">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Jump to a popular topic</p>
-        <div className="flex flex-wrap gap-2">{(id === "telAviv" ? [
-          ["paying", "Tickets & payment"],
-          ["red-line", "Red Line stations"],
-          ["national-rail", "Mainline rail"],
-          ["shabbat", "Weekend transport"],
-        ] : [
-          ["israel-trains", "Train travel"],
-          ["israel-ravkav", "Rav-Kav & payment"],
-          ["israel-haifa", "Getting around Haifa"],
-          ["weekends", "Shabbat & holidays"],
-        ]).map(([anchor, label]) => <a key={anchor} href={"#" + anchor} className="rounded-full border bg-card px-3 py-2 text-sm font-medium text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">{label}</a>)}</div>
-      </nav>}
       {guide.sections.filter((section) => !(id === "bethlehem" && section.id === "entry-rules")).map((section) => <Fragment key={section.id}><section id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>
         <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
           {id === "airportTaxis" && section.id === "steps" ? (

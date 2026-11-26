@@ -263,6 +263,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(visit.paragraphs[1]).toContain("12:30–14:30");
     expect(weekend.paragraphs.join(" ")).not.toContain("11:00 to 15:00");
     expect(deadSea.answer).toContain("line 444 requires an advance seat reservation");
+    expect(deadSea.comparison.rows.find(row => row[0] === "Egged buses 486 / 444")?.[2]).toContain("₪19");
+    expect(deadSea.sections.find(section => section.id === "bus")?.paragraphs.join(" ")).toContain("standard adult single fare from Jerusalem to Ein Bokek is about ₪19");
     expect(deadSea.sections.find(section => section.id === "beach")?.tip).toBeUndefined();
     expect(deadSea.sections.find(section => section.id === "private")?.paragraphs.join(" ")).not.toContain("₪2,100");
     expect(deadSea.sections.find(section => section.id === "driving")?.paragraphs.join(" ")).toContain("Desert rain can cause sudden flash floods");

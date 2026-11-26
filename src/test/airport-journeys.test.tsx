@@ -478,6 +478,9 @@ describe("four independent airport transportation comparisons", () => {
     expect(telAviv.intro).toContain("where you're staying");
     expect(telAviv.faqs).toHaveLength(10);
     expect(telAviv.faqs.some(faq => faq.q.includes("Can I walk from Tel Aviv railway station"))).toBe(false);
+    expect(telAviv.faqs.find(faq => faq.q === "How do I pay for a train or bus to Tel Aviv?")?.a).toContain("Buy a single train ticket at the airport railway station");
+    expect(deadSea.faqs.find(faq => faq.q === "Do I need a voucher for the train to Jerusalem?")?.a).toContain("Each passenger needs a free personal voucher");
+    expect(deadSea.faqs.find(faq => faq.q === "How do I pay for the airport train and Dead Sea bus?")?.a).toContain("about ₪19");
     expect(telAviv.weekend.join(" ")).not.toContain("old shared-taxi descriptions");
     expect(haifa.faqs).toHaveLength(10);
     expect(haifa.faqs.filter(faq => /bus 905/i.test(faq.q))).toHaveLength(3);

@@ -665,7 +665,7 @@ export const journeyDestinationGuides = {
         "caption": "Jerusalem to the Dead Sea: ways to travel",
         "headers": ["Transport", "Best for", "Journey time or fare", "Booking and planning"],
         "rows": [
-          ["Egged buses 486 / 444", "One destination on a budget", "Fare depends on destination; Ein Bokek bus ride takes about 1¾–2 hours", "Check your stop and return; reserve a seat on line 444"],
+          ["Egged buses 486 / 444", "One destination on a budget", "About ₪19 per adult to Ein Bokek; 1¾–2 hours", "Check your stop and return; reserve a seat on line 444"],
           ["Taxi or private driver", "Direct pickup and flexible sightseeing", "Approx. 90–110 minutes by road to Ein Bokek; request a quote", "Specify one-way or return, waiting time and group size"],
           ["Organised day tour", "Combining Masada, Ein Gedi and beach time", "Full-day itinerary; price depends on selected tour", "Confirm Jerusalem departure, beach, admissions and return"],
           ["Rental car", "Several independent stops and a flexible day", "Approx. 90–110 minutes to Ein Bokek, plus stops", "Check route access, parking and weather conditions"]
@@ -704,7 +704,7 @@ export const journeyDestinationGuides = {
           "title": "By public bus: Egged 486 and 444",
           "paragraphs": [
             "Egged line 486 departs from Jerusalem Central Bus Station along the Dead Sea corridor, serving stops including Ein Gedi, Masada and Ein Bokek. Line 444 continues towards Eilat and requires an advance seat reservation. Get off at the bus stop closest to your hotel or the attraction you plan to visit.",
-            "Get off near Ein Bokek Central Beach or at the stop closest to your hotel. The operator's journey planner displays the fare for your destination and date. Check your departure platform, return bus time and walking distance to the beach or hotel. Israel Railways does not serve the Dead Sea.",
+            "A standard adult single fare from Jerusalem to Ein Bokek is about ₪19. Fares to other Dead Sea stops depend on distance. Check your departure platform, return bus time and walking distance to the beach or hotel. Israel Railways does not serve the Dead Sea.",
             "Buses between individual Dead Sea attractions are infrequent, and the last bus back to Jerusalem may leave early. Friday and holiday timetables are shorter, while ordinary buses generally pause for Shabbat. Check the last return bus from your chosen stop."
           ],
           "sourceIds": [

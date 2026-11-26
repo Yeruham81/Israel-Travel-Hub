@@ -139,7 +139,7 @@ function JerusalemRailDetails({ guide }: { guide: AirportJourneyGuide }) {
           <Lightbulb aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 fill-amber-200/70 text-amber-600 dark:fill-amber-500/25 dark:text-amber-400" />
           <h4 className="text-xl font-semibold">Jerusalem train: free personal voucher</h4>
         </div>
-        <p className="mt-2">Israel Railways has required a <strong>free personal voucher for the selected Jerusalem train, in addition to a valid ticket</strong>. Check the current requirement and instructions before travelling.</p>
+        <p className="mt-2">Israel Railways requires a <strong>free personal voucher for each passenger on the selected Jerusalem train, in addition to a valid ticket</strong>. Follow the official voucher instructions before travelling.</p>
         <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
           <a href="https://rail.co.il/?lan=en&page=vouchers-jerusalem" className="font-semibold text-primary underline underline-offset-4" target="_blank" rel="noopener noreferrer">Official voucher instructions</a>
           <a href="https://www.rail.co.il/" className="font-semibold text-primary underline underline-offset-4" target="_blank" rel="noopener noreferrer">Check the train timetable and fare</a>
@@ -244,7 +244,7 @@ function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide 
       {guide.photos?.station && <figure className="mt-5 max-w-3xl">
         <img src={guide.photos.station.src} alt={guide.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
-      <UsefulJourneyLink label="Jerusalem train: free personal voucher instructions" href="https://rail.co.il/?lan=en&page=vouchers-jerusalem" context="Israel Railways' August 2026 notice requires a separate, free voucher for each passenger on the selected Jerusalem train, in addition to a valid ticket. Check the current rule before travelling." />
+      <UsefulJourneyLink label="Jerusalem train: free personal voucher instructions" href="https://rail.co.il/?lan=en&page=vouchers-jerusalem" context="Each passenger needs a free personal voucher for the selected Jerusalem train, in addition to a valid ticket." />
       <h4 className="mt-8 text-xl font-semibold">Step 2: Change to an Egged bus at Jerusalem Central Bus Station</h4>
       <p className="mt-3 leading-relaxed">Jerusalem–Yitzhak Navon railway station is deep underground. Allow time for lifts, the walk to Jerusalem Central Bus Station and its intercity platforms. Bus 486 serves the Dead Sea hotel area; reserved-seat bus 444 to Eilat may offer another departure. The buses are not coordinated with airport train arrivals. Check the last bus to Ein Bokek and leave enough time to change in Jerusalem.</p>
       <div role="region" aria-label="Airport-to-Ein-Bokek public transport legs" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border">
@@ -358,7 +358,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
 
   const sourceBlock = (
   <SourcesDisclosure>
-          <p className="mt-3 text-sm text-muted-foreground">Check the linked operators for fares, dated timetables and pickup points before travelling. {id === "jerusalem" || id === "ein-bokek" ? "If taking the Jerusalem train, check the current personal-voucher rule as well." : ""}</p>
+          <p className="mt-3 text-sm text-muted-foreground">Check the linked operators for fares, dated timetables and pickup points before travelling. {id === "jerusalem" || id === "ein-bokek" ? "If taking the Jerusalem train, reserve a free personal voucher for each passenger." : ""}</p>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
   
           </ul>

@@ -1052,7 +1052,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       "Compare the full journey from your starting address to your hotel or attraction.",
       "Choose a loaded Rav-Kav or approved payment app and validate every ride.",
       "Check 90-minute transfers, longer-distance fares and day passes.",
-      "For Jerusalem trains, check whether the free advance voucher is required.",
+      "For Jerusalem trains, reserve a free personal voucher for each passenger in addition to a valid ticket.",
       "Check weekend and holiday timetables before travelling.",
       "Confirm the last return service, luggage space and accessibility arrangements.",
       "For rural travel, review weather, attraction access and offline directions.",
