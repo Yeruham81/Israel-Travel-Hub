@@ -149,7 +149,7 @@ jobs:
         run: |
           bash scripts/build-validated-static.sh
           node scripts/verify-hostinger-static-export.mjs --editorial
-          bun run test
+          VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
       - name: Compare all emitted HTML and SEO files
         run: |
           cat > "$RUNNER_TEMP/unused-audit/compare.py" <<'PY'
