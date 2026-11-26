@@ -1,0 +1,57 @@
+name: Independent source inventory (audit only)
+on:
+  push:
+    branches: [audit/remove-lovable-source-scan]
+  pull_request:
+    branches: [main]
+    paths: [".github/workflows/independent-source-inventory.yml"]
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ca64b2f3b1a4a2c65aff2e6d14efc880a1ea567b
+          persist-credentials: false
+      - name: Scan every tracked file at the pinned base revision
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import collections, pathlib, re, subprocess
+          sha = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+          paths = subprocess.check_output(["git", "ls-files", "-z"]).decode().split("\0")
+          patterns = {
+              "brand": rb"lovable",
+              "template": rb"tanstack_start_ts",
+              "project-id": rb"7cd7aae9-57c0-4ced-b1fa-2f0691483fee",
+              "registry": rb"sandbox-npm-cache",
+          }
+          compiled = {k: re.compile(v, re.I) for k, v in patterns.items()}
+          count = collections.Counter()
+          files = 0
+          binary = 0
+          matches = 0
+          print("BASE", sha)
+          for name in filter(None, paths):
+              path = pathlib.Path(name)
+              data = path.read_bytes()
+              files += 1
+              is_binary = b"\x00" in data
+              binary += is_binary
+              hits = {k: len(p.findall(data)) for k,p in compiled.items() if p.search(data)}
+              name_hits = [k for k,p in compiled.items() if p.search(name.encode())]
+              if not hits and not name_hits:
+                  continue
+              matches += 1
+              count.update(hits)
+              line_numbers = [] if is_binary else [
+                  i for i, line in enumerate(data.splitlines(), 1)
+                  if any(p.search(line) for p in compiled.values())
+              ]
+              print("MATCH", name, "binary=" + str(is_binary), "counts=" + str(hits), "name=" + str(name_hits), "lines=" + ",".join(map(str, line_numbers)))
+          print("TOTAL", "files=" + str(files), "binary=" + str(binary), "matched_files=" + str(matches), "occurrences=" + str(dict(count)))
+          PY
