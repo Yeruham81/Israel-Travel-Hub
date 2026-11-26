@@ -83,10 +83,19 @@ jobs:
             let count=0;
             for (const [file,ds] of groups) {
               const edits=[];
-              const assetNames=new Set(file.statements.filter(ts.isImportDeclaration).filter(n=>n.importClause?.name && /^@\/assets\//.test(n.moduleSpecifier.text)).map(n=>n.importClause.name.text));
+              // Only plain, local image URL imports can become unused as a
+              // consequence of removing the reviewed, unused IMG table.
+              const assetNames=new Map(file.statements.filter(ts.isImportDeclaration).filter(n=>n.importClause?.name && /^@\/assets\/[\w./-]+\.(?:webp|png|jpe?g|avif|gif)$/i.test(n.moduleSpecifier.text)).map(n=>[n.importClause.name.text,n.moduleSpecifier.text]));
+              const imgDependencies=new Set();
+              let removedImageTable=false;
               function pureImageValue(node) {
                 if (ts.isStringLiteral(node)) return true;
-                if (ts.isIdentifier(node)) return assetNames.has(node.text);
+                if (ts.isIdentifier(node)) {
+                  const mod=assetNames.get(node.text);
+                  if (!mod) return false;
+                  imgDependencies.add(mod);
+                  return true;
+                }
                 if (ts.isObjectLiteralExpression(node)) return node.properties.every(p=>ts.isPropertyAssignment(p) && (ts.isIdentifier(p.name)||ts.isStringLiteral(p.name)) && pureImageValue(p.initializer));
                 return false;
               }
@@ -120,6 +129,7 @@ jobs:
                   if (!ts.isIdentifier(d.name)||d.name.text!=='IMG'||!d.initializer||!within.some(x=>x.code===6133&&x.start===d.name.getStart(file))) continue;
                   const init=ts.isSatisfiesExpression(d.initializer)?d.initializer.expression:d.initializer;
                   if (!ts.isObjectLiteralExpression(init)||!pureImageValue(init)) throw new Error('IMG initializer changed; review manually');
+                  removedImageTable=true;
                   edits.push(cleanLine(file,node));
                   manifest.push({round,file:'src/routes/index.tsx',kind:'unused pure image table',removed:['IMG']});
                 }
@@ -129,7 +139,14 @@ jobs:
               for (const e of edits.sort((a,b)=>b.a-a.a)) source=source.slice(0,e.a)+e.replacement+source.slice(e.b);
               // Check the combined edits too, in case multiple imports share a module.
               const nextModules=emittedModules(source,file.fileName);
-              for (const mod of oldModules) if (!nextModules.has(mod)) throw new Error('Runtime module removed: '+file.fileName+' '+mod);
+              for (const mod of oldModules) {
+                if (nextModules.has(mod)) continue;
+                if (removedImageTable && imgDependencies.has(mod)) {
+                  console.log('UNUSED IMAGE URL AFTER IMG REMOVAL',path.relative(process.cwd(),file.fileName),mod);
+                  continue;
+                }
+                throw new Error('Runtime module removed: '+file.fileName+' '+mod);
+              }
               fs.writeFileSync(file.fileName,source);
               count+=edits.length;
             }
