@@ -157,7 +157,8 @@ describe("shared ordinary tour catalog", () => {
     const offer = tourBookingOffers.find(offer => offer.productId === "eilat-glass-bottom-boat")!;
     const now = new Date("2026-10-22T12:00:00Z");
     expect(tourSnapshotPrice(offer, now)?.amount).toBe(24);
-    expect(tourSnapshotPrice(offer, new Date("2026-11-23T00:00:00Z"))).toBeUndefined();
+    expect(tourSnapshotPrice(offer, new Date("2026-11-23T00:00:00Z"))?.amount).toBe(24);
+    expect(tourSnapshotPrice(offer, new Date("2030-01-01T00:00:00Z"))?.amount).toBe(24);
     expect(tourSnapshotPrice(offer, new Date("2026-10-21T00:00:00Z"))).toBeUndefined();
     expect(tourSnapshotPrice({ ...offer, listedPrice: { ...offer.listedPrice!, amount: NaN } }, now)).toBeUndefined();
     expect(tourSnapshotPrice({ ...offer, listedPrice: { ...offer.listedPrice!, sourceId: "unrelated" } }, now)).toBeUndefined();

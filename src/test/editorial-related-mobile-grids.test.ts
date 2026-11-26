@@ -21,9 +21,7 @@ const sections: [string, string, string][] = [
   ["src/routes/private-driver-in-israel.tsx", 'id="travel-guides"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
   ["src/routes/private-driver-in-israel.tsx", 'id="next-steps"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
   ["src/routes/shore-excursions.index.tsx", 'id="shore-related-guides"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
-  ["src/routes/shore-excursions.index.tsx", 'id="shore-practical"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
   ["src/components/PortPage.tsx", 'aria-labelledby="shore-local-h"', "grid grid-cols-2 gap-4 lg:grid-cols-3"],
-  ["src/components/PortPage.tsx", 'aria-labelledby="shore-practical-h"', "grid grid-cols-2 gap-3 lg:grid-cols-3"],
   ["src/components/MountOlivesRelatedGuides.tsx", 'data-testid="mount-olives-related-guides"', "grid grid-cols-2 gap-4 lg:grid-cols-3"],
   ["src/components/MountZionRelatedGuides.tsx", 'data-testid="mount-zion-related-guides"', "grid grid-cols-2 gap-4 lg:grid-cols-3"],
 ];
@@ -46,6 +44,19 @@ describe("editorial six-card grid responsive parity", () => {
     expect(shared).toContain('size-5 shrink-0 text-primary');
   });
 
+  it("reuses the shared six-link grid on both shore page templates and stacks hub guide cards", () => {
+    for (const file of ["src/routes/shore-excursions.index.tsx","src/components/PortPage.tsx"]) {
+      expect(read(file)).toContain('<IconTripPlanningLinks id="shore-practical"');
+    }
+    expect(read("src/components/IconTripPlanningLinks.tsx")).toContain("grid grid-cols-2 gap-3 lg:grid-cols-3");
+    const hub=read("src/routes/shore-excursions.index.tsx");
+    const start=hub.indexOf('id="shore-related-guides"');
+    const section=hub.slice(start,hub.indexOf("</section>",start));
+    expect(section).toContain("flex-col");
+    expect(section).toContain("aspect-[16/9] w-full");
+    expect(section).not.toContain("sm:flex-row");
+  });
+
   it("uses the same grid rule in the shared attraction and related-guide components", () => {
     const attraction = read("src/components/AttractionDestinationPage.tsx");
     expect(attraction).toContain('className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-3"');
@@ -63,7 +74,6 @@ describe("editorial six-card grid responsive parity", () => {
       ["src/routes/attractions.index.tsx", 'id="attractions-related"'],
       ["src/routes/airport-transfers.index.tsx", 'id="keep-planning"'],
       ["src/routes/private-driver-in-israel.tsx", 'id="travel-guides"'],
-      ["src/routes/shore-excursions.index.tsx", 'id="shore-related-guides"'],
     ] as const) {
       const source = read(file);
       const start = source.indexOf(marker);

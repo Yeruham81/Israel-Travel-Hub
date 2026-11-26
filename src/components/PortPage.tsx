@@ -1,8 +1,10 @@
+import { IconTripPlanningLinks } from "@/components/IconTripPlanningLinks";
+import { ShorePortPlanning } from "@/components/ShorePlanning";
 import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { Link } from "@tanstack/react-router";
 import { CalendarDays, Compass, Smartphone, TrainFront, CarFront, CloudSun } from "lucide-react";
 import { useState } from "react";
-import { Breadcrumbs, FaqList, SourceList } from "@/components/Guide";
+import { Breadcrumbs, FaqList, SourceList, OnThisPage } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/GuideCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { ShoreQuoteForm } from "@/components/ShoreQuoteForm";
@@ -52,27 +54,35 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
   return <main className="mx-auto max-w-5xl px-4 pb-12">
     <div className="pt-6"><Breadcrumbs items={crumbsFor(id).map(crumb => ({ name: crumb.name, to: crumb.path }))} /></div>
     <header className="mt-2">
-      <GuideHeroLayout image={<GuideHeroMedia src={port.photo.src} alt={port.photo.alt} width={1200} height={450} compact />}>
+      <GuideHeroLayout image={<GuideHeroMedia src={port.photo.src} alt={port.photo.alt} width={710} height={473} compact />}>
         <p className="eyebrow">Private excursions, guided tours & cruise-port pickup</p>
         <h1 className="guide-page-title mt-3 font-semibold">{port.title}</h1>
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
         <PageUpdated date={SHORE_EXCURSION_UPDATED_DATE} />
+        <AuthorCard />
       </GuideHeroLayout>
     </header>
-    <div className="mt-4"><AuthorCard introduction /></div>
+    <OnThisPage sections={[["itineraries","Shore excursions"],["shore-planning","Compare destinations"],["shore-map","Destination map"],["port-pickup","Port pickup"],["return-to-ship","Return to the ship"],["faq","FAQ"],["shore-local","Related guides"],["request-quote","Contact Me"]]}/>
     <ShoreServiceCatalog portId={id} filters={filters} onFilterChange={onFilterChange} itineraryId={itineraryId} onSelectItinerary={setItineraryId} />
-    <section aria-labelledby="shore-planning-h" className="mt-12">
-      <h2 id="shore-planning-h" className="text-2xl font-semibold">Choosing the right shore excursion from {port.name}</h2>
-      <div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">
-        <p>{port.answer}</p>
-        <p>{port.overview[0]}</p>
-        <p><strong className="text-foreground">Port pickup:</strong> {port.portAccess.paragraphs[0]} <a href={port.portAccess.source.url} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-2">Official {port.name} Port information</a>.</p>
-        <p><strong className="text-foreground">Returning to the ship:</strong> Plan from the time you can actually disembark. Confirm the pickup point, any shuttle, road-traffic allowance and return buffer before the all-aboard deadline. Ask what happens if your port call changes.</p>
-        {id === "ashdod" && <p>For Masada, check <a href="https://en.parks.org.il/reserve-park/masada-national-park" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-2">official park and cable-car information</a> before planning your beach stop and return journey.</p>}
+    <ShorePortPlanning id={id} name={port.name}/>
+    <section id="port-pickup" aria-labelledby="port-pickup-h" className="mt-12 scroll-mt-24">
+      <h2 id="port-pickup-h" className="text-3xl">{port.portAccess.heading}</h2>
+      <div className="mt-4 space-y-3 leading-relaxed">
+        {port.portAccess.paragraphs.map(paragraph=><p key={paragraph}>{paragraph}</p>)}
+        <p><a href={port.portAccess.source.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Official {port.name} Port information</a>{id==="haifa"&&<> · <a href="https://www.google.com/maps/search/?api=1&query=65+HaAtsmaut+Street+Haifa+Israel" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Public terminal approach on Google Maps</a></>}</p>
       </div>
     </section>
+    <section id="return-to-ship" aria-labelledby="return-to-ship-h" className="mt-12 scroll-mt-24">
+      <h2 id="return-to-ship-h" className="text-3xl">Planning your return to the cruise ship</h2>
+      <p className="mt-4 leading-relaxed">I plan your day from the time you expect to disembark until the all-aboard deadline. Docking and sailing times are different from the time available for sightseeing.</p>
+      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {[["Docking","Arrival of your ship at the port."],["Disembarkation","When you can leave the ship and meet your driver."],["All aboard","The deadline to be back on board."],["Sailing","Scheduled departure from port."]].map(([title,text])=><div key={title} className="rounded-xl border bg-card p-3"><h3 className="font-semibold">{title}</h3><p className="mt-2 text-sm">{text}</p></div>)}
+      </div>
+      <p className="mt-4">Allow time for the return drive, shuttle and security procedures. Share any changes to your ship's schedule with your driver or tour operator promptly.</p>
+      {id==="ashdod"&&<p className="mt-3">For Masada, plan your visit around the <a href="https://en.parks.org.il/reserve-park/masada-national-park" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">park and cable-car operating hours</a>.</p>}
+    </section>
     <FaqList faqs={port.faqs} />
-    <section aria-labelledby="shore-local-h" className="mt-12">
+    <section id="shore-local" aria-labelledby="shore-local-h" className="mt-12">
       <h2 id="shore-local-h" className="text-2xl font-semibold">Explore destinations from {port.name} further</h2>
       <p className="mt-2 text-sm text-muted-foreground">Discover the places you can include in your day ashore.</p>
       <ul className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" aria-label="Useful guides for your day ashore">
@@ -88,24 +98,9 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
         </li>)}
       </ul>
     </section>
-    <section aria-labelledby="shore-practical-h" className="mt-12">
-      <h2 id="shore-practical-h" className="text-2xl font-semibold">Practical guides for your trip to Israel</h2>
-      <p className="mt-2 text-sm text-muted-foreground">Helpful information for your cruise stop and journeys beyond the excursion.</p>
-      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
-        {practicalGuides.map(guide => {
-          const Icon = guide.icon;
-          return <Link key={guide.to} to={guide.to} className="group flex min-w-0 flex-col items-start gap-3 sm:flex-row rounded-xl border bg-secondary/25 p-3.5 transition-colors hover:border-primary hover:bg-secondary/50 focus-visible:outline-2 focus-visible:outline-primary">
-            <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-background text-primary"><Icon size={20} aria-hidden="true" /></span>
-            <span className="min-w-0">
-              <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{guide.title}</span>
-              <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
-            </span>
-          </Link>;
-        })}
-      </div>
-    </section>
+    <IconTripPlanningLinks id="shore-practical" title="Plan the next part of your trip" items={practicalGuides}/>
     <ShoreQuoteForm key={id} portId={id} itineraryId={itineraryId} onItineraryChange={setItineraryId} />
-    <SourceList ids={shoreSourceIds(id)} intro="My rates in ILS cover private transportation only. For external excursions, confirm availability, final prices, inclusions and return arrangements with the operator." />
+    <SourceList ids={shoreSourceIds(id)} intro="Official port information and tour booking sources." />
     <details className="mt-10 rounded-xl border p-4 text-sm">
       <summary className="cursor-pointer font-semibold">Image credits</summary>
       <div className="mt-3 space-y-3">{[...new Map(photos.map(photo => [photo.src, photo])).values()].map(photo => <GuidePhotoCredit key={photo.src} photo={photo} insideDisclosure />)}</div>

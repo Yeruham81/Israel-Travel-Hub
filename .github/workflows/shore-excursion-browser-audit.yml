@@ -1,0 +1,64 @@
+name: Shore excursion browser audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/components/PortPage.tsx'
+      - 'src/components/Shore*.tsx'
+      - 'src/data/shore*.ts'
+      - 'src/routes/shore-excursions*'
+      - 'public/maps/shore-destinations.html'
+      - 'scripts/audit-shore-excursions.cjs'
+      - '.github/workflows/shore-excursion-browser-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: shore-audit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    env:
+      CI: "true"
+      VITE_INDEXABLE: "false"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Install headless Chromium
+        run: |
+          npm install --prefix /tmp/shore-audit --no-save playwright@1.56.1
+          /tmp/shore-audit/node_modules/.bin/playwright install --with-deps chromium
+      - name: Start local website
+        run: |
+          node scripts/generate-sitemap.mjs --mode development
+          nohup ./node_modules/.bin/vite dev --host 127.0.0.1 --port 4173 > /tmp/shore-vite.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS --max-time 4 http://127.0.0.1:4173/shore-excursions/ > /dev/null; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/shore-vite.log
+          exit 1
+      - name: Audit actual maps, consent, responsive forms and catalog navigation
+        env:
+          NODE_PATH: /tmp/shore-audit/node_modules
+        run: node scripts/audit-shore-excursions.cjs
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: shore-excursion-browser-evidence
+          path: shore-browser-evidence/
+          if-no-files-found: warn
+      - name: Preview diagnostics
+        if: failure()
+        run: test ! -f /tmp/shore-vite.log || tail -100 /tmp/shore-vite.log

@@ -16,7 +16,8 @@ describe("External tour and activity cards use a third-width desktop layout", ()
 
     const shore = source("ShoreServiceCatalog");
     expect(shore).toContain('className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3"');
-    expect(shore).toContain("partnerTours.length % 3 === 2");
+    expect(shore).not.toContain("partnerTours.length % 3");
+    expect(shore).not.toContain("shore-companion-card");
     expect(shore).toContain("<ExternalProviderTourCard");
     expect(source("ExternalProviderTourCard")).toContain('className="aspect-[16/9] w-full object-cover"');
   });

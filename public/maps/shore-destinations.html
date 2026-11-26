@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/><meta name="referrer" content="strict-origin-when-cross-origin"/>
+<title>Shore excursion destinations</title>
+<link rel="stylesheet" data-consent-href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous"/>
+<style>
+html,body,#map{margin:0;width:100%;height:100%}
+body{font:13px/1.4 system-ui,sans-serif;background:#edf3f7;color:#123346}
+#map{position:absolute;inset:0}
+#status{position:absolute;inset:0;z-index:5;display:grid;place-content:center;padding:20px;text-align:center;background:#edf3f7f2}
+#status[hidden]{display:none}
+#status p{margin:0 0 12px}
+a{color:#195c9e}
+.maplibregl-popup-content{font:13px/1.5 system-ui,sans-serif;max-width:245px;padding:10px 12px}
+.maplibregl-ctrl-attrib{font:10px/1.3 system-ui,sans-serif}
+.shore-pin{display:grid;place-items:center;width:27px;height:27px;border:2px solid #fff;border-radius:50%;background:#1d4ed8;color:white;font:bold 12px/1 system-ui,sans-serif;box-shadow:0 2px 7px #102d4080;cursor:pointer}
+.shore-pin[aria-pressed="true"]{background:#a34b10;outline:3px solid #082f49;outline-offset:2px;z-index:10}
+.shore-pin:focus-visible{outline:3px solid #082f49;outline-offset:3px}
+</style>
+<script defer src="/consent-embed.js" data-category="external"></script>
+</head>
+<body>
+<div id="map" role="region" aria-label="All shore excursion destinations"></div>
+<div id="status" role="status"><p id="message">Loading destinations…</p></div>
+<script type="application/x-consent" data-consent-src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
+<script type="application/x-consent">
+(()=>{"use strict";
+const pointsByPort={"haifa":[["Haifa Port",32.819,35],["Akko",32.922,35.07],["Rosh Hanikra",33.093,35.105],["Nazareth",32.702,35.297],["Sea of Galilee",32.792,35.532],["Tel Aviv & Jaffa",32.055,34.754],["Jerusalem",31.778,35.234]],"ashdod":[["Ashdod Port",31.831,34.638],["Tel Aviv & Jaffa",32.055,34.754],["Jerusalem",31.778,35.234],["Bethlehem",31.704,35.207],["Masada",31.315,35.353],["Dead Sea",31.197,35.363],["Nazareth",32.702,35.297],["Sea of Galilee",32.792,35.532]]};
+const port=new URLSearchParams(location.search).get("port");
+const status=document.getElementById("status"),message=document.getElementById("message");
+if(port!=="haifa"&&port!=="ashdod"){message.textContent="Choose a cruise port in the guide.";return}
+const points=pointsByPort[port];
+if(typeof maplibregl==="undefined"){message.textContent="Use the numbered location links in the guide.";return}
+const bounds=new maplibregl.LngLatBounds();
+points.forEach(([,lat,lon])=>bounds.extend([lon,lat]));
+let map;
+try{
+maplibregl.setWorkerCount(1);
+map=new maplibregl.Map({container:"map",style:new URL("./english-style.json",location.href).href,bounds,fitBoundsOptions:{padding:45,maxZoom:10},cooperativeGestures:true,dragRotate:false,touchPitch:false,pitchWithRotate:false,renderWorldCopies:false,maxPitch:0});
+map.addControl(new maplibregl.NavigationControl({showCompass:false}),"top-right");
+map.once("load",()=>{points.forEach(([label,lat,lon],i)=>{
+const el=document.createElement("button");el.type="button";el.className="shore-pin";el.textContent=String(i+1);el.title=label;el.setAttribute("aria-label",label);
+const popup=document.createElement("div");const name=document.createElement("strong");name.textContent=label;popup.append(name);
+new maplibregl.Marker({element:el}).setLngLat([lon,lat]).setPopup(new maplibregl.Popup({offset:18}).setDOMContent(popup)).addTo(map);
+});status.hidden=true;});
+map.on("error",()=>{if(!status.hidden)message.textContent="Use the numbered location links in the guide.";});
+window.addEventListener("pagehide",e=>{if(!e.persisted)map.remove();});
+}catch{message.textContent="Use the numbered location links in the guide.";}
+})();
+</script></body></html>

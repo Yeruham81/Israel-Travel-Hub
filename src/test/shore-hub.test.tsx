@@ -54,8 +54,8 @@ describe("Israel shore excursion hub", () => {
     const homepageShorePhoto = services.find(service => service.id === "shore-excursions")?.feature?.src;
     expect(homepageShorePhoto).toBeTruthy();
     expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: /Cruise passengers walking/ })).toHaveAttribute("src", homepageShorePhoto);
-    // The four route cards have distinct illustrations, separate from related-guide images.
-    expect(within(destinations).getAllByRole("img")).toHaveLength(4);
+    // The six route cards have distinct illustrations, separate from related-guide images.
+    expect(within(destinations).getAllByRole("img")).toHaveLength(6);
     expect(destinations.querySelector('[data-experience="coast"] img')?.getAttribute("src")).toMatch(/jaffa-route/);
     for (const experience of shoreHubExperiences) {
       const card = destinations.querySelector(`[data-experience="${experience.id}"]`);
@@ -63,27 +63,23 @@ describe("Israel shore excursion hub", () => {
       expect(card?.querySelector("img")).not.toBeNull();
       expect(card).toHaveTextContent(experience.title);
     }
-    const topChoices = [
-      screen.getByRole("link", { name: "Excursions from Ashdod" }),
-      screen.getByRole("link", { name: "Excursions from Haifa" }),
-    ];
+    expect(within(screen.getByTestId("hub-header")).queryByRole("link",{name:"Excursions from Ashdod"})).not.toBeInTheDocument();
+    expect(within(screen.getByTestId("hub-header")).queryByRole("link",{name:"Excursions from Haifa"})).not.toBeInTheDocument();
     const quoteNav = screen.getByRole("navigation", { name: "Private cruise-port quote requests" });
     const bottomChoices = [
       within(quoteNav).getByRole("link", { name: "Request a quote from Ashdod" }),
       within(quoteNav).getByRole("link", { name: "Request a quote from Haifa" }),
     ];
-    expect(topChoices[0]).toHaveClass("btn-primary");
-    expect(topChoices[1]).toHaveClass("btn-primary");
     expect(bottomChoices[0]).toHaveClass("text-primary");
     expect(bottomChoices[1]).toHaveClass("text-primary");
     expect(bottomChoices[0]).toHaveAttribute("href", "/shore-excursions/ashdod/#request-quote");
     expect(bottomChoices[1]).toHaveAttribute("href", "/shore-excursions/haifa/#request-quote");
-    expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
     const ports = screen.getByRole("list", { name: "Cruise port excursion guides" });
     expect(ports).toHaveTextContent("A great starting point for visiting some of Israel's major attractions.");
     expect(ports).toHaveTextContent("The ideal location for touring the northern coast and Galilee region.");
     expect([...ports.querySelectorAll("img")].map(image => image.getAttribute("src")))
-      .toEqual(expect.arrayContaining([expect.stringMatching(/ashdod-port-card/), expect.stringMatching(/haifa-port-card/)]));
+      .toEqual(expect.arrayContaining([expect.stringMatching(/ashdod-shore-excursions/), expect.stringMatching(/haifa-shore-excursions/)]));
     expect(screen.queryByText(/Pickup arrangements differ:/)).not.toBeInTheDocument();
     const credits = screen.getByText("Photo credits").closest("details");
     expect(credits).not.toBeNull();

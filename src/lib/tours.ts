@@ -67,7 +67,7 @@ export function tourSnapshotPrice(offer: TourBookingOffer, now = new Date()) {
   const source = sources.find(source => source.id === price.sourceId);
   const checked = Date.parse(`${price.checkedAt}T00:00:00Z`);
   const age = now.getTime() - checked;
-  if (source?.id !== offer.id || source.checkedAt !== price.checkedAt || price.checkedAt !== offer.checkedAt || !Number.isFinite(age) || age < 0 || age > 30 * 86_400_000) return undefined;
+  if (source?.id !== offer.id || source.checkedAt !== price.checkedAt || price.checkedAt !== offer.checkedAt || !Number.isFinite(age) || age < 0) return undefined;
   if (new Date(checked).toISOString().slice(0, 10) !== price.checkedAt) return undefined;
   return price;
 }
