@@ -65,7 +65,7 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
     photo: airportTransferPhotos["tel-aviv"]!,
     description: "Combine Old Jaffa's stone lanes and harbour with Tel Aviv's Mediterranean promenade. Choose time at a market, a neighborhood walk or a beachside lunch.",
     bestFor: "Coastal scenery, city life and a gentler pace",
-    planningNote: "Choose the walking and lunch stops around your time ashore; this is a shorter coastal journey than the desert options.",
+    planningNote: "This coastal trip involves less driving than the desert routes, leaving more time for walks and lunch ashore.",
     highlights: ["Old Jaffa", "Tel Aviv seafront", "Flexible city stops"],
   },
   "ashdod-jerusalem": {
@@ -77,7 +77,7 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
   },
   "ashdod-masada": {
     photo: masadaPhoto,
-    description: "Head into the Judean Desert for Masada and a Dead Sea stop. Decide whether your priority is the fortress visit, floating time or a slower combination of both.",
+    description: "Head into the Judean Desert for Masada and a Dead Sea stop. Spend more time at the fortress or floating in the Dead Sea, or allow time for both.",
     bestFor: "Desert landscapes, ancient history and Dead Sea time",
     planningNote: "A long return journey: confirm site opening, cable-car admission, beach or resort access and the time available at each stop.",
     highlights: ["Masada", "Judean Desert", "Dead Sea stop"],
@@ -86,21 +86,21 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
     photo: airportTransferPhotos["dead-sea"]!,
     description: "Combining the desert with Jerusalem is an ambitious custom request, with priorities and shorter stops agreed before booking.",
     bestFor: "A long port call with carefully chosen highlights",
-    planningNote: "Request only for a sufficiently long call. Agree the priorities and return buffer before booking.",
+    planningNote: "Allow a long port call for this excursion. Agree on the main stops and leave enough time to return to the ship.",
     highlights: ["Masada", "Dead Sea", "Selected Jerusalem stops"],
   },
   "haifa-akko": {
     photo: { src: akko, alt: "Fishing boats and stone buildings around Akko's old harbour", sourceUrl: "", credit: "Akko harbour · image reused from the publisher's original Haifa excursion page; original JPEG retained" },
     description: "Explore Akko's old harbour and historic lanes, with a proposed coastal extension to Rosh Hanikra. Agree the actual stops and walking pace with your driver.",
     bestFor: "Old-town atmosphere and northern coastal scenery",
-    planningNote: "Ask whether Rosh Hanikra is operating and accessible on your date before relying on it. Discuss an alternative northern stop if needed.",
+    planningNote: "Confirm that Rosh Hanikra is open and accessible on your date; discuss an alternative stop in northern Israel if needed.",
     highlights: ["Akko Old City", "Historic harbour", "Rosh Hanikra if accessible"],
   },
   "haifa-tel-aviv": {
     photo: { src: jaffa, alt: "Old Jaffa and its harbour beside the Mediterranean coast", sourceUrl: "" },
     description: "Travel south for Old Jaffa and Tel Aviv's seafront, architecture or city neighborhoods. Pick a few priorities and leave room for traffic on the return to Haifa.",
     bestFor: "Urban culture, Jaffa and Mediterranean promenades",
-    planningNote: "This involves more road time than a nearby northern outing. Confirm the time left for walking, food and any extra stops.",
+    planningNote: "This route takes longer than nearby northern excursions. Allow time for walking, meals and any extra stops.",
     highlights: ["Old Jaffa", "Tel Aviv promenade", "City neighborhoods"],
   },
   "haifa-galilee": {
@@ -112,7 +112,7 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
   },
   "haifa-jerusalem": {
     photo: { src: "/images/hotels/jerusalem-night.webp", alt: "Illuminated walls and historic skyline of Jerusalem Old City after dusk", sourceUrl: "" },
-    description: "A long day south to Jerusalem, focused on your essential Old City sites and viewpoints. Keep the plan selective and make the ship's return deadline the first planning constraint.",
+    description: "A long day south to Jerusalem, focused on your essential Old City sites and viewpoints. Choose a few main sights and allow ample time to return before the ship's all-aboard deadline.",
     bestFor: "A Jerusalem priority on a sufficiently long port call",
     planningNote: "Confirm the full return plan before choosing this route. A Bethlehem visit and licensed guiding need separate arrangements.",
     highlights: ["Jerusalem Old City", "Chosen holy sites", "Viewpoint if time allows"],
@@ -136,12 +136,12 @@ const portDetails: Record<ShorePortId, PortDetails> = {
     answer: "A private car and driver lets you agree the stops and walking pace; licensed guiding and admission are separate unless stated. Guided tours follow the operator's published itinerary and inclusions. Before booking any option, verify its Ashdod Port meeting point, return arrangements and fit with your ship's deadline.",
     photo: { src: ashdod, alt: "Cruise ships alongside the quays at Ashdod Port", sourceUrl: "" },
     overview: [
-      "Ashdod is the southern cruise-port starting point in this guide. A Tel Aviv–Jaffa day keeps the focus on the coast; Jerusalem puts historic and religious sites first. Masada and the Dead Sea add a longer desert drive, so choose them for a port call that leaves enough time for the return.",
-      "Make the main destination clear: the Western Wall, Jaffa, Masada or a Dead Sea beach involves a different day. Agree the stops and planned return rather than trying to fit every regional attraction into one excursion.",
+      "Ashdod is a convenient starting point for excursions to the coast, Jerusalem and the Judean Desert. A Tel Aviv–Jaffa day keeps the focus on the coast; Jerusalem puts historic and religious sites first. Masada and the Dead Sea add a longer desert drive, so choose them for a port call that leaves enough time for the return.",
+      "Make the main destination clear: the Western Wall, Jaffa, Masada or a Dead Sea beach involves a different day. Choose your main stops and agree on the return time before setting out.",
     ],
     faqs: [
       { q: "Which excursion suits a shorter Ashdod port call?", a: "Discuss Tel Aviv and Jaffa or a more local coastal plan before a long desert itinerary. Share your expected time off the ship and all-aboard deadline to allow for the return journey." },
-      { q: "Can I combine Jerusalem, Masada and the Dead Sea?", a: "Combining these destinations makes for an ambitious long day. Request a feasibility check for your exact call and agree the priority stops. Choose a simpler itinerary if the schedule does not allow enough time." },
+      { q: "Can I combine Jerusalem, Masada and the Dead Sea?", a: "Combining these destinations makes for an ambitious long day. Send me your ship's schedule so we can agree on the main stops and see whether the combined trip is possible. Choose a simpler itinerary if the schedule does not allow enough time." },
       ...sharedFaqs,
     ],
     related: portShoreGuides.ashdod,
