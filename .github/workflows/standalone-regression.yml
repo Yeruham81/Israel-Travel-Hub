@@ -1,0 +1,140 @@
+name: Standalone migration regression (audit only)
+on:
+  push:
+    branches: [audit/standalone-regression]
+permissions:
+  contents: read
+jobs:
+  comparison:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: "https://www.israel-taxi.com"
+      VITE_INDEXABLE: "true"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: audit
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          ref: 67d8abc60c53f43faeda4f0895bce7e520025f50
+          path: before
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          ref: a3ff5bb9af782a6e473164ae8a1ae62023ef8cc0
+          path: after
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('after/bun.lock') }}
+          restore-keys: |
+            bun-${{ runner.os }}-${{ runner.arch }}-
+      - name: Build and verify previous production revision
+        working-directory: before
+        run: |
+          bash scripts/install-ci-dependencies.sh
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs --editorial
+      - name: Build and verify independent production revision
+        working-directory: after
+        run: |
+          bash scripts/install-ci-dependencies.sh
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs --editorial
+      - name: Compare every sitemap page and scan all generated files
+        run: python3 audit/scripts/standalone-regression-compare.py before/.output/public after/.output/public
+      - name: Scan all tracked candidate files
+        working-directory: after
+        run: |
+          python3 - <<'PY'
+          import re, subprocess, pathlib
+          marker=re.compile(rb'lovable|tanstack_start_ts|7cd7aae9-57c0-4ced-b1fa-2f0691483fee|sandbox-npm-cache',re.I)
+          names=[x for x in subprocess.check_output(['git','ls-files','-z']).split(b'\0') if x]
+          hits=[x.decode() for x in names if marker.search(x) or marker.search(pathlib.Path(x.decode()).read_bytes())]
+          print('SOURCE SCAN',len(names),'files',len(hits),'matches',hits)
+          assert not hits
+          PY
+      - name: Install Chromium
+        run: |
+          npm install --prefix /tmp/static-browser-audit --no-save playwright@1.56.1
+          /tmp/static-browser-audit/node_modules/.bin/playwright install --with-deps chromium
+      - name: Test actual static output with mocked providers
+        env:
+          NODE_PATH: /tmp/static-browser-audit/node_modules
+          COOKIE_AUDIT_URL: http://127.0.0.1:4180
+        run: |
+          python3 -m http.server 4180 --bind 127.0.0.1 --directory after/.output/public > /tmp/static-server.log 2>&1 &
+          trap 'kill $! 2>/dev/null || true' EXIT
+          for i in $(seq 1 20); do if curl -fsS http://127.0.0.1:4180/ >/dev/null; then break; fi; sleep 1; done
+          node after/scripts/audit-cookie-consent.cjs
+          node audit/scripts/standalone-regression-browser.cjs
+  full-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: "true"
+      CI_FUNCTIONAL_ONLY: "false"
+      VITE_INDEXABLE: "false"
+      VITE_CANONICAL_ORIGIN: "https://www.israel-taxi.com"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: a3ff5bb9af782a6e473164ae8a1ae62023ef8cc0
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            bun-${{ runner.os }}-${{ runner.arch }}-
+      - run: bash scripts/install-ci-dependencies.sh
+      - run: python3 scripts/test-deployment-storage.py
+      - run: bun run build
+      - run: npx tsc --noEmit
+      - name: Run entire test suite including editorial layouts
+        run: bun run test
+      - name: Lint
+        if: always()
+        run: bun run lint
+  staging-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: "https://saddlebrown-guanaco-454061.hostingersite.com"
+      VITE_INDEXABLE: "false"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: a3ff5bb9af782a6e473164ae8a1ae62023ef8cc0
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - run: bash scripts/build-validated-static.sh
+      - run: node scripts/verify-hostinger-static-export.mjs
