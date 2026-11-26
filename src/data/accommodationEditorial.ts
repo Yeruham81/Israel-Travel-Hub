@@ -1,11 +1,11 @@
 export const accommodationEditorial = {
   jerusalem: { path: "/travel-blog/where-to-stay-in-jerusalem/", title: "Where to Stay in Jerusalem: Choose Your Base",
     description: "Compare Jerusalem neighbourhoods for Old City access, transport, food and local atmosphere before choosing hotels.",
-    intro: "Jerusalem's hills, Old City gates and different neighbourhood rhythms make the location of your hotel especially important. I compare the main areas, from Jaffa Road to the Old City and quieter residential streets, so you can choose a base that suits your trip.",
+    intro: "Choosing the right hotel location in Jerusalem can make a big difference to your visit, especially given the city's hills and the entrances to the Old City. I compare the main areas, from Jaffa Road to the Old City and quieter residential streets, so you can choose a base that suits your trip.",
     tip: "For a first visit, consider the walk to the Old City gates, the light rail, evening dining and where a taxi can stop with your luggage." },
   telaviv: { path: "/travel-blog/where-to-stay-in-tel-aviv/", title: "Where to Stay in Tel Aviv: Beaches & Neighborhoods",
     description: "Compare Tel Aviv and Jaffa neighborhoods for beaches, food markets, nightlife and transport before booking.",
-    intro: "A beachfront hotel, a small place in Jaffa and an address near Rothschild Boulevard can give you very different experiences. I explain the city's main areas and their tradeoffs before you choose a hotel.",
+    intro: "Staying by the beach, in historic Jaffa or near Rothschild Boulevard offers three very different ways to experience Tel Aviv. I'll help you choose the neighbourhood that best suits your visit.",
     tip: "Decide how often you want to walk to the sea, which neighborhoods you will visit in the evening and whether you need convenient public transport." },
   haifa: { path: "/travel-blog/best-hotels-in-haifa/", title: "Best Hotels in Haifa: Where to Stay",
     description: "Compare 10 Haifa hotels by location, travel style, beach access and facilities, from the German Colony and Mount Carmel to the southern coast.",

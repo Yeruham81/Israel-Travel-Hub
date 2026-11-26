@@ -55,9 +55,9 @@ const decisionNotes = {
     check: "If you plan to arrive on Friday evening or Saturday, check your hotel's reception and meals, as well as transport. Services vary by area.",
     faqs: [
       { q: "Where is the most convenient base for a first visit to Jerusalem?", a: "Downtown around Jaffa Road is a practical starting point for restaurants, the light rail and walks towards the Old City. If Jaffa Gate is your priority, compare Mamilla and nearby King David Street." },
-      { q: "Should I stay inside Jerusalem's Old City?", a: "It can be a memorable choice if you are visiting religious and historic sites early or late in the day. Check the specific gate, steps and luggage access first; a hotel just outside the walls can be simpler." },
-      { q: "Which Jerusalem areas suit families or longer stays?", a: "The German Colony and Baka offer more of a residential atmosphere. Downtown can be more convenient without a car, depending on where you will spend your days." },
-      { q: "What changes over Shabbat?", a: "Regular public transport and many businesses in West Jerusalem pause from Friday afternoon to Saturday evening. East Jerusalem and parts of the Old City have different business patterns. Confirm your arrival, meals and check-in arrangements." },
+      { q: "Should I stay inside Jerusalem's Old City?", a: "It can be a memorable choice if you are visiting religious and historic sites early or late in the day. Consider the nearest Old City gate, stairs and how far you'll need to carry your luggage. A hotel just outside the walls may be more convenient." },
+      { q: "Which Jerusalem areas suit families or longer stays?", a: "The German Colony and Baka offer more of a residential atmosphere. Downtown is a convenient choice if you plan to explore Jerusalem on foot or by public transport." },
+      { q: "What changes over Shabbat?", a: "Regular public transport and many businesses in West Jerusalem pause from Friday afternoon to Saturday evening. Shops and restaurants in East Jerusalem and parts of the Old City often follow different opening hours. Confirm your arrival, meals and check-in arrangements." },
     ],
   },
   telaviv: {
@@ -65,9 +65,9 @@ const decisionNotes = {
     callout: "A Tel Aviv neighbourhood name can cover quite different streets. Before booking, compare the actual walk from the hotel door to the beach, restaurants or sights you plan to visit most.",
     check: "If you arrive on Friday evening or Saturday, check the current airport-to-hotel connection. Trains and regular bus routes may have limited or no service.",
     faqs: [
-      { q: "Where should I stay in Tel Aviv on my first visit?", a: "The central beachfront around Gordon, Frishman and Bograshov beaches works well for sea-focused visits. The streets around Dizengoff Square balance city life and beach access." },
+      { q: "Where should I stay in Tel Aviv on my first visit?", a: "The area around Gordon, Frishman and Bograshov beaches is ideal for a beach holiday. Stay near Dizengoff Square for restaurants, shops and easy access to the beach." },
       { q: "Where is a quieter area for a family stay?", a: "Residential parts of the Old North have parks and northern beaches nearby. The Tel Aviv Port itself is busier, so pay attention to the exact street and room location." },
-      { q: "Is Jaffa a good base for exploring Tel Aviv?", a: "Yes, especially if you enjoy history, galleries, food and the old port. Central beaches and Dizengoff are farther north, so consider the transport or walking you will need." },
+      { q: "Is Jaffa a good base for exploring Tel Aviv?", a: "Yes, especially if you enjoy history, galleries, food and the old port. From Jaffa, allow extra time to reach the central beaches and Dizengoff Street." },
       { q: "Do I need a rental car if I stay centrally?", a: "Usually not for exploring Tel Aviv. Many central sights are walkable, and buses, the Red Line and taxis cover longer journeys. Parking can be difficult and expensive." },
     ],
   },
@@ -121,7 +121,7 @@ const telAvivBookingTips = [
   { title: "Plan your arrival", text: "Check the last connection from the airport or station and Friday-evening or Saturday service." },
   { title: "Confirm parking", text: "Parking is often limited and costly in central Tel Aviv; ask about the actual garage or space." },
   { title: "Review apartment check-in", text: "For self-check-in accommodation, save the entry instructions and an emergency contact." },
-  { title: "Read the booking terms", text: "Compare the final total, occupancy, included taxes and cancellation rules before paying." },
+  { title: "Read the booking terms", text: "Before booking, check the total price, number of guests, taxes and cancellation policy." },
 ] as const;
 
 /** Use the Accommodation page's titled, two-column booking checklist treatment. */
@@ -129,7 +129,7 @@ const jerusalemBookingTips = [
   { title: "Check the walking route", text: "Plan the walk to your preferred Old City gate, including hills and steps." },
   { title: "Confirm taxi access", text: "Confirm where your taxi can stop and how far you will carry luggage." },
   { title: "Consider street noise", text: "Ask about noise from pedestrian streets, market deliveries and nearby bars." },
-  { title: "Check accessibility", text: "Check lift access and the full step-free route to your room if needed." },
+  { title: "Check accessibility", text: "If you have limited mobility, check whether you can reach your room without using stairs." },
   { title: "Plan a weekend arrival", text: "For a Friday-evening or Saturday arrival, confirm check-in, meals and transport." },
   { title: "Ask about a Shabbat elevator", text: "If you need a Shabbat elevator, check whether the hotel has one." },
   { title: "Confirm parking", text: "Driving? Ask for the exact parking location and daily charge." },
@@ -233,7 +233,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         <p className="eyebrow">Choose your base</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Where should you stay in {cityName}?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">{choices.introduction}</p>
-        {cityId === "jerusalem" && <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">For planning the sights, tours and travel beyond your hotel area, use my <Link to="/travel-blog/jerusalem-travel-guide/" className="font-semibold text-primary underline underline-offset-4">Jerusalem travel guide</Link>.</p>}
+        {cityId === "jerusalem" && <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">See my <Link to="/travel-blog/jerusalem-travel-guide/" className="font-semibold text-primary underline underline-offset-4">Jerusalem travel guide</Link> for sightseeing ideas and day trips.</p>}
         <Link to={guide.path as LinkProps["to"]} className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid={`${cityId}-all-hotels-link`}>
           Browse all {cityName} hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
         </Link>

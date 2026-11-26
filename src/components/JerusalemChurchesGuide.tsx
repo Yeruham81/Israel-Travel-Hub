@@ -42,17 +42,17 @@ const related = [
   {title:"Israel's calendar of events",to:"/travel-blog/calendar-of-events/" as const,text:"Religious dates and holidays that affect visits",photo:calendarPhoto,alt:"Calendar with dates highlighted"},
 ];
 const tours = [
-  {title:"Old City of Jerusalem guided walking tour",platform:"Viator",duration:"About 4 hours",text:"Guided walk through historic religious landmarks; verify which church interiors are included.",affiliateKey:"churches-jerusalem-old-city-walk-viator",image:"/images/attractions/old-jerusalem-via-dolorosa.webp",alt:"Via Dolorosa street in Jerusalem",startingPriceUsd:55,rating:4.8,reviewCount:71},
-  {title:"Private Jerusalem Old City walking tour",platform:"Viator",duration:"3–4 hours",text:"Private guiding through the Old City; confirm access to the Holy Sepulchre and other chapels.",affiliateKey:"churches-jerusalem-private-oldcity-viator",image:guideTourPhoto,alt:"Travelers on a guided Jerusalem tour"},
-  {title:"Bethlehem half-day guided tour from Jerusalem",platform:"GetYourGuide",duration:"About 4 hours",text:"A separate Bethlehem outing centred on the Nativity Church and nearby Christian sites.",affiliateKey:"churches-jerusalem-bethlehem-halfday-gyg",startingPriceUsd:75,rating:4.8,reviewCount:610,image:bethlehemTourPhoto,alt:"Courtyard of the Church of the Nativity in Bethlehem"},
+  {title:"Old City of Jerusalem guided walking tour",platform:"Viator",duration:"About 4 hours",text:"A guided walk through historic religious sites. Check which churches you will visit inside.",affiliateKey:"churches-jerusalem-old-city-walk-viator",image:"/images/attractions/old-jerusalem-via-dolorosa.webp",alt:"Via Dolorosa street in Jerusalem",startingPriceUsd:55,rating:4.8,reviewCount:71},
+  {title:"Private Jerusalem Old City walking tour",platform:"Viator",duration:"3–4 hours",text:"A private guided tour of the Old City. Check which churches and chapels are included.",affiliateKey:"churches-jerusalem-private-oldcity-viator",image:guideTourPhoto,alt:"Travelers on a guided Jerusalem tour"},
+  {title:"Bethlehem half-day guided tour from Jerusalem",platform:"GetYourGuide",duration:"About 4 hours",text:"A trip to Bethlehem to visit the Church of the Nativity and nearby Christian sites.",affiliateKey:"churches-jerusalem-bethlehem-halfday-gyg",startingPriceUsd:75,rating:4.8,reviewCount:610,image:bethlehemTourPhoto,alt:"Courtyard of the Church of the Nativity in Bethlehem"},
 ];
 const faqs = [
   {q:"Which churches are essential on a first visit to Jerusalem?",a:"For most first visits, I would prioritise the Church of the Holy Sepulchre and selected stops along the Via Dolorosa. Add Gethsemane on the Mount of Olives or Dormition Abbey on Mount Zion if your time and interests allow."},
-  {q:"Can I visit all the major churches in one day?",a:"Not comfortably. The sites lie in four distinct areas, and opening windows, religious services, queues and steep paths affect visits. Focus on one or two nearby clusters of churches."},
+  {q:"Can I visit all the major churches in one day?",a:"Not comfortably. The churches are spread across four areas, with different opening hours, religious services and walking distances. Focus on churches in one or two nearby neighbourhoods."},
   {q:"Are Jerusalem churches free to enter?",a:"Many offer free general entry, but some compounds, archaeological areas and towers charge separately. St Anne, Pater Noster, the Chapel of the Ascension and the Redeemer tower have published admission charges."},
   {q:"Is the Garden Tomb the same place as the Church of the Holy Sepulchre?",a:"No. They are separate places. The Holy Sepulchre is the traditional site of the crucifixion and resurrection for numerous historic churches; the Garden Tomb is a different site popular with some Protestant visitors."},
   {q:"Is the Mount of Olives walk accessible to everyone?",a:"No. The slope is steep, paths can be uneven and some compounds have stairs. A drive to an upper viewpoint can avoid the uphill climb, but the descent may still be difficult. Confirm accessibility for specific sites."},
-  {q:"Can tourists attend a religious service or arrange group prayer?",a:"Visitor opening hours apply to sightseeing. Contact the church or responsible community about worship participation, private ceremonies or group prayer."},
+  {q:"Can tourists attend a religious service or arrange group prayer?",a:"Visitor opening hours apply to sightseeing. Contact the church directly to arrange group prayer, private ceremonies or attendance at religious services."},
   {q:"Do holidays affect church opening times?",a:"Yes. Christian feast days, Holy Week, worship services, Jewish holidays and special events may change access. Check the relevant church and Israel's events calendar before travelling."},
 ];
 
@@ -150,7 +150,7 @@ export function JerusalemChurchesGuide(){
     </header>
     <section className="mt-8 rounded-xl border border-primary/20 bg-secondary/40 p-5 sm:p-6" aria-labelledby="quick-answer">
       <h2 id="quick-answer" className="text-xl font-bold">Where I would start</h2>
-      <p className="mt-2 leading-relaxed">For a first visit, start at the <a className="font-semibold text-primary hover:underline" href="#church-holy-sepulchre">Church of the Holy Sepulchre</a> and follow part of the <Link to="/attractions/via-dolorosa/" className="font-semibold text-primary hover:underline">Via Dolorosa</Link> with my full guide to the fourteen stations. If you have more time, add <a className="font-semibold text-primary hover:underline" href="#church-all-nations">Gethsemane</a> or <a className="font-semibold text-primary hover:underline" href="#church-dormition">Dormition Abbey</a>. Ein Karem is a separate journey, not a quick extension of an Old City walk.</p>
+      <p className="mt-2 leading-relaxed">For a first visit, start at the <a className="font-semibold text-primary hover:underline" href="#church-holy-sepulchre">Church of the Holy Sepulchre</a> and follow part of the <Link to="/attractions/via-dolorosa/" className="font-semibold text-primary hover:underline">Via Dolorosa</Link> with my full guide to the fourteen stations. If you have more time, add <a className="font-semibold text-primary hover:underline" href="#church-all-nations">Gethsemane</a> or <a className="font-semibold text-primary hover:underline" href="#church-dormition">Dormition Abbey</a>. I recommend setting aside half a day to explore Ein Karem.</p>
     </section>
     <OnThisPage sections={sections}/>
     <section id="choose" aria-labelledby="choose-heading" className="mt-10 scroll-mt-24">
@@ -178,20 +178,20 @@ export function JerusalemChurchesGuide(){
       {index===2&&<p className="mt-4 text-sm leading-relaxed text-muted-foreground">The Cenacle is included as an important Christian heritage site, although it is not a church. My <Link to="/attractions/mount-zion/" className="font-semibold text-primary underline">Mount Zion guide</Link> covers these places in more detail.</p>}
     </section>)}
     <section id="routes" aria-labelledby="routes-heading" className="mt-12 scroll-mt-24">
-      <Heading id="routes" title="Three realistic ways to plan your visit" intro="These are flexible suggestions, not timed promises of entry to every church."/>
+      <Heading id="routes" title="Three realistic ways to plan your visit"/>
       <div className="grid gap-4 md:grid-cols-3">{[
-        {time:"Half day",title:"Old City Christian highlights",steps:["Begin near Lion's Gate with St Anne and selected Stations of the Cross","Follow part of the Via Dolorosa","Allow unhurried time at the Holy Sepulchre"],note:"Queues at the Edicule may be long. Choose fewer stops if you join services."},
-        {time:"Full day",title:"Old City and one nearby cluster",steps:["Visit the Holy Sepulchre in the morning","Add Mount Zion churches OR a Mount of Olives hillside route","Leave extra time for a transfer and hillside walking"],note:"Do not attempt both hills plus all Old City churches on a rigid schedule."},
+        {time:"Half day",title:"Old City Christian highlights",steps:["Begin near Lion's Gate with St Anne and selected Stations of the Cross","Follow part of the Via Dolorosa","Allow plenty of time at the Holy Sepulchre"],note:"Queues at the Edicule may be long. Choose fewer stops if you join services."},
+        {time:"Full day",title:"Old City and one nearby cluster",steps:["Visit the Holy Sepulchre in the morning","Add Mount Zion churches OR a Mount of Olives hillside route","Leave extra time for a transfer and hillside walking"],note:"For a more relaxed day, choose either Mount Zion or the Mount of Olives after visiting the Old City."},
         {time:"Another half day",title:"Ein Karem village churches",steps:["Travel to Ein Karem separately","Visit St John the Baptist and the Church of the Visitation","Enjoy time in the neighbourhood before returning"],note:"Allow for the Visitation's uphill approach and midday closing."}
       ].map(r=><div key={r.title} className="rounded-xl border bg-card p-5"><p className="text-xs font-bold uppercase tracking-wide text-primary">{r.time}</p><h3 className="mt-2 text-lg font-bold">{r.title}</h3><ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">{r.steps.map(s=><li key={s}>{s}</li>)}</ol><p className="mt-4 text-sm text-muted-foreground">{r.note}</p></div>)}</div>
     </section>
     <section id="practical" aria-labelledby="practical-heading" className="mt-12 scroll-mt-24">
       <Heading id="practical" title="My practical advice for church visits"/>
       <div className="grid gap-4 sm:grid-cols-2">{[
-        {title:"Dress and worship",text:"Cover shoulders and knees as a good starting point, keep voices low, and respect active liturgies. Group services and photography may require permission."},
+        {title:"Dress and worship",text:"Cover your shoulders and knees, speak quietly and respect religious services. Group services and photography may require permission."},
         {title:"Opening hours and admission",text:"The published times and charges above are based on the Christian Information Center's September 2026 list. Holy Week, feast days and site-specific events can change access."},
         {title:"Stairs and steep paths",text:"The Old City has uneven paving; Mount of Olives paths can be steep; the Tomb of the Virgin Mary has a long staircase. Verify accessibility directly for your destination."},
-        {title:"Transport and meeting places",text:"Vehicles cannot enter most Old City lanes. Arrange a realistic gate or road-accessible pickup, and allow time between the Old City, Mount of Olives and Ein Karem."}
+        {title:"Transport and meeting places",text:"Vehicles cannot enter most Old City lanes. Arrange pickup near an Old City gate and allow time to travel between the Old City, Mount of Olives and Ein Karem."}
       ].map(t=><div key={t.title} className="rounded-xl border bg-card p-5"><h3 className="font-bold">{t.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.text}</p></div>)}</div>
       <div className="mt-5"><Tip><Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline">Israel's calendar of events</Link> is useful for understanding holiday and special-date changes. Church-specific schedules should still be checked directly with the relevant community.</Tip></div>
     </section>

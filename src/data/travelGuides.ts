@@ -419,7 +419,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "short-trip",
         title: "Compare prepaid eSIM data plans",
-        paragraphs: ["For a week of maps, messaging and light browsing, I would choose a small data package with enough days of validity. The table includes different durations where the same data allowance is available. My choice: Saily."],
+        paragraphs: ["For a week of using maps, messaging and occasional browsing, I recommend a small data package that covers your stay. My choice: Saily."],
         sourceIds: ["guide-esim-saily", "guide-esim-airalo-fixed", "guide-esim-yesim", "guide-esim-gigsky"],
       },
       {
@@ -431,7 +431,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "features",
         title: "Compare eSIM provider features",
-        paragraphs: ["I compare the network, data sharing, top-ups and activation rules as well as price. The table compares published features of each provider."],
+        paragraphs: ["Compare network coverage, hotspot use, top-up options and activation rules as well as prices."],
         sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-drimsim", "guide-esim-gigsky-activation"],
       },
       {
@@ -443,7 +443,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "payg",
         title: "Pay-as-you-go eSIM for Israel",
-        paragraphs: ["Drimsim charges according to data usage. It may suit occasional use or a backup connection, while a prepaid package can be more economical for daily navigation and social media."],
+        paragraphs: ["With Drimsim, you pay only for the data you use. It may suit occasional use or a backup connection, while a prepaid package can be more economical for daily navigation and social media."],
         sourceIds: ["guide-esim-drimsim"],
       },
       {
@@ -483,7 +483,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "coverage",
         title: "Will it work throughout Israel?",
         paragraphs: [
-          "Coverage is generally easier to find in Tel Aviv, Jerusalem and other major cities than in remote areas of the Negev, Galilee and Dead Sea region. Your eSIM's local network also affects reception.",
+          "Mobile coverage is generally better in major cities than in remote parts of the Negev, Galilee and Dead Sea region. Your eSIM's local network also affects reception.",
           "Visiting Bethlehem, Jericho or other parts of the West Bank? Check whether your Israel eSIM includes Palestinian mobile networks if you plan to visit areas served by them. Coverage may differ across the area, so confirm the relevant network before you go.",
         ],
         sourceIds: ["guide-esim-yesim", "guide-esim-airalo"],
@@ -492,7 +492,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "setup",
         title: "How to install and activate your eSIM",
         paragraphs: [
-          "Install your eSIM over Wi-Fi before departure. Start the plan according to its activation rules, and keep your home number active if you need verification texts. Ordinary calls and texts on your home line can still incur roaming fees.",
+          "Install your eSIM over Wi-Fi before departure. Check when your eSIM plan starts and keep your regular SIM active if you need to receive verification codes by SMS. Ordinary calls and texts on your home line can still incur roaming fees.",
         ],
         sourceIds: ["guide-esim-airalo", "guide-esim-saily"],
       },
