@@ -87,7 +87,7 @@ function BeachPhotoSlot({ beach, kind = "detail", compact = false }: {
   beach: TelAvivBeach; kind?: "pick" | "detail"; compact?: boolean;
 }) {
   const photo = kind === "pick" ? beach.pickPhoto : beach.detailPhoto;
-  const shape = compact ? "aspect-[4/3] w-24 shrink-0 rounded-lg sm:w-28 md:aspect-[16/9] md:w-full lg:aspect-[4/3] lg:w-24 xl:w-28" : "aspect-[16/9] w-full lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl";
+  const shape = compact ? "aspect-[4/3] w-24 shrink-0 rounded-lg sm:w-28 md:aspect-[16/9] md:w-full lg:aspect-[4/3] lg:w-24 xl:w-28" : kind === "detail" ? "aspect-[16/9] w-full lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:aspect-[16/10] lg:rounded-xl" : "aspect-[16/9] w-full lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl";
   return photo ? (
     beach.id === "tzuk-south" && kind === "detail" ? (
       <figure className={shape + " relative overflow-hidden"}>
@@ -121,22 +121,22 @@ function BeachCard({ beach, compact = false }: { beach: TelAvivBeach; compact?: 
         </div>
       </div>
     ) : (
-      <>
-        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_250px] lg:grid-rows-[auto_1fr] lg:items-start lg:gap-x-4 lg:gap-y-2 lg:p-4">
+        <div className="lg:contents">
           <BeachPhotoSlot beach={beach} />
           <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
             <p className="text-xs font-semibold uppercase tracking-wide text-primary">{beach.bestFor}</p>
             <h4 className="mt-1 text-xl font-bold">{beach.name}</h4>
-            <p className="mt-3 leading-relaxed">{beach.summary}</p>
+            <p className="mt-3 leading-relaxed lg:mt-2">{beach.summary}</p>
           </div>
         </div>
-        <div className="border-t p-4 sm:p-5 lg:px-6">
+        <div className="border-t p-4 sm:p-5 lg:col-start-1 lg:row-start-2 lg:border-t-0 lg:p-0">
           <p className="text-sm leading-relaxed text-muted-foreground">{beach.tip}</p>
-          <p className="mt-3 rounded-lg bg-secondary/40 px-3 py-2 text-xs font-medium">{beach.highlights} · {beach.accessShort}</p>
+          <p className="mt-3 rounded-lg bg-secondary/40 px-3 py-2 text-xs font-medium lg:mt-2 lg:py-1.5">{beach.highlights} · {beach.accessShort}</p>
         </div>
-      </>
+      </div>
     )}
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t px-4 py-3 text-xs sm:px-5 lg:px-6">
+    <div className={"flex flex-wrap items-center gap-x-4 gap-y-2 border-t px-4 py-3 text-xs sm:px-5 " + (compact ? "lg:px-6" : "lg:px-4 lg:py-2")}>
       <BeachMapLink beach={beach} />
       {beach.official && <OfficialLink href={beach.official}>City beach details</OfficialLink>}
     </div>

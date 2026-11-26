@@ -65,6 +65,16 @@ describe("Tel Aviv beach guide editorial regression", () => {
     expect(page).toContain("data-beach-photo-slot");
   });
 
+  it("uses desktop-only space-saving layout for horizontal beach cards", () => {
+    const page = readFileSync(resolve(process.cwd(), "src/components/TelAvivBeachesGuide.tsx"), "utf8");
+    expect(page).toContain("lg:grid-cols-[minmax(0,1fr)_250px] lg:grid-rows-[auto_1fr]");
+    expect(page).toContain("lg:row-span-2 lg:aspect-[16/10]");
+    expect(page).toContain('className="lg:contents"');
+    expect(page).toContain("border-t p-4 sm:p-5 lg:col-start-1 lg:row-start-2 lg:border-t-0 lg:p-0");
+    expect(page).toContain("mt-3 leading-relaxed lg:mt-2");
+    expect(page).toContain('compact ? "lg:px-6" : "lg:px-4 lg:py-2"');
+  });
+
   it("retains thirteen map markers in north-to-south order", () => {
     expect(beachMapPoints).toHaveLength(13);
     expect(beachMapPoints.map(point => point.id)).toEqual(telAvivBeaches.map(beach => beach.id));
