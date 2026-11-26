@@ -14,7 +14,7 @@ export const journeyDestinationGuides = {
     "title": "The Dead Sea: beaches, floating and a practical visitor guide",
     "description": "Plan a Dead Sea visit around Ein Bokek, a managed beach, hotels and desert attractions. Compare northern and southern destinations and arrange the return journey.",
     "intro": "The Dead Sea is famous for its exceptionally salty water, desert scenery, bathing beaches and nearby archaeological sites. Start by choosing which beach or hotel area you'd like to visit. Ein Bokek, the northern beaches and Masada offer different day-trip options.",
-    "answer": "For a first independent beach visit, compare the managed public-beach area at Ein Bokek with a named private beach or hotel day package. Visit a designated beach with lifeguards, check its facilities and arrange your return transport. The northern shore, Ein Gedi, Masada and the southern hotel district are separate stops, not one walkable attraction.",
+    "answer": "For a first independent beach visit, compare the managed public-beach area at Ein Bokek with a named private beach or hotel day package. Visit a designated beach with lifeguards, check its facilities and arrange your return transport. Allow travel time between the northern shore, Ein Gedi, Masada and the southern hotel district.",
     "topics": [
       "attractions",
       "destinations",
@@ -104,7 +104,7 @@ export const journeyDestinationGuides = {
         "id": "attractions",
         "title": "Add one clear attraction priority",
         "paragraphs": [
-          "Visit Masada for its ancient fortress and panoramic desert views. Check cable-car hours and hiking trail conditions before visiting. Ein Gedi Nature Reserve offers desert hiking trails and waterfalls, with access depending on trail conditions and opening hours. Qumran adds another archaeological focus, while Qasr el-Yahud is a separate lower-Jordan pilgrimage destination.",
+          "Visit Masada for its ancient fortress and panoramic desert views. Check cable-car hours and hiking trail conditions before visiting. Ein Gedi Nature Reserve offers desert hiking trails and waterfalls, with access depending on trail conditions and opening hours. Visit Qumran for its archaeological ruins and connection to the Dead Sea Scrolls, or Qasr el-Yahud for its religious significance as a baptism site.",
           "Prioritize the attractions you'd most like to visit and allow enough time to explore them. If you're combining a nature reserve, a religious ceremony and a beach visit, allow enough time for each activity. Each attraction has its own admission fees and opening hours."
         ],
         "links": [
