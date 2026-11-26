@@ -22,10 +22,10 @@ describe("compact shore excursions hub", () => {
     expect(page).not.toContain("Small details that make a better day ashore");
   });
 
-  it("keeps two equal port actions, direct port cards and destination-filtered links", () => {
-    expect(page).toContain("Excursions from Ashdod");
-    expect(page).toContain("Excursions from Haifa");
-    expect(page).toContain("sm:min-w-48");
+  it("keeps direct port cards and destination-filtered links without duplicate actions", () => {
+    expect(page).not.toContain("Excursions from Ashdod");
+    expect(page).not.toContain("Excursions from Haifa");
+    expect(page).not.toContain("sm:min-w-48");
     expect(page).toContain("portIds.map(id =>");
     expect(page).toContain("getShorePort(id)");
     expect(page).toContain("search={{ destination: link.destination }}");
@@ -34,7 +34,7 @@ describe("compact shore excursions hub", () => {
   });
 
   it("retains even card grids, related guides, factual FAQs and source citations", () => {
-    expect(shoreHubExperiences).toHaveLength(4);
+    expect(shoreHubExperiences).toHaveLength(6);
     expect(shoreTourFormats).toHaveLength(2);
     expect(shorePlanningSteps).toHaveLength(4);
     expect(shoreHubGuides).toHaveLength(6);
