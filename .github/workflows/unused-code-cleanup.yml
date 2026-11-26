@@ -1,4 +1,4 @@
-name: Unused code cleanup - stage 1 proposal
+name: Unused code cleanup - remaining route declarations
 on:
   push:
     branches: [audit/unused-code-cleanup]
@@ -7,7 +7,6 @@ permissions:
   contents: read
 jobs:
   route-import-proposal:
-    if: ${{ !contains(github.event.head_commit.message, '[apply-verified-stage1]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -34,7 +33,7 @@ jobs:
           npx tsc --noEmit --pretty false
           mkdir -p "$RUNNER_TEMP/unused-audit"
           cp -a .output/public "$RUNNER_TEMP/unused-audit-before"
-      - name: Collect baseline and generate conservative route import proposal
+      - name: Collect baseline and propose remaining route cleanup
         shell: bash
         run: |
           out="$RUNNER_TEMP/unused-audit"
@@ -51,65 +50,98 @@ jobs:
           if (raw.error) throw new Error('Cannot read tsconfig');
           const parsed = ts.parseJsonConfigFileContent(raw.config, ts.sys, path.dirname(config), { noUnusedLocals: true, noUnusedParameters: true, noEmit: true });
           if (parsed.errors.length) throw new Error('Cannot parse tsconfig');
-          const program = ts.createProgram(parsed.fileNames, parsed.options);
-          const diagnostics = ts.getPreEmitDiagnostics(program);
           const targets = new Set([6133, 6192, 6196, 6198, 6199]);
-          const groups = new Map();
-          for (const d of diagnostics) {
-            if (!d.file || d.start == null || !targets.has(d.code)) continue;
-            const name = path.relative(process.cwd(), d.file.fileName).replaceAll(path.sep, '/');
-            if (!/^src\/(routes|route-heads)\//.test(name) || d.file.isDeclarationFile) continue;
-            if (!groups.has(d.file)) groups.set(d.file, []);
-            groups.get(d.file).push(d);
-          }
-          const printer = ts.createPrinter({newLine: ts.NewLineKind.LineFeed});
           const manifest = [];
-          for (const [file, ds] of groups) {
-            const edits = [];
-            for (const node of file.statements) {
-              if (!ts.isImportDeclaration(node) || !node.importClause) continue;
-              const clause = node.importClause;
-              const bindings = clause.namedBindings;
-              if (!bindings || !ts.isNamedImports(bindings)) continue;
-              const start = node.getStart(file);
-              const end = node.end;
-              const original = file.text.slice(start, end);
-              // Do not rewrite imports containing comments, attributes, or unusual syntax.
-              if (/\/\*|\/\//.test(original) || node.attributes || node.assertClause) continue;
-              const isUnused = spec => ds.some(d => [6133, 6196].includes(d.code) && d.start >= spec.getStart(file) && d.start < spec.end);
-              const allUnused = ds.some(d => d.code === 6192 && d.start >= start && d.start < end);
-              const removed = bindings.elements.filter(spec => allUnused || isUnused(spec));
-              if (!removed.length) continue;
-              const remaining = bindings.elements.filter(spec => !removed.includes(spec));
-              // Preserve a value import from the same module. A whole value import
-              // can have module effects, so leave it for manual review.
-              if (!clause.isTypeOnly && !clause.name && !remaining.some(spec => !spec.isTypeOnly)) continue;
-              let replacement;
-              if (!remaining.length && !clause.name) {
-                if (!clause.isTypeOnly) continue;
-                replacement = '';
-              } else if (!remaining.length) {
-                // Default-only imports are not part of this first proposal.
-                continue;
-              } else {
-                const updated = ts.factory.updateNamedImports(bindings, remaining);
-                replacement = printer.printNode(ts.EmitHint.Unspecified, updated, file);
-              }
-              const a = replacement ? bindings.getStart(file) : start;
-              const b = replacement ? bindings.end : end;
-              edits.push({a,b,replacement});
-              manifest.push({file:path.relative(process.cwd(),file.fileName),module:node.moduleSpecifier.getText(file),removed:removed.map(s=>s.getText(file))});
+          // Only remove complete unused imports when the TS emitter already
+          // omits them, or another emitted import of the same module remains.
+          // This avoids deleting module initialization and deliberate effects.
+          if (parsed.options.verbatimModuleSyntax !== false) throw new Error('Review module emission settings');
+          const emitOptions = {...parsed.options, noEmit:false, declaration:false, declarationMap:false, sourceMap:false, inlineSourceMap:false, inlineSources:false, incremental:false, composite:false};
+          function emittedModules(text, filename) {
+            const result = ts.transpileModule(text,{compilerOptions:emitOptions,fileName:filename});
+            const sf = ts.createSourceFile('emit.js',result.outputText,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
+            return new Set(sf.statements.filter(ts.isImportDeclaration).map(n=>n.moduleSpecifier.text));
+          }
+          function scope(file) {
+            return /^src\/(routes|route-heads)\//.test(path.relative(process.cwd(),file.fileName).replaceAll(path.sep,'/')) && !file.isDeclarationFile;
+          }
+          function cleanLine(file,node) {
+            const a=node.getStart(file), b=node.end;
+            const lineStart=file.text.lastIndexOf('\n',a-1)+1;
+            const lineEnd=file.text.indexOf('\n',b);
+            if (!file.text.slice(lineStart,a).trim() && lineEnd>=0 && !file.text.slice(b,lineEnd).trim()) return {a:lineStart,b:lineEnd+1,replacement:''};
+            return {a,b,replacement:''};
+          }
+          for (let round=1;round<=5;round++) {
+            const program=ts.createProgram(parsed.fileNames,parsed.options);
+            const groups=new Map();
+            for (const d of ts.getPreEmitDiagnostics(program)) {
+              if (!d.file || d.start==null || !targets.has(d.code) || !scope(d.file)) continue;
+              if (!groups.has(d.file)) groups.set(d.file,[]);
+              groups.get(d.file).push(d);
             }
-            if (!edits.length) continue;
-            let source = file.text;
-            for (const e of edits.sort((a,b)=>b.a-a.a)) source=source.slice(0,e.a)+e.replacement+source.slice(e.b);
-            fs.writeFileSync(file.fileName, source);
+            let count=0;
+            for (const [file,ds] of groups) {
+              const edits=[];
+              const assetNames=new Set(file.statements.filter(ts.isImportDeclaration).filter(n=>n.importClause?.name && /^@\/assets\//.test(n.moduleSpecifier.text)).map(n=>n.importClause.name.text));
+              function pureImageValue(node) {
+                if (ts.isStringLiteral(node)) return true;
+                if (ts.isIdentifier(node)) return assetNames.has(node.text);
+                if (ts.isObjectLiteralExpression(node)) return node.properties.every(p=>ts.isPropertyAssignment(p) && (ts.isIdentifier(p.name)||ts.isStringLiteral(p.name)) && pureImageValue(p.initializer));
+                return false;
+              }
+              const oldModules=emittedModules(file.text,file.fileName);
+              for (const node of file.statements) {
+                const a=node.getStart(file),b=node.end;
+                const within=ds.filter(d=>d.start>=a&&d.start<b);
+                if (!within.length) continue;
+                if (ts.isImportDeclaration(node) && node.importClause && !node.attributes && !node.assertClause) {
+                  const original=file.text.slice(a,b);
+                  if (/\/\*|\/\//.test(original)) continue;
+                  const clause=node.importClause, bindings=clause.namedBindings;
+                  const names=[];
+                  if (clause.name) names.push(clause.name);
+                  if (bindings && ts.isNamedImports(bindings)) names.push(...bindings.elements);
+                  if (bindings && ts.isNamespaceImport(bindings)) names.push(bindings.name);
+                  const whole=within.some(d=>d.code===6192)||names.length>0&&names.every(n=>within.some(d=>[6133,6196].includes(d.code)&&d.start>=a&&d.start<n.end&&(d.start>=n.getStart(file)||names.length===1)));
+                  if (!whole) continue;
+                  const edit=cleanLine(file,node);
+                  const proposed=file.text.slice(0,edit.a)+file.text.slice(edit.b);
+                  if (oldModules.has(node.moduleSpecifier.text) && !emittedModules(proposed,file.fileName).has(node.moduleSpecifier.text)) {
+                    console.log('RETAIN MODULE EFFECT',path.relative(process.cwd(),file.fileName),node.moduleSpecifier.text);
+                    continue;
+                  }
+                  edits.push(edit);
+                  manifest.push({round,file:path.relative(process.cwd(),file.fileName),kind:'unused import',module:node.moduleSpecifier.getText(file),removed:names.map(n=>n.getText(file))});
+                } else if (path.relative(process.cwd(),file.fileName)==='src/routes/index.tsx' && ts.isVariableStatement(node) && !node.modifiers?.length && (node.declarationList.flags&ts.NodeFlags.Const) && node.declarationList.declarations.length===1) {
+                  const d=node.declarationList.declarations[0];
+                  // Explicitly reviewed dead image lookup table: no function
+                  // calls, getters, computed keys, spreads or exported values.
+                  if (!ts.isIdentifier(d.name)||d.name.text!=='IMG'||!d.initializer||!within.some(x=>x.code===6133&&x.start===d.name.getStart(file))) continue;
+                  const init=ts.isSatisfiesExpression(d.initializer)?d.initializer.expression:d.initializer;
+                  if (!ts.isObjectLiteralExpression(init)||!pureImageValue(init)) throw new Error('IMG initializer changed; review manually');
+                  edits.push(cleanLine(file,node));
+                  manifest.push({round,file:'src/routes/index.tsx',kind:'unused pure image table',removed:['IMG']});
+                }
+              }
+              if (!edits.length) continue;
+              let source=file.text;
+              for (const e of edits.sort((a,b)=>b.a-a.a)) source=source.slice(0,e.a)+e.replacement+source.slice(e.b);
+              // Check the combined edits too, in case multiple imports share a module.
+              const nextModules=emittedModules(source,file.fileName);
+              for (const mod of oldModules) if (!nextModules.has(mod)) throw new Error('Runtime module removed: '+file.fileName+' '+mod);
+              fs.writeFileSync(file.fileName,source);
+              count+=edits.length;
+            }
+            console.log('ROUND',round,'EDITS',count);
+            if (!count) break;
           }
           fs.writeFileSync(path.join(process.env.RUNNER_TEMP,'unused-audit','manifest.json'),JSON.stringify(manifest,null,2));
-          console.log('PROPOSED IMPORT EDITS',JSON.stringify(manifest,null,2));
+          console.log('PROPOSED REMAINING ROUTE EDITS',JSON.stringify(manifest,null,2));
           JS
           git diff --check
-          git diff -- src/routes src/route-heads > "$out/stage-1.patch"
+          git diff -- src/routes src/route-heads > "$out/stage-1-remaining.patch"
+          sha256sum "$out/stage-1-remaining.patch"
           git diff --stat
       - name: Validate candidate diagnostics
         run: |
@@ -140,6 +172,8 @@ jobs:
           for label, items in [('BEFORE',before),('AFTER',after)]:
               print(label,'unused',sum(n for (p,c,m),n in items.items() if c in unused),'other',sum(n for (p,c,m),n in items.items() if c not in unused))
               print(label,'groups',dict(collections.Counter({g:sum(n for (p,c,m),n in items.items() if c in unused and group(p)==g) for g in ('routes','components/data','tests','other')})))
+          remaining=sum(n for (p,c,m),n in after.items() if c in unused and group(p)=='routes')
+          print('REMAINING ROUTE DIAGNOSTICS',remaining)
           new=after-before
           if new:
               print('NEW DIAGNOSTICS',new)
@@ -289,58 +323,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: unused-code-stage-1-proposal
+          name: unused-code-stage-1-remaining-proposal
           path: ${{ runner.temp }}/unused-audit/
           if-no-files-found: warn
-  apply-verified-stage1:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/audit/unused-code-cleanup' && contains(github.event.head_commit.message, '[apply-verified-stage1]') }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: write
-      actions: read
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: audit/unused-code-cleanup
-          persist-credentials: true
-          fetch-depth: 0
-      - uses: actions/download-artifact@v4
-        with:
-          name: unused-code-stage-1-proposal
-          path: ${{ runner.temp }}/verified-stage1
-          run-id: 45906307320
-          github-token: ${{ github.token }}
-      - name: Apply exactly the previously validated patch to the audit branch
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          test "$(git diff --name-only 6f7c82c4e7910520d8c430fbe66122df6288ab17 HEAD)" = ".github/workflows/unused-code-cleanup.yml"
-          patch="$RUNNER_TEMP/verified-stage1/stage-1.patch"
-          echo "df502d0f4d58e11fbebefd7c8f534d135c80cb863c8e90c767fc86ee2cd3d754  $patch" | sha256sum -c -
-          git apply --index --check "$patch"
-          git apply --index "$patch"
-          git diff --cached --check
-          python3 - "$patch" <<'PY'
-          import pathlib, re, subprocess, sys
-          patch = pathlib.Path(sys.argv[1]).read_text()
-          expected = {}
-          for block in patch.split("diff --git ")[1:]:
-              name = re.match(r'a/(.*?) b/(.*?)\n', block)
-              index = re.search(r'^index ([0-9a-f]+)\.\.([0-9a-f]+) 100644$', block, re.M)
-              assert name and index and name[1] == name[2], "Invalid patch entry"
-              assert name[1].startswith(("src/routes/", "src/route-heads/"))
-              expected[name[1]] = index[2]
-          files = subprocess.check_output(["git", "diff", "--cached", "--name-only", "-z"]).decode().split("\0")
-          assert set(filter(None, files)) == set(expected) and len(expected) == 107
-          for path, sha in expected.items():
-              blob = subprocess.check_output(["git", "rev-parse", ":" + path], text=True).strip()
-              assert blob.startswith(sha), path
-          print("VERIFIED SOURCE BLOBS", len(expected))
-          PY
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Apply verified stage 1 unused named import cleanup"
-          git push origin HEAD:refs/heads/audit/unused-code-cleanup
-          git rev-parse HEAD
