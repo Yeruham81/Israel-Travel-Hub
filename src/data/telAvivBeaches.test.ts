@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { beachMapPoints, beachTopPicks, telAvivBeaches } from "@/data/telAvivBeaches";
 
@@ -39,8 +39,8 @@ describe("Tel Aviv beach guide editorial regression", () => {
     expect(page).toContain('kind="pick"');
     expect(page).toContain("Focus on a beach");
     expect(page).toContain("There are no lifeguard services at Aviv Beach.");
-    expect(page).toContain("Sunday · Tuesday · Thursday");
-    expect(page).toContain("Monday · Wednesday · Friday");
+    expect(telAvivBeaches.find(beach => beach.id === "nordau")?.summary).toContain("Sunday · Tuesday · Thursday");
+    expect(telAvivBeaches.find(beach => beach.id === "nordau")?.summary).toContain("Monday · Wednesday · Friday");
     expect(page).not.toMatch(/(?:stopped|ceased|discontinued).*lifeguard services at Aviv Beach/i);
     expect(map).toContain("cluster:true");
     expect(map).toContain("tel-aviv-beach-map-focus");
@@ -53,16 +53,40 @@ describe("Tel Aviv beach guide editorial regression", () => {
     expect(page).toContain("flex flex-col gap-3 border-b p-4 sm:flex-row sm:items-end");
     expect(page).toContain("w-full min-w-0 text-sm font-semibold sm:w-auto sm:flex-1");
     expect(page).toContain("disabled:opacity-40 sm:w-auto");
-    expect(page).toContain('area.name === "Southern coast and Jaffa"');
-    expect(page).toContain('group.compact ? "mt-5 grid items-stretch gap-4 md:grid-cols-3" : "mt-5 grid gap-4"');
-    expect(page).toContain('data-testid={group.compact ? "beach-compact-cards" : "beach-detailed-cards"}');
-    expect(page).toContain('data-detailed-card={compact ? undefined : "horizontal"}');
-    expect(telAvivBeaches.filter(beach => beach.featured || beach.area === "Southern coast and Jaffa")).toHaveLength(7);
-    expect(page).toContain("md:aspect-[16/9] md:w-full");
+    expect(page).toContain('data-testid="beach-detailed-cards"');
+    expect(page).toContain('data-detailed-card="horizontal"');
+    expect(page).toContain('{beaches.map(beach => <BeachCard key={beach.id} beach={beach} />)}');
+    expect(page).not.toContain("beach-compact-cards");
     expect(page).not.toContain("officialTelAvivBeachesEnglish");
     expect(data).not.toContain("officialTelAvivBeachesEnglish");
     expect(page).toContain("There are no lifeguard services at Aviv Beach.");
     expect(page).toContain("data-beach-photo-slot");
+  });
+
+  it("uses desktop-only space-saving layout for horizontal beach cards", () => {
+    const page = readFileSync(resolve(process.cwd(), "src/components/TelAvivBeachesGuide.tsx"), "utf8");
+    expect(page).toContain("lg:grid-cols-[minmax(0,1fr)_250px] lg:grid-rows-[auto_1fr]");
+    expect(page).toContain("lg:row-span-2 lg:aspect-[16/10]");
+    expect(page).toContain('className="lg:contents"');
+    expect(page).toContain("border-t p-4 sm:p-5 lg:col-start-1 lg:row-start-2 lg:border-t-0 lg:p-0");
+    expect(page).toContain("mt-3 leading-relaxed lg:mt-2");
+    expect(page).toContain("sm:px-5 lg:px-4 lg:py-2");
+  });
+
+  it("provides a separate local image for every top beach pick", () => {
+    const photos = beachTopPicks.map(pick => telAvivBeaches.find(beach => beach.id === pick.id)?.pickPhoto);
+    expect(photos.every(photo => !!photo?.alt)).toBe(true);
+    expect(new Set(photos.map(photo => photo?.src)).size).toBe(6);
+    for (const photo of photos) {
+      expect(existsSync(resolve(process.cwd(), "public", photo!.src.slice(1)))).toBe(true);
+      expect(telAvivBeaches.some(beach => beach.detailPhoto?.src === photo!.src)).toBe(false);
+    }
+  });
+
+  it("has local photos for every beach and the three nearby beaches", () => {
+    expect(telAvivBeaches.every(beach => !!beach.detailPhoto?.alt && beach.detailPhoto.width > 0 && beach.detailPhoto.height > 0)).toBe(true);
+    for (const beach of telAvivBeaches) expect(existsSync(resolve(process.cwd(), "public", beach.detailPhoto!.src.slice(1)))).toBe(true);
+    for (const id of ["sidna-ali", "gaash", "palmahim"]) expect(existsSync(resolve(process.cwd(), "public/images/tel-aviv-beaches", id + ".webp"))).toBe(true);
   });
 
   it("retains thirteen map markers in north-to-south order", () => {
