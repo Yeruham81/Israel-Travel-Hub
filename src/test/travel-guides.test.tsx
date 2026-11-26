@@ -591,7 +591,7 @@ describe("migrated practical guides", () => {
     expect(guide.sections.find(section => section.id === "taxis")?.inlineLinks?.map(link => link.to)).toEqual([
       travelGuidePaths.uber, travelGuidePaths.taxiFares, travelGuidePaths.sherut,
     ]);
-    expect(guide.sections.find(section => section.id === "bikes")?.paragraphs.join(" ")).toMatch(/at least 16.*qualification requirements.*rental car/s);
+    expect(guide.sections.find(section => section.id === "bikes")?.paragraphs.join(" ")).toMatch(/at least 16.*qualification requirements.*(?:rental car|renting a car for trips outside the city)/s);
     const shabbat = guide.sections.find(section => section.id === "shabbat")!;
     expect(shabbat.paragraphs.join(" ")).toMatch(/Friday 16:30–02:00.*Saturday 09:00–17:30/s);
     expect(shabbat.paragraphs.join(" ")).toContain("Terminal 1");
