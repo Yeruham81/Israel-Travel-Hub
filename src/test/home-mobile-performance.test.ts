@@ -25,28 +25,16 @@ describe("home mobile performance optimizations", () => {
     expect(bytes("public/fonts/LICENSE-newsreader.txt")).toBeGreaterThan(100);
   });
 
-  it("serves thumbnails for small home cards instead of downloading full-size photos", () => {
+  it("keeps compact home cards lazy-loaded with the destination hero and thumbnail fallback", () => {
     const homepage = read("src/routes/index.tsx");
-    expect(homepage).toContain("c.img.thumb ?? c.img.src");
-    const sources = [
-      "src/assets/home/bethlehem-nativity",
-      "src/assets/home/jerusalem-old-city",
-      "src/assets/home/tel-aviv-coast",
-      "src/assets/home/tiberias-lake",
-      "src/assets/home/masada-dead-sea",
-      "src/assets/home/caesarea-aqueduct",
-      "src/assets/haifa/panorama",
-      "src/assets/dead-sea/beach",
-    ];
-    for (const source of sources) {
-      const original = bytes(`${source}.webp`);
-      const compact = bytes(`${source}-card.webp`);
-      expect(compact, source).toBeLessThan(original / 2);
-      expect(compact, source).toBeLessThan(35000);
-    }
-    for (const name of ["jerusalemCard", "telAvivCard", "tiberiasCard", "bethlehemCard", "masadaCard", "caesareaAqueductCard", "deadSeaBeachCard", "haifaHotelsCard"]) {
-      expect(homepage).toContain(`thumb: ${name}`);
-    }
+    const compact = homepage.slice(homepage.indexOf("function CompactCard("), homepage.indexOf("function AirportTransferCard("));
+    expect(compact).toContain("guideHeroPhotoForPath(String(c.to))?.src ?? c.img.thumb ?? c.img.src");
+    expect(compact).toContain('loading="lazy" decoding="async"');
+    expect(compact).toContain("width={224} height={160}");
+    expect(homepage).toContain("<CompactCard key={c.label} c={c} />");
+    const photo = homepage.slice(homepage.indexOf("function PhotoCard("), homepage.indexOf("function CompactCard("));
+    expect(photo).toContain("guideHeroPhotoForPath(String(c.to))?.src ?? c.img.src");
+    expect(photo).toContain('loading="lazy" decoding="async"');
   });
 
   it("uses optimized and clearly labeled AI destination illustrations only in the accommodation gallery", () => {
@@ -157,11 +145,15 @@ describe("home mobile performance optimizations", () => {
     expect(home).not.toContain("hotel-room-feature.webp");
     expect(home).not.toContain("/images/guides/taxi-in-tel-aviv.webp");
     expect(home).not.toContain("airport-pickup");
-    for (const name of ["jerusalem-old-city", "tel-aviv-coast", "tiberias-lake", "bethlehem-nativity", "masada-dead-sea", "caesarea-aqueduct"]) {
-      const base = `src/assets/home/${name}`;
+    const gallery = home.slice(home.indexOf("export const accommodationDestinationCards"), home.indexOf("export const services"));
+    for (const place of ["jerusalem", "tel-aviv-jaffa", "tiberias-galilee", "dead-sea", "haifa"]) {
+      const base = `public/images/home/accommodation-${place}-ai`;
       expect(bytes(`${base}-tile.webp`)).toBeLessThan(bytes(`${base}.webp`));
-      expect(home).toContain(`${name}-tile.webp`);
+      expect(bytes(`${base}-tile.webp`)).toBeLessThan(40000);
+      expect(gallery).toContain(`src: "/images/home/accommodation-${place}-ai.webp", thumb: "/images/home/accommodation-${place}-ai-tile.webp"`);
     }
+    expect(home).toContain("cards: accommodationDestinationCards");
+    expect(home).toContain("<PhotoCard c={card} />");
     expect(home).toContain("guideHeroPhotoForPath(String(c.to))?.src ?? c.img.src");
     expect(home).not.toContain("c.img.tile ?? c.img.src");
     expect(home).toContain("xl:aspect-[6/5]");
@@ -241,7 +233,9 @@ describe("home mobile performance optimizations", () => {
     expect(bytes("src/assets/airport-transfers/airport-mobile.webp")).toBeLessThan(bytes("src/assets/airport-transfers/airport.webp"));
     expect(bytes("src/assets/home/hero-jerusalem-psi-mobile.webp")).toBeLessThan(bytes("src/assets/home/hero-jerusalem-sm-optimized.webp"));
     expect(hero).toContain("hero-jerusalem-psi-mobile.webp");
-    expect(homepage).toContain("hero-jerusalem-psi-mobile.webp");
+    const head = read("src/route-heads/index.head.tsx");
+    expect(head).toContain('import lcpHeroMobile from "@/assets/home/hero-jerusalem-psi-mobile.webp"');
+    expect(head).toContain('href: lcpHeroMobile, media: "(max-width: 767px)", fetchPriority: "high"');
     expect(homepage).toContain("bethlehemTourPhotoMobile");
     expect(homepage).toContain("guidedTourMobile");
     expect(homepage).toContain("benGurionApronPhotoMobile");
