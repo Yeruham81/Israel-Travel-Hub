@@ -20,12 +20,14 @@ async function pageAt(path: string) {
 
 describe("independent author identity and page credits", () => {
   it("shows one real portrait, experience statement and exact review profile across the page families", async () => {
-    const paths = ["/", "/travel-blog/", "/accommodation/", "/airport-transfers/", "/private-driver-in-israel/", "/shore-excursions/haifa/", "/airport-transfers/jerusalem/", "/travel-blog/where-to-stay-in-jerusalem/", "/accommodation/tel-aviv/jaffa/", "/travel-blog/best-hotels-in-haifa/", "/accommodation/dead-sea/spa/", "/attractions/caesarea/"];
+    const paths = ["/", "/travel-blog/", "/accommodation/", "/airport-transfers/", "/private-driver-in-israel/", "/shore-excursions/haifa/", "/shore-excursions/ashdod/", "/travel-blog/uber-in-israel/", "/airport-transfers/jerusalem/", "/travel-blog/where-to-stay-in-jerusalem/", "/accommodation/tel-aviv/jaffa/", "/travel-blog/best-hotels-in-haifa/", "/accommodation/dead-sea/spa/", "/attractions/caesarea/"];
     for (const path of paths) {
       const { container, unmount } = await pageAt(path);
       const cards = screen.getAllByTestId("author-card");
       expect(cards, path).toHaveLength(1);
       const card = cards[0]!;
+      expect(card.closest('[data-testid="guide-hero-layout"]'), path).toBeNull();
+      expect(card, path).toHaveClass("w-full");
       // Narrow layouts must give the biography most of the row; the button
       // belongs BELOW the copy instead of taking a third flex column.
       expect(card).toHaveClass("grid", "grid-cols-[3.5rem_minmax(0,1fr)]");
