@@ -6,7 +6,6 @@ permissions:
   contents: read
 jobs:
   comparison:
-    if: ${{ !contains(github.event.head_commit.message, '[format-proposal]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
@@ -86,7 +85,6 @@ jobs:
           node after/scripts/audit-cookie-consent.cjs
           node audit/scripts/standalone-regression-browser.cjs
   full-tests:
-    if: ${{ !contains(github.event.head_commit.message, '[format-proposal]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -118,7 +116,6 @@ jobs:
       - name: Run entire test suite including editorial layouts
         run: bun run test
   staging-export:
-    if: ${{ !contains(github.event.head_commit.message, '[format-proposal]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -141,7 +138,6 @@ jobs:
       - run: bash scripts/build-validated-static.sh
       - run: node scripts/verify-hostinger-static-export.mjs
   lint-comparison:
-    if: ${{ !contains(github.event.head_commit.message, '[format-proposal]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
@@ -213,35 +209,3 @@ jobs:
             ${{ runner.temp }}/before-lint.json
             ${{ runner.temp }}/after-lint.json
           if-no-files-found: warn
-  format-proposal:
-    if: ${{ contains(github.event.head_commit.message, '[format-proposal]') }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v7
-        with:
-          node-version: "24"
-          package-manager-cache: false
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: "1.4.4"
-      - run: bash scripts/install-ci-dependencies.sh
-      - name: Generate formatting proposal only (no push)
-        run: |
-          bunx --no-install prettier --write scripts/generate-sitemap.mjs scripts/standalone-regression-browser.cjs scripts/verify-hostinger-static-export.mjs src/lib/site.ts src/test/detailed-horizontal-card-layouts.test.ts src/test/hostingerPrerender.test.ts src/test/legacy-referrals.test.tsx src/test/security-headers.test.ts src/test/sitemap.test.ts vite.config.ts
-          bunx --no-install prettier --check scripts/generate-sitemap.mjs scripts/standalone-regression-browser.cjs scripts/verify-hostinger-static-export.mjs src/lib/site.ts src/test/detailed-horizontal-card-layouts.test.ts src/test/hostingerPrerender.test.ts src/test/legacy-referrals.test.tsx src/test/security-headers.test.ts src/test/sitemap.test.ts vite.config.ts
-          node --check scripts/generate-sitemap.mjs
-          node --check scripts/standalone-regression-browser.cjs
-          node --check scripts/verify-hostinger-static-export.mjs
-          python3 - <<'PY'
-          import base64, pathlib, hashlib
-          for name in ["scripts/generate-sitemap.mjs","scripts/standalone-regression-browser.cjs","scripts/verify-hostinger-static-export.mjs","src/lib/site.ts","src/test/detailed-horizontal-card-layouts.test.ts","src/test/hostingerPrerender.test.ts","src/test/legacy-referrals.test.tsx","src/test/security-headers.test.ts","src/test/sitemap.test.ts","vite.config.ts"]:
-              data = pathlib.Path(name).read_bytes()
-              encoded = base64.b64encode(data).decode()
-              print("FORMAT_HASH", name, hashlib.sha256(data).hexdigest())
-              for i in range(0, len(encoded), 3000):
-                  print("FORMAT_CHUNK", name, i, encoded[i:i+3000])
-          PY

@@ -16,12 +16,30 @@ const readComponent = (name: string) =>
   readFileSync(resolve(process.cwd(), "src/components", name + ".tsx"), "utf8");
 
 const layouts = [
-  { component: "SeniorToursGuide", grid: 'className="grid gap-5" data-testid="senior-detailed-trip-cards"' },
-  { component: "TelAvivAttractionsGuide", grid: 'className="grid gap-5" data-testid="tel-aviv-detailed-experience-cards"' },
-  { component: "DeadSeaAttractionsGuide", grid: 'className="grid gap-5" data-testid="deadsea-detailed-experience-cards"' },
-  { component: "TopTenIsraelGuide", grid: 'className="grid gap-5" data-testid="top-ten-detailed-experience-cards"' },
-  { component: "JerusalemShoppingGuide", grid: 'className="mt-5 grid gap-5" data-testid="jerusalem-shopping-detailed-cards"' },
-  { component: "IsraelFoodGuide", grid: 'className="grid gap-5" data-testid="israel-food-dish-grid"' },
+  {
+    component: "SeniorToursGuide",
+    grid: 'className="grid gap-5" data-testid="senior-detailed-trip-cards"',
+  },
+  {
+    component: "TelAvivAttractionsGuide",
+    grid: 'className="grid gap-5" data-testid="tel-aviv-detailed-experience-cards"',
+  },
+  {
+    component: "DeadSeaAttractionsGuide",
+    grid: 'className="grid gap-5" data-testid="deadsea-detailed-experience-cards"',
+  },
+  {
+    component: "TopTenIsraelGuide",
+    grid: 'className="grid gap-5" data-testid="top-ten-detailed-experience-cards"',
+  },
+  {
+    component: "JerusalemShoppingGuide",
+    grid: 'className="mt-5 grid gap-5" data-testid="jerusalem-shopping-detailed-cards"',
+  },
+  {
+    component: "IsraelFoodGuide",
+    grid: 'className="grid gap-5" data-testid="israel-food-dish-grid"',
+  },
 ] as const;
 
 describe("Full-width editorial detail cards", () => {
@@ -39,14 +57,17 @@ describe("Full-width editorial detail cards", () => {
     expect(4 + 10 + 10 + 10 + 10 + 10 + detailedBeachCount).toBe(67);
   });
 
-  it.each(layouts)("$component uses a single desktop row with image in the upper right", ({ component, grid }) => {
-    const page = readComponent(component);
-    expect(page).toContain(grid);
-    expect(page).toContain('data-detailed-card="horizontal"');
-    expect(page).toContain("lg:grid-cols-[minmax(0,1fr)_270px]");
-    expect(page).toContain("lg:col-start-2 lg:row-start-1");
-    expect(page).toContain("lg:col-start-1 lg:row-start-1");
-  });
+  it.each(layouts)(
+    "$component uses a single desktop row with image in the upper right",
+    ({ component, grid }) => {
+      const page = readComponent(component);
+      expect(page).toContain(grid);
+      expect(page).toContain('data-detailed-card="horizontal"');
+      expect(page).toContain("lg:grid-cols-[minmax(0,1fr)_270px]");
+      expect(page).toContain("lg:col-start-2 lg:row-start-1");
+      expect(page).toContain("lg:col-start-1 lg:row-start-1");
+    },
+  );
 
   it("shows all Tel Aviv beaches as full-width rows with a right-hand photograph", () => {
     const page = readComponent("TelAvivBeachesGuide");
@@ -65,7 +86,9 @@ describe("Full-width editorial detail cards", () => {
     expect(food).toContain('data-testid="israel-food-tour-cards"');
     expect(food).toContain('className="grid gap-4 md:grid-cols-3"');
     const telAviv = readComponent("TelAvivAttractionsGuide");
-    expect(telAviv).toContain('sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-affiliate-tours"');
+    expect(telAviv).toContain(
+      'sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-affiliate-tours"',
+    );
     const senior = readComponent("SeniorToursGuide");
     expect(senior).toContain('className="grid grid-cols-2 gap-4 lg:grid-cols-3"');
   });

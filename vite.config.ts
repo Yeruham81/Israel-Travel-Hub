@@ -21,7 +21,8 @@ export default defineConfig(({ command }) => ({
               autoStaticPathsDiscovery: true,
               crawlLinks: true,
               // Maps are static HTML assets; PHP APIs are managed on the host.
-              filter: ({ path }: { path: string }) => !path.startsWith("/maps/") && !path.startsWith("/api/"),
+              filter: ({ path }: { path: string }) =>
+                !path.startsWith("/maps/") && !path.startsWith("/api/"),
               failOnError: true,
               concurrency: 5,
             },

@@ -4,31 +4,70 @@ import { QueryClient } from "@tanstack/react-query";
 import { describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { CANONICAL_ORIGIN, PRODUCTION_CANONICAL_ORIGIN, pageMeta, siteConfig } from "@/lib/site";
-import { collectSitemapPaths, buildSitemap, buildRobots, normalizeOrigin, DEFAULT_CANONICAL_ORIGIN } from "../../scripts/generate-sitemap.mjs";
+import {
+  collectSitemapPaths,
+  buildSitemap,
+  buildRobots,
+  normalizeOrigin,
+  DEFAULT_CANONICAL_ORIGIN,
+} from "../../scripts/generate-sitemap.mjs";
 
 describe("generated XML sitemap and robots.txt", () => {
   it("requires the production domain AND an explicit opt-in to enable indexing", () => {
-    const staging = siteConfig({ VITE_CANONICAL_ORIGIN: "https://saddlebrown-guanaco-454061.hostingersite.com", VITE_INDEXABLE: "true" });
-    const preview = siteConfig({ VITE_CANONICAL_ORIGIN: "https://preview.example.test", VITE_INDEXABLE: "true" });
-    const launch = siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN, VITE_INDEXABLE: "true" });
+    const staging = siteConfig({
+      VITE_CANONICAL_ORIGIN: "https://saddlebrown-guanaco-454061.hostingersite.com",
+      VITE_INDEXABLE: "true",
+    });
+    const preview = siteConfig({
+      VITE_CANONICAL_ORIGIN: "https://preview.example.test",
+      VITE_INDEXABLE: "true",
+    });
+    const launch = siteConfig({
+      VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN,
+      VITE_INDEXABLE: "true",
+    });
     expect(staging.indexable).toBe(false);
     expect(preview.indexable).toBe(false);
     expect(DEFAULT_CANONICAL_ORIGIN).toBe(PRODUCTION_CANONICAL_ORIGIN);
-    for (const env of [{}, { VITE_INDEXABLE: "true" }, { VITE_CANONICAL_ORIGIN: "", VITE_INDEXABLE: "true" }, { VITE_CANONICAL_ORIGIN: "  ", VITE_INDEXABLE: "true" }]) {
+    for (const env of [
+      {},
+      { VITE_INDEXABLE: "true" },
+      { VITE_CANONICAL_ORIGIN: "", VITE_INDEXABLE: "true" },
+      { VITE_CANONICAL_ORIGIN: "  ", VITE_INDEXABLE: "true" },
+    ]) {
       expect(siteConfig(env)).toEqual({ origin: PRODUCTION_CANONICAL_ORIGIN, indexable: false });
     }
-    expect(siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN }).indexable).toBe(false);
-    expect(siteConfig({ VITE_CANONICAL_ORIGIN: "https://israel-taxi.com", VITE_INDEXABLE: "true" }).indexable).toBe(false);
-    expect(siteConfig({ VITE_CANONICAL_ORIGIN: "http://www.israel-taxi.com", VITE_INDEXABLE: "true" }).indexable).toBe(false);
-    expect(siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN + "/", VITE_INDEXABLE: "true" }).indexable).toBe(true);
-    expect(siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN, VITE_INDEXABLE: "false" }).indexable).toBe(false);
+    expect(siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN }).indexable).toBe(
+      false,
+    );
+    expect(
+      siteConfig({ VITE_CANONICAL_ORIGIN: "https://israel-taxi.com", VITE_INDEXABLE: "true" })
+        .indexable,
+    ).toBe(false);
+    expect(
+      siteConfig({ VITE_CANONICAL_ORIGIN: "http://www.israel-taxi.com", VITE_INDEXABLE: "true" })
+        .indexable,
+    ).toBe(false);
+    expect(
+      siteConfig({
+        VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN + "/",
+        VITE_INDEXABLE: "true",
+      }).indexable,
+    ).toBe(true);
+    expect(
+      siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN, VITE_INDEXABLE: "false" })
+        .indexable,
+    ).toBe(false);
     expect(launch.indexable).toBe(true);
-    expect(pageMeta({ title: "Test", description: "Test", path: "/" }, launch).meta)
-      .toContainEqual({ name: "robots", content: "index,follow" });
-    expect(pageMeta({ title: "Test", description: "Test", path: "/" }, staging).meta)
-      .toContainEqual({ name: "robots", content: "noindex,nofollow" });
-    expect(pageMeta({ title: "Test", description: "Test", path: "/" }, launch).links)
-      .toContainEqual({ rel: "canonical", href: "https://www.israel-taxi.com/" });
+    expect(pageMeta({ title: "Test", description: "Test", path: "/" }, launch).meta).toContainEqual(
+      { name: "robots", content: "index,follow" },
+    );
+    expect(
+      pageMeta({ title: "Test", description: "Test", path: "/" }, staging).meta,
+    ).toContainEqual({ name: "robots", content: "noindex,nofollow" });
+    expect(
+      pageMeta({ title: "Test", description: "Test", path: "/" }, launch).links,
+    ).toContainEqual({ rel: "canonical", href: "https://www.israel-taxi.com/" });
   });
 
   it("covers every static HTML route, including both the airport comparison and private-transfer pages", async () => {
@@ -45,7 +84,9 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).toContain("/terms-of-use/");
     for (const city of ["jerusalem", "tel-aviv", "haifa", "ein-bokek"]) {
       expect(paths).toContain("/travel-blog/ben-gurion-airport-to-" + city + "/");
-      expect(paths).not.toContain("/travel-blog/how-to-get-from-ben-gurion-airport-to-" + city + "/");
+      expect(paths).not.toContain(
+        "/travel-blog/how-to-get-from-ben-gurion-airport-to-" + city + "/",
+      );
       expect(paths).toContain("/airport-transfers/" + city + "/");
       expect(paths).not.toContain("/airport-transfers/ben-gurion-airport-to-" + city + "/");
     }
@@ -67,8 +108,30 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).toContain("/accommodation/");
 
     const hotelSubpages = [
-      ["jerusalem", ["downtown", "mamilla-king-david", "old-city", "mahane-yehuda-nachlaot", "east-jerusalem", "german-colony-baka"]],
-      ["tel-aviv", ["beachfront", "dizengoff-city-center", "old-north-port", "neve-tzedek", "jaffa", "florentin", "kerem-hateimanim", "rothschild-boulevard"]],
+      [
+        "jerusalem",
+        [
+          "downtown",
+          "mamilla-king-david",
+          "old-city",
+          "mahane-yehuda-nachlaot",
+          "east-jerusalem",
+          "german-colony-baka",
+        ],
+      ],
+      [
+        "tel-aviv",
+        [
+          "beachfront",
+          "dizengoff-city-center",
+          "old-north-port",
+          "neve-tzedek",
+          "jaffa",
+          "florentin",
+          "kerem-hateimanim",
+          "rothschild-boulevard",
+        ],
+      ],
       ["haifa", ["boutique", "family"]],
       ["tiberias", ["luxury", "family"]],
       ["dead-sea", ["spa", "family"]],
@@ -97,19 +160,55 @@ describe("generated XML sitemap and robots.txt", () => {
     ]) {
       expect(paths).not.toContain(oldPath + "/");
       expect(paths).toContain(canonicalPath);
-      expect(Object.values(createRouter({ routeTree, context: { queryClient: new QueryClient() } }).routesById).some(route => route.fullPath === oldPath)).toBe(false);
+      expect(
+        Object.values(
+          createRouter({ routeTree, context: { queryClient: new QueryClient() } }).routesById,
+        ).some((route) => route.fullPath === oldPath),
+      ).toBe(false);
     }
-    for (const slug of ["old-city-jerusalem", "mount-of-olives", "mount-zion", "jaffa", "akko-acre", "rosh-hanikra", "mount-tabor", "capernaum", "tabgha", "mount-of-beatitudes", "magdala", "yardenit", "basilica-of-the-annunciation", "mount-precipice", "tel-megiddo", "masada", "dead-sea", "sea-of-galilee", "ein-gedi", "qasr-el-yahud", "mitzpe-ramon-crater"]) {
+    for (const slug of [
+      "old-city-jerusalem",
+      "mount-of-olives",
+      "mount-zion",
+      "jaffa",
+      "akko-acre",
+      "rosh-hanikra",
+      "mount-tabor",
+      "capernaum",
+      "tabgha",
+      "mount-of-beatitudes",
+      "magdala",
+      "yardenit",
+      "basilica-of-the-annunciation",
+      "mount-precipice",
+      "tel-megiddo",
+      "masada",
+      "dead-sea",
+      "sea-of-galilee",
+      "ein-gedi",
+      "qasr-el-yahud",
+      "mitzpe-ramon-crater",
+    ]) {
       expect(paths).toContain(`/attractions/${slug}/`);
       expect(paths).not.toContain(`/travel-blog/${slug}/`);
     }
-    for (const slug of ["attractions-in-tel-aviv", "dead-sea-attractions", "museums-in-jerusalem"]) {
+    for (const slug of [
+      "attractions-in-tel-aviv",
+      "dead-sea-attractions",
+      "museums-in-jerusalem",
+    ]) {
       expect(paths).toContain(`/travel-blog/${slug}/`);
     }
-    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
+    const router = createRouter({
+      routeTree,
+      context: { queryClient: new QueryClient() },
+      trailingSlash: "always",
+    });
     for (const p of paths) {
       const matched = router.matchRoutes(p);
-      expect(matched.at(-1)?.routeId.replace(/\/$/, "") || "/", p).toBe(p.replace(/\/$/, "") || "/");
+      expect(matched.at(-1)?.routeId.replace(/\/$/, "") || "/", p).toBe(
+        p.replace(/\/$/, "") || "/",
+      );
     }
   });
 
@@ -119,8 +218,8 @@ describe("generated XML sitemap and robots.txt", () => {
     const doc = new DOMParser().parseFromString(xml, "application/xml");
     expect(doc.querySelector("parsererror")).toBeNull();
     expect(doc.documentElement.namespaceURI).toBe("http://www.sitemaps.org/schemas/sitemap/0.9");
-    const found = [...doc.getElementsByTagNameNS("*", "loc")].map(x => x.textContent);
-    expect(found).toEqual(paths.map(p => "https://example.org" + p));
+    const found = [...doc.getElementsByTagNameNS("*", "loc")].map((x) => x.textContent);
+    expect(found).toEqual(paths.map((p) => "https://example.org" + p));
     expect(xml).not.toMatch(/<lastmod>|<priority>|<changefreq>/);
     expect(xml).not.toContain("/api/exchange-rates/");
     expect(() => buildSitemap(["/valid/", "/valid/"], "https://example.org")).toThrow("Duplicate");
@@ -134,18 +233,21 @@ describe("generated XML sitemap and robots.txt", () => {
     const robots = await readFile("public/robots.txt", "utf8");
     const doc = new DOMParser().parseFromString(xml, "application/xml");
     expect(doc.querySelector("parsererror")).toBeNull();
-    const urls = [...doc.getElementsByTagNameNS("*", "loc")].map(x => x.textContent || "");
-    expect(urls.map(u => new URL(u).pathname)).toEqual(paths);
+    const urls = [...doc.getElementsByTagNameNS("*", "loc")].map((x) => x.textContent || "");
+    expect(urls.map((u) => new URL(u).pathname)).toEqual(paths);
     const sitemapOrigin = new URL(urls[0]!).origin;
     expect(robots).toBe(buildRobots(sitemapOrigin));
     expect(robots).toMatch(/^User-agent: \*\nAllow: \//);
     expect(robots).not.toContain("Disallow:");
     expect(siteConfig({}).origin).toBe(DEFAULT_CANONICAL_ORIGIN);
     const expectedOrigin = normalizeOrigin(CANONICAL_ORIGIN);
-    const canonical = pageMeta({ title: "Test", description: "Test", path: "/travel-blog/" }).links[0]?.href;
+    const canonical = pageMeta({ title: "Test", description: "Test", path: "/travel-blog/" })
+      .links[0]?.href;
     expect(canonical).toBe(expectedOrigin + "/travel-blog/");
     // Development/indexing policy is not changed by adding an XML sitemap.
-    expect(pageMeta({ title: "Test", description: "Test", path: "/travel-blog/" }, siteConfig({})).meta).toContainEqual({ name: "robots", content: "noindex,nofollow" });
-    expect(urls.every(url => url.startsWith(sitemapOrigin + "/"))).toBe(true);
+    expect(
+      pageMeta({ title: "Test", description: "Test", path: "/travel-blog/" }, siteConfig({})).meta,
+    ).toContainEqual({ name: "robots", content: "noindex,nofollow" });
+    expect(urls.every((url) => url.startsWith(sitemapOrigin + "/"))).toBe(true);
   });
 });

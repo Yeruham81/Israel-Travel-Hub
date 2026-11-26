@@ -7,13 +7,15 @@ describe("Hostinger deployment build safeguards", () => {
   it("fails the static export on prerendering errors", () => {
     expect(read("vite.config.ts")).toMatch(/failOnError:\s*true/);
     expect(read("scripts/build-validated-static.sh")).toContain("Error in renderToReadableStream:");
-    expect(read("scripts/build-validated-static.sh")).toContain('set -euo pipefail');
+    expect(read("scripts/build-validated-static.sh")).toContain("set -euo pipefail");
   });
 
   it("keeps native static prerender separate from the Nitro SSR build", () => {
     const config = read("vite.config.ts");
     const script = read("scripts/build-validated-static.sh");
-    expect(config).toContain('command === "build" && process.env["HOSTINGER_STATIC_BUILD"] !== "true"');
+    expect(config).toContain(
+      'command === "build" && process.env["HOSTINGER_STATIC_BUILD"] !== "true"',
+    );
     expect(script).toContain("rm -rf -- dist .output");
     expect(script).toContain("dist/client/index.html");
     expect(script).toContain("cp -a dist/client/. .output/public/");
@@ -28,12 +30,20 @@ describe("Hostinger deployment build safeguards", () => {
     ]) {
       expect(read(path), path).toContain("bash scripts/build-validated-static.sh");
     }
-    expect(read(".github/workflows/full-project-validation.yml")).toContain("node scripts/verify-hostinger-static-export.mjs");
+    expect(read(".github/workflows/full-project-validation.yml")).toContain(
+      "node scripts/verify-hostinger-static-export.mjs",
+    );
   });
 
   it("still protects PHP endpoints, server configuration, and remote files", () => {
     const deploy = read(".github/workflows/deploy-hostinger-premium.yml");
-    for (const rule of ["--exclude='/api/***'", "--exclude='/.htaccess'", "--exclude='*.php'", "--exclude='/.well-known/***'", "StrictHostKeyChecking=yes"]) {
+    for (const rule of [
+      "--exclude='/api/***'",
+      "--exclude='/.htaccess'",
+      "--exclude='*.php'",
+      "--exclude='/.well-known/***'",
+      "StrictHostKeyChecking=yes",
+    ]) {
       expect(deploy).toContain(rule);
     }
     expect(deploy).not.toMatch(/\brsync\b[^\n]*--delete/);
