@@ -22,7 +22,7 @@ GTM container or automatic history-view handler for this stream.
 
 Analytics and its preference control are enabled only when the build is
 production/indexable **and** the browser is on the exact permanent www HTTPS
-origin. The Hostinger temporary site, local development and Lovable previews
+origin. The Hostinger temporary site, local development and other preview origins
 remain untracked, even if a stored preference is present.
 
 The initial preference is unknown. Basic consent mode keeps the Google script
@@ -41,7 +41,7 @@ The shared form hook emits `generate_lead` only after matching server acceptance
 deduplicated locally by request reference. GA4 receives only `form_type`, never
 the reference, the enquiry fields, email address, name or journey information.
 
-## Cutover verification still required
+## Production verification checklist
 
 This change does not switch DNS, publish to the old production webroot or enable
 indexing. End-to-end collection into the real GA4 property is deliberately not

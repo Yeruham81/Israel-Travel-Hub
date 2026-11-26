@@ -1,9 +1,9 @@
 # Basic website security baseline — 23 October 2026
 
-Scope: Israel Taxi & Travel (TanStack Start/React SSR, hosted on Lovable).
+Scope: Israel Taxi & Travel (historical TanStack Start/React SSR review; production now uses Hostinger static HTML and PHP APIs).
 This is a code and dependency configuration review, not a penetration test.
 Live header checks on 23 October confirmed the core headers and the limited CSP
-on the published lovable.app website; future hosting changes require rechecking.
+on the former preview deployment; the current production host requires separate verification.
 
 ## Implemented in this change
 
@@ -12,7 +12,7 @@ on the published lovable.app website; future hosting changes require rechecking.
      Referrer-Policy, Permissions-Policy, X-Permitted-Cross-Domain-Policies.
    - Production-only `X-Frame-Options: SAMEORIGIN` on HTML responses for
      `israel-taxi.com` and `www.israel-taxi.com`.
-   - Preview sites remain embeddable in Lovable's editor.
+   - Non-production preview sites are exempt from the production-only frame policy.
    - Existing cookies, status codes, no-store API cache settings and response
      bodies are preserved, including errors.
 2. `public/_headers`
@@ -54,16 +54,15 @@ on the published lovable.app website; future hosting changes require rechecking.
   `POST /api/quote-request/` in the actual hosting control panel if available.
   Ensure legitimate customer submissions can still reach Brevo.
 - GitHub Dependabot alert/settings and account 2FA cannot be verified or enabled
-  by these code changes. Confirm in GitHub Settings → Security and in Lovable,
-  GitHub, Brevo, QUIC.cloud DNS and Hostinger account security.
+  by these code changes. Confirm in GitHub Settings → Security and in Brevo, QUIC.cloud DNS and Hostinger account security.
 - `Strict-Transport-Security` is deliberately NOT enabled until all production
   hostnames/redirects/certificates are tested after domain cutover.
 - A minimal CSP (`base-uri 'self'; object-src 'none'`) has been deployed and
   verified on the live site. A **full script/style CSP** is NOT yet enforced:
-  TanStack Start uses inline hydration and the Lovable preview may be framed.
+  TanStack Start uses inline hydration; preview origins may be framed.
   First measure CSP violations in Report-Only mode, then implement nonce/hash
   support and test pages, maps, quote forms and booking links.
-- **Verified for the published lovable.app URL:** HTML replies include
+- **Historically verified for the former preview deployment:** HTML replies include
   nosniff, Referrer-Policy, Permissions-Policy and the minimal CSP; quote API
   replies also include `Cache-Control: no-store`. See
   https://github.com/Yeruham81/Israel-Travel-Hub/actions/runs/40015718758.
@@ -73,9 +72,8 @@ on the published lovable.app website; future hosting changes require rechecking.
 ## Verify after publishing
 
 ```sh
-curl -I https://israel-taxi-travel.lovable.app/
-curl -I https://israel-taxi-travel.lovable.app/api/quote-request/
-curl -I https://www.israel-taxi.com/   # only after domain cutover
+curl -I https://www.israel-taxi.com/
+curl -I https://www.israel-taxi.com/api/quote-request/
 ```
 
 Expected: nosniff/referrer/permissions headers for HTML and JSON; no X-Frame-Options

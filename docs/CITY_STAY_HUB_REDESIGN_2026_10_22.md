@@ -7,7 +7,7 @@ Updated the two existing editorial pages without changing their routes, SEO meta
 - `/travel-blog/where-to-stay-in-jerusalem/`
 - `/travel-blog/where-to-stay-in-tel-aviv/`
 
-All implementation was performed directly via GitHub; no Lovable AI agent invocation.
+All implementation was performed directly via GitHub; no external editor-agent invocation.
 
 ## Area cards and travel-planning links
 
