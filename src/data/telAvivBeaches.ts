@@ -34,7 +34,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "tzuk-south", name: "South Tzuk Beach", area: "Northern coast",
-    detailPhoto: { src: "/images/tel-aviv-beaches/south-tzuk-illustration.webp", alt: "Kayaks on a sandy shore, an illustrative photo of beach activities", width: 454, height: 206 },
+    detailPhoto: { src: "/images/tel-aviv-beaches/south-tzuk-neutral.webp", alt: "Mediterranean waves washing onto a sandy beach", width: 480, height: 300 },
     bestFor: "Room away from the centre", summary: "An open northern beach with large lawns, a restaurant, a playground, sports facilities and accessible paths.",
     tip: "Free parking is available near the entrance; accessible beach showers and water-access chairs are listed by the municipality.",
     access: "Northern Tel Aviv; plan a return ride and check the precise entrance.",
@@ -54,7 +54,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "metzitzim", name: "Metzitzim Beach", area: "Northern coast",
-    pickPhoto: { src: "/images/tel-aviv-beaches/metzitzim-pick-illustration.webp", alt: "Illustrative photo of beach volleyball in Tel Aviv", width: 680, height: 454 },
+    pickPhoto: { src: "/images/tel-aviv-beaches/metzitzim-pick.webp", alt: "Metzitzim Beach seen from above, with a sheltered bathing area and sailing boats offshore", width: 800, height: 449 },
     detailPhoto: { src: "/images/tel-aviv-beaches/metzitzim.webp", alt: "Sunbeds and umbrellas at Metzitzim Beach near Tel Aviv Port", width: 748, height: 486 },
     bestFor: "Families near the port", summary: "Beside Tel Aviv Port, Metzitzim is popular with families for its playground, baby shower, beach library and nearby cafés.",
     tip: "Choose the marked swimming area and keep children under close supervision, regardless of how calm the water appears.",

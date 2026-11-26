@@ -28,7 +28,6 @@ const headings = [
   ["beaches", "Explore beaches"],
   ["season", "When to visit"],
   ["practical", "Practical tips"],
-  ["transport", "Getting there"],
   ["beyond", "Beyond Tel Aviv"],
   ["faq", "FAQ"],
   ["explore-more", "Explore more"],
@@ -37,9 +36,9 @@ const headings = [
 
 const pickIcons = [Waves, Users, Heart, Compass, TreePalm, Sun];
 const areas = [
-  { name: "Northern coast" as const, intro: "The Tzuk beaches, Tel Baruch, the port and Hilton." },
-  { name: "Central seafront" as const, intro: "The main hotel-lined promenade, from Gordon to Geula." },
-  { name: "Southern coast and Jaffa" as const, intro: "Beaches and parks along the southern waterfront towards Jaffa." },
+  { name: "Northern coast" as const, intro: "The northern beaches offer more open space and a quieter atmosphere away from the busiest parts of the promenade. The Tzuk beaches and Tel Baruch are ideal for a relaxed beach day, while Metzitzim and Hilton are closer to the port, cafés and waterfront activities." },
+  { name: "Central seafront" as const, intro: "This is the classic Tel Aviv beachfront, with lively bathing beaches, volleyball courts, cafés and restaurants along the promenade. From Gordon to Geula, these beaches are convenient for visitors staying in central hotels and for combining a swim with sightseeing in the city." },
+  { name: "Southern coast and Jaffa" as const, intro: "The waterfront becomes more open and park-like around Charles Clore, with lawns, walking paths and views towards Old Jaffa. Farther south, Givat Aliya has a more local atmosphere and distinctive stone arches. Both offer a different experience from the central hotel-lined beaches." },
 ];
 const related = [
   { title: "Attractions in Tel Aviv", to: "/travel-blog/attractions-in-tel-aviv/" as const, note: "Ideas for sightseeing beyond the sand", image: rothschildPhoto, alt: "Rothschild Boulevard in Tel Aviv" },
@@ -98,16 +97,9 @@ function BeachPhotoSlot({ beach, kind = "detail" }: {
   const photo = kind === "pick" ? beach.pickPhoto : beach.detailPhoto;
   const shape = kind === "detail" ? "aspect-[16/9] w-full lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:aspect-[16/10] lg:rounded-xl" : "aspect-[16/9] w-full";
   return photo ? (
-    ((beach.id === "tzuk-south" && kind === "detail") || (beach.id === "metzitzim" && kind === "pick")) ? (
-      <figure className={shape + " relative overflow-hidden"}>
-        <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width={photo.width} height={photo.height} className="h-full w-full object-cover" />
-        <figcaption className="absolute bottom-0 right-0 rounded-tl bg-black/65 px-2 py-1 text-[10px] text-white">Illustrative photo</figcaption>
-      </figure>
-    ) : (
-      <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async"
-        width={photo.width} height={photo.height}
-        className={shape + " object-cover"} />
-    )
+    <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async"
+      width={photo.width} height={photo.height}
+      className={shape + " object-cover"} />
   ) : (
     <div aria-hidden="true" data-beach-photo-slot={kind + ":" + beach.id}
       className={shape + " flex items-center justify-center bg-secondary/50 text-primary/30"}>
@@ -292,11 +284,6 @@ export function TelAvivBeachesGuide() {
         </div>
       </section>
 
-      <section id="transport" aria-labelledby="transport-h" className="mt-12 scroll-mt-24">
-        <Heading id="transport" title="How to get to Tel Aviv's beaches" />
-        <p className="leading-relaxed">The central beaches are within walking distance of many beachfront hotels. Use the Google Maps link on each beach card for directions. For public transport and Shabbat travel, see my <Link to="/travel-blog/getting-around-tel-aviv/" className="font-semibold text-primary hover:underline">getting around Tel Aviv guide</Link>.</p>
-      </section>
-
       <section id="beyond" aria-labelledby="beyond-h" className="mt-12 scroll-mt-24">
         <Heading id="beyond" title="Beaches beyond Tel Aviv" intro="Set aside a separate coastal outing for these beaches beyond Tel Aviv." />
         <div className="grid gap-4 md:grid-cols-3">
@@ -304,7 +291,7 @@ export function TelAvivBeachesGuide() {
           <div className="overflow-hidden rounded-xl border bg-card"><img src="/images/tel-aviv-beaches/gaash.webp" alt="Sandy shore below the cliffs at Ga'ash Beach" width={701} height={470} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" /><div className="p-4"><h3 className="text-lg font-semibold">Ga'ash Beach</h3><p className="mt-2 text-sm leading-relaxed">A natural stretch of sand beneath coastal cliffs. Keep away from unstable cliff edges and swim only where lifeguards are on duty.</p><p className="mt-4 text-xs"><OfficialLink href="https://www.google.com/maps/search/?api=1&query=Gaash+Beach+Israel">View location</OfficialLink></p></div></div>
           <div className="overflow-hidden rounded-xl border bg-card"><img src="/images/tel-aviv-beaches/palmahim.webp" alt="Palmahim Beach and its natural coastline" width={703} height={528} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" /><div className="p-4"><h3 className="text-lg font-semibold">Palmahim Beach</h3><p className="mt-2 text-sm leading-relaxed">A protected natural shoreline south of the city. Pedestrian access is free; vehicles may incur entry or parking charges, and swimming arrangements follow park notices.</p><p className="mt-4 text-xs"><OfficialLink href="https://en.parks.org.il/reserve-park/palmahim-beach-national-park/">Official park information</OfficialLink> · <OfficialLink href="https://www.google.com/maps/search/?api=1&query=Palmahim+Beach+National+Park">View location</OfficialLink></p></div></div>
         </div>
-        <p className="mt-3 text-sm text-muted-foreground">For a longer coastal sightseeing day, I recommend a separate outing to <Link to="/attractions/caesarea/" className="font-semibold text-primary hover:underline">Caesarea</Link> and its beaches.</p>
+        <p className="mt-3 text-sm text-muted-foreground">For a coastal day trip beyond Tel Aviv, I recommend <Link to="/attractions/caesarea/" className="font-semibold text-primary hover:underline">Caesarea</Link>, where you can explore the ancient harbour and archaeological remains before spending time at the beach.</p>
       </section>
 
       <FaqList faqs={faqs} />

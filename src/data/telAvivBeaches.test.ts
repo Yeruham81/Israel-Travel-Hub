@@ -89,6 +89,15 @@ describe("Tel Aviv beach guide editorial regression", () => {
     for (const id of ["sidna-ali", "gaash", "palmahim"]) expect(existsSync(resolve(process.cwd(), "public/images/tel-aviv-beaches", id + ".webp"))).toBe(true);
   });
 
+  it("shows the new beach photos without captions and omits the redundant transport section", () => {
+    const page = readFileSync(resolve(process.cwd(), "src/components/TelAvivBeachesGuide.tsx"), "utf8");
+    expect(page).not.toContain("Illustrative photo");
+    expect(page).not.toContain("How to get to Tel Aviv's beaches");
+    expect(page).not.toContain('["transport", "Getting there"]');
+    expect(telAvivBeaches.find(beach => beach.id === "metzitzim")?.pickPhoto?.src).toBe("/images/tel-aviv-beaches/metzitzim-pick.webp");
+    expect(telAvivBeaches.find(beach => beach.id === "tzuk-south")?.detailPhoto?.src).toBe("/images/tel-aviv-beaches/south-tzuk-neutral.webp");
+  });
+
   it("retains thirteen map markers in north-to-south order", () => {
     expect(beachMapPoints).toHaveLength(13);
     expect(beachMapPoints.map(point => point.id)).toEqual(telAvivBeaches.map(beach => beach.id));
