@@ -78,7 +78,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     faqs:seniorFaqs,
     sourceIds:[],
     related:["jerusalem","israel","christianTours","travelTips"],
-    services:[{label:"Ask Moshe about a private driver",to:"/private-driver-in-israel/"}],
+    services:[{label:"Ask me about a private driver",to:"/private-driver-in-israel/"}],
   },
   christianTours: {
     id: "christianTours",

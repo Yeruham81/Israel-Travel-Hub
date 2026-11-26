@@ -18,7 +18,7 @@ import { christianToursHero, christianAreas, christianRoutes, christianOffers, c
 const updatedAt="2026-11-21";
 const slug="/travel-blog/christian-tours-in-israel/";
 const link="font-semibold text-primary underline underline-offset-4 hover:text-primary/80";
-const nav=[["start","How to plan"],["destinations","Christian destinations"],["itineraries","Sample itineraries"],["tours","Guided tours"],["practical","Visiting advice"],["other-places","Other biblical places"],["faq","FAQ"],["more-sites","Related Christian guides"],["plan-trip","Plan your visit"],["contact","Contact Moshe"]] as const;
+const nav=[["start","How to plan"],["destinations","Christian destinations"],["itineraries","Sample itineraries"],["tours","Guided tours"],["practical","Visiting advice"],["other-places","Other biblical places"],["faq","FAQ"],["more-sites","Related Christian guides"],["plan-trip","Plan your visit"],["contact","Contact me"]] as const;
 const sources=[
  {title:"Christian Information Center - shrine opening hours",url:"https://www.cicts.org/our-services/"},
  {title:"Christian Information Center - Masses and services",url:"https://www.cicts.org/masses-services/"},
@@ -200,7 +200,7 @@ export function ChristianToursGuide(){
      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{christianPlanningCards.map(item=><Related key={item.to} item={item}/>)}</div>
    </section>
    <section id="contact" aria-labelledby="contact-heading" className="mt-12 scroll-mt-24">
-     <h2 id="contact-heading" className="sr-only">Ask Moshe Barak about private transport for your Christian heritage trip</h2>
+     <h2 id="contact-heading" className="sr-only">Ask me about private transport for your Christian heritage trip</h2>
      <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
        heading:"Need transport between Christian sites?",
        introduction:"I'm Moshe Barak. Tell me your travel dates, pickup location and group size if you want a private airport transfer, a multi-stop sightseeing day or a driver for your journey between Jerusalem, Nazareth and the Galilee. Guiding and West Bank arrangements must be confirmed separately.",

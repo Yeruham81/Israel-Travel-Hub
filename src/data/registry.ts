@@ -1074,7 +1074,7 @@ const sourceCatalog: SourceReference[] = [
   {
     id: "kiwitaxi-airport", title: "Ben Gurion Airport transfers", publisher: "Kiwitaxi",
     url: "https://kiwitaxi.com/en/israel/ben-gurion-airport", checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
-    note: "Official airport transfer page. Travelers enter their destination and dates; no live quote or booking was checked.",
+    note: "Official airport transfer page. Enter your destination and dates for prices and booking options.",
   },
   {
     id: "welcome-telaviv", title: "Tel Aviv airport pickups", publisher: "Welcome Pickups",
@@ -1172,7 +1172,7 @@ const sourceCatalog: SourceReference[] = [
     publisher: "Moshe Barak",
     url: "",
     checkedAt: SHORE_EXCURSION_CHECK_DATE,
-    note: "Four private return day-trip itineraries from Ashdod. Contact Moshe for a personalized quote.",
+    note: "Four private return day-trip itineraries from Ashdod. Contact me for a personalized quote.",
   },
   {
     id: "owner-haifa-shore",
@@ -1180,7 +1180,7 @@ const sourceCatalog: SourceReference[] = [
     publisher: "Moshe Barak",
     url: "",
     checkedAt: SHORE_EXCURSION_CHECK_DATE,
-    note: "Four private return day-trip itineraries from Haifa. Contact Moshe for a personalized quote.",
+    note: "Four private return day-trip itineraries from Haifa. Contact me for a personalized quote.",
   },
   {
     id: "beinharim-ashdod-jlm-bethlehem",
@@ -2126,7 +2126,7 @@ export const offers: Offer[] = [
       amount: 550,
       basis: "per_vehicle",
       maxPartySize: 4,
-      conditions: "Published weekday starting fare for up to 4 passengers. Extra charges may apply for night, weekend or holiday trips. Please inquire in advance. Not a live quote.",
+      conditions: "Published weekday starting fare for up to 4 passengers. Extra charges may apply for night, weekend or holiday trips. Contact me in advance for a personalized quote.",
       sourceId: "moshe-airport-transfers",
     },
     maxPassengersKnown: 4,

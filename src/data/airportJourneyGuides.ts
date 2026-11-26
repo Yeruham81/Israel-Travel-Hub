@@ -314,7 +314,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       takeaway: "Choose the station with the easiest onward route to your hotel.",
     },
     answer: "The train is usually the best low-cost option when running. Choose a station near your destination: Hof HaCarmel for southern Haifa, Bat Galim for the coast or Center HaShmona for downtown. Hotels on Mount Carmel generally need an uphill bus or taxi; a direct taxi or private transfer avoids that change.",
-    trainIntro: "The Ben Gurion Airport railway station is below Terminal 3. Follow the train signs after customs; passengers using Terminal 1 first need the free internal shuttle to Terminal 3. Direct trains to Haifa take approximately 80–100 minutes, depending on your destination station and the service. Buy a ticket at the station or use a valid Rav-Kav or supported payment app. Check the current fare and make sure your train stops at the station nearest your hotel. Haifa's railway stations are near the coast. To reach a hotel on Mount Carmel, you'll usually need a bus or taxi. My Ben Gurion Airport arrival guide explains the terminal steps; the getting around Israel guide explains onward public transport.",
+    trainIntro: "The Ben Gurion Airport railway station is below Terminal 3. Follow the train signs after customs; passengers using Terminal 1 first need the free internal shuttle to Terminal 3. Direct trains to Haifa take approximately 80–110 minutes, depending on your destination station and the service. Buy a ticket at the station or use a valid Rav-Kav or supported payment app. Check the current fare and make sure your train stops at the station nearest your hotel. Haifa's railway stations are near the coast. To reach a hotel on Mount Carmel, you'll usually need a bus or taxi. My Ben Gurion Airport arrival guide explains the terminal steps; the getting around Israel guide explains onward public transport.",
     photo: { src: "/images/travel-blog/featured-airport-haifa.webp", alt: "Route to Haifa from Ben Gurion Airport", label: "Airport to Haifa", sourceUrl: "" },
     updatedAt: "2026-11-23",
     historicalPrices: false,
@@ -378,7 +378,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     weekend: [
       "Rail service normally pauses during the main Shabbat period and most Jewish holidays. Published bus 905 service is limited to Saturday night and early Sunday, and must be checked for your specific date.",
       "If no operating rail/bus connection suits the flight, compare the official airport taxi queue with an advance private transfer. Price, vehicle size and meeting instructions differ.",
-      "Older airport shared-taxi listings may no longer be valid. Check the Sherut in Israel guide and airport Shabbat transport guide for current options."
+      "The former Amal shared airport taxi service to Haifa has ended. My Sherut in Israel guide and airport Shabbat transport guide explain the available transport options."
     ],
     advice: [
       "Allow plenty of time between your flight's arrival and your cruise check-in deadline.",

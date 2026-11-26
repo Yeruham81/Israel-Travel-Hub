@@ -291,8 +291,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.related).toHaveLength(6);
     expect(g.planNext).toHaveLength(4);
     expect(g.options.every(option => Boolean(option.comparison?.advantages && option.comparison?.drawbacks))).toBe(true);
-    expect(g.weekend.join(" ")).toContain("Older airport shared-taxi listings");
-    expect(g.weekend.join(" ")).not.toContain("Amal");
+    expect(g.weekend.join(" ")).toContain("The former Amal shared airport taxi service to Haifa has ended.");
     expect(g.options.find(o => o.id === "rail")?.cost).toContain("₪");
     expect(g.options.find(o => o.id === "bus")?.cost).not.toContain("₪");
     expect(g.options.find(o => o.id === "taxi")?.cost).toMatch(/meter/i);

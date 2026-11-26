@@ -27,7 +27,7 @@ const sections=[
  ["faq","FAQ"],
  ["explore-sites","Destinations to explore"],
  ["travel-guides","More planning guides"],
- ["contact","Contact Moshe"],
+ ["contact","Contact me"],
 ] as const;
 const references=[
  {title:"Israel Nature and Parks Authority - accessibility of national parks",url:"https://en.parks.org.il/accessibility/"},

@@ -11,10 +11,6 @@ import { travelGuidePaths } from "@/data/travel-guide-paths";
  * never sourced from old articles.
  */
 type Upgrade = {
-  title?: string;
-  description?: string;
-  intro?: string;
-  answer?: string;
   sections: GuideSection[];
   related?: TravelGuideId[];
   services?: TravelGuide["services"];
@@ -22,10 +18,6 @@ type Upgrade = {
 };
 const articles: Partial<Record<TravelGuideId, Upgrade>> = {
   jerusalem: {
-    title: "Jerusalem Travel Guide: What to See, Where to Stay & How to Plan",
-    description: "Plan your Jerusalem visit: Old City, Mount of Olives, museums, markets, neighborhoods, how many days to stay, local transport and day trips.",
-    intro: "Jerusalem is easiest to explore in clusters rather than as one long list of landmarks. I suggest choosing an Old City gate for your first day, setting aside a separate half-day for the Mount of Olives or a museum, and keeping space for the markets and neighbourhoods that give the city its everyday character.",
-    answer: "For a first visit, plan two to three days if possible. Give the Old City its own focused day; add the Mount of Olives or Mount Zion according to your interests, then choose between museums, Mahane Yehuda and another neighbourhood. With a single day, concentrate on one walk and one nearby addition. Hotel location, religious-site access, Shabbat services and your actual departure point matter more than fitting every landmark into one itinerary.",
     sections: [
       {
         id: "jerusalem-route-one-day",
@@ -76,8 +68,6 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
     ],
   },
   jerusalemChurches: {
-    title: "Churches in Jerusalem: What to See & How to Visit",
-    description: "Explore 20 churches in Jerusalem with opening hours, photos, maps and visits to the Old City, Mount of Olives, Mount Zion and Ein Karem.",
     sections: [
       {
         id: "more-old-city-churches",
@@ -118,8 +108,6 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
     related: ["jerusalem", "bethlehem"],
   },
   jerusalemShopping: {
-    title: "Shopping in Jerusalem: Markets, Crafts, Malls & Local Streets",
-    description: "Jerusalem shopping guide: Mahane Yehuda Market, Old City souks, Mamilla, Cardo, Ben Yehuda, Malha, Emek Refaim, craft shops and practical advice.",
     sections: [
       {
         id: "artists-colony",
@@ -187,10 +175,6 @@ export function applyJerusalemGuideEditorial(guides: Record<TravelGuideId, Trave
     if (!changes) continue;
     const guide = guides[id];
     if (!guide) throw new Error("Jerusalem editorial guide missing: " + id);
-    if (changes.title) guide.title = changes.title;
-    if (changes.description) guide.description = changes.description;
-    if (changes.intro) guide.intro = changes.intro;
-    if (changes.answer) guide.answer = changes.answer;
     // The dedicated shopping guide now has one authoritative 10-place registry.
     // Avoid appending older generic shopping sections that duplicate its locations.
     if (id !== "jerusalemShopping") {
