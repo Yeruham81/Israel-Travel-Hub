@@ -130,7 +130,7 @@ export const journeyDestinationGuides = {
         "id": "transport-season",
         "title": "Arrival, season and the return journey",
         "paragraphs": [
-          "From Jerusalem, the final destination determines whether a northern beach or the southern hotel strip suits your day. Public transport may work for a defined stop; a driver, rental or organised excursion can fit other combinations. Include the journey to the departure stop and the return after your beach or park closes.",
+          "From Jerusalem, the final destination determines whether a northern beach or the southern hotel strip suits your day. Buses are convenient for visiting one destination. A private driver, rental car or organised tour offers more flexibility for several stops. Include the journey to the departure stop and the return after your beach or park closes.",
           "The area can be very hot. Choose the timing and amount of outdoor walking around the local forecast, and check weather and road notices before a desert outing. Include the name and address of your Dead Sea beach or hotel when requesting a transfer."
         ],
         "links": [
@@ -603,7 +603,7 @@ export const journeyDestinationGuides = {
     photo: topTenIsraelHero,
     facts: [
       { label: "Ten experiences", text: "Coast, heritage, food, nature and night sky" },
-      { label: "Eight regions", text: "Geographical map to choose a realistic route" },
+      { label: "Eight regions", text: "Explore Israel's regions and plan your itinerary" },
       { label: "Start planning", text: "Pick priorities, then fit them to your dates" },
     ],
     comparison: {
