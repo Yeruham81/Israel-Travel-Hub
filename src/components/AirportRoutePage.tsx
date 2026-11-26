@@ -69,12 +69,12 @@ const routeReading: Record<AirportTransferRouteId, RelatedCard[]> = {
     { title: "Where to stay in Tel Aviv", description: "Compare beach, central-city and Jaffa neighborhoods.", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
     { title: "Explore Old Jaffa", description: "See the port, stone lanes and nearby sights.", to: "/attractions/jaffa/" },
     { title: "Getting around Tel Aviv", description: "Light rail, buses and local transport after check-in.", to: travelGuidePaths.telAviv },
-    { title: "Tel Aviv beaches", description: "Choose the right stretch of waterfront for your stay.", to: travelGuidePaths.telAvivBeaches },
+    { title: "Tel Aviv beaches", description: "Explore Tel Aviv's beaches and seafront neighborhoods.", to: travelGuidePaths.telAvivBeaches },
     { title: "Official airport taxis", description: "Learn about airport taxi pickup and fare arrangements.", to: travelGuidePaths.airportTaxis },
   ],
   haifa: [
     { title: "Ben Gurion Airport arrival tips", description: "Plan baggage collection and your driver meeting point.", to: travelGuidePaths.arrival },
-    { title: "Where to stay in Haifa", description: "Compare Lower City, German Colony and Carmel hotels.", to: "/travel-blog/best-hotels-in-haifa/" },
+    { title: "Where to stay in Haifa", description: "Choose a hotel near the Haifa attractions you plan to visit.", to: "/travel-blog/best-hotels-in-haifa/" },
     { title: "Haifa attractions", description: "Explore the gardens, waterfront and Carmel viewpoints.", to: "/attractions/haifa/" },
     { title: "Haifa shore excursions", description: "Plan a visit around your cruise and port schedule.", to: "/shore-excursions/haifa/" },
     { title: "Getting around Israel", description: "Continue your journey through northern Israel.", to: travelGuidePaths.israel },
@@ -82,7 +82,7 @@ const routeReading: Record<AirportTransferRouteId, RelatedCard[]> = {
   ],
   "dead-sea": [
     { title: "Ben Gurion Airport arrival tips", description: "From passport control to the driver meeting point.", to: travelGuidePaths.arrival },
-    { title: "Dead Sea hotels", description: "Find your exact Ein Bokek or Neve Zohar hotel area.", to: "/travel-blog/best-dead-sea-hotels/" },
+    { title: "Dead Sea hotels", description: "Compare hotels in Ein Bokek, Neve Zohar and Ein Gedi, including beach access, mineral pools and spa facilities.", to: "/travel-blog/best-dead-sea-hotels/" },
     { title: "Dead Sea attractions", description: "Plan beaches, viewpoints and desert highlights.", to: "/attractions/dead-sea/" },
     { title: "Visit Masada", description: "Plan the fortress visit, cable car and site access.", to: "/attractions/masada/" },
     { title: "Jerusalem to the Dead Sea", description: "Explore further journeys and stops around the region.", to: travelGuidePaths.jerusalemDeadSea },
