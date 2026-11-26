@@ -30,6 +30,9 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Test deployment storage maintenance in isolated fixtures
+        run: python3 scripts/test-deployment-storage.py
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:

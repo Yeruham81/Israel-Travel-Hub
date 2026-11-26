@@ -164,11 +164,13 @@ jobs:
           fi
           # NEVER add --delete. Keep manually configured PHP, .htaccess,
           # host configuration, upload directories and unpublished backups.
-          # Maintain a private backup of overwritten HTML/assets outside public_html.
-          BACKUP_DIR="$(dirname "$HOSTINGER_REMOTE_PATH")/cms-static-backups/$GITHUB_RUN_ID"
+          # Keep private per-attempt backups outside public_html; prune only
+          # after a successful transfer and public smoke test.
+          BACKUP_ROOT="$(dirname "$HOSTINGER_REMOTE_PATH")/deployment-backups"
+          BACKUP_DIR="$BACKUP_ROOT/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
           if [[ "$DRY_RUN" == "false" ]]; then
             ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
-              "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" "umask 077 && mkdir -p '$BACKUP_DIR'"
+              "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" "python3 -c 'import sys; assert sys.version_info >= (3, 8)' && test ! -L '$BACKUP_ROOT' && umask 077 && mkdir -p '$BACKUP_ROOT' && mkdir '$BACKUP_DIR'"
             args+=(--backup --backup-dir="$BACKUP_DIR")
           fi
           rsync -rltvz --delay-updates --no-perms --no-owner --no-group \
@@ -195,3 +197,23 @@ jobs:
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
           done
+
+      - name: Retain three successful backups and prune obsolete generated assets
+        if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Only safe, direct build asset names are tracked. Unrecognized files
+          # and all nested/manual assets remain outside automatic deletion.
+          manifest="$(mktemp)"
+          trap 'rm -f "$manifest"' EXIT
+          find .output/public/assets -maxdepth 1 -type f -printf '%f\n' \
+            | LC_ALL=C grep -E '^[A-Za-z0-9_.-]+$' | LC_ALL=C sort -u > "$manifest"
+          test -s "$manifest"
+          root="$(dirname "$HOSTINGER_REMOTE_PATH")/deployment-backups"
+          run="$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          ssh_args=(-p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts")
+          ssh "${ssh_args[@]}" "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "umask 077 && test ! -L '$root' && test ! -L '$root/$run' && test -d '$root/$run' && set -C && cat > '$root/$run/.asset-manifest'" < "$manifest"
+          ssh "${ssh_args[@]}" "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "umask 077 && python3 - '${HOSTINGER_REMOTE_PATH%/}' '$run'" < scripts/maintain-deployment-storage.py
