@@ -38,7 +38,7 @@ const comparisonGuides = [
 ] as const;
 
 const planningLinks = [
-  { title: "Ben Gurion arrival tips", description: "Passport control, baggage claim, customs and meeting your driver.", to: travelGuidePaths.arrival, photo: travelGuideCardPhotos.arrival, thumb: guideArrivalThumb },
+  { title: "Ben Gurion arrival tips", description: "Learn what to expect at Ben Gurion Airport, from passport control and baggage collection to customs and meeting your driver.", to: travelGuidePaths.arrival, photo: travelGuideCardPhotos.arrival, thumb: guideArrivalThumb },
   { title: "Official airport taxis", description: "Airport taxi queues, ride codes and regulated metered fares.", to: travelGuidePaths.airportTaxis, photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Airport taxi service sign at Ben Gurion Airport" }, thumb: guideAirportTaxisThumb },
   { title: "Taxis in Israel", description: "Taxi apps, fares, receipts and paying for local rides.", to: travelGuidePaths.taxis, photo: travelGuideCardPhotos.taxis, thumb: guideTaxisThumb },
   { title: "Getting around Israel", description: "Intercity trains, buses and travel between destinations.", to: travelGuidePaths.israel, photo: travelGuideCardPhotos.israel, thumb: guideIsraelThumb },
