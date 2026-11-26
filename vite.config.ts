@@ -6,8 +6,8 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import { nitro } from "nitro/vite";
 import react from "@vitejs/plugin-react";
 
-// The production website uses static HTML on Hostinger. Standard SSR builds
-// use Nitro's Node server; no hosted editor or provider-specific shim is needed.
+// Native TanStack prerender owns its client/server output during static builds.
+// Ordinary SSR builds use Nitro's Node server; the two build modes stay separate.
 export default defineConfig(({ command }) => ({
   plugins: [
     tailwindcss(),
@@ -30,7 +30,9 @@ export default defineConfig(({ command }) => ({
       // Preserve the custom SSR error handler and response security headers.
       server: { entry: "server" },
     }),
-    ...(command === "build" ? [nitro({ preset: "node-server" })] : []),
+    ...(command === "build" && process.env["HOSTINGER_STATIC_BUILD"] !== "true"
+      ? [nitro({ preset: "node-server" })]
+      : []),
     react(),
   ],
   css: { transformer: "lightningcss" },
