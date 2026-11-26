@@ -63,10 +63,10 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "booking", title: "How to Find and Book a Taxi in Israel",
         photo: cityPhoto,
         paragraphs: [
-          "In major cities such as Tel Aviv, Jerusalem and Haifa, you can often hail a licensed taxi on the street. Tell the driver the actual address and confirm the payment method and regulated meter before departure. During busy periods or in remote areas, booking a taxi may be more reliable.",
+          "In major cities such as Tel Aviv, Jerusalem and Haifa, you can often hail a licensed taxi on the street. Give the driver your destination address and confirm the payment method and use of the meter before setting off. During busy periods or in remote areas, booking a taxi may be more reliable.",
           "You'll find taxi stands near many hotels, railway stations, hospitals and shopping centres. A hotel or local dispatcher can also arrange a pickup; ask whether a regulated ordering addition applies and keep a dispatcher's phone number or your hotel address available offline.",
           "Taxi apps let you enter your pickup location and view the driver's details and your ride history. Enter the correct pickup address, wait for driver confirmation and check whether the displayed price is an estimate or a fixed offer. For choosing an app, see my Uber, Gett and Yango guide.",
-          "A private transfer is booked in advance, usually with an agreed vehicle, pickup point and price. Check what is included and when the arrangement becomes a confirmed reservation.",
+          "A private transfer is booked in advance, usually with an agreed vehicle, pickup point and price. Check what's included in the price and ask for booking confirmation.",
         ],
         inlineLinks: [{ text: "Uber, Gett and Yango guide", to: travelGuidePaths.uber }],
         links: [{ label: "Private driver for a planned trip", to: "/private-driver-in-israel/" }],
@@ -100,7 +100,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Yellow Taxi Entrance sign inside an airport terminal" },
         paragraphs: [
           "At Ben Gurion Airport, order an authorized taxi through Gett or an airport self-service kiosk. For an immediate ride at Terminal 3, follow the official taxi line at ground-floor Exit 03; advance-scheduled Gett pickups at Terminal 3 use Level 2, Exit 23. Terminal 1 has its own taxi queue outside the main arrivals exit.",
-          "My airport taxi guide explains ride codes, payment, accessibility, scheduled bookings and indicative fares to popular destinations. The Ben Gurion Airport arrival guide covers the steps from passport control and baggage collection to onward transport.",
+          "My airport taxi guide explains ride codes, payment, accessibility, scheduled bookings and indicative fares to popular destinations. My airport arrival guide explains passport control, baggage collection and how to leave the airport.",
           "To compare transport choices for your exact route, read my guides to getting from Ben Gurion Airport to Tel Aviv, Jerusalem, Haifa or Ein Bokek. If you prefer to arrange a vehicle and meeting point in advance, you can request a private airport transfer quote.",
         ],
         inlineLinks: [
@@ -118,7 +118,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "sherut", title: "Are Shared Sherut Taxis Available from the Airport?",
         paragraphs: [
           "A sherut is a shared taxi or minibus operating on a set route. Local sherut services still run on some routes in Israel, while the former regular airport shared-taxi services to Jerusalem and Haifa have ended.",
-          "For an airport-to-city journey, use an available train or bus, an authorized taxi or a pre-booked private transfer. The free airport terminal shuttle connects airport facilities. My airport sherut guide explains which shared-taxi routes have ended and what alternatives remain.",
+          "For an airport-to-city journey, use an available train or bus, an authorized taxi or a pre-booked private transfer. A free shuttle bus connects the airport terminals. My airport sherut guide explains which shared-taxi routes have ended and what alternatives remain.",
         ],
         inlineLinks: [{ text: "airport sherut guide", to: travelGuidePaths.sherut }],
         sourceIds: ["guide-iaa"],
@@ -137,15 +137,15 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "Taxi fares are charged in Israeli shekels. Cash is widely accepted, while card and app payments depend on the provider. Check the method before departure, and avoid paying again in the cab for an app-paid trip.",
           "Tipping isn't required, but you can round up the fare for good service. A small round-up for particularly helpful service is your choice. Keep your receipt and ride details in case you leave something behind or need to question a charge.",
-          "Drivers cannot add unofficial fees for luggage or passengers travelling within the taxi's permitted capacity. Only regulated extras may be charged. Ordinary special-taxi journeys generally use the meter, although there are specific intercity exceptions for officially listed fixed fares. Confirm the fare basis before the journey.",
+          "Drivers cannot add unofficial fees for luggage or passengers travelling within the taxi's permitted capacity. Only regulated extras may be charged. Ordinary special-taxi journeys generally use the meter, although there are specific intercity exceptions for officially listed fixed fares. Confirm how your fare will be calculated before the ride.",
         ],
         sourceIds: ["taxi-passenger-rights"],
       },
       {
         id: "special-needs", title: "Luggage, Child Seats, Groups and Accessibility",
         paragraphs: [
-          "A taxi may have enough seats for your group but not enough room for everyone's luggage. Declare all passengers and bags before ordering, and request a larger vehicle when appropriate.",
-          "For a child seat, tell the operator the child's age and size and confirm that the correct restraint will be provided. For wheelchair access, arrange an appropriate vehicle and boarding assistance in advance.",
+          "A taxi may have enough seats for your group but not enough room for everyone's luggage. Specify the number of passengers and bags when booking, and request a larger vehicle if needed.",
+          "If you need a child seat, give the taxi company your child's age and size and confirm that a suitable seat is available. For wheelchair access, arrange an appropriate vehicle and boarding assistance in advance.",
           "For larger groups, special equipment or remote destinations, booking ahead is usually easier.",
         ],
         links: [{ label: "Arrange a vehicle for a planned private journey", to: "/private-driver-in-israel/" }],
@@ -169,8 +169,8 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "safety", title: "Taxi Safety and Common Mistakes to Avoid",
         paragraphs: [
-          "Use a licensed taxi, check the driver and number plate against your booking, and avoid unsolicited rides at the airport. Save an accurate destination pin, confirm the meter or legal price basis, and check the final receipt.",
-          "For a smooth journey, choose a confirmed pickup point, distinguish an app fare estimate from a fixed quote, mention oversized luggage and arrange transport back from remote destinations.",
+          "Use a licensed taxi, check the driver and number plate against your booking, and avoid unsolicited rides at the airport. Save your destination on Google Maps, confirm the fare calculation and check your receipt.",
+          "Agree on a pickup location, check whether the quoted fare is fixed or estimated, mention large bags and arrange your return journey from remote destinations.",
           "You can follow your route in a map app and share trip details if traveling alone. If you leave a wallet or bag behind, contact the operator quickly with the vehicle number, date, route and ride code.",
           "If you're overcharged or have a problem with the driver, you can file a complaint with the Ministry of Transport using the official link below. Keep the receipt, vehicle registration or license number, date, route, driver or owner details and any booking messages. The taxi fares guide explains lawful meter charges and extras.",
         ],
@@ -328,7 +328,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       "Save your receipt or app ride record",
     ],
     faqs: [
-      { q: "Is the taxi fare charged per passenger?", a: "An ordinary metered taxi fare covers the vehicle journey. The number of passengers within its licensed capacity does not create a general per-person surcharge." },
+      { q: "Is the taxi fare charged per passenger?", a: "The metered fare is for the whole taxi, regardless of how many passengers travel within its licensed capacity." },
       { q: "Can the price in an app differ from the final meter fare?", a: "Yes. A displayed amount may be an estimate rather than a fixed-price offer. The regulated meter and legally permitted additions determine the total on a metered ride." },
       { q: "Are suitcase charges allowed?", a: "The published taxi tariff includes no general luggage fee. Confirm that the vehicle has enough space for your bags, especially for a group." },
       { q: "Why does a journey cost more on Shabbat?", a: "Tariffs B and C apply during specified hours, including Shabbat and recognized holidays. Use the timetable on this page to identify the applicable tariff." },

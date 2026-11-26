@@ -18,11 +18,11 @@ export const seniorDayTrips:SeniorDay[] = [
   {
     id:"jerusalem",title:"Jerusalem at a comfortable pace",duration:"Half-day or full-day",
     sampleOrder:[
-      "Begin near an agreed Old City drop-off and follow one suitable historic route.",
+      "Start near one of the Old City gates and explore the historic streets at a comfortable pace.",
       "Spend time at one priority site, such as the Tower of David Museum or the Western Wall, after checking its actual accessible entrance.",
       "Finish with a scenic viewpoint or a comfortable return toward your agreed pickup location.",
     ],
-    restStop:"Plan a seated coffee or lunch break near Mamilla or the museum area; confirm convenient access and available seating.",
+    restStop:"Enjoy a coffee or lunch break near Mamilla or the museums. Choose a café or restaurant that's easy to reach.",
     shortenDay:"Keep Mount of Olives and extra Old City lanes for another outing if you prefer more time at your first stop.",
     accessInfo:[
       {label:"Old City accessible-route map app — Android",url:"https://play.google.com/store/apps/details?id=pami.accessibility.sayyes"},
@@ -58,11 +58,11 @@ export const seniorDayTrips:SeniorDay[] = [
   {
     id:"galilee",title:"Nazareth & the Sea of Galilee",duration:"Full-day or two shorter days",
     sampleOrder:[
-      "Visit one priority church in Nazareth, such as the Basilica of the Annunciation, after checking step-free access for your entrance.",
+      "Visit one of Nazareth's main churches, such as the Basilica of the Annunciation. Check whether you can enter without using stairs.",
       "Drive to the lakeside and choose one site such as Capernaum.",
       "Enjoy lunch or a seated lake-view break near Tiberias, then decide whether an additional short stop is worthwhile.",
     ],
-    restStop:"Allow a leisurely lakeside lunch around Tiberias or another suitable location, with time to rest after the Nazareth visit.",
+    restStop:"Enjoy a relaxed lunch overlooking the Sea of Galilee after visiting Nazareth.",
     shortenDay:"Choose the lakeside highlights first and save additional churches or Mount Tabor for a second day; an overnight Galilee base can help.",
     image:"/images/attractions/sea-of-galilee.webp",alt:"Sea of Galilee surrounded by low green hills",
     intro:"A journey north can combine Nazareth's churches with peaceful lakeside sites. For travelers who tire easily, splitting the region across two days may be far more pleasant than a long round trip.",
@@ -86,7 +86,7 @@ export const seniorDayTrips:SeniorDay[] = [
     ],
     image:"/images/attractions/haifa-bahai-gardens.webp",alt:"Baháʼí Gardens on the slopes of Mount Carmel in Haifa",
     intro:"The Mediterranean coast offers a good mix of archaeology, city panoramas and relaxed waterside stops. Choose two highlights for a comfortable day with plenty of time at each stop.",
-    easy:"A selected accessible section at Caesarea plus a Haifa viewpoint or the Akko waterfront can work better than touring every site.",
+    easy:"For a relaxed day, explore the accessible parts of Caesarea and visit a viewpoint in Haifa or the waterfront in Akko.",
     watchFor:"Caesarea has designated accessible areas; check the precise visitor route and its surfaces. The Baháʼí Gardens' terraces and Akko's historic lanes may include steps and uneven ground.",
     suggestedStops:[{label:"Caesarea",to:"/attractions/caesarea/"},{label:"Haifa",to:"/attractions/haifa/"},{label:"Akko",to:"/attractions/akko-acre/"}],
     to:"/tours/caesarea-haifa-acre/",googlePlace:"Caesarea National Park, Israel",
@@ -98,8 +98,8 @@ export const seniorTransportPreferences=[
   {title:"A flexible pace",text:"Choose later starts, shorter days, additional breaks, one region per day and extra time when a visit is more meaningful than expected."},
   {title:"A suitable vehicle",text:"Tell me the number of passengers, seating and legroom preferences, luggage, walking aids and ease of getting in and out so I can check a suitable vehicle before confirming your quote."},
   {title:"Realistic drop-off points",text:"I'll help identify the closest permitted drop-off, with a realistic walking distance to the entrance. Pedestrian streets and restricted roads call for an agreed meeting point."},
-  {title:"Clear arrangements",text:"Agree on stops, pickup time, approximate day length, any separate guide, charges and cancellation terms before booking. Changes remain subject to confirmation."},
-  {title:"Companions are welcome",text:"Family members, friends or carers can share the journey when the vehicle is suitable. Please mention any assistance that must be provided by someone travelling with you."},
+  {title:"Clear arrangements",text:"Agree on stops, pickup time, approximate day length, any separate guide, charges and cancellation terms before booking. Please confirm any changes with me in advance."},
+  {title:"Companions are welcome",text:"Family members, friends and carers are welcome to join your trip. Please mention any assistance that must be provided by someone travelling with you."},
 ] as const;
 
 export const seniorAccessQuestions=[
@@ -121,7 +121,7 @@ export const seniorFaqs=[
  {q:"Is Jerusalem's Old City accessible for wheelchairs?",a:"Some Old City routes have improved access, while historic paving, slopes and steps still affect others. Choose a specific route and confirm the entrance and mobility conditions for each stop."},
  {q:"Can a senior visitor go up Masada without hiking?",a:"Masada has an eastern entrance served by an accessible cable car. The plateau has varied surfaces and steps, so check cable-car operation and the specific archaeological areas you'd like to visit before travelling."},
  {q:"Do private day trips include a licensed tour guide?",a:"My service covers private transport and help with route planning. If you'd like a licensed sightseeing guide, please request it in advance so the separate arrangement can be checked and confirmed."},
- {q:"Can you pick us up at Ben Gurion Airport or a cruise terminal?",a:"Airport or cruise-port pickup can form part of a private transport arrangement. Share your flight or ship information, luggage and destination so that the appropriate pickup instructions and vehicle can be confirmed."},
+ {q:"Can you pick us up at Ben Gurion Airport or a cruise terminal?",a:"I can arrange pickup from Ben Gurion Airport or your cruise port. Share your flight or ship information, luggage and destination so that the appropriate pickup instructions and vehicle can be confirmed."},
  {q:"How long should a day trip last?",a:"There is no fixed ideal duration. Four to six hours may be more comfortable for some travelers, while others enjoy a full day with regular breaks. We can set a realistic schedule based on your preferences and the locations involved."},
 ];
 

@@ -51,7 +51,7 @@ const commonTaxi = [
   "The regulated meter sets the fare. Keep the ride code and receipt, and check luggage space before boarding.",
 ];
 const commonTransfer = [
-  "I can arrange a vehicle for your party and luggage, with a meeting point and hotel drop-off agreed in advance.",
+  "I can arrange a vehicle for your group and luggage, with pickup and drop-off locations agreed in advance.",
   "I'll confirm the total price, waiting time and cancellation terms in writing. All bookings require confirmation.",
 ];
 const commonRental = [
@@ -69,9 +69,9 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     exampleJourney: {
       title: "Example: landing at TLV and staying near Jaffa Gate",
       steps: [
-        { label: "Reach the airport railway", detail: "After collecting your luggage, follow the signs to the train station below Terminal 3 and check the next departure." },
+        { label: "Take the airport train", detail: "After collecting your luggage, follow the signs to the train station below Terminal 3 and check the next departure." },
         { label: "Travel to Jerusalem–Yitzhak Navon", detail: "Allow roughly 26–30 minutes on the train, then extra time to reach street level." },
-        { label: "Continue toward Jaffa Gate", detail: "Use the light rail and a suitable final walk, or a local taxi if carrying heavy bags. Ask the hotel which Old City entrance and drop-off are practical." },
+        { label: "Continue toward Jaffa Gate", detail: "Take the light rail and walk to your hotel, or use a taxi if you have heavy luggage. Ask the hotel which Old City entrance and drop-off are practical." },
       ],
       takeaway: "The train works well for many central Jerusalem hotels. A taxi or private transfer may be easier with heavy luggage or accommodation inside the Old City.",
     },
@@ -106,7 +106,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         ...commonTaxi, "If you're staying in or near the Old City, ask your hotel where a vehicle can drop you off. You may need to walk the final stretch with your luggage. See the official airport taxi guide for pickup instructions and the taxi fares in Israel guide for metered prices."
       ], inlineLinks: [{ text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" }, { text: "taxi fares in Israel guide", to: "/travel-blog/taxi-fares-in-israel/" }], checklist: ["Order with Gett or use the airport kiosk, then follow the queue instructions.", "Confirm payment and the regulated meter.", "For Old City lodging, save the recommended drop-off point."] },
       { id: "private", name: "Private transfer arranged ahead", time: "45–60+ min", cost: "Written quote; published weekday starting rate on booking page", bestFor: "Family, groups and special pickup needs", doorToDoor: "To agreed vehicle-accessible point", availability: "By confirmation", comparison: { advantages: "Pre-arranged pickup and vehicle choice", drawbacks: "Book ahead; extras may apply" }, heading: "When is a pre-booked private pickup worthwhile?", paragraphs: [
-        ...commonTransfer, "It can be especially helpful when you are arriving with children, multiple suitcases or a late-night hotel check-in. Arrange a road-accessible meeting or drop-off point near your Old City accommodation. The separate private transfer to Jerusalem page covers the quoted vehicle, included service and booking request."
+        ...commonTransfer, "It can be especially helpful when you are arriving with children, multiple suitcases or a late-night hotel check-in. Arrange pickup or drop-off near an Old City gate close to your hotel. The separate private transfer to Jerusalem page covers the quoted vehicle, included service and booking request."
       ], inlineLinks: [{ text: "private transfer to Jerusalem page", to: "/airport-transfers/jerusalem/" }], checklist: ["Request the vehicle size and child seats that you actually need.", "Share the hotel entrance and flight number.", "Check waiting time and flight-delay terms in writing."] },
       { id: "bus", name: "Bus 485 (very limited)", time: "55–60+ min", cost: "About ₪14.50 per adult (when operating)", bestFor: "Only if its timetable fits your flight", doorToDoor: "No", availability: "Sparse departures; confirm date and operator", comparison: { cost: "≈₪14.50", advantages: "Public-transport alternative", drawbacks: "Very limited departures" }, heading: "Is there a direct bus from the airport to Jerusalem?", paragraphs: [
         "The Israel Airports Authority still lists bus 485 to Jerusalem at Terminal 3, Level 2, Exit 21. Bus 485 runs infrequently, so check whether a departure suits your arrival time in the official national public-transport planner.",
@@ -116,12 +116,12 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         ...commonRental, "Jerusalem's Old City, pedestrian areas and central parking restrictions can make a car inconvenient during a city-focused stay. Compare collection and vehicle options on DiscoverCars."
       ], inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }], checklist: ["Check permitted parking at your accommodation.", "Compare airport collection with picking up your rental car in the city after a few days.", "Verify rental operating hours for your arrival day."] },
     ],
-    stations: [{ name: "Jerusalem–Yitzhak Navon", time: "Around 26–30 min from TLV", usefulFor: "Central bus station and Jaffa Road light rail; connect to your actual hotel." }],
+    stations: [{ name: "Jerusalem–Yitzhak Navon", time: "Around 26–30 min from TLV", usefulFor: "Near the Central Bus Station and the Jaffa Road light rail." }],
     arrivalAreas: [
       { area: "Downtown / Jaffa Road", station: "Jerusalem–Yitzhak Navon", onward: "Use the light rail along Jaffa Road or take a short taxi ride to your address." },
       { area: "Mamilla", station: "Jerusalem–Yitzhak Navon", onward: "Take the light rail toward the city centre and walk the final stretch, or use a taxi with luggage." },
       { area: "Old City / Jaffa Gate", station: "Jerusalem–Yitzhak Navon", onward: "Continue toward City Hall and Jaffa Gate. Confirm the closest accessible gate with your accommodation." },
-      { area: "Mount Scopus / East Jerusalem", station: "Jerusalem–Yitzhak Navon", onward: "Choose a local bus or taxi for the final journey to your exact address." },
+      { area: "Mount Scopus / East Jerusalem", station: "Jerusalem–Yitzhak Navon", onward: "Take a local bus or taxi to your hotel." },
     ],
     connections: [
       "For Downtown/Mamilla, choose the best light-rail stop or a taxi from Navon, and check the walking distance with luggage. Allow time for the final walk to your accommodation.",
@@ -141,11 +141,11 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "On Fridays and holiday eves, check the last train before choosing public transport.",
     ],
     faqs: [
-      { q: "What is the cheapest way from Ben Gurion Airport to Jerusalem?", a: "When running, the direct train is usually the lowest-cost practical option at ₪21 for a standard adult ticket, plus any city connection. The Jerusalem line also requires a free personal voucher." },
+      { q: "What is the cheapest way from Ben Gurion Airport to Jerusalem?", a: "During operating hours, the direct train is usually the cheapest option, at ₪21 for an adult ticket, plus local transport. The Jerusalem line also requires a free personal voucher." },
       { q: "Do I need a free voucher for the Jerusalem train?", a: "The railway\'s current notice requires a free personal voucher as well as a valid train ticket. The official instructions are linked directly in the train section above; recheck them before travelling." },
       { q: "Can the train take me directly to the Old City or Mamilla?", a: "No. The train stops at Jerusalem–Yitzhak Navon near the central bus station. Continue by light rail, suitable taxi or a walk; check the gate and hotel entrance if carrying luggage." },
       { q: "How much is a taxi from the airport to Jerusalem?", a: "Official airport taxis use the regulated meter. The total depends on the exact address, traffic, pickup time and permitted extras; check the current taxi tariff and pay according to the meter." },
-      { q: "Does bus 485 still run directly to Jerusalem?", a: "The airport still lists it from Terminal 3, Level 2, Exit 21, but scheduled departures are very limited. Confirm an actual departure and final stop on your date before relying on it." },
+      { q: "Does bus 485 still run directly to Jerusalem?", a: "The airport still lists it from Terminal 3, Level 2, Exit 21, but scheduled departures are very limited. Check the timetable and where the bus stops in Jerusalem." },
       { q: "Do trains run to Jerusalem on Shabbat or late at night?", a: "Trains usually stop during the main Shabbat break, while some late-night or Saturday-evening departures may be scheduled. Always check your exact date, including timetable revisions and voucher rules." },
       { q: "Should I book a taxi or a private transfer for an Old City hotel?", a: "An authorized taxi runs on the regulated meter. A private ride requires a confirmed quote and agreed vehicle. For either one, ask your accommodation for its nearest vehicle-accessible entrance or gate." },
     ],
@@ -186,7 +186,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         { label: "Get from the station to the beach or hotel", detail: "Tel Aviv's railway stations are inland. Check how to reach your hotel by bus, taxi or on foot, especially if you're staying near the beach." },
         { label: "Recheck a Friday or Saturday arrival", detail: "Regular rail service stops for much of Shabbat. The limited weekend Line 711 runs via Terminal 1, with its own stops and timetable; it is not a direct replacement for the rail service." },
       ],
-      takeaway: "For a light-bag daytime arrival, train plus local transport may work well. For Old Jaffa, family luggage or late arrivals, compare the whole door-to-door journey.",
+      takeaway: "If you're arriving during the day with little luggage, the train is a convenient option. For Old Jaffa, family luggage or late arrivals, compare the whole door-to-door journey.",
     },
     answer: "The train is usually the fastest low-cost choice during operating hours. Choose the station that works best for your hotel, then continue by bus or taxi. Bus 445 may serve a more convenient city stop; an official taxi or private transfer goes directly to an accessible address.",
     trainIntro: "The airport railway station is below Terminal 3; follow the train signs after customs. If you arrive at Terminal 1, take the free internal shuttle to Terminal 3 first. Buy a train ticket at the station or use an accepted Rav-Kav or payment app. A standard adult train ticket to Tel Aviv costs ₪11.50. Tel Aviv has four mainline stations: HaHagana, HaShalom, Savidor Center and University. None is directly on the beachfront, so plan the last bus, taxi, walk or light-rail connection to your hotel. The Ben Gurion Airport arrival guide explains the airport sequence; the getting around Tel Aviv guide covers the city connections.",
@@ -213,7 +213,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     privateLabel: "Request a private Tel Aviv or Jaffa transfer",
     options: [
       { id: "rail", name: "Train to Tel Aviv", time: "About 11–30 min to a station", cost: "₪11.50 per adult (one way)", bestFor: "Quick, lower-cost weekday arrival", doorToDoor: "No", availability: "Not during the main Shabbat break", comparison: { cost: "₪11.50", advantages: "Quick, low-cost and avoids traffic", drawbacks: "Train stops inland; hotel connection often required" }, heading: "Train from Ben Gurion Airport to Tel Aviv", paragraphs: [
-        "Take the airport train to a Tel Aviv station that works for your hotel address. Use the station table below to compare onward buses, taxis and walking routes.",
+        "Take the airport train to the station most convenient for your hotel. Use the station table below to compare onward buses, taxis and walking routes.",
         "For hotels near the beach, Old Jaffa or Neve Tzedek, my where to stay in Tel Aviv guide explains the neighborhoods, and the getting around Tel Aviv guide covers local connections."
       ], inlineLinks: [{ text: "where to stay in Tel Aviv guide", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { text: "getting around Tel Aviv guide", to: "/travel-blog/getting-around-tel-aviv/" }], checklist: ["Use the full hotel address when choosing the station.", "Check the last train and late-night stopping pattern.", "Include the onward fare and bags in the total comparison."] },
       { id: "bus", name: "Bus 445", time: "About 40–70+ min, depending on stop", cost: "₪8–14.50 per adult, depending on stop", bestFor: "Addresses near its city stops", doorToDoor: "No", availability: "Timetable dependent; Shabbat restrictions", comparison: { cost: "₪8–14.50", advantages: "May reach central or beachfront stops", drawbacks: "Slower; timetable and stop dependent" }, heading: "Bus 445: another route into central Tel Aviv", paragraphs: [
@@ -249,11 +249,11 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     ],
     connections: [
       "Beachfront accommodation: the station is usually inland; compare a local bus or taxi for the last leg, especially with luggage.",
-      "Old Jaffa: historic lanes, pedestrian areas and steps can make a precise drop-off important. Check the nearest road-accessible entrance.",
+      "Old Jaffa: narrow streets and steps may mean walking the last part of your journey. Ask your hotel where a taxi can drop you off.",
       "For Dizengoff Street or Rothschild Boulevard, compare nearby bus stops before choosing a train station.",
     ],
     weekend: [
-      "Standard trains and most regular buses do not run during the main Shabbat break. Tel Aviv’s free weekend bus 711 serves Terminal 1 on a limited timetable. Check whether its actual stop and departure suit your destination.",
+      "Standard trains and most regular buses do not run during the main Shabbat break. Tel Aviv’s free weekend bus 711 serves Terminal 1 on a limited timetable. Check the bus timetable and stops.",
       "An authorized taxi or confirmed private transfer may be a more practical choice when the 711 does not match your flight, when arriving late or when carrying large bags.",
       "Check Saturday-evening train departures and holiday changes in the dedicated airport Shabbat guide."
     ],

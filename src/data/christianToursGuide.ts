@@ -45,7 +45,7 @@ export const christianAreas: ChristianArea[] = [
   {
     id:"bethlehem",name:"Bethlehem",title:"Bethlehem: the Nativity and the shepherds' fields",
     image:bethlehemPhoto,alt:"The Church of the Nativity in Bethlehem",
-    intro:"Bethlehem is a Palestinian city in the West Bank, south of Jerusalem. The Church of the Nativity is a UNESCO-listed pilgrimage landmark built around the site traditionally associated with Jesus' birth. Nearby Manger Square and Beit Sahour add context to the Nativity story.",
+    intro:"Bethlehem is a Palestinian city in the West Bank, south of Jerusalem. The Church of the Nativity is a UNESCO-listed pilgrimage landmark built around the site traditionally associated with Jesus' birth. Visit Manger Square and nearby Beit Sahour to explore other places associated with the Nativity story.",
     planning:"Plan Bethlehem as a separate half- or full-day visit. Entry and checkpoint arrangements may differ by nationality, vehicle and conditions on your travel date. Confirm your driver's eligibility to enter Palestinian Authority areas.",
     sites:[
       {name:"Church of the Nativity",note:"Traditional birthplace of Jesus",officialUrl:"https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/",mapPlace:"Church of the Nativity, Manger Square, Bethlehem, West Bank"},
@@ -87,7 +87,7 @@ export const christianAreas: ChristianArea[] = [
     id:"tabor",name:"Mount Tabor",title:"Mount Tabor: the Transfiguration tradition",
     image:"/images/attractions/mount-tabor-basilica-aerial.webp",alt:"Basilica of the Transfiguration on Mount Tabor",
     intro:"Mount Tabor is traditionally associated with the Transfiguration. The hilltop basilica, views and wooded surroundings make it a distinctive stop between Nazareth and the eastern Lower Galilee.",
-    planning:"It is a separate hilltop outing, not a quick walk from Nazareth. Access to the upper church and any vehicle restrictions should be checked for the day.",
+    planning:"Mount Tabor is best visited as a separate trip from Nazareth. Check church opening hours and vehicle access before visiting Mount Tabor.",
     sites:[{name:"Basilica of the Transfiguration",note:"The main church and viewpoint",to:"/attractions/mount-tabor/"}],
     mapPlace:"Church of the Transfiguration, Mount Tabor, Israel",
     related:{label:"My Mount Tabor visitor guide",to:"/attractions/mount-tabor/"},
@@ -96,7 +96,7 @@ export const christianAreas: ChristianArea[] = [
     id:"jordan",name:"Jordan River",title:"Jordan River: choose the right baptismal site",
     image:"/images/attractions/jordan-river-baptism.webp",alt:"Steps leading into the Jordan River at a designated baptism site",
     intro:"The two principal baptismal visitor experiences are different. Qasr al-Yahud on the lower Jordan near Jericho is associated by Christian tradition with Jesus' baptism. Yardenit is a modern, organised baptism site near the southern end of the Sea of Galilee, not the same traditional location.",
-    planning:"Choose your river stop based on geography and the kind of visit you want. A ceremony, clergy, appropriate clothing and permission for group worship may require separate coordination. Follow the site's current access instructions.",
+    planning:"Choose the baptism site that best fits your itinerary and religious plans. If you're planning a baptism or group prayer, arrange clergy, clothing and any required permissions in advance. Follow the site's current access instructions.",
     sites:[
       {name:"Qasr al-Yahud",note:"Traditional baptismal location near Jericho",to:"/attractions/qasr-el-yahud/"},
       {name:"Yardenit",note:"Organised baptismal facilities south of the Sea of Galilee",to:"/attractions/yardenit/"},
@@ -108,7 +108,7 @@ export const christianAreas: ChristianArea[] = [
     id:"carmel",name:"Haifa & Carmel",title:"Haifa and Mount Carmel: a different Christian tradition",
     image:"/images/attractions/haifa-stella-maris.webp",alt:"Stella Maris Carmelite monastery in Haifa",
     intro:"On the Mediterranean coast, the Stella Maris monastery in Haifa is linked with Carmelite spirituality and the prophet Elijah. Deir al-Mukhraqa (Muhraqa), on another part of the Carmel ridge, is traditionally associated with Elijah's contest described in the Book of Kings.",
-    planning:"Stella Maris and Muhraqa are not the same monastery or an easy walk between adjacent sites. Allow a separate drive and check religious-site opening arrangements.",
+    planning:"Stella Maris and Muhraqa are two monasteries in different parts of Mount Carmel. Allow a separate drive and check religious-site opening arrangements.",
     sites:[
       {name:"Stella Maris, Haifa",note:"Carmelite monastery overlooking the Mediterranean",officialUrl:"https://www.carmelholylanddco.org/contacts/",mapPlace:"Stella Maris Monastery, Haifa, Israel"},
       {name:"Deir al-Mukhraqa, Mount Carmel",note:"Traditional site linked with Elijah",officialUrl:"https://www.carmelholylanddco.org/who-we-are/the-discalced-carmelites-in-the-holy-land/",mapPlace:"Deir al-Mukhraqa Carmelite Monastery, Daliyat al-Karmel, Israel"},
@@ -137,7 +137,7 @@ export const christianRoutes = [
   {
     time:"4 days",title:"Holy Land highlights",subtitle:"Jerusalem, Bethlehem and Galilee",
     steps:["Day 1: Jerusalem Old City, Via Dolorosa and Holy Sepulchre","Day 2: Mount of Olives or Bethlehem, with separate travel arrangements","Day 3: Nazareth and optional Mount Tabor","Day 4: Capernaum, Tabgha, Mount of Beatitudes and the lake"],
-    advice:"Bethlehem travel requires its own eligibility and crossing plan; confirm access before treating it as a fixed stop.",
+    advice:"Before including Bethlehem in your itinerary, check whether you and your driver are permitted to enter.",
     mapLegs:[
       {label:"Day 1 - Jerusalem on foot",origin:"Via Dolorosa, Jerusalem, Israel",waypoints:[],destination:"Church of the Holy Sepulchre, Jerusalem, Israel",mode:"walking"},
       {label:"Day 2 - Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
@@ -148,7 +148,7 @@ export const christianRoutes = [
   {
     time:"7 days",title:"A more complete pilgrimage",subtitle:"Room for reflection and extra stops",
     steps:["Days 1–2: Jerusalem Old City, Mount of Olives and Mount Zion","Day 3: Bethlehem and Beit Sahour, subject to current arrangements","Day 4: lower Jordan baptismal site or optional Jericho visit","Day 5: Nazareth, Cana and Mount Tabor","Days 6–7: Sea of Galilee churches, Magdala and optional Haifa/Carmel"],
-    advice:"This is a flexible regional outline. Arrival, luggage, road travel, religious services and any West Bank access require extra time.",
+    advice:"Arrival, luggage, road travel, religious services and any West Bank access require extra time.",
     mapLegs:[
       {label:"Days 1–2 - Jerusalem churches",origin:"Gethsemane, Jerusalem, Israel",waypoints:["Via Dolorosa, Jerusalem, Israel"],destination:"Mount Zion, Jerusalem, Israel",mode:"walking"},
       {label:"Day 3 - Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
@@ -203,9 +203,9 @@ export const christianOffers: ChristianOffer[] = [
 
 export const christianFaqs = [
   {q:"How many days do I need for the main Christian sites?",a:"Three or four days can introduce Jerusalem, Bethlehem and the Galilee, but you will travel frequently. Five to seven days makes it easier to keep visits at a comfortable pace and allow for services and longer stays at individual churches."},
-  {q:"Can I visit Bethlehem from Jerusalem?",a:"Visits to Bethlehem, a Palestinian city in the West Bank, depend on entry eligibility and current access conditions. Check entry eligibility, current checkpoint conditions, operator instructions and the need for a separate Palestinian driver or guide. Confirm whether your Israeli rental car or private driver is permitted to enter."},
+  {q:"Can I visit Bethlehem from Jerusalem?",a:"Visits to Bethlehem, a Palestinian city in the West Bank, depend on entry eligibility and current access conditions. Check whether you can enter Bethlehem, whether the checkpoints are open and whether you need a local Palestinian driver or guide. Confirm whether your Israeli rental car or private driver is permitted to enter."},
   {q:"Where was Jesus traditionally baptized?",a:"Christian tradition associates the baptism of Jesus with the lower Jordan near Qasr al-Yahud. Yardenit, at the southern end of the Sea of Galilee, is a modern designated baptism site and a different location."},
-  {q:"Do I need a licensed tour guide for Christian sightseeing?",a:"You can visit many sites independently. A licensed guide can add interpretation, context and help with an organised itinerary. I provide private transportation; professional guiding should be arranged separately."},
+  {q:"Do I need a licensed tour guide for Christian sightseeing?",a:"You can visit many sites independently. A licensed guide can explain the history and religious significance of the places you visit. I provide private transportation; professional guiding should be arranged separately."},
   {q:"Can tourists visit churches on Sundays?",a:"Often yes, but Sunday services and local worship have priority and some areas may be temporarily restricted. Check the particular church's schedule and whether a service is open to visitors."},
   {q:"What should I wear when visiting churches?",a:"Modest clothing covering shoulders and knees is a sensible default. Some monasteries and sacred spaces have stricter rules; carry a scarf or additional layer and follow the site's signs."},
   {q:"Can I see Christian sites without renting a car?",a:"Yes. Jerusalem's Old City is mostly on foot, and organised day trips serve major regions. Public transport can cover some connections, but isolated church sites, steep approaches and changes of schedule may justify a driver or guided tour."},
