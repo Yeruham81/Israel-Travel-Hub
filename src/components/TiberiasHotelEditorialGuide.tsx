@@ -47,13 +47,13 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
     kind: "Lakefront boutique",
     summary: "A contemporary lakeside hotel with a private beach area, seasonal outdoor pool and spa.",
     bestFor: "Couples and families seeking an upscale lakeside stay",
-    consider: "Check the season's beach and pool arrangements and the exact room view.",
+    consider: "Check seasonal beach and pool opening hours and the view from your chosen room.",
     beach: "Private lakeside beach area; seasonal",
   },
   "tib-galei-kinneret": {
     kind: "Luxury lake resort",
     summary: "A stylish hotel on the southern waterfront with gardens, a private beach, pool and spa.",
-    bestFor: "Couples, spa breaks and older families",
+    bestFor: "Couples, spa holidays and families with teenagers",
     consider: "Guests must be aged 12 or older; beach facilities are seasonal.",
     beach: "Private beach; seasonal access",
   },
@@ -68,7 +68,7 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
     kind: "Family water park",
     summary: "A southern-lakeshore resort with a swimming beach and a water park featuring pools and slides.",
     bestFor: "Families planning full days of swimming and activities",
-    consider: "Check water-park operating dates, separate-swimming sessions and slide restrictions.",
+    consider: "Check when the water park is open, separate swimming hours for men and women, and any restrictions on using the slides.",
     beach: "Swimming beach at the resort; seasonal",
   },
   "tib-leonardo-club": {
@@ -81,7 +81,7 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
   "tib-caesar": {
     kind: "Promenade hotel",
     summary: "A full-service waterfront hotel with an outdoor pool and a spa with thermal mineral water.",
-    bestFor: "First visits, couples and families exploring Tiberias on foot",
+    bestFor: "First-time visitors, couples and families who want to explore Tiberias on foot",
     consider: "The thermal mineral pool is restricted to guests aged 18 or over.",
     beach: "On the promenade; swimming beach arrangements separate",
   },
@@ -95,8 +95,8 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
   "tib-emily": {
     kind: "Small city hotel",
     summary: "A small hotel near the city centre offering bed-and-breakfast accommodation.",
-    bestFor: "Travelers exploring the Galilee between hotel stays",
-    consider: "Arrange additional meals ahead and check parking or pool arrangements if needed.",
+    bestFor: "Travellers looking for a convenient place to stay while exploring the Galilee",
+    consider: "Check meal options, parking availability and access to the swimming pool.",
     beach: "Near the waterfront; check swimming access",
   },
   "tib-tiberia": {
@@ -110,16 +110,16 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
     kind: "Independent hostel",
     summary: "A central hostel with shared facilities and a choice of private or dormitory rooms.",
     bestFor: "Solo visitors, budget-conscious groups and public-transport users",
-    consider: "Choose the exact room and bathroom type and check late-arrival arrangements.",
+    consider: "Choose between a private or shared bathroom, and confirm check-in hours if you're arriving late.",
     beach: "Walk to the waterfront and public beaches",
   },
 };
 
 const bookingTips = [
-  { title: "Choose the walking route", text: "Check the hotel's elevation and the return from the promenade, especially with luggage or a stroller." },
+  { title: "Choose the walking route", text: "Some hotels are uphill from the promenade. Consider the walk back, especially with luggage or a stroller." },
   { title: "Check where you can swim", text: "Private beaches, designated swimming areas and pools have their own seasonal operating schedules." },
-  { title: "Compare room views", text: "Choose an explicitly described lake-view room if sunrise over the Sea of Galilee matters to you." },
-  { title: "Check children's facilities", text: "Water parks, slides, kids' clubs and pools can run on limited dates and carry age or height rules." },
+  { title: "Compare room views", text: "Book a lake-view room if you'd like to watch the sunrise over the Sea of Galilee." },
+  { title: "Check children's facilities", text: "Check seasonal opening hours for water parks, pools and kids' clubs, as well as any age or height restrictions." },
   { title: "Confirm the meal plan", text: "Check which meals and drinks are included in your chosen package." },
   { title: "Consider spa access", text: "Minimum guest ages, thermal-pool access and treatment charges vary between properties." },
   { title: "Plan Galilee sightseeing", text: "Sites around the lake are spread out; coordinate a car, tour or private driver in advance." },

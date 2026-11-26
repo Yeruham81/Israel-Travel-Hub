@@ -209,20 +209,20 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     map: { lat: 31.7845, lon: 35.211, bounds: [35.201, 31.7777, 35.2198, 31.7905], reference: "Mahane Yehuda Market / Nachlaot" },
     overview: [
       "Mahane Yehuda Market sits around Jaffa Road and Agripas Street, immediately west of Downtown. Nachlaot extends into the historic lanes alongside it, with stone houses, small courtyards and synagogues. The two names often appear together in hotel descriptions, but the exact street makes a considerable difference.",
-      "During market hours, the attraction is everyday food shopping: bakeries, produce, spices and casual places to eat. Later, bars and restaurants bring a different crowd. A stay facing the market can be lively and convenient, while a property a few streets into Nachlaot may feel much more residential.",
-      "Boutique hotels and apartment-style stays work well here, particularly if food and neighbourhood life matter more than being next to an Old City gate. Kitchens can be useful for longer stays, but verify the equipment in the exact unit. This area is less suitable if you want consistently quiet surroundings or extensive facilities in a large resort-style hotel.",
+      "During the day, explore the market's bakeries, fresh produce stalls, spice shops and small restaurants. In the evening, the market becomes a lively area for dining and nightlife. A stay facing the market can be lively and convenient, while a property a few streets into Nachlaot may feel much more residential.",
+      "Boutique hotels and apartment-style stays work well here, particularly if food and neighbourhood life matter more than being next to an Old City gate. If you're staying for several days, consider an apartment with a well-equipped kitchen. This area is less suitable if you want consistently quiet surroundings or extensive facilities in a large resort-style hotel.",
     ],
     highlights: [
       { name: "Mahane Yehuda Market", text: "Food shopping, bakeries and casual meals by day, with a different restaurant and bar scene in the evening." },
       { name: "Nachlaot lanes", text: "Historic stone houses and courtyards offer a residential contrast to the market streets. Respect residents' privacy." },
-      { name: "Jaffa Road & Davidka Square", text: "Useful orientation points for light-rail connections and walking toward the city center." },
+      { name: "Jaffa Road & Davidka Square", text: "From here, you can take the light rail or walk towards the city center." },
     ],
     gettingAround: [
       "Allow roughly 20–30 minutes to walk toward Jaffa Gate from much of this area. Another option is the light rail toward City Hall followed by a walk, when service is operating. Check your accommodation's walking route from the market.",
       "Parking and driving through nearby lanes can be awkward. Ask where a taxi can stop and how to reach the entrance with suitcases. Many market businesses close from Friday afternoon for Shabbat, so confirm opening times and arrange food and transport for your actual dates.",
     ],
     arrivalTips: ["Ask whether the room faces the market, a main road or an internal courtyard.", "Arrange apartment access and key collection before a late or Shabbat arrival.", "Check both evening noise and early-morning deliveries when choosing a room."],
-    bookingTips: ["For an apartment, confirm the kitchen equipment, cleaning schedule and any separate cleaning fee.", "Read recent room-specific reviews for noise, stairs and access."],
+    bookingTips: ["For an apartment, confirm the kitchen equipment, cleaning schedule and any separate cleaning fee.", "Read recent guest reviews for information about noise, stairs and accessibility."],
     faqs: [
       { q: "Should I stay beside the market or inside Nachlaot?", a: "Beside the market is convenient for food and nightlife. A side street in Nachlaot can feel more residential, but access and noise still depend on the specific building and room." },
       { q: "Is the market open throughout Shabbat?", a: "Do not plan on normal market trading from Friday afternoon through Saturday. Individual restaurants and bars keep their own hours; check the businesses you intend to use." },
@@ -241,8 +241,8 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     map: { lat: 31.7873, lon: 35.2311, bounds: [35.224, 31.7807, 35.240, 31.7952], reference: "Nablus Road / northern Old City hotel district" },
     overview: [
       "For this accommodation guide, East Jerusalem means the hotel cluster just north and northeast of the Old City: Damascus Gate, Nablus Road, Salah ad-Din Street, St. George's Cathedral and the American Colony area. Check the walking distance to the Old City from your chosen hotel.",
-      "Palestinian restaurants, bakeries, shops and heritage buildings give these streets a character distinct from western Downtown. The Garden Tomb and northern Old City entrances make the district useful for Christian pilgrims, while smaller heritage hotels offer a different experience from a large conventional property.",
-      "The area has considerable variety. Busy commercial streets near Damascus Gate feel different from quieter gardens and hotel grounds farther north. Choose a hotel according to its location, access and proximity to the sights you plan to visit. It is less convenient for travelers who mainly want western Downtown's bars or Mahane Yehuda.",
+      "The area is known for its Palestinian restaurants, bakeries, local shops and historic buildings. The district is particularly convenient for Christian pilgrims visiting the Garden Tomb and entering the Old City through Damascus Gate. Several historic hotels also offer accommodation in traditional buildings.",
+      "For a quieter stay, consider hotels with gardens farther north of the busy streets around Damascus Gate. Choose a hotel according to its location, access and proximity to the sights you plan to visit. It is less convenient for travelers who mainly want western Downtown's bars or Mahane Yehuda.",
     ],
     highlights: [
       { name: "Damascus Gate", text: "A major northern entrance to the Old City's market lanes and the Muslim and Christian quarters." },
@@ -258,7 +258,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     faqs: [
       { q: "Does every East Jerusalem hotel have easy Old City access?", a: "No. The name covers a large area. This guide focuses on the northern Old City hotel district; properties on the Mount of Olives or farther out can involve substantially different journeys." },
       { q: "Is this area convenient for Christian pilgrims?", a: "The northern hotel district is useful for the Garden Tomb, Damascus Gate and several Christian institutions. The best base still depends on the specific churches and sites in your itinerary." },
-      { q: "Will shops and restaurants be open on Saturday?", a: "Some businesses operate on a different weekly rhythm from western Jerusalem, but opening hours vary. Confirm the places you plan to use and arrange transport separately." },
+      { q: "Will shops and restaurants be open on Saturday?", a: "Many shops and restaurants in East Jerusalem remain open on Saturdays, although opening hours vary. Confirm the places you plan to use and arrange transport separately." },
     ],
   },
   {
@@ -272,13 +272,13 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     photo: { src: germanColonyPhoto, alt: "A pavement café and historic stone buildings on Emek Refaim in the German Colony", sourceUrl: "" },
     map: { lat: 31.7655, lon: 35.219, bounds: [35.208, 31.7515, 35.230, 31.777], reference: "Emek Refaim / German Colony and Baka" },
     overview: [
-      "The German Colony and Baka are neighboring residential areas south of central Jerusalem. Emek Refaim is the German Colony's main café and shopping street, while Baka extends farther south and east around Bethlehem Road. A hotel at the northern end of the German Colony has a different relationship to the Old City from a suite deep inside Baka.",
-      "This is an appealing base for families, repeat visitors and longer stays. Historic stone buildings, neighbourhood cafés and quiet residential side streets offer a relaxed base after sightseeing. The accommodation mix includes a large luxury hotel and apartment-style properties with more independent living space.",
-      "Distance is the tradeoff. Use buses or taxis for longer journeys to the sights, particularly from southern Baka. Ask the hotel about current construction near Emek Refaim and the First Station, including noise, pedestrian routes and vehicle access.",
+      "The German Colony and Baka are neighboring residential areas south of central Jerusalem. Emek Refaim is the German Colony's main café and shopping street, while Baka extends farther south and east around Bethlehem Road. Hotels at the northern end of the German Colony are closer to the Old City than accommodation farther south in Baka.",
+      "This is an appealing base for families, repeat visitors and longer stays. Historic stone buildings, neighbourhood cafés and quiet residential side streets offer a relaxed base after sightseeing. Accommodation includes a large luxury hotel and apartments with extra living space.",
+      "These neighbourhoods are farther from the main tourist attractions. Use buses or taxis for longer journeys to the sights, particularly from southern Baka. Ask the hotel about current construction near Emek Refaim and the First Station, including noise, pedestrian routes and vehicle access.",
     ],
     highlights: [
-      { name: "Emek Refaim", text: "Cafés, restaurants and historic stone buildings form the main neighbourhood spine." },
-      { name: "First Station area & Train Track Park", text: "A useful point of orientation for the northern German Colony and walks along the former railway corridor; check current access." },
+      { name: "Emek Refaim", text: "The neighbourhood's main street is lined with cafés, restaurants and historic stone buildings." },
+      { name: "First Station area & Train Track Park", text: "Explore the northern German Colony and enjoy a walk along the former railway tracks. Check which sections are currently open." },
       { name: "Baka & Bethlehem Road", text: "Residential streets and neighbourhood food options suit travelers who prefer space and a longer local stay." },
     ],
     gettingAround: [
@@ -436,8 +436,8 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     map: { lat: 32.0538, lon: 34.7523, bounds: [34.743, 32.0445, 34.766, 32.064], reference: "Old Jaffa / flea-market district" },
     overview: [
       "Jaffa sits at the southern end of the Tel Aviv coastline, with an old port, stone lanes and a historic hill above the sea. The adjoining flea-market district adds shops, cafés and evening restaurants around the streets inland from the Clock Tower.",
-      "Choose Jaffa as a base if you want time to explore its streets, markets and waterfront. A morning around the port, an afternoon among galleries and an evening in the market make a different rhythm from a stay beside Dizengoff Square. Luxury heritage hotels and smaller boutique properties offer different ways to experience it.",
-      "Be precise about which part you book. The Old City can involve slopes, cobbles and steps, while a flea-market hotel puts you closer to lively eating and drinking streets. Choose a sea-view room if the outlook matters to you. Allow extra travel time to central Tel Aviv beaches and northern neighborhoods.",
+      "Choose Jaffa as a base if you want time to explore its streets, markets and waterfront. Spend your mornings by Jaffa Port, explore the galleries in the afternoon and enjoy the flea market's restaurants in the evening. Choose from luxury hotels in historic buildings and smaller boutique hotels.",
+      "Consider which part of Jaffa you'd prefer to stay in. The Old City can involve slopes, cobbles and steps, while a flea-market hotel puts you closer to lively eating and drinking streets. For views of the Mediterranean, book a sea-view room. Allow extra travel time to central Tel Aviv beaches and northern neighborhoods.",
     ],
     highlights: [
       { name: "Old Jaffa lanes & galleries", text: "Stone streets and courtyards lead around the historic hill, with sea viewpoints along the way." },
@@ -446,7 +446,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     ],
     gettingAround: [
       "Old Jaffa and the flea-market district can be explored on foot, but the hill and steps affect accessibility. The coastal route north links toward Neve Tzedek and central Tel Aviv; allow a longer walk or use transport if your daily plans center on Dizengoff or the port.",
-      "For an airport transfer, use the exact Jaffa address and ask the hotel which entrance a vehicle can reach. A road-level doorway does not guarantee a step-free route to the room. Confirm the whole arrival route if you have a stroller, limited mobility or heavy luggage.",
+      "For an airport transfer, use the exact Jaffa address and ask the hotel which entrance a vehicle can reach. Check whether you can reach your room from the hotel entrance without using stairs. Confirm the whole arrival route if you have a stroller, limited mobility or heavy luggage.",
     ],
     arrivalTips: ["Ask about stairs, lifts and the route from the taxi drop-off to your room.", "Check whether your hotel is on the Old City hill or beside the flea market.", "For a market-side room, ask about restaurant noise and late-evening activity."],
     bookingTips: ["Book an explicit sea-view category if an outlook matters; a Jaffa address alone is not enough.", "Confirm the current property name, room category and services, particularly in landmark hotels that have changed operator."],
@@ -467,13 +467,13 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     photo: { src: florentinPhoto, alt: "Street cafés and apartment buildings in Florentin, Tel Aviv", sourceUrl: "" },
     map: { lat: 32.0557, lon: 34.7695, bounds: [34.76, 32.0485, 34.781, 32.063], reference: "Florentin / Levinsky Market district" },
     overview: [
-      "Florentin is a southern Tel Aviv neighborhood of apartment buildings, workshops, cafés, bars and changing street art. The Levinsky Market streets add food shops and places to eat along its northern side. Florentin's appeal is its everyday city life and neighbourhood atmosphere.",
-      "Choose it if you enjoy exploring food streets by day and going out nearby in the evening. Neve Tzedek, the southern end of Rothschild Boulevard and Jaffa are nearby directions to explore, making it useful for a trip focused on the southern city. Accommodation is more often a small property, room or apartment-style stay than a large resort hotel.",
-      "The same mix that gives Florentin its character can affect sleep. Nightlife, deliveries, workshops and construction vary from one block to the next. Compare recent room-specific information, and ask about the entrance and check-in format: a digitally managed stay may provide a different level of on-site service from a conventional hotel.",
+      "Florentin is a southern Tel Aviv neighborhood of apartment buildings, workshops, cafés, bars and changing street art. The Levinsky Market streets add food shops and places to eat along its northern side. Florentin is ideal for experiencing local Tel Aviv life.",
+      "Choose it if you enjoy exploring food streets by day and going out nearby in the evening. Neve Tzedek, the southern end of Rothschild Boulevard and Jaffa are nearby directions to explore, making it useful for a trip focused on the southern city. Most accommodation options here are small hotels, guest rooms and apartments.",
+      "Florentin's lively streets can be noisy at night. Nightlife, deliveries, workshops and construction vary from one block to the next. Read recent guest reviews and check whether the accommodation has a staffed reception or uses self-check-in.",
     ],
     highlights: [
       { name: "Florentin's street art", text: "Murals and painted shutters change over time, so explore the neighborhood to see what's there today." },
-      { name: "Levinsky Market streets", text: "Food shops, spices and cafés provide a natural route for tasting the southern city. Check individual opening hours." },
+      { name: "Levinsky Market streets", text: "Explore Levinsky Market's spice shops, cafés and speciality food stores. Check individual opening hours." },
       { name: "Neighborhood cafés & bars", text: "Florentin's evening life is part of the attraction and a reason to choose your room location carefully." },
     ],
     gettingAround: [
@@ -501,16 +501,16 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     overview: [
       "Kerem HaTeimanim, the Yemenite Quarter, occupies small streets between the Carmel Market area and the coast. Its low-rise buildings, residential lanes and places serving Yemenite food create a distinct setting close to several of Tel Aviv's busiest visitor routes.",
       "Choose this area if you want market food and the beach in the same stay. Nachalat Binyamin, Neve Tzedek and Rothschild Boulevard are nearby directions to explore, while the coastal promenade gives another route through the city. It works particularly well if you enjoy exploring on foot.",
-      "The boundaries matter when choosing accommodation. Properties around Allenby and Nachalat Binyamin are often grouped with the quarter but sit on its market-facing edges. The inner lanes can feel more residential; market deliveries, main-road activity and evening venues create a different atmosphere around the perimeter.",
+      "Check whether your accommodation is within the Yemenite Quarter or on one of the busier surrounding streets. Properties around Allenby and Nachalat Binyamin are often grouped with the quarter but sit on its market-facing edges. The inner lanes can feel more residential; market deliveries, main-road activity and evening venues create a different atmosphere around the perimeter.",
     ],
     highlights: [
-      { name: "Carmel Market", text: "A focal point for food shopping and market browsing. Opening hours and the Friday-to-Saturday rhythm vary by business." },
+      { name: "Carmel Market", text: "A focal point for food shopping and market browsing. Opening hours vary between shops and stalls, especially on Fridays and Saturdays." },
       { name: "Yemenite Quarter food streets", text: "Small local places to eat and residential lanes give the quarter a different feel from the main market thoroughfare." },
       { name: "Nachalat Binyamin & the nearby coast", text: "Historic streets and the promenade offer two directions for extending a short neighborhood walk." },
     ],
     gettingAround: [
       "The beach is around 10–15 minutes on foot from many addresses, sometimes closer from the western lanes. Check your actual route: an apartment on Nachalat Binyamin is east of the residential quarter, while a place closer to the sea gives a different starting point.",
-      "Narrow lanes, pedestrian sections and limited parking make this easier as a walking base than a driving base. Ask for a vehicle-accessible meeting point and the last stretch with luggage. Confirm your hotel's arrival arrangements and transport for the day you arrive.",
+      "With narrow streets, pedestrian areas and limited parking, the neighbourhood is best explored on foot. Ask for a vehicle-accessible meeting point and the last stretch with luggage. Confirm your hotel's arrival arrangements and transport for the day you arrive.",
     ],
     arrivalTips: ["Confirm whether your stay is in the quarter or on the Carmel Market / Nachalat Binyamin edge.", "Ask how far the taxi stop is from your entrance, especially in pedestrian streets.", "Check lift access and any early-morning delivery or nightlife noise near your room."],
     bookingTips: ["For an apartment, confirm the exact unit, minimum stay, cleaning and on-site support.", "For a quieter stay, check room orientation, street noise and included services."],
@@ -532,8 +532,8 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     map: { lat: 32.0643, lon: 34.7754, bounds: [34.767, 32.0555, 34.7855, 32.0755], reference: "Rothschild Boulevard / White City district" },
     overview: [
       "Rothschild Boulevard is a long, tree-lined route through the central and southern city, with a central walking strip and buildings from different periods of Tel Aviv's development. The surrounding White City streets mix historic architecture, offices, restaurants and residential life.",
-      "Choose it if architecture, food and evening walks matter more than waking up beside the sand. Some hotels stand directly on the boulevard; others, including The Norman on Nachmani Street, are a short walk away. The wider district offers boutique and luxury stays without the seafront tower setting.",
-      "Look at the street number and surrounding blocks. The southern end connects toward Neve Tzedek, Florentin and Levinsky Market, while the northern end leads toward Habima and the wider center. Traffic and evening venues can affect rooms even with a leafy outlook, and the beach remains a separate walk.",
+      "Choose it if architecture, food and evening walks matter more than waking up beside the sand. Some hotels stand directly on the boulevard; others, including The Norman on Nachmani Street, are a short walk away. The surrounding streets are home to stylish boutique hotels and luxury accommodation.",
+      "Look at the street number and surrounding blocks. The southern end connects toward Neve Tzedek, Florentin and Levinsky Market, while the northern end leads toward Habima and the wider center. Rooms overlooking the boulevard may be affected by traffic and nightlife noise. The beach is a short walk away.",
     ],
     highlights: [
       { name: "The boulevard's central promenade", text: "A shaded route for walking and getting a feel for the surrounding streets, with cafés along the way." },
