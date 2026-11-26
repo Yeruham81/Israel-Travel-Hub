@@ -173,7 +173,10 @@ describe("migrated Israel itineraries", () => {
     expect(view).toContain("g.jerusalemTourOptionsDay === index + 1");
     expect(view).toContain('<JerusalemItineraryTourOptions days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3} />');
     const cards = file("src/components/JerusalemItineraryTourOptions.tsx");
-    expect(cards).toContain("<details");
+    expect(cards).not.toContain("<details");
+    expect(cards).not.toContain("<summary");
+    expect(cards).toContain('<h4 className="font-semibold text-primary">Alternative day tours from Jerusalem</h4>');
+    expect(cards).toContain('data-testid="itinerary-jerusalem-tours"');
     expect(cards).toContain("Alternative day tours from Jerusalem");
     expect(cards).toContain("Book these tours with the individual providers.");
     expect(cards).toContain("platform={tour.provider}");
@@ -418,7 +421,7 @@ describe("migrated Israel itineraries", () => {
     const tourComponent = file("src/components/JerusalemItineraryTourOptions.tsx");
     const itineraryComponent = file("src/components/IsraelItineraryPage.tsx");
 
-    expect(tourComponent).toContain("<span>Alternative day tours from Jerusalem</span>");
+    expect(tourComponent).toContain('<h4 className="font-semibold text-primary">Alternative day tours from Jerusalem</h4>');
     expect(tourComponent).toContain("Each replaces that day's planned sightseeing.");
     expect(tourComponent).toContain("a guided Masada and Dead Sea trip for Day 3");
     expect(itineraryComponent).toContain("presentation.transferDays.includes(index + 1)");
