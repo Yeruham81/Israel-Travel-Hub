@@ -79,7 +79,7 @@ export const journeyDestinationGuides = {
         "title": "Ein Bokek: a practical base for a beach day",
         "paragraphs": [
           "Ein Bokek’s managed public-beach area and promenade sit beside the southern hotel district. Hotel pools, changing facilities and spas may require a separate payment. Check the exact facilities you intend to use and any parking or equipment charges.",
-          "A nearby hotel does not automatically make its entire beachfront private, nor does public beach access grant use of hotel amenities. For a day package, read which changing room, towel, pool, spa or meal is included. If you're staying overnight, consider how far your hotel is from the beach."
+          "Public beaches are open to visitors, while hotels may reserve their pools, spas and other facilities for paying guests. For a day package, read which changing room, towel, pool, spa or meal is included. If you're staying overnight, consider how far your hotel is from the beach."
         ],
         "links": [
           {
@@ -97,7 +97,7 @@ export const journeyDestinationGuides = {
         "title": "Enjoy the water through designated facilities",
         "paragraphs": [
           "Swim only at designated beaches while lifeguards are on duty, and follow their instructions. Enter slowly, keep the water away from your face and avoid splashing or diving. Use the provided showers to rinse off. The Dead Sea is ideal for floating on your back. Avoid swimming on your stomach.",
-          "Do not walk onto an unregulated shore or look for an informal mud pool. Unstable ground and sinkholes affect parts of the region. A hotel spa or packaged mud treatment is a separately offered amenity; choose it by the facility and included service rather than expecting the same experience at every beach."
+          "Do not walk onto an unregulated shore or look for an informal mud pool. Unstable ground and sinkholes affect parts of the region. For a Dead Sea mud treatment, compare the treatments and facilities offered by local hotels and spas."
         ]
       },
       {
@@ -130,7 +130,7 @@ export const journeyDestinationGuides = {
         "id": "transport-season",
         "title": "Arrival, season and the return journey",
         "paragraphs": [
-          "From Jerusalem, the final destination determines whether a northern beach or the southern hotel strip suits your day. Buses are convenient for visiting one destination. A private driver, rental car or organised tour offers more flexibility for several stops. Include the journey to the departure stop and the return after your beach or park closes.",
+          "From Jerusalem, you can visit the northern Dead Sea beaches or travel farther south to the Ein Bokek hotel district. Buses are convenient for visiting one destination. A private driver, rental car or organised tour offers more flexibility for several stops. Allow time to reach your bus stop and check the return timetable before visiting the beach or nature reserve.",
           "The area can be very hot. Choose the timing and amount of outdoor walking around the local forecast, and check weather and road notices before a desert outing. Include the name and address of your Dead Sea beach or hotel when requesting a transfer."
         ],
         "links": [
@@ -220,7 +220,7 @@ export const journeyDestinationGuides = {
     },
     {
       "label": "Bus 234",
-      "text": "Checkpoint 300 approach; check current crossing arrangements and onward transport"
+      "text": "Checkpoint 300: pedestrian crossing and transport to Bethlehem"
     }
   ],
   "comparison": {
@@ -239,7 +239,7 @@ export const journeyDestinationGuides = {
       [
         "Bus 234",
         "Visitors crossing Checkpoint 300 on foot",
-        "About 15–20 minutes by bus to Checkpoint 300, then the authorised crossing and onward travel"
+        "About 15–20 minutes by bus, plus checkpoint crossing time and local transport to Bethlehem for eligible travellers"
       ],
       [
         "Authorised private driver",
@@ -704,8 +704,8 @@ export const journeyDestinationGuides = {
           "title": "By public bus: Egged 486 and 444",
           "paragraphs": [
             "Egged line 486 departs from Jerusalem Central Bus Station along the Dead Sea corridor, serving stops including Ein Gedi, Masada and Ein Bokek. Line 444 continues towards Eilat and requires an advance seat reservation. Get off at the bus stop closest to your hotel or the attraction you plan to visit.",
-            "For a beach day, choose the bus stop closest to Ein Bokek Central Beach or your named hotel. The operator's journey planner displays the fare for your destination and date. Check the platform, return departure and final walk from the stop. Israel Railways does not serve the Dead Sea.",
-            "Buses between individual Dead Sea attractions are infrequent, and the last bus back to Jerusalem may leave early. Friday and holiday timetables are shorter, while ordinary buses generally pause for Shabbat. Plan the return from the exact stop you intend to use."
+            "Get off near Ein Bokek Central Beach or at the stop closest to your hotel. The operator's journey planner displays the fare for your destination and date. Check your departure platform, return bus time and walking distance to the beach or hotel. Israel Railways does not serve the Dead Sea.",
+            "Buses between individual Dead Sea attractions are infrequent, and the last bus back to Jerusalem may leave early. Friday and holiday timetables are shorter, while ordinary buses generally pause for Shabbat. Check the last return bus from your chosen stop."
           ],
           "sourceIds": [
             "m26-egged",
@@ -829,7 +829,7 @@ export const journeyDestinationGuides = {
         },
         {
           "q": "Do buses run to the Dead Sea on Shabbat?",
-          "a": "Regular buses do not provide a dependable Saturday travel option. Services are reduced or suspended from Friday afternoon until Saturday evening, so check your exact date or arrange other transport."
+          "a": "Regular bus services are reduced or suspended from Friday afternoon until Saturday evening. Check the timetable or arrange private transport for Shabbat."
         },
         {
           "q": "Should I stay at the Dead Sea overnight?",
