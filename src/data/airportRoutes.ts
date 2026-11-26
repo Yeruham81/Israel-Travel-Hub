@@ -63,11 +63,11 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
       response: "List the number and size of your cases, plus any stroller. I can confirm a vehicle with enough luggage space and quote the appropriate fare.",
     },
     planningTitle: "Match the vehicle to your luggage",
-    planningText: "Include all suitcases, carry-ons, strollers and child-seat needs in your request so I can confirm the suitable vehicle.",
+    planningText: "List your suitcases, carry-ons, strollers and any child seats you need so I can confirm a suitable vehicle.",
     faqs: [
       { q: "How long does an airport transfer to Tel Aviv take?", a: "Allow around 20–40 minutes as a planning estimate or more after pickup. Traffic and the exact Tel Aviv or Jaffa address can add time. Allow separately for immigration, baggage and reaching the meeting point." },
       { q: "Does the request form cover Jaffa too?", a: "Yes. Tel Aviv & Jaffa is preselected. Enter your actual Jaffa hotel or apartment address so I can confirm the final price and a suitable vehicle drop-off." },
-      { q: "Will four passengers and all our suitcases fit?", a: "Passenger capacity and luggage capacity are separate considerations. List every suitcase, carry-on and stroller. I will need to confirm the vehicle and whether a larger option changes the quote." },
+      { q: "Will four passengers and all our suitcases fit?", a: "A car needs enough seats and luggage space for your group. List every suitcase, carry-on and stroller. I'll confirm the vehicle and any price difference if you need a larger one." },
     ],
     related: [
       { label: "Find your Tel Aviv hotel area", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
@@ -93,9 +93,9 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
       response: "Share your ship name and boarding deadline. I can plan the transfer to the confirmed passenger entrance, with time allowed for arrival formalities, traffic and terminal access.",
     },
     planningTitle: "Connecting to a cruise?",
-    planningText: "Tell me the ship name, passenger terminal and latest check-in time so I can check the practical route and timing.",
+    planningText: "Tell me the ship's name, passenger terminal and latest check-in time so I can plan the drive.",
     faqs: [
-      { q: "How long should I allow for a private transfer to Haifa?", a: "Allow about 75–110 minutes as a planning estimate or more after pickup. The Haifa neighbourhood and traffic matter, and time in the airport is additional. Avoid a tight onward connection based only on that estimate." },
+      { q: "How long should I allow for a private transfer to Haifa?", a: "Allow about 75–110 minutes or more after pickup, depending on traffic and your destination in Haifa, plus time for airport formalities. Avoid a tight onward connection based only on that estimate." },
       { q: "Can I request a hotel on Mount Carmel?", a: "Yes. Include the full hotel or apartment address and any entrance instructions. Explain steps or mobility needs so I can confirm a practical drop-off and suitable vehicle." },
       { q: "Is a Haifa Port drop-off the same as a city hotel transfer?", a: "No. Include the exact passenger terminal, ship and required arrival time. Send me your exact port entrance so I can confirm access, the route and the final price." },
     ],
@@ -125,7 +125,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     planningTitle: "Extra stops and return journeys",
     planningText: "Include any rest break, Masada stop or return flight in your request for an itinerary and total fare tailored to your trip.",
     faqs: [
-      { q: "How long is the private airport transfer to Ein Bokek?", a: "Allow around 1 hour 45 minutes to 2 hours 30 minutes or more after pickup, as a planning estimate. Airport formalities, traffic and road disruptions can add time. Confirm your hotel check-in arrangements independently." },
+      { q: "How long is the private airport transfer to Ein Bokek?", a: "Allow around 1 hour 45 minutes to 2 hours 30 minutes or more after pickup. Airport formalities, traffic and road disruptions can add time. Arrange your hotel check-in in advance." },
       { q: "Does the Ein Bokek price apply to every Dead Sea hotel?", a: "No. Enter the exact property. Ein Gedi, Neve Zohar and other Dead Sea locations need confirmation for their own route and final quote; the displayed starting rate is specifically for Ein Bokek." },
       { q: "Can I stop at Masada or arrange the return journey?", a: "Describe any extra stop and the return flight details in the additional requests field. Ask for the itinerary, time and price to be agreed separately. Neither sightseeing nor a return ride is included in the one-way starting rate." },
     ],
