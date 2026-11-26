@@ -40,7 +40,7 @@ export const privateDriverHero = {
 };
 export const privateDriverBenefits = [
   { title: "A route that fits your plans", text: "Choose your pickup, drop-off and favourite stops for a personalised itinerary." },
-  { title: "Space for your group", text: "Tell me your group size and how much luggage you're bringing so I can arrange a suitable vehicle." },
+  { title: "Space for your group", text: "Tell me how many passengers and bags you're travelling with so I can arrange a suitable vehicle." },
   { title: "A clear quote before booking", text: "I'll confirm the itinerary, vehicle, total price and arrangements before you decide." },
 ];
 export const privateDriverFaqs = [
