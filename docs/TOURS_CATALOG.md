@@ -1,6 +1,6 @@
 # Tours & Day Trips catalog
 
-Implemented 22 October 2026. Existing Lovable project and staging indexing settings are preserved.
+Implemented 22 October 2026. The then-existing preview and staging indexing settings were preserved.
 
 ## Visitor pages
 

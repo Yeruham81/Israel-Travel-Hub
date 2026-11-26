@@ -1,7 +1,7 @@
 name: Deploy static website to Hostinger Premium
 
 # Do not publish broken code. Automatic deployments only follow successful
-# Full Project Validation runs on main; credentials never enter Lovable/Vite.
+# Full Project Validation runs on main; credentials never enter frontend build variables.
 on:
   workflow_run:
     workflows: ["Full Project Validation"]

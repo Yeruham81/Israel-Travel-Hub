@@ -1,33 +1,66 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
-// or the app will break with duplicate plugins:
-//   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,
-//     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
-//     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
-// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { fileURLToPath } from "node:url";
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { nitro } from "nitro/vite";
+import react from "@vitejs/plugin-react";
 
-export default defineConfig({
-  tanstackStart: {
-    // Static HTML export is used only for Hostinger Premium deploy builds.
-    // Ordinary Lovable previews, local dev, and standard CI builds keep SSR.
-    ...(process.env["HOSTINGER_STATIC_BUILD"] === "true"
-      ? {
-          prerender: {
-            enabled: true,
-            autoSubfolderIndex: true,
-            autoStaticPathsDiscovery: true,
-            crawlLinks: true,
-            // The interactive /maps/*.html assets are served as files, not router pages.
-            // A crawler can misinterpret their iframe query strings as broken routes.
-            filter: ({ path }: { path: string }) => !path.startsWith("/maps/") && !path.startsWith("/api/"),
-            // Do not publish incomplete HTML when any route fails to render.
-            failOnError: true,
-            concurrency: 5,
-          },
-        }
-      : {}),
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
+// Native TanStack prerender owns its client/server output during static builds.
+// Ordinary SSR builds use Nitro's Node server; the two build modes stay separate.
+export default defineConfig(({ command }) => ({
+  plugins: [
+    tailwindcss(),
+    tsconfigPaths({ projects: ["./tsconfig.json"] }),
+    tanstackStart({
+      ...(process.env["HOSTINGER_STATIC_BUILD"] === "true"
+        ? {
+            prerender: {
+              enabled: true,
+              autoSubfolderIndex: true,
+              autoStaticPathsDiscovery: true,
+              crawlLinks: true,
+              // Maps are static HTML assets; PHP APIs are managed on the host.
+              filter: ({ path }: { path: string }) => !path.startsWith("/maps/") && !path.startsWith("/api/"),
+              failOnError: true,
+              concurrency: 5,
+            },
+          }
+        : {}),
+      // Preserve the custom SSR error handler and response security headers.
+      server: { entry: "server" },
+    }),
+    ...(command === "build" && process.env["HOSTINGER_STATIC_BUILD"] !== "true"
+      ? [nitro({ preset: "node-server" })]
+      : []),
+    react(),
+  ],
+  css: { transformer: "lightningcss" },
+  resolve: {
+    alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
+    dedupe: [
+      "react",
+      "react-dom",
+      "react/jsx-runtime",
+      "react/jsx-dev-runtime",
+      "@tanstack/react-query",
+      "@tanstack/query-core",
+    ],
   },
-});
+  optimizeDeps: {
+    include: [
+      "react",
+      "react-dom",
+      "react-dom/client",
+      "react/jsx-runtime",
+      "react/jsx-dev-runtime",
+    ],
+    ignoreOutdatedRequests: true,
+  },
+  // Only VITE_ variables are exposed to the client (Vite's native default).
+  server: {
+    host: "::",
+    port: 8080,
+    watch: { awaitWriteFinish: { stabilityThreshold: 1000, pollInterval: 100 } },
+  },
+}));

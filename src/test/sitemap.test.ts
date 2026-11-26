@@ -9,12 +9,22 @@ import { collectSitemapPaths, buildSitemap, buildRobots, normalizeOrigin, DEFAUL
 describe("generated XML sitemap and robots.txt", () => {
   it("requires the production domain AND an explicit opt-in to enable indexing", () => {
     const staging = siteConfig({ VITE_CANONICAL_ORIGIN: "https://saddlebrown-guanaco-454061.hostingersite.com", VITE_INDEXABLE: "true" });
-    const lovable = siteConfig({ VITE_CANONICAL_ORIGIN: DEFAULT_CANONICAL_ORIGIN, VITE_INDEXABLE: "true" });
+    const preview = siteConfig({ VITE_CANONICAL_ORIGIN: "https://preview.example.test", VITE_INDEXABLE: "true" });
     const launch = siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN, VITE_INDEXABLE: "true" });
     expect(staging.indexable).toBe(false);
-    expect(lovable.indexable).toBe(false);
+    expect(preview.indexable).toBe(false);
+    expect(DEFAULT_CANONICAL_ORIGIN).toBe(PRODUCTION_CANONICAL_ORIGIN);
+    for (const env of [{}, { VITE_INDEXABLE: "true" }, { VITE_CANONICAL_ORIGIN: "", VITE_INDEXABLE: "true" }, { VITE_CANONICAL_ORIGIN: "  ", VITE_INDEXABLE: "true" }]) {
+      expect(siteConfig(env)).toEqual({ origin: PRODUCTION_CANONICAL_ORIGIN, indexable: false });
+    }
+    expect(siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN }).indexable).toBe(false);
+    expect(siteConfig({ VITE_CANONICAL_ORIGIN: "https://israel-taxi.com", VITE_INDEXABLE: "true" }).indexable).toBe(false);
+    expect(siteConfig({ VITE_CANONICAL_ORIGIN: "http://www.israel-taxi.com", VITE_INDEXABLE: "true" }).indexable).toBe(false);
+    expect(siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN + "/", VITE_INDEXABLE: "true" }).indexable).toBe(true);
     expect(siteConfig({ VITE_CANONICAL_ORIGIN: PRODUCTION_CANONICAL_ORIGIN, VITE_INDEXABLE: "false" }).indexable).toBe(false);
     expect(launch.indexable).toBe(true);
+    expect(pageMeta({ title: "Test", description: "Test", path: "/" }, launch).meta)
+      .toContainEqual({ name: "robots", content: "index,follow" });
     expect(pageMeta({ title: "Test", description: "Test", path: "/" }, staging).meta)
       .toContainEqual({ name: "robots", content: "noindex,nofollow" });
     expect(pageMeta({ title: "Test", description: "Test", path: "/" }, launch).links)

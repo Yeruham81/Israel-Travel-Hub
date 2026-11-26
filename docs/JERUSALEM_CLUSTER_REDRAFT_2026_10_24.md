@@ -27,7 +27,7 @@ Do not merge any of these: their search intents are distinct. The city guide is 
 - src/data/jerusalemClusterEditorial.ts provides in-place editorial upgrades to 6 practical TravelGuide pages and substantial updates to four individual Attraction guides. Existing high-value sections remain; new sections fill identified topical gaps and use inlineLinks inside paragraphs.
 - src/components/JerusalemClusterLinks.tsx renders direct, topic-sensitive link cards without reused images; maps reciprocal links from Jerusalem places to tours and transport, including Jerusalem tours, Bethlehem and Dead Sea tours, Ashdod cruise excursions, airport guide and city accommodation.
 - src/components/JerusalemPartnerOffers.tsx reserves independently configurable ProviderLink page IDs for later verified Viator/GetYourGuide/Tiqets/etc. integrations; no offers, prices or affiliate claims are rendered unless actually configured in the existing provider registry.
-- Correct canonical routes retained. No Lovable agent, no change to customer-request forms.
+- Correct canonical routes retained. No external editor agent, no change to customer-request forms.
 - All editorial additions have update date 2026-10-24. This records an editorial update, not a guarantee that every site's opening status has been independently reconfirmed.
 
 ## Affiliate plan (not published until approved)

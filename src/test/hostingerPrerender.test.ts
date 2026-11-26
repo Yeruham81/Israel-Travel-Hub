@@ -10,6 +10,16 @@ describe("Hostinger deployment build safeguards", () => {
     expect(read("scripts/build-validated-static.sh")).toContain('set -euo pipefail');
   });
 
+  it("keeps native static prerender separate from the Nitro SSR build", () => {
+    const config = read("vite.config.ts");
+    const script = read("scripts/build-validated-static.sh");
+    expect(config).toContain('command === "build" && process.env["HOSTINGER_STATIC_BUILD"] !== "true"');
+    expect(script).toContain("rm -rf -- dist .output");
+    expect(script).toContain("dist/client/index.html");
+    expect(script).toContain("cp -a dist/client/. .output/public/");
+    expect(script).not.toContain("cp -a dist/server");
+  });
+
   it("validates the same static build before CI succeeds or a deployment can upload", () => {
     for (const path of [
       ".github/workflows/full-project-validation.yml",

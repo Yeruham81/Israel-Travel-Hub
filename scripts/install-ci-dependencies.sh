@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Retain the exact dependency versions from bun.lock. Only retry transient
-# package-registry failures (e.g. Lovable cache 429), never regenerate the lock.
+# package-registry failures (e.g. HTTP 429), never regenerate the lock.
 set -euo pipefail
 export BUN_CONFIG_HTTP_RETRY_BACKOFF=500
 

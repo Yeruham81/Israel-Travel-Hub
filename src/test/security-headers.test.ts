@@ -29,8 +29,8 @@ describe("SSR response security headers", () => {
     expect(response.headers.get("x-frame-options")).toBeNull();
   });
 
-  it.each(["israel-taxi-travel.lovable.app", "preview--israel-taxi-travel.lovable.app", "localhost"])(
-    "keeps the %s preview embeddable in Lovable",
+  it.each(["saddlebrown-guanaco-454061.hostingersite.com", "preview.example.test", "localhost"])(
+    "keeps the %s non-production origin exempt from production frame policy",
     (hostname) => {
       const response = withSecurityHeaders(
         new Response("hello", { headers: { "content-type": "text/html" } }),
@@ -85,7 +85,7 @@ describe("SSR response security headers", () => {
         "Content-Type": "text/html",
         "Content-Security-Policy": "default-src 'self'; object-src 'none'",
       },
-    }), request("israel-taxi-travel.lovable.app"));
+    }), request("saddlebrown-guanaco-454061.hostingersite.com"));
     expect(response.headers.get("content-security-policy")).toBe("default-src 'self'; object-src 'none'");
     expect(response.headers.get("x-frame-options")).toBeNull();
   });

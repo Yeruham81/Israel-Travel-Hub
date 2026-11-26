@@ -4,6 +4,7 @@ import { renderToString } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { isPublisherUrl, providerLinks } from "@/data/registry";
+import { CANONICAL_ORIGIN } from "@/lib/site";
 
 function routerAt(path: string) {
   return createRouter({
@@ -14,7 +15,29 @@ function routerAt(path: string) {
   });
 }
 
+// Allow the permanent origin in metadata only for valid current routes and
+// local image assets. Retain the prohibition on obsolete publisher referrals.
+function isCurrentMetadataUrl(value: string, currentPaths: Set<string>, origin = CANONICAL_ORIGIN) {
+  const url = new URL(value);
+  if (url.origin !== origin || url.username || url.password) return false;
+  const path = url.pathname === "/" ? "/" : url.pathname.replace(/\/+$/, "") + "/";
+  return currentPaths.has(path) ||
+    /^\/(?:src\/assets|assets|images)\/[^?#]+\.(?:webp|avif|png|jpe?g|svg|gif|ico)$/i.test(url.pathname);
+}
+
 describe("replacement-site navigation", () => {
+  it("distinguishes current canonical metadata from obsolete or noncanonical publisher URLs", () => {
+    const origin = "https://www.israel-taxi.com";
+    const paths = new Set(["/", "/about-me/", "/travel-blog/"]);
+    expect(isCurrentMetadataUrl(origin + "/#website", paths, origin)).toBe(true);
+    expect(isCurrentMetadataUrl(origin + "/about-me/#moshe-barak", paths, origin)).toBe(true);
+    expect(isCurrentMetadataUrl(origin + "/src/assets/home/photo.webp", paths, origin)).toBe(true);
+    expect(isCurrentMetadataUrl(origin + "/travel-blog/", paths, origin)).toBe(true);
+    expect(isCurrentMetadataUrl(origin + "/about/", paths, origin)).toBe(false);
+    expect(isCurrentMetadataUrl(origin + "/wp-content/uploads/photo.jpg", paths, origin)).toBe(false);
+    expect(isCurrentMetadataUrl("https://israel-taxi.com/about-me/", paths, origin)).toBe(false);
+    expect(isCurrentMetadataUrl(origin + ".example.org/about-me/", paths, origin)).toBe(false);
+  });
   // The only temporary exception is four owner-authored itineraries awaiting migration.
   // This whitelist MUST be removed when the original slugs are re-created as internal routes.
   const temporaryItineraryLinks = new Set([3, 5, 7, 10].map(days =>
@@ -24,6 +47,7 @@ describe("replacement-site navigation", () => {
   it("blocks legacy-site referrals except for the four documented itinerary bridge links", async () => {
     const routes = Object.values(routerAt("/").routesById).filter(route => route.id !== "__root__" && route.options.component);
     expect(routes.length).toBeGreaterThan(90);
+    const currentPaths = new Set(routes.map(route => route.fullPath.endsWith("/") ? route.fullPath : route.fullPath + "/"));
     for (const route of routes) {
       const path = route.fullPath.endsWith("/") ? route.fullPath : route.fullPath + "/";
       const router = routerAt(path);
@@ -52,7 +76,14 @@ describe("replacement-site navigation", () => {
       const text = doc.body.textContent?.replace(/[\w.+-]+@israel-taxi\.com/gi, "");
       expect(text, path).not.toMatch(/israel-taxi\.com|Prefer an online form|existing .*contact form|original online form|original operator page/i);
       const head = await route.options.head?.({} as never);
-      expect(JSON.stringify(head), `${path}: metadata`).not.toMatch(/israel-taxi\.com/i);
+      const remainingMetadata = (JSON.stringify(head) ?? "").replace(
+        /https:\/\/www\.israel-taxi\.com(?=\/|["\\]|$)[^"\\\s<>]*/gi,
+        value => {
+          expect(isCurrentMetadataUrl(value, currentPaths), path + ": metadata URL " + value).toBe(true);
+          return "[verified current metadata URL]";
+        },
+      );
+      expect(remainingMetadata, path + ": metadata").not.toMatch(/israel-taxi\.com/i);
       if (path === "/about-me/") expect(doc.querySelector('#privacy a[href="/privacy-policy/"]')).not.toBeNull();
       for (const link of doc.querySelectorAll('a[href="/privacy-policy/"]')) {
         expect(link.hasAttribute("target"), path).toBe(false);
