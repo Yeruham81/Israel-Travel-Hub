@@ -51,7 +51,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
       {(filters.destination || filters.format) && <a href={shoreServiceHref(portId, {})} onClick={event => filter(event, {})} className="text-sm font-semibold text-primary underline">Clear filters</a>}
     </div>
     {visible.length === 0 ? <section className="mt-5 rounded-2xl border p-8 text-center">
-      <h2 className="text-2xl font-semibold">No tours match this destination</h2>
+      <h2 className="text-2xl font-semibold">No tours match your selection</h2>
       <p className="mt-3 text-muted-foreground">Choose another destination or excursion type to see more shore excursions from {port.name} Port.</p>
       <a href={shoreServiceHref(portId, {})} onClick={event => filter(event, {})} className="btn btn-primary mt-5">Show all shore excursions</a>
     </section> : <>
