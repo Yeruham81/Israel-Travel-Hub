@@ -37,7 +37,7 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
   "east-jerusalem": {
     heading: "Near Damascus Gate is a specific location",
     choose: "Nablus Road and the streets by the Garden Tomb offer access to northern Old City entrances and local Palestinian restaurants.",
-    compare: "An advertisement saying only 'East Jerusalem' may refer to a much wider area, including addresses not practical for walking to Damascus Gate.",
+    compare: "East Jerusalem covers a large area. Check your hotel's walking distance from Damascus Gate if you plan to visit the Old City regularly.",
     arrival: "Use the complete hotel street address when planning a transfer, and confirm the appropriate gate and access arrangements with the accommodation.",
   },
   "german-colony": {
@@ -54,27 +54,27 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
   },
   "telaviv-dizengoff": {
     heading: "Staying near Dizengoff Square",
-    choose: "The square and its nearby blocks make a convenient walking base for cafés, city architecture and routes toward the central beach.",
+    choose: "Staying near Dizengoff Square puts cafés, Bauhaus architecture and the central beaches within walking distance.",
     compare: "A hotel much farther north on Dizengoff serves a different set of neighborhoods; a central beachfront stay is better for visitors who want the sand immediately nearby.",
     arrival: "Check your hotel's street number and its distance from Dizengoff Square. From your arrival station in Tel Aviv, continue to your hotel by bus or taxi.",
   },
   "telaviv-old-north": {
     heading: "Residential Old North or the lively port?",
     choose: "Side streets in the Old North suit longer stays and access to northern beaches and the Yarkon corridor.",
-    compare: "Accommodation beside the port can be lively into the evening. Southern-city sights around Carmel Market and Jaffa take a longer onward journey from the northern waterfront.",
+    compare: "Accommodation beside the port can be lively into the evening. Allow extra travel time from the Old North to Carmel Market and Jaffa.",
     arrival: "Give your driver the full hotel address, particularly when traveling with children or bulky luggage.",
   },
   "telaviv-neve-tzedek": {
     heading: "Historic lanes versus the district's edges",
     choose: "The Shabazi Street and Suzanne Dellal area places the restored low-rise streets at the center of the stay.",
     compare: "Properties along Lilienblum, Herzl or surrounding thoroughfares can be convenient for Rothschild Boulevard while feeling less like the quiet historic core.",
-    arrival: "Narrow streets, converted buildings and limited vehicle access make the hotel's specific unloading point and lift arrangements important.",
+    arrival: "Ask your hotel about taxi access, luggage drop-off and elevator availability.",
   },
   "telaviv-jaffa": {
     heading: "Sleep on Old Jaffa's hill or beside the flea market?",
     choose: "The historic hill offers stone lanes and a different setting near the old port; it can require slopes and steps with luggage.",
     compare: "Near the Clock Tower and flea market, cafés and evening restaurants are closer to many accommodation entrances, but noise can last later.",
-    arrival: "Ask whether a taxi can stop at the actual entrance or whether you must walk uphill through pedestrian lanes. Book a sea-view room if you'd like to overlook the Mediterranean.",
+    arrival: "Ask your hotel where taxis can drop you off and whether the remaining walk involves hills or steps. Book a sea-view room if you'd like to overlook the Mediterranean.",
   },
   "telaviv-florentin": {
     heading: "The same neighborhood has very different nights",
@@ -101,7 +101,7 @@ export const destinationBaseChoices: Record<string, BaseChoice[]> = {
   deadsea: [
     { visitor: "Want to walk between a resort and nearby services", base: "Ein Bokek", reason: "The central resort strip has managed beach areas and more hotel-to-promenade choices, although the beach route still varies by property." },
     { visitor: "Planning to spend most of the stay inside a resort", base: "Southern hotel district / Neve Zohar", reason: "The resort-led setting makes meal plans and on-site facilities particularly important; outside dining is less convenient." },
-    { visitor: "Prioritizing nature and inland scenery", base: "Ein Gedi", reason: "Ein Gedi suits a nature-focused stay. Plan separate transport if a managed bathing beach is a main goal." },
+    { visitor: "Prioritizing nature and inland scenery", base: "Ein Gedi", reason: "Ein Gedi suits a nature-focused stay. Arrange transport to a designated swimming beach if you plan to swim in the Dead Sea." },
   ],
   tiberias: [
     { visitor: "Arriving without a car and visiting the town", base: "Lower town / promenade", reason: "Restaurants and some waterfront walks are closer together, though lakeside location does not guarantee a private swimming beach." },
@@ -119,7 +119,7 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
   "deadsea:spa": {
     heading: "Example: two guests with different spa priorities",
     situation: "One guest wants mineral-water facilities and treatments; the other mainly wants a comfortable hotel and beach time.",
-    decision: "Check which spa facilities and treatments are included for each guest. Compare the treatments included in your package, indoor mineral-pool facilities and access to a supervised beach separately.",
+    decision: "Check whether your package includes spa treatments, indoor mineral pools and access to a beach with lifeguards, and which benefits apply to each guest.",
   },
   "deadsea:family": {
     heading: "Example: a toddler and an older child",
@@ -154,7 +154,7 @@ export const areaArrivalSignals: Record<string, string> = {
   mamilla: "Use the hotel street entrance, not the pedestrian avenue",
   "old-city": "Nearest permitted gate, steps and luggage walk matter",
   "mahane-yehuda": "Market traffic and late apartment entry require planning",
-  "east-jerusalem": "Pin the actual Nablus Road or Damascus Gate address",
+  "east-jerusalem": "Save your hotel's address on Google Maps",
   "german-colony": "Baka and Emek Refaim are different taxi destinations",
   "telaviv-beachfront": "HaYarkon frontage may differ from reception entrance",
   "telaviv-dizengoff": "Check distance from Dizengoff Square, not street name",
