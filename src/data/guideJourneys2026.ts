@@ -750,7 +750,7 @@ export const journeyDestinationGuides = {
           "id": "tours",
           "title": "By organised tour: transport plus sightseeing",
           "paragraphs": [
-            "An organised tour is a convenient way to combine the Dead Sea with attractions such as Masada or Ein Gedi. Transport and sightseeing stops are arranged in advance, so you don't need to coordinate several buses.",
+            "An organised tour is a convenient way to combine the Dead Sea with attractions such as Masada or Ein Gedi. An organised tour includes transport between the attractions on its itinerary.",
             "Excursions follow different itineraries. Some concentrate on a Dead Sea beach, while others allocate much of the day to Masada and Ein Gedi. Confirm that the tour departs from Jerusalem, its return point, the precise beach, time spent there and whether park admission or cable-car tickets are included."
           ],
         },
@@ -759,7 +759,7 @@ export const journeyDestinationGuides = {
           "title": "By rental car: the most flexible option",
           "paragraphs": [
             "Renting a car gives you the freedom to visit several attractions around the Dead Sea. From Jerusalem, follow Highway 1 east and Highway 90 south. Set your navigation app to your hotel, beach or attraction entrance. Masada's eastern entrance is accessible from Route 90.",
-            "Driving lets you start early and combine attractions, but allow time for collecting the car, parking and returning to Jerusalem. See my car rental guide for details on insurance, fuel policies, pickup hours and permitted roads.",
+            "With a rental car, you can leave early and visit several attractions in one day. Allow time for collecting the car, parking and the return drive to Jerusalem. See my car rental guide for details on insurance, fuel policies, pickup hours and permitted roads.",
             "Desert rain can cause sudden flash floods and road closures even when Jerusalem is dry. Check weather warnings and Route 90 status before departure, and use marked beach and parking access points."
           ],
           "photo": { "src": deadSeaRouteRoadPhoto, "alt": "Route 90 curving beside the Dead Sea and Judean Desert cliffs" },

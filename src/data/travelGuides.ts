@@ -1145,7 +1145,7 @@ telAviv: {
         id: "paying", title: "City buses, fares and payment",
         paragraphs: [
           "City buses cover more Tel Aviv neighbourhoods than the Red Line, connecting beaches, museums, markets and hotels. Check the bus number, direction, walking distance to your destination and last Friday departure.",
-          "A standard journey of up to 15 km costs ₪8. With an appropriately validated Rav-Kav or approved mobile payment app, eligible bus and light-rail transfers can be included within 90 minutes. Longer trips and daily passes follow separate fare rules.",
+          "A standard journey of up to 15 km costs ₪8. When you validate your journey using a Rav-Kav or approved payment app, eligible transfers between buses and the light rail are included within 90 minutes. Longer trips and daily passes follow separate fare rules.",
           "Load a Rav-Kav card or register an approved ticketing app before boarding, and validate each journey. Cash to the driver is generally unavailable. Use the national public transport planner for exact stops and departures.",
         ],
         photo: { src: archivedBuses, alt: "City buses at a Tel Aviv metropolitan transport terminal" },
@@ -1254,9 +1254,9 @@ telAviv: {
       {
         id: "bikes", title: "Cycling, e-scooters, parking and rental cars",
         paragraphs: [
-          "Bikes and e-scooters suit short trips on permitted cycling routes. Rent through an operator app, check registration and payment requirements, review the permitted riding and parking zones, and end your rental in an allowed area.",
+          "Bikes and e-scooters suit short trips on permitted cycling routes. Rent a bicycle or e-scooter through the operator's app. Check registration and payment requirements, use permitted cycling routes and end your rental in an approved parking area.",
           "Electric bike and scooter riders must be at least 16 and meet the applicable qualification requirements. Helmets are mandatory, ordinary pedestrian pavements are for walking, and scooters cannot carry passengers.",
-          "A rental car is rarely needed for central Tel Aviv sightseeing, but can be useful for trips outside the city. Blue-and-white street parking may require payment or a permit. Check the parking signs and rental desk hours. See my car rental guide for options beyond the city.",
+          "Walking and public transport are convenient for exploring central Tel Aviv. Consider renting a car for trips outside the city. Blue-and-white street parking may require payment or a permit. Check the parking signs and rental desk hours. See my car rental guide for options beyond the city.",
         ],
         inlineLinks: [{ text: "car rental guide", to: "/car-rental/" }],
         externalLinks: [{ label: "Tel Aviv municipality - bicycle and scooter rules", href: "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/BicycleEnforcement.aspx" }],
@@ -1266,7 +1266,7 @@ telAviv: {
         id: "shabbat", title: "Getting around Tel Aviv on Shabbat",
         paragraphs: [
           "Regular city buses, the Red Line and Israel Railways generally pause for Shabbat. Na'im Busofash operates free routes through Tel Aviv and nearby municipalities on Friday and Saturday.",
-          "The network publishes general service hours of Friday 16:30–02:00 and Saturday 09:00–17:30. Each line has its own stops and departures, so use the official map and timetable. Riders who need an accessible pickup can contact the operator in advance, generally at least three hours before their intended trip.",
+          "The network publishes general service hours of Friday 16:30–02:00 and Saturday 09:00–17:30. Each line has its own stops and departures, so use the official map and timetable. If you need an accessible pickup, contact the operator in advance, generally at least three hours before your planned journey.",
           "Free weekend bus 711 serves Ben Gurion Airport Terminal 1 on selected departures, with seasonal operating hours. My Ben Gurion Airport on Shabbat guide covers the timetable and connections. For destinations without a suitable weekend bus, licensed taxis and arranged private transfers are available.",
         ],
         inlineLinks: [{ text: "Ben Gurion Airport on Shabbat guide", to: travelGuidePaths.shabbat }],
@@ -1276,7 +1276,7 @@ telAviv: {
           rows: [
             ["Regular buses, Red Line and trains", "Generally suspended", "Check Friday's last and Saturday's first services"],
             ["Na'im Busofash", "Free on selected Friday/Saturday routes", "Stops and last buses vary by line"],
-            ["Local sherut", "Selected routes", "Confirm individual route operation"],
+            ["Local sherut", "Selected routes", "Check which routes operate on Shabbat"],
             ["Licensed taxis", "Usually available", "Fare, availability and pickup vary"],
             ["Walking and cycling", "Possible", "Consider weather and safe routes"],
           ],
@@ -1290,7 +1290,7 @@ telAviv: {
       {
         id: "accessibility", title: "Accessibility and practical navigation",
         paragraphs: [
-          "If you use a wheelchair, stroller or have heavy luggage, check lifts, accessible station entrances, step-free routes and the final connection to your destination. Book an appropriate accessible taxi in advance where needed.",
+          "If you're travelling with a wheelchair, stroller or heavy luggage, look for stations with lifts and step-free access, and check the route from the station to your destination. Book an appropriate accessible taxi in advance where needed.",
           "Google Maps and Moovit help compare walking, bus and rail routes. The official transport planner and operator sites provide timetables and disruptions. My getting around Israel guide covers travelling beyond Tel Aviv.",
         ],
         inlineLinks: [{ text: "getting around Israel guide", to: travelGuidePaths.israel }],

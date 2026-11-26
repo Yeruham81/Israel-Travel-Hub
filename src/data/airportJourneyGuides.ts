@@ -347,15 +347,15 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         ...commonTaxi, "Travel time and taxi fares depend on where you're going in Haifa, particularly whether your destination is by the coast or up Mount Carmel. Provide the exact building or authorized terminal entrance, and keep your ride code. Read the official airport taxi guide for Gett pickup instructions, the taxi fares guide for regulated meter charges, and my Uber alternatives guide for app availability."
       ], inlineLinks: [{ text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" }, { text: "taxi fares guide", to: "/travel-blog/taxi-fares-in-israel/" }, { text: "Uber alternatives guide", to: "/travel-blog/uber-in-israel/" } ], checklist: ["Use Gett or the authorized kiosk and queue.", "Specify the destination neighbourhood and building.", "Allow extra margin for a cruise connection."] },
       { id: "private", name: "Pre-booked private transfer", time: "About 75–110+ min after pickup", cost: "Written quote; starting rate on booking page", bestFor: "Large parties, bags, timed connections", doorToDoor: "To agreed point", availability: "By confirmation", comparison: { advantages: "Vehicle size, pickup and written price arranged", drawbacks: "Book and confirm in advance; costs more than rail" }, heading: "When a pre-booked transfer is useful", paragraphs: [
-        ...commonTransfer, "A pre-booked transfer can suit Mount Carmel hotels, several suitcases, larger groups or a cruise departure. If boarding a ship, supply its name, the passenger-terminal entrance and check-in deadline; allow for flight and road delays. See my private transfer to Haifa page for vehicle options, starting prices and a personal quote."
+        ...commonTransfer, "A pre-booked transfer is especially convenient for travellers staying on Mount Carmel, larger groups, passengers with several suitcases and cruise passengers. If you're joining a cruise, provide the ship's name, passenger terminal entrance and check-in deadline. Allow extra time for flight delays and traffic. See my private transfer to Haifa page for vehicle options, starting prices and a personal quote."
       ], inlineLinks: [{ text: "private transfer to Haifa page", to: "/airport-transfers/haifa/" } ], checklist: ["Confirm luggage and vehicle size.", "If travelling to a ship, share boarding deadlines.", "Request the exact Haifa hotel or terminal entrance."] },
-      { id: "bus", name: "Bus 905 (limited)", time: "About 110–125+ min when available", cost: "Distance-based fare; limited service", bestFor: "Flexible arrivals within its window", doorToDoor: "No", availability: "Limited departures on Saturday night and early Sunday morning", comparison: { cost: "Distance-based", advantages: "Low-cost direct bus when available", drawbacks: "Limited weekend departures and possible additional transport within Haifa" }, heading: "Bus 905 from the airport to Haifa: limited weekend service", paragraphs: [
+      { id: "bus", name: "Bus 905 (limited)", time: "About 110–125+ min when available", cost: "Distance-based fare; limited service", bestFor: "Arrivals that coincide with the bus timetable", doorToDoor: "No", availability: "Limited departures on Saturday night and early Sunday morning", comparison: { cost: "Distance-based", advantages: "Low-cost direct bus when available", drawbacks: "Limited weekend departures and possible additional transport within Haifa" }, heading: "Bus 905 from the airport to Haifa: limited weekend service", paragraphs: [
         "Line 905 appears in published journey-planner listings as a limited airport-to-Haifa bus service, mainly around Saturday night and early Sunday. It may not run on your arrival date. Check the live timetable and boarding stop before relying on it, and allow time to clear passport control and collect luggage.",
-        "Published line 905 stop lists include Haifa Hof HaCarmel and HaMifratz Central. Confirm the stops of the departure shown for your travel date; reaching the German Colony or Center HaShmona requires another connection. The fare for bus 905 depends on the distance travelled. Regular buses generally require a loaded Rav-Kav or supported payment app rather than cash to the driver; see the getting around Israel guide."
+        "Published line 905 stop lists include Haifa Hof HaCarmel and HaMifratz Central. Confirm the stops of the departure shown for your travel date; reaching the German Colony or Center HaShmona requires another connection. The fare for bus 905 depends on the distance travelled. Pay for regular bus journeys with a loaded Rav-Kav or supported payment app. Drivers generally do not accept cash. My getting around Israel guide explains the available payment methods."
       ], inlineLinks: [{ text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" } ], checklist: ["Check departure times for your arrival date.", "Check the exact Terminal 3 boarding stop and city destination.", "Consider a train (when running) or taxi as an alternative."] },
       { id: "rental", name: "Rental car", time: "About 75–110+ min driving plus collection", cost: "Rental + insurance, tolls, fuel and parking", bestFor: "A northern Israel road trip", doorToDoor: "Yes, where permitted", availability: "Collection hours vary", comparison: { cost: "Rental + extras", advantages: "Flexible for further northern Israel travel", drawbacks: "Collection hours, hills, tolls and parking" }, heading: "Should you rent a car at the airport?", paragraphs: [
         ...commonRental, "A rental can be useful if Haifa is a base for Akko (Acre), Nazareth, the Sea of Galilee or other northern road trips. If you're spending just a few days in Haifa, buses and taxis may be more convenient than renting a car. If you're planning to explore northern Israel, compare rental-car options on DiscoverCars. You can also plan a separate visit to Akko using the Akko travel guide."
-      ], inlineLinks: [{ text: "Akko travel guide", to: "/attractions/akko-acre/" }, { text: "DiscoverCars", to: "/car-rental/" } ], checklist: ["Ask about parking at your Haifa hotel.", "Compare Highway 6 toll handling.", "Check desk hours if arriving on Shabbat."] },
+      ], inlineLinks: [{ text: "Akko travel guide", to: "/attractions/akko-acre/" }, { text: "DiscoverCars", to: "/car-rental/" } ], checklist: ["Ask about parking at your Haifa hotel.", "Check how your rental company charges for Highway 6 tolls.", "Check desk hours if arriving on Shabbat."] },
     ],
     stations: [
       { name: "Haifa Hof HaCarmel", time: "About 80–85 min", usefulFor: "Southern Haifa, Carmel Beach, MATAM and bus connections." },
@@ -367,7 +367,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { area: "Southern Haifa / MATAM", station: "Haifa Hof HaCarmel", onward: "Use local transport for the nearby business district or beach." },
       { area: "Bat Galim / Rambam", station: "Haifa Bat Galim", onward: "Walk or take a short taxi ride to the address." },
       { area: "Downtown / German Colony", station: "Haifa Center HaShmona", onward: "Walk or take a short taxi ride toward Ben Gurion Boulevard." },
-      { area: "Carmel Center / hilltop hotels", station: "Haifa Center HaShmona", onward: "Connect to an uphill bus or taxi; allow for the steep climb." },
+      { area: "Carmel Center / hilltop hotels", station: "Haifa Center HaShmona", onward: "Take a bus or taxi up to Carmel Center." },
       { area: "Haifa Port / cruise terminal", station: "Haifa Center HaShmona", onward: "Check your ship's passenger entrance and check-in time before continuing." },
     ],
     connections: [
@@ -381,7 +381,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "Older airport shared-taxi listings may no longer be valid. Check the Sherut in Israel guide and airport Shabbat transport guide for current options."
     ],
     advice: [
-      "For a cruise departure, allow a generous margin between landing and ship check-in.",
+      "Allow plenty of time between your flight's arrival and your cruise check-in deadline.",
       "Confirm luggage space and child seats if booking a standard taxi or private vehicle.",
       "If Haifa is your base for northern day trips, compare rental-car costs with rail and taxis.",
     ],
@@ -392,7 +392,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Is there a direct train from Ben Gurion Airport to Haifa?", a: "Direct trains are generally available during regular rail operation, but stops, frequency and service disruptions vary. Check Israel Railways for your destination station and travel date." },
       { q: "Which station is best for Haifa's German Colony?", a: "Haifa Center HaShmona is a convenient station for downtown Haifa and the German Colony. Check your hotel's address and the walking distance or taxi ride from the station." },
       { q: "When does airport bus 905 run?", a: "Bus 905 has a very limited timetable, mainly around Saturday night and early Sunday. Check departures for your travel date and keep a train or taxi alternative." },
-      { q: "Are there airport sheruts to Haifa?", a: "Do not rely on older shared airport-taxi listings. Check current transport options or arrange an authorized taxi or private transfer." },
+      { q: "Are there airport sheruts to Haifa?", a: "The former Amal shared airport taxi service to Haifa is no longer operating. You can take an authorized airport taxi or arrange a private transfer." },
       { q: "How do I get from Ben Gurion Airport to Haifa's cruise terminal?", a: "You can take the train and arrange the final journey from the station, or book a direct vehicle. Confirm your ship's passenger entrance and check-in deadline, and allow time for luggage, traffic and possible delays." },
       { q: "Which Haifa railway station should I use for a Mount Carmel hotel?", a: "Haifa's railway stations are along the coast. Most hotels on Mount Carmel require a short bus or taxi ride from the station." },
       { q: "Can I get an Uber from Ben Gurion Airport to Haifa?", a: "No. Uber passenger rides are not available in Israel as of November 2026. Use an official airport taxi or a confirmed private transfer." },
@@ -468,16 +468,16 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     privatePath: "/airport-transfers/ein-bokek/",
     privateLabel: "Request a private Ein Bokek transfer",
     options: [
-      { id: "rail", name: "Train + bus via Jerusalem", time: "Roughly 3–4+ hours with connections", cost: "About ₪40 per adult (₪21 train + ₪19 bus)", bestFor: "Daytime arrivals, light luggage", doorToDoor: "No", availability: "Requires a bus connection in Jerusalem", comparison: { cost: "≈₪40 total", advantages: "Usually the least expensive option", drawbacks: "Train–bus transfer, early last bus, hotel-stop walk" }, heading: "Train and bus via Jerusalem: the budget option", paragraphs: [
+      { id: "rail", name: "Train + bus via Jerusalem", time: "Roughly 3–4+ hours with connections", cost: "About ₪40 per adult (₪21 train + ₪19 bus)", bestFor: "Daytime arrivals, light luggage", doorToDoor: "No", availability: "Requires a bus connection in Jerusalem", comparison: { cost: "≈₪40 total", advantages: "Usually the least expensive option", drawbacks: "Change in Jerusalem, limited evening buses and a possible walk to your hotel" }, heading: "Train and bus via Jerusalem: the budget option", paragraphs: [
         "For a cheaper journey, take the train to Jerusalem–Yitzhak Navon and continue by bus to the Dead Sea. Check the last bus serving your hotel before choosing an airport train departure.",
-        "My getting around Israel guide explains public-transport payment, and the Jerusalem to the Dead Sea guide covers the onward bus."
+        "My getting around Israel guide explains how to pay for public transport, and the Jerusalem to the Dead Sea guide provides details of the bus journey."
       ], inlineLinks: [
         { text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" },
         { text: "Jerusalem to the Dead Sea guide", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
       ], checklist: ["Check train and bus timetables for your travel date and reserve any required free train voucher.", "Check the stops, seat reservation requirements and last departure of bus lines 486 and 444.", "Allow time for passport control, baggage collection and the transfer from Yitzhak Navon railway station to Jerusalem Central Bus Station."] },
       { id: "taxi", name: "Official airport taxi", time: "About 1h 45m–2h 30m+ after pickup", cost: "Regulated meter; check current tariff", bestFor: "On-arrival direct ride to a resort", doorToDoor: "To accessible hotel entrance", availability: "Subject to available licensed taxis", comparison: { cost: "Regulated meter", advantages: "Direct airport-to-hotel ride, including Shabbat", drawbacks: "High and variable long-distance meter fare" }, heading: "Official airport taxi to Ein Bokek or Neve Zohar", paragraphs: [
         ...commonTaxi,
-        "The total on this longer journey depends on the regulated tariff, time, distance and permitted extras. See my official airport taxi guide for pickup instructions and the taxi fares in Israel guide for how metered fares are calculated.",
+        "The taxi fare depends on the regulated tariff, journey time, distance and any permitted additional charges. See my official airport taxi guide for pickup instructions and the taxi fares in Israel guide for how metered fares are calculated.",
         "Give the driver your complete hotel name: Ein Bokek, Hamei Zohar, Neve Zohar and Ein Gedi are distinct destinations. Check luggage space, payment, any planned stop and hotel access before leaving the airport. There is no Uber passenger-car service in Israel; my Uber alternatives guide explains available apps."
       ], inlineLinks: [
         { text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" },
@@ -486,8 +486,8 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ], checklist: ["Order through the official airport process, keeping the ride code and receipt.", "Confirm your hotel's drop-off point and make sure the taxi has enough space for your luggage.", "Allow for the cost of a long-distance metered taxi ride."] },
       { id: "private", name: "Pre-booked private transfer", time: "About 1h 45m–2h 30m+ after pickup", cost: "Published weekday vehicle starting rate; written quote", bestFor: "Families, several bags, late arrival", doorToDoor: "To agreed hotel entrance", availability: "Only after confirmation", comparison: { advantages: "Confirmed vehicle and agreed meeting point", drawbacks: "Must be booked and confirmed; costlier than public transport" }, heading: "When a pre-booked transfer is useful", paragraphs: [
         ...commonTransfer,
-        "A private transfer can be convenient for families, late arrivals and travellers with extra luggage because the vehicle and price are arranged in advance. Provide the hotel, flight details and full luggage list. See my private transfer to Ein Bokek page for starting prices and a personal quote.",
-        "If you'd like to visit Masada or Ein Gedi on the way, ask for a separate quote that includes the extra stop and waiting time. The Masada visitor guide can help you plan how long to spend there."
+        "A private transfer can be convenient for families, late arrivals and travellers with extra luggage because the vehicle and price are arranged in advance. Send me your hotel name, flight details, passenger count and luggage details. See my private transfer to Ein Bokek page for starting prices and a personal quote.",
+        "If you'd like to visit Masada or Ein Gedi on the way, I can provide a quote that includes the sightseeing stop and waiting time. The Masada visitor guide can help you plan how long to spend there."
       ], inlineLinks: [
         { text: "private transfer to Ein Bokek page", to: "/airport-transfers/ein-bokek/" },
         { text: "Masada visitor guide", to: "/attractions/masada/" },
@@ -522,15 +522,15 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "For a self-drive option, check that the car-rental counter is open for your arrival and that desert road access is safe on that date.",
     ],
     advice: [
-      "Work backward from the last bus serving your hotel's stop.",
+      "Plan your train journey around the last bus from Jerusalem to your hotel.",
       "Carry drinking water for any outdoor walk between a bus stop and your hotel.",
       "Check Route 90 closures and desert flood warnings before driving.",
-      "A missed final bus can mean a costly long-distance taxi from Jerusalem.",
+      "If you miss the last bus, you may need to pay for a long-distance taxi from Jerusalem to the Dead Sea.",
     ],
     faqs: [
       { q: "Do I need to reserve a seat on bus 444 or 421?", a: "Egged lists routes 444 and 421 as reserved-seat services. Check availability and the current reservation instructions before travel, and allow time to reach the correct departure platform." },
       { q: "How do I pay for the airport train and Dead Sea bus?", a: "Train tickets are available at Ben Gurion Airport railway station, with accepted Rav-Kav or payment-app options where supported. The bus fare is generally about ₪19; use an accepted payment method or Egged's advance seat-booking process where required." },
-      { q: "Is bus 421 via Tel Aviv a good alternative?", a: "Bus 421 from Tel Aviv–Savidor runs infrequently and requires a seat reservation. It is only useful if you can reach the departure on time from the airport. Travelling via Jerusalem is usually easier." },
+      { q: "Is bus 421 via Tel Aviv a good alternative?", a: "Bus 421 from Tel Aviv–Savidor runs infrequently and requires a seat reservation. Allow enough time to reach Tel Aviv Savidor station before departure. For most airport arrivals, travelling via Jerusalem is easier." },
       { q: "What if road 90 is closed because of flooding?", a: "Check police and official road notices, and follow closures. Flash floods can make the road dangerous; do not drive through a flooded roadway or assume a hired vehicle can legally bypass a closure." },
       { q: "Is there a direct train from Ben Gurion Airport to Ein Bokek?", a: "No. There is no railway station in Ein Bokek. A common lower-cost route is the train to Jerusalem–Yitzhak Navon followed by a scheduled Dead Sea bus, when both services operate." },
       { q: "Is there a direct bus from Ben Gurion Airport to the Dead Sea?", a: "There is no regular direct bus from the airport to Ein Bokek. The usual public transport route is by train to Jerusalem, followed by an Egged bus to the Dead Sea. Check the timetable for your travel date." },
