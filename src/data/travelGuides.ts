@@ -776,7 +776,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     title: "Getting Around Israel: Trains, Buses, Taxis & Travel Tips",
     description: "How to travel around Israel by train, bus, light rail, sherut, taxi or car. Practical Rav-Kav fares, Jerusalem train vouchers, Shabbat travel and city connections.",
     intro: "Planning how to get around Israel? This guide compares trains, buses, light rail, taxis and private journeys, with practical advice on fares, transfers and Shabbat travel.",
-    answer: "For journeys between Tel Aviv, Jerusalem and Haifa, compare trains and buses alongside the connection to your final address. In cities, walk or use local buses and light rail; for remote attractions, a rental car, tour or private driver may save time. Pay for most public transport with a loaded Rav-Kav or an approved ticketing app, and plan separately for Shabbat and holidays.",
+    answer: "When travelling between Tel Aviv, Jerusalem and Haifa, consider both the train or bus journey and the distance to your hotel. In cities, walk or use local buses and light rail; for remote attractions, a rental car, tour or private driver may save time. Pay for most public transport with a loaded Rav-Kav or an approved ticketing app, and plan separately for Shabbat and holidays.",
     topics: ["transportation", "destinations", "itineraries", "tips"],
     updatedAt: "2026-11-24",
     photo: {
@@ -805,14 +805,14 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "public-transport", title: "Trains, buses and light rail",
         paragraphs: [
-          "Trains are useful between major cities; buses extend the network to smaller towns. Light rail and local buses work well along operating urban corridors. Compare the full trip to your hotel, including station access and changes.",
+          "Trains are useful between major cities; buses extend the network to smaller towns. Light rail and local buses are convenient for getting around cities. Consider the entire journey to your hotel, including transfers and walking distances.",
         ],
         subsections: [
           {
             id: "israel-trains", title: "Israel Railways and Jerusalem train vouchers",
             paragraphs: [
               "Israel Railways serves Ben Gurion Airport, Tel Aviv, Jerusalem, Haifa, Akko, Be'er Sheva and other destinations. Jerusalem–Yitzhak Navon is outside the Old City, Tel Aviv's stations are inland, and many Haifa hotels sit uphill from the coastal line. For terminal connections, see my airport arrival guide.",
-              "For trains to or from Jerusalem–Yitzhak Navon, Israel Railways currently requires a separate free personal travel voucher as well as a valid ticket. Request the voucher for your selected train from 72 hours before departure. Confirm the rule on your actual travel date using the official link below.",
+              "For trains to or from Jerusalem–Yitzhak Navon, Israel Railways currently requires a separate free personal travel voucher as well as a valid ticket. Request the voucher for your selected train from 72 hours before departure. Check whether the voucher is still required before travelling.",
             ],
             inlineLinks: [{ text: "my airport arrival guide", to: travelGuidePaths.arrival }],
             photo: { src: navonPlatform, alt: "Platforms at Jerusalem–Yitzhak Navon railway station" },
@@ -834,9 +834,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-light-rail", title: "Urban rail, Metronit and Haifa cable cars",
             paragraphs: [
-              "In Jerusalem, the Red Line serves the city centre and approaches to the Old City. The first Green Line L3 service opened in August 2026 and was extended in November from the Malha area via the centre to Damascus Gate. Check the current operating map: later planned extensions are separate from the lines already running.",
-              "Greater Tel Aviv's Red Line links parts of Tel Aviv–Jaffa, Ramat Gan, Bnei Brak, Petah Tikva and Bat Yam. In Haifa, the Metronit rapid-bus network, Carmelit underground funicular and Rakbalit transit cable car serve different corridors. The tourist cable car near Bat Galim is a different service.",
-              "Use the fare and validation method accepted by your service. For light rail, validate before boarding.",
+              "In Jerusalem, the Red Line serves the city centre and approaches to the Old City. The first Green Line L3 service opened in August 2026 and was extended in November from the Malha area via the centre to Damascus Gate. Use the latest route map to see which stations are open.",
+              "Greater Tel Aviv's Red Line links parts of Tel Aviv–Jaffa, Ramat Gan, Bnei Brak, Petah Tikva and Bat Yam. In Haifa, the Metronit buses, Carmelit underground railway and Rakbalit cable car connect different parts of the city. The tourist cable car near Bat Galim is a different service.",
+              "Use the correct ticket or payment app for each transport service. For light rail, validate before boarding.",
             ],
             photo: { src: jerusalemLightRail, alt: "Jerusalem light rail train by a city station" },
             highlightedLinks: [{ label: "Jerusalem light rail - official service updates", href: "https://j-lrt.co.il/updates/", context: "Operating lines, stations, service notices and planned extensions." }],
@@ -863,8 +863,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-ravkav", title: "Choosing Rav-Kav or a ticketing app",
             paragraphs: [
-              "Visitors can purchase an anonymous Rav-Kav without an Israeli ID or personal photo at selected sales points. Load a suitable fare or pass in advance. Compatible phones can add value using Rav-Kav Online, and the card works as a practical backup when mobile data is unavailable.",
-              "Approved apps including Moovit and Rav-Pass can validate eligible journeys. Set up your payment method before travelling and follow the instructions on buses, at rail gates and on light rail. For mobile data during your visit, see my Israel eSIM guide.",
+              "Visitors can purchase an anonymous Rav-Kav without an Israeli ID or personal photo at selected sales points. Load a suitable fare or pass in advance. You can top up your Rav-Kav using a compatible phone. The card also works without mobile internet.",
+              "You can pay for supported journeys using apps such as Moovit and Rav-Pass. Set up your payment method before travelling and follow the instructions on buses, at rail gates and on light rail. For mobile data during your visit, see my Israel eSIM guide.",
             ],
             inlineLinks: [{ text: "my Israel eSIM guide", to: travelGuidePaths.esim }],
             highlightedLinks: [{ label: "Rav-Kav Online - visitor instructions", href: "https://ravkavonline.co.il/en/public-transport-in-israel", context: "Where to obtain, load and use Rav-Kav, including fare and transfer guidance." }],
@@ -900,7 +900,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-taxis", title: "Licensed taxis and booking apps",
             paragraphs: [
-              "Taxis can be booked at taxi stands, via your hotel or through Gett or Yango where supported. Confirm the pickup, payment and fare basis. Uber and Lyft currently do not offer passenger rides in Israel; my Uber alternatives guide compares the local booking choices.",
+              "Taxis can be booked at taxi stands, via your hotel or through Gett or Yango where supported. Confirm where the taxi will collect you, how the fare is calculated and how you can pay. Uber and Lyft currently do not offer passenger rides in Israel; my Uber alternatives guide compares the local booking choices.",
             ],
             inlineLinks: [{ text: "Uber alternatives guide", to: travelGuidePaths.uber }],
             sourceIds: ["guide-gett-app", "guide-yango-israel", "guide-uber-availability", "taxi-fares-2026"],
@@ -917,7 +917,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "destinations", title: "Getting around cities and regions",
         paragraphs: [
-          "Travel time depends on where you stay and how you connect from the nearest station. These practical pointers help you choose the right local guide.",
+          "Travel time depends on where you stay and how you connect from the nearest station.",
         ],
         subsections: [
           {
@@ -941,7 +941,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-haifa", title: "Haifa and Mount Carmel",
             paragraphs: [
-              "Haifa's railway stations lie near the coast; much of the city climbs Mount Carmel. Combine buses, Metronit and the Carmelit where useful, and plan a taxi or uphill connection to your accommodation. See my Haifa attractions guide and airport-to-Haifa guide.",
+              "Haifa's railway stations lie near the coast; much of the city climbs Mount Carmel. Use buses, the Metronit or Carmelit to get around Haifa. A taxi can be convenient for reaching hotels higher up Mount Carmel. See my Haifa attractions guide and airport-to-Haifa guide.",
             ],
             inlineLinks: [
               { text: "Haifa attractions guide", to: "/attractions/haifa/" },
@@ -952,9 +952,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-galilee", title: "Tiberias, the Galilee and the Sea of Galilee",
             paragraphs: [
-              "Regional buses connect Tiberias, Nazareth and other towns, but many attractions around the Sea of Galilee are separated by long distances. Check the last bus and the walking distance from its stop. A rental car, private driver or day tour can help with multiple sites; the Tiberias accommodation guide compares convenient bases.",
+              "Regional buses connect Tiberias, Nazareth and other towns, but many attractions around the Sea of Galilee are separated by long distances. Check the last bus and the walking distance from its stop. A rental car, private driver or day tour makes it easier to visit several sites around the lake. See my Tiberias hotel guide for places to stay.",
             ],
-            inlineLinks: [{ text: "Tiberias accommodation guide", to: "/travel-blog/best-hotels-in-tiberias/" }],
+            inlineLinks: [{ text: "Tiberias hotel guide", to: "/travel-blog/best-hotels-in-tiberias/" }],
           },
           {
             id: "israel-eilat", title: "Eilat, the Negev and the Dead Sea",
@@ -988,7 +988,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-drivers", title: "Private driver or organized tour?",
             paragraphs: [
-              "A private driver provides transport for your agreed itinerary; guiding, admission tickets and extra stops depend on the arrangement. A guided tour may include more fixed sightseeing services. Compare hours, pickup, vehicle size and total price. See my private driver page or the tours and day trips directory.",
+              "A private driver provides transport for your agreed itinerary; guiding, admission tickets and extra stops depend on the arrangement. An organised tour usually follows a set sightseeing itinerary. Compare hours, pickup, vehicle size and total price. See my private driver page or the tours and day trips directory.",
             ],
             inlineLinks: [
               { text: "private driver page", to: "/private-driver-in-israel/" },

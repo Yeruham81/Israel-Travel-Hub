@@ -13,11 +13,11 @@ export type HaifaMuseumEntry = {
 export const haifaMuseumAreas: {id: HaifaMuseumArea; name: string; intro: string}[] = [
   {
     id: "downtown", name: "Downtown, Wadi Nisnas & German Colony",
-    intro: "The City Museum and Haifa Museum of Art suit a lower-city cultural outing. The Railway Museum is farther east at historic Haifa East station; check the route before combining all three."
+    intro: "Combine the City Museum and Haifa Museum of Art in a visit to downtown Haifa. The Railway Museum is farther east at historic Haifa East station; check the route before combining all three."
   },
   {
     id: "hadar", name: "Hadar: science & artists' houses",
-    intro: "MadaTech makes a substantial family visit in the historic Technion building. Hermann Struck's former home is a smaller art-history stop elsewhere in Hadar, with its own opening schedule."
+    intro: "Families can easily spend several hours exploring MadaTech in the historic Technion building. Hermann Struck's former home is a smaller art-history stop elsewhere in Hadar, with its own opening schedule."
   },
   {
     id: "carmel", name: "Carmel Centre & University of Haifa",
@@ -48,7 +48,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     admission: "Adult ₪30 on the municipal price list; check exhibition and ticket availability.",
     openingDays: "Usually Sun, Tue–Wed, Sat 10:00–16:00; Thu 10:00–18:00; Fri 10:00–14:00. Mon closed, but may close for exhibition installation.",
     booking: "Check that an exhibition is open before travelling; temporary changeovers can close the building.",
-    intro: "The City Museum occupies a restored Templer-era building in the German Colony. Its exhibitions explore Haifa's different communities and evolving urban identity.",
+    intro: "The City Museum occupies a restored Templer-era building in the German Colony. Its exhibitions explore Haifa's diverse communities and the city's changing character.",
     highlights: ["Changing exhibitions about the city's architecture, people and social history.", "A convenient pairing with Ben Gurion Avenue and views towards the Bahá'í terraces."],
     tip: "Make this part of a German Colony walk; the museum sometimes closes between exhibitions, so check the day's programme before setting out.",
     url: "https://www.hcm.org.il/eng", featured: false
@@ -73,10 +73,10 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     admission: "Admission varies by date and eligibility; children under 5 enter free with an advance-issued ticket.",
     openingDays: "Changes by date, season and school holidays; use the official live opening calendar.",
     booking: "Book a dated admission ticket online in advance to secure your preferred visit.",
-    intro: "MadaTech fills the historic Technion campus with interactive exhibitions, science demonstrations and outdoor installations. It is one of the strongest choices for families, but also rewarding for adults who enjoy science.",
+    intro: "MadaTech fills the historic Technion campus with interactive exhibitions, science demonstrations and outdoor installations. It's an excellent choice for families and anyone interested in science.",
     highlights: ["Hands-on science and technology experiences across several exhibition areas.", "The outdoor science park and programmes that change throughout the year."],
     highlightsForFamilies: "Plan around a three-hour visit, allow more time with younger children, and bring spare clothes if the water activities are operating.",
-    tip: "I would make MadaTech the main event of a museum day. The outdoor science garden is especially useful when the weather is good.",
+    tip: "I would make MadaTech the main event of a museum day. Don't miss the outdoor science garden on a sunny day.",
     url: "https://www.madatech.org.il/en/", ticketUrl: "https://tickets.madatech.org.il/en/", featured: true
   },
   {
@@ -86,9 +86,9 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     admission: "Free general admission according to Haifa Museums; check separately for workshops or special activities.",
     openingDays: "Usually Sun, Tue–Wed 10:00–16:00; Thu 10:00–18:00; Fri 10:00–14:00. Mon and Sat closed.",
     booking: "Check the exhibition programme and access arrangements.",
-    intro: "Housed in artist Hermann Struck's former home, this smaller museum introduces his printmaking work, personal objects and the artistic world of the early twentieth century. Exhibitions also explore the printmaking medium.",
+    intro: "Housed in artist Hermann Struck's former home, this smaller museum introduces his printmaking work, personal objects and the artistic world of the early twentieth century. Exhibitions also explore different printmaking techniques.",
     highlights: ["The artist's historic home, furnishings and studio atmosphere.", "Printmaking exhibitions and original works connected with Struck's career."],
-    tip: "This is a compact specialist visit, best for art lovers. Check the current exhibition before making a special trip up to Hadar.",
+    tip: "This small museum is particularly appealing to art lovers. Check the current exhibition before making a special trip up to Hadar.",
     url: "https://www.shm.org.il/eng"
   },
   {
@@ -112,7 +112,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     booking: "Do not plan an interior visit until the operator announces reopening.",
     intro: "The museum is dedicated to the painter Mané-Katz and the collection he left to Haifa. Works from the collection may be shown elsewhere while the historic museum undergoes renovation.",
     highlights: ["Mané-Katz paintings and works relating to the School of Paris.", "Jewish ceremonial objects and the artist's personal collection when the museum reopens."],
-    tip: "For now, treat the building as a possible exterior landmark only. The official Haifa Museums site is the best place to follow reopening notices.",
+    tip: "You can still see the historic building from outside during renovations. The official Haifa Museums site is the best place to follow reopening notices.",
     url: "https://www.mkm.org.il/eng", closureNote: "Closed for renovation (interior visits unavailable)"
   },
   {
@@ -125,7 +125,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     booking: "General entry is free; confirm access to particular galleries and groups in advance.",
     intro: "The Reuben and Edith Hecht Museum is inside the University of Haifa campus. Archaeological finds, ancient crafts, the Ma'agan Michael shipwreck and art galleries make it a rewarding stop for visitors interested in the region's long history.",
     highlights: ["Archaeology from the Canaanite period onwards and displays of ancient daily life.", "The ancient Ma'agan Michael ship exhibition and art collections."],
-    tip: "Allow time for the journey to the university high above the centre. It is worth visiting, but it is not a short walk from Tikotin or the German Colony.",
+    tip: "Allow time for the journey to the university high above the centre. I recommend visiting the Hecht Museum separately from Tikotin and the German Colony.",
     url: "https://mushecht.haifa.ac.il/", featured: true
   },
   {

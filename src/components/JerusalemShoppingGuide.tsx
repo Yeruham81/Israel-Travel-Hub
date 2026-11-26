@@ -57,7 +57,7 @@ const faqs = [
   { q: "Can I shop in Jerusalem on Shabbat?", a: "Many city-centre shops and Mahane Yehuda market stalls close for Shabbat. The First Station hosts food and cultural activities on Saturdays, but its published shopping hours are 18:00–22:00. Check the business or event you want before setting out." },
   { q: "Can tourists get a VAT refund on purchases in Israel?", a: "Eligible tourists can apply for a VAT refund on qualifying goods bought at participating businesses, subject to the Israel Tax Authority's rules and documentation. Ask the retailer for the required paperwork and check the official procedure before departure." },
   { q: "Should I bargain in Jerusalem's markets?", a: "In some traditional market stalls polite bargaining is welcome; fixed-price shops, galleries and chain stores work differently. Confirm the final price before paying." },
-  { q: "When does the Bezalel Arts Fair take place?", a: "The arts fair is associated with Friday mornings in the Bezalel and Shatz pedestrian-street area. Dates, hours and the programme may change with weather or special events, so I recommend checking the current organiser listing before going." },
+  { q: "When does the Bezalel Arts Fair take place?", a: "The arts fair usually takes place on Friday mornings around Bezalel and Shatz streets. Dates, hours and the programme may change with weather or special events, so I recommend checking the current organiser listing before going." },
 ];
 
 function OfficialLink({ href, children }: { href: string; children: React.ReactNode }) {
@@ -169,7 +169,7 @@ export function JerusalemShoppingGuide() {
 
       <section id="choose" aria-labelledby="choose-h" className="mt-10 scroll-mt-24">
         <Heading id="choose" title="Where should you shop in Jerusalem?"
-          intro="Pick the shopping experience you want, then jump to the full description, location and practical tips." />
+          intro="Discover the best places to shop in Jerusalem." />
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
           {shoppingTopPicks.map((pick, index) => {
             const Icon = icons[index]!;
@@ -210,7 +210,7 @@ export function JerusalemShoppingGuide() {
 
       <section id="shopping-map" aria-labelledby="shopping-map-h" className="mt-12 scroll-mt-24">
         <Heading id="shopping-map" title="Jerusalem shopping map"
-          intro="See which places make sense together on foot and which need a separate journey. Select a destination to zoom in." />
+          intro="Find shopping areas within walking distance of each other. Select a destination to zoom in." />
         <div className="overflow-hidden rounded-xl border bg-card">
           <div className="flex flex-col gap-3 border-b p-4 sm:flex-row sm:items-end">
             <label htmlFor="jerusalem-shop-select" className="w-full min-w-0 text-sm font-semibold sm:w-auto sm:flex-1">

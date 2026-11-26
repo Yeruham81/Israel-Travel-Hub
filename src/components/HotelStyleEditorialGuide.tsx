@@ -45,7 +45,7 @@ type HotelEditorNote = {
 const deadSeaHotelNotes: Record<string, HotelEditorNote> = {
   "ds-kayma": {
     kind: "Luxury resort",
-    summary: "An intimate, low-rise luxury stay with an infinity pool and direct access to the Dead Sea shore.",
+    summary: "A small luxury hotel with low-rise buildings, an infinity pool and direct beach access.",
     bestFor: "Couples and quieter upscale breaks",
     consider: "Guests must be aged 10 or older; the southern location is less convenient for shops.",
     beach: "Direct beach access",
@@ -66,7 +66,7 @@ const deadSeaHotelNotes: Record<string, HotelEditorNote> = {
   },
   "ds-nevo": {
     kind: "Spa resort",
-    summary: "A substantial Ein Bokek resort combining pools, the Esprit Spa and convenient beach services.",
+    summary: "A large resort in Ein Bokek with swimming pools, the Esprit Spa and beach facilities.",
     bestFor: "First visits and mixed-interest groups",
     consider: "Treatments and certain facilities may cost extra; check spa entry policies.",
     beach: "Beach beside the hotel",
@@ -101,7 +101,7 @@ const deadSeaHotelNotes: Record<string, HotelEditorNote> = {
   },
   "ds-leonardo-plaza": {
     kind: "Family hotel",
-    summary: "A self-contained southern hotel with family-room options and resort facilities.",
+    summary: "A resort in the southern hotel district with family rooms and leisure facilities.",
     bestFor: "Families comparing package value",
     consider: "Confirm the pathway or shuttle to the beach and its current timetable.",
     beach: "Pathway or shuttle to the beach",
@@ -130,7 +130,7 @@ const bookingTips = [
   { title: "Check family facilities", text: "Ask about the dates, hours and age limits for children's clubs, slides and outdoor pools." },
   { title: "Select the exact room", text: "Sea views, private pools, connecting rooms and accessible entrances depend on the room category." },
   { title: "Plan the arrival and return", text: "Confirm the hotel entrance, bus stop or transfer, especially on Friday evenings and Jewish holidays." },
-  { title: "Compare the complete total", text: "Check taxes, spa extras, parking, cancellation deadlines and all guests before paying." },
+  { title: "Compare the total cost", text: "Check taxes, spa extras, parking, cancellation deadlines and all guests before paying." },
 ] as const;
 
 const groupCaptions: Record<string, { title: string; eyebrow: string; advice: string }> = {
@@ -147,7 +147,7 @@ const groupCaptions: Record<string, { title: string; eyebrow: string; advice: st
   family: {
     title: "Family & all-inclusive hotels",
     eyebrow: "Activities, meals and beach days",
-    advice: "Leonardo Club suits families seeking an activity-led package, while VERT offers a more conventional resort stay near the Ein Bokek promenade.",
+    advice: "Leonardo Club is ideal for families looking for entertainment and activities, while VERT offers a resort holiday near the Ein Bokek promenade.",
   },
   value: {
     title: "Best-value stays",

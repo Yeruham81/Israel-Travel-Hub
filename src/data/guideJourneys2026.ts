@@ -216,7 +216,7 @@ export const journeyDestinationGuides = {
     },
     {
       "label": "Bus 231",
-      "text": "Via Beit Jala and the Bab al-Zaqaq area; confirm where to alight"
+      "text": "Via Beit Jala to Bab al-Zaqaq"
     },
     {
       "label": "Bus 234",
@@ -233,12 +233,12 @@ export const journeyDestinationGuides = {
     "rows": [
       [
         "Bus 231",
-        "Independent visitors seeking a lower-cost route towards central Bethlehem",
+        "Budget travellers heading to central Bethlehem",
         "About 20–30 minutes by bus in normal traffic to Bab al-Zaqaq / Beit Jala Road; continue to Manger Square on foot or by local taxi"
       ],
       [
         "Bus 234",
-        "Visitors deliberately using the Checkpoint 300 route",
+        "Visitors crossing Checkpoint 300 on foot",
         "About 15–20 minutes by bus to Checkpoint 300, then the authorised crossing and onward travel"
       ],
       [
@@ -254,7 +254,7 @@ export const journeyDestinationGuides = {
       [
         "Organised tour",
         "First-time visitors wanting an itinerary and return arranged",
-        "Actual Jerusalem departure, sites, guide handover and access rules"
+        "Pickup in Jerusalem, places visited, local guides and entry requirements"
       ],
       [
         "Rental car",
@@ -361,7 +361,7 @@ export const journeyDestinationGuides = {
           "title": "Bus 234: via Checkpoint 300",
           "paragraphs": [
             "Bus 234 travels from Nevi'im Terminal to Checkpoint 300 / Bethlehem Road, taking about 15–20 minutes in normal traffic. For an independent trip, eligible passengers can use the pedestrian crossing when it is operating, then arrange a local taxi or pickup for Manger Square. The bus itself does not go to the church.",
-            "The reported reopening to authorised vehicles and tourist coaches does not make this public-bus route a through service. Agree a meeting point with your local driver or guide, and leave extra time for checks and your return bus to Jerusalem."
+            "Bus 234 still terminates at Checkpoint 300. Agree a meeting point with your local driver or guide, and leave extra time for checks and your return bus to Jerusalem."
           ]
         }
       ],
@@ -375,7 +375,7 @@ export const journeyDestinationGuides = {
       "id": "private-taxi",
       "title": "Private driver or taxi: check where the ride ends",
       "paragraphs": [
-        "An appropriately authorised and insured Palestinian taxi may be able to take eligible visitors from Jerusalem to Bethlehem and back, with waiting time for sightseeing. Confirm that both the driver and vehicle are permitted to complete the journey.",
+        "Visitors who are permitted to enter Bethlehem can arrange a return trip with a Palestinian taxi driver who has the necessary permits and insurance, including time for sightseeing. Confirm that both the driver and vehicle are permitted to complete the journey.",
         "Before booking, confirm the pickup point, permitted route, insurance, sightseeing stops, waiting time and total price, including the return. Remember that a driver may not be a licensed guide.",
         "An Israeli taxi can take eligible travellers towards Checkpoint 300, but a through-trip needs specific driver and vehicle permissions and appropriate insurance. An independent visitor using the pedestrian crossing can arrange a Palestinian taxi or guide on the Bethlehem side."
       ],
@@ -549,7 +549,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Can an Israeli taxi take me directly into Bethlehem?",
-      "a": "Through-travel into Bethlehem depends on the driver's and vehicle's permits and insurance. Israeli taxis generally stop before Checkpoint 300; eligible visitors can use the pedestrian crossing when operating and arrange local transport."
+      "a": "Both the driver and vehicle need the appropriate permits and insurance to enter Bethlehem. Israeli taxis generally stop before Checkpoint 300; eligible visitors can use the pedestrian crossing when operating and arrange local transport."
     },
     {
       "q": "Do I need a passport to visit Bethlehem?",
