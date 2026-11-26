@@ -1,6 +1,6 @@
 import { PrivacyInformationLink } from "@/components/PrivacyInformationLink";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { QuoteSubmissionControls } from "@/components/QuoteSubmissionControls";
@@ -10,7 +10,7 @@ import type { GuideContactCopy } from "@/lib/guide-contact";
 import { TripadvisorReviewsButton } from "@/components/TripadvisorReviewsButton";
 
 // A bottom-of-page contact portrait may repeat a separated introductory author portrait.
-export function HomeContactForm({ context = "homepage", guide, showPortrait = true, showTripadvisorBesidePortraitMobile = false }: { context?: "homepage" | "about" | "taxis"; guide?: GuideContactCopy; showPortrait?: boolean; showTripadvisorBesidePortraitMobile?: boolean }) {
+export function HomeContactForm({ context = "homepage", guide, showPortrait = true, showTripadvisorBesidePortraitMobile = false, subjectRequest }: { context?: "homepage" | "about" | "taxis"; guide?: GuideContactCopy; showPortrait?: boolean; showTripadvisorBesidePortraitMobile?: boolean; subjectRequest?: { value: string } | undefined }) {
   const headingId = guide ? "guide-contact-h" : context === "about" ? "about-contact-h" : context === "taxis" ? "taxis-contact-h" : "home-contact-h";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,6 +19,7 @@ export function HomeContactForm({ context = "homepage", guide, showPortrait = tr
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState("");
   const submission = useQuoteSubmission();
+  useEffect(() => { if (subjectRequest) setSubject(subjectRequest.value); }, [subjectRequest]);
   function update(setter: (value: string) => void, value: string) { setter(value); submission.reset(); setError(""); }
   async function send(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
