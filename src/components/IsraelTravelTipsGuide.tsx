@@ -162,7 +162,7 @@ export function IsraelTravelTipsGuide() {
           <p>Some communities have limited weekend shuttle networks, including the <a href="https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" target="_blank" rel="noopener noreferrer" className={linkClass}>Tel Aviv-area Na'im Busofash service</a>. Taxis and private drivers may operate, subject to availability. These networks are not substitutes for regular national rail or bus service.</p>
           <p>When arriving or changing hotels on Friday or Saturday, verify your exact route, opening hours, luggage needs and check-in arrangements. My <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className={linkClass}>airport travel on Shabbat guide</Link> explains the options, while <Link to="/travel-blog/calendar-of-events/" className={linkClass}>Israel's calendar of events</Link> helps with holiday dates.</p>
         </Topic>
-        <Tip>For Friday arrivals, check your flight's scheduled landing time against the final train or bus and any transfer to your hotel. The final part of the journey is easy to overlook.</Tip>
+        <Tip>For Friday arrivals, check your flight's scheduled landing time against the final train or bus and any transfer to your hotel.</Tip>
       </section>
 
       <section id="plan-your-stay" className="mt-12 scroll-mt-24" aria-labelledby="plan-title">
@@ -202,7 +202,7 @@ export function IsraelTravelTipsGuide() {
       <FaqList faqs={[...travelTipsFaqs]}/>
 
       <section id="related" className="mt-12 scroll-mt-24" aria-labelledby="related-title">
-        <Heading id="related-title" intro="Dive deeper only where you need more detail. These six guides help with the next stage of planning.">Related practical Israel travel guides</Heading>
+        <Heading id="related-title" intro="Explore my other travel guides for more information about planning your trip.">Related practical Israel travel guides</Heading>
         <ul className="grid grid-cols-2 gap-4 lg:grid-cols-3" data-testid="travel-tips-related-guides">
           {related.map(card => <li key={card.href} className="editorial-card-link min-w-0 overflow-hidden rounded-xl border bg-card"><a href={card.href} className="group flex h-full flex-col"><img src={guideHeroPhotoForPath(card.href)?.src ?? card.image} alt={guideHeroPhotoForPath(card.href)?.alt ?? card.alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><h3 className="font-bold group-hover:text-primary">{card.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.description}</p></div></a></li>)}
         </ul>

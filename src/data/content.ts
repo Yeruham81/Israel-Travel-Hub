@@ -113,8 +113,8 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     map: { lat: 31.7816, lon: 35.2199, bounds: [35.2105, 31.7765, 35.2295, 31.7875], reference: "Zion Square / Jaffa Road" },
     overview: [
       "Downtown is the modern center west of the Old City, around Jaffa Road, Zion Square, Ben Yehuda Street and the lanes of Nahalat Shiva. Downtown lies outside the Old City walls, within walking distance of the historic sights.",
-      "For a first visit, this location balances central sights and everyday services. You can start the morning at a café, walk toward Jaffa Gate, and return to restaurants and shopping streets in the evening. Jaffa Road's light rail is useful for moving along the center toward the market and the station area; check its current service for your dates.",
-      "The convenience comes with an urban feel. A room above a lively pedestrian street offers a different stay from an inward-facing room one lane away. If quiet nights or parking matter more than restaurants and walkability, compare the German Colony or a specific hotel away from the busiest streets before deciding.",
+      "Downtown Jerusalem is a convenient choice for first-time visitors, with attractions, shops and restaurants nearby. You can start the morning at a café, walk toward Jaffa Gate, and return to restaurants and shopping streets in the evening. Jaffa Road's light rail is useful for moving along the center toward the market and the station area; check its current service for your dates.",
+      "Rooms overlooking busy pedestrian streets can be noisier than rooms facing an inner courtyard. If quiet nights or parking matter more than restaurants and walkability, compare the German Colony or a specific hotel away from the busiest streets before deciding.",
     ],
     highlights: [
       { name: "Jaffa Road & Zion Square", text: "A useful point of orientation, with light-rail stops and cafés along the surrounding streets." },
@@ -122,8 +122,8 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
       { name: "Jaffa Gate & the Old City", text: "Head east for the Old City. The walk depends on your starting street, hills and the gate you need." },
     ],
     gettingAround: [
-      "From the eastern side of Downtown, allow roughly 10–15 minutes to walk to Jaffa Gate; hotels farther west take longer. Mahane Yehuda is usually a walk of about 10–20 minutes or a short light-rail journey. These are orientation estimates, not timed routes from every hotel.",
-      "Arriving from Jerusalem–Yitzhak Navon station normally involves a separate ride or light-rail journey to your hotel. Many central streets are pedestrianized, so confirm the nearest permitted taxi stop. For a Shabbat arrival, check the actual transport service and your hotel's check-in instructions in advance.",
+      "From the eastern side of Downtown, allow roughly 10–15 minutes to walk to Jaffa Gate; hotels farther west take longer. Mahane Yehuda is usually a walk of about 10–20 minutes or a short light-rail journey. Walking times vary depending on your hotel's location.",
+      "From Jerusalem–Yitzhak Navon station, take the light rail or a taxi to your hotel. Many central streets are pedestrianized, so confirm the nearest permitted taxi stop. For a Shabbat arrival, check the actual transport service and your hotel's check-in instructions in advance.",
     ],
     arrivalTips: ["Ask for the closest vehicle-accessible entrance.", "Check the walking route from your light-rail stop with luggage.", "Light sleepers should ask about inward-facing rooms and nearby bars."],
     bookingTips: ["Check whether breakfast is included in the room rate you choose.", "If you have a car, get the car park's exact location and total charge in writing."],
@@ -146,7 +146,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     overview: [
       "Mamilla and the northern part of King David Street form a hotel district immediately west of the Old City. Mamilla's pedestrian avenue leads toward Jaffa Gate, while King Solomon Street and King David Street connect some of Jerusalem's best-known luxury properties.",
       "The appeal is the combination of location and hotel facilities. You can explore the Old City on foot and return to a modern room, restaurants or a spa, depending on the hotel you choose. Downtown is also accessible on foot, so you do not have to spend every meal in a luxury hotel restaurant.",
-      "This is one of the city's more expensive areas. It has a polished, visitor-oriented atmosphere distinct from Nachlaot's market streets and Baka's residential character. Hotels farther south along King David Street are still convenient, but add walking time compared with a property immediately beside Mamilla Avenue.",
+      "This is one of the city's more expensive areas. Mamilla is known for its upscale hotels, elegant shopping avenue and restaurants. Hotels farther south along King David Street are still convenient, but add walking time compared with a property immediately beside Mamilla Avenue.",
     ],
     highlights: [
       { name: "Mamilla Avenue", text: "An open-air pedestrian shopping avenue connecting the modern hotel district with Jaffa Gate." },
@@ -158,7 +158,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
       "Hotel entrances outside the walls generally make an arrival with luggage simpler than a stay deep inside the Old City. Still, confirm the entrance and parking arrangements, particularly during holidays, events or road closures. Check the distance from your hotel to the nearest light-rail stop.",
     ],
     arrivalTips: ["Use the hotel's street entrance as your airport transfer destination.", "If traveling with children, check how the walk to Jaffa Gate works with a stroller.", "Confirm Friday-evening and Saturday check-in and meal arrangements directly."],
-    bookingTips: ["Book an explicitly described view category if an Old City view is essential.", "Check pool opening dates, children's access and whether spa treatments cost extra."],
+    bookingTips: ["If you want an Old City view, book a room that specifically includes one.", "Check pool opening dates, children's access and whether spa treatments cost extra."],
     faqs: [
       { q: "Am I staying inside the Old City?", a: "No. Mamilla and King David Street are outside the western walls. The advantage is being close to Jaffa Gate while retaining the facilities and vehicle access of a modern hotel district." },
       { q: "Do all rooms have an Old City view?", a: "No. Views vary by hotel, building, floor and room category. Only rely on a view that is explicitly included in the room description you book." },
@@ -178,7 +178,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     overview: [
       "The Old City is the most immersive option if Jerusalem's history and religious sites are the focus of your visit. Its Christian, Armenian, Jewish and Muslim quarters contain sacred places, market lanes and residential streets within the same walls. Staying here lets you experience the lanes before and after the busiest sightseeing hours.",
       "Accommodation is mainly in historic hotels, religious guesthouses and smaller properties. A courtyard, rooftop or historic building can be a memorable part of the stay, but facilities and accessibility vary considerably. Decide which quarter fits your plans before choosing a hotel name.",
-      "The main compromise is practical access. A nearby map pin does not guarantee an easy walk: stairs, hills, crowds and stone paving can make luggage or a stroller difficult. Visitors who need reliable step-free access or door-to-door vehicle arrival should consider accommodation outside the walls and confirm specific arrangements with the hotel.",
+      "The main difficulty is reaching your hotel with luggage. Even a short walk can be difficult with luggage or a stroller because of stairs, steep streets, crowds and uneven paving. Visitors who need reliable step-free access or door-to-door vehicle arrival should consider accommodation outside the walls and confirm specific arrangements with the hotel.",
     ],
     highlights: [
       { name: "Christian & Armenian quarters", text: "Explore around Jaffa Gate, the Church of the Holy Sepulchre and the historic lanes between the quarters." },
@@ -190,7 +190,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
       "Travel between sites mainly on foot and allow extra time beyond a map's distance estimate. Vehicle restrictions and site-entry arrangements can change. A hotel with an elevator does not make the surrounding approach step-free, so discuss the whole route if accessibility is important.",
     ],
     arrivalTips: ["Get the exact gate, permitted drop-off and walking instructions from the hotel before you travel.", "Ask whether luggage help can be arranged and whether it has a separate charge.", "Check stairs both inside the building and on the approach from the gate."],
-    bookingTips: ["Confirm an elevator, room floor and step-free access individually; do not infer them from a general accessibility label.", "Ask about evening reception, nearby food options and the room's outlook before booking."],
+    bookingTips: ["Ask the hotel whether it has an elevator and whether you can reach your room without using stairs.", "Ask about evening reception, nearby food options and the room's outlook before booking."],
     faqs: [
       { q: "Can a taxi take me to the hotel door?", a: "Many lanes have restricted vehicle access, and the appropriate drop-off depends on the property and current rules. Get written arrival instructions from the hotel." },
       { q: "Which quarter should I choose?", a: "Match the quarter to the places you plan to visit, then compare the nearest gate and actual walking route. Jaffa Gate is practical for Mamilla and Downtown; the Jewish Quarter suits extended time around its heritage sites." },
@@ -308,8 +308,8 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     map: { lat: 32.0821, lon: 34.7674, bounds: [34.759, 32.069, 34.775, 32.0915], reference: "Gordon / Frishman beach district" },
     overview: [
       "Tel Aviv's central beachfront follows the promenade beside HaYarkon Street, with Gordon, Frishman and Bograshov beaches providing useful landmarks. This guide focuses on that central strip: the port to the north and Jaffa to the south offer different bases and have their own guides.",
-      "Stay here if an early swim, a sunset walk or an easy return from the beach matters to your trip. The coast also works for a first visit because you can walk inland to restaurants and central streets. The accommodation mix ranges from substantial hotels with leisure facilities to smaller boutique properties just behind the waterfront.",
-      "Expect an urban coastline, with road traffic, people on the promenade and busy public beaches. Sea-facing rooms often carry a premium, while a side view can be very different from a full view. Look at the exact entrance and room description: some properties are across HaYarkon Street, and others sit a block or more inland.",
+      "Stay here if an early swim, a sunset walk or an easy return from the beach matters to your trip. The coast also works for a first visit because you can walk inland to restaurants and central streets. Accommodation ranges from large beachfront hotels with pools and leisure facilities to smaller boutique hotels in nearby streets.",
+      "Expect busy beaches, a lively promenade and traffic along HaYarkon Street. Rooms with a full sea view usually cost more than rooms with a partial sea view. Look at the exact entrance and room description: some properties are across HaYarkon Street, and others sit a block or more inland.",
     ],
     highlights: [
       { name: "Gordon, Frishman & Bograshov beaches", text: "Central beach landmarks for choosing your preferred part of the coast. Check current lifeguard hours and swimming conditions locally." },
@@ -318,10 +318,10 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     ],
     gettingAround: [
       "From the central beaches, Dizengoff Square is often around 10–20 minutes away on foot, depending on the hotel. Jaffa and the port are farther along the coast: compare the actual walking route before deciding to cover both ends of the city in one day.",
-      "The airport train does not deliver you to the promenade. Plan the onward trip from your chosen Tel Aviv station, or arrange a transfer to the hotel's street entrance. If driving, confirm a specific parking space and charge; a nearby public car park is different from hotel parking.",
+      "From the airport train, continue to your beachfront hotel by bus or taxi. Plan the onward trip from your chosen Tel Aviv station, or arrange a transfer to the hotel's street entrance. If driving, confirm a specific parking space and charge; a nearby public car park is different from hotel parking.",
     ],
     arrivalTips: ["Give your driver the hotel's entrance address, which may differ from the promenade frontage.", "Check the current train or bus service for your arrival date, especially Friday evening and Saturday.", "Ask how far you will carry bags from the drop-off, and whether the route has steps."],
-    bookingTips: ["Choose a room explicitly described as full sea view if that is essential; do not infer it from the hotel's location.", "Confirm which pool, breakfast and beach-related services are included for your dates."],
+    bookingTips: ["If you want an unobstructed sea view, book a room specifically advertised with a full sea view.", "Confirm which pool, breakfast and beach-related services are included for your dates."],
     faqs: [
       { q: "Does a beachfront hotel have its own beach?", a: "Tel Aviv's central beaches are public, and hotel arrangements vary. Confirm any advertised beach services directly and check whether a road separates your hotel from the sand." },
       { q: "Is the beachfront convenient for a first visit?", a: "Yes, particularly if you want beach time alongside city sightseeing. The central strip gives access to the promenade and inland cafés; Jaffa and the northern port still require a longer walk or a ride." },
@@ -341,7 +341,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     overview: [
       "This area centers on Dizengoff Square and the surrounding streets, including the nearby stretch of Dizengoff Street, Frishman and Bograshov. Explore central Tel Aviv's neighborhood cafés, restaurants and architecture along this route.",
       "Choose it if you want to leave the hotel on foot and have several directions to explore. You can head west toward the beach, south toward Meir Park and the shopping streets, or spend the evening close to the square. Several boutique hotels occupy buildings with their own histories, making the accommodation part of the neighborhood experience.",
-      "The tradeoff is city noise and a smaller hotel format. A characterful central property may have fewer leisure facilities than a large hotel on the seafront. Some streets are lively late into the evening, and a listing described simply as 'Dizengoff' can be well north of the square.",
+      "Expect some street noise and mostly smaller hotels. Central boutique hotels often have fewer facilities than large beachfront hotels. Some streets are lively late into the evening, and a listing described simply as 'Dizengoff' can be well north of the square.",
     ],
     highlights: [
       { name: "Dizengoff Square", text: "The fountain and surrounding buildings provide a recognizable meeting point and an easy start for a walk through the White City." },
@@ -353,7 +353,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
       "This is a practical base without a rental car. Check the walking route from your bus stop and the hotel's vehicle entrance, particularly if the address faces a pedestrian space. Friday-evening and Saturday transport has different service patterns; verify your exact journey before arrival.",
     ],
     arrivalTips: ["Confirm the hotel is near Dizengoff Square if that is the location you want.", "Ask for the nearest taxi stopping point and how to reach reception with luggage.", "Light sleepers should ask about room orientation, nearby bars and street works."],
-    bookingTips: ["Compare room size and window outlook, particularly in converted historic buildings.", "Check breakfast, parking and any rooftop access against the rate you select."],
+    bookingTips: ["Check room sizes and views, especially in renovated historic buildings.", "Check breakfast, parking and any rooftop access against the rate you select."],
     faqs: [
       { q: "Is this a good alternative to a beachfront hotel?", a: "Yes, if you prefer cafés, architecture and a central city feel. You can still walk to the beach, but you will not have the same immediate access or outlook as a room on the coast." },
       { q: "Are all Dizengoff hotels close to the square?", a: "No. Dizengoff Street continues a long way north. Check the exact address and walking route to the square before booking." },
@@ -373,7 +373,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     overview: [
       "The Old North stretches through residential streets north of the central city toward the Yarkon River. Tel Aviv Port, known locally as the Namal, sits on its coastal edge. The Old North and port cover adjoining areas, so the street you choose affects the atmosphere and your daily walks.",
       "The appeal is a mix of neighborhood cafés, beach access and open space. Independence Park, the northern beaches, the port's waterfront and the Yarkon corridor give families and longer-stay visitors alternatives to a day of shopping or sightseeing. Southern parts of the Old North remain closer to the city center than a hotel right beside the port.",
-      "Do not read 'north' as a guarantee of silence. The port has restaurants and a lively public waterfront, while major roads remain busy. If your itinerary focuses on Jaffa, Carmel Market and the southern neighborhoods, factor in the extra journeys before choosing this base.",
+      "Some parts of the Old North can be lively and noisy, particularly near the port and main roads. The port has restaurants and a lively public waterfront, while major roads remain busy. If your itinerary focuses on Jaffa, Carmel Market and the southern neighborhoods, factor in the extra journeys before choosing this base.",
     ],
     highlights: [
       { name: "Tel Aviv Port boardwalk", text: "Waterfront restaurants and an open walking area at the northern end of the city's coastal route." },
@@ -408,7 +408,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
       "Accommodation within the historic core is limited, and booking platforms often include properties just beyond it. Lilienblum, Herzl and Yehuda HaLevi streets connect Neve Tzedek with the wider southern center; a hotel there may offer easy access without the same quiet-lane setting. Narrow streets and limited parking also make the exact entrance important.",
     ],
     highlights: [
-      { name: "Shabazi Street", text: "The neighborhood's main walking spine, with boutiques, cafés and side lanes to explore." },
+      { name: "Shabazi Street", text: "The neighbourhood's main street, lined with boutiques, cafés and charming side streets." },
       { name: "Suzanne Dellal area", text: "Historic buildings and courtyards around the dance and cultural center form a useful neighborhood landmark; check events separately." },
       { name: "Charles Clore Park & the southern promenade", text: "The nearby coast offers a route toward Jaffa and a break from the enclosed neighborhood streets." },
     ],
