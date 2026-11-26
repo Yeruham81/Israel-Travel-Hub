@@ -31,7 +31,6 @@ import { heritageGuides } from "@/data/guideHeritage2026";
 import { journeyDestinationGuides } from "@/data/guideJourneys2026";
 import { taxiGuideCluster } from "@/data/taxiGuideCluster";
 import { applyJerusalemGuideEditorial } from "@/data/jerusalemClusterEditorial";
-import { sanityUberGuide } from "@/data/generated/sanityUberSnapshot";
 import { christianFaqs, christianToursHero } from "@/data/christianToursGuide";
 import { seniorFaqs, seniorHero, seniorUpdatedAt } from "@/data/seniorToursGuide";
 import { deadSeaAttractionsUpdatedAt } from "@/data/deadSeaAttractionsGuide";
@@ -124,9 +123,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       headers: ["Service", "How it works", "Pricing", "Best for"],
       rows: [
         ["Gett", "Request a licensed taxi through the app; Gett also runs the official airport taxi ordering system", "Regulated metered fare or displayed offer, depending on the booking", "Everyday app bookings and Ben Gurion Airport taxis"],
-        ["Yango", "Request a licensed taxi using the rider app where local drivers are available", "Check the displayed estimate or fixed offer before confirming", "App-based rides in supported areas"],
+        ["Yango", "Book a licensed taxi through the app in areas served by Yango.", "Check the displayed estimate or fixed offer before confirming", "App-based rides in supported areas"],
         ["Licensed taxi or hotel dispatcher", "Use a licensed taxi stand, hail a taxi or ask a hotel or local dispatch office", "Regulated taxi meter and permitted charges; confirm payment method", "Travellers who prefer booking without an app"],
-        ["Pre-booked private transfer", "Arrange a dedicated vehicle and pickup details in advance", "Confirmed quote with agreed vehicle, waiting and cancellation terms", "Airport arrivals, longer routes, groups and extra luggage"],
+        ["Pre-booked private transfer", "Book a private vehicle and agree on the pickup details in advance.", "Confirmed quote with agreed vehicle, waiting and cancellation terms", "Airport arrivals, longer routes, groups and extra luggage"],
       ],
     },
     sections: [
@@ -134,8 +133,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "uber-status",
         title: "Is Uber available in Israel?",
         paragraphs: [
-          "Uber and Lyft currently have no passenger ride-booking service in Israel. For local ride booking, use an operator that serves Israel.",
-          "On 24 March 2026, a proposal concerning app-based rides in private cars passed its first reading in the Knesset. That was a legislative step rather than approval for Uber to begin service. See the Knesset's official announcement for the proposal's recorded status.",
+          "Uber and Lyft currently have no passenger ride-booking service in Israel.",
+          "On 24 March 2026, a proposal concerning app-based rides in private cars passed its first reading in the Knesset. The proposal must pass further legislative stages before the new service can begin. See the Knesset's official announcement for the proposal's recorded status.",
         ],
         externalLinks: [
           { label: "Uber - official Israel information", href: "https://www.uber.com/il/en/" },
@@ -149,7 +148,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "Gett lets you request a licensed taxi, enter your destination and review the booking information. Check the pickup pin, the offered fare or estimate, and your payment method before confirming a ride. Drivers and features vary by location.",
           "Yango is another option for requesting licensed taxis where it operates. Check the pickup location, the quoted or estimated price and the available payment method in the app before booking.",
-          "Download and verify your preferred app before your trip. The official App Store and Google Play listings below take you directly to the passenger apps.",
+          "Download your preferred taxi app and set up your account before travelling. The official App Store and Google Play listings below take you directly to the passenger apps.",
         ],
         externalLinks: [
           { label: "Gett for iPhone", href: "https://apps.apple.com/il/app/id412802326" },
@@ -163,7 +162,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "fares-options",
         title: "Other taxis, fares and payment",
         paragraphs: [
-          "You can also get a taxi from a licensed stand, hail one on the street, call a local dispatcher or ask your hotel to book one. Confirm your exact pickup address, the regulated meter or agreed permitted fare, and how you can pay. My taxis in Israel guide covers passenger rights and booking methods.",
+          "You can also get a taxi from a licensed stand, hail one on the street, call a local dispatcher or ask your hotel to book one. Confirm the pickup location, how the fare will be calculated and the accepted payment methods. My taxis in Israel guide covers passenger rights and booking methods.",
           "Israeli taxi fares are regulated. The total can vary with distance, traffic, time of day and permitted surcharges. An app may display an estimate rather than a fixed fare, so read the booking screen carefully. My taxi fares guide explains meter tariffs and extra charges.",
           "Check whether cash or card payment is available for your booking, especially if you use a foreign-issued card. Around Tel Aviv's pedestrian areas, Jerusalem's Old City or Haifa's steep streets, a precise pickup pin and hotel entrance can make the meeting easier.",
         ],
@@ -179,7 +178,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         photo: hallPhoto,
         paragraphs: [
           "For an immediate licensed taxi, order through Gett or an airport self-service kiosk and save the ride code. At Terminal 3, join the official taxi queue on the ground floor by Exit 03. At Terminal 1, use the main arrivals exit. Show your code when directed to the taxi.",
-          "For a Gett ride scheduled at least two hours in advance, Terminal 3 pickup is on Level 2 by Exit 23. This differs from the on-demand queue at Exit 03. The official Gett airport page explains both arrangements.",
+          "For a Gett ride scheduled at least two hours in advance, Terminal 3 pickup is on Level 2 by Exit 23. This differs from the on-demand queue at Exit 03. See Gett's airport guide for both pickup locations.",
           "A separately booked private transfer can have its own meeting instructions. Follow the confirmation from your operator. For more details, see my Ben Gurion Airport taxis guide or arrange a private airport transfer.",
         ],
         inlineLinks: [
@@ -195,7 +194,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "shabbat",
         title: "Taxi apps during Shabbat and late at night",
         paragraphs: [
-          "Licensed taxis may operate during Shabbat, Jewish holidays and late at night, although driver availability depends on the location. For an airport arrival or another time-sensitive ride, arranging pickup in advance is sensible.",
+          "Licensed taxis may operate during Shabbat, Jewish holidays and late at night, although driver availability depends on the location. I recommend booking in advance for airport pickups or journeys where timing is important.",
           "Night, weekend and holiday tariffs can be higher. Check my guide to airport travel on Shabbat for transport options and the Israeli taxi fares guide for regulated charges.",
         ],
         inlineLinks: [
@@ -210,8 +209,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Practical tips before your first ride",
         paragraphs: [
           "Save your hotel name and street address, keep mobile data available, and check that the driver and vehicle match the booking before boarding. An address written in Hebrew can help if a pickup point is unclear.",
-          "Request child seats, wheelchair-accessible transport or a larger luggage allowance in advance and confirm the vehicle that will arrive. For longer routes, compare transport options in my getting around Israel guide or consider a confirmed private driver.",
-          "If you need mobile data on arrival, my Israel eSIM guide explains the options for visiting travellers.",
+          "If you need child seats, wheelchair access or extra luggage space, request a suitable vehicle in advance. For longer routes, compare transport options in my getting around Israel guide or consider a confirmed private driver.",
+          "See my Israel eSIM guide for mobile data options during your stay.",
         ],
         inlineLinks: [
           { text: "getting around Israel guide", to: travelGuidePaths.israel },
@@ -257,7 +256,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     photo: { src: sherutNesherCardPhoto, alt: "Former Nesher yellow-and-white shared shuttle van at Ben Gurion Airport" },
     facts: [
       { label: "Nesher & Amal airport sherut", text: "Former scheduled shared rides to Jerusalem and Haifa — ended" },
-      { label: "Local sherut minibuses", text: "Route-based shared taxis remain on some routes outside the airport" },
+      { label: "Local sherut minibuses", text: "Local shared taxis still operate in some cities" },
       { label: "Airport arrivals today", text: "Train, scheduled bus, authorized taxi or private transfer" },
     ],
     comparison: {
@@ -265,9 +264,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       headers: ["Ride type", "How it works", "When it is useful"],
       rows: [
         ["Local sherut (monit sherut)", "Shared minibus on a set route; each passenger pays for a seat", "Short trips along a local route when that service is running"],
-        ["Pre-booked shared shuttle", "Operator confirms an available departure and sells individual places", "Travellers whose dates, luggage and pickup match an actual confirmed service"],
+        ["Pre-booked shared shuttle", "Book an individual seat on a scheduled shared shuttle", "Travellers looking for a pre-booked shared ride"],
         ["Licensed airport taxi", "Exclusive taxi for your party, ordered via Gett or an airport kiosk", "Direct airport travel without sharing the vehicle"],
-        ["Private transfer", "Dedicated vehicle arranged in advance for your group", "Flight arrivals, luggage-heavy journeys and a confirmed meeting arrangement"],
+        ["Private transfer", "Dedicated vehicle arranged in advance for your group", "Airport arrivals, families and travellers with extra luggage"],
       ],
     },
     sections: [
@@ -292,7 +291,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "A monit sherut (מונית שירות) is usually a yellow shared minibus travelling along a numbered route. Look for its route number and destination on the front windshield. You pay for one seat rather than hiring the vehicle.",
           "At a safe, permitted place along the route, signal to a driver to stop and tell them where you would like to get off. The driver follows the designated route, and pickup or drop-off arrangements vary. Ask about the fare and whether to pay cash or another way before boarding.",
-          "Local sherut services remain in selected areas, including parts of Tel Aviv, but a listed route is not a promise of a departure at your chosen time. Space for large suitcases, prams and other equipment can be limited. For wider city and intercity transport choices, see my getting around Israel guide and getting around Tel Aviv guide.",
+          "Local sherut minibuses still operate in some areas, including parts of Tel Aviv. Service frequency varies by route. Space for large suitcases, prams and other equipment can be limited. For wider city and intercity transport choices, see my getting around Israel guide and getting around Tel Aviv guide.",
         ],
         inlineLinks: [
           { text: "getting around Israel guide", to: travelGuidePaths.israel },
@@ -304,7 +303,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "airport-alternatives",
         title: "Getting from Ben Gurion Airport to your destination",
         paragraphs: [
-          "The train station at Terminal 3 serves useful connections when rail services are operating. For Jerusalem, Haifa and Tel Aviv, choose the station nearest your destination and include the final connection to your hotel. For a direct journey, compare the licensed airport taxi queue with a confirmed private transfer.",
+          "Trains from Terminal 3 connect Ben Gurion Airport with several major cities. For Jerusalem, Haifa and Tel Aviv, choose the station nearest your destination and include the final connection to your hotel. For a direct journey, compare the licensed airport taxi queue with a confirmed private transfer.",
           "My airport-to-Jerusalem guide, airport-to-Tel Aviv guide, airport-to-Haifa guide and airport-to-Ein Bokek guide provide route-specific advice. For Friday and Saturday journeys, my airport Shabbat guide explains the available transport.",
         ],
         inlineLinks: [
@@ -340,7 +339,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "official-taxi",
         title: "Licensed airport taxis and the free terminal shuttle",
         paragraphs: [
-          "For an immediate licensed taxi, request your ride code through Gett or an airport self-service kiosk. At Terminal 3, the authorized taxi queue is on the ground floor by Exit 03. At Terminal 1, use the main arrivals exit. A licensed taxi carries your own party and operates under the regulated taxi fare system.",
+          "For an immediate licensed taxi, request your ride code through Gett or an airport self-service kiosk. At Terminal 3, the authorized taxi queue is on the ground floor by Exit 03. At Terminal 1, use the main arrivals exit. A licensed airport taxi takes you and your group directly to your destination and charges a regulated metered fare.",
           "A Gett taxi scheduled at least two hours ahead has a different Terminal 3 collection point: Level 2, Gate 23. My Ben Gurion Airport taxis guide explains the pickup procedures, and the taxi fares in Israel guide covers regulated charges.",
           "The free airport shuttle is a separate internal bus connecting Terminal 1 and Terminal 3 and airport facilities. From Terminal 3, find it on Level G near Gate 01. It serves the airport rather than transporting travellers to Tel Aviv, Jerusalem or Haifa. See my Ben Gurion Airport arrival guide for terminal guidance.",
         ],
@@ -359,7 +358,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Sherut and airport transport on Shabbat",
         paragraphs: [
           "Some local shared-taxi routes operate during Shabbat and Jewish holidays, but their availability depends on the particular line. The former regular Nesher and Amal airport services are no longer available, and trains and most ordinary buses pause for much of Shabbat.",
-          "Free weekend Line 711 links Shoham with central Tel Aviv via Ben Gurion Airport Terminal 1 on limited Friday and Saturday departures. Its operating window changes between winter and summer schedules. The airport Shabbat transport guide explains the timetable, Terminal 3 connections and taxi alternatives.",
+          "Free weekend Line 711 links Shoham with central Tel Aviv via Ben Gurion Airport Terminal 1 on limited Friday and Saturday departures. Its operating hours vary between winter and summer. The airport Shabbat transport guide explains the timetable, Terminal 3 connections and taxi alternatives.",
         ],
         inlineLinks: [
           { text: "Jewish holidays", to: "/travel-blog/calendar-of-events/" },
@@ -371,7 +370,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "booked-shared",
         title: "Booking a shared airport shuttle in advance",
         paragraphs: [
-          "A commercially booked shared shuttle is a separate service from a numbered local sherut route. A company may offer individual seats on a specific departure; check that a confirmed service matches your arrival date, flight and destination.",
+          "Commercial shared shuttles offer individual seats that can be booked in advance. Local sherut minibuses pick up passengers along designated routes. A company may offer individual seats on a specific departure; check that a confirmed service matches your arrival date, flight and destination.",
           "Before paying, confirm the operator and departure, exact pickup and drop-off points, total price per seat, luggage allowance, child-seat or accessibility needs, flight-delay arrangements and cancellation terms. Keep the written confirmation. You can also request a dedicated airport transfer for your own group.",
         ],
         inlineLinks: [{ text: "dedicated airport transfer", to: "/airport-transfers/" }],
@@ -389,7 +388,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     faqs: [
       { q: "How do I pay for a local sherut ride?", a: "You pay for your own seat. Fares and accepted payment methods depend on the route, so ask the driver about the fare and payment before boarding." },
       { q: "Can I reserve a seat on a sherut or shared shuttle?", a: "A local route-based sherut usually accepts passengers along its route as space allows. A separate commercial shared shuttle may require advance booking and written confirmation for a specific departure." },
-      { q: "Can I bring large suitcases on a sherut?", a: "Capacity in shared minibuses can be limited. For large cases, prams or specialist equipment, confirm the available space and consider a vehicle arranged for your group." },
+      { q: "Can I bring large suitcases on a sherut?", a: "Capacity in shared minibuses can be limited. If you're travelling with large suitcases, a stroller or mobility equipment, consider booking a private vehicle with enough space." },
       { q: "Does a sherut or airport bus run on Shabbat?", a: "Some local sherut routes operate, but the former regular airport sheruts have ended. Free weekend Line 711 serves Terminal 1 on selected departures, with seasonal operating hours." },
       { q: "What's the difference between a sherut and a pre-booked shared shuttle?", a: "A local sherut normally follows a numbered public route and takes passengers along that line. A booked shared shuttle is a specific commercial service with its own departure time, reservation and terms." },
     ],
@@ -549,7 +548,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       caption: "From landing to your first journey in Israel",
       headers: ["Arrival stage", "What to do", "Keep ready"],
       rows: [
-        ["Before the flight", "Check entry eligibility, ETA-IL or visa, and airport flight information", "Passport, approval, hotel and onward-travel details"],
+        ["Before the flight", "Check entry requirements, ETA-IL or visa requirements and flight details", "Passport, approval, hotel and onward-travel details"],
         ["Passport control", "Follow arrivals and immigration signage and staff instructions", "Passport, entry documents and travel details"],
         ["Baggage claim", "Find your flight's carousel; report missing or damaged luggage to the airline or handler", "Baggage tag, report number and delivery address"],
         ["Customs", "Choose the correct green or red channel under the official rules", "Receipts or documents for goods you need to declare"],
@@ -563,7 +562,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "Visitors travelling on visa-exempt passports generally need an approved ETA-IL before departure. The official application fee is ₪25 (November 2026); apply through the Population and Immigration Authority's website. Travellers who require a visa should arrange the appropriate visa before flying, while Israeli citizens and other exempt categories follow different rules.",
           "Keep your passport, any required ETA-IL or visa, your first accommodation address and onward or return travel details accessible offline. ETA-IL is a travel authorisation; the border officer makes the final entry decision.",
-          "Check your arrival terminal and flight status with your airline or the airport before departure. For a private pickup, share your flight number and the local calendar date of arrival in Israel, especially after midnight.",
+          "Check your arrival terminal and flight status with your airline or the airport before departure. For a private airport pickup, provide your flight number and arrival date in Israel, especially if your flight lands after midnight.",
         ],
         highlightedLinks: [{
           label: "Apply for ETA-IL - official Israeli government portal",
@@ -592,7 +591,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "passport-control",
         title: "Passport control and the blue entry card",
         paragraphs: [
-          "After leaving the aircraft, follow arrivals signs to passport control and choose the appropriate lane. Eligible passengers may use automated stations; airport staff will direct you. Keep your passport, ETA-IL or visa where required, accommodation address and onward travel information ready.",
+          "After leaving the aircraft, follow arrivals signs to passport control and choose the appropriate lane. Passengers who qualify can use the automated passport control gates. Airport staff will direct you. Keep your passport, ETA-IL or visa where required, accommodation address and onward travel information ready.",
           "Border staff may ask about your visit, where you will stay and when you plan to leave. Follow their instructions and keep the entry record issued to you.",
           "International visitors normally receive a small blue entry card at passport control. Keep it with your passport throughout the trip: it documents your entry and may be requested for a tourist VAT refund when departing Israel.",
         ],
@@ -607,7 +606,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "baggage",
         title: "Collecting luggage and reporting a missing bag",
         paragraphs: [
-          "After passport control, find your flight number on the baggage screens and follow its assigned carousel. Keep the baggage tags from check-in until all bags have arrived. Strollers, mobility equipment and oversized items may arrive at a separate collection point.",
+          "After passport control, find your flight number on the baggage screens and follow its assigned carousel. Keep your baggage tags until you've collected all your luggage. Strollers, wheelchairs and oversized luggage may need to be collected separately.",
           "If a checked bag is missing or damaged, go to the airline's baggage service desk or its ground-handling company's desk before leaving baggage reclaim. File a report, obtain the case reference (often called a Property Irregularity Report or PIR), and keep your baggage tag, flight details, contact number and delivery address in Israel.",
           "For follow-up on checked baggage or items left on an aircraft, contact the airline or its ground handler using the airport's lost-property directory. For belongings lost in the public terminal, use the airport's separate lost-and-found form.",
         ],
@@ -636,9 +635,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "arrivals-hall",
         title: "Meeting your driver in the public arrivals hall",
         paragraphs: [
-          "After customs, enter the public arrivals hall and follow your transport provider's meeting instructions. Save the destination address, booking confirmation and a reachable telephone number or messaging contact before you leave the baggage area.",
-          "For a pre-booked private transfer, use the exact meeting point specified in the confirmation. Tell your operator if baggage collection or passport control takes longer than expected, and follow the agreed waiting and flight-delay policy.",
-          "Keep your belongings together, and choose the official airport information desk or your confirmed provider if you need directions to the correct collection point.",
+          "After customs, enter the public arrivals hall and follow your transport provider's meeting instructions. Before leaving baggage claim, have your destination address, booking confirmation and driver's contact details ready.",
+          "Meet your driver at the location specified in your booking confirmation. Tell your operator if baggage collection or passport control takes longer than expected, and follow the agreed waiting and flight-delay policy.",
+          "If you need help finding your pickup point, ask at the airport information desk or contact your driver.",
         ],
         sourceIds: ["guide-iaa"],
       },
@@ -658,7 +657,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "How to travel from Ben Gurion Airport to your hotel",
         photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Taxi entrance sign at Ben Gurion Airport" },
         paragraphs: [
-          "Choose your transport according to your exact hotel or final address. Trains are useful for rail-connected cities, with a further bus, taxi or walk to some hotels. Buses serve selected routes, and an official airport taxi provides a direct metered journey.",
+          "Choose your transport according to your exact hotel or final address. Trains are convenient for reaching major cities, although you may need a bus or taxi from the station to your hotel. Buses serve selected routes, and an official airport taxi provides a direct metered journey.",
           "For an immediate taxi at Terminal 3, order through Gett or an airport kiosk and take your ride code to the official queue at ground-floor Exit 03. Advance-scheduled Gett taxis meet at Level 2, Exit 23. My Ben Gurion Airport taxi guide explains the full booking and pickup procedure.",
           "You can arrange a private airport transfer in advance, with the vehicle, meeting point, waiting conditions and price confirmed by the provider. My airport sherut guide explains the former shared-taxi routes and today's alternatives; the taxi fares guide covers regulated meter charges.",
           "For a complete route comparison, read my destination guides to Tel Aviv, Jerusalem, Haifa and Ein Bokek at the Dead Sea. My getting around Israel guide compares onward travel by rail, bus and taxi throughout the country.",
@@ -694,7 +693,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Planning the time from landing to the arrivals hall",
         paragraphs: [
           "Your landing time and the time you reach the public arrivals hall are different. Allow for taxiing, leaving the aircraft, walking to passport control, queues, baggage collection and any customs processing.",
-          "These estimates are based on typical passenger experience from landing to the public arrivals hall. A busy arrival period, a remote aircraft stand or further border checks can extend the journey.",
+          "These estimates are based on typical passenger experience from landing to the public arrivals hall. Long queues, additional passport checks or a bus ride from the aircraft to the terminal can increase the time needed to leave the airport.",
           "Give a pre-booked driver your flight number and agree how the meeting time, free waiting allowance and delay charges work. When possible, coordinate the final meeting after you have collected your bags.",
         ],
         tables: [{
@@ -1343,10 +1342,6 @@ telAviv: {
 
 // Enrich the already-migrated Jerusalem pages while retaining their full sections.
 applyJerusalemGuideEditorial(travelGuides);
-
-// Only the selected, validated Sanity build snapshot overrides the Uber guide.
-// Ordinary builds continue using the source-controlled content.
-if (sanityUberGuide) travelGuides.uber = sanityUberGuide;
 
 export type GuideDirectoryEntry = { id: string; title: string; description: string; to: LinkProps["to"]; topics: GuideTopicId[]; photo?: GuidePhoto; updatedAt?: string };
 

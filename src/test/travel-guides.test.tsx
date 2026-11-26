@@ -1048,7 +1048,7 @@ describe("migrated practical guides", () => {
     expect(costs.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxiFares);
     expect(guide.sections.find((section) => section.id === "destinations")!.tables?.[0]?.rows).toHaveLength(5);
     expect(guide.sections.find((section) => section.id === "shabbat-hours")!.paragraphs.join(" ")).toContain("Yom Kippur is a special exception");
-    expect(guide.sections.find((section) => section.id === "restart")!.paragraphs.join(" ")).toMatch(/first train or bus actually scheduled for your date/);
+    expect(guide.sections.find((section) => section.id === "restart")!.paragraphs.join(" ")).toMatch(/check when trains and buses to your destination resume/);
     expect(guide.services).toHaveLength(6);
     expect(guide.services.map(item => item.to)).toContain(travelGuidePaths.israel);
     expect(guide.services.map(item => item.to)).toContain(travelGuidePaths.travelTips);

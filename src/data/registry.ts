@@ -11,7 +11,6 @@ export { travelGuidePaths, type TravelGuideId } from "@/data/travel-guide-paths"
 import type { TourProduct, TourBookingOffer } from "@/data/tourTypes";
 import { carRentalSources } from "@/data/carRentalGuide";
 import { migrationSources } from "@/data/guideMigrationSources";
-import { sanityUberSources } from "@/data/generated/sanityUberSnapshot";
 import { neighborhoodHotelAdditions, neighborhoodHotelSources } from "@/data/neighborhoodHotels";
 import kiwitaxiLogo from "@/assets/providers/kiwitaxi.svg";
 import welcomePickupsLogo from "@/assets/providers/welcome-pickups.svg";
@@ -2202,9 +2201,9 @@ export const offers: Offer[] = [
  */
 export const sources: SourceReference[] = sourceCatalog.filter((source) => Boolean(source.url) && !isPublisherUrl(source.url));
 
-// Sanity sources are preferred; internal first-party notes remain available for
-// verification of dated fares, but never become public citations.
-export const getSource = (id: string) => sanityUberSources.find((s) => s.id === id) || sourceCatalog.find((s) => s.id === id)!;
+// Internal first-party notes remain available for verification of dated fares,
+// but never become public citations.
+export const getSource = (id: string) => sourceCatalog.find((s) => s.id === id)!;
 export const publicSources = (ids: string[]) => [...new Set(ids)].map(getSource).filter((source): source is SourceReference => Boolean(source?.url) && !isPublisherUrl(source.url));
 
 export function formatCheckDate(d: ISODate) {
