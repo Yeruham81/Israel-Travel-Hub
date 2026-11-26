@@ -199,7 +199,7 @@ export const journeyDestinationGuides = {
   "id": "bethlehem",
   "updatedAt": "2026-11-24",
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
-  "description": "Compare bus 231 and 234, licensed private drivers, taxis to Checkpoint 300 and Bethlehem tours. Plan your final stop, documents and the return to Jerusalem.",
+  "description": "Compare bus 231 and 234, licensed private drivers, taxis to Checkpoint 300 and Bethlehem tours. Learn where to get off, which travel documents to bring and how to return to Jerusalem.",
   "intro": "Bethlehem is only a short distance from Jerusalem, but getting there requires some planning. Here's how to travel by bus, taxi or organised tour, and what to check before you leave.",
   "answer": "For independent travellers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers may use the pedestrian crossing and onward local transport. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
   "topics": [
@@ -268,14 +268,14 @@ export const journeyDestinationGuides = {
       "id": "entry-rules",
       "title": "Before you go: Area A, entry rules and checkpoints",
       "paragraphs": [
-        "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Not every driver or vehicle is permitted to make the journey.",
+        "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Drivers and vehicles must have the appropriate permission to enter Bethlehem.",
         "Bring your original passport and any required entry documents. If you're travelling on a US passport, check the State Department's travel advice for current entry and security information.",
         "A 22 November 2026 announcement reported that Checkpoint 300 would reopen to authorised vehicles and tourist coaches from 23 November. Crossing eligibility, operating hours and security restrictions may still change; confirm your actual route and vehicle permission with the operator before travel."
       ],
       "richParagraphs": [
         [
           {
-            "text": "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Not every driver or vehicle is permitted to make the journey."
+            "text": "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Drivers and vehicles must have the appropriate permission to enter Bethlehem."
           }
         ],
         [
@@ -485,7 +485,7 @@ export const journeyDestinationGuides = {
           }
         }
       ],
-      "tip": "If the grotto is your priority, allow time for the queue and plan nearby visits around its opening hours.",
+      "tip": "Plan your visit to the Grotto of the Nativity around its opening hours, allowing extra time for queues.",
       "sourceIds": [
         "m26-cicts-grotto-hours",
         "m26-custodia-nativity-restoration",
@@ -528,12 +528,12 @@ export const journeyDestinationGuides = {
     "Carry your original passport and any immigration entry documents.",
     "Save the bus timetable or your driver's contact details for offline use.",
     "Carry some small cash for a local taxi if you are crossing at Checkpoint 300.",
-    "Allow time for the return crossing and onward journey before evening plans."
+    "Allow enough time to cross the checkpoint and return to Jerusalem before your evening plans."
   ],
     "faqs": [
     {
       "q": "What is the cheapest way to travel from Jerusalem to Bethlehem?",
-      "a": "An East Jerusalem bus is normally the lowest-cost option. South Buses currently publishes an ₪8 fare for journeys up to 15 km; confirm the fare for your exact ride. Line 231 goes towards Bab al-Zaqaq, while line 234 ends at Checkpoint 300 and requires onward travel."
+      "a": "An East Jerusalem bus is normally the lowest-cost option. South Buses currently publishes an ₪8 fare for journeys up to 15 km; confirm the fare for your exact ride. Line 231 stops at Bab al-Zaqaq, while eligible passengers on line 234 continue from Checkpoint 300 after crossing."
     },
     {
       "q": "Is bus 231 or bus 234 better for the Church of the Nativity?",
@@ -561,11 +561,11 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Is there a train from Jerusalem to Bethlehem?",
-      "a": "No. There is no passenger-train service between Jerusalem and Bethlehem; consider an East Jerusalem bus, a permitted private arrangement or an organised tour."
+      "a": "Bethlehem has no passenger railway service. Travel by bus from East Jerusalem, an authorised private vehicle or an organised tour."
     },
     {
       "q": "Can I visit Bethlehem on Saturday?",
-      "a": "East Jerusalem buses may operate on Saturdays; line 231 and 234 departure schedules are published by South Buses. Bethlehem's church visiting hours are separate from the bus timetable."
+      "a": "East Jerusalem buses may operate on Saturdays; line 231 and 234 departure schedules are published by South Buses. Check church opening hours as well as Saturday bus departures."
     },
     {
       "q": "Can I drive an Israeli rental car into Bethlehem?",
