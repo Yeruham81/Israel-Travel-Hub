@@ -19,7 +19,7 @@ export function HomeContactForm({ context = "homepage", guide, showPortrait = tr
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState("");
   const submission = useQuoteSubmission();
-  useEffect(() => { if (subjectRequest) setSubject(subjectRequest.value); }, [subjectRequest]);
+  useEffect(() => { if (subjectRequest) { setSubject(subjectRequest.value); setError(""); } }, [subjectRequest]);
   function update(setter: (value: string) => void, value: string) { setter(value); submission.reset(); setError(""); }
   async function send(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

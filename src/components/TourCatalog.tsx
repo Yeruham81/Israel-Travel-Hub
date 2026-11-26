@@ -10,7 +10,7 @@ import { recordOutboundClick } from "@/lib/outbound";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { PriceDisplay } from "@/components/CurrencyRates";
 
-export function OwnerTourSection({ tours, compact = false, onRequestQuote }: { tours: TourProduct[]; compact?: boolean; onRequestQuote?: (tour: TourProduct) => void }) {
+export function OwnerTourSection({ tours, compact = false, onRequestQuote }: { tours: TourProduct[]; compact?: boolean; onRequestQuote?: ((tour: TourProduct) => void) | undefined }) {
   if (!tours.length) return null;
   return <section id="my-private-days" aria-labelledby="my-private-days-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24">
     <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
@@ -71,7 +71,7 @@ export function ExternalTourCard({ tour, pageId }: { tour: TourProduct; pageId: 
   </li>;
 }
 
-export function TourCatalog({ categoryId, filters, onChange, onRequestQuote }: { categoryId: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void; onRequestQuote?: (tour: TourProduct) => void }) {
+export function TourCatalog({ categoryId, filters, onChange, onRequestQuote }: { categoryId: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void; onRequestQuote?: ((tour: TourProduct) => void) | undefined }) {
   const compact = categoryId === "jerusalem" || categoryId === "tel-aviv-jaffa" || categoryId === "masada-dead-sea" || categoryId === "bethlehem-jericho" || categoryId === "nazareth-galilee" || categoryId === "northern-coast" || categoryId === "negev-ramon" || categoryId === "golan-heights" || categoryId === "food-markets" || categoryId === "eilat-red-sea";
   const departures: { label: string; search: TourSearch }[] = [
     { label: "From Jerusalem", search: { origin: "jerusalem" } },
@@ -79,7 +79,7 @@ export function TourCatalog({ categoryId, filters, onChange, onRequestQuote }: {
   ];
   const chips: Record<TourCategoryId, { label: string; search: TourSearch }[]> = {
     jerusalem: [...departures, { label: "History & heritage", search: { tag: "heritage" } }, { label: "Food & markets", search: { tag: "food" } }, { label: "Art & architecture", search: { tag: "art" } }],
-    "tel-aviv-jaffa": [{ label: "Jaffa", search: { q: "Jaffa" } }, { label: "Food & markets", search: { tag: "food" } }, { label: "Art & architecture", search: { tag: "art" } }],
+    "tel-aviv-jaffa": [{ label: "Old Jaffa", search: { q: "Old Jaffa" } }, { label: "Food & markets", search: { tag: "food" } }, { label: "Art & architecture", search: { tag: "art" } }],
     "masada-dead-sea": [...departures, { label: "Visit Masada", search: { destination: "masada" } }, { label: "Ein Gedi routes", search: { destination: "ein-gedi" } }, { label: "Dead Sea only", search: { q: "relaxation" } }],
     "bethlehem-jericho": [...departures, { label: "Bethlehem", search: { destination: "bethlehem" } }, { label: "Jericho", search: { destination: "jericho" } }, { label: "Qasr al-Yahud", search: { destination: "jordan-river" } }],
     "nazareth-galilee": [...departures, { label: "Yardenit", search: { destination: "jordan-river" } }, { label: "Magdala", search: { q: "Magdala" } }],

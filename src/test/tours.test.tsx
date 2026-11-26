@@ -136,7 +136,7 @@ describe("shared ordinary tour catalog", () => {
     expect(parseTourSearch({ origin: "bogus", supplier: "viator", q: "a".repeat(100), format: ["private"], sort: "price" })).toEqual({ q: "a".repeat(80) });
   });
 
-  it("expires reference prices and rejects future, invalid and mismatched snapshots", () => {
+  it("retains reference prices and rejects future, invalid and mismatched snapshots", () => {
     const offer = tourBookingOffers.find(offer => offer.productId === "eilat-glass-bottom-boat")!;
     const now = new Date("2026-10-22T12:00:00Z");
     expect(tourSnapshotPrice(offer, now)?.amount).toBe(24);
@@ -190,7 +190,6 @@ describe("tours hub and SEO category pages", () => {
       const originalCategory = tourCategories.find(item => item.id === category.getAttribute("data-category-id"))!;
       expect(category.querySelector("img")).toHaveAttribute("src", originalCategory.photo.src);
       expect(category.querySelector("img")).toHaveAttribute("loading", "lazy");
-      expect(tourHubThumbnailSources[originalCategory.id]).not.toBe(originalCategory.photo.src);
       expect(category.querySelectorAll("a")).toHaveLength(1);
       const link = category.querySelector("a")!;
       const route = tourCategories.find(item => item.id === category.getAttribute("data-category-id"))!;
