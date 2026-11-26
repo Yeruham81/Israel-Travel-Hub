@@ -84,7 +84,7 @@ describe("Tel Aviv beach guide editorial regression", () => {
   });
 
   it("has local photos for every beach and the three nearby beaches", () => {
-    expect(telAvivBeaches.every(beach => !!beach.detailPhoto?.alt)).toBe(true);
+    expect(telAvivBeaches.every(beach => !!beach.detailPhoto?.alt && beach.detailPhoto.width > 0 && beach.detailPhoto.height > 0)).toBe(true);
     for (const beach of telAvivBeaches) expect(existsSync(resolve(process.cwd(), "public", beach.detailPhoto!.src.slice(1)))).toBe(true);
     for (const id of ["sidna-ali", "gaash", "palmahim"]) expect(existsSync(resolve(process.cwd(), "public/images/tel-aviv-beaches", id + ".webp"))).toBe(true);
   });
