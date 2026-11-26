@@ -31,7 +31,8 @@ describe("visitor-facing editorial copy", () => {
       "src/components/DeadSeaAttractionsGuide.tsx",
       "src/components/TabghaAttractionPage.tsx",
       "src/components/CapernaumAttractionPage.tsx",
-      "src/components/SacredHillPlanningSections.tsx",
+      "src/components/MountZionAttractionPage.tsx",
+      "src/components/MountOlivesAttractionPage.tsx",
       "src/components/JerusalemShoppingGuide.tsx",
       "src/components/JordanRiverBaptismGuide.tsx",
     ];

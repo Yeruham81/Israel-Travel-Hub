@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { attractionMeta } from "@/components/AttractionGuidePage";
+import { attractionMeta } from "@/lib/attraction-meta";
 import { TelAvivAttractionsGuide } from "@/components/TelAvivAttractionsGuide";
 
 export const Route = createFileRoute("/travel-blog/attractions-in-tel-aviv")({

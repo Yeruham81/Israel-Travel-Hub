@@ -47,7 +47,7 @@ describe("attraction contact introductions promote transport instead of generic 
   });
 
   it("keeps the dedicated inquiry templates focused on Moshe's private transport services", () => {
-    const files = ["HomeContactForm", "TourCategoryPage", "SacredHillContactForm", "TransferQuoteForm", "PrivateDriverQuoteForm", "ShoreQuoteForm"];
+    const files = ["HomeContactForm", "TourCategoryPage", "TransferQuoteForm", "PrivateDriverQuoteForm", "ShoreQuoteForm"];
     for (const name of files) {
       const src = readFileSync(`src/components/${name}.tsx`, "utf8");
       expect(src, name).toMatch(/private (?:transfer|transport|driver|journey|ride|vehicle|day trip)|private airport|driver/i);

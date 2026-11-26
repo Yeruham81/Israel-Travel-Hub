@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { attractionGuides } from "@/data/attractionGuides";
 import { sacredHillEditorial, sacredHillOverrides, type SacredHillId } from "@/data/sacredHillGuides";
-import { attractionMeta } from "@/components/AttractionGuidePage";
+import { attractionMeta } from "@/lib/attraction-meta";
 
 const ids: SacredHillId[] = ["mount-zion", "mount-of-olives"];
 const oldDomain = /(?:https?:\/\/)?(?:www\.)?israel-taxi\.com/i;

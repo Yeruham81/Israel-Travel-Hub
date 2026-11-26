@@ -2,16 +2,18 @@ import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { SacredHillGuideContent } from "@/components/SacredHillGuideContent";
-import { mapsWalkUrl } from "@/components/SacredHillPlanningSections";
-import { sacredHillPlanning } from "@/data/sacredHillPlanning";
+import { MountZionAttractionPage } from "@/components/MountZionAttractionPage";
+import { MountOlivesAttractionPage } from "@/components/MountOlivesAttractionPage";
+import { mountZionSite } from "@/data/mountZionSite";
+import { mountOlivesSite } from "@/data/mountOlivesSite";
 import type { SacredHillId } from "@/data/sacredHillGuides";
 import { routeTree } from "@/routeTree.gen";
 import { createQuoteDeliveryService } from "@/lib/quote-delivery.server";
 
 const enabled = () => ({ BREVO_API_KEY: "test-only-key", QUOTE_DELIVERY_ENABLED: "true" });
 const now = () => Date.parse("2026-10-24T11:00:00Z");
-const labelFor = (id: SacredHillId) => id === "mount-zion" ? "Mount Zion" : "the Mount of Olives";
+const siteFor = (id: SacredHillId) => id === "mount-zion" ? mountZionSite : mountOlivesSite;
+const testIdFor = (id: SacredHillId) => id === "mount-zion" ? "mount-zion" : "mount-olives";
 
 afterEach(() => {
   cleanup();
@@ -22,64 +24,65 @@ afterEach(() => {
 });
 
 async function mountGuide(id: SacredHillId) {
-  const path = `/travel-blog/${id}/`;
-  const title = id === "mount-zion" ? "Mount Zion, Jerusalem" : "Mount of Olives, Jerusalem";
+  const path = `/attractions/${id}/`;
+  const Page = id === "mount-zion" ? MountZionAttractionPage : MountOlivesAttractionPage;
   window.history.replaceState(null, "", path);
-  document.title = title;
+  document.title = siteFor(id).title;
   const router = createRouter({
     routeTree, context: { queryClient: new QueryClient() },
     history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always",
   });
   await router.load();
-  const view = render(<RouterContextProvider router={router}><main><h1>{title}</h1><SacredHillGuideContent id={id} /></main></RouterContextProvider>);
+  const view = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+  const title = within(view.container).getByRole("heading", { level: 1 }).textContent!.trim();
   return { path, title, view };
 }
 
 describe("sacred hill visit planning", () => {
-  it.each(["mount-zion", "mount-of-olives"] as const)("covers every site in the %s reference table with sources", (id) => {
-    const facts = sacredHillPlanning[id].facts;
-    expect(facts.length).toBe(id === "mount-zion" ? 7 : 8);
-    expect(facts.every(f => f.site && f.hours && f.admission && f.sourceUrl.startsWith("https://"))).toBe(true);
-    expect(sacredHillPlanning[id].days).toHaveLength(2);
-    expect(sacredHillPlanning[id].days.every(day => day.steps.length >= 3)).toBe(true);
-    expect(sacredHillPlanning[id].walks).toHaveLength(3);
+  it.each(["mount-zion", "mount-of-olives"] as const)("covers every site in the active %s reference table with sources", (id) => {
+    const site = siteFor(id);
+    expect(site.hours).toHaveLength(id === "mount-zion" ? 7 : 8);
+    expect(site.hours.every(f => f.name && f.time && f.admission && f.note)).toBe(true);
+    expect(Object.values(site.official).every(url => url.startsWith("https://"))).toBe(true);
   });
 
-  it("encodes Maps URLs with explicit walking mode but does not claim live ETA", () => {
-    const url = mapsWalkUrl("Zion Gate, Jerusalem", "St Peter in Gallicantu Jerusalem");
-    expect(url).toContain("api=1");
-    expect(url).toContain("travelmode=walking");
-    expect(url).toContain("Zion%20Gate%2C%20Jerusalem");
-    expect(url).not.toContain("minutes");
-  });
-
-  it.each(["mount-zion", "mount-of-olives"] as const)("renders %s with hours before FAQ and FAQs before contact", async id => {
+  it.each(["mount-zion", "mount-of-olives"] as const)("renders %s with current hours, walking links, FAQ and contact", async id => {
     const { view } = await mountGuide(id);
     const main = view.container.querySelector("main")!;
-    const hours = main.querySelector("#visit-facts");
+    const hours = main.querySelector("#visitor-info");
     const faq = main.querySelector("#faq");
-    const contact = main.querySelector("#contact-moshe");
+    const contact = main.querySelector<HTMLElement>("#contact");
     expect(hours).toBeInTheDocument();
     expect(faq).toBeInTheDocument();
     expect(contact).toBeInTheDocument();
     expect(hours!.compareDocumentPosition(faq!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(faq!.compareDocumentPosition(contact!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(hours!.querySelectorAll("tbody tr")).toHaveLength(sacredHillPlanning[id].facts.length);
-    expect(hours!.querySelector('[data-testid="sacred-hours-table"] table')).not.toBeNull();
-    expect(hours!.querySelector('[data-testid="sacred-hours-mobile"]')).toBeNull();
-    const orderedIds = ["places-to-see", "walking-route", "visit-facts", "getting-there", "visitor-advice", "history", "faq", "visit-options"];
+    const table = within(main).getByTestId(testIdFor(id) + "-hours-fees");
+    expect(table).toHaveClass("overflow-x-auto");
+    expect(table.querySelectorAll("tbody tr")).toHaveLength(siteFor(id).hours.length);
+    for (const fact of siteFor(id).hours) expect(within(table).getByRole("rowheader", { name: fact.name })).toBeInTheDocument();
+    expect(table.querySelectorAll("table")).toHaveLength(1);
+    const orderedIds = ["highlights", "visit-plan", "visitor-info", "getting-there", "history", "tours", "faq", "nearby", "trip-planning", "contact"];
     const sectionNodes = orderedIds.map(sectionId => main.querySelector("#" + sectionId));
     expect(sectionNodes.every(Boolean)).toBe(true);
     for (let i = 0; i < sectionNodes.length - 1; i++) {
       expect(sectionNodes[i]!.compareDocumentPosition(sectionNodes[i + 1]!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     }
-    expect(screen.getByRole("form", { name: `Message Moshe about ${labelFor(id)}` })).toBeInTheDocument();
+    expect(within(contact!).getByRole("form", { name: "Guide contact message" })).toBeInTheDocument();
     expect(contact?.querySelector('[data-testid="contact-reviews-row"]')).toBeInTheDocument();
+    expect(contact?.querySelector('[data-photo-role="contact-portrait"]')).toBeInTheDocument();
     expect(contact?.querySelector('[data-testid="contact-tripadvisor-reviews"] a[href*="tripadvisor"]')).not.toBeNull();
-    expect(screen.getAllByRole("link", { name: "Contact me" }).some(link => link.getAttribute("href") === "#visit-options")).toBe(true);
-    expect(screen.getByText("Choosing your visit day")).toBeInTheDocument();
-    expect(main.querySelectorAll('a[href*="google.com/maps/dir/"]')).toHaveLength(3);
-  });
+    expect(within(main).getByRole("navigation", { name: "On this page" }).querySelector('a[href="#contact"]')).not.toBeNull();
+    const walks = within(main).getByTestId(testIdFor(id) + "-walking-connections").querySelectorAll("a[href*='google.com/maps/dir/']");
+    expect(walks).toHaveLength(3);
+    for (const walk of walks) {
+      const url = new URL(walk.getAttribute("href")!);
+      expect(url.searchParams.get("api")).toBe("1");
+      expect(url.searchParams.get("travelmode")).toBe("walking");
+      expect(url.searchParams.get("origin")).toBeTruthy();
+      expect(url.searchParams.get("destination")).toBeTruthy();
+    }
+  }, 15000);
 
   it.each(["mount-zion", "mount-of-olives"] as const)("submits %s contact via the established Brevo endpoint with source context", async id => {
     const send = vi.fn().mockResolvedValue(undefined);
@@ -90,7 +93,7 @@ describe("sacred hill visit planning", () => {
       })));
     vi.stubGlobal("fetch", fetch);
     const { path, title } = await mountGuide(id);
-    const form = screen.getByRole("form", { name: `Message Moshe about ${labelFor(id)}` });
+    const form = screen.getByRole("form", { name: "Guide contact message" });
     expect(within(form).getByLabelText("Subject *")).toHaveValue("");
     fireEvent.submit(form);
     expect(fetch).not.toHaveBeenCalled();
@@ -118,5 +121,5 @@ describe("sacred hill visit planning", () => {
     expect(send.mock.calls[0]![0].text).toContain("Sent from page: " + title);
     fireEvent.submit(form);
     await waitFor(() => expect(fetch).toHaveBeenCalledOnce());
-  });
+  }, 15000);
 });

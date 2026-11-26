@@ -9,7 +9,7 @@ const guideTemplates = [
   ["src/components/TravelGuide.tsx", 1],
   ["src/components/AirportJourneyPage.tsx", 1],
   ["src/components/AirportRoutePage.tsx", 1],
-  ["src/components/AttractionGuidePage.tsx", 1],
+  ["src/components/AttractionDestinationPage.tsx", 1],
   ["src/components/IsraelItineraryPage.tsx", 1],
   ["src/components/PortPage.tsx", 1],
   ["src/components/TourCategoryPage.tsx", 1],
