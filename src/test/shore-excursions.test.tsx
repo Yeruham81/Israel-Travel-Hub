@@ -70,9 +70,9 @@ describe("shore excursions", () => {
     const intro = within(quote as HTMLElement).getByTestId("quote-form-intro");
     expect(quote.firstElementChild?.firstElementChild).toBe(intro);
     expect(intro).toHaveClass("bg-navy", "border-b");
-    expect(within(quote as HTMLElement).getByTestId("quote-fields-contact")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-4");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-contact")).toHaveClass("grid-cols-2", "xl:grid-cols-4");
     expect(within(quote as HTMLElement).getByTestId("quote-fields-cruise")).toHaveClass("sm:grid-cols-2");
-    expect(within(quote as HTMLElement).getByTestId("quote-fields-schedule")).toHaveClass("sm:grid-cols-2", "2xl:grid-cols-4");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-schedule")).toHaveClass("grid-cols-2", "2xl:grid-cols-4");
     expect(within(quote as HTMLElement).getByTestId("quote-fields-party")).toHaveClass("sm:grid-cols-2");
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(port.title);
@@ -109,12 +109,12 @@ describe("shore excursions", () => {
     const externalCards = services.filter((card) => card.dataset["serviceKind"] === "guided-tour");
     expect(externalSection?.querySelectorAll('[data-testid="shore-service-card"]')).toHaveLength(externalCards.length);
     expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).not.toHaveTextContent("External starting prices are dated published reference prices, not live quotes.");
-    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("booking conditions");
-    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("cancellation policy");
+    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("current prices");
+    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("booking website");
     expect(externalSection).not.toHaveTextContent("My published starting rates");
     expect(externalSection?.querySelector("#partner-tours-h")).toHaveTextContent(`Explore ${port.name} shore excursions`);
     expect(externalSection).toHaveTextContent("Compare guided day trips and small-group experiences");
-    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')?.textContent).toMatch(/^These shore excursions are provided by independent tour operators and booked through external booking websites\./);
+    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')?.textContent).toBe("Check available dates, current prices, inclusions and reviews on the booking website.");
     expect(container.querySelector("#itineraries")?.textContent).not.toContain("Compare the route, duration, tour format and starting price.");
     for (const externalCard of externalCards) {
       expect(within(externalCard).getByRole("img")).toHaveAttribute("alt", expect.any(String));
@@ -124,7 +124,7 @@ describe("shore excursions", () => {
       const booking = within(externalCard).getByRole("link", { name: /^View tour:/ });
       expect(booking).toHaveAttribute("target", "_blank");
       expect(booking).toHaveAttribute("rel", expect.stringContaining("noopener noreferrer"));
-      expect(externalCard).toHaveTextContent(/From US|Check current price/);
+      expect(externalCard).not.toHaveTextContent(/Check current price|Check reviews on provider|Duration on provider/);
       expect(within(externalCard).queryByRole("link", { name: /Request .* from (Ashdod|Haifa)/ })).not.toBeInTheDocument();
     }
     // Photo credits stay available in one footer disclosure, not repeated below the hero photo.
@@ -138,7 +138,7 @@ describe("shore excursions", () => {
       expect(within(card).getByRole("heading", { level: 3 })).toHaveTextContent(itinerary.destination);
       expect(within(card).getByRole("img").getAttribute("alt")).toBeTruthy();
       expect(card).not.toHaveTextContent(/From ILS|Per vehicle/);
-      expect(card).toHaveTextContent(`Private car & driver · From ${port.name} Port`);
+      expect(card).toHaveTextContent("Full day · Customized itinerary · Private car & driver");
       expect(card.querySelector("article")).toHaveClass("sm:flex-row");
       expect(within(card).getByRole("link", { name: `Request a quote: ${itinerary.destination} from ${port.name}` })).toHaveAttribute("href", "#request-quote");
     });

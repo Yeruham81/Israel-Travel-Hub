@@ -1,10 +1,11 @@
 import { operators, partners, providerLinks, sources, shoreBookingPlatforms, shoreDestinations, shoreServices, shoreTourProducts, shorePorts, type ShoreDestinationId, type ShorePortId, type ShoreTourProduct } from "@/data/registry";
 
-export type ShoreServiceSearch = { destination?: ShoreDestinationId };
+export type ShoreServiceSearch = { destination?: ShoreDestinationId; format?: "shared" | "private" | "driver" };
 
 export function parseShoreServiceSearch(search: Record<string, unknown>): ShoreServiceSearch {
   const destination = shoreDestinations.find((item) => item.id === search["destination"] && shoreServices.some((service) => service.status === "published" && service.kind !== "transfer" && service.destinationIds.includes(item.id)))?.id;
-  return destination ? { destination } : {};
+  const format = search["format"] === "shared" || search["format"] === "private" || search["format"] === "driver" ? search["format"] : undefined;
+  return { ...(destination ? { destination } : {}), ...(format ? { format } : {}) };
 }
 
 /** One card per published product; never infer port pickup from a city listing. */
@@ -20,14 +21,14 @@ export function servicesForPort(portId: ShorePortId) {
 }
 
 export function filterShoreServices(portId: ShorePortId, search: ShoreServiceSearch) {
-  return servicesForPort(portId).filter((item) => !search.destination || item.destinationIds.includes(search.destination));
+  return servicesForPort(portId).filter(item => (!search.destination || item.destinationIds.includes(search.destination)) && (!search.format || (search.format === "driver" ? item.kind === "private-driver" : item.kind === "guided-tour" && item.product?.groupFormat === search.format)));
 }
 
 export function shoreSourceIds(portId: ShorePortId) {
-  return [...new Set([shorePorts[portId].sourceId, "owner-private-driver", ...servicesForPort(portId).flatMap((service) => [service.provider.sourceId, service.product?.listedPrice?.sourceId].filter((id): id is string => Boolean(id)))])];
+  return [...new Set([shorePorts[portId].sourceId, "owner-private-driver", portId === "haifa" ? "shore-haifa-terminal" : "shore-ashdod-terminal", ...(portId === "ashdod" ? ["inpa-masada"] : []), ...servicesForPort(portId).flatMap((service) => [service.provider.sourceId, service.product?.listedPrice?.sourceId].filter((id): id is string => Boolean(id)))])];
 }
 
-/** A short-lived editorial starting-price snapshot, never an exact-date live quote. */
+/** Recorded starting prices remain visible until updated or removed. */
 export function shoreListedPrice(product: ShoreTourProduct | undefined, now = new Date()) {
   const price = product?.listedPrice;
   if (!price || price.kind !== "published_snapshot" || price.currency !== "USD" || !Number.isFinite(price.amount) || price.amount <= 0) return undefined;
@@ -36,7 +37,7 @@ export function shoreListedPrice(product: ShoreTourProduct | undefined, now = ne
   const source = sources.find((source) => source.id === price.sourceId);
   const checked = Date.parse(`${price.checkedAt}T00:00:00Z`);
   const age = now.getTime() - checked;
-  if (!source || source.checkedAt !== price.checkedAt || !Number.isFinite(age) || age < 0 || age > 30 * 86_400_000) return undefined;
+  if (!source || source.checkedAt !== price.checkedAt || !Number.isFinite(age) || age < 0) return undefined;
   if (new Date(checked).toISOString().slice(0, 10) !== price.checkedAt) return undefined;
   return price;
 }
