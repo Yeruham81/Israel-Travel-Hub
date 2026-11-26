@@ -958,7 +958,7 @@ describe("migrated practical guides", () => {
     for (const section of travelGuides.sherut.sections) {
       const element = container.querySelector(`#${section.id}`)! as HTMLElement;
       for (const link of section.inlineLinks || []) {
-        const proseLinks = within(element).getAllByRole("link", { name: link.text, exact: true }).filter((a) => a.closest("p"));
+        const proseLinks = within(element).getAllByRole("link", { name: link.text }).filter((a) => a.closest("p"));
         expect(proseLinks).toHaveLength(1);
         expect(proseLinks[0]).toHaveAttribute("href", link.to);
       }
