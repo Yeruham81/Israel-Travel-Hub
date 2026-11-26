@@ -46,7 +46,21 @@ describe("independent author identity and page credits", () => {
       expect(labelLines[1]).toHaveClass("text-sm", "font-bold");
       expect(reviews.querySelector('span[aria-hidden="true"]')).toHaveClass("bg-[#34E0A1]");
       expect(reviews.querySelector('img[src="/images/tripadvisor-owl-black.svg"]')).toHaveAttribute("width", "28");
-      expect(within(card).getByRole("link", { name: "Moshe Barak" })).toHaveAttribute("href", "/about-me/#moshe-barak");
+      if (path === "/") {
+        expect(within(card).getByRole("link", { name: "Read more about me" })).toHaveAttribute("href", "/about-me/");
+        expect(card).not.toHaveTextContent("About Moshe Barak");
+        const contact = container.querySelector("#contact") as HTMLElement;
+        expect(contact).toBeInTheDocument();
+        expect(contact.querySelector('[data-testid="contact-reviews-row"]')).toBeNull();
+        expect(contact.querySelector('[data-photo-role="contact-portrait"]')).toBeNull();
+        expect(within(contact).queryByRole("link", { name: /Read Reviews on TripAdvisor/i })).toBeNull();
+        expect(within(card).getAllByRole("link", { name: /Read Reviews on TripAdvisor/i })).toHaveLength(1);
+      } else {
+        expect(within(card).getByRole("link", { name: "Moshe Barak" })).toHaveAttribute("href", "/about-me/#moshe-barak");
+        if (path === "/about-me/") {
+          expect(within(container.querySelector("#contact") as HTMLElement).getByRole("link", { name: /Read Reviews on TripAdvisor/i })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
+        }
+      }
       expect(card).not.toHaveTextContent(/5\.0|five stars|\d+ reviews|licensed guide/i);
       expect(container.querySelector('a[href*="israel-taxi.com/wp-content/"]'), path).toBeNull();
       expect(container.querySelector('#sources a[href*="israel-taxi.com"]'), path).toBeNull();

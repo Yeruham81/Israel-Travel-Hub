@@ -10,7 +10,7 @@ import type { GuideContactCopy } from "@/lib/guide-contact";
 import { TripadvisorReviewsButton } from "@/components/TripadvisorReviewsButton";
 
 // A bottom-of-page contact portrait may repeat a separated introductory author portrait.
-export function HomeContactForm({ context = "homepage", guide, showPortrait = true, showTripadvisorBesidePortraitMobile = false, subjectRequest }: { context?: "homepage" | "about" | "taxis"; guide?: GuideContactCopy; showPortrait?: boolean; showTripadvisorBesidePortraitMobile?: boolean; subjectRequest?: { value: string } | undefined }) {
+export function HomeContactForm({ context = "homepage", guide, showPortrait = true, showTripadvisorBesidePortraitMobile = false, showTripadvisorReviews = true, subjectRequest }: { context?: "homepage" | "about" | "taxis"; guide?: GuideContactCopy; showPortrait?: boolean; showTripadvisorBesidePortraitMobile?: boolean; showTripadvisorReviews?: boolean; subjectRequest?: { value: string } | undefined }) {
   const headingId = guide ? "guide-contact-h" : context === "about" ? "about-contact-h" : context === "taxis" ? "taxis-contact-h" : "home-contact-h";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -36,10 +36,10 @@ export function HomeContactForm({ context = "homepage", guide, showPortrait = tr
   return <section id="contact" aria-labelledby={headingId} className={`${guide || context === "taxis" ? "mt-12 " : ""}scroll-mt-24 overflow-hidden rounded-2xl border bg-card shadow-sm`}>
     <div className="grid md:grid-cols-[0.85fr_1.5fr]">
       <div className="bg-navy p-6 text-navy-foreground sm:p-8">
-        <div className={`flex items-start justify-between gap-3 ${showTripadvisorBesidePortraitMobile ? "flex-nowrap md:flex-wrap" : "flex-wrap"}`} data-testid="contact-reviews-row">
+        {(showPortrait || showTripadvisorReviews) && <div className={`flex items-start justify-between gap-3 ${showTripadvisorBesidePortraitMobile ? "flex-nowrap md:flex-wrap" : "flex-wrap"}`} data-testid="contact-reviews-row">
           {showPortrait && <img src={airportTransferPhotos["moshe"]!.src} alt={airportTransferPhotos["moshe"]!.alt} data-photo-role="contact-portrait" width={150} height={200} loading="lazy" decoding="async" className={`${showTripadvisorBesidePortraitMobile ? "h-20 w-16 sm:h-24 sm:w-20" : "h-24 w-20"} shrink-0 rounded-xl object-cover`} />}
-          <div className="min-w-0" data-testid="contact-tripadvisor-reviews"><TripadvisorReviewsButton /></div>
-        </div>
+          {showTripadvisorReviews && <div className="min-w-0" data-testid="contact-tripadvisor-reviews"><TripadvisorReviewsButton /></div>}
+        </div>}
         <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-80">{guide?.eyebrow && !/ask moshe/i.test(guide.eyebrow) ? guide.eyebrow : "Contact me"}</p>
         <h2 id={headingId} className="mt-3 text-3xl">{guide?.heading ?? (context === "taxis" ? "Need a private transfer or driver in Israel?" : "Need a private transfer or day trip in Israel?")}</h2>
         <p className="mt-4 leading-relaxed opacity-90">{guide?.introduction ?? (context === "taxis" ? "I’m Moshe Barak. I arrange private transfers, city-to-city rides and day trips with a driver. Share your route, date and number of passengers, and I’ll reply personally." : "I’m Moshe Barak. I arrange airport transfers, private journeys and sightseeing days with a driver in Israel. Tell me your pickup location, travel date, destinations and passenger details, and I’ll reply personally.")}</p>
