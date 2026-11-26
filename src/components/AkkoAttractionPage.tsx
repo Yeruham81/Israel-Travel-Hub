@@ -64,7 +64,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
   contactIntroduction: "Tell me your travel date, pickup point, passenger count and the historic sites you want to see. I can arrange private transport or a day trip with a driver to Akko and nearby attractions.",
   facts: [
     { icon: "location", label: "Location", value: "Old Akko (Acre)", note: "Walled Mediterranean old town, north of Haifa" },
-    { icon: "duration", label: "Time needed", value: "3–6 hours", note: "Choose a shorter or fuller walking route" },
+    { icon: "duration", label: "Time needed", value: "3–6 hours", note: "From a short walk to a full day of sightseeing" },
     { icon: "admission", label: "Combined ticket", value: info.comboAdult, note: "For the main heritage sites and museums" },
     { icon: "hours", label: "Main sites", value: "From 09:00", note: "Most close at 17:00; Friday at 16:00" },
     { icon: "highlights", label: "Don't miss", value: "Crusader & Ottoman", note: "Knights’ Halls, tunnel, market and harbour" },
@@ -85,7 +85,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         title="Templars’ Tunnel"
         image={{ src: images.tunnel, alt: "Illuminated medieval stone passage in the Templars’ Tunnel beneath Old Akko" }}
       >
-        <p>Walk through a restored underground passage linking the Templars’ former stronghold with the harbour area. The tunnel is one of the more unusual experiences in the old town and is easy to combine with the market and waterfront.</p>
+        <p>Walk through a restored underground passage linking the Templars’ former stronghold with the harbour area. After exploring this fascinating underground tunnel, continue on foot to the nearby market and harbour.</p>
         <p><strong>Accessibility:</strong> The tunnel is temporarily inaccessible for wheelchair users, according to the operator. <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the latest notice</a> before visiting.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket</p>
       </AttractionHighlight>
@@ -93,8 +93,8 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         title="Al-Basha Turkish Bath"
         image={{ src: images.bath, alt: "Historic domed bathing chambers inside Al-Basha Turkish Bath in Old Akko" }}
       >
-        <p>Akko's beautifully restored Ottoman bathhouse offers a different side of local history. Its series of rooms and interpretive presentation introduce the rituals and social life of the old hammam.</p>
-        <p>It is a good addition after the Crusader sites, especially if you prefer shorter indoor visits. <a href={official.bath} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the official Turkish Bath guide</a>.</p>
+        <p>Akko's beautifully restored Ottoman bathhouse offers a glimpse into daily life during the Ottoman period. Explore the bathhouse rooms and learn about the bathing traditions and social life of the old hammam.</p>
+        <p>I recommend visiting the bathhouse after exploring the Crusader sites. <a href={official.bath} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the official Turkish Bath guide</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst
@@ -109,7 +109,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         title="Old market, Turkish Bazaar and lanes"
         image={{ src: images.market, alt: "Traditional street market and shops in the narrow lanes of Old Akko" }}
       >
-        <p>The market is where the historic setting feels most alive. Walk between spice shops, bakeries, small food stalls and stone passageways, and take time to enjoy the local atmosphere.</p>
+        <p>Akko's lively market is one of the best places to experience local life. Walk between spice shops, bakeries, small food stalls and stone passageways, and take time to enjoy the local atmosphere.</p>
         <p>I would leave time for a food stop between museum visits. <a href={official.market} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Akko market information</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free entry</p>
       </AttractionHighlight>
@@ -117,8 +117,8 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         title="The fishing harbour, sea walls and waterfront"
         image={{ src: images.harbour, alt: "Fishing boats and historic stone waterfront buildings in the harbour of Old Akko" }}
       >
-        <p>Finish the day among fishing boats and Mediterranean views. The harbour, sea gate and stretches of the old sea walls are an enjoyable contrast to the underground halls.</p>
-        <p>Look for the historic Khan al-Umdan nearby, a landmark caravanserai associated with the port. Some heritage buildings are best viewed from outside, so check access before planning an interior visit. <a href={official.harbour} target="_blank" rel="noopener noreferrer" className={inlineLink}>Port and marina history</a>.</p>
+        <p>Finish the day among fishing boats and Mediterranean views. Explore the historic harbour, sea gate and old city walls overlooking the Mediterranean.</p>
+        <p>Look for the historic Khan al-Umdan nearby, a landmark caravanserai associated with the port. Check which historic buildings are open to visitors. <a href={official.harbour} target="_blank" rel="noopener noreferrer" className={inlineLink}>Port and marina history</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free entry</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst
@@ -133,7 +133,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         title="Ramchal Synagogue and Jewish Heritage Center"
         image={{ src: images.ramchal, alt: "Historic Ramchal Synagogue in the heart of Old Akko" }}
       >
-        <p>This intimate historic site explores the life of Rabbi Moshe Chaim Luzzatto (the Ramchal) and Jewish heritage in Crusader and Ottoman Akko. Exhibits and archaeological finds add another layer to the visit.</p>
+        <p>This small historic site tells the story of Rabbi Moshe Chaim Luzzatto (the Ramchal) and Akko's Jewish heritage during the Crusader and Ottoman periods.</p>
         <p>The synagogue and heritage center are <strong>closed on Saturdays and <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link></strong>. <a href={official.ramchal} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the official visitor information</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket; check opening days</p>
       </AttractionHighlight>

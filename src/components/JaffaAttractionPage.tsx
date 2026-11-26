@@ -77,10 +77,10 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight mobileImageFirst title="Clock Tower Square" image={{ src: photos.clock, alt: "The Ottoman Clock Tower at the entrance to historic Jaffa" }}>
-        <p>The Ottoman-era Clock Tower, dating from around 1902–1903, is a natural starting point for a Jaffa walk. The square links the old town, harbour and flea-market streets.</p>
+        <p>I recommend starting your walk at Jaffa's Ottoman-era Clock Tower, built around 1902–1903. The square links the old town, harbour and flea-market streets.</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Mahmoudiya Mosque" image={{ src: photos.mosque, alt: "Historic stone architecture of the Mahmoudiya Mosque in Jaffa" }}>
-        <p>Mahmoudiya Mosque is one of Jaffa's most important Ottoman landmarks, recognised by its minaret and decorated entrances. Admire the exterior and follow the visiting arrangements of this active place of worship.</p>
+        <p>Mahmoudiya Mosque is one of Jaffa's most important Ottoman landmarks, recognised by its minaret and decorated entrances. Admire the mosque's exterior and respect local customs and prayer times.</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Kedumim Square" image={{ src: photos.square, alt: "Kedumim Square on Old Jaffa's historic hill" }}>
         <p>The hilltop square sits beside galleries, historic lanes and sea-facing viewpoints. The Visitors Center beneath it has presented Jaffa's archaeological history; check the <a href={official.oldJaffa} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Jaffa website (Hebrew)</a> for current visitor activities.</p>
@@ -89,19 +89,19 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <p>St. Peter's Church is a Franciscan landmark associated with Christian traditions about Peter in Joppa. It is an active church; dress respectfully and check <a href={official.church} target="_blank" rel="noopener noreferrer" className={inlineLink}>visiting arrangements (Hebrew)</a> around services and holidays.</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Zodiac Alleys and artists' galleries" image={{ src: photos.alleys, alt: "Narrow historic stone alleyway in the artists' quarter of Old Jaffa" }}>
-        <p>The winding alleys named after signs of the zodiac are among the best places to wander without a rigid schedule. You will find restored stone buildings, studios, small art galleries and quiet corners between the busier squares.</p>
+        <p>Take a leisurely stroll through the winding alleys named after the signs of the zodiac. You will find restored stone buildings, studios, small art galleries and quiet corners between the busier squares.</p>
         <p>Explore several adjoining lanes to discover the artists’ quarter; comfortable shoes help on steps and uneven historic paving.</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Summit Garden and Wishing Bridge" image={{ src: photos.garden, alt: "The wooden Wishing Bridge leads into the green slopes of Gan HaPisga in Old Jaffa" }}>
-        <p>Summit Garden (Gan HaPisga, also called Abrasha Park) offers one of the best views north towards Tel Aviv's coastline. Its open spaces, sculptures and Wishing Bridge are close to the old town's main walking route.</p>
+        <p>Summit Garden (Gan HaPisga, also called Abrasha Park) offers one of the best views north towards Tel Aviv's coastline. Explore the garden's sculptures and open spaces, and visit the nearby Wishing Bridge.</p>
         <p>The bridge has bronze plaques depicting the twelve zodiac signs. Local tradition invites visitors to touch their own sign, look towards the sea and make a wish. I particularly like the view from the garden in the late afternoon.</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Jaffa Port and the waterfront" image={{ src: photos.port, alt: "Fishing boats and waterfront buildings around Jaffa Port" }}>
-        <p>Jaffa's old harbour is still associated with fishing boats, waterfront restaurants and maritime history. The quay is an enjoyable contrast to the narrow lanes above, with open views out to the Mediterranean.</p>
-        <p>Look towards the offshore rocks associated with the legend of Andromeda, or spend time by the waterfront before a meal. Boat activities, when operating, are separate commercial experiences and should be checked directly.</p>
+        <p>Jaffa's historic harbour is home to fishing boats and waterfront restaurants. Enjoy a stroll along the harbour with its open views of the Mediterranean.</p>
+        <p>Look towards the offshore rocks associated with the legend of Andromeda, or spend time by the waterfront before a meal. Ask local boat operators about available trips.</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Flea Market and Greek Market streets" image={{ src: photos.market, alt: "Antique shops and outdoor stalls in the Jaffa Flea Market area" }}>
-        <p>Jaffa's flea-market district lies southeast of the Clock Tower. Antique stalls and vintage shops sit alongside cafés, restaurants and small design businesses; nearby Greek Market streets add another lively pocket to explore.</p>
+        <p>Jaffa's flea-market district lies southeast of the Clock Tower. Browse antique stalls, vintage shops and designer boutiques, and enjoy the cafés and restaurants around the flea market and nearby Greek Market.</p>
         <p>Visit during market trading hours to browse antique stalls and vintage shops. The <a href="#visitor-info" className={inlineLink}>visitor table</a> lists typical market hours, with a link to the <a href={official.fleaMarketHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>market website</a> for updates.</p>
       </AttractionHighlight>
       <AttractionPracticalTip>For a first-time visit, I would prioritise the hilltop old town, Summit Garden, the port and either the flea market or a museum according to your interests. Allow time to enjoy a coffee or meal along the way.</AttractionPracticalTip>
@@ -112,7 +112,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Na Laga'at Center" image={{ src: photos.nalagaat, alt: "Na Laga'at cultural centre at the Jaffa Port complex" }}>
         <p>The <a href={official.nalagaat} target="_blank" rel="noopener noreferrer" className={inlineLink}>Na Laga'at Center</a> near Jaffa Port presents accessible cultural experiences, including theatre, workshops and dining in darkness at the BlackOut restaurant.</p>
-        <p>Choose a performance, workshop or dining experience from the programme and reserve your preferred session.</p>
+        <p>Book a performance, workshop or dinner in advance.</p>
       </AttractionHighlight>
     </div>
   ),
@@ -161,7 +161,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       <p className="text-sm leading-relaxed">On <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>religious holidays and special dates</Link>, check the venue's published schedule before visiting.</p>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Accessibility and family visits</h3>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">The port promenade and parts of the surrounding streets offer relatively level approaches, while the historic hill has slopes, stone paving, steps and narrow passages. Visitors using a stroller or wheelchair may need a route adapted to their mobility needs.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">The port promenade and parts of the surrounding streets offer relatively level approaches, while the historic hill has slopes, stone paving, steps and narrow passages. If you're visiting with a wheelchair or stroller, I recommend starting with the flatter streets around the port.</p>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">For a booked Na Laga'at activity, consult the centre's <a href={official.nalagaatAccess} target="_blank" rel="noopener noreferrer" className={inlineLink}>accessibility arrangements</a> in advance.</p>
       </article>
     </div>

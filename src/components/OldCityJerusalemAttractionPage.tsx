@@ -49,7 +49,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   contactIntroduction: "Tell me your hotel or pickup point, visiting date, passengers and the Old City landmarks you want to see. I can arrange private transport with a driver to a suitable entrance gate and pickup after your walk.",
   facts: [
     { icon: "location", label: "Location", value: "Inside the city walls", note: "Six main entrance gates featured on the map" },
-    { icon: "duration", label: "Time needed", value: "2–3 hours to a full day", note: "Around 4–5 hours for a classic cross-quarter walk" },
+    { icon: "duration", label: "Time needed", value: "2–3 hours to a full day", note: "Around 4–5 hours to explore the four quarters" },
     { icon: "admission", label: "Old City streets", value: "Free entry", note: "Museums, tours and the ramparts charge separately" },
     { icon: "hours", label: "Opening hours", value: "Vary by site", note: "Religious services and security affect access" },
     { icon: "highlights", label: "Don't miss", value: "Sacred landmarks", note: "Western Wall, Holy Sepulchre and historic lanes" },
@@ -60,38 +60,38 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
     <div className="mt-4 space-y-3">
       <AttractionHighlight mobileImageFirst title="The Western Wall (Kotel)" image={{ src: photos.wall, alt: "Western Wall prayer plaza beneath Jerusalem's ancient stone walls, with the Dome of the Rock visible behind" }}>
         <p>One of the most visited places in Jerusalem, the Western Wall is a Jewish prayer site beside the western retaining wall of the ancient Temple Mount. The open plaza is worth visiting even on a short walk through the Old City.</p>
-        <p>The plaza is generally open around the clock and entry is free. Be respectful of worshippers, follow the posted prayer-area arrangements and allow extra time for security screening during holidays. <a href={official.westernWall} target="_blank" rel="noopener noreferrer" className={inlineLink}>Western Wall visitor information</a>.</p>
+        <p>The plaza is generally open around the clock and entry is free. Respect worshippers, follow the signs in the prayer areas and allow extra time for security checks during holidays. <a href={official.westernWall} target="_blank" rel="noopener noreferrer" className={inlineLink}>Western Wall visitor information</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free entry to the prayer plaza</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Church of the Holy Sepulchre" image={{ src: photos.sepulchre, alt: "Ornate chapel with lamps and religious paintings inside the Church of the Holy Sepulchre" }}>
         <p>In the Christian Quarter, this major pilgrimage church is traditionally associated with the crucifixion, burial and resurrection of Jesus. Its chapels, tomb shrine and prayer spaces are shared by several Christian communities.</p>
-        <p>Entry is free, but services and visitor queues can affect access. I recommend allowing at least an hour if you would like to explore more than the entrance area. Check the <a href={official.christianHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Information Center's current church hours</a>.</p>
+        <p>Entry is free, but services and visitor queues can affect access. I recommend spending at least an hour exploring the church and its chapels. Check the <a href={official.christianHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Information Center's current church hours</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free entry; opening hours vary seasonally</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Via Dolorosa and the Christian Quarter" image={{ src: photos.via, alt: "Narrow stone street and shops along the Via Dolorosa in Jerusalem's Old City" }}>
         <p>The Via Dolorosa is the traditional route associated with Jesus carrying the cross. Its Stations of the Cross pass through busy streets, chapels and parts of the Muslim and Christian Quarters, ending at the Holy Sepulchre.</p>
-        <p>Walking along the public streets is free. You can follow the marked stations independently or join a pilgrimage-focused guided walk; individual chapels may have restricted hours. <Link to="/attractions/via-dolorosa/" className={inlineLink}>Follow my complete Via Dolorosa route and all 14 stations</Link>, or <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>explore more Jerusalem churches</Link>.</p>
+        <p>Walking along the public streets is free. Follow the Stations of the Cross on your own or join a guided tour. Some chapels have limited opening hours. <Link to="/attractions/via-dolorosa/" className={inlineLink}>Follow my complete Via Dolorosa route and all 14 stations</Link>, or <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>explore more Jerusalem churches</Link>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free public walking route</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Temple Mount" image={{ src: photos.temple, alt: "Golden Dome of the Rock on the Temple Mount in Jerusalem" }}>
         <p>The Temple Mount is sacred to Judaism and Islam. The compound includes the Dome of the Rock and Al-Aqsa Mosque and is one of the most significant religious sites in Jerusalem.</p>
-        <p><strong>Visitor access is tightly controlled.</strong> Non-Muslim visits, when permitted, normally use the Mughrabi Gate approach beside the Western Wall, on Sunday–Thursday during limited visiting windows. Access for non-Muslim visitors is generally closed on Fridays and Saturdays, and may also be restricted on religious holidays or for security reasons. The interiors of Al-Aqsa Mosque and the Dome of the Rock are generally not open to non-Muslim visitors. Check the latest access arrangements shortly before your visit.</p>
+        <p><strong>Visitor access is tightly controlled.</strong> Non-Muslim visitors normally enter through the Mughrabi Gate beside the Western Wall, during designated visiting hours from Sunday to Thursday, when access is permitted. Access for non-Muslim visitors is generally closed on Fridays and Saturdays, and may also be restricted on religious holidays or for security reasons. The interiors of Al-Aqsa Mosque and the Dome of the Rock are generally not open to non-Muslim visitors. Check the latest access arrangements shortly before your visit.</p>
         <p className="text-xs font-semibold text-muted-foreground">Limited visiting windows; no general admission to the shrine interiors</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Jewish Quarter, Cardo and Hurva Synagogue" image={{ src: photos.cardo, alt: "Historic vaulted Cardo shopping passage with stone paving in Jerusalem's Jewish Quarter" }}>
-        <p>The Jewish Quarter offers restored lanes, archaeological remains, the Cardo's colonnaded Roman-era street and the distinctive Hurva Synagogue. It is an enjoyable area for an unhurried walk between the market streets and the Western Wall.</p>
+        <p>The Jewish Quarter offers restored lanes, archaeological remains, the Cardo's colonnaded Roman-era street and the distinctive Hurva Synagogue. Enjoy a leisurely walk through the Jewish Quarter on your way to the Western Wall.</p>
         <p>The public streets and open sections of the Cardo can be explored freely. Entry to certain archaeological exhibits, synagogue interiors and guided attractions may require a separate ticket or have limited visiting hours.</p>
         <p className="text-xs font-semibold text-muted-foreground">Public lanes free; indoor attractions may be ticketed</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Tower of David Jerusalem Museum and Jaffa Gate" image={{ src: photos.tower, alt: "Ancient stone fortress, towers and courtyards at the Tower of David near Jaffa Gate" }}>
         <p>Just inside Jaffa Gate, the Tower of David's citadel offers an excellent introduction to the city's long history through archaeology, exhibitions and views from the fortress. The nearby gate is also a practical starting point for exploring the Christian and Armenian Quarters.</p>
         <p>Allow around 60–90 minutes for the museum. The main visitor entrance is opposite Jaffa Gate Plaza, near the exit from Mamilla Avenue, rather than through the historic Jaffa Gate passage. Museum tickets are separate from other Old City attractions. <a href={official.towerEntrance} target="_blank" rel="noopener noreferrer" className={inlineLink}>Find the museum entrance</a> and <a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>check tickets and hours</a>.</p>
-        <p>From Jaffa Gate, you can also explore the quieter Armenian Quarter and the Cathedral of St. James. The cathedral normally admits visitors only during short prayer-service periods, and the surrounding monastery is not open for casual visits. <a href={official.stJames} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the visitor arrangements</a> before going.</p>
+        <p>From Jaffa Gate, you can also explore the quieter Armenian Quarter and the Cathedral of St. James. The cathedral usually welcomes visitors during brief prayer services. The surrounding monastery is closed to general visitors. <a href={official.stJames} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the visitor arrangements</a> before going.</p>
         <p className="text-xs font-semibold text-muted-foreground">Museum admission: {info.towerAdult} adult; Jaffa Gate itself is free</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Western Wall Tunnels" image={{ src: photos.tunnels, alt: "Illuminated ancient stone vaults along the underground Western Wall Tunnels tour" }}>
         <p>A guided walk beneath the Old City streets reveals historic sections of the Western Wall, archaeological layers and stone passages that are not visible from the plaza above. Several routes are offered, each with a different emphasis.</p>
-        <p>Unlike the outdoor plaza, tunnel visits are paid and should be booked for a specific tour time. <a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>View tours and book directly with the Western Wall Heritage Foundation</a>.</p>
+        <p>Book your Western Wall Tunnels tour in advance. An admission fee applies. <a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>View tours and book directly with the Western Wall Heritage Foundation</a>.</p>
         <p>Accessibility varies considerably by route: the Great Stone Tour is partly accessible with advance arrangements for wheelchair users, while the Great Bridge route is not wheelchair accessible. Check the <a href={official.tunnelsAccessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>official tour-by-tour accessibility guidance</a> before booking.</p>
         <p className="text-xs font-semibold text-muted-foreground">Ticketed guided tour; advance booking recommended</p>
       </AttractionHighlight>
@@ -105,7 +105,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Explore the streets, prayer plazas and market lanes at your own pace. Use this table to compare visiting arrangements for individual landmarks and book time-specific experiences.</p>
+      <p>Explore the streets, prayer plazas and market lanes at your own pace. Compare opening hours, admission fees and booking requirements for the main landmarks.</p>
       <div role="region" aria-label="Old City opening hours and admission table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" data-testid="jerusalem-old-city-hours-fees">
         <table className="w-full min-w-[830px] border-collapse text-left text-sm">
           <caption className="sr-only">Opening hours, prices and entry information for Old City landmarks</caption>
@@ -137,7 +137,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="jerusalem-old-city-entry">
         <h3 className="font-serif text-xl font-semibold">Choose the right entrance gate</h3>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">Begin at <strong>Jaffa Gate</strong> for the Tower of David and the Christian and Armenian Quarters; use <strong>Dung Gate</strong> for the Western Wall; choose <strong>Damascus Gate</strong> for the Muslim Quarter markets; or enter through <strong>Zion Gate</strong> when arriving from Mount Zion. <strong>New Gate</strong> serves the Christian Quarter, while <strong>Lion's Gate</strong> connects the eastern Old City with the Mount of Olives.</p>
-        <p className="mt-2 text-sm leading-relaxed">The <a href="#getting-there" className={inlineLink}>gate comparison and approach instructions</a> below help you plan a pickup or drop-off.</p>
+        <p className="mt-2 text-sm leading-relaxed">See the <a href="#getting-there" className={inlineLink}>guide to Old City gates</a> below to choose the most convenient entrance.</p>
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="jerusalem-old-city-access">
         <h3 className="font-serif text-xl font-semibold">Accessibility, families and practical facilities</h3>

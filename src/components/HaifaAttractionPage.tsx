@@ -183,7 +183,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
     { icon: "access", label: "Getting around", value: "Walk + transport", note: "Steep slopes between city districts" },
     { icon: "hours", label: "Best time", value: "Daytime", note: "Market and garden access varies" },
   ],
-  glanceNote: <>My advice is to choose an upper-Carmel viewpoint and one neighbourhood at the foot of the mountain, then use transport between them. Add the Bat Galim coast or a museum if your schedule permits.</>,
+  glanceNote: <>I recommend visiting a viewpoint on Mount Carmel and exploring one of the neighbourhoods below, using the Carmelit, a bus or a taxi between them. Add the Bat Galim coast or a museum if your schedule permits.</>,
   highlightContent: (
     <div className="mt-4 space-y-3" data-testid="haifa-eight-highlights">
       <AttractionHighlight title="Bahá’í Gardens and the Shrine of the Báb"
@@ -195,26 +195,26 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Louis Promenade and Carmel Center"
         image={{ src: pictures.carmel, alt: "Panoramic view over Haifa's city slopes and Mediterranean bay from Mount Carmel" }}>
-        <p>Louis Promenade follows Yefe Nof Street on the Carmel ridge, with wide views across the city, port and bay. It is a natural pairing with the Upper Balcony of the Bahá’í Gardens: the two sights are across the street from one another.</p>
-        <p>From Carmel Center, you can walk towards Louis Promenade and the nearby upper garden viewpoint. This is one of the easiest areas for visitors who want a big Haifa view without committing to a long downhill walk.</p>
+        <p>Louis Promenade follows Yefe Nof Street on the Carmel ridge, with wide views across the city, port and bay. Combine your walk with a visit to the upper viewpoint of the Bahá’í Gardens, just across the street.</p>
+        <p>From Carmel Center, you can walk towards Louis Promenade and the nearby upper garden viewpoint. It's an easy way to enjoy panoramic views of Haifa without a long walk downhill.</p>
         {directions("Louis Promenade, Yefe Nof, Haifa, Israel")}
       </AttractionHighlight>
       <AttractionHighlight title="The German Colony"
         image={{ src: pictures.colony, alt: "Ben Gurion Boulevard and the Bahá’í Gardens rising behind Haifa's German Colony" }}>
-        <p>Ben Gurion Boulevard is lined with nineteenth-century Templer-era buildings, restaurants and cafés, with the Bahá’í terraces rising above its eastern end. In the evening, the neighbourhood becomes a pleasant setting for a meal with the illuminated garden axis in view.</p>
+        <p>Ben Gurion Boulevard is lined with nineteenth-century Templer-era buildings, restaurants and cafés, with the Bahá’í terraces rising above its eastern end. In the evening, enjoy dinner overlooking the illuminated Bahá’í Gardens.</p>
         <p>The <Link to="/travel-blog/museums-in-haifa/" className={inlineLink}>Haifa City Museum</Link> occupies a restored historic building nearby, and the lower garden viewpoint at 21 Hagefen Street is a short walk away. Start here for a short walking route into Wadi Nisnas.</p>
         {directions("Ben Gurion Boulevard, German Colony, Haifa, Israel")}
       </AttractionHighlight>
       <AttractionHighlight title="Wadi Nisnas: market and neighbourhood art"
         image={{ src: pictures.wadi, alt: "Stone buildings and street life in the Wadi Nisnas neighbourhood of Haifa", mobileContain: true }}>
-        <p>Wadi Nisnas is a lived-in Arab neighbourhood known for its market lanes, small food businesses and outdoor art. It offers a different side of Haifa from the manicured gardens and waterfront.</p>
+        <p>Wadi Nisnas is a traditional Arab neighbourhood known for its market streets, local food shops and street art. It offers a different side of Haifa from the manicured gardens and waterfront.</p>
         <p>I would browse the market during the day, try a local pastry or hummus and look for the artwork along the streets. Respect residential entrances and ask before photographing people. Market stalls have independent opening hours, including on Sundays.</p>
         {directions("Wadi Nisnas Market, Haifa, Israel")}
       </AttractionHighlight>
       <AttractionHighlight title="Downtown Haifa and the Turkish Market"
         image={{ src: pictures.market, alt: "Pedestrian streets and historic commercial buildings in Haifa's Turkish Market district" }}>
         <p>The Lower City's renovated Turkish Market quarter, around Moshe Aharon Street, is a compact area of historic commercial buildings, cafés, bars and casual dining. It combines well with Wadi Nisnas and the German Colony on foot.</p>
-        <p>Nearby streets around the port give a sense of Haifa's working maritime character. The nightlife is different from daytime market trading, so choose your timing according to whether you want food, architecture or an evening out.</p>
+        <p>The streets around the port reflect Haifa's maritime history and everyday life. Explore the market and historic buildings during the day, or return in the evening for restaurants and bars.</p>
         {directions("Turkish Market, Moshe Aharon Street, Haifa, Israel")}
       </AttractionHighlight>
       <AttractionHighlight title="Stella Maris Monastery and the tourist cable car"
@@ -225,7 +225,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Bat Galim promenade and waterfront"
         image={{ src: pictures.batGalim, alt: "Bat Galim seaside neighbourhood and Haifa Bay by the Mediterranean" }}>
-        <p>Bat Galim feels unlike the hillside districts: its promenade, cafés and sea views reward an easy waterfront stroll. The lower station of the Stella Maris tourist cable car is here, so you can combine the coast with the monastery if the ride is operating.</p>
+        <p>Bat Galim is ideal for a relaxed seaside walk, with cafés and beautiful Mediterranean views along the promenade. The lower station of the Stella Maris tourist cable car is here, so you can combine the coast with the monastery if the ride is operating.</p>
         <p>The nearby <strong>Elijah's Cave</strong> is another optional visit for those interested in religious traditions. Allow travel time between the coastal sites.</p>
         {directions("Bat Galim Promenade, Haifa, Israel")}
       </AttractionHighlight>
@@ -251,7 +251,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
   ),
   itineraryContent: (
     <div className="mt-4 space-y-4" data-testid="haifa-itineraries">
-      <p>Haifa is not a single flat walking destination. I recommend combining short walks within individual districts with a Carmelit, bus or taxi ride when moving between Mount Carmel and the lower streets.</p>
+      <p>Haifa is built on the steep slopes of Mount Carmel. I recommend combining short walks within individual districts with a Carmelit, bus or taxi ride when moving between Mount Carmel and the lower streets.</p>
       <div className="grid gap-3 md:grid-cols-2">
         <article className="rounded-xl border bg-card p-4 sm:p-5">
           <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">A Lower City walk — around 2–3 hours</h3></div>
@@ -277,7 +277,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4" data-testid="haifa-visitor-essentials">
-      <p>Haifa is a city with independent attractions, not one ticketed site. Public streets, many viewpoints, beaches and promenades are free to visit. Museums, commercial cable cars and certain activities set separate prices and schedules.</p>
+      <p>Public streets, many viewpoints, beaches and promenades are free to visit. Museums, commercial cable cars and certain activities set separate prices and schedules.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <article className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2"><Ticket className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Bahá’í Gardens access</h3></div>
