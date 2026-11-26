@@ -19,7 +19,7 @@ const publicDir = path.join(root, "public");
 
 // Keep aligned with siteConfig({}) in src/lib/site.ts.
 // Override by setting VITE_CANONICAL_ORIGIN for the actual deployment domain.
-export const DEFAULT_CANONICAL_ORIGIN = "https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app";
+export const DEFAULT_CANONICAL_ORIGIN = "https://www.israel-taxi.com";
 
 function normalizePath(route) {
   if (!route.startsWith("/") || route.includes("?") || route.includes("#")) {
@@ -103,7 +103,7 @@ async function main() {
   const mode = flag < 0 ? "production" : process.argv[flag + 1];
   if (!["production", "development"].includes(mode)) throw new Error("Invalid Vite mode: " + mode);
   const env = loadEnv(mode, root, "VITE_");
-  const origin = normalizeOrigin(env.VITE_CANONICAL_ORIGIN || DEFAULT_CANONICAL_ORIGIN);
+  const origin = normalizeOrigin(env.VITE_CANONICAL_ORIGIN?.trim() || DEFAULT_CANONICAL_ORIGIN);
   const pages = await collectSitemapPaths();
   await mkdir(publicDir, { recursive: true });
   await Promise.all([

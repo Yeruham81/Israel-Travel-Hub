@@ -5,8 +5,10 @@ export const PRODUCTION_CANONICAL_ORIGIN = "https://www.israel-taxi.com";
 
 /** Pure launch configuration: no publishing or indexing changes occur here. */
 export function siteConfig(env: { VITE_CANONICAL_ORIGIN?: string; VITE_INDEXABLE?: string }) {
-  const origin = (env.VITE_CANONICAL_ORIGIN || "https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app").replace(/\/+$/, "");
-  return { origin, indexable: env.VITE_INDEXABLE === "true" && origin === PRODUCTION_CANONICAL_ORIGIN };
+  const configuredOrigin = (env.VITE_CANONICAL_ORIGIN || "").trim().replace(/\/+$/, "");
+  const origin = configuredOrigin || PRODUCTION_CANONICAL_ORIGIN;
+  // A default canonical address is not permission to index a local/preview build.
+  return { origin, indexable: env.VITE_INDEXABLE === "true" && configuredOrigin === PRODUCTION_CANONICAL_ORIGIN };
 }
 
 export const SITE_CONFIG = siteConfig({
