@@ -208,7 +208,7 @@ describe("migrated Israel itineraries", () => {
     expect(new Set(itineraries["3"].dayTipHeadings).size).toBe(3);
     expect(itineraries["10"].dayTipHeadings).toHaveLength(10);
     expect(view).toContain("My practical planning tips");
-    expect(guide.noCarAdvice).toMatch(/^Jerusalem and Tel Aviv lend themselves to exploring/);
+    expect(guide.noCarAdvice).toMatch(/^Jerusalem and Tel Aviv are easy to explore/);
     expect(guide.noCarAdvice).not.toContain("Choose an organized tour");
 
     expect(messageCopy).toContain("I'm Moshe Barak. I arrange airport transfers, private journeys between cities and sightseeing days with a driver.");
@@ -259,7 +259,7 @@ describe("migrated Israel itineraries", () => {
     expect(g.hotelBases).toContain("flying the day after Day 5");
     expect(g.overviewRows?.[0]?.night).toContain("after Day 1");
     expect(g.overviewRows?.[3]?.night).toContain("after Day 4");
-    expect(g.reality).toContain("five usable sightseeing days");
+    expect(g.reality).toContain("the day before your five-day itinerary begins");
     expect(g.overviewRows).toHaveLength(5);
     expect(g.overviewRows?.every(row => Boolean(row.travel))).toBe(true);
     expect(g.overviewRows?.[4]?.night).toContain("Departure");
