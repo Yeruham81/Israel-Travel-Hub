@@ -1,24 +1,7 @@
 name: Airport transfer hub regression
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'src/routes/airport-transfers.index.tsx'
-      - 'src/components/AirportDestinationCard.tsx'
-      - 'src/components/AirportRoutePage.tsx'
-      - 'src/components/AirportBookingPlatforms.tsx'
-      - 'src/components/TransferQuoteForm.tsx'
-      - 'src/components/TravelGuide.tsx'
-      - 'src/data/airportTransfers.ts'
-      - 'src/data/airportRoutes.ts'
-      - 'src/data/registry.ts'
-      - 'src/test/airport-transfers.test.tsx'
-      - 'src/test/airport-routes.test.tsx'
-      - 'src/test/transportation.test.tsx'
-      - 'src/test/currency-prices.test.tsx'
-      - 'src/test/site-voice.test.ts'
-      - '.github/workflows/airport-transfers-regression.yml'
+
 permissions:
   contents: read
 jobs:

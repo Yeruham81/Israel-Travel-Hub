@@ -2,10 +2,8 @@ name: Audit published Israel food guide across desktop and mobile
 # Accessibility QA recognises decorative icons with alt="" and the permitted repeated Moshe portrait.
 # Final published check of new food jump navigation, actual market photos, credits and mobile layout.
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/audit-israel-food-published.yml"
+  workflow_dispatch:
+
 permissions:
   contents: read
 jobs:

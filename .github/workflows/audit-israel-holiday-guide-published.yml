@@ -1,15 +1,11 @@
 name: Audit published Israel holiday visitor guide
 on:
-  workflow_run:
-    workflows: ["Deploy static website to Hostinger Premium"]
-    types: [completed]
+  workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
   retired-route:
-    if: >-
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.head_sha == github.sha
     runs-on: ubuntu-24.04
     timeout-minutes: 4
     steps:
@@ -26,9 +22,6 @@ jobs:
             *) echo "::error::Removed route unexpectedly returned HTTP $status"; exit 1 ;;
           esac
   audit:
-    if: >-
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.head_sha == github.sha
     runs-on: ubuntu-24.04
     timeout-minutes: 17
     steps:

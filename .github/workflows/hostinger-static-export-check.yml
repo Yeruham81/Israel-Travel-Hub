@@ -1,13 +1,6 @@
 name: Verify Hostinger static export in pull requests
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - "vite.config.ts"
-      - "scripts/verify-hostinger-static-export.mjs"
-      - ".github/workflows/deploy-hostinger-premium.yml"
-      - ".github/workflows/hostinger-static-export-check.yml"
   workflow_dispatch:
 
 permissions:

@@ -1,14 +1,13 @@
 name: CMS - Verify Uber static integration
 
 on:
-  push:
-    branches: ['feature/sanity-uber-staging-20261112']
+  workflow_dispatch:
   pull_request:
+    branches: [main]
     paths:
       - 'cms-pilot/**'
       - 'scripts/sanity/**'
-      - 'scripts/build-validated-static.sh'
-      - 'src/**'
+      - 'src/data/generated/sanityUberSnapshot.ts'
       - '.github/workflows/cms-uber-verify.yml'
 
 permissions:

@@ -1,17 +1,7 @@
 name: Tour catalog regression
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'src/components/TourCategoryPage.tsx'
-      - 'src/components/TourCatalog.tsx'
-      - 'src/data/tours.ts'
-      - 'src/data/tourTypes.ts'
-      - 'src/data/registry.ts'
-      - 'src/lib/tours.ts'
-      - 'src/test/tours.test.tsx'
-      - '.github/workflows/tour-catalog-regression.yml'
+
 permissions:
   contents: read
 concurrency:

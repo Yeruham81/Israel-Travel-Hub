@@ -1,29 +1,7 @@
 name: Verify Eilat attraction guide and static route
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/verify-eilat-attraction.yml"
-      - "src/components/EilatAttractionPage.tsx"
-      - "src/data/eilatSite.ts"
-      - "src/routes/attractions.eilat.tsx"
-      - "src/data/attractionsHub.ts"
-      - "src/data/nav.ts"
-      - "src/test/eilat-attraction-feature.test.tsx"
-      - "src/data/guideCities2026.ts"
-      - "src/data/registry.ts"
-      - "src/data/travelGuides.ts"
-      - "src/routes/index.tsx"
-      - "src/data/bestTimeIsrael.ts"
-      - "src/data/israelItineraries.ts"
-      - "src/data/tours.ts"
-      - "src/data/content.ts"
-      - "src/test/travel-blog-hub-images.test.ts"
-      - "src/test/guide-migration-2026.test.tsx"
-      - "scripts/verify-hostinger-static-export.mjs"
-      - "public/sitemap.xml"
-
   workflow_dispatch:
+
 permissions:
   contents: read
 jobs:

@@ -6,6 +6,13 @@ on:
       - 'src/components/PortPage.tsx'
       - 'src/components/Shore*.tsx'
       - 'src/data/shore*.ts'
+      - 'src/lib/shore-*.ts'
+      - 'src/components/QuoteFormIntro.tsx'
+      - 'src/components/QuoteSubmissionControls.tsx'
+      - 'src/hooks/useQuoteSubmission.ts'
+      - 'src/components/ConsentIframe.tsx'
+      - 'src/hooks/use-cookie-consent.ts'
+      - 'src/lib/cookie-consent.ts'
       - 'src/routes/shore-excursions*'
       - 'public/maps/shore-destinations.html'
       - 'scripts/audit-shore-excursions.cjs'
@@ -49,7 +56,7 @@ jobs:
           done
           cat /tmp/shore-vite.log
           exit 1
-      - name: Audit actual maps, consent, responsive forms and catalog navigation
+      - name: Audit map consent, quote validation and catalog navigation
         env:
           NODE_PATH: /tmp/shore-audit/node_modules
         run: node scripts/audit-shore-excursions.cjs

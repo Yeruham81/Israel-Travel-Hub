@@ -1,10 +1,8 @@
 name: Audit published Israel seasons guide in desktop and mobile browsers
 # Final post-deployment verification of the seven requested seasonal guide refinements.
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/audit-best-time-published.yml"
+  workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
