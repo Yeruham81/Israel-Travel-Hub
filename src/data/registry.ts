@@ -2059,25 +2059,25 @@ export const hotelRecommendations: HotelRecommendation[] = [
     id: "tlv-florentin-house", cityId: "telaviv", areaId: "telaviv-florentin", name: "Florentin House by HOMY", style: "Neighborhood stay on Florentin Street",
     summary: "A small-property option on Florentin Street listed by HOMY, placing you within the neighborhood's everyday café and nightlife setting. Check the current room descriptions and accommodation format.",
     bestFor: "Independent visitors who want Florentin itself as their base for the southern city.",
-    watch: "Confirm the exact room or unit, private facilities, check-in process and sound insulation. Do not assume an older hostel listing describes the current offer.", sourceId: "hotel-tlv-florentin-house-official",
+    watch: "Confirm the exact room or unit, private facilities, check-in process and sound insulation. Check the property's current room descriptions before booking.", sourceId: "hotel-tlv-florentin-house-official",
   },
   {
     id: "tlv-poli-house", cityId: "telaviv", areaId: "telaviv-kerem", name: "Poli House by AFI Hotels", style: "Design hotel by the Carmel Market district",
     summary: "An AFI design hotel by the Allenby and Nachalat Binyamin market-side streets. It offers access to Carmel Market and the Yemenite Quarter, while its busier edge location differs from a room within the quarter's small residential lanes.",
     bestFor: "Couples and city-break visitors who want design and nearby market food and nightlife.",
-    watch: "Some room categories are compact. Confirm the exact size, balcony if offered, noise exposure and any rooftop or leisure access included.", sourceId: "hotel-tlv-poli-house-official",
+    watch: "Some room categories are compact. Check room size, balcony availability, noise levels and access to rooftop facilities.", sourceId: "hotel-tlv-poli-house-official",
   },
   {
     id: "tlv-assemblage", cityId: "telaviv", areaId: "telaviv-kerem", name: "Assemblage Boutique", style: "Historic boutique stay on the quarter's northern edge",
     summary: "A small property in a preserved building at 48 Allenby Street, near the northern edge of Kerem HaTeimanim. Its rooms, studios and suites offer different layouts, with access toward both the beach and Carmel Market from a busy central street.",
     bestFor: "Couples and independent visitors who enjoy historic buildings and a central market-and-beach base.",
-    watch: "The operator states that the building has no lift. Confirm stairs, the self-service check-in process, exact room layout and street-facing versus courtyard outlook.", sourceId: "hotel-tlv-assemblage-official",
+    watch: "The operator states that the building has no lift. Check the stairs, self check-in arrangements, room layout and whether your room faces the street or courtyard.", sourceId: "hotel-tlv-assemblage-official",
   },
   {
     id: "tlv-the-norman", cityId: "telaviv", areaId: "telaviv-rothschild", name: "The Norman Tel Aviv", style: "Luxury heritage hotel off Rothschild",
-    summary: "A luxury property in restored buildings on Nachmani Street, near Rothschild Boulevard rather than directly on it. The historic setting suits visitors who want a distinctive hotel alongside access to the central city's restaurants and architecture.",
+    summary: "A luxury hotel in restored historic buildings on Nachmani Street, a short walk from Rothschild Boulevard. The historic setting suits visitors who want a distinctive hotel alongside access to the central city's restaurants and architecture.",
     bestFor: "Couples and luxury city stays where the property itself is part of the trip.",
-    watch: "Confirm the exact building and room category, and check breakfast, leisure access and any additional charges in your selected offer.", sourceId: "hotel-tlv-the-norman-official",
+    watch: "Check your room's location, breakfast, access to leisure facilities and any additional charges.", sourceId: "hotel-tlv-the-norman-official",
   },
   {
     id: "tlv-65-rothschild", cityId: "telaviv", areaId: "telaviv-rothschild", name: "65 Hotel Rothschild", style: "Boutique hotel directly on Rothschild Boulevard",
@@ -2231,15 +2231,15 @@ export const routeFaqs: { q: string; a: string }[] = [
   },
   {
     q: "We are more than four people with lots of luggage. What should I book?",
-    a: "Ask for a group quote and state the exact number of passengers, suitcases and any oversized items such as strollers or golf bags. Don't assume a standard car fits; confirm the vehicle type in writing.",
+    a: "Send me your passenger count, number of suitcases and details of any large items such as strollers or golf bags. I'll confirm a suitable vehicle for your group and luggage.",
   },
   {
     q: "Can I travel on Shabbat or holidays?",
-    a: "Check Israel Railways' current service for your exact date before relying on the train. For a transfer or taxi, confirm the provider's availability and any night, weekend or holiday charges for your arrival time.",
+    a: "Check Israel Railways' timetable for your travel date. For a transfer or taxi, confirm the provider's availability and any night, weekend or holiday charges for your arrival time.",
   },
   {
     q: "Is there a train instead?",
-    a: "Yes, Israel Railways serves the airport and Jerusalem. Schedules and fares change, so check the official Israel Railways site for your travel date and consider the extra step from the station to your accommodation.",
+    a: "Yes, Israel Railways serves the airport and Jerusalem. Check train times and fares on the Israel Railways website, and plan the journey from the station to your hotel.",
   },
 ];
 
@@ -2289,13 +2289,13 @@ export const providerLinks: ProviderLink[] = [
       relationship: partner ? "booking_platform" : "independent_operator", operatorId: operator.id, ...(partner ? { partnerId: partner.id } : {}),
       mode: "provider_redirect", title: product.title, summary: product.summary,
       ctaLabel: `View on ${partner?.name || operator.name}`, url: trackingUrl || product.publicUrl, isAffiliate: Boolean(trackingUrl), sourceId: product.id,
-      reentryNote: "Select your actual sailing date and party on the booking site. Confirm the port and return arrangements before booking.",
-      confirm: ["Actual sailing date and port-call times", "Exact port meeting point", "Guide, group format and inclusions", "Site access and admission fees", "Return arrangements and cancellation terms"],
+      reentryNote: "Enter your cruise date and number of passengers on the booking site. Confirm the port and return arrangements before booking.",
+      confirm: ["Cruise date and hours in port", "Exact port meeting point", "Guide, group format and inclusions", "Site access and admission fees", "Return arrangements and cancellation terms"],
     };
   }),
   ...([
-    ["airalo", "Airalo", "Compare Israel package sizes, validity and the inclusions of the exact plan."],
-    ["saily", "Saily", "Compare data packages and any optional call/text product separately; check the number's country."],
+    ["airalo", "Airalo", "Compare data allowances, validity periods and included services."],
+    ["saily", "Saily", "Compare data plans, optional calls and SMS, and the country of any included phone number."],
     ["yesim", "Yesim", "Compare fixed data with unlimited packages and read the fair-use speed conditions."],
     ["gigsky", "GigSky", "Choose Israel in the app or site; check country coverage if considering a regional or wider-travel package."],
     ["drimsim", "Drimsim", "Compare pay-as-you-use data costs and setup terms with a fixed-data travel package."],
@@ -2304,7 +2304,7 @@ export const providerLinks: ProviderLink[] = [
     const trackingUrl = affiliateConfig[id]?.trackingUrl;
     return { id, pageIds: ["guide-esim"], providerName, relationship: "booking_platform", partnerId, mode: "provider_redirect", title: `${providerName} for Israel`, summary,
       ctaLabel: `Check plans on ${providerName}`, url: trackingUrl || travelGuideSources.find((source) => source.id === `guide-esim-${partnerId}`)!.url, isAffiliate: Boolean(trackingUrl), sourceId: `guide-esim-${partnerId}`,
-      confirm: ["Exact device compatibility", "Country coverage and activation", "Data and validity", "Hotspot and fair-use rules", "Final price and refund terms"], reentryNote: "Choose and purchase the plan on the provider's site. No live price, network speed or completed purchase is verified here." };
+      confirm: ["Exact device compatibility", "Country coverage and activation", "Data and validity", "Hotspot and fair-use rules", "Final price and refund terms"], reentryNote: "Choose your preferred plan and check the latest prices and terms on the provider's website." };
   }),
   ...([
     ["kiwitaxi", "Kiwitaxi", "kiwitaxi-airport", "Choose your destination and vehicle on Kiwitaxi's Ben Gurion Airport page."],
@@ -2317,7 +2317,7 @@ export const providerLinks: ProviderLink[] = [
     return { id, pageIds: ["airport-private-transfers", ...airportTransferRoutes.map((route) => `airport-route-${route.id}`)], providerName, relationship: "booking_platform", partnerId, mode: "provider_redirect",
       title: `${providerName} airport transfers`, summary, ctaLabel: `Check transfers on ${providerName}`,
       url: trackingUrl || sources.find((source) => source.id === sourceId)!.url, isAffiliate: Boolean(trackingUrl),
-      reentryNote: "Enter Ben Gurion Airport, your exact destination, date, passengers and luggage on the provider's site.",
+      reentryNote: "Enter your airport pickup, destination, travel date, passenger count and luggage details.",
       confirm: ["Route and pickup time", "Vehicle and luggage allowance", "Total price and waiting policy", "Cancellation terms"], sourceId };
   }),
   ...[...hotelRecommendations, ...neighborhoodHotelAdditions].map((hotel): ProviderLink => {
