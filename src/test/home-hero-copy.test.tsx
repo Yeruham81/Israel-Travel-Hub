@@ -291,10 +291,13 @@ describe("homepage marketing copy and service sections", () => {
 
     const aboutMoshe = screen.getByRole("complementary", { name: "About Moshe Barak" });
     expect(within(aboutMoshe).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
+    expect(within(aboutMoshe).getByRole("link", { name: "Read more about me" })).toHaveAttribute("href", "/about-me/");
+    expect(within(aboutMoshe).getByRole("link", { name: /Read Reviews on TripAdvisor/i })).toBeInTheDocument();
     const homepageContact = document.getElementById("contact")!;
     expect(homepageContact).toBeInTheDocument();
     expect(homepageContact.querySelector('[data-photo-role="contact-portrait"]')).toBeNull();
-    expect(homepageContact.querySelector('[data-testid="contact-tripadvisor-reviews"] a[href*="tripadvisor"]')).not.toBeNull();
+    expect(homepageContact.querySelector('[data-testid="contact-reviews-row"]')).toBeNull();
+    expect(homepageContact.querySelector('[data-testid="contact-tripadvisor-reviews"] a[href*="tripadvisor"]')).toBeNull();
     expect(within(homepageContact).getByRole("form", { name: "Homepage contact message" })).toBeInTheDocument();
 
     expect(screen.queryByRole("heading", { name: /Airport Transfers & Private Drivers/i })).not.toBeInTheDocument();
