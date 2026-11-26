@@ -15,7 +15,7 @@ const broadHubs = [
 const focusedPages = [
   "src/components/AirportRoutePage.tsx",
   "src/components/TourCategoryPage.tsx",
-  "src/components/AttractionGuidePage.tsx",
+  "src/components/AttractionDestinationPage.tsx",
   "src/components/PortPage.tsx",
   "src/components/Guide.tsx",
 ] as const;
@@ -52,7 +52,7 @@ describe("consistent top-of-page layout for service and discovery hubs", () => {
     const media = read("src/components/GuideHeroMedia.tsx");
     expect(media).toContain("lg:max-h-[260px]");
     expect(media).toContain("lg:aspect-[4/3]");
-    expect(read("src/components/AttractionGuidePage.tsx")).not.toContain("caption={id ===");
+    expect(read("src/components/AttractionDestinationPage.tsx")).not.toContain("caption={id ===");
   });
 
   it("preserves the unique photographic design of the main homepage", () => {
