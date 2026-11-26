@@ -144,7 +144,7 @@ describe("shore excursions", () => {
     });
     expect(container.querySelector("#itineraries")!.compareDocumentPosition(container.querySelector("#request-quote")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     // Exact category-page order: catalog (external then private), planning, FAQ, local, practical, contact.
-    const sections = ["#external-tours", "#my-private-days", '[aria-labelledby="shore-planning-h"]', "#faq", '[aria-labelledby="shore-local-h"]', '[aria-labelledby="shore-practical-h"]', "#request-quote"];
+    const sections = ["#external-tours", "#my-private-days", '[aria-labelledby="shore-planning-h"]', "#faq", '[aria-labelledby="shore-local-h"]', '#shore-practical', "#request-quote"];
     const nodes = sections.map(selector => container.querySelector(selector));
     expect(nodes.every(Boolean)).toBe(true);
     for (let i = 1; i < nodes.length; i++) expect(nodes[i - 1]!.compareDocumentPosition(nodes[i]!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
@@ -174,7 +174,9 @@ describe("shore excursions", () => {
       expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
     }
     expect(container.querySelector("#route-fit, #benefits-h, #timing, #format, #check, #ready-h")).toBeNull();
-    expect(screen.getByRole("heading", { name: "Practical guides for your trip to Israel" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Plan the next part of your trip" })).toBeInTheDocument();
+    expect(screen.getByRole("table",{name:"Compare destinations from "+port.name})).toBeInTheDocument();
+    expect(screen.getByRole("navigation",{name:"On this page"})).toBeInTheDocument();
     const practical = container.querySelector('section[aria-labelledby="shore-practical-h"]');
     expect(practical?.querySelectorAll("a")).toHaveLength(6);
     expect(practical?.querySelector("div.lg\\:grid-cols-3")).not.toBeNull();

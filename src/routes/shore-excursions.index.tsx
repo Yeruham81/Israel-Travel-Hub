@@ -1,3 +1,4 @@
+import { ShoreHubComparison } from "@/components/ShorePlanning";
 import { TripadvisorReviewsButton } from "@/components/TripadvisorReviewsButton";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { IconTripPlanningLinks } from "@/components/IconTripPlanningLinks";
@@ -113,6 +114,10 @@ function Shore() {
         </ul>
       </section>
 
+      <section id="compare-ports" aria-labelledby="compare-ports-h" className="mt-9">
+        <h2 id="compare-ports-h" className="text-2xl font-semibold">Compare destinations by cruise port</h2>
+        <ShoreHubComparison/>
+      </section>
       <section id="tour-formats" aria-labelledby="shore-formats-h" className="mt-9 scroll-mt-24">
         <h2 id="shore-formats-h" className="text-2xl font-semibold">Private driver or guided excursion?</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
