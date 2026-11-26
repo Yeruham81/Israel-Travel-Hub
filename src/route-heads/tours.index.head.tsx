@@ -1,4 +1,4 @@
-import { tourCategories, tourCategoryPaths, toursHubHero, toursHubDescription, toursHubFaqs, toursHubTitle } from "@/data/tours";
+import { tourCategories, tourCategoryPaths, toursHubHero, toursHubDescription, toursHubTitle } from "@/data/tours";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { Route } from "../routes/tours.index";
 

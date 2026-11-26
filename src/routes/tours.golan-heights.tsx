@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TourCategoryPage, tourCategoryMeta } from "@/components/TourCategoryPage";
+import { TourCategoryPage } from "@/components/TourCategoryPage";
 import { parseTourSearch } from "@/lib/tours";
 
 export const Route = createFileRoute("/tours/golan-heights")({

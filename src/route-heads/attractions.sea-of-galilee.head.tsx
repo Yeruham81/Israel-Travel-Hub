@@ -1,4 +1,4 @@
-import { SeaOfGalileeAttractionPage, seaOfGalileeSite } from "@/components/SeaOfGalileeAttractionPage";
+import { seaOfGalileeSite } from "@/components/SeaOfGalileeAttractionPage";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 

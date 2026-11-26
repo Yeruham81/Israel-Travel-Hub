@@ -1,4 +1,4 @@
-import { DeadSeaAttractionPage, deadSeaSite } from "@/components/DeadSeaAttractionPage";
+import { deadSeaSite } from "@/components/DeadSeaAttractionPage";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 

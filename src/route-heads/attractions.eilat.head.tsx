@@ -1,4 +1,4 @@
-import { EilatAttractionPage, eilatDestinationContent } from "@/components/EilatAttractionPage";
+import { eilatDestinationContent } from "@/components/EilatAttractionPage";
 import { eilatSite } from "@/data/eilatSite";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";

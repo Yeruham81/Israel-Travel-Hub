@@ -1,11 +1,7 @@
 import { getShorePort } from "@/data/shoreExcursions";
 import cruisePortFeature from "@/assets/home/cruise-port-feature.webp";
-import {
-  shoreHubDescription, shoreHubExperiences, shoreHubFaqs, shoreHubPorts,
-  shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_UPDATED_DATE,
-  shorePlanningSteps, shoreTourFormats,
-} from "@/data/shoreHub";
-import { publicSources, shorePorts, travelGuidePaths } from "@/data/registry";
+import { shoreHubDescription, shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_UPDATED_DATE } from "@/data/shoreHub";
+import { publicSources, shorePorts } from "@/data/registry";
 import { authorLd } from "@/lib/author";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta, SITE_NAME } from "@/lib/site";
 import { Route } from "../routes/shore-excursions.index";

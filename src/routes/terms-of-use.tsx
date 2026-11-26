@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { LegalPage, legalPageMeta, type LegalSection } from "@/components/LegalPage";
+import { LegalPage, type LegalSection } from "@/components/LegalPage";
 import { airportTransferContact } from "@/data/registry";
 
 export const Route = createFileRoute("/terms-of-use")({

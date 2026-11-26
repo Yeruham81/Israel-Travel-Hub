@@ -1,4 +1,4 @@
-import { ViaDolorosaAttractionPage, viaDolorosaDestinationContent } from "@/components/ViaDolorosaAttractionPage";
+import { viaDolorosaDestinationContent } from "@/components/ViaDolorosaAttractionPage";
 import { viaDolorosaSite } from "@/data/viaDolorosaSite";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";

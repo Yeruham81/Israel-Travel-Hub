@@ -1,10 +1,7 @@
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { holidayGuideSources } from "@/data/israelHolidayVisitorGuide";
-import {
-  HOLIDAY_GUIDE_PATH, HOLIDAY_GUIDE_TITLE, HOLIDAY_GUIDE_DESCRIPTION, HOLIDAY_GUIDE_UPDATED,
-  HOLIDAY_GUIDE_PHOTO, IsraelHolidayVisitorGuidePage,
-} from "@/components/IsraelHolidayVisitorGuide";
+import { HOLIDAY_GUIDE_PATH, HOLIDAY_GUIDE_TITLE, HOLIDAY_GUIDE_DESCRIPTION, HOLIDAY_GUIDE_UPDATED, HOLIDAY_GUIDE_PHOTO } from "@/components/IsraelHolidayVisitorGuide";
 import { Route } from "../routes/travel-blog.calendar-of-events";
 
 export const routeHead = () => {

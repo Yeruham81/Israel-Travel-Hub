@@ -1,4 +1,4 @@
-import { MountZionAttractionPage, mountZionDestinationContent } from "@/components/MountZionAttractionPage";
+import { mountZionDestinationContent } from "@/components/MountZionAttractionPage";
 import { mountZionSite } from "@/data/mountZionSite";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";

@@ -1,3 +1,3 @@
-import { PortPage, shorePortMeta } from "@/components/PortPage";
+import { shorePortMeta } from "@/components/PortPage";
 
 export const routeHead = () => shorePortMeta("ashdod");
