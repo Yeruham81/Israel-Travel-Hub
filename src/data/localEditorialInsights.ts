@@ -56,7 +56,7 @@ export const areaDecisionNotes: Record<string, AreaDecision> = {
     heading: "Staying near Dizengoff Square",
     choose: "The square and its nearby blocks make a convenient walking base for cafés, city architecture and routes toward the central beach.",
     compare: "A hotel much farther north on Dizengoff serves a different set of neighborhoods; a central beachfront stay is better for visitors who want the sand immediately nearby.",
-    arrival: "Check your hotel's street number and its distance from Dizengoff Square. From the airport train station, continue to your hotel by bus or taxi.",
+    arrival: "Check your hotel's street number and its distance from Dizengoff Square. From your arrival station in Tel Aviv, continue to your hotel by bus or taxi.",
   },
   "telaviv-old-north": {
     heading: "Residential Old North or the lively port?",
