@@ -61,7 +61,7 @@ const deadSeaHotelNotes: Record<string, HotelEditorNote> = {
     kind: "Design resort",
     summary: "A Greek-inspired, low-rise Ein Bokek hotel with beach access and spa facilities.",
     bestFor: "Couples who enjoy distinctive design",
-    consider: "Private pools and outdoor areas depend on the exact room category.",
+    consider: "Private pools and outdoor areas are available with selected room types.",
     beach: "Beachfront access",
   },
   "ds-nevo": {
@@ -73,7 +73,7 @@ const deadSeaHotelNotes: Record<string, HotelEditorNote> = {
   },
   "ds-oasis": {
     kind: "Wellness hotel",
-    summary: "A spa-focused hotel in Ein Bokek with a Moroccan-inspired wellness complex and a short beach walk.",
+    summary: "A hotel in Ein Bokek with a Moroccan-inspired spa, a short walk from the beach.",
     bestFor: "Visitors seeking an age-restricted spa atmosphere",
     consider: "The hotel lists entry from 16; check-in is from 18, with accompaniment rules for younger guests.",
     beach: "Short walk to the beach",
@@ -108,7 +108,7 @@ const deadSeaHotelNotes: Record<string, HotelEditorNote> = {
   },
   "ds-ein-gedi": {
     kind: "Nature retreat",
-    summary: "An inland hotel amid Ein Gedi's gardens, with the Synergy Spa and access to nearby nature outings.",
+    summary: "A hotel surrounded by Ein Gedi's gardens, with the Synergy Spa and nearby hiking trails and nature attractions.",
     bestFor: "Nature-focused visits and spa time",
     consider: "The hotel is not beside an operating bathing beach; plan beach time separately.",
     beach: "Travel required to an operating beach",
@@ -125,10 +125,10 @@ const deadSeaHotelNotes: Record<string, HotelEditorNote> = {
 const bookingTips = [
   { title: "Check the real beach route", text: "A beachfront label may mean direct access, a short walk, a pathway or a hotel shuttle." },
   { title: "Separate hotel and spa age rules", text: "Hotels may apply separate minimum ages to accommodation, spa access and mineral pools." },
-  { title: "Compare pool types", text: "Freshwater, Dead Sea mineral-water and sulphur pools are different facilities, with different access rules." },
+  { title: "Compare pool types", text: "Check which freshwater, mineral-water and sulphur pools are included in your stay and whether access restrictions apply." },
   { title: "Read the meal plan", text: "Confirm breakfast, half-board or all-inclusive details, including drinks and snacks where relevant." },
   { title: "Check family facilities", text: "Ask about the dates, hours and age limits for children's clubs, slides and outdoor pools." },
-  { title: "Select the exact room", text: "Sea views, private pools, connecting rooms and accessible entrances depend on the room category." },
+  { title: "Select the exact room", text: "Check whether your chosen room includes a sea view, private pool, connecting rooms or accessible facilities." },
   { title: "Plan the arrival and return", text: "Confirm the hotel entrance, bus stop or transfer, especially on Friday evenings and Jewish holidays." },
   { title: "Compare the total cost", text: "Check taxes, spa extras, parking, cancellation deadlines and all guests before paying." },
 ] as const;

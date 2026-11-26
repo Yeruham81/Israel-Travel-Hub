@@ -37,7 +37,7 @@ const hotelNotes: Record<string, HotelNote> = {
     kind: "Design hotel",
     summary: "Contemporary design, a spa and a seasonal rooftop plunge pool beside the lower Bahá'í Gardens.",
     bestFor: "Couples and guests aged 16+ seeking a stylish German Colony stay",
-    consider: "Confirm the 16+ guest rule, spa extras and rooftop plunge-pool season.",
+    consider: "Guests must be aged 16 or older. Check additional spa charges and seasonal rooftop pool opening hours.",
     beach: "Travel required for a swimming beach",
   },
   "haifa-dan-carmel": {
@@ -58,7 +58,7 @@ const hotelNotes: Record<string, HotelNote> = {
     kind: "Historic boutique",
     summary: "A preserved hotel on Ben Gurion Boulevard, close to restaurants and the lower Bahá'í Gardens.",
     bestFor: "Visitors who want to walk around the German Colony",
-    consider: "Compare room outlook, boulevard noise, parking and breakfast inclusion.",
+    consider: "Check room views, street noise, parking and whether breakfast is included.",
     beach: "City location; travel to the beach",
   },
   "haifa-crowne-plaza": {
@@ -92,13 +92,13 @@ const hotelNotes: Record<string, HotelNote> = {
   "haifa-port-inn": {
     kind: "Independent guesthouse",
     summary: "Smaller accommodation on Derech Yafo for exploring downtown and the lower city.",
-    bestFor: "Independent visitors who prefer a straightforward town base",
-    consider: "Confirm current room and bathroom arrangements, reception and late arrival directly.",
+    bestFor: "Independent travellers looking for simple accommodation in downtown Haifa",
+    consider: "Check room facilities, bathroom type and reception hours if you're arriving late.",
     beach: "Downtown; travel to a swimming beach",
   },
   "haifa-loui-talpiot": {
     kind: "Market-area hotel",
-    summary: "A small stay beside Talpiot Market in Hadar, with kitchenette options and shared rooftop areas.",
+    summary: "A small accommodation option near Talpiot Market in Hadar, with rooms offering kitchenettes and access to shared rooftop areas.",
     bestFor: "Food and market enthusiasts and self-catering travelers",
     consider: "Check kitchen equipment, steps, event noise and travel between Hadar and the Carmel.",
     beach: "Hadar location; separate beach journey",
@@ -129,7 +129,7 @@ const groupCopy: Record<string, { title: string; eyebrow: string; advice: string
   budget: {
     title: "Independent & budget-minded stays",
     eyebrow: "Simple rooms and local character",
-    advice: "Port Inn and Loui Talpiot offer different lower-city and Hadar settings. Compare room facilities, arrival arrangements and the total price.",
+    advice: "Port Inn is located in downtown Haifa, while Loui Talpiot is near Talpiot Market in Hadar. Compare room facilities, arrival arrangements and the total price.",
   },
 };
 
@@ -138,7 +138,7 @@ const groupTips: Record<string, { title: string; points: readonly [string, strin
     title: "Choose your Haifa luxury base",
     points: [
       "Decide whether you want German Colony restaurants nearby or a hotel high on the Carmel.",
-      "Confirm the exact guest ages, room outlook and seasonal pool arrangements.",
+      "Check minimum guest ages, room views and seasonal pool opening hours.",
     ],
   },
   boutique: {
@@ -158,7 +158,7 @@ const groupTips: Record<string, { title: string; points: readonly [string, strin
   "mid-range": {
     title: "Compare hotel rates and daily transport",
     points: [
-      "Include the climb between downtown and the Carmel in your transport plan.",
+      "Use the Carmelit, buses or taxis to travel between downtown Haifa and Mount Carmel.",
       "If you book Nof under the Haifa Bay View name, confirm the address.",
     ],
   },
