@@ -10,7 +10,7 @@ export type TelAvivBeach = {
   access: string;
   accessShort: string;
   highlights: string;
-  /** Local image fields intentionally left empty for the later beach photo batch. */
+  /** Local photographs; use distinct images for the quick pick and detailed card. */
   pickPhoto?: { src: string; alt: string };
   detailPhoto?: { src: string; alt: string };
   lat: number;
@@ -41,6 +41,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "tel-baruch", name: "Tel Baruch Beach", area: "Northern coast",
+    detailPhoto: { src: "/images/tel-aviv-beaches/tel-baruch.webp", alt: "Tel Baruch Beach with its open sandy shoreline and coastal cliffs" },
     bestFor: "A relaxed beach day", summary: "North of Tel Aviv Port, this broad beach has a more local feel, with facilities and a separate dog area farther along the shore. It is not a quick stroll from the central hotel strip.",
     tip: "The off-leash area is south of the kite-surfing section, not inside the supervised swimming zone.",
     access: "North of the port; use a suitable bus, taxi or car.",
@@ -50,6 +51,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "metzitzim", name: "Metzitzim Beach", area: "Northern coast",
+    detailPhoto: { src: "/images/tel-aviv-beaches/metzitzim.webp", alt: "Sunbeds and umbrellas at Metzitzim Beach near Tel Aviv Port" },
     bestFor: "Families near the port", summary: "Beside Tel Aviv Port, Metzitzim is popular with families because of its nearby facilities, child-friendly beach amenities and opportunities to stop for food or a promenade walk.",
     tip: "Choose the marked swimming area and keep children under close supervision, regardless of how calm the water appears.",
     access: "Beside Tel Aviv Port; a pleasant addition to a port visit.",
@@ -67,6 +69,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "hilton", name: "Hilton Beach", area: "Northern coast",
+    detailPhoto: { src: "/images/tel-aviv-beaches/hilton.webp", alt: "Rainbow flags along the promenade at Hilton Beach" },
     bestFor: "LGBTQ+ social scene and water sports", summary: "The area below the Hilton Hotel is especially well known for its LGBTQ+ scene, as well as surfing and other water-based activities. Look for the specific stretch suited to your plans.",
     tip: "The dog-friendly off-leash area is north of the declared swimming beach, with its own signs.",
     access: "Near Independence Park, north of the marina.",
@@ -76,6 +79,8 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "gordon", name: "Gordon Beach", area: "Central seafront",
+    detailPhoto: { src: "/images/tel-aviv-beaches/gordon.webp", alt: "Gordon Beach and the beachfront hotels seen from the breakwater" },
+    pickPhoto: { src: "/images/top-ten-israel/beaches.webp", alt: "Gordon Beach and the palm-lined Tel Aviv promenade" },
     bestFor: "The classic Tel Aviv beach", summary: "A lively stretch at the foot of Gordon Street, with volleyball, the beachfront promenade and places to eat nearby. It's a natural first stop if you want to experience Tel Aviv beach culture.",
     tip: "Visit early on a hot weekend for more room on the sand, and enjoy the promenade after your swim.",
     access: "End of Gordon Street, near the marina and Gordon Pool.",
@@ -85,6 +90,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "frishman", name: "Frishman Beach", area: "Central seafront",
+    detailPhoto: { src: "/images/tel-aviv-beaches/frishman.webp", alt: "Sandy Frishman Beach with volleyball nets and shade shelters" },
     bestFor: "Central hotels and easy access", summary: "One of the simplest beaches to reach if you stay near the central promenade. Frishman works well for a few hours by the sea followed by lunch or sightseeing inland.",
     tip: "If you're meeting someone, use the Frishman Street beach entrance as your meeting point.",
     access: "End of Frishman Street; convenient for many beachfront hotels.",
@@ -102,6 +108,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "jerusalem", name: "Jerusalem Beach", area: "Central seafront",
+    detailPhoto: { src: "/images/tel-aviv-beaches/jerusalem.webp", alt: "Jerusalem Beach with a lifeguard tower and shaded seating" },
     bestFor: "Seafront and central-city walking", summary: "Just off the end of Allenby Street, Jerusalem Beach is a practical choice for combining the sea with cafés and central Tel Aviv. The beachfront promenade continues toward Jaffa.",
     tip: "Make time for a promenade walk south toward the older parts of the city if the weather is pleasant.",
     access: "End of Allenby Street, near Opera Tower.",
@@ -127,6 +134,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "givat-aliya", name: "Givat Aliya Beach", area: "Southern coast and Jaffa",
+    detailPhoto: { src: "/images/tel-aviv-beaches/givat-aliya.webp", alt: "Givat Aliya Beach and the stone arches along the Jaffa waterfront" },
     bestFor: "A local Jaffa atmosphere", summary: "Farther south in Jaffa, Givat Aliya is known for its seaside setting and distinctive stone arches near the shore. It feels quite different from the beach-and-hotel strip in central Tel Aviv.",
     tip: "Allow for a separate journey from central Tel Aviv. Follow local signs for the supervised swimming zone and the designated dog area to the south.",
     access: "Southern Jaffa, well beyond Old Jaffa Port.",
