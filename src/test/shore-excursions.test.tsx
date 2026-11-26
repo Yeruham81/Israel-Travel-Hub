@@ -144,7 +144,7 @@ describe("shore excursions", () => {
     });
     expect(container.querySelector("#itineraries")!.compareDocumentPosition(container.querySelector("#request-quote")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     // Exact category-page order: catalog (external then private), planning, FAQ, local, practical, contact.
-    const sections = ["#external-tours", "#my-private-days", '[aria-labelledby="shore-planning-h"]', "#faq", '[aria-labelledby="shore-local-h"]', '#shore-practical', "#request-quote"];
+    const sections = ["#external-tours", "#my-private-days", "#shore-planning", "#shore-map", "#port-pickup", "#return-to-ship", "#faq", '[aria-labelledby="shore-local-h"]', '#shore-practical', "#request-quote"];
     const nodes = sections.map(selector => container.querySelector(selector));
     expect(nodes.every(Boolean)).toBe(true);
     for (let i = 1; i < nodes.length; i++) expect(nodes[i - 1]!.compareDocumentPosition(nodes[i]!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
@@ -179,7 +179,7 @@ describe("shore excursions", () => {
     expect(screen.getByRole("navigation",{name:"On this page"})).toBeInTheDocument();
     const practical = container.querySelector('section[aria-labelledby="shore-practical-h"]');
     expect(practical?.querySelectorAll("a")).toHaveLength(6);
-    expect(practical?.querySelector("div.lg\\:grid-cols-3")).not.toBeNull();
+    expect(practical?.querySelector("ul.lg\\:grid-cols-3")).not.toBeNull();
         expect(container.querySelector("a a")).toBeNull();
     expect(container.querySelector(`header time[datetime="${SHORE_EXCURSION_UPDATED_DATE}"]`)).toBeInTheDocument();
     const head = await route.options.head?.({} as never);
@@ -207,7 +207,7 @@ describe("shore excursions", () => {
     fireEvent.change(screen.getByLabelText("Expected disembarkation time *"), { target: { value: "08:00" } });
     fireEvent.change(screen.getByLabelText("Ship's all-aboard time *"), { target: { value: "18:00" } });
     fireEvent.change(screen.getByLabelText("Passengers *"), { target: { value: "6" } });
-    expect(screen.getByText(/Your party needs a separate group quote/)).toBeInTheDocument();
+    expect(screen.getByText(/I can arrange a suitable van or minibus for larger groups/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send excursion request" }));

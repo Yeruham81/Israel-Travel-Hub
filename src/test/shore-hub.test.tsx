@@ -54,7 +54,7 @@ describe("Israel shore excursion hub", () => {
     const homepageShorePhoto = services.find(service => service.id === "shore-excursions")?.feature?.src;
     expect(homepageShorePhoto).toBeTruthy();
     expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: /Cruise passengers walking/ })).toHaveAttribute("src", homepageShorePhoto);
-    // The four route cards have distinct illustrations, separate from related-guide images.
+    // The six route cards have distinct illustrations, separate from related-guide images.
     expect(within(destinations).getAllByRole("img")).toHaveLength(6);
     expect(destinations.querySelector('[data-experience="coast"] img')?.getAttribute("src")).toMatch(/jaffa-route/);
     for (const experience of shoreHubExperiences) {

@@ -61,7 +61,7 @@ function Shore() {
     <HubHeader
       crumbs={crumbs.map(crumb => ({ name: crumb.name, to: crumb.path }))}
       title={shoreHubTitle}
-      intro="Arriving by cruise ship? Explore guided excursions and private car-and-driver days from Ashdod and Haifa. Start with your port, then choose a route that fits your time ashore."
+      intro="Arriving by cruise ship? I arrange private car-and-driver day trips from Ashdod and Haifa. Compare guided excursions and choose a route that fits your time ashore."
       checkedAt={SHORE_EXCURSION_UPDATED_DATE}
       showAuthor={false}
       image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}

@@ -1164,7 +1164,7 @@ const sourceCatalog: SourceReference[] = [
     publisher: "Moshe Barak",
     url: "",
     checkedAt: SHORE_EXCURSION_CHECK_DATE,
-    note: "Publisher's four Ashdod return car-and-driver itineraries and ILS starting rates checked: Tel Aviv/Jaffa 1,200; Jerusalem 1,700; Masada/Dead Sea 2,200; Masada/Dead Sea/Jerusalem 2,400. Up to four passengers. The fare cards and payment note specify ILS; a conflicting USD FAQ and approximate conversions are not used. These are published starting figures, not live quotes. Guiding and admissions are excluded; final terms require confirmation.",
+    note: "Four private return day-trip itineraries from Ashdod. Contact Moshe for a personalized quote.",
   },
   {
     id: "owner-haifa-shore",
@@ -1172,7 +1172,7 @@ const sourceCatalog: SourceReference[] = [
     publisher: "Moshe Barak",
     url: "",
     checkedAt: SHORE_EXCURSION_CHECK_DATE,
-    note: "Publisher's four Haifa return car-and-driver itineraries and ILS starting rates checked: Akko/Rosh Hanikra 1,900; Tel Aviv/Jaffa 2,100; Nazareth/Galilee 2,300; Jerusalem 2,700. Up to four passengers. The fare cards and payment note specify ILS; a conflicting USD FAQ and approximate conversions are not used. These are published starting figures, not live quotes. Site operation, guiding, admissions and final terms must be confirmed.",
+    note: "Four private return day-trip itineraries from Haifa. Contact Moshe for a personalized quote.",
   },
   {
     id: "beinharim-ashdod-jlm-bethlehem",
