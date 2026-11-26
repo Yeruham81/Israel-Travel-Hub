@@ -1,7 +1,7 @@
 import type { MouseEvent } from "react";
 import { getShoreCatalog } from "@/data/shoreExcursions";
 import { shoreDestinations, shorePorts, type ShorePortId } from "@/data/registry";
-import { parseShoreServiceSearch, shoreServiceHref, type ShoreServiceSearch } from "@/lib/shore-services";
+import { shoreServiceHref, type ShoreServiceSearch } from "@/lib/shore-services";
 import { recordOutboundClick } from "@/lib/outbound";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 
@@ -20,7 +20,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
   const privateTours = visible.filter((service) => Boolean(service.itinerary));
   const partnerTours = visible.filter((service) => !service.itinerary);
   const destinations = shoreDestinations.filter((destination) => catalog.some((service) => service.destinationIds.includes(destination.id)));
-  const withoutDestination = parseShoreServiceSearch({ ...filters, destination: undefined });
+  const withoutDestination: ShoreServiceSearch = {};
   function filter(event: MouseEvent<HTMLAnchorElement>, next: ShoreServiceSearch) {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
@@ -34,25 +34,16 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
       <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
         <span className="mr-1 shrink-0 text-xs font-semibold text-muted-foreground">Destination:</span>
         <a href={shoreServiceHref(portId, withoutDestination)} onClick={event => filter(event, withoutDestination)} aria-current={!filters.destination ? "true" : undefined} className="chip shrink-0 text-xs">All destinations</a>
-        {destinations.map(destination => <a key={destination.id} href={shoreServiceHref(portId, { ...filters, destination: destination.id })} onClick={event => filter(event, { ...filters, destination: destination.id })} aria-current={filters.destination === destination.id ? "true" : undefined} className="chip shrink-0 text-xs">{destination.label}</a>)}
-      </div>
-    </nav>
-    <nav aria-label="Filter port services by type" className="mt-2 rounded-xl border bg-secondary/25 px-3 py-3 sm:px-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="mr-1 text-xs font-semibold text-muted-foreground">Excursion type:</span>
-        {([{label:"All excursions",format:undefined},{label:"Guided group tours",format:"shared"},{label:"Private guided tours",format:"private"},{label:"Private car & driver",format:"driver"}] as const).map(({label,format}) => {
-          const next = parseShoreServiceSearch({...filters,format});
-          return <a key={label} href={shoreServiceHref(portId,next)} onClick={event=>filter(event,next)} aria-current={filters.format===format?"true":undefined} className="chip text-xs">{label}</a>;
-        })}
+        {destinations.map(destination => <a key={destination.id} href={shoreServiceHref(portId, { destination: destination.id })} onClick={event => filter(event, { destination: destination.id })} aria-current={filters.destination === destination.id ? "true" : undefined} className="chip shrink-0 text-xs">{destination.label}</a>)}
       </div>
     </nav>
     <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
       <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{visible.length} {visible.length === 1 ? "experience" : "experiences"}{filters.destination ? " · " + shoreDestinations.find(destination => destination.id === filters.destination)?.label : ""}</p>
-      {(filters.destination || filters.format) && <a href={shoreServiceHref(portId, {})} onClick={event => filter(event, {})} className="text-sm font-semibold text-primary underline">Clear filters</a>}
+      {filters.destination && <a href={shoreServiceHref(portId, {})} onClick={event => filter(event, {})} className="text-sm font-semibold text-primary underline">Clear filters</a>}
     </div>
     {visible.length === 0 ? <section className="mt-5 rounded-2xl border p-8 text-center">
       <h2 className="text-2xl font-semibold">No tours match your selection</h2>
-      <p className="mt-3 text-muted-foreground">Choose another destination or excursion type to see more shore excursions from {port.name} Port.</p>
+      <p className="mt-3 text-muted-foreground">Choose another destination to see more shore excursions from {port.name} Port.</p>
       <a href={shoreServiceHref(portId, {})} onClick={event => filter(event, {})} className="btn btn-primary mt-5">Show all shore excursions</a>
     </section> : <>
       {partnerTours.length > 0 && <section id="external-tours" aria-labelledby="partner-tours-h" data-section="external-tours" className="mt-5 scroll-mt-24">

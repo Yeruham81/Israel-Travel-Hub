@@ -1,11 +1,10 @@
 import { operators, partners, providerLinks, sources, shoreBookingPlatforms, shoreDestinations, shoreServices, shoreTourProducts, shorePorts, type ShoreDestinationId, type ShorePortId, type ShoreTourProduct } from "@/data/registry";
 
-export type ShoreServiceSearch = { destination?: ShoreDestinationId; format?: "shared" | "private" | "driver" };
+export type ShoreServiceSearch = { destination?: ShoreDestinationId };
 
 export function parseShoreServiceSearch(search: Record<string, unknown>): ShoreServiceSearch {
   const destination = shoreDestinations.find((item) => item.id === search["destination"] && shoreServices.some((service) => service.status === "published" && service.kind !== "transfer" && service.destinationIds.includes(item.id)))?.id;
-  const format = search["format"] === "shared" || search["format"] === "private" || search["format"] === "driver" ? search["format"] : undefined;
-  return { ...(destination ? { destination } : {}), ...(format ? { format } : {}) };
+  return destination ? { destination } : {};
 }
 
 /** One card per published product; never infer port pickup from a city listing. */
@@ -21,7 +20,7 @@ export function servicesForPort(portId: ShorePortId) {
 }
 
 export function filterShoreServices(portId: ShorePortId, search: ShoreServiceSearch) {
-  return servicesForPort(portId).filter(item => (!search.destination || item.destinationIds.includes(search.destination)) && (!search.format || (search.format === "driver" ? item.kind === "private-driver" : item.kind === "guided-tour" && item.product?.groupFormat === search.format)));
+  return servicesForPort(portId).filter(item => !search.destination || item.destinationIds.includes(search.destination));
 }
 
 export function shoreSourceIds(portId: ShorePortId) {

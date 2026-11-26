@@ -59,8 +59,8 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
         <h1 className="guide-page-title mt-3 font-semibold">{port.title}</h1>
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
         <PageUpdated date={SHORE_EXCURSION_UPDATED_DATE} />
-        <AuthorCard />
       </GuideHeroLayout>
+      <AuthorCard />
     </header>
     <OnThisPage sections={[["itineraries","Shore excursions"],["shore-planning","Compare destinations"],["shore-map","Destination map"],["port-pickup","Port pickup"],["return-to-ship","Return to the ship"],["faq","FAQ"],["shore-local","Related guides"],["request-quote","Contact Me"]]}/>
     <ShoreServiceCatalog portId={id} filters={filters} onFilterChange={onFilterChange} itineraryId={itineraryId} onSelectItinerary={setItineraryId} />

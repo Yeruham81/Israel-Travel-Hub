@@ -54,7 +54,7 @@ describe("port service catalog", () => {
     expect(cards().slice(0, externalCount).every(card => card.dataset["serviceKind"] === "guided-tour" && ["getyourguide", "viator"].includes(card.dataset["bookingPlatform"]!))).toBe(true);
     expect(cards().slice(externalCount).every(card => card.dataset["serviceKind"] === "private-driver" && card.dataset["bookingPlatform"] === "direct")).toBe(true);
     expect(screen.queryByRole("search")).not.toBeInTheDocument();
-    expect(screen.getByRole("navigation", { name: "Filter port services by type" })).toBeInTheDocument();
+    expect(screen.queryByRole("navigation", { name: "Filter port services by type" })).not.toBeInTheDocument();
     expect(screen.queryByRole("navigation", { name: "Filter port services by booking site" })).not.toBeInTheDocument();
     expect(container.querySelector("a a")).toBeNull();
     const header = screen.getByRole("heading", { level: 1 }).closest("header")!;
@@ -267,11 +267,15 @@ describe("port service catalog", () => {
     expect(privateTour).not.toHaveTextContent(/US\$|From ILS/);
   });
 
-  it("combines destination and excursion type while preserving legacy links",async()=>{
-    const {router}=await pageAt("/shore-excursions/haifa/?destination=jerusalem");
-    fireEvent.click(within(screen.getByRole("navigation",{name:"Filter port services by type"})).getByRole("link",{name:"Private car & driver"}));
-    await waitFor(()=>expect(router.state.location.search).toEqual({destination:"jerusalem",format:"driver"}));
-    expect(cards()).toHaveLength(filterShoreServices("haifa",{destination:"jerusalem",format:"driver"}).length);
-    expect(cards().every(card=>card.dataset["serviceKind"]==="private-driver")).toBe(true);
+  it.each(["haifa", "ashdod"] as const)("ignores retired excursion type filters on %s legacy URLs", async (port) => {
+    expect(parseShoreServiceSearch({ format: "driver" })).toEqual({});
+    expect(parseShoreServiceSearch({ destination: "jerusalem", format: "shared" })).toEqual({ destination: "jerusalem" });
+    const { router } = await pageAt(`/shore-excursions/${port}/?destination=jerusalem&format=driver`);
+    expect(cards()).toHaveLength(filterShoreServices(port, { destination: "jerusalem" }).length);
+    expect(new Set(cards().map(card => card.dataset["serviceKind"]))).toEqual(new Set(["guided-tour", "private-driver"]));
+    expect(screen.queryByRole("navigation", { name: "Filter port services by type" })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("link", { name: /^All destinations$/ }));
+    await waitFor(() => expect(router.state.location.search).toEqual({}));
+    expect(cards()).toHaveLength(catalogSizes[port]);
   });
 });

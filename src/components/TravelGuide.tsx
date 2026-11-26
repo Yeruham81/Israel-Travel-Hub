@@ -335,9 +335,8 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
           <h1 className="guide-page-title">{guide.title}</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
           <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
-          {(id === "esim" || id === "uber" || id === "sherut" || id === "israel" || id === "telAviv" || id === "jerusalemDeadSea") && <AuthorCard />}
         </GuideHeroLayout>
-        {id !== "esim" && id !== "uber" && id !== "sherut" && id !== "israel" && id !== "telAviv" && id !== "jerusalemDeadSea" && <AuthorCard />}
+        <AuthorCard />
       </header>
       <section id="quick-answer" aria-labelledby="answer-h" className="mt-8 scroll-mt-24 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-7">
         <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{id === "esim" ? emphasizeEsimNames(guide.answer) : guide.answer}</p>
