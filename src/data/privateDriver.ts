@@ -40,14 +40,14 @@ export const privateDriverHero = {
 };
 export const privateDriverBenefits = [
   { title: "A route that fits your plans", text: "Choose your pickup, drop-off and favourite stops for a personalised itinerary." },
-  { title: "Space for your group", text: "Tell me how many people and bags are coming so I can check a suitable vehicle." },
+  { title: "Space for your group", text: "Tell me your group size and how much luggage you're bringing so I can arrange a suitable vehicle." },
   { title: "A clear quote before booking", text: "I'll confirm the itinerary, vehicle, total price and arrangements before you decide." },
 ];
 export const privateDriverFaqs = [
   { q: "How is my private driver quote calculated?", a: "The price depends on your route, the hours needed, date, vehicle size and any special requests. I'll confirm the total and what it covers, including the agreed stops, waiting time, parking or tolls where relevant, before you book." },
   { q: "Can I add stops or change the route during the journey?", a: "Yes, let's plan your preferred stops in advance so there is enough time to enjoy them. Changes on the day depend on the driver's availability and may affect the price, so please discuss them with me first." },
   { q: "Is a licensed tour guide included?", a: "A private driver provides transport for your agreed route. Guided visits are a separate service. If you'd like a licensed guide, tell me the language and places you're interested in so I can check the options." },
-  { q: "Can I request a larger vehicle, child seats or accessibility support?", a: "Please include your group size, children's ages, luggage and any accessibility needs. I'll check the suitable vehicle and equipment for your date and confirm what can be arranged." },
+  { q: "Can I request a larger vehicle, child seats or accessibility support?", a: "Please include your group size, children's ages, luggage and any accessibility needs. I'll check which vehicles and equipment are available for your date." },
   { q: "How do payment, cancellation and extra hours work?", a: "I'll explain the payment and cancellation terms with your quote, along with any limits on hours or mileage and charges for extra time or stops. Your booking is confirmed only after we agree on the itinerary, vehicle, price and relevant terms." },
   { q: "Can I book a pickup from Ben Gurion Airport?", a: "Yes. For airport pickups, use my Airport Transfers page to see starting prices to popular destinations and request a quote for your arrival." },
 ];
