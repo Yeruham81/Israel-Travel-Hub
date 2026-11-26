@@ -17,8 +17,8 @@ export const shoreHubPorts: Record<ShorePortId, {
     location: "Southern Mediterranean coast",
     description: "A great starting point for visiting some of Israel's major attractions.",
     highlights: ["Jerusalem & Bethlehem", "Tel Aviv & Old Jaffa", "Masada & the Dead Sea"],
-    planning: "A coastal outing can offer a gentler day. Jerusalem involves walking and steps; desert routes need a longer port call and time on the road.",
-    pickup: "This secure port is not a pedestrian city-center terminal. The ship's shuttle and authorized pickup point must be confirmed for the actual call.",
+    planning: "A coastal outing offers a more relaxed alternative. Jerusalem involves walking and steps; desert routes need a longer port call and time on the road.",
+    pickup: "Ashdod is a secure port. Confirm the ship's shuttle arrangements and authorized pickup point before your visit.",
   },
   haifa: {
     location: "Northern Mediterranean coast",
@@ -79,7 +79,7 @@ export const shorePlanningSteps = [
 export const shoreHubFaqs = [
   { q: "Which Israeli cruise port is better for Jerusalem?", a: "Jerusalem excursions are listed from both Ashdod and Haifa. Ashdod is the more southerly starting point; Haifa involves a longer journey south. The right choice is the port on your ship's itinerary and a tour that fits the actual hours ashore, with time reserved for the return." },
   { q: "What can I visit on a shore excursion from Haifa?", a: "Haifa and Akko offer a northern coastal day, while Nazareth and the Sea of Galilee suit Christian heritage and countryside interests. Jerusalem and Tel Aviv are longer-distance options. If Rosh Hanikra is part of your proposed route, confirm that the site is operating and agree an alternative stop." },
-  { q: "Can I visit Masada and the Dead Sea from Ashdod Port?", a: "Yes, the Ashdod page includes guided and private-driver options for Masada and the Dead Sea. It is a full-day desert outing, so check the fit with your ship's schedule, the cable-car and admission arrangements, and how much time remains for a designated beach stop." },
+  { q: "Can I visit Masada and the Dead Sea from Ashdod Port?", a: "Yes, the Ashdod page includes guided and private-driver options for Masada and the Dead Sea. It is a full-day desert outing, so allow for the return drive, cable-car and admission arrangements, and time at a designated beach." },
   { q: "Is a licensed guide included in every excursion?", a: "A car-and-driver service covers transport and a driver; licensed guiding is a separate arrangement unless explicitly included. Guided tours have their own stated inclusions. Check the guide's language, site entry and any local handover arrangements for a combined Jerusalem and Bethlehem visit." },
   { q: "Does every tour include pickup and return to the same port?", a: "The excursions on these port pages are return day trips from the named port. Confirm the exact meeting point and whether a terminal shuttle is involved. Choose a tour with confirmed pickup at your cruise port." },
   { q: "What if the ship arrives late or changes its itinerary?", a: "Ask the provider for its written delay, missed-port-call and cancellation policy before booking. Agree which stops will be shortened or removed if time is lost. Agree the return plan and cancellation terms with the booking provider." },
