@@ -7,7 +7,7 @@ import type { SacredHillEditorial } from "@/data/sacredHillGuides";
  * Rendered images come only from files stored in this repository.
  * Site-specific photographs not yet available locally are intentionally omitted.
  */
-export const mountOlivesAttractionUpdate: Pick<Attraction, "title" | "description" | "intro" | "takeaway" | "duration" | "image" | "official" | "faqs"> = {
+export const mountOlivesAttractionUpdate: Required<Pick<Attraction, "title" | "description" | "intro" | "takeaway" | "duration" | "image" | "official" | "faqs">> = {
   title: "Mount of Olives, Jerusalem: Viewpoint, Churches & How to Visit",
   description: "Plan a Mount of Olives visit: where to find the Jerusalem viewpoint, how to reach it by bus, Gethsemane, churches, walking routes and Old City connections.",
   intro: "From the Mount of Olives, Jerusalem's Old City spreads out before you, with the Dome of the Rock, ancient walls and church towers rising beyond the Jewish cemetery. Just below the lookout are places closely associated with the life of Jesus, from Dominus Flevit to the Garden of Gethsemane. Here's how to choose the stops and fit the hill into your time in Jerusalem.",

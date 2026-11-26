@@ -6,7 +6,7 @@ import type { SacredHillEditorial } from "@/data/sacredHillGuides";
  * Mount Zion visitor-focused edition. All photos are already committed local
  * assets; an unverified photo is never substituted for a specific sacred site.
  */
-export const mountZionAttractionUpdate: Pick<Attraction, "title" | "description" | "intro" | "takeaway" | "duration" | "image" | "official" | "faqs"> = {
+export const mountZionAttractionUpdate: Required<Pick<Attraction, "title" | "description" | "intro" | "takeaway" | "duration" | "image" | "official" | "faqs">> = {
   title: "Mount Zion, Jerusalem: What to See & How to Visit",
   description: "Explore Mount Zion in Jerusalem: seven places to visit, the Room of the Last Supper, David's Tomb, Dormition Abbey, opening hours and walking routes.",
   intro: "Mount Zion sits immediately outside Jerusalem's Old City walls, just beyond Zion Gate. Within a short walk are the traditional Room of the Last Supper, David's Tomb and Dormition Abbey. St Peter in Gallicantu and the Catholic cemetery lie a little farther down the hill. It's an easy addition to an Old City visit, with several important Christian and Jewish places in one neighbourhood.",
