@@ -474,7 +474,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ], inlineLinks: [
         { text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" },
         { text: "Jerusalem to the Dead Sea guide", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
-      ], checklist: ["Check both train and bus on your exact date, including any required free rail voucher.", "Verify the 486 or 444 stop list, seat-booking rules and last bus to your hotel.", "Allow time for passport control, baggage collection and the transfer from Yitzhak Navon railway station to Jerusalem Central Bus Station."] },
+      ], checklist: ["Check train and bus timetables for your travel date and reserve any required free train voucher.", "Check the stops, seat reservation requirements and last departure of bus lines 486 and 444.", "Allow time for passport control, baggage collection and the transfer from Yitzhak Navon railway station to Jerusalem Central Bus Station."] },
       { id: "taxi", name: "Official airport taxi", time: "About 1h 45m–2h 30m+ after pickup", cost: "Regulated meter; check current tariff", bestFor: "On-arrival direct ride to a resort", doorToDoor: "To accessible hotel entrance", availability: "Subject to available licensed taxis", comparison: { cost: "Regulated meter", advantages: "Direct airport-to-hotel ride, including Shabbat", drawbacks: "High and variable long-distance meter fare" }, heading: "Official airport taxi to Ein Bokek or Neve Zohar", paragraphs: [
         ...commonTaxi,
         "The total on this longer journey depends on the regulated tariff, time, distance and permitted extras. See my official airport taxi guide for pickup instructions and the taxi fares in Israel guide for how metered fares are calculated.",
@@ -483,7 +483,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         { text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" },
         { text: "taxi fares in Israel guide", to: "/travel-blog/taxi-fares-in-israel/" },
         { text: "Uber alternatives guide", to: "/travel-blog/uber-in-israel/" },
-      ], checklist: ["Order through the official airport process, keeping the ride code and receipt.", "Check your hotel's actual entrance and suitcase capacity.", "Allow for the cost of a long-distance metered taxi ride."] },
+      ], checklist: ["Order through the official airport process, keeping the ride code and receipt.", "Confirm your hotel's drop-off point and make sure the taxi has enough space for your luggage.", "Allow for the cost of a long-distance metered taxi ride."] },
       { id: "private", name: "Pre-booked private transfer", time: "About 1h 45m–2h 30m+ after pickup", cost: "Published weekday vehicle starting rate; written quote", bestFor: "Families, several bags, late arrival", doorToDoor: "To agreed hotel entrance", availability: "Only after confirmation", comparison: { advantages: "Confirmed vehicle and agreed meeting point", drawbacks: "Must be booked and confirmed; costlier than public transport" }, heading: "When a pre-booked transfer is useful", paragraphs: [
         ...commonTransfer,
         "A private transfer can be convenient for families, late arrivals and travellers with extra luggage because the vehicle and price are arranged in advance. Provide the hotel, flight details and full luggage list. See my private transfer to Ein Bokek page for starting prices and a personal quote.",
@@ -491,7 +491,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ], inlineLinks: [
         { text: "private transfer to Ein Bokek page", to: "/airport-transfers/ein-bokek/" },
         { text: "Masada visitor guide", to: "/attractions/masada/" },
-      ], checklist: ["Share the exact Dead Sea hotel, landing time, passenger count and luggage.", "Ask about child seats, waiting, flight delays, night/weekend charges and cancellation.", "Confirm any sightseeing stop or return transfer separately in writing."] },
+      ], checklist: ["Provide your hotel name, flight arrival time, passenger count and luggage details.", "Ask about child seats, waiting, flight delays, night/weekend charges and cancellation.", "Confirm any sightseeing stop or return transfer separately in writing."] },
       { id: "rental", name: "Rental car", time: "About 1h 45m–2h 30m+ driving plus collection", cost: "Rental, insurance, fuel and parking", bestFor: "Independent Masada/Dead Sea touring", doorToDoor: "To accessible parking area", availability: "Check desk hours and road access", comparison: { cost: "Rental + extras", advantages: "Freedom for Masada and other Dead Sea stops", drawbacks: "Collection time, parking and flood-related road closures" }, heading: "Should you rent a car at the airport?", paragraphs: [
         ...commonRental,
         "Consider renting a car if you also plan to visit Masada, Ein Gedi or other destinations. Compare rental prices, insurance and parking costs on DiscoverCars' Israel rental search.",
@@ -508,16 +508,16 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     ],
     arrivalAreas: [
       { area: "Ein Bokek hotel strip", station: "Bus 486 or 444 from Jerusalem", onward: "Get off at the stop closest to your hotel." },
-      { area: "Hamei Zohar / Neve Zohar", station: "Bus serving the specific resort stop", onward: "Check the hotel name and stop before boarding in Jerusalem." },
-      { area: "Ein Gedi / Masada", station: "Separate Dead Sea destination", onward: "Choose the bus stop closest to Masada or Ein Gedi." },
+      { area: "Hamei Zohar / Neve Zohar", station: "Bus to your hotel area", onward: "Check the hotel name and stop before boarding in Jerusalem." },
+      { area: "Ein Gedi / Masada", station: "Bus to Ein Gedi or Masada", onward: "Choose the bus stop closest to Masada or Ein Gedi." },
     ],
     connections: [
-      "Ein Bokek has multiple hotel-area bus stops. Enter your full hotel name in the journey planner and confirm the exact stop, walking distance and direction before boarding.",
-      "Neve Zohar and Hamei Zohar hotels may have different stops from central Ein Bokek. Masada and Ein Gedi are separate destinations farther north; use their own journey plans.",
+      "Ein Bokek has multiple hotel-area bus stops. Enter your hotel's name in the journey planner to find the nearest bus stop and walking route. Check the bus direction before boarding.",
+      "Neve Zohar and Hamei Zohar hotels may have different stops from central Ein Bokek. Masada and Ein Gedi lie farther north along the Dead Sea shore and have their own bus stops.",
       "For afternoon or evening arrivals, check that you can still catch the final bus from Jerusalem. Also make sure you can reach your hotel safely from the bus stop, especially with luggage.",
     ],
     weekend: [
-      "Most regular rail and intercity bus services stop for the main Shabbat period and many Jewish holidays. Buses 486 and 444 generally do not operate during Shabbat. Check the last departure before Shabbat and the first service afterwards. My airport Shabbat transport guide covers practical alternatives from TLV.",
+      "Most regular rail and intercity bus services stop for the main Shabbat period and many Jewish holidays. Buses 486 and 444 generally do not operate during Shabbat. Check the last departure before Shabbat and the first service afterwards. My airport Shabbat transport guide explains the available weekend transport options from Ben Gurion Airport.",
       "When public transport isn't running, consider an official airport taxi or a pre-booked private transfer, subject to availability. The taxis in Israel guide explains the difference between metered rides and advance private transport.",
       "For a self-drive option, check that the car-rental counter is open for your arrival and that desert road access is safe on that date.",
     ],
@@ -562,7 +562,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     planNext: [
       { label: "The Dead Sea visitor guide", to: "/attractions/dead-sea/", note: "Learn about swimming, the resort areas and practical conditions." },
       { label: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Choose viewpoints, reserves and scenic stops near the shore." },
-      { label: "Ein Gedi visitor guide", to: "/attractions/ein-gedi/", note: "Plan the nature reserve and its separate location from Ein Bokek." },
+      { label: "Ein Gedi visitor guide", to: "/attractions/ein-gedi/", note: "Discover Ein Gedi's hiking trails, waterfalls and visitor information." },
       { label: "Israel itinerary: five days", to: "/travel-blog/israel-itinerary-5-days/", note: "Combine a Dead Sea stay with nearby destinations." },
     ]
   }

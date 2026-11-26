@@ -2417,14 +2417,14 @@ export const providerLinks: ProviderLink[] = [
   // Private transport (non-airport)
   {
     id: "private-driver-moshe", pageIds: ["private-driver", "tours-hub"], ...moshe, mode: "provider_inquiry",
-    title: "Private driver by the day", summary: "Hire a local driver for multi-stop days or intercity transfers. Itinerary and price agreed by inquiry.",
+    title: "Private driver by the day", summary: "Hire a local driver for multi-stop days or intercity transfers. Contact me for a personalized itinerary and quote.",
     ctaLabel: "Request a quote", url: "/private-driver-in-israel/#request-quote", isAffiliate: false,
     reentryNote: "Include your date, route and party details. I'll confirm the arrangements with you in writing.", confirm: ["Hours included", "Entrance fees not included unless stated", "Guide vs driver only"], sourceId: "owner-private-driver",
   },
   // Tours
   {
     id: "bethlehem-beinharim", pageIds: ["bethlehem", "tours-hub"], providerName: "Bein Harim Tours", relationship: "independent_operator", operatorId: "bein-harim", mode: "provider_redirect",
-    title: "Jerusalem and Bethlehem tour (combined itinerary)", summary: "A combined day covering sites in Jerusalem and Bethlehem — not a Bethlehem-only tour. The operator lists pickup from several cities, including Jerusalem.",
+    title: "Jerusalem and Bethlehem tour (combined itinerary)", summary: "A full-day tour visiting attractions in both Jerusalem and Bethlehem. The operator lists pickup from several cities, including Jerusalem.",
     ctaLabel: "See dates and prices on Bein Harim", url: "https://www.beinharimtours.com/jerusalem-and-bethlehem-tour/", isAffiliate: false,
     reentryNote: "Choose your date and pickup on the operator's site.", confirm: ["Departure date and pickup point", "Tour language", "Shared or private format", "Passport and current travel requirements", "Cancellation terms"], sourceId: "beinharim-jlm-bethlehem",
   },
@@ -2437,36 +2437,36 @@ export const providerLinks: ProviderLink[] = [
   // Shore excursions (port-specific pages only)
   {
     id: "ashdod-shore-moshe", pageIds: ["shore-ashdod", "shore-hub"], ...moshe, mode: "provider_inquiry",
-    title: "Private car-and-driver shore excursion from Ashdod", summary: "Local driver business with suggested Tel Aviv/Jaffa, Jerusalem and Masada/Dead Sea days from Ashdod Port. Itinerary, price and timing agreed by inquiry.",
+    title: "Private car-and-driver shore excursion from Ashdod", summary: "Private day trips from Ashdod Port to Tel Aviv and Jaffa, Jerusalem, or Masada and the Dead Sea. Itinerary, price and timing agreed by inquiry.",
     ctaLabel: "Request a quote", url: "/shore-excursions/ashdod/#request-quote", isAffiliate: false,
-    reentryNote: "Nothing is sent from this page. Include ship name, date, disembarkation and all-aboard times and party size in your request.",
+    reentryNote: "Include ship name, date, disembarkation and all-aboard times and party size in your request.",
     confirm: ["Price and what it covers", "Pickup point at the port", "Driver only or licensed guide", "Return timing for your all-aboard time", "Cancellation terms"], sourceId: "owner-ashdod-shore",
   },
   {
     id: "ashdod-shore-beinharim", pageIds: ["shore-ashdod"], providerName: "Bein Harim Tours", relationship: "independent_operator", operatorId: "bein-harim", mode: "provider_redirect",
-    title: "Jerusalem and Bethlehem day tour from Ashdod Port", summary: "The operator's port-specific product combining Jerusalem and Bethlehem in one day from Ashdod.",
+    title: "Jerusalem and Bethlehem day tour from Ashdod Port", summary: "A full-day excursion from Ashdod Port to Jerusalem and Bethlehem.",
     ctaLabel: "See dates and prices on Bein Harim", url: affiliateConfig["ashdod-shore-beinharim"]?.trackingUrl || "https://www.beinharimtours.com/jerusalem-and-bethlehem-day-tour-from-ashdod-port/", isAffiliate: Boolean(affiliateConfig["ashdod-shore-beinharim"]?.trackingUrl),
     reentryNote: "Choose your date on the operator's site.", confirm: ["Your ship's date and port-call times", "Meeting point at the port", "Shared or private format and inclusions", "Passport and travel requirements for Bethlehem", "Return arrangements and cancellation terms"], sourceId: "beinharim-ashdod-jlm-bethlehem",
   },
   {
     id: "haifa-shore-moshe", pageIds: ["shore-haifa", "shore-hub"], ...moshe, mode: "provider_inquiry",
-    title: "Private car-and-driver shore excursion from Haifa", summary: "Local driver business with suggested Akko/Rosh Hanikra, Tel Aviv/Jaffa, Nazareth/Sea of Galilee and Jerusalem days from Haifa Port. Itinerary and price by inquiry.",
+    title: "Private car-and-driver shore excursion from Haifa", summary: "Private day trips from Haifa Port to Akko and Rosh Hanikra, Tel Aviv and Jaffa, Nazareth and the Sea of Galilee, or Jerusalem. Itinerary and price by inquiry.",
     ctaLabel: "Request a quote", url: "/shore-excursions/haifa/#request-quote", isAffiliate: false,
-    reentryNote: "Nothing is sent from this page. Include ship name, date, disembarkation and all-aboard times and party size in your request.",
+    reentryNote: "Include ship name, date, disembarkation and all-aboard times and party size in your request.",
     confirm: ["Whether the itinerary fits your port-call time", "Pickup point at the port", "Driver only or licensed guide", "Entrance fees", "Cancellation terms"], sourceId: "owner-haifa-shore",
   },
   {
     id: "haifa-shore-beinharim", pageIds: ["shore-haifa"], providerName: "Bein Harim Tours", relationship: "independent_operator", operatorId: "bein-harim", mode: "provider_redirect",
-    title: "Ship-to-shore: Haifa to Jerusalem and Bethlehem", summary: "The operator's Haifa-port product combining Jerusalem and Bethlehem in one long day.",
+    title: "Ship-to-shore: Haifa to Jerusalem and Bethlehem", summary: "A full-day shore excursion from Haifa Port visiting Jerusalem and Bethlehem.",
     ctaLabel: "See dates and prices on Bein Harim", url: affiliateConfig["haifa-shore-beinharim"]?.trackingUrl || "https://www.beinharimtours.com/ship-to-shore-excursions-haifa-jerusalem-bethlehem/", isAffiliate: Boolean(affiliateConfig["haifa-shore-beinharim"]?.trackingUrl),
     reentryNote: "Choose your date on the operator's site.", confirm: ["Your ship's date and port-call times", "Meeting point at the port", "Shared or private format and inclusions", "Passport and travel requirements for Bethlehem", "Return arrangements and cancellation terms"], sourceId: "beinharim-haifa-jlm-bethlehem",
   },
   ...(["haifa", "ashdod"] as const).flatMap((portId): ProviderLink[] => (["airport", "city"] as const).map((destination) => ({
     id: `${portId}-port-${destination}-transfer`, pageIds: [shorePorts[portId].pageId], ...moshe, mode: "provider_inquiry",
     title: destination === "airport" ? `${shorePorts[portId].name} Port to Ben Gurion Airport` : `${shorePorts[portId].name} Port to your hotel or another city`,
-    summary: destination === "airport" ? "Request a one-way private transfer after your cruise. Share your ship, flight, passengers and luggage so I can assess the pickup, route and price." : "Request a one-way transfer from the port to your hotel or another address in Israel. The route, vehicle, pickup point and price are agreed individually.",
+    summary: destination === "airport" ? "Request a one-way private transfer after your cruise. Send me your cruise and flight details, passenger count and luggage requirements for a personal quote." : "Request a one-way transfer from the port to your hotel or another address in Israel. I'll confirm your pickup point, route, vehicle and total price.",
     ctaLabel: "Request a transfer quote", url: `/private-driver-in-israel/?port=${portId}&transfer=${destination}#request-quote`, isAffiliate: false,
-    reentryNote: "A transfer request, not a return shore excursion. Confirm the exact meeting point and destination; no vehicle, port access or availability is reserved by selecting it.",
+    reentryNote: "Request a one-way transfer from the port to your destination. I'll confirm availability and pickup arrangements. All bookings require confirmation.",
     confirm: ["Exact port meeting point", "Destination and luggage", "Pickup date and time", "Vehicle and total price", "Cancellation terms"], sourceId: "owner-private-driver",
   }))),
   // Attractions & tickets (official)
