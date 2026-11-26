@@ -18,7 +18,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     city: "Jerusalem", title: "Private transfer from Ben Gurion Airport to Jerusalem",
     description: "Private Ben Gurion Airport to Jerusalem transfer: travel time, Old City hotel drop-off, luggage and weekday starting rate. Send a quote request.",
     intro: "Arrange a private ride between Ben Gurion Airport and Jerusalem, including Mamilla and the Old City area. Send me your flight, luggage and hotel address for a personal quote.",
-    checklistTip: "For Old City accommodation, confirm a vehicle-accessible drop-off and any remaining walk or steps.",
+    checklistTip: "If you're staying inside Jerusalem's Old City, ask your hotel where your driver can drop you off and whether there are steps along the way.",
     journeyTitle: "Driving to your Jerusalem hotel",
     journeyText: "Allow around 45–60 minutes or more after pickup from Ben Gurion Airport, depending on traffic and your hotel. Add time for passport control and baggage collection before the drive.",
     areasTitle: "Where in Jerusalem are you staying?",
@@ -35,7 +35,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     planningTitle: "Late arrival and Old City access",
     planningText: "For an evening arrival, arrange late check-in or key collection with your accommodation before you travel.",
     faqs: [
-      { q: "How long is the private transfer to Jerusalem?", a: "The drive to Jerusalem is usually around 45–60 minutes after pickup, with extra time depending on traffic and your hotel's location. Allow separately for arrival formalities and baggage collection." },
+      { q: "How long is the private transfer to Jerusalem?", a: "The drive to Jerusalem is usually around 45–60 minutes after pickup, with extra time depending on traffic and your hotel's location. Allow extra time for passport control and baggage collection." },
       { q: "Can the driver take me to a hotel inside the Old City?", a: "Provide the exact hotel and ask for the nearest permitted drop-off. Confirm any remaining walk, steps and luggage arrangements with the hotel and me before booking." },
       { q: "Can I request a Friday-night or holiday arrival?", a: "Yes. Include your actual flight date and time in the request. I must confirm availability, pickup arrangements and any extra charges; submitting a request does not reserve a driver." },
     ],
@@ -50,7 +50,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     intro: "Arrange a direct private transfer between Ben Gurion Airport and your hotel in Tel Aviv or Jaffa. Send your flight, group size and luggage details for a personal quote.",
     checklistTip: "For Old Jaffa or beachfront accommodation, confirm the hotel entrance or nearest drivable drop-off.",
     journeyTitle: "Driving to Tel Aviv or Jaffa",
-    journeyText: "Allow around 20–40 minutes or more after pickup from Ben Gurion Airport. The final approach depends on traffic, the beachfront hotel entrance or the streets around Old Jaffa.",
+    journeyText: "Allow around 20–40 minutes or more after pickup from Ben Gurion Airport. Traffic and your hotel's location, particularly along the beachfront or in Old Jaffa, may affect the journey time.",
     areasTitle: "Beachfront hotel, central apartment or Jaffa stay?",
     areas: [
       { title: "Beachfront hotels", text: "Provide the full hotel name and the correct vehicle entrance; some seafront properties have a separate luggage drop-off." },
@@ -65,9 +65,9 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     planningTitle: "Match the vehicle to your luggage",
     planningText: "List your suitcases, carry-ons, strollers and any child seats you need so I can confirm a suitable vehicle.",
     faqs: [
-      { q: "How long does an airport transfer to Tel Aviv take?", a: "Allow around 20–40 minutes as a planning estimate or more after pickup. Traffic and the exact Tel Aviv or Jaffa address can add time. Allow separately for immigration, baggage and reaching the meeting point." },
+      { q: "How long does an airport transfer to Tel Aviv take?", a: "Allow around 20–40 minutes or longer after pickup. Traffic and the exact Tel Aviv or Jaffa address can add time. Allow separately for immigration, baggage and reaching the meeting point." },
       { q: "Does the request form cover Jaffa too?", a: "Yes. Tel Aviv & Jaffa is preselected. Enter your actual Jaffa hotel or apartment address so I can confirm the final price and a suitable vehicle drop-off." },
-      { q: "Will four passengers and all our suitcases fit?", a: "A car needs enough seats and luggage space for your group. List every suitcase, carry-on and stroller. I'll confirm the vehicle and any price difference if you need a larger one." },
+      { q: "Will four passengers and all our suitcases fit?", a: "Four passengers with large suitcases may need a larger vehicle. List every suitcase, carry-on and stroller. I'll confirm the vehicle and any price difference if you need a larger one." },
     ],
     related: [
       { label: "Find your Tel Aviv hotel area", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
@@ -89,13 +89,13 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     ],
     example: {
       title: "If your flight connects with a cruise departure",
-      situation: "A cruise connection needs the ship, passenger entrance and required boarding time.",
+      situation: "For a transfer to Haifa Port, provide your ship's name, passenger terminal and boarding deadline.",
       response: "Share your ship name and boarding deadline. I can plan the transfer to the confirmed passenger entrance, with time allowed for arrival formalities, traffic and terminal access.",
     },
     planningTitle: "Connecting to a cruise?",
     planningText: "Tell me the ship's name, passenger terminal and latest check-in time so I can plan the drive.",
     faqs: [
-      { q: "How long should I allow for a private transfer to Haifa?", a: "Allow about 75–110 minutes or more after pickup, depending on traffic and your destination in Haifa, plus time for airport formalities. Avoid a tight onward connection based only on that estimate." },
+      { q: "How long should I allow for a private transfer to Haifa?", a: "Allow about 75–110 minutes or more after pickup, depending on traffic and your destination in Haifa, plus time for airport formalities. Allow extra time if you're continuing to a cruise or another scheduled departure." },
       { q: "Can I request a hotel on Mount Carmel?", a: "Yes. Include the full hotel or apartment address and any entrance instructions. Explain steps or mobility needs so I can confirm a practical drop-off and suitable vehicle." },
       { q: "Is a Haifa Port drop-off the same as a city hotel transfer?", a: "No. Include the exact passenger terminal, ship and required arrival time. Send me your exact port entrance so I can confirm access, the route and the final price." },
     ],
