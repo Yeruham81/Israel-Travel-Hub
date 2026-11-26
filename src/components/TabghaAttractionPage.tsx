@@ -68,7 +68,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
         title="Church of the Multiplication of the Loaves and Fishes"
         image={{ src: "/images/attractions/tabgha-multiplication-church.webp", alt: "Stone exterior of the Church of the Multiplication at Tabgha, with palm trees in the courtyard" }}
       >
-        <p>This peaceful Benedictine church commemorates the feeding of the five thousand. Its simple stone interior shelters remarkable Byzantine mosaics, while the courtyard provides a pleasant introduction to the site.</p>
+        <p>This peaceful Benedictine church commemorates the feeding of the five thousand. The church's simple stone interior contains beautiful Byzantine mosaics, and its courtyard is a peaceful place to begin your visit.</p>
         <p>I recommend making this your first stop if you are visiting both churches, as it closes earlier in the afternoon.</p>
       </AttractionHighlight>
       <AttractionHighlight
@@ -76,7 +76,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
         image={{ src: "/images/attractions/tabgha-loaves-fishes-mosaic.webp", alt: "Ancient mosaic showing a bread basket between two fish near the altar of the Church of the Multiplication" }}
       >
         <p>Look down in front of the altar for the famous mosaic of two fish and a basket of bread. The basket contains four loaves, a detail that often catches visitors' attention.</p>
-        <p>Take time to look at the surrounding floor as well: birds, plants and other nature motifs are among the church's most beautiful surviving mosaics.</p>
+        <p>Look for the beautiful mosaics of birds, plants and other natural scenes on the surrounding floor.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="Church of the Primacy of Peter"
@@ -86,13 +86,13 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
         <p>Inside is the rock known as <em>Mensa Christi</em>, or “Table of Christ”. The lakeside setting makes this a lovely place to spend a few quiet moments.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The gardens and shoreline">
-        <p>Between the old stones, gardens and water's edge, Tabgha offers a gentler pace than many larger sightseeing stops. Enjoy the lake views and give people attending services or praying their space.</p>
+        <p>Tabgha's quiet gardens and lakeside churches make it a lovely place to slow down and enjoy the scenery. Enjoy the lake views and give people attending services or praying their space.</p>
       </AttractionHighlight>
     </div>
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The two churches have their own entrances and visiting hours. These are the details I would use to plan a visit to both.</p>
+      <p>The two churches have their own entrances and visiting hours.</p>
       
       <div role="region" aria-label="Visitor information comparison" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
         <table className="w-full min-w-[700px] border-collapse text-left text-sm" data-testid="tabgha-visitor-table">
@@ -221,7 +221,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
     { q: "What is Tabgha best known for?", a: "Its Church of the Multiplication, with the ancient loaves-and-fishes mosaic, and the nearby Church of the Primacy of Peter at the lakeshore." },
     { q: "Can I visit both churches in one trip?", a: "Yes. They are close to one another. Allow about an hour for the two churches and their surroundings, more if you plan to pray or travel with a group." },
     { q: "Is the Church of the Multiplication open on Sundays?", a: "There are no regular sightseeing visits on Sundays; access is reserved for Mass participants. Monday–Saturday visitor hours are 09:00–15:00 (last entry 14:45). The Church of the Primacy of Peter normally welcomes visitors on Sundays." },
-    { q: "Is there an entry fee?", a: "Neither church currently lists a visitor admission fee. For group services or special arrangements, contact the responsible church." },
+    { q: "Is there an entry fee?", a: "Neither church currently lists an entrance fee. Contact the church directly to arrange a group service or special visit." },
     { q: "Can I visit Tabgha without a car?", a: "It may be possible by bus, but services and the walk to the churches can make planning awkward. A car or organised Galilee tour is usually easier." },
     { q: "Is Tabgha the same as Capernaum?", a: "No. They are nearby places with different sights. Tabgha is known for two churches; Capernaum is known for its ancient synagogue and traditional House of Peter." },
     { q: "Can I visit with limited mobility?", a: "The Church of the Multiplication has a relatively level approach, and the Primacy chapel has an access ramp. The rocky lakeshore and steps may still be difficult to reach. Contact both churches to confirm a step-free route for your visit." },

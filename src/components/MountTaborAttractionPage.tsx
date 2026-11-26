@@ -40,23 +40,23 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
       <AttractionHighlight title="The Church of the Transfiguration">
         <p>The Franciscan basilica is the main reason pilgrims visit Mount Tabor. Designed by Antonio Barluzzi and completed in 1924, it has two distinctive towers flanking a pale stone entrance. The towers recall Moses and Elijah, who appear in the Gospel account of the Transfiguration.</p>
         <p>Approaching the Franciscan compound, you pass the historic <strong>Gate of the Wind</strong>, restored from an earlier gateway. Beside the basilica, look for the ruins of the <strong>medieval Benedictine monastery</strong>, including its former chapel and other stone structures.</p>
-        <p>Step inside to appreciate the church's architecture and atmosphere, built above traces of earlier sanctuaries.</p>
+        <p>Step inside the basilica, built above the remains of earlier churches, to admire its architecture.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The golden mosaic and crypt" image={{ src: "/images/attractions/mount-tabor-mosaic.webp", alt: "Golden mosaic showing Jesus between Moses and Elijah inside the Basilica of the Transfiguration" }}>
-        <p>The golden mosaic above the sanctuary shows Jesus in radiant white, with Moses and Elijah alongside him. It is the centrepiece of the church and rewards a few quiet moments.</p>
-        <p>Look into the lower crypt too, where an older apse and mosaics add another layer to the history of the sanctuary.</p>
+        <p>The golden mosaic above the sanctuary shows Jesus in radiant white, with Moses and Elijah alongside him. Take a few moments to admire this beautiful mosaic.</p>
+        <p>Visit the lower crypt to see an older apse and mosaics from an earlier period.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The hilltop basilica and its terraces" image={{ src: "/images/attractions/mount-tabor-basilica-aerial.webp", alt: "Aerial view of the Basilica of the Transfiguration and surrounding monastery buildings on Mount Tabor" }}>
         <p>This view from above shows how the basilica and monastery sit on the wooded summit, surrounded by the open landscape of Lower Galilee.</p>
         <p>After exploring the church, walk out to the terraces for views across the Jezreel Valley and the surrounding hills, especially on clear days.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Greek Orthodox church of St. Elias" image={{ src: "/images/attractions/mount-tabor-orthodox-interior.webp", alt: "Painted arches, religious icons and the iconostasis inside Mount Tabor's Greek Orthodox church" }}>
-        <p>The Greek Orthodox monastery stands elsewhere on the summit, with its own Transfiguration tradition. Its church was rebuilt in the early twentieth century over earlier remains.</p>
+        <p>The Greek Orthodox monastery is also located on the summit and commemorates the Transfiguration. Its church was rebuilt in the early twentieth century over earlier remains.</p>
         <p><strong>The church is not normally open for casual sightseeing.</strong> If you hope to enter, contact the monastery to check whether a visit can be arranged.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The forested mountain and summit paths" image={{ src: "/images/attractions/mount-tabor-landscape.webp", alt: "The green, rounded silhouette of Mount Tabor rising above the surrounding Lower Galilee landscape" }}>
         <p>Mount Tabor's rounded outline is striking even from the surrounding valley. At the top, marked paths lead past oak woodland, old defensive walls and viewpoints.</p>
-        <p>For walkers, the black-marked summit loop adds a different experience to a visit focused on the church.</p>
+        <p>Follow the black-marked circular trail for a scenic walk around the summit.</p>
       </AttractionHighlight>
     </div>
   ),
@@ -95,7 +95,7 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Mount Tabor rises between <strong>Daburiyya</strong> and <strong>Shibli–Umm al-Ghanam</strong>, east of Nazareth. The narrow, winding road makes reaching the foot of the mountain and reaching the basilica two different parts of the journey.</p>
+      <p>Mount Tabor rises between <strong>Daburiyya</strong> and <strong>Shibli–Umm al-Ghanam</strong>, east of Nazareth. A narrow, winding road leads from the villages at the foot of the mountain to the basilica at the summit.</p>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">

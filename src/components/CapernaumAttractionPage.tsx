@@ -68,7 +68,7 @@ const page: AttractionDestinationContent = {
         image={{ src: "/images/attractions/capernaum-synagogue-aerial.webp", alt: "Aerial close-up of Capernaum’s limestone synagogue surrounded by basalt village remains" }}
       >
         <p>White limestone columns and carved details stand out against the darker basalt of the village. This is the best-known archaeological landmark at Capernaum.</p>
-        <p>The synagogue visible today is generally dated to the fifth century, much later than the time of Jesus. Earlier archaeological levels lie beneath it.</p>
+        <p>The synagogue visible today is generally dated to the fifth century, much later than the time of Jesus. Remains of earlier buildings lie beneath the synagogue.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The traditional House of Peter"
@@ -78,13 +78,13 @@ const page: AttractionDestinationContent = {
         <p>The modern memorial church rises above the excavations, allowing visitors to see the remains below. The identification as Peter's personal home is a matter of tradition, not proven archaeological certainty.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The basalt houses of the old village">
-        <p>Take a few minutes to explore the low stone walls and courtyards between the main monuments. These domestic remains show the scale and layout of the settlement that stood beside the lake.</p>
+        <p>Take a few minutes to explore the low stone walls and courtyards between the main monuments. The remains of ancient homes reveal how the lakeside village was laid out.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The Greek Orthodox Church of the Twelve Apostles"
         image={{ src: "/images/attractions/capernaum-orthodox-church.webp", alt: "Greek Orthodox Church of the Twelve Apostles in Capernaum with bright red domes and crosses" }}
       >
-        <p>The neighbouring Greek Orthodox monastery is recognisable by its red-domed church and peaceful grounds. It offers a different religious and architectural experience from the ruins.</p>
+        <p>The neighbouring Greek Orthodox monastery is recognisable by its red-domed church and peaceful grounds.</p>
         <p><strong>Visits must be arranged in advance</strong> with the monastery.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The national park and the lakeshore">
@@ -164,7 +164,7 @@ const page: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or with a driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">From Route 90, turn east onto <strong>Route 87</strong> and follow signs to Capernaum (about 4 km from the junction). The site can also be approached from Route 92 along the eastern side of the lake. Choose the <strong>exact site entrance</strong> in your navigation app.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Route 90, turn east onto <strong>Route 87</strong> and follow signs to Capernaum (about 4 km from the junction). The site can also be approached from Route 92 along the eastern side of the lake. Use Google Maps to navigate to the entrance of the site you wish to visit.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
@@ -232,12 +232,12 @@ const page: AttractionDestinationContent = {
   ),
   faqs: [
     { q: "Are Capernaum and Kfar Nahum the same place?", a: "Yes. Kfar Nahum is the Hebrew name of Capernaum, on the northwestern shore of the Sea of Galilee." },
-    { q: "Do I need to book admission to the archaeological site?", a: "The Franciscan compound publishes an entrance fee, opening hours and last-entry times; individual visits are generally arranged at the entrance. Check current holiday and group rules with the Christian Information Center before arriving." },
+    { q: "Do I need to book admission to the archaeological site?", a: "Individual visitors can usually buy their admission tickets at the entrance to the Franciscan archaeological site. Check current holiday and group rules with the Christian Information Center before arriving." },
     { q: "Is one ticket valid for all parts of Capernaum?", a: "No. The Franciscan ruins, Orthodox monastery and national park visitor area are separately managed. The monastery asks for advance phone arrangements." },
-    { q: "Is the synagogue standing today from the time of Jesus?", a: "No. The monumental white limestone building is generally dated to the fifth century, with older archaeological layers below it." },
-    { q: "Can I combine Capernaum with Nazareth in one day?", a: "Yes, if you have a vehicle or suitable prearranged tour. Capernaum combines naturally with Tabgha and the Mount of Beatitudes; Nazareth adds travel and sightseeing time, so plan a realistic route." },
+    { q: "Is the synagogue standing today from the time of Jesus?", a: "No. The white limestone synagogue dates mainly to the fifth century and stands above the remains of earlier buildings." },
+    { q: "Can I combine Capernaum with Nazareth in one day?", a: "Yes, if you have a vehicle or suitable prearranged tour. Capernaum combines naturally with Tabgha and the Mount of Beatitudes; Allow extra time for the drive to Nazareth and sightseeing there." },
     { q: "Is a public bus a convenient way to visit?", a: "Usually not. Some connections are possible, but stops can be far from the entrance and buses are not frequent. A car, taxi or organised day trip is generally simpler." },
-    { q: "Is the visit suitable for people with limited mobility?", a: "The visitor areas have different surfaces and accessibility arrangements. Excavated basalt areas can be uneven. Check step-free access with the exact site operator before travelling." },
+    { q: "Is the visit suitable for people with limited mobility?", a: "The visitor areas have different surfaces and accessibility arrangements. The ancient basalt stone paths can be uneven. Contact the site directly for wheelchair access information." },
   ],
   nearby: [
     { label: "Tabgha", to: "/attractions/tabgha/", note: "Lakeside churches, mosaics and early Christian traditions." },

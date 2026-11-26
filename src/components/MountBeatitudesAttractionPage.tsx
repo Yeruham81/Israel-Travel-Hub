@@ -44,18 +44,18 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
         image={{ src: "/images/attractions/beatitudes-church-gardens.jpg", alt: "The domed octagonal Church of the Beatitudes seen through flowering gardens and palm trees" }}
       >
         <p>The small sanctuary, designed by Italian architect Antonio Barluzzi, is the centrepiece of the visit. Its eight sides reflect the eight Beatitudes at the beginning of the Sermon on the Mount.</p>
-        <p>Step inside to see the central altar, the dome and the Latin Beatitudes written in the upper windows. The quiet interior is especially rewarding when there are few visitors.</p>
+        <p>Step inside to see the central altar, the dome and the Latin Beatitudes written in the upper windows. Visit during quieter hours to enjoy the peaceful atmosphere inside the church.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The shaded colonnade and lake views"
         image={{ src: "/images/attractions/beatitudes-colonnade-lake.webp", alt: "Arched stone colonnade at the Church of the Beatitudes opening towards gardens and the Sea of Galilee" }}
       >
-        <p>Walk around the arches encircling the church. They frame lovely views towards the lake and offer shade while you take in the hillside setting.</p>
+        <p>Walk around the arches encircling the church. The shaded arches offer beautiful views over the Sea of Galilee.</p>
         <p>I recommend spending a few extra minutes enjoying the peaceful surroundings.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Gardens and views over the Sea of Galilee">
         <p>Walk through the landscaped gardens to enjoy the quiet setting and views over the lake. Some outdoor areas are reserved for organised prayer and services, so give groups their space.</p>
-        <p>Garden paths follow the slope, with changes in level as you move away from the main church.</p>
+        <p>Some garden paths are sloping or include steps.</p>
         <figure className="mt-3 overflow-hidden rounded-lg border border-border/70">
           <img src="/images/attractions/beatitudes-sea-view.webp" alt="Panoramic view of the Sea of Galilee and green hills from the Mount of Beatitudes gardens" loading="lazy" decoding="async" width={768} height={249} className="block h-auto w-full object-cover" />
           <figcaption className="px-3 py-2 text-xs text-muted-foreground">The Sea of Galilee as seen from the Mount of Beatitudes.</figcaption>
@@ -65,7 +65,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The church and gardens are visited as one site, with the lake viewpoints close to the sanctuary.</p>
+      <p>The church, gardens and lake viewpoints are all within the same grounds.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="beatitudes-hours-admission">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Opening hours</h3>
@@ -105,7 +105,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or with a driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">From Tiberias, follow Route 90 north along the lake towards Tabgha and take the signed access road uphill to the Church of the Beatitudes. Use the church entrance as your navigation destination.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Tiberias, follow Route 90 north along the lake towards Tabgha and take the signed access road uphill to the Church of the Beatitudes. Follow Google Maps to the church entrance.</p>
             <a href={churchDrivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">Directions to the Church of the Beatitudes</a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -174,7 +174,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
     </div>
   ),
   faqs: [
-    { q: "How much time do I need at the Mount of Beatitudes?", a: "Around 45–60 minutes is comfortable for the church, colonnade, gardens and lake views. Allow longer if you are attending a booked service." },
+    { q: "How much time do I need at the Mount of Beatitudes?", a: "Allow 45–60 minutes to explore the church and gardens and enjoy the lake views. Allow longer if you are attending a booked service." },
     { q: "What are the visiting hours?", a: "The published visiting hours are 08:00–11:30 and 14:00–16:30, with a midday closure in between. Check holiday closures before travelling." },
     { q: "Is there an entrance fee?", a: "Yes. The entrance fee is ₪10 per person." },
     { q: "Can I visit without a car?", a: "You may be able to reach the Tabgha area by bus from Tiberias, but the uphill approach to the church makes this less convenient. A rental car, organised tour or private driver is easier when combining sites." },

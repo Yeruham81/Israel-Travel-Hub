@@ -42,22 +42,22 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
         title="The first-century synagogue"
         image={{ src: "/images/attractions/magdala-first-century-synagogue.webp", alt: "Stone foundations, benches and ancient mosaic floor in Magdala's excavated first-century synagogue" }}
       >
-        <p>The synagogue is the archaeological heart of Magdala. Its stone benches, preserved floor and meeting space offer a rare window into Jewish community life in the Galilee during the first century.</p>
-        <p>Walk around the sheltered excavation to see how the original building was laid out. A guided explanation can help bring the remains to life.</p>
+        <p>The ancient synagogue is Magdala's main archaeological attraction. Its stone benches and preserved floor offer a rare glimpse of Jewish community life in the first-century Galilee.</p>
+        <p>Walk around the covered excavation to see the synagogue's original layout. A guided explanation can help bring the remains to life.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Magdala Stone">
         <p>The carved stone discovered in the synagogue is one of the site's most important finds. Its reliefs include a depiction of the menorah, connecting the town's Jewish life to the Temple in Jerusalem.</p>
         <p>The stone displayed in the synagogue is a replica. The original is part of the Israel Antiquities Authority’s collection and has been exhibited elsewhere.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Streets, marketplace and ritual baths">
-        <p>Beyond the synagogue, the excavated town reveals shops, domestic buildings and ancient <em>mikvaot</em> (ritual baths). Together, these remains help explain how people lived and worked beside the lake.</p>
+        <p>Beyond the synagogue, you can explore the remains of shops, homes and ancient <em>mikvaot</em> (Jewish ritual baths). Together, these remains help explain how people lived and worked beside the lake.</p>
         <p>I recommend allowing time for the archaeological site as well as the church.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="Duc In Altum and the Boat Chapel"
         image={{ src: "/images/attractions/magdala-boat-chapel.webp", alt: "Boat-shaped altar and bright arched windows inside Duc In Altum's lakeside prayer chapel at Magdala" }}
       >
-        <p>The modern prayer centre is a very different experience from the excavations. Its Boat Chapel faces towards the Sea of Galilee, with an altar recalling Jesus' teaching from a fishing boat.</p>
+        <p>Its Boat Chapel faces towards the Sea of Galilee, with an altar recalling Jesus' teaching from a fishing boat.</p>
         <p>Allow some quiet time to look around, and remember that services may be taking place.</p>
       </AttractionHighlight>
       <AttractionHighlight
@@ -71,7 +71,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The archaeological park and Duc In Altum are part of the same Magdala visitor complex, but their published closing times differ.</p>
+      <p>The archaeological park and Duc In Altum share the same grounds but have different closing times.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="magdala-hours-tickets">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Opening hours</h3>
@@ -88,7 +88,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
             <div className="flex items-start justify-between gap-3"><dt>Visitors over age 12</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.regularAdmissionPrice}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Group of {visit.groupMinimumSize} or more (per person)</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.groupAdmissionPrice}</dd></div>
           </dl>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Rates confirmed directly with the visitor centre. For other admission categories and guided visits, contact the visitor centre.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Rates confirmed directly with the visitor centre. Contact the visitor centre for group rates, other ticket prices and guided tours.</p>
           <a href={"mailto:" + visit.visitorEmail} className={"mt-2 inline-block text-sm " + inlineLink}>{visit.visitorEmail}</a>
           <p className="mt-1 text-sm"><a href={"tel:" + visit.visitorPhoneHref} className={inlineLink} dir="ltr">{visit.visitorPhone}</a></p>
           <a href={sources.contact} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official visitor centre contacts <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
@@ -157,7 +157,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
     <div className="mt-4 space-y-3">
       <p>Magdala was a prosperous Jewish town beside the Sea of Galilee during the first century. Archaeological excavations uncovered a synagogue, houses, a marketplace and ritual baths, revealing a community shaped by trade, fishing and religious life.</p>
       <p>The town is traditionally associated with Mary Magdalene, a follower of Jesus named in the Gospels. The archaeological remains establish the ancient settlement's importance, but they cannot identify an individual home or prove details of her life.</p>
-      <p>Duc In Altum is a modern centre for prayer and reflection, celebrating Gospel narratives and the women who followed Jesus. Its chapels complement the archaeological visit while belonging to a different period of the site's story.</p>
+      <p>Duc In Altum is a modern centre for prayer and reflection, celebrating Gospel narratives and the women who followed Jesus.</p>
     </div>
   ),
   tourContent: (

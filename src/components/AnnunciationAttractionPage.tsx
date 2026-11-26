@@ -41,21 +41,21 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
         image={{ src: "/images/attractions/annunciation-grotto.webp", alt: "Lower Basilica of the Annunciation with the ancient stone grotto and prayer area" }}
       >
         <p>The lower basilica is built around the grotto that Catholic tradition associates with Mary's home and the angel Gabriel's announcement in the Gospel of Luke. The grotto is the spiritual heart of the sanctuary, and its stone walls stand in contrast to the architecture above.</p>
-        <p>Take a moment to look at the remains of earlier churches around the shrine. The grotto is an active place of prayer; approach quietly and follow any barriers or guidance given by the attendants.</p>
+        <p>Take a moment to look at the remains of earlier churches around the shrine. The grotto is a place of prayer. Keep your voice low and follow the attendants' instructions.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The upper basilica and its large mosaic"
         image={{ src: "/images/attractions/annunciation-upper-basilica.webp", alt: "Upper Basilica of the Annunciation with stained-glass windows and the colourful mosaic behind the altar" }}
       >
-        <p>Above the grotto, the upper church opens into a striking modern worship space with stained glass and a large mosaic above the altar. The two levels are visually linked by the opening beneath the dome.</p>
-        <p>I recommend seeing both levels: they offer very different experiences of the same sanctuary, from the intimacy of the grotto to the brightness of the main church.</p>
+        <p>The upper basilica features striking modern architecture, stained-glass windows and a large mosaic above the altar. The two levels are visually linked by the opening beneath the dome.</p>
+        <p>I recommend visiting both levels, from the quiet grotto below to the spacious, light-filled basilica above.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="Marian mosaics from around the world"
         image={{ src: "/images/attractions/annunciation-marian-mosaics.webp", alt: "Colourful international images of Mary displayed along the covered walkway at the Annunciation Basilica" }}
       >
-        <p>The covered walkways and courtyard display artistic depictions of Mary donated by Catholic communities from different countries. Styles, clothing and materials vary, making this an engaging part of the visit even for those mainly interested in art and architecture.</p>
-        <p>Look for the names of the contributing countries beneath the images. Each work gives a different interpretation of a shared religious subject.</p>
+        <p>The courtyard and covered walkways display images of Mary donated by Catholic communities around the world. Styles, clothing and materials vary, making this an engaging part of the visit even for those mainly interested in art and architecture.</p>
+        <p>Look for the names of the contributing countries beneath the images. Each artwork reflects the artistic traditions of its country.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The distinctive dome"
@@ -66,7 +66,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Archaeological remains and St. Joseph's Church">
         <p>The raised platform beside the basilica protects remains of the ancient village and connects the Annunciation sanctuary with the nearby <strong>Church of St. Joseph</strong>, another Franciscan church associated with the Holy Family.</p>
-        <p>St. Joseph's has its own crypt and traditions. If it is open, it makes a natural addition to your visit without needing another drive across Nazareth.</p>
+        <p>St. Joseph's Church has its own crypt and is well worth visiting while you're at the basilica.</p>
       </AttractionHighlight>
     </div>
   ),
