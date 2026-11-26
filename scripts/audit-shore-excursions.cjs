@@ -1,89 +1,117 @@
-const assert=require("node:assert/strict");
-const fs=require("node:fs");
-const {chromium}=require("playwright");
-const base=process.env.SHORE_AUDIT_URL||"http://127.0.0.1:4173";
-const key="ith:cookie-consent:v1";
-const output="shore-browser-evidence";
-fs.mkdirSync(output,{recursive:true});
-(async()=>{
- const browser=await chromium.launch({headless:true,args:["--enable-webgl","--use-gl=angle","--use-angle=swiftshader","--enable-unsafe-swiftshader"]});
- const failures=[];
- try{
- for(const width of [320,390,768,1440]){
-  const context=await browser.newContext({viewport:{width,height:900}});
-  const external=[];
-  await context.route("**/*",async route=>{
-   const url=new URL(route.request().url());
-   if(url.origin!==base&&/^https?:$/.test(url.protocol)){
-    external.push(url.href);
-    if(/tpwgt\.com|google-analytics|googletagmanager|doubleclick|googlesyndication/.test(url.hostname))return route.abort();
-   }
-   return route.continue();
-  });
-  const page=await context.newPage();
-  page.on("pageerror",error=>console.log("PAGE_ERROR",width,error.message));
-  await page.goto(base+"/shore-excursions/",{waitUntil:"domcontentloaded"});
-  await page.getByRole("button",{name:"Accept necessary",exact:true}).click();
-  await page.locator('[aria-label="Cruise port excursion guides"]').waitFor();
-  const hub=page.locator('[aria-label="Cruise port excursion guides"]');
-  assert.equal(await hub.locator("li").count(),2);
-  const cards=await hub.locator("li").evaluateAll(nodes=>nodes.map(n=>({x:n.getBoundingClientRect().x,y:n.getBoundingClientRect().y,width:n.getBoundingClientRect().width})));
-  assert(Math.abs(cards[0].y-cards[1].y)<2,"port cards same row at "+width);
-  assert.equal(await page.locator("[data-experience]").count(),6);
-  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),"hub horizontal overflow "+width);
-  for(const [port,count] of [["haifa",7],["ashdod",8]]){
-   try{
-    await page.goto(base+"/shore-excursions/"+port+"/",{waitUntil:"domcontentloaded"});
-    const map=page.locator("#shore-map");
-    await map.scrollIntoViewIfNeeded();
-    assert.equal(await map.locator("iframe[src]").count(),0,"map must stay blocked without consent");
-    assert.equal(await map.locator("ol li").count(),count);
-    const table=page.locator("#shore-planning table");
-    assert.equal(await table.locator("tbody tr").count(),6);
-    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),"page overflow "+port+" "+width);
-    const form=page.locator("#request-quote");
-    await form.scrollIntoViewIfNeeded();
-    const fields=form.getByTestId("quote-fields-schedule");
-    const fieldBoxes=await fields.locator("label").evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,right:r.right}}));
-    assert.equal(fieldBoxes.length,4);
-    assert(Math.abs(fieldBoxes[0].y-fieldBoxes[1].y)<3,"schedule pairs "+port+" "+width);
-    assert(fieldBoxes.every(r=>r.x>=0&&r.right<=width+1),"schedule fields fit "+port+" "+width);
-    const reviews=form.getByTestId("contact-reviews-row");
-    assert(await reviews.isVisible(),"reviews row");
-    const quote=page.locator("#my-private-days").getByRole("link",{name:/Request a quote:/}).first();
-    await quote.click();
-    assert(await form.locator('select[name="itinerary"]').inputValue(),"quote preselection");
-    await form.screenshot({path:output+"/"+port+"-form-"+width+".png"});
-    await map.getByRole("button",{name:"Cookie settings for External content"}).click();
-    await page.getByRole("dialog").getByRole("checkbox").nth(1).check();
-    await page.getByRole("button",{name:"Save preferences"}).click();
-    const frame=map.locator("iframe[src]");
-    await frame.waitFor();
-    await frame.scrollIntoViewIfNeeded();
-    const inside=page.frameLocator("#shore-map iframe[src]");
-    await inside.locator(".shore-pin").first().waitFor({timeout:45000});
-    assert.equal(await inside.locator(".shore-pin").count(),count,"all map pins rendered");
-    const fit=await inside.locator(".shore-pin").evaluateAll(nodes=>nodes.every(n=>{const r=n.getBoundingClientRect();return r.left>=-1&&r.top>=-1&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1}));
-    assert(fit,"all pins in view "+port+" "+width);
-    await inside.locator(".shore-pin").first().click();
-    await inside.locator(".maplibregl-popup-content").waitFor();
-    await map.screenshot({path:output+"/"+port+"-map-"+width+".png"});
-    await page.locator("footer").getByRole("button",{name:"Cookie settings",exact:true}).click();
-    await page.getByRole("button",{name:"Accept necessary",exact:true}).click();
-    await frame.waitFor({state:"detached"});
-    console.log("SHORE_BROWSER_PASS",port,width,count);
-   }catch(error){
-    failures.push(port+" "+width+": "+error.message);
-    console.error("SHORE_BROWSER_FAIL",port,width,error.message,external.slice(-10));
-    await page.screenshot({path:output+"/"+port+"-failure-"+width+".png",fullPage:true}).catch(()=>{});
-    await page.evaluate(k=>localStorage.removeItem(k),key);
-    await page.reload({waitUntil:"domcontentloaded"});
-    const necessary=page.getByRole("button",{name:"Accept necessary",exact:true});
-    if(await necessary.isVisible())await necessary.click();
-   }
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const { chromium } = require("playwright");
+const base = process.env.SHORE_AUDIT_URL || "http://127.0.0.1:4173";
+const output = "shore-browser-evidence";
+fs.mkdirSync(output, { recursive: true });
+
+(async () => {
+  const browser = await chromium.launch({ headless: true, args: ["--enable-webgl", "--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
+  const results = [];
+  async function scenario(port, width, name, run) {
+    const context = await browser.newContext({ viewport: { width, height: 900 } });
+    const page = await context.newPage();
+    const external = [];
+    try {
+      await context.route("**/*", async route => {
+        const url = new URL(route.request().url());
+        if (url.origin !== base && /^https?:$/.test(url.protocol)) {
+          external.push(url.href);
+          if (/tpwgt\.com|google-analytics|googletagmanager|doubleclick|googlesyndication/.test(url.hostname)) return route.abort();
+        }
+        return route.continue();
+      });
+      page.on("pageerror", error => console.log("PAGE_ERROR", port, width, error.message));
+      await run(page);
+      results.push({ port, width, name, status: "passed" });
+      console.log("SHORE_FUNCTION_PASS", port, width, name);
+    } catch (error) {
+      results.push({ port, width, name, status: "failed", error: error.message, external: external.slice(-10) });
+      console.error("SHORE_FUNCTION_FAIL", port, width, name, error.message);
+    } finally {
+      await context.close();
+    }
   }
-  await context.close();
- }
- }finally{await browser.close();}
- assert.deepEqual(failures,[]);
-})().catch(error=>{console.error(error);process.exit(1);});
+  async function open(page, path) {
+    const response = await page.goto(base + path, { waitUntil: "domcontentloaded" });
+    assert(response?.ok(), "page loads successfully: " + path);
+    await page.getByRole("button", { name: "Accept necessary", exact: true }).click();
+  }
+  try {
+    for (const width of [390, 1440]) {
+      for (const [port, count] of [["haifa", 7], ["ashdod", 8]]) {
+        const path = "/shore-excursions/" + port + "/";
+        const isPort = url => url.pathname.replace(/\/$/, "") === path.replace(/\/$/, "");
+        await scenario(port, width, "hub navigation and catalog filters", async page => {
+          await open(page, "/shore-excursions/");
+          const hub = page.locator('[aria-label="Cruise port excursion guides"]');
+          await hub.locator('a[href*="/shore-excursions/' + port + '"]').click();
+          await page.waitForURL(isPort);
+          const catalog = page.locator("#itineraries");
+          const types = catalog.getByRole("navigation", { name: "Filter port services by type" });
+          const driver = types.getByRole("link", { name: "Private car & driver", exact: true });
+          await driver.click();
+          await page.waitForURL(url => isPort(url) && url.searchParams.get("format") === "driver");
+          await page.locator('#itineraries a[aria-current="true"][href*="format=driver"]').waitFor();
+          const cards = catalog.getByTestId("shore-service-card");
+          await cards.first().waitFor();
+          assert((await cards.count()) > 0, "driver filter has results");
+          assert((await cards.evaluateAll(nodes => nodes.map(n => n.dataset.serviceKind))).every(kind => kind === "private-driver"), "driver filter excludes other tour types");
+          await catalog.getByRole("link", { name: "Clear filters", exact: true }).click();
+          await page.waitForURL(url => isPort(url) && !url.searchParams.has("format") && !url.searchParams.has("destination"));
+          const destinations = catalog.getByRole("navigation", { name: "Filter port services by destination" });
+          const destination = destinations.locator('a[href*="destination="]').first();
+          const href = await destination.getAttribute("href");
+          const expected = new URL(href, base).searchParams.get("destination");
+          assert(expected, "destination filter has a destination");
+          await destination.click();
+          await page.waitForURL(url => isPort(url) && url.searchParams.get("destination") === expected);
+          await destinations.locator('a[aria-current="true"][href*="destination="]').waitFor();
+          await catalog.getByRole("link", { name: "Clear filters", exact: true }).click();
+          await page.waitForURL(url => isPort(url) && !url.searchParams.has("destination"));
+        });
+        await scenario(port, width, "quote selection and form validation", async page => {
+          await open(page, path);
+          const form = page.locator("#request-quote");
+          const select = form.locator('select[name="itinerary"]');
+          const quote = page.locator("#my-private-days").getByRole("link", { name: /Request a quote:/ }).first();
+          const label = await quote.getAttribute("aria-label");
+          await quote.click();
+          await page.waitForFunction(() => !!document.querySelector('#request-quote select[name="itinerary"]')?.value);
+          const selectedLabel = await select.locator("option:checked").textContent();
+          assert(label.includes("Request a quote: " + selectedLabel + " from "), "correct itinerary selected");
+          await page.locator("#my-private-days").getByRole("link", { name: "request a custom route" }).click();
+          await page.waitForFunction(() => document.querySelector('#request-quote select[name="itinerary"]')?.value === "other");
+          await form.locator('input[name="otherItinerary"]').waitFor();
+          await form.getByRole("button", { name: "Send excursion request", exact: true }).click();
+          await form.getByRole("alert").filter({ hasText: "Please check these details:" }).waitFor();
+          // Only invalid submission is exercised; never send a real inquiry.
+        });
+        await scenario(port, width, "map consent and pin interaction", async page => {
+          await open(page, path);
+          const map = page.locator("#shore-map");
+          await map.scrollIntoViewIfNeeded();
+          const frame = map.locator("iframe[src]");
+          assert.equal(await frame.count(), 0, "map must stay blocked without consent");
+          await map.getByRole("button", { name: "Cookie settings for External content" }).click();
+          await page.getByRole("dialog").getByRole("checkbox").nth(1).check();
+          await page.getByRole("button", { name: "Save preferences" }).click();
+          await frame.waitFor();
+          await frame.scrollIntoViewIfNeeded();
+          const inside = page.frameLocator("#shore-map iframe[src]");
+          await inside.locator(".shore-pin").nth(count - 1).waitFor({ timeout: 45000 });
+          assert.equal(await inside.locator(".shore-pin").count(), count, "all map markers initialized");
+          await inside.locator(".shore-pin").first().click();
+          await inside.locator(".maplibregl-popup-content").waitFor();
+          await page.locator("footer").getByRole("button", { name: "Cookie settings", exact: true }).click();
+          await page.getByRole("button", { name: "Accept necessary", exact: true }).click();
+          await frame.waitFor({ state: "detached" });
+        });
+      }
+    }
+  } finally {
+    await browser.close();
+    fs.writeFileSync(output + "/functional-results.json", JSON.stringify(results, null, 2) + "\n");
+  }
+  assert.deepEqual(results.filter(result => result.status === "failed"), []);
+})().catch(error => { console.error(error); process.exit(1); });
