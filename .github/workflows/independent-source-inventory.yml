@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: ca64b2f3b1a4a2c65aff2e6d14efc880a1ea567b
+          ref: 843de2f0a1ff4948c6f860842fe1d0ca153842ff
           persist-credentials: false
       - name: Scan every tracked file at the pinned base revision
         shell: bash
@@ -54,4 +54,6 @@ jobs:
               ]
               print("MATCH", name, "binary=" + str(is_binary), "counts=" + str(hits), "name=" + str(name_hits), "lines=" + ",".join(map(str, line_numbers)))
           print("TOTAL", "files=" + str(files), "binary=" + str(binary), "matched_files=" + str(matches), "occurrences=" + str(dict(count)))
+          if matches:
+              raise SystemExit('Legacy markers remain in tracked source')
           PY
