@@ -19,17 +19,17 @@ const hotelCardDetails: Record<string, { type: string; location: string; highlig
   arthur: {
     type: "Boutique hotel",
     location: "Ben Yehuda area",
-    highlight: "Intimate, period-inspired Atlas stay on pedestrian streets.",
+    highlight: "Small Atlas boutique hotel with period-inspired décor in a pedestrian area.",
   },
   mamilla: {
     type: "Luxury hotel",
     location: "Beside Mamilla Avenue",
-    highlight: "Contemporary luxury on the approach to Jaffa Gate.",
+    highlight: "Contemporary luxury hotel near Jaffa Gate.",
   },
   "king-david": {
     type: "Historic luxury",
     location: "King David Street",
-    highlight: "Landmark hotel with classic grand-hotel character.",
+    highlight: "Historic luxury hotel with elegant interiors.",
   },
   "new-imperial": {
     type: "Historic hotel",
@@ -44,7 +44,7 @@ const hotelCardDetails: Record<string, { type: string; location: string; highlig
   bezalel: {
     type: "Boutique hotel",
     location: "Nachlaot",
-    highlight: "Art-focused Atlas stay close to the market and Downtown.",
+    highlight: "Atlas boutique hotel with artistic décor near Mahane Yehuda Market and Downtown.",
   },
   "market-courtyard": {
     type: "Apartment suites",
@@ -59,7 +59,7 @@ const hotelCardDetails: Record<string, { type: string; location: string; highlig
   "jerusalem-hotel": {
     type: "Heritage hotel",
     location: "Near Nablus Road",
-    highlight: "Family-run stay with Arabesque interiors and local character.",
+    highlight: "Family-run hotel with traditional Arabesque interiors.",
   },
   orient: {
     type: "Luxury hotel",
@@ -69,21 +69,21 @@ const hotelCardDetails: Record<string, { type: string; location: string; highlig
   "rafael-residence": {
     type: "Apartment suites",
     location: "Bethlehem Road, Baka",
-    highlight: "Residential suites with living space and kitchen facilities.",
+    highlight: "Spacious suites with living areas and kitchen facilities.",
   },
   // Tel Aviv: one concise distinction per locally sourced hotel choice.
   "tlv-dan": { type: "Classic beachfront luxury", location: "HaYarkon Street", highlight: "Established seafront hotel near Gordon and Frishman beaches." },
-  "tlv-royal-beach": { type: "Luxury beach hotel", location: "Central promenade", highlight: "Large Isrotel hotel near the southern central-beach stretch." },
+  "tlv-royal-beach": { type: "Luxury beach hotel", location: "Central promenade", highlight: "Large Isrotel hotel near the southern end of Tel Aviv's central beachfront." },
   "tlv-center-chic": { type: "Design boutique", location: "Dizengoff Square", highlight: "An Atlas hotel directly beside the square and its cafés." },
-  "tlv-dizengoff-garden": { type: "Small boutique hotel", location: "Dizengoff Street", highlight: "A compact city stay close to shops and evening restaurants." },
+  "tlv-dizengoff-garden": { type: "Small boutique hotel", location: "Dizengoff Street", highlight: "Small city hotel close to shops and restaurants." },
   "tlv-shalom": { type: "Boutique hotel", location: "Independence Park", highlight: "Sea-adjacent Atlas hotel near northern beaches." },
   "tlv-tal": { type: "Contemporary hotel", location: "Near Tel Aviv Port", highlight: "A convenient base for the port and Metzitzim Beach." },
   "tlv-trieste": { type: "Heritage suites", location: "Near Neve Tzedek", highlight: "Independent suites in a restored low-rise building." },
   "tlv-vera": { type: "Boutique hotel", location: "Lilienblum Street", highlight: "Stylish city base between Neve Tzedek and Rothschild." },
-  "tlv-setai": { type: "Luxury heritage hotel", location: "Jaffa's Clock Tower", highlight: "Restored landmark setting close to Old Jaffa and the port." },
+  "tlv-setai": { type: "Luxury heritage hotel", location: "Jaffa's Clock Tower", highlight: "Luxury hotel in a restored historic building near Old Jaffa and the port." },
   "tlv-margosa": { type: "Boutique hotel", location: "Near the flea market", highlight: "Small Jaffa hotel with cafés and historic streets nearby." },
   "tlv-levinski-market": { type: "Urban hotel", location: "Levinsky Market", highlight: "A practical base for local food stalls and Florentin streets." },
-  "tlv-mulan": { type: "Small urban hotel", location: "Florentin area", highlight: "An independent stay in the lively south-city district." },
+  "tlv-mulan": { type: "Small urban hotel", location: "Florentin area", highlight: "Small hotel in the lively Florentin neighbourhood." },
   "tlv-carmel-beach-house": { type: "Guesthouse-style stay", location: "Carmel Market area", highlight: "Compact accommodation between the market and central beaches." },
   "tlv-fabric": { type: "Design boutique", location: "Nahalat Binyamin", highlight: "Atlas boutique hotel on a lively pedestrian-shopping street." },
   "tlv-rothschild22": { type: "Business boutique", location: "Rothschild Boulevard", highlight: "Urban hotel on the boulevard near restaurants and offices." },

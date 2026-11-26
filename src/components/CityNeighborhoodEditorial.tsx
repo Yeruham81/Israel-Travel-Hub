@@ -50,23 +50,23 @@ const telAvivAreaCardPhotos: Record<string, { src: string; alt: string }> = {
 
 const decisionNotes = {
   jerusalem: {
-    introduction: "For a first visit, I usually recommend comparing Downtown and Mamilla first. Downtown has the broadest mix of restaurants and transport, while Mamilla is particularly useful for Jaffa Gate. The right choice changes if your focus is pilgrimage, market food or a quieter residential stay.",
+    introduction: "For a first visit, I usually recommend comparing Downtown and Mamilla first. Downtown has the broadest mix of restaurants and transport, while Mamilla is particularly useful for Jaffa Gate. Consider the Old City for pilgrimage, Mahane Yehuda for food and nightlife, or the German Colony for quieter surroundings.",
     callout: "Jerusalem is hilly. A hotel that looks close to the Old City on a map may still involve steps, an uphill return or a long walk from the nearest taxi drop-off.",
     check: "If you plan to arrive on Friday evening or Saturday, check your hotel's reception and meals, as well as transport. Services vary by area.",
     faqs: [
-      { q: "Where is the most convenient base for a first visit to Jerusalem?", a: "Downtown around Jaffa Road is a practical starting point for restaurants, the light rail and walks towards the Old City. If Jaffa Gate is your priority, compare Mamilla and nearby King David Street." },
+      { q: "Where is the most convenient base for a first visit to Jerusalem?", a: "Downtown Jerusalem around Jaffa Road offers restaurants, convenient light-rail access and easy walks to the Old City. If Jaffa Gate is your priority, compare Mamilla and nearby King David Street." },
       { q: "Should I stay inside Jerusalem's Old City?", a: "It can be a memorable choice if you are visiting religious and historic sites early or late in the day. Consider the nearest Old City gate, stairs and how far you'll need to carry your luggage. A hotel just outside the walls may be more convenient." },
-      { q: "Which Jerusalem areas suit families or longer stays?", a: "The German Colony and Baka offer more of a residential atmosphere. Downtown is a convenient choice if you plan to explore Jerusalem on foot or by public transport." },
+      { q: "Which Jerusalem areas suit families or longer stays?", a: "The German Colony and Baka offer quieter residential streets and neighbourhood cafés. Downtown is a convenient choice if you plan to explore Jerusalem on foot or by public transport." },
       { q: "What changes over Shabbat?", a: "Regular public transport and many businesses in West Jerusalem pause from Friday afternoon to Saturday evening. Shops and restaurants in East Jerusalem and parts of the Old City often follow different opening hours. Confirm your arrival, meals and check-in arrangements." },
     ],
   },
   telaviv: {
     introduction: "I would start with the central beaches or Dizengoff Square if this is your first Tel Aviv visit. From there, choose between easy access to the sea, cafés and shopping, or a different neighbourhood experience in Jaffa, Neve Tzedek, Rothschild, Florentin and the north.",
-    callout: "A Tel Aviv neighbourhood name can cover quite different streets. Before booking, compare the actual walk from the hotel door to the beach, restaurants or sights you plan to visit most.",
+    callout: "Before booking, compare the actual walk from the hotel door to the beach, restaurants or sights you plan to visit most.",
     check: "If you arrive on Friday evening or Saturday, check the current airport-to-hotel connection. Trains and regular bus routes may have limited or no service.",
     faqs: [
       { q: "Where should I stay in Tel Aviv on my first visit?", a: "The area around Gordon, Frishman and Bograshov beaches is ideal for a beach holiday. Stay near Dizengoff Square for restaurants, shops and easy access to the beach." },
-      { q: "Where is a quieter area for a family stay?", a: "Residential parts of the Old North have parks and northern beaches nearby. The Tel Aviv Port itself is busier, so pay attention to the exact street and room location." },
+      { q: "Where is a quieter area for a family stay?", a: "Residential parts of the Old North have parks and northern beaches nearby. The port is generally livelier, so choose a nearby residential street if you prefer quieter evenings." },
       { q: "Is Jaffa a good base for exploring Tel Aviv?", a: "Yes, especially if you enjoy history, galleries, food and the old port. From Jaffa, allow extra time to reach the central beaches and Dizengoff Street." },
       { q: "Do I need a rental car if I stay centrally?", a: "Usually not for exploring Tel Aviv. Many central sights are walkable, and buses, the Red Line and taxis cover longer journeys. Parking can be difficult and expensive." },
     ],
@@ -80,24 +80,24 @@ const jerusalemPractical: Record<string, { consider: string; gettingAround: stri
     gettingAround: "From the eastern end of Downtown, Jaffa Gate is roughly 10–15 minutes on foot; hotels farther west take longer. Jaffa Road has light-rail stops for the market and station area. Confirm the nearest vehicle-accessible drop-off.",
   },
   mamilla: {
-    consider: "Room rates are often higher than Downtown, and an Old City view is only guaranteed when the chosen room category explicitly includes it.",
+    consider: "Hotels in Mamilla are often more expensive than Downtown hotels. Book a room specifically advertised with an Old City view if that's important to you.",
     gettingAround: "Jaffa Gate is often roughly 5–15 minutes on foot from hotels in this district. King David Street extends south, adding walking time. Ask your driver to use the hotel's vehicle-accessible entrance.",
   },
   "old-city": {
     consider: "Historic guesthouses vary greatly in facilities and accessibility. A lift inside the building does not make the cobbled approach from the gate step-free.",
-    gettingAround: "Choose the arrival gate with your hotel: Jaffa Gate suits many western approaches, Damascus Gate the northern lanes, while Zion or Dung gates may suit some Jewish Quarter addresses. Confirm the permitted drop-off and remaining walk with luggage.",
+    gettingAround: "Choose the arrival gate with your hotel: Jaffa Gate suits many western approaches, Damascus Gate the northern lanes, while Zion or Dung gates may suit some Jewish Quarter addresses. Ask where a taxi can drop you off and how far you'll need to carry your luggage.",
   },
   "mahane-yehuda": {
     consider: "Market-facing rooms can hear deliveries and evening bars. Apartments can be convenient for longer stays, but check the kitchen and check-in arrangements in the exact unit.",
     gettingAround: "Jaffa Gate is roughly 20–30 minutes on foot from much of this area. Alternatively, take the light rail toward City Hall when it is operating, then walk. Parking and pickup beside the market can be awkward.",
   },
   "east-jerusalem": {
-    consider: "Hotels near Damascus Gate and those around the American Colony offer different settings. If western Downtown restaurants and Mahane Yehuda nightlife are your priority, choose a base farther west.",
+    consider: "Hotels near Damascus Gate are closer to the busy commercial streets, while those around the American Colony generally offer quieter surroundings. If western Downtown restaurants and Mahane Yehuda nightlife are your priority, choose a base farther west.",
     gettingAround: "Hotels beside the northern Old City walls may be a short walk from Damascus Gate, while properties near the American Colony are farther away. Use the precise address for arrival and check the most useful gate for your itinerary.",
   },
   "german-colony": {
     consider: "The northern German Colony is closer to central sights than southern Baka. A residential atmosphere often means using taxis or buses on some sightseeing days.",
-    gettingAround: "From the northern German Colony, Jaffa Gate is roughly a 15–25-minute walk, depending on the starting point. Properties farther into Baka usually make more sense as a bus-or-taxi base.",
+    gettingAround: "From the northern German Colony, Jaffa Gate is roughly a 15–25-minute walk, depending on the starting point. If you're staying farther south in Baka, buses and taxis are convenient for reaching the main attractions.",
   },
 };
 
@@ -115,7 +115,7 @@ const telAvivNoteDesign: Record<string, { insightTitle: string; arrivalTitle: st
 
 const telAvivBookingTips = [
   { title: "Measure the walk to the beach", text: "Check the hotel's street address and the route to the beach you expect to use." },
-  { title: "Book the right view", text: "A hotel near the seafront does not guarantee a sea-view room; check the exact room category." },
+  { title: "Book the right view", text: "Book a room specifically advertised with a sea view if you'd like to overlook the Mediterranean." },
   { title: "Look at street and bar noise", text: "For Florentin, Rothschild and market streets, check which way your room faces." },
   { title: "Check steps and lifts", text: "Converted buildings in Neve Tzedek and Jaffa may have stairs or restricted vehicle access." },
   { title: "Plan your arrival", text: "Check the last connection from the airport or station and Friday-evening or Saturday service." },
