@@ -67,7 +67,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     title: "Israel Tours for Seniors: Private Day Trips at Your Own Pace",
     description: "Plan comfortable Israel tours for seniors with private transport, flexible sightseeing and day trips to Jerusalem, Masada, the Galilee and coast.",
     intro: "My personal guide to unhurried, carefully planned day trips for older visitors who appreciate private transport, manageable walks and the freedom to choose their own pace.",
-    answer: "Private sightseeing with a driver can connect key sites with flexible pickups, shorter walking segments and rest breaks. Choose realistic stops and confirm any essential accessibility or specialist vehicle requirements before booking.",
+    answer: "A private day trip with a driver allows you to visit several attractions at your own pace, with convenient pickups, shorter walks and time for rest breaks. Choose an itinerary that suits your pace and discuss any accessibility or special vehicle requirements before booking.",
     updatedAt: seniorUpdatedAt,
     topics: ["tips", "itineraries", "transportation", "destinations"],
     photo: seniorHero,
@@ -460,7 +460,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "compatibility",
         title: "Will an eSIM work on your phone?",
         paragraphs: [
-          "Not sure if your phone supports eSIM? Airalo's compatibility checker lists supported iPhone, Samsung, Pixel and other models. Look up your exact model before buying, especially if it was purchased in another region.",
+          "Use Airalo's compatibility checker to find out whether your phone supports eSIM. Check your exact model and regional version before purchasing a plan.",
           "Your phone also needs to be unlocked. Many phones can keep a home SIM active for calls and messages while using a travel eSIM for data.",
         ],
         externalLinks: [
@@ -509,7 +509,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { q: "Can I use my eSIM as a hotspot for a laptop?", a: "Many travel eSIMs allow tethering, but the limits vary by provider. For work or frequent video calls, pay attention to the amount of high-speed data included each day." },
       { q: "What happens when my fixed-data eSIM runs out?", a: "Your mobile data service may stop until you buy a top-up or another plan. Check the provider's top-up options before your trip." },
       { q: "Will my Israel eSIM work in Bethlehem or Jericho?", a: "Coverage in the West Bank depends on the networks included in your plan. Israeli coverage alone does not guarantee access to Palestinian networks." },
-      { q: "Do travel eSIMs give me an Israeli number?", a: "Most basic plans are data-only. Some providers sell calls and SMS separately, but check the country of the phone number; a US number is not an Israeli one." },
+      { q: "Do travel eSIMs give me an Israeli number?", a: "Most basic travel eSIMs include mobile data only. If you need calls, SMS or an Israeli phone number, choose a plan that specifically includes those services." },
       { q: "Can I buy an eSIM after arriving in Israel?", a: "Yes, you can buy online at any time. I recommend arranging it before the flight, so you can use maps, messages and booking details as soon as you land." },
     ],
     sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-saily-usd-price-nov26", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-drimsim"],
@@ -744,7 +744,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       "Keep the blue entry card and baggage claim tags",
       "Report missing checked baggage at your airline's baggage service desk",
       "Choose the correct customs channel and keep relevant receipts",
-      "Confirm onward transport, the pickup point and the waiting policy",
+      "Arrange your airport transfer and confirm the meeting point and waiting time policy",
       "Arrange mobile connectivity, child seats or accessibility assistance in advance",
     ],
     faqs: [
@@ -775,7 +775,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     title: "Getting Around Israel: Trains, Buses, Taxis & Travel Tips",
     description: "How to travel around Israel by train, bus, light rail, sherut, taxi or car. Practical Rav-Kav fares, Jerusalem train vouchers, Shabbat travel and city connections.",
     intro: "Planning how to get around Israel? This guide compares trains, buses, light rail, taxis and private journeys, with practical advice on fares, transfers and Shabbat travel.",
-    answer: "When travelling between Tel Aviv, Jerusalem and Haifa, consider both the train or bus journey and the distance to your hotel. In cities, walk or use local buses and light rail; for remote attractions, a rental car, tour or private driver may save time. Pay for most public transport with a loaded Rav-Kav or an approved ticketing app, and plan separately for Shabbat and holidays.",
+    answer: "Trains and intercity buses are convenient for travelling between Tel Aviv, Jerusalem and Haifa. Choose a station or stop with easy connections to your hotel. Explore city centres on foot, by local bus or light rail. For more remote attractions, consider renting a car, joining a tour or booking a private driver. Pay for most public transport using a loaded Rav-Kav or an approved ticketing app. Check service hours for Shabbat and public holidays.",
     topics: ["transportation", "destinations", "itineraries", "tips"],
     updatedAt: "2026-11-24",
     photo: {
@@ -958,7 +958,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-eilat", title: "Eilat, the Negev and the Dead Sea",
             paragraphs: [
-              "There is no passenger rail line to Eilat or the Ein Bokek hotel area. Check intercity bus reservations and connections, particularly for remote desert sites. My Eilat attractions guide, Jerusalem-to-the-Dead-Sea guide and airport-to-Ein-Bokek guide provide destination-specific options.",
+              "Eilat and the Ein Bokek hotel area are served by intercity buses; neither has passenger rail service. Check whether your journey requires a seat reservation or a connection. My Eilat attractions guide, Jerusalem-to-the-Dead-Sea guide and airport-to-Ein-Bokek guide provide destination-specific options.",
             ],
             inlineLinks: [
               { text: "Eilat attractions guide", to: "/attractions/eilat/" },
@@ -1065,7 +1065,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { q: "How do ₪8 fares and 90-minute transfers work?", a: "A standard journey up to 15 km costs ₪8. Eligible bus and light-rail transfers within 90 minutes are included when you validate correctly; longer journeys and special products use other fare rules." },
       { q: "Do I need an advance train voucher for Jerusalem?", a: "Israel Railways currently requires a separate free personal voucher for travel to or from Jerusalem–Yitzhak Navon, available from 72 hours before your selected train. Check the official rule for your date; the voucher does not replace your ticket." },
       { q: "Does public transport operate during Shabbat?", a: "Most regular trains and buses pause for much of Shabbat. Selected local shared taxis and weekend buses operate on specific routes; licensed taxis and confirmed private transfers are other options." },
-      { q: "Can I reach Eilat and the Dead Sea without a car?", a: "Intercity buses serve Eilat and Dead Sea destinations, sometimes with connections or seat reservations. There is no passenger train to Eilat or Ein Bokek; plan the last bus and final stop." },
+      { q: "Can I reach Eilat and the Dead Sea without a car?", a: "You can reach Eilat and the Dead Sea by intercity bus. Some journeys require a connection or seat reservation. There is no passenger train to Eilat or Ein Bokek. Check the stop nearest your accommodation and the last available departure." },
     ],
     sourceIds: [
       "guide-bus-planner", "guide-public-transport-payments", "guide-select-card-payment",
@@ -1195,7 +1195,7 @@ telAviv: {
             ["Arlozorov", "Tel Aviv Savidor Center railway station, buses and north-central connections"],
             ["Sha'ul HaMelekh", "Tel Aviv Museum of Art and government district"],
             ["Yehudit", "Sarona and the Begin business district"],
-            ["Karlibach", "Business district and onward bus connections"],
+            ["Karlibach", "Business district and local bus connections"],
             ["Allenby", "Rothschild Boulevard, Allenby and access to Carmel Market"],
             ["Elifelet", "Neve Tzedek and south Tel Aviv"],
             ["Shalma (Salame)", "Southern Jaffa; continue towards Old Jaffa"],

@@ -70,7 +70,7 @@ export const journeyDestinationGuides = {
         "id": "lake",
         "title": "Understand the lake and the shore",
         "paragraphs": [
-          "The Dead Sea lies in the Jordan Rift landscape far below Mediterranean sea level. Its high salt concentration creates the buoyancy for which it is famous. The scenery and shoreline have changed over time, so old photographs and a map pin are not a reliable guide to a safe or currently managed water entrance.",
+          "The Dead Sea lies in the Jordan Rift landscape far below Mediterranean sea level. Its high salt concentration creates the buoyancy for which it is famous. The Dead Sea shoreline has changed considerably over time. For safe access to the water, use designated beaches that are currently open to visitors.",
           "This guide focuses on visits approached from Jerusalem and destinations on the western side. The hotel and beach facilities around Ein Bokek are also distinct from the northern lake landscape."
         ]
       },
@@ -377,7 +377,7 @@ export const journeyDestinationGuides = {
       "paragraphs": [
         "Visitors who are permitted to enter Bethlehem can arrange a return trip with a Palestinian taxi driver who has the necessary permits and insurance, including time for sightseeing. Confirm that both the driver and vehicle are permitted to complete the journey.",
         "Before booking, confirm the pickup point, permitted route, insurance, sightseeing stops, waiting time and total price, including the return. Remember that a driver may not be a licensed guide.",
-        "An Israeli taxi can take eligible travellers towards Checkpoint 300, but a through-trip needs specific driver and vehicle permissions and appropriate insurance. An independent visitor using the pedestrian crossing can arrange a Palestinian taxi or guide on the Bethlehem side."
+        "Eligible travellers can take an Israeli taxi towards Checkpoint 300. Continuing into Bethlehem in the same vehicle requires the appropriate driver permits, vehicle permits and insurance. After crossing on foot, you can arrange a local taxi or guide on the Bethlehem side."
       ],
       "photo": {
         "src": palestinianTaxiPhoto,
@@ -477,7 +477,7 @@ export const journeyDestinationGuides = {
           "id": "bethlehem-sites",
           "title": "What to see around the Church of the Nativity",
           "paragraphs": [
-            "Start at the Church of the Nativity and Manger Square. You can walk to the Milk Grotto and Star Street, but Shepherds' Field in nearby Beit Sahour usually requires a separate ride. Wear modest clothing and comfortable shoes when visiting active places of worship."
+            "Start at the Church of the Nativity and Manger Square. The Milk Grotto and Star Street are within walking distance of Manger Square. Take a taxi to Shepherds' Field in nearby Beit Sahour. Wear modest clothing and comfortable shoes when visiting active places of worship."
           ],
           "photo": {
             "src": milkGrottoPhoto,
@@ -537,7 +537,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Is bus 231 or bus 234 better for the Church of the Nativity?",
-      "a": "Line 231 stops at Bab al-Zaqaq / Beit Jala Road, about 1 km from Manger Square. Line 234 ends at Checkpoint 300, where eligible visitors arrange the crossing and onward transport. Neither bus stops at the Church of the Nativity."
+      "a": "Line 231 stops at Bab al-Zaqaq / Beit Jala Road, about 1 km from Manger Square. Line 234 ends at Checkpoint 300, where eligible visitors can cross and continue by local taxi. From Bab al-Zaqaq, continue to the Church of the Nativity on foot or by taxi."
     },
     {
       "q": "Where do buses to Bethlehem leave from in Jerusalem?",
@@ -676,7 +676,7 @@ export const journeyDestinationGuides = {
           "id": "destinations",
           "title": "Choose your Dead Sea destination",
           "paragraphs": [
-            "The northern beaches, Qumran, Ein Gedi, Masada and Ein Bokek are separate stops along Route 90. Choose the exact entrance or beach before deciding how to travel.",
+            "The northern beaches, Qumran, Ein Gedi, Masada and Ein Bokek are spread along Route 90. Plan your transport according to the places you want to visit.",
             "These are approximate one-way driving times from central Jerusalem via Routes 1 and 90, in normal conditions. Public buses can take longer, with departure times depending on the stop."
           ],
           "tables": [{
@@ -732,7 +732,7 @@ export const journeyDestinationGuides = {
           "title": "By taxi or private driver: direct travel from your hotel",
           "paragraphs": [
             "A taxi or pre-booked private transfer takes you from your Jerusalem pickup address to the chosen Dead Sea hotel, beach or attraction. This suits travellers with luggage, families and visitors travelling outside normal bus hours.",
-            "For a one-way ride, confirm the drop-off address. For a day trip with sightseeing, agree on the stops, driver waiting time and return to Jerusalem. Guiding and attraction admission should be arranged separately.",
+            "For a one-way transfer, confirm your drop-off address. For a private day trip, agree on the sightseeing stops, driver waiting time at each attraction and return journey to Jerusalem. Guiding and attraction admission should be arranged separately.",
             "For a private Masada and Dead Sea day trip, send me your pickup location in Jerusalem, travel date, passengers, planned stops and return time using the contact form. I'll reply personally with a quote. You can also browse my Masada and Dead Sea tours or read about my private driver service."
           ],
           "inlineLinks": [
@@ -758,7 +758,7 @@ export const journeyDestinationGuides = {
           "id": "driving",
           "title": "By rental car: the most flexible option",
           "paragraphs": [
-            "A rental car gives you flexibility for several Dead Sea stops. The usual drive follows Highway 1 east and Highway 90 south. Navigate to the exact hotel, beach or park entrance: Masada's eastern visitor entrance is accessed from Route 90.",
+            "Renting a car gives you the freedom to visit several attractions around the Dead Sea. From Jerusalem, follow Highway 1 east and Highway 90 south. Set your navigation app to your hotel, beach or attraction entrance. Masada's eastern entrance is accessible from Route 90.",
             "Driving lets you start early and combine attractions, but allow time for collecting the car, parking and returning to Jerusalem. See my car rental guide for details on insurance, fuel policies, pickup hours and permitted roads.",
             "Desert rain can cause sudden flash floods and road closures even when Jerusalem is dry. Check weather warnings and Route 90 status before departure, and use marked beach and parking access points."
           ],
