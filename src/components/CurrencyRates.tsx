@@ -75,8 +75,8 @@ export function CurrencyRatesProvider({ children, enabled = true }: { children: 
         try {
           data = await loadRates(referenceFxConfig.endpoint);
         } catch {
-          // Always check the independently updated public snapshot if Lovable's
-          // own API fails, even when an older cached quote is still usable.
+          // Always check the independently updated public snapshot if the
+          // same-origin API fails, even when an older cached quote is still usable.
           // The publication-date guard below prevents any downgrade.
           try {
             data = await loadRates(referenceFxConfig.publicSnapshotUrl);

@@ -25,12 +25,14 @@ describe("SSR response security headers", () => {
       expect(secured.headers.get(key)).toBe(value);
     }
     expect(secured.headers.get("x-frame-options")).toBe("SAMEORIGIN");
-    expect(secured.headers.get("content-security-policy")).toBe("base-uri 'self'; object-src 'none'");
+    expect(secured.headers.get("content-security-policy")).toBe(
+      "base-uri 'self'; object-src 'none'",
+    );
     expect(response.headers.get("x-frame-options")).toBeNull();
   });
 
-  it.each(["israel-taxi-travel.lovable.app", "preview--israel-taxi-travel.lovable.app", "localhost"])(
-    "keeps the %s preview embeddable in Lovable",
+  it.each(["saddlebrown-guanaco-454061.hostingersite.com", "preview.example.test", "localhost"])(
+    "keeps the %s non-production origin exempt from production frame policy",
     (hostname) => {
       const response = withSecurityHeaders(
         new Response("hello", { headers: { "content-type": "text/html" } }),
@@ -44,12 +46,14 @@ describe("SSR response security headers", () => {
   it("applies frame protection on both live website hostnames and never on APIs", () => {
     for (const hostname of ["israel-taxi.com", "www.israel-taxi.com"]) {
       const page = withSecurityHeaders(
-        new Response("page", { headers: { "content-type": "text/html" } }), request(hostname),
+        new Response("page", { headers: { "content-type": "text/html" } }),
+        request(hostname),
       );
       expect(page.headers.get("x-frame-options")).toBe("SAMEORIGIN");
       const apiRequest = new Request(`https://${hostname}/api/quote-request/`);
       const api = withSecurityHeaders(
-        Response.json({ accepted: true }, { headers: { "Cache-Control": "no-store" } }), apiRequest,
+        Response.json({ accepted: true }, { headers: { "Cache-Control": "no-store" } }),
+        apiRequest,
       );
       expect(api.headers.get("x-frame-options")).toBeNull();
       expect(api.headers.get("cache-control")).toBe("no-store");
@@ -74,29 +78,41 @@ describe("SSR response security headers", () => {
     expect(response.headers.get("referrer-policy")).toBe("no-referrer");
     expect(response.headers.get("x-frame-options")).toBe("DENY");
     expect(await response.text()).toBe("not found");
-    const noContent = withSecurityHeaders(new Response(null, { status: 204 }), request("israel-taxi.com"));
+    const noContent = withSecurityHeaders(
+      new Response(null, { status: 204 }),
+      request("israel-taxi.com"),
+    );
     expect(noContent.status).toBe(204);
     expect(await noContent.text()).toBe("");
   });
 
   it("preserves a pre-existing stricter CSP without overwriting it", () => {
-    const response = withSecurityHeaders(new Response("hi", {
-      headers: {
-        "Content-Type": "text/html",
-        "Content-Security-Policy": "default-src 'self'; object-src 'none'",
-      },
-    }), request("israel-taxi-travel.lovable.app"));
-    expect(response.headers.get("content-security-policy")).toBe("default-src 'self'; object-src 'none'");
+    const response = withSecurityHeaders(
+      new Response("hi", {
+        headers: {
+          "Content-Type": "text/html",
+          "Content-Security-Policy": "default-src 'self'; object-src 'none'",
+        },
+      }),
+      request("saddlebrown-guanaco-454061.hostingersite.com"),
+    );
+    expect(response.headers.get("content-security-policy")).toBe(
+      "default-src 'self'; object-src 'none'",
+    );
     expect(response.headers.get("x-frame-options")).toBeNull();
   });
 
   it("protects normal and error responses at the server entrypoint without premature strict script CSP or HSTS", () => {
     const server = readFileSync("src/server.ts", "utf8");
-    expect(server).toContain("withSecurityHeaders(await normalizeCatastrophicSsrResponse(response), request)");
+    expect(server).toContain(
+      "withSecurityHeaders(await normalizeCatastrophicSsrResponse(response), request)",
+    );
     expect(server).toContain("withSecurityHeaders(new Response(renderErrorPage()");
     const headers = readFileSync("src/lib/security-headers.server.ts", "utf8");
     expect(headers).toContain("base-uri 'self'; object-src 'none'");
     expect(headers).not.toMatch(/headers\.set\(["']strict-transport-security["']/i);
-    expect(headers).not.toMatch(/headers\.set\(["']content-security-policy["'],\s*["'][^"'\n]*(?:script-src|default-src)/i);
+    expect(headers).not.toMatch(
+      /headers\.set\(["']content-security-policy["'],\s*["'][^"'\n]*(?:script-src|default-src)/i,
+    );
   });
 });

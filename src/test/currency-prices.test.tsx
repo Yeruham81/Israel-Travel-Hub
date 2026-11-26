@@ -141,7 +141,7 @@ describe("international price estimates", () => {
     expect(screen.getByTestId("exchange-rate-note")).not.toHaveTextContent("unavailable");
   });
 
-  it("falls back to the daily public Bank of Israel snapshot after a Lovable 503", async () => {
+  it("falls back to the daily public Bank of Israel snapshot after an API 503", async () => {
     vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
     const live = {
       ...initialReferenceFx,
@@ -177,7 +177,7 @@ describe("international price estimates", () => {
     expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("≈ USD 138");
   });
 
-  it("rejects a stale public snapshot after a Lovable 503", async () => {
+  it("rejects a stale public snapshot after an API 503", async () => {
     vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
     const mockedFetch = vi.fn<typeof fetch>()
       .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
@@ -192,7 +192,7 @@ describe("international price estimates", () => {
     expect(price.querySelector('[data-currency="USD"]')).toBeNull();
   });
 
-  it("refreshes a still-valid older cached quote from GitHub when the Lovable API returns 503", async () => {
+  it("refreshes a still-valid older cached quote from GitHub when the same-origin API returns 503", async () => {
     vi.setSystemTime(Date.parse("2026-10-20T20:00:00Z"));
     const previouslySaved = {
       ...initialReferenceFx,

@@ -1,7 +1,7 @@
 # Editorial content optimization — round 2 (23 October 2026)
 
 ## Implementation
-Made directly in the GitHub main branch (without a Lovable-agent build). This pass adds specific planning guidance and illustrative decision scenarios. It deliberately does not invent personal experience, provide live pricing, or promise operational conditions.
+Made directly in the GitHub main branch (without an external editor-agent build). This pass adds specific planning guidance and illustrative decision scenarios. It deliberately does not invent personal experience, provide live pricing, or promise operational conditions.
 
 ### Ben Gurion Airport transfers and transport guides
 - Four independent all-mode journey guides now include three-step destination-specific illustrative journeys and a pragmatic choice note: Jerusalem/Jaffa Gate, Tel Aviv beachfront, Haifa railway/hills/port, and Jerusalem connection to Ein Bokek.

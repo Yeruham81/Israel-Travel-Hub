@@ -39,7 +39,7 @@ export function createExchangeRateService({
       const rates = parseBoiRates(await fetchJson(referenceFxConfig.upstreamUrl, 65536), now());
       accept(rates, true);
     } catch {
-      // Lovable may be unable to fetch the upstream API even while the
+      // The SSR runtime may be unable to fetch the upstream API even while the
       // separately hosted PHP service has valid, current Bank of Israel rates.
       // Fetch server-to-server: browser CORS settings are not relied upon.
       try {
