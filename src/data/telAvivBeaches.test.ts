@@ -39,8 +39,8 @@ describe("Tel Aviv beach guide editorial regression", () => {
     expect(page).toContain('kind="pick"');
     expect(page).toContain("Focus on a beach");
     expect(page).toContain("There are no lifeguard services at Aviv Beach.");
-    expect(page).toContain("Sunday · Tuesday · Thursday");
-    expect(page).toContain("Monday · Wednesday · Friday");
+    expect(telAvivBeaches.find(beach => beach.id === "nordau")?.summary).toContain("Sunday · Tuesday · Thursday");
+    expect(telAvivBeaches.find(beach => beach.id === "nordau")?.summary).toContain("Monday · Wednesday · Friday");
     expect(page).not.toMatch(/(?:stopped|ceased|discontinued).*lifeguard services at Aviv Beach/i);
     expect(map).toContain("cluster:true");
     expect(map).toContain("tel-aviv-beach-map-focus");
@@ -53,12 +53,10 @@ describe("Tel Aviv beach guide editorial regression", () => {
     expect(page).toContain("flex flex-col gap-3 border-b p-4 sm:flex-row sm:items-end");
     expect(page).toContain("w-full min-w-0 text-sm font-semibold sm:w-auto sm:flex-1");
     expect(page).toContain("disabled:opacity-40 sm:w-auto");
-    expect(page).toContain('area.name === "Southern coast and Jaffa"');
-    expect(page).toContain('group.compact ? "mt-5 grid items-stretch gap-4 md:grid-cols-3" : "mt-5 grid gap-4"');
-    expect(page).toContain('data-testid={group.compact ? "beach-compact-cards" : "beach-detailed-cards"}');
-    expect(page).toContain('data-detailed-card={compact ? undefined : "horizontal"}');
-    expect(telAvivBeaches.filter(beach => beach.featured || beach.area === "Southern coast and Jaffa")).toHaveLength(7);
-    expect(page).toContain("md:aspect-[16/9] md:w-full");
+    expect(page).toContain('data-testid="beach-detailed-cards"');
+    expect(page).toContain('data-detailed-card="horizontal"');
+    expect(page).toContain('{beaches.map(beach => <BeachCard key={beach.id} beach={beach} />)}');
+    expect(page).not.toContain("beach-compact-cards");
     expect(page).not.toContain("officialTelAvivBeachesEnglish");
     expect(data).not.toContain("officialTelAvivBeachesEnglish");
     expect(page).toContain("There are no lifeguard services at Aviv Beach.");
@@ -72,7 +70,7 @@ describe("Tel Aviv beach guide editorial regression", () => {
     expect(page).toContain('className="lg:contents"');
     expect(page).toContain("border-t p-4 sm:p-5 lg:col-start-1 lg:row-start-2 lg:border-t-0 lg:p-0");
     expect(page).toContain("mt-3 leading-relaxed lg:mt-2");
-    expect(page).toContain('compact ? "lg:px-6" : "lg:px-4 lg:py-2"');
+    expect(page).toContain("sm:px-5 lg:px-4 lg:py-2");
   });
 
   it("provides a separate local image for every top beach pick", () => {
@@ -83,6 +81,12 @@ describe("Tel Aviv beach guide editorial regression", () => {
       expect(existsSync(resolve(process.cwd(), "public", photo!.src.slice(1)))).toBe(true);
       expect(telAvivBeaches.some(beach => beach.detailPhoto?.src === photo!.src)).toBe(false);
     }
+  });
+
+  it("has local photos for every beach and the three nearby beaches", () => {
+    expect(telAvivBeaches.every(beach => !!beach.detailPhoto?.alt)).toBe(true);
+    for (const beach of telAvivBeaches) expect(existsSync(resolve(process.cwd(), "public", beach.detailPhoto!.src.slice(1)))).toBe(true);
+    for (const id of ["sidna-ali", "gaash", "palmahim"]) expect(existsSync(resolve(process.cwd(), "public/images/tel-aviv-beaches", id + ".webp"))).toBe(true);
   });
 
   it("retains thirteen map markers in north-to-south order", () => {

@@ -1,4 +1,4 @@
-// Editorial beach descriptions and approximate overview-map markers.
+// Editorial beach descriptions and approximate overview-map markers. Coordinates cross-checked against named OpenStreetMap beach features (Mapcarta), November 2026.
 // Official classifications and lifeguard arrangements: Tel Aviv–Yafo Municipality.
 export type TelAvivBeach = {
   id: string;
@@ -26,29 +26,29 @@ export const telAvivBeaches: TelAvivBeach[] = [
   {
     id: "tzuk-north", name: "North Tzuk Beach", area: "Northern coast",
     detailPhoto: { src: "/images/tel-aviv-beaches/tzuk-north.webp", alt: "Sandy North Tzuk Beach with coastal cliffs and the Herzliya skyline" },
-    bestFor: "Spacious northern beach", summary: "At Tel Aviv's northern edge near Herzliya, North Tzuk offers lawns, shade shelters and a different pace from the hotel-lined promenade. It takes more planning to reach from central Tel Aviv.",
+    bestFor: "Spacious northern beach", summary: "At Tel Aviv's northern edge near Herzliya, North Tzuk offers lawns, shade shelters and a different pace from the hotel-lined promenade. The municipality lists free parking near the entrance.",
     tip: "The municipality says that the approach is only partly accessible because of a slope. Check the exact accessible route before travelling.",
     access: "Far north; bus, taxi or car is usually more convenient from central hotels.",
-    accessShort: "Northern edge", highlights: "Lawns · Shade shelters", lat: 32.146, lon: 34.789,
+    accessShort: "Northern edge", highlights: "Lawns · Shade · Free parking", lat: 32.146, lon: 34.789,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Hatzuk.aspx"
   },
   {
     id: "tzuk-south", name: "South Tzuk Beach", area: "Northern coast",
     detailPhoto: { src: "/images/tel-aviv-beaches/south-tzuk-illustration.webp", alt: "Kayaks on a sandy shore, an illustrative photo of beach activities" },
-    bestFor: "Room away from the centre", summary: "A northern beach stretch with a more open setting than the city centre. It suits visitors planning a dedicated beach outing.",
-    tip: "North and South Tzuk are distinct access points; confirm which entrance and lifeguard station you plan to use.",
+    bestFor: "Room away from the centre", summary: "An open northern beach with large lawns, a restaurant, a playground, sports facilities and accessible paths.",
+    tip: "Free parking is available near the entrance; accessible beach showers and water-access chairs are listed by the municipality.",
     access: "Northern Tel Aviv; plan a return ride and check the precise entrance.",
-    accessShort: "Far north", highlights: "Northern beach · Paid parking", lat: 32.135, lon: 34.783,
+    accessShort: "Far north", highlights: "Free parking · Playground · Accessible facilities", lat: 32.14015, lon: 34.78949,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/SouthHatzuk.aspx"
   },
   {
     id: "tel-baruch", name: "Tel Baruch Beach", area: "Northern coast",
     pickPhoto: { src: "/images/tel-aviv-beaches/tel-baruch-pick.webp", alt: "Sandy shoreline and waves at Tel Baruch Beach" },
     detailPhoto: { src: "/images/tel-aviv-beaches/tel-baruch.webp", alt: "Tel Baruch Beach with its open sandy shoreline and coastal cliffs" },
-    bestFor: "A relaxed beach day", summary: "North of Tel Aviv Port, this broad beach has a more local feel, with facilities and a separate dog area farther along the shore. It is not a quick stroll from the central hotel strip.",
-    tip: "The off-leash area is south of the kite-surfing section, not inside the supervised swimming zone.",
+    bestFor: "A relaxed beach day", summary: "North of Tel Aviv Port, this broad beach has a more local feel, with lawns, a promenade towards the port and designated water-sport and dog areas.",
+    tip: "The designated off-leash area is south of the kite-surfing section.",
     access: "North of the port; use a suitable bus, taxi or car.",
-    accessShort: "North of the port", highlights: "Dog area nearby · Parking", lat: 32.120, lon: 34.778,
+    accessShort: "North of the port", highlights: "Lawns · Kite-surfing · Paid parking", lat: 32.12203, lon: 34.78247,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/TelBaruch.aspx",
     featured: true
   },
@@ -56,30 +56,30 @@ export const telAvivBeaches: TelAvivBeach[] = [
     id: "metzitzim", name: "Metzitzim Beach", area: "Northern coast",
     pickPhoto: { src: "/images/tel-aviv-beaches/metzitzim-pick-illustration.webp", alt: "Illustrative photo of beach volleyball in Tel Aviv" },
     detailPhoto: { src: "/images/tel-aviv-beaches/metzitzim.webp", alt: "Sunbeds and umbrellas at Metzitzim Beach near Tel Aviv Port" },
-    bestFor: "Families near the port", summary: "Beside Tel Aviv Port, Metzitzim is popular with families because of its nearby facilities, child-friendly beach amenities and opportunities to stop for food or a promenade walk.",
+    bestFor: "Families near the port", summary: "Beside Tel Aviv Port, Metzitzim is popular with families for its playground, baby shower, beach library and nearby cafés.",
     tip: "Choose the marked swimming area and keep children under close supervision, regardless of how calm the water appears.",
     access: "Beside Tel Aviv Port; a pleasant addition to a port visit.",
-    accessShort: "By Tel Aviv Port", highlights: "Playground · Baby shower · Volleyball", lat: 32.098, lon: 34.772,
+    accessShort: "By Tel Aviv Port", highlights: "Playground · Hot showers · Floodlit volleyball", lat: 32.09418, lon: 34.77084,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Metzizim.aspx",
     featured: true
   },
   {
     id: "nordau", name: "Nordau Religious Beach", area: "Northern coast",
     detailPhoto: { src: "/images/tel-aviv-beaches/nordau.webp", alt: "Aerial view of Nordau Religious Beach, its shade shelters and bathing area" },
-    bestFor: "Gender-separated bathing", summary: "The city's designated religious bathing beach, with separate days for women and men during the bathing season. The current schedule is shown in the practical information below.",
-    tip: "Check the current season's timetable, official notices and any temporary station changes before setting out; these arrangements do not apply to the neighbouring beaches.",
+    bestFor: "Gender-separated bathing", summary: "The city's designated religious bathing beach. During the official bathing season, women: Sunday · Tuesday · Thursday; men: Monday · Wednesday · Friday.",
+    tip: "Facilities include a playground, kiosk, lockers and accessible shade shelters.",
     access: "Northern promenade, near the Nordau street area.",
-    accessShort: "Near Nordau Street", highlights: "Separate bathing · Lockers · Shade", lat: 32.093, lon: 34.770,
+    accessShort: "Near Nordau Street", highlights: "Separate bathing · Lockers · Shade", lat: 32.09301, lon: 34.77033,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Nordau.aspx"
   },
   {
     id: "hilton", name: "Hilton Beach", area: "Northern coast",
     pickPhoto: { src: "/images/tel-aviv-beaches/hilton-pick.webp", alt: "Colourful shade shelters and sunbeds on Hilton Beach" },
     detailPhoto: { src: "/images/tel-aviv-beaches/hilton.webp", alt: "Rainbow flags along the promenade at Hilton Beach" },
-    bestFor: "LGBTQ+ social scene and water sports", summary: "The area below the Hilton Hotel is especially well known for its LGBTQ+ scene, as well as surfing and other water-based activities. Look for the specific stretch suited to your plans.",
+    bestFor: "LGBTQ+ social scene and water sports", summary: "The area below the Hilton Hotel is especially well known for its LGBTQ+ scene, as well as surfing and other water-based activities. Use the marked swimming and surfing areas; the dog beach lies farther north.",
     tip: "The dog-friendly off-leash area is north of the declared swimming beach, with its own signs.",
     access: "Near Independence Park, north of the marina.",
-    accessShort: "Near Independence Park", highlights: "Water sports nearby · Dog area", lat: 32.088, lon: 34.766,
+    accessShort: "Near Independence Park", highlights: "Water sports nearby · Dog area", lat: 32.08762, lon: 34.76923,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Hilton.aspx",
     featured: true
   },
@@ -87,10 +87,10 @@ export const telAvivBeaches: TelAvivBeach[] = [
     id: "gordon", name: "Gordon Beach", area: "Central seafront",
     detailPhoto: { src: "/images/tel-aviv-beaches/gordon.webp", alt: "Gordon Beach and the beachfront hotels seen from the breakwater" },
     pickPhoto: { src: "/images/top-ten-israel/beaches.webp", alt: "Gordon Beach and the palm-lined Tel Aviv promenade" },
-    bestFor: "The classic Tel Aviv beach", summary: "A lively stretch at the foot of Gordon Street, with volleyball, the beachfront promenade and places to eat nearby. It's a natural first stop if you want to experience Tel Aviv beach culture.",
+    bestFor: "The classic Tel Aviv beach", summary: "A lively stretch at the foot of Gordon Street, with volleyball, sports facilities, cafés and the adjacent Gordon Pool. It's a natural first stop if you want to experience Tel Aviv beach culture.",
     tip: "Visit early on a hot weekend for more room on the sand, and enjoy the promenade after your swim.",
     access: "End of Gordon Street, near the marina and Gordon Pool.",
-    accessShort: "Gordon Street", highlights: "Volleyball · Restaurants", lat: 32.0824, lon: 34.766,
+    accessShort: "Gordon Street", highlights: "Volleyball · Restaurants", lat: 32.08315, lon: 34.76747,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Gordon.aspx",
     featured: true
   },
@@ -101,7 +101,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
     bestFor: "Central hotels and easy access", summary: "One of the simplest beaches to reach if you stay near the central promenade. Frishman works well for a few hours by the sea followed by lunch or sightseeing inland.",
     tip: "If you're meeting someone, use the Frishman Street beach entrance as your meeting point.",
     access: "End of Frishman Street; convenient for many beachfront hotels.",
-    accessShort: "Frishman Street", highlights: "Volleyball · Children's facilities", lat: 32.079, lon: 34.765,
+    accessShort: "Frishman Street", highlights: "Volleyball · Children's facilities", lat: 32.08055, lon: 34.76665,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Frishman.aspx",
     featured: true
   },
@@ -109,9 +109,9 @@ export const telAvivBeaches: TelAvivBeach[] = [
     id: "bograshov", name: "Bograshov Beach", area: "Central seafront",
     detailPhoto: { src: "/images/tel-aviv-beaches/bograshov.webp", alt: "Bograshov Beach, beachfront hotels, promenade and playground" },
     bestFor: "A central beach stop", summary: "A popular central beach at the end of Bograshov Street. It's handy for visitors staying inland near Bograshov and Ben Yehuda as well as those exploring the seafront on foot.",
-    tip: "The neighbouring beaches are close together: choose the entrance nearest your hotel instead of travelling across the city for a similar stretch.",
+    tip: "London Square and the beachfront hotels are nearby.",
     access: "End of Bograshov Street on the seafront.",
-    accessShort: "Bograshov Street", highlights: "Playground · Volleyball", lat: 32.076, lon: 34.764,
+    accessShort: "Bograshov Street", highlights: "Playground · Volleyball", lat: 32.07782, lon: 34.76574,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Bugrashov.aspx"
   },
   {
@@ -120,36 +120,36 @@ export const telAvivBeaches: TelAvivBeach[] = [
     bestFor: "Seafront and central-city walking", summary: "Just off the end of Allenby Street, Jerusalem Beach is a practical choice for combining the sea with cafés and central Tel Aviv. The beachfront promenade continues toward Jaffa.",
     tip: "Make time for a promenade walk south toward the older parts of the city if the weather is pleasant.",
     access: "End of Allenby Street, near Opera Tower.",
-    accessShort: "Allenby Street", highlights: "Playground · Volleyball", lat: 32.0708, lon: 34.762,
+    accessShort: "Allenby Street", highlights: "Playground · Volleyball", lat: 32.07471, lon: 34.76467,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Jerusalem.aspx"
   },
   {
     id: "geula", name: "Geula Beach", area: "Central seafront",
     detailPhoto: { src: "/images/tel-aviv-beaches/geula.webp", alt: "Geula Beach with red sunbeds, shade shelters and a lifeguard tower" },
-    bestFor: "Central promenade & markets", summary: "Geula is another named, declared beach between the central promenade and the southern beachfront. It can be useful if your accommodation is near Geula Street or the Carmel Market area.",
-    tip: "Check the active lifeguard station and posted flags at Geula itself.",
+    bestFor: "Central promenade & markets", summary: "Geula is a central beach near Carmel Market and the Yemenite Quarter, ideal for combining a swim with a market visit.",
+    tip: "Walk inland along Geula Street to explore the neighbourhood's cafés and market.",
     access: "Near the end of Geula Street, south of Jerusalem Beach.",
-    accessShort: "Geula Street", highlights: "Shade · Volleyball", lat: 32.0669, lon: 34.7589,
+    accessShort: "Geula Street", highlights: "Shade · Volleyball", lat: 32.07208, lon: 34.76372,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Geula.aspx"
   },
   {
     id: "charles-clore", name: "Charles Clore Beach", area: "Southern coast and Jaffa",
     pickPhoto: { src: "/images/tel-aviv-beaches/charles-clore-pick.webp", alt: "Charles Clore shoreline and promenade in the evening light" },
     detailPhoto: { src: "/images/tel-aviv-beaches/charles-clore.webp", alt: "Sunset along the Charles Clore shoreline with Old Jaffa in the distance" },
-    bestFor: "A beach day with Jaffa views", summary: "Beside Charles Clore Park, this declared bathing beach has supervised areas, changing facilities and chair or sunbed hire. Nearby open stretches sometimes called Alma Beach are not necessarily part of the supervised bathing area.",
+    bestFor: "A beach day with Jaffa views", summary: "Beside Charles Clore Park, the beach offers changing rooms, a café, lawns, a playground and walking and cycling paths. Swim within the marked bathing zone; the southern stretch is designated for water sports.",
     tip: "Combine the park and shoreline with Neve Tzedek or an Old Jaffa walk. The permitted off-leash dog section is south of the declared beach.",
     access: "Along the coast south of central Tel Aviv, near Charles Clore Park.",
-    accessShort: "Charles Clore Park", highlights: "Changing rooms · Beach hire", lat: 32.059, lon: 34.7548,
+    accessShort: "Charles Clore Park", highlights: "Lawns · Playground · Water sports", lat: 32.06032, lon: 34.75869,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Charles.aspx",
     featured: true
   },
   {
     id: "givat-aliya", name: "Givat Aliya Beach", area: "Southern coast and Jaffa",
     detailPhoto: { src: "/images/tel-aviv-beaches/givat-aliya.webp", alt: "Givat Aliya Beach and the stone arches along the Jaffa waterfront" },
-    bestFor: "A local Jaffa atmosphere", summary: "Farther south in Jaffa, Givat Aliya is known for its seaside setting and distinctive stone arches near the shore. It feels quite different from the beach-and-hotel strip in central Tel Aviv.",
+    bestFor: "A local Jaffa atmosphere", summary: "Farther south in Jaffa, Givat Aliya is known for its seaside setting and distinctive stone arches near the shore. Its stone arches and local Jaffa setting make it a distinctive coastal stop.",
     tip: "Allow for a separate journey from central Tel Aviv. Follow local signs for the supervised swimming zone and the designated dog area to the south.",
     access: "Southern Jaffa, well beyond Old Jaffa Port.",
-    accessShort: "Southern Jaffa", highlights: "Stone arches · Dog area nearby", lat: 32.035, lon: 34.742,
+    accessShort: "Southern Jaffa", highlights: "Stone arches · Dog area nearby", lat: 32.03884, lon: 34.74486,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Aliya.aspx"
   }
 ];
@@ -158,7 +158,7 @@ export const beachMapPoints = telAvivBeaches.map(({ id, name, lat, lon }) => ({ 
 
 export const beachTopPicks = [
   { id: "gordon", label: "Classic Tel Aviv", note: "Volleyball, a lively promenade and the city's beach culture." },
-  { id: "metzitzim", label: "With children", note: "Family amenities near the port; supervision still matters." },
+  { id: "metzitzim", label: "With children", note: "Playground, family facilities and easy access to the port." },
   { id: "hilton", label: "LGBTQ+ friendly", note: "A welcoming social beach and nearby sport zones." },
   { id: "frishman", label: "Central & convenient", note: "Easy to pair with a hotel stay or city walk." },
   { id: "tel-baruch", label: "Beyond the centre", note: "A broader northern beach with a local feel." },
