@@ -25,6 +25,7 @@ export const officialBeachPrices = "https://www.tel-aviv.gov.il/Visitors/Beaches
 export const telAvivBeaches: TelAvivBeach[] = [
   {
     id: "tzuk-north", name: "North Tzuk Beach", area: "Northern coast",
+    detailPhoto: { src: "/images/tel-aviv-beaches/tzuk-north.webp", alt: "Sandy North Tzuk Beach with coastal cliffs and the Herzliya skyline" },
     bestFor: "Spacious northern beach", summary: "At Tel Aviv's northern edge near Herzliya, North Tzuk offers lawns, shade shelters and a different pace from the hotel-lined promenade. It takes more planning to reach from central Tel Aviv.",
     tip: "The municipality says that the approach is only partly accessible because of a slope. Check the exact accessible route before travelling.",
     access: "Far north; bus, taxi or car is usually more convenient from central hotels.",
@@ -33,6 +34,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "tzuk-south", name: "South Tzuk Beach", area: "Northern coast",
+    detailPhoto: { src: "/images/tel-aviv-beaches/south-tzuk-illustration.webp", alt: "Kayaks on a sandy shore, an illustrative photo of beach activities" },
     bestFor: "Room away from the centre", summary: "A northern beach stretch with a more open setting than the city centre. It suits visitors planning a dedicated beach outing.",
     tip: "North and South Tzuk are distinct access points; confirm which entrance and lifeguard station you plan to use.",
     access: "Northern Tel Aviv; plan a return ride and check the precise entrance.",
@@ -61,6 +63,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "nordau", name: "Nordau Religious Beach", area: "Northern coast",
+    detailPhoto: { src: "/images/tel-aviv-beaches/nordau.webp", alt: "Aerial view of Nordau Religious Beach, its shade shelters and bathing area" },
     bestFor: "Gender-separated bathing", summary: "The city's designated religious bathing beach, with separate days for women and men during the bathing season. The current schedule is shown in the practical information below.",
     tip: "Check the current season's timetable, official notices and any temporary station changes before setting out; these arrangements do not apply to the neighbouring beaches.",
     access: "Northern promenade, near the Nordau street area.",
@@ -100,6 +103,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "bograshov", name: "Bograshov Beach", area: "Central seafront",
+    detailPhoto: { src: "/images/tel-aviv-beaches/bograshov.webp", alt: "Bograshov Beach, beachfront hotels, promenade and playground" },
     bestFor: "A central beach stop", summary: "A popular central beach at the end of Bograshov Street. It's handy for visitors staying inland near Bograshov and Ben Yehuda as well as those exploring the seafront on foot.",
     tip: "The neighbouring beaches are close together: choose the entrance nearest your hotel instead of travelling across the city for a similar stretch.",
     access: "End of Bograshov Street on the seafront.",
@@ -117,6 +121,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "geula", name: "Geula Beach", area: "Central seafront",
+    detailPhoto: { src: "/images/tel-aviv-beaches/geula.webp", alt: "Geula Beach with red sunbeds, shade shelters and a lifeguard tower" },
     bestFor: "Central promenade & markets", summary: "Geula is another named, declared beach between the central promenade and the southern beachfront. It can be useful if your accommodation is near Geula Street or the Carmel Market area.",
     tip: "Check the active lifeguard station and posted flags at Geula itself.",
     access: "Near the end of Geula Street, south of Jerusalem Beach.",
@@ -125,6 +130,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "charles-clore", name: "Charles Clore Beach", area: "Southern coast and Jaffa",
+    detailPhoto: { src: "/images/tel-aviv-beaches/charles-clore.webp", alt: "Sunset along the Charles Clore shoreline with Old Jaffa in the distance" },
     bestFor: "A beach day with Jaffa views", summary: "Beside Charles Clore Park, this declared bathing beach has supervised areas, changing facilities and chair or sunbed hire. Nearby open stretches sometimes called Alma Beach are not necessarily part of the supervised bathing area.",
     tip: "Combine the park and shoreline with Neve Tzedek or an Old Jaffa walk. The permitted off-leash dog section is south of the declared beach.",
     access: "Along the coast south of central Tel Aviv, near Charles Clore Park.",

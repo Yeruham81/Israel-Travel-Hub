@@ -89,9 +89,16 @@ function BeachPhotoSlot({ beach, kind = "detail", compact = false }: {
   const photo = kind === "pick" ? beach.pickPhoto : beach.detailPhoto;
   const shape = compact ? "aspect-[4/3] w-24 shrink-0 rounded-lg sm:w-28 md:aspect-[16/9] md:w-full lg:aspect-[4/3] lg:w-24 xl:w-28" : "aspect-[16/9] w-full lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl";
   return photo ? (
-    <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async"
-      width={compact ? 280 : 880} height={compact ? 210 : 495}
-      className={shape + " object-cover"} />
+    beach.id === "tzuk-south" && kind === "detail" ? (
+      <figure className={shape + " relative overflow-hidden"}>
+        <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width={454} height={206} className="h-full w-full object-cover" />
+        <figcaption className="absolute bottom-0 right-0 rounded-tl bg-black/65 px-2 py-1 text-[10px] text-white">Illustrative photo</figcaption>
+      </figure>
+    ) : (
+      <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async"
+        width={compact ? 280 : 880} height={compact ? 210 : 495}
+        className={shape + " object-cover"} />
+    )
   ) : (
     <div aria-hidden="true" data-beach-photo-slot={kind + ":" + beach.id}
       className={shape + " flex items-center justify-center bg-secondary/50 text-primary/30"}>
