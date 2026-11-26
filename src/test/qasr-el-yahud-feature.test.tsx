@@ -50,12 +50,12 @@ describe("Qasr el-Yahud upgraded attraction guide", () => {
     expect(page).toContain("Book a free Qasr el-Yahud visit");
     expect(page).toContain("up to two weeks in advance");
     expect(page).toContain("href={official.operatorEnglish}");
-    expect(page).toContain("free for visitors of all ages");
+    expect(page).toContain("free for all ages");
     expect(page).toContain("Last entry is one hour before closing");
     expect(page).toContain("cover shoulders and knees");
     expect(page).toContain("does not provide clergy");
     expect(page).toContain("official ceremony guidelines");
-    expect(page).toContain("separate advance coordination and approval");
+    expect(page).toContain("Group ceremonies and special events may require advance approval");
     expect(page).toContain("changing rooms and hot showers");
     expect(page).toContain("immersion in the river is not accessible");
     expect(page).toContain("former minefield hazards");
