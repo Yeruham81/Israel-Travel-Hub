@@ -1,0 +1,176 @@
+name: Unused code cleanup - stage 1 proposal
+on:
+  push:
+    branches: [audit/unused-code-cleanup]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  route-import-proposal:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      CI: "true"
+      CI_FUNCTIONAL_ONLY: "false"
+      VITE_INDEXABLE: "true"
+      VITE_CANONICAL_ORIGIN: "https://www.israel-taxi.com"
+      HOSTINGER_STATIC_BUILD: "true"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Build baseline and validate types
+        run: |
+          bash scripts/build-validated-static.sh
+          npx tsc --noEmit --pretty false
+          mkdir -p "$RUNNER_TEMP/unused-audit"
+          cp -a .output/public "$RUNNER_TEMP/unused-audit-before"
+      - name: Collect baseline and generate conservative route import proposal
+        shell: bash
+        run: |
+          out="$RUNNER_TEMP/unused-audit"
+          status=0
+          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters > "$out/before.txt" 2>&1 || status=$?
+          cat "$out/before.txt"
+          if [[ "$status" -gt 2 ]]; then exit "$status"; fi
+          node --input-type=module <<'JS'
+          import ts from 'typescript';
+          import fs from 'node:fs';
+          import path from 'node:path';
+          const config = ts.findConfigFile('.', ts.sys.fileExists);
+          const raw = ts.readConfigFile(config, ts.sys.readFile);
+          if (raw.error) throw new Error('Cannot read tsconfig');
+          const parsed = ts.parseJsonConfigFileContent(raw.config, ts.sys, path.dirname(config), { noUnusedLocals: true, noUnusedParameters: true, noEmit: true });
+          if (parsed.errors.length) throw new Error('Cannot parse tsconfig');
+          const program = ts.createProgram(parsed.fileNames, parsed.options);
+          const diagnostics = ts.getPreEmitDiagnostics(program);
+          const targets = new Set([6133, 6192, 6196, 6198, 6199]);
+          const groups = new Map();
+          for (const d of diagnostics) {
+            if (!d.file || d.start == null || !targets.has(d.code)) continue;
+            const name = path.relative(process.cwd(), d.file.fileName).replaceAll(path.sep, '/');
+            if (!/^src\/(routes|route-heads)\//.test(name) || d.file.isDeclarationFile) continue;
+            if (!groups.has(d.file)) groups.set(d.file, []);
+            groups.get(d.file).push(d);
+          }
+          const printer = ts.createPrinter({newLine: ts.NewLineKind.LineFeed});
+          const manifest = [];
+          for (const [file, ds] of groups) {
+            const edits = [];
+            for (const node of file.statements) {
+              if (!ts.isImportDeclaration(node) || !node.importClause) continue;
+              const clause = node.importClause;
+              const bindings = clause.namedBindings;
+              if (!bindings || !ts.isNamedImports(bindings)) continue;
+              const start = node.getStart(file);
+              const end = node.end;
+              const original = file.text.slice(start, end);
+              // Do not rewrite imports containing comments, attributes, or unusual syntax.
+              if (/\/\*|\/\//.test(original) || node.attributes || node.assertClause) continue;
+              const isUnused = spec => ds.some(d => [6133, 6196].includes(d.code) && d.start >= spec.getStart(file) && d.start < spec.end);
+              const allUnused = ds.some(d => d.code === 6192 && d.start >= start && d.start < end);
+              const removed = bindings.elements.filter(spec => allUnused || isUnused(spec));
+              if (!removed.length) continue;
+              const remaining = bindings.elements.filter(spec => !removed.includes(spec));
+              // Preserve a value import from the same module. A whole value import
+              // can have module effects, so leave it for manual review.
+              if (!clause.isTypeOnly && !clause.name && !remaining.some(spec => !spec.isTypeOnly)) continue;
+              let replacement;
+              if (!remaining.length && !clause.name) {
+                if (!clause.isTypeOnly) continue;
+                replacement = '';
+              } else if (!remaining.length) {
+                // Default-only imports are not part of this first proposal.
+                continue;
+              } else {
+                const updated = ts.factory.updateNamedImports(bindings, remaining);
+                replacement = printer.printNode(ts.EmitHint.Unspecified, updated, file);
+              }
+              const a = replacement ? bindings.getStart(file) : start;
+              const b = replacement ? bindings.end : end;
+              edits.push({a,b,replacement});
+              manifest.push({file:path.relative(process.cwd(),file.fileName),module:node.moduleSpecifier.getText(file),removed:removed.map(s=>s.getText(file))});
+            }
+            if (!edits.length) continue;
+            let source = file.text;
+            for (const e of edits.sort((a,b)=>b.a-a.a)) source=source.slice(0,e.a)+e.replacement+source.slice(e.b);
+            fs.writeFileSync(file.fileName, source);
+          }
+          fs.writeFileSync(path.join(process.env.RUNNER_TEMP,'unused-audit','manifest.json'),JSON.stringify(manifest,null,2));
+          console.log('PROPOSED IMPORT EDITS',JSON.stringify(manifest,null,2));
+          JS
+          git diff --check
+          git diff -- src/routes src/route-heads > "$out/stage-1.patch"
+          git diff --stat
+      - name: Validate candidate diagnostics
+        run: |
+          out="$RUNNER_TEMP/unused-audit"
+          status=0
+          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters > "$out/after.txt" 2>&1 || status=$?
+          cat "$out/after.txt"
+          if [[ "$status" -gt 2 ]]; then exit "$status"; fi
+          python3 - <<'PY'
+          import pathlib, os, re, collections
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'unused-audit'
+          unused={6133,6192,6196,6198,6199}
+          def read(name):
+              counter=collections.Counter()
+              for line in (root/name).read_text().splitlines():
+                  m=re.match(r'^(.*?)\(\d+,\d+\): error TS(\d+): (.*)$',line)
+                  if m:
+                      counter[(m[1],int(m[2]),m[3])]+=1
+                  elif re.search(r'error TS\d+:',line):
+                      raise SystemExit('Unclassified compiler diagnostic: '+line)
+              return counter
+          before,after=read('before.txt'),read('after.txt')
+          def group(p):
+              if p.startswith(('src/routes/','src/route-heads/')): return 'routes'
+              if p.startswith(('src/components/','src/data/')): return 'components/data'
+              if p.startswith('src/test/') or '.test.' in p or '.spec.' in p: return 'tests'
+              return 'other'
+          for label, items in [('BEFORE',before),('AFTER',after)]:
+              print(label,'unused',sum(n for (p,c,m),n in items.items() if c in unused),'other',sum(n for (p,c,m),n in items.items() if c not in unused))
+              print(label,'groups',dict(collections.Counter({g:sum(n for (p,c,m),n in items.items() if c in unused and group(p)==g) for g in ('routes','components/data','tests','other')})))
+          new=after-before
+          if new:
+              print('NEW DIAGNOSTICS',new)
+              raise SystemExit('Candidate introduced new diagnostics')
+          PY
+          npx tsc --noEmit --pretty false
+      - name: Build candidate and run regression suite
+        run: |
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs --editorial
+          bun run test
+      - name: Compare all emitted HTML and SEO files
+        run: |
+          python3 - <<'PY'
+          import pathlib, os, hashlib
+          from html.parser import HTMLParser
+          before=pathlib.Path(os.environ['RUNNER_TEMP'])/'unused-audit-before'
+          after=pathlib.Path('.output/public')
+          def collect(root):
+              return {p.relative_to(root).as_posix():p for p in root.rglob('*') if p.is_file() and (p.suffix=='.html' or p.name in ('robots.txt','sitemap.xml'))}
+          a,b=collect(before),collect(after)
+          if not a or a.keys()!=b.keys(): raise SystemExit('Export file inventory differs')
+          # Asset hashes can change without changing HTML content. Report all
+          # raw differences for manual review; do not silently normalize them.
+          diff=[k for k in sorted(a) if a[k].read_bytes()!=b[k].read_bytes()]
+          print('EXPORTED HTML/SEO FILES',len(a),'RAW DIFFERENCES',len(diff),diff)
+          if diff: raise SystemExit('Review HTML/SEO differences before accepting patch')
+          PY
+      - name: Save diagnostics and proposed patch
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unused-code-stage-1-proposal
+          path: ${{ runner.temp }}/unused-audit/
+          if-no-files-found: warn
