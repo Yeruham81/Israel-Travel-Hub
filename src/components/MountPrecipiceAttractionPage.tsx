@@ -30,7 +30,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
     { icon: "location", label: "Location", value: "South of Nazareth", note: "Above the Jezreel Valley" },
     { icon: "duration", label: "Time needed", value: "30–45 minutes", note: "For the lookout; 1–2 hours with a longer ridge walk" },
     { icon: "admission", label: "Admission", value: "Free", note: "Public open-air viewpoint" },
-    { icon: "hours", label: "When to visit", value: "During daylight", note: "The exposed viewpoint is best enjoyed in good visibility" },
+    { icon: "hours", label: "When to visit", value: "During daylight", note: "Best visited on a clear day" },
     { icon: "access", label: "Getting there", value: "Car or taxi", note: "Parking near the summit" },
     { icon: "highlights", label: "Main lookout", value: "Paved approach", note: "The longer Gospel Trail is a separate hike" },
   ],
@@ -51,11 +51,11 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         title="Mount Tabor on the horizon"
         image={{ src: "/images/attractions/mount-precipice-mount-tabor-view.webp", alt: "Mount Tabor rising beyond the Nazareth area in a view taken from Mount Precipice" }}
       >
-        <p>Look east towards the rounded outline of <Link to="/attractions/mount-tabor/" className={inlineLink}>Mount Tabor</Link>. Its distinctive shape is easy to recognise, and it makes a lovely landmark to point out from the overlook.</p>
-        <p>If you're visiting both mountains, treat them as two separate stops with driving and visiting time between them.</p>
+        <p>Look east towards the rounded outline of <Link to="/attractions/mount-tabor/" className={inlineLink}>Mount Tabor</Link>. Mount Tabor is easily recognisable by its distinctive rounded shape.</p>
+        <p>If you're visiting both mountains, allow time for the drive between them.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Forester's House lookout and short ridge walk">
-        <p>For a little more walking, follow the path east along the ridge. KKL-JNF describes another lookout about 300 metres from the main plaza, marked by the small stone building once used by local foresters.</p>
+        <p>For a longer walk, follow the path east along the ridge. KKL-JNF describes another lookout about 300 metres from the main plaza, marked by the small stone building once used by local foresters.</p>
         <p>A short accessible path connects this lookout back to the parking area. The cliffside sections need more care than the paved approach to the main viewpoint.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The start of the Gospel Trail">
@@ -71,13 +71,13 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Entry, parking and a short visit</h3>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">There is no entry charge for the public lookout. Follow the brown road signs for Mount Precipice and park near the hilltop trailhead. The paved path leads to the Three Faiths Lookout.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">Allow about <strong>30–45 minutes</strong> for the main viewpoint and photographs. If you would like a longer walk along the hilltop, allow <strong>about 1–2 hours</strong> in total. A daylight visit is the most practical choice.</p>
+          <p className="mt-2 text-sm leading-relaxed sm:text-base">Allow about <strong>30–45 minutes</strong> for the main viewpoint and photographs. If you would like a longer walk along the hilltop, allow <strong>about 1–2 hours</strong> in total. I recommend visiting during daylight hours.</p>
           <a href={mountPrecipiceSite.sources.kkl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">KKL-JNF's official walking guide <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Paths and accessibility</h3>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">KKL-JNF describes the paved route from the car park to the Three Faiths Lookout as wheelchair accessible, with a short accessible connection from the Forester's House lookout back to the car park.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">The longer cliffside and Gospel Trail paths include uneven and exposed sections. Anyone with specific mobility requirements should check the current conditions before visiting.</p>
+          <p className="mt-2 text-sm leading-relaxed sm:text-base">The longer cliffside and Gospel Trail paths include uneven and exposed sections. If you have limited mobility, check the condition of the paths before visiting.</p>
           <a href={mountPrecipiceSite.sources.kkl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">See the lookout and trail description <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
       </div>
@@ -107,11 +107,11 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Look for the nearby bus stop <strong>Beit Al-Hikma School / Al-Qafza (בי״ס בית אל-חכמה/אל-קפזה)</strong>, on the southern side of Nazareth. The walk from this stop to Mount Precipice is not the same as the short paved path from the hilltop car park: check the uphill route, pavements and return journey before setting out. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to confirm a suitable service for your date. For several regional stops, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing guided tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Look for the nearby bus stop <strong>Beit Al-Hikma School / Al-Qafza (בי״ס בית אל-חכמה/אל-קפזה)</strong>, on the southern side of Nazareth. From the bus stop, you'll need to walk uphill to the viewpoint. Check the walking route and return bus times before setting out. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to confirm a suitable service for your date. For several regional stops, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing guided tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">On foot</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The easy option is the paved lookout path from the hilltop car park. The longer <strong>Gospel Trail</strong> descends from Mount Precipice towards the Kesullot Valley. Allow time for a proper hike; check the trail route and arrange a pickup or return before setting out.</p>
+            <p className="mt-2 text-sm leading-relaxed">The easy option is the paved lookout path from the hilltop car park. The longer <strong>Gospel Trail</strong> descends from Mount Precipice towards the Kesullot Valley. Allow enough time for the hike and arrange your return transport in advance.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="mount-precipice-location-map">

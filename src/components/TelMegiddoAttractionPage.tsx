@@ -40,18 +40,18 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
         title="The Canaanite and Israelite city gates"
         image={{ src: "/images/attractions/tel-megiddo-gate.webp", alt: "Massive ancient stone gate and paved approach at Tel Megiddo National Park" }}
       >
-        <p>The imposing stone gates show why Megiddo was so important to those controlling the route across the valley. The Canaanite gateway and later Israelite fortifications belong to different periods, even though they are close together on the visitor trail.</p>
-        <p>Look at the thickness of the walls and the stone paving before moving farther into the mound. The park's explanations help you read the structures in their historical sequence.</p>
+        <p>Megiddo's imposing stone gates reflect its strategic importance along ancient trade routes through the valley. The Canaanite gateway and later Israelite fortifications belong to different periods, even though they are close together on the visitor trail.</p>
+        <p>Look at the thickness of the walls and the stone paving before moving farther into the mound. Information signs explain when the different structures were built.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="Temples and many layers of ancient cities"
         image={{ src: "/images/attractions/tel-megiddo-city-layers.webp", alt: "Excavated stone foundations and archaeological trenches showing ancient occupation at Tel Megiddo" }}
       >
-        <p>In the great excavation trench, successive layers reveal how the city was built and rebuilt over thousands of years. The sacred area includes remains of Bronze Age temples, while nearby foundations tell other chapters of life on the hill.</p>
+        <p>In the great excavation trench, successive layers reveal how the city was built and rebuilt over thousands of years. The sacred area contains the remains of Bronze Age temples, alongside foundations of buildings from other periods.</p>
         <p>I recommend taking a moment at the viewpoint over the excavation; understanding the layers makes the later buildings much easier to appreciate.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Stables, granary and daily life">
-        <p>Remains traditionally identified as stables include stone troughs and arrangements associated with horses. A large circular stone-lined pit served as a granary, with grain remains helping archaeologists understand its use.</p>
+        <p>The buildings traditionally identified as stables contain stone troughs and features associated with keeping horses. A large circular stone-lined pit served as a granary, with grain remains helping archaeologists understand its use.</p>
         <p>Some royal dates and attributions have been debated, so I prefer to focus on what the surviving buildings can tell us about transport, storage and the administration of an important city.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The underground water system">
@@ -64,7 +64,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
         image={{ src: "/images/attractions/tel-megiddo-aerial.webp", alt: "Aerial view of the ancient Tel Megiddo mound amid cultivated fields of the Jezreel Valley" }}
       >
         <p>From the elevated remains, look across the fields and the historic routes connecting the coastal plain with the inland valleys. Megiddo's location explains much of its wealth, military significance and repeated destruction and rebuilding.</p>
-        <p>On a clear day, the broad landscape also helps place the famous Armageddon tradition in its geographical setting.</p>
+        <p>On a clear day, you can enjoy panoramic views over the valley associated with the biblical tradition of Armageddon.</p>
       </AttractionHighlight>
     </div>
   ),
@@ -83,7 +83,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Admission and contact</h3>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">Published standard admission is <strong>{telMegiddoSite.prices.adult} per adult</strong> and <strong>{telMegiddoSite.prices.child} per child</strong>. Other reductions or group prices may apply.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">I recommend <a href={telMegiddoSite.sources.reserve} target="_blank" rel="noopener noreferrer" className={inlineLink}>coordinating your visit through the official reservation system</a>. This also helps you receive notices of changes to routes or opening arrangements.</p>
+          <p className="mt-2 text-sm leading-relaxed sm:text-base">I recommend <a href={telMegiddoSite.sources.reserve} target="_blank" rel="noopener noreferrer" className={inlineLink}>booking your visit in advance through the official website</a>. You'll also receive updates about trail closures or changes to opening hours.</p>
           <p className="mt-3 text-sm"><strong>Phone: </strong><a href={"tel:" + telMegiddoSite.phoneHref} dir="ltr" className={inlineLink}>{telMegiddoSite.phone}</a></p>
           <p className="mt-1 text-sm"><strong>Email: </strong><a href={"mailto:" + telMegiddoSite.email} className={inlineLink}>{telMegiddoSite.email}</a></p>
           <a href={telMegiddoSite.sources.park} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official prices and hours <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
@@ -116,7 +116,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">Walking inside the park</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Follow the numbered, signposted visitor route around the mound. If you would prefer to remain above ground, staff can point out the surface route and accessible sections.</p>
+            <p className="mt-2 text-sm leading-relaxed">Follow the numbered, signposted visitor route around the mound. If you prefer to skip the underground tunnel, ask the park staff about the above-ground paths and accessible areas.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="tel-megiddo-location-map">

@@ -46,19 +46,19 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
         title="The Jordan River baptism area"
         image={{ src: ceremonyPhoto, alt: "Christian pilgrims gathering for a baptism ceremony beside the lower Jordan River at Qasr el-Yahud" }}
       >
-        <p>At the designated riverbank area, visitors can see the water and the steps used during Christian baptism ceremonies. The place is associated by tradition with Jesus' baptism by John the Baptist and remains important to pilgrims from many churches.</p>
+        <p>Walk down to the riverbank to see the Jordan River and the steps where baptism ceremonies take place. The place is associated by tradition with Jesus' baptism by John the Baptist and remains important to pilgrims from many churches.</p>
         <p>You can also come simply to observe, reflect or pray. If a ceremony is in progress, leave space for participants and ask permission before taking close-up photographs.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="River terraces and places for reflection"
         image={{ src: riverbankPhoto, alt: "Visitor terraces, shade structures and the Jordan River at the Qasr el-Yahud site" }}
       >
-        <p>Look across the narrow river to the opposite, Jordanian bank. The visitor area includes places to pause beside the water, with shaded space and access to the designated baptism steps.</p>
+        <p>Look across the narrow river to the opposite, Jordanian bank. The riverbank has shaded areas and steps leading down to the baptism site.</p>
         <p>The site has been improved with a wider river deck, a prayer area and renewed visitor facilities. Stick to the marked public area and follow the attendants' instructions at the water.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Monasteries and the Jordan Valley landscape">
         <p>Historic Christian monasteries and chapels dot the Jordan Valley, reflecting centuries of religious life and pilgrimage. Some were established in the Byzantine period and still lend the landscape its distinctive character.</p>
-        <p>From the marked visitor area, take in the river, desert vegetation and nearby religious landmarks. For a closer look at the monastery corridor, ask about officially arranged visits.</p>
+        <p>Enjoy views of the Jordan River, desert vegetation and historic monasteries from the designated visitor area. Ask the site staff whether guided visits to the nearby monasteries are available.</p>
       </AttractionHighlight>
     </div>
   ),
@@ -79,15 +79,15 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
         </article>
         <article className="rounded-xl border bg-card p-4" data-testid="qasr-free-reservation">
           <div className="flex items-center gap-2"><Ticket className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-serif text-xl font-semibold">Free entry — reserve first</h3></div>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">The entry price is <strong>free for visitors of all ages</strong>. Since {visit.registerSince}, the operator has required registration before arriving at the site.</p>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Choose your date directly on the Qasr el-Yahud visitor page. Reservation dates normally open <strong>up to two weeks in advance</strong>; dates farther ahead may not appear yet. Booking the visit does not include a baptism ceremony or transport.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Admission is <strong>free for all ages</strong>. Since {visit.registerSince}, the operator has required registration before arriving at the site.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Book your visit through the official Qasr el-Yahud website. Reservation dates normally open <strong>up to two weeks in advance</strong>; dates farther ahead may not appear yet. Booking the visit does not include a baptism ceremony or transport.</p>
           <a href={official.operatorEnglish} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Book a free Qasr el-Yahud visit <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
         </article>
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="qasr-baptism-guidance">
         <div className="flex items-center gap-2"><Shirt className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">Baptism and entering the water</h3></div>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">Entering the river is permitted in the designated baptism area when staff allow it. Clothing must <strong>cover shoulders and knees</strong>; swimwear alone is not permitted. Baptism robes and towels can be purchased on site, subject to availability.</p>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">Arrange your own officiant and ceremony time; the parks authority does not provide clergy. <strong>Organized group ceremonies or special events may require separate advance coordination and approval</strong> from the site manager, in addition to the visitor reservation. See the <a href={official.ceremonies} target="_blank" rel="noopener noreferrer" className={inlineLink}>official ceremony guidelines</a>, and allow time to prepare and change.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">Arrange your own officiant and ceremony time; the parks authority does not provide clergy. <strong>Group ceremonies and special events may require advance approval</strong> from the site manager, in addition to your regular visitor reservation. See the <a href={official.ceremonies} target="_blank" rel="noopener noreferrer" className={inlineLink}>official ceremony guidelines</a>, and allow time to prepare and change.</p>
         <AttractionPracticalTip>
           <strong>River safety:</strong> This is a baptism site, not a swimming beach. Use only the designated access steps, follow staff instructions and avoid entering the river if conditions or access restrictions do not permit it.
         </AttractionPracticalTip>
@@ -116,7 +116,7 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Public transport and the final approach</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">There is no convenient public-bus stop at the riverbank entrance. Buses along Route 90 do not remove the need for an arranged final transfer, and the access road is not an appropriate walk. Confirm your round-trip transport before leaving Jerusalem or the Dead Sea. Check regional services with the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official journey planner</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">There is no convenient public-bus stop at the riverbank entrance. If you travel by bus along Route 90, you'll need to arrange transport from the bus stop to the site. Avoid walking along the access road. Confirm your round-trip transport before leaving Jerusalem or the Dead Sea. Check regional services with the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official journey planner</a>.</p>
           </article>
           <AttractionPracticalTip>
             <strong>Stay on the marked road.</strong> The access road is controlled, and surrounding monastery tracks may be restricted because of security and former minefield hazards. Check official access instructions before travelling.

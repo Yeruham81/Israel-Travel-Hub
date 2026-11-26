@@ -142,16 +142,16 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     { icon: "access", label: "Getting around", value: "Bus, taxi or car", note: "The southern beaches and desert are spread out" },
     { icon: "hours", label: "Visit planning", value: "Check each venue", note: "Heat, winds and holidays affect plans" },
   ],
-  glanceNote: <>Eilat is a city, not a single ticketed attraction. Public beaches and the promenade are different from Coral Beach Nature Reserve, Dolphin Reef, the Underwater Observatory and Timna Park, all of which have their own admission and visitor arrangements.</>,
+  glanceNote: <>Eilat's public beaches and promenade are free to visit. Coral Beach Nature Reserve, Dolphin Reef, the Underwater Observatory and Timna Park have separate admission fees.</>,
   highlightContent: <div className="mt-4 space-y-5" data-testid="eilat-attractions-highlights">
-    <p>The city's two biggest advantages are the marine life just offshore and the contrasting desert landscapes. The following are my priorities for a first visit, beginning in the city and moving south along the coast before heading into the mountains.</p>
+    <p>Eilat combines the colourful marine life of the Red Sea with spectacular desert scenery. The following are my priorities for a first visit, beginning in the city and moving south along the coast before heading into the mountains.</p>
     <AttractionHighlight title="Coral Beach Nature Reserve" image={{ src: photos.reserve, alt: "Clear turquoise water over coral formations at Eilat Coral Beach Nature Reserve" }}>
       <p>This protected reef is among Eilat's main snorkeling spots. Marked access points help visitors enter the water without trampling coral, and the reserve has beach facilities. Entry is paid; check the current visitor rules, capacity and advance reservation advice on the {sourcesLink(official.coralReserve, "Israel Nature and Parks Authority website")}.</p>
       <p><strong>Best for:</strong> confident swimmers and travelers who want to see colorful fish and coral while following marine-protection rules. Swimming ability, sea conditions and suitable footwear matter.</p>
       {placeLink("Coral Beach Nature Reserve, Eilat, Israel")}
     </AttractionHighlight>
     <AttractionHighlight title="Underwater Observatory Marine Park" image={{ src: photos.observatory, alt: "Distinctive white underwater observatory tower on a pier in Eilat" }}>
-      <p>The observatory's viewing rooms let you look at the natural reef below the surface without entering the water. Additional exhibits focus on Red Sea marine life. It is an attractive alternative for non-swimmers, families and very hot afternoons.</p>
+      <p>The observatory's viewing rooms let you look at the natural reef below the surface without entering the water. Additional exhibits focus on Red Sea marine life. It's a great choice for families, visitors who prefer to stay dry and those looking for a break from the afternoon heat.</p>
       <p>Allow time to explore the park and its trails. The operator recommends around three to four hours; check {sourcesLink(official.underwaterObservatory, "current park hours, ticket types and attractions")}.</p>
       {placeLink("Underwater Observatory Marine Park, Eilat, Israel")}
     </AttractionHighlight>
@@ -161,12 +161,12 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       {placeLink("Dolphin Reef, Eilat, Israel")}
     </AttractionHighlight>
     <AttractionHighlight title="North Beach, the promenade and marina" image={{ src: "/images/attractions/eilat-at-dusk.webp", alt: "Eilat marina and North Beach waterfront illuminated at dusk" }}>
-      <p>The central beachfront and promenade are easy options for an unstructured morning or evening: waterfront walks, cafés, hotel-area beaches and views towards the surrounding mountains. This is the most straightforward area if you are staying in central Eilat without a car.</p>
+      <p>Spend a relaxed morning or evening along Eilat's central beachfront, enjoying seaside walks, cafés, beaches and mountain views. This is the most straightforward area if you are staying in central Eilat without a car.</p>
       <p>Not every beach has a lifeguard or identical facilities. Follow the signs at your chosen beach before swimming. Check seasonal opening hours for water-sports kiosks.</p>
       {placeLink("Eilat North Beach, Israel")}
     </AttractionHighlight>
     <h3 className="pt-3 font-serif text-xl font-semibold">Which Eilat beach should you choose?</h3>
-    <p>Compare central hotel-area beaches, relaxed south-coast beach businesses and protected reef areas. They have different facilities, access rules and swimming supervision. Browse the <a href={official.beaches} target="_blank" rel="noopener noreferrer" className={inlineLink}>Eilat beach directory</a> for more options.</p>
+    <p>Choose from lively central beaches, quieter beaches along the southern coast and protected coral reefs. They have different facilities, access rules and swimming supervision. Browse the <a href={official.beaches} target="_blank" rel="noopener noreferrer" className={inlineLink}>Eilat beach directory</a> for more options.</p>
     <div className="grid gap-3 sm:grid-cols-2" data-testid="eilat-beach-comparison">
       {[
         { name: "North Beach & promenade", best: "Central hotels and easy walks", detail: "A convenient area for visitors, cafés and evening walks. Use only designated, supervised swimming areas.", query: "North Beach, Eilat, Israel" },
@@ -203,7 +203,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       {placeLink("Eilat Birdwatching Park, Israel")}
     </AttractionHighlight>
     <AttractionHighlight title="Eilat Botanical Garden" image={{ src: photos.botanical, alt: "Paths, cacti and tropical greenery at Eilat Botanical Garden" }}>
-      <p>The {sourcesLink(official.botanical, "Eilat Botanical Garden")} is a separate planted and partly shaded attraction on the northern side of the city. It offers a change of pace from the beaches, with its own opening schedule and admission rules.</p>
+      <p>{sourcesLink(official.botanical, "Eilat Botanical Garden")} offers lush greenery and shaded walking paths on the northern side of the city. It offers a change of pace from the beaches, with its own opening schedule and admission rules.</p>
       {placeLink("Eilat Botanical Garden, Israel")}
     </AttractionHighlight>
     <AttractionPracticalTip>My first-visit priorities would be one reef experience, one non-water activity and an early desert outing. Do not try to fit Timna Park, Red Canyon, the observatory and a full beach afternoon into a single day.</AttractionPracticalTip>
@@ -213,7 +213,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <div className="grid gap-4 md:grid-cols-3">
       <article className="rounded-xl border bg-card p-4">
         <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">One day: the Red Sea</h3></div>
-        <p className="mt-3 text-sm leading-relaxed">Start with Coral Beach Nature Reserve <strong>or</strong> Dolphin Reef. If you choose Coral Beach, continue to the Underwater Observatory farther south, then return to the North Beach promenade for an evening walk. The sample map follows the Coral Beach option only.</p>
+        <p className="mt-3 text-sm leading-relaxed">Start with Coral Beach Nature Reserve <strong>or</strong> Dolphin Reef. If you choose Coral Beach, continue to the Underwater Observatory farther south, then return to the North Beach promenade for an evening walk.</p>
         <p className="mt-2 text-xs text-muted-foreground">Choose two main paid attractions for a relaxed day.</p>
         <a href={maps.marine} target="_blank" rel="noopener noreferrer" className={inlineLink}>View sample Coral Beach–Observatory–North Beach route</a>
       </article>
