@@ -74,7 +74,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
                     <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Flight departure date *" : "Flight arrival date *"}<Input name="date" type="date" required value={fields.date} onChange={(e) => update("date", e.target.value)} className={fieldClass} /></label>
                     <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Flight departure time *" : "Flight arrival time *"}<Input name="time" type="time" required value={fields.time} onChange={(e) => update("time", e.target.value)} className={fieldClass} /></label>
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground">Use the {airportDropoff ? "departure" : "arrival"} date and time in Israel local time, including the correct date after midnight.</p>
+                  <p className="mt-2 text-xs text-muted-foreground">Enter your flight's arrival or departure date and time in Israel local time, especially for flights after midnight.</p>
                 </div>
                 <div>
                   <div className="grid gap-4 sm:grid-cols-2" data-testid="quote-fields-destination">
