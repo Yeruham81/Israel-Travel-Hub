@@ -657,10 +657,10 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "How to travel from Ben Gurion Airport to your hotel",
         photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Taxi entrance sign at Ben Gurion Airport" },
         paragraphs: [
-          "Choose your transport according to your exact hotel or final address. Trains are convenient for reaching major cities, although you may need a bus or taxi from the station to your hotel. Buses serve selected routes, and an official airport taxi provides a direct metered journey.",
+          "Choose the most convenient transport option for your destination. Trains are convenient for reaching major cities, although you may need a bus or taxi from the station to your hotel. Buses serve selected routes, and an official airport taxi provides a direct metered journey.",
           "For an immediate taxi at Terminal 3, order through Gett or an airport kiosk and take your ride code to the official queue at ground-floor Exit 03. Advance-scheduled Gett taxis meet at Level 2, Exit 23. My Ben Gurion Airport taxi guide explains the full booking and pickup procedure.",
           "You can arrange a private airport transfer in advance, with the vehicle, meeting point, waiting conditions and price confirmed by the provider. My airport sherut guide explains the former shared-taxi routes and today's alternatives; the taxi fares guide covers regulated meter charges.",
-          "For a complete route comparison, read my destination guides to Tel Aviv, Jerusalem, Haifa and Ein Bokek at the Dead Sea. My getting around Israel guide compares onward travel by rail, bus and taxi throughout the country.",
+          "For a complete route comparison, read my destination guides to Tel Aviv, Jerusalem, Haifa and Ein Bokek at the Dead Sea. My getting around Israel guide explains how to travel around the country by train, bus and taxi.",
         ],
         inlineLinks: [
           { text: "Ben Gurion Airport taxi guide", to: travelGuidePaths.airportTaxis },
@@ -677,7 +677,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           caption: "Airport-to-hotel transport at a glance",
           headers: ["Mode", "Useful when", "Where to go / Pickup point"],
           rows: [
-            ["Train", "Rail-connected cities and onward local connections", "Terminal 3 railway station, below the terminal; follow the train signs"],
+            ["Train", "Major cities served by Israel Railways", "Terminal 3 railway station, below the terminal; follow the train signs"],
             ["Public bus", "Your journey matches a current bus route", "Check your line: services such as 445/485 use Terminal 3, Level 2, Exit 21"],
             ["Immediate airport taxi", "A direct ride to your address", "Terminal 3 ground floor, Exit 03; use Gett or an airport taxi kiosk"],
             ["Gett taxi booked in advance", "Scheduled airport pickup using Gett", "Terminal 3, Level 2, Exit 23; follow the booking details"],
@@ -694,7 +694,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "Your landing time and the time you reach the public arrivals hall are different. Allow for taxiing, leaving the aircraft, walking to passport control, queues, baggage collection and any customs processing.",
           "These estimates are based on typical passenger experience from landing to the public arrivals hall. Long queues, additional passport checks or a bus ride from the aircraft to the terminal can increase the time needed to leave the airport.",
-          "Give a pre-booked driver your flight number and agree how the meeting time, free waiting allowance and delay charges work. When possible, coordinate the final meeting after you have collected your bags.",
+          "Give your driver your flight number and confirm the pickup time, included waiting time and any delay charges. When possible, coordinate the final meeting after you have collected your bags.",
         ],
         tables: [{
           caption: "Estimated time from landing to the public arrivals hall",
@@ -712,7 +712,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "shabbat",
         title: "Arriving on Shabbat or a Jewish holiday",
         paragraphs: [
-          "Ben Gurion Airport can receive flights on Shabbat, while most regular trains and buses pause during the weekly rest period. Check the last Friday and first Saturday-night departure for your actual travel date, including the connection from your final station to the hotel.",
+          "Ben Gurion Airport can receive flights on Shabbat, while most regular trains and buses pause during the weekly rest period. Check the last Friday departure and the first Saturday-night departure, including transport from the station to your hotel.",
           "Authorized airport taxis and confirmed private transfers remain practical options. Free weekend Line 711 serves parts of Tel Aviv on a limited timetable from Terminal 1, with the airport's internal shuttle connecting the terminals. My airport Shabbat transport guide explains these options and the service restart times.",
         ],
         inlineLinks: [{ text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat }],
@@ -1303,7 +1303,7 @@ telAviv: {
 ,
     ],
     checklist: [
-      "Choose the station or stop nearest your destination and plan the final walk.",
+      "Choose the station or bus stop within the shortest convenient walking distance of your destination.",
       "Set up Rav-Kav or an approved payment app and validate every journey.",
       "Use the ₪8 local fare and eligible 90-minute transfers when planning costs.",
       "Confirm the Red Line service and final destination before boarding.",
