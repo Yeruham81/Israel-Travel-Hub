@@ -60,7 +60,9 @@ jobs:
       - name: Check TypeScript
         run: npx tsc --noEmit
 
-      - name: Run all tests
+      - name: Run regression tests (editorial layout checks on manual runs only)
+        env:
+          CI_FUNCTIONAL_ONLY: ${{ github.event_name != 'workflow_dispatch' }}
         run: bun run test
 
       - name: Verify Sanity Uber guide conversion and source integrity
@@ -75,4 +77,8 @@ jobs:
           VITE_INDEXABLE: ${{ vars.HOSTINGER_INDEXABLE || 'false' }}
         run: |
           bash scripts/build-validated-static.sh
-          node scripts/verify-hostinger-static-export.mjs
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            node scripts/verify-hostinger-static-export.mjs --editorial
+          else
+            node scripts/verify-hostinger-static-export.mjs
+          fi

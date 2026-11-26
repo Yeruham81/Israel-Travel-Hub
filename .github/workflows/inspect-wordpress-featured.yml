@@ -2,9 +2,6 @@ name: Inspect legacy WordPress featured images
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/inspect-wordpress-featured.yml"
 
 permissions:
   contents: read

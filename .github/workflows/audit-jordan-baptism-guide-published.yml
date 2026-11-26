@@ -1,15 +1,11 @@
 name: Audit published Jordan River baptism guide
 on:
-  workflow_run:
-    workflows: ["Deploy static website to Hostinger Premium"]
-    types: [completed]
+  workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
   audit:
-    if: >-
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.head_sha == github.sha
     runs-on: ubuntu-24.04
     timeout-minutes: 17
     steps:

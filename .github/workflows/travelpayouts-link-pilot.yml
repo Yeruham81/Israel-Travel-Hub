@@ -13,11 +13,6 @@ on:
           - paamonim
           - jerusalem-areas
           - haifa-browse
-  push:
-    branches: [main]
-    paths:
-      - 'scripts/travelpayouts/**'
-      - '.github/workflows/travelpayouts-link-pilot.yml'
 
 permissions:
   contents: read

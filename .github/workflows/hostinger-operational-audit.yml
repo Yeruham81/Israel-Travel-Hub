@@ -4,10 +4,6 @@ name: Audit Hostinger website operations (read only)
 # Only main branch runs receive SSH secrets.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/hostinger-operational-audit.yml"
 
 permissions:
   contents: read

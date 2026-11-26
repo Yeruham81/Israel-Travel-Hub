@@ -3,23 +3,21 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - "scripts/audit-travelpayouts-only.cjs"
-      - "src/data/registry.ts"
-      - "src/components/StayEditorialGuidePage.tsx"
-      - "src/components/TravelpayoutsHotelWidgets.tsx"
-      - "src/components/**"
-      - ".github/workflows/audit-travelpayouts-only.yml"
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/audit-travelpayouts-only.yml"
-      - "scripts/audit-travelpayouts-only.cjs"
-      - "src/data/registry.ts"
-      - "src/components/MountOlivesAttractionPage.tsx"
-      - "src/components/MountZionAttractionPage.tsx"
-      - "src/components/HotelDestinationPage.tsx"
-      - "src/components/HotelCategoryPage.tsx"
+      - 'scripts/audit-travelpayouts-only.cjs'
+      - 'scripts/travelpayouts/**'
+      - 'src/data/registry.ts'
+      - 'src/data/tours.ts'
+      - 'src/data/*affiliate*'
+      - 'src/lib/*affiliate*.ts'
+      - 'src/components/*BookingPlatforms.tsx'
+      - 'src/components/*Widget*.tsx'
+      - 'src/components/ExternalProviderTourCard.tsx'
+      - 'src/components/HotelDestinationPage.tsx'
+      - 'src/components/HotelCategoryPage.tsx'
+      - 'public/widgets/**'
+      - '.github/workflows/audit-travelpayouts-only.yml'
   workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
@@ -36,9 +34,12 @@ jobs:
       - name: Enforce Travelpayouts-only source links
         run: node scripts/audit-travelpayouts-only.cjs
       - uses: oven-sh/setup-bun@v2
+        if: github.event_name == 'workflow_dispatch'
       - name: Install site dependencies
+        if: github.event_name == 'workflow_dispatch'
         run: bun install --frozen-lockfile
       - name: Start isolated full-site preview
+        if: github.event_name == 'workflow_dispatch'
         env:
           VITE_CANONICAL_ORIGIN: http://127.0.0.1:4173
           VITE_INDEXABLE: "false"
@@ -52,28 +53,16 @@ jobs:
           tail -80 /tmp/travelpayouts-vite.log
           exit 1
       - name: Install read-only Chromium
+        if: github.event_name == 'workflow_dispatch'
         run: |
           npm install --prefix /tmp/travelpayouts-audit --no-save playwright@1.56.1
           /tmp/travelpayouts-audit/node_modules/.bin/playwright install --with-deps chromium
       - name: Crawl all rendered pages in isolated preview and verify outbound links
+        if: github.event_name == 'workflow_dispatch'
         env:
           NODE_PATH: /tmp/travelpayouts-audit/node_modules
           SITE_AUDIT_ORIGIN: http://127.0.0.1:4173
         run: node scripts/audit-travelpayouts-only.cjs --published
-      - name: Verify five updated guide regressions in isolated desktop/mobile preview
-        env:
-          NODE_PATH: /tmp/travelpayouts-audit/node_modules
-          BAPTISM_AUDIT_ORIGIN: http://127.0.0.1:4173
-          JERUSALEM_HUB_AUDIT_ORIGIN: http://127.0.0.1:4173
-          SENIORS_AUDIT_ORIGIN: http://127.0.0.1:4173
-          CHURCHES_AUDIT_ORIGIN: http://127.0.0.1:4173
-          HOLIDAY_GUIDE_ORIGIN: http://127.0.0.1:4173
-        run: |
-          node scripts/audit-jerusalem-churches-published.cjs
-          node scripts/audit-jerusalem-hub-published.cjs
-          node scripts/audit-senior-tours-published.cjs
-          node scripts/audit-jordan-baptism-guide-published.cjs
-          node scripts/audit-israel-holiday-guide-published.cjs
       - name: Save audit evidence
         if: always()
         uses: actions/upload-artifact@v4

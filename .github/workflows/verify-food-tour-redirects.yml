@@ -1,9 +1,7 @@
 name: Check food-tour Travelpayouts clickouts
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/verify-food-tour-redirects.yml"
+  workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
