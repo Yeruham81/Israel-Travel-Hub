@@ -86,7 +86,7 @@ describe("home mobile performance optimizations", () => {
     expect(page).toContain('className="home-offscreen');
     expect(page).toContain('<TripadvisorReviewsSection />');
     expect(page).toContain('<PersonalTestimonialsSection />');
-    expect(page).toContain('<HomeContactForm showPortrait={false} />');
+    expect(page).toContain('<HomeContactForm showPortrait={false} showTripadvisorReviews={false} />');
     expect(read("src/components/HomeContactForm.tsx")).toContain("showPortrait = true");
     // The first transfer/service section remains on the normal rendering path.
     expect(page).toContain('className={`scroll-mt-6 rounded-2xl border p-5 md:p-8');
