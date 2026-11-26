@@ -45,6 +45,10 @@ jobs:
         env:
           NODE_PATH: /tmp/cookie-audit/node_modules
         run: node scripts/audit-cookie-consent.cjs
+      - name: Verify car rental layout and widget states at five viewport widths (controlled provider fixture)
+        env:
+          NODE_PATH: /tmp/cookie-audit/node_modules
+        run: node scripts/audit-car-rental-widget.cjs
       - name: Show preview diagnostics on failure
         if: failure()
         run: test ! -f /tmp/cookie-vite.log || tail -100 /tmp/cookie-vite.log

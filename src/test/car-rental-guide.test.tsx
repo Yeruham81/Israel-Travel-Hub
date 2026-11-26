@@ -1,9 +1,10 @@
+import { NECESSARY_ONLY, ALL_CATEGORIES, saveCookieConsent } from "@/lib/cookie-consent";
 import "@/test/consent-fixture";
 import { readFileSync } from "node:fs";
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { CarRentalGuide } from "@/components/CarRentalGuide";
 import { DiscoverCarsSearchWidget } from "@/components/DiscoverCarsSearchWidget";
@@ -11,7 +12,7 @@ import { carRentalSources, carRentalHero } from "@/data/carRentalGuide";
 import { getSource } from "@/data/registry";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 
-afterEach(cleanup);
+afterEach(() => { cleanup(); vi.useRealTimers(); });
 
 describe("car rental guide and Travelpayouts search", () => {
   it("offers practical planning, real tables, six related guides and tracked comparison links", async () => {
@@ -30,7 +31,7 @@ describe("car rental guide and Travelpayouts search", () => {
     for (const section of [documents, driving]) {
       expect(section.querySelector('a[href*="hertz.co.il"], a[href*="eldan.co.il"]')).toBeNull();
     }
-    const related = within(container).getByRole("region", { name: "Plan your trip around Israel" });
+    const related = within(container).getByRole("region", { name: "Related practical guides" });
     const summaries = related.querySelectorAll(".line-clamp-2");
     expect(summaries).toHaveLength(6);
     expect(Array.from(summaries).every(summary => (summary.textContent?.length || 0) <= 80)).toBe(true);
@@ -45,7 +46,8 @@ describe("car rental guide and Travelpayouts search", () => {
     for (const source of carRentalSources) expect(getSource(source.id)?.url).toBe(source.url);
     expect(guideHeroPhotoForPath("/car-rental/")).toEqual(carRentalHero);
     const referrals = Array.from(container.querySelectorAll<HTMLAnchorElement>('a[href*="discovercars.tpm.li"]'));
-    expect(referrals).toHaveLength(2);
+    expect(referrals).toHaveLength(3);
+    expect(new Set(referrals.map(link=>new URL(link.href).searchParams.get("sub_id"))).size).toBe(3);
     for (const link of referrals) {
       const url = new URL(link.href);
       expect(url.pathname).toBe("/w2RwEsmb");
@@ -53,13 +55,20 @@ describe("car rental guide and Travelpayouts search", () => {
       expect(link.rel).toContain("sponsored");
     }
     expect(container).not.toHaveTextContent("Tips only");
-    const alternative = screen.getByRole("complementary", { name: "A private driver alternative" });
+    expect(screen.queryByRole("complementary", { name: "A private driver alternative" })).not.toBeInTheDocument();
+    const widget = container.querySelector("#compare-rentals")!;
+    expect(widget.compareDocumentPosition(container.querySelector("#car-needed")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(widget.compareDocumentPosition(screen.getByRole("navigation",{name:"On this page"})) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.querySelector("time")?.nextElementSibling).toHaveAttribute("data-testid","author-card");
+    expect(screen.getByTestId("rental-vehicle-categories").children).toHaveLength(3);
+    const planning = screen.getByTestId("icon-trip-planning-links");
+    expect(within(planning).getAllByRole("link")).toHaveLength(6);
     const contactSection = container.querySelector("#contact") as HTMLElement;
     const form = screen.getByRole("form", { name: "Guide contact message" });
     expect(container.querySelectorAll("form")).toHaveLength(1);
-    expect(alternative.nextElementSibling).toBe(contactSection);
-    expect(contactSection.nextElementSibling).toBe(related);
-    expect(within(alternative).queryByRole("link")).not.toBeInTheDocument();
+    expect(related.nextElementSibling).toBe(planning);
+    expect(planning.nextElementSibling).toBe(contactSection);
+    expect(within(contactSection).getByTestId("contact-reviews-row")).toHaveClass("flex-nowrap");
     expect(within(contactSection).getByRole("heading", { name: "Need a private driver for your Israel journey?" })).toBeInTheDocument();
     expect(within(form).getByRole("textbox", { name: "Your name *" })).toBeRequired();
     expect(within(form).getByRole("textbox", { name: "Email address *" })).toBeRequired();
@@ -87,6 +96,9 @@ describe("car rental guide and Travelpayouts search", () => {
     resize(window.location.origin, window, 700);
     resize(window.location.origin, frame.contentWindow, NaN);
     expect(frame).toHaveAttribute("height", "355");
+    resize(window.location.origin, frame.contentWindow, 240);
+    expect(frame).toHaveAttribute("height", "240");
+    expect(screen.queryByText("Loading car search…")).not.toBeInTheDocument();
     resize(window.location.origin, frame.contentWindow, 700);
     expect(frame).toHaveAttribute("height", "700");
     resize(window.location.origin, frame.contentWindow, 50000);
@@ -100,6 +112,27 @@ describe("car rental guide and Travelpayouts search", () => {
     const frame = screen.getByTitle("DiscoverCars car rental search") as HTMLIFrameElement;
     fireEvent(window, new MessageEvent("message", { origin: window.location.origin, source: frame.contentWindow, data: { type: "itt-discovercars-error" } }));
     expect(screen.getByRole("status")).toHaveTextContent("temporarily unavailable");
+    expect(frame.isConnected).toBe(false);
     expect(screen.getByRole("link", { name: "Compare cars on DiscoverCars" })).toHaveAttribute("rel", "sponsored noopener noreferrer");
+  });
+  it("keeps the comparison link usable without marketing consent, and resets on withdrawal", () => {
+    saveCookieConsent(NECESSARY_ONLY);
+    const {container} = render(<DiscoverCarsSearchWidget/>);
+    expect(container.querySelector("iframe[src]")).toBeNull();
+    expect(screen.getByRole("link",{name:"Compare cars on DiscoverCars"})).toHaveAttribute("rel","sponsored noopener noreferrer");
+    act(()=>saveCookieConsent(ALL_CATEGORIES));
+    expect(container.querySelector("iframe[src]")).not.toBeNull();
+    act(()=>saveCookieConsent(NECESSARY_ONLY));
+    expect(container.querySelector("iframe[src]")).toBeNull();
+    act(()=>saveCookieConsent(ALL_CATEGORIES));
+    expect(screen.getByRole("status")).toHaveTextContent("Loading car search");
+  });
+  it("replaces an empty provider frame with the tracked alternative after a bounded timeout", () => {
+    vi.useFakeTimers();
+    const {container}=render(<DiscoverCarsSearchWidget/>);
+    act(()=>vi.advanceTimersByTime(15000));
+    expect(container.querySelector("iframe[src]")).toBeNull();
+    expect(screen.getByRole("status")).toHaveTextContent("temporarily unavailable");
+    expect(screen.getByRole("link",{name:"Compare cars on DiscoverCars"})).toBeInTheDocument();
   });
 });
