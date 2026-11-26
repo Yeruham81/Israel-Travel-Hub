@@ -11,7 +11,7 @@ describe("External tour and activity cards use a third-width desktop layout", ()
   it("uses three desktop columns for shared destination and shore-excursion catalogs", () => {
     const tours = source("TourCatalog");
     expect(tours).toContain('className={compact ? "mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3" : "mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"}');
-    expect(tours).toContain("external.length % 3 === 2");
+    expect(tours).not.toContain("tour-companion-card");
     expect(tours).toContain("<ExternalProviderTourCard");
 
     const shore = source("ShoreServiceCatalog");

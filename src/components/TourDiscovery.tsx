@@ -1,20 +1,20 @@
 import { Link } from "@tanstack/react-router";
-import { Anchor, ArrowRight } from "lucide-react";
+import { Anchor } from "lucide-react";
 import { tourCategories, tourCategoryPaths, tourCruisePorts, type TourCategoryId } from "@/data/tours";
-import { tourHubThumbnailSources } from "@/data/tourHubThumbnails";
+import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 
 /** The hub is a visual gateway; detailed filters and individual products belong on category pages. */
-const hubCategoryCopy: Record<TourCategoryId, { title: string; description: string; action: string }> = {
-  jerusalem: { title: "Jerusalem tours", description: "Old City walks, sacred landmarks and guided day trips.", action: "Explore Jerusalem tours" },
-  "tel-aviv-jaffa": { title: "Tel Aviv & Jaffa", description: "Historic Jaffa, street art, lively markets and local culture.", action: "Discover Tel Aviv tours" },
-  "masada-dead-sea": { title: "Masada & Dead Sea", description: "Ancient ruins, desert views, sunrise hikes and Dead Sea experiences.", action: "Compare Dead Sea trips" },
-  "bethlehem-jericho": { title: "Bethlehem & Jericho", description: "Christian heritage, historic sites and Jordan River excursions.", action: "Explore heritage tours" },
-  "nazareth-galilee": { title: "Nazareth & Sea of Galilee", description: "Biblical landmarks, lakeside villages and northern day trips.", action: "Explore Galilee tours" },
-  "northern-coast": { title: "Caesarea, Haifa & Acre", description: "Roman ruins, coastal scenery and historic port cities.", action: "Discover coastal tours" },
-  "negev-ramon": { title: "Negev & Ramon Crater", description: "Desert jeep safaris, hiking, geology and stargazing.", action: "Explore desert activities" },
-  "golan-heights": { title: "Golan Heights", description: "Scenic viewpoints, nature, ancient sites and guided adventures.", action: "Browse Golan tours" },
-  "food-markets": { title: "Food & Market Tours", description: "Local tastings, bustling markets and hands-on cooking experiences.", action: "Browse food tours" },
-  "eilat-red-sea": { title: "Eilat & Red Sea", description: "Snorkeling, boat cruises and adventures in the surrounding desert.", action: "See Eilat activities" },
+const hubCategoryCopy: Record<TourCategoryId, { title: string; description: string }> = {
+  jerusalem: { title: "Jerusalem tours", description: "Old City walks, sacred landmarks and guided day trips." },
+  "tel-aviv-jaffa": { title: "Tel Aviv & Jaffa", description: "Historic Jaffa, street art, lively markets and local culture." },
+  "masada-dead-sea": { title: "Masada & Dead Sea", description: "Ancient ruins, desert views, sunrise hikes and Dead Sea experiences." },
+  "bethlehem-jericho": { title: "Bethlehem & Jericho", description: "Christian heritage, historic sites and Jordan River excursions." },
+  "nazareth-galilee": { title: "Nazareth & Sea of Galilee", description: "Biblical landmarks, lakeside villages and northern day trips." },
+  "northern-coast": { title: "Caesarea, Haifa & Acre", description: "Roman ruins, coastal scenery and historic port cities." },
+  "negev-ramon": { title: "Negev & Ramon Crater", description: "Desert jeep safaris, hiking, geology and stargazing." },
+  "golan-heights": { title: "Golan Heights", description: "Scenic viewpoints, nature, ancient sites and guided adventures." },
+  "food-markets": { title: "Food & Market Tours", description: "Local tastings, bustling markets and hands-on cooking experiences." },
+  "eilat-red-sea": { title: "Eilat & Red Sea", description: "Snorkeling, boat cruises and adventures in the surrounding desert." },
 };
 
 export function TourCategoryExplorer() {
@@ -24,14 +24,11 @@ export function TourCategoryExplorer() {
       {tourCategories.map(category => {
         const copy = hubCategoryCopy[category.id];
         return <li key={category.id} id={`category-${category.id}`} data-category-id={category.id} className="min-w-0 scroll-mt-24">
-          <Link to={tourCategoryPaths[category.id]} className="group flex h-full min-w-0 items-center gap-3 rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
-            <img src={tourHubThumbnailSources[category.id]} alt="" width={160} height={192} loading="lazy" decoding="async" className="h-28 w-24 shrink-0 rounded-xl object-cover sm:h-32 sm:w-28" />
+          <Link to={tourCategoryPaths[category.id]} className="editorial-card-link group flex h-full min-w-0 items-center gap-3 overflow-hidden rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
+            <div className="h-28 w-24 shrink-0 overflow-hidden rounded-xl sm:h-32 sm:w-28"><img src={category.photo.src} srcSet={stage5PhotoSrcSet(category.photo.src)} sizes="(min-width: 640px) 112px, 96px" alt="" width={160} height={192} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform group-hover:scale-105" /></div>
             <div className="flex min-w-0 flex-1 flex-col items-start">
               <h3 className="text-base font-semibold leading-snug text-foreground sm:text-lg">{copy.title}</h3>
               <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{copy.description}</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:underline">
-                {copy.action}<ArrowRight aria-hidden className="size-4 shrink-0" />
-              </span>
             </div>
           </Link>
         </li>;

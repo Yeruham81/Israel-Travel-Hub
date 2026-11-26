@@ -10,7 +10,7 @@ import { recordOutboundClick } from "@/lib/outbound";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { PriceDisplay } from "@/components/CurrencyRates";
 
-export function OwnerTourSection({ tours, compact = false }: { tours: TourProduct[]; compact?: boolean }) {
+export function OwnerTourSection({ tours, compact = false, onRequestQuote }: { tours: TourProduct[]; compact?: boolean; onRequestQuote?: ((tour: TourProduct) => void) | undefined }) {
   if (!tours.length) return null;
   return <section id="my-private-days" aria-labelledby="my-private-days-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24">
     <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
@@ -24,9 +24,9 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
             <div className="min-w-0 flex-1">
               <h3 className="text-base font-semibold leading-snug">{tour.title}</h3>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
-              <p className="mt-2 text-xs text-muted-foreground">{tour.duration} · Private car &amp; driver</p>
+              <p className="mt-2 text-xs text-muted-foreground">{tour.length === "full-day" ? "Full day · Customized itinerary" : tour.duration} · Private car &amp; driver</p>
             </div>
-            <a href="#contact" aria-label={"Request a quote for " + tour.title} className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center">Request a quote</a>
+            <a href="#contact" onClick={() => onRequestQuote?.(tour)} aria-label={"Request a quote for " + tour.title} className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center">Request a quote</a>
           </div>
         </article>
       </li> : <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex h-full min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card">
@@ -62,7 +62,7 @@ export function ExternalTourCard({ tour, pageId }: { tour: TourProduct; pageId: 
     <ExternalProviderTourCard
       image={image.src} alt={image.alt}
       platform={primaryOffer.partner.name} title={tour.title} description={tour.summary}
-      duration={tour.duration} location={`From ${tour.originIds.map(placeLabel).join(" / ")}`}
+      duration={tour.duration} location={tour.originIds.length && !["tours-tel-aviv-jaffa","tours-negev-ramon","tours-eilat-red-sea"].includes(pageId) ? `From ${tour.originIds.map(id => id === "tel-aviv" ? "Tel Aviv" : placeLabel(id)).join(" / ")}` : undefined} omitMissingDetails
       rating={tour.rating && { value: tour.rating.value, count: tour.rating.count }}
       price={price && { amount: price.amount, currency: price.currency, basis: price.basis, maxPartySize: price.maxPartySize }}
       href={primaryOffer.provider.url} affiliate={primaryOffer.provider.isAffiliate}
@@ -71,115 +71,37 @@ export function ExternalTourCard({ tour, pageId }: { tour: TourProduct; pageId: 
   </li>;
 }
 
-export function TourCatalog({ categoryId, filters, onChange }: { categoryId: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void }) {
+export function TourCatalog({ categoryId, filters, onChange, onRequestQuote }: { categoryId: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void; onRequestQuote?: ((tour: TourProduct) => void) | undefined }) {
   const compact = categoryId === "jerusalem" || categoryId === "tel-aviv-jaffa" || categoryId === "masada-dead-sea" || categoryId === "bethlehem-jericho" || categoryId === "nazareth-galilee" || categoryId === "northern-coast" || categoryId === "negev-ramon" || categoryId === "golan-heights" || categoryId === "food-markets" || categoryId === "eilat-red-sea";
-  const compactChips: { label: string; search: TourSearch }[] = categoryId === "jerusalem" ? [
-    { label: "All tours", search: {} },
+  const departures: { label: string; search: TourSearch }[] = [
     { label: "From Jerusalem", search: { origin: "jerusalem" } },
     { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
-    { label: "Up to half a day", search: { length: "short" } },
-    { label: "Full day", search: { length: "full-day" } },
-    { label: "Private", search: { format: "private" } },
-    { label: "Food & markets", search: { tag: "food" } },
-    { label: "History & heritage", search: { tag: "heritage" } },
-    { label: "Art & architecture", search: { tag: "art" } },
-    { label: "Shortest first", search: { sort: "duration" } },
-  ] : categoryId === "tel-aviv-jaffa" ? [
-    { label: "All tours", search: {} },
-    { label: "Up to half a day", search: { length: "short" } },
-    { label: "Full day", search: { length: "full-day" } },
-    { label: "Private", search: { format: "private" } },
-    { label: "Food & markets", search: { tag: "food" } },
-    { label: "History & heritage", search: { tag: "heritage" } },
-    { label: "Art & architecture", search: { tag: "art" } },
-    { label: "Self-guided", search: { format: "independent" } },
-    { label: "Shortest first", search: { sort: "duration" } },
-    { label: "Title A–Z", search: { sort: "title" } },
-  ] : categoryId === "masada-dead-sea" ? [
-    { label: "All tours", search: {} },
-    { label: "From Jerusalem", search: { origin: "jerusalem" } },
-    { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
-    { label: "Visit Masada", search: { destination: "masada" } },
-    { label: "Ein Gedi routes", search: { destination: "ein-gedi" } },
-    { label: "Dead Sea only", search: { q: "relaxation" } },
-    { label: "Sunrise hikes", search: { q: "sunrise" } },
-    { label: "Private driver", search: { format: "private" } },
-    { label: "Guided groups", search: { format: "shared" } },
-    { label: "Self-guided", search: { format: "independent" } },
-    { label: "Shortest first", search: { sort: "duration" } },
-  ] : categoryId === "bethlehem-jericho" ? [
-    { label: "All tours", search: {} },
-    { label: "From Jerusalem", search: { origin: "jerusalem" } },
-    { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
-    { label: "Jericho", search: { destination: "jericho" } },
-    { label: "Qasr al-Yahud", search: { destination: "jordan-river" } },
-    { label: "Half day", search: { length: "short" } },
-    { label: "Full day", search: { length: "full-day" } },
-    { label: "Private guided", search: { format: "private" } },
-    { label: "Group tours", search: { format: "shared" } },
-    { label: "Shortest first", search: { sort: "duration" } },
-  ] : categoryId === "nazareth-galilee" ? [
-    { label: "All tours", search: {} },
-    { label: "From Jerusalem", search: { origin: "jerusalem" } },
-    { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
-    { label: "Jordan River stop", search: { destination: "jordan-river" } },
-    { label: "Magdala", search: { q: "Magdala" } },
-    { label: "Private tours", search: { format: "private" } },
-    { label: "Guided group tours", search: { format: "shared" } },
-    { label: "Full day", search: { length: "full-day" } },
-    { label: "Shortest first", search: { sort: "duration" } },
-  ] : categoryId === "northern-coast" ? [
-    { label: "All tours", search: {} },
-    { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
-    { label: "From Jerusalem", search: { origin: "jerusalem" } },
-    { label: "Rosh Hanikra routes", search: { q: "Rosh Hanikra" } },
-    { label: "Small groups", search: { format: "shared", q: "Small group" } },
-    { label: "Guided groups", search: { format: "shared" } },
-    { label: "Private tours", search: { format: "private" } },
-    { label: "Shortest first", search: { sort: "duration" } },
-  ] : categoryId === "negev-ramon" ? [
-    { label: "All experiences", search: {} },
-    { label: "From Mitzpe Ramon", search: { origin: "mitzpe-ramon" } },
-    { label: "Jeep safaris", search: { q: "jeep" } },
-    { label: "Geology tours", search: { q: "geology" } },
-    { label: "Stargazing", search: { q: "stargazing" } },
-    { label: "Rappelling", search: { q: "rappelling" } },
-    { label: "Full-day adventures", search: { length: "full-day" } },
-    { label: "Private tours", search: { format: "private" } },
-    { label: "Shortest first", search: { sort: "duration" } },
-  ] : categoryId === "food-markets" ? [
-    { label: "All experiences", search: {} },
-    { label: "Jerusalem", search: { origin: "jerusalem" } },
-    { label: "Tel Aviv", search: { origin: "tel-aviv" } },
-    { label: "Short walks", search: { length: "short" } },
-    { label: "Market tastings", search: { q: "tasting" } },
-    { label: "Cooking workshop", search: { q: "cooking" } },
-    { label: "Private food tours", search: { format: "private" } },
-    { label: "Shortest first", search: { sort: "duration" } },
-  ] : categoryId === "eilat-red-sea" ? [
-    { label: "All experiences", search: {} },
-    { label: "Boat cruises", search: { q: "boat" } },
-    { label: "Snorkeling", search: { q: "snorkeling" } },
-    { label: "Jeep adventures", search: { q: "jeep" } },
-    { label: "Timna Park", search: { q: "Timna" } },
-    { label: "Red Canyon", search: { q: "Red Canyon" } },
-    { label: "Private experiences", search: { format: "private" } },
-    { label: "Shortest first", search: { sort: "duration" } },
-  ] : [
-    { label: "All tours", search: {} },
-    { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
-    { label: "From Jerusalem", search: { origin: "jerusalem" } },
-    { label: "Local northern pickup", search: { origin: "galilee" } },
-    { label: "Mount Bental", search: { q: "Bental" } },
-    { label: "Katzrin", search: { q: "Katzrin" } },
-    { label: "Group tours", search: { format: "shared" } },
-    { label: "Private experiences", search: { format: "private" } },
-    { label: "Shortest first", search: { sort: "duration" } },
   ];
+  const chips: Record<TourCategoryId, { label: string; search: TourSearch }[]> = {
+    jerusalem: [...departures, { label: "History & heritage", search: { tag: "heritage" } }, { label: "Food & markets", search: { tag: "food" } }, { label: "Art & architecture", search: { tag: "art" } }],
+    "tel-aviv-jaffa": [{ label: "Old Jaffa", search: { q: "Old Jaffa" } }, { label: "Food & markets", search: { tag: "food" } }, { label: "Art & architecture", search: { tag: "art" } }],
+    "masada-dead-sea": [...departures, { label: "Visit Masada", search: { destination: "masada" } }, { label: "Ein Gedi routes", search: { destination: "ein-gedi" } }, { label: "Dead Sea only", search: { q: "relaxation" } }],
+    "bethlehem-jericho": [...departures, { label: "Bethlehem", search: { destination: "bethlehem" } }, { label: "Jericho", search: { destination: "jericho" } }, { label: "Qasr al-Yahud", search: { destination: "jordan-river" } }],
+    "nazareth-galilee": [...departures, { label: "Yardenit", search: { destination: "jordan-river" } }, { label: "Magdala", search: { q: "Magdala" } }],
+    "northern-coast": [...departures, { label: "Rosh Hanikra routes", search: { q: "Rosh Hanikra" } }],
+    "negev-ramon": [{ label: "Jeep safaris", search: { q: "jeep" } }, { label: "Geology tours", search: { q: "geology" } }, { label: "Stargazing", search: { q: "stargazing" } }, { label: "Rappelling", search: { q: "rappelling" } }],
+    "golan-heights": [...departures, { label: "Local northern pickup", search: { origin: "galilee" } }, { label: "Mount Bental", search: { q: "Bental" } }, { label: "Katzrin", search: { q: "Katzrin" } }],
+    "food-markets": [{ label: "Jerusalem", search: { origin: "jerusalem" } }, { label: "Tel Aviv", search: { origin: "tel-aviv" } }],
+    "eilat-red-sea": [{ label: "Boat cruises", search: { q: "boat" } }, { label: "Snorkeling", search: { q: "snorkeling" } }, { label: "Desert adventures", search: { q: "jeep" } }],
+  };
   const all = toursForCategory(categoryId);
+  const compactChips = [
+    { label: ["negev-ramon","food-markets","eilat-red-sea"].includes(categoryId) ? "All experiences" : "All tours", search: {} },
+    ...chips[categoryId].filter(item => { const count = filterTours(categoryId, item.search).length; return count > 0 && count < all.length; }),
+  ];
   const visible = filterTours(categoryId, filters);
   const owner = visible.filter(isOwnerTour);
+  const quality = (tour: TourProduct) => {
+    const offers = offersForTour(tour.id, `tours-${categoryId}`).filter(offer => offer.provider.isAffiliate);
+    return Number(Boolean(tour.rating)) + Number(offers.some(offer => Boolean(tourSnapshotPrice(offer))));
+  };
   const external = visible.filter(tour => !isOwnerTour(tour));
+  if (!filters.sort) external.sort((a,b) => quality(b)-quality(a) || (b.rating?.value ?? 0)-(a.rating?.value ?? 0) || (b.rating?.count ?? 0)-(a.rating?.count ?? 0));
   const origins = tourPlaces.filter(place => all.some(tour => tour.originIds.includes(place.id)));
   const destinations = tourPlaces.filter(place => all.some(tour => tour.destinationIds.includes(place.id)));
   const tags = tourTags.filter(tag => all.some(tour => tour.tagIds.includes(tag.id)));
@@ -187,7 +109,7 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
   const active = Object.keys(filters).some(key => key !== "sort");
   return <div id="tour-catalog" className={compact ? "mt-7 scroll-mt-24" : "mt-10 scroll-mt-24"}>
     {compact ? <nav aria-label={`Filter ${getTourCategory(categoryId).shortTitle} tours`} className="rounded-xl border bg-secondary/25 px-3 py-3 sm:px-4">
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
+      <div className="flex flex-wrap items-center gap-2">
         <span className="mr-1 shrink-0 text-xs font-semibold text-muted-foreground">Show:</span>
         {compactChips.map(item => {
           const selected = Object.entries(item.search).length === Object.entries(filters).length && Object.entries(item.search).every(([key, value]) => filters[key as keyof TourSearch] === value);
@@ -206,27 +128,19 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
     </form>}
     <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
       <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{visible.length} {visible.length === 1 ? "experience" : "experiences"}</p>
-      <div className="flex flex-wrap items-center gap-3">{!compact && active && <button type="button" onClick={() => onChange({})} className="text-sm font-semibold text-primary underline">Clear filters</button>}{!compact && <label className="text-xs text-muted-foreground">Sort by <select aria-label="Sort tours" value={filters.sort || ""} onChange={event => set("sort", event.target.value)} className="ml-1 rounded-lg border bg-background p-2 text-sm text-foreground"><option value="">Featured</option><option value="duration">Shortest duration</option><option value="title">Title A–Z</option></select></label>}</div>
+      <div className="flex flex-wrap items-center gap-3">{(active || filters.sort) && <button type="button" onClick={() => onChange({})} className="text-sm font-semibold text-primary underline">Clear filters</button>}{!compact && <label className="text-xs text-muted-foreground">Sort by <select aria-label="Sort tours" value={filters.sort || ""} onChange={event => set("sort", event.target.value)} className="ml-1 rounded-lg border bg-background p-2 text-sm text-foreground"><option value="">Featured</option><option value="duration">Shortest duration</option><option value="title">Title A–Z</option></select></label>}</div>
     </div>
     {visible.length === 0 ? <section className="mt-5 rounded-2xl border p-8 text-center"><h2 className="text-2xl font-semibold">No tours match these choices</h2><p className="mt-3 text-muted-foreground">Try another departure, destination or interest.</p><button type="button" className="btn btn-primary mt-5" onClick={() => onChange({})}>Show all tours in this category</button></section> : <>
       {!compact && <OwnerTourSection tours={owner} />}
       {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className={compact ? "mt-5 scroll-mt-24" : "mt-12 scroll-mt-24 border-t pt-8"}>
         <h2 id="external-tours-h" className={compact ? "text-2xl font-semibold" : "text-3xl font-semibold"}>{compact ? `Explore ${getTourCategory(categoryId).shortTitle} tours` : `${owner.length > 0 ? "More " : ""}${getTourCategory(categoryId).title}`}</h2>
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{compact ? (categoryId === "jerusalem" ? "Compare guided walks, cultural experiences and day trips from Jerusalem or Tel Aviv. Explore the options below to find the right experience for your visit." : categoryId === "tel-aviv-jaffa" ? "Compare guided walks, food and culture tours, cycling and audio experiences around Tel Aviv & Jaffa." : categoryId === "masada-dead-sea" ? "Compare classic Masada guided tours, sunrise hikes, Ein Gedi combinations and Dead Sea beach days from Jerusalem or Tel Aviv." : categoryId === "bethlehem-jericho" ? "Compare Bethlehem highlights with longer tours visiting Jericho and the Qasr al-Yahud baptismal site. Each card identifies the actual stops and departure city." : categoryId === "nazareth-galilee" ? "Compare Nazareth, Sea of Galilee churches and day trips with or without a Yardenit Jordan River stop, with both shared and privately guided options." : categoryId === "northern-coast" ? "Compare guided trips to Caesarea, Haifa and Akko from Tel Aviv or Jerusalem, including small groups, private guiding and routes with an advertised Rosh Hanikra stop." : categoryId === "negev-ramon" ? "Compare Mitzpe Ramon jeep trips, desert geology outings, stargazing and rappelling. Most experiences depart locally, not from Tel Aviv." : categoryId === "golan-heights" ? "Compare guided Golan Heights day trips and private experiences from Tel Aviv, Jerusalem or locally, with stops and meeting points clearly identified." : categoryId === "food-markets" ? "Compare Jerusalem and Tel Aviv tasting walks, market tours and hands-on cooking, with duration and departure meeting points identified." : "Compare Red Sea boat and snorkeling activities with guided desert jeep trips around Eilat. Check pickup, participation requirements and inclusions before booking.") : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}</p>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{compact ? (categoryId === "jerusalem" ? "Compare local guided walks and day trips from Jerusalem or Tel Aviv." : categoryId === "tel-aviv-jaffa" ? "Compare guided walks, food and culture tours, cycling and audio experiences around Tel Aviv & Jaffa." : categoryId === "masada-dead-sea" ? "Compare classic Masada guided tours, sunrise hikes, Ein Gedi combinations and Dead Sea beach days from Jerusalem or Tel Aviv." : categoryId === "bethlehem-jericho" ? "Compare Bethlehem highlights with longer tours visiting Jericho and the Qasr al-Yahud baptismal site." : categoryId === "nazareth-galilee" ? "Compare Nazareth, Sea of Galilee churches and day trips with or without a Yardenit Jordan River stop, with both shared and privately guided options." : categoryId === "northern-coast" ? "Compare guided trips to Caesarea, Haifa and Akko from Tel Aviv or Jerusalem, including small groups, private guiding and routes with an advertised Rosh Hanikra stop." : categoryId === "negev-ramon" ? "Compare Mitzpe Ramon jeep trips, desert geology outings, stargazing and rappelling. Most experiences start in Mitzpe Ramon." : categoryId === "golan-heights" ? "Compare guided Golan Heights day trips and private experiences from Tel Aviv, Jerusalem or northern Israel." : categoryId === "food-markets" ? "Compare Jerusalem and Tel Aviv tasting walks, market tours and hands-on cooking." : "Compare Red Sea boat and snorkeling activities with guided desert jeep trips around Eilat.") : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}</p>
         <ul aria-label="External tours" className={compact ? "mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3" : "mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"}>
           {external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} compact={compact} />)}
-          {external.length % 3 === 2 && <li data-testid="tour-companion-card" className="flex h-full min-w-0 flex-col justify-between rounded-xl border bg-secondary/25 p-4 sm:p-5">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wide text-primary">More options</p>
-              <h3 className="mt-2 text-lg font-semibold">Explore more tours</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Compare departure points, dates and itineraries.</p>
-            </div>
-            <button type="button" onClick={() => onChange({})} className="mt-4 inline-flex min-h-10 items-center justify-center rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-secondary">Show all tours</button>
-          </li>}
         </ul>
-        <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Check the operator's booking page for available dates, pickup and return arrangements, guiding, admissions, final prices and cancellation terms.</p>
+        <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Check available dates, current prices, inclusions and reviews on the booking website.</p>
       </section>}
-      {compact && <OwnerTourSection tours={owner} compact />}
+      {compact && <OwnerTourSection tours={owner} compact onRequestQuote={onRequestQuote} />}
     </>}
   </div>;
 }
