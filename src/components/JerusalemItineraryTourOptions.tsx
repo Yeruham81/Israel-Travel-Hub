@@ -44,15 +44,13 @@ function trackedItineraryTourUrl(url: string, tourId: string, days: 3 | 5 | 7 | 
 
 /** Shares the compact Bethlehem/Dead Sea photo, duration, price and review-card visual language. */
 export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 | 7 | 10 }) {
-  return <details
-    className="group min-w-0 rounded-lg border bg-background"
+  return <section
+    className="min-w-0 rounded-lg border bg-background p-4"
+    aria-label="Alternative day tours from Jerusalem"
     data-testid="itinerary-jerusalem-tours"
   >
-    <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-lg px-4 py-3 font-semibold text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&::-webkit-details-marker]:hidden">
-      <span>Alternative day tours from Jerusalem</span>
-      <span aria-hidden="true" className="shrink-0 text-sm text-muted-foreground transition-transform group-open:rotate-180">⌄</span>
-    </summary>
-    <div className="min-w-0 border-t px-4 pb-4 pt-3">
+    <h4 className="font-semibold text-primary">Alternative day tours from Jerusalem</h4>
+    <div className="mt-3 min-w-0">
       <p className="text-sm leading-relaxed text-muted-foreground">
         {days === 7
           ? "Choose a Bethlehem or Jericho tour for Day 2 or a guided Masada and Dead Sea trip for Day 3. Each replaces that day's planned sightseeing."
@@ -81,5 +79,5 @@ export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 | 7 |
         Book these tours with the individual providers. Check dates, meeting and return arrangements, guiding, walking requirements, admissions, final prices and cancellation terms.
       </p>
     </div>
-  </details>;
+  </section>;
 }
