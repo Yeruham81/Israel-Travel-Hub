@@ -468,13 +468,13 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     privatePath: "/airport-transfers/ein-bokek/",
     privateLabel: "Request a private Ein Bokek transfer",
     options: [
-      { id: "rail", name: "Train + bus via Jerusalem", time: "Roughly 3–4+ hours with connections", cost: "About ₪40 per adult (₪21 train + ₪19 bus)", bestFor: "Daytime arrivals, light luggage", doorToDoor: "No", availability: "Requires a usable onward bus", comparison: { cost: "≈₪40 total", advantages: "Usually the least expensive option", drawbacks: "Train–bus transfer, early last bus, hotel-stop walk" }, heading: "Train and bus via Jerusalem: the budget option", paragraphs: [
+      { id: "rail", name: "Train + bus via Jerusalem", time: "Roughly 3–4+ hours with connections", cost: "About ₪40 per adult (₪21 train + ₪19 bus)", bestFor: "Daytime arrivals, light luggage", doorToDoor: "No", availability: "Requires a bus connection in Jerusalem", comparison: { cost: "≈₪40 total", advantages: "Usually the least expensive option", drawbacks: "Train–bus transfer, early last bus, hotel-stop walk" }, heading: "Train and bus via Jerusalem: the budget option", paragraphs: [
         "For a cheaper journey, take the train to Jerusalem–Yitzhak Navon and continue by bus to the Dead Sea. Check the last bus serving your hotel before choosing an airport train departure.",
         "My getting around Israel guide explains public-transport payment, and the Jerusalem to the Dead Sea guide covers the onward bus."
       ], inlineLinks: [
         { text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" },
         { text: "Jerusalem to the Dead Sea guide", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
-      ], checklist: ["Check both train and bus on your exact date, including any required free rail voucher.", "Verify the 486 or 444 stop list, seat-booking rules and last bus to your hotel.", "Allow for airport formalities and changing stations in Jerusalem."] },
+      ], checklist: ["Check both train and bus on your exact date, including any required free rail voucher.", "Verify the 486 or 444 stop list, seat-booking rules and last bus to your hotel.", "Allow time for passport control, baggage collection and the transfer from Yitzhak Navon railway station to Jerusalem Central Bus Station."] },
       { id: "taxi", name: "Official airport taxi", time: "About 1h 45m–2h 30m+ after pickup", cost: "Regulated meter; check current tariff", bestFor: "On-arrival direct ride to a resort", doorToDoor: "To accessible hotel entrance", availability: "Subject to available licensed taxis", comparison: { cost: "Regulated meter", advantages: "Direct airport-to-hotel ride, including Shabbat", drawbacks: "High and variable long-distance meter fare" }, heading: "Official airport taxi to Ein Bokek or Neve Zohar", paragraphs: [
         ...commonTaxi,
         "The total on this longer journey depends on the regulated tariff, time, distance and permitted extras. See my official airport taxi guide for pickup instructions and the taxi fares in Israel guide for how metered fares are calculated.",
@@ -509,7 +509,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     arrivalAreas: [
       { area: "Ein Bokek hotel strip", station: "Bus 486 or 444 from Jerusalem", onward: "Get off at the stop closest to your hotel." },
       { area: "Hamei Zohar / Neve Zohar", station: "Bus serving the specific resort stop", onward: "Check the hotel name and stop before boarding in Jerusalem." },
-      { area: "Ein Gedi / Masada", station: "Separate Dead Sea destination", onward: "Plan your journey to the specific site you intend to visit." },
+      { area: "Ein Gedi / Masada", station: "Separate Dead Sea destination", onward: "Choose the bus stop closest to Masada or Ein Gedi." },
     ],
     connections: [
       "Ein Bokek has multiple hotel-area bus stops. Enter your full hotel name in the journey planner and confirm the exact stop, walking distance and direction before boarding.",
@@ -536,7 +536,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Is there a direct bus from Ben Gurion Airport to the Dead Sea?", a: "Do not count on a regular direct airport-to-Ein Bokek bus. The usual public-transport plan is a train to Jerusalem and an onward Egged bus, subject to the actual dated timetable." },
       { q: "Which Jerusalem buses reach Ein Bokek hotels?", a: "Tamar Regional Council lists routes 486 and 444 for the Dead Sea from Jerusalem. Confirm the current departure, direction, hotel-stop list and any seat-booking requirement with the operator or journey planner." },
       { q: "How long does it take from TLV Airport to Ein Bokek?", a: "Plan roughly 1 hour 45 minutes to 2 hours 30 minutes or more of driving after pickup, depending on traffic and road conditions. Travelling by train and bus can take 3–4 hours or longer, including waiting times." },
-      { q: "Can I reach Ein Bokek after an evening flight?", a: "Only if an actual onward bus still runs after you clear the airport and reach Jerusalem Central Bus Station. Check the last bus before depending on public transport; a late train does not guarantee a Dead Sea connection." },
+      { q: "Can I reach Ein Bokek after an evening flight?", a: "You can travel by public transport if you reach Jerusalem Central Bus Station before the last bus to Ein Bokek. Check the last bus before depending on public transport; a late train does not guarantee a Dead Sea connection." },
       { q: "Do buses or trains run to Ein Bokek on Shabbat?", a: "Regular train and intercity-bus connections generally stop during the main Shabbat period. Check the precise holiday/weekend schedules, and compare a confirmed taxi, pre-booked transfer or car rental if there is no usable service." },
       { q: "Do I need a voucher for the train to Jerusalem?", a: "Check whether a free personal voucher is required in addition to your train ticket for travel to Jerusalem. Follow the current Israel Railways instructions before boarding." },
       { q: "Is the Ein Bokek bus stop outside every hotel?", a: "Several bus stops serve the Ein Bokek hotel area, and some hotels require a further walk. Search using the full hotel name and check the remaining walk." },
