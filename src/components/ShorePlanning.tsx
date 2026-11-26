@@ -17,7 +17,7 @@ export function ShorePortPlanning({id,name}:{id:ShorePortId;name:string}){
  <section id="shore-planning" aria-labelledby="shore-planning-h" className="mt-12 scroll-mt-24">
    <h2 id="shore-planning-h" className="text-3xl">Choosing the right shore excursion from {name}</h2>
    <ShoreComparisonTable caption={"Compare destinations from "+name} headers={["Destination","Highlights","Approx. one-way drive","Best suited to"]} rows={shoreDestinationRows[id]}/>
-   <p className="mt-3 text-sm text-muted-foreground">Allow extra time for traffic, sightseeing, port access and return to the ship. Distances and driving times are approximate and depend on your pickup point and route.</p>
+   <p className="mt-3 text-sm text-muted-foreground">Allow extra time for traffic, sightseeing, port access and return to the ship. Distances and driving times are approximate and depend on your pickup point and route. The Galilee figures are direct journeys; a combined itinerary adds travel between stops.</p>
  </section>
  <section id="shore-map" aria-labelledby="shore-map-h" className="mt-10 scroll-mt-24">
   <h2 id="shore-map-h" className="text-3xl">Destinations from {name} Port</h2>

@@ -86,7 +86,7 @@ describe("port service catalog", () => {
   it("restores a destination link and offers a working way out when that port has no matching tour", async () => {
     await pageAt("/shore-excursions/haifa/?destination=masada");
     expect(cards()).toHaveLength(0);
-    expect(screen.getByRole("heading", { name: "No tours match this destination" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "No tours match your selection" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("link", { name: "Clear filters" }));
     await waitFor(() => expect(cards()).toHaveLength(catalogSizes.haifa));
     const tag = within(screen.getByRole("navigation", { name: "Filter port services by destination" })).getByRole("link", { name: "Akko (Acre)" });

@@ -25,7 +25,7 @@ export function filterShoreServices(portId: ShorePortId, search: ShoreServiceSea
 }
 
 export function shoreSourceIds(portId: ShorePortId) {
-  return [...new Set([shorePorts[portId].sourceId, "owner-private-driver", portId === "haifa" ? "shore-haifa-terminal" : "shore-ashdod-terminal", ...(portId === "ashdod" ? ["inpa-masada"] : []), ...servicesForPort(portId).flatMap((service) => [service.provider.sourceId, service.product?.listedPrice?.sourceId].filter((id): id is string => Boolean(id)))])];
+  return [...new Set([shorePorts[portId].sourceId, "owner-private-driver", portId === "haifa" ? "shore-haifa-terminal" : "shore-ashdod-terminal", "shore-distance-jerusalem", ...(portId === "ashdod" ? ["inpa-masada","shore-distance-ashdod-tlv","shore-distance-ashdod-masada","shore-distance-ashdod-nazareth"] : ["shore-distance-akko","shore-distance-rosh","shore-distance-nazareth","shore-distance-galilee","shore-distance-haifa-tlv"]), ...servicesForPort(portId).flatMap((service) => [service.provider.sourceId, service.product?.listedPrice?.sourceId].filter((id): id is string => Boolean(id)))])];
 }
 
 /** Recorded starting prices remain visible until updated or removed. */
