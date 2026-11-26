@@ -74,16 +74,73 @@ jobs:
         run: |
           npm install --prefix /tmp/static-browser-audit --no-save playwright@1.56.1
           /tmp/static-browser-audit/node_modules/.bin/playwright install --with-deps chromium
-      - name: Test actual static output with mocked providers
+      - name: Test both static revisions with identical local API and provider mocks
         env:
           NODE_PATH: /tmp/static-browser-audit/node_modules
           COOKIE_AUDIT_URL: http://127.0.0.1:4180
         run: |
-          python3 -m http.server 4180 --bind 127.0.0.1 --directory after/.output/public > /tmp/static-server.log 2>&1 &
-          trap 'kill $! 2>/dev/null || true' EXIT
-          for i in $(seq 1 20); do if curl -fsS http://127.0.0.1:4180/ >/dev/null; then break; fi; sleep 1; done
-          node after/scripts/audit-cookie-consent.cjs
-          node audit/scripts/standalone-regression-browser.cjs
+          cat > "$RUNNER_TEMP/static-audit-server.py" <<'PY'
+          import datetime, functools, http.server, json, sys
+          from urllib.parse import urlsplit
+
+          class Handler(http.server.SimpleHTTPRequestHandler):
+              def do_GET(self):
+                  if urlsplit(self.path).path == "/api/exchange-rates/":
+                      # Synthetic, time-valid fixture for the production PHP API.
+                      # Never contact the upstream service or the public fallback.
+                      now = datetime.datetime.now(datetime.timezone.utc)
+                      body = json.dumps({"rates": {
+                          "sourceId": "fx-bank-of-israel",
+                          "publishedAt": now.date().isoformat(),
+                          "checkedAt": now.isoformat().replace("+00:00", "Z"),
+                          "ilsPerUnit": {"USD": 3.5, "EUR": 4.0}
+                      }, "status": "fresh"}).encode()
+                      self.send_response(200)
+                      self.send_header("Content-Type", "application/json")
+                      self.send_header("Cache-Control", "no-store")
+                      self.send_header("Content-Length", str(len(body)))
+                      self.end_headers()
+                      self.wfile.write(body)
+                      return
+                  super().do_GET()
+
+          handler = functools.partial(Handler, directory=sys.argv[1])
+          http.server.ThreadingHTTPServer(("127.0.0.1", 4180), handler).serve_forever()
+          PY
+          overall=0
+          server_pid=""
+          trap 'if [[ -n "$server_pid" ]]; then kill "$server_pid" 2>/dev/null || true; fi' EXIT
+          for revision in before after; do
+            echo "::group::Browser checks: $revision"
+            log="$RUNNER_TEMP/static-server-$revision.log"
+            python3 "$RUNNER_TEMP/static-audit-server.py" "$revision/.output/public" > "$log" 2>&1 &
+            server_pid=$!
+            ready=0
+            for i in $(seq 1 20); do
+              if curl -fsS "$COOKIE_AUDIT_URL/" >/dev/null 2>&1; then ready=1; break; fi
+              sleep 1
+            done
+            if [[ "$ready" != 1 ]]; then
+              cat "$log"
+              exit 1
+            fi
+            cookies=0
+            browser=0
+            # Same unmodified consent assertions and browser harness for both revisions.
+            node audit/scripts/audit-cookie-consent.cjs || cookies=$?
+            node audit/scripts/standalone-regression-browser.cjs || browser=$?
+            echo "BROWSER RESULT $revision cookies=$cookies browser=$browser"
+            if ! grep -F 'GET /api/exchange-rates/ HTTP/' "$log" | grep -q '200'; then
+              echo "::error::The mocked currency endpoint was not exercised by $revision"
+              overall=1
+            fi
+            if [[ "$cookies" != 0 || "$browser" != 0 ]]; then overall=1; fi
+            kill "$server_pid"
+            wait "$server_pid" 2>/dev/null || true
+            server_pid=""
+            echo "::endgroup::"
+          done
+          exit "$overall"
   full-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 20
