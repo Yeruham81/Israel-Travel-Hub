@@ -20,12 +20,11 @@ jobs:
           persist-credentials: false
       - uses: actions/checkout@v7
         with:
-          ref: 67d8abc60c53f43faeda4f0895bce7e520025f50
+          ref: 2b74b67c7305d3e3ab44346a34fb700d91a8b75c
           path: before
           persist-credentials: false
       - uses: actions/checkout@v7
         with:
-          ref: a3ff5bb9af782a6e473164ae8a1ae62023ef8cc0
           path: after
           persist-credentials: false
       - uses: actions/setup-node@v7
@@ -46,6 +45,8 @@ jobs:
         run: |
           bash scripts/install-ci-dependencies.sh
           bash scripts/build-validated-static.sh
+          # Apply only the updated verification assertions after building the unchanged baseline.
+          cp ../audit/scripts/verify-hostinger-static-export.mjs scripts/verify-hostinger-static-export.mjs
           node scripts/verify-hostinger-static-export.mjs --editorial
       - name: Build and verify independent production revision
         working-directory: after
@@ -62,7 +63,10 @@ jobs:
           import re, subprocess, pathlib
           marker=re.compile(rb'lovable|tanstack_start_ts|7cd7aae9-57c0-4ced-b1fa-2f0691483fee|sandbox-npm-cache',re.I)
           names=[x for x in subprocess.check_output(['git','ls-files','-z']).split(b'\0') if x]
-          hits=[x.decode() for x in names if marker.search(x) or marker.search(pathlib.Path(x.decode()).read_bytes())]
+          # Audit-only files necessarily contain the patterns they detect; remove them before merging.
+          audit_only={b'.github/workflows/standalone-regression.yml', b'scripts/standalone-regression-compare.py'}
+          hits=[x.decode() for x in names if x not in audit_only and (marker.search(x) or marker.search(pathlib.Path(x.decode()).read_bytes()))]
+          print('Excluded audit harness only:', sorted(audit_only))
           print('SOURCE SCAN',len(names),'files',len(hits),'matches',hits)
           assert not hits
           PY
@@ -91,7 +95,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: a3ff5bb9af782a6e473164ae8a1ae62023ef8cc0
           persist-credentials: false
       - uses: actions/setup-node@v7
         with:
@@ -112,9 +115,6 @@ jobs:
       - run: npx tsc --noEmit
       - name: Run entire test suite including editorial layouts
         run: bun run test
-      - name: Lint
-        if: always()
-        run: bun run lint
   staging-export:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -126,7 +126,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: a3ff5bb9af782a6e473164ae8a1ae62023ef8cc0
           persist-credentials: false
       - uses: actions/setup-node@v7
         with:
@@ -138,3 +137,75 @@ jobs:
       - run: bash scripts/install-ci-dependencies.sh
       - run: bash scripts/build-validated-static.sh
       - run: node scripts/verify-hostinger-static-export.mjs
+  lint-comparison:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CI: "true"
+      VITE_INDEXABLE: "false"
+      VITE_CANONICAL_ORIGIN: "https://www.israel-taxi.com"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: 2b74b67c7305d3e3ab44346a34fb700d91a8b75c
+          path: before
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          path: after
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Collect baseline and candidate ESLint reports
+        shell: bash
+        run: |
+          for revision in before after; do
+            (
+              cd "$revision"
+              bash scripts/install-ci-dependencies.sh
+              bun run build
+              status=0
+              bun run lint --format json --output-file "$RUNNER_TEMP/$revision-lint.json" || status=$?
+              if [[ "$status" -gt 1 || ! -s "$RUNNER_TEMP/$revision-lint.json" ]]; then
+                echo "::error::ESLint failed to produce a valid report for $revision"
+                exit 1
+              fi
+            )
+          done
+      - name: Compare diagnostic multisets by file, rule, severity and message
+        run: |
+          python3 - <<'PY'
+          import collections, json, os, pathlib
+          def load(revision):
+              report = pathlib.Path(os.environ["RUNNER_TEMP"]) / (revision + "-lint.json")
+              root = pathlib.Path(revision).resolve()
+              counts = collections.Counter()
+              for entry in json.loads(report.read_text()):
+                  path = str(pathlib.Path(entry["filePath"]).relative_to(root))
+                  for m in entry["messages"]:
+                      counts[(path, m.get("ruleId") or "<parser>", m["severity"], m["message"])] += 1
+              return counts
+          before, after = load("before"), load("after")
+          new, removed = after - before, before - after
+          for name, values in (("BASELINE", before), ("CANDIDATE", after), ("NEW", new), ("REMOVED", removed)):
+              print(name, "errors", sum(n for k,n in values.items() if k[2]==2), "warnings", sum(n for k,n in values.items() if k[2]==1))
+              print(name, "rules", dict(collections.Counter({rule:sum(n for k,n in values.items() if k[1]==rule) for rule in {k[1] for k in values}})))
+          for (path, rule, severity, message), n in sorted(new.items()):
+              print("NEW DIAGNOSTIC", path, rule, severity, n, message)
+          if new:
+              raise SystemExit("New lint diagnostics must be reviewed and resolved before migration.")
+          PY
+      - name: Save raw lint reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: standalone-lint-reports
+          path: |
+            ${{ runner.temp }}/before-lint.json
+            ${{ runner.temp }}/after-lint.json
+          if-no-files-found: warn

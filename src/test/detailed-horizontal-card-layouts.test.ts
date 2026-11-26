@@ -25,10 +25,8 @@ const layouts = [
 ] as const;
 
 describe("Full-width editorial detail cards", () => {
-  it("has exactly 61 long-form cards across seven guide pages", () => {
-    const detailedBeachCount = telAvivBeaches.filter(
-      beach => beach.featured || beach.area === "Southern coast and Jaffa"
-    ).length;
+  it("has exactly 67 long-form cards across seven guide pages", () => {
+    const detailedBeachCount = telAvivBeaches.length;
     expect([
       seniorDayTrips.length,
       telAvivExperiences.length,
@@ -37,8 +35,8 @@ describe("Full-width editorial detail cards", () => {
       jerusalemShoppingPlaces.length,
       foodDishes.length,
       detailedBeachCount,
-    ]).toEqual([4, 10, 10, 10, 10, 10, 7]);
-    expect(4 + 10 + 10 + 10 + 10 + 10 + detailedBeachCount).toBe(61);
+    ]).toEqual([4, 10, 10, 10, 10, 10, 13]);
+    expect(4 + 10 + 10 + 10 + 10 + 10 + detailedBeachCount).toBe(67);
   });
 
   it.each(layouts)("$component uses a single desktop row with image in the upper right", ({ component, grid }) => {
@@ -50,16 +48,16 @@ describe("Full-width editorial detail cards", () => {
     expect(page).toContain("lg:col-start-1 lg:row-start-1");
   });
 
-  it("shows detailed Tel Aviv beaches as wide rows without changing the six compact beach cards", () => {
+  it("shows all Tel Aviv beaches as full-width rows with a right-hand photograph", () => {
     const page = readComponent("TelAvivBeachesGuide");
-    expect(page).toContain('data-detailed-card={compact ? undefined : "horizontal"}');
-    expect(page).toContain('group.compact ? "mt-5 grid items-stretch gap-4 md:grid-cols-3" : "mt-5 grid gap-4"');
-    expect(page).toContain('data-testid={group.compact ? "beach-compact-cards" : "beach-detailed-cards"}');
-    expect(page).toContain("lg:grid-cols-[minmax(0,1fr)_270px]");
+    expect(page).toContain('data-detailed-card="horizontal"');
+    expect(page).toContain('className="mt-4 grid gap-3" data-testid="beach-detailed-cards"');
+    expect(page).toContain("lg:grid-cols-[minmax(0,1fr)_250px]");
     expect(page).toContain("lg:col-start-2 lg:row-start-1");
-    expect(telAvivBeaches.length - telAvivBeaches.filter(
-      beach => beach.featured || beach.area === "Southern coast and Jaffa"
-    ).length).toBe(6);
+    expect(page).toContain("lg:col-start-1 lg:row-start-1");
+    expect(page).toContain("beaches.map(beach => <BeachCard");
+    expect(page).not.toContain("beach-compact-cards");
+    expect(telAvivBeaches).toHaveLength(13);
   });
 
   it("keeps short-form provider and related-guide tiles out of the wide-card transformation", () => {

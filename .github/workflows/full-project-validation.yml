@@ -63,6 +63,65 @@ jobs:
       - name: Check TypeScript
         run: npx tsc --noEmit
 
+      # Opt-in diagnostics: reuse the installed dependencies and generated routes.
+      # Unused declarations are reported, never a deployment gate.
+      - name: Audit unused TypeScript declarations (non-blocking)
+        if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[unused-audit]')) }}
+        continue-on-error: true
+        shell: bash
+        run: |
+          report="$RUNNER_TEMP/unused-typescript.txt"
+          status=0
+          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters > "$report" 2>&1 || status=$?
+          cat "$report"
+          echo "TypeScript diagnostic exit code: $status"
+          python3 - "$report" "$status" <<'PY'
+          import collections
+          import os
+          import pathlib
+          import re
+          import sys
+
+          report = pathlib.Path(sys.argv[1]).read_text()
+          status = int(sys.argv[2])
+          unused_codes = {"6133", "6138", "6192", "6196", "6198"}
+          counts = collections.Counter()
+          files = collections.Counter()
+          other = []
+          for line in report.splitlines():
+              match = re.match(r"^(.+?)\(\d+,\d+\): error TS(\d+):", line)
+              if match:
+                  path, code = match.groups()
+                  if code in unused_codes:
+                      counts[code] += 1
+                      files[path] += 1
+                  else:
+                      other.append(line)
+              elif re.search(r"\berror TS\d+:", line):
+                  other.append(line)
+
+          total = sum(counts.values())
+          print(f"UNUSED_AUDIT: {total} diagnostics across {len(files)} files; {len(other)} other diagnostics")
+          summary = [
+              "### Optional TypeScript unused-declaration audit",
+              f"- Unused-declaration diagnostics: {total}",
+              f"- Files affected: {len(files)}",
+              f"- Other compiler diagnostics: {len(other)}",
+              f"- Compiler exit code: {status}",
+              "",
+              "| Diagnostic | Count |", "|---|---:|",
+              *[f"| TS{code} | {count} |" for code, count in sorted(counts.items())],
+              "",
+              "| Source file | Diagnostics |", "|---|---:|",
+              *[f"| `{path}` | {count} |" for path, count in files.most_common()],
+          ]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as output:
+              output.write("\n".join(summary) + "\n")
+          if other or (status and not total):
+              print("::warning::Unused-declaration audit may be incomplete; inspect compiler output.")
+              sys.exit(1)
+          PY
+
       - name: Run regression tests (editorial layout checks on manual runs only)
         env:
           CI_FUNCTIONAL_ONLY: ${{ github.event_name != 'workflow_dispatch' }}

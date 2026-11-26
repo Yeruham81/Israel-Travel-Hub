@@ -491,8 +491,7 @@ assert(pagesWithTables >= 12, "Unexpectedly few pages with real comparison table
 console.log("Responsive table parity verified across " + pagesWithTables + " sitemap pages and " + auditedTables + " rendered tables.");
 
 // Long-form editorial content uses the museum-style full-width card layout.
-// Compact related guides, bookable tours and short beach cards are intentionally
-// excluded from this assertion.
+// Compact related guides and bookable tours are excluded from this assertion.
 const horizontalDetailPages = [
   ["/travel-blog/israel-tours-for-seniors/", 4],
   ["/travel-blog/attractions-in-tel-aviv/", 10],
@@ -500,7 +499,7 @@ const horizontalDetailPages = [
   ["/travel-blog/top-10-things-to-do-in-israel/", 10],
   ["/travel-blog/shopping-in-jerusalem/", 10],
   ["/travel-blog/what-to-eat-in-israel/", 10],
-  ["/travel-blog/beaches-in-tel-aviv/", 7],
+  ["/travel-blog/beaches-in-tel-aviv/", 13],
 ];
 let verifiedHorizontalCards = 0;
 for (const [route, expected] of horizontalDetailPages) {
@@ -513,7 +512,7 @@ for (const [route, expected] of horizontalDetailPages) {
     "Horizontal editorial cards missing desktop right-side photo layout on " + route);
   verifiedHorizontalCards += actual;
 }
-assert(verifiedHorizontalCards === 61, "Long-form editorial card count must total 61");
+assert(verifiedHorizontalCards === 67, "Long-form editorial card count must total 67");
 console.log("Wide editorial card layout verified in static export: " + verifiedHorizontalCards + " cards across seven guides.");
 
 }
