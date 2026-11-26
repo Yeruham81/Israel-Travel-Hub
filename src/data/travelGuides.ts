@@ -304,13 +304,13 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Getting from Ben Gurion Airport to your destination",
         paragraphs: [
           "Trains from Terminal 3 connect Ben Gurion Airport with several major cities. For Jerusalem, Haifa and Tel Aviv, choose the station nearest your destination and include the final connection to your hotel. For a direct journey, compare the licensed airport taxi queue with a confirmed private transfer.",
-          "My airport-to-Jerusalem guide, airport-to-Tel Aviv guide, airport-to-Haifa guide and airport-to-Ein Bokek guide provide route-specific advice. For Friday and Saturday journeys, my airport Shabbat guide explains the available transport.",
+          "My guides to Jerusalem, Tel Aviv, Haifa and Ein Bokek explain the transport options from Ben Gurion Airport. For Friday and Saturday journeys, my airport Shabbat guide explains the available transport.",
         ],
         inlineLinks: [
-          { text: "airport-to-Jerusalem guide", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
-          { text: "airport-to-Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
-          { text: "airport-to-Haifa guide", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
-          { text: "airport-to-Ein Bokek guide", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
+          { text: "Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+          { text: "Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+          { text: "Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+          { text: "Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
           { text: "airport Shabbat guide", to: travelGuidePaths.shabbat },
         ],
         tables: [{
@@ -827,7 +827,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Buses reach Tiberias, Safed, Nazareth, Eilat, the Dead Sea and neighbourhoods away from railway stations. For long-distance journeys, check whether the operator requires an advance seat reservation, especially on selected routes to Eilat.",
               "The national public transport planner shows stops, connections and departure times. Pay attention to the last return service, particularly on Fridays, before visiting smaller towns or rural attractions.",
             ],
-            highlightedLinks: [{ label: "National public transport journey planner", href: "https://bus.gov.il/en/home", context: "Search routes using your actual date, departure point and destination." }],
+            highlightedLinks: [{ label: "National public transport journey planner", href: "https://bus.gov.il/en/home", context: "Enter your travel date, starting point and destination." }],
             sourceIds: ["guide-bus-planner", "guide-egged-seat-reservations"],
           },
           {
