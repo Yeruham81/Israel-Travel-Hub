@@ -89,9 +89,9 @@ function BeachPhotoSlot({ beach, kind = "detail", compact = false }: {
   const photo = kind === "pick" ? beach.pickPhoto : beach.detailPhoto;
   const shape = compact ? "aspect-[4/3] w-24 shrink-0 rounded-lg sm:w-28 md:aspect-[16/9] md:w-full lg:aspect-[4/3] lg:w-24 xl:w-28" : kind === "detail" ? "aspect-[16/9] w-full lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:aspect-[16/10] lg:rounded-xl" : "aspect-[16/9] w-full lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl";
   return photo ? (
-    beach.id === "tzuk-south" && kind === "detail" ? (
+    ((beach.id === "tzuk-south" && kind === "detail") || (beach.id === "metzitzim" && kind === "pick")) ? (
       <figure className={shape + " relative overflow-hidden"}>
-        <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width={454} height={206} className="h-full w-full object-cover" />
+        <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width={kind === "pick" ? 680 : 454} height={kind === "pick" ? 454 : 206} className="h-full w-full object-cover" />
         <figcaption className="absolute bottom-0 right-0 rounded-tl bg-black/65 px-2 py-1 text-[10px] text-white">Illustrative photo</figcaption>
       </figure>
     ) : (

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { beachMapPoints, beachTopPicks, telAvivBeaches } from "@/data/telAvivBeaches";
 
@@ -73,6 +73,16 @@ describe("Tel Aviv beach guide editorial regression", () => {
     expect(page).toContain("border-t p-4 sm:p-5 lg:col-start-1 lg:row-start-2 lg:border-t-0 lg:p-0");
     expect(page).toContain("mt-3 leading-relaxed lg:mt-2");
     expect(page).toContain('compact ? "lg:px-6" : "lg:px-4 lg:py-2"');
+  });
+
+  it("provides a separate local image for every top beach pick", () => {
+    const photos = beachTopPicks.map(pick => telAvivBeaches.find(beach => beach.id === pick.id)?.pickPhoto);
+    expect(photos.every(photo => !!photo?.alt)).toBe(true);
+    expect(new Set(photos.map(photo => photo?.src)).size).toBe(6);
+    for (const photo of photos) {
+      expect(existsSync(resolve(process.cwd(), "public", photo!.src.slice(1)))).toBe(true);
+      expect(telAvivBeaches.some(beach => beach.detailPhoto?.src === photo!.src)).toBe(false);
+    }
   });
 
   it("retains thirteen map markers in north-to-south order", () => {

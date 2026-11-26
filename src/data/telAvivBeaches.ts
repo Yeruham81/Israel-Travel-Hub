@@ -43,6 +43,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "tel-baruch", name: "Tel Baruch Beach", area: "Northern coast",
+    pickPhoto: { src: "/images/tel-aviv-beaches/tel-baruch-pick.webp", alt: "Sandy shoreline and waves at Tel Baruch Beach" },
     detailPhoto: { src: "/images/tel-aviv-beaches/tel-baruch.webp", alt: "Tel Baruch Beach with its open sandy shoreline and coastal cliffs" },
     bestFor: "A relaxed beach day", summary: "North of Tel Aviv Port, this broad beach has a more local feel, with facilities and a separate dog area farther along the shore. It is not a quick stroll from the central hotel strip.",
     tip: "The off-leash area is south of the kite-surfing section, not inside the supervised swimming zone.",
@@ -53,6 +54,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "metzitzim", name: "Metzitzim Beach", area: "Northern coast",
+    pickPhoto: { src: "/images/tel-aviv-beaches/metzitzim-pick-illustration.webp", alt: "Illustrative photo of beach volleyball in Tel Aviv" },
     detailPhoto: { src: "/images/tel-aviv-beaches/metzitzim.webp", alt: "Sunbeds and umbrellas at Metzitzim Beach near Tel Aviv Port" },
     bestFor: "Families near the port", summary: "Beside Tel Aviv Port, Metzitzim is popular with families because of its nearby facilities, child-friendly beach amenities and opportunities to stop for food or a promenade walk.",
     tip: "Choose the marked swimming area and keep children under close supervision, regardless of how calm the water appears.",
@@ -72,6 +74,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "hilton", name: "Hilton Beach", area: "Northern coast",
+    pickPhoto: { src: "/images/tel-aviv-beaches/hilton-pick.webp", alt: "Colourful shade shelters and sunbeds on Hilton Beach" },
     detailPhoto: { src: "/images/tel-aviv-beaches/hilton.webp", alt: "Rainbow flags along the promenade at Hilton Beach" },
     bestFor: "LGBTQ+ social scene and water sports", summary: "The area below the Hilton Hotel is especially well known for its LGBTQ+ scene, as well as surfing and other water-based activities. Look for the specific stretch suited to your plans.",
     tip: "The dog-friendly off-leash area is north of the declared swimming beach, with its own signs.",
@@ -93,6 +96,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "frishman", name: "Frishman Beach", area: "Central seafront",
+    pickPhoto: { src: "/images/tel-aviv-beaches/frishman-pick.webp", alt: "Frishman Beach and the central Tel Aviv promenade" },
     detailPhoto: { src: "/images/tel-aviv-beaches/frishman.webp", alt: "Sandy Frishman Beach with volleyball nets and shade shelters" },
     bestFor: "Central hotels and easy access", summary: "One of the simplest beaches to reach if you stay near the central promenade. Frishman works well for a few hours by the sea followed by lunch or sightseeing inland.",
     tip: "If you're meeting someone, use the Frishman Street beach entrance as your meeting point.",
@@ -130,6 +134,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   },
   {
     id: "charles-clore", name: "Charles Clore Beach", area: "Southern coast and Jaffa",
+    pickPhoto: { src: "/images/tel-aviv-beaches/charles-clore-pick.webp", alt: "Charles Clore shoreline and promenade in the evening light" },
     detailPhoto: { src: "/images/tel-aviv-beaches/charles-clore.webp", alt: "Sunset along the Charles Clore shoreline with Old Jaffa in the distance" },
     bestFor: "A beach day with Jaffa views", summary: "Beside Charles Clore Park, this declared bathing beach has supervised areas, changing facilities and chair or sunbed hire. Nearby open stretches sometimes called Alma Beach are not necessarily part of the supervised bathing area.",
     tip: "Combine the park and shoreline with Neve Tzedek or an Old Jaffa walk. The permitted off-leash dog section is south of the declared beach.",
