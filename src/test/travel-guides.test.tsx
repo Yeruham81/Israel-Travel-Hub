@@ -1231,7 +1231,7 @@ describe("migrated practical guides", () => {
     for (const price of ["$4.99","$10.79","$16.79","$20.99","$29.19"]) expect(fixed).toHaveTextContent(price);
     expect(fixed.querySelector("del")).toHaveTextContent("$20.99");
     const unlimited=screen.getByRole("table",{name:"Unlimited eSIM plans by duration"});
-    for(const label of ["7 days","15 days","30 days","€21.70","€35.00","€55.00","$69.00","$18.79","$33.99","$49.99","—"]) expect(unlimited).toHaveTextContent(label);
+    for(const label of ["7 days","15 days","30 days","€21.70","€35.00","€55.00","$69.00","$18.79","$33.99","$49.99","$26.99","$48.99","$71.99"]) expect(unlimited).toHaveTextContent(label);
     expect(screen.getByRole("table",{name:"eSIM provider features"})).toBeInTheDocument();
     expect(screen.getByRole("table",{name:"Drimsim pay-as-you-go data costs"})).toHaveTextContent("€50.00");
     for(const table of [fixed,unlimited,screen.getByRole("table",{name:"eSIM provider features"})]) expect(table.parentElement).toHaveClass("overflow-x-auto");

@@ -19,6 +19,7 @@ export const esimUnlimitedPlans: EsimPlan[] = [
   ...([[3,12.5],[5,18],[7,26.5],[10,34],[15,48],[30,69]] as const).map(([days,usd])=>direct("Airalo","Unlimited",days,usd,"guide-esim-airalo")),
   yesimUnlimited(7,21.7),yesimUnlimited(15,35),yesimUnlimited(30,55),
   gig("Unlimited",7,18.79),gig("Unlimited",15,33.99),gig("Unlimited",30,49.99),
+  ...([[7,26.99],[15,48.99],[30,71.99]] as const).map(([days,usd])=>p("Saily","Unlimited",days,usd,ESIM_UPDATED,"publisher","guide-esim-saily")),
 ];
 export const esimFairUse: Record<EsimProvider,string> = {
   Saily: "—",
