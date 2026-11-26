@@ -199,7 +199,7 @@ export const journeyDestinationGuides = {
   "id": "bethlehem",
   "updatedAt": "2026-11-24",
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
-  "description": "Compare bus 231 and 234, licensed private drivers, taxis to Checkpoint 300 and Bethlehem tours. Learn where to get off, which travel documents to bring and how to return to Jerusalem.",
+  "description": "Travel from Jerusalem to Bethlehem by bus 231 or 234, licensed private driver, taxi or tour. Learn about Checkpoint 300, travel documents and return options.",
   "intro": "Bethlehem is only a short distance from Jerusalem, but getting there requires some planning. Here's how to travel by bus, taxi or organised tour, and what to check before you leave.",
   "answer": "For independent travellers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers can cross on foot when the checkpoint is open and continue by local taxi. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
   "topics": [
