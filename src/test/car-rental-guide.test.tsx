@@ -59,7 +59,7 @@ describe("car rental guide and Travelpayouts search", () => {
     const widget = container.querySelector("#compare-rentals")!;
     expect(widget.compareDocumentPosition(container.querySelector("#car-needed")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(widget.compareDocumentPosition(screen.getByRole("navigation",{name:"On this page"})) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(container.querySelector("time")?.nextElementSibling).toHaveAttribute("data-testid","author-card");
+    expect(container.querySelector("time")?.closest("p")?.nextElementSibling).toHaveAttribute("data-testid","author-card");
     expect(screen.getByTestId("rental-vehicle-categories").children).toHaveLength(3);
     const planning = screen.getByTestId("icon-trip-planning-links");
     expect(within(planning).getAllByRole("link")).toHaveLength(6);

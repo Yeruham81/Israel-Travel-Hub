@@ -8,7 +8,7 @@ const key="ith:cookie-consent:v1";
   for(const width of [320,360,390,768,1440]){
    const context=await browser.newContext({viewport:{width,height:900}});
    const requests=[];let fail=false;
-   await context.addInitScript(k=>localStorage.setItem(k,JSON.stringify({version:2,categories:{analytics:false,external:false,marketing:false,advertising:false},expiresAt:Date.now()+86400000})),key);
+   await context.addInitScript(k=>{if(window.top===window&&!localStorage.getItem(k))localStorage.setItem(k,JSON.stringify({version:2,categories:{analytics:false,external:false,marketing:false,advertising:false},expiresAt:Date.now()+86400000}));},key);
    await context.route("**/*",async route=>{
     const url=new URL(route.request().url());
     if(url.origin===base||!/^https?:$/.test(url.protocol))return route.continue();
