@@ -56,16 +56,16 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
       <section id="service-overview" aria-labelledby="service-overview-h" className="mt-9 scroll-mt-24" data-testid="driver-service-overview">
         <h2 id="service-overview-h" className="text-2xl font-semibold sm:text-3xl">Private driver service in Israel: travel on your own terms</h2>
         <div className="mt-3 max-w-4xl space-y-4 text-[15px] leading-7 sm:text-base">
-          <p>Hiring a private car and driver in Israel gives you a direct journey planned around your own schedule. Arrange one pickup, your preferred route and a final drop-off with a private driver. I help arrange private transport between hotels and cities, a day of sightseeing with selected stops, or a longer journey that combines travel and visits along the way. You choose the places that matter to you, and I'll help work out realistic timing.</p>
+          <p>I arrange private car-and-driver journeys across Israel, from direct hotel transfers to full days of sightseeing and longer trips with stops along the way. Choose your pickup, preferred stops and final destination, and I'll help plan the timing.</p>
           <h3 className="pt-1 text-lg font-semibold">Who is a private driver suitable for?</h3>
-          <p>My private driver service is suitable for couples, families with children, friends travelling together, business visitors with several appointments, and travellers carrying luggage between accommodations. I can help you plan door-to-door transport for a short visit to Israel or a more relaxed schedule with breaks. For older travellers or anyone with particular mobility needs, please tell me what support is required so I can check the vehicle and arrangements in advance.</p>
+          <p>My private driver service is available for couples, families, groups of friends, business travellers and anyone moving between hotels with luggage. If you prefer a slower pace or need help with mobility, tell me what you need so I can check the vehicle and arrangements in advance.</p>
           <p><strong>What is included?</strong> Your quote will describe the agreed transport, route, vehicle, pickup arrangements and any included waiting time. I provide private transportation. Entrance tickets, licensed tour guiding and other extras should be arranged separately unless specifically confirmed. Share your dates, destinations, number of passengers and any special requests, and I'll reply with the options and relevant booking terms.</p>
         </div>
       </section>
 
       <section id="journeys" aria-labelledby="journeys-h" className="mt-8 scroll-mt-24">
         <h2 id="journeys-h" className="text-2xl font-semibold">Choose the journey that suits you</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Whether you need a direct transfer, a day out or several stops along the way, choose a starting point and I'll help with the details.</p>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a direct transfer, a sightseeing day or a journey with several stops. I'll help plan the details.</p>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {privateDriverJourneys.map(journey => <article key={journey.id} className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/40" data-testid="driver-journey-card">
             <img src={journey.photo.src} alt={journey.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[16/9] h-auto w-full object-cover" />
