@@ -368,7 +368,8 @@ describe("migrated Israel itineraries", () => {
     expect(g.description).toContain("Nazareth");
     expect(g.intro).toMatch(/a week in Israel/i);
     expect(g.reviewedAt).toBe("2026-11-24");
-    expect(g.reality).toContain("transfer days");
+    expect(g.reality).toMatch(/extra travel time on Days 4 and 6/i);
+    expect(g.reality).toMatch(/changing hotels/i);
     expect(g.hotelBases).toContain("after Days 1–3");
     expect(g.hotelBases).toContain("after Days 4–5");
     expect(g.hotelBases).toContain("after Day 6");
