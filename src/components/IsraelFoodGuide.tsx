@@ -170,7 +170,7 @@ function Practical(){
   {title:"Portions and prices",text:"Check whether your order is a pita, laffa or full plate, and whether salads, extra dips, drinks or desserts cost more. Bakery items can be priced by weight."},
   {title:"Shabbat and holidays",text:"Many market stalls close ahead of Shabbat or holiday evenings. Other cafés and restaurants may remain open. Check opening hours with your chosen restaurant or shop."},
   {title:"Payment and service",text:"Prices are usually listed in Israeli shekels (ILS). Cards are common but a backup payment option is useful at small stalls. For table service, around 10–15% tipping is customary; check the bill."},
-  {title:"A few easy ordering words",text:"Pita = pocket bread; laffa = wrap; charif = spicy; bli = without; bevakasha = please. If you need exact dietary control, ask for the full ingredient details."}
+  {title:"A few easy ordering words",text:"Pita = pocket bread; laffa = wrap; charif = spicy; bli = without; bevakasha = please. If you have dietary restrictions, ask about all the ingredients before ordering."}
  ];
  return <section id="practical" aria-labelledby="practical-heading" className="mt-12 scroll-mt-24">
     <SectionHeading id="practical" title="Before you order: six useful tips" intro="A few questions make your first food stops much easier, especially if you are unfamiliar with the menu or have dietary needs."/>
@@ -251,7 +251,7 @@ export function IsraelFoodGuide(){
    <Practical/>
    <FaqList faqs={foodFAQs}/>
    <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
-      <SectionHeading id="explore-more" title="Explore the neighbourhoods behind the flavours" intro="Turn your food stop into part of a bigger walking route or city visit."/>
+      <SectionHeading id="explore-more" title="Explore the neighbourhoods behind the flavours" intro="Combine local food with sightseeing in Jerusalem or Tel Aviv."/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{exploreCards.map(item=><RelatedCard key={item.to} item={item}/>)}</div>
    </section>
    <section id="plan-trip" aria-labelledby="plan-trip-heading" className="mt-12 scroll-mt-24">

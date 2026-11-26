@@ -61,7 +61,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(rentalLink).not.toHaveAttribute("rel");
     expect(screen.getByRole("heading", { name: /visit Bethlehem on Saturday or Sunday/ })).toBeInTheDocument();
     const localTaxi = container.querySelector("#private-taxi") as HTMLElement;
-    expect(localTaxi.querySelector("p")?.textContent?.startsWith("An appropriately authorised and insured Palestinian taxi")).toBe(true);
+    expect(localTaxi.querySelector("p")).toHaveTextContent("Palestinian taxi driver who has the necessary permits and insurance");
     expect(localTaxi.querySelector("p")).toHaveTextContent("Confirm that both the driver and vehicle are permitted");
     expect(within(localTaxi).queryByRole("link", { name: /Enquire about a legally permitted private journey/ })).not.toBeInTheDocument();
     expect(localTaxi.querySelector('a[href="/private-driver-in-israel/"]')).toBeNull();

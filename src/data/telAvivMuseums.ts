@@ -14,10 +14,10 @@ export type MuseumEntry = {
 };
 
 export const museumAreas: { id: MuseumArea; name: string; intro: string }[] = [
-  { id: "central", name: "City centre & Bialik Square", intro: "Art and small heritage buildings are spread across the centre. The Bialik Square museums form the most convenient walking cluster; allow a separate journey to the main Tel Aviv Museum of Art." },
-  { id: "north", name: "Ramat Aviv & Tel Aviv University", intro: "The university and northern museums offer some of the city's largest collections. Choose one major museum or two carefully timed visits, allowing travel time between them." },
+  { id: "central", name: "City centre & Bialik Square", intro: "Art and small heritage buildings are spread across the centre. The museums around Bialik Square are within easy walking distance of each other. Visit the Tel Aviv Museum of Art separately." },
+  { id: "north", name: "Ramat Aviv & Tel Aviv University", intro: "The university and northern museums offer some of the city's largest collections. Allow plenty of time to explore each museum." },
   { id: "south", name: "Neve Tzedek & the southern seafront", intro: "A smaller artist museum and a separate military-history museum can complement a walk towards the waterfront, with different entrances and booking arrangements." },
-  { id: "jaffa", name: "Old Jaffa", intro: "Historic stone lanes, a striking artist-house museum and specialist guided visits. Allow time for steep streets and the walk between venues." },
+  { id: "jaffa", name: "Old Jaffa", intro: "Historic stone streets, an artist's former home and guided tours. Allow time for steep streets and the walk between venues." },
 ];
 
 export const museums: MuseumEntry[] = [
@@ -28,7 +28,7 @@ export const museums: MuseumEntry[] = [
     priceNis: 55,
     admission: "Adult ₪55; under 18 free", booking: "Check current exhibitions; last entry 1 hour before closing",
     highlightsForFamilies: "Under-18s enter free (regular museum admission).",
-    intro: "My first choice for a substantial art visit. Israeli and international modern and contemporary collections sit alongside ambitious temporary exhibitions in distinctive modern buildings.",
+    intro: "My first choice for art lovers in Tel Aviv. The museum features Israeli and international modern and contemporary art, along with temporary exhibitions.",
     highlights: ["Israeli and international collections", "Herta and Paul Amir Building and architecture", "Changing exhibitions and sculpture"],
     tip: "Review the exhibitions before travelling. The Eyal Ofer Pavilion (formerly Helena Rubinstein Pavilion) is a separate venue at 6 Tarsat Boulevard; check its own exhibition and ticket arrangements.",
     url: "https://www.tamuseum.org.il/en/visit/", featured: true,
@@ -41,7 +41,7 @@ export const museums: MuseumEntry[] = [
     openingDays: "Mon–Sat (closed Sun); Fri until 14:00, Sat until 16:00",
     priceNis: 40,
     admission: "Adult ₪40; under 6 free; family ticket ₪85", booking: "Tickets sold online only",
-    intro: "An engaging introduction to the city through the experiences and memories of its residents, historic objects and changing exhibitions. Its location makes it easy to build a small museum walk around Bialik Square.",
+    intro: "An engaging introduction to the city through the experiences and memories of its residents, historic objects and changing exhibitions. Several other museums are just a short walk away.",
     highlights: ["Local stories and multimedia", "Historic municipal building", "Easy pairing with artist-house museums"],
     tip: "Combine it with Rubin Museum, Bialik House or Liebling Haus nearby. Check the Bialik Square combined ticket before buying multiple admissions.",
     url: "https://taycm.org.il/en/info-en/", featured: true,
@@ -54,7 +54,7 @@ export const museums: MuseumEntry[] = [
     priceNis: 40,
     admission: "Adult ₪40; under 18 free with adult", booking: "Check exhibitions; groups should arrange tours",
     highlightsForFamilies: "Free under-18 entry with an accompanying adult.",
-    intro: "The former home of painter Reuven Rubin brings his work and the early cultural life of Tel Aviv into a domestic setting. A rewarding contrast with the main art museum.",
+    intro: "Explore Reuven Rubin's paintings and Tel Aviv's early cultural history in the artist's former home. A rewarding contrast with the main art museum.",
     highlights: ["Works by Reuven Rubin", "Historic artist's home", "Short central-city visit"],
     tip: "It is only a short walk from the City Museum; check which rooms and displays are open.",
     url: "https://rubinmuseum.org.il/en/company/visit/main/",
@@ -127,7 +127,7 @@ export const museums: MuseumEntry[] = [
     priceNis: 58,
     admission: "Adult ₪58; under 18 free for regular museum entry", booking: "Exhibitions and activities may need separate tickets",
     highlightsForFamilies: "MUZA Park and selected grounds are free to enter during opening hours; exhibitions and events are separate.",
-    intro: "A leafy multi-pavilion museum campus with archaeology, historical craft, photography and changing displays. The grounds are a real part of the experience.",
+    intro: "Set in spacious gardens, the museum has several exhibition buildings dedicated to archaeology, traditional crafts and photography.",
     highlights: ["Archaeological and material-culture collections", "Outdoor heritage spaces", "Changing exhibitions"],
     tip: "The Lasky Planetarium is a separate attraction within MUZA and may require a separate ticket. Check the museum for reopening news.",
     closureNote: "Planetarium closed as of November 2026.",
@@ -141,7 +141,7 @@ export const museums: MuseumEntry[] = [
     openingDays: "Sun & Tue–Thu 09:00–17:00; Mon 09:00–15:00; Fri 09:00–11:00 (closed Sat)",
     priceNis: 30,
     admission: "Adult ₪30; ages 6–18 ₪20", booking: "Advance booking by phone or WhatsApp: 03-5459800 (ages 6+)",
-    intro: "An immersive, guided group experience follows young Palmach recruits through the period leading to Israel's independence. This is a structured timed presentation, not a self-guided gallery.",
+    intro: "An immersive, guided group experience follows young Palmach recruits through the period leading to Israel's independence. Visits take place in guided groups at scheduled times.",
     highlights: ["90-minute immersive tour", "Palmach story and history", "Multi-language audio options"],
     tip: "Ask about English-language translation headphones when arranging your timed visit.",
     url: "https://palmach.org.il/en/museum/visit/",

@@ -44,7 +44,7 @@ const hotelNotes: Record<string, HotelNote> = {
     kind: "Luxury hotel",
     summary: "An established Carmel hotel near the Louis Promenade, with gardens, outdoor pools and bay views.",
     bestFor: "Couples and families who prefer an upscale Carmel base",
-    consider: "Room capacity, pool schedules and executive-area age rules vary; confirm the exact offer.",
+    consider: "Check how many guests your room accommodates, pool opening hours and age restrictions in executive areas.",
     beach: "Hilltop setting; travel to the beach",
   },
   "haifa-schumacher": {
@@ -65,21 +65,21 @@ const hotelNotes: Record<string, HotelNote> = {
     kind: "Carmel family hotel",
     summary: "A Carmel Center hotel with a heated indoor pool, near viewpoints and city restaurants.",
     bestFor: "Families wanting a hilltop base and an indoor swimming option",
-    consider: "Confirm child access to the pool, room occupancy and health-club rules.",
+    consider: "Check whether children can use the pool and how many guests each room accommodates. Review the health club's rules.",
     beach: "Separate trip to the shore",
   },
   "haifa-leonardo-plaza": {
     kind: "Beachfront hotel",
-    summary: "A southern-seafront hotel with beach access, swimming pools and date-dependent children's activities.",
+    summary: "A hotel on Haifa's southern beachfront with beach access, swimming pools and seasonal children's activities.",
     bestFor: "Families whose holiday centers on the beach and promenade",
-    consider: "Check the actual suite layout, pool arrangements and children's club dates.",
+    consider: "Check the suite layout, pool opening hours and kids' club schedule.",
     beach: "Beach access from the pool area",
   },
   "haifa-golden-crown": {
     kind: "Lower-city hotel",
     summary: "A modern hotel near the German Colony and downtown, convenient for urban sightseeing and dining.",
     bestFor: "Visitors prioritizing a lower-city base",
-    consider: "Check parking, room outlook and the route to your train station or cruise terminal.",
+    consider: "Check parking, room views and transport to the railway station or cruise terminal.",
     beach: "Urban hotel; travel to the coast",
   },
   "haifa-nof": {
@@ -109,7 +109,7 @@ const groupCopy: Record<string, { title: string; eyebrow: string; advice: string
   luxury: {
     title: "Luxury & romantic stays",
     eyebrow: "German Colony design or Carmel views",
-    advice: "Choose Botanica for a design-led, age-restricted German Colony stay or Dan Carmel for a larger hilltop hotel with pools and family facilities.",
+    advice: "Choose Botanica for a stylish hotel with age restrictions in the German Colony, or Dan Carmel for a larger hilltop hotel with pools and family facilities.",
   },
   boutique: {
     title: "Boutique & heritage hotels",
@@ -124,7 +124,7 @@ const groupCopy: Record<string, { title: string; eyebrow: string; advice: string
   "mid-range": {
     title: "Practical city hotels",
     eyebrow: "Downtown access or a Carmel outlook",
-    advice: "Golden Crown suits a lower-city base, while Nof offers a Carmel address and bay views. Check overall value for your actual dates.",
+    advice: "Choose Golden Crown for a stay in downtown Haifa or Nof for views over the bay from Mount Carmel. Compare prices for your travel dates.",
   },
   budget: {
     title: "Independent & budget-minded stays",
@@ -188,9 +188,9 @@ function trackedExpediaBrowseLink(pageKey: string) {
 }
 
 const bookingTips = [
-  { title: "Choose the right elevation", text: "A nearby point on the map may be up a steep slope. Check walks, steps and the Carmelit or bus connection." },
+  { title: "Consider Haifa's steep hills", text: "A nearby point on the map may be up a steep slope. Check walks, steps and the Carmelit or bus connection." },
   { title: "Confirm your beach plan", text: "For beach days, choose the southern seafront. Mount Carmel hotels offer bay views with a separate journey to the shore." },
-  { title: "Match the room to your party", text: "Check all guest ages, bed arrangements, connecting rooms and any adults-only policy before paying." },
+  { title: "Choose the right room for your group", text: "Check all guest ages, bed arrangements, connecting rooms and any adults-only policy before paying." },
   { title: "Compare actual facilities", text: "Pools, plunge pools, spa treatments and children's activities can have different seasons or access rules." },
   { title: "Check transport and parking", text: "Confirm train station, parking charges and the exact drop-off point, particularly for a late arrival or cruise." },
   { title: "Review the total price", text: "Compare the same dates, guests, meals and cancellation terms, including any parking or spa extras." },

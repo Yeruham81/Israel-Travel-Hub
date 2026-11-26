@@ -143,7 +143,7 @@ function SeasonSections(){
 }
 function HolidayAndWeather(){
   return <section id="planning" aria-labelledby="planning-heading" className="mt-12 scroll-mt-24">
-    <SectionHeading id="planning" title="Holidays, weather and planning around your dates" intro="The month gives you a starting point. Religious calendars, transport schedules, weather warnings and your particular itinerary determine what is practical."/>
+    <SectionHeading id="planning" title="Holidays, weather and planning around your dates" intro="When choosing your travel dates, consider Jewish holidays, transport schedules and weather conditions."/>
     <div className="grid gap-5 lg:grid-cols-2">
       <article className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="text-lg font-bold">Holidays can change the entire day</h3>
