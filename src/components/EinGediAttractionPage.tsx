@@ -51,7 +51,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight title="Nahal David - the short waterfall approach" image={{ src: oasisPhoto, alt: "Freshwater and lush greenery in the Nahal David area of Ein Gedi oasis" }}>
-        <p>For a short nature visit, I would start at Nahal David. After the October 2026 floods, the park authority describes a <strong>walk of around ten minutes to the first waterfall</strong>. The pool below it currently has no water because of flood debris; the former longer waterfall circuit should not be assumed open.</p>
+        <p>For a short nature visit, I would start at Nahal David. After the October 2026 floods, the park authority describes a <strong>walk of around ten minutes to the first waterfall</strong>. Flood debris has left the pool below the waterfall dry. Check which longer trails have reopened before visiting.</p>
         <p>There are accessibility features on the approach, but the section available on your visit may be shorter than the usual paved route. <a href={official.david} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the official Nahal David route update</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight
@@ -72,7 +72,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
         title="Ein Gedi Spring, higher paths and viewpoints"
         image={{ src: desertOverlook, alt: "Desert hiking ledge above Ein Gedi with views down to the Dead Sea" }}
       >
-        <p>Experienced hikers can explore the upper paths towards Ein Gedi Spring and Dodim Cave when those routes are open. The park describes a roughly three-hour route from Tel Goren, with an early last-entry time (currently listed as 10:00 on its English visitor page).</p>
+        <p>Experienced hikers can explore the upper paths towards Ein Gedi Spring and Dodim Cave when those routes are open. The hike from Tel Goren takes around three hours. The park currently lists 10:00 as the latest entry time.</p>
         <p>This is a different outing from the short Nahal David waterfall visit. Check the <a href={official.overview} target="_blank" rel="noopener noreferrer" className={inlineLink}>latest route-specific entry and exit times</a> before choosing it.</p>
       </AttractionHighlight>
       <AttractionHighlight
@@ -81,7 +81,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
         note={<>Mosaic photo: <a href="https://commons.wikimedia.org/wiki/File:Ein_Gedi_synagogue058.JPG" target="_blank" rel="noopener noreferrer" className={inlineLink}>Stéphanie Gromann / Wikimedia Commons</a> (attribution license).</>}
       >
         <p>Just south of the Nahal David entrance, Ein Gedi Antiquities National Park preserves a late-antique synagogue and mosaic floor, offering a different perspective on the oasis's history.</p>
-        <p>This archaeological site has a separate, lower-priced entrance ticket if visited on its own. Combine a shorter nature walk with a visit to the accessible ancient synagogue.</p>
+        <p>A cheaper admission ticket is available if you visit only the ancient synagogue. Combine a shorter nature walk with a visit to the accessible ancient synagogue.</p>
         <a href={official.antiquities} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official ancient synagogue visitor information</a>
       </AttractionHighlight>
     </div>
@@ -131,9 +131,9 @@ export const einGediDestinationContent: AttractionDestinationContent = {
           <li><strong>Flash floods:</strong> Never enter a canyon when storms or flood warnings affect its drainage area, even if the sky above you is clear.</li>
           <li><strong>Heat and water:</strong> Carry drinking water, a hat and closed hiking shoes. Plan longer hikes for cooler hours and do not drink stream water.</li>
           <li><strong>Accessible areas:</strong> A roughly 500-metre paved Nahal David approach, resting points and the synagogue have accessibility features; natural canyon routes are often unsuitable for wheelchairs.</li>
-          <li><strong>Facilities:</strong> Parking, restrooms, shaded picnic spots and a visitor service point are available at designated entrances.</li>
+          <li><strong>Facilities:</strong> Parking, toilets, shaded picnic areas and visitor information are available at designated entrances.</li>
           <li><strong>Wildlife:</strong> Keep your distance from ibex and hyrax, and never offer food to animals.</li>
-          <li><strong>Swimming:</strong> Pools and water access depend on the particular trail's open status; the Dead Sea shoreline beside the reserve is not a designated swimming beach.</li>
+          <li><strong>Swimming:</strong> Access to pools depends on which trails are open. The Dead Sea shoreline beside the reserve is not a designated swimming beach.</li>
         </ul>
         <p className="mt-3 text-sm leading-relaxed">Contact Nahal David at <a href="tel:+97286584285" className={inlineLink} dir="ltr">{info.davidPhone}</a>, Nahal Arugot at <a href="tel:+97286118860" className={inlineLink} dir="ltr">{info.arugotPhone}</a>, or Ein Gedi Antiquities at <a href="tel:+97289170586" className={inlineLink} dir="ltr">{info.antiquitiesPhone}</a> for entrance-specific guidance.</p>
       </div>
@@ -141,7 +141,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Ein Gedi's entrances lie along <strong>Route 90 on the western shore of the Dead Sea</strong>. Nahal David, Nahal Arugot and the ancient synagogue are distinct visitor stops, so check the location on your reservation before navigating.</p>
+      <p>Ein Gedi's entrances lie along <strong>Route 90 on the western shore of the Dead Sea</strong>. Nahal David, Nahal Arugot and the ancient synagogue have separate entrances. Use the entrance listed on your reservation.</p>
       <div className="grid gap-3 sm:grid-cols-3" data-testid="ein-gedi-three-entrances">
         <article className="rounded-xl border bg-card p-3">
           <h3 className="font-serif text-lg font-semibold">Nahal David</h3>
@@ -189,7 +189,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
         <div className="mt-3 space-y-3 text-sm leading-relaxed sm:text-base">
           <div><strong>A short, easy visit (30–60 minutes):</strong> Start at Nahal David for the ten-minute waterfall approach and enjoy the oasis scenery at a relaxed pace.</div>
           <div><strong>Nature and history (1½–2½ hours):</strong> Add the ancient synagogue and its mosaics, with enough time for the separate entrance.</div>
-          <div><strong>A challenging hike (3–4+ hours):</strong> For experienced hikers, consider Nahal Arugot or a permitted upper route, starting early enough for the designated entry cutoff.</div>
+          <div><strong>A challenging hike (3–4+ hours):</strong> Experienced hikers can explore Nahal Arugot or one of the open upper trails. Arrive before the last entry time.</div>
         </div>
         <p className="mt-3 text-sm leading-relaxed sm:text-base">For a full-day excursion, I recommend choosing one main Ein Gedi trail and adding Masada and an authorized Dead Sea beach at Ein Bokek only if the travel times and opening hours fit comfortably.</p>
       </div>
@@ -233,7 +233,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
   ),
   faqs: [
     { q: "Is Ein Gedi Nature Reserve open?", a: "Yes, but flood damage has altered several routes. Nahal David currently offers a short walk to its first waterfall, while Nahal Arugot and the upper trails have different difficulty and entry rules. Check the current park notice before travelling." },
-    { q: "Do I need to reserve entry?", a: "Yes. The park requires advance visit coordination for each nature-reserve entrance separately. Use the official Nahal David or Nahal Arugot page to select a visit time. The ancient synagogue has its own visitor arrangements." },
+    { q: "Do I need to reserve entry?", a: "Yes. Book your visit separately for each nature reserve entrance you plan to use. Use the official Nahal David or Nahal Arugot page to select a visit time. The ancient synagogue has its own visitor arrangements." },
     { q: "Which Ein Gedi walk is suitable for families?", a: "Nahal David's short waterfall approach is usually the simpler choice. The modified Nahal Arugot route to the Hidden Waterfall is intended for experienced hikers, so choose it only if everyone is prepared for the difficulty." },
     { q: "Is Ein Gedi wheelchair accessible?", a: "The Nahal David entrance area has accessible features, and the ancient synagogue and its mosaic floor are accessible. Confirm the exact open section before arriving; natural canyon trails are generally not wheelchair accessible." },
     { q: "Can I swim in the Dead Sea at Ein Gedi?", a: "The reserve's shoreline is not a designated Dead Sea swimming beach. For a swim, plan a separate stop at an authorized beach, such as the public beach in Ein Bokek." },

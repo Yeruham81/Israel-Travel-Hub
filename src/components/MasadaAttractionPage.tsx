@@ -57,18 +57,18 @@ export const masadaDestinationContent: AttractionDestinationContent = {
         title="The ancient synagogue, storerooms and casemate wall"
         image={{ src: ruinsPhoto, alt: "Excavated stone rooms, walls and archaeological remains on the Masada plateau" }}
       >
-        <p>Walk among the stone storerooms, residential structures and the synagogue associated with the Jewish rebel occupation. Together they reveal how a remote hilltop fortress supported a large population during the Roman siege.</p>
+        <p>Explore the ancient storerooms, living quarters and synagogue used by the Jewish rebels. Together they reveal how a remote hilltop fortress supported a large population during the Roman siege.</p>
         <p>I recommend allowing time to read the archaeological signs and enjoy the famous viewpoints.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Roman siege camps and ramp">
-        <p>From the western side and several viewpoints, you can still make out the Roman siege ramp and the outlines of military camps in the desert below. They help explain the engineering effort behind Rome's assault on the fortress.</p>
+        <p>From the western side and several viewpoints, you can still make out the Roman siege ramp and the outlines of military camps in the desert below. These remains reveal how the Roman army laid siege to the fortress.</p>
         <p>The shorter <a href={official.romanRamp} target="_blank" rel="noopener noreferrer" className={inlineLink}>Roman Ramp Trail</a> approaches the plateau from the western entrance, not from the cable-car station.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The steep Snake Path"
         image={{ src: snakePathPhoto, alt: "Steep winding Snake Path climbing the eastern side of Masada" }}
       >
-        <p>The Snake Path zigzags up the eastern cliff. Its approximately 2 km ascent climbs around 350 m and takes about an hour for fit hikers. Heat restrictions can close it to ascent or descent well before the park closes.</p>
+        <p>The Snake Path zigzags up the eastern cliff. Its approximately 2 km ascent climbs around 350 m and takes about an hour for fit hikers. In hot weather, the trail may close to hikers several hours before the park closes.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The cable car to the summit"
@@ -77,14 +77,14 @@ export const masadaDestinationContent: AttractionDestinationContent = {
         <p>For an easier ascent, the cable car leaves from Masada East and takes around three minutes to reach the summit. It is paid separately from park admission, and the last ascent normally leaves one hour before the park closes.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Yigael Yadin Masada Museum">
-        <p>Located at the eastern visitor complex, the museum displays archaeological finds from the excavations, including objects linked to Herod, the rebels and the Roman army.</p>
+        <p>The museum at the eastern entrance displays artifacts from Herod's palace, the Jewish rebels and the Roman army.</p>
         <p>A museum visit is <strong>included with regular park admission</strong>, but a separate time reservation is required. Museum-only entry costs {fees.museumOnly}. <a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Museum and booking details</a>.</p>
       </AttractionHighlight>
     </div>
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Park admission and cable-car travel are priced separately. The visitor rates and operating hours below apply to your chosen date and admission category.</p>
+      <p>Park admission and cable-car travel are priced separately.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="masada-hours-tickets">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">National park hours</h3>
@@ -141,7 +141,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="masada-visitor-essentials">
         <h3 className="font-serif text-xl font-semibold">Museum, reservations and practical essentials</h3>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li><strong>Reservations:</strong> Booking a park timeslot ahead helps guarantee entry, particularly during busy periods. The museum needs its own timed reservation even when admission is included.</li>
+          <li><strong>Reservations:</strong> Booking a park timeslot ahead helps guarantee entry, particularly during busy periods. You must reserve a time to visit the museum, even if admission is included in your ticket.</li>
           <li><strong>Museum hours:</strong> Sunday–Thursday and Saturday, 08:30–15:30; Friday and holiday eves, 08:30–14:30, subject to special closures. Reserve in advance.</li>
           <li><strong>Accessibility:</strong> The east-side cable car, bridge, many plateau paths and the museum are accessible. Descending to the Northern Palace terraces requires numerous steps.</li>
           <li><strong>What to bring:</strong> Water, hat, sun protection and sturdy shoes. Shade is limited on the plateau; sudden desert flooding can also affect roads and trails.</li>
@@ -165,7 +165,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Most visitors arriving from the Dead Sea use <strong>Masada East</strong>. Choose <strong>Masada West</strong> if you plan to climb the Roman Ramp or attend the evening show. The approaches and facilities differ.</p>
+      <p>Most visitors arriving from the Dead Sea use <strong>Masada East</strong>. Choose <strong>Masada West</strong> if you plan to climb the Roman Ramp or attend the evening show.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="masada-two-entrances">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Masada East - Route 90</h3>
@@ -263,7 +263,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
     { q: "Which Masada entrance should I use?", a: "Masada East serves the cable car, Snake Path and museum; Masada West serves the Roman Ramp and night show. Check the directions for your chosen entrance in the How to get there section." },
     { q: "Can I see sunrise at Masada using the cable car?", a: "The Snake Path can open before dawn, subject to weather restrictions. Regular cable-car hours start later; special sunrise cable-car departures run only on selected dates and require booking." },
     { q: "How difficult is the Snake Path?", a: "It is a steep ascent of around 2 km with roughly 900 steps, taking about an hour for fit hikers. Summer heat may close ascent as early as 07:00. Check the park's current instructions." },
-    { q: "Do I need to reserve entry or the museum?", a: "Advance park timeslot coordination is recommended because it guarantees entry when there is capacity pressure. For the Yigael Yadin Museum, a separate timed reservation is required even if the museum is included with paid park entry." },
+    { q: "Do I need to reserve entry or the museum?", a: "Book your visit in advance to guarantee entry during busy periods. For the Yigael Yadin Museum, a separate timed reservation is required even if the museum is included with paid park entry." },
     { q: "How long does a visit to Masada take?", a: "Allow 2–3 hours on site for the main ruins and viewpoints, plus extra time for hiking, the museum, or a separate Dead Sea stop." },
     { q: "Where does the Masada night show take place?", a: "At Masada West, with separate admission and advance booking. Its seasonal starting times are listed in the visitor information section." },
   ],

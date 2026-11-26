@@ -40,7 +40,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
     { icon: "highlights", label: "Don't miss", value: "Theater & harbor", note: "Hippodrome, ancient port and Crusader walls" },
     { icon: "access", label: "Accessibility", value: "Partial / varied", note: "Several accessible areas; uneven ruins elsewhere" },
   ],
-  glanceNote: <>The <strong>aqueduct by the beach</strong> is a separate stop from the main national-park circuit. Allow time to travel between them.</>,
+  glanceNote: <>The <strong>aqueduct</strong> is located beside the beach, north of the main archaeological park. Allow time to travel between them.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight
@@ -48,17 +48,17 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
         image={{ src: theaterPhoto, alt: "Tiered stone seating and stage area of the Roman theater at Caesarea" }}
       >
         <p>Start with Caesarea's restored Roman theater, where the Mediterranean is almost part of the scenery. It was built in Herod's time and still serves as a venue for performances.</p>
-        <p>Walk up into the seating for a view of the stage and coastline. This is a good place to picture the scale of the port city before moving on to the excavations.</p>
+        <p>Walk up into the seating for a view of the stage and coastline. From here, you can appreciate the scale of the ancient Roman city.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The hippodrome and promontory palace">
-        <p>The long arena beside the sea hosted horse and chariot races in Roman times. Nearby, the remains of the promontory palace stretch out towards the waves, showing how closely royal life and the coastline were linked.</p>
-        <p>Allow time to walk the sea-facing route between these remains.</p>
+        <p>The long arena beside the sea hosted horse and chariot races in Roman times. Nearby, the remains of Herod's seaside palace extend towards the Mediterranean.</p>
+        <p>Enjoy a walk along the coast between the ruins.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The ancient harbor and Crusader walls"
         image={{ src: "/images/attractions/caesarea-crusader-arches.svg", alt: "Historic stone arches within the Crusader quarter at Caesarea" }}
       >
-        <p>Herod built one of the ancient Mediterranean's ambitious artificial harbors here. Later rulers reshaped the city, leaving Crusader walls, gates and stone-lined streets around today's harbor area.</p>
+        <p>Herod built one of the most impressive artificial harbors of the ancient Mediterranean here. Later rulers reshaped the city, leaving Crusader walls, gates and stone-lined streets around today's harbor area.</p>
         <p>I recommend walking through the northern harbor quarter and taking time to see both the sea and the fortifications. Cafés and restaurants make this a pleasant place for a break.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The harbor visitors' center in Herod's vaults">
@@ -69,14 +69,14 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
         title="The aqueduct on the beach"
         image={{ src: "/images/attractions/caesarea-aqueduct-arches.svg", alt: "Roman aqueduct arches beside the sandy beach at Caesarea" }}
       >
-        <p>North of the main archaeological circuit, the aqueduct's long row of stone arches once carried fresh water into Roman Caesarea. Today it stands beside the beach and is especially striking against the sea.</p>
+        <p>North of the archaeological park, the aqueduct's stone arches once carried fresh water to Roman Caesarea. Today it stands beside the beach and is especially striking against the sea.</p>
         <p>Visit the aqueduct as a separate nearby stop, preferably by car or with a driver. It is not the same entrance as the theater or harbor, and beach access and swimming conditions should be checked separately. <a href={aqueductDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Directions to the aqueduct</a>.</p>
       </AttractionHighlight>
     </div>
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Caesarea National Park is managed by the Israel Nature and Parks Authority. Its archaeological areas operate on seasonal hours; the harbor precinct can remain active later, while the harbor visitors' center follows its own schedule.</p>
+      <p>Caesarea National Park is managed by the Israel Nature and Parks Authority. Opening hours vary by season. The harbor may remain open later than the archaeological park, and the visitors' center has its own opening hours.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="caesarea-hours-tickets">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">National park opening hours</h3>
@@ -131,7 +131,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Caesarea National Park lies on the Mediterranean coast, between Tel Aviv and Haifa, west of Or Akiva. The two main visitor access areas are by the southern Roman theater and the northern Crusader harbor gate.</p>
+      <p>Caesarea National Park lies on the Mediterranean coast, between Tel Aviv and Haifa, west of Or Akiva. The two main entrances are near the Roman theater in the south and the Crusader harbor gate in the north.</p>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">

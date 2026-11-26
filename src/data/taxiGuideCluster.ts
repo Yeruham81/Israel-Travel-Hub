@@ -105,7 +105,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         ],
         inlineLinks: [
           { text: "airport taxi guide", to: travelGuidePaths.airportTaxis },
-          { text: "Ben Gurion Airport arrival guide", to: travelGuidePaths.arrival },
+          { text: "airport arrival guide", to: travelGuidePaths.arrival },
           { text: "Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
           { text: "Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
           { text: "Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },

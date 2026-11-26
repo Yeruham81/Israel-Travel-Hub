@@ -48,21 +48,21 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
         title="The turquoise sea grottoes"
         image={{ src: "/images/attractions/rosh-hanikra-blue-grotto.webp", alt: "Bright turquoise sea inside a naturally carved rock grotto at Rosh Hanikra" }}
       >
-        <p>Inside the grottoes, waves enter narrow openings in the rock, and the changing light turns the water shades of blue and green. The sound and movement of the sea are part of what makes this a memorable visit.</p>
-        <p>Walk at your own pace along the marked grotto route. Look for the natural formation known as <strong>Elephant's Foot</strong> and the textures cut into the chalk cliffs. Some sections have steps, low light and damp ground.</p>
+        <p>Inside the grottoes, waves enter narrow openings in the rock, and the changing light turns the water shades of blue and green. Listen to the waves echoing through the sea caves.</p>
+        <p>Walk at your own pace along the marked grotto route. Look for the rock formation known as <strong>Elephant's Foot</strong> and the patterns carved into the white cliffs by the sea. Some sections have steps, low light and damp ground.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The railway tunnel and audiovisual presentation"
         image={{ src: "/images/attractions/rosh-hanikra-railway-tunnel.webp", alt: "Illuminated rock-cut tunnel at the Rosh Hanikra visitor site" }}
       >
-        <p>Near the grottoes, the old railway tunnel recalls the line built through the headland during the Second World War to link Haifa with Beirut and Tripoli. Today the visitor experience includes an audiovisual presentation telling the story of the cliffs, caves and railway.</p>
+        <p>Near the grottoes, the old railway tunnel recalls the line built through the headland during the Second World War to link Haifa with Beirut and Tripoli. Today, a short film tells the story of the cliffs, sea caves and historic railway.</p>
               </AttractionHighlight>
       <AttractionHighlight
         title="The chalk headland above the Mediterranean"
         image={{ src: "/images/attractions/rosh-hanikra-cliffs.webp", alt: "White limestone and chalk cliffs at Rosh Hanikra rising directly from the Mediterranean Sea" }}
       >
         <p>The pale headland is a landmark of the northern coast. From the designated viewpoints, take in the layers of rock and deep-blue water, then look south along the Western Galilee coastline towards Achziv and Nahariya.</p>
-        <p>Stay within the visitor areas and observe any posted border or security instructions; the location is immediately beside Israel's northern frontier.</p>
+        <p>Rosh Hanikra is right beside the Lebanese border. Stay within designated visitor areas and follow local security instructions.</p>
       </AttractionHighlight>
     </div>
   ),
@@ -151,14 +151,14 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
   ),
   historyContent: (
     <div className="mt-4 space-y-3">
-      <p>The headland is formed from ancient marine sediments. Over time, waves and water worked into cracks in the pale rock, gradually creating the grottoes and passages visitors can see today. Changing light and sea conditions give the caves a different character from one visit to the next.</p>
+      <p>The headland is formed from ancient marine sediments. Over time, waves and water worked into cracks in the pale rock, gradually creating the grottoes and passages visitors can see today. The changing light and movement of the sea constantly transform the appearance of the caves.</p>
       <p>During the Second World War, military engineers carved railway tunnels through the cliffs for the <strong>Haifa–Beirut–Tripoli railway</strong>. The line connected ports and military routes along the eastern Mediterranean; the connection across the border was interrupted in the events surrounding 1948.</p>
-      <p>The historic rail tunnel and the modern grottoes walkway are different features of the headland. The visitor film explains part of this story, while the surrounding rock reveals a much older geological history.</p>
+      <p>The visitor film explains part of this story, while the surrounding rock reveals a much older geological history.</p>
     </div>
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>A northern coastal tour can include Rosh Hanikra, Akko and Haifa. Check whether your chosen route actually stops at the grottoes, whether admission is included and whether the cable car is operating on the date.</p>
+      <p>A northern coastal tour can include Rosh Hanikra, Akko and Haifa. Before booking a tour, check whether it includes the grottoes, admission and the cable-car ride.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/caesarea-haifa-acre/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="rosh-hanikra-tours-card">
           <img src={akkoPhoto} alt="Harbour in Old Akko on a northern Israel coastal tour" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />
@@ -185,7 +185,7 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
     { q: "What are the opening hours?", a: "The site is open daily. Last cable-car entry is at 16:00 in autumn and winter and 18:00 in summer; the site closes one hour later. Check the official homepage for daily hours and changes due to holidays or weather." },
     { q: "How much time do I need?", a: "Allow about 60–90 minutes for the viewpoints, cable car, grotto walk and film, plus any queueing time." },
     { q: "Is Rosh Hanikra wheelchair accessible?", a: "Partly. There is an accessible bridge and cable-car access, and visitors using wheelchairs can reach the first grotto and part of the second. The remaining cave path has narrow passages and steps." },
-    { q: "Can I visit the caves without taking the cable car?", a: "The regular ticket includes the cable car to the lower visitor area. Contact the site directly to discuss any alternative access arrangements required for your visit." },
+    { q: "Can I visit the caves without taking the cable car?", a: "The standard ticket includes the cable-car ride down to the grottoes. If you need an alternative way to reach them, contact Rosh Hanikra directly." },
     { q: "Is swimming permitted inside the grottoes?", a: "No. This is a visitor walking route through sea caves, not a designated bathing beach." },
     { q: "What else can I visit nearby?", a: "Achziv Beach, Nahariya and Old Akko make good nearby stops. Haifa is an option if you are travelling farther south." },
   ],

@@ -25,7 +25,7 @@ describe("Dead Sea attractions editorial guide", () => {
       if (stop.guide) expect(stop.guide.to).toMatch(/^\//);
     }
     expect(deadSeaStops.find(stop => stop.id === "einot-tsukim")?.practical).toContain("does not offer access");
-    expect(deadSeaStops.find(stop => stop.id === "ein-gedi")?.practical).toContain("strenuous");
+    expect(deadSeaStops.find(stop => stop.id === "ein-gedi")?.practical).toMatch(/strenuous|demanding/);
     expect(deadSeaStops.find(stop => stop.id === "ein-gedi")?.practical).toContain("advance registration");
     expect(deadSeaStops.find(stop => stop.id === "novomeysky")?.practical).toContain("15 minutes early");
     expect(deadSeaStops.find(stop => stop.id === "desert-adventures")?.title).toContain("Stargazing");

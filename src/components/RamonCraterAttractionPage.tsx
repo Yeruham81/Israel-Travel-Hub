@@ -50,19 +50,19 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight title="Ramon Crater Visitor Center">
-        <p>Start at the visitor center on the crater rim. Its exhibitions combine the story of Israeli astronaut Ilan Ramon with the geology, wildlife and natural history of the makhtesh. The exhibitions provide context for the landscapes you will see outside.</p>
+        <p>Start at the visitor center on the crater rim. Its exhibitions combine the story of Israeli astronaut Ilan Ramon with the geology, wildlife and natural history of the makhtesh. The exhibitions help explain how this remarkable desert landscape was formed.</p>
         <p>Allow roughly an hour for the indoor experience and reserve an entry time. You can enjoy many of the surrounding viewpoints without a visitor-center ticket. <a href={official.center} target="_blank" rel="noopener noreferrer" className={inlineLink}>Visitor information and reservations</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Camel Hill and the crater-rim viewpoints" image={{ src: camelHillPhoto, alt: "Rocky viewpoint at Camel Hill overlooking the Negev landscape" }}>
         <p>The town-side promenade and Camel Hill (Har Gamal) give you sweeping views of the vast crater basin and its ridges. I would visit in the early morning or late afternoon, when softer light brings out the colours of the rocks.</p>
-        <p>These are good options when you have limited time or prefer to enjoy the desert without a strenuous hike. Keep to the marked approaches and stay clear of exposed cliff edges.</p>
+        <p>Both viewpoints are ideal for a short visit with little walking. Keep to the marked approaches and stay clear of exposed cliff edges.</p>
       </AttractionHighlight>
       <AttractionHighlight title="HaMinsara — the Carpentry Shop" image={{ src: minsaraPhoto, alt: "Rectangular and hexagonal sandstone prisms at HaMinsara in Ramon Crater" }}>
-        <p>HaMinsara is a short geological walk famous for polygonal stone columns that resemble pieces of timber. Their unusual shape makes this a rewarding stop even for visitors who are not planning a long trail.</p>
+        <p>HaMinsara is a short geological walk famous for polygonal stone columns that resemble pieces of timber. These unusual rock formations are well worth the short walk.</p>
         <p>Access is via a short track from Route 40, south of Mitzpe Ramon. <a href={official.minsara} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the official approach and walking information</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Ramon Colors National Park" image={{ src: widePhoto, alt: "Wide desert landscape showing the rocky slopes of Makhtesh Ramon" }}>
-        <p>Drive through the restored former quarry area to see remarkable bands of coloured stone, old mining features and accessible viewing platforms. The signed scenic route is particularly convenient for visitors who want to explore the crater floor with short stops.</p>
+        <p>Drive through the restored former quarry area to see remarkable bands of coloured stone, old mining features and accessible viewing platforms. Follow the scenic driving route and stop at viewpoints along the crater floor.</p>
         <p>The park is open from sunrise to sunset. Respect temporary restoration signs and stay out of the water-filled quarry pits; no drinking water is available on the route. <a href={official.colors} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramon Colors official visitor page</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Nahal Ardon and longer hikes">
@@ -77,7 +77,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
         <p><strong>Closed as of November 2026.</strong> <a href={official.haiRamon} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the current visiting status on the official website</a> when planning your trip.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Stargazing in the desert" image={{ src: starsPhoto, alt: "The Milky Way and a star-filled night sky above a desert tree near Ramon Crater" }}>
-        <p>Ramon Crater was designated an International Dark Sky Park in 2017. An overnight stay provides a different experience from a daytime visit, with a chance to see remarkably dark skies.</p>
+        <p>Ramon Crater was designated an International Dark Sky Park in 2017. Stay overnight to enjoy some of Israel's darkest skies and excellent stargazing opportunities.</p>
         <p>Look for a cloud-free night with little moonlight and use an authorised overnight site or guided activity. Avoid entering closed trails or driving off-road after dark. <a href={official.darkSky} target="_blank" rel="noopener noreferrer" className={inlineLink}>Dark-sky park information</a>.</p>
       </AttractionHighlight>
     </div>
@@ -132,7 +132,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Mitzpe Ramon sits on <strong>Route 40, south of Be'er Sheva</strong>. The crater rim is beside the town; HaMinsara, Ramon Colors and some trailheads are farther along or off the road. Save your actual stop before setting out.</p>
+      <p>Mitzpe Ramon sits on <strong>Route 40, south of Be'er Sheva</strong>. The crater rim is beside the town; HaMinsara, Ramon Colors and some trailheads are farther along or off the road. Save your destination on Google Maps before setting out.</p>
       <div className="grid gap-3 sm:grid-cols-3" data-testid="ramon-three-stops">
         <article className="rounded-xl border bg-card p-3">
           <h3 className="font-serif text-lg font-semibold">Visitor center</h3>
@@ -199,7 +199,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Guided desert walks, jeep excursions and night-sky experiences can introduce you to parts of the landscape that require more preparation. Check each tour's actual route, pickup location, duration and weather policy before booking.</p>
+      <p>Guided hikes, jeep tours and stargazing excursions offer more ways to explore Ramon Crater. Check each tour's actual route, pickup location, duration and weather policy before booking.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/negev-desert-ramon-crater/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
           <img src={jeepPhoto} alt="Off-road vehicle on a desert track in the Ramon Crater area" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
@@ -217,7 +217,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
     { q: "Do I have to pay to see Ramon Crater?", a: "No. Outdoor rim viewpoints are free. The indoor Ramon Visitor Center charges admission and requires an advance booking." },
     { q: "Can I enjoy Ramon Crater without hiking?", a: "Yes. The rim promenade, Camel Hill and scenic drives provide memorable views. Parts of Ramon Colors also have accessible facilities." },
     { q: "Is Hai Ramon open?", a: "Hai Ramon is closed as of November 2026. Check the official Israel Nature and Parks Authority website for its current status before travelling." },
-    { q: "Can I see the stars from Ramon Crater?", a: "The dark-sky park offers excellent potential for stargazing, but actual visibility depends on moonlight, clouds and local conditions. Use authorised viewing areas." },
+    { q: "Can I see the stars from Ramon Crater?", a: "Ramon Crater is an excellent place for stargazing, especially on clear nights with little moonlight. Use authorised viewing areas." },
   ],
   nearby: [
     { label: "Masada National Park", to: "/attractions/masada/", note: "The famous desert fortress above the Dead Sea on a separate excursion." },
