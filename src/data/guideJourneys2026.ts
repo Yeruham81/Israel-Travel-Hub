@@ -104,8 +104,8 @@ export const journeyDestinationGuides = {
         "id": "attractions",
         "title": "Add one clear attraction priority",
         "paragraphs": [
-          "Masada offers archaeology and a plateau setting, with cable-car and trail arrangements that need their own check. Ein Gedi is a nature reserve with route-specific opening conditions, not a generic swim stop. Qumran adds another archaeological focus, while Qasr el-Yahud is a separate lower-Jordan pilgrimage destination.",
-          "Choose the stop most important to your interests and leave real time for it. An outing that includes a park, a ceremony and a beach may need fewer extra stops rather than a longer list. Each attraction has its own admission fees and opening hours."
+          "Visit Masada for its ancient fortress and panoramic desert views. Check cable-car hours and hiking trail conditions before visiting. Ein Gedi Nature Reserve offers desert hiking trails and waterfalls, with access depending on trail conditions and opening hours. Qumran adds another archaeological focus, while Qasr el-Yahud is a separate lower-Jordan pilgrimage destination.",
+          "Prioritize the attractions you'd most like to visit and allow enough time to explore them. If you're combining a nature reserve, a religious ceremony and a beach visit, allow enough time for each activity. Each attraction has its own admission fees and opening hours."
         ],
         "links": [
           {
@@ -131,7 +131,7 @@ export const journeyDestinationGuides = {
         "title": "Arrival, season and the return journey",
         "paragraphs": [
           "From Jerusalem, the final destination determines whether a northern beach or the southern hotel strip suits your day. Public transport may work for a defined stop; a driver, rental or organised excursion can fit other combinations. Include the journey to the departure stop and the return after your beach or park closes.",
-          "The area can be very hot. Choose the timing and amount of outdoor walking around the local forecast, and check weather and road notices before a desert outing. Use your actual beach or hotel address when asking for a transfer, rather than a broad lake name."
+          "The area can be very hot. Choose the timing and amount of outdoor walking around the local forecast, and check weather and road notices before a desert outing. Include the name and address of your Dead Sea beach or hotel when requesting a transfer."
         ],
         "links": [
           {
@@ -168,7 +168,7 @@ export const journeyDestinationGuides = {
       },
       {
         "q": "Does a hotel spa package include everything?",
-        "a": "Read the actual package. Beach, pool, spa, changing facilities, towels and meals can be separate inclusions or charges."
+        "a": "Check whether your day package includes beach access, pools, spa facilities, changing rooms, towels and meals."
       }
     ],
     "related": [
@@ -541,7 +541,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Where do buses to Bethlehem leave from in Jerusalem?",
-      "a": "The Arab bus station just outside Damascus Gate in East Jerusalem, rather than the western Central Bus Station."
+      "a": "Buses depart from the Arab bus station near Damascus Gate in East Jerusalem."
     },
     {
       "q": "Can a Palestinian driver pick me up in Jerusalem?",
@@ -703,7 +703,7 @@ export const journeyDestinationGuides = {
           "id": "bus",
           "title": "By public bus: Egged 486 and 444",
           "paragraphs": [
-            "Egged line 486 departs from Jerusalem Central Bus Station along the Dead Sea corridor, serving stops including Ein Gedi, Masada and Ein Bokek. Line 444 continues towards Eilat and requires an advance seat reservation. Choose the bus stop nearest your actual attraction or hotel.",
+            "Egged line 486 departs from Jerusalem Central Bus Station along the Dead Sea corridor, serving stops including Ein Gedi, Masada and Ein Bokek. Line 444 continues towards Eilat and requires an advance seat reservation. Get off at the bus stop closest to your hotel or the attraction you plan to visit.",
             "For a beach day, choose the bus stop closest to Ein Bokek Central Beach or your named hotel. The operator's journey planner displays the fare for your destination and date. Check the platform, return departure and final walk from the stop. Israel Railways does not serve the Dead Sea.",
             "Buses between individual Dead Sea attractions are infrequent, and the last bus back to Jerusalem may leave early. Friday and holiday timetables are shorter, while ordinary buses generally pause for Shabbat. Plan the return from the exact stop you intend to use."
           ],
