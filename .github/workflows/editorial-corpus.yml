@@ -1,0 +1,49 @@
+name: Full Site Editorial Corpus
+on:
+  push:
+    branches: [editorial/full-site-review]
+    paths:
+      - 'scripts/export-editorial-review.mjs'
+      - '.github/workflows/editorial-corpus.yml'
+  workflow_dispatch:
+    inputs:
+      log_group:
+        description: "Group number to print to job log"
+        required: false
+        default: "1"
+permissions:
+  contents: read
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: https://www.israel-taxi.com
+      VITE_INDEXABLE: "true"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install locked dependencies
+        run: bash scripts/install-ci-dependencies.sh
+      - name: Build static HTML
+        run: bash scripts/build-validated-static.sh
+      - name: Verify and extract every canonical page
+        env:
+          EDITORIAL_LOG_GROUP: ${{ inputs.log_group || '1' }}
+        run: node scripts/export-editorial-review.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: editorial-corpus
+          path: editorial-review-export/
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,1057 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "72ab55bf70ecbcc28eab1712bcd2020cab5c9b80",
+  "groups": [
+    {
+      "id": 1,
+      "name": "Home, about and private services"
+    },
+    {
+      "id": 2,
+      "name": "Airport transfers and airport journey guides"
+    },
+    {
+      "id": 3,
+      "name": "Taxi and public transport guides"
+    },
+    {
+      "id": 4,
+      "name": "Israel itineraries"
+    },
+    {
+      "id": 5,
+      "name": "Jerusalem guides and attractions"
+    },
+    {
+      "id": 6,
+      "name": "Tel Aviv guides and attractions"
+    },
+    {
+      "id": 7,
+      "name": "Haifa, Akko, Caesarea and northern Israel"
+    },
+    {
+      "id": 8,
+      "name": "Dead Sea, Masada, Negev and Eilat"
+    },
+    {
+      "id": 9,
+      "name": "Christian sites, pilgrimage and baptism"
+    },
+    {
+      "id": 10,
+      "name": "Accommodation and neighbourhood guides"
+    },
+    {
+      "id": 11,
+      "name": "Tours and shore excursions"
+    },
+    {
+      "id": 12,
+      "name": "General travel guides and legal pages"
+    },
+    {
+      "id": 13,
+      "name": "Shared components and interactive text"
+    }
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "group": 1,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/about-me/",
+      "group": 1,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/dead-sea/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/dead-sea/family/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/dead-sea/spa/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/haifa/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/haifa/boutique/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/haifa/family/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/jerusalem/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/jerusalem/downtown/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/jerusalem/east-jerusalem/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/jerusalem/german-colony-baka/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/jerusalem/mahane-yehuda-nachlaot/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/jerusalem/mamilla-king-david/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/jerusalem/old-city/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tel-aviv/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tel-aviv/beachfront/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tel-aviv/dizengoff-city-center/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tel-aviv/florentin/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tel-aviv/jaffa/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tel-aviv/kerem-hateimanim/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tel-aviv/neve-tzedek/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tel-aviv/old-north-port/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tel-aviv/rothschild-boulevard/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tiberias/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tiberias/family/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/accommodation/tiberias/luxury/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/airport-transfers/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/airport-transfers/ein-bokek/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/airport-transfers/haifa/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/airport-transfers/jerusalem/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/airport-transfers/tel-aviv/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/akko-acre/",
+      "group": 7,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/basilica-of-the-annunciation/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/caesarea/",
+      "group": 7,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/capernaum/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/dead-sea/",
+      "group": 8,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/eilat/",
+      "group": 8,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/ein-gedi/",
+      "group": 8,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/haifa/",
+      "group": 7,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/jaffa/",
+      "group": 6,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/magdala/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/masada/",
+      "group": 8,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/mitzpe-ramon-crater/",
+      "group": 8,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/mount-of-beatitudes/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/mount-of-olives/",
+      "group": 5,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/mount-precipice/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/mount-tabor/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/mount-zion/",
+      "group": 5,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/old-city-jerusalem/",
+      "group": 5,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/qasr-el-yahud/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/rosh-hanikra/",
+      "group": 7,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/sea-of-galilee/",
+      "group": 7,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/tabgha/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/tel-megiddo/",
+      "group": 7,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/via-dolorosa/",
+      "group": 5,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/attractions/yardenit/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/car-rental/",
+      "group": 3,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/privacy-policy/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/private-driver-in-israel/",
+      "group": 1,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/shore-excursions/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/shore-excursions/ashdod/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/shore-excursions/haifa/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/terms-of-use/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/bethlehem-jericho-jordan-river/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/caesarea-haifa-acre/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/eilat-red-sea/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/food-market-tours/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/golan-heights/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/jerusalem/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/masada-dead-sea/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/nazareth-sea-of-galilee/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/negev-desert-ramon-crater/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/tours/tel-aviv-jaffa/",
+      "group": 11,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/attractions-in-tel-aviv/",
+      "group": 6,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/baptism-in-the-jordan-river/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/beaches-in-tel-aviv/",
+      "group": 6,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-arrival-tips/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-taxis/",
+      "group": 3,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-to-ein-bokek/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-to-haifa/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/best-dead-sea-hotels/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/best-esim-for-israel/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/best-hotels-in-haifa/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/best-hotels-in-tiberias/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/best-time-to-visit-israel/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/calendar-of-events/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/christian-tours-in-israel/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/churches-in-jerusalem/",
+      "group": 5,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/dead-sea-attractions/",
+      "group": 8,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/from-ben-gurion-airport-on-shabbat/",
+      "group": 2,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/getting-around-israel/",
+      "group": 3,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/getting-around-tel-aviv/",
+      "group": 3,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/israel-itinerary-10-days/",
+      "group": 4,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/israel-itinerary-3-days/",
+      "group": 4,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/israel-itinerary-5-days/",
+      "group": 4,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/israel-itinerary-7-days/",
+      "group": 4,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/israel-tours-for-seniors/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/israel-travel-tips/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/jerusalem-to-bethlehem/",
+      "group": 9,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/jerusalem-to-the-dead-sea/",
+      "group": 8,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/jerusalem-travel-guide/",
+      "group": 5,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/museums-in-haifa/",
+      "group": 7,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/museums-in-jerusalem/",
+      "group": 5,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/museums-in-tel-aviv/",
+      "group": 6,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/sherut-in-israel/",
+      "group": 3,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/shopping-in-jerusalem/",
+      "group": 5,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/taxi-fares-in-israel/",
+      "group": 3,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/taxis-in-israel/",
+      "group": 3,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/top-10-things-to-do-in-israel/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/uber-in-israel/",
+      "group": 3,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/what-to-eat-in-israel/",
+      "group": 12,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/where-to-stay-in-jerusalem/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "path": "/travel-blog/where-to-stay-in-tel-aviv/",
+      "group": 10,
+      "status": "pending",
+      "reviewedSnapshot": null,
+      "changes": 0,
+      "notes": ""
+    }
+  ],
+  "shared": [
+    {
+      "name": "Header, desktop and mobile navigation, footer",
+      "group": 13,
+      "status": "pending",
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "name": "Cookie consent and preferences",
+      "group": 13,
+      "status": "pending",
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "name": "Floating contact and share controls",
+      "group": 13,
+      "status": "pending",
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "name": "Forms, validation, success and error states",
+      "group": 13,
+      "status": "pending",
+      "changes": 0,
+      "notes": ""
+    },
+    {
+      "name": "Expandable and dynamically loaded content, filters, calendars and widgets",
+      "group": 13,
+      "status": "pending",
+      "changes": 0,
+      "notes": ""
+    }
+  ]
+}
