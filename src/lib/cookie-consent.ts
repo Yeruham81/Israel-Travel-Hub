@@ -75,7 +75,7 @@ function notify() {
 }
 /** Optional anonymous server receipt. Disabled until /admin/ is installed and privacy notice reviewed. */
 function recordConsentSelection(choice: CookieConsent): void {
-  if (import.meta.env.VITE_CONSENT_LEDGER_ENABLED !== "true") return;
+  if (import.meta.env["VITE_CONSENT_LEDGER_ENABLED"] !== "true") return;
   try {
     const body = JSON.stringify({
       eventId: crypto.randomUUID(),
