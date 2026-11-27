@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: "24"
       - name: Validate link generator
         run: node --check scripts/travelpayouts/generate-discovercars.mjs
       - name: Generate link with protected Travelpayouts API token

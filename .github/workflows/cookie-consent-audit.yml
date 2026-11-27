@@ -4,30 +4,30 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'src/components/**/*Cookie*.tsx'
-      - 'src/components/**/*Consent*.tsx'
-      - 'src/components/**/*Widget*.tsx'
-      - 'src/components/Analytics.tsx'
-      - 'src/components/Layout.tsx'
-      - 'src/components/HotelDestinationPage.tsx'
-      - 'src/components/HotelCategoryPage.tsx'
-      - 'src/components/MountOlivesAttractionPage.tsx'
-      - 'src/styles.css'
-      - 'src/components/CarRentalGuide.tsx'
-      - 'src/components/*Footer*.tsx'
-      - 'src/routes/__root.tsx'
-      - 'src/routes/car-rental*'
-      - 'src/routes/accommodation*'
-      - 'src/hooks/use-cookie-consent.ts'
-      - 'src/lib/*consent*.ts'
-      - 'src/lib/analytics.ts'
-      - 'src/lib/getyourguide-city-widget.ts'
-      - 'public/maps/**'
-      - 'public/widgets/**'
-      - 'scripts/audit-cookie-consent.cjs'
-      - 'package.json'
-      - 'bun.lock'
-      - '.github/workflows/cookie-consent-audit.yml'
+      - "src/components/**/*Cookie*.tsx"
+      - "src/components/**/*Consent*.tsx"
+      - "src/components/**/*Widget*.tsx"
+      - "src/components/Analytics.tsx"
+      - "src/components/Layout.tsx"
+      - "src/components/HotelDestinationPage.tsx"
+      - "src/components/HotelCategoryPage.tsx"
+      - "src/components/MountOlivesAttractionPage.tsx"
+      - "src/styles.css"
+      - "src/components/CarRentalGuide.tsx"
+      - "src/components/*Footer*.tsx"
+      - "src/routes/__root.tsx"
+      - "src/routes/car-rental*"
+      - "src/routes/accommodation*"
+      - "src/hooks/use-cookie-consent.ts"
+      - "src/lib/*consent*.ts"
+      - "src/lib/analytics.ts"
+      - "src/lib/getyourguide-city-widget.ts"
+      - "public/maps/**"
+      - "public/widgets/**"
+      - "scripts/audit-cookie-consent.cjs"
+      - "package.json"
+      - "bun.lock"
+      - ".github/workflows/cookie-consent-audit.yml"
 
 permissions:
   contents: read

@@ -3,19 +3,19 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'scripts/audit-travelpayouts-only.cjs'
-      - 'scripts/travelpayouts/**'
-      - 'src/data/registry.ts'
-      - 'src/data/tours.ts'
-      - 'src/data/*affiliate*'
-      - 'src/lib/*affiliate*.ts'
-      - 'src/components/*BookingPlatforms.tsx'
-      - 'src/components/*Widget*.tsx'
-      - 'src/components/ExternalProviderTourCard.tsx'
-      - 'src/components/HotelDestinationPage.tsx'
-      - 'src/components/HotelCategoryPage.tsx'
-      - 'public/widgets/**'
-      - '.github/workflows/audit-travelpayouts-only.yml'
+      - "scripts/audit-travelpayouts-only.cjs"
+      - "scripts/travelpayouts/**"
+      - "src/data/registry.ts"
+      - "src/data/tours.ts"
+      - "src/data/*affiliate*"
+      - "src/lib/*affiliate*.ts"
+      - "src/components/*BookingPlatforms.tsx"
+      - "src/components/*Widget*.tsx"
+      - "src/components/ExternalProviderTourCard.tsx"
+      - "src/components/HotelDestinationPage.tsx"
+      - "src/components/HotelCategoryPage.tsx"
+      - "public/widgets/**"
+      - ".github/workflows/audit-travelpayouts-only.yml"
   workflow_dispatch:
 
 permissions:

@@ -4,7 +4,7 @@ on:
   schedule:
     # Multiple off-peak checks so a delayed/dropped scheduled run is less
     # likely to leave the website without the latest published reference rates.
-    - cron: '17 10,13,16,19 * * *'
+    - cron: "17 10,13,16,19 * * *"
   # Routine code changes are validated offline by Full Project Validation.
   workflow_dispatch:
 
@@ -26,7 +26,7 @@ jobs:
           persist-credentials: true
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: "24"
       - name: Validate and refresh published reference rates
         run: node scripts/refresh-public-exchange-rates.mjs
       - name: Commit new official data only if publication changed
