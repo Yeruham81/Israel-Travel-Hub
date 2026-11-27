@@ -47,7 +47,7 @@ function github_recent_runs(): array {
         if (!preg_match('~^https://github\.com/Yeruham81/Israel-Travel-Hub/actions/runs/\d+$~D', $url)) continue;
         $runs[] = [
             'name' => substr((string)($item['name'] ?? 'Workflow'), 0, 160),
-            'status' => substr((string)($item['conclusion'] ?: $item['status'] ?: 'unknown'), 0, 24),
+            'status' => substr((string)(($item['conclusion'] ?? null) ?: ($item['status'] ?? 'unknown')), 0, 24),
             'branch' => substr((string)($item['head_branch'] ?? ''), 0, 100),
             'created_at' => substr((string)($item['created_at'] ?? ''), 0, 50),
             'url' => $url,
