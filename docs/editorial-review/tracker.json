@@ -577,26 +577,26 @@
     {
       "path": "/shore-excursions/",
       "group": 11,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 8,
+      "notes": "All eight page-specific group 11C edits approved and applied; Regression and rendered corpus verification pending."
     },
     {
       "path": "/shore-excursions/ashdod/",
       "group": 11,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 10,
+      "notes": "All eight page-specific group 11C edits approved and applied; Four shared port-page edits also applied, counted once across both port pages (two allocated to each for aggregate tracking). Regression and rendered corpus verification pending."
     },
     {
       "path": "/shore-excursions/haifa/",
       "group": 11,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 10,
+      "notes": "All eight page-specific group 11C edits approved and applied; Four shared port-page edits also applied, counted once across both port pages (two allocated to each for aggregate tracking). Regression and rendered corpus verification pending."
     },
     {
       "path": "/terms-of-use/",
@@ -628,7 +628,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/tours/eilat-red-sea/",
@@ -636,7 +636,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/tours/food-market-tours/",
@@ -644,7 +644,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/tours/golan-heights/",
@@ -652,7 +652,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/tours/jerusalem/",
@@ -676,7 +676,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/tours/negev-desert-ramon-crater/",
@@ -684,7 +684,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/tours/tel-aviv-jaffa/",
