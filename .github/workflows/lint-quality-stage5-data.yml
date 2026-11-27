@@ -69,13 +69,19 @@ jobs:
             const visit=node=>{
               const children=[];
               ts.forEachChild(node,child=>{children.push(visit(child));});
+              // A plain object property key has the same semantics whether
+              // its identifier is quoted or unquoted. Do not normalize
+              // computed keys, shorthand properties, or literal values.
+              const staticKey=node.parent&&ts.isPropertyAssignment(node.parent)&&node.parent.name===node&&(ts.isIdentifier(node)||ts.isStringLiteral(node));
               const literal=ts.isStringLiteral(node)?node.text:undefined;
               const leaf=children.length===0?(literal??node.getText(parsed)):undefined;
-              return [node.kind,node.flags&ts.NodeFlags.OptionalChain,typeof node.operator==='number'?node.operator:null,leaf,children];
+              return [staticKey?'StaticPropertyKey':node.kind,node.flags&ts.NodeFlags.OptionalChain,typeof node.operator==='number'?node.operator:null,leaf,children];
             };
             return JSON.stringify(visit(parsed));
           };
           if(fingerprint('const x = {a: "hello", b: 2};')!==fingerprint("const x = {\n a: 'hello',\n b: 2,\n};"))throw Error('AST whitespace self-test failed');
+          if(fingerprint('const x={"jerusalem":1};')!==fingerprint('const x={jerusalem:1};'))throw Error('Static key quoting self-test failed');
+          if(fingerprint('const x={"__proto__":null};')!==fingerprint('const x={__proto__:null};'))throw Error('Static prototype key quoting self-test failed');
           for(const [left,right] of [
             ['const x="a";','const x="b";'],
             ['const x="/a/";','const x="/b/";'],
@@ -83,7 +89,11 @@ jobs:
             ['const x=-n;','const x=+n;'],
             ['const x=a+b;','const x=a-b;'],
             ['const x=a?.b;','const x=a.b;'],
-            ['const x={a:1,b:2};','const x={b:2,a:1};']
+            ['const x={a:1,b:2};','const x={b:2,a:1};'],
+            ['const x={"jerusalem":1};','const x={haifa:1};'],
+            ['const x={"jerusalem":1};','const x={["jerusalem"]:1};'],
+            ['const x={a:"jerusalem"};','const x={a:jerusalem};'],
+            ['const x={__proto__:null};','const x={["__proto__"]:null};']
           ])if(fingerprint(left)===fingerprint(right))throw Error('AST change detection self-test failed: '+left);
           for(const file of files){
             const before=fs.readFileSync(file,'utf8');
