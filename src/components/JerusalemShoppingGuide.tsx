@@ -186,7 +186,7 @@ export function JerusalemShoppingGuide() {
 
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
         <Heading id="compare" title="Jerusalem shopping areas at a glance"
-          intro="Ten distinct choices, from traditional markets to an indoor shopping mall. Opening hours vary between individual shops and events." />
+          intro="Compare ten shopping areas, from traditional markets to a modern indoor mall. Opening hours vary by shop and event." />
         
         <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
           <table className="w-full min-w-[760px] table-fixed border-collapse text-left text-sm">
@@ -271,7 +271,7 @@ export function JerusalemShoppingGuide() {
           </div>
           <div className="rounded-xl border bg-card p-5"><Sun aria-hidden="true" className="h-5 w-5 text-primary" />
             <h3 className="mt-3 font-bold">German Colony & First Station</h3>
-            <p className="mt-2 text-sm leading-relaxed">Explore Emek Refaim's cafés and boutiques, then continue to the First Station for a meal or a scheduled event. Check pop-up market dates before relying on shopping stalls.</p>
+            <p className="mt-2 text-sm leading-relaxed">Explore Emek Refaim's cafés and boutiques, then continue to the First Station for a meal or a scheduled event. Check when pop-up markets take place before visiting.</p>
             <p className="mt-3 text-xs text-muted-foreground">Best for: relaxed neighbourhood browsing</p>
           </div>
         </div>
@@ -286,7 +286,7 @@ export function JerusalemShoppingGuide() {
             <p className="mt-2 text-sm leading-relaxed">Many shops and market stalls close early on Friday and remain closed on Saturday. The First Station runs some food and cultural activities on Saturday, but its shopping page lists Saturday shopping hours of 18:00–22:00. Check the specific venue. See my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Israel calendar of events</Link> for holidays that may affect shopping.</p>
           </div>
           <div className="rounded-xl border bg-card p-5"><CreditCard aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Payment & bargaining</h3>
-            <p className="mt-2 text-sm leading-relaxed">Cards are widely accepted in established shops, while some small market stalls may prefer cash. Confirm the total price in shekels before paying. Negotiate politely only where it is welcomed; there is no universal market discount.</p>
+            <p className="mt-2 text-sm leading-relaxed">Cards are widely accepted in established shops, while some small market stalls may prefer cash. Confirm the total price in shekels before paying. Bargain politely at stalls where bargaining is welcome.</p>
           </div>
           <div className="rounded-xl border bg-card p-5"><Receipt aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Tourist VAT refunds</h3>
             <p className="mt-2 text-sm leading-relaxed">Eligible tourists may qualify for a VAT refund on certain goods bought from approved participating retailers. Ask for the required documentation at purchase and follow the <OfficialLink href="https://www.gov.il/en/pages/vat-refund-guide-for-tourists?chapterIndex=1">Israel Tax Authority guide</OfficialLink> for current conditions.</p>
@@ -295,7 +295,7 @@ export function JerusalemShoppingGuide() {
             <p className="mt-2 text-sm leading-relaxed">Ask about materials, the maker and return or exchange policies, especially for jewellery and artwork. Keep your receipt and check whether delicate or large purchases can be packed or shipped safely. Food gifts also need to comply with your destination's import rules.</p>
           </div>
           <div className="rounded-xl border bg-card p-5"><Accessibility aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Accessibility & walking</h3>
-            <p className="mt-2 text-sm leading-relaxed">Parts of the Old City include steps, narrow lanes and uneven surfaces. Mamilla and modern malls offer a different walking environment. For specific step-free access or mobility help, check the entrance and route to the individual business.</p>
+            <p className="mt-2 text-sm leading-relaxed">Expect steps, narrow lanes and uneven paving in parts of the Old City. Mamilla and modern malls are other options. If you need step-free access, check the route and entrance of the shop you plan to visit.</p>
           </div>
           <div className="rounded-xl border bg-card p-5"><TrainFront aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Getting around with purchases</h3>
             <p className="mt-2 text-sm leading-relaxed">The light rail serves central Jerusalem near Mahane Yehuda and Ben Yehuda Street. A taxi can be easier with bulky shopping or for Malha, Emek Refaim and the First Station. Keep your return route and luggage in mind.</p>
@@ -324,7 +324,7 @@ export function JerusalemShoppingGuide() {
 
       <HomeContactForm showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy("Jerusalem")} />
       <SourcesDisclosure>
-        <p className="mb-3 text-sm leading-relaxed">I use destination and venue information for the markets, shopping venues and tax guidance. Check current event dates and individual shop opening times before visiting.</p>
+        <p className="mb-3 text-sm leading-relaxed">Check current market dates, shop opening hours and VAT refund rules using the links below.</p>
         <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
           <li><OfficialLink href="https://en.machne.co.il/">Mahane Yehuda - independent market visitor guide</OfficialLink></li>
           <li><OfficialLink href="https://edisonhafakot.co.il/he/fairline/3">Bezalel Arts Fair - organiser and Friday schedule (Hebrew)</OfficialLink></li>

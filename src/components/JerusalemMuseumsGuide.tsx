@@ -155,7 +155,7 @@ export function JerusalemMuseumsGuide(){
       <GuideHeroLayout image={<GuideHeroMedia src={museumHero} alt="Rockefeller Museum courtyard and tower in Jerusalem"/>}>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Jerusalem · Museums, history and culture</p>
         <h1 className="guide-page-title mt-2">Best Museums in Jerusalem</h1>
-        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From archaeology and art to Holocaust remembrance and hands-on science, Jerusalem offers very different museum experiences. In my guide, I compare the options, visitor arrangements and neighbourhoods to help you plan a rewarding visit.</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">Jerusalem's museums range from art and archaeology to Holocaust remembrance and hands-on science. I've grouped them by area and included admission prices, opening hours and booking advice to help you choose.</p>
         <PageUpdated date={updatedAt}/>
       </GuideHeroLayout>
       <AuthorCard/>
@@ -191,7 +191,7 @@ export function JerusalemMuseumsGuide(){
       </div>
     </section>
     <section id="by-area" aria-labelledby="by-area-heading" className="mt-12 scroll-mt-24">
-      <SectionHeading id="by-area" title="Explore museums by area" intro="Use these neighbourhood groups to plan realistically. Choose one major museum or a few smaller nearby venues, allowing for transport."/>
+      <SectionHeading id="by-area" title="Explore museums by area" intro="Choose one major museum or a few smaller museums in the same area. Allow time to travel between them."/>
       {museumAreas.map((area,index)=><section key={area.id} id={"area-"+area.id} aria-label={area.name} className="mt-9 scroll-mt-24">
         <h3 className="text-2xl font-semibold">{area.name}</h3>
         <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
