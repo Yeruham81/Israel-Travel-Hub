@@ -37,7 +37,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight title="Three Faiths Lookout">
-        <p>From the hilltop parking area, follow the paved path to the Three Faiths Lookout. The plaza has a peaceful atmosphere and explanatory signs in English, Hebrew and Arabic. KKL-JNF describes an olive tree planted by Pope John Paul II as a symbol of peace.</p>
+        <p>From the hilltop parking area, follow the paved path to the Three Faiths Lookout. The plaza has a peaceful atmosphere and explanatory signs in English, Hebrew and Arabic. Pope John Paul II planted an olive tree here as a symbol of peace.</p>
         <p>This is the easiest place to start your visit, especially if you have limited time before heading into Nazareth.</p>
       </AttractionHighlight>
       <AttractionHighlight
@@ -51,11 +51,11 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         title="Mount Tabor on the horizon"
         image={{ src: "/images/attractions/mount-precipice-mount-tabor-view.webp", alt: "Mount Tabor rising beyond the Nazareth area in a view taken from Mount Precipice" }}
       >
-        <p>Look east towards the rounded outline of <Link to="/attractions/mount-tabor/" className={inlineLink}>Mount Tabor</Link>. Mount Tabor is easily recognisable by its distinctive rounded shape.</p>
+        <p>Look east towards the rounded outline of <Link to="/attractions/mount-tabor/" className={inlineLink}>Mount Tabor</Link>.</p>
         <p>If you're visiting both mountains, allow time for the drive between them.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Forester's House lookout and short ridge walk">
-        <p>For a longer walk, follow the path east along the ridge. KKL-JNF describes another lookout about 300 metres from the main plaza, marked by the small stone building once used by local foresters.</p>
+        <p>For a longer walk, follow the path east along the ridge. Another lookout lies about 300 metres from the main plaza, beside a small stone building once used by local foresters.</p>
         <p>A short accessible path connects this lookout back to the parking area. The cliffside sections need more care than the paved approach to the main viewpoint.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The start of the Gospel Trail">
@@ -70,13 +70,13 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
       <div className="grid gap-3 sm:grid-cols-2" data-testid="mount-precipice-visitor-cards">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Entry, parking and a short visit</h3>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">There is no entry charge for the public lookout. Follow the brown road signs for Mount Precipice and park near the hilltop trailhead. The paved path leads to the Three Faiths Lookout.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Admission to the lookout is free. Follow the brown road signs for Mount Precipice and park near the hilltop trailhead. The paved path leads to the Three Faiths Lookout.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base">Allow about <strong>30–45 minutes</strong> for the main viewpoint and photographs. If you would like a longer walk along the hilltop, allow <strong>about 1–2 hours</strong> in total. I recommend visiting during daylight hours.</p>
           <a href={mountPrecipiceSite.sources.kkl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">KKL-JNF's official walking guide <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Paths and accessibility</h3>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">KKL-JNF describes the paved route from the car park to the Three Faiths Lookout as wheelchair accessible, with a short accessible connection from the Forester's House lookout back to the car park.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">The paved path from the car park to the Three Faiths Lookout is wheelchair accessible. A short accessible path also connects the Forester's House lookout to the car park.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base">The longer cliffside and Gospel Trail paths include uneven and exposed sections. If you have limited mobility, check the condition of the paths before visiting.</p>
           <a href={mountPrecipiceSite.sources.kkl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">See the lookout and trail description <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
@@ -152,7 +152,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Mount Precipice offers a scenic addition to a Nazareth day. Choose a tour that specifically includes the lookout. Look carefully at the itinerary and whether the lookout is an actual stop.</p>
+      <p>If you want to enjoy the Jezreel Valley views, choose a Nazareth tour that includes a stop at Mount Precipice.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
           <img src="/images/attractions/nazareth-galilee.webp" alt="Religious artwork in Nazareth on a northern Israel sightseeing route" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

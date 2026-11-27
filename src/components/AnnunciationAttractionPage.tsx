@@ -54,7 +54,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
         title="Marian mosaics from around the world"
         image={{ src: "/images/attractions/annunciation-marian-mosaics.webp", alt: "Colourful international images of Mary displayed along the covered walkway at the Annunciation Basilica" }}
       >
-        <p>The courtyard and covered walkways display images of Mary donated by Catholic communities around the world. Styles, clothing and materials vary, making this an engaging part of the visit even for those mainly interested in art and architecture.</p>
+        <p>The courtyard and covered walkways display images of Mary donated by Catholic communities around the world. The artworks vary in style, clothing and materials, reflecting artistic traditions from around the world.</p>
         <p>Look for the names of the contributing countries beneath the images. Each artwork reflects the artistic traditions of its country.</p>
       </AttractionHighlight>
       <AttractionHighlight
@@ -78,12 +78,12 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
           <h3 className="font-serif text-xl font-semibold">Opening hours and entry</h3>
           <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Daily visitor hours:</strong> {annunciationSite.hours.generalVisitors} for the upper basilica and grotto, with <strong>last entry at {annunciationSite.hours.lastEntry}</strong>.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Sightseeing ends at 18:00.</strong> From <strong>{annunciationSite.hours.eveningPrayer}</strong>, the lower basilica is available for <strong>silent prayer only</strong>; the upper basilica is closed and these are not additional tourist visiting hours. Services and major celebrations may change access.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">The center lists closing at 15:00 on Holy Thursday and closure on Good Friday. Check the hours directly for Easter, Annunciation Day and any other special date.</p>
+          <p className="mt-2 text-sm leading-relaxed sm:text-base">The basilica closes at 15:00 on Holy Thursday and remains closed on Good Friday. Check the hours directly for Easter, Annunciation Day and any other special date.</p>
           <a href={annunciationSite.sources.cic} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official visitor-hours listing <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Admission and contact</h3>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Admission to the basilica is <strong>free</strong>. Groups arranging a Mass, a ceremony or guided religious activities should contact the sanctuary separately before setting their itinerary.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Admission to the basilica is <strong>free</strong>. Groups planning a Mass, ceremony or guided religious activity should contact the sanctuary in advance.</p>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">Would you like to attend Mass? Check the <a href={annunciationSite.sources.parish} target="_blank" rel="noopener noreferrer" className={inlineLink}>Nazareth parish's published Mass schedule</a> for the basilica, grotto and St. Joseph's Church; times may change for special celebrations.</p>
           <p className="mt-3 text-sm"><strong>Pilgrims' Office: </strong><a href={"tel:" + annunciationSite.pilgrimsOffice.href} dir="ltr" className={inlineLink}>{annunciationSite.pilgrimsOffice.phone}</a></p>
           <p className="mt-1 text-sm"><strong>Email: </strong><a href={"mailto:" + annunciationSite.pilgrimsOffice.email} className={inlineLink}>{annunciationSite.pilgrimsOffice.email}</a></p>
@@ -96,7 +96,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="annunciation-visitor-essentials">
         <h3 className="font-serif text-xl font-semibold">Useful things to know before visiting</h3>
         <ul className="mt-3 grid list-disc gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
-          <li><strong>Dress:</strong> Wear modest clothing that covers shoulders and knees, appropriate for an active Catholic sanctuary.</li>
+          <li><strong>Dress:</strong> Wear modest clothing that covers your shoulders and knees.</li>
           <li><strong>Photography:</strong> Follow posted rules, avoid flash when requested and give worshippers privacy during prayer.</li>
           <li><strong>Accessibility:</strong> The modern upper level is easier to access than some ancient sections. Ask staff about lifts, the grotto and the best step-free route for your needs.</li>
           <li><strong>Other spaces:</strong> St. Joseph's Church has separate visiting arrangements. The archaeological museum displays finds from earlier churches and can be <strong>visited on request</strong> through the Franciscan convent. See the <a href={annunciationSite.sources.custody} target="_blank" rel="noopener noreferrer" className={inlineLink}>sanctuary's visitor information</a>.</li>
@@ -120,7 +120,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">On foot in Nazareth</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The basilica works well as the start of a walk through the surrounding old-city streets and market. St. Joseph's Church is in the same Franciscan complex, while the Greek Orthodox Annunciation church and Mary's Well are a separate walk through central Nazareth.</p>
+            <p className="mt-2 text-sm leading-relaxed">The basilica is a good starting point for exploring Nazareth's old city and market on foot. St. Joseph's Church is in the same Franciscan complex, while the Greek Orthodox Annunciation church and Mary's Well are a separate walk through central Nazareth.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="annunciation-location-map">
@@ -163,7 +163,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Many Nazareth and Galilee tours visit the Basilica of the Annunciation, but time inside the church can vary. Check whether your chosen itinerary includes the grotto and upper basilica, and whether a worship service might affect access.</p>
+      <p>Many Nazareth and Galilee tours visit the Basilica of the Annunciation. Choose a tour that allows time for both the grotto and upper basilica, bearing in mind that access may change during services.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
           <img src="/images/attractions/mount-precipice-jezreel-view.webp" alt="View across the Jezreel Valley from Mount Precipice near Nazareth on a northern Israel tour" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

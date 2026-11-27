@@ -347,10 +347,10 @@
     {
       "path": "/attractions/basilica-of-the-annunciation/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending."
     },
     {
       "path": "/attractions/caesarea/",
@@ -384,7 +384,7 @@
       "status": "edited",
       "reviewedSnapshot": "9c6ccea1702fda1123af87feecec3f0d590daf8c39b246a09242892e8599d1e0",
       "changes": 6,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending."
     },
     {
       "path": "/attractions/ein-gedi/",
@@ -436,7 +436,7 @@
       "status": "edited",
       "reviewedSnapshot": "4c12b18f8052a24ea5abcb35d660a4be64e1b253260e96c81a71448481a35147",
       "changes": 5,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending."
     },
     {
       "path": "/attractions/mount-of-beatitudes/",
@@ -458,18 +458,18 @@
     {
       "path": "/attractions/mount-precipice/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending."
     },
     {
       "path": "/attractions/mount-tabor/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending."
     },
     {
       "path": "/attractions/mount-zion/",
@@ -847,7 +847,7 @@
       "status": "edited",
       "reviewedSnapshot": "06b38441b2e3419a461393d1c9eef2a870c767c940d647f8ddc364ab049ceb53",
       "changes": 7,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending."
     },
     {
       "path": "/travel-blog/from-ben-gurion-airport-on-shabbat/",
@@ -939,7 +939,7 @@
       "status": "edited",
       "reviewedSnapshot": "b8d765ca58e217e6fbe7bd5c475102a106e2a52133cd1067092fcdd281d9ba18",
       "changes": 6,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending."
     },
     {
       "path": "/travel-blog/jerusalem-travel-guide/",
