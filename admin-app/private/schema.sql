@@ -108,3 +108,12 @@ CREATE TABLE IF NOT EXISTS admin_backups (
   verified_at DATETIME NULL,
   INDEX ix_backup_date (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- Rate-limit only short-lived HMAC identifiers, never plaintext IP addresses.
+CREATE TABLE IF NOT EXISTS admin_consent_rate_limits (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  source_hash CHAR(64) NOT NULL,
+  recorded_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX ix_consent_rate_window (source_hash, recorded_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
