@@ -1,7 +1,5 @@
 import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
 import { shoreHubExperiences, shoreHubFaqs, shorePlanningSteps, shoreTourFormats } from "@/data/shoreHub";
 import { shoreHubGuides } from "@/data/shoreReading";
 

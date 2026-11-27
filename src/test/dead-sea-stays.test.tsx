@@ -7,7 +7,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { HotelDestinationPage } from "@/components/HotelDestinationPage";
 import { HotelCategoryPage } from "@/components/HotelCategoryPage";
 import { deadSeaStayGuide, hotelCategoryGuides } from "@/data/content";
-import { affiliateConfig, deadSeaHotelRecommendations, providerLinks } from "@/data/registry";
+import { deadSeaHotelRecommendations, providerLinks } from "@/data/registry";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";
 import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";

@@ -5,7 +5,7 @@ import { cleanup, render, screen, within } from "@testing-library/react";
 import { routeTree } from "@/routeTree.gen";
 import { Route as BethlehemRoute } from "@/routes/travel-blog.jerusalem-to-bethlehem";
 import { Route as DeadSeaRoute } from "@/routes/travel-blog.jerusalem-to-the-dead-sea";
-import { affiliateConfig, tourBookingOffers, travelGuidePaths, getSource } from "@/data/registry";
+import { affiliateConfig, travelGuidePaths, getSource } from "@/data/registry";
 import { travelGuides } from "@/data/travelGuides";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import { deadSeaTourCards } from "@/data/deadSeaTourOffers";

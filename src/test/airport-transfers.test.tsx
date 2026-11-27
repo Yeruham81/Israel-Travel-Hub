@@ -180,7 +180,7 @@ describe("private Ben Gurion transfers", () => {
   });
 
   it("selects the clicked destination in the form and handles groups and other addresses", async () => {
-    const { container } = await renderAirport();
+    await renderAirport();
     chooseDestination("netanya");
     expect(screen.getByLabelText("Destination *")).toHaveValue("netanya");
     chooseDestination("jerusalem");
@@ -193,7 +193,7 @@ describe("private Ben Gurion transfers", () => {
   });
 
   it("validates required fields, then sends all journey details directly without browser storage", async () => {
-    const { container } = await renderAirport();
+    await renderAirport();
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
     expect(screen.getByRole("alert")).toHaveTextContent("Enter your full name");
     expect(screen.queryByRole("link", { name: "Open email to Moshe" })).not.toBeInTheDocument();
@@ -211,7 +211,7 @@ describe("private Ben Gurion transfers", () => {
   });
 
   it("keeps the details and shows an honest error if direct sending is unavailable", async () => {
-    const { container } = await renderAirport();
+    await renderAirport();
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     chooseDestination("tel-aviv");
