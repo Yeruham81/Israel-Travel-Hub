@@ -72,3 +72,13 @@ test("recognize only the audited default spread and preserve object precedence",
  assert.throws(()=>registry(base.replace("[offer.id, undefined]","[offer.id, 'unexpected']")),/Unsupported affiliate spread value/);
  assert.throws(()=>registry(base.replace("[offer.id, undefined]","[offer.other, undefined]")),/Unsupported affiliate spread value/);
 });
+
+test("airport lookup ignores unrelated computed and shorthand IDs but rejects ambiguous references", () => {
+ const source=fixture.replace("const sourceCatalog=", "const unrelated=(id)=>({id,url:'https://wrong.example/'});\nconst sourceCatalog=")
+   .replace("const sourceCatalog=[", "const sourceCatalog=[...[],{id: 'other', url:'https://other.example/'},");
+ assert.equal(registry(source).airport("kiwitaxi","https://kiwitaxi.com/airport"),true);
+ const duplicate=source.replace("const sourceCatalog=[","const sourceCatalog=[{id:'kiwitaxi-airport',url:'https://wrong.example/'},");
+ assert.equal(registry(duplicate).airport("kiwitaxi","https://kiwitaxi.com/airport"),false);
+ const decoy=source.replace("id:'kiwitaxi-airport'","id:'other-airport'");
+ assert.equal(registry(decoy).airport("kiwitaxi","https://kiwitaxi.com/airport"),false);
+});

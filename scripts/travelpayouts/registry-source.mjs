@@ -112,13 +112,18 @@ export function registry(source) {
     airport(partner, url) {
       const sourceId = { kiwitaxi: "kiwitaxi-airport", welcome: "welcome-telaviv", intui: "intui-airport", gettransfer: "gettransfer-telaviv" }[partner];
       if (!sourceId) return false;
-      const matches = [];
-      const visit = (node) => {
-        if (ts.isObjectLiteralExpression(node) && string(property(node, "id")?.initializer) === sourceId && property(node, "url")) matches.push(string(property(node, "url").initializer));
-        ts.forEachChild(node, visit);
-      };
-      visit(tree);
-      return matches.length === 1 && matches[0] === url;
+      // Airport reference records are direct members of sourceCatalog.
+      // Do not traverse unrelated generated records, callbacks or shorthand IDs.
+      const array = declaration(tree, "sourceCatalog");
+      if (!ts.isArrayLiteralExpression(array)) throw Error("Unexpected reference catalog");
+      const matches = array.elements.map(unwrap).filter((node) => {
+        if (!ts.isObjectLiteralExpression(node)) return false;
+        const ids = node.properties.filter((p) => name(p.name) === "id" && ts.isPropertyAssignment(p) && string(p.initializer) === sourceId);
+        return ids.length > 0;
+      });
+      return matches.length === 1 &&
+        string(property(matches[0], "id")?.initializer) === sourceId &&
+        string(property(matches[0], "url")?.initializer) === url;
     },
     tour(product, partner, url) {
       const matches = tourTuples(tree).filter((e) => ts.isArrayLiteralExpression(e) && string(e.elements[0]) === product && string(e.elements[1]) === partner);
