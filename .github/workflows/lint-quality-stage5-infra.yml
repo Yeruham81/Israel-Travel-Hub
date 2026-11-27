@@ -1,12 +1,75 @@
-name: Stage 5.5.5b - trial infrastructure YAML formatting and verify parity
+name: Stage 5.5.5b - persist verified YAML patch and validate committed code
 on:
   push:
     branches: [audit/lint-quality-stage5-infra]
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
+concurrency:
+  group: stage-5-5-5b-infra-permanent
+  cancel-in-progress: false
 jobs:
-  trial:
+  persist:
+    if: github.ref == 'refs/heads/audit/lint-quality-stage5-infra'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    outputs:
+      commit: ${{ steps.persist.outputs.commit }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: stage-5-5-5b-infra-trial
+          run-id: 46061138078
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/verified-trial
+      - name: Apply exact verified YAML patch
+        id: persist
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/verified-trial"
+          (cd "$out" && sha256sum -c <<'HASHES'
+          383e62c0607c908a1b500ac12e80ed6b7b7dbad8ab3c4cd18576c26adccbcda2  stage-5-5-5b-infra.patch
+          HASHES
+          )
+          test "$(git rev-parse origin/main)" = 31d7963b29101048f62925c1c849d35449f59d88
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/audit/lint-quality-stage5-infra)"
+          git diff --exit-code
+          if git apply --reverse --check "$out/stage-5-5-5b-infra.patch"; then
+            echo "Verified patch already present"
+          else
+            test "$(git rev-parse HEAD^)" = d64a12d2f7d8412fd91b42ba9823925cb4b67b48
+            test "$(git diff --name-only HEAD^ HEAD)" = .github/workflows/lint-quality-stage5-infra.yml
+            git apply --check "$out/stage-5-5-5b-infra.patch"
+            git apply --index "$out/stage-5-5-5b-infra.patch"
+            git diff --cached --check
+            python3 - <<'PY'
+          import json, os, pathlib, subprocess
+          out=pathlib.Path(os.environ["RUNNER_TEMP"])/"verified-trial"
+          expected=set(json.loads((out/"changed.json").read_text()))
+          scope=set(json.loads((out/"scope.json").read_text()))
+          actual=set(subprocess.check_output(["git","diff","--cached","--name-only","-z"]).decode().split("\0"))-{""}
+          assert len(expected)==20 and len(scope)==52 and expected<=scope
+          assert actual==expected,(actual-expected,expected-actual)
+          assert all(x.startswith(".github/workflows/") and x.endswith((".yml",".yaml")) and x!=".github/workflows/lint-quality-stage5-infra.yml" for x in actual)
+          assert all((out/"candidates"/x).read_bytes()==pathlib.Path(x).read_bytes() for x in actual)
+          print("Exact verified scope:",len(actual),"YAML infrastructure files")
+          PY
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Stage 5.5.5b: permanently apply verified YAML formatting patch'
+            git push origin HEAD:refs/heads/audit/lint-quality-stage5-infra
+          fi
+          git diff --exit-code
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "Permanent commit: $(git rev-parse HEAD)"
+  validate:
+    needs: persist
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     env:
@@ -18,6 +81,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: ${{ needs.persist.outputs.commit }}
           persist-credentials: false
           fetch-depth: 0
       - uses: actions/setup-node@v7
@@ -27,321 +91,97 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.4.4"
-      - run: bash scripts/install-ci-dependencies.sh
-      - name: Prepare production reference and report directory
+      - uses: actions/download-artifact@v4
+        with:
+          name: stage-5-5-5b-infra-trial
+          run-id: 46061138078
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/verified-trial
+      - name: Verify permanent commit and exact patch
         run: |
-          mkdir -p "$RUNNER_TEMP/unused-audit"
+          set -euo pipefail
+          out="$RUNNER_TEMP/verified-trial"
+          (cd "$out" && sha256sum -c <<'HASHES'
+          383e62c0607c908a1b500ac12e80ed6b7b7dbad8ab3c4cd18576c26adccbcda2  stage-5-5-5b-infra.patch
+          HASHES
+          )
+          test "$(git rev-parse HEAD)" = "${{ needs.persist.outputs.commit }}"
           test "$(git rev-parse origin/main)" = 31d7963b29101048f62925c1c849d35449f59d88
+          git merge-base --is-ancestor origin/main HEAD
+          git apply --reverse --check "$out/stage-5-5-5b-infra.patch"
+          git diff --exit-code
+          mkdir -p "$RUNNER_TEMP/permanent-report"
+          git rev-parse HEAD | tee "$RUNNER_TEMP/permanent-report/validated-commit.txt"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Build current main reference
+        run: |
           git worktree add --detach "$RUNNER_TEMP/main-reference" 31d7963b29101048f62925c1c849d35449f59d88
           cd "$RUNNER_TEMP/main-reference"
           bash scripts/install-ci-dependencies.sh
           bash scripts/build-validated-static.sh
-      - name: Inventory and trial YAML formatting without changing triggers or commands
-        shell: bash
-        run: |
-          set -euo pipefail
-          git diff --quiet
-          node --input-type=module <<'JS'
-          import fs from "node:fs";
-          import path from "node:path";
-          import {execFileSync} from "node:child_process";
-          import prettier from "prettier";
-          const out=path.join(process.env.RUNNER_TEMP,"unused-audit");
-          const files=execFileSync("git",["ls-files","-z"]).toString().split("\0").filter(p=>p===".github/dependabot.yml"||/^\.github\/workflows\/.*\.ya?ml$/.test(p));
-          const auditWorkflow=".github/workflows/lint-quality-stage5-infra.yml";
-          if(!files.includes(auditWorkflow))throw Error("Missing temporary audit workflow");
-          files.splice(files.indexOf(auditWorkflow),1);
-          if(files.length!==52)throw Error("Unexpected YAML inventory "+files.length);
-          fs.writeFileSync(path.join(out,"inventory.json"),JSON.stringify(files,null,2));
-          for(const file of files){
-            const before=fs.readFileSync(file,"utf8"),options=await prettier.resolveConfig(file);
-            let current=before,stable=false;const seen=new Set([before]);
-            for(let i=0;i<5;i++){
-              const next=await prettier.format(current,{...options,filepath:file});
-              if(next===current){stable=true;break;}
-              if(seen.has(next))break;
-              seen.add(next);current=next;
-            }
-            if(!stable)throw Error("Unstable formatting "+file);
-            const dest=path.join(out,"candidates",file);
-            fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,current);
-          }
-          JS
-          python3 - <<'PY'
-          import pathlib, os, json, yaml, fnmatch, subprocess, ast
-          out=pathlib.Path(os.environ["RUNNER_TEMP"])/"unused-audit"
-          files=json.loads((out/"inventory.json").read_text())
-          def fingerprint(text, loader):
-              def node(n):
-                  if isinstance(n,yaml.ScalarNode): return ("scalar",n.tag,n.value)
-                  if isinstance(n,yaml.SequenceNode): return ("sequence",n.tag,[node(x) for x in n.value])
-                  if isinstance(n,yaml.MappingNode):
-                      pairs=[(node(k),node(v)) for k,v in n.value]
-                      keys=[repr(k) for k,v in pairs]
-                      if len(keys)!=len(set(keys)): raise ValueError("Duplicate YAML mapping key")
-                      return ("mapping",n.tag,pairs)
-                  raise ValueError("Unsupported YAML node")
-              return node(yaml.compose(text,Loader=loader))
-          def events(text):
-              return [(type(e).__name__,getattr(e,"anchor",None),getattr(e,"tag",None),getattr(e,"value",None)) for e in yaml.parse(text)]
-          def same(a,b):
-              return all(fingerprint(a,l)==fingerprint(b,l) for l in (yaml.BaseLoader,yaml.SafeLoader)) and events(a)==events(b)
-          assert same("run: |\n  echo hello\n","run: |\n    echo hello\n")
-          assert not same("run: |\n  echo hello\n","run: |\n  echo goodbye\n")
-          assert not same("on: [push]\n","on: [pull_request]\n")
-          assert not same('env: {FLAG: "true"}','env: {FLAG: true}')
-          # A formatting-only change must not itself trigger an operational job.
-          # Treat any push workflow with broad/uncertain path filters conservatively.
-          # Evaluate push filters for the planned main-branch merge, not arbitrary branches.
-          # Unknown/negative patterns remain conservative; tags-only workflows cannot run on a branch push.
-          def matches(pattern,value):
-              return fnmatch.fnmatchcase(value,pattern) or (pattern.startswith("**/") and fnmatch.fnmatchcase(value,pattern[3:]))
-          def branch_may_trigger(cfg,branch="main"):
-              if not isinstance(cfg,dict): return True
-              include=cfg.get("branches")
-              ignore=cfg.get("branches-ignore")
-              if include is not None:
-                  if not isinstance(include,list) or any(not isinstance(p,str) or p.startswith("!") or any(c in p for c in "+?[]") for p in include): return True
-                  return any(matches(p,branch) for p in include)
-              if ignore is not None:
-                  if not isinstance(ignore,list) or any(not isinstance(p,str) or p.startswith("!") or any(c in p for c in "+?[]") for p in ignore): return True
-                  return not any(matches(p,branch) for p in ignore)
-              if "tags" in cfg or "tags-ignore" in cfg: return False
-              return True
-          assert not branch_may_trigger({"branches":["editorial/full-site-review"]})
-          assert branch_may_trigger({"branches":["main"]})
-          assert branch_may_trigger({"branches":["**"]})
-          assert branch_may_trigger({"branches":["!main","release/**"]})
-          assert not branch_may_trigger({"branches-ignore":["main"]})
-          assert not branch_may_trigger({"tags":["v*"]})
-          assert branch_may_trigger(None)
-          push_rules=[];branch_excluded=[]
-          for file in files:
-              if not file.startswith(".github/workflows/"): continue
-              data=yaml.load(pathlib.Path(file).read_text(),Loader=yaml.BaseLoader)
-              trigger=data.get("on",{})
-              push=("push" in trigger) if isinstance(trigger,(dict,list)) else trigger=="push"
-              if push and file!=".github/workflows/full-project-validation.yml":
-                  cfg=trigger.get("push") if isinstance(trigger,dict) else None
-                  if not branch_may_trigger(cfg):
-                      branch_excluded.append(file)
-                      continue
-                  patterns=cfg.get("paths") if isinstance(cfg,dict) else None
-                  push_rules.append((file,patterns))
-          print("WORKFLOWS NOT TRIGGERED ON MAIN",json.dumps(branch_excluded))
-          def may_trigger(file,patterns):
-              if not patterns: return True
-              return any(not isinstance(p,str) or p.startswith("!") or any(c in p for c in "+?[]") or matches(p,file) for p in patterns)
-          changed=[];scope=[];excluded=[];report=[]
-          for file in files:
-              p=pathlib.Path(file);before=p.read_text();after=(out/"candidates"/file).read_text()
-              triggers=[wf for wf,patterns in push_rules if may_trigger(file,patterns)]
-              equivalent=same(before,after)
-              if not equivalent or (triggers and before!=after):
-                  excluded.append(file)
-                  report.append({"file":file,"status":"deferred","semanticParity":equivalent,"possiblePushTriggers":triggers,"wouldChange":before!=after})
-                  continue
-              scope.append(file)
-              if before!=after:
-                  p.write_text(after);changed.append(file)
-              report.append({"file":file,"status":"changed" if before!=after else "already-formatted","semanticParity":True})
-          for name,value in [("scope",scope),("changed",changed),("excluded",excluded),("yaml-report",report),("push-rules",push_rules)]:
-              (out/(name+".json")).write_text(json.dumps(value,indent=2))
-          print("INFRA FORMAT SUMMARY",json.dumps({"inventoried":len(files),"included":len(scope),"changed":len(changed),"deferred":len(excluded)}))
-          assert changed, "No eligible formatting changes; inspect exclusions before proceeding"
-          for entry in report:
-              if entry["status"]=="deferred": print("DEFERRED",json.dumps(entry))
-          for p in pathlib.Path("scripts").rglob("*.py"): ast.parse(p.read_text(),filename=str(p))
-          for p in pathlib.Path("scripts").rglob("*.sh"): subprocess.run(["bash","-n",str(p)],check=True)
-          print("PASS: Python and shell syntax; no scripts executed by syntax checks")
-          actual=set(subprocess.check_output(["git","diff","--name-only","-z"]).decode().split("\0"))-{""}
-          assert actual==set(changed),(actual,changed)
-          PY
-          git diff --check
-          git diff --binary > "$RUNNER_TEMP/unused-audit/stage-5-5-5b-infra.patch"
-          sha256sum "$RUNNER_TEMP/unused-audit/stage-5-5-5b-infra.patch"
-      - name: Verify lint, format and strict TypeScript and static export
+      - name: Lint and check 52 YAML infrastructure files
         run: |
           bun run lint
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import path from 'node:path';
           import prettier from 'prettier';
-          const scope=JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP,'unused-audit','scope.json'),'utf8'));
+          const scope=JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP,'verified-trial','scope.json'),'utf8'));
+          if(scope.length!==52)throw Error('Unexpected scope');
           for(const file of scope){
             const options=await prettier.resolveConfig(file);
             if(!await prettier.check(fs.readFileSync(file,'utf8'),{...options,filepath:file}))throw Error('Formatting failed '+file);
           }
-          console.log('PASS: all script and configuration files in trial scope satisfy Prettier');
+          console.log('PASS: all 52 committed YAML infrastructure files satisfy Prettier');
           JS
+      - name: Build production and verify static export and strict TypeScript
+        run: |
           node --test scripts/israel-events-source.test.mjs scripts/travelpayouts/registry-source.test.mjs scripts/verify-photo-credits.test.mjs
           python3 scripts/test-deployment-storage.py
+          python3 - <<'PY'
+          import ast, pathlib, subprocess, yaml, json, os
+          out=pathlib.Path(os.environ["RUNNER_TEMP"])/"verified-trial"
+          for file in json.loads((out/"scope.json").read_text()):
+              before=subprocess.check_output(["git","show","31d7963b29101048f62925c1c849d35449f59d88:"+file],text=True)
+              after=pathlib.Path(file).read_text()
+              def fingerprint(text, loader):
+                  def node(n):
+                      if isinstance(n,yaml.ScalarNode): return ("scalar",n.tag,n.value)
+                      if isinstance(n,yaml.SequenceNode): return ("sequence",n.tag,[node(x) for x in n.value])
+                      if isinstance(n,yaml.MappingNode): return ("mapping",n.tag,[(node(k),node(v)) for k,v in n.value])
+                      raise ValueError("Unsupported node")
+                  return node(yaml.compose(text,Loader=loader))
+              assert all(fingerprint(before,l)==fingerprint(after,l) for l in (yaml.BaseLoader,yaml.SafeLoader)),file
+          for p in pathlib.Path("scripts").rglob("*.py"): ast.parse(p.read_text(),filename=str(p))
+          for p in pathlib.Path("scripts").rglob("*.sh"): subprocess.run(["bash","-n",str(p)],check=True)
+          print("PASS: 52 YAML files preserve parsed semantics; Python and Shell syntax checked")
+          PY
           bash scripts/build-validated-static.sh
           npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters
           node scripts/verify-hostinger-static-export.mjs --editorial
-      - name: Compare candidate production output with current main
-        run: |
-          cat > "$RUNNER_TEMP/unused-audit/compare.py" <<'PY'
-          import collections, hashlib, json, pathlib, re, sys, xml.etree.ElementTree as ET
-          from html.parser import HTMLParser
-          from urllib.parse import urlsplit, urljoin, unquote
-          base, candidate = [pathlib.Path(s) for s in sys.argv[1:3]]
-          origin = "https://www.israel-taxi.com"
-          markers = re.compile(rb"lovable|tanstack_start_ts|7cd7aae9-57c0-4ced-b1fa-2f0691483fee|sandbox-npm-cache", re.I)
-          def digest(data): return hashlib.sha256(data).hexdigest()
-          def manifest(root):
-              return {str(p.relative_to(root)):p for p in root.rglob("*") if p.is_file()}
-          old, new = manifest(base), manifest(candidate)
-          def urls(root):
-              return [node.text for node in ET.parse(root/"sitemap.xml").getroot().findall("{*}url/{*}loc")]
-          old_urls, new_urls = urls(base), urls(candidate)
-          issues = []
-          def check(ok, message):
-              if not ok: issues.append(message)
-          check(old_urls == new_urls, "Ordered sitemap URL list changed")
-          check((base/"robots.txt").read_bytes() == (candidate/"robots.txt").read_bytes(), "robots.txt changed")
-          old_html, new_html = {p for p in old if p.endswith(".html")}, {p for p in new if p.endswith(".html")}
-          check(old_html == new_html, "HTML paths differ: removed="+str(sorted(old_html-new_html))+" added="+str(sorted(new_html-old_html)))
-          def norm(value, root):
-              if value is None: return ""
-              # Preserve actual image/font identity even if the bundler changes its hashed filename.
-              def asset(m):
-                  path = m.group(0)
-                  local = root / path.lstrip("/")
-                  if local.is_file(): return "/asset-content/"+digest(local.read_bytes())
-                  return path
-              value = re.sub(r"/assets/[A-Za-z0-9_.-]+\.(?:webp|avif|png|jpe?g|svg|gif|woff2?|ico)\b",asset,value,flags=re.I)
-              return re.sub(r"(?<=:)[rR][a-zA-Z0-9_]+(?=:)", "react-id", value)
-          class Page(HTMLParser):
-              def __init__(self, root):
-                  super().__init__(convert_charrefs=True)
-                  self.root=root; self.body=False; self.skip=0; self.title=False; self.schema=False
-                  self.text_chunks=[]
-                  self.meta=[]; self.data=[]; self.structure=[]; self.jsonld=[]; self.title_parts=[]; self.links=[]; self.assets=[]; self.schemas=[]; self.forms=0; self.images=0
-              def flush_text(self):
-                  # React can split adjacent JSX text into several HTML text nodes
-                  # separated by invisible hydration comments. Compare their actual
-                  # concatenated text, retaining whitespace between visible words.
-                  value=" ".join("".join(self.text_chunks).split())
-                  if value: self.data.append(value)
-                  self.text_chunks=[]
-              def handle_starttag(self,tag,attrs):
-                  self.flush_text()
-                  d=dict(attrs)
-                  if tag=="body": self.body=True
-                  if tag=="title": self.title=True
-                  if tag=="meta": self.meta.append(tuple(sorted((k,norm(v,self.root)) for k,v in attrs)))
-                  if tag=="link" and d.get("rel")=="canonical": self.meta.append(("canonical",d.get("href")))
-                  if tag=="script":
-                      self.skip+=1
-                      if d.get("type")=="application/ld+json": self.schema=True; self.jsonld=[]
-                  if tag=="style": self.skip+=1
-                  if tag=="script" and d.get("src"): self.assets.append(d["src"])
-                  if tag=="link" and d.get("rel") in ("stylesheet","modulepreload","preload") and d.get("href"): self.assets.append(d["href"])
-                  if not self.body or self.skip or tag=="link": return
-                  if tag=="form": self.forms+=1
-                  if tag=="img": self.images+=1
-                  if tag=="a" and d.get("href"): self.links.append(d["href"])
-                  for k in ("src","poster","data-consent-src"):
-                      if d.get(k): self.assets.append(d[k])
-                  if d.get("srcset"):
-                      self.assets.extend(s.strip().split()[0] for s in d["srcset"].split(",") if s.strip() and not s.strip().startswith("data:"))
-                  self.structure.append((tag,tuple(sorted((k,norm(v,self.root)) for k,v in attrs if k not in ("data-tsd-source",)))))
-              def handle_startendtag(self,tag,attrs): self.handle_starttag(tag,attrs)
-              def handle_endtag(self,tag):
-                  self.flush_text()
-                  if tag=="title": self.title=False
-                  if tag=="script" and self.schema:
-                      self.schemas.append(json.loads("".join(self.jsonld))); self.schema=False
-                  if tag in ("script","style"): self.skip=max(0,self.skip-1); return
-                  if self.body and not self.skip and tag!="link": self.structure.append(("/"+tag,()))
-                  if tag=="body": self.body=False
-              def handle_data(self,data):
-                  if self.title: self.title_parts.append(data)
-                  if self.schema: self.jsonld.append(data)
-                  if self.body and not self.skip: self.text_chunks.append(data)
-          def page(root,url):
-              rel=urlsplit(url).path.strip("/")
-              p=Page(root)
-              p.feed((root/rel/"index.html").read_text(encoding="utf-8"))
-              p.close()
-              p.flush_text()
-              return p
-          def schema_norm(v,root):
-              if isinstance(v,str): return norm(v,root)
-              if isinstance(v,list): return [schema_norm(x,root) for x in v]
-              if isinstance(v,dict): return {k:schema_norm(x,root) for k,x in v.items()}
-              return v
-          def missing_assets(p,root,url):
-              missing=set()
-              for a in p.assets:
-                  if a.startswith(("data:","blob:","#")): continue
-                  u=urlsplit(urljoin(url,a))
-                  if u.netloc!="www.israel-taxi.com" or u.path.startswith("/api/"): continue
-                  path=root/unquote(u.path.lstrip("/"))
-                  if not path.is_file() and not (path/"index.html").is_file(): missing.add(a)
-              return missing
-          # Prove that invisible hydration splits are equivalent, but changed
-          # text, lost spaces, and text moved across element boundaries are not.
-          def sample(html):
-              p=Page(base); p.feed(html); p.close(); p.flush_text(); return p.data
-          assert sample("<body><p>A.<!-- --> <!-- -->B</p></body>")==sample("<body><p>A. B</p></body>")
-          assert sample("<body><p>A. B</p></body>")!=sample("<body><p>A.B</p></body>")
-          assert sample("<body><p>A. B</p></body>")!=sample("<body><p>A. C</p></body>")
-          assert sample("<body><p>A. <b>B</b></p></body>")!=sample("<body><p>A. B</p></body>")
-          print("PASS: visible-text comparator preserves content and element boundaries")
-          stats=collections.Counter(); by_kind=collections.Counter()
-          for url in new_urls:
-              a,b=page(base,url),page(candidate,url)
-              for kind,x,y in [
-                  ("title",a.title_parts,b.title_parts),("metadata",sorted(map(str,a.meta)),sorted(map(str,b.meta))),
-                  ("structured data",schema_norm(a.schemas,base),schema_norm(b.schemas,candidate)),
-                  ("visible text",a.data,b.data),("body tags and attributes",a.structure,b.structure),
-                  ("links",a.links,b.links),("forms",a.forms,b.forms),("images",a.images,b.images)]:
-                  if x!=y:
-                      by_kind[kind]+=1
-                      if by_kind[kind]<=4:
-                          if isinstance(x,list) and isinstance(y,list):
-                              first=next(((str(xx)[:250],str(yy)[:250]) for xx,yy in zip(x,y) if xx!=yy),("length "+str(len(x)),"length "+str(len(y))))
-                              print("DIFFERENCE",url,kind,first)
-                          else: print("DIFFERENCE",url,kind,str(x)[:150],str(y)[:150])
-              added_missing=missing_assets(b,candidate,url)-missing_assets(a,base,url)
-              check(not added_missing, "New missing assets on "+url+": "+str(sorted(added_missing)))
-              stats.update(pages=1, forms=b.forms, links=len(b.links), images=b.images, schemas=len(b.schemas))
-          print("PAGE TOTALS",dict(stats))
-          print("PAGE DIFFERENCES",dict(by_kind))
-          for kind,n in by_kind.items(): issues.append(str(n)+" pages differ in "+kind)
-          # Public helpers/data, images and maps must not be altered by the build migration.
-          for p in sorted(set(old)|set(new)):
-              if p.startswith(("maps/","widgets/","images/","data/")):
-                  check(p in old and p in new and digest(old[p].read_bytes())==digest(new[p].read_bytes()),"Public helper/asset changed: "+p)
-          for name,p in new.items():
-              data=p.read_bytes()
-              check(not markers.search(data) and not markers.search(name.encode()),"Legacy marker in generated file "+name)
-              check(not (name.endswith(".php") or name.startswith("api/") or name in (".env",".htaccess") or name.endswith(".map")),"Unexpected private/API/source-map export: "+name)
-          print("GENERATED FILES",len(old),len(new),"HTML",len(old_html),len(new_html))
-          for ext in (".js",".css",".html"):
-              aa=[p.stat().st_size for k,p in old.items() if k.endswith(ext)]
-              bb=[p.stat().st_size for k,p in new.items() if k.endswith(ext)]
-              print("OUTPUT SIZE",ext,"before",len(aa),sum(aa),"after",len(bb),sum(bb))
-          print("LEGACY MARKER SCAN AND PARITY ISSUES",len(issues))
-          for issue in issues[:100]: print("ISSUE",issue)
-          if issues: sys.exit(1)
-          print("PASS: page content, metadata, schema, links, forms, public helpers, assets and legacy marker scan")
-          PY
-          set -o pipefail
-          python3 "$RUNNER_TEMP/unused-audit/compare.py" "$RUNNER_TEMP/main-reference/.output/public" .output/public | tee "$RUNNER_TEMP/unused-audit/production-parity.txt"
-          git diff --check
-          git diff --stat
-      - name: Full regression after infrastructure formatting
+      - name: Compare committed production output with main
         shell: bash
         run: |
           set -euo pipefail
-          VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test 2>&1 | tee "$RUNNER_TEMP/unused-audit/regression.txt"
-      - name: Save trial patch and verification reports
+          python3 "$RUNNER_TEMP/verified-trial/compare.py" "$RUNNER_TEMP/main-reference/.output/public" .output/public | tee "$RUNNER_TEMP/permanent-report/production-parity.txt"
+      - name: Full regression on permanent commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test 2>&1 | tee "$RUNNER_TEMP/permanent-report/regression.txt"
+      - name: Guard authored source after validation
+        run: |
+          git status --short
+          python3 - <<'PY'
+          import subprocess
+          changed=set(subprocess.check_output(["git","diff","--name-only","-z"]).decode().split("\0"))-{""}
+          allowed={"src/data/generated/guide-directory.ts","src/routeTree.gen.ts","public/sitemap.xml","public/robots.txt"}
+          assert changed<=allowed,changed-allowed
+          PY
+      - name: Save verification reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: stage-5-5-5b-infra-trial
-          path: ${{ runner.temp }}/unused-audit/
+          name: stage-5-5-5b-infra-permanent-validation
+          path: ${{ runner.temp }}/permanent-report/
           if-no-files-found: warn
