@@ -350,7 +350,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending."
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending. Initial corpus run 46002584454 passed; dedicated group 9 regression verification pending."
     },
     {
       "path": "/attractions/caesarea/",
@@ -367,7 +367,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending."
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending. Initial corpus run 46002972945 passed; dedicated group 9 regression verification pending."
     },
     {
       "path": "/attractions/dead-sea/",
@@ -375,7 +375,7 @@
       "status": "edited",
       "reviewedSnapshot": "9aca4c726104018b31b99a699c222f06168e9bcc007c8cf1527fda3f573c81ee",
       "changes": 7,
-      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval. Targeted regression and extraction passed in run 45998806714; user approved.",
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval. Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; combined release verification pending.",
       "postEditSnapshot": "24252609734fd49f5e2f989fa58b3fe13a75aa1b872717608db9be3803b28151"
     },
     {
@@ -384,7 +384,7 @@
       "status": "edited",
       "reviewedSnapshot": "9c6ccea1702fda1123af87feecec3f0d590daf8c39b246a09242892e8599d1e0",
       "changes": 6,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; combined release verification pending."
     },
     {
       "path": "/attractions/ein-gedi/",
@@ -392,7 +392,7 @@
       "status": "edited",
       "reviewedSnapshot": "193516268cafba9b38b1aeee6ba22ff4791316d819919a86019014c30c68bfa9",
       "changes": 6,
-      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval. Targeted regression and extraction passed in run 45998806714; user approved.",
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval. Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; combined release verification pending.",
       "postEditSnapshot": "b252c01026682b164f787905b430c5caf0c3d53be1a80439f4a499d1f2820bf8"
     },
     {
@@ -419,7 +419,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending."
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending. Initial corpus run 46002972945 passed; dedicated group 9 regression verification pending."
     },
     {
       "path": "/attractions/masada/",
@@ -427,7 +427,7 @@
       "status": "edited",
       "reviewedSnapshot": "1a904b33e5107dc330b79f63298b5c3919b8d71bf16e2bbe6935be29fbced58b",
       "changes": 6,
-      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval. Targeted regression and extraction passed in run 45998806714; user approved.",
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval. Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; combined release verification pending.",
       "postEditSnapshot": "d956bfd3fcf8dc11c9ac9a40eae0a9b1e282594b0369d6ebd13168e15a638c9d"
     },
     {
@@ -436,7 +436,7 @@
       "status": "edited",
       "reviewedSnapshot": "4c12b18f8052a24ea5abcb35d660a4be64e1b253260e96c81a71448481a35147",
       "changes": 5,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; combined release verification pending."
     },
     {
       "path": "/attractions/mount-of-beatitudes/",
@@ -444,7 +444,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending."
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending. Initial corpus run 46002972945 passed; dedicated group 9 regression verification pending."
     },
     {
       "path": "/attractions/mount-of-olives/",
@@ -461,7 +461,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending."
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending. Initial corpus run 46002584454 passed; dedicated group 9 regression verification pending."
     },
     {
       "path": "/attractions/mount-tabor/",
@@ -469,7 +469,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending."
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending. Initial corpus run 46002584454 passed; dedicated group 9 regression verification pending."
     },
     {
       "path": "/attractions/mount-zion/",
@@ -521,7 +521,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending."
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending. Initial corpus run 46002972945 passed; dedicated group 9 regression verification pending."
     },
     {
       "path": "/attractions/tel-megiddo/",
@@ -847,7 +847,7 @@
       "status": "edited",
       "reviewedSnapshot": "06b38441b2e3419a461393d1c9eef2a870c767c940d647f8ddc364ab049ceb53",
       "changes": 7,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; combined release verification pending."
     },
     {
       "path": "/travel-blog/from-ben-gurion-airport-on-shabbat/",
@@ -939,7 +939,7 @@
       "status": "edited",
       "reviewedSnapshot": "b8d765ca58e217e6fbe7bd5c475102a106e2a52133cd1067092fcdd281d9ba18",
       "changes": 6,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; combined release verification pending."
     },
     {
       "path": "/travel-blog/jerusalem-travel-guide/",
