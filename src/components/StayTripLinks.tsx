@@ -66,102 +66,464 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
   jerusalem: {
     name: "Jerusalem",
     local: [
-      card("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/", "Choose cultural highlights from the city’s museums.", museumJerusalem, "Jerusalem museum interior"),
-      card("Shopping in Jerusalem", "/travel-blog/shopping-in-jerusalem/", "Explore markets, craft stalls and local shopping streets.", "/images/attractions/old-jerusalem-via-dolorosa.webp", "Souk stalls along a stone-paved lane in Jerusalem's Old City"),
-      card("Jerusalem Old City", "/attractions/old-city-jerusalem/", "Understand the quarters, historic gates and walking routes.", oldCityLanes, "Narrow stone streets and historic architecture in Jerusalem's Old City"),
-      card("Jerusalem travel guide", "/travel-blog/jerusalem-travel-guide/", "Discover the city’s principal sights and plan your days.", jerusalemOverview, "Jerusalem skyline and old city"),
-      card("Mount of Olives", "/attractions/mount-of-olives/", "Explore the historic hillside, viewpoints and religious landmarks.", mountOfOlivesCard, "Mount of Olives churches and Jerusalem panorama"),
-      card("Churches in Jerusalem", "/travel-blog/churches-in-jerusalem/", "Plan visits to important churches across Jerusalem.", "/images/jerusalem/church-of-all-nations.webp", "Church of All Nations near the Mount of Olives"),
+      card(
+        "Museums in Jerusalem",
+        "/travel-blog/museums-in-jerusalem/",
+        "Choose cultural highlights from the city’s museums.",
+        museumJerusalem,
+        "Jerusalem museum interior",
+      ),
+      card(
+        "Shopping in Jerusalem",
+        "/travel-blog/shopping-in-jerusalem/",
+        "Explore markets, craft stalls and local shopping streets.",
+        "/images/attractions/old-jerusalem-via-dolorosa.webp",
+        "Souk stalls along a stone-paved lane in Jerusalem's Old City",
+      ),
+      card(
+        "Jerusalem Old City",
+        "/attractions/old-city-jerusalem/",
+        "Understand the quarters, historic gates and walking routes.",
+        oldCityLanes,
+        "Narrow stone streets and historic architecture in Jerusalem's Old City",
+      ),
+      card(
+        "Jerusalem travel guide",
+        "/travel-blog/jerusalem-travel-guide/",
+        "Discover the city’s principal sights and plan your days.",
+        jerusalemOverview,
+        "Jerusalem skyline and old city",
+      ),
+      card(
+        "Mount of Olives",
+        "/attractions/mount-of-olives/",
+        "Explore the historic hillside, viewpoints and religious landmarks.",
+        mountOfOlivesCard,
+        "Mount of Olives churches and Jerusalem panorama",
+      ),
+      card(
+        "Churches in Jerusalem",
+        "/travel-blog/churches-in-jerusalem/",
+        "Plan visits to important churches across Jerusalem.",
+        "/images/jerusalem/church-of-all-nations.webp",
+        "Church of All Nations near the Mount of Olives",
+      ),
     ],
     onward: [
-      card("Ben Gurion Airport to Jerusalem", "/travel-blog/ben-gurion-airport-to-jerusalem/", "Compare train, bus, taxi and transfer arrangements.", airportHall, "Ben Gurion Airport terminal"),
-      card("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/", "Plan a practical journey to Bethlehem from the city.", bethlehemTravel, "Road and buildings on the way to Bethlehem"),
-      card("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Compare routes for a desert and Dead Sea excursion.", deadSeaTravel, "Road through the Judean Desert"),
-      card("Getting around Israel", "/travel-blog/getting-around-israel/", "Compare trains, buses, light rail and taxis for journeys beyond Jerusalem.", jerusalemLightRail, "Jerusalem light-rail train"),
-      card("Airport travel on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/", "Understand arrivals when regular public transport is limited.", airportTransfers, "Ben Gurion Airport terminal and aircraft"),
-      card("Visiting Masada", "/attractions/masada/", "Plan the fortress and cable car for an early desert visit.", masadaCable, "Cable car travelling toward Masada"),
+      card(
+        "Ben Gurion Airport to Jerusalem",
+        "/travel-blog/ben-gurion-airport-to-jerusalem/",
+        "Compare train, bus, taxi and transfer arrangements.",
+        airportHall,
+        "Ben Gurion Airport terminal",
+      ),
+      card(
+        "Jerusalem to Bethlehem",
+        "/travel-blog/jerusalem-to-bethlehem/",
+        "Plan a practical journey to Bethlehem from the city.",
+        bethlehemTravel,
+        "Road and buildings on the way to Bethlehem",
+      ),
+      card(
+        "Jerusalem to the Dead Sea",
+        "/travel-blog/jerusalem-to-the-dead-sea/",
+        "Compare routes for a desert and Dead Sea excursion.",
+        deadSeaTravel,
+        "Road through the Judean Desert",
+      ),
+      card(
+        "Getting around Israel",
+        "/travel-blog/getting-around-israel/",
+        "Compare trains, buses, light rail and taxis for journeys beyond Jerusalem.",
+        jerusalemLightRail,
+        "Jerusalem light-rail train",
+      ),
+      card(
+        "Airport travel on Shabbat",
+        "/travel-blog/from-ben-gurion-airport-on-shabbat/",
+        "Understand arrivals when regular public transport is limited.",
+        airportTransfers,
+        "Ben Gurion Airport terminal and aircraft",
+      ),
+      card(
+        "Visiting Masada",
+        "/attractions/masada/",
+        "Plan the fortress and cable car for an early desert visit.",
+        masadaCable,
+        "Cable car travelling toward Masada",
+      ),
     ],
   },
   telaviv: {
     name: "Tel Aviv",
     local: [
-      card("Attractions in Tel Aviv", "/travel-blog/attractions-in-tel-aviv/", "Find city sights beyond the hotel neighbourhood.", telAvivAttractions, "Central Tel Aviv city and neighborhood views"),
-      card("Museums in Tel Aviv", "/travel-blog/museums-in-tel-aviv/", "Explore art, heritage and the city’s museums.", museumTelAviv, "Museum architecture in Tel Aviv"),
-      card("Beaches in Tel Aviv", "/travel-blog/beaches-in-tel-aviv/", "Choose the right part of the waterfront for your visit.", beachesTelAviv, "Tel Aviv Mediterranean beach"),
-      card("Exploring Jaffa", "/attractions/jaffa/", "Explore Old Jaffa’s harbour, lanes and local character.", "/images/city-stays/tel-aviv-jaffa.webp", "Old Jaffa market and streets"),
-      card("Tel Aviv & Jaffa tours", "/tours/tel-aviv-jaffa/", "Find walking tours, neighborhood routes and historic Jaffa experiences.", telAvivTourHero, "Tel Aviv skyline and the Mediterranean coast"),
-      card("Food & market tours", "/tours/food-market-tours/", "Discover tasting routes and market walks in Tel Aviv.", telAvivFoodMarketTours, "Market food stalls and tasting experiences"),
+      card(
+        "Attractions in Tel Aviv",
+        "/travel-blog/attractions-in-tel-aviv/",
+        "Find city sights beyond the hotel neighbourhood.",
+        telAvivAttractions,
+        "Central Tel Aviv city and neighborhood views",
+      ),
+      card(
+        "Museums in Tel Aviv",
+        "/travel-blog/museums-in-tel-aviv/",
+        "Explore art, heritage and the city’s museums.",
+        museumTelAviv,
+        "Museum architecture in Tel Aviv",
+      ),
+      card(
+        "Beaches in Tel Aviv",
+        "/travel-blog/beaches-in-tel-aviv/",
+        "Choose the right part of the waterfront for your visit.",
+        beachesTelAviv,
+        "Tel Aviv Mediterranean beach",
+      ),
+      card(
+        "Exploring Jaffa",
+        "/attractions/jaffa/",
+        "Explore Old Jaffa’s harbour, lanes and local character.",
+        "/images/city-stays/tel-aviv-jaffa.webp",
+        "Old Jaffa market and streets",
+      ),
+      card(
+        "Tel Aviv & Jaffa tours",
+        "/tours/tel-aviv-jaffa/",
+        "Find walking tours, neighborhood routes and historic Jaffa experiences.",
+        telAvivTourHero,
+        "Tel Aviv skyline and the Mediterranean coast",
+      ),
+      card(
+        "Food & market tours",
+        "/tours/food-market-tours/",
+        "Discover tasting routes and market walks in Tel Aviv.",
+        telAvivFoodMarketTours,
+        "Market food stalls and tasting experiences",
+      ),
     ],
     onward: [
-      card("Ben Gurion Airport to Tel Aviv", "/travel-blog/ben-gurion-airport-to-tel-aviv/", "Select the right arrival connection for your hotel.", airportTransfers, "Airport arrival and transfer facilities"),
-      card("Getting around Tel Aviv", "/travel-blog/getting-around-tel-aviv/", "Plan walking, local trains, buses and taxis.", telAvivPromenade, "Tel Aviv promenade and city streets"),
-      card("Best time to visit Israel", "/travel-blog/best-time-to-visit-israel/", "Understand seasons, weather and regional travel conditions.", seasonPhoto, "Seasonal Mediterranean landscape"),
-      card("Airport arrivals on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/", "Check weekend arrivals and transport changes.", airportHall, "Ben Gurion Airport arrival terminal"),
-      card("What to eat in Israel", "/travel-blog/what-to-eat-in-israel/", "Add markets and regional food to your itinerary.", foodPhoto, "Israeli food and local dishes"),
-      card("Israel travel tips", "/travel-blog/israel-travel-tips/", "Practical preparation before you explore beyond the city.", seasonPhoto, "Seasonal landscape in Israel"),
+      card(
+        "Ben Gurion Airport to Tel Aviv",
+        "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+        "Select the right arrival connection for your hotel.",
+        airportTransfers,
+        "Airport arrival and transfer facilities",
+      ),
+      card(
+        "Getting around Tel Aviv",
+        "/travel-blog/getting-around-tel-aviv/",
+        "Plan walking, local trains, buses and taxis.",
+        telAvivPromenade,
+        "Tel Aviv promenade and city streets",
+      ),
+      card(
+        "Best time to visit Israel",
+        "/travel-blog/best-time-to-visit-israel/",
+        "Understand seasons, weather and regional travel conditions.",
+        seasonPhoto,
+        "Seasonal Mediterranean landscape",
+      ),
+      card(
+        "Airport arrivals on Shabbat",
+        "/travel-blog/from-ben-gurion-airport-on-shabbat/",
+        "Check weekend arrivals and transport changes.",
+        airportHall,
+        "Ben Gurion Airport arrival terminal",
+      ),
+      card(
+        "What to eat in Israel",
+        "/travel-blog/what-to-eat-in-israel/",
+        "Add markets and regional food to your itinerary.",
+        foodPhoto,
+        "Israeli food and local dishes",
+      ),
+      card(
+        "Israel travel tips",
+        "/travel-blog/israel-travel-tips/",
+        "Practical preparation before you explore beyond the city.",
+        seasonPhoto,
+        "Seasonal landscape in Israel",
+      ),
     ],
   },
   haifa: {
     name: "Haifa",
     local: [
-      card("Haifa travel guide", "/attractions/haifa/", "Explore the city's landmarks and neighbourhoods.", haifaOverview, "Haifa city and hillside"),
-      card("Museums in Haifa", "/travel-blog/museums-in-haifa/", "Find museums and cultural stops on Mount Carmel.", haifaMuseums, "Haifa museum and exhibits"),
-      card("Acre (Akko)", "/attractions/akko-acre/", "Discover the historic walled port city close to Haifa.", akkoPort, "Historic coastal stone buildings in Acre"),
-      card("Haifa shore excursions", "/shore-excursions/haifa/", "Explore the port region and excursions from Haifa.", haifaPort, "Port and coastline at Haifa"),
-      card("Rosh Hanikra", "/attractions/rosh-hanikra/", "Discover the dramatic grottoes and cliffs on the northern coast.", "/images/attractions/rosh-hanikra-cliffs.webp", "White cliffs and Mediterranean water at Rosh Hanikra"),
-      card("Caesarea, Haifa & Acre tours", "/tours/caesarea-haifa-acre/", "Explore guided tours of the northern Mediterranean coast.", caesareaAqueductPhoto, "Ancient Roman aqueduct by the beach at Caesarea"),
+      card(
+        "Haifa travel guide",
+        "/attractions/haifa/",
+        "Explore the city's landmarks and neighbourhoods.",
+        haifaOverview,
+        "Haifa city and hillside",
+      ),
+      card(
+        "Museums in Haifa",
+        "/travel-blog/museums-in-haifa/",
+        "Find museums and cultural stops on Mount Carmel.",
+        haifaMuseums,
+        "Haifa museum and exhibits",
+      ),
+      card(
+        "Acre (Akko)",
+        "/attractions/akko-acre/",
+        "Discover the historic walled port city close to Haifa.",
+        akkoPort,
+        "Historic coastal stone buildings in Acre",
+      ),
+      card(
+        "Haifa shore excursions",
+        "/shore-excursions/haifa/",
+        "Explore the port region and excursions from Haifa.",
+        haifaPort,
+        "Port and coastline at Haifa",
+      ),
+      card(
+        "Rosh Hanikra",
+        "/attractions/rosh-hanikra/",
+        "Discover the dramatic grottoes and cliffs on the northern coast.",
+        "/images/attractions/rosh-hanikra-cliffs.webp",
+        "White cliffs and Mediterranean water at Rosh Hanikra",
+      ),
+      card(
+        "Caesarea, Haifa & Acre tours",
+        "/tours/caesarea-haifa-acre/",
+        "Explore guided tours of the northern Mediterranean coast.",
+        caesareaAqueductPhoto,
+        "Ancient Roman aqueduct by the beach at Caesarea",
+      ),
     ],
     onward: [
-      card("Ben Gurion Airport to Haifa", "/travel-blog/ben-gurion-airport-to-haifa/", "Compare the train, taxi and transfer options.", airportHall, "Ben Gurion Airport arrivals hall"),
-      card("Visiting Tel Megiddo", "/attractions/tel-megiddo/", "Plan an archaeological stop in northern Israel.", megiddoPhoto, "Ancient ruins at Tel Megiddo"),
-      card("Caesarea", "/attractions/caesarea/", "Visit the Roman harbour on the coast south of Haifa.", caesareaPhoto, "Ancient Caesarea amphitheatre and coast"),
-      card("Getting around Israel", "/travel-blog/getting-around-israel/", "Connect Haifa with other cities and regional destinations.", roadTrip, "A road through Israeli countryside"),
-      card("Israel itinerary: seven days", "/travel-blog/israel-itinerary-7-days/", "Fit the coast and north into a one-week trip.", sevenDayPhoto, "Landscape of the Galilee"),
-      card("Best time to visit Israel", "/travel-blog/best-time-to-visit-israel/", "Plan around seasonal conditions and regional activities.", seasonPhoto, "Seasonal Israel landscape"),
+      card(
+        "Ben Gurion Airport to Haifa",
+        "/travel-blog/ben-gurion-airport-to-haifa/",
+        "Compare the train, taxi and transfer options.",
+        airportHall,
+        "Ben Gurion Airport arrivals hall",
+      ),
+      card(
+        "Visiting Tel Megiddo",
+        "/attractions/tel-megiddo/",
+        "Plan an archaeological stop in northern Israel.",
+        megiddoPhoto,
+        "Ancient ruins at Tel Megiddo",
+      ),
+      card(
+        "Caesarea",
+        "/attractions/caesarea/",
+        "Visit the Roman harbour on the coast south of Haifa.",
+        caesareaPhoto,
+        "Ancient Caesarea amphitheatre and coast",
+      ),
+      card(
+        "Getting around Israel",
+        "/travel-blog/getting-around-israel/",
+        "Connect Haifa with other cities and regional destinations.",
+        roadTrip,
+        "A road through Israeli countryside",
+      ),
+      card(
+        "Israel itinerary: seven days",
+        "/travel-blog/israel-itinerary-7-days/",
+        "Fit the coast and north into a one-week trip.",
+        sevenDayPhoto,
+        "Landscape of the Galilee",
+      ),
+      card(
+        "Best time to visit Israel",
+        "/travel-blog/best-time-to-visit-israel/",
+        "Plan around seasonal conditions and regional activities.",
+        seasonPhoto,
+        "Seasonal Israel landscape",
+      ),
     ],
   },
   tiberias: {
     name: "Tiberias",
     local: [
-      card("Sea of Galilee guide", "/attractions/sea-of-galilee/", "Explore the lake and surrounding attractions.", tiberiasLake, "Sea of Galilee near Tiberias"),
-      card("Magdala", "/attractions/magdala/", "Discover an archaeological site on the lakeshore.", magdalaPhoto, "Historic archaeological site at Magdala"),
-      card("Capernaum", "/attractions/capernaum/", "Plan a visit to the northern lakeside heritage site.", capernaumPhoto, "Ruins and stonework at Capernaum"),
-      card("Tabgha", "/attractions/tabgha/", "Explore churches and historic sites beside the lake.", tabghaPhoto, "Historic church setting at Tabgha"),
-      card("Yardenit", "/attractions/yardenit/", "Plan a visit to the Jordan River baptism site.", yardenitPhoto, "Yardenit and the Jordan River"),
-      card("Mount of Beatitudes", "/attractions/mount-of-beatitudes/", "Visit the hillside overlooking the Sea of Galilee.", beatitudesPhoto, "Mount of Beatitudes landscape"),
+      card(
+        "Sea of Galilee guide",
+        "/attractions/sea-of-galilee/",
+        "Explore the lake and surrounding attractions.",
+        tiberiasLake,
+        "Sea of Galilee near Tiberias",
+      ),
+      card(
+        "Magdala",
+        "/attractions/magdala/",
+        "Discover an archaeological site on the lakeshore.",
+        magdalaPhoto,
+        "Historic archaeological site at Magdala",
+      ),
+      card(
+        "Capernaum",
+        "/attractions/capernaum/",
+        "Plan a visit to the northern lakeside heritage site.",
+        capernaumPhoto,
+        "Ruins and stonework at Capernaum",
+      ),
+      card(
+        "Tabgha",
+        "/attractions/tabgha/",
+        "Explore churches and historic sites beside the lake.",
+        tabghaPhoto,
+        "Historic church setting at Tabgha",
+      ),
+      card(
+        "Yardenit",
+        "/attractions/yardenit/",
+        "Plan a visit to the Jordan River baptism site.",
+        yardenitPhoto,
+        "Yardenit and the Jordan River",
+      ),
+      card(
+        "Mount of Beatitudes",
+        "/attractions/mount-of-beatitudes/",
+        "Visit the hillside overlooking the Sea of Galilee.",
+        beatitudesPhoto,
+        "Mount of Beatitudes landscape",
+      ),
     ],
     onward: [
-      card("Mount Tabor", "/attractions/mount-tabor/", "Visit the hilltop basilica and enjoy views across Lower Galilee.", mountTaborPhoto, "Basilica and landscape on Mount Tabor"),
-      card("Nazareth & Galilee tours", "/tours/nazareth-sea-of-galilee/", "Explore organized trips to the region’s key places.", galileeTourPhoto, "Visitors viewing mosaics inside the Basilica of the Annunciation in Nazareth"),
-      card("Nazareth", "/attractions/basilica-of-the-annunciation/", "Add a trip to Nazareth and its major historic church.", nazarethPhoto, "Basilica of the Annunciation in Nazareth"),
-      card("Getting around Israel", "/travel-blog/getting-around-israel/", "See how the north fits with the rest of your journey.", roadTrip, "Road travel through the countryside"),
-      card("Israel itinerary: seven days", "/travel-blog/israel-itinerary-7-days/", "Build a northern stop into a week-long itinerary.", sevenDayPhoto, "Galilee hills and countryside"),
-      card("Israel itinerary: ten days", "/travel-blog/israel-itinerary-10-days/", "Allow more time around the lake and further afield.", caesareaPhoto, "Coastal sights and wider itinerary across Israel"),
+      card(
+        "Mount Tabor",
+        "/attractions/mount-tabor/",
+        "Visit the hilltop basilica and enjoy views across Lower Galilee.",
+        mountTaborPhoto,
+        "Basilica and landscape on Mount Tabor",
+      ),
+      card(
+        "Nazareth & Galilee tours",
+        "/tours/nazareth-sea-of-galilee/",
+        "Explore organized trips to the region’s key places.",
+        galileeTourPhoto,
+        "Visitors viewing mosaics inside the Basilica of the Annunciation in Nazareth",
+      ),
+      card(
+        "Nazareth",
+        "/attractions/basilica-of-the-annunciation/",
+        "Add a trip to Nazareth and its major historic church.",
+        nazarethPhoto,
+        "Basilica of the Annunciation in Nazareth",
+      ),
+      card(
+        "Getting around Israel",
+        "/travel-blog/getting-around-israel/",
+        "See how the north fits with the rest of your journey.",
+        roadTrip,
+        "Road travel through the countryside",
+      ),
+      card(
+        "Israel itinerary: seven days",
+        "/travel-blog/israel-itinerary-7-days/",
+        "Build a northern stop into a week-long itinerary.",
+        sevenDayPhoto,
+        "Galilee hills and countryside",
+      ),
+      card(
+        "Israel itinerary: ten days",
+        "/travel-blog/israel-itinerary-10-days/",
+        "Allow more time around the lake and further afield.",
+        caesareaPhoto,
+        "Coastal sights and wider itinerary across Israel",
+      ),
     ],
   },
   deadsea: {
     name: "the Dead Sea",
     local: [
-      card("The Dead Sea visitor guide", "/attractions/dead-sea/", "Learn about swimming, salt and practical conditions.", deadSeaPhoto, "Dead Sea beachfront and salt water"),
-      card("Dead Sea attractions", "/travel-blog/dead-sea-attractions/", "Compare natural sites and stops around the region.", deadSeaMudBathing, "Visitor enjoying a Dead Sea mineral mud treatment by the shoreline"),
-      card("Ein Gedi", "/attractions/ein-gedi/", "Plan a visit to the springs and nature reserve.", einGediPhoto, "Waterfall and green cliffs in Ein Gedi Nature Reserve"),
-      card("Masada", "/attractions/masada/", "Visit the historic desert fortress near the shore.", masadaPhoto, "Masada and Dead Sea landscape"),
-      card("Qasr el Yahud", "/attractions/qasr-el-yahud/", "Visit the historic baptism site beside the Jordan River.", qasrPhoto, "Jordan River baptism site at Qasr el Yahud"),
-      card("Masada & Dead Sea tours", "/tours/masada-dead-sea/", "Explore tour options combining the fortress and the shore.", masadaTourPhoto, "Desert excursion to Masada and the Dead Sea"),
+      card(
+        "The Dead Sea visitor guide",
+        "/attractions/dead-sea/",
+        "Learn about swimming, salt and practical conditions.",
+        deadSeaPhoto,
+        "Dead Sea beachfront and salt water",
+      ),
+      card(
+        "Dead Sea attractions",
+        "/travel-blog/dead-sea-attractions/",
+        "Compare natural sites and stops around the region.",
+        deadSeaMudBathing,
+        "Visitor enjoying a Dead Sea mineral mud treatment by the shoreline",
+      ),
+      card(
+        "Ein Gedi",
+        "/attractions/ein-gedi/",
+        "Plan a visit to the springs and nature reserve.",
+        einGediPhoto,
+        "Waterfall and green cliffs in Ein Gedi Nature Reserve",
+      ),
+      card(
+        "Masada",
+        "/attractions/masada/",
+        "Visit the historic desert fortress near the shore.",
+        masadaPhoto,
+        "Masada and Dead Sea landscape",
+      ),
+      card(
+        "Qasr el Yahud",
+        "/attractions/qasr-el-yahud/",
+        "Visit the historic baptism site beside the Jordan River.",
+        qasrPhoto,
+        "Jordan River baptism site at Qasr el Yahud",
+      ),
+      card(
+        "Masada & Dead Sea tours",
+        "/tours/masada-dead-sea/",
+        "Explore tour options combining the fortress and the shore.",
+        masadaTourPhoto,
+        "Desert excursion to Masada and the Dead Sea",
+      ),
     ],
     onward: [
-      card("Ben Gurion Airport to Ein Bokek", "/travel-blog/ben-gurion-airport-to-ein-bokek/", "Compare routes to the Dead Sea hotel strip.", airportHall, "Ben Gurion Airport arrival terminal"),
-      card("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Plan a day trip or transfer from Jerusalem.", deadSeaTravel, "Road from Jerusalem to the Dead Sea"),
-      card("Israel itinerary: three days", "/travel-blog/israel-itinerary-3-days/", "Consider the Dead Sea on a short holiday.", roadTrip, "Scenic road in Israel"),
-      card("Israel itinerary: five days", "/travel-blog/israel-itinerary-5-days/", "Combine a Dead Sea stay with other regions.", seasonPhoto, "Israeli desert and seasonal landscape"),
-      card("Israel calendar of events", "/travel-blog/calendar-of-events/", "Check holiday dates when planning hotel and transport arrangements.", israelCalendar, "Israel travel calendar and special dates"),
-      card("Baptism in the Jordan River", "/travel-blog/baptism-in-the-jordan-river/", "Compare the main baptism locations and access.", "/images/attractions/jordan-river-baptism.webp", "Jordan River waterside"),
+      card(
+        "Ben Gurion Airport to Ein Bokek",
+        "/travel-blog/ben-gurion-airport-to-ein-bokek/",
+        "Compare routes to the Dead Sea hotel strip.",
+        airportHall,
+        "Ben Gurion Airport arrival terminal",
+      ),
+      card(
+        "Jerusalem to the Dead Sea",
+        "/travel-blog/jerusalem-to-the-dead-sea/",
+        "Plan a day trip or transfer from Jerusalem.",
+        deadSeaTravel,
+        "Road from Jerusalem to the Dead Sea",
+      ),
+      card(
+        "Israel itinerary: three days",
+        "/travel-blog/israel-itinerary-3-days/",
+        "Consider the Dead Sea on a short holiday.",
+        roadTrip,
+        "Scenic road in Israel",
+      ),
+      card(
+        "Israel itinerary: five days",
+        "/travel-blog/israel-itinerary-5-days/",
+        "Combine a Dead Sea stay with other regions.",
+        seasonPhoto,
+        "Israeli desert and seasonal landscape",
+      ),
+      card(
+        "Israel calendar of events",
+        "/travel-blog/calendar-of-events/",
+        "Check holiday dates when planning hotel and transport arrangements.",
+        israelCalendar,
+        "Israel travel calendar and special dates",
+      ),
+      card(
+        "Baptism in the Jordan River",
+        "/travel-blog/baptism-in-the-jordan-river/",
+        "Compare the main baptism locations and access.",
+        "/images/attractions/jordan-river-baptism.webp",
+        "Jordan River waterside",
+      ),
     ],
   },
 };
 
 export function StayTripLinks({
-  region, currentPath, presentation = "stay",
+  region,
+  currentPath,
+  presentation = "stay",
 }: {
   region: string;
   currentPath?: string;
@@ -173,7 +535,8 @@ export function StayTripLinks({
   const normalized = (url: string) => url.replace(/\/+$/, "");
   const visited = new Set<string>();
   const keep = (item: GuideCard) => {
-    if (normalized(item.to) === normalized(currentPath ?? "") || visited.has(normalized(item.to))) return false;
+    if (normalized(item.to) === normalized(currentPath ?? "") || visited.has(normalized(item.to)))
+      return false;
     visited.add(normalized(item.to));
     return true;
   };
@@ -181,26 +544,84 @@ export function StayTripLinks({
   const onward = set.onward.filter(keep);
   const renderCards = (items: GuideCard[], grid: string, testId: string): ReactNode => (
     <ul className={`mt-5 grid gap-4 ${grid}`} data-testid={testId}>
-      {items.map((item) => <li key={item.to} className="min-w-0">
-        <Link to={item.to as LinkProps["to"]} className={`editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden ${isEditorial ? "rounded-xl" : "rounded-2xl"} border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`}>
-          <img src={item.photo} alt={item.alt} loading="lazy" decoding="async" width={600} height={375} className="aspect-[16/10] w-full object-cover" />
-          <span className={`flex flex-1 flex-col ${isEditorial ? "p-4" : "p-3 sm:p-4"}`}>
-            <span className={isEditorial ? "text-base font-bold leading-snug text-foreground group-hover:text-primary" : "text-sm font-semibold leading-snug text-foreground group-hover:text-primary sm:text-lg"}>{item.title}</span>
-            <span className={isEditorial ? "mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground" : "mt-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm"}>{item.note}</span>
-            
-          </span>
-        </Link>
-      </li>)}
+      {items.map((item) => (
+        <li key={item.to} className="min-w-0">
+          <Link
+            to={item.to as LinkProps["to"]}
+            className={`editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden ${isEditorial ? "rounded-xl" : "rounded-2xl"} border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`}
+          >
+            <img
+              src={item.photo}
+              alt={item.alt}
+              loading="lazy"
+              decoding="async"
+              width={600}
+              height={375}
+              className="aspect-[16/10] w-full object-cover"
+            />
+            <span className={`flex flex-1 flex-col ${isEditorial ? "p-4" : "p-3 sm:p-4"}`}>
+              <span
+                className={
+                  isEditorial
+                    ? "text-base font-bold leading-snug text-foreground group-hover:text-primary"
+                    : "text-sm font-semibold leading-snug text-foreground group-hover:text-primary sm:text-lg"
+                }
+              >
+                {item.title}
+              </span>
+              <span
+                className={
+                  isEditorial
+                    ? "mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground"
+                    : "mt-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm"
+                }
+              >
+                {item.note}
+              </span>
+            </span>
+          </Link>
+        </li>
+      ))}
     </ul>
   );
-  return <div data-testid="stay-trip-planning" className="space-y-12">
-    {local.length > 0 && <section id="explore" aria-labelledby="stay-explore-h" className="mt-14 scroll-mt-32">
-      <h2 id="stay-explore-h" className="text-2xl font-bold sm:text-3xl">Explore more around {set.name}</h2>
-      {renderCards(local, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" || region === "haifa" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
-    </section>}
-    {onward.length > 0 && <section id="trip-planning" aria-labelledby="stay-planning-h" className="scroll-mt-32">
-      <h2 id="stay-planning-h" className="text-2xl font-bold sm:text-3xl">Plan the rest of your trip</h2>
-      {renderCards(onward, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" || region === "haifa" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-3", "stay-trip-photo-grid")}
-    </section>}
-  </div>;
+  return (
+    <div data-testid="stay-trip-planning" className="space-y-12">
+      {local.length > 0 && (
+        <section id="explore" aria-labelledby="stay-explore-h" className="mt-14 scroll-mt-32">
+          <h2 id="stay-explore-h" className="text-2xl font-bold sm:text-3xl">
+            Explore more around {set.name}
+          </h2>
+          {renderCards(
+            local,
+            region === "jerusalem" ||
+              region === "telaviv" ||
+              region === "deadsea" ||
+              region === "tiberias" ||
+              region === "haifa"
+              ? "grid-cols-2 lg:grid-cols-3"
+              : "sm:grid-cols-2",
+            "stay-local-photo-grid",
+          )}
+        </section>
+      )}
+      {onward.length > 0 && (
+        <section id="trip-planning" aria-labelledby="stay-planning-h" className="scroll-mt-32">
+          <h2 id="stay-planning-h" className="text-2xl font-bold sm:text-3xl">
+            Plan the rest of your trip
+          </h2>
+          {renderCards(
+            onward,
+            region === "jerusalem" ||
+              region === "telaviv" ||
+              region === "deadsea" ||
+              region === "tiberias" ||
+              region === "haifa"
+              ? "grid-cols-2 lg:grid-cols-3"
+              : "sm:grid-cols-2 lg:grid-cols-3",
+            "stay-trip-photo-grid",
+          )}
+        </section>
+      )}
+    </div>
+  );
 }

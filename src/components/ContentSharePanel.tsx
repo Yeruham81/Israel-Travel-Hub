@@ -159,7 +159,13 @@ export function ContentSharePanel({ pathname }: { pathname: string }) {
               target={id === "email" ? undefined : "_blank"}
               rel={id === "email" ? undefined : "noopener noreferrer"}
               referrerPolicy="no-referrer"
-              aria-label={id === "email" ? "Share by email" : id === "whatsapp" || id === "telegram" ? `Share via ${label}` : `Share on ${label}`}
+              aria-label={
+                id === "email"
+                  ? "Share by email"
+                  : id === "whatsapp" || id === "telegram"
+                    ? `Share via ${label}`
+                    : `Share on ${label}`
+              }
             >
               {id === "email" ? (
                 <Mail aria-hidden="true" />

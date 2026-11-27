@@ -1,3 +1,4 @@
+import { sourceFragment } from "@/test-utils/source-fragment";
 import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { affiliateConfig, tourBookingOffers, tourProducts } from "@/data/registry";
@@ -21,27 +22,27 @@ describe("Jordan River baptism comparison guide",()=>{
   it("pairs a Yardenit photo with visitor facts and shows only two location pins on the comparison map",()=>{
     const page = readFileSync("src/components/JordanRiverBaptismGuide.tsx","utf8");
     const map = readFileSync("public/maps/area.html","utf8");
-    expect(page).toContain('data-testid="baptism-yardenit-photo-facts"');
-    expect(page).toContain('src={yardenitSite.hero.src}');
-    expect(page).toContain('alt={yardenitSite.hero.alt}');
-    expect(page).toContain('pinMode: "locations"');
-    expect(page).toContain('waypoints: JSON.stringify(baptismMapLocations)');
-    expect(page).toContain('src={baptismComparisonMapUrl}');
-    expect(page).not.toContain('maps?saddr=');
-    expect(page).not.toContain('origin=Yardenit%20Baptismal%20Site%2C%20Israel&destination=Qasr');
-    expect(page).not.toContain("The map illustrates their separation, not a guaranteed travel time");
+    expect(page).toMatch(sourceFragment('data-testid="baptism-yardenit-photo-facts"'));
+    expect(page).toMatch(sourceFragment('src={yardenitSite.hero.src}'));
+    expect(page).toMatch(sourceFragment('alt={yardenitSite.hero.alt}'));
+    expect(page).toMatch(sourceFragment('pinMode: "locations"'));
+    expect(page).toMatch(sourceFragment('waypoints: JSON.stringify(baptismMapLocations)'));
+    expect(page).toMatch(sourceFragment('src={baptismComparisonMapUrl}'));
+    expect(page).not.toMatch(sourceFragment('maps?saddr='));
+    expect(page).not.toMatch(sourceFragment('origin=Yardenit%20Baptismal%20Site%2C%20Israel&destination=Qasr'));
+    expect(page).not.toMatch(sourceFragment("The map illustrates their separation, not a guaranteed travel time"));
     expect(map).toContain('const locationPinMode = params.get("pinMode") === "locations"');
     expect(map).toContain('locationPinMode ? "Location" : "Stop"');
   });
   it("uses concise, positive practical wording without unnecessary cross-border commentary",()=>{
     const page = readFileSync("src/components/JordanRiverBaptismGuide.tsx","utf8");
-    expect(page).not.toContain("The opposite, Jordanian bank is home to");
-    expect(page).not.toContain("A riverbank visit is not permission to cross between countries");
-    expect(page).not.toContain("Neither tradition nor archaeology establishes");
-    expect(page).toContain("Guiding and religious services should be arranged separately.");
-    expect(page).not.toContain("Guiding and religious services are arranged separately.");
-    expect(page).not.toContain("editorial snapshots, not live offers");
-    expect(page).toContain("Check current prices, availability, the exact river stop");
+    expect(page).not.toMatch(sourceFragment("The opposite, Jordanian bank is home to"));
+    expect(page).not.toMatch(sourceFragment("A riverbank visit is not permission to cross between countries"));
+    expect(page).not.toMatch(sourceFragment("Neither tradition nor archaeology establishes"));
+    expect(page).toMatch(sourceFragment("Guiding and religious services should be arranged separately."));
+    expect(page).not.toMatch(sourceFragment("Guiding and religious services are arranged separately."));
+    expect(page).not.toMatch(sourceFragment("editorial snapshots, not live offers"));
+    expect(page).toMatch(sourceFragment("Check current prices, availability, the exact river stop"));
     expect(baptismTourGroups[0].description).toContain("arrange it separately with your officiant and the site");
     expect(baptismTourGroups[0].description).not.toContain("does not automatically include");
   });

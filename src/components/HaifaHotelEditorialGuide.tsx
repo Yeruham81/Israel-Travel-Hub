@@ -31,60 +31,77 @@ const sections = [
   ["contact", "Contact me"],
 ] as const;
 
-type HotelNote = { kind: string; summary: string; bestFor: string; consider: string; beach: string };
+type HotelNote = {
+  kind: string;
+  summary: string;
+  bestFor: string;
+  consider: string;
+  beach: string;
+};
 const hotelNotes: Record<string, HotelNote> = {
   "haifa-botanica": {
     kind: "Design hotel",
-    summary: "Contemporary design, a spa and a seasonal rooftop plunge pool beside the lower Bahá'í Gardens.",
+    summary:
+      "Contemporary design, a spa and a seasonal rooftop plunge pool beside the lower Bahá'í Gardens.",
     bestFor: "Couples and guests aged 16+ seeking a stylish German Colony stay",
-    consider: "Guests must be aged 16 or older. Check additional spa charges and seasonal rooftop pool opening hours.",
+    consider:
+      "Guests must be aged 16 or older. Check additional spa charges and seasonal rooftop pool opening hours.",
     beach: "Travel required for a swimming beach",
   },
   "haifa-dan-carmel": {
     kind: "Luxury hotel",
-    summary: "An established Carmel hotel near the Louis Promenade, with gardens, outdoor pools and bay views.",
+    summary:
+      "An established Carmel hotel near the Louis Promenade, with gardens, outdoor pools and bay views.",
     bestFor: "Couples and families who prefer an upscale Carmel base",
-    consider: "Check how many guests your room accommodates, pool opening hours and age restrictions in executive areas.",
+    consider:
+      "Check how many guests your room accommodates, pool opening hours and age restrictions in executive areas.",
     beach: "Hilltop setting; travel to the beach",
   },
   "haifa-schumacher": {
     kind: "Heritage boutique",
-    summary: "A restored Templer building and modern wing with a garden and rooftop terrace in the German Colony.",
+    summary:
+      "A restored Templer building and modern wing with a garden and rooftop terrace in the German Colony.",
     bestFor: "Adults seeking historic architecture and a smaller hotel",
     consider: "Adults-only policy; check your room's building, steps and breakfast arrangements.",
     beach: "City location; travel to the beach",
   },
   "haifa-colony": {
     kind: "Historic boutique",
-    summary: "A preserved hotel on Ben Gurion Boulevard, close to restaurants and the lower Bahá'í Gardens.",
+    summary:
+      "A preserved hotel on Ben Gurion Boulevard, close to restaurants and the lower Bahá'í Gardens.",
     bestFor: "Visitors who want to walk around the German Colony",
     consider: "Check room views, street noise, parking and whether breakfast is included.",
     beach: "City location; travel to the beach",
   },
   "haifa-crowne-plaza": {
     kind: "Carmel family hotel",
-    summary: "A Carmel Center hotel with a heated indoor pool, near viewpoints and city restaurants.",
+    summary:
+      "A Carmel Center hotel with a heated indoor pool, near viewpoints and city restaurants.",
     bestFor: "Families wanting a hilltop base and an indoor swimming option",
-    consider: "Check whether children can use the pool and how many guests each room accommodates. Review the health club's rules.",
+    consider:
+      "Check whether children can use the pool and how many guests each room accommodates. Review the health club's rules.",
     beach: "Separate trip to the shore",
   },
   "haifa-leonardo-plaza": {
     kind: "Beachfront hotel",
-    summary: "A hotel on Haifa's southern beachfront with beach access, swimming pools and seasonal children's activities.",
+    summary:
+      "A hotel on Haifa's southern beachfront with beach access, swimming pools and seasonal children's activities.",
     bestFor: "Families whose holiday centers on the beach and promenade",
     consider: "Check the suite layout, pool opening hours and kids' club schedule.",
     beach: "Beach access from the pool area",
   },
   "haifa-golden-crown": {
     kind: "Lower-city hotel",
-    summary: "A modern hotel near the German Colony and downtown, convenient for urban sightseeing and dining.",
+    summary:
+      "A modern hotel near the German Colony and downtown, convenient for urban sightseeing and dining.",
     bestFor: "Visitors prioritizing a lower-city base",
     consider: "Check parking, room views and transport to the railway station or cruise terminal.",
     beach: "Urban hotel; travel to the coast",
   },
   "haifa-nof": {
     kind: "Carmel city hotel",
-    summary: "A Carmel Center hotel overlooking Haifa Bay, also known on some booking sites as Haifa Bay View.",
+    summary:
+      "A Carmel Center hotel overlooking Haifa Bay, also known on some booking sites as Haifa Bay View.",
     bestFor: "Travelers looking for panoramic bay views and a convenient Mount Carmel location",
     consider: "Verify 101 Hanassi Avenue if the provider uses the former Haifa Bay View name.",
     beach: "Hilltop view; separate beach journey",
@@ -98,9 +115,11 @@ const hotelNotes: Record<string, HotelNote> = {
   },
   "haifa-loui-talpiot": {
     kind: "Market-area hotel",
-    summary: "A small accommodation option near Talpiot Market in Hadar, with rooms offering kitchenettes and access to shared rooftop areas.",
+    summary:
+      "A small accommodation option near Talpiot Market in Hadar, with rooms offering kitchenettes and access to shared rooftop areas.",
     bestFor: "Food and market enthusiasts and self-catering travelers",
-    consider: "Check kitchen equipment, steps, event noise and travel between Hadar and the Carmel.",
+    consider:
+      "Check kitchen equipment, steps, event noise and travel between Hadar and the Carmel.",
     beach: "Hadar location; separate beach journey",
   },
 };
@@ -109,27 +128,32 @@ const groupCopy: Record<string, { title: string; eyebrow: string; advice: string
   luxury: {
     title: "Luxury & romantic stays",
     eyebrow: "German Colony design or Carmel views",
-    advice: "Choose Botanica for a stylish hotel with age restrictions in the German Colony, or Dan Carmel for a larger hilltop hotel with pools and family facilities.",
+    advice:
+      "Choose Botanica for a stylish hotel with age restrictions in the German Colony, or Dan Carmel for a larger hilltop hotel with pools and family facilities.",
   },
   boutique: {
     title: "Boutique & heritage hotels",
     eyebrow: "Historic architecture and neighborhood life",
-    advice: "The Schumacher offers an adults-only boutique experience, while The Colony Hotel puts you on Ben Gurion Boulevard near restaurants and the lower gardens.",
+    advice:
+      "The Schumacher offers an adults-only boutique experience, while The Colony Hotel puts you on Ben Gurion Boulevard near restaurants and the lower gardens.",
   },
   family: {
     title: "Family & beach hotels",
     eyebrow: "Pools, space and the daily journey",
-    advice: "Compare Crowne Plaza's indoor pool and Carmel location with Leonardo Plaza's beachfront setting and seasonal children's facilities.",
+    advice:
+      "Compare Crowne Plaza's indoor pool and Carmel location with Leonardo Plaza's beachfront setting and seasonal children's facilities.",
   },
   "mid-range": {
     title: "Practical city hotels",
     eyebrow: "Downtown access or a Carmel outlook",
-    advice: "Choose Golden Crown for a stay in downtown Haifa or Nof for views over the bay from Mount Carmel. Compare prices for your travel dates.",
+    advice:
+      "Choose Golden Crown for a stay in downtown Haifa or Nof for views over the bay from Mount Carmel. Compare prices for your travel dates.",
   },
   budget: {
     title: "Independent & budget-minded stays",
     eyebrow: "Simple rooms and local character",
-    advice: "Port Inn is located in downtown Haifa, while Loui Talpiot is near Talpiot Market in Hadar. Compare room facilities, arrival arrangements and the total price.",
+    advice:
+      "Port Inn is located in downtown Haifa, while Loui Talpiot is near Talpiot Market in Hadar. Compare room facilities, arrival arrangements and the total price.",
   },
 };
 
@@ -181,19 +205,39 @@ const browseLabels: Record<string, string> = {
 };
 
 function trackedExpediaBrowseLink(pageKey: string) {
-  return linksForPage(pageKey).find(link =>
-    link.isAffiliate && link.partnerId === "expedia"
-    && /^https:\/\/expedia\.(?:tpm\.li|tpk\.lv)\/[A-Za-z0-9]+(?:\?[^\s]*)?$/.test(link.url)
+  return linksForPage(pageKey).find(
+    (link) =>
+      link.isAffiliate &&
+      link.partnerId === "expedia" &&
+      /^https:\/\/expedia\.(?:tpm\.li|tpk\.lv)\/[A-Za-z0-9]+(?:\?[^\s]*)?$/.test(link.url),
   );
 }
 
 const bookingTips = [
-  { title: "Consider Haifa's steep hills", text: "Even short walks in Haifa can involve steep hills. Check walks, steps and the Carmelit or bus connection." },
-  { title: "Confirm your beach plan", text: "For beach days, choose the southern seafront. Mount Carmel hotels offer bay views with a separate journey to the shore." },
-  { title: "Choose the right room for your group", text: "Check all guest ages, bed arrangements, connecting rooms and any adults-only policy before paying." },
-  { title: "Compare actual facilities", text: "Pools, plunge pools, spa treatments and children's activities can have different seasons or access rules." },
-  { title: "Check transport and parking", text: "Confirm train station, parking charges and the exact drop-off point, particularly for a late arrival or cruise." },
-  { title: "Review the total price", text: "Compare the same dates, guests, meals and cancellation terms, including any parking or spa extras." },
+  {
+    title: "Consider Haifa's steep hills",
+    text: "Even short walks in Haifa can involve steep hills. Check walks, steps and the Carmelit or bus connection.",
+  },
+  {
+    title: "Confirm your beach plan",
+    text: "For beach days, choose the southern seafront. Mount Carmel hotels offer bay views with a separate journey to the shore.",
+  },
+  {
+    title: "Choose the right room for your group",
+    text: "Check all guest ages, bed arrangements, connecting rooms and any adults-only policy before paying.",
+  },
+  {
+    title: "Compare actual facilities",
+    text: "Pools, plunge pools, spa treatments and children's activities can have different seasons or access rules.",
+  },
+  {
+    title: "Check transport and parking",
+    text: "Confirm train station, parking charges and the exact drop-off point, particularly for a late arrival or cruise.",
+  },
+  {
+    title: "Review the total price",
+    text: "Compare the same dates, guests, meals and cancellation terms, including any parking or spa extras.",
+  },
 ] as const;
 
 function HotelCard({ id, pageId }: { id: string; pageId: string }) {
@@ -202,224 +246,522 @@ function HotelCard({ id, pageId }: { id: string; pageId: string }) {
   const photo = resortHotelPhoto(id);
   const booking = hotelBooking(id);
   if (!note) return null;
-  return <li id={"hotel-" + id} className="flex h-full min-w-0 scroll-mt-32 flex-col overflow-hidden rounded-xl border bg-card shadow-sm" data-testid="haifa-editorial-hotel-card">
-    <figure className="overflow-hidden bg-muted">
-      <img src={photo.src} alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-    </figure>
-    <div className="flex flex-1 flex-col p-4 sm:p-5">
-      <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-        <Hotel className="h-4 w-4 shrink-0 text-primary" aria-hidden /> {note.kind}
-      </p>
-      <h4 className="mt-2 text-lg font-bold leading-snug sm:text-xl">{hotel.name}</h4>
-      <p className="mt-2 flex items-start gap-1.5 text-xs text-muted-foreground">
-        <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden /> {hotel.resortFacts.location}
-      </p>
-      <a href={hotelGoogleMapsUrl(hotel)} target="_blank" rel="noopener noreferrer"
-        aria-label={"View location of " + hotel.name + " on Google Maps (opens in a new tab)"}
-        className="mt-1.5 inline-flex w-fit items-center gap-1.5 text-xs font-medium text-primary underline underline-offset-2 hover:text-primary/80"
-        data-testid="haifa-hotel-map-link">
-        View location on Google Maps <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-      </a>
-      <p className="mt-3 text-sm leading-relaxed">{note.summary}</p>
-      <p className="mt-3 text-sm leading-relaxed"><strong>Best for:</strong> {note.bestFor}</p>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Beach access:</strong> {note.beach}</p>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Before booking:</strong> {note.consider}</p>
-      {booking?.isAffiliate ? <a href={hotelAffiliateUrl(booking, pageId, hotel.id)}
-        target="_blank" rel={relFor(booking.isAffiliate)}
-        onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
-        aria-label={"Check rooms and rates for " + hotel.name + " on Expedia (opens in a new tab)"}
-        className="group mt-auto flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        data-testid="haifa-editorial-hotel-link">
-        Check rooms & rates <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
-      </a> : <Link to="/accommodation/haifa/" className="mt-auto flex min-h-11 items-center justify-center gap-2 rounded-lg border p-3 text-center text-sm font-semibold text-primary">Explore Haifa hotels <ArrowRight className="h-4 w-4" aria-hidden /></Link>}
-    </div>
-  </li>;
+  return (
+    <li
+      id={"hotel-" + id}
+      className="flex h-full min-w-0 scroll-mt-32 flex-col overflow-hidden rounded-xl border bg-card shadow-sm"
+      data-testid="haifa-editorial-hotel-card"
+    >
+      <figure className="overflow-hidden bg-muted">
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          width={755}
+          height={503}
+          loading="lazy"
+          decoding="async"
+          className="aspect-[16/9] w-full object-cover"
+        />
+      </figure>
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          <Hotel className="h-4 w-4 shrink-0 text-primary" aria-hidden /> {note.kind}
+        </p>
+        <h4 className="mt-2 text-lg font-bold leading-snug sm:text-xl">{hotel.name}</h4>
+        <p className="mt-2 flex items-start gap-1.5 text-xs text-muted-foreground">
+          <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />{" "}
+          {hotel.resortFacts.location}
+        </p>
+        <a
+          href={hotelGoogleMapsUrl(hotel)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={"View location of " + hotel.name + " on Google Maps (opens in a new tab)"}
+          className="mt-1.5 inline-flex w-fit items-center gap-1.5 text-xs font-medium text-primary underline underline-offset-2 hover:text-primary/80"
+          data-testid="haifa-hotel-map-link"
+        >
+          View location on Google Maps <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+        </a>
+        <p className="mt-3 text-sm leading-relaxed">{note.summary}</p>
+        <p className="mt-3 text-sm leading-relaxed">
+          <strong>Best for:</strong> {note.bestFor}
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          <strong className="text-foreground">Beach access:</strong> {note.beach}
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          <strong className="text-foreground">Before booking:</strong> {note.consider}
+        </p>
+        {booking?.isAffiliate ? (
+          <a
+            href={hotelAffiliateUrl(booking, pageId, hotel.id)}
+            target="_blank"
+            rel={relFor(booking.isAffiliate)}
+            onClick={() =>
+              recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })
+            }
+            aria-label={
+              "Check rooms and rates for " + hotel.name + " on Expedia (opens in a new tab)"
+            }
+            className="group mt-auto flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            data-testid="haifa-editorial-hotel-link"
+          >
+            Check rooms & rates <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
+          </a>
+        ) : (
+          <Link
+            to="/accommodation/haifa/"
+            className="mt-auto flex min-h-11 items-center justify-center gap-2 rounded-lg border p-3 text-center text-sm font-semibold text-primary"
+          >
+            Explore Haifa hotels <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        )}
+      </div>
+    </li>
+  );
 }
 
 export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestination }) {
   const pageId = "guide-best-hotels-in-haifa";
   const groups = guide.groups;
-  const mainGroups = groups.filter(group => group.id !== "budget");
-  const budgetGroup = groups.find(group => group.id === "budget");
-  const allHotelIds = groups.flatMap(group => group.hotelIds);
-  const sourceIds = [...new Set([...guide.sourceIds, ...allHotelIds.map(id => resortHotel(id).sourceId)])];
+  const mainGroups = groups.filter((group) => group.id !== "budget");
+  const budgetGroup = groups.find((group) => group.id === "budget");
+  const allHotelIds = groups.flatMap((group) => group.hotelIds);
+  const sourceIds = [
+    ...new Set([...guide.sourceIds, ...allHotelIds.map((id) => resortHotel(id).sourceId)]),
+  ];
   const allHotelsAffiliate = trackedExpediaBrowseLink("stay-haifa-browse");
 
-  return <main className="pb-10" data-testid="haifa-style-editorial">
-    <GuideHeader
-      crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: accommodationEditorial.haifa.title, to: accommodationEditorial.haifa.path as LinkProps["to"] }]}
-      eyebrow="Travel guide · Haifa"
-      title={guide.title}
-      intro={guide.intro}
-      image={guide.photo}
-      checkedAt={guide.reviewedAt}
-    />
-    <OnThisPage sections={sections} />
-    <article className="mx-auto max-w-5xl px-4">
-      <section id="choose" className="mt-10 scroll-mt-32" aria-labelledby="choose-h">
-        <p className="eyebrow">Choose the location, then the hotel</p>
-        <h2 id="choose-h" className="mt-2 text-3xl">Which Haifa stay suits you?</h2>
-        <p className="mt-4 max-w-4xl leading-relaxed">I recommend choosing your Haifa neighborhood before comparing rooms. The German Colony puts restaurants and historic streets close by; Mount Carmel suits viewpoints and upper-city dining; and the southern waterfront is convenient for beach days. Downtown and Hadar offer lively urban bases, including independent places to stay.</p>
-        <Link to="/accommodation/haifa/" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary" data-testid="editorial-all-hotels-link">
-          Browse all Haifa hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-        </Link>
-        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-2" data-testid="haifa-category-grid">
-          {mainGroups.map(group => {
-            const copy = groupCopy[group.id];
-            return <a key={group.id} href={"#group-" + group.id}
-              className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md" data-testid="haifa-category-card">
-              <img src={group.photo.src} alt={group.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
-              <span className="flex min-w-0 flex-1 flex-col p-3 sm:p-4">
-                <span className="break-words text-sm font-bold leading-snug sm:text-lg">{copy?.title ?? group.title}</span>
-                <span className="mt-2 line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{copy?.eyebrow ?? group.intro}</span>
-                <span className="mt-3 inline-flex flex-wrap items-center gap-1 text-xs font-semibold text-primary sm:text-sm">See hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden /></span>
-              </span>
-            </a>;
-          })}
-        </div>
-        {budgetGroup && (
-        <a href="#group-budget" className="group mt-4 flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md sm:flex-row sm:items-center" data-testid="haifa-budget-spotlight">
-          <span className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
-            <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Another way to stay in Haifa</span>
-            <strong className="mt-1 break-words text-base leading-snug sm:text-lg">Independent & budget-minded stays</strong>
-            <span className="mt-2 text-sm leading-relaxed text-muted-foreground">Explore smaller places to stay in the lower city and around Talpiot Market.</span>
-          </span>
-          <span className="flex min-h-11 shrink-0 items-center gap-2 border-t px-4 py-3 text-sm font-semibold text-primary sm:border-l sm:border-t-0 sm:px-5">
-            See hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-          </span>
-        </a>
-        )}
-        <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
-          <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
-          <p>For a beach holiday, start with the southern seafront. For viewpoints and restaurants on Mount Carmel, compare hotels in the upper city. The German Colony is a useful base for historic streets and the lower Bahá'í Gardens.</p>
-        </aside>
-      </section>
-
-      <section id="compare" className="mt-14 scroll-mt-32" aria-labelledby="compare-h">
-        <h2 id="compare-h" className="text-3xl">Haifa hotels at a glance</h2>
-        <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" tabIndex={0} aria-label="Compare 10 Haifa hotel recommendations">
-          <table className="w-full min-w-[700px] text-left text-sm" data-testid="haifa-hotel-comparison">
-            <caption className="sr-only">Recommended Haifa stays by main appeal, neighborhood and beach access</caption>
-            <thead className="bg-secondary"><tr>
-              <th scope="col" className="px-4 py-3 font-semibold">Hotel</th>
-              <th scope="col" className="px-4 py-3 font-semibold">Best for</th>
-              <th scope="col" className="px-4 py-3 font-semibold">Location</th>
-              <th scope="col" className="px-4 py-3 font-semibold">Beach access</th>
-            </tr></thead>
-            <tbody className="divide-y">
-              {allHotelIds.map(id => {
-                const hotel = resortHotel(id);
-                const note = hotelNotes[id];
-                return <tr key={id} data-testid="haifa-comparison-row">
-                  <th scope="row" className="min-w-44 px-4 py-4 align-top"><a href={"#hotel-" + id} className="font-semibold text-primary underline underline-offset-2">{hotel.name}</a></th>
-                  <td className="px-4 py-4 align-top leading-relaxed">{note?.bestFor ?? hotel.bestFor}</td>
-                  <td className="px-4 py-4 align-top leading-relaxed text-muted-foreground">{hotel.resortFacts.location}</td>
-                  <td className="px-4 py-4 align-top leading-relaxed text-muted-foreground">{note?.beach ?? hotel.resortFacts.beach}</td>
-                </tr>;
-              })}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section id="hotels" className="mt-14 scroll-mt-32" aria-labelledby="hotels-h">
-        <p className="eyebrow">My selected places to stay</p>
-        <h2 id="hotels-h" className="mt-2 text-3xl">Recommended hotels by travel style</h2>
-        <div className="mt-6 divide-y border-t">
-          {groups.map(group => {
-            const copy = groupCopy[group.id];
-            const tip = groupTips[group.id];
-            const browseLabel = browseLabels[group.id];
-            const affiliate = trackedExpediaBrowseLink("stay-haifa-" + group.id + "-browse");
-            return <section key={group.id} id={"group-" + group.id} className="scroll-mt-32 py-9 sm:py-11" aria-labelledby={"group-" + group.id + "-h"} data-testid="haifa-hotel-group">
-              <p className="eyebrow">{copy?.eyebrow}</p>
-              <h3 id={"group-" + group.id + "-h"} className="mt-2 text-2xl font-semibold sm:text-3xl">{copy?.title ?? group.title}</h3>
-              <p className="mt-3 max-w-4xl leading-relaxed">{copy?.advice ?? group.intro}</p>
-              {group.guidePath && <Link to={group.guidePath as LinkProps["to"]} className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-2">
-                {group.guideLabel ?? "Explore the detailed comparison"} <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>}
-              <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="haifa-hotel-grid">
-                {group.hotelIds.map(id => <HotelCard key={id} id={id} pageId={pageId} />)}
-                {tip && <li className="min-w-0 sm:col-span-2 lg:col-span-1" data-testid="haifa-category-tip">
-                  <aside className="flex h-full flex-col rounded-xl border border-amber-200 bg-amber-50/70 p-5 dark:border-amber-900/50 dark:bg-amber-950/20" aria-label={tip.title}>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
-                      <Lightbulb className="h-5 w-5" aria-hidden />
+  return (
+    <main className="pb-10" data-testid="haifa-style-editorial">
+      <GuideHeader
+        crumbs={[
+          { name: "Home", to: "/" },
+          { name: "Travel guides", to: "/travel-blog/" },
+          {
+            name: accommodationEditorial.haifa.title,
+            to: accommodationEditorial.haifa.path as LinkProps["to"],
+          },
+        ]}
+        eyebrow="Travel guide · Haifa"
+        title={guide.title}
+        intro={guide.intro}
+        image={guide.photo}
+        checkedAt={guide.reviewedAt}
+      />
+      <OnThisPage sections={sections} />
+      <article className="mx-auto max-w-5xl px-4">
+        <section id="choose" className="mt-10 scroll-mt-32" aria-labelledby="choose-h">
+          <p className="eyebrow">Choose the location, then the hotel</p>
+          <h2 id="choose-h" className="mt-2 text-3xl">
+            Which Haifa stay suits you?
+          </h2>
+          <p className="mt-4 max-w-4xl leading-relaxed">
+            I recommend choosing your Haifa neighborhood before comparing rooms. The German Colony
+            puts restaurants and historic streets close by; Mount Carmel suits viewpoints and
+            upper-city dining; and the southern waterfront is convenient for beach days. Downtown
+            and Hadar offer lively urban bases, including independent places to stay.
+          </p>
+          <Link
+            to="/accommodation/haifa/"
+            className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary"
+            data-testid="editorial-all-hotels-link"
+          >
+            Browse all Haifa hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+          </Link>
+          <div
+            className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-2"
+            data-testid="haifa-category-grid"
+          >
+            {mainGroups.map((group) => {
+              const copy = groupCopy[group.id];
+              return (
+                <a
+                  key={group.id}
+                  href={"#group-" + group.id}
+                  className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md"
+                  data-testid="haifa-category-card"
+                >
+                  <img
+                    src={group.photo.src}
+                    alt={group.photo.alt}
+                    width={755}
+                    height={503}
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-[16/10] w-full object-cover"
+                  />
+                  <span className="flex min-w-0 flex-1 flex-col p-3 sm:p-4">
+                    <span className="break-words text-sm font-bold leading-snug sm:text-lg">
+                      {copy?.title ?? group.title}
                     </span>
-                    <h4 className="mt-4 text-lg font-semibold leading-snug">{tip.title}</h4>
-                    <ul className="mt-4 space-y-4 text-sm leading-relaxed">
-                      {tip.points.map(point => <li key={point} className="flex items-start gap-2.5">
-                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" aria-hidden />
-                        <span>{point}</span>
-                      </li>)}
-                    </ul>
-                  </aside>
-                </li>}
-              </ul>
-              {browseLabel && affiliate && <div className="mt-6 flex justify-center">
-                <a href={hotelBrowseAffiliateUrl(affiliate, pageId)}
-                  target="_blank" rel={relFor(affiliate.isAffiliate)}
-                  onClick={() => recordOutboundClick({ pageId, productId: affiliate.id, offerId: affiliate.id })}
-                  className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                  data-testid="haifa-category-browse-link">
-                  {browseLabel} <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
-                  <span className="sr-only"> (opens in a new tab)</span>
+                    <span className="mt-2 line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                      {copy?.eyebrow ?? group.intro}
+                    </span>
+                    <span className="mt-3 inline-flex flex-wrap items-center gap-1 text-xs font-semibold text-primary sm:text-sm">
+                      See hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+                    </span>
+                  </span>
                 </a>
-              </div>}
-            </section>;
-          })}
-        </div>
-        <p className="mt-5 text-sm leading-relaxed">For a destination overview and focused family or boutique comparisons, see the <Link to="/accommodation/haifa/" className="font-semibold text-primary underline underline-offset-2">Haifa accommodation guide</Link>.</p>
-        {allHotelsAffiliate && <div className="mt-3 flex flex-col items-start gap-3 rounded-2xl border bg-secondary/30 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
-          <h3 className="text-lg font-semibold">Looking for more hotels in Haifa?</h3>
-          <a href={hotelBrowseAffiliateUrl(allHotelsAffiliate, pageId)}
-            target="_blank" rel={relFor(allHotelsAffiliate.isAffiliate)}
-            onClick={() => recordOutboundClick({ pageId, productId: allHotelsAffiliate.id, offerId: allHotelsAffiliate.id })}
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-card px-4 py-2 text-center text-sm font-semibold text-primary"
-            data-testid="haifa-all-hotels-browse-link">
-            Browse more Haifa hotels <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
-            <span className="sr-only"> (opens in a new tab)</span>
-          </a>
-        </div>}
-      </section>
+              );
+            })}
+          </div>
+          {budgetGroup && (
+            <a
+              href="#group-budget"
+              className="group mt-4 flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md sm:flex-row sm:items-center"
+              data-testid="haifa-budget-spotlight"
+            >
+              <span className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
+                <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Another way to stay in Haifa
+                </span>
+                <strong className="mt-1 break-words text-base leading-snug sm:text-lg">
+                  Independent & budget-minded stays
+                </strong>
+                <span className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  Explore smaller places to stay in the lower city and around Talpiot Market.
+                </span>
+              </span>
+              <span className="flex min-h-11 shrink-0 items-center gap-2 border-t px-4 py-3 text-sm font-semibold text-primary sm:border-l sm:border-t-0 sm:px-5">
+                See hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+              </span>
+            </a>
+          )}
+          <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
+            <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
+            <p>
+              For a beach holiday, start with the southern seafront. For viewpoints and restaurants
+              on Mount Carmel, compare hotels in the upper city. The German Colony is a useful base
+              for historic streets and the lower Bahá'í Gardens.
+            </p>
+          </aside>
+        </section>
 
-      <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
-        <h2 id="location-h" className="text-3xl">Haifa hotel areas & getting around</h2>
-        <p className="mt-3 leading-relaxed">Haifa stretches from the port and German Colony up to the Carmel and along the southern beachfront.</p>
-        <div className="mt-5"><AreaMap area={{ name: "Haifa hotel areas", map: guide.map }} provider="google" googleZoom={12} /></div>
-        <div className="mt-5 grid gap-4 sm:grid-cols-3">
-          {guide.locations.map(location => <article key={location.name} className="rounded-xl border bg-card p-4 sm:p-5">
-            <MapPin className="h-5 w-5 text-primary" aria-hidden />
-            <h3 className="mt-3 font-semibold">{location.name}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{location.text}</p>
-          </article>)}
-        </div>
-        <h3 className="mt-8 text-xl font-semibold">Arriving by train, cruise ship or airport transfer</h3>
-        <p className="mt-3 leading-relaxed">Haifa Center–HaShmona station is a useful arrival point for the lower city and German Colony; Haifa Hof HaCarmel serves the southern beach area. For Carmel Center hotels, plan an onward journey uphill. The <a href="https://www.carmelithaifa.com/carmelit-haifa/carmelit-haifa-about/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-2">Carmelit</a> links downtown, Hadar and Carmel Center, with the final walk depending on your hotel. My <Link to="/travel-blog/ben-gurion-airport-to-haifa/" className="font-semibold text-primary underline underline-offset-2">Ben Gurion Airport to Haifa guide</Link> covers longer-distance arrival options.</p>
-        <p className="mt-3 leading-relaxed">For the Bahá'í Gardens, choose the entrance that serves the area you plan to visit. Haifa Center–HaShmona railway station is close to the port passenger area, while cruise access depends on your ship and terminal. I also offer private journeys combining Haifa with <Link to="/attractions/akko-acre/" className="font-semibold text-primary underline underline-offset-2">Acre</Link>, <Link to="/attractions/caesarea/" className="font-semibold text-primary underline underline-offset-2">Caesarea</Link> or the Galilee.</p>
-      </section>
+        <section id="compare" className="mt-14 scroll-mt-32" aria-labelledby="compare-h">
+          <h2 id="compare-h" className="text-3xl">
+            Haifa hotels at a glance
+          </h2>
+          <div
+            className="mt-5 overflow-x-auto rounded-2xl border bg-card"
+            role="region"
+            tabIndex={0}
+            aria-label="Compare 10 Haifa hotel recommendations"
+          >
+            <table
+              className="w-full min-w-[700px] text-left text-sm"
+              data-testid="haifa-hotel-comparison"
+            >
+              <caption className="sr-only">
+                Recommended Haifa stays by main appeal, neighborhood and beach access
+              </caption>
+              <thead className="bg-secondary">
+                <tr>
+                  <th scope="col" className="px-4 py-3 font-semibold">
+                    Hotel
+                  </th>
+                  <th scope="col" className="px-4 py-3 font-semibold">
+                    Best for
+                  </th>
+                  <th scope="col" className="px-4 py-3 font-semibold">
+                    Location
+                  </th>
+                  <th scope="col" className="px-4 py-3 font-semibold">
+                    Beach access
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {allHotelIds.map((id) => {
+                  const hotel = resortHotel(id);
+                  const note = hotelNotes[id];
+                  return (
+                    <tr key={id} data-testid="haifa-comparison-row">
+                      <th scope="row" className="min-w-44 px-4 py-4 align-top">
+                        <a
+                          href={"#hotel-" + id}
+                          className="font-semibold text-primary underline underline-offset-2"
+                        >
+                          {hotel.name}
+                        </a>
+                      </th>
+                      <td className="px-4 py-4 align-top leading-relaxed">
+                        {note?.bestFor ?? hotel.bestFor}
+                      </td>
+                      <td className="px-4 py-4 align-top leading-relaxed text-muted-foreground">
+                        {hotel.resortFacts.location}
+                      </td>
+                      <td className="px-4 py-4 align-top leading-relaxed text-muted-foreground">
+                        {note?.beach ?? hotel.resortFacts.beach}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-      <section id="tips" className="mt-14 scroll-mt-32" aria-labelledby="tips-h">
-        <h2 id="tips-h" className="text-3xl">What to check before booking</h2>
-        <StayBookingChecklist testId="haifa-booking-checklist" groups={[
-          { title: "Location & arrival", items: bookingTips.slice(0, Math.ceil(bookingTips.length / 2)) },
-          { title: "Room & booking conditions", items: bookingTips.slice(Math.ceil(bookingTips.length / 2)) },
-        ]} />
-        <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
-          <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
-          <p>Travel dates can affect hotel services and transport. My <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> helps you plan around Jewish holidays and special dates.</p>
-        </aside>
-        <p className="mt-5 text-sm leading-relaxed text-muted-foreground">Room prices, guest policies and cancellation terms appear on the booking provider when you select your dates.</p>
-      </section>
+        <section id="hotels" className="mt-14 scroll-mt-32" aria-labelledby="hotels-h">
+          <p className="eyebrow">My selected places to stay</p>
+          <h2 id="hotels-h" className="mt-2 text-3xl">
+            Recommended hotels by travel style
+          </h2>
+          <div className="mt-6 divide-y border-t">
+            {groups.map((group) => {
+              const copy = groupCopy[group.id];
+              const tip = groupTips[group.id];
+              const browseLabel = browseLabels[group.id];
+              const affiliate = trackedExpediaBrowseLink("stay-haifa-" + group.id + "-browse");
+              return (
+                <section
+                  key={group.id}
+                  id={"group-" + group.id}
+                  className="scroll-mt-32 py-9 sm:py-11"
+                  aria-labelledby={"group-" + group.id + "-h"}
+                  data-testid="haifa-hotel-group"
+                >
+                  <p className="eyebrow">{copy?.eyebrow}</p>
+                  <h3
+                    id={"group-" + group.id + "-h"}
+                    className="mt-2 text-2xl font-semibold sm:text-3xl"
+                  >
+                    {copy?.title ?? group.title}
+                  </h3>
+                  <p className="mt-3 max-w-4xl leading-relaxed">{copy?.advice ?? group.intro}</p>
+                  {group.guidePath && (
+                    <Link
+                      to={group.guidePath as LinkProps["to"]}
+                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-2"
+                    >
+                      {group.guideLabel ?? "Explore the detailed comparison"}{" "}
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Link>
+                  )}
+                  <ul
+                    className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                    data-testid="haifa-hotel-grid"
+                  >
+                    {group.hotelIds.map((id) => (
+                      <HotelCard key={id} id={id} pageId={pageId} />
+                    ))}
+                    {tip && (
+                      <li
+                        className="min-w-0 sm:col-span-2 lg:col-span-1"
+                        data-testid="haifa-category-tip"
+                      >
+                        <aside
+                          className="flex h-full flex-col rounded-xl border border-amber-200 bg-amber-50/70 p-5 dark:border-amber-900/50 dark:bg-amber-950/20"
+                          aria-label={tip.title}
+                        >
+                          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+                            <Lightbulb className="h-5 w-5" aria-hidden />
+                          </span>
+                          <h4 className="mt-4 text-lg font-semibold leading-snug">{tip.title}</h4>
+                          <ul className="mt-4 space-y-4 text-sm leading-relaxed">
+                            {tip.points.map((point) => (
+                              <li key={point} className="flex items-start gap-2.5">
+                                <Check
+                                  className="mt-0.5 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300"
+                                  aria-hidden
+                                />
+                                <span>{point}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </aside>
+                      </li>
+                    )}
+                  </ul>
+                  {browseLabel && affiliate && (
+                    <div className="mt-6 flex justify-center">
+                      <a
+                        href={hotelBrowseAffiliateUrl(affiliate, pageId)}
+                        target="_blank"
+                        rel={relFor(affiliate.isAffiliate)}
+                        onClick={() =>
+                          recordOutboundClick({
+                            pageId,
+                            productId: affiliate.id,
+                            offerId: affiliate.id,
+                          })
+                        }
+                        className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                        data-testid="haifa-category-browse-link"
+                      >
+                        {browseLabel} <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
+                        <span className="sr-only"> (opens in a new tab)</span>
+                      </a>
+                    </div>
+                  )}
+                </section>
+              );
+            })}
+          </div>
+          <p className="mt-5 text-sm leading-relaxed">
+            For a destination overview and focused family or boutique comparisons, see the{" "}
+            <Link
+              to="/accommodation/haifa/"
+              className="font-semibold text-primary underline underline-offset-2"
+            >
+              Haifa accommodation guide
+            </Link>
+            .
+          </p>
+          {allHotelsAffiliate && (
+            <div className="mt-3 flex flex-col items-start gap-3 rounded-2xl border bg-secondary/30 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+              <h3 className="text-lg font-semibold">Looking for more hotels in Haifa?</h3>
+              <a
+                href={hotelBrowseAffiliateUrl(allHotelsAffiliate, pageId)}
+                target="_blank"
+                rel={relFor(allHotelsAffiliate.isAffiliate)}
+                onClick={() =>
+                  recordOutboundClick({
+                    pageId,
+                    productId: allHotelsAffiliate.id,
+                    offerId: allHotelsAffiliate.id,
+                  })
+                }
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-card px-4 py-2 text-center text-sm font-semibold text-primary"
+                data-testid="haifa-all-hotels-browse-link"
+              >
+                Browse more Haifa hotels <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          )}
+        </section>
 
-      <FaqList faqs={guide.faqs} />
-      <StayTripLinks region={guide.id} currentPath={accommodationEditorial.haifa.path} presentation="guide" />
-      <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
-        ...guideContactCopy(guide.title, "accommodation", guide.name),
-        heading: "Need a private transfer to Haifa?" ,
-        introduction: "I'm Moshe Barak. I can arrange an airport transfer to Haifa, a private driver for sightseeing or a day trip beyond the city. Tell me your dates, pickup point and group size, and I'll reply personally.",
-        placeholder: "Your dates, pickup point, destinations, passengers and luggage…",
-      }} />
-      <SourceList ids={sourceIds} intro="Hotel websites and local travel resources, with check dates below." compact />
-    </article>
-  </main>;
+        <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
+          <h2 id="location-h" className="text-3xl">
+            Haifa hotel areas & getting around
+          </h2>
+          <p className="mt-3 leading-relaxed">
+            Haifa stretches from the port and German Colony up to the Carmel and along the southern
+            beachfront.
+          </p>
+          <div className="mt-5">
+            <AreaMap
+              area={{ name: "Haifa hotel areas", map: guide.map }}
+              provider="google"
+              googleZoom={12}
+            />
+          </div>
+          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+            {guide.locations.map((location) => (
+              <article key={location.name} className="rounded-xl border bg-card p-4 sm:p-5">
+                <MapPin className="h-5 w-5 text-primary" aria-hidden />
+                <h3 className="mt-3 font-semibold">{location.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {location.text}
+                </p>
+              </article>
+            ))}
+          </div>
+          <h3 className="mt-8 text-xl font-semibold">
+            Arriving by train, cruise ship or airport transfer
+          </h3>
+          <p className="mt-3 leading-relaxed">
+            Haifa Center–HaShmona station is a useful arrival point for the lower city and German
+            Colony; Haifa Hof HaCarmel serves the southern beach area. For Carmel Center hotels,
+            plan an onward journey uphill. The{" "}
+            <a
+              href="https://www.carmelithaifa.com/carmelit-haifa/carmelit-haifa-about/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary underline underline-offset-2"
+            >
+              Carmelit
+            </a>{" "}
+            links downtown, Hadar and Carmel Center, with the final walk depending on your hotel. My{" "}
+            <Link
+              to="/travel-blog/ben-gurion-airport-to-haifa/"
+              className="font-semibold text-primary underline underline-offset-2"
+            >
+              Ben Gurion Airport to Haifa guide
+            </Link>{" "}
+            covers longer-distance arrival options.
+          </p>
+          <p className="mt-3 leading-relaxed">
+            For the Bahá'í Gardens, choose the entrance that serves the area you plan to visit.
+            Haifa Center–HaShmona railway station is close to the port passenger area, while cruise
+            access depends on your ship and terminal. I also offer private journeys combining Haifa
+            with{" "}
+            <Link
+              to="/attractions/akko-acre/"
+              className="font-semibold text-primary underline underline-offset-2"
+            >
+              Acre
+            </Link>
+            ,{" "}
+            <Link
+              to="/attractions/caesarea/"
+              className="font-semibold text-primary underline underline-offset-2"
+            >
+              Caesarea
+            </Link>{" "}
+            or the Galilee.
+          </p>
+        </section>
+
+        <section id="tips" className="mt-14 scroll-mt-32" aria-labelledby="tips-h">
+          <h2 id="tips-h" className="text-3xl">
+            What to check before booking
+          </h2>
+          <StayBookingChecklist
+            testId="haifa-booking-checklist"
+            groups={[
+              {
+                title: "Location & arrival",
+                items: bookingTips.slice(0, Math.ceil(bookingTips.length / 2)),
+              },
+              {
+                title: "Room & booking conditions",
+                items: bookingTips.slice(Math.ceil(bookingTips.length / 2)),
+              },
+            ]}
+          />
+          <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
+            <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
+            <p>
+              Travel dates can affect hotel services and transport. My{" "}
+              <Link
+                to="/travel-blog/calendar-of-events/"
+                className="font-semibold text-primary underline underline-offset-2"
+              >
+                Israel calendar of events
+              </Link>{" "}
+              helps you plan around Jewish holidays and special dates.
+            </p>
+          </aside>
+          <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+            Room prices, guest policies and cancellation terms appear on the booking provider when
+            you select your dates.
+          </p>
+        </section>
+
+        <FaqList faqs={guide.faqs} />
+        <StayTripLinks
+          region={guide.id}
+          currentPath={accommodationEditorial.haifa.path}
+          presentation="guide"
+        />
+        <HomeContactForm
+          showTripadvisorBesidePortraitMobile
+          guide={{
+            ...guideContactCopy(guide.title, "accommodation", guide.name),
+            heading: "Need a private transfer to Haifa?",
+            introduction:
+              "I'm Moshe Barak. I can arrange an airport transfer to Haifa, a private driver for sightseeing or a day trip beyond the city. Tell me your dates, pickup point and group size, and I'll reply personally.",
+            placeholder: "Your dates, pickup point, destinations, passengers and luggage…",
+          }}
+        />
+        <SourceList
+          ids={sourceIds}
+          intro="Hotel websites and local travel resources, with check dates below."
+          compact
+        />
+      </article>
+    </main>
+  );
 }

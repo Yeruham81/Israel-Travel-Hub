@@ -7,9 +7,17 @@ import { recordOutboundClick } from "@/lib/outbound";
  * No GA4 ID is invented or injected by this helper.
  */
 export function recordAffiliateTourClick({
-  pageId, productId, offerId, provider, linkUrl,
+  pageId,
+  productId,
+  offerId,
+  provider,
+  linkUrl,
 }: {
-  pageId: string; productId: string; offerId: string; provider: string; linkUrl: string;
+  pageId: string;
+  productId: string;
+  offerId: string;
+  provider: string;
+  linkUrl: string;
 }) {
   recordOutboundClick({ pageId, productId, offerId });
   if (typeof window === "undefined" || !hasCookieConsent("analytics")) return;

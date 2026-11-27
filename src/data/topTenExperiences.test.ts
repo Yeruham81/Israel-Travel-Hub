@@ -1,3 +1,4 @@
+import { sourceFragment, sourceIndex } from "@/test-utils/source-fragment";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -62,21 +63,24 @@ describe("Top 10 Israel experiences guide", () => {
 
   it("keeps ten cards, the same responsive comparison table and both six-card guide collections", () => {
     const page = readFileSync(resolve(process.cwd(), "src/components/TopTenIsraelGuide.tsx"), "utf8");
-    expect(page).toContain("grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5");
+    expect(page).toMatch(sourceFragment("grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5"));
     expect(page).toContain("min-w-[760px]");
-    expect(page).not.toContain("hidden w-full table-fixed");
+    expect(page).not.toMatch(sourceFragment("hidden w-full table-fixed"));
     expect(page).toContain("overflow-x-auto");
-    expect(page).not.toContain("Swipe the table sideways to compare all ten experiences.");
-    expect(page.indexOf('<section id="experiences"')).toBeLessThan(page.indexOf('<section id="experience-map"'));
-    expect(page).toContain("Where to Stay in Israel");
-    expect(page).toContain("beach information (Hebrew)");
+    expect(page).not.toMatch(sourceFragment("Swipe the table sideways to compare all ten experiences."));
+    const experiencesAt = sourceIndex(page, '<section id="experiences"');
+    const mapAt = sourceIndex(page, '<section id="experience-map"');
+    expect(experiencesAt).toBeGreaterThanOrEqual(0);
+    expect(mapAt).toBeGreaterThan(experiencesAt);
+    expect(page).toMatch(sourceFragment("Where to Stay in Israel"));
+    expect(page).toMatch(sourceFragment("beach information (Hebrew)"));
     expect(page).toContain("topTenSuggestedRoutes.map");
     expect(page).toContain("related.map");
     expect(page).toContain("planning.map");
-    expect(page).toContain('ref={mapRef}');
-    expect(page).toContain("HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy");
-    expect(page.indexOf("<HomeContactForm")).toBeLessThan(page.indexOf("<SourcesDisclosure>"));
+    expect(page).toMatch(sourceFragment('ref={mapRef}'));
+    expect(page).toMatch(sourceFragment("HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy"));
+    expect(sourceIndex(page, "<HomeContactForm")).toBeLessThan(sourceIndex(page, "<SourcesDisclosure>"));
     expect(page).not.toContain("israel-taxi.com");
-    expect(page).not.toContain("20" + "27");
+    expect(page).not.toMatch(sourceFragment("20" + "27"));
   });
 });

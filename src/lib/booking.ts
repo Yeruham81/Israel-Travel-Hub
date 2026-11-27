@@ -19,7 +19,12 @@ export function isDisplayableLiveQuote(
   now: Date = new Date(),
 ): boolean {
   if (!q) return false;
-  if (q.context.productId !== ctx.productId || q.context.date !== ctx.date || q.context.partySize !== ctx.partySize) return false;
+  if (
+    q.context.productId !== ctx.productId ||
+    q.context.date !== ctx.date ||
+    q.context.partySize !== ctx.partySize
+  )
+    return false;
   if (!q.currency || !q.basis || !(q.amount > 0) || !q.fetchedAt) return false;
   return new Date(q.expiresAt).getTime() > now.getTime();
 }

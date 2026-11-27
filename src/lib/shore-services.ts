@@ -1,42 +1,116 @@
-import { operators, partners, providerLinks, sources, shoreBookingPlatforms, shoreDestinations, shoreServices, shoreTourProducts, shorePorts, type ShoreDestinationId, type ShorePortId, type ShoreTourProduct } from "@/data/registry";
+import {
+  operators,
+  partners,
+  providerLinks,
+  sources,
+  shoreBookingPlatforms,
+  shoreDestinations,
+  shoreServices,
+  shoreTourProducts,
+  shorePorts,
+  type ShoreDestinationId,
+  type ShorePortId,
+  type ShoreTourProduct,
+} from "@/data/registry";
 
 export type ShoreServiceSearch = { destination?: ShoreDestinationId };
 
 export function parseShoreServiceSearch(search: Record<string, unknown>): ShoreServiceSearch {
-  const destination = shoreDestinations.find((item) => item.id === search["destination"] && shoreServices.some((service) => service.status === "published" && service.kind !== "transfer" && service.destinationIds.includes(item.id)))?.id;
+  const destination = shoreDestinations.find(
+    (item) =>
+      item.id === search["destination"] &&
+      shoreServices.some(
+        (service) =>
+          service.status === "published" &&
+          service.kind !== "transfer" &&
+          service.destinationIds.includes(item.id),
+      ),
+  )?.id;
   return destination ? { destination } : {};
 }
 
 /** One card per published product; never infer port pickup from a city listing. */
 export function servicesForPort(portId: ShorePortId) {
-  return shoreServices.filter((item) => item.portId === portId && item.status === "published" && item.kind !== "transfer").flatMap((item) => {
-    const provider = providerLinks.find((link) => link.id === item.providerLinkId && link.pageIds.includes(shorePorts[portId].pageId));
-    if (!provider || (provider.relationship !== "publisher_operator" && !shoreBookingPlatforms.some((id) => id === provider.partnerId))) return [];
-    const operator = operators.find((operator) => operator.id === provider?.operatorId);
-    const partner = partners.find((partner) => partner.id === provider?.partnerId);
-    const product = shoreTourProducts.find((product) => product.id === item.productId);
-    return provider?.url ? [{ ...item, provider, operator, partner, product }] : [];
-  });
+  return shoreServices
+    .filter(
+      (item) => item.portId === portId && item.status === "published" && item.kind !== "transfer",
+    )
+    .flatMap((item) => {
+      const provider = providerLinks.find(
+        (link) =>
+          link.id === item.providerLinkId && link.pageIds.includes(shorePorts[portId].pageId),
+      );
+      if (
+        !provider ||
+        (provider.relationship !== "publisher_operator" &&
+          !shoreBookingPlatforms.some((id) => id === provider.partnerId))
+      )
+        return [];
+      const operator = operators.find((operator) => operator.id === provider?.operatorId);
+      const partner = partners.find((partner) => partner.id === provider?.partnerId);
+      const product = shoreTourProducts.find((product) => product.id === item.productId);
+      return provider?.url ? [{ ...item, provider, operator, partner, product }] : [];
+    });
 }
 
 export function filterShoreServices(portId: ShorePortId, search: ShoreServiceSearch) {
-  return servicesForPort(portId).filter(item => !search.destination || item.destinationIds.includes(search.destination));
+  return servicesForPort(portId).filter(
+    (item) => !search.destination || item.destinationIds.includes(search.destination),
+  );
 }
 
 export function shoreSourceIds(portId: ShorePortId) {
-  return [...new Set([shorePorts[portId].sourceId, "owner-private-driver", portId === "haifa" ? "shore-haifa-terminal" : "shore-ashdod-terminal", "shore-distance-jerusalem", ...(portId === "ashdod" ? ["inpa-masada","shore-distance-ashdod-tlv","shore-distance-ashdod-masada","shore-distance-ashdod-nazareth"] : ["shore-distance-akko","shore-distance-rosh","shore-distance-nazareth","shore-distance-galilee","shore-distance-haifa-tlv"]), ...servicesForPort(portId).flatMap((service) => [service.provider.sourceId, service.product?.listedPrice?.sourceId].filter((id): id is string => Boolean(id)))])];
+  return [
+    ...new Set([
+      shorePorts[portId].sourceId,
+      "owner-private-driver",
+      portId === "haifa" ? "shore-haifa-terminal" : "shore-ashdod-terminal",
+      "shore-distance-jerusalem",
+      ...(portId === "ashdod"
+        ? [
+            "inpa-masada",
+            "shore-distance-ashdod-tlv",
+            "shore-distance-ashdod-masada",
+            "shore-distance-ashdod-nazareth",
+          ]
+        : [
+            "shore-distance-akko",
+            "shore-distance-rosh",
+            "shore-distance-nazareth",
+            "shore-distance-galilee",
+            "shore-distance-haifa-tlv",
+          ]),
+      ...servicesForPort(portId).flatMap((service) =>
+        [service.provider.sourceId, service.product?.listedPrice?.sourceId].filter(
+          (id): id is string => Boolean(id),
+        ),
+      ),
+    ]),
+  ];
 }
 
 /** Recorded starting prices remain visible until updated or removed. */
 export function shoreListedPrice(product: ShoreTourProduct | undefined, now = new Date()) {
   const price = product?.listedPrice;
-  if (!price || price.kind !== "published_snapshot" || price.currency !== "USD" || !Number.isFinite(price.amount) || price.amount <= 0) return undefined;
+  if (
+    !price ||
+    price.kind !== "published_snapshot" ||
+    price.currency !== "USD" ||
+    !Number.isFinite(price.amount) ||
+    price.amount <= 0
+  )
+    return undefined;
   if (price.basis !== "per_person" && price.basis !== "per_group") return undefined;
-  if (price.basis === "per_group" && (!Number.isInteger(price.maxPartySize) || price.maxPartySize! < 1)) return undefined;
+  if (
+    price.basis === "per_group" &&
+    (!Number.isInteger(price.maxPartySize) || price.maxPartySize! < 1)
+  )
+    return undefined;
   const source = sources.find((source) => source.id === price.sourceId);
   const checked = Date.parse(`${price.checkedAt}T00:00:00Z`);
   const age = now.getTime() - checked;
-  if (!source || source.checkedAt !== price.checkedAt || !Number.isFinite(age) || age < 0) return undefined;
+  if (!source || source.checkedAt !== price.checkedAt || !Number.isFinite(age) || age < 0)
+    return undefined;
   if (new Date(checked).toISOString().slice(0, 10) !== price.checkedAt) return undefined;
   return price;
 }
@@ -44,11 +118,26 @@ export function shoreListedPrice(product: ShoreTourProduct | undefined, now = ne
 /** Verified product ratings remain visible only while their source check is sufficiently recent. */
 export function shoreListedRating(product: ShoreTourProduct | undefined, now = new Date()) {
   const rating = product?.rating;
-  if (!rating || !Number.isFinite(rating.value) || rating.value < 1 || rating.value > 5 || !Number.isInteger(rating.count) || rating.count < 1) return undefined;
-  const source = sources.find(source => source.id === product.id);
+  if (
+    !rating ||
+    !Number.isFinite(rating.value) ||
+    rating.value < 1 ||
+    rating.value > 5 ||
+    !Number.isInteger(rating.count) ||
+    rating.count < 1
+  )
+    return undefined;
+  const source = sources.find((source) => source.id === product.id);
   const checked = Date.parse(rating.checkedAt + "T00:00:00Z");
   const age = now.getTime() - checked;
-  if (!source || source.checkedAt !== rating.checkedAt || !Number.isFinite(age) || age < 0 || age > 90 * 86_400_000) return undefined;
+  if (
+    !source ||
+    source.checkedAt !== rating.checkedAt ||
+    !Number.isFinite(age) ||
+    age < 0 ||
+    age > 90 * 86_400_000
+  )
+    return undefined;
   return rating;
 }
 
@@ -59,8 +148,12 @@ export function shoreServiceHref(portId: ShorePortId, search: ShoreServiceSearch
 
 export type PortTransferSearch = { port?: ShorePortId; transfer?: "airport" | "city" };
 export function parsePortTransferSearch(search: Record<string, unknown>): PortTransferSearch {
-  const port = search["port"] === "haifa" || search["port"] === "ashdod" ? search["port"] : undefined;
-  const transfer = search["transfer"] === "airport" || search["transfer"] === "city" ? search["transfer"] : undefined;
+  const port =
+    search["port"] === "haifa" || search["port"] === "ashdod" ? search["port"] : undefined;
+  const transfer =
+    search["transfer"] === "airport" || search["transfer"] === "city"
+      ? search["transfer"]
+      : undefined;
   return port && transfer ? { port, transfer } : {};
 }
 

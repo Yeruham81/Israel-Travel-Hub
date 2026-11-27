@@ -1,3 +1,4 @@
+import { sourceFragment, sourceIndex } from "@/test-utils/source-fragment";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -44,7 +45,7 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    expect(telAvivEditorialOverview.highlights).toHaveLength(10);
    expect(telAvivEditorialOverview.official.length).toBeGreaterThan(2);
    const route=readFileSync(resolve(process.cwd(),"src/routes/travel-blog.attractions-in-tel-aviv.tsx"),"utf8");
-   expect(route).toContain("component: TelAvivAttractionsGuide");
+   expect(route).toMatch(sourceFragment("component: TelAvivAttractionsGuide"));
  });
 
  it("shares one canonical cover among the page header, directory and related-guide cards",()=>{
@@ -52,8 +53,8 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    const destination="/travel-blog/attractions-in-tel-aviv/";
    const directory=guideDirectory.find(entry=>String(entry.to)===destination);
    const related=attractionRelatedGuides.find(entry=>String(entry.to)===destination);
-   expect(page).toContain("src={telAvivAttractionsHero.src}");
-   expect(page).toContain("alt={telAvivAttractionsHero.alt}");
+   expect(page).toMatch(sourceFragment("src={telAvivAttractionsHero.src}"));
+   expect(page).toMatch(sourceFragment("alt={telAvivAttractionsHero.alt}"));
    expect(telAvivEditorialOverview.image).toEqual(telAvivAttractionsHero);
    expect(guideHeroPhotoForPath(destination)).toEqual(telAvivAttractionsHero);
    expect(directory?.photo?.src).toBe(telAvivAttractionsHero.src);
@@ -62,7 +63,7 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
 
  it("uses the approved I Love Tel Aviv Port photograph as the unique optimized page cover",()=>{
    const source=readFileSync(resolve(process.cwd(),"src/data/telAvivAttractionsGuide.ts"),"utf8");
-   expect(source).toContain('import hero from "@/assets/guides/tel-aviv-attractions-hero.webp"');
+   expect(source).toMatch(sourceFragment('import hero from "@/assets/guides/tel-aviv-attractions-hero.webp"'));
    expect(telAvivAttractionsHero.alt).toContain("Tel Aviv Port");
    const file=resolve(process.cwd(),"src/assets/guides/tel-aviv-attractions-hero.webp");
    expect(existsSync(file)).toBe(true);
@@ -117,40 +118,40 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    ];
    for(const id of ids)expect(affiliateConfig[id]?.trackingUrl).toMatch(/^https:\/\/(?:getyourguide|viator)\.tpm\.li\//);
    const page=readFileSync(resolve(process.cwd(),"src/components/TelAvivAttractionsGuide.tsx"),"utf8");
-   for(const id of ids)expect(page).toContain(id);
+   for(const id of ids)expect(page).toMatch(sourceFragment(id));
    expect(page).toContain("tel_aviv_attractions_");
-   expect(page).toContain("Carmel Market Food-Tasting Tour");
-   expect(page).not.toContain("Market Tour & Israeli Cooking Workshop");
-   expect(page).toContain("HaCarmel St 43");
-   expect(page).toContain("Yefet St 7");
+   expect(page).toMatch(sourceFragment("Carmel Market Food-Tasting Tour"));
+   expect(page).not.toMatch(sourceFragment("Market Tour & Israeli Cooking Workshop"));
+   expect(page).toMatch(sourceFragment("HaCarmel St 43"));
+   expect(page).toMatch(sourceFragment("Yefet St 7"));
    expect(page).toContain("florentin-graffiti.webp");
    expect(page).toContain("carmel-food-tasting.webp");
-   expect(page).toContain("fromUsd:145");
+   expect(page).toMatch(sourceFragment("fromUsd:145"));
    expect(page).toContain("walkingDirectionsUrl");
-   expect(page).toContain("travelmode:\"walking\"");
-   expect(page).toContain("Na'im BeSofash weekend shuttle");
+   expect(page).toMatch(sourceFragment("travelmode:\"walking\""));
+   expect(page).toMatch(sourceFragment("Na'im BeSofash weekend shuttle"));
    expect(page).toContain("telAvivGraffitiPhotoCredit.json");
-   expect(page).toContain("relFor(true)");
-   expect(page).toContain('data-testid="tel-aviv-curated-tour"');
-   expect(page).toContain('data-testid="tel-aviv-affiliate-tours"');
-   expect(page).toContain('sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-affiliate-tours"');
+   expect(page).toMatch(sourceFragment("relFor(true)"));
+   expect(page).toMatch(sourceFragment('data-testid="tel-aviv-curated-tour"'));
+   expect(page).toMatch(sourceFragment('data-testid="tel-aviv-affiliate-tours"'));
+   expect(page).toMatch(sourceFragment('sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-affiliate-tours"'));
    expect(page).toContain('tourPhotos["neve-tzedek-walk"]');
    expect(page).toContain('tourPhotos["tel-aviv-cycling"]');
-   expect(page).toContain('to="/tours/tel-aviv-jaffa/"');
-   expect(page).toContain('to="/tours/food-market-tours/"');
+   expect(page).toMatch(sourceFragment('to="/tours/tel-aviv-jaffa/"'));
+   expect(page).toMatch(sourceFragment('to="/tours/food-market-tours/"'));
  });
 
  it("follows the content-first mobile pattern and connects key local guides",()=>{
    const page=readFileSync(resolve(process.cwd(),"src/components/TelAvivAttractionsGuide.tsx"),"utf8");
-   expect(page).toContain("grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-5");
-   expect(page).not.toContain("Swipe the table sideways to compare all ten attractions.");
+   expect(page).toMatch(sourceFragment("grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-5"));
+   expect(page).not.toMatch(sourceFragment("Swipe the table sideways to compare all ten attractions."));
    expect(page).toContain("min-w-[760px]");
-   expect(page.indexOf('<section id="explore"')).toBeLessThan(page.indexOf('<section id="map"'));
+   expect(sourceIndex(page, '<section id="explore"')).toBeLessThan(sourceIndex(page, '<section id="map"'));
    expect(page).toContain("HomeContactForm");
-   expect(page.indexOf("<HomeContactForm")).toBeLessThan(page.indexOf("<SourcesDisclosure>"));
+   expect(sourceIndex(page, "<HomeContactForm")).toBeLessThan(sourceIndex(page, "<SourcesDisclosure>"));
    expect(page).toContain("related.map");
    expect(page).toContain("planning.map");
-   expect(page).toContain("Where to Stay in Israel");
+   expect(page).toMatch(sourceFragment("Where to Stay in Israel"));
    expect(existsSync(resolve(process.cwd(),"public/images/tel-aviv-attractions/carmel-food-tasting.webp"))).toBe(true);
    expect(existsSync(resolve(process.cwd(),"public/images/tel-aviv-attractions/florentin-graffiti.webp"))).toBe(true);
    expect(florentinCredit.license).toBe("CC BY 4.0");

@@ -6,7 +6,10 @@ import type { ProviderLink } from "@/data/registry";
  * https://support.travelpayouts.com/hc/en-us/articles/12729746524050-How-to-dynamically-change-SubID-in-short-affiliate-links
  */
 function normalizeTrackingId(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
 }
 
 function subId(parts: string[]): string {
@@ -29,10 +32,15 @@ function withTravelpayoutsSubId(
     return booking.url;
   }
   // Keep official and unrelated affiliate URLs untouched.
-  if (url.protocol !== "https:" || !(
-    url.hostname === "tp.st" || url.hostname.endsWith(".tpm.li")
-    || url.hostname.endsWith(".tpk.lv")
-  )) return booking.url;
+  if (
+    url.protocol !== "https:" ||
+    !(
+      url.hostname === "tp.st" ||
+      url.hostname.endsWith(".tpm.li") ||
+      url.hostname.endsWith(".tpk.lv")
+    )
+  )
+    return booking.url;
   url.searchParams.set("sub_id", value);
   return url.toString();
 }

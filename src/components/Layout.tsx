@@ -3,11 +3,29 @@ import { SiteLink as Link } from "@/components/SiteLink";
 import { lazy, Suspense, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { ChevronDown, Compass } from "lucide-react";
 
-import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, legalNav, type NavItem, type SidebarNavItem } from "@/data/nav";
+import {
+  allNavGroups,
+  serviceNav,
+  serviceDomains,
+  hotelNav,
+  utilityNav,
+  footerNav,
+  legalNav,
+  type NavItem,
+  type SidebarNavItem,
+} from "@/data/nav";
 import { AnalyticsPreferencesLink } from "@/components/Analytics";
 import { relFor } from "@/lib/outbound";
 
-export function ExtLink({ href, children, className }: { href: string; children: ReactNode; className?: string }) {
+export function ExtLink({
+  href,
+  children,
+  className,
+}: {
+  href: string;
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <a href={href} target="_blank" rel={relFor(false)} className={className}>
       {children}
@@ -19,13 +37,29 @@ export function ExtLink({ href, children, className }: { href: string; children:
 export function Wordmark() {
   return (
     <Link to="/" className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-      <span aria-hidden className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-navy font-serif text-sm italic text-navy-foreground sm:h-8 sm:w-8 sm:text-base">i</span>
+      <span
+        aria-hidden
+        className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-navy font-serif text-sm italic text-navy-foreground sm:h-8 sm:w-8 sm:text-base"
+      >
+        i
+      </span>
       <span className="flex flex-col gap-1">
         <span className="whitespace-nowrap font-serif font-semibold text-[0.9rem] leading-none min-[375px]:text-base sm:text-xl">
           Israel Taxi <span className="italic text-primary">&amp;</span> Travel
         </span>
-        <span data-testid="wordmark-byline" className="flex w-full items-center justify-center gap-1.5 whitespace-nowrap font-sans text-[0.72rem] font-bold leading-none tracking-[0.025em] text-primary sm:text-[0.85rem]">
-          <span data-testid="custom-taxi-icon" aria-hidden="true" className="inline-block h-3.5 w-[18px] shrink-0 bg-primary sm:h-4 sm:w-5" style={{ mask: "url(/images/taxi-byline.png) center / contain no-repeat", WebkitMask: "url(/images/taxi-byline.png) center / contain no-repeat" }} />
+        <span
+          data-testid="wordmark-byline"
+          className="flex w-full items-center justify-center gap-1.5 whitespace-nowrap font-sans text-[0.72rem] font-bold leading-none tracking-[0.025em] text-primary sm:text-[0.85rem]"
+        >
+          <span
+            data-testid="custom-taxi-icon"
+            aria-hidden="true"
+            className="inline-block h-3.5 w-[18px] shrink-0 bg-primary sm:h-4 sm:w-5"
+            style={{
+              mask: "url(/images/taxi-byline.png) center / contain no-repeat",
+              WebkitMask: "url(/images/taxi-byline.png) center / contain no-repeat",
+            }}
+          />
           <span>Moshe Barak</span>
         </span>
       </span>
@@ -34,11 +68,25 @@ export function Wordmark() {
   );
 }
 
-function SidebarLink({ item, onNavigate, emphasized = false }: { item: NavItem | { label: string; href: string }; onNavigate: (() => void) | undefined; emphasized?: boolean }) {
+function SidebarLink({
+  item,
+  onNavigate,
+  emphasized = false,
+}: {
+  item: NavItem | { label: string; href: string };
+  onNavigate: (() => void) | undefined;
+  emphasized?: boolean;
+}) {
   const className = `block rounded-lg px-3 py-1.5 ${emphasized ? "font-semibold text-foreground" : "font-medium"} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`;
   if ("href" in item) {
     return (
-      <a href={item.href} target="_blank" rel={relFor(false)} onClick={onNavigate} className={`${className} hover:bg-muted`}>
+      <a
+        href={item.href}
+        target="_blank"
+        rel={relFor(false)}
+        onClick={onNavigate}
+        className={`${className} hover:bg-muted`}
+      >
         {item.label}
         <span className="sr-only"> (opens in a new tab)</span>
       </a>
@@ -58,54 +106,110 @@ function SidebarLink({ item, onNavigate, emphasized = false }: { item: NavItem |
   );
 }
 
-function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate: (() => void) | undefined }) {
+function SidebarBranch({
+  item,
+  onNavigate,
+}: {
+  item: SidebarNavItem;
+  onNavigate: (() => void) | undefined;
+}) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const branch = "children" in item ? item : undefined;
   const children = branch?.children;
   const isChildPage = children?.some((child) => child.to === pathname) ?? false;
   const [expanded, setExpanded] = useState(isChildPage);
   const id = useId();
-  useEffect(() => { if (isChildPage) setExpanded(true); }, [isChildPage]);
+  useEffect(() => {
+    if (isChildPage) setExpanded(true);
+  }, [isChildPage]);
   if ("headingOnly" in item) {
-    return <>
-      <div className="px-3 py-1.5 text-sm font-semibold text-foreground">{item.label}</div>
-      <ul aria-label={item.childrenLabel ?? `${item.label} guides`} className="ml-3 mt-1 space-y-0.5 border-l pl-2">
-        {item.children.map((child) => <li key={String(child.to)}><SidebarLink item={child} onNavigate={onNavigate} /></li>)}
-      </ul>
-    </>;
+    return (
+      <>
+        <div className="px-3 py-1.5 text-sm font-semibold text-foreground">{item.label}</div>
+        <ul
+          aria-label={item.childrenLabel ?? `${item.label} guides`}
+          className="ml-3 mt-1 space-y-0.5 border-l pl-2"
+        >
+          {item.children.map((child) => (
+            <li key={String(child.to)}>
+              <SidebarLink item={child} onNavigate={onNavigate} />
+            </li>
+          ))}
+        </ul>
+      </>
+    );
   }
   if ("href" in item) return <SidebarLink item={item} onNavigate={onNavigate} />;
   if (!children) return <SidebarLink item={item} onNavigate={onNavigate} />;
   const alwaysExpanded = item.alwaysExpanded ?? false;
   if (item.toggleOnly) {
-    return <>
-      <button
-        type="button"
-        aria-label={`Toggle ${item.label} attractions`}
-        aria-expanded={expanded}
-        aria-controls={id}
-        onClick={() => setExpanded((open) => !open)}
-        className="flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-semibold text-foreground transition-colors hover:bg-secondary/75 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-      >
-        <span>{item.label}</span>
-        <ChevronDown aria-hidden="true" className={`h-4 w-4 shrink-0 transition-transform ${expanded ? "rotate-180" : ""}`} />
-      </button>
-      <ul id={id} hidden={!expanded} aria-label={branch.childrenLabel ?? `${item.label} guides`} className="ml-3 mt-0.5 space-y-0.5 border-l border-border/80 pl-2">
-        {children.map((child) => <li key={String(child.to)}><SidebarLink item={child} onNavigate={onNavigate} /></li>)}
-      </ul>
-    </>;
+    return (
+      <>
+        <button
+          type="button"
+          aria-label={`Toggle ${item.label} attractions`}
+          aria-expanded={expanded}
+          aria-controls={id}
+          onClick={() => setExpanded((open) => !open)}
+          className="flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-semibold text-foreground transition-colors hover:bg-secondary/75 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          <span>{item.label}</span>
+          <ChevronDown
+            aria-hidden="true"
+            className={`h-4 w-4 shrink-0 transition-transform ${expanded ? "rotate-180" : ""}`}
+          />
+        </button>
+        <ul
+          id={id}
+          hidden={!expanded}
+          aria-label={branch.childrenLabel ?? `${item.label} guides`}
+          className="ml-3 mt-0.5 space-y-0.5 border-l border-border/80 pl-2"
+        >
+          {children.map((child) => (
+            <li key={String(child.to)}>
+              <SidebarLink item={child} onNavigate={onNavigate} />
+            </li>
+          ))}
+        </ul>
+      </>
+    );
   }
-  return <>
-    <div className="flex items-center gap-1">
-      <div className="min-w-0 flex-1"><SidebarLink item={item} onNavigate={onNavigate} emphasized={alwaysExpanded} /></div>
-      {!alwaysExpanded && <button type="button" aria-label={item.toggleLabel ?? `Show ${item.label} pages`} aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded(!expanded)} className="rounded-lg p-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary">
-        <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
-      </button>}
-    </div>
-    <ul id={id} hidden={!alwaysExpanded && !expanded} aria-label={branch?.childrenLabel ?? `${item.label} pages`} className="ml-3 mt-1 space-y-0.5 border-l pl-2">
-      {children.map((child) => <li key={child.to}><SidebarLink item={child} onNavigate={onNavigate} /></li>)}
-    </ul>
-  </>;
+  return (
+    <>
+      <div className="flex items-center gap-1">
+        <div className="min-w-0 flex-1">
+          <SidebarLink item={item} onNavigate={onNavigate} emphasized={alwaysExpanded} />
+        </div>
+        {!alwaysExpanded && (
+          <button
+            type="button"
+            aria-label={item.toggleLabel ?? `Show ${item.label} pages`}
+            aria-expanded={expanded}
+            aria-controls={id}
+            onClick={() => setExpanded(!expanded)}
+            className="rounded-lg p-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary"
+          >
+            <ChevronDown
+              aria-hidden
+              className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+            />
+          </button>
+        )}
+      </div>
+      <ul
+        id={id}
+        hidden={!alwaysExpanded && !expanded}
+        aria-label={branch?.childrenLabel ?? `${item.label} pages`}
+        className="ml-3 mt-1 space-y-0.5 border-l pl-2"
+      >
+        {children.map((child) => (
+          <li key={child.to}>
+            <SidebarLink item={child} onNavigate={onNavigate} />
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
 
 /** Global navigation shared by the desktop rail and the mobile drawer. */
@@ -113,11 +217,17 @@ export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav aria-label="Explore Israel" className="text-sm">
       <ul className="mb-5 border-b pb-4">
-        {utilityNav.map((item) => <li key={item.label}><SidebarLink item={item} onNavigate={onNavigate} /></li>)}
+        {utilityNav.map((item) => (
+          <li key={item.label}>
+            <SidebarLink item={item} onNavigate={onNavigate} />
+          </li>
+        ))}
       </ul>
       {allNavGroups.map((g) => (
         <section key={g.title} aria-label={g.title} className="mb-6 border-b pb-5">
-          <h2 className="mb-3 border-l-2 border-primary/50 pl-3 font-sans text-base font-bold uppercase leading-5 tracking-wide text-primary">{g.title}</h2>
+          <h2 className="mb-3 border-l-2 border-primary/50 pl-3 font-sans text-base font-bold uppercase leading-5 tracking-wide text-primary">
+            {g.title}
+          </h2>
           <ul className="space-y-0.5">
             {g.items.map((i) => (
               <li key={i.label}>
@@ -128,7 +238,11 @@ export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
         </section>
       ))}
       <ul>
-        {footerNav.map((item) => <li key={item.label}><SidebarLink item={item} onNavigate={onNavigate} /></li>)}
+        {footerNav.map((item) => (
+          <li key={item.label}>
+            <SidebarLink item={item} onNavigate={onNavigate} />
+          </li>
+        ))}
       </ul>
     </nav>
   );
@@ -152,16 +266,41 @@ export function SiteHeader() {
         <nav aria-label="Services" className="hidden min-w-0 flex-1 lg:block">
           <ul className="flex items-center justify-end gap-1 text-[15px] font-medium capitalize xl:gap-3">
             {headerNav.map((n) => (
-              <li key={n.label}><Link to={n.to} className="flex min-h-11 items-center justify-center rounded-lg px-2 py-1 text-center leading-5 transition-colors hover:bg-muted hover:text-primary" activeProps={{ className: "bg-primary/10 text-primary" }}>{n.label}</Link></li>
+              <li key={n.label}>
+                <Link
+                  to={n.to}
+                  className="flex min-h-11 items-center justify-center rounded-lg px-2 py-1 text-center leading-5 transition-colors hover:bg-muted hover:text-primary"
+                  activeProps={{ className: "bg-primary/10 text-primary" }}
+                >
+                  {n.label}
+                </Link>
+              </li>
             ))}
           </ul>
         </nav>
-        <button ref={menuTrigger} type="button" onClick={() => { setHasOpened(true); setOpen(true); }} className="btn shrink-0 whitespace-nowrap gap-1 bg-navy px-3 py-2 text-sm text-navy-foreground hover:bg-navy/85 lg:hidden" aria-haspopup="dialog" aria-expanded={open}>
+        <button
+          ref={menuTrigger}
+          type="button"
+          onClick={() => {
+            setHasOpened(true);
+            setOpen(true);
+          }}
+          className="btn shrink-0 whitespace-nowrap gap-1 bg-navy px-3 py-2 text-sm text-navy-foreground hover:bg-navy/85 lg:hidden"
+          aria-haspopup="dialog"
+          aria-expanded={open}
+        >
           <Compass className="h-4 w-4" aria-hidden /> Menu
         </button>
         <Suspense fallback={null}>
           {hasOpened && (
-            <MobileNavigationSheet open={open} onOpenChange={setOpen} onCloseAutoFocus={(event) => { event.preventDefault(); menuTrigger.current?.focus(); }}>
+            <MobileNavigationSheet
+              open={open}
+              onOpenChange={setOpen}
+              onCloseAutoFocus={(event) => {
+                event.preventDefault();
+                menuTrigger.current?.focus();
+              }}
+            >
               <GlobalNav onNavigate={() => setOpen(false)} />
             </MobileNavigationSheet>
           )}
@@ -187,32 +326,65 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-4">
         <div>
           <p className="font-serif text-2xl">Israel Taxi &amp; Travel</p>
-          <p className="mt-3 text-sm opacity-80">Private transportation services and local travel advice by Moshe Barak.</p>
+          <p className="mt-3 text-sm opacity-80">
+            Private transportation services and local travel advice by Moshe Barak.
+          </p>
         </div>
         <div className="text-sm">
           <p className="font-semibold">Services</p>
           <ul className="mt-3 space-y-2 opacity-90">
-            {serviceNav.slice(1).map((n) => <li key={n.label}><Link to={n.to}>{n.label}</Link></li>)}
+            {serviceNav.slice(1).map((n) => (
+              <li key={n.label}>
+                <Link to={n.to}>{n.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="text-sm">
           <p className="font-semibold">Popular destinations &amp; guides</p>
           <ul className="mt-3 space-y-2 opacity-90">
-            {hotelNav.map((n) => <li key={n.label}><Link to={n.to}>{n.label}</Link></li>)}
-            <li><Link to="/airport-transfers/jerusalem/">Ben Gurion Airport to Jerusalem</Link></li>
-            <li><Link to="/travel-blog/">Travel guides</Link></li>
-            <li><Link to="/travel-blog/getting-around-israel/">Getting around Israel</Link></li>
-            <li><Link to="/about-me/">About me</Link></li>
+            {hotelNav.map((n) => (
+              <li key={n.label}>
+                <Link to={n.to}>{n.label}</Link>
+              </li>
+            ))}
+            <li>
+              <Link to="/airport-transfers/jerusalem/">Ben Gurion Airport to Jerusalem</Link>
+            </li>
+            <li>
+              <Link to="/travel-blog/">Travel guides</Link>
+            </li>
+            <li>
+              <Link to="/travel-blog/getting-around-israel/">Getting around Israel</Link>
+            </li>
+            <li>
+              <Link to="/about-me/">About me</Link>
+            </li>
           </ul>
         </div>
         <div className="text-sm opacity-90">
           <p className="font-semibold">Disclosure</p>
-          <p className="mt-3">This website contains affiliate links. I may earn a commission when you make a purchase or booking through these links, at no extra cost to you. Thank you for supporting my website.</p>
-          <p className="mt-3">Some images on this website were generated using artificial intelligence.</p>
+          <p className="mt-3">
+            This website contains affiliate links. I may earn a commission when you make a purchase
+            or booking through these links, at no extra cost to you. Thank you for supporting my
+            website.
+          </p>
+          <p className="mt-3">
+            Some images on this website were generated using artificial intelligence.
+          </p>
         </div>
         <nav aria-label="Legal" className="border-t border-white/20 pt-6 text-sm md:col-span-4">
           <ul className="flex flex-wrap gap-x-6 gap-y-3">
-            {legalNav.map((item) => <li key={item.label}><Link to={item.to} className="underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4">{item.label}</Link></li>)}
+            {legalNav.map((item) => (
+              <li key={item.label}>
+                <Link
+                  to={item.to}
+                  className="underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
             <AnalyticsPreferencesLink />
           </ul>
         </nav>

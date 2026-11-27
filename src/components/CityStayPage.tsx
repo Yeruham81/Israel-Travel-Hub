@@ -7,7 +7,15 @@ import { CityStayHub } from "@/components/CityStayHub";
 import { JerusalemStayHub } from "@/components/JerusalemStayHub";
 import { TelAvivStayHub } from "@/components/TelAvivStayHub";
 import { linksForPage } from "@/data/registry";
-import { type UiCrumb, FaqList, GuideHeader, OnThisPage, ProviderSection, Section, SourceList } from "@/components/Guide";
+import {
+  type UiCrumb,
+  FaqList,
+  GuideHeader,
+  OnThisPage,
+  ProviderSection,
+  Section,
+  SourceList,
+} from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 
@@ -25,7 +33,15 @@ const sections = [
 
 export function CityStayPage({ g }: { g: CityStayGuide }) {
   const areas = neighborhoodGuidesForCity(g.id);
-  return g.id === "jerusalem" ? <JerusalemStayHub g={g} areas={areas} /> : g.id === "telaviv" ? <TelAvivStayHub g={g} areas={areas} /> : areas.length ? <CityStayHub g={g} areas={areas} /> : <SimpleCityStayPage g={g} />;
+  return g.id === "jerusalem" ? (
+    <JerusalemStayHub g={g} areas={areas} />
+  ) : g.id === "telaviv" ? (
+    <TelAvivStayHub g={g} areas={areas} />
+  ) : areas.length ? (
+    <CityStayHub g={g} areas={areas} />
+  ) : (
+    <SimpleCityStayPage g={g} />
+  );
 }
 
 function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
@@ -36,7 +52,11 @@ function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
   return (
     <main>
       <GuideHeader
-        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }, { name: g.city, to: g.path as UiCrumb["to"] }]}
+        crumbs={[
+          { name: "Home", to: "/" },
+          { name: "Accommodation", to: "/accommodation/" },
+          { name: g.city, to: g.path as UiCrumb["to"] },
+        ]}
         eyebrow={`Accommodation · ${g.city}`}
         title={g.title}
         intro={g.intro}
@@ -44,26 +64,57 @@ function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
         <Section id="overview" title={`Choosing where to stay in ${g.city}`}>
-          {g.overview.map((p) => <p key={p}>{p}</p>)}
+          {g.overview.map((p) => (
+            <p key={p}>{p}</p>
+          ))}
         </Section>
 
         <section id="areas" aria-labelledby="areas-h" className="mt-14">
-          <h2 id="areas-h" className="text-3xl">Areas at a glance</h2>
-          <p className="mt-2 text-muted-foreground">Pick what matters to you to highlight matching areas. This only highlights my guidance below — it doesn't search hotels.</p>
-          <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Highlight areas by preference">
+          <h2 id="areas-h" className="text-3xl">
+            Areas at a glance
+          </h2>
+          <p className="mt-2 text-muted-foreground">
+            Pick what matters to you to highlight matching areas. This only highlights my guidance
+            below — it doesn't search hotels.
+          </p>
+          <div
+            className="mt-4 flex flex-wrap gap-2"
+            role="group"
+            aria-label="Highlight areas by preference"
+          >
             {prefs.map((p) => (
-              <button key={p} type="button" className="chip" aria-pressed={pref === p} onClick={() => setPref(pref === p ? null : p)}>{preferenceLabels[p]}</button>
+              <button
+                key={p}
+                type="button"
+                className="chip"
+                aria-pressed={pref === p}
+                onClick={() => setPref(pref === p ? null : p)}
+              >
+                {preferenceLabels[p]}
+              </button>
             ))}
           </div>
           <ul className="mt-5 grid gap-4 md:grid-cols-2">
             {g.areas.map((a) => {
               const match = !pref || a.suits.includes(pref);
               return (
-                <li key={a.name} className={`rounded-2xl border bg-card p-5 transition-opacity ${match ? "" : "opacity-40"} ${pref && match ? "border-primary" : ""}`} data-match={match}>
+                <li
+                  key={a.name}
+                  className={`rounded-2xl border bg-card p-5 transition-opacity ${match ? "" : "opacity-40"} ${pref && match ? "border-primary" : ""}`}
+                  data-match={match}
+                >
                   <h3 className="text-xl">{a.name}</h3>
                   <p className="mt-2 text-sm leading-relaxed">{a.text}</p>
-                  <p className="mt-2 text-sm text-muted-foreground"><span className="font-medium text-foreground">Watch for:</span> {a.watch}</p>
-                  <p className="mt-3 flex flex-wrap gap-1">{a.suits.map((s) => <span key={s} className="rounded-full bg-muted px-2 py-0.5 text-xs">{preferenceLabels[s]}</span>)}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    <span className="font-medium text-foreground">Watch for:</span> {a.watch}
+                  </p>
+                  <p className="mt-3 flex flex-wrap gap-1">
+                    {a.suits.map((s) => (
+                      <span key={s} className="rounded-full bg-muted px-2 py-0.5 text-xs">
+                        {preferenceLabels[s]}
+                      </span>
+                    ))}
+                  </p>
                 </li>
               );
             })}
@@ -71,8 +122,15 @@ function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
         </section>
 
         <section id="checklist" aria-labelledby="cl-h" className="mt-14">
-          <h2 id="cl-h" className="text-3xl">Practical booking checklist</h2>
-          <StayBookingChecklist groups={[{ title: "Location & arrival", items: g.checklist.slice(0, 4) }, { title: "Room & booking conditions", items: g.checklist.slice(4) }]} />
+          <h2 id="cl-h" className="text-3xl">
+            Practical booking checklist
+          </h2>
+          <StayBookingChecklist
+            groups={[
+              { title: "Location & arrival", items: g.checklist.slice(0, 4) },
+              { title: "Room & booking conditions", items: g.checklist.slice(4) },
+            ]}
+          />
         </section>
 
         <ProviderSection

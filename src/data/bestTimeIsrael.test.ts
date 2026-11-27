@@ -1,3 +1,4 @@
+import { sourceFragment, sourceIndex } from "@/test-utils/source-fragment";
 import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
@@ -16,9 +17,9 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     expect(bestTimeGuide.updatedAt).toBe("2026-11-21");
     expect(travelGuides.bestTime).toBe(bestTimeGuide);
     const route=readRouteSource("src/routes/travel-blog.best-time-to-visit-israel.tsx");
-    expect(route).toContain('travelGuideMeta("bestTime")');
-    expect(route).toContain("component: BestTimeIsraelGuide");
-    expect(route).not.toContain('<TravelGuidePage id="bestTime"');
+    expect(route).toMatch(sourceFragment('travelGuideMeta("bestTime")'));
+    expect(route).toMatch(sourceFragment("component: BestTimeIsraelGuide"));
+    expect(route).not.toMatch(sourceFragment('<TravelGuidePage id="bestTime"'));
   });
 
   it("covers exactly twelve calendar months and five distinct travel purposes",()=>{
@@ -62,19 +63,19 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
   it("ships the custom accessible layout, local seasonal photos and relevant official safety links",()=>{
     const component=readFileSync("src/components/BestTimeIsraelGuide.tsx","utf8");
     expect(component).toContain("GuideHeroLayout");
-    expect(component).toContain("<GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}");
-    expect(component).toContain("aria-pressed={filter===value}");
-    expect(component).toContain("<table");
-    expect(component).toContain('<caption className="sr-only">');
-    expect(component).toContain('role="region"');
+    expect(component).toMatch(sourceFragment("<GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}"));
+    expect(component).toMatch(sourceFragment("aria-pressed={filter===value}"));
+    expect(component).toMatch(sourceFragment("<table"));
+    expect(component).toMatch(sourceFragment('<caption className="sr-only">'));
+    expect(component).toMatch(sourceFragment('role="region"'));
     expect(component).toContain('scroll-mt-24');
     expect(component).toContain("MonthMatrix");
     expect(component).toContain("RegionCards");
     expect(component).toContain("SeasonSections");
     expect(component).toContain("HolidayAndWeather");
-    expect(component).toContain("https://ims.gov.il/en/warning");
-    expect(component).toContain("https://en.parks.org.il/");
-    expect(component).toContain('to="/travel-blog/calendar-of-events/"');
+    expect(component).toMatch(sourceFragment("https://ims.gov.il/en/warning"));
+    expect(component).toMatch(sourceFragment("https://en.parks.org.il/"));
+    expect(component).toMatch(sourceFragment('to="/travel-blog/calendar-of-events/"'));
     for(const season of ["spring","summer","autumn","winter"]){
       for(const width of [320,720]){
         const file=`public/images/best-time-israel/${season}-${width}.webp`;
@@ -85,25 +86,25 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
         expect(bytes.byteLength,file).toBeLessThan(170_000);
       }
     }
-    expect(component).toContain("srcSet={photo.srcSet}");
-    expect(component).toContain("sizes={seasonPhotoSize}");
-    expect(component).toContain("src={photo.src}");
-    expect(component).toContain("Bahai Gardens");
+    expect(component).toMatch(sourceFragment("srcSet={photo.srcSet}"));
+    expect(component).toMatch(sourceFragment("sizes={seasonPhotoSize}"));
+    expect(component).toMatch(sourceFragment("src={photo.src}"));
+    expect(component).toMatch(sourceFragment("Bahai Gardens"));
     expect(component).not.toContain("hero-haifa-medium.webp");
-    expect(component).toContain("loading=\"lazy\"");
-    expect(component).toContain('guideHeroPhotoForPath(String(item.to))');
-    expect(component.indexOf("<SourcesDisclosure>")).toBeGreaterThan(component.indexOf("<HomeContactForm"));
-    expect(component).not.toContain('<section id="faq"');
+    expect(component).toMatch(sourceFragment("loading=\"lazy\""));
+    expect(component).toMatch(sourceFragment('guideHeroPhotoForPath(String(item.to))'));
+    expect(sourceIndex(component, "<SourcesDisclosure>")).toBeGreaterThan(sourceIndex(component, "<HomeContactForm"));
+    expect(component).not.toMatch(sourceFragment('<section id="faq"'));
     expect(component).not.toContain('["sources"');
-    expect(component).toContain('["contact","Contact me"]');
-    expect(component).toContain('className="grid grid-cols-2 gap-4 lg:grid-cols-3"');
-    expect(component).toContain('role="status" aria-live="polite"');
-    expect(component).toContain('aria-controls="month-insight"');
-    expect(component).toContain('const activeMonth=visible.find');
-    expect(component).toContain('onClick={()=>setSelectedMonth(month.month)}');
-    expect(component).not.toContain('visible.map(month=><div key={month.month}');
-    expect(component).toContain('to:"/attractions/sea-of-galilee/"');
-    expect(component).toContain('to:"/attractions/dead-sea/"');
+    expect(component).toMatch(sourceFragment('["contact","Contact me"]'));
+    expect(component).toMatch(sourceFragment('className="grid grid-cols-2 gap-4 lg:grid-cols-3"'));
+    expect(component).toMatch(sourceFragment('role="status" aria-live="polite"'));
+    expect(component).toMatch(sourceFragment('aria-controls="month-insight"'));
+    expect(component).toMatch(sourceFragment('const activeMonth=visible.find'));
+    expect(component).toMatch(sourceFragment('onClick={()=>setSelectedMonth(month.month)}'));
+    expect(component).not.toMatch(sourceFragment('visible.map(month=><div key={month.month}'));
+    expect(component).toMatch(sourceFragment('to:"/attractions/sea-of-galilee/"'));
+    expect(component).toMatch(sourceFragment('to:"/attractions/dead-sea/"'));
   });
 
   it("only offers existing provider-linked products with distinct page-level click attribution",()=>{
@@ -114,14 +115,14 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     ];
     for(const id of configIds)expect(affiliateConfig[id]?.trackingUrl).toMatch(/^https:\/\/(?:viator|getyourguide)\.tpm\.li\//);
     const page=readFileSync("src/components/BestTimeIsraelGuide.tsx","utf8");
-    expect(page).toContain('url.searchParams.set("sub_id",item.sub)');
-    expect(readFileSync("src/components/CuratedPartnerTourCard.tsx","utf8")).toContain("<ExternalProviderTourCard");
-    expect(readFileSync("src/components/ExternalProviderTourCard.tsx","utf8")).toContain("rel={relFor(affiliate)}");
+    expect(page).toMatch(sourceFragment('url.searchParams.set("sub_id",item.sub)'));
+    expect(readFileSync("src/components/CuratedPartnerTourCard.tsx","utf8")).toMatch(sourceFragment("<ExternalProviderTourCard"));
+    expect(readFileSync("src/components/ExternalProviderTourCard.tsx","utf8")).toMatch(sourceFragment("rel={relFor(affiliate)}"));
     expect(readFileSync("src/components/CuratedPartnerTourCard.tsx","utf8")).toContain("recordOutboundClick");
-    expect(page).not.toContain("starting price");
-    expect(page).toContain('data-testid="best-time-seasonal-tours"');
-    expect(page).toContain('image={item.image} alt={item.alt}');
-    expect(page).toContain("<CuratedPartnerTourCard");
+    expect(page).not.toMatch(sourceFragment("starting price"));
+    expect(page).toMatch(sourceFragment('data-testid="best-time-seasonal-tours"'));
+    expect(page).toMatch(sourceFragment('image={item.image} alt={item.alt}'));
+    expect(page).toMatch(sourceFragment("<CuratedPartnerTourCard"));
     expect(page).toContain("masadaTourPhoto");
     expect(page).toContain("/images/attractions/old-jerusalem-cardo.webp");
     expect(page).toContain("/images/attractions/jaffa-flea-market.webp");
@@ -140,9 +141,9 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     }
     expect(guideHeroPhotoForPath("/attractions/masada/")).toEqual(masadaSite.hero);
     const component=readFileSync("src/components/BestTimeIsraelGuide.tsx","utf8");
-    for(const to of paths)expect(component).toContain(`to:"${to}"`);
-    expect(component).not.toContain('to:"/travel-blog/sea-of-galilee/"');
-    expect(component).not.toContain('to:"/travel-blog/the-dead-sea/"');
+    for(const to of paths)expect(component).toMatch(sourceFragment(`to:"${to}"`));
+    expect(component).not.toMatch(sourceFragment('to:"/travel-blog/sea-of-galilee/"'));
+    expect(component).not.toMatch(sourceFragment('to:"/travel-blog/the-dead-sea/"'));
   });
 
   it("resolves every declared citation ID to an independent external source",()=>{

@@ -2,9 +2,13 @@ import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { useLayoutEffect, useRef, type ReactNode } from "react";
 
 export function introFitsFourLines(height: number, lineHeight: number): boolean {
-  return Number.isFinite(height) && height > 0 &&
-    Number.isFinite(lineHeight) && lineHeight > 0 &&
-    height <= lineHeight * 4 + 1;
+  return (
+    Number.isFinite(height) &&
+    height > 0 &&
+    Number.isFinite(lineHeight) &&
+    lineHeight > 0 &&
+    height <= lineHeight * 4 + 1
+  );
 }
 
 /**
@@ -23,7 +27,8 @@ export function GuideHeroLayout({ children, image }: { children: ReactNode; imag
     // A slightly wider photo is allowed only when the COMPLETE introduction
     // still fits into four lines. Do not truncate the text to make it fit.
     const measure = () => {
-      const desktop = window.matchMedia?.("(min-width: 1024px)").matches ?? window.innerWidth >= 1024;
+      const desktop =
+        window.matchMedia?.("(min-width: 1024px)").matches ?? window.innerWidth >= 1024;
       if (!desktop) {
         layout.classList.remove("guide-hero-photo-expanded");
         return;
@@ -39,16 +44,21 @@ export function GuideHeroLayout({ children, image }: { children: ReactNode; imag
 
     measure();
     let lastWidth = -1;
-    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(([entry]) => {
-      const width = entry?.contentRect.width ?? 0;
-      if (Math.abs(width - lastWidth) < 1) return;
-      lastWidth = width;
-      measure();
-    });
+    const observer =
+      typeof ResizeObserver === "undefined"
+        ? null
+        : new ResizeObserver(([entry]) => {
+            const width = entry?.contentRect.width ?? 0;
+            if (Math.abs(width - lastWidth) < 1) return;
+            lastWidth = width;
+            measure();
+          });
     observer?.observe(layout);
     window.addEventListener("resize", measure);
     let mounted = true;
-    document.fonts?.ready.then(() => { if (mounted) measure(); });
+    document.fonts?.ready.then(() => {
+      if (mounted) measure();
+    });
     return () => {
       mounted = false;
       observer?.disconnect();
@@ -102,33 +112,49 @@ export function GuideHeroMedia({
 }) {
   return (
     <figure className="w-full max-w-2xl lg:max-w-none" data-testid="guide-hero-media">
-      {mobileSrc ? <picture className="block">
-        <source media="(max-width: 480px)" srcSet={mobileSrc} type="image/webp" />
-      <img
-        src={src}
-        srcSet={srcSet ?? stage5PhotoSrcSet(src)}
-        sizes={sizes ?? ((srcSet ?? stage5PhotoSrcSet(src)) ? "(min-width: 1024px) 420px, (min-width: 640px) 600px, calc(100vw - 34px)" : undefined)}
-        alt={alt}
-        width={width}
-        height={height}
-        fetchPriority="high"
-        decoding="async"
-        className={`block aspect-[16/9] w-full rounded-2xl ${compact ? "max-h-[185px] lg:max-h-[175px]" : "max-h-[300px] lg:aspect-[4/3] lg:max-h-[260px]"} ${fit === "contain" ? "bg-secondary/30 object-contain" : "object-cover"}`}
-      />
-      </picture> : (
-      <img
-        src={src}
-        srcSet={srcSet ?? stage5PhotoSrcSet(src)}
-        sizes={sizes ?? ((srcSet ?? stage5PhotoSrcSet(src)) ? "(min-width: 1024px) 420px, (min-width: 640px) 600px, calc(100vw - 34px)" : undefined)}
-        alt={alt}
-        width={width}
-        height={height}
-        fetchPriority="high"
-        decoding="async"
-        className={`block aspect-[16/9] w-full rounded-2xl ${compact ? "max-h-[185px] lg:max-h-[175px]" : "max-h-[300px] lg:aspect-[4/3] lg:max-h-[260px]"} ${fit === "contain" ? "bg-secondary/30 object-contain" : "object-cover"}`}
-      />
+      {mobileSrc ? (
+        <picture className="block">
+          <source media="(max-width: 480px)" srcSet={mobileSrc} type="image/webp" />
+          <img
+            src={src}
+            srcSet={srcSet ?? stage5PhotoSrcSet(src)}
+            sizes={
+              sizes ??
+              ((srcSet ?? stage5PhotoSrcSet(src))
+                ? "(min-width: 1024px) 420px, (min-width: 640px) 600px, calc(100vw - 34px)"
+                : undefined)
+            }
+            alt={alt}
+            width={width}
+            height={height}
+            fetchPriority="high"
+            decoding="async"
+            className={`block aspect-[16/9] w-full rounded-2xl ${compact ? "max-h-[185px] lg:max-h-[175px]" : "max-h-[300px] lg:aspect-[4/3] lg:max-h-[260px]"} ${fit === "contain" ? "bg-secondary/30 object-contain" : "object-cover"}`}
+          />
+        </picture>
+      ) : (
+        <img
+          src={src}
+          srcSet={srcSet ?? stage5PhotoSrcSet(src)}
+          sizes={
+            sizes ??
+            ((srcSet ?? stage5PhotoSrcSet(src))
+              ? "(min-width: 1024px) 420px, (min-width: 640px) 600px, calc(100vw - 34px)"
+              : undefined)
+          }
+          alt={alt}
+          width={width}
+          height={height}
+          fetchPriority="high"
+          decoding="async"
+          className={`block aspect-[16/9] w-full rounded-2xl ${compact ? "max-h-[185px] lg:max-h-[175px]" : "max-h-[300px] lg:aspect-[4/3] lg:max-h-[260px]"} ${fit === "contain" ? "bg-secondary/30 object-contain" : "object-cover"}`}
+        />
       )}
-      {caption && <figcaption className="mt-2 text-xs leading-relaxed text-muted-foreground">{caption}</figcaption>}
+      {caption && (
+        <figcaption className="mt-2 text-xs leading-relaxed text-muted-foreground">
+          {caption}
+        </figcaption>
+      )}
       {children}
     </figure>
   );

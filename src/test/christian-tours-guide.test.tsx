@@ -1,3 +1,4 @@
+import { sourceFragment } from "@/test-utils/source-fragment";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { christianAreas, christianRoutes, christianOffers, christianFaqs, christianPlanningCards, christianSiteCards } from "@/data/christianToursGuide";
@@ -16,11 +17,11 @@ describe("Christian tours in Israel editorial guide",()=>{
     expect(travelGuides.christianTours.title).toMatch(/^Christian Tours in Israel/);
     expect(travelGuides.christianTours.topics).toContain("religion");
     expect(allNavGroups.some(g=>g.items.some(item=>"to" in item && item.to===travelGuidePaths.christianTours))).toBe(true);
-    expect(page).toContain("<AuthorCard/>");
-    expect(page).toContain("<HomeContactForm");
-    expect(page).toContain("<SourcesDisclosure>");
+    expect(page).toMatch(sourceFragment("<AuthorCard/>"));
+    expect(page).toMatch(sourceFragment("<HomeContactForm"));
+    expect(page).toMatch(sourceFragment("<SourcesDisclosure>"));
     expect(page).toContain("PageUpdated");
-    expect(page).not.toContain("Top 7 Places to Visit");
+    expect(page).not.toMatch(sourceFragment("Top 7 Places to Visit"));
   });
   it("contains seven distinct areas, practical routes, FAQs, related guides and careful cross-border guidance",()=>{
     expect(christianAreas).toHaveLength(7);
@@ -40,12 +41,12 @@ describe("Christian tours in Israel editorial guide",()=>{
     expect(christianFaqs.length).toBeGreaterThanOrEqual(8);
     expect(christianSiteCards).toHaveLength(6);
     expect(christianPlanningCards).toHaveLength(6);
-    expect(page).toContain("Google Maps");
-    expect(page).toContain('query.set("waypoints",leg.waypoints.join("|"))');
+    expect(page).toMatch(sourceFragment("Google Maps"));
+    expect(page).toMatch(sourceFragment('query.set("waypoints",leg.waypoints.join("|"))'));
     expect(page).toContain("site.officialUrl");
-    expect(page).toContain("West Bank");
+    expect(page).toMatch(sourceFragment("West Bank"));
     expect(christianAreas.find(area => area.intro.includes("Qasr al-Yahud"))?.intro).toMatch(/Qasr al-Yahud.*traditionally associated with Jesus\x27 baptism.*Yardenit is a modern baptism site/s);
-    expect(data).toContain("separate half- or full-day visit");
+    expect(data).toMatch(sourceFragment("separate half- or full-day visit"));
   });
   it("links exactly six product-specific tours through Travelpayouts with page-specific attribution",()=>{
     expect(christianOffers).toHaveLength(6);
@@ -61,11 +62,11 @@ describe("Christian tours in Israel editorial guide",()=>{
       expect(affiliateConfig[offer.affiliateKey]?.trackingUrl,offer.affiliateKey).toMatch(/^https:\/\/(?:viator|getyourguide)\.tpm\.li\//);
       expect(offer.subId).toMatch(/^christian_tours_/);
     }
-    expect(page).toContain('searchParams.set("sub_id",tour.subId)');
-    expect(page).toContain("<ExternalProviderTourCard");
-    expect(page).toContain("lg:grid-cols-3");
-    expect(page).not.toContain("https://www.viator.com/tours/");
-    expect(page).not.toContain("https://www.getyourguide.com/");
+    expect(page).toMatch(sourceFragment('searchParams.set("sub_id",tour.subId)'));
+    expect(page).toMatch(sourceFragment("<ExternalProviderTourCard"));
+    expect(page).toMatch(sourceFragment("lg:grid-cols-3"));
+    expect(page).not.toMatch(sourceFragment("https://www.viator.com/tours/"));
+    expect(page).not.toMatch(sourceFragment("https://www.getyourguide.com/"));
   });
   it("uses existing local images and never duplicates an image path",()=>{
     const matches=[...data.matchAll(/"\/images\/[^"]+\.(?:webp|jpg|png)"/g)].map(m=>m[0].slice(1,-1));

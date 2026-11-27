@@ -1,3 +1,4 @@
+import { sourceFragment, sourceIndex } from "@/test-utils/source-fragment";
 import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
@@ -20,11 +21,11 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
     expect(guide.photo.alt).toBe(migrationPhotos["what-to-eat-in-israel"].alt);
     expect(guide.updatedAt).toBe("2026-11-21");
     expect(guide.title).toMatch(/^What to Eat in Israel/);
-    expect(route()).toContain('travelGuideMeta("food")');
-    expect(route()).toContain("component: IsraelFoodGuide");
-    expect(route()).not.toContain('TravelGuidePage id="food"');
-    expect(ui()).toContain("<GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}");
-    expect(ui()).toContain("<PageUpdated date={guide.updatedAt");
+    expect(route()).toMatch(sourceFragment('travelGuideMeta("food")'));
+    expect(route()).toMatch(sourceFragment("component: IsraelFoodGuide"));
+    expect(route()).not.toMatch(sourceFragment('TravelGuidePage id="food"'));
+    expect(ui()).toMatch(sourceFragment("<GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}"));
+    expect(ui()).toMatch(sourceFragment("<PageUpdated date={guide.updatedAt"));
   });
 
   it("offers all ten specific dishes with their previously owned photos",()=>{
@@ -83,46 +84,46 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
       expect(tour.detail).toContain("Approximately");
     }
     const content=ui();
-    expect(content).toContain('url.searchParams.set("sub_id",tour.subId)');
-    expect(content).toContain("<CuratedPartnerTourCard");
-    expect(content).toContain('pageId="what_to_eat_in_israel"');
-    expect(content).not.toContain('starting price');
-    expect(content).toContain('data-testid="israel-food-tour-cards"');
+    expect(content).toMatch(sourceFragment('url.searchParams.set("sub_id",tour.subId)'));
+    expect(content).toMatch(sourceFragment("<CuratedPartnerTourCard"));
+    expect(content).toMatch(sourceFragment('pageId="what_to_eat_in_israel"'));
+    expect(content).not.toMatch(sourceFragment('starting price'));
+    expect(content).toMatch(sourceFragment('data-testid="israel-food-tour-cards"'));
     const marketImage=foodTours.find(t=>t.key==="mahane-yehuda")?.image;
     expect(marketImage).toBeTruthy();
-    expect(readFileSync("src/data/israelFoodExplorer.ts","utf8")).toContain("image:mahaneYehudaStreetPhoto");
+    expect(readFileSync("src/data/israelFoodExplorer.ts","utf8")).toMatch(sourceFragment("image:mahaneYehudaStreetPhoto"));
     expect(foodMarkets.find(m=>m.id==="jerusalem")?.image).toBe("/images/food-guide/mahane-yehuda-food-stalls.webp");
     expect(foodTours.find(t=>t.key==="levinsky")?.image).toBe("/images/food-guide/levinsky-spice-shop.webp");
-    expect(content).toContain("commons.wikimedia.org/wiki/File:PikiWiki_Israel_9177_Levinsky_market_in_Tel_Aviv.JPG");
-    expect(content).toContain("CC BY 2.5");
-    expect(content).toContain("commons.wikimedia.org/wiki/File:Mahane_Yehuda_shoppers.jpg");
-    expect(content).toContain("CC BY-SA 3.0");
+    expect(content).toMatch(sourceFragment("commons.wikimedia.org/wiki/File:PikiWiki_Israel_9177_Levinsky_market_in_Tel_Aviv.JPG"));
+    expect(content).toMatch(sourceFragment("CC BY 2.5"));
+    expect(content).toMatch(sourceFragment("commons.wikimedia.org/wiki/File:Mahane_Yehuda_shoppers.jpg"));
+    expect(content).toMatch(sourceFragment("CC BY-SA 3.0"));
   });
 
   it("keeps compact filtering, guide sets, contact and consolidated footer photo credits",()=>{
     const content=ui();
-    expect(content).toContain('aria-pressed={filter===kind.id}');
-    expect(content).toContain('aria-label="Jump to a food dish"');
-    expect(content).toContain('onClick={event=>onPickFood(event,dish.id)}');
-    expect(content).toContain('setFoodFilter("all")');
-    expect(content).toContain('setPendingDish(dishId)');
+    expect(content).toMatch(sourceFragment('aria-pressed={filter===kind.id}'));
+    expect(content).toMatch(sourceFragment('aria-label="Jump to a food dish"'));
+    expect(content).toMatch(sourceFragment('onClick={event=>onPickFood(event,dish.id)}'));
+    expect(content).toMatch(sourceFragment('setFoodFilter("all")'));
+    expect(content).toMatch(sourceFragment('setPendingDish(dishId)'));
     expect(content).toContain('target.scrollIntoView?.');
-    expect(content).not.toContain('About this food tradition');
-    expect(content).toContain('{dish.summary} {dish.roots}');
-    expect(content).toContain('data-testid="israel-food-dish-grid"');
+    expect(content).not.toMatch(sourceFragment('About this food tradition'));
+    expect(content).toMatch(sourceFragment('{dish.summary} {dish.roots}'));
+    expect(content).toMatch(sourceFragment('data-testid="israel-food-dish-grid"'));
     expect(content).toContain("visible.length");
-    expect(content).toContain("grid grid-cols-2 gap-4 lg:grid-cols-3");
-    expect(content).toContain('guideHeroPhotoForPath(String(item.to))');
+    expect(content).toMatch(sourceFragment("grid grid-cols-2 gap-4 lg:grid-cols-3"));
+    expect(content).toMatch(sourceFragment('guideHeroPhotoForPath(String(item.to))'));
     expect((content.match(/<RelatedCard key=\{item\.to\}/g)||[]).length).toBe(2);
-    expect(content).toContain('id="food-words"');
-    expect(content).toContain('id="markets"');
-    expect(content).toContain('id="practical"');
-    expect(content).toContain("<FaqList faqs={foodFAQs}/>");
-    expect(content).toContain("<HomeContactForm");
-    expect(content.indexOf("<SourcesDisclosure>")).toBeGreaterThan(content.indexOf("<HomeContactForm"));
-    expect(content).toContain("<PhotoCreditsDisclosure entries={[");
+    expect(content).toMatch(sourceFragment('id="food-words"'));
+    expect(content).toMatch(sourceFragment('id="markets"'));
+    expect(content).toMatch(sourceFragment('id="practical"'));
+    expect(content).toMatch(sourceFragment("<FaqList faqs={foodFAQs}/>"));
+    expect(content).toMatch(sourceFragment("<HomeContactForm"));
+    expect(sourceIndex(content, "<SourcesDisclosure>")).toBeGreaterThan(sourceIndex(content, "<HomeContactForm"));
+    expect(content).toMatch(sourceFragment("<PhotoCreditsDisclosure entries={["));
     expect(content).not.toContain('["sources"');
-    expect(content).toContain('["contact","Contact me"]');
+    expect(content).toMatch(sourceFragment('["contact","Contact me"]'));
   });
 
   it("all four declared SEO citations resolve in the main registry",()=>{

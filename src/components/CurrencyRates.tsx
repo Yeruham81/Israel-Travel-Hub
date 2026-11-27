@@ -1,29 +1,61 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { initialReferenceFx, referenceFxConfig, type ForeignDisplayCurrency } from "@/data/reference-fx";
-import { convertedAmount, displayCurrencies, isUsableExchangeRates, parseExchangeRateResult, type ExchangeRateResult } from "@/lib/exchange-rates";
+import {
+  initialReferenceFx,
+  referenceFxConfig,
+  type ForeignDisplayCurrency,
+} from "@/data/reference-fx";
+import {
+  convertedAmount,
+  displayCurrencies,
+  isUsableExchangeRates,
+  parseExchangeRateResult,
+  type ExchangeRateResult,
+} from "@/lib/exchange-rates";
 
 type CurrencyState = ExchangeRateResult & { loading: boolean };
 type StoredRates = ExchangeRateResult & { nextCheckAt: number };
-const bootstrap = (): CurrencyState => ({ rates: isUsableExchangeRates(initialReferenceFx) ? initialReferenceFx : null, status: "cached", loading: false });
+const bootstrap = (): CurrencyState => ({
+  rates: isUsableExchangeRates(initialReferenceFx) ? initialReferenceFx : null,
+  status: "cached",
+  loading: false,
+});
 export const CurrencyRatesContext = createContext<CurrencyState>(bootstrap());
 
 function readStoredRates(): StoredRates | null {
   try {
     const raw: unknown = JSON.parse(localStorage.getItem(referenceFxConfig.storageKey) || "null");
-    if (!raw || typeof raw !== "object" || !("nextCheckAt" in raw) || typeof raw.nextCheckAt !== "number" || !Number.isFinite(raw.nextCheckAt) || raw.nextCheckAt > Date.now() + referenceFxConfig.refreshMs) return null;
+    if (
+      !raw ||
+      typeof raw !== "object" ||
+      !("nextCheckAt" in raw) ||
+      typeof raw.nextCheckAt !== "number" ||
+      !Number.isFinite(raw.nextCheckAt) ||
+      raw.nextCheckAt > Date.now() + referenceFxConfig.refreshMs
+    )
+      return null;
     const data = parseExchangeRateResult(raw);
     return data.rates ? { ...data, nextCheckAt: raw.nextCheckAt } : null;
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
 function storeRates(data: StoredRates) {
   try {
     if (data.rates) localStorage.setItem(referenceFxConfig.storageKey, JSON.stringify(data));
     else localStorage.removeItem(referenceFxConfig.storageKey);
-  } catch { /* Conversion remains usable when browser storage is blocked. */ }
+  } catch {
+    /* Conversion remains usable when browser storage is blocked. */
+  }
 }
 
 /** One request shared by every price on a page, with daily refresh across navigation and reloads. */
-export function CurrencyRatesProvider({ children, enabled = true }: { children: ReactNode; enabled?: boolean }) {
+export function CurrencyRatesProvider({
+  children,
+  enabled = true,
+}: {
+  children: ReactNode;
+  enabled?: boolean;
+}) {
   const [state, setState] = useState(bootstrap);
   useEffect(() => {
     // The homepage has no exchange-rate displays. Avoid an unnecessary fetch
@@ -35,27 +67,43 @@ export function CurrencyRatesProvider({ children, enabled = true }: { children: 
     let controller: AbortController | null = null;
     const stored = readStoredRates();
     const initial = bootstrap();
-    let current: ExchangeRateResult = stored?.rates && (!initial.rates || stored.rates.publishedAt >= initial.rates.publishedAt) ? stored : initial;
+    let current: ExchangeRateResult =
+      stored?.rates && (!initial.rates || stored.rates.publishedAt >= initial.rates.publishedAt)
+        ? stored
+        : initial;
     let nextCheckAt = current === stored ? stored!.nextCheckAt : 0;
     setState({ ...current, loading: false });
 
     function schedule() {
       clearTimeout(timer);
-      const expiresAt = current.rates ? Date.parse(`${current.rates.publishedAt}T00:00:00Z`) + referenceFxConfig.maxAgeMs + 1 : Infinity;
-      if (active) timer = setTimeout(() => {
-        if (document.visibilityState !== "hidden") void refresh();
-      }, Math.max(1000, Math.min(nextCheckAt, expiresAt) - Date.now()));
+      const expiresAt = current.rates
+        ? Date.parse(`${current.rates.publishedAt}T00:00:00Z`) + referenceFxConfig.maxAgeMs + 1
+        : Infinity;
+      if (active)
+        timer = setTimeout(
+          () => {
+            if (document.visibilityState !== "hidden") void refresh();
+          },
+          Math.max(1000, Math.min(nextCheckAt, expiresAt) - Date.now()),
+        );
     }
     async function refresh() {
       if (!active || controller) return;
-      if (Date.now() < nextCheckAt && (!current.rates || isUsableExchangeRates(current.rates))) { schedule(); return; }
+      if (Date.now() < nextCheckAt && (!current.rates || isUsableExchangeRates(current.rates))) {
+        schedule();
+        return;
+      }
       controller = new AbortController();
       const request = controller;
       // The server can try both Bank of Israel and the Hostinger fallback.
       // Allow both bounded upstream attempts to finish before aborting the client request.
       const timeout = setTimeout(() => request.abort(), referenceFxConfig.timeoutMs * 2 + 4000);
       const usable = isUsableExchangeRates(current.rates);
-      setState({ rates: usable ? current.rates : null, status: usable ? "cached" : "unavailable", loading: true });
+      setState({
+        rates: usable ? current.rates : null,
+        status: usable ? "cached" : "unavailable",
+        loading: true,
+      });
       try {
         async function loadRates(url: string): Promise<ExchangeRateResult> {
           const response = await fetch(url, {
@@ -87,7 +135,11 @@ export function CurrencyRatesProvider({ children, enabled = true }: { children: 
           }
         }
         if (!data.rates) throw new Error("No usable currency data");
-        if (isUsableExchangeRates(current.rates) && data.rates.publishedAt < current.rates.publishedAt) throw new Error("Older currency publication");
+        if (
+          isUsableExchangeRates(current.rates) &&
+          data.rates.publishedAt < current.rates.publishedAt
+        )
+          throw new Error("Older currency publication");
         if (!active) return;
         const freshUntil = Date.parse(data.rates.checkedAt) + referenceFxConfig.refreshMs;
         const fresh = data.status === "fresh" && freshUntil > Date.now();
@@ -95,7 +147,9 @@ export function CurrencyRatesProvider({ children, enabled = true }: { children: 
         nextCheckAt = fresh ? freshUntil : Date.now() + referenceFxConfig.retryMs;
       } catch {
         if (!active) return;
-        current = isUsableExchangeRates(current.rates) ? { rates: current.rates, status: "cached" } : { rates: null, status: "unavailable" };
+        current = isUsableExchangeRates(current.rates)
+          ? { rates: current.rates, status: "cached" }
+          : { rates: null, status: "unavailable" };
         nextCheckAt = Date.now() + referenceFxConfig.retryMs;
       } finally {
         clearTimeout(timeout);
@@ -107,11 +161,20 @@ export function CurrencyRatesProvider({ children, enabled = true }: { children: 
         }
       }
     }
-    function resume() { if (document.visibilityState !== "hidden") void refresh(); }
-    if (Date.now() >= nextCheckAt) void refresh(); else schedule();
+    function resume() {
+      if (document.visibilityState !== "hidden") void refresh();
+    }
+    if (Date.now() >= nextCheckAt) void refresh();
+    else schedule();
     window.addEventListener("focus", resume);
     document.addEventListener("visibilitychange", resume);
-    return () => { active = false; clearTimeout(timer); controller?.abort(); window.removeEventListener("focus", resume); document.removeEventListener("visibilitychange", resume); };
+    return () => {
+      active = false;
+      clearTimeout(timer);
+      controller?.abort();
+      window.removeEventListener("focus", resume);
+      document.removeEventListener("visibilitychange", resume);
+    };
   }, [enabled]);
   return <CurrencyRatesContext.Provider value={state}>{children}</CurrencyRatesContext.Provider>;
 }
@@ -123,19 +186,69 @@ const currencyVisuals = {
 };
 function CurrencyIcon({ currency }: { currency: "ILS" | ForeignDisplayCurrency }) {
   const visual = currencyVisuals[currency];
-  return <span aria-hidden="true" className={`inline-grid h-5 w-5 shrink-0 place-items-center rounded-full font-sans text-xs font-bold leading-none ${visual.tone}`}>{visual.symbol}</span>;
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-grid h-5 w-5 shrink-0 place-items-center rounded-full font-sans text-xs font-bold leading-none ${visual.tone}`}
+    >
+      {visual.symbol}
+    </span>
+  );
 }
 
-export function PriceDisplay({ amount, size = "card", from = true, className = "" }: { amount: number; size?: "card" | "hero" | "compact"; from?: boolean; className?: string }) {
+export function PriceDisplay({
+  amount,
+  size = "card",
+  from = true,
+  className = "",
+}: {
+  amount: number;
+  size?: "card" | "hero" | "compact";
+  from?: boolean;
+  className?: string;
+}) {
   const { rates, loading } = useContext(CurrencyRatesContext);
   const available = isUsableExchangeRates(rates);
-  return <div className={`min-w-0 ${className}`} data-testid="currency-price" data-ils={amount}>
-    <p className={`flex flex-wrap items-center gap-2 font-semibold tabular-nums ${size === "hero" ? "text-3xl" : size === "compact" ? "text-base" : "text-2xl"}`}><CurrencyIcon currency="ILS" /><span>{from ? "From " : ""}ILS {amount.toLocaleString("en-US")}</span></p>
-    <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-medium tabular-nums text-muted-foreground" aria-label="Approximate foreign-currency equivalents">
-      {available ? displayCurrencies.map((currency) => <span key={currency} className="inline-flex items-center gap-1.5 whitespace-nowrap" data-currency={currency}><CurrencyIcon currency={currency} /><span>≈ {currency} {convertedAmount(amount, currency, rates).toLocaleString("en-US")}</span></span>) : <span className="font-normal">{loading ? "Updating currency conversions…" : "Currency conversions temporarily unavailable"}</span>}
+  return (
+    <div className={`min-w-0 ${className}`} data-testid="currency-price" data-ils={amount}>
+      <p
+        className={`flex flex-wrap items-center gap-2 font-semibold tabular-nums ${size === "hero" ? "text-3xl" : size === "compact" ? "text-base" : "text-2xl"}`}
+      >
+        <CurrencyIcon currency="ILS" />
+        <span>
+          {from ? "From " : ""}ILS {amount.toLocaleString("en-US")}
+        </span>
+      </p>
+      <div
+        className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-medium tabular-nums text-muted-foreground"
+        aria-label="Approximate foreign-currency equivalents"
+      >
+        {available ? (
+          displayCurrencies.map((currency) => (
+            <span
+              key={currency}
+              className="inline-flex items-center gap-1.5 whitespace-nowrap"
+              data-currency={currency}
+            >
+              <CurrencyIcon currency={currency} />
+              <span>
+                ≈ {currency} {convertedAmount(amount, currency, rates).toLocaleString("en-US")}
+              </span>
+            </span>
+          ))
+        ) : (
+          <span className="font-normal">
+            {loading
+              ? "Updating currency conversions…"
+              : "Currency conversions temporarily unavailable"}
+          </span>
+        )}
+      </div>
+      <p className="mt-1.5 text-[0.65rem] leading-relaxed text-muted-foreground">
+        Approximate conversions · payment in ILS
+      </p>
     </div>
-    <p className="mt-1.5 text-[0.65rem] leading-relaxed text-muted-foreground">Approximate conversions · payment in ILS</p>
-  </div>;
+  );
 }
 
 /** Compact, unobtrusive equivalents for the airport hub's landscape destination cards.
@@ -147,16 +260,32 @@ export function CompactCurrencyEquivalents({ amount }: { amount: number }) {
   if (!isUsableExchangeRates(rates)) return null;
   const usd = convertedAmount(amount, "USD", rates).toLocaleString("en-US");
   const eur = convertedAmount(amount, "EUR", rates).toLocaleString("en-US");
-  return <p className="mt-0.5 flex flex-wrap items-center gap-x-1 text-xs leading-snug tabular-nums text-muted-foreground" data-testid="compact-currency-estimate" data-ils={amount} aria-label={`Approximately ${usd} US dollars or ${eur} euros`}>
-    <span className="whitespace-nowrap" data-currency="USD">≈ ${usd}</span>
-    <span aria-hidden="true">·</span>
-    <span className="whitespace-nowrap" data-currency="EUR">€{eur}</span>
-  </p>;
+  return (
+    <p
+      className="mt-0.5 flex flex-wrap items-center gap-x-1 text-xs leading-snug tabular-nums text-muted-foreground"
+      data-testid="compact-currency-estimate"
+      data-ils={amount}
+      aria-label={`Approximately ${usd} US dollars or ${eur} euros`}
+    >
+      <span className="whitespace-nowrap" data-currency="USD">
+        ≈ ${usd}
+      </span>
+      <span aria-hidden="true">·</span>
+      <span className="whitespace-nowrap" data-currency="EUR">
+        €{eur}
+      </span>
+    </p>
+  );
 }
 
 /** Shared concise pricing disclaimer; FX publication and cache status are kept in data, not displayed. */
 export function ExchangeRateNote({ className = "" }: { className?: string }) {
-  return <p className={`text-xs leading-relaxed text-muted-foreground ${className}`} data-testid="exchange-rate-note">
-    Charged in ILS. USD and EUR amounts are approximate estimates only.
-  </p>;
+  return (
+    <p
+      className={`text-xs leading-relaxed text-muted-foreground ${className}`}
+      data-testid="exchange-rate-note"
+    >
+      Charged in ILS. USD and EUR amounts are approximate estimates only.
+    </p>
+  );
 }

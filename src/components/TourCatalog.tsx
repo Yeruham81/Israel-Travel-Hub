@@ -4,142 +4,631 @@ import { Clock3, MapPin, Users } from "lucide-react";
 import type { TourProduct } from "@/data/tourTypes";
 import { tourPlaces, tourTags } from "@/data/tourTypes";
 import { getTourCategory, tourPhotos, type TourCategoryId } from "@/data/tours";
-import { filterTours, isOwnerTour, offersForTour, placeLabel, toursForCategory, tourSnapshotPrice, type TourSearch } from "@/lib/tours";
+import {
+  filterTours,
+  isOwnerTour,
+  offersForTour,
+  placeLabel,
+  toursForCategory,
+  tourSnapshotPrice,
+  type TourSearch,
+} from "@/lib/tours";
 import { recordOutboundClick } from "@/lib/outbound";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { PriceDisplay } from "@/components/CurrencyRates";
 
-export function OwnerTourSection({ tours, compact = false, onRequestQuote }: { tours: TourProduct[]; compact?: boolean; onRequestQuote?: ((tour: TourProduct) => void) | undefined }) {
+export function OwnerTourSection({
+  tours,
+  compact = false,
+  onRequestQuote,
+}: {
+  tours: TourProduct[];
+  compact?: boolean;
+  onRequestQuote?: ((tour: TourProduct) => void) | undefined;
+}) {
   if (!tours.length) return null;
-  return <section id="my-private-days" aria-labelledby="my-private-days-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24">
-    <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged by me</p>
-    <h2 id="my-private-days-h" className="mt-2 text-3xl font-semibold">My private day trips</h2>
-    <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">I'll customize your private day trip according to your preferred destinations, pickup location and itinerary.</p>
-    <ul className={compact ? "mt-4 grid auto-rows-fr gap-3" : "mt-5 grid auto-rows-fr gap-5 sm:grid-cols-2"} aria-label="My private day trips">
-      {tours.map(tour => compact ? <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="h-full min-w-0 scroll-mt-24 overflow-hidden rounded-xl border bg-card">
-        <article className="flex h-full min-w-0 flex-col sm:flex-row sm:items-stretch">
-          <div className="relative h-36 w-full shrink-0 overflow-hidden bg-secondary/20 sm:h-auto sm:w-48 lg:w-56"><img src={tourPhotos[tour.id]!.src} srcSet={stage5PhotoSrcSet(tourPhotos[tour.id]!.src)} sizes="(min-width: 1024px) 340px, (min-width: 768px) 50vw, calc(100vw - 34px)" alt={tourPhotos[tour.id]!.alt} width={320} height={180} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" /></div>
-          <div className="flex min-w-0 flex-1 flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-5 lg:px-5">
-            <div className="min-w-0 flex-1">
-              <h3 className="text-base font-semibold leading-snug">{tour.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
-              <p className="mt-2 text-xs text-muted-foreground">{tour.length === "full-day" ? "Full day · Customized itinerary" : tour.duration} · Private car &amp; driver</p>
-            </div>
-            <a href="#contact" onClick={() => onRequestQuote?.(tour)} aria-label={"Get a quote for " + tour.title} className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center">Get a quote</a>
-          </div>
-        </article>
-      </li> : <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex h-full min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card">
-        <img src={tourPhotos[tour.id]!.src} srcSet={stage5PhotoSrcSet(tourPhotos[tour.id]!.src)} sizes="(min-width: 1024px) 340px, (min-width: 768px) 50vw, calc(100vw - 34px)" alt={tourPhotos[tour.id]!.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-        <article className="flex flex-1 flex-col p-4">
-          <h3 className="text-xl font-semibold leading-snug text-foreground">{tour.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
-          <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
-            <div><dt className="sr-only">Duration</dt><dd className="flex items-start gap-2"><Clock3 aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />{tour.duration}</dd></div>
-            <div><dt className="sr-only">Tour format</dt><dd className="flex items-start gap-2"><Users aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />{tour.formatLabel}</dd></div>
-            <div className="col-span-2"><dt className="sr-only">Departure</dt><dd className="flex items-start gap-2"><MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" /><span><strong className="font-medium">From {tour.originIds.map(placeLabel).join(" or ")}</strong><br /><span className="text-xs text-muted-foreground">{tour.pickup}</span></span></dd></div>
-            <div className="col-span-2"><dt className="inline font-medium">Includes: </dt><dd className="inline text-muted-foreground">{tour.inclusions}</dd></div>
-          </dl>
-          <p className="mt-3 text-xs text-primary">{tour.destinationIds.map(placeLabel).join(" · ")}</p>
-          <div className="mt-auto pt-4"><div className="border-t pt-4">{tour.price ? <><PriceDisplay amount={tour.price.amount} /><p className="mt-2 text-xs text-muted-foreground">Per vehicle · up to {tour.price.maxPartySize} · transport only</p></> : <><p className="text-lg font-semibold">Customized quote for your itinerary</p><p className="mt-1 text-xs text-muted-foreground">Route, vehicle and full price agreed before booking</p></>}</div>
-            <Link to="/private-driver-in-israel/" search={{ tour: tour.id }} hash="request-quote" className="btn btn-primary mt-4 w-full" aria-label={`Get a quote for ${tour.title}`}>Get a quote</Link>
-          </div>
-        </article>
-      </li>)}
-    </ul>
-    {!compact && tours.some(tour => tour.price) && <p className="mt-5 max-w-3xl text-xs leading-relaxed text-muted-foreground">My rates cover private transport only, with published starting prices in ILS per vehicle for up to four passengers on weekdays. Send me your travel date, pickup city, group size and preferred stops to get a personalized quote.</p>}
-  </section>;
+  return (
+    <section
+      id="my-private-days"
+      aria-labelledby="my-private-days-h"
+      data-section="moshe-private-tours"
+      className="mt-10 scroll-mt-24"
+    >
+      <p className="text-xs font-bold uppercase tracking-widest text-primary">
+        Personally arranged by me
+      </p>
+      <h2 id="my-private-days-h" className="mt-2 text-3xl font-semibold">
+        My private day trips
+      </h2>
+      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+        I'll customize your private day trip according to your preferred destinations, pickup
+        location and itinerary.
+      </p>
+      <ul
+        className={
+          compact ? "mt-4 grid auto-rows-fr gap-3" : "mt-5 grid auto-rows-fr gap-5 sm:grid-cols-2"
+        }
+        aria-label="My private day trips"
+      >
+        {tours.map((tour) =>
+          compact ? (
+            <li
+              key={tour.id}
+              id={tour.id}
+              data-product-id={tour.id}
+              data-operator-id="moshe-barak"
+              data-testid="owner-tour-card"
+              className="h-full min-w-0 scroll-mt-24 overflow-hidden rounded-xl border bg-card"
+            >
+              <article className="flex h-full min-w-0 flex-col sm:flex-row sm:items-stretch">
+                <div className="relative h-36 w-full shrink-0 overflow-hidden bg-secondary/20 sm:h-auto sm:w-48 lg:w-56">
+                  <img
+                    src={tourPhotos[tour.id]!.src}
+                    srcSet={stage5PhotoSrcSet(tourPhotos[tour.id]!.src)}
+                    sizes="(min-width: 1024px) 340px, (min-width: 768px) 50vw, calc(100vw - 34px)"
+                    alt={tourPhotos[tour.id]!.alt}
+                    width={320}
+                    height={180}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+                <div className="flex min-w-0 flex-1 flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-5 lg:px-5">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-base font-semibold leading-snug">{tour.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                      {tour.summary}
+                    </p>
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      {tour.length === "full-day"
+                        ? "Full day · Customized itinerary"
+                        : tour.duration}{" "}
+                      · Private car &amp; driver
+                    </p>
+                  </div>
+                  <a
+                    href="#contact"
+                    onClick={() => onRequestQuote?.(tour)}
+                    aria-label={"Get a quote for " + tour.title}
+                    className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center"
+                  >
+                    Get a quote
+                  </a>
+                </div>
+              </article>
+            </li>
+          ) : (
+            <li
+              key={tour.id}
+              id={tour.id}
+              data-product-id={tour.id}
+              data-operator-id="moshe-barak"
+              data-testid="owner-tour-card"
+              className="flex h-full min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card"
+            >
+              <img
+                src={tourPhotos[tour.id]!.src}
+                srcSet={stage5PhotoSrcSet(tourPhotos[tour.id]!.src)}
+                sizes="(min-width: 1024px) 340px, (min-width: 768px) 50vw, calc(100vw - 34px)"
+                alt={tourPhotos[tour.id]!.alt}
+                width={720}
+                height={480}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[16/9] w-full object-cover"
+              />
+              <article className="flex flex-1 flex-col p-4">
+                <h3 className="text-xl font-semibold leading-snug text-foreground">{tour.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
+                <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
+                  <div>
+                    <dt className="sr-only">Duration</dt>
+                    <dd className="flex items-start gap-2">
+                      <Clock3 aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />
+                      {tour.duration}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="sr-only">Tour format</dt>
+                    <dd className="flex items-start gap-2">
+                      <Users aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />
+                      {tour.formatLabel}
+                    </dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="sr-only">Departure</dt>
+                    <dd className="flex items-start gap-2">
+                      <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />
+                      <span>
+                        <strong className="font-medium">
+                          From {tour.originIds.map(placeLabel).join(" or ")}
+                        </strong>
+                        <br />
+                        <span className="text-xs text-muted-foreground">{tour.pickup}</span>
+                      </span>
+                    </dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="inline font-medium">Includes: </dt>
+                    <dd className="inline text-muted-foreground">{tour.inclusions}</dd>
+                  </div>
+                </dl>
+                <p className="mt-3 text-xs text-primary">
+                  {tour.destinationIds.map(placeLabel).join(" · ")}
+                </p>
+                <div className="mt-auto pt-4">
+                  <div className="border-t pt-4">
+                    {tour.price ? (
+                      <>
+                        <PriceDisplay amount={tour.price.amount} />
+                        <p className="mt-2 text-xs text-muted-foreground">
+                          Per vehicle · up to {tour.price.maxPartySize} · transport only
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-lg font-semibold">Customized quote for your itinerary</p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          Route, vehicle and full price agreed before booking
+                        </p>
+                      </>
+                    )}
+                  </div>
+                  <Link
+                    to="/private-driver-in-israel/"
+                    search={{ tour: tour.id }}
+                    hash="request-quote"
+                    className="btn btn-primary mt-4 w-full"
+                    aria-label={`Get a quote for ${tour.title}`}
+                  >
+                    Get a quote
+                  </Link>
+                </div>
+              </article>
+            </li>
+          ),
+        )}
+      </ul>
+      {!compact && tours.some((tour) => tour.price) && (
+        <p className="mt-5 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+          My rates cover private transport only, with published starting prices in ILS per vehicle
+          for up to four passengers on weekdays. Send me your travel date, pickup city, group size
+          and preferred stops to get a personalized quote.
+        </p>
+      )}
+    </section>
+  );
 }
 
-export function ExternalTourCard({ tour, pageId }: { tour: TourProduct; pageId: string; compact?: boolean }) {
-  const offers = offersForTour(tour.id, pageId).filter(offer => offer.provider.isAffiliate);
+export function ExternalTourCard({
+  tour,
+  pageId,
+}: {
+  tour: TourProduct;
+  pageId: string;
+  compact?: boolean;
+}) {
+  const offers = offersForTour(tour.id, pageId).filter((offer) => offer.provider.isAffiliate);
   // Use a partner offer with a documented price first, then the first approved Travelpayouts link.
-  const primaryOffer = offers.find(offer => tourSnapshotPrice(offer)) ?? offers[0];
+  const primaryOffer = offers.find((offer) => tourSnapshotPrice(offer)) ?? offers[0];
   if (!primaryOffer) return null;
   const price = tourSnapshotPrice(primaryOffer);
   const image = tourPhotos[tour.id]!;
-  return <li id={tour.id} data-product-id={tour.id} data-testid="tour-card" className="h-full min-w-0 scroll-mt-24">
-    <ExternalProviderTourCard
-      image={image.src} alt={image.alt}
-      platform={primaryOffer.partner.name} title={tour.title} description={tour.summary}
-      duration={tour.duration} location={tour.originIds.length && !["tours-tel-aviv-jaffa","tours-negev-ramon","tours-eilat-red-sea"].includes(pageId) ? `From ${tour.originIds.map(id => id === "tel-aviv" ? "Tel Aviv" : placeLabel(id)).join(" / ")}` : undefined} omitMissingDetails
-      rating={tour.rating && { value: tour.rating.value, count: tour.rating.count }}
-      price={price && { amount: price.amount, currency: price.currency, basis: price.basis, maxPartySize: price.maxPartySize }}
-      href={primaryOffer.provider.url} affiliate={primaryOffer.provider.isAffiliate}
-      onClick={() => recordOutboundClick({ pageId, productId: tour.id, offerId: primaryOffer.id })}
-    />
-  </li>;
+  return (
+    <li
+      id={tour.id}
+      data-product-id={tour.id}
+      data-testid="tour-card"
+      className="h-full min-w-0 scroll-mt-24"
+    >
+      <ExternalProviderTourCard
+        image={image.src}
+        alt={image.alt}
+        platform={primaryOffer.partner.name}
+        title={tour.title}
+        description={tour.summary}
+        duration={tour.duration}
+        location={
+          tour.originIds.length &&
+          !["tours-tel-aviv-jaffa", "tours-negev-ramon", "tours-eilat-red-sea"].includes(pageId)
+            ? `From ${tour.originIds.map((id) => (id === "tel-aviv" ? "Tel Aviv" : placeLabel(id))).join(" / ")}`
+            : undefined
+        }
+        omitMissingDetails
+        rating={tour.rating && { value: tour.rating.value, count: tour.rating.count }}
+        price={
+          price && {
+            amount: price.amount,
+            currency: price.currency,
+            basis: price.basis,
+            maxPartySize: price.maxPartySize,
+          }
+        }
+        href={primaryOffer.provider.url}
+        affiliate={primaryOffer.provider.isAffiliate}
+        onClick={() =>
+          recordOutboundClick({ pageId, productId: tour.id, offerId: primaryOffer.id })
+        }
+      />
+    </li>
+  );
 }
 
-export function TourCatalog({ categoryId, filters, onChange, onRequestQuote }: { categoryId: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void; onRequestQuote?: ((tour: TourProduct) => void) | undefined }) {
-  const compact = categoryId === "jerusalem" || categoryId === "tel-aviv-jaffa" || categoryId === "masada-dead-sea" || categoryId === "bethlehem-jericho" || categoryId === "nazareth-galilee" || categoryId === "northern-coast" || categoryId === "negev-ramon" || categoryId === "golan-heights" || categoryId === "food-markets" || categoryId === "eilat-red-sea";
+export function TourCatalog({
+  categoryId,
+  filters,
+  onChange,
+  onRequestQuote,
+}: {
+  categoryId: TourCategoryId;
+  filters: TourSearch;
+  onChange: (next: TourSearch, replace?: boolean) => void;
+  onRequestQuote?: ((tour: TourProduct) => void) | undefined;
+}) {
+  const compact =
+    categoryId === "jerusalem" ||
+    categoryId === "tel-aviv-jaffa" ||
+    categoryId === "masada-dead-sea" ||
+    categoryId === "bethlehem-jericho" ||
+    categoryId === "nazareth-galilee" ||
+    categoryId === "northern-coast" ||
+    categoryId === "negev-ramon" ||
+    categoryId === "golan-heights" ||
+    categoryId === "food-markets" ||
+    categoryId === "eilat-red-sea";
   const departures: { label: string; search: TourSearch }[] = [
     { label: "From Jerusalem", search: { origin: "jerusalem" } },
     { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
   ];
   const chips: Record<TourCategoryId, { label: string; search: TourSearch }[]> = {
-    jerusalem: [...departures, { label: "History & heritage", search: { tag: "heritage" } }, { label: "Food & markets", search: { tag: "food" } }, { label: "Art & architecture", search: { tag: "art" } }],
-    "tel-aviv-jaffa": [{ label: "Old Jaffa", search: { q: "Old Jaffa" } }, { label: "Food & markets", search: { tag: "food" } }, { label: "Art & architecture", search: { tag: "art" } }],
-    "masada-dead-sea": [...departures, { label: "Visit Masada", search: { destination: "masada" } }, { label: "Ein Gedi routes", search: { destination: "ein-gedi" } }, { label: "Dead Sea only", search: { q: "relaxation" } }],
-    "bethlehem-jericho": [...departures, { label: "Bethlehem", search: { destination: "bethlehem" } }, { label: "Jericho", search: { destination: "jericho" } }, { label: "Qasr al-Yahud", search: { destination: "jordan-river" } }],
-    "nazareth-galilee": [...departures, { label: "Yardenit", search: { destination: "jordan-river" } }, { label: "Magdala", search: { q: "Magdala" } }],
-    "northern-coast": [...departures, { label: "Rosh Hanikra routes", search: { q: "Rosh Hanikra" } }],
-    "negev-ramon": [{ label: "Jeep safaris", search: { q: "jeep" } }, { label: "Geology tours", search: { q: "geology" } }, { label: "Stargazing", search: { q: "stargazing" } }, { label: "Rappelling", search: { q: "rappelling" } }],
-    "golan-heights": [...departures, { label: "Local northern pickup", search: { origin: "galilee" } }, { label: "Mount Bental", search: { q: "Bental" } }, { label: "Katzrin", search: { q: "Katzrin" } }],
-    "food-markets": [{ label: "Jerusalem", search: { origin: "jerusalem" } }, { label: "Tel Aviv", search: { origin: "tel-aviv" } }],
-    "eilat-red-sea": [{ label: "Boat cruises", search: { q: "boat" } }, { label: "Snorkeling", search: { q: "snorkeling" } }, { label: "Desert adventures", search: { q: "jeep" } }],
+    jerusalem: [
+      ...departures,
+      { label: "History & heritage", search: { tag: "heritage" } },
+      { label: "Food & markets", search: { tag: "food" } },
+      { label: "Art & architecture", search: { tag: "art" } },
+    ],
+    "tel-aviv-jaffa": [
+      { label: "Old Jaffa", search: { q: "Old Jaffa" } },
+      { label: "Food & markets", search: { tag: "food" } },
+      { label: "Art & architecture", search: { tag: "art" } },
+    ],
+    "masada-dead-sea": [
+      ...departures,
+      { label: "Visit Masada", search: { destination: "masada" } },
+      { label: "Ein Gedi routes", search: { destination: "ein-gedi" } },
+      { label: "Dead Sea only", search: { q: "relaxation" } },
+    ],
+    "bethlehem-jericho": [
+      ...departures,
+      { label: "Bethlehem", search: { destination: "bethlehem" } },
+      { label: "Jericho", search: { destination: "jericho" } },
+      { label: "Qasr al-Yahud", search: { destination: "jordan-river" } },
+    ],
+    "nazareth-galilee": [
+      ...departures,
+      { label: "Yardenit", search: { destination: "jordan-river" } },
+      { label: "Magdala", search: { q: "Magdala" } },
+    ],
+    "northern-coast": [
+      ...departures,
+      { label: "Rosh Hanikra routes", search: { q: "Rosh Hanikra" } },
+    ],
+    "negev-ramon": [
+      { label: "Jeep safaris", search: { q: "jeep" } },
+      { label: "Geology tours", search: { q: "geology" } },
+      { label: "Stargazing", search: { q: "stargazing" } },
+      { label: "Rappelling", search: { q: "rappelling" } },
+    ],
+    "golan-heights": [
+      ...departures,
+      { label: "Local northern pickup", search: { origin: "galilee" } },
+      { label: "Mount Bental", search: { q: "Bental" } },
+      { label: "Katzrin", search: { q: "Katzrin" } },
+    ],
+    "food-markets": [
+      { label: "Jerusalem", search: { origin: "jerusalem" } },
+      { label: "Tel Aviv", search: { origin: "tel-aviv" } },
+    ],
+    "eilat-red-sea": [
+      { label: "Boat cruises", search: { q: "boat" } },
+      { label: "Snorkeling", search: { q: "snorkeling" } },
+      { label: "Desert adventures", search: { q: "jeep" } },
+    ],
   };
   const all = toursForCategory(categoryId);
   const compactChips = [
-    { label: ["negev-ramon","food-markets","eilat-red-sea"].includes(categoryId) ? "All experiences" : "All tours", search: {} },
-    ...chips[categoryId].filter(item => { const count = filterTours(categoryId, item.search).length; return count > 0 && count < all.length; }),
+    {
+      label: ["negev-ramon", "food-markets", "eilat-red-sea"].includes(categoryId)
+        ? "All experiences"
+        : "All tours",
+      search: {},
+    },
+    ...chips[categoryId].filter((item) => {
+      const count = filterTours(categoryId, item.search).length;
+      return count > 0 && count < all.length;
+    }),
   ];
   const visible = filterTours(categoryId, filters);
   const owner = visible.filter(isOwnerTour);
   const quality = (tour: TourProduct) => {
-    const offers = offersForTour(tour.id, `tours-${categoryId}`).filter(offer => offer.provider.isAffiliate);
-    return Number(Boolean(tour.rating)) + Number(offers.some(offer => Boolean(tourSnapshotPrice(offer))));
+    const offers = offersForTour(tour.id, `tours-${categoryId}`).filter(
+      (offer) => offer.provider.isAffiliate,
+    );
+    return (
+      Number(Boolean(tour.rating)) +
+      Number(offers.some((offer) => Boolean(tourSnapshotPrice(offer))))
+    );
   };
-  const external = visible.filter(tour => !isOwnerTour(tour));
-  if (!filters.sort) external.sort((a,b) => quality(b)-quality(a) || (b.rating?.value ?? 0)-(a.rating?.value ?? 0) || (b.rating?.count ?? 0)-(a.rating?.count ?? 0));
-  const origins = tourPlaces.filter(place => all.some(tour => tour.originIds.includes(place.id)));
-  const destinations = tourPlaces.filter(place => all.some(tour => tour.destinationIds.includes(place.id)));
-  const tags = tourTags.filter(tag => all.some(tour => tour.tagIds.includes(tag.id)));
-  const set = (key: keyof TourSearch, value: string) => onChange({ ...filters, [key]: value || undefined }, key === "q");
-  const active = Object.keys(filters).some(key => key !== "sort");
-  return <div id="tour-catalog" className={compact ? "mt-7 scroll-mt-24" : "mt-10 scroll-mt-24"}>
-    {compact ? <nav aria-label={`Filter ${getTourCategory(categoryId).shortTitle} tours`} className="rounded-xl border bg-secondary/25 px-3 py-3 sm:px-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="mr-1 shrink-0 text-xs font-semibold text-muted-foreground">Show:</span>
-        {compactChips.map(item => {
-          const selected = Object.entries(item.search).length === Object.entries(filters).length && Object.entries(item.search).every(([key, value]) => filters[key as keyof TourSearch] === value);
-          return <button key={item.label} type="button" className="chip shrink-0 text-xs" aria-pressed={selected} onClick={() => onChange(item.search)}>{item.label}</button>;
-        })}
+  const external = visible.filter((tour) => !isOwnerTour(tour));
+  if (!filters.sort)
+    external.sort(
+      (a, b) =>
+        quality(b) - quality(a) ||
+        (b.rating?.value ?? 0) - (a.rating?.value ?? 0) ||
+        (b.rating?.count ?? 0) - (a.rating?.count ?? 0),
+    );
+  const origins = tourPlaces.filter((place) =>
+    all.some((tour) => tour.originIds.includes(place.id)),
+  );
+  const destinations = tourPlaces.filter((place) =>
+    all.some((tour) => tour.destinationIds.includes(place.id)),
+  );
+  const tags = tourTags.filter((tag) => all.some((tour) => tour.tagIds.includes(tag.id)));
+  const set = (key: keyof TourSearch, value: string) =>
+    onChange({ ...filters, [key]: value || undefined }, key === "q");
+  const active = Object.keys(filters).some((key) => key !== "sort");
+  return (
+    <div id="tour-catalog" className={compact ? "mt-7 scroll-mt-24" : "mt-10 scroll-mt-24"}>
+      {compact ? (
+        <nav
+          aria-label={`Filter ${getTourCategory(categoryId).shortTitle} tours`}
+          className="rounded-xl border bg-secondary/25 px-3 py-3 sm:px-4"
+        >
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="mr-1 shrink-0 text-xs font-semibold text-muted-foreground">Show:</span>
+            {compactChips.map((item) => {
+              const selected =
+                Object.entries(item.search).length === Object.entries(filters).length &&
+                Object.entries(item.search).every(
+                  ([key, value]) => filters[key as keyof TourSearch] === value,
+                );
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  className="chip shrink-0 text-xs"
+                  aria-pressed={selected}
+                  onClick={() => onChange(item.search)}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+        </nav>
+      ) : (
+        <form
+          role="search"
+          aria-label="Find a tour in this category"
+          onSubmit={(event) => event.preventDefault()}
+          className="rounded-2xl border bg-secondary/40 p-4 sm:p-5"
+        >
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <label className="text-xs font-semibold">
+              Search tours
+              <input
+                type="search"
+                value={filters.q || ""}
+                onChange={(event) => set("q", event.target.value)}
+                placeholder="Place or interest"
+                maxLength={80}
+                className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"
+              />
+            </label>
+            <label className="text-xs font-semibold">
+              Departure location
+              <select
+                value={filters.origin || ""}
+                onChange={(event) => set("origin", event.target.value)}
+                className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"
+              >
+                <option value="">All departures</option>
+                {origins.map((origin) => (
+                  <option key={origin.id} value={origin.id}>
+                    {origin.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="text-xs font-semibold">
+              Duration
+              <select
+                value={filters.length || ""}
+                onChange={(event) => set("length", event.target.value)}
+                className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"
+              >
+                <option value="">Any duration</option>
+                <option value="short">Up to half a day</option>
+                <option value="full-day">Full day</option>
+              </select>
+            </label>
+            <label className="text-xs font-semibold">
+              Tour type
+              <select
+                value={filters.format || ""}
+                onChange={(event) => set("format", event.target.value)}
+                className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"
+              >
+                <option value="">All experiences</option>
+                <option value="shared">Shared guided experience</option>
+                <option value="private">Private</option>
+                <option value="independent">Shared transport & host</option>
+              </select>
+            </label>
+          </div>
+          {destinations.length > 1 && (
+            <div className="mt-4">
+              <p className="text-xs font-semibold">Destinations</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  className="chip"
+                  aria-pressed={!filters.destination}
+                  onClick={() => set("destination", "")}
+                >
+                  All destinations
+                </button>
+                {destinations.map((place) => (
+                  <button
+                    key={place.id}
+                    type="button"
+                    className="chip"
+                    aria-pressed={filters.destination === place.id}
+                    onClick={() =>
+                      set("destination", filters.destination === place.id ? "" : place.id)
+                    }
+                  >
+                    {place.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {tags.length > 1 && (
+            <div className="mt-4">
+              <p className="text-xs font-semibold">Interests</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  className="chip"
+                  aria-pressed={!filters.tag}
+                  onClick={() => set("tag", "")}
+                >
+                  All interests
+                </button>
+                {tags.map((tag) => (
+                  <button
+                    key={tag.id}
+                    type="button"
+                    className="chip"
+                    aria-pressed={filters.tag === tag.id}
+                    onClick={() => set("tag", filters.tag === tag.id ? "" : tag.id)}
+                  >
+                    {tag.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </form>
+      )}
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <p role="status" aria-live="polite" className="text-sm text-muted-foreground">
+          {visible.length} {visible.length === 1 ? "experience" : "experiences"}
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          {(active || filters.sort) && (
+            <button
+              type="button"
+              onClick={() => onChange({})}
+              className="text-sm font-semibold text-primary underline"
+            >
+              Clear filters
+            </button>
+          )}
+          {!compact && (
+            <label className="text-xs text-muted-foreground">
+              Sort by{" "}
+              <select
+                aria-label="Sort tours"
+                value={filters.sort || ""}
+                onChange={(event) => set("sort", event.target.value)}
+                className="ml-1 rounded-lg border bg-background p-2 text-sm text-foreground"
+              >
+                <option value="">Featured</option>
+                <option value="duration">Shortest duration</option>
+                <option value="title">Title A–Z</option>
+              </select>
+            </label>
+          )}
+        </div>
       </div>
-    </nav> : <form role="search" aria-label="Find a tour in this category" onSubmit={event => event.preventDefault()} className="rounded-2xl border bg-secondary/40 p-4 sm:p-5">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <label className="text-xs font-semibold">Search tours<input type="search" value={filters.q || ""} onChange={event => set("q", event.target.value)} placeholder="Place or interest" maxLength={80} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal" /></label>
-        <label className="text-xs font-semibold">Departure location<select value={filters.origin || ""} onChange={event => set("origin", event.target.value)} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"><option value="">All departures</option>{origins.map(origin => <option key={origin.id} value={origin.id}>{origin.label}</option>)}</select></label>
-        <label className="text-xs font-semibold">Duration<select value={filters.length || ""} onChange={event => set("length", event.target.value)} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"><option value="">Any duration</option><option value="short">Up to half a day</option><option value="full-day">Full day</option></select></label>
-        <label className="text-xs font-semibold">Tour type<select value={filters.format || ""} onChange={event => set("format", event.target.value)} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"><option value="">All experiences</option><option value="shared">Shared guided experience</option><option value="private">Private</option><option value="independent">Shared transport & host</option></select></label>
-      </div>
-      {destinations.length > 1 && <div className="mt-4"><p className="text-xs font-semibold">Destinations</p><div className="mt-2 flex flex-wrap gap-2"><button type="button" className="chip" aria-pressed={!filters.destination} onClick={() => set("destination", "")}>All destinations</button>{destinations.map(place => <button key={place.id} type="button" className="chip" aria-pressed={filters.destination === place.id} onClick={() => set("destination", filters.destination === place.id ? "" : place.id)}>{place.label}</button>)}</div></div>}
-      {tags.length > 1 && <div className="mt-4"><p className="text-xs font-semibold">Interests</p><div className="mt-2 flex flex-wrap gap-2"><button type="button" className="chip" aria-pressed={!filters.tag} onClick={() => set("tag", "")}>All interests</button>{tags.map(tag => <button key={tag.id} type="button" className="chip" aria-pressed={filters.tag === tag.id} onClick={() => set("tag", filters.tag === tag.id ? "" : tag.id)}>{tag.label}</button>)}</div></div>}
-    </form>}
-    <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-      <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{visible.length} {visible.length === 1 ? "experience" : "experiences"}</p>
-      <div className="flex flex-wrap items-center gap-3">{(active || filters.sort) && <button type="button" onClick={() => onChange({})} className="text-sm font-semibold text-primary underline">Clear filters</button>}{!compact && <label className="text-xs text-muted-foreground">Sort by <select aria-label="Sort tours" value={filters.sort || ""} onChange={event => set("sort", event.target.value)} className="ml-1 rounded-lg border bg-background p-2 text-sm text-foreground"><option value="">Featured</option><option value="duration">Shortest duration</option><option value="title">Title A–Z</option></select></label>}</div>
+      {visible.length === 0 ? (
+        <section className="mt-5 rounded-2xl border p-8 text-center">
+          <h2 className="text-2xl font-semibold">No tours match your selection</h2>
+          <p className="mt-3 text-muted-foreground">Try adjusting your filters.</p>
+          <button type="button" className="btn btn-primary mt-5" onClick={() => onChange({})}>
+            Show all tours
+          </button>
+        </section>
+      ) : (
+        <>
+          {!compact && <OwnerTourSection tours={owner} />}
+          {external.length > 0 && (
+            <section
+              id="external-tours"
+              aria-labelledby="external-tours-h"
+              data-section="external-tours"
+              className={compact ? "mt-5 scroll-mt-24" : "mt-12 scroll-mt-24 border-t pt-8"}
+            >
+              <h2
+                id="external-tours-h"
+                className={compact ? "text-2xl font-semibold" : "text-3xl font-semibold"}
+              >
+                {compact
+                  ? `Explore ${getTourCategory(categoryId).shortTitle} tours`
+                  : `${owner.length > 0 ? "More " : ""}${getTourCategory(categoryId).title}`}
+              </h2>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                {compact
+                  ? categoryId === "jerusalem"
+                    ? "Compare local guided walks and day trips from Jerusalem or Tel Aviv."
+                    : categoryId === "tel-aviv-jaffa"
+                      ? "Compare guided walks, food and culture tours, cycling and audio experiences around Tel Aviv & Jaffa."
+                      : categoryId === "masada-dead-sea"
+                        ? "Compare classic Masada guided tours, sunrise hikes, Ein Gedi combinations and Dead Sea beach days from Jerusalem or Tel Aviv."
+                        : categoryId === "bethlehem-jericho"
+                          ? "Compare Bethlehem highlights with longer tours visiting Jericho and the Qasr al-Yahud baptismal site."
+                          : categoryId === "nazareth-galilee"
+                            ? "Compare Nazareth, Sea of Galilee churches and day trips with or without a Yardenit Jordan River stop, with both shared and privately guided options."
+                            : categoryId === "northern-coast"
+                              ? "Compare guided trips to Caesarea, Haifa and Akko from Tel Aviv or Jerusalem, including small groups, private guiding and routes with an advertised Rosh Hanikra stop."
+                              : categoryId === "negev-ramon"
+                                ? "Compare Mitzpe Ramon jeep trips, desert geology outings, stargazing and rappelling. Most experiences start in Mitzpe Ramon."
+                                : categoryId === "golan-heights"
+                                  ? "Compare guided Golan Heights day trips and private experiences from Tel Aviv, Jerusalem or northern Israel."
+                                  : categoryId === "food-markets"
+                                    ? "Compare Jerusalem and Tel Aviv tasting walks, market tours and hands-on cooking."
+                                    : "Compare Red Sea boat and snorkeling activities with guided desert jeep trips around Eilat."
+                  : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}
+              </p>
+              <ul
+                aria-label="External tours"
+                className={
+                  compact
+                    ? "mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3"
+                    : "mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+                }
+              >
+                {external.map((tour) => (
+                  <ExternalTourCard
+                    key={tour.id}
+                    tour={tour}
+                    pageId={`tours-${categoryId}`}
+                    compact={compact}
+                  />
+                ))}
+              </ul>
+              <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+                Check available dates, current prices, inclusions and reviews on the booking
+                website.
+              </p>
+            </section>
+          )}
+          {compact && <OwnerTourSection tours={owner} compact onRequestQuote={onRequestQuote} />}
+        </>
+      )}
     </div>
-    {visible.length === 0 ? <section className="mt-5 rounded-2xl border p-8 text-center"><h2 className="text-2xl font-semibold">No tours match your selection</h2><p className="mt-3 text-muted-foreground">Try adjusting your filters.</p><button type="button" className="btn btn-primary mt-5" onClick={() => onChange({})}>Show all tours</button></section> : <>
-      {!compact && <OwnerTourSection tours={owner} />}
-      {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className={compact ? "mt-5 scroll-mt-24" : "mt-12 scroll-mt-24 border-t pt-8"}>
-        <h2 id="external-tours-h" className={compact ? "text-2xl font-semibold" : "text-3xl font-semibold"}>{compact ? `Explore ${getTourCategory(categoryId).shortTitle} tours` : `${owner.length > 0 ? "More " : ""}${getTourCategory(categoryId).title}`}</h2>
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{compact ? (categoryId === "jerusalem" ? "Compare local guided walks and day trips from Jerusalem or Tel Aviv." : categoryId === "tel-aviv-jaffa" ? "Compare guided walks, food and culture tours, cycling and audio experiences around Tel Aviv & Jaffa." : categoryId === "masada-dead-sea" ? "Compare classic Masada guided tours, sunrise hikes, Ein Gedi combinations and Dead Sea beach days from Jerusalem or Tel Aviv." : categoryId === "bethlehem-jericho" ? "Compare Bethlehem highlights with longer tours visiting Jericho and the Qasr al-Yahud baptismal site." : categoryId === "nazareth-galilee" ? "Compare Nazareth, Sea of Galilee churches and day trips with or without a Yardenit Jordan River stop, with both shared and privately guided options." : categoryId === "northern-coast" ? "Compare guided trips to Caesarea, Haifa and Akko from Tel Aviv or Jerusalem, including small groups, private guiding and routes with an advertised Rosh Hanikra stop." : categoryId === "negev-ramon" ? "Compare Mitzpe Ramon jeep trips, desert geology outings, stargazing and rappelling. Most experiences start in Mitzpe Ramon." : categoryId === "golan-heights" ? "Compare guided Golan Heights day trips and private experiences from Tel Aviv, Jerusalem or northern Israel." : categoryId === "food-markets" ? "Compare Jerusalem and Tel Aviv tasting walks, market tours and hands-on cooking." : "Compare Red Sea boat and snorkeling activities with guided desert jeep trips around Eilat.") : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}</p>
-        <ul aria-label="External tours" className={compact ? "mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3" : "mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"}>
-          {external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} compact={compact} />)}
-        </ul>
-        <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Check available dates, current prices, inclusions and reviews on the booking website.</p>
-      </section>}
-      {compact && <OwnerTourSection tours={owner} compact onRequestQuote={onRequestQuote} />}
-    </>}
-  </div>;
+  );
 }

@@ -1,25 +1,85 @@
 import { ExternalLink } from "lucide-react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type { HotelCategoryGuide, StayGuidePhoto } from "@/data/content";
-import { deadSeaHotelRecommendations, tiberiasHotelRecommendations, haifaHotelRecommendations, providerLinks, type ResortHotelFacts, type ProviderLink } from "@/data/registry";
+import {
+  deadSeaHotelRecommendations,
+  tiberiasHotelRecommendations,
+  haifaHotelRecommendations,
+  providerLinks,
+  type ResortHotelFacts,
+  type ProviderLink,
+} from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { isPublisherUrl } from "@/data/site-identity";
 
-const resortHotels = [...deadSeaHotelRecommendations, ...tiberiasHotelRecommendations, ...haifaHotelRecommendations];
+const resortHotels = [
+  ...deadSeaHotelRecommendations,
+  ...tiberiasHotelRecommendations,
+  ...haifaHotelRecommendations,
+];
 export const resortHotel = (id: string) => resortHotels.find((hotel) => hotel.id === id)!;
-export const hotelBooking = (id: string) => providerLinks.find((link) => link.id === `hotel-${id}-expedia`);
+export const hotelBooking = (id: string) =>
+  providerLinks.find((link) => link.id === `hotel-${id}-expedia`);
 
-export function StayComparison({ hotelIds, columns, caption }: { hotelIds: string[]; columns: { key: keyof ResortHotelFacts; label: string }[]; caption: string }) {
+export function StayComparison({
+  hotelIds,
+  columns,
+  caption,
+}: {
+  hotelIds: string[];
+  columns: { key: keyof ResortHotelFacts; label: string }[];
+  caption: string;
+}) {
   return (
-    <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" aria-label={caption} tabIndex={0}>
+    <div
+      className="mt-5 overflow-x-auto rounded-2xl border bg-card"
+      role="region"
+      aria-label={caption}
+      tabIndex={0}
+    >
       <table className="w-full min-w-[760px] text-left text-sm">
         <caption className="sr-only">{caption}</caption>
-        <thead className="bg-secondary"><tr><th scope="col" className="px-4 py-3 font-semibold">Place to stay</th>{columns.map((column) => <th key={column.key} scope="col" className="px-4 py-3 font-semibold">{column.label}</th>)}</tr></thead>
-        <tbody className="divide-y">{hotelIds.map((id) => {
-          const hotel = resortHotel(id);
-          return <tr key={id} data-testid="stay-comparison-row"><th scope="row" className="min-w-44 px-4 py-4"><a href={`#hotel-${id}`} className="font-semibold text-primary underline underline-offset-2">{hotel.name}</a><span className="mt-1 block text-xs font-normal text-muted-foreground">{hotel.style}</span></th>{columns.map((column) => <td key={column.key} className="min-w-40 px-4 py-4 align-top leading-relaxed text-muted-foreground">{hotel.resortFacts[column.key]}</td>)}</tr>;
-        })}</tbody>
+        <thead className="bg-secondary">
+          <tr>
+            <th scope="col" className="px-4 py-3 font-semibold">
+              Place to stay
+            </th>
+            {columns.map((column) => (
+              <th key={column.key} scope="col" className="px-4 py-3 font-semibold">
+                {column.label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y">
+          {hotelIds.map((id) => {
+            const hotel = resortHotel(id);
+            return (
+              <tr key={id} data-testid="stay-comparison-row">
+                <th scope="row" className="min-w-44 px-4 py-4">
+                  <a
+                    href={`#hotel-${id}`}
+                    className="font-semibold text-primary underline underline-offset-2"
+                  >
+                    {hotel.name}
+                  </a>
+                  <span className="mt-1 block text-xs font-normal text-muted-foreground">
+                    {hotel.style}
+                  </span>
+                </th>
+                {columns.map((column) => (
+                  <td
+                    key={column.key}
+                    className="min-w-40 px-4 py-4 align-top leading-relaxed text-muted-foreground"
+                  >
+                    {hotel.resortFacts[column.key]}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
@@ -27,24 +87,103 @@ export function StayComparison({ hotelIds, columns, caption }: { hotelIds: strin
 
 export function StayCategoryCard({ guide }: { guide: HotelCategoryGuide }) {
   return (
-    <Link to={guide.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60 hover:bg-secondary/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="stay-category-card">
-      <div className="overflow-hidden bg-muted"><img src={guide.photo.src} alt={guide.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" /></div>
-      <div className="flex flex-1 flex-col p-4 sm:p-5"><p className="eyebrow">Hotel comparison</p><h3 className="mt-2 text-xl font-semibold group-hover:text-primary sm:text-2xl">{guide.shortTitle}</h3><p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.summary}</p></div>
+    <Link
+      to={guide.path as LinkProps["to"]}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60 hover:bg-secondary/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      data-testid="stay-category-card"
+    >
+      <div className="overflow-hidden bg-muted">
+        <img
+          src={guide.photo.src}
+          alt={guide.photo.alt}
+          width={755}
+          height={503}
+          loading="lazy"
+          decoding="async"
+          className="aspect-[16/9] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <p className="eyebrow">Hotel comparison</p>
+        <h3 className="mt-2 text-xl font-semibold group-hover:text-primary sm:text-2xl">
+          {guide.shortTitle}
+        </h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.summary}</p>
+      </div>
     </Link>
   );
 }
 
 export function StayBookingDisclosure() {
-  return <div className="mt-5 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed"><p>I compare hotels by location, travel style and facilities, using information from the properties themselves.</p><p className="mt-2">Check room prices, availability and cancellation terms on the booking site. Ask the hotel about occupancy, guest and facility age limits, meals, seasonal pools, beach access and parking where relevant.</p></div>;
+  return (
+    <div className="mt-5 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed">
+      <p>
+        I compare hotels by location, travel style and facilities, using information from the
+        properties themselves.
+      </p>
+      <p className="mt-2">
+        Check room prices, availability and cancellation terms on the booking site. Ask the hotel
+        about occupancy, guest and facility age limits, meals, seasonal pools, beach access and
+        parking where relevant.
+      </p>
+    </div>
+  );
 }
 
-export function StayBrowseLink({ link, pageId }: { link: ProviderLink | undefined; pageId: string }) {
+export function StayBrowseLink({
+  link,
+  pageId,
+}: {
+  link: ProviderLink | undefined;
+  pageId: string;
+}) {
   if (!link) return null;
-  return <div className="mt-5 flex flex-wrap items-center gap-3"><a href={hotelBrowseAffiliateUrl(link, pageId)} target="_blank" rel={relFor(link.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: link.id, offerId: link.id })} className="btn btn-outline">{link.title} <ExternalLink className="h-4 w-4" aria-hidden /><span className="sr-only"> (opens in a new tab)</span></a><p className="text-xs text-muted-foreground">Enter dates on {link.providerName} and confirm the location.</p></div>;
+  return (
+    <div className="mt-5 flex flex-wrap items-center gap-3">
+      <a
+        href={hotelBrowseAffiliateUrl(link, pageId)}
+        target="_blank"
+        rel={relFor(link.isAffiliate)}
+        onClick={() => recordOutboundClick({ pageId, productId: link.id, offerId: link.id })}
+        className="btn btn-outline"
+      >
+        {link.title} <ExternalLink className="h-4 w-4" aria-hidden />
+        <span className="sr-only"> (opens in a new tab)</span>
+      </a>
+      <p className="text-xs text-muted-foreground">
+        Enter dates on {link.providerName} and confirm the location.
+      </p>
+    </div>
+  );
 }
 
 export function StayPhotoCredits({ photos }: { photos: StayGuidePhoto[] }) {
-  const unique = [...new Map(photos.filter((photo) => Boolean(photo.sourceUrl?.trim()) && !isPublisherUrl(photo.sourceUrl)).map((photo) => [photo.sourceUrl, photo])).values()];
+  const unique = [
+    ...new Map(
+      photos
+        .filter((photo) => Boolean(photo.sourceUrl?.trim()) && !isPublisherUrl(photo.sourceUrl))
+        .map((photo) => [photo.sourceUrl, photo]),
+    ).values(),
+  ];
   if (!unique.length) return null;
-  return <details className="mt-10 rounded-xl border bg-card p-4 text-xs text-muted-foreground"><summary className="cursor-pointer font-semibold">Photo credits</summary><ul className="mt-2 space-y-2">{unique.map((photo) => <li key={photo.sourceUrl}><a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{photo.label}<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul></details>;
+  return (
+    <details className="mt-10 rounded-xl border bg-card p-4 text-xs text-muted-foreground">
+      <summary className="cursor-pointer font-semibold">Photo credits</summary>
+      <ul className="mt-2 space-y-2">
+        {unique.map((photo) => (
+          <li key={photo.sourceUrl}>
+            <a
+              href={photo.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2"
+            >
+              {photo.label}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
 }

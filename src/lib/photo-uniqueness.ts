@@ -14,7 +14,10 @@ export function photoIdentity(src: string): string {
   const stem = basename
     .replace(/\.(?:webp|avif|jpe?g|png)$/i, "")
     .replace(/\.(?:jpe?g|png)$/i, "")
-    .replace(/(?:[-_]\d+x\d+|[-_](?:card|tile|feature|thumb|thumbnail|small|medium|large|sm)(?:[-_]optimized)?)+$/gi, "")
+    .replace(
+      /(?:[-_]\d+x\d+|[-_](?:card|tile|feature|thumb|thumbnail|small|medium|large|sm)(?:[-_]optimized)?)+$/gi,
+      "",
+    )
     .replace(/(?:[-_]optimized)$/i, "")
     .replace(/[-_]+/g, "-");
   return directory + stem;

@@ -1,3 +1,4 @@
+import { sourceFragment } from "@/test-utils/source-fragment";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -10,16 +11,16 @@ const source = (name: string) =>
 describe("External tour and activity cards use a third-width desktop layout", () => {
   it("uses three desktop columns for shared destination and shore-excursion catalogs", () => {
     const tours = source("TourCatalog");
-    expect(tours).toContain('className={compact ? "mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3" : "mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"}');
+    expect(tours).toMatch(sourceFragment('className={compact ? "mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3" : "mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"}'));
     expect(tours).not.toContain("tour-companion-card");
-    expect(tours).toContain("<ExternalProviderTourCard");
+    expect(tours).toMatch(sourceFragment("<ExternalProviderTourCard"));
 
     const shore = source("ShoreServiceCatalog");
-    expect(shore).toContain('className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3"');
-    expect(shore).not.toContain("partnerTours.length % 3");
+    expect(shore).toMatch(sourceFragment('className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3"'));
+    expect(shore).not.toMatch(sourceFragment("partnerTours.length % 3"));
     expect(shore).not.toContain("shore-companion-card");
-    expect(shore).toContain("<ExternalProviderTourCard");
-    expect(source("ExternalProviderTourCard")).toContain('className="aspect-[16/9] w-full object-cover"');
+    expect(shore).toMatch(sourceFragment("<ExternalProviderTourCard"));
+    expect(source("ExternalProviderTourCard")).toMatch(sourceFragment('className="aspect-[16/9] w-full object-cover"'));
   });
 
   it("uses three desktop columns for independently booked tours in guides and attractions", () => {
@@ -32,13 +33,13 @@ describe("External tour and activity cards use a third-width desktop layout", ()
       ["JerusalemPartnerOffers", 'className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"'],
     ];
     for (const [file, desktopColumns] of sections) {
-      expect(source(file), file).toContain(desktopColumns);
+      expect(source(file), file).toMatch(sourceFragment(desktopColumns));
     }
   });
 
   it("curates six distinct, already approved provider activities for Tel Aviv", () => {
     const telAviv = source("TelAvivAttractionsGuide");
-    const ids = [...telAviv.matchAll(/id:"(tour-[^"]+@tours-tel-aviv-jaffa)"/g)].map(match => match[1]);
+    const ids = [...telAviv.matchAll(/id:\s*"(tour-[^"]+@tours-tel-aviv-jaffa)"/g)].map(match => match[1]);
     expect(ids).toHaveLength(6);
     expect(new Set(ids).size).toBe(6);
     expect(ids.filter(id => id?.includes("-getyourguide@")).length).toBeGreaterThanOrEqual(2);

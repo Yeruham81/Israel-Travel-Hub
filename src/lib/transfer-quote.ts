@@ -2,59 +2,140 @@ import { airportTransferContact, airportTransferRates } from "@/data/registry";
 import { israelNow } from "@/lib/israel-time";
 
 /** Shared by the canonical page and its legacy redirect; only known destination IDs survive. */
-export function parseAirportTransferSearch(search: Record<string, unknown>): { destination?: string } {
+export function parseAirportTransferSearch(search: Record<string, unknown>): {
+  destination?: string;
+} {
   const destination = search["destination"];
-  return typeof destination === "string" && (destination === "other" || airportTransferRates.some((rate) => rate.id === destination)) ? { destination } : {};
+  return typeof destination === "string" &&
+    (destination === "other" || airportTransferRates.some((rate) => rate.id === destination))
+    ? { destination }
+    : {};
 }
 
 export type TransferQuoteFields = {
-  name: string; email: string; phone: string; date: string; time: string; flight: string;
-  destinationId: string; otherDestination: string; address: string; passengers: string;
-  suitcases: string; carryOns: string; notes: string; consent: boolean;
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
+  time: string;
+  flight: string;
+  destinationId: string;
+  otherDestination: string;
+  address: string;
+  passengers: string;
+  suitcases: string;
+  carryOns: string;
+  notes: string;
+  consent: boolean;
 };
 
 export const emptyTransferQuote: TransferQuoteFields = {
-  name: "", email: "", phone: "", date: "", time: "", flight: "", destinationId: "",
-  otherDestination: "", address: "", passengers: "2", suitcases: "2", carryOns: "0", notes: "", consent: false,
+  name: "",
+  email: "",
+  phone: "",
+  date: "",
+  time: "",
+  flight: "",
+  destinationId: "",
+  otherDestination: "",
+  address: "",
+  passengers: "2",
+  suitcases: "2",
+  carryOns: "0",
+  notes: "",
+  consent: false,
 };
 
-export function validateTransferQuote(v: TransferQuoteFields, now = new Date(), direction: "pickup" | "dropoff" = "pickup") {
+export function validateTransferQuote(
+  v: TransferQuoteFields,
+  now = new Date(),
+  direction: "pickup" | "dropoff" = "pickup",
+) {
   const errors: string[] = [];
-  if (!v.name.trim() || v.name.length > 120) errors.push("Enter your full name (up to 120 characters).");
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()) || v.email.length > 254) errors.push("Enter a valid email address.");
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(v.date) || Number.isNaN(Date.parse(`${v.date}T00:00:00Z`)) || new Date(`${v.date}T00:00:00Z`).toISOString().slice(0, 10) !== v.date) errors.push(direction === "pickup" ? "Choose a valid flight arrival date." : "Choose a valid flight departure date.");
+  if (!v.name.trim() || v.name.length > 120)
+    errors.push("Enter your full name (up to 120 characters).");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()) || v.email.length > 254)
+    errors.push("Enter a valid email address.");
+  if (
+    !/^\d{4}-\d{2}-\d{2}$/.test(v.date) ||
+    Number.isNaN(Date.parse(`${v.date}T00:00:00Z`)) ||
+    new Date(`${v.date}T00:00:00Z`).toISOString().slice(0, 10) !== v.date
+  )
+    errors.push(
+      direction === "pickup"
+        ? "Choose a valid flight arrival date."
+        : "Choose a valid flight departure date.",
+    );
   else if (v.date < israelNow(now).date) errors.push("Choose today or a future flight date.");
-  if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(v.time)) errors.push(direction === "pickup" ? "Enter the flight arrival time in Israel local time." : "Enter the flight departure time in Israel local time.");
+  if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(v.time))
+    errors.push(
+      direction === "pickup"
+        ? "Enter the flight arrival time in Israel local time."
+        : "Enter the flight departure time in Israel local time.",
+    );
   else if (v.date === israelNow(now).date) {
     const [hours = 0, minutes = 0] = v.time.split(":").map(Number);
-    if (hours * 60 + minutes < israelNow(now).minutes) errors.push("Choose a flight time later than the current local time in Israel.");
+    if (hours * 60 + minutes < israelNow(now).minutes)
+      errors.push("Choose a flight time later than the current local time in Israel.");
   }
-  if (!airportTransferRates.some((r) => r.id === v.destinationId) && v.destinationId !== "other") errors.push("Choose your destination.");
-  if (v.destinationId === "other" && !v.otherDestination.trim()) errors.push("Enter the city or destination for your request.");
-  if (direction === "dropoff" && !v.address.trim()) errors.push("Enter the hotel or address for your airport pickup.");
-  for (const [key, label, min, max] of [["passengers", "passengers", 1, 99], ["suitcases", "suitcases", 0, 40], ["carryOns", "carry-ons", 0, 40]] as const) {
+  if (!airportTransferRates.some((r) => r.id === v.destinationId) && v.destinationId !== "other")
+    errors.push("Choose your destination.");
+  if (v.destinationId === "other" && !v.otherDestination.trim())
+    errors.push("Enter the city or destination for your request.");
+  if (direction === "dropoff" && !v.address.trim())
+    errors.push("Enter the hotel or address for your airport pickup.");
+  for (const [key, label, min, max] of [
+    ["passengers", "passengers", 1, 99],
+    ["suitcases", "suitcases", 0, 40],
+    ["carryOns", "carry-ons", 0, 40],
+  ] as const) {
     const value = Number(v[key]);
-    if (!v[key].trim() || !Number.isInteger(value) || value < min || value > max) errors.push(`Enter ${label} between ${min} and ${max}.`);
+    if (!v[key].trim() || !Number.isInteger(value) || value < min || value > max)
+      errors.push(`Enter ${label} between ${min} and ${max}.`);
   }
-  if (v.notes.length > 1500 || v.address.length > 250 || v.otherDestination.length > 120 || v.phone.length > 50 || v.flight.length > 30) errors.push("Shorten the trip details to the limits shown in the form.");
-  if (!v.consent) errors.push("Confirm that you agree to share your details with Moshe for this request.");
+  if (
+    v.notes.length > 1500 ||
+    v.address.length > 250 ||
+    v.otherDestination.length > 120 ||
+    v.phone.length > 50 ||
+    v.flight.length > 30
+  )
+    errors.push("Shorten the trip details to the limits shown in the form.");
+  if (!v.consent)
+    errors.push("Confirm that you agree to share your details with Moshe for this request.");
   return errors;
 }
 
 /** Shared formatter for validated transfer details in server-generated email. */
 export function buildTransferQuoteDraft(v: TransferQuoteFields) {
-  const destination = airportTransferRates.find((r) => r.id === v.destinationId)?.destination || v.otherDestination.trim();
+  const destination =
+    airportTransferRates.find((r) => r.id === v.destinationId)?.destination ||
+    v.otherDestination.trim();
   const singleLine = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
   const subject = `Moshe Barak - Israel Taxi & Travel / ${singleLine(v.name)}`;
   const body = [
-    `Name: ${singleLine(v.name)}`, `Email: ${singleLine(v.email)}`, `Phone / WhatsApp: ${singleLine(v.phone) || "Not supplied"}`,
-    "Pickup: Ben Gurion Airport (TLV)", `Destination: ${singleLine(destination)}`, `Hotel / address: ${singleLine(v.address) || "To be confirmed"}`,
-    `Flight arrival: ${v.date} at ${v.time} (Israel local time)`, `Flight number: ${singleLine(v.flight) || "To be confirmed"}`,
-    `Passengers: ${v.passengers}`, `Suitcases: ${v.suitcases}`, `Carry-ons: ${v.carryOns}`,
-    "", "Additional requests / child seats:", v.notes.trim() || "None specified", "",
+    `Name: ${singleLine(v.name)}`,
+    `Email: ${singleLine(v.email)}`,
+    `Phone / WhatsApp: ${singleLine(v.phone) || "Not supplied"}`,
+    "Pickup: Ben Gurion Airport (TLV)",
+    `Destination: ${singleLine(destination)}`,
+    `Hotel / address: ${singleLine(v.address) || "To be confirmed"}`,
+    `Flight arrival: ${v.date} at ${v.time} (Israel local time)`,
+    `Flight number: ${singleLine(v.flight) || "To be confirmed"}`,
+    `Passengers: ${v.passengers}`,
+    `Suitcases: ${v.suitcases}`,
+    `Carry-ons: ${v.carryOns}`,
+    "",
+    "Additional requests / child seats:",
+    v.notes.trim() || "None specified",
+    "",
     "I consent to sharing these details with Moshe Barak for this inquiry.",
   ].join("\n");
-  return { subject, body, url: `mailto:${airportTransferContact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` };
+  return {
+    subject,
+    body,
+    url: `mailto:${airportTransferContact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+  };
 }
 
 /** Airport drop-off uses the existing, verified general-enquiry delivery contract.
@@ -62,7 +143,9 @@ export function buildTransferQuoteDraft(v: TransferQuoteFields) {
  * airport-pickup requests while accurately reporting the reverse journey.
  */
 export function buildAirportDropoffMessage(v: TransferQuoteFields) {
-  const area = airportTransferRates.find((rate) => rate.id === v.destinationId)?.destination || v.otherDestination.trim();
+  const area =
+    airportTransferRates.find((rate) => rate.id === v.destinationId)?.destination ||
+    v.otherDestination.trim();
   const clean = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
   return [
     "Airport transfer: To Ben Gurion Airport (TLV)",
@@ -70,8 +153,12 @@ export function buildAirportDropoffMessage(v: TransferQuoteFields) {
     `Pickup hotel / address: ${clean(v.address)}`,
     `Flight departure: ${v.date} at ${v.time} (Israel local time)`,
     `Flight number: ${clean(v.flight) || "To be confirmed"}`,
-    `Passengers: ${v.passengers}`, `Suitcases: ${v.suitcases}`, `Carry-ons: ${v.carryOns}`,
+    `Passengers: ${v.passengers}`,
+    `Suitcases: ${v.suitcases}`,
+    `Carry-ons: ${v.carryOns}`,
     `Phone / WhatsApp: ${clean(v.phone) || "Not supplied"}`,
-    "", "Additional requests / child seats:", v.notes.trim() || "None specified",
+    "",
+    "Additional requests / child seats:",
+    v.notes.trim() || "None specified",
   ].join("\n");
 }

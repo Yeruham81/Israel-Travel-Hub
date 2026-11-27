@@ -1,15 +1,65 @@
-import { ESIM_UPDATED, esimProviders, esimPicks, esimFixedPlans, esimUnlimitedPlans, esimFairUse, esimFeatureRows, esimUsd, esimPlanPrice, drimsimEurPerMb, type EsimPlan } from "@/data/esimIsraelPlans";
+import {
+  ESIM_UPDATED,
+  esimProviders,
+  esimPicks,
+  esimFixedPlans,
+  esimUnlimitedPlans,
+  esimFairUse,
+  esimFeatureRows,
+  esimUsd,
+  esimPlanPrice,
+  drimsimEurPerMb,
+  type EsimPlan,
+} from "@/data/esimIsraelPlans";
 import { GuideTags } from "@/components/GuideCard";
 export { GuideTags, GuidePhotoCredit, GuideCard } from "@/components/GuideCard";
 import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
 import { type LinkProps } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
 import { Fragment, type ReactNode } from "react";
-import { BedDouble, BookOpen, CarFront, Landmark, Lightbulb, TrainFront, Waves, Plane, Car, ReceiptText, MapPinned, Smartphone, Building2, Mountain, type LucideIcon } from "lucide-react";
-import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderNameLink, RelatedLinks, SourceList } from "@/components/Guide";
-import { travelGuides, type GuidePhoto, type GuideSection, type GuideInlineSpan, type GuideTable, type TravelGuide } from "@/data/travelGuides";
+import {
+  BedDouble,
+  BookOpen,
+  CarFront,
+  Landmark,
+  Lightbulb,
+  TrainFront,
+  Waves,
+  Plane,
+  Car,
+  ReceiptText,
+  MapPinned,
+  Smartphone,
+  Building2,
+  Mountain,
+  type LucideIcon,
+} from "lucide-react";
+import {
+  Breadcrumbs,
+  Checklist,
+  FaqList,
+  OnThisPage,
+  ProviderNameLink,
+  RelatedLinks,
+  SourceList,
+} from "@/components/Guide";
+import {
+  travelGuides,
+  type GuidePhoto,
+  type GuideSection,
+  type GuideInlineSpan,
+  type GuideTable,
+  type TravelGuide,
+} from "@/data/travelGuides";
 import { guideTopics } from "@/data/generated/guide-directory";
-import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
+import {
+  publicSources,
+  isPublisherUrl,
+  linksForPage,
+  travelGuidePaths,
+  TRAVEL_GUIDE_CHECK_DATE,
+  type TravelGuideId,
+} from "@/data/registry";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
@@ -22,11 +72,19 @@ import { guideContactCopy, type GuideContactKind } from "@/lib/guide-contact";
 import { JerusalemJourneyOptions } from "@/components/JerusalemJourneyPlanner";
 import { BethlehemTourOptions } from "@/components/BethlehemTourOptions";
 import { BethlehemGuideFollowUps } from "@/components/BethlehemGuideFollowUps";
-import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
+import {
+  JerusalemClusterLinks,
+  type JerusalemClusterKey,
+} from "@/components/JerusalemClusterLinks";
 import { DeadSeaGuideFollowUps } from "@/components/DeadSeaGuideFollowUps";
 import { DeadSeaTourOptions } from "@/components/DeadSeaTourOptions";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
-import { ShabbatBusLinks, ShabbatTerminalSteps, ShabbatTimesLink, ShabbatPublicTransportLinks } from "@/components/ShabbatGuideExtras";
+import {
+  ShabbatBusLinks,
+  ShabbatTerminalSteps,
+  ShabbatTimesLink,
+  ShabbatPublicTransportLinks,
+} from "@/components/ShabbatGuideExtras";
 import { UsefulLinkCallout } from "@/components/UsefulLinkCallout";
 import { AirportTaxiDestinationCards } from "@/components/AirportTaxiDestinationCards";
 import { IconTripPlanningLinks } from "@/components/IconTripPlanningLinks";
@@ -40,7 +98,15 @@ const shabbatPlanningIcons: Record<string, LucideIcon> = {
   [travelGuidePaths.travelTips]: BookOpen,
 };
 
-const uberSourceIds = ["guide-uber-availability", "guide-lyft-cities", "guide-ridesharing-bill-2026", "guide-gett-app", "guide-yango-israel", "guide-iaa", "taxi-fares-2026"];
+const uberSourceIds = [
+  "guide-uber-availability",
+  "guide-lyft-cities",
+  "guide-ridesharing-bill-2026",
+  "guide-gett-app",
+  "guide-yango-israel",
+  "guide-iaa",
+  "taxi-fares-2026",
+];
 
 const sherutPlanningIcons: Record<string, LucideIcon> = {
   "/airport-transfers/": Plane,
@@ -78,7 +144,17 @@ const uberPlanningIcons: Record<string, LucideIcon> = {
   [travelGuidePaths.esim]: Smartphone,
 };
 
-function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds, ...guide.sections.flatMap(section => [...(section.sourceIds || []), ...(section.subsections || []).flatMap(sub => sub.sourceIds || [])])])]; }
+function sourcesFor(guide: TravelGuide) {
+  return [
+    ...new Set([
+      ...guide.sourceIds,
+      ...guide.sections.flatMap((section) => [
+        ...(section.sourceIds || []),
+        ...(section.subsections || []).flatMap((sub) => sub.sourceIds || []),
+      ]),
+    ]),
+  ];
+}
 
 function guideContactKind(guide: TravelGuide): GuideContactKind {
   if (guide.id === "shabbat") return "shabbat";
@@ -88,7 +164,8 @@ function guideContactKind(guide: TravelGuide): GuideContactKind {
   if (guide.topics.includes("transportation")) return "transport";
   if (guide.topics.includes("accommodation")) return "accommodation";
   if (guide.topics.includes("itineraries")) return "itinerary";
-  if (guide.topics.includes("attractions") || guide.topics.includes("religion")) return "attraction";
+  if (guide.topics.includes("attractions") || guide.topics.includes("religion"))
+    return "attraction";
   return "general";
 }
 
@@ -126,22 +203,60 @@ export function travelGuideMeta(id: TravelGuideId) {
   const guide = travelGuides[id];
   const updatedAt = guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE;
   const path = travelGuidePaths[id];
-  const parent = path.startsWith("/attractions/") ? { name: "Attractions", path: "/attractions/" } : { name: "Travel guides", path: "/travel-blog/" };
-  const meta = pageMeta({ title: id === "shabbat" ? "Ben Gurion Airport on Shabbat: Bus 711, Taxis & Trains" : guide.title, description: guide.description, path, type: "article", crumbs: [{ name: "Home", path: "/" }, parent, { name: guide.title, path }], image: guide.photo.src, imageAlt: guide.photo.alt });
+  const parent = path.startsWith("/attractions/")
+    ? { name: "Attractions", path: "/attractions/" }
+    : { name: "Travel guides", path: "/travel-blog/" };
+  const meta = pageMeta({
+    title:
+      id === "shabbat" ? "Ben Gurion Airport on Shabbat: Bus 711, Taxis & Trains" : guide.title,
+    description: guide.description,
+    path,
+    type: "article",
+    crumbs: [{ name: "Home", path: "/" }, parent, { name: guide.title, path }],
+    image: guide.photo.src,
+    imageAlt: guide.photo.alt,
+  });
   const imageUrl = new URL(guide.photo.src, CANONICAL_ORIGIN).href;
-  return { ...meta, scripts: [...meta.scripts, jsonLd(
-    { "@context": "https://schema.org", "@type": "Article", "@id": `${CANONICAL_ORIGIN}${path}#article`, headline: guide.title, description: guide.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${path}`, inLanguage: "en", dateModified: updatedAt,
-      author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      about: guide.topics.map((topic) => guideTopics.find((item) => item.id === topic)!.label), citation: publicSources(id === "uber" ? uberSourceIds : sourcesFor(guide)).map((source) => source.url), image: imageUrl,
-    })] };
+  return {
+    ...meta,
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": `${CANONICAL_ORIGIN}${path}#article`,
+        headline: guide.title,
+        description: guide.description,
+        mainEntityOfPage: `${CANONICAL_ORIGIN}${path}`,
+        inLanguage: "en",
+        dateModified: updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        about: guide.topics.map((topic) => guideTopics.find((item) => item.id === topic)!.label),
+        citation: publicSources(id === "uber" ? uberSourceIds : sourcesFor(guide)).map(
+          (source) => source.url,
+        ),
+        image: imageUrl,
+      }),
+    ],
+  };
 }
 
 /** Keep section images with the text they illustrate, after the opening paragraph. */
 function GuideSectionPhoto({ photo }: { photo: GuidePhoto }) {
   return (
     <figure className="max-w-3xl">
-      <img src={photo.src} srcSet={stage5PhotoSrcSet(photo.src)} sizes="(min-width: 1024px) 755px, calc(100vw - 34px)" alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
-
+      <img
+        src={photo.src}
+        srcSet={stage5PhotoSrcSet(photo.src)}
+        sizes="(min-width: 1024px) 755px, calc(100vw - 34px)"
+        alt={photo.alt}
+        width={755}
+        height={503}
+        loading="lazy"
+        decoding="async"
+        className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover"
+      />
     </figure>
   );
 }
@@ -163,30 +278,132 @@ function showSectionReferences(guideId: TravelGuideId, sectionId: string) {
 function SectionReferences({ ids }: { ids: string[] }) {
   const sources = publicSources(ids);
   if (!sources.length) return null;
-  return <p className="mt-4 text-xs text-muted-foreground">References: {sources.map((source, index) => <span key={source.id}>{index > 0 && " · "}<a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">{source.publisher.replaceAll(" — ", " - ")}<span className="sr-only"> (opens in a new tab)</span></a></span>)}</p>;
+  return (
+    <p className="mt-4 text-xs text-muted-foreground">
+      References:{" "}
+      {sources.map((source, index) => (
+        <span key={source.id}>
+          {index > 0 && " · "}
+          <a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">
+            {source.publisher.replaceAll(" — ", " - ")}
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </span>
+      ))}
+    </p>
+  );
 }
 
-function GuideDataTable({ table, nested = false, mobileGuidance = false }: { table: GuideTable; nested?: boolean; mobileGuidance?: boolean }) {
+function GuideDataTable({
+  table,
+  nested = false,
+  mobileGuidance = false,
+}: {
+  table: GuideTable;
+  nested?: boolean;
+  mobileGuidance?: boolean;
+}) {
   const Heading = nested ? "h4" : "h3";
-  return <div className="mt-6">
-    <Heading className="text-xl font-semibold">{table.caption}</Heading>
-        <div role="region" aria-label={table.caption} tabIndex={0} className="mt-3 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
-      <table className={"w-full text-left text-sm " + (mobileGuidance ? "min-w-[720px]" : "min-w-[560px]")}>
-        <caption className="sr-only">{table.caption}</caption>
-        <thead className="bg-secondary"><tr>{table.headers.map((h, i) => <th key={h} scope="col" className={"p-3 font-semibold " + (mobileGuidance && i === 0 ? "sticky left-0 z-10 bg-secondary shadow-[1px_0_0_0_var(--border)]" : "")}>{h}</th>)}</tr></thead>
-        <tbody className="divide-y">{table.rows.map((row, i) => <tr key={i} className="bg-card">{row.map((cell, j) => j === 0
-          ? <th scope="row" key={j} className={"p-3 font-medium " + (mobileGuidance ? "sticky left-0 z-10 bg-card shadow-[1px_0_0_0_var(--border)]" : "")}>
-              {table.rowLinks?.[i] ? ("to" in table.rowLinks[i]! ? <Link to={(table.rowLinks[i]! as { to: string }).to as LinkProps["to"]} className="font-medium text-primary underline underline-offset-4">{cell}</Link> : <a href={(table.rowLinks[i]! as { href: string }).href} target="_blank" rel="noopener noreferrer" aria-label={(table.rowLinks[i]! as { href: string; label?: string }).label || cell} className="font-medium text-primary underline underline-offset-4">{cell}<span className="sr-only"> (opens in a new tab)</span></a>) : cell}
-            </th>
-          : <td key={j} className="p-3 leading-relaxed">{cell}</td>)}</tr>)}</tbody>
-      </table>
+  return (
+    <div className="mt-6">
+      <Heading className="text-xl font-semibold">{table.caption}</Heading>
+      <div
+        role="region"
+        aria-label={table.caption}
+        tabIndex={0}
+        className="mt-3 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"
+      >
+        <table
+          className={
+            "w-full text-left text-sm " + (mobileGuidance ? "min-w-[720px]" : "min-w-[560px]")
+          }
+        >
+          <caption className="sr-only">{table.caption}</caption>
+          <thead className="bg-secondary">
+            <tr>
+              {table.headers.map((h, i) => (
+                <th
+                  key={h}
+                  scope="col"
+                  className={
+                    "p-3 font-semibold " +
+                    (mobileGuidance && i === 0
+                      ? "sticky left-0 z-10 bg-secondary shadow-[1px_0_0_0_var(--border)]"
+                      : "")
+                  }
+                >
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y">
+            {table.rows.map((row, i) => (
+              <tr key={i} className="bg-card">
+                {row.map((cell, j) =>
+                  j === 0 ? (
+                    <th
+                      scope="row"
+                      key={j}
+                      className={
+                        "p-3 font-medium " +
+                        (mobileGuidance
+                          ? "sticky left-0 z-10 bg-card shadow-[1px_0_0_0_var(--border)]"
+                          : "")
+                      }
+                    >
+                      {table.rowLinks?.[i] ? (
+                        "to" in table.rowLinks[i]! ? (
+                          <Link
+                            to={(table.rowLinks[i]! as { to: string }).to as LinkProps["to"]}
+                            className="font-medium text-primary underline underline-offset-4"
+                          >
+                            {cell}
+                          </Link>
+                        ) : (
+                          <a
+                            href={(table.rowLinks[i]! as { href: string }).href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={
+                              (table.rowLinks[i]! as { href: string; label?: string }).label || cell
+                            }
+                            className="font-medium text-primary underline underline-offset-4"
+                          >
+                            {cell}
+                            <span className="sr-only"> (opens in a new tab)</span>
+                          </a>
+                        )
+                      ) : (
+                        cell
+                      )}
+                    </th>
+                  ) : (
+                    <td key={j} className="p-3 leading-relaxed">
+                      {cell}
+                    </td>
+                  ),
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {table.note && (
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{table.note}</p>
+      )}
     </div>
-    {table.note && <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{table.note}</p>}
-  </div>;
+  );
 }
 
 /** Link a specific phrase inside a paragraph, keeping all other article text as plain text. */
-export function GuideParagraph({ paragraph, inlineLinks }: { paragraph: string; inlineLinks?: GuideSection["inlineLinks"] }) {
+export function GuideParagraph({
+  paragraph,
+  inlineLinks,
+}: {
+  paragraph: string;
+  inlineLinks?: GuideSection["inlineLinks"];
+}) {
   if (!inlineLinks?.length) return <>{paragraph}</>;
   const matches = inlineLinks
     .map(({ text, to }) => ({ text, to, index: paragraph.indexOf(text) }))
@@ -197,285 +414,1501 @@ export function GuideParagraph({ paragraph, inlineLinks }: { paragraph: string; 
   for (const { text, to, index } of matches) {
     if (index < pos) continue;
     parts.push(paragraph.slice(pos, index));
-    parts.push(<Link key={`${index}-${text}`} to={to} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">{text}</Link>);
+    parts.push(
+      <Link
+        key={`${index}-${text}`}
+        to={to}
+        className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary"
+      >
+        {text}
+      </Link>,
+    );
     pos = index + text.length;
   }
   parts.push(paragraph.slice(pos));
   return <>{parts}</>;
 }
 
-
 /** Preserve Portable Text link spans and inline emphasis within the original guide layout. */
 function GuideRichParagraph({ spans }: { spans: GuideInlineSpan[] }) {
-  return <>{spans.map((span, index) => {
-    let node: ReactNode = span.text;
-    if (span.marks?.includes("code")) node = <code className="rounded bg-secondary px-1 py-0.5 text-sm">{node}</code>;
-    if (span.marks?.includes("strong")) node = <strong>{node}</strong>;
-    if (span.marks?.includes("em")) node = <em>{node}</em>;
-    if (span.marks?.includes("underline")) node = <u>{node}</u>;
-    if (span.to) node = <Link to={span.to} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">{node}</Link>;
-    if (span.href) node = <a href={span.href} target="_blank" rel={/^https:\/\/[a-z0-9-]+\.tpm\.li\//i.test(span.href) ? "sponsored noopener noreferrer" : "noopener noreferrer"} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">{node}<span className="sr-only"> (opens in a new tab)</span></a>;
-    return <Fragment key={index}>{node}</Fragment>;
-  })}</>;
+  return (
+    <>
+      {spans.map((span, index) => {
+        let node: ReactNode = span.text;
+        if (span.marks?.includes("code"))
+          node = <code className="rounded bg-secondary px-1 py-0.5 text-sm">{node}</code>;
+        if (span.marks?.includes("strong")) node = <strong>{node}</strong>;
+        if (span.marks?.includes("em")) node = <em>{node}</em>;
+        if (span.marks?.includes("underline")) node = <u>{node}</u>;
+        if (span.to)
+          node = (
+            <Link
+              to={span.to}
+              className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary"
+            >
+              {node}
+            </Link>
+          );
+        if (span.href)
+          node = (
+            <a
+              href={span.href}
+              target="_blank"
+              rel={
+                /^https:\/\/[a-z0-9-]+\.tpm\.li\//i.test(span.href)
+                  ? "sponsored noopener noreferrer"
+                  : "noopener noreferrer"
+              }
+              className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+            >
+              {node}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          );
+        return <Fragment key={index}>{node}</Fragment>;
+      })}
+    </>
+  );
 }
 
 /** Link provider names in eSIM buying advice using existing tracked affiliate URLs. */
 function emphasizeEsimNames(paragraph: string): ReactNode {
-  return paragraph.split(/\b(Airalo|Saily|Yesim|GigSky|Drimsim)\b/g)
-    .map((part, i) => /^(Airalo|Saily|Yesim|GigSky|Drimsim)$/.test(part) ? <strong key={i}>{part}</strong> : part);
+  return paragraph
+    .split(/\b(Airalo|Saily|Yesim|GigSky|Drimsim)\b/g)
+    .map((part, i) =>
+      /^(Airalo|Saily|Yesim|GigSky|Drimsim)$/.test(part) ? <strong key={i}>{part}</strong> : part,
+    );
 }
 
 /** Recommendations show one tracked provider action at the end, without repeated brand links. */
-function esimRecommendation(paragraph: string, providers: ReturnType<typeof linksForPage>): ReactNode {
+function esimRecommendation(
+  paragraph: string,
+  providers: ReturnType<typeof linksForPage>,
+): ReactNode {
   const match = paragraph.match(/^(.*?)(My choice:\s*)(Airalo|Saily|Yesim|GigSky|Drimsim)(\.)$/s);
   if (!match) return emphasizeEsimNames(paragraph);
   const provider = providers.find((item) => item.providerName === match[3]);
   if (!provider) return emphasizeEsimNames(paragraph);
-  return <>{emphasizeEsimNames(match[1] ?? "")}<strong>My choice:</strong>{" "}
-    <ProviderNameLink link={provider} pageId="guide-esim">{match[3]}</ProviderNameLink>{match[4]}</>;
+  return (
+    <>
+      {emphasizeEsimNames(match[1] ?? "")}
+      <strong>My choice:</strong>{" "}
+      <ProviderNameLink link={provider} pageId="guide-esim">
+        {match[3]}
+      </ProviderNameLink>
+      {match[4]}
+    </>
+  );
 }
 
-function EsimProviderLink({ name, providers, children }: { name: string; providers: ReturnType<typeof linksForPage>; children?: ReactNode }) {
-  const provider = providers.find(item => item.providerName === name);
-  return provider ? <ProviderNameLink link={provider} pageId="guide-esim">{children ?? name}</ProviderNameLink> : <>{children ?? name}</>;
+function EsimProviderLink({
+  name,
+  providers,
+  children,
+}: {
+  name: string;
+  providers: ReturnType<typeof linksForPage>;
+  children?: ReactNode;
+}) {
+  const provider = providers.find((item) => item.providerName === name);
+  return provider ? (
+    <ProviderNameLink link={provider} pageId="guide-esim">
+      {children ?? name}
+    </ProviderNameLink>
+  ) : (
+    <>{children ?? name}</>
+  );
 }
 
-function EsimPrice({ plan, showDays = true }: {plan: EsimPlan; showDays?: boolean}) {
-  return <span className="block tabular-nums"><strong>{esimPlanPrice(plan)}</strong>{plan.regularUsd !== undefined && <del className="ml-1 text-xs text-muted-foreground">{esimUsd(plan.regularUsd)}</del>}{showDays && <span className="block text-xs text-muted-foreground">{plan.days} days</span>}</span>;
+function EsimPrice({ plan, showDays = true }: { plan: EsimPlan; showDays?: boolean }) {
+  return (
+    <span className="block tabular-nums">
+      <strong>{esimPlanPrice(plan)}</strong>
+      {plan.regularUsd !== undefined && (
+        <del className="ml-1 text-xs text-muted-foreground">{esimUsd(plan.regularUsd)}</del>
+      )}
+      {showDays && <span className="block text-xs text-muted-foreground">{plan.days} days</span>}
+    </span>
+  );
 }
 function EsimPickCards({ providers }: { providers: ReturnType<typeof linksForPage> }) {
   const icons = [Plane, BedDouble, Smartphone, Waves];
-  return <section aria-label="Choose your eSIM by trip type" className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
-    {esimPicks.map(({label,plan,reason},index) => {
-      const Icon = icons[index]!;
-      return <article key={label} className="flex min-w-0 flex-col rounded-xl border bg-card p-3 sm:p-5">
-        <Icon className="size-5 text-primary" aria-hidden />
-        <h3 className="mt-2 text-sm font-semibold">{label}</h3>
-        <p className="mt-2 text-xl font-bold">{plan.gb === "Unlimited" ? "Unlimited" : plan.gb + " GB"}</p>
-        <EsimPrice plan={plan}/>
-        <p className="mt-2 flex-1 text-xs text-muted-foreground">{reason}</p>
-        <p className="mt-3 text-sm font-semibold">{plan.provider}</p>
-        <div className="mt-2 rounded-lg border border-primary/30 px-2 py-2 text-center text-sm"><EsimProviderLink name={plan.provider} providers={providers}>View plans <span className="sr-only">on {plan.provider}</span></EsimProviderLink></div>
-      </article>;
-    })}
-  </section>;
+  return (
+    <section
+      aria-label="Choose your eSIM by trip type"
+      className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4"
+    >
+      {esimPicks.map(({ label, plan, reason }, index) => {
+        const Icon = icons[index]!;
+        return (
+          <article
+            key={label}
+            className="flex min-w-0 flex-col rounded-xl border bg-card p-3 sm:p-5"
+          >
+            <Icon className="size-5 text-primary" aria-hidden />
+            <h3 className="mt-2 text-sm font-semibold">{label}</h3>
+            <p className="mt-2 text-xl font-bold">
+              {plan.gb === "Unlimited" ? "Unlimited" : plan.gb + " GB"}
+            </p>
+            <EsimPrice plan={plan} />
+            <p className="mt-2 flex-1 text-xs text-muted-foreground">{reason}</p>
+            <p className="mt-3 text-sm font-semibold">{plan.provider}</p>
+            <div className="mt-2 rounded-lg border border-primary/30 px-2 py-2 text-center text-sm">
+              <EsimProviderLink name={plan.provider} providers={providers}>
+                View plans <span className="sr-only">on {plan.provider}</span>
+              </EsimProviderLink>
+            </div>
+          </article>
+        );
+      })}
+    </section>
+  );
 }
-function EsimComparisonTable({ caption, headers, rows }: {caption: string; headers: ReactNode[]; rows: ReactNode[][]}) {
-  return <div role="region" aria-label={caption} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
-    <table className={"w-full text-left text-sm " + (headers.length > 2 ? "min-w-[640px]" : "min-w-[280px]")}>
-      <caption className="sr-only">{caption}</caption>
-      <thead className="bg-secondary"><tr>{headers.map((head,i)=><th key={i} scope="col" className={"p-3 font-semibold " + (i===0?"sticky left-0 z-10 bg-secondary":"")}>{head}</th>)}</tr></thead>
-      <tbody className="divide-y">{rows.map((row,i)=><tr key={i} className="bg-card">{row.map((cell,j)=>j===0?<th scope="row" key={j} className="sticky left-0 z-10 bg-card p-3 font-medium">{cell}</th>:<td key={j} className="p-3 align-top">{cell}</td>)}</tr>)}</tbody>
-    </table>
-  </div>;
+function EsimComparisonTable({
+  caption,
+  headers,
+  rows,
+}: {
+  caption: string;
+  headers: ReactNode[];
+  rows: ReactNode[][];
+}) {
+  return (
+    <div
+      role="region"
+      aria-label={caption}
+      tabIndex={0}
+      className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"
+    >
+      <table
+        className={
+          "w-full text-left text-sm " + (headers.length > 2 ? "min-w-[640px]" : "min-w-[280px]")
+        }
+      >
+        <caption className="sr-only">{caption}</caption>
+        <thead className="bg-secondary">
+          <tr>
+            {headers.map((head, i) => (
+              <th
+                key={i}
+                scope="col"
+                className={
+                  "p-3 font-semibold " + (i === 0 ? "sticky left-0 z-10 bg-secondary" : "")
+                }
+              >
+                {head}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y">
+          {rows.map((row, i) => (
+            <tr key={i} className="bg-card">
+              {row.map((cell, j) =>
+                j === 0 ? (
+                  <th scope="row" key={j} className="sticky left-0 z-10 bg-card p-3 font-medium">
+                    {cell}
+                  </th>
+                ) : (
+                  <td key={j} className="p-3 align-top">
+                    {cell}
+                  </td>
+                ),
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 function EsimFixedComparison({ providers }: { providers: ReturnType<typeof linksForPage> }) {
-  return <><EsimComparisonTable caption="Prepaid eSIM data plans" headers={["Data",...esimProviders.map(name=><EsimProviderLink key={name} name={name} providers={providers}/>)]} rows={[1,3,5,10,20,30,50].map(gb=>[gb+" GB",...esimProviders.map(name=>{
-    const plans=esimFixedPlans.filter(p=>p.provider===name&&p.gb===gb);
-    return plans.length?<div className="space-y-2">{plans.map(plan=><EsimPrice key={plan.days} plan={plan}/>)}</div>:"—";
-  })])}/>
-  <p className="mt-2 text-xs text-muted-foreground">— = no matching offer listed. Prices shown in USD.</p></>;
+  return (
+    <>
+      <EsimComparisonTable
+        caption="Prepaid eSIM data plans"
+        headers={[
+          "Data",
+          ...esimProviders.map((name) => (
+            <EsimProviderLink key={name} name={name} providers={providers} />
+          )),
+        ]}
+        rows={[1, 3, 5, 10, 20, 30, 50].map((gb) => [
+          gb + " GB",
+          ...esimProviders.map((name) => {
+            const plans = esimFixedPlans.filter((p) => p.provider === name && p.gb === gb);
+            return plans.length ? (
+              <div className="space-y-2">
+                {plans.map((plan) => (
+                  <EsimPrice key={plan.days} plan={plan} />
+                ))}
+              </div>
+            ) : (
+              "—"
+            );
+          }),
+        ])}
+      />
+      <p className="mt-2 text-xs text-muted-foreground">
+        — = no matching offer listed. Prices shown in USD.
+      </p>
+    </>
+  );
 }
-function EsimUnlimitedComparison({ providers }: {providers: ReturnType<typeof linksForPage>}) {
-  return <><EsimComparisonTable caption="Unlimited eSIM plans by duration" headers={["Provider","7 days","15 days","30 days","Daily high-speed data"]} rows={esimProviders.map(name=>[<EsimProviderLink name={name} providers={providers}/>,...[7,15,30].map(days=>{const plan=esimUnlimitedPlans.find(p=>p.provider===name&&p.days===days);return plan?<EsimPrice plan={plan} showDays={false}/>:"—";}),esimFairUse[name]])}/>
-    <p className="mt-2 text-xs text-muted-foreground">— = no matching offer listed. Prices shown in USD ($) or EUR (€).</p></>;
+function EsimUnlimitedComparison({ providers }: { providers: ReturnType<typeof linksForPage> }) {
+  return (
+    <>
+      <EsimComparisonTable
+        caption="Unlimited eSIM plans by duration"
+        headers={["Provider", "7 days", "15 days", "30 days", "Daily high-speed data"]}
+        rows={esimProviders.map((name) => [
+          <EsimProviderLink name={name} providers={providers} />,
+          ...[7, 15, 30].map((days) => {
+            const plan = esimUnlimitedPlans.find((p) => p.provider === name && p.days === days);
+            return plan ? <EsimPrice plan={plan} showDays={false} /> : "—";
+          }),
+          esimFairUse[name],
+        ])}
+      />
+      <p className="mt-2 text-xs text-muted-foreground">
+        — = no matching offer listed. Prices shown in USD ($) or EUR (€).
+      </p>
+    </>
+  );
 }
-function EsimFeatures({ providers }: {providers: ReturnType<typeof linksForPage>}) {
-  return <EsimComparisonTable caption="eSIM provider features" headers={["Provider","Network / speed","Hotspot","Top-up","Calls & SMS","Activation","Support"]} rows={esimFeatureRows.map(([name,...features])=>[<EsimProviderLink name={name!} providers={providers}/>,...features])}/>;
+function EsimFeatures({ providers }: { providers: ReturnType<typeof linksForPage> }) {
+  return (
+    <EsimComparisonTable
+      caption="eSIM provider features"
+      headers={[
+        "Provider",
+        "Network / speed",
+        "Hotspot",
+        "Top-up",
+        "Calls & SMS",
+        "Activation",
+        "Support",
+      ]}
+      rows={esimFeatureRows.map(([name, ...features]) => [
+        <EsimProviderLink name={name!} providers={providers} />,
+        ...features,
+      ])}
+    />
+  );
 }
 function EsimUsage() {
-  const items = [{icon:MapPinned,title:"Light use",amount:"1–3 GB",text:"Maps, messages and email for a short visit."},{icon:Smartphone,title:"Moderate use",amount:"5–10 GB",text:"Navigation, social media and photos over one to three weeks."},{icon:Waves,title:"Heavy use",amount:"20–50 GB+",text:"Video calls, streaming or sharing data with a laptop."}];
-  return <div className="mt-5 grid gap-3 sm:grid-cols-3">{items.map(({icon:Icon,title,amount,text})=><article key={title} className="rounded-xl border bg-card p-4"><Icon className="size-5 text-primary" aria-hidden/><h3 className="mt-2 font-semibold">{title}</h3><p className="mt-1 text-xl font-bold">{amount}</p><p className="mt-2 text-sm text-muted-foreground">{text}</p></article>)}<p className="text-xs text-muted-foreground sm:col-span-3">Estimates for the whole trip. Video quality, travel duration and Wi-Fi availability affect usage. Download offline maps and keep automatic updates on Wi-Fi to save data.</p></div>;
+  const items = [
+    {
+      icon: MapPinned,
+      title: "Light use",
+      amount: "1–3 GB",
+      text: "Maps, messages and email for a short visit.",
+    },
+    {
+      icon: Smartphone,
+      title: "Moderate use",
+      amount: "5–10 GB",
+      text: "Navigation, social media and photos over one to three weeks.",
+    },
+    {
+      icon: Waves,
+      title: "Heavy use",
+      amount: "20–50 GB+",
+      text: "Video calls, streaming or sharing data with a laptop.",
+    },
+  ];
+  return (
+    <div className="mt-5 grid gap-3 sm:grid-cols-3">
+      {items.map(({ icon: Icon, title, amount, text }) => (
+        <article key={title} className="rounded-xl border bg-card p-4">
+          <Icon className="size-5 text-primary" aria-hidden />
+          <h3 className="mt-2 font-semibold">{title}</h3>
+          <p className="mt-1 text-xl font-bold">{amount}</p>
+          <p className="mt-2 text-sm text-muted-foreground">{text}</p>
+        </article>
+      ))}
+      <p className="text-xs text-muted-foreground sm:col-span-3">
+        Estimates for the whole trip. Video quality, travel duration and Wi-Fi availability affect
+        usage. Download offline maps and keep automatic updates on Wi-Fi to save data.
+      </p>
+    </div>
+  );
 }
-function EsimPayg({providers}: {providers: ReturnType<typeof linksForPage>}) {
-  return <><EsimComparisonTable caption="Drimsim pay-as-you-go data costs" headers={["Data used","Estimated data charge"]} rows={[100,500,1000,5000].map(mb=>[mb.toLocaleString("en-US")+" MB","€"+(mb*drimsimEurPerMb).toFixed(2)])}/><p className="mt-3 text-sm">Data only; compare the purchase and balance requirements too. <EsimProviderLink name="Drimsim" providers={providers}>View Drimsim plans and rates</EsimProviderLink>.</p></>;
+function EsimPayg({ providers }: { providers: ReturnType<typeof linksForPage> }) {
+  return (
+    <>
+      <EsimComparisonTable
+        caption="Drimsim pay-as-you-go data costs"
+        headers={["Data used", "Estimated data charge"]}
+        rows={[100, 500, 1000, 5000].map((mb) => [
+          mb.toLocaleString("en-US") + " MB",
+          "€" + (mb * drimsimEurPerMb).toFixed(2),
+        ])}
+      />
+      <p className="mt-3 text-sm">
+        Data only; compare the purchase and balance requirements too.{" "}
+        <EsimProviderLink name="Drimsim" providers={providers}>
+          View Drimsim plans and rates
+        </EsimProviderLink>
+        .
+      </p>
+    </>
+  );
 }
 function EsimSetup() {
   const steps = [
-    {title:"Before your flight",text:"On iPhone, open Settings > Cellular / Mobile Data > Add eSIM. On Android, open Settings > SIMs or SIM manager > Add eSIM. Follow the app or QR-code instructions; menus vary by device."},
-    {title:"On arrival in Israel",text:"Turn on the travel eSIM, choose it for mobile data and enable roaming on that line if required. Keep your original SIM's data roaming off."},
-    {title:"If you cannot connect",text:"Check the active plan and selected data line, toggle airplane mode or restart the phone. Follow the provider's APN and network instructions; contact its support before deleting the eSIM."},
+    {
+      title: "Before your flight",
+      text: "On iPhone, open Settings > Cellular / Mobile Data > Add eSIM. On Android, open Settings > SIMs or SIM manager > Add eSIM. Follow the app or QR-code instructions; menus vary by device.",
+    },
+    {
+      title: "On arrival in Israel",
+      text: "Turn on the travel eSIM, choose it for mobile data and enable roaming on that line if required. Keep your original SIM's data roaming off.",
+    },
+    {
+      title: "If you cannot connect",
+      text: "Check the active plan and selected data line, toggle airplane mode or restart the phone. Follow the provider's APN and network instructions; contact its support before deleting the eSIM.",
+    },
   ];
-  return <ol className="mt-5 grid gap-3 sm:grid-cols-3">{steps.map((step,i)=><li key={step.title} className="rounded-xl border bg-card p-4"><span className="grid size-8 place-items-center rounded-full bg-secondary font-semibold text-primary">{i+1}</span><h3 className="mt-2 font-semibold">{step.title}</h3><p className="mt-2 text-sm leading-relaxed">{step.text}</p></li>)}</ol>;
+  return (
+    <ol className="mt-5 grid gap-3 sm:grid-cols-3">
+      {steps.map((step, i) => (
+        <li key={step.title} className="rounded-xl border bg-card p-4">
+          <span className="grid size-8 place-items-center rounded-full bg-secondary font-semibold text-primary">
+            {i + 1}
+          </span>
+          <h3 className="mt-2 font-semibold">{step.title}</h3>
+          <p className="mt-2 text-sm leading-relaxed">{step.text}</p>
+        </li>
+      ))}
+    </ol>
+  );
 }
 
 export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const guide = travelGuides[id];
   // Area A entry rules introduce the Bethlehem route choices before the comparison.
-  const bethlehemEntryRules = id === "bethlehem" ? guide.sections.find((section) => section.id === "entry-rules") : undefined;
+  const bethlehemEntryRules =
+    id === "bethlehem" ? guide.sections.find((section) => section.id === "entry-rules") : undefined;
   const providers = guide.providerPageId ? linksForPage(guide.providerPageId) : [];
-  const isJerusalemCluster = (["jerusalem", "jerusalemChurches", "jerusalemShopping", "bethlehem", "jerusalemDeadSea"] as string[]).includes(id);
+  const isJerusalemCluster = (
+    [
+      "jerusalem",
+      "jerusalemChurches",
+      "jerusalemShopping",
+      "bethlehem",
+      "jerusalemDeadSea",
+    ] as string[]
+  ).includes(id);
   const isNationalGuide = id === "israel";
   const isTransportOverview = isNationalGuide || id === "telAviv";
   const isTaxiFareGuide = id === "taxiFares";
-  const overviewRowAnchors = id === "telAviv"
-    ? ["choose", "paying", "red-line", "national-rail", "taxis", "taxis", "shabbat", "bikes", "bikes"]
-    : ["israel-trains", "israel-buses", "israel-light-rail", "israel-taxis", "israel-sherut", "israel-rentals", "israel-drivers"];
+  const overviewRowAnchors =
+    id === "telAviv"
+      ? [
+          "choose",
+          "paying",
+          "red-line",
+          "national-rail",
+          "taxis",
+          "taxis",
+          "shabbat",
+          "bikes",
+          "bikes",
+        ]
+      : [
+          "israel-trains",
+          "israel-buses",
+          "israel-light-rail",
+          "israel-taxis",
+          "israel-sherut",
+          "israel-rentals",
+          "israel-drivers",
+        ];
   const creditedPhotos = [
     { label: "Main guide image", photo: guide.photo },
-    ...guide.sections.flatMap(section => [
+    ...guide.sections.flatMap((section) => [
       ...(section.photo ? [{ label: section.title, photo: section.photo }] : []),
-      ...(section.subsections || []).flatMap(sub => sub.photo ? [{ label: sub.title, photo: sub.photo }] : []),
+      ...(section.subsections || []).flatMap((sub) =>
+        sub.photo ? [{ label: sub.title, photo: sub.photo }] : [],
+      ),
     ]),
-  ].filter(entry => hasPublicPhotoCredit(entry.photo)).map(({label, photo}) => ({
-    label,
-    credit: photo.credit,
-    sourceUrl: photo.sourceUrl && !isPublisherUrl(photo.sourceUrl) ? photo.sourceUrl : undefined,
-    licenseUrl: photo.licenseUrl,
-  }));
-  return <main className="mx-auto max-w-5xl px-4 pb-8">
-    <article>
-      <header className="pt-6">
-        <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: travelGuidePaths[id].startsWith("/attractions/") ? "Attractions" : "Travel guides", to: travelGuidePaths[id].startsWith("/attractions/") ? "/attractions/" : "/travel-blog/" }, { name: guide.title, to: travelGuidePaths[id] }]} />
-        {!travelGuidePaths[id].startsWith("/attractions/") && <div className="mt-6"><GuideTags topics={guide.topics} /></div>}
-        <GuideHeroLayout image={
-          <GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}/>
-        }>
-          <h1 className="guide-page-title">{guide.title}</h1>
-          <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
-          <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
-        </GuideHeroLayout>
-        <AuthorCard />
-      </header>
-      <section id="quick-answer" aria-labelledby="answer-h" className="mt-8 scroll-mt-24 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-7">
-        <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{id === "esim" ? emphasizeEsimNames(guide.answer) : guide.answer}</p>
-        {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
-      </section>
-      {id === "esim" && <><EsimPickCards providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Prices reviewed {new Date(ESIM_UPDATED + "T12:00:00Z").toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric",timeZone:"UTC"})} (USD except where marked). Providers may display prices in your local currency.</p></>}
-      {isTransportOverview && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-3">
-        {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p>
-          <p className="mt-2 text-sm leading-relaxed">
-            {fact.link && fact.text.includes(fact.link.text) ? <>
-              {fact.text.slice(0, fact.text.indexOf(fact.link.text))}
-              <a href={fact.link.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">
-                {fact.link.text}<span className="sr-only"> (opens in a new tab)</span>
-              </a>
-              {fact.text.slice(fact.text.indexOf(fact.link.text) + fact.link.text.length)}
-            </> : fact.text}
+  ]
+    .filter((entry) => hasPublicPhotoCredit(entry.photo))
+    .map(({ label, photo }) => ({
+      label,
+      credit: photo.credit,
+      sourceUrl: photo.sourceUrl && !isPublisherUrl(photo.sourceUrl) ? photo.sourceUrl : undefined,
+      licenseUrl: photo.licenseUrl,
+    }));
+  return (
+    <main className="mx-auto max-w-5xl px-4 pb-8">
+      <article>
+        <header className="pt-6">
+          <Breadcrumbs
+            items={[
+              { name: "Home", to: "/" },
+              {
+                name: travelGuidePaths[id].startsWith("/attractions/")
+                  ? "Attractions"
+                  : "Travel guides",
+                to: travelGuidePaths[id].startsWith("/attractions/")
+                  ? "/attractions/"
+                  : "/travel-blog/",
+              },
+              { name: guide.title, to: travelGuidePaths[id] },
+            ]}
+          />
+          {!travelGuidePaths[id].startsWith("/attractions/") && (
+            <div className="mt-6">
+              <GuideTags topics={guide.topics} />
+            </div>
+          )}
+          <GuideHeroLayout image={<GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt} />}>
+            <h1 className="guide-page-title">{guide.title}</h1>
+            <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">
+              {guide.intro}
+            </p>
+            <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
+          </GuideHeroLayout>
+          <AuthorCard />
+        </header>
+        <section
+          id="quick-answer"
+          aria-labelledby="answer-h"
+          className="mt-8 scroll-mt-24 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-7"
+        >
+          <h2 id="answer-h" className="text-2xl">
+            Quick answer
+          </h2>
+          <p className="mt-3 text-lg leading-relaxed">
+            {id === "esim" ? emphasizeEsimNames(guide.answer) : guide.answer}
           </p>
-        </div>)}
-      </section>}
-      <OnThisPage sections={id === "jerusalemDeadSea"
-        ? [["at-a-glance", "Compare options"], ["destinations", "Destinations & times"], ["bus", "Bus 486 / 444"], ["private", "Taxi & driver"], ["tours", "Organised tours"], ["driving", "Rental car"], ["beach", "Public beach"], ["journey-destinations", "Other stops"], ["contact", "Contact me"]]
-        : id === "bethlehem"
-        ? [["entry-rules", "Area A & entry rules"], ["at-a-glance", "Compare travel options"], ...guide.sections.filter((section) => section.id !== "entry-rules").map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
-        : id === "shabbat"
-          ? [["at-a-glance", "Compare options"], ["shabbat-hours", "Shabbat services"], ["weekend-711", "Free bus 711"], ["terminal-transfer", "Terminal shuttle"], ["taxis-transfers", "Taxis & transfers"], ["costs", "Shabbat taxi fares"], ["destinations", "Destinations"], ["restart", "When trains resume"], ["faq", "FAQ"], ["contact", "Contact me"]]
-        : id === "arrival"
-          ? [["at-a-glance", "Arrival steps"], ["before-you-fly", "Before flying"], ["arrival-terminal", "Terminal 3"], ["passport-control", "Passport control"], ["baggage", "Baggage claim"], ["customs", "Customs"], ["arrivals-hall", "Arrival hall"], ["leave-airport", "Transport"], ["arrival-timing", "Arrival timing"], ["faq", "FAQ"], ["contact", "Contact me"]]
-        : id === "taxis"
-          ? [["at-a-glance", "Booking methods"], ["recognize", "Licensed taxis"], ["booking", "How to book"], ["fares", "Taxi fares"], ["apps", "Taxi apps"], ["airport", "Taking a Taxi from Ben Gurion Airport"], ["holidays", "Shabbat & holidays"], ["intercity", "Long-distance taxis"], ["faq", "FAQ"], ["contact", "Contact me"]]
-        : isTaxiFareGuide
-          ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Before you go"], ["faq", "FAQ"], ["contact", "Contact me"], ["sources", "Sources"]]
-          : id === "esim"
-          ? [...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact me"]]
-          : id === "uber" || id === "sherut"
-          ? [["at-a-glance", id === "uber" ? "Compare ride options" : "Compare travel options"], ...guide.sections.map(section => [section.id, section.title] as const), ["checklist", "Before you go"], ["faq", "FAQ"], ["contact", "Contact me"]]
-        : id === "telAviv"
-          ? [["at-a-glance", "Compare options"], ["choose", "Getting around"], ["paying", "Buses & tickets"], ["red-line", "Red Line"], ["national-rail", "Rail stations"], ["taxis", "Taxis & sherut"], ["bikes", "Cycling & driving"], ["shabbat", "Weekend travel"], ["accessibility", "Practical tips"], ["contact", "Contact me"]]
-        : id === "israel"
-          ? [["at-a-glance", "Choosing transport"], ["public-transport", "Public transport"], ["paying", "Tickets & payment"], ["taxis-and-sherut", "Taxis & transfers"], ["destinations", "Cities & regions"], ["rental-car", "Car rental & day trips"], ["weekends", "Shabbat & travel tips"], ["contact", "Contact me"]]
-        : id === "airportTaxis"
-          ? [["at-a-glance", "Pickup points"], ["steps", "How to book"], ["terminal3", "Terminal 3"], ["terminal1", "Terminal 1"], ["scheduled", "Advance booking"], ["fares", "Taxi fares"], ["weekend", "Shabbat & holidays"], ["destinations", "Popular destinations"], ["faq", "FAQ"], ["contact", "Contact me"]]
-          : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact me"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", "Contact me"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
-      {bethlehemEntryRules && <section id={bethlehemEntryRules.id} aria-labelledby="entry-rules-h" className="mt-10 scroll-mt-24">
-        <h2 id="entry-rules-h" className="text-3xl">{bethlehemEntryRules.title}</h2>
-        <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
-          {bethlehemEntryRules.paragraphs.map((paragraph, index) => <p key={index}>
-            {bethlehemEntryRules.richParagraphs?.[index]
-              ? <GuideRichParagraph spans={bethlehemEntryRules.richParagraphs[index]} />
-              : <GuideParagraph paragraph={paragraph} inlineLinks={bethlehemEntryRules.inlineLinks} />}
-          </p>)}
-        </div>
-      </section>}
-      {id !== "esim" && <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
-        <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
-        {isTransportOverview && <p className="mt-3 max-w-3xl leading-relaxed">{id === "israel" ? "Compare fares, the complete journey to your final address and availability for your travel date." : "Choose the option that suits your destination, fare and day of travel."}</p>}
-        <div role="region" aria-label="Transport comparison table" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"><table className={isTransportOverview ? "w-full min-w-[860px] text-left text-sm" : (id === "jerusalemDeadSea" || id === "bethlehem") ? "w-full min-w-[780px] text-left text-sm" : id === "uber" || id === "sherut" ? "w-full min-w-[760px] text-left text-sm" : isTaxiFareGuide ? "w-full min-w-[640px] text-left text-sm" : "w-full min-w-[560px] text-left text-sm"}><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className={"p-4 font-semibold " + ((isTransportOverview || isTaxiFareGuide || id === "uber" || id === "sherut" || id === "jerusalemDeadSea" || id === "bethlehem") && heading === guide.comparison.headers[0] ? "sticky left-0 z-10 bg-secondary" : "")}>{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className={"p-4 font-medium " + ((isTransportOverview || isTaxiFareGuide || id === "uber" || id === "sherut" || id === "jerusalemDeadSea" || id === "bethlehem") ? "sticky left-0 z-10 bg-card" : "")}>{isTransportOverview ? <a href={"#" + (overviewRowAnchors[index] || "choose")} className="text-primary underline underline-offset-4">{cell}</a> : cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
-        {isTaxiFareGuide && <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">Rates effective April 2026, specified through March 2027 unless amended. All amounts above include 18% VAT outside Eilat; the official regulation lists amounts before VAT.</p>}
-      </section>}
-      {guide.sections.filter((section) => !(id === "bethlehem" && section.id === "entry-rules")).map((section) => <Fragment key={section.id}><section id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>
-        <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
-          {id === "airportTaxis" && section.id === "steps" ? (
-            <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="airport-taxi-booking-steps">
-              {section.paragraphs.map((step, index) => <li key={index} className="rounded-2xl border bg-card p-5 shadow-sm">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-base font-bold text-primary">{index + 1}</span>
-                <h3 className="mt-3 text-lg font-semibold">{["Order a taxi", "Save the ride code", "Join the official line"][index]}</h3>
-                <p className="mt-2 text-sm leading-relaxed">{step.replace(/^\d+\.\s*/, "")}</p>
-              </li>)}
-            </ol>
-          ) : section.paragraphs.map((paragraph, paragraphIndex) => (
-            <Fragment key={paragraphIndex}>
-              <p>{section.richParagraphs?.[paragraphIndex] ? <GuideRichParagraph spans={section.richParagraphs[paragraphIndex]} /> : id === "esim" ? esimRecommendation(paragraph, providers) : <GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} />}</p>
-              {id === "esim" && paragraphIndex === 0 && <>{section.id === "short-trip" && <EsimFixedComparison providers={providers}/>} {section.id === "unlimited" && <EsimUnlimitedComparison providers={providers}/>} {section.id === "features" && <EsimFeatures providers={providers}/>} {section.id === "long-trip" && <EsimUsage/>} {section.id === "payg" && <EsimPayg providers={providers}/>} {section.id === "setup" && <EsimSetup/>}</>}
-              {paragraphIndex === 0 && section.photo && <GuideSectionPhoto photo={section.photo} />}
+          {guide.reviewNote && (
+            <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">
+              {guide.reviewNote}
+            </p>
+          )}
+        </section>
+        {id === "esim" && (
+          <>
+            <EsimPickCards providers={providers} />
+            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+              Prices reviewed{" "}
+              {new Date(ESIM_UPDATED + "T12:00:00Z").toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                timeZone: "UTC",
+              })}{" "}
+              (USD except where marked). Providers may display prices in your local currency.
+            </p>
+          </>
+        )}
+        {isTransportOverview && (
+          <section
+            aria-label="Transport planning essentials"
+            className="mt-5 grid gap-3 sm:grid-cols-3"
+          >
+            {guide.facts.map((fact) => (
+              <div key={fact.label} className="rounded-xl border bg-card p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-primary">
+                  {fact.label}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed">
+                  {fact.link && fact.text.includes(fact.link.text) ? (
+                    <>
+                      {fact.text.slice(0, fact.text.indexOf(fact.link.text))}
+                      <a
+                        href={fact.link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary"
+                      >
+                        {fact.link.text}
+                        <span className="sr-only"> (opens in a new tab)</span>
+                      </a>
+                      {fact.text.slice(fact.text.indexOf(fact.link.text) + fact.link.text.length)}
+                    </>
+                  ) : (
+                    fact.text
+                  )}
+                </p>
+              </div>
+            ))}
+          </section>
+        )}
+        <OnThisPage
+          sections={
+            id === "jerusalemDeadSea"
+              ? [
+                  ["at-a-glance", "Compare options"],
+                  ["destinations", "Destinations & times"],
+                  ["bus", "Bus 486 / 444"],
+                  ["private", "Taxi & driver"],
+                  ["tours", "Organised tours"],
+                  ["driving", "Rental car"],
+                  ["beach", "Public beach"],
+                  ["journey-destinations", "Other stops"],
+                  ["contact", "Contact me"],
+                ]
+              : id === "bethlehem"
+                ? [
+                    ["entry-rules", "Area A & entry rules"],
+                    ["at-a-glance", "Compare travel options"],
+                    ...guide.sections
+                      .filter((section) => section.id !== "entry-rules")
+                      .map((section) => [section.id, section.title] as const),
+                    ["checklist", "Checklist"],
+                    ["faq", "FAQ"],
+                    ["contact", "Contact"],
+                    ["sources", "Sources"],
+                  ]
+                : id === "shabbat"
+                  ? [
+                      ["at-a-glance", "Compare options"],
+                      ["shabbat-hours", "Shabbat services"],
+                      ["weekend-711", "Free bus 711"],
+                      ["terminal-transfer", "Terminal shuttle"],
+                      ["taxis-transfers", "Taxis & transfers"],
+                      ["costs", "Shabbat taxi fares"],
+                      ["destinations", "Destinations"],
+                      ["restart", "When trains resume"],
+                      ["faq", "FAQ"],
+                      ["contact", "Contact me"],
+                    ]
+                  : id === "arrival"
+                    ? [
+                        ["at-a-glance", "Arrival steps"],
+                        ["before-you-fly", "Before flying"],
+                        ["arrival-terminal", "Terminal 3"],
+                        ["passport-control", "Passport control"],
+                        ["baggage", "Baggage claim"],
+                        ["customs", "Customs"],
+                        ["arrivals-hall", "Arrival hall"],
+                        ["leave-airport", "Transport"],
+                        ["arrival-timing", "Arrival timing"],
+                        ["faq", "FAQ"],
+                        ["contact", "Contact me"],
+                      ]
+                    : id === "taxis"
+                      ? [
+                          ["at-a-glance", "Booking methods"],
+                          ["recognize", "Licensed taxis"],
+                          ["booking", "How to book"],
+                          ["fares", "Taxi fares"],
+                          ["apps", "Taxi apps"],
+                          ["airport", "Taking a Taxi from Ben Gurion Airport"],
+                          ["holidays", "Shabbat & holidays"],
+                          ["intercity", "Long-distance taxis"],
+                          ["faq", "FAQ"],
+                          ["contact", "Contact me"],
+                        ]
+                      : isTaxiFareGuide
+                        ? [
+                            ["at-a-glance", "Meter rates"],
+                            ...guide.sections.map(
+                              (section) => [section.id, section.title] as const,
+                            ),
+                            ["checklist", "Before you go"],
+                            ["faq", "FAQ"],
+                            ["contact", "Contact me"],
+                            ["sources", "Sources"],
+                          ]
+                        : id === "esim"
+                          ? [
+                              ...guide.sections.map(
+                                (section) => [section.id, section.title] as const,
+                              ),
+                              ["checklist", "Checklist"],
+                              ["faq", "FAQ"],
+                              ["contact", "Contact me"],
+                            ]
+                          : id === "uber" || id === "sherut"
+                            ? [
+                                [
+                                  "at-a-glance",
+                                  id === "uber" ? "Compare ride options" : "Compare travel options",
+                                ],
+                                ...guide.sections.map(
+                                  (section) => [section.id, section.title] as const,
+                                ),
+                                ["checklist", "Before you go"],
+                                ["faq", "FAQ"],
+                                ["contact", "Contact me"],
+                              ]
+                            : id === "telAviv"
+                              ? [
+                                  ["at-a-glance", "Compare options"],
+                                  ["choose", "Getting around"],
+                                  ["paying", "Buses & tickets"],
+                                  ["red-line", "Red Line"],
+                                  ["national-rail", "Rail stations"],
+                                  ["taxis", "Taxis & sherut"],
+                                  ["bikes", "Cycling & driving"],
+                                  ["shabbat", "Weekend travel"],
+                                  ["accessibility", "Practical tips"],
+                                  ["contact", "Contact me"],
+                                ]
+                              : id === "israel"
+                                ? [
+                                    ["at-a-glance", "Choosing transport"],
+                                    ["public-transport", "Public transport"],
+                                    ["paying", "Tickets & payment"],
+                                    ["taxis-and-sherut", "Taxis & transfers"],
+                                    ["destinations", "Cities & regions"],
+                                    ["rental-car", "Car rental & day trips"],
+                                    ["weekends", "Shabbat & travel tips"],
+                                    ["contact", "Contact me"],
+                                  ]
+                                : id === "airportTaxis"
+                                  ? [
+                                      ["at-a-glance", "Pickup points"],
+                                      ["steps", "How to book"],
+                                      ["terminal3", "Terminal 3"],
+                                      ["terminal1", "Terminal 1"],
+                                      ["scheduled", "Advance booking"],
+                                      ["fares", "Taxi fares"],
+                                      ["weekend", "Shabbat & holidays"],
+                                      ["destinations", "Popular destinations"],
+                                      ["faq", "FAQ"],
+                                      ["contact", "Contact me"],
+                                    ]
+                                  : [
+                                      ["at-a-glance", "At a glance"],
+                                      ...guide.sections.map(
+                                        (section) => [section.id, section.title] as const,
+                                      ),
+                                      ["checklist", "Checklist"],
+                                      ["faq", "FAQ"],
+                                      ...(isTransportOverview
+                                        ? ([
+                                            ["contact", "Contact me"],
+                                            ["sources", "Sources"],
+                                          ] as const)
+                                        : ([
+                                            ["sources", "Sources"],
+                                            ["contact", "Contact me"],
+                                          ] as const)),
+                                    ]
+          }
+          compactLabels={
+            id === "taxis"
+              ? taxiNavCompactLabels
+              : isTaxiFareGuide
+                ? fareNavCompactLabels
+                : undefined
+          }
+        />
+        {bethlehemEntryRules && (
+          <section
+            id={bethlehemEntryRules.id}
+            aria-labelledby="entry-rules-h"
+            className="mt-10 scroll-mt-24"
+          >
+            <h2 id="entry-rules-h" className="text-3xl">
+              {bethlehemEntryRules.title}
+            </h2>
+            <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
+              {bethlehemEntryRules.paragraphs.map((paragraph, index) => (
+                <p key={index}>
+                  {bethlehemEntryRules.richParagraphs?.[index] ? (
+                    <GuideRichParagraph spans={bethlehemEntryRules.richParagraphs[index]} />
+                  ) : (
+                    <GuideParagraph
+                      paragraph={paragraph}
+                      inlineLinks={bethlehemEntryRules.inlineLinks}
+                    />
+                  )}
+                </p>
+              ))}
+            </div>
+          </section>
+        )}
+        {id !== "esim" && (
+          <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
+            <h2 id="comparison-h" className="text-3xl">
+              {guide.comparison.caption}
+            </h2>
+            {isTransportOverview && (
+              <p className="mt-3 max-w-3xl leading-relaxed">
+                {id === "israel"
+                  ? "Compare fares, the complete journey to your final address and availability for your travel date."
+                  : "Choose the option that suits your destination, fare and day of travel."}
+              </p>
+            )}
+            <div
+              role="region"
+              aria-label="Transport comparison table"
+              tabIndex={0}
+              className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"
+            >
+              <table
+                className={
+                  isTransportOverview
+                    ? "w-full min-w-[860px] text-left text-sm"
+                    : id === "jerusalemDeadSea" || id === "bethlehem"
+                      ? "w-full min-w-[780px] text-left text-sm"
+                      : id === "uber" || id === "sherut"
+                        ? "w-full min-w-[760px] text-left text-sm"
+                        : isTaxiFareGuide
+                          ? "w-full min-w-[640px] text-left text-sm"
+                          : "w-full min-w-[560px] text-left text-sm"
+                }
+              >
+                <caption className="sr-only">{guide.comparison.caption}</caption>
+                <thead className="bg-secondary">
+                  <tr>
+                    {guide.comparison.headers.map((heading) => (
+                      <th
+                        key={heading}
+                        scope="col"
+                        className={
+                          "p-4 font-semibold " +
+                          ((isTransportOverview ||
+                            isTaxiFareGuide ||
+                            id === "uber" ||
+                            id === "sherut" ||
+                            id === "jerusalemDeadSea" ||
+                            id === "bethlehem") &&
+                          heading === guide.comparison.headers[0]
+                            ? "sticky left-0 z-10 bg-secondary"
+                            : "")
+                        }
+                      >
+                        {heading}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {guide.comparison.rows.map((row, index) => (
+                    <tr key={index} className="bg-card">
+                      {row.map((cell, cellIndex) =>
+                        cellIndex === 0 ? (
+                          <th
+                            key={cellIndex}
+                            scope="row"
+                            className={
+                              "p-4 font-medium " +
+                              (isTransportOverview ||
+                              isTaxiFareGuide ||
+                              id === "uber" ||
+                              id === "sherut" ||
+                              id === "jerusalemDeadSea" ||
+                              id === "bethlehem"
+                                ? "sticky left-0 z-10 bg-card"
+                                : "")
+                            }
+                          >
+                            {isTransportOverview ? (
+                              <a
+                                href={"#" + (overviewRowAnchors[index] || "choose")}
+                                className="text-primary underline underline-offset-4"
+                              >
+                                {cell}
+                              </a>
+                            ) : (
+                              cell
+                            )}
+                          </th>
+                        ) : (
+                          <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">
+                            {cell}
+                          </td>
+                        ),
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {isTaxiFareGuide && (
+              <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">
+                Rates effective April 2026, specified through March 2027 unless amended. All amounts
+                above include 18% VAT outside Eilat; the official regulation lists amounts before
+                VAT.
+              </p>
+            )}
+          </section>
+        )}
+        {guide.sections
+          .filter((section) => !(id === "bethlehem" && section.id === "entry-rules"))
+          .map((section) => (
+            <Fragment key={section.id}>
+              <section
+                id={section.id}
+                aria-labelledby={`${section.id}-h`}
+                className="mt-12 scroll-mt-24"
+              >
+                <h2 id={`${section.id}-h`} className="text-3xl">
+                  {section.title}
+                </h2>
+                <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
+                  {id === "airportTaxis" && section.id === "steps" ? (
+                    <ol
+                      className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+                      data-testid="airport-taxi-booking-steps"
+                    >
+                      {section.paragraphs.map((step, index) => (
+                        <li key={index} className="rounded-2xl border bg-card p-5 shadow-sm">
+                          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-base font-bold text-primary">
+                            {index + 1}
+                          </span>
+                          <h3 className="mt-3 text-lg font-semibold">
+                            {
+                              ["Order a taxi", "Save the ride code", "Join the official line"][
+                                index
+                              ]
+                            }
+                          </h3>
+                          <p className="mt-2 text-sm leading-relaxed">
+                            {step.replace(/^\d+\.\s*/, "")}
+                          </p>
+                        </li>
+                      ))}
+                    </ol>
+                  ) : (
+                    section.paragraphs.map((paragraph, paragraphIndex) => (
+                      <Fragment key={paragraphIndex}>
+                        <p>
+                          {section.richParagraphs?.[paragraphIndex] ? (
+                            <GuideRichParagraph spans={section.richParagraphs[paragraphIndex]} />
+                          ) : id === "esim" ? (
+                            esimRecommendation(paragraph, providers)
+                          ) : (
+                            <GuideParagraph
+                              paragraph={paragraph}
+                              inlineLinks={section.inlineLinks}
+                            />
+                          )}
+                        </p>
+                        {id === "esim" && paragraphIndex === 0 && (
+                          <>
+                            {section.id === "short-trip" && (
+                              <EsimFixedComparison providers={providers} />
+                            )}{" "}
+                            {section.id === "unlimited" && (
+                              <EsimUnlimitedComparison providers={providers} />
+                            )}{" "}
+                            {section.id === "features" && <EsimFeatures providers={providers} />}{" "}
+                            {section.id === "long-trip" && <EsimUsage />}{" "}
+                            {section.id === "payg" && <EsimPayg providers={providers} />}{" "}
+                            {section.id === "setup" && <EsimSetup />}
+                          </>
+                        )}
+                        {paragraphIndex === 0 && section.photo && (
+                          <GuideSectionPhoto photo={section.photo} />
+                        )}
+                      </Fragment>
+                    ))
+                  )}
+                  {section.paragraphs.length === 0 && section.photo && (
+                    <GuideSectionPhoto photo={section.photo} />
+                  )}
+                </div>
+                {section.tables?.map((table) => (
+                  <GuideDataTable
+                    key={table.caption}
+                    table={table}
+                    mobileGuidance={
+                      isTransportOverview ||
+                      isTaxiFareGuide ||
+                      id === "sherut" ||
+                      id === "jerusalemDeadSea"
+                    }
+                  />
+                ))}
+                {section.subsections?.map((sub) => (
+                  <section
+                    key={sub.id}
+                    id={sub.id}
+                    aria-labelledby={sub.id + "-h"}
+                    className="mt-9 scroll-mt-24"
+                  >
+                    <h3 id={sub.id + "-h"} className="text-2xl font-semibold">
+                      {sub.title}
+                    </h3>
+                    <div className="mt-3 max-w-4xl space-y-4 leading-relaxed text-foreground">
+                      {sub.paragraphs.map((paragraph, paragraphIndex) => (
+                        <Fragment key={paragraphIndex}>
+                          <p>
+                            <GuideParagraph paragraph={paragraph} inlineLinks={sub.inlineLinks} />
+                          </p>
+                          {paragraphIndex === 0 && sub.photo && (
+                            <GuideSectionPhoto photo={sub.photo} />
+                          )}
+                        </Fragment>
+                      ))}
+                      {sub.paragraphs.length === 0 && sub.photo && (
+                        <GuideSectionPhoto photo={sub.photo} />
+                      )}
+                    </div>
+                    {sub.steps && (
+                      <div
+                        className="mt-6 max-w-4xl rounded-xl border bg-secondary/40 p-5"
+                        aria-label="Step-by-step instructions"
+                      >
+                        <h4 className="text-lg font-semibold">
+                          {sub.id === "israel-trains"
+                            ? "How to request the free Jerusalem train voucher"
+                            : "Step by step"}
+                        </h4>
+                        <ol className="mt-3 list-decimal space-y-3 pl-5 leading-relaxed">
+                          {sub.steps.map((step) => (
+                            <li key={step}>{step}</li>
+                          ))}
+                        </ol>
+                      </div>
+                    )}
+                    {sub.tables?.map((table) => (
+                      <GuideDataTable
+                        key={table.caption}
+                        table={table}
+                        nested
+                        mobileGuidance={isTransportOverview}
+                      />
+                    ))}
+                    {sub.bullets && (
+                      <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">
+                        {sub.bullets.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
+                        ))}
+                      </ul>
+                    )}
+                    {sub.links && (
+                      <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                        {sub.links.map((link) => (
+                          <li key={link.to}>
+                            <Link
+                              to={link.to}
+                              className="font-medium text-primary underline underline-offset-4"
+                            >
+                              {link.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {sub.externalLinks
+                      ?.filter(
+                        (link) =>
+                          !sub.highlightedLinks?.some(
+                            (highlighted) => highlighted.href === link.href,
+                          ),
+                      )
+                      .map((link) => (
+                        <p key={link.href} className="mt-3 text-sm">
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-primary underline underline-offset-4"
+                          >
+                            {link.label}
+                          </a>
+                        </p>
+                      ))}
+                    {sub.highlightedLinks?.map((link) => (
+                      <UsefulLinkCallout key={link.href} {...link} />
+                    ))}
+                  </section>
+                ))}
+                {id === "airportTaxis" && section.id === "destinations" && (
+                  <AirportTaxiDestinationCards />
+                )}
+                {section.bullets && (
+                  <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">
+                    {section.bullets.map((bullet) => (
+                      <li key={bullet}>{id === "esim" ? emphasizeEsimNames(bullet) : bullet}</li>
+                    ))}
+                  </ul>
+                )}
+                {section.links && (
+                  <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                    {section.links.map((link) => (
+                      <li key={link.to}>
+                        <Link
+                          to={link.to}
+                          className="font-medium text-primary underline underline-offset-4"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {section.externalLinks?.some(
+                  (link) =>
+                    !section.highlightedLinks?.some(
+                      (highlighted) => highlighted.href === link.href,
+                    ),
+                ) && (
+                  <ul
+                    aria-label="Official resources"
+                    className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm"
+                  >
+                    {section.externalLinks
+                      .filter(
+                        (link) =>
+                          !section.highlightedLinks?.some(
+                            (highlighted) => highlighted.href === link.href,
+                          ),
+                      )
+                      .map((link) => (
+                        <li key={link.href}>
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel={
+                              link.href.startsWith("https://tp.media/r?")
+                                ? "sponsored noopener noreferrer"
+                                : "noopener noreferrer"
+                            }
+                            className="font-medium text-primary underline underline-offset-4"
+                          >
+                            {link.label}
+                            <span className="sr-only"> (opens in a new tab)</span>
+                          </a>
+                        </li>
+                      ))}
+                  </ul>
+                )}
+                {section.highlightedLinks?.map((link) => (
+                  <UsefulLinkCallout key={link.href} {...link} />
+                ))}
+                {section.tip && (
+                  <aside
+                    role="note"
+                    className="mt-5 flex max-w-4xl items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950 dark:border-amber-700/70 dark:bg-amber-950/25 dark:text-amber-100"
+                  >
+                    <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" aria-hidden />
+                    <p>
+                      <strong>Tip:</strong> {section.tip}
+                    </p>
+                  </aside>
+                )}
+                {id === "jerusalemDeadSea" && section.id === "tours" && <DeadSeaTourOptions />}
+                {id === "bethlehem" && section.id === "tours" && <BethlehemTourOptions />}
+                {showSectionReferences(id, section.id) && (
+                  <SectionReferences ids={section.sourceIds || []} />
+                )}
+                {id === "esim" && section.id === "coverage" && (
+                  <p className="mt-4 max-w-4xl text-sm leading-relaxed">
+                    If Bethlehem is on your itinerary, see my{" "}
+                    <Link
+                      to="/travel-blog/jerusalem-to-bethlehem/"
+                      className="font-medium text-primary underline underline-offset-4"
+                    >
+                      Jerusalem to Bethlehem travel guide
+                    </Link>
+                    .
+                  </p>
+                )}
+                {id === "shabbat" && section.id === "taxis-transfers" && (
+                  <p className="mt-4 max-w-4xl leading-relaxed text-foreground">
+                    Want to arrange a private pickup on Shabbat?{" "}
+                    <a
+                      href="#contact"
+                      className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    >
+                      Send me your arrival details using the contact form below
+                    </a>
+                    .
+                  </p>
+                )}
+                {id === "sherut" && section.id === "airport-alternatives" && (
+                  <p className="mt-4 max-w-4xl leading-relaxed text-foreground">
+                    For a direct journey,{" "}
+                    <a
+                      href="#contact"
+                      className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    >
+                      ask me about a private airport pickup
+                    </a>
+                    .
+                  </p>
+                )}
+              </section>
+              {id === "shabbat" && section.id === "shabbat-hours" && <ShabbatTimesLink />}
+              {id === "shabbat" && section.id === "weekend-711" && <ShabbatBusLinks />}
+              {id === "shabbat" && section.id === "terminal-transfer" && <ShabbatTerminalSteps />}
+              {id === "shabbat" && section.id === "restart" && <ShabbatPublicTransportLinks />}
             </Fragment>
           ))}
-          {section.paragraphs.length === 0 && section.photo && <GuideSectionPhoto photo={section.photo} />}
-        </div>{section.tables?.map((table) => <GuideDataTable key={table.caption} table={table} mobileGuidance={isTransportOverview || isTaxiFareGuide || id === "sherut" || id === "jerusalemDeadSea"} />)}
-        {section.subsections?.map(sub => <section key={sub.id} id={sub.id} aria-labelledby={sub.id + "-h"} className="mt-9 scroll-mt-24">
-          <h3 id={sub.id + "-h"} className="text-2xl font-semibold">{sub.title}</h3>
-          <div className="mt-3 max-w-4xl space-y-4 leading-relaxed text-foreground">
-            {sub.paragraphs.map((paragraph, paragraphIndex) => <Fragment key={paragraphIndex}>
-              <p><GuideParagraph paragraph={paragraph} inlineLinks={sub.inlineLinks} /></p>
-              {paragraphIndex === 0 && sub.photo && <GuideSectionPhoto photo={sub.photo} />}
-            </Fragment>)}
-            {sub.paragraphs.length === 0 && sub.photo && <GuideSectionPhoto photo={sub.photo} />}
-          </div>
-          {sub.steps && <div className="mt-6 max-w-4xl rounded-xl border bg-secondary/40 p-5" aria-label="Step-by-step instructions">
-            <h4 className="text-lg font-semibold">{sub.id === "israel-trains" ? "How to request the free Jerusalem train voucher" : "Step by step"}</h4>
-            <ol className="mt-3 list-decimal space-y-3 pl-5 leading-relaxed">{sub.steps.map(step => <li key={step}>{step}</li>)}</ol>
-          </div>}
-          {sub.tables?.map(table => <GuideDataTable key={table.caption} table={table} nested mobileGuidance={isTransportOverview} />)}
-          {sub.bullets && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{sub.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul>}
-          {sub.links && <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{sub.links.map(link => <li key={link.to}><Link to={link.to} className="font-medium text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>}
-          {sub.externalLinks?.filter(link => !sub.highlightedLinks?.some(highlighted => highlighted.href === link.href)).map(link => <p key={link.href} className="mt-3 text-sm"><a href={link.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">{link.label}</a></p>)}
-          {sub.highlightedLinks?.map(link => <UsefulLinkCallout key={link.href} {...link} />)}
-        </section>)}
-        {id === "airportTaxis" && section.id === "destinations" && <AirportTaxiDestinationCards />}{section.bullets && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{section.bullets.map((bullet) => <li key={bullet}>{id === "esim" ? emphasizeEsimNames(bullet) : bullet}</li>)}</ul>}{section.links && <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.links.map((link) => <li key={link.to}><Link to={link.to} className="font-medium text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>}{section.externalLinks?.some(link => !section.highlightedLinks?.some(highlighted => highlighted.href === link.href)) && <ul aria-label="Official resources" className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.externalLinks.filter(link => !section.highlightedLinks?.some(highlighted => highlighted.href === link.href)).map((link) => <li key={link.href}><a href={link.href} target="_blank" rel={link.href.startsWith("https://tp.media/r?") ? "sponsored noopener noreferrer" : "noopener noreferrer"} className="font-medium text-primary underline underline-offset-4">{link.label}<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul>}{section.highlightedLinks?.map(link => <UsefulLinkCallout key={link.href} {...link} />)}{section.tip && <aside role="note" className="mt-5 flex max-w-4xl items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950 dark:border-amber-700/70 dark:bg-amber-950/25 dark:text-amber-100"><Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" aria-hidden /><p><strong>Tip:</strong> {section.tip}</p></aside>}{id === "jerusalemDeadSea" && section.id === "tours" && <DeadSeaTourOptions />}{id === "bethlehem" && section.id === "tours" && <BethlehemTourOptions />}{showSectionReferences(id, section.id) && <SectionReferences ids={section.sourceIds || []} />}{id === "esim" && section.id === "coverage" && <p className="mt-4 max-w-4xl text-sm leading-relaxed">If Bethlehem is on your itinerary, see my <Link to="/travel-blog/jerusalem-to-bethlehem/" className="font-medium text-primary underline underline-offset-4">Jerusalem to Bethlehem travel guide</Link>.</p>}{id === "shabbat" && section.id === "taxis-transfers" && <p className="mt-4 max-w-4xl leading-relaxed text-foreground">Want to arrange a private pickup on Shabbat? <a href="#contact" className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Send me your arrival details using the contact form below</a>.</p>}{id === "sherut" && section.id === "airport-alternatives" && <p className="mt-4 max-w-4xl leading-relaxed text-foreground">For a direct journey, <a href="#contact" className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">ask me about a private airport pickup</a>.</p>}</section>
-        {id === "shabbat" && section.id === "shabbat-hours" && <ShabbatTimesLink />}{id === "shabbat" && section.id === "weekend-711" && <ShabbatBusLinks />}{id === "shabbat" && section.id === "terminal-transfer" && <ShabbatTerminalSteps />}{id === "shabbat" && section.id === "restart" && <ShabbatPublicTransportLinks />}</Fragment>)}
-      {id === "jerusalemDeadSea" && <JerusalemJourneyOptions id={id} />}
-      
-      {<section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24"><Checklist title={id === "bethlehem" ? "Travel checklist" : "Before you go"} items={guide.checklist} /></section>}
-      
-      {id !== "jerusalemDeadSea" && id !== "bethlehem" && <JerusalemPartnerOffers id={id} />}
-      {isJerusalemCluster && id !== "jerusalemDeadSea" && id !== "bethlehem" && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
-      <FaqList faqs={guide.faqs} {...(isTransportOverview && guide.faqGroups ? { groups: guide.faqGroups } : {})} />
-      {id === "jerusalemDeadSea" && <DeadSeaGuideFollowUps />}
-      {id === "bethlehem" && <BethlehemGuideFollowUps />}
-      {!isTransportOverview && !isTaxiFareGuide && id !== "esim" && id !== "jerusalemDeadSea" && id !== "bethlehem" && id !== "airportTaxis" && id !== "taxis" && id !== "arrival" && id !== "shabbat" && id !== "uber" && id !== "sherut" && <SourceList ids={sourcesFor(guide)} />}
-      {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} illustrated={id === "israel" || id === "telAviv" || id === "esim" || id === "airportTaxis" || id === "arrival"} maxPhotoCards={id === "israel" || id === "telAviv" || id === "esim" || id === "airportTaxis" || id === "arrival" ? 6 : 4} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
-      {id === "esim" && <IconTripPlanningLinks title="Plan the next part of your trip" items={guide.services.map((service,index)=>({title:service.label,description:service.note ?? "",to:service.to,icon:[Plane,MapPinned,BedDouble,BookOpen,CarFront,Landmark][index] ?? BookOpen}))} />}
-      {!isJerusalemCluster && id !== "esim" && id !== "shabbat" && id !== "jerusalemDeadSea" && id !== "uber" && id !== "sherut" && id !== "israel" && id !== "telAviv" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
-      {id === "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths.shabbat} illustrated maxPhotoCards={6} items={[
-        { label: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
-        { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
-        { label: "Ben Gurion Airport to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
-        { label: "Ben Gurion Airport to Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
-        { label: "Official airport taxi pickup", to: travelGuidePaths.airportTaxis },
-        { label: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival },
-      ]} />}
-      {id === "telAviv" && <IconTripPlanningLinks title="Plan the next part of your trip" id="tel-aviv-trip-planning" className="mt-12" items={guide.services.map(item => ({ title: item.label, description: item.note ?? "", to: item.to, icon: telAvivPlanningIcons[String(item.to)] ?? BookOpen }))} />}
-      {id === "israel" && <IconTripPlanningLinks title="Plan the next part of your trip" id="israel-trip-planning" className="mt-12" items={guide.services.map(item => ({ title: item.label, description: item.note ?? "", to: item.to, icon: israelPlanningIcons[String(item.to)] ?? BookOpen }))} />}
-      {id === "sherut" && <IconTripPlanningLinks title="Plan the next part of your trip" id="sherut-trip-planning" className="mt-12" items={guide.services.map(item => ({ title: item.label, description: item.note ?? "", to: item.to, icon: sherutPlanningIcons[String(item.to)] ?? BookOpen }))} />}
-      {id === "uber" && <IconTripPlanningLinks title="Plan the next part of your trip" id="uber-trip-planning" className="mt-12" items={guide.services.map(item => ({ title: item.label, description: item.note ?? "", to: item.to, icon: uberPlanningIcons[String(item.to)] ?? BookOpen }))} />}
-      {id === "shabbat" && <IconTripPlanningLinks title="Plan the next part of your trip" id="shabbat-trip-planning" className="mt-12" items={guide.services.map(item => ({ title: item.label, description: item.note ?? "", to: item.to, icon: shabbatPlanningIcons[String(item.to)] ?? BookOpen }))} />}
-      {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
-      {id === "taxis" && <HomeContactForm context="taxis" showTripadvisorBesidePortraitMobile />}
-      {id !== "taxis" && <HomeContactForm key={id} showTripadvisorBesidePortraitMobile guide={id === "esim" ? { ...guideContactCopy(guide.title, "connectivity"), eyebrow:"Contact me", heading:"Need a private airport transfer or driver in Israel?", introduction:"I arrange private airport pickups and day trips with a driver. Tell me your pickup point, travel date, destinations and passengers, and I’ll reply personally.", placeholder:"Pickup point, destination, date, passengers and luggage…" } : id === "uber" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact me", heading: "Need a Private Transfer in Israel?", introduction: "Tell me your pickup location, destination, travel date and passengers. I can arrange a private transfer with a driver and will reply personally about your journey.", placeholder: "Pickup, destination, date, passengers and luggage…" } : id === "airportTaxis" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight, destination, passengers and luggage. I'll reply personally about arranging a confirmed pickup.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "taxiFares" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact me", heading: "Need a private transfer for your journey?", introduction: "I arrange private transfers and city-to-city journeys with a driver. Tell me your pickup point, destination, date and passengers, and I'll reply personally about your private ride.", placeholder: "Route, travel date, passengers, luggage or your question…" } : id === "arrival" ? { ...guideContactCopy(guide.title, "airport"), eyebrow: "Contact me", heading: "Need a private airport pickup?", introduction: "Tell me your arrival date, flight number, destination, passenger count and luggage. I can discuss a suitable confirmed airport transfer and meeting arrangement.", placeholder: "Flight date, destination, passengers, luggage or your question…" } : id === "shabbat" ? { ...guideContactCopy(guide.title, "shabbat"), eyebrow: "Contact me" } : id === "bethlehem" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact me", heading: "Need a Private Transfer To or From Jerusalem?", introduction: "Tell me your pickup location, destination, travel date, passengers and luggage. I\u0027ll reply personally about arranging private transport to or from Jerusalem.", placeholder: "Pickup, destination, date, passengers and luggage…" } : id === "jerusalemDeadSea" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact me", heading: "Need a Private Transfer or Driver to the Dead Sea?", introduction: "Tell me your pickup location in Jerusalem, travel date, destinations, passengers and planned return time. I'll reply personally about arranging your private journey.", placeholder: "Jerusalem pickup, date, Dead Sea stops, passengers and return time…" } : id === "telAviv" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact me", heading: "Need a Private Transfer or Driver in Tel Aviv?", introduction: "Tell me your pickup point, destination, travel date and number of passengers. I\u0027ll reply personally about arranging your private journey.", placeholder: "Pickup point, destination, date and passengers…" } : id === "israel" ? { ...guideContactCopy(guide.title, "transport"), eyebrow: "Contact me", heading: "Need a Private Transfer or Driver in Israel?", introduction: "Tell me your travel date, pickup point, destinations and number of passengers. I\u0027ll reply personally about arranging a suitable private journey.", placeholder: "Travel date, pickup, destinations and passengers…" } : guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
-      {id === "uber" && <SourceList ids={uberSourceIds} intro="Official information on ride apps, taxi regulations and airport pickup." compact linksOnly />}
-      {id === "sherut" && <SourceList ids={sourcesFor(guide)} intro="Official information on airport pickup, public transport and local sherut services." compact linksOnly />}
-      {id === "taxis" && <SourceList ids={sourcesFor(guide)} intro="Official taxi service, passenger rights and public transport sources for this guide." />}
-      {id === "airportTaxis" && <SourceList ids={sourcesFor(guide)} intro="Official Gett, Israel Airports Authority and Ministry of Transport information for airport taxi booking, pickup and fares." />}
-      {id === "arrival" && <SourceList ids={sourcesFor(guide)} intro="Official entry, airport, customs, baggage and transport information for planning your arrival." />}
-      {id === "shabbat" && <SourceList ids={sourcesFor(guide)} intro="Official Line 711 seasonal timetables, airport services, regulated taxi fares and public transport references." />}
-      {isTransportOverview && <SourceList ids={sourcesFor(guide)} intro={id === "israel" ? "Official public transport, railway and operator information." : "Official operator information on Tel Aviv transport, ticketing and weekend routes."} compact linksOnly />}
-      {isTaxiFareGuide && <SourceList ids={sourcesFor(guide)} intro="Official taxi tariffs, applicable times and passenger-rights references." />}
-      {id === "jerusalemDeadSea" && <SourceList ids={sourcesFor(guide)} intro="Official bus, beach and national-park information." compact linksOnly />}
-      {id === "bethlehem" && <SourceList ids={sourcesFor(guide)} intro="Official bus, church and entry references." />}
-      {id === "esim" && <SourceList ids={sourcesFor(guide)} intro="Provider plan pages, fair-use policies and dated price references used in this guide." />}
-      <PhotoCreditsDisclosure entries={creditedPhotos}/>
-    </article>
-  </main>;
+        {id === "jerusalemDeadSea" && <JerusalemJourneyOptions id={id} />}
+
+        {
+          <section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24">
+            <Checklist
+              title={id === "bethlehem" ? "Travel checklist" : "Before you go"}
+              items={guide.checklist}
+            />
+          </section>
+        }
+
+        {id !== "jerusalemDeadSea" && id !== "bethlehem" && <JerusalemPartnerOffers id={id} />}
+        {isJerusalemCluster && id !== "jerusalemDeadSea" && id !== "bethlehem" && (
+          <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />
+        )}
+        <FaqList
+          faqs={guide.faqs}
+          {...(isTransportOverview && guide.faqGroups ? { groups: guide.faqGroups } : {})}
+        />
+        {id === "jerusalemDeadSea" && <DeadSeaGuideFollowUps />}
+        {id === "bethlehem" && <BethlehemGuideFollowUps />}
+        {!isTransportOverview &&
+          !isTaxiFareGuide &&
+          id !== "esim" &&
+          id !== "jerusalemDeadSea" &&
+          id !== "bethlehem" &&
+          id !== "airportTaxis" &&
+          id !== "taxis" &&
+          id !== "arrival" &&
+          id !== "shabbat" &&
+          id !== "uber" &&
+          id !== "sherut" && <SourceList ids={sourcesFor(guide)} />}
+        {!isJerusalemCluster && id !== "shabbat" && (
+          <RelatedLinks
+            title="Related practical guides"
+            currentPath={travelGuidePaths[id]}
+            illustrated={
+              id === "israel" ||
+              id === "telAviv" ||
+              id === "esim" ||
+              id === "airportTaxis" ||
+              id === "arrival"
+            }
+            maxPhotoCards={
+              id === "israel" ||
+              id === "telAviv" ||
+              id === "esim" ||
+              id === "airportTaxis" ||
+              id === "arrival"
+                ? 6
+                : 4
+            }
+            items={guide.related.map((guideId) => ({
+              label: travelGuides[guideId].title,
+              to: travelGuidePaths[guideId],
+            }))}
+          />
+        )}
+        {id === "esim" && (
+          <IconTripPlanningLinks
+            title="Plan the next part of your trip"
+            items={guide.services.map((service, index) => ({
+              title: service.label,
+              description: service.note ?? "",
+              to: service.to,
+              icon: [Plane, MapPinned, BedDouble, BookOpen, CarFront, Landmark][index] ?? BookOpen,
+            }))}
+          />
+        )}
+        {!isJerusalemCluster &&
+          id !== "esim" &&
+          id !== "shabbat" &&
+          id !== "jerusalemDeadSea" &&
+          id !== "uber" &&
+          id !== "sherut" &&
+          id !== "israel" &&
+          id !== "telAviv" && (
+            <RelatedLinks title="Plan the next part of your trip" items={guide.services} />
+          )}
+        {id === "shabbat" && (
+          <RelatedLinks
+            title="Related practical guides"
+            currentPath={travelGuidePaths.shabbat}
+            illustrated
+            maxPhotoCards={6}
+            items={[
+              {
+                label: "Ben Gurion Airport to Tel Aviv",
+                to: "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+              },
+              {
+                label: "Ben Gurion Airport to Jerusalem",
+                to: "/travel-blog/ben-gurion-airport-to-jerusalem/",
+              },
+              {
+                label: "Ben Gurion Airport to Haifa",
+                to: "/travel-blog/ben-gurion-airport-to-haifa/",
+              },
+              {
+                label: "Ben Gurion Airport to Ein Bokek",
+                to: "/travel-blog/ben-gurion-airport-to-ein-bokek/",
+              },
+              { label: "Official airport taxi pickup", to: travelGuidePaths.airportTaxis },
+              { label: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival },
+            ]}
+          />
+        )}
+        {id === "telAviv" && (
+          <IconTripPlanningLinks
+            title="Plan the next part of your trip"
+            id="tel-aviv-trip-planning"
+            className="mt-12"
+            items={guide.services.map((item) => ({
+              title: item.label,
+              description: item.note ?? "",
+              to: item.to,
+              icon: telAvivPlanningIcons[String(item.to)] ?? BookOpen,
+            }))}
+          />
+        )}
+        {id === "israel" && (
+          <IconTripPlanningLinks
+            title="Plan the next part of your trip"
+            id="israel-trip-planning"
+            className="mt-12"
+            items={guide.services.map((item) => ({
+              title: item.label,
+              description: item.note ?? "",
+              to: item.to,
+              icon: israelPlanningIcons[String(item.to)] ?? BookOpen,
+            }))}
+          />
+        )}
+        {id === "sherut" && (
+          <IconTripPlanningLinks
+            title="Plan the next part of your trip"
+            id="sherut-trip-planning"
+            className="mt-12"
+            items={guide.services.map((item) => ({
+              title: item.label,
+              description: item.note ?? "",
+              to: item.to,
+              icon: sherutPlanningIcons[String(item.to)] ?? BookOpen,
+            }))}
+          />
+        )}
+        {id === "uber" && (
+          <IconTripPlanningLinks
+            title="Plan the next part of your trip"
+            id="uber-trip-planning"
+            className="mt-12"
+            items={guide.services.map((item) => ({
+              title: item.label,
+              description: item.note ?? "",
+              to: item.to,
+              icon: uberPlanningIcons[String(item.to)] ?? BookOpen,
+            }))}
+          />
+        )}
+        {id === "shabbat" && (
+          <IconTripPlanningLinks
+            title="Plan the next part of your trip"
+            id="shabbat-trip-planning"
+            className="mt-12"
+            items={guide.services.map((item) => ({
+              title: item.label,
+              description: item.note ?? "",
+              to: item.to,
+              icon: shabbatPlanningIcons[String(item.to)] ?? BookOpen,
+            }))}
+          />
+        )}
+        {guide.reading && (
+          <section aria-labelledby="reading-h" className="mt-12">
+            <h2 id="reading-h" className="text-2xl">
+              More on this topic
+            </h2>
+            <ul className="mt-4 space-y-3">
+              {guide.reading.map((reading) => (
+                <li key={reading.href} className="rounded-xl border p-4">
+                  <a
+                    href={reading.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-primary underline"
+                  >
+                    {reading.label}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                  <p className="mt-1 text-sm text-muted-foreground">{reading.note}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+        {id === "taxis" && <HomeContactForm context="taxis" showTripadvisorBesidePortraitMobile />}
+        {id !== "taxis" && (
+          <HomeContactForm
+            key={id}
+            showTripadvisorBesidePortraitMobile
+            guide={
+              id === "esim"
+                ? {
+                    ...guideContactCopy(guide.title, "connectivity"),
+                    eyebrow: "Contact me",
+                    heading: "Need a private airport transfer or driver in Israel?",
+                    introduction:
+                      "I arrange private airport pickups and day trips with a driver. Tell me your pickup point, travel date, destinations and passengers, and I’ll reply personally.",
+                    placeholder: "Pickup point, destination, date, passengers and luggage…",
+                  }
+                : id === "uber"
+                  ? {
+                      ...guideContactCopy(guide.title, "transport"),
+                      eyebrow: "Contact me",
+                      heading: "Need a Private Transfer in Israel?",
+                      introduction:
+                        "Tell me your pickup location, destination, travel date and passengers. I can arrange a private transfer with a driver and will reply personally about your journey.",
+                      placeholder: "Pickup, destination, date, passengers and luggage…",
+                    }
+                  : id === "airportTaxis"
+                    ? {
+                        ...guideContactCopy(guide.title, "airport"),
+                        eyebrow: "Contact me",
+                        heading: "Need a private airport pickup?",
+                        introduction:
+                          "Tell me your arrival date, flight, destination, passengers and luggage. I'll reply personally about arranging a confirmed pickup.",
+                        placeholder:
+                          "Flight date, destination, passengers, luggage or your question…",
+                      }
+                    : id === "taxiFares"
+                      ? {
+                          ...guideContactCopy(guide.title, "transport"),
+                          eyebrow: "Contact me",
+                          heading: "Need a private transfer for your journey?",
+                          introduction:
+                            "I arrange private transfers and city-to-city journeys with a driver. Tell me your pickup point, destination, date and passengers, and I'll reply personally about your private ride.",
+                          placeholder: "Route, travel date, passengers, luggage or your question…",
+                        }
+                      : id === "arrival"
+                        ? {
+                            ...guideContactCopy(guide.title, "airport"),
+                            eyebrow: "Contact me",
+                            heading: "Need a private airport pickup?",
+                            introduction:
+                              "Tell me your arrival date, flight number, destination, passenger count and luggage. I can discuss a suitable confirmed airport transfer and meeting arrangement.",
+                            placeholder:
+                              "Flight date, destination, passengers, luggage or your question…",
+                          }
+                        : id === "shabbat"
+                          ? { ...guideContactCopy(guide.title, "shabbat"), eyebrow: "Contact me" }
+                          : id === "bethlehem"
+                            ? {
+                                ...guideContactCopy(guide.title, "transport"),
+                                eyebrow: "Contact me",
+                                heading: "Need a Private Transfer To or From Jerusalem?",
+                                introduction:
+                                  "Tell me your pickup location, destination, travel date, passengers and luggage. I\u0027ll reply personally about arranging private transport to or from Jerusalem.",
+                                placeholder: "Pickup, destination, date, passengers and luggage…",
+                              }
+                            : id === "jerusalemDeadSea"
+                              ? {
+                                  ...guideContactCopy(guide.title, "transport"),
+                                  eyebrow: "Contact me",
+                                  heading: "Need a Private Transfer or Driver to the Dead Sea?",
+                                  introduction:
+                                    "Tell me your pickup location in Jerusalem, travel date, destinations, passengers and planned return time. I'll reply personally about arranging your private journey.",
+                                  placeholder:
+                                    "Jerusalem pickup, date, Dead Sea stops, passengers and return time…",
+                                }
+                              : id === "telAviv"
+                                ? {
+                                    ...guideContactCopy(guide.title, "transport"),
+                                    eyebrow: "Contact me",
+                                    heading: "Need a Private Transfer or Driver in Tel Aviv?",
+                                    introduction:
+                                      "Tell me your pickup point, destination, travel date and number of passengers. I\u0027ll reply personally about arranging your private journey.",
+                                    placeholder: "Pickup point, destination, date and passengers…",
+                                  }
+                                : id === "israel"
+                                  ? {
+                                      ...guideContactCopy(guide.title, "transport"),
+                                      eyebrow: "Contact me",
+                                      heading: "Need a Private Transfer or Driver in Israel?",
+                                      introduction:
+                                        "Tell me your travel date, pickup point, destinations and number of passengers. I\u0027ll reply personally about arranging a suitable private journey.",
+                                      placeholder:
+                                        "Travel date, pickup, destinations and passengers…",
+                                    }
+                                  : guideContactCopy(
+                                      guide.title,
+                                      guideContactKind(guide),
+                                      guide.title.split(":")[0],
+                                    )
+            }
+          />
+        )}
+        {id === "uber" && (
+          <SourceList
+            ids={uberSourceIds}
+            intro="Official information on ride apps, taxi regulations and airport pickup."
+            compact
+            linksOnly
+          />
+        )}
+        {id === "sherut" && (
+          <SourceList
+            ids={sourcesFor(guide)}
+            intro="Official information on airport pickup, public transport and local sherut services."
+            compact
+            linksOnly
+          />
+        )}
+        {id === "taxis" && (
+          <SourceList
+            ids={sourcesFor(guide)}
+            intro="Official taxi service, passenger rights and public transport sources for this guide."
+          />
+        )}
+        {id === "airportTaxis" && (
+          <SourceList
+            ids={sourcesFor(guide)}
+            intro="Official Gett, Israel Airports Authority and Ministry of Transport information for airport taxi booking, pickup and fares."
+          />
+        )}
+        {id === "arrival" && (
+          <SourceList
+            ids={sourcesFor(guide)}
+            intro="Official entry, airport, customs, baggage and transport information for planning your arrival."
+          />
+        )}
+        {id === "shabbat" && (
+          <SourceList
+            ids={sourcesFor(guide)}
+            intro="Official Line 711 seasonal timetables, airport services, regulated taxi fares and public transport references."
+          />
+        )}
+        {isTransportOverview && (
+          <SourceList
+            ids={sourcesFor(guide)}
+            intro={
+              id === "israel"
+                ? "Official public transport, railway and operator information."
+                : "Official operator information on Tel Aviv transport, ticketing and weekend routes."
+            }
+            compact
+            linksOnly
+          />
+        )}
+        {isTaxiFareGuide && (
+          <SourceList
+            ids={sourcesFor(guide)}
+            intro="Official taxi tariffs, applicable times and passenger-rights references."
+          />
+        )}
+        {id === "jerusalemDeadSea" && (
+          <SourceList
+            ids={sourcesFor(guide)}
+            intro="Official bus, beach and national-park information."
+            compact
+            linksOnly
+          />
+        )}
+        {id === "bethlehem" && (
+          <SourceList ids={sourcesFor(guide)} intro="Official bus, church and entry references." />
+        )}
+        {id === "esim" && (
+          <SourceList
+            ids={sourcesFor(guide)}
+            intro="Provider plan pages, fair-use policies and dated price references used in this guide."
+          />
+        )}
+        <PhotoCreditsDisclosure entries={creditedPhotos} />
+      </article>
+    </main>
+  );
 }

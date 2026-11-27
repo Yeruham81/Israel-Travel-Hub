@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
  * Shared inquiry sections all have a stable id. Require an actual form inside
  * the section so unrelated content and pages without inquiries get no CTA.
  */
-const CONTACT_TARGETS = "#main #contact, #main #contact-moshe, #main #request-quote, #main [data-contact-form]";
+const CONTACT_TARGETS =
+  "#main #contact, #main #contact-moshe, #main #request-quote, #main [data-contact-form]";
 
 function findContactTarget(): HTMLElement | null {
   return (
     Array.from(document.querySelectorAll<HTMLElement>(CONTACT_TARGETS)).find(
-      (element) => element.querySelector("form") && !element.closest("[hidden], [aria-hidden='true']"),
+      (element) =>
+        element.querySelector("form") && !element.closest("[hidden], [aria-hidden='true']"),
     ) ?? null
   );
 }
@@ -130,7 +132,8 @@ export function FloatingContactButton() {
       className="fixed z-30 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#1766c2] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-black/20 hover:bg-[#1053a2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1766c2] motion-safe:transition-colors"
       style={{
         right: "calc(1rem + env(safe-area-inset-right, 0px))",
-        bottom: "calc(1rem + env(safe-area-inset-bottom, 0px) + var(--floating-contact-bottom-offset, 0px))",
+        bottom:
+          "calc(1rem + env(safe-area-inset-bottom, 0px) + var(--floating-contact-bottom-offset, 0px))",
       }}
     >
       <MessageCircle aria-hidden="true" className="h-5 w-5 shrink-0" />

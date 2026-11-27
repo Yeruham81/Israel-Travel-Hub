@@ -2,7 +2,6 @@ import { carRentalHero } from "@/data/carRentalGuide";
 import telAvivTourHero from "@/assets/home/hero-tel-aviv-large.webp";
 import deadSeaHero from "@/assets/dead-sea/landscape.webp";
 
-
 import { guideDirectory } from "@/data/generated/guide-directory";
 import { attractionGuidePhotos } from "@/data/generated/guide-directory";
 import { attractionIds, attractionPath } from "@/data/attractionGuideTypes";
@@ -31,7 +30,11 @@ export function guideHeroPhotoForPath(to: string): GuideHeroPhoto | undefined {
   if (path === "/car-rental/") return carRentalHero;
   if (attractionHeroRegistry[path]) return attractionHeroRegistry[path];
   if (path === "/attractions/old-city-jerusalem/") return oldCityJerusalemSite.hero;
-  if (path === "/tours/tel-aviv-jaffa/") return { src: telAvivTourHero, alt: "Panoramic view of Tel Aviv's Mediterranean coast and skyline" };
+  if (path === "/tours/tel-aviv-jaffa/")
+    return {
+      src: telAvivTourHero,
+      alt: "Panoramic view of Tel Aviv's Mediterranean coast and skyline",
+    };
   if (path === "/attractions/jaffa/") return jaffaSite.hero;
   if (path === "/attractions/yardenit/") return yardenitSite.hero;
   if (path === "/attractions/qasr-el-yahud/") return qasrElYahudSite.hero;
@@ -39,14 +42,21 @@ export function guideHeroPhotoForPath(to: string): GuideHeroPhoto | undefined {
   if (path === "/attractions/masada/") return masadaSite.hero;
   if (path === "/attractions/caesarea/") return caesareaSite.hero;
   if (path === "/attractions/eilat/") return eilatSite.hero;
-  if (path === "/attractions/dead-sea/") return { src: deadSeaHero, alt: "Dead Sea shoreline and desert scenery" };
-  if (path === "/attractions/sea-of-galilee/") return { src: "/images/attractions/sea-of-galilee.webp", alt: "Sea of Galilee and surrounding hills" };
-  if (path === "/travel-blog/museums-in-jerusalem/") return {
-    src: jerusalemMuseumsHero, alt: "Rockefeller Archaeological Museum courtyard in Jerusalem",
-  };
+  if (path === "/attractions/dead-sea/")
+    return { src: deadSeaHero, alt: "Dead Sea shoreline and desert scenery" };
+  if (path === "/attractions/sea-of-galilee/")
+    return {
+      src: "/images/attractions/sea-of-galilee.webp",
+      alt: "Sea of Galilee and surrounding hills",
+    };
+  if (path === "/travel-blog/museums-in-jerusalem/")
+    return {
+      src: jerusalemMuseumsHero,
+      alt: "Rockefeller Archaeological Museum courtyard in Jerusalem",
+    };
   if (path === "/travel-blog/attractions-in-tel-aviv/") return telAvivAttractionsHero;
-  const guide = guideDirectory.find(entry => normalized(String(entry.to)) === path);
+  const guide = guideDirectory.find((entry) => normalized(String(entry.to)) === path);
   if (guide?.photo) return guide.photo;
-  const attractionId = attractionIds.find(id => normalized(attractionPath(id)) === path);
-  return attractionId ? attractionGuidePhotos[attractionId] ?? undefined : undefined;
+  const attractionId = attractionIds.find((id) => normalized(attractionPath(id)) === path);
+  return attractionId ? (attractionGuidePhotos[attractionId] ?? undefined) : undefined;
 }

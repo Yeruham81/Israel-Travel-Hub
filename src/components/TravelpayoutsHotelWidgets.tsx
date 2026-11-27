@@ -10,24 +10,39 @@ export const hotelSearchWidgets = [
   {
     id: "agoda",
     title: "Search hotels with Agoda",
-    scriptUrl: "https://tpwgt.com/content?trs=406243&shmarker=622032.accommodation_hub_widget&locale=en&default_destination=Jerusalem%2C%20Israel&powered_by=false&primary_override=%235392F9&color_button=%235392F9&color_icons=%235392F9&dark=%23262626&color_border=%235392F9&color_focused=%2332a8dd&border_radius=5&no_labels=&plain=false&promo_id=8303&campaign_id=104",
+    scriptUrl:
+      "https://tpwgt.com/content?trs=406243&shmarker=622032.accommodation_hub_widget&locale=en&default_destination=Jerusalem%2C%20Israel&powered_by=false&primary_override=%235392F9&color_button=%235392F9&color_icons=%235392F9&dark=%23262626&color_border=%235392F9&color_focused=%2332a8dd&border_radius=5&no_labels=&plain=false&promo_id=8303&campaign_id=104",
   },
   {
     id: "booking",
     title: "Search hotels with Booking.com",
-    scriptUrl: "https://tpwgt.com/content?trs=406243&shmarker=622032.accommodation_hub_widget&locale=en-us&powered_by=false&campaign_id=84&promo_id=9240",
+    scriptUrl:
+      "https://tpwgt.com/content?trs=406243&shmarker=622032.accommodation_hub_widget&locale=en-us&powered_by=false&campaign_id=84&promo_id=9240",
   },
 ] as const;
 
-function HotelSearchWidget({ widget, visible }: {
+function HotelSearchWidget({
+  widget,
+  visible,
+}: {
   widget: (typeof hotelSearchWidgets)[number];
   visible: boolean;
 }) {
-  return <div className="min-w-0 rounded-2xl border bg-card p-4 sm:p-6" data-testid={`${widget.id}-hotel-search-widget`}>
-    <div className="min-h-52 min-w-0 max-w-full overflow-x-auto" role="group" aria-label={widget.title} data-testid={`${widget.id}-hotel-widget-mount`}>
-      {visible && <BookingWidgetFrame scriptUrl={widget.scriptUrl} title={widget.title} />}
+  return (
+    <div
+      className="min-w-0 rounded-2xl border bg-card p-4 sm:p-6"
+      data-testid={`${widget.id}-hotel-search-widget`}
+    >
+      <div
+        className="min-h-52 min-w-0 max-w-full overflow-x-auto"
+        role="group"
+        aria-label={widget.title}
+        data-testid={`${widget.id}-hotel-widget-mount`}
+      >
+        {visible && <BookingWidgetFrame scriptUrl={widget.scriptUrl} title={widget.title} />}
+      </div>
     </div>
-  </div>;
+  );
 }
 
 /**
@@ -35,7 +50,9 @@ function HotelSearchWidget({ widget, visible }: {
  * the hotel-style cards; Agoda remains after the FAQ. The external scripts are
  * still inserted only when their respective section approaches the viewport.
  */
-export function TravelpayoutsHotelWidget({ provider }: {
+export function TravelpayoutsHotelWidget({
+  provider,
+}: {
   provider: (typeof hotelSearchWidgets)[number]["id"];
 }) {
   const sectionRef = useRef<HTMLElement>(null);

@@ -1,3 +1,4 @@
+import { sourceFragment } from "@/test-utils/source-fragment";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { guideDirectory, filterGuides, guideTopics } from "@/data/travelGuides";
@@ -49,11 +50,11 @@ describe("travel-blog index responsive WebP delivery", () => {
     const source = readFileSync("src/routes/travel-blog.index.tsx","utf8");
     const component = readFileSync("src/components/GuideCard.tsx","utf8");
     expect(source).toMatch(/uniqueGuideCardPhotos\(\s*guides\.map\(\s*\(?guide\)?\s*=>\s*\(\{\s*guide\s*,?\s*\}\)\s*,?\s*\)\s*,?\s*\)/);
-    expect(source).toContain('responsiveSrcSet={travelBlogHubImageSets[cardPhoto?.src ?? ""]}');
-    expect(source).toContain('srcSet={travelBlogExploreImageSets[item.photo.src]}');
-    expect(source).toContain('href={topicHref(item.id)}');
-    expect(component).toContain("src={displayedPhoto.src} srcSet={responsiveSrcSet ?? stage5PhotoSrcSet(displayedPhoto.src)}");
-    expect(component).toContain("aspect-[3/2] w-full object-cover");
+    expect(source).toMatch(sourceFragment('responsiveSrcSet={travelBlogHubImageSets[cardPhoto?.src ?? ""]}'));
+    expect(source).toMatch(sourceFragment('srcSet={travelBlogExploreImageSets[item.photo.src]}'));
+    expect(source).toMatch(sourceFragment('href={topicHref(item.id)}'));
+    expect(component).toMatch(sourceFragment("src={displayedPhoto.src} srcSet={responsiveSrcSet ?? stage5PhotoSrcSet(displayedPhoto.src)}"));
+    expect(component).toMatch(sourceFragment("aspect-[3/2] w-full object-cover"));
     expect(source).toContain("GuidePhotoCredit");
     expect(source).toContain("guideDirectory.flatMap");
     expect(Object.keys(travelBlogExploreImageSets).length).toBe(2);

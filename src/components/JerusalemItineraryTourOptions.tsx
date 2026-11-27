@@ -20,16 +20,46 @@ import qasrAlYahud from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp"
  * three-, five-, seven- and ten-day itineraries without duplicating catalog data.
  */
 export const threeDayJerusalemTourSelections = [
-  { id: "jslm-deadsea-beach-viator", area: "Dead Sea", image: deadSeaMud, alt: "Mud bathing on the Dead Sea shore" },
-  { id: "jslm-deadsea-masada-viator", area: "Masada & Dead Sea", image: masadaPalace, alt: "Ancient ruins at Masada" },
-  { id: "jslm-bethlehem-halfday-viator", area: "Bethlehem", image: bethlehemNativity, alt: "Inside the Church of the Nativity in Bethlehem" },
-  { id: "jslm-bethlehem-halfday-gyg", area: "Bethlehem", image: bethlehemGrottos, alt: "Catholic grottos beneath the Church of the Nativity" },
-  { id: "jslm-bethlehem-jericho-viator", area: "Jericho & Bethlehem", image: jordanRiver, alt: "Jordan River baptism area near Jericho" },
-  { id: "jslm-deadsea-jericho-jordan-viator", area: "Jericho & Dead Sea", image: qasrAlYahud, alt: "Qasr al-Yahud baptism site on the Jordan River" },
+  {
+    id: "jslm-deadsea-beach-viator",
+    area: "Dead Sea",
+    image: deadSeaMud,
+    alt: "Mud bathing on the Dead Sea shore",
+  },
+  {
+    id: "jslm-deadsea-masada-viator",
+    area: "Masada & Dead Sea",
+    image: masadaPalace,
+    alt: "Ancient ruins at Masada",
+  },
+  {
+    id: "jslm-bethlehem-halfday-viator",
+    area: "Bethlehem",
+    image: bethlehemNativity,
+    alt: "Inside the Church of the Nativity in Bethlehem",
+  },
+  {
+    id: "jslm-bethlehem-halfday-gyg",
+    area: "Bethlehem",
+    image: bethlehemGrottos,
+    alt: "Catholic grottos beneath the Church of the Nativity",
+  },
+  {
+    id: "jslm-bethlehem-jericho-viator",
+    area: "Jericho & Bethlehem",
+    image: jordanRiver,
+    alt: "Jordan River baptism area near Jericho",
+  },
+  {
+    id: "jslm-deadsea-jericho-jordan-viator",
+    area: "Jericho & Dead Sea",
+    image: qasrAlYahud,
+    alt: "Qasr al-Yahud baptism site on the Jordan River",
+  },
 ] as const;
 
 const tourCatalog = new Map<string, DeadSeaTourCard | BethlehemTourCard>(
-  [...deadSeaTourCards, ...bethlehemTourCards].map(tour => [tour.id, tour] as const),
+  [...deadSeaTourCards, ...bethlehemTourCards].map((tour) => [tour.id, tour] as const),
 );
 
 function trackedItineraryTourUrl(url: string, tourId: string, days: 3 | 5 | 7 | 10): string {
@@ -44,40 +74,62 @@ function trackedItineraryTourUrl(url: string, tourId: string, days: 3 | 5 | 7 | 
 
 /** Shares the compact Bethlehem/Dead Sea photo, duration, price and review-card visual language. */
 export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 | 7 | 10 }) {
-  return <section
-    className="min-w-0 rounded-lg border bg-background p-4"
-    aria-label="Alternative day tours from Jerusalem"
-    data-testid="itinerary-jerusalem-tours"
-  >
-    <h4 className="font-semibold text-primary">Alternative day tours from Jerusalem</h4>
-    <div className="mt-3 min-w-0">
-      <p className="text-sm leading-relaxed text-muted-foreground">
-        {days === 7
-          ? "Choose a Bethlehem or Jericho tour for Day 2 or a guided Masada and Dead Sea trip for Day 3. Each replaces that day's planned sightseeing."
-          : days === 10
-          ? "Set aside Day 2 for Bethlehem or Jericho if you choose one of these tours. A guided Masada and Dead Sea trip can cover your Day 3 desert excursion."
-          : "Use a guided Masada and Dead Sea tour for your desert day, or set aside one of your Jerusalem days for Bethlehem or Jericho. Compare routes, meeting points and time at the sites."}
-      </p>
-      <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {threeDayJerusalemTourSelections.map(item => {
-          const tour = tourCatalog.get(item.id);
-          const approvedLink = tour ? affiliateConfig[tour.id]?.trackingUrl : undefined;
-          if (!tour || !approvedLink) return null;
-          const groupRate = "priceUnit" in tour && tour.priceUnit === "group-up-to-four";
-          return <ExternalProviderTourCard
-            key={tour.id} testId="itinerary-jerusalem-tour-card"
-            image={item.image} alt={item.alt} platform={tour.provider}
-            title={tour.title} description={tour.subtitle} duration={tour.duration}
-            rating={{ value: tour.rating, count: tour.reviewCount }}
-            price={{ amount: tour.fromUsd, currency: "USD", basis: groupRate ? "per_group" : "per_person", maxPartySize: groupRate ? 4 : undefined }}
-            href={trackedItineraryTourUrl(approvedLink, tour.id, days)}
-            onClick={() => recordOutboundClick({ pageId: `israel-itinerary-${days}-days`, productId: tour.id, offerId: tour.id })}
-          />;
-        })}
+  return (
+    <section
+      className="min-w-0 rounded-lg border bg-background p-4"
+      aria-label="Alternative day tours from Jerusalem"
+      data-testid="itinerary-jerusalem-tours"
+    >
+      <h4 className="font-semibold text-primary">Alternative day tours from Jerusalem</h4>
+      <div className="mt-3 min-w-0">
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          {days === 7
+            ? "Choose a Bethlehem or Jericho tour for Day 2 or a guided Masada and Dead Sea trip for Day 3. Each replaces that day's planned sightseeing."
+            : days === 10
+              ? "Set aside Day 2 for Bethlehem or Jericho if you choose one of these tours. A guided Masada and Dead Sea trip can cover your Day 3 desert excursion."
+              : "Use a guided Masada and Dead Sea tour for your desert day, or set aside one of your Jerusalem days for Bethlehem or Jericho. Compare routes, meeting points and time at the sites."}
+        </p>
+        <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {threeDayJerusalemTourSelections.map((item) => {
+            const tour = tourCatalog.get(item.id);
+            const approvedLink = tour ? affiliateConfig[tour.id]?.trackingUrl : undefined;
+            if (!tour || !approvedLink) return null;
+            const groupRate = "priceUnit" in tour && tour.priceUnit === "group-up-to-four";
+            return (
+              <ExternalProviderTourCard
+                key={tour.id}
+                testId="itinerary-jerusalem-tour-card"
+                image={item.image}
+                alt={item.alt}
+                platform={tour.provider}
+                title={tour.title}
+                description={tour.subtitle}
+                duration={tour.duration}
+                rating={{ value: tour.rating, count: tour.reviewCount }}
+                price={{
+                  amount: tour.fromUsd,
+                  currency: "USD",
+                  basis: groupRate ? "per_group" : "per_person",
+                  maxPartySize: groupRate ? 4 : undefined,
+                }}
+                href={trackedItineraryTourUrl(approvedLink, tour.id, days)}
+                onClick={() =>
+                  recordOutboundClick({
+                    pageId: `israel-itinerary-${days}-days`,
+                    productId: tour.id,
+                    offerId: tour.id,
+                  })
+                }
+              />
+            );
+          })}
+        </div>
+        <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+          Book these tours with the individual providers. Check dates, meeting and return
+          arrangements, guiding, walking requirements, admissions, final prices and cancellation
+          terms.
+        </p>
       </div>
-      <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-        Book these tours with the individual providers. Check dates, meeting and return arrangements, guiding, walking requirements, admissions, final prices and cancellation terms.
-      </p>
-    </div>
-  </section>;
+    </section>
+  );
 }

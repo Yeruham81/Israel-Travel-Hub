@@ -1,3 +1,4 @@
+import { sourceFragment } from "@/test-utils/source-fragment";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -61,35 +62,35 @@ describe("Full-width editorial detail cards", () => {
     "$component uses a single desktop row with image in the upper right",
     ({ component, grid }) => {
       const page = readComponent(component);
-      expect(page).toContain(grid);
-      expect(page).toContain('data-detailed-card="horizontal"');
-      expect(page).toContain("lg:grid-cols-[minmax(0,1fr)_270px]");
-      expect(page).toContain("lg:col-start-2 lg:row-start-1");
-      expect(page).toContain("lg:col-start-1 lg:row-start-1");
+      expect(page).toMatch(sourceFragment(grid));
+      expect(page).toMatch(sourceFragment('data-detailed-card="horizontal"'));
+      expect(page).toMatch(sourceFragment("lg:grid-cols-[minmax(0,1fr)_270px]"));
+      expect(page).toMatch(sourceFragment("lg:col-start-2 lg:row-start-1"));
+      expect(page).toMatch(sourceFragment("lg:col-start-1 lg:row-start-1"));
     },
   );
 
   it("shows all Tel Aviv beaches as full-width rows with a right-hand photograph", () => {
     const page = readComponent("TelAvivBeachesGuide");
-    expect(page).toContain('data-detailed-card="horizontal"');
-    expect(page).toContain('className="mt-4 grid gap-3" data-testid="beach-detailed-cards"');
-    expect(page).toContain("lg:grid-cols-[minmax(0,1fr)_250px]");
-    expect(page).toContain("lg:col-start-2 lg:row-start-1");
-    expect(page).toContain("lg:col-start-1 lg:row-start-1");
-    expect(page).toContain("beaches.map(beach => <BeachCard");
+    expect(page).toMatch(sourceFragment('data-detailed-card="horizontal"'));
+    expect(page).toMatch(sourceFragment('className="mt-4 grid gap-3" data-testid="beach-detailed-cards"'));
+    expect(page).toMatch(sourceFragment("lg:grid-cols-[minmax(0,1fr)_250px]"));
+    expect(page).toMatch(sourceFragment("lg:col-start-2 lg:row-start-1"));
+    expect(page).toMatch(sourceFragment("lg:col-start-1 lg:row-start-1"));
+    expect(page).toMatch(sourceFragment("beaches.map(beach => <BeachCard"));
     expect(page).not.toContain("beach-compact-cards");
     expect(telAvivBeaches).toHaveLength(13);
   });
 
   it("keeps short-form provider and related-guide tiles out of the wide-card transformation", () => {
     const food = readComponent("IsraelFoodGuide");
-    expect(food).toContain('data-testid="israel-food-tour-cards"');
-    expect(food).toContain('className="grid gap-4 md:grid-cols-3"');
+    expect(food).toMatch(sourceFragment('data-testid="israel-food-tour-cards"'));
+    expect(food).toMatch(sourceFragment('className="grid gap-4 md:grid-cols-3"'));
     const telAviv = readComponent("TelAvivAttractionsGuide");
-    expect(telAviv).toContain(
-      'sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-affiliate-tours"',
+    expect(telAviv).toMatch(
+      sourceFragment('sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-affiliate-tours"'),
     );
     const senior = readComponent("SeniorToursGuide");
-    expect(senior).toContain('className="grid grid-cols-2 gap-4 lg:grid-cols-3"');
+    expect(senior).toMatch(sourceFragment('className="grid grid-cols-2 gap-4 lg:grid-cols-3"'));
   });
 });

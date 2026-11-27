@@ -1,3 +1,4 @@
+import { sourceFragment } from "@/test-utils/source-fragment";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
@@ -6,13 +7,13 @@ const mapPage = readFileSync("public/maps/mount-zion.html", "utf8");
 
 describe("Mount Zion map with all seven pins", () => {
   it("loads one interactive map for all sites and keeps the overview visible", () => {
-    expect(component).toContain('const mapUrl = "/maps/mount-zion.html?points="');
-    expect(component).toContain("JSON.stringify(points)");
-    expect(component).toContain('onClick={() => send("all")}');
-    expect(component).toContain('type: "mount-zion-map-focus"');
-    expect(component).toContain('type !== "mount-zion-map-selected"');
+    expect(component).toMatch(sourceFragment('const mapUrl = "/maps/mount-zion.html?points="'));
+    expect(component).toMatch(sourceFragment("JSON.stringify(points)"));
+    expect(component).toMatch(sourceFragment('onClick={() => send("all")}'));
+    expect(component).toMatch(sourceFragment('type: "mount-zion-map-focus"'));
+    expect(component).toMatch(sourceFragment('type !== "mount-zion-map-selected"'));
     expect(component).not.toContain("googleEmbed");
-    expect(component).not.toContain("key={selected");
+    expect(component).not.toMatch(sourceFragment("key={selected"));
     expect(mapPage).toContain("new maplibregl.Map");
     expect(mapPage).toContain("new maplibregl.Marker");
     expect(mapPage).toContain("points.forEach");
@@ -23,13 +24,13 @@ describe("Mount Zion map with all seven pins", () => {
 
   it("shows seven numbered places, with distinct central and lower areas", () => {
     const ids = ["zion-gate", "dormition", "cenacle", "david-tomb", "holocaust", "gallicantu", "schindler"];
-    const listed = [...component.matchAll(/\{ id: "([^"]+)", name:/g)].map(match => match[1]);
+    const listed = [...component.matchAll(/\{\s*id:\s*"([^"]+)",\s*name:/g)].map(match => match[1]);
     expect(listed).toEqual(ids);
     for (const id of ids) expect(mapPage).toContain(id);
     expect(mapPage).toContain("points.length!==7");
-    expect(component).toContain('area: "gate"');
-    expect(component).toContain('area: "central"');
-    expect(component).toContain('area: "lower"');
+    expect(component).toMatch(sourceFragment('area: "gate"'));
+    expect(component).toMatch(sourceFragment('area: "central"'));
+    expect(component).toMatch(sourceFragment('area: "lower"'));
     expect(mapPage).toContain('point.id==="david-tomb"');
     expect(mapPage).toContain('point.id==="cenacle"');
   });

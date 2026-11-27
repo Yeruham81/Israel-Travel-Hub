@@ -1,3 +1,4 @@
+import { sourceFragment, sourceIndex } from "@/test-utils/source-fragment";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -89,30 +90,30 @@ describe("Dead Sea attractions editorial guide", () => {
       expect(tracking).toMatch(/^https:\/\/(?:viator|getyourguide)\.tpm\.li\//);
     }
     const page=readFileSync(resolve(process.cwd(),"src/components/DeadSeaAttractionsGuide.tsx"),"utf8");
-    expect(page).toContain('data-testid="deadsea-three-tours"');
-    expect(page).toContain('data-testid="deadsea-curated-tour"');
-    expect(page).toContain('url.searchParams.set("sub_id"');
-    expect(page).toContain('pageId:"dead_sea_attractions"');
-    expect(page).toContain('to="/tours/masada-dead-sea/"');
-    expect(page).toContain("relFor(true)");
+    expect(page).toMatch(sourceFragment('data-testid="deadsea-three-tours"'));
+    expect(page).toMatch(sourceFragment('data-testid="deadsea-curated-tour"'));
+    expect(page).toMatch(sourceFragment('url.searchParams.set("sub_id"'));
+    expect(page).toMatch(sourceFragment('pageId:"dead_sea_attractions"'));
+    expect(page).toMatch(sourceFragment('to="/tours/masada-dead-sea/"'));
+    expect(page).toMatch(sourceFragment("relFor(true)"));
   });
 
   it("keeps the content-led order, compact mobile choice grid, comparison, related guides, sources and transport links", () => {
     const page=readFileSync(resolve(process.cwd(),"src/components/DeadSeaAttractionsGuide.tsx"),"utf8");
-    expect(page).toContain("grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-5");
-    expect(page).not.toContain("Swipe the table sideways to compare all ten Dead Sea experiences.");
+    expect(page).toMatch(sourceFragment("grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-5"));
+    expect(page).not.toMatch(sourceFragment("Swipe the table sideways to compare all ten Dead Sea experiences."));
     expect(page).toContain("min-w-[800px]");
-    expect(page).toContain("Entry & booking");
-    expect(page.indexOf('<section id="experiences"')).toBeLessThan(page.indexOf('<section id="area-map"'));
+    expect(page).toMatch(sourceFragment("Entry & booking"));
+    expect(sourceIndex(page, '<section id="experiences"')).toBeLessThan(sourceIndex(page, '<section id="area-map"'));
     expect(page).toContain("related.map");
     expect(page).toContain("planning.map");
     expect(page).toContain("HomeContactForm");
-    expect(page.indexOf("<HomeContactForm")).toBeLessThan(page.indexOf("<SourcesDisclosure>"));
-    expect(page).toContain("Where to Stay in Israel");
+    expect(sourceIndex(page, "<HomeContactForm")).toBeLessThan(sourceIndex(page, "<SourcesDisclosure>"));
+    expect(page).toMatch(sourceFragment("Where to Stay in Israel"));
     expect(page).toContain("ben-gurion-airport-to-ein-bokek");
-    expect(page).toContain("Photograph credits");
+    expect(page).toMatch(sourceFragment("Photograph credits"));
     expect(page).not.toContain("israel-taxi.com");
     const route=readFileSync(resolve(process.cwd(),"src/routes/travel-blog.dead-sea-attractions.tsx"),"utf8");
-    expect(route).toContain("component: DeadSeaAttractionsGuide");
+    expect(route).toMatch(sourceFragment("component: DeadSeaAttractionsGuide"));
   });
 });

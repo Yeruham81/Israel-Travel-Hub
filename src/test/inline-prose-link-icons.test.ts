@@ -1,3 +1,4 @@
+import { sourceFragment } from "@/test-utils/source-fragment";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
@@ -16,9 +17,9 @@ describe("editorial prose links", () => {
   });
 
   it("keeps plain link text and an accessible new-tab description in the senior guide", () => {
-    expect(seniors).toContain('rel="noopener noreferrer"');
-    expect(seniors).toContain('(opens in a new tab)');
-    expect(seniors).not.toContain('<ExternalLink');
+    expect(seniors).toMatch(sourceFragment('rel="noopener noreferrer"'));
+    expect(seniors).toMatch(sourceFragment('(opens in a new tab)'));
+    expect(seniors).not.toMatch(sourceFragment('<ExternalLink'));
   });
 
   it("removes top-of-article detours and repeats, retaining the floating-contact destination", () => {
@@ -28,9 +29,9 @@ describe("editorial prose links", () => {
       "The private driver provides transportation and agreed stops",
       "Ask Moshe about your day",
       "I cannot assume or guarantee an accessible vehicle",
-    ]) expect(seniors).not.toContain(text);
-    expect(seniors).toContain('href="#contact"');
-    expect(seniors).toContain('heading:"Need a private driver for a comfortable day trip?"');
-    expect(seniors).toContain("I arrange comfortable private day trips with a driver in Israel");
+    ]) expect(seniors).not.toMatch(sourceFragment(text));
+    expect(seniors).toMatch(sourceFragment('href="#contact"'));
+    expect(seniors).toMatch(sourceFragment('heading:"Need a private driver for a comfortable day trip?"'));
+    expect(seniors).toMatch(sourceFragment("I arrange comfortable private day trips with a driver in Israel"));
   });
 });

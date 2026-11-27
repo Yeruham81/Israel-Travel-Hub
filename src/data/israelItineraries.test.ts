@@ -1,3 +1,4 @@
+import { sourceFragment, sourceIndex } from "@/test-utils/source-fragment";
 import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
 import { createRouter, rootRouteId } from "@tanstack/react-router";
@@ -25,7 +26,7 @@ describe("migrated Israel itineraries", () => {
       const guide = itineraries[id];
       expect(guide.days).toBe(Number(id));
       expect(guide.path).toBe(`/travel-blog/israel-itinerary-${id}-days/`);
-      expect(readRouteSource(`src/routes/travel-blog.israel-itinerary-${id}-days.tsx`)).toContain(`itineraryMeta("${id}")`);
+      expect(readRouteSource(`src/routes/travel-blog.israel-itinerary-${id}-days.tsx`)).toMatch(sourceFragment(`itineraryMeta("${id}")`));
       expect(guide.daysPlan).toHaveLength(guide.days);
       expect(new Set(guide.daysPlan.map(d => d.name)).size).toBe(guide.days);
       expect(guide.description.length).toBeGreaterThan(95);
@@ -112,20 +113,20 @@ describe("migrated Israel itineraries", () => {
       }
     }
     const widgetComponent = file("src/components/GetYourGuideCityWidget.tsx");
-    expect(widgetComponent).not.toContain("<details");
-    expect(widgetComponent).not.toContain("<summary");
+    expect(widgetComponent).not.toMatch(sourceFragment("<details"));
+    expect(widgetComponent).not.toMatch(sourceFragment("<summary"));
     expect(widgetComponent).not.toContain("onToggle");
     expect(widgetComponent).not.toContain("useState");
-    expect(widgetComponent).toContain("<h4");
-    expect(widgetComponent).toContain("More things to do in {config.name}");
-    expect(widgetComponent).toContain("><BookingWidgetFrame scriptUrl={getYourGuideCityWidgetSrc(city, page)}");
-    expect(file("src/components/BookingWidgetFrame.tsx")).toContain('loading="lazy"');
-    expect(widgetComponent).toContain("<BookingWidgetFrame");
-    expect(file("src/components/BookingWidgetFrame.tsx")).toContain('category="marketing"');
-    expect(widgetComponent).not.toContain("GetYourGuide (affiliate)");
-    expect(widgetComponent).not.toContain("I may earn a commission");
+    expect(widgetComponent).toMatch(sourceFragment("<h4"));
+    expect(widgetComponent).toMatch(sourceFragment("More things to do in {config.name}"));
+    expect(widgetComponent).toMatch(sourceFragment("><BookingWidgetFrame scriptUrl={getYourGuideCityWidgetSrc(city, page)}"));
+    expect(file("src/components/BookingWidgetFrame.tsx")).toMatch(sourceFragment('loading="lazy"'));
+    expect(widgetComponent).toMatch(sourceFragment("<BookingWidgetFrame"));
+    expect(file("src/components/BookingWidgetFrame.tsx")).toMatch(sourceFragment('category="marketing"'));
+    expect(widgetComponent).not.toMatch(sourceFragment("GetYourGuide (affiliate)"));
+    expect(widgetComponent).not.toMatch(sourceFragment("I may earn a commission"));
     const guideComponent = file("src/components/IsraelItineraryPage.tsx");
-    expect(guideComponent).toContain("<GetYourGuideCityWidget");
+    expect(guideComponent).toMatch(sourceFragment("<GetYourGuideCityWidget"));
   });
 
   it("gives curated three-column partner tour cards consistent breathing room", () => {
@@ -136,7 +137,7 @@ describe("migrated Israel itineraries", () => {
     ]) {
       const cards = file(path);
       expect(cards, path).toMatch(/grid gap-5 sm:grid-cols-2 (?:lg|xl):grid-cols-3/);
-      expect(cards, path).not.toContain("grid gap-3 sm:grid-cols-2 xl:grid-cols-3");
+      expect(cards, path).not.toMatch(sourceFragment("grid gap-3 sm:grid-cols-2 xl:grid-cols-3"));
     }
   });
 
@@ -170,21 +171,21 @@ describe("migrated Israel itineraries", () => {
     }, {});
     expect(groups).toEqual({ "Dead Sea": 2, Bethlehem: 2, Jericho: 2 });
     const view = file("src/components/IsraelItineraryPage.tsx");
-    expect(view).toContain("g.jerusalemTourOptionsDay === index + 1");
-    expect(view).toContain('<JerusalemItineraryTourOptions days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3} />');
+    expect(view).toMatch(sourceFragment("g.jerusalemTourOptionsDay === index + 1"));
+    expect(view).toMatch(sourceFragment('<JerusalemItineraryTourOptions days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3} />'));
     const cards = file("src/components/JerusalemItineraryTourOptions.tsx");
-    expect(cards).not.toContain("<details");
-    expect(cards).not.toContain("<summary");
-    expect(cards).toContain('<h4 className="font-semibold text-primary">Alternative day tours from Jerusalem</h4>');
-    expect(cards).toContain('data-testid="itinerary-jerusalem-tours"');
-    expect(cards).toContain("Alternative day tours from Jerusalem");
-    expect(cards).toContain("Book these tours with the individual providers.");
-    expect(cards).toContain("platform={tour.provider}");
-    expect(cards).not.toContain("{item.area} · {tour.provider}");
-    expect(cards).toContain("<ExternalProviderTourCard");
-    expect(cards).not.toContain("Affiliate links: I may earn a commission if you book.");
-    expect(cards).not.toContain("indicative snapshots, not live quotes.");
-    expect(cards).not.toContain("Check availability, current prices, inclusions, entry requirements");
+    expect(cards).not.toMatch(sourceFragment("<details"));
+    expect(cards).not.toMatch(sourceFragment("<summary"));
+    expect(cards).toMatch(sourceFragment('<h4 className="font-semibold text-primary">Alternative day tours from Jerusalem</h4>'));
+    expect(cards).toMatch(sourceFragment('data-testid="itinerary-jerusalem-tours"'));
+    expect(cards).toMatch(sourceFragment("Alternative day tours from Jerusalem"));
+    expect(cards).toMatch(sourceFragment("Book these tours with the individual providers."));
+    expect(cards).toMatch(sourceFragment("platform={tour.provider}"));
+    expect(cards).not.toMatch(sourceFragment("{item.area} · {tour.provider}"));
+    expect(cards).toMatch(sourceFragment("<ExternalProviderTourCard"));
+    expect(cards).not.toMatch(sourceFragment("Affiliate links: I may earn a commission if you book."));
+    expect(cards).not.toMatch(sourceFragment("indicative snapshots, not live quotes."));
+    expect(cards).not.toMatch(sourceFragment("Check availability, current prices, inclusions, entry requirements"));
     expect(cards).toContain('sub_id');
   });
 
@@ -197,9 +198,9 @@ describe("migrated Israel itineraries", () => {
     const messageCopy = file("src/lib/guide-contact.ts");
     const footer = file("src/components/Layout.tsx");
 
-    expect(view).not.toContain("Each day offers a different side of Israel");
-    expect(view).not.toContain("Each day distinguishes a workable core");
-    expect(view).toContain('{g.dayTipHeadings?.[index] ?? "Worth knowing"}');
+    expect(view).not.toMatch(sourceFragment("Each day offers a different side of Israel"));
+    expect(view).not.toMatch(sourceFragment("Each day distinguishes a workable core"));
+    expect(view).toMatch(sourceFragment('{g.dayTipHeadings?.[index] ?? "Worth knowing"}'));
     expect(itineraries["3"].dayTipHeadings).toEqual([
       "Old City access and walking",
       "Desert-day essentials",
@@ -207,23 +208,23 @@ describe("migrated Israel itineraries", () => {
     ]);
     expect(new Set(itineraries["3"].dayTipHeadings).size).toBe(3);
     expect(itineraries["10"].dayTipHeadings).toHaveLength(10);
-    expect(view).toContain("My practical planning tips");
+    expect(view).toMatch(sourceFragment("My practical planning tips"));
     expect(guide.noCarAdvice).toMatch(/^Jerusalem and Tel Aviv are easy to explore/);
     expect(guide.noCarAdvice).not.toContain("Choose an organized tour");
 
-    expect(messageCopy).toContain("I'm Moshe Barak. I arrange airport transfers, private journeys between cities and sightseeing days with a driver.");
-    expect(contact).toContain('const [subject, setSubject] = useState("");');
-    expect(messageCopy).toContain('return { ...base, subject: "", heading: "Need private transport for your Israel itinerary?"');
-    expect(contact).toContain('name="subject" required');
-    expect(contact).toContain("update(setSubject, e.target.value)");
+    expect(messageCopy).toMatch(sourceFragment("I'm Moshe Barak. I arrange airport transfers, private journeys between cities and sightseeing days with a driver."));
+    expect(contact).toMatch(sourceFragment('const [subject, setSubject] = useState("");'));
+    expect(messageCopy).toMatch(sourceFragment('return { ...base, subject: "", heading: "Need private transport for your Israel itinerary?"'));
+    expect(contact).toMatch(sourceFragment('name="subject" required'));
+    expect(contact).toMatch(sourceFragment("update(setSubject, e.target.value)"));
 
-    expect(widget).not.toContain("Optional tours and activities from GetYourGuide (affiliate).");
-    expect(widget).not.toContain("I may earn a commission if you book through this widget.");
-    expect(widget).toContain("getYourGuideCityWidgetSrc(city, page)");
-    expect(footer).toContain("This website contains affiliate links");
-    expect(tours).toContain("Use a guided Masada and Dead Sea tour for your desert day");
-    expect(tours).not.toContain("not additional stops to fit into it");
-    expect(tours).toContain("<ExternalProviderTourCard");
+    expect(widget).not.toMatch(sourceFragment("Optional tours and activities from GetYourGuide (affiliate)."));
+    expect(widget).not.toMatch(sourceFragment("I may earn a commission if you book through this widget."));
+    expect(widget).toMatch(sourceFragment("getYourGuideCityWidgetSrc(city, page)"));
+    expect(footer).toMatch(sourceFragment("This website contains affiliate links"));
+    expect(tours).toMatch(sourceFragment("Use a guided Masada and Dead Sea tour for your desert day"));
+    expect(tours).not.toMatch(sourceFragment("not additional stops to fit into it"));
+    expect(tours).toMatch(sourceFragment("<ExternalProviderTourCard"));
     expect(tours).toContain("recordOutboundClick");
   });
 
@@ -346,20 +347,20 @@ describe("migrated Israel itineraries", () => {
     expect(itineraries["10"].dayChoices?.map(item => item.day)).toEqual([2,6,7,8,10]);
     expect(itineraries["10"].dayTipHeadings).toHaveLength(10);
     const view = file("src/components/IsraelItineraryPage.tsx");
-    expect(view).toContain("const compactOverview = true");
-    expect(view).toContain('data-testid={`day-${index + 1}-route-choices`}');
-    expect(view.indexOf('data-testid={`day-${index + 1}-route-choices`}')).toBeGreaterThan(view.indexOf('<dl className="space-y-5">'));
-    expect(view).toContain('id !== "5" && id !== "7" && id !== "10" ? <h3 className="mt-6 text-xl font-semibold">Transport and hotel planning</h3>');
-    expect(view).toContain("Have more or fewer than 5 days in Israel?");
-    expect(view).toContain("My practical planning tips");
+    expect(view).toMatch(sourceFragment("const compactOverview = true"));
+    expect(view).toMatch(sourceFragment('data-testid={`day-${index + 1}-route-choices`}'));
+    expect(sourceIndex(view, 'data-testid={`day-${index + 1}-route-choices`}')).toBeGreaterThan(sourceIndex(view, '<dl className="space-y-5">'));
+    expect(view).toMatch(sourceFragment('id !== "5" && id !== "7" && id !== "10" ? <h3 className="mt-6 text-xl font-semibold">Transport and hotel planning</h3>'));
+    expect(view).toMatch(sourceFragment("Have more or fewer than 5 days in Israel?"));
+    expect(view).toMatch(sourceFragment("My practical planning tips"));
     expect(view).toContain("g.dayTipHeadings?.[index]");
-    expect(view).toContain("<GetYourGuideCityWidget");
-    expect(view).toContain('days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3}');
+    expect(view).toMatch(sourceFragment("<GetYourGuideCityWidget"));
+    expect(view).toMatch(sourceFragment('days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3}'));
     const tours = file("src/components/JerusalemItineraryTourOptions.tsx");
-    expect(tours).toContain('export function JerusalemItineraryTourOptions({ days = 3 }');
-    expect(tours).toContain('itt_${days}day_');
-    expect(tours).toContain('pageId: `israel-itinerary-${days}-days`');
-    expect(tours).toContain("grid gap-5 sm:grid-cols-2 lg:grid-cols-3");
+    expect(tours).toMatch(sourceFragment('export function JerusalemItineraryTourOptions({ days = 3 }'));
+    expect(tours).toMatch(sourceFragment('itt_${days}day_'));
+    expect(tours).toMatch(sourceFragment('pageId: `israel-itinerary-${days}-days`'));
+    expect(tours).toMatch(sourceFragment("grid gap-5 sm:grid-cols-2 lg:grid-cols-3"));
   });
 
   it("provides a coherent seven-day route across three hotel bases with realistic transfer days", () => {
@@ -422,11 +423,11 @@ describe("migrated Israel itineraries", () => {
     const tourComponent = file("src/components/JerusalemItineraryTourOptions.tsx");
     const itineraryComponent = file("src/components/IsraelItineraryPage.tsx");
 
-    expect(tourComponent).toContain('<h4 className="font-semibold text-primary">Alternative day tours from Jerusalem</h4>');
-    expect(tourComponent).toContain("Each replaces that day's planned sightseeing.");
-    expect(tourComponent).toContain("a guided Masada and Dead Sea trip for Day 3");
-    expect(itineraryComponent).toContain("presentation.transferDays.includes(index + 1)");
-    expect(itineraryComponent).toContain("The times shown are for sightseeing only.");
+    expect(tourComponent).toMatch(sourceFragment('<h4 className="font-semibold text-primary">Alternative day tours from Jerusalem</h4>'));
+    expect(tourComponent).toMatch(sourceFragment("Each replaces that day's planned sightseeing."));
+    expect(tourComponent).toMatch(sourceFragment("a guided Masada and Dead Sea trip for Day 3"));
+    expect(itineraryComponent).toMatch(sourceFragment("presentation.transferDays.includes(index + 1)"));
+    expect(itineraryComponent).toMatch(sourceFragment("The times shown are for sightseeing only."));
     expect(g.daySequences?.[2]?.steps[0]?.stop).toBe("Masada plateau");
     expect(g.daySequences?.[5]?.steps[0]?.stop).toBe("Haifa's German Colony viewpoint");
     expect(g.daysPlan[2]?.morning).not.toContain("Allow about two to three hours at the fortress");
@@ -489,22 +490,22 @@ describe("migrated Israel itineraries", () => {
   it("uses the consistent seven-day responsive layout and correctly attributed partner links", () => {
     const view = file("src/components/IsraelItineraryPage.tsx");
     const tours = file("src/components/JerusalemItineraryTourOptions.tsx");
-    expect(view).toContain("const compactOverview = true");
-    expect(view).toContain("Daily route, transport and overnight stays");
-    expect(view).toContain("Have more or fewer than 7 days in Israel?");
-    expect(view).toContain("Before you book");
-    expect(view).toContain("Related practical guides");
-    expect(view).toContain('days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3}');
-    expect(view).toContain('id !== "5" && id !== "7" && id !== "10"');
-    expect(view.indexOf('data-testid={`day-${index + 1}-route-choices`}')).toBeGreaterThan(view.indexOf('<dl className="space-y-5">'));
-    expect(tours).toContain("days?: 3 | 5 | 7 | 10");
-    expect(tours).toContain("days: 3 | 5 | 7 | 10");
-    expect(tours).toContain('itt_${days}day_');
-    expect(tours).toContain('pageId: `israel-itinerary-${days}-days`');
-    expect(tours).toContain("grid gap-5 sm:grid-cols-2 lg:grid-cols-3");
+    expect(view).toMatch(sourceFragment("const compactOverview = true"));
+    expect(view).toMatch(sourceFragment("Daily route, transport and overnight stays"));
+    expect(view).toMatch(sourceFragment("Have more or fewer than 7 days in Israel?"));
+    expect(view).toMatch(sourceFragment("Before you book"));
+    expect(view).toMatch(sourceFragment("Related practical guides"));
+    expect(view).toMatch(sourceFragment('days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3}'));
+    expect(view).toMatch(sourceFragment('id !== "5" && id !== "7" && id !== "10"'));
+    expect(sourceIndex(view, 'data-testid={`day-${index + 1}-route-choices`}')).toBeGreaterThan(sourceIndex(view, '<dl className="space-y-5">'));
+    expect(tours).toMatch(sourceFragment("days?: 3 | 5 | 7 | 10"));
+    expect(tours).toMatch(sourceFragment("days: 3 | 5 | 7 | 10"));
+    expect(tours).toMatch(sourceFragment('itt_${days}day_'));
+    expect(tours).toMatch(sourceFragment('pageId: `israel-itinerary-${days}-days`'));
+    expect(tours).toMatch(sourceFragment("grid gap-5 sm:grid-cols-2 lg:grid-cols-3"));
     expect(new URL(getYourGuideCityWidgetSrc("jerusalem", "7_day")).searchParams.get("shmarker")).toBe("622032.7_day");
     expect(new URL(getYourGuideCityWidgetSrc("telAviv", "7_day")).searchParams.get("iata")).toBe("TLV");
-    expect(file("src/components/GetYourGuideCityWidget.tsx")).not.toContain("Optional tours and activities from GetYourGuide (affiliate).");
+    expect(file("src/components/GetYourGuideCityWidget.tsx")).not.toMatch(sourceFragment("Optional tours and activities from GetYourGuide (affiliate)."));
   });
 
   it("has a focused, bookable-through-guides three-day plan without intrusive affiliate links", () => {
@@ -533,10 +534,10 @@ describe("migrated Israel itineraries", () => {
     }
 
     const view = file("src/components/IsraelItineraryPage.tsx");
-    expect(view).toContain("Related practical guides");
-    expect(view).toContain("Daily route and hotel bases");
-    expect(view).toContain("<SourcesDisclosure>");
-    expect(view.indexOf("<HomeContactForm")).toBeLessThan(view.indexOf("<SourcesDisclosure>"));
+    expect(view).toMatch(sourceFragment("Related practical guides"));
+    expect(view).toMatch(sourceFragment("Daily route and hotel bases"));
+    expect(view).toMatch(sourceFragment("<SourcesDisclosure>"));
+    expect(sourceIndex(view, "<HomeContactForm")).toBeLessThan(sourceIndex(view, "<SourcesDisclosure>"));
   });
 
   it("keeps the upgraded ten-day route, hotel choices, affiliate widgets and source links coherent", () => {
@@ -583,15 +584,15 @@ describe("migrated Israel itineraries", () => {
       { day: 9, city: "telAviv" },
     ]);
     expect(getYourGuideCityWidgetSrc("haifa", "10_day")).toContain("shmarker=622032.10_day");
-    expect(tours).toContain("days?: 3 | 5 | 7 | 10");
-    expect(tours).toContain("Set aside Day 2 for Bethlehem or Jericho");
-    expect(view).toContain("presentation.transferDays.includes(index + 1)");
-    expect(view).toContain("const compactOverview = true");
+    expect(tours).toMatch(sourceFragment("days?: 3 | 5 | 7 | 10"));
+    expect(tours).toMatch(sourceFragment("Set aside Day 2 for Bethlehem or Jericho"));
+    expect(view).toMatch(sourceFragment("presentation.transferDays.includes(index + 1)"));
+    expect(view).toMatch(sourceFragment("const compactOverview = true"));
     expect(g.alternatives).toHaveLength(2);
     expect(g.alternatives[0]?.text).toMatch(/southern 10-day route.*replace the Galilee and Haifa with Eilat and Timna/i);
     expect(g.southernRouteOverview).toHaveLength(5);
     expect(g.southernRouteOverview?.[2]?.focus).toContain("Timna Park");
-    expect(view).toContain("Southern ten-day alternative at a glance");
+    expect(view).toMatch(sourceFragment("Southern ten-day alternative at a glance"));
     expect(g.relatedGuides).toHaveLength(6);
     expect(g.faqs).toHaveLength(8);
     expect(g.beforeYouGo).toHaveLength(4);
@@ -638,12 +639,12 @@ describe("migrated Israel itineraries", () => {
     expect(itineraries["7"].alternatives).toEqual([]);
     expect(itineraries["10"].alternatives).toHaveLength(2);
     const view = file("src/components/IsraelItineraryPage.tsx");
-    expect(view).toContain('g.alternatives.length > 0 && (');
-    expect(view).toContain('...(g.alternatives.length ? [["alternatives", "Adjust the route"]');
-    expect(view).toContain('id="alternatives"');
-    expect(view).toContain("Adjust this itinerary to your trip");
-    expect(view).toContain('id="transport"');
-    expect(view).toContain("<FaqList faqs={g.faqs} />");
+    expect(view).toMatch(sourceFragment('g.alternatives.length > 0 && ('));
+    expect(view).toMatch(sourceFragment('...(g.alternatives.length ? [["alternatives", "Adjust the route"]'));
+    expect(view).toMatch(sourceFragment('id="alternatives"'));
+    expect(view).toMatch(sourceFragment("Adjust this itinerary to your trip"));
+    expect(view).toMatch(sourceFragment('id="transport"'));
+    expect(view).toMatch(sourceFragment("<FaqList faqs={g.faqs} />"));
   });
 
   it("turns the three-day guide into a travel-ready plan without changing longer itineraries", () => {
@@ -716,17 +717,17 @@ describe("migrated Israel itineraries", () => {
     }
 
     const view = file("src/components/IsraelItineraryPage.tsx");
-    expect(view).toContain("day-${index + 1}-highlights");
-    expect(view).toContain("Suggested highlights");
-    expect(view).toContain('<ul className="mt-3 space-y-2">');
-    expect(view).not.toContain("approximate times</span>");
-    expect(view).toContain('data-testid="departure-scenarios"');
-    expect(view).toContain("Getting around");
-    expect(view).toContain("dayTextLinks(g, index + 1");
-    expect(view).toContain("beforeBookingLinks(g, index)");
-    expect(view).toContain('rel="noopener noreferrer"');
+    expect(view).toMatch(sourceFragment("day-${index + 1}-highlights"));
+    expect(view).toMatch(sourceFragment("Suggested highlights"));
+    expect(view).toMatch(sourceFragment('<ul className="mt-3 space-y-2">'));
+    expect(view).not.toMatch(sourceFragment("approximate times</span>"));
+    expect(view).toMatch(sourceFragment('data-testid="departure-scenarios"'));
+    expect(view).toMatch(sourceFragment("Getting around"));
+    expect(view).toMatch(sourceFragment("dayTextLinks(g, index + 1"));
+    expect(view).toMatch(sourceFragment("beforeBookingLinks(g, index)"));
+    expect(view).toMatch(sourceFragment('rel="noopener noreferrer"'));
     expect(view).toContain("g.daySequences?.find");
-    expect(view).not.toContain("<RouteMap");
+    expect(view).not.toMatch(sourceFragment("<RouteMap"));
   });
 
   it("integrates pre-booking checks with transport tips after the itinerary and keeps distinct Old City photos", () => {
@@ -745,38 +746,38 @@ describe("migrated Israel itineraries", () => {
     expect(migrationPhotos["itinerary-3day-holy-sepulchre"].sourceUrl).toBe("");
 
     const view = file("src/components/IsraelItineraryPage.tsx");
-    expect(view).not.toContain('id="before-you-go"');
-    expect(view).not.toContain('id="planning-checklist"');
-    expect(view).toContain("My practical planning tips");
-    expect(view).toContain("Transport and hotel planning");
-    expect(view).toContain("Before you book");
-    expect(view).toContain("Have more than 3 days in Israel?");
-    expect(view.indexOf('id="days"')).toBeLessThan(view.indexOf('id="transport"'));
-    expect(view.indexOf('id="transport"')).toBeLessThan(view.indexOf('id="alternatives"'));
-    expect(view.indexOf("Transport and hotel planning")).toBeLessThan(view.indexOf("Before you book"));
-    expect(view.indexOf("Before you book")).toBeLessThan(view.indexOf('id="alternatives"'));
-    expect(view.indexOf('id="alternatives"')).toBeLessThan(view.indexOf('id="other-durations"'));
-    expect(view.indexOf("Before you book")).toBeLessThan(view.indexOf("<HomeContactForm"));
-    expect(view).toContain("g.beforeYouGo.map((tip, index) =>");
-    expect(view).toContain("g.logistics.map((tip, index) =>");
+    expect(view).not.toMatch(sourceFragment('id="before-you-go"'));
+    expect(view).not.toMatch(sourceFragment('id="planning-checklist"'));
+    expect(view).toMatch(sourceFragment("My practical planning tips"));
+    expect(view).toMatch(sourceFragment("Transport and hotel planning"));
+    expect(view).toMatch(sourceFragment("Before you book"));
+    expect(view).toMatch(sourceFragment("Have more than 3 days in Israel?"));
+    expect(sourceIndex(view, 'id="days"')).toBeLessThan(sourceIndex(view, 'id="transport"'));
+    expect(sourceIndex(view, 'id="transport"')).toBeLessThan(sourceIndex(view, 'id="alternatives"'));
+    expect(sourceIndex(view, "Transport and hotel planning")).toBeLessThan(sourceIndex(view, "Before you book"));
+    expect(sourceIndex(view, "Before you book")).toBeLessThan(sourceIndex(view, 'id="alternatives"'));
+    expect(sourceIndex(view, 'id="alternatives"')).toBeLessThan(sourceIndex(view, 'id="other-durations"'));
+    expect(sourceIndex(view, "Before you book")).toBeLessThan(sourceIndex(view, "<HomeContactForm"));
+    expect(view).toMatch(sourceFragment("g.beforeYouGo.map((tip, index) =>"));
+    expect(view).toMatch(sourceFragment("g.logistics.map((tip, index) =>"));
   });
 
   it("keeps map and photo-credit clutter out of the shared itinerary layout", () => {
     const view = file("src/components/IsraelItineraryPage.tsx");
-    expect(view).not.toContain("<RouteMap");
-    expect(view).not.toContain("This sample route assumes");
-    expect(view).not.toContain("Practical planning note");
-    expect(view).not.toContain("Use these focused guides");
+    expect(view).not.toMatch(sourceFragment("<RouteMap"));
+    expect(view).not.toMatch(sourceFragment("This sample route assumes"));
+    expect(view).not.toMatch(sourceFragment("Practical planning note"));
+    expect(view).not.toMatch(sourceFragment("Use these focused guides"));
     expect(view).not.toContain("GuidePhotoCredit");
-    expect(view).toContain('g.dayTipHeadings?.[index] ?? "Worth knowing"');
-    expect(view).not.toContain('>Worth knowing</h4>');
-    expect(view).not.toContain('<h4 className="font-semibold">My practical planning tip</h4>');
-    expect(view).toContain("Tips for transport and hotel planning");
-    expect(view).toContain("Adjust this itinerary to your trip");
-    expect(view).toContain("Photo credits &amp; licences");
+    expect(view).toMatch(sourceFragment('g.dayTipHeadings?.[index] ?? "Worth knowing"'));
+    expect(view).not.toMatch(sourceFragment('>Worth knowing</h4>'));
+    expect(view).not.toMatch(sourceFragment('<h4 className="font-semibold">My practical planning tip</h4>'));
+    expect(view).toMatch(sourceFragment("Tips for transport and hotel planning"));
+    expect(view).toMatch(sourceFragment("Adjust this itinerary to your trip"));
+    expect(view).toMatch(sourceFragment("Photo credits &amp; licences"));
     expect(view).toContain("hasPublicPhotoCredit");
-    expect(view).toContain("list-disc space-y-4");
-    expect(view.indexOf("<SourcesDisclosure>")).toBeLessThan(view.indexOf("Photo credits &amp; licences"));
+    expect(view).toMatch(sourceFragment("list-disc space-y-4"));
+    expect(sourceIndex(view, "<SourcesDisclosure>")).toBeLessThan(sourceIndex(view, "Photo credits &amp; licences"));
   });
 
   it("has contextual navigation and a generated route-tree entry for every itinerary", () => {

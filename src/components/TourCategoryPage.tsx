@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { PageUpdated } from "@/components/PageUpdated";
 import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
-import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
+import {
+  JerusalemClusterLinks,
+  type JerusalemClusterKey,
+} from "@/components/JerusalemClusterLinks";
 import { AttractionRegionTrail } from "@/components/AttractionRegionTrail";
 import { AuthorCard } from "@/components/AuthorCard";
 import { HomeContactForm } from "@/components/HomeContactForm";
@@ -14,8 +17,35 @@ import { GuidePhotoCredit } from "@/components/GuideCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { MoreTourCategories, TourCruiseCallout } from "@/components/TourDiscovery";
 import { TourCatalog } from "@/components/TourCatalog";
-import { TOURS_UPDATED_DATE, getTourCategory, tourCategories, tourCategoryPaths, tourCruisePhoto, tourPhotos, tourReadingGuides, jerusalemTourLocalCards, jerusalemTourPlanningCards, telAvivTourLocalCards, masadaTourLocalCards, bethlehemTourLocalCards, galileeTourLocalCards, northernCoastTourLocalCards, negevTourLocalCards, golanTourLocalCards, foodTourLocalCards, eilatTourLocalCards, type TourCategoryId } from "@/data/tours";
-import { offersForTour, parseTourSearch, toursForCategory, filterTours, isOwnerTour, type TourSearch } from "@/lib/tours";
+import {
+  TOURS_UPDATED_DATE,
+  getTourCategory,
+  tourCategories,
+  tourCategoryPaths,
+  tourCruisePhoto,
+  tourPhotos,
+  tourReadingGuides,
+  jerusalemTourLocalCards,
+  jerusalemTourPlanningCards,
+  telAvivTourLocalCards,
+  masadaTourLocalCards,
+  bethlehemTourLocalCards,
+  galileeTourLocalCards,
+  northernCoastTourLocalCards,
+  negevTourLocalCards,
+  golanTourLocalCards,
+  foodTourLocalCards,
+  eilatTourLocalCards,
+  type TourCategoryId,
+} from "@/data/tours";
+import {
+  offersForTour,
+  parseTourSearch,
+  toursForCategory,
+  filterTours,
+  isOwnerTour,
+  type TourSearch,
+} from "@/lib/tours";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
@@ -25,16 +55,61 @@ export function tourCategoryMeta(id: TourCategoryId) {
   const path = tourCategoryPaths[id];
   const title = category.title;
   const description = category.description;
-  const meta = pageMeta({ title: `${title} | Israel Taxi & Travel`, description, path, image: category.photo.src, imageAlt: category.photo.alt,
-    crumbs: [{ name: "Home", path: "/" }, { name: "Tours & day trips", path: "/tours/" }, { name: title, path }] });
-  return { ...meta, scripts: [...meta.scripts, jsonLd({ "@context": "https://schema.org", "@type": "CollectionPage", name: title, description, url: CANONICAL_ORIGIN + path,
-    author: { "@type": "Person", name: "Moshe Barak", url: CANONICAL_ORIGIN + "/about-me/" },
-    mainEntity: { "@type": "ItemList", itemListElement: toursForCategory(id).map((tour, index) => ({ "@type": "ListItem", position: index + 1, name: tour.title, url: CANONICAL_ORIGIN + path + "#" + tour.id })) } })] };
+  const meta = pageMeta({
+    title: `${title} | Israel Taxi & Travel`,
+    description,
+    path,
+    image: category.photo.src,
+    imageAlt: category.photo.alt,
+    crumbs: [
+      { name: "Home", path: "/" },
+      { name: "Tours & day trips", path: "/tours/" },
+      { name: title, path },
+    ],
+  });
+  return {
+    ...meta,
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: title,
+        description,
+        url: CANONICAL_ORIGIN + path,
+        author: { "@type": "Person", name: "Moshe Barak", url: CANONICAL_ORIGIN + "/about-me/" },
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: toursForCategory(id).map((tour, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: tour.title,
+            url: CANONICAL_ORIGIN + path + "#" + tour.id,
+          })),
+        },
+      }),
+    ],
+  };
 }
 
-export function TourPhotoCredits({ photos }: { photos: { src: string; alt: string; sourceUrl?: string; credit?: string; licenseUrl?: string }[] }) {
-  const unique = [...new Map(photos.filter(hasPublicPhotoCredit).map(photo => [photo.src, photo])).values()];
-  return unique.length ? <details className="mt-10 rounded-xl border p-4 text-sm"><summary className="cursor-pointer font-semibold">Image credits</summary><div className="mt-3 space-y-3">{unique.map(photo => <GuidePhotoCredit key={photo.src} photo={photo} insideDisclosure />)}</div></details> : null;
+export function TourPhotoCredits({
+  photos,
+}: {
+  photos: { src: string; alt: string; sourceUrl?: string; credit?: string; licenseUrl?: string }[];
+}) {
+  const unique = [
+    ...new Map(photos.filter(hasPublicPhotoCredit).map((photo) => [photo.src, photo])).values(),
+  ];
+  return unique.length ? (
+    <details className="mt-10 rounded-xl border p-4 text-sm">
+      <summary className="cursor-pointer font-semibold">Image credits</summary>
+      <div className="mt-3 space-y-3">
+        {unique.map((photo) => (
+          <GuidePhotoCredit key={photo.src} photo={photo} insideDisclosure />
+        ))}
+      </div>
+    </details>
+  ) : null;
 }
 
 const jerusalemPlanningIcons = {
@@ -46,13 +121,107 @@ const jerusalemPlanningIcons = {
   lightbulb: Lightbulb,
 } as const;
 
-export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void }) {
+export function TourCategoryPage({
+  id,
+  filters: rawFilters,
+  onChange,
+}: {
+  id: TourCategoryId;
+  filters: TourSearch;
+  onChange: (next: TourSearch, replace?: boolean) => void;
+}) {
   const category = getTourCategory(id);
-  const isCityTemplate = id === "jerusalem" || id === "tel-aviv-jaffa" || id === "masada-dead-sea" || id === "bethlehem-jericho" || id === "nazareth-galilee" || id === "northern-coast" || id === "negev-ramon" || id === "golan-heights" || id === "food-markets" || id === "eilat-red-sea";
-  const localCards = id === "jerusalem" ? jerusalemTourLocalCards : id === "tel-aviv-jaffa" ? telAvivTourLocalCards : id === "masada-dead-sea" ? masadaTourLocalCards : id === "bethlehem-jericho" ? bethlehemTourLocalCards : id === "nazareth-galilee" ? galileeTourLocalCards : id === "northern-coast" ? northernCoastTourLocalCards : id === "negev-ramon" ? negevTourLocalCards : id === "golan-heights" ? golanTourLocalCards : id === "food-markets" ? foodTourLocalCards : eilatTourLocalCards;
-  const cityName = id === "jerusalem" ? "Jerusalem" : id === "tel-aviv-jaffa" ? "Tel Aviv & Jaffa" : id === "masada-dead-sea" ? "Masada & the Dead Sea" : id === "bethlehem-jericho" ? "Bethlehem, Jericho & Qasr al-Yahud" : id === "nazareth-galilee" ? "Nazareth & the Sea of Galilee" : id === "northern-coast" ? "Caesarea, Haifa & Akko" : id === "negev-ramon" ? "Negev & Ramon Crater" : id === "golan-heights" ? "Golan Heights" : id === "food-markets" ? "Israel’s food markets" : "Eilat & the Red Sea";
-  const localHeadingId = id === "jerusalem" ? "jerusalem-local-h" : id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : id === "masada-dead-sea" ? "masada-local-h" : id === "bethlehem-jericho" ? "bethlehem-local-h" : id === "nazareth-galilee" ? "galilee-local-h" : id === "northern-coast" ? "northern-coast-local-h" : id === "negev-ramon" ? "negev-local-h" : id === "golan-heights" ? "golan-local-h" : id === "food-markets" ? "food-local-h" : "eilat-local-h";
-  const planningHeadingId = id === "jerusalem" ? "jerusalem-planning-h" : id === "tel-aviv-jaffa" ? "tel-aviv-planning-h" : id === "masada-dead-sea" ? "masada-planning-h" : id === "bethlehem-jericho" ? "bethlehem-planning-h" : id === "nazareth-galilee" ? "galilee-planning-h" : id === "northern-coast" ? "northern-coast-planning-h" : id === "negev-ramon" ? "negev-planning-h" : id === "golan-heights" ? "golan-planning-h" : id === "food-markets" ? "food-planning-h" : "eilat-planning-h";
+  const isCityTemplate =
+    id === "jerusalem" ||
+    id === "tel-aviv-jaffa" ||
+    id === "masada-dead-sea" ||
+    id === "bethlehem-jericho" ||
+    id === "nazareth-galilee" ||
+    id === "northern-coast" ||
+    id === "negev-ramon" ||
+    id === "golan-heights" ||
+    id === "food-markets" ||
+    id === "eilat-red-sea";
+  const localCards =
+    id === "jerusalem"
+      ? jerusalemTourLocalCards
+      : id === "tel-aviv-jaffa"
+        ? telAvivTourLocalCards
+        : id === "masada-dead-sea"
+          ? masadaTourLocalCards
+          : id === "bethlehem-jericho"
+            ? bethlehemTourLocalCards
+            : id === "nazareth-galilee"
+              ? galileeTourLocalCards
+              : id === "northern-coast"
+                ? northernCoastTourLocalCards
+                : id === "negev-ramon"
+                  ? negevTourLocalCards
+                  : id === "golan-heights"
+                    ? golanTourLocalCards
+                    : id === "food-markets"
+                      ? foodTourLocalCards
+                      : eilatTourLocalCards;
+  const cityName =
+    id === "jerusalem"
+      ? "Jerusalem"
+      : id === "tel-aviv-jaffa"
+        ? "Tel Aviv & Jaffa"
+        : id === "masada-dead-sea"
+          ? "Masada & the Dead Sea"
+          : id === "bethlehem-jericho"
+            ? "Bethlehem, Jericho & Qasr al-Yahud"
+            : id === "nazareth-galilee"
+              ? "Nazareth & the Sea of Galilee"
+              : id === "northern-coast"
+                ? "Caesarea, Haifa & Akko"
+                : id === "negev-ramon"
+                  ? "Negev & Ramon Crater"
+                  : id === "golan-heights"
+                    ? "Golan Heights"
+                    : id === "food-markets"
+                      ? "Israel’s food markets"
+                      : "Eilat & the Red Sea";
+  const localHeadingId =
+    id === "jerusalem"
+      ? "jerusalem-local-h"
+      : id === "tel-aviv-jaffa"
+        ? "tel-aviv-local-h"
+        : id === "masada-dead-sea"
+          ? "masada-local-h"
+          : id === "bethlehem-jericho"
+            ? "bethlehem-local-h"
+            : id === "nazareth-galilee"
+              ? "galilee-local-h"
+              : id === "northern-coast"
+                ? "northern-coast-local-h"
+                : id === "negev-ramon"
+                  ? "negev-local-h"
+                  : id === "golan-heights"
+                    ? "golan-local-h"
+                    : id === "food-markets"
+                      ? "food-local-h"
+                      : "eilat-local-h";
+  const planningHeadingId =
+    id === "jerusalem"
+      ? "jerusalem-planning-h"
+      : id === "tel-aviv-jaffa"
+        ? "tel-aviv-planning-h"
+        : id === "masada-dead-sea"
+          ? "masada-planning-h"
+          : id === "bethlehem-jericho"
+            ? "bethlehem-planning-h"
+            : id === "nazareth-galilee"
+              ? "galilee-planning-h"
+              : id === "northern-coast"
+                ? "northern-coast-planning-h"
+                : id === "negev-ramon"
+                  ? "negev-planning-h"
+                  : id === "golan-heights"
+                    ? "golan-planning-h"
+                    : id === "food-markets"
+                      ? "food-planning-h"
+                      : "eilat-planning-h";
   const filters = parseTourSearch(rawFilters);
   const [subjectRequest, setSubjectRequest] = useState<{ value: string }>();
   const visibleOwner = filterTours(id, filters).some(isOwnerTour);
@@ -61,74 +230,456 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
   const products = toursForCategory(id);
   const guides = tourReadingGuides(id);
   const attractionRegions = attractionRegionsForTours[id] ?? [];
-  const sourceIds = products.flatMap(tour => [...(tour.price ? [tour.price.sourceId] : []), ...offersForTour(tour.id).map(offer => offer.id)]);
-  return <main className="mx-auto max-w-5xl px-4 pb-12">
-    <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Tours & day trips", to: "/tours/" }, { name: title, to: path }]} /></div>
-    <header className="mt-2">
-      <GuideHeroLayout image={<GuideHeroMedia src={category.photo.src} alt={category.photo.alt} width={1200} height={450} compact={isCityTemplate} />}>
-        <p className="eyebrow">{id === "jerusalem" ? "Guided walks, small groups & private experiences" : id === "tel-aviv-jaffa" ? "Guided walks, food, art & private experiences" : id === "masada-dead-sea" ? "Guided desert days, sunrise hikes & private transport" : id === "bethlehem-jericho" ? "Bethlehem, Jericho & Qasr al-Yahud guided experiences" : id === "nazareth-galilee" ? "Galilee churches, guided day trips & private journeys" : id === "northern-coast" ? "Coastal heritage days, small groups & private journeys" : id === "negev-ramon" ? "Crater jeep safaris, geology & desert adventure" : id === "golan-heights" ? "Golan heritage, nature & private guiding" : id === "food-markets" ? "Market tastings, culinary walks & cooking experiences" : id === "eilat-red-sea" ? "Red Sea cruises, snorkeling & desert adventures" : `Tours & day trips · ${category.shortTitle}`}</p>
-        <h1 className="guide-page-title mt-3 font-semibold">{title}</h1>
-        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{category.intro}</p>
-        <PageUpdated date={TOURS_UPDATED_DATE} />
-        {!isCityTemplate && <a href="#tour-catalog" className="btn btn-primary mt-5">Explore {category.shortTitle} experiences</a>}
-      </GuideHeroLayout>
-    </header>
-    {isCityTemplate ? <div className="mt-4"><AuthorCard /></div> : <AttractionRegionTrail links={attractionRegions} />}
-    {!isCityTemplate && <section aria-labelledby="choose-day-h" className="mt-10"><h2 id="choose-day-h" className="text-3xl font-semibold">Find the right day for your trip</h2><div className="mt-5 grid gap-4 md:grid-cols-3">{category.choices.map(choice => <article key={choice.title} className="rounded-2xl border bg-card p-5"><h3 className="text-xl font-semibold">{choice.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{choice.text}</p></article>)}</div></section>}
-    <OnThisPage sections={[["tour-catalog","Tours & activities"], ...(visibleOwner ? [["my-private-days","My private day trips"]] as const : []), ["choosing-tour","Choosing the right tour"], ["faq","FAQ"], ["tour-local","Related guides"], ["tour-planning","Travel tips"], ["contact","Contact me"]]} />
-    <TourCatalog categoryId={id} filters={filters} onChange={onChange} onRequestQuote={tour => setSubjectRequest({ value: tour.title })} />
-    <section id="choosing-tour" aria-labelledby="planning-day-h" className="mt-12"><h2 id="planning-day-h" className="text-2xl font-semibold">{id === "jerusalem" ? "Choosing the right Jerusalem tour" : id === "tel-aviv-jaffa" ? "Choosing the right Tel Aviv & Jaffa tour" : id === "masada-dead-sea" ? "Choosing the right Masada & Dead Sea tour" : id === "bethlehem-jericho" ? "Choosing the right Bethlehem & Jericho tour" : id === "nazareth-galilee" ? "Choosing the right Nazareth & Galilee tour" : id === "northern-coast" ? "Choosing the right northern coast tour" : id === "negev-ramon" ? "Choosing the right Ramon Crater tour" : id === "golan-heights" ? "Choosing the right Golan Heights tour" : id === "food-markets" ? "Choosing the right food & market experience" : id === "eilat-red-sea" ? "Choosing the right Eilat activity" : `Planning your ${category.shortTitle} experience`}</h2><div className="mt-4 grid gap-3 md:grid-cols-3" aria-label="Compare tour options">{category.choices.map(choice => <article key={choice.title} className="rounded-xl border bg-secondary/25 p-4"><h3 className="text-base font-semibold">{choice.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{choice.text}</p></article>)}</div><div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">{category.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
-      {id === "bethlehem-jericho" && <p className="mt-4 text-sm text-muted-foreground">For the Qasr al-Yahud portion of the trip, <a href="https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">check the official visitor information</a>. Opening, admission and permitted activities can change.</p>}
-      {id === "negev-ramon" && <p className="mt-4 text-sm text-muted-foreground">The Negev can be affected by flash floods and extreme temperatures. <a href="https://en.parks.org.il/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Check official parks guidance</a> and the operator's weather and trail updates before visiting.</p>}
-      {id === "eilat-red-sea" && <p className="mt-4 text-sm text-muted-foreground">Sea conditions, extreme heat and trail closures can affect activities. Check <a href="https://en.parks.org.il/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">official parks guidance</a> and the operator’s current safety instructions before setting out.</p>}
-      {id === "northern-coast" && <p className="mt-4 text-sm text-muted-foreground">The garden terraces and the northern grottos have separate visitor arrangements. <a href="https://ganbahai.org.il/visit-us-haifa/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Check official Bahá’í Gardens visiting options</a> and <a href="https://rosh-hanikra.com/tq/en/info/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Rosh Hanikra site information</a> for visiting arrangements.</p>}
-      {id === "masada-dead-sea" && <p className="mt-4 text-sm text-muted-foreground">Ein Gedi access changes after floods. <a href="https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Check current routes and advance reservations with the parks authority</a> before your visit.</p>}
-      {id === "jerusalem" && <p className="mt-4 text-sm">For a culinary walk, compare <Link to="/tours/food-market-tours/" className="font-semibold text-primary underline">food and market tours</Link>.</p>}
-      {id === "tel-aviv-jaffa" && <p className="mt-4 text-sm">For dedicated tastings and cooking experiences, explore <Link to="/tours/food-market-tours/" className="font-semibold text-primary underline">food and market tours</Link>.</p>}
-      {id === "nazareth-galilee" && <p className="mt-4 text-sm">For a separate day in the north, compare <Link to="/tours/golan-heights/" className="font-semibold text-primary underline">Golan Heights tours</Link>.</p>}
-      {id === "golan-heights" && <p className="mt-4 text-sm">For lakeside heritage and churches, explore <Link to="/tours/nazareth-sea-of-galilee/" className="font-semibold text-primary underline">Nazareth and Sea of Galilee tours</Link>.</p>}
-      {id === "northern-coast" && <p className="mt-4 text-sm">Cruise passengers can choose dedicated <Link to="/shore-excursions/haifa/" className="font-semibold text-primary underline">Haifa shore excursions</Link>.</p>}
-    </section>
-    {!isCityTemplate && (["bethlehem-jericho", "masada-dead-sea", "food-markets"] as string[]).includes(id) && <JerusalemClusterLinks pageKey={("tour-" + id) as JerusalemClusterKey} />}
-    <FaqList faqs={category.faqs} />
-    {isCityTemplate ? <>
-      <section id="tour-local" aria-labelledby={localHeadingId} className="mt-12 scroll-mt-24">
-        <h2 id={localHeadingId} className="text-2xl font-semibold">Explore {cityName} further</h2>
-        <p className="mt-2 text-sm text-muted-foreground">{id === "masada-dead-sea" ? "Plan your fortress visit, check nature-trail access, discover desert attractions and choose a place to stay." : id === "bethlehem-jericho" ? "Plan your Bethlehem visit, understand the Qasr al-Yahud site and check practical travel arrangements for the Jordan Valley." : id === "nazareth-galilee" ? "Explore Nazareth’s main church, lakeside Christian heritage sites and the Jordan River baptismal stop near the Kinneret." : id === "northern-coast" ? "Plan visits to Caesarea’s Roman ruins, Haifa’s gardens and museums, Akko’s Old City and the northern sea grottoes." : id === "negev-ramon" ? "Prepare for your desert visit, with related trip ideas and practical planning guides for southern Israel." : id === "golan-heights" ? "Explore nearby northern destinations and plan how to fit a Golan day into a larger Galilee journey." : id === "food-markets" ? "Explore Israeli food traditions, historic markets and nearby neighborhoods before your tasting walk." : id === "eilat-red-sea" ? "Plan your Red Sea stay and separate southern Israel excursions with practical guides." : `Find places to visit, neighborhoods to explore and more ways to enjoy ${cityName}.`}</p>
-        <div className={localCards.length === 6 ? "mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"}>
-          {localCards.map(item => <Link key={item.to} to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
-            <img src={tourCategories.find(other => String(tourCategoryPaths[other.id]) === String(item.to))?.photo.src ?? guideHeroPhotoForPath(String(item.to))?.src ?? item.photo.src} srcSet={stage5PhotoSrcSet(tourCategories.find(other => tourCategoryPaths[other.id] === item.to)?.photo.src ?? guideHeroPhotoForPath(String(item.to))?.src ?? item.photo.src)} sizes="(min-width: 1024px) 340px, 45vw" alt={tourCategories.find(other => tourCategoryPaths[other.id] === item.to)?.photo.alt ?? guideHeroPhotoForPath(String(item.to))?.alt ?? item.photo.alt} width={320} height={176} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-            <span className="flex flex-1 flex-col p-3.5">
-              <span className="text-base font-semibold leading-snug text-foreground group-hover:text-primary">{item.title}</span>
-              <span className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{item.description}</span>
-              
-            </span>
-          </Link>)}
+  const sourceIds = products.flatMap((tour) => [
+    ...(tour.price ? [tour.price.sourceId] : []),
+    ...offersForTour(tour.id).map((offer) => offer.id),
+  ]);
+  return (
+    <main className="mx-auto max-w-5xl px-4 pb-12">
+      <div className="pt-6">
+        <Breadcrumbs
+          items={[
+            { name: "Home", to: "/" },
+            { name: "Tours & day trips", to: "/tours/" },
+            { name: title, to: path },
+          ]}
+        />
+      </div>
+      <header className="mt-2">
+        <GuideHeroLayout
+          image={
+            <GuideHeroMedia
+              src={category.photo.src}
+              alt={category.photo.alt}
+              width={1200}
+              height={450}
+              compact={isCityTemplate}
+            />
+          }
+        >
+          <p className="eyebrow">
+            {id === "jerusalem"
+              ? "Guided walks, small groups & private experiences"
+              : id === "tel-aviv-jaffa"
+                ? "Guided walks, food, art & private experiences"
+                : id === "masada-dead-sea"
+                  ? "Guided desert days, sunrise hikes & private transport"
+                  : id === "bethlehem-jericho"
+                    ? "Bethlehem, Jericho & Qasr al-Yahud guided experiences"
+                    : id === "nazareth-galilee"
+                      ? "Galilee churches, guided day trips & private journeys"
+                      : id === "northern-coast"
+                        ? "Coastal heritage days, small groups & private journeys"
+                        : id === "negev-ramon"
+                          ? "Crater jeep safaris, geology & desert adventure"
+                          : id === "golan-heights"
+                            ? "Golan heritage, nature & private guiding"
+                            : id === "food-markets"
+                              ? "Market tastings, culinary walks & cooking experiences"
+                              : id === "eilat-red-sea"
+                                ? "Red Sea cruises, snorkeling & desert adventures"
+                                : `Tours & day trips · ${category.shortTitle}`}
+          </p>
+          <h1 className="guide-page-title mt-3 font-semibold">{title}</h1>
+          <p
+            data-guide-intro
+            className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground"
+          >
+            {category.intro}
+          </p>
+          <PageUpdated date={TOURS_UPDATED_DATE} />
+          {!isCityTemplate && (
+            <a href="#tour-catalog" className="btn btn-primary mt-5">
+              Explore {category.shortTitle} experiences
+            </a>
+          )}
+        </GuideHeroLayout>
+      </header>
+      {isCityTemplate ? (
+        <div className="mt-4">
+          <AuthorCard />
         </div>
-      </section>
-      <section id="tour-planning" aria-labelledby={planningHeadingId} className="mt-12 scroll-mt-24">
-        <h2 id={planningHeadingId} className="text-2xl font-semibold">Practical guides for your trip to Israel</h2>
-        <p className="mt-2 text-sm text-muted-foreground">Helpful information for planning your visit beyond {cityName}.</p>
-        <div className={jerusalemTourPlanningCards.length === 6 ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"}>
-          {jerusalemTourPlanningCards.map(item => {
-            const Icon = jerusalemPlanningIcons[item.icon];
-            return <Link key={item.to} to={item.to} className="group flex min-w-0 flex-col items-start gap-3 rounded-xl border bg-secondary/25 sm:flex-row p-3.5 transition-colors hover:border-primary hover:bg-secondary/50 focus-visible:outline-2 focus-visible:outline-primary">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-background text-primary"><Icon size={20} aria-hidden="true" /></span>
-              <span className="min-w-0">
-                <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{item.title}</span>
-                <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>
-              </span>
-            </Link>;
-          })}
+      ) : (
+        <AttractionRegionTrail links={attractionRegions} />
+      )}
+      {!isCityTemplate && (
+        <section aria-labelledby="choose-day-h" className="mt-10">
+          <h2 id="choose-day-h" className="text-3xl font-semibold">
+            Find the right day for your trip
+          </h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            {category.choices.map((choice) => (
+              <article key={choice.title} className="rounded-2xl border bg-card p-5">
+                <h3 className="text-xl font-semibold">{choice.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{choice.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+      <OnThisPage
+        sections={[
+          ["tour-catalog", "Tours & activities"],
+          ...(visibleOwner ? ([["my-private-days", "My private day trips"]] as const) : []),
+          ["choosing-tour", "Choosing the right tour"],
+          ["faq", "FAQ"],
+          ["tour-local", "Related guides"],
+          ["tour-planning", "Travel tips"],
+          ["contact", "Contact me"],
+        ]}
+      />
+      <TourCatalog
+        categoryId={id}
+        filters={filters}
+        onChange={onChange}
+        onRequestQuote={(tour) => setSubjectRequest({ value: tour.title })}
+      />
+      <section id="choosing-tour" aria-labelledby="planning-day-h" className="mt-12">
+        <h2 id="planning-day-h" className="text-2xl font-semibold">
+          {id === "jerusalem"
+            ? "Choosing the right Jerusalem tour"
+            : id === "tel-aviv-jaffa"
+              ? "Choosing the right Tel Aviv & Jaffa tour"
+              : id === "masada-dead-sea"
+                ? "Choosing the right Masada & Dead Sea tour"
+                : id === "bethlehem-jericho"
+                  ? "Choosing the right Bethlehem & Jericho tour"
+                  : id === "nazareth-galilee"
+                    ? "Choosing the right Nazareth & Galilee tour"
+                    : id === "northern-coast"
+                      ? "Choosing the right northern coast tour"
+                      : id === "negev-ramon"
+                        ? "Choosing the right Ramon Crater tour"
+                        : id === "golan-heights"
+                          ? "Choosing the right Golan Heights tour"
+                          : id === "food-markets"
+                            ? "Choosing the right food & market experience"
+                            : id === "eilat-red-sea"
+                              ? "Choosing the right Eilat activity"
+                              : `Planning your ${category.shortTitle} experience`}
+        </h2>
+        <div className="mt-4 grid gap-3 md:grid-cols-3" aria-label="Compare tour options">
+          {category.choices.map((choice) => (
+            <article key={choice.title} className="rounded-xl border bg-secondary/25 p-4">
+              <h3 className="text-base font-semibold">{choice.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{choice.text}</p>
+            </article>
+          ))}
         </div>
+        <div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">
+          {category.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
+        {id === "bethlehem-jericho" && (
+          <p className="mt-4 text-sm text-muted-foreground">
+            For the Qasr al-Yahud portion of the trip,{" "}
+            <a
+              href="https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary underline"
+            >
+              check the official visitor information
+            </a>
+            . Opening, admission and permitted activities can change.
+          </p>
+        )}
+        {id === "negev-ramon" && (
+          <p className="mt-4 text-sm text-muted-foreground">
+            The Negev can be affected by flash floods and extreme temperatures.{" "}
+            <a
+              href="https://en.parks.org.il/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary underline"
+            >
+              Check official parks guidance
+            </a>{" "}
+            and the operator's weather and trail updates before visiting.
+          </p>
+        )}
+        {id === "eilat-red-sea" && (
+          <p className="mt-4 text-sm text-muted-foreground">
+            Sea conditions, extreme heat and trail closures can affect activities. Check{" "}
+            <a
+              href="https://en.parks.org.il/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary underline"
+            >
+              official parks guidance
+            </a>{" "}
+            and the operator’s current safety instructions before setting out.
+          </p>
+        )}
+        {id === "northern-coast" && (
+          <p className="mt-4 text-sm text-muted-foreground">
+            The garden terraces and the northern grottos have separate visitor arrangements.{" "}
+            <a
+              href="https://ganbahai.org.il/visit-us-haifa/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary underline"
+            >
+              Check official Bahá’í Gardens visiting options
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://rosh-hanikra.com/tq/en/info/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary underline"
+            >
+              Rosh Hanikra site information
+            </a>{" "}
+            for visiting arrangements.
+          </p>
+        )}
+        {id === "masada-dead-sea" && (
+          <p className="mt-4 text-sm text-muted-foreground">
+            Ein Gedi access changes after floods.{" "}
+            <a
+              href="https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary underline"
+            >
+              Check current routes and advance reservations with the parks authority
+            </a>{" "}
+            before your visit.
+          </p>
+        )}
+        {id === "jerusalem" && (
+          <p className="mt-4 text-sm">
+            For a culinary walk, compare{" "}
+            <Link to="/tours/food-market-tours/" className="font-semibold text-primary underline">
+              food and market tours
+            </Link>
+            .
+          </p>
+        )}
+        {id === "tel-aviv-jaffa" && (
+          <p className="mt-4 text-sm">
+            For dedicated tastings and cooking experiences, explore{" "}
+            <Link to="/tours/food-market-tours/" className="font-semibold text-primary underline">
+              food and market tours
+            </Link>
+            .
+          </p>
+        )}
+        {id === "nazareth-galilee" && (
+          <p className="mt-4 text-sm">
+            For a separate day in the north, compare{" "}
+            <Link to="/tours/golan-heights/" className="font-semibold text-primary underline">
+              Golan Heights tours
+            </Link>
+            .
+          </p>
+        )}
+        {id === "golan-heights" && (
+          <p className="mt-4 text-sm">
+            For lakeside heritage and churches, explore{" "}
+            <Link
+              to="/tours/nazareth-sea-of-galilee/"
+              className="font-semibold text-primary underline"
+            >
+              Nazareth and Sea of Galilee tours
+            </Link>
+            .
+          </p>
+        )}
+        {id === "northern-coast" && (
+          <p className="mt-4 text-sm">
+            Cruise passengers can choose dedicated{" "}
+            <Link to="/shore-excursions/haifa/" className="font-semibold text-primary underline">
+              Haifa shore excursions
+            </Link>
+            .
+          </p>
+        )}
       </section>
-      <HomeContactForm subjectRequest={subjectRequest} showTripadvisorBesidePortraitMobile guide={{ heading: id === "masada-dead-sea" ? "Need a private driver for Masada and the Dead Sea?" : id === "bethlehem-jericho" ? "Need private transport for your Jerusalem-area trip?" : id === "nazareth-galilee" ? "Need a private driver for Nazareth and the Galilee?" : id === "northern-coast" ? "Need a private driver for Caesarea, Haifa and Akko?" : id === "negev-ramon" ? "Need a private driver for the Negev and Ramon Crater?" : id === "golan-heights" ? "Need a private driver for the Golan Heights?" : id === "food-markets" ? "Need a private transfer for your city or market visit?" : id === "eilat-red-sea" ? "Need a private transfer or driver in Eilat?" : `Need a private driver or transfer in ${cityName}?`, introduction: id === "bethlehem-jericho" ? "I arrange private transfers on permitted routes around Jerusalem. Share your date, pickup and passenger count for a personal quote. Arrange transport within Palestinian areas with the licensed local operator." : id === "food-markets" ? "I arrange private transfers to markets and city attractions. Share your date, pickup and passenger count for a personal quote." : id === "eilat-red-sea" ? "I arrange private transfers and sightseeing journeys with a driver in southern Israel. Share your route, date and passenger count for a personal quote." : `I arrange private transfers and day trips with a driver for ${cityName}. Share your date, pickup, preferred stops and passenger count for a personal quote.`, subject: "", placeholder: "Dates, number of travelers, places you want to visit or your question…" }} />
-    </> : <>
-      <RelatedGuideCards title="Get to know the places on your itinerary" guides={guides} />
-      <MoreTourCategories currentId={id} />
-      <TourCruiseCallout />
-    </>}
-    <SourceList ids={sourceIds} />
-    <TourPhotoCredits photos={[category.photo, ...products.map(tour => tourPhotos[tour.id]!), ...(!isCityTemplate ? [tourCruisePhoto, ...tourCategories.map(item => item.photo), ...guides.map(guide => guide.photo)] : []), ...(isCityTemplate ? localCards.map(card => card.photo) : [])]} />
-  </main>;
+      {!isCityTemplate &&
+        (["bethlehem-jericho", "masada-dead-sea", "food-markets"] as string[]).includes(id) && (
+          <JerusalemClusterLinks pageKey={("tour-" + id) as JerusalemClusterKey} />
+        )}
+      <FaqList faqs={category.faqs} />
+      {isCityTemplate ? (
+        <>
+          <section id="tour-local" aria-labelledby={localHeadingId} className="mt-12 scroll-mt-24">
+            <h2 id={localHeadingId} className="text-2xl font-semibold">
+              Explore {cityName} further
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {id === "masada-dead-sea"
+                ? "Plan your fortress visit, check nature-trail access, discover desert attractions and choose a place to stay."
+                : id === "bethlehem-jericho"
+                  ? "Plan your Bethlehem visit, understand the Qasr al-Yahud site and check practical travel arrangements for the Jordan Valley."
+                  : id === "nazareth-galilee"
+                    ? "Explore Nazareth’s main church, lakeside Christian heritage sites and the Jordan River baptismal stop near the Kinneret."
+                    : id === "northern-coast"
+                      ? "Plan visits to Caesarea’s Roman ruins, Haifa’s gardens and museums, Akko’s Old City and the northern sea grottoes."
+                      : id === "negev-ramon"
+                        ? "Prepare for your desert visit, with related trip ideas and practical planning guides for southern Israel."
+                        : id === "golan-heights"
+                          ? "Explore nearby northern destinations and plan how to fit a Golan day into a larger Galilee journey."
+                          : id === "food-markets"
+                            ? "Explore Israeli food traditions, historic markets and nearby neighborhoods before your tasting walk."
+                            : id === "eilat-red-sea"
+                              ? "Plan your Red Sea stay and separate southern Israel excursions with practical guides."
+                              : `Find places to visit, neighborhoods to explore and more ways to enjoy ${cityName}.`}
+            </p>
+            <div
+              className={
+                localCards.length === 6
+                  ? "mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3"
+                  : "mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+              }
+            >
+              {localCards.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary"
+                >
+                  <img
+                    src={
+                      tourCategories.find(
+                        (other) => String(tourCategoryPaths[other.id]) === String(item.to),
+                      )?.photo.src ??
+                      guideHeroPhotoForPath(String(item.to))?.src ??
+                      item.photo.src
+                    }
+                    srcSet={stage5PhotoSrcSet(
+                      tourCategories.find((other) => tourCategoryPaths[other.id] === item.to)?.photo
+                        .src ??
+                        guideHeroPhotoForPath(String(item.to))?.src ??
+                        item.photo.src,
+                    )}
+                    sizes="(min-width: 1024px) 340px, 45vw"
+                    alt={
+                      tourCategories.find((other) => tourCategoryPaths[other.id] === item.to)?.photo
+                        .alt ??
+                      guideHeroPhotoForPath(String(item.to))?.alt ??
+                      item.photo.alt
+                    }
+                    width={320}
+                    height={176}
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-[16/9] w-full object-cover"
+                  />
+                  <span className="flex flex-1 flex-col p-3.5">
+                    <span className="text-base font-semibold leading-snug text-foreground group-hover:text-primary">
+                      {item.title}
+                    </span>
+                    <span className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                      {item.description}
+                    </span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+          <section
+            id="tour-planning"
+            aria-labelledby={planningHeadingId}
+            className="mt-12 scroll-mt-24"
+          >
+            <h2 id={planningHeadingId} className="text-2xl font-semibold">
+              Practical guides for your trip to Israel
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Helpful information for planning your visit beyond {cityName}.
+            </p>
+            <div
+              className={
+                jerusalemTourPlanningCards.length === 6
+                  ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3"
+                  : "mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+              }
+            >
+              {jerusalemTourPlanningCards.map((item) => {
+                const Icon = jerusalemPlanningIcons[item.icon];
+                return (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className="group flex min-w-0 flex-col items-start gap-3 rounded-xl border bg-secondary/25 sm:flex-row p-3.5 transition-colors hover:border-primary hover:bg-secondary/50 focus-visible:outline-2 focus-visible:outline-primary"
+                  >
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-background text-primary">
+                      <Icon size={20} aria-hidden="true" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-sm font-semibold text-foreground group-hover:text-primary">
+                        {item.title}
+                      </span>
+                      <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">
+                        {item.description}
+                      </span>
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+          <HomeContactForm
+            subjectRequest={subjectRequest}
+            showTripadvisorBesidePortraitMobile
+            guide={{
+              heading:
+                id === "masada-dead-sea"
+                  ? "Need a private driver for Masada and the Dead Sea?"
+                  : id === "bethlehem-jericho"
+                    ? "Need private transport for your Jerusalem-area trip?"
+                    : id === "nazareth-galilee"
+                      ? "Need a private driver for Nazareth and the Galilee?"
+                      : id === "northern-coast"
+                        ? "Need a private driver for Caesarea, Haifa and Akko?"
+                        : id === "negev-ramon"
+                          ? "Need a private driver for the Negev and Ramon Crater?"
+                          : id === "golan-heights"
+                            ? "Need a private driver for the Golan Heights?"
+                            : id === "food-markets"
+                              ? "Need a private transfer for your city or market visit?"
+                              : id === "eilat-red-sea"
+                                ? "Need a private transfer or driver in Eilat?"
+                                : `Need a private driver or transfer in ${cityName}?`,
+              introduction:
+                id === "bethlehem-jericho"
+                  ? "I arrange private transfers on permitted routes around Jerusalem. Share your date, pickup and passenger count for a personal quote. Arrange transport within Palestinian areas with the licensed local operator."
+                  : id === "food-markets"
+                    ? "I arrange private transfers to markets and city attractions. Share your date, pickup and passenger count for a personal quote."
+                    : id === "eilat-red-sea"
+                      ? "I arrange private transfers and sightseeing journeys with a driver in southern Israel. Share your route, date and passenger count for a personal quote."
+                      : `I arrange private transfers and day trips with a driver for ${cityName}. Share your date, pickup, preferred stops and passenger count for a personal quote.`,
+              subject: "",
+              placeholder: "Dates, number of travelers, places you want to visit or your question…",
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <RelatedGuideCards title="Get to know the places on your itinerary" guides={guides} />
+          <MoreTourCategories currentId={id} />
+          <TourCruiseCallout />
+        </>
+      )}
+      <SourceList ids={sourceIds} />
+      <TourPhotoCredits
+        photos={[
+          category.photo,
+          ...products.map((tour) => tourPhotos[tour.id]!),
+          ...(!isCityTemplate
+            ? [
+                tourCruisePhoto,
+                ...tourCategories.map((item) => item.photo),
+                ...guides.map((guide) => guide.photo),
+              ]
+            : []),
+          ...(isCityTemplate ? localCards.map((card) => card.photo) : []),
+        ]}
+      />
+    </main>
+  );
 }

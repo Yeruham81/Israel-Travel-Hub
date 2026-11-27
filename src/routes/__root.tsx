@@ -91,9 +91,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       // Fonts are served by this origin. Preload only the two faces used at first paint.
       // This avoids a render-blocking cross-origin stylesheet and its font request chain.
-      { rel: "preload", href: siteSansUrl, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
-      { rel: "preload", href: siteSerifUrl, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
-      { rel: "preload", href: siteSerifSemiboldUrl, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+      {
+        rel: "preload",
+        href: siteSansUrl,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: siteSerifUrl,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: siteSerifSemiboldUrl,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
       {
         rel: "stylesheet",
         href: appCss,
@@ -123,28 +141,35 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const isHome = useRouterState({ select: (s) => s.matches.some((match) => match.routeId === "/") });
+  const isHome = useRouterState({
+    select: (s) => s.matches.some((match) => match.routeId === "/"),
+  });
   const Content = isHome ? "main" : "div";
 
   return (
     <QueryClientProvider client={queryClient}>
       <CurrencyRatesProvider enabled={!isHome}>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">Skip to content</a>
-      <SiteHeader />
-      <Content id="main">
-        {isHome && <HomeHero />}
-        <div className="mx-auto flex max-w-[90rem]">
-          <SiteSidebar />
-          <div className="min-w-0 flex-1">
-            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-            <Outlet />
-            <PageContentSharePanel />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2"
+        >
+          Skip to content
+        </a>
+        <SiteHeader />
+        <Content id="main">
+          {isHome && <HomeHero />}
+          <div className="mx-auto flex max-w-[90rem]">
+            <SiteSidebar />
+            <div className="min-w-0 flex-1">
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+              <PageContentSharePanel />
+            </div>
           </div>
-        </div>
-      </Content>
-      <SiteFooter />
-      <FloatingContactButton />
-      <Analytics />
+        </Content>
+        <SiteFooter />
+        <FloatingContactButton />
+        <Analytics />
       </CurrencyRatesProvider>
     </QueryClientProvider>
   );

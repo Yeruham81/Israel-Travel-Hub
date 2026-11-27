@@ -10,7 +10,12 @@ import { BookOpen } from "lucide-react";
 import type { ReactNode } from "react";
 import { ExtLink } from "@/components/Layout";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
-import { publicSources, formatCheckDate, INFO_CHECK_DATE, type ProviderLink } from "@/data/registry";
+import {
+  publicSources,
+  formatCheckDate,
+  INFO_CHECK_DATE,
+  type ProviderLink,
+} from "@/data/registry";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
@@ -27,9 +32,16 @@ export function Breadcrumbs({ items }: { items: UiCrumb[] }) {
       <ol className="flex flex-wrap gap-1">
         {items.map((c, i) =>
           i === items.length - 1 ? (
-            <li key={c.name} aria-current="page" className="text-foreground">{c.name}</li>
+            <li key={c.name} aria-current="page" className="text-foreground">
+              {c.name}
+            </li>
           ) : (
-            <li key={c.name}><Link to={c.to} className="hover:text-primary">{c.name}</Link> /</li>
+            <li key={c.name}>
+              <Link to={c.to} className="hover:text-primary">
+                {c.name}
+              </Link>{" "}
+              /
+            </li>
           ),
         )}
       </ol>
@@ -55,9 +67,9 @@ const conciseSectionNames: Readonly<Record<string, string>> = {
   "airport-shuttle": "Terminal shuttle",
   "official-taxi": "Official airport taxis",
   "local-sherut": "Local sherut",
-  "plan": "Data plans",
-  "calling": "Phone calls & SMS",
-  "compatibility": "Phone compatibility",
+  plan: "Data plans",
+  calling: "Phone calls & SMS",
+  compatibility: "Phone compatibility",
   "before-you-fly": "Before you fly",
   "arrival-terminal": "Arrival terminal",
   "passport-control": "Passport control",
@@ -76,7 +88,7 @@ const conciseSectionNames: Readonly<Record<string, string>> = {
   "weekend-711": "Weekend bus 711",
   "terminal-transfer": "Terminal transfer",
   "taxis-transfers": "Taxis & transfers",
-  "restart": "Transport restart",
+  restart: "Transport restart",
   "before-booking": "Before booking",
   "arrival-and-travel": "Arrival & transport",
   "everyday-essentials": "Travel essentials",
@@ -106,19 +118,19 @@ const conciseSectionNames: Readonly<Record<string, string>> = {
   "northern-pilgrimage": "Nazareth & Galilee",
   "coastal-day": "Coastal day trips",
   "trip-format": "Day-trip formats",
-  "scope": "Fare coverage",
+  scope: "Fare coverage",
   "time-distance": "Meter calculations",
   "tariff-hours": "Tariff hours",
-  "extras": "Extra charges",
-  "estimates": "Fare estimates",
-  "disputes": "Fare disputes",
-  "steps": "Ordering a taxi",
-  "terminal3": "Terminal 3",
-  "terminal1": "Terminal 1",
-  "scheduled": "Scheduled pickup",
+  extras: "Extra charges",
+  estimates: "Fare estimates",
+  disputes: "Fare disputes",
+  steps: "Ordering a taxi",
+  terminal3: "Terminal 3",
+  terminal1: "Terminal 1",
+  scheduled: "Scheduled pickup",
   "versus-transfer": "Taxi or transfer",
-  "destinations": "Destinations",
-  "support": "Receipts & support",
+  destinations: "Destinations",
+  support: "Receipts & support",
   "special-needs": "Luggage & access",
   "getting-there": "Getting there",
   "choose-site": "Choose your site",
@@ -162,47 +174,120 @@ export function compactOnThisPageLabel(id: string, label: string): string {
  * Display up to ten jump links in two columns on narrow screens (five rows).
  * More links appear at wider breakpoints, with the rest in an accessible disclosure menu.
  */
-export function OnThisPage({ sections, sticky = false, compactLabels, fullLabels = false }: { sections: readonly (readonly [string, string])[]; sticky?: boolean; compactLabels?: Readonly<Record<string, string>> | undefined; fullLabels?: boolean }) {
+export function OnThisPage({
+  sections,
+  sticky = false,
+  compactLabels,
+  fullLabels = false,
+}: {
+  sections: readonly (readonly [string, string])[];
+  sticky?: boolean;
+  compactLabels?: Readonly<Record<string, string>> | undefined;
+  fullLabels?: boolean;
+}) {
   // Sources remain at the end of each guide in their own collapsed disclosure.
   // They are deliberately excluded from both the visible jump links and All sections.
-  const visibleSections = sections.filter(([id, label]) => id.toLowerCase() !== "sources" && label.trim().toLowerCase() !== "sources");
-  const overflowVisibility = visibleSections.length <= 10 ? "hidden" : visibleSections.length <= 12 ? "lg:hidden" : visibleSections.length <= 15 ? "xl:hidden" : "";
+  const visibleSections = sections.filter(
+    ([id, label]) => id.toLowerCase() !== "sources" && label.trim().toLowerCase() !== "sources",
+  );
+  const overflowVisibility =
+    visibleSections.length <= 10
+      ? "hidden"
+      : visibleSections.length <= 12
+        ? "lg:hidden"
+        : visibleSections.length <= 15
+          ? "xl:hidden"
+          : "";
   return (
-    <nav aria-label="On this page" className={`${sticky ? "sticky top-[57px] z-30" : ""} on-this-page relative mt-5 min-w-0 rounded-xl border border-primary/25 bg-secondary/40 p-3 shadow-sm backdrop-blur sm:p-4`}>
+    <nav
+      aria-label="On this page"
+      className={`${sticky ? "sticky top-[57px] z-30" : ""} on-this-page relative mt-5 min-w-0 rounded-xl border border-primary/25 bg-secondary/40 p-3 shadow-sm backdrop-blur sm:p-4`}
+    >
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 pb-3">
-        <span className="shrink-0 text-xs font-bold uppercase tracking-wider text-foreground">On this page</span>
-        {visibleSections.length > 10 && <details className={`group relative ${overflowVisibility}`}>
-          <summary className="cursor-pointer list-none rounded-md px-2 py-1 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary">
-            All sections <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">⌄</span>
-          </summary>
-          <ul className="absolute right-0 top-full z-40 mt-1 max-h-[min(60vh,420px)] w-[min(88vw,340px)] space-y-0.5 overflow-y-auto rounded-xl border bg-card p-2 shadow-lg">
-            {visibleSections.map(([id, label]) => <li key={id}><a href={`#${id}`} className="block rounded-md px-3 py-2 text-sm leading-snug text-foreground hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">{label}</a></li>)}
-          </ul>
-        </details>}
+        <span className="shrink-0 text-xs font-bold uppercase tracking-wider text-foreground">
+          On this page
+        </span>
+        {visibleSections.length > 10 && (
+          <details className={`group relative ${overflowVisibility}`}>
+            <summary className="cursor-pointer list-none rounded-md px-2 py-1 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary">
+              All sections{" "}
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform group-open:rotate-180"
+              >
+                ⌄
+              </span>
+            </summary>
+            <ul className="absolute right-0 top-full z-40 mt-1 max-h-[min(60vh,420px)] w-[min(88vw,340px)] space-y-0.5 overflow-y-auto rounded-xl border bg-card p-2 shadow-lg">
+              {visibleSections.map(([id, label]) => (
+                <li key={id}>
+                  <a
+                    href={`#${id}`}
+                    className="block rounded-md px-3 py-2 text-sm leading-snug text-foreground hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
       </div>
       <ul className="grid min-w-0 grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {visibleSections.map(([id, label], index) => {
-          const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 10 ? "hidden lg:block" : "";
-          const visibleLabel = fullLabels ? label : (compactLabels?.[id] ?? compactOnThisPageLabel(id, label));
-          return <li key={id} className={`min-w-0 ${visibility}`}>
-            <a href={`#${id}`} title={label} aria-label={visibleLabel === label ? label : `${visibleLabel}: ${label}`} className="chip chip-dense w-full min-w-0">
-              <span className="block min-w-0">{visibleLabel}</span>
-            </a>
-          </li>;
+          const visibility =
+            index >= 15
+              ? "hidden"
+              : index >= 12
+                ? "hidden xl:block"
+                : index >= 10
+                  ? "hidden lg:block"
+                  : "";
+          const visibleLabel = fullLabels
+            ? label
+            : (compactLabels?.[id] ?? compactOnThisPageLabel(id, label));
+          return (
+            <li key={id} className={`min-w-0 ${visibility}`}>
+              <a
+                href={`#${id}`}
+                title={label}
+                aria-label={visibleLabel === label ? label : `${visibleLabel}: ${label}`}
+                className="chip chip-dense w-full min-w-0"
+              >
+                <span className="block min-w-0">{visibleLabel}</span>
+              </a>
+            </li>
+          );
         })}
       </ul>
     </nav>
   );
 }
 
-export function GuideHeader({ crumbs, eyebrow, title, intro, image, checkedAt = INFO_CHECK_DATE }: { crumbs: UiCrumb[]; eyebrow: string; title: string; intro: ReactNode; image?: { src: string; alt: string }; checkedAt?: string }) {
+export function GuideHeader({
+  crumbs,
+  eyebrow,
+  title,
+  intro,
+  image,
+  checkedAt = INFO_CHECK_DATE,
+}: {
+  crumbs: UiCrumb[];
+  eyebrow: string;
+  title: string;
+  intro: ReactNode;
+  image?: { src: string; alt: string };
+  checkedAt?: string;
+}) {
   return (
     <header className="mx-auto max-w-5xl px-4 pt-6">
       <Breadcrumbs items={crumbs} />
       <GuideHeroLayout image={image && <GuideHeroMedia src={image.src} alt={image.alt} />}>
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="guide-page-title mt-3">{title}</h1>
-        <div data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{intro}</div>
+        <div data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">
+          {intro}
+        </div>
         <PageUpdated date={checkedAt} />
       </GuideHeroLayout>
       <AuthorCard />
@@ -210,10 +295,22 @@ export function GuideHeader({ crumbs, eyebrow, title, intro, image, checkedAt = 
   );
 }
 
-export function Section({ id, title, children, className = "" }: { id: string; title: string; children: ReactNode; className?: string }) {
+export function Section({
+  id,
+  title,
+  children,
+  className = "",
+}: {
+  id: string;
+  title: string;
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <section id={id} aria-labelledby={`${id}-h`} className={`mt-14 ${className}`}>
-      <h2 id={`${id}-h`} className="text-3xl">{title}</h2>
+      <h2 id={`${id}-h`} className="text-3xl">
+        {title}
+      </h2>
       <div className="prose-guide">{children}</div>
     </section>
   );
@@ -224,37 +321,71 @@ export function Checklist({ title, items }: { title: string; items: string[] }) 
     <div className="rounded-xl border bg-card p-5">
       <h3 className="font-serif text-lg">{title}</h3>
       <ul className="mt-2 space-y-1 text-sm">
-        {items.map((i) => <li key={i}>✓ {i}</li>)}
+        {items.map((i) => (
+          <li key={i}>✓ {i}</li>
+        ))}
       </ul>
     </div>
   );
 }
 
 export function FaqList({
-  faqs, groups, compact = false,
+  faqs,
+  groups,
+  compact = false,
 }: {
   faqs: { q: string; a: string }[];
   groups?: { title: string; indexes: number[] }[];
   compact?: boolean;
 }) {
-  const renderAnswer = (f: { q: string; a: string }) => <details key={f.q} className="group p-5">
-    <summary className="flex cursor-pointer list-none justify-between gap-4 font-semibold">{f.q}<span aria-hidden className="text-primary transition-transform group-open:rotate-45">+</span></summary>
-    <p className="mt-3 leading-relaxed text-foreground">{f.a}</p>
-  </details>;
+  const renderAnswer = (f: { q: string; a: string }) => (
+    <details key={f.q} className="group p-5">
+      <summary className="flex cursor-pointer list-none justify-between gap-4 font-semibold">
+        {f.q}
+        <span aria-hidden className="text-primary transition-transform group-open:rotate-45">
+          +
+        </span>
+      </summary>
+      <p className="mt-3 leading-relaxed text-foreground">{f.a}</p>
+    </details>
+  );
   return (
     <section id="faq" aria-labelledby="faq-h" className={compact ? "mt-9" : "mt-14"}>
-      <h2 id="faq-h" className={compact ? "text-2xl font-semibold" : "text-3xl"}>Frequently asked questions</h2>
-      {groups?.length ? <div className="mt-5 space-y-7">
-        {groups.map(group => <section key={group.title} aria-label={group.title}>
-          <h3 className="mb-3 text-xl font-semibold">{group.title}</h3>
-          <div className="divide-y rounded-2xl border bg-card">{group.indexes.map(i => faqs[i]).filter((f): f is { q: string; a: string } => Boolean(f)).map(renderAnswer)}</div>
-        </section>)}
-      </div> : <div className="mt-4 divide-y rounded-2xl border bg-card">{faqs.map(renderAnswer)}</div>}
+      <h2 id="faq-h" className={compact ? "text-2xl font-semibold" : "text-3xl"}>
+        Frequently asked questions
+      </h2>
+      {groups?.length ? (
+        <div className="mt-5 space-y-7">
+          {groups.map((group) => (
+            <section key={group.title} aria-label={group.title}>
+              <h3 className="mb-3 text-xl font-semibold">{group.title}</h3>
+              <div className="divide-y rounded-2xl border bg-card">
+                {group.indexes
+                  .map((i) => faqs[i])
+                  .filter((f): f is { q: string; a: string } => Boolean(f))
+                  .map(renderAnswer)}
+              </div>
+            </section>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-4 divide-y rounded-2xl border bg-card">{faqs.map(renderAnswer)}</div>
+      )}
     </section>
   );
 }
 
-export function SourceList({ ids, intro = "", compact = false, linksOnly = false }: { ids: string[]; intro?: string; compact?: boolean; linksOnly?: boolean }) {
+export function SourceList({
+  ids,
+  intro = "",
+  compact = false,
+  linksOnly = false,
+}: {
+  ids: string[];
+  intro?: string;
+  compact?: boolean;
+  linksOnly?: boolean;
+}) {
   const sources = publicSources(ids);
   if (!sources.length) return null;
   return (
@@ -262,10 +393,25 @@ export function SourceList({ ids, intro = "", compact = false, linksOnly = false
       {intro && <p className="mt-2 text-sm text-muted-foreground">{intro}</p>}
       <ul className={compact ? "mt-4 grid gap-2 sm:grid-cols-2" : "mt-4 space-y-3"}>
         {sources.map((s) => (
-          <li key={s.id} className={compact ? "min-w-0 rounded-lg border bg-card p-3 text-sm" : "rounded-xl border bg-card p-4 text-sm"}>
-            <ExtLink href={s.url} className="font-semibold text-primary">{(compact ? s.title : `${s.publisher}: ${s.title}`).replaceAll(" — ", " - ")}</ExtLink>
-            {!linksOnly && s.note && (!compact || !s.id.startsWith("hotel-")) && <p className="mt-1 text-muted-foreground">{s.note}</p>}
-            {!linksOnly && <p className="mt-1 text-xs text-muted-foreground">{s.checkedAt ? `Checked ${formatCheckDate(s.checkedAt)}` : "Linked for reference"}</p>}
+          <li
+            key={s.id}
+            className={
+              compact
+                ? "min-w-0 rounded-lg border bg-card p-3 text-sm"
+                : "rounded-xl border bg-card p-4 text-sm"
+            }
+          >
+            <ExtLink href={s.url} className="font-semibold text-primary">
+              {(compact ? s.title : `${s.publisher}: ${s.title}`).replaceAll(" — ", " - ")}
+            </ExtLink>
+            {!linksOnly && s.note && (!compact || !s.id.startsWith("hotel-")) && (
+              <p className="mt-1 text-muted-foreground">{s.note}</p>
+            )}
+            {!linksOnly && (
+              <p className="mt-1 text-xs text-muted-foreground">
+                {s.checkedAt ? `Checked ${formatCheckDate(s.checkedAt)}` : "Linked for reference"}
+              </p>
+            )}
           </li>
         ))}
       </ul>
@@ -273,55 +419,148 @@ export function SourceList({ ids, intro = "", compact = false, linksOnly = false
   );
 }
 
-function ProviderAction({ link: l, pageId, className, children, showArrow = true }: { link: ProviderLink; pageId: string; className: string; children: ReactNode; showArrow?: boolean }) {
+function ProviderAction({
+  link: l,
+  pageId,
+  className,
+  children,
+  showArrow = true,
+}: {
+  link: ProviderLink;
+  pageId: string;
+  className: string;
+  children: ReactNode;
+  showArrow?: boolean;
+}) {
   const internal = l.url.startsWith("/");
-  return <a
-    href={l.id === "cars-discovercars" ? carRentalAffiliateUrl(`/${pageId}/`) : hotelBrowseAffiliateUrl(l, pageId)}
-    target={internal ? undefined : "_blank"}
-    rel={internal ? undefined : relFor(l.isAffiliate)}
-    onClick={internal ? undefined : () => recordOutboundClick({ pageId, productId: l.id, offerId: l.id })}
-    className={className}
-  >
-    {children}{showArrow && internal && <> <span aria-hidden>→</span></>}
-    {!internal && showArrow && <span className="sr-only"> (opens in a new tab)</span>}
-  </a>;
+  return (
+    <a
+      href={
+        l.id === "cars-discovercars"
+          ? carRentalAffiliateUrl(`/${pageId}/`)
+          : hotelBrowseAffiliateUrl(l, pageId)
+      }
+      target={internal ? undefined : "_blank"}
+      rel={internal ? undefined : relFor(l.isAffiliate)}
+      onClick={
+        internal ? undefined : () => recordOutboundClick({ pageId, productId: l.id, offerId: l.id })
+      }
+      className={className}
+    >
+      {children}
+      {showArrow && internal && (
+        <>
+          {" "}
+          <span aria-hidden>→</span>
+        </>
+      )}
+      {!internal && showArrow && <span className="sr-only"> (opens in a new tab)</span>}
+    </a>
+  );
 }
 
 /** Text links in editorial eSIM comparisons use the same affiliate URL and click attribution as provider buttons. */
-export function ProviderNameLink({ link, pageId, children }: { link: ProviderLink; pageId: string; children?: ReactNode }) {
-  return <ProviderAction link={link} pageId={pageId} showArrow={false} className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">{children ?? link.providerName}</ProviderAction>;
+export function ProviderNameLink({
+  link,
+  pageId,
+  children,
+}: {
+  link: ProviderLink;
+  pageId: string;
+  children?: ReactNode;
+}) {
+  return (
+    <ProviderAction
+      link={link}
+      pageId={pageId}
+      showArrow={false}
+      className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary"
+    >
+      {children ?? link.providerName}
+    </ProviderAction>
+  );
 }
 
 export function ProviderCard({ link: l, pageId }: { link: ProviderLink; pageId: string }) {
   return (
     <li className="rounded-2xl border bg-card p-5 md:p-6" data-testid="provider-card">
-      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{relationshipLabel[l.relationship]} · {l.providerName}</p>
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        {relationshipLabel[l.relationship]} · {l.providerName}
+      </p>
       <h3 className="mt-1 text-2xl">{l.title}</h3>
-      {l.relationship === "publisher_operator" && <p className="mt-1 text-sm font-medium text-warning">Disclosure: operated by the publisher's local transport business.</p>}
+      {l.relationship === "publisher_operator" && (
+        <p className="mt-1 text-sm font-medium text-warning">
+          Disclosure: operated by the publisher's local transport business.
+        </p>
+      )}
       <p className="mt-2 text-muted-foreground">{l.summary}</p>
-      <p className="mt-3 text-sm"><span className="font-medium">Confirm on the offer:</span> {l.confirm.join(", ")}.</p>
+      <p className="mt-3 text-sm">
+        <span className="font-medium">Confirm on the offer:</span> {l.confirm.join(", ")}.
+      </p>
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <ProviderAction link={l} pageId={pageId} className="btn btn-primary">{l.ctaLabel}</ProviderAction>
-        <p className="text-xs text-muted-foreground">{l.url.startsWith("/") ? "Review the service and send a quote request." : modeNote[l.mode]}{l.reentryNote ? ` ${l.reentryNote}` : ""}</p>
+        <ProviderAction link={l} pageId={pageId} className="btn btn-primary">
+          {l.ctaLabel}
+        </ProviderAction>
+        <p className="text-xs text-muted-foreground">
+          {l.url.startsWith("/")
+            ? "Review the service and send a quote request."
+            : modeNote[l.mode]}
+          {l.reentryNote ? ` ${l.reentryNote}` : ""}
+        </p>
       </div>
     </li>
   );
 }
 
-export function ProviderSection({ id = "book", title, intro, links, pageId }: { id?: string; title: string; intro?: ReactNode; links: ProviderLink[]; pageId: string }) {
+export function ProviderSection({
+  id = "book",
+  title,
+  intro,
+  links,
+  pageId,
+}: {
+  id?: string;
+  title: string;
+  intro?: ReactNode;
+  links: ProviderLink[];
+  pageId: string;
+}) {
   return (
     <section id={id} aria-labelledby={`${id}-h`} className="mt-14">
-      <h2 id={`${id}-h`} className="text-3xl">{title}</h2>
+      <h2 id={`${id}-h`} className="text-3xl">
+        {title}
+      </h2>
       {intro && <p className="mt-2 max-w-3xl text-muted-foreground">{intro}</p>}
-      <ul className="mt-5 space-y-4">{links.map((l) => <ProviderCard key={l.id} link={l} pageId={pageId} />)}</ul>
+      <ul className="mt-5 space-y-4">
+        {links.map((l) => (
+          <ProviderCard key={l.id} link={l} pageId={pageId} />
+        ))}
+      </ul>
     </section>
   );
 }
 
 function GuideCardPhoto({ photo }: { photo?: { src: string; alt: string } | null }) {
-  return photo
-    ? <img src={photo.src} srcSet={stage5PhotoSrcSet(photo.src)} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 45vw" alt={photo.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
-    : <span aria-hidden="true" className="flex aspect-[16/9] w-full items-center justify-center bg-secondary/50 text-muted-foreground"><BookOpen className="h-10 w-10 opacity-50" /></span>;
+  return photo ? (
+    <img
+      src={photo.src}
+      srcSet={stage5PhotoSrcSet(photo.src)}
+      sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 45vw"
+      alt={photo.alt}
+      loading="lazy"
+      decoding="async"
+      width={600}
+      height={340}
+      className="aspect-[16/9] w-full object-cover"
+    />
+  ) : (
+    <span
+      aria-hidden="true"
+      className="flex aspect-[16/9] w-full items-center justify-center bg-secondary/50 text-muted-foreground"
+    >
+      <BookOpen className="h-10 w-10 opacity-50" />
+    </span>
+  );
 }
 
 /**
@@ -342,7 +581,21 @@ const relatedDirectory: GuideDirectoryEntry[] = [
   })),
 ];
 
-export function RelatedLinks({ title = "Plan the rest of your trip", items, currentPath, illustrated = false, maxPhotoCards = 4, descriptionLines = 3 }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[]; currentPath?: string; illustrated?: boolean; maxPhotoCards?: number; descriptionLines?: 2 | 3 }) {
+export function RelatedLinks({
+  title = "Plan the rest of your trip",
+  items,
+  currentPath,
+  illustrated = false,
+  maxPhotoCards = 4,
+  descriptionLines = 3,
+}: {
+  title?: string;
+  items: { label: string; to: LinkProps["to"]; note?: string }[];
+  currentPath?: string;
+  illustrated?: boolean;
+  maxPhotoCards?: number;
+  descriptionLines?: 2 | 3;
+}) {
   // Use the same licensed, locally stored guide photographs as the taxi and Shabbat
   // recommendation cards. Only explicitly selected related links are illustrated.
   // Keep service/directory links as compact secondary navigation rather than dropping them.
@@ -356,89 +609,225 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       return true;
     });
     const withPhoto = unique.flatMap((item) => {
-      const guide = relatedDirectory.find((entry) => normalized(String(entry.to)) === normalized(String(item.to)) && entry.photo);
+      const guide = relatedDirectory.find(
+        (entry) => normalized(String(entry.to)) === normalized(String(item.to)) && entry.photo,
+      );
       return guide ? [{ item, guide }] : [];
     });
-    const pictured = uniqueGuideCardPhotos(withPhoto.slice(0, maxPhotoCards), [relatedDirectory.find(guide => normalized(String(guide.to)) === normalized(currentPath || ""))?.photo?.src || ""]);
+    const pictured = uniqueGuideCardPhotos(withPhoto.slice(0, maxPhotoCards), [
+      relatedDirectory.find(
+        (guide) => normalized(String(guide.to)) === normalized(currentPath || ""),
+      )?.photo?.src || "",
+    ]);
     const picturedPaths = new Set(pictured.map(({ item }) => normalized(String(item.to))));
     const remaining = unique.filter((item) => !picturedPaths.has(normalized(String(item.to))));
     if (!pictured.length && !remaining.length) return null;
-    return <section aria-label={title} className="mt-12" data-testid="stay-trip-planning">
-      <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
-      {pictured.length > 0 && <ul className={pictured.length === 6 ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"} data-testid="stay-trip-photo-grid">
-        {pictured.map(({ item, guide, cardPhoto }) => <li key={String(item.to)} className="min-w-0">
-          <Link to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-            <GuideCardPhoto photo={cardPhoto ?? null} />
-            <span className="flex flex-1 flex-col p-4">
-              <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
-              <span className={`mt-2 flex-1 text-sm leading-relaxed text-muted-foreground ${descriptionLines === 2 ? "line-clamp-2" : "line-clamp-3"}`}>{item.note || guide.description}</span>
-              
-            </span>
-          </Link>
-        </li>)}
-      </ul>}
-      {remaining.length > 0 && <nav aria-label="More trip planning options" className="mt-5">
-        <p className="text-sm font-semibold text-muted-foreground">More ways to plan your stay</p>
-        <ul className={remaining.length === 6 ? "mt-3 grid grid-cols-2 gap-2 lg:grid-cols-3" : "mt-3 grid gap-2 sm:grid-cols-2"}>
-          {remaining.map((item) => <li key={String(item.to)}>
-            <Link to={item.to} className="group flex h-full flex-col justify-center rounded-xl border bg-card px-4 py-3 text-sm transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <span className="font-semibold text-foreground group-hover:text-primary">{item.label}</span>
-              {item.note && <span className="mt-1 text-xs leading-relaxed text-muted-foreground">{item.note}</span>}
-            </Link>
-          </li>)}
-        </ul>
-      </nav>}
-    </section>;
+    return (
+      <section aria-label={title} className="mt-12" data-testid="stay-trip-planning">
+        <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
+        {pictured.length > 0 && (
+          <ul
+            className={
+              pictured.length === 6
+                ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3"
+                : "mt-4 grid gap-4 sm:grid-cols-2"
+            }
+            data-testid="stay-trip-photo-grid"
+          >
+            {pictured.map(({ item, guide, cardPhoto }) => (
+              <li key={String(item.to)} className="min-w-0">
+                <Link
+                  to={item.to}
+                  className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                  <GuideCardPhoto photo={cardPhoto ?? null} />
+                  <span className="flex flex-1 flex-col p-4">
+                    <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">
+                      {item.label}
+                    </span>
+                    <span
+                      className={`mt-2 flex-1 text-sm leading-relaxed text-muted-foreground ${descriptionLines === 2 ? "line-clamp-2" : "line-clamp-3"}`}
+                    >
+                      {item.note || guide.description}
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+        {remaining.length > 0 && (
+          <nav aria-label="More trip planning options" className="mt-5">
+            <p className="text-sm font-semibold text-muted-foreground">
+              More ways to plan your stay
+            </p>
+            <ul
+              className={
+                remaining.length === 6
+                  ? "mt-3 grid grid-cols-2 gap-2 lg:grid-cols-3"
+                  : "mt-3 grid gap-2 sm:grid-cols-2"
+              }
+            >
+              {remaining.map((item) => (
+                <li key={String(item.to)}>
+                  <Link
+                    to={item.to}
+                    className="group flex h-full flex-col justify-center rounded-xl border bg-card px-4 py-3 text-sm transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  >
+                    <span className="font-semibold text-foreground group-hover:text-primary">
+                      {item.label}
+                    </span>
+                    {item.note && (
+                      <span className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                        {item.note}
+                      </span>
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+      </section>
+    );
   }
   const guideSection = /\bguides?\b/i.test(title);
   const normalized = (path: string) => path.replace(/\/+$/, "");
-  const current = currentPath ? relatedDirectory.find((guide) => normalized(String(guide.to)) === normalized(currentPath)) : undefined;
-  const titleWords = new Set((current?.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((w) => w.replace(/s$/, "")).filter((w) => !["israel", "travel", "guide", "with", "from", "your", "what", "about", "best"].includes(w)));
+  const current = currentPath
+    ? relatedDirectory.find((guide) => normalized(String(guide.to)) === normalized(currentPath))
+    : undefined;
+  const titleWords = new Set(
+    (current?.title.toLowerCase().match(/[a-z]{4,}/g) || [])
+      .map((w) => w.replace(/s$/, ""))
+      .filter(
+        (w) =>
+          !["israel", "travel", "guide", "with", "from", "your", "what", "about", "best"].includes(
+            w,
+          ),
+      ),
+  );
   const guideItems = guideSection
-    ? items.flatMap((item, order) => {
-        const guide = relatedDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
-        if (!guide || (current && guide.to === current.to)) return [];
-        const strongTopics = guide.topics.filter((topic) => topic !== "tips" && current?.topics.includes(topic)).length;
-        const words = new Set((guide.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((w) => w.replace(/s$/, "")));
-        const titleOverlap = [...titleWords].filter((word) => words.has(word)).length;
-        // Avoid generic "tips" tag alone making off-topic eSIM/hotel pages appear in a taxi cluster.
-        if (current && current.topics.some((topic) => topic !== "tips") && strongTopics === 0 && titleOverlap === 0) return [];
-        return [{ item, guide, order, score: strongTopics * 3 + titleOverlap * 2 }];
-      }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index)
-        .sort((a, b) => b.score - a.score || a.order - b.order).slice(0, 6)
+    ? items
+        .flatMap((item, order) => {
+          const guide = relatedDirectory.find(
+            (candidate) => candidate.to === item.to && Boolean(candidate.photo),
+          );
+          if (!guide || (current && guide.to === current.to)) return [];
+          const strongTopics = guide.topics.filter(
+            (topic) => topic !== "tips" && current?.topics.includes(topic),
+          ).length;
+          const words = new Set(
+            (guide.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((w) => w.replace(/s$/, "")),
+          );
+          const titleOverlap = [...titleWords].filter((word) => words.has(word)).length;
+          // Avoid generic "tips" tag alone making off-topic eSIM/hotel pages appear in a taxi cluster.
+          if (
+            current &&
+            current.topics.some((topic) => topic !== "tips") &&
+            strongTopics === 0 &&
+            titleOverlap === 0
+          )
+            return [];
+          return [{ item, guide, order, score: strongTopics * 3 + titleOverlap * 2 }];
+        })
+        .filter(
+          ({ guide }, index, all) =>
+            all.findIndex((entry) => entry.guide.to === guide.to) === index,
+        )
+        .sort((a, b) => b.score - a.score || a.order - b.order)
+        .slice(0, 6)
     : [];
   // For broad planning topics (e.g. eSIM), retain a compact pair from the editor's
   // explicitly selected guides when taxonomy alone cannot find two matches.
   // When editors explicitly choose exactly six practical guides, keep all six
   // instead of letting generic topic-ranking remove a locally relevant guide.
   // Only use this override when all six distinct guide routes are valid.
-  const curatedSix = guideSection && items.length === 6
-    ? items.flatMap((item, order) => {
-        const guide = relatedDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
-        return guide && (!current || guide.to !== current.to) ? [{ item, guide, order, score: 0 }] : [];
-      }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index)
-    : [];
-  const selectedGuides = curatedSix.length === 6 ? curatedSix : guideItems.length >= 2 ? guideItems : items.flatMap((item, order) => {
-    const guide = relatedDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
-    return guide && (!current || guide.to !== current.to) ? [{ item, guide, order, score: 0 }] : [];
-  }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index).slice(0, 6);
+  const curatedSix =
+    guideSection && items.length === 6
+      ? items
+          .flatMap((item, order) => {
+            const guide = relatedDirectory.find(
+              (candidate) => candidate.to === item.to && Boolean(candidate.photo),
+            );
+            return guide && (!current || guide.to !== current.to)
+              ? [{ item, guide, order, score: 0 }]
+              : [];
+          })
+          .filter(
+            ({ guide }, index, all) =>
+              all.findIndex((entry) => entry.guide.to === guide.to) === index,
+          )
+      : [];
+  const selectedGuides =
+    curatedSix.length === 6
+      ? curatedSix
+      : guideItems.length >= 2
+        ? guideItems
+        : items
+            .flatMap((item, order) => {
+              const guide = relatedDirectory.find(
+                (candidate) => candidate.to === item.to && Boolean(candidate.photo),
+              );
+              return guide && (!current || guide.to !== current.to)
+                ? [{ item, guide, order, score: 0 }]
+                : [];
+            })
+            .filter(
+              ({ guide }, index, all) =>
+                all.findIndex((entry) => entry.guide.to === guide.to) === index,
+            )
+            .slice(0, 6);
   // When an editorial list is odd, prefer a genuinely related additional guide.
   // If none qualifies, show the strongest complete pairs rather than inventing relevance.
-  const supplemental = current && selectedGuides.length > 0 && selectedGuides.length % 2 === 1 && selectedGuides.length < 6
-    ? relatedDirectory
-        .filter((candidate) => String(candidate.to).startsWith("/travel-blog/") && candidate.photo && candidate.to !== current.to && !selectedGuides.some((entry) => entry.guide.to === candidate.to))
-        .map((candidate) => {
-          const shared = candidate.topics.filter((topic) => topic !== "tips" && current.topics.includes(topic));
-          const words = new Set((candidate.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((word) => word.replace(/s$/, "")));
-          const overlap = [...titleWords].filter((word) => words.has(word)).length;
-          const specificTopic = shared.some((topic) => !["destinations", "attractions"].includes(topic));
-          return { guide: candidate, score: shared.length * 3 + overlap * 2, relevant: specificTopic || overlap > 0 };
-        })
-        .filter((candidate) => candidate.relevant && candidate.score >= 3)
-        .sort((a, b) => b.score - a.score)[0]
-    : undefined;
+  const supplemental =
+    current &&
+    selectedGuides.length > 0 &&
+    selectedGuides.length % 2 === 1 &&
+    selectedGuides.length < 6
+      ? relatedDirectory
+          .filter(
+            (candidate) =>
+              String(candidate.to).startsWith("/travel-blog/") &&
+              candidate.photo &&
+              candidate.to !== current.to &&
+              !selectedGuides.some((entry) => entry.guide.to === candidate.to),
+          )
+          .map((candidate) => {
+            const shared = candidate.topics.filter(
+              (topic) => topic !== "tips" && current.topics.includes(topic),
+            );
+            const words = new Set(
+              (candidate.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((word) =>
+                word.replace(/s$/, ""),
+              ),
+            );
+            const overlap = [...titleWords].filter((word) => words.has(word)).length;
+            const specificTopic = shared.some(
+              (topic) => !["destinations", "attractions"].includes(topic),
+            );
+            return {
+              guide: candidate,
+              score: shared.length * 3 + overlap * 2,
+              relevant: specificTopic || overlap > 0,
+            };
+          })
+          .filter((candidate) => candidate.relevant && candidate.score >= 3)
+          .sort((a, b) => b.score - a.score)[0]
+      : undefined;
   const completedGuides = supplemental
-    ? [...selectedGuides, { item: { label: supplemental.guide.title, to: supplemental.guide.to, note: supplemental.guide.description }, guide: supplemental.guide, score: supplemental.score, order: items.length }]
+    ? [
+        ...selectedGuides,
+        {
+          item: {
+            label: supplemental.guide.title,
+            to: supplemental.guide.to,
+            note: supplemental.guide.description,
+          },
+          guide: supplemental.guide,
+          score: supplemental.score,
+          order: items.length,
+        },
+      ]
     : selectedGuides;
   const pairedGuides = uniqueGuideCardPhotos(
     completedGuides.slice(0, completedGuides.length - (completedGuides.length % 2)),
@@ -447,39 +836,78 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
   if (guideSection && pairedGuides.length === 0) return null;
   if (!guideSection && items.length === 0) return null;
 
-  return <section aria-label={title} className="mt-12">
-    <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
-    {guideSection ? (
-      <ul className={pairedGuides.length === 6 ? "mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"}>
-        {pairedGuides.map(({ item, guide, cardPhoto }) => <li key={String(guide.to)} className="min-w-0">
-          <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-            <GuideCardPhoto photo={cardPhoto ?? null} />
-            <span className="flex flex-1 flex-col p-4">
-              <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
-              <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note || guide.description}</span>
-              
-            </span>
-          </Link>
-        </li>)}
-      </ul>
-    ) : (
-      <ul className={items.length === 6 ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-4 grid gap-3 sm:grid-cols-2"}>
-        {items.map((item) => <li key={String(item.to)}>
-          <Link to={item.to} className="block h-full rounded-xl border bg-card p-4 hover:border-primary focus-visible:outline-2 focus-visible:outline-primary">
-            <span className="font-medium">{item.label}</span>
-            {item.note && <span className="mt-1 block text-sm text-muted-foreground">{item.note}</span>}
-          </Link>
-        </li>)}
-      </ul>
-    )}
-  </section>;
+  return (
+    <section aria-label={title} className="mt-12">
+      <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
+      {guideSection ? (
+        <ul
+          className={
+            pairedGuides.length === 6
+              ? "mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3"
+              : "mt-4 grid gap-4 sm:grid-cols-2"
+          }
+        >
+          {pairedGuides.map(({ item, guide, cardPhoto }) => (
+            <li key={String(guide.to)} className="min-w-0">
+              <Link
+                to={guide.to}
+                className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                <GuideCardPhoto photo={cardPhoto ?? null} />
+                <span className="flex flex-1 flex-col p-4">
+                  <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">
+                    {item.label}
+                  </span>
+                  <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {item.note || guide.description}
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul
+          className={
+            items.length === 6
+              ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3"
+              : "mt-4 grid gap-3 sm:grid-cols-2"
+          }
+        >
+          {items.map((item) => (
+            <li key={String(item.to)}>
+              <Link
+                to={item.to}
+                className="block h-full rounded-xl border bg-card p-4 hover:border-primary focus-visible:outline-2 focus-visible:outline-primary"
+              >
+                <span className="font-medium">{item.label}</span>
+                {item.note && (
+                  <span className="mt-1 block text-sm text-muted-foreground">{item.note}</span>
+                )}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
 }
 
-export function EndCta({ title, links, pageId }: { title: string; links: ProviderLink[]; pageId: string }) {
+export function EndCta({
+  title,
+  links,
+  pageId,
+}: {
+  title: string;
+  links: ProviderLink[];
+  pageId: string;
+}) {
   return (
     <section className="mt-14 rounded-2xl bg-primary p-8 text-primary-foreground">
       <h2 className="text-3xl">{title}</h2>
-      <p className="mt-2 opacity-85">Confirm the final price and arrangements with the provider before paying.</p>
+      <p className="mt-2 opacity-85">
+        Confirm the final price and arrangements with the provider before paying.
+      </p>
       <div className="mt-6 flex flex-wrap gap-3">
         {links.map((l) => (
           <ProviderAction key={l.id} link={l} pageId={pageId} className="btn btn-light">
@@ -492,9 +920,24 @@ export function EndCta({ title, links, pageId }: { title: string; links: Provide
 }
 
 /** Hub card linking to an internal page. */
-export function HubCard({ to, eyebrow, title, text, cta }: { to: LinkProps["to"]; eyebrow?: string; title: string; text: string; cta: string }) {
+export function HubCard({
+  to,
+  eyebrow,
+  title,
+  text,
+  cta,
+}: {
+  to: LinkProps["to"];
+  eyebrow?: string;
+  title: string;
+  text: string;
+  cta: string;
+}) {
   return (
-    <Link to={to} className="group flex h-full flex-col rounded-2xl border bg-card p-6 transition-colors hover:border-primary">
+    <Link
+      to={to}
+      className="group flex h-full flex-col rounded-2xl border bg-card p-6 transition-colors hover:border-primary"
+    >
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       <h3 className="mt-2 text-2xl">{title}</h3>
       <p className="mt-2 flex-1 text-muted-foreground">{text}</p>
@@ -503,7 +946,17 @@ export function HubCard({ to, eyebrow, title, text, cta }: { to: LinkProps["to"]
   );
 }
 
-export function HubHeader({ crumbs, eyebrow, title, intro, actions, checkedAt, showAuthor = true, image, imageLayout = "compact" }: {
+export function HubHeader({
+  crumbs,
+  eyebrow,
+  title,
+  intro,
+  actions,
+  checkedAt,
+  showAuthor = true,
+  image,
+  imageLayout = "compact",
+}: {
   crumbs: UiCrumb[];
   eyebrow?: string;
   title: string;
@@ -517,19 +970,32 @@ export function HubHeader({ crumbs, eyebrow, title, intro, actions, checkedAt, s
   imageLayout?: "compact" | "guide";
 }) {
   const guideImage = Boolean(image) && imageLayout === "guide";
-  const content = <>
-    {eyebrow && <p className={guideImage ? "eyebrow" : "eyebrow mt-6"}>{eyebrow}</p>}
-    <h1 className="guide-page-title mt-3 max-w-4xl">{title}</h1>
-    <div data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{intro}</div>
-    {actions && <div className="mt-5 flex flex-wrap gap-3">{actions}</div>}
-  </>;
+  const content = (
+    <>
+      {eyebrow && <p className={guideImage ? "eyebrow" : "eyebrow mt-6"}>{eyebrow}</p>}
+      <h1 className="guide-page-title mt-3 max-w-4xl">{title}</h1>
+      <div
+        data-guide-intro
+        className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground"
+      >
+        {intro}
+      </div>
+      {actions && <div className="mt-5 flex flex-wrap gap-3">{actions}</div>}
+    </>
+  );
   return (
     <header className="hub-header mx-auto max-w-5xl px-4 pt-6" data-testid="hub-header">
       <Breadcrumbs items={crumbs} />
-      {guideImage ? <GuideHeroLayout image={image}>{content}</GuideHeroLayout> : image ? <div className="mt-4 grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1.9fr)_minmax(0,0.95fr)] lg:gap-6">
-        <div className="min-w-0">{content}</div>
-        <div className="min-w-0">{image}</div>
-      </div> : content}
+      {guideImage ? (
+        <GuideHeroLayout image={image}>{content}</GuideHeroLayout>
+      ) : image ? (
+        <div className="mt-4 grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1.9fr)_minmax(0,0.95fr)] lg:gap-6">
+          <div className="min-w-0">{content}</div>
+          <div className="min-w-0">{image}</div>
+        </div>
+      ) : (
+        content
+      )}
       {checkedAt && <PageUpdated date={checkedAt} />}
       {showAuthor && <AuthorCard />}
     </header>

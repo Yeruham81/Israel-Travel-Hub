@@ -5,7 +5,12 @@ import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard"
 import { tourBookingOffers, tourProducts } from "@/data/registry";
 import { tourSnapshotPrice } from "@/lib/tours";
 import { SiteLink as Link } from "@/components/SiteLink";
-import { AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip, type AttractionDestinationContent } from "@/components/AttractionDestinationPage";
+import {
+  AttractionDestinationPage,
+  AttractionHighlight,
+  AttractionPracticalTip,
+  type AttractionDestinationContent,
+} from "@/components/AttractionDestinationPage";
 import { affiliateConfig } from "@/data/registry";
 import { recordAffiliateTourClick } from "@/lib/tour-analytics";
 const lakeHero = "/images/attractions/sea-of-galilee.webp";
@@ -17,30 +22,43 @@ import nazarethCard from "@/assets/guides/2026-10/mount-precipice.webp";
 import privateCard from "@/assets/tiberias/heritage.webp";
 
 const sources = {
-  beaches: "https://ikinneret.org.il/%D7%9E%D7%99%D7%93%D7%A2-%D7%95%D7%A9%D7%99%D7%A8%D7%95%D7%AA%D7%99%D7%9D/%D7%9E%D7%93%D7%A8%D7%99%D7%9A-%D7%97%D7%95%D7%A4%D7%99-%D7%9B%D7%99%D7%A0%D7%A8%D7%AA/",
+  beaches:
+    "https://ikinneret.org.il/%D7%9E%D7%99%D7%93%D7%A2-%D7%95%D7%A9%D7%99%D7%A8%D7%95%D7%AA%D7%99%D7%9D/%D7%9E%D7%93%D7%A8%D7%99%D7%9A-%D7%97%D7%95%D7%A4%D7%99-%D7%9B%D7%99%D7%A0%D7%A8%D7%AA/",
   tzemach: "https://ikinneret.org.il/beaches/%D7%97%D7%95%D7%A3-%D7%A6%D7%9E%D7%97/",
-  hukok: "https://ikinneret.org.il/beaches/%D7%97%D7%95%D7%A3-%D7%97%D7%95%D7%A7%D7%95%D7%A7-%D7%A6%D7%A4%D7%95%D7%9F/",
-  kursi: "https://ikinneret.org.il/beaches/%D7%9B%D7%95%D7%A8%D7%A1%D7%99-%D7%97%D7%95%D7%A3-%D7%A9%D7%A7%D7%98/",
-  unsafeShore: "https://ikinneret.org.il/beaches/%D7%A9%D7%A4%D7%9A-%D7%A0%D7%97%D7%9C-%D7%A2%D7%9E%D7%95%D7%93/",
+  hukok:
+    "https://ikinneret.org.il/beaches/%D7%97%D7%95%D7%A3-%D7%97%D7%95%D7%A7%D7%95%D7%A7-%D7%A6%D7%A4%D7%95%D7%9F/",
+  kursi:
+    "https://ikinneret.org.il/beaches/%D7%9B%D7%95%D7%A8%D7%A1%D7%99-%D7%97%D7%95%D7%A3-%D7%A9%D7%A7%D7%98/",
+  unsafeShore:
+    "https://ikinneret.org.il/beaches/%D7%A9%D7%A4%D7%9A-%D7%A0%D7%97%D7%9C-%D7%A2%D7%9E%D7%95%D7%93/",
   arbel: "https://en.parks.org.il/reserve-park/arbel-national-park-and-nature-reserve/",
   egged: "https://www.egged.co.il/",
   lakeAuthority: "https://ikinneret.org.il/",
 };
 const maps = {
   tiberias: "https://www.google.com/maps/dir/?api=1&destination=Tiberias%2C%20Israel",
-  tzemach: "https://www.google.com/maps/dir/?api=1&destination=Tzemach%20Beach%2C%20Sea%20of%20Galilee%2C%20Israel",
-  hukok: "https://www.google.com/maps/dir/?api=1&destination=Hukok%20North%20Beach%2C%20Sea%20of%20Galilee%2C%20Israel",
-  kursi: "https://www.google.com/maps/dir/?api=1&destination=Kursi%20Beach%2C%20Sea%20of%20Galilee%2C%20Israel",
+  tzemach:
+    "https://www.google.com/maps/dir/?api=1&destination=Tzemach%20Beach%2C%20Sea%20of%20Galilee%2C%20Israel",
+  hukok:
+    "https://www.google.com/maps/dir/?api=1&destination=Hukok%20North%20Beach%2C%20Sea%20of%20Galilee%2C%20Israel",
+  kursi:
+    "https://www.google.com/maps/dir/?api=1&destination=Kursi%20Beach%2C%20Sea%20of%20Galilee%2C%20Israel",
   lake: "https://www.google.com/maps/search/?api=1&query=Sea%20of%20Galilee%2C%20Israel",
 };
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
 function External({ href, children }: { href: string; children: ReactNode }) {
-  return <a href={href} target="_blank" rel="noopener noreferrer" className={inlineLink}>{children}<span className="sr-only"> (opens in a new tab)</span></a>;
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={inlineLink}>
+      {children}
+      <span className="sr-only"> (opens in a new tab)</span>
+    </a>
+  );
 }
 
 export const seaOfGalileeSite = {
   title: "Sea of Galilee: Beaches, Tiberias & Visitor Guide",
-  description: "Plan a visit to Israel's Sea of Galilee: supervised beaches, Tiberias, lakeside boat trips, Capernaum, Tabgha, transport and day-trip ideas.",
+  description:
+    "Plan a visit to Israel's Sea of Galilee: supervised beaches, Tiberias, lakeside boat trips, Capernaum, Tabgha, transport and day-trip ideas.",
   updatedAt: "2026-11-21",
   hero: { src: lakeHero, alt: "Blue waters of the Sea of Galilee with the surrounding hills" },
   sources,
@@ -51,7 +69,8 @@ export const galileeTours = [
     id: "tour-nazareth-galilee-tel-aviv-getyourguide@tours-nazareth-galilee",
     provider: "GetYourGuide",
     title: "Nazareth, Tiberias & Sea of Galilee",
-    description: "An organised Galilee excursion departing from Tel Aviv. Check the exact stops, duration and pickup details.",
+    description:
+      "An organised Galilee excursion departing from Tel Aviv. Check the exact stops, duration and pickup details.",
     photo: { src: boatCard, alt: "Tiberias and the Sea of Galilee seen from the town" },
     departure: "From Tel Aviv",
   },
@@ -59,7 +78,8 @@ export const galileeTours = [
     id: "tour-nazareth-galilee-jerusalem-viator@tours-nazareth-galilee",
     provider: "Viator",
     title: "Nazareth & Sea of Galilee Day Trip",
-    description: "A guided northern Israel day trip from Jerusalem with selected lakeside and Christian heritage stops.",
+    description:
+      "A guided northern Israel day trip from Jerusalem with selected lakeside and Christian heritage stops.",
     photo: { src: nazarethCard, alt: "View over Nazareth and the Galilee hills" },
     departure: "From Jerusalem",
   },
@@ -67,32 +87,56 @@ export const galileeTours = [
     id: "tour-galilee-private-tel-aviv-viator@tours-nazareth-galilee",
     provider: "Viator",
     title: "Private Nazareth, Tiberias & Galilee Tour",
-    description: "A private guided day trip from Tel Aviv. Check the itinerary and what's included before booking.",
+    description:
+      "A private guided day trip from Tel Aviv. Check the itinerary and what's included before booking.",
     photo: { src: privateCard, alt: "Historic architecture in Tiberias near the Sea of Galilee" },
     departure: "Private tour · Tel Aviv",
   },
 ] as const;
 
 export function SeaOfGalileeTourCards() {
-  return <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="galilee-tour-cards">
-    {galileeTours.map(tour => {
-      const href = affiliateConfig[tour.id]?.trackingUrl;
-      if (!href) return null;
-      const offer = tourBookingOffers.find(item => item.id === tour.id.split("@")[0]);
-      const product = tourProducts.find(item => item.id === offer?.productId);
-      const snapshot = offer ? tourSnapshotPrice(offer) : undefined;
-      return <ExternalProviderTourCard
-        key={tour.id}
-        image={tour.photo.src} alt={tour.photo.alt} platform={tour.provider}
-        title={tour.title} description={tour.description}
-        duration={product?.duration} location={tour.departure}
-        rating={product?.rating && { value: product.rating.value, count: product.rating.count }}
-        price={snapshot && { amount: snapshot.amount, currency: snapshot.currency, basis: snapshot.basis, maxPartySize: snapshot.maxPartySize }}
-        href={href}
-        onClick={() => recordAffiliateTourClick({ pageId: "attractions-sea-of-galilee", productId: tour.id, offerId: tour.id, provider: tour.provider, linkUrl: href })}
-      />;
-    })}
-  </div>;
+  return (
+    <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="galilee-tour-cards">
+      {galileeTours.map((tour) => {
+        const href = affiliateConfig[tour.id]?.trackingUrl;
+        if (!href) return null;
+        const offer = tourBookingOffers.find((item) => item.id === tour.id.split("@")[0]);
+        const product = tourProducts.find((item) => item.id === offer?.productId);
+        const snapshot = offer ? tourSnapshotPrice(offer) : undefined;
+        return (
+          <ExternalProviderTourCard
+            key={tour.id}
+            image={tour.photo.src}
+            alt={tour.photo.alt}
+            platform={tour.provider}
+            title={tour.title}
+            description={tour.description}
+            duration={product?.duration}
+            location={tour.departure}
+            rating={product?.rating && { value: product.rating.value, count: product.rating.count }}
+            price={
+              snapshot && {
+                amount: snapshot.amount,
+                currency: snapshot.currency,
+                basis: snapshot.basis,
+                maxPartySize: snapshot.maxPartySize,
+              }
+            }
+            href={href}
+            onClick={() =>
+              recordAffiliateTourClick({
+                pageId: "attractions-sea-of-galilee",
+                productId: tour.id,
+                offerId: tour.id,
+                provider: tour.provider,
+                linkUrl: href,
+              })
+            }
+          />
+        );
+      })}
+    </div>
+  );
 }
 
 /** A lakeside visitor guide, rather than a second list of the individual church pages. */
@@ -103,7 +147,8 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
   title: seaOfGalileeSite.title,
   heroTitle: "The Sea of Galilee",
   region: "Sea of Galilee & Jordan River",
-  intro: "The Sea of Galilee combines a peaceful freshwater lake with some of northern Israel's best-known historical and biblical sites. I'll help you choose a beach, explore Tiberias and the northern shore, and plan your day at a comfortable pace.",
+  intro:
+    "The Sea of Galilee combines a peaceful freshwater lake with some of northern Israel's best-known historical and biblical sites. I'll help you choose a beach, explore Tiberias and the northern shore, and plan your day at a comfortable pace.",
   hero: seaOfGalileeSite.hero,
   updatedAt: seaOfGalileeSite.updatedAt,
   highlightsTitle: "What to experience around the lake",
@@ -113,177 +158,549 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
   itineraryTitle: "Plan a day at the Sea of Galilee",
   historyTitle: "Why the Sea of Galilee matters",
   relatedTitle: "Explore the Sea of Galilee and Jordan",
-  contactIntroduction: "Tell me your date, pickup point, group size and the places you want to visit around the Sea of Galilee, Tiberias or Nazareth. I can arrange a private transfer or day trip with a driver.",
+  contactIntroduction:
+    "Tell me your date, pickup point, group size and the places you want to visit around the Sea of Galilee, Tiberias or Nazareth. I can arrange a private transfer or day trip with a driver.",
   facts: [
-    { icon: "location", label: "Region", value: "Northern Israel", note: "The lake lies below sea level in the Jordan Rift Valley" },
-    { icon: "duration", label: "Time needed", value: "1–2 days", note: "Half a day for a beach; longer to explore the lake" },
-    { icon: "admission", label: "Lake access", value: "Varies by beach", note: "Several beaches offer free pedestrian entry" },
-    { icon: "hours", label: "Swimming", value: "Seasonal", note: "Use designated beaches during lifeguard shifts" },
-    { icon: "highlights", label: "Best for", value: "Scenery & heritage", note: "Beaches, boat trips and Christian sites" },
-    { icon: "access", label: "Main base", value: "Tiberias", note: "Hotels, buses, restaurants and lakeside walks" },
+    {
+      icon: "location",
+      label: "Region",
+      value: "Northern Israel",
+      note: "The lake lies below sea level in the Jordan Rift Valley",
+    },
+    {
+      icon: "duration",
+      label: "Time needed",
+      value: "1–2 days",
+      note: "Half a day for a beach; longer to explore the lake",
+    },
+    {
+      icon: "admission",
+      label: "Lake access",
+      value: "Varies by beach",
+      note: "Several beaches offer free pedestrian entry",
+    },
+    {
+      icon: "hours",
+      label: "Swimming",
+      value: "Seasonal",
+      note: "Use designated beaches during lifeguard shifts",
+    },
+    {
+      icon: "highlights",
+      label: "Best for",
+      value: "Scenery & heritage",
+      note: "Beaches, boat trips and Christian sites",
+    },
+    {
+      icon: "access",
+      label: "Main base",
+      value: "Tiberias",
+      note: "Hotels, buses, restaurants and lakeside walks",
+    },
   ],
-  glanceNote: <><strong>For a first visit, I recommend either a relaxing day by the lake or exploring the historic sites along its northern shore.</strong> If you want to combine the two, allow time for travel between the beach and the historic sites and check their opening hours.</>,
-  highlightContent: <div className="mt-4 space-y-3">
-    <AttractionHighlight title="Walk along the Tiberias waterfront" image={{ src: waterfront, alt: "Tiberias waterfront and the Sea of Galilee" }}>
-      <p>Tiberias is the region's most convenient base, with lakeside views, hotels, restaurants and bus connections. Start at the promenade for a relaxed introduction, then explore the town or continue to a supervised beach.</p>
-      <p>For a longer stay, my <Link to="/accommodation/tiberias/" className={inlineLink}>Tiberias accommodation guide</Link> helps you compare hotel styles and locations. Check whether your lakeside hotel offers access to a designated swimming beach.</p>
-    </AttractionHighlight>
-    <AttractionHighlight title="Enjoy a designated lakeside beach">
-      <p>Lake Kinneret is a freshwater lake, ideal for swimming at its designated beaches. Facilities, lifeguard shifts, parking, camping and entry policies vary considerably between beaches.</p>
-      <p>I recommend considering <External href={sources.tzemach}>Tzemach Beach</External> on the southern shore, <External href={sources.hukok}>Hukok North</External> on the northwestern shore and <External href={sources.kursi}>Kursi</External> on the eastern shore. Check the beach authority's notices before setting out.</p>
-    </AttractionHighlight>
-    <AttractionPracticalTip><strong>Swim at designated bathing beaches with operating lifeguard services.</strong> Swimming is prohibited along some stretches of the shoreline. For example, the <External href={sources.unsafeShore}>Nahal Amud estuary</External> is a natural shoreline where swimming is prohibited.</AttractionPracticalTip>
-    <AttractionHighlight title="See Capernaum, Tabgha and the Mount of Beatitudes">
-      <p>The northwestern shore is especially rewarding for visitors interested in New Testament history. <Link to="/attractions/capernaum/" className={inlineLink}>Capernaum</Link> has lakeside archaeological remains, <Link to="/attractions/tabgha/" className={inlineLink}>Tabgha</Link> is associated with the multiplication of the loaves and fishes, and the <Link to="/attractions/mount-of-beatitudes/" className={inlineLink}>Mount of Beatitudes</Link> offers a hilltop sanctuary with lake views.</p>
-      <p>Choose two or three nearby sites, allowing time for separate entrances, religious services and local opening arrangements.</p>
-    </AttractionHighlight>
-    <AttractionHighlight title="Boat trips and lake views" image={{ src: sunrise, alt: "Sunlight reflecting across Lake Kinneret at Tiberias" }}>
-      <p>Enjoy views of the surrounding hills and lakeside villages on a boat trip across the Sea of Galilee. Cruises depart from designated jetties, including in the Tiberias area, but routes and departure schedules depend on operators and season.</p>
-      <p>For a panoramic viewpoint, <External href={sources.arbel}>Arbel National Park</External> overlooks the lake from the west. Choose a short visit to the viewpoint or allow more time for a hike. Cliff-edge trails can be steep and may close in unsuitable weather.</p>
-    </AttractionHighlight>
-    <AttractionHighlight title="The Jordan River and Yardenit" image={{ src: lakeView, alt: "Green hills and lake scenery of the Galilee region" }}>
-      <p>The Jordan River flows out of the southern end of the Sea of Galilee. <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> is a managed baptismal visitor site south of the lake, while <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link> on the western shore combines archaeology with a modern pilgrimage center.</p>
-      <p>If you're planning a baptism ceremony at Yardenit, arrange the religious service in advance.</p>
-    </AttractionHighlight>
-  </div>,
-  visitorContent: <div className="mt-4 space-y-4">
-    <p>The Sea of Galilee has both municipal and regional-authority beaches. Some managed beaches offer free entry on foot. Check parking charges, available facilities and lifeguard hours separately. The <External href={sources.beaches}>official Kinneret beach guide</External> is the best place to check the beach that matches your route.</p>
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="galilee-beaches">
-      <article className="rounded-xl border bg-card p-4">
-        <h3 className="font-serif text-lg font-semibold">Tzemach Beach</h3>
-        <p className="mt-2 text-sm"><strong>Southern shore · Free entry</strong></p>
-        <p className="mt-2 text-sm leading-relaxed">A designated quiet beach with accessible facilities. During the swimming season, lifeguards are normally on duty from 09:00 to 17:00. Camping is prohibited here.</p>
-        <div className="mt-3 space-y-2 text-sm"><External href={sources.tzemach}>Beach rules and facilities</External><div><External href={maps.tzemach}>Get directions</External></div></div>
-      </article>
-      <article className="rounded-xl border bg-card p-4">
-        <h3 className="font-serif text-lg font-semibold">Hukok North</h3>
-        <p className="mt-2 text-sm"><strong>Northwestern shore · Free on foot</strong></p>
-        <p className="mt-2 text-sm leading-relaxed">A family-oriented quiet beach with shaded areas and camping facilities. Vehicle parking and some optional services are charged separately.</p>
-        <div className="mt-3 space-y-2 text-sm"><External href={sources.hukok}>Beach rules and facilities</External><div><External href={maps.hukok}>Get directions</External></div></div>
-      </article>
-      <article className="rounded-xl border bg-card p-4">
-        <h3 className="font-serif text-lg font-semibold">Kursi Beach</h3>
-        <p className="mt-2 text-sm"><strong>Eastern shore · Free on foot</strong></p>
-        <p className="mt-2 text-sm leading-relaxed">A quieter managed shoreline with shade, showers and accessible bathing equipment. Parking is paid.</p>
-        <div className="mt-3 space-y-2 text-sm"><External href={sources.kursi}>Beach rules and facilities</External><div><External href={maps.kursi}>Get directions</External></div></div>
-      </article>
+  glanceNote: (
+    <>
+      <strong>
+        For a first visit, I recommend either a relaxing day by the lake or exploring the historic
+        sites along its northern shore.
+      </strong>{" "}
+      If you want to combine the two, allow time for travel between the beach and the historic sites
+      and check their opening hours.
+    </>
+  ),
+  highlightContent: (
+    <div className="mt-4 space-y-3">
+      <AttractionHighlight
+        title="Walk along the Tiberias waterfront"
+        image={{ src: waterfront, alt: "Tiberias waterfront and the Sea of Galilee" }}
+      >
+        <p>
+          Tiberias is the region's most convenient base, with lakeside views, hotels, restaurants
+          and bus connections. Start at the promenade for a relaxed introduction, then explore the
+          town or continue to a supervised beach.
+        </p>
+        <p>
+          For a longer stay, my{" "}
+          <Link to="/accommodation/tiberias/" className={inlineLink}>
+            Tiberias accommodation guide
+          </Link>{" "}
+          helps you compare hotel styles and locations. Check whether your lakeside hotel offers
+          access to a designated swimming beach.
+        </p>
+      </AttractionHighlight>
+      <AttractionHighlight title="Enjoy a designated lakeside beach">
+        <p>
+          Lake Kinneret is a freshwater lake, ideal for swimming at its designated beaches.
+          Facilities, lifeguard shifts, parking, camping and entry policies vary considerably
+          between beaches.
+        </p>
+        <p>
+          I recommend considering <External href={sources.tzemach}>Tzemach Beach</External> on the
+          southern shore, <External href={sources.hukok}>Hukok North</External> on the northwestern
+          shore and <External href={sources.kursi}>Kursi</External> on the eastern shore. Check the
+          beach authority's notices before setting out.
+        </p>
+      </AttractionHighlight>
+      <AttractionPracticalTip>
+        <strong>Swim at designated bathing beaches with operating lifeguard services.</strong>{" "}
+        Swimming is prohibited along some stretches of the shoreline. For example, the{" "}
+        <External href={sources.unsafeShore}>Nahal Amud estuary</External> is a natural shoreline
+        where swimming is prohibited.
+      </AttractionPracticalTip>
+      <AttractionHighlight title="See Capernaum, Tabgha and the Mount of Beatitudes">
+        <p>
+          The northwestern shore is especially rewarding for visitors interested in New Testament
+          history.{" "}
+          <Link to="/attractions/capernaum/" className={inlineLink}>
+            Capernaum
+          </Link>{" "}
+          has lakeside archaeological remains,{" "}
+          <Link to="/attractions/tabgha/" className={inlineLink}>
+            Tabgha
+          </Link>{" "}
+          is associated with the multiplication of the loaves and fishes, and the{" "}
+          <Link to="/attractions/mount-of-beatitudes/" className={inlineLink}>
+            Mount of Beatitudes
+          </Link>{" "}
+          offers a hilltop sanctuary with lake views.
+        </p>
+        <p>
+          Choose two or three nearby sites, allowing time for separate entrances, religious services
+          and local opening arrangements.
+        </p>
+      </AttractionHighlight>
+      <AttractionHighlight
+        title="Boat trips and lake views"
+        image={{ src: sunrise, alt: "Sunlight reflecting across Lake Kinneret at Tiberias" }}
+      >
+        <p>
+          Enjoy views of the surrounding hills and lakeside villages on a boat trip across the Sea
+          of Galilee. Cruises depart from designated jetties, including in the Tiberias area, but
+          routes and departure schedules depend on operators and season.
+        </p>
+        <p>
+          For a panoramic viewpoint, <External href={sources.arbel}>Arbel National Park</External>{" "}
+          overlooks the lake from the west. Choose a short visit to the viewpoint or allow more time
+          for a hike. Cliff-edge trails can be steep and may close in unsuitable weather.
+        </p>
+      </AttractionHighlight>
+      <AttractionHighlight
+        title="The Jordan River and Yardenit"
+        image={{ src: lakeView, alt: "Green hills and lake scenery of the Galilee region" }}
+      >
+        <p>
+          The Jordan River flows out of the southern end of the Sea of Galilee.{" "}
+          <Link to="/attractions/yardenit/" className={inlineLink}>
+            Yardenit
+          </Link>{" "}
+          is a managed baptismal visitor site south of the lake, while{" "}
+          <Link to="/attractions/magdala/" className={inlineLink}>
+            Magdala
+          </Link>{" "}
+          on the western shore combines archaeology with a modern pilgrimage center.
+        </p>
+        <p>
+          If you're planning a baptism ceremony at Yardenit, arrange the religious service in
+          advance.
+        </p>
+      </AttractionHighlight>
     </div>
-    <AttractionPracticalTip>Swimming is permitted only in the designated area when lifeguards are working. Check seasonal notices, water-quality alerts and weather before entering. Unsupervised shores are not a substitute, even when the gate or promenade is open.</AttractionPracticalTip>
-    <p className="text-sm leading-relaxed">Check each beach's admission fees, parking charges, camping rules and accessible facilities. The Kinneret Cities Association operates a public information hotline at <strong>*55477</strong> for current beach details.</p>
-  </div>,
-  transportContent: <div className="mt-4 space-y-3">
-    <p>Use a specific destination such as Tiberias, Tzemach Beach or Capernaum when planning transport. The lake has a long shoreline, and attractions on different sides can take much longer to connect than a map suggests.</p>
-    <div className="grid gap-3 sm:grid-cols-2">
-      <article className="rounded-xl border bg-card p-4">
-        <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><CarFront className="size-5 text-primary" aria-hidden="true" />By car or private driver</h3>
-        <p className="mt-2 text-sm leading-relaxed">A car gives the most flexibility for the northern heritage sites, beaches and eastern shore. Approaches from the center of Israel generally use Route 6 or other northbound highways, with Routes 77, 90 and 92 around the lake depending on the destination.</p>
-        <p className="mt-2 text-sm leading-relaxed">Leave time for traffic and site opening hours. A <Link to="/private-driver-in-israel/" className={inlineLink}>private driver</Link> can be practical for a full-day route with several stops.</p>
-        <div className="mt-2"><External href={maps.tiberias}>Directions to Tiberias</External></div>
-      </article>
-      <article className="rounded-xl border bg-card p-4">
-        <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><BusFront className="size-5 text-primary" aria-hidden="true" />By public bus</h3>
-        <p className="mt-2 text-sm leading-relaxed">Tiberias is the area's principal bus hub. Intercity buses connect it with other parts of Israel. Check the onward connection and return service for your chosen lakeside church, viewpoint or beach.</p>
-        <p className="mt-2 text-sm leading-relaxed">There is no passenger railway station at Tiberias. Check <External href={sources.egged}>current bus schedules</External>, the nearest stop and your return trip, especially on Fridays and Jewish holidays.</p>
-      </article>
+  ),
+  visitorContent: (
+    <div className="mt-4 space-y-4">
+      <p>
+        The Sea of Galilee has both municipal and regional-authority beaches. Some managed beaches
+        offer free entry on foot. Check parking charges, available facilities and lifeguard hours
+        separately. The <External href={sources.beaches}>official Kinneret beach guide</External> is
+        the best place to check the beach that matches your route.
+      </p>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="galilee-beaches">
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="font-serif text-lg font-semibold">Tzemach Beach</h3>
+          <p className="mt-2 text-sm">
+            <strong>Southern shore · Free entry</strong>
+          </p>
+          <p className="mt-2 text-sm leading-relaxed">
+            A designated quiet beach with accessible facilities. During the swimming season,
+            lifeguards are normally on duty from 09:00 to 17:00. Camping is prohibited here.
+          </p>
+          <div className="mt-3 space-y-2 text-sm">
+            <External href={sources.tzemach}>Beach rules and facilities</External>
+            <div>
+              <External href={maps.tzemach}>Get directions</External>
+            </div>
+          </div>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="font-serif text-lg font-semibold">Hukok North</h3>
+          <p className="mt-2 text-sm">
+            <strong>Northwestern shore · Free on foot</strong>
+          </p>
+          <p className="mt-2 text-sm leading-relaxed">
+            A family-oriented quiet beach with shaded areas and camping facilities. Vehicle parking
+            and some optional services are charged separately.
+          </p>
+          <div className="mt-3 space-y-2 text-sm">
+            <External href={sources.hukok}>Beach rules and facilities</External>
+            <div>
+              <External href={maps.hukok}>Get directions</External>
+            </div>
+          </div>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="font-serif text-lg font-semibold">Kursi Beach</h3>
+          <p className="mt-2 text-sm">
+            <strong>Eastern shore · Free on foot</strong>
+          </p>
+          <p className="mt-2 text-sm leading-relaxed">
+            A quieter managed shoreline with shade, showers and accessible bathing equipment.
+            Parking is paid.
+          </p>
+          <div className="mt-3 space-y-2 text-sm">
+            <External href={sources.kursi}>Beach rules and facilities</External>
+            <div>
+              <External href={maps.kursi}>Get directions</External>
+            </div>
+          </div>
+        </article>
+      </div>
+      <AttractionPracticalTip>
+        Swimming is permitted only in the designated area when lifeguards are working. Check
+        seasonal notices, water-quality alerts and weather before entering. Unsupervised shores are
+        not a substitute, even when the gate or promenade is open.
+      </AttractionPracticalTip>
+      <p className="text-sm leading-relaxed">
+        Check each beach's admission fees, parking charges, camping rules and accessible facilities.
+        The Kinneret Cities Association operates a public information hotline at{" "}
+        <strong>*55477</strong> for current beach details.
+      </p>
     </div>
-    <p className="text-sm">For an organised excursion that starts outside the region, browse <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>Nazareth & Sea of Galilee day tours</Link>.</p>
-  </div>,
-  itineraryContent: <div className="mt-4 space-y-4">
-    <div className="grid gap-3 sm:grid-cols-2">
-      <article className="rounded-xl border bg-card p-4">
-        <h3 className="font-serif text-lg font-semibold">A relaxed lakeside day</h3>
-        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
-          <li>Start with a walk and a coffee along the Tiberias waterfront.</li>
-          <li>Spend time at a lifeguard-supervised beach that fits your transport route and bathing season.</li>
-          <li>Enjoy a short boat trip, a lake viewpoint or a meal beside the shore, subject to availability.</li>
-        </ol>
-      </article>
-      <article className="rounded-xl border bg-card p-4">
-        <h3 className="font-serif text-lg font-semibold">Northwestern heritage circuit</h3>
-        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
-          <li>Visit Capernaum and its lakeside remains in the morning.</li>
-          <li>Continue to Tabgha and the Mount of Beatitudes, checking each site's opening hours.</li>
-          <li>Choose Magdala or a Tiberias waterfront stop if time permits; allow for the drive back.</li>
-        </ol>
-      </article>
+  ),
+  transportContent: (
+    <div className="mt-4 space-y-3">
+      <p>
+        Use a specific destination such as Tiberias, Tzemach Beach or Capernaum when planning
+        transport. The lake has a long shoreline, and attractions on different sides can take much
+        longer to connect than a map suggests.
+      </p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="flex items-center gap-2 font-serif text-lg font-semibold">
+            <CarFront className="size-5 text-primary" aria-hidden="true" />
+            By car or private driver
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed">
+            A car gives the most flexibility for the northern heritage sites, beaches and eastern
+            shore. Approaches from the center of Israel generally use Route 6 or other northbound
+            highways, with Routes 77, 90 and 92 around the lake depending on the destination.
+          </p>
+          <p className="mt-2 text-sm leading-relaxed">
+            Leave time for traffic and site opening hours. A{" "}
+            <Link to="/private-driver-in-israel/" className={inlineLink}>
+              private driver
+            </Link>{" "}
+            can be practical for a full-day route with several stops.
+          </p>
+          <div className="mt-2">
+            <External href={maps.tiberias}>Directions to Tiberias</External>
+          </div>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="flex items-center gap-2 font-serif text-lg font-semibold">
+            <BusFront className="size-5 text-primary" aria-hidden="true" />
+            By public bus
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed">
+            Tiberias is the area's principal bus hub. Intercity buses connect it with other parts of
+            Israel. Check the onward connection and return service for your chosen lakeside church,
+            viewpoint or beach.
+          </p>
+          <p className="mt-2 text-sm leading-relaxed">
+            There is no passenger railway station at Tiberias. Check{" "}
+            <External href={sources.egged}>current bus schedules</External>, the nearest stop and
+            your return trip, especially on Fridays and Jewish holidays.
+          </p>
+        </article>
+      </div>
+      <p className="text-sm">
+        For an organised excursion that starts outside the region, browse{" "}
+        <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>
+          Nazareth & Sea of Galilee day tours
+        </Link>
+        .
+      </p>
     </div>
-    <AttractionPracticalTip>For a one-day trip from Jerusalem or Tel Aviv, choose three or four main places and keep them geographically close. A beach break, several churches, an Arbel hike and a Jordan River stop will usually be too much for one comfortable day.</AttractionPracticalTip>
-    <div className="rounded-xl border bg-card p-4 sm:p-5">
-      <h3 className="font-serif text-lg font-semibold">Sea of Galilee area map</h3>
-      <p className="mt-1 text-sm text-muted-foreground">The map covers the wider lake. Use the individual directions above for a specific beach or Tiberias.</p>
-      <ConsentIframe title="Map of the Sea of Galilee, Tiberias and surrounding shores in Israel" src="https://maps.google.com/maps?q=Sea%20of%20Galilee%2C%20Israel&hl=en&z=10&t=m&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="mt-3 h-64 w-full rounded-lg border sm:h-80" />
-      <div className="mt-3"><External href={maps.lake}>Open the Sea of Galilee in Google Maps</External></div>
+  ),
+  itineraryContent: (
+    <div className="mt-4 space-y-4">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="font-serif text-lg font-semibold">A relaxed lakeside day</h3>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
+            <li>Start with a walk and a coffee along the Tiberias waterfront.</li>
+            <li>
+              Spend time at a lifeguard-supervised beach that fits your transport route and bathing
+              season.
+            </li>
+            <li>
+              Enjoy a short boat trip, a lake viewpoint or a meal beside the shore, subject to
+              availability.
+            </li>
+          </ol>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="font-serif text-lg font-semibold">Northwestern heritage circuit</h3>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
+            <li>Visit Capernaum and its lakeside remains in the morning.</li>
+            <li>
+              Continue to Tabgha and the Mount of Beatitudes, checking each site's opening hours.
+            </li>
+            <li>
+              Choose Magdala or a Tiberias waterfront stop if time permits; allow for the drive
+              back.
+            </li>
+          </ol>
+        </article>
+      </div>
+      <AttractionPracticalTip>
+        For a one-day trip from Jerusalem or Tel Aviv, choose three or four main places and keep
+        them geographically close. A beach break, several churches, an Arbel hike and a Jordan River
+        stop will usually be too much for one comfortable day.
+      </AttractionPracticalTip>
+      <div className="rounded-xl border bg-card p-4 sm:p-5">
+        <h3 className="font-serif text-lg font-semibold">Sea of Galilee area map</h3>
+        <p className="mt-1 text-sm text-muted-foreground">
+          The map covers the wider lake. Use the individual directions above for a specific beach or
+          Tiberias.
+        </p>
+        <ConsentIframe
+          title="Map of the Sea of Galilee, Tiberias and surrounding shores in Israel"
+          src="https://maps.google.com/maps?q=Sea%20of%20Galilee%2C%20Israel&hl=en&z=10&t=m&output=embed"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="mt-3 h-64 w-full rounded-lg border sm:h-80"
+        />
+        <div className="mt-3">
+          <External href={maps.lake}>Open the Sea of Galilee in Google Maps</External>
+        </div>
+      </div>
     </div>
-  </div>,
-  practicalContent: <div className="mt-4 space-y-4">
-    <div className="grid gap-3 sm:grid-cols-2">
-      <article className="rounded-xl border bg-card p-4">
-        <h3 className="font-serif text-lg font-semibold">At the beach</h3>
-        <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed">
-          <li>Swim only at designated beaches while lifeguards are on duty.</li>
-          <li>Take water shoes for rocky lake edges; keep children within reach and follow lifeguard warnings.</li>
-          <li>Bring water, sunscreen, shade and a towel. Conditions can change with winds and changing water levels.</li>
-          <li>Check whether camping, loud music, barbecues or dogs are permitted at your selected beach.</li>
-        </ul>
-      </article>
-      <article className="rounded-xl border bg-card p-4">
-        <h3 className="font-serif text-lg font-semibold">At historic and religious sites</h3>
-        <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed">
-          <li>Wear clothing suitable for visiting churches and active worship sites.</li>
-          <li>Check the opening hours and separate access rules of each compound.</li>
-          <li>Choose cooler hours for outdoor ruins, viewpoints and walking routes.</li>
-          <li>Check <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays and special dates</Link> when planning transport and services.</li>
-        </ul>
-      </article>
+  ),
+  practicalContent: (
+    <div className="mt-4 space-y-4">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="font-serif text-lg font-semibold">At the beach</h3>
+          <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed">
+            <li>Swim only at designated beaches while lifeguards are on duty.</li>
+            <li>
+              Take water shoes for rocky lake edges; keep children within reach and follow lifeguard
+              warnings.
+            </li>
+            <li>
+              Bring water, sunscreen, shade and a towel. Conditions can change with winds and
+              changing water levels.
+            </li>
+            <li>
+              Check whether camping, loud music, barbecues or dogs are permitted at your selected
+              beach.
+            </li>
+          </ul>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <h3 className="font-serif text-lg font-semibold">At historic and religious sites</h3>
+          <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed">
+            <li>Wear clothing suitable for visiting churches and active worship sites.</li>
+            <li>Check the opening hours and separate access rules of each compound.</li>
+            <li>Choose cooler hours for outdoor ruins, viewpoints and walking routes.</li>
+            <li>
+              Check{" "}
+              <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>
+                Jewish holidays and special dates
+              </Link>{" "}
+              when planning transport and services.
+            </li>
+          </ul>
+        </article>
+      </div>
+      <AttractionPracticalTip>
+        Water levels, storm conditions and seasonal beach operations can affect access. Confirm the
+        current status of your chosen beach or trail on the day you visit.
+      </AttractionPracticalTip>
     </div>
-    <AttractionPracticalTip>Water levels, storm conditions and seasonal beach operations can affect access. Confirm the current status of your chosen beach or trail on the day you visit.</AttractionPracticalTip>
-  </div>,
-  historyContent: <div className="mt-4 space-y-3 leading-relaxed">
-    <p>Despite its English name, the Sea of Galilee is a freshwater lake. It is also known as Lake Kinneret and Lake Tiberias. Its water level varies over time, and the lake is an important part of Israel's northern landscape and water history.</p>
-    <p>The lakeshore and nearby settlements are associated with several accounts in the New Testament, including the ministry of Jesus and traditions remembered at Capernaum, Tabgha and the Mount of Beatitudes. Visitors also find Jewish history, archaeology, agricultural villages and modern lakeside life.</p>
-    <p>If religious heritage is your main interest, start with the dedicated <Link to="/attractions/capernaum/" className={inlineLink}>Capernaum</Link> and <Link to="/attractions/tabgha/" className={inlineLink}>Tabgha</Link> guides; the lake itself also rewards time simply spent enjoying the setting.</p>
-  </div>,
-  tourContent: <div className="mt-4 space-y-3">
-    <p>These existing Viator and GetYourGuide partner tours offer organised ways to explore parts of the Galilee from Jerusalem or Tel Aviv. Tour itineraries vary; check whether your chosen tour includes a boat ride, swimming or a Jordan River baptism ceremony.</p>
-    <SeaOfGalileeTourCards />
-    <p className="text-xs leading-relaxed text-muted-foreground">Check current prices, departure times, ratings, entrance tickets and cancellation terms on the booking provider before paying.</p>
-    <p>For additional routes and departure choices, see <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>all Nazareth & Sea of Galilee tours</Link>. For a flexible private car-and-driver itinerary, <a href="#contact" className={inlineLink}>contact me</a>.</p>
-  </div>,
+  ),
+  historyContent: (
+    <div className="mt-4 space-y-3 leading-relaxed">
+      <p>
+        Despite its English name, the Sea of Galilee is a freshwater lake. It is also known as Lake
+        Kinneret and Lake Tiberias. Its water level varies over time, and the lake is an important
+        part of Israel's northern landscape and water history.
+      </p>
+      <p>
+        The lakeshore and nearby settlements are associated with several accounts in the New
+        Testament, including the ministry of Jesus and traditions remembered at Capernaum, Tabgha
+        and the Mount of Beatitudes. Visitors also find Jewish history, archaeology, agricultural
+        villages and modern lakeside life.
+      </p>
+      <p>
+        If religious heritage is your main interest, start with the dedicated{" "}
+        <Link to="/attractions/capernaum/" className={inlineLink}>
+          Capernaum
+        </Link>{" "}
+        and{" "}
+        <Link to="/attractions/tabgha/" className={inlineLink}>
+          Tabgha
+        </Link>{" "}
+        guides; the lake itself also rewards time simply spent enjoying the setting.
+      </p>
+    </div>
+  ),
+  tourContent: (
+    <div className="mt-4 space-y-3">
+      <p>
+        These existing Viator and GetYourGuide partner tours offer organised ways to explore parts
+        of the Galilee from Jerusalem or Tel Aviv. Tour itineraries vary; check whether your chosen
+        tour includes a boat ride, swimming or a Jordan River baptism ceremony.
+      </p>
+      <SeaOfGalileeTourCards />
+      <p className="text-xs leading-relaxed text-muted-foreground">
+        Check current prices, departure times, ratings, entrance tickets and cancellation terms on
+        the booking provider before paying.
+      </p>
+      <p>
+        For additional routes and departure choices, see{" "}
+        <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>
+          all Nazareth & Sea of Galilee tours
+        </Link>
+        . For a flexible private car-and-driver itinerary,{" "}
+        <a href="#contact" className={inlineLink}>
+          contact me
+        </a>
+        .
+      </p>
+    </div>
+  ),
   faqs: [
-    { q: "Is the Sea of Galilee a sea or a lake?", a: "It is a freshwater lake, known in Hebrew as Lake Kinneret. Its shore and waters lie below sea level." },
-    { q: "Can I swim in the Sea of Galilee?", a: "Yes, at designated beaches in the supervised bathing area during active lifeguard shifts. Some natural shorelines are not authorised for swimming, even if they are open for walking." },
-    { q: "Are Sea of Galilee beaches free?", a: "Some Kinneret authority beaches offer free pedestrian entry but charge for parking or extras. Other municipal or private facilities may charge admission. Check the specific beach." },
-    { q: "What is the best town to stay in?", a: "Tiberias is usually the most practical base for hotels, restaurants and bus connections. Smaller lakeside communities can suit travelers looking for a quieter overnight stay." },
-    { q: "How long should I spend around the lake?", a: "Allow half a day for a beach and Tiberias or a full day for a selection of the northern heritage sites. Two days lets you explore more slowly and include viewpoints or a boat trip." },
-    { q: "Can I visit Capernaum and Tabgha in one day?", a: "Yes. Capernaum, Tabgha and the Mount of Beatitudes are close to one another and can easily be visited on the same day, depending on their opening hours." },
-    { q: "Can I reach the Sea of Galilee without a car?", a: "Tiberias has intercity bus services, but many lakeside sights need further transport. Check routes and the last return bus before committing to a multi-stop day." },
-    { q: "Do the boat cruises operate every day?", a: "Not necessarily. Operators set their own schedules and departure points, so confirm current availability directly before arranging the rest of your itinerary." },
-    { q: "Can I see Nazareth and the Sea of Galilee in a day?", a: "Yes, but a guided excursion or private driver can help because the sites are spread out. Choose a few highlights that interest you most." },
-    { q: "Is Yardenit beside the Sea of Galilee?", a: "Yardenit is at the southern end of the area, on the Jordan River downstream from the lake. A baptismal ceremony is separate from simply visiting the site." },
-    { q: "Which beach is best for families?", a: "Choose a declared beach with staffed lifeguards, shade, toilets and accessible facilities for your group. Tzemach, Hukok North and Kursi are three options to compare using the authority's beach guide." },
+    {
+      q: "Is the Sea of Galilee a sea or a lake?",
+      a: "It is a freshwater lake, known in Hebrew as Lake Kinneret. Its shore and waters lie below sea level.",
+    },
+    {
+      q: "Can I swim in the Sea of Galilee?",
+      a: "Yes, at designated beaches in the supervised bathing area during active lifeguard shifts. Some natural shorelines are not authorised for swimming, even if they are open for walking.",
+    },
+    {
+      q: "Are Sea of Galilee beaches free?",
+      a: "Some Kinneret authority beaches offer free pedestrian entry but charge for parking or extras. Other municipal or private facilities may charge admission. Check the specific beach.",
+    },
+    {
+      q: "What is the best town to stay in?",
+      a: "Tiberias is usually the most practical base for hotels, restaurants and bus connections. Smaller lakeside communities can suit travelers looking for a quieter overnight stay.",
+    },
+    {
+      q: "How long should I spend around the lake?",
+      a: "Allow half a day for a beach and Tiberias or a full day for a selection of the northern heritage sites. Two days lets you explore more slowly and include viewpoints or a boat trip.",
+    },
+    {
+      q: "Can I visit Capernaum and Tabgha in one day?",
+      a: "Yes. Capernaum, Tabgha and the Mount of Beatitudes are close to one another and can easily be visited on the same day, depending on their opening hours.",
+    },
+    {
+      q: "Can I reach the Sea of Galilee without a car?",
+      a: "Tiberias has intercity bus services, but many lakeside sights need further transport. Check routes and the last return bus before committing to a multi-stop day.",
+    },
+    {
+      q: "Do the boat cruises operate every day?",
+      a: "Not necessarily. Operators set their own schedules and departure points, so confirm current availability directly before arranging the rest of your itinerary.",
+    },
+    {
+      q: "Can I see Nazareth and the Sea of Galilee in a day?",
+      a: "Yes, but a guided excursion or private driver can help because the sites are spread out. Choose a few highlights that interest you most.",
+    },
+    {
+      q: "Is Yardenit beside the Sea of Galilee?",
+      a: "Yardenit is at the southern end of the area, on the Jordan River downstream from the lake. A baptismal ceremony is separate from simply visiting the site.",
+    },
+    {
+      q: "Which beach is best for families?",
+      a: "Choose a declared beach with staffed lifeguards, shade, toilets and accessible facilities for your group. Tzemach, Hukok North and Kursi are three options to compare using the authority's beach guide.",
+    },
   ],
   nearby: [
-    { label: "Capernaum", to: "/attractions/capernaum/", note: "Ancient synagogue and lakeside archaeology" },
+    {
+      label: "Capernaum",
+      to: "/attractions/capernaum/",
+      note: "Ancient synagogue and lakeside archaeology",
+    },
     { label: "Tabgha", to: "/attractions/tabgha/", note: "Mosaic church and biblical traditions" },
-    { label: "Mount of Beatitudes", to: "/attractions/mount-of-beatitudes/", note: "Church gardens and sweeping lake views" },
-    { label: "Magdala", to: "/attractions/magdala/", note: "Archaeological remains and pilgrimage center" },
-    { label: "Yardenit", to: "/attractions/yardenit/", note: "Managed baptismal site on the Jordan River" },
-    { label: "Mount Tabor", to: "/attractions/mount-tabor/", note: "A nearby Galilee heritage destination" },
+    {
+      label: "Mount of Beatitudes",
+      to: "/attractions/mount-of-beatitudes/",
+      note: "Church gardens and sweeping lake views",
+    },
+    {
+      label: "Magdala",
+      to: "/attractions/magdala/",
+      note: "Archaeological remains and pilgrimage center",
+    },
+    {
+      label: "Yardenit",
+      to: "/attractions/yardenit/",
+      note: "Managed baptismal site on the Jordan River",
+    },
+    {
+      label: "Mount Tabor",
+      to: "/attractions/mount-tabor/",
+      note: "A nearby Galilee heritage destination",
+    },
   ],
   planningLinks: [
-    { label: "Hotels around Tiberias", to: "/accommodation/tiberias/", icon: "region", description: "Find a practical lakeside base" },
-    { label: "Nazareth & Galilee tours", to: "/tours/nazareth-sea-of-galilee/", icon: "itinerary", description: "Compare organised excursions" },
-    { label: "Jordan River baptism sites", to: "/travel-blog/baptism-in-the-jordan-river/", icon: "region", description: "Compare Yardenit with other baptism sites" },
-    { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", icon: "transport", description: "Plan connections and bus journeys" },
-    { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", icon: "seasons", description: "Weather, heat and seasonal planning" },
-    { label: "Private driver in Israel", to: "/private-driver-in-israel/", icon: "itinerary", description: "Arrange flexible road transport" },
+    {
+      label: "Hotels around Tiberias",
+      to: "/accommodation/tiberias/",
+      icon: "region",
+      description: "Find a practical lakeside base",
+    },
+    {
+      label: "Nazareth & Galilee tours",
+      to: "/tours/nazareth-sea-of-galilee/",
+      icon: "itinerary",
+      description: "Compare organised excursions",
+    },
+    {
+      label: "Jordan River baptism sites",
+      to: "/travel-blog/baptism-in-the-jordan-river/",
+      icon: "region",
+      description: "Compare Yardenit with other baptism sites",
+    },
+    {
+      label: "Getting around Israel",
+      to: "/travel-blog/getting-around-israel/",
+      icon: "transport",
+      description: "Plan connections and bus journeys",
+    },
+    {
+      label: "Best time to visit Israel",
+      to: "/travel-blog/best-time-to-visit-israel/",
+      icon: "seasons",
+      description: "Weather, heat and seasonal planning",
+    },
+    {
+      label: "Private driver in Israel",
+      to: "/private-driver-in-israel/",
+      icon: "itinerary",
+      description: "Arrange flexible road transport",
+    },
   ],
   sources: [
     { label: "Kinneret Cities Association - official beach directory", url: sources.beaches },
     { label: "Kinneret Cities Association - Tzemach Beach", url: sources.tzemach },
     { label: "Kinneret Cities Association - Hukok North Beach", url: sources.hukok },
     { label: "Kinneret Cities Association - Kursi Beach", url: sources.kursi },
-    { label: "Kinneret Cities Association - Nahal Amud estuary (bathing prohibited)", url: sources.unsafeShore },
+    {
+      label: "Kinneret Cities Association - Nahal Amud estuary (bathing prohibited)",
+      url: sources.unsafeShore,
+    },
     { label: "Kinneret Cities Association - visitor notices", url: sources.lakeAuthority },
     { label: "Israel Nature and Parks Authority - Arbel National Park", url: sources.arbel },
     { label: "Egged - official bus and route planning", url: sources.egged },

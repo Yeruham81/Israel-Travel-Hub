@@ -7,7 +7,7 @@ export function uniqueGuideCardPhotos<T extends { guide: GuideDirectoryEntry }>(
   entries: T[],
   _reservedPhotos: string[] = [],
 ): Array<T & { cardPhoto?: { src: string; alt: string } }> {
-  return entries.map(entry => ({
+  return entries.map((entry) => ({
     ...entry,
     ...(entry.guide.photo ? { cardPhoto: entry.guide.photo } : {}),
   }));

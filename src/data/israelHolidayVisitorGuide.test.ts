@@ -1,3 +1,4 @@
+import { sourceFragment } from "@/test-utils/source-fragment";
 import { readRouteSource } from "@/test-utils/read-route-source";
 import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
@@ -21,9 +22,9 @@ describe("Israel holidays visitor guide", () => {
     expect(travelGuides.calendar.updatedAt).toBe("2026-11-22");
     const page = readFileSync("src/components/IsraelHolidayVisitorGuide.tsx", "utf8");
     const route = readRouteSource("src/routes/travel-blog.calendar-of-events.tsx");
-    expect(page).toContain('{name:"Calendar of events",to:HOLIDAY_GUIDE_PATH}');
+    expect(page).toMatch(sourceFragment('{name:"Calendar of events",to:HOLIDAY_GUIDE_PATH}'));
     expect(route).toMatch(/\{\s*name:\s*"Calendar of events",\s*path:\s*HOLIDAY_GUIDE_PATH\s*,?\s*\}/);
-    expect(page).not.toContain("Holidays in Israel: A Practical Guide for Visitors");
+    expect(page).not.toMatch(sourceFragment("Holidays in Israel: A Practical Guide for Visitors"));
     expect(route).toMatch(/headline:\s*HOLIDAY_GUIDE_TITLE\b/);
     expect(existsSync("public" + HOLIDAY_GUIDE_PHOTO.src)).toBe(true);
     expect(HOLIDAY_GUIDE_PHOTO.src).toBe("/images/holiday-guide/israel-calendar-of-events.webp");

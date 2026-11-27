@@ -4,10 +4,15 @@ import { ISRAEL_TZ } from "@/lib/israel-time";
 export function israelSubmissionTime(instant: Date): string {
   const parts = new Intl.DateTimeFormat("en-GB", {
     timeZone: ISRAEL_TZ,
-    year: "numeric", month: "long", day: "numeric",
-    hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
   }).formatToParts(instant);
-  const value = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value ?? "";
+  const value = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((part) => part.type === type)?.value ?? "";
   return `${value("day")} ${value("month")} ${value("year")}, ${value("hour")}:${value("minute")} (Israel time)`;
 }
 
@@ -19,23 +24,52 @@ export function safeEmailSenderName(name: string): string {
 }
 
 function escapeHtml(value: string): string {
-  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 /** Only trusted form labels are styled; arbitrary user message lines remain plain and escaped. */
 const fieldLabels = new Set([
-  "Sent from page", "Name", "Email", "Subject", "Message",
-  "Phone / WhatsApp", "Pickup", "Destination", "Hotel / address",
-  "Flight arrival", "Flight number", "Passengers",
-  "Suitcases", "Carry-ons", "Additional requests / child seats",
-  "Service", "Pickup date", "Preferred pickup time", "Final drop-off",
-  "Luggage", "Guide preference", "Stops, approximate timing and priorities",
-  "Child seats, mobility needs or additional requests", "Country",
-  "Departure & return port", "Cruise ship", "Excursion date", "Expected disembarkation",
-  "Ship's all-aboard deadline", "Requested itinerary",
+  "Sent from page",
+  "Name",
+  "Email",
+  "Subject",
+  "Message",
+  "Phone / WhatsApp",
+  "Pickup",
+  "Destination",
+  "Hotel / address",
+  "Flight arrival",
+  "Flight number",
+  "Passengers",
+  "Suitcases",
+  "Carry-ons",
+  "Additional requests / child seats",
+  "Service",
+  "Pickup date",
+  "Preferred pickup time",
+  "Final drop-off",
+  "Luggage",
+  "Guide preference",
+  "Stops, approximate timing and priorities",
+  "Child seats, mobility needs or additional requests",
+  "Country",
+  "Departure & return port",
+  "Cruise ship",
+  "Excursion date",
+  "Expected disembarkation",
+  "Ship's all-aboard deadline",
+  "Requested itinerary",
   "Priorities, child seats, mobility needs or additional requests",
-  "Additional requests", "Website", "Form", "Submitted", "Request reference",
+  "Additional requests",
+  "Website",
+  "Form",
+  "Submitted",
+  "Request reference",
 ]);
 
 /** Rich HTML and readable plain text are sent in the same Brevo request. */

@@ -18,7 +18,10 @@ export const getYourGuideWidgetCities = {
 export type GetYourGuideWidgetCity = keyof typeof getYourGuideWidgetCities;
 export type GetYourGuideWidgetPage = "3_day" | "5_day" | "7_day" | "10_day";
 
-export function getYourGuideCityWidgetSrc(city: GetYourGuideWidgetCity, page: GetYourGuideWidgetPage): string {
+export function getYourGuideCityWidgetSrc(
+  city: GetYourGuideWidgetCity,
+  page: GetYourGuideWidgetPage,
+): string {
   const params = new URLSearchParams({
     trs: "406243",
     shmarker: `622032.${page}`,

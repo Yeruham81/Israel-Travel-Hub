@@ -1,3 +1,4 @@
+import { sourceFragment, sourceIndex } from "@/test-utils/source-fragment";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { yardenitDestinationContent as content } from "@/components/YardenitAttractionPage";
@@ -11,7 +12,7 @@ describe("Yardenit individual attraction upgrade", () => {
     const route = readFileSync("src/routes/attractions.yardenit.tsx", "utf8");
     const article = readFileSync("src/components/YardenitAttractionPage.tsx", "utf8");
     const shell = readFileSync("src/components/AttractionDestinationPage.tsx", "utf8");
-    expect(route).toContain("component: YardenitAttractionPage");
+    expect(route).toMatch(sourceFragment("component: YardenitAttractionPage"));
     expect(content.path).toBe("/attractions/yardenit/");
     expect(content.title).toBe(site.title);
     expect(content.intro).toBe(site.intro);
@@ -23,26 +24,26 @@ describe("Yardenit individual attraction upgrade", () => {
     expect(travelGuides.yardenit.title).toBe(content.title);
     expect(JSON.stringify(travelGuideMeta("yardenit").scripts)).toContain("2026-11-17");
     expect(attractionHubCards.filter(item => String(item.to) === String(content.path))).toHaveLength(1);
-    expect(article).toContain("Baptism ends before site closing");
+    expect(article).toMatch(sourceFragment("Baptism ends before site closing"));
     expect(content.glanceNote).toBeUndefined();
-    expect(article).toContain("There is no resident priest");
-    expect(article).toContain('data-testid="yardenit-location-map"');
-    expect(article).toContain('data-testid="yardenit-hours-baptism"');
-    expect(article).toContain('data-testid="yardenit-visitor-essentials"');
-    expect(article).toContain("https://bus.gov.il/en/home");
-    expect(article).toContain("Beit Yerach Regional School");
-    expect(article).toContain("stop 57066");
-    expect(article).toContain("Bring a towel, dry clothes");
-    expect(article).toContain("established in <strong>1981 by Kibbutz Kinneret");
-    expect(article).toContain("more than 80 languages and dialects");
-    expect(article).toContain("Pilgrims in white robes taking part in a group baptism");
-    expect(article).toContain('to="/car-rental/"');
+    expect(article).toMatch(sourceFragment("There is no resident priest"));
+    expect(article).toMatch(sourceFragment('data-testid="yardenit-location-map"'));
+    expect(article).toMatch(sourceFragment('data-testid="yardenit-hours-baptism"'));
+    expect(article).toMatch(sourceFragment('data-testid="yardenit-visitor-essentials"'));
+    expect(article).toMatch(sourceFragment("https://bus.gov.il/en/home"));
+    expect(article).toMatch(sourceFragment("Beit Yerach Regional School"));
+    expect(article).toMatch(sourceFragment("stop 57066"));
+    expect(article).toMatch(sourceFragment("Bring a towel, dry clothes"));
+    expect(article).toMatch(sourceFragment("established in <strong>1981 by Kibbutz Kinneret"));
+    expect(article).toMatch(sourceFragment("more than 80 languages and dialects"));
+    expect(article).toMatch(sourceFragment("Pilgrims in white robes taking part in a group baptism"));
+    expect(article).toMatch(sourceFragment('to="/car-rental/"'));
     expect(article).not.toContain("carRentalAffiliateUrl");
-    expect(article).toContain('href="#contact"');
-    expect(article).toContain('to="/tours/nazareth-sea-of-galilee/"');
-    expect(shell).toContain('["contact", "Contact me"]');
+    expect(article).toMatch(sourceFragment('href="#contact"'));
+    expect(article).toMatch(sourceFragment('to="/tours/nazareth-sea-of-galilee/"'));
+    expect(shell).toMatch(sourceFragment('["contact", "Contact me"]'));
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
-    expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
+    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(sourceIndex(shell, "<HomeContactForm"));
   });
   it("uses local photos without repeating the hero and keeps relevant links", () => {
     expect(existsSync("src/assets/guides/yardenit.jpg")).toBe(true);
@@ -65,7 +66,7 @@ describe("Yardenit individual attraction upgrade", () => {
       "/attractions/basilica-of-the-annunciation/",
       "/attractions/mount-tabor/",
     ]);
-    expect(article).not.toContain("These are options, not a checklist");
-    expect(article).not.toContain("Worth knowing:");
+    expect(article).not.toMatch(sourceFragment("These are options, not a checklist"));
+    expect(article).not.toMatch(sourceFragment("Worth knowing:"));
   });
 });

@@ -1,5 +1,17 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { Accessibility, ArrowRight, Eye, Footprints, House, Lightbulb, MapPin, Route, TrainFront, Volume2, type LucideIcon } from "lucide-react";
+import {
+  Accessibility,
+  ArrowRight,
+  Eye,
+  Footprints,
+  House,
+  Lightbulb,
+  MapPin,
+  Route,
+  TrainFront,
+  Volume2,
+  type LucideIcon,
+} from "lucide-react";
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
 import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { StayTripLinks } from "@/components/StayTripLinks";
@@ -24,51 +36,100 @@ import eastJerusalemCard from "@/assets/jerusalem/east-jerusalem-house.webp";
  * buttons belong to those catalogue pages, not this editorial guide.
  */
 const sections = [
-  ["choose", "Choose your area"], ["compare", "At a glance"],
-  ["neighborhoods", "Neighborhoods"], ["tips", "Booking tips"],
-  ["faq", "FAQ"], ["explore", "Related guides"],
-  ["trip-planning", "Trip planning"], ["contact", "Contact me"],
+  ["choose", "Choose your area"],
+  ["compare", "At a glance"],
+  ["neighborhoods", "Neighborhoods"],
+  ["tips", "Booking tips"],
+  ["faq", "FAQ"],
+  ["explore", "Related guides"],
+  ["trip-planning", "Trip planning"],
+  ["contact", "Contact me"],
 ] as const;
 
 const neighborhoodSections = sections.filter(([id]) => id !== "compare");
 
 const jerusalemAreaCardPhotos: Record<string, { src: string; alt: string }> = {
   downtown: { src: downtownCard, alt: "Streets and historic buildings in Downtown Jerusalem" },
-  mamilla: { src: mamillaStreet, alt: "Mamilla Avenue and the surrounding hotel district in Jerusalem" },
+  mamilla: {
+    src: mamillaStreet,
+    alt: "Mamilla Avenue and the surrounding hotel district in Jerusalem",
+  },
   "old-city": { src: oldCityStoneLane, alt: "Narrow sandstone lane in Jerusalem's Jewish Quarter" },
   "mahane-yehuda": { src: marketCard, alt: "Mahane Yehuda Market in Jerusalem" },
   "east-jerusalem": { src: eastJerusalemCard, alt: "Traditional house in East Jerusalem" },
-  "german-colony": { src: "/images/city-stays/jerusalem-german-colony.webp", alt: "Emek Refaim Street in Jerusalem's German Colony" },
+  "german-colony": {
+    src: "/images/city-stays/jerusalem-german-colony.webp",
+    alt: "Emek Refaim Street in Jerusalem's German Colony",
+  },
 };
 
 /** Tel Aviv neighbourhood photos: use full-size area images where possible, with selected location-specific alternatives. */
 const telAvivAreaCardPhotos: Record<string, { src: string; alt: string }> = {
-  "telaviv-beachfront": { src: "/images/city-stays/tel-aviv-beachfront.webp", alt: "Gordon Beach on Tel Aviv's Mediterranean waterfront" },
-  "telaviv-dizengoff": { src: "/images/city-stays/tel-aviv-dizengoff.webp", alt: "Dizengoff Square in central Tel Aviv" },
-  "telaviv-jaffa": { src: "/images/city-stays/tel-aviv-jaffa.webp", alt: "Market streets in Jaffa" },
+  "telaviv-beachfront": {
+    src: "/images/city-stays/tel-aviv-beachfront.webp",
+    alt: "Gordon Beach on Tel Aviv's Mediterranean waterfront",
+  },
+  "telaviv-dizengoff": {
+    src: "/images/city-stays/tel-aviv-dizengoff.webp",
+    alt: "Dizengoff Square in central Tel Aviv",
+  },
+  "telaviv-jaffa": {
+    src: "/images/city-stays/tel-aviv-jaffa.webp",
+    alt: "Market streets in Jaffa",
+  },
 };
 
 const decisionNotes = {
   jerusalem: {
-    introduction: "For a first visit, I recommend Downtown or Mamilla. Downtown has the broadest mix of restaurants and transport, while Mamilla is particularly useful for Jaffa Gate. Consider the Old City for pilgrimage, Mahane Yehuda for food and nightlife, or the German Colony for quieter surroundings.",
-    callout: "Jerusalem is hilly. A hotel that looks close to the Old City on a map may still involve steps, an uphill return or a long walk from the nearest taxi drop-off.",
-    check: "If you plan to arrive on Friday evening or Saturday, check your hotel's reception and meals, as well as transport. Services vary by area.",
+    introduction:
+      "For a first visit, I recommend Downtown or Mamilla. Downtown has the broadest mix of restaurants and transport, while Mamilla is particularly useful for Jaffa Gate. Consider the Old City for pilgrimage, Mahane Yehuda for food and nightlife, or the German Colony for quieter surroundings.",
+    callout:
+      "Jerusalem is hilly. A hotel that looks close to the Old City on a map may still involve steps, an uphill return or a long walk from the nearest taxi drop-off.",
+    check:
+      "If you plan to arrive on Friday evening or Saturday, check your hotel's reception and meals, as well as transport. Services vary by area.",
     faqs: [
-      { q: "Where is the most convenient base for a first visit to Jerusalem?", a: "Downtown Jerusalem around Jaffa Road offers restaurants, convenient light-rail access and easy walks to the Old City. If Jaffa Gate is your priority, compare Mamilla and nearby King David Street." },
-      { q: "Should I stay inside Jerusalem's Old City?", a: "It can be a memorable choice if you are visiting religious and historic sites early or late in the day. Consider the nearest Old City gate, stairs and how far you'll need to carry your luggage. A hotel just outside the walls may be more convenient." },
-      { q: "Which Jerusalem areas suit families or longer stays?", a: "The German Colony and Baka offer quieter residential streets and neighborhood cafés. Downtown is a convenient choice if you plan to explore Jerusalem on foot or by public transport." },
-      { q: "What changes over Shabbat?", a: "Regular public transport and many businesses in West Jerusalem pause from Friday afternoon to Saturday evening. Shops and restaurants in East Jerusalem and parts of the Old City often follow different opening hours. Confirm your arrival, meals and check-in arrangements." },
+      {
+        q: "Where is the most convenient base for a first visit to Jerusalem?",
+        a: "Downtown Jerusalem around Jaffa Road offers restaurants, convenient light-rail access and easy walks to the Old City. If Jaffa Gate is your priority, compare Mamilla and nearby King David Street.",
+      },
+      {
+        q: "Should I stay inside Jerusalem's Old City?",
+        a: "It can be a memorable choice if you are visiting religious and historic sites early or late in the day. Consider the nearest Old City gate, stairs and how far you'll need to carry your luggage. A hotel just outside the walls may be more convenient.",
+      },
+      {
+        q: "Which Jerusalem areas suit families or longer stays?",
+        a: "The German Colony and Baka offer quieter residential streets and neighborhood cafés. Downtown is a convenient choice if you plan to explore Jerusalem on foot or by public transport.",
+      },
+      {
+        q: "What changes over Shabbat?",
+        a: "Regular public transport and many businesses in West Jerusalem pause from Friday afternoon to Saturday evening. Shops and restaurants in East Jerusalem and parts of the Old City often follow different opening hours. Confirm your arrival, meals and check-in arrangements.",
+      },
     ],
   },
   telaviv: {
-    introduction: "For a first visit to Tel Aviv, I recommend staying near the central beaches or Dizengoff Square. For a more local experience, consider Jaffa's historic streets, Neve Tzedek's boutiques, Rothschild Boulevard, Florentin's nightlife or the residential Old North.",
-    callout: "Choose a hotel within convenient walking distance of your favorite beaches, restaurants and attractions.",
-    check: "If you arrive on Friday evening or Saturday, check the current airport-to-hotel connection. Trains and regular bus routes may have limited or no service.",
+    introduction:
+      "For a first visit to Tel Aviv, I recommend staying near the central beaches or Dizengoff Square. For a more local experience, consider Jaffa's historic streets, Neve Tzedek's boutiques, Rothschild Boulevard, Florentin's nightlife or the residential Old North.",
+    callout:
+      "Choose a hotel within convenient walking distance of your favorite beaches, restaurants and attractions.",
+    check:
+      "If you arrive on Friday evening or Saturday, check the current airport-to-hotel connection. Trains and regular bus routes may have limited or no service.",
     faqs: [
-      { q: "Where should I stay in Tel Aviv on my first visit?", a: "The area around Gordon, Frishman and Bograshov beaches is ideal for a beach holiday. Stay near Dizengoff Square for restaurants, shops and easy access to the beach." },
-      { q: "Where is a quieter area for a family stay?", a: "Residential parts of the Old North have parks and northern beaches nearby. The port is generally livelier, so choose a nearby residential street if you prefer quieter evenings." },
-      { q: "Is Jaffa a good base for exploring Tel Aviv?", a: "Yes, especially if you enjoy history, galleries, food and the old port. From Jaffa, allow extra time to reach the central beaches and Dizengoff Street." },
-      { q: "Do I need a rental car if I stay centrally?", a: "Usually not for exploring Tel Aviv. Many central sights are walkable, and buses, the Red Line and taxis cover longer journeys. Parking can be difficult and expensive." },
+      {
+        q: "Where should I stay in Tel Aviv on my first visit?",
+        a: "The area around Gordon, Frishman and Bograshov beaches is ideal for a beach holiday. Stay near Dizengoff Square for restaurants, shops and easy access to the beach.",
+      },
+      {
+        q: "Where is a quieter area for a family stay?",
+        a: "Residential parts of the Old North have parks and northern beaches nearby. The port is generally livelier, so choose a nearby residential street if you prefer quieter evenings.",
+      },
+      {
+        q: "Is Jaffa a good base for exploring Tel Aviv?",
+        a: "Yes, especially if you enjoy history, galleries, food and the old port. From Jaffa, allow extra time to reach the central beaches and Dizengoff Street.",
+      },
+      {
+        q: "Do I need a rental car if I stay centrally?",
+        a: "Usually not for exploring Tel Aviv. Many central sights are walkable, and buses, the Red Line and taxis cover longer journeys. Parking can be difficult and expensive.",
+      },
     ],
   },
 } as const;
@@ -76,73 +137,209 @@ const decisionNotes = {
 /** Short decisions and transport advice that add to, rather than repeat, the area overview. */
 const jerusalemPractical: Record<string, { consider: string; gettingAround: string }> = {
   downtown: {
-    consider: "Busy pedestrian streets suit visitors who enjoy cafés and city life. For quieter evenings, compare a courtyard-facing room or the German Colony.",
-    gettingAround: "From the eastern end of Downtown, Jaffa Gate is roughly 10–15 minutes on foot; hotels farther west take longer. Jaffa Road has light-rail stops for the market and station area. Confirm the nearest vehicle-accessible drop-off.",
+    consider:
+      "Busy pedestrian streets suit visitors who enjoy cafés and city life. For quieter evenings, compare a courtyard-facing room or the German Colony.",
+    gettingAround:
+      "From the eastern end of Downtown, Jaffa Gate is roughly 10–15 minutes on foot; hotels farther west take longer. Jaffa Road has light-rail stops for the market and station area. Confirm the nearest vehicle-accessible drop-off.",
   },
   mamilla: {
-    consider: "Hotels in Mamilla are often more expensive than Downtown hotels. Book a room specifically advertised with an Old City view if that's important to you.",
-    gettingAround: "Jaffa Gate is often roughly 5–15 minutes on foot from hotels in this district. King David Street extends south, adding walking time. Ask your driver to use the hotel's vehicle-accessible entrance.",
+    consider:
+      "Hotels in Mamilla are often more expensive than Downtown hotels. Book a room specifically advertised with an Old City view if that's important to you.",
+    gettingAround:
+      "Jaffa Gate is often roughly 5–15 minutes on foot from hotels in this district. King David Street extends south, adding walking time. Ask your driver to use the hotel's vehicle-accessible entrance.",
   },
   "old-city": {
-    consider: "Historic guesthouses vary greatly in facilities and accessibility. If you need step-free access, check both the route from the Old City gate and accessibility within the hotel.",
-    gettingAround: "Choose the arrival gate with your hotel: Jaffa Gate suits many western approaches, Damascus Gate the northern lanes, while Zion or Dung gates may suit some Jewish Quarter addresses. Ask where a taxi can drop you off and how far you'll need to carry your luggage.",
+    consider:
+      "Historic guesthouses vary greatly in facilities and accessibility. If you need step-free access, check both the route from the Old City gate and accessibility within the hotel.",
+    gettingAround:
+      "Choose the arrival gate with your hotel: Jaffa Gate suits many western approaches, Damascus Gate the northern lanes, while Zion or Dung gates may suit some Jewish Quarter addresses. Ask where a taxi can drop you off and how far you'll need to carry your luggage.",
   },
   "mahane-yehuda": {
-    consider: "Market-facing rooms can hear deliveries and evening bars. Apartments can be convenient for longer stays, but check the kitchen and check-in arrangements in the exact unit.",
-    gettingAround: "Jaffa Gate is roughly 20–30 minutes on foot from much of this area. Alternatively, take the light rail toward City Hall when it is operating, then walk. Parking and pickup beside the market can be awkward.",
+    consider:
+      "Market-facing rooms can hear deliveries and evening bars. Apartments can be convenient for longer stays, but check the kitchen and check-in arrangements in the exact unit.",
+    gettingAround:
+      "Jaffa Gate is roughly 20–30 minutes on foot from much of this area. Alternatively, take the light rail toward City Hall when it is operating, then walk. Parking and pickup beside the market can be awkward.",
   },
   "east-jerusalem": {
-    consider: "Hotels near Damascus Gate are closer to the busy commercial streets, while those around the American Colony generally offer quieter surroundings. If western Downtown restaurants and Mahane Yehuda nightlife are your priority, choose a base farther west.",
-    gettingAround: "Hotels beside the northern Old City walls may be a short walk from Damascus Gate, while properties near the American Colony are farther away. Use the precise address for arrival and check the most useful gate for your itinerary.",
+    consider:
+      "Hotels near Damascus Gate are closer to the busy commercial streets, while those around the American Colony generally offer quieter surroundings. If western Downtown restaurants and Mahane Yehuda nightlife are your priority, choose a base farther west.",
+    gettingAround:
+      "Hotels beside the northern Old City walls may be a short walk from Damascus Gate, while properties near the American Colony are farther away. Use the precise address for arrival and check the most useful gate for your itinerary.",
   },
   "german-colony": {
-    consider: "The northern German Colony is closer to central sights than southern Baka. Allow for bus or taxi journeys to some of Jerusalem's main attractions.",
-    gettingAround: "From the northern German Colony, Jaffa Gate is roughly a 15–25-minute walk, depending on the starting point. If you're staying farther south in Baka, buses and taxis are convenient for reaching the main attractions.",
+    consider:
+      "The northern German Colony is closer to central sights than southern Baka. Allow for bus or taxi journeys to some of Jerusalem's main attractions.",
+    gettingAround:
+      "From the northern German Colony, Jaffa Gate is roughly a 15–25-minute walk, depending on the starting point. If you're staying farther south in Baka, buses and taxis are convenient for reaching the main attractions.",
   },
 };
 
 /** Tailored comparisons and arrival guidance for each of the eight Tel Aviv areas. */
-const telAvivNoteDesign: Record<string, { insightTitle: string; arrivalTitle: string; InsightIcon: LucideIcon; ArrivalIcon: LucideIcon }> = {
-  "telaviv-beachfront": { insightTitle: "Beach access & room views", arrivalTitle: "Finding the hotel entrance", InsightIcon: Eye, ArrivalIcon: MapPin },
-  "telaviv-dizengoff": { insightTitle: "Near the square or farther north?", arrivalTitle: "From the airport and stations", InsightIcon: Footprints, ArrivalIcon: Route },
-  "telaviv-old-north": { insightTitle: "Quiet streets or the port?", arrivalTitle: "A northern Tel Aviv arrival", InsightIcon: Volume2, ArrivalIcon: MapPin },
-  "telaviv-neve-tzedek": { insightTitle: "Historic lanes or main roads?", arrivalTitle: "Arriving among narrow streets", InsightIcon: House, ArrivalIcon: Footprints },
-  "telaviv-jaffa": { insightTitle: "Old Jaffa or the flea market?", arrivalTitle: "Hills, steps & luggage", InsightIcon: Footprints, ArrivalIcon: MapPin },
-  "telaviv-florentin": { insightTitle: "Nightlife & room noise", arrivalTitle: "Apartment entry arrangements", InsightIcon: Volume2, ArrivalIcon: MapPin },
-  "telaviv-kerem": { insightTitle: "Market edge or inner streets?", arrivalTitle: "Walking in with luggage", InsightIcon: Volume2, ArrivalIcon: Footprints },
-  "telaviv-rothschild": { insightTitle: "Which end of the boulevard?", arrivalTitle: "Checking your actual address", InsightIcon: Route, ArrivalIcon: MapPin },
+const telAvivNoteDesign: Record<
+  string,
+  { insightTitle: string; arrivalTitle: string; InsightIcon: LucideIcon; ArrivalIcon: LucideIcon }
+> = {
+  "telaviv-beachfront": {
+    insightTitle: "Beach access & room views",
+    arrivalTitle: "Finding the hotel entrance",
+    InsightIcon: Eye,
+    ArrivalIcon: MapPin,
+  },
+  "telaviv-dizengoff": {
+    insightTitle: "Near the square or farther north?",
+    arrivalTitle: "From the airport and stations",
+    InsightIcon: Footprints,
+    ArrivalIcon: Route,
+  },
+  "telaviv-old-north": {
+    insightTitle: "Quiet streets or the port?",
+    arrivalTitle: "A northern Tel Aviv arrival",
+    InsightIcon: Volume2,
+    ArrivalIcon: MapPin,
+  },
+  "telaviv-neve-tzedek": {
+    insightTitle: "Historic lanes or main roads?",
+    arrivalTitle: "Arriving among narrow streets",
+    InsightIcon: House,
+    ArrivalIcon: Footprints,
+  },
+  "telaviv-jaffa": {
+    insightTitle: "Old Jaffa or the flea market?",
+    arrivalTitle: "Hills, steps & luggage",
+    InsightIcon: Footprints,
+    ArrivalIcon: MapPin,
+  },
+  "telaviv-florentin": {
+    insightTitle: "Nightlife & room noise",
+    arrivalTitle: "Apartment entry arrangements",
+    InsightIcon: Volume2,
+    ArrivalIcon: MapPin,
+  },
+  "telaviv-kerem": {
+    insightTitle: "Market edge or inner streets?",
+    arrivalTitle: "Walking in with luggage",
+    InsightIcon: Volume2,
+    ArrivalIcon: Footprints,
+  },
+  "telaviv-rothschild": {
+    insightTitle: "Which end of the boulevard?",
+    arrivalTitle: "Checking your actual address",
+    InsightIcon: Route,
+    ArrivalIcon: MapPin,
+  },
 };
 
 const telAvivBookingTips = [
-  { title: "Walking distance to the beach", text: "Check the hotel's street address and the route to the beach you expect to use." },
-  { title: "Book the right view", text: "Book a room specifically advertised with a sea view if you'd like to overlook the Mediterranean." },
-  { title: "Street noise and nightlife", text: "For Florentin, Rothschild and market streets, check which way your room faces." },
-  { title: "Check steps and lifts", text: "Converted buildings in Neve Tzedek and Jaffa may have stairs or restricted vehicle access." },
-  { title: "Plan your arrival", text: "Check the last connection from the airport or station and Friday-evening or Saturday service." },
-  { title: "Confirm parking", text: "Parking is often limited and costly in central Tel Aviv; ask about the actual garage or space." },
-  { title: "Review apartment check-in", text: "For self-check-in accommodation, save the entry instructions and an emergency contact." },
-  { title: "Read the booking terms", text: "Before booking, check the total price, number of guests, taxes and cancellation policy." },
+  {
+    title: "Walking distance to the beach",
+    text: "Check the hotel's street address and the route to the beach you expect to use.",
+  },
+  {
+    title: "Book the right view",
+    text: "Book a room specifically advertised with a sea view if you'd like to overlook the Mediterranean.",
+  },
+  {
+    title: "Street noise and nightlife",
+    text: "For Florentin, Rothschild and market streets, check which way your room faces.",
+  },
+  {
+    title: "Check steps and lifts",
+    text: "Converted buildings in Neve Tzedek and Jaffa may have stairs or restricted vehicle access.",
+  },
+  {
+    title: "Plan your arrival",
+    text: "Check the last connection from the airport or station and Friday-evening or Saturday service.",
+  },
+  {
+    title: "Confirm parking",
+    text: "Parking is often limited and costly in central Tel Aviv; ask about the actual garage or space.",
+  },
+  {
+    title: "Review apartment check-in",
+    text: "For self-check-in accommodation, save the entry instructions and an emergency contact.",
+  },
+  {
+    title: "Read the booking terms",
+    text: "Before booking, check the total price, number of guests, taxes and cancellation policy.",
+  },
 ] as const;
 
 /** Use the Accommodation page's titled, two-column booking checklist treatment. */
 const jerusalemBookingTips = [
-  { title: "Check the walking route", text: "Plan the walk to your preferred Old City gate, including hills and steps." },
-  { title: "Confirm taxi access", text: "Confirm where your taxi can stop and how far you will carry luggage." },
-  { title: "Consider street noise", text: "Ask about noise from pedestrian streets, market deliveries and nearby bars." },
-  { title: "Check accessibility", text: "If you have limited mobility, check whether you can reach your room without using stairs." },
-  { title: "Plan a weekend arrival", text: "For a Friday-evening or Saturday arrival, confirm check-in, meals and transport." },
-  { title: "Ask about a Shabbat elevator", text: "If you need a Shabbat elevator, check whether the hotel has one." },
-  { title: "Confirm parking", text: "If you're driving, confirm the hotel's parking arrangements and daily charges." },
-  { title: "Read the full booking terms", text: "Check the full price, included taxes and cancellation deadline before paying." },
+  {
+    title: "Check the walking route",
+    text: "Plan the walk to your preferred Old City gate, including hills and steps.",
+  },
+  {
+    title: "Confirm taxi access",
+    text: "Confirm where your taxi can stop and how far you will carry luggage.",
+  },
+  {
+    title: "Consider street noise",
+    text: "Ask about noise from pedestrian streets, market deliveries and nearby bars.",
+  },
+  {
+    title: "Check accessibility",
+    text: "If you have limited mobility, check whether you can reach your room without using stairs.",
+  },
+  {
+    title: "Plan a weekend arrival",
+    text: "For a Friday-evening or Saturday arrival, confirm check-in, meals and transport.",
+  },
+  {
+    title: "Ask about a Shabbat elevator",
+    text: "If you need a Shabbat elevator, check whether the hotel has one.",
+  },
+  {
+    title: "Confirm parking",
+    text: "If you're driving, confirm the hotel's parking arrangements and daily charges.",
+  },
+  {
+    title: "Read the full booking terms",
+    text: "Check the full price, included taxes and cancellation deadline before paying.",
+  },
 ] as const;
 
-const jerusalemNoteDesign: Record<string, { insightTitle: string; arrivalTitle: string; InsightIcon: LucideIcon; ArrivalIcon: LucideIcon }> = {
-  downtown: { insightTitle: "City energy & quiet rooms", arrivalTitle: "Walking to Jaffa Gate", InsightIcon: Volume2, ArrivalIcon: Footprints },
-  mamilla: { insightTitle: "Booking a room with a view", arrivalTitle: "Reaching Jaffa Gate", InsightIcon: Eye, ArrivalIcon: Footprints },
-  "old-city": { insightTitle: "Historic buildings & accessibility", arrivalTitle: "Choose the right gate", InsightIcon: Accessibility, ArrivalIcon: MapPin },
-  "mahane-yehuda": { insightTitle: "Market streets after dark", arrivalTitle: "Getting to the Old City", InsightIcon: Volume2, ArrivalIcon: TrainFront },
-  "east-jerusalem": { insightTitle: "Choose the exact location", arrivalTitle: "Damascus Gate on foot", InsightIcon: MapPin, ArrivalIcon: Footprints },
-  "german-colony": { insightTitle: "A residential base", arrivalTitle: "Routes from Baka & the German Colony", InsightIcon: House, ArrivalIcon: Route },
+const jerusalemNoteDesign: Record<
+  string,
+  { insightTitle: string; arrivalTitle: string; InsightIcon: LucideIcon; ArrivalIcon: LucideIcon }
+> = {
+  downtown: {
+    insightTitle: "City energy & quiet rooms",
+    arrivalTitle: "Walking to Jaffa Gate",
+    InsightIcon: Volume2,
+    ArrivalIcon: Footprints,
+  },
+  mamilla: {
+    insightTitle: "Booking a room with a view",
+    arrivalTitle: "Reaching Jaffa Gate",
+    InsightIcon: Eye,
+    ArrivalIcon: Footprints,
+  },
+  "old-city": {
+    insightTitle: "Historic buildings & accessibility",
+    arrivalTitle: "Choose the right gate",
+    InsightIcon: Accessibility,
+    ArrivalIcon: MapPin,
+  },
+  "mahane-yehuda": {
+    insightTitle: "Market streets after dark",
+    arrivalTitle: "Getting to the Old City",
+    InsightIcon: Volume2,
+    ArrivalIcon: TrainFront,
+  },
+  "east-jerusalem": {
+    insightTitle: "Choose the exact location",
+    arrivalTitle: "Damascus Gate on foot",
+    InsightIcon: MapPin,
+    ArrivalIcon: Footprints,
+  },
+  "german-colony": {
+    insightTitle: "A residential base",
+    arrivalTitle: "Routes from Baka & the German Colony",
+    InsightIcon: House,
+    ArrivalIcon: Route,
+  },
 };
 
 function JerusalemPracticalNotes({ areaId }: { areaId: string }) {
@@ -150,30 +347,34 @@ function JerusalemPracticalNotes({ areaId }: { areaId: string }) {
   const presentation = jerusalemNoteDesign[areaId];
   if (!notes || !presentation) return null;
   const { InsightIcon, ArrivalIcon } = presentation;
-  return <div className="mt-6 grid gap-4 sm:grid-cols-2" data-testid="jerusalem-practical-notes">
-    <aside className="rounded-2xl border border-primary/20 border-l-4 border-l-primary bg-secondary/40 p-4 shadow-sm sm:p-5">
-      <div className="flex items-start gap-3">
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
-          <InsightIcon className="h-5 w-5" aria-hidden />
-        </span>
-        <div className="min-w-0">
-          <h4 className="font-semibold leading-snug">{presentation.insightTitle}</h4>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{notes.consider}</p>
+  return (
+    <div className="mt-6 grid gap-4 sm:grid-cols-2" data-testid="jerusalem-practical-notes">
+      <aside className="rounded-2xl border border-primary/20 border-l-4 border-l-primary bg-secondary/40 p-4 shadow-sm sm:p-5">
+        <div className="flex items-start gap-3">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+            <InsightIcon className="h-5 w-5" aria-hidden />
+          </span>
+          <div className="min-w-0">
+            <h4 className="font-semibold leading-snug">{presentation.insightTitle}</h4>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{notes.consider}</p>
+          </div>
         </div>
-      </div>
-    </aside>
-    <div className="rounded-2xl border border-sky-200/80 bg-sky-50/70 p-4 shadow-sm dark:border-sky-700/35 dark:bg-sky-950/25 sm:p-5">
-      <div className="flex items-start gap-3">
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-100 text-sky-800 dark:bg-sky-900/45 dark:text-sky-300">
-          <ArrivalIcon className="h-5 w-5" aria-hidden />
-        </span>
-        <div className="min-w-0">
-          <h4 className="font-semibold leading-snug">{presentation.arrivalTitle}</h4>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{notes.gettingAround}</p>
+      </aside>
+      <div className="rounded-2xl border border-sky-200/80 bg-sky-50/70 p-4 shadow-sm dark:border-sky-700/35 dark:bg-sky-950/25 sm:p-5">
+        <div className="flex items-start gap-3">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-100 text-sky-800 dark:bg-sky-900/45 dark:text-sky-300">
+            <ArrivalIcon className="h-5 w-5" aria-hidden />
+          </span>
+          <div className="min-w-0">
+            <h4 className="font-semibold leading-snug">{presentation.arrivalTitle}</h4>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {notes.gettingAround}
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>;
+  );
 }
 
 function TelAvivPracticalNotes({ areaId }: { areaId: string }) {
@@ -181,30 +382,32 @@ function TelAvivPracticalNotes({ areaId }: { areaId: string }) {
   const presentation = telAvivNoteDesign[areaId];
   if (!note || !presentation) return null;
   const { InsightIcon, ArrivalIcon } = presentation;
-  return <div className="mt-6 grid gap-4 sm:grid-cols-2" data-testid="telaviv-practical-notes">
-    <aside className="rounded-2xl border border-primary/20 border-l-4 border-l-primary bg-secondary/40 p-4 shadow-sm sm:p-5">
-      <div className="flex items-start gap-3">
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
-          <InsightIcon className="h-5 w-5" aria-hidden />
-        </span>
-        <div className="min-w-0">
-          <h4 className="font-semibold leading-snug">{presentation.insightTitle}</h4>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{note.compare}</p>
+  return (
+    <div className="mt-6 grid gap-4 sm:grid-cols-2" data-testid="telaviv-practical-notes">
+      <aside className="rounded-2xl border border-primary/20 border-l-4 border-l-primary bg-secondary/40 p-4 shadow-sm sm:p-5">
+        <div className="flex items-start gap-3">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+            <InsightIcon className="h-5 w-5" aria-hidden />
+          </span>
+          <div className="min-w-0">
+            <h4 className="font-semibold leading-snug">{presentation.insightTitle}</h4>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{note.compare}</p>
+          </div>
         </div>
-      </div>
-    </aside>
-    <div className="rounded-2xl border border-sky-200/80 bg-sky-50/70 p-4 shadow-sm dark:border-sky-700/35 dark:bg-sky-950/25 sm:p-5">
-      <div className="flex items-start gap-3">
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-100 text-sky-800 dark:bg-sky-900/45 dark:text-sky-300">
-          <ArrivalIcon className="h-5 w-5" aria-hidden />
-        </span>
-        <div className="min-w-0">
-          <h4 className="font-semibold leading-snug">{presentation.arrivalTitle}</h4>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{note.arrival}</p>
+      </aside>
+      <div className="rounded-2xl border border-sky-200/80 bg-sky-50/70 p-4 shadow-sm dark:border-sky-700/35 dark:bg-sky-950/25 sm:p-5">
+        <div className="flex items-start gap-3">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-100 text-sky-800 dark:bg-sky-900/45 dark:text-sky-300">
+            <ArrivalIcon className="h-5 w-5" aria-hidden />
+          </span>
+          <div className="min-w-0">
+            <h4 className="font-semibold leading-snug">{presentation.arrivalTitle}</h4>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{note.arrival}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>;
+  );
 }
 
 export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
@@ -218,122 +421,309 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
   const areaPhotos = cityId === "jerusalem" ? jerusalemAreaCardPhotos : telAvivAreaCardPhotos;
   const hero = stayEditorialHeroPhotos[cityId];
 
-  return <main className="pb-10" data-testid="city-neighborhood-editorial">
-    <GuideHeader
-      crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: info.title, to: info.path as LinkProps["to"] }]}
-      eyebrow={`Travel guide · ${cityName}`}
-      title={info.title}
-      intro={info.intro}
-      checkedAt={guide.reviewedAt || INFO_CHECK_DATE}
-      image={hero}
-    />
-    <OnThisPage sections={neighborhoodSections} />
-    <article className="mx-auto max-w-5xl px-4">
-      <section id="choose" aria-labelledby="choose-h" className="mt-10 scroll-mt-32">
-        <p className="eyebrow">Choose your base</p>
-        <h2 id="choose-h" className="mt-2 text-3xl">Where should you stay in {cityName}?</h2>
-        <p className="mt-4 max-w-4xl leading-relaxed">{choices.introduction}</p>
-        {cityId === "jerusalem" && <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">See my <Link to="/travel-blog/jerusalem-travel-guide/" className="font-semibold text-primary underline underline-offset-4">Jerusalem travel guide</Link> for sightseeing ideas and day trips.</p>}
-        <Link to={guide.path as LinkProps["to"]} className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid={`${cityId}-all-hotels-link`}>
-          Browse all {cityName} hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-        </Link>
+  return (
+    <main className="pb-10" data-testid="city-neighborhood-editorial">
+      <GuideHeader
+        crumbs={[
+          { name: "Home", to: "/" },
+          { name: "Travel guides", to: "/travel-blog/" },
+          { name: info.title, to: info.path as LinkProps["to"] },
+        ]}
+        eyebrow={`Travel guide · ${cityName}`}
+        title={info.title}
+        intro={info.intro}
+        checkedAt={guide.reviewedAt || INFO_CHECK_DATE}
+        image={hero}
+      />
+      <OnThisPage sections={neighborhoodSections} />
+      <article className="mx-auto max-w-5xl px-4">
+        <section id="choose" aria-labelledby="choose-h" className="mt-10 scroll-mt-32">
+          <p className="eyebrow">Choose your base</p>
+          <h2 id="choose-h" className="mt-2 text-3xl">
+            Where should you stay in {cityName}?
+          </h2>
+          <p className="mt-4 max-w-4xl leading-relaxed">{choices.introduction}</p>
+          {cityId === "jerusalem" && (
+            <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">
+              See my{" "}
+              <Link
+                to="/travel-blog/jerusalem-travel-guide/"
+                className="font-semibold text-primary underline underline-offset-4"
+              >
+                Jerusalem travel guide
+              </Link>{" "}
+              for sightseeing ideas and day trips.
+            </p>
+          )}
+          <Link
+            to={guide.path as LinkProps["to"]}
+            className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            data-testid={`${cityId}-all-hotels-link`}
+          >
+            Browse all {cityName} hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+          </Link>
 
-        {<ul className={`mt-7 grid grid-cols-2 gap-3 sm:gap-4 ${cityId === "jerusalem" ? "lg:grid-cols-3" : "lg:grid-cols-4"}`} data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-image-grid`}>
+          {
+            <ul
+              className={`mt-7 grid grid-cols-2 gap-3 sm:gap-4 ${cityId === "jerusalem" ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}
+              data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-image-grid`}
+            >
+              {areas.map((area) => {
+                const photo = areaPhotos[area.id] ?? area.photo;
+                return (
+                  <li key={area.id} className="min-w-0">
+                    <a
+                      href={`#area-${area.id}`}
+                      className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    >
+                      <div className="overflow-hidden bg-muted">
+                        <img
+                          src={photo.src}
+                          alt={photo.alt}
+                          width={600}
+                          height={375}
+                          loading="lazy"
+                          decoding="async"
+                          className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]"
+                        />
+                      </div>
+                      <span className="flex flex-1 flex-col p-3 sm:p-4">
+                        <span className="text-sm font-bold leading-snug text-foreground group-hover:text-primary sm:text-lg">
+                          {area.shortName}
+                        </span>
+                        <span className="mt-1.5 line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                          {area.bestFor}
+                        </span>
+                        <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary sm:text-sm">
+                          Explore this area{" "}
+                          <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          }
+
+          <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
+            <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
+            <p>{choices.callout}</p>
+          </aside>
+        </section>
+
+        <section
+          id="neighborhoods"
+          aria-labelledby="neighborhoods-h"
+          className="mt-14 scroll-mt-32"
+        >
+          <h2 id="neighborhoods-h" className="text-3xl">
+            Neighborhoods in {cityName}
+          </h2>
+          <div className="mt-5 divide-y border-t">
             {areas.map((area) => {
               const photo = areaPhotos[area.id] ?? area.photo;
-              return <li key={area.id} className="min-w-0">
-              <a href={`#area-${area.id}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                <div className="overflow-hidden bg-muted">
-                  <img src={photo.src} alt={photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" />
-                </div>
-                <span className="flex flex-1 flex-col p-3 sm:p-4">
-                  <span className="text-sm font-bold leading-snug text-foreground group-hover:text-primary sm:text-lg">{area.shortName}</span>
-                  <span className="mt-1.5 line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{area.bestFor}</span>
-                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary sm:text-sm">Explore this area <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden /></span>
-                </span>
-              </a>
-            </li>;
+              return (
+                <section
+                  key={area.id}
+                  id={`area-${area.id}`}
+                  aria-labelledby={`area-${area.id}-h`}
+                  className="scroll-mt-32 py-9 sm:py-11"
+                  data-testid="editorial-neighborhood"
+                >
+                  <div
+                    className="grid items-stretch gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(230px,1fr)] md:gap-7"
+                    data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-layout`}
+                  >
+                    <div className="min-w-0">
+                      <h3 id={`area-${area.id}-h`} className="text-2xl font-semibold sm:text-3xl">
+                        {area.name}
+                      </h3>
+                      {
+                        <div
+                          className="mt-3 space-y-1.5 text-sm leading-relaxed"
+                          data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-highlights`}
+                        >
+                          <p>
+                            <strong>Best for:</strong> {area.bestFor}
+                          </p>
+                          <p>
+                            <strong>Nearby highlights:</strong>{" "}
+                            {area.highlights
+                              .slice(0, 3)
+                              .map((place) => place.name)
+                              .join(" · ")}
+                          </p>
+                        </div>
+                      }
+                      {area.overview.slice(0, 2).map((paragraph, index) => (
+                        <p key={index} className="mt-3 leading-relaxed">
+                          {paragraph}
+                        </p>
+                      ))}
+
+                      <CityEditorialHotels area={area} />
+                    </div>
+                    <div
+                      className="flex min-w-0 flex-col"
+                      data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-media`}
+                    >
+                      <figure className="overflow-hidden rounded-xl border bg-secondary/20">
+                        <img
+                          src={photo.src}
+                          alt=""
+                          width={755}
+                          height={503}
+                          loading="lazy"
+                          decoding="async"
+                          className="aspect-[16/10] w-full object-cover"
+                        />
+                        <figcaption className="px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+                          {photo.alt}
+                        </figcaption>
+                      </figure>
+                      <div
+                        className="mt-6 min-h-0 flex-1"
+                        data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-map`}
+                      >
+                        <AreaMap
+                          area={area}
+                          compact
+                          provider="google"
+                          showExternalLink={false}
+                          stretch
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  {cityId === "jerusalem" ? (
+                    <JerusalemPracticalNotes areaId={area.id} />
+                  ) : (
+                    <TelAvivPracticalNotes areaId={area.id} />
+                  )}
+                  {cityId === "jerusalem" && area.id === "german-colony" && (
+                    <aside className="mt-4 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
+                      <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
+                      <p>
+                        Blue Line light-rail construction on Emek Refaim has changed some road and
+                        bus arrangements. Ask your accommodation about its current entrance and
+                        drop-off; consult the{" "}
+                        <a
+                          href="https://baka.org.il/he/120/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-primary underline underline-offset-2"
+                        >
+                          local construction updates
+                        </a>{" "}
+                        before travelling.
+                      </p>
+                    </aside>
+                  )}
+                  <div className="mt-6 flex justify-center">
+                    <Link
+                      to={area.path as LinkProps["to"]}
+                      className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-3 text-center text-sm font-semibold"
+                    >
+                      Browse more hotels in {area.shortName}{" "}
+                      <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+                    </Link>
+                  </div>
+                </section>
+              );
             })}
-          </ul>}
+          </div>
+        </section>
 
-        <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
-          <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
-          <p>{choices.callout}</p>
-        </aside>
-      </section>
+        <section id="tips" aria-labelledby="tips-h" className="mt-12 scroll-mt-32">
+          <h2 id="tips-h" className="text-3xl">
+            What to check before booking
+          </h2>
 
-      <section id="neighborhoods" aria-labelledby="neighborhoods-h" className="mt-14 scroll-mt-32">
-        <h2 id="neighborhoods-h" className="text-3xl">Neighborhoods in {cityName}</h2>
-        <div className="mt-5 divide-y border-t">
-          {areas.map((area) => {
-            const photo = areaPhotos[area.id] ?? area.photo;
-            return <section key={area.id} id={`area-${area.id}`} aria-labelledby={`area-${area.id}-h`} className="scroll-mt-32 py-9 sm:py-11" data-testid="editorial-neighborhood">
-            <div className="grid items-stretch gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(230px,1fr)] md:gap-7" data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-layout`}>
-              <div className="min-w-0">
-                <h3 id={`area-${area.id}-h`} className="text-2xl font-semibold sm:text-3xl">{area.name}</h3>
-                {<div className="mt-3 space-y-1.5 text-sm leading-relaxed" data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-highlights`}>
-                  <p><strong>Best for:</strong> {area.bestFor}</p>
-                  <p><strong>Nearby highlights:</strong> {area.highlights.slice(0, 3).map((place) => place.name).join(" · ")}</p>
-                </div>}
-                {area.overview.slice(0, 2).map((paragraph, index) => <p key={index} className="mt-3 leading-relaxed">{paragraph}</p>)}
+          <StayBookingChecklist
+            testId={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-booking-checklist`}
+            groups={[
+              {
+                title: "Location & arrival",
+                items: (cityId === "jerusalem" ? jerusalemBookingTips : telAvivBookingTips).slice(
+                  0,
+                  4,
+                ),
+              },
+              {
+                title: "Room & booking conditions",
+                items: (cityId === "jerusalem" ? jerusalemBookingTips : telAvivBookingTips).slice(
+                  4,
+                ),
+              },
+            ]}
+          />
+          <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
+            <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
+            <p>
+              {cityId === "jerusalem" ? (
+                <>
+                  Check my{" "}
+                  <Link
+                    to="/travel-blog/calendar-of-events/"
+                    className="font-semibold text-primary underline underline-offset-2"
+                  >
+                    Israel calendar of events
+                  </Link>{" "}
+                  for holiday dates that may affect local services during your stay.
+                </>
+              ) : (
+                <>
+                  {choices.check} See my{" "}
+                  <Link
+                    to="/travel-blog/calendar-of-events/"
+                    className="font-semibold text-primary underline underline-offset-2"
+                  >
+                    Israel calendar of events
+                  </Link>{" "}
+                  for public holidays and special dates that can affect your plans.
+                </>
+              )}
+            </p>
+          </aside>
+          <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+            {
+              "Hotels and booking websites are independent providers. Review all booking details carefully before confirming."
+            }
+          </p>
+        </section>
 
-                <CityEditorialHotels area={area} />
-              </div>
-              <div className="flex min-w-0 flex-col" data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-media`}>
-                <figure className="overflow-hidden rounded-xl border bg-secondary/20">
-                  <img src={photo.src} alt="" width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
-                  <figcaption className="px-3 py-2 text-xs leading-relaxed text-muted-foreground">{photo.alt}</figcaption>
-                </figure>
-                <div className="mt-6 min-h-0 flex-1" data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-map`}>
-                  <AreaMap area={area} compact provider="google" showExternalLink={false} stretch />
-                </div>
-              </div>
-            </div>
-            {cityId === "jerusalem" ? <JerusalemPracticalNotes areaId={area.id} /> : <TelAvivPracticalNotes areaId={area.id} />}
-            {cityId === "jerusalem" && area.id === "german-colony" && <aside className="mt-4 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
-              <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
-              <p>Blue Line light-rail construction on Emek Refaim has changed some road and bus arrangements. Ask your accommodation about its current entrance and drop-off; consult the <a href="https://baka.org.il/he/120/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-2">local construction updates</a> before travelling.</p>
-            </aside>}
-            <div className="mt-6 flex justify-center">
-              <Link to={area.path as LinkProps["to"]} className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-3 text-center text-sm font-semibold">
-                Browse more hotels in {area.shortName} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-              </Link>
-            </div>
-          </section>;
-          })}
-        </div>
-      </section>
-
-      <section id="tips" aria-labelledby="tips-h" className="mt-12 scroll-mt-32">
-        <h2 id="tips-h" className="text-3xl">What to check before booking</h2>
-
-        <StayBookingChecklist testId={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-booking-checklist`} groups={[
-          { title: "Location & arrival", items: (cityId === "jerusalem" ? jerusalemBookingTips : telAvivBookingTips).slice(0, 4) },
-          { title: "Room & booking conditions", items: (cityId === "jerusalem" ? jerusalemBookingTips : telAvivBookingTips).slice(4) },
-        ]} />
-        <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
-          <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
-          <p>{cityId === "jerusalem"
-            ? <>Check my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> for holiday dates that may affect local services during your stay.</>
-            : <>{choices.check} See my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> for public holidays and special dates that can affect your plans.</>}</p>
-        </aside>
-        <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-          {"Hotels and booking websites are independent providers. Review all booking details carefully before confirming."}
-        </p>
-      </section>
-
-      <FaqList faqs={cityId === "jerusalem"
-        ? [...decisionNotes.jerusalem.faqs, {
-          q: "How do I get from Jerusalem Yitzhak Navon station to my hotel?",
-          a: "Yitzhak Navon station is next to the Central Bus Station and the light-rail connection. Use the light rail along Jaffa Road for many Downtown and market-area hotels, or take a taxi for an address farther away. Allow for the final walk to the entrance and check service on Friday evenings, Saturdays and holidays.",
-        }]
-        : [...decisionNotes.telaviv.faqs]} />
-      <StayTripLinks region={cityId} currentPath={info.path} presentation="guide" />
-      <HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy(info.title, "accommodation", cityName)} />
-      <SourceList
-        ids={cityId === "jerusalem" ? [...guide.sourceIds, ...jerusalemStaySourceIds] : guide.sourceIds}
-        intro={cityId === "jerusalem" ? "Transport and access information for planning your stay." : "Neighborhood and accommodation information for planning your stay."}
-      />
-    </article>
-  </main>;
+        <FaqList
+          faqs={
+            cityId === "jerusalem"
+              ? [
+                  ...decisionNotes.jerusalem.faqs,
+                  {
+                    q: "How do I get from Jerusalem Yitzhak Navon station to my hotel?",
+                    a: "Yitzhak Navon station is next to the Central Bus Station and the light-rail connection. Use the light rail along Jaffa Road for many Downtown and market-area hotels, or take a taxi for an address farther away. Allow for the final walk to the entrance and check service on Friday evenings, Saturdays and holidays.",
+                  },
+                ]
+              : [...decisionNotes.telaviv.faqs]
+          }
+        />
+        <StayTripLinks region={cityId} currentPath={info.path} presentation="guide" />
+        <HomeContactForm
+          showTripadvisorBesidePortraitMobile
+          guide={guideContactCopy(info.title, "accommodation", cityName)}
+        />
+        <SourceList
+          ids={
+            cityId === "jerusalem"
+              ? [...guide.sourceIds, ...jerusalemStaySourceIds]
+              : guide.sourceIds
+          }
+          intro={
+            cityId === "jerusalem"
+              ? "Transport and access information for planning your stay."
+              : "Neighborhood and accommodation information for planning your stay."
+          }
+        />
+      </article>
+    </main>
+  );
 }

@@ -6,12 +6,32 @@ import type { ContactMessageFields } from "@/lib/contact-message";
 
 export const quoteRequestEndpoint = "/api/quote-request/";
 export const deliveryErrorCodes = [
-  "BREVO_UNAUTHORIZED", "BREVO_FORBIDDEN", "BREVO_SENDER", "BREVO_RATE_LIMIT", "BREVO_REJECTED", "BREVO_PROVIDER", "BREVO_RESPONSE", "BREVO_TIMEOUT", "BREVO_DNS", "BREVO_TLS", "BREVO_CONNECT", "BREVO_REDIRECT", "BREVO_RUNTIME", "BREVO_NETWORK",
-  "HTTP_403", "HTTP_404", "HTTP_ERROR", "BAD_RESPONSE", "REQUEST_TIMEOUT", "REQUEST_NETWORK",
+  "BREVO_UNAUTHORIZED",
+  "BREVO_FORBIDDEN",
+  "BREVO_SENDER",
+  "BREVO_RATE_LIMIT",
+  "BREVO_REJECTED",
+  "BREVO_PROVIDER",
+  "BREVO_RESPONSE",
+  "BREVO_TIMEOUT",
+  "BREVO_DNS",
+  "BREVO_TLS",
+  "BREVO_CONNECT",
+  "BREVO_REDIRECT",
+  "BREVO_RUNTIME",
+  "BREVO_NETWORK",
+  "HTTP_403",
+  "HTTP_404",
+  "HTTP_ERROR",
+  "BAD_RESPONSE",
+  "REQUEST_TIMEOUT",
+  "REQUEST_NETWORK",
 ] as const;
-export type DeliveryErrorCode = typeof deliveryErrorCodes[number];
+export type DeliveryErrorCode = (typeof deliveryErrorCodes)[number];
 export function knownDeliveryErrorCode(value: unknown): DeliveryErrorCode | undefined {
-  return typeof value === "string" && deliveryErrorCodes.some((code) => code === value) ? value as DeliveryErrorCode : undefined;
+  return typeof value === "string" && deliveryErrorCodes.some((code) => code === value)
+    ? (value as DeliveryErrorCode)
+    : undefined;
 }
 export type QuoteRequest =
   | { kind: "transfer"; fields: TransferQuoteFields }
@@ -20,7 +40,11 @@ export type QuoteRequest =
   | { kind: "shore"; portId: ShorePortId; fields: ShoreQuoteFields };
 
 export type QuoteSourcePage = { sourcePath: string; sourceTitle?: string | undefined };
-export type QuoteRequestPayload = QuoteSourcePage & { requestId: string; website: string; request: QuoteRequest };
+export type QuoteRequestPayload = QuoteSourcePage & {
+  requestId: string;
+  website: string;
+  request: QuoteRequest;
+};
 
 /** Keep the source above the enquiry in every directly submitted email. */
 export function quoteRequestBody(body: string, source: QuoteSourcePage) {

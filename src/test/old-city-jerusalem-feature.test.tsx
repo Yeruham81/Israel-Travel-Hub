@@ -1,3 +1,4 @@
+import { sourceFragment } from "@/test-utils/source-fragment";
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { oldCityJerusalemDestinationContent as content } from "@/components/OldCityJerusalemAttractionPage";
@@ -14,16 +15,16 @@ const mapHtml = readFileSync("public/maps/jerusalem-old-city.html", "utf8");
 describe("Jerusalem Old City — upgraded visitor guide", () => {
   it("uses the new panoramic hero consistently on the page and linked attraction cards", () => {
     const route = readFileSync("src/routes/attractions.old-city-jerusalem.tsx", "utf8");
-    expect(route).toContain("component: OldCityJerusalemAttractionPage");
+    expect(route).toMatch(sourceFragment("component: OldCityJerusalemAttractionPage"));
     expect(content.path).toBe("/attractions/old-city-jerusalem/");
     expect(content.title).toBe(site.title);
     expect(content.heroTitle).toBe("Jerusalem’s Old City: What to See & How to Visit");
-    expect(readFileSync("src/data/oldCityJerusalemSite.ts", "utf8")).toContain('import oldCityPanorama from "@/assets/home/jerusalem-old-city.webp"');
+    expect(readFileSync("src/data/oldCityJerusalemSite.ts", "utf8")).toMatch(sourceFragment('import oldCityPanorama from "@/assets/home/jerusalem-old-city.webp"'));
     expect(site.hero.src).not.toContain("via-dolorosa");
     expect(existsSync("src/assets/home/jerusalem-old-city.webp")).toBe(true);
     expect(content.hero.src).toBe(site.hero.src);
     expect(attractionHubCards.find(card => card.to === content.path)?.photo.src).toBe(site.hero.src);
-    expect((page.match(/<AttractionHighlight mobileImageFirst/g) ?? [])).toHaveLength(8);
+    expect((page.match(/<AttractionHighlight\s+mobileImageFirst/g) ?? [])).toHaveLength(8);
     expect(content.itineraryFirst).toBe(true);
     expect(content.itineraryTitle).toBe("Plan your Old City visit");
     expect(content.facts).toHaveLength(6);
@@ -45,26 +46,26 @@ describe("Jerusalem Old City — upgraded visitor guide", () => {
     ];
     for (const name of images) {
       expect(existsSync("public/images/attractions/" + name), name).toBe(true);
-      expect(page).toContain(name);
+      expect(page).toMatch(sourceFragment(name));
     }
-    expect(page).toContain("<OldCityJerusalemRouteMap />");
-    expect(mapComponent).toContain('data-testid="jerusalem-old-city-map"');
-    expect(mapComponent).toContain('const overviewUrl = "/maps/jerusalem-old-city.html?points="');
-    expect(mapComponent).toContain('type: "jerusalem-old-city-map-focus"');
+    expect(page).toMatch(sourceFragment("<OldCityJerusalemRouteMap />"));
+    expect(mapComponent).toMatch(sourceFragment('data-testid="jerusalem-old-city-map"'));
+    expect(mapComponent).toMatch(sourceFragment('const overviewUrl = "/maps/jerusalem-old-city.html?points="'));
+    expect(mapComponent).toMatch(sourceFragment('type: "jerusalem-old-city-map-focus"'));
     expect(mapComponent).toContain("jerusalem-old-city-map-selected");
-    expect(mapComponent).toContain('focus("all")');
+    expect(mapComponent).toMatch(sourceFragment('focus("all")'));
     expect(mapHtml).toContain("points.length!==14");
     expect(mapHtml).toContain("new maplibregl.Marker");
     expect(mapHtml).toContain("points.forEach");
     expect(mapHtml).toContain('point.type==="site"');
     expect(mapHtml).toContain("www.google.com/maps/search");
     expect(mapHtml).not.toContain("travelmode=driving");
-    const sitePins = [...mapComponent.matchAll(/type: "site" \}/g)];
-    const gatePins = [...mapComponent.matchAll(/type: "gate" \}/g)];
+    const sitePins = [...mapComponent.matchAll(/type:\s*"site"\s*,?\s*\}/g)];
+    const gatePins = [...mapComponent.matchAll(/type:\s*"gate"\s*,?\s*\}/g)];
     expect(sitePins).toHaveLength(8);
     expect(gatePins).toHaveLength(6);
     for (const gate of ["Jaffa Gate", "Dung Gate", "Damascus Gate", "Zion Gate", "Lion's Gate", "New Gate"])
-      expect(mapComponent).toContain(gate);
+      expect(mapComponent).toMatch(sourceFragment(gate));
   });
 
   it("compares hours and admission as a real mobile-scrollable table and offers useful routes", () => {
@@ -81,29 +82,29 @@ describe("Jerusalem Old City — upgraded visitor guide", () => {
       "Two suggested walking routes", "via-dolorosa", "Western Wall Tunnels",
       "Ramparts Walk", "Cathedral of St. James",
     ]) {
-      expect(page).toContain(required);
+      expect(page).toMatch(sourceFragment(required));
     }
-    expect(page).toContain("The Old City's major landmarks");
-    expect(page).toContain("Via Dolorosa and the Christian Quarter");
-    expect(page).toContain("The <strong>southern route</strong>");
-    expect(page).toContain("The <strong>northern route</strong>");
+    expect(page).toMatch(sourceFragment("The Old City's major landmarks"));
+    expect(page).toMatch(sourceFragment("Via Dolorosa and the Christian Quarter"));
+    expect(page).toMatch(sourceFragment("The <strong>southern route</strong>"));
+    expect(page).toMatch(sourceFragment("The <strong>northern route</strong>"));
     expect(page).toContain("Sunday–Thursday");
-    expect(page).toContain("Accessible JLM");
-    expect(page).toContain("Friday and Shabbat:");
+    expect(page).toMatch(sourceFragment("Accessible JLM"));
+    expect(page).toMatch(sourceFragment("Friday and Shabbat:"));
     expect((page.match(/<AttractionPracticalTip>/g) ?? [])).toHaveLength(4);
     expect(site.visitor.towerAdult).toBe("₪55");
     expect(site.visitor.rampartsAdult).toBe("₪25");
-    expect(page).not.toContain('id="via-dolorosa-guide"');
+    expect(page).not.toMatch(sourceFragment('id="via-dolorosa-guide"'));
   });
 
   it("keeps three Travelpayouts tour cards focused on visitors who are in Jerusalem", () => {
-    expect(page).toContain('data-testid="jerusalem-old-city-featured-tours"');
-    expect(page).toContain("lg:grid-cols-3");
-    expect(page).toContain("<ExternalTourCard");
-    expect(page).toContain("<CuratedPartnerTourCard");
-    expect(page).toContain("https://viator.tpk.lv/YV4HrN5E");
-    expect(page).toContain('pageId="attractions-old-city-jerusalem"');
-    expect(page).not.toContain('tour.id === "jerusalem-day-tel-aviv"');
+    expect(page).toMatch(sourceFragment('data-testid="jerusalem-old-city-featured-tours"'));
+    expect(page).toMatch(sourceFragment("lg:grid-cols-3"));
+    expect(page).toMatch(sourceFragment("<ExternalTourCard"));
+    expect(page).toMatch(sourceFragment("<CuratedPartnerTourCard"));
+    expect(page).toMatch(sourceFragment("https://viator.tpk.lv/YV4HrN5E"));
+    expect(page).toMatch(sourceFragment('pageId="attractions-old-city-jerusalem"'));
+    expect(page).not.toMatch(sourceFragment('tour.id === "jerusalem-day-tel-aviv"'));
     for (const id of ["jerusalem-old-city-walk", "jerusalem-private-oldcity-walk"]) {
       expect(tourProducts.find(tour => tour.id === id)?.originIds).toContain("jerusalem");
       expect(offersForTour(id, "attractions-old-city-jerusalem").some(offer => offer.provider.isAffiliate)).toBe(true);
@@ -120,7 +121,7 @@ describe("Jerusalem Old City — upgraded visitor guide", () => {
     ];
     expect(content.nearby?.map(item => item.to)).toEqual(expected);
     expect(content.planningLinks).toHaveLength(6);
-    expect(page).toContain("contactIntroduction:");
-    expect(page).toContain('<Link to="/attractions/via-dolorosa/"');
+    expect(page).toMatch(sourceFragment("contactIntroduction:"));
+    expect(page).toMatch(sourceFragment('<Link to="/attractions/via-dolorosa/"'));
   });
 });

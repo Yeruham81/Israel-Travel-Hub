@@ -1,6 +1,16 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
-export type HeroSlide = { src: string; srcSm: string; srcMedium: string; alt: string; caption: string; pos?: string; width?: number; height?: number; highDensity?: boolean };
+export type HeroSlide = {
+  src: string;
+  srcSm: string;
+  srcMedium: string;
+  alt: string;
+  caption: string;
+  pos?: string;
+  width?: number;
+  height?: number;
+  highDensity?: boolean;
+};
 
 const INTERVAL = 6000;
 
@@ -30,7 +40,10 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
     const vis = () => setHidden(document.visibilityState === "hidden");
     vis();
     document.addEventListener("visibilitychange", vis);
-    return () => { mq.removeEventListener("change", apply); document.removeEventListener("visibilitychange", vis); };
+    return () => {
+      mq.removeEventListener("change", apply);
+      document.removeEventListener("visibilitychange", vis);
+    };
   }, []);
 
   /** Resolves once slide i's displayed image is loaded + decoded; rejects if it fails. */
@@ -54,7 +67,12 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
   const onImgError = (i: number) => {
     waiters.current.get(i)?.forEach((w) => w.reject());
     waiters.current.delete(i);
-    if (i !== index) setMounted((prev) => { const s = new Set(prev); s.delete(i); return s; }); // allow a later retry
+    if (i !== index)
+      setMounted((prev) => {
+        const s = new Set(prev);
+        s.delete(i);
+        return s;
+      }); // allow a later retry
   };
 
   const running = !reduced && !hovered && !focused && !hidden;
@@ -65,22 +83,32 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
   // Other slide changes warm their next image sooner, but still off the
   // critical first-paint network path.
   useEffect(() => {
-    const timeout = window.setTimeout(() => {
-      ensure((index + 1) % n).catch(() => undefined);
-    }, index === 0 ? 4800 : 350);
+    const timeout = window.setTimeout(
+      () => {
+        ensure((index + 1) % n).catch(() => undefined);
+      },
+      index === 0 ? 4800 : 350,
+    );
     return () => window.clearTimeout(timeout);
   }, [index, n, ensure]);
 
   /** Request a slide; the current photo/caption stay until the target is ready. Newest request wins. */
-  const go = useCallback((i: number) => {
-    const target = ((i % n) + n) % n;
-    const id = ++requestId.current;
-    setTick((t) => t + 1);
-    ensure(target).then(
-      () => { if (id === requestId.current) setIndex(target); },
-      () => { if (id === requestId.current) setTick((t) => t + 1); }, // keep current slide; re-arm timer
-    );
-  }, [n, ensure]);
+  const go = useCallback(
+    (i: number) => {
+      const target = ((i % n) + n) % n;
+      const id = ++requestId.current;
+      setTick((t) => t + 1);
+      ensure(target).then(
+        () => {
+          if (id === requestId.current) setIndex(target);
+        },
+        () => {
+          if (id === requestId.current) setTick((t) => t + 1);
+        }, // keep current slide; re-arm timer
+      );
+    },
+    [n, ensure],
+  );
 
   useEffect(() => {
     if (!running) return;
@@ -100,22 +128,48 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocus={() => setFocused(true)}
-      onBlur={(e) => { if (!rootRef.current?.contains(e.relatedTarget as Node)) setFocused(false); }}
+      onBlur={(e) => {
+        if (!rootRef.current?.contains(e.relatedTarget as Node)) setFocused(false);
+      }}
     >
       <div className="absolute inset-0">
         {slides.map((s, i) => (
-          <div key={s.caption} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${n}: ${s.caption}`} aria-hidden={i !== index} className={`absolute inset-0 ${fade} ${i === index ? "opacity-100" : "opacity-0"}`}>
+          <div
+            key={s.caption}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${n}: ${s.caption}`}
+            aria-hidden={i !== index}
+            className={`absolute inset-0 ${fade} ${i === index ? "opacity-100" : "opacity-0"}`}
+          >
             {(mounted.has(i) || i === index) && (
               <picture className="absolute inset-0 block h-full w-full">
                 <source media="(max-width: 767px)" srcSet={s.srcSm} />
-                <source media="(max-width: 1800px)" srcSet={s.highDensity ? s.srcMedium + " 1x, " + s.src + " 2x" : s.srcMedium} />
-                <img src={s.src} alt={s.alt} width={s.width ?? 1920} height={s.height ?? 872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" onLoad={(e) => onImgLoad(i, e.currentTarget)} onError={() => onImgError(i)} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
+                <source
+                  media="(max-width: 1800px)"
+                  srcSet={s.highDensity ? s.srcMedium + " 1x, " + s.src + " 2x" : s.srcMedium}
+                />
+                <img
+                  src={s.src}
+                  alt={s.alt}
+                  width={s.width ?? 1920}
+                  height={s.height ?? 872}
+                  fetchPriority={i === 0 ? "high" : "auto"}
+                  decoding="async"
+                  onLoad={(e) => onImgLoad(i, e.currentTarget)}
+                  onError={() => onImgError(i)}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{ objectPosition: s.pos ?? "center" }}
+                />
               </picture>
             )}
           </div>
         ))}
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-black/5 max-md:bg-gradient-to-t max-md:from-black/60 max-md:via-black/30 max-md:to-black/10" aria-hidden />
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-black/5 max-md:bg-gradient-to-t max-md:from-black/60 max-md:via-black/30 max-md:to-black/10"
+        aria-hidden
+      />
       <div className="relative mx-auto max-w-[90rem]">{children}</div>
       <div className="relative mx-auto mt-14 flex max-w-[90rem] flex-col items-center gap-1.5 px-4 pb-3 md:mt-20 md:px-8 md:pb-4">
         <p
@@ -126,7 +180,11 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
         >
           {slides[index]?.caption}
         </p>
-        <div className="flex items-center justify-center gap-0.5" role="group" aria-label="Choose a place">
+        <div
+          className="flex items-center justify-center gap-0.5"
+          role="group"
+          aria-label="Choose a place"
+        >
           {slides.map((s, i) => (
             <button
               key={s.caption}
@@ -136,7 +194,10 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
               aria-current={i === index}
               className="grid h-7 w-7 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-white"
             >
-              <span aria-hidden className={`block h-1.5 rounded-full bg-white/80 transition-all duration-200 md:h-2 ${i === index ? "w-3 opacity-90" : "w-1.5 opacity-45 md:w-2"}`} />
+              <span
+                aria-hidden
+                className={`block h-1.5 rounded-full bg-white/80 transition-all duration-200 md:h-2 ${i === index ? "w-3 opacity-90" : "w-1.5 opacity-45 md:w-2"}`}
+              />
             </button>
           ))}
         </div>

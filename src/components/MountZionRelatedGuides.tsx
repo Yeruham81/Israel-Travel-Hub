@@ -5,7 +5,8 @@ type Related = { title: string; summary: string; to: LinkProps["to"]; photo: str
 const related: Related[] = [
   {
     title: "Jerusalem's Old City",
-    summary: "Walk through the gates and quarters, and connect Mount Zion with the Jewish and Armenian Quarters.",
+    summary:
+      "Walk through the gates and quarters, and connect Mount Zion with the Jewish and Armenian Quarters.",
     to: "/attractions/old-city-jerusalem/",
     photo: "/images/attractions/jerusalem.webp",
     alt: "Jerusalem Old City walls and skyline",
@@ -26,14 +27,16 @@ const related: Related[] = [
   },
   {
     title: "Jerusalem travel guide",
-    summary: "Markets, historic neighbourhoods, local transport and ideas for spending more time in the city.",
+    summary:
+      "Markets, historic neighbourhoods, local transport and ideas for spending more time in the city.",
     to: "/travel-blog/jerusalem-travel-guide/",
     photo: "/images/attractions/hero-jerusalem.webp",
     alt: "View across Jerusalem",
   },
   {
     title: "Jerusalem tours & day trips",
-    summary: "Discover sightseeing itineraries and guided experiences covering the city and its holy places.",
+    summary:
+      "Discover sightseeing itineraries and guided experiences covering the city and its holy places.",
     to: "/tours/jerusalem/",
     photo: tourPhoto,
     alt: "Sightseeing scene",
@@ -48,20 +51,46 @@ const related: Related[] = [
 ];
 
 export function MountZionRelatedGuides() {
-  return <section aria-labelledby="zion-related-heading" className="mt-12 border-t pt-8" data-testid="mount-zion-related-guides">
-    <h2 id="zion-related-heading" className="text-2xl font-semibold sm:text-3xl">Explore more around Jerusalem</h2>
-    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Keep exploring after Mount Zion, or plan the rest of your time in Jerusalem.</p>
-    <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-3">
-      {related.map(item => <li key={String(item.to)}>
-        <Link to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-          <img loading="lazy" decoding="async" width={112} height={104} src={item.photo} alt={item.alt} className="aspect-[16/9] h-auto w-full object-cover" />
-          <span className="flex min-w-0 flex-1 flex-col self-stretch p-3 sm:p-4">
-            <span className="font-semibold leading-snug group-hover:text-primary">{item.title}</span>
-            <span className="mt-1 line-clamp-3 text-xs leading-relaxed text-muted-foreground">{item.summary}</span>
-            
-          </span>
-        </Link>
-      </li>)}
-    </ul>
-  </section>;
+  return (
+    <section
+      aria-labelledby="zion-related-heading"
+      className="mt-12 border-t pt-8"
+      data-testid="mount-zion-related-guides"
+    >
+      <h2 id="zion-related-heading" className="text-2xl font-semibold sm:text-3xl">
+        Explore more around Jerusalem
+      </h2>
+      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+        Keep exploring after Mount Zion, or plan the rest of your time in Jerusalem.
+      </p>
+      <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-3">
+        {related.map((item) => (
+          <li key={String(item.to)}>
+            <Link
+              to={item.to}
+              className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <img
+                loading="lazy"
+                decoding="async"
+                width={112}
+                height={104}
+                src={item.photo}
+                alt={item.alt}
+                className="aspect-[16/9] h-auto w-full object-cover"
+              />
+              <span className="flex min-w-0 flex-1 flex-col self-stretch p-3 sm:p-4">
+                <span className="font-semibold leading-snug group-hover:text-primary">
+                  {item.title}
+                </span>
+                <span className="mt-1 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
+                  {item.summary}
+                </span>
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }

@@ -1,3 +1,4 @@
+import { sourceFragment, sourceIndex } from "@/test-utils/source-fragment";
 import { readFileSync } from "node:fs";
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
@@ -45,14 +46,14 @@ describe("attraction contact panels share the approved mobile TripAdvisor layout
 
   it("keeps the shared contact description below the photo and reviews, without forcing desktop nowrap", () => {
     const source = readFileSync("src/components/HomeContactForm.tsx", "utf8");
-    expect(source).toContain('showTripadvisorBesidePortraitMobile ? "flex-nowrap md:flex-wrap" : "flex-wrap"');
-    const rowAt = source.indexOf('data-testid="contact-reviews-row"');
-    const reviewsAt = source.indexOf('data-testid="contact-tripadvisor-reviews"');
-    const textAt = source.indexOf('{guide?.introduction');
+    expect(source).toMatch(sourceFragment('showTripadvisorBesidePortraitMobile ? "flex-nowrap md:flex-wrap" : "flex-wrap"'));
+    const rowAt = sourceIndex(source, 'data-testid="contact-reviews-row"');
+    const reviewsAt = sourceIndex(source, 'data-testid="contact-tripadvisor-reviews"');
+    const textAt = sourceIndex(source, '{guide?.introduction');
     expect(rowAt).toBeGreaterThanOrEqual(0);
     expect(reviewsAt).toBeGreaterThan(rowAt);
     expect(textAt).toBeGreaterThan(reviewsAt);
-    expect(source).toContain("<TripadvisorReviewsButton />");
+    expect(source).toMatch(sourceFragment("<TripadvisorReviewsButton />"));
   });
 });
 
@@ -88,20 +89,20 @@ describe("all travel-guide contact layouts", () => {
   it("adds the missing contact form to the Haifa hotels editorial page", () => {
     const route = readFileSync("src/routes/travel-blog.best-hotels-in-haifa.tsx", "utf8");
     const page = readFileSync("src/components/HaifaHotelEditorialGuide.tsx", "utf8");
-    expect(route).toContain('<HaifaHotelEditorialGuide guide={g} />');
-    expect(page).toContain('["contact", "Contact me"]');
-    expect(page).toContain("HomeContactForm showTripadvisorBesidePortraitMobile");
-    expect(page).toContain("Need a private transfer to Haifa?");
-    expect(page).toContain("I'll reply personally");
-    expect(page).not.toContain("hotel advice");
+    expect(route).toMatch(sourceFragment('<HaifaHotelEditorialGuide guide={g} />'));
+    expect(page).toMatch(sourceFragment('["contact", "Contact me"]'));
+    expect(page).toMatch(sourceFragment("HomeContactForm showTripadvisorBesidePortraitMobile"));
+    expect(page).toMatch(sourceFragment("Need a private transfer to Haifa?"));
+    expect(page).toMatch(sourceFragment("I'll reply personally"));
+    expect(page).not.toMatch(sourceFragment("hotel advice"));
   });
 
   it("keeps the reviews link on every airport journey's quote form", () => {
     const route = readFileSync("src/components/AirportJourneyPage.tsx", "utf8");
     const quote = readFileSync("src/components/TransferQuoteForm.tsx", "utf8");
     const intro = readFileSync("src/components/QuoteFormIntro.tsx", "utf8");
-    expect(route).toContain("<TransferQuoteForm");
+    expect(route).toMatch(sourceFragment("<TransferQuoteForm"));
     expect(quote).toContain("showTripadvisorReviews");
-    expect(intro).toContain("<TripadvisorReviewsButton />");
+    expect(intro).toMatch(sourceFragment("<TripadvisorReviewsButton />"));
   });
 });

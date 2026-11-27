@@ -24,7 +24,12 @@ const specificHotelQueries: Record<string, string> = {
 };
 
 export function hotelGoogleMapsUrl(hotel: { id?: string; name: string; cityId: string }): string {
-  const area = hotel.cityId === "deadsea" ? "Dead Sea" : hotel.cityId === "tiberias" ? "Tiberias" : hotel.cityId;
+  const area =
+    hotel.cityId === "deadsea"
+      ? "Dead Sea"
+      : hotel.cityId === "tiberias"
+        ? "Tiberias"
+        : hotel.cityId;
   const location = (hotel.id && specificHotelQueries[hotel.id]) || `${hotel.name}, ${area}, Israel`;
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
 }

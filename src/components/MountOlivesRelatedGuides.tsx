@@ -2,7 +2,13 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import mountZion from "@/assets/guides/mount-zion.jpg";
 import tourPhoto from "@/assets/home/guided-tour-card.webp";
 
-const related: { title: string; summary: string; to: LinkProps["to"]; photo: string; alt: string }[] = [
+const related: {
+  title: string;
+  summary: string;
+  to: LinkProps["to"];
+  photo: string;
+  alt: string;
+}[] = [
   {
     title: "Walking through Jerusalem's Old City",
     summary: "Choose your gate, explore the quarters and plan a route from Lion's Gate.",
@@ -26,7 +32,8 @@ const related: { title: string; summary: string; to: LinkProps["to"]; photo: str
   },
   {
     title: "Jerusalem travel guide",
-    summary: "Plan the rest of your stay, including markets, museums, transport and neighbourhoods.",
+    summary:
+      "Plan the rest of your stay, including markets, museums, transport and neighbourhoods.",
     to: "/travel-blog/jerusalem-travel-guide/",
     photo: "/images/attractions/hero-jerusalem.webp",
     alt: "Panorama of Jerusalem's historic centre",
@@ -48,20 +55,46 @@ const related: { title: string; summary: string; to: LinkProps["to"]; photo: str
 ];
 
 export function MountOlivesRelatedGuides() {
-  return <section aria-labelledby="olives-related-heading" className="mt-12 border-t pt-8" data-testid="mount-olives-related-guides">
-    <h2 id="olives-related-heading" className="text-2xl font-semibold sm:text-3xl">Explore more around Jerusalem</h2>
-    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Continue into the Old City, choose another sacred site or plan the rest of your stay.</p>
-    <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-3">
-      {related.map(item => <li key={String(item.to)}>
-        <Link to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-          <img loading="lazy" decoding="async" width={112} height={104} src={item.photo} alt={item.alt} className="aspect-[16/9] h-auto w-full object-cover" />
-          <span className="flex min-w-0 flex-1 flex-col self-stretch p-3 sm:p-4">
-            <span className="font-semibold leading-snug group-hover:text-primary">{item.title}</span>
-            <span className="mt-1 line-clamp-3 text-xs leading-relaxed text-muted-foreground">{item.summary}</span>
-            
-          </span>
-        </Link>
-      </li>)}
-    </ul>
-  </section>;
+  return (
+    <section
+      aria-labelledby="olives-related-heading"
+      className="mt-12 border-t pt-8"
+      data-testid="mount-olives-related-guides"
+    >
+      <h2 id="olives-related-heading" className="text-2xl font-semibold sm:text-3xl">
+        Explore more around Jerusalem
+      </h2>
+      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+        Continue into the Old City, choose another sacred site or plan the rest of your stay.
+      </p>
+      <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-3">
+        {related.map((item) => (
+          <li key={String(item.to)}>
+            <Link
+              to={item.to}
+              className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <img
+                loading="lazy"
+                decoding="async"
+                width={112}
+                height={104}
+                src={item.photo}
+                alt={item.alt}
+                className="aspect-[16/9] h-auto w-full object-cover"
+              />
+              <span className="flex min-w-0 flex-1 flex-col self-stretch p-3 sm:p-4">
+                <span className="font-semibold leading-snug group-hover:text-primary">
+                  {item.title}
+                </span>
+                <span className="mt-1 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
+                  {item.summary}
+                </span>
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }

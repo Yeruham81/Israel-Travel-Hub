@@ -2,37 +2,82 @@ import { privateDriverContact, privateDriverServices } from "@/data/registry";
 import { israelNow } from "@/lib/israel-time";
 
 export type DriverQuoteFields = {
-  name: string; email: string; phone: string; serviceId: string; date: string; time: string;
-  pickup: string; dropoff: string; passengers: string; luggage: string; itinerary: string;
-  notes: string; consent: boolean;
+  name: string;
+  email: string;
+  phone: string;
+  serviceId: string;
+  date: string;
+  time: string;
+  pickup: string;
+  dropoff: string;
+  passengers: string;
+  luggage: string;
+  itinerary: string;
+  notes: string;
+  consent: boolean;
 };
 export const emptyDriverQuote: DriverQuoteFields = {
-  name: "", email: "", phone: "", serviceId: "", date: "", time: "", pickup: "", dropoff: "",
-  passengers: "2", luggage: "", itinerary: "", notes: "", consent: false,
+  name: "",
+  email: "",
+  phone: "",
+  serviceId: "",
+  date: "",
+  time: "",
+  pickup: "",
+  dropoff: "",
+  passengers: "2",
+  luggage: "",
+  itinerary: "",
+  notes: "",
+  consent: false,
 };
 
 export function validateDriverQuote(v: DriverQuoteFields, now = new Date()) {
   const errors: string[] = [];
   const today = israelNow(now);
-  if (!v.name.trim() || v.name.length > 120) errors.push("Enter your full name (up to 120 characters).");
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()) || v.email.length > 254) errors.push("Enter a valid email address.");
-  if (!privateDriverServices.some((service) => service.id === v.serviceId)) errors.push("Choose the type of journey.");
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(v.date) || Number.isNaN(Date.parse(`${v.date}T00:00:00Z`)) || new Date(`${v.date}T00:00:00Z`).toISOString().slice(0, 10) !== v.date) errors.push("Choose a valid pickup date.");
+  if (!v.name.trim() || v.name.length > 120)
+    errors.push("Enter your full name (up to 120 characters).");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()) || v.email.length > 254)
+    errors.push("Enter a valid email address.");
+  if (!privateDriverServices.some((service) => service.id === v.serviceId))
+    errors.push("Choose the type of journey.");
+  if (
+    !/^\d{4}-\d{2}-\d{2}$/.test(v.date) ||
+    Number.isNaN(Date.parse(`${v.date}T00:00:00Z`)) ||
+    new Date(`${v.date}T00:00:00Z`).toISOString().slice(0, 10) !== v.date
+  )
+    errors.push("Choose a valid pickup date.");
   else if (v.date < today.date) errors.push("Choose today or a future pickup date.");
   if (v.time) {
-    if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(v.time)) errors.push("Enter a valid pickup time in Israel local time, or leave it open.");
+    if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(v.time))
+      errors.push("Enter a valid pickup time in Israel local time, or leave it open.");
     else if (v.date === today.date) {
       const [hours, minutes] = v.time.split(":").map(Number);
-      if (hours! * 60 + minutes! < today.minutes) errors.push("That pickup time has already passed today in Israel.");
+      if (hours! * 60 + minutes! < today.minutes)
+        errors.push("That pickup time has already passed today in Israel.");
     }
   }
   if (!v.pickup.trim()) errors.push("Enter the pickup city, hotel or address.");
-  if (!v.dropoff.trim()) errors.push("Enter your final destination or indicate that you wish to return to the pickup location.");
-  if ((v.serviceId === "day-hire" || v.serviceId === "multi-stop") && !v.itinerary.trim()) errors.push("Describe the stops or priorities for your journey.");
+  if (!v.dropoff.trim())
+    errors.push(
+      "Enter your final destination or indicate that you wish to return to the pickup location.",
+    );
+  if ((v.serviceId === "day-hire" || v.serviceId === "multi-stop") && !v.itinerary.trim())
+    errors.push("Describe the stops or priorities for your journey.");
   const passengers = Number(v.passengers);
-  if (!v.passengers.trim() || !Number.isInteger(passengers) || passengers < 1 || passengers > 99) errors.push("Enter the total number of passengers, including children (1–99).");
-  if (v.phone.length > 50 || v.pickup.length > 250 || v.dropoff.length > 250 || v.luggage.length > 250 || v.itinerary.length > 1500 || v.notes.length > 1500) errors.push("Shorten the trip details to the limits shown in the form.");
-  if (!v.consent) errors.push("Confirm that you agree to share your details with Moshe for this request.");
+  if (!v.passengers.trim() || !Number.isInteger(passengers) || passengers < 1 || passengers > 99)
+    errors.push("Enter the total number of passengers, including children (1–99).");
+  if (
+    v.phone.length > 50 ||
+    v.pickup.length > 250 ||
+    v.dropoff.length > 250 ||
+    v.luggage.length > 250 ||
+    v.itinerary.length > 1500 ||
+    v.notes.length > 1500
+  )
+    errors.push("Shorten the trip details to the limits shown in the form.");
+  if (!v.consent)
+    errors.push("Confirm that you agree to share your details with Moshe for this request.");
   return errors;
 }
 
@@ -42,13 +87,28 @@ export function buildDriverQuoteDraft(v: DriverQuoteFields) {
   const service = privateDriverServices.find((item) => item.id === v.serviceId)!.label;
   const subject = `Moshe Barak - Israel Taxi & Travel / ${line(v.name)}`;
   const body = [
-    `Name: ${line(v.name)}`, `Email: ${line(v.email)}`, `Phone / WhatsApp: ${line(v.phone) || "Not supplied"}`,
-    `Service: ${service}`, `Pickup date: ${line(v.date)}`, `Preferred pickup time: ${line(v.time) || "To be agreed"} (Israel local time)`,
-    `Pickup: ${line(v.pickup)}`, `Final drop-off: ${line(v.dropoff)}`, `Passengers: ${line(v.passengers)}`,
+    `Name: ${line(v.name)}`,
+    `Email: ${line(v.email)}`,
+    `Phone / WhatsApp: ${line(v.phone) || "Not supplied"}`,
+    `Service: ${service}`,
+    `Pickup date: ${line(v.date)}`,
+    `Preferred pickup time: ${line(v.time) || "To be agreed"} (Israel local time)`,
+    `Pickup: ${line(v.pickup)}`,
+    `Final drop-off: ${line(v.dropoff)}`,
+    `Passengers: ${line(v.passengers)}`,
     `Luggage: ${line(v.luggage) || "To be confirmed"}`,
-    "", "Stops, approximate timing and priorities:", v.itinerary.trim() || "Direct journey between the addresses above.",
-    "", "Additional requests:", v.notes.trim() || "None specified", "",
+    "",
+    "Stops, approximate timing and priorities:",
+    v.itinerary.trim() || "Direct journey between the addresses above.",
+    "",
+    "Additional requests:",
+    v.notes.trim() || "None specified",
+    "",
     "I consent to sharing these details with Moshe Barak for this inquiry.",
   ].join("\n");
-  return { subject, body, url: `mailto:${privateDriverContact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` };
+  return {
+    subject,
+    body,
+    url: `mailto:${privateDriverContact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+  };
 }
