@@ -18,4 +18,22 @@ describe("format-invariant source fragment assertions", () => {
     expect(sourceIndex('<section\n id="a">', '<section id="a"')).toBe(0);
     expect(sourceIndex('<section id="b">', '<section id="a"')).toBe(-1);
   });
+  it("accepts the specific formatter changes found in stage 5.5.2", () => {
+    expect('["contact", "Contact me"]').toMatch(sourceFragment('["contact","Contact me"]'));
+    expect('["wrong", "Contact me"]').not.toMatch(sourceFragment('["contact","Contact me"]'));
+    expect('["contact", "Contact Me"]').not.toMatch(sourceFragment('["contact","Contact me"]'));
+    expect('<AuthorCard />').toMatch(sourceFragment('<AuthorCard/>'));
+    expect('<OtherCard />').not.toMatch(sourceFragment('<AuthorCard/>'));
+    expect('<AuthorCard hidden />').not.toMatch(sourceFragment('<AuthorCard/>'));
+    const grid = sourceFragment('sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-affiliate-tours"');
+    expect('<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"\n  data-testid="tel-aviv-affiliate-tours">').toMatch(grid);
+    expect('<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2"\n  data-testid="tel-aviv-affiliate-tours">').not.toMatch(grid);
+    expect('<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"\n  data-testid="wrong">').not.toMatch(grid);
+    const link = sourceFragment('href="#contact" className="font-semibold text-primary underline underline-offset-4">arranging a private day trip with a driver');
+    expect('<a\n href="#contact"\n className="font-semibold text-primary underline underline-offset-4"\n >\n arranging a private day trip with a driver\n </a>').toMatch(link);
+    expect('<a href="#wrong" className="font-semibold text-primary underline underline-offset-4">arranging a private day trip with a driver</a>').not.toMatch(link);
+    expect('<a href="#contact" className="font-semibold text-primary underline underline-offset-4">arranging a shared day trip with a driver</a>').not.toMatch(link);
+    expect("about 300\n metres from the main plaza").toMatch(sourceFragment("300 metres"));
+    expect("about 500 metres from the main plaza").not.toMatch(sourceFragment("300 metres"));
+  });
 });

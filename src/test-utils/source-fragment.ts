@@ -10,7 +10,18 @@ const codeSpace = "\\s*";
 
 export function sourceFragment(fragment: string): RegExp {
   if (!fragment) return /(?:)/;
-  const isCode = /[<>{}=]|=>|\b[\w$]+:\s*["'\d]|\b[\w$]+\.[\w$]+\(|\b(?:const|return)\s/.test(fragment);
+  // Some assertions start inside a className value and end at the next
+  // attribute. Preserve the exact class suffix and attribute value while
+  // allowing Prettier to put the attributes on separate lines.
+  const classTail = fragment.match(/^([\w:-]+(?: [\w:-]+)*)"\s+([\w-]+)="([^"]*)"$/);
+  if (classTail) {
+    return new RegExp(
+      '(?:^|(?<=[\\s"]))' + escapeRegExp(classTail[1]!) + '"\\s+' +
+      escapeRegExp(classTail[2]!) + '\\s*=\\s*"' + escapeRegExp(classTail[3]!) + '"',
+    );
+  }
+  const jsxLike = /^<\/?[\w]|^[\w-]+\s*=\s*["'{]/.test(fragment);
+  const isCode = /[<>{}=]|^\s*\[|=>|\b[\w$]+:\s*["'\d]|\b[\w$]+\.[\w$]+\(|\b(?:const|return)\s/.test(fragment);
   if (!isCode) {
     return new RegExp(fragment.split(/(\s+)/).map(part => /^\s+$/.test(part) ? visibleSpace + "+" : escapeRegExp(part)).join(""));
   }
@@ -49,6 +60,8 @@ export function sourceFragment(fragment: string): RegExp {
       if (jsxBranch) {
         result += "\\s*(?:\\(\\s*)?";
       } else if (previous.token === ">" && current.token === "<" && !current.before) {
+        result += codeSpace;
+      } else if (jsxLike && (current.token === ">" || (current.token === "/" && next?.token === ">") || (previous.token === ">" && !current.before))) {
         result += codeSpace;
       } else if (current.before) {
         result += flexible.has(previous.token) || flexible.has(current.token) || current.token === ">" || current.token === "/" ?

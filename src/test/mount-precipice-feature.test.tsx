@@ -58,7 +58,7 @@ describe("Mount Precipice attraction guide", () => {
     }
     expect(article).toContain("Three Faiths Lookout");
     expect(article).toContain("Forester's House");
-    expect(article).toContain("300 metres");
+    expect(article).toMatch(/\b300\s+metres\b/);
     expect(article).toContain("Beit Al-Hikma School / Al-Qafza");
     expect(article).toContain("בי״ס בית אל-חכמה/אל-קפזה");
     expect(article).toContain("Main lookout (30–45 minutes)");
