@@ -61,4 +61,12 @@ describe("page photo attribution policy", () => {
       expect(source.match(/<PhotoCreditsDisclosure\b/g), name).toHaveLength(1);
     }
   });
+
+  it("uses structured attribution data in every attraction template", () => {
+    for (const name of readdirSync("src/components").filter((name) => name.endsWith("AttractionPage.tsx"))) {
+      const source = readFileSync("src/components/" + name, "utf8");
+      expect(source, name).not.toMatch(/photoCredits:\s*\(/);
+    }
+  });
+
 });

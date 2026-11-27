@@ -867,67 +867,30 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       icon: "arrival",
     },
   ],
-  photoCredits: (
-    <p>
-      Eilat Birdwatching Park: Israel Zeller / Zeller Zalmanson, PikiWiki Israel (
-      <a
-        href="https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_85046_eilat_bird_park.jpg"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        source
-      </a>
-      ,{" "}
-      <a
-        href="https://creativecommons.org/licenses/by/2.5/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        CC BY 2.5
-      </a>
-      ). Eilat Botanical Garden: Tiia Monto (
-      <a
-        href="https://commons.wikimedia.org/wiki/File:Eilat_Botanical_garden_12.jpg"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        source
-      </a>
-      ,{" "}
-      <a
-        href="https://creativecommons.org/licenses/by-sa/3.0/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        CC BY-SA 3.0
-      </a>
-      ). Glass-bottom boat: Yonatan Dodin (
-      <a
-        href="https://commons.wikimedia.org/wiki/File:Glass-bottom_boat,_Israel_Yam_7,_Eilat_(2023).jpg"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        source
-      </a>
-      ,{" "}
-      <a
-        href="https://creativecommons.org/licenses/by/4.0/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        CC BY 4.0
-      </a>
-      ). These three Wikimedia Commons photos were cropped, resized and converted to WebP; their
-      adapted image files retain their stated Creative Commons licenses. Other location photographs
-      are from the publisher's existing image archive.
-    </p>
-  ),
+  photoCredits: [
+    {
+      label: "Eilat Birdwatching Park",
+      credit: "Israel Zeller / Zeller Zalmanson, PikiWiki Israel · CC BY 2.5; cropped, resized and converted to WebP",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_85046_eilat_bird_park.jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
+    },
+    {
+      label: "Eilat Botanical Garden",
+      credit: "Tiia Monto · CC BY-SA 3.0; cropped, resized and converted to WebP",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Eilat_Botanical_garden_12.jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    },
+    {
+      label: "Glass-bottom boat",
+      credit: "Yonatan Dodin · CC BY 4.0; cropped, resized and converted to WebP",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Glass-bottom_boat,_Israel_Yam_7,_Eilat_(2023).jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    },
+    {
+      label: "Other location photographs",
+      credit: "From the publisher's existing image archive.",
+    },
+  ],
   sources: [
     { label: "INPA - Eilat Coral Beach Nature Reserve", url: official.coralReserve },
     { label: "Eilat beach directory", url: official.beaches },
