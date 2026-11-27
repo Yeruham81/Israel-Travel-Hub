@@ -115,7 +115,7 @@ function Shore() {
       <section id="tour-formats" aria-labelledby="shore-formats-h" className="mt-9 scroll-mt-24">
         <h2 id="shore-formats-h" className="text-2xl font-semibold">Private driver or guided excursion?</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Choose a flexible private drive or a guided excursion. Individual listings explain what is included.
+          Choose between a private car and driver with a customized itinerary or an organized guided excursion.
         </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {shoreTourFormats.map(format => <li key={format.title} className="rounded-xl border bg-card p-4">

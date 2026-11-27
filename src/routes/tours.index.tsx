@@ -28,7 +28,7 @@ function Tours() {
       crumbs={[{ name: "Home", to: "/" }, { name: "Tours & day trips", to: "/tours/" }]}
       title={toursHubTitle}
       checkedAt={TOURS_UPDATED_DATE}
-      intro="Explore Israel's highlights, from Jerusalem and the Dead Sea to the Galilee, Negev and Red Sea. Find guided tours, private experiences and local activities to suit your travel plans."
+      intro="Explore Israel's highlights, from Jerusalem and the Dead Sea to the Galilee, Negev and Red Sea. Choose from guided tours, private day trips and local activities across Israel."
     />
     <div className="mx-auto max-w-5xl px-4">
       <TourCategoryExplorer />

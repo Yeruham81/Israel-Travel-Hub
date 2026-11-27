@@ -339,15 +339,15 @@ export const tourCategories: TourCategory[] = [
     description: "Compare Jerusalem tours, Old City visits and guided day trips from Tel Aviv, including private and combined Jerusalem–Bethlehem itineraries.",
     intro: "Discover Jerusalem's historic quarters, sacred landmarks and panoramic viewpoints. Choose a guided walking tour, a full-day experience or a private journey tailored to your interests.",
     photo: migration["EXISTING:jerusalem"], match: { destinations: ["jerusalem"] },
-    paragraphs: ["Explore Jerusalem's Old City on foot, through historic stone streets, colourful markets and sacred landmarks. Choose a tour departing from Jerusalem to spend more time in the city, or one from Tel Aviv if you need return transport.", "For a first visit, I recommend a tour focused on the city. Jerusalem–Bethlehem itineraries involve more travel and crossing arrangements; check the operator's current requirements. A private guided tour includes guiding; my private-driver service provides flexible transport, with guiding arranged separately."],
+    paragraphs: ["Explore Jerusalem's Old City on foot, through historic stone streets, colourful markets and sacred landmarks. Tours starting in Jerusalem allow more time for sightseeing, while departures from Tel Aviv include travel to Jerusalem.", "For a first visit, I recommend dedicating a full day to Jerusalem. Jerusalem–Bethlehem itineraries involve more travel and crossing arrangements; check the operator's current requirements. My private-driver service offers flexible transport along your chosen itinerary, with a licensed guide available by separate arrangement."],
     choices: [
       { title: "Jerusalem in a day", text: "Ideal for first-time visitors, combining panoramic viewpoints, a guided walk through the Old City and transport from your departure city." },
       { title: "Jerusalem & Bethlehem", text: "Visit the historic and religious landmarks of Jerusalem and Bethlehem on the same day. Allow for less time in each place and confirm crossing requirements." },
-      { title: "Your own pace", text: "A private guided tour suits detailed interests; my car-and-driver service suits a tailored transport plan, with guiding arranged separately." },
+      { title: "Your own pace", text: "Choose a private guide for an in-depth visit, or arrange a private car and driver for a customized itinerary." },
     ],
     faqs: [
       { q: "Does a Jerusalem tour always start in Jerusalem?", a: "You can join a Jerusalem tour departing from either Jerusalem or Tel Aviv. A tour from Tel Aviv includes travel to Jerusalem, while a Jerusalem departure starts locally." },
-      { q: "Will I visit every major holy site?", a: "Each tour visits a selection of landmarks. Check which sites are included and how much time you'll spend at each one. Religious events, opening arrangements and operating days can change the route." },
+      { q: "Will I visit every major holy site?", a: "Compare the landmarks and visit durations included in each tour. Religious events, opening arrangements and operating days can change the route." },
       { q: "Is a walking tour suitable for everyone?", a: "Old City streets include uneven paving, slopes and steps. Tell the operator about mobility needs and ask about the actual walking route before choosing a tour." },
     ], reading: ["jerusalem", "bethlehem", "baptism", "tips"],
   },
@@ -356,24 +356,24 @@ export const tourCategories: TourCategory[] = [
     description: "Discover Tel Aviv and Old Jaffa through guided walks, street art, architecture and Carmel Market tastings. Compare duration, meeting points and inclusions.",
     intro: "Follow Jaffa's lanes down to the sea, explore Tel Aviv's creative neighborhoods or taste your way through the market. Most local experiences last a few hours.",
     photo: { src: telAvivTourHero, alt: "Panoramic view of Tel Aviv's Mediterranean coast and skyline" }, match: { destinations: ["tel-aviv"] },
-    paragraphs: ["I recommend exploring Tel Aviv and Jaffa one neighbourhood at a time: walk historic Jaffa and Neve Tzedek, discover the White City's architecture, or focus on Florentin street art and Carmel Market's food stalls. Choose between guided walking tours, cycling tours and self-guided audio tours.", "Most guided walks start at a designated meeting point. Confirm where your tour ends and whether food, bicycle equipment or museum admission is included. I offer flexible private transport between your preferred stops. Professional guiding can be arranged separately."],
+    paragraphs: ["I recommend exploring Tel Aviv and Jaffa through their distinctive neighborhoods: historic Jaffa, Neve Tzedek, the White City's architecture, Florentin's street art and Carmel Market's food stalls. Choose between guided walking tours, cycling tours and self-guided audio tours.", "Most guided walks start at a designated meeting point. Confirm where your tour ends and whether food, bicycle equipment or museum admission is included. I offer flexible private transport between your preferred stops. Professional guiding can be arranged separately."],
     choices: [
       { title: "Old Jaffa & city highlights", text: "Explore Jaffa's historic streets, the Mediterranean coastline and Tel Aviv's charming neighbourhoods." },
-      { title: "Street art & local stories", text: "A short guided walk exploring colourful murals and local street art. Ideal when you already know the city's main landmarks." },
-      { title: "Markets & tastings", text: "Combine local history with food. Compare tasting quantities and dietary options." },
+      { title: "Street art & local stories", text: "Explore colorful murals and local street art on a guided walk through the city. Ideal when you already know the city's main landmarks." },
+      { title: "Markets & tastings", text: "Discover local culinary traditions through market tastings, with food and dietary options varying by tour." },
     ],
     faqs: [
-      { q: "Are these guided walking tours or other experiences?", a: "Most listings are guided walks, but cycling and self-guided audio options are also available. Each tour card gives the duration and format. Check the actual meeting point and mobility requirements on the booking page." },
+      { q: "Are these guided walking tours or other experiences?", a: "Choose from guided walking tours, cycling tours and self-guided audio experiences. Each tour card gives the duration and format. Check the actual meeting point and mobility requirements on the booking page." },
       { q: "Can I combine Jaffa with Carmel Market?", a: "Yes. Some longer guided walks connect Jaffa, Neve Tzedek and Carmel Market. For a shorter outing, choose a dedicated Jaffa walk or market tasting, and check whether the tour ends where it began." },
       { q: "Are food tastings included on every tour?", a: "Tastings are included on dedicated food tours and other tours that list them. Check which tastings are included and whether the tour accommodates your dietary needs." },
-      { q: "Can I explore Tel Aviv & Jaffa with a private driver?", a: "Yes. I can plan a flexible transport itinerary with pickup and stops agreed in advance. My driver service is transport only; if you want a licensed guide, please ask about arranging one separately." },
+      { q: "Can I explore Tel Aviv & Jaffa with a private driver?", a: "Yes. I can plan a flexible transport itinerary with pickup and stops agreed in advance. I provide private transport and can arrange a licensed guide separately upon request." },
       { q: "What should I know about weekends and the weather?", a: "Market stalls, museums and public transport can have different Friday, Saturday and holiday schedules. In hot weather, carry water and plan shade breaks. The historic lanes of Jaffa include slopes, steps and uneven paving." },
     ], reading: ["jaffa", "telAviv", "food", "tips"],
   },
   {
     id: "masada-dead-sea", title: "Masada & Dead Sea tours", shortTitle: "Masada & the Dead Sea",
     description: "Compare exact Masada and Dead Sea tour options from Jerusalem or Tel Aviv, including guided trips, sunrise hikes, Ein Gedi routes, beach days and private transport.",
-    intro: "Explore Masada's mountain fortress and the extraordinary Dead Sea, with day trips from Jerusalem and Tel Aviv. Compare classic guided tours, sunrise hikes, Ein Gedi combinations and relaxed beach days.",
+    intro: "Explore the ancient fortress of Masada and float in the Dead Sea on a day trip from Jerusalem or Tel Aviv. Compare classic guided tours, sunrise hikes, Ein Gedi combinations and relaxed beach days.",
     photo: migration["EXISTING:masada"], match: { destinations: ["masada", "dead-sea", "ein-gedi"] },
     paragraphs: [
       "Tours depart from Jerusalem and Tel Aviv. Classic tours usually pair a guided visit to Masada with time at a designated Dead Sea beach. Sunrise options begin very early and often involve the steep Snake Path hike, while Dead Sea-only trips leave more time for relaxing by the water.",
@@ -383,14 +383,14 @@ export const tourCategories: TourCategory[] = [
     choices: [
       { title: "Masada and beach", text: "Combine fortress history and dramatic desert views with time at a designated Dead Sea bathing area." },
       { title: "Sunrise and Ein Gedi", text: "Start early for a day of desert hiking, with a steep climb to Masada on some tours. Confirm reserve access and your fitness for the hike." },
-      { title: "Dead Sea relaxation", text: "Spend more time by the water instead of visiting Masada, or arrange a flexible private itinerary." },
+      { title: "Dead Sea beach day", text: "Enjoy a relaxing day at the Dead Sea or arrange a customized private trip." },
     ],
     faqs: [
-      { q: "Can I start a Masada and Dead Sea tour from Jerusalem or Tel Aviv?", a: "Yes. The catalog includes departures from both cities. Travel times, meeting points and the time available at each stop differ, so check the exact departure shown on the booking page." },
-      { q: "Is the Masada cable car included in the tour price?", a: "Not always. National-park admission and cable-car tickets may be separate. On sunrise itineraries, the ascent may be a demanding hike on the Snake Path rather than a cable-car ride." },
+      { q: "Can I start a Masada and Dead Sea tour from Jerusalem or Tel Aviv?", a: "Yes. The catalog includes departures from both cities. Compare departure locations, journey times and sightseeing durations when choosing your tour." },
+      { q: "Is the Masada cable car included in the tour price?", a: "National-park admission and cable-car tickets are included in some tours and charged separately on others. On sunrise itineraries, the ascent may be a demanding hike on the Snake Path rather than a cable-car ride." },
       { q: "Can I visit Ein Gedi on a combined day tour?", a: "Some tours advertise Ein Gedi, but floods have changed trail access and operators may substitute another location. Check current reserve information, advance-registration requirements and the operator's confirmed itinerary." },
       { q: "Are there tours that visit only the Dead Sea?", a: "Yes. Dead Sea relaxation tours give you more time for floating in the water and relaxing on the beach. Confirm the designated beach, bathing facilities, admission fees and pickup location before booking." },
-      { q: "Can I arrange a private car and driver?", a: "Yes. I can arrange a private day trip with a driver from Jerusalem or Tel Aviv, tailored to your preferred route and stops. My driving service is separate from licensed guiding, site admissions and meals." },
+      { q: "Can I arrange a private car and driver?", a: "Yes. I can arrange a private day trip with a driver from Jerusalem or Tel Aviv, tailored to your preferred route and stops. My private-driver service covers transport along your agreed itinerary, with guiding, admission fees and meals arranged separately." },
     ], reading: ["masada", "deadSea", "einGedi", "tips"],
   },
   {
@@ -399,21 +399,21 @@ export const tourCategories: TourCategory[] = [
     intro: "Explore Bethlehem, the ancient city of Jericho and Qasr al-Yahud, the Jordan River baptismal site near Jericho. Compare Bethlehem-only visits with full-day tours that include Jericho and the baptismal site, departing from Jerusalem or Tel Aviv.",
     photo: migration["jerusalem-to-bethlehem"], match: { destinations: ["bethlehem", "jericho"] },
     paragraphs: [
-      "Choose between a visit to Bethlehem and longer tours combining Bethlehem, Jericho and the Jordan River. Short Bethlehem trips usually focus on the Church of the Nativity, Manger Square and Shepherds' Field. Longer day tours can add Jericho's archaeological and biblical sites and, on selected routes, a stop at Qasr al-Yahud on the lower Jordan River.",
-      "Check the detailed itinerary and the named baptismal site: choose a tour that explicitly includes Qasr al-Yahud if that is an essential stop. Arrange any baptism ceremony separately with the supplier. Visits to the Church of the Nativity and its grotto can be affected by services, restoration and queues.",
+      "Explore Bethlehem on a shorter guided tour, or combine Bethlehem, Jericho and the Jordan River in a full-day excursion. Short Bethlehem trips usually focus on the Church of the Nativity, Manger Square and Shepherds' Field. Longer day tours can add Jericho's archaeological and biblical sites and, on selected routes, a stop at Qasr al-Yahud on the lower Jordan River.",
+      "If you wish to visit Qasr al-Yahud, select an itinerary that includes this Jordan River baptismal site. Arrange any baptism ceremony separately with the supplier. Visits to the Church of the Nativity and its grotto can be affected by services, restoration and queues.",
       "Bethlehem and parts of Jericho are in Palestinian Authority-administered areas, and entry rules, passport eligibility, checkpoints, local guide and vehicle arrangements depend on the visitor and itinerary. Some operators restrict participation by nationality. Confirm eligibility and permitted access directly with the operator for your travel date before paying.",
     ],
     choices: [
       { title: "Bethlehem highlights", text: "Visit the Church of the Nativity and other important Christian sites in Bethlehem." },
-      { title: "Bethlehem, Jericho and Qasr al-Yahud", text: "A full-day pilgrimage and heritage route; check that all three sites are explicitly included." },
-      { title: "Shared or privately guided", text: "Compare group sizes, departure locations, transport, local guiding arrangements and included admission fees." },
+      { title: "Bethlehem, Jericho and Qasr al-Yahud", text: "A full-day pilgrimage exploring Bethlehem's Christian landmarks, ancient Jericho and the Jordan River baptismal site." },
+      { title: "Group tours & private guides", text: "Compare group sizes, departure locations, transport, local guiding arrangements and included admission fees." },
     ],
     faqs: [
       { q: "Do all tours on this page visit Bethlehem, Jericho and Qasr al-Yahud?", a: "Some focus on Bethlehem; others combine it with Jericho and Qasr al-Yahud. Check which sites your chosen tour visits before booking." },
-      { q: "Which Jordan River baptismal site is relevant to these itineraries?", a: "Qasr al-Yahud (also written Kasr el-Yahud), the baptismal site on the lower Jordan River near Jericho. If you want to visit Qasr al-Yahud, choose a tour that specifically includes this baptismal site." },
+      { q: "Which Jordan River baptismal site is relevant to these itineraries?", a: "Qasr al-Yahud, also written Kasr el-Yahud, is the baptismal site on the lower Jordan River near Jericho. Select a tour that includes a visit to this site." },
       { q: "Can I depart from Jerusalem or Tel Aviv?", a: "Tours depart from Jerusalem or Tel Aviv, depending on the itinerary. Filter tours by departure city, then check the meeting point, whether hotel pickup is available and where the tour ends." },
       { q: "Can every traveler enter Bethlehem and Jericho?", a: "No. Entry and transit depend on nationality, travel documents, current security measures and the route. Some booking products explicitly restrict Israeli passport holders. Confirm your circumstances with the operator and current official guidance before purchasing." },
-      { q: "Is baptism or entry to the Nativity Grotto guaranteed?", a: "No. A stop at Qasr al-Yahud can be a sightseeing visit. Confirm any baptism ceremony separately. Grotto entry depends on religious services, restoration work, queues and available time." },
+      { q: "Is baptism or entry to the Nativity Grotto guaranteed?", a: "Visits to Qasr al-Yahud may include sightseeing. Arrange a baptism ceremony separately if you wish to be baptized. Grotto entry depends on religious services, restoration work, queues and available time." },
       { q: "Do tours use local guides or change vehicles at checkpoints?", a: "Sometimes. Bethlehem trips may involve locally licensed guides, a vehicle change or a checkpoint handover. The arrangements differ by operator, traveler eligibility and date. Ask the provider to confirm the complete pickup, guiding and return plan." },
     ], reading: ["bethlehem", "baptism", "jerusalem", "tips"],
   },
@@ -423,18 +423,18 @@ export const tourCategories: TourCategory[] = [
     intro: "Discover Nazareth's historic churches and the lakeside sites where the Gospel stories unfolded. Compare guided day trips and private tours from Jerusalem or Tel Aviv, or ask me to arrange your own private transport around the Galilee.",
     photo: migration["EXISTING:galilee"], match: { destinations: ["nazareth", "galilee"] },
     paragraphs: [
-      "A typical full-day route connects Nazareth’s Basilica of the Annunciation with selected sites around the Sea of Galilee, such as Capernaum, Tabgha and the Mount of Beatitudes. Some routes pass Cana or Mount Tabor on the way to the lake. Choose a tour with time at the sites you want to visit.",
-      "Travel from Jerusalem normally takes longer than from Tel Aviv. When booking a group tour, check the pickup location, guiding language, included admission fees, time at each site and return time. My private car-and-driver service covers transportation. Arrange licensed guiding separately.",
+      "A typical full-day route connects Nazareth’s Basilica of the Annunciation with selected sites around the Sea of Galilee, such as Capernaum, Tabgha and the Mount of Beatitudes. Some routes pass Cana or Mount Tabor on the way to the lake.",
+      "Travel from Jerusalem normally takes longer than from Tel Aviv. When booking a group tour, check the pickup location, guiding language, included admission fees, time at each site and return time. I offer private transport around the Galilee, with licensed guiding available by separate arrangement.",
       "Some Galilee tours also stop at Yardenit, the baptismal site on the Jordan River near the southern end of the lake. Arrange any baptism ceremony separately. Confirm religious-site opening hours, modest dress, site access and any ceremony requirements before booking.",
     ],
     choices: [
       { title: "Nazareth and lakeside churches", text: "Combine the Annunciation, Capernaum, Tabgha and selected viewpoints in one guided day." },
-      { title: "Galilee with a Jordan River visit", text: "Choose a route that explicitly includes Yardenit if you want to visit the baptismal site." },
-      { title: "Private guided or driver-only", text: "Book a private guided tour or arrange a private driver and choose your own stops." },
+      { title: "Galilee with a Jordan River visit", text: "Visit Yardenit, the Jordan River baptismal site near the southern end of the Sea of Galilee, on selected tours." },
+      { title: "Private tours & personal driver", text: "Book a private guided tour or arrange a private driver and choose your own stops." },
     ],
     faqs: [
       { q: "Can I join a Nazareth and Sea of Galilee day tour from Jerusalem or Tel Aviv?", a: "Yes. Tours depart from both Jerusalem and Tel Aviv, with different pickup locations and journey times. Select the correct departure on the booking page and confirm the actual pickup point." },
-      { q: "Do all the tours visit Capernaum, Tabgha and the Mount of Beatitudes?", a: "No. Some tours include guided visits, others offer viewpoints or drive past certain sites. Check the stops and ticket inclusions for the product and date you choose." },
+      { q: "Do all the tours visit Capernaum, Tabgha and the Mount of Beatitudes?", a: "Itineraries range from guided visits to panoramic stops and scenic drives past religious landmarks. Check the stops and ticket inclusions for the product and date you choose." },
       { q: "Do Galilee tours include a Jordan River baptism?", a: "Some routes stop at Yardenit, near the southern end of the Sea of Galilee. Arrange a baptism ceremony separately with the provider." },
       { q: "What is the difference between a private guided tour and a private driver?", a: "An externally listed private guided tour includes the guiding described in that product. My own private car-and-driver service provides transport and an itinerary agreed with you; licensed guiding, admission fees and meals are separate." },
       { q: "Can I see Nazareth and the Sea of Galilee in one day?", a: "Yes, although the schedule can be long, especially when starting in Jerusalem. Prioritise the sites most important to you and allow for travel, security or access changes and queues at churches." },
@@ -447,23 +447,23 @@ export const tourCategories: TourCategory[] = [
     intro: "Follow Israel’s Mediterranean coast from Roman Caesarea through Haifa’s hillside viewpoints to the historic harbour and markets of Akko (Acre). Compare guided group trips and private experiences from Tel Aviv or Jerusalem, or arrange a flexible day with your own driver.",
     photo: airport["caesarea"]!, match: { destinations: ["caesarea", "haifa", "akko"] },
     paragraphs: [
-      "Explore three of Israel's most fascinating coastal destinations: Caesarea’s Roman theatre and archaeological harbour, Haifa’s Bahá’í Gardens setting and Akko’s UNESCO-listed Old City. Shared tours usually include a brief panoramic stop in Haifa; a guided walk inside the garden terraces is a separate experience. Allow time for Caesarea’s archaeological park and Akko’s underground attractions; admission arrangements vary.",
-      "Several advertised itineraries also mention Rosh Hanikra near the Lebanese border. Access to the grottos and coastal border area can change; confirm the route and alternatives with the operator.",
-      "Day trips from Jerusalem generally involve longer travel times than departures from Tel Aviv. Compare group size, meeting point, included tickets, language and the available time in each city. An external private tour with a licensed guide is different from my private car-and-driver service, where guiding and admissions are arranged separately.",
+      "Explore three of Israel's most fascinating coastal destinations: Caesarea’s Roman theatre and archaeological harbour, Haifa’s Bahá’í Gardens setting and Akko’s UNESCO-listed Old City. Shared tours usually stop at a panoramic viewpoint overlooking the Bahá’í Gardens. Guided visits inside the terraces require separate arrangements. Allow time for Caesarea’s archaeological park and Akko’s underground attractions; admission arrangements vary.",
+      "Some itineraries also include Rosh Hanikra, near the Lebanese border. Access to the grottos and coastal border area can change; confirm the route and alternatives with the operator.",
+      "Day trips from Jerusalem generally involve longer travel times than departures from Tel Aviv. Compare group size, meeting point, included tickets, language and the available time in each city. I offer flexible private transport along the northern coast, with licensed guiding and admission tickets arranged separately.",
     ],
     choices: [
-      { title: "Classic coast & archaeology", text: "A full-day shared trip through Caesarea, Haifa and Akko with a guide; verify admissions and the exact stops." },
+      { title: "Classic coast & archaeology", text: "A full-day guided excursion combining Caesarea's Roman ruins, Haifa's panoramic views and Akko's historic streets." },
       { title: "Small group or private guide", text: "Choose a smaller group or a licensed private guide for more time at your preferred historical sites." },
       { title: "Flexible driver-only day", text: "Arrange a private driver from Tel Aviv or Jerusalem and choose the coastal attractions you'd like to visit." },
     ],
     faqs: [
       { q: "Can I depart from Jerusalem as well as Tel Aviv?", a: "Yes. The catalog lists options from both cities. Journeys from Jerusalem are normally longer; select the correct departure and verify the meeting point, pickup arrangements and duration on the booking page." },
-      { q: "Do all tours visit Caesarea, Haifa and Akko?", a: "These three cities are the core destinations, but time on site, guided walking and stops within each city vary between products. Check the listed stops and visit durations." },
+      { q: "Do all tours visit Caesarea, Haifa and Akko?", a: "Tours vary in the time spent in each city, the attractions visited and the guided walks included. Check the listed stops and visit durations." },
       { q: "Is entry to the Bahá’í Gardens included?", a: "Many tours stop at an outside viewpoint with a view of the terraces. Check official garden visiting rules and the operator's exact plans." },
       { q: "Can I visit the Rosh Hanikra grottos on the same day?", a: "Some advertised coastal tours include Rosh Hanikra, but its access and operating arrangements near the northern border can change. Confirm current access to the grottos and an alternative plan before booking." },
       { q: "Are entry tickets for Caesarea and Akko included?", a: "Inclusions vary. Some shared tours include national-park and Crusader-attraction tickets, while small-group and private options may charge separately. Compare the included admissions shown by each operator." },
       { q: "How does a private driver differ from a private guided tour?", a: "Private guided tours include the guiding services described by the tour operator. My private driving service covers transport and agreed stops; a licensed guide, attraction tickets and meals are separate unless specifically included in the quote." },
-      { q: "Can I use these tours when arriving by cruise ship?", a: "Standard day tours do not guarantee port pickup or timely return to your vessel. Use the dedicated Haifa or Ashdod shore-excursion pages and confirm your ship's arrival, terminal and all-aboard time." },
+      { q: "Can I use these tours when arriving by cruise ship?", a: "Cruise passengers should choose excursions specifically arranged around their ship's arrival and departure times. Use the dedicated Haifa or Ashdod shore-excursion pages and confirm your ship's arrival, terminal and all-aboard time." },
     ], reading: ["caesarea", "haifa", "akko", "tips"],
   },
   {
@@ -472,20 +472,20 @@ export const tourCategories: TourCategory[] = [
     intro: "Discover the dramatic rock formations of Makhtesh Ramon, the vast erosion crater in Israel's Negev Desert. Compare short 4×4 safaris, guided hikes, geological explorations, stargazing and adventurous cliff activities, mostly starting in Mitzpe Ramon.",
     photo: { src: ramonClouds, alt: "Wide view of Makhtesh Ramon beneath a cloudy sky" }, match: { destinations: ["ramon-crater"] },
     paragraphs: [
-      "Most experiences start or offer pickup in Mitzpe Ramon. The booking platform may classify them under Sde Boker, even when the actual meeting point is in Mitzpe Ramon. Arrange your own transport to Mitzpe Ramon unless it is included in your tour.",
-      "Shorter jeep and geology tours explore the crater's multicoloured rock, dry riverbeds and viewpoints; longer combinations may include hiking, and selected offers focus on a sunset experience or rappelling. Check the physical requirements, minimum age, accessibility, equipment, group size and duration of your chosen activity.",
+      "Most tours depart from Mitzpe Ramon or offer local pickup. The booking platform may classify them under Sde Boker, even when the actual meeting point is in Mitzpe Ramon. Arrange your own transport to Mitzpe Ramon unless it is included in your tour.",
+      "Short jeep and geology tours explore colorful rock formations, dry riverbeds and panoramic viewpoints. Longer excursions may include hiking, sunset stops or rappelling. Check the physical requirements, minimum age, accessibility, equipment, group size and duration of your chosen activity.",
       "The Negev is exposed to heat and flash-flood risks even when local weather looks clear. Check current Israel Nature and Parks Authority warnings, trail closures, weather forecasts and the operator's safety and cancellation guidance. Desert access and stargazing depend on weather and local conditions.",
     ],
     choices: [
       { title: "2-hour crater jeep safari", text: "Explore the crater's geological formations and spectacular viewpoints on a two-hour jeep tour." },
       { title: "Hiking & adventure", text: "Choose a longer jeep tour, guided hike or supervised rappelling activity that suits your group's abilities." },
-      { title: "Sunset & desert skies", text: "Experience the changing light or a stargazing outing when visibility and weather permit." },
+      { title: "Sunset & desert skies", text: "Watch the sunset over the desert or enjoy guided stargazing on a clear night." },
     ],
     faqs: [
       { q: "Do all these tours include transport from Tel Aviv or Jerusalem?", a: "Most start in Mitzpe Ramon, though the platform can label the broader region Sde Boker. Confirm the actual meeting point and arrange your trip south separately if not explicitly included." },
-      { q: "Is Ramon Crater an impact crater?", a: "No. Makhtesh Ramon is an erosion landform formed over geological time, not a meteorite impact crater." },
+      { q: "Is Ramon Crater an impact crater?", a: "Makhtesh Ramon is a vast natural depression shaped by geological processes and erosion over millions of years." },
       { q: "Which activities are suitable for children or first-time visitors?", a: "Shorter guided jeep or geology outings may suit more visitors. Rappelling and longer hikes have different participation requirements. Check minimum ages, mobility and safety instructions with the provider." },
-      { q: "Can I combine stargazing and a jeep tour?", a: "Some operators advertise twilight jeep-and-sky combinations. Clear skies, timing and the exact activity depend on the booked option and weather." },
+      { q: "Can I combine stargazing and a jeep tour?", a: "Some operators combine sunset jeep tours with guided stargazing. Clear skies, timing and the exact activity depend on the booked option and weather." },
       { q: "Can desert routes close without notice?", a: "Yes. Flash floods, extreme heat and other restrictions can affect trails and access. Check the official parks authority and your operator shortly before travelling." },
       { q: "Are these the same as Masada and Dead Sea tours?", a: "No. This category focuses on Mitzpe Ramon and Makhtesh Ramon in the central Negev; Masada and Dead Sea day tours appear in their own category." },
     ],
@@ -499,18 +499,18 @@ export const tourCategories: TourCategory[] = [
     match: { destinations: ["golan"] },
     paragraphs: [
       "A typical Golan day trip visits Mount Bental, Katzrin or local archaeological sites and overlooks. Longer routes may offer time at Ein Keshatot, Tel Dan, Banias or Nimrod Fortress. Choose a tour that includes the sites you want to explore, and check whether admission fees are included.",
-      "Shared trips from Tel Aviv and Jerusalem are generally long days. Private guiding may provide more flexibility, but pickup points, route changes, vehicle access and attraction openings still require confirmation with the operator.",
+      "Allow a full day for guided excursions to the Golan Heights from Tel Aviv or Jerusalem. Private guided tours offer greater flexibility in pickup locations, sightseeing stops and time spent at each attraction, subject to current access restrictions.",
       "Parts of the Golan are close to military zones and the UN-monitored separation area. Current travel warnings, possible minefield areas, weather and temporary park or trail closures can change routes at short notice. Avoid unmarked tracks, heed all signs and check authoritative instructions and the operator's confirmed itinerary before booking.",
     ],
     choices: [
       { title: "Classic Golan day trip", text: "Visit Mount Bental and Katzrin on a shared guided trip from Tel Aviv or Jerusalem." },
-      { title: "Nature and archaeology", text: "Look for an advertised stop at Banias, Nimrod Fortress, Ein Keshatot or other specific sites." },
+      { title: "Nature and archaeology", text: "Explore nature reserves and historic sites such as Banias, Nimrod Fortress and Ein Keshatot on selected tours." },
       { title: "Private guiding & off-road", text: "Private guided tours offer greater flexibility. Confirm current access restrictions and safety requirements before booking." },
     ],
     faqs: [
-      { q: "Is this category limited to the Golan Heights?", a: "Yes. It focuses on destinations in the Golan. Some tours approach the plateau via the Sea of Galilee or Tel Dan, but the main sightseeing is in the Golan region." },
+      { q: "Is this category limited to the Golan Heights?", a: "These tours focus on the Golan Heights, with some itineraries also visiting the Sea of Galilee or Tel Dan along the way." },
       { q: "Can I depart from Jerusalem or Tel Aviv?", a: "Yes. Several tours list pickup from those cities; others meet locally in northern Israel. Check each booking page for the actual departure and return plan." },
-      { q: "Are Mount Bental and Katzrin included on every tour?", a: "Both are common stops; itineraries vary. Private routes and jeep tours can focus on different parts of the Golan. Read the detailed stop list." },
+      { q: "Are Mount Bental and Katzrin included on every tour?", a: "Mount Bental and Katzrin are popular stops, while private tours and jeep excursions also explore other parts of the Golan Heights. Read the detailed stop list." },
       { q: "Can I visit Banias waterfalls or Nimrod Fortress?", a: "Only when the operator lists them and access is permitted. Some trips instead offer viewpoints, and admissions may be separate. Current park and security restrictions can change." },
       { q: "Is it safe to leave marked routes?", a: "No. Some areas have unexploded ordnance or minefield hazards, and there are military restrictions near the border. Stay on approved roads and paths and follow official warnings and tour-operator instructions." },
       { q: "Do these listings guarantee a tour is operating?", a: "Availability depends on the travel date. Verify the departure, sites, security restrictions and cancellation terms directly before paying." },
@@ -523,22 +523,22 @@ export const tourCategories: TourCategory[] = [
     intro: "Discover Israeli food through the markets, neighbourhoods and people who make it. Compare tastings in Jerusalem’s Mahane Yehuda Market with culinary walks, market visits and a cooking workshop in Tel Aviv.",
     photo: migration["what-to-eat-in-israel"], match: { tags: ["food"] },
     paragraphs: [
-      "Choose your city and the kind of experience you want. Jerusalem's Mahane Yehuda tours concentrate on the stalls and food traditions of one bustling market; Tel Aviv options range from Levinsky and Carmel Market tastings to a longer Jaffa-to-Carmel walk and a hands-on cooking workshop.",
-      "A guided market tour usually lasts two to three hours. A multi-neighbourhood tour may be longer and divide its time between tastings, history, architecture and walking. A private culinary guide offers flexibility, but check the exact itinerary and whether drinks or a full meal are included.",
+      "Jerusalem's Mahane Yehuda tours concentrate on the stalls and food traditions of one bustling market; Tel Aviv options range from Levinsky and Carmel Market tastings to a longer Jaffa-to-Carmel walk and a hands-on cooking workshop.",
+      "A guided market tour usually lasts two to three hours. Longer culinary tours combine food tastings with neighborhood history, architecture and guided walks. A private culinary guide offers flexibility, but check the exact itinerary and whether drinks or a full meal are included.",
       "Markets and independent stalls follow different Friday, Shabbat and holiday schedules. Tell the supplier about allergies, vegetarian options, kosher needs and any other restrictions before booking. Ask which food stops can offer suitable substitutions. Most listings start at a designated city meeting point."
     ],
     choices: [
       { title: "Jerusalem market tastings", text: "Explore Mahane Yehuda Market, sample local delicacies and learn about Jerusalem's culinary traditions." },
       { title: "Tel Aviv's food neighborhoods", text: "Explore Carmel or Levinsky markets, or combine Jaffa's streets with market tastings." },
-      { title: "Cook or go private", text: "Try a market-to-kitchen cooking experience or arrange a private guide focused on your tastes." }
+      { title: "Cooking workshops & private food tours", text: "Try a market-to-kitchen cooking experience or arrange a private guide focused on your tastes." }
     ],
     faqs: [
-      { q: "Where do food tours start?", a: "These are local city tours. Jerusalem experiences meet at agreed city locations; Tel Aviv tours meet near the relevant market or Jaffa. Hotel pickup is not generally included. Confirm the exact address and end point with the operator." },
+      { q: "Where do food tours start?", a: "Jerusalem food tours start at designated city meeting points, while Tel Aviv tours typically begin near the markets or in Jaffa. Hotel pickup is not generally included. Confirm the exact address and end point with the operator." },
       { q: "Do market tastings count as a full meal?", a: "Some tours provide several substantial samples; others combine small tastes with sightseeing. Check the inclusions, drinks and expected food quantities before booking." },
       { q: "Are there vegetarian, vegan or kosher options?", a: "Some operators can adapt tastings, but no single dietary option is guaranteed across every stall. Ask about allergies, vegetarian or vegan needs, kosher certification and possible substitutions before purchasing." },
-      { q: "Which market should I choose: Mahane Yehuda, Carmel or Levinsky?", a: "Mahane Yehuda is in Jerusalem and combines an energetic produce market with varied local food traditions. Carmel and Levinsky are different Tel Aviv food areas. Choose by where you are staying, the exact itinerary and the food that interests you." },
+      { q: "Which market should I choose: Mahane Yehuda, Carmel or Levinsky?", a: "Mahane Yehuda is in Jerusalem and combines an energetic produce market with varied local food traditions. In Tel Aviv, Carmel Market is known for its lively food stalls and fresh produce, while Levinsky Market is particularly popular for spices and specialty foods. Choose by where you are staying, the exact itinerary and the food that interests you." },
       { q: "Are markets open on Friday or Saturday?", a: "Hours vary by city and stall. Many Jewish-operated stalls close before Shabbat and remain closed on Saturday, with changes around religious holidays. Check your tour's operating date and the actual stops with the operator." },
-      { q: "Is a cooking class the same as a tasting walk?", a: "No. A cooking workshop lets you prepare local dishes and enjoy a meal together, according to the advertised programme. Tasting walks focus on visiting stalls, sampling food and learning from a local guide." }
+      { q: "Is a cooking class the same as a tasting walk?", a: "A cooking workshop offers hands-on experience preparing local dishes and enjoying a meal together, depending on the program. Tasting walks focus on visiting stalls, sampling food and learning from a local guide." }
     ],
     reading: ["food", "jerusalem", "jaffa", "telAviv"],
   },
@@ -548,20 +548,20 @@ export const tourCategories: TourCategory[] = [
     intro: "Enjoy Eilat's Red Sea setting on a glass-bottom boat or guided snorkeling trip, then explore the striking desert beyond the city. Compare boat activities with jeep tours to Timna Park, the Red Canyon and the Eilat Mountains.",
     photo: airport["eilat"]!, match: { destinations: ["eilat"] },
     paragraphs: [
-      "Most experiences on this page start at local meeting points in Eilat; arrange travel from Jerusalem or Tel Aviv separately. Boat trips and snorkeling focus on the Red Sea. Off-road excursions explore mountain and desert scenery outside town, with some including short guided hikes, viewpoints or local refreshments.",
-      "For a relaxed outing without entering the water, look at a glass-bottom cruise. For guided snorkelling, you should be comfortable swimming in the sea and use suitable equipment. Check how long you'll spend in the water, the swimming requirements, minimum age and what's included. The advertised duration may also include instruction and preparation.",
-      "Timna Park excursions and Red Canyon hikes are different from central Eilat's coastal activities. Walking routes can involve steps or ladders, rough ground and exposure to heat. Confirm your hotel's pickup eligibility, physical requirements, site admissions, the planned route and weather-related cancellation terms directly with the supplier."
+      "Most experiences on this page start at local meeting points in Eilat; arrange travel from Jerusalem or Tel Aviv separately. Boat trips and snorkeling excursions offer opportunities to explore the Red Sea's marine life. Jeep excursions explore the surrounding mountains and desert landscapes, with selected tours including guided hikes, scenic stops and refreshments.",
+      "A glass-bottom boat cruise is a relaxing way to enjoy the Red Sea and its underwater scenery from the boat. For guided snorkelling, you should be comfortable swimming in the sea and use suitable equipment. Check how long you'll spend in the water, the swimming requirements, minimum age and what's included. The advertised duration may also include instruction and preparation.",
+      "Timna Park and the Red Canyon offer opportunities to explore the desert beyond Eilat. Walking routes can involve steps or ladders, rough ground and exposure to heat. Confirm your hotel's pickup eligibility, physical requirements, site admissions, the planned route and weather-related cancellation terms directly with the supplier."
     ],
     choices: [
-      { title: "Red Sea without swimming", text: "Enjoy coastal scenery and underwater viewing aboard a glass-bottom boat." },
-      { title: "In the water", text: "Choose guided reef snorkeling and check swimming ability, equipment and actual time at sea." },
+      { title: "Glass-bottom boat cruises", text: "Enjoy coastal scenery and underwater viewing aboard a glass-bottom boat." },
+      { title: "Guided reef snorkeling", text: "Choose guided reef snorkeling and check swimming ability, equipment and actual time at sea." },
       { title: "Desert & canyon adventures", text: "Explore Timna, the Red Canyon or the Eilat Mountains by jeep, with hiking requirements that vary by route." }
     ],
     faqs: [
       { q: "Do activities include transport from Tel Aviv or Jerusalem?", a: "The activities listed here depart from Eilat. Arrange travel to Eilat and accommodation separately, then check whether your selected activity offers local hotel pickup." },
       { q: "Do I need to swim for a glass-bottom boat cruise?", a: "No. Passengers remain on board for the advertised cruise. Confirm boarding access, trip duration and any accessibility requirements before booking." },
       { q: "How long is the snorkeling session?", a: "The listed total duration can include check-in, instruction and equipment preparation. Ask how much time you'll spend snorkelling, what swimming skills are required and whether equipment is included in the price." },
-      { q: "Are Timna Park and the Red Canyon the same tour?", a: "No. Timna is a desert park with geological formations and archaeological remains; the Red Canyon is a hiking route with narrow rock passages and, on some routes, ladders. Choose a listing that explicitly names your preferred location." },
+      { q: "Are Timna Park and the Red Canyon the same tour?", a: "Timna Park features geological formations and archaeological remains, while the Red Canyon offers hiking through narrow rock passages, with ladders along some routes. Choose a listing that explicitly names your preferred location." },
       { q: "Are desert jeep tours suitable for children?", a: "Requirements vary by route and operator. Check ages, child seats, rough-road conditions, hiking or ladder sections and any medical restrictions. A jeep ride alone is different from a combined jeep-and-hike outing." },
       { q: "Can wind, heat or weather cancel an activity?", a: "Yes. Sea conditions can affect cruises and snorkeling, while floods, heat and access restrictions can affect desert routes. Confirm official safety advice and the operator's cancellation or rescheduling policy close to your date." }
     ],
@@ -582,9 +582,9 @@ export const TOURS_UPDATED_DATE = "2026-11-26";
 export const toursHubTitle = "Tours & day trips in Israel";
 export const toursHubDescription = "Compare Israel tours and day trips in Jerusalem, Tel Aviv, the Galilee, Masada and Eilat, including guided excursions, private tours and food walks.";
 export const toursHubFaqs = [
-  { q: "What's the difference between a guided tour and a private driver?", a: "A guided tour includes guiding only where it is explicitly listed. My private driver service provides transportation and agreed stops; licensed guiding is a separate service to arrange if needed." },
-  { q: "Where do tours start, and is hotel pickup included?", a: "Departure locations vary by tour and operator. Some experiences offer hotel pickup, while others start at a designated meeting point. Always check the departure city, meeting place and pickup inclusions before booking." },
-  { q: "How can I check tour prices and availability?", a: "Open the individual tour's booking page to check current dates, prices, group sizes and inclusions with the operator. Starting prices are shown where available. Contact me for a private transport quote." },
+  { q: "What's the difference between a guided tour and a private driver?", a: "Guided tours include the services of a guide as described in the itinerary. My private driver service provides transportation and agreed stops; licensed guiding is a separate service to arrange if needed." },
+  { q: "Where do tours start, and is hotel pickup included?", a: "Some tours offer hotel pickup, while others depart from designated meeting points. Always check the departure city, meeting place and pickup inclusions before booking." },
+  { q: "How can I check tour prices and availability?", a: "Each tour's booking page provides available dates, prices, group sizes and included services. Starting prices are shown where available. Contact me for a private transport quote." },
   { q: "Are there tours for cruise passengers?", a: "Yes. Visit the dedicated Haifa or Ashdod shore-excursion pages. Choose a tour that confirms cruise-port pickup and return arrangements compatible with your ship's schedule." },
 ];
 
