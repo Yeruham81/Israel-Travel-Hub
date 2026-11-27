@@ -67,7 +67,7 @@ describe("whole-card editorial navigation without redundant CTA footers", () => 
 
   it("preserves separate booking and contact actions", () => {
     expect(read("src/components/ChristianToursGuide.tsx")).toContain("Read related guide");
-    expect(read("src/routes/private-driver-in-israel.tsx")).toContain("Request a quote");
+    expect(read("src/routes/private-driver-in-israel.tsx")).toContain("Get a quote");
     expect(read("src/components/HaifaHotelEditorialGuide.tsx")).toContain("Check rooms & rates");
   });
 });

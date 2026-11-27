@@ -61,7 +61,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         photo: cityPhoto,
         paragraphs: [
           "In major cities such as Tel Aviv, Jerusalem and Haifa, you can often hail a licensed taxi on the street. Give the driver your destination address and confirm the payment method and use of the meter before setting off. During busy periods or in remote areas, booking a taxi may be more reliable.",
-          "You'll find taxi stands near many hotels, railway stations, hospitals and shopping centres. You can also ask your hotel or a local dispatcher to arrange a pickup. Ask whether the official booking fee applies, and save the dispatcher's phone number or your hotel address for offline use.",
+          "You'll find taxi stands near many hotels, railway stations, hospitals and shopping centers. You can also ask your hotel or a local dispatcher to arrange a pickup. Ask whether the official booking fee applies, and save the dispatcher's phone number or your hotel address for offline use.",
           "Enter your pickup address in the taxi app, check whether the fare is estimated or fixed, and wait for a driver to confirm. The app also shows your driver's details and ride history. My Uber, Gett and Yango guide explains which taxi apps you can use in Israel.",
           "A private transfer is booked in advance, usually with an agreed vehicle, pickup point and price. Check what's included in the price and ask for booking confirmation.",
         ],

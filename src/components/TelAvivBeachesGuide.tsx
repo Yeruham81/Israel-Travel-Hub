@@ -37,7 +37,7 @@ const pickIcons = [Waves, Users, Heart, Compass, TreePalm, Sun];
 const areas = [
   { name: "Northern coast" as const, intro: "The northern beaches offer more open space and a quieter atmosphere away from the busiest parts of the promenade. The Tzuk beaches and Tel Baruch are ideal for a relaxed beach day, while Metzitzim and Hilton are closer to the port, cafés and waterfront activities." },
   { name: "Central seafront" as const, intro: "This is the classic Tel Aviv beachfront, with lively bathing beaches, volleyball courts, cafés and restaurants along the promenade. From Gordon to Geula, these beaches are convenient for visitors staying in central hotels and for combining a swim with sightseeing in the city." },
-  { name: "Southern coast and Jaffa" as const, intro: "Around Charles Clore, the waterfront opens onto lawns, walking paths and views of Old Jaffa. Farther south, Givat Aliya is known for its neighbourhood atmosphere and distinctive stone arches." },
+  { name: "Southern coast and Jaffa" as const, intro: "Around Charles Clore, the waterfront opens onto lawns, walking paths and views of Old Jaffa. Farther south, Givat Aliya is known for its neighborhood atmosphere and distinctive stone arches." },
 ];
 const related = [
   { title: "Attractions in Tel Aviv", to: "/travel-blog/attractions-in-tel-aviv/" as const, note: "Ideas for sightseeing beyond the sand", image: rothschildPhoto, alt: "Rothschild Boulevard in Tel Aviv" },
@@ -45,7 +45,7 @@ const related = [
   { title: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" as const, note: "Buses, the light rail, taxis and walking", image: dizengoffPhoto, alt: "A street in central Tel Aviv" },
   { title: "Museums in Tel Aviv", to: "/travel-blog/museums-in-tel-aviv/" as const, note: "Art, history and a good rainy-day alternative", image: museumPhoto, alt: "Tel Aviv museum architecture" },
   { title: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/" as const, note: "Seasonal planning for city and beach visits", image: heroPhoto, alt: "Seasonal view of Israel" },
-  { title: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const, note: "Compare areas near the coast and city centre", image: beachfrontPhoto, alt: "Hotels along Tel Aviv's waterfront" },
+  { title: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const, note: "Compare areas near the coast and city center", image: beachfrontPhoto, alt: "Hotels along Tel Aviv's waterfront" },
 ];
 
 const faqs = [
@@ -150,7 +150,7 @@ export function TelAvivBeachesGuide() {
         <GuideHeroLayout image={<GuideHeroMedia src={heroPhoto} alt="The Mediterranean shoreline and beachfront in Tel Aviv" />}>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Tel Aviv & Jaffa · Beaches and seaside</p>
           <h1 className="guide-page-title mt-2">The Best Beaches in Tel Aviv</h1>
-          <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From the lively city-centre beaches to the quieter northern shoreline and the coast around Jaffa, my guide will help you choose where to swim, relax and explore the waterfront.</p>
+          <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From the lively city-center beaches to the quieter northern shoreline and the coast around Jaffa, my guide will help you choose where to swim, relax and explore the waterfront.</p>
           <PageUpdated date={updatedAt} />
         </GuideHeroLayout>
         <AuthorCard />

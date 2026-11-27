@@ -140,7 +140,7 @@ describe("shore excursions", () => {
       expect(card).not.toHaveTextContent(/From ILS|Per vehicle/);
       expect(card).toHaveTextContent("Full day · Customized itinerary · Private car & driver");
       expect(card.querySelector("article")).toHaveClass("sm:flex-row");
-      expect(within(card).getByRole("link", { name: `Request a quote: ${itinerary.destination} from ${port.name}` })).toHaveAttribute("href", "#request-quote");
+      expect(within(card).getByRole("link", { name: `Get a quote: ${itinerary.destination} from ${port.name}` })).toHaveAttribute("href", "#request-quote");
     });
     expect(container.querySelector("#itineraries")!.compareDocumentPosition(container.querySelector("#request-quote")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     // Exact category-page order: catalog (external then private), planning, FAQ, local, practical, contact.
@@ -195,7 +195,7 @@ describe("shore excursions", () => {
     const Page = route.options.component!;
     render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     const itinerary = port.itineraries[0]!;
-    fireEvent.click(screen.getByRole("link", { name: `Request a quote: ${itinerary.destination} from ${port.name}` }));
+    fireEvent.click(screen.getByRole("link", { name: `Get a quote: ${itinerary.destination} from ${port.name}` }));
     expect(screen.getByLabelText("Preferred itinerary *")).toHaveValue(itinerary.id);
     fireEvent.click(screen.getByRole("button", { name: "Send excursion request" }));
     expect(screen.getByRole("alert")).toHaveTextContent("Enter your cruise ship's name");
@@ -217,7 +217,7 @@ describe("shore excursions", () => {
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: port.title, request: { kind: "shore", portId: id, fields: { ship: "Example Voyager", date: "2099-11-01", pickupTime: "08:00", allAboardDate: "2099-11-01", allAboardTime: "18:00", passengers: "6", itineraryId: itinerary.id, consent: true } } });
     expect(localStorage.length).toBe(0);
-    fireEvent.click(screen.getByRole("link", { name: `Request a quote: ${port.itineraries[1]!.destination} from ${port.name}` }));
+    fireEvent.click(screen.getByRole("link", { name: `Get a quote: ${port.itineraries[1]!.destination} from ${port.name}` }));
     expect(screen.getByRole("button", { name: "Send excursion request" })).toBeEnabled();
     fireEvent.change(screen.getByLabelText("Preferred itinerary *"), { target: { value: "other" } });
     expect(screen.getByLabelText("Preferred itinerary *")).toHaveValue("other");

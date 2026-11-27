@@ -1,28 +1,32 @@
 /** Jerusalem churches visitor data, checked against the Christian Information Center's 15 September 2026 shrine listing and named site operators. Coordinates cross-checked against named site-location records. Do not infer that published access implies access during services. */
 export type ChurchArea = "old" | "olives" | "zion" | "karem";
 export type JerusalemChurch = {id:string;area:ChurchArea;name:string;tradition:string;description:string;highlight:string;hours:string;admission:string;tip:string;lat:number;lon:number;photo:string|null;feature:boolean;photoAlt:string;photoCredit?:string;photoSourceUrl?:string;photoLicenseUrl?:string;officialUrl?:string;officialLabel?:string};
-export type ChurchAreaInfo = {id:ChurchArea;title:string;intro:string;color:string};
+export type ChurchAreaInfo = {id:ChurchArea;title:string;intro:string;cardIntro:string;color:string};
 export const churchAreas:ChurchAreaInfo[] = [
   {
     "id": "old",
+    "cardIntro": "Holy Sepulchre, Via Dolorosa and historic churches.",
     "title": "Old City churches",
     "intro": "Start with the Church of the Holy Sepulchre and the Via Dolorosa, then choose smaller churches nearby. The alleys are walkable but include steps, crowds and uneven paving.",
     "color": "#2563eb"
   },
   {
     "id": "olives",
+    "cardIntro": "Gethsemane, Pater Noster and the Chapel of the Ascension.",
     "title": "Mount of Olives & Kidron Valley",
     "intro": "Gethsemane lies near the foot of the hill, while Pater Noster and the Chapel of the Ascension are higher. A downhill visit still involves steep sections.",
     "color": "#15803d"
   },
   {
     "id": "zion",
+    "cardIntro": "Dormition Abbey, the Cenacle and St Peter in Gallicantu.",
     "title": "Mount Zion churches",
     "intro": "Dormition Abbey, the Cenacle and St Peter in Gallicantu are close together, but each site has its own visiting hours and entry rules.",
     "color": "#b45309"
   },
   {
     "id": "karem",
+    "cardIntro": "Pilgrimage churches in a historic hillside village.",
     "title": "Ein Karem churches",
     "intro": "A separate journey west of central Jerusalem, with two major pilgrimage churches on different levels of the village.",
     "color": "#9333ea"
@@ -148,11 +152,11 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "area": "old",
     "name": "Christ Church Jerusalem",
     "tradition": "Anglican / evangelical",
-    "description": "A historic Protestant church near Jaffa Gate, with a heritage centre explaining the community's nineteenth-century history.",
-    "highlight": "Heritage centre and distinctive church interior",
+    "description": "A historic Protestant church near Jaffa Gate, with a heritage center explaining the community's nineteenth-century history.",
+    "highlight": "Heritage center and distinctive church interior",
     "hours": "Wed–Fri and Sun 09:00–15:00; closed Mon, Tue and Sat",
-    "admission": "Check heritage-centre arrangements",
-    "tip": "Groups must arrange visits with the heritage centre in advance.",
+    "admission": "Check heritage-center arrangements",
+    "tip": "Groups must arrange visits with the heritage center in advance.",
     "lat": 31.7761,
     "lon": 35.2291,
     "photo": "/images/jerusalem/churches/christ-church.webp",

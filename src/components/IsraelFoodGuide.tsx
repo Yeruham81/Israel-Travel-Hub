@@ -127,7 +127,7 @@ function FoodDay({onPickFood}:{onPickFood:PickFood}){
 }
 function Markets(){
  return <section id="markets" aria-labelledby="markets-heading" className="mt-12 scroll-mt-24">
-   <SectionHeading id="markets" title="Where to explore local food" intro="Markets and old neighbourhoods make good introductions because you can see the ingredients, watch food being prepared and choose a few stops at your own pace."/>
+   <SectionHeading id="markets" title="Where to explore local food" intro="Markets and old neighborhoods make good introductions because you can see the ingredients, watch food being prepared and choose a few stops at your own pace."/>
    <div className="grid gap-5 sm:grid-cols-2">{foodMarkets.map(market=><article key={market.id} className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
      <img src={market.image} alt={market.alt} width={755} height={460} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
      <div className="flex flex-1 flex-col p-4 sm:p-5">
@@ -178,17 +178,17 @@ function Practical(){
 }
 type NavCard={title:string;description:string;to:LinkProps["to"];image:string;alt:string};
 const exploreCards:NavCard[]=[
- {title:"Markets & shopping in Jerusalem",description:"Explore Mahane Yehuda, Old City markets and shopping neighbourhoods",to:"/travel-blog/shopping-in-jerusalem/",image:"/images/jerusalem-shopping/old-city-market.webp",alt:"Market lanes in Jerusalem's Old City"},
+ {title:"Markets & shopping in Jerusalem",description:"Explore Mahane Yehuda, Old City markets and shopping neighborhoods",to:"/travel-blog/shopping-in-jerusalem/",image:"/images/jerusalem-shopping/old-city-market.webp",alt:"Market lanes in Jerusalem's Old City"},
  {title:"Explore Tel Aviv",description:"Street markets, food stops and city highlights",to:"/travel-blog/attractions-in-tel-aviv/",image:"/images/attractions/tel-aviv-jaffa.webp",alt:"Tel Aviv skyline near the Mediterranean"},
  {title:"Old Jaffa",description:"Local cafés, historic streets and the old port",to:"/attractions/jaffa/",image:"/images/attractions/jaffa-port.webp",alt:"Old Jaffa Port and its waterfront"},
  {title:"Discover Akko",description:"Old City food lanes and northern coastal attractions",to:"/attractions/akko-acre/",image:"/images/attractions/akko-market.webp",alt:"Market stalls in Old Akko"},
- {title:"Explore Haifa",description:"The northern coast, gardens, local markets and neighbourhoods",to:"/attractions/haifa/",image:"/images/attractions/haifa-bahai-gardens.webp",alt:"Haifa Bahai Gardens terraces and harbour"},
+ {title:"Explore Haifa",description:"The northern coast, gardens, local markets and neighborhoods",to:"/attractions/haifa/",image:"/images/attractions/haifa-bahai-gardens.webp",alt:"Haifa Bahai Gardens terraces and harbour"},
  {title:"Jerusalem's Old City",description:"Historic quarters and places to explore on foot",to:"/attractions/old-city-jerusalem/",image:"/images/attractions/old-jerusalem-cardo.webp",alt:"Jerusalem's historic Cardo"}
 ];
 const planningCards:NavCard[]=[
  {title:"Best time to visit Israel",description:"Weather, seasons and holiday planning",to:"/travel-blog/best-time-to-visit-israel/",image:migrationPhotos["best-time-to-visit-israel"].src,alt:migrationPhotos["best-time-to-visit-israel"].alt},
  {title:"3 days in Israel",description:"A short itinerary with time for a food stop",to:"/travel-blog/israel-itinerary-3-days/",image:"/images/attractions/jerusalem.webp",alt:"Jerusalem cityscape"},
- {title:"5 days in Israel",description:"Combine city visits and local neighbourhoods",to:"/travel-blog/israel-itinerary-5-days/",image:fiveDayPhoto,alt:"Caesarea archaeological coastline"},
+ {title:"5 days in Israel",description:"Combine city visits and local neighborhoods",to:"/travel-blog/israel-itinerary-5-days/",image:fiveDayPhoto,alt:"Caesarea archaeological coastline"},
  {title:"7 days in Israel",description:"Take more time between the cities",to:"/travel-blog/israel-itinerary-7-days/",image:"/images/attractions/sea-of-galilee.webp",alt:"Sea of Galilee"},
  {title:"Israel holidays",description:"Plan Shabbat, public holidays and opening hours",to:"/travel-blog/calendar-of-events/",image:"/images/attractions/old-jerusalem-tower-of-david.webp",alt:"Historic Jerusalem"},
  {title:"Getting around Israel",description:"Trains, buses, city travel and private transfers",to:"/travel-blog/getting-around-israel/",image:travelByTrainPhoto,alt:"Train platforms at Ben Gurion Airport"}
@@ -248,7 +248,7 @@ export function IsraelFoodGuide(){
    <Practical/>
    <FaqList faqs={foodFAQs}/>
    <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
-      <SectionHeading id="explore-more" title="Explore the neighbourhoods behind the flavours" intro="Combine local food with sightseeing in Jerusalem or Tel Aviv."/>
+      <SectionHeading id="explore-more" title="Explore the neighborhoods behind the flavours" intro="Combine local food with sightseeing in Jerusalem or Tel Aviv."/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{exploreCards.map(item=><RelatedCard key={item.to} item={item}/>)}</div>
    </section>
    <section id="plan-trip" aria-labelledby="plan-trip-heading" className="mt-12 scroll-mt-24">

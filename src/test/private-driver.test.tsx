@@ -48,7 +48,7 @@ describe("private driver page and inquiry", () => {
     expect(within(serviceOverview).getByRole("heading", { name: "Private driver service in Israel: travel on your own terms" })).toBeInTheDocument();
     expect(within(serviceOverview).getByRole("heading", { name: "Who is a private driver suitable for?" })).toBeInTheDocument();
     expect(serviceOverview).toHaveTextContent("couples, families, groups of friends");
-    expect(serviceOverview).toHaveTextContent("business travellers");
+    expect(serviceOverview).toHaveTextContent("business travelers");
     expect(serviceOverview).toHaveTextContent(/licensed guides and other extras are arranged separately unless confirmed in the quote/i);
     expect(serviceOverview).toHaveTextContent(/entrance tickets/i);
     expect(serviceOverview.compareDocumentPosition(container.querySelector("#journeys")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
@@ -60,7 +60,7 @@ describe("private driver page and inquiry", () => {
     const header = screen.getByTestId("hub-header");
     expect(header).toContainElement(screen.getByRole("heading", { level: 1 }));
     expect(within(header).getByTestId("guide-hero-media")).toBeInTheDocument();
-    expect(within(header).getByRole("link", { name: "Request a personal quote" })).toHaveAttribute("href", "#request-quote");
+    expect(within(header).getByRole("link", { name: "Get a quote" })).toHaveAttribute("href", "#request-quote");
     expect(within(header).getByTestId("author-card")).toBeInTheDocument();
     expect(screen.getAllByTestId("author-card")).toHaveLength(1);
     expect(screen.queryByText("Plan the day before requesting a quote")).not.toBeInTheDocument();
@@ -81,7 +81,7 @@ describe("private driver page and inquiry", () => {
     expect(privateDriverFaqs).toHaveLength(6);
     expect(screen.getByRole("region", { name: "Frequently asked questions" })).toHaveTextContent("How do payment, cancellation and extra hours work?");
     const afterFaq = screen.getByTestId("driver-after-faq-cta");
-    expect(within(afterFaq).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "#request-quote");
+    expect(within(afterFaq).getByRole("link", { name: "Get a quote" })).toHaveAttribute("href", "#request-quote");
     expect(screen.queryByText("Photo credits")).not.toBeInTheDocument();
     expect(privateDriverHero.alt).toMatch(/Car travelling on a winding road/);
     const guides = screen.getAllByTestId("driver-guide-card");

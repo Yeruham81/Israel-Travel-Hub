@@ -138,7 +138,7 @@ export const foodTours = [
     image:mahaneYehudaStreetPhoto,alt:"Agripas Street beside Mahane Yehuda Market in Jerusalem",
     subId:"what_to_eat_israel_mahane_yehuda"},
   {id:"tour-levinsky-market-tasting-viator@tours-food-markets",key:"levinsky",productId:"levinsky-market-tasting",location:"Tel Aviv",provider:"Viator",name:"Levinsky Market tasting walk",
-    description:"Explore speciality food shops, ingredients and neighbourhood food traditions with a guide.",
+    description:"Explore speciality food shops, ingredients and neighborhood food traditions with a guide.",
     detail:"Approximately 2 hours · Confirm substitutions and schedule",
     image:"/images/food-guide/levinsky-spice-shop.webp",alt:"Spices and speciality food products inside a Levinsky Market shop in Tel Aviv",
     subId:"what_to_eat_israel_levinsky_tasting"}

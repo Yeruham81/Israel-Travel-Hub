@@ -206,7 +206,7 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
     { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/", description: "Arrange your onward journey from the airport.", icon: "arrival" },
   ],
   sources: [
-    { label: "Rosh Hanikra — official visitor information centre", url: roshHanikraSite.sources.info, note: "Current seasonal hours, local access, ticket conditions, parking and contact." },
+    { label: "Rosh Hanikra — official visitor information center", url: roshHanikraSite.sources.info, note: "Current seasonal hours, local access, ticket conditions, parking and contact." },
     { label: "Rosh Hanikra — official tickets and entry experience", url: roshHanikraSite.sources.tickets, note: "Ticket booking, cable car, grottoes and audiovisual presentation." },
     { label: "Rosh Hanikra — official accessibility statement", url: roshHanikraSite.sources.accessibility, note: "Accessible bridge, cable car, partial grotto access and visitor facilities." },
     { label: "Rosh Hanikra and Old Akko — combined ticket", url: roshHanikraSite.sources.comboAkko, note: "Operator's combined coastal sightseeing option." },

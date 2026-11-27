@@ -27,7 +27,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
         <span className="mt-1 inline-block text-[11px] font-semibold text-primary group-hover:underline sm:mt-2 sm:text-sm">View transfer details</span>
       </div>
     </Link>}
-    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${hubQuoteButtonClass} sm:mt-2 sm:self-end`}><span className="sm:hidden">Get a quote</span><span className="hidden sm:inline">Request a quote</span></a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${hubQuoteButtonClass} sm:mt-2 sm:self-end`}>Get a quote</a>
   </article>;
   if (layout === "hub-row") return <article
     className="grid h-full min-h-[5.5rem] min-w-0 grid-cols-[3.5rem_minmax(0,1fr)_6.1rem] items-center gap-1.5 min-[380px]:grid-cols-[4rem_minmax(0,1fr)_6.5rem] rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:min-h-[7rem] sm:grid-cols-[7rem_minmax(0,1fr)_8.75rem] sm:gap-3 sm:p-3"
@@ -39,7 +39,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
       {price && <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-base">From ₪{price.amount.toLocaleString("en-US")}</p>}
       {price && <div className="min-w-0"><CompactCurrencyEquivalents amount={price.amount} /></div>}
     </div>
-    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${hubQuoteButtonClass} justify-self-end`}><span className="sm:hidden">Get a quote</span><span className="hidden sm:inline">Request a quote</span></a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${hubQuoteButtonClass} justify-self-end`}>Get a quote</a>
   </article>;
   const compact = layout === "compact";
   const image = <img src={photo.src} alt={photo.alt} width={compact ? 80 : 360} height={compact ? 80 : 240} loading="lazy" decoding="async" className={compact ? "h-20 w-20 shrink-0 rounded-lg object-cover" : "aspect-[3/2] w-full object-cover"} />;
@@ -60,6 +60,6 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
   const quoteClass = `${quoteButtonClass} self-stretch ${compact ? "mx-4 mb-4" : "mx-3 mb-3 sm:mx-5 sm:mb-5"}`;
   return <article className="flex h-full flex-col overflow-hidden rounded-2xl border bg-card" data-testid={testId} data-destination={id}>
     {route ? <Link to={route.path} className="flex flex-1 flex-col hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">{details}</Link> : <div className="flex flex-1 flex-col">{details}</div>}
-    {onChoose ? <a href="#request-quote" onClick={() => onChoose(id)} className={quoteClass}>Request a quote</a> : route ? <Link to={route.path} hash="request-quote" className={quoteClass}>Request a quote</Link> : <Link to="/airport-transfers/" search={{ destination: id }} hash="request-quote" className={quoteClass}>Request a quote</Link>}
+    {onChoose ? <a href="#request-quote" onClick={() => onChoose(id)} className={quoteClass}>Get a quote</a> : route ? <Link to={route.path} hash="request-quote" className={quoteClass}>Get a quote</Link> : <Link to="/airport-transfers/" search={{ destination: id }} hash="request-quote" className={quoteClass}>Get a quote</Link>}
   </article>;
 }

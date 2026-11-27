@@ -216,7 +216,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "bestFor": "Unusual salt geology and desert scenery",
     "allow": "1–3 hours depending on the route",
     "access": "Public viewpoints or guided routes; site-specific rules",
-    "description": "Mount Sodom is a remarkable ridge of salt rock at the southern end of the Dead Sea. The folds, cliffs and pale desert landscape make it an appealing stop for travellers interested in geology and dramatic scenery.",
+    "description": "Mount Sodom is a remarkable ridge of salt rock at the southern end of the Dead Sea. The folds, cliffs and pale desert landscape make it an appealing stop for travelers interested in geology and dramatic scenery.",
     "practical": "Not every salt-cave or ridge route is open for independent visits. Caves, technical descents and challenging off-road tracks require appropriate access, equipment and qualified guiding. Do not improvise a route into unstable salt formations.",
     "gettingThere": "Mount Sodom has several distinct trailheads and viewpoints. The signed hiking approaches are not the same as the mapped lookout; consult the Israel Nature and Parks Authority route directions before choosing where to park.",
     "tip": "I would choose a short marked viewpoint or book a specialist guide if exploring the caves is your priority.",
@@ -282,7 +282,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "access": "Guided admission by advance booking",
     "description": "The restored historic potash-workers' camp at Sdom tells the story of early Dead Sea industry and the people who worked here. It adds a human and industrial-history perspective to a region better known for beaches and desert ruins.",
     "practical": "Admission is by a pre-booked guided tour. Choose your date and time in the official Hebrew booking calendar, and arrive about 15 minutes early. The operator's public pages show differing opening hours; use the available booking times for your visit.",
-    "gettingThere": "The visitor centre is near Sdom, south of Ein Bokek. Set your navigation to the visitor centre itself.",
+    "gettingThere": "The visitor center is near Sdom, south of Ein Bokek. Set your navigation to the visitor center itself.",
     "tip": "I'd choose an available guided time on the official website first, arrive 15 minutes early, and then plan the other southern Dead Sea stops around it.",
     "official": {
       "label": "Official visitor information and booking (Hebrew)",
@@ -296,7 +296,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     ],
     "image": {
       "src": "/images/dead-sea-attractions/novomeysky.webp",
-      "alt": "Preserved buildings at the Moshe Novomeysky visitor centre in the Sdom workers camp"
+      "alt": "Preserved buildings at the Moshe Novomeysky visitor center in the Sdom workers camp"
     }
   },
   {

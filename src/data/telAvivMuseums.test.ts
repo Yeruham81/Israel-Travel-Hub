@@ -113,7 +113,7 @@ describe("Tel Aviv museums editorial guide", () => {
     const bauhaus = museums.find(museum => museum.id === "bauhaus");
     expect(bauhaus?.closureNote).toBeUndefined();
     expect(bauhaus?.booking).toContain("Check dates for guided White City tours");
-    expect(bauhaus?.tip).toContain("Check with the centre in advance");
+    expect(bauhaus?.tip).toContain("Check with the center in advance");
     expect(bauhaus?.booking.toLowerCase()).not.toContain("suspended");
     expect(museums.find(museum => museum.id === "bialik")?.admission).toContain("₪75");
     expect(museums.find(museum => museum.id === "art")?.ticketUrl).toContain("tickets.tamuseum.org.il");

@@ -31,7 +31,7 @@ export const cityCultureGuides = {
         ],
       },
       ...(["Northern coast", "Central seafront", "Southern coast and Jaffa"] as const).map(area => ({
-        id: area === "Northern coast" ? "north" : area === "Central seafront" ? "centre" : "south",
+        id: area === "Northern coast" ? "north" : area === "Central seafront" ? "center" : "south",
         title: area,
         paragraphs: [listedTelAvivBeaches.filter(beach => beach.area === area).map(beach => beach.name).join(", ") + "."],
         subsections: listedTelAvivBeaches.filter(beach => beach.area === area).map(beach => ({

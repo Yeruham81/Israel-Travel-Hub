@@ -3,7 +3,7 @@ export const magdalaSite = {
   title: "Magdala: Ancient Synagogue, Archaeology and Duc In Altum",
   description: "Plan a visit to Magdala by the Sea of Galilee: first-century synagogue, Magdala Stone, Duc In Altum, opening hours, tickets, getting there and nearby sites.",
   region: "Sea of Galilee" as const,
-  intro: "At Magdala, the remains of a first-century Jewish town stand beside Duc In Altum, a modern Christian prayer centre. I recommend exploring the ancient synagogue and streets before visiting the peaceful chapels overlooking the Sea of Galilee.",
+  intro: "At Magdala, the remains of a first-century Jewish town stand beside Duc In Altum, a modern Christian prayer center. I recommend exploring the ancient synagogue and streets before visiting the peaceful chapels overlooking the Sea of Galilee.",
   hero: {
     src: "/images/attractions/magdala-duc-in-altum-exterior.webp",
     alt: "Rounded stone facade of Duc In Altum at Magdala near the Sea of Galilee",

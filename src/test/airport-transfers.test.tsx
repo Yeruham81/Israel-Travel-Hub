@@ -19,7 +19,7 @@ async function renderAirport() {
 }
 function chooseDestination(id: string) {
   const card = screen.getAllByTestId("airport-destination-card").find((item) => item.dataset["destination"] === id)!;
-  fireEvent.click(within(card).getByRole("link", { name: /^(Get a quote|Request a quote|Get a quote Request a quote)$/ }));
+  fireEvent.click(within(card).getByRole("link", { name: "Get a quote" }));
 }
 function fillRequest() {
   fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie Smith" } });
@@ -74,16 +74,15 @@ describe("private Ben Gurion transfers", () => {
         expect(within(card).getByRole("img")).toHaveAttribute("src", airportHubPhotoSrc[rate.id]);
         expect(card).toHaveClass("flex-row", "sm:flex-col");
         expect(within(card).getByRole("img")).toHaveClass("w-16", "min-[380px]:w-[4.5rem]", "min-[440px]:w-[4.75rem]", "sm:w-40", "md:w-36", "lg:w-40");
-        expect(within(card).getByRole("link", { name: /^(Get a quote|Request a quote|Get a quote Request a quote)$/ })).toHaveClass("sm:self-end");
+        expect(within(card).getByRole("link", { name: "Get a quote" })).toHaveClass("sm:self-end");
         expect(within(card).getByRole("heading", { level: 3 })).toHaveClass("text-base", "sm:text-xl");
         expect(within(card).getByText(`From ₪${rate.price.amount.toLocaleString("en-US")}`)).toHaveClass("text-[13px]", "font-bold");
         const routeLink = within(card).getByRole("link", { name: /View transfer details/ });
         expect(router.matchRoutes(new URL(routeLink.getAttribute("href")!, "https://example.test").pathname).at(-1)?.routeId).toContain("airport-transfers");
       } else expect(within(card).getByRole("img")).toHaveAttribute("src", airportDestinationCards.find(item => item.id === rate.id)!.photo.hubSrc);
-      const quoteButton = within(card).getByRole("link", { name: /^(Get a quote|Request a quote|Get a quote Request a quote)$/ });
+      const quoteButton = within(card).getByRole("link", { name: "Get a quote" });
       expect(quoteButton).toHaveAttribute("href", "#request-quote");
-      expect(within(quoteButton).getByText("Get a quote")).toHaveClass("sm:hidden");
-      expect(within(quoteButton).getByText("Request a quote")).toHaveClass("hidden", "sm:inline");
+      expect(quoteButton).toHaveTextContent(/^Get a quote$/);
       expect(quoteButton).toHaveClass("bg-primary", "text-primary-foreground", "whitespace-nowrap", "shadow-sm", "min-h-11", "px-2", "sm:px-3");
       expect(quoteButton).toHaveClass("min-h-11");
       expect(quoteButton).not.toHaveClass("bg-primary/10");
@@ -133,7 +132,7 @@ describe("private Ben Gurion transfers", () => {
     expect(updateLine.querySelector("time")).toHaveAttribute("datetime", "2026-11-23");
     expect(rateTerms.querySelector("time")).toBeNull();
     expect(updateLine.compareDocumentPosition(popular)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(within(hubHeader).queryByRole("link", { name: "Request a personal quote" })).not.toBeInTheDocument();
+    expect(within(hubHeader).queryByRole("link", { name: "Get a quote" })).not.toBeInTheDocument();
   });
 
   it("uses the lean content order and preserves booking links, benefits, FAQ and guide navigation", async () => {

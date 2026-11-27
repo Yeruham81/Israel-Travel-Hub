@@ -133,7 +133,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
           <li><strong>Alternative:</strong> For limited mobility, visit the lookout by vehicle and arrange a separate drop-off near Gethsemane. Check step-free access to each church directly.</li>
           <li><strong>Tomb of Mary:</strong> Reaching the underground sanctuary involves a long stairway.</li>
           <li><strong>Respectful visits:</strong> Wear modest clothing inside churches, observe service times and follow photography instructions.</li>
-          <li><strong>Jewish cemetery:</strong> This is an active burial ground, not a walking shortcut. Use the <a href={official.graveLocator} target="_blank" rel="noopener noreferrer" className={inlineLink}>City of David cemetery mapping system</a> to locate particular graves and approaches. Guided cemetery tours for organised groups require booking at least eight working days ahead; the <a href={official.cemetery} target="_blank" rel="noopener noreferrer" className={inlineLink}>information centre</a> is temporarily closed. Respect funerals and mourners.</li>
+          <li><strong>Jewish cemetery:</strong> This is an active burial ground, not a walking shortcut. Use the <a href={official.graveLocator} target="_blank" rel="noopener noreferrer" className={inlineLink}>City of David cemetery mapping system</a> to locate particular graves and approaches. Guided cemetery tours for organised groups require booking at least eight working days ahead; the <a href={official.cemetery} target="_blank" rel="noopener noreferrer" className={inlineLink}>information center</a> is temporarily closed. Respect funerals and mourners.</li>
         </ul>
       </div>
     </div>
@@ -210,7 +210,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   historyContent: (
     <div className="mt-4 space-y-3">
       {mountOlivesEditorialUpdate.history.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-      <p>Jerusalem’s eastern landscape also has a long Muslim and Arab history. The hillside neighbourhood of At-Tur and the surrounding religious landmarks are part of a living community. I recommend visiting with respect for local residents, worshippers and the different traditions associated with the area.</p>
+      <p>Jerusalem’s eastern landscape also has a long Muslim and Arab history. The hillside neighborhood of At-Tur and the surrounding religious landmarks are part of a living community. I recommend visiting with respect for local residents, worshippers and the different traditions associated with the area.</p>
       <p>For a deeper look at the hill’s history, see the <a href={official.cemeteryGraves} target="_blank" rel="noopener noreferrer" className={inlineLink}>Mount of Olives cemetery heritage project</a> and my <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Jerusalem churches guide</Link>.</p>
     </div>
   ),

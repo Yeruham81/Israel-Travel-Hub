@@ -101,7 +101,6 @@ function TourSection({group}:{group:typeof baptismTourGroups[number]}) {
     </div>;
    })}
   </div>
-  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Check current prices, availability, the exact river stop, pickup and cancellation terms with the tour provider. Arrange any baptism ceremony, clergy or Qasr el-Yahud visitor reservation separately.</p>
  </section>;
 }
 export function JordanRiverBaptismGuidePage() {
@@ -195,6 +194,7 @@ export function JordanRiverBaptismGuidePage() {
    <p className="mt-4 text-sm leading-relaxed">For private transport, <a href="#contact" className={linkClass}>tell me your chosen site, date, departure point and ceremony time</a>. I can discuss a driver, waiting time and practical stops. Guiding and religious services should be arranged separately.</p>
   </section>
   {baptismTourGroups.map(group=><TourSection key={group.id} group={group}/>)}
+  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Check current prices, availability, the exact river stop, pickup and cancellation terms with the tour provider. Arrange any baptism ceremony, clergy or Qasr el-Yahud visitor reservation separately.</p>
   <section id="practical-tips" className="mt-12 scroll-mt-24" aria-labelledby="practical-tips-heading">
    <Heading id="practical-tips" intro="A little preparation can make a religious visit more meaningful and comfortable.">My practical tips</Heading>
    <div className="grid gap-3 sm:grid-cols-2">{[

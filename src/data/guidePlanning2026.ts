@@ -143,10 +143,10 @@ export const planningGuides = {
       },
       {
         "id": "markets",
-        "title": "Where to explore: markets and neighbourhoods",
+        "title": "Where to explore: markets and neighborhoods",
         "paragraphs": [
           "Mahane Yehuda is a useful Jerusalem area for shopping and tasting, with food businesses and evening venues around the market. Carmel Market and the surrounding Kerem HaTeimanim streets offer a different Tel Aviv setting. A guided tasting can add context; ask how much food, walking and drink is actually included.",
-          "Plan a food outing with the rest of the neighbourhood rather than making repeated cross-city journeys. Do not assume a market, all its stalls and nearby restaurants follow the same opening pattern. On Fridays, holidays and late arrivals, identify a specific place for your next meal."
+          "Plan a food outing with the rest of the neighborhood rather than making repeated cross-city journeys. Do not assume a market, all its stalls and nearby restaurants follow the same opening pattern. On Fridays, holidays and late arrivals, identify a specific place for your next meal."
         ],
         "links": [
           {
@@ -173,7 +173,7 @@ export const planningGuides = {
       }
     ],
     "checklist": [
-      "Choose a neighbourhood and a few dishes",
+      "Choose a neighborhood and a few dishes",
       "Ask about fillings, sauces and allergens",
       "Confirm portion size and included extras",
       "Check the business’s own holiday and weekend hours",
@@ -186,7 +186,7 @@ export const planningGuides = {
       },
       {
         "q": "Do all restaurants close on Shabbat?",
-        "a": "No. Opening patterns vary by venue and neighbourhood. Check the actual restaurant or market stall you want to visit."
+        "a": "No. Opening patterns vary by venue and neighborhood. Check the actual restaurant or market stall you want to visit."
       },
       {
         "q": "Are these dishes unique to Israel?",
@@ -205,7 +205,7 @@ export const planningGuides = {
         "to": "/travel-blog/beaches-in-tel-aviv/"
       },
       {
-        "label": "Choose a hotel neighbourhood",
+        "label": "Choose a hotel neighborhood",
         "to": "/accommodation/"
       }
     ],

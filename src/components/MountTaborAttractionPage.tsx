@@ -178,7 +178,7 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
   faqs: [
     { q: "Can I drive to the summit of Mount Tabor?", a: "Private cars may drive up when permitted. Large coaches stop below the summit; passengers can continue by local taxi." },
     { q: "What are the Church of the Transfiguration's opening hours?", a: "Monday–Friday 08:00–17:00; Saturday–Sunday 08:00–12:00 and 14:00–16:30, according to the Franciscan sanctuary. Confirm changes for services and holidays." },
-    { q: "Is Mount Tabor free to visit?", a: "The Israel Nature and Parks Authority lists free entry to Mount Tabor. Local taxi transport to the summit is charged separately." },
+    { q: "Is Mount Tabor free to visit?", a: "Entry to Mount Tabor is free. Local taxi transport to the summit is charged separately." },
     { q: "Can I visit the Greek Orthodox monastery?", a: "The monastery and its church are not normally open to casual sightseeing. Confirm any special visit directly with the monastery." },
     { q: "How long should I spend on Mount Tabor?", a: "Allow about 60–90 minutes for the basilica and terraces, plus the journey up and down. Add 1–2 hours for the 2 km summit walking loop." },
     { q: "Is Mount Tabor the same as the Mount of Beatitudes?", a: "No. Mount Tabor rises over the Jezreel Valley in Lower Galilee; the Mount of Beatitudes overlooks the Sea of Galilee." },

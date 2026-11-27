@@ -92,7 +92,7 @@ const hotelNotes: Record<string, HotelNote> = {
   "haifa-port-inn": {
     kind: "Independent guesthouse",
     summary: "Smaller accommodation on Derech Yafo for exploring downtown and the lower city.",
-    bestFor: "Independent travellers looking for simple accommodation in downtown Haifa",
+    bestFor: "Independent travelers looking for simple accommodation in downtown Haifa",
     consider: "Check room facilities, bathroom type and reception hours if you're arriving late.",
     beach: "Downtown; travel to a swimming beach",
   },

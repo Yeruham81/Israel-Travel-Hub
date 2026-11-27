@@ -14,7 +14,7 @@ export type MuseumEntry = {
 };
 
 export const museumAreas: { id: MuseumArea; name: string; intro: string }[] = [
-  { id: "central", name: "City centre & Bialik Square", intro: "Art and small heritage buildings are spread across the centre. The museums around Bialik Square are within easy walking distance of each other. Visit the Tel Aviv Museum of Art separately." },
+  { id: "central", name: "City center & Bialik Square", intro: "Art and small heritage buildings are spread across the center. The museums around Bialik Square are within easy walking distance of each other. Visit the Tel Aviv Museum of Art separately." },
   { id: "north", name: "Ramat Aviv & Tel Aviv University", intro: "The university and northern museums offer some of the city's largest collections. Allow plenty of time to explore each museum." },
   { id: "south", name: "Neve Tzedek & the southern seafront", intro: "A smaller artist museum and a separate military-history museum can complement a walk towards the waterfront, with different entrances and booking arrangements." },
   { id: "jaffa", name: "Old Jaffa", intro: "Historic stone streets, an artist's former home and guided tours. Allow time for steep streets and the walk between venues." },
@@ -65,7 +65,7 @@ export const museums: MuseumEntry[] = [
     openingDays: "Daily; opening hours vary for events",
     priceNis: 0,
     admission: "General admission free; special programmes may cost extra", booking: "Check programme and guided-tour dates",
-    intro: "Set inside a restored International Style building, this cultural centre introduces the architecture and urban history that shaped Tel Aviv's UNESCO-listed White City.",
+    intro: "Set inside a restored International Style building, this cultural center introduces the architecture and urban history that shaped Tel Aviv's UNESCO-listed White City.",
     highlights: ["Modernist residential architecture", "Multidisciplinary exhibitions", "Architecture walks and talks"],
     tip: "An excellent addition to a Bialik Square afternoon; book a specialist English tour separately if one is available.",
     url: "https://www.lieblinghaus.org/whoarewe-en", featured: true,
@@ -85,13 +85,13 @@ export const museums: MuseumEntry[] = [
   },
   {
     id: "bauhaus", mapLocation: { lat: 32.07656, lon: 34.77437 }, name: "Bauhaus Center Tel Aviv", area: "central", neighbourhood: "Dizengoff Square", address: "77 Dizengoff Street, Tel Aviv",
-    theme: "Architecture centre", bestFor: "Architecture tours & design", duration: "30–60 minutes, longer with a tour",
+    theme: "Architecture center", bestFor: "Architecture tours & design", duration: "30–60 minutes, longer with a tour",
     openingDays: "Sun–Fri (closed Sat); check holiday schedule",
     priceNis: 0,
     admission: "Gallery entry free; self-guided audio tour ₪90; guided tours priced separately", booking: "Check dates for guided White City tours or choose the self-guided audio walk",
     intro: "A gallery, bookshop and starting point for guided and self-guided White City architecture walks.",
     highlights: ["Design exhibitions", "Bauhaus and International Style context", "Guided walks and self-guided audio tours"],
-    tip: "Check with the centre in advance that your chosen guided walk or self-guided activity is running on your visit date.",
+    tip: "Check with the center in advance that your chosen guided walk or self-guided activity is running on your visit date.",
     url: "https://bauhaus-center.com/", ticketUrl: "https://bauhaus-center.com/tel-aviv-white-city-tours/",
   },
   {
@@ -165,7 +165,7 @@ export const museums: MuseumEntry[] = [
     priceNis: 40,
     admission: "Adult ₪40; under 18 free", booking: "Check current exhibitions; online tickets available",
     highlightsForFamilies: "Children under 18 enter free.",
-    intro: "A small museum devoted to the painter, illustrator and author Nahum Gutman. Its Neve Tzedek setting makes it particularly enjoyable as part of a neighbourhood walk.",
+    intro: "A small museum devoted to the painter, illustrator and author Nahum Gutman. Its Neve Tzedek setting makes it particularly enjoyable as part of a neighborhood walk.",
     highlights: ["Works by Nahum Gutman", "Israeli art and illustration", "Historic Neve Tzedek setting"],
     tip: "Spend time exploring Neve Tzedek afterwards; allow extra walking time if you continue to Jaffa.",
     url: "https://www.gutmanmuseum.co.il/en/useful-info/",

@@ -112,7 +112,7 @@ export function JerusalemCityHubPage(){
       </div>
       <div className="mt-5 rounded-xl border border-primary/20 bg-secondary/40 p-4 sm:p-5" id="quick-answer" aria-label="Quick answer">
         <h2 className="text-lg font-bold">Where I'd start</h2>
-        <p className="mt-2 leading-relaxed">For a first visit, I'd spend one day getting to know the <Link className={linkClass} to="/attractions/old-city-jerusalem/">Old City</Link>, including the <Link className={linkClass} to="/attractions/via-dolorosa/">Via Dolorosa</Link> if Christian pilgrimage interests you; use a second day for the <Link className={linkClass} to="/attractions/mount-of-olives/">Mount of Olives</Link> or a <Link className={linkClass} to="/travel-blog/museums-in-jerusalem/">museum</Link>, then leave time for <Link className={linkClass} to="/travel-blog/shopping-in-jerusalem/">Mahane Yehuda</Link> and the neighbourhoods. Keep a day trip outside Jerusalem separate from a full city day.</p>
+        <p className="mt-2 leading-relaxed">For a first visit, I'd spend one day getting to know the <Link className={linkClass} to="/attractions/old-city-jerusalem/">Old City</Link>, including the <Link className={linkClass} to="/attractions/via-dolorosa/">Via Dolorosa</Link> if Christian pilgrimage interests you; use a second day for the <Link className={linkClass} to="/attractions/mount-of-olives/">Mount of Olives</Link> or a <Link className={linkClass} to="/travel-blog/museums-in-jerusalem/">museum</Link>, then leave time for <Link className={linkClass} to="/travel-blog/shopping-in-jerusalem/">Mahane Yehuda</Link> and the neighborhoods. Keep a day trip outside Jerusalem separate from a full city day.</p>
       </div>
     </section>
     <OnThisPage sections={sections}/>
@@ -130,13 +130,13 @@ export function JerusalemCityHubPage(){
           <div className="mt-auto flex flex-wrap gap-x-4 gap-y-2 pt-4">{plan.links.map(link=>link.to==="#day-trips"?<a key={link.title} href="#day-trips" className="text-xs font-semibold text-primary underline underline-offset-4">{link.title}</a>:<Link key={link.title} to={link.to} className="text-xs font-semibold text-primary underline underline-offset-4">{link.title}</Link>)}</div>
         </article>)}
       </div>
-      <Tip>On a first day, I'd choose the Old City gate that makes sense for your priorities and mobility. A route with fewer stops can be more rewarding than a list of famous places you only see from outside.</Tip>
+      <Tip>Choose your starting gate according to the places you want to visit and your mobility needs. A route with fewer stops can be more rewarding than a list of famous places you only see from outside.</Tip>
     </section>
 
     <TourCards group={jerusalemTourGroups[0]}/>
 
     <section id="where-to-stay" aria-labelledby="where-to-stay-h" className="mt-12 scroll-mt-24">
-      <Heading id="where-to-stay" title="Where should you stay in Jerusalem?" intro="Choose a neighbourhood based on the places you want to visit, transport options and how far you're comfortable walking."/>
+      <Heading id="where-to-stay" title="Where should you stay in Jerusalem?" intro="Choose a neighborhood based on the places you want to visit, transport options and how far you're comfortable walking."/>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="jerusalem-stay-areas">
         {jerusalemStayAreas.map(area=><article key={area.to} className="editorial-card-link group overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20">
           <Link to={area.to} className="flex h-full flex-col p-4 focus-visible:outline-2 focus-visible:outline-primary" aria-label={"Explore hotels in "+area.name}>
@@ -152,7 +152,7 @@ export function JerusalemCityHubPage(){
         <Link to="/travel-blog/where-to-stay-in-jerusalem/" className="editorial-card-link group flex flex-col rounded-xl border border-primary/20 bg-secondary/40 p-4 hover:border-primary/60">
           <span className="text-xs font-semibold uppercase tracking-wide text-primary">Choose your area</span>
           <strong className="mt-1 text-base">Where to Stay in Jerusalem</strong>
-          <span className="mt-2 text-sm leading-relaxed text-muted-foreground">My detailed comparison of the city's six most useful neighbourhoods for visitors.</span>
+          <span className="mt-2 text-sm leading-relaxed text-muted-foreground">My detailed comparison of the city's six most useful neighborhoods for visitors.</span>
           
         </Link>
         <Link to="/accommodation/jerusalem/" className="editorial-card-link group flex flex-col rounded-xl border border-primary/20 bg-secondary/40 p-4 hover:border-primary/60">
@@ -201,7 +201,7 @@ export function JerusalemCityHubPage(){
     </section>
 
     <FaqList faqs={[...jerusalemHubFaqs]}/>
-    <CardGrid id="explore-more" title="Plan the next part of your Israel trip" intro="Jerusalem may be the centre of your visit or one stop on a wider route. These guides help with time, holidays and practical preparation." items={jerusalemMoreGuides}/>
+    <CardGrid id="explore-more" title="Plan the next part of your Israel trip" intro="Jerusalem may be the center of your visit or one stop on a wider route. These guides help with time, holidays and practical preparation." items={jerusalemMoreGuides}/>
 
     <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
       heading:"Need a private driver for your Jerusalem trip?",

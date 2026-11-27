@@ -120,7 +120,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       rows: [
         ["Gett", "Request a licensed taxi through the app; Gett also runs the official airport taxi ordering system", "Regulated metered fare or displayed offer, depending on the booking", "Everyday app bookings and Ben Gurion Airport taxis"],
         ["Yango", "Book a licensed taxi through the app in areas served by Yango.", "Check the displayed estimate or fixed offer before confirming", "App-based rides in supported areas"],
-        ["Licensed taxi or hotel dispatcher", "Use a licensed taxi stand, hail a taxi or ask a hotel or local dispatch office", "Regulated taxi meter and permitted charges; confirm payment method", "Travellers who prefer booking without an app"],
+        ["Licensed taxi or hotel dispatcher", "Use a licensed taxi stand, hail a taxi or ask a hotel or local dispatch office", "Regulated taxi meter and permitted charges; confirm payment method", "Travelers who prefer booking without an app"],
         ["Pre-booked private transfer", "Book a private vehicle and agree on the pickup details in advance.", "Confirmed quote with agreed vehicle, waiting and cancellation terms", "Airport arrivals, longer routes, groups and extra luggage"],
       ],
     },
@@ -260,9 +260,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       headers: ["Ride type", "How it works", "When it is useful"],
       rows: [
         ["Local sherut (monit sherut)", "Shared minibus on a set route; each passenger pays for a seat", "Short trips along a local route when that service is running"],
-        ["Pre-booked shared shuttle", "Book an individual seat on a scheduled shared shuttle", "Travellers looking for a pre-booked shared ride"],
+        ["Pre-booked shared shuttle", "Book an individual seat on a scheduled shared shuttle", "Travelers looking for a pre-booked shared ride"],
         ["Licensed airport taxi", "Exclusive taxi for your party, ordered via Gett or an airport kiosk", "Direct airport travel without sharing the vehicle"],
-        ["Private transfer", "Dedicated vehicle arranged in advance for your group", "Airport arrivals, families and travellers with extra luggage"],
+        ["Private transfer", "Dedicated vehicle arranged in advance for your group", "Airport arrivals, families and travelers with extra luggage"],
       ],
     },
     sections: [
@@ -556,7 +556,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "before-you-fly",
         title: "Entry documents and ETA-IL: what to prepare before flying",
         paragraphs: [
-          "Visitors travelling on visa-exempt passports generally need an approved ETA-IL before departure. The official application fee is ₪25 (November 2026); apply through the Population and Immigration Authority's website. Travellers who require a visa should arrange the appropriate visa before flying, while Israeli citizens and other exempt categories follow different rules.",
+          "Visitors travelling on visa-exempt passports generally need an approved ETA-IL before departure. The official application fee is ₪25 (November 2026); apply through the Population and Immigration Authority's website. Travelers who require a visa should arrange the appropriate visa before flying, while Israeli citizens and other exempt categories follow different rules.",
           "Keep your passport, any required ETA-IL or visa, your first accommodation address and onward or return travel details accessible offline. ETA-IL is a travel authorisation; the border officer makes the final entry decision.",
           "Check your arrival terminal and flight status with your airline or the airport before departure. For a private airport pickup, provide your flight number and arrival date in Israel, especially if your flight lands after midnight.",
         ],
@@ -616,7 +616,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "customs",
         title: "Red and green customs channels",
         paragraphs: [
-          "After baggage claim, follow the customs signs. The green channel is for travellers with nothing requiring declaration; use the red channel for goods or amounts that must be declared under Israel's customs rules.",
+          "After baggage claim, follow the customs signs. The green channel is for travelers with nothing requiring declaration; use the red channel for goods or amounts that must be declared under Israel's customs rules.",
           "Check restrictions and declaration limits if you are carrying cash, valuable goods or regulated items. The Israel Tax Authority recommends using the red channel and asking a customs officer when you are unsure.",
           "Keep receipts and supporting documents ready for anything you need to declare. Allow time for any customs checks when arranging your pickup.",
         ],
@@ -643,7 +643,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "Set up roaming or an eSIM before departure when possible. A working phone helps you receive your taxi ride code, reach a driver and view current train times. Save your accommodation address, pickup instructions and travel documents offline. My Israel eSIM guide explains the available data options.",
           "Terminal 3 provides ATMs and other passenger services near the arrivals area. The local currency is the Israeli shekel (ILS); check withdrawal and exchange fees and keep a backup payment method.",
-          "Ask your airline in advance for any mobility or baggage assistance you need. The airport also lists paid porter services for travellers who want additional help with luggage.",
+          "Ask your airline in advance for any mobility or baggage assistance you need. The airport also lists paid porter services for travelers who want additional help with luggage.",
         ],
         inlineLinks: [{ text: "Israel eSIM guide", to: travelGuidePaths.esim }],
         sourceIds: ["guide-iaa-arrival-services", "guide-iaa-accessibility"],
@@ -771,7 +771,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     title: "Getting Around Israel: Trains, Buses, Taxis & Travel Tips",
     description: "How to travel around Israel by train, bus, light rail, sherut, taxi or car. Practical Rav-Kav fares, Jerusalem train vouchers, Shabbat travel and city connections.",
     intro: "Planning how to get around Israel? This guide compares trains, buses, light rail, taxis and private journeys, with practical advice on fares, transfers and Shabbat travel.",
-    answer: "Trains and intercity buses are convenient for travelling between Tel Aviv, Jerusalem and Haifa. Choose a station or stop with easy connections to your hotel. Explore city centres on foot, by local bus or light rail. For more remote attractions, consider renting a car, joining a tour or booking a private driver. Pay for most public transport using a loaded Rav-Kav or an approved ticketing app. Check service hours for Shabbat and public holidays.",
+    answer: "Trains and intercity buses are convenient for travelling between Tel Aviv, Jerusalem and Haifa. Choose a station or stop with easy connections to your hotel. Explore city centers on foot, by local bus or light rail. For more remote attractions, consider renting a car, joining a tour or booking a private driver. Pay for most public transport using a loaded Rav-Kav or an approved ticketing app. Check service hours for Shabbat and public holidays.",
     topics: ["transportation", "destinations", "itineraries", "tips"],
     updatedAt: "2026-11-24",
     photo: {
@@ -820,7 +820,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-buses", title: "City and intercity buses",
             paragraphs: [
-              "Buses reach Tiberias, Safed, Nazareth, Eilat, the Dead Sea and neighbourhoods away from railway stations. For long-distance journeys, check whether the operator requires an advance seat reservation, especially on selected routes to Eilat.",
+              "Buses reach Tiberias, Safed, Nazareth, Eilat, the Dead Sea and neighborhoods away from railway stations. For long-distance journeys, check whether the operator requires an advance seat reservation, especially on selected routes to Eilat.",
               "The national public transport planner shows stops, connections and departure times. Pay attention to the last return service, particularly on Fridays, before visiting smaller towns or rural attractions.",
             ],
             highlightedLinks: [{ label: "National public transport journey planner", href: "https://bus.gov.il/en/home", context: "Enter your travel date, starting point and destination." }],
@@ -829,7 +829,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-light-rail", title: "Urban rail, Metronit and Haifa cable cars",
             paragraphs: [
-              "In Jerusalem, the Red Line serves the city centre and approaches to the Old City. The first Green Line L3 service opened in August 2026 and was extended in November from the Malha area via the centre to Damascus Gate. Use the latest route map to see which stations are open.",
+              "In Jerusalem, the Red Line serves the city center and approaches to the Old City. The first Green Line L3 service opened in August 2026 and was extended in November from the Malha area via the center to Damascus Gate. Use the latest route map to see which stations are open.",
               "Greater Tel Aviv's Red Line links parts of Tel Aviv–Jaffa, Ramat Gan, Bnei Brak, Petah Tikva and Bat Yam. In Haifa, the Metronit buses, Carmelit underground railway and Rakbalit cable car connect different parts of the city. The tourist cable car near Bat Galim is a different service.",
               "Use the correct ticket or payment app for each transport service. For light rail, validate before boarding.",
             ],
@@ -920,13 +920,13 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             paragraphs: [
               "Walk, cycle on suitable routes, or use buses and the Red Line. Tel Aviv's railway stations are inland, with buses and taxis connecting them to beachfront hotels. My getting around Tel Aviv guide covers stations, local tickets and weekend buses.",
             ],
-            photo: { src: telAvivDizengoff, alt: "Dizengoff neighbourhood streets in Tel Aviv" },
+            photo: { src: telAvivDizengoff, alt: "Dizengoff neighborhood streets in Tel Aviv" },
             inlineLinks: [{ text: "getting around Tel Aviv guide", to: travelGuidePaths.telAviv }],
           },
           {
             id: "israel-jerusalem", title: "Jerusalem and the Old City",
             paragraphs: [
-              "Use the operating light-rail lines and buses for the city centre, then walk or take a taxi where needed. Hills, steps and restricted Old City streets affect travel with luggage. See my Jerusalem travel guide and airport-to-Jerusalem guide.",
+              "Use the operating light-rail lines and buses for the city center, then walk or take a taxi where needed. Hills, steps and restricted Old City streets affect travel with luggage. See my Jerusalem travel guide and airport-to-Jerusalem guide.",
             ],
             inlineLinks: [
               { text: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },
@@ -1086,7 +1086,7 @@ telAviv: {
     title: "Getting Around Tel Aviv: Buses, Red Line, Taxis & Shabbat Travel",
     description: "Practical Tel Aviv transport guide: Red Line light rail, local buses and Rav-Kav fares, station choices, taxis, free Shabbat buses, bikes and accessibility.",
     intro: "Explore Tel Aviv and Old Jaffa on foot, by bus, light rail or taxi. Compare routes, payment options and weekend transport.",
-    answer: "For nearby beaches, markets and central neighbourhoods, walk. Use city buses for longer journeys, the Red Line where its stations suit your route and Israel Railways for the airport and intercity trips. During Shabbat, selected free Na'im Busofash routes and licensed taxis offer alternatives to regular buses and trains.",
+    answer: "For nearby beaches, markets and central neighborhoods, walk. Use city buses for longer journeys, the Red Line where its stations suit your route and Israel Railways for the airport and intercity trips. During Shabbat, selected free Na'im Busofash routes and licensed taxis offer alternatives to regular buses and trains.",
     updatedAt: "2026-11-24",
     topics: ["transportation", "destinations", "tips"],
     photo: {src: telAvivLightRail, alt: "Tel Aviv light rail tram on the Red Line"},
@@ -1099,8 +1099,8 @@ telAviv: {
       caption: "Getting around Tel Aviv at a glance",
       headers: ["Option", "Best for", "Fare basis", "Shabbat availability", "Useful detail"],
       rows: [
-        ["Walking", "Beaches, markets and adjacent neighbourhoods", "Free", "Available", "Allow for heat and walking distances"],
-        ["City buses", "Cross-town and neighbourhood connections", "₪8 for up to 15 km", "Regular routes generally pause", "Confirm stop, direction and validation"],
+        ["Walking", "Beaches, markets and adjacent neighborhoods", "Free", "Available", "Allow for heat and walking distances"],
+        ["City buses", "Cross-town and neighborhood connections", "₪8 for up to 15 km", "Regular routes generally pause", "Confirm stop, direction and validation"],
         ["Red Line light rail", "Journeys along the operating corridor", "Standard public fare", "Generally suspended", "Check R1, R2 or R3 destination"],
         ["Israel Railways", "Airport and intercity travel", "Distance-based", "Generally suspended", "Stations are inland from the beach"],
         ["Licensed taxis", "Direct journeys, luggage and late arrivals", "Metered fare", "Usually available", "Check pickup and extra charges"],
@@ -1114,7 +1114,7 @@ telAviv: {
       {
         id: "choose", title: "Choosing transport and walking routes",
         paragraphs: [
-          "For central sightseeing, walk between nearby attractions and use buses or light rail for longer connections. Choose a hotel near the areas you will explore most often; my where to stay in Tel Aviv guide explains convenient neighbourhoods.",
+          "For central sightseeing, walk between nearby attractions and use buses or light rail for longer connections. Choose a hotel near the areas you will explore most often; my where to stay in Tel Aviv guide explains convenient neighborhoods.",
           "Explore Old Jaffa and its port on foot, walk between Neve Tzedek and Rothschild Boulevard, or spend time around Carmel Market. Tel Aviv Port, the northern museums and Old Jaffa are farther apart. See my Jaffa attraction guide and Tel Aviv beaches guide when planning individual stops.",
           "In summer, choose shaded walking routes and check accessibility if needed. Consider a taxi if you're carrying heavy luggage or staying far from the station.",
         ],
@@ -1140,7 +1140,7 @@ telAviv: {
       {
         id: "paying", title: "City buses, fares and payment",
         paragraphs: [
-          "City buses cover more Tel Aviv neighbourhoods than the Red Line, connecting beaches, museums, markets and hotels. Check the bus number, direction, walking distance to your destination and last Friday departure.",
+          "City buses cover more Tel Aviv neighborhoods than the Red Line, connecting beaches, museums, markets and hotels. Check the bus number, direction, walking distance to your destination and last Friday departure.",
           "A standard journey of up to 15 km costs ₪8. When you validate your journey using a Rav-Kav or approved payment app, eligible transfers between buses and the light rail are included within 90 minutes. Longer trips and daily passes follow separate fare rules.",
           "Load a Rav-Kav card or set up an approved payment app before boarding, and validate each ride. Drivers generally do not accept cash. Use the national public transport planner for exact stops and departures.",
         ],
@@ -1222,7 +1222,7 @@ telAviv: {
           caption: "Tel Aviv railway stations, south to north",
           headers: ["Station", "Nearby areas", "Useful onward connection"],
           rows: [
-            ["Tel Aviv HaHagana", "Southern Ayalon corridor and southern neighbourhoods", "Buses or taxis towards south Tel Aviv"],
+            ["Tel Aviv HaHagana", "Southern Ayalon corridor and southern neighborhoods", "Buses or taxis towards south Tel Aviv"],
             ["Tel Aviv HaShalom", "Azrieli and Sarona business and shopping districts", "Walking distance or local bus connections"],
             ["Tel Aviv Savidor Center", "Central-northern Ayalon corridor", "Arlozorov Red Line station and major bus hub"],
             ["Tel Aviv University", "University, Expo and north Tel Aviv", "Local bus or taxi to northern Tel Aviv"],
@@ -1330,7 +1330,7 @@ telAviv: {
       { label: "Tel Aviv Attractions", to: "/travel-blog/attractions-in-tel-aviv/", note: "Markets, museums and city highlights." },
       { label: "Explore Old Jaffa", to: "/attractions/jaffa/", note: "Old streets, port and walking stops." },
       { label: "Tel Aviv Beaches", to: travelGuidePaths.telAvivBeaches, note: "Beachfront areas and onward connections." },
-      { label: "Where to Stay", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Choose the right neighbourhood for your plans." },
+      { label: "Where to Stay", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Choose the right neighborhood for your plans." },
     ],
   },
   ...taxiGuideCluster,
@@ -1361,8 +1361,8 @@ const guideDirectoryEntries: GuideDirectoryEntry[] = [
   { id: "airport-journey-haifa", title: "How to get from Ben Gurion Airport to Haifa", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/ben-gurion-airport-to-haifa/", topics: ["transportation", "tips"], photo: airportJourneyGuides.haifa.photo, updatedAt: airportJourneyGuides.haifa.updatedAt ?? "" },
   { id: "airport-journey-ein-bokek", title: "How to get from Ben Gurion Airport to Ein Bokek", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/", topics: ["transportation", "tips"], photo: airportJourneyGuides["ein-bokek"].photo, updatedAt: airportJourneyGuides["ein-bokek"].updatedAt ?? "" },
   ...Object.values(travelGuides).filter((guide) => !travelGuidePaths[guide.id].startsWith("/attractions/")).map((guide) => ({ id: guide.id, title: guide.title, description: guide.description, to: travelGuidePaths[guide.id], topics: guide.topics, photo: guide.photo, updatedAt: guide.updatedAt ?? "" })),
-  { id: "stay-jerusalem", title: "Where to stay in Jerusalem", description: "Choose the neighbourhood and hotel style that fit your visit.", to: "/travel-blog/where-to-stay-in-jerusalem/", topics: ["destinations", "accommodation"], photo: stayEditorialHeroPhotos.jerusalem, updatedAt: cityStayGuides.jerusalem.reviewedAt ?? "" },
-  { id: "stay-telaviv", title: "Where to stay in Tel Aviv", description: "Compare beachfront, Jaffa and central neighbourhoods.", to: "/travel-blog/where-to-stay-in-tel-aviv/", topics: ["destinations", "accommodation"], photo: stayEditorialHeroPhotos.telaviv, updatedAt: cityStayGuides.telaviv.reviewedAt ?? "" },
+  { id: "stay-jerusalem", title: "Where to stay in Jerusalem", description: "Choose the neighborhood and hotel style that fit your visit.", to: "/travel-blog/where-to-stay-in-jerusalem/", topics: ["destinations", "accommodation"], photo: stayEditorialHeroPhotos.jerusalem, updatedAt: cityStayGuides.jerusalem.reviewedAt ?? "" },
+  { id: "stay-telaviv", title: "Where to stay in Tel Aviv", description: "Compare beachfront, Jaffa and central neighborhoods.", to: "/travel-blog/where-to-stay-in-tel-aviv/", topics: ["destinations", "accommodation"], photo: stayEditorialHeroPhotos.telaviv, updatedAt: cityStayGuides.telaviv.reviewedAt ?? "" },
   { id: "stay-haifa", title: "Best Hotels in Haifa: Where to Stay", description: "Compare ten hotels across the German Colony, Mount Carmel, Hadar and Haifa beaches.", to: "/travel-blog/best-hotels-in-haifa/", topics: ["destinations", "accommodation"], photo: { src: "/images/travel-blog/featured-haifa-hotels.webp", alt: "Haifa hotels and cityscape" }, updatedAt: "2026-11-25" },
   { id: "stay-tiberias", title: "Tiberias & Sea of Galilee hotels", description: "Lakeside bases, family facilities and practical arrival checks.", to: "/travel-blog/best-hotels-in-tiberias/", topics: ["destinations", "accommodation"], photo: tiberiasStayGuide.photo, updatedAt: "2026-11-19" },
   { id: "stay-deadsea", title: "Dead Sea hotels", description: "Choose Ein Bokek, a spa stay or a family hotel on the Israeli shore.", to: "/travel-blog/best-dead-sea-hotels/", topics: ["destinations", "accommodation"], photo: deadSeaStayGuide.photo, updatedAt: "2026-11-19" },

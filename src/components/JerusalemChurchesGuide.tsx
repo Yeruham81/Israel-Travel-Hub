@@ -155,7 +155,7 @@ export function JerusalemChurchesGuide(){
     <OnThisPage sections={sections}/>
     <section id="choose" aria-labelledby="choose-heading" className="mt-10 scroll-mt-24">
       <Heading id="choose" title="Choose churches by area" intro="Choose from four areas of Jerusalem, depending on which churches you want to visit and how much time you have."/>
-      <div className="grid gap-3 sm:grid-cols-2">{churchAreas.map(a=><a key={a.id} href={"#"+a.id} className="editorial-card-link rounded-xl border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-secondary/20"><span className="mb-3 inline-block h-1.5 w-12 rounded-full" style={{backgroundColor:a.color}} aria-hidden="true"/><h3 className="text-lg font-semibold">{a.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.intro}</p></a>)}</div>
+      <div className="grid gap-3 sm:grid-cols-2">{churchAreas.map(a=><a key={a.id} href={"#"+a.id} className="editorial-card-link rounded-xl border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-secondary/20"><span className="mb-3 inline-block h-1.5 w-12 rounded-full" style={{backgroundColor:a.color}} aria-hidden="true"/><h3 className="text-lg font-semibold">{a.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.cardIntro}</p></a>)}</div>
       <div role="region" aria-label="Compare Jerusalem church visiting areas" tabIndex={0} className="mt-5 overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
         <table className="w-full min-w-[650px] text-left text-sm">
           <caption className="sr-only">Four areas to visit Jerusalem churches compared by main sites, typical time and walking conditions</caption>

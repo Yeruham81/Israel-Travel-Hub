@@ -201,7 +201,7 @@ export const journeyDestinationGuides = {
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
   "description": "Travel from Jerusalem to Bethlehem by bus 231 or 234, licensed private driver, taxi or tour. Learn about Checkpoint 300, travel documents and return options.",
   "intro": "Bethlehem is a short journey from Jerusalem. Here's how to get there by bus, taxi or organised tour, including crossing arrangements and entry requirements.",
-  "answer": "For independent travellers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers can cross on foot when the checkpoint is open and continue by local taxi. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
+  "answer": "For independent travelers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers can cross on foot when the checkpoint is open and continue by local taxi. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
   "topics": [
     "transportation",
     "destinations",
@@ -233,13 +233,13 @@ export const journeyDestinationGuides = {
     "rows": [
       [
         "Bus 231",
-        "Budget travellers heading to central Bethlehem",
+        "Budget travelers heading to central Bethlehem",
         "About 20–30 minutes by bus in normal traffic to Bab al-Zaqaq / Beit Jala Road; continue to Manger Square on foot or by local taxi"
       ],
       [
         "Bus 234",
         "Visitors crossing Checkpoint 300 on foot",
-        "About 15–20 minutes by bus, plus checkpoint crossing time and local transport to Bethlehem for eligible travellers"
+        "About 15–20 minutes by bus, plus checkpoint crossing time and local transport to Bethlehem for eligible travelers"
       ],
       [
         "Authorised private driver",
@@ -248,7 +248,7 @@ export const journeyDestinationGuides = {
       ],
       [
         "Taxi to Checkpoint 300",
-        "Travellers meeting a local driver after the crossing",
+        "Travelers meeting a local driver after the crossing",
         "Separate transport on each side and possible waiting time"
       ],
       [
@@ -377,7 +377,7 @@ export const journeyDestinationGuides = {
       "paragraphs": [
         "Visitors who are permitted to enter Bethlehem can arrange a return trip with a Palestinian taxi driver who has the necessary permits and insurance, including time for sightseeing. Confirm that both the driver and vehicle are permitted to complete the journey.",
         "Before booking, confirm the pickup point, permitted route, insurance, sightseeing stops, waiting time and total price, including the return. Remember that a driver may not be a licensed guide.",
-        "Eligible travellers can take an Israeli taxi towards Checkpoint 300. Continuing into Bethlehem in the same vehicle requires the appropriate driver permits, vehicle permits and insurance. After crossing on foot, you can arrange a local taxi or guide on the Bethlehem side."
+        "Eligible travelers can take an Israeli taxi towards Checkpoint 300. Continuing into Bethlehem in the same vehicle requires the appropriate driver permits, vehicle permits and insurance. After crossing on foot, you can arrange a local taxi or guide on the Bethlehem side."
       ],
       "photo": {
         "src": palestinianTaxiPhoto,
@@ -731,7 +731,7 @@ export const journeyDestinationGuides = {
           "id": "private",
           "title": "By taxi or private driver: direct travel from your hotel",
           "paragraphs": [
-            "A taxi or pre-booked private transfer takes you from your Jerusalem pickup address to the chosen Dead Sea hotel, beach or attraction. This suits travellers with luggage, families and visitors travelling outside normal bus hours.",
+            "A taxi or pre-booked private transfer takes you from your Jerusalem pickup address to the chosen Dead Sea hotel, beach or attraction. This suits travelers with luggage, families and visitors travelling outside normal bus hours.",
             "For a one-way transfer, confirm your drop-off address. For a private day trip, agree on the sightseeing stops, driver waiting time at each attraction and return journey to Jerusalem. Guiding and attraction admission should be arranged separately.",
             "For a private Masada and Dead Sea day trip, send me your pickup location in Jerusalem, travel date, passengers, planned stops and return time using the contact form. I'll reply personally with a quote. You can also browse my Masada and Dead Sea tours or read about my private driver service."
           ],

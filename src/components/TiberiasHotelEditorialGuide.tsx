@@ -75,7 +75,7 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
     kind: "Family activity hotel",
     summary: "A central family hotel with seasonal water slides, children's clubs and entertainment.",
     bestFor: "Families seeking meals and activities close to town",
-    consider: "Confirm whether your booking is full board or all-inclusive; the advertised package can change.",
+    consider: "The hotel currently offers full-board accommodation. Confirm which meals, drinks and snacks are included.",
     beach: "Short trip to a public swimming beach",
   },
   "tib-caesar": {
@@ -94,15 +94,15 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
   },
   "tib-emily": {
     kind: "Small city hotel",
-    summary: "A small hotel near the city centre offering bed-and-breakfast accommodation.",
-    bestFor: "Travellers looking for a convenient place to stay while exploring the Galilee",
+    summary: "A small hotel near the city center offering bed-and-breakfast accommodation.",
+    bestFor: "Travelers looking for a convenient place to stay while exploring the Galilee",
     consider: "Check meal options, parking availability and access to the swimming pool.",
     beach: "Near the waterfront; check swimming access",
   },
   "tib-tiberia": {
     kind: "Small central hotel",
     summary: "A simple hotel offering private rooms in Tiberias' historic center, within easy reach of local attractions.",
-    bestFor: "Independent travellers looking for a private hotel room",
+    bestFor: "Independent travelers looking for a private hotel room",
     consider: "Confirm reception hours, stairs or lift access and room facilities.",
     beach: "Central town base; walk to the lakefront",
   },
@@ -169,7 +169,7 @@ const groupPlanningTips: Record<string, { title: string; points: readonly [strin
 const hotelFacilityNotices: Record<string, string> = {
   "tib-galei-kinneret": "The private beach closed on October 4, 2026. The operator expects it to reopen for the next swimming season.",
   "tib-scots": "The seasonal outdoor pool is closed from November 1, 2026, to April 1, 2027.",
-  "tib-leonardo-club": "The water slides are closed for winter. The operator currently says stays run on a full-board basis rather than all-inclusive.",
+  "tib-leonardo-club": "The water slides are closed for winter. The hotel currently offers full-board stays.",
 };
 
 const browseLabels: Record<string, string> = {

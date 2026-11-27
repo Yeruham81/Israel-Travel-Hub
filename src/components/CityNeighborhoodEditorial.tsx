@@ -25,7 +25,7 @@ import eastJerusalemCard from "@/assets/jerusalem/east-jerusalem-house.webp";
  */
 const sections = [
   ["choose", "Choose your area"], ["compare", "At a glance"],
-  ["neighborhoods", "Neighbourhoods"], ["tips", "Booking tips"],
+  ["neighborhoods", "Neighborhoods"], ["tips", "Booking tips"],
   ["faq", "FAQ"], ["explore", "Related guides"],
   ["trip-planning", "Trip planning"], ["contact", "Contact me"],
 ] as const;
@@ -56,7 +56,7 @@ const decisionNotes = {
     faqs: [
       { q: "Where is the most convenient base for a first visit to Jerusalem?", a: "Downtown Jerusalem around Jaffa Road offers restaurants, convenient light-rail access and easy walks to the Old City. If Jaffa Gate is your priority, compare Mamilla and nearby King David Street." },
       { q: "Should I stay inside Jerusalem's Old City?", a: "It can be a memorable choice if you are visiting religious and historic sites early or late in the day. Consider the nearest Old City gate, stairs and how far you'll need to carry your luggage. A hotel just outside the walls may be more convenient." },
-      { q: "Which Jerusalem areas suit families or longer stays?", a: "The German Colony and Baka offer quieter residential streets and neighbourhood cafés. Downtown is a convenient choice if you plan to explore Jerusalem on foot or by public transport." },
+      { q: "Which Jerusalem areas suit families or longer stays?", a: "The German Colony and Baka offer quieter residential streets and neighborhood cafés. Downtown is a convenient choice if you plan to explore Jerusalem on foot or by public transport." },
       { q: "What changes over Shabbat?", a: "Regular public transport and many businesses in West Jerusalem pause from Friday afternoon to Saturday evening. Shops and restaurants in East Jerusalem and parts of the Old City often follow different opening hours. Confirm your arrival, meals and check-in arrangements." },
     ],
   },
@@ -263,7 +263,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
       </section>
 
       <section id="neighborhoods" aria-labelledby="neighborhoods-h" className="mt-14 scroll-mt-32">
-        <h2 id="neighborhoods-h" className="text-3xl">Neighbourhoods in {cityName}</h2>
+        <h2 id="neighborhoods-h" className="text-3xl">Neighborhoods in {cityName}</h2>
         <div className="mt-5 divide-y border-t">
           {areas.map((area) => {
             const photo = areaPhotos[area.id] ?? area.photo;
@@ -332,7 +332,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
       <HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy(info.title, "accommodation", cityName)} />
       <SourceList
         ids={cityId === "jerusalem" ? [...guide.sourceIds, ...jerusalemStaySourceIds] : guide.sourceIds}
-        intro={cityId === "jerusalem" ? "Transport and access information for planning your stay." : "Neighbourhood and accommodation information for planning your stay."}
+        intro={cityId === "jerusalem" ? "Transport and access information for planning your stay." : "Neighborhood and accommodation information for planning your stay."}
       />
     </article>
   </main>;

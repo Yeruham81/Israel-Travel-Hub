@@ -17,9 +17,9 @@ import { migrationPhotos } from "@/data/guideMigrationPhotos";
 
 const updatedAt = "2026-11-21";
 const related = [
-  { title: "Explore Haifa's attractions", to: "/attractions/haifa/" as const, note: "Gardens, viewpoints, neighbourhoods and the coast" },
+  { title: "Explore Haifa's attractions", to: "/attractions/haifa/" as const, note: "Gardens, viewpoints, neighborhoods and the coast" },
   { title: "Haifa travel guide", to: "/attractions/haifa/" as const, note: "Plan your time in the city, from the Carmel to the port" },
-  { title: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" as const, note: "Compare practical hotel areas and neighbourhoods" },
+  { title: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" as const, note: "Compare practical hotel areas and neighborhoods" },
   { title: "Haifa shore excursions", to: "/shore-excursions/haifa/" as const, note: "Plan a city visit around your cruise schedule" },
   { title: "Old Acre attractions", to: "/attractions/akko-acre/" as const, note: "Explore the historic coastal city just north of Haifa" },
   { title: "Getting to Haifa from the airport", to: "/travel-blog/ben-gurion-airport-to-haifa/" as const, note: "Train, taxi and private transfer options" },
@@ -149,7 +149,7 @@ export function HaifaMuseumsGuide() {
       <GuideHeroLayout image={<GuideHeroMedia src={migrationPhotos["museums-in-haifa"].src} alt={migrationPhotos["museums-in-haifa"].alt}/>}>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Haifa & Coast · Art, science and history</p>
         <h1 className="guide-page-title mt-2">Best Museums in Haifa</h1>
-        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From interactive science and ancient ships to contemporary art and Japanese prints, Haifa has museums for very different interests. In my guide, I'll help you choose the best options and plan visits around the city's hills and neighbourhoods.</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From interactive science and ancient ships to contemporary art and Japanese prints, Haifa has museums for very different interests. In my guide, I'll help you choose the best options and plan visits around the city's hills and neighborhoods.</p>
         <PageUpdated date={updatedAt}/>
       </GuideHeroLayout>
       <AuthorCard/>
@@ -236,7 +236,7 @@ export function HaifaMuseumsGuide() {
       <SectionHeading id="practical" title="My practical museum-planning tips"/>
       <div className="grid gap-4 md:grid-cols-2">
         <div className="rounded-xl border p-5"><h3 className="font-bold">Tickets & combinations</h3><p className="mt-2 text-sm leading-relaxed">The municipal <OfficialLink href="https://www.hms.org.il/eng/Bundle_ticket">Haifa Museums combined ticket</OfficialLink> applies to participating museums, not every institution in the city. MadaTech, the naval museum, Israel Railways and the university museum have their own arrangements.</p></div>
-        <div className="rounded-xl border p-5"><h3 className="font-bold">Haifa's hills & transport</h3><p className="mt-2 text-sm leading-relaxed">Haifa is a hilly city. Buses, taxis and the Carmelit make travelling between neighbourhoods easier.</p></div>
+        <div className="rounded-xl border p-5"><h3 className="font-bold">Haifa's hills & transport</h3><p className="mt-2 text-sm leading-relaxed">Haifa is a hilly city. Buses, taxis and the Carmelit make travelling between neighborhoods easier.</p></div>
         <div className="rounded-xl border p-5"><h3 className="font-bold">Weekends & Jewish holidays</h3><p className="mt-2 text-sm leading-relaxed">Some municipal museums open on Saturdays, while the Railway Museum and naval museum typically do not. <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Jewish holidays and holiday eves</Link> can change opening times.</p></div>
         <div className="rounded-xl border p-5"><h3 className="font-bold">Accessibility & cruise visitors</h3><p className="mt-2 text-sm leading-relaxed">Historic homes and vessels may involve stairs or restricted access. Cruise passengers should allow plenty of time to return to their ship. Check the actual museum entrance and last admission.</p></div>
       </div>

@@ -204,6 +204,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     </section>
     <section id="days" aria-labelledby="days-h" className="mt-14 scroll-mt-28">
       <h2 id="days-h" className="text-3xl">Your {g.days}-day itinerary, day by day</h2>
+      {!!g.daySequences?.length && <p className="mt-3 text-sm leading-relaxed text-muted-foreground" data-testid="seven-day-transfer-times-note">The times shown are for sightseeing only. Allow extra time for travel between stops, hotel check-in and luggage, especially when using public transport.</p>}
       <div className="mt-7 space-y-10">
         {g.daysPlan.map((day, index) => {
           const image = migrationPhotos[day.image];
@@ -230,11 +231,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                         </li>
                       ))}
                     </ul>
-                    {(presentation.transferDays.includes(index + 1) || index + 1 === g.days) && (
-                      <p className="mt-3 text-xs leading-relaxed text-muted-foreground" data-testid="seven-day-transfer-times-note">
-                        The times shown are for sightseeing only. Allow extra time for travel between stops, hotel check-in and luggage, especially when using public transport.
-                      </p>
-                    )}
                   </div>
                 )}
                 <dl className="space-y-5">
@@ -380,7 +376,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     </section>
     <HomeContactForm key={id} showTripadvisorBesidePortraitMobile guide={{
       ...guideContactCopy(g.title, "itinerary"),
-      eyebrow: "Contact Me",
+      eyebrow: "Contact me",
       heading: "Need a Private Driver for Your Israel Trip?",
       introduction: "Tell me your travel dates, pickup location, destinations and number of passengers. I'll reply personally about arranging private transport for your journey.",
       placeholder: "Travel dates, pickup point, destinations, passengers and luggage…",
