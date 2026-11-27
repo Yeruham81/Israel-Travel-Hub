@@ -36,7 +36,7 @@ export function PrivateDriverQuoteForm({ serviceId, onServiceChange }: { service
         headingId="driver-quote-h"
         eyebrow="Your route starts here"
         title="Request a private driver quote"
-        description="Tell me where and when you'd like to travel, who is coming and which stops matter to you. I'll help plan a suitable itinerary and vehicle for your journey."
+        description="Tell me your travel dates, pickup location, preferred destinations and number of passengers. I'll help customize your itinerary and arrange a suitable vehicle."
       />
       <div className="p-3 sm:p-7">
         <form onSubmit={send} noValidate aria-label="Private driver quote request" aria-busy={submission.isSending}>
@@ -50,11 +50,11 @@ export function PrivateDriverQuoteForm({ serviceId, onServiceChange }: { service
               </div>
               <div>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4" data-testid="quote-fields-journey">
-                  <label className="col-span-2 min-w-0 text-sm font-medium sm:col-span-1">Type of journey *<select name="service" required value={serviceId} onChange={(e) => { onServiceChange(e.target.value); submission.reset(); }} className={selectClass}><option value="">Choose your journey</option>{privateDriverServices.map((service) => <option key={service.id} value={service.id}>{service.label}</option>)}</select></label>
+                  <label className="col-span-2 min-w-0 text-sm font-medium sm:col-span-1">Type of journey *<select name="service" required value={serviceId} onChange={(e) => { onServiceChange(e.target.value); submission.reset(); }} className={selectClass}><option value="">Select journey type</option>{privateDriverServices.map((service) => <option key={service.id} value={service.id}>{service.label}</option>)}</select></label>
                   <label className="min-w-0 text-sm font-medium">Pickup date *<Input name="date" type="date" required value={fields.date} onChange={(e) => update("date", e.target.value)} className={dateTimeClass} /></label>
                   <label className="min-w-0 text-sm font-medium">Pickup time<Input name="time" type="time" value={fields.time} onChange={(e) => update("time", e.target.value)} className={dateTimeClass} /></label>
                 </div>
-                <p className="mt-2 text-xs text-muted-foreground">Use Israel local date and time. Leave the time open if it still needs to be agreed.</p>
+                <p className="mt-2 text-xs text-muted-foreground">Enter the date and time in Israel's local time zone. You can leave the time blank.</p>
               </div>
               <div className="grid gap-4 sm:grid-cols-2" data-testid="quote-fields-route">
                 <label className="min-w-0 text-sm font-medium">Pickup city, hotel or address *<Input name="pickup" required maxLength={250} placeholder="For example, your hotel in Tel Aviv" value={fields.pickup} onChange={(e) => update("pickup", e.target.value)} className={fieldClass} /></label>

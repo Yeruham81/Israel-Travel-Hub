@@ -103,7 +103,7 @@ describe("international price estimates", () => {
     const fresh = screen.getByTestId("compact-currency-estimate");
     expect(fresh.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ $138");
     expect(fresh.querySelector('[data-currency="EUR"]')).toHaveTextContent("€110");
-    expect(fresh).not.toHaveTextContent("USD/EUR estimates unavailable");
+    expect(fresh).not.toHaveTextContent("Currency conversions temporarily unavailable");
   });
 
   it("does not fetch on the price-free homepage and activates after navigation to priced routes", async () => {
@@ -188,7 +188,7 @@ describe("international price estimates", () => {
     expect(mockedFetch).toHaveBeenCalledTimes(3);
     expect(mockedFetch).toHaveBeenNthCalledWith(3, referenceFxConfig.localSnapshotUrl, expect.objectContaining({ credentials: "omit" }));
     const price = screen.getByTestId("currency-price");
-    expect(price).toHaveTextContent("USD/EUR estimates unavailable");
+    expect(price).toHaveTextContent("Currency conversions temporarily unavailable");
     expect(price.querySelector('[data-currency="USD"]')).toBeNull();
   });
 

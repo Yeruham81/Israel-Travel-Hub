@@ -8,10 +8,10 @@ export type CookieConsent = { version: 2; categories: CookieCategories; expiresA
 export const NECESSARY_ONLY: CookieCategories = { analytics: false, external: false, marketing: false, advertising: false };
 export const ALL_CATEGORIES: CookieCategories = { analytics: true, external: true, marketing: true, advertising: true };
 export const COOKIE_CATEGORIES = [
-  { id: "analytics", title: "Analytics", description: "Measures website traffic and visitor interactions." },
-  { id: "external", title: "External content", description: "Enables embedded content and interactive features." },
-  { id: "marketing", title: "Booking widgets", description: "Supports booking tools and referral tracking." },
-  { id: "advertising", title: "Advertising", description: "Supports advertising, ad measurement and personalization." },
+  { id: "analytics", title: "Analytics", description: "Helps me understand how visitors use my website." },
+  { id: "external", title: "External content", description: "Enables interactive maps and other embedded external content." },
+  { id: "marketing", title: "Booking widgets", description: "Enables hotel, tour and car rental booking widgets and referral tracking." },
+  { id: "advertising", title: "Advertising", description: "Enables advertising, ad measurement and personalization when advertising services are introduced." },
 ] as const;
 
 export function readStoredConsent(storage: Pick<Storage, "getItem">, now = Date.now()): CookieConsent | null {

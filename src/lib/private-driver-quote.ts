@@ -18,7 +18,7 @@ export function validateDriverQuote(v: DriverQuoteFields, now = new Date()) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()) || v.email.length > 254) errors.push("Enter a valid email address.");
   if (!privateDriverServices.some((service) => service.id === v.serviceId)) errors.push("Choose the type of journey.");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(v.date) || Number.isNaN(Date.parse(`${v.date}T00:00:00Z`)) || new Date(`${v.date}T00:00:00Z`).toISOString().slice(0, 10) !== v.date) errors.push("Choose a valid pickup date.");
-  else if (v.date < today.date) errors.push("Choose a pickup date that is not in the past in Israel.");
+  else if (v.date < today.date) errors.push("Choose today or a future pickup date.");
   if (v.time) {
     if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(v.time)) errors.push("Enter a valid pickup time in Israel local time, or leave it open.");
     else if (v.date === today.date) {
@@ -27,10 +27,10 @@ export function validateDriverQuote(v: DriverQuoteFields, now = new Date()) {
     }
   }
   if (!v.pickup.trim()) errors.push("Enter the pickup city, hotel or address.");
-  if (!v.dropoff.trim()) errors.push("Enter the final drop-off, or say you will return to the pickup point.");
+  if (!v.dropoff.trim()) errors.push("Enter your final destination or indicate that you wish to return to the pickup location.");
   if ((v.serviceId === "day-hire" || v.serviceId === "multi-stop") && !v.itinerary.trim()) errors.push("Describe the stops or priorities for your journey.");
   const passengers = Number(v.passengers);
-  if (!v.passengers.trim() || !Number.isInteger(passengers) || passengers < 1 || passengers > 99) errors.push("Enter passengers between 1 and 99, including children.");
+  if (!v.passengers.trim() || !Number.isInteger(passengers) || passengers < 1 || passengers > 99) errors.push("Enter the total number of passengers, including children (1–99).");
   if (v.phone.length > 50 || v.pickup.length > 250 || v.dropoff.length > 250 || v.luggage.length > 250 || v.itinerary.length > 1500 || v.notes.length > 1500) errors.push("Shorten the trip details to the limits shown in the form.");
   if (!v.consent) errors.push("Confirm that you agree to share your details with Moshe for this request.");
   return errors;

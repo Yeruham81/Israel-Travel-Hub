@@ -220,7 +220,7 @@ describe("migrated Israel itineraries", () => {
     expect(widget).not.toContain("Optional tours and activities from GetYourGuide (affiliate).");
     expect(widget).not.toContain("I may earn a commission if you book through this widget.");
     expect(widget).toContain("getYourGuideCityWidgetSrc(city, page)");
-    expect(footer).toContain("Some links on this page are affiliate links");
+    expect(footer).toContain("This website contains affiliate links");
     expect(tours).toContain("Use a guided Masada and Dead Sea tour for your desert day");
     expect(tours).not.toContain("not additional stops to fit into it");
     expect(tours).toContain("<ExternalProviderTourCard");

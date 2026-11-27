@@ -149,11 +149,11 @@ describe("four dedicated airport transfer routes", () => {
     fireEvent.change(screen.getByLabelText("Flight arrival time *"), { target: { value: "22:30" } });
     fireEvent.change(screen.getByLabelText("Drop-off hotel or address"), { target: { value: `Example Hotel, ${guide.city}` } });
     fireEvent.change(screen.getByLabelText("Passengers *"), { target: { value: "6" } });
-    expect(screen.getByText(/published car starting prices do not apply/)).toBeInTheDocument();
+    expect(screen.getByText(/I'll provide a customized quote for a suitable vehicle/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.submit(form);
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: guide.title, request: { kind: "transfer", fields: { destinationId: route.id, address: `Example Hotel, ${guide.city}`, passengers: "6", consent: true } } });
@@ -183,7 +183,7 @@ describe("four dedicated airport transfer routes", () => {
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
     const body = JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body));
     expect(body.request.kind).toBe("contact");
     expect(body.request.fields.subject).toBe("Private transfer to Ben Gurion Airport");

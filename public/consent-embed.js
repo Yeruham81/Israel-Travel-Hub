@@ -18,7 +18,7 @@
   }
   const message = document.createElement("div");
   message.style.cssText = "position:fixed;inset:0;z-index:9999;display:grid;place-content:center;padding:24px;text-align:center;background:#f2f6f9;color:#16283e;font:14px/1.6 system-ui";
-  message.innerHTML = '<p>This content needs permission in Cookie settings.</p><a href="/#cookie-settings" target="_top" style="color:#0077a8">Cookie settings</a>';
+  message.innerHTML = '<p>Enable this content in Cookie settings.</p><a href="/#cookie-settings" target="_top" style="color:#0077a8">Cookie settings</a>';
   function checkWithdrawal() {
     if (started && !stored()) location.reload();
   }

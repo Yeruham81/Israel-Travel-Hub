@@ -330,10 +330,10 @@
     {
       "path": "/attractions/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending."
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/attractions/akko-acre/",
@@ -560,10 +560,10 @@
     {
       "path": "/privacy-policy/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 14,
-      "notes": "Group 12C approved style revisions plus explicit user instructions: active form delivery and consent-gated GA4, generic email processor disclosure, remove duplication, 24-hour cancellation in Terms; update document dates to 2026-11-27. Regression verification pending."
+      "notes": "Group 12C approved style revisions plus explicit user instructions: active form delivery and consent-gated GA4, generic email processor disclosure, remove duplication, 24-hour cancellation in Terms; update document dates to 2026-11-27. Regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/private-driver-in-israel/",
@@ -601,10 +601,10 @@
     {
       "path": "/terms-of-use/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 14,
-      "notes": "Group 12C approved style revisions plus explicit user instructions: active form delivery and consent-gated GA4, generic email processor disclosure, remove duplication, 24-hour cancellation in Terms; update document dates to 2026-11-27. Regression verification pending."
+      "notes": "Group 12C approved style revisions plus explicit user instructions: active form delivery and consent-gated GA4, generic email processor disclosure, remove duplication, 24-hour cancellation in Terms; update document dates to 2026-11-27. Regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/tours/",
@@ -697,10 +697,10 @@
     {
       "path": "/travel-blog/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending."
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/travel-blog/attractions-in-tel-aviv/",
@@ -787,10 +787,10 @@
     {
       "path": "/travel-blog/best-esim-for-israel/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/travel-blog/best-hotels-in-haifa/",
@@ -811,18 +811,18 @@
     {
       "path": "/travel-blog/best-time-to-visit-israel/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 8,
-      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/travel-blog/calendar-of-events/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/travel-blog/christian-tours-in-israel/",
@@ -912,18 +912,18 @@
     {
       "path": "/travel-blog/israel-tours-for-seniors/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 9,
-      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/travel-blog/israel-travel-tips/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 9,
-      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending."
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/travel-blog/jerusalem-to-bethlehem/",
@@ -1016,10 +1016,10 @@
     {
       "path": "/travel-blog/top-10-things-to-do-in-israel/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 9,
-      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending."
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/travel-blog/uber-in-israel/",
@@ -1033,10 +1033,10 @@
     {
       "path": "/travel-blog/what-to-eat-in-israel/",
       "group": 12,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 9,
-      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
     },
     {
       "path": "/travel-blog/where-to-stay-in-jerusalem/",
@@ -1059,37 +1059,37 @@
     {
       "name": "Header, desktop and mobile navigation, footer",
       "group": 13,
-      "status": "pending",
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "changes": 15,
+      "notes": "15 approved group 13A copy edits, including About me in both navigation locations and Back to homepage on both error screens; user requested Best Dead Sea hotels. Regression verification pending. Initial corpus 46014975147 failed on three stale copy assertions; updated those assertions without changing regression intent. Editorial corpus 46015882661 succeeded on ac2eba9; final full validation pending. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
     },
     {
       "name": "Cookie consent and preferences",
       "group": 13,
-      "status": "pending",
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "changes": 16,
+      "notes": "Applied 16 approved wording changes plus essential terminology consistency. Retained disclosure of similar technologies and advertising measurement. At user request Accept all spans first row with filled primary styling and larger text; Accept essential and Manage preferences remain visible, high contrast, directly accessible, minimum 44px height in second row. Consent logic unchanged. User advised that disproportionate prominence may create regulatory risk. Updated unit/browser audit selectors; verification pending. Editorial corpus 46015882661 succeeded on ac2eba9; final full validation pending. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
     },
     {
       "name": "Floating contact and share controls",
       "group": 13,
-      "status": "pending",
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "changes": 4,
+      "notes": "Approved 4 share copy changes. User explicitly retained Contact me — jump to the inquiry form and Share; no changes to contact button or native share label. Verification pending. Editorial corpus including dedicated sharing tests 46016387134 passed. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
     },
     {
       "name": "Forms, validation, success and error states",
       "group": 13,
-      "status": "pending",
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "changes": 23,
+      "notes": "All 23 approved group 13D edits applied, including user's preferred reply-soon acknowledgement. Shared sending text and passenger validations updated in both relevant contexts; form rules, schema, submission behavior unchanged. Verification pending. Initial corpus 46016861847 reported 34 failures in six files caused by stale field, confirmation and validation-message expectations. Matched those expectations to approved text without changing test logic. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
     },
     {
       "name": "Expandable and dynamically loaded content, filters, calendars and widgets",
       "group": 13,
-      "status": "pending",
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "changes": 21,
+      "notes": "All 21 approved group 13E copy changes applied; filter functions, links, prices, currency rates and widget behavior preserved. Final validation pending. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending. Shore browser audit 46018159531 failed on obsolete UI selectors; corrected both labels. At user's approval, audit retained for manual execution only after material changes; normal full validation and cookie audit remain unchanged. Manual audit not yet verified."
     }
   ]
 }

@@ -208,7 +208,7 @@ describe("tours hub and SEO category pages", () => {
       const href = link.getAttribute("href")!;
       expect(router.matchRoutes(href).at(-1)?.routeId.replace(/\/$/, "")).toBe(href.replace(/\/$/, ""));
     }
-    const cruise = screen.getByRole("region", { name: "Arriving in Israel by cruise ship?" });
+    const cruise = screen.getByRole("region", { name: "Shore excursions from Haifa and Ashdod" });
     expect(within(cruise).queryAllByRole("img")).toHaveLength(0);
     expect(within(cruise).getAllByRole("link").map(link => link.getAttribute("href"))).toEqual(["/shore-excursions/haifa/", "/shore-excursions/ashdod/"]);
     expect(within(cruise).getByRole("navigation", { name: "Shore excursions by port" })).toBeInTheDocument();

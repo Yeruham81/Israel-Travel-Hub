@@ -99,13 +99,13 @@ describe("sacred hill visit planning", () => {
     expect(fetch).not.toHaveBeenCalled();
     expect(within(form).getByRole("alert")).toBeInTheDocument();
 
-    fireEvent.change(within(form).getByLabelText("Your name *"), { target: { value: "A traveller" } });
+    fireEvent.change(within(form).getByLabelText("Full name *"), { target: { value: "A traveller" } });
     fireEvent.change(within(form).getByLabelText("Email address *"), { target: { value: "guest@example.com" } });
     fireEvent.change(within(form).getByLabelText("Subject *"), { target: { value: id === "mount-zion" ? "Mount Zion visit" : "Mount of Olives visit" } });
     fireEvent.change(within(form).getByLabelText("Your message *"), { target: { value: "Can you arrange pickup from my hotel and visit the churches?" } });
     fireEvent.click(within(form).getByRole("checkbox"));
     fireEvent.submit(form);
-    expect(await within(form).findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await within(form).findByText("Thank you for your message")).toBeInTheDocument();
     expect(fetch).toHaveBeenCalledOnce();
     const payload = JSON.parse(fetch.mock.calls[0]![1].body);
     expect(payload.sourcePath).toBe(path);

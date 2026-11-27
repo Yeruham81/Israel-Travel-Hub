@@ -37,9 +37,9 @@ export function DiscoverCarsSearchWidget() {
       loading="lazy" width="100%" height={height} className="block w-full border-0"
       sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
       onError={() => setFailed(true)} />
-    {failed && <p role="status" className="mt-3 text-sm text-muted-foreground">Car search is temporarily unavailable. You can compare rentals directly on DiscoverCars below.</p>}
+    {failed && <p role="status" className="mt-3 text-sm text-muted-foreground">Car rental search is temporarily unavailable. Use the link below to compare prices directly on DiscoverCars.</p>}
     <p className="mx-3 mt-4 border-t py-4 text-sm leading-relaxed text-muted-foreground sm:mx-0 sm:pb-0">
-      <RentalComparisonLink placement="widget-fallback" className="font-semibold text-primary underline underline-offset-4">Compare cars on DiscoverCars</RentalComparisonLink>
+      <RentalComparisonLink placement="widget-fallback" className="font-semibold text-primary underline underline-offset-4">Compare car rental prices</RentalComparisonLink>
       {" "}to explore available vehicles and the rental conditions for your dates.
     </p>
   </div>;

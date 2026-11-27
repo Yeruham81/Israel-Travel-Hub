@@ -21,6 +21,6 @@ export function BookingWidgetFrame({ scriptUrl, title }: { scriptUrl: string; ti
   }, []);
   return <>
     <ConsentIframe ref={frame} category="marketing" title={title} srcDoc={html} loading="lazy" height={height} className="w-full border-0" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" />
-    {failed && <p role="status" className="mt-2 text-sm text-muted-foreground">This booking widget is temporarily unavailable.</p>}
+    {failed && <p role="status" className="mt-2 text-sm text-muted-foreground">Online booking is temporarily unavailable through this widget.</p>}
   </>;
 }
