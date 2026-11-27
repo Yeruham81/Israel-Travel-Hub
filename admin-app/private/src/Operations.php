@@ -76,3 +76,35 @@ function local_deployment_backups(): array {
     usort($result, fn($a,$b) => strcmp($b['name'], $a['name']));
     return array_slice($result, 0, 30);
 }
+
+
+/**
+ * Read the published sitemap as the source of valid editorial URL choices.
+ * No remote requests, no XML external entities, no content execution.
+ */
+function published_site_paths(): array {
+    $file = dirname(__DIR__, 2) . '/public_html/sitemap.xml';
+    if (!is_readable($file) || is_link($file) || filesize($file) > 4_000_000) return [];
+    $xml = file_get_contents($file);
+    if (!is_string($xml)) return [];
+    preg_match_all('~<loc>\s*([^<]+)\s*</loc>~i', $xml, $matches);
+    $result = [];
+    $host = strtolower(explode(':', (string)($_SERVER['HTTP_HOST'] ?? ''))[0]);
+    foreach ($matches[1] ?? [] as $raw) {
+        $url = html_entity_decode(trim($raw), ENT_QUOTES | ENT_XML1, 'UTF-8');
+        $parts = parse_url($url);
+        if (!is_array($parts) || strtolower((string)($parts['host'] ?? '')) !== $host) continue;
+        $path = $parts['path'] ?? '/';
+        if (!is_string($path) || !preg_match('~^/(?!/)[A-Za-z0-9/_-]*/?$~D', $path)) continue;
+        $result[$path] = true;
+    }
+    $paths = array_keys($result);
+    sort($paths, SORT_STRING);
+    return $paths;
+}
+
+function site_paths_datalist(): void {
+    echo '<datalist id="site-pages">';
+    foreach (published_site_paths() as $path) echo '<option value="' . escape($path) . '"></option>';
+    echo '</datalist>';
+}
