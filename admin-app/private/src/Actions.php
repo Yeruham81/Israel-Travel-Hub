@@ -33,6 +33,9 @@ function handle_action(array $user): never {
         $source = assert_path(text_input('source_path', 500));
         $dest = assert_redirect_destination($source, text_input('target_path', 500));
         $state = allowed(text_input('state', 16), ['draft','approved']);
+        if ($state === 'approved' && !in_array($user['role'], ['owner','admin'], true)) {
+            throw new RuntimeException('Only administrators can approve publication.');
+        }
         // Prevent direct and indirect loops within the managed redirects.
         $visited = [$source => true];
         $next = $dest;
@@ -71,6 +74,9 @@ function handle_action(array $user): never {
         $ogDesc = text_input('og_description', 330);
         $robots = allowed(text_input('robots', 30), ['index,follow','noindex,follow','noindex,nofollow']);
         $state = allowed(text_input('state', 16), ['draft','approved']);
+        if ($state === 'approved' && !in_array($user['role'], ['owner','admin'], true)) {
+            throw new RuntimeException('Only administrators can approve publication.');
+        }
         db()->prepare(
             'INSERT INTO admin_seo_overrides (page_path,meta_title,meta_description,og_title,og_description,robots,state,updated_by) VALUES (?,?,?,?,?,?,?,?)
              ON DUPLICATE KEY UPDATE meta_title=VALUES(meta_title),meta_description=VALUES(meta_description),og_title=VALUES(og_title),og_description=VALUES(og_description),robots=VALUES(robots),state=VALUES(state),updated_by=VALUES(updated_by)'
