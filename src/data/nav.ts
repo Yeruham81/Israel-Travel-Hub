@@ -24,7 +24,7 @@ export const airportTransferNav = {
 export const serviceNav: NavItem[] = [
   { label: "Home", to: "/" },
   { label: "Airport transfers", to: "/airport-transfers/" },
-  { label: "Tours & Day Trips", to: "/tours/" },
+  { label: "Tours & day trips", to: "/tours/" },
   { label: "Shore excursions", to: "/shore-excursions/" },
   { label: "Accommodation", to: "/accommodation/" },
   { label: "Attractions", to: "/attractions/" },
@@ -46,8 +46,8 @@ export const hotelNav: NavItem[] = [
 const travelTips = {
   gettingAround: { label: "Getting around Israel", to: travelGuidePaths.israel },
   uber: { label: "Is there Uber in Israel?", to: travelGuidePaths.uber },
-  esim: { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim },
-  arrival: { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival },
+  esim: { label: "Best eSIM for Israel", to: travelGuidePaths.esim },
+  arrival: { label: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival },
 } satisfies Record<string, SidebarNavItem>;
 
 export const utilityNav: NavItem[] = [
@@ -55,7 +55,7 @@ export const utilityNav: NavItem[] = [
 ];
 
 export const footerNav: NavItem[] = [
-  { label: "About Moshe Barak", to: "/about-me/" },
+  { label: "About me", to: "/about-me/" },
 ];
 
 export const legalNav: NavItem[] = [
@@ -74,7 +74,7 @@ export const attractionSidebarGuideLabels: Record<string, string> = {
   haifa: "Haifa",
   caesarea: "Caesarea",
   "rosh-hanikra": "Rosh Hanikra",
-  annunciation: "Annunciation",
+  annunciation: "Basilica of the Annunciation",
   "mount-tabor": "Mount Tabor",
   precipice: "Mount Precipice",
   megiddo: "Tel Megiddo",
@@ -302,7 +302,7 @@ export const allNavGroups: NavGroup[] = [
         { label: "How to get to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
         { label: "How to get to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
         { label: "How to get to Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
-        { label: "Ben Gurion Airport Taxis", to: travelGuidePaths.airportTaxis },
+        { label: "Ben Gurion Airport taxis", to: travelGuidePaths.airportTaxis },
         { label: "Traveling from Ben Gurion Airport on Shabbat", to: travelGuidePaths.shabbat },
         { label: "Sherut from Ben Gurion Airport", to: travelGuidePaths.sherut },
         travelTips.arrival,
@@ -321,7 +321,7 @@ export const allNavGroups: NavGroup[] = [
         { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
         { label: "Best hotels in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
         { label: "Best hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
-        { label: "Dead Sea best hotels", to: "/travel-blog/best-dead-sea-hotels/" },
+        { label: "Best Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
       ] },
       { label: "Israel Itineraries", headingOnly: true, childrenLabel: "Trip lengths", children: [
         { label: "Israel in 3 days", to: "/travel-blog/israel-itinerary-3-days/" },

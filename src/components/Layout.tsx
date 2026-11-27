@@ -187,7 +187,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-4">
         <div>
           <p className="font-serif text-2xl">Israel Taxi &amp; Travel</p>
-          <p className="mt-3 text-sm opacity-80">Independent local guidance for international visitors planning travel in Israel.</p>
+          <p className="mt-3 text-sm opacity-80">Private transportation services and local travel advice by Moshe Barak.</p>
         </div>
         <div className="text-sm">
           <p className="font-semibold">Services</p>
@@ -196,18 +196,18 @@ export function SiteFooter() {
           </ul>
         </div>
         <div className="text-sm">
-          <p className="font-semibold">Popular</p>
+          <p className="font-semibold">Popular destinations &amp; guides</p>
           <ul className="mt-3 space-y-2 opacity-90">
             {hotelNav.map((n) => <li key={n.label}><Link to={n.to}>{n.label}</Link></li>)}
-            <li><Link to="/airport-transfers/jerusalem/">Airport to Jerusalem</Link></li>
+            <li><Link to="/airport-transfers/jerusalem/">Ben Gurion Airport to Jerusalem</Link></li>
             <li><Link to="/travel-blog/">Travel guides</Link></li>
             <li><Link to="/travel-blog/getting-around-israel/">Getting around Israel</Link></li>
-            <li><Link to="/about-me/">About Moshe Barak</Link></li>
+            <li><Link to="/about-me/">About me</Link></li>
           </ul>
         </div>
         <div className="text-sm opacity-90">
           <p className="font-semibold">Disclosure</p>
-          <p className="mt-3">Some links on this page are affiliate links, meaning I may earn a small commission if you make a purchase or booking, at no extra cost to you. This helps me keep this site running – thank you!</p>
+          <p className="mt-3">This website contains affiliate links. I may earn a commission when you make a purchase or booking through these links, at no extra cost to you. Thank you for supporting my website.</p>
           <p className="mt-3">Some images on this website were generated using artificial intelligence.</p>
         </div>
         <nav aria-label="Legal" className="border-t border-white/20 pt-6 text-sm md:col-span-4">
