@@ -19,12 +19,12 @@ const consentKey = "ith:cookie-consent:v1";
   const settle = () => page.waitForTimeout(700);
   async function settings() {
     await page.locator("footer").getByRole("button", { name: "Cookie settings", exact: true }).click();
-    await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
+    await page.getByRole("dialog", { name: "Cookie settings" }).waitFor();
   }
-  async function necessary() { await page.getByRole("button", { name: "Accept necessary", exact: true }).click(); await settle(); assert.equal(await page.getByRole("dialog", { name: "Cookie preferences" }).count(), 0); }
+  async function necessary() { await page.getByRole("button", { name: "Accept essential", exact: true }).click(); await settle(); assert.equal(await page.getByRole("dialog", { name: "Cookie settings" }).count(), 0); }
   for (const path of ["/car-rental/", "/accommodation/", "/attractions/mount-of-olives/"]) {
     await page.goto(base + path, { waitUntil: "networkidle" });
-    await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
+    await page.getByRole("dialog", { name: "Cookie settings" }).waitFor();
     assert.equal(requests.length, 0, "No provider request before consent at " + path + ": " + requests.join(","));
     await necessary();
     await page.locator("footer").scrollIntoViewIfNeeded();
@@ -34,7 +34,7 @@ const consentKey = "ith:cookie-consent:v1";
     await page.evaluate(key => localStorage.removeItem(key), consentKey);
   }
   await page.goto(base + "/car-rental/", { waitUntil: "networkidle" });
-  await page.getByRole("button", { name: "Customize" }).click();
+  await page.getByRole("button", { name: "Manage preferences" }).click();
   const boxes = page.getByRole("dialog").getByRole("checkbox");
   assert.equal(await boxes.count(), 4, "Advertising has its own category");
   await boxes.nth(3).check();
@@ -89,8 +89,8 @@ const consentKey = "ith:cookie-consent:v1";
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(base + "/car-rental/#cookie-settings", { waitUntil: "networkidle" });
-  await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
-  for (const label of ["Accept all", "Accept necessary", "Customize"]) {
+  await page.getByRole("dialog", { name: "Cookie settings" }).waitFor();
+  for (const label of ["Accept all", "Accept essential", "Manage preferences"]) {
     const box = await page.getByRole("button", { name: label, exact: true }).boundingBox();
     assert(box && box.x >= 0 && box.x + box.width <= 390 && box.y >= 0 && box.y + box.height <= 844, "Mobile choice visible: " + label);
   }

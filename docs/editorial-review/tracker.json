@@ -1061,14 +1061,14 @@
       "group": 13,
       "status": "edited",
       "changes": 15,
-      "notes": "15 approved group 13A copy edits, including About me in both navigation locations and Back to homepage on both error screens; user requested Best Dead Sea hotels. Regression verification pending."
+      "notes": "15 approved group 13A copy edits, including About me in both navigation locations and Back to homepage on both error screens; user requested Best Dead Sea hotels. Regression verification pending. Initial corpus 46014975147 failed on three stale copy assertions; updated those assertions without changing regression intent."
     },
     {
       "name": "Cookie consent and preferences",
       "group": 13,
-      "status": "pending",
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "changes": 16,
+      "notes": "Applied 16 approved wording changes plus essential terminology consistency. Retained disclosure of similar technologies and advertising measurement. Two equal direct consent choices in first row; Manage preferences spans second row; no deliberate accept/refuse prominence disparity. Updated unit/browser audit selectors; verification pending."
     },
     {
       "name": "Floating contact and share controls",
