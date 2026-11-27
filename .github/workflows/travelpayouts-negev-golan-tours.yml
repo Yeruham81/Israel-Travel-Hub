@@ -1,15 +1,13 @@
 name: Travelpayouts Negev and Golan tour deep links
+# Explicit operator action only; source formatting must never call the partner API.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'scripts/travelpayouts/generate-negev-golan-tours.mjs'
-      - '.github/workflows/travelpayouts-negev-golan-tours.yml'
+  workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
   generate:
-    if: contains(github.event.head_commit.message, '[generate-negev-golan-tour-links]')
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -55,6 +55,27 @@ jobs:
       - name: Install dependencies
         run: bash scripts/install-ci-dependencies.sh
 
+      - name: Validate operational scripts without external API calls
+        shell: bash
+        env:
+          TRAVELPAYOUTS_API_TOKEN: ""
+        run: |
+          set -euo pipefail
+          git ls-files -z scripts | while IFS= read -r -d '' script; do
+            case "$script" in
+              *.js|*.mjs|*.cjs) node --check "$script" ;;
+              *.sh) bash -n "$script" ;;
+            esac
+          done
+          for script in generate-airport-platforms generate-bethlehem-category-tours generate-bethlehem-tours generate-deadsea-tours generate-food-eilat-tours generate-galilee-tours generate-jerusalem-tours generate-masada-tours generate-negev-golan-tours generate-northern-coast-tours generate-seven-missing-links generate-shore-excursions generate-tel-aviv-tours; do
+            node "scripts/travelpayouts/$script.mjs" --validate
+          done
+          node scripts/travelpayouts/generate-links.mjs --validate
+          for input in remaining-hotels paamonim-hotel jerusalem-neighborhood-fifth-hotels haifa-browse; do
+            node scripts/travelpayouts/generate-links.mjs "scripts/travelpayouts/$input.json" --validate
+          done
+          node --test scripts/israel-events-source.test.mjs scripts/travelpayouts/registry-source.test.mjs
+
       - name: Test rendered photo attribution audit
         run: node --test scripts/verify-photo-credits.test.mjs
 

@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { registry, setTracking } from "./registry-source.mjs";
 // Only apply exact generated links for known products. Preserve direct links on API failure.
 const data = JSON.parse(await readFile("artifacts/travelpayouts-shore-excursions.json", "utf8"));
 if (
@@ -33,12 +34,11 @@ for (const item of data.results) {
     !/^\/[a-zA-Z0-9]+\/?$/.test(target.pathname)
   )
     throw Error("Invalid tracking domain " + item.id);
-  const before = '"' + item.id + '": undefined,';
-  const after = '"' + item.id + '": { trackingUrl: "' + target.href + '" },';
-  if (source.includes(after)) continue;
-  if (!source.includes(before))
-    throw Error("Refusing to overwrite existing tracking entry " + item.id);
-  source = source.replace(before, after);
+  const product = registry(source).shore(item.id);
+  if (product.platform !== item.platform || product.url !== item.url) throw Error("Product URL or platform changed: " + item.id);
+  const next = setTracking(source, item.id, target.href);
+  if (next === source) continue;
+  source = next;
   applied++;
 }
 if (seen.size !== 18) throw Error("Missing result items");

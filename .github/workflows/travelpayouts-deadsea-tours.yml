@@ -1,18 +1,15 @@
 name: Generate Jerusalem Dead Sea Travelpayouts links
 
+# Explicit operator action only; source formatting must never call the partner API.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'scripts/travelpayouts/generate-deadsea-tours.mjs'
-      - '.github/workflows/travelpayouts-deadsea-tours.yml'
 
 permissions:
   contents: read
 
 jobs:
   generate:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     name: Generate Jerusalem-to-Dead-Sea candidate partner links
     runs-on: ubuntu-latest
     steps:

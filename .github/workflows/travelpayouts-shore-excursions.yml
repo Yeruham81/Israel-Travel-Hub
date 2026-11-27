@@ -1,17 +1,13 @@
 name: Generate Travelpayouts shore excursion product links
+# Explicit operator action only; source formatting must never call the partner API.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'scripts/travelpayouts/generate-shore-excursions.mjs'
-      - 'scripts/travelpayouts/apply-shore-excursions.mjs'
-      - '.github/workflows/travelpayouts-shore-excursions.yml'
   workflow_dispatch:
+
 permissions:
   contents: write
 jobs:
   generate:
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[generate-shore-affiliates]')
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -19,6 +15,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
       - name: Validate shore source URLs
         run: node scripts/travelpayouts/generate-shore-excursions.mjs --validate
       - name: Generate authentic product links

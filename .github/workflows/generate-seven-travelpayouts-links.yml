@@ -1,16 +1,13 @@
 name: Generate seven targeted Travelpayouts links
+# Explicit operator action only; source formatting must never call the partner API.
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/generate-seven-travelpayouts-links.yml"
-      - "scripts/travelpayouts/generate-seven-missing-links.mjs"
   workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
   generate:
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[generate-seven-affiliate-links]')
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:

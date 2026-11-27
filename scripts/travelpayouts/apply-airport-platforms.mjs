@@ -1,5 +1,6 @@
 /** Apply only approved Travelpayouts short links that match configured public destinations. */
 import { readFile, writeFile } from "node:fs/promises";
+import { registry, setTracking } from "./registry-source.mjs";
 const data = JSON.parse(await readFile("artifacts/travelpayouts-airport-platforms.json", "utf8"));
 if (
   data.projectId !== 406243 ||
@@ -31,7 +32,7 @@ for (const item of data.results) {
   if (
     configKey !== expected ||
     replacements.has(configKey) ||
-    !contents.includes(JSON.stringify(url))
+    !registry(contents).airport(partnerId, url)
   )
     throw Error("Unexpected affiliate source or duplicate");
   if (status === "generated") {
@@ -43,30 +44,9 @@ for (const item of data.results) {
     replacements.set(configKey, trackingUrl);
   } else replacements.set(configKey, null);
 }
-for (const partnerId of ["kiwitaxi", "welcome", "intui", "gettransfer"]) {
-  const key = `airport-${partnerId}`;
-  const trackingUrl = replacements.get(key);
-  if (trackingUrl) {
-    const needle = `"${key}": undefined,`;
-    if (!contents.includes(needle)) throw Error("Global affiliate placeholder changed: " + key);
-    contents = contents.replace(needle, `"${key}": { trackingUrl: "${trackingUrl}" },`);
-  }
-}
-const begin = "  // BEGIN Travelpayouts airport route-specific links";
-const end = "  // END Travelpayouts airport route-specific links";
-const lines = [...replacements]
-  .filter(([key, url]) => key.includes("@") && url)
-  .map(([key, url]) => `  "${key}": { trackingUrl: "${url}" },`);
-const block = begin + "\n" + lines.join("\n") + "\n" + end + "\n";
-if (contents.includes(begin)) {
-  const start = contents.indexOf(begin);
-  const finish = contents.indexOf(end, start);
-  if (finish < 0) throw Error("Truncated route affiliate block");
-  contents = contents.slice(0, start) + block + contents.slice(finish + end.length + 1);
-} else {
-  const anchor = '  "ashdod-shore-beinharim": undefined,';
-  if (!contents.includes(anchor)) throw Error("Airport affiliate anchor moved");
-  contents = contents.replace(anchor, block + anchor);
+for (const [key, url] of replacements) {
+  if (!url) continue;
+  contents = setTracking(contents, key, url, { allowInsert: key.includes("@"), allowReplace: key.includes("@") });
 }
 await writeFile(filename, contents, "utf8");
 console.log(
