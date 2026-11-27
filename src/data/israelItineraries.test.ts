@@ -588,7 +588,7 @@ describe("migrated Israel itineraries", () => {
     expect(view).toContain("presentation.transferDays.includes(index + 1)");
     expect(view).toContain("const compactOverview = true");
     expect(g.alternatives).toHaveLength(2);
-    expect(g.alternatives[0]?.text).toContain("separate 10-day route");
+    expect(g.alternatives[0]?.text).toMatch(/southern 10-day route.*replace the Galilee and Haifa with Eilat and Timna/i);
     expect(g.southernRouteOverview).toHaveLength(5);
     expect(g.southernRouteOverview?.[2]?.focus).toContain("Timna Park");
     expect(view).toContain("Southern ten-day alternative at a glance");
