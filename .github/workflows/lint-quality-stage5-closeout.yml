@@ -1,0 +1,223 @@
+name: Stage 5.5.6d - final optimization closeout
+on:
+  push:
+    branches: [audit/lint-quality-stage5-closeout]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: stage5-closeout
+  cancel-in-progress: true
+jobs:
+  validate:
+    name: Validate exact merged main snapshot
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CI: "true"
+      VITE_INDEXABLE: "false"
+      CI_FUNCTIONAL_ONLY: "false"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          ref: e3e91c79d7dfbbd9bbb4f9bc75fc0633ede24821
+          persist-credentials: false
+
+      - name: Verify exact main snapshot and final scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = e3e91c79d7dfbbd9bbb4f9bc75fc0633ede24821
+          python3 - <<'PY'
+          import ast, pathlib, subprocess, yaml
+          files=subprocess.check_output(["git","ls-files","-z"]).decode().split("\0")
+          counts={"python":0,"shell":0,"yaml":0}
+          for f in filter(None,files):
+              p=pathlib.Path(f)
+              if f.startswith("scripts/") and p.suffix==".py":
+                  ast.parse(p.read_text(),filename=f);counts["python"]+=1
+              elif f.startswith("scripts/") and p.suffix==".sh":
+                  subprocess.run(["bash","-n",f],check=True);counts["shell"]+=1
+              elif f.startswith(".github/") and p.suffix in (".yml",".yaml"):
+                  def verify(n):
+                      if isinstance(n,yaml.MappingNode):
+                          keys=[(k.tag,k.value) for k,v in n.value if isinstance(k,yaml.ScalarNode)]
+                          assert len(keys)==len(set(keys)),f
+                          for k,v in n.value: verify(v)
+                      elif isinstance(n,yaml.SequenceNode):
+                          for v in n.value: verify(v)
+                  verify(yaml.compose(p.read_text(),Loader=yaml.BaseLoader));counts["yaml"]+=1
+          print("CLOSEOUT_NATIVE_SYNTAX",counts)
+          PY
+
+      - name: Test deployment storage maintenance in isolated fixtures
+        run: python3 scripts/test-deployment-storage.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+
+      - name: Restore Bun download cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            bun-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Install dependencies
+        run: bash scripts/install-ci-dependencies.sh
+
+      - name: Validate operational scripts without external API calls
+        shell: bash
+        env:
+          TRAVELPAYOUTS_API_TOKEN: ""
+        run: |
+          set -euo pipefail
+          git ls-files -z scripts | while IFS= read -r -d '' script; do
+            case "$script" in
+              *.js|*.mjs|*.cjs) node --check "$script" ;;
+              *.sh) bash -n "$script" ;;
+            esac
+          done
+          for script in generate-airport-platforms generate-bethlehem-category-tours generate-bethlehem-tours generate-deadsea-tours generate-food-eilat-tours generate-galilee-tours generate-jerusalem-tours generate-masada-tours generate-negev-golan-tours generate-northern-coast-tours generate-seven-missing-links generate-shore-excursions generate-tel-aviv-tours; do
+            node "scripts/travelpayouts/$script.mjs" --validate
+          done
+          node scripts/travelpayouts/generate-links.mjs --validate
+          for input in remaining-hotels paamonim-hotel jerusalem-neighborhood-fifth-hotels haifa-browse; do
+            node scripts/travelpayouts/generate-links.mjs "scripts/travelpayouts/$input.json" --validate
+          done
+          node --test scripts/israel-events-source.test.mjs scripts/travelpayouts/registry-source.test.mjs
+
+      - name: Test rendered photo attribution audit
+        run: node --test scripts/verify-photo-credits.test.mjs
+
+      # TanStack Router regenerates routeTree.gen.ts at build time.
+      # Build first so type-checking sees any newly added file routes.
+      - name: Build production version
+        run: bun run build
+
+      - name: Enforce ESLint with zero warnings
+        run: bun run lint
+
+      - name: Enforce authored code and configuration formatting
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import { execFileSync } from "node:child_process";
+          import prettier from "prettier";
+
+          const generated = new Set([
+            "src/routeTree.gen.ts",
+            "src/data/generated/guide-directory.ts",
+            "src/data/israelEventFeed.generated.json",
+            "src/data/attractionHubResponsivePhotos.ts",
+            "src/data/travelBlogHubResponsivePhotos.ts",
+            "public/data/boi-exchange-rates.json",
+            "public/sitemap.xml",
+            "public/robots.txt",
+            "bun.lock",
+          ]);
+          // Exact pre-existing exceptions from the final baseline, pending
+          // separate review of CSS and standalone browser assets. New files
+          // are not exempt. Documentation and archived workflows are out of scope.
+          const deferred = new Set([
+            "src/styles.css",
+            "public/consent-embed.js",
+            "public/maps/akko-attractions.html",
+            "public/maps/area.html",
+            "public/maps/dead-sea-attractions.html",
+            "public/maps/english-style.json",
+            "public/maps/haifa-museums.html",
+            "public/maps/jaffa-attractions.html",
+            "public/maps/jerusalem-churches.html",
+            "public/maps/jerusalem-museums.html",
+            "public/maps/jerusalem-old-city.html",
+            "public/maps/jerusalem-shopping.html",
+            "public/maps/mount-of-olives.html",
+            "public/maps/mount-zion.html",
+            "public/maps/shore-destinations.html",
+            "public/maps/tel-aviv-attractions.html",
+            "public/maps/tel-aviv-beaches.html",
+            "public/maps/tel-aviv-museums.html",
+            "public/maps/top-ten-israel.html",
+            "public/maps/via-dolorosa.html",
+            "public/widgets/discovercars.html",
+          ]);
+          const eligible = (file) => {
+            if (generated.has(file) || file.startsWith("docs/") || file.endsWith(".md")) return false;
+            if (/^\.github\/.*\.ya?ml$/.test(file)) return true;
+            if (file.startsWith("src/")) return /\.(?:[jt]sx?|[cm][jt]s|css|json)$/.test(file);
+            if (file.startsWith("scripts/")) return /\.(?:[cm]?[jt]s|[jt]sx|json)$/.test(file);
+            if (file.startsWith("public/")) return /\.(?:js|mjs|css|json|html)$/.test(file);
+            return !file.includes("/") && (/\.(?:[cm]?[jt]s|json)$/.test(file) || file === ".prettierrc");
+          };
+          const files = execFileSync("git", ["ls-files", "-z"]).toString().split("\0").filter(Boolean);
+          const failures = [];
+          const exceptions = [];
+          let checked = 0;
+          for (const file of files.filter(eligible)) {
+            const info = await prettier.getFileInfo(file, { ignorePath: ".prettierignore", withNodeModules: false });
+            if (info.ignored || !info.inferredParser) {
+              failures.push(file + " (unexpected ignored or unsupported file)");
+              continue;
+            }
+            const source = fs.readFileSync(file, "utf8");
+            const options = await prettier.resolveConfig(file);
+            try {
+              const formatted = await prettier.format(source, { ...options, filepath: file });
+              checked++;
+              if (source === formatted) continue;
+              if (deferred.has(file)) exceptions.push(file);
+              else failures.push(file);
+            } catch (error) {
+              failures.push(file + " (parser error: " + error.message + ")");
+            }
+          }
+          console.log("Checked authored files:", checked);
+          console.log("Existing deferred formatting gaps:", exceptions.length, exceptions);
+          if (failures.length) {
+            console.error("Formatting gate failed:", failures);
+            process.exitCode = 1;
+          }
+          if (checked === 0) throw Error("Formatting scope is empty");
+          JS
+
+      - name: Check TypeScript including unused declarations
+        run: npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters
+
+      - name: Run complete regression suite including editorial layout
+        env:
+          CI_FUNCTIONAL_ONLY: "false"
+        run: bun run test
+
+      # Match the same static build that will be published to Premium hosting.
+      # Running only the ordinary SSR build can miss prerender-specific failures.
+      - name: Validate Hostinger prerender before any deployment is eligible
+        env:
+          HOSTINGER_STATIC_BUILD: "true"
+          VITE_CANONICAL_ORIGIN: https://www.israel-taxi.com
+          VITE_INDEXABLE: "true"
+        run: |
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs --editorial
+      - name: Confirm no authored files changed during the audit
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import subprocess
+          changed=set(subprocess.check_output(["git","diff","--name-only","-z"]).decode().split("\0"))-{""}
+          allowed={"src/data/generated/guide-directory.ts","src/routeTree.gen.ts","public/sitemap.xml","public/robots.txt"}
+          assert changed<=allowed,changed-allowed
+          print("CLOSEOUT_TRACKED_CHANGES",sorted(changed))
+          PY
