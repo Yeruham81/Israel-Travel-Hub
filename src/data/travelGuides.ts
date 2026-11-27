@@ -142,9 +142,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "taxi-apps",
         title: "Gett and Yango: booking a taxi with an app",
         paragraphs: [
-          "Gett lets you request a licensed taxi, enter your destination and review the booking information. Check the pickup pin, the offered fare or estimate, and your payment method before confirming a ride. Drivers and features vary by location.",
+          "Use Gett to request a licensed taxi and enter your destination. Before booking, check the pickup pin, estimated or offered fare and payment method. Driver availability and app features vary by location.",
           "Yango is another option for requesting licensed taxis where it operates. Check the pickup location, the quoted or estimated price and the available payment method in the app before booking.",
-          "Download your preferred taxi app and set up your account before travelling. The official App Store and Google Play listings below take you directly to the passenger apps.",
+          "Download Gett or Yango using the links below and set up your account before travelling.",
         ],
         externalLinks: [
           { label: "Gett for iPhone", href: "https://apps.apple.com/il/app/id412802326" },
@@ -175,7 +175,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "For an immediate licensed taxi, order through Gett or an airport self-service kiosk and save the ride code. At Terminal 3, join the official taxi queue on the ground floor by Exit 03. At Terminal 1, use the main arrivals exit. Show your code when directed to the taxi.",
           "For a Gett ride scheduled at least two hours in advance, Terminal 3 pickup is on Level 2 by Exit 23. This differs from the on-demand queue at Exit 03. See Gett's airport guide for both pickup locations.",
-          "A separately booked private transfer can have its own meeting instructions. Follow the confirmation from your operator. For more details, see my Ben Gurion Airport taxis guide or arrange a private airport transfer.",
+          "If you book a private transfer, follow the pickup instructions in your booking confirmation. For more details, see my Ben Gurion Airport taxis guide or arrange a private airport transfer.",
         ],
         inlineLinks: [
           { text: "Ben Gurion Airport taxis guide", to: travelGuidePaths.airportTaxis },
@@ -227,7 +227,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     faqs: [
       { q: "Can I pay with a foreign credit card?", a: "A foreign-issued card may work, but acceptance varies by app and transaction. Check your chosen app's payment options before requesting a taxi and keep a backup payment method." },
       { q: "Can I get a taxi without a smartphone?", a: "Yes. Use a licensed taxi stand, a local dispatcher or a hotel-booked taxi. Ben Gurion Airport also has self-service kiosks for the authorized on-demand queue." },
-      { q: "Can I request child seats, a minivan or an accessible vehicle?", a: "Some providers can arrange special equipment or a suitable vehicle with advance notice. Confirm your equipment or accessibility request directly when booking a taxi." },
+      { q: "Can I request child seats, a minivan or an accessible vehicle?", a: "Yes, with providers that offer these options. Request a child seat, minivan or accessible vehicle in advance and confirm availability before booking." },
       { q: "Are taxi apps available on Shabbat?", a: "Licensed taxis can operate during Shabbat and holidays, but local driver availability varies. Plan important pickups ahead." },
     ],
     sourceIds: ["guide-uber-availability", "guide-lyft-cities", "guide-ridesharing-bill-2026", "guide-gett-app", "guide-yango-israel", "guide-gett", "guide-iaa", "taxi-fares-2026"],
@@ -286,7 +286,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         },
         paragraphs: [
           "A monit sherut (מונית שירות) is usually a yellow shared minibus travelling along a numbered route. Look for its route number and destination on the front windshield. Each passenger pays an individual fare.",
-          "At a safe, permitted place along the route, signal to a driver to stop and tell them where you would like to get off. The driver follows the designated route, and pickup or drop-off arrangements vary. Ask about the fare and whether to pay cash or another way before boarding.",
+          "Signal to the driver at a safe, permitted stopping point. Tell them where you want to get off along the route, and ask about the fare and payment options before boarding. Pickup and drop-off rules vary by route.",
           "Local sherut minibuses still operate in some areas, including parts of Tel Aviv. Service frequency varies by route. Space for large suitcases, prams and other equipment can be limited. For wider city and intercity transport choices, see my getting around Israel guide and getting around Tel Aviv guide.",
         ],
         inlineLinks: [
@@ -337,7 +337,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "For an immediate licensed taxi, request your ride code through Gett or an airport self-service kiosk. At Terminal 3, the authorized taxi queue is on the ground floor by Exit 03. At Terminal 1, use the main arrivals exit. A licensed airport taxi takes you and your group directly to your destination and charges a regulated metered fare.",
           "A Gett taxi scheduled at least two hours ahead has a different Terminal 3 collection point: Level 2, Gate 23. My Ben Gurion Airport taxis guide explains the pickup procedures, and the taxi fares in Israel guide covers regulated charges.",
-          "The free airport shuttle connects Terminals 1 and 3 with other airport facilities. From Terminal 3, find it on Level G near Gate 01. The shuttle operates exclusively within the airport complex. See my Ben Gurion Airport arrival guide for terminal guidance.",
+          "The free airport shuttle runs between Terminals 1 and 3 and other airport facilities. At Terminal 3, board on Level G near Gate 01. It only serves the airport grounds. See my Ben Gurion Airport arrival guide for terminal guidance.",
         ],
         inlineLinks: [
           { text: "Ben Gurion Airport taxis guide", to: travelGuidePaths.airportTaxis },
@@ -367,7 +367,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Booking a shared airport shuttle in advance",
         paragraphs: [
           "Commercial shared shuttles offer individual seats that can be booked in advance. Local sherut minibuses pick up passengers along designated routes. Choose a shuttle departure that suits your flight's arrival time and destination.",
-          "Before paying, confirm the operator and departure, exact pickup and drop-off points, total price per seat, luggage allowance, child-seat or accessibility needs, flight-delay arrangements and cancellation terms. Keep the written confirmation. You can also request a dedicated airport transfer for your own group.",
+          "Before paying, check the operator, departure time, pickup and drop-off points, price per seat and luggage allowance. Confirm any child-seat or accessibility needs, and check what happens if your flight is delayed or you need to cancel. Keep your written confirmation. You can also request a dedicated airport transfer for your own group.",
         ],
         inlineLinks: [{ text: "dedicated airport transfer", to: "/airport-transfers/" }],
         sourceIds: [],
@@ -383,10 +383,10 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     faqs: [
       { q: "How do I pay for a local sherut ride?", a: "You pay for your own seat. Fares and accepted payment methods depend on the route, so ask the driver about the fare and payment before boarding." },
-      { q: "Can I reserve a seat on a sherut or shared shuttle?", a: "A local route-based sherut usually accepts passengers along its route as space allows. A separate commercial shared shuttle may require advance booking and written confirmation for a specific departure." },
+      { q: "Can I reserve a seat on a sherut or shared shuttle?", a: "You can usually board a local sherut if a seat is available. A commercial shared shuttle may require you to reserve a seat for a specific departure and receive written confirmation." },
       { q: "Can I bring large suitcases on a sherut?", a: "Capacity in shared minibuses can be limited. If you're travelling with large suitcases, a stroller or mobility equipment, consider booking a private vehicle with enough space." },
       { q: "Does a sherut or airport bus run on Shabbat?", a: "Some local sherut routes operate, but the former regular airport sheruts have ended. Free weekend Line 711 serves Terminal 1 on selected departures, with seasonal operating hours." },
-      { q: "What's the difference between a sherut and a pre-booked shared shuttle?", a: "A local sherut normally follows a numbered public route and takes passengers along that line. A pre-booked shared shuttle offers reserved seats at scheduled departure times, with its own booking conditions." },
+      { q: "What's the difference between a sherut and a pre-booked shared shuttle?", a: "A local sherut picks up passengers along a numbered public route. A pre-booked shared shuttle offers reserved seats at scheduled times, with its own booking terms." },
     ],
     sourceIds: ["guide-iaa", "guide-gett", "israel-rail", "guide-weekend-711", "guide-weekend-timetable", "guide-sherut-regulation", "guide-telaviv-transit"],
     related: ["shabbat", "airportTaxis", "taxis", "arrival", "israel", "taxiFares"],
