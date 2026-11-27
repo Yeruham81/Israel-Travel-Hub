@@ -981,7 +981,7 @@ const sourceCatalog: SourceReference[] = [
   ...shoreTourProducts.map((product): SourceReference => ({
     id: product.id, title: product.title, publisher: product.partnerId === "getyourguide" ? "GetYourGuide product listing" : product.partnerId === "viator" ? "Viator product listing" : product.operatorId === "tourist-israel" ? "Tourist Israel" : "Compass Travel Israel",
     url: product.publicUrl, checkedAt: product.checkedAt || SHORE_EXCURSION_CHECK_DATE,
-    note: `Pickup and return: ${product.portIds.map((id) => shorePorts[id].name).join(" / ")} Port. ${product.seasonNote ? "The operator advertises a 2027 cruise program. " : ""}${product.operatorId === "rent-a-guide" ? "The itinerary and inclusions specify pickup and return at Ashdod. " : ""}Confirm availability for your sailing date, total price, port access and return arrangements with the operator.`,
+    note: `Pickup and return: ${product.portIds.map((id) => shorePorts[id].name).join(" / ")} Port. ${product.seasonNote ? "The operator advertises a 2027 cruise program. " : ""}${product.operatorId === "rent-a-guide" ? "The itinerary and inclusions specify pickup and return at Ashdod. " : ""}`,
   })),
   { id: "moshe-author-profile", title: "Moshe Barak biography", publisher: "Moshe Barak", url: "", checkedAt: "2026-10-18", note: "Publisher biography supports over 20 years in private transport, local route knowledge and tailored journeys for international visitors. Tripadvisor is linked to the owner-supplied profile only; no live score, count or review text is reproduced." },
   referenceFxSource,
