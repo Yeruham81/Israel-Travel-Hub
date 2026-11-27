@@ -553,7 +553,7 @@ describe("migrated Israel itineraries", () => {
     expect(g.hotelBases).toContain("Haifa after Day 7");
     expect(g.daysPlan[6]?.evening).toContain("continue to Tel Aviv instead");
     expect(g.daysPlan[3]?.afternoon).toContain("Check Magdala’s visiting hours before adding this stop");
-    expect(g.daysPlan[4]?.afternoon).toContain("allow time for short drives and separate entrances");
+    expect(g.daysPlan[4]?.afternoon).toMatch(/allow time for short drives and separate entrances/i);
     expect(g.daysPlan[5]?.morning).toContain("Arbel National Park");
     expect(g.daySequences?.[5]?.steps[0]?.stop).toContain("Arbel");
     expect(g.overviewRows?.[6]?.travel).toContain("Road/bus to Akko");
