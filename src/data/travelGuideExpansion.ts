@@ -84,7 +84,7 @@ export const expandedTravelGuides = {
         id: "weekend-711",
         title: "Free weekend bus 711: Ben Gurion Airport to Tel Aviv",
         paragraphs: [
-          "The free Na’im Besofash Line 711 connects Shoham with central Tel Aviv via Ben Gurion Airport Terminal 1. The November 2026 winter-time route listing shows Friday 15:45–01:30 and Saturday 10:30–16:30, about every two hours. Saturday service ends earlier during Israel’s winter time; daylight-saving-time schedules extend service later in the day. Departure times at the airport stop differ from the route-wide operating window.",
+          "The free Na’im Besofash Line 711 connects Shoham with central Tel Aviv via Ben Gurion Airport Terminal 1. The November 2026 winter-time route listing shows Friday 15:45–01:30 and Saturday 10:30–16:30, about every two hours. Saturday service ends earlier during Israel’s winter time; daylight-saving-time schedules extend service later in the day. Check the timetable for the exact departure times from Terminal 1.",
           "At the airport, use Ben Gurion Airport / Terminal 1, stop 34609, in the Tel Aviv-bound direction. The line serves HaRakevet Street, Rothschild Boulevard, Habima Square, Dizengoff Center and the Tel Aviv Museum. Use the table below to find the bus stop closest to your hotel.",
           "Allow time for passport control, baggage collection and the shuttle from Terminal 3 to Terminal 1. Select the stop closest to your hotel and plan the remaining walk or local ride. For holidays and summer travel, use the operator’s current timetable for the exact date and direction.",
         ],
@@ -206,7 +206,7 @@ export const expandedTravelGuides = {
     ],
     faqs: [
       { q: "Does Line 711 pick up directly at Terminal 3?", a: "No. It serves Terminal 1; follow the airport shuttle steps above and check the stop and direction on the operator's timetable." },
-      { q: "When is the last Line 711 bus from the airport on Saturday?", a: "Check the current departure for Terminal 1 toward Tel Aviv. The advertised route-wide operating window is not the time of the last bus at the airport." },
+      { q: "When is the last Line 711 bus from the airport on Saturday?", a: "Check the timetable for the last bus from Terminal 1 toward Tel Aviv. The published operating hours cover the entire route." },
       { q: "Is Line 711 suitable for passengers using wheelchairs?", a: "The operator requests accessible-trip coordination on 03-7313911 at least three hours before pickup. Confirm the complete route, including the terminal shuttle and your destination." },
       { q: "Is a taxi or private transfer cheaper to Jerusalem on Shabbat?", a: "Neither is always cheaper. Compare the estimated metered taxi fare with a written private-transfer quote for your exact pickup time, address, party and luggage." },
       { q: "Can I take a train after Shabbat ends?", a: "Possibly. Check the first actual departure for your Saturday date and route, allowing enough time to leave arrivals and make your final connection." },

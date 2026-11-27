@@ -108,7 +108,7 @@ export const christianAreas: ChristianArea[] = [
     id:"carmel",name:"Haifa & Carmel",title:"Haifa and Mount Carmel: a different Christian tradition",
     image:"/images/attractions/haifa-stella-maris.webp",alt:"Stella Maris Carmelite monastery in Haifa",
     intro:"On the Mediterranean coast, the Stella Maris monastery in Haifa is linked with Carmelite spirituality and the prophet Elijah. Deir al-Mukhraqa (Muhraqa), on another part of the Carmel ridge, is traditionally associated with Elijah's contest described in the Book of Kings.",
-    planning:"Stella Maris and Muhraqa are two monasteries in different parts of Mount Carmel. Allow a separate drive and check religious-site opening arrangements.",
+    planning:"Stella Maris and Muhraqa are two monasteries in different parts of Mount Carmel. Allow time to drive between the two monasteries and check their opening hours.",
     sites:[
       {name:"Stella Maris, Haifa",note:"Carmelite monastery overlooking the Mediterranean",officialUrl:"https://www.carmelholylanddco.org/contacts/",mapPlace:"Stella Maris Monastery, Haifa, Israel"},
       {name:"Deir al-Mukhraqa, Mount Carmel",note:"Traditional site linked with Elijah",officialUrl:"https://www.carmelholylanddco.org/who-we-are/the-discalced-carmelites-in-the-holy-land/",mapPlace:"Deir al-Mukhraqa Carmelite Monastery, Daliyat al-Karmel, Israel"},

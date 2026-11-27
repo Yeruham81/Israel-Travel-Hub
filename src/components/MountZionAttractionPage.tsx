@@ -236,7 +236,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     { q: "Is Mount Zion free to visit?", a: "The public streets and Zion Gate are free, as are many central religious sites. Museums and other compounds may have their own entrance requirements and charges." },
     { q: "Can I visit Mount Zion on Sunday?", a: "Yes. The Cenacle and David's Tomb have separate arrangements; Dormition Abbey welcomes sightseeing visitors from 11:30, while St Peter in Gallicantu is normally closed." },
     { q: "Can I visit Oskar Schindler's grave?", a: "His grave is in the Catholic cemetery on the lower southern slope, not directly beside the Upper Room. Check the gate before descending and treat the cemetery as a place of remembrance." },
-    { q: "Is Mount Zion suitable for wheelchair users?", a: "The compact area near Zion Gate is easier than the lower extensions, but the Upper Room is reached by stairs. St Peter in Gallicantu reports an accessible site with separate vehicle access, while the walk between stops may still be steep or uneven." },
+    { q: "Is Mount Zion suitable for wheelchair users?", a: "The area near Zion Gate is easier to explore than the sites farther downhill. The Upper Room is reached by stairs. St Peter in Gallicantu reports an accessible site with separate vehicle access, while the walk between stops may still be steep or uneven." },
   ],
   nearby: [
     { label: "Jerusalem’s Old City", to: "/attractions/old-city-jerusalem/", note: "Walk through Zion Gate into the historic quarters." },

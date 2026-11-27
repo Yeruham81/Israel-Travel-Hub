@@ -672,7 +672,7 @@ describe("migrated Israel itineraries", () => {
     expect(guide.day3Options?.map(option => option.heading)).toEqual([
       "Flying home on Day 3?", "Staying another night?",
     ]);
-    expect(guide.daysPlan[2]?.practical).toBe("Before leaving Jerusalem, confirm where you can store and collect your luggage in Tel Aviv, including opening hours and transport from the storage location to the airport. Confirm that your chosen station or storage facility offers luggage storage. Consult Ben Gurion Airport connections before deciding how late to sightsee.");
+    expect(guide.daysPlan[2]?.practical).toBe("Arrange luggage storage in Tel Aviv before leaving Jerusalem. Check its opening hours and allow enough time to collect your bags and reach the airport. See Ben Gurion Airport connections to plan your departure.");
     expect(guide.day3Options?.[0]?.text).toContain("arrange luggage storage in advance");
     expect(guide.daysPlan[2]?.morning).toMatch(/no trains run/i);
     for (const id of ["7", "10"] as const) expect(itineraries[id].day3Options).toBeUndefined();

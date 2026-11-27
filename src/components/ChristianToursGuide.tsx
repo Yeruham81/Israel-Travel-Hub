@@ -173,7 +173,7 @@ export function ChristianToursGuide(){
      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-christian-tour-group="south">{offers.filter(o=>o.tour.group==="south").map(o=><TourCard key={o.tour.id} tour={o.tour} url={o.url}/>)}</div>
      <h3 className="mb-3 mt-8 font-serif text-xl font-semibold">Nazareth, Galilee &amp; Jordan River</h3>
      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-christian-tour-group="north">{offers.filter(o=>o.tour.group==="north").map(o=><TourCard key={o.tour.id} tour={o.tour} url={o.url}/>)}</div>
-     <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Prices, ratings, reviews and availability are shown by the booking provider, not updated live on this page. Confirm the product name, tour itinerary, final price, included stops, date and West Bank eligibility before paying.</p>
+     <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Check the booking website for current prices, availability, ratings and reviews. Before paying, confirm your tour date, itinerary, included stops, final price and eligibility to enter the West Bank.</p>
      <p className="mt-3 text-sm leading-relaxed">For more options, see my <Link to="/tours/jerusalem/" className={link}>Jerusalem tours</Link>, <Link to="/tours/bethlehem-jericho-jordan-river/" className={link}>Bethlehem and Jordan River tours</Link> and <Link to="/tours/nazareth-sea-of-galilee/" className={link}>Galilee tours</Link>. My <Link to="/private-driver-in-israel/" className={link}>private driver service</Link> covers transportation. Licensed guiding should be arranged separately.</p>
    </section>
 
