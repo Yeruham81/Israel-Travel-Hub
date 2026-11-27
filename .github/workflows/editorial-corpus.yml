@@ -31,7 +31,7 @@ jobs:
       - name: Install locked dependencies
         run: bash scripts/install-ci-dependencies.sh
       - name: Verify reviewed group regression tests
-        run: bun run test src/test/home-hero-copy.test.tsx src/test/homepage-structure.test.tsx src/test/about-page.test.tsx src/test/private-driver.test.tsx src/components/HomeHero.test.ts src/test/airport-transfers.test.tsx src/test/airport-routes.test.tsx src/test/airport-journeys.test.tsx src/test/travel-guides.test.tsx src/data/travelGuides.test.ts src/test/site-voice.test.ts src/data/taxiGuideCluster.test.ts src/test/car-rental-guide.test.tsx src/test/car-rental-affiliate.test.ts
+        run: bun run test src/test/home-hero-copy.test.tsx src/test/homepage-structure.test.tsx src/test/about-page.test.tsx src/test/private-driver.test.tsx src/components/HomeHero.test.ts src/test/airport-transfers.test.tsx src/test/airport-routes.test.tsx src/test/airport-journeys.test.tsx src/test/travel-guides.test.tsx src/data/travelGuides.test.ts src/test/site-voice.test.ts src/data/taxiGuideCluster.test.ts src/test/car-rental-guide.test.tsx src/test/car-rental-affiliate.test.ts src/test/transportation.test.tsx
       - name: Build static HTML
         env:
           HOSTINGER_STATIC_BUILD: "true"
