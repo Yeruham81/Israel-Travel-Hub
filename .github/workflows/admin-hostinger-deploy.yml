@@ -100,6 +100,11 @@ jobs:
           WEB="${HOSTINGER_REMOTE_PATH%/}/admin"
           PRIVATE="$(dirname "$HOSTINGER_REMOTE_PATH")/private-admin"
           SSH=(-p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts")
+          # When updating an existing installation, preserve its previous
+          # public/admin code and private PHP logic in a restricted backup.
+          BACKUP="$(dirname "$HOSTINGER_REMOTE_PATH")/private-admin-backups/$GITHUB_RUN_ID"
+          ssh "${SSH[@]}" "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "if test -f '$WEB/.ith-admin-deploy-ok'; then umask 077 && mkdir -p '$BACKUP' && cp -a '$WEB' '$BACKUP/web' && if test -d '$PRIVATE/src'; then cp -a '$PRIVATE/src' '$BACKUP/src'; fi; fi"
           # Protect the /admin folder BEFORE copying index.php.
           ssh "${SSH[@]}" "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
             "umask 077 && mkdir -p '$PRIVATE/src' '$PRIVATE/bin' && chmod 700 '$PRIVATE' '$PRIVATE/src' '$PRIVATE/bin' && mkdir -p '$WEB/assets'"
