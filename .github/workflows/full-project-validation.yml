@@ -84,67 +84,96 @@ jobs:
       - name: Build production version
         run: bun run build
 
-      - name: Check TypeScript
-        run: npx tsc --noEmit
+      - name: Enforce ESLint with zero warnings
+        run: bun run lint
 
-      # Opt-in diagnostics: reuse the installed dependencies and generated routes.
-      # Unused declarations are reported, never a deployment gate.
-      - name: Audit unused TypeScript declarations (non-blocking)
-        if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[unused-audit]')) }}
-        continue-on-error: true
+      - name: Enforce authored code and configuration formatting
         shell: bash
         run: |
-          report="$RUNNER_TEMP/unused-typescript.txt"
-          status=0
-          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters > "$report" 2>&1 || status=$?
-          cat "$report"
-          echo "TypeScript diagnostic exit code: $status"
-          python3 - "$report" "$status" <<'PY'
-          import collections
-          import os
-          import pathlib
-          import re
-          import sys
+          set -euo pipefail
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import { execFileSync } from "node:child_process";
+          import prettier from "prettier";
 
-          report = pathlib.Path(sys.argv[1]).read_text()
-          status = int(sys.argv[2])
-          unused_codes = {"6133", "6138", "6192", "6196", "6198"}
-          counts = collections.Counter()
-          files = collections.Counter()
-          other = []
-          for line in report.splitlines():
-              match = re.match(r"^(.+?)\(\d+,\d+\): error TS(\d+):", line)
-              if match:
-                  path, code = match.groups()
-                  if code in unused_codes:
-                      counts[code] += 1
-                      files[path] += 1
-                  else:
-                      other.append(line)
-              elif re.search(r"\berror TS\d+:", line):
-                  other.append(line)
+          const generated = new Set([
+            "src/routeTree.gen.ts",
+            "src/data/generated/guide-directory.ts",
+            "src/data/israelEventFeed.generated.json",
+            "src/data/attractionHubResponsivePhotos.ts",
+            "src/data/travelBlogHubResponsivePhotos.ts",
+            "public/data/boi-exchange-rates.json",
+            "public/sitemap.xml",
+            "public/robots.txt",
+            "bun.lock",
+          ]);
+          // Exact pre-existing exceptions from the final baseline, pending
+          // separate review of CSS and standalone browser assets. New files
+          // are not exempt. Documentation and archived workflows are out of scope.
+          const deferred = new Set([
+            "src/styles.css",
+            "public/consent-embed.js",
+            "public/maps/akko-attractions.html",
+            "public/maps/area.html",
+            "public/maps/dead-sea-attractions.html",
+            "public/maps/english-style.json",
+            "public/maps/haifa-museums.html",
+            "public/maps/jaffa-attractions.html",
+            "public/maps/jerusalem-churches.html",
+            "public/maps/jerusalem-museums.html",
+            "public/maps/jerusalem-old-city.html",
+            "public/maps/jerusalem-shopping.html",
+            "public/maps/mount-of-olives.html",
+            "public/maps/mount-zion.html",
+            "public/maps/shore-destinations.html",
+            "public/maps/tel-aviv-attractions.html",
+            "public/maps/tel-aviv-beaches.html",
+            "public/maps/tel-aviv-museums.html",
+            "public/maps/top-ten-israel.html",
+            "public/maps/via-dolorosa.html",
+            "public/widgets/discovercars.html",
+          ]);
+          const eligible = (file) => {
+            if (generated.has(file) || file.startsWith("docs/") || file.endsWith(".md")) return false;
+            if (/^\.github\/.*\.ya?ml$/.test(file)) return true;
+            if (file.startsWith("src/")) return /\.(?:[jt]sx?|[cm][jt]s|css|json)$/.test(file);
+            if (file.startsWith("scripts/")) return /\.(?:[cm]?[jt]s|[jt]sx|json)$/.test(file);
+            if (file.startsWith("public/")) return /\.(?:js|mjs|css|json|html)$/.test(file);
+            return !file.includes("/") && (/\.(?:[cm]?[jt]s|json)$/.test(file) || file === ".prettierrc");
+          };
+          const files = execFileSync("git", ["ls-files", "-z"]).toString().split("\0").filter(Boolean);
+          const failures = [];
+          const exceptions = [];
+          let checked = 0;
+          for (const file of files.filter(eligible)) {
+            const info = await prettier.getFileInfo(file, { ignorePath: ".prettierignore", withNodeModules: false });
+            if (info.ignored || !info.inferredParser) {
+              failures.push(file + " (unexpected ignored or unsupported file)");
+              continue;
+            }
+            const source = fs.readFileSync(file, "utf8");
+            const options = await prettier.resolveConfig(file);
+            try {
+              const formatted = await prettier.format(source, { ...options, filepath: file });
+              checked++;
+              if (source === formatted) continue;
+              if (deferred.has(file)) exceptions.push(file);
+              else failures.push(file);
+            } catch (error) {
+              failures.push(file + " (parser error: " + error.message + ")");
+            }
+          }
+          console.log("Checked authored files:", checked);
+          console.log("Existing deferred formatting gaps:", exceptions.length, exceptions);
+          if (failures.length) {
+            console.error("Formatting gate failed:", failures);
+            process.exitCode = 1;
+          }
+          if (checked === 0) throw Error("Formatting scope is empty");
+          JS
 
-          total = sum(counts.values())
-          print(f"UNUSED_AUDIT: {total} diagnostics across {len(files)} files; {len(other)} other diagnostics")
-          summary = [
-              "### Optional TypeScript unused-declaration audit",
-              f"- Unused-declaration diagnostics: {total}",
-              f"- Files affected: {len(files)}",
-              f"- Other compiler diagnostics: {len(other)}",
-              f"- Compiler exit code: {status}",
-              "",
-              "| Diagnostic | Count |", "|---|---:|",
-              *[f"| TS{code} | {count} |" for code, count in sorted(counts.items())],
-              "",
-              "| Source file | Diagnostics |", "|---|---:|",
-              *[f"| `{path}` | {count} |" for path, count in files.most_common()],
-          ]
-          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as output:
-              output.write("\n".join(summary) + "\n")
-          if other or (status and not total):
-              print("::warning::Unused-declaration audit may be incomplete; inspect compiler output.")
-              sys.exit(1)
-          PY
+      - name: Check TypeScript including unused declarations
+        run: npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters
 
       - name: Run regression tests (editorial layout checks on manual runs only)
         env:
