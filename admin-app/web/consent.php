@@ -59,7 +59,7 @@ foreach (['analytics','external','marketing','advertising'] as $name) {
 try {
     $cfg = config();
     $secret = (string) ($cfg['audit_hmac_secret'] ?? '');
-    if (strlen($secret) < 32) throw new RuntimeException('Server configuration incomplete');
+    if (!preg_match('/^[a-f0-9]{64}$/D', $secret)) throw new RuntimeException('Server configuration incomplete');
     $source = hash_hmac('sha256', (string) ($_SERVER['REMOTE_ADDR'] ?? ''), $secret);
     $pdo = db();
     $count = $pdo->prepare('SELECT COUNT(*) FROM admin_consent_rate_limits WHERE source_hash = ? AND recorded_at > (NOW() - INTERVAL 5 MINUTE)');
