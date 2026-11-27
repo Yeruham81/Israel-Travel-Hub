@@ -53,7 +53,7 @@ jobs:
           const generated=new Set(['src/data/generated/guide-directory.ts','src/data/israelEventFeed.generated.json','src/data/attractionHubResponsivePhotos.ts','src/data/travelBlogHubResponsivePhotos.ts','src/data/tourHubThumbnails.ts']);
           // Tests and JSON receive a separate pass; generated assets must be
           // changed at their generators rather than by an incidental format run.
-          const included=[], excluded=[], changed=[];
+          const included=[], excluded=[], changed=[], differences=[], pending=new Map();
           // Compare parsed, emitted JavaScript with comments removed and
           // normalized output, rather than stripping spaces from literals.
           // TypeScript compiler diagnostics and production parity remain independent gates.
@@ -95,6 +95,17 @@ jobs:
             ['const x={a:"jerusalem"};','const x={a:jerusalem};'],
             ['const x={__proto__:null};','const x={["__proto__"]:null};']
           ])if(fingerprint(left)===fingerprint(right))throw Error('AST change detection self-test failed: '+left);
+          // Formatting may change parentheses without changing grouping in the
+          // normalized emitted program. Test the canonical printer as well.
+          const equivalent=async (left,right)=>(await canonical(left))===(await canonical(right))||fingerprint(left)===fingerprint(right);
+          if(!await equivalent('const x=a??b??c;','const x=(a??b)??c;'))throw Error('Canonical grouping self-test failed');
+          for(const [left,right] of [
+            ['const x=(a??b)+c;','const x=a??(b+c);'],
+            ['const x=(a?.b).c;','const x=a?.b.c;'],
+            ['const x=(a+b)*c;','const x=a+b*c;'],
+            ['const x="original";','const x="different";'],
+            ['const x={a:1,b:2};','const x={b:2,a:1};']
+          ])if(await equivalent(left,right))throw Error('Canonical change detection self-test failed: '+left);
           for(const file of files){
             const before=fs.readFileSync(file,'utf8');
             const info=await prettier.getFileInfo(file,{ignorePath:'.prettierignore'});
@@ -117,19 +128,27 @@ jobs:
               fs.writeFileSync(path.join(diagnostic,name+'.after.js'),afterCanonical);
               fs.writeFileSync(path.join(diagnostic,name+'.before.ast.json'),beforeAst);
               fs.writeFileSync(path.join(diagnostic,name+'.after.ast.json'),afterAst);
-              if(beforeAst!==afterAst)throw Error('Emitted AST changed '+file);
-              // Only accept textual differences when the independently
-              // parsed AST is identical, including literal values.
-              console.log('EMITTED TEXT DIFFERENCE, IDENTICAL AST: '+file);
+              // Exact canonical code equality is sufficient even if the raw
+              // parser retains redundant grouping parentheses. Otherwise
+              // require the independent AST to match. Never ignore both.
+              const textEqual=beforeCanonical===afterCanonical;
+              const astEqual=beforeAst===afterAst;
+              differences.push({file,textEqual,astEqual});
+              if(!textEqual&&!astEqual)console.error('UNRESOLVED EMITTED DIFFERENCE: '+file);
+              else console.log('VERIFIED FORMATTING-ONLY DIFFERENCE: '+file+' canonical='+textEqual+' AST='+astEqual);
             }
             included.push(file);
-            if(before!==after){fs.writeFileSync(file,after);changed.push(file);}
+            if(before!==after){pending.set(file,after);changed.push(file);}
           }
           if(!included.length)throw Error('Empty data scope');
           fs.writeFileSync(path.join(out,'scope.json'),JSON.stringify(included,null,2));
           fs.writeFileSync(path.join(out,'excluded.json'),JSON.stringify(excluded,null,2));
           fs.writeFileSync(path.join(out,'changed.json'),JSON.stringify(changed,null,2));
-          console.log('DATA FORMAT SUMMARY',JSON.stringify({tracked:files.length,included:included.length,excluded:excluded.length,changed:changed.length,idempotent:true,emittedCodeParity:true}));
+          fs.writeFileSync(path.join(out,'emitted-comparison.json'),JSON.stringify(differences,null,2));
+          const unresolved=differences.filter(x=>!x.textEqual&&!x.astEqual);
+          console.log('DATA FORMAT SUMMARY',JSON.stringify({tracked:files.length,included:included.length,excluded:excluded.length,changed:changed.length,idempotent:true,emittedCodeParity:unresolved.length===0,unresolved:unresolved.length}));
+          if(unresolved.length)throw Error('Unresolved emitted differences: '+unresolved.map(x=>x.file).join(', '));
+          for(const [file,after] of pending)fs.writeFileSync(file,after);
           console.log('EXCLUDED',JSON.stringify(excluded));
           JS
           git diff --check
