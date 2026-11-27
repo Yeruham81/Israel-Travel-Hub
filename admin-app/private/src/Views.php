@@ -80,19 +80,20 @@ function render_dashboard(array $user): void {
     $consents = query_count('admin_consent_events');
     $redirects = query_count('admin_redirects');
     $seo = query_count('admin_seo_overrides');
-    $failures = query_count('admin_job_events', "status = 'failure'");
+    $github = github_recent_runs();
+    $failures = $github['connected'] ? count(array_filter($github['runs'], fn($run) => $run['status'] === 'failure')) : '—';
     $cards = [
         ['New messages', $new, 'inbox','Requires attention'],
         ['All enquiries', $messages, 'inbox','From server-side form logging'],
         ['Consent events', $consents, 'consents','Recorded choices'],
         ['Managed 301s', $redirects, 'redirects','Draft and approved'],
         ['SEO overrides', $seo, 'seo','Awaiting static export'],
-        ['Job failures', $failures, 'jobs','Imported automation events'],
+        ['Job failures', $failures, 'jobs', $github['connected'] ? 'Last 30 GitHub runs' : 'Live monitor not connected'],
     ];
     ?><div class="notice-strip"><strong>Management workspace</strong><span> Data is shown only when its server-side source has been connected. No placeholder statistics are used.</span></div>
     <div class="stat-grid"><?php foreach ($cards as [$label,$count,$target,$note]): ?>
       <a class="stat-card" href="/admin/?page=<?=escape($target)?>"><span class="stat-label"><?=escape($label)?></span>
-      <strong class="stat-value"><?=number_format((int)$count)?></strong><span class="stat-note"><?=escape($note)?></span></a>
+      <strong class="stat-value"><?=is_numeric($count) ? number_format((int)$count) : escape((string)$count)?></strong><span class="stat-note"><?=escape($note)?></span></a>
     <?php endforeach; ?></div>
     <div class="dashboard-grid">
       <section class="panel"><div class="panel-heading"><h2>Recent enquiries</h2><a href="/admin/?page=inbox">View all</a></div>
@@ -112,7 +113,7 @@ function render_dashboard(array $user): void {
       <div><strong>Enquiry inbox</strong><p>Database ready; existing PHP/Brevo handler must write accepted messages here.</p><span class="status warn">Awaiting integration</span></div>
       <div><strong>Consent ledger</strong><p>Database ready; public consent endpoint and privacy disclosure must be connected.</p><span class="status warn">Awaiting integration</span></div>
       <div><strong>SEO & redirects</strong><p>Edit and approve proposals here; deployment integration is needed to publish them.</p><span class="status warn">Review workflow required</span></div>
-      <div><strong>Backups & GitHub jobs</strong><p>Read-only registers; require authenticated automation reports for live status.</p><span class="status warn">Awaiting integration</span></div>
+      <div><strong>Backups & GitHub jobs</strong><p>Read-only deployment backups and optional fine-grained GitHub Actions monitoring.</p><span class="status warn"><?= $github['connected'] ? 'GitHub monitor connected' : 'Configure GitHub read token' ?></span></div>
     </div></section><?php
 }
 function render_inbox(array $user): void {
@@ -181,15 +182,28 @@ function render_seo(): void {
     <?php if(!$rows): ?><p class="empty-state">No SEO overrides. The site's existing React metadata remains the source of truth.</p><?php else: ?><div class="table-scroll"><table><thead><tr><th>Page</th><th>Meta title</th><th>Robots</th><th>State</th><th></th></tr></thead><tbody><?php foreach($rows as $r): ?><tr><td><code><?=escape($r['page_path'])?></code></td><td><?=escape($r['meta_title'])?></td><td><?=escape($r['robots'])?></td><td><span class="status"><?=escape($r['state'])?></span></td><td><form class="inline-form" method="post"><?=csrf_field()?><input type="hidden" name="action" value="delete_seo"><input type="hidden" name="page_path" value="<?=escape($r['page_path'])?>"><button class="text-danger" type="submit">Remove</button></form></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section><?php
 }
 function render_jobs(): void {
-    $rows=query_all('SELECT * FROM admin_job_events ORDER BY observed_at DESC LIMIT 200');
-    ?><section class="panel"><div class="panel-heading"><h2>Automation events</h2><span class="small-muted">GitHub, Hostinger and maintenance workflows</span></div>
-    <?php if(!$rows): ?><p class="empty-state">No automation events have been imported yet. GitHub Actions remains the authoritative monitoring source until a signed integration is configured.</p><?php else: ?><div class="table-scroll"><table><thead><tr><th>Observed</th><th>Job</th><th>Status</th><th>Details</th><th>Run</th></tr></thead><tbody><?php foreach($rows as $r): ?><tr><td><?=escape($r['observed_at'])?></td><td><?=escape($r['job_name'])?></td><td><span class="status"><?=escape($r['status'])?></span></td><td><?=escape($r['details'])?></td><td><?php if($r['workflow_url'] && preg_match('~^https://github\.com/[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+/actions/runs/\d+$~D',(string)$r['workflow_url'])): ?><a href="<?=escape($r['workflow_url'])?>" rel="noopener noreferrer" target="_blank">Open ↗</a><?php endif; ?></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section><?php
+    $github = github_recent_runs();
+    ?><section class="panel"><div class="panel-heading"><h2>Live GitHub Actions</h2><a href="https://github.com/Yeruham81/Israel-Travel-Hub/actions" target="_blank" rel="noopener noreferrer">Open GitHub ↗</a></div>
+    <?php if (!$github['connected']): ?><p class="empty-state"><?=escape($github['message'])?> No workflows are assumed successful when the connection is unavailable.</p>
+    <?php else: ?><p class="muted small">Latest 30 GitHub runs, read directly using a server-only, read-only token.</p><div class="table-scroll"><table><thead><tr><th>Created</th><th>Workflow</th><th>Branch</th><th>Result</th><th>Run</th></tr></thead><tbody>
+    <?php foreach($github['runs'] as $r): ?><tr><td><?=escape($r['created_at'])?></td><td><?=escape($r['name'])?></td><td><?=escape($r['branch'])?></td><td><span class="status"><?=escape($r['status'])?></span></td><td><a href="<?=escape($r['url'])?>" target="_blank" rel="noopener noreferrer">View ↗</a></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section>
+    <?php $rows=query_all('SELECT * FROM admin_job_events ORDER BY observed_at DESC LIMIT 200'); ?>
+    <section class="panel"><div class="panel-heading"><h2>Internal event archive</h2><span class="small-muted">Up to 200 imported events</span></div>
+    <?php if (!$rows): ?><p class="empty-state">No internal event reports recorded. Live GitHub runs above are independent of this archive.</p>
+    <?php else: ?><div class="table-scroll"><table><thead><tr><th>Observed</th><th>Job</th><th>Status</th><th>Details</th></tr></thead><tbody><?php foreach($rows as $r): ?><tr><td><?=escape($r['observed_at'])?></td><td><?=escape($r['job_name'])?></td><td><?=escape($r['status'])?></td><td><?=escape($r['details'])?></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section><?php
 }
 function render_backups(): void {
-    $rows=query_all('SELECT * FROM admin_backups ORDER BY created_at DESC LIMIT 200');
-    ?><div class="notice-strip"><strong>Backup safety</strong><span> Backup archives and access credentials must remain outside public_html. This screen shows verified inventory entries only; it does not claim to create backups yet.</span></div>
-    <section class="panel"><div class="panel-heading"><h2>Backup inventory</h2><span class="small-muted">Last 200 entries</span></div>
-    <?php if(!$rows): ?><p class="empty-state">No backup inventory has been connected. Existing Hostinger deployment backups remain separate; no new backup was created by this dashboard.</p><?php else: ?><div class="table-scroll"><table><thead><tr><th>Created</th><th>Name</th><th>Type</th><th>Status</th><th>Last verified</th></tr></thead><tbody><?php foreach($rows as $r): ?><tr><td><?=escape($r['created_at'])?></td><td><?=escape($r['backup_name'])?></td><td><?=escape($r['backup_kind'])?></td><td><span class="status"><?=escape($r['status'])?></span></td><td><?=escape($r['verified_at']?:'Not verified')?></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section><?php
+    $folders = local_deployment_backups();
+    ?><div class="notice-strip"><strong>Backup safety</strong><span> Existing deployment backup folders are read directly from Hostinger outside public_html. Presence does not prove that a backup has been restore-tested.</span></div>
+    <section class="panel"><div class="panel-heading"><h2>Hostinger deployment backups</h2><span class="small-muted">Last 30 directories, read-only</span></div>
+    <?php if (!$folders): ?><p class="empty-state">No readable deployment backup directories found. This does not mean Hostinger account backups are absent.</p>
+    <?php else: ?><div class="table-scroll"><table><thead><tr><th>Backup run</th><th>Last updated</th><th>Asset manifest</th></tr></thead><tbody>
+    <?php foreach($folders as $folder): ?><tr><td><code><?=escape($folder['name'])?></code></td><td><?=escape($folder['modified_at'])?></td><td><?= $folder['manifest'] ? 'Present' : 'Not recorded' ?></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section>
+    <?php $rows=query_all('SELECT * FROM admin_backups ORDER BY created_at DESC LIMIT 200'); ?>
+    <section class="panel"><div class="panel-heading"><h2>Additional backup inventory</h2></div>
+    <?php if (!$rows): ?><p class="empty-state">No additional backup inventory has been imported; restore and creation actions are not yet connected.</p>
+    <?php else: ?><div class="table-scroll"><table><thead><tr><th>Created</th><th>Name</th><th>Type</th><th>Status</th><th>Last verified</th></tr></thead><tbody>
+    <?php foreach($rows as $r): ?><tr><td><?=escape($r['created_at'])?></td><td><?=escape($r['backup_name'])?></td><td><?=escape($r['backup_kind'])?></td><td><span class="status"><?=escape($r['status'])?></span></td><td><?=escape($r['verified_at'] ?: 'Not verified')?></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section><?php
 }
 function render_users(array $user): void {
     $rows=query_all('SELECT id,username,role,active,created_at,last_login_at FROM admin_users ORDER BY id');
