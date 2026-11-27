@@ -70,7 +70,7 @@ import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { guideContactCopy, type GuideContactKind } from "@/lib/guide-contact";
 import { JerusalemJourneyOptions } from "@/components/JerusalemJourneyPlanner";
-import { BethlehemTourOptions } from "@/components/BethlehemTourOptions";
+import { BethlehemTourOptions, bethlehemTourPhotoCredits } from "@/components/BethlehemTourOptions";
 import { BethlehemGuideFollowUps } from "@/components/BethlehemGuideFollowUps";
 import {
   JerusalemClusterLinks,
@@ -1907,7 +1907,9 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
             intro="Provider plan pages, fair-use policies and dated price references used in this guide."
           />
         )}
-        <PhotoCreditsDisclosure entries={creditedPhotos} />
+        <PhotoCreditsDisclosure
+          entries={[...creditedPhotos, ...(id === "bethlehem" ? bethlehemTourPhotoCredits() : [])]}
+        />
       </article>
     </main>
   );
