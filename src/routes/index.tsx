@@ -16,8 +16,8 @@ import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import guidedTour from "@/assets/home/guided-tour-feature.webp";
 import guidedTourMobile from "@/assets/home/guided-tour-feature-mobile.webp";
 import cruisePort from "@/assets/home/cruise-port-feature.webp";
-import ashdodPort from "@/assets/home/ashdod-port.webp";
-import haifaPort from "@/assets/home/haifa-port.webp";
+import ashdodPort from "@/assets/shore-excursions/ashdod-shore-excursions.webp";
+import haifaPort from "@/assets/shore-excursions/haifa-shore-excursions.webp";
 import haifaHotels from "@/assets/haifa/panorama.webp";
 import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import jerusalemCard from "@/assets/home/jerusalem-old-city-card.webp";
@@ -118,8 +118,8 @@ export const services: Service[] = [
     text: "Make the most of your time ashore with excursions from Israel’s cruise ports, from historic landmarks and cultural highlights to unforgettable day trips.",
     feature: { src: cruisePort, alt: "Illustrative cruise passengers walking along a harbour quay toward a waiting minivan (not a specific ship or operator)" },
     cards: [
-      { label: "From Ashdod Port", text: "Explore Jerusalem, Tel Aviv–Jaffa, Masada or the Dead Sea from Ashdod.", cta: "Explore Ashdod excursions", to: "/shore-excursions/ashdod/", img: { src: ashdodPort, alt: "Aerial view of Ashdod Port" } },
-      { label: "From Haifa Port", text: "Discover Akko, Nazareth and the Galilee, or visit Jerusalem from Haifa.", cta: "Explore Haifa excursions", to: "/shore-excursions/haifa/", img: { src: haifaPort, alt: "Haifa Port and Haifa Bay seen from Mount Carmel" } },
+      { label: "From Ashdod Port", text: "Explore Jerusalem, Tel Aviv–Jaffa, Masada or the Dead Sea from Ashdod.", cta: "Explore Ashdod excursions", to: "/shore-excursions/ashdod/", img: { src: ashdodPort, alt: "Cruise ships alongside the quays at Ashdod Port" } },
+      { label: "From Haifa Port", text: "Discover Akko, Nazareth and the Galilee, or visit Jerusalem from Haifa.", cta: "Explore Haifa excursions", to: "/shore-excursions/haifa/", img: { src: haifaPort, alt: "Cruise ship at Haifa Port with the city skyline at dusk" } },
     ],
     hub: { label: "Explore all shore excursions", to: "/shore-excursions/" },
   },
