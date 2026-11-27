@@ -389,8 +389,8 @@ jobs:
           test "$(git diff --name-only c72bef556ded607db5a6dcbcd682c3b5161efcc1 HEAD)" = ".github/workflows/unused-code-cleanup.yml"
           patch="$RUNNER_TEMP/verified-stage2/stage-2.patch"
           echo "675087e18e6ef4bf372d64408719506a2fab3e2ba2a2e34fbd3d5d443cd51fab  $patch" | sha256sum -c -
-          git apply --index --check "$patch"
-          git apply --index "$patch"
+          git apply --index --check --exclude=src/data/generated/guide-directory.ts "$patch"
+          git apply --index --exclude=src/data/generated/guide-directory.ts "$patch"
           git diff --cached --check
           python3 - "$patch" <<'PY'
           import pathlib, re, subprocess, sys
@@ -401,6 +401,9 @@ jobs:
               index = re.search(r'^index ([0-9a-f]+)\.\.([0-9a-f]+) 100644$', block, re.M)
               assert name and index and name[1] == name[2], "Invalid patch entry"
               assert name[1].startswith(("src/components/", "src/data/"))
+              if name[1] == "src/data/generated/guide-directory.ts":
+                  print("EXCLUDED BUILD-GENERATED FILE", name[1])
+                  continue
               assert not name[1].startswith("src/data/generated/")
               expected[name[1]] = index[2]
           files = subprocess.check_output(["git", "diff", "--cached", "--name-only", "-z"]).decode().split("\0")
