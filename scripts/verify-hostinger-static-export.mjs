@@ -15,6 +15,15 @@ const origin = process.env["VITE_CANONICAL_ORIGIN"];
 const indexable = process.env["VITE_INDEXABLE"] === "true";
 const editorial = process.argv.includes("--editorial");
 
+function verifyContactJump(main, page) {
+  const links = [...main.matchAll(/<a\b[^>]*\bhref="#contact"[^>]*>([\s\S]*?)<\/a>/gi)];
+  assert(
+    links.some(([, content]) => content.replace(/<!--[^]*?-->|<[^>]*>/g, "").trim() === "Contact me"),
+    "Missing Contact me jump link: " + page,
+  );
+  assert(/<section\b[^>]*\bid="contact"/i.test(main), "Missing contact form target: " + page);
+}
+
 assert(origin, "Set VITE_CANONICAL_ORIGIN for Hostinger");
 const canonical = new URL(origin);
 assert(
@@ -277,7 +286,7 @@ if (editorial) {
     const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1];
     assert(main, "Missing taxi guide article: " + slug);
     assert(main.includes(title), "Unexpected taxi guide title: " + slug);
-    assert(main.includes("Contact Me"), "Taxi guide contact link missing: " + slug);
+    verifyContactJump(main, slug);
     assert(main.includes('id="checklist"'), "Missing taxi guide checklist: " + slug);
     assert(main.includes('id="sources"'), "Missing taxi guide sources: " + slug);
     assert(main.includes("Written by"), "Missing taxi guide author: " + slug);
@@ -326,11 +335,11 @@ if (editorial) {
     "Terminal 1",
     "airport-taxi-sign.webp",
     "ben-gurion-rail-platform",
-    "Contact Me",
     "Plan the next part of your trip",
   ]) {
     assert(shabbatMain.includes(required), "Missing Shabbat airport update: " + required);
   }
+  verifyContactJump(shabbatMain, "Shabbat airport guide");
   assert(
     !/\b(?:Line|route|bus)\s+712\b/i.test(shabbatMain),
     "Airport Shabbat guide must not direct readers to Line 712",
@@ -410,11 +419,12 @@ if (editorial) {
     arrivalRelated && [...arrivalRelated.matchAll(/<li\b/g)].length === 6,
     "Airport arrival page must include six illustrated related-guide cards",
   );
+  verifyContactJump(arrivalMain, "Ben Gurion arrivals guide");
   const arrivalSources = arrivalMain.indexOf('id="sources"');
   const arrivalContact = arrivalMain.indexOf('id="contact"');
   assert(
     arrivalContact > 0 && arrivalSources > arrivalContact,
-    "Airport arrivals references must appear after Contact Me",
+    "Airport arrivals references must appear after Contact me",
   );
   for (const city of ["tel-aviv", "jerusalem", "haifa", "ein-bokek"]) {
     assert(
@@ -445,12 +455,12 @@ if (editorial) {
     'data-testid="airport-taxi-destination-cards"',
     "Estimated daytime fares from Ben Gurion Airport",
     "Need a private airport pickup?",
-    "Contact Me",
     "Accessible taxis at Terminal 3",
     "Ministry of Transport",
   ]) {
     assert(taxiMain.includes(required), "Airport taxi guide missing: " + required);
   }
+  verifyContactJump(taxiMain, "Ben Gurion airport taxis guide");
   assert(!taxiMain.includes("Contact Moshe"), "Outdated airport taxi contact label returned");
   const taxiCards = taxiMain.match(
     /<nav\b[^>]*data-testid="airport-taxi-destination-cards"[^>]*>([\s\S]*?)<\/nav>/i,
