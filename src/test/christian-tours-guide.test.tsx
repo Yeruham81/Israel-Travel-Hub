@@ -44,7 +44,8 @@ describe("Christian tours in Israel editorial guide",()=>{
     expect(page).toContain('query.set("waypoints",leg.waypoints.join("|"))');
     expect(page).toContain("site.officialUrl");
     expect(page).toContain("West Bank");
-    expect(data).toContain("not the same traditional location");
+    expect(data).toContain("Qasr al-Yahud, on the lower Jordan near Jericho, is traditionally associated with Jesus' baptism.");
+    expect(data).toContain("Yardenit is a modern baptism site near the southern end of the Sea of Galilee.");
     expect(data).toContain("separate half- or full-day visit");
   });
   it("links exactly six product-specific tours through Travelpayouts with page-specific attribution",()=>{
