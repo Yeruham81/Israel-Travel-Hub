@@ -157,7 +157,7 @@ function Tours(){
    </a>;
   })}
   </div>
-  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These experiences are operated by independent providers and booked through their own platforms. Before booking, check the current departure date, meeting location, itinerary, guiding language, walking requirements, included admissions, accessibility and cancellation terms directly with the provider.</p>
+  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These activities are run by independent operators. Check the date, meeting point, itinerary, guide's language, walking requirements, included tickets, accessibility and cancellation terms before booking.</p>
   <div className="mt-5 flex flex-wrap justify-center gap-3">
    <Link to="/tours/tel-aviv-jaffa/" className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-secondary/35 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-secondary">Explore all Tel Aviv & Jaffa tours <ChevronRight aria-hidden className="h-4 w-4"/></Link>
    <Link to="/tours/food-market-tours/" className="inline-flex items-center gap-2 rounded-lg border bg-background px-4 py-2.5 text-sm font-semibold text-primary hover:bg-secondary">Explore food & market tours <ChevronRight aria-hidden className="h-4 w-4"/></Link>

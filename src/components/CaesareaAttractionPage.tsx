@@ -70,7 +70,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
         image={{ src: "/images/attractions/caesarea-aqueduct-arches.svg", alt: "Roman aqueduct arches beside the sandy beach at Caesarea" }}
       >
         <p>North of the archaeological park, the aqueduct's stone arches once carried fresh water to Roman Caesarea. Today it stands beside the beach and is especially striking against the sea.</p>
-        <p>Visit the aqueduct as a separate nearby stop, preferably by car or with a driver. It is not the same entrance as the theater or harbor, and beach access and swimming conditions should be checked separately. <a href={aqueductDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Directions to the aqueduct</a>.</p>
+        <p>The aqueduct has a separate entrance from the theater and harbor. It's easiest to visit by car or with a driver. Check beach access and swimming conditions if you plan to spend time there. <a href={aqueductDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Directions to the aqueduct</a>.</p>
       </AttractionHighlight>
     </div>
   ),

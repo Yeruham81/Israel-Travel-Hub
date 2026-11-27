@@ -289,7 +289,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     bookingTips: ["For a family suite, confirm separate bedrooms, sofa beds, kitchen equipment and maximum occupancy.", "Check parking terms and any seasonal pool restrictions for the exact property and date."],
     faqs: [
       { q: "Are the German Colony and Baka the same neighbourhood?", a: "They are adjoining areas. The German Colony centers on Emek Refaim and is closer to the First Station; Baka stretches farther south and east around Bethlehem Road." },
-      { q: "Can I walk to the Old City?", a: "It is realistic for many visitors staying in the northern German Colony. From deeper in Baka, the longer walk makes buses or taxis more useful. Check the actual hotel-to-gate route." },
+      { q: "Can I walk to the Old City?", a: "Many visitors staying in the northern German Colony can walk to the Old City. From farther south in Baka, a bus or taxi may be easier. Check the walking route from your hotel." },
       { q: "How should I check construction disruption?", a: "Ask your accommodation shortly before arrival about its entrance, nearby roadworks, bus stops and the outlook of your room. A city-wide construction notice may not describe the effect on your particular stay." },
     ],
   },
@@ -1068,7 +1068,7 @@ const haifaCategoryGuides: HotelCategoryGuide[] = [
     overviewTitle: "Decide between beach days and a Carmel city base", detailNavLabel: "Pools, rooms & transport", checklistTitle: "Children, rooms & pool access",
     overview: [
       "Start with your family's daily plan. Leonardo Plaza puts the beach and promenade beside the hotel. Crowne Plaza offers a Carmel address with a heated indoor pool. Dan Carmel combines a higher city setting with hotel gardens, an outdoor pool and a separate children's pool. Each suits a different balance of hotel time and outings.",
-      "A bay view from the Carmel is not the same as immediate beach access. Factor in the journeys to the shore, downtown or your chosen attractions, especially with a stroller or tired children. If you need step-free access or car seats, arrange them for the actual hotel entrance and transport plan.",
+      "Hotels on Mount Carmel may have bay views, but you'll need to travel to the beach or downtown. Allow time for these journeys, especially with young children. Ask about step-free hotel access and arrange car seats if needed.",
       "Match the room to the whole party before comparing a headline rate. Dan Carmel's published occupancy varies between categories, and a hotel's family-friendly label does not establish a separate bedroom or an internal connection. Also check the dates of children's programming: Leonardo Plaza lists club activity on weekends, holidays and in July–August, not an unrestricted daily timetable.",
     ],
     decisions: [

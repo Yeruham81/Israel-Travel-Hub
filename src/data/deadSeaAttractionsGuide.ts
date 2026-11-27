@@ -101,7 +101,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "allow": "Varies by currently open trail; some walks take around 3 hours",
     "access": "Paid reserve; entry and reservations vary by trail",
     "description": "Ein Gedi is an oasis of springs, vegetation and wildlife beside the desert escarpment. Its stream valleys and resident ibex make a striking contrast with the bare slopes around the Dead Sea.",
-    "practical": "Flood and rockfall damage have restricted or changed access to Nahal David and Nahal Arugot. Some hiking trails are demanding and require an early start or advance booking. The archaeological site has separate entry rules. Check which waterfall trails are open, their opening hours and whether advance booking is required.",
+    "practical": "Flood and rockfall damage have restricted or changed access to Nahal David and Nahal Arugot. Some hiking trails are demanding and require an early start or advance booking. The archaeological site has its own entry rules. Check which waterfall trails are open, their hours and booking requirements.",
     "gettingThere": "Ein Gedi sits on Route 90, north of Masada and Ein Bokek. Follow directions to the specific park entrance listed on your booking, not to Ein Gedi Kibbutz or the hotel.",
     "tip": "I would choose the route only after checking the official trail update and whether the walking time, heat exposure and difficulty match your group.",
     "image": {
@@ -309,7 +309,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "allow": "A few hours or an evening",
     "access": "Operator-dependent; guided activities require booking",
     "description": "Choose a daylight guided jeep outing or specialist canyon adventure for dramatic desert terrain, or book a separate evening stargazing experience when the sky is clear.",
-    "practical": "Daytime jeep drives and canyon trips need a qualified operator and route-specific instructions. Rappelling and cave visits require suitable equipment and careful supervision. For night stargazing, ask about moonlight, cloud cover, transport and warm clothing; a star-filled sky is never guaranteed.",
+    "practical": "Choose a qualified operator for jeep drives and canyon trips, and follow the safety instructions for your route. Rappelling and cave visits require suitable equipment and careful supervision. For stargazing, ask about moonlight, cloud cover, transport and whether you need warm clothing.",
     "gettingThere": "Operators may depart from Ein Bokek, Neve Zohar or other meeting points. Confirm the exact pickup and return transport before booking.",
     "tip": "I'd book a daylight jeep outing for desert scenery or an evening stargazing tour for a quieter experience.",
     "image": {
@@ -465,7 +465,7 @@ export const deadSeaFaqs = [
   },
   {
     "q": "Can I explore Ein Gedi's waterfalls and canyons as normal?",
-    "a": "Access has changed following flood damage. Nahal David, Nahal Arugot and the antiquities area have different visitor arrangements; check the current official park updates and reserve the entrance and trail that are available for your date."
+    "a": "Access has changed following flood damage. Nahal David, Nahal Arugot and the antiquities area have different access rules. Check the park's latest updates and reserve an entrance and trail that are open on your travel date."
   },
   {
     "q": "Is the Dead Sea suitable for a visit without a car?",

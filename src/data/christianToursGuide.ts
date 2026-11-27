@@ -95,7 +95,7 @@ export const christianAreas: ChristianArea[] = [
   {
     id:"jordan",name:"Jordan River",title:"Jordan River: choose the right baptismal site",
     image:"/images/attractions/jordan-river-baptism.webp",alt:"Steps leading into the Jordan River at a designated baptism site",
-    intro:"The two principal baptismal visitor experiences are different. Qasr al-Yahud on the lower Jordan near Jericho is associated by Christian tradition with Jesus' baptism. Yardenit is a modern, organised baptism site near the southern end of the Sea of Galilee, not the same traditional location.",
+    intro:"Qasr al-Yahud, on the lower Jordan near Jericho, is traditionally associated with Jesus' baptism. Yardenit is a modern baptism site near the southern end of the Sea of Galilee.",
     planning:"Choose the baptism site that best fits your itinerary and religious plans. If you're planning a baptism or group prayer, arrange clergy, clothing and any required permissions in advance. Follow the site's current access instructions.",
     sites:[
       {name:"Qasr al-Yahud",note:"Traditional baptismal location near Jericho",to:"/attractions/qasr-el-yahud/"},

@@ -201,7 +201,7 @@ export const topTenFaqs = [
   { q: "How many days do I need to experience Israel?",
     a: "Three to five days can give you a focused city-and-day-trip introduction, while seven to ten days offers more room for regional stops. Travelling to Eilat or Mitzpe Ramon takes extra time. Use my itineraries to build a route that fits your actual dates." },
   { q: "Can I visit these places without renting a car?",
-    a: "Yes, especially Jerusalem, Tel Aviv and Haifa, which have public transport options. Masada, the Dead Sea, lakeside Galilee stops and the southern desert are more involved; compare public transport, guided tours and an arranged driver for the specific day." },
+    a: "Yes, especially Jerusalem, Tel Aviv and Haifa, which have public transport options. Masada, the Dead Sea, the Sea of Galilee and the southern desert are harder to explore without a car. Compare public transport, guided tours and private drivers for your day trip." },
   { q: "Which experiences suit families with children?",
     a: "Consider a supervised beach, food market, accessible Old City route, museums or an Eilat marine activity suited to your children. At Masada, the desert or on snorkelling outings, choose the route and conditions for your children's ages and abilities." },
   { q: "When is the best season to visit these places?",

@@ -157,7 +157,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
   ),
   faqs: [
     { q: "Is entry to Yardenit free?", a: "Yes. Entry and the baptism ceremony itself are free; white robes and some facilities cost extra." },
-    { q: "Do I need to book a baptism in advance?", a: "Arrange your minister and ceremony details ahead of time. Groups of up to 40 may visit without general coordination; larger groups should contact Yardenit." },
+    { q: "Do I need to book a baptism in advance?", a: "Arrange your minister and ceremony details ahead of time. Groups of up to 40 may visit without arranging their visit in advance. Larger groups should contact Yardenit beforehand." },
     { q: "Is there a priest at Yardenit?", a: "There is no resident priest; Yardenit can provide local clergy contacts on request." },
     { q: "What should I wear for a baptism?", a: "Wear the required white baptism robe over suitable clothing. Entering the water in swimwear alone is not permitted." },
     { q: "What are Yardenit's opening hours?", a: "Hours listed on the operator's pages differ. Contact Yardenit to confirm access and the last baptism time for your chosen date." },

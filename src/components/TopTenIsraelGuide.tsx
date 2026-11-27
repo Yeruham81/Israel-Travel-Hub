@@ -246,7 +246,7 @@ export function TopTenIsraelGuide() {
 
       <section id="routes" aria-labelledby="routes-h" className="mt-12 scroll-mt-24">
         <Heading id="routes" title="How I would combine the experiences"
-          intro="These regional combinations work well as planning starting points. Each needs its own realistic amount of time; I wouldn't try to complete all ten in a single short trip." />
+          intro="Group nearby sights together and allow enough time for each region. If you have only a few days, choose the experiences that interest you most." />
         <div className="grid gap-4 md:grid-cols-2">
           {topTenSuggestedRoutes.map((route,index) => <div key={route.title} className="rounded-xl border bg-card p-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-primary">Route idea {index + 1}</p>

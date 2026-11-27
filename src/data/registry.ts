@@ -187,7 +187,7 @@ const travelGuideSources: SourceReference[] = [
     ["guide-yango-israel", "Yango Israel taxi booking service", "Yango Israel — Appli Taxi", "https://appli.taxi/rider/", "Local operator's rider information for Yango taxi orders and listed cash/card payment choices; driver and feature availability still depend on the location and actual booking."],
     ["guide-telaviv-apps", "Getting around Tel Aviv: local taxi apps", "Tel Aviv Global / Tel Aviv-Yafo Municipality", "https://visit.tel-aviv.gov.il/move/in-tel-aviv", "Municipal visitor guide naming Gett, Raxi and Yango as local taxi-booking apps. It is background guidance, not a guarantee of live pickup or app capabilities."],
     ["guide-gett-app", "Gett Israel taxi-booking app", "Gett", "https://www.gett.com/il/", "Local taxi app and dispatcher services; pricing, methods of payment and availability should be checked in the current booking screen."],
-    ["guide-711-hours", "Line 711 winter and summer weekend operating windows", "Noa Tanua (weekend transit route listing)", "https://www.noat.co.il/routes/line-711", "Published winter-time route-wide hours checked November 2026: Friday 15:45–01:30, Saturday 10:30–16:30, about every two hours. During daylight saving time Saturday service may finish later. Route-wide hours are not actual departures from the Ben Gurion Terminal 1 stop; confirm date, stop and direction with the operating timetable."],
+    ["guide-711-hours", "Line 711 winter and summer weekend operating windows", "Noa Tanua (weekend transit route listing)", "https://www.noat.co.il/routes/line-711", "Winter operating hours checked in November 2026: Friday 15:45–01:30, Saturday 10:30–16:30, about every two hours. Saturday service may finish later in summer. Check the timetable for exact departures from Ben Gurion Terminal 1."],
     ["guide-weekend-711", "Weekend transport and Line 711", "Tel Aviv-Yafo Municipality", "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx", "Municipal information on free Line 711 between Shoham and Tel Aviv via Ben Gurion Terminal 1. Check departure times, luggage space and holiday schedules before travel."],
     ["guide-weekend-timetable", "Na'im Besofash Line 711 timetable and airport stop", "Na'im Besofash", "https://busofash.co.il/?lines=711", "Official Line 711 timetable and Terminal 1 stop 34609. Winter-time and daylight-saving-time schedules differ; check the exact stop, direction and date. Accessible journeys should be coordinated with the operator on 03-7313911 at least three hours before the requested pickup."],
     ["guide-jerusalem-tourism", "Jerusalem visitor information", "iTravelJerusalem / Jerusalem Development Authority", "https://www.itraveljerusalem.com/", "Official destination information for areas, museums, heritage sites and visitor planning. Individual site access, reservations and religious-event arrangements need a current check."],
@@ -738,7 +738,7 @@ const ownerDayTripSources: SourceReference[] = [
   { id: "owner-galilee-tel-aviv", title: "Nazareth & Sea of Galilee private day from Tel Aviv", path: "nazareth-sea-of-galilee-day-trip-from-tel-aviv" },
   { id: "owner-galilee-jerusalem", title: "Nazareth & Sea of Galilee private day from Jerusalem", path: "nazareth-sea-of-galilee-day-trip-from-jerusalem" },
 ].map(({ id, title }) => ({ id, title, publisher: "Moshe Barak", url: "", checkedAt: TOUR_CATALOG_CHECK_DATE,
-  note: "Owner's original itinerary page checked for the explicit ILS price block, duration, pickup and return city, weekday basis and up-to-four-passenger limit. The legacy notes still contain an outdated USD sentence; the explicit ILS price block is used. Transportation only; guiding, admissions, parking, tolls, meals and tips excluded. Availability and the full price require confirmation." }));
+  note: "Original itinerary with weekday rates in shekels for up to four passengers, duration, pickup and return city. Transportation only; guiding, admission tickets, parking, tolls, meals and tips are excluded. Availability and the full price require confirmation." }));
 export const tourProducts: TourProduct[] = [
   { id: "my-jerusalem-day", status: "published", operatorId: "moshe-barak", originIds: ["tel-aviv", "jerusalem"], destinationIds: ["jerusalem"], tagIds: ["heritage", "christian"], title: "Jerusalem at your own pace", summary: "Enjoy a flexible private drive through Jerusalem, with a customized route built around your interests, preferred stops and schedule.", duration: "Full day · Customized itinerary", length: "full-day", format: "private", formatLabel: "Private car & driver", pickup: "Hotel pickup and final drop-off agreed in advance", inclusions: "Private vehicle and driver for your customized route" },
   { id: "my-tel-aviv-day", status: "published", operatorId: "moshe-barak", originIds: ["tel-aviv"], destinationIds: ["tel-aviv"], tagIds: ["heritage", "art"], title: "Tel Aviv & Jaffa at your own pace", summary: "Explore Tel Aviv and Old Jaffa by private vehicle, with your choice of neighborhoods, scenic stops and markets. I arrange the driving and pickup around your plans; a licensed guide is separate.", duration: "Full day · Customized itinerary", length: "full-day", format: "private", formatLabel: "Private car & driver", pickup: "Pickup and return locations agreed in advance", inclusions: "Private vehicle and driver; professional guiding and admissions are separate" },
@@ -991,7 +991,7 @@ const sourceCatalog: SourceReference[] = [
   ...airportTransferRoutes.filter((route) => route.id !== "jerusalem").map((route): SourceReference => ({
     id: route.sourceId, title: `Ben Gurion Airport to ${route.id === "dead-sea" ? "Ein Bokek" : route.id === "tel-aviv" ? "Tel Aviv" : "Haifa"} — original guide`,
     publisher: "Moshe Barak", url: "", checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
-    note: "Moshe Barak's original route guide provides local planning context and approximate driving time. Road time starts after pickup and excludes airport formalities. It is a planning estimate; current traffic, the exact address and road conditions can change the journey.",
+    note: "Moshe Barak's original route guide gives an estimated driving time after airport pickup. Allow extra time for airport formalities, traffic and the journey to your final address.",
   })),
   ...jerusalemHotelSources,
   ...telAvivHotelSources,
@@ -1001,7 +1001,7 @@ const sourceCatalog: SourceReference[] = [
   {
     id: "owner-hotels-haifa", title: "Best hotels in Haifa (original guide)", publisher: "Moshe Barak",
     url: "", checkedAt: HAIFA_STAY_REVIEW_DATE,
-    note: "Editorial basis for the ten-property hub, boutique and family guides. Existing publisher-owned Expedia links and selected photographs are reused. Primary operator sources supplement the original guide; old ratings, fixed price ranges and unconfirmed amenities are not repeated.",
+    note: "Hotel recommendations in Haifa, including boutique and family options. Check individual hotel websites for current facilities and booking terms.",
   },
   {
     id: "haifa-botanica-facilities", title: "Botanica — rooftop plunge pool and facilities", publisher: "Leonardo Hotels",
@@ -1016,7 +1016,7 @@ const sourceCatalog: SourceReference[] = [
   {
     id: "owner-hotels-deadsea", title: "Best Dead Sea Hotels (original guide)", publisher: "Moshe Barak",
     url: "", checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
-    note: "Editorial basis for the destination guide, spa and family comparisons. Existing publisher-owned Expedia links and photographs are reused. Hotel policies were checked against primary operator sources; no firsthand stays at every property or live prices are claimed.",
+    note: "Hotel recommendations for the Dead Sea, including spa and family options. Check the individual hotels for current policies and rates.",
   },
   {
     id: "ds-nevo-spa", title: "Esprit Spa — Nevo", publisher: "Isrotel",
@@ -1139,7 +1139,7 @@ const sourceCatalog: SourceReference[] = [
     publisher: "Moshe Barak",
     url: "",
     checkedAt: TELAVIV_STAY_REVIEW_DATE,
-    note: "Editorial basis for the eight neighborhood guides and selected stays. Existing Expedia booking links and neighborhood photographs are reused from this guide; hotel identity and accommodation style were cross-checked with primary property sources. No live prices or availability are supplied.",
+    note: "An overview of eight Tel Aviv neighbourhoods and recommended places to stay, with hotel details checked against individual property websites.",
   },
   {
     id: "owner-hotels-tiberias",
@@ -1147,7 +1147,7 @@ const sourceCatalog: SourceReference[] = [
     publisher: "Moshe Barak",
     url: "",
     checkedAt: TIBERIAS_STAY_REVIEW_DATE,
-    note: "Editorial basis for the ten-property destination guide and focused family and luxury comparisons. Publisher-owned Expedia links and selected photographs are reused. Primary hotel sources supplement the guide, including current meal-plan notices and guest ages; no firsthand stays at every hotel or live room offers are claimed.",
+    note: "Hotel recommendations for Tiberias, including family and luxury options. Check individual hotel websites for current meal plans and age restrictions.",
   },
   {
     id: "owner-bethlehem-guide",
@@ -1187,7 +1187,7 @@ const sourceCatalog: SourceReference[] = [
     publisher: "Bein Harim Tours",
     url: "https://www.beinharimtours.com/jerusalem-and-bethlehem-day-tour-from-ashdod-port/",
     checkedAt: SHORE_EXCURSION_CHECK_DATE,
-    note: "Operator product page reopened 21 October 2026: guided Jerusalem and Bethlehem itinerary with pickup and return at Ashdod Port. No date-specific availability, current price or return guarantee is verified by this portal.",
+    note: "Guided Jerusalem and Bethlehem tour with pickup and return at Ashdod Port. Check availability, price and return arrangements for your sailing.",
   },
   {
     id: "beinharim-haifa-jlm-bethlehem",
@@ -1195,7 +1195,7 @@ const sourceCatalog: SourceReference[] = [
     publisher: "Bein Harim Tours",
     url: "https://www.beinharimtours.com/ship-to-shore-excursions-haifa-jerusalem-bethlehem/",
     checkedAt: SHORE_EXCURSION_CHECK_DATE,
-    note: "Operator product page reopened 21 October 2026: private guided Jerusalem and Bethlehem itinerary with pickup and return at Haifa Port. No date-specific availability, current price or return guarantee is verified by this portal.",
+    note: "Private guided Jerusalem and Bethlehem tour with pickup and return at Haifa Port. Check availability, price and return arrangements for your sailing.",
   },
   {
     id: "owner-private-day-trips",
