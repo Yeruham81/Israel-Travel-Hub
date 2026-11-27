@@ -5,7 +5,6 @@ import {
   JERUSALEM_HUB_PATH, JERUSALEM_HUB_TITLE, JERUSALEM_HUB_DESCRIPTION,
   JERUSALEM_HUB_UPDATED, jerusalemHubFaqs, jerusalemHubSources,
 } from "@/data/jerusalemCityHub";
-import { Route } from "../routes/travel-blog.jerusalem-travel-guide";
 
 export const routeHead = () => {
     const hero=travelGuides.jerusalem.photo;

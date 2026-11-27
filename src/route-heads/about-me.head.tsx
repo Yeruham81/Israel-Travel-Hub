@@ -1,7 +1,6 @@
 import portrait from "@/assets/airport-transfers/moshe.webp";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
-import { Route } from "../routes/about-me";
 
 export const routeHead = () => {
     const meta = pageMeta({

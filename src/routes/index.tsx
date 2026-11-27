@@ -1,46 +1,13 @@
 import { eilatSite } from "@/data/eilatSite";
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
-import lcpHeroMobile from "@/assets/home/hero-jerusalem-psi-mobile.webp";
-import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
-import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
-import jerusalem from "@/assets/home/jerusalem-old-city.webp";
 import benGurionApronPhoto from "@/assets/airport-transfers/airport.webp";
 import benGurionApronPhotoMobile from "@/assets/airport-transfers/airport-mobile.webp";
-import telAviv from "@/assets/home/tel-aviv-coast.webp";
-import tiberias from "@/assets/home/tiberias-lake.webp";
-import t3 from "@/assets/home/ben-gurion-t3.webp";
-import bethlehem from "@/assets/home/bethlehem-nativity.webp";
-import masada from "@/assets/home/masada-dead-sea.webp";
 import timnaParkFeature from "@/assets/home/timna-park-feature-optimized.webp";
-import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import guidedTour from "@/assets/home/guided-tour-feature.webp";
 import guidedTourMobile from "@/assets/home/guided-tour-feature-mobile.webp";
 import cruisePort from "@/assets/home/cruise-port-feature.webp";
 import ashdodPort from "@/assets/home/ashdod-port.webp";
 import haifaPort from "@/assets/home/haifa-port.webp";
-import haifaHotels from "@/assets/haifa/panorama.webp";
-import deadSeaBeach from "@/assets/dead-sea/beach.webp";
-import jerusalemCard from "@/assets/home/jerusalem-old-city-card.webp";
-import telAvivCard from "@/assets/home/tel-aviv-coast-card.webp";
-import tiberiasCard from "@/assets/home/tiberias-lake-card.webp";
-import bethlehemCard from "@/assets/home/bethlehem-nativity-card.webp";
-import masadaCard from "@/assets/home/masada-dead-sea-card.webp";
-import caesareaDuskCard from "@/assets/home/caesarea-dusk-card.webp";
-import caesareaAqueductCard from "@/assets/home/caesarea-aqueduct-card.webp";
-import guidedTourCard from "@/assets/home/guided-tour-card.webp";
-import cruisePortCard from "@/assets/home/cruise-port-card.webp";
-import haifaHotelsCard from "@/assets/haifa/panorama-card.webp";
-import deadSeaBeachCard from "@/assets/dead-sea/beach-card.webp";
-import jerusalemTile from "@/assets/home/jerusalem-old-city-tile.webp";
-import telAvivTile from "@/assets/home/tel-aviv-coast-tile.webp";
-import tiberiasTile from "@/assets/home/tiberias-lake-tile.webp";
-import bethlehemTile from "@/assets/home/bethlehem-nativity-tile.webp";
-import masadaTile from "@/assets/home/masada-dead-sea-tile.webp";
-import caesareaTile from "@/assets/home/caesarea-aqueduct-tile.webp";
-import haifaTile from "@/assets/haifa/panorama-tile.webp";
-import deadSeaTile from "@/assets/dead-sea/beach-tile.webp";
-import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
-import { authorLd } from "@/lib/author";
 import { tourCategoryPaths } from "@/data/tours";
 import bethlehemTourPhoto from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";
 import bethlehemTourPhotoMobile from "@/assets/guides/2026-10/jerusalem-to-bethlehem-mobile.webp";
@@ -67,16 +34,6 @@ type Img = { src: string; alt: string; thumb?: string; tile?: string; mobile?: s
 type Card = { label: string; text?: string; cta?: string; to: LinkProps["to"]; img: Img };
 type Service = { id: string; eyebrow: string; tagline: string; title: string; text: string; feature?: Img; cards: Card[]; hub: { label: string; to: LinkProps["to"] } };
 
-const IMG = {
-  jerusalem: { src: jerusalem, thumb: jerusalemCard, tile: jerusalemTile, alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" },
-  telAviv: { src: telAviv, thumb: telAvivCard, tile: telAvivTile, alt: "Tel Aviv's beachfront skyline seen from Jaffa" },
-  tiberias: { src: tiberias, thumb: tiberiasCard, tile: tiberiasTile, alt: "Tiberias on the shore of the Sea of Galilee, seen from the water" },
-  deadSea: { src: deadSeaBeach, thumb: deadSeaBeachCard, tile: deadSeaTile, alt: "Ein Bokek's beach and palm-lined promenade beside the Dead Sea" },
-  haifa: { src: haifaHotels, thumb: haifaHotelsCard, tile: haifaTile, alt: "Haifa Bay and the Bahá'í Gardens seen from Mount Carmel" },
-  bethlehem: { src: bethlehem, thumb: bethlehemCard, tile: bethlehemTile, alt: "Church of the Nativity on Manger Square, Bethlehem" },
-  masada: { src: masada, thumb: masadaCard, tile: masadaTile, alt: "Masada plateau from the air with the Dead Sea behind" },
-  caesarea: { src: caesareaAqueduct, thumb: caesareaAqueductCard, tile: caesareaTile, alt: "Roman aqueduct along the beach at Caesarea" },
-} satisfies Record<string, Img>;
 
 export const accommodationDestinationCards: Card[] = [
   { label: "Jerusalem", text: "Old City, city centre & boutique hotels", to: "/accommodation/jerusalem/", img: { src: "/images/home/accommodation-jerusalem-ai.webp", thumb: "/images/home/accommodation-jerusalem-ai-tile.webp", alt: "AI-generated illustration of Jerusalem's Old City walls and skyline" } },

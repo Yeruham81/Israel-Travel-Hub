@@ -4,7 +4,6 @@ import { shoreHubDescription, shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_
 import { publicSources, shorePorts } from "@/data/registry";
 import { authorLd } from "@/lib/author";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta, SITE_NAME } from "@/lib/site";
-import { Route } from "../routes/shore-excursions.index";
 
 const portIds = ["ashdod", "haifa"] as const;
 const heroPhoto = { src: cruisePortFeature, alt: "Cruise passengers walking along a harbour quay toward a waiting vehicle", sourceUrl: "" };

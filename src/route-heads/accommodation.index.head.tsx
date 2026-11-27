@@ -1,7 +1,6 @@
 import { accommodationDestinations } from "@/data/content";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import hotelRoomPhoto from "@/assets/home/hotel-room-feature.webp";
-import { Route } from "../routes/accommodation.index";
 
 const destinations = accommodationDestinations;
 export const routeHead = () => {

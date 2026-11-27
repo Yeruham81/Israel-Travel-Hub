@@ -6,7 +6,6 @@ import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { HubHeader } from "@/components/Guide";
 
 import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, type GuideTopicId } from "@/data/generated/guide-directory";
-import { pageMeta } from "@/lib/site";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 import { travelGuidePaths } from "@/data/travel-guide-paths";
 import { travelBlogHubImageSets, travelBlogExploreImageSets } from "@/data/travelBlogHubResponsivePhotos";

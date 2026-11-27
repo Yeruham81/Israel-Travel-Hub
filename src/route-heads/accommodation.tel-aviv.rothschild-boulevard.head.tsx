@@ -1,6 +1,5 @@
 import { telAvivAreaGuides, cityStayGuides } from "@/data/content";
 import { hotelSubguideMeta } from "@/lib/landing-schema";
-import { Route } from "../routes/accommodation.tel-aviv.rothschild-boulevard";
 
 const guide = telAvivAreaGuides.find(g => g.path === "/accommodation/tel-aviv/rothschild-boulevard/")!;
 const city = cityStayGuides[guide.cityId];

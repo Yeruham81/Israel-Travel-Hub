@@ -18,10 +18,8 @@ import masadaFeature from "@/assets/home/masada-cable-car-card.webp";
 import coastHubThumb from "@/assets/shore-hub/jaffa-route.webp";
 import { shoreHubExperiences, shoreHubFaqs, shoreHubPorts, shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_UPDATED_DATE, shorePlanningSteps, shoreTourFormats } from "@/data/shoreHub";
 import { shorePorts, travelGuidePaths } from "@/data/registry";
-import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
-import { CANONICAL_ORIGIN, jsonLd, pageMeta, SITE_NAME } from "@/lib/site";
 
 const portIds = ["ashdod", "haifa"] as const;
 const heroPhoto = { src: cruisePortFeature, alt: "Cruise passengers walking along a harbour quay toward a waiting vehicle", sourceUrl: "" };

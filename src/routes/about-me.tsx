@@ -2,8 +2,6 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { Clock3, HeartHandshake, MapPinned } from "lucide-react";
 import portrait from "@/assets/airport-transfers/moshe.webp";
 import clientCollage from "@/assets/about/moshe-barak-with-clients.webp";
-import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
-import { authorLd } from "@/lib/author";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { privateDriverHero } from "@/data/privateDriver";
 import { toursHubHero } from "@/data/tours";

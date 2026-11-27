@@ -4,7 +4,6 @@ import {
   BAPTISM_PATH, BAPTISM_TITLE, BAPTISM_DESCRIPTION, BAPTISM_UPDATED,
   BAPTISM_HERO, baptismFaqs, baptismSources,
 } from "@/data/jordanRiverBaptism";
-import { Route } from "../routes/travel-blog.baptism-in-the-jordan-river";
 
 export const routeHead = () => {
     const meta = pageMeta({

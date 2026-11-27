@@ -1,6 +1,5 @@
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
-import { Route } from "../routes/airport-transfers.index";
 
 export const routeHead = () => {
     const head = pageMeta({

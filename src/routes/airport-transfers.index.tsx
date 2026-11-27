@@ -18,7 +18,6 @@ import { GuidePhotoCredit } from "@/components/GuideCard";
 import { AIRPORT_TRANSFER_HUB_UPDATED_DATE, airportDestinationCards, airportHubPhotoSrc, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
 import { travelGuidePhotos, travelGuideCardPhotos } from "@/data/generated/guide-directory";
 import { travelGuidePaths } from "@/data/travel-guide-paths";
-import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { parseAirportTransferSearch } from "@/lib/transfer-quote";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
