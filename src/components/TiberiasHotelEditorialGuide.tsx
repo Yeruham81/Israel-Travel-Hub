@@ -75,7 +75,7 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
     kind: "Family activity hotel",
     summary: "A central family hotel with seasonal water slides, children's clubs and entertainment.",
     bestFor: "Families seeking meals and activities close to town",
-    consider: "Confirm whether your booking is full board or all-inclusive; the advertised package can change.",
+    consider: "The hotel currently offers full-board accommodation. Confirm which meals, drinks and snacks are included.",
     beach: "Short trip to a public swimming beach",
   },
   "tib-caesar": {
