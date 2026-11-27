@@ -207,7 +207,7 @@ describe("shore excursions", () => {
     fireEvent.change(screen.getByLabelText("Expected disembarkation time *"), { target: { value: "08:00" } });
     fireEvent.change(screen.getByLabelText("Ship's all-aboard time *"), { target: { value: "18:00" } });
     fireEvent.change(screen.getByLabelText("Passengers *"), { target: { value: "6" } });
-    expect(screen.getByText(/I can arrange a suitable van or minibus for larger groups/)).toBeInTheDocument();
+    expect(screen.getByText(/Vans and minibuses are available for larger groups/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send excursion request" }));
