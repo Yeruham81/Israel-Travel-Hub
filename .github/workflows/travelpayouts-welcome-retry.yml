@@ -1,15 +1,13 @@
 name: Validate Welcome Pickups affiliate fallback
+# Explicit operator action only; source formatting must never call the partner API.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'scripts/travelpayouts/retry-airport-welcome.mjs'
-      - '.github/workflows/travelpayouts-welcome-retry.yml'
+  workflow_dispatch:
+
 permissions:
   contents: write
 jobs:
   check:
-    if: contains(github.event.head_commit.message, '[retry-airport-welcome]')
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

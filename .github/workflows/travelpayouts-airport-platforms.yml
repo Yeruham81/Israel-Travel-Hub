@@ -1,16 +1,13 @@
 name: Generate Travelpayouts airport platform deeplinks
+# Explicit operator action only; source formatting must never call the partner API.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'scripts/travelpayouts/generate-airport-platforms.mjs'
-      - 'scripts/travelpayouts/apply-airport-platforms.mjs'
-      - '.github/workflows/travelpayouts-airport-platforms.yml'
+  workflow_dispatch:
+
 permissions:
   contents: write
 jobs:
   generate:
-    if: contains(github.event.head_commit.message, '[generate-airport-affiliates]')
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
