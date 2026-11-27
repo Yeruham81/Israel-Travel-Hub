@@ -1,0 +1,348 @@
+name: Stage 5.5.4 - trial test file formatting and verify parity
+on:
+  push:
+    branches: [audit/lint-quality-stage5-tests]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  trial:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      CI: "true"
+      CI_FUNCTIONAL_ONLY: "false"
+      VITE_INDEXABLE: "true"
+      VITE_CANONICAL_ORIGIN: https://www.israel-taxi.com
+      HOSTINGER_STATIC_BUILD: "true"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Prepare production reference and report directory
+        run: |
+          mkdir -p "$RUNNER_TEMP/unused-audit"
+          test "$(git rev-parse origin/main)" = 63f03f4028eeb6c4eeecf7379417bd1c46b348a6
+          git worktree add --detach "$RUNNER_TEMP/main-reference" 63f03f4028eeb6c4eeecf7379417bd1c46b348a6
+          cd "$RUNNER_TEMP/main-reference"
+          bash scripts/install-ci-dependencies.sh
+          bash scripts/build-validated-static.sh
+      - name: Inventory test and helper files and run reversible formatting trial
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/unused-audit"
+          git diff --quiet
+          git ls-files -z src > "$out/test-scope.bin"
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import prettier from 'prettier';
+          import ts from 'typescript';
+          const out=path.join(process.env.RUNNER_TEMP,'unused-audit');
+          const helpers=new Set(['src/test-utils/read-route-source.ts','src/test-utils/source-fragment.ts','src/test/consent-fixture.ts','src/test/setup.ts']);
+          const files=fs.readFileSync(path.join(out,'test-scope.bin'),'utf8').split('\0').filter(file=>/\.(test|spec)\.[cm]?[jt]sx?$/.test(file)||helpers.has(file));
+          if(files.length!==165||files.filter(file=>helpers.has(file)).length!==4)throw Error('Unexpected test inventory: '+files.length);
+          // Exclude non-test production sources and generated data. Compare
+          // emitted JSX as actual JavaScript, including its text children.
+          const included=[], excluded=[], changed=[], differences=[], pending=new Map();
+          // Compare parsed, emitted JavaScript with comments removed and
+          // normalized output, rather than stripping spaces from literals.
+          // TypeScript compiler diagnostics and production parity remain independent gates.
+          const emit=(file,source)=>ts.transpileModule(source,{fileName:file,reportDiagnostics:true,compilerOptions:{target:ts.ScriptTarget.ESNext,module:ts.ModuleKind.ESNext,jsx:ts.JsxEmit.ReactJSX,removeComments:true}}); 
+          // Prettier's default objectWrap preserves existing line breaks in
+          // object literals. Collapse them for the textual comparison only.
+          const canonical=async code=>await prettier.format(code,{parser:'typescript',semi:true,singleQuote:false,objectWrap:'collapse'});
+          // Compare parsed emitted ASTs as an additional independent guard.
+          // Keep literal values, operators, optional-chain semantics and order.
+          const fingerprint=source=>{
+            const parsed=ts.createSourceFile('emitted.ts',source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TS);
+            if(parsed.parseDiagnostics.length)throw Error('Emitted AST parse diagnostics');
+            const visit=node=>{
+              const children=[];
+              ts.forEachChild(node,child=>{children.push(visit(child));});
+              // A plain object property key has the same semantics whether
+              // its identifier is quoted or unquoted. Do not normalize
+              // computed keys, shorthand properties, or literal values.
+              const staticKey=node.parent&&ts.isPropertyAssignment(node.parent)&&node.parent.name===node&&(ts.isIdentifier(node)||ts.isStringLiteral(node));
+              const literal=ts.isStringLiteral(node)?node.text:undefined;
+              const leaf=children.length===0?(literal??node.getText(parsed)):undefined;
+              return [staticKey?'StaticPropertyKey':node.kind,node.flags&ts.NodeFlags.OptionalChain,typeof node.operator==='number'?node.operator:null,leaf,children];
+            };
+            return JSON.stringify(visit(parsed));
+          };
+          if(fingerprint('const x = {a: "hello", b: 2};')!==fingerprint("const x = {\n a: 'hello',\n b: 2,\n};"))throw Error('AST whitespace self-test failed');
+          if(fingerprint('const x={"jerusalem":1};')!==fingerprint('const x={jerusalem:1};'))throw Error('Static key quoting self-test failed');
+          if(fingerprint('const x={"__proto__":null};')!==fingerprint('const x={__proto__:null};'))throw Error('Static prototype key quoting self-test failed');
+          for(const [left,right] of [
+            ['const x="a";','const x="b";'],
+            ['const x="/a/";','const x="/b/";'],
+            ['const x=2;','const x=3;'],
+            ['const x=-n;','const x=+n;'],
+            ['const x=a+b;','const x=a-b;'],
+            ['const x=a?.b;','const x=a.b;'],
+            ['const x={a:1,b:2};','const x={b:2,a:1};'],
+            ['const x={"jerusalem":1};','const x={haifa:1};'],
+            ['const x={"jerusalem":1};','const x={["jerusalem"]:1};'],
+            ['const x={a:"jerusalem"};','const x={a:jerusalem};'],
+            ['const x={__proto__:null};','const x={["__proto__"]:null};']
+          ])if(fingerprint(left)===fingerprint(right))throw Error('AST change detection self-test failed: '+left);
+          // Formatting may change parentheses without changing grouping in the
+          // normalized emitted program. Test the canonical printer as well.
+          const equivalent=async (left,right)=>(await canonical(left))===(await canonical(right))||fingerprint(left)===fingerprint(right);
+          if(!await equivalent('const x=a??b??c;','const x=(a??b)??c;'))throw Error('Canonical grouping self-test failed');
+          for(const [left,right] of [
+            ['const x=(a??b)+c;','const x=a??(b+c);'],
+            ['const x=(a?.b).c;','const x=a?.b.c;'],
+            ['const x=(a+b)*c;','const x=a+b*c;'],
+            ['const x="original";','const x="different";'],
+            ['const x={a:1,b:2};','const x={b:2,a:1};']
+          ])if(await equivalent(left,right))throw Error('Canonical change detection self-test failed: '+left);
+          for(const file of files){
+            const before=fs.readFileSync(file,'utf8');
+            const info=await prettier.getFileInfo(file,{ignorePath:'.prettierignore'});
+            if(info.ignored||!/\.tsx?$/.test(file))throw Error('Unexpected ignored or unsupported test: '+file);
+            const options=await prettier.resolveConfig(file);
+            const after=await prettier.format(before,{...options,filepath:file});
+            if(await prettier.format(after,{...options,filepath:file})!==after)throw Error('Non-idempotent '+file);
+            const a=emit(file,before),b=emit(file,after);
+            if(a.diagnostics?.some(x=>x.category===ts.DiagnosticCategory.Error)||b.diagnostics?.some(x=>x.category===ts.DiagnosticCategory.Error))throw Error('Transpile diagnostics '+file);
+            // Canonicalize emitted JS with the same formatter; quote style and
+            // optional semicolons are formatting, not changed string values.
+            const beforeCanonical=await canonical(a.outputText),afterCanonical=await canonical(b.outputText);
+            const beforeAst=fingerprint(a.outputText),afterAst=fingerprint(b.outputText);
+            if(beforeCanonical!==afterCanonical||beforeAst!==afterAst){
+              const diagnostic=path.join(out,'emitted-diff');
+              fs.mkdirSync(diagnostic,{recursive:true});
+              const name=path.basename(file);
+              fs.writeFileSync(path.join(diagnostic,name+'.before.js'),beforeCanonical);
+              fs.writeFileSync(path.join(diagnostic,name+'.after.js'),afterCanonical);
+              fs.writeFileSync(path.join(diagnostic,name+'.before.ast.json'),beforeAst);
+              fs.writeFileSync(path.join(diagnostic,name+'.after.ast.json'),afterAst);
+              // Exact canonical code equality is sufficient even if the raw
+              // parser retains redundant grouping parentheses. Otherwise
+              // require the independent AST to match. Never ignore both.
+              const textEqual=beforeCanonical===afterCanonical;
+              const astEqual=beforeAst===afterAst;
+              differences.push({file,textEqual,astEqual});
+              if(!textEqual&&!astEqual)console.error('UNRESOLVED EMITTED DIFFERENCE: '+file);
+              else console.log('VERIFIED FORMATTING-ONLY DIFFERENCE: '+file+' canonical='+textEqual+' AST='+astEqual);
+            }
+            included.push(file);
+            if(before!==after){pending.set(file,after);changed.push(file);}
+          }
+          if(included.length!==165)throw Error('Unexpected test scope');
+          fs.writeFileSync(path.join(out,'scope.json'),JSON.stringify(included,null,2));
+          fs.writeFileSync(path.join(out,'excluded.json'),JSON.stringify(excluded,null,2));
+          fs.writeFileSync(path.join(out,'changed.json'),JSON.stringify(changed,null,2));
+          fs.writeFileSync(path.join(out,'emitted-comparison.json'),JSON.stringify(differences,null,2));
+          const unresolved=differences.filter(x=>!x.textEqual&&!x.astEqual);
+          console.log('TEST FORMAT SUMMARY',JSON.stringify({tracked:files.length,included:included.length,excluded:excluded.length,changed:changed.length,idempotent:true,emittedCodeParity:unresolved.length===0,unresolved:unresolved.length}));
+          if(unresolved.length)throw Error('Unresolved emitted differences: '+unresolved.map(x=>x.file).join(', '));
+          for(const [file,after] of pending)fs.writeFileSync(file,after);
+          console.log('EXCLUDED',JSON.stringify(excluded));
+          JS
+          git diff --check
+          git diff --binary -- src > "$out/stage-5-5-4-tests.patch"
+          git diff --numstat > "$out/numstat.tsv"
+          sha256sum "$out/stage-5-5-4-tests.patch"
+          python3 - <<'PY'
+          import json, os, pathlib, subprocess
+          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'unused-audit'
+          actual=set(subprocess.check_output(['git','diff','--name-only','-z']).decode().split('\0'))-{''}
+          expected=set(json.loads((out/'changed.json').read_text()))
+          assert actual==expected,(actual-expected,expected-actual)
+          print('PASS: only scoped test and helper files changed')
+          PY
+      - name: Verify lint, format and strict TypeScript and static export
+        run: |
+          bun run lint
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import prettier from 'prettier';
+          const scope=JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP,'unused-audit','scope.json'),'utf8'));
+          for(const file of scope){
+            const options=await prettier.resolveConfig(file);
+            if(!await prettier.check(fs.readFileSync(file,'utf8'),{...options,filepath:file}))throw Error('Formatting failed '+file);
+          }
+          console.log('PASS: all test and helper files in trial scope satisfy Prettier');
+          JS
+          bash scripts/build-validated-static.sh
+          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters
+          node scripts/verify-hostinger-static-export.mjs --editorial
+      - name: Compare candidate production output with current main
+        run: |
+          cat > "$RUNNER_TEMP/unused-audit/compare.py" <<'PY'
+          import collections, hashlib, json, pathlib, re, sys, xml.etree.ElementTree as ET
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit, urljoin, unquote
+          base, candidate = [pathlib.Path(s) for s in sys.argv[1:3]]
+          origin = "https://www.israel-taxi.com"
+          markers = re.compile(rb"lovable|tanstack_start_ts|7cd7aae9-57c0-4ced-b1fa-2f0691483fee|sandbox-npm-cache", re.I)
+          def digest(data): return hashlib.sha256(data).hexdigest()
+          def manifest(root):
+              return {str(p.relative_to(root)):p for p in root.rglob("*") if p.is_file()}
+          old, new = manifest(base), manifest(candidate)
+          def urls(root):
+              return [node.text for node in ET.parse(root/"sitemap.xml").getroot().findall("{*}url/{*}loc")]
+          old_urls, new_urls = urls(base), urls(candidate)
+          issues = []
+          def check(ok, message):
+              if not ok: issues.append(message)
+          check(old_urls == new_urls, "Ordered sitemap URL list changed")
+          check((base/"robots.txt").read_bytes() == (candidate/"robots.txt").read_bytes(), "robots.txt changed")
+          old_html, new_html = {p for p in old if p.endswith(".html")}, {p for p in new if p.endswith(".html")}
+          check(old_html == new_html, "HTML paths differ: removed="+str(sorted(old_html-new_html))+" added="+str(sorted(new_html-old_html)))
+          def norm(value, root):
+              if value is None: return ""
+              # Preserve actual image/font identity even if the bundler changes its hashed filename.
+              def asset(m):
+                  path = m.group(0)
+                  local = root / path.lstrip("/")
+                  if local.is_file(): return "/asset-content/"+digest(local.read_bytes())
+                  return path
+              value = re.sub(r"/assets/[A-Za-z0-9_.-]+\.(?:webp|avif|png|jpe?g|svg|gif|woff2?|ico)\b",asset,value,flags=re.I)
+              return re.sub(r"(?<=:)[rR][a-zA-Z0-9_]+(?=:)", "react-id", value)
+          class Page(HTMLParser):
+              def __init__(self, root):
+                  super().__init__(convert_charrefs=True)
+                  self.root=root; self.body=False; self.skip=0; self.title=False; self.schema=False
+                  self.text_chunks=[]
+                  self.meta=[]; self.data=[]; self.structure=[]; self.jsonld=[]; self.title_parts=[]; self.links=[]; self.assets=[]; self.schemas=[]; self.forms=0; self.images=0
+              def flush_text(self):
+                  # React can split adjacent JSX text into several HTML text nodes
+                  # separated by invisible hydration comments. Compare their actual
+                  # concatenated text, retaining whitespace between visible words.
+                  value=" ".join("".join(self.text_chunks).split())
+                  if value: self.data.append(value)
+                  self.text_chunks=[]
+              def handle_starttag(self,tag,attrs):
+                  self.flush_text()
+                  d=dict(attrs)
+                  if tag=="body": self.body=True
+                  if tag=="title": self.title=True
+                  if tag=="meta": self.meta.append(tuple(sorted((k,norm(v,self.root)) for k,v in attrs)))
+                  if tag=="link" and d.get("rel")=="canonical": self.meta.append(("canonical",d.get("href")))
+                  if tag=="script":
+                      self.skip+=1
+                      if d.get("type")=="application/ld+json": self.schema=True; self.jsonld=[]
+                  if tag=="style": self.skip+=1
+                  if tag=="script" and d.get("src"): self.assets.append(d["src"])
+                  if tag=="link" and d.get("rel") in ("stylesheet","modulepreload","preload") and d.get("href"): self.assets.append(d["href"])
+                  if not self.body or self.skip or tag=="link": return
+                  if tag=="form": self.forms+=1
+                  if tag=="img": self.images+=1
+                  if tag=="a" and d.get("href"): self.links.append(d["href"])
+                  for k in ("src","poster","data-consent-src"):
+                      if d.get(k): self.assets.append(d[k])
+                  if d.get("srcset"):
+                      self.assets.extend(s.strip().split()[0] for s in d["srcset"].split(",") if s.strip() and not s.strip().startswith("data:"))
+                  self.structure.append((tag,tuple(sorted((k,norm(v,self.root)) for k,v in attrs if k not in ("data-tsd-source",)))))
+              def handle_startendtag(self,tag,attrs): self.handle_starttag(tag,attrs)
+              def handle_endtag(self,tag):
+                  self.flush_text()
+                  if tag=="title": self.title=False
+                  if tag=="script" and self.schema:
+                      self.schemas.append(json.loads("".join(self.jsonld))); self.schema=False
+                  if tag in ("script","style"): self.skip=max(0,self.skip-1); return
+                  if self.body and not self.skip and tag!="link": self.structure.append(("/"+tag,()))
+                  if tag=="body": self.body=False
+              def handle_data(self,data):
+                  if self.title: self.title_parts.append(data)
+                  if self.schema: self.jsonld.append(data)
+                  if self.body and not self.skip: self.text_chunks.append(data)
+          def page(root,url):
+              rel=urlsplit(url).path.strip("/")
+              p=Page(root)
+              p.feed((root/rel/"index.html").read_text(encoding="utf-8"))
+              p.close()
+              p.flush_text()
+              return p
+          def schema_norm(v,root):
+              if isinstance(v,str): return norm(v,root)
+              if isinstance(v,list): return [schema_norm(x,root) for x in v]
+              if isinstance(v,dict): return {k:schema_norm(x,root) for k,x in v.items()}
+              return v
+          def missing_assets(p,root,url):
+              missing=set()
+              for a in p.assets:
+                  if a.startswith(("data:","blob:","#")): continue
+                  u=urlsplit(urljoin(url,a))
+                  if u.netloc!="www.israel-taxi.com" or u.path.startswith("/api/"): continue
+                  path=root/unquote(u.path.lstrip("/"))
+                  if not path.is_file() and not (path/"index.html").is_file(): missing.add(a)
+              return missing
+          # Prove that invisible hydration splits are equivalent, but changed
+          # text, lost spaces, and text moved across element boundaries are not.
+          def sample(html):
+              p=Page(base); p.feed(html); p.close(); p.flush_text(); return p.data
+          assert sample("<body><p>A.<!-- --> <!-- -->B</p></body>")==sample("<body><p>A. B</p></body>")
+          assert sample("<body><p>A. B</p></body>")!=sample("<body><p>A.B</p></body>")
+          assert sample("<body><p>A. B</p></body>")!=sample("<body><p>A. C</p></body>")
+          assert sample("<body><p>A. <b>B</b></p></body>")!=sample("<body><p>A. B</p></body>")
+          print("PASS: visible-text comparator preserves content and element boundaries")
+          stats=collections.Counter(); by_kind=collections.Counter()
+          for url in new_urls:
+              a,b=page(base,url),page(candidate,url)
+              for kind,x,y in [
+                  ("title",a.title_parts,b.title_parts),("metadata",sorted(map(str,a.meta)),sorted(map(str,b.meta))),
+                  ("structured data",schema_norm(a.schemas,base),schema_norm(b.schemas,candidate)),
+                  ("visible text",a.data,b.data),("body tags and attributes",a.structure,b.structure),
+                  ("links",a.links,b.links),("forms",a.forms,b.forms),("images",a.images,b.images)]:
+                  if x!=y:
+                      by_kind[kind]+=1
+                      if by_kind[kind]<=4:
+                          if isinstance(x,list) and isinstance(y,list):
+                              first=next(((str(xx)[:250],str(yy)[:250]) for xx,yy in zip(x,y) if xx!=yy),("length "+str(len(x)),"length "+str(len(y))))
+                              print("DIFFERENCE",url,kind,first)
+                          else: print("DIFFERENCE",url,kind,str(x)[:150],str(y)[:150])
+              added_missing=missing_assets(b,candidate,url)-missing_assets(a,base,url)
+              check(not added_missing, "New missing assets on "+url+": "+str(sorted(added_missing)))
+              stats.update(pages=1, forms=b.forms, links=len(b.links), images=b.images, schemas=len(b.schemas))
+          print("PAGE TOTALS",dict(stats))
+          print("PAGE DIFFERENCES",dict(by_kind))
+          for kind,n in by_kind.items(): issues.append(str(n)+" pages differ in "+kind)
+          # Public helpers/data, images and maps must not be altered by the build migration.
+          for p in sorted(set(old)|set(new)):
+              if p.startswith(("maps/","widgets/","images/","data/")):
+                  check(p in old and p in new and digest(old[p].read_bytes())==digest(new[p].read_bytes()),"Public helper/asset changed: "+p)
+          for name,p in new.items():
+              data=p.read_bytes()
+              check(not markers.search(data) and not markers.search(name.encode()),"Legacy marker in generated file "+name)
+              check(not (name.endswith(".php") or name.startswith("api/") or name in (".env",".htaccess") or name.endswith(".map")),"Unexpected private/API/source-map export: "+name)
+          print("GENERATED FILES",len(old),len(new),"HTML",len(old_html),len(new_html))
+          for ext in (".js",".css",".html"):
+              aa=[p.stat().st_size for k,p in old.items() if k.endswith(ext)]
+              bb=[p.stat().st_size for k,p in new.items() if k.endswith(ext)]
+              print("OUTPUT SIZE",ext,"before",len(aa),sum(aa),"after",len(bb),sum(bb))
+          print("LEGACY MARKER SCAN AND PARITY ISSUES",len(issues))
+          for issue in issues[:100]: print("ISSUE",issue)
+          if issues: sys.exit(1)
+          print("PASS: page content, metadata, schema, links, forms, public helpers, assets and legacy marker scan")
+          PY
+          set -o pipefail
+          python3 "$RUNNER_TEMP/unused-audit/compare.py" "$RUNNER_TEMP/main-reference/.output/public" .output/public | tee "$RUNNER_TEMP/unused-audit/production-parity.txt"
+          git diff --check
+          git diff --stat
+      - name: Full regression after test formatting
+        shell: bash
+        run: |
+          set -euo pipefail
+          VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test 2>&1 | tee "$RUNNER_TEMP/unused-audit/regression.txt"
+      - name: Save trial patch and verification reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-5-5-4-tests-trial
+          path: ${{ runner.temp }}/unused-audit/
+          if-no-files-found: warn
