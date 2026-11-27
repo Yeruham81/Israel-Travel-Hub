@@ -1,0 +1,199 @@
+name: Stage 5.5.6a - final code quality baseline and full regression
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [audit/lint-quality-stage5-final]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stage5-final-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate project
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    env:
+      CI: "true"
+      VITE_INDEXABLE: "false"
+      CI_FUNCTIONAL_ONLY: "false"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Test deployment storage maintenance in isolated fixtures
+        run: python3 scripts/test-deployment-storage.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+
+      - name: Restore Bun download cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            bun-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Install dependencies
+        run: bash scripts/install-ci-dependencies.sh
+
+      - name: Inventory all tracked files and audit authored formatting without edits
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/quality-final"
+          node --input-type=module <<'JS'
+          import fs from "node:fs";
+          import path from "node:path";
+          import {execFileSync} from "node:child_process";
+          import prettier from "prettier";
+          const out=path.join(process.env.RUNNER_TEMP,"quality-final");
+          const files=execFileSync("git",["ls-files","-z"]).toString().split("\0").filter(Boolean);
+          const generated=new Set(["src/routeTree.gen.ts","src/data/generated/guide-directory.ts","src/data/israelEventFeed.generated.json","public/data/boi-exchange-rates.json","public/sitemap.xml","public/robots.txt","bun.lock"]);
+          const rows=[];
+          function category(f){
+            if(generated.has(f))return "generated-or-lock";
+            if(f.startsWith("docs/ci-archive/"))return "archived-workflows";
+            if(f.startsWith("docs/")||f.endsWith(".md"))return "documentation";
+            if(/^\.github\/.*\.ya?ml$/.test(f))return "active-yaml";
+            if(f.startsWith("src/")&&/\.(?:[jt]sx?|[cm][jt]s|css|json)$/.test(f))return f.startsWith("src/test/")||/\.(?:test|spec)\.[jt]sx?$/.test(f)?"tests":"application";
+            if(f.startsWith("scripts/")&&/\.(?:[cm]?[jt]s|[jt]sx|json)$/.test(f))return "scripts";
+            if(f.startsWith("public/")&&/\.(?:js|mjs|css|json|html)$/.test(f))return "public-helpers";
+            if(!f.includes("/")&&(/\.(?:[cm]?[jt]s|json)$/.test(f)||f===".prettierrc"))return "root-config";
+            if(/\.(?:py|sh)$/.test(f))return "native-scripts";
+            return "assets-other";
+          }
+          const eligible=new Set(["active-yaml","application","tests","scripts","public-helpers","root-config","documentation"]);
+          for(const file of files){
+            const group=category(file);
+            if(!eligible.has(group)){rows.push({file,group,status:"not-in-prettier-scope"});continue;}
+            const info=await prettier.getFileInfo(file,{ignorePath:".prettierignore",withNodeModules:false});
+            if(info.ignored||!info.inferredParser){rows.push({file,group,status:"unsupported-or-ignored",parser:info.inferredParser});continue;}
+            try{
+              const before=fs.readFileSync(file,"utf8");
+              const options=await prettier.resolveConfig(file);
+              const after=await prettier.format(before,{...options,filepath:file});
+              rows.push({file,group,status:before===after?"compliant":"format-needed"});
+            }catch(error){rows.push({file,group,status:"parse-error",message:String(error.message)});}
+          }
+          const totals={};
+          for(const {group,status} of rows){totals[group]??={};totals[group][status]=(totals[group][status]??0)+1;}
+          fs.writeFileSync(path.join(out,"inventory.json"),JSON.stringify(rows,null,2));
+          fs.writeFileSync(path.join(out,"format-summary.json"),JSON.stringify(totals,null,2));
+          console.log("QUALITY_INVENTORY_TOTAL",files.length);
+          console.log("QUALITY_FORMAT_SUMMARY",JSON.stringify(totals));
+          for(const row of rows.filter(x=>["format-needed","parse-error","unsupported-or-ignored"].includes(x.status)))console.log("QUALITY_FINDING",JSON.stringify(row));
+          const summary=["### Final formatting baseline","","| Scope | Compliant | Needs formatting | Parse errors | Other |","|---|---:|---:|---:|---:|"];
+          for(const [group,c] of Object.entries(totals))summary.push(`| ${group} | ${c.compliant??0} | ${c["format-needed"]??0} | ${c["parse-error"]??0} | ${(c["unsupported-or-ignored"]??0)+(c["not-in-prettier-scope"]??0)} |`);
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,summary.join("\n")+"\n");
+          if(rows.some(x=>x.status==="parse-error"))console.log("::warning::Formatting parser findings require review before enforcement");
+          JS
+          git diff --exit-code
+      - name: Run strict ESLint baseline
+        shell: bash
+        run: |
+          set -o pipefail
+          bun run lint 2>&1 | tee "$RUNNER_TEMP/quality-final/eslint.txt"
+      - name: Check native scripts and active YAML syntax
+        run: |
+          python3 - <<'PY'
+          import ast, pathlib, subprocess, yaml
+          files=subprocess.check_output(["git","ls-files","-z"]).decode().split("\0")
+          counts={"python":0,"shell":0,"yaml":0}
+          for f in filter(None,files):
+              p=pathlib.Path(f)
+              if f.startswith("scripts/") and p.suffix==".py":
+                  ast.parse(p.read_text(),filename=f);counts["python"]+=1
+              elif f.startswith("scripts/") and p.suffix==".sh":
+                  subprocess.run(["bash","-n",f],check=True);counts["shell"]+=1
+              elif f.startswith(".github/") and p.suffix in (".yml",".yaml") and f!=".github/workflows/lint-quality-stage5-final.yml":
+                  def verify(n):
+                      if isinstance(n,yaml.MappingNode):
+                          keys=[(k.tag,k.value) for k,v in n.value if isinstance(k,yaml.ScalarNode)]
+                          assert len(keys)==len(set(keys)),f
+                          for k,v in n.value: verify(v)
+                      elif isinstance(n,yaml.SequenceNode):
+                          for v in n.value: verify(v)
+                  verify(yaml.compose(p.read_text(),Loader=yaml.BaseLoader));counts["yaml"]+=1
+          print("QUALITY_NATIVE_SYNTAX",counts)
+          PY
+
+      - name: Validate operational scripts without external API calls
+        shell: bash
+        env:
+          TRAVELPAYOUTS_API_TOKEN: ""
+        run: |
+          set -euo pipefail
+          git ls-files -z scripts | while IFS= read -r -d '' script; do
+            case "$script" in
+              *.js|*.mjs|*.cjs) node --check "$script" ;;
+              *.sh) bash -n "$script" ;;
+            esac
+          done
+          for script in generate-airport-platforms generate-bethlehem-category-tours generate-bethlehem-tours generate-deadsea-tours generate-food-eilat-tours generate-galilee-tours generate-jerusalem-tours generate-masada-tours generate-negev-golan-tours generate-northern-coast-tours generate-seven-missing-links generate-shore-excursions generate-tel-aviv-tours; do
+            node "scripts/travelpayouts/$script.mjs" --validate
+          done
+          node scripts/travelpayouts/generate-links.mjs --validate
+          for input in remaining-hotels paamonim-hotel jerusalem-neighborhood-fifth-hotels haifa-browse; do
+            node scripts/travelpayouts/generate-links.mjs "scripts/travelpayouts/$input.json" --validate
+          done
+          node --test scripts/israel-events-source.test.mjs scripts/travelpayouts/registry-source.test.mjs
+
+      - name: Test rendered photo attribution audit
+        run: node --test scripts/verify-photo-credits.test.mjs
+
+      # TanStack Router regenerates routeTree.gen.ts at build time.
+      # Build first so type-checking sees any newly added file routes.
+      - name: Build production version
+        run: bun run build
+
+      - name: Check TypeScript
+        run: npx tsc --noEmit
+
+      - name: Strict unused TypeScript declarations audit
+        shell: bash
+        run: |
+          set -o pipefail
+          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters 2>&1 | tee "$RUNNER_TEMP/quality-final/unused-typescript.txt"
+          echo "PASS: zero strict TypeScript unused-declaration diagnostics"
+
+      - name: Run all regression tests including editorial layout
+        shell: bash
+        run: |
+          set -o pipefail
+          bun run test 2>&1 | tee "$RUNNER_TEMP/quality-final/regression.txt"
+
+      # Match the same static build that will be published to Premium hosting.
+      # Running only the ordinary SSR build can miss prerender-specific failures.
+      - name: Validate Hostinger prerender before any deployment is eligible
+        env:
+          HOSTINGER_STATIC_BUILD: "true"
+          VITE_CANONICAL_ORIGIN: https://www.israel-taxi.com
+          VITE_INDEXABLE: "true"
+        run: |
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs --editorial
+      - name: Preserve audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-5-5-6a-final-quality-baseline
+          path: ${{ runner.temp }}/quality-final/
+          if-no-files-found: warn
