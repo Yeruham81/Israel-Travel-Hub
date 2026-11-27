@@ -93,18 +93,18 @@
     {
       "path": "/accommodation/dead-sea/family/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/accommodation/dead-sea/spa/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/accommodation/haifa/",
@@ -117,18 +117,18 @@
     {
       "path": "/accommodation/haifa/boutique/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/accommodation/haifa/family/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/accommodation/jerusalem/",
@@ -200,7 +200,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/dizengoff-city-center/",
@@ -208,7 +208,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/florentin/",
@@ -216,7 +216,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/jaffa/",
@@ -224,7 +224,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/kerem-hateimanim/",
@@ -232,7 +232,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/neve-tzedek/",
@@ -240,7 +240,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/old-north-port/",
@@ -248,7 +248,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/rothschild-boulevard/",
@@ -256,7 +256,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tiberias/",
@@ -269,18 +269,18 @@
     {
       "path": "/accommodation/tiberias/family/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/accommodation/tiberias/luxury/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/airport-transfers/",
