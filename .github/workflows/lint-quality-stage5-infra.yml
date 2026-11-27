@@ -92,7 +92,30 @@ jobs:
           assert not same('env: {FLAG: "true"}','env: {FLAG: true}')
           # A formatting-only change must not itself trigger an operational job.
           # Treat any push workflow with broad/uncertain path filters conservatively.
-          push_rules=[]
+          # Evaluate push filters for the planned main-branch merge, not arbitrary branches.
+          # Unknown/negative patterns remain conservative; tags-only workflows cannot run on a branch push.
+          def matches(pattern,value):
+              return fnmatch.fnmatchcase(value,pattern) or (pattern.startswith("**/") and fnmatch.fnmatchcase(value,pattern[3:]))
+          def branch_may_trigger(cfg,branch="main"):
+              if not isinstance(cfg,dict): return True
+              include=cfg.get("branches")
+              ignore=cfg.get("branches-ignore")
+              if include is not None:
+                  if not isinstance(include,list) or any(not isinstance(p,str) or p.startswith("!") or any(c in p for c in "+?[]") for p in include): return True
+                  return any(matches(p,branch) for p in include)
+              if ignore is not None:
+                  if not isinstance(ignore,list) or any(not isinstance(p,str) or p.startswith("!") or any(c in p for c in "+?[]") for p in ignore): return True
+                  return not any(matches(p,branch) for p in ignore)
+              if "tags" in cfg or "tags-ignore" in cfg: return False
+              return True
+          assert not branch_may_trigger({"branches":["editorial/full-site-review"]})
+          assert branch_may_trigger({"branches":["main"]})
+          assert branch_may_trigger({"branches":["**"]})
+          assert branch_may_trigger({"branches":["!main","release/**"]})
+          assert not branch_may_trigger({"branches-ignore":["main"]})
+          assert not branch_may_trigger({"tags":["v*"]})
+          assert branch_may_trigger(None)
+          push_rules=[];branch_excluded=[]
           for file in files:
               if not file.startswith(".github/workflows/"): continue
               data=yaml.load(pathlib.Path(file).read_text(),Loader=yaml.BaseLoader)
@@ -100,17 +123,21 @@ jobs:
               push=("push" in trigger) if isinstance(trigger,(dict,list)) else trigger=="push"
               if push and file!=".github/workflows/full-project-validation.yml":
                   cfg=trigger.get("push") if isinstance(trigger,dict) else None
+                  if not branch_may_trigger(cfg):
+                      branch_excluded.append(file)
+                      continue
                   patterns=cfg.get("paths") if isinstance(cfg,dict) else None
                   push_rules.append((file,patterns))
+          print("WORKFLOWS NOT TRIGGERED ON MAIN",json.dumps(branch_excluded))
           def may_trigger(file,patterns):
               if not patterns: return True
-              return any(p.startswith("!") or fnmatch.fnmatchcase(file,p) or (p.startswith("**/") and fnmatch.fnmatchcase(file,p[3:])) for p in patterns)
+              return any(not isinstance(p,str) or p.startswith("!") or any(c in p for c in "+?[]") or matches(p,file) for p in patterns)
           changed=[];scope=[];excluded=[];report=[]
           for file in files:
               p=pathlib.Path(file);before=p.read_text();after=(out/"candidates"/file).read_text()
               triggers=[wf for wf,patterns in push_rules if may_trigger(file,patterns)]
               equivalent=same(before,after)
-              if not equivalent or triggers:
+              if not equivalent or (triggers and before!=after):
                   excluded.append(file)
                   report.append({"file":file,"status":"deferred","semanticParity":equivalent,"possiblePushTriggers":triggers,"wouldChange":before!=after})
                   continue
@@ -121,6 +148,7 @@ jobs:
           for name,value in [("scope",scope),("changed",changed),("excluded",excluded),("yaml-report",report),("push-rules",push_rules)]:
               (out/(name+".json")).write_text(json.dumps(value,indent=2))
           print("INFRA FORMAT SUMMARY",json.dumps({"inventoried":len(files),"included":len(scope),"changed":len(changed),"deferred":len(excluded)}))
+          assert changed, "No eligible formatting changes; inspect exclusions before proceeding"
           for entry in report:
               if entry["status"]=="deferred": print("DEFERRED",json.dumps(entry))
           for p in pathlib.Path("scripts").rglob("*.py"): ast.parse(p.read_text(),filename=str(p))
