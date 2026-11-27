@@ -7,6 +7,7 @@ permissions:
   contents: read
 jobs:
   components-data-proposal:
+    if: ${{ !contains(github.event.head_commit.message, '[apply-verified-stage2]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -360,3 +361,57 @@ jobs:
           path: ${{ runner.temp }}/unused-audit/
           if-no-files-found: warn
 
+
+  apply-verified-stage2:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/audit/unused-code-cleanup' && contains(github.event.head_commit.message, '[apply-verified-stage2]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: audit/unused-code-cleanup
+          persist-credentials: true
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: unused-code-stage-2-proposal
+          path: ${{ runner.temp }}/verified-stage2
+          run-id: 45967509176
+          github-token: ${{ github.token }}
+      - name: Apply exactly the validated stage 2 patch to the audit branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git diff --name-only c72bef556ded607db5a6dcbcd682c3b5161efcc1 HEAD)" = ".github/workflows/unused-code-cleanup.yml"
+          patch="$RUNNER_TEMP/verified-stage2/stage-2.patch"
+          echo "675087e18e6ef4bf372d64408719506a2fab3e2ba2a2e34fbd3d5d443cd51fab  $patch" | sha256sum -c -
+          git apply --index --check "$patch"
+          git apply --index "$patch"
+          git diff --cached --check
+          python3 - "$patch" <<'PY'
+          import pathlib, re, subprocess, sys
+          patch = pathlib.Path(sys.argv[1]).read_text()
+          expected = {}
+          for block in patch.split("diff --git ")[1:]:
+              name = re.match(r'a/(.*?) b/(.*?)\n', block)
+              index = re.search(r'^index ([0-9a-f]+)\.\.([0-9a-f]+) 100644$', block, re.M)
+              assert name and index and name[1] == name[2], "Invalid patch entry"
+              assert name[1].startswith(("src/components/", "src/data/"))
+              assert not name[1].startswith("src/data/generated/")
+              expected[name[1]] = index[2]
+          files = subprocess.check_output(["git", "diff", "--cached", "--name-only", "-z"]).decode().split("\0")
+          assert set(filter(None, files)) == set(expected) and len(expected) == 29
+          for path, sha in expected.items():
+              blob = subprocess.check_output(["git", "rev-parse", ":" + path], text=True).strip()
+              assert blob.startswith(sha), path
+          print("VERIFIED SOURCE BLOBS", len(expected))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Apply verified stage 2 components and data cleanup"
+          git push origin HEAD:refs/heads/audit/unused-code-cleanup
+          git rev-parse HEAD
