@@ -54,9 +54,9 @@ function Attractions() {
     <main className="mx-auto max-w-6xl px-4 pb-16">
       <HubHeader
         crumbs={[{ name: "Home", to: "/" }, { name: "Attractions", to: PATH }]}
-        eyebrow="Discover the places that make Israel memorable"
+        eyebrow="Historic sites, cities & natural attractions"
         title="Attractions & places to visit in Israel"
-        intro="Discover individual places worth visiting across Israel, from ancient cities and archaeological sites to churches, nature reserves and desert viewpoints. Browse the attractions by region below."
+        intro="Explore Israel's ancient cities, archaeological sites, religious landmarks, nature reserves and desert landscapes."
       />
 
       <section id="browse-regions" aria-labelledby="browse-regions-heading" className="mt-8 scroll-mt-24 border-y py-4 sm:mt-10 sm:py-5">
@@ -123,7 +123,7 @@ function Attractions() {
             </li>)}
           </ul>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            Wondering how to explore these places? Find a <Link to="/tours/" className="font-medium text-primary underline-offset-4 hover:underline">guided tour you can book online</Link>, plan an <Link to="/shore-excursions/" className="font-medium text-primary underline-offset-4 hover:underline">unforgettable shore excursion</Link>, or enjoy a <Link to="/private-driver-in-israel/" className="font-medium text-primary underline-offset-4 hover:underline">private day trip with your own driver</Link>.
+            Find a <Link to="/tours/" className="font-medium text-primary underline-offset-4 hover:underline">guided tour you can book online</Link>, plan a <Link to="/shore-excursions/" className="font-medium text-primary underline-offset-4 hover:underline">shore excursion from Haifa or Ashdod</Link>, or enjoy a <Link to="/private-driver-in-israel/" className="font-medium text-primary underline-offset-4 hover:underline">private day trip with your own driver</Link>.
           </p>
         </section>
 

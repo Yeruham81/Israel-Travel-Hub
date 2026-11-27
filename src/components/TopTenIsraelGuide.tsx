@@ -148,7 +148,7 @@ export function TopTenIsraelGuide() {
           { name: "Top 10 Things to Do in Israel", to: "/travel-blog/top-10-things-to-do-in-israel/" },
         ]} />
         <GuideHeroLayout image={<GuideHeroMedia src={topTenIsraelHero.src} alt={topTenIsraelHero.alt} />}>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Israel · Experiences worth planning around</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Israel · My recommended experiences</p>
           <h1 className="guide-page-title mt-2">Top 10 Things to Do in Israel</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">
             From Jerusalem's Old City to the beaches of Tel Aviv, the Dead Sea and the desert night sky, these are ten experiences I'd consider when planning a trip to Israel. Explore the ones that interest you most and use my tips to build a comfortable route.
@@ -168,7 +168,7 @@ export function TopTenIsraelGuide() {
 
       <section id="choose" aria-labelledby="choose-h" className="mt-10 scroll-mt-24">
         <Heading id="choose" title="Choose the experiences that interest you"
-          intro="Ten ways to experience Israel, from culture and food to beaches, history and nature. Select any card for my practical guide below." />
+          intro="My ten recommended experiences in Israel, from historic landmarks and local food to beaches and natural landscapes." />
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
           {experiences.map((experience,index) => {
             const Icon = iconList[index]!;
@@ -184,7 +184,7 @@ export function TopTenIsraelGuide() {
 
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
         <Heading id="compare" title="Compare all ten experiences"
-          intro="Use this overview to choose activities that fit your interests, base and available time. Visit lengths are suggestions, excluding journeys between destinations." />
+          intro="Compare experiences by location, recommended visit duration and interests. Visit lengths are suggestions, excluding journeys between destinations." />
         
         <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
           <table className="w-full min-w-[760px] table-fixed border-collapse text-left text-sm">
@@ -208,7 +208,7 @@ export function TopTenIsraelGuide() {
 
       <section id="experiences" aria-labelledby="experiences-h" className="mt-12 scroll-mt-24">
         <Heading id="experiences" title="My guide to ten memorable Israel experiences"
-          intro="I have included the practical details that matter most when deciding which experiences fit your trip." />
+        />
         <div className="grid gap-5" data-testid="top-ten-detailed-experience-cards">
           {experiences.map((experience,index) => <ExperienceCard key={experience.id} experience={experience} number={index+1} />)}
         </div>
@@ -217,7 +217,7 @@ export function TopTenIsraelGuide() {
 
       <section id="experience-map" aria-labelledby="experience-map-h" className="mt-12 scroll-mt-24">
         <Heading id="experience-map" title="Where these experiences are in Israel"
-          intro="The map highlights eight representative regions for the ten experiences. Use it to see the geography before choosing a route." />
+          intro="The map shows the main regions covered in this guide." />
         <div className="overflow-hidden rounded-xl border bg-card">
           <div className="flex flex-col gap-3 border-b p-4 sm:flex-row sm:items-end">
             <label htmlFor="top-ten-region-select" className="w-full min-w-0 text-sm font-semibold sm:w-auto sm:flex-1">
@@ -267,14 +267,14 @@ export function TopTenIsraelGuide() {
 
       <section id="practical" aria-labelledby="practical-h" className="mt-12 scroll-mt-24">
         <Heading id="practical" title="My practical tips for a better Israel trip"
-          intro="The best plans match the region, the weather and the way you like to travel." />
+        />
         <div className="grid gap-4 md:grid-cols-2">
           <div className="rounded-xl border bg-card p-5"><Clock3 aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Give every region enough time</h3><p className="mt-2 text-sm leading-relaxed">Travel between Jerusalem, the Galilee, Mitzpe Ramon and Eilat takes time. I suggest choosing a few overnight bases and avoiding repeated long return drives.</p></div>
           <div className="rounded-xl border bg-card p-5"><CalendarDays aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Plan around holidays and opening days</h3><p className="mt-2 text-sm leading-relaxed">Shabbat and religious holidays affect transport, markets and some attractions. Use my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Israel calendar of events</Link> and check the venue you want to visit.</p></div>
           <div className="rounded-xl border bg-card p-5"><ShieldCheck aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Choose safe bathing and trails</h3><p className="mt-2 text-sm leading-relaxed">Swim only where lifeguard service is operating, use managed Dead Sea beaches, protect coral habitats, and check park trail notices before exposed hikes.</p></div>
-          <div className="rounded-xl border bg-card p-5"><CarFront aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Choose transport by journey</h3><p className="mt-2 text-sm leading-relaxed">Use city transport where convenient, and weigh a tour, car or private driver for remote sites. Plan the final return journey as carefully as the outward trip. See my <Link to="/travel-blog/getting-around-israel/" className="font-semibold text-primary hover:underline">transport guide</Link>.</p></div>
+          <div className="rounded-xl border bg-card p-5"><CarFront aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Transport between attractions</h3><p className="mt-2 text-sm leading-relaxed">Public transport is convenient in major cities, while organized tours, rental cars and private drivers offer options for reaching more remote attractions. Plan the final return journey as carefully as the outward trip. See my <Link to="/travel-blog/getting-around-israel/" className="font-semibold text-primary hover:underline">transport guide</Link>.</p></div>
           <div className="rounded-xl border bg-card p-5"><Footprints aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Match activity to your pace</h3><p className="mt-2 text-sm leading-relaxed">The Old City has stone paving and steps; desert viewpoints, water activities and park trails involve different demands. Choose access and activity levels that fit your group.</p></div>
-          <div className="rounded-xl border bg-card p-5"><Moon aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">If you're going stargazing</h3><p className="mt-2 text-sm leading-relaxed">A darker moon phase, clear sky and authorised viewing area make the difference. Pack layers for cool desert nights and consider staying locally.</p></div>
+          <div className="rounded-xl border bg-card p-5"><Moon aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">If you're going stargazing</h3><p className="mt-2 text-sm leading-relaxed">For the best stargazing conditions, choose a clear night close to the new moon and an authorized viewing area. Pack layers for cool desert nights and consider staying locally.</p></div>
         </div>
       </section>
       <div className="mt-5"><Tip>If you are choosing travel dates, spring and autumn are good starting points for a mixed city-and-nature trip. Still check the actual forecast: Jerusalem's hills, the coast and the deserts can have very different conditions on the same day.</Tip></div>

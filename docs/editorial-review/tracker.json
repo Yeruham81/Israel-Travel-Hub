@@ -330,10 +330,10 @@
     {
       "path": "/attractions/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 7,
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending."
     },
     {
       "path": "/attractions/akko-acre/",
@@ -560,10 +560,10 @@
     {
       "path": "/privacy-policy/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 14,
+      "notes": "Group 12C approved style revisions plus explicit user instructions: active form delivery and consent-gated GA4, generic email processor disclosure, remove duplication, 24-hour cancellation in Terms; update document dates to 2026-11-27. Regression verification pending."
     },
     {
       "path": "/private-driver-in-israel/",
@@ -577,130 +577,130 @@
     {
       "path": "/shore-excursions/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 8,
-      "notes": "All eight page-specific group 11C edits approved and applied; Regression and rendered corpus verification pending."
+      "notes": "All eight page-specific group 11C edits approved and applied; Regression and rendered corpus verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/shore-excursions/ashdod/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 10,
-      "notes": "All eight page-specific group 11C edits approved and applied; Four shared port-page edits also applied, counted once across both port pages (two allocated to each for aggregate tracking). Regression and rendered corpus verification pending."
+      "notes": "All eight page-specific group 11C edits approved and applied; Four shared port-page edits also applied, counted once across both port pages (two allocated to each for aggregate tracking). Regression and rendered corpus verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/shore-excursions/haifa/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 10,
-      "notes": "All eight page-specific group 11C edits approved and applied; Four shared port-page edits also applied, counted once across both port pages (two allocated to each for aggregate tracking). Regression and rendered corpus verification pending."
+      "notes": "All eight page-specific group 11C edits approved and applied; Four shared port-page edits also applied, counted once across both port pages (two allocated to each for aggregate tracking). Regression and rendered corpus verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/terms-of-use/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 14,
+      "notes": "Group 12C approved style revisions plus explicit user instructions: active form delivery and consent-gated GA4, generic email processor disclosure, remove duplication, 24-hour cancellation in Terms; update document dates to 2026-11-27. Regression verification pending."
     },
     {
       "path": "/tours/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 4,
-      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending."
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/tours/bethlehem-jericho-jordan-river/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending."
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/tours/caesarea-haifa-acre/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/tours/eilat-red-sea/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/tours/food-market-tours/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/tours/golan-heights/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/tours/jerusalem/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending."
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/tours/masada-dead-sea/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending."
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/tours/nazareth-sea-of-galilee/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/tours/negev-desert-ramon-crater/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending."
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/tours/tel-aviv-jaffa/",
       "group": 11,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending."
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
     },
     {
       "path": "/travel-blog/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 7,
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/attractions-in-tel-aviv/",
@@ -787,10 +787,10 @@
     {
       "path": "/travel-blog/best-esim-for-israel/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 7,
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/best-hotels-in-haifa/",
@@ -811,18 +811,18 @@
     {
       "path": "/travel-blog/best-time-to-visit-israel/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 8,
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/calendar-of-events/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 7,
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/christian-tours-in-israel/",
@@ -912,18 +912,18 @@
     {
       "path": "/travel-blog/israel-tours-for-seniors/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 9,
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/israel-travel-tips/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 9,
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/jerusalem-to-bethlehem/",
@@ -1016,10 +1016,10 @@
     {
       "path": "/travel-blog/top-10-things-to-do-in-israel/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 9,
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/uber-in-israel/",
@@ -1033,10 +1033,10 @@
     {
       "path": "/travel-blog/what-to-eat-in-israel/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 9,
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/where-to-stay-in-jerusalem/",

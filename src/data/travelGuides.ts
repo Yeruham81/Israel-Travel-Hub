@@ -403,7 +403,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     id: "esim",
     title: "Best eSIM for Israel: Prices, Providers & My Picks",
     description: "Compare Israel eSIM prices for short trips, longer stays and heavy data use. My picks for 3GB, 5GB, 10GB and unlimited travel plans.",
-    intro: "Choosing an eSIM for Israel? Here are my picks for a short break, a longer holiday and travellers who need unlimited data.",
+    intro: "Here are my recommended eSIM plans for Israel, from short visits and longer holidays to unlimited data packages.",
     answer: "I would start with Saily for a short trip or everyday use and Airalo for 10GB over 30 days. For unlimited data, I would choose GigSky, with 3.5GB of high-speed data per day.",
     updatedAt: ESIM_UPDATED,
     topics: ["connectivity", "tips"],
@@ -414,7 +414,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "short-trip",
         title: "Compare prepaid eSIM data plans",
-        paragraphs: ["For a week of using maps, messaging and occasional browsing, I recommend a small data package that covers your stay. My choice: Saily."],
+        paragraphs: ["For a week of navigation, messaging and occasional browsing, I recommend a 3GB data package. My choice: Saily."],
         sourceIds: ["guide-esim-saily", "guide-esim-airalo-fixed", "guide-esim-yesim", "guide-esim-gigsky"],
       },
       {
@@ -432,20 +432,20 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "long-trip",
         title: "How much data do you need in Israel?",
-        paragraphs: ["For one to three weeks of navigation and browsing, 5GB is a reasonable starting point. If you frequently upload photos or make video calls, consider 10GB or more. For a month with 10GB, my choice is Airalo."],
+        paragraphs: ["For a stay of one to three weeks, I recommend starting with 5GB for navigation and everyday browsing. If you frequently upload photos or make video calls, consider 10GB or more. For a month with 10GB, my choice is Airalo."],
         sourceIds: ["guide-esim-airalo-fixed", "guide-esim-saily"],
       },
       {
         id: "payg",
         title: "Pay-as-you-go eSIM for Israel",
-        paragraphs: ["With Drimsim, you pay only for the data you use. It may suit occasional use or a backup connection, while a prepaid package can be more economical for daily navigation and social media."],
+        paragraphs: ["With Drimsim, you pay only for the data you use. Pay-as-you-go data is useful for occasional browsing or as a backup connection. Prepaid packages generally offer better value for everyday use."],
         sourceIds: ["guide-esim-drimsim"],
       },
       {
         id: "regional",
         title: "Best eSIM for a Middle East trip",
         paragraphs: [
-          "Combining Israel with Jordan, Egypt or other countries? Airalo's Middle East & North Africa regional eSIM can cover several destinations with one plan. A listed option is " + esimRegional.gb + "GB for " + esimRegional.days + " days at " + esimUsd(esimRegional.usd).replace(/\.00$/, "") + ". Before buying, confirm coverage for Israel and each additional destination, including access to Palestinian networks if your trip includes the West Bank. My choice: Airalo.",
+          "If your trip includes Israel, Jordan, Egypt or other countries, consider a regional eSIM. Airalo's Middle East & North Africa regional eSIM can cover several destinations with one plan. A listed option is " + esimRegional.gb + "GB for " + esimRegional.days + " days at " + esimUsd(esimRegional.usd).replace(/\.00$/, "") + ". Before buying, confirm coverage for Israel and each additional destination, including access to Palestinian networks if your trip includes the West Bank. My choice: Airalo.",
         ],
         externalLinks: [
           { label: "View Airalo's Middle East & North Africa plans", href: AIRALO_MENA_AFFILIATE_URL },
@@ -456,7 +456,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "compatibility",
         title: "Will an eSIM work on your phone?",
         paragraphs: [
-          "Use Airalo's compatibility checker to find out whether your phone supports eSIM. Check your exact model and regional version before purchasing a plan.",
+          "Check whether your specific phone model and regional version support eSIM using Airalo's compatibility checker.",
           "Your phone also needs to be unlocked. Many phones can keep a home SIM active for calls and messages while using a travel eSIM for data.",
         ],
         externalLinks: [
@@ -501,7 +501,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       "On arrival select the travel eSIM for mobile data; follow its roaming instructions and prevent roaming charges on your home SIM",
     ],
     faqs: [
-      { q: "Can I keep my WhatsApp number with a travel eSIM?", a: "Yes. WhatsApp normally stays linked to your existing number while you use the travel eSIM for internet access. You do not need to change your WhatsApp number." },
+      { q: "Can I keep my WhatsApp number with a travel eSIM?", a: "Yes. WhatsApp normally stays linked to your existing number while you use the travel eSIM for internet access." },
       { q: "Can I use my eSIM as a hotspot for a laptop?", a: "Many travel eSIMs allow tethering, but the limits vary by provider. For work or frequent video calls, pay attention to the amount of high-speed data included each day." },
       { q: "What happens when my fixed-data eSIM runs out?", a: "Your mobile data service may stop until you buy a top-up or another plan. Check the provider's top-up options before your trip." },
       { q: "Will my Israel eSIM work in Bethlehem or Jericho?", a: "Coverage in the West Bank depends on the networks included in your plan. Israeli coverage alone does not guarantee access to Palestinian networks." },

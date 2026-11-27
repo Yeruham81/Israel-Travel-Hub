@@ -36,7 +36,7 @@ export const seniorDayTrips:SeniorDay[] = [
     to:"/tours/jerusalem/",googlePlace:"Old City Jerusalem, Israel",
   },
   {
-    id:"masada",title:"Masada & the Dead Sea, without a strenuous hike",duration:"Full-day",
+    id:"masada",title:"Masada by cable car & the Dead Sea",duration:"Full-day",
     sampleOrder:[
       "Start early at Masada's eastern visitor entrance; check cable-car operation and the accessible areas before buying tickets.",
       "Ride the cable car and choose a section of the plateau and viewpoints suited to your mobility.",
@@ -51,7 +51,7 @@ export const seniorDayTrips:SeniorDay[] = [
     image:"/images/attractions/dead-sea.webp",alt:"Dead Sea and desert shoreline",
     intro:"This desert day can focus on viewpoints, Masada's eastern visitor complex and a relaxed stop at the Dead Sea. The Masada cable car offers an alternative to climbing the Snake Path.",
     easy:"Consider the cable car and a limited section of the archaeological plateau, followed by lunch or a scenic stop at Ein Bokek.",
-    watchFor:"The park authority identifies the cable car as wheelchair accessible. Check access to the plateau, ruins and beaches separately. Be prepared for uneven surfaces, intense heat and slippery areas along the Dead Sea shore.",
+    watchFor:"The Masada cable car is wheelchair accessible. Check access to the plateau, ruins and beaches separately. Be prepared for uneven surfaces, intense heat and slippery areas along the Dead Sea shore.",
     suggestedStops:[{label:"Masada",to:"/attractions/masada/"},{label:"Dead Sea",to:"/attractions/dead-sea/"},{label:"Jerusalem to the Dead Sea",to:"/travel-blog/jerusalem-to-the-dead-sea/"}],
     to:"/tours/masada-dead-sea/",googlePlace:"Masada National Park, Israel",
   },
@@ -65,14 +65,14 @@ export const seniorDayTrips:SeniorDay[] = [
     restStop:"Enjoy a relaxed lunch overlooking the Sea of Galilee after visiting Nazareth.",
     shortenDay:"Choose the lakeside highlights first and save additional churches or Mount Tabor for a second day; an overnight Galilee base can help.",
     image:"/images/attractions/sea-of-galilee.webp",alt:"Sea of Galilee surrounded by low green hills",
-    intro:"A journey north can combine Nazareth's churches with peaceful lakeside sites. For travelers who tire easily, splitting the region across two days may be far more pleasant than a long round trip.",
+    intro:"A journey north can combine Nazareth's churches with peaceful lakeside sites. For a more relaxed visit, I recommend spending two days exploring Nazareth and the Sea of Galilee.",
     easy:"Choose one main Nazareth church and one or two lakeside stops, with time for the scenery and a quiet meal.",
     watchFor:"Some sanctuaries have steps, uneven paths and busy services. Drive times from Jerusalem are longer than they appear on a small map; verify the entry and mobility details for each location.",
     suggestedStops:[{label:"Annunciation Basilica",to:"/attractions/basilica-of-the-annunciation/"},{label:"Sea of Galilee",to:"/attractions/sea-of-galilee/"},{label:"Capernaum",to:"/attractions/capernaum/"}],
     to:"/tours/nazareth-sea-of-galilee/",googlePlace:"Basilica of the Annunciation, Nazareth, Israel",
   },
   {
-    id:"coast",title:"Caesarea, Haifa & Akko — choose your stops",duration:"Full-day",
+    id:"coast",title:"Caesarea, Haifa & Akko at your own pace",duration:"Full-day",
     sampleOrder:[
       "Explore a selected visitor route at Caesarea, beginning at the entrance that best suits your walking needs.",
       "Pause for a seated lunch around Caesarea Harbor or Haifa before continuing along the coast.",
