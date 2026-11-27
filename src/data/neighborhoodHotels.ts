@@ -424,4 +424,5 @@ export const neighborhoodHotelSources: SourceReference[] = supplemental.map((hot
   publisher: "Expedia",
   url: hotel.expediaUrl,
   checkedAt: hotel.id === "jlm-paamonim" || ["jlm-eldan", "jlm-christ-church", "jlm-brown-machne", "jlm-national-hotel", "jlm-dan-boutique"].includes(hotel.id) ? "2026-11-19" : "2026-10-22",
+  note: "",
 }));
