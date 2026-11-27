@@ -51,7 +51,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight title="Nahal David - the short waterfall approach" image={{ src: oasisPhoto, alt: "Freshwater and lush greenery in the Nahal David area of Ein Gedi oasis" }}>
-        <p>For a short nature visit, I would start at Nahal David. After the October 2026 floods, the park authority describes a <strong>walk of around ten minutes to the first waterfall</strong>. Flood debris has left the pool below the waterfall dry. Check which longer trails have reopened before visiting.</p>
+        <p>For a short nature visit, I would start at Nahal David. Following the October 2026 floods, the open route is a <strong>walk of around ten minutes to the first waterfall</strong>. Flood debris has left the pool below the waterfall dry. Check which longer trails have reopened before visiting.</p>
         <p>There are accessibility features on the approach, but the section available on your visit may be shorter than the usual paved route. <a href={official.david} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the official Nahal David route update</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight
@@ -59,7 +59,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
         image={{ src: rockGorgePhoto, alt: "Rocky water-carved gorge within Ein Gedi Nature Reserve" }}
       >
         <p>South of Nahal David, Nahal Arugot offers a more demanding canyon hike. The route towards the Hidden Waterfall has been modified after flooding and is currently intended for <strong>experienced hikers</strong>. The red-marked trail follows the drier northern bank; the blue-marked option includes sections in the stream bed.</p>
-        <p>Allow several hours and check the conditions of any pools before setting off. The park currently lists an earlier cutoff for new entrants to this trail, so plan your starting time around the <a href={official.arugot} target="_blank" rel="noopener noreferrer" className={inlineLink}>official Nahal Arugot notice</a>.</p>
+        <p>Allow several hours and check the conditions of any pools before setting off. This trail currently closes to new visitors earlier than usual. Plan your start time using the <a href={official.arugot} target="_blank" rel="noopener noreferrer" className={inlineLink}>official Nahal Arugot notice</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The green oasis and its desert wildlife"
@@ -72,8 +72,8 @@ export const einGediDestinationContent: AttractionDestinationContent = {
         title="Ein Gedi Spring, higher paths and viewpoints"
         image={{ src: desertOverlook, alt: "Desert hiking ledge above Ein Gedi with views down to the Dead Sea" }}
       >
-        <p>Experienced hikers can explore the upper paths towards Ein Gedi Spring and Dodim Cave when those routes are open. The hike from Tel Goren takes around three hours. The park currently lists 10:00 as the latest entry time.</p>
-        <p>This is a different outing from the short Nahal David waterfall visit. Check the <a href={official.overview} target="_blank" rel="noopener noreferrer" className={inlineLink}>latest route-specific entry and exit times</a> before choosing it.</p>
+        <p>Experienced hikers can explore the upper paths towards Ein Gedi Spring and Dodim Cave when those routes are open. The hike from Tel Goren takes around three hours. The current last entry time is 10:00.</p>
+        <p>For this longer hike, check the <a href={official.overview} target="_blank" rel="noopener noreferrer" className={inlineLink}>latest route-specific entry and exit times</a> before choosing it.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The ancient synagogue and its mosaics"
@@ -99,7 +99,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
           <p className="mt-1 text-sm leading-relaxed sm:text-base">Sunday–Thursday & Saturday: <strong>{info.winterRegular}</strong></p>
           <p className="mt-1 text-sm leading-relaxed sm:text-base">Friday & ordinary holiday eves: <strong>{info.winterFriday}</strong></p>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">Rosh Hashanah, Passover and Yom Kippur eves: <strong>{info.specialHolidayEves}</strong>.</p>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>General last entry is one hour before closing.</strong> Nahal Arugot currently has an earlier cutoff (up to three hours before closing), while the upper Ein Gedi Spring route lists entry by 10:00. Check the entry times for your chosen trail. <a href={official.english} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official hours and notices</a>.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>General last entry is one hour before closing.</strong> Nahal Arugot currently has an earlier cutoff (up to three hours before closing), while entry to the upper Ein Gedi Spring route is by 10:00. Check the entry times for your chosen trail. <a href={official.english} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official hours and notices</a>.</p>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2"><Ticket className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-serif text-xl font-semibold">Nature reserve admission</h3></div>
@@ -210,7 +210,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Day trips to the Dead Sea often include Masada and a stop at Ein Gedi. Check whether your tour actually enters the nature reserve, which trail is planned and whether the itinerary can adapt to current closures.</p>
+      <p>Day trips to the Dead Sea often include Masada and a stop at Ein Gedi. Check whether the tour includes entry to the nature reserve, which trail you'll visit and how the operator handles trail closures.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/masada-dead-sea/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="ein-gedi-tours-card">
           <img src={masadaPhoto} alt="Masada fortress above the Dead Sea, a popular day-trip combination with Ein Gedi" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>

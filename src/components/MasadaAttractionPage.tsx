@@ -141,7 +141,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="masada-visitor-essentials">
         <h3 className="font-serif text-xl font-semibold">Museum, reservations and practical essentials</h3>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li><strong>Reservations:</strong> Booking a park timeslot ahead helps guarantee entry, particularly during busy periods. You must reserve a time to visit the museum, even if admission is included in your ticket.</li>
+          <li><strong>Reservations:</strong> Reserve a park entry time in advance, especially during busy periods. You must reserve a time to visit the museum, even if admission is included in your ticket.</li>
           <li><strong>Museum hours:</strong> Sunday–Thursday and Saturday, 08:30–15:30; Friday and holiday eves, 08:30–14:30, subject to special closures. Reserve in advance.</li>
           <li><strong>Accessibility:</strong> The east-side cable car, bridge, many plateau paths and the museum are accessible. Descending to the Northern Palace terraces requires numerous steps.</li>
           <li><strong>What to bring:</strong> Water, hat, sun protection and sturdy shoes. Shade is limited on the plateau; sudden desert flooding can also affect roads and trails.</li>
@@ -158,7 +158,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
           <div className="flex justify-between gap-3"><dt>September–October</dt><dd className="font-semibold" dir="ltr">{fees.nightShowSeptemberOctober}</dd></div>
           <div className="flex justify-between gap-3"><dt>November–December</dt><dd className="font-semibold" dir="ltr">{fees.nightShowNovemberDecember}</dd></div>
         </dl>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Closed January–April according to the operator's English timetable. November–December shows are weather-dependent; confirm availability and the starting time for your date.</p>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Closed January–April. November–December shows are weather-dependent; confirm availability and the starting time for your date.</p>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">The show is reached from Arad via Road 3199. <a href={official.nightShow} target="_blank" rel="noopener noreferrer" className={inlineLink}>Show times and booking</a>.</p>
       </div>
     </div>
@@ -220,9 +220,9 @@ export const masadaDestinationContent: AttractionDestinationContent = {
       </figure>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <div className="flex items-center gap-2"><Sun className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Sunrise and hiking plans</h3></div>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">The Snake Path can open about an hour before sunrise, and the western Roman Ramp about half an hour before sunrise, subject to conditions. <strong>Regular cable-car service does not automatically operate for sunrise</strong>; special sunrise rides are organized on selected dates and require their own booking.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">The Snake Path can open about an hour before sunrise, and the western Roman Ramp about half an hour before sunrise, subject to conditions. <strong>Regular cable-car service begins after sunrise.</strong> Special sunrise rides operate on selected dates and require advance booking.</p>
         <AttractionPracticalTip>
-          <strong>Hiking safety:</strong> In the heat, hike only when the trail is officially open and carry plenty of water. Never assume a return path remains open simply because you managed to climb up.
+          <strong>Hiking safety:</strong> In the heat, hike only when the trail is officially open and carry plenty of water. Check the descent trail's opening hours before starting your climb.
         </AttractionPracticalTip>
       </div>
     </div>
@@ -231,7 +231,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
     <div className="mt-4 space-y-3">
       <p>King Herod developed Masada as a fortified palace complex during the late first century BCE, with impressive storerooms, water systems and terraces overlooking the desert.</p>
       <p>After the Jewish revolt against Rome began in 66 CE, rebels occupied the mountaintop. Roman forces eventually laid siege to Masada, building a ring of camps and a ramp against the western side. The events of the final siege are known largely from the first-century historian Josephus; not every part of his account can be independently verified archaeologically.</p>
-      <p>Today the fortress is a UNESCO World Heritage Site. The standing ruins and visible siege works make the scale of the ancient complex and its desert setting unusually easy to understand.</p>
+      <p>Today Masada is a UNESCO World Heritage Site. From the summit you can see the ancient fortress and the remains of the Roman siege works across the surrounding desert.</p>
     </div>
   ),
   tourContent: (
@@ -263,7 +263,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
     { q: "Which Masada entrance should I use?", a: "Masada East serves the cable car, Snake Path and museum; Masada West serves the Roman Ramp and night show. Check the directions for your chosen entrance in the How to get there section." },
     { q: "Can I see sunrise at Masada using the cable car?", a: "The Snake Path can open before dawn, subject to weather restrictions. Regular cable-car hours start later; special sunrise cable-car departures run only on selected dates and require booking." },
     { q: "How difficult is the Snake Path?", a: "It is a steep ascent of around 2 km with roughly 900 steps, taking about an hour for fit hikers. Summer heat may close ascent as early as 07:00. Check the park's current instructions." },
-    { q: "Do I need to reserve entry or the museum?", a: "Book your visit in advance to guarantee entry during busy periods. For the Yigael Yadin Museum, a separate timed reservation is required even if the museum is included with paid park entry." },
+    { q: "Do I need to reserve entry or the museum?", a: "Reserve your visit in advance, especially during busy periods. For the Yigael Yadin Museum, a separate timed reservation is required even if the museum is included with paid park entry." },
     { q: "How long does a visit to Masada take?", a: "Allow 2–3 hours on site for the main ruins and viewpoints, plus extra time for hiking, the museum, or a separate Dead Sea stop." },
     { q: "Where does the Masada night show take place?", a: "At Masada West, with separate admission and advance booking. Its seasonal starting times are listed in the visitor information section." },
   ],

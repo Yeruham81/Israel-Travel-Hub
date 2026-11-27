@@ -341,7 +341,7 @@
       "status": "edited",
       "reviewedSnapshot": "8683af55f0b2c19739d879ee7eb15609a9779c5163ca937c678a9f66ab4a2bae",
       "changes": 7,
-      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge.",
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending.",
       "postEditSnapshot": "d828c183dc145681fbac0a96ff98e25191e4c4df096335a9f378676f99d88e3e"
     },
     {
@@ -358,7 +358,7 @@
       "status": "edited",
       "reviewedSnapshot": "db8d855a62a8a2c97719abf8cec4e069c8f9b92a6f1155a2a71c3da94c2351e4",
       "changes": 3,
-      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge.",
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending.",
       "postEditSnapshot": "63bd2c914c254c8383742105f09bac05828caa1616a830e30ba54f28c46fc004"
     },
     {
@@ -372,10 +372,10 @@
     {
       "path": "/attractions/dead-sea/",
       "group": 8,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "9aca4c726104018b31b99a699c222f06168e9bcc007c8cf1527fda3f573c81ee",
+      "changes": 7,
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval."
     },
     {
       "path": "/attractions/eilat/",
@@ -388,10 +388,10 @@
     {
       "path": "/attractions/ein-gedi/",
       "group": 8,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "193516268cafba9b38b1aeee6ba22ff4791316d819919a86019014c30c68bfa9",
+      "changes": 6,
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval."
     },
     {
       "path": "/attractions/haifa/",
@@ -399,7 +399,8 @@
       "status": "edited",
       "reviewedSnapshot": "ec426fd530ab63c542e453016b18b82a21f7e2e5b899669b70aa814a7dfd0953",
       "changes": 6,
-      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval."
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending.",
+      "postEditSnapshot": "5a633049eb50ec04ddd4a2039cacc2d4f0b70e11a833fce3043f9de705195f99"
     },
     {
       "path": "/attractions/jaffa/",
@@ -421,10 +422,10 @@
     {
       "path": "/attractions/masada/",
       "group": 8,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "1a904b33e5107dc330b79f63298b5c3919b8d71bf16e2bbe6935be29fbced58b",
+      "changes": 6,
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval."
     },
     {
       "path": "/attractions/mitzpe-ramon-crater/",
@@ -499,7 +500,7 @@
       "status": "edited",
       "reviewedSnapshot": "42cfe24dc94c1f7c2acd530c640d110504edc1685c687432c4e5745f6737c7ad",
       "changes": 5,
-      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge.",
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending.",
       "postEditSnapshot": "d2307f1690b20437f79542646382cfd4331d4459f6cc246e8ebcc8b07b8d2f70"
     },
     {
@@ -508,7 +509,8 @@
       "status": "edited",
       "reviewedSnapshot": "c9c40dc4b1c469eaa99918221d3a2c03e220ab9828c40d0bb90858eae4df6b80",
       "changes": 6,
-      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval."
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending.",
+      "postEditSnapshot": "02e5a8d179938c9193850699c3cbe41aa00fda6eb61f493241c355decf4493b2"
     },
     {
       "path": "/attractions/tabgha/",
@@ -524,7 +526,8 @@
       "status": "edited",
       "reviewedSnapshot": "31dc97818623627516be210da1d62f0abfc73d8e0f7c7e3b605b09d64f272973",
       "changes": 5,
-      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval."
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending.",
+      "postEditSnapshot": "19c43c6021a18a1ff62ae44f480d276fad3537093a873b33655f916b6eb26fda"
     },
     {
       "path": "/attractions/via-dolorosa/",
@@ -950,7 +953,8 @@
       "status": "edited",
       "reviewedSnapshot": "42205ae80fcc8196e52ca7ba2da58f46882352cbc12ea84770f484e971a9ef55",
       "changes": 10,
-      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval."
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending.",
+      "postEditSnapshot": "0ad1581056e1796b7bdf460ad93fd2aa2ecf40fb4ad3f5139f29c0c3b1eedf04"
     },
     {
       "path": "/travel-blog/museums-in-jerusalem/",
