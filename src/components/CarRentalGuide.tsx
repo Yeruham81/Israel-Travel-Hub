@@ -86,7 +86,7 @@ export function CarRentalGuide() {
       <Section id="costs" title="Compare the whole rental cost">
         <p>Use the total for your actual trip when comparing offers. A lower daily rate can come with a different mileage allowance, excess, fuel policy or collection fee.</p>
         <RentalTable caption="Car rental costs to compare before booking" headers={["Cost or condition", "What to compare", "Before you book"]} rows={rentalCostRows} />
-        <p>The security deposit is a separate card hold or payment under the rental agreement. Budget for it alongside the rental charge. For taxes, have the supplier confirm your eligibility and the items included in any exemption.</p>
+        <p>The rental company may block or charge a security deposit on your card, in addition to the rental price. For taxes, have the supplier confirm your eligibility and the items included in any exemption.</p>
         <p><RentalComparisonLink placement="cost-comparison" className={inline}>Compare rental offers for your route and dates</RentalComparisonLink>.</p>
       </Section>
 

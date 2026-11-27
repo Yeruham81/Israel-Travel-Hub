@@ -205,7 +205,7 @@ export const topTenFaqs = [
   { q: "Which experiences suit families with children?",
     a: "Consider a supervised beach, food market, accessible Old City route, museums or an Eilat marine activity suited to your children. At Masada, the desert or on snorkelling outings, choose the route and conditions for your children's ages and abilities." },
   { q: "When is the best season to visit these places?",
-    a: "Spring and autumn are good starting points for a varied trip, but each region differs. Desert hikes and open-air archaeology need heat-aware planning; beach and water activities have their own seasons. Check weather and holiday arrangements for your actual travel dates." },
+    a: "Spring and autumn are good starting points for a varied trip, but each region differs. Avoid the hottest hours when hiking in the desert or visiting outdoor archaeological sites. Plan beach and water activities according to the season. Check weather and holiday arrangements for your actual travel dates." },
   { q: "Can I combine Eilat and the Ramon Crater with Jerusalem or Tel Aviv?",
     a: "You can combine them on a longer trip, but I recommend treating the Negev and Eilat as a southern leg with dedicated travel time and at least one overnight stop. They are not quick additions to a central-Israel sightseeing day." },
 ];

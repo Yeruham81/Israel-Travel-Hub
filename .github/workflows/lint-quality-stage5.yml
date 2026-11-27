@@ -1,4 +1,4 @@
-name: Stage 5.1 - read-only lint and formatting inventory
+name: Stage 5.2 - targeted lint cleanup validation
 on:
   push:
     branches: [audit/lint-quality-stage5]
@@ -6,16 +6,20 @@ on:
 permissions:
   contents: read
 jobs:
-  inventory:
+  validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 30
     env:
       CI: "true"
+      CI_FUNCTIONAL_ONLY: "false"
+      VITE_INDEXABLE: "true"
+      VITE_CANONICAL_ORIGIN: "https://www.israel-taxi.com"
+      HOSTINGER_STATIC_BUILD: "true"
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: e13c2f51a41006bfa45f1395607d067567f40540
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-node@v7
         with:
           node-version: "24"
@@ -24,142 +28,189 @@ jobs:
         with:
           bun-version: "1.4.4"
       - run: bash scripts/install-ci-dependencies.sh
-      - name: Inventory existing ESLint and standalone Prettier configuration
-        shell: bash
+      - name: Build and lint updated main reference
         run: |
-          set -euo pipefail
-          out="$RUNNER_TEMP/lint-inventory"
-          mkdir -p "$out"
-          git rev-parse HEAD > "$out/source-commit.txt"
-          git status --porcelain > "$out/before-status.txt"
-          node_modules/.bin/eslint --version > "$out/eslint-version.txt"
-          node_modules/.bin/prettier --version > "$out/prettier-version.txt"
-          for file in src/routes/index.tsx src/components/GuideCard.tsx src/test/transportation.test.tsx scripts/generate-sitemap.mjs src/routeTree.gen.ts; do
-            node_modules/.bin/eslint --print-config "$file" > "$out/config-$(basename "$file").json"
-          done
+          mkdir -p "$RUNNER_TEMP/unused-audit"
+          git worktree add --detach "$RUNNER_TEMP/main-reference" d4ce80b5f57af0f190d066f44634b6282a3e1587
+          cd "$RUNNER_TEMP/main-reference"
+          bash scripts/install-ci-dependencies.sh
           status=0
-          node_modules/.bin/eslint . --format json-with-metadata --output-file "$out/eslint.json" > "$out/eslint-stdout.txt" 2> "$out/eslint-stderr.txt" || status=$?
-          echo "$status" > "$out/eslint-exit.txt"
-          cat "$out/eslint-stderr.txt"
+          node_modules/.bin/eslint . --rule 'prettier/prettier: off' --format json --output-file "$RUNNER_TEMP/unused-audit/before-lint.json" || status=$?
           test "$status" -le 1
-          test -s "$out/eslint.json"
-          status=0
-          node_modules/.bin/prettier --list-different . > "$out/prettier-files.txt" 2> "$out/prettier-stderr.txt" || status=$?
-          echo "$status" > "$out/prettier-exit.txt"
-          cat "$out/prettier-stderr.txt"
-          test "$status" -le 1
-          git ls-files -z > "$out/tracked-files.bin"
-          git status --porcelain > "$out/after-status.txt"
-          diff -u "$out/before-status.txt" "$out/after-status.txt"
-      - name: Classify by rule, severity, scope and fixability
-        shell: bash
+          bash scripts/build-validated-static.sh
+      - name: Check nonformat lint and strict TypeScript
         run: |
+          status=0
+          node_modules/.bin/eslint . --rule 'prettier/prettier: off' --format json --output-file "$RUNNER_TEMP/unused-audit/after-lint.json" || status=$?
+          test "$status" -le 1
           python3 - <<'PY'
-          import collections as C, csv, json, os, pathlib, re
-          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'lint-inventory'
-          root=pathlib.Path.cwd()
-          data=json.loads((out/'eslint.json').read_text())
-          results=data['results']
-          meta=data.get('metadata',{}).get('rulesMeta',{})
-          tracked=set((out/'tracked-files.bin').read_bytes().decode().split('\0'))
-          generated={'src/routeTree.gen.ts','src/data/generated/guide-directory.ts','src/data/israelEventFeed.generated.json'}
-          def relative(p):
-              return pathlib.Path(p).resolve().relative_to(root).as_posix()
-          def scope(p):
-              if p in generated or p.startswith('src/data/generated/'): return 'generated'
-              if p.startswith('src/test/') or re.search(r'\.(test|spec)\.[^.]+$',p): return 'tests'
-              for part in ('routes','route-heads','components','data','lib','hooks'):
-                  if p.startswith('src/'+part+'/'): return 'src/'+part
-              if p.startswith('src/'): return 'src/other'
-              if p.startswith('scripts/'): return 'scripts'
-              if p.startswith('public/'): return 'public'
-              return 'configuration/other'
-          def category(rule,fatal):
-              if fatal or not rule: return 'P1 parse/configuration - inspect'
-              if rule=='prettier/prettier': return 'P4 formatting only'
-              if rule.startswith('react-hooks/'): return 'P1 React hooks - inspect'
-              if rule.startswith('react-refresh/'): return 'P3 development refresh'
-              if rule=='no-restricted-imports': return 'P1 import boundary - inspect'
-              if rule.startswith('@typescript-eslint/'):
-                  if rule.split('/')[-1] in ('no-explicit-any','ban-ts-comment','no-empty-object-type','no-unsafe-function-type','no-wrapper-object-types','no-non-null-assertion'):
-                      return 'P2 typing and maintainability'
-                  return 'P2 TypeScript rule - inspect'
-              if meta.get(rule,{}).get('type')=='problem': return 'P1 correctness - inspect'
-              return 'P2 other lint - inspect'
-          by_rule=C.defaultdict(C.Counter); by_scope=C.defaultdict(C.Counter); by_file=C.defaultdict(C.Counter); by_cat=C.Counter()
-          rows=[]; suppressed=C.Counter(); actual=C.Counter()
-          for f in results:
-              path=relative(f['filePath'])
-              for s in f.get('suppressedMessages',[]): suppressed[s.get('ruleId') or '(none)']+=1
-              for m in f['messages']:
-                  rule=m.get('ruleId') or '(none)'
-                  severity='error' if m['severity']==2 else 'warning' if m['severity']==1 else 'other'
-                  cat=category(m.get('ruleId'),m.get('fatal',False))
-                  fixable='fix' in m
-                  generated_file=scope(path)=='generated'
-                  rows.append([path,m.get('line',0),m.get('column',0),rule,severity,cat,scope(path),int(fixable),int(generated_file),m['message']])
-                  for counter in (by_rule[rule],by_scope[scope(path)],by_file[path]):
-                      counter['total']+=1
-                      counter[severity]+=1
-                      counter['fixable']+=int(fixable)
-                      counter['nonformat']+=int(rule!='prettier/prettier')
-                      counter['generated']+=int(generated_file)
-                  by_cat[cat]+=1
-                  actual[severity]+=1
-          assert actual['error']==sum(f['errorCount'] for f in results)
-          assert actual['warning']==sum(f['warningCount'] for f in results)
-          assert sum(c['fixable'] for c in by_rule.values())==sum(f['fixableErrorCount']+f['fixableWarningCount'] for f in results)
-          with (out/'diagnostics.tsv').open('w',newline='') as fh:
-              writer=csv.writer(fh,delimiter='\t'); writer.writerow(['file','line','column','rule','severity','priority_review','scope','has_autofix','generated','message']); writer.writerows(rows)
-          with (out/'nonformat-diagnostics.tsv').open('w',newline='') as fh:
-              writer=csv.writer(fh,delimiter='\t'); writer.writerow(['file','line','column','rule','severity','priority_review','scope','has_autofix','generated','message']); writer.writerows(r for r in rows if r[3]!='prettier/prettier')
-          prettier=[p.strip().removeprefix('./') for p in (out/'prettier-files.txt').read_text().splitlines() if p.strip()]
-          prettier_groups=C.Counter(scope(p) for p in prettier)
-          prettier_ext=C.Counter(pathlib.Path(p).suffix or '(none)' for p in prettier)
-          lint_format={r[0] for r in rows if r[3]=='prettier/prettier'}
-          summary={
-              'source_commit':(out/'source-commit.txt').read_text().strip(),
-              'eslint_version':(out/'eslint-version.txt').read_text().strip(),
-              'prettier_version':(out/'prettier-version.txt').read_text().strip(),
-              'eslint_files_scanned':len(results),'eslint_files_with_messages':len(by_file),
-              'eslint_total':len(rows),'errors':actual['error'],'warnings':actual['warning'],
-              'formatting_diagnostics':by_rule['prettier/prettier']['total'],
-              'nonformat_diagnostics':sum(r[3]!='prettier/prettier' for r in rows),
-              'nonformat_production_source_diagnostics':sum(r[3]!='prettier/prettier' and r[6].startswith('src/') for r in rows),
-              'generated_diagnostics':sum(r[8] for r in rows),
-              'fatal_diagnostics':sum(f.get('fatalErrorCount',0) for f in results),
-              'fixable_diagnostics':sum(r[7] for r in rows),
-              'suppressed_diagnostics':dict(suppressed),
-              'by_rule':{k:dict(v) for k,v in sorted(by_rule.items(),key=lambda kv:-kv[1]['total'])},
-              'by_scope':{k:dict(v) for k,v in sorted(by_scope.items())},
-              'by_category':dict(by_cat),
-              'top_nonformat_files':{k:dict(v) for k,v in sorted(by_file.items(),key=lambda kv:-kv[1]['nonformat'])[:30] if v['nonformat']},
-              'prettier_different_files':len(prettier),'prettier_tracked_different_files':sum(p in tracked for p in prettier),
-              'prettier_by_scope':dict(prettier_groups),'prettier_by_extension':dict(prettier_ext),
-              'prettier_overlap_with_eslint_format':len(set(prettier)&lint_format),
-              'prettier_only_files':sorted(set(prettier)-lint_format),
-          }
-          (out/'summary.json').write_text(json.dumps(summary,indent=2,ensure_ascii=False))
-          print('LINT_INVENTORY_SUMMARY',json.dumps({k:v for k,v in summary.items() if k!='prettier_only_files'},ensure_ascii=False))
-          for row in rows:
-              if row[3]!='prettier/prettier':
-                  print('NONFORMAT',json.dumps(row,ensure_ascii=False))
-          lines=['## Stage 5.1 inventory (read-only)',f"Commit: {summary['source_commit']}",'','| Metric | Count |','|---|---:|']
-          for k in ('eslint_files_scanned','eslint_files_with_messages','eslint_total','errors','warnings','formatting_diagnostics','nonformat_diagnostics','nonformat_production_source_diagnostics','generated_diagnostics','fatal_diagnostics','fixable_diagnostics','prettier_different_files','prettier_tracked_different_files','prettier_overlap_with_eslint_format'):
-              lines.append(f'| {k} | {summary[k]} |')
-          lines+=['','### Rules','| Rule | Errors | Warnings | Total | Fixable |','|---|---:|---:|---:|---:|']
-          for rule,v in summary['by_rule'].items():
-              lines.append(f"| {rule} | {v.get('error',0)} | {v.get('warning',0)} | {v.get('total',0)} | {v.get('fixable',0)} |")
-          lines+=['','### Review categories','Priority is provisional; a lint finding or available autofix is not proof of a runtime defect. Generated files are reported separately.','| Category | Count |','|---|---:|']
-          lines.extend(f'| {k} | {v} |' for k,v in by_cat.items())
-          (out/'summary.md').write_text('\n'.join(lines)+'\n')
-          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as fh: fh.write('\n'.join(lines)+'\n')
-          if summary['fatal_diagnostics']: print('::warning::Fatal lint diagnostics detected; classification requires review.')
+          import collections, json, os, pathlib
+          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'unused-audit'
+          roots=[pathlib.Path(os.environ['RUNNER_TEMP'])/'main-reference',pathlib.Path.cwd()]
+          def parse(name, root):
+              items=json.loads((out/name).read_text())
+              diagnostics=collections.Counter()
+              suppressed=collections.Counter()
+              for item in items:
+                  path=str(pathlib.Path(item['filePath']).relative_to(root))
+                  for m in item['messages']:
+                      diagnostics[(path,m.get('ruleId'),m['severity'],m['message'])]+=1
+                  for m in item.get('suppressedMessages',[]):
+                      suppressed[(path,m.get('ruleId'),m['message'])]+=1
+              print(name,'errors',sum(v for k,v in diagnostics.items() if k[2]==2),'warnings',sum(v for k,v in diagnostics.items() if k[2]==1),'suppressed',sum(suppressed.values()))
+              return diagnostics,suppressed
+          before,bs=parse('before-lint.json',roots[0])
+          after,ass=parse('after-lint.json',roots[1])
+          assert sum(v for k,v in before.items() if k[2]==2)==13, 'Baseline changed'
+          assert not any(k[2]==2 for k in after), 'Remaining nonformat error'
+          assert after==collections.Counter({k:v for k,v in before.items() if k[2]==1}), 'Warnings changed'
+          expected={('src/lib/analytics.ts','prefer-rest-params'),('src/lib/quote-email-format.server.ts','no-control-regex'),('src/lib/quote-request-schema.server.ts','no-control-regex'),('src/lib/tours.ts','no-control-regex')}
+          added=ass-bs
+          assert not bs-ass and sum(added.values())==4 and {(k[0],k[1]) for k in added}==expected, 'Unexpected suppression change'
+          print('PASS: 9 corrected errors, 4 intentional narrow suppressions, no new diagnostics')
           PY
-      - name: Save complete read-only inventory
+          bash scripts/build-validated-static.sh
+          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters
+          node scripts/verify-hostinger-static-export.mjs --editorial
+          VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
+      - name: Compare candidate production output with current main
+        run: |
+          cat > "$RUNNER_TEMP/unused-audit/compare.py" <<'PY'
+          import collections, hashlib, json, pathlib, re, sys, xml.etree.ElementTree as ET
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit, urljoin, unquote
+          base, candidate = [pathlib.Path(s) for s in sys.argv[1:3]]
+          origin = "https://www.israel-taxi.com"
+          markers = re.compile(rb"lovable|tanstack_start_ts|7cd7aae9-57c0-4ced-b1fa-2f0691483fee|sandbox-npm-cache", re.I)
+          def digest(data): return hashlib.sha256(data).hexdigest()
+          def manifest(root):
+              return {str(p.relative_to(root)):p for p in root.rglob("*") if p.is_file()}
+          old, new = manifest(base), manifest(candidate)
+          def urls(root):
+              return [node.text for node in ET.parse(root/"sitemap.xml").getroot().findall("{*}url/{*}loc")]
+          old_urls, new_urls = urls(base), urls(candidate)
+          issues = []
+          def check(ok, message):
+              if not ok: issues.append(message)
+          check(old_urls == new_urls, "Ordered sitemap URL list changed")
+          check((base/"robots.txt").read_bytes() == (candidate/"robots.txt").read_bytes(), "robots.txt changed")
+          old_html, new_html = {p for p in old if p.endswith(".html")}, {p for p in new if p.endswith(".html")}
+          check(old_html == new_html, "HTML paths differ: removed="+str(sorted(old_html-new_html))+" added="+str(sorted(new_html-old_html)))
+          def norm(value, root):
+              if value is None: return ""
+              # Preserve actual image/font identity even if the bundler changes its hashed filename.
+              def asset(m):
+                  path = m.group(0)
+                  local = root / path.lstrip("/")
+                  if local.is_file(): return "/asset-content/"+digest(local.read_bytes())
+                  return path
+              value = re.sub(r"/assets/[A-Za-z0-9_.-]+\.(?:webp|avif|png|jpe?g|svg|gif|woff2?|ico)\b",asset,value,flags=re.I)
+              return re.sub(r"(?<=:)[rR][a-zA-Z0-9_]+(?=:)", "react-id", value)
+          class Page(HTMLParser):
+              def __init__(self, root):
+                  super().__init__(convert_charrefs=True)
+                  self.root=root; self.body=False; self.skip=0; self.title=False; self.schema=False
+                  self.meta=[]; self.data=[]; self.structure=[]; self.jsonld=[]; self.title_parts=[]; self.links=[]; self.assets=[]; self.schemas=[]; self.forms=0; self.images=0
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  if tag=="body": self.body=True
+                  if tag=="title": self.title=True
+                  if tag=="meta": self.meta.append(tuple(sorted((k,norm(v,self.root)) for k,v in attrs)))
+                  if tag=="link" and d.get("rel")=="canonical": self.meta.append(("canonical",d.get("href")))
+                  if tag=="script":
+                      self.skip+=1
+                      if d.get("type")=="application/ld+json": self.schema=True; self.jsonld=[]
+                  if tag=="style": self.skip+=1
+                  if tag=="script" and d.get("src"): self.assets.append(d["src"])
+                  if tag=="link" and d.get("rel") in ("stylesheet","modulepreload","preload") and d.get("href"): self.assets.append(d["href"])
+                  if not self.body or self.skip or tag=="link": return
+                  if tag=="form": self.forms+=1
+                  if tag=="img": self.images+=1
+                  if tag=="a" and d.get("href"): self.links.append(d["href"])
+                  for k in ("src","poster","data-consent-src"):
+                      if d.get(k): self.assets.append(d[k])
+                  if d.get("srcset"):
+                      self.assets.extend(s.strip().split()[0] for s in d["srcset"].split(",") if s.strip() and not s.strip().startswith("data:"))
+                  self.structure.append((tag,tuple(sorted((k,norm(v,self.root)) for k,v in attrs if k not in ("data-tsd-source",)))))
+              def handle_startendtag(self,tag,attrs): self.handle_starttag(tag,attrs)
+              def handle_endtag(self,tag):
+                  if tag=="title": self.title=False
+                  if tag=="script" and self.schema:
+                      self.schemas.append(json.loads("".join(self.jsonld))); self.schema=False
+                  if tag in ("script","style"): self.skip=max(0,self.skip-1); return
+                  if self.body and not self.skip and tag!="link": self.structure.append(("/"+tag,()))
+                  if tag=="body": self.body=False
+              def handle_data(self,data):
+                  if self.title: self.title_parts.append(data)
+                  if self.schema: self.jsonld.append(data)
+                  if self.body and not self.skip:
+                      s=" ".join(data.split())
+                      if s:self.data.append(s)
+          def page(root,url):
+              rel=urlsplit(url).path.strip("/")
+              p=Page(root)
+              p.feed((root/rel/"index.html").read_text(encoding="utf-8"))
+              return p
+          def schema_norm(v,root):
+              if isinstance(v,str): return norm(v,root)
+              if isinstance(v,list): return [schema_norm(x,root) for x in v]
+              if isinstance(v,dict): return {k:schema_norm(x,root) for k,x in v.items()}
+              return v
+          def missing_assets(p,root,url):
+              missing=set()
+              for a in p.assets:
+                  if a.startswith(("data:","blob:","#")): continue
+                  u=urlsplit(urljoin(url,a))
+                  if u.netloc!="www.israel-taxi.com" or u.path.startswith("/api/"): continue
+                  path=root/unquote(u.path.lstrip("/"))
+                  if not path.is_file() and not (path/"index.html").is_file(): missing.add(a)
+              return missing
+          stats=collections.Counter(); by_kind=collections.Counter()
+          for url in new_urls:
+              a,b=page(base,url),page(candidate,url)
+              for kind,x,y in [
+                  ("title",a.title_parts,b.title_parts),("metadata",sorted(map(str,a.meta)),sorted(map(str,b.meta))),
+                  ("structured data",schema_norm(a.schemas,base),schema_norm(b.schemas,candidate)),
+                  ("visible text",a.data,b.data),("body tags and attributes",a.structure,b.structure),
+                  ("links",a.links,b.links),("forms",a.forms,b.forms),("images",a.images,b.images)]:
+                  if x!=y:
+                      by_kind[kind]+=1
+                      if by_kind[kind]<=4:
+                          if isinstance(x,list) and isinstance(y,list):
+                              first=next(((str(xx)[:250],str(yy)[:250]) for xx,yy in zip(x,y) if xx!=yy),("length "+str(len(x)),"length "+str(len(y))))
+                              print("DIFFERENCE",url,kind,first)
+                          else: print("DIFFERENCE",url,kind,str(x)[:150],str(y)[:150])
+              added_missing=missing_assets(b,candidate,url)-missing_assets(a,base,url)
+              check(not added_missing, "New missing assets on "+url+": "+str(sorted(added_missing)))
+              stats.update(pages=1, forms=b.forms, links=len(b.links), images=b.images, schemas=len(b.schemas))
+          print("PAGE TOTALS",dict(stats))
+          print("PAGE DIFFERENCES",dict(by_kind))
+          for kind,n in by_kind.items(): issues.append(str(n)+" pages differ in "+kind)
+          # Public helpers/data, images and maps must not be altered by the build migration.
+          for p in sorted(set(old)|set(new)):
+              if p.startswith(("maps/","widgets/","images/","data/")):
+                  check(p in old and p in new and digest(old[p].read_bytes())==digest(new[p].read_bytes()),"Public helper/asset changed: "+p)
+          for name,p in new.items():
+              data=p.read_bytes()
+              check(not markers.search(data) and not markers.search(name.encode()),"Legacy marker in generated file "+name)
+              check(not (name.endswith(".php") or name.startswith("api/") or name in (".env",".htaccess") or name.endswith(".map")),"Unexpected private/API/source-map export: "+name)
+          print("GENERATED FILES",len(old),len(new),"HTML",len(old_html),len(new_html))
+          for ext in (".js",".css",".html"):
+              aa=[p.stat().st_size for k,p in old.items() if k.endswith(ext)]
+              bb=[p.stat().st_size for k,p in new.items() if k.endswith(ext)]
+              print("OUTPUT SIZE",ext,"before",len(aa),sum(aa),"after",len(bb),sum(bb))
+          print("LEGACY MARKER SCAN AND PARITY ISSUES",len(issues))
+          for issue in issues[:100]: print("ISSUE",issue)
+          if issues: sys.exit(1)
+          print("PASS: page content, metadata, schema, links, forms, public helpers, assets and legacy marker scan")
+          PY
+          python3 "$RUNNER_TEMP/unused-audit/compare.py" "$RUNNER_TEMP/main-reference/.output/public" .output/public
+          git diff --check
+          git diff --stat
+      - name: Save verification reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: stage-5-1-lint-inventory
-          path: ${{ runner.temp }}/lint-inventory/
+          name: stage-5-2-validation
+          path: ${{ runner.temp }}/unused-audit/
           if-no-files-found: warn

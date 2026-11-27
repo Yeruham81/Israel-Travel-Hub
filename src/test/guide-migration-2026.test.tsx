@@ -137,7 +137,7 @@ describe("October planning, city and heritage guide migration", () => {
     const router = await routerAt(url);
     expect(router.matchRoutes(url).at(-1)?.routeId).not.toBe(rootRouteId);
     const { container } = render(<RouterContextProvider router={router}><IsraelHolidayVisitorGuidePage /></RouterContextProvider>);
-    expect(within(container).getByRole("heading", {level:1,name:"Israel\'s Calendar of events: A practical guide for visitors"})).toBeInTheDocument();
+    expect(within(container).getByRole("heading", {level:1,name:"Israel's Calendar of events: A practical guide for visitors"})).toBeInTheDocument();
     expect(within(container).getByRole("heading", {name:"Which dates affect travel most?"})).toBeInTheDocument();
     expect(within(container).getByRole("heading", {name:"Major Jewish holidays that can change your itinerary"})).toBeInTheDocument();
     expect(within(container).getByRole("heading", {name:"Muslim, Christian & Druze holidays"})).toBeInTheDocument();

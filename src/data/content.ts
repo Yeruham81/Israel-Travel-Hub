@@ -630,7 +630,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     faqs: [
       { q: "Beach or city centre for a first visit?", a: "Both work; the city is compact. Beachfront suits relaxed days and families, while Rothschild and Dizengoff suit food and nightlife. Jaffa adds historic atmosphere." },
       { q: "Do I need a car in Tel Aviv?", a: "Usually not. Walking, bikes, buses and taxis cover most needs and parking is difficult. Rent a car when you leave the city instead." },
-      { q: "Where can I find hotel recommendations for each area?", a: "Open any of the eight neighborhood guides above. Each explains the area's character, nearby sights and practical arrival considerations, followed by my selected places to stay. You can also compare Tel Aviv hotels here using the area filters; check actual rates and booking terms on the provider site." },
+      { q: "Where can I find hotel recommendations for each area?", a: "Open any of the eight neighborhood guides above. Each guide introduces the neighborhood, nearby attractions, transport options and my hotel recommendations. You can also compare Tel Aviv hotels here using the area filters; check actual rates and booking terms on the provider site." },
       { q: "How do I get from Ben Gurion Airport?", a: "Use my private airport-to-Tel Aviv transfer page for an arranged hotel pickup. For walking, buses, rail and taxis during your stay, read Getting around Tel Aviv; check the airport-on-Shabbat guide for weekend arrivals." },
     ],
     sourceIds: ["owner-stay-telaviv"],

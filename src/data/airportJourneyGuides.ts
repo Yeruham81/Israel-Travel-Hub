@@ -83,7 +83,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       onward: { src: benGurionRailPlatform, alt: "Ben Gurion Airport railway station platform used to board trains toward Jerusalem" },
     },
     stationLinks: [{ text: "Ben Gurion Airport arrival guide", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }],
-    weekendLinks: [{ text: "airport Shabbat transport guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { text: "Sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" }, { text: "Israel\'s holiday and special dates guide", to: "/travel-blog/calendar-of-events/" }],
+    weekendLinks: [{ text: "airport Shabbat transport guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { text: "Sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" }, { text: "Israel's holiday and special dates guide", to: "/travel-blog/calendar-of-events/" }],
     sources: [
       { title: "Israel Railways - official route and current train fare", url: "https://www.rail.co.il/" },
       { title: "Israel Railways - free personal voucher for Jerusalem line (August 2026 notice)", url: "https://rail.co.il/?lan=en&page=vouchers-jerusalem" },
@@ -129,7 +129,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "Israel Railways and most regular buses normally stop during the main Shabbat period and many Jewish holidays. Check the journey planner for the last departure before Shabbat and the first Saturday-night service.",
       "When trains are unavailable at your arrival time, compare the airport's authorized metered taxi with a confirmed private transfer. A rental car is another possibility only if collection is operating.",
       "The regular Nesher airport-to-Jerusalem shared-taxi route described in older guides no longer runs. Do not rely on old pickup details. My Sherut in Israel guide explains the distinction, and the airport Shabbat transport guide covers current weekend options.",
-      "For holiday-related travel planning, see Israel\'s holiday and special dates guide."
+      "For holiday-related travel planning, see Israel's holiday and special dates guide."
     ],
     advice: [
       "Allow time for baggage collection and the journey from Yitzhak Navon station to your hotel.",
@@ -139,7 +139,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     ],
     faqs: [
       { q: "What is the cheapest way from Ben Gurion Airport to Jerusalem?", a: "During operating hours, the direct train is usually the cheapest option, at ₪21 for an adult ticket, plus local transport. The Jerusalem line also requires a free personal voucher." },
-      { q: "Do I need a free voucher for the Jerusalem train?", a: "The railway\'s current notice requires a free personal voucher as well as a valid train ticket. The official instructions are linked directly in the train section above; recheck them before travelling." },
+      { q: "Do I need a free voucher for the Jerusalem train?", a: "The railway's current notice requires a free personal voucher as well as a valid train ticket. The official instructions are linked directly in the train section above; recheck them before travelling." },
       { q: "Can the train take me directly to the Old City or Mamilla?", a: "No. The train stops at Jerusalem–Yitzhak Navon near the central bus station. Continue by light rail, suitable taxi or a walk; check the gate and hotel entrance if carrying luggage." },
       { q: "How much is a taxi from the airport to Jerusalem?", a: "Official airport taxis use the regulated meter. The total depends on the exact address, traffic, pickup time and permitted extras; check the current taxi tariff and pay according to the meter." },
       { q: "Does bus 485 still run directly to Jerusalem?", a: "The airport still lists it from Terminal 3, Level 2, Exit 21, but scheduled departures are very limited. Check the timetable and where the bus stops in Jerusalem." },
@@ -186,7 +186,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       takeaway: "If you're arriving during the day with little luggage, the train is a convenient option. For Old Jaffa, family luggage or late arrivals, compare the whole door-to-door journey.",
     },
     answer: "The train is usually the fastest low-cost choice during operating hours. Choose the station that works best for your hotel, then continue by bus or taxi. Bus 445 may serve a more convenient city stop; an official taxi or private transfer goes directly to an accessible address.",
-    trainIntro: "The airport railway station is below Terminal 3; follow the train signs after customs. If you arrive at Terminal 1, take the free internal shuttle to Terminal 3 first. Buy a train ticket at the station or use an accepted Rav-Kav or payment app. A standard adult train ticket to Tel Aviv costs ₪11.50. Tel Aviv has four mainline stations: HaHagana, HaShalom, Savidor Center and University. None is directly on the beachfront, so plan the last bus, taxi, walk or light-rail connection to your hotel. The Ben Gurion Airport arrival guide explains the airport sequence; the getting around Tel Aviv guide covers the city connections.",
+    trainIntro: "The airport railway station is below Terminal 3; follow the train signs after customs. If you arrive at Terminal 1, take the free internal shuttle to Terminal 3 first. Buy a train ticket at the station or use an accepted Rav-Kav or payment app. A standard adult train ticket to Tel Aviv costs ₪11.50. Tel Aviv has four mainline stations: HaHagana, HaShalom, Savidor Center and University. None is directly on the beachfront, so plan how to reach your hotel by bus, taxi, light rail or on foot. The Ben Gurion Airport arrival guide explains what to do at the airport; the getting around Tel Aviv guide covers city transport.",
     photo: { src: "/images/home/transfer-tel-aviv-beach-skyline.webp", alt: "Tel Aviv Mediterranean beachfront and skyline", label: "Tel Aviv beachfront", sourceUrl: "" },
     updatedAt: "2026-11-23",
     historicalPrices: false,
@@ -311,7 +311,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       takeaway: "Choose the station with the easiest onward route to your hotel.",
     },
     answer: "The train is usually the best low-cost option when running. Choose a station near your destination: Hof HaCarmel for southern Haifa, Bat Galim for the coast or Center HaShmona for downtown. Hotels on Mount Carmel generally need an uphill bus or taxi; a direct taxi or private transfer avoids that change.",
-    trainIntro: "The Ben Gurion Airport railway station is below Terminal 3. Follow the train signs after customs; passengers using Terminal 1 first need the free internal shuttle to Terminal 3. Direct trains to Haifa take approximately 80–110 minutes, depending on your destination station and the service. Buy a ticket at the station or use a valid Rav-Kav or supported payment app. Check the current fare and make sure your train stops at the station nearest your hotel. Haifa's railway stations are near the coast. To reach a hotel on Mount Carmel, you'll usually need a bus or taxi. My Ben Gurion Airport arrival guide explains the terminal steps; the getting around Israel guide explains onward public transport.",
+    trainIntro: "The Ben Gurion Airport railway station is below Terminal 3. Follow the train signs after customs; passengers using Terminal 1 first need the free internal shuttle to Terminal 3. Direct trains to Haifa take approximately 80–110 minutes, depending on your destination station and the service. Buy a ticket at the station or use a valid Rav-Kav or supported payment app. Check the current fare and make sure your train stops at the station nearest your hotel. Haifa's railway stations are near the coast. To reach a hotel on Mount Carmel, you'll usually need a bus or taxi. My Ben Gurion Airport arrival guide explains what to do at the airport, and the getting around Israel guide covers public transport.",
     photo: { src: "/images/travel-blog/featured-airport-haifa.webp", alt: "Route to Haifa from Ben Gurion Airport", label: "Airport to Haifa", sourceUrl: "" },
     updatedAt: "2026-11-23",
     historicalPrices: false,
@@ -434,7 +434,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       takeaway: "The train and bus are separate services, so allow plenty of time between them. If you cannot catch the last bus, arrange another way to reach your hotel.",
     },
     answer: "For a lower-cost journey, take the train to Jerusalem and connect to bus 486 or reserved-seat bus 444. Allow roughly 3–4 hours or more and check the last bus before boarding the train. A metered taxi or confirmed private transfer goes straight to the hotel.",
-    trainIntro: "Ben Gurion Airport railway station is directly below Terminal 3; follow the train signs after customs. Passengers arriving at Terminal 1 need the airport's free internal shuttle to Terminal 3. The train to Jerusalem–Yitzhak Navon usually takes about 26–30 minutes. You can buy a single train ticket at the station or use an accepted Rav-Kav or payment app. Each passenger also needs a free personal voucher for the selected Jerusalem train, in addition to a valid ticket. My airport arrival guide covers the terminal steps, and the getting around Israel guide explains public-transport ticketing.",
+    trainIntro: "Ben Gurion Airport railway station is directly below Terminal 3; follow the train signs after customs. Passengers arriving at Terminal 1 need the airport's free internal shuttle to Terminal 3. The train to Jerusalem–Yitzhak Navon usually takes about 26–30 minutes. You can buy a single train ticket at the station or use an accepted Rav-Kav or payment app. Each passenger also needs a free personal voucher for the selected Jerusalem train, in addition to a valid ticket. My airport arrival guide explains what to do at the airport, and the getting around Israel guide covers public transport tickets.",
     photo: { src: "/images/travel-blog/featured-airport-ein-bokek.webp", alt: "Road and scenery approaching Ein Bokek at the Dead Sea", label: "Airport to Ein Bokek", sourceUrl: "" },
     updatedAt: "2026-11-23",
     historicalPrices: false,

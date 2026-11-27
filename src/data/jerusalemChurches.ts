@@ -18,7 +18,7 @@ export const churchAreas:ChurchAreaInfo[] = [
   {
     "id": "zion",
     "title": "Mount Zion churches",
-    "intro": "Dormition Abbey, the Cenacle and St Peter in Gallicantu are close geographically but have separate custodians and entrance arrangements.",
+    "intro": "Dormition Abbey, the Cenacle and St Peter in Gallicantu are close together, but each site has its own visiting hours and entry rules.",
     "color": "#b45309"
   },
   {

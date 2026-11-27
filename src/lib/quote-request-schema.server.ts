@@ -13,6 +13,7 @@ function fieldSchema<T extends Record<string, string | boolean>>(defaults: T) {
 export const quoteRequestSchema = z.object({
   requestId: z.string().uuid(),
   sourcePath: z.string().max(300).regex(/^\/[a-zA-Z0-9/_-]*$/),
+  // eslint-disable-next-line no-control-regex -- Reject control characters in the submitted page title.
   sourceTitle: z.string().trim().min(1).max(300).regex(/^[^\u0000-\u001f\u007f]*$/).optional(),
   website: z.string().max(200),
   request: z.discriminatedUnion("kind", [

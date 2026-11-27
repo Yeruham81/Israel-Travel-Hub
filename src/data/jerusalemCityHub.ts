@@ -67,7 +67,7 @@ export const jerusalemHubFaqs = [
   {q:"Do I need a rental car while sightseeing in Jerusalem?",a:"Not for most central sightseeing. Walking, city buses, light rail and taxis are often more practical; a private driver is useful for a tailored route or several widely separated stops. A rental may suit a wider road trip."},
   {q:"What should I know about Jerusalem on Shabbat or holidays?",a:"Many regular buses, trains and businesses operate differently or stop around Shabbat and Jewish holidays. Religious sites follow their own worship and visitor hours. Check your exact travel date, the event calendar and official transport schedules."},
   {q:"What should I wear to religious sites in Jerusalem?",a:"Carry clothing that covers shoulders and knees as a sensible starting point; individual synagogues, churches, mosques and holy compounds may have additional rules. Follow staff instructions and respect services and worshippers."},
-  {q:"Can I visit Bethlehem or the Dead Sea on a day trip from Jerusalem?",a:"Both are possible depending on your date and travel arrangements, but they are distinct journeys. Bethlehem is in the West Bank and has particular access and operator rules; for the Dead Sea you must choose a specific beach, attraction or hotel and plan your return."},
+  {q:"Can I visit Bethlehem or the Dead Sea on a day trip from Jerusalem?",a:"Both Bethlehem and the Dead Sea are possible day trips from Jerusalem. Bethlehem is in the West Bank and has particular access and operator rules; for the Dead Sea you must choose a specific beach, attraction or hotel and plan your return."},
 ] as const;
 
 export const jerusalemHubSources=[

@@ -99,7 +99,7 @@ export const tourCategoryPaths = {
 export type TourCategoryId = keyof typeof tourCategoryPaths;
 
 export const tourPhotos: Record<string, GuidePhoto> = {
-  "my-jerusalem-day": { src: "/images/jerusalem/mount-zion/mount-zion-hillside.webp", alt: "Green hillside and historic buildings on Jerusalem\'s Mount Zion" },
+  "my-jerusalem-day": { src: "/images/jerusalem/mount-zion/mount-zion-hillside.webp", alt: "Green hillside and historic buildings on Jerusalem's Mount Zion" },
   "my-tel-aviv-day": { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "A taxi on a Tel Aviv street, illustrating private transport" },
   "my-masada-day": airport["dead-sea"]!,
   "my-masada-jerusalem": { src: masadaCableCar, alt: "A cable-car cabin below Masada's desert cliffs", sourceUrl: "https://commons.wikimedia.org/wiki/File:Masada_Cable_Car_1438_(511094328).jpg", credit: "James Emery · CC BY 2.0 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by/2.0/" },
@@ -472,7 +472,7 @@ export const tourCategories: TourCategory[] = [
     intro: "Discover the dramatic rock formations of Makhtesh Ramon, the vast erosion crater in Israel's Negev Desert. Compare short 4×4 safaris, guided hikes, geological explorations, stargazing and adventurous cliff activities, mostly starting in Mitzpe Ramon.",
     photo: { src: ramonClouds, alt: "Wide view of Makhtesh Ramon beneath a cloudy sky" }, match: { destinations: ["ramon-crater"] },
     paragraphs: [
-      "Most experiences start or offer pickup in Mitzpe Ramon. The booking platform may classify them under Sde Boker, even when the actual meeting point is in Mitzpe Ramon. Arrange your intercity journey separately unless the specific product clearly includes it.",
+      "Most experiences start or offer pickup in Mitzpe Ramon. The booking platform may classify them under Sde Boker, even when the actual meeting point is in Mitzpe Ramon. Arrange your own transport to Mitzpe Ramon unless it is included in your tour.",
       "Shorter jeep and geology tours explore the crater's multicoloured rock, dry riverbeds and viewpoints; longer combinations may include hiking, and selected offers focus on a sunset experience or rappelling. Check the physical requirements, minimum age, accessibility, equipment, group size and duration of your chosen activity.",
       "The Negev is exposed to heat and flash-flood risks even when local weather looks clear. Check current Israel Nature and Parks Authority warnings, trail closures, weather forecasts and the operator's safety and cancellation guidance. Desert access and stargazing depend on weather and local conditions.",
     ],

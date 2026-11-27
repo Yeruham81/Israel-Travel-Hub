@@ -26,7 +26,7 @@ const heroPhoto = { src: cruisePortFeature, alt: "Cruise passengers walking alon
 const crumbs = [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "/shore-excursions/" }] as const;
 
 const experiencePhotos = {
-  jerusalem: { src: jerusalemFeature, alt: "Historic buildings in Jerusalem\'s Old City" },
+  jerusalem: { src: jerusalemFeature, alt: "Historic buildings in Jerusalem's Old City" },
   history: { src: bethlehemPhoto, alt: "Church of the Nativity in Bethlehem" },
   "north-coast": { src: akkoPhoto, alt: "Akko old harbour" },
   galilee: { src: galileeFeature, alt: "Sea of Galilee and its surrounding hills" },

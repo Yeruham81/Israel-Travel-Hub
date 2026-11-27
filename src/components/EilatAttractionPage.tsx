@@ -263,7 +263,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       </article>
       <article className="rounded-xl border bg-card p-4">
         <h3 className="flex items-center gap-2 font-serif text-xl font-semibold"><CarFront className="size-5 text-primary"/>Car, taxi and day trips</h3>
-        <p className="mt-3 text-sm leading-relaxed">Taxis are useful between beaches, hotels and activity locations. A car is particularly practical for Timna, while Red Canyon access and hiking arrangements deserve separate planning. You can compare <Link to="/car-rental/" className={inlineLink}>rental cars in Israel</Link> or enquire about a <Link to="/private-driver-in-israel/" className={inlineLink}>private driver</Link>.</p>
+        <p className="mt-3 text-sm leading-relaxed">Taxis are useful between beaches, hotels and activity locations. A car is particularly useful for Timna. Check trail conditions and plan your transport to the Red Canyon before visiting. You can compare <Link to="/car-rental/" className={inlineLink}>rental cars in Israel</Link> or enquire about a <Link to="/private-driver-in-israel/" className={inlineLink}>private driver</Link>.</p>
         <p className="mt-2 text-sm leading-relaxed">There is no passenger railway to Eilat. Long-distance bus, road travel and flights through Ramon Airport are the main connections from central Israel; verify current schedules and services.</p>
       </article>
     </div>

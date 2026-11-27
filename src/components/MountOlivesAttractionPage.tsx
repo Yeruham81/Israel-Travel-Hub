@@ -216,7 +216,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>These three independently operated tours include the Mount of Olives, but differ in length and scope: two concentrate on the hillside, while the longer option also explores Jerusalem’s Old City. Check the itinerary, meeting point, admissions, dates and accessibility with the provider before booking.</p>
+      <p>These three tours visit the Mount of Olives. Two focus on the hillside, while the longest also explores Jerusalem’s Old City. Check the itinerary, meeting point, admissions, dates and accessibility with the provider before booking.</p>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="mount-olives-tour-cards">
         {mountOlivesTours.map(tour => <div key={tour.id} data-tour-id={tour.id} className="min-w-0">
           <CuratedPartnerTourCard

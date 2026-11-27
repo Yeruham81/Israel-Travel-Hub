@@ -64,6 +64,7 @@ export function createAnalytics(win: Window, config: LaunchConfig) {
     // Keep the standard gtag arguments queue, but discard later optional events
     // after consent withdrawal, including existing contact/affiliate helpers.
     browser.gtag = function (...args: unknown[]) {
+      // eslint-disable-next-line prefer-rest-params -- Preserve the standard gtag arguments-object queue and consent gate.
       if (choice === "granted" || args[0] === "consent") layer.push(arguments);
     };
     browser.gtag("consent", "default", {

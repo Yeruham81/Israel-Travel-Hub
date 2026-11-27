@@ -1099,7 +1099,7 @@ describe("migrated practical guides", () => {
     expect(taxiSection.querySelector("form")).toBeNull();
     expect(container.querySelector('nav[aria-label="On this page"] a[href="#contact"]')).not.toBeNull();
     expect(within(container).getByRole("heading", { name: "Need a private airport transfer on Shabbat?" })).toBeInTheDocument();
-    expect(within(container).getByText("Share your flight, destination, passengers and luggage. I\'ll reply personally about arranging your private airport pickup.")).toBeInTheDocument();
+    expect(within(container).getByText("Share your flight, destination, passengers and luggage. I'll reply personally about arranging your private airport pickup.")).toBeInTheDocument();
     expect(container.querySelector("#contact")?.textContent).not.toContain("Line 711");
     expect((within(contact).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toBe("");
     const sources = container.querySelector("#sources")!;
