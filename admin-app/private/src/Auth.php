@@ -9,7 +9,7 @@ function login(string $username, string $password): bool {
     if (!preg_match('/^[a-zA-Z][a-zA-Z0-9_.-]{2,63}$/D', $username) || strlen($password) > 512) return false;
     $cfg = config();
     $subject = hash_hmac('sha256', strtolower($username) . '|' . (string) ($_SERVER['REMOTE_ADDR'] ?? ''), (string) ($cfg['audit_hmac_secret'] ?? ''));
-    if (strlen((string) ($cfg['audit_hmac_secret'] ?? '')) < 32) {
+    if (!preg_match('/^[a-f0-9]{64}$/D', (string) ($cfg['audit_hmac_secret'] ?? ''))) {
         throw new RuntimeException('Secure login limiter is not configured.');
     }
     $window = query_one(
