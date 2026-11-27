@@ -1,0 +1,131 @@
+name: Admin - Deploy isolated PHP dashboard to Hostinger
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Upload secure admin app files (default: audit only)'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hostinger-premium-website
+  cancel-in-progress: false
+
+jobs:
+  deploy-admin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      HOSTINGER_SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+      HOSTINGER_SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+      HOSTINGER_SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+      HOSTINGER_SSH_KNOWN_HOSTS: ${{ secrets.HOSTINGER_SSH_KNOWN_HOSTS }}
+      HOSTINGER_REMOTE_PATH: ${{ secrets.HOSTINGER_REMOTE_PATH }}
+      HOSTINGER_SSH_PORT: ${{ vars.HOSTINGER_SSH_PORT || '65002' }}
+      APPROVED_PRODUCTION: ${{ vars.HOSTINGER_PRODUCTION_DEPLOY_APPROVED || 'false' }}
+      CUTOVER_FREEZE: ${{ vars.HOSTINGER_CUTOVER_FREEZE || 'false' }}
+    steps:
+      - name: Checkout the reviewed main revision
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Guard main and exact deployment revision
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_REF" == "refs/heads/main" ]] || { echo "::error::Only main may deploy admin"; exit 1; }
+          CURRENT="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          [[ "$CURRENT" == "$GITHUB_SHA" ]] || { echo "::error::main moved; abort obsolete upload"; exit 1; }
+      - name: PHP validation
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql, mbstring
+          coverage: none
+      - name: Lint and test PHP
+        run: |
+          set -euo pipefail
+          find admin-app -name '*.php' -type f -print0 | xargs -0 -n1 php -l
+          php admin-app/tests/validation.php
+          test ! -e admin-app/private/config.php
+      - name: Validate remote credentials and webroot
+        shell: bash
+        run: |
+          set -euo pipefail
+          for var in HOSTINGER_SSH_HOST HOSTINGER_SSH_USER HOSTINGER_SSH_PRIVATE_KEY HOSTINGER_SSH_KNOWN_HOSTS HOSTINGER_REMOTE_PATH; do
+            [[ -n "${!var}" ]] || { echo "::error::Missing SSH secret $var"; exit 1; }
+          done
+          [[ "$HOSTINGER_REMOTE_PATH" =~ ^/home/[A-Za-z0-9_-]+/domains/[A-Za-z0-9.-]+/public_html/?$ ]] ||
+            { echo "::error::Invalid Hostinger webroot"; exit 1; }
+          [[ "$HOSTINGER_SSH_PORT" =~ ^[0-9]{2,5}$ ]] || exit 1
+          [[ "$HOSTINGER_SSH_USER" =~ ^[A-Za-z0-9_-]+$ ]] || exit 1
+          [[ "$HOSTINGER_SSH_HOST" =~ ^[A-Za-z0-9.:-]+$ ]] || exit 1
+          if [[ "${{ inputs.deploy }}" == "true" ]]; then
+            [[ "$CUTOVER_FREEZE" != "true" ]] || { echo "::error::Hostinger freeze is active"; exit 1; }
+            if [[ "$HOSTINGER_REMOTE_PATH" == *'/domains/israel-taxi.com/public_html'* ]]; then
+              [[ "$APPROVED_PRODUCTION" == "true" ]] || { echo "::error::Production admin upload requires explicit deployment approval"; exit 1; }
+            fi
+          fi
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$HOSTINGER_SSH_PRIVATE_KEY" > "$HOME/.ssh/hostinger_deploy"
+          printf '%s\n' "$HOSTINGER_SSH_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/hostinger_deploy" "$HOME/.ssh/known_hosts"
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "test -f '$HOSTINGER_REMOTE_PATH/.ith-static-deploy-ok' && test -f '$HOSTINGER_REMOTE_PATH/index.html' && test ! -e '$HOSTINGER_REMOTE_PATH/wp-config.php'" ||
+            { echo "::error::The selected site is not the verified static Hostinger webroot"; exit 1; }
+      - name: Inspect upload destination without changing it
+        shell: bash
+        run: |
+          set -euo pipefail
+          WEB="${HOSTINGER_REMOTE_PATH%/}/admin"
+          PRIVATE="$(dirname "$HOSTINGER_REMOTE_PATH")/private-admin"
+          echo "Admin public path: $WEB"
+          echo "Admin private source: $PRIVATE"
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "test ! -L '$WEB' && test ! -L '$PRIVATE' && { test ! -e '$WEB' || test -f '$WEB/.ith-admin-deploy-ok'; }" ||
+            { echo "::error::Unknown existing /admin directory or symlink; refusing overwrite"; exit 1; }
+          echo "No existing admin files modified in validation mode."
+      - name: Upload app only when explicitly approved
+        if: inputs.deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          WEB="${HOSTINGER_REMOTE_PATH%/}/admin"
+          PRIVATE="$(dirname "$HOSTINGER_REMOTE_PATH")/private-admin"
+          SSH=(-p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts")
+          # Protect the /admin folder BEFORE copying index.php.
+          ssh "${SSH[@]}" "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "umask 077 && mkdir -p '$PRIVATE/src' '$PRIVATE/bin' && chmod 700 '$PRIVATE' '$PRIVATE/src' '$PRIVATE/bin' && mkdir -p '$WEB/assets'"
+          rsync -rlptvz -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            admin-app/web/.htaccess "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$WEB/.htaccess"
+          # Private code and schema never go under public_html.
+          rsync -rltvz -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            admin-app/private/src/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$PRIVATE/src/"
+          rsync -rltvz -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            admin-app/private/bin/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$PRIVATE/bin/"
+          rsync -rltvz -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            admin-app/private/schema.sql "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$PRIVATE/schema.sql"
+          rsync -rltvz --exclude='/.htaccess' --exclude='*.bak' \
+            -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            admin-app/web/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$WEB/"
+          ssh "${SSH[@]}" "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "touch '$WEB/.ith-admin-deploy-ok' && chmod 644 '$WEB/.htaccess' '$WEB/index.php' '$WEB/assets/admin.css' && chmod 755 '$WEB' '$WEB/assets'"
+          echo "Admin PHP source uploaded. Configure private-admin/config.php and initialize MySQL before login becomes available."
+      - name: Check endpoint behaviour when deployed
+        if: inputs.deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Login can legitimately return 503 before first database initialization.
+          URL="https://${HOSTINGER_REMOTE_PATH#*/domains/}"
+          URL="${URL%%/*}"
+          status="$(curl --retry 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "https://$URL/admin/")"
+          echo "Admin endpoint HTTP $status (200 after setup, 503 before setup)."
+          [[ "$status" == "200" || "$status" == "503" ]] || exit 1
