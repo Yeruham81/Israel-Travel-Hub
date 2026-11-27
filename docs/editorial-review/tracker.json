@@ -538,10 +538,10 @@
     {
       "path": "/car-rental/",
       "group": 3,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "b069dbe96d1ad73dd228878262e2c31cdc5335420abb4c32d816379558ff932c",
+      "changes": 8,
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
     },
     {
       "path": "/privacy-policy/",
@@ -723,10 +723,10 @@
     {
       "path": "/travel-blog/ben-gurion-airport-taxis/",
       "group": 3,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "808256da15593a69705ca29ebe524cd597e3cd260570e39fa78a219ddcc0d877",
+      "changes": 6,
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
     },
     {
       "path": "/travel-blog/ben-gurion-airport-to-ein-bokek/",
@@ -843,18 +843,18 @@
     {
       "path": "/travel-blog/getting-around-israel/",
       "group": 3,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "1501b58451eff4671f58bd9288ae4d08f46b8c7a1f3ca8f64f5ede352a188cad",
+      "changes": 5,
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
     },
     {
       "path": "/travel-blog/getting-around-tel-aviv/",
       "group": 3,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "52dac4edf14520a177406c33d53700216241acbc474884e37d677b878aa229c6",
+      "changes": 6,
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
     },
     {
       "path": "/travel-blog/israel-itinerary-10-days/",
@@ -958,7 +958,8 @@
       "status": "edited",
       "reviewedSnapshot": "ebaf8ae268d42c471a8630bb4c4ec49db0ca3728262ad34f5a502709e3ff5886",
       "changes": 5,
-      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending.",
+      "postEditSnapshot": "c2602a7491b98043750f11663c5960d38a28828046a83db3cfba73071b78274c"
     },
     {
       "path": "/travel-blog/shopping-in-jerusalem/",
@@ -974,7 +975,8 @@
       "status": "edited",
       "reviewedSnapshot": "8c82571b45931d47e927117036941da742ef3c16a6230c0b1d52b91db982c313",
       "changes": 4,
-      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending.",
+      "postEditSnapshot": "dc18d70a6f7f484bf9c763518f704505b6957a3106047869f0a7e6c78177cb99"
     },
     {
       "path": "/travel-blog/taxis-in-israel/",
@@ -982,7 +984,8 @@
       "status": "edited",
       "reviewedSnapshot": "583d7de06ef4d9e066079cffce8550cc755139587d4c6cb6f9a299a164e3709f",
       "changes": 4,
-      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending.",
+      "postEditSnapshot": "b7929afe8c96322d71d140059d862e41e6ab80f21956bd4b5fc5cb92d81916bc"
     },
     {
       "path": "/travel-blog/top-10-things-to-do-in-israel/",
@@ -998,7 +1001,8 @@
       "status": "edited",
       "reviewedSnapshot": "6e58521b6d9f73463d1215747e20169cceb43e0517fb9d4e56fa51cd691b7fab",
       "changes": 4,
-      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending.",
+      "postEditSnapshot": "d20d0715da0f1609ae294a15a7f7154f2c6f7c964d47b761857ec6f29fbc08d3"
     },
     {
       "path": "/travel-blog/what-to-eat-in-israel/",

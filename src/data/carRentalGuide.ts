@@ -35,7 +35,7 @@ export const rentalChecklists = {
   ],
   return: [
     "Follow your supplier’s return directions and allow time for any airport shuttle.",
-    "Return the agreed fuel level and keep your refuelling receipt.",
+    "Return the car with the agreed fuel level and keep your refuelling receipt.",
     "Photograph the parked car, mileage and fuel gauge at handover.",
     "Collect your belongings and ask for written confirmation that you've returned the car. If you're returning it outside opening hours, follow the key-drop instructions.",
     "Keep the final invoice and check the deposit release with your card issuer and supplier.",
@@ -44,7 +44,7 @@ export const rentalChecklists = {
 
 export const carRentalFaqs = [
   { q: "Should I rent a car for my whole trip to Israel?", a: "Match the rental to the days you will drive between destinations. For a trip that starts with several days in central Tel Aviv or Jerusalem, I suggest exploring the city first and collecting a car for the regional part of your journey." },
-  { q: "Is airport or city pickup better?", a: "Airport pickup is convenient when you head straight into a road trip. A city branch can suit a later start after sightseeing. Compare the complete price, branch hours and return arrangements for your dates." },
+  { q: "Is airport or city pickup better?", a: "Pick up your car at the airport if you're starting a road trip straight away. If you're sightseeing in the city first, collect it from a city branch when you're ready to leave. Compare total prices, opening hours and return options." },
   { q: "Do I need an international driving permit?", a: "Check the selected supplier’s rules for your original licence. Hertz Israel requires an international permit when the licence uses a non-Latin script; Eldan asks for one when the licence is not in English. Bring the original licence alongside any required permit." },
   { q: "Can I use a debit card for the deposit?", a: "Check the payment section of the specific rental offer before booking. Many suppliers require a physical credit card in the main driver’s name, even when online payment can be made by another method. Choose an offer whose deposit requirements match the card you will bring." },
   { q: "Does DiscoverCars Full Coverage remove the deposit?", a: "DiscoverCars describes Full Coverage as reimbursement protection for eligible charges. The rental supplier’s deposit and rental agreement still apply. Read the offer’s deposit amount, covered items, exclusions and claims requirements together." },

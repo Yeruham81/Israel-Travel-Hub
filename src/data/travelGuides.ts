@@ -789,7 +789,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       rows: [
         ["Train", "Airport and cities served by rail", "Distance-based ticket", "Generally suspended", "Plan transport from the station to your hotel"],
         ["Bus", "Cities, towns and intercity routes", "Regulated distance fare", "Most routes suspended", "Check departure times and the last return bus"],
-        ["Light rail", "Operating corridors in Jerusalem and Tel Aviv", "Regulated transit fare", "Generally suspended", "Validate before boarding; routes are limited"],
+        ["Light rail", "Routes in Jerusalem and the Tel Aviv area", "Regulated transit fare", "Generally suspended", "Validate before boarding; routes are limited"],
         ["Licensed taxi", "Door-to-door journeys with luggage", "Metered fare", "Usually available", "Check the pickup point and permitted extras"],
         ["Shared taxi (sherut)", "Selected local routes", "Fare per passenger", "Some routes operate", "Service and room for luggage vary by route"],
         ["Rental car", "Rural areas and multi-stop days", "Rental, fuel and parking", "Driving possible", "Check desk hours and insurance restrictions"],
@@ -812,7 +812,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             inlineLinks: [{ text: "my airport arrival guide", to: travelGuidePaths.arrival }],
             photo: { src: navonPlatform, alt: "Platforms at Jerusalem–Yitzhak Navon railway station" },
             highlightedLinks: [
-              { label: "Israel Railways - journeys, fares and departures", href: "https://www.rail.co.il/", context: "Choose stations and travel date, and check train changes and disruption notices." },
+              { label: "Israel Railways - journeys, fares and departures", href: "https://www.rail.co.il/", context: "Choose your stations and travel date, and check for changes or disruptions." },
               { label: "Jerusalem line - free train travel voucher", href: "https://rail.co.il/?lan=en&page=vouchers-jerusalem", context: "Official information and instructions for the currently required advance voucher." },
             ],
             sourceIds: ["israel-rail", "guide-train-nov-2026", "guide-jerusalem-train-voucher"],
@@ -850,7 +850,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           headers: ["Payment method", "Getting started", "Useful for", "Important detail"],
           rows: [
             ["Anonymous Rav-Kav", "Buy and load at a supported counter, machine or retailer", "Visitors who prefer a physical card", "Validate each ride; personalized discounts are unavailable"],
-            ["Approved mobile app", "Register and add a supported payment method", "Bus and rail journeys without preloading a card", "Follow the app's validation steps; keep mobile data and battery"],
+            ["Approved mobile app", "Register and add a supported payment method", "Bus and rail journeys without preloading a card", "Follow the app's validation steps; keep your phone charged and connected"],
             ["Contactless bank card", "Tap on an explicitly enabled Egged bus", "An occasional single full-fare journey", "Only selected routes, without normal transfer benefits"],
           ],
         }],
@@ -868,7 +868,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-ticket-rules", title: "Fares, transfers and credit-card taps",
             paragraphs: [
-              "The standard ₪8 fare applies to journeys up to 15 km under the current distance-based system. Eligible city bus and light-rail journeys can include transfers within 90 minutes, provided each leg is correctly validated. For several daily journeys, compare a day pass with individual fares; longer journeys have different prices.",
+              "A standard journey of up to 15 km costs ₪8, including eligible bus and light-rail transfers within 90 minutes. Validate every ride. If you're making several journeys in one day, compare a day pass with individual fares. Longer journeys cost more.",
               "Since January 2026, Egged has accepted contactless international Visa and Mastercard cards and digital wallets on selected services in Eilat, Jerusalem and metropolitan Haifa. This is not a nationwide payment method: it generally covers a full-fare single journey, without the ordinary Rav-Kav or app transfer and discount benefits. For children and reduced-fare tickets, check passenger eligibility and validation rules.",
             ],
             highlightedLinks: [{ label: "Egged - supported credit-card payment routes", href: "https://www.egged.co.il/en/information-for-passengers/rav-kav-and-payment-apps", context: "The pilot locations, accepted cards and single-ride limitations." }],
@@ -1036,7 +1036,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-accessibility", title: "Luggage, accessibility and children",
             paragraphs: [
-              "Station lifts, bus equipment, wheelchair places and step-free routes vary. Some intercity accessible services require advance arrangements. Check your departure time and boarding location, and confirm child seats or luggage capacity with your chosen taxi or private-transfer provider.",
+              "Station lifts, wheelchair spaces and step-free access vary by station and vehicle. Some accessible intercity services need to be booked in advance. Check your departure time and boarding location, and confirm child seats or luggage capacity with your chosen taxi or private-transfer provider.",
             ],
             highlightedLinks: [{ label: "Egged - accessibility arrangements", href: "https://www.egged.co.il/en/accessibility-statement", context: "Accessible vehicles, reservation requirements and passenger assistance." }],
             sourceIds: ["guide-egged-accessibility"],
@@ -1115,7 +1115,7 @@ telAviv: {
         id: "choose", title: "Choosing transport and walking routes",
         paragraphs: [
           "For central sightseeing, walk between nearby attractions and use buses or light rail for longer connections. Choose a hotel near the areas you will explore most often; my where to stay in Tel Aviv guide explains convenient neighbourhoods.",
-          "Old Jaffa and its port, Neve Tzedek and Rothschild Boulevard, and the Carmel Market area each work well as walking clusters. Tel Aviv Port, the northern museums and Old Jaffa are farther apart. See my Jaffa attraction guide and Tel Aviv beaches guide when planning individual stops.",
+          "Explore Old Jaffa and its port on foot, walk between Neve Tzedek and Rothschild Boulevard, or spend time around Carmel Market. Tel Aviv Port, the northern museums and Old Jaffa are farther apart. See my Jaffa attraction guide and Tel Aviv beaches guide when planning individual stops.",
           "In summer, choose shaded walking routes and check accessibility if needed. Consider a taxi if you're carrying heavy luggage or staying far from the station.",
         ],
         photo: { src: telAvivDizengoff, alt: "Pedestrian-friendly streets in Tel Aviv's Dizengoff area" },
@@ -1142,7 +1142,7 @@ telAviv: {
         paragraphs: [
           "City buses cover more Tel Aviv neighbourhoods than the Red Line, connecting beaches, museums, markets and hotels. Check the bus number, direction, walking distance to your destination and last Friday departure.",
           "A standard journey of up to 15 km costs ₪8. When you validate your journey using a Rav-Kav or approved payment app, eligible transfers between buses and the light rail are included within 90 minutes. Longer trips and daily passes follow separate fare rules.",
-          "Load a Rav-Kav card or register an approved ticketing app before boarding, and validate each journey. Cash to the driver is generally unavailable. Use the national public transport planner for exact stops and departures.",
+          "Load a Rav-Kav card or set up an approved payment app before boarding, and validate each ride. Drivers generally do not accept cash. Use the national public transport planner for exact stops and departures.",
         ],
         photo: { src: archivedBuses, alt: "City buses at a Tel Aviv metropolitan transport terminal" },
         tables: [{
@@ -1169,7 +1169,7 @@ telAviv: {
             id: "ta-bank-card", title: "Paying by credit card on Dan buses",
             paragraphs: [
               "On participating Dan buses, a supported contactless Visa or Mastercard, including eligible foreign cards and digital wallets, pays the published ₪8 fare for one passenger.",
-              "This full-fare single journey carries no ordinary 90-minute transfer benefit or personal discounts. A Dan bank-card tap does not cover travel on the Red Line.",
+              "The card payment covers one full-fare bus ride, without free 90-minute transfers or personal discounts. You'll need a separate ticket for the Red Line.",
             ],
             externalLinks: [{ label: "Dan - official card payment rules", href: "https://www.dan.co.il/faq/credit-card-ride-validation" }],
             sourceIds: ["guide-dan-bank-card-2026"],
@@ -1225,7 +1225,7 @@ telAviv: {
             ["Tel Aviv HaHagana", "Southern Ayalon corridor and southern neighbourhoods", "Buses or taxis towards south Tel Aviv"],
             ["Tel Aviv HaShalom", "Azrieli and Sarona business and shopping districts", "Walking distance or local bus connections"],
             ["Tel Aviv Savidor Center", "Central-northern Ayalon corridor", "Arlozorov Red Line station and major bus hub"],
-            ["Tel Aviv University", "University, Expo and north Tel Aviv", "Local bus or taxi to the north-city areas"],
+            ["Tel Aviv University", "University, Expo and north Tel Aviv", "Local bus or taxi to northern Tel Aviv"],
           ],
         }],
         inlineLinks: [{ text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" }],
@@ -1250,7 +1250,7 @@ telAviv: {
       {
         id: "bikes", title: "Cycling, e-scooters, parking and rental cars",
         paragraphs: [
-          "Bikes and e-scooters suit short trips on permitted cycling routes. Rent a bicycle or e-scooter through the operator's app. Check registration and payment requirements, use permitted cycling routes and end your rental in an approved parking area.",
+          "Bikes and e-scooters are useful for short trips. Rent one through the operator's app, check the registration and payment requirements, ride on permitted routes and park in an approved area.",
           "Electric bike and scooter riders must be at least 16 and meet the applicable qualification requirements. Helmets are mandatory, ordinary pedestrian pavements are for walking, and scooters cannot carry passengers.",
           "Walking and public transport are convenient for exploring central Tel Aviv. Consider renting a car for trips outside the city. Blue-and-white street parking may require payment or a permit. Check the parking signs and rental desk hours. See my car rental guide for options beyond the city.",
         ],
@@ -1299,7 +1299,7 @@ telAviv: {
 ,
     ],
     checklist: [
-      "Choose the station or bus stop within the shortest convenient walking distance of your destination.",
+      "Choose a station or bus stop with an easy walk to your destination.",
       "Set up Rav-Kav or an approved payment app and validate every journey.",
       "Use the ₪8 local fare and eligible 90-minute transfers when planning costs.",
       "Confirm the Red Line service and final destination before boarding.",

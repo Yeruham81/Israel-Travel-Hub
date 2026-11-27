@@ -407,7 +407,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "Authorized Ben Gurion Airport taxis run on the regulated meter. The fare depends on distance, driving time, the applicable A, B or C tariff and permitted extra charges. Traffic delays therefore affect the final amount.",
           "Under the temporary tariff introduced in April 2026, the standard meter starts at ₪12.46 including VAT and a ₪5 addition applies when departing Ben Gurion Airport. The table below offers daytime meter estimates based on route distance and driving time. For tariff hours, per-kilometer rates and permitted extras, see my taxi fares in Israel guide.",
-          "The meter is used for the official taxi queue and scheduled Gett taxis. A separately arranged private transfer follows the written quote and terms agreed with its provider.",
+          "Both taxis from the official queue and pre-booked Gett taxis use the meter. With a private transfer, the price and booking terms are agreed in writing with the provider.",
         ],
         inlineLinks: [{ text: "taxi fares in Israel guide", to: travelGuidePaths.taxiFares }],
         tables: [airportTaxiEstimateTable],
@@ -428,7 +428,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "special", title: "Luggage, child seats and accessible taxis",
         paragraphs: [
-          "For several large cases, a stroller or more than four passengers, arrange a taxi with enough luggage space and seats. Tell the operator what you are carrying before your pickup.",
+          "If you have several large suitcases, a stroller or more than four passengers, request a larger taxi. Tell the operator how many passengers and bags you have before pickup.",
           "At Terminal 3, ramp-equipped wheelchair-accessible taxis can be requested in the Gett app, at the terminal's self-service taxi kiosks or through the dispatcher at the official queue near Exit 03. For specific wheelchair space or boarding needs, arrange assistance in advance.",
           "If a child restraint is required, request the correct seat for your child's age and size before your journey. Airline or airport assistance inside the terminal is arranged separately from the taxi ride.",
         ],
@@ -453,8 +453,8 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "versus-transfer", title: "Official airport taxi or pre-booked private transfer?",
         paragraphs: [
-          "An official airport taxi is a convenient option for passengers with standard luggage. I recommend considering a pre-booked private transfer for a larger group, a particular vehicle, several suitcases or a long journey where you prefer the pickup and price arrangements agreed ahead of time.",
-          "Private transfers are booked with their own operator and have a confirmed meeting place, vehicle class and waiting terms. Follow the meeting instructions in your booking confirmation. You can compare my private airport transfer service and request a quote. For taxi apps elsewhere in Israel, my Uber in Israel guide explains Gett, Yango and current ride-hailing options.",
+          "An official airport taxi is a convenient choice if you have standard luggage. I recommend a pre-booked private transfer if you're travelling in a larger group, need a specific vehicle or extra luggage space, or prefer to agree on the pickup and price for a long journey in advance.",
+          "Book directly with the private transfer operator and agree on the meeting point, vehicle type and waiting policy. Follow the pickup instructions in your confirmation. You can find details of my private airport transfer service and request a quote. For taxi apps elsewhere in Israel, my Uber in Israel guide explains Gett, Yango and current ride-hailing options.",
         ],
         tables: [{
           caption: "Compare your airport pickup options",
@@ -480,7 +480,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "support", title: "Receipts, lost property and Gett support",
         paragraphs: [
-          "For an item left in a taxi or a problem with your fare, keep the ride code, receipt, trip date and taxi registration number. Gett provides customer-service chat through its app and website. For kiosk bookings, phone *2299 using the number entered when ordering.",
+          "If you leave something in the taxi or have a question about your fare, keep the ride code, receipt, travel date and taxi registration number. Contact Gett through the app or website chat. For kiosk bookings, call *2299 from the number you used to book.",
           "For a formal complaint about a licensed taxi, use the Ministry of Transport complaint service. Airline baggage missing before you leave the airport is handled by the airline; my arrival guide explains that process.",
         ],
         inlineLinks: [{ text: "arrival guide", to: travelGuidePaths.arrival }],
@@ -498,7 +498,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       "Keep your booking, preferred payment method and fare receipt",
     ],
     faqs: [
-      { q: "What happens if my flight is delayed?", a: "For a scheduled Gett ride, enter your flight number so pickup timing can follow flight updates. If the change is substantial, use the contact or chat option in your booking." },
+      { q: "What happens if my flight is delayed?", a: "When scheduling a Gett ride, enter your flight number so Gett can adjust the pickup time if your flight is delayed. For a major delay, use the contact or chat option in your booking." },
       { q: "Can I order a taxi without an Israeli mobile number?", a: "You can use an airport self-service kiosk without downloading Gett. Make sure you can receive the ride code and any service messages on the number you provide; ask the dispatcher for help if necessary." },
       { q: "Can I request a wheelchair-accessible taxi?", a: "At Terminal 3, ramp-equipped vehicles can be requested through Gett, a taxi kiosk or the official dispatcher. For specific wheelchair and boarding requirements, arrange assistance in advance." },
       { q: "What if I leave something in the taxi?", a: "Contact Gett through its customer-service chat, or call *2299 if your order was placed at a kiosk. Have your ride code, trip details and receipt ready." },
