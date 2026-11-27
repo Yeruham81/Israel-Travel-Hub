@@ -30,50 +30,142 @@ export const AIRPORT_TRANSFER_UPDATED_DATE = "2026-11-23";
 export const AIRPORT_TRANSFER_HUB_UPDATED_DATE = "2026-11-23";
 
 export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
-  "tel-aviv": { src: telAviv, alt: "Tel Aviv's beachfront hotels and promenade", sourceUrl: "", label: "Tel Aviv beachfront" },
-  jerusalem: { src: jerusalem, alt: "Jerusalem’s Old City and historic stone architecture", sourceUrl: "", label: "Jerusalem Old City" },
-  haifa: { src: haifa, alt: "Haifa Bay and the Bahá'í Gardens from Mount Carmel", sourceUrl: "", label: "Haifa Bay" },
-  "dead-sea": { src: deadSea, alt: "Ein Bokek beach beside the Dead Sea", sourceUrl: "", label: "Ein Bokek, Dead Sea" },
-  raanana: { src: raanana, alt: "Orange Tree public artwork in Ra’anana", sourceUrl: "", label: "Ra’anana" },
-  herzliya: { src: herzliya, alt: "Herzliya beach and the Mediterranean coastline", sourceUrl: "", label: "Herzliya beach" },
-  netanya: { src: netanya, alt: "Netanya's coastal skyline and beaches", sourceUrl: "", label: "Netanya coastline" },
-  ashdod: { src: ashdod, alt: "Boats in Ashdod Marina seen from the air", sourceUrl: "", label: "Ashdod Marina" },
-  caesarea: { src: caesarea, alt: "Aerial view of Caesarea's ancient coastal harbour", sourceUrl: "", label: "Caesarea coastline" },
-  nazareth: { src: nazareth, alt: "Courtyard and dome of the Basilica of the Annunciation in Nazareth", sourceUrl: "", label: "Nazareth" },
-  eilat: { src: eilat, alt: "Palm-lined waterfront and hotels in Eilat on the Red Sea", sourceUrl: "", label: "Eilat waterfront" },
-  other: { src: airport, alt: "Aircraft beside the terminal at Ben Gurion Airport", sourceUrl: "", label: "Ben Gurion Airport" },
-  moshe: { src: moshe, alt: "Moshe Barak seated in his vehicle", sourceUrl: "", label: "Moshe Barak — operator portrait" },
+  "tel-aviv": {
+    src: telAviv,
+    alt: "Tel Aviv's beachfront hotels and promenade",
+    sourceUrl: "",
+    label: "Tel Aviv beachfront",
+  },
+  jerusalem: {
+    src: jerusalem,
+    alt: "Jerusalem’s Old City and historic stone architecture",
+    sourceUrl: "",
+    label: "Jerusalem Old City",
+  },
+  haifa: {
+    src: haifa,
+    alt: "Haifa Bay and the Bahá'í Gardens from Mount Carmel",
+    sourceUrl: "",
+    label: "Haifa Bay",
+  },
+  "dead-sea": {
+    src: deadSea,
+    alt: "Ein Bokek beach beside the Dead Sea",
+    sourceUrl: "",
+    label: "Ein Bokek, Dead Sea",
+  },
+  raanana: {
+    src: raanana,
+    alt: "Orange Tree public artwork in Ra’anana",
+    sourceUrl: "",
+    label: "Ra’anana",
+  },
+  herzliya: {
+    src: herzliya,
+    alt: "Herzliya beach and the Mediterranean coastline",
+    sourceUrl: "",
+    label: "Herzliya beach",
+  },
+  netanya: {
+    src: netanya,
+    alt: "Netanya's coastal skyline and beaches",
+    sourceUrl: "",
+    label: "Netanya coastline",
+  },
+  ashdod: {
+    src: ashdod,
+    alt: "Boats in Ashdod Marina seen from the air",
+    sourceUrl: "",
+    label: "Ashdod Marina",
+  },
+  caesarea: {
+    src: caesarea,
+    alt: "Aerial view of Caesarea's ancient coastal harbour",
+    sourceUrl: "",
+    label: "Caesarea coastline",
+  },
+  nazareth: {
+    src: nazareth,
+    alt: "Courtyard and dome of the Basilica of the Annunciation in Nazareth",
+    sourceUrl: "",
+    label: "Nazareth",
+  },
+  eilat: {
+    src: eilat,
+    alt: "Palm-lined waterfront and hotels in Eilat on the Red Sea",
+    sourceUrl: "",
+    label: "Eilat waterfront",
+  },
+  other: {
+    src: airport,
+    alt: "Aircraft beside the terminal at Ben Gurion Airport",
+    sourceUrl: "",
+    label: "Ben Gurion Airport",
+  },
+  moshe: {
+    src: moshe,
+    alt: "Moshe Barak seated in his vehicle",
+    sourceUrl: "",
+    label: "Moshe Barak — operator portrait",
+  },
 };
 
 /** Use the same four destination images already displayed under Airport Transfers on the homepage. */
 export const airportHomepageRoutePhotos: Record<string, Pick<StayGuidePhoto, "src" | "alt">> = {
-  jerusalem: { src: "/images/home/transfer-jerusalem-tower-of-david.webp", alt: "Tower of David citadel beside Jerusalem’s Old City" },
-  "tel-aviv": { src: "/images/home/transfer-tel-aviv-beach-skyline.webp", alt: "Tel Aviv Mediterranean beach and modern skyline" },
-  haifa: { src: "/images/home/transfer-haifa-bahai-gardens.webp", alt: "Bahá’í Gardens staircase and Shrine in Haifa" },
-  "dead-sea": { src: "/images/home/transfer-ein-bokek-aerial.webp", alt: "Aerial view of Ein Bokek Dead Sea resort area and turquoise water" },
+  jerusalem: {
+    src: "/images/home/transfer-jerusalem-tower-of-david.webp",
+    alt: "Tower of David citadel beside Jerusalem’s Old City",
+  },
+  "tel-aviv": {
+    src: "/images/home/transfer-tel-aviv-beach-skyline.webp",
+    alt: "Tel Aviv Mediterranean beach and modern skyline",
+  },
+  haifa: {
+    src: "/images/home/transfer-haifa-bahai-gardens.webp",
+    alt: "Bahá’í Gardens staircase and Shrine in Haifa",
+  },
+  "dead-sea": {
+    src: "/images/home/transfer-ein-bokek-aerial.webp",
+    alt: "Aerial view of Ein Bokek Dead Sea resort area and turquoise water",
+  },
 };
 
 export const airportHubPhotoSrc: Record<string, string> = {
-  "jerusalem": "/images/home/transfer-jerusalem-tower-of-david-mobile.webp",
+  jerusalem: "/images/home/transfer-jerusalem-tower-of-david-mobile.webp",
   "tel-aviv": "/images/home/transfer-tel-aviv-beach-skyline-mobile.webp",
-  "haifa": "/images/home/transfer-haifa-bahai-gardens-mobile.webp",
+  haifa: "/images/home/transfer-haifa-bahai-gardens-mobile.webp",
   "dead-sea": "/images/home/transfer-ein-bokek-aerial-mobile.webp",
-  "raanana": hubRaanana,
-  "herzliya": hubHerzliya,
-  "netanya": hubNetanya,
-  "ashdod": hubAshdod,
-  "caesarea": hubCaesarea,
-  "nazareth": hubNazareth,
-  "eilat": hubEilat,
-  "other": hubOther,
+  raanana: hubRaanana,
+  herzliya: hubHerzliya,
+  netanya: hubNetanya,
+  ashdod: hubAshdod,
+  caesarea: hubCaesarea,
+  nazareth: hubNazareth,
+  eilat: hubEilat,
+  other: hubOther,
 };
 
-export const airportDestinationCards = airportTransferRates.map((rate) => ({ ...rate, photo: { ...(airportHomepageRoutePhotos[rate.id] ?? airportTransferPhotos[rate.id]!), hubSrc: airportHubPhotoSrc[rate.id] } }));
+export const airportDestinationCards = airportTransferRates.map((rate) => ({
+  ...rate,
+  photo: {
+    ...(airportHomepageRoutePhotos[rate.id] ?? airportTransferPhotos[rate.id]!),
+    hubSrc: airportHubPhotoSrc[rate.id],
+  },
+}));
 
 export const airportTransferBenefits = [
-  { title: "Agreed price, no extra charges", text: "I'll confirm the full fare before you book, with no unexpected charges added later." },
-  { title: "Flight tracking", text: "I track your flight and adjust pickup timing to your arrival." },
-  { title: "Free cancellation up to 24 hours", text: "You can cancel a direct booking free of charge up to 24 hours before pickup." },
+  {
+    title: "Agreed price, no extra charges",
+    text: "I'll confirm the full fare before you book, with no unexpected charges added later.",
+  },
+  {
+    title: "Flight tracking",
+    text: "I track your flight and adjust pickup timing to your arrival.",
+  },
+  {
+    title: "Free cancellation up to 24 hours",
+    text: "You can cancel a direct booking free of charge up to 24 hours before pickup.",
+  },
 ];
 
 export const airportTransferChecklist = [
@@ -85,65 +177,124 @@ export const airportTransferChecklist = [
 ];
 
 export const airportTransferFaqs = [
-  { q: "Are the displayed prices per person?", a: "No. These are starting weekday fares from Ben Gurion Airport, per vehicle for up to four passengers. I quote journeys to the airport separately. I include any applicable night, weekend or holiday surcharges in the final price before booking." },
-  { q: "Can I request a larger vehicle or child seats?", a: "Yes. Tell me about all passengers, luggage and children's ages. I'll confirm the vehicle and any requested seats before the booking is finalized." },
-  { q: "Will you track my flight if it is delayed?", a: "I track the flight details you provide and coordinate the pickup around the actual landing time. Please follow the agreed meeting instructions and contact me if your arrival or baggage collection changes unexpectedly." },
-  { q: "When can I cancel for free?", a: "For transfers booked directly with me, cancellation is free until 24 hours before the scheduled pickup. Ask about the terms of later cancellations when confirming the booking. Independent booking platforms have their own cancellation policies." },
-  { q: "Where will I meet my driver at Ben Gurion Airport?", a: "For an airport pickup, I'll confirm your terminal meeting point and pickup instructions with the booking details. Follow those instructions after collecting your luggage." },
-  { q: "How can I pay for my airport transfer?", a: "I'll confirm the available payment methods and when payment is due in writing before your booking is finalized." },
-  { q: "Can I arrange a transfer on Shabbat or late at night?", a: "Send your travel date and time. I'll confirm availability, the vehicle and any night, Shabbat or holiday surcharge in your personal quote." },
-  { q: "When is my transfer booking confirmed?", a: "Your booking is confirmed in writing once we agree on availability, the full fare, pickup location and payment terms." },
+  {
+    q: "Are the displayed prices per person?",
+    a: "No. These are starting weekday fares from Ben Gurion Airport, per vehicle for up to four passengers. I quote journeys to the airport separately. I include any applicable night, weekend or holiday surcharges in the final price before booking.",
+  },
+  {
+    q: "Can I request a larger vehicle or child seats?",
+    a: "Yes. Tell me about all passengers, luggage and children's ages. I'll confirm the vehicle and any requested seats before the booking is finalized.",
+  },
+  {
+    q: "Will you track my flight if it is delayed?",
+    a: "I track the flight details you provide and coordinate the pickup around the actual landing time. Please follow the agreed meeting instructions and contact me if your arrival or baggage collection changes unexpectedly.",
+  },
+  {
+    q: "When can I cancel for free?",
+    a: "For transfers booked directly with me, cancellation is free until 24 hours before the scheduled pickup. Ask about the terms of later cancellations when confirming the booking. Independent booking platforms have their own cancellation policies.",
+  },
+  {
+    q: "Where will I meet my driver at Ben Gurion Airport?",
+    a: "For an airport pickup, I'll confirm your terminal meeting point and pickup instructions with the booking details. Follow those instructions after collecting your luggage.",
+  },
+  {
+    q: "How can I pay for my airport transfer?",
+    a: "I'll confirm the available payment methods and when payment is due in writing before your booking is finalized.",
+  },
+  {
+    q: "Can I arrange a transfer on Shabbat or late at night?",
+    a: "Send your travel date and time. I'll confirm availability, the vehicle and any night, Shabbat or holiday surcharge in your personal quote.",
+  },
+  {
+    q: "When is my transfer booking confirmed?",
+    a: "Your booking is confirmed in writing once we agree on availability, the full fare, pickup location and payment terms.",
+  },
 ];
 
 export const airportRelatedLinks = [
   {
-    label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival,
-    description: "Follow the arrival sequence from passport control to baggage claim, customs and the public arrivals hall.",
-    photo: { src: airportHall, alt: "Arrivals reception hall at Ben Gurion Airport Terminal 3", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" },
+    label: "Ben Gurion arrival tips",
+    to: travelGuidePaths.arrival,
+    description:
+      "Follow the arrival sequence from passport control to baggage claim, customs and the public arrivals hall.",
+    photo: {
+      src: airportHall,
+      alt: "Arrivals reception hall at Ben Gurion Airport Terminal 3",
+      credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+    },
   },
   {
-    label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim,
-    description: "Stay connected for maps, messages and travel plans. Understand phone compatibility, data allowances and activation before choosing an eSIM for your visit.",
-    photo: { src: esim, alt: "A phone displaying an illustrative eSIM screen against a city background", sourceUrl: "", credit: "Illustrative eSIM screen, not a provider speed test." },
+    label: "Choosing an eSIM for Israel",
+    to: travelGuidePaths.esim,
+    description:
+      "Stay connected for maps, messages and travel plans. Understand phone compatibility, data allowances and activation before choosing an eSIM for your visit.",
+    photo: {
+      src: esim,
+      alt: "A phone displaying an illustrative eSIM screen against a city background",
+      sourceUrl: "",
+      credit: "Illustrative eSIM screen, not a provider speed test.",
+    },
   },
   {
-    label: "Taxis in Israel", to: travelGuidePaths.taxis,
-    description: "Make everyday journeys easier after your airport ride. Learn about taxi apps, payment, receipts and the details to confirm before setting off.",
+    label: "Taxis in Israel",
+    to: travelGuidePaths.taxis,
+    description:
+      "Make everyday journeys easier after your airport ride. Learn about taxi apps, payment, receipts and the details to confirm before setting off.",
     photo: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed taxis in Tel Aviv" },
   },
   {
-    label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" as const,
-    description: "Find a Jerusalem neighborhood that suits your visit. Compare Old City atmosphere, central locations and quieter areas, with practical hotel and vehicle-access advice.",
+    label: "Where to stay in Jerusalem",
+    to: "/travel-blog/where-to-stay-in-jerusalem/" as const,
+    description:
+      "Find a Jerusalem neighborhood that suits your visit. Compare Old City atmosphere, central locations and quieter areas, with practical hotel and vehicle-access advice.",
     photo: airportTransferPhotos["jerusalem"]!,
   },
   {
-    label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const,
-    description: "Choose between beachfront mornings, central city life and historic Jaffa. Explore Tel Aviv's hotel areas and find the right base for your stay.",
+    label: "Where to stay in Tel Aviv",
+    to: "/travel-blog/where-to-stay-in-tel-aviv/" as const,
+    description:
+      "Choose between beachfront mornings, central city life and historic Jaffa. Explore Tel Aviv's hotel areas and find the right base for your stay.",
     photo: airportTransferPhotos["tel-aviv"]!,
   },
   {
-    label: "Haifa hotels", to: "/travel-blog/best-hotels-in-haifa/" as const,
-    description: "Discover places to stay around the German Colony, Carmel and coast. Match your hotel location to Haifa's sights, hills and onward plans.",
+    label: "Haifa hotels",
+    to: "/travel-blog/best-hotels-in-haifa/" as const,
+    description:
+      "Discover places to stay around the German Colony, Carmel and coast. Match your hotel location to Haifa's sights, hills and onward plans.",
     photo: airportTransferPhotos["haifa"]!,
   },
   {
-    label: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" as const,
-    description: "Compare Ein Bokek resorts, southern hotel districts and Ein Gedi stays; beach access and mineral pools are not interchangeable.",
+    label: "Dead Sea hotels",
+    to: "/travel-blog/best-dead-sea-hotels/" as const,
+    description:
+      "Compare Ein Bokek resorts, southern hotel districts and Ein Gedi stays; beach access and mineral pools are not interchangeable.",
     photo: airportTransferPhotos["dead-sea"]!,
   },
   {
-    label: "Tours & day trips", to: "/tours/" as const,
-    description: "Turn your stay into a journey of discovery. Explore guided outings and private day trips to historic cities, sacred sites and memorable landscapes.",
+    label: "Tours & day trips",
+    to: "/tours/" as const,
+    description:
+      "Turn your stay into a journey of discovery. Explore guided outings and private day trips to historic cities, sacred sites and memorable landscapes.",
     photo: airportTransferPhotos["nazareth"]!,
   },
   {
-    label: "Attractions & experiences", to: "/attractions/" as const,
-    description: "Find the places that make your Israel itinerary your own. Discover ancient harbours, city sights, heritage sites and natural landscapes across the country.",
+    label: "Attractions & experiences",
+    to: "/attractions/" as const,
+    description:
+      "Find the places that make your Israel itinerary your own. Discover ancient harbours, city sights, heritage sites and natural landscapes across the country.",
     photo: airportTransferPhotos["caesarea"]!,
   },
   {
-    label: "Israel travel tips", to: travelGuidePaths.travelTips,
-    description: "Prepare for a smoother trip, from everyday essentials to planning your days. Find practical advice on packing, communication and exploring Israel's cities and sights.",
-    photo: { src: roadTrip, alt: "Illustration of a vehicle traveling along a desert road in Israel" },
+    label: "Israel travel tips",
+    to: travelGuidePaths.travelTips,
+    description:
+      "Prepare for a smoother trip, from everyday essentials to planning your days. Find practical advice on packing, communication and exploring Israel's cities and sights.",
+    photo: {
+      src: roadTrip,
+      alt: "Illustration of a vehicle traveling along a desert road in Israel",
+    },
   },
 ];

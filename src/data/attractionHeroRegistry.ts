@@ -51,5 +51,8 @@ export const attractionHeroRegistry: Record<string, { src: string; alt: string }
   "/attractions/tel-megiddo/": telMegiddoSite.hero,
   "/attractions/yardenit/": yardenitSite.hero,
   "/attractions/dead-sea/": { src: deadSeaHero, alt: "Dead Sea shoreline and desert scenery" },
-  "/attractions/sea-of-galilee/": { src: "/images/attractions/sea-of-galilee.webp", alt: "Blue waters of the Sea of Galilee with the surrounding hills" },
+  "/attractions/sea-of-galilee/": {
+    src: "/images/attractions/sea-of-galilee.webp",
+    alt: "Blue waters of the Sea of Galilee with the surrounding hills",
+  },
 };

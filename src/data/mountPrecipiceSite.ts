@@ -3,11 +3,16 @@ import mountPrecipiceHero from "@/assets/guides/2026-10/mount-precipice.webp";
 /** Mount Precipice facts shared by the visitor page and SEO directory. */
 export const mountPrecipiceSite = {
   title: "Mount Precipice: Nazareth's View over the Jezreel Valley",
-  description: "Visit Mount Precipice near Nazareth for Jezreel Valley views, the Three Faiths Lookout, short walks, driving directions and nearby Galilee sites.",
+  description:
+    "Visit Mount Precipice near Nazareth for Jezreel Valley views, the Three Faiths Lookout, short walks, driving directions and nearby Galilee sites.",
   region: "Nazareth & Lower Galilee" as const,
   updatedAt: "2026-11-17",
-  intro: "Just south of Nazareth, Mount Precipice offers one of the loveliest views across the Jezreel Valley. A short paved path leads from the hilltop parking area to a viewpoint connected with the Gospel story of Jesus' rejection at Nazareth. Here is how I would plan an easy scenic stop, with ideas for a longer walk or a day exploring the region.",
-  hero: { src: mountPrecipiceHero, alt: "Stone lookout terrace and small central building on Mount Precipice, with the Jezreel Valley behind them" },
+  intro:
+    "Just south of Nazareth, Mount Precipice offers one of the loveliest views across the Jezreel Valley. A short paved path leads from the hilltop parking area to a viewpoint connected with the Gospel story of Jesus' rejection at Nazareth. Here is how I would plan an easy scenic stop, with ideas for a longer walk or a day exploring the region.",
+  hero: {
+    src: mountPrecipiceHero,
+    alt: "Stone lookout terrace and small central building on Mount Precipice, with the Jezreel Valley behind them",
+  },
   sources: {
     kkl: "https://kkl-jnf.org/hiking_and_walking_tracks/mount-of-precipice/",
     jesusTrail: "https://jesustrail.com/sites/mount-precipice/",

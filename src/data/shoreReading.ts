@@ -17,75 +17,114 @@ export type ShoreReadingGuide = {
 const guides = {
   jerusalem: {
     title: "Jerusalem's Old City",
-    description: "Discover the holy sites, historic quarters and viewpoints. Plan a rewarding visit around the walking, steps and time available ashore.",
+    description:
+      "Discover the holy sites, historic quarters and viewpoints. Plan a rewarding visit around the walking, steps and time available ashore.",
     to: "/attractions/old-city-jerusalem/",
     photo: migrationPhotos["EXISTING:jerusalem"],
   },
   telAviv: {
     title: "A day in Tel Aviv",
-    description: "Make room for the seafront, markets and lively neighborhoods. Find practical advice for moving between city stops during a coastal day trip.",
+    description:
+      "Make room for the seafront, markets and lively neighborhoods. Find practical advice for moving between city stops during a coastal day trip.",
     to: travelGuidePaths.telAviv,
     photo: airportTransferPhotos["tel-aviv"]!,
   },
   jaffa: {
     title: "Old Jaffa & its harbour",
-    description: "Explore stone lanes, sea views and the flea-market area. Choose a few memorable stops and leave time to enjoy the atmosphere.",
+    description:
+      "Explore stone lanes, sea views and the flea-market area. Choose a few memorable stops and leave time to enjoy the atmosphere.",
     to: "/attractions/jaffa/",
-    photo: { src: jaffa, alt: "Old Jaffa's historic buildings and harbour beside the Mediterranean", sourceUrl: "" },
+    photo: {
+      src: jaffa,
+      alt: "Old Jaffa's historic buildings and harbour beside the Mediterranean",
+      sourceUrl: "",
+    },
   },
   masada: {
     title: "Masada: fortress & desert views",
-    description: "Discover the ancient plateau above the Dead Sea. Understand the cable-car options, admission and practical planning for a desert excursion.",
+    description:
+      "Discover the ancient plateau above the Dead Sea. Understand the cable-car options, admission and practical planning for a desert excursion.",
     to: "/attractions/masada/",
     photo: migrationPhotos["EXISTING:masada"],
   },
   deadSea: {
     title: "Visiting the Dead Sea",
-    description: "Plan a scenic stop or time at a designated beach. Learn what to consider about access, facilities and combining the coast with Masada.",
+    description:
+      "Plan a scenic stop or time at a designated beach. Learn what to consider about access, facilities and combining the coast with Masada.",
     to: travelGuidePaths.deadSea,
     photo: airportTransferPhotos["dead-sea"]!,
   },
   bethlehem: {
     title: "Bethlehem & the Nativity Church",
-    description: "Explore the Church of the Nativity and Manger Square. Understand the arrangements to discuss before adding Bethlehem to a Jerusalem excursion.",
+    description:
+      "Explore the Church of the Nativity and Manger Square. Understand the arrangements to discuss before adding Bethlehem to a Jerusalem excursion.",
     to: travelGuidePaths.bethlehem,
     photo: migrationPhotos["jerusalem-to-bethlehem"],
   },
   haifa: {
     title: "Haifa: gardens, views & coast",
-    description: "Discover the Bahá'í Gardens, German Colony and Carmel viewpoints. Build a local outing with less driving and more time near your ship.",
+    description:
+      "Discover the Bahá'í Gardens, German Colony and Carmel viewpoints. Build a local outing with less driving and more time near your ship.",
     to: "/attractions/haifa/",
     photo: airportTransferPhotos["haifa"]!,
   },
   akko: {
     title: "Akko's Old City & harbour",
-    description: "Discover Crusader heritage, market lanes and the fishing harbour. Plan the walking route and admission choices for a day along the northern coast.",
+    description:
+      "Discover Crusader heritage, market lanes and the fishing harbour. Plan the walking route and admission choices for a day along the northern coast.",
     to: "/attractions/akko-acre/",
-    photo: { src: akko, alt: "Fishing boats and historic buildings around Akko's harbour", sourceUrl: "", credit: "Akko harbour · publisher's original excursion photograph; retained unchanged" },
+    photo: {
+      src: akko,
+      alt: "Fishing boats and historic buildings around Akko's harbour",
+      sourceUrl: "",
+      credit: "Akko harbour · publisher's original excursion photograph; retained unchanged",
+    },
   },
   nazareth: {
     title: "Nazareth & the Annunciation",
-    description: "Visit the Basilica of the Annunciation and discover its significance. Plan church access and combine Nazareth with selected Galilee sites.",
+    description:
+      "Visit the Basilica of the Annunciation and discover its significance. Plan church access and combine Nazareth with selected Galilee sites.",
     to: travelGuidePaths.annunciation,
     photo: migrationPhotos["basilica-of-the-annunciation"],
   },
   galilee: {
     title: "Sea of Galilee highlights",
-    description: "Explore the lakeside setting of Tiberias, Capernaum and Tabgha. Choose the heritage stops and landscapes that matter most to your party.",
+    description:
+      "Explore the lakeside setting of Tiberias, Capernaum and Tabgha. Choose the heritage stops and landscapes that matter most to your party.",
     to: "/attractions/sea-of-galilee/",
     photo: migrationPhotos["EXISTING:galilee"],
   },
   roshHanikra: {
     title: "Rosh Hanikra & the grottoes",
-    description: "Discover the white cliffs and sea caves of the northern coast. Check operating conditions before including the grottoes in your day ashore.",
+    description:
+      "Discover the white cliffs and sea caves of the northern coast. Check operating conditions before including the grottoes in your day ashore.",
     to: "/attractions/rosh-hanikra/",
-    photo: { src: roshHanikra, alt: "Turquoise Mediterranean water inside the Rosh Hanikra grottoes", sourceUrl: "", credit: "Photograph from the publisher's Rosh Hanikra guide; retained unchanged" },
+    photo: {
+      src: roshHanikra,
+      alt: "Turquoise Mediterranean water inside the Rosh Hanikra grottoes",
+      sourceUrl: "",
+      credit: "Photograph from the publisher's Rosh Hanikra guide; retained unchanged",
+    },
   },
 } satisfies Record<string, ShoreReadingGuide>;
 
 export const portShoreGuides: Record<ShorePortId, ShoreReadingGuide[]> = {
-  ashdod: [guides.jerusalem, guides.telAviv, guides.jaffa, guides.masada, guides.deadSea, guides.bethlehem],
-  haifa: [guides.haifa, guides.akko, guides.nazareth, guides.galilee, guides.roshHanikra, guides.jerusalem],
+  ashdod: [
+    guides.jerusalem,
+    guides.telAviv,
+    guides.jaffa,
+    guides.masada,
+    guides.deadSea,
+    guides.bethlehem,
+  ],
+  haifa: [
+    guides.haifa,
+    guides.akko,
+    guides.nazareth,
+    guides.galilee,
+    guides.roshHanikra,
+    guides.jerusalem,
+  ],
 };
 
 /** Short hub-only previews; retain detailed descriptions on individual port pages. */

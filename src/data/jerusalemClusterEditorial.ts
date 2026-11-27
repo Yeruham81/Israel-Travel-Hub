@@ -41,7 +41,10 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         inlineLinks: [
           { text: "Mount of Olives", to: "/attractions/mount-of-olives/" },
           { text: "shopping guide", to: travelGuidePaths.jerusalemShopping },
-          { text: "neighborhood-by-neighborhood hotel guide", to: "/travel-blog/where-to-stay-in-jerusalem/" },
+          {
+            text: "neighborhood-by-neighborhood hotel guide",
+            to: "/travel-blog/where-to-stay-in-jerusalem/",
+          },
         ],
       },
       {
@@ -52,7 +55,10 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
           "The Old City is predominantly explored on foot. For a Mount of Olives visit, a vehicle to an upper lookout followed by a downhill walk can save a strenuous climb. A day based around museums may involve different transit connections. Regular public transport changes significantly for Shabbat and Jewish holidays, so check the actual service day.",
         ],
         inlineLinks: [
-          { text: "Ben Gurion Airport to Jerusalem guide", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+          {
+            text: "Ben Gurion Airport to Jerusalem guide",
+            to: "/travel-blog/ben-gurion-airport-to-jerusalem/",
+          },
           { text: "airport transfer service", to: "/airport-transfers/jerusalem/" },
           { text: "Jewish holidays", to: "/travel-blog/calendar-of-events/" },
         ],
@@ -60,10 +66,24 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
     ],
     related: ["jerusalemChurches", "jerusalemShopping", "jerusalemDeadSea", "bethlehem"],
     services: [
-      { label: "Jerusalem walking and guided tours", to: "/tours/jerusalem/", note: "Check the advertised starting city and guiding inclusions" },
-      { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Neighborhood and hotel advice" },
-      { label: "Airport to Jerusalem: all transport options", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
-      { label: "Airport to Jerusalem: request a private transfer", to: "/airport-transfers/jerusalem/" },
+      {
+        label: "Jerusalem walking and guided tours",
+        to: "/tours/jerusalem/",
+        note: "Check the advertised starting city and guiding inclusions",
+      },
+      {
+        label: "Where to stay in Jerusalem",
+        to: "/travel-blog/where-to-stay-in-jerusalem/",
+        note: "Neighborhood and hotel advice",
+      },
+      {
+        label: "Airport to Jerusalem: all transport options",
+        to: "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      },
+      {
+        label: "Airport to Jerusalem: request a private transfer",
+        to: "/airport-transfers/jerusalem/",
+      },
     ],
   },
   jerusalemChurches: {
@@ -80,7 +100,10 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
       {
         id: "christian-tradition-context",
         title: "Understand tradition, history and site access",
-        photo: { src: "/images/jerusalem/church-of-all-nations.webp", alt: "Church of All Nations by Gethsemane on the Mount of Olives" },
+        photo: {
+          src: "/images/jerusalem/church-of-all-nations.webp",
+          alt: "Church of All Nations by Gethsemane on the Mount of Olives",
+        },
         paragraphs: [
           "A church's association with a biblical event is a matter of religious tradition and sometimes differs from what archaeology can establish. State this distinction when comparing sites: the Cenacle, Dormition Abbey and St Peter in Gallicantu tell related but separate stories on Mount Zion. The Mount Zion guide explains the short walk between them and the visitor limitations.",
           "On the Mount of Olives, the Church of All Nations and Garden of Gethsemane lie near the foot of the hill, while Dominus Flevit, Pater Noster and the Church of the Ascension require more climbing. Use the Mount of Olives guide for access, downhill route planning and suitable vehicle pickup points. Ein Karem, with the Church of the Visitation and St John the Baptist, is a separate neighborhood journey.",
@@ -112,11 +135,12 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
       { label: "Food and market tours", to: "/tours/food-market-tours/" },
       { label: "Explore the Old City", to: "/attractions/old-city-jerusalem/" },
       { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
-      { label: "German Colony and Baka hotels", to: "/accommodation/jerusalem/german-colony-baka/" },
+      {
+        label: "German Colony and Baka hotels",
+        to: "/accommodation/jerusalem/german-colony-baka/",
+      },
     ],
   },
-
-
 };
 
 export function applyJerusalemGuideEditorial(guides: Record<TravelGuideId, TravelGuide>) {
@@ -126,15 +150,38 @@ export function applyJerusalemGuideEditorial(guides: Record<TravelGuideId, Trave
     const guide = guides[id];
     if (!guide) throw new Error("Jerusalem editorial guide missing: " + id);
     if (changes.sections) {
-      guide.sections = [...guide.sections, ...changes.sections.filter(section => !guide.sections.some(existing => existing.id === section.id))];
+      guide.sections = [
+        ...guide.sections,
+        ...changes.sections.filter(
+          (section) => !guide.sections.some((existing) => existing.id === section.id),
+        ),
+      ];
     }
-    if (changes.related) guide.related = [...new Set([...guide.related, ...changes.related])].filter(other => other !== id);
-    if (changes.services) guide.services = [...changes.services, ...guide.services.filter(service => !changes.services?.some(added => added.to === service.to))];
+    if (changes.related)
+      guide.related = [...new Set([...guide.related, ...changes.related])].filter(
+        (other) => other !== id,
+      );
+    if (changes.services)
+      guide.services = [
+        ...changes.services,
+        ...guide.services.filter(
+          (service) => !changes.services?.some((added) => added.to === service.to),
+        ),
+      ];
     if (changes.reading) guide.reading = [...(guide.reading || []), ...changes.reading];
     if (id === "jerusalemChurches") {
-      const einKarem = guide.sections.find(section => section.id === "ein-karem");
-      if (einKarem && !einKarem.photo) einKarem.photo = { src: "/images/jerusalem/church-of-visitation.webp", alt: "Church of the Visitation in the hillside Ein Karem neighborhood" };
+      const einKarem = guide.sections.find((section) => section.id === "ein-karem");
+      if (einKarem && !einKarem.photo)
+        einKarem.photo = {
+          src: "/images/jerusalem/church-of-visitation.webp",
+          alt: "Church of the Visitation in the hillside Ein Karem neighborhood",
+        };
     }
-    guide.updatedAt = id === "jerusalemShopping" ? "2026-11-20" : id === "jerusalemChurches" || id === "jerusalem" ? "2026-11-21" : "2026-10-24";
+    guide.updatedAt =
+      id === "jerusalemShopping"
+        ? "2026-11-20"
+        : id === "jerusalemChurches" || id === "jerusalem"
+          ? "2026-11-21"
+          : "2026-10-24";
   }
 }

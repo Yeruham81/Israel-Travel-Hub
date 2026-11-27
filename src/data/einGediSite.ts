@@ -2,10 +2,12 @@ import { einGediCardPhoto } from "@/data/einGediCardPhoto";
 
 export const einGediSite = {
   title: "Ein Gedi Nature Reserve: Trails, Waterfalls & Visitor Guide",
-  description: "Plan Ein Gedi by the Dead Sea: Nahal David and Arugot trail restrictions, entry tickets, opening hours, wildlife, accessibility and the ancient synagogue.",
+  description:
+    "Plan Ein Gedi by the Dead Sea: Nahal David and Arugot trail restrictions, entry tickets, opening hours, wildlife, accessibility and the ancient synagogue.",
   region: "Dead Sea & Judean Desert" as const,
   updatedAt: "2026-11-18",
-  intro: "Ein Gedi is one of the most striking oases along the Dead Sea: freshwater streams, green cliffs and waterfalls set against the Judean Desert. I recommend choosing your trail before travelling, because recent floods have changed which sections are open. A short nature walk and a longer canyon hike require very different plans.",
+  intro:
+    "Ein Gedi is one of the most striking oases along the Dead Sea: freshwater streams, green cliffs and waterfalls set against the Judean Desert. I recommend choosing your trail before travelling, because recent floods have changed which sections are open. A short nature walk and a longer canyon hike require very different plans.",
   hero: einGediCardPhoto,
   visit: {
     adult: "₪31",

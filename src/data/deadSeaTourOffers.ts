@@ -35,7 +35,8 @@ export const deadSeaTourCards: DeadSeaTourCard[] = [
     rating: 4.6,
     reviewCount: 13,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.viator.com/tours/Jerusalem/Dead-Sea-Chill-Out-Day-Trip-from-Jerusalem/d921-6540P70",
+    sourceUrl:
+      "https://www.viator.com/tours/Jerusalem/Dead-Sea-Chill-Out-Day-Trip-from-Jerusalem/d921-6540P70",
     photoId: "beach-mud",
   },
   {
@@ -48,7 +49,8 @@ export const deadSeaTourCards: DeadSeaTourCard[] = [
     rating: 4.3,
     reviewCount: 790,
     checkedAt: "2026-11-21",
-    sourceUrl: "https://www.viator.com/tours/Jerusalem/Masada-and-the-Dead-Sea-Day-Trip-from-Jerusalem/d921-5209MASDSJ",
+    sourceUrl:
+      "https://www.viator.com/tours/Jerusalem/Masada-and-the-Dead-Sea-Day-Trip-from-Jerusalem/d921-5209MASDSJ",
     photoId: "masada-palace",
   },
   {
@@ -61,7 +63,8 @@ export const deadSeaTourCards: DeadSeaTourCard[] = [
     rating: 4.4,
     reviewCount: 133,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.viator.com/tours/Jerusalem/Masada-Ein-Gedi-and-Dead-Sea-Tour-from-Jerusalem/d921-6540P7",
+    sourceUrl:
+      "https://www.viator.com/tours/Jerusalem/Masada-Ein-Gedi-and-Dead-Sea-Tour-from-Jerusalem/d921-6540P7",
     photoId: "ein-gedi",
   },
   {
@@ -74,7 +77,8 @@ export const deadSeaTourCards: DeadSeaTourCard[] = [
     rating: 4.4,
     reviewCount: 843,
     checkedAt: "2026-11-21",
-    sourceUrl: "https://www.getyourguide.com/jerusalem-l97/masada-the-dead-sea-full-day-tour-from-jerusalem-t21495/",
+    sourceUrl:
+      "https://www.getyourguide.com/jerusalem-l97/masada-the-dead-sea-full-day-tour-from-jerusalem-t21495/",
     photoId: "salt-shore",
   },
   {
@@ -87,7 +91,8 @@ export const deadSeaTourCards: DeadSeaTourCard[] = [
     rating: 4.6,
     reviewCount: 247,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.getyourguide.com/jerusalem-l97/from-jerusalem-masada-at-sunrise-ein-gedi-dead-sea-tour-t23458/",
+    sourceUrl:
+      "https://www.getyourguide.com/jerusalem-l97/from-jerusalem-masada-at-sunrise-ein-gedi-dead-sea-tour-t23458/",
     photoId: "sunrise",
   },
   {
@@ -100,7 +105,8 @@ export const deadSeaTourCards: DeadSeaTourCard[] = [
     rating: 4.2,
     reviewCount: 16,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.viator.com/tours/Jerusalem/Jericho-the-Jordan-river-and-the-Dead-Sea-from-Jerusalem/d921-5209P97",
+    sourceUrl:
+      "https://www.viator.com/tours/Jerusalem/Jericho-the-Jordan-river-and-the-Dead-Sea-from-Jerusalem/d921-5209P97",
     photoId: "jordan-river",
   },
 ];

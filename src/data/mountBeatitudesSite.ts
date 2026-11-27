@@ -3,10 +3,15 @@ import mountBeatitudesHero from "@/assets/guides/mount-of-beatitudes.jpg";
 /** Shared visitor details for the Church of the Beatitudes, its directory entry and SEO. */
 export const mountBeatitudesSite = {
   title: "Mount of Beatitudes: Church, Gardens and Sea of Galilee Views",
-  description: "Plan your visit to the Mount of Beatitudes: octagonal church, gardens, Sea of Galilee views, opening hours, admission and nearby sites.",
+  description:
+    "Plan your visit to the Mount of Beatitudes: octagonal church, gardens, Sea of Galilee views, opening hours, admission and nearby sites.",
   region: "Sea of Galilee" as const,
-  intro: "The Mount of Beatitudes overlooks the northwestern Sea of Galilee, where Christian tradition places Jesus' Sermon on the Mount. Visit the beautiful octagonal church, wander through its peaceful gardens and enjoy sweeping views over the lake.",
-  hero: { src: mountBeatitudesHero, alt: "Octagonal Church of the Beatitudes and its landscaped gardens above the Sea of Galilee" },
+  intro:
+    "The Mount of Beatitudes overlooks the northwestern Sea of Galilee, where Christian tradition places Jesus' Sermon on the Mount. Visit the beautiful octagonal church, wander through its peaceful gardens and enjoy sweeping views over the lake.",
+  hero: {
+    src: mountBeatitudesHero,
+    alt: "Octagonal Church of the Beatitudes and its landscaped gardens above the Sea of Galilee",
+  },
   updatedAt: "2026-11-17",
   visit: {
     morning: "08:00–11:30",

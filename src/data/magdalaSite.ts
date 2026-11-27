@@ -1,9 +1,11 @@
 /** Visitor-facing source of truth for the individual Magdala attraction page. */
 export const magdalaSite = {
   title: "Magdala: Ancient Synagogue, Archaeology and Duc In Altum",
-  description: "Plan a visit to Magdala by the Sea of Galilee: first-century synagogue, Magdala Stone, Duc In Altum, opening hours, tickets, getting there and nearby sites.",
+  description:
+    "Plan a visit to Magdala by the Sea of Galilee: first-century synagogue, Magdala Stone, Duc In Altum, opening hours, tickets, getting there and nearby sites.",
   region: "Sea of Galilee" as const,
-  intro: "At Magdala, the remains of a first-century Jewish town stand beside Duc In Altum, a modern Christian prayer center. I recommend exploring the ancient synagogue and streets before visiting the peaceful chapels overlooking the Sea of Galilee.",
+  intro:
+    "At Magdala, the remains of a first-century Jewish town stand beside Duc In Altum, a modern Christian prayer center. I recommend exploring the ancient synagogue and streets before visiting the peaceful chapels overlooking the Sea of Galilee.",
   hero: {
     src: "/images/attractions/magdala-duc-in-altum-exterior.webp",
     alt: "Rounded stone facade of Duc In Altum at Magdala near the Sea of Galilee",
@@ -27,7 +29,8 @@ export const magdalaSite = {
   sources: {
     plan: "https://www.magdala.org/plan-your-visit",
     archaeology: "https://www.magdala.org/archaeology",
-    stoneCatalogue: "https://resources.metmuseum.org/resources/metpublications/pdf/The_World_between_Empires_Art_and_Identity_in_the_Ancient_Middle_East.pdf",
+    stoneCatalogue:
+      "https://resources.metmuseum.org/resources/metpublications/pdf/The_World_between_Empires_Art_and_Identity_in_the_Ancient_Middle_East.pdf",
     ducInAltum: "https://www.magdala.org/duc-in-altum",
     contact: "https://www.magdala.org/contact",
     cicHours: "https://www.cicts.org/our-services/",

@@ -7,108 +7,265 @@ import museums from "@/assets/guides/museums-in-jerusalem.jpg";
 export const jerusalemAttractions: Record<string, Attraction> = {
   "old-city-jerusalem": {
     title: "Jerusalem Old City: Quarters, Gates, Sights & Walking Routes",
-    description: "Visit Jerusalem's Old City: Jewish, Christian, Muslim and Armenian Quarters, the Western Wall, Holy Sepulchre, gates, walking routes and access tips.",
+    description:
+      "Visit Jerusalem's Old City: Jewish, Christian, Muslim and Armenian Quarters, the Western Wall, Holy Sepulchre, gates, walking routes and access tips.",
     region: "Jerusalem",
     image: oldCityJerusalemSite.hero,
     intro: oldCityJerusalemSite.intro,
-    takeaway: "Choose your gate by the sites you want to visit. Jaffa Gate works well for the Christian and Armenian quarters; Dung Gate is convenient for the Western Wall and Jewish Quarter. A half-day is enough for one or two areas, not every landmark.",
+    takeaway:
+      "Choose your gate by the sites you want to visit. Jaffa Gate works well for the Christian and Armenian quarters; Dung Gate is convenient for the Western Wall and Jewish Quarter. A half-day is enough for one or two areas, not every landmark.",
     duration: "Half day to full day",
     highlights: [
-          { name: "The four quarters: choose your focus", description: "The Jewish, Christian, Muslim and Armenian Quarters each have distinctive places of worship, streets and history. Walking routes do not follow neat dividing lines, and a single visit rarely covers everything in depth.", tip: "Begin with the quarter most relevant to your interests; allow time for the lanes between sights." },
-          { name: "Western Wall and the Jewish Quarter", description: "The Western Wall is an active prayer site. Nearby lanes lead to the Cardo, historic synagogues and archaeological remains. Access and visitor conduct may change around prayers and holidays.", tip: "Dung Gate is a useful approach for the Western Wall; use the entry suitable for your mobility and security arrangements." },
-          { name: "Holy Sepulchre and the Christian Quarter", description: "The church contains several traditions and places associated with Jesus' crucifixion and resurrection. Services and pilgrims take priority, and some chapels have queues independent of the main church entrance.", tip: "If your focus is churches rather than all four quarters, use the churches of Jerusalem guide for a pilgrimage-oriented route." },
-          { name: "Muslim Quarter, Via Dolorosa and markets", description: "The busy streets from Damascus Gate contain shops, religious institutions and the traditional Stations of the Cross route. Temple Mount/Haram al-Sharif access is separately controlled, and cannot be assumed on a general Old City walk.", tip: "Keep market browsing flexible and confirm separately any planned access to religious compounds." },
-          { name: "Armenian Quarter, Mount Zion and the city gates", description: "A route from Jaffa Gate through the Armenian Quarter can continue toward Zion Gate and the principal Mount Zion sites outside the walls. Museum admission at the citadel and ramparts access are separate decisions.", tip: "Combine nearby places once, rather than repeatedly retracing the route between gates." },
-        ],
+      {
+        name: "The four quarters: choose your focus",
+        description:
+          "The Jewish, Christian, Muslim and Armenian Quarters each have distinctive places of worship, streets and history. Walking routes do not follow neat dividing lines, and a single visit rarely covers everything in depth.",
+        tip: "Begin with the quarter most relevant to your interests; allow time for the lanes between sights.",
+      },
+      {
+        name: "Western Wall and the Jewish Quarter",
+        description:
+          "The Western Wall is an active prayer site. Nearby lanes lead to the Cardo, historic synagogues and archaeological remains. Access and visitor conduct may change around prayers and holidays.",
+        tip: "Dung Gate is a useful approach for the Western Wall; use the entry suitable for your mobility and security arrangements.",
+      },
+      {
+        name: "Holy Sepulchre and the Christian Quarter",
+        description:
+          "The church contains several traditions and places associated with Jesus' crucifixion and resurrection. Services and pilgrims take priority, and some chapels have queues independent of the main church entrance.",
+        tip: "If your focus is churches rather than all four quarters, use the churches of Jerusalem guide for a pilgrimage-oriented route.",
+      },
+      {
+        name: "Muslim Quarter, Via Dolorosa and markets",
+        description:
+          "The busy streets from Damascus Gate contain shops, religious institutions and the traditional Stations of the Cross route. Temple Mount/Haram al-Sharif access is separately controlled, and cannot be assumed on a general Old City walk.",
+        tip: "Keep market browsing flexible and confirm separately any planned access to religious compounds.",
+      },
+      {
+        name: "Armenian Quarter, Mount Zion and the city gates",
+        description:
+          "A route from Jaffa Gate through the Armenian Quarter can continue toward Zion Gate and the principal Mount Zion sites outside the walls. Museum admission at the citadel and ramparts access are separate decisions.",
+        tip: "Combine nearby places once, rather than repeatedly retracing the route between gates.",
+      },
+    ],
     arrival: [
-          "Jaffa Gate is a convenient approach for the Tower of David, Christian and Armenian Quarters. Dung Gate commonly works for the Western Wall; Damascus Gate is closer to many Muslim Quarter streets.",
-          "Jerusalem–Yitzhak Navon railway station is not an Old City entrance. Continue by local transport to an appropriate gate.",
-          "Most lanes are pedestrian-only with slopes, steps and uneven stones. Check the accessible route and the nearest legal vehicle drop-off for your specific site or accommodation.",
-        ],
+      "Jaffa Gate is a convenient approach for the Tower of David, Christian and Armenian Quarters. Dung Gate commonly works for the Western Wall; Damascus Gate is closer to many Muslim Quarter streets.",
+      "Jerusalem–Yitzhak Navon railway station is not an Old City entrance. Continue by local transport to an appropriate gate.",
+      "Most lanes are pedestrian-only with slopes, steps and uneven stones. Check the accessible route and the nearest legal vehicle drop-off for your specific site or accommodation.",
+    ],
     planning: [
-          "Allow half a day for one or two focused areas, or more for multiple quarters and museum or church interiors.",
-          "Dress and conduct standards differ at working prayer sites; follow posted instructions, security checks and photography requests.",
-          "Do not count on entry to the Temple Mount/Haram al-Sharif without checking current access restrictions and the rules for your visit.",
-          "Check worship services, Shabbat, religious holidays and any locally announced closures for the date you intend to visit.",
-        ],
-    faqs: [{q:"Is the Old City free to enter?",a:"The public streets generally are, but selected museums, archaeological sites and experiences charge admission."},{q:"Which gate is closest to the Western Wall?",a:"Dung Gate is often the most direct approach; security arrangements can alter pedestrian access."},{q:"Can a driver take me to an Old City hotel?",a:"A car may reach an adjacent gate or road-accessible entrance; many lodging entrances require a final walk."}],
+      "Allow half a day for one or two focused areas, or more for multiple quarters and museum or church interiors.",
+      "Dress and conduct standards differ at working prayer sites; follow posted instructions, security checks and photography requests.",
+      "Do not count on entry to the Temple Mount/Haram al-Sharif without checking current access restrictions and the rules for your visit.",
+      "Check worship services, Shabbat, religious holidays and any locally announced closures for the date you intend to visit.",
+    ],
+    faqs: [
+      {
+        q: "Is the Old City free to enter?",
+        a: "The public streets generally are, but selected museums, archaeological sites and experiences charge admission.",
+      },
+      {
+        q: "Which gate is closest to the Western Wall?",
+        a: "Dung Gate is often the most direct approach; security arrangements can alter pedestrian access.",
+      },
+      {
+        q: "Can a driver take me to an Old City hotel?",
+        a: "A car may reach an adjacent gate or road-accessible entrance; many lodging entrances require a final walk.",
+      },
+    ],
     official: [
-          { label: "Tower of David Jerusalem Museum", url: "https://www.tod.org.il/en/" },
-          { label: "Jerusalem tourism visitor information", url: "https://www.itraveljerusalem.com/en" },
-          { label: "Christian Information Center", url: "https://www.cicts.org/" },
-        ],
+      { label: "Tower of David Jerusalem Museum", url: "https://www.tod.org.il/en/" },
+      {
+        label: "Jerusalem tourism visitor information",
+        url: "https://www.itraveljerusalem.com/en",
+      },
+      { label: "Christian Information Center", url: "https://www.cicts.org/" },
+    ],
   },
   "via-dolorosa": {
-  title: viaDolorosaSite.title,
-  description: viaDolorosaSite.description,
-  region: "Jerusalem",
-  image: viaDolorosaSite.hero,
-  intro: viaDolorosaSite.intro,
-  takeaway: "Begin at the first two Stations near the Flagellation compound and follow the numbered street markers west to the Church of the Holy Sepulchre. Allow time for the five indoor Stations and services.",
-  duration: "1–3 hours",
-  highlights: [
-    { name: "The first two Stations", description: "The traditional route begins at Al-Umariyya School and the Franciscan Flagellation and Condemnation chapels.", tip: "Begin by Lion's Gate and check chapel visiting hours." },
-    { name: "Ecce Homo and the Lithostrotos", description: "The historic arch, basilica and Roman-era pavement provide a glimpse into the street's layered history.", tip: "Confirm access and visiting hours at Ecce Homo." },
-    { name: "Nine street Stations", description: "The outdoor devotional route turns through Al-Wad, the market and Al-Khanqa lanes, ending near the Coptic monastery.", tip: "Look for Roman-numeral station markers at corners and doorways." },
-    { name: "Holy Sepulchre Stations", description: "The final five stations are traditionally commemorated inside the Church of the Holy Sepulchre.", tip: "Plan around the church's visiting schedule and prayer services." },
-  ],
-  arrival: [
-    "Lion's Gate provides a useful approach toward the early Stations; Damascus Gate is another way through the market.",
-    "The light rail serves northern Old City approaches near Damascus Gate; continue on foot.",
-    "Arrange a taxi pickup at a named road-accessible gate, such as Jaffa Gate or New Gate, when finishing at the Holy Sepulchre.",
-  ],
-  planning: [
-    "Allow 45–60 minutes for the outdoor section and more time for the last five indoor stations.",
-    "Wear comfortable shoes for uneven stone streets, slopes and occasional steps.",
-    "Check shrine hours and special processions before your visit.",
-    "Use the map for orientation and follow posted station markers in the streets.",
-  ],
-  faqs: [
-    { q: "Where does the Via Dolorosa start?", a: "Near Al-Umariyya School and the Church of the Flagellation, east of the Old City." },
-    { q: "Where does it end?", a: "At the Church of the Holy Sepulchre, where the last five Stations are traditionally commemorated." },
-    { q: "Is the outdoor route free?", a: "Yes. Public lanes can be visited free of charge; associated museums and some interior attractions have their own arrangements." },
-  ],
-  official: [
-    { label: "Terra Sancta Museum Stations guide", url: viaDolorosaSite.official.stations },
-    { label: "Christian Information Center opening hours", url: viaDolorosaSite.official.churchHours },
-  ],
-},
+    title: viaDolorosaSite.title,
+    description: viaDolorosaSite.description,
+    region: "Jerusalem",
+    image: viaDolorosaSite.hero,
+    intro: viaDolorosaSite.intro,
+    takeaway:
+      "Begin at the first two Stations near the Flagellation compound and follow the numbered street markers west to the Church of the Holy Sepulchre. Allow time for the five indoor Stations and services.",
+    duration: "1–3 hours",
+    highlights: [
+      {
+        name: "The first two Stations",
+        description:
+          "The traditional route begins at Al-Umariyya School and the Franciscan Flagellation and Condemnation chapels.",
+        tip: "Begin by Lion's Gate and check chapel visiting hours.",
+      },
+      {
+        name: "Ecce Homo and the Lithostrotos",
+        description:
+          "The historic arch, basilica and Roman-era pavement provide a glimpse into the street's layered history.",
+        tip: "Confirm access and visiting hours at Ecce Homo.",
+      },
+      {
+        name: "Nine street Stations",
+        description:
+          "The outdoor devotional route turns through Al-Wad, the market and Al-Khanqa lanes, ending near the Coptic monastery.",
+        tip: "Look for Roman-numeral station markers at corners and doorways.",
+      },
+      {
+        name: "Holy Sepulchre Stations",
+        description:
+          "The final five stations are traditionally commemorated inside the Church of the Holy Sepulchre.",
+        tip: "Plan around the church's visiting schedule and prayer services.",
+      },
+    ],
+    arrival: [
+      "Lion's Gate provides a useful approach toward the early Stations; Damascus Gate is another way through the market.",
+      "The light rail serves northern Old City approaches near Damascus Gate; continue on foot.",
+      "Arrange a taxi pickup at a named road-accessible gate, such as Jaffa Gate or New Gate, when finishing at the Holy Sepulchre.",
+    ],
+    planning: [
+      "Allow 45–60 minutes for the outdoor section and more time for the last five indoor stations.",
+      "Wear comfortable shoes for uneven stone streets, slopes and occasional steps.",
+      "Check shrine hours and special processions before your visit.",
+      "Use the map for orientation and follow posted station markers in the streets.",
+    ],
+    faqs: [
+      {
+        q: "Where does the Via Dolorosa start?",
+        a: "Near Al-Umariyya School and the Church of the Flagellation, east of the Old City.",
+      },
+      {
+        q: "Where does it end?",
+        a: "At the Church of the Holy Sepulchre, where the last five Stations are traditionally commemorated.",
+      },
+      {
+        q: "Is the outdoor route free?",
+        a: "Yes. Public lanes can be visited free of charge; associated museums and some interior attractions have their own arrangements.",
+      },
+    ],
+    official: [
+      { label: "Terra Sancta Museum Stations guide", url: viaDolorosaSite.official.stations },
+      {
+        label: "Christian Information Center opening hours",
+        url: viaDolorosaSite.official.churchHours,
+      },
+    ],
+  },
   "museums-in-jerusalem": {
     title: "Best Museums in Jerusalem: What to See & Which to Choose",
-    description: "Compare Jerusalem museums: Israel Museum, Yad Vashem, Tower of David, Bible Lands, Rockefeller, Islamic Art, Science Museum and specialist collections.",
+    description:
+      "Compare Jerusalem museums: Israel Museum, Yad Vashem, Tower of David, Bible Lands, Rockefeller, Islamic Art, Science Museum and specialist collections.",
     region: "Jerusalem",
-    image: {src:museums,alt:"Rockefeller Museum courtyard and tower in Jerusalem"},
-    intro: "Jerusalem's museums are too varied for a single ranking. The Israel Museum suits art and archaeology, Yad Vashem requires dedicated time for Holocaust remembrance, and Tower of David connects the city's history to its walls. Choose by subject, location and how much time you can give a visit.",
-    takeaway: "For a first museum afternoon, choose one major institution rather than racing between three. Group the Israel Museum, Bible Lands Museum and Science Museum near Givat Ram; pair Tower of David with Jaffa Gate; allow a separate reflective visit to Yad Vashem. Check the institution's own ticket and visitor information.",
+    image: { src: museums, alt: "Rockefeller Museum courtyard and tower in Jerusalem" },
+    intro:
+      "Jerusalem's museums are too varied for a single ranking. The Israel Museum suits art and archaeology, Yad Vashem requires dedicated time for Holocaust remembrance, and Tower of David connects the city's history to its walls. Choose by subject, location and how much time you can give a visit.",
+    takeaway:
+      "For a first museum afternoon, choose one major institution rather than racing between three. Group the Israel Museum, Bible Lands Museum and Science Museum near Givat Ram; pair Tower of David with Jaffa Gate; allow a separate reflective visit to Yad Vashem. Check the institution's own ticket and visitor information.",
     duration: "Two to four hours at a major institution; shorter for selected specialist museums",
     highlights: [
-          { name: "Israel Museum", description: "The Shrine of the Book, Second Temple Jerusalem model, archaeology, Jewish Art and Life, fine art and sculpture garden make this an expansive visit.", tip: "Pick a small number of collections rather than expecting to see everything in one visit." },
-          { name: "Yad Vashem", description: "The Holocaust History Museum, Hall of Names and memorials form a place of remembrance rather than a general entertainment attraction.", tip: "Check advance reservation requirements, age guidance and accessibility; allow time afterward." },
-          { name: "Tower of David Jerusalem Museum", description: "A restored citadel beside Jaffa Gate with galleries on Jerusalem's history, archaeology and viewpoints. Evening experiences and private tours are booked separately.", tip: "Combine it with a manageable Old City route, and confirm which galleries and experiences your ticket includes." },
-          { name: "Bible Lands Museum Jerusalem", description: "Civilisations of the ancient Near East, material culture and stories that help place biblical texts in a historical context.", tip: "Close to the Israel Museum; decide if two cultural institutions fit your available energy and time." },
-          { name: "Rockefeller Archaeological Museum", description: "Collections of archaeology and regional history in a distinctive building near the Old City's northeastern side.", tip: "Verify public access and current exhibitions before travelling specially." },
-          { name: "Museum for Islamic Art", description: "Decorative arts, manuscripts, design and changing exhibitions exploring Islamic civilisation and related collections.", tip: "Check the current programme and separate admission details." },
-          { name: "Bloomfield Science Museum", description: "Interactive exhibits suitable for families and visitors interested in science and technology.", tip: "Check the intended age range, workshops and holiday programmes." },
-          { name: "Museum of the Underground Prisoners", description: "A museum in a former prison in the Russian Compound examining the British Mandate period and underground movements.", tip: "A focused historical visit; check whether visits require booking." },
-          { name: "Menachem Begin Heritage Center", description: "An institution examining Begin's life and modern Israeli history, with exhibitions and events.", tip: "Check tour language and advance reservation arrangements." },
-          { name: "Friends of Zion Museum", description: "Multimedia exhibitions on individuals and communities connected to Zionism and Israel.", tip: "Confirm current tour format, language and reservation requirements." },
-          { name: "Museum of Tolerance Jerusalem", description: "An institution presenting exhibitions and events on coexistence, dialogue and society.", tip: "Confirm what is currently open to the public; events and general visiting are different." },
-          { name: "Time Elevator Jerusalem", description: "A multimedia introduction to Jerusalem's history, distinct from an object-based museum.", tip: "Check current operating status and programme independently before making it part of an itinerary." },
-        ],
-    arrival: ["The Israel Museum is in Givat Ram, Yad Vashem on Mount Herzl, and Tower of David by Jaffa Gate. Plan distinct transport routes.","Light rail, buses or a taxi may save considerable time between institutions; walking all three is unrealistic for most visitors.","For families, check whether children meet each museum's minimum age guidance."],
-    planning: ["Check official admission, discounted tickets and advance reservations; an online ticket may not include special exhibitions.","Security screening and bag restrictions can add time.","Consider a long lunch break or a quiet activity after visiting Yad Vashem.","Museum opening patterns around Shabbat and holidays vary; never assume one museum's schedule applies to others."],
+      {
+        name: "Israel Museum",
+        description:
+          "The Shrine of the Book, Second Temple Jerusalem model, archaeology, Jewish Art and Life, fine art and sculpture garden make this an expansive visit.",
+        tip: "Pick a small number of collections rather than expecting to see everything in one visit.",
+      },
+      {
+        name: "Yad Vashem",
+        description:
+          "The Holocaust History Museum, Hall of Names and memorials form a place of remembrance rather than a general entertainment attraction.",
+        tip: "Check advance reservation requirements, age guidance and accessibility; allow time afterward.",
+      },
+      {
+        name: "Tower of David Jerusalem Museum",
+        description:
+          "A restored citadel beside Jaffa Gate with galleries on Jerusalem's history, archaeology and viewpoints. Evening experiences and private tours are booked separately.",
+        tip: "Combine it with a manageable Old City route, and confirm which galleries and experiences your ticket includes.",
+      },
+      {
+        name: "Bible Lands Museum Jerusalem",
+        description:
+          "Civilisations of the ancient Near East, material culture and stories that help place biblical texts in a historical context.",
+        tip: "Close to the Israel Museum; decide if two cultural institutions fit your available energy and time.",
+      },
+      {
+        name: "Rockefeller Archaeological Museum",
+        description:
+          "Collections of archaeology and regional history in a distinctive building near the Old City's northeastern side.",
+        tip: "Verify public access and current exhibitions before travelling specially.",
+      },
+      {
+        name: "Museum for Islamic Art",
+        description:
+          "Decorative arts, manuscripts, design and changing exhibitions exploring Islamic civilisation and related collections.",
+        tip: "Check the current programme and separate admission details.",
+      },
+      {
+        name: "Bloomfield Science Museum",
+        description:
+          "Interactive exhibits suitable for families and visitors interested in science and technology.",
+        tip: "Check the intended age range, workshops and holiday programmes.",
+      },
+      {
+        name: "Museum of the Underground Prisoners",
+        description:
+          "A museum in a former prison in the Russian Compound examining the British Mandate period and underground movements.",
+        tip: "A focused historical visit; check whether visits require booking.",
+      },
+      {
+        name: "Menachem Begin Heritage Center",
+        description:
+          "An institution examining Begin's life and modern Israeli history, with exhibitions and events.",
+        tip: "Check tour language and advance reservation arrangements.",
+      },
+      {
+        name: "Friends of Zion Museum",
+        description:
+          "Multimedia exhibitions on individuals and communities connected to Zionism and Israel.",
+        tip: "Confirm current tour format, language and reservation requirements.",
+      },
+      {
+        name: "Museum of Tolerance Jerusalem",
+        description:
+          "An institution presenting exhibitions and events on coexistence, dialogue and society.",
+        tip: "Confirm what is currently open to the public; events and general visiting are different.",
+      },
+      {
+        name: "Time Elevator Jerusalem",
+        description:
+          "A multimedia introduction to Jerusalem's history, distinct from an object-based museum.",
+        tip: "Check current operating status and programme independently before making it part of an itinerary.",
+      },
+    ],
+    arrival: [
+      "The Israel Museum is in Givat Ram, Yad Vashem on Mount Herzl, and Tower of David by Jaffa Gate. Plan distinct transport routes.",
+      "Light rail, buses or a taxi may save considerable time between institutions; walking all three is unrealistic for most visitors.",
+      "For families, check whether children meet each museum's minimum age guidance.",
+    ],
+    planning: [
+      "Check official admission, discounted tickets and advance reservations; an online ticket may not include special exhibitions.",
+      "Security screening and bag restrictions can add time.",
+      "Consider a long lunch break or a quiet activity after visiting Yad Vashem.",
+      "Museum opening patterns around Shabbat and holidays vary; never assume one museum's schedule applies to others.",
+    ],
     faqs: [
-          { q: "Which museum should I visit first?", a: "Tower of David suits a short introduction to Jerusalem near Jaffa Gate; the Israel Museum is better for a broad art-and-archaeology afternoon. Yad Vashem is a separate remembrance visit." },
-          { q: "Do all Jerusalem museums use one ticket?", a: "No. Each institution manages its own admission, temporary exhibitions, tours and any advance reservation." },
-          { q: "Can I visit Yad Vashem and the Old City in the same morning?", a: "They are in different parts of Jerusalem. Give Yad Vashem the time it deserves and leave enough travel and security-screening time." },
-        ],
+      {
+        q: "Which museum should I visit first?",
+        a: "Tower of David suits a short introduction to Jerusalem near Jaffa Gate; the Israel Museum is better for a broad art-and-archaeology afternoon. Yad Vashem is a separate remembrance visit.",
+      },
+      {
+        q: "Do all Jerusalem museums use one ticket?",
+        a: "No. Each institution manages its own admission, temporary exhibitions, tours and any advance reservation.",
+      },
+      {
+        q: "Can I visit Yad Vashem and the Old City in the same morning?",
+        a: "They are in different parts of Jerusalem. Give Yad Vashem the time it deserves and leave enough travel and security-screening time.",
+      },
+    ],
     official: [
-          { label: "The Israel Museum", url: "https://www.imj.org.il/en" },
-          { label: "Yad Vashem", url: "https://www.yadvashem.org/" },
-          { label: "Tower of David Jerusalem Museum", url: "https://www.tod.org.il/en/" },
-          { label: "Bible Lands Museum", url: "https://www.blmj.org/en" },
-          { label: "Jerusalem tourism information", url: "https://www.itraveljerusalem.com/en" },
-        ],
+      { label: "The Israel Museum", url: "https://www.imj.org.il/en" },
+      { label: "Yad Vashem", url: "https://www.yadvashem.org/" },
+      { label: "Tower of David Jerusalem Museum", url: "https://www.tod.org.il/en/" },
+      { label: "Bible Lands Museum", url: "https://www.blmj.org/en" },
+      { label: "Jerusalem tourism information", url: "https://www.itraveljerusalem.com/en" },
+    ],
   },
   "mount-of-olives": {
     title: mountOlivesAttractionUpdate.title,
@@ -119,14 +276,48 @@ export const jerusalemAttractions: Record<string, Attraction> = {
     takeaway: mountOlivesAttractionUpdate.takeaway,
     duration: mountOlivesAttractionUpdate.duration,
     highlights: [
-          { name: "Panoramic lookout on the ridge", description: "An elevated view towards the Old City walls and domes is a strong starting point for a first visit. Different viewpoints have different access and vehicle stopping points.", tip: "Arrange an upper-ridge arrival and decide where to finish the downhill walk." },
-          { name: "Church of Pater Noster and Ascension traditions", description: "Christian pilgrimage sites around the upper ridge are associated with the Lord's Prayer and the Ascension. Opening and ticket arrangements differ by compound.", tip: "Do not assume a general hilltop stop includes entry to either compound." },
-          { name: "Dominus Flevit Church", description: "The church recalls the Gospel tradition of Jesus weeping over Jerusalem and has a view towards the Old City.", tip: "Steep approaches and steps can make this unsuitable for some mobility needs." },
-          { name: "Garden of Gethsemane and Church of All Nations", description: "At the lower slope, a garden and basilica form one of the major Christian pilgrimage settings. These are active places of worship.", tip: "Check religious services and visiting windows before arrival." },
-          { name: "Jewish cemetery and nearby sacred sites", description: "The historic cemetery reflects centuries of Jewish burial tradition; the hillside also has Christian monasteries and chapels with their own arrangements.", tip: "Respect mourners and avoid treating burial areas as shortcuts or photo backdrops." },
-        ],
-    arrival: ["A taxi or arranged vehicle to the upper ridge makes a downhill visit easier.","Walking from the Old City involves descending and climbing the Kidron Valley; evaluate heat and mobility.","Select a lower pickup point before heading down, and check whether a vehicle can reach it."],
-    planning: ["Set priorities: viewpoint, one or two churches and the valley is often enough.","Carry water, sun protection and sturdy footwear.","Check church access around festivals and services.","Some visitor routes are not wheelchair accessible; use a suitable viewpoint if needed."],
+      {
+        name: "Panoramic lookout on the ridge",
+        description:
+          "An elevated view towards the Old City walls and domes is a strong starting point for a first visit. Different viewpoints have different access and vehicle stopping points.",
+        tip: "Arrange an upper-ridge arrival and decide where to finish the downhill walk.",
+      },
+      {
+        name: "Church of Pater Noster and Ascension traditions",
+        description:
+          "Christian pilgrimage sites around the upper ridge are associated with the Lord's Prayer and the Ascension. Opening and ticket arrangements differ by compound.",
+        tip: "Do not assume a general hilltop stop includes entry to either compound.",
+      },
+      {
+        name: "Dominus Flevit Church",
+        description:
+          "The church recalls the Gospel tradition of Jesus weeping over Jerusalem and has a view towards the Old City.",
+        tip: "Steep approaches and steps can make this unsuitable for some mobility needs.",
+      },
+      {
+        name: "Garden of Gethsemane and Church of All Nations",
+        description:
+          "At the lower slope, a garden and basilica form one of the major Christian pilgrimage settings. These are active places of worship.",
+        tip: "Check religious services and visiting windows before arrival.",
+      },
+      {
+        name: "Jewish cemetery and nearby sacred sites",
+        description:
+          "The historic cemetery reflects centuries of Jewish burial tradition; the hillside also has Christian monasteries and chapels with their own arrangements.",
+        tip: "Respect mourners and avoid treating burial areas as shortcuts or photo backdrops.",
+      },
+    ],
+    arrival: [
+      "A taxi or arranged vehicle to the upper ridge makes a downhill visit easier.",
+      "Walking from the Old City involves descending and climbing the Kidron Valley; evaluate heat and mobility.",
+      "Select a lower pickup point before heading down, and check whether a vehicle can reach it.",
+    ],
+    planning: [
+      "Set priorities: viewpoint, one or two churches and the valley is often enough.",
+      "Carry water, sun protection and sturdy footwear.",
+      "Check church access around festivals and services.",
+      "Some visitor routes are not wheelchair accessible; use a suitable viewpoint if needed.",
+    ],
     faqs: mountOlivesAttractionUpdate.faqs,
     official: mountOlivesAttractionUpdate.official,
   },
@@ -139,14 +330,48 @@ export const jerusalemAttractions: Record<string, Attraction> = {
     takeaway: mountZionAttractionUpdate.takeaway,
     duration: mountZionAttractionUpdate.duration,
     highlights: [
-          { name: "The Cenacle (traditional Last Supper Room)", description: "An upper chamber of the historic building is traditionally linked to the Last Supper, with medieval and later architectural layers.", tip: "Verify access separately; the space's historical association should not be confused with proof of the original room." },
-          { name: "David's Tomb", description: "A traditional tomb site below the Cenacle, used as a place of Jewish prayer. Its identification is religious tradition rather than a definitive archaeological conclusion.", tip: "Observe clothing and prayer-space requirements and avoid intrusive photography." },
-          { name: "Dormition Abbey", description: "A striking Benedictine church associated with Christian tradition about the Dormition of Mary, with a church and crypt.", tip: "Current church and crypt access should be checked with the institution." },
-          { name: "St Peter in Gallicantu", description: "A church on the eastern slope connected by tradition with Peter's denial of Jesus. It has separate visitor arrangements and a steep approach.", tip: "Allow time for steps and views; do not presume it is part of a Cenacle visit." },
-          { name: "Zion Gate and the Armenian Quarter", description: "Mount Zion's position beside Zion Gate makes it a natural extension of an Old City walk through the Armenian Quarter.", tip: "A route via the gate is generally more efficient than returning to Jaffa Gate between stops." },
-        ],
-    arrival: ["Approach on foot from Zion Gate or the Armenian Quarter, taking care on stepped lanes.","Taxis and private vehicles can use nearby road-accessible points but not every pedestrian path.","If staying outside central Jerusalem, combine a local bus or taxi with a short walk."],
-    planning: ["Dress modestly and remain quiet during prayer.","Allow extra time for holidays, services and any restricted site.","Use sturdy shoes; Mount Zion's paving and stairways are uneven.","Choose a manageable combination with the Old City, rather than walking back and forth repeatedly."],
+      {
+        name: "The Cenacle (traditional Last Supper Room)",
+        description:
+          "An upper chamber of the historic building is traditionally linked to the Last Supper, with medieval and later architectural layers.",
+        tip: "Verify access separately; the space's historical association should not be confused with proof of the original room.",
+      },
+      {
+        name: "David's Tomb",
+        description:
+          "A traditional tomb site below the Cenacle, used as a place of Jewish prayer. Its identification is religious tradition rather than a definitive archaeological conclusion.",
+        tip: "Observe clothing and prayer-space requirements and avoid intrusive photography.",
+      },
+      {
+        name: "Dormition Abbey",
+        description:
+          "A striking Benedictine church associated with Christian tradition about the Dormition of Mary, with a church and crypt.",
+        tip: "Current church and crypt access should be checked with the institution.",
+      },
+      {
+        name: "St Peter in Gallicantu",
+        description:
+          "A church on the eastern slope connected by tradition with Peter's denial of Jesus. It has separate visitor arrangements and a steep approach.",
+        tip: "Allow time for steps and views; do not presume it is part of a Cenacle visit.",
+      },
+      {
+        name: "Zion Gate and the Armenian Quarter",
+        description:
+          "Mount Zion's position beside Zion Gate makes it a natural extension of an Old City walk through the Armenian Quarter.",
+        tip: "A route via the gate is generally more efficient than returning to Jaffa Gate between stops.",
+      },
+    ],
+    arrival: [
+      "Approach on foot from Zion Gate or the Armenian Quarter, taking care on stepped lanes.",
+      "Taxis and private vehicles can use nearby road-accessible points but not every pedestrian path.",
+      "If staying outside central Jerusalem, combine a local bus or taxi with a short walk.",
+    ],
+    planning: [
+      "Dress modestly and remain quiet during prayer.",
+      "Allow extra time for holidays, services and any restricted site.",
+      "Use sturdy shoes; Mount Zion's paving and stairways are uneven.",
+      "Choose a manageable combination with the Old City, rather than walking back and forth repeatedly.",
+    ],
     faqs: mountZionAttractionUpdate.faqs,
     official: mountZionAttractionUpdate.official,
   },

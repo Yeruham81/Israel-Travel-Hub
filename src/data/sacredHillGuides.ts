@@ -1,4 +1,7 @@
-import { mountOlivesAttractionUpdate, mountOlivesEditorialUpdate } from "@/data/mountOlivesRevision";
+import {
+  mountOlivesAttractionUpdate,
+  mountOlivesEditorialUpdate,
+} from "@/data/mountOlivesRevision";
 import { mountZionAttractionUpdate, mountZionEditorialUpdate } from "@/data/mountZionRevision";
 import type { Attraction } from "@/data/attractionGuideTypes";
 

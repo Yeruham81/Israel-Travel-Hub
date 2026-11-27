@@ -18,7 +18,13 @@ export type BethlehemTourCard = {
   reviewCount: number;
   checkedAt: string;
   sourceUrl: string;
-  photoId: "nativity-interior" | "catholic-grottos" | "jordan-river" | "jerusalem-damascus-gate" | "bethlehem" | "shepherds-field";
+  photoId:
+    | "nativity-interior"
+    | "catholic-grottos"
+    | "jordan-river"
+    | "jerusalem-damascus-gate"
+    | "bethlehem"
+    | "shepherds-field";
 };
 export const bethlehemTourCards: BethlehemTourCard[] = [
   {
@@ -46,7 +52,8 @@ export const bethlehemTourCards: BethlehemTourCard[] = [
     rating: 4.8,
     reviewCount: 611,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.getyourguide.com/jerusalem-l97/from-jerusalem-half-day-bethlehem-guided-tour-t213663/",
+    sourceUrl:
+      "https://www.getyourguide.com/jerusalem-l97/from-jerusalem-half-day-bethlehem-guided-tour-t213663/",
     photoId: "catholic-grottos",
   },
   {
@@ -60,7 +67,8 @@ export const bethlehemTourCards: BethlehemTourCard[] = [
     rating: 4.7,
     reviewCount: 135,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.viator.com/tours/Jerusalem/Bethlehem-and-Jericho-Full-Day-Tour-from-Jerusalem-and-Tel-Aviv/d921-115730P10",
+    sourceUrl:
+      "https://www.viator.com/tours/Jerusalem/Bethlehem-and-Jericho-Full-Day-Tour-from-Jerusalem-and-Tel-Aviv/d921-115730P10",
     photoId: "jordan-river",
   },
   {
@@ -74,7 +82,8 @@ export const bethlehemTourCards: BethlehemTourCard[] = [
     rating: 4.3,
     reviewCount: 68,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.getyourguide.com/jerusalem-l97/full-day-tour-of-the-holy-land-from-jerusalem-t22125/",
+    sourceUrl:
+      "https://www.getyourguide.com/jerusalem-l97/full-day-tour-of-the-holy-land-from-jerusalem-t22125/",
     photoId: "jerusalem-damascus-gate",
   },
   {
@@ -88,7 +97,8 @@ export const bethlehemTourCards: BethlehemTourCard[] = [
     rating: 5.0,
     reviewCount: 23,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.getyourguide.com/jerusalem-l97/from-jerusalemtel-aviv-bethlehem-half-day-private-tour-t419447/",
+    sourceUrl:
+      "https://www.getyourguide.com/jerusalem-l97/from-jerusalemtel-aviv-bethlehem-half-day-private-tour-t419447/",
     photoId: "bethlehem",
   },
   {
@@ -102,7 +112,8 @@ export const bethlehemTourCards: BethlehemTourCard[] = [
     rating: 5.0,
     reviewCount: 55,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.viator.com/tours/Jerusalem/Bethlehem-Half-Day-Private-Tour-Free-Hotel-Pick-up-and-Drop-Off-from-Tel-Aviv/d921-115730P7",
+    sourceUrl:
+      "https://www.viator.com/tours/Jerusalem/Bethlehem-Half-Day-Private-Tour-Free-Hotel-Pick-up-and-Drop-Off-from-Tel-Aviv/d921-115730P7",
     photoId: "shepherds-field",
   },
 ];

@@ -61,8 +61,12 @@ const roundNearestTen = (value: number) => Math.round(value / 10) * 10;
 export function airportTaxiEstimatedFare(route: (typeof airportTaxiFareRoutes)[number]) {
   const [minimumKm, maximumKm] = route.roadKm;
   const [minimumMinutes, maximumMinutes] = route.driveMinutes;
-  const low = meteredFareEstimate({ tariff: "A", km: minimumKm, minutes: minimumMinutes }).withVat + airportDepartureFee;
-  const high = meteredFareEstimate({ tariff: "A", km: maximumKm, minutes: maximumMinutes }).withVat + airportDepartureFee;
+  const low =
+    meteredFareEstimate({ tariff: "A", km: minimumKm, minutes: minimumMinutes }).withVat +
+    airportDepartureFee;
+  const high =
+    meteredFareEstimate({ tariff: "A", km: maximumKm, minutes: maximumMinutes }).withVat +
+    airportDepartureFee;
   return {
     minimum: roundNearestTen(low),
     maximum: roundNearestTen(high),
@@ -74,7 +78,9 @@ export const airportTaxiEstimateTable = {
   caption: "Estimated daytime fares from Ben Gurion Airport",
   headers: ["Destination", "Daytime meter estimate", "Typical drive"],
   rows: airportTaxiFareRoutes.map((route) => [
-    route.label, airportTaxiEstimatedFare(route).range, route.travelTime,
+    route.label,
+    airportTaxiEstimatedFare(route).range,
+    route.travelTime,
   ]),
   rowLinks: airportTaxiFareRoutes.map((route) => ({ to: route.to })),
   note: "Illustrative Tariff A meter estimates in NIS, calculated from the April 2026 regulated rates and indicative route distances/drive times; updated November 2026. Includes 18% VAT and the ₪5 airport departure addition. The meter can run higher with traffic, a different final address, night/Shabbat tariffs, tolls or other permitted charges. These are planning estimates, not fixed quotes.",

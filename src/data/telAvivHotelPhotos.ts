@@ -11,7 +11,6 @@ import jaffaCard from "@/assets/attractions-hub/card-jaffa-420.webp";
 import cityTaxi from "@/assets/travel-blog-hub/taxi-in-tel-aviv-44a5c4426c-420.webp";
 import saronaStreet from "@/assets/home/hero-refresh-tel-aviv-sarona-medium.webp";
 
-
 import telAvivCoast from "@/assets/home/tel-aviv-coast.webp";
 import beachesTelAviv from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
 import kerem from "@/assets/tel-aviv/kerem-hateimanim.webp";
@@ -38,12 +37,22 @@ export const telAvivHotelPhotos: Record<string, HotelIllustration> = {
     alt: "Tel Aviv's Mediterranean promenade and beachfront",
     label: "Tel Aviv city photograph",
     credit: "FLASHPACKER TRAVELGUIDE · CC BY-SA 2.0",
-    sourceUrl: "https://commons.wikimedia.org/wiki/File:Tel_Aviv_Tayelet-Strand-Promenade_Beach_(34257299744).jpg",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Tel_Aviv_Tayelet-Strand-Promenade_Beach_(34257299744).jpg",
     licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
   },
-  "tlv-embassy": district(alternateBeachView, "Central Tel Aviv beachfront and Mediterranean coastal views"),
-  "tlv-backstage": district("/images/city-stays/tel-aviv-dizengoff.webp", "Dizengoff Square in central Tel Aviv"),
-  "tlv-cinema": district("/images/hotel-cards/tlv-cinema.webp", "Illustrative urban architecture and culture in central Tel Aviv"),
+  "tlv-embassy": district(
+    alternateBeachView,
+    "Central Tel Aviv beachfront and Mediterranean coastal views",
+  ),
+  "tlv-backstage": district(
+    "/images/city-stays/tel-aviv-dizengoff.webp",
+    "Dizengoff Square in central Tel Aviv",
+  ),
+  "tlv-cinema": district(
+    "/images/hotel-cards/tlv-cinema.webp",
+    "Illustrative urban architecture and culture in central Tel Aviv",
+  ),
   "tlv-port-tower": {
     src: telAvivCoast,
     alt: "Tel Aviv's coastline photographed from Jaffa",
@@ -63,9 +72,24 @@ export const telAvivHotelPhotos: Record<string, HotelIllustration> = {
     credit: "Photograph reused from the publisher's Tel Aviv beach guide",
   },
   "tlv-albi-florentin": district(cityTaxi, "Tel Aviv city streets and urban transport"),
-  "tlv-florentin-house": district("/images/city-stays/tel-aviv-jaffa.webp", "South Tel Aviv and Jaffa urban surroundings"),
-  "tlv-poli-house": district("/images/attractions/tel-aviv-jaffa.webp", "Historic Jaffa waterfront and city"),
-  "tlv-assemblage": district("/images/city-stays/tel-aviv-beachfront.webp", "Tel Aviv's Mediterranean beachfront district"),
-  "tlv-the-norman": district(saronaStreet, "Central Tel Aviv urban architecture and street scenery"),
-  "tlv-65-rothschild": district("/images/hotel-cards/tlv-65-rothschild.webp", "Illustrative historical city architecture of Tel Aviv-Yafo"),
+  "tlv-florentin-house": district(
+    "/images/city-stays/tel-aviv-jaffa.webp",
+    "South Tel Aviv and Jaffa urban surroundings",
+  ),
+  "tlv-poli-house": district(
+    "/images/attractions/tel-aviv-jaffa.webp",
+    "Historic Jaffa waterfront and city",
+  ),
+  "tlv-assemblage": district(
+    "/images/city-stays/tel-aviv-beachfront.webp",
+    "Tel Aviv's Mediterranean beachfront district",
+  ),
+  "tlv-the-norman": district(
+    saronaStreet,
+    "Central Tel Aviv urban architecture and street scenery",
+  ),
+  "tlv-65-rothschild": district(
+    "/images/hotel-cards/tlv-65-rothschild.webp",
+    "Illustrative historical city architecture of Tel Aviv-Yafo",
+  ),
 };

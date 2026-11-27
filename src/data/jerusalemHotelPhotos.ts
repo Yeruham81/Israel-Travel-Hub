@@ -15,10 +15,19 @@ const neighbourhood = (src: string, alt: string): HotelIllustration => ({
 });
 
 export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
-  "herbert-samuel": neighbourhood("/images/attractions/jerusalem.webp", "Jerusalem stone buildings and urban scenery"),
-  "arthur": neighbourhood("/images/city-stays/jerusalem-downtown.webp", "Downtown Jerusalem neighbourhood"),
-  "mamilla": neighbourhood(mamillaOverview, "Jerusalem stone skyline near the historic city center"),
-  "king-david": neighbourhood("/images/city-stays/jerusalem-mamilla.webp", "Mamilla and King David Street area of Jerusalem"),
+  "herbert-samuel": neighbourhood(
+    "/images/attractions/jerusalem.webp",
+    "Jerusalem stone buildings and urban scenery",
+  ),
+  arthur: neighbourhood(
+    "/images/city-stays/jerusalem-downtown.webp",
+    "Downtown Jerusalem neighbourhood",
+  ),
+  mamilla: neighbourhood(mamillaOverview, "Jerusalem stone skyline near the historic city center"),
+  "king-david": neighbourhood(
+    "/images/city-stays/jerusalem-mamilla.webp",
+    "Mamilla and King David Street area of Jerusalem",
+  ),
   "new-imperial": {
     src: jerusalemOldCity,
     alt: "Historic Jerusalem Old City skyline and stone buildings",
@@ -26,11 +35,32 @@ export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
     credit: "Berthold Werner · Public domain",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock_BW_14.JPG",
   },
-  "sephardic-house": neighbourhood("/images/attractions/old-jerusalem-western-wall.webp", "Western Wall and historic Jewish Quarter surroundings in Jerusalem"),
-  "bezalel": neighbourhood("/images/hotel-cards/bezalel.webp", "Nachlaot neighborhood streets in central Jerusalem"),
-  "market-courtyard": neighbourhood("/images/attractions/jerusalem-shopping.webp", "Jerusalem market streets and shops"),
-  "american-colony": neighbourhood("/images/attractions/old-jerusalem-damascus-gate.webp", "Damascus Gate and northern Old City surroundings"),
-  "jerusalem-hotel": neighbourhood("/images/hotels/jerusalem-night.webp", "Jerusalem skyline at night"),
-  "orient": neighbourhood("/images/city-stays/jerusalem-german-colony.webp", "Street scene in Jerusalem’s German Colony"),
-  "rafael-residence": neighbourhood("/images/jerusalem/first-station.webp", "Historic First Station area of Jerusalem near Baka"),
+  "sephardic-house": neighbourhood(
+    "/images/attractions/old-jerusalem-western-wall.webp",
+    "Western Wall and historic Jewish Quarter surroundings in Jerusalem",
+  ),
+  bezalel: neighbourhood(
+    "/images/hotel-cards/bezalel.webp",
+    "Nachlaot neighborhood streets in central Jerusalem",
+  ),
+  "market-courtyard": neighbourhood(
+    "/images/attractions/jerusalem-shopping.webp",
+    "Jerusalem market streets and shops",
+  ),
+  "american-colony": neighbourhood(
+    "/images/attractions/old-jerusalem-damascus-gate.webp",
+    "Damascus Gate and northern Old City surroundings",
+  ),
+  "jerusalem-hotel": neighbourhood(
+    "/images/hotels/jerusalem-night.webp",
+    "Jerusalem skyline at night",
+  ),
+  orient: neighbourhood(
+    "/images/city-stays/jerusalem-german-colony.webp",
+    "Street scene in Jerusalem’s German Colony",
+  ),
+  "rafael-residence": neighbourhood(
+    "/images/jerusalem/first-station.webp",
+    "Historic First Station area of Jerusalem near Baka",
+  ),
 };

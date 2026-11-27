@@ -1,14 +1,16 @@
 /** Fact-checked civic, transit and visitor sources for the multi-neighborhood Haifa guide. */
 export const haifaSite = {
   title: "Things to Do in Haifa | Bahá’í Gardens, Carmel & City Walks",
-  description: "My practical Haifa guide: Bahá’í Gardens viewpoints, German Colony, Wadi Nisnas, Carmel, Bat Galim, beaches, two city itineraries, transport and tours.",
+  description:
+    "My practical Haifa guide: Bahá’í Gardens viewpoints, German Colony, Wadi Nisnas, Carmel, Bat Galim, beaches, two city itineraries, transport and tours.",
   updatedAt: "2026-11-20",
   region: "Haifa & northern coast",
   hero: {
     src: "/images/attractions/haifa-coast.webp",
     alt: "Haifa's mountain slopes, port and Mediterranean bay",
   },
-  intro: "I recommend exploring Haifa one neighborhood at a time. The Bahá’í Gardens rise between the German Colony and Mount Carmel, while Wadi Nisnas, the Lower City and Bat Galim give you a very different taste of local life. Below are the sights I would prioritise, how to combine them and the transport that makes Haifa's steep hills easier.",
+  intro:
+    "I recommend exploring Haifa one neighborhood at a time. The Bahá’í Gardens rise between the German Colony and Mount Carmel, while Wadi Nisnas, the Lower City and Bat Galim give you a very different taste of local life. Below are the sights I would prioritise, how to combine them and the transport that makes Haifa's steep hills easier.",
   official: {
     bahai: "https://ganbahai.org.il/visit-us-haifa/",
     bahaiBooking: "https://www.booking.ganbahai.org.il/service-page/English-tour-Yefe-Nof-St",

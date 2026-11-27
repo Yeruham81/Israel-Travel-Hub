@@ -51,261 +51,262 @@ import itineraryFiveDayCaesareaCover from "@/assets/home/caesarea-dusk.webp";
 import itineraryTenDayHaifaCover from "@/assets/home/haifa-port.webp";
 import originalTenDayIbex from "@/assets/negev/ramon-ibex.webp";
 
-
 export const migrationPhotos = {
   "best-time-to-visit-israel": {
-    "src": image0,
-    "alt": "A busy Mediterranean beach and promenade in Israel",
-    "sourceUrl": ""
+    src: image0,
+    alt: "A busy Mediterranean beach and promenade in Israel",
+    sourceUrl: "",
   },
   "what-to-eat-in-israel": {
-    "src": image1,
-    "alt": "Flatbread, salads and savoury dishes served at a shared meal",
-    "sourceUrl": ""
+    src: image1,
+    alt: "Flatbread, salads and savoury dishes served at a shared meal",
+    sourceUrl: "",
   },
   "calendar-of-events": {
-    "src": image2,
-    "alt": "A paper calendar with highlighted dates",
-    "sourceUrl": ""
+    src: image2,
+    alt: "A paper calendar with highlighted dates",
+    sourceUrl: "",
   },
   "beaches-in-tel-aviv": {
-    "src": image3,
-    "alt": "Tel Aviv beachfront and Mediterranean shoreline",
-    "sourceUrl": ""
+    src: image3,
+    alt: "Tel Aviv beachfront and Mediterranean shoreline",
+    sourceUrl: "",
   },
   "museums-in-tel-aviv": {
-    "src": image4,
-    "alt": "The geometric exterior of the Tel Aviv Museum of Art",
-    "sourceUrl": "",
-    "credit": "© www.artursalisz.com"
+    src: image4,
+    alt: "The geometric exterior of the Tel Aviv Museum of Art",
+    sourceUrl: "",
+    credit: "© www.artursalisz.com",
   },
   "museums-in-haifa": {
-    "src": image5,
-    "alt": "White colonnaded building and landscaped grounds overlooking Haifa Bay",
-    "sourceUrl": ""
+    src: image5,
+    alt: "White colonnaded building and landscaped grounds overlooking Haifa Bay",
+    sourceUrl: "",
   },
   "tel-megiddo": {
-    "src": image6,
-    "alt": "Ancient stone remains and palm trees at Tel Megiddo",
-    "sourceUrl": ""
+    src: image6,
+    alt: "Ancient stone remains and palm trees at Tel Megiddo",
+    sourceUrl: "",
   },
   "mount-precipice": {
-    "src": image7,
-    "alt": "A viewpoint above the Jezreel Valley at Mount Precipice",
-    "sourceUrl": ""
+    src: image7,
+    alt: "A viewpoint above the Jezreel Valley at Mount Precipice",
+    sourceUrl: "",
   },
   "basilica-of-the-annunciation": {
-    "src": image8,
-    "alt": "Basilica of the Annunciation above the buildings of Nazareth",
-    "sourceUrl": ""
+    src: image8,
+    alt: "Basilica of the Annunciation above the buildings of Nazareth",
+    sourceUrl: "",
   },
-  "magdala": {
-    "src": image9,
-    "alt": "The modern Duc In Altum prayer center at Magdala",
-    "sourceUrl": ""
+  magdala: {
+    src: image9,
+    alt: "The modern Duc In Altum prayer center at Magdala",
+    sourceUrl: "",
   },
   "jerusalem-to-bethlehem": {
-    "src": image10,
-    "alt": "The Church of the Nativity and Manger Square in Bethlehem",
-    "sourceUrl": ""
+    src: image10,
+    alt: "The Church of the Nativity and Manger Square in Bethlehem",
+    sourceUrl: "",
   },
   "jerusalem-to-the-dead-sea": {
-    "src": image11,
-    "alt": "A road curving through the desert beside the Dead Sea",
-    "sourceUrl": ""
+    src: image11,
+    alt: "A road curving through the desert beside the Dead Sea",
+    sourceUrl: "",
   },
   "food-1": {
-    "src": image12,
-    "alt": "A shawarma spit beside a cooking surface",
-    "sourceUrl": "",
-    "credit": "© Vyacheslav Argenberg"
+    src: image12,
+    alt: "A shawarma spit beside a cooking surface",
+    sourceUrl: "",
+    credit: "© Vyacheslav Argenberg",
   },
   "food-2": {
-    "src": image13,
-    "alt": "Falafel balls with herbs",
-    "sourceUrl": ""
+    src: image13,
+    alt: "Falafel balls with herbs",
+    sourceUrl: "",
   },
   "food-3": {
-    "src": image14,
-    "alt": "Jerusalem mixed grill served on a plate",
-    "sourceUrl": ""
+    src: image14,
+    alt: "Jerusalem mixed grill served on a plate",
+    sourceUrl: "",
   },
   "food-4": {
-    "src": image15,
-    "alt": "Hummus with chickpeas, herbs and olive oil",
-    "sourceUrl": "",
-    "credit": "Photo: Daniel Zelazo"
+    src: image15,
+    alt: "Hummus with chickpeas, herbs and olive oil",
+    sourceUrl: "",
+    credit: "Photo: Daniel Zelazo",
   },
   "food-5": {
-    "src": image16,
-    "alt": "Shakshuka with eggs in a tomato sauce",
-    "sourceUrl": ""
+    src: image16,
+    alt: "Shakshuka with eggs in a tomato sauce",
+    sourceUrl: "",
   },
   "food-6": {
-    "src": image17,
-    "alt": "A sabich pita filled with aubergine, egg and salad",
-    "sourceUrl": ""
+    src: image17,
+    alt: "A sabich pita filled with aubergine, egg and salad",
+    sourceUrl: "",
   },
   "food-7": {
-    "src": image18,
-    "alt": "A tray of sesame-topped bourekas pastries",
-    "sourceUrl": ""
+    src: image18,
+    alt: "A tray of sesame-topped bourekas pastries",
+    sourceUrl: "",
   },
   "food-8": {
-    "src": image19,
-    "alt": "Jachnun with tomato, egg and spicy sauce",
-    "sourceUrl": ""
+    src: image19,
+    alt: "Jachnun with tomato, egg and spicy sauce",
+    sourceUrl: "",
   },
   "food-9": {
-    "src": image20,
-    "alt": "Malabi puddings topped with nuts and rose petals",
-    "sourceUrl": ""
+    src: image20,
+    alt: "Malabi puddings topped with nuts and rose petals",
+    sourceUrl: "",
   },
   "food-10": {
-    "src": image21,
-    "alt": "Kanafeh topped with pistachios",
-    "sourceUrl": ""
+    src: image21,
+    alt: "Kanafeh topped with pistachios",
+    sourceUrl: "",
   },
   "annunciation-interior": {
-    "src": image22,
-    "alt": "Interior of the Basilica of the Annunciation in Nazareth",
-    "sourceUrl": ""
+    src: image22,
+    alt: "Interior of the Basilica of the Annunciation in Nazareth",
+    sourceUrl: "",
   },
   "magdala-archaeology": {
-    "src": image23,
-    "alt": "Archaeological remains beneath a protective canopy at Magdala",
-    "sourceUrl": ""
+    src: image23,
+    alt: "Archaeological remains beneath a protective canopy at Magdala",
+    sourceUrl: "",
   },
   "eretz-israel-museum": {
-    "src": image24,
-    "alt": "Entrance to MUZA, the Eretz Israel Museum in Tel Aviv",
-    "sourceUrl": ""
+    src: image24,
+    alt: "Entrance to MUZA, the Eretz Israel Museum in Tel Aviv",
+    sourceUrl: "",
   },
   "EXISTING:eilat": {
-    "src": image25,
-    "alt": "Eilat’s hotels, palm trees and Red Sea waterfront"
+    src: image25,
+    alt: "Eilat’s hotels, palm trees and Red Sea waterfront",
   },
   "EXISTING:yardenit": {
-    "src": image26,
-    "alt": "Designated baptism areas beside the Jordan River at Yardenit"
+    src: image26,
+    alt: "Designated baptism areas beside the Jordan River at Yardenit",
   },
   "EXISTING:qasr": {
-    "src": image27,
-    "alt": "Visitors at the designated lower-Jordan baptism area at Qasr el-Yahud"
+    src: image27,
+    alt: "Visitors at the designated lower-Jordan baptism area at Qasr el-Yahud",
   },
   "EXISTING:deadSea": {
-    "src": image28,
-    "alt": "Dead Sea shoreline and desert landscape"
+    src: image28,
+    alt: "Dead Sea shoreline and desert landscape",
   },
   "EXISTING:jerusalem": {
-    "src": image29,
-    "alt": "Jerusalem Old City and the Dome of the Rock from the Mount of Olives",
-    "credit": "Berthold Werner · Public domain",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock_BW_14.JPG"
+    src: image29,
+    alt: "Jerusalem Old City and the Dome of the Rock from the Mount of Olives",
+    credit: "Berthold Werner · Public domain",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock_BW_14.JPG",
   },
   "EXISTING:coast": {
-    "src": image30,
-    "alt": "Tel Aviv’s Mediterranean shoreline seen from Jaffa",
-    "credit": "Ariel Manor · CC BY 2.5 · resized WebP",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_58105_jaffa_-_old_city.jpg",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.5/"
+    src: image30,
+    alt: "Tel Aviv’s Mediterranean shoreline seen from Jaffa",
+    credit: "Ariel Manor · CC BY 2.5 · resized WebP",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_58105_jaffa_-_old_city.jpg",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
   },
   "EXISTING:masada": {
-    "src": image31,
-    "alt": "Masada plateau above the Dead Sea",
-    "credit": "Godot13 · CC BY-SA 4.0 · resized WebP",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Israel-2013-Aerial_13-Masada.jpg",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+    src: image31,
+    alt: "Masada plateau above the Dead Sea",
+    credit: "Godot13 · CC BY-SA 4.0 · resized WebP",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Israel-2013-Aerial_13-Masada.jpg",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
   },
   "EXISTING:haifa": {
-    "src": image32,
-    "alt": "Haifa Bay and the Bahá’í Gardens from Mount Carmel",
-    "credit": "Юкатан · CC BY-SA 3.0 · resized WebP",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Panorama_Haifa_(cropped).jpg",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+    src: image32,
+    alt: "Haifa Bay and the Bahá’í Gardens from Mount Carmel",
+    credit: "Юкатан · CC BY-SA 3.0 · resized WebP",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Panorama_Haifa_(cropped).jpg",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
   },
   "EXISTING:galilee": {
-    "src": image33,
-    "alt": "Tiberias seen from the Sea of Galilee",
-    "credit": "Ian Scott · CC BY-SA 2.0 · resized WebP",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tiberias_from_the_Sea_of_Galilee_(5809646279).jpg",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/"
+    src: image33,
+    alt: "Tiberias seen from the Sea of Galilee",
+    credit: "Ian Scott · CC BY-SA 2.0 · resized WebP",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Tiberias_from_the_Sea_of_Galilee_(5809646279).jpg",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
   },
   "EXISTING:ramon": {
-    "src": image34,
-    "alt": "Desert cliffs and the landscape of Ramon Crater"
+    src: image34,
+    alt: "Desert cliffs and the landscape of Ramon Crater",
   },
   "itinerary-tiberias-hotels": {
     src: itineraryTiberiasWaterfront,
     alt: "Tiberias waterfront and the Sea of Galilee",
   },
   "itinerary-7day-capernaum": {
-    "src": itineraryCapernaumSynagogue,
-    "alt": "Archaeological remains at Capernaum on the northern Sea of Galilee shore"
+    src: itineraryCapernaumSynagogue,
+    alt: "Archaeological remains at Capernaum on the northern Sea of Galilee shore",
   },
   "itinerary-5day-caesarea-cover": {
-    "src": itineraryFiveDayCaesareaCover,
-    "alt": "Caesarea's ancient Mediterranean coast at dusk, a coastal highlight of the five-day Israel route"
+    src: itineraryFiveDayCaesareaCover,
+    alt: "Caesarea's ancient Mediterranean coast at dusk, a coastal highlight of the five-day Israel route",
   },
   "itinerary-10day-haifa-port-cover": {
-    "src": itineraryTenDayHaifaCover,
-    "alt": "Haifa's working port and Mediterranean waterfront, a northern stop on the ten-day Israel route"
+    src: itineraryTenDayHaifaCover,
+    alt: "Haifa's working port and Mediterranean waterfront, a northern stop on the ten-day Israel route",
   },
   "itinerary-10day-cover": {
-    "src": itineraryTenDayCover,
-    "alt": "Panoramic view of Jerusalem and its historic skyline"
+    src: itineraryTenDayCover,
+    alt: "Panoramic view of Jerusalem and its historic skyline",
   },
   "itinerary-10day-akko-port": {
-    "src": itineraryAkkoPort,
-    "alt": "Stone fortifications and historic harbour at Old Akko on Israel’s Mediterranean coast"
+    src: itineraryAkkoPort,
+    alt: "Stone fortifications and historic harbour at Old Akko on Israel’s Mediterranean coast",
   },
   "itinerary-10day-akko-aerial": {
-    "src": itineraryAkkoAerial,
-    "alt": "Aerial view of the walled Old City of Akko and its Mediterranean harbour"
+    src: itineraryAkkoAerial,
+    alt: "Aerial view of the walled Old City of Akko and its Mediterranean harbour",
   },
   "itinerary-5day-caesarea": {
-    "src": itineraryCaesareaAqueduct,
-    "alt": "Ancient stone aqueduct on the Mediterranean shore near Caesarea",
-    "credit": "זאב שטיין (Zeev Stein) · CC BY 2.5 · resized",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:125359_caesarea_national_park_PikiWiki_Israel.jpg",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.5/"
+    src: itineraryCaesareaAqueduct,
+    alt: "Ancient stone aqueduct on the Mediterranean shore near Caesarea",
+    credit: "זאב שטיין (Zeev Stein) · CC BY 2.5 · resized",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:125359_caesarea_national_park_PikiWiki_Israel.jpg",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
   },
   "itinerary-5day-mount-of-olives": {
-    "src": "/images/jerusalem/church-of-all-nations.webp",
-    "alt": "Church of All Nations at Gethsemane, below Jerusalem's Mount of Olives"
+    src: "/images/jerusalem/church-of-all-nations.webp",
+    alt: "Church of All Nations at Gethsemane, below Jerusalem's Mount of Olives",
   },
   "itinerary-3day-jerusalem-cover": {
-    "src": "/images/attractions/hero-jerusalem.webp",
-    "alt": "Wide panorama of the Old City of Jerusalem, its ancient walls and the Dome of the Rock"
+    src: "/images/attractions/hero-jerusalem.webp",
+    alt: "Wide panorama of the Old City of Jerusalem, its ancient walls and the Dome of the Rock",
   },
   "itinerary-3day-holy-sepulchre": {
-    "src": itineraryChurchHolySepulchre,
-    "alt": "Entrance courtyard of the Church of the Holy Sepulchre in Jerusalem’s Old City",
-    "sourceUrl": ""
+    src: itineraryChurchHolySepulchre,
+    alt: "Entrance courtyard of the Church of the Holy Sepulchre in Jerusalem’s Old City",
+    sourceUrl: "",
   },
   "itinerary-jerusalem-old-city": {
-    "src": itineraryOldCity,
-    "alt": "Narrow stone lane in Jerusalem’s Jewish Quarter"
+    src: itineraryOldCity,
+    alt: "Narrow stone lane in Jerusalem’s Jewish Quarter",
   },
   "itinerary-train": {
-    "src": itineraryTrain,
-    "alt": "Rail platform at Jerusalem Yitzhak Navon station"
+    src: itineraryTrain,
+    alt: "Rail platform at Jerusalem Yitzhak Navon station",
   },
   "itinerary-airport": {
-    "src": itineraryAirport,
-    "alt": "Ben Gurion Airport Terminal 3 exterior"
+    src: itineraryAirport,
+    alt: "Ben Gurion Airport Terminal 3 exterior",
   },
   "itinerary-masada-car": {
-    "src": itineraryMasadaCar,
-    "alt": "Cable car ascending to the Masada plateau"
+    src: itineraryMasadaCar,
+    alt: "Cable car ascending to the Masada plateau",
   },
   "itinerary-dead-sea-shore": {
-    "src": itineraryDeadSeaShore,
-    "alt": "Designated Ein Bokek shoreline at the Dead Sea"
+    src: itineraryDeadSeaShore,
+    alt: "Designated Ein Bokek shoreline at the Dead Sea",
   },
   "itinerary-jaffa-streets": {
-    "src": itineraryJaffaStreets,
-    "alt": "Historic streets and buildings in Old Jaffa"
+    src: itineraryJaffaStreets,
+    alt: "Historic streets and buildings in Old Jaffa",
   },
   "featured-original-3day": {
     src: "/images/travel-blog/featured-itinerary-3-days.webp",

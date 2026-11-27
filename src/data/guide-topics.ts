@@ -9,4 +9,4 @@ export const guideTopics = [
   { id: "religion", label: "Religion & heritage" },
   { id: "shopping", label: "Shopping & markets" },
 ] as const;
-export type GuideTopicId = typeof guideTopics[number]["id"];
+export type GuideTopicId = (typeof guideTopics)[number]["id"];

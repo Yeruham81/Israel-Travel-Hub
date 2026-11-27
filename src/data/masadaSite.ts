@@ -3,11 +3,16 @@ import masadaHero from "@/assets/home/hero-masada-large.webp";
 /** Official visitor facts for the Masada National Park attraction guide. */
 export const masadaSite = {
   title: "Masada National Park: Tickets, Cable Car & Visitor Guide",
-  description: "Visit Masada National Park: cable car, Snake Path, Roman Ramp, ticket prices, park hours, museum and travel from Jerusalem or the Dead Sea.",
+  description:
+    "Visit Masada National Park: cable car, Snake Path, Roman Ramp, ticket prices, park hours, museum and travel from Jerusalem or the Dead Sea.",
   region: "Dead Sea & Judean Desert" as const,
   updatedAt: "2026-11-17",
-  intro: "Masada rises dramatically above the Dead Sea, with the remains of King Herod's fortress, vast desert views and the story of the Roman siege. For most visitors, the key decisions are whether to take the cable car or hike, which entrance to use and how early to arrive before the desert heat.",
-  hero: { src: masadaHero, alt: "Masada fortress plateau rising above the Judean Desert and Dead Sea" },
+  intro:
+    "Masada rises dramatically above the Dead Sea, with the remains of King Herod's fortress, vast desert views and the story of the Roman siege. For most visitors, the key decisions are whether to take the cable car or hike, which entrance to use and how early to arrive before the desert heat.",
+  hero: {
+    src: masadaHero,
+    alt: "Masada fortress plateau rising above the Judean Desert and Dead Sea",
+  },
   visit: {
     summerRegular: "08:00–17:00",
     summerFriday: "08:00–16:00",

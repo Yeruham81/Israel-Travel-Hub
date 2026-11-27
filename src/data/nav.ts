@@ -3,14 +3,22 @@ import { travelGuidePaths } from "@/data/travel-guide-paths";
 
 export type NavItem = { label: string; to: LinkProps["to"] };
 export type SidebarNavItem =
-  | (NavItem & { children?: NavItem[]; childrenLabel?: string; toggleLabel?: string; alwaysExpanded?: boolean; toggleOnly?: boolean })
+  | (NavItem & {
+      children?: NavItem[];
+      childrenLabel?: string;
+      toggleLabel?: string;
+      alwaysExpanded?: boolean;
+      toggleOnly?: boolean;
+    })
   | { label: string; href: string }
   | { label: string; headingOnly: true; children: NavItem[]; childrenLabel?: string };
 export type NavGroup = { title: string; items: SidebarNavItem[] };
 
 export const airportTransferNav = {
-  label: "Airport transfers", to: "/airport-transfers/" as const,
-  childrenLabel: "Airport transfer destinations", alwaysExpanded: true,
+  label: "Airport transfers",
+  to: "/airport-transfers/" as const,
+  childrenLabel: "Airport transfer destinations",
+  alwaysExpanded: true,
   children: [
     { label: "To Jerusalem", to: "/airport-transfers/jerusalem/" },
     { label: "To Tel Aviv & Jaffa", to: "/airport-transfers/tel-aviv/" },
@@ -50,13 +58,9 @@ const travelTips = {
   arrival: { label: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival },
 } satisfies Record<string, SidebarNavItem>;
 
-export const utilityNav: NavItem[] = [
-  { label: "Home", to: "/" },
-];
+export const utilityNav: NavItem[] = [{ label: "Home", to: "/" }];
 
-export const footerNav: NavItem[] = [
-  { label: "About me", to: "/about-me/" },
-];
+export const footerNav: NavItem[] = [{ label: "About me", to: "/about-me/" }];
 
 export const legalNav: NavItem[] = [
   { label: "Privacy Policy", to: "/privacy-policy/" },
@@ -99,157 +103,78 @@ const attractionNavigation = [
     "Jerusalem",
     "Jerusalem",
     [
-      [
-        "old-city-jerusalem",
-        "old-city-jerusalem"
-      ],
-      [
-        "via-dolorosa",
-        "via-dolorosa"
-      ],
-      [
-        "mount-of-olives",
-        "mount-of-olives"
-      ],
-      [
-        "mount-zion",
-        "mount-zion"
-      ]
-    ]
+      ["old-city-jerusalem", "old-city-jerusalem"],
+      ["via-dolorosa", "via-dolorosa"],
+      ["mount-of-olives", "mount-of-olives"],
+      ["mount-zion", "mount-zion"],
+    ],
   ],
-  [
-    "Tel Aviv & Jaffa",
-    "Tel Aviv & Jaffa",
-    [
-      [
-        "jaffa",
-        "jaffa"
-      ]
-    ]
-  ],
+  ["Tel Aviv & Jaffa", "Tel Aviv & Jaffa", [["jaffa", "jaffa"]]],
   [
     "Haifa & Coast",
     "Haifa & the Mediterranean coast",
     [
-      [
-        "haifa",
-        "haifa"
-      ],
-      [
-        "akko-acre",
-        "akko-acre"
-      ],
-      [
-        "caesarea",
-        "caesarea"
-      ],
-      [
-        "rosh-hanikra",
-        "rosh-hanikra"
-      ]
-    ]
+      ["haifa", "haifa"],
+      ["akko-acre", "akko-acre"],
+      ["caesarea", "caesarea"],
+      ["rosh-hanikra", "rosh-hanikra"],
+    ],
   ],
   [
     "Nazareth & Galilee",
     "Nazareth & Galilee",
     [
-      [
-        "annunciation",
-        "basilica-of-the-annunciation"
-      ],
-      [
-        "mount-tabor",
-        "mount-tabor"
-      ],
-      [
-        "precipice",
-        "mount-precipice"
-      ],
-      [
-        "megiddo",
-        "tel-megiddo"
-      ]
-    ]
+      ["annunciation", "basilica-of-the-annunciation"],
+      ["mount-tabor", "mount-tabor"],
+      ["precipice", "mount-precipice"],
+      ["megiddo", "tel-megiddo"],
+    ],
   ],
   [
     "Sea of Galilee & Jordan River",
     "Sea of Galilee & the Jordan River",
     [
-      [
-        "sea-of-galilee",
-        "sea-of-galilee"
-      ],
-      [
-        "capernaum",
-        "capernaum"
-      ],
-      [
-        "tabgha",
-        "tabgha"
-      ],
-      [
-        "mount-of-beatitudes",
-        "mount-of-beatitudes"
-      ],
-      [
-        "magdala",
-        "magdala"
-      ],
-      [
-        "yardenit",
-        "yardenit"
-      ]
-    ]
+      ["sea-of-galilee", "sea-of-galilee"],
+      ["capernaum", "capernaum"],
+      ["tabgha", "tabgha"],
+      ["mount-of-beatitudes", "mount-of-beatitudes"],
+      ["magdala", "magdala"],
+      ["yardenit", "yardenit"],
+    ],
   ],
   [
     "Dead Sea & Masada",
     "Dead Sea & Masada",
     [
-      [
-        "dead-sea",
-        "dead-sea"
-      ],
-      [
-        "masada",
-        "masada"
-      ],
-      [
-        "ein-gedi",
-        "ein-gedi"
-      ],
-      [
-        "qasr",
-        "qasr-el-yahud"
-      ]
-    ]
+      ["dead-sea", "dead-sea"],
+      ["masada", "masada"],
+      ["ein-gedi", "ein-gedi"],
+      ["qasr", "qasr-el-yahud"],
+    ],
   ],
   [
     "Negev & Eilat",
     "Negev Desert & Eilat",
     [
-      [
-        "mitzpe-ramon-crater",
-        "mitzpe-ramon-crater"
-      ],
-      [
-        "eilat",
-        "eilat"
-      ]
-    ]
-  ]
+      ["mitzpe-ramon-crater", "mitzpe-ramon-crater"],
+      ["eilat", "eilat"],
+    ],
+  ],
 ] as const;
 
-export const attractionSidebarRegions: SidebarNavItem[] = attractionNavigation.map(([label, title, cards]) => ({
-  label,
-  to: "/attractions/" as const,
-  toggleOnly: true,
-  childrenLabel: `${title} attractions`,
-  toggleLabel: `Toggle ${label} attractions`,
-  children: cards.map(([id, slug]) => ({
-    label: attractionSidebarGuideLabels[id]!,
-    to: `/attractions/${slug}/` as LinkProps["to"],
-  })),
-}));
+export const attractionSidebarRegions: SidebarNavItem[] = attractionNavigation.map(
+  ([label, title, cards]) => ({
+    label,
+    to: "/attractions/" as const,
+    toggleOnly: true,
+    childrenLabel: `${title} attractions`,
+    toggleLabel: `Toggle ${label} attractions`,
+    children: cards.map(([id, slug]) => ({
+      label: attractionSidebarGuideLabels[id]!,
+      to: `/attractions/${slug}/` as LinkProps["to"],
+    })),
+  }),
+);
 
 /** Shared desktop/mobile menu, with topic headings and their guide links. */
 export const allNavGroups: NavGroup[] = [
@@ -264,22 +189,37 @@ export const allNavGroups: NavGroup[] = [
   {
     title: "Tours & trips",
     items: [
-      { label: "Tours & day trips", to: "/tours/", childrenLabel: "Tour categories", alwaysExpanded: true, children: [
-        { label: "Jerusalem", to: "/tours/jerusalem/" },
-        { label: "Tel Aviv & Jaffa", to: "/tours/tel-aviv-jaffa/" },
-        { label: "Masada & the Dead Sea", to: "/tours/masada-dead-sea/" },
-        { label: "Bethlehem, Jericho & Qasr al-Yahud", to: "/tours/bethlehem-jericho-jordan-river/" },
-        { label: "Nazareth & Sea of Galilee", to: "/tours/nazareth-sea-of-galilee/" },
-        { label: "Caesarea, Haifa & Acre", to: "/tours/caesarea-haifa-acre/" },
-        { label: "Negev & Ramon Crater", to: "/tours/negev-desert-ramon-crater/" },
-        { label: "Golan Heights", to: "/tours/golan-heights/" },
-        { label: "Food & markets", to: "/tours/food-market-tours/" },
-        { label: "Eilat & the Red Sea", to: "/tours/eilat-red-sea/" },
-      ] },
-      { label: "Shore excursions", to: "/shore-excursions/", childrenLabel: "Shore excursion ports", alwaysExpanded: true, children: [
-        { label: "From Haifa Port", to: "/shore-excursions/haifa/" },
-        { label: "From Ashdod Port", to: "/shore-excursions/ashdod/" },
-      ] },
+      {
+        label: "Tours & day trips",
+        to: "/tours/",
+        childrenLabel: "Tour categories",
+        alwaysExpanded: true,
+        children: [
+          { label: "Jerusalem", to: "/tours/jerusalem/" },
+          { label: "Tel Aviv & Jaffa", to: "/tours/tel-aviv-jaffa/" },
+          { label: "Masada & the Dead Sea", to: "/tours/masada-dead-sea/" },
+          {
+            label: "Bethlehem, Jericho & Qasr al-Yahud",
+            to: "/tours/bethlehem-jericho-jordan-river/",
+          },
+          { label: "Nazareth & Sea of Galilee", to: "/tours/nazareth-sea-of-galilee/" },
+          { label: "Caesarea, Haifa & Acre", to: "/tours/caesarea-haifa-acre/" },
+          { label: "Negev & Ramon Crater", to: "/tours/negev-desert-ramon-crater/" },
+          { label: "Golan Heights", to: "/tours/golan-heights/" },
+          { label: "Food & markets", to: "/tours/food-market-tours/" },
+          { label: "Eilat & the Red Sea", to: "/tours/eilat-red-sea/" },
+        ],
+      },
+      {
+        label: "Shore excursions",
+        to: "/shore-excursions/",
+        childrenLabel: "Shore excursion ports",
+        alwaysExpanded: true,
+        children: [
+          { label: "From Haifa Port", to: "/shore-excursions/haifa/" },
+          { label: "From Ashdod Port", to: "/shore-excursions/ashdod/" },
+        ],
+      },
     ],
   },
   {
@@ -288,53 +228,78 @@ export const allNavGroups: NavGroup[] = [
   },
   {
     title: "Attractions",
-    items: [
-      { label: "All attractions", to: "/attractions/" },
-      ...attractionSidebarRegions,
-    ],
+    items: [{ label: "All attractions", to: "/attractions/" }, ...attractionSidebarRegions],
   },
   {
     title: "Travel guides",
     items: [
       { label: "All travel guides", to: "/travel-blog/" },
-      { label: "From Ben Gurion Airport", headingOnly: true, childrenLabel: "Ben Gurion Airport arrival guides", children: [
-        { label: "How to get to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
-        { label: "How to get to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
-        { label: "How to get to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
-        { label: "How to get to Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
-        { label: "Ben Gurion Airport taxis", to: travelGuidePaths.airportTaxis },
-        { label: "Traveling from Ben Gurion Airport on Shabbat", to: travelGuidePaths.shabbat },
-        { label: "Sherut from Ben Gurion Airport", to: travelGuidePaths.sherut },
-        travelTips.arrival,
-      ] },
-      { label: "Getting Around", headingOnly: true, childrenLabel: "Getting around guides", children: [
-        travelTips.gettingAround,
-        { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
-        { label: "How to get from Jerusalem to Bethlehem", to: travelGuidePaths.bethlehem },
-        { label: "How to get from Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
-        { label: "Taxis in Israel", to: travelGuidePaths.taxis },
-        { label: "Taxi fares in Israel", to: travelGuidePaths.taxiFares },
-        travelTips.uber,
-      ] },
-      { label: "Where to Stay Guides", headingOnly: true, childrenLabel: "Accommodation planning guides", children: [
-        { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
-        { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
-        { label: "Best hotels in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
-        { label: "Best hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
-        { label: "Best Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
-      ] },
-      { label: "Israel Itineraries", headingOnly: true, childrenLabel: "Trip lengths", children: [
-        { label: "Israel in 3 days", to: "/travel-blog/israel-itinerary-3-days/" },
-        { label: "Israel in 5 days", to: "/travel-blog/israel-itinerary-5-days/" },
-        { label: "Israel in 7 days", to: "/travel-blog/israel-itinerary-7-days/" },
-        { label: "Israel in 10 days", to: "/travel-blog/israel-itinerary-10-days/" },
-      ] },
-      { label: "Planning Your Trip", headingOnly: true, childrenLabel: "Trip planning guides", children: [
-        { label: "Israel travel tips", to: travelGuidePaths.travelTips },
-        { label: "Best time to visit Israel", to: travelGuidePaths.bestTime },
-        { label: "Holidays & events", to: travelGuidePaths.calendar },
-        travelTips.esim,
-      ] },
+      {
+        label: "From Ben Gurion Airport",
+        headingOnly: true,
+        childrenLabel: "Ben Gurion Airport arrival guides",
+        children: [
+          { label: "How to get to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+          { label: "How to get to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+          { label: "How to get to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+          { label: "How to get to Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
+          { label: "Ben Gurion Airport taxis", to: travelGuidePaths.airportTaxis },
+          { label: "Traveling from Ben Gurion Airport on Shabbat", to: travelGuidePaths.shabbat },
+          { label: "Sherut from Ben Gurion Airport", to: travelGuidePaths.sherut },
+          travelTips.arrival,
+        ],
+      },
+      {
+        label: "Getting Around",
+        headingOnly: true,
+        childrenLabel: "Getting around guides",
+        children: [
+          travelTips.gettingAround,
+          { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
+          { label: "How to get from Jerusalem to Bethlehem", to: travelGuidePaths.bethlehem },
+          {
+            label: "How to get from Jerusalem to the Dead Sea",
+            to: travelGuidePaths.jerusalemDeadSea,
+          },
+          { label: "Taxis in Israel", to: travelGuidePaths.taxis },
+          { label: "Taxi fares in Israel", to: travelGuidePaths.taxiFares },
+          travelTips.uber,
+        ],
+      },
+      {
+        label: "Where to Stay Guides",
+        headingOnly: true,
+        childrenLabel: "Accommodation planning guides",
+        children: [
+          { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
+          { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
+          { label: "Best hotels in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
+          { label: "Best hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
+          { label: "Best Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
+        ],
+      },
+      {
+        label: "Israel Itineraries",
+        headingOnly: true,
+        childrenLabel: "Trip lengths",
+        children: [
+          { label: "Israel in 3 days", to: "/travel-blog/israel-itinerary-3-days/" },
+          { label: "Israel in 5 days", to: "/travel-blog/israel-itinerary-5-days/" },
+          { label: "Israel in 7 days", to: "/travel-blog/israel-itinerary-7-days/" },
+          { label: "Israel in 10 days", to: "/travel-blog/israel-itinerary-10-days/" },
+        ],
+      },
+      {
+        label: "Planning Your Trip",
+        headingOnly: true,
+        childrenLabel: "Trip planning guides",
+        children: [
+          { label: "Israel travel tips", to: travelGuidePaths.travelTips },
+          { label: "Best time to visit Israel", to: travelGuidePaths.bestTime },
+          { label: "Holidays & events", to: travelGuidePaths.calendar },
+          travelTips.esim,
+        ],
+      },
       { label: "What to eat in Israel", to: travelGuidePaths.food },
       { label: "Top 10 Israel experiences", to: travelGuidePaths.topTen },
       { label: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },

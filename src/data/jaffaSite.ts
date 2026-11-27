@@ -1,25 +1,33 @@
 /** Curated facts and operator links for the multi-stop Jaffa visitor guide. */
 export const jaffaSite = {
   title: "Things to Do in Jaffa | Old City, Port & Walking Guide",
-  description: "Explore Old Jaffa with practical walking routes, the Clock Tower, historic alleys, St. Peter's Church, Jaffa Port, flea market, local food and transport tips.",
+  description:
+    "Explore Old Jaffa with practical walking routes, the Clock Tower, historic alleys, St. Peter's Church, Jaffa Port, flea market, local food and transport tips.",
   updatedAt: "2026-11-23",
   region: "Tel Aviv & Jaffa",
   hero: {
     src: "/images/attractions/jaffa-panorama.webp",
     alt: "Panoramic view of historic Jaffa and its Mediterranean coastline",
   },
-  intro: "Jaffa is one of my favourite places to visit in Tel Aviv. You can explore the ancient harbour, Ottoman landmarks, stone alleys, galleries and flea market on foot. Allow half a day to see the historic hill and waterfront, with time for a coffee or meal near the market.",
+  intro:
+    "Jaffa is one of my favourite places to visit in Tel Aviv. You can explore the ancient harbour, Ottoman landmarks, stone alleys, galleries and flea market on foot. Allow half a day to see the historic hill and waterfront, with time for a coffee or meal near the market.",
   official: {
     oldJaffa: "https://www.oldjaffa.co.il/",
     municipality: "https://www.tel-aviv.gov.il/en/",
     touristInformation: "https://visit.tel-aviv.gov.il/info/about",
     municipalWalkingGuide: "https://www.tel-aviv.gov.il/Visitors/Jaffa/Pages/oldjaffatour.aspx",
-    municipalWalkMapShort: "https://www.tel-aviv.gov.il/Visitors/Jaffa/Documents/%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%20%D7%94%D7%A2%D7%99%D7%A8%20%D7%94%D7%A2%D7%AA%D7%99%D7%A7%D7%94%20-%20%D7%9E%D7%A4%D7%94%20%D7%9C%D7%94%D7%95%D7%A8%D7%93%D7%94.pdf",
-    municipalWalkingMap: "https://www.tel-aviv.gov.il/Visitors/Jaffa/Documents/%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%20%D7%94%D7%A2%D7%99%D7%A8%20%D7%94%D7%A2%D7%AA%D7%99%D7%A7%D7%94%20-%20%D7%94%D7%A1%D7%99%D7%95%D7%A8%20%D7%94%D7%9E%D7%9C%D7%90.pdf",
-    oldJaffaArrival: "https://www.oldjaffa.co.il/%D7%99%D7%A6%D7%99%D7%A8%D7%AA-%D7%A7%D7%A9%D7%A8/",
-    tzorfimParking: "https://www.oldjaffa.co.il/%D7%AA%D7%A7%D7%A0%D7%95%D7%9F-%D7%97%D7%A0%D7%99%D7%95%D7%9F-%D7%94%D7%A6%D7%95%D7%A8%D7%A4%D7%99%D7%9D/",
-    jaffaPortParking: "https://www.oldjaffa.co.il/%D7%AA%D7%A7%D7%A0%D7%95%D7%9F-%D7%97%D7%A0%D7%99%D7%95%D7%9F-%D7%A0%D7%9E%D7%9C-%D7%99%D7%A4%D7%95/",
-    church: "https://www.oldjaffa.co.il/businesses/%D7%9B%D7%A0%D7%A1%D7%99%D7%99%D7%AA-%D7%A1%D7%A0%D7%98-%D7%A4%D7%99%D7%98%D7%A8/",
+    municipalWalkMapShort:
+      "https://www.tel-aviv.gov.il/Visitors/Jaffa/Documents/%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%20%D7%94%D7%A2%D7%99%D7%A8%20%D7%94%D7%A2%D7%AA%D7%99%D7%A7%D7%94%20-%20%D7%9E%D7%A4%D7%94%20%D7%9C%D7%94%D7%95%D7%A8%D7%93%D7%94.pdf",
+    municipalWalkingMap:
+      "https://www.tel-aviv.gov.il/Visitors/Jaffa/Documents/%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%20%D7%94%D7%A2%D7%99%D7%A8%20%D7%94%D7%A2%D7%AA%D7%99%D7%A7%D7%94%20-%20%D7%94%D7%A1%D7%99%D7%95%D7%A8%20%D7%94%D7%9E%D7%9C%D7%90.pdf",
+    oldJaffaArrival:
+      "https://www.oldjaffa.co.il/%D7%99%D7%A6%D7%99%D7%A8%D7%AA-%D7%A7%D7%A9%D7%A8/",
+    tzorfimParking:
+      "https://www.oldjaffa.co.il/%D7%AA%D7%A7%D7%A0%D7%95%D7%9F-%D7%97%D7%A0%D7%99%D7%95%D7%9F-%D7%94%D7%A6%D7%95%D7%A8%D7%A4%D7%99%D7%9D/",
+    jaffaPortParking:
+      "https://www.oldjaffa.co.il/%D7%AA%D7%A7%D7%A0%D7%95%D7%9F-%D7%97%D7%A0%D7%99%D7%95%D7%9F-%D7%A0%D7%9E%D7%9C-%D7%99%D7%A4%D7%95/",
+    church:
+      "https://www.oldjaffa.co.il/businesses/%D7%9B%D7%A0%D7%A1%D7%99%D7%99%D7%AA-%D7%A1%D7%A0%D7%98-%D7%A4%D7%99%D7%98%D7%A8/",
     museum: "https://www.ilanagoormuseum.org/en/visiting/",
     uriGeller: "https://www.urigellermuseum.com/",
     nalagaat: "https://nalagaat.org.il/en/",

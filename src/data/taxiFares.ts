@@ -36,12 +36,24 @@ export const taxiFaresWithVat = {
  * and other permitted extras. Kilometres beyond 10 are charged ONLY at the
  * higher rate — the first-10 rate is never added to them as well.
  */
-export function meteredFareEstimate({ tariff, km, minutes }: { tariff: TaxiTariff; km: number; minutes: number }) {
+export function meteredFareEstimate({
+  tariff,
+  km,
+  minutes,
+}: {
+  tariff: TaxiTariff;
+  km: number;
+  minutes: number;
+}) {
   if (km < 0 || minutes < 0) throw new Error("Distance and time must be non-negative");
   const f = taxiFaresPreVat;
   const firstKm = Math.min(km, TAXI_KM_THRESHOLD);
   const extraKm = Math.max(km - TAXI_KM_THRESHOLD, 0);
-  const preVat = f.start + firstKm * f.perKmFirst10[tariff] + extraKm * f.perKmBeyond10[tariff] + minutes * f.perMinute[tariff];
+  const preVat =
+    f.start +
+    firstKm * f.perKmFirst10[tariff] +
+    extraKm * f.perKmBeyond10[tariff] +
+    minutes * f.perMinute[tariff];
   const withVat = preVat * (1 + TAXI_VAT_RATE);
   return { preVat: Math.round(preVat * 100) / 100, withVat: Math.round(withVat * 100) / 100 };
 }
@@ -49,22 +61,56 @@ export function meteredFareEstimate({ tariff, km, minutes }: { tariff: TaxiTarif
 const ils = (n: number) => `₪${n.toFixed(2)}`;
 
 export const fareExamples = [
-  { id: "a-short", label: "Tariff A, 5 km in 15 minutes", tariff: "A" as const, km: 5, minutes: 15,
-    working: `(10.56 + 5 × 1.65 + 15 × 1.65) × 1.18` },
-  { id: "b-longer", label: "Tariff B, 12 km in 25 minutes", tariff: "B" as const, km: 12, minutes: 25,
-    working: `(10.56 + 10 × 1.98 + 2 × 3.54 + 25 × 1.98) × 1.18` },
+  {
+    id: "a-short",
+    label: "Tariff A, 5 km in 15 minutes",
+    tariff: "A" as const,
+    km: 5,
+    minutes: 15,
+    working: `(10.56 + 5 × 1.65 + 15 × 1.65) × 1.18`,
+  },
+  {
+    id: "b-longer",
+    label: "Tariff B, 12 km in 25 minutes",
+    tariff: "B" as const,
+    km: 12,
+    minutes: 25,
+    working: `(10.56 + 10 × 1.98 + 2 × 3.54 + 25 × 1.98) × 1.18`,
+  },
 ].map((example) => ({ ...example, total: meteredFareEstimate(example).withVat }));
 
 export const consumerFareTable = {
   caption: "Official taxi meter prices from 1 April 2026 (ILS, including 18% VAT)",
   headers: ["Charge", "Tariff A", "Tariff B", "Tariff C"],
   rows: [
-    ["Starting meter (initial charge)", ils(taxiFaresWithVat.start), ils(taxiFaresWithVat.start), ils(taxiFaresWithVat.start)],
-    ["Per minute of travel", ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresWithVat.perMinute[t]))],
-    ["Per km, first 10 km", ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresWithVat.perKmFirst10[t]))],
-    ["Per km, beyond 10 km", ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresWithVat.perKmBeyond10[t]))],
-    ["Waiting at passenger's request, per hour", ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresWithVat.waitingPerHour[t]))],
-    ["Ordered taxi (dispatch) addition", ils(taxiFaresWithVat.orderedTaxi), ils(taxiFaresWithVat.orderedTaxi), ils(taxiFaresWithVat.orderedTaxi)],
+    [
+      "Starting meter (initial charge)",
+      ils(taxiFaresWithVat.start),
+      ils(taxiFaresWithVat.start),
+      ils(taxiFaresWithVat.start),
+    ],
+    [
+      "Per minute of travel",
+      ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresWithVat.perMinute[t])),
+    ],
+    [
+      "Per km, first 10 km",
+      ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresWithVat.perKmFirst10[t])),
+    ],
+    [
+      "Per km, beyond 10 km",
+      ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresWithVat.perKmBeyond10[t])),
+    ],
+    [
+      "Waiting at passenger's request, per hour",
+      ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresWithVat.waitingPerHour[t])),
+    ],
+    [
+      "Ordered taxi (dispatch) addition",
+      ils(taxiFaresWithVat.orderedTaxi),
+      ils(taxiFaresWithVat.orderedTaxi),
+      ils(taxiFaresWithVat.orderedTaxi),
+    ],
   ],
   note: "Rounded consumer amounts as published with the 2026 order. Temporary rates valid until 31 March 2027 unless amended. Tolls and other permitted additions are charged separately.",
 };
@@ -73,12 +119,31 @@ export const preVatFareTable = {
   caption: "The same 2026 amounts before VAT (ILS)",
   headers: ["Charge", "Tariff A", "Tariff B", "Tariff C"],
   rows: [
-    ["Starting meter", ils(taxiFaresPreVat.start), ils(taxiFaresPreVat.start), ils(taxiFaresPreVat.start)],
+    [
+      "Starting meter",
+      ils(taxiFaresPreVat.start),
+      ils(taxiFaresPreVat.start),
+      ils(taxiFaresPreVat.start),
+    ],
     ["Per minute", ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresPreVat.perMinute[t]))],
-    ["Per km, first 10 km", ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresPreVat.perKmFirst10[t]))],
-    ["Per km, beyond 10 km", ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresPreVat.perKmBeyond10[t]))],
-    ["Waiting, per hour", ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresPreVat.waitingPerHour[t]))],
-    ["Ordered taxi addition", ils(taxiFaresPreVat.orderedTaxi), ils(taxiFaresPreVat.orderedTaxi), ils(taxiFaresPreVat.orderedTaxi)],
+    [
+      "Per km, first 10 km",
+      ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresPreVat.perKmFirst10[t])),
+    ],
+    [
+      "Per km, beyond 10 km",
+      ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresPreVat.perKmBeyond10[t])),
+    ],
+    [
+      "Waiting, per hour",
+      ...(["A", "B", "C"] as const).map((t) => ils(taxiFaresPreVat.waitingPerHour[t])),
+    ],
+    [
+      "Ordered taxi addition",
+      ils(taxiFaresPreVat.orderedTaxi),
+      ils(taxiFaresPreVat.orderedTaxi),
+      ils(taxiFaresPreVat.orderedTaxi),
+    ],
   ],
   note: "Useful for checking arithmetic: VAT at 18% is applied once to the total, so results can differ by a few agorot from adding the rounded consumer amounts.",
 };

@@ -6,26 +6,68 @@ import type { SacredHillEditorial } from "@/data/sacredHillGuides";
  * Rendered images come only from files stored in this repository.
  * Site-specific photographs not yet available locally are intentionally omitted.
  */
-export const mountOlivesAttractionUpdate: Required<Pick<Attraction, "title" | "description" | "intro" | "takeaway" | "duration" | "image" | "official" | "faqs">> = {
+export const mountOlivesAttractionUpdate: Required<
+  Pick<
+    Attraction,
+    "title" | "description" | "intro" | "takeaway" | "duration" | "image" | "official" | "faqs"
+  >
+> = {
   title: "Mount of Olives, Jerusalem: Viewpoint, Churches & How to Visit",
-  description: "Plan a Mount of Olives visit: where to find the Jerusalem viewpoint, how to reach it by bus, Gethsemane, churches, walking routes and Old City connections.",
-  intro: "From the Mount of Olives, Jerusalem's Old City spreads out before you, with the Dome of the Rock, ancient walls and church towers rising beyond the Jewish cemetery. Just below the lookout are places closely associated with the life of Jesus, from Dominus Flevit to the Garden of Gethsemane. Here's how to choose the stops and fit the hill into your time in Jerusalem.",
-  takeaway: "For a first visit, begin at the lookout near the Seven Arches Hotel, then follow the Palm Sunday road to Dominus Flevit and Gethsemane. Allow about two to three hours if you want to enter churches. You can continue from the foot of the hill to the Old City, or make the viewpoint a final stop after exploring Jerusalem.",
-  duration: "30–45 minutes for the panorama; around 2–3 hours with Gethsemane and selected churches",
-  image: { src: "/images/attractions/mount-of-olives.webp", alt: "The Mount of Olives hillside facing Jerusalem Old City" },
+  description:
+    "Plan a Mount of Olives visit: where to find the Jerusalem viewpoint, how to reach it by bus, Gethsemane, churches, walking routes and Old City connections.",
+  intro:
+    "From the Mount of Olives, Jerusalem's Old City spreads out before you, with the Dome of the Rock, ancient walls and church towers rising beyond the Jewish cemetery. Just below the lookout are places closely associated with the life of Jesus, from Dominus Flevit to the Garden of Gethsemane. Here's how to choose the stops and fit the hill into your time in Jerusalem.",
+  takeaway:
+    "For a first visit, begin at the lookout near the Seven Arches Hotel, then follow the Palm Sunday road to Dominus Flevit and Gethsemane. Allow about two to three hours if you want to enter churches. You can continue from the foot of the hill to the Old City, or make the viewpoint a final stop after exploring Jerusalem.",
+  duration:
+    "30–45 minutes for the panorama; around 2–3 hours with Gethsemane and selected churches",
+  image: {
+    src: "/images/attractions/mount-of-olives.webp",
+    alt: "The Mount of Olives hillside facing Jerusalem Old City",
+  },
   official: [
-    { label: "Christian Information Center — church hours", url: "https://www.cicts.org/en/updated-opening-hours-holy-places-tourist-sites-holy-land" },
-    { label: "City of David — Mount of Olives access and buses", url: "https://cityofdavid.org.il/en/sites/mount-of-olives-eng/" },
-    { label: "Moovit — routes near the viewpoint", url: "https://moovitapp.com/index/en/public_transit-%D7%9E%D7%A6%D7%A4%D7%94_%D7%94%D7%A8_%D7%94%D7%96%D7%99%D7%AA%D7%99%D7%9D_%D7%9E%D7%9C%D7%95%D7%9F_%D7%A9%D7%91%D7%A2_%D7%94%D7%A7%D7%A9%D7%AA%D7%95%D7%AA-Israel-stop_34625826-1" },
+    {
+      label: "Christian Information Center — church hours",
+      url: "https://www.cicts.org/en/updated-opening-hours-holy-places-tourist-sites-holy-land",
+    },
+    {
+      label: "City of David — Mount of Olives access and buses",
+      url: "https://cityofdavid.org.il/en/sites/mount-of-olives-eng/",
+    },
+    {
+      label: "Moovit — routes near the viewpoint",
+      url: "https://moovitapp.com/index/en/public_transit-%D7%9E%D7%A6%D7%A4%D7%94_%D7%94%D7%A8_%D7%94%D7%96%D7%99%D7%AA%D7%99%D7%9D_%D7%9E%D7%9C%D7%95%D7%9F_%D7%A9%D7%91%D7%A2_%D7%94%D7%A7%D7%A9%D7%AA%D7%95%D7%AA-Israel-stop_34625826-1",
+    },
   ],
   faqs: [
-    { q: "Where is the best Mount of Olives viewpoint?", a: "The familiar panoramic terrace is beside the Seven Arches Hotel, overlooking the Jewish cemetery and Jerusalem's Old City." },
-    { q: "How long do I need on the Mount of Olives?", a: "Allow 30–45 minutes for the panorama alone, or around two to three hours for the lookout, Dominus Flevit and Gethsemane with selected church interiors. A longer pilgrimage route takes more time." },
-    { q: "Is it free to visit the Mount of Olives?", a: "The outdoor viewpoint is generally free. Pater Noster and the Chapel of the Ascension charge small entrance fees; other churches have their own visiting arrangements. Check the admission table before you go." },
-    { q: "Can I visit the churches on a Sunday?", a: "Some churches are open to visitors only on certain days of the week. Pater Noster is currently closed on Sundays, and St Mary Magdalene generally welcomes sightseeing visitors on selected weekday and Saturday mornings. The panorama and Gethsemane can still be part of your visit." },
-    { q: "Can I walk from the Mount of Olives to the Old City?", a: "Yes. From Gethsemane at the foot of the hill you can continue towards Lion's Gate. If you start at the upper lookout, follow the marked downhill route and allow for the slope and church detours." },
-    { q: "Is the walk suitable for visitors with limited mobility?", a: "The traditional descent includes steep sections and uneven paths. A comfortable alternative is to reach the upper viewpoint by vehicle and, if you wish, make a separate stop near Gethsemane." },
-    { q: "Can I explore the Mount of Olives without a guided tour?", a: "Yes. The public viewpoint and most church visiting areas can be explored independently during their public hours. A guided tour can help you learn more about the history of the sites, while a private driver can make getting around easier." },
+    {
+      q: "Where is the best Mount of Olives viewpoint?",
+      a: "The familiar panoramic terrace is beside the Seven Arches Hotel, overlooking the Jewish cemetery and Jerusalem's Old City.",
+    },
+    {
+      q: "How long do I need on the Mount of Olives?",
+      a: "Allow 30–45 minutes for the panorama alone, or around two to three hours for the lookout, Dominus Flevit and Gethsemane with selected church interiors. A longer pilgrimage route takes more time.",
+    },
+    {
+      q: "Is it free to visit the Mount of Olives?",
+      a: "The outdoor viewpoint is generally free. Pater Noster and the Chapel of the Ascension charge small entrance fees; other churches have their own visiting arrangements. Check the admission table before you go.",
+    },
+    {
+      q: "Can I visit the churches on a Sunday?",
+      a: "Some churches are open to visitors only on certain days of the week. Pater Noster is currently closed on Sundays, and St Mary Magdalene generally welcomes sightseeing visitors on selected weekday and Saturday mornings. The panorama and Gethsemane can still be part of your visit.",
+    },
+    {
+      q: "Can I walk from the Mount of Olives to the Old City?",
+      a: "Yes. From Gethsemane at the foot of the hill you can continue towards Lion's Gate. If you start at the upper lookout, follow the marked downhill route and allow for the slope and church detours.",
+    },
+    {
+      q: "Is the walk suitable for visitors with limited mobility?",
+      a: "The traditional descent includes steep sections and uneven paths. A comfortable alternative is to reach the upper viewpoint by vehicle and, if you wish, make a separate stop near Gethsemane.",
+    },
+    {
+      q: "Can I explore the Mount of Olives without a guided tour?",
+      a: "Yes. The public viewpoint and most church visiting areas can be explored independently during their public hours. A guided tour can help you learn more about the history of the sites, while a private driver can make getting around easier.",
+    },
   ],
 };
 
@@ -37,7 +79,8 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     { label: "Combine with", value: "Lion's Gate, Gethsemane and the Old City" },
     { label: "Bus connections", value: "84, 255 or 275, depending on your starting point" },
   ],
-  routeIntro: "You can enjoy the panorama on its own, or make the Mount of Olives the beginning of a day in Jerusalem's Old City. If you're visiting the churches, consider starting with Pater Noster and the Chapel of the Ascension near At-Tur before walking downhill.",
+  routeIntro:
+    "You can enjoy the panorama on its own, or make the Mount of Olives the beginning of a day in Jerusalem's Old City. If you're visiting the churches, consider starting with Pater Noster and the Chapel of the Ascension near At-Tur before walking downhill.",
   routes: [
     {
       name: "From the viewpoint to the Old City",
@@ -68,69 +111,116 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
   stops: [
     {
       name: "The panoramic viewpoint",
-      description: "The classic Jerusalem photograph is taken from the terrace near the Seven Arches Hotel. Across the hillside cemetery you can see the Dome of the Rock, the city walls and many of the Old City's most recognisable landmarks.",
-      visit: "Early morning is particularly good for photographing the city, with the sun coming from behind the viewpoint. A short stop here also works well at the end of an Old City tour.",
+      description:
+        "The classic Jerusalem photograph is taken from the terrace near the Seven Arches Hotel. Across the hillside cemetery you can see the Dome of the Rock, the city walls and many of the Old City's most recognisable landmarks.",
+      visit:
+        "Early morning is particularly good for photographing the city, with the sun coming from behind the viewpoint. A short stop here also works well at the end of an Old City tour.",
       tipLabel: "My tip",
-      image: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem Old City and the Dome of the Rock seen from the east" },
+      image: {
+        src: "/images/attractions/jerusalem.webp",
+        alt: "Jerusalem Old City and the Dome of the Rock seen from the east",
+      },
     },
     {
       name: "Pater Noster Church",
-      description: "On the upper ridge, the Carmelite compound commemorates Jesus teaching the Lord's Prayer. Its cloisters are lined with ceramic versions of the prayer in languages from around the world, making this one of the hill's most distinctive stops.",
-      visit: "Don't miss the panels displaying the Lord's Prayer in many languages. If you're following the longer route, visit Pater Noster together with the nearby Ascension chapel on the upper ridge.",
+      description:
+        "On the upper ridge, the Carmelite compound commemorates Jesus teaching the Lord's Prayer. Its cloisters are lined with ceramic versions of the prayer in languages from around the world, making this one of the hill's most distinctive stops.",
+      visit:
+        "Don't miss the panels displaying the Lord's Prayer in many languages. If you're following the longer route, visit Pater Noster together with the nearby Ascension chapel on the upper ridge.",
       tipLabel: "Plan around",
-      image: { src: "/images/jerusalem/mount-of-olives/pater-noster.webp", alt: "Stone courtyard and cloister at Pater Noster Church on the Mount of Olives" },
+      image: {
+        src: "/images/jerusalem/mount-of-olives/pater-noster.webp",
+        alt: "Stone courtyard and cloister at Pater Noster Church on the Mount of Olives",
+      },
     },
     {
       name: "Chapel of the Ascension",
-      description: "This small domed chapel in At-Tur is a traditional site of the Ascension of Jesus. It stands within a modest walled enclosure, a short distance from Pater Noster; other Christian denominations also maintain Ascension traditions on the hill.",
-      visit: "Allow a few minutes to visit the chapel and its courtyard before continuing along the ridge.",
+      description:
+        "This small domed chapel in At-Tur is a traditional site of the Ascension of Jesus. It stands within a modest walled enclosure, a short distance from Pater Noster; other Christian denominations also maintain Ascension traditions on the hill.",
+      visit:
+        "Allow a few minutes to visit the chapel and its courtyard before continuing along the ridge.",
       tipLabel: "Good to pair with",
-      image: { src: "/images/jerusalem/mount-of-olives/chapel-of-ascension.webp", alt: "Small stone-domed Chapel of the Ascension in a walled courtyard on the Mount of Olives" },
+      image: {
+        src: "/images/jerusalem/mount-of-olives/chapel-of-ascension.webp",
+        alt: "Small stone-domed Chapel of the Ascension in a walled courtyard on the Mount of Olives",
+      },
     },
     {
       name: "Dominus Flevit",
-      description: "The teardrop-shaped Franciscan church marks the Gospel tradition of Jesus weeping over Jerusalem. Architect Antonio Barluzzi designed its altar window to frame a view of the Old City. The small garden is a peaceful place to enjoy the view.",
-      visit: "I recommend allowing time to visit the interior. The window behind the altar is one of the memorable views on the walk.",
+      description:
+        "The teardrop-shaped Franciscan church marks the Gospel tradition of Jesus weeping over Jerusalem. Architect Antonio Barluzzi designed its altar window to frame a view of the Old City. The small garden is a peaceful place to enjoy the view.",
+      visit:
+        "I recommend allowing time to visit the interior. The window behind the altar is one of the memorable views on the walk.",
       tipLabel: "Worth making time for",
-      image: { src: "/images/jerusalem/mount-of-olives/dominus-flevit.webp", alt: "Teardrop-shaped Dominus Flevit Church amid trees on Jerusalem's Mount of Olives" },
+      image: {
+        src: "/images/jerusalem/mount-of-olives/dominus-flevit.webp",
+        alt: "Teardrop-shaped Dominus Flevit Church amid trees on Jerusalem's Mount of Olives",
+      },
     },
     {
       name: "Church of St Mary Magdalene",
-      description: "The Russian Orthodox church's golden onion domes are among the best-known features of the Mount of Olives skyline. Dedicated to Mary Magdalene, it stands above Gethsemane among terraced gardens and trees.",
-      visit: "The church stands below the main road and has a separate entrance from Dominus Flevit. Use the map to find the right entrance.",
+      description:
+        "The Russian Orthodox church's golden onion domes are among the best-known features of the Mount of Olives skyline. Dedicated to Mary Magdalene, it stands above Gethsemane among terraced gardens and trees.",
+      visit:
+        "The church stands below the main road and has a separate entrance from Dominus Flevit. Use the map to find the right entrance.",
       tipLabel: "When to go",
-      image: { src: "/images/jerusalem/mount-of-olives/mary-magdalene-church.webp", alt: "Russian Orthodox St Mary Magdalene Church with distinctive golden domes and garden" },
+      image: {
+        src: "/images/jerusalem/mount-of-olives/mary-magdalene-church.webp",
+        alt: "Russian Orthodox St Mary Magdalene Church with distinctive golden domes and garden",
+      },
     },
     {
       name: "Garden of Gethsemane & Church of All Nations",
-      description: "At the foot of the hill, Gethsemane is remembered as the place where Jesus prayed before his arrest. The garden's ancient olive trees stand beside the Church of All Nations, also known as the Basilica of the Agony, with its richly decorated façade and atmospheric interior.",
-      visit: "I recommend finishing your Mount of Olives walk at Gethsemane before continuing to Lion's Gate. Allow time inside the basilica as well as at the garden railings; services may take place during the day.",
+      description:
+        "At the foot of the hill, Gethsemane is remembered as the place where Jesus prayed before his arrest. The garden's ancient olive trees stand beside the Church of All Nations, also known as the Basilica of the Agony, with its richly decorated façade and atmospheric interior.",
+      visit:
+        "I recommend finishing your Mount of Olives walk at Gethsemane before continuing to Lion's Gate. Allow time inside the basilica as well as at the garden railings; services may take place during the day.",
       tipLabel: "Onward route",
-      image: { src: "/images/jerusalem/church-of-all-nations.webp", alt: "Church of All Nations beside the Garden of Gethsemane" },
+      image: {
+        src: "/images/jerusalem/church-of-all-nations.webp",
+        alt: "Church of All Nations beside the Garden of Gethsemane",
+      },
     },
     {
       name: "Tomb of the Virgin Mary",
-      description: "Near Gethsemane, a long stone stairway leads down to the traditional Tomb of Mary, an important pilgrimage church in Eastern Christian tradition. Lamps, icons and the underground setting give it a different atmosphere from the basilica nearby.",
-      visit: "The tomb is a short walk from Gethsemane, but reaching it involves a long staircase. If stairs are difficult for you, visit Gethsemane and the nearby basilica instead.",
+      description:
+        "Near Gethsemane, a long stone stairway leads down to the traditional Tomb of Mary, an important pilgrimage church in Eastern Christian tradition. Lamps, icons and the underground setting give it a different atmosphere from the basilica nearby.",
+      visit:
+        "The tomb is a short walk from Gethsemane, but reaching it involves a long staircase. If stairs are difficult for you, visit Gethsemane and the nearby basilica instead.",
       tipLabel: "Nearby",
-      image: { src: "/images/jerusalem/mount-of-olives/tomb-of-virgin-mary.webp", alt: "Ancient stone staircase leading down to the Tomb of the Virgin Mary near Gethsemane" },
+      image: {
+        src: "/images/jerusalem/mount-of-olives/tomb-of-virgin-mary.webp",
+        alt: "Ancient stone staircase leading down to the Tomb of the Virgin Mary near Gethsemane",
+      },
     },
     {
       name: "Mount of Olives Jewish cemetery",
-      description: "The Jewish cemetery covers much of the western hillside and is one of Jerusalem's most significant historic burial grounds. It is part of Jewish religious tradition and continues to serve families and mourners today.",
-      visit: "The panoramic terrace offers a clear view over the cemetery. If you want to visit particular graves or learn about its history, consult the Mount of Olives cemetery information before your trip.",
+      description:
+        "The Jewish cemetery covers much of the western hillside and is one of Jerusalem's most significant historic burial grounds. It is part of Jewish religious tradition and continues to serve families and mourners today.",
+      visit:
+        "The panoramic terrace offers a clear view over the cemetery. If you want to visit particular graves or learn about its history, consult the Mount of Olives cemetery information before your trip.",
       tipLabel: "For a closer look",
-      image: { src: "/images/jerusalem/mount-of-olives/jewish-cemetery.webp", alt: "Dense rows of historic Jewish graves on the Mount of Olives with Jerusalem Old City across the valley" },
+      image: {
+        src: "/images/jerusalem/mount-of-olives/jewish-cemetery.webp",
+        alt: "Dense rows of historic Jewish graves on the Mount of Olives with Jerusalem Old City across the valley",
+      },
     },
   ],
-  transportIntro: "You can reach the upper viewpoint directly by car or bus. For an Old City visit, the most useful distinction is between transport to the upper ridge and transport to Gethsemane at its foot.",
+  transportIntro:
+    "You can reach the upper viewpoint directly by car or bus. For an Old City visit, the most useful distinction is between transport to the upper ridge and transport to Gethsemane at its foot.",
   transport: [
     {
       title: "By bus to the viewpoint",
       text: "Bus 84 runs from Ammunition Hill, beside the light-rail station, toward Ma'ale HaZeitim near the Seven Arches Hotel. From the Sultan Suleiman Street terminal near Damascus Gate, routes 255 and 275 serve the Church of the Ascension/Rabia Al-Adawiya area, a short walk from the upper ridge. If your main destination is Gethsemane or the cemetery information area, routes 83, 83A and 51 serve nearby Jericho Road stops. Check the exact stop and service day before leaving.",
       links: [
-        { label: "Mount of Olives bus directions (Moovit)", url: "https://moovitapp.com/index/en/public_transit-Monte_de_los_Olivos-Israel-site_61262338-1" },
-        { label: "Mount of Olives access information", url: "https://cityofdavid.org.il/en/sites/mount-of-olives-eng/" },
+        {
+          label: "Mount of Olives bus directions (Moovit)",
+          url: "https://moovitapp.com/index/en/public_transit-Monte_de_los_Olivos-Israel-site_61262338-1",
+        },
+        {
+          label: "Mount of Olives access information",
+          url: "https://cityofdavid.org.il/en/sites/mount-of-olives-eng/",
+        },
       ],
     },
     {
@@ -143,16 +233,32 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     },
   ],
   practical: [
-    { title: "Choose your church day", text: "Pater Noster and St Mary Magdalene have fewer public visiting sessions than the other major stops. If either is important to you, plan around its opening day first and build the rest of the route around it." },
-    { title: "Walking comfort", text: "Allow for the slope between the ridge and Gethsemane. The lookout can be enjoyed separately by anyone who would rather travel between upper and lower stops by vehicle." },
-    { title: "Dress and services", text: "Modest clothing is appropriate for the churches. Allow extra time for church visits, as religious services may limit access." },
-    { title: "The view in different light", text: "Morning light illuminates the Old City from the east. Late afternoon can be atmospheric too, especially if the viewpoint is your final stop after a city tour." },
+    {
+      title: "Choose your church day",
+      text: "Pater Noster and St Mary Magdalene have fewer public visiting sessions than the other major stops. If either is important to you, plan around its opening day first and build the rest of the route around it.",
+    },
+    {
+      title: "Walking comfort",
+      text: "Allow for the slope between the ridge and Gethsemane. The lookout can be enjoyed separately by anyone who would rather travel between upper and lower stops by vehicle.",
+    },
+    {
+      title: "Dress and services",
+      text: "Modest clothing is appropriate for the churches. Allow extra time for church visits, as religious services may limit access.",
+    },
+    {
+      title: "The view in different light",
+      text: "Morning light illuminates the Old City from the east. Late afternoon can be atmospheric too, especially if the viewpoint is your final stop after a city tour.",
+    },
   ],
   historyTitle: "The Mount of Olives in Christian and Jewish tradition",
   history: [
     "The Mount of Olives is closely linked with the final days of Jesus' ministry. Christian pilgrims come to remember his approach to Jerusalem on Palm Sunday, his lament over the city at Dominus Flevit and his prayer in the Garden of Gethsemane. Pater Noster and the Ascension chapels honour other moments in the Gospel tradition.",
     "The ridge also has a central place in Jewish history and religious tradition. For centuries, people have chosen burial on its slopes overlooking Jerusalem, giving the hillside cemetery its distinctive appearance today.",
   ],
-  hotelNote: "If you're staying several nights, a hotel near Jaffa Gate, Mamilla or the centre can make Old City visits easier; a Mount of Olives hotel is a different choice, often made for the setting and the views.",
-  relatedHotel: { text: "Jerusalem accommodation guide", to: "/travel-blog/where-to-stay-in-jerusalem/" },
+  hotelNote:
+    "If you're staying several nights, a hotel near Jaffa Gate, Mamilla or the centre can make Old City visits easier; a Mount of Olives hotel is a different choice, often made for the setting and the views.",
+  relatedHotel: {
+    text: "Jerusalem accommodation guide",
+    to: "/travel-blog/where-to-stay-in-jerusalem/",
+  },
 };

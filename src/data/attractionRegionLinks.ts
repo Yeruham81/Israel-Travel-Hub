@@ -13,7 +13,9 @@ export const regionalAttractionLinks = {
   negev: { hash: "negev-eilat", label: "Negev & Eilat" },
 } as const satisfies Record<string, AttractionRegionLink>;
 
-export const attractionRegionsForTours: Partial<Record<TourCategoryId, readonly AttractionRegionLink[]>> = {
+export const attractionRegionsForTours: Partial<
+  Record<TourCategoryId, readonly AttractionRegionLink[]>
+> = {
   jerusalem: [regionalAttractionLinks.jerusalem],
   "tel-aviv-jaffa": [regionalAttractionLinks.telAviv],
   "northern-coast": [regionalAttractionLinks.coast],
@@ -23,4 +25,3 @@ export const attractionRegionsForTours: Partial<Record<TourCategoryId, readonly 
   "food-markets": [regionalAttractionLinks.jerusalem, regionalAttractionLinks.telAviv],
   // Bethlehem / Jericho has no matching Attractions region; avoid a misleading link.
 };
-

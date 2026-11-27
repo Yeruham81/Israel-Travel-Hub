@@ -1,7 +1,8 @@
 /** Via Dolorosa visitor facts based on the Franciscan Terra Sancta Museum and Christian Information Center, November 2026. */
 export const viaDolorosaSite = {
   title: "Via Dolorosa, Jerusalem: 14 Stations of the Cross & Walking Guide",
-  description: "Walk Jerusalem's Via Dolorosa: all 14 Stations of the Cross, route map, starting point, Friday procession and practical visiting tips.",
+  description:
+    "Walk Jerusalem's Via Dolorosa: all 14 Stations of the Cross, route map, starting point, Friday procession and practical visiting tips.",
   updatedAt: "2026-11-23",
   region: "Jerusalem",
   hero: {
@@ -9,9 +10,11 @@ export const viaDolorosaSite = {
     mobileSrc: "/images/attractions/via-dolorosa-mobile.webp",
     alt: "Historic stone-paved Via Dolorosa in Jerusalem's Old City",
   },
-  intro: "The Via Dolorosa winds through Jerusalem's Muslim and Christian Quarters, following the traditional Christian Stations of the Cross from the area near Lion's Gate to the Church of the Holy Sepulchre. Nine stations are marked in the streets, while the last five are inside the church. Use my station-by-station guide and map to choose a starting gate, follow the turns and plan the time you need.",
+  intro:
+    "The Via Dolorosa winds through Jerusalem's Muslim and Christian Quarters, following the traditional Christian Stations of the Cross from the area near Lion's Gate to the Church of the Holy Sepulchre. Nine stations are marked in the streets, while the last five are inside the church. Use my station-by-station guide and map to choose a starting gate, follow the turns and plan the time you need.",
   official: {
-    stations: "https://www.terrasanctamuseum.org/en/discover-more/the-fourteen-stations-of-the-sorrowful-way/",
+    stations:
+      "https://www.terrasanctamuseum.org/en/discover-more/the-fourteen-stations-of-the-sorrowful-way/",
     walk: "https://www.enjoyjerusalem.org/explore/paths-and-trails/stops/dolorosa-1-9",
     churchHours: "https://www.cicts.org/our-services/",
     procession: "https://www.cicts.org/catholic-masses/",
@@ -24,19 +27,89 @@ export const viaDolorosaSite = {
   },
   /** The first nine are traditional street stations; the final five are inside the Holy Sepulchre. */
   stations: [
-    { n: 1, name: "Jesus is condemned to death", place: "Al-Umariyya School courtyard (traditional starting area)", note: "Access to the school courtyard depends on arrangements; begin at the street outside." },
-    { n: 2, name: "Jesus takes up the cross", place: "Franciscan Chapel of the Condemnation & Church of the Flagellation", note: "Opposite the first station; both are within the Franciscan compound." },
-    { n: 3, name: "Jesus falls for the first time", place: "Via Dolorosa / Al-Wad (El-Wad) junction", note: "Look for the Polish Catholic chapel near the turn south." },
-    { n: 4, name: "Jesus meets his mother Mary", place: "Armenian Catholic Church of Our Lady of Sorrows", note: "A few steps south of Station III; marked by a relief over the doorway." },
-    { n: 5, name: "Simon of Cyrene helps carry the cross", place: "Al-Wad street corner and westward turn", note: "Look for the Franciscan oratory at the bend." },
-    { n: 6, name: "Veronica wipes Jesus' face", place: "Westward Via Dolorosa market lane", note: "Traditional site near a wall marker and the chapel associated with Veronica." },
-    { n: 7, name: "Jesus falls for the second time", place: "Via Dolorosa / Khan al-Zeit market crossing", note: "Watch for the chapel at the busy junction." },
-    { n: 8, name: "Jesus addresses the women of Jerusalem", place: "Al-Khanqa (Khanqa as-Salahiyya) lane", note: "The station is marked on a wall near the Greek monastery." },
-    { n: 9, name: "Jesus falls for the third time", place: "Coptic Orthodox monastery approach", note: "Take a short detour toward the Coptic monastery and Deir al-Sultan above the church." },
-    { n: 10, name: "Jesus is stripped of his garments", place: "Church of the Holy Sepulchre — Calvary area", note: "The last five stations are commemorated inside the church." },
-    { n: 11, name: "Jesus is nailed to the cross", place: "Holy Sepulchre — Calvary", note: "Within the elevated Calvary chapels." },
-    { n: 12, name: "Jesus dies on the cross", place: "Holy Sepulchre — Calvary", note: "The main Calvary altar is a major prayer site." },
-    { n: 13, name: "Jesus is taken down from the cross", place: "Holy Sepulchre — Latin altar of Our Lady of Sorrows, on Calvary", note: "Station XIII is at the altar between the crucifixion chapels. The Stone of Anointing, downstairs, commemorates preparing Jesus' body for burial." },
-    { n: 14, name: "Jesus is laid in the tomb", place: "Holy Sepulchre — Edicule", note: "Expect a queue to enter the tomb shrine." },
+    {
+      n: 1,
+      name: "Jesus is condemned to death",
+      place: "Al-Umariyya School courtyard (traditional starting area)",
+      note: "Access to the school courtyard depends on arrangements; begin at the street outside.",
+    },
+    {
+      n: 2,
+      name: "Jesus takes up the cross",
+      place: "Franciscan Chapel of the Condemnation & Church of the Flagellation",
+      note: "Opposite the first station; both are within the Franciscan compound.",
+    },
+    {
+      n: 3,
+      name: "Jesus falls for the first time",
+      place: "Via Dolorosa / Al-Wad (El-Wad) junction",
+      note: "Look for the Polish Catholic chapel near the turn south.",
+    },
+    {
+      n: 4,
+      name: "Jesus meets his mother Mary",
+      place: "Armenian Catholic Church of Our Lady of Sorrows",
+      note: "A few steps south of Station III; marked by a relief over the doorway.",
+    },
+    {
+      n: 5,
+      name: "Simon of Cyrene helps carry the cross",
+      place: "Al-Wad street corner and westward turn",
+      note: "Look for the Franciscan oratory at the bend.",
+    },
+    {
+      n: 6,
+      name: "Veronica wipes Jesus' face",
+      place: "Westward Via Dolorosa market lane",
+      note: "Traditional site near a wall marker and the chapel associated with Veronica.",
+    },
+    {
+      n: 7,
+      name: "Jesus falls for the second time",
+      place: "Via Dolorosa / Khan al-Zeit market crossing",
+      note: "Watch for the chapel at the busy junction.",
+    },
+    {
+      n: 8,
+      name: "Jesus addresses the women of Jerusalem",
+      place: "Al-Khanqa (Khanqa as-Salahiyya) lane",
+      note: "The station is marked on a wall near the Greek monastery.",
+    },
+    {
+      n: 9,
+      name: "Jesus falls for the third time",
+      place: "Coptic Orthodox monastery approach",
+      note: "Take a short detour toward the Coptic monastery and Deir al-Sultan above the church.",
+    },
+    {
+      n: 10,
+      name: "Jesus is stripped of his garments",
+      place: "Church of the Holy Sepulchre — Calvary area",
+      note: "The last five stations are commemorated inside the church.",
+    },
+    {
+      n: 11,
+      name: "Jesus is nailed to the cross",
+      place: "Holy Sepulchre — Calvary",
+      note: "Within the elevated Calvary chapels.",
+    },
+    {
+      n: 12,
+      name: "Jesus dies on the cross",
+      place: "Holy Sepulchre — Calvary",
+      note: "The main Calvary altar is a major prayer site.",
+    },
+    {
+      n: 13,
+      name: "Jesus is taken down from the cross",
+      place: "Holy Sepulchre — Latin altar of Our Lady of Sorrows, on Calvary",
+      note: "Station XIII is at the altar between the crucifixion chapels. The Stone of Anointing, downstairs, commemorates preparing Jesus' body for burial.",
+    },
+    {
+      n: 14,
+      name: "Jesus is laid in the tomb",
+      place: "Holy Sepulchre — Edicule",
+      note: "Expect a queue to enter the tomb shrine.",
+    },
   ],
 } as const;
