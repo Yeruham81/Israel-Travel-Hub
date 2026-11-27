@@ -58,6 +58,33 @@ jobs:
           // normalized output, rather than stripping spaces from literals.
           // TypeScript compiler diagnostics and production parity remain independent gates.
           const emit=(file,source)=>ts.transpileModule(source,{fileName:file,reportDiagnostics:true,compilerOptions:{target:ts.ScriptTarget.ESNext,module:ts.ModuleKind.ESNext,jsx:ts.JsxEmit.Preserve,removeComments:true}}); 
+          // Prettier's default objectWrap preserves existing line breaks in
+          // object literals. Collapse them for the textual comparison only.
+          const canonical=async code=>await prettier.format(code,{parser:'typescript',semi:true,singleQuote:false,objectWrap:'collapse'});
+          // Compare parsed emitted ASTs as an additional independent guard.
+          // Keep literal values, operators, optional-chain semantics and order.
+          const fingerprint=source=>{
+            const parsed=ts.createSourceFile('emitted.ts',source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TS);
+            if(parsed.parseDiagnostics.length)throw Error('Emitted AST parse diagnostics');
+            const visit=node=>{
+              const children=[];
+              ts.forEachChild(node,child=>{children.push(visit(child));});
+              const literal=ts.isStringLiteral(node)?node.text:undefined;
+              const leaf=children.length===0?(literal??node.getText(parsed)):undefined;
+              return [node.kind,node.flags&ts.NodeFlags.OptionalChain,typeof node.operator==='number'?node.operator:null,leaf,children];
+            };
+            return JSON.stringify(visit(parsed));
+          };
+          if(fingerprint('const x = {a: "hello", b: 2};')!==fingerprint("const x = {\n a: 'hello',\n b: 2,\n};"))throw Error('AST whitespace self-test failed');
+          for(const [left,right] of [
+            ['const x="a";','const x="b";'],
+            ['const x="/a/";','const x="/b/";'],
+            ['const x=2;','const x=3;'],
+            ['const x=-n;','const x=+n;'],
+            ['const x=a+b;','const x=a-b;'],
+            ['const x=a?.b;','const x=a.b;'],
+            ['const x={a:1,b:2};','const x={b:2,a:1};']
+          ])if(fingerprint(left)===fingerprint(right))throw Error('AST change detection self-test failed: '+left);
           for(const file of files){
             const before=fs.readFileSync(file,'utf8');
             const info=await prettier.getFileInfo(file,{ignorePath:'.prettierignore'});
@@ -70,8 +97,21 @@ jobs:
             if(a.diagnostics?.some(x=>x.category===ts.DiagnosticCategory.Error)||b.diagnostics?.some(x=>x.category===ts.DiagnosticCategory.Error))throw Error('Transpile diagnostics '+file);
             // Canonicalize emitted JS with the same formatter; quote style and
             // optional semicolons are formatting, not changed string values.
-            const canonical=async code=>await prettier.format(code,{parser:'typescript',semi:true,singleQuote:false});
-            if(await canonical(a.outputText)!==await canonical(b.outputText))throw Error('Emitted code changed '+file);
+            const beforeCanonical=await canonical(a.outputText),afterCanonical=await canonical(b.outputText);
+            const beforeAst=fingerprint(a.outputText),afterAst=fingerprint(b.outputText);
+            if(beforeCanonical!==afterCanonical||beforeAst!==afterAst){
+              const diagnostic=path.join(out,'emitted-diff');
+              fs.mkdirSync(diagnostic,{recursive:true});
+              const name=path.basename(file);
+              fs.writeFileSync(path.join(diagnostic,name+'.before.js'),beforeCanonical);
+              fs.writeFileSync(path.join(diagnostic,name+'.after.js'),afterCanonical);
+              fs.writeFileSync(path.join(diagnostic,name+'.before.ast.json'),beforeAst);
+              fs.writeFileSync(path.join(diagnostic,name+'.after.ast.json'),afterAst);
+              if(beforeAst!==afterAst)throw Error('Emitted AST changed '+file);
+              // Only accept textual differences when the independently
+              // parsed AST is identical, including literal values.
+              console.log('EMITTED TEXT DIFFERENCE, IDENTICAL AST: '+file);
+            }
             included.push(file);
             if(before!==after){fs.writeFileSync(file,after);changed.push(file);}
           }
