@@ -7,6 +7,7 @@ import { attractionHubCards, attractionHubRegions } from "@/data/attractionsHub"
 import { attractionSidebarGuideLabels, attractionSidebarRegions } from "@/data/nav";
 import { attractionPath } from "@/data/attractionGuideTypes";
 import { affiliateConfig } from "@/data/registry";
+import { christianAreas } from "@/data/christianToursGuide";
 
 const page=readFileSync("src/components/ViaDolorosaAttractionPage.tsx","utf8");
 const map=readFileSync("src/components/ViaDolorosaRouteMap.tsx","utf8");
@@ -103,8 +104,11 @@ describe("Via Dolorosa standalone Jerusalem attraction",()=>{
     expect(content.nearby).toHaveLength(6);
     const hub=readFileSync("src/routes/attractions.index.tsx","utf8");
     expect(hub).toContain('className="mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-4 lg:grid-cols-3"');
-    const christian=readFileSync("src/data/christianToursGuide.ts","utf8");
-    expect(christian).toContain('{name:"Via Dolorosa",note:"The traditional Stations of the Cross",to:"/attractions/via-dolorosa/"}');
+    expect(christianAreas.find(area=>area.id==="jerusalem")?.sites).toContainEqual({
+      name:"Via Dolorosa",
+      note:"The traditional Stations of the Cross",
+      to:"/attractions/via-dolorosa/",
+    });
     for(const path of [
       "/attractions/old-city-jerusalem/",
       "/attractions/mount-of-olives/",

@@ -9,6 +9,7 @@ import {
 import { travelGuides } from "./travelGuides";
 import { migrationPhotos } from "./guideMigrationPhotos";
 import { publicSources, affiliateConfig } from "./registry";
+import mahaneYehudaStreetPhoto from "@/assets/jerusalem/mahane-yehuda.webp";
 
 const route=()=>readRouteSource("src/routes/travel-blog.what-to-eat-in-israel.tsx");
 const ui=()=>readFileSync("src/components/IsraelFoodGuide.tsx","utf8");
@@ -91,7 +92,7 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
     expect(content).toMatch(sourceFragment('data-testid="israel-food-tour-cards"'));
     const marketImage=foodTours.find(t=>t.key==="mahane-yehuda")?.image;
     expect(marketImage).toBeTruthy();
-    expect(readFileSync("src/data/israelFoodExplorer.ts","utf8")).toMatch(sourceFragment("image:mahaneYehudaStreetPhoto"));
+    expect(marketImage).toBe(mahaneYehudaStreetPhoto);
     expect(foodMarkets.find(m=>m.id==="jerusalem")?.image).toBe("/images/food-guide/mahane-yehuda-food-stalls.webp");
     expect(foodTours.find(t=>t.key==="levinsky")?.image).toBe("/images/food-guide/levinsky-spice-shop.webp");
     expect(content).toMatch(sourceFragment("commons.wikimedia.org/wiki/File:PikiWiki_Israel_9177_Levinsky_market_in_Tel_Aviv.JPG"));
