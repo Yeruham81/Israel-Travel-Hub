@@ -59,18 +59,18 @@
     {
       "path": "/",
       "group": 1,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "6f6a7a2636921d3e343dde259340805b0c6e63f04cced0717281d000fdcbc935",
+      "changes": 7,
+      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification."
     },
     {
       "path": "/about-me/",
       "group": 1,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "d697b6d0b923a557ae7c7a6c84d841114792044cae7fafb9a99bd5d09d584799",
+      "changes": 14,
+      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification."
     },
     {
       "path": "/accommodation/",
@@ -547,10 +547,10 @@
     {
       "path": "/private-driver-in-israel/",
       "group": 1,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "5aef686b20f9f05a322417791b59805f26cd1f569ef8765a5fc142377db80e8a",
+      "changes": 14,
+      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification."
     },
     {
       "path": "/shore-excursions/",

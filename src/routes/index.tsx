@@ -46,7 +46,7 @@ export const accommodationDestinationCards: Card[] = [
 export const services: Service[] = [
   {
     id: "transfers", eyebrow: "Airport Transfers", tagline: "Plan a Smooth Arrival in Israel", title: "Airport Transfers",
-    text: "Start your visit to Israel with a smooth, comfortable arrival. Arrange a private transfer from Ben Gurion Airport to Jerusalem, Tel Aviv, Haifa, or any other destination across the country.",
+    text: "Arrange a private transfer from Ben Gurion Airport to Jerusalem, Tel Aviv, Haifa or any other destination in Israel.",
     feature: { src: benGurionApronPhoto, mobile: benGurionApronPhotoMobile, alt: "Parked aircraft at Ben Gurion Airport with the terminal sign reading BEN GURION AIRPORT" },
     cards: [
       { label: "To Jerusalem", to: "/airport-transfers/jerusalem/", img: { src: "/images/home/transfer-jerusalem-tower-of-david.webp", mobile: "/images/home/transfer-jerusalem-tower-of-david-mobile.webp", alt: "Tower of David citadel beside Jerusalem’s Old City" } },
@@ -58,7 +58,7 @@ export const services: Service[] = [
   },
   {
     id: "tours", eyebrow: "Tours & Day Trips", tagline: "See the Best of Israel in a Day", title: "Tours & Day Trips",
-    text: "Explore Israel’s top destinations with guided tours and day trips, and find the experiences that best match your interests and travel style.",
+    text: "Find guided tours and day trips to Israel’s historic cities, religious sites, coast and desert.",
     feature: { src: guidedTour, mobile: guidedTourMobile, alt: "Illustrative small group on a guided walk through old stone streets" },
     cards: [
       { label: "Jerusalem", to: tourCategoryPaths.jerusalem, img: { src: "/images/attractions/jerusalem.webp", mobile: "/images/attractions/jerusalem-mobile.webp", alt: "Jerusalem’s Old City and the Dome of the Rock" } },
@@ -72,8 +72,8 @@ export const services: Service[] = [
   },
   {
     id: "shore-excursions", eyebrow: "Shore Excursions", tagline: "Make the Most of Your Time Ashore", title: "Shore Excursions",
-    text: "Make the most of your time ashore with excursions from Israel’s cruise ports, from historic landmarks and cultural highlights to unforgettable day trips.",
-    feature: { src: cruisePort, alt: "Illustrative cruise passengers walking along a harbour quay toward a waiting minivan (not a specific ship or operator)" },
+    text: "Find excursions from Ashdod and Haifa, and choose the sights you want to visit during your time in port.",
+    feature: { src: cruisePort, alt: "Illustration of cruise passengers walking along a quay toward a minivan" },
     cards: [
       { label: "From Ashdod Port", text: "Explore Jerusalem, Tel Aviv–Jaffa, Masada or the Dead Sea from Ashdod.", cta: "Explore Ashdod excursions", to: "/shore-excursions/ashdod/", img: { src: ashdodPort, alt: "Cruise ships alongside the quays at Ashdod Port" } },
       { label: "From Haifa Port", text: "Discover Akko, Nazareth and the Galilee, or visit Jerusalem from Haifa.", cta: "Explore Haifa excursions", to: "/shore-excursions/haifa/", img: { src: haifaPort, alt: "Cruise ship at Haifa Port with the city skyline at dusk" } },
@@ -88,7 +88,7 @@ export const services: Service[] = [
   },
   {
     id: "attractions", eyebrow: "Attractions & Experiences", tagline: "Discover Israel’s Must-See Places", title: "Attractions & Experiences",
-    text: "Discover Israel’s most memorable attractions, from ancient landmarks and historic cities to breathtaking natural wonders.",
+    text: "Explore ancient sites, historic cities, beaches and natural wonders across Israel.",
     feature: { src: timnaParkFeature, alt: "Sandstone rock formations and desert landscape at Timna Park near Eilat" },
     cards: [
       { label: "Rosh Hanikra", to: "/attractions/rosh-hanikra/", img: { src: roshHanikraPhoto, alt: "Sea grottoes and white limestone cliffs at Rosh Hanikra" } },
@@ -267,7 +267,7 @@ function Home() {
 
       <div className="home-offscreen home-offscreen-tripadvisor"><TripadvisorReviewsSection /></div>
       <section id="guides" aria-labelledby="guides-h" className="home-offscreen mx-auto mt-12 max-w-6xl scroll-mt-6 px-4">
-        <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Plan your trip with practical local advice on transportation, travel essentials and exploring Israel with confidence.</p></div>
+        <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">My guides cover transport, sightseeing, accommodation and everyday travel essentials.</p></div>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="home-guide-grid">
           {[...homeGuideCards.first, ...homeGuideCards.second].map((guide) => (
             <GuideCard key={guide.id} guide={guide} headingLevel={3} showReadMoreArrow={false} compactHomeLayout />

@@ -59,7 +59,7 @@ export function HomeHero() {
           <p className="text-xs font-semibold uppercase tracking-[0.17em] opacity-95">Your journey starts here</p>
           <h1 id="home-title" className="mt-4 max-w-2xl text-4xl leading-[1.08] md:text-5xl lg:max-w-none lg:whitespace-nowrap lg:text-[clamp(3rem,3.65vw,3.25rem)]">Discover Israel, Travel Smarter</h1>
           <p className="mt-3 max-w-2xl text-lg font-medium leading-relaxed opacity-100 md:text-xl">
-            From airport arrivals and getting around to memorable day trips, places to stay and must-see sights, find practical local advice to make the most of your time in Israel.
+            Find local advice on airport transfers, getting around Israel, day trips, places to stay and sights to visit.
           </p>
         </div>
       </HeroCarousel>

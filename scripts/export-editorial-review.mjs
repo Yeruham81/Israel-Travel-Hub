@@ -58,4 +58,4 @@ await writeFile(path.join(out,"shared-static.txt"),shared);
 await writeFile(path.join(out,"manifest.json"),JSON.stringify({commit:process.env.GITHUB_SHA||null,scope:"Prerendered HTML; client-only states require separate review.",pages:manifest,sharedSha256:hash(shared)},null,2)+"\n");
 for(const group of tracker.groups){const pages=manifest.filter(p=>p.group===group.id);console.log("GROUP "+group.id+": "+pages.length+" pages, "+pages.reduce((n,p)=>n+p.words,0)+" words");}
 console.log("EXTRACTED "+manifest.length+" canonical pages");
-if(process.env.EDITORIAL_LOG_GROUP){const id=Number(process.env.EDITORIAL_LOG_GROUP);for(const item of manifest.filter(p=>p.group===id))console.log("\n===== PAGE "+item.path+" | "+item.sha256+" =====\n"+await readFile(path.join(out,item.file),"utf8"));}
+if(process.env.EDITORIAL_LOG_GROUP){const ids=process.env.EDITORIAL_LOG_GROUP.split(',').map(Number);for(const item of manifest.filter(p=>ids.includes(p.group)))console.log("\n===== PAGE "+item.path+" | "+item.sha256+" =====\n"+await readFile(path.join(out,item.file),"utf8"));}

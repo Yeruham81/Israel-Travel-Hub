@@ -5,12 +5,13 @@ on:
     paths:
       - 'scripts/export-editorial-review.mjs'
       - '.github/workflows/editorial-corpus.yml'
+      - 'docs/editorial-review/tracker.json'
   workflow_dispatch:
     inputs:
       log_group:
         description: "Group number to print to job log"
         required: false
-        default: "1"
+        default: "2"
 permissions:
   contents: read
 jobs:
@@ -35,11 +36,13 @@ jobs:
           bun-version: "1.4.4"
       - name: Install locked dependencies
         run: bash scripts/install-ci-dependencies.sh
+      - name: Verify first group regression tests
+        run: bun run test src/test/home-hero-copy.test.tsx src/test/homepage-structure.test.tsx src/test/about-page.test.tsx src/test/private-driver.test.tsx src/components/HomeHero.test.ts
       - name: Build static HTML
         run: bash scripts/build-validated-static.sh
       - name: Verify and extract every canonical page
         env:
-          EDITORIAL_LOG_GROUP: ${{ inputs.log_group || '1' }}
+          EDITORIAL_LOG_GROUP: ${{ inputs.log_group || '1,2' }}
         run: node scripts/export-editorial-review.mjs
       - uses: actions/upload-artifact@v4
         with:

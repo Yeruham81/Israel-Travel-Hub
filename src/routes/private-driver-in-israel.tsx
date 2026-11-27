@@ -44,7 +44,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
       crumbs={[{ name: "Home", to: "/" }, { name: "Private driver", to: "/private-driver-in-israel/" }]}
       eyebrow="Travel at your own pace"
       title="Private driver in Israel"
-      intro="From hotel-to-hotel transfers to a full day exploring Israel, I'll help arrange a private driver around your route and group. Tell me what you have in mind, and I'll prepare a personal quote."
+      intro="Arrange a private driver for a hotel transfer, a sightseeing day or a longer trip across Israel. Tell me your plans and I'll prepare a personal quote."
       checkedAt={PRIVATE_DRIVER_CHECK_DATE}
       image={<GuideHeroMedia src={privateDriverHero.src} alt={privateDriverHero.alt} />}
       imageLayout="guide"
@@ -55,16 +55,16 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
       <section id="service-overview" aria-labelledby="service-overview-h" className="mt-9 scroll-mt-24" data-testid="driver-service-overview">
         <h2 id="service-overview-h" className="text-2xl font-semibold sm:text-3xl">Private driver service in Israel: travel on your own terms</h2>
         <div className="mt-3 max-w-4xl space-y-4 text-[15px] leading-7 sm:text-base">
-          <p>Explore Israel with a private car and driver, at your own pace and according to your own schedule. Choose your pickup location, sightseeing stops and final destination. I arrange direct hotel transfers, full days of sightseeing and longer trips with stops along the way, and I'll help plan the timing.</p>
+          <p>Choose your pickup location, sightseeing stops and final destination. I'll help plan the timing so you can travel at your own pace.</p>
           <h3 className="pt-1 text-lg font-semibold">Who is a private driver suitable for?</h3>
-          <p>My private driver service is available for couples, families, groups of friends, business travellers and anyone moving between hotels with luggage. If you prefer a slower pace or need help with mobility, tell me what you need so I can check the vehicle and arrangements in advance.</p>
-          <p><strong>What is included?</strong> Your personal quote will include the route, vehicle, pickup details, agreed waiting time and total price. I provide private transportation. Entrance tickets, licensed tour guiding and other extras should be arranged separately unless specifically confirmed. Share your dates, destinations, number of passengers and any special requests, and I'll reply with the options and relevant booking terms.</p>
+          <p>I arrange transport for solo travellers, couples, families, groups of friends and business travellers. If you have mobility needs or extra luggage, let me know so I can check which vehicles are suitable.</p>
+          <p><strong>What is included?</strong> Your quote covers private transport, with the route, vehicle, pickup details, agreed waiting time and total price. Entrance tickets, licensed guides and other extras are arranged separately unless confirmed in the quote.</p>
         </div>
       </section>
 
       <section id="journeys" aria-labelledby="journeys-h" className="mt-8 scroll-mt-24">
         <h2 id="journeys-h" className="text-2xl font-semibold">Choose the journey that suits you</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a direct transfer, a sightseeing day or a journey with several stops. I'll help plan the details.</p>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Compare three ways to travel with a private driver.</p>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {privateDriverJourneys.map(journey => <article key={journey.id} className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/40" data-testid="driver-journey-card">
             <img src={journey.photo.src} alt={journey.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[16/9] h-auto w-full object-cover" />
@@ -91,7 +91,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
         </div>
       </section>
 
-      {portFields && <p className="mt-6 rounded-xl border bg-secondary/40 px-4 py-3 text-sm leading-relaxed">Travelling from {portFields.pickup}? Please add your exact pickup point, destination and any ship or flight details in the form so I can check the arrangements for your journey.</p>}
+      {portFields && <p className="mt-6 rounded-xl border bg-secondary/40 px-4 py-3 text-sm leading-relaxed">Travelling from {portFields.pickup}? Include your pickup point, destination and ship or flight details in the form below.</p>}
       {tourFields && <p className="mt-6 rounded-xl border bg-secondary/40 px-4 py-3 text-sm leading-relaxed">Planning a private day out? Please include the itinerary you'd like, your pickup point and any changes you have in mind in the form below.</p>}
       <PrivateDriverQuoteForm serviceId={serviceId} onServiceChange={setServiceId} />
 

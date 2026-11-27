@@ -15,15 +15,15 @@ export const Route = createFileRoute("/about-me")({
 });
 
 const personalApproach = [
-  { icon: HeartHandshake, title: "Personal attention", detail: "I take the time to understand your interests, who you're traveling with and the pace that suits you. Your plans shape the journey." },
-  { icon: Clock3, title: "Professional service", detail: "Punctuality, careful driving and clear communication are central to the way I work. I pay attention to the details that help your day run smoothly." },
-  { icon: MapPinned, title: "Local knowledge", detail: "Years of traveling across Israel help me suggest practical routes, combine destinations naturally and make thoughtful use of your time." },
+  { icon: HeartHandshake, title: "Personal attention", detail: "I listen to your interests and plan around your travel companions and preferred pace." },
+  { icon: Clock3, title: "Professional service", detail: "I value punctuality, careful driving and clear communication throughout your trip." },
+  { icon: MapPinned, title: "Local knowledge", detail: "I know the roads and distances between destinations, and can help you choose stops that fit your schedule." },
 ];
 
 const services = [
-  { photo: airportTransferPhotos["other"]!, title: "Airport transfers", detail: "A personal welcome to Israel, with pickup and drop-off arrangements planned around your flight, luggage and destination.", to: "/airport-transfers/" as const },
-  { photo: toursHubHero, title: "Tours & day-trip ideas", detail: "Explore places you'd like to visit, from Jerusalem and the Dead Sea to the Galilee, and find ideas for your time in Israel.", to: "/tours/" as const },
-  { photo: privateDriverHero, title: "My private driver service", detail: "Tell me the places you have in mind, and I can help plan a flexible private journey around your interests and preferred pace.", to: "/private-driver-in-israel/" as const },
+  { photo: airportTransferPhotos["other"]!, title: "Airport transfers", detail: "I arrange airport pickup and transport to your destination, taking your flight and luggage into account.", to: "/airport-transfers/" as const },
+  { photo: toursHubHero, title: "Tours & day-trip ideas", detail: "Find day-trip ideas for Jerusalem, the Dead Sea, the Galilee and other destinations.", to: "/tours/" as const },
+  { photo: privateDriverHero, title: "My private driver service", detail: "Choose the places you want to visit and enjoy a private journey at your own pace.", to: "/private-driver-in-israel/" as const },
 ];
 
 function MosheAbout() {
@@ -33,8 +33,8 @@ function MosheAbout() {
         <div>
           <p className="eyebrow">Your local driver in Israel</p>
           <h1 className="guide-page-title mt-3">Let me help you discover Israel</h1>
-          <p className="mt-5 max-w-3xl text-lg leading-relaxed sm:text-xl">I'm <strong className="font-semibold">Moshe Barak</strong>, and I've spent more than 20 years welcoming travelers to Israel and helping them explore the country, with personal attention, professional service and the local knowledge that makes a journey easier.</p>
-          <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">I was born and raised in Israel. I enjoy sharing the places I know, helping you plan your days and making you feel welcome from the moment you arrive.</p>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed sm:text-xl">I'm <strong className="font-semibold">Moshe Barak</strong>, and I've spent more than 20 years helping visitors get around Israel and explore the country.</p>
+          <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">I was born and raised in Israel, and enjoy sharing the places I know and helping visitors plan their time here.</p>
           <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" aria-label="Read Reviews on TripAdvisor" data-external-icon="none" className="mt-6 inline-flex items-center gap-3 rounded-xl bg-[#34e0a1] px-5 py-3 text-center font-semibold leading-snug text-[#002b1c] transition-colors hover:bg-[#2bc68e] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
             <img src="/images/tripadvisor-owl-black.svg" alt="" width={28} height={28} className="size-7" />
             <span>Read Reviews on<br />TripAdvisor</span>
@@ -51,8 +51,8 @@ function MosheAbout() {
         <div>
           <p className="eyebrow">Years of journeys across Israel</p>
           <h2 id="experience-heading" className="mt-2 text-2xl leading-tight sm:text-3xl">Experience that makes the journey easier</h2>
-          <p className="mt-4 leading-relaxed">Over the years, I've driven individuals, couples, families and small groups from around the world. I've helped with airport arrivals, city visits and personally planned days exploring Israel's landscapes, history and everyday life.</p>
-          <p className="mt-4 leading-relaxed text-muted-foreground">The people I meet are what make this work special. I listen to what matters to you, offer practical suggestions and help bring the details together so you can enjoy your visit at your own pace.</p>
+          <p className="mt-4 leading-relaxed">Over the years, I've driven solo travelers, couples, families and small groups from around the world, from airport pickups to sightseeing trips across Israel.</p>
+          <p className="mt-4 leading-relaxed text-muted-foreground">The people I meet are what make this work special. I enjoy helping them discover places they might otherwise miss.</p>
         </div>
         <figure className="min-w-0">
           <img src={clientCollage} alt="Moshe Barak with clients during journeys around Israel" width={681} height={341} loading="lazy" decoding="async" className="h-auto w-full rounded-2xl border bg-card shadow-sm" />
@@ -67,7 +67,7 @@ function MosheAbout() {
 
     <section className="mx-auto max-w-6xl px-4 py-10 sm:py-12" aria-labelledby="approach-heading">
       <h2 id="approach-heading" className="text-2xl sm:text-3xl">The care I bring to your journey</h2>
-      <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">I aim to make excellent service part of the whole experience, from your first message to the end of your journey.</p>
+      <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">From your first message to your final drop-off, here's what you can expect from me.</p>
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {personalApproach.map(({ icon: Icon, title, detail }) => <article key={title} className="rounded-2xl border bg-card p-5 sm:p-6">
           <Icon size={25} className="text-primary" aria-hidden />
@@ -96,14 +96,14 @@ function MosheAbout() {
 
     <section id="methodology" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-10" aria-labelledby="methodology-heading">
       <h2 id="methodology-heading" className="text-2xl">Experience behind my travel guides</h2>
-      <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">The content on this website brings together my many years of personal experience in Israel and first-hand feedback from thousands of clients. I share what I've learned in my <Link to="/travel-blog/" className="font-semibold text-primary underline underline-offset-4">Israel travel guides</Link> to help you plan a visit that suits you.</p>
+      <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">My website draws on years of experience traveling around Israel and feedback from thousands of clients. I share what I've learned in my <Link to="/travel-blog/" className="font-semibold text-primary underline underline-offset-4">Israel travel guides</Link> to help you plan your visit.</p>
     </section>
 
     <section className="border-t bg-secondary/30 py-10 sm:py-12" aria-labelledby="direct-contact-heading">
       <div className="mx-auto max-w-6xl px-4">
         <div className="mb-6">
           <h2 id="direct-contact-heading" className="text-2xl sm:text-3xl">Plan your time in Israel with me</h2>
-          <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">Tell me when you're visiting, who you're traveling with and the places you'd love to see. I'll reply personally and help you plan the journey.</p>
+          <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">Tell me when you're visiting and where you'd like to go. I'll reply personally.</p>
         </div>
         <HomeContactForm context="about" />
         <p id="privacy" className="mt-4 scroll-mt-24 text-sm leading-relaxed text-muted-foreground">Read my <Link to="/privacy-policy/" className="font-semibold text-primary underline underline-offset-4">Privacy Policy</Link> for information about the details you share when you contact me.</p>
