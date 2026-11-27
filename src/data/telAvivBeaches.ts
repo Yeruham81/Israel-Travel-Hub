@@ -26,7 +26,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   {
     id: "tzuk-north", name: "North Tzuk Beach", area: "Northern coast",
     detailPhoto: { src: "/images/tel-aviv-beaches/tzuk-north.webp", alt: "Sandy North Tzuk Beach with coastal cliffs and the Herzliya skyline", width: 706, height: 530 },
-    bestFor: "Spacious northern beach", summary: "At Tel Aviv's northern edge near Herzliya, North Tzuk offers lawns, shade shelters and a quieter setting than the central beaches. The municipality lists free parking near the entrance.",
+    bestFor: "Spacious northern beach", summary: "At Tel Aviv's northern edge near Herzliya, North Tzuk offers lawns, shade shelters and a quieter setting than the central beaches. Free parking is available near the entrance.",
     tip: "The slope on the approach limits wheelchair access, according to the municipality. Check the accessible route before travelling.",
     access: "Far north; bus, taxi or car is usually more convenient from central hotels.",
     accessShort: "Northern edge", highlights: "Lawns · Shade · Free parking", lat: 32.14376, lon: 34.79094,

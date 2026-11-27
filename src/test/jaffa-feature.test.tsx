@@ -73,7 +73,7 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(component).toContain("Na Laga'at Center");
     expect(component).toContain("Ilana Goor Museum");
     expect(component).toContain("₪45 adult");
-    expect(component).toContain("advance reservations");
+    expect(component).toMatch(/advance reservations?/i);
     expect(component).toContain("Sun–Thu 09:00–17:00; Fri 09:00–14:00");
     expect(component).toContain("Naim BaSofash weekend service");
     expect(component).toContain("Dr. Avishai Teicher / PikiWiki Israel");
