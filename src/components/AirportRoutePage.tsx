@@ -136,7 +136,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
               <p className="mt-1 text-xs text-muted-foreground">Per vehicle · up to 4 passengers</p>
             </div>
           </div>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">The starting fare is for an airport pickup. Returns, larger vehicles and extra stops receive a personal quote.</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">The starting fare covers airport pickup. I'll quote return trips, larger vehicles and extra stops separately.</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">I confirm the full price before booking. The ILS fare includes any applicable night, weekend or holiday surcharge; USD and EUR estimates use current exchange rates.</p>
           <a href="#request-quote" onClick={focusQuote} className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>
         </div>
@@ -144,7 +144,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
 
       <section id="journey-details" aria-labelledby="journey-h" className="mt-9 scroll-mt-24">
         <h2 id="journey-h" className="text-2xl font-semibold">Private transfer to {guide.city}</h2>
-        <p className="mt-2 max-w-4xl text-sm leading-relaxed text-muted-foreground">Travel between Ben Gurion Airport and your hotel or address with a vehicle suited to your group and luggage. For airport pickups, I coordinate the agreed meeting point around your landing time.</p>
+        <p className="mt-2 max-w-4xl text-sm leading-relaxed text-muted-foreground">I'll arrange a vehicle for your group and luggage, and agree on where to meet you at the airport.</p>
         <div className="mt-4 grid grid-cols-3 gap-4 rounded-2xl border bg-secondary/25 p-3 sm:gap-6 sm:p-4 lg:gap-8">
           {airportTransferBenefits.map((benefit, index) => {
             const Icon = benefitIcons[index]!;

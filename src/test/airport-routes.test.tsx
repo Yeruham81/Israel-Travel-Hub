@@ -206,6 +206,6 @@ describe("four dedicated airport transfer routes", () => {
     const deadSea = getAirportRouteGuide("dead-sea");
     expect(deadSea.rate.price.amount).toBe(1300);
     expect(deadSea.areas.map((area) => area.text).join(" ")).toMatch(/Ein Bokek.*Neve|Ein Bokek.*every hotel/s);
-    expect(deadSea.faqs.find((faq) => faq.q.includes("every Dead Sea hotel"))?.a).toMatch(/Ein Gedi, Neve Zohar.*own route.*Ein Bokek/);
+    expect(deadSea.faqs.find((faq) => faq.q.includes("every Dead Sea hotel"))?.a).toMatch(/starting fare applies to Ein Bokek only.*separate quote to Ein Gedi, Neve Zohar/s);
   });
 });

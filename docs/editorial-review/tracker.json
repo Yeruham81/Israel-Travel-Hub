@@ -283,42 +283,42 @@
     {
       "path": "/airport-transfers/",
       "group": 2,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "09e98468367804662a1a8ef6f85dcab6c3212258685afeea36e0fb7fdd269432",
+      "changes": 6,
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction."
     },
     {
       "path": "/airport-transfers/ein-bokek/",
       "group": 2,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "74e9a064e0cc603f54a9cb92a4e2ee917727360dc1c3a25a2b092e3c4157d03b",
+      "changes": 10,
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction."
     },
     {
       "path": "/airport-transfers/haifa/",
       "group": 2,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "0c04632b7fb91bafdfe2bb21b91ca808ace89ee8db783fa75004377978a261f4",
+      "changes": 11,
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction."
     },
     {
       "path": "/airport-transfers/jerusalem/",
       "group": 2,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "6ba3904568a05ee3b0b713ffc8fa9e2a4927ec5500b215374b08da9077fac70f",
+      "changes": 9,
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction."
     },
     {
       "path": "/airport-transfers/tel-aviv/",
       "group": 2,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "f482283948bc7db21fc0aba9ad24bc87d56829f8eee76778f22da60d05cf083d",
+      "changes": 8,
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction."
     },
     {
       "path": "/attractions/",
