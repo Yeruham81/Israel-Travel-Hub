@@ -31,8 +31,8 @@ jobs:
       - name: Prepare production reference and report directory
         run: |
           mkdir -p "$RUNNER_TEMP/unused-audit"
-          test "$(git rev-parse origin/main)" = eeec1c7550fc9af71bf952b4551b710acfa04680
-          git worktree add --detach "$RUNNER_TEMP/main-reference" eeec1c7550fc9af71bf952b4551b710acfa04680
+          test "$(git rev-parse origin/main)" = 31d7963b29101048f62925c1c849d35449f59d88
+          git worktree add --detach "$RUNNER_TEMP/main-reference" 31d7963b29101048f62925c1c849d35449f59d88
           cd "$RUNNER_TEMP/main-reference"
           bash scripts/install-ci-dependencies.sh
           bash scripts/build-validated-static.sh
@@ -48,6 +48,9 @@ jobs:
           import prettier from "prettier";
           const out=path.join(process.env.RUNNER_TEMP,"unused-audit");
           const files=execFileSync("git",["ls-files","-z"]).toString().split("\0").filter(p=>p===".github/dependabot.yml"||/^\.github\/workflows\/.*\.ya?ml$/.test(p));
+          const auditWorkflow=".github/workflows/lint-quality-stage5-infra.yml";
+          if(!files.includes(auditWorkflow))throw Error("Missing temporary audit workflow");
+          files.splice(files.indexOf(auditWorkflow),1);
           if(files.length!==52)throw Error("Unexpected YAML inventory "+files.length);
           fs.writeFileSync(path.join(out,"inventory.json"),JSON.stringify(files,null,2));
           for(const file of files){
@@ -143,7 +146,7 @@ jobs:
           }
           console.log('PASS: all script and configuration files in trial scope satisfy Prettier');
           JS
-          node --test scripts/israel-events-source.test.mjs scripts/travelpayouts/registry-source.test.mjs
+          node --test scripts/israel-events-source.test.mjs scripts/travelpayouts/registry-source.test.mjs scripts/verify-photo-credits.test.mjs
           python3 scripts/test-deployment-storage.py
           bash scripts/build-validated-static.sh
           npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters

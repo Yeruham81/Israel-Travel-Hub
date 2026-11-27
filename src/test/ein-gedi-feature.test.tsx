@@ -23,6 +23,12 @@ describe("Ein Gedi upgraded attraction guide", () => {
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(5);
     expect(content.sources).toHaveLength(5);
+    expect(content.photoCredits).toEqual([
+      expect.objectContaining({
+        credit: expect.stringContaining("Stéphanie Gromann"),
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Ein_Gedi_synagogue058.JPG",
+      }),
+    ]);
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell).toContain("<AuthorCard />");
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
@@ -93,6 +99,7 @@ describe("Ein Gedi upgraded attraction guide", () => {
     expect(article).toContain("oasisPhoto");
     expect(article).toContain("synagogueMosaicPhoto");
     expect(article).toContain("Stéphanie Gromann / Wikimedia Commons");
+    expect(article).not.toContain("Mosaic photo:");
     expect(article).toContain("The ancient synagogue and its mosaics");
   });
 });

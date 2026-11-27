@@ -76,6 +76,9 @@ jobs:
           done
           node --test scripts/israel-events-source.test.mjs scripts/travelpayouts/registry-source.test.mjs
 
+      - name: Test rendered photo attribution audit
+        run: node --test scripts/verify-photo-credits.test.mjs
+
       # TanStack Router regenerates routeTree.gen.ts at build time.
       # Build first so type-checking sees any newly added file routes.
       - name: Build production version
