@@ -649,7 +649,7 @@ export const journeyDestinationGuides = {
       "title": "How to Get from Jerusalem to the Dead Sea: Bus, Taxi, Tours & Car",
       "description": "Jerusalem to the Dead Sea: bus 486 or 444, taxi, private driver, tours or rental car, with driving times, destination stops, beach access and return travel.",
       "intro": "Travelling from Jerusalem to the Dead Sea? First choose your destination: a northern beach, Ein Gedi, Masada or the Ein Bokek hotel area. Then compare public buses, a private ride, an organised tour and a rental car.",
-      "answer": "Egged bus 486 is a good budget choice for one Dead Sea destination; line 444 requires an advance seat reservation. For several stops or a flexible return, choose an organised tour, private driver or rental car. Allow roughly 90–110 minutes to drive from central Jerusalem to Ein Bokek, where the council's central public beach is free to enter. Confirm your return journey before leaving.",
+      "answer": "Egged bus 486 is a good budget choice for one Dead Sea destination; line 444 requires an advance seat reservation. For several stops or a flexible return, choose an organised tour, private driver or rental car. Allow roughly 90–110 minutes to drive from central Jerusalem to Ein Bokek, where Ein Bokek Central Beach is free to enter. Confirm your return journey before leaving.",
       "topics": [
         "transportation",
         "destinations",
@@ -750,8 +750,8 @@ export const journeyDestinationGuides = {
           "id": "tours",
           "title": "By organised tour: transport plus sightseeing",
           "paragraphs": [
-            "An organised tour is a convenient way to combine the Dead Sea with attractions such as Masada or Ein Gedi. An organised tour includes transport between the attractions on its itinerary.",
-            "Excursions follow different itineraries. Some concentrate on a Dead Sea beach, while others allocate much of the day to Masada and Ein Gedi. Confirm that the tour departs from Jerusalem, its return point, the precise beach, time spent there and whether park admission or cable-car tickets are included."
+            "An organised tour is a convenient way to combine a Dead Sea beach visit with Masada or Ein Gedi, with transport between the attractions included.",
+            "Some excursions focus on beach time, while others spend much of the day at Masada and Ein Gedi. Confirm that the tour departs from Jerusalem, its return point, the precise beach, time spent there and whether park admission or cable-car tickets are included."
           ],
         },
         {
@@ -780,8 +780,8 @@ export const journeyDestinationGuides = {
           "id": "beach",
           "title": "Where to go for a Dead Sea beach day",
           "paragraphs": [
-            "For swimming and floating, I recommend Ein Bokek Central Beach, where public entry, showers, changing rooms, toilets, shaded areas and council-provided chairs and umbrellas are free. The promenade has drinking-water fountains, cafés and shops.",
-            "Blue-and-white parking near the central beach is paid, with additional parking above the hotel area. The council-run central beach is different from hotel-operated public beaches, where chairs and umbrellas may cost extra for non-guests. Use the marked, supervised swimming area; lifeguard hours vary by season.",
+            "For swimming and floating, I recommend Ein Bokek Central Beach, where public entry, showers, changing rooms, toilets, shaded areas and chairs and umbrellas are free. The promenade has drinking-water fountains, cafés and shops.",
+            "Blue-and-white parking near the central beach is paid, with additional parking above the hotel area. At hotel-operated public beaches, chairs and umbrellas may cost extra for non-guests. Use the marked, supervised swimming area; lifeguard hours vary by season.",
             "Bring drinking water, sun protection and a towel. Ein Bokek Central Beach has an accessible approach and beach wheelchairs available through the lifeguard station. My Dead Sea visitor guide explains bathing and accessibility in more detail."
           ],
           "photo": { "src": einBokekShorePhoto, "alt": "Ein Bokek shoreline and the Dead Sea landscape" },
@@ -825,7 +825,7 @@ export const journeyDestinationGuides = {
         },
         {
           "q": "Is the public beach at Ein Bokek wheelchair-accessible?",
-          "a": "Yes. Tamar Regional Council provides an accessible route into the water at Ein Bokek Central Beach, and beach wheelchairs can be borrowed from the lifeguard station. If you need assistance or a particular facility, check with the council before your visit."
+          "a": "Yes. Ein Bokek Central Beach has an accessible route into the water, and beach wheelchairs can be borrowed from the lifeguard station. If you need assistance or a particular facility, check with the council before your visit."
         },
         {
           "q": "Do buses run to the Dead Sea on Shabbat?",
