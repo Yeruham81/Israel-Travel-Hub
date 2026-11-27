@@ -114,7 +114,7 @@ export function IsraelHolidayVisitorGuidePage(){
       <GuideHeroLayout image={<GuideHeroMedia src={HOLIDAY_GUIDE_PHOTO.src} alt={HOLIDAY_GUIDE_PHOTO.alt} width={640} height={480}/>}>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Practical Israel travel guide</p>
         <h1 className="guide-page-title mt-2">{HOLIDAY_GUIDE_TITLE}</h1>
-        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From Shabbat and Yom Kippur to Passover, Ramadan, Christmas and national memorial days, special dates shape daily life in Israel. I'll explain what visitors should expect before choosing travel days, hotels and sightseeing plans.</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From Shabbat and Yom Kippur to Passover, Ramadan, Christmas and national memorial days, special dates shape daily life in Israel. My guide explains how Israel's holidays and religious observances affect transport, accommodation and sightseeing.</p>
         <PageUpdated date={HOLIDAY_GUIDE_UPDATED}/>
       </GuideHeroLayout>
       <AuthorCard/>
@@ -122,11 +122,11 @@ export function IsraelHolidayVisitorGuidePage(){
     <section id="overview" aria-labelledby="overview-heading" className="mt-8 scroll-mt-24 rounded-xl border border-primary/20 bg-secondary/40 p-5 sm:p-6">
       <h2 id="overview-heading" className="text-xl font-bold">What matters most when planning your visit?</h2>
       <p className="mt-2 leading-relaxed">Check whether your dates include <strong>Shabbat or a major Jewish festival day</strong>, whether you are travelling on a <strong>holiday eve</strong>, and whether school holidays or religious pilgrimages will bring extra crowds. <strong>Yom Kippur needs particular care</strong> because regular travel and normal flight operations stop. Other religious and national events may affect traffic, opening hours and local services.</p>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">This guide explains recurring traditions and their typical effects. It is not a live events or performance directory. For actual dates, consult <a href="https://www.hebcal.com/holidays/?i=on" target="_blank" rel="noopener noreferrer" className={linkStyle}>the Israel Jewish holiday calendar</a> and check schedules with the relevant operator.</p>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">This guide covers recurring holidays, religious traditions and their practical effects on visitors. For actual dates, consult <a href="https://www.hebcal.com/holidays/?i=on" target="_blank" rel="noopener noreferrer" className={linkStyle}>the Israel Jewish holiday calendar</a> and check schedules with the relevant operator.</p>
     </section>
     <OnThisPage sections={TOC}/>
     <section id="travel-effects" className="mt-11 scroll-mt-24" aria-labelledby="travel-effects-heading">
-      <Heading id="travel-effects" intro="The same word 'holiday' can mean very different things for transport, shops and visitor attractions.">Which dates affect travel most?</Heading>
+      <Heading id="travel-effects" intro="Public transport, business hours and visitor attractions operate differently during various holidays.">Which dates affect travel most?</Heading>
       <div role="region" tabIndex={0} aria-label="Typical impact of Israeli holidays on transport and visitor plans" className="overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
         <table className="w-full min-w-[650px] text-left text-sm leading-relaxed">
           <caption className="sr-only">Comparison of common Israeli holiday and observance travel effects</caption>
@@ -137,7 +137,7 @@ export function IsraelHolidayVisitorGuidePage(){
       <div className="mt-5 grid gap-4 md:grid-cols-3">
         <div className="rounded-xl border bg-card p-4"><Clock3 className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Dates begin at sunset</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Jewish festivals start the evening before the main civil date. Last buses and trains may leave well before sunset.</p></div>
         <div className="rounded-xl border bg-card p-4"><Train className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Main festival days vs. intermediate days</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">On Passover and Sukkot, the first and final festival days differ from Chol HaMoed for work and transport.</p></div>
-        <div className="rounded-xl border bg-card p-4"><MapPinned className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Different cities, different rhythms</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Business hours and holiday customs vary among Jerusalem, Tel Aviv, Haifa, Nazareth and other communities.</p></div>
+        <div className="rounded-xl border bg-card p-4"><MapPinned className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Holiday customs across Israel</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Business hours and holiday customs vary among Jerusalem, Tel Aviv, Haifa, Nazareth and other communities.</p></div>
       </div>
       <div className="mt-5 rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-bold">{schoolCalendarPlanning.title}</h3>
@@ -152,12 +152,12 @@ export function IsraelHolidayVisitorGuidePage(){
       {group.id==="other-traditions"&&<p className="mt-4 text-sm leading-relaxed">If Jerusalem churches are on your itinerary, check visiting times and liturgical access in my <Link to="/travel-blog/churches-in-jerusalem/" className={linkStyle}>Jerusalem churches guide</Link>. These are active places of worship.</p>}
     </section>)}
     <section id="practical" className="mt-12 scroll-mt-24" aria-labelledby="practical-heading">
-      <Heading id="practical" intro="A few checks before you pay for your flights, hotel and sightseeing can prevent the most common holiday-related surprises.">My practical event-date planning checklist</Heading>
+      <Heading id="practical">My practical event-date planning checklist</Heading>
       <div className="grid gap-3 sm:grid-cols-2">{planning.map(p=><article key={p.title} className="rounded-xl border bg-card p-4 sm:p-5"><h3 className="flex items-start gap-2 font-bold"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true"/>{p.title}</h3><p className="mt-2 pl-7 text-sm leading-relaxed text-muted-foreground">{p.text}</p></article>)}</div>
       <div className="mt-5"><MyTip>I would build some flexibility into a trip during Passover, Sukkot or a major pilgrimage period. A nearby alternative attraction and a confirmed return journey are often more useful than an overpacked itinerary.</MyTip></div>
     </section>
     <section id="dates" className="mt-12 scroll-mt-24" aria-labelledby="dates-heading">
-      <Heading id="dates" intro="Holiday dates can move between years. Islamic dates may also need local confirmation, and some Christian observances follow different church calendars.">Check the exact dates before you travel</Heading>
+      <Heading id="dates" intro="Many religious holidays fall on different Gregorian calendar dates each year. Islamic dates may also need local confirmation, and some Christian observances follow different church calendars.">Check the exact dates before you travel</Heading>
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-xl border bg-secondary/40 p-5"><CalendarDays className="mb-2 h-6 w-6 text-primary" aria-hidden="true"/><h3 className="text-lg font-bold">Find the exact holiday dates</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Jewish holidays move on the civil calendar, and holiday dates observed in Israel can differ from those followed abroad. Muslim dates may be confirmed closer to the observance. Use the appropriate calendar for your travel year.</p><div className="mt-3 flex flex-wrap gap-x-4 gap-y-2"><a href="https://www.hebcal.com/holidays/?i=on" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Jewish dates in Israel <ExternalLink className="h-4 w-4" aria-hidden="true"/></a><a href="https://www.timeanddate.com/holidays/israel/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Other holidays and observances <ExternalLink className="h-4 w-4" aria-hidden="true"/></a></div></div>
         <div className="rounded-xl border bg-card p-5"><Wallet className="mb-2 h-6 w-6 text-primary" aria-hidden="true"/><h3 className="text-lg font-bold">Confirm services and prices</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Holiday travel can involve early departures, different taxi tariff periods and busy hotels. Check the provider's holiday timetable and total price for your date.</p><a href="https://rail.co.il/?lan=en&page=holidays-information" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official Israel Railways holiday information <ExternalLink className="h-4 w-4" aria-hidden="true"/></a></div>
@@ -167,7 +167,7 @@ export function IsraelHolidayVisitorGuidePage(){
     <RelatedGuides/>
     <HomeContactForm showTripadvisorBesidePortraitMobile guide={guideContactCopy(HOLIDAY_GUIDE_TITLE,"itinerary")}/>
     <SourcesDisclosure>
-      <p className="mb-3 text-sm leading-relaxed">I use Israeli public transport and holiday guidance to explain the usual patterns, not to guarantee an individual opening time, price or train departure. Check dates and arrangements with the relevant operator before travelling.</p>
+      <p className="mb-3 text-sm leading-relaxed">For holiday timetables, opening hours and transport fares, consult the official resources below. Check dates and arrangements with the relevant operator before travelling.</p>
       <ul className="space-y-2 text-sm">{holidayGuideSources.map(source=><li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">{source.label}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/></a></li>)}</ul>
     </SourcesDisclosure>
   </article></main>;
