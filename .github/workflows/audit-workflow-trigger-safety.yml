@@ -44,7 +44,11 @@ jobs:
                   if p.name=="travelpayouts-link-pilot.yml":
                       continue
                   assert job["if"]=="github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'",p
-                  assert job["steps"]==old["jobs"][name]["steps"],p
+                  steps=job["steps"]
+                  if p.name in {"travelpayouts-airport-platforms.yml","travelpayouts-food-eilat-tours.yml","travelpayouts-shore-excursions.yml","travelpayouts-welcome-retry.yml"}:
+                      assert steps[2:4]==[{"uses":"oven-sh/setup-bun@v2","with":{"bun-version":"1.4.4"}},{"run":"bash scripts/install-ci-dependencies.sh"}],p
+                      steps=steps[:2]+steps[4:]
+                  assert steps==old["jobs"][name]["steps"],p
           p=pathlib.Path(".github/workflows/refresh-public-exchange-rates.yml")
           old=yaml.load(subprocess.check_output(["git","show",base+":"+str(p)],text=True),Loader=yaml.BaseLoader)
           new=yaml.load(p.read_text(),Loader=yaml.BaseLoader)
@@ -99,7 +103,7 @@ jobs:
           for input in remaining-hotels paamonim-hotel jerusalem-neighborhood-fifth-hotels haifa-browse; do
             node scripts/travelpayouts/generate-links.mjs "scripts/travelpayouts/$input.json" --validate
           done
-          node --test scripts/israel-events-source.test.mjs
+          node --test scripts/israel-events-source.test.mjs scripts/travelpayouts/registry-source.test.mjs
 
       # TanStack Router regenerates routeTree.gen.ts at build time.
       # Build first so type-checking sees any newly added file routes.
