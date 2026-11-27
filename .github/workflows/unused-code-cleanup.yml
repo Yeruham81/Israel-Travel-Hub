@@ -1,4 +1,4 @@
-name: Unused code cleanup - remaining route declarations
+name: Unused code cleanup - stage 2 components and data
 on:
   push:
     branches: [audit/unused-code-cleanup]
@@ -6,8 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  route-import-proposal:
-    if: ${{ !contains(github.event.head_commit.message, '[apply-verified-stage1]') }}
+  components-data-proposal:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -34,7 +33,7 @@ jobs:
           npx tsc --noEmit --pretty false
           mkdir -p "$RUNNER_TEMP/unused-audit"
           cp -a .output/public "$RUNNER_TEMP/unused-audit-before"
-      - name: Collect baseline and propose remaining route cleanup
+      - name: Collect baseline and propose components and data cleanup
         shell: bash
         run: |
           out="$RUNNER_TEMP/unused-audit"
@@ -51,115 +50,126 @@ jobs:
           if (raw.error) throw new Error('Cannot read tsconfig');
           const parsed = ts.parseJsonConfigFileContent(raw.config, ts.sys, path.dirname(config), { noUnusedLocals: true, noUnusedParameters: true, noEmit: true });
           if (parsed.errors.length) throw new Error('Cannot parse tsconfig');
-          const targets = new Set([6133, 6192, 6196, 6198, 6199]);
-          const manifest = [];
-          // Only remove complete unused imports when the TS emitter already
-          // omits them, or another emitted import of the same module remains.
-          // This avoids deleting module initialization and deliberate effects.
-          if (parsed.options.verbatimModuleSyntax !== false) throw new Error('Review module emission settings');
-          const emitOptions = {...parsed.options, noEmit:false, declaration:false, declarationMap:false, sourceMap:false, inlineSourceMap:false, inlineSources:false, incremental:false, composite:false};
+          const targets = new Set([6133,6192,6196,6198,6199]);
+          const manifest=[];
+          const relative=file=>path.relative(process.cwd(),file.fileName).replaceAll(path.sep,'/');
+          const scope=file=>/^src\/(components|data)\//.test(relative(file))&&!/^src\/data\/generated\//.test(relative(file))&&!file.isDeclarationFile;
+          if(parsed.options.verbatimModuleSyntax!==false) throw Error('Review module emission settings');
+          const emitOptions={...parsed.options,noEmit:false,declaration:false,declarationMap:false,sourceMap:false,inlineSourceMap:false,inlineSources:false,incremental:false,composite:false};
           function emittedModules(text, filename) {
-            const result = ts.transpileModule(text,{compilerOptions:emitOptions,fileName:filename});
-            const sf = ts.createSourceFile('emit.js',result.outputText,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
+            const output=ts.transpileModule(text,{compilerOptions:emitOptions,fileName:filename}).outputText;
+            const sf=ts.createSourceFile('emit.js',output,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
             return new Set(sf.statements.filter(ts.isImportDeclaration).map(n=>n.moduleSpecifier.text));
           }
-          function scope(file) {
-            return /^src\/(routes|route-heads)\//.test(path.relative(process.cwd(),file.fileName).replaceAll(path.sep,'/')) && !file.isDeclarationFile;
+          function assertModules(oldText,newText,filename,allowed=new Set()) {
+            const next=emittedModules(newText,filename);
+            for(const mod of emittedModules(oldText,filename)) if(!next.has(mod)&&!allowed.has(mod)) throw Error('Runtime module removed: '+filename+' '+mod);
           }
+          const first=ts.createProgram(parsed.fileNames,parsed.options);
+          const firstDiags=ts.getPreEmitDiagnostics(first);
+          function reviewed(file,name,oldText,newText,allowed=new Set()) {
+            const sf=first.getSourceFiles().find(f=>relative(f)===file);
+            if(!sf||!firstDiags.some(d=>d.file===sf&&d.code===6133&&ts.flattenDiagnosticMessageText(d.messageText,' ').includes("'"+name+"'"))) throw Error('Reviewed declaration no longer diagnosed: '+file+' '+name);
+            const source=fs.readFileSync(file,'utf8');
+            if(source.split(oldText).length!==2) throw Error('Reviewed source changed: '+file+' '+name);
+            const result=source.replace(oldText,newText);
+            assertModules(source,result,file,allowed);
+            fs.writeFileSync(file,result);
+            manifest.push({file,kind:'reviewed unused declaration',removed:[name]});
+          }
+          // Keep the public prop type intact: callers may still pass cardPhoto.
+          reviewed('src/components/GuideCard.tsx','cardPhoto','headingLevel = 2, cardPhoto, compactHomeLayout','headingLevel = 2, compactHomeLayout');
+          // Remove only the dead helper and unused callback argument.
+          const beachFile='src/components/TelAvivBeachesGuide.tsx';
+          const beach=first.getSourceFiles().find(f=>relative(f)===beachFile);
+          const tip=beach.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='Tip');
+          if(!tip||tip.modifiers?.length||!tip.getText(beach).includes('className="flex gap-3 rounded-xl border border-amber-300/50')) throw Error('Review Tip helper');
+          reviewed(beachFile,'Tip',tip.getText(beach)+'\n','');
+          reviewed(beachFile,'index','areas.map((area, index) => {','areas.map((area) => {');
+          // Private helper only, all existing calls have exactly three arguments.
+          const hubFile='src/data/attractionsHub.ts';
+          const hub=first.getSourceFiles().find(f=>relative(f)===hubFile);
+          let callCount=0;
+          function checkCalls(n) {
+            if(ts.isCallExpression(n)&&ts.isIdentifier(n.expression)&&n.expression.text==='editorialAttraction') {
+              if(n.arguments.length!==3) throw Error('Review editorialAttraction call');
+              callCount++;
+            }
+            ts.forEachChild(n,checkCalls);
+          }
+          checkCalls(hub);
+          if(callCount!==6) throw Error('Review editorialAttraction call count');
+          reviewed(hubFile,'photoOverride','const editorialAttraction = (id: TravelGuideId, title: string, description: string, photoOverride?: { src: string; alt: string })','const editorialAttraction = (id: TravelGuideId, title: string, description: string)');
+          // L is a local pure object factory. Confirm its exact implementation.
+          const itineraryFile='src/data/israelItineraries.ts';
+          if(!fs.readFileSync(itineraryFile,'utf8').includes('const L = (label: string, to: InternalPath): ItineraryLink => ({ label, to });')) throw Error('Review itinerary factory');
+          reviewed(itineraryFile,'deadSeaHotels','const deadSeaHotels = L("Dead Sea hotel areas", "/travel-blog/best-dead-sea-hotels/");\n','');
+          reviewed(itineraryFile,'baptism','const baptism = L("Qasr el-Yahud visit guide", "/attractions/qasr-el-yahud/");\n','');
+          const taxiFile='src/data/taxiGuideCluster.ts';
+          if(!fs.readFileSync(taxiFile,'utf8').includes('import roadTrip from "@/assets/home/road-trip.webp";')) throw Error('Review image dependency');
+          reviewed(taxiFile,'intercityPhoto','const intercityPhoto = { src: roadTrip, alt: "Illustration of a vehicle traveling on a road through the Israeli landscape" };\n','',new Set(['@/assets/home/road-trip.webp']));
           function cleanLine(file,node) {
             const a=node.getStart(file), b=node.end;
             const lineStart=file.text.lastIndexOf('\n',a-1)+1;
             const lineEnd=file.text.indexOf('\n',b);
-            if (!file.text.slice(lineStart,a).trim() && lineEnd>=0 && !file.text.slice(b,lineEnd).trim()) return {a:lineStart,b:lineEnd+1,replacement:''};
+            if(!file.text.slice(lineStart,a).trim()&&lineEnd>=0&&!file.text.slice(b,lineEnd).trim()) return {a:lineStart,b:lineEnd+1,replacement:''};
             return {a,b,replacement:''};
           }
-          for (let round=1;round<=5;round++) {
+          const printer=ts.createPrinter({newLine:ts.NewLineKind.LineFeed});
+          for(let round=1;round<=5;round++) {
             const program=ts.createProgram(parsed.fileNames,parsed.options);
             const groups=new Map();
-            for (const d of ts.getPreEmitDiagnostics(program)) {
-              if (!d.file || d.start==null || !targets.has(d.code) || !scope(d.file)) continue;
-              if (!groups.has(d.file)) groups.set(d.file,[]);
+            for(const d of ts.getPreEmitDiagnostics(program)) {
+              if(!d.file||d.start==null||!targets.has(d.code)||!scope(d.file)) continue;
+              if(!groups.has(d.file)) groups.set(d.file,[]);
               groups.get(d.file).push(d);
             }
             let count=0;
-            for (const [file,ds] of groups) {
+            for(const [file,ds] of groups) {
               const edits=[];
-              // Only plain, local image URL imports can become unused as a
-              // consequence of removing the reviewed, unused IMG table.
-              const assetNames=new Map(file.statements.filter(ts.isImportDeclaration).filter(n=>n.importClause?.name && /^@\/assets\/[\w./-]+\.(?:webp|png|jpe?g|avif|gif)$/i.test(n.moduleSpecifier.text)).map(n=>[n.importClause.name.text,n.moduleSpecifier.text]));
-              const imgDependencies=new Set();
-              let removedImageTable=false;
-              function pureImageValue(node) {
-                if (ts.isStringLiteral(node)) return true;
-                if (ts.isIdentifier(node)) {
-                  const mod=assetNames.get(node.text);
-                  if (!mod) return false;
-                  imgDependencies.add(mod);
-                  return true;
-                }
-                if (ts.isObjectLiteralExpression(node)) return node.properties.every(p=>ts.isPropertyAssignment(p) && (ts.isIdentifier(p.name)||ts.isStringLiteral(p.name)) && pureImageValue(p.initializer));
-                return false;
-              }
-              const oldModules=emittedModules(file.text,file.fileName);
-              for (const node of file.statements) {
-                const a=node.getStart(file),b=node.end;
+              for(const node of file.statements) {
+                if(!ts.isImportDeclaration(node)||!node.importClause||node.attributes||node.assertClause) continue;
+                const a=node.getStart(file),b=node.end,original=file.text.slice(a,b);
+                if(/\/\*|\/\//.test(original)) continue;
                 const within=ds.filter(d=>d.start>=a&&d.start<b);
-                if (!within.length) continue;
-                if (ts.isImportDeclaration(node) && node.importClause && !node.attributes && !node.assertClause) {
-                  const original=file.text.slice(a,b);
-                  if (/\/\*|\/\//.test(original)) continue;
-                  const clause=node.importClause, bindings=clause.namedBindings;
-                  const names=[];
-                  if (clause.name) names.push(clause.name);
-                  if (bindings && ts.isNamedImports(bindings)) names.push(...bindings.elements);
-                  if (bindings && ts.isNamespaceImport(bindings)) names.push(bindings.name);
-                  const whole=within.some(d=>d.code===6192)||names.length>0&&names.every(n=>within.some(d=>[6133,6196].includes(d.code)&&d.start>=a&&d.start<n.end&&(d.start>=n.getStart(file)||names.length===1)));
-                  if (!whole) continue;
-                  const edit=cleanLine(file,node);
-                  const proposed=file.text.slice(0,edit.a)+file.text.slice(edit.b);
-                  if (oldModules.has(node.moduleSpecifier.text) && !emittedModules(proposed,file.fileName).has(node.moduleSpecifier.text)) {
-                    console.log('RETAIN MODULE EFFECT',path.relative(process.cwd(),file.fileName),node.moduleSpecifier.text);
-                    continue;
-                  }
-                  edits.push(edit);
-                  manifest.push({round,file:path.relative(process.cwd(),file.fileName),kind:'unused import',module:node.moduleSpecifier.getText(file),removed:names.map(n=>n.getText(file))});
-                } else if (path.relative(process.cwd(),file.fileName)==='src/routes/index.tsx' && ts.isVariableStatement(node) && !node.modifiers?.length && (node.declarationList.flags&ts.NodeFlags.Const) && node.declarationList.declarations.length===1) {
-                  const d=node.declarationList.declarations[0];
-                  // Explicitly reviewed dead image lookup table: no function
-                  // calls, getters, computed keys, spreads or exported values.
-                  if (!ts.isIdentifier(d.name)||d.name.text!=='IMG'||!d.initializer||!within.some(x=>x.code===6133&&x.start===d.name.getStart(file))) continue;
-                  const init=ts.isSatisfiesExpression(d.initializer)?d.initializer.expression:d.initializer;
-                  if (!ts.isObjectLiteralExpression(init)||!pureImageValue(init)) throw new Error('IMG initializer changed; review manually');
-                  removedImageTable=true;
-                  edits.push(cleanLine(file,node));
-                  manifest.push({round,file:'src/routes/index.tsx',kind:'unused pure image table',removed:['IMG']});
-                }
+                if(!within.length) continue;
+                const clause=node.importClause,bindings=clause.namedBindings;
+                const names=[];
+                if(clause.name) names.push(clause.name);
+                if(bindings&&ts.isNamedImports(bindings)) names.push(...bindings.elements);
+                if(bindings&&ts.isNamespaceImport(bindings)) names.push(bindings.name);
+                const isUnused=n=>within.some(d=>[6133,6196].includes(d.code)&&d.start>=n.getStart(file)&&d.start<n.end);
+                const whole=within.some(d=>d.code===6192)||names.length>0&&names.every(n=>isUnused(n)||names.length===1&&within.some(d=>[6133,6196].includes(d.code)));
+                let edit,removed;
+                if(whole) {
+                  edit=cleanLine(file,node); removed=names;
+                } else if(bindings&&ts.isNamedImports(bindings)) {
+                  removed=bindings.elements.filter(isUnused);
+                  const remaining=bindings.elements.filter(n=>!removed.includes(n));
+                  if(!removed.length||!remaining.length) continue;
+                  edit={a:bindings.getStart(file),b:bindings.end,replacement:printer.printNode(ts.EmitHint.Unspecified,ts.factory.updateNamedImports(bindings,remaining),file)};
+                } else continue;
+                const proposed=file.text.slice(0,edit.a)+edit.replacement+file.text.slice(edit.b);
+                assertModules(file.text,proposed,file.fileName);
+                edits.push(edit);
+                manifest.push({round,file:relative(file),kind:'unused import',module:node.moduleSpecifier.getText(file),removed:removed.map(n=>n.getText(file))});
               }
-              if (!edits.length) continue;
+              if(!edits.length) continue;
               let source=file.text;
-              for (const e of edits.sort((a,b)=>b.a-a.a)) source=source.slice(0,e.a)+e.replacement+source.slice(e.b);
-              // Check the combined edits too, in case multiple imports share a module.
-              const nextModules=emittedModules(source,file.fileName);
-              for (const mod of oldModules) {
-                if (nextModules.has(mod)) continue;
-                if (removedImageTable && imgDependencies.has(mod)) {
-                  console.log('UNUSED IMAGE URL AFTER IMG REMOVAL',path.relative(process.cwd(),file.fileName),mod);
-                  continue;
-                }
-                throw new Error('Runtime module removed: '+file.fileName+' '+mod);
-              }
+              for(const e of edits.sort((a,b)=>b.a-a.a)) source=source.slice(0,e.a)+e.replacement+source.slice(e.b);
+              assertModules(file.text,source,file.fileName);
               fs.writeFileSync(file.fileName,source);
               count+=edits.length;
             }
             console.log('ROUND',round,'EDITS',count);
-            if (!count) break;
+            if(!count) break;
           }
           fs.writeFileSync(path.join(process.env.RUNNER_TEMP,'unused-audit','manifest.json'),JSON.stringify(manifest,null,2));
-          console.log('PROPOSED REMAINING ROUTE EDITS',JSON.stringify(manifest,null,2));
+          console.log('PROPOSED COMPONENT AND DATA EDITS',JSON.stringify(manifest,null,2));
           JS
           git diff --check
-          git diff -- src/routes src/route-heads > "$out/stage-1-remaining.patch"
-          sha256sum "$out/stage-1-remaining.patch"
+          git diff -- src/components src/data > "$out/stage-2.patch"
+          sha256sum "$out/stage-2.patch"
           git diff --stat
       - name: Validate candidate diagnostics
         run: |
@@ -192,6 +202,11 @@ jobs:
               print(label,'groups',dict(collections.Counter({g:sum(n for (p,c,m),n in items.items() if c in unused and group(p)==g) for g in ('routes','components/data','tests','other')})))
           remaining=sum(n for (p,c,m),n in after.items() if c in unused and group(p)=='routes')
           print('REMAINING ROUTE DIAGNOSTICS',remaining)
+          assert sum(n for (p,c,m),n in before.items() if c in unused and group(p)=='routes')==0, 'Stage 1 baseline regressed'
+          assert sum(n for (p,c,m),n in before.items() if c in unused and group(p)=='components/data')==65, 'Stage 2 baseline changed'
+          assert remaining==0, 'Route cleanup regressed'
+          assert sum(n for (p,c,m),n in after.items() if c in unused and group(p)=='components/data')==0, 'Stage 2 not yet complete'
+          assert sum(n for (p,c,m),n in after.items() if c in unused and group(p)=='tests')==10, 'Test diagnostics changed unexpectedly'
           new=after-before
           if new:
               print('NEW DIAGNOSTICS',new)
@@ -341,59 +356,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: unused-code-stage-1-remaining-proposal
+          name: unused-code-stage-2-proposal
           path: ${{ runner.temp }}/unused-audit/
           if-no-files-found: warn
 
-  apply-verified-stage1:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/audit/unused-code-cleanup' && contains(github.event.head_commit.message, '[apply-verified-stage1]') }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: write
-      actions: read
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: audit/unused-code-cleanup
-          persist-credentials: true
-          fetch-depth: 0
-      - uses: actions/download-artifact@v4
-        with:
-          name: unused-code-stage-1-remaining-proposal
-          path: ${{ runner.temp }}/verified-stage1
-          run-id: 45907844275
-          github-token: ${{ github.token }}
-      - name: Apply exactly the previously validated patch to the audit branch
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          test "$(git diff --name-only 48cabb7a098f9472c0c9c01b8635e1c6118be9f3 HEAD)" = ".github/workflows/unused-code-cleanup.yml"
-          patch="$RUNNER_TEMP/verified-stage1/stage-1-remaining.patch"
-          echo "9b94fe9063d5b6f01d848787a538e846e8bcb2a0e607d28da393ae956b0e4376  $patch" | sha256sum -c -
-          git apply --index --check "$patch"
-          git apply --index "$patch"
-          git diff --cached --check
-          python3 - "$patch" <<'PY'
-          import pathlib, re, subprocess, sys
-          patch = pathlib.Path(sys.argv[1]).read_text()
-          expected = {}
-          for block in patch.split("diff --git ")[1:]:
-              name = re.match(r'a/(.*?) b/(.*?)\n', block)
-              index = re.search(r'^index ([0-9a-f]+)\.\.([0-9a-f]+) 100644$', block, re.M)
-              assert name and index and name[1] == name[2], "Invalid patch entry"
-              assert name[1].startswith(("src/routes/", "src/route-heads/"))
-              expected[name[1]] = index[2]
-          files = subprocess.check_output(["git", "diff", "--cached", "--name-only", "-z"]).decode().split("\0")
-          assert set(filter(None, files)) == set(expected) and len(expected) == 93
-          for path, sha in expected.items():
-              blob = subprocess.check_output(["git", "rev-parse", ":" + path], text=True).strip()
-              assert blob.startswith(sha), path
-          print("VERIFIED SOURCE BLOBS", len(expected))
-          PY
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Apply verified remaining unused route declarations"
-          git push origin HEAD:refs/heads/audit/unused-code-cleanup
-          git rev-parse HEAD
