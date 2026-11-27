@@ -146,11 +146,19 @@ describe("Jerusalem independent day-trip planning guides", () => {
         .getByRole("img", { name: /Shepherds’ Field Chapel mural/ })
         .getAttribute("src"),
     ).toMatch(/shepherds-field-chapel/);
-    expect(
-      within(screen.getByTestId("bethlehem-tour-options")).getByRole("link", {
-        name: /Armineaghayan \/ Wikimedia Commons/,
-      }),
-    ).toHaveAttribute("href", expect.stringContaining("commons.wikimedia.org"));
+    const credits = screen.getByTestId("page-photo-credits");
+    expect(credits).not.toHaveAttribute("open");
+    expect(credits).toHaveTextContent("Armineaghayan / Wikimedia Commons · CC BY-SA 4.0 (resized)");
+    expect(within(credits).getByText("Photo source")).toHaveAttribute(
+      "href",
+      expect.stringContaining("Shepherds_Field_Chapel"),
+    );
+    expect(within(credits).getByText("Licence")).toHaveAttribute(
+      "href",
+      "https://creativecommons.org/licenses/by-sa/4.0/",
+    );
+    expect(screen.getByTestId("bethlehem-tour-options")).not.toHaveTextContent("Armineaghayan");
+    expect(container.querySelector("#sources")!.compareDocumentPosition(credits) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(
       container.querySelectorAll(
         "#buses [role='note'], #private-taxi [role='note'], #visit-return [role='note']",

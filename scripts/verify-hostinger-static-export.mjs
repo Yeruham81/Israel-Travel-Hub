@@ -9,6 +9,7 @@ import { join } from "node:path";
 import assert from "node:assert/strict";
 import { verifyEditorialCardHeroes } from "./verify-editorial-card-heroes.mjs";
 import { auditSiteMeta } from "./audit-site-meta.mjs";
+import { verifyPhotoCredits } from "./verify-photo-credits.mjs";
 
 const root = ".output/public";
 const origin = process.env["VITE_CANONICAL_ORIGIN"];
@@ -812,6 +813,7 @@ console.log("Homepage and AboutPage structured data verified.");
 
 if (editorial) verifyEditorialCardHeroes({ root, paths });
 auditSiteMeta({ root, paths });
+verifyPhotoCredits({ root, paths });
 console.log(`Hostinger prerender verified: ${paths.size}/${paths.size} sitemap pages.`);
 console.log(`Target canonical origin: ${origin}; indexable: ${indexable}`);
 console.log(`PHP API source/credentials are not part of this static deployment.`);

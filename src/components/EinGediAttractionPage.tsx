@@ -192,20 +192,6 @@ export const einGediDestinationContent: AttractionDestinationContent = {
           src: synagogueMosaicPhoto,
           alt: "Bird and geometric designs in the mosaic floor of the ancient synagogue at Ein Gedi",
         }}
-        note={
-          <>
-            Mosaic photo:{" "}
-            <a
-              href="https://commons.wikimedia.org/wiki/File:Ein_Gedi_synagogue058.JPG"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={inlineLink}
-            >
-              Stéphanie Gromann / Wikimedia Commons
-            </a>{" "}
-            (attribution license).
-          </>
-        }
       >
         <p>
           Just south of the Nahal David entrance, Ein Gedi Antiquities National Park preserves a
@@ -774,6 +760,13 @@ export const einGediDestinationContent: AttractionDestinationContent = {
       to: "/travel-blog/best-time-to-visit-israel/",
       description: "Weather and seasons for desert travel.",
       icon: "seasons",
+    },
+  ],
+  photoCredits: [
+    {
+      label: "Ancient synagogue mosaic at Ein Gedi",
+      credit: "Stéphanie Gromann / Wikimedia Commons (attribution license; optimized WebP)",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Ein_Gedi_synagogue058.JPG",
     },
   ],
   sources: [

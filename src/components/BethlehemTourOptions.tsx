@@ -1,3 +1,4 @@
+import { photoCreditEntries } from "@/components/PhotoCreditsDisclosure";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { affiliateConfig } from "@/data/registry";
 import { bethlehemTourCards } from "@/data/bethlehemTourOffers";
@@ -30,8 +31,20 @@ const tourPhotos = {
   "shepherds-field": {
     src: shepherdsFieldChapel,
     alt: "Shepherds’ Field Chapel mural in Beit Sahour near Bethlehem",
+    credit: "Armineaghayan / Wikimedia Commons · CC BY-SA 4.0 (resized)",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Shepherds_Field_Chapel,_Roman_Catholic_(Beit_Sahour)-interior_(2).jpg",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
   },
 } as const;
+
+export function bethlehemTourPhotoCredits() {
+  return photoCreditEntries(
+    bethlehemTourCards
+      .filter((tour) => Boolean(affiliateConfig[tour.id]?.trackingUrl))
+      .map((tour) => tourPhotos[tour.photoId]),
+  );
+}
 
 /** Same compact price, duration and review cards as the Dead Sea guide.
  * Only publisher-approved product deeplinks can appear as booking cards.
@@ -92,27 +105,6 @@ export function BethlehemTourOptions() {
         change. Before booking, check the departure date and location, itinerary, guiding, walking
         requirements, admissions, meeting and return arrangements, and cancellation policy directly
         with the booking provider.
-      </p>
-      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-        Shepherds’ Field Chapel photo:{" "}
-        <a
-          href="https://commons.wikimedia.org/wiki/File:Shepherds_Field_Chapel,_Roman_Catholic_(Beit_Sahour)-interior_(2).jpg"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline underline-offset-2"
-        >
-          Armineaghayan / Wikimedia Commons
-        </a>{" "}
-        ·{" "}
-        <a
-          href="https://creativecommons.org/licenses/by-sa/4.0/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline underline-offset-2"
-        >
-          CC BY-SA 4.0
-        </a>{" "}
-        (resized).
       </p>
     </section>
   );
