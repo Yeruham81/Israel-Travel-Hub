@@ -1,0 +1,165 @@
+name: Stage 5.1 - read-only lint and formatting inventory
+on:
+  push:
+    branches: [audit/lint-quality-stage5]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      CI: "true"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: e13c2f51a41006bfa45f1395607d067567f40540
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Inventory existing ESLint and standalone Prettier configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/lint-inventory"
+          mkdir -p "$out"
+          git rev-parse HEAD > "$out/source-commit.txt"
+          git status --porcelain > "$out/before-status.txt"
+          node_modules/.bin/eslint --version > "$out/eslint-version.txt"
+          node_modules/.bin/prettier --version > "$out/prettier-version.txt"
+          for file in src/routes/index.tsx src/components/GuideCard.tsx src/test/transportation.test.tsx scripts/generate-sitemap.mjs src/routeTree.gen.ts; do
+            node_modules/.bin/eslint --print-config "$file" > "$out/config-$(basename "$file").json"
+          done
+          status=0
+          node_modules/.bin/eslint . --format json-with-metadata --output-file "$out/eslint.json" > "$out/eslint-stdout.txt" 2> "$out/eslint-stderr.txt" || status=$?
+          echo "$status" > "$out/eslint-exit.txt"
+          cat "$out/eslint-stderr.txt"
+          test "$status" -le 1
+          test -s "$out/eslint.json"
+          status=0
+          node_modules/.bin/prettier --list-different . > "$out/prettier-files.txt" 2> "$out/prettier-stderr.txt" || status=$?
+          echo "$status" > "$out/prettier-exit.txt"
+          cat "$out/prettier-stderr.txt"
+          test "$status" -le 1
+          git ls-files -z > "$out/tracked-files.bin"
+          git status --porcelain > "$out/after-status.txt"
+          diff -u "$out/before-status.txt" "$out/after-status.txt"
+      - name: Classify by rule, severity, scope and fixability
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import collections as C, csv, json, os, pathlib, re
+          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'lint-inventory'
+          root=pathlib.Path.cwd()
+          data=json.loads((out/'eslint.json').read_text())
+          results=data['results']
+          meta=data.get('metadata',{}).get('rulesMeta',{})
+          tracked=set((out/'tracked-files.bin').read_bytes().decode().split('\0'))
+          generated={'src/routeTree.gen.ts','src/data/generated/guide-directory.ts','src/data/israelEventFeed.generated.json'}
+          def relative(p):
+              return pathlib.Path(p).resolve().relative_to(root).as_posix()
+          def scope(p):
+              if p in generated or p.startswith('src/data/generated/'): return 'generated'
+              if p.startswith('src/test/') or re.search(r'\.(test|spec)\.[^.]+$',p): return 'tests'
+              for part in ('routes','route-heads','components','data','lib','hooks'):
+                  if p.startswith('src/'+part+'/'): return 'src/'+part
+              if p.startswith('src/'): return 'src/other'
+              if p.startswith('scripts/'): return 'scripts'
+              if p.startswith('public/'): return 'public'
+              return 'configuration/other'
+          def category(rule,fatal):
+              if fatal or not rule: return 'P1 parse/configuration - inspect'
+              if rule=='prettier/prettier': return 'P4 formatting only'
+              if rule.startswith('react-hooks/'): return 'P1 React hooks - inspect'
+              if rule.startswith('react-refresh/'): return 'P3 development refresh'
+              if rule=='no-restricted-imports': return 'P1 import boundary - inspect'
+              if rule.startswith('@typescript-eslint/'):
+                  if rule.split('/')[-1] in ('no-explicit-any','ban-ts-comment','no-empty-object-type','no-unsafe-function-type','no-wrapper-object-types','no-non-null-assertion'):
+                      return 'P2 typing and maintainability'
+                  return 'P2 TypeScript rule - inspect'
+              if meta.get(rule,{}).get('type')=='problem': return 'P1 correctness - inspect'
+              return 'P2 other lint - inspect'
+          by_rule=C.defaultdict(C.Counter); by_scope=C.defaultdict(C.Counter); by_file=C.defaultdict(C.Counter); by_cat=C.Counter()
+          rows=[]; suppressed=C.Counter(); actual=C.Counter()
+          for f in results:
+              path=relative(f['filePath'])
+              for s in f.get('suppressedMessages',[]): suppressed[s.get('ruleId') or '(none)']+=1
+              for m in f['messages']:
+                  rule=m.get('ruleId') or '(none)'
+                  severity='error' if m['severity']==2 else 'warning' if m['severity']==1 else 'other'
+                  cat=category(m.get('ruleId'),m.get('fatal',False))
+                  fixable='fix' in m
+                  generated_file=scope(path)=='generated'
+                  rows.append([path,m.get('line',0),m.get('column',0),rule,severity,cat,scope(path),int(fixable),int(generated_file),m['message']])
+                  for counter in (by_rule[rule],by_scope[scope(path)],by_file[path]):
+                      counter['total']+=1
+                      counter[severity]+=1
+                      counter['fixable']+=int(fixable)
+                      counter['nonformat']+=int(rule!='prettier/prettier')
+                      counter['generated']+=int(generated_file)
+                  by_cat[cat]+=1
+                  actual[severity]+=1
+          assert actual['error']==sum(f['errorCount'] for f in results)
+          assert actual['warning']==sum(f['warningCount'] for f in results)
+          assert sum(c['fixable'] for c in by_rule.values())==sum(f['fixableErrorCount']+f['fixableWarningCount'] for f in results)
+          with (out/'diagnostics.tsv').open('w',newline='') as fh:
+              writer=csv.writer(fh,delimiter='\t'); writer.writerow(['file','line','column','rule','severity','priority_review','scope','has_autofix','generated','message']); writer.writerows(rows)
+          with (out/'nonformat-diagnostics.tsv').open('w',newline='') as fh:
+              writer=csv.writer(fh,delimiter='\t'); writer.writerow(['file','line','column','rule','severity','priority_review','scope','has_autofix','generated','message']); writer.writerows(r for r in rows if r[3]!='prettier/prettier')
+          prettier=[p.strip().removeprefix('./') for p in (out/'prettier-files.txt').read_text().splitlines() if p.strip()]
+          prettier_groups=C.Counter(scope(p) for p in prettier)
+          prettier_ext=C.Counter(pathlib.Path(p).suffix or '(none)' for p in prettier)
+          lint_format={r[0] for r in rows if r[3]=='prettier/prettier'}
+          summary={
+              'source_commit':(out/'source-commit.txt').read_text().strip(),
+              'eslint_version':(out/'eslint-version.txt').read_text().strip(),
+              'prettier_version':(out/'prettier-version.txt').read_text().strip(),
+              'eslint_files_scanned':len(results),'eslint_files_with_messages':len(by_file),
+              'eslint_total':len(rows),'errors':actual['error'],'warnings':actual['warning'],
+              'formatting_diagnostics':by_rule['prettier/prettier']['total'],
+              'nonformat_diagnostics':sum(r[3]!='prettier/prettier' for r in rows),
+              'nonformat_production_source_diagnostics':sum(r[3]!='prettier/prettier' and r[6].startswith('src/') for r in rows),
+              'generated_diagnostics':sum(r[8] for r in rows),
+              'fatal_diagnostics':sum(f.get('fatalErrorCount',0) for f in results),
+              'fixable_diagnostics':sum(r[7] for r in rows),
+              'suppressed_diagnostics':dict(suppressed),
+              'by_rule':{k:dict(v) for k,v in sorted(by_rule.items(),key=lambda kv:-kv[1]['total'])},
+              'by_scope':{k:dict(v) for k,v in sorted(by_scope.items())},
+              'by_category':dict(by_cat),
+              'top_nonformat_files':{k:dict(v) for k,v in sorted(by_file.items(),key=lambda kv:-kv[1]['nonformat'])[:30] if v['nonformat']},
+              'prettier_different_files':len(prettier),'prettier_tracked_different_files':sum(p in tracked for p in prettier),
+              'prettier_by_scope':dict(prettier_groups),'prettier_by_extension':dict(prettier_ext),
+              'prettier_overlap_with_eslint_format':len(set(prettier)&lint_format),
+              'prettier_only_files':sorted(set(prettier)-lint_format),
+          }
+          (out/'summary.json').write_text(json.dumps(summary,indent=2,ensure_ascii=False))
+          print('LINT_INVENTORY_SUMMARY',json.dumps({k:v for k,v in summary.items() if k!='prettier_only_files'},ensure_ascii=False))
+          for row in rows:
+              if row[3]!='prettier/prettier':
+                  print('NONFORMAT',json.dumps(row,ensure_ascii=False))
+          lines=['## Stage 5.1 inventory (read-only)',f"Commit: {summary['source_commit']}",'','| Metric | Count |','|---|---:|']
+          for k in ('eslint_files_scanned','eslint_files_with_messages','eslint_total','errors','warnings','formatting_diagnostics','nonformat_diagnostics','nonformat_production_source_diagnostics','generated_diagnostics','fatal_diagnostics','fixable_diagnostics','prettier_different_files','prettier_tracked_different_files','prettier_overlap_with_eslint_format'):
+              lines.append(f'| {k} | {summary[k]} |')
+          lines+=['','### Rules','| Rule | Errors | Warnings | Total | Fixable |','|---|---:|---:|---:|---:|']
+          for rule,v in summary['by_rule'].items():
+              lines.append(f"| {rule} | {v.get('error',0)} | {v.get('warning',0)} | {v.get('total',0)} | {v.get('fixable',0)} |")
+          lines+=['','### Review categories','Priority is provisional; a lint finding or available autofix is not proof of a runtime defect. Generated files are reported separately.','| Category | Count |','|---|---:|']
+          lines.extend(f'| {k} | {v} |' for k,v in by_cat.items())
+          (out/'summary.md').write_text('\n'.join(lines)+'\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as fh: fh.write('\n'.join(lines)+'\n')
+          if summary['fatal_diagnostics']: print('::warning::Fatal lint diagnostics detected; classification requires review.')
+          PY
+      - name: Save complete read-only inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-5-1-lint-inventory
+          path: ${{ runner.temp }}/lint-inventory/
+          if-no-files-found: warn
