@@ -36,7 +36,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "israel",
     "name": "The Israel Museum, Jerusalem",
     "area": "west",
-    "neighborhood": "Museum Row · Givat Ram",
+    "neighbourhood": "Museum Row · Givat Ram",
     "address": "11 Ruppin Boulevard, Jerusalem",
     "mapLocation": {
       "lat": 31.7725,
@@ -63,7 +63,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "bible",
     "name": "Bible Lands Museum Jerusalem",
     "area": "west",
-    "neighborhood": "Museum Row · Givat Ram",
+    "neighbourhood": "Museum Row · Givat Ram",
     "address": "21 Shmuel Stefan Wise Street, Jerusalem",
     "mapLocation": {
       "lat": 31.774905,
@@ -89,7 +89,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "science",
     "name": "Bloomfield Science Museum",
     "area": "west",
-    "neighborhood": "Museum Row · Givat Ram",
+    "neighbourhood": "Museum Row · Givat Ram",
     "address": "3 Museum Boulevard, Jerusalem",
     "mapLocation": {
       "lat": 31.778395,
@@ -117,7 +117,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "yad",
     "name": "Yad Vashem – Holocaust History Museum",
     "area": "west",
-    "neighborhood": "Mount of Remembrance · western Jerusalem",
+    "neighbourhood": "Mount of Remembrance · western Jerusalem",
     "address": "Mount of Remembrance, Jerusalem",
     "mapLocation": {
       "lat": 31.774207,
@@ -145,7 +145,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "tower",
     "name": "Tower of David Jerusalem Museum",
     "area": "old",
-    "neighborhood": "Jaffa Gate · Old City",
+    "neighbourhood": "Jaffa Gate · Old City",
     "address": "Tower of David Citadel, Jaffa Gate, Jerusalem",
     "mapLocation": {
       "lat": 31.7767,
@@ -172,7 +172,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "rockefeller",
     "name": "Rockefeller Archaeological Museum",
     "area": "old",
-    "neighborhood": "Sultan Suleiman Street · near Herod's Gate",
+    "neighbourhood": "Sultan Suleiman Street · near Herod's Gate",
     "address": "27 Sultan Suleiman Street, Jerusalem",
     "mapLocation": {
       "lat": 31.7837,
@@ -198,7 +198,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "time",
     "name": "Time Elevator Jerusalem",
     "area": "old",
-    "neighborhood": "Mamilla · near Jaffa Gate",
+    "neighbourhood": "Mamilla · near Jaffa Gate",
     "address": "6 Yitzhak Kariv Street, Mamilla, Jerusalem",
     "mapLocation": {
       "lat": 31.7774953,
@@ -225,7 +225,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "prison",
     "name": "Museum of the Underground Prisoners",
     "area": "central",
-    "neighborhood": "Russian Compound",
+    "neighbourhood": "Russian Compound",
     "address": "1 Mish'ol HaGvura, Russian Compound, Jerusalem",
     "mapLocation": {
       "lat": 31.78191,
@@ -250,7 +250,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "friends",
     "name": "Friends of Zion Museum",
     "area": "central",
-    "neighborhood": "Nahalat Shiva · city center",
+    "neighbourhood": "Nahalat Shiva · city center",
     "address": "20 Yosef Rivlin Street, Jerusalem",
     "mapLocation": {
       "lat": 31.780167,
@@ -275,7 +275,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "tolerance",
     "name": "Museum of Tolerance Jerusalem",
     "area": "central",
-    "neighborhood": "Hillel Street · city center",
+    "neighbourhood": "Hillel Street · city center",
     "address": "32 Hillel Street, Jerusalem",
     "mapLocation": {
       "lat": 31.779129,
@@ -303,7 +303,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "music",
     "name": "Hebrew Music Museum",
     "area": "central",
-    "neighborhood": "Nahalat Shiva · city center",
+    "neighbourhood": "Nahalat Shiva · city center",
     "address": "10 Yoel Moshe Salomon Street, Jerusalem",
     "mapLocation": {
       "lat": 31.780637,
@@ -330,7 +330,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "italian",
     "name": "Nahon Museum of Italian Jewish Art",
     "area": "central",
-    "neighborhood": "Hillel Street · city center",
+    "neighbourhood": "Hillel Street · city center",
     "address": "25 Hillel Street, Jerusalem",
     "mapLocation": {
       "lat": 31.780202,
@@ -356,7 +356,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "seam",
     "name": "Museum on the Seam",
     "area": "central",
-    "neighborhood": "Musrara · seam-line area",
+    "neighbourhood": "Musrara · seam-line area",
     "address": "4 Heil HaHandasa Street, Jerusalem",
     "mapLocation": {
       "lat": 31.786352,
@@ -382,7 +382,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "islamic",
     "name": "Museum for Islamic Art",
     "area": "south",
-    "neighborhood": "Talbiya · HaPalmach Street",
+    "neighbourhood": "Talbiya · HaPalmach Street",
     "address": "2 HaPalmach Street, Jerusalem",
     "mapLocation": {
       "lat": 31.768585,
@@ -408,7 +408,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "begin",
     "name": "Menachem Begin Heritage Center",
     "area": "south",
-    "neighborhood": "Near the Old City · Hinnom Valley",
+    "neighbourhood": "Near the Old City · Hinnom Valley",
     "address": "6 Nahon Street, Jerusalem",
     "mapLocation": {
       "lat": 31.769344,
