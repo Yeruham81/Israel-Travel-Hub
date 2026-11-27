@@ -78,6 +78,10 @@ try {
         $id, $policy, (int)$categories['analytics'], (int)$categories['external'],
         (int)$categories['marketing'], (int)$categories['advertising'], $path,
     ]);
+    // Keep rate-limit identifiers short-lived, without collecting plaintext IPs.
+    if (random_int(1, 50) === 1) {
+        $pdo->exec('DELETE FROM admin_consent_rate_limits WHERE recorded_at < (NOW() - INTERVAL 1 DAY)');
+    }
     http_response_code(202);
     echo '{"accepted":true}';
 } catch (Throwable $error) {
