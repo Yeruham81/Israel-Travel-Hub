@@ -90,6 +90,11 @@ function text_input(string $key, int $max = 255): string {
     }
     return trim($value);
 }
+function password_input(string $key): string {
+    $value = $_POST[$key] ?? null;
+    if (!is_string($value) || strlen($value) > 200) throw new RuntimeException('Invalid password length.');
+    return $value; // Do not trim user-selected passwords.
+}
 function allowed(string $value, array $values): string {
     if (!in_array($value, $values, true)) throw new RuntimeException('Invalid selection.');
     return $value;
@@ -167,7 +172,7 @@ function assert_path(string $value): string {
 function assert_redirect_destination(string $from, string $to): string {
     $to = assert_path($to);
     if ($to === $from) throw new RuntimeException('Source and destination must differ.');
-    foreach (['/admin', '/api/'] as $blocked) {
+    foreach (['/admin', '/api'] as $blocked) {
         if (str_starts_with($from, $blocked) || str_starts_with($to, $blocked)) {
             throw new RuntimeException('Admin and API paths cannot be redirected.');
         }
