@@ -4,7 +4,7 @@ import { sourceFragment, sourceIndex } from "@/test-utils/source-fragment";
 describe("format-invariant source fragment assertions", () => {
   it("accepts whitespace and optional formatter parentheses while preserving exact code", () => {
     expect('aria-pressed={filter === value}').toMatch(sourceFragment('aria-pressed={filter===value}'));
-    expect('cards.map((card) => (\n  <Card')).toMatch(sourceFragment('cards.map(card => <Card'));
+    expect('cards.map((card) => (\n  <Card').toMatch(sourceFragment('cards.map(card => <Card'));
     expect('<Photo\n  loading="lazy"\n  decoding="async"\n/>').toMatch(sourceFragment('<Photo loading="lazy" decoding="async" />'));
     expect('const overviewUrl =\n  "/maps/example.html?points="').toMatch(sourceFragment('const overviewUrl = "/maps/example.html?points="'));
     expect('A useful\n  sentence').toMatch(sourceFragment('A useful sentence'));
