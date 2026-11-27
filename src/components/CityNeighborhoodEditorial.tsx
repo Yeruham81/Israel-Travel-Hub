@@ -50,7 +50,7 @@ const telAvivAreaCardPhotos: Record<string, { src: string; alt: string }> = {
 
 const decisionNotes = {
   jerusalem: {
-    introduction: "For a first visit, I usually recommend comparing Downtown and Mamilla first. Downtown has the broadest mix of restaurants and transport, while Mamilla is particularly useful for Jaffa Gate. Consider the Old City for pilgrimage, Mahane Yehuda for food and nightlife, or the German Colony for quieter surroundings.",
+    introduction: "For a first visit, I recommend Downtown or Mamilla. Downtown has the broadest mix of restaurants and transport, while Mamilla is particularly useful for Jaffa Gate. Consider the Old City for pilgrimage, Mahane Yehuda for food and nightlife, or the German Colony for quieter surroundings.",
     callout: "Jerusalem is hilly. A hotel that looks close to the Old City on a map may still involve steps, an uphill return or a long walk from the nearest taxi drop-off.",
     check: "If you plan to arrive on Friday evening or Saturday, check your hotel's reception and meals, as well as transport. Services vary by area.",
     faqs: [
@@ -61,8 +61,8 @@ const decisionNotes = {
     ],
   },
   telaviv: {
-    introduction: "I would start with the central beaches or Dizengoff Square if this is your first Tel Aviv visit. From there, choose between easy access to the sea, cafés and shopping, or a different neighbourhood experience in Jaffa, Neve Tzedek, Rothschild, Florentin and the north.",
-    callout: "Before booking, compare the actual walk from the hotel door to the beach, restaurants or sights you plan to visit most.",
+    introduction: "For a first visit to Tel Aviv, I recommend staying near the central beaches or Dizengoff Square. For a more local experience, consider Jaffa's historic streets, Neve Tzedek's boutiques, Rothschild Boulevard, Florentin's nightlife or the residential Old North.",
+    callout: "Choose a hotel within convenient walking distance of your favorite beaches, restaurants and attractions.",
     check: "If you arrive on Friday evening or Saturday, check the current airport-to-hotel connection. Trains and regular bus routes may have limited or no service.",
     faqs: [
       { q: "Where should I stay in Tel Aviv on my first visit?", a: "The area around Gordon, Frishman and Bograshov beaches is ideal for a beach holiday. Stay near Dizengoff Square for restaurants, shops and easy access to the beach." },
@@ -84,7 +84,7 @@ const jerusalemPractical: Record<string, { consider: string; gettingAround: stri
     gettingAround: "Jaffa Gate is often roughly 5–15 minutes on foot from hotels in this district. King David Street extends south, adding walking time. Ask your driver to use the hotel's vehicle-accessible entrance.",
   },
   "old-city": {
-    consider: "Historic guesthouses vary greatly in facilities and accessibility. A lift inside the building does not make the cobbled approach from the gate step-free.",
+    consider: "Historic guesthouses vary greatly in facilities and accessibility. If you need step-free access, check both the route from the Old City gate and accessibility within the hotel.",
     gettingAround: "Choose the arrival gate with your hotel: Jaffa Gate suits many western approaches, Damascus Gate the northern lanes, while Zion or Dung gates may suit some Jewish Quarter addresses. Ask where a taxi can drop you off and how far you'll need to carry your luggage.",
   },
   "mahane-yehuda": {
@@ -96,7 +96,7 @@ const jerusalemPractical: Record<string, { consider: string; gettingAround: stri
     gettingAround: "Hotels beside the northern Old City walls may be a short walk from Damascus Gate, while properties near the American Colony are farther away. Use the precise address for arrival and check the most useful gate for your itinerary.",
   },
   "german-colony": {
-    consider: "The northern German Colony is closer to central sights than southern Baka. A residential atmosphere often means using taxis or buses on some sightseeing days.",
+    consider: "The northern German Colony is closer to central sights than southern Baka. Allow for bus or taxi journeys to some of Jerusalem's main attractions.",
     gettingAround: "From the northern German Colony, Jaffa Gate is roughly a 15–25-minute walk, depending on the starting point. If you're staying farther south in Baka, buses and taxis are convenient for reaching the main attractions.",
   },
 };
@@ -114,9 +114,9 @@ const telAvivNoteDesign: Record<string, { insightTitle: string; arrivalTitle: st
 };
 
 const telAvivBookingTips = [
-  { title: "Measure the walk to the beach", text: "Check the hotel's street address and the route to the beach you expect to use." },
+  { title: "Walking distance to the beach", text: "Check the hotel's street address and the route to the beach you expect to use." },
   { title: "Book the right view", text: "Book a room specifically advertised with a sea view if you'd like to overlook the Mediterranean." },
-  { title: "Look at street and bar noise", text: "For Florentin, Rothschild and market streets, check which way your room faces." },
+  { title: "Street noise and nightlife", text: "For Florentin, Rothschild and market streets, check which way your room faces." },
   { title: "Check steps and lifts", text: "Converted buildings in Neve Tzedek and Jaffa may have stairs or restricted vehicle access." },
   { title: "Plan your arrival", text: "Check the last connection from the airport or station and Friday-evening or Saturday service." },
   { title: "Confirm parking", text: "Parking is often limited and costly in central Tel Aviv; ask about the actual garage or space." },
@@ -132,7 +132,7 @@ const jerusalemBookingTips = [
   { title: "Check accessibility", text: "If you have limited mobility, check whether you can reach your room without using stairs." },
   { title: "Plan a weekend arrival", text: "For a Friday-evening or Saturday arrival, confirm check-in, meals and transport." },
   { title: "Ask about a Shabbat elevator", text: "If you need a Shabbat elevator, check whether the hotel has one." },
-  { title: "Confirm parking", text: "Driving? Ask for the exact parking location and daily charge." },
+  { title: "Confirm parking", text: "If you're driving, confirm the hotel's parking arrangements and daily charges." },
   { title: "Read the full booking terms", text: "Check the full price, included taxes and cancellation deadline before paying." },
 ] as const;
 

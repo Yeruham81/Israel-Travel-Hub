@@ -96,7 +96,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/dead-sea/spa/",
@@ -104,7 +104,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/haifa/",
@@ -120,7 +120,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/haifa/family/",
@@ -128,7 +128,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/jerusalem/",
@@ -272,7 +272,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tiberias/luxury/",
@@ -280,7 +280,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/airport-transfers/",
@@ -779,10 +779,10 @@
     {
       "path": "/travel-blog/best-dead-sea-hotels/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending."
     },
     {
       "path": "/travel-blog/best-esim-for-israel/",
@@ -795,18 +795,18 @@
     {
       "path": "/travel-blog/best-hotels-in-haifa/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending."
     },
     {
       "path": "/travel-blog/best-hotels-in-tiberias/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending."
     },
     {
       "path": "/travel-blog/best-time-to-visit-israel/",
@@ -1041,18 +1041,18 @@
     {
       "path": "/travel-blog/where-to-stay-in-jerusalem/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending."
     },
     {
       "path": "/travel-blog/where-to-stay-in-tel-aviv/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending."
     }
   ],
   "shared": [
