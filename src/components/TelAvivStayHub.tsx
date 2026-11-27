@@ -16,7 +16,7 @@ import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
-import { AreaPhotoCredit } from "@/components/AreaMap";
+import { areaPhotoCreditEntries } from "@/components/AreaMap";
 import telavivHeroPhoto from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-medium.webp";
 import telavivAreaGuidePhoto from "@/assets/guides/2026-11/where-to-stay-tel-aviv-drive.webp";
 
@@ -273,8 +273,7 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
           guide={guideContactCopy(g.title, "accommodation", g.city)}
         />
         <SourceList ids={g.sourceIds} />
-        <AreaPhotoCredit areas={areas} />
-        <CityHotelPhotoCredits city="telaviv" />
+        <CityHotelPhotoCredits city="telaviv" extraEntries={areaPhotoCreditEntries(areas)} />
       </article>
     </main>
   );

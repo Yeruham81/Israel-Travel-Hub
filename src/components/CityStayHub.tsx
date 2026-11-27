@@ -19,7 +19,7 @@ import {
   FaqList,
   SourceList,
 } from "@/components/Guide";
-import { AreaPhotoCredit } from "@/components/AreaMap";
+import { areaPhotoCreditEntries } from "@/components/AreaMap";
 import { TelAvivHotelBrowser } from "@/components/TelAvivHotelBrowser";
 import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
 import { StayTripLinks } from "@/components/StayTripLinks";
@@ -400,8 +400,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
         <StayTripLinks region={g.id} currentPath={g.path} />
         <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.city)} />
         <SourceList ids={g.sourceIds} />
-        <AreaPhotoCredit areas={areas} />
-        <CityHotelPhotoCredits city={g.id === "telaviv" ? "telaviv" : "jerusalem"} />
+        <CityHotelPhotoCredits city={g.id === "telaviv" ? "telaviv" : "jerusalem"} extraEntries={areaPhotoCreditEntries(areas)} />
       </article>
     </main>
   );

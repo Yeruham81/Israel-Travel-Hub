@@ -7,12 +7,14 @@ import {
 } from "@/data/content";
 import { areaDecisionNotes } from "@/data/localEditorialInsights";
 import { hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
-import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
+import { hotelsInCityCatalog } from "@/data/cityHotelCatalog";
 import { JerusalemHotelTile } from "@/components/JerusalemHotelBrowser";
 import { JerusalemNeighborhoodGuideCallout } from "@/components/JerusalemNeighborhoodGuideCallout";
 import { TelAvivNeighborhoodGuideCallout } from "@/components/TelAvivNeighborhoodGuideCallout";
 import { TelAvivHotelTile } from "@/components/TelAvivHotelBrowser";
-import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
+import { AreaMap, areaPhotoCreditEntries } from "@/components/AreaMap";
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
+import { hotelPhotoCreditEntries } from "@/components/CityHotelPhotoCredits";
 import { GuideHeader, OnThisPage, Section, FaqList, SourceList } from "@/components/Guide";
 import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { StayTripLinks } from "@/components/StayTripLinks";
