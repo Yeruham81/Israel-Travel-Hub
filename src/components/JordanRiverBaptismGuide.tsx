@@ -2,7 +2,7 @@ import { ConsentIframe } from "@/components/ConsentIframe";
 import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { ArrowUpRight, CheckCircle2, Clock3, ExternalLink, Lightbulb, MapPinned, Shirt, Star, Users } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Clock3, ExternalLink, Lightbulb, MapPinned, Shirt, Users } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
@@ -15,7 +15,6 @@ import { yardenitSite } from "@/data/yardenitSite";
 import { qasrElYahudSite } from "@/data/qasrElYahudSite";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { recordAffiliateTourClick } from "@/lib/tour-analytics";
-import { relFor } from "@/lib/outbound";
 import { BAPTISM_PATH, BAPTISM_TITLE, BAPTISM_UPDATED, BAPTISM_HERO, baptismFaqs, baptismSources, baptismTourGroups } from "@/data/jordanRiverBaptism";
 import qasrPhoto from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp";
 

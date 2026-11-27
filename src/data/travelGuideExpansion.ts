@@ -11,7 +11,6 @@ import masada from "@/assets/home/masada-dead-sea.webp";
 import yardenit from "@/assets/guides/yardenit.jpg";
 import qasr from "@/assets/guides/qasr-el-yahud.jpg";
 import sepulchre from "@/assets/guides/holy-sepulchre.jpg";
-import jerusalemShabbatNight from "@/assets/travel-blog-hub/jerusalem-night-443d64981d-420.webp";
 import jerusalemShoppingFeature from "@/assets/guides/2026-11/jerusalem-old-city-market-lanes.webp";
 
 const photos = {

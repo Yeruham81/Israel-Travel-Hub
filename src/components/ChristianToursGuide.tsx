@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { ArrowUpRight, CalendarDays, Clock3, ExternalLink, Lightbulb, MapPin, Route } from "lucide-react";
+import { ArrowUpRight, CalendarDays, ExternalLink, Lightbulb, MapPin, Route } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";

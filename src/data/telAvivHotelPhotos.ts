@@ -14,12 +14,7 @@ import saronaStreet from "@/assets/home/hero-refresh-tel-aviv-sarona-medium.webp
 
 import telAvivCoast from "@/assets/home/tel-aviv-coast.webp";
 import beachesTelAviv from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
-import beachfront from "@/assets/tel-aviv/beachfront.webp";
-import dizengoff from "@/assets/tel-aviv/dizengoff.webp";
-import florentin from "@/assets/tel-aviv/florentin.webp";
-import jaffa from "@/assets/tel-aviv/jaffa.webp";
 import kerem from "@/assets/tel-aviv/kerem-hateimanim.webp";
-import rothschild from "@/assets/tel-aviv/rothschild.webp";
 
 export type HotelIllustration = {
   src: string;

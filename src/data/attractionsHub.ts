@@ -56,7 +56,7 @@ const attraction = (id: AttractionId, title: string, description: string, fallba
     photo: id === "old-city-jerusalem" ? oldCityJerusalemSite.hero : id === "via-dolorosa" ? viaDolorosaSite.hero : id === "jaffa" ? jaffaSite.hero : id === "akko-acre" ? akkoSite.hero : image ?? photoOverride ?? { src: fallback, alt: title },
   };
 };
-const editorialAttraction = (id: TravelGuideId, title: string, description: string, photoOverride?: { src: string; alt: string }): AttractionHubCard => ({
+const editorialAttraction = (id: TravelGuideId, title: string, description: string): AttractionHubCard => ({
   id, title, description, to: travelGuidePaths[id],
   photo: travelGuidePhotos[id],
 });

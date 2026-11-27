@@ -1,9 +1,6 @@
 import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
-import {
-  ArrowUpRight, ChefHat, Clock3, ExternalLink,
-  Flame, Heart, Lightbulb, MapPin, UtensilsCrossed
-} from "lucide-react";
+import { ArrowUpRight, ChefHat, ExternalLink, Flame, Heart, Lightbulb, MapPin, UtensilsCrossed } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";

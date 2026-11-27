@@ -3,7 +3,7 @@ import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard"
 import { recordOutboundClick } from "@/lib/outbound";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowUpRight, Church, Clock3, ExternalLink, Lightbulb, MapPin, Ticket } from "lucide-react";
+import { Church, Clock3, ExternalLink, Lightbulb, MapPin, Ticket } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";

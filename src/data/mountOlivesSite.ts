@@ -1,4 +1,3 @@
-import heroJerusalemLarge from "@/assets/home/hero-jerusalem-large.webp";
 
 /** Checked against the Christian Information Center's September 2026 listing and
  * City of David's Mount of Olives visitor guidance. Each compound has its own rules. */

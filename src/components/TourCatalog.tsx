@@ -3,7 +3,6 @@ import { Link } from "@tanstack/react-router";
 import { Clock3, MapPin, Users } from "lucide-react";
 import type { TourProduct } from "@/data/tourTypes";
 import { tourPlaces, tourTags } from "@/data/tourTypes";
-import { operators } from "@/data/registry";
 import { getTourCategory, tourPhotos, type TourCategoryId } from "@/data/tours";
 import { filterTours, isOwnerTour, offersForTour, placeLabel, toursForCategory, tourSnapshotPrice, type TourSearch } from "@/lib/tours";
 import { recordOutboundClick } from "@/lib/outbound";
