@@ -1,3 +1,3 @@
-import { TravelGuidePage, travelGuideMeta } from "@/components/TravelGuide";
+import { travelGuideMeta } from "@/components/TravelGuide";
 
 export const routeHead = () => travelGuideMeta("bethlehem");

@@ -1,6 +1,5 @@
-import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, attractionRelatedGuides, type AttractionHubCard } from "@/data/attractionsHub";
+import { attractionHubCards, attractionHubPhotos } from "@/data/attractionsHub";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
-import { Route } from "../routes/attractions.index";
 
 const PATH = "/attractions/";
 const TITLE = "Best attractions in Israel: places to visit & things to see";

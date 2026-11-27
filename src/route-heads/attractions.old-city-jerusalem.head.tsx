@@ -1,4 +1,4 @@
-import { OldCityJerusalemAttractionPage, oldCityJerusalemDestinationContent } from "@/components/OldCityJerusalemAttractionPage";
+import { oldCityJerusalemDestinationContent } from "@/components/OldCityJerusalemAttractionPage";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";

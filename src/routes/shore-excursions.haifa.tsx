@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PortPage, shorePortMeta } from "@/components/PortPage";
+import { PortPage } from "@/components/PortPage";
 import { parseShoreServiceSearch } from "@/lib/shore-services";
 
 export const Route = createFileRoute("/shore-excursions/haifa")({

@@ -8,7 +8,6 @@ import { HomeContactForm } from "@/components/HomeContactForm";
 import { attractionRegionsForTours } from "@/data/attractionRegionLinks";
 import { Link } from "@tanstack/react-router";
 import { CalendarDays, CloudSun, Lightbulb, Smartphone, TrainFront, Utensils } from "lucide-react";
-import { travelGuidePaths } from "@/data/travel-guide-paths";
 import { Breadcrumbs, FaqList, SourceList, OnThisPage } from "@/components/Guide";
 import { RelatedGuideCards } from "@/components/ShoreReadingGuides";
 import { GuidePhotoCredit } from "@/components/GuideCard";

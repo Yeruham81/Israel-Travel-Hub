@@ -7,7 +7,6 @@ import { StayPhotoCredits } from "@/components/StayGuideParts";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { privateDriverBenefits, privateDriverFaqs, privateDriverGuides, privateDriverHero, privateDriverJourneys } from "@/data/privateDriver";
 import { PRIVATE_DRIVER_CHECK_DATE } from "@/data/registry";
-import { pageMeta } from "@/lib/site";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { portTransferPrefill } from "@/lib/shore-services";
 import { parsePrivateDriverSearch, privateTourPrefill } from "@/lib/private-driver-search";

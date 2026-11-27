@@ -5,7 +5,6 @@ import { mountBeatitudesSite } from "@/data/mountBeatitudesSite";
 import { mountTaborSite } from "@/data/mountTaborSite";
 import haifaImg from "@/assets/haifa/panorama.webp";
 import { akkoSite } from "@/data/akkoSite";
-import lake from "@/assets/home/tiberias-lake.webp";
 import { roshHanikraSite } from "@/data/roshHanikraSite";
 export const northernAttractions: Record<string, Attraction> = {
 "sea-of-galilee":{

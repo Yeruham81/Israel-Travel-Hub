@@ -23,7 +23,7 @@ export function GuidePhotoCredit({ photo, insideDisclosure = false }: { photo: G
   </details>;
 }
 
-export function GuideCard({ guide, headingLevel = 2, cardPhoto, compactHomeLayout = false, responsiveSrcSet }: { guide: GuideDirectoryEntry; headingLevel?: 2 | 3; cardPhoto?: { src: string; alt: string } | null; showReadMoreArrow?: boolean; compactHomeLayout?: boolean; responsiveSrcSet?: string | undefined }) {
+export function GuideCard({ guide, headingLevel = 2, compactHomeLayout = false, responsiveSrcSet }: { guide: GuideDirectoryEntry; headingLevel?: 2 | 3; cardPhoto?: { src: string; alt: string } | null; showReadMoreArrow?: boolean; compactHomeLayout?: boolean; responsiveSrcSet?: string | undefined }) {
   const Heading = headingLevel === 3 ? "h3" : "h2";
   // Always show the main photo of the destination page, not a caller override.
   const displayedPhoto = guide.photo;

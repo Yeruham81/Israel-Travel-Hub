@@ -48,7 +48,6 @@ const jerusalem = L("Jerusalem Old City guide", "/attractions/old-city-jerusalem
 const jerusalemHotels = L("Where to stay in Jerusalem", "/travel-blog/where-to-stay-in-jerusalem/");
 const masada = L("Planning a visit to Masada", "/attractions/masada/");
 const deadSea = L("Dead Sea attractions and practical stops", "/travel-blog/dead-sea-attractions/");
-const deadSeaHotels = L("Dead Sea hotel areas", "/travel-blog/best-dead-sea-hotels/");
 const telaviv = L("Explore Old Jaffa", "/attractions/jaffa/");
 const telavivHotels = L("Where to stay in Tel Aviv", "/travel-blog/where-to-stay-in-tel-aviv/");
 const caesarea = L("Caesarea, Haifa and Akko tour options", "/tours/caesarea-haifa-acre/");
@@ -58,7 +57,6 @@ const nazareth = L("Basilica of the Annunciation", "/attractions/basilica-of-the
 const lake = L("Sea of Galilee guide", "/attractions/sea-of-galilee/");
 const tiberiasHotels = L("Hotels in Tiberias", "/travel-blog/best-hotels-in-tiberias/");
 const akko = L("Akko Old City", "/attractions/akko-acre/");
-const baptism = L("Qasr el-Yahud visit guide", "/attractions/qasr-el-yahud/");
 
 const days3: ItineraryDay[] = [
   {

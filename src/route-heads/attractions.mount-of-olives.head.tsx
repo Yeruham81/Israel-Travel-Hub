@@ -1,4 +1,4 @@
-import { MountOlivesAttractionPage, mountOlivesDestinationContent } from "@/components/MountOlivesAttractionPage";
+import { mountOlivesDestinationContent } from "@/components/MountOlivesAttractionPage";
 import { mountOlivesSite } from "@/data/mountOlivesSite";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";

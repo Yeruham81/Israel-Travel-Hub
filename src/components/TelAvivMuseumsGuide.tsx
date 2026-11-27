@@ -14,7 +14,6 @@ import { additionalMuseums, museumAreas, museumMapPoints, museums, type MuseumEn
 import museumHero from "@/assets/guides/2026-10/museums-in-tel-aviv.webp";
 import { telAvivMuseumPhotos } from "@/data/telAvivMuseumPhotos";
 import jaffaPhoto from "@/assets/tel-aviv/jaffa.webp";
-import nevePhoto from "@/assets/tel-aviv/neve-tzedek.webp";
 import beachPhoto from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
 import dizengoffPhoto from "@/assets/tel-aviv/dizengoff.webp";
 import rothschildPhoto from "@/assets/tel-aviv/rothschild.webp";

@@ -7,7 +7,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { HotelDestinationPage } from "@/components/HotelDestinationPage";
 import { HotelCategoryPage } from "@/components/HotelCategoryPage";
 import { haifaStayGuide as destination, hotelCategoryGuides } from "@/data/content";
-import { affiliateConfig, getSource, linksForPage, providerLinks, haifaHotelRecommendations as hotels } from "@/data/registry";
+import { getSource, linksForPage, providerLinks, haifaHotelRecommendations as hotels } from "@/data/registry";
 import { hotelNav } from "@/data/nav";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";

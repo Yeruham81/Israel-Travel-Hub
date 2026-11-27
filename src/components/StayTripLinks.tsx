@@ -16,8 +16,6 @@ import roadTrip from "@/assets/home/road-trip.webp";
 import masadaCable from "@/assets/home/masada-cable-car.webp";
 import museumTelAviv from "@/assets/guides/2026-10/museums-in-tel-aviv.webp";
 import beachesTelAviv from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
-import telAvivCoast from "@/assets/home/tel-aviv-coast.webp";
-import telAvivMuseum from "@/assets/guides/2026-10/eretz-israel-museum.webp";
 import telAvivPromenade from "@/assets/tel-aviv/beachfront.webp";
 import airportTransfers from "@/assets/airport-transfers/airport.webp";
 import foodPhoto from "@/assets/guides/2026-10/what-to-eat-in-israel.webp";
@@ -25,7 +23,6 @@ import haifaOverview from "@/assets/home/hero-haifa.webp";
 import haifaMuseums from "@/assets/guides/2026-10/museums-in-haifa.webp";
 import haifaPort from "@/assets/home/haifa-port.webp";
 import akkoPort from "@/assets/shore-excursions/akko-port.jpg";
-import haifaArrival from "@/assets/airport-transfers/ashdod.webp";
 import megiddoPhoto from "@/assets/guides/2026-10/tel-megiddo.webp";
 import caesareaPhoto from "@/assets/home/caesarea-dusk.webp";
 import caesareaAqueductPhoto from "@/assets/home/caesarea-aqueduct.webp";
@@ -47,9 +44,6 @@ import deadSeaMudBathing from "@/assets/guides/dead-sea-excursions/dead-sea-mud-
 import qasrPhoto from "@/assets/guides/qasr-el-yahud.jpg";
 import seasonPhoto from "@/assets/guides/2026-10/best-time-to-visit-israel.webp";
 import israelCalendar from "@/assets/guides/2026-10/calendar-of-events.webp";
-import jerusalemNight from "@/assets/home/jerusalem-old-city.webp";
-import telAvivBeachfront from "@/assets/home/tel-aviv-coast.webp";
-import inlandRoute from "@/assets/home/masada-cable-car-wide.webp";
 
 type Region = "jerusalem" | "telaviv" | "haifa" | "tiberias" | "deadsea";
 type GuideCard = { title: string; to: string; note: string; photo: string; alt: string };

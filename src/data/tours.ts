@@ -19,7 +19,6 @@ import haifaColony from "@/assets/haifa/colony.webp";
 import roshHanikraCave from "@/assets/guides/rosh-hanikra.jpg";
 import caesareaTheatreCard from "@/assets/home/caesarea-theatre-card.webp";
 import caesareaDusk from "@/assets/home/caesarea-dusk.webp";
-import caesareaAqueductTile from "@/assets/home/caesarea-aqueduct-tile.webp";
 import haifaPortImage from "@/assets/home/haifa-port.webp";
 import roshHanikraPhoto from "@/assets/home/rosh-hanikra-grottos.jpg";
 import holySepulchre from "@/assets/guides/holy-sepulchre.jpg";
@@ -35,7 +34,6 @@ import bethlehemShepherdsField from "@/assets/guides/bethlehem/shepherds-field-c
 import jordanQasrPhoto from "@/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp";
 import qasrPhoto from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp";
 import palestinianTaxi from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
-import bethlehemNativity from "@/assets/home/bethlehem-nativity.webp";
 import coralReef from "@/assets/eilat/coral-reef.webp";
 import timnaPark from "@/assets/home/timna-park-feature.jpg";
 import cruiseShip from "@/assets/home/cruise-port.webp";

@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { HaifaHotelEditorialGuide } from "@/components/HaifaHotelEditorialGuide";
 import { accommodationEditorial } from "@/data/accommodationEditorial";
 import { haifaStayGuide } from "@/data/content";
-import { hotelEditorialMeta } from "@/lib/hotel-editorial-meta";
 
 const g = { ...haifaStayGuide, title: accommodationEditorial.haifa.title, intro: accommodationEditorial.haifa.intro, reviewedAt: "2026-11-25", photo: { ...haifaStayGuide.photo, src: "/images/travel-blog/featured-haifa-hotels.webp", alt: "Haifa hotels and cityscape" } };
 export const Route = createFileRoute("/travel-blog/best-hotels-in-haifa")({

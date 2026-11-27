@@ -8,7 +8,7 @@ import { HotelDestinationPage } from "@/components/HotelDestinationPage";
 import { HotelCategoryPage } from "@/components/HotelCategoryPage";
 import { StayHotelCard } from "@/components/StayHotelCard";
 import { tiberiasStayGuide as destination, hotelCategoryGuides } from "@/data/content";
-import { affiliateConfig, getSource, providerLinks, tiberiasHotelRecommendations as hotels } from "@/data/registry";
+import { getSource, providerLinks, tiberiasHotelRecommendations as hotels } from "@/data/registry";
 import { activeHotelNotice } from "@/lib/hotel-notices";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";

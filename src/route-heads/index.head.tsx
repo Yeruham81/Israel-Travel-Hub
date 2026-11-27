@@ -3,7 +3,6 @@ import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
-import { Route } from "../routes/index";
 
 export const routeHead = () => {
     const meta = pageMeta({

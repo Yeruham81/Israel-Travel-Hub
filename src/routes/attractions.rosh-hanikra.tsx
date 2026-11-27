@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { attractionMeta } from "@/lib/attraction-meta";
 import { RoshHanikraAttractionPage } from "@/components/RoshHanikraAttractionPage";
 
 export const Route = createFileRoute("/attractions/rosh-hanikra")({

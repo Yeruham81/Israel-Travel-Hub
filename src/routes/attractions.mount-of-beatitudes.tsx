@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { attractionMeta } from "@/lib/attraction-meta";
 import { MountBeatitudesAttractionPage } from "@/components/MountBeatitudesAttractionPage";
 
 export const Route = createFileRoute("/attractions/mount-of-beatitudes")({

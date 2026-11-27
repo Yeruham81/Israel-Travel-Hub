@@ -1,5 +1,4 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
-import heroJerusalemLarge from "@/assets/home/hero-jerusalem-large.webp";
 import type { SacredHillEditorial } from "@/data/sacredHillGuides";
 
 /**

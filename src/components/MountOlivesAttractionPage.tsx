@@ -4,7 +4,7 @@ import {
   AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
-import { mountOlivesEditorialUpdate, mountOlivesAttractionUpdate } from "@/data/mountOlivesRevision";
+import { mountOlivesEditorialUpdate } from "@/data/mountOlivesRevision";
 import { mountOlivesSite } from "@/data/mountOlivesSite";
 import guidedTourPhoto from "@/assets/home/guided-tour-card.webp";
 import oldCityTourPhoto from "@/assets/home/jerusalem-old-city-card.webp";

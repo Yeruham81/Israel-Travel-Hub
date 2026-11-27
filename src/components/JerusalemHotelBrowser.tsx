@@ -5,7 +5,6 @@ import { jerusalemAreaGuides } from "@/data/content";
 import { linksForPage, type HotelRecommendation } from "@/data/registry";
 import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
 import { activeHotelNotice } from "@/lib/hotel-notices";
-import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 

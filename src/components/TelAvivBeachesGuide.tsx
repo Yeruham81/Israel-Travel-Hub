@@ -2,7 +2,7 @@ import { ConsentIframe } from "@/components/ConsentIframe";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, ExternalLink, Lightbulb, MapPin, Waves, Users, Heart, Compass, TreePalm, Sun, ShieldCheck, Bus, Accessibility, Dog, Umbrella, CalendarDays } from "lucide-react";
+import { ArrowUpRight, ExternalLink, MapPin, Waves, Users, Heart, Compass, TreePalm, Sun, ShieldCheck, Accessibility, Dog, Umbrella, CalendarDays } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
@@ -18,7 +18,6 @@ import rothschildPhoto from "@/assets/tel-aviv/rothschild.webp";
 import dizengoffPhoto from "@/assets/tel-aviv/dizengoff.webp";
 import museumPhoto from "@/assets/guides/2026-10/museums-in-tel-aviv.webp";
 import beachfrontPhoto from "@/assets/tel-aviv/beachfront.webp";
-import roadPhoto from "@/assets/home/road-trip-card.webp";
 
 const updatedAt = "2026-11-26";
 const headings = [
@@ -83,12 +82,6 @@ function Heading({ id, title, intro }: { id: string; title: string; intro?: stri
     <h2 id={id + "-h"} className="text-2xl font-bold tracking-tight sm:text-3xl">{title}</h2>
     {intro && <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{intro}</p>}
   </div>;
-}
-function Tip({ children }: { children: React.ReactNode }) {
-  return <aside className="flex gap-3 rounded-xl border border-amber-300/50 bg-amber-50/80 p-4 text-sm leading-relaxed text-slate-800">
-    <Lightbulb aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
-    <div>{children}</div>
-  </aside>;
 }
 /** Photograph positions are part of the layout now; exact local assets can be attached later. */
 function BeachPhotoSlot({ beach, kind = "detail" }: {
@@ -247,7 +240,7 @@ export function TelAvivBeachesGuide() {
 
       <section id="beaches" aria-labelledby="beaches-h" className="mt-12 scroll-mt-24">
         <Heading id="beaches" title="My guide to Tel Aviv's beaches" intro="Explore all 13 municipal bathing beaches from north to south." />
-        {areas.map((area, index) => {
+        {areas.map((area) => {
           const beaches = telAvivBeaches.filter(beach => beach.area === area.name);
           return <section key={area.name} aria-label={area.name} className="mt-9">
             <h3 className="text-xl font-bold sm:text-2xl">{area.name}</h3>

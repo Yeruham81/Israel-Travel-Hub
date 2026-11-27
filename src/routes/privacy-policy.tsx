@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ExtLink } from "@/components/Layout";
-import { LegalPage, legalPageMeta, type LegalSection } from "@/components/LegalPage";
+import { LegalPage, type LegalSection } from "@/components/LegalPage";
 import { airportTransferContact } from "@/data/registry";
 
 export const Route = createFileRoute("/privacy-policy")({

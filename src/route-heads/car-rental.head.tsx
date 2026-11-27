@@ -1,6 +1,5 @@
 import { CAR_RENTAL_UPDATED, carRentalTitle, carRentalDescription, carRentalHero } from "@/data/carRentalGuide";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
-import { Route } from "../routes/car-rental";
 
 export const routeHead = () => {
     const head = pageMeta({ title: carRentalTitle, description: carRentalDescription, path: "/car-rental/",

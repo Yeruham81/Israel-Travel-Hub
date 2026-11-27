@@ -7,7 +7,6 @@ import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { accommodationDestinations } from "@/data/content";
 import { accommodationEditorial } from "@/data/accommodationEditorial";
 import { hotelHubFaqs, hotelStyles } from "@/data/hotelHub";
-import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import hotelRoomPhoto from "@/assets/home/hotel-room-feature.webp";
 
 const destinations = accommodationDestinations;

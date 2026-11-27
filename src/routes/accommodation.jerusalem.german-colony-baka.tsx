@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NeighborhoodStayPage } from "@/components/NeighborhoodStayPage";
-import { jerusalemAreaGuides, cityStayGuides } from "@/data/content";
-import { hotelSubguideMeta } from "@/lib/landing-schema";
+import { jerusalemAreaGuides } from "@/data/content";
 const guide = jerusalemAreaGuides.find(g => g.path === "/accommodation/jerusalem/german-colony-baka/")!;
 
 export const Route = createFileRoute("/accommodation/jerusalem/german-colony-baka")({

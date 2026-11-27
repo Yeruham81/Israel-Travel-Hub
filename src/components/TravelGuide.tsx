@@ -1,14 +1,14 @@
 import { ESIM_UPDATED, esimProviders, esimPicks, esimFixedPlans, esimUnlimitedPlans, esimFairUse, esimFeatureRows, esimUsd, esimPlanPrice, drimsimEurPerMb, type EsimPlan } from "@/data/esimIsraelPlans";
-import { GuideTags, GuidePhotoCredit, GuideCard } from "@/components/GuideCard";
+import { GuideTags } from "@/components/GuideCard";
 export { GuideTags, GuidePhotoCredit, GuideCard } from "@/components/GuideCard";
 import { stage5PhotoSrcSet } from "@/lib/stage5-photo-variants";
-import { Link as RouterLink, type LinkProps } from "@tanstack/react-router";
+import { type LinkProps } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
 import { Fragment, type ReactNode } from "react";
 import { BedDouble, BookOpen, CarFront, Landmark, Lightbulb, TrainFront, Waves, Plane, Car, ReceiptText, MapPinned, Smartphone, Building2, Mountain, type LucideIcon } from "lucide-react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderNameLink, RelatedLinks, SourceList } from "@/components/Guide";
-import { travelGuides, type GuideDirectoryEntry, type GuidePhoto, type GuideSection, type GuideInlineSpan, type GuideTable, type TravelGuide } from "@/data/travelGuides";
-import { guideTopics, type GuideTopicId } from "@/data/generated/guide-directory";
+import { travelGuides, type GuidePhoto, type GuideSection, type GuideInlineSpan, type GuideTable, type TravelGuide } from "@/data/travelGuides";
+import { guideTopics } from "@/data/generated/guide-directory";
 import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";

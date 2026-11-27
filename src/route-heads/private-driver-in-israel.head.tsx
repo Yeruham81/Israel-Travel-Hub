@@ -1,6 +1,5 @@
-import { privateDriverBenefits, privateDriverFaqs, privateDriverGuides, privateDriverHero, privateDriverJourneys } from "@/data/privateDriver";
+import { privateDriverHero } from "@/data/privateDriver";
 import { pageMeta } from "@/lib/site";
-import { Route } from "../routes/private-driver-in-israel";
 
 export const routeHead = () => pageMeta({
     title: "Private driver in Israel: intercity transfers and day hire",

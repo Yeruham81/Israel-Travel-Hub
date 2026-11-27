@@ -5,17 +5,14 @@
  * Cross-links intentionally avoid repeating other guides in full.
  */
 import type { TravelGuide } from "@/data/travelGuides";
-import { consumerFareTable, taxiFaresWithVat } from "@/data/taxiFares";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { travelGuidePaths } from "@/data/travel-guide-paths";
 import { airportTaxiEstimateTable } from "@/data/airportTaxiFareEstimates";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import roadTrip from "@/assets/home/road-trip.webp";
 import taxiMeterPhoto from "@/assets/guides/israeli-taxi-roof-sign.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
 
 const cityPhoto = airportTransferPhotos["tel-aviv"]!;
-const intercityPhoto = { src: roadTrip, alt: "Illustration of a vehicle traveling on a road through the Israeli landscape" };
 const terminalHallPhoto = { src: airportHall, alt: "Ben Gurion Airport Terminal 3 arrivals hall", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" };
 
 export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", TravelGuide> = {

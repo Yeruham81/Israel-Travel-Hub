@@ -5,7 +5,6 @@ import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import bestTimeGuidePhoto from "@/assets/guides/2026-10/best-time-to-visit-israel.webp";
 import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
 import deadSeaHotelPool from "@/assets/dead-sea/pool.webp";
-import jerusalemOldCity from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
 
 /** Six focused guide cards with local, relevant photographs, followed by
  * genuinely useful onward planning links. Specific to the Jerusalem–Dead Sea

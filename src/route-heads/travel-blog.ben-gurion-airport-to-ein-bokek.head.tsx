@@ -1,3 +1,3 @@
-import { AirportJourneyPage, airportJourneyMeta } from "@/components/AirportJourneyPage";
+import { airportJourneyMeta } from "@/components/AirportJourneyPage";
 
 export const routeHead = () => airportJourneyMeta("ein-bokek");

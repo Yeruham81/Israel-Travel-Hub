@@ -2,11 +2,7 @@ import { ConsentIframe } from "@/components/ConsentIframe";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import {
- ArrowUpRight, ExternalLink, MapPin, Clock3, Waves, Landmark, Utensils, House,
- Building2, Palette, Footprints, ShoppingBag, Coffee, TreePalm, Lightbulb,
- CalendarDays, Train, ShieldCheck, BedDouble, ChevronRight, Compass, Ticket,
-} from "lucide-react";
+import { ArrowUpRight, ExternalLink, MapPin, Clock3, Waves, Landmark, Utensils, House, Building2, Palette, Footprints, ShoppingBag, Coffee, TreePalm, Lightbulb, CalendarDays, Train, ShieldCheck, BedDouble, ChevronRight } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
@@ -35,7 +31,6 @@ import tenDays from "@/assets/home/hero-eilat-mountains-sm.webp";
 import railPhoto from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import seasonPhoto from "@/assets/guides/2026-10/best-time-to-visit-israel.webp";
 import tourJaffa from "@/assets/attractions-hub/card-jaffa-420.webp";
-import tourFood from "@/assets/tel-aviv/kerem-hateimanim.webp";
 import tourCity from "@/assets/home/hero-tel-aviv-sm.webp";
 
 const icons=[Landmark,Waves,Utensils,House,Building2,Palette,Footprints,ShoppingBag,Coffee,TreePalm];
