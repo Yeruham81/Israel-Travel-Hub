@@ -1,3 +1,4 @@
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { ConsentIframe } from "@/components/ConsentIframe";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { useEffect, useRef, useState, type ReactNode } from "react";
@@ -918,46 +919,7 @@ export function TelAvivMuseumsGuide() {
             The official museum websites below provide current opening hours, admission prices,
             exhibitions and closure notices.
           </p>
-          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-            Photo credits for the four added museum photographs (resized and compressed to WebP):{" "}
-            <a
-              href="https://commons.wikimedia.org/wiki/File:Bauhaus_Center_Tel_Aviv.JPG"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            >
-              Bauhaus Center - Itzuvit, CC BY-SA 3.0
-            </a>
-            ;{" "}
-            <a
-              href="https://commons.wikimedia.org/wiki/File:Bialik_Bldg.jpg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            >
-              Bialik House - Ori Lubin
-            </a>
-            ;{" "}
-            <a
-              href="https://commons.wikimedia.org/wiki/File:Bauhaus_Tel-Aviv_museum.jpg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            >
-              Bauhaus-era building - Talmoryair, CC BY 3.0
-            </a>
-            ;{" "}
-            <a
-              href="https://commons.wikimedia.org/wiki/File:Rubin_Museum_Tel_Aviv,_Room_39.jpg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            >
-              Rubin Museum - Yoram Shoval, CC BY-SA 4.0
-            </a>
-            . The historic Bauhaus Museum photograph illustrates the White City architecture
-            discussed in the Liebling Haus entry.
-          </p>
+
           <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
             {museums.map((museum) => (
               <li key={museum.id}>
@@ -966,6 +928,12 @@ export function TelAvivMuseumsGuide() {
             ))}
           </ul>
         </SourcesDisclosure>
+        <PhotoCreditsDisclosure entries={[
+  { label: "Bauhaus Center", credit: "Itzuvit · CC BY-SA 3.0; resized and compressed to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Bauhaus_Center_Tel_Aviv.JPG", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
+  { label: "Bialik House", credit: "Ori Lubin; resized and compressed to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Bialik_Bldg.jpg" },
+  { label: "Bauhaus-era building (illustrating White City architecture in the Liebling Haus entry)", credit: "Talmoryair · CC BY 3.0; resized and compressed to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Bauhaus_Tel-Aviv_museum.jpg", licenseUrl: "https://creativecommons.org/licenses/by/3.0/" },
+  { label: "Rubin Museum", credit: "Yoram Shoval · CC BY-SA 4.0; resized and compressed to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Rubin_Museum_Tel_Aviv,_Room_39.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
+]} />
       </article>
     </main>
   );

@@ -1,3 +1,4 @@
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { ConsentIframe } from "@/components/ConsentIframe";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link } from "@tanstack/react-router";
@@ -1042,28 +1043,9 @@ export function TelAvivAttractionsGuide() {
               <External url="https://www.rail.co.il/en">Israel Railways</External>
             </li>
           </ul>
-          <p className="mt-5 border-t pt-4 text-xs leading-relaxed text-muted-foreground">
-            Florentin graffiti photograph:{" "}
-            <a
-              className="font-semibold text-primary hover:underline"
-              href={florentinPhotoCredit.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {florentinPhotoCredit.author}
-            </a>
-            , licensed under{" "}
-            <a
-              className="font-semibold text-primary hover:underline"
-              href={florentinPhotoCredit.licenseUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {florentinPhotoCredit.license}
-            </a>
-            . {florentinPhotoCredit.modification}.
-          </p>
+
         </SourcesDisclosure>
+        <PhotoCreditsDisclosure entries={[{ label: "Florentin graffiti photograph", credit: [florentinPhotoCredit.author, florentinPhotoCredit.license, florentinPhotoCredit.modification].join(" · "), sourceUrl: florentinPhotoCredit.sourceUrl, licenseUrl: florentinPhotoCredit.licenseUrl }]} />
       </article>
     </main>
   );

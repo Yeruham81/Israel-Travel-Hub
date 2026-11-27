@@ -1,3 +1,4 @@
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { ConsentIframe } from "@/components/ConsentIframe";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link } from "@tanstack/react-router";
@@ -1001,42 +1002,9 @@ export function DeadSeaAttractionsGuide() {
               </OfficialLink>
             </li>
           </ul>
-          <div className="mt-5 border-t pt-4">
-            <h3 className="text-sm font-semibold text-foreground">Photograph credits</h3>
-            <p className="mt-1 text-xs leading-relaxed">
-              Three location-specific images are adapted to the card proportions from licensed
-              Wikimedia Commons originals.
-            </p>
-            <ul className="mt-3 space-y-2 text-xs leading-relaxed">
-              {deadSeaPhotoCredits.map((credit) => (
-                <li key={credit.id}>
-                  <a
-                    href={credit.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-primary hover:underline"
-                  >
-                    {credit.id === "nahal-bokek"
-                      ? "Nahal Bokek"
-                      : credit.id === "einot-tsukim"
-                        ? "Einot Tsukim"
-                        : "Moshe Novomeysky Visitor Center"}
-                  </a>
-                  {" - photograph by " + credit.author + ", "}
-                  <a
-                    href={credit.licenseUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-primary hover:underline"
-                  >
-                    {credit.license}
-                  </a>
-                  {". Cropped to fit the layout."}
-                </li>
-              ))}
-            </ul>
-          </div>
+
         </SourcesDisclosure>
+        <PhotoCreditsDisclosure entries={deadSeaPhotoCredits.map((credit) => ({ label: credit.id === "nahal-bokek" ? "Nahal Bokek" : credit.id === "einot-tsukim" ? "Einot Tsukim" : "Moshe Novomeysky Visitor Center", credit: credit.author + " · " + credit.license + "; cropped to fit the layout", sourceUrl: credit.sourceUrl, licenseUrl: credit.licenseUrl }))} />
       </article>
     </main>
   );
