@@ -1043,9 +1043,21 @@ export function TelAvivAttractionsGuide() {
               <External url="https://www.rail.co.il/en">Israel Railways</External>
             </li>
           </ul>
-
         </SourcesDisclosure>
-        <PhotoCreditsDisclosure entries={[{ label: "Florentin graffiti photograph", credit: [florentinPhotoCredit.author, florentinPhotoCredit.license, florentinPhotoCredit.modification].join(" · "), sourceUrl: florentinPhotoCredit.sourceUrl, licenseUrl: florentinPhotoCredit.licenseUrl }]} />
+        <PhotoCreditsDisclosure
+          entries={[
+            {
+              label: "Florentin graffiti photograph",
+              credit: [
+                florentinPhotoCredit.author,
+                florentinPhotoCredit.license,
+                florentinPhotoCredit.modification,
+              ].join(" · "),
+              sourceUrl: florentinPhotoCredit.sourceUrl,
+              licenseUrl: florentinPhotoCredit.licenseUrl,
+            },
+          ]}
+        />
       </article>
     </main>
   );

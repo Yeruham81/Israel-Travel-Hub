@@ -147,10 +147,7 @@ describe("independent author identity and page credits", () => {
       "href",
       external.sourceUrl,
     );
-    expect(within(disclosure).getByText("Licence")).toHaveAttribute(
-      "href",
-      external.licenseUrl,
-    );
+    expect(within(disclosure).getByText("Licence")).toHaveAttribute("href", external.licenseUrl);
     expect(container.textContent).not.toContain("original publisher");
     expect(container.textContent).not.toContain("Illustrative scene");
   });

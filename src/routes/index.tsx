@@ -724,7 +724,12 @@ function Home() {
       <div className="mx-auto mb-10 mt-10 max-w-6xl px-4">
         <PhotoCreditsDisclosure
           entries={photoCredits
-            .filter((credit) => !isPublisherUrl(credit.sourceUrl) && credit.asset !== "ashdod-port" && credit.asset !== "haifa-port")
+            .filter(
+              (credit) =>
+                !isPublisherUrl(credit.sourceUrl) &&
+                credit.asset !== "ashdod-port" &&
+                credit.asset !== "haifa-port",
+            )
             .map((credit) => ({
               label: credit.subject,
               credit: [credit.author, credit.license, credit.changes].filter(Boolean).join(" · "),

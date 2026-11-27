@@ -1002,9 +1002,20 @@ export function DeadSeaAttractionsGuide() {
               </OfficialLink>
             </li>
           </ul>
-
         </SourcesDisclosure>
-        <PhotoCreditsDisclosure entries={deadSeaPhotoCredits.map((credit) => ({ label: credit.id === "nahal-bokek" ? "Nahal Bokek" : credit.id === "einot-tsukim" ? "Einot Tsukim" : "Moshe Novomeysky Visitor Center", credit: credit.author + " · " + credit.license + "; cropped to fit the layout", sourceUrl: credit.sourceUrl, licenseUrl: credit.licenseUrl }))} />
+        <PhotoCreditsDisclosure
+          entries={deadSeaPhotoCredits.map((credit) => ({
+            label:
+              credit.id === "nahal-bokek"
+                ? "Nahal Bokek"
+                : credit.id === "einot-tsukim"
+                  ? "Einot Tsukim"
+                  : "Moshe Novomeysky Visitor Center",
+            credit: credit.author + " · " + credit.license + "; cropped to fit the layout",
+            sourceUrl: credit.sourceUrl,
+            licenseUrl: credit.licenseUrl,
+          }))}
+        />
       </article>
     </main>
   );

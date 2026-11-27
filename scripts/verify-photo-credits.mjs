@@ -4,18 +4,23 @@ import assert from "node:assert/strict";
 import { JSDOM } from "jsdom";
 
 const regionSelector = 'section[aria-label="Photo credits and licences"]';
-const attributionText = /\b(?:Wikimedia Commons|Creative Commons|CC\s+BY(?:-SA|-NC|-ND)*\b|CC0\b|PikiWiki|Unsplash|Pexels|photo(?:graph|s|graphs)?\s+(?:credits?|attribution)\b)|\b(?:photo|photograph|image)\s*:\s*$/i;
-const sourceTerms = /wikimedia|creative\s*commons|\bcc\s+by\b|\bcc0\b|unsplash|pexels|pikiwiki|(?:photo|image|photograph)[ _-]*credit|photo\s*:/i;
+const attributionText =
+  /\b(?:Wikimedia Commons|Creative Commons|CC\s+BY(?:-SA|-NC|-ND)*\b|CC0\b|PikiWiki|Unsplash|Pexels|photo(?:graph|s|graphs)?\s+(?:credits?|attribution)\b)|\b(?:photo|photograph|image)\s*:\s*$/i;
+const sourceTerms =
+  /wikimedia|creative\s*commons|\bcc\s+by\b|\bcc0\b|unsplash|pexels|pikiwiki|(?:photo|image|photograph)[ _-]*credit|photo\s*:/i;
 
 function isPhotoSource(href) {
   try {
     const url = new URL(href);
     const host = url.hostname.toLowerCase();
     return (
-      (host === "commons.wikimedia.org" && /\/(?:wiki\/)?(?:File:|Special:FilePath)/i.test(url.pathname)) ||
+      (host === "commons.wikimedia.org" &&
+        /\/(?:wiki\/)?(?:File:|Special:FilePath)/i.test(url.pathname)) ||
       (host === "creativecommons.org" && /^\/(?:licenses|publicdomain)\//i.test(url.pathname)) ||
-      ((host === "unsplash.com" || host === "www.unsplash.com") && /^\/(?:photos\/|license(?:\/|$))/i.test(url.pathname)) ||
-      ((host === "pexels.com" || host === "www.pexels.com") && /^\/(?:photo\/|license(?:\/|$))/i.test(url.pathname))
+      ((host === "unsplash.com" || host === "www.unsplash.com") &&
+        /^\/(?:photos\/|license(?:\/|$))/i.test(url.pathname)) ||
+      ((host === "pexels.com" || host === "www.pexels.com") &&
+        /^\/(?:photo\/|license(?:\/|$))/i.test(url.pathname))
     );
   } catch {
     return false;
@@ -44,8 +49,14 @@ export function auditPhotoCredits(html, page) {
           add("photo credits precede #" + before.id);
       }
       for (const image of main.querySelectorAll("img")) {
-        if (!region.contains(image) && (region.compareDocumentPosition(image) & Node.DOCUMENT_POSITION_FOLLOWING))
-          add("content photo after credits: " + (image.getAttribute("alt") || image.getAttribute("src") || "(unlabelled)"));
+        if (
+          !region.contains(image) &&
+          region.compareDocumentPosition(image) & Node.DOCUMENT_POSITION_FOLLOWING
+        )
+          add(
+            "content photo after credits: " +
+              (image.getAttribute("alt") || image.getAttribute("src") || "(unlabelled)"),
+          );
       }
     }
     for (const anchor of main.querySelectorAll("a[href]")) {
@@ -55,24 +66,30 @@ export function auditPhotoCredits(html, page) {
     const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
       const parent = node.parentElement;
-      if (!parent || parent.closest(regionSelector + ", script, style, template, noscript, svg")) continue;
+      if (!parent || parent.closest(regionSelector + ", script, style, template, noscript, svg"))
+        continue;
       const value = node.textContent.trim().replace(/\s+/g, " ");
       if (attributionText.test(value))
         add("attribution text outside disclosure: " + value.slice(0, 180));
     }
     // Explicit coverage for the two verified regressions; placement alone must
     // not pass if an attribution is simply removed from the rendered page.
-    const expected = {
-      "/travel-blog/jerusalem-to-bethlehem/": [
-        "https://commons.wikimedia.org/wiki/File:Shepherds_Field_Chapel,_Roman_Catholic_(Beit_Sahour)-interior_(2).jpg",
-        "https://creativecommons.org/licenses/by-sa/4.0/",
-      ],
-      "/attractions/ein-gedi/": [
-        "https://commons.wikimedia.org/wiki/File:Ein_Gedi_synagogue058.JPG",
-      ],
-    }[page] ?? [];
+    const expected =
+      {
+        "/travel-blog/jerusalem-to-bethlehem/": [
+          "https://commons.wikimedia.org/wiki/File:Shepherds_Field_Chapel,_Roman_Catholic_(Beit_Sahour)-interior_(2).jpg",
+          "https://creativecommons.org/licenses/by-sa/4.0/",
+        ],
+        "/attractions/ein-gedi/": [
+          "https://commons.wikimedia.org/wiki/File:Ein_Gedi_synagogue058.JPG",
+        ],
+      }[page] ?? [];
     for (const href of expected) {
-      if (!regions.some((region) => [...region.querySelectorAll("a[href]")].some((a) => a.getAttribute("href") === href)))
+      if (
+        !regions.some((region) =>
+          [...region.querySelectorAll("a[href]")].some((a) => a.getAttribute("href") === href),
+        )
+      )
         add("required photo source/licence missing from disclosure: " + href);
     }
     return { issues: [...issues], disclosures: regions.length };
@@ -94,13 +111,19 @@ export function reportPhotoCreditSources(root = "src") {
       } else if (/\.(?:tsx?|json)$/.test(item.name) && !/\.test\./.test(item.name)) {
         scanned++;
         const lines = readFileSync(path, "utf8").split("\n");
-        const matches = lines.flatMap((line, i) => sourceTerms.test(line) ? [i + 1] : []);
+        const matches = lines.flatMap((line, i) => (sourceTerms.test(line) ? [i + 1] : []));
         if (matches.length) candidates.push({ path, matches });
       }
     }
   }
   for (const dir of ["components", "routes", "data"]) walk(join(root, dir));
-  console.log("Photo attribution source inventory: " + scanned + " files scanned, " + candidates.length + " candidate files.");
+  console.log(
+    "Photo attribution source inventory: " +
+      scanned +
+      " files scanned, " +
+      candidates.length +
+      " candidate files.",
+  );
   for (const { path, matches } of candidates) console.log(path + ": " + matches.join(", "));
   return { scanned, candidates };
 }
@@ -115,7 +138,15 @@ export function verifyPhotoCredits({ root, paths }) {
     disclosures += result.disclosures;
     issues.push(...result.issues);
   }
-  console.log("Photo credit HTML audit: " + paths.size + " sitemap pages, " + disclosures + " disclosures, " + issues.length + " issues.");
+  console.log(
+    "Photo credit HTML audit: " +
+      paths.size +
+      " sitemap pages, " +
+      disclosures +
+      " disclosures, " +
+      issues.length +
+      " issues.",
+  );
   for (const issue of issues) console.error(issue);
   assert.equal(issues.length, 0, "Rendered photo-credit placement audit failed");
 }

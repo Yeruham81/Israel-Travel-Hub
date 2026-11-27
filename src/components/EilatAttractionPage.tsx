@@ -870,8 +870,10 @@ export const eilatDestinationContent: AttractionDestinationContent = {
   photoCredits: [
     {
       label: "Eilat Birdwatching Park",
-      credit: "Israel Zeller / Zeller Zalmanson, PikiWiki Israel · CC BY 2.5; cropped, resized and converted to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_85046_eilat_bird_park.jpg",
+      credit:
+        "Israel Zeller / Zeller Zalmanson, PikiWiki Israel · CC BY 2.5; cropped, resized and converted to WebP",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_85046_eilat_bird_park.jpg",
       licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
     },
     {
@@ -883,7 +885,8 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     {
       label: "Glass-bottom boat",
       credit: "Yonatan Dodin · CC BY 4.0; cropped, resized and converted to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Glass-bottom_boat,_Israel_Yam_7,_Eilat_(2023).jpg",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:Glass-bottom_boat,_Israel_Yam_7,_Eilat_(2023).jpg",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
     },
     {

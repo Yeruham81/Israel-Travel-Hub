@@ -38,9 +38,15 @@ describe("page photo attribution policy", () => {
         const file = dir + "/" + name;
         const source = readFileSync(file, "utf8");
         expect(source, file).not.toMatch(/<GuidePhotoCredit\b/);
-        expect(source, file).not.toMatch(/<summary\b[^>]*>\s*(?:Guide image credits|Image credits|Photo credits|Illustrative photo credits)/i);
-        for (const block of source.matchAll(/<SourcesDisclosure\b[^>]*>[\s\S]*?<\/SourcesDisclosure>/g)) {
-          expect(block[0], file).not.toMatch(/<PhotoCreditsDisclosure\b|commons\.wikimedia\.org\/wiki\/File:|creativecommons\.org\/licenses\//i);
+        expect(source, file).not.toMatch(
+          /<summary\b[^>]*>\s*(?:Guide image credits|Image credits|Photo credits|Illustrative photo credits)/i,
+        );
+        for (const block of source.matchAll(
+          /<SourcesDisclosure\b[^>]*>[\s\S]*?<\/SourcesDisclosure>/g,
+        )) {
+          expect(block[0], file).not.toMatch(
+            /<PhotoCreditsDisclosure\b|commons\.wikimedia\.org\/wiki\/File:|creativecommons\.org\/licenses\//i,
+          );
         }
       }
     }
@@ -57,16 +63,19 @@ describe("page photo attribution policy", () => {
       "AttractionDestinationPage",
     ]) {
       const source = readFileSync("src/components/" + name + ".tsx", "utf8");
-      expect(source.indexOf("<PhotoCreditsDisclosure"), name).toBeGreaterThan(source.lastIndexOf("</SourcesDisclosure>"));
+      expect(source.indexOf("<PhotoCreditsDisclosure"), name).toBeGreaterThan(
+        source.lastIndexOf("</SourcesDisclosure>"),
+      );
       expect(source.match(/<PhotoCreditsDisclosure\b/g), name).toHaveLength(1);
     }
   });
 
   it("uses structured attribution data in every attraction template", () => {
-    for (const name of readdirSync("src/components").filter((name) => name.endsWith("AttractionPage.tsx"))) {
+    for (const name of readdirSync("src/components").filter((name) =>
+      name.endsWith("AttractionPage.tsx"),
+    )) {
       const source = readFileSync("src/components/" + name, "utf8");
       expect(source, name).not.toMatch(/photoCredits:\s*\(/);
     }
   });
-
 });

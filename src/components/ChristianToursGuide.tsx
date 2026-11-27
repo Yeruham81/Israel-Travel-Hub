@@ -714,10 +714,19 @@ export function ChristianToursGuide() {
                 <External href={source.url}>{source.title}</External>
               </li>
             ))}
-
           </ul>
         </SourcesDisclosure>
-        <PhotoCreditsDisclosure entries={[{ label: "Sea of Galilee photograph", credit: "Ian Scott / Wikimedia Commons · CC BY-SA 2.0; resized to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Tiberias_from_the_Sea_of_Galilee_(5809646279).jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" }]} />
+        <PhotoCreditsDisclosure
+          entries={[
+            {
+              label: "Sea of Galilee photograph",
+              credit: "Ian Scott / Wikimedia Commons · CC BY-SA 2.0; resized to WebP",
+              sourceUrl:
+                "https://commons.wikimedia.org/wiki/File:Tiberias_from_the_Sea_of_Galilee_(5809646279).jpg",
+              licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+            },
+          ]}
+        />
       </article>
     </main>
   );

@@ -35,9 +35,14 @@ for (const result of results) {
     throw Error("Missing or untrusted affiliate link for " + id);
   const partner = id.endsWith("-getyourguide") ? "getyourguide" : "viator";
   const productId = id.slice(5, -(partner.length + 1));
-  if (!registry(original).tour(productId, partner, url)) throw Error("Product URL changed since generation: " + id);
-  if (new URL(partnerUrl).hostname !== partner + ".tpm.li") throw Error("Tracking provider mismatch: " + id);
-  original = setTracking(original, configKey, partnerUrl, { allowInsert: true, allowReplace: true });
+  if (!registry(original).tour(productId, partner, url))
+    throw Error("Product URL changed since generation: " + id);
+  if (new URL(partnerUrl).hostname !== partner + ".tpm.li")
+    throw Error("Tracking provider mismatch: " + id);
+  original = setTracking(original, configKey, partnerUrl, {
+    allowInsert: true,
+    allowReplace: true,
+  });
 }
 await writeFile(file, original, "utf8");
 console.log("Applied 16 product-specific tour affiliate links for review in git");

@@ -678,10 +678,32 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     },
   ],
   photoCredits: [
-    { label: "David’s Tomb", credit: "Jacek555 / Wikimedia Commons · CC BY-SA 3.0; resized and cropped to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:The_cenotaph_of_David%27s_Tomb.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
-    { label: "Zion Gate", credit: "Marco Plassio / Wikimedia Commons · CC BY-SA 3.0; resized and cropped to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_-_Zion_gate.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
-    { label: "Oskar Schindler’s grave", credit: "Marco Plassio / Wikimedia Commons · CC BY-SA 3.0; resized and cropped to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_-_Oskar_Schindler%27s_Grave.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
-    { label: "Chamber of the Holocaust", credit: "Adam Jones / Wikimedia Commons · CC BY-SA 2.0; resized and cropped to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Chamber_of_the_Holocaust_-_Outside_King_David%27s_Tomb_-_Jerusalem_-_Israel_-_02_(5676110809).jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" },
+    {
+      label: "David’s Tomb",
+      credit: "Jacek555 / Wikimedia Commons · CC BY-SA 3.0; resized and cropped to WebP",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:The_cenotaph_of_David%27s_Tomb.jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    },
+    {
+      label: "Zion Gate",
+      credit: "Marco Plassio / Wikimedia Commons · CC BY-SA 3.0; resized and cropped to WebP",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_-_Zion_gate.jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    },
+    {
+      label: "Oskar Schindler’s grave",
+      credit: "Marco Plassio / Wikimedia Commons · CC BY-SA 3.0; resized and cropped to WebP",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:Jerusalem_-_Oskar_Schindler%27s_Grave.jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    },
+    {
+      label: "Chamber of the Holocaust",
+      credit: "Adam Jones / Wikimedia Commons · CC BY-SA 2.0; resized and cropped to WebP",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:Chamber_of_the_Holocaust_-_Outside_King_David%27s_Tomb_-_Jerusalem_-_Israel_-_02_(5676110809).jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+    },
   ],
   sources: [
     { label: "Christian Information Center - holy site visiting hours", url: official.cicHours },
