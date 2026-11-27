@@ -1,4 +1,4 @@
-name: Stage 5.5b - verify component trial with hydration-aware text comparison
+name: Stage 5.5b - validate systematic source assertion migration
 on:
   push:
     branches: [audit/lint-quality-stage5]
@@ -10,7 +10,7 @@ jobs:
     permissions:
       contents: read
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 40
     env:
       CI: "true"
       CI_FUNCTIONAL_ONLY: "false"
@@ -37,6 +37,156 @@ jobs:
           cd "$RUNNER_TEMP/main-reference"
           bash scripts/install-ci-dependencies.sh
           bash scripts/build-validated-static.sh
+      - name: Trial systematic test assertion migration
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/unused-audit"
+          mkdir -p "$out"
+          cat > .stage-5-5b-test-migration.mjs <<'JS'
+          import fs from "node:fs";
+          import path from "node:path";
+          import ts from "typescript";
+          const out=path.join(process.env.RUNNER_TEMP,"unused-audit");
+          // Explicit source-string variables in the failed suites only. Assertions
+          // against imported data, rendered DOM, CSS and public HTML remain unchanged.
+          const suites = {
+            "src/data/bestTimeIsrael.test.ts": ["route","component","page"],
+            "src/data/deadSeaAttractionsGuide.test.ts": ["page","route"],
+            "src/data/israelFoodExplorer.test.ts": ["content"],
+            "src/data/israelHolidayVisitorGuide.test.ts": ["page","route"],
+            "src/data/israelItineraries.test.ts": ["widgetComponent","guideComponent","view","cards","widget","tours","contact","messageCopy","footer","tourComponent","itineraryComponent"],
+            "src/data/jordanRiverBaptism.test.ts": ["page"],
+            "src/data/telAvivAttractionsGuide.test.ts": ["page","route","source"],
+            "src/data/telAvivBeaches.test.ts": ["page","data"],
+            "src/data/topTenExperiences.test.ts": ["page"],
+            "src/test/akko-feature.test.tsx": ["route","component","mapComponent","page","registry"],
+            "src/test/annunciation-feature.test.tsx": ["route","shell","article"],
+            "src/test/capernaum-feature.test.tsx": ["article","shell","route","pageLayout","park","siteInfo","guideComponent","contact"],
+            "src/test/christian-tours-guide.test.tsx": ["page","data"],
+            "src/test/contact-form-tripadvisor-visual.test.tsx": ["source","route","page","quote","intro"],
+            "src/test/detailed-horizontal-card-layouts.test.ts": ["page","food","telAviv","senior"],
+            "src/test/editorial-related-mobile-grids.test.ts": ["source","hub","guide","shared","section","attraction","related","jerusalem","category","itinerary"],
+            "src/test/external-tour-card-grids.test.ts": ["tours","shore","telAviv"],
+            "src/test/haifa-city-guide.test.tsx": ["page"],
+            "src/test/inline-prose-link-icons.test.ts": ["seniors"],
+            "src/test/israel-travel-tips-guide.test.tsx": ["source","route"],
+            "src/test/jaffa-feature.test.tsx": ["component","route","mapComponent","registry"],
+            "src/test/magdala-feature.test.tsx": ["article","route","shell"],
+            "src/test/mount-zion-map.test.ts": ["component"],
+            "src/test/old-city-jerusalem-feature.test.tsx": ["page","mapComponent","route"],
+            "src/test/qasr-el-yahud-feature.test.tsx": ["route","shell","page"],
+            "src/test/senior-tours-guide.test.tsx": ["component","dataSource"],
+            "src/test/tabgha-feature.test.tsx": ["article","route","shell"],
+            "src/test/tel-megiddo-feature.test.tsx": ["route","shell","article"],
+            "src/test/travel-blog-hub-images.test.ts": ["source","component"],
+            "src/test/yardenit-feature.test.tsx": ["article","route","shell"],
+          };
+          const counts={};
+          const exactEdits={
+            "src/test/akko-feature.test.tsx":[["/<AttractionHighlight mobileImageFirst/g","/<AttractionHighlight\\s+mobileImageFirst/g"]],
+            "src/test/jaffa-feature.test.tsx":[["/<AttractionHighlight mobileImageFirst/g","/<AttractionHighlight\\s+mobileImageFirst/g"]],
+            "src/test/haifa-city-guide.test.tsx":[["/<AttractionHighlight title=/g","/<AttractionHighlight\\s+title=/g"]],
+            "src/test/old-city-jerusalem-feature.test.tsx":[["/<AttractionHighlight mobileImageFirst/g","/<AttractionHighlight\\s+mobileImageFirst/g"],["/type: \"site\" \\}/g","/type:\\s*\"site\"\\s*,?\\s*\\}/g"],["/type: \"gate\" \\}/g","/type:\\s*\"gate\"\\s*,?\\s*\\}/g"]],
+            "src/test/mount-zion-map.test.ts":[["/\\{ id: \"([^\"]+)\", name:/g","/\\{\\s*id:\\s*\"([^\"]+)\",\\s*name:/g"]],
+            "src/test/external-tour-card-grids.test.ts":[["/id:\"(tour-[^\"]+@tours-tel-aviv-jaffa)\"/g","/id:\\s*\"(tour-[^\"]+@tours-tel-aviv-jaffa)\"/g"]],
+            "src/data/topTenExperiences.test.ts":[["    expect(page.indexOf('<section id=\"experiences\"')).toBeLessThan(page.indexOf('<section id=\"experience-map\"'));","    const experiencesAt = sourceIndex(page, '<section id=\"experiences\"');\n    const mapAt = sourceIndex(page, '<section id=\"experience-map\"');\n    expect(experiencesAt).toBeGreaterThanOrEqual(0);\n    expect(mapAt).toBeGreaterThan(experiencesAt);"]],
+          };
+          function isSource(node,names){
+            if(ts.isIdentifier(node))return names.includes(node.text);
+            if(ts.isCallExpression(node)&&ts.isIdentifier(node.expression)){
+              const name=node.expression.text;
+              if(name==="readRouteSource")return true;
+              if(["readFileSync","file","read"].includes(name)){
+                const arg=node.arguments[0]?.getText()??"";
+                return /src\/(?:components|routes|route-heads|data|lib|hooks|server)/.test(arg)&&!/\.css["']/.test(arg);
+              }
+              return ["ui","route","source","readComponent"].includes(name);
+            }
+            return false;
+          }
+          for(const [file,names] of Object.entries(suites)){
+            const original=fs.readFileSync(file,"utf8");
+            let code=original;
+            const manual=exactEdits[file]??[];
+            for(const [a,b] of manual){
+              if(code.split(a).length!==2)throw Error("Manual edit mismatch "+file+": "+a);
+              code=code.replace(a,b);
+            }
+            const tree=ts.createSourceFile(file,code,ts.ScriptTarget.Latest,true);
+            const edits=[];
+            let contain=0,indices=0;
+            const walk=node=>{
+              if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)){
+                const access=node.expression;
+                if(access.name.text==="toContain"&&node.arguments.length===1){
+                  let owner=access.expression;
+                  if(ts.isPropertyAccessExpression(owner)&&owner.name.text==="not")owner=owner.expression;
+                  if(ts.isCallExpression(owner)&&ts.isIdentifier(owner.expression)&&owner.expression.text==="expect"&&owner.arguments[0]&&isSource(owner.arguments[0],names)){
+                    const arg=node.arguments[0];
+                    // Retain exact single-word/data-value checks. Convert only literal
+                    // fragments with formatting-sensitive syntax or multiword prose;
+                    // dynamic expected fragments are kept verbatim inside the helper.
+                    const raw=arg.getText(tree);
+                    if(ts.isStringLiteralLike(arg)&&!/[<>{}=:\s(),]/.test(arg.text)){}
+                    else{
+                      edits.push([access.name.getStart(tree),access.name.end,"toMatch"]);
+                      edits.push([arg.getStart(tree),arg.end,"sourceFragment("+raw+")"]);
+                      contain++;
+                    }
+                  }
+                }
+                if(access.name.text==="indexOf"&&node.arguments.length>=1&&isSource(access.expression,names)){
+                  const arg=node.arguments[0];
+                  if(ts.isStringLiteralLike(arg)&&/[<>{}=:\s(),]/.test(arg.text)){
+                    edits.push([node.getStart(tree),node.end,"sourceIndex("+access.expression.getText(tree)+", "+node.arguments.map(a=>a.getText(tree)).join(", ")+")"]);
+                    indices++;
+                  }
+                }
+              }
+              ts.forEachChild(node,walk);
+            };
+            walk(tree);
+            for(const [start,end,value] of edits.sort((a,b)=>b[0]-a[0]))code=code.slice(0,start)+value+code.slice(end);
+            if(contain||indices||code.includes("sourceIndex(")){
+              const imports=[];
+              if(contain)imports.push("sourceFragment");
+              if(indices||code.includes("sourceIndex("))imports.push("sourceIndex");
+              code='import { '+imports.join(", ")+' } from "@/test-utils/source-fragment";\n'+code;
+            }
+            if(code===original)throw Error("No assertion changes for "+file);
+            fs.writeFileSync(file,code);
+            counts[file]={contains:contain,indices,manual:manual.length};
+          }
+          fs.writeFileSync(path.join(out,"assertion-migration.json"),JSON.stringify(counts,null,2));
+          console.log("ASSERTION MIGRATION",JSON.stringify({files:Object.keys(counts).length,contains:Object.values(counts).reduce((n,x)=>n+x.contains,0),indices:Object.values(counts).reduce((n,x)=>n+x.indices,0),manual:Object.values(counts).reduce((n,x)=>n+x.manual,0)}));
+          // Inventory other test suites using source-file inspection for future stages.
+          // This is a read-only list, not an instruction to rewrite passing tests.
+          const others=[];
+          function scan(dir){
+            for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+              const name=path.join(dir,entry.name);
+              if(entry.isDirectory())scan(name);
+              else if(/\.(?:test|spec)\.tsx?$/.test(name)&&!suites[name]){
+                const content=fs.readFileSync(name,"utf8");
+                if(/readFileSync|readRouteSource/.test(content)&&/\.toContain\(|\.indexOf\(|\.match\(/.test(content))others.push(name);
+              }
+            }
+          }
+          scan("src");
+          fs.writeFileSync(path.join(out,"additional-source-sensitive-suites.json"),JSON.stringify(others,null,2));
+          console.log("ADDITIONAL SOURCE ASSERTION SUITES",others.length);
+          JS
+          node .stage-5-5b-test-migration.mjs
+          rm .stage-5-5b-test-migration.mjs
+          git diff --check
+          git diff --binary -- src/test src/data > "$out/stage-5-5b-test-migration.patch"
+          sha256sum "$out/stage-5-5b-test-migration.patch"
+          git diff --name-only
+          git add -- src/test src/data
+          git -c user.name='CI test trial' -c user.email='ci@example.invalid' commit -m 'Temporary assertion migration for verification only'
+      - name: Verify adapted tests against existing unformatted components
+        run: VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
       - name: Trial formatting of tracked components, hooks and libraries
         shell: bash
         run: |
