@@ -197,7 +197,7 @@ const page: AttractionDestinationContent = {
           <li><strong>Galilee towns and the Jordan River:</strong> <Link to="/attractions/basilica-of-the-annunciation/" className="font-semibold text-primary underline underline-offset-4">Nazareth’s Basilica of the Annunciation</Link>, <Link to="/attractions/sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">Tiberias and the Sea of Galilee</Link>, and <Link to="/attractions/yardenit/" className="font-semibold text-primary underline underline-offset-4">Yardenit</Link>.</li>
           <li><strong>Lower Galilee:</strong> <Link to="/attractions/mount-tabor/" className="font-semibold text-primary underline underline-offset-4">Mount Tabor</Link>.</li>
         </ul>
-        <p className="mt-3 text-sm text-muted-foreground">I recommend choosing three to five sites, including Capernaum, and building a realistic day trip around your starting point, opening hours and travel times. If you're joining a shore excursion, allow enough time to return to Haifa Port.</p>
+        <p className="mt-3 text-sm text-muted-foreground">I recommend visiting three to five sites, including Capernaum. Plan your day around your starting point, opening hours and driving times. If you're joining a shore excursion, allow enough time to return to Haifa Port.</p>
       </div>
       <figure className="overflow-hidden rounded-xl border bg-card">
         <img src="/images/attractions/capernaum-aerial-overview.webp" alt="Aerial view of the archaeological compound, shoreline and Sea of Galilee at Capernaum" loading="lazy" decoding="async" width={1100} height={714} className="h-52 w-full object-cover object-center sm:h-64" />

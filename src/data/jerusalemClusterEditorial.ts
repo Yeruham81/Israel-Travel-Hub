@@ -94,8 +94,8 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         id: "church-tour-options",
         title: "Self-guided, guided or private transport?",
         paragraphs: [
-          "A self-guided Old City church walk suits visitors comfortable with navigation, queues and independent historical reading. A licensed guide can explain differences in Christian traditions and arrange a route around agreed priorities. In any tour listing, read which churches are actually included, whether entrances are possible, and whether the operator provides a licensed guide.",
-          "My Jerusalem tours directory includes guided experiences offered by different operators; my private-driver service is transport rather than automatic guiding. For visitors arriving by cruise ship, a Jerusalem outing from Ashdod needs a realistic disembarkation and return buffer before committing to a long pilgrimage route.",
+          "You can explore the Old City's churches on your own, allowing time to find your way and wait in queues. A licensed guide can explain the different Christian traditions and tailor the walk to your interests. Before booking a tour, check which churches you can enter and whether a licensed guide is included.",
+          "My Jerusalem tours directory includes guided tours from different operators. My private-driver service provides transport, with guiding arranged separately. If you're planning a Jerusalem outing from Ashdod, allow time to leave the ship and return before departure.",
         ],
         inlineLinks: [
           { text: "Jerusalem tours", to: "/tours/jerusalem/" },

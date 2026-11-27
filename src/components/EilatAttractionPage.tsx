@@ -296,7 +296,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     </div>
   </div>,
   tourContent: <div className="mt-4 space-y-4">
-    <p>Prefer a booked activity? These are three different ways to experience Eilat, selected from existing Viator and GetYourGuide listings. They are provided by independent operators, not by me. Availability, exact meeting points and whether the activity is running must be confirmed with the provider.</p>
+    <p>Here are three activities in Eilat offered by independent tour operators through Viator and GetYourGuide. Check availability and meeting points before booking.</p>
     <EilatPartnerTours/>
     <p className="text-xs leading-relaxed text-muted-foreground">Check current prices, reviews, available dates, inclusions and cancellation terms on the booking website.</p>
     <p>For a wider choice, <Link to="/tours/eilat-red-sea/" className={inlineLink}>explore all Eilat & Red Sea tours</Link>. Contact me below to arrange private transport between attractions.</p>

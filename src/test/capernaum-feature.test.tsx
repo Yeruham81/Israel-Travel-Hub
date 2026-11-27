@@ -99,7 +99,7 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(article).toContain("053-2840991");
     expect(article.match(/whitespace-nowrap/g)).toHaveLength(3);
     expect(article).toContain("A full-day Galilee and Sea of Galilee trip");
-    expect(article).toContain("I recommend choosing three to five sites, including Capernaum");
+    expect(article).toMatch(/I recommend visiting three to five sites, including Capernaum/);
     expect(article).not.toContain("These are options, not a checklist for a single day");
     expect(article).not.toContain("Add the Greek Orthodox monastery only if");
     expect(article).not.toContain("A half-day on the northern Sea of Galilee");

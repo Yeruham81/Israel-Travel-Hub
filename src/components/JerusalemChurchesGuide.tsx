@@ -196,7 +196,7 @@ export function JerusalemChurchesGuide(){
       <div className="mt-5"><Tip><Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline">Israel's calendar of events</Link> is useful for understanding holiday and special-date changes. Church-specific schedules should still be checked directly with the relevant community.</Tip></div>
     </section>
     <section id="tours" aria-labelledby="tours-heading" className="mt-12 scroll-mt-24">
-      <Heading id="tours" title="Guided church and Christian heritage tours" intro="These tours are operated by independent providers and booked through their own platforms. Before booking, check the current departure date and location, itinerary, guide language, church access, admission fees and cancellation policy directly with the provider."/>
+      <Heading id="tours" title="Guided church and Christian heritage tours" intro="These tours are run by independent operators. Check the date, meeting point, itinerary, guide's language, church access, admission fees and cancellation policy before booking."/>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {availableTours.map(t => <ExternalProviderTourCard key={t.url}
           image={t.image} alt={t.alt} platform={t.platform}

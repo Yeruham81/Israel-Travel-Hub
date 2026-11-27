@@ -99,7 +99,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
           <p className="mt-1 text-sm leading-relaxed sm:text-base">Sunday–Thursday & Saturday: <strong>{info.winterRegular}</strong></p>
           <p className="mt-1 text-sm leading-relaxed sm:text-base">Friday & ordinary holiday eves: <strong>{info.winterFriday}</strong></p>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">Rosh Hashanah, Passover and Yom Kippur eves: <strong>{info.specialHolidayEves}</strong>.</p>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>General last entry is one hour before closing.</strong> Nahal Arugot currently has an earlier cutoff (up to three hours before closing), while the upper Ein Gedi Spring route lists entry by 10:00. Verify route-specific times for your visit. <a href={official.english} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official hours and notices</a>.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>General last entry is one hour before closing.</strong> Nahal Arugot currently has an earlier cutoff (up to three hours before closing), while the upper Ein Gedi Spring route lists entry by 10:00. Check the entry times for your chosen trail. <a href={official.english} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official hours and notices</a>.</p>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2"><Ticket className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-serif text-xl font-semibold">Nature reserve admission</h3></div>
@@ -233,7 +233,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
   ),
   faqs: [
     { q: "Is Ein Gedi Nature Reserve open?", a: "Yes, but flood damage has altered several routes. Nahal David currently offers a short walk to its first waterfall, while Nahal Arugot and the upper trails have different difficulty and entry rules. Check the current park notice before travelling." },
-    { q: "Do I need to reserve entry?", a: "Yes. Book your visit separately for each nature reserve entrance you plan to use. Use the official Nahal David or Nahal Arugot page to select a visit time. The ancient synagogue has its own visitor arrangements." },
+    { q: "Do I need to reserve entry?", a: "Yes. Book your visit separately for each nature reserve entrance you plan to use. Use the official Nahal David or Nahal Arugot page to select a visit time. The ancient synagogue has its own entry rules." },
     { q: "Which Ein Gedi walk is suitable for families?", a: "Nahal David's short waterfall approach is usually the simpler choice. The modified Nahal Arugot route to the Hidden Waterfall is intended for experienced hikers, so choose it only if everyone is prepared for the difficulty." },
     { q: "Is Ein Gedi wheelchair accessible?", a: "The Nahal David entrance area has accessible features, and the ancient synagogue and its mosaic floor are accessible. Confirm the exact open section before arriving; natural canyon trails are generally not wheelchair accessible." },
     { q: "Can I swim in the Dead Sea at Ein Gedi?", a: "The reserve's shoreline is not a designated Dead Sea swimming beach. For a swim, plan a separate stop at an authorized beach, such as the public beach in Ein Bokek." },

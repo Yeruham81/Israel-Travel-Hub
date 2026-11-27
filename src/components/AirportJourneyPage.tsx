@@ -259,7 +259,7 @@ function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide 
       <UsefulJourneyLink label="Check the last 486 or 444 bus to the Dead Sea" href="https://bus.gov.il/en/home" context="Check the last bus to your hotel, then choose an airport train that leaves enough time for the connection." />
       <UsefulJourneyLink label="Egged - reserve seats on bus 444 (or limited 421)" href="https://www.egged.co.il/en/information-for-passengers/tickets-information" context="The operator lists these as reserved-seat services. Check seat availability and the correct departure stop before depending on either route." />
       <h4 className="mt-8 text-xl font-semibold">Step 3: Get off at the correct Dead Sea hotel stop</h4>
-      <p className="mt-3 leading-relaxed">Ein Bokek, Hamei Zohar and Neve Zohar have different stops along the hotel area; Ein Gedi and Masada are separate destinations. Confirm the exact stop for your hotel and the final walk with luggage, especially during the hottest hours of the day.</p>
+      <p className="mt-3 leading-relaxed">Ein Bokek, Hamei Zohar and Neve Zohar have different bus stops. Ein Gedi and Masada are separate destinations. Check which stop is closest to your hotel and how far you'll need to walk with luggage, especially in hot weather.</p>
       {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
         <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}

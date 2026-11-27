@@ -290,7 +290,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       </div>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Accessibility and families</h3>
-        <p className="mt-2 text-sm leading-relaxed">Haifa's slopes can be challenging even between nearby-looking neighbourhoods. The Lower City and parts of the beachfront are generally easier for shorter walks; the Carmel slopes, older steps and certain viewpoints require more care. For Bahá’í visits, the 80 Hatzionut Main Entrance has the largest paved self-guided area, although it includes a moderately steep slope. The guided terrace descent is not accessible to visitors with walking difficulties or strollers. Read the <a href={official.bahaiAccess} className={inlineLink} target="_blank" rel="noopener noreferrer">official accessibility guidance</a>.</p>
+        <p className="mt-2 text-sm leading-relaxed">Even short walks between Haifa's neighbourhoods can involve steep hills. The Lower City and parts of the beachfront are generally easier for shorter walks; the Carmel slopes, older steps and certain viewpoints require more care. For Bahá’í visits, the 80 Hatzionut Main Entrance has the largest paved self-guided area, although it includes a moderately steep slope. The guided terrace descent is not accessible to visitors with walking difficulties or strollers. Read the <a href={official.bahaiAccess} className={inlineLink} target="_blank" rel="noopener noreferrer">official accessibility guidance</a>.</p>
       </article>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Safe beach visits</h3>
@@ -395,7 +395,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
     { q: "Can I walk from the top of the Bahá’í Gardens to the German Colony through the terraces?", a: "No. The public viewpoints are separate; the terraces are not an unrestricted top-to-bottom public walkway. A reserved guided tour follows an authorised route with its own meeting and exit points." },
     { q: "Is Haifa easy to visit without a car?", a: "Yes, especially if you choose nearby sites within each district and use rail, the Carmelit, buses or taxis between hillside and coastal locations. Do not plan a single long walking loop across the mountain and harbour." },
     { q: "What can I do in Haifa on Saturday?", a: "Public promenades, viewpoints and some food businesses can be good options, though opening hours vary. Some city buses and Metronit services operate on Saturdays, while Israel Railways and the Carmelit have different weekend schedules. Check the exact service and venue." },
-    { q: "Which Haifa activities work well for families?", a: "The Bat Galim waterfront, southern beaches in lifeguard season, Madatech and short Carmel lookouts are useful choices. With a stroller, choose accessible garden areas and check the access arrangements for each site; the guided terrace descent involves steps." },
+    { q: "Which Haifa activities work well for families?", a: "The Bat Galim waterfront, southern beaches in lifeguard season, Madatech and short Carmel lookouts are useful choices. If you're visiting with a stroller, choose accessible garden areas. The guided walk down the terraces involves steps." },
   ],
   nearby: [
     { label: "Old Akko (Acre)", to: "/attractions/akko-acre/", note: "Crusader halls, Ottoman lanes, markets and harbour views." },

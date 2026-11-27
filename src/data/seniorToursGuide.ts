@@ -122,7 +122,7 @@ export const seniorFaqs=[
  {q:"Can a senior visitor go up Masada without hiking?",a:"Masada has an eastern entrance served by an accessible cable car. The plateau has varied surfaces and steps, so check cable-car operation and the specific archaeological areas you'd like to visit before travelling."},
  {q:"Do private day trips include a licensed tour guide?",a:"My service covers private transport and help with route planning. If you'd like a licensed sightseeing guide, please request it in advance so the separate arrangement can be checked and confirmed."},
  {q:"Can you pick us up at Ben Gurion Airport or a cruise terminal?",a:"I can arrange pickup from Ben Gurion Airport or your cruise port. Share your flight or ship information, luggage and destination so that the appropriate pickup instructions and vehicle can be confirmed."},
- {q:"How long should a day trip last?",a:"There is no fixed ideal duration. Four to six hours may be more comfortable for some travelers, while others enjoy a full day with regular breaks. We can set a realistic schedule based on your preferences and the locations involved."},
+ {q:"How long should a day trip last?",a:"Four to six hours may be more comfortable for some travelers, while others enjoy a full day with regular breaks. I'll help you choose a schedule that suits your pace and the places you want to visit."},
 ];
 
 export type SeniorRelated={title:string;description:string;to:LinkProps["to"];image:string;alt:string};

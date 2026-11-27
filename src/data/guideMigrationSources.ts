@@ -2,7 +2,7 @@ import type { SourceReference } from "@/data/registry";
 
 export const migrationSources: SourceReference[] = [
   { id:"guide-tlv-food-money", title:"Money and tipping in Tel Aviv", publisher:"Tel Aviv official visitor information", url:"https://visit.tel-aviv.gov.il/info/money", checkedAt:"2026-11-21", note:"Currency information and customary sit-down restaurant tipping; individual venues may differ." },
-  { id:"guide-jerusalem-food-markets", title:"Jerusalem food markets and fairs", publisher:"iTravelJerusalem", url:"https://www.itraveljerusalem.com/article/markets-and-fairs-in-jerusalem", checkedAt:"2026-11-21", note:"Mahane Yehuda visitor context, market atmosphere and local schedules; confirm individual business hours." },
+  { id:"guide-jerusalem-food-markets", title:"Jerusalem food markets and fairs", publisher:"iTravelJerusalem", url:"https://www.itraveljerusalem.com/article/markets-and-fairs-in-jerusalem", checkedAt:"2026-11-21", note:"Mahane Yehuda Market visitor information. Check opening hours with individual shops and stalls." },
   { id: "m26-ims", title: "Israel climate atlas and monthly climatology", publisher: "Israel Meteorological Service", url: "https://ims.gov.il/en/ClimateAtlas", checkedAt: "2026-11-21", note: "Official monthly climate maps for Israel's regions. Check the weather forecast for your travel dates." },
   { id: "m26-ims-warnings", title: "Official severe weather and flash flood warnings", publisher: "Israel Meteorological Service", url: "https://ims.gov.il/en/warning", checkedAt: "2026-11-21", note: "Weather warnings may change rapidly; consult directly before desert walks or outdoor journeys." },
   { id: "m26-hebcal", title: "Jewish holidays in Israel (annual dates)", publisher: "Hebcal", url: "https://www.hebcal.com/holidays/?i=on", checkedAt: "2026-11-21", note: "Use the Israel setting and specific travel year. Dates shift relative to the Gregorian calendar." },
@@ -42,7 +42,7 @@ export const migrationSources: SourceReference[] = [
     "publisher": "Tel Aviv–Yafo Municipality",
     "url": "https://www.tel-aviv.gov.il/en/Visit/Top10Places/Pages/default.aspx",
     "checkedAt": "2026-10-20",
-    "note": "City and Carmel Market context; individual businesses and events have their own opening arrangements."
+    "note": "Carmel Market and city visitor information. Check opening hours with individual businesses and event organisers."
   },
   {
     "id": "m26-tlv-events",
@@ -202,7 +202,7 @@ export const migrationSources: SourceReference[] = [
     "publisher": "Israel Nature and Parks Authority",
     "url": "https://en.parks.org.il/reserve-park/eilat-coral-beach-nature-reserve/",
     "checkedAt": "2026-10-20",
-    "note": "Managed reef access and park visitor arrangements; guided diving is a separate activity."
+    "note": "Coral reef visitor information and park access. Guided diving is booked separately."
   },
   {
     "id": "m26-observatory",
@@ -226,7 +226,7 @@ export const migrationSources: SourceReference[] = [
     "publisher": "Timna Park",
     "url": "https://parktimna.co.il/en/timna-park/",
     "checkedAt": "2026-10-20",
-    "note": "Official desert-park information; plan the specific route and current conditions separately from an Eilat beach day."
+    "note": "Official desert park information, including routes and current visitor conditions."
   },
   {
     "id": "m26-megiddo",

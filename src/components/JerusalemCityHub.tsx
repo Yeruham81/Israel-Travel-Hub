@@ -79,7 +79,7 @@ function TourCards({group}:{group:typeof jerusalemTourGroups[number]}) {
         </div>;
       })}
     </div>
-    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These tours are operated by independent providers and booked through their own platforms. Tour details, availability, prices and booking conditions are set by the operators and may change. Before booking, check the departure date and location, itinerary, guiding, walking requirements, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider.</p>
+    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These tours are run by independent operators. Before booking, check the date, itinerary, pickup and return details, guide, admission fees, walking requirements, price and cancellation policy on the booking website.</p>
     <Link to={group.id==="city-tours"?"/tours/jerusalem/":"/tours/"} className="mt-4 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">
       {group.id==="city-tours"?"Explore all Jerusalem tours":"Explore more tours and day trips"} <ArrowUpRight aria-hidden="true" className="h-4 w-4"/>
     </Link>
@@ -197,7 +197,7 @@ export function JerusalemCityHubPage(){
         ].map(item=><article key={item.title} className="rounded-xl border bg-card p-4"><h3 className="font-bold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p></article>)}
       </div>
       <p className="mt-4 text-sm leading-relaxed text-muted-foreground">For specific church visiting arrangements, the <a className={linkClass} href="https://www.cicts.org/our-services/" target="_blank" rel="noopener noreferrer">Christian Information Center</a> publishes information about church visits. Confirm admission and worship arrangements with the relevant site before you travel.</p>
-      <Tip>If your plans include a private day trip, I'd set the main destination and realistic walking time first, then add optional stops. A private driver handles transport; licensed guiding and entrance tickets are separate unless specifically arranged.</Tip>
+      <Tip>For a private day trip, I recommend choosing your main destination and allowing enough time to explore it on foot before adding other stops. A private driver handles transport; licensed guiding and entrance tickets are separate unless specifically arranged.</Tip>
     </section>
 
     <FaqList faqs={[...jerusalemHubFaqs]}/>

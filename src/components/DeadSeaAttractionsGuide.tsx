@@ -254,7 +254,7 @@ export function DeadSeaAttractionsGuide() {
           <ConsentIframe ref={mapRef} title="Interactive map of representative Dead Sea attractions" src={mapUrl} width={900} height={450} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[330px] w-full border-0 sm:h-[450px]"
             onLoad={()=>{if(selectedPoint!=="all")mapRef.current?.contentWindow?.postMessage({type:"dead-sea-attractions-map-focus",id:selectedPoint},window.location.origin);}}/>
           <div className="flex flex-wrap items-center justify-between gap-3 p-3 text-xs text-muted-foreground">
-            <span>Markers are for regional orientation; confirm the exact entrance or trailhead before travelling. Map data © OpenStreetMap contributors.</span>
+            <span>The map shows the locations of the main attractions. Check the entrance or trailhead before travelling. Map data © OpenStreetMap contributors.</span>
             {selectedPoint==="all" ? <OfficialLink href="https://www.google.com/maps/search/?api=1&query=Dead+Sea+Israel+attractions">See the region on Google Maps</OfficialLink> :
             <MapLink label="Selected location" query={deadSeaMapPoints.find(point=>point.id===selectedPoint)?.query||"Dead Sea, Israel"}/>}
           </div>
@@ -350,7 +350,7 @@ export function DeadSeaAttractionsGuide() {
       }}/>
 
       <SourcesDisclosure>
-        <p className="mb-3 text-sm leading-relaxed">Official site pages are useful for current reservations, entry arrangements and weather-sensitive changes. I recommend checking the specific date before you travel.</p>
+        <p className="mb-3 text-sm leading-relaxed">Use the official websites to check opening hours, reservations and weather-related closures for your travel date.</p>
         <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
           <li><OfficialLink href="https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en">Tamar Regional Council - Ein Bokek Central Beach</OfficialLink></li>
           <li><OfficialLink href="https://www.deadsea.co.il/tracks/ein-bokek/?lang=en">Tamar Regional Council - Nahal Bokek</OfficialLink></li>
