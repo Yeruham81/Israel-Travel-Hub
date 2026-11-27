@@ -85,15 +85,15 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         title="Templars’ Tunnel"
         image={{ src: images.tunnel, alt: "Illuminated medieval stone passage in the Templars’ Tunnel beneath Old Akko" }}
       >
-        <p>Walk through a restored underground passage linking the Templars’ former stronghold with the harbour area. After exploring this fascinating underground tunnel, continue on foot to the nearby market and harbour.</p>
-        <p><strong>Accessibility:</strong> The tunnel is temporarily inaccessible for wheelchair users, according to the operator. <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the latest notice</a> before visiting.</p>
+        <p>Walk through the restored underground passage that links the Templars’ former stronghold with the harbour area. Afterwards, continue to the nearby market or waterfront.</p>
+        <p><strong>Accessibility:</strong> The tunnel is temporarily inaccessible for wheelchair users. <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the latest notice</a> before visiting.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst
         title="Al-Basha Turkish Bath"
         image={{ src: images.bath, alt: "Historic domed bathing chambers inside Al-Basha Turkish Bath in Old Akko" }}
       >
-        <p>Akko's beautifully restored Ottoman bathhouse offers a glimpse into daily life during the Ottoman period. Explore the bathhouse rooms and learn about the bathing traditions and social life of the old hammam.</p>
+        <p>Explore the restored Ottoman bathhouse and learn how bathing traditions shaped daily life and social gatherings in Akko.</p>
         <p>I recommend visiting the bathhouse after exploring the Crusader sites. <a href={official.bath} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the official Turkish Bath guide</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket</p>
       </AttractionHighlight>
@@ -117,7 +117,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         title="The fishing harbour, sea walls and waterfront"
         image={{ src: images.harbour, alt: "Fishing boats and historic stone waterfront buildings in the harbour of Old Akko" }}
       >
-        <p>Finish the day among fishing boats and Mediterranean views. Explore the historic harbour, sea gate and old city walls overlooking the Mediterranean.</p>
+        <p>Finish the day by the fishing boats in the historic harbour, then explore the sea gate and city walls overlooking the Mediterranean.</p>
         <p>Look for the historic Khan al-Umdan nearby, a landmark caravanserai associated with the port. Check which historic buildings are open to visitors. <a href={official.harbour} target="_blank" rel="noopener noreferrer" className={inlineLink}>Port and marina history</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free entry</p>
       </AttractionHighlight>
@@ -211,7 +211,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Use car parks near the Visitors Center and enjoy the historic lanes on foot. The official visitor information lists <strong>Moat Parking (free)</strong> and the <strong>Eucalyptus car park (paid parking)</strong>. For a private transfer or multi-stop day out, <a href="#contact" className={inlineLink}>contact me</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Use car parks near the Visitors Center and enjoy the historic lanes on foot. Nearby options include <strong>Moat Parking (free)</strong> and the <strong>Eucalyptus car park (paid parking)</strong>. For a private transfer or multi-stop day out, <a href="#contact" className={inlineLink}>contact me</a>.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Directions to the Visitors Center <ArrowUpRight className="h-3.5 w-3.5"/></a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -265,7 +265,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
       <AkkoAttractionsMap />
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5" data-testid="akko-gentler-walk">
         <h3 className="font-serif text-xl font-semibold">A gentler option - market and waterfront</h3>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">Begin near the Visitors Center, browse the Old Market and continue towards the harbour. This outdoor option offers flexibility for shorter breaks and avoids several underground attractions. Historic paving and some slopes remain; contact the <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>site accessibility team</a> to arrange a suitable route.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">Begin near the Visitors Center, browse the Old Market and continue towards the harbour. This outdoor route avoids several underground attractions and lets you stop for breaks. Expect uneven stone paving and some slopes; contact the <a href={official.accessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>site accessibility team</a> to arrange a suitable route.</p>
         <a href={gentleWalk} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Open market and harbour route in Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
       </article>
       <p>Use the <a href={official.oldCityRoute} target="_blank" rel="noopener noreferrer" className={inlineLink}>official classic route</a> or the <a href={walkingMap} target="_blank" rel="noopener noreferrer" className={inlineLink}>official Old Akko walking map (PDF)</a> for local entrances and street connections.</p>
@@ -292,7 +292,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
     <div className="mt-4 space-y-3" data-testid="akko-practical-tips">
       <AttractionPracticalTip><strong>Best starting point:</strong> Begin at the Visitors Center on Weizmann Street 1, where tickets and official walking maps are available.</AttractionPracticalTip>
       <AttractionPracticalTip><strong>Historic paving:</strong> Choose comfortable shoes with good grip for narrow stone lanes, steps and underground passages.</AttractionPracticalTip>
-      <AttractionPracticalTip><strong>Ticket timing:</strong> Allow enough time for your chosen heritage site before the ticket office closes one hour before the published closing time.</AttractionPracticalTip>
+      <AttractionPracticalTip><strong>Ticket timing:</strong> Ticket offices close one hour before the sites close. Arrive earlier to allow enough time for your visit.</AttractionPracticalTip>
       <AttractionPracticalTip><strong>Religious holidays and worship:</strong> Plan the Ramchal visit for Sunday–Friday and check visitor access at Al-Jazzar Mosque around prayers.</AttractionPracticalTip>
       <AttractionPracticalTip><strong>Weather:</strong> Bring water and sun protection for the harbour and exposed sea walls, and use the indoor sites for breaks on warmer days.</AttractionPracticalTip>
     </div>

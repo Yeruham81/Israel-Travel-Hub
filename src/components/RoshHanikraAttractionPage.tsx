@@ -41,8 +41,8 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
         title="The cable car down the white cliffs"
         image={{ src: "/images/attractions/rosh-hanikra-cable-car.webp", alt: "Red cable car beside the white chalk cliffs and surf at Rosh Hanikra" }}
       >
-        <p>The visit begins with the cable car, which descends the cliff from the upper station towards the Mediterranean. The short ride gives you a close look at the striking contrast between the white rock and the blue sea.</p>
-        <p>The cable car is part of the regular admission experience. Strong winds or operational restrictions may affect it, so check the <a href={roshHanikraSite.sources.info} target="_blank" rel="noopener noreferrer" className={inlineLink}>official visitor information</a> before setting out.</p>
+        <p>Take the cable car from the upper station down the cliff, with views of the white rock and blue Mediterranean along the way.</p>
+        <p>The cable-car ride is included in the admission price. Strong winds or operational restrictions may affect service, so check the <a href={roshHanikraSite.sources.info} target="_blank" rel="noopener noreferrer" className={inlineLink}>official visitor information</a> before setting out.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The turquoise sea grottoes"
@@ -108,12 +108,12 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Follow Route 4 north of Nahariya to the signed Rosh Hanikra grottoes entrance. Parking is provided at the site; on busy days, leave time to find a space and join the cable-car queue. For a longer coastal route, <Link to="/car-rental/" className={inlineLink}>renting a car</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a> makes multiple stops easier.</p>
+            <p className="mt-2 text-sm leading-relaxed">Follow Route 4 north of Nahariya to the signed Rosh Hanikra grottoes entrance. Parking is available at the site. On busy days, allow time to find a space and queue for the cable car. For a longer coastal route, <Link to="/car-rental/" className={inlineLink}>renting a car</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a> makes multiple stops easier.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Driving directions to the entrance <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Take a train to <strong>Nahariya</strong> and check the onward bus connection. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to check the current bus connection, walking distance to the upper station and return services.</p>
+            <p className="mt-2 text-sm leading-relaxed">Take a train to <strong>Nahariya</strong>, then plan your bus journey using the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to check connections, walking distance to the upper station and return services.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">Walking through the site</h3></div>
@@ -181,7 +181,7 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
   ),
   faqs: [
     { q: "Is Rosh Hanikra open for visits?", a: "Yes. The site is open daily, subject to changes for holidays, weather or temporary restrictions. Check the operator's latest opening hours before travelling." },
-    { q: "What does the Rosh Hanikra ticket include?", a: "The standard entry experience includes the cable car, the self-guided grotto walk and an audiovisual presentation. Admission is ₪47 for adults, ₪39 for children under 18, soldiers, senior citizens and visitors with disabilities, and ₪29 for children with disabilities." },
+    { q: "What does the Rosh Hanikra ticket include?", a: "Admission includes the cable car, a self-guided walk through the grottoes and an audiovisual presentation. Admission is ₪47 for adults, ₪39 for children under 18, soldiers, senior citizens and visitors with disabilities, and ₪29 for children with disabilities." },
     { q: "What are the opening hours?", a: "The site is open daily. Last cable-car entry is at 16:00 in autumn and winter and 18:00 in summer; the site closes one hour later. Check the official homepage for daily hours and changes due to holidays or weather." },
     { q: "How much time do I need?", a: "Allow about 60–90 minutes for the viewpoints, cable car, grotto walk and film, plus any queueing time." },
     { q: "Is Rosh Hanikra wheelchair accessible?", a: "Partly. There is an accessible bridge and cable-car access, and visitors using wheelchairs can reach the first grotto and part of the second. The remaining cave path has narrow passages and steps." },

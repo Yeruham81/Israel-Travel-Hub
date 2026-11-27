@@ -338,10 +338,10 @@
     {
       "path": "/attractions/akko-acre/",
       "group": 7,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "8683af55f0b2c19739d879ee7eb15609a9779c5163ca937c678a9f66ab4a2bae",
+      "changes": 7,
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval."
     },
     {
       "path": "/attractions/basilica-of-the-annunciation/",
@@ -354,10 +354,10 @@
     {
       "path": "/attractions/caesarea/",
       "group": 7,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "db8d855a62a8a2c97719abf8cec4e069c8f9b92a6f1155a2a71c3da94c2351e4",
+      "changes": 3,
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval."
     },
     {
       "path": "/attractions/capernaum/",
@@ -405,7 +405,8 @@
       "status": "edited",
       "reviewedSnapshot": "ae1e396568cd4eb28153bceb357c6077f71cc3713a02acb1a6843f785d76e527",
       "changes": 5,
-      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval."
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending.",
+      "postEditSnapshot": "73d1d366c38d330e0318a388ca26a947fa747b6d5d90980e9b14f224a70926dc"
     },
     {
       "path": "/attractions/magdala/",
@@ -493,10 +494,10 @@
     {
       "path": "/attractions/rosh-hanikra/",
       "group": 7,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "42cfe24dc94c1f7c2acd530c640d110504edc1685c687432c4e5745f6737c7ad",
+      "changes": 5,
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval."
     },
     {
       "path": "/attractions/sea-of-galilee/",
@@ -698,7 +699,8 @@
       "status": "edited",
       "reviewedSnapshot": "46598bdd36a1bc5c3410e09db7f89204aa8b33747066ab5dc47e545c0dffed93",
       "changes": 8,
-      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval."
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending.",
+      "postEditSnapshot": "cef664530f371797d80e5a6d6d12affcd24c4766bb9a46102546be64423d2171"
     },
     {
       "path": "/travel-blog/baptism-in-the-jordan-river/",
@@ -714,7 +716,8 @@
       "status": "edited",
       "reviewedSnapshot": "786baf3469f87ff6a4f4cb1f64fd46fdccaa03811c8c886d54e758dad0730374",
       "changes": 7,
-      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. User approved all edits with direct wording for free parking at North Tzuk."
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. User approved all edits with direct wording for free parking at North Tzuk. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending.",
+      "postEditSnapshot": "0dc221ea282e3705a92a7f8d404a296dab3a26de868a7ee711c69ae96ecba6f7"
     },
     {
       "path": "/travel-blog/ben-gurion-airport-arrival-tips/",
@@ -961,7 +964,8 @@
       "status": "edited",
       "reviewedSnapshot": "18b2f325e7612479b680d7307de0d125cd4211ef4cc338b17247bf8f918bfba8",
       "changes": 9,
-      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval."
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending.",
+      "postEditSnapshot": "5dc95991514fa49330ddbabbc50f972dafac82a62643554f1d5384e35928f62e"
     },
     {
       "path": "/travel-blog/sherut-in-israel/",

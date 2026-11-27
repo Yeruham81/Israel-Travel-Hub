@@ -141,11 +141,11 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By train and bus</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">There is no train stop at the park itself. Use Caesarea–Pardes Hanna or Binyamina station as a starting point and check a connecting bus or taxi. Verify the final stop, walking route and return trip in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>public transport planner</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Take a train to Caesarea–Pardes Hanna or Binyamina, then continue to the park by bus or taxi. Verify the final stop, walking route and return trip in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>public transport planner</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">Walking inside the park</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">A coastal walking route links the theater, hippodrome and harbor. If you enter at one end and leave at the other, allow time to return to your parked car or arrange collection at the opposite gate.</p>
+            <p className="mt-2 text-sm leading-relaxed">Walk along the coast between the theater, hippodrome and harbor. If you finish at the opposite entrance, arrange a pickup there or allow time to walk back to your car.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="caesarea-location-map">
@@ -215,7 +215,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
   faqs: [
     { q: "How much does Caesarea National Park cost?", a: "Full park admission costs ₪46 for an adult and ₪27 for a child aged 5–18. Students and adults in groups of more than 30 pay ₪39; children in qualifying groups and Israeli senior citizens pay ₪23. Harbor-only admission costs ₪18 and excludes the theater, hippodrome and visitors' center." },
     { q: "What are the opening hours?", a: "The park opens at 08:00. April–October it closes at 17:00 (16:00 on Fridays and other holiday eves); November–March at 16:00 (15:00 on Fridays and other holiday eves). On Rosh Hashanah, Passover and Yom Kippur eves, it closes at 13:00. Last park entry is one hour before closing." },
-    { q: "Do I need to reserve a visit?", a: "Regular independent visits to the national park generally do not require advance reservation, although entry may depend on capacity. For the harbor visitors' center, groups of more than 10 should reserve a time; without reservations, entry is first-come, first-served and subject to available space." },
+    { q: "Do I need to reserve a visit?", a: "You can usually visit the national park without a reservation, subject to capacity. For the harbor visitors' center, groups of more than 10 should book a time. Visitors without reservations are admitted on a first-come, first-served basis." },
     { q: "How long should I spend at Caesarea?", a: "Allow 2–3 hours for the theater, hippodrome, ancient harbor and visitors' center. Add more time for a meal or the separate aqueduct stop." },
     { q: "Is the aqueduct part of the park walk?", a: "The aqueduct beside the beach is a separate nearby stop, away from the main theater-to-harbor archaeological route." },
     { q: "Is the harbor open after the national park closes?", a: "The harbor precinct may remain open into the evening, but entry to the archaeological park follows its own earlier opening and closing times." },
