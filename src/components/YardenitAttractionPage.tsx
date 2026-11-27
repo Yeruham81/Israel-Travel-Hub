@@ -47,14 +47,14 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
         <p>Look for the Wall of New Life, a collection of hand-painted ceramic panels displaying the Gospel account of Jesus’ baptism (Mark 1:9–11) in more than 80 languages and dialects. Created by Armenian artist Hagop Anteassian, the panels celebrate the many communities that come to Yardenit.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Gardens and quiet places for prayer">
-        <p>Along the landscaped riverbank, you'll find quiet places to sit, pray and enjoy the scenery. I recommend allowing some extra time to enjoy the peaceful surroundings.</p>
+        <p>Along the landscaped riverbank, you'll find quiet places to sit, pray and enjoy the scenery.</p>
         <p>If a baptism is taking place, give participants privacy and ask before photographing anyone.</p>
       </AttractionHighlight>
     </div>
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Entry to Yardenit is free, and the site does not charge for the baptism ceremony itself. You pay separately for a white robe and certain visitor facilities.</p>
+      <p>Admission and baptism are free. White baptism robes and certain visitor facilities cost extra.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="yardenit-hours-baptism">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Opening hours and contact</h3>
@@ -78,8 +78,8 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
         <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>If you’re being baptized:</strong> Bring a towel, dry clothes for afterwards, a bag for wet items and drinking water. Changing rooms and showers are available at the site.</p>
         <ul className="mt-3 grid list-disc gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
           <li><strong>Facilities:</strong> Toilets, a gift shop and food and drink options are available.</li>
-          <li><strong>Accessibility:</strong> The operator describes ramps and handrails for accessing the baptism areas. Ask about the best route for your particular needs.</li>
-          <li><strong>Groups:</strong> The official FAQ says groups of up to 40 can visit without advance coordination. A planned ceremony still needs its own arrangements.</li>
+          <li><strong>Accessibility:</strong> Ramps and handrails provide access to the baptism areas. Ask staff about the most suitable route for your needs.</li>
+          <li><strong>Groups:</strong> Groups of up to 40 can visit without advance coordination. Baptism ceremonies must be arranged separately.</li>
           <li><strong>Respectful visits:</strong> Keep the baptism area peaceful, respect worshippers and use only designated water-entry areas.</li>
         </ul>
       </div>
@@ -87,7 +87,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Yardenit stands close to <strong>Kibbutz Kinneret</strong>, where the Jordan River leaves the Sea of Galilee at its southern end. It is south of Tiberias, away from the churches around the northern shore.</p>
+      <p>Yardenit stands close to <strong>Kibbutz Kinneret</strong>, where the Jordan River leaves the Sea of Galilee at its southern end. It lies south of Tiberias.</p>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
@@ -134,7 +134,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Some guided Galilee tours stop at Yardenit, while others focus on the northern churches and archaeological sites. Check the itinerary before booking, especially if you need time for a baptism ceremony.</p>
+      <p>Choose a Galilee tour that includes Yardenit and allows enough time for a baptism ceremony if you are planning one.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
           <img src="/images/attractions/sea-of-galilee.webp" alt="Sea of Galilee landscape on a guided northern Israel tour" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

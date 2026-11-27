@@ -152,7 +152,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     </AttractionHighlight>
     <AttractionHighlight title="Underwater Observatory Marine Park" image={{ src: photos.observatory, alt: "Distinctive white underwater observatory tower on a pier in Eilat" }}>
       <p>The observatory's viewing rooms let you look at the natural reef below the surface without entering the water. Additional exhibits focus on Red Sea marine life. It's a great choice for families, visitors who prefer to stay dry and those looking for a break from the afternoon heat.</p>
-      <p>Allow time to explore the park and its trails. The operator recommends around three to four hours; check {sourcesLink(official.underwaterObservatory, "current park hours, ticket types and attractions")}.</p>
+      <p>Allow around three to four hours to explore the park and its trails. Check {sourcesLink(official.underwaterObservatory, "current park hours, ticket types and attractions")}.</p>
       {placeLink("Underwater Observatory Marine Park, Eilat, Israel")}
     </AttractionHighlight>
     <AttractionHighlight title="Dolphin Reef" image={{ src: photos.dolphin, alt: "Dolphin swimming alongside a diver at Dolphin Reef in Eilat" }}>
@@ -162,7 +162,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     </AttractionHighlight>
     <AttractionHighlight title="North Beach, the promenade and marina" image={{ src: "/images/attractions/eilat-at-dusk.webp", alt: "Eilat marina and North Beach waterfront illuminated at dusk" }}>
       <p>Spend a relaxed morning or evening along Eilat's central beachfront, enjoying seaside walks, cafés, beaches and mountain views. This is the most straightforward area if you are staying in central Eilat without a car.</p>
-      <p>Not every beach has a lifeguard or identical facilities. Follow the signs at your chosen beach before swimming. Check seasonal opening hours for water-sports kiosks.</p>
+      <p>Swim only in designated areas while lifeguards are on duty. Follow the signs at your chosen beach. Check seasonal opening hours for water-sports kiosks.</p>
       {placeLink("Eilat North Beach, Israel")}
     </AttractionHighlight>
     <h3 className="pt-3 font-serif text-xl font-semibold">Which Eilat beach should you choose?</h3>
@@ -172,7 +172,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
         { name: "North Beach & promenade", best: "Central hotels and easy walks", detail: "A convenient area for visitors, cafés and evening walks. Use only designated, supervised swimming areas.", query: "North Beach, Eilat, Israel" },
         { name: "Dekel Beach", best: "Relaxed south-coast beach time", detail: "A casual shoreline with cafés and seating. Check current access and whether a lifeguard is present.", query: "Dekel Beach, Eilat, Israel" },
         { name: "Mosh's Beach", best: "Casual atmosphere and beach café", detail: "An informal beach setting, not a protected reef reserve. Verify business hours and swimming supervision.", query: "Mosh's Beach, Eilat, Israel" },
-        { name: "Migdalor / Lighthouse Beach", best: "Rockier southern coastline", detail: "A southern stop near reef areas. Wear suitable footwear and never assume a lifeguard is present.", query: "Migdalor Beach, Eilat, Israel" },
+        { name: "Migdalor / Lighthouse Beach", best: "Rockier southern coastline", detail: "A southern beach near the reefs. Wear suitable footwear and swim only in designated areas with a lifeguard on duty.", query: "Migdalor Beach, Eilat, Israel" },
         { name: "Princess Beach", best: "Southern reef and snorkeling interests", detail: "Check shore access, marked entry points, swimming conditions and coral-protection rules.", query: "Princess Beach, Eilat, Israel" },
         { name: "Coral Beach Nature Reserve", best: "Protected reef in a managed setting", detail: "A separate paid reserve with reef access and facilities. Check admission and advance booking guidance.", query: "Coral Beach Nature Reserve, Eilat, Israel" },
       ].map(beach => <article key={beach.name} className="rounded-xl border bg-card p-4">
@@ -203,10 +203,10 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       {placeLink("Eilat Birdwatching Park, Israel")}
     </AttractionHighlight>
     <AttractionHighlight title="Eilat Botanical Garden" image={{ src: photos.botanical, alt: "Paths, cacti and tropical greenery at Eilat Botanical Garden" }}>
-      <p>{sourcesLink(official.botanical, "Eilat Botanical Garden")} offers lush greenery and shaded walking paths on the northern side of the city. It offers a change of pace from the beaches, with its own opening schedule and admission rules.</p>
+      <p>{sourcesLink(official.botanical, "Eilat Botanical Garden")} offers lush greenery and shaded walking paths on the northern side of the city. Check opening hours and admission before visiting.</p>
       {placeLink("Eilat Botanical Garden, Israel")}
     </AttractionHighlight>
-    <AttractionPracticalTip>My first-visit priorities would be one reef experience, one non-water activity and an early desert outing. Do not try to fit Timna Park, Red Canyon, the observatory and a full beach afternoon into a single day.</AttractionPracticalTip>
+    <AttractionPracticalTip>For a first visit, I'd spend a day exploring the reef and marine attractions, then set aside another morning for Timna Park or Red Canyon.</AttractionPracticalTip>
   </div>,
   itineraryContent: <div className="mt-4 space-y-4" data-testid="eilat-suggested-itineraries">
     <p>The best plan depends on whether you want mostly beach time or a mix of Red Sea and desert scenery. Adapt the suggested days to your pace.</p>
@@ -248,7 +248,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       </article>
       <article className="rounded-xl border bg-card p-4">
         <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><Footprints className="size-5 text-primary"/>Accessibility and families</h3>
-        <p className="mt-2 text-sm leading-relaxed">The city promenade is different from rocky reefs and desert trails. Stairs, ladders, uneven rock and water access can be major limitations. Check accessible routes, child-age restrictions and any physical requirements directly with each venue.</p>
+        <p className="mt-2 text-sm leading-relaxed">The promenade is a good option for an easy walk. Rocky reefs and desert trails may involve uneven surfaces, stairs, ladders and difficult water access. Check accessible routes, child-age restrictions and any physical requirements directly with each venue.</p>
       </article>
     </div>
     <AttractionPracticalTip>Book the attraction you most care about before filling the rest of the day. If a reef activity or desert tour is weather-dependent, keep a flexible alternative such as the Underwater Observatory or a relaxed city visit.</AttractionPracticalTip>

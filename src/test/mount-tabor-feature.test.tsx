@@ -57,7 +57,7 @@ describe("Mount Tabor individual attraction guide", () => {
     expect(site.visit.weekendHours).toBe("08:00–12:00 / 14:00–16:30");
     expect(article).toContain("<strong>Monday–Friday:</strong>");
     expect(article).toContain("<strong>Saturday–Sunday:</strong>");
-    expect(article).toContain("not normally open for casual sightseeing");
+    expect(article).toContain("the church is generally closed to casual visitors");
     expect(article).toContain("Antonio Barluzzi");
     expect(article).toContain("1924");
     expect(article).toContain("https://bus.gov.il/en/home");

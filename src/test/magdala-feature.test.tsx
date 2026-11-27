@@ -71,8 +71,7 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(site.visit.groupAdmissionPrice).toBe("₪17");
     expect(site.visit.groupMinimumSize).toBe(10);
     expect(article).toContain("Visitors over age 12");
-    expect(article).toContain("Rates confirmed directly with the visitor centre.");
-    expect(article).toContain("group rates, other ticket prices and guided tours");
+    expect(article).toContain("Contact the visitor centre for group rates, additional ticket prices and guided tours.");
     expect(site.visit.visitorEmail).toBe("visit@magdala.org");
     expect(article).toContain("visit.visitorEmail");
     expect(site.visit.prayerEmail).toBe("ducinaltum@magdala.org");
