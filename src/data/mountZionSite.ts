@@ -7,7 +7,7 @@ export const mountZionSite = {
   updatedAt: "2026-11-22",
   region: "Jerusalem",
   hero: { src: mountZionHero, alt: "Dormition Abbey on Mount Zion beside Jerusalem's Old City" },
-  intro: "Just outside Jerusalem’s Old City walls, Mount Zion brings together the Room of the Last Supper, the traditional Tomb of King David and Dormition Abbey, all a few minutes’ walk from Zion Gate. Follow a short circuit for the main landmarks, or allow more time for St Peter in Gallicantu, the Chamber of the Holocaust and Oskar Schindler’s grave. This guide helps you choose a route, check visiting hours and find each entrance.",
+  intro: "Just outside Jerusalem’s Old City walls, Mount Zion brings together the Room of the Last Supper, the traditional Tomb of King David and Dormition Abbey, all a few minutes’ walk from Zion Gate. Follow a short circuit for the main landmarks, or allow more time for St Peter in Gallicantu, the Chamber of the Holocaust and Oskar Schindler’s grave.",
   official: {
     cicHours: "https://www.cicts.org/our-services/",
     dormition: "https://dormitio.net/abtei/gottesdienst-oeffnungszeiten/",

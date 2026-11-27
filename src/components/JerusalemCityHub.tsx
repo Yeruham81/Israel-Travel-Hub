@@ -130,7 +130,7 @@ export function JerusalemCityHubPage(){
           <div className="mt-auto flex flex-wrap gap-x-4 gap-y-2 pt-4">{plan.links.map(link=>link.to==="#day-trips"?<a key={link.title} href="#day-trips" className="text-xs font-semibold text-primary underline underline-offset-4">{link.title}</a>:<Link key={link.title} to={link.to} className="text-xs font-semibold text-primary underline underline-offset-4">{link.title}</Link>)}</div>
         </article>)}
       </div>
-      <Tip>On a first day, I'd choose the Old City gate that makes sense for your priorities and mobility. A route with fewer stops can be more rewarding than a list of famous places you only see from outside.</Tip>
+      <Tip>Choose your starting gate according to the places you want to visit and your mobility needs. A route with fewer stops can be more rewarding than a list of famous places you only see from outside.</Tip>
     </section>
 
     <TourCards group={jerusalemTourGroups[0]}/>

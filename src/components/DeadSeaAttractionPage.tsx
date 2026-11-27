@@ -169,7 +169,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
           <ol className="mt-2 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
             <li>Visit <Link to="/attractions/masada/" className={inlineLink}>Masada</Link> in the cooler morning hours; allow two to three hours for the plateau.</li>
             <li>Continue to Ein Bokek for a late-morning or afternoon beach stop within supervised bathing hours.</li>
-            <li>Keep extra time for the drive home. Add <Link to="/attractions/ein-gedi/" className={inlineLink}>Ein Gedi</Link> only when its trails are open and the day's timing makes sense.</li>
+            <li>Keep extra time for the drive home. Add <Link to="/attractions/ein-gedi/" className={inlineLink}>Ein Gedi</Link> if its trails are open and you have enough time.</li>
           </ol>
         </article>
       </div>

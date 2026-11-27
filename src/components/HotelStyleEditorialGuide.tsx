@@ -194,7 +194,7 @@ const groupPlanningTips: Record<string, { title: string; points: readonly [strin
 };
 
 const hotelFacilityNotices: Record<string, string> = {
-  "ds-herods": "As of November 2026, the operator lists the spa Jacuzzi and hotel gym as temporarily closed for upgrades.",
+  "ds-herods": "As of November 2026, the spa Jacuzzi and hotel gym are temporarily closed for upgrades.",
   "ds-leonardo-club": "As of November 2026, the operator lists the water park and thermal mineral pools as temporarily closed. Confirm their status for your travel dates.",
 };
 

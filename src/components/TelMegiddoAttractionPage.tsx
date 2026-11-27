@@ -95,7 +95,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
           <li><strong>Footwear:</strong> Wear comfortable shoes with grip for uneven archaeological surfaces and steps.</li>
           <li><strong>Weather:</strong> Much of the mound is open to the sun. Bring drinking water and sun protection in warmer months.</li>
           <li><strong>Accessibility:</strong> Parts of the park have adapted visitor routes, but not every excavation or underground section is step-free. Ask about the route that suits your needs.</li>
-          <li><strong>Facilities:</strong> The official site lists a museum, explanatory film and visitor services near the entrance.</li>
+          <li>Facilities include a museum, an explanatory film and visitor services near the entrance.</li>
         </ul>
       </div>
     </div>

@@ -169,7 +169,7 @@ const groupPlanningTips: Record<string, { title: string; points: readonly [strin
 const hotelFacilityNotices: Record<string, string> = {
   "tib-galei-kinneret": "The private beach closed on October 4, 2026. The operator expects it to reopen for the next swimming season.",
   "tib-scots": "The seasonal outdoor pool is closed from November 1, 2026, to April 1, 2027.",
-  "tib-leonardo-club": "The water slides are closed for winter. The operator currently says stays run on a full-board basis rather than all-inclusive.",
+  "tib-leonardo-club": "The water slides are closed for winter. The hotel currently offers full-board stays.",
 };
 
 const browseLabels: Record<string, string> = {
