@@ -81,7 +81,8 @@ describe("travel-blog index responsive WebP delivery", () => {
       ),
     );
     expect(component).toMatch(sourceFragment("aspect-[3/2] w-full object-cover"));
-    expect(source).toContain("GuidePhotoCredit");
+    expect(source).toContain("<PhotoCreditsDisclosure");
+    expect(source).toContain("photoCreditEntries(photos)");
     expect(source).toContain("guideDirectory.flatMap");
     expect(Object.keys(travelBlogExploreImageSets).length).toBe(2);
   });

@@ -1,3 +1,4 @@
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { ExternalLink } from "lucide-react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type { HotelCategoryGuide, StayGuidePhoto } from "@/data/content";
@@ -165,25 +166,9 @@ export function StayPhotoCredits({ photos }: { photos: StayGuidePhoto[] }) {
         .map((photo) => [photo.sourceUrl, photo]),
     ).values(),
   ];
-  if (!unique.length) return null;
   return (
-    <details className="mt-10 rounded-xl border bg-card p-4 text-xs text-muted-foreground">
-      <summary className="cursor-pointer font-semibold">Photo credits</summary>
-      <ul className="mt-2 space-y-2">
-        {unique.map((photo) => (
-          <li key={photo.sourceUrl}>
-            <a
-              href={photo.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2"
-            >
-              {photo.label}
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </details>
+    <PhotoCreditsDisclosure
+      entries={unique.map((photo) => ({ label: photo.label, sourceUrl: photo.sourceUrl }))}
+    />
   );
 }

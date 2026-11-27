@@ -152,7 +152,8 @@ describe("Dead Sea attractions editorial guide", () => {
     );
     expect(page).toMatch(sourceFragment("Where to Stay in Israel"));
     expect(page).toContain("ben-gurion-airport-to-ein-bokek");
-    expect(page).toMatch(sourceFragment("Photograph credits"));
+    expect(page).toContain("<PhotoCreditsDisclosure");
+    expect(sourceIndex(page, "</SourcesDisclosure>")).toBeLessThan(sourceIndex(page, "<PhotoCreditsDisclosure"));
     expect(page).not.toContain("israel-taxi.com");
     const route = readFileSync(
       resolve(process.cwd(), "src/routes/travel-blog.dead-sea-attractions.tsx"),

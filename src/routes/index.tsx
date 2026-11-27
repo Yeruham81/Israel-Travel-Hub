@@ -1,3 +1,4 @@
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { eilatSite } from "@/data/eilatSite";
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
 import benGurionApronPhoto from "@/assets/airport-transfers/airport.webp";
@@ -720,52 +721,18 @@ function Home() {
       <div className="home-offscreen mx-auto mt-14 max-w-6xl px-4">
         <HomeContactForm showPortrait={false} showTripadvisorReviews={false} />
       </div>
-      <details className="mx-auto mb-10 mt-10 max-w-6xl px-4 text-sm text-muted-foreground">
-        <summary className="inline-block min-h-8 cursor-pointer rounded px-1 py-1.5 font-medium hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-          Photo credits
-        </summary>
-        <ul className="mt-3 space-y-1.5">
-          {photoCredits
-            .filter(
-              (credit) =>
-                !isPublisherUrl(credit.sourceUrl) &&
-                credit.asset !== "ashdod-port" &&
-                credit.asset !== "haifa-port",
-            )
-            .map((c) => (
-              <li key={c.asset}>
-                {c.sourceUrl ? (
-                  <a
-                    href={c.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline hover:text-foreground"
-                  >
-                    {c.subject}
-                  </a>
-                ) : (
-                  c.subject
-                )}
-                {c.author && <> by {c.author}</>}
-                {c.asset === "accommodation-destination-illustrations" ? ": " : " - "}
-                {c.licenseUrl ? (
-                  <a
-                    href={c.licenseUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline hover:text-foreground"
-                  >
-                    {c.license}
-                  </a>
-                ) : (
-                  c.license
-                )}
-                {"."}
-                {c.changes && <> {c.changes}.</>}
-              </li>
-            ))}
-        </ul>
-      </details>
+      <div className="mx-auto mb-10 mt-10 max-w-6xl px-4">
+        <PhotoCreditsDisclosure
+          entries={photoCredits
+            .filter((credit) => !isPublisherUrl(credit.sourceUrl) && credit.asset !== "ashdod-port" && credit.asset !== "haifa-port")
+            .map((credit) => ({
+              label: credit.subject,
+              credit: [credit.author, credit.license, credit.changes].filter(Boolean).join(" · "),
+              sourceUrl: credit.sourceUrl,
+              licenseUrl: credit.licenseUrl,
+            }))}
+        />
+      </div>
     </div>
   );
 }

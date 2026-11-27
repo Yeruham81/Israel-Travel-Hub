@@ -74,28 +74,8 @@ export function AreaMap({
   );
 }
 
-export function AreaPhotoCredit({ areas }: { areas: NeighborhoodStayGuide[] }) {
-  const creditedAreas = areas.filter((area) => !isPublisherUrl(area.photo.sourceUrl));
-  if (!creditedAreas.length) return null;
-  return (
-    <details className="mt-10 rounded-xl border bg-card p-4 text-xs text-muted-foreground">
-      <summary className="cursor-pointer font-semibold">Photo credits</summary>
-      <ul className="mt-2 space-y-2">
-        {creditedAreas.map((area) => (
-          <li key={area.id}>
-            <a
-              href={area.photo.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2"
-            >
-              {area.name}
-              {area.photo.credit ? `: ${area.photo.credit}` : ""}
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </details>
-  );
+export function areaPhotoCreditEntries(areas: NeighborhoodStayGuide[]) {
+  return areas
+    .filter((area) => !isPublisherUrl(area.photo.sourceUrl))
+    .map((area) => ({ label: area.name, credit: area.photo.credit, sourceUrl: area.photo.sourceUrl }));
 }

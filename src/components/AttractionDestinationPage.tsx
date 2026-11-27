@@ -1,3 +1,4 @@
+import { PhotoCreditsDisclosure, type PagePhotoCredit } from "@/components/PhotoCreditsDisclosure";
 import type { LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { SiteLink as Link } from "@/components/SiteLink";
@@ -114,7 +115,7 @@ export type AttractionDestinationContent = {
   navigationSections?: [string, string][];
   sources: AttractionSource[];
   /** Optional compact attributions for third-party images below the source list. */
-  photoCredits?: ReactNode;
+  photoCredits?: PagePhotoCredit[];
 };
 
 function AtAGlance({
@@ -495,17 +496,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
           ))}
         </ul>
       </SourcesDisclosure>
-      {content.photoCredits && (
-        <details
-          className="group/attraction-credits mt-6 rounded-xl border bg-card text-sm text-muted-foreground"
-          data-testid="attraction-photo-credits"
-        >
-          <summary className="cursor-pointer rounded-xl px-4 py-3 font-semibold text-foreground focus-visible:outline-2 focus-visible:outline-primary">
-            Photo credits &amp; licences
-          </summary>
-          <div className="border-t px-4 py-4 text-xs leading-relaxed">{content.photoCredits}</div>
-        </details>
-      )}
+      <PhotoCreditsDisclosure entries={content.photoCredits ?? []} testId="attraction-photo-credits" />
     </main>
   );
 }

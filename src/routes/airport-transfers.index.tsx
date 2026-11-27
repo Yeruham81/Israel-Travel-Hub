@@ -26,7 +26,7 @@ import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { AirportDestinationCard as DestinationCard } from "@/components/AirportDestinationCard";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { IconTripPlanningLinks } from "@/components/IconTripPlanningLinks";
-import { GuidePhotoCredit } from "@/components/GuideCard";
+import { PhotoCreditsDisclosure, photoCreditEntries } from "@/components/PhotoCreditsDisclosure";
 import {
   AIRPORT_TRANSFER_HUB_UPDATED_DATE,
   airportDestinationCards,
@@ -391,20 +391,7 @@ function Airport() {
           </ul>
         </section>
         <IconTripPlanningLinks title="Plan the rest of your stay" items={tripPlanningLinks} />
-        {creditedPhotos.length > 0 && (
-          <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground">
-            <summary className="cursor-pointer font-semibold">Photo credits</summary>
-            <ul className="mt-3 space-y-3">
-              {[...new Map(creditedPhotos.map((photo) => [photo.src, photo])).values()].map(
-                (photo) => (
-                  <li key={photo.src}>
-                    <GuidePhotoCredit photo={photo} />
-                  </li>
-                ),
-              )}
-            </ul>
-          </details>
-        )}
+        <PhotoCreditsDisclosure entries={photoCreditEntries(creditedPhotos)} />
       </div>
     </main>
   );

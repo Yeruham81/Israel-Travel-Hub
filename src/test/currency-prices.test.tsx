@@ -275,7 +275,7 @@ describe("international price estimates", () => {
     expect(screen.getByTestId("exchange-rate-note")).not.toHaveTextContent("unavailable");
   });
 
-  it("falls back to the daily public Bank of Israel snapshot after an API 503", async () => {
+  it("falls back to the same-origin Bank of Israel snapshot after an API 503", async () => {
     vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
     const live = {
       ...initialReferenceFx,
@@ -302,7 +302,7 @@ describe("international price estimates", () => {
     );
     expect(mockedFetch).toHaveBeenNthCalledWith(
       2,
-      referenceFxConfig.publicSnapshotUrl,
+      referenceFxConfig.localSnapshotUrl,
       expect.objectContaining({ credentials: "omit" }),
     );
     expect(
@@ -313,19 +313,12 @@ describe("international price estimates", () => {
     ).toHaveTextContent("≈ EUR 110");
   });
 
-  it("uses the built-in same-origin snapshot when GitHub cannot be reached by the browser", async () => {
+  it("does not contact external hosts when both same-origin rate sources fail", async () => {
     vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
-    const live = {
-      ...initialReferenceFx,
-      publishedAt: "2026-10-25",
-      checkedAt: new Date().toISOString(),
-      ilsPerUnit: { USD: 4, EUR: 5 },
-    };
     const mockedFetch = vi
       .fn<typeof fetch>()
       .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
-      .mockRejectedValueOnce(new TypeError("Cross-origin request blocked"))
-      .mockResolvedValueOnce(Response.json({ rates: live, status: "cached" }));
+      .mockRejectedValueOnce(new TypeError("Snapshot unavailable"));
     vi.stubGlobal("fetch", mockedFetch);
     render(
       <CurrencyRatesProvider>
@@ -333,18 +326,19 @@ describe("international price estimates", () => {
       </CurrencyRatesProvider>,
     );
     await flush();
-    expect(mockedFetch).toHaveBeenCalledTimes(3);
-    expect(mockedFetch).toHaveBeenNthCalledWith(
-      3,
+    expect(mockedFetch.mock.calls.map(([url]) => url)).toEqual([
+      referenceFxConfig.endpoint,
       referenceFxConfig.localSnapshotUrl,
-      expect.objectContaining({ credentials: "omit" }),
-    );
-    expect(
-      screen.getByTestId("currency-price").querySelector('[data-currency="USD"]'),
-    ).toHaveTextContent("≈ USD 138");
+    ]);
+    for (const [, options] of mockedFetch.mock.calls) {
+      expect(options).toEqual(expect.objectContaining({ credentials: "omit", redirect: "error" }));
+    }
+    const price = screen.getByTestId("currency-price");
+    expect(price).toHaveTextContent("ILS 550");
+    expect(price.querySelector('[data-currency="USD"]')).toBeNull();
   });
 
-  it("rejects a stale public snapshot after an API 503", async () => {
+  it("rejects a stale same-origin snapshot after an API 503", async () => {
     vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
     const mockedFetch = vi
       .fn<typeof fetch>()
@@ -357,9 +351,9 @@ describe("international price estimates", () => {
       </CurrencyRatesProvider>,
     );
     await flush();
-    expect(mockedFetch).toHaveBeenCalledTimes(3);
+    expect(mockedFetch).toHaveBeenCalledTimes(2);
     expect(mockedFetch).toHaveBeenNthCalledWith(
-      3,
+      2,
       referenceFxConfig.localSnapshotUrl,
       expect.objectContaining({ credentials: "omit" }),
     );
@@ -368,7 +362,7 @@ describe("international price estimates", () => {
     expect(price.querySelector('[data-currency="USD"]')).toBeNull();
   });
 
-  it("refreshes a still-valid older cached quote from GitHub when the same-origin API returns 503", async () => {
+  it("refreshes a still-valid older cached quote from the local snapshot when the API returns 503", async () => {
     vi.setSystemTime(Date.parse("2026-10-20T20:00:00Z"));
     const previouslySaved = {
       ...initialReferenceFx,
@@ -404,7 +398,7 @@ describe("international price estimates", () => {
     expect(fetched).toHaveBeenCalledTimes(2);
     expect(fetched).toHaveBeenNthCalledWith(
       2,
-      referenceFxConfig.publicSnapshotUrl,
+      referenceFxConfig.localSnapshotUrl,
       expect.anything(),
     );
     expect(
@@ -440,9 +434,8 @@ describe("international price estimates", () => {
     await act(async () => {
       await vi.advanceTimersByTimeAsync(referenceFxConfig.retryMs);
     });
-    // Each failed refresh attempts the same-origin API, the live public
-    // GitHub snapshot, and finally the bundled same-origin snapshot.
-    expect(fetch).toHaveBeenCalledTimes(6);
+    // Each failed refresh attempts only the same-origin API and snapshot.
+    expect(fetch).toHaveBeenCalledTimes(4);
   });
 
   it("hides expired conversions and never shows zero or NaN estimates when data is unavailable", async () => {

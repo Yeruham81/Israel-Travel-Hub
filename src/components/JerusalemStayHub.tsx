@@ -17,7 +17,7 @@ import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
-import { AreaPhotoCredit } from "@/components/AreaMap";
+import { areaPhotoCreditEntries } from "@/components/AreaMap";
 import jerusalemHeroPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
 
 const pageSections = [
@@ -256,8 +256,7 @@ export function JerusalemStayHub({
           guide={guideContactCopy(g.title, "accommodation", g.city)}
         />
         <SourceList ids={g.sourceIds} />
-        <AreaPhotoCredit areas={areas} />
-        <CityHotelPhotoCredits city="jerusalem" />
+        <CityHotelPhotoCredits city="jerusalem" extraEntries={areaPhotoCreditEntries(areas)} />
       </article>
     </main>
   );
