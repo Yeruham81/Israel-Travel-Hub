@@ -16,7 +16,11 @@ const body = {
 };
 const response = await fetch("https://api.travelpayouts.com/links/v1/create", {
   method: "POST",
-  headers: { "Content-Type": "application/json", Accept: "application/json", "X-Access-Token": token },
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    "X-Access-Token": token,
+  },
   body: JSON.stringify(body),
   signal: AbortSignal.timeout(20000),
   redirect: "error",
@@ -24,17 +28,40 @@ const response = await fetch("https://api.travelpayouts.com/links/v1/create", {
 if (!response.ok) throw new Error("Travelpayouts API HTTP " + response.status);
 const payload = await response.json();
 const result = payload?.result?.links?.[0];
-if (payload?.code !== "success" || result?.code !== "success" || typeof result.partner_url !== "string") {
-  throw new Error("Cannot generate DiscoverCars affiliate link: " + String(result?.message ?? payload?.code ?? "unknown").slice(0, 200));
+if (
+  payload?.code !== "success" ||
+  result?.code !== "success" ||
+  typeof result.partner_url !== "string"
+) {
+  throw new Error(
+    "Cannot generate DiscoverCars affiliate link: " +
+      String(result?.message ?? payload?.code ?? "unknown").slice(0, 200),
+  );
 }
 const parsed = new URL(result.partner_url);
-if (parsed.protocol !== "https:" || parsed.username || parsed.password ||
-    !["tp.st", "tpm.li"].includes(parsed.hostname) &&
-    !parsed.hostname.endsWith(".tp.st") && !parsed.hostname.endsWith(".tpm.li")) {
+if (
+  parsed.protocol !== "https:" ||
+  parsed.username ||
+  parsed.password ||
+  (!["tp.st", "tpm.li"].includes(parsed.hostname) &&
+    !parsed.hostname.endsWith(".tp.st") &&
+    !parsed.hostname.endsWith(".tpm.li"))
+) {
   throw new Error("Travelpayouts did not return an approved short-link domain");
 }
 await mkdir("artifacts", { recursive: true });
-await writeFile("artifacts/discovercars-israel-link.json",
-  JSON.stringify({ target, partner_id: 622032, project_id: 406243,
-    affiliate_url: parsed.toString(), sub_id: "itt_car_base" }, null, 2) + "\n");
+await writeFile(
+  "artifacts/discovercars-israel-link.json",
+  JSON.stringify(
+    {
+      target,
+      partner_id: 622032,
+      project_id: 406243,
+      affiliate_url: parsed.toString(),
+      sub_id: "itt_car_base",
+    },
+    null,
+    2,
+  ) + "\n",
+);
 console.log("VERIFIED_DISCOVERCARS_ISRAEL_LINK=" + parsed.toString());

@@ -18,7 +18,9 @@ const editorial = process.argv.includes("--editorial");
 function verifyContactJump(main, page) {
   const links = [...main.matchAll(/<a\b[^>]*\bhref="#contact"[^>]*>([\s\S]*?)<\/a>/gi)];
   assert(
-    links.some(([, content]) => content.replace(/<!--[^]*?-->|<[^>]*>/g, "").trim() === "Contact me"),
+    links.some(
+      ([, content]) => content.replace(/<!--[^]*?-->|<[^>]*>/g, "").trim() === "Contact me",
+    ),
     "Missing Contact me jump link: " + page,
   );
   assert(/<section\b[^>]*\bid="contact"/i.test(main), "Missing contact form target: " + page);

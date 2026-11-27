@@ -27,14 +27,26 @@ function validateRates(rates) {
   if (typeof publishedAt !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(publishedAt))
     throw new Error("Invalid FX publication date");
   const published = Date.parse(`${publishedAt}T00:00:00Z`);
-  if (!Number.isFinite(published) || new Date(published).toISOString().slice(0, 10) !== publishedAt
-    || now.getTime() - published > maxAgeMs || published > now.getTime() + toleranceMs)
+  if (
+    !Number.isFinite(published) ||
+    new Date(published).toISOString().slice(0, 10) !== publishedAt ||
+    now.getTime() - published > maxAgeMs ||
+    published > now.getTime() + toleranceMs
+  )
     throw new Error("Published FX rates are stale or dated in the future");
   const checked = Date.parse(checkedAt);
   if (!Number.isFinite(checked) || checked < published || checked > now.getTime() + toleranceMs)
     throw new Error("Invalid FX verification timestamp");
-  if (!ilsPerUnit || ["USD", "EUR"].some(key =>
-    typeof ilsPerUnit[key] !== "number" || !Number.isFinite(ilsPerUnit[key]) || ilsPerUnit[key] <= 0 || ilsPerUnit[key] >= 1000))
+  if (
+    !ilsPerUnit ||
+    ["USD", "EUR"].some(
+      (key) =>
+        typeof ilsPerUnit[key] !== "number" ||
+        !Number.isFinite(ilsPerUnit[key]) ||
+        ilsPerUnit[key] <= 0 ||
+        ilsPerUnit[key] >= 1000,
+    )
+  )
     throw new Error("Invalid USD/EUR FX amounts");
   return { publishedAt, checkedAt, ilsPerUnit: { USD: ilsPerUnit.USD, EUR: ilsPerUnit.EUR } };
 }
@@ -42,11 +54,17 @@ function validateRates(rates) {
 function parseOfficial(body) {
   if (!Array.isArray(body?.exchangeRates)) throw new Error("Invalid Bank of Israel payload");
   const observations = ["USD", "EUR"].map((currency) => {
-    const matches = body.exchangeRates.filter(row => row && typeof row === "object" && row.key === currency);
+    const matches = body.exchangeRates.filter(
+      (row) => row && typeof row === "object" && row.key === currency,
+    );
     if (matches.length !== 1) throw new Error(`Missing or duplicate ${currency} observation`);
     const row = matches[0];
-    if (row.unit !== 1 || typeof row.currentExchangeRate !== "number"
-      || typeof row.lastUpdate !== "string" || !Number.isFinite(Date.parse(row.lastUpdate)))
+    if (
+      row.unit !== 1 ||
+      typeof row.currentExchangeRate !== "number" ||
+      typeof row.lastUpdate !== "string" ||
+      !Number.isFinite(Date.parse(row.lastUpdate))
+    )
       throw new Error(`Invalid ${currency} observation`);
     return { date: row.lastUpdate.slice(0, 10), value: row.currentExchangeRate };
   });
@@ -77,12 +95,16 @@ try {
   console.log("Read validated Bank of Israel reference rates from Hostinger");
 }
 
-const previous = await readFile(target, "utf8").then(JSON.parse).catch(() => null);
+const previous = await readFile(target, "utf8")
+  .then(JSON.parse)
+  .catch(() => null);
 if (previous?.rates?.publishedAt && current.publishedAt < previous.rates.publishedAt)
   throw new Error("Refusing to overwrite a newer publication");
-if (previous?.rates?.publishedAt === current.publishedAt &&
+if (
+  previous?.rates?.publishedAt === current.publishedAt &&
   previous.rates.ilsPerUnit?.USD === current.ilsPerUnit.USD &&
-  previous.rates.ilsPerUnit?.EUR === current.ilsPerUnit.EUR) {
+  previous.rates.ilsPerUnit?.EUR === current.ilsPerUnit.EUR
+) {
   console.log(`Bank of Israel publication ${current.publishedAt} unchanged`);
   process.exit(0);
 }
