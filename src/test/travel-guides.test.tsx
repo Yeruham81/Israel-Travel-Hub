@@ -1003,7 +1003,8 @@ describe("migrated practical guides", () => {
     expect(getSource("guide-weekend-711").url).toContain("tel-aviv.gov.il");
     const bus = guide.sections.find((section) => section.id === "weekend-711")!;
     expect(bus.paragraphs.join(" ")).toMatch(/winter-time.*Friday 15:45–01:30.*Saturday 10:30–16:30.*daylight-saving-time schedules extend/s);
-    expect(bus.paragraphs.join(" ")).toContain("airport stop differ");
+    expect(bus.paragraphs.join(" ")).toContain("Check the timetable for the exact departure times from Terminal 1.");
+    expect(guide.faqs.find((faq) => faq.q === "When is the last Line 711 bus from the airport on Saturday?")?.a).toContain("The published operating hours cover the entire route.");
     expect(bus.tables?.[0]?.headers).toEqual(["Line 711 stop / area", "Useful for", "Next step"]);
     expect(bus.tables?.[0]?.rows).toHaveLength(5);
     expect(bus.sourceIds).toContain("guide-711-hours");

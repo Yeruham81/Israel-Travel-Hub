@@ -31,7 +31,7 @@ jobs:
       - name: Build and lint updated main reference
         run: |
           mkdir -p "$RUNNER_TEMP/unused-audit"
-          git worktree add --detach "$RUNNER_TEMP/main-reference" d4ce80b5f57af0f190d066f44634b6282a3e1587
+          git worktree add --detach "$RUNNER_TEMP/main-reference" 812e681ae60683669030f9e0bb5b1076b264539e
           cd "$RUNNER_TEMP/main-reference"
           bash scripts/install-ci-dependencies.sh
           status=0
