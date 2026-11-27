@@ -68,15 +68,15 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
         title="Church of the Multiplication of the Loaves and Fishes"
         image={{ src: "/images/attractions/tabgha-multiplication-church.webp", alt: "Stone exterior of the Church of the Multiplication at Tabgha, with palm trees in the courtyard" }}
       >
-        <p>This peaceful Benedictine church commemorates the feeding of the five thousand. The church's simple stone interior contains beautiful Byzantine mosaics, and its courtyard is a peaceful place to begin your visit.</p>
+        <p>This Benedictine church commemorates the feeding of the five thousand. Its simple stone interior contains beautiful Byzantine mosaics, and its quiet courtyard is a pleasant place to begin your visit.</p>
         <p>I recommend making this your first stop if you are visiting both churches, as it closes earlier in the afternoon.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The loaves-and-fishes mosaic"
         image={{ src: "/images/attractions/tabgha-loaves-fishes-mosaic.webp", alt: "Ancient mosaic showing a bread basket between two fish near the altar of the Church of the Multiplication" }}
       >
-        <p>Look down in front of the altar for the famous mosaic of two fish and a basket of bread. The basket contains four loaves, a detail that often catches visitors' attention.</p>
-        <p>Look for the beautiful mosaics of birds, plants and other natural scenes on the surrounding floor.</p>
+        <p>Look down in front of the altar for the famous mosaic of two fish and a basket of bread. The mosaic shows four loaves in the basket.</p>
+        <p>The surrounding floor features mosaics of birds, plants and other natural scenes.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="Church of the Primacy of Peter"
@@ -86,7 +86,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
         <p>Inside is the rock known as <em>Mensa Christi</em>, or “Table of Christ”. The lakeside setting makes this a lovely place to spend a few quiet moments.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The gardens and shoreline">
-        <p>Tabgha's quiet gardens and lakeside churches make it a lovely place to slow down and enjoy the scenery. Enjoy the lake views and give people attending services or praying their space.</p>
+        <p>Take time to enjoy Tabgha's quiet gardens and lake views while respecting the privacy of worshippers.</p>
       </AttractionHighlight>
     </div>
   ),
@@ -120,7 +120,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-xl font-semibold">Useful things to know before visiting</h3>
         <ul className="mt-3 grid gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base list-disc">
           <li><strong>Entry:</strong> Neither church currently publishes an admission fee. Check with the church if you are arranging a special group visit.</li>
-          <li><strong>Dress:</strong> Both are working places of worship. Cover shoulders and knees and be considerate during services.</li>
+          <li><strong>Dress:</strong> Both churches are active places of worship. Cover your shoulders and knees and be considerate during services.</li>
           <li><strong>Accessibility:</strong> The Multiplication church has a relatively level approach. An access ramp was installed at the Primacy chapel, but the rocky lakeshore and steps are difficult for wheelchair users. Contact each church to check the current step-free route.</li>
           <li><strong>Parking and facilities:</strong> Car and coach parking is available around Tabgha, with separate entrances to the churches. The Benedictine monastery shop is normally open Monday–Saturday, 09:00–15:00.</li>
         </ul>
@@ -145,7 +145,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">You can reach Tabgha by bus from Tiberias, but it is not the most convenient option for visitors, especially if you want to explore several sites around the Sea of Galilee in one day. Check bus times and the walk from your stop with the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">official public transport planner</a>. For a more flexible day, I recommend <Link to="/car-rental/" className="font-semibold text-primary underline underline-offset-4">renting a car</Link>, joining an <Link to="/tours/nazareth-sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">organised Galilee tour</Link>, or <a href="#contact" className="font-semibold text-primary underline underline-offset-4">arranging a private day trip with a driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Buses from Tiberias serve Tabgha, but a car or organised tour offers more flexibility when visiting several lakeside sites in one day. Check bus times and the walk from your stop with the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">official public transport planner</a>. For a more flexible day, I recommend <Link to="/car-rental/" className="font-semibold text-primary underline underline-offset-4">renting a car</Link>, joining an <Link to="/tours/nazareth-sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">organised Galilee tour</Link>, or <a href="#contact" className="font-semibold text-primary underline underline-offset-4">arranging a private day trip with a driver</a>.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="tabgha-location-map">

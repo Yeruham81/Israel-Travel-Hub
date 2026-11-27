@@ -42,15 +42,15 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
         title="The first-century synagogue"
         image={{ src: "/images/attractions/magdala-first-century-synagogue.webp", alt: "Stone foundations, benches and ancient mosaic floor in Magdala's excavated first-century synagogue" }}
       >
-        <p>The ancient synagogue is Magdala's main archaeological attraction. Its stone benches and preserved floor offer a rare glimpse of Jewish community life in the first-century Galilee.</p>
-        <p>Walk around the covered excavation to see the synagogue's original layout. A guided explanation can help bring the remains to life.</p>
+        <p>The ancient synagogue is Magdala's main archaeological attraction. Its stone benches and preserved floor illustrate Jewish community life in first-century Galilee.</p>
+        <p>Walk around the covered excavation to see the synagogue's original layout. A guide can explain how the synagogue was used.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Magdala Stone">
         <p>The carved stone discovered in the synagogue is one of the site's most important finds. Its reliefs include a depiction of the menorah, connecting the town's Jewish life to the Temple in Jerusalem.</p>
         <p>The stone displayed in the synagogue is a replica. The original is part of the Israel Antiquities Authority’s collection and has been exhibited elsewhere.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Streets, marketplace and ritual baths">
-        <p>Beyond the synagogue, you can explore the remains of shops, homes and ancient <em>mikvaot</em> (Jewish ritual baths). Together, these remains help explain how people lived and worked beside the lake.</p>
+        <p>Beyond the synagogue, you can explore the remains of shops, homes and ancient <em>mikvaot</em> (Jewish ritual baths). These remains illustrate everyday life in the ancient lakeside town.</p>
         <p>I recommend allowing time for the archaeological site as well as the church.</p>
       </AttractionHighlight>
       <AttractionHighlight
@@ -58,7 +58,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
         image={{ src: "/images/attractions/magdala-boat-chapel.webp", alt: "Boat-shaped altar and bright arched windows inside Duc In Altum's lakeside prayer chapel at Magdala" }}
       >
         <p>Its Boat Chapel faces towards the Sea of Galilee, with an altar recalling Jesus' teaching from a fishing boat.</p>
-        <p>Allow some quiet time to look around, and remember that services may be taking place.</p>
+        <p>Explore the chapel quietly, especially during religious services.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The Women's Atrium and other chapels"
@@ -88,7 +88,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
             <div className="flex items-start justify-between gap-3"><dt>Visitors over age 12</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.regularAdmissionPrice}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Group of {visit.groupMinimumSize} or more (per person)</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.groupAdmissionPrice}</dd></div>
           </dl>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Rates confirmed directly with the visitor centre. Contact the visitor centre for group rates, other ticket prices and guided tours.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Contact the visitor centre for group rates, additional ticket prices and guided tours.</p>
           <a href={"mailto:" + visit.visitorEmail} className={"mt-2 inline-block text-sm " + inlineLink}>{visit.visitorEmail}</a>
           <p className="mt-1 text-sm"><a href={"tel:" + visit.visitorPhoneHref} className={inlineLink} dir="ltr">{visit.visitorPhone}</a></p>
           <a href={sources.contact} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official visitor centre contacts <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
@@ -146,7 +146,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-xl font-semibold">Combine Magdala with the northern Sea of Galilee</h3>
         <p className="mt-3 text-sm leading-relaxed sm:text-base">I recommend choosing three to five sites for your day, depending on where you're starting and how much time you want to spend at Magdala.</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li><strong>Near the north shore:</strong> <Link to="/attractions/tabgha/" className={inlineLink}>Tabgha</Link>, <Link to="/attractions/capernaum/" className={inlineLink}>Capernaum</Link> and the <Link to="/attractions/mount-of-beatitudes/" className={inlineLink}>Mount of Beatitudes</Link> are natural companions.</li>
+          <li><strong>Northern shore:</strong> Combine Magdala with <Link to="/attractions/tabgha/" className={inlineLink}>Tabgha</Link>, <Link to="/attractions/capernaum/" className={inlineLink}>Capernaum</Link> and the <Link to="/attractions/mount-of-beatitudes/" className={inlineLink}>Mount of Beatitudes</Link>.</li>
           <li><strong>Along the lake:</strong> Include time in <Link to="/attractions/sea-of-galilee/" className={inlineLink}>Tiberias or the surrounding lakeside area</Link>.</li>
           <li><strong>A longer route:</strong> Add <Link to="/attractions/basilica-of-the-annunciation/" className={inlineLink}>Nazareth</Link> or <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> if travel time and your schedule allow.</li>
         </ul>
@@ -162,7 +162,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Guided Galilee trips can make it easier to combine Magdala with lakeside churches and other nearby stops. Choose an itinerary that includes both the archaeological park and Duc In Altum if you want to visit both.</p>
+      <p>Guided Galilee tours can combine Magdala with nearby lakeside churches. Choose an itinerary that includes both the archaeological park and Duc In Altum.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="magdala-galilee-tours-card">
           <img src="/images/attractions/sea-of-galilee.webp" alt="Landscape of the Sea of Galilee on a northern Israel guided tour route" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

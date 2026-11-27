@@ -23,13 +23,13 @@ const visitorAreas = [
   {
     name: "National park & marine terminal",
     details: <div className="space-y-2">
-      <p>Access is <strong>free and does not require advance booking</strong>.</p>
+      <p>Admission is <strong>free, with no advance booking required</strong>.</p>
       <ul className="list-disc space-y-1 pl-4">
         <li><strong>Sun–Thu & Saturday:</strong> {capernaumSite.park.regular}, year-round.</li>
         <li><strong>Fridays and holiday eves:</strong> {capernaumSite.park.fridays}, year-round.</li>
         <li><strong>Rosh Hashanah, Passover and Yom Kippur eves:</strong> {capernaumSite.park.specialHolidayEves}.</li>
       </ul>
-      <p className="text-xs text-muted-foreground">The park closes admission one hour before its posted closing time.</p>
+      <p className="text-xs text-muted-foreground">Last admission is one hour before closing.</p>
     </div>,
     source: "Parks Authority — official visitor hours",
     url: visitSources.parkHebrew,
@@ -75,7 +75,7 @@ const page: AttractionDestinationContent = {
         image={{ src: "/images/attractions/capernaum-peters-house.webp", alt: "Basalt dwelling remains and the elevated modern memorial above the traditional House of Peter at Capernaum" }}
       >
         <p>Excavated rooms near the synagogue are traditionally associated with the apostle Peter. Christian worship developed here over centuries, and a Byzantine octagonal church later enclosed part of the earlier site.</p>
-        <p>The modern memorial church rises above the excavations, allowing visitors to see the remains below. The identification as Peter's personal home is a matter of tradition, not proven archaeological certainty.</p>
+        <p>The modern memorial church rises above the excavations, allowing visitors to see the remains below. Christian tradition identifies these remains as Peter's home, although this has not been established archaeologically.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The basalt houses of the old village">
         <p>Take a few minutes to explore the low stone walls and courtyards between the main monuments. The remains of ancient homes reveal how the lakeside village was laid out.</p>
@@ -136,10 +136,10 @@ const page: AttractionDestinationContent = {
       </AttractionPracticalTip>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="capernaum-visitor-facilities">
         <h3 className="font-serif text-xl font-semibold">Facilities and visitor essentials</h3>
-        <p className="mt-2 text-sm leading-relaxed">The following facilities are described by the <strong>national park authority for its own visitor area</strong>, not for the separately managed churches.</p>
+        <p className="mt-2 text-sm leading-relaxed">The following facilities are available within the <strong>national park</strong>.</p>
         <div className="mt-3 grid gap-x-5 gap-y-1 sm:grid-cols-2" data-testid="capernaum-facilities-columns">
           <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed sm:text-base">
-            <li><strong>Parking:</strong> Parking near the park entrance, with a paved accessible approach.</li>
+            <li><strong>Parking:</strong> Parking near the entrance, with a paved accessible path.</li>
             <li><strong>Restrooms and drinking water:</strong> Toilets and water fountains, including accessible facilities.</li>
             <li><strong>Shade and seating:</strong> Shaded seating overlooking the lake.</li>
           </ul>
@@ -168,7 +168,7 @@ const page: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Getting here by bus may be possible, but infrequent services and the walk to the entrance make it inconvenient. <strong>I recommend a car, taxi, or prearranged group or private tour</strong> for an easier visit, especially when combining several lakeside sites.</p>
+            <p className="mt-2 text-sm leading-relaxed">Bus services are infrequent, and the entrance requires a walk from the bus stop. <strong>I recommend a car, taxi, or prearranged group or private tour</strong> for an easier visit, especially when combining several lakeside sites.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="capernaum-location-map">
@@ -209,7 +209,7 @@ const page: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Galilee day tours may include Capernaum alongside Nazareth, Tabgha or the Mount of Beatitudes. Choose a trip that <strong>explicitly lists Capernaum as a stop</strong> and check its departure city, time on site, guiding language and admission arrangements.</p>
+      <p>Galilee day tours may include Capernaum alongside Nazareth, Tabgha or the Mount of Beatitudes. Choose a tour that <strong>includes Capernaum</strong>, and compare departure points, visiting time, guiding languages and admission arrangements.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="capernaum-galilee-tours-card">
           <img src="/images/attractions/sea-of-galilee.webp" alt="Sea of Galilee landscape representing guided visits around its northern shore" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

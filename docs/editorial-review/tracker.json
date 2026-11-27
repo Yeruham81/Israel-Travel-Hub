@@ -364,10 +364,10 @@
     {
       "path": "/attractions/capernaum/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 7,
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending."
     },
     {
       "path": "/attractions/dead-sea/",
@@ -416,10 +416,10 @@
     {
       "path": "/attractions/magdala/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 7,
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending."
     },
     {
       "path": "/attractions/masada/",
@@ -441,10 +441,10 @@
     {
       "path": "/attractions/mount-of-beatitudes/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending."
     },
     {
       "path": "/attractions/mount-of-olives/",
@@ -518,10 +518,10 @@
     {
       "path": "/attractions/tabgha/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending."
     },
     {
       "path": "/attractions/tel-megiddo/",
