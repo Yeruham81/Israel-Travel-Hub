@@ -2,7 +2,7 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import { BadgeCheck, CalendarCheck, CheckCircle2, PlaneLanding } from "lucide-react";
 import { Breadcrumbs, FaqList } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
-import { GuidePhotoCredit } from "@/components/GuideCard";
+import { PhotoCreditsDisclosure, photoCreditEntries } from "@/components/PhotoCreditsDisclosure";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
 import {
   AIRPORT_TRANSFER_UPDATED_DATE,
@@ -498,20 +498,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           </li>
         </ul>
       </section>
-      {creditedPhotos.length > 0 && (
-        <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground">
-          <summary className="cursor-pointer font-semibold">Photo credits</summary>
-          <ul className="mt-3 space-y-3">
-            {[...new Map(creditedPhotos.map((photo) => [photo.src, photo])).values()].map(
-              (photo) => (
-                <li key={photo.src}>
-                  <GuidePhotoCredit photo={photo} />
-                </li>
-              ),
-            )}
-          </ul>
-        </details>
-      )}
+      <PhotoCreditsDisclosure entries={photoCreditEntries(creditedPhotos)} />
     </main>
   );
 }

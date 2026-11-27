@@ -5,7 +5,7 @@ import { Link } from "@tanstack/react-router";
 import { CalendarDays, Compass, Smartphone, TrainFront, CarFront, CloudSun } from "lucide-react";
 import { useState } from "react";
 import { Breadcrumbs, FaqList, SourceList, OnThisPage } from "@/components/Guide";
-import { GuidePhotoCredit } from "@/components/GuideCard";
+import { PhotoCreditsDisclosure, photoCreditEntries } from "@/components/PhotoCreditsDisclosure";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { ShoreQuoteForm } from "@/components/ShoreQuoteForm";
 import { airportTransferPhotos } from "@/data/airportTransfers";
@@ -312,14 +312,7 @@ export function PortPage({
         ids={shoreSourceIds(id)}
         intro="Official port information and tour booking sources. Confirm availability for your sailing date, total price, port access and return arrangements with the operator."
       />
-      <details className="mt-10 rounded-xl border p-4 text-sm">
-        <summary className="cursor-pointer font-semibold">Image credits</summary>
-        <div className="mt-3 space-y-3">
-          {[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => (
-            <GuidePhotoCredit key={photo.src} photo={photo} insideDisclosure />
-          ))}
-        </div>
-      </details>
+      <PhotoCreditsDisclosure entries={photoCreditEntries(photos)} />
     </main>
   );
 }

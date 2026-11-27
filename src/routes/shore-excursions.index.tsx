@@ -15,7 +15,7 @@ import {
   TrainFront,
 } from "lucide-react";
 import { FaqList, HubHeader, SourceList } from "@/components/Guide";
-import { GuidePhotoCredit } from "@/components/GuideCard";
+import { PhotoCreditsDisclosure, photoCreditEntries } from "@/components/PhotoCreditsDisclosure";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { getShorePort } from "@/data/shoreExcursions";
 import { shoreHubGuides } from "@/data/shoreReading";
@@ -348,22 +348,11 @@ function Shore() {
           title="Plan your trip to Israel"
           items={practicalGuides}
         />
-        {photos.length > 0 && (
-          <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground">
-            <summary className="cursor-pointer font-semibold">Photo credits</summary>
-            <ul className="mt-3 space-y-3">
-              {[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => (
-                <li key={photo.src}>
-                  <GuidePhotoCredit photo={photo} />
-                </li>
-              ))}
-            </ul>
-          </details>
-        )}
         <SourceList
           ids={shoreHubSourceIds}
           intro="Official port and national-park information for planning. Your cruise line and tour operator confirm the arrangements for your ship and date."
         />
+        <PhotoCreditsDisclosure entries={photoCreditEntries(photos)} />
       </div>
     </main>
   );
