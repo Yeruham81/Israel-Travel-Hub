@@ -46,7 +46,7 @@ describe("editorial six-card grid responsive parity", () => {
 
   it("reuses the shared six-link grid on both shore page templates and stacks hub guide cards", () => {
     for (const file of ["src/routes/shore-excursions.index.tsx","src/components/PortPage.tsx"]) {
-      expect(read(file)).toContain('<IconTripPlanningLinks id="shore-practical"');
+      expect(read(file)).toMatch(/<IconTripPlanningLinks\s+id="shore-practical"/);
     }
     expect(read("src/components/IconTripPlanningLinks.tsx")).toContain("grid grid-cols-2 gap-3 lg:grid-cols-3");
     const hub=read("src/routes/shore-excursions.index.tsx");

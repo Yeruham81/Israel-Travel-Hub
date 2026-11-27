@@ -22,9 +22,9 @@ describe("Israel holidays visitor guide", () => {
     const page = readFileSync("src/components/IsraelHolidayVisitorGuide.tsx", "utf8");
     const route = readRouteSource("src/routes/travel-blog.calendar-of-events.tsx");
     expect(page).toContain('{name:"Calendar of events",to:HOLIDAY_GUIDE_PATH}');
-    expect(route).toContain('{name:"Calendar of events",path:HOLIDAY_GUIDE_PATH}');
+    expect(route).toMatch(/\{\s*name:\s*"Calendar of events",\s*path:\s*HOLIDAY_GUIDE_PATH\s*,?\s*\}/);
     expect(page).not.toContain("Holidays in Israel: A Practical Guide for Visitors");
-    expect(route).toContain("headline:HOLIDAY_GUIDE_TITLE");
+    expect(route).toMatch(/headline:\s*HOLIDAY_GUIDE_TITLE\b/);
     expect(existsSync("public" + HOLIDAY_GUIDE_PHOTO.src)).toBe(true);
     expect(HOLIDAY_GUIDE_PHOTO.src).toBe("/images/holiday-guide/israel-calendar-of-events.webp");
     expect(travelGuides.calendar.photo.src).toBe(HOLIDAY_GUIDE_PHOTO.src);

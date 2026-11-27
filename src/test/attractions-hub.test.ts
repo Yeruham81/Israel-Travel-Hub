@@ -35,7 +35,7 @@ describe("Attractions hub redesign", () => {
     const css = readFileSync("src/styles.css", "utf8");
 
     expect(attractionHubCards).toHaveLength(25);
-    expect(page).toContain("region.cards.map((card) => <AttractionCard");
+    expect(page).toMatch(/region\.cards\.map\(\s*\(card\)\s*=>\s*\(?\s*<AttractionCard\b/);
     expect(card).toContain('className="editorial-card-link group flex h-full');
     expect(card).toContain("overflow-hidden rounded-2xl border bg-card");
     expect(card).toContain('className="aspect-[3/2] overflow-hidden bg-secondary"');
@@ -96,8 +96,8 @@ describe("Attractions hub redesign", () => {
     expect(page).toContain("Plan your trip to Israel");
     expect(page).toContain("attractionRelatedGuides.map");
     expect(page).toContain("attractionPlanningPaths.map");
-    expect(page).toContain("<img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src}");
-    expect(page).toContain("<Icon aria-hidden");
+    expect(page).toMatch(/<img\s+src=\{\s*guideHeroPhotoForPath\(String\(guide\.to\)\)\?\.src\s*\?\?\s*guide\.photo\.src\s*\}/);
+    expect(page).toMatch(/<Icon\s+aria-hidden\b/);
     expect(page).not.toContain("More ways to plan your trip");
     expect(page).not.toContain('data-testid="attractions-planning-card"');
     expect(page).toContain('to="/tours/"');
@@ -197,10 +197,10 @@ describe("attractions landing responsive image delivery", () => {
     expect(page).toContain('sizes="(min-width: 1280px) 365px');
     expect(page).toContain("srcSet={attractionHubRegionImageSets[region.image.src]}");
     expect(page).toContain('sizes="(min-width: 640px) 144px, 80px"');
-    expect(page).toContain("srcSet={attractionHubRelatedImageSets[guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src]}");
+    expect(page).toMatch(/srcSet=\{\s*attractionHubRelatedImageSets\[\s*guideHeroPhotoForPath\(String\(guide\.to\)\)\?\.src\s*\?\?\s*guide\.photo\.src\s*\]\s*\}/);
     expect(page).toContain('sizes="(min-width: 640px) 112px, 96px"');
-    expect(page).toContain('<img src={photo.src}');
-    expect(page).toContain('<img src={region.image.src}');
-    expect(page).toContain('<img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src}');
+    expect(page).toMatch(/<img\s+src=\{photo\.src\}/);
+    expect(page).toMatch(/<img\s+src=\{region\.image\.src\}/);
+    expect(page).toMatch(/<img\s+src=\{\s*guideHeroPhotoForPath\(String\(guide\.to\)\)\?\.src\s*\?\?\s*guide\.photo\.src\s*\}/);
   });
 });

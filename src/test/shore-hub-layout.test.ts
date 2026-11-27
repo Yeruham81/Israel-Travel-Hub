@@ -24,7 +24,7 @@ describe("compact shore excursions hub", () => {
     expect(page).not.toContain("Excursions from Ashdod");
     expect(page).not.toContain("Excursions from Haifa");
     expect(page).not.toContain("sm:min-w-48");
-    expect(page).toContain("portIds.map(id =>");
+    expect(page).toMatch(/portIds\.map\(\s*\(?id\)?\s*=>/);
     expect(page).toContain("getShorePort(id)");
     expect(page).toContain("search={{ destination: link.destination }}");
     expect(page).toContain('hash="request-quote"');

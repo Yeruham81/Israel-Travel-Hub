@@ -12,15 +12,15 @@ describe("home mobile performance optimizations", () => {
     const css = read("src/styles.css");
     expect(root).not.toContain("fonts.googleapis.com");
     expect(root).not.toContain("fonts.gstatic.com");
-    expect(root).toContain('rel: "preload", href: siteSansUrl');
-    expect(root).toContain('rel: "preload", href: siteSerifUrl');
+    expect(root).toMatch(/rel:\s*"preload",\s*href:\s*siteSansUrl\b/);
+    expect(root).toMatch(/rel:\s*"preload",\s*href:\s*siteSerifUrl\b/);
     for (const filename of ["instrument-sans-latin-wght-normal.woff2", "newsreader-latin-400.woff2", "newsreader-latin-600.woff2", "newsreader-latin-400-italic.woff2"]) {
       expect(bytes(`src/assets/fonts/${filename}`)).toBeGreaterThan(5000);
       expect(css).toContain(`./assets/fonts/${filename}`);
       expect(css).not.toContain(`url("/fonts/${filename}")`);
     }
     expect(css).toMatch(/font-display:\s*optional/);
-    expect(root).toContain('rel: "preload", href: siteSerifSemiboldUrl');
+    expect(root).toMatch(/rel:\s*"preload",\s*href:\s*siteSerifSemiboldUrl\b/);
     expect(bytes("public/fonts/LICENSE-instrument-sans.txt")).toBeGreaterThan(100);
     expect(bytes("public/fonts/LICENSE-newsreader.txt")).toBeGreaterThan(100);
   });
@@ -29,12 +29,12 @@ describe("home mobile performance optimizations", () => {
     const homepage = read("src/routes/index.tsx");
     const compact = homepage.slice(homepage.indexOf("function CompactCard("), homepage.indexOf("function AirportTransferCard("));
     expect(compact).toContain("guideHeroPhotoForPath(String(c.to))?.src ?? c.img.thumb ?? c.img.src");
-    expect(compact).toContain('loading="lazy" decoding="async"');
-    expect(compact).toContain("width={224} height={160}");
+    expect(compact).toMatch(/loading="lazy"\s+decoding="async"/);
+    expect(compact).toMatch(/width=\{224\}\s+height=\{160\}/);
     expect(homepage).toContain("<CompactCard key={c.label} c={c} />");
     const photo = homepage.slice(homepage.indexOf("function PhotoCard("), homepage.indexOf("function CompactCard("));
     expect(photo).toContain("guideHeroPhotoForPath(String(c.to))?.src ?? c.img.src");
-    expect(photo).toContain('loading="lazy" decoding="async"');
+    expect(photo).toMatch(/loading="lazy"\s+decoding="async"/);
   });
 
   it("uses optimized and clearly labeled AI destination illustrations only in the accommodation gallery", () => {
@@ -51,7 +51,7 @@ describe("home mobile performance optimizations", () => {
     expect(section.match(/AI-generated illustration/g)).toHaveLength(5);
     expect(home).not.toContain("Destination illustrations generated with AI; not photographs");
     expect(read("src/components/Layout.tsx")).toContain("Some images on this website were generated using artificial intelligence.");
-    expect(home).not.toContain('media="(min-width: 1280px)" srcSet={c.img.thumb}');
+    expect(home).not.toMatch(/media="\(min-width: 1280px\)"\s+srcSet=\{c\.img\.thumb\}/);
     expect(home).toContain('xl:aspect-[6/5]');
     expect(home).not.toContain('xl:aspect-[4/5]');
   });
@@ -65,7 +65,7 @@ describe("home mobile performance optimizations", () => {
     expect(page).toContain('media: "(min-width: 768px) and (max-width: 1800px)"');
     expect(page).toContain('media: "(min-width: 1801px)"');
     expect(page).toContain('fetchPriority: "high"');
-    expect(page.match(/rel: "preload", as: "image"/g)).toHaveLength(3);
+    expect(page.match(/rel:\s*"preload",\s*as:\s*"image"/g)).toHaveLength(3);
   });
 
   it("skips expensive offscreen paint on phones but does not hide SEO content", () => {
@@ -136,12 +136,12 @@ describe("home mobile performance optimizations", () => {
       expect(home).toContain(`${name}-feature.webp`);
     }
     expect(home).toContain('import benGurionApronPhoto from "@/assets/airport-transfers/airport.webp"');
-    expect(home).toContain('feature: { src: benGurionApronPhoto, mobile: benGurionApronPhotoMobile, alt:');
-    expect(home).not.toContain('feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp"');
+    expect(home).toMatch(/feature:\s*\{\s*src:\s*benGurionApronPhoto,\s*mobile:\s*benGurionApronPhotoMobile,\s*alt:/);
+    expect(home).not.toMatch(/feature:\s*\{\s*src:\s*"\/images\/travel-blog\/taxi-in-tel-aviv\.webp"/);
     expect(bytes("src/assets/airport-transfers/airport.webp")).toBeGreaterThan(10000);
     expect(bytes("public/images/home/uber-in-israel-phone-question.webp")).toBeGreaterThan(10000);
     expect(bytes("public/images/home/uber-in-israel-phone-question.webp")).toBeLessThan(30000);
-    expect(home).toContain('first: guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id))');
+    expect(home).toMatch(/first:\s*guideDirectory\.filter\(\s*\(guide\)\s*=>\s*\["uber",\s*"esim",\s*"arrival"\]\.includes\(guide\.id\),?\s*\)/);
     expect(home).not.toContain("hotel-room-feature.webp");
     expect(home).not.toContain("/images/guides/taxi-in-tel-aviv.webp");
     expect(home).not.toContain("airport-pickup");
@@ -150,7 +150,7 @@ describe("home mobile performance optimizations", () => {
       const base = `public/images/home/accommodation-${place}-ai`;
       expect(bytes(`${base}-tile.webp`)).toBeLessThan(bytes(`${base}.webp`));
       expect(bytes(`${base}-tile.webp`)).toBeLessThan(40000);
-      expect(gallery).toContain(`src: "/images/home/accommodation-${place}-ai.webp", thumb: "/images/home/accommodation-${place}-ai-tile.webp"`);
+      expect(gallery).toMatch(new RegExp(String.raw`src:\s*"/images/home/accommodation-${place}-ai\.webp",\s*thumb:\s*"/images/home/accommodation-${place}-ai-tile\.webp"`));
     }
     expect(home).toContain("cards: accommodationDestinationCards");
     expect(home).toContain("<PhotoCard c={card} />");
@@ -177,17 +177,17 @@ describe("home mobile performance optimizations", () => {
     }
     expect(home).toContain('aspect-[16/9] overflow-hidden min-[480px]:aspect-auto');
     expect(home).toContain('lg:min-h-[280px] lg:grid-cols-2 lg:items-stretch');
-    expect(home).toContain('auto-rows-fr gap-3" aria-label="Shore excursions by port"');
+    expect(home).toMatch(/auto-rows-fr gap-3"\s+aria-label="Shore excursions by port"/);
     expect(home).toContain('line-clamp-2 text-sm leading-snug text-muted-foreground');
   });
 
   it("serves smaller transfer pictures on phones without changing desktop photos", () => {
     const home = read("src/routes/index.tsx");
     expect(home).toContain('mobile?: string');
-    expect(home).toContain('media="(max-width: 767px)" srcSet={c.img.mobile}');
+    expect(home).toMatch(/media="\(max-width: 767px\)"\s+srcSet=\{c\.img\.mobile\}/);
     expect(home).toContain('<picture className="absolute inset-0 block">');
     expect(home).toContain('type="image/webp"');
-    expect(home).toContain('loading="lazy" decoding="async"');
+    expect(home).toMatch(/loading="lazy"\s+decoding="async"/);
     for (const slug of ["jerusalem-tower-of-david", "tel-aviv-beach-skyline", "haifa-bahai-gardens", "ein-bokek-aerial"]) {
       const original = `public/images/home/transfer-${slug}.webp`;
       const mobile = `public/images/home/transfer-${slug}-mobile.webp`;
@@ -206,9 +206,9 @@ describe("home mobile performance optimizations", () => {
     const homepage = read("src/routes/index.tsx");
     const hero = read("src/components/HomeHero.tsx");
     expect(homepage).toContain('<picture className="block">');
-    expect(homepage).toContain('width={400} height={300}');
-    expect(homepage).toContain('media="(max-width: 767px)" srcSet={c.img.mobile}');
-    expect(homepage).toContain('s.feature.mobile && <source');
+    expect(homepage).toMatch(/width=\{400\}\s+height=\{300\}/);
+    expect(homepage).toMatch(/media="\(max-width: 767px\)"\s+srcSet=\{c\.img\.mobile\}/);
+    expect(homepage).toMatch(/s\.feature\.mobile\s*&&\s*\(?\s*<source\b/);
     for (const path of [
       "public/images/attractions/jerusalem",
       "public/images/attractions/tel-aviv-jaffa",
@@ -235,7 +235,7 @@ describe("home mobile performance optimizations", () => {
     expect(hero).toContain("hero-jerusalem-psi-mobile.webp");
     const head = read("src/route-heads/index.head.tsx");
     expect(head).toContain('import lcpHeroMobile from "@/assets/home/hero-jerusalem-psi-mobile.webp"');
-    expect(head).toContain('href: lcpHeroMobile, media: "(max-width: 767px)", fetchPriority: "high"');
+    expect(head).toMatch(/href:\s*lcpHeroMobile,\s*media:\s*"\(max-width: 767px\)",\s*fetchPriority:\s*"high"/);
     expect(homepage).toContain("bethlehemTourPhotoMobile");
     expect(homepage).toContain("guidedTourMobile");
     expect(homepage).toContain("benGurionApronPhotoMobile");
