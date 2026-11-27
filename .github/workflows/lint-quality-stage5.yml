@@ -1,4 +1,4 @@
-name: Stage 5.4 - separate lint, format and development diagnostics
+name: Stage 5.5a - trial format routes and route heads
 on:
   push:
     branches: [audit/lint-quality-stage5]
@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  validate:
+  trial:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -28,82 +28,67 @@ jobs:
         with:
           bun-version: "1.4.4"
       - run: bash scripts/install-ci-dependencies.sh
-      - name: Build and capture current main lint baseline
+      - name: Prepare current main reference
         run: |
           mkdir -p "$RUNNER_TEMP/unused-audit"
-          git worktree add --detach "$RUNNER_TEMP/main-reference" 6f2ab4d4fa881c0d10a847eb38348c2925c296f2
+          git worktree add --detach "$RUNNER_TEMP/main-reference" 72ab55bf70ecbcc28eab1712bcd2020cab5c9b80
           cd "$RUNNER_TEMP/main-reference"
           bash scripts/install-ci-dependencies.sh
-          status=0
-          node_modules/.bin/eslint . --rule 'prettier/prettier: off' --format json --output-file "$RUNNER_TEMP/unused-audit/before-lint.json" || status=$?
-          test "$status" -le 1
           bash scripts/build-validated-static.sh
-      - name: Validate separate lint and optional refresh checks
+      - name: Trial formatting of tracked route and metadata files only
+        shell: bash
         run: |
+          set -euo pipefail
           out="$RUNNER_TEMP/unused-audit"
-          bun run lint
-          node_modules/.bin/eslint . --format json --output-file "$out/after-lint.json"
-          bun run lint:refresh > "$out/refresh-output.txt"
-          node_modules/.bin/eslint 'src/**/*.{ts,tsx}' --rule 'react-refresh/only-export-components: [warn, {allowConstantExport: true}]' --format json --output-file "$out/refresh.json"
-          status=0
-          node_modules/.bin/prettier --list-different . > "$out/format-files.txt" || status=$?
-          test "$status" -le 1
-          python3 - <<'PY'
-          import collections, json, os, pathlib
-          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'unused-audit'
-          def parse(name,root):
-              data=json.loads((out/name).read_text())
-              messages=collections.Counter()
-              suppressed=collections.Counter()
-              for item in data:
-                  p=str(pathlib.Path(item['filePath']).relative_to(root))
-                  for m in item['messages']:
-                      messages[(p,m.get('ruleId'),m['severity'],m['message'])]+=1
-                  for m in item.get('suppressedMessages',[]):
-                      suppressed[(p,m.get('ruleId'))]+=1
-              return data,messages,suppressed
-          before,b,bs=parse('before-lint.json',pathlib.Path(os.environ['RUNNER_TEMP'])/'main-reference')
-          after,a,ass=parse('after-lint.json',pathlib.Path.cwd())
-          refresh,r,rs=parse('refresh.json',pathlib.Path.cwd())
-          assert sum(v for k,v in b.items() if k[2]==2)==13, 'Unexpected baseline errors'
-          assert not a,'Unexpected active quality diagnostics'
-          assert r==collections.Counter({k:v for k,v in b.items() if k[1]=='react-refresh/only-export-components'}), 'Optional refresh findings changed'
-          expected={('src/lib/analytics.ts','prefer-rest-params'):1,('src/lib/quote-email-format.server.ts','no-control-regex'):1,('src/lib/quote-request-schema.server.ts','no-control-regex'):1,('src/lib/tours.ts','no-control-regex'):1}
-          assert dict(ass)==expected,'Unexpected suppression inventory'
-          generated={'src/routeTree.gen.ts','src/data/generated/guide-directory.ts'}
-          assert not generated & {str(pathlib.Path(x['filePath']).relative_to(pathlib.Path.cwd())) for x in after}
-          format_files=(out/'format-files.txt').read_text().splitlines()
-          assert not (generated|{'src/data/israelEventFeed.generated.json'}) & set(format_files)
-          print('QUALITY SUMMARY',json.dumps({'baseline_nonformat_errors':13,'quality_errors':0,'quality_warnings':0,'optional_refresh_warnings':sum(r.values()),'intentional_suppressions':sum(ass.values()),'format_files':len(format_files),'lint_files':len(after)}))
-          PY
-      - name: Prove meaningful lint rules still detect problems
-        run: |
+          git rev-parse HEAD > "$out/trial-base.txt"
+          git diff --quiet
+          git ls-files -z src/routes src/route-heads > "$out/scope.bin"
           node --input-type=module <<'JS'
-          import {ESLint} from 'eslint';
-          const eslint=new ESLint();
-          const tests=[
-            ['@typescript-eslint/no-explicit-any','export const bad: any = 1;','src/lib/lint-probe.ts'],
-            ['react-hooks/rules-of-hooks','import { useState } from "react"; export function Example({flag}: {flag: boolean}) { if (flag) useState(0); return null; }','src/components/LintProbe.tsx'],
-            ['no-restricted-imports','import "server-only";','src/lib/lint-probe.ts'],
-          ];
-          for(const [rule,code,filePath] of tests){
-            const [r]=await eslint.lintText(code,{filePath});
-            if(!r.messages.some(m=>m.ruleId===rule&&m.severity===2))throw Error('Missing expected rule '+rule+': '+JSON.stringify(r.messages));
-            console.log('RULE PROBE PASS',rule);
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import prettier from 'prettier';
+          const out=path.join(process.env.RUNNER_TEMP,'unused-audit');
+          const scope=fs.readFileSync(path.join(out,'scope.bin'),'utf8').split('\0').filter(p=>/\.tsx?$/.test(p)&&!/\.(test|spec)\.tsx?$/.test(p));
+          if(!scope.length)throw Error('Empty formatting scope');
+          const all=[],changed=[];
+          for(const file of scope){
+            const info=await prettier.getFileInfo(file,{ignorePath:'.prettierignore'});
+            if(info.ignored)throw Error('Unexpected ignored route: '+file);
+            const before=fs.readFileSync(file,'utf8');
+            const options=await prettier.resolveConfig(file);
+            const after=await prettier.format(before,{...options,filepath:file});
+            const repeat=await prettier.format(after,{...options,filepath:file});
+            if(after!==repeat)throw Error('Non-idempotent formatting '+file);
+            all.push(file);
+            if(before!==after){
+              fs.writeFileSync(file,after);
+              changed.push(file);
+            }
           }
-          const cfg=await eslint.calculateConfigForFile('src/components/LintProbe.tsx');
-          const dep=cfg.rules['react-hooks/exhaustive-deps'];
-          if(!dep||dep[0]===0)throw Error('React Hook dependency checking disabled');
-          const [formatted]=await eslint.lintText('export const value={a:1,b:2};',{filePath:'src/lib/lint-probe.ts'});
-          if(formatted.messages.length)throw Error('Formatting should not be an ESLint finding: '+JSON.stringify(formatted.messages));
-          console.log('RULE PROBE PASS no formatting coupling; exhaustive-deps enabled');
+          fs.writeFileSync(path.join(out,'scope.json'),JSON.stringify(all,null,2));
+          fs.writeFileSync(path.join(out,'changed.json'),JSON.stringify(changed,null,2));
+          console.log('FORMAT TRIAL SUMMARY',JSON.stringify({scanned:all.length,changed:changed.length,routeFiles:changed.filter(p=>p.startsWith('src/routes/')).length,headFiles:changed.filter(p=>p.startsWith('src/route-heads/')).length,idempotent:true}));
           JS
-      - name: Build candidate and run full regression
+          git diff --check
+          git diff --binary -- src/routes src/route-heads > "$out/stage-5-5a.patch"
+          git diff --numstat > "$out/numstat.tsv"
+          git diff --stat | tail -n 1
+          sha256sum "$out/stage-5-5a.patch"
+          python3 - <<'PY'
+          import json, pathlib, os, subprocess
+          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'unused-audit'
+          actual=set(subprocess.check_output(['git','diff','--name-only','-z']).decode().split('\0'))-{''}
+          expected=set(json.loads((out/'changed.json').read_text()))
+          assert actual==expected,(actual-expected,expected-actual)
+          print('PASS: only targeted tracked files changed')
+          PY
+      - name: Check lint, formatting and strict TypeScript
         run: |
+          bun run lint
+          node_modules/.bin/prettier --check 'src/routes/**/*.{ts,tsx}' 'src/route-heads/**/*.{ts,tsx}'
           bash scripts/build-validated-static.sh
           npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters
           node scripts/verify-hostinger-static-export.mjs --editorial
-          VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
       - name: Compare candidate production output with current main
         run: |
           cat > "$RUNNER_TEMP/unused-audit/compare.py" <<'PY'
@@ -238,10 +223,12 @@ jobs:
           python3 "$RUNNER_TEMP/unused-audit/compare.py" "$RUNNER_TEMP/main-reference/.output/public" .output/public
           git diff --check
           git diff --stat
-      - name: Save stage 5.4 reports
+      - name: Run full regression after formatting
+        run: VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
+      - name: Save trial patch and verification reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: stage-5-4-validation
+          name: stage-5-5a-format-trial
           path: ${{ runner.temp }}/unused-audit/
           if-no-files-found: warn
