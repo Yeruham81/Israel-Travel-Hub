@@ -1,0 +1,88 @@
+name: Admin - PHP security and schema validation
+
+on:
+  pull_request:
+    paths:
+      - 'admin-app/**'
+      - '.github/workflows/admin-php-validation.yml'
+  push:
+    branches:
+      - 'feature/secure-admin-dashboard-20261127'
+
+permissions:
+  contents: read
+
+jobs:
+  php-validation:
+    name: Lint secure server admin
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up supported PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql, mbstring
+          coverage: none
+      - name: PHP lint
+        run: |
+          set -euo pipefail
+          find admin-app -name '*.php' -type f -print0 | xargs -0 -n1 php -l
+      - name: Validate security-sensitive invariants
+        run: |
+          set -euo pipefail
+          test ! -e admin-app/private/config.php
+          test -f admin-app/web/.htaccess
+          grep -q 'DirectoryIndex index.php' admin-app/web/.htaccess
+          grep -q "session.cookie_httponly" admin-app/private/src/Core.php
+          grep -q "password_hash" admin-app/private/src/Auth.php
+          grep -q "audit" admin-app/private/src/Actions.php
+          php admin-app/tests/validation.php
+
+
+  mysql-integration:
+    name: Verify actual login and dashboard with MySQL
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ci-only-password
+          MYSQL_DATABASE: ith_admin
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pci-only-password"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql, mbstring
+          coverage: none
+      - name: Provision temporary, non-production database configuration
+        run: |
+          cat > admin-app/private/config.php <<'PHP'
+          <?php
+          return [
+              'db_dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=ith_admin;charset=utf8mb4',
+              'db_user' => 'root',
+              'db_password' => 'ci-only-password',
+              'audit_hmac_secret' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+          ];
+          PHP
+      - name: Initialize owner from CLI
+        run: |
+          set -euo pipefail
+          printf 'siteowner\nTest-Only-Secure-Passphrase-123!\n' | php admin-app/private/bin/install.php
+      - name: Exercise authentication, permissions, inbox and dashboard
+        run: php admin-app/tests/mysql-integration.php

@@ -1,0 +1,6 @@
+# Real secrets and runtime state never belong in GitHub.
+config.php
+*.sqlite
+*.db
+*.bak
+*.log
