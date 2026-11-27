@@ -97,7 +97,7 @@ describe("intent-specific taxi guide cluster", () => {
     expect(guide.sections.find((section) => section.id === "airport")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
     expect(guide.sections.find((section) => section.id === "holidays")?.paragraphs.join(" ")).not.toContain("16:01");
     expect(guide.sections.find((section) => section.id === "holidays")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxiFares);
-    expect(guide.sections.find((section) => section.id === "intercity")?.paragraphs.join(" ")).toContain("pedestrian crossing");
+    expect(guide.sections.find((section) => section.id === "intercity")?.paragraphs.join(" ")).toMatch(/Checkpoint 300.*cross on foot.*Palestinian taxi on the other side/s);
     expect(guide.sections.find((section) => section.id === "safety")?.externalLinks?.[0]?.href).toContain("complaint_about_conduct_in_public_transportation");
     expect(guide.services[0]?.label).toContain("Request a quote");
   });

@@ -44,7 +44,7 @@ describe("Christian tours in Israel editorial guide",()=>{
     expect(page).toContain('query.set("waypoints",leg.waypoints.join("|"))');
     expect(page).toContain("site.officialUrl");
     expect(page).toContain("West Bank");
-    expect(data).toContain("not the same traditional location");
+    expect(christianAreas.find(area => area.intro.includes("Qasr al-Yahud"))?.intro).toMatch(/Qasr al-Yahud.*traditionally associated with Jesus\x27 baptism.*Yardenit is a modern baptism site/s);
     expect(data).toContain("separate half- or full-day visit");
   });
   it("links exactly six product-specific tours through Travelpayouts with page-specific attribution",()=>{
