@@ -20,20 +20,23 @@ export function haifaMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: haifaSite.title,
-      description: haifaSite.description,
-      inLanguage: "en",
-      dateModified: haifaSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(haifaSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: Object.values(haifaSite.official),
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: haifaSite.title,
+        description: haifaSite.description,
+        inLanguage: "en",
+        dateModified: haifaSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(haifaSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: Object.values(haifaSite.official),
+      }),
+    ],
   };
 }
 export const routeHead = haifaMeta;

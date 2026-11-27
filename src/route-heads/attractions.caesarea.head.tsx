@@ -21,20 +21,23 @@ export function caesareaMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: caesareaSite.title,
-      description: caesareaSite.description,
-      inLanguage: "en",
-      dateModified: caesareaSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(caesareaSharePhoto, CANONICAL_ORIGIN).href,
-      citation: Object.values(caesareaSite.sources),
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: caesareaSite.title,
+        description: caesareaSite.description,
+        inLanguage: "en",
+        dateModified: caesareaSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(caesareaSharePhoto, CANONICAL_ORIGIN).href,
+        citation: Object.values(caesareaSite.sources),
+      }),
+    ],
   };
 }
 export const routeHead = caesareaMeta;

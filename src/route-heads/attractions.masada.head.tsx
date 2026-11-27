@@ -20,20 +20,23 @@ export function masadaMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: masadaSite.title,
-      description: masadaSite.description,
-      inLanguage: "en",
-      dateModified: masadaSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(masadaSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: Object.values(masadaSite.sources),
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: masadaSite.title,
+        description: masadaSite.description,
+        inLanguage: "en",
+        dateModified: masadaSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(masadaSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: Object.values(masadaSite.sources),
+      }),
+    ],
   };
 }
 export const routeHead = masadaMeta;

@@ -20,20 +20,23 @@ export function einGediMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: einGediSite.title,
-      description: einGediSite.description,
-      inLanguage: "en",
-      dateModified: einGediSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(einGediSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: Object.values(einGediSite.sources),
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: einGediSite.title,
+        description: einGediSite.description,
+        inLanguage: "en",
+        dateModified: einGediSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(einGediSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: Object.values(einGediSite.sources),
+      }),
+    ],
   };
 }
 export const routeHead = einGediMeta;

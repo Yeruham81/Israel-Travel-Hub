@@ -21,20 +21,23 @@ export function mountZionMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: mountZionSite.title,
-      description: mountZionSite.description,
-      inLanguage: "en",
-      dateModified: mountZionSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(mountZionSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: [...new Set(mountZionDestinationContent.sources.map(source => source.url))],
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: mountZionSite.title,
+        description: mountZionSite.description,
+        inLanguage: "en",
+        dateModified: mountZionSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(mountZionSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: [...new Set(mountZionDestinationContent.sources.map((source) => source.url))],
+      }),
+    ],
   };
 }
 export const routeHead = mountZionMeta;

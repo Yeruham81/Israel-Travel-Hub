@@ -20,20 +20,23 @@ export function deadSeaMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: deadSeaSite.title,
-      description: deadSeaSite.description,
-      inLanguage: "en",
-      dateModified: deadSeaSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(deadSeaSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: Object.values(deadSeaSite.sources).filter((u, i, all) => all.indexOf(u) === i),
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: deadSeaSite.title,
+        description: deadSeaSite.description,
+        inLanguage: "en",
+        dateModified: deadSeaSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(deadSeaSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: Object.values(deadSeaSite.sources).filter((u, i, all) => all.indexOf(u) === i),
+      }),
+    ],
   };
 }
 export const routeHead = deadSeaMeta;

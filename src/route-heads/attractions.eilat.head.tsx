@@ -21,20 +21,23 @@ export function eilatMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: eilatSite.title,
-      description: eilatSite.description,
-      inLanguage: "en",
-      dateModified: eilatSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(eilatSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: eilatDestinationContent.sources.map(source => source.url),
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: eilatSite.title,
+        description: eilatSite.description,
+        inLanguage: "en",
+        dateModified: eilatSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(eilatSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: eilatDestinationContent.sources.map((source) => source.url),
+      }),
+    ],
   };
 }
 export const routeHead = eilatMeta;

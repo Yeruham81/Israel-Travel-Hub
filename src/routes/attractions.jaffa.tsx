@@ -23,30 +23,36 @@ export function jaffaMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: jaffaSite.title,
-      description: jaffaSite.description,
-      inLanguage: "en",
-      dateModified: jaffaSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(jaffaSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: [
-        jaffaSite.official.oldJaffa,
-        jaffaSite.official.municipality,
-        jaffaSite.official.municipalWalkingMap,
-        jaffaSite.official.museum,
-        jaffaSite.official.nalagaat,
-      ],
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: jaffaSite.title,
+        description: jaffaSite.description,
+        inLanguage: "en",
+        dateModified: jaffaSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(jaffaSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: [
+          jaffaSite.official.oldJaffa,
+          jaffaSite.official.municipality,
+          jaffaSite.official.municipalWalkingMap,
+          jaffaSite.official.museum,
+          jaffaSite.official.nalagaat,
+        ],
+      }),
+    ],
   };
 }
 
 export const Route = createFileRoute("/attractions/jaffa")({
-  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.jaffa.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
+  head: async (ctx) => {
+    const { routeHead } = await import("../route-heads/attractions.jaffa.head");
+    return Reflect.apply(routeHead, undefined, [ctx]);
+  },
   component: JaffaAttractionPage,
 });

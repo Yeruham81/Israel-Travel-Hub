@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MountOlivesAttractionPage, mountOlivesDestinationContent } from "@/components/MountOlivesAttractionPage";
+import {
+  MountOlivesAttractionPage,
+  mountOlivesDestinationContent,
+} from "@/components/MountOlivesAttractionPage";
 import { mountOlivesSite } from "@/data/mountOlivesSite";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
@@ -23,24 +26,30 @@ export function mountOlivesMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: mountOlivesSite.title,
-      description: mountOlivesSite.description,
-      inLanguage: "en",
-      dateModified: mountOlivesSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(mountOlivesSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: [...new Set(mountOlivesDestinationContent.sources.map(source => source.url))],
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: mountOlivesSite.title,
+        description: mountOlivesSite.description,
+        inLanguage: "en",
+        dateModified: mountOlivesSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(mountOlivesSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: [...new Set(mountOlivesDestinationContent.sources.map((source) => source.url))],
+      }),
+    ],
   };
 }
 
 export const Route = createFileRoute("/attractions/mount-of-olives")({
-  head: async (ctx) => { const { routeHead } = await import("../route-heads/attractions.mount-of-olives.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
+  head: async (ctx) => {
+    const { routeHead } = await import("../route-heads/attractions.mount-of-olives.head");
+    return Reflect.apply(routeHead, undefined, [ctx]);
+  },
   component: MountOlivesAttractionPage,
 });

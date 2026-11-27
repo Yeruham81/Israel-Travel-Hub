@@ -21,20 +21,23 @@ export function viaDolorosaMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: viaDolorosaSite.title,
-      description: viaDolorosaSite.description,
-      inLanguage: "en",
-      dateModified: viaDolorosaSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(viaDolorosaSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: [...new Set(viaDolorosaDestinationContent.sources.map(source => source.url))],
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: viaDolorosaSite.title,
+        description: viaDolorosaSite.description,
+        inLanguage: "en",
+        dateModified: viaDolorosaSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(viaDolorosaSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: [...new Set(viaDolorosaDestinationContent.sources.map((source) => source.url))],
+      }),
+    ],
   };
 }
 export const routeHead = viaDolorosaMeta;

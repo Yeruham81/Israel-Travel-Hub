@@ -5,17 +5,20 @@ import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 
 export const routeHead = () => {
-    const meta = pageMeta({
-      title: "Israel Travel Guides: Airport Transfers, Tours, Hotels & Attractions",
-      description: "Plan Israel airport transfers, tours, shore excursions, accommodation and attractions with practical local travel guides and clear booking options.",
-      path: "/",
-    });
-    // HTML head discovery rather than waiting for the <picture> far below the
-    // global navigation. The media constraints match HeroCarousel's sources:
-    // the browser fetches ONE asset at the viewport's appropriate size.
-    return {
-      ...meta,
-      scripts: [...meta.scripts, jsonLd({
+  const meta = pageMeta({
+    title: "Israel Travel Guides: Airport Transfers, Tours, Hotels & Attractions",
+    description:
+      "Plan Israel airport transfers, tours, shore excursions, accommodation and attractions with practical local travel guides and clear booking options.",
+    path: "/",
+  });
+  // HTML head discovery rather than waiting for the <picture> far below the
+  // global navigation. The media constraints match HeroCarousel's sources:
+  // the browser fetches ONE asset at the viewport's appropriate size.
+  return {
+    ...meta,
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
         "@context": "https://schema.org",
         "@graph": [
           {
@@ -31,16 +34,39 @@ export const routeHead = () => {
             "@id": CANONICAL_ORIGIN + "/#organization",
             name: SITE_NAME,
             url: CANONICAL_ORIGIN + "/",
-            description: "Private airport transfers, travel planning and practical Israel travel guides.",
+            description:
+              "Private airport transfers, travel planning and practical Israel travel guides.",
           },
           authorLd(),
         ],
-      })],
-      links: [
-        ...meta.links,
-        { rel: "preload", as: "image", type: "image/webp", href: lcpHeroMobile, media: "(max-width: 767px)", fetchPriority: "high" },
-        { rel: "preload", as: "image", type: "image/webp", href: lcpHeroMedium, media: "(min-width: 768px) and (max-width: 1800px)", fetchPriority: "high" },
-        { rel: "preload", as: "image", type: "image/webp", href: lcpHeroLarge, media: "(min-width: 1801px)", fetchPriority: "high" },
-      ],
-    };
+      }),
+    ],
+    links: [
+      ...meta.links,
+      {
+        rel: "preload",
+        as: "image",
+        type: "image/webp",
+        href: lcpHeroMobile,
+        media: "(max-width: 767px)",
+        fetchPriority: "high",
+      },
+      {
+        rel: "preload",
+        as: "image",
+        type: "image/webp",
+        href: lcpHeroMedium,
+        media: "(min-width: 768px) and (max-width: 1800px)",
+        fetchPriority: "high",
+      },
+      {
+        rel: "preload",
+        as: "image",
+        type: "image/webp",
+        href: lcpHeroLarge,
+        media: "(min-width: 1801px)",
+        fetchPriority: "high",
+      },
+    ],
   };
+};

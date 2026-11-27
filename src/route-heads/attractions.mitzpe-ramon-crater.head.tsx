@@ -20,20 +20,23 @@ export function ramonCraterMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: ramonCraterSite.title,
-      description: ramonCraterSite.description,
-      inLanguage: "en",
-      dateModified: ramonCraterSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(ramonCraterSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: Object.values(ramonCraterSite.sources),
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: ramonCraterSite.title,
+        description: ramonCraterSite.description,
+        inLanguage: "en",
+        dateModified: ramonCraterSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(ramonCraterSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: Object.values(ramonCraterSite.sources),
+      }),
+    ],
   };
 }
 export const routeHead = ramonCraterMeta;

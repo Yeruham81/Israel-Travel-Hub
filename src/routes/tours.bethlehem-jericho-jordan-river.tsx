@@ -4,12 +4,27 @@ import { parseTourSearch } from "@/lib/tours";
 
 export const Route = createFileRoute("/tours/bethlehem-jericho-jordan-river")({
   validateSearch: parseTourSearch,
-  head: async (ctx) => { const { routeHead } = await import("../route-heads/tours.bethlehem-jericho-jordan-river.head"); return Reflect.apply(routeHead, undefined, [ctx]); },
+  head: async (ctx) => {
+    const { routeHead } = await import("../route-heads/tours.bethlehem-jericho-jordan-river.head");
+    return Reflect.apply(routeHead, undefined, [ctx]);
+  },
   component: CategoryRoute,
 });
 
 function CategoryRoute() {
   const filters = Route.useSearch();
   const navigate = Route.useNavigate();
-  return <TourCategoryPage id="bethlehem-jericho" filters={filters} onChange={(search, replace) => { void navigate({ search: parseTourSearch(search), resetScroll: false, replace: Boolean(replace) }); }} />;
+  return (
+    <TourCategoryPage
+      id="bethlehem-jericho"
+      filters={filters}
+      onChange={(search, replace) => {
+        void navigate({
+          search: parseTourSearch(search),
+          resetScroll: false,
+          replace: Boolean(replace),
+        });
+      }}
+    />
+  );
 }

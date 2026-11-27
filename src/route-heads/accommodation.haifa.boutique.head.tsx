@@ -1,6 +1,7 @@
 import { hotelCategoryGuides, haifaStayGuide } from "@/data/content";
 import { hotelSubguideMeta } from "@/lib/landing-schema";
 
-const guide = hotelCategoryGuides.find(g => g.path === "/accommodation/haifa/boutique/")!;
+const guide = hotelCategoryGuides.find((g) => g.path === "/accommodation/haifa/boutique/")!;
 const destination = haifaStayGuide;
-export const routeHead = () => hotelSubguideMeta(guide, destination, guide.shortTitle, guide.photo.src);
+export const routeHead = () =>
+  hotelSubguideMeta(guide, destination, guide.shortTitle, guide.photo.src);

@@ -20,20 +20,23 @@ export function qasrElYahudMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: qasrElYahudSite.title,
-      description: qasrElYahudSite.description,
-      inLanguage: "en",
-      dateModified: qasrElYahudSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(qasrElYahudSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: Object.values(qasrElYahudSite.sources),
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: qasrElYahudSite.title,
+        description: qasrElYahudSite.description,
+        inLanguage: "en",
+        dateModified: qasrElYahudSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(qasrElYahudSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: Object.values(qasrElYahudSite.sources),
+      }),
+    ],
   };
 }
 export const routeHead = qasrElYahudMeta;

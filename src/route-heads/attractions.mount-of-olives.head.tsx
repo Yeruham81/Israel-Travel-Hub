@@ -21,20 +21,23 @@ export function mountOlivesMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: mountOlivesSite.title,
-      description: mountOlivesSite.description,
-      inLanguage: "en",
-      dateModified: mountOlivesSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(mountOlivesSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: [...new Set(mountOlivesDestinationContent.sources.map(source => source.url))],
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: mountOlivesSite.title,
+        description: mountOlivesSite.description,
+        inLanguage: "en",
+        dateModified: mountOlivesSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(mountOlivesSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: [...new Set(mountOlivesDestinationContent.sources.map((source) => source.url))],
+      }),
+    ],
   };
 }
 export const routeHead = mountOlivesMeta;

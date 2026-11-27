@@ -21,20 +21,25 @@ export function oldCityJerusalemMeta() {
   const url = CANONICAL_ORIGIN + PATH;
   return {
     ...meta,
-    scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": url + "#article",
-      mainEntityOfPage: url,
-      headline: oldCityJerusalemSite.title,
-      description: oldCityJerusalemSite.description,
-      inLanguage: "en",
-      dateModified: oldCityJerusalemSite.updatedAt,
-      author: authorLd(),
-      publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
-      image: new URL(oldCityJerusalemSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: [...new Set(oldCityJerusalemDestinationContent.sources.map(source => source.url))],
-    })],
+    scripts: [
+      ...meta.scripts,
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": url + "#article",
+        mainEntityOfPage: url,
+        headline: oldCityJerusalemSite.title,
+        description: oldCityJerusalemSite.description,
+        inLanguage: "en",
+        dateModified: oldCityJerusalemSite.updatedAt,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+        image: new URL(oldCityJerusalemSite.hero.src, CANONICAL_ORIGIN).href,
+        citation: [
+          ...new Set(oldCityJerusalemDestinationContent.sources.map((source) => source.url)),
+        ],
+      }),
+    ],
   };
 }
 export const routeHead = oldCityJerusalemMeta;
