@@ -42,11 +42,11 @@ jobs:
           test "$(git rev-parse origin/main)" = 31d7963b29101048f62925c1c849d35449f59d88
           test "$(git rev-parse HEAD)" = "$(git rev-parse origin/audit/lint-quality-stage5-infra)"
           git diff --exit-code
-          if git apply --reverse --check "$out/stage-5-5-5b-infra.patch"; then
+          if git apply --reverse --check "$out/stage-5-5-5b-infra.patch" 2>/dev/null; then
             echo "Verified patch already present"
           else
-            test "$(git rev-parse HEAD^)" = d64a12d2f7d8412fd91b42ba9823925cb4b67b48
-            test "$(git diff --name-only HEAD^ HEAD)" = .github/workflows/lint-quality-stage5-infra.yml
+            git merge-base --is-ancestor 31d7963b29101048f62925c1c849d35449f59d88 HEAD
+            test "$(git diff --name-only 31d7963b29101048f62925c1c849d35449f59d88 HEAD)" = .github/workflows/lint-quality-stage5-infra.yml
             git apply --check "$out/stage-5-5-5b-infra.patch"
             git apply --index "$out/stage-5-5-5b-infra.patch"
             git diff --cached --check
@@ -59,7 +59,21 @@ jobs:
           assert len(expected)==20 and len(scope)==52 and expected<=scope
           assert actual==expected,(actual-expected,expected-actual)
           assert all(x.startswith(".github/workflows/") and x.endswith((".yml",".yaml")) and x!=".github/workflows/lint-quality-stage5-infra.yml" for x in actual)
-          assert all((out/"candidates"/x).read_bytes()==pathlib.Path(x).read_bytes() for x in actual)
+          # The artifact excludes hidden candidate paths. Reconstruct the verified
+          # patch in an isolated index from the pinned reference, and compare blobs.
+          import tempfile
+          with tempfile.TemporaryDirectory() as tmp:
+              env={**os.environ,"GIT_INDEX_FILE":str(pathlib.Path(tmp)/"index")}
+              subprocess.run(["git","read-tree","31d7963b29101048f62925c1c849d35449f59d88"],env=env,check=True)
+              subprocess.run(["git","apply","--cached",str(out/"stage-5-5-5b-infra.patch")],env=env,check=True)
+              def blob(file,env):
+                  return subprocess.check_output(["git","show",":"+file],env=env)
+              for file in actual:
+                  assert blob(file,env)==blob(file,os.environ)==pathlib.Path(file).read_bytes(),file
+          report=json.loads((out/"yaml-report.json").read_text())
+          assert len(report)==52 and {r["file"] for r in report}==scope
+          assert all(r["semanticParity"] and r["status"] in ("changed","already-formatted") for r in report)
+          assert {r["file"] for r in report if r["status"]=="changed"}==expected
           print("Exact verified scope:",len(actual),"YAML infrastructure files")
           PY
             git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Stage 5.5.5b: permanently apply verified YAML formatting patch'
