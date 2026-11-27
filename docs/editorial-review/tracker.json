@@ -612,7 +612,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 4,
-      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/tours/bethlehem-jericho-jordan-river/",
@@ -620,39 +620,39 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/tours/caesarea-haifa-acre/",
       "group": 11,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/tours/eilat-red-sea/",
       "group": 11,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 7,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/tours/food-market-tours/",
       "group": 11,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/tours/golan-heights/",
       "group": 11,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/tours/jerusalem/",
@@ -660,7 +660,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/tours/masada-dead-sea/",
@@ -668,23 +668,23 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/tours/nazareth-sea-of-galilee/",
       "group": 11,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/tours/negev-desert-ramon-crater/",
       "group": 11,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending."
     },
     {
       "path": "/tours/tel-aviv-jaffa/",
@@ -692,7 +692,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 5,
-      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending."
     },
     {
       "path": "/travel-blog/",
