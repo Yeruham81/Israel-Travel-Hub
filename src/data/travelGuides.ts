@@ -602,8 +602,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "baggage",
         title: "Collecting luggage and reporting a missing bag",
         paragraphs: [
-          "After passport control, find your flight number on the baggage screens and follow its assigned carousel. Keep your baggage tags until you've collected all your luggage. Strollers, wheelchairs and oversized luggage may need to be collected separately.",
-          "If a checked bag is missing or damaged, go to the airline's baggage service desk or its ground-handling company's desk before leaving baggage reclaim. File a report, obtain the case reference (often called a Property Irregularity Report or PIR), and keep your baggage tag, flight details, contact number and delivery address in Israel.",
+          "After passport control, check the baggage screens for your flight number and carousel. Keep your baggage tags until you've collected all your luggage. Strollers, wheelchairs and oversized luggage may need to be collected separately.",
+          "If a checked bag is missing or damaged, report it to the airline or its ground handler before leaving baggage claim. Ask for a report reference (often called a Property Irregularity Report or PIR). Keep your baggage tag, flight details, contact number and delivery address in Israel.",
           "For missing checked luggage or belongings left on the plane, contact the airline or its ground handler using the airport's lost-property directory. For belongings lost in the public terminal, use the airport's separate lost-and-found form.",
         ],
         externalLinks: [
@@ -632,7 +632,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Meeting your driver in the public arrivals hall",
         paragraphs: [
           "After customs, enter the public arrivals hall and follow your transport provider's meeting instructions. Before leaving baggage claim, have your destination address, booking confirmation and driver's contact details ready.",
-          "Meet your driver at the location specified in your booking confirmation. Tell your operator if baggage collection or passport control takes longer than expected, and follow the agreed waiting and flight-delay policy.",
+          "Meet your driver at the agreed pickup point. Let your driver or operator know if passport control or baggage collection takes longer than expected, and follow the agreed waiting and flight-delay policy.",
           "If you need help finding your pickup point, ask at the airport information desk or contact your driver.",
         ],
         sourceIds: ["guide-iaa"],
@@ -678,7 +678,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             ["Immediate airport taxi", "A direct ride to your address", "Terminal 3 ground floor, Exit 03; use Gett or an airport taxi kiosk"],
             ["Gett taxi booked in advance", "Scheduled airport pickup using Gett", "Terminal 3, Level 2, Exit 23; follow the booking details"],
             ["Pre-booked private transfer", "A confirmed vehicle and meeting point", "Meet your driver at the location stated in your confirmation"],
-            ["Rental car", "A self-drive journey after landing", "Follow your rental provider's Terminal 3 collection instructions"],
+            ["Rental car", "Driving yourself from the airport", "Follow your rental provider's Terminal 3 collection instructions"],
           ],
           note: "Terminals, bus stops and pickup instructions can change by service and date. The weekend Line 711 has a Terminal 1 stop; see my airport Shabbat transport guide.",
         }],
@@ -688,7 +688,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "arrival-timing",
         title: "Planning the time from landing to the arrivals hall",
         paragraphs: [
-          "Your landing time and the time you reach the public arrivals hall are different. Allow for taxiing, leaving the aircraft, walking to passport control, queues, baggage collection and any customs processing.",
+          "After landing, allow time for the aircraft to reach its parking position, then for disembarking, passport control, baggage collection and customs.",
           "These estimates are based on typical passenger experience from landing to the public arrivals hall. Long queues, additional passport checks or a bus ride from the aircraft to the terminal can increase the time needed to leave the airport.",
           "Give your driver your flight number and confirm the pickup time, included waiting time and any delay charges. Contact your driver after collecting your luggage.",
         ],
@@ -698,7 +698,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           rows: [
             ["Hand luggage only", "Allow roughly 30–60 minutes", "Include passport control, the walk and customs"],
             ["Checked luggage", "Allow roughly 60–120 minutes or more", "Leave time for your carousel and any baggage delay"],
-            ["Wheelchair or additional arrival assistance", "Confirm an individual allowance with your airline", "Arrange ground-handler help in advance and tell the driver about the extra coordination"],
+            ["Wheelchair or additional arrival assistance", "Ask your airline how much extra time to allow", "Arrange arrival assistance in advance and tell your driver about your needs"],
           ],
           note: "Allow additional time for security, immigration or baggage delays.",
         }],

@@ -180,7 +180,7 @@ function TelAvivRailDetails({ guide }: { guide: AirportJourneyGuide }) {
         </table>
       </div>
       <h4 className="mt-8 text-xl font-semibold">From the station to the beach, your hotel or Old Jaffa</h4>
-      <p className="mt-3 leading-relaxed">All four mainline railway stations are inland. Check the complete connection to your hotel, especially if you are carrying luggage or staying near the beach or in Old Jaffa.</p>
+      <p className="mt-3 leading-relaxed">All four railway stations are inland. Plan a bus, taxi or walk to your hotel, especially if you're staying near the beach or in Old Jaffa.</p>
       {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
         <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
@@ -246,7 +246,7 @@ function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide 
       </figure>}
       <UsefulJourneyLink label="Jerusalem train: free personal voucher instructions" href="https://rail.co.il/?lan=en&page=vouchers-jerusalem" context="Each passenger needs a free personal voucher for the selected Jerusalem train, in addition to a valid ticket." />
       <h4 className="mt-8 text-xl font-semibold">Step 2: Change to an Egged bus at Jerusalem Central Bus Station</h4>
-      <p className="mt-3 leading-relaxed">Jerusalem–Yitzhak Navon railway station is deep underground. Allow time for lifts, the walk to Jerusalem Central Bus Station and its intercity platforms. Bus 486 serves the Dead Sea hotel area; reserved-seat bus 444 to Eilat may offer another departure. The buses are not coordinated with airport train arrivals. Check the last bus to Ein Bokek and leave enough time to change in Jerusalem.</p>
+      <p className="mt-3 leading-relaxed">Jerusalem–Yitzhak Navon railway station is deep underground. Allow time for lifts, the walk to Jerusalem Central Bus Station and its intercity platforms. Bus 486 serves the Dead Sea hotel area; reserved-seat bus 444 to Eilat may offer another departure. Train and bus timetables are separate. Check the last bus to Ein Bokek and allow enough time to change in Jerusalem.</p>
       <div role="region" aria-label="Airport-to-Ein-Bokek public transport legs" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border">
         <table className="w-full min-w-[590px] text-left text-sm">
           <caption className="sr-only">Ben Gurion Airport to Ein Bokek: train, transfer and bus journey stages</caption>
@@ -266,7 +266,7 @@ function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide 
       <ArrivalAreaTable guide={guide} />
       <p className="mt-4 text-sm leading-relaxed">For the exact resort location, compare my <Link to="/travel-blog/best-dead-sea-hotels/" className="font-semibold text-primary underline underline-offset-4">Dead Sea hotels guide</Link>. If you are starting your trip in Jerusalem instead of changing trains there, consult <Link to="/travel-blog/jerusalem-to-the-dead-sea/" className="font-semibold text-primary underline underline-offset-4">Jerusalem to the Dead Sea</Link>.</p>
       <h4 className="mt-8 text-xl font-semibold">A limited alternative: bus 421 via Tel Aviv–Savidor</h4>
-      <p className="mt-3 leading-relaxed">Bus 421 is another limited option from Tel Aviv–Savidor to the Dead Sea. You would first need to reach Savidor by train from the airport and reserve your bus seat separately. Use this route only if the timetable works better than travelling via Jerusalem. See my <Link to="/travel-blog/ben-gurion-airport-to-tel-aviv/" className="font-semibold text-primary underline underline-offset-4">airport-to-Tel-Aviv guide</Link> for the rail arrival leg.</p>
+      <p className="mt-3 leading-relaxed">Bus 421 is another limited option from Tel Aviv–Savidor to the Dead Sea. Take the train to Savidor and reserve your seat on bus 421 in advance. Use this route only if the timetable works better than travelling via Jerusalem. See my <Link to="/travel-blog/ben-gurion-airport-to-tel-aviv/" className="font-semibold text-primary underline underline-offset-4">airport-to-Tel-Aviv guide</Link> for the train journey from the airport.</p>
       <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
         <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
         
@@ -358,7 +358,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
 
   const sourceBlock = (
   <SourcesDisclosure>
-          <p className="mt-3 text-sm text-muted-foreground">Check the linked operators for fares, dated timetables and pickup points before travelling. {id === "jerusalem" || id === "ein-bokek" ? "If taking the Jerusalem train, reserve a free personal voucher for each passenger." : ""}</p>
+          <p className="mt-3 text-sm text-muted-foreground">Use these official sources to check fares, departure times and pickup points before travelling. {id === "jerusalem" || id === "ein-bokek" ? "If taking the Jerusalem train, reserve a free personal voucher for each passenger." : ""}</p>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
   
           </ul>
@@ -423,7 +423,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         {focusedLayout && <aside aria-label={"Pre-booked airport transfer to " + g.city} data-testid="airport-journey-private-links" className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/20 bg-secondary/30 p-4">
           <div className="min-w-0 flex-1">
             <p className="font-semibold">Prefer an arranged airport pickup?</p>
-            <p className="mt-1 text-sm text-muted-foreground">See vehicle and starting-price details, or request a personal quote for your flight and hotel.</p>
+            <p className="mt-1 text-sm text-muted-foreground">View starting prices and vehicle options, or request a quote for your journey.</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link to={g.privatePath} className="inline-flex min-h-11 items-center rounded-lg border border-primary/35 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary">Private transfer details</Link>
