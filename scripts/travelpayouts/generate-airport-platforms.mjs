@@ -2,6 +2,7 @@
  * Each page+provider pair gets its own readable SubID; failed programs retain public URLs.
  */
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { registry } from "./registry-source.mjs";
 
 const projectId = 406243;
 const publisherId = 622032;
@@ -18,7 +19,7 @@ const pages = [
   ["airport-route-haifa", "haifa"],
   ["airport-route-dead-sea", "ein_bokek"],
 ];
-const original = await readFile("src/data/registry.ts", "utf8");
+const catalog = registry(await readFile("src/data/registry.ts", "utf8"));
 const links = pages.flatMap(([pageId, slug]) =>
   providers.map(([partnerId, url]) => ({
     pageId,
@@ -39,7 +40,7 @@ for (const item of links) {
     url.protocol !== "https:" ||
     url.username ||
     url.password ||
-    !original.includes(JSON.stringify(item.url))
+    !catalog.airport(item.partnerId, item.url)
   )
     throw Error("Untrusted or changed provider destination: " + item.partnerId);
 }

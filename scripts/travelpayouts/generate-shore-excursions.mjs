@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { registry } from "./registry-source.mjs";
 // Protected Travelpayouts API is the sole source of affiliate short URLs.
 const projectId = 406243,
   publisherId = 622032;
@@ -22,17 +23,12 @@ const ids = [
   "shore-viator-ashdod-masada-dead-sea",
   "shore-viator-haifa-jerusalem-holy-city",
 ];
-const registry = await readFile("src/data/registry.ts", "utf8");
+const catalog = registry(await readFile("src/data/registry.ts", "utf8"));
 const records = ids.map((id) => {
-  const start = registry.indexOf('id: "' + id + '"');
-  if (start < 0) throw Error("Missing shore product " + id);
-  const end = registry.indexOf("\n  },", start);
-  const block = registry.slice(start, end);
   const platform = id.startsWith("shore-gyg-") ? "getyourguide" : "viator";
-  const found = block.match(/publicUrl: "(https:\/\/[^"]+)"/);
-  if (!found || !block.includes('partnerId: "' + platform + '"'))
-    throw Error("Product/platform mismatch " + id);
-  const url = new URL(found[1]);
+  const product = catalog.shore(id);
+  if (!product.url || product.platform !== platform) throw Error("Product/platform mismatch " + id);
+  const url = new URL(product.url);
   if (
     url.protocol !== "https:" ||
     url.username ||
@@ -42,9 +38,9 @@ const records = ids.map((id) => {
     url.hostname !== "www." + (platform === "viator" ? "viator.com" : "getyourguide.com")
   )
     throw Error("Invalid source URL " + id);
-  const pending = registry.includes('"' + id + '": undefined,');
-  const configured = registry.includes('"' + id + '": { trackingUrl: "https://');
-  if (!pending && !configured) throw Error("Tracking configuration missing " + id);
+  const state = catalog.tracking(id).state;
+  if (state === "missing") throw Error("Tracking configuration missing " + id);
+  const pending = state === "pending";
   return {
     id,
     url: url.href,

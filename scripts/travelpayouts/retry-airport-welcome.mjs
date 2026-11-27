@@ -2,6 +2,7 @@
  * Keep the ordinary provider link if neither official address converts for this project.
  */
 import { readFile, writeFile } from "node:fs/promises";
+import { setTracking } from "./registry-source.mjs";
 const file = "src/data/registry.ts";
 const token = process.env.TRAVELPAYOUTS_API_TOKEN;
 if (!token) throw Error("Missing protected token");
@@ -73,20 +74,11 @@ if (!hub) {
   process.exit(0);
 }
 let contents = await readFile(file, "utf8");
-const old = '"airport-welcome": undefined,';
-if (!contents.includes(old)) throw Error("Welcome partner placeholder unexpectedly changed");
-contents = contents.replace(old, '"airport-welcome": { trackingUrl: "' + hub + '" },');
-const lines = [];
+contents = setTracking(contents, "airport-welcome", hub);
 for (const [pageId, slug] of pages.slice(1)) {
   const result = await create(chosen, "airport_" + slug + "_welcome");
   console.log("Welcome " + pageId + ": " + (result.trackingUrl ? "approved" : result.error));
-  if (result.trackingUrl)
-    lines.push(
-      '  "airport-welcome@' + pageId + '": { trackingUrl: "' + result.trackingUrl + '" },',
-    );
+  if (result.trackingUrl) contents = setTracking(contents, "airport-welcome@" + pageId, result.trackingUrl, { allowInsert: true });
 }
-const end = "  // END Travelpayouts airport route-specific links";
-if (!contents.includes(end)) throw Error("Missing route-link insertion marker");
-contents = contents.replace(end, lines.join("\n") + (lines.length ? "\n" : "") + end);
 await writeFile(file, contents, "utf8");
-console.log("Welcome Pickups verified tracking URLs: " + (1 + lines.length) + "/5");
+console.log("Welcome Pickups verified tracking URLs staged");
