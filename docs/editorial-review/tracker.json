@@ -59,19 +59,19 @@
     {
       "path": "/",
       "group": 1,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "6f6a7a2636921d3e343dde259340805b0c6e63f04cced0717281d000fdcbc935",
       "changes": 7,
-      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending.",
+      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "184a017d2fa556ae63c01b460bac0038ec197b95ecbcdc415958612e87188861"
     },
     {
       "path": "/about-me/",
       "group": 1,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "d697b6d0b923a557ae7c7a6c84d841114792044cae7fafb9a99bd5d09d584799",
       "changes": 14,
-      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending.",
+      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "ea17d374935ccb47ef9a186293b34b3898187c26cbd23f36474ccb2e368283d3"
     },
     {
@@ -285,46 +285,46 @@
     {
       "path": "/airport-transfers/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "09e98468367804662a1a8ef6f85dcab6c3212258685afeea36e0fb7fdd269432",
       "changes": 6,
-      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending.",
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "984c08a978a55f74cdf5fafb669c4ecf6e0d85e03b979a17dab5ae2843c91663"
     },
     {
       "path": "/airport-transfers/ein-bokek/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "74e9a064e0cc603f54a9cb92a4e2ee917727360dc1c3a25a2b092e3c4157d03b",
       "changes": 10,
-      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending.",
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "f416e4b4cd93cb4872c114fd334720ef2e79d4f995469b005e1b1c862d755e4e"
     },
     {
       "path": "/airport-transfers/haifa/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "0c04632b7fb91bafdfe2bb21b91ca808ace89ee8db783fa75004377978a261f4",
       "changes": 11,
-      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending.",
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "97041e8c320bb4a553be25d678fba97f62d047408d5c3be1a9dc527023c23cd2"
     },
     {
       "path": "/airport-transfers/jerusalem/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "6ba3904568a05ee3b0b713ffc8fa9e2a4927ec5500b215374b08da9077fac70f",
       "changes": 9,
-      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending.",
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "9c66bdfe3ffb5685789a67312c6bc20d3923388e60581966f09d454acc322d1a"
     },
     {
       "path": "/airport-transfers/tel-aviv/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "f482283948bc7db21fc0aba9ad24bc87d56829f8eee76778f22da60d05cf083d",
       "changes": 8,
-      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending.",
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "2ffa7c534ac51e7adbdb3cd0e7f0c0553853d6c09707ceda73701400241c5fce"
     },
     {
@@ -538,10 +538,10 @@
     {
       "path": "/car-rental/",
       "group": 3,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "b069dbe96d1ad73dd228878262e2c31cdc5335420abb4c32d816379558ff932c",
       "changes": 8,
-      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
     },
     {
       "path": "/privacy-policy/",
@@ -554,10 +554,10 @@
     {
       "path": "/private-driver-in-israel/",
       "group": 1,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "5aef686b20f9f05a322417791b59805f26cd1f569ef8765a5fc142377db80e8a",
       "changes": 14,
-      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending.",
+      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "099ef373b017bf704bce1ea8b01daa0972f1563e803db9e400dd4ea8a317fbeb"
     },
     {
@@ -715,50 +715,50 @@
     {
       "path": "/travel-blog/ben-gurion-airport-arrival-tips/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "2a30fc79a0dae9b4631f0343e6155e83436b81e2fa29fe8885e1c2514adae4a7",
       "changes": 7,
-      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending."
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
     },
     {
       "path": "/travel-blog/ben-gurion-airport-taxis/",
       "group": 3,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "808256da15593a69705ca29ebe524cd597e3cd260570e39fa78a219ddcc0d877",
       "changes": 6,
-      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
     },
     {
       "path": "/travel-blog/ben-gurion-airport-to-ein-bokek/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "35802add688bff724edb31a7b50e93b94047618c59a2e6c35964f31d2f8638b5",
       "changes": 8,
-      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending."
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
     },
     {
       "path": "/travel-blog/ben-gurion-airport-to-haifa/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "1d66c3502ce91649ba03be271618d62eeb53cf385d9e68887dd71bd4e51d6115",
       "changes": 7,
-      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending."
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
     },
     {
       "path": "/travel-blog/ben-gurion-airport-to-jerusalem/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "9f13f165fd62e52ef33a1dc6422b466fa3bacd3d68ddce7418f5da9c13b128fa",
       "changes": 5,
-      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending."
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
     },
     {
       "path": "/travel-blog/ben-gurion-airport-to-tel-aviv/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "bf659861b05dd125737dc37c70875254200585befcc3484f4052c776b458b9d9",
       "changes": 8,
-      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending."
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
     },
     {
       "path": "/travel-blog/best-dead-sea-hotels/",
@@ -835,58 +835,58 @@
     {
       "path": "/travel-blog/from-ben-gurion-airport-on-shabbat/",
       "group": 2,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "4683f566b07e4532e3c081281eb2033c7b7641bd280db3092d5cb6851baadfa3",
       "changes": 9,
-      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending."
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
     },
     {
       "path": "/travel-blog/getting-around-israel/",
       "group": 3,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "1501b58451eff4671f58bd9288ae4d08f46b8c7a1f3ca8f64f5ede352a188cad",
       "changes": 5,
-      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
     },
     {
       "path": "/travel-blog/getting-around-tel-aviv/",
       "group": 3,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "52dac4edf14520a177406c33d53700216241acbc474884e37d677b878aa229c6",
       "changes": 6,
-      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction."
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
     },
     {
       "path": "/travel-blog/israel-itinerary-10-days/",
       "group": 4,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "461298d9918168ab6c57e6b00632dfdb3f9888fb42d88ce034ed95ca4cd4b9d4",
+      "changes": 5,
+      "notes": "Reviewed prerendered itinerary content from artifact 15190479263; edited daily descriptions, advice and FAQs while retaining route, dates, attractions, lodging and booking links. Await regression."
     },
     {
       "path": "/travel-blog/israel-itinerary-3-days/",
       "group": 4,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "c473808427dfc990ff443b152a4d36b5bf85b90602f9ffef521eb77e56ce89df",
+      "changes": 7,
+      "notes": "Reviewed prerendered itinerary content from artifact 15190479263; edited daily descriptions, advice and FAQs while retaining route, dates, attractions, lodging and booking links. Await regression."
     },
     {
       "path": "/travel-blog/israel-itinerary-5-days/",
       "group": 4,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "5f104250477fa73f157cb04ae52853b28180af7a28f35495821f6a2c77480887",
+      "changes": 5,
+      "notes": "Reviewed prerendered itinerary content from artifact 15190479263; edited daily descriptions, advice and FAQs while retaining route, dates, attractions, lodging and booking links. Await regression."
     },
     {
       "path": "/travel-blog/israel-itinerary-7-days/",
       "group": 4,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "7c185171ac6c225b20b9350708507fe9737146d936f2a360f6beb2619129abf4",
+      "changes": 6,
+      "notes": "Reviewed prerendered itinerary content from artifact 15190479263; edited daily descriptions, advice and FAQs while retaining route, dates, attractions, lodging and booking links. Await regression."
     },
     {
       "path": "/travel-blog/israel-tours-for-seniors/",
@@ -955,10 +955,10 @@
     {
       "path": "/travel-blog/sherut-in-israel/",
       "group": 3,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "ebaf8ae268d42c471a8630bb4c4ec49db0ca3728262ad34f5a502709e3ff5886",
       "changes": 5,
-      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending.",
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "c2602a7491b98043750f11663c5960d38a28828046a83db3cfba73071b78274c"
     },
     {
@@ -972,19 +972,19 @@
     {
       "path": "/travel-blog/taxi-fares-in-israel/",
       "group": 3,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "8c82571b45931d47e927117036941da742ef3c16a6230c0b1d52b91db982c313",
       "changes": 4,
-      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending.",
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "dc18d70a6f7f484bf9c763518f704505b6957a3106047869f0a7e6c78177cb99"
     },
     {
       "path": "/travel-blog/taxis-in-israel/",
       "group": 3,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "583d7de06ef4d9e066079cffce8550cc755139587d4c6cb6f9a299a164e3709f",
       "changes": 4,
-      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending.",
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "b7929afe8c96322d71d140059d862e41e6ab80f21956bd4b5fc5cb92d81916bc"
     },
     {
@@ -998,10 +998,10 @@
     {
       "path": "/travel-blog/uber-in-israel/",
       "group": 3,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "6e58521b6d9f73463d1215747e20169cceb43e0517fb9d4e56fa51cd691b7fab",
       "changes": 4,
-      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending.",
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
       "postEditSnapshot": "d20d0715da0f1609ae294a15a7f7154f2c6f7c964d47b761857ec6f29fbc08d3"
     },
     {
