@@ -1,14 +1,76 @@
-name: Stage 5.5b - resume after editorial sync and validate format trial
+name: Stage 5.5.2 - persist verified patches and validate committed code
 on:
   push:
     branches: [audit/lint-quality-stage5]
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
+concurrency:
+  group: stage-5-5-2-permanent
+  cancel-in-progress: false
 jobs:
-  trial:
+  persist:
+    if: github.ref == 'refs/heads/audit/lint-quality-stage5'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     permissions:
-      contents: read
+      contents: write
+      actions: read
+    outputs:
+      commit: ${{ steps.persist.outputs.commit }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: stage-5-5b-format-trial
+          run-id: 46038195874
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/verified-trial
+      - name: Apply exact verified patches to audit branch
+        id: persist
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/verified-trial"
+          (cd "$out" && sha256sum -c <<'HASHES'
+          d312d64a29f1ad292717fd6ce33065075202d0e2bdf40b2fc74f7944a499892a  stage-5-5b-test-migration.patch
+          5b0f9171bd3f9ef7439c1b4ff7e0b38d1bd365f21850f7711dd76725bbad37b6  stage-5-5b.patch
+          de85d36fae38ab0a0dc91147aaf517b846a17664b5956d8f42c9dfb891c99dd8  changed.json
+          7296c8516ebfa3fbb5070e62af1424fe4f8c5fe767b30269ad53d757486dcd65  assertion-migration.json
+          HASHES
+          )
+          test "$(git rev-parse origin/main)" = 3252d8096c9ae78242df837bc890f55fe7cf6c36
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/audit/lint-quality-stage5)"
+          git diff --exit-code
+          if git apply --reverse --check "$out/stage-5-5b.patch" && git apply --reverse --check "$out/stage-5-5b-test-migration.patch"; then
+            echo "Verified patches already present"
+          else
+            test "$(git rev-parse HEAD^)" = d63d434db22835275e60a7c0fa020c48f0162113
+            test "$(git diff --name-only HEAD^ HEAD)" = .github/workflows/lint-quality-stage5.yml
+            git apply --check "$out/stage-5-5b-test-migration.patch" "$out/stage-5-5b.patch"
+            git apply --index "$out/stage-5-5b-test-migration.patch" "$out/stage-5-5b.patch"
+            git diff --cached --check
+            python3 - <<'PY'
+          import json, os, pathlib, subprocess
+          out=pathlib.Path(os.environ["RUNNER_TEMP"])/"verified-trial"
+          tests=set(json.loads((out/"assertion-migration.json").read_text()))
+          sources=set(json.loads((out/"changed.json").read_text()))
+          actual=set(subprocess.check_output(["git","diff","--cached","--name-only","-z"]).decode().split("\0"))-{""}
+          assert len(tests)==30 and len(sources)==184 and not tests&sources
+          assert actual==tests|sources,(actual-(tests|sources),(tests|sources)-actual)
+          print("Exact verified scope:",len(tests),"test files,",len(sources),"source files")
+          PY
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Stage 5.5.2: permanently apply validated formatting and regression assertion patches'
+            git push origin HEAD:refs/heads/audit/lint-quality-stage5
+          fi
+          git diff --exit-code
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "Permanent commit: $(git rev-parse HEAD)"
+  validate:
+    needs: persist
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     env:
@@ -20,6 +82,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: ${{ needs.persist.outputs.commit }}
           persist-credentials: false
           fetch-depth: 0
       - uses: actions/setup-node@v7
@@ -29,230 +92,38 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.4.4"
-      - run: bash scripts/install-ci-dependencies.sh
-      - name: Prepare current main reference
+      - uses: actions/download-artifact@v4
+        with:
+          name: stage-5-5b-format-trial
+          run-id: 46038195874
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/verified-trial
+      - name: Confirm committed patches and reference
         run: |
-          mkdir -p "$RUNNER_TEMP/unused-audit"
+          set -euo pipefail
+          out="$RUNNER_TEMP/verified-trial"
+          (cd "$out" && sha256sum -c <<'HASHES'
+          d312d64a29f1ad292717fd6ce33065075202d0e2bdf40b2fc74f7944a499892a  stage-5-5b-test-migration.patch
+          5b0f9171bd3f9ef7439c1b4ff7e0b38d1bd365f21850f7711dd76725bbad37b6  stage-5-5b.patch
+          fc9f24087b337009b57fed151e7e8d314255122b305896628306abd04bf0ff11  compare.py
+          f156bdb103dca2df79e7a6e7e2f2539cc8599dc5c49148b2d3cd96cefaca424a  scope.json
+          HASHES
+          )
+          test "$(git rev-parse HEAD)" = "${{ needs.persist.outputs.commit }}"
+          test "$(git rev-parse origin/main)" = 3252d8096c9ae78242df837bc890f55fe7cf6c36
+          git merge-base --is-ancestor origin/main HEAD
+          git apply --reverse --check "$out/stage-5-5b.patch" "$out/stage-5-5b-test-migration.patch"
+          git diff --exit-code
+          mkdir -p "$RUNNER_TEMP/permanent-report"
+          git rev-parse HEAD | tee "$RUNNER_TEMP/permanent-report/validated-commit.txt"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Build current main reference
+        run: |
           git worktree add --detach "$RUNNER_TEMP/main-reference" 3252d8096c9ae78242df837bc890f55fe7cf6c36
           cd "$RUNNER_TEMP/main-reference"
           bash scripts/install-ci-dependencies.sh
           bash scripts/build-validated-static.sh
-      - name: Trial systematic test assertion migration
-        shell: bash
-        run: |
-          set -euo pipefail
-          out="$RUNNER_TEMP/unused-audit"
-          mkdir -p "$out"
-          cat > .stage-5-5b-test-migration.mjs <<'JS'
-          import fs from "node:fs";
-          import path from "node:path";
-          import ts from "typescript";
-          const out=path.join(process.env.RUNNER_TEMP,"unused-audit");
-          // Explicit source-string variables in the failed suites only. Assertions
-          // against imported data, rendered DOM, CSS and public HTML remain unchanged.
-          const suites = {
-            "src/data/bestTimeIsrael.test.ts": ["route","component","page"],
-            "src/data/deadSeaAttractionsGuide.test.ts": ["page","route"],
-            "src/data/israelFoodExplorer.test.ts": ["content"],
-            "src/data/israelHolidayVisitorGuide.test.ts": ["page","route"],
-            "src/data/israelItineraries.test.ts": ["widgetComponent","guideComponent","view","cards","widget","tours","contact","messageCopy","footer","tourComponent","itineraryComponent"],
-            "src/data/jordanRiverBaptism.test.ts": ["page"],
-            "src/data/telAvivAttractionsGuide.test.ts": ["page","route","source"],
-            "src/data/telAvivBeaches.test.ts": ["page","data"],
-            "src/data/topTenExperiences.test.ts": ["page"],
-            "src/test/akko-feature.test.tsx": ["route","component","mapComponent","page","registry"],
-            "src/test/annunciation-feature.test.tsx": ["route","shell","article"],
-            "src/test/capernaum-feature.test.tsx": ["article","shell","route","pageLayout","park","siteInfo","guideComponent","contact"],
-            "src/test/christian-tours-guide.test.tsx": ["page","data"],
-            "src/test/contact-form-tripadvisor-visual.test.tsx": ["source","route","page","quote","intro"],
-            "src/test/detailed-horizontal-card-layouts.test.ts": ["page","food","telAviv","senior"],
-            "src/test/editorial-related-mobile-grids.test.ts": ["source","hub","guide","shared","section","attraction","related","jerusalem","category","itinerary"],
-            "src/test/external-tour-card-grids.test.ts": ["tours","shore","telAviv"],
-            "src/test/haifa-city-guide.test.tsx": ["page"],
-            "src/test/inline-prose-link-icons.test.ts": ["seniors"],
-            "src/test/israel-travel-tips-guide.test.tsx": ["source","route"],
-            "src/test/jaffa-feature.test.tsx": ["component","route","mapComponent","registry"],
-            "src/test/magdala-feature.test.tsx": ["article","route","shell"],
-            "src/test/mount-zion-map.test.ts": ["component"],
-            "src/test/old-city-jerusalem-feature.test.tsx": ["page","mapComponent","route"],
-            "src/test/qasr-el-yahud-feature.test.tsx": ["route","shell","page"],
-            "src/test/senior-tours-guide.test.tsx": ["component","dataSource"],
-            "src/test/tabgha-feature.test.tsx": ["article","route","shell"],
-            "src/test/tel-megiddo-feature.test.tsx": ["route","shell","article"],
-            "src/test/travel-blog-hub-images.test.ts": ["source","component"],
-            "src/test/yardenit-feature.test.tsx": ["article","route","shell"],
-          };
-          const counts={};
-          const exactEdits={
-            "src/test/akko-feature.test.tsx":[["/<AttractionHighlight mobileImageFirst/g","/<AttractionHighlight\\s+mobileImageFirst/g"]],
-            "src/test/jaffa-feature.test.tsx":[["/<AttractionHighlight mobileImageFirst/g","/<AttractionHighlight\\s+mobileImageFirst/g"]],
-            "src/test/haifa-city-guide.test.tsx":[["/<AttractionHighlight title=/g","/<AttractionHighlight\\s+title=/g"]],
-            "src/test/old-city-jerusalem-feature.test.tsx":[["/<AttractionHighlight mobileImageFirst/g","/<AttractionHighlight\\s+mobileImageFirst/g"],["/type: \"site\" \\}/g","/type:\\s*\"site\"\\s*,?\\s*\\}/g"],["/type: \"gate\" \\}/g","/type:\\s*\"gate\"\\s*,?\\s*\\}/g"]],
-            "src/test/mount-zion-map.test.ts":[["/\\{ id: \"([^\"]+)\", name:/g","/\\{\\s*id:\\s*\"([^\"]+)\",\\s*name:/g"]],
-            "src/test/external-tour-card-grids.test.ts":[["/id:\"(tour-[^\"]+@tours-tel-aviv-jaffa)\"/g","/id:\\s*\"(tour-[^\"]+@tours-tel-aviv-jaffa)\"/g"]],
-            "src/data/topTenExperiences.test.ts":[["    expect(page.indexOf('<section id=\"experiences\"')).toBeLessThan(page.indexOf('<section id=\"experience-map\"'));","    const experiencesAt = sourceIndex(page, '<section id=\"experiences\"');\n    const mapAt = sourceIndex(page, '<section id=\"experience-map\"');\n    expect(experiencesAt).toBeGreaterThanOrEqual(0);\n    expect(mapAt).toBeGreaterThan(experiencesAt);"]],
-          };
-          function isSource(node,names){
-            if(ts.isIdentifier(node))return names.includes(node.text);
-            if(ts.isCallExpression(node)&&ts.isIdentifier(node.expression)){
-              const name=node.expression.text;
-              if(name==="readRouteSource")return true;
-              if(["readFileSync","file","read"].includes(name)){
-                const arg=node.arguments[0]?.getText()??"";
-                return /src\/(?:components|routes|route-heads|data|lib|hooks|server)/.test(arg)&&!/\.css["']/.test(arg);
-              }
-              return ["ui","route","source","readComponent"].includes(name);
-            }
-            return false;
-          }
-          for(const [file,names] of Object.entries(suites)){
-            const original=fs.readFileSync(file,"utf8");
-            let code=original;
-            const manual=exactEdits[file]??[];
-            for(const [a,b] of manual){
-              if(code.split(a).length!==2)throw Error("Manual edit mismatch "+file+": "+a);
-              code=code.replace(a,b);
-            }
-            const tree=ts.createSourceFile(file,code,ts.ScriptTarget.Latest,true);
-            const edits=[];
-            let contain=0,indices=0;
-            const walk=node=>{
-              if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)){
-                const access=node.expression;
-                if(access.name.text==="toContain"&&node.arguments.length===1){
-                  let owner=access.expression;
-                  if(ts.isPropertyAccessExpression(owner)&&owner.name.text==="not")owner=owner.expression;
-                  if(ts.isCallExpression(owner)&&ts.isIdentifier(owner.expression)&&owner.expression.text==="expect"&&owner.arguments[0]&&isSource(owner.arguments[0],names)){
-                    const arg=node.arguments[0];
-                    // Retain exact single-word/data-value checks. Convert only literal
-                    // fragments with formatting-sensitive syntax or multiword prose;
-                    // dynamic expected fragments are kept verbatim inside the helper.
-                    const raw=arg.getText(tree);
-                    if(ts.isStringLiteralLike(arg)&&!/[<>{}=:\s(),]/.test(arg.text)){}
-                    else{
-                      edits.push([access.name.getStart(tree),access.name.end,"toMatch"]);
-                      edits.push([arg.getStart(tree),arg.end,"sourceFragment("+raw+")"]);
-                      contain++;
-                    }
-                  }
-                }
-                if(access.name.text==="indexOf"&&node.arguments.length>=1&&isSource(access.expression,names)){
-                  const arg=node.arguments[0];
-                  if(ts.isStringLiteralLike(arg)&&/[<>{}=:\s(),]/.test(arg.text)){
-                    edits.push([node.getStart(tree),node.end,"sourceIndex("+access.expression.getText(tree)+", "+node.arguments.map(a=>a.getText(tree)).join(", ")+")"]);
-                    indices++;
-                  }
-                }
-              }
-              ts.forEachChild(node,walk);
-            };
-            walk(tree);
-            for(const [start,end,value] of edits.sort((a,b)=>b[0]-a[0]))code=code.slice(0,start)+value+code.slice(end);
-            if(contain||indices||code.includes("sourceIndex(")){
-              const imports=[];
-              if(contain)imports.push("sourceFragment");
-              if(indices||code.includes("sourceIndex("))imports.push("sourceIndex");
-              code='import { '+imports.join(", ")+' } from "@/test-utils/source-fragment";\n'+code;
-            }
-            if(code===original)throw Error("No assertion changes for "+file);
-            fs.writeFileSync(file,code);
-            counts[file]={contains:contain,indices,manual:manual.length};
-          }
-          fs.writeFileSync(path.join(out,"assertion-migration.json"),JSON.stringify(counts,null,2));
-          console.log("ASSERTION MIGRATION",JSON.stringify({files:Object.keys(counts).length,contains:Object.values(counts).reduce((n,x)=>n+x.contains,0),indices:Object.values(counts).reduce((n,x)=>n+x.indices,0),manual:Object.values(counts).reduce((n,x)=>n+x.manual,0)}));
-          // Inventory other test suites using source-file inspection for future stages.
-          // This is a read-only list, not an instruction to rewrite passing tests.
-          const others=[];
-          function scan(dir){
-            for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
-              const name=path.join(dir,entry.name);
-              if(entry.isDirectory())scan(name);
-              else if(/\.(?:test|spec)\.tsx?$/.test(name)&&!suites[name]){
-                const content=fs.readFileSync(name,"utf8");
-                if(/readFileSync|readRouteSource/.test(content)&&/\.toContain\(|\.indexOf\(|\.match\(/.test(content))others.push(name);
-              }
-            }
-          }
-          scan("src");
-          fs.writeFileSync(path.join(out,"additional-source-sensitive-suites.json"),JSON.stringify(others,null,2));
-          console.log("ADDITIONAL SOURCE ASSERTION SUITES",others.length);
-          JS
-          node .stage-5-5b-test-migration.mjs
-          rm .stage-5-5b-test-migration.mjs
-          git diff --check
-          git diff --binary -- src/test src/data > "$out/stage-5-5b-test-migration.patch"
-          sha256sum "$out/stage-5-5b-test-migration.patch"
-          git diff --name-only
-          git add -- src/test src/data
-          git -c user.name='CI test trial' -c user.email='ci@example.invalid' commit -m 'Temporary assertion migration for verification only'
-      - name: Verify adapted tests against existing unformatted components
-        run: |
-          set -euo pipefail
-          out="$RUNNER_TEMP/unused-audit"
-          git diff --quiet
-          VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
-          git status --short | tee "$out/post-baseline-test-status.txt"
-          git diff --binary > "$out/post-baseline-test-generated.patch"
-          python3 - <<'PY'
-          import subprocess
-          actual=set(subprocess.check_output(['git','diff','--name-only','-z']).decode().split('\0'))-{''}
-          allowed={'src/data/generated/guide-directory.ts','src/routeTree.gen.ts'}
-          print('TRACKED CHANGES AFTER TESTS',sorted(actual))
-          unexpected=actual-allowed
-          assert not unexpected, ('Unexpected test modifications',sorted(unexpected))
-          PY
-          # Tests generate derived code; preserve the diagnostic patch and reset
-          # only the known generated files, never authored source.
-          git restore --worktree -- src/data/generated/guide-directory.ts src/routeTree.gen.ts
-          git diff --quiet
-      - name: Trial formatting of components, libraries and resynchronized routes
-        shell: bash
-        run: |
-          set -euo pipefail
-          out="$RUNNER_TEMP/unused-audit"
-          git rev-parse HEAD > "$out/trial-base.txt"
-          git diff --quiet
-          git ls-files -z src/components src/hooks src/lib src/router.tsx src/server.ts src/start.ts src/routes src/route-heads > "$out/scope.bin"
-          node --input-type=module <<'JS'
-          import fs from 'node:fs';
-          import path from 'node:path';
-          import prettier from 'prettier';
-          const out=path.join(process.env.RUNNER_TEMP,'unused-audit');
-          const scope=fs.readFileSync(path.join(out,'scope.bin'),'utf8').split('\0').filter(p=>/\.tsx?$/.test(p)&&!/\.(test|spec)\.tsx?$/.test(p));
-          if(!scope.length)throw Error('Empty formatting scope');
-          const all=[],changed=[];
-          for(const file of scope){
-            const info=await prettier.getFileInfo(file,{ignorePath:'.prettierignore'});
-            if(info.ignored)throw Error('Unexpected ignored source: '+file);
-            const before=fs.readFileSync(file,'utf8');
-            const options=await prettier.resolveConfig(file);
-            const after=await prettier.format(before,{...options,filepath:file});
-            const repeat=await prettier.format(after,{...options,filepath:file});
-            if(after!==repeat)throw Error('Non-idempotent formatting '+file);
-            all.push(file);
-            if(before!==after){
-              fs.writeFileSync(file,after);
-              changed.push(file);
-            }
-          }
-          fs.writeFileSync(path.join(out,'scope.json'),JSON.stringify(all,null,2));
-          fs.writeFileSync(path.join(out,'changed.json'),JSON.stringify(changed,null,2));
-          console.log('FORMAT TRIAL SUMMARY',JSON.stringify({scanned:all.length,changed:changed.length,componentFiles:changed.filter(p=>p.startsWith('src/components/')).length,hookFiles:changed.filter(p=>p.startsWith('src/hooks/')).length,libraryFiles:changed.filter(p=>p.startsWith('src/lib/')).length,entryFiles:changed.filter(p=>/^src\/[^/]+$/.test(p)).length,routeFiles:changed.filter(p=>p.startsWith('src/routes/')||p.startsWith('src/route-heads/')).length,idempotent:true}));
-          JS
-          git diff --check
-          git diff --binary -- src/components src/hooks src/lib src/router.tsx src/server.ts src/start.ts src/routes src/route-heads > "$out/stage-5-5b.patch"
-          git diff --numstat > "$out/numstat.tsv"
-          git diff --stat | tail -n 1
-          sha256sum "$out/stage-5-5b.patch"
-          python3 - <<'PY'
-          import json, pathlib, os, subprocess
-          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'unused-audit'
-          actual=set(subprocess.check_output(['git','diff','--name-only','-z']).decode().split('\0'))-{''}
-          expected=set(json.loads((out/'changed.json').read_text()))
-          assert actual==expected,(actual-expected,expected-actual)
-          print('PASS: only targeted tracked files changed')
-          PY
-      - name: Check lint, formatting and strict TypeScript
+      - name: Lint and verify all 479 scoped files
         run: |
           bun run lint
           node_modules/.bin/prettier --check 'src/routes/**/*.{ts,tsx}' 'src/route-heads/**/*.{ts,tsx}'
@@ -260,175 +131,42 @@ jobs:
           import fs from 'node:fs';
           import path from 'node:path';
           import prettier from 'prettier';
-          const scope=JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP,'unused-audit','scope.json'),'utf8'));
+          const scope=JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP,'verified-trial','scope.json'),'utf8'));
+          if(scope.length!==479)throw Error('Unexpected scope');
           for(const file of scope){
             const options=await prettier.resolveConfig(file);
             if(!await prettier.check(fs.readFileSync(file,'utf8'),{...options,filepath:file}))throw Error('Formatting check failed: '+file);
           }
-          console.log('PASS: all trial source files satisfy Prettier');
+          console.log('PASS: all 479 committed source files satisfy Prettier');
           JS
+      - name: Build production and verify static export and strict TypeScript
+        run: |
           bash scripts/build-validated-static.sh
           npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters
           node scripts/verify-hostinger-static-export.mjs --editorial
-      - name: Compare candidate production output with current main
+      - name: Compare committed production output with main
+        shell: bash
         run: |
-          cat > "$RUNNER_TEMP/unused-audit/compare.py" <<'PY'
-          import collections, hashlib, json, pathlib, re, sys, xml.etree.ElementTree as ET
-          from html.parser import HTMLParser
-          from urllib.parse import urlsplit, urljoin, unquote
-          base, candidate = [pathlib.Path(s) for s in sys.argv[1:3]]
-          origin = "https://www.israel-taxi.com"
-          markers = re.compile(rb"lovable|tanstack_start_ts|7cd7aae9-57c0-4ced-b1fa-2f0691483fee|sandbox-npm-cache", re.I)
-          def digest(data): return hashlib.sha256(data).hexdigest()
-          def manifest(root):
-              return {str(p.relative_to(root)):p for p in root.rglob("*") if p.is_file()}
-          old, new = manifest(base), manifest(candidate)
-          def urls(root):
-              return [node.text for node in ET.parse(root/"sitemap.xml").getroot().findall("{*}url/{*}loc")]
-          old_urls, new_urls = urls(base), urls(candidate)
-          issues = []
-          def check(ok, message):
-              if not ok: issues.append(message)
-          check(old_urls == new_urls, "Ordered sitemap URL list changed")
-          check((base/"robots.txt").read_bytes() == (candidate/"robots.txt").read_bytes(), "robots.txt changed")
-          old_html, new_html = {p for p in old if p.endswith(".html")}, {p for p in new if p.endswith(".html")}
-          check(old_html == new_html, "HTML paths differ: removed="+str(sorted(old_html-new_html))+" added="+str(sorted(new_html-old_html)))
-          def norm(value, root):
-              if value is None: return ""
-              # Preserve actual image/font identity even if the bundler changes its hashed filename.
-              def asset(m):
-                  path = m.group(0)
-                  local = root / path.lstrip("/")
-                  if local.is_file(): return "/asset-content/"+digest(local.read_bytes())
-                  return path
-              value = re.sub(r"/assets/[A-Za-z0-9_.-]+\.(?:webp|avif|png|jpe?g|svg|gif|woff2?|ico)\b",asset,value,flags=re.I)
-              return re.sub(r"(?<=:)[rR][a-zA-Z0-9_]+(?=:)", "react-id", value)
-          class Page(HTMLParser):
-              def __init__(self, root):
-                  super().__init__(convert_charrefs=True)
-                  self.root=root; self.body=False; self.skip=0; self.title=False; self.schema=False
-                  self.text_chunks=[]
-                  self.meta=[]; self.data=[]; self.structure=[]; self.jsonld=[]; self.title_parts=[]; self.links=[]; self.assets=[]; self.schemas=[]; self.forms=0; self.images=0
-              def flush_text(self):
-                  # React can split adjacent JSX text into several HTML text nodes
-                  # separated by invisible hydration comments. Compare their actual
-                  # concatenated text, retaining whitespace between visible words.
-                  value=" ".join("".join(self.text_chunks).split())
-                  if value: self.data.append(value)
-                  self.text_chunks=[]
-              def handle_starttag(self,tag,attrs):
-                  self.flush_text()
-                  d=dict(attrs)
-                  if tag=="body": self.body=True
-                  if tag=="title": self.title=True
-                  if tag=="meta": self.meta.append(tuple(sorted((k,norm(v,self.root)) for k,v in attrs)))
-                  if tag=="link" and d.get("rel")=="canonical": self.meta.append(("canonical",d.get("href")))
-                  if tag=="script":
-                      self.skip+=1
-                      if d.get("type")=="application/ld+json": self.schema=True; self.jsonld=[]
-                  if tag=="style": self.skip+=1
-                  if tag=="script" and d.get("src"): self.assets.append(d["src"])
-                  if tag=="link" and d.get("rel") in ("stylesheet","modulepreload","preload") and d.get("href"): self.assets.append(d["href"])
-                  if not self.body or self.skip or tag=="link": return
-                  if tag=="form": self.forms+=1
-                  if tag=="img": self.images+=1
-                  if tag=="a" and d.get("href"): self.links.append(d["href"])
-                  for k in ("src","poster","data-consent-src"):
-                      if d.get(k): self.assets.append(d[k])
-                  if d.get("srcset"):
-                      self.assets.extend(s.strip().split()[0] for s in d["srcset"].split(",") if s.strip() and not s.strip().startswith("data:"))
-                  self.structure.append((tag,tuple(sorted((k,norm(v,self.root)) for k,v in attrs if k not in ("data-tsd-source",)))))
-              def handle_startendtag(self,tag,attrs): self.handle_starttag(tag,attrs)
-              def handle_endtag(self,tag):
-                  self.flush_text()
-                  if tag=="title": self.title=False
-                  if tag=="script" and self.schema:
-                      self.schemas.append(json.loads("".join(self.jsonld))); self.schema=False
-                  if tag in ("script","style"): self.skip=max(0,self.skip-1); return
-                  if self.body and not self.skip and tag!="link": self.structure.append(("/"+tag,()))
-                  if tag=="body": self.body=False
-              def handle_data(self,data):
-                  if self.title: self.title_parts.append(data)
-                  if self.schema: self.jsonld.append(data)
-                  if self.body and not self.skip: self.text_chunks.append(data)
-          def page(root,url):
-              rel=urlsplit(url).path.strip("/")
-              p=Page(root)
-              p.feed((root/rel/"index.html").read_text(encoding="utf-8"))
-              p.close()
-              p.flush_text()
-              return p
-          def schema_norm(v,root):
-              if isinstance(v,str): return norm(v,root)
-              if isinstance(v,list): return [schema_norm(x,root) for x in v]
-              if isinstance(v,dict): return {k:schema_norm(x,root) for k,x in v.items()}
-              return v
-          def missing_assets(p,root,url):
-              missing=set()
-              for a in p.assets:
-                  if a.startswith(("data:","blob:","#")): continue
-                  u=urlsplit(urljoin(url,a))
-                  if u.netloc!="www.israel-taxi.com" or u.path.startswith("/api/"): continue
-                  path=root/unquote(u.path.lstrip("/"))
-                  if not path.is_file() and not (path/"index.html").is_file(): missing.add(a)
-              return missing
-          # Prove that invisible hydration splits are equivalent, but changed
-          # text, lost spaces, and text moved across element boundaries are not.
-          def sample(html):
-              p=Page(base); p.feed(html); p.close(); p.flush_text(); return p.data
-          assert sample("<body><p>A.<!-- --> <!-- -->B</p></body>")==sample("<body><p>A. B</p></body>")
-          assert sample("<body><p>A. B</p></body>")!=sample("<body><p>A.B</p></body>")
-          assert sample("<body><p>A. B</p></body>")!=sample("<body><p>A. C</p></body>")
-          assert sample("<body><p>A. <b>B</b></p></body>")!=sample("<body><p>A. B</p></body>")
-          print("PASS: visible-text comparator preserves content and element boundaries")
-          stats=collections.Counter(); by_kind=collections.Counter()
-          for url in new_urls:
-              a,b=page(base,url),page(candidate,url)
-              for kind,x,y in [
-                  ("title",a.title_parts,b.title_parts),("metadata",sorted(map(str,a.meta)),sorted(map(str,b.meta))),
-                  ("structured data",schema_norm(a.schemas,base),schema_norm(b.schemas,candidate)),
-                  ("visible text",a.data,b.data),("body tags and attributes",a.structure,b.structure),
-                  ("links",a.links,b.links),("forms",a.forms,b.forms),("images",a.images,b.images)]:
-                  if x!=y:
-                      by_kind[kind]+=1
-                      if by_kind[kind]<=4:
-                          if isinstance(x,list) and isinstance(y,list):
-                              first=next(((str(xx)[:250],str(yy)[:250]) for xx,yy in zip(x,y) if xx!=yy),("length "+str(len(x)),"length "+str(len(y))))
-                              print("DIFFERENCE",url,kind,first)
-                          else: print("DIFFERENCE",url,kind,str(x)[:150],str(y)[:150])
-              added_missing=missing_assets(b,candidate,url)-missing_assets(a,base,url)
-              check(not added_missing, "New missing assets on "+url+": "+str(sorted(added_missing)))
-              stats.update(pages=1, forms=b.forms, links=len(b.links), images=b.images, schemas=len(b.schemas))
-          print("PAGE TOTALS",dict(stats))
-          print("PAGE DIFFERENCES",dict(by_kind))
-          for kind,n in by_kind.items(): issues.append(str(n)+" pages differ in "+kind)
-          # Public helpers/data, images and maps must not be altered by the build migration.
-          for p in sorted(set(old)|set(new)):
-              if p.startswith(("maps/","widgets/","images/","data/")):
-                  check(p in old and p in new and digest(old[p].read_bytes())==digest(new[p].read_bytes()),"Public helper/asset changed: "+p)
-          for name,p in new.items():
-              data=p.read_bytes()
-              check(not markers.search(data) and not markers.search(name.encode()),"Legacy marker in generated file "+name)
-              check(not (name.endswith(".php") or name.startswith("api/") or name in (".env",".htaccess") or name.endswith(".map")),"Unexpected private/API/source-map export: "+name)
-          print("GENERATED FILES",len(old),len(new),"HTML",len(old_html),len(new_html))
-          for ext in (".js",".css",".html"):
-              aa=[p.stat().st_size for k,p in old.items() if k.endswith(ext)]
-              bb=[p.stat().st_size for k,p in new.items() if k.endswith(ext)]
-              print("OUTPUT SIZE",ext,"before",len(aa),sum(aa),"after",len(bb),sum(bb))
-          print("LEGACY MARKER SCAN AND PARITY ISSUES",len(issues))
-          for issue in issues[:100]: print("ISSUE",issue)
-          if issues: sys.exit(1)
-          print("PASS: page content, metadata, schema, links, forms, public helpers, assets and legacy marker scan")
+          set -euo pipefail
+          python3 "$RUNNER_TEMP/verified-trial/compare.py" "$RUNNER_TEMP/main-reference/.output/public" .output/public | tee "$RUNNER_TEMP/permanent-report/production-parity.txt"
+      - name: Full regression on permanent commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test 2>&1 | tee "$RUNNER_TEMP/permanent-report/regression.txt"
+      - name: Guard authored source after validation
+        run: |
+          git status --short
+          python3 - <<'PY'
+          import subprocess
+          changed=set(subprocess.check_output(["git","diff","--name-only","-z"]).decode().split("\0"))-{""}
+          allowed={"src/data/generated/guide-directory.ts","src/routeTree.gen.ts","public/sitemap.xml","public/robots.txt"}
+          assert changed<=allowed,changed-allowed
           PY
-          python3 "$RUNNER_TEMP/unused-audit/compare.py" "$RUNNER_TEMP/main-reference/.output/public" .output/public
-          git diff --check
-          git diff --stat
-      - name: Run full regression after formatting
-        run: VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
-      - name: Save trial patch and verification reports
+      - name: Save verification reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: stage-5-5b-format-trial
-          path: ${{ runner.temp }}/unused-audit/
+          name: stage-5-5-2-permanent-validation
+          path: ${{ runner.temp }}/permanent-report/
           if-no-files-found: warn
