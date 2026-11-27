@@ -60,7 +60,7 @@ describe("private driver page and inquiry", () => {
     const header = screen.getByTestId("hub-header");
     expect(header).toContainElement(screen.getByRole("heading", { level: 1 }));
     expect(within(header).getByTestId("guide-hero-media")).toBeInTheDocument();
-    expect(within(header).getByRole("link", { name: "Request a personal quote" })).toHaveAttribute("href", "#request-quote");
+    expect(within(header).getByRole("link", { name: "Get a quote" })).toHaveAttribute("href", "#request-quote");
     expect(within(header).getByTestId("author-card")).toBeInTheDocument();
     expect(screen.getAllByTestId("author-card")).toHaveLength(1);
     expect(screen.queryByText("Plan the day before requesting a quote")).not.toBeInTheDocument();
