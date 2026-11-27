@@ -95,7 +95,18 @@ application/json POST containing eventId (UUID), policyVersion, sourcePath
 and four boolean flags: analytics, external, marketing, advertising.
 It returns HTTP 202 only after storage. It does not require visitor login.
 
-The current cookie-consent client is NOT YET POSTING to it. First update the
+The cookie-consent client supports an explicit opt-in build variable
+VITE_CONSENT_LEDGER_ENABLED=true. It is OFF by default, so no extra network
+request is made until the admin server, privacy notice and receipt retention
+are ready. Logging is asynchronous and never blocks a visitor's choice.
+
+The private maintenance command is:
+  php /home/<user>/domains/<domain>/private-admin/bin/retention.php
+Configure a scheduled Hostinger cron task before enabling receipt collection.
+It deletes consent receipts older than 365 days and authentication/rate-limit
+fingerprints older than one day.
+
+The current cookie-consent client is NOT POSTING BY DEFAULT to it. First update the
 privacy policy to disclose this security/privacy log, decide retention, and
 then connect saveCookieConsent to the endpoint. Avoid claiming identity-level
 proof of consent from anonymous category events.
