@@ -1,4 +1,4 @@
-name: Stage 5.5b - retry component format trial
+name: Stage 5.5b - verify component trial with hydration-aware text comparison
 on:
   push:
     branches: [audit/lint-quality-stage5]
@@ -139,8 +139,17 @@ jobs:
               def __init__(self, root):
                   super().__init__(convert_charrefs=True)
                   self.root=root; self.body=False; self.skip=0; self.title=False; self.schema=False
+                  self.text_chunks=[]
                   self.meta=[]; self.data=[]; self.structure=[]; self.jsonld=[]; self.title_parts=[]; self.links=[]; self.assets=[]; self.schemas=[]; self.forms=0; self.images=0
+              def flush_text(self):
+                  # React can split adjacent JSX text into several HTML text nodes
+                  # separated by invisible hydration comments. Compare their actual
+                  # concatenated text, retaining whitespace between visible words.
+                  value=" ".join("".join(self.text_chunks).split())
+                  if value: self.data.append(value)
+                  self.text_chunks=[]
               def handle_starttag(self,tag,attrs):
+                  self.flush_text()
                   d=dict(attrs)
                   if tag=="body": self.body=True
                   if tag=="title": self.title=True
@@ -163,6 +172,7 @@ jobs:
                   self.structure.append((tag,tuple(sorted((k,norm(v,self.root)) for k,v in attrs if k not in ("data-tsd-source",)))))
               def handle_startendtag(self,tag,attrs): self.handle_starttag(tag,attrs)
               def handle_endtag(self,tag):
+                  self.flush_text()
                   if tag=="title": self.title=False
                   if tag=="script" and self.schema:
                       self.schemas.append(json.loads("".join(self.jsonld))); self.schema=False
@@ -172,13 +182,13 @@ jobs:
               def handle_data(self,data):
                   if self.title: self.title_parts.append(data)
                   if self.schema: self.jsonld.append(data)
-                  if self.body and not self.skip:
-                      s=" ".join(data.split())
-                      if s:self.data.append(s)
+                  if self.body and not self.skip: self.text_chunks.append(data)
           def page(root,url):
               rel=urlsplit(url).path.strip("/")
               p=Page(root)
               p.feed((root/rel/"index.html").read_text(encoding="utf-8"))
+              p.close()
+              p.flush_text()
               return p
           def schema_norm(v,root):
               if isinstance(v,str): return norm(v,root)
@@ -194,6 +204,15 @@ jobs:
                   path=root/unquote(u.path.lstrip("/"))
                   if not path.is_file() and not (path/"index.html").is_file(): missing.add(a)
               return missing
+          # Prove that invisible hydration splits are equivalent, but changed
+          # text, lost spaces, and text moved across element boundaries are not.
+          def sample(html):
+              p=Page(base); p.feed(html); p.close(); p.flush_text(); return p.data
+          assert sample("<body><p>A.<!-- --> <!-- -->B</p></body>")==sample("<body><p>A. B</p></body>")
+          assert sample("<body><p>A. B</p></body>")!=sample("<body><p>A.B</p></body>")
+          assert sample("<body><p>A. B</p></body>")!=sample("<body><p>A. C</p></body>")
+          assert sample("<body><p>A. <b>B</b></p></body>")!=sample("<body><p>A. B</p></body>")
+          print("PASS: visible-text comparator preserves content and element boundaries")
           stats=collections.Counter(); by_kind=collections.Counter()
           for url in new_urls:
               a,b=page(base,url),page(candidate,url)
