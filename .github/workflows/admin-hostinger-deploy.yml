@@ -124,8 +124,8 @@ jobs:
         run: |
           set -euo pipefail
           # Login can legitimately return 503 before first database initialization.
-          URL="https://${HOSTINGER_REMOTE_PATH#*/domains/}"
-          URL="${URL%%/*}"
-          status="$(curl --retry 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "https://$URL/admin/")"
+          HOST="${HOSTINGER_REMOTE_PATH#*/domains/}"
+          HOST="${HOST%%/*}"
+          status="$(curl --retry 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "https://$HOST/admin/")"
           echo "Admin endpoint HTTP $status (200 after setup, 503 before setup)."
           [[ "$status" == "200" || "$status" == "503" ]] || exit 1
