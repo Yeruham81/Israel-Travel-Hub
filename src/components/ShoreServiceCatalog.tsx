@@ -71,7 +71,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
       {privateTours.length > 0 && <section id="my-private-days" aria-labelledby="owner-tours-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24">
         <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged by me</p>
         <h2 id="owner-tours-h" className="mt-2 text-3xl font-semibold">My private day trips from {port.name} Port</h2>
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Enjoy a flexible private car-and-driver day, with pickup and return arranged around your ship's schedule and your preferred stops.</p>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">I'll customize your private shore excursion around your ship's schedule and preferred destinations.</p>
         <ul aria-label={"My private day trips from " + port.name + " Port"} className="mt-4 grid auto-rows-fr gap-3">
           {privateTours.map(service => {
             const itinerary = service.itinerary;
@@ -91,7 +91,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
             </li>;
           })}
         </ul>
-        <p className="mt-4 text-sm">For another itinerary, <a href="#request-quote" onClick={()=>onSelectItinerary("other")} className="font-semibold text-primary underline">request a custom route</a>.</p>
+        <p className="mt-4 text-sm"><a href="#request-quote" onClick={()=>onSelectItinerary("other")} className="font-semibold text-primary underline">Contact me for a customized itinerary</a>.</p>
       </section>}
     </>}
   </div>;

@@ -1082,14 +1082,14 @@
       "group": 13,
       "status": "edited",
       "changes": 23,
-      "notes": "All 23 approved group 13D edits applied, including user's preferred reply-soon acknowledgement. Shared sending text and passenger validations updated in both relevant contexts; form rules, schema, submission behavior unchanged. Verification pending."
+      "notes": "All 23 approved group 13D edits applied, including user's preferred reply-soon acknowledgement. Shared sending text and passenger validations updated in both relevant contexts; form rules, schema, submission behavior unchanged. Verification pending. Initial corpus 46016861847 reported 34 failures in six files caused by stale field, confirmation and validation-message expectations. Matched those expectations to approved text without changing test logic."
     },
     {
       "name": "Expandable and dynamically loaded content, filters, calendars and widgets",
       "group": 13,
-      "status": "pending",
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "changes": 21,
+      "notes": "All 21 approved group 13E copy changes applied; filter functions, links, prices, currency rates and widget behavior preserved. Final validation pending."
     }
   ]
 }

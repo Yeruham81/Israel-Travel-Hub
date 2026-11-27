@@ -186,7 +186,7 @@ describe("private Ben Gurion transfers", () => {
     chooseDestination("jerusalem");
     expect(screen.getByLabelText("Destination *")).toHaveValue("jerusalem");
     fireEvent.change(screen.getByLabelText("Passengers *"), { target: { value: "6" } });
-    expect(screen.getByText(/published car starting prices do not apply/)).toBeInTheDocument();
+    expect(screen.getByText(/I'll provide a customized quote for a suitable vehicle/)).toBeInTheDocument();
     chooseDestination("other");
     expect(screen.getByLabelText("City or destination *")).toBeRequired();
     expect(screen.getByLabelText("Destination *")).toHaveValue("other");
@@ -201,7 +201,7 @@ describe("private Ben Gurion transfers", () => {
     fillRequest();
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: "Private airport transfers from Ben Gurion Airport", request: { kind: "transfer", fields: { destinationId: "jerusalem", email: "jamie+trip@example.com", date: "2099-11-01", time: "23:45", flight: "LY123", address: "Example Hotel, Jerusalem", consent: true } } });
@@ -219,7 +219,7 @@ describe("private Ben Gurion transfers", () => {
     fillRequest(); fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("Message sending is temporarily unavailable");
     expect(screen.getByLabelText("Full name *")).toHaveValue("Jamie Smith");
-    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for your message")).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /Copy|Prepare/ })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Open email/ })).not.toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
@@ -244,7 +244,7 @@ describe("private Ben Gurion transfers", () => {
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
     const payload = JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body));
     expect(payload.request.kind).toBe("contact");
     expect(payload.request.fields).toMatchObject({ email: "jamie@example.com", subject: "Private transfer to Ben Gurion Airport" });
@@ -336,7 +336,7 @@ describe("transfer request validation", () => {
     const now = new Date("2026-10-17T14:00:00Z");
     expect(validateTransferQuote(good, now)).toEqual([]);
     expect(validateTransferQuote({ ...good, date: "2026-02-31" }, now)).toContain("Choose a valid flight arrival date.");
-    expect(validateTransferQuote({ ...good, date: "2026-10-17", time: "10:00" }, now)).toContain("That arrival time has already passed today in Israel.");
+    expect(validateTransferQuote({ ...good, date: "2026-10-17", time: "10:00" }, now)).toContain("Choose a flight time later than the current local time in Israel.");
     expect(validateTransferQuote({ ...good, passengers: "0", consent: false }, now)).toHaveLength(2);
     expect(validateTransferQuote({ ...good, destinationId: "other" }, now)).toContain("Enter the city or destination for your request.");
     const custom = { ...good, destinationId: "other", otherDestination: "Akko\r\nBcc: someone@example.com" };
