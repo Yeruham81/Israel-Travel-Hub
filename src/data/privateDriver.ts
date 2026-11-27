@@ -12,7 +12,7 @@ import deadSeaPhoto from "@/assets/dead-sea/beach-card.webp";
 const descriptions = {
   intercity: {
     title: "Hotel-to-hotel transfers",
-    text: "Travelling from one city to another? Enjoy a direct journey between your hotels with an agreed pickup time and room for your luggage.",
+    text: "Travel directly between hotels, with an agreed pickup time and space for your luggage.",
     photo: photos["haifa"]!,
   },
   "day-hire": {
@@ -27,7 +27,7 @@ const descriptions = {
   },
   "multi-stop": {
     title: "Multi-stop journeys",
-    text: "Travelling between cities? Add a visit to Caesarea or another stop along the way. I'll help plan your pickup, stops and final drop-off.",
+    text: "Add a visit to Caesarea or another attraction on your way from one city to the next.",
     photo: photos["caesarea"]!,
   },
 };
@@ -39,16 +39,16 @@ export const privateDriverHero = {
   label: "Scenic road to Jerusalem",
 };
 export const privateDriverBenefits = [
-  { title: "A route that fits your plans", text: "Choose your pickup, drop-off and favourite stops for a personalised itinerary." },
+  { title: "A route that fits your plans", text: "Choose where to start, which sights to visit and where to finish." },
   { title: "Space for your group", text: "Tell me how many passengers and bags you're travelling with so I can arrange a suitable vehicle." },
-  { title: "A clear quote before booking", text: "I'll confirm the itinerary, vehicle, total price and arrangements before you decide." },
+  { title: "A clear quote before booking", text: "I'll confirm your route, vehicle and total price before you book." },
 ];
 export const privateDriverFaqs = [
-  { q: "How is my private driver quote calculated?", a: "The price depends on your route, the hours needed, date, vehicle size and any special requests. I'll confirm the total and what it covers, including the agreed stops, waiting time, parking or tolls where relevant, before you book." },
-  { q: "Can I add stops or change the route during the journey?", a: "Yes, let's plan your preferred stops in advance so there is enough time to enjoy them. Changes on the day depend on the driver's availability and may affect the price, so please discuss them with me first." },
-  { q: "Is a licensed tour guide included?", a: "A private driver provides transport for your agreed route. Guided visits are a separate service. If you'd like a licensed guide, tell me the language and places you're interested in so I can check the options." },
+  { q: "How is my private driver quote calculated?", a: "The price depends on your route, date, vehicle size, hours and special requests. Before you book, I'll confirm the total price and explain whether it covers stops, waiting time, parking and tolls." },
+  { q: "Can I add stops or change the route during the journey?", a: "Yes, if the driver is available. Changes on the day may affect the price, so please discuss them with me first. Planning your stops in advance helps you make the most of your time." },
+  { q: "Is a licensed tour guide included?", a: "A licensed guide is arranged separately from your private driver. Tell me which sites you'd like to visit and your preferred language, and I'll check the options." },
   { q: "Can I request a larger vehicle, child seats or accessibility support?", a: "Please include your group size, children's ages, luggage and any accessibility needs. I'll check which vehicles and equipment are available for your date." },
-  { q: "How do payment, cancellation and extra hours work?", a: "I'll explain the payment and cancellation terms with your quote, along with any limits on hours or mileage and charges for extra time or stops. Your booking is confirmed only after we agree on the itinerary, vehicle, price and relevant terms." },
+  { q: "How do payment, cancellation and extra hours work?", a: "Your quote will explain payment, cancellation, any limits on hours or mileage, and charges for extra time or stops. Your booking is confirmed once we've agreed on the route, vehicle, price and terms." },
   { q: "Can I book a pickup from Ben Gurion Airport?", a: "Yes. For airport pickups, use my Airport Transfers page to see starting prices to popular destinations and request a quote for your arrival." },
 ];
 export const privateDriverGuides = [

@@ -19,7 +19,7 @@ async function renderAirport() {
 }
 function chooseDestination(id: string) {
   const card = screen.getAllByTestId("airport-destination-card").find((item) => item.dataset["destination"] === id)!;
-  fireEvent.click(within(card).getByRole("link", { name: /^(Get a quote|Request a quote|Get a quote Request a quote)$/ }));
+  fireEvent.click(within(card).getByRole("link", { name: "Get a quote" }));
 }
 function fillRequest() {
   fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie Smith" } });
@@ -74,16 +74,15 @@ describe("private Ben Gurion transfers", () => {
         expect(within(card).getByRole("img")).toHaveAttribute("src", airportHubPhotoSrc[rate.id]);
         expect(card).toHaveClass("flex-row", "sm:flex-col");
         expect(within(card).getByRole("img")).toHaveClass("w-16", "min-[380px]:w-[4.5rem]", "min-[440px]:w-[4.75rem]", "sm:w-40", "md:w-36", "lg:w-40");
-        expect(within(card).getByRole("link", { name: /^(Get a quote|Request a quote|Get a quote Request a quote)$/ })).toHaveClass("sm:self-end");
+        expect(within(card).getByRole("link", { name: "Get a quote" })).toHaveClass("sm:self-end");
         expect(within(card).getByRole("heading", { level: 3 })).toHaveClass("text-base", "sm:text-xl");
         expect(within(card).getByText(`From ₪${rate.price.amount.toLocaleString("en-US")}`)).toHaveClass("text-[13px]", "font-bold");
         const routeLink = within(card).getByRole("link", { name: /View transfer details/ });
         expect(router.matchRoutes(new URL(routeLink.getAttribute("href")!, "https://example.test").pathname).at(-1)?.routeId).toContain("airport-transfers");
       } else expect(within(card).getByRole("img")).toHaveAttribute("src", airportDestinationCards.find(item => item.id === rate.id)!.photo.hubSrc);
-      const quoteButton = within(card).getByRole("link", { name: /^(Get a quote|Request a quote|Get a quote Request a quote)$/ });
+      const quoteButton = within(card).getByRole("link", { name: "Get a quote" });
       expect(quoteButton).toHaveAttribute("href", "#request-quote");
-      expect(within(quoteButton).getByText("Get a quote")).toHaveClass("sm:hidden");
-      expect(within(quoteButton).getByText("Request a quote")).toHaveClass("hidden", "sm:inline");
+      expect(quoteButton).toHaveTextContent(/^Get a quote$/);
       expect(quoteButton).toHaveClass("bg-primary", "text-primary-foreground", "whitespace-nowrap", "shadow-sm", "min-h-11", "px-2", "sm:px-3");
       expect(quoteButton).toHaveClass("min-h-11");
       expect(quoteButton).not.toHaveClass("bg-primary/10");
@@ -133,7 +132,7 @@ describe("private Ben Gurion transfers", () => {
     expect(updateLine.querySelector("time")).toHaveAttribute("datetime", "2026-11-23");
     expect(rateTerms.querySelector("time")).toBeNull();
     expect(updateLine.compareDocumentPosition(popular)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(within(hubHeader).queryByRole("link", { name: "Request a personal quote" })).not.toBeInTheDocument();
+    expect(within(hubHeader).queryByRole("link", { name: "Get a quote" })).not.toBeInTheDocument();
   });
 
   it("uses the lean content order and preserves booking links, benefits, FAQ and guide navigation", async () => {
@@ -169,8 +168,8 @@ describe("private Ben Gurion transfers", () => {
     expect(within(checklist).getAllByRole("listitem")).toHaveLength(5);
     expect(checklist).toHaveTextContent("if you need them.");
     expect(checklist).not.toHaveTextContent("if your party needs them.");
-    expect(within(benefits).getByText(/Flight status is monitored/)).toBeInTheDocument();
-    expect(within(benefits).getByText(/Direct bookings can be cancelled free/)).toBeInTheDocument();
+    expect(within(benefits).getByText(/I track your flight and adjust pickup timing/)).toBeInTheDocument();
+    expect(within(benefits).getByText(/cancel a direct booking free of charge up to 24 hours before pickup/i)).toBeInTheDocument();
     for (const link of [...within(related).getAllByRole("link"), ...within(planning).getAllByRole("link")]) {
       const path = link.getAttribute("href")!;
       expect(router.matchRoutes(path).at(-1)?.routeId.replace(/\/$/, "")).toBe(path.replace(/\/$/, ""));
@@ -186,7 +185,7 @@ describe("private Ben Gurion transfers", () => {
     chooseDestination("jerusalem");
     expect(screen.getByLabelText("Destination *")).toHaveValue("jerusalem");
     fireEvent.change(screen.getByLabelText("Passengers *"), { target: { value: "6" } });
-    expect(screen.getByText(/published car starting prices do not apply/)).toBeInTheDocument();
+    expect(screen.getByText(/I'll provide a customized quote for a suitable vehicle/)).toBeInTheDocument();
     chooseDestination("other");
     expect(screen.getByLabelText("City or destination *")).toBeRequired();
     expect(screen.getByLabelText("Destination *")).toHaveValue("other");
@@ -201,7 +200,7 @@ describe("private Ben Gurion transfers", () => {
     fillRequest();
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: "Private airport transfers from Ben Gurion Airport", request: { kind: "transfer", fields: { destinationId: "jerusalem", email: "jamie+trip@example.com", date: "2099-11-01", time: "23:45", flight: "LY123", address: "Example Hotel, Jerusalem", consent: true } } });
@@ -219,7 +218,7 @@ describe("private Ben Gurion transfers", () => {
     fillRequest(); fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("Message sending is temporarily unavailable");
     expect(screen.getByLabelText("Full name *")).toHaveValue("Jamie Smith");
-    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for your message")).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /Copy|Prepare/ })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Open email/ })).not.toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
@@ -244,7 +243,7 @@ describe("private Ben Gurion transfers", () => {
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
     const payload = JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body));
     expect(payload.request.kind).toBe("contact");
     expect(payload.request.fields).toMatchObject({ email: "jamie@example.com", subject: "Private transfer to Ben Gurion Airport" });
@@ -320,8 +319,8 @@ describe("private Ben Gurion transfers", () => {
     }
     const providerSection = screen.getByRole("region", { name: "Prefer to book online?" });
     expect(providerSection).toHaveTextContent("You can also search for an airport transfer on one of the booking websites below.");
-    expect(providerSection).toHaveTextContent("Each provider sets its own prices and terms.");
-    expect(screen.getByTestId("airport-external-providers-note")).toHaveTextContent("Please review all details carefully before booking.");
+    expect(providerSection).toHaveTextContent("Each independent booking website sets its own prices and terms.");
+    expect(screen.getByTestId("airport-external-providers-note")).toHaveTextContent("Each independent booking website sets its own prices and terms. Check the details before booking.");
     expect(banners.every(banner => Boolean(banner.querySelector(".self-center")))).toBe(true);
     act(() => saveCookieConsent(ALL_CATEGORIES));
     fireEvent.click(banners[0]!);
@@ -336,7 +335,7 @@ describe("transfer request validation", () => {
     const now = new Date("2026-10-17T14:00:00Z");
     expect(validateTransferQuote(good, now)).toEqual([]);
     expect(validateTransferQuote({ ...good, date: "2026-02-31" }, now)).toContain("Choose a valid flight arrival date.");
-    expect(validateTransferQuote({ ...good, date: "2026-10-17", time: "10:00" }, now)).toContain("That arrival time has already passed today in Israel.");
+    expect(validateTransferQuote({ ...good, date: "2026-10-17", time: "10:00" }, now)).toContain("Choose a flight time later than the current local time in Israel.");
     expect(validateTransferQuote({ ...good, passengers: "0", consent: false }, now)).toHaveLength(2);
     expect(validateTransferQuote({ ...good, destinationId: "other" }, now)).toContain("Enter the city or destination for your request.");
     const custom = { ...good, destinationId: "other", otherDestination: "Akko\r\nBcc: someone@example.com" };

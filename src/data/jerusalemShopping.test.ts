@@ -11,7 +11,7 @@ describe("Jerusalem shopping guide editorial regression", () => {
     expect(new Set(shoppingTopPicks.map(pick => pick.id)).size).toBe(6);
     expect(shoppingTopPicks.every(pick => places.some(place => place.id === pick.id))).toBe(true);
     expect(shoppingDistricts.map(group => group.title)).toEqual([
-      "Old City & Mamilla", "City centre & markets", "South Jerusalem",
+      "Old City & Mamilla", "City center & markets", "South Jerusalem",
     ]);
     expect(places.every(place => shoppingDistricts.some(group => group.title === place.district))).toBe(true);
   });

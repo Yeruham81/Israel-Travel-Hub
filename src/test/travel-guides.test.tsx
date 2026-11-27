@@ -449,7 +449,7 @@ describe("migrated practical guides", () => {
     const nav = container.querySelector('nav[aria-label="On this page"]')!;
     expect(nav.querySelectorAll("ul.grid > li")).toHaveLength(11);
     expect(nav.querySelector('a[href="#leave-airport"]')).toHaveTextContent("Transport");
-    expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Me");
+    expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact me");
     expect(container.querySelector('[data-testid="stay-trip-photo-grid"]')?.querySelectorAll("li")).toHaveLength(6);
     expect(container.querySelector("#contact")).toHaveTextContent("Need a private airport pickup?");
     const sourceSection = container.querySelector("#sources");
@@ -479,7 +479,7 @@ describe("migrated practical guides", () => {
     const airportJump = nav.querySelector('a[href="#airport"].chip');
     expect(airportJump).toHaveTextContent("Airport taxis");
     expect(airportJump).toHaveAttribute("aria-label", "Airport taxis: Taking a Taxi from Ben Gurion Airport");
-    expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Me");
+    expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact me");
     const jumpItems = Array.from(nav.querySelectorAll("ul.grid > li"));
     expect(jumpItems).toHaveLength(10);
     expect(jumpItems.every((item) => !item.classList.contains("hidden"))).toBe(true);
@@ -497,7 +497,7 @@ describe("migrated practical guides", () => {
       const Page = route.options.component!;
       const { container, unmount } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
       const nav = container.querySelector('nav[aria-label="On this page"]') as HTMLElement;
-      expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Me");
+      expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact me");
       expect(container.querySelector("#checklist")).not.toBeNull();
       expect(container.querySelector('[data-photo-role="author-portrait"]')).not.toBeNull();
       expect(container.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
@@ -1247,7 +1247,7 @@ describe("migrated practical guides", () => {
     expect(within(container.querySelector("#compatibility") as HTMLElement).getByRole("link",{name:/Check whether your phone supports eSIM/})).toHaveAttribute("href",AIRALO_COMPATIBILITY_AFFILIATE_URL);
     expect(within(container.querySelector("#regional") as HTMLElement).getByRole("link",{name:/View Airalo's Middle East/})).toHaveAttribute("href",AIRALO_MENA_AFFILIATE_URL);
     expect(within(container.querySelector("#coverage") as HTMLElement).getByRole("link",{name:/Jerusalem to Bethlehem/})).toBeInTheDocument();
-    expect(container.querySelector('nav a[href="#contact"]')).toHaveTextContent("Contact Me");
+    expect(container.querySelector('nav a[href="#contact"]')).toHaveTextContent("Contact me");
     expect(within(screen.getByTestId("icon-trip-planning-links")).getAllByRole("link")).toHaveLength(6);
     expect(container.querySelector('form[aria-label="Guide contact message"]')).not.toBeNull();
     expect(container.querySelector("article")?.lastElementChild).toBe(container.querySelector("#sources"));

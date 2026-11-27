@@ -1,28 +1,32 @@
 /** Jerusalem churches visitor data, checked against the Christian Information Center's 15 September 2026 shrine listing and named site operators. Coordinates cross-checked against named site-location records. Do not infer that published access implies access during services. */
 export type ChurchArea = "old" | "olives" | "zion" | "karem";
 export type JerusalemChurch = {id:string;area:ChurchArea;name:string;tradition:string;description:string;highlight:string;hours:string;admission:string;tip:string;lat:number;lon:number;photo:string|null;feature:boolean;photoAlt:string;photoCredit?:string;photoSourceUrl?:string;photoLicenseUrl?:string;officialUrl?:string;officialLabel?:string};
-export type ChurchAreaInfo = {id:ChurchArea;title:string;intro:string;color:string};
+export type ChurchAreaInfo = {id:ChurchArea;title:string;intro:string;cardIntro:string;color:string};
 export const churchAreas:ChurchAreaInfo[] = [
   {
     "id": "old",
+    "cardIntro": "Holy Sepulchre, Via Dolorosa and historic churches.",
     "title": "Old City churches",
     "intro": "Start with the Church of the Holy Sepulchre and the Via Dolorosa, then choose smaller churches nearby. The alleys are walkable but include steps, crowds and uneven paving.",
     "color": "#2563eb"
   },
   {
     "id": "olives",
+    "cardIntro": "Gethsemane, Pater Noster and the Chapel of the Ascension.",
     "title": "Mount of Olives & Kidron Valley",
     "intro": "Gethsemane lies near the foot of the hill, while Pater Noster and the Chapel of the Ascension are higher. A downhill visit still involves steep sections.",
     "color": "#15803d"
   },
   {
     "id": "zion",
+    "cardIntro": "Dormition Abbey, the Cenacle and St Peter in Gallicantu.",
     "title": "Mount Zion churches",
     "intro": "Dormition Abbey, the Cenacle and St Peter in Gallicantu are close together, but each site has its own visiting hours and entry rules.",
     "color": "#b45309"
   },
   {
     "id": "karem",
+    "cardIntro": "Pilgrimage churches in a historic hillside village.",
     "title": "Ein Karem churches",
     "intro": "A separate journey west of central Jerusalem, with two major pilgrimage churches on different levels of the village.",
     "color": "#9333ea"
@@ -96,7 +100,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "highlight": "Oil lamps, patterned tiles and Armenian liturgy",
     "hours": "Mon–Fri and Sun 06:30–07:30; daily 15:00–15:30; Sat 06:30–10:00",
     "admission": "Confirm access",
-    "tip": "These short windows relate to worship; visiting is not equivalent to unrestricted tourist entry.",
+    "tip": "Visitors are usually admitted during these brief periods of worship. Respect the services and check access in advance.",
     "lat": 31.774616,
     "lon": 35.229058,
     "photo": "/images/jerusalem/churches/st-james.webp",
@@ -130,7 +134,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "area": "old",
     "name": "Ecce Homo Basilica",
     "tradition": "Roman Catholic · Sisters of Notre Dame de Sion",
-    "description": "A chapel along the Via Dolorosa associated with the Roman-period arch; the nearby Lithostrotos offers further archaeological context.",
+    "description": "A chapel along the Via Dolorosa near the Roman-period arch and the ancient pavement known as the Lithostrotos.",
     "highlight": "Ecce Homo arch and Lithostrotos",
     "hours": "Daily 08:00–17:00 for the Lithostrotos; Good Friday prayer only. Basilica is available for prayer and worship with separate arrangements.",
     "admission": "Check the site for any ticketed sections",
@@ -148,11 +152,11 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "area": "old",
     "name": "Christ Church Jerusalem",
     "tradition": "Anglican / evangelical",
-    "description": "A historic Protestant church near Jaffa Gate, with a heritage centre explaining the community's nineteenth-century history.",
-    "highlight": "Heritage centre and distinctive church interior",
+    "description": "A historic Protestant church near Jaffa Gate, with a heritage center explaining the community's nineteenth-century history.",
+    "highlight": "Heritage center and distinctive church interior",
     "hours": "Wed–Fri and Sun 09:00–15:00; closed Mon, Tue and Sat",
-    "admission": "Check heritage-centre arrangements",
-    "tip": "Groups must arrange visits with the heritage centre in advance.",
+    "admission": "Check heritage-center arrangements",
+    "tip": "Groups must arrange visits with the heritage center in advance.",
     "lat": 31.7761,
     "lon": 35.2291,
     "photo": "/images/jerusalem/churches/christ-church.webp",
@@ -249,7 +253,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "highlight": "Golden domes and icon-filled interior",
     "hours": "Tue, Thu and Sat 10:00–12:00",
     "admission": "Confirm on arrival",
-    "tip": "The narrow visitor window should shape your walking route.",
+    "tip": "Plan your walk around the church's short morning opening hours.",
     "lat": 31.778949,
     "lon": 35.240836,
     "photo": "/images/jerusalem/mount-of-olives/mary-magdalene-church.webp",
@@ -299,7 +303,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "highlight": "Underground sanctuary and icons",
     "hours": "Generally 08:00–18:00",
     "admission": "Check at the entrance",
-    "tip": "The long staircase can make this visit unsuitable for some mobility needs.",
+    "tip": "Visiting the tomb involves descending and climbing a long staircase.",
     "lat": 31.780344,
     "lon": 35.239488,
     "photo": "/images/jerusalem/churches/tomb-of-virgin-mary.webp",
@@ -333,7 +337,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "highlight": "Mosaics, archaeological spaces and views",
     "hours": "Mon–Sat 08:30–17:00; closed Sun; closed 25 Dec and 1 Jan",
     "admission": "Check on arrival",
-    "tip": "An accessible itinerary using inclined paths is available for visitors with reduced mobility; ask the sanctuary about suitable access and parking. Ancient steps remain uneven, and the claim that Jesus certainly used them exceeds the evidence.",
+    "tip": "Visitors with reduced mobility can use an accessible itinerary along sloping paths; ask the sanctuary about access and parking. The ancient steps are uneven, and it is uncertain whether Jesus used them.",
     "lat": 31.77139,
     "lon": 35.23194,
     "photo": "/images/jerusalem/mount-zion/st-peter-in-gallicantu.webp",
@@ -351,7 +355,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "highlight": "Gothic-style interior and layered history",
     "hours": "Generally 08:00–18:00; closed Yom Kippur",
     "admission": "General access normally free",
-    "tip": "This is a separate heritage site with different administration and permissions.",
+    "tip": "Check visiting and group prayer arrangements for the Upper Room separately from Dormition Abbey.",
     "lat": 31.771719,
     "lon": 35.229238,
     "photo": "/images/jerusalem/mount-zion/cenacle-upper-room.webp",
@@ -385,7 +389,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "highlight": "Traditional birth grotto and decorative tilework",
     "hours": "08:00–12:00 and 14:00–18:00 summer / until 17:00 winter; Sunday from 09:00; last entry 15 minutes early",
     "admission": "Generally free",
-    "tip": "Pair with the Visitation only if the climb and midday closing work for your group.",
+    "tip": "To visit both churches, allow time for the uphill walk to the Visitation and plan around its midday closure.",
     "lat": 31.76806,
     "lon": 35.16306,
     "photo": "/images/jerusalem/churches/st-john-baptist-ein-karem.webp",

@@ -61,7 +61,7 @@ describe("car rental guide and Travelpayouts search", () => {
     expect(contactSection.nextElementSibling).toBe(related);
     expect(within(alternative).queryByRole("link")).not.toBeInTheDocument();
     expect(within(contactSection).getByRole("heading", { name: "Need a private driver for your Israel journey?" })).toBeInTheDocument();
-    expect(within(form).getByRole("textbox", { name: "Your name *" })).toBeRequired();
+    expect(within(form).getByRole("textbox", { name: "Full name *" })).toBeRequired();
     expect(within(form).getByRole("textbox", { name: "Email address *" })).toBeRequired();
     expect(within(form).getByRole("textbox", { name: "Subject *" })).toHaveValue("");
     expect(within(form).getByRole("textbox", { name: "Your message *" })).toBeRequired();
@@ -100,6 +100,6 @@ describe("car rental guide and Travelpayouts search", () => {
     const frame = screen.getByTitle("DiscoverCars car rental search") as HTMLIFrameElement;
     fireEvent(window, new MessageEvent("message", { origin: window.location.origin, source: frame.contentWindow, data: { type: "itt-discovercars-error" } }));
     expect(screen.getByRole("status")).toHaveTextContent("temporarily unavailable");
-    expect(screen.getByRole("link", { name: "Compare cars on DiscoverCars" })).toHaveAttribute("rel", "sponsored noopener noreferrer");
+    expect(screen.getByRole("link", { name: "Compare car rental prices" })).toHaveAttribute("rel", "sponsored noopener noreferrer");
   });
 });

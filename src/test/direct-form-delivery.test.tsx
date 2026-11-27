@@ -24,7 +24,7 @@ async function contactForm(context: "homepage" | "about" = "homepage") {
 }
 
 function fill() {
-  for (const [label, value] of [["Your name *", fields.name], ["Email address *", fields.email], ["Subject *", fields.subject], ["Your message *", fields.message]]) fireEvent.change(screen.getByLabelText(label!), { target: { value } });
+  for (const [label, value] of [["Full name *", fields.name], ["Email address *", fields.email], ["Subject *", fields.subject], ["Your message *", fields.message]]) fireEvent.change(screen.getByLabelText(label!), { target: { value } });
   fireEvent.click(screen.getByRole("checkbox"));
 }
 
@@ -60,7 +60,7 @@ describe("one-step direct form delivery", () => {
     fill();
     expect(fetch).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
     expect(fetch).toHaveBeenCalledOnce();
     expect(fetch).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST", credentials: "same-origin" }));
     const payload = JSON.parse(fetch.mock.calls[0]![1].body);
@@ -72,7 +72,7 @@ describe("one-step direct form delivery", () => {
     expect(email.replyTo).toBe(fields.email);
     expect(email.senderName).toBe(fields.name);
     expect(email.html).toContain("<strong>Sent from page:</strong>");
-    expect(screen.getByText("I will reply soon to the email address you provided.")).toBeInTheDocument();
+    expect(screen.getByText("I'll reply soon to the email address you provided.")).toBeInTheDocument();
     expect(email.subject).toBe("Moshe Barak - Israel Taxi & Travel / " + fields.name);
     expect(email.text).not.toMatch(/campaign=|SEO title|#contact/);
     expect(screen.queryByText("Your Message Is Ready")).not.toBeInTheDocument();
@@ -91,9 +91,9 @@ describe("one-step direct form delivery", () => {
     expect(fetch).toHaveBeenCalledOnce();
     expect(screen.getByRole("button", { name: "Sending…" })).toBeDisabled();
     expect(screen.getByLabelText("Your message *")).toBeDisabled();
-    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for your message")).not.toBeInTheDocument();
     finish();
-    await screen.findByText("Thank you for contacting me");
+    await screen.findByText("Thank you for your message");
     fireEvent.submit(form);
     expect(fetch).toHaveBeenCalledOnce();
     expect(send).toHaveBeenCalledOnce();
@@ -106,7 +106,7 @@ describe("one-step direct form delivery", () => {
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("Message sending is temporarily unavailable");
     expect(screen.getByLabelText("Your message *")).toHaveValue(fields.message);
-    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for your message")).not.toBeInTheDocument();
     expect(fetch).toHaveBeenCalledOnce();
     expect(send).not.toHaveBeenCalled();
   });
@@ -139,7 +139,7 @@ describe("one-step direct form delivery", () => {
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("Email delivery could not be confirmed");
     expect(screen.getByRole("alert")).toHaveTextContent("Error code: BAD_RESPONSE (HTTP 200)");
-    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for your message")).not.toBeInTheDocument();
   });
 
   it.each([
@@ -157,6 +157,6 @@ describe("one-step direct form delivery", () => {
     expect(alert).toHaveTextContent(`Error code: ${code} (HTTP ${status})`);
     expect(alert).not.toHaveTextContent(/password|Private server diagnostic/);
     expect(screen.getByLabelText("Your message *")).toHaveValue(fields.message);
-    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for your message")).not.toBeInTheDocument();
   });
 });

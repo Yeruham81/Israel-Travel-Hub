@@ -56,7 +56,7 @@ export const expandedTravelGuides = {
         paragraphs: [
           "On an ordinary Shabbat, most regular trains and buses stop on Friday and resume on Saturday evening. The last Friday departure and the first Saturday-night service depend on the date and route. Check which trains and buses will be running by the time you leave the arrivals hall.",
           "Public transport schedules may also change during Jewish holidays. Yom Kippur is a special exception with major restrictions on airport flight operations, so consult the Israel Airports Authority and your airline when planning travel on that date. My calendar of Jewish holidays explains dates and their effect on visitors.",
-          "Allow time for passport control, baggage claim and customs before your next connection. My Ben Gurion Airport arrival tips explain each step. The Shabbat-times link below helps you understand the weekly calendar; use the transport timetables for actual train and bus departures.",
+          "Allow time for passport control, baggage claim and customs before your next connection. My Ben Gurion Airport arrival tips explain each step. Use the Shabbat-times link below to check when Shabbat starts and ends, and the transport timetables for train and bus departures.",
         ],
         inlineLinks: [{ text: "Jewish holidays", to: "/travel-blog/calendar-of-events/" }, { text: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival }],
         sourceIds: ["israel-rail", "guide-iaa"],
@@ -65,7 +65,7 @@ export const expandedTravelGuides = {
         id: "arrival-time",
         title: "Which option suits your arrival time?",
         paragraphs: [
-          "Allow time to clear passport control and collect your luggage before choosing your transport. The table below shows what is usually available at different points on Friday and Saturday; match any public-transport connection to the actual timetable for your date.",
+          "Allow time for passport control and baggage collection. Use the table below to compare your Friday and Saturday transport options, then check the timetable for your date.",
         ],
         tables: [{
           caption: "Plan by when your flight arrives",
@@ -96,7 +96,7 @@ export const expandedTravelGuides = {
             ["Rothschild Boulevard", "Hotels and apartments along Rothschild", "Check which stop on the boulevard best matches your address"],
             ["Habima Square", "Central Tel Aviv and the cultural district", "Continue to your hotel on foot or by a suitable local ride"],
             ["Dizengoff Center", "Dizengoff and surrounding central streets", "Check your hotel’s position north or south of the centre"],
-            ["Tel Aviv Museum", "The museum and nearby city-centre streets", "Plan the last connection for your actual address"],
+            ["Tel Aviv Museum", "The museum and nearby city-centre streets", "Plan how to reach your hotel from the stop"],
           ],
           note: "Check the stop-by-stop timetable for the current direction and stop names.",
         }],
@@ -107,7 +107,7 @@ export const expandedTravelGuides = {
         title: "How to reach bus 711 from Terminal 3",
         paragraphs: [
           "For international arrivals at Terminal 3, take the airport’s free inter-terminal shuttle to Terminal 1. The Israel Airports Authority lists an approximately 15-minute frequency around the clock, including Shabbat. Follow the three steps below from arrivals to the Line 711 stop.",
-          "The internal shuttle connects the two airport terminals; Line 711 then travels toward Tel Aviv. Allow extra time for the airport shuttle and the short walk to the Line 711 bus stop.",
+          "Allow extra time for the shuttle between the terminals and the short walk to the Line 711 stop.",
         ],
         sourceIds: ["guide-iaa", "guide-weekend-711"],
       },
@@ -140,7 +140,7 @@ export const expandedTravelGuides = {
         id: "rental-car",
         title: "Can I collect a rental car on Saturday?",
         paragraphs: [
-          "Possibly. Car rental desks have different opening hours on Saturdays and Jewish holidays. Confirm that you can collect your car when you arrive. Before booking, confirm the pickup location, opening hours and what happens if your flight is delayed.",
+          "It depends on the rental desk's opening hours. Before booking, check Saturday or holiday opening hours, the pickup location and what happens if your flight is delayed.",
           "A rental makes more sense if you are beginning a multi-stop trip than if you simply need a ride to central Tel Aviv. Include fuel, insurance, tolls and parking when comparing it with an airport taxi. You can compare available cars on DiscoverCars.",
         ],
         inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }],
@@ -165,8 +165,8 @@ export const expandedTravelGuides = {
           headers: ["Destination", "Options during the main Shabbat break", "Check first"],
           rows: [
             ["Central Tel Aviv", "Free Line 711, official taxi or confirmed transfer", "Bus time, Terminal 1 stop and last leg to the hotel"],
-            ["Jerusalem", "Metered taxi, confirmed transfer or collectable rental car", "Final address and the first train after Shabbat"],
-            ["Haifa", "Metered taxi, confirmed transfer or collectable rental car", "Travel time, luggage and car availability"],
+            ["Jerusalem", "Metered taxi, confirmed transfer or rental car if available", "Final address and the first train after Shabbat"],
+            ["Haifa", "Metered taxi, confirmed transfer or rental car if available", "Travel time, luggage and car availability"],
             ["Ein Bokek / Dead Sea", "Confirmed direct ride or suitable rental car; taxi may be possible", "Exact resort address and long-distance quote"],
             ["Nazareth, Tiberias / Galilee", "Confirmed direct ride or suitable rental car; taxi may be possible", "Arrival time and accommodation access"],
           ],
@@ -208,8 +208,8 @@ export const expandedTravelGuides = {
       { q: "Does Line 711 pick up directly at Terminal 3?", a: "No. It serves Terminal 1; follow the airport shuttle steps above and check the stop and direction on the operator's timetable." },
       { q: "When is the last Line 711 bus from the airport on Saturday?", a: "Check the timetable for the last bus from Terminal 1 toward Tel Aviv. The published operating hours cover the entire route." },
       { q: "Is Line 711 suitable for passengers using wheelchairs?", a: "The operator requests accessible-trip coordination on 03-7313911 at least three hours before pickup. Confirm the complete route, including the terminal shuttle and your destination." },
-      { q: "Is a taxi or private transfer cheaper to Jerusalem on Shabbat?", a: "Neither is always cheaper. Compare the estimated metered taxi fare with a written private-transfer quote for your exact pickup time, address, party and luggage." },
-      { q: "Can I take a train after Shabbat ends?", a: "Possibly. Check the first actual departure for your Saturday date and route, allowing enough time to leave arrivals and make your final connection." },
+      { q: "Is a taxi or private transfer cheaper to Jerusalem on Shabbat?", a: "Compare the estimated metered taxi fare with a private-transfer quote for your pickup time, destination, passengers and luggage." },
+      { q: "Can I take a train after Shabbat ends?", a: "Yes, once trains resume on Saturday evening. Check the first departure to your destination and allow time to leave arrivals and reach your hotel." },
       { q: "Can I travel to Ben Gurion Airport during Shabbat?", a: "Yes. Check Line 711 toward Shoham and the free transfer from Terminal 1 to Terminal 3, or arrange a licensed taxi or confirmed private ride." },
     ],
     sourceIds: ["guide-weekend-711", "guide-weekend-timetable", "guide-gett", "guide-iaa", "israel-rail", "taxi-fares-2026"],

@@ -228,7 +228,7 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
     }
     expect(screen.getByTestId("sources")).toHaveAttribute("data-intro", region === "jerusalem"
       ? "Transport and access information for planning your stay."
-      : "Neighbourhood and accommodation information for planning your stay.");
+      : "Neighborhood and accommodation information for planning your stay.");
     expect(container).not.toHaveTextContent("Use these short summaries to narrow your options");
     expect(container).not.toHaveTextContent("Hotel selections are kept separately under Accommodation");
     expect(within(screen.getByTestId("city-neighborhood-editorial")).getByTestId("trip-links-props")).toHaveAttribute("data-presentation", "guide");

@@ -79,7 +79,7 @@ describe("Tabgha visitor guide follows the individual-attraction template", () =
     expect(article).toContain("https://bus.gov.il/en/home");
     expect(article).not.toContain("https://bus.gov.il/en/Geographic-Area");
     expect(article).toContain("Follow the signs to each Tabgha site.");
-    expect(article).toContain("You can reach Tabgha by bus from Tiberias");
+    expect(article).toContain("Buses from Tiberias serve Tabgha");
     expect(article).toContain('to="/car-rental/"');
     expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain("joining an <Link to=\"/tours/nazareth-sea-of-galilee/\"");

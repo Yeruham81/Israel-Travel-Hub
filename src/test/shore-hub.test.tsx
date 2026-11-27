@@ -76,8 +76,8 @@ describe("Israel shore excursion hub", () => {
     expect(bottomChoices[1]).toHaveAttribute("href", "/shore-excursions/haifa/#request-quote");
     expect(screen.getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
     const ports = screen.getByRole("list", { name: "Cruise port excursion guides" });
-    expect(ports).toHaveTextContent("A great starting point for visiting some of Israel's major attractions.");
-    expect(ports).toHaveTextContent("The ideal location for touring the northern coast and Galilee region.");
+    expect(ports).toHaveTextContent("A convenient starting point for Jerusalem, Tel Aviv, Jaffa and the Dead Sea.");
+    expect(ports).toHaveTextContent("A convenient gateway to Acre, Nazareth, the Sea of Galilee and Israel's northern coast.");
     expect([...ports.querySelectorAll("img")].map(image => image.getAttribute("src")))
       .toEqual(expect.arrayContaining([expect.stringMatching(/ashdod-shore-excursions/), expect.stringMatching(/haifa-shore-excursions/)]));
     expect(screen.queryByText(/Pickup arrangements differ:/)).not.toBeInTheDocument();

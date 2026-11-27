@@ -553,11 +553,11 @@ describe("Jerusalem direct hotel catalog", () => {
     expect(areaGuide.querySelector("img")).toHaveAttribute("src", jerusalemEditorialHero);
     expect(within(areaGuide).getByRole("link", { name: /Compare neighborhoods/i })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
     const neighborhoodCards = neighborhoodSection.querySelector("ul")!;
-    const firstTip = within(neighborhoodSection).getByText("Think about the last walk.").closest("div")!;
+    const firstTip = within(neighborhoodSection).getByText("Consider the walk to your hotel.").closest("div")!;
     const secondTip = within(neighborhoodSection).getByText("Check your dates.").closest("div")!;
     expect(neighborhoodCards.compareDocumentPosition(firstTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(firstTip.compareDocumentPosition(secondTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(within(comparison as HTMLElement).getByText(/Compare the accommodation range and luggage access/)).toBeInTheDocument();
+    expect(within(comparison as HTMLElement).getByText(/Compare accommodation styles and luggage access/)).toBeInTheDocument();
     expect(within(comparison as HTMLElement).getAllByRole("link", { name: "Browse hotels" })).toHaveLength(6);
     expect(screen.getByTestId("stay-local-photo-grid").querySelectorAll("a")).toHaveLength(6);
     expect(screen.getByRole("img", { name: "Jaffa Gate and Jerusalem Old City walls" })).toBeInTheDocument();

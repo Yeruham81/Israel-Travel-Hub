@@ -220,7 +220,7 @@ describe("migrated Israel itineraries", () => {
     expect(widget).not.toContain("Optional tours and activities from GetYourGuide (affiliate).");
     expect(widget).not.toContain("I may earn a commission if you book through this widget.");
     expect(widget).toContain("getYourGuideCityWidgetSrc(city, page)");
-    expect(footer).toContain("Some links on this page are affiliate links");
+    expect(footer).toContain("This website contains affiliate links");
     expect(tours).toContain("Use a guided Masada and Dead Sea tour for your desert day");
     expect(tours).not.toContain("not additional stops to fit into it");
     expect(tours).toContain("<ExternalProviderTourCard");
@@ -553,7 +553,7 @@ describe("migrated Israel itineraries", () => {
     expect(g.hotelBases).toContain("Haifa after Day 7");
     expect(g.daysPlan[6]?.evening).toContain("continue to Tel Aviv instead");
     expect(g.daysPlan[3]?.afternoon).toContain("Check Magdala’s visiting hours before adding this stop");
-    expect(g.daysPlan[4]?.afternoon).toContain("allow time for short drives and separate entrances");
+    expect(g.daysPlan[4]?.afternoon).toMatch(/allow time for short drives and separate entrances/i);
     expect(g.daysPlan[5]?.morning).toContain("Arbel National Park");
     expect(g.daySequences?.[5]?.steps[0]?.stop).toContain("Arbel");
     expect(g.overviewRows?.[6]?.travel).toContain("Road/bus to Akko");
@@ -588,7 +588,7 @@ describe("migrated Israel itineraries", () => {
     expect(view).toContain("presentation.transferDays.includes(index + 1)");
     expect(view).toContain("const compactOverview = true");
     expect(g.alternatives).toHaveLength(2);
-    expect(g.alternatives[0]?.text).toContain("separate 10-day route");
+    expect(g.alternatives[0]?.text).toMatch(/southern 10-day route.*replace the Galilee and Haifa with Eilat and Timna/i);
     expect(g.southernRouteOverview).toHaveLength(5);
     expect(g.southernRouteOverview?.[2]?.focus).toContain("Timna Park");
     expect(view).toContain("Southern ten-day alternative at a glance");

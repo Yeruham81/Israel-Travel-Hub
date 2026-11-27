@@ -61,8 +61,8 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         photo: cityPhoto,
         paragraphs: [
           "In major cities such as Tel Aviv, Jerusalem and Haifa, you can often hail a licensed taxi on the street. Give the driver your destination address and confirm the payment method and use of the meter before setting off. During busy periods or in remote areas, booking a taxi may be more reliable.",
-          "You'll find taxi stands near many hotels, railway stations, hospitals and shopping centres. A hotel or local dispatcher can also arrange a pickup; ask whether a regulated ordering addition applies and keep a dispatcher's phone number or your hotel address available offline.",
-          "Taxi apps let you enter your pickup location and view the driver's details and your ride history. Enter the correct pickup address, wait for driver confirmation and check whether the displayed price is an estimate or a fixed offer. My Uber, Gett and Yango guide explains which taxi apps you can use in Israel.",
+          "You'll find taxi stands near many hotels, railway stations, hospitals and shopping centers. You can also ask your hotel or a local dispatcher to arrange a pickup. Ask whether the official booking fee applies, and save the dispatcher's phone number or your hotel address for offline use.",
+          "Enter your pickup address in the taxi app, check whether the fare is estimated or fixed, and wait for a driver to confirm. The app also shows your driver's details and ride history. My Uber, Gett and Yango guide explains which taxi apps you can use in Israel.",
           "A private transfer is booked in advance, usually with an agreed vehicle, pickup point and price. Check what's included in the price and ask for booking confirmation.",
         ],
         inlineLinks: [{ text: "Uber, Gett and Yango guide", to: travelGuidePaths.uber }],
@@ -134,7 +134,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "Taxi fares are charged in Israeli shekels. Cash is widely accepted, while card and app payments depend on the provider. Check the method before departure, and avoid paying again in the cab for an app-paid trip.",
           "Tipping is optional in Israel. You can round up the fare if you're happy with the service. Keep your receipt and ride details in case you leave something behind or need to question a charge.",
-          "Drivers cannot add unofficial fees for luggage or passengers travelling within the taxi's permitted capacity. Only regulated extras may be charged. Ordinary special-taxi journeys generally use the meter, although there are specific intercity exceptions for officially listed fixed fares. Confirm how your fare will be calculated before the ride.",
+          "Drivers cannot add unofficial fees for luggage or passengers travelling within the taxi's permitted capacity. Only regulated extras may be charged. Regular private taxi rides generally use the meter, except on certain intercity routes with officially listed fixed fares. Confirm how your fare will be calculated before the ride.",
         ],
         sourceIds: ["taxi-passenger-rights"],
       },
@@ -187,7 +187,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     faqs: [
       { q: "Can I book a taxi without a smartphone?", a: "Yes. Hail a licensed taxi, use a taxi stand, ask your accommodation to call a dispatcher or arrange a pickup by phone." },
       { q: "Can I pay for a taxi by credit card?", a: "Card and in-app payments depend on the provider and vehicle. Confirm your preferred method when ordering or before departure; cash in shekels is widely accepted." },
-      { q: "Do drivers usually speak English?", a: "English proficiency varies. Keep your destination address and map pin ready, preferably also in Hebrew." },
+      { q: "Do drivers usually speak English?", a: "Some drivers speak English. Keep your destination address and map pin handy, with the address in Hebrew if possible." },
       { q: "Can I arrange a child seat or wheelchair-accessible taxi?", a: "Yes, through an operator that provides the right vehicle or equipment. Confirm the exact requirements and availability in advance." },
       { q: "Can I take a taxi to the Dead Sea or a remote destination?", a: "Yes. For long journeys, confirm the destination and return plan before departure. My airport and intercity guides compare taxis with other transport choices." },
       { q: "How do I report lost property or a driver complaint?", a: "Keep the taxi's licence number, receipt and booking details. Contact the operator for lost items or the Ministry of Transport for a formal complaint." },
@@ -237,7 +237,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "tariff-hours",
         title: "When do daytime, night and Shabbat tariffs apply?",
         paragraphs: [
-          "Tariff A is the lowest, B the middle and C the highest. The applicable tariff is determined by the day and local clock time in Israel.",
+          "Tariff A is the cheapest, B is higher and C is the most expensive. The rate depends on the day and time in Israel.",
           "The schedule below also covers Friday evenings, Shabbat and recognized holidays. Use Israel's calendar of events for holiday dates and my airport Shabbat guide for transport alternatives.",
         ],
         inlineLinks: [
@@ -285,7 +285,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "Example 1: A 5 km ride taking 15 minutes under Tariff A costs approximately ₪51.40, excluding extra charges.",
           "Example 2: A 12 km ride taking 25 minutes under Tariff B costs approximately ₪102.59. The final 2 km use the higher distance rate, while the time charge continues throughout the ride.",
-          "These are examples, not guaranteed prices. Actual fares depend on your journey and any permitted extra charges. Calculations use the official rates before final rounding, so adding displayed rounded rates may produce a small difference.",
+          "Your fare will depend on the journey and any permitted extra charges. The examples use the official rates before rounding; using the rounded rates in the table may give a slightly different total.",
         ],
         sourceIds: ["taxi-fares-2026"],
       },
@@ -293,7 +293,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "estimates", title: "Metered taxis, app estimates and pre-booked transfers",
         paragraphs: [
           "Taxi apps may show an estimated fare before pickup. On metered rides, the final price follows the regulated tariff, including any permitted extras. Check the pricing terms when booking and keep the final receipt. My taxis in Israel guide explains booking methods; the Uber alternatives guide compares available apps.",
-          "A separately arranged private transfer can offer a confirmed written price, vehicle type and meeting instructions. Compare the quoted inclusions, waiting time, tolls and cancellation terms. My Ben Gurion Airport taxis guide includes illustrative fares to four destinations. For a wider comparison of taxis with trains and buses, see my getting around Israel guide.",
+          "With a pre-booked private transfer, you can agree on the price in writing, vehicle type and pickup details. Check what the price covers, including waiting time and tolls, and review the cancellation terms. My Ben Gurion Airport taxis guide includes illustrative fares to four destinations. For a wider comparison of taxis with trains and buses, see my getting around Israel guide.",
         ],
         inlineLinks: [
           { text: "taxis in Israel guide", to: travelGuidePaths.taxis },
@@ -307,7 +307,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "disputes",
         title: "Checking your fare and avoiding overcharges",
         paragraphs: [
-          "Before starting, confirm that the taxi is licensed, the meter is running and any additional charges are explained. For a metered ride, the meter should be visible and used as required.",
+          "Before setting off, check that the taxi is licensed and ask about extra charges. On a metered ride, make sure the meter is running and visible.",
           "Keep your receipt, trip date, route and taxi number in case you need to question a charge. Ask the driver or booking service to explain the charge. If necessary, submit a complaint to the Ministry of Transport.",
         ],
         highlightedLinks: [{
@@ -407,7 +407,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "Authorized Ben Gurion Airport taxis run on the regulated meter. The fare depends on distance, driving time, the applicable A, B or C tariff and permitted extra charges. Traffic delays therefore affect the final amount.",
           "Under the temporary tariff introduced in April 2026, the standard meter starts at ₪12.46 including VAT and a ₪5 addition applies when departing Ben Gurion Airport. The table below offers daytime meter estimates based on route distance and driving time. For tariff hours, per-kilometer rates and permitted extras, see my taxi fares in Israel guide.",
-          "The meter is used for the official taxi queue and scheduled Gett taxis. A separately arranged private transfer follows the written quote and terms agreed with its provider.",
+          "Both taxis from the official queue and pre-booked Gett taxis use the meter. With a private transfer, the price and booking terms are agreed in writing with the provider.",
         ],
         inlineLinks: [{ text: "taxi fares in Israel guide", to: travelGuidePaths.taxiFares }],
         tables: [airportTaxiEstimateTable],
@@ -428,7 +428,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "special", title: "Luggage, child seats and accessible taxis",
         paragraphs: [
-          "For several large cases, a stroller or more than four passengers, arrange a taxi with enough luggage space and seats. Tell the operator what you are carrying before your pickup.",
+          "If you have several large suitcases, a stroller or more than four passengers, request a larger taxi. Tell the operator how many passengers and bags you have before pickup.",
           "At Terminal 3, ramp-equipped wheelchair-accessible taxis can be requested in the Gett app, at the terminal's self-service taxi kiosks or through the dispatcher at the official queue near Exit 03. For specific wheelchair space or boarding needs, arrange assistance in advance.",
           "If a child restraint is required, request the correct seat for your child's age and size before your journey. Airline or airport assistance inside the terminal is arranged separately from the taxi ride.",
         ],
@@ -453,8 +453,8 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "versus-transfer", title: "Official airport taxi or pre-booked private transfer?",
         paragraphs: [
-          "An official airport taxi is a convenient option for passengers with standard luggage. I recommend considering a pre-booked private transfer for a larger group, a particular vehicle, several suitcases or a long journey where you prefer the pickup and price arrangements agreed ahead of time.",
-          "Private transfers are booked with their own operator and have a confirmed meeting place, vehicle class and waiting terms. Follow the meeting instructions in your booking confirmation. You can compare my private airport transfer service and request a quote. For taxi apps elsewhere in Israel, my Uber in Israel guide explains Gett, Yango and current ride-hailing options.",
+          "An official airport taxi is a convenient choice if you have standard luggage. I recommend a pre-booked private transfer if you're travelling in a larger group, need a specific vehicle or extra luggage space, or prefer to agree on the pickup and price for a long journey in advance.",
+          "Book directly with the private transfer operator and agree on the meeting point, vehicle type and waiting policy. Follow the pickup instructions in your confirmation. You can find details of my private airport transfer service and request a quote. For taxi apps elsewhere in Israel, my Uber in Israel guide explains Gett, Yango and current ride-hailing options.",
         ],
         tables: [{
           caption: "Compare your airport pickup options",
@@ -480,7 +480,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "support", title: "Receipts, lost property and Gett support",
         paragraphs: [
-          "For an item left in a taxi or a problem with your fare, keep the ride code, receipt, trip date and taxi registration number. Gett provides customer-service chat through its app and website. For kiosk bookings, phone *2299 using the number entered when ordering.",
+          "If you leave something in the taxi or have a question about your fare, keep the ride code, receipt, travel date and taxi registration number. Contact Gett through the app or website chat. For kiosk bookings, call *2299 from the number you used to book.",
           "For a formal complaint about a licensed taxi, use the Ministry of Transport complaint service. Airline baggage missing before you leave the airport is handled by the airline; my arrival guide explains that process.",
         ],
         inlineLinks: [{ text: "arrival guide", to: travelGuidePaths.arrival }],
@@ -498,7 +498,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       "Keep your booking, preferred payment method and fare receipt",
     ],
     faqs: [
-      { q: "What happens if my flight is delayed?", a: "For a scheduled Gett ride, enter your flight number so pickup timing can follow flight updates. If the change is substantial, use the contact or chat option in your booking." },
+      { q: "What happens if my flight is delayed?", a: "When scheduling a Gett ride, enter your flight number so Gett can adjust the pickup time if your flight is delayed. For a major delay, use the contact or chat option in your booking." },
       { q: "Can I order a taxi without an Israeli mobile number?", a: "You can use an airport self-service kiosk without downloading Gett. Make sure you can receive the ride code and any service messages on the number you provide; ask the dispatcher for help if necessary." },
       { q: "Can I request a wheelchair-accessible taxi?", a: "At Terminal 3, ramp-equipped vehicles can be requested through Gett, a taxi kiosk or the official dispatcher. For specific wheelchair and boarding requirements, arrange assistance in advance." },
       { q: "What if I leave something in the taxi?", a: "Contact Gett through its customer-service chat, or call *2299 if your order was placed at a kiosk. Have your ride code, trip details and receipt ready." },

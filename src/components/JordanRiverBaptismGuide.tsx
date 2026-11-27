@@ -101,7 +101,6 @@ function TourSection({group}:{group:typeof baptismTourGroups[number]}) {
     </div>;
    })}
   </div>
-  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Check current prices, availability, the exact river stop, pickup and cancellation terms with the tour provider. Arrange any baptism ceremony, clergy or Qasr el-Yahud visitor reservation separately.</p>
  </section>;
 }
 export function JordanRiverBaptismGuidePage() {
@@ -111,7 +110,7 @@ export function JordanRiverBaptismGuidePage() {
    <GuideHeroLayout image={<GuideHeroMedia src={BAPTISM_HERO.src} alt={BAPTISM_HERO.alt} width={640} height={400}/>}>
     <p className="text-xs font-bold uppercase tracking-wider text-primary">My Holy Land pilgrimage guide</p>
     <h1 className="guide-page-title mt-2">{BAPTISM_TITLE}</h1>
-    <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">If you're planning a baptism or a visit to the Jordan River, choosing the right site is the first step. I'll help you compare Yardenit and Qasr el-Yahud, arrange the practical details and plan a journey that fits your time in Israel.</p>
+    <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">Planning a baptism or a visit to the Jordan River? I'll explain the differences between Yardenit and Qasr el-Yahud and help you plan your visit.</p>
     <PageUpdated date={BAPTISM_UPDATED}/>
    </GuideHeroLayout>
    <AuthorCard/>
@@ -122,7 +121,7 @@ export function JordanRiverBaptismGuidePage() {
   </section>
   <OnThisPage sections={toc}/>
   <section id="compare-sites" className="mt-11 scroll-mt-24" aria-labelledby="compare-sites-heading">
-   <Heading id="compare-sites" intro="The two sites are on different stretches of the river, far apart. I recommend choosing by religious meaning, travel region and the facilities you need.">Yardenit or Qasr el-Yahud: which site should you visit?</Heading>
+   <Heading id="compare-sites" intro="The two sites are far apart. Choose according to their religious significance, your itinerary and the facilities you need.">Yardenit or Qasr el-Yahud: which site should you visit?</Heading>
    
    <div role="region" tabIndex={0} aria-label="Jordan River baptism site comparison" className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" data-testid="baptism-site-comparison">
     <table className="w-full min-w-[640px] text-left text-sm leading-relaxed"><caption className="sr-only">Comparison of Yardenit and Qasr el-Yahud</caption><thead className="bg-secondary/60"><tr><th scope="col" className="p-3">Compare</th><th scope="col" className="p-3">Yardenit</th><th scope="col" className="p-3">Qasr el-Yahud</th></tr></thead><tbody>
@@ -140,7 +139,7 @@ export function JordanRiverBaptismGuidePage() {
   </section>
   <section id="yardenit" className="mt-12 scroll-mt-24" aria-labelledby="yardenit-heading">
    <Heading id="yardenit" intro="An established, peaceful baptism setting near Kibbutz Kinneret.">Yardenit: baptism near the Sea of Galilee</Heading>
-   <p className="leading-relaxed">At Yardenit, designated steps lead to the Jordan River and visitors can use changing facilities and riverside spaces. According to the operator, general entry and conducting a baptism are free. A special white robe is required, available to rent or buy, and certain facilities cost extra. There is no resident priest, but the operator can provide clergy contacts. Groups of up to 40 can visit without arranging their visit in advance. Larger groups should contact Yardenit beforehand. <a href={yardenitSite.sources.faq} target="_blank" rel="noopener noreferrer" className={linkClass}>See the official questions and answers</a>.</p>
+   <p className="leading-relaxed">At Yardenit, designated steps lead to the Jordan River and visitors can use changing facilities and riverside spaces. Admission and baptism are free. A special white robe is required, available to rent or buy, and certain facilities cost extra. There is no resident priest, but the operator can provide clergy contacts. Groups of up to 40 can visit without advance booking. Larger groups should contact Yardenit beforehand. <a href={yardenitSite.sources.faq} target="_blank" rel="noopener noreferrer" className={linkClass}>See the official questions and answers</a>.</p>
    <div className="mt-5 grid items-start gap-5 sm:grid-cols-2" data-testid="baptism-yardenit-photo-facts">
     <img src={yardenitSite.hero.src} alt={yardenitSite.hero.alt} width={620} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full rounded-xl object-cover"/>
     <div className="rounded-xl border bg-card p-4">
@@ -195,6 +194,7 @@ export function JordanRiverBaptismGuidePage() {
    <p className="mt-4 text-sm leading-relaxed">For private transport, <a href="#contact" className={linkClass}>tell me your chosen site, date, departure point and ceremony time</a>. I can discuss a driver, waiting time and practical stops. Guiding and religious services should be arranged separately.</p>
   </section>
   {baptismTourGroups.map(group=><TourSection key={group.id} group={group}/>)}
+  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Check current prices, availability, the exact river stop, pickup and cancellation terms with the tour provider. Arrange any baptism ceremony, clergy or Qasr el-Yahud visitor reservation separately.</p>
   <section id="practical-tips" className="mt-12 scroll-mt-24" aria-labelledby="practical-tips-heading">
    <Heading id="practical-tips" intro="A little preparation can make a religious visit more meaningful and comfortable.">My practical tips</Heading>
    <div className="grid gap-3 sm:grid-cols-2">{[

@@ -38,7 +38,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     booking: "General visits usually do not require booking; check current exhibitions.",
     intro: "Haifa's principal contemporary-art museum presents changing Israeli and international exhibitions in a historic building at the meeting point of Hadar and Wadi Nisnas. The displays vary, so I would check what's on before choosing a visit.",
     highlights: ["Rotating contemporary exhibitions, including photography, video and installation art.", "A good cultural stop to combine with Wadi Nisnas and the lower-city streets."],
-    tip: "Look at the current exhibition programme first. This museum is about changing displays, so one visit can feel very different from another.",
+    tip: "Check the current exhibition programme before choosing when to visit.",
     url: "https://www.hma.org.il/eng", featured: true
   },
   {
@@ -63,7 +63,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     intro: "Inside the historic Haifa East station complex, the Railway Museum traces rail travel from Ottoman and British Mandate lines to the modern railway system. Its surviving locomotives and carriages are the main draw.",
     highlights: ["Historic engines, passenger carriages and railway equipment.", "The story of the old Jezreel Valley Railway and Haifa East station."],
     highlightsForFamilies: "Families interested in trains often enjoy this more than a conventional history gallery.",
-    tip: "The museum entrance is not at Haifa Merkaz HaShmona station. Use the museum's own arrival directions and leave extra time to reach Haifa East.",
+    tip: "The museum entrance is at historic Haifa East station. Follow the museum's arrival directions and allow time to get there.",
     url: "https://rail.co.il/?lan=en&page=museum", ticketUrl: "https://rail.co.il/?lan=en&page=museum-hours", featured: true
   },
   {
@@ -83,7 +83,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     id: "struck", mapLocation: {lat:32.80469,lon:35.00056}, name: "Hermann Struck Museum", area: "hadar", neighbourhood: "Hadar HaCarmel",
     address: "23 Arlozorov Street, Haifa", theme: "Printmaking & artists' house",
     bestFor: "Historic interiors, prints and intimate exhibitions", duration: "45–75 minutes", priceNis: 0,
-    admission: "Free general admission according to Haifa Museums; check separately for workshops or special activities.",
+    admission: "General admission is free. Workshops and special activities may incur additional charges.",
     openingDays: "Usually Sun, Tue–Wed 10:00–16:00; Thu 10:00–18:00; Fri 10:00–14:00. Mon and Sat closed.",
     booking: "Check the exhibition programme and access arrangements.",
     intro: "Housed in artist Hermann Struck's former home, this smaller museum introduces his printmaking work, personal objects and the artistic world of the early twentieth century. Exhibitions also explore different printmaking techniques.",
@@ -98,7 +98,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     admission: "Adult ₪40 on the municipal price list; discounts and combined tickets vary.",
     openingDays: "Sun, Tue–Wed, Sat 10:00–16:00; Thu 10:00–18:00; Fri 10:00–14:00. Mon closed.",
     booking: "General visits usually do not require booking; check workshops and special events separately.",
-    intro: "A dedicated museum of Japanese art on the Carmel ridge, Tikotin shows prints, ceramics, textiles and other works through changing exhibitions. It offers a different cultural experience from Haifa's history and maritime collections.",
+    intro: "A dedicated museum of Japanese art on the Carmel ridge, Tikotin shows prints, ceramics, textiles and other works through changing exhibitions.",
     highlights: ["Japanese prints, decorative arts and thoughtfully curated temporary displays.", "Japanese cultural events and workshops on selected dates."],
     tip: "Pair it with a Carmel Centre walk and a viewpoint. Check if a special workshop is scheduled during your stay.",
     url: "https://www.tmja.org.il/eng", featured: true
@@ -108,7 +108,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     address: "89 Yefe Nof Street, Haifa", theme: "Artist's home & Jewish art",
     bestFor: "École de Paris painting and personal collections", duration: "45–75 minutes when open",
     admission: "Closed for renovation; admission will need reconfirmation when it reopens.",
-    openingDays: "Closed for renovation according to Haifa Museums.",
+    openingDays: "Temporarily closed for renovation.",
     booking: "Do not plan an interior visit until the operator announces reopening.",
     intro: "The museum is dedicated to the painter Mané-Katz and the collection he left to Haifa. Works from the collection may be shown elsewhere while the historic museum undergoes renovation.",
     highlights: ["Mané-Katz paintings and works relating to the School of Paris.", "Jewish ceremonial objects and the artist's personal collection when the museum reopens."],
@@ -125,7 +125,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     booking: "General entry is free; confirm access to particular galleries and groups in advance.",
     intro: "The Reuben and Edith Hecht Museum is inside the University of Haifa campus. Archaeological finds, ancient crafts, the Ma'agan Michael shipwreck and art galleries make it a rewarding stop for visitors interested in the region's long history.",
     highlights: ["Archaeology from the Canaanite period onwards and displays of ancient daily life.", "The ancient Ma'agan Michael ship exhibition and art collections."],
-    tip: "Allow time for the journey to the university high above the centre. I recommend visiting the Hecht Museum separately from Tikotin and the German Colony.",
+    tip: "Allow time for the journey to the university high above the center. I recommend visiting the Hecht Museum separately from Tikotin and the German Colony.",
     url: "https://mushecht.haifa.ac.il/", featured: true
   },
   {
@@ -146,7 +146,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     neighbourhood: "Western Haifa / Bat Galim", address: "204 Allenby Road, Haifa",
     theme: "Immigration & naval history", bestFor: "Historic ships, migration and Israel's navy",
     duration: "1.5–2 hours", priceNis: 20,
-    admission: "Adult ₪20 according to the Ministry of Defense; reduced rates available.",
+    admission: "Adults: ₪20. Reduced admission rates are available.",
     openingDays: "Sun–Thu 09:00–16:00; Fri and Sat closed.",
     booking: "Contact the museum in advance for tours and current vessel-access arrangements.",
     intro: "This Ministry of Defense museum tells the story of clandestine Jewish immigration under the British Mandate and the development of Israel's navy. The ships and submarines are major attractions, though access to interiors can vary.",
@@ -166,7 +166,7 @@ export const haifaAdditionalMuseums = [
   {
     name: "Israeli Personal Computer Museum",
     place: "Haifa Bay area",
-    note: "Appeared in the original guide, but I could not verify regular public opening or ticket arrangements. Contact the operator and confirm the current address before making a special visit.",
+    note: "Contact the operator in advance to confirm whether the museum is open to visitors, its address and ticket arrangements.",
     url: "https://www.google.com/maps/search/?api=1&query=Israeli+Personal+Computer+Museum+Haifa"
   },
   {

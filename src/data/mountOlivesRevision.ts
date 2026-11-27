@@ -44,7 +44,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
       time: "Around 2–3 hours on the hill, plus Old City time",
       bestFor: "First-time visitors, panoramas and the main Christian sites",
       steps: [
-        "Start at the Seven Arches lookout for a wide view of the Old City. From here, you can identify the main landmarks of the Old City before exploring its streets.",
+        "Start at the Seven Arches lookout to spot the Old City's main landmarks before exploring its streets.",
         "Take the historic Palm Sunday road toward Dominus Flevit, the small church recalling Jesus' tears over Jerusalem.",
         "Continue to Gethsemane and the Church of All Nations at the foot of the hill. The nearby Tomb of Mary is an optional addition.",
         "Cross toward Lion's Gate to continue into the Old City, where you can follow the Via Dolorosa or explore the Christian Quarter.",
@@ -83,7 +83,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     {
       name: "Chapel of the Ascension",
       description: "This small domed chapel in At-Tur is a traditional site of the Ascension of Jesus. It stands within a modest walled enclosure, a short distance from Pater Noster; other Christian denominations also maintain Ascension traditions on the hill.",
-      visit: "The small stone-domed chapel is within a walled compound near Pater Noster. Allow a few minutes to visit the chapel and its courtyard.",
+      visit: "Allow a few minutes to visit the chapel and its courtyard before continuing along the ridge.",
       tipLabel: "Good to pair with",
       image: { src: "/images/jerusalem/mount-of-olives/chapel-of-ascension.webp", alt: "Small stone-domed Chapel of the Ascension in a walled courtyard on the Mount of Olives" },
     },
@@ -97,7 +97,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     {
       name: "Church of St Mary Magdalene",
       description: "The Russian Orthodox church's golden onion domes are among the best-known features of the Mount of Olives skyline. Dedicated to Mary Magdalene, it stands above Gethsemane among terraced gardens and trees.",
-      visit: "The church is set below the main road amid trees and terraced gardens. Its entrance is separate from Dominus Flevit; check the approach on the map so you do not mistake the two.",
+      visit: "The church stands below the main road and has a separate entrance from Dominus Flevit. Use the map to find the right entrance.",
       tipLabel: "When to go",
       image: { src: "/images/jerusalem/mount-of-olives/mary-magdalene-church.webp", alt: "Russian Orthodox St Mary Magdalene Church with distinctive golden domes and garden" },
     },
@@ -111,7 +111,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     {
       name: "Tomb of the Virgin Mary",
       description: "Near Gethsemane, a long stone stairway leads down to the traditional Tomb of Mary, an important pilgrimage church in Eastern Christian tradition. Lamps, icons and the underground setting give it a different atmosphere from the basilica nearby.",
-      visit: "It is only a short addition to a Gethsemane visit. A long staircase leads down to the tomb. Visitors with walking difficulties may prefer to visit Gethsemane and the nearby basilica.",
+      visit: "The tomb is a short walk from Gethsemane, but reaching it involves a long staircase. If stairs are difficult for you, visit Gethsemane and the nearby basilica instead.",
       tipLabel: "Nearby",
       image: { src: "/images/jerusalem/mount-of-olives/tomb-of-virgin-mary.webp", alt: "Ancient stone staircase leading down to the Tomb of the Virgin Mary near Gethsemane" },
     },

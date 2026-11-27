@@ -50,7 +50,7 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
         <section id="areas" aria-labelledby="areas-h" className="mt-12 scroll-mt-28">
           <h2 id="areas-h" className="text-2xl font-semibold sm:text-3xl">Choose your Tel Aviv neighborhood</h2>
           <p className="mt-3 w-full text-pretty leading-relaxed text-muted-foreground">
-            Browse eight Tel Aviv hotel districts, from the central beaches to Jaffa and Rothschild Boulevard. Filter the neighborhoods below, or use my hotel catalog above to compare individual properties and booking options.
+            Filter the neighborhoods by your travel preferences or browse my hotel recommendations above.
           </p>
           <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Choose areas by travel style">
             <button
@@ -92,7 +92,7 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <div className="flex gap-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 dark:border-amber-400/20 dark:bg-amber-500/5">
               <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
-              <p className="text-sm leading-relaxed"><strong>Check walking distances.</strong> Staying close to the beach does not necessarily put Rothschild, Jaffa or the railway stations within a short walk. Check your main stops on the map before choosing a hotel.</p>
+              <p className="text-sm leading-relaxed"><strong>Check walking distances.</strong> From the beachfront, walking distances to Rothschild Boulevard, Jaffa and railway stations vary considerably. Check the distances to your planned destinations.</p>
             </div>
             <div className="flex gap-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 dark:border-amber-400/20 dark:bg-amber-500/5">
               <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
@@ -136,7 +136,7 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
                 Not sure where to base yourself in Tel Aviv?
               </h2>
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                In my guide, I compare eight Tel Aviv neighborhoods, including their atmosphere, walking routes, public transport and access to the city’s major sights.
+                My neighborhood guide compares local atmosphere, walking routes, public transport and access to Tel Aviv's main attractions.
               </p>
               <Link
                 to={"/travel-blog/where-to-stay-in-tel-aviv/" as LinkProps["to"]}

@@ -18,7 +18,7 @@ export function TripadvisorReviewsSection({ personal = false }: { personal?: boo
           className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border bg-background px-3 py-2 pr-9 text-sm transition-colors hover:border-primary focus-visible:ring-2 focus-visible:ring-ring"
         >
           <img src="/images/tripadvisor.svg" alt="" width={20} height={20} loading="lazy" className="size-5" />
-          <span className="font-semibold">Tripadvisor</span>
+          <span className="font-semibold">TripAdvisor</span>
           <span className="flex items-center gap-0.5 text-[#00AA6C]" aria-hidden="true">
             {Array.from({ length: 5 }, (_, i) => <Star key={i} size={13} fill="currentColor" />)}
           </span>
@@ -29,7 +29,7 @@ export function TripadvisorReviewsSection({ personal = false }: { personal?: boo
       <TripadvisorReviewCarousel />
       <div className="flex justify-center px-4 pb-4 sm:px-6">
         <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center gap-1.5 py-1.5 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring">
-          {personal ? "Read all my Tripadvisor reviews" : "Read all Tripadvisor reviews"} <ExternalLink size={13} aria-hidden />
+          {personal ? "Read all my TripAdvisor reviews" : "Read all TripAdvisor reviews"} <ExternalLink size={13} aria-hidden />
         </a>
       </div>
     </div>

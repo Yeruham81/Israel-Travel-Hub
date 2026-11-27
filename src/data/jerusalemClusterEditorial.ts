@@ -36,12 +36,12 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         paragraphs: [
           "On the second day, choose the Mount of Olives if viewpoints and Christian pilgrimage sites are a priority, or the Israel Museum and Yad Vashem if museums and history are central to the trip. These locations are not one short, level walking loop; add a taxi or public-transport leg as needed.",
           "For another afternoon, browse Mahane Yehuda and the downtown streets. Combine Mamilla with a Jaffa Gate visit, or visit the German Colony on a quieter evening. My shopping guide separates food markets, Old City crafts and modern shopping streets, so you can choose a stop that actually fits your interests.",
-          "Staying overnight near the Old City has a different arrival and luggage experience from staying near Jaffa Road or Mahane Yehuda. The neighbourhood-by-neighbourhood hotel guide explains these trade-offs and includes links to the relevant accommodation areas.",
+          "Staying overnight near the Old City has a different arrival and luggage experience from staying near Jaffa Road or Mahane Yehuda. The neighborhood-by-neighborhood hotel guide explains these trade-offs and includes links to the relevant accommodation areas.",
         ],
         inlineLinks: [
           { text: "Mount of Olives", to: "/attractions/mount-of-olives/" },
           { text: "shopping guide", to: travelGuidePaths.jerusalemShopping },
-          { text: "neighbourhood-by-neighbourhood hotel guide", to: "/travel-blog/where-to-stay-in-jerusalem/" },
+          { text: "neighborhood-by-neighborhood hotel guide", to: "/travel-blog/where-to-stay-in-jerusalem/" },
         ],
       },
       {
@@ -61,7 +61,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
     related: ["jerusalemChurches", "jerusalemShopping", "jerusalemDeadSea", "bethlehem"],
     services: [
       { label: "Jerusalem walking and guided tours", to: "/tours/jerusalem/", note: "Check the advertised starting city and guiding inclusions" },
-      { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Neighbourhood and hotel advice" },
+      { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Neighborhood and hotel advice" },
       { label: "Airport to Jerusalem: all transport options", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
       { label: "Airport to Jerusalem: request a private transfer", to: "/airport-transfers/jerusalem/" },
     ],
@@ -83,7 +83,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         photo: { src: "/images/jerusalem/church-of-all-nations.webp", alt: "Church of All Nations by Gethsemane on the Mount of Olives" },
         paragraphs: [
           "A church's association with a biblical event is a matter of religious tradition and sometimes differs from what archaeology can establish. State this distinction when comparing sites: the Cenacle, Dormition Abbey and St Peter in Gallicantu tell related but separate stories on Mount Zion. The Mount Zion guide explains the short walk between them and the visitor limitations.",
-          "On the Mount of Olives, the Church of All Nations and Garden of Gethsemane lie near the foot of the hill, while Dominus Flevit, Pater Noster and the Church of the Ascension require more climbing. Use the Mount of Olives guide for access, downhill route planning and suitable vehicle pickup points. Ein Karem, with the Church of the Visitation and St John the Baptist, is a separate neighbourhood journey.",
+          "On the Mount of Olives, the Church of All Nations and Garden of Gethsemane lie near the foot of the hill, while Dominus Flevit, Pater Noster and the Church of the Ascension require more climbing. Use the Mount of Olives guide for access, downhill route planning and suitable vehicle pickup points. Ein Karem, with the Church of the Visitation and St John the Baptist, is a separate neighborhood journey.",
         ],
         inlineLinks: [
           { text: "Mount Zion guide", to: "/attractions/mount-zion/" },
@@ -133,7 +133,7 @@ export function applyJerusalemGuideEditorial(guides: Record<TravelGuideId, Trave
     if (changes.reading) guide.reading = [...(guide.reading || []), ...changes.reading];
     if (id === "jerusalemChurches") {
       const einKarem = guide.sections.find(section => section.id === "ein-karem");
-      if (einKarem && !einKarem.photo) einKarem.photo = { src: "/images/jerusalem/church-of-visitation.webp", alt: "Church of the Visitation in the hillside Ein Karem neighbourhood" };
+      if (einKarem && !einKarem.photo) einKarem.photo = { src: "/images/jerusalem/church-of-visitation.webp", alt: "Church of the Visitation in the hillside Ein Karem neighborhood" };
     }
     guide.updatedAt = id === "jerusalemShopping" ? "2026-11-20" : id === "jerusalemChurches" || id === "jerusalem" ? "2026-11-21" : "2026-10-24";
   }

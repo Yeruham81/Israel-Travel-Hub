@@ -20,7 +20,7 @@ describe("homepage navigation and review sources", () => {
     expect(accommodationDestinationCards.every(card => !String(card.to).startsWith("/travel-blog/"))).toBe(true);
   });
   it("keeps six ordered primary entries and rental only in the sidebar", () => {
-    expect(serviceDomains.map(x => x.label)).toEqual(["Airport transfers", "Tours & Day Trips", "Shore excursions", "Accommodation", "Attractions", "Travel guides"]);
+    expect(serviceDomains.map(x => x.label)).toEqual(["Airport transfers", "Tours & day trips", "Shore excursions", "Accommodation", "Attractions", "Travel guides"]);
     expect(serviceDomains.map(x => x.to)).not.toContain("/car-rental/");
     expect(serviceDomains.map(x => x.to)).not.toContain("/tickets/");
     const sidebar = allNavGroups.flatMap(group => group.items.filter(item => "to" in item));
@@ -52,7 +52,7 @@ describe("homepage navigation and review sources", () => {
 
     const reviewSection = screen.getByRole("heading", { name: "What Travelers Say" }).closest("section")!;
     expect(reviewSection.querySelector(".bg-navy")).toBeNull();
-    const controls = screen.getByRole("group", { name: "Choose a Tripadvisor review" });
+    const controls = screen.getByRole("group", { name: "Choose a TripAdvisor review" });
     expect(within(controls).getAllByRole("button")).toHaveLength(tripadvisorReviews.length);
     expect(screen.queryByRole("button", { name: /Previous Tripadvisor reviews|Next Tripadvisor reviews|Pause Tripadvisor reviews|Play Tripadvisor reviews/ })).not.toBeInTheDocument();
 
@@ -60,7 +60,7 @@ describe("homepage navigation and review sources", () => {
     expect(cards).toHaveTextContent("Yaniv B");
     expect(cards).not.toHaveTextContent("Kaye L");
 
-    const dot = screen.getByRole("button", { name: "Show Tripadvisor review from Marc" });
+    const dot = screen.getByRole("button", { name: "Show TripAdvisor review from Marc" });
     fireEvent.click(dot);
     expect(dot).toHaveAttribute("aria-pressed", "true");
     expect(cards).toHaveTextContent("Marc");

@@ -39,18 +39,19 @@ export function Analytics() {
     setCustomize(false);
   }
   if (!ready || (consent && !opened)) return null;
-  const buttonClass = "rounded-lg border border-primary bg-card px-3 py-2.5 text-sm font-semibold text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2";
+  const buttonClass = "min-h-11 rounded-lg border border-primary bg-card px-3 py-2.5 text-sm font-semibold text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2";
+  const acceptAllClass = "col-span-2 min-h-14 rounded-lg border border-primary bg-primary px-4 py-3.5 text-base font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2";
   return <section role="dialog" aria-labelledby="cookie-preferences-title" aria-describedby="cookie-preferences-description"
     className="fixed inset-x-3 bottom-3 z-[80] max-h-[85dvh] overflow-y-auto rounded-2xl border-2 border-primary bg-card p-5 text-card-foreground shadow-xl sm:left-5 sm:right-auto sm:w-[32rem] sm:max-w-[calc(100vw-2.5rem)]">
-    <h2 id="cookie-preferences-title" className="text-lg font-semibold">Cookie preferences</h2>
-    <p id="cookie-preferences-description" className="mt-2 text-sm leading-relaxed">This website uses cookies and similar technologies to improve your experience, analyze traffic and support marketing.{" "}<Link to="/privacy-policy/" hash="analytics-advertising" className="font-semibold text-primary underline">Privacy policy</Link></p>
-    <div className="mt-4 grid gap-2 sm:grid-cols-3">
-      <button type="button" onClick={() => choose(ALL_CATEGORIES)} className={buttonClass}>Accept all</button>
-      <button type="button" onClick={() => choose(NECESSARY_ONLY)} className={buttonClass}>Accept necessary</button>
-      <button type="button" aria-expanded={customize} aria-controls="cookie-categories" onClick={() => { setSelection({ ...(consent?.categories ?? NECESSARY_ONLY) }); setCustomize(true); }} className={buttonClass}>Customize</button>
+    <h2 id="cookie-preferences-title" className="text-lg font-semibold">Cookie settings</h2>
+    <p id="cookie-preferences-description" className="mt-2 text-sm leading-relaxed">This website uses cookies and similar technologies to improve your browsing experience, analyze traffic and enable optional features.{" "}<Link to="/privacy-policy/" hash="analytics-advertising" className="font-semibold text-primary underline">Privacy policy</Link></p>
+    <div className="mt-4 grid grid-cols-2 gap-2">
+      <button type="button" onClick={() => choose(ALL_CATEGORIES)} className={acceptAllClass}>Accept all</button>
+      <button type="button" onClick={() => choose(NECESSARY_ONLY)} className={buttonClass}>Accept essential</button>
+      <button type="button" aria-expanded={customize} aria-controls="cookie-categories" onClick={() => { setSelection({ ...(consent?.categories ?? NECESSARY_ONLY) }); setCustomize(true); }} className={buttonClass}>Manage preferences</button>
     </div>
     {customize && <div id="cookie-categories" className="mt-4 space-y-3 border-t pt-4">
-      <div className="rounded-lg border p-3 text-sm"><p className="font-semibold">Necessary <span className="font-normal text-muted-foreground">— Always on</span></p><p className="mt-1 text-muted-foreground">Required for site functionality, security and saving your preferences.</p></div>
+      <div className="rounded-lg border p-3 text-sm"><p className="font-semibold">Essential <span className="font-normal text-muted-foreground">(always active)</span></p><p className="mt-1 text-muted-foreground">Essential for website functionality, security and saving your preferences.</p></div>
       {COOKIE_CATEGORIES.map(category => <label key={category.id} className="flex cursor-pointer items-start gap-3 rounded-lg border p-3 text-sm">
         <input type="checkbox" className="mt-1 h-4 w-4 shrink-0 accent-primary" checked={selection[category.id]} onChange={event => setSelection(current => ({ ...current, [category.id]: event.target.checked }))} />
         <span><span className="block font-semibold">{category.title}</span><span className="mt-1 block text-muted-foreground">{category.description}</span></span>

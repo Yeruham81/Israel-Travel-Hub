@@ -23,11 +23,11 @@ export function validateTransferQuote(v: TransferQuoteFields, now = new Date(), 
   if (!v.name.trim() || v.name.length > 120) errors.push("Enter your full name (up to 120 characters).");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()) || v.email.length > 254) errors.push("Enter a valid email address.");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(v.date) || Number.isNaN(Date.parse(`${v.date}T00:00:00Z`)) || new Date(`${v.date}T00:00:00Z`).toISOString().slice(0, 10) !== v.date) errors.push(direction === "pickup" ? "Choose a valid flight arrival date." : "Choose a valid flight departure date.");
-  else if (v.date < israelNow(now).date) errors.push("Choose an arrival date that is not in the past in Israel.");
+  else if (v.date < israelNow(now).date) errors.push("Choose today or a future flight date.");
   if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(v.time)) errors.push(direction === "pickup" ? "Enter the flight arrival time in Israel local time." : "Enter the flight departure time in Israel local time.");
   else if (v.date === israelNow(now).date) {
     const [hours = 0, minutes = 0] = v.time.split(":").map(Number);
-    if (hours * 60 + minutes < israelNow(now).minutes) errors.push("That arrival time has already passed today in Israel.");
+    if (hours * 60 + minutes < israelNow(now).minutes) errors.push("Choose a flight time later than the current local time in Israel.");
   }
   if (!airportTransferRates.some((r) => r.id === v.destinationId) && v.destinationId !== "other") errors.push("Choose your destination.");
   if (v.destinationId === "other" && !v.otherDestination.trim()) errors.push("Enter the city or destination for your request.");

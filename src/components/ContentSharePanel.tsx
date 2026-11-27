@@ -126,12 +126,12 @@ export function ContentSharePanel({ pathname }: { pathname: string }) {
     try {
       await navigator.clipboard.writeText(url);
       setManualCopy(false);
-      setStatus("Link copied.");
+      setStatus("Link copied to clipboard.");
       clearTimeout(resetTimer.current);
       resetTimer.current = setTimeout(() => setStatus(""), 3000);
     } catch {
       setManualCopy(true);
-      setStatus("Select and copy the page link.");
+      setStatus("Copy the link below to share this page.");
     }
   }
 
@@ -141,7 +141,7 @@ export function ContentSharePanel({ pathname }: { pathname: string }) {
     } catch (error) {
       if ((error as { name?: string })?.name !== "AbortError") {
         setManualCopy(true);
-        setStatus("Select and copy the page link.");
+        setStatus("Copy the link below to share this page.");
       }
     }
   }
@@ -159,7 +159,7 @@ export function ContentSharePanel({ pathname }: { pathname: string }) {
               target={id === "email" ? undefined : "_blank"}
               rel={id === "email" ? undefined : "noopener noreferrer"}
               referrerPolicy="no-referrer"
-              aria-label={id === "email" ? "Share by email" : `Share on ${label}`}
+              aria-label={id === "email" ? "Share by email" : id === "whatsapp" || id === "telegram" ? `Share via ${label}` : `Share on ${label}`}
             >
               {id === "email" ? (
                 <Mail aria-hidden="true" />
@@ -185,7 +185,7 @@ export function ContentSharePanel({ pathname }: { pathname: string }) {
             onClick={copyLink}
           >
             <Copy aria-hidden="true" />
-            <span>{status === "Link copied." ? "Copied!" : "Copy link"}</span>
+            <span>{status === "Link copied to clipboard." ? "Copied!" : "Copy link"}</span>
           </button>
           {nativeAvailable && (
             <button

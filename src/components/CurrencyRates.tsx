@@ -132,9 +132,9 @@ export function PriceDisplay({ amount, size = "card", from = true, className = "
   return <div className={`min-w-0 ${className}`} data-testid="currency-price" data-ils={amount}>
     <p className={`flex flex-wrap items-center gap-2 font-semibold tabular-nums ${size === "hero" ? "text-3xl" : size === "compact" ? "text-base" : "text-2xl"}`}><CurrencyIcon currency="ILS" /><span>{from ? "From " : ""}ILS {amount.toLocaleString("en-US")}</span></p>
     <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-medium tabular-nums text-muted-foreground" aria-label="Approximate foreign-currency equivalents">
-      {available ? displayCurrencies.map((currency) => <span key={currency} className="inline-flex items-center gap-1.5 whitespace-nowrap" data-currency={currency}><CurrencyIcon currency={currency} /><span>≈ {currency} {convertedAmount(amount, currency, rates).toLocaleString("en-US")}</span></span>) : <span className="font-normal">{loading ? "Loading currency estimates…" : "USD/EUR estimates unavailable"}</span>}
+      {available ? displayCurrencies.map((currency) => <span key={currency} className="inline-flex items-center gap-1.5 whitespace-nowrap" data-currency={currency}><CurrencyIcon currency={currency} /><span>≈ {currency} {convertedAmount(amount, currency, rates).toLocaleString("en-US")}</span></span>) : <span className="font-normal">{loading ? "Updating currency conversions…" : "Currency conversions temporarily unavailable"}</span>}
     </div>
-    <p className="mt-1.5 text-[0.65rem] leading-relaxed text-muted-foreground">Estimates only · charged in ILS</p>
+    <p className="mt-1.5 text-[0.65rem] leading-relaxed text-muted-foreground">Approximate conversions · payment in ILS</p>
   </div>;
 }
 

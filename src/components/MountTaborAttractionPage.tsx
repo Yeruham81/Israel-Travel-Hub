@@ -40,10 +40,10 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
       <AttractionHighlight title="The Church of the Transfiguration">
         <p>The Franciscan basilica is the main reason pilgrims visit Mount Tabor. Designed by Antonio Barluzzi and completed in 1924, it has two distinctive towers flanking a pale stone entrance. The towers recall Moses and Elijah, who appear in the Gospel account of the Transfiguration.</p>
         <p>Approaching the Franciscan compound, you pass the historic <strong>Gate of the Wind</strong>, restored from an earlier gateway. Beside the basilica, look for the ruins of the <strong>medieval Benedictine monastery</strong>, including its former chapel and other stone structures.</p>
-        <p>Step inside the basilica, built above the remains of earlier churches, to admire its architecture.</p>
+        <p>The basilica stands above the remains of earlier churches.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The golden mosaic and crypt" image={{ src: "/images/attractions/mount-tabor-mosaic.webp", alt: "Golden mosaic showing Jesus between Moses and Elijah inside the Basilica of the Transfiguration" }}>
-        <p>The golden mosaic above the sanctuary shows Jesus in radiant white, with Moses and Elijah alongside him. Take a few moments to admire this beautiful mosaic.</p>
+        <p>The golden mosaic above the sanctuary shows Jesus in radiant white, with Moses and Elijah alongside him.</p>
         <p>Visit the lower crypt to see an older apse and mosaics from an earlier period.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The hilltop basilica and its terraces" image={{ src: "/images/attractions/mount-tabor-basilica-aerial.webp", alt: "Aerial view of the Basilica of the Transfiguration and surrounding monastery buildings on Mount Tabor" }}>
@@ -51,8 +51,8 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
         <p>After exploring the church, walk out to the terraces for views across the Jezreel Valley and the surrounding hills, especially on clear days.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Greek Orthodox church of St. Elias" image={{ src: "/images/attractions/mount-tabor-orthodox-interior.webp", alt: "Painted arches, religious icons and the iconostasis inside Mount Tabor's Greek Orthodox church" }}>
-        <p>The Greek Orthodox monastery is also located on the summit and commemorates the Transfiguration. Its church was rebuilt in the early twentieth century over earlier remains.</p>
-        <p><strong>The church is not normally open for casual sightseeing.</strong> If you hope to enter, contact the monastery to check whether a visit can be arranged.</p>
+        <p>The Greek Orthodox monastery on the summit also commemorates the Transfiguration. Its church was rebuilt in the early twentieth century over earlier remains.</p>
+        <p>Contact the monastery in advance to arrange a visit, as <strong>the church is generally closed to casual visitors.</strong></p>
       </AttractionHighlight>
       <AttractionHighlight title="The forested mountain and summit paths" image={{ src: "/images/attractions/mount-tabor-landscape.webp", alt: "The green, rounded silhouette of Mount Tabor rising above the surrounding Lower Galilee landscape" }}>
         <p>Mount Tabor's rounded outline is striking even from the surrounding valley. At the top, marked paths lead past oak woodland, old defensive walls and viewpoints.</p>
@@ -73,7 +73,7 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Admission and contact</h3>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">The national parks authority lists free entry to Mount Tabor. If you use a local taxi to reach the summit, agree the price and return arrangement before going up.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Admission to Mount Tabor is free. If you take a local taxi to the summit, agree on the fare and arrange your return journey in advance.</p>
           <p className="mt-3 text-sm"><strong>Visitor enquiries: </strong><a href={"tel:" + mountTaborSite.visit.visitorPhoneHref} dir="ltr" className={inlineLink}>{mountTaborSite.visit.visitorPhone}</a></p>
           <p className="mt-1 text-sm"><strong>Franciscan community: </strong><a href={"tel:" + mountTaborSite.visit.friarsPhoneHref} dir="ltr" className={inlineLink}>{mountTaborSite.visit.friarsPhone}</a></p>
           <a href={mountTaborSite.sources.franciscan} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Franciscan sanctuary information <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
@@ -154,7 +154,7 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>A guided northern Israel trip can combine Mount Tabor with Nazareth and other Galilee sites. If Mount Tabor is a priority, choose a Galilee tour that includes the basilica at the summit.</p>
+      <p>Mount Tabor combines well with Nazareth and other Galilee sites. Choose a guided tour that includes the Church of the Transfiguration at the summit.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="mount-tabor-galilee-tours-card">
           <img src="/images/attractions/sea-of-galilee.webp" alt="Sea of Galilee landscape on a guided northern Israel day trip" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />
@@ -178,7 +178,7 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
   faqs: [
     { q: "Can I drive to the summit of Mount Tabor?", a: "Private cars may drive up when permitted. Large coaches stop below the summit; passengers can continue by local taxi." },
     { q: "What are the Church of the Transfiguration's opening hours?", a: "Monday–Friday 08:00–17:00; Saturday–Sunday 08:00–12:00 and 14:00–16:30, according to the Franciscan sanctuary. Confirm changes for services and holidays." },
-    { q: "Is Mount Tabor free to visit?", a: "The Israel Nature and Parks Authority lists free entry to Mount Tabor. Local taxi transport to the summit is charged separately." },
+    { q: "Is Mount Tabor free to visit?", a: "Entry to Mount Tabor is free. Local taxi transport to the summit is charged separately." },
     { q: "Can I visit the Greek Orthodox monastery?", a: "The monastery and its church are not normally open to casual sightseeing. Confirm any special visit directly with the monastery." },
     { q: "How long should I spend on Mount Tabor?", a: "Allow about 60–90 minutes for the basilica and terraces, plus the journey up and down. Add 1–2 hours for the 2 km summit walking loop." },
     { q: "Is Mount Tabor the same as the Mount of Beatitudes?", a: "No. Mount Tabor rises over the Jezreel Valley in Lower Galilee; the Mount of Beatitudes overlooks the Sea of Galilee." },

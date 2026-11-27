@@ -257,7 +257,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
         expect(spans.map(span => span.text).join(""), section.id + " paragraph " + index).toBe(section.paragraphs[index]);
       });
     }
-    expect(bethlehem.intro).toContain("getting there requires some planning");
+    expect(bethlehem.intro).toContain("crossing arrangements and entry requirements");
     expect(bus.subsections?.find(sub => sub.id === "bus-231")?.title).toContain("via Beit Jala");
     expect(bus.paragraphs.join(" ")).not.toContain("Line 231 passes through the Bab al-Zaqaq");
     expect(visit.paragraphs[1]).toContain("12:30–14:30");

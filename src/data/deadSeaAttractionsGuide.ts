@@ -32,7 +32,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "bestFor": "First-time visitors, swimming facilities & families",
     "allow": "2–3 hours",
     "access": "Free public beach; supervised bathing areas only",
-    "description": "The best place to begin a Dead Sea visit is often Ein Bokek's maintained public beachfront. Floating in its highly saline water, then relaxing along the promenade, makes an easy introduction even if you have no plans to visit a hotel spa.",
+    "description": "I recommend Ein Bokek's public beach for a first visit. Float in the salty water, then relax along the promenade.",
     "practical": "Public showers, shade and visitor facilities are available in the central beach area. Enter the water slowly, keep your face and eyes clear, avoid swallowing the water, and rinse thoroughly afterwards. Follow lifeguard instructions; do not enter the sea outside permitted bathing zones.",
     "gettingThere": "Set your navigation to Ein Bokek Central Beach. The public beach is beside the hotel strip; check parking conditions and the last transport connection.",
     "tip": "I'd give the beach its own unhurried slot after sightseeing. Fresh water, sandals and a towel make the visit much more comfortable.",
@@ -161,7 +161,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "allow": "Around 2–3 hours",
     "access": "Free trail; check weather and trail conditions",
     "description": "A short distance from the resort strip, the Nahal Bokek trail follows a small freshwater stream through a desert canyon. Reeds, shallow pools and changing rock scenery offer a welcome alternative to an entire day on the shore.",
-    "practical": "The Tamar Regional Council describes a roughly 3 km out-and-back visit with some walking in shallow water. The entry is from the designated hikers' parking area reached via the Sonol petrol station access road. Do not park on Route 90. Never enter a wadi when flooding is possible, even if local skies look clear.",
+    "practical": "The route is roughly 3 km out and back, with some walking in shallow water. The entry is from the designated hikers' parking area reached via the Sonol petrol station access road. Do not park on Route 90. Never enter a wadi when flooding is possible, even if local skies look clear.",
     "gettingThere": "Navigate to the Nahal Bokek trailhead at the designated hikers' parking by the Sonol station in Ein Bokek; the waterfront beach is a different destination.",
     "tip": "I'd take water shoes and dry footwear for afterwards, and choose a cooler period of the day. A wet canyon walk needs proper grip even if it is described as family-friendly.",
     "official": {
@@ -216,7 +216,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "bestFor": "Unusual salt geology and desert scenery",
     "allow": "1–3 hours depending on the route",
     "access": "Public viewpoints or guided routes; site-specific rules",
-    "description": "Mount Sodom is a remarkable ridge of salt rock at the southern end of the Dead Sea. The folds, cliffs and pale desert landscape make it an appealing stop for travellers interested in geology and dramatic scenery.",
+    "description": "Mount Sodom is a remarkable ridge of salt rock at the southern end of the Dead Sea. The folds, cliffs and pale desert landscape make it an appealing stop for travelers interested in geology and dramatic scenery.",
     "practical": "Not every salt-cave or ridge route is open for independent visits. Caves, technical descents and challenging off-road tracks require appropriate access, equipment and qualified guiding. Do not improvise a route into unstable salt formations.",
     "gettingThere": "Mount Sodom has several distinct trailheads and viewpoints. The signed hiking approaches are not the same as the mapped lookout; consult the Israel Nature and Parks Authority route directions before choosing where to park.",
     "tip": "I would choose a short marked viewpoint or book a specialist guide if exploring the caves is your priority.",
@@ -282,7 +282,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "access": "Guided admission by advance booking",
     "description": "The restored historic potash-workers' camp at Sdom tells the story of early Dead Sea industry and the people who worked here. It adds a human and industrial-history perspective to a region better known for beaches and desert ruins.",
     "practical": "Admission is by a pre-booked guided tour. Choose your date and time in the official Hebrew booking calendar, and arrive about 15 minutes early. The operator's public pages show differing opening hours; use the available booking times for your visit.",
-    "gettingThere": "The visitor centre is near Sdom, south of Ein Bokek. Set your navigation to the visitor centre itself.",
+    "gettingThere": "The visitor center is near Sdom, south of Ein Bokek. Set your navigation to the visitor center itself.",
     "tip": "I'd choose an available guided time on the official website first, arrive 15 minutes early, and then plan the other southern Dead Sea stops around it.",
     "official": {
       "label": "Official visitor information and booking (Hebrew)",
@@ -296,7 +296,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     ],
     "image": {
       "src": "/images/dead-sea-attractions/novomeysky.webp",
-      "alt": "Preserved buildings at the Moshe Novomeysky visitor centre in the Sdom workers camp"
+      "alt": "Preserved buildings at the Moshe Novomeysky visitor center in the Sdom workers camp"
     }
   },
   {
@@ -482,7 +482,7 @@ export const deadSeaEditorialOverview: Attraction = {
   image: deadSeaAttractionsHero,
   duration: "One full day to several days",
   intro: "Explore ten different attractions in the Dead Sea region, from safe public bathing and historic Masada to freshwater oases, nature walks and heritage sites.",
-  takeaway: "For a first visit, choose two or three compatible stops rather than attempting the whole shoreline in a single day.",
+  takeaway: "For a first visit, I recommend choosing two or three stops in the same part of the Dead Sea.",
   highlights: deadSeaStops.map(stop => ({ name: stop.title, description: stop.description, tip: stop.tip })),
   arrival: deadSeaStops.map(stop => stop.gettingThere),
   planning: [

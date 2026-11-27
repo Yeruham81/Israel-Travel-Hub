@@ -208,7 +208,7 @@ describe("tours hub and SEO category pages", () => {
       const href = link.getAttribute("href")!;
       expect(router.matchRoutes(href).at(-1)?.routeId.replace(/\/$/, "")).toBe(href.replace(/\/$/, ""));
     }
-    const cruise = screen.getByRole("region", { name: "Arriving in Israel by cruise ship?" });
+    const cruise = screen.getByRole("region", { name: "Shore excursions from Haifa and Ashdod" });
     expect(within(cruise).queryAllByRole("img")).toHaveLength(0);
     expect(within(cruise).getAllByRole("link").map(link => link.getAttribute("href"))).toEqual(["/shore-excursions/haifa/", "/shore-excursions/ashdod/"]);
     expect(within(cruise).getByRole("navigation", { name: "Shore excursions by port" })).toBeInTheDocument();
@@ -699,7 +699,7 @@ describe("tours hub and SEO category pages", () => {
     fireEvent.change(message, { target: { value: "Two travelers in January" } });
     const owner = screen.getAllByTestId("owner-tour-card")[0]!;
     const title = owner.querySelector("h3")!.textContent!;
-    fireEvent.click(within(owner).getByRole("link", { name: /^Request a quote/ }));
+    fireEvent.click(within(owner).getByRole("link", { name: /^Get a quote/ }));
     await waitFor(() => expect(subject).toHaveValue(title));
     expect(message).toHaveValue("Two travelers in January");
   });

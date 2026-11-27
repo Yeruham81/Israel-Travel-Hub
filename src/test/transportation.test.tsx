@@ -74,7 +74,7 @@ describe("airport transfers and private driver separation", () => {
     expect(screen.queryByRole("heading", { name: "Plan the day before requesting a quote" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
-    expect(screen.getByText(/Tell me what you have in mind, and I.ll prepare a personal quote/)).toBeInTheDocument();
+    expect(screen.getByText(/Tell me your plans and I'll prepare a personal quote/)).toBeInTheDocument();
     expect(container.textContent).not.toMatch(/ILS\s*\d/);
     expect(linksForPage("private-driver").map((link) => link.id)).toEqual(["private-driver-moshe"]);
     expect(linksForPage("transfers-hub")).toEqual([]);

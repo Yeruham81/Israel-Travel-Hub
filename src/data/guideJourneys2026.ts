@@ -200,8 +200,8 @@ export const journeyDestinationGuides = {
   "updatedAt": "2026-11-24",
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
   "description": "Travel from Jerusalem to Bethlehem by bus 231 or 234, licensed private driver, taxi or tour. Learn about Checkpoint 300, travel documents and return options.",
-  "intro": "Bethlehem is only a short distance from Jerusalem, but getting there requires some planning. Here's how to travel by bus, taxi or organised tour, and what to check before you leave.",
-  "answer": "For independent travellers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers can cross on foot when the checkpoint is open and continue by local taxi. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
+  "intro": "Bethlehem is a short journey from Jerusalem. Here's how to get there by bus, taxi or organised tour, including crossing arrangements and entry requirements.",
+  "answer": "For independent travelers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers can cross on foot when the checkpoint is open and continue by local taxi. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
   "topics": [
     "transportation",
     "destinations",
@@ -233,13 +233,13 @@ export const journeyDestinationGuides = {
     "rows": [
       [
         "Bus 231",
-        "Budget travellers heading to central Bethlehem",
+        "Budget travelers heading to central Bethlehem",
         "About 20–30 minutes by bus in normal traffic to Bab al-Zaqaq / Beit Jala Road; continue to Manger Square on foot or by local taxi"
       ],
       [
         "Bus 234",
         "Visitors crossing Checkpoint 300 on foot",
-        "About 15–20 minutes by bus, plus checkpoint crossing time and local transport to Bethlehem for eligible travellers"
+        "About 15–20 minutes by bus, plus checkpoint crossing time and local transport to Bethlehem for eligible travelers"
       ],
       [
         "Authorised private driver",
@@ -248,7 +248,7 @@ export const journeyDestinationGuides = {
       ],
       [
         "Taxi to Checkpoint 300",
-        "Travellers meeting a local driver after the crossing",
+        "Travelers meeting a local driver after the crossing",
         "Separate transport on each side and possible waiting time"
       ],
       [
@@ -311,13 +311,13 @@ export const journeyDestinationGuides = {
       "id": "buses",
       "title": "By bus: choose line 231 or 234",
       "paragraphs": [
-        "Buses to Bethlehem leave from the East Jerusalem bus station near Damascus Gate, not Jerusalem Central Bus Station. The Christian Information Center's East Jerusalem bus guide identifies the boarding area.",
+        "Buses to Bethlehem depart from the East Jerusalem bus station near Damascus Gate. The Christian Information Center's East Jerusalem bus guide identifies the boarding area.",
         "South Buses publishes an ₪8 standard cash fare and an ₪8 Rav-Kav fare for journeys up to 15 km. Rav-Kav passengers must validate on each ride; the operator also describes 90-minute transfers under the ticket rules. Check your bus fare and return departure times."
       ],
       "richParagraphs": [
         [
           {
-            "text": "Buses to Bethlehem leave from the East Jerusalem bus station near Damascus Gate, not Jerusalem Central Bus Station. The "
+            "text": "Buses to Bethlehem depart from the East Jerusalem bus station near Damascus Gate. The "
           },
           {
             "text": "Christian Information Center's East Jerusalem bus guide",
@@ -352,7 +352,7 @@ export const journeyDestinationGuides = {
           "id": "bus-231",
           "title": "Bus 231: via Beit Jala towards central Bethlehem",
           "paragraphs": [
-            "Bus 231 serves the Bab al-Zaqaq / Beit Jala Road stop, closer to central Bethlehem than Checkpoint 300. Journey planners estimate around 20–30 minutes from the East Jerusalem terminal in ordinary traffic; allow more at busy times.",
+            "Bus 231 serves the Bab al-Zaqaq / Beit Jala Road stop, closer to central Bethlehem than Checkpoint 300. The journey from the East Jerusalem terminal takes approximately 20–30 minutes in normal traffic. Allow extra time during busy periods.",
             "Get off at Bab al-Zaqaq / Beit Jala Road. Manger Square and the Church of the Nativity are roughly 1 km away, so continue on foot if comfortable or take a short local taxi ride."
           ]
         },
@@ -360,7 +360,7 @@ export const journeyDestinationGuides = {
           "id": "bus-234",
           "title": "Bus 234: via Checkpoint 300",
           "paragraphs": [
-            "Bus 234 travels from Nevi'im Terminal to Checkpoint 300 / Bethlehem Road, taking about 15–20 minutes in normal traffic. For an independent trip, eligible passengers can use the pedestrian crossing when it is operating, then arrange a local taxi or pickup for Manger Square. The bus itself does not go to the church.",
+            "Bus 234 travels from Nevi'im Terminal to Checkpoint 300 / Bethlehem Road, taking about 15–20 minutes in normal traffic. For an independent trip, eligible passengers can use the pedestrian crossing when it is operating, then arrange a local taxi or pickup for Manger Square.",
             "Bus 234 still terminates at Checkpoint 300. Agree a meeting point with your local driver or guide, and leave extra time for checks and your return bus to Jerusalem."
           ]
         }
@@ -377,7 +377,7 @@ export const journeyDestinationGuides = {
       "paragraphs": [
         "Visitors who are permitted to enter Bethlehem can arrange a return trip with a Palestinian taxi driver who has the necessary permits and insurance, including time for sightseeing. Confirm that both the driver and vehicle are permitted to complete the journey.",
         "Before booking, confirm the pickup point, permitted route, insurance, sightseeing stops, waiting time and total price, including the return. Remember that a driver may not be a licensed guide.",
-        "Eligible travellers can take an Israeli taxi towards Checkpoint 300. Continuing into Bethlehem in the same vehicle requires the appropriate driver permits, vehicle permits and insurance. After crossing on foot, you can arrange a local taxi or guide on the Bethlehem side."
+        "Eligible travelers can take an Israeli taxi towards Checkpoint 300. Continuing into Bethlehem in the same vehicle requires the appropriate driver permits, vehicle permits and insurance. After crossing on foot, you can arrange a local taxi or guide on the Bethlehem side."
       ],
       "photo": {
         "src": palestinianTaxiPhoto,
@@ -392,7 +392,7 @@ export const journeyDestinationGuides = {
       "id": "tours",
       "title": "Organised day trips and guided Bethlehem visits",
       "paragraphs": [
-        "A half-day tour of Bethlehem avoids the need to arrange local buses and transfers yourself. Private tours offer more flexibility, while full-day tours may include other destinations.",
+        "A half-day tour of Bethlehem simplifies transport and crossing arrangements. Private tours offer more flexibility, while full-day tours may include other destinations.",
         "Some tours use different drivers or guides for the journey and the sightseeing in Bethlehem."
       ],
       "sourceIds": [
@@ -433,14 +433,14 @@ export const journeyDestinationGuides = {
       "id": "visit-return",
       "title": "Plan a half-day visit and the journey back",
       "paragraphs": [
-        "Half a day is usually enough to see Bethlehem's main central sites. Allow extra time for church queues, transport and any additional stops.",
+        "Half a day is usually enough to visit Bethlehem's main attractions. Allow extra time for church queues, transport and any additional stops.",
         "The Church of the Nativity is a UNESCO World Heritage site. The Christian Information Center lists temporary basilica hours of 05:00–17:00. The Grotto of the Nativity has separate visiting hours during restoration: 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday. Check both schedules before travelling.",
         "Agree on your return pickup time and location in advance. Allow extra time for checkpoints and transport connections."
       ],
       "richParagraphs": [
         [
           {
-            "text": "Half a day is usually enough to see Bethlehem's main central sites. Allow extra time for church queues, transport and any additional stops."
+            "text": "Half a day is usually enough to visit Bethlehem's main attractions. Allow extra time for church queues, transport and any additional stops."
           }
         ],
         [
@@ -533,7 +533,7 @@ export const journeyDestinationGuides = {
     "faqs": [
     {
       "q": "What is the cheapest way to travel from Jerusalem to Bethlehem?",
-      "a": "An East Jerusalem bus is normally the lowest-cost option. South Buses currently publishes an ₪8 fare for journeys up to 15 km; confirm the fare for your exact ride. Line 231 stops at Bab al-Zaqaq, while eligible passengers on line 234 continue from Checkpoint 300 after crossing."
+      "a": "An East Jerusalem bus is normally the lowest-cost option. The standard bus fare for journeys up to 15 km is ₪8. Line 231 stops at Bab al-Zaqaq, while eligible passengers on line 234 continue from Checkpoint 300 after crossing."
     },
     {
       "q": "Is bus 231 or bus 234 better for the Church of the Nativity?",
@@ -561,7 +561,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Is there a train from Jerusalem to Bethlehem?",
-      "a": "Bethlehem has no passenger railway service. Travel by bus from East Jerusalem, an authorised private vehicle or an organised tour."
+      "a": "There is no train service to Bethlehem. You can travel by bus from East Jerusalem, authorised private vehicle or organised tour."
     },
     {
       "q": "Can I visit Bethlehem on Saturday?",
@@ -649,7 +649,7 @@ export const journeyDestinationGuides = {
       "title": "How to Get from Jerusalem to the Dead Sea: Bus, Taxi, Tours & Car",
       "description": "Jerusalem to the Dead Sea: bus 486 or 444, taxi, private driver, tours or rental car, with driving times, destination stops, beach access and return travel.",
       "intro": "Travelling from Jerusalem to the Dead Sea? First choose your destination: a northern beach, Ein Gedi, Masada or the Ein Bokek hotel area. Then compare public buses, a private ride, an organised tour and a rental car.",
-      "answer": "Egged bus 486 is a good budget choice for one Dead Sea destination; line 444 requires an advance seat reservation. For several stops or a flexible return, choose an organised tour, private driver or rental car. Allow roughly 90–110 minutes to drive from central Jerusalem to Ein Bokek, where the council's central public beach is free to enter. Confirm your return journey before leaving.",
+      "answer": "Egged bus 486 is a good budget choice for one Dead Sea destination; line 444 requires an advance seat reservation. For several stops or a flexible return, choose an organised tour, private driver or rental car. Allow roughly 90–110 minutes to drive from central Jerusalem to Ein Bokek, where Ein Bokek Central Beach is free to enter. Confirm your return journey before leaving.",
       "topics": [
         "transportation",
         "destinations",
@@ -731,7 +731,7 @@ export const journeyDestinationGuides = {
           "id": "private",
           "title": "By taxi or private driver: direct travel from your hotel",
           "paragraphs": [
-            "A taxi or pre-booked private transfer takes you from your Jerusalem pickup address to the chosen Dead Sea hotel, beach or attraction. This suits travellers with luggage, families and visitors travelling outside normal bus hours.",
+            "A taxi or pre-booked private transfer takes you from your Jerusalem pickup address to the chosen Dead Sea hotel, beach or attraction. This suits travelers with luggage, families and visitors travelling outside normal bus hours.",
             "For a one-way transfer, confirm your drop-off address. For a private day trip, agree on the sightseeing stops, driver waiting time at each attraction and return journey to Jerusalem. Guiding and attraction admission should be arranged separately.",
             "For a private Masada and Dead Sea day trip, send me your pickup location in Jerusalem, travel date, passengers, planned stops and return time using the contact form. I'll reply personally with a quote. You can also browse my Masada and Dead Sea tours or read about my private driver service."
           ],
@@ -750,8 +750,8 @@ export const journeyDestinationGuides = {
           "id": "tours",
           "title": "By organised tour: transport plus sightseeing",
           "paragraphs": [
-            "An organised tour is a convenient way to combine the Dead Sea with attractions such as Masada or Ein Gedi. An organised tour includes transport between the attractions on its itinerary.",
-            "Excursions follow different itineraries. Some concentrate on a Dead Sea beach, while others allocate much of the day to Masada and Ein Gedi. Confirm that the tour departs from Jerusalem, its return point, the precise beach, time spent there and whether park admission or cable-car tickets are included."
+            "An organised tour is a convenient way to combine a Dead Sea beach visit with Masada or Ein Gedi, with transport between the attractions included.",
+            "Some excursions focus on beach time, while others spend much of the day at Masada and Ein Gedi. Confirm that the tour departs from Jerusalem, its return point, the precise beach, time spent there and whether park admission or cable-car tickets are included."
           ],
         },
         {
@@ -780,8 +780,8 @@ export const journeyDestinationGuides = {
           "id": "beach",
           "title": "Where to go for a Dead Sea beach day",
           "paragraphs": [
-            "For swimming and floating, I recommend Ein Bokek Central Beach, where public entry, showers, changing rooms, toilets, shaded areas and council-provided chairs and umbrellas are free. The promenade has drinking-water fountains, cafés and shops.",
-            "Blue-and-white parking near the central beach is paid, with additional parking above the hotel area. The council-run central beach is different from hotel-operated public beaches, where chairs and umbrellas may cost extra for non-guests. Use the marked, supervised swimming area; lifeguard hours vary by season.",
+            "For swimming and floating, I recommend Ein Bokek Central Beach, where public entry, showers, changing rooms, toilets, shaded areas and chairs and umbrellas are free. The promenade has drinking-water fountains, cafés and shops.",
+            "Blue-and-white parking near the central beach is paid, with additional parking above the hotel area. At hotel-operated public beaches, chairs and umbrellas may cost extra for non-guests. Use the marked, supervised swimming area; lifeguard hours vary by season.",
             "Bring drinking water, sun protection and a towel. Ein Bokek Central Beach has an accessible approach and beach wheelchairs available through the lifeguard station. My Dead Sea visitor guide explains bathing and accessibility in more detail."
           ],
           "photo": { "src": einBokekShorePhoto, "alt": "Ein Bokek shoreline and the Dead Sea landscape" },
@@ -825,7 +825,7 @@ export const journeyDestinationGuides = {
         },
         {
           "q": "Is the public beach at Ein Bokek wheelchair-accessible?",
-          "a": "Yes. Tamar Regional Council provides an accessible route into the water at Ein Bokek Central Beach, and beach wheelchairs can be borrowed from the lifeguard station. If you need assistance or a particular facility, check with the council before your visit."
+          "a": "Yes. Ein Bokek Central Beach has an accessible route into the water, and beach wheelchairs can be borrowed from the lifeguard station. If you need assistance or a particular facility, check with the council before your visit."
         },
         {
           "q": "Do buses run to the Dead Sea on Shabbat?",

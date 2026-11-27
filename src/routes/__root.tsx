@@ -36,7 +36,7 @@ function NotFoundComponent() {
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            Back to homepage
           </Link>
         </div>
       </div>
@@ -52,10 +52,10 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
     <div className="flex min-h-[60vh] items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Unable to load this page
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong while loading this page. You can try refreshing or head back home.
+          Please try loading the page again or return to the homepage.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -71,7 +71,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            Back to homepage
           </a>
         </div>
       </div>
@@ -91,27 +91,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       // Fonts are served by this origin. Preload only the two faces used at first paint.
       // This avoids a render-blocking cross-origin stylesheet and its font request chain.
-      {
-        rel: "preload",
-        href: siteSansUrl,
-        as: "font",
-        type: "font/woff2",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "preload",
-        href: siteSerifUrl,
-        as: "font",
-        type: "font/woff2",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "preload",
-        href: siteSerifSemiboldUrl,
-        as: "font",
-        type: "font/woff2",
-        crossOrigin: "anonymous",
-      },
+      { rel: "preload", href: siteSansUrl, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+      { rel: "preload", href: siteSerifUrl, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+      { rel: "preload", href: siteSerifSemiboldUrl, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -141,35 +123,28 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const isHome = useRouterState({
-    select: (s) => s.matches.some((match) => match.routeId === "/"),
-  });
+  const isHome = useRouterState({ select: (s) => s.matches.some((match) => match.routeId === "/") });
   const Content = isHome ? "main" : "div";
 
   return (
     <QueryClientProvider client={queryClient}>
       <CurrencyRatesProvider enabled={!isHome}>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2"
-        >
-          Skip to content
-        </a>
-        <SiteHeader />
-        <Content id="main">
-          {isHome && <HomeHero />}
-          <div className="mx-auto flex max-w-[90rem]">
-            <SiteSidebar />
-            <div className="min-w-0 flex-1">
-              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-              <Outlet />
-              <PageContentSharePanel />
-            </div>
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">Skip to content</a>
+      <SiteHeader />
+      <Content id="main">
+        {isHome && <HomeHero />}
+        <div className="mx-auto flex max-w-[90rem]">
+          <SiteSidebar />
+          <div className="min-w-0 flex-1">
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+            <PageContentSharePanel />
           </div>
-        </Content>
-        <SiteFooter />
-        <FloatingContactButton />
-        <Analytics />
+        </div>
+      </Content>
+      <SiteFooter />
+      <FloatingContactButton />
+      <Analytics />
       </CurrencyRatesProvider>
     </QueryClientProvider>
   );

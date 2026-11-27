@@ -20,7 +20,7 @@ const platformButtonStyles: Record<string, string> = {
 const hubOffers: Record<string, { description: string; action: string }> = {
   kiwitaxi: { description: "Start your trip with a pre-booked pickup and a vehicle that suits your group.", action: "Check prices" },
   welcome: { description: "Arrange a welcoming airport pickup and travel straight to your destination.", action: "Book your pickup" },
-  intui: { description: "Find a comfortable transfer for your route, party and luggage.", action: "Explore transfers" },
+  intui: { description: "Find a transfer with space for your passengers and luggage.", action: "Explore transfers" },
   gettransfer: { description: "See available transfer offers and choose the ride that works for you.", action: "Compare offers" },
 };
 
@@ -44,6 +44,6 @@ export function AirportBookingPlatforms({ pageId = "airport-private-transfers", 
         <span className={`${compact ? "mt-3" : "mt-5"} inline-flex min-h-11 w-fit self-center items-center justify-center rounded-lg border px-5 py-2.5 text-center text-sm font-semibold shadow-sm transition-[background-color,border-color,box-shadow] group-hover:shadow-md ${platformButtonStyles[platform.partnerId || ""] ?? "border-primary/40 bg-secondary text-foreground group-hover:bg-secondary/80"}`}>{compact ? (hubOffer?.action ?? "View options") : platform.ctaLabel}</span><span className="sr-only"> (opens in a new tab)</span>
       </a>;
     })}</div>
-    {compact && <p className="mt-3 text-xs leading-relaxed text-muted-foreground" data-testid="airport-external-providers-note">These are external, independently operated booking websites. Each provider sets its own prices and terms. Please review all details carefully before booking.</p>}
+    {compact && <p className="mt-3 text-xs leading-relaxed text-muted-foreground" data-testid="airport-external-providers-note">Each independent booking website sets its own prices and terms. Check the details before booking.</p>}
   </section>;
 }

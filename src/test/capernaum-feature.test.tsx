@@ -91,7 +91,7 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(article).not.toContain("in both seasons");
     expect(article).toContain("National park & marine terminal");
     expect(article).not.toContain("National park / marine terminal");
-    expect(article).toContain("Access is <strong>free and does not require advance booking</strong>");
+    expect(article).toContain("Admission is <strong>free, with no advance booking required</strong>");
     expect(article).toContain('data-testid="capernaum-facilities-columns"');
     expect(article).not.toContain("An aerial view helps put");
     expect(article).toContain("Message me to arrange a private day trip");

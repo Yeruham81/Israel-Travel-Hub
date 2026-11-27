@@ -85,7 +85,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
         <p>The <External href={links.einBokek}>regional tourism authority's beach page</External> explains the public facilities, including accessible beach equipment. <External href={maps.einBokek}>Find Ein Bokek Central Beach on Google Maps</External>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Hamei Zohar Central Beach" image={{ src: sunbedsPhoto, alt: "Sun loungers and shade at the southern Dead Sea beaches" }}>
-        <p>South of the main Ein Bokek hotel strip, Hamei Zohar is another free public bathing choice, with managed beach facilities and a more spread-out coastal setting. I recommend considering Hamei Zohar if your hotel or driving route brings you farther south.</p>
+        <p>South of Ein Bokek, Hamei Zohar has another free public beach with facilities and a more open shoreline. I recommend it if you're staying or travelling farther south.</p>
         <p>See the <External href={links.hameiZohar}>official Hamei Zohar beach information</External> and <External href={maps.hameiZohar}>location on Google Maps</External>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Salt scenery, desert cliffs and the promenade" image={{ src: saltFormationPhoto, alt: "White salt formations rising from the turquoise Dead Sea" }}>
@@ -100,18 +100,18 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>You don't need a hotel reservation to float in the Dead Sea. The official beach pages currently list <strong>07:00–18:00 in summer</strong> and <strong>07:00–16:00 in winter</strong> for the Ein Bokek and Hamei Zohar central beaches. Confirm lifeguard hours and local notices before entering the water.</p>
+      <p>You don't need a hotel reservation to float in the Dead Sea. The central beaches at Ein Bokek and Hamei Zohar operate from <strong>07:00–18:00 in summer</strong> and <strong>07:00–16:00 in winter</strong>. Confirm lifeguard hours and local notices before entering the water.</p>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="dead-sea-beach-comparison">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-lg font-semibold">Ein Bokek Central Beach</h3>
           <p className="mt-2 text-sm"><strong>Admission:</strong> Free</p>
-          <p className="mt-1 text-sm leading-relaxed">A convenient first choice with showers, changing rooms, council-provided free chairs and umbrellas, and access to the hotel-area promenade. Nearby parking is generally paid.</p>
+          <p className="mt-1 text-sm leading-relaxed">A convenient first choice with showers, changing rooms, free chairs and umbrellas, and access to the hotel-area promenade. Nearby parking is generally paid.</p>
           <External href={links.einBokek}>Official beach information</External>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-lg font-semibold">Hamei Zohar Central Beach</h3>
           <p className="mt-2 text-sm"><strong>Admission:</strong> Free</p>
-          <p className="mt-1 text-sm leading-relaxed">A public beach farther south, with showers, changing rooms, free council-provided chairs and umbrellas, and lifeguard services during operating hours.</p>
+          <p className="mt-1 text-sm leading-relaxed">A public beach farther south, with showers, changing rooms, free chairs and umbrellas, and lifeguard services during operating hours.</p>
           <External href={links.hameiZohar}>Official beach information</External>
         </article>
         <article className="rounded-xl border bg-card p-4">
@@ -121,14 +121,14 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
           <External href={links.hotelBeaches}>Compare beach facilities</External>
         </article>
       </div>
-      <AttractionPracticalTip><strong>Free entry does not mean supervised bathing at every hour.</strong> Beach promenades may remain accessible outside lifeguard shifts, but enter the water only within the marked swimming area while lifeguards are operating. Check the posted notices on arrival.</AttractionPracticalTip>
+      <AttractionPracticalTip><strong>Enter the water only in the marked bathing area while lifeguards are on duty.</strong> Beach promenades may remain accessible outside lifeguard hours. Check the posted notices on arrival.</AttractionPracticalTip>
       <div className="rounded-xl border bg-secondary/20 p-4">
         <h3 className="font-serif text-lg font-semibold">Where to go and what to budget for</h3>
         <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Public beach:</strong> Entry is free at the central Ein Bokek and Hamei Zohar beaches.</li>
           <li><strong>Extra costs:</strong> Parking, meals, optional rentals, treatments and hotel facilities may cost extra.</li>
           <li><strong>Water and shade:</strong> Bring drinking water and use the public showers to remove salt after bathing.</li>
-          <li><strong>Accessibility:</strong> Central beaches advertise accessible paths and beach wheelchairs; check the available facilities at the lifeguard station.</li>
+          <li><strong>Accessibility:</strong> The central beaches have accessible paths and beach wheelchairs. Ask at the lifeguard station about available facilities.</li>
           <li><strong>Weather:</strong> Summer heat can be extreme, while desert storms can affect the roads and hiking access.</li>
         </ul>
       </div>
@@ -169,7 +169,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
           <ol className="mt-2 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
             <li>Visit <Link to="/attractions/masada/" className={inlineLink}>Masada</Link> in the cooler morning hours; allow two to three hours for the plateau.</li>
             <li>Continue to Ein Bokek for a late-morning or afternoon beach stop within supervised bathing hours.</li>
-            <li>Keep extra time for the drive home. Add <Link to="/attractions/ein-gedi/" className={inlineLink}>Ein Gedi</Link> only when its trails are open and the day's timing makes sense.</li>
+            <li>Keep extra time for the drive home. Add <Link to="/attractions/ein-gedi/" className={inlineLink}>Ein Gedi</Link> if its trails are open and you have enough time.</li>
           </ol>
         </article>
       </div>
@@ -217,7 +217,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
   tourContent: (
     <div className="mt-4 space-y-3">
       <p>Guided day trips are useful if you'd rather not drive. These sample tours depart from Jerusalem and range from a relaxed beach excursion to a Masada-and-Dead-Sea combination.</p>
-      <AttractionPracticalTip>Tour itineraries may include a northern-shore beach, Ein Bokek or Hamei Zohar; check the beach named by the operator. Check the exact beach stop, entrance fees, admissions and pickup point before booking.</AttractionPracticalTip>
+      <AttractionPracticalTip>Tours may visit a northern-shore beach, Ein Bokek or Hamei Zohar. Before booking, check the exact beach, included entrance fees and pickup point.</AttractionPracticalTip>
       <DeadSeaTourOptions selectedIds={["jslm-deadsea-beach-viator", "jslm-deadsea-masada-viator", "jslm-deadsea-masada-gyg"]} pageId="attractions-dead-sea" />
       <p className="text-sm">For more departure options, including Tel Aviv, explore my <Link to="/tours/masada-dead-sea/" className={inlineLink}>Masada & Dead Sea tours</Link>. For a flexible route with a private driver, <a href="#contact" className={inlineLink}>send me your plans</a>.</p>
     </div>

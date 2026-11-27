@@ -33,10 +33,10 @@ describe("four dedicated airport transfer routes", () => {
     expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("I confirm the full price before booking.");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("Per vehicle · up to 4 passengers");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("One-way weekday airport pickup");
-    expect(screen.getByTestId("airport-route-fx-note").previousElementSibling).toHaveTextContent("Returns, larger vehicles and extra stops receive a personal quote.");
+    expect(screen.getByTestId("airport-route-fx-note").previousElementSibling).toHaveTextContent(/quote return trips, larger vehicles and extra stops separately/i);
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(route.driveTime);
-    expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveAttribute("href", "#request-quote");
-    expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveClass("bg-primary");
+    expect(screen.getByRole("link", { name: "Get a quote" })).toHaveAttribute("href", "#request-quote");
+    expect(screen.getByRole("link", { name: "Get a quote" })).toHaveClass("bg-primary");
     const hero = screen.getByTestId("guide-hero-layout");
     expect(within(hero).getByTestId("guide-hero-media").querySelector("img")).toHaveAttribute("src", expect.stringMatching(/transfer-/));
     const updateLine = within(hero).getByText(/^Updated/);
@@ -127,8 +127,8 @@ describe("four dedicated airport transfer routes", () => {
     expect(banners).toHaveLength(4);
     expect(banners.every(banner => Boolean(banner.querySelector(".self-center")))).toBe(true);
     expect(platformSection).toHaveTextContent("You can also search for a private transfer to " + guide.city + " on one of the booking websites below.");
-    expect(platformSection).toHaveTextContent("Each provider sets its own prices and terms.");
-    expect(platformSection).toHaveTextContent("Please review all details carefully before booking.");
+    expect(platformSection).toHaveTextContent("Each independent booking website sets its own prices and terms.");
+    expect(platformSection).toHaveTextContent("Check the details before booking.");
     expect(within(platformSection).getByTestId("airport-external-providers-note")).toBeInTheDocument();
     expect(platformSection.compareDocumentPosition(container.querySelector("#faq")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     for (const [index, platform] of platformLinks.entries()) {
@@ -149,11 +149,11 @@ describe("four dedicated airport transfer routes", () => {
     fireEvent.change(screen.getByLabelText("Flight arrival time *"), { target: { value: "22:30" } });
     fireEvent.change(screen.getByLabelText("Drop-off hotel or address"), { target: { value: `Example Hotel, ${guide.city}` } });
     fireEvent.change(screen.getByLabelText("Passengers *"), { target: { value: "6" } });
-    expect(screen.getByText(/published car starting prices do not apply/)).toBeInTheDocument();
+    expect(screen.getByText(/I'll provide a customized quote for a suitable vehicle/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.submit(form);
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: guide.title, request: { kind: "transfer", fields: { destinationId: route.id, address: `Example Hotel, ${guide.city}`, passengers: "6", consent: true } } });
@@ -183,7 +183,7 @@ describe("four dedicated airport transfer routes", () => {
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
     const body = JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body));
     expect(body.request.kind).toBe("contact");
     expect(body.request.fields.subject).toBe("Private transfer to Ben Gurion Airport");
@@ -206,6 +206,6 @@ describe("four dedicated airport transfer routes", () => {
     const deadSea = getAirportRouteGuide("dead-sea");
     expect(deadSea.rate.price.amount).toBe(1300);
     expect(deadSea.areas.map((area) => area.text).join(" ")).toMatch(/Ein Bokek.*Neve|Ein Bokek.*every hotel/s);
-    expect(deadSea.faqs.find((faq) => faq.q.includes("every Dead Sea hotel"))?.a).toMatch(/Ein Gedi, Neve Zohar.*own route.*Ein Bokek/);
+    expect(deadSea.faqs.find((faq) => faq.q.includes("every Dead Sea hotel"))?.a).toMatch(/starting fare applies to Ein Bokek only.*separate quote to Ein Gedi, Neve Zohar/s);
   });
 });

@@ -15,7 +15,7 @@ describe("Attraction On this page contact labels", () => {
 
   it("uses first-person contact labels in travel guides", () => {
     const travelGuide = file("src/components/TravelGuide.tsx");
-    expect(travelGuide).toContain('["contact", "Contact Me"]');
+    expect(travelGuide).toContain('["contact", "Contact me"]');
     expect(travelGuide).not.toContain("Contact Moshe");
     const attractionIdsInTravelGuide = ["annunciation", "magdala", "precipice", "qasr", "megiddo", "yardenit"] as const;
     for (const id of attractionIdsInTravelGuide) expect(travelGuidePaths[id].startsWith("/attractions/")).toBe(true);

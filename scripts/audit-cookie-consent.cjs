@@ -19,12 +19,14 @@ const consentKey = "ith:cookie-consent:v1";
   const settle = () => page.waitForTimeout(700);
   async function settings() {
     await page.locator("footer").getByRole("button", { name: "Cookie settings", exact: true }).click();
-    await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
+    await page.getByRole("dialog", { name: "Cookie settings" }).waitFor();
   }
-  async function necessary() { await page.getByRole("button", { name: "Accept necessary", exact: true }).click(); await settle(); assert.equal(await page.getByRole("dialog", { name: "Cookie preferences" }).count(), 0); }
+  async function necessary() { await page.getByRole("button", { name: "Accept essential", exact: true }).click(); await settle(); assert.equal(await page.getByRole("dialog", { name: "Cookie settings" }).count(), 0); }
   for (const path of ["/car-rental/", "/accommodation/", "/attractions/mount-of-olives/"]) {
-    await page.goto(base + path, { waitUntil: "networkidle" });
-    await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
+    await page.goto(base + path, { waitUntil: "domcontentloaded" });
+    await page.getByRole("dialog", { name: "Cookie settings" }).waitFor();
+    await page.locator("#main").waitFor();
+    await settle();
     assert.equal(requests.length, 0, "No provider request before consent at " + path + ": " + requests.join(","));
     await necessary();
     await page.locator("footer").scrollIntoViewIfNeeded();
@@ -33,8 +35,9 @@ const consentKey = "ith:cookie-consent:v1";
     assert.equal(await page.locator('iframe[src],iframe[srcdoc]').count(), 0);
     await page.evaluate(key => localStorage.removeItem(key), consentKey);
   }
-  await page.goto(base + "/car-rental/", { waitUntil: "networkidle" });
-  await page.getByRole("button", { name: "Customize" }).click();
+  await page.goto(base + "/car-rental/", { waitUntil: "domcontentloaded" });
+  await page.getByRole("dialog", { name: "Cookie settings" }).waitFor();
+  await page.getByRole("button", { name: "Manage preferences" }).click();
   const boxes = page.getByRole("dialog").getByRole("checkbox");
   assert.equal(await boxes.count(), 4, "Advertising has its own category");
   await boxes.nth(3).check();
@@ -56,18 +59,18 @@ const consentKey = "ith:cookie-consent:v1";
   await settings(); await necessary();
   assert.equal(await page.locator('iframe[src],iframe[srcdoc]').count(), 0, "Withdrawal destroys optional frames");
   const count = requests.length;
-  await page.reload({ waitUntil: "networkidle" }); await page.locator("footer").scrollIntoViewIfNeeded(); await settle();
+  await page.reload({ waitUntil: "domcontentloaded" }); await page.locator("footer").scrollIntoViewIfNeeded(); await settle();
   assert.equal(requests.length, count, "Rejection persists after reload");
   // Functional and commercial categories enable different provider documents.
-  await page.goto(base + "/attractions/mount-of-olives/", { waitUntil: "networkidle" });
-  await settings(); await boxes.nth(1).check();
+  await page.goto(base + "/attractions/mount-of-olives/#cookie-settings", { waitUntil: "domcontentloaded" });
+  await page.getByRole("dialog", { name: "Cookie settings" }).waitFor(); await boxes.nth(1).check();
   await page.getByRole("button", { name: "Save preferences" }).click();
   await page.locator('iframe[data-cookie-category="external"][src]').first().scrollIntoViewIfNeeded();
   await settle();
   assert(requests.some(url => /unpkg\.com|maps\.google\.com/.test(url)), "External content enables map resources");
   await settings(); await necessary();
-  await page.goto(base + "/accommodation/", { waitUntil: "networkidle" });
-  await settings(); await boxes.nth(2).check();
+  await page.goto(base + "/accommodation/#cookie-settings", { waitUntil: "domcontentloaded" });
+  await page.getByRole("dialog", { name: "Cookie settings" }).waitFor(); await boxes.nth(2).check();
   await page.getByRole("button", { name: "Save preferences" }).click();
   await page.locator('#hotel-search-booking').scrollIntoViewIfNeeded();
   await page.locator('#hotel-search-booking iframe[srcdoc]').waitFor();
@@ -83,17 +86,26 @@ const consentKey = "ith:cookie-consent:v1";
   await otherTab.close();
   const directCount = requests.length;
   for (const path of ["/maps/area.html?bbox=35.20,31.76,35.24,31.79&marker=31.777,35.22", "/widgets/discovercars.html"]) {
-    await page.goto(base + path, { waitUntil: "networkidle" }); await settle();
+    await page.goto(base + path, { waitUntil: "domcontentloaded" });
+    await page.getByRole("link", { name: "Cookie settings", exact: true }).waitFor();
+    await settle();
     assert.equal(requests.length, directCount, "Direct helper URL cannot bypass consent");
     assert(await page.getByRole("link", { name: "Cookie settings", exact: true }).isVisible());
   }
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto(base + "/car-rental/#cookie-settings", { waitUntil: "networkidle" });
-  await page.getByRole("dialog", { name: "Cookie preferences" }).waitFor();
-  for (const label of ["Accept all", "Accept necessary", "Customize"]) {
+  await page.goto(base + "/car-rental/#cookie-settings", { waitUntil: "domcontentloaded" });
+  await page.getByRole("dialog", { name: "Cookie settings" }).waitFor();
+  for (const label of ["Accept all", "Accept essential", "Manage preferences"]) {
     const box = await page.getByRole("button", { name: label, exact: true }).boundingBox();
     assert(box && box.x >= 0 && box.x + box.width <= 390 && box.y >= 0 && box.y + box.height <= 844, "Mobile choice visible: " + label);
   }
+  const acceptBox = await page.getByRole("button", { name: "Accept all", exact: true }).boundingBox();
+  const essentialBox = await page.getByRole("button", { name: "Accept essential", exact: true }).boundingBox();
+  const manageBox = await page.getByRole("button", { name: "Manage preferences", exact: true }).boundingBox();
+  assert(acceptBox && essentialBox && manageBox, "All three consent choices remain visible");
+  assert(acceptBox.width > essentialBox.width && acceptBox.width > manageBox.width, "Accept all spans first row");
+  assert(essentialBox.y >= acceptBox.y + acceptBox.height && manageBox.y >= acceptBox.y + acceptBox.height, "Both secondary choices are directly below Accept all");
+  assert(Math.abs(essentialBox.y - manageBox.y) < 2, "Secondary choices share a row");
   await necessary();
   assert(await page.locator("#main form").count() > 0, "Enquiry form remains available");
   assert(await page.locator('a[href*="tpm.li"]').count() > 0, "Affiliate click-out remains available");
@@ -107,7 +119,8 @@ const consentKey = "ith:cookie-consent:v1";
   assert(!requests.some(url => /googlesyndication|doubleclick|googleadservices/.test(url)), "No ad request even after Accept all while ads are inactive");
   // A previous all-categories choice cannot silently become an advertising grant.
   await page.evaluate(key => localStorage.setItem(key, JSON.stringify({ version: 1, categories: { analytics: true, external: true, marketing: true }, expiresAt: Date.now() + 86400000 })), consentKey);
-  await page.reload({ waitUntil: "networkidle" }); await settings();
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.getByRole("dialog", { name: "Cookie settings" }).waitFor();
   assert.equal(await boxes.nth(0).isChecked(), true);
   assert.equal(await boxes.nth(1).isChecked(), true);
   assert.equal(await boxes.nth(2).isChecked(), true);

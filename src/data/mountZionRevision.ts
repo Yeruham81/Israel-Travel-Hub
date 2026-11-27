@@ -50,7 +50,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
         "Visit the Cenacle, traditionally remembered as the Room of the Last Supper, on the upper floor of the David's Tomb complex.",
         "Go downstairs to the traditional Tomb of King David, an active Jewish prayer site, then return toward Zion Gate or continue to your next Jerusalem stop.",
       ],
-      note: "On Sundays, Dormition Abbey is more convenient after its late-morning opening. The Upper Room and David's Tomb have their own visiting arrangements.",
+      note: "On Sundays, visit the Upper Room and David's Tomb first, then Dormition Abbey after it opens at 11:30.",
     },
     {
       name: "Mount Zion first, then the Old City",
@@ -62,7 +62,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
         "Return to Zion Gate if you have visited the lower sites, or arrange a pickup at a suitable road-accessible point.",
         "Enter the Old City through Zion Gate and explore the Armenian and Jewish Quarters; you can continue toward the Western Wall or the Christian Quarter.",
       ],
-      note: "The church and cemetery are on different parts of the hillside. Choose which site you want to visit and allow time to walk back to Zion Gate.",
+      note: "Choose either the church or the cemetery, as they are on different parts of the hillside. Allow time to walk back uphill to Zion Gate.",
     },
   ],
   stopIntro: "Begin near Zion Gate for the main landmarks. The last two stops lead downhill to separate entrances; allow more time for either one.",
@@ -77,7 +77,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
     {
       name: "David's Tomb",
       description: "The traditional Tomb of King David occupies the lower level beneath the Cenacle. Its identification with the biblical king developed in medieval traditions, and the chamber remains an active Jewish prayer site.",
-      visit: "There are separate Jewish prayer sections here, and men should bring a head covering. Allow a quiet few minutes, particularly when people are praying, before moving back towards Dormition Abbey.",
+      visit: "Respect the separate Jewish prayer areas and keep your visit quiet, especially during prayers. Men should bring a head covering.",
       tipLabel: "A respectful visit",
       image: { src: "/images/jerusalem/mount-zion/davids-tomb.webp", alt: "The traditional cenotaph of King David inside the Mount Zion prayer chamber" },
     },

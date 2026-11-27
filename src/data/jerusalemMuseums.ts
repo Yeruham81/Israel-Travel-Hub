@@ -22,13 +22,13 @@ export const jerusalemMuseumAreas: {id:JerusalemMuseumArea;name:string;intro:str
   },
   {
     "id": "central",
-    "name": "City centre, Nahalat Shiva & Musrara",
-    "intro": "Smaller heritage museums and multimedia experiences are scattered across central streets, with a walkable cluster around Hillel Street and Nahalat Shiva; Museum on the Seam is farther north."
+    "name": "City center, Nahalat Shiva & Musrara",
+    "intro": "Several smaller heritage museums and multimedia attractions are within walking distance of Hillel Street and Nahalat Shiva. Museum on the Seam is farther north."
   },
   {
     "id": "south",
     "name": "Talbiya & the Hinnom Valley",
-    "intro": "The Museum for Islamic Art and Menachem Begin Heritage Center reward dedicated visits on the south side of the city centre. Allow transfer time between them."
+    "intro": "The Museum for Islamic Art and Menachem Begin Heritage Center are south of the city center. Allow enough time for each museum and the journey between them."
   }
 ];
 export const jerusalemMuseums: JerusalemMuseumEntry[] = [
@@ -130,7 +130,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "admission": "Free entry to the museum and memorial campus",
     "openingDays": "Sun–Thu and Friday mornings; closed Sat and Jewish holidays",
     "booking": "Reserve a free museum entry slot online; walk-ins depend on availability",
-    "intro": "Israel's Holocaust remembrance centre combines the Holocaust History Museum with monuments, archives, survivor testimony and contemplative spaces across its campus.",
+    "intro": "Israel's Holocaust remembrance center combines the Holocaust History Museum with monuments, archives, survivor testimony and contemplative spaces across its campus.",
     "highlights": [
       "Holocaust History Museum and Hall of Names",
       "Children's Memorial and the Avenue of the Righteous"
@@ -189,7 +189,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
       "Distinctive 1930s stone architecture",
       "Regional archaeological collections"
     ],
-    "tip": "Do not plan a spontaneous interior visit. Check whether a book-ahead guided tour is running; the facade can be seen from Sultan Suleiman Street.",
+    "tip": "Visit the interior only if you've booked a guided tour. You can see the facade from Sultan Suleiman Street.",
     "url": "https://www.tod.org.il/en/tours-around-jerusalem/",
     "ticketUrl": "https://www.tod.org.il/en/event/treasures-of-the-rockefeller-in-en/",
     "closureNote": "Closed to regular walk-in visitors; check organised tours."
@@ -211,7 +211,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "admission": "Regular ticket ₪58; online price advertised at ₪49",
     "openingDays": "Show times vary; generally Sun–Fri, closed Sat",
     "booking": "Book a timed performance; arrange English audio by phone",
-    "intro": "A motion-seat multimedia show takes visitors through chapters of Jerusalem's past. It is an indoor experience built around an audiovisual presentation.",
+    "intro": "This indoor audiovisual show uses moving seats to take visitors through different periods of Jerusalem's history.",
     "highlights": [
       "Immersive film and moving-seat effects",
       "Visual storytelling about Jerusalem's history"
@@ -243,14 +243,14 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
       "Original prison cells and escape story",
       "Historical displays about the Mandate period"
     ],
-    "tip": "Pair the museum with a walk through the Russian Compound and city-centre streets.",
+    "tip": "Pair the museum with a walk through the Russian Compound and city-center streets.",
     "url": "https://museums.mod.gov.il/sites/Jerusalem/AboutUs/Pages/About.aspx"
   },
   {
     "id": "friends",
     "name": "Friends of Zion Museum",
     "area": "central",
-    "neighbourhood": "Nahalat Shiva · city centre",
+    "neighbourhood": "Nahalat Shiva · city center",
     "address": "20 Yosef Rivlin Street, Jerusalem",
     "mapLocation": {
       "lat": 31.780167,
@@ -262,12 +262,12 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "admission": "Guided experience; check current admission at booking",
     "openingDays": "Guided sessions Sun–Fri; closed Sat; check actual tour times",
     "booking": "Guided tour only; reserve your preferred language and slot",
-    "intro": "An immersive multimedia presentation explores the stories of non-Jewish supporters of Zionism and the founding of Israel through a distinctly curated perspective.",
+    "intro": "The museum uses multimedia exhibits to present its account of non-Jewish supporters of Zionism and the founding of Israel.",
     "highlights": [
       "Guided multimedia storytelling",
       "Historical narratives through immersive displays"
     ],
-    "tip": "This is a timed guided experience; select your language and allow time to arrive before the session.",
+    "tip": "Book a guided visit in your preferred language and arrive before the scheduled start.",
     "url": "https://fozmuseum.com/",
     "ticketUrl": "https://fozmuseum.com/online-reservation/"
   },
@@ -275,7 +275,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "tolerance",
     "name": "Museum of Tolerance Jerusalem",
     "area": "central",
-    "neighbourhood": "Hillel Street · city centre",
+    "neighbourhood": "Hillel Street · city center",
     "address": "32 Hillel Street, Jerusalem",
     "mapLocation": {
       "lat": 31.779129,
@@ -288,7 +288,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "admission": "Guided English exhibition tour ₪35–50 depending on ticket type",
     "openingDays": "Guided tours on selected Sun–Fri dates; closed Sat",
     "booking": "Book a dated guided tour; exhibition age guidance may apply",
-    "intro": "A contemporary exhibition and cultural centre devoted to human dignity, dialogue and identity, with themed gallery tours and changing public programmes.",
+    "intro": "A contemporary exhibition and cultural center devoted to human dignity, dialogue and identity, with themed gallery tours and changing public programmes.",
     "highlights": [
       "Guided tours of current exhibitions",
       "Contemporary cultural and social themes"
@@ -303,7 +303,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "music",
     "name": "Hebrew Music Museum",
     "area": "central",
-    "neighbourhood": "Nahalat Shiva · city centre",
+    "neighbourhood": "Nahalat Shiva · city center",
     "address": "10 Yoel Moshe Salomon Street, Jerusalem",
     "mapLocation": {
       "lat": 31.780637,
@@ -330,7 +330,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "italian",
     "name": "Nahon Museum of Italian Jewish Art",
     "area": "central",
-    "neighbourhood": "Hillel Street · city centre",
+    "neighbourhood": "Hillel Street · city center",
     "address": "25 Hillel Street, Jerusalem",
     "mapLocation": {
       "lat": 31.780202,
@@ -421,12 +421,12 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "admission": "Adult ₪30; senior, student and child ₪25",
     "openingDays": "Sun–Thu 09:00–16:30; Fri until 12:30; closed Sat",
     "booking": "Pre-book a guided multimedia museum tour",
-    "intro": "A multimedia presentation traces Menachem Begin's life from Poland to his leadership in Israel and the peace agreement with Egypt, alongside the centre's educational collections.",
+    "intro": "A multimedia presentation traces Menachem Begin's life from Poland to his leadership in Israel and the peace agreement with Egypt, alongside the center's educational collections.",
     "highlights": [
       "Personal archives and multimedia biography",
       "Israel's modern political and diplomatic history"
     ],
-    "tip": "Reserve the tour language and take time to enjoy the views towards the Hinnom Valley afterwards.",
+    "tip": "Book a tour in your preferred language, then enjoy the views towards the Hinnom Valley afterwards.",
     "url": "https://www.begincenter.org.il/begins-heritage/museum/?lang=en",
     "ticketUrl": "https://begincenter.smarticket.co.il/en/",
     "featured": true

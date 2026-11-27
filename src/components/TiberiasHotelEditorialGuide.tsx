@@ -75,7 +75,7 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
     kind: "Family activity hotel",
     summary: "A central family hotel with seasonal water slides, children's clubs and entertainment.",
     bestFor: "Families seeking meals and activities close to town",
-    consider: "Confirm whether your booking is full board or all-inclusive; the advertised package can change.",
+    consider: "The hotel currently offers full-board accommodation. Confirm which meals, drinks and snacks are included.",
     beach: "Short trip to a public swimming beach",
   },
   "tib-caesar": {
@@ -94,15 +94,15 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
   },
   "tib-emily": {
     kind: "Small city hotel",
-    summary: "A small hotel near the city centre offering bed-and-breakfast accommodation.",
-    bestFor: "Travellers looking for a convenient place to stay while exploring the Galilee",
+    summary: "A small hotel near the city center offering bed-and-breakfast accommodation.",
+    bestFor: "Travelers looking for a convenient place to stay while exploring the Galilee",
     consider: "Check meal options, parking availability and access to the swimming pool.",
     beach: "Near the waterfront; check swimming access",
   },
   "tib-tiberia": {
     kind: "Small central hotel",
-    summary: "A simple private-room hotel in Tiberias' historic center, handy for town sightseeing.",
-    bestFor: "Independent travellers looking for a private hotel room",
+    summary: "A simple hotel offering private rooms in Tiberias' historic center, within easy reach of local attractions.",
+    bestFor: "Independent travelers looking for a private hotel room",
     consider: "Confirm reception hours, stairs or lift access and room facilities.",
     beach: "Central town base; walk to the lakefront",
   },
@@ -169,7 +169,7 @@ const groupPlanningTips: Record<string, { title: string; points: readonly [strin
 const hotelFacilityNotices: Record<string, string> = {
   "tib-galei-kinneret": "The private beach closed on October 4, 2026. The operator expects it to reopen for the next swimming season.",
   "tib-scots": "The seasonal outdoor pool is closed from November 1, 2026, to April 1, 2027.",
-  "tib-leonardo-club": "The water slides are closed for winter. The operator currently says stays run on a full-board basis rather than all-inclusive.",
+  "tib-leonardo-club": "The water slides are closed for winter. The hotel currently offers full-board stays.",
 };
 
 const browseLabels: Record<string, string> = {
@@ -255,7 +255,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
       <section id="choose" className="mt-10 scroll-mt-32" aria-labelledby="choose-h">
         <p className="eyebrow">Choose your Tiberias stay</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Tiberias hotel suits you?</h2>
-        <p className="mt-4 max-w-4xl leading-relaxed">I recommend choosing a hotel around the kind of holiday you want: a luxurious lakeside break, family activities, a convenient central base or simple accommodation for exploring the Galilee.</p>
+        <p className="mt-4 max-w-4xl leading-relaxed">I recommend a lakeside hotel for relaxation, a resort with children's facilities for a family holiday, or central accommodation for sightseeing around the Galilee.</p>
         <Link to="/accommodation/tiberias/" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary" data-testid="editorial-all-hotels-link">
           Browse all Tiberias hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
         </Link>
@@ -362,7 +362,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
 
       <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
         <h2 id="location-h" className="text-3xl">Tiberias hotel areas & getting around</h2>
-        <p className="mt-3 leading-relaxed">Hotels range from the lower town and promenade to hillside streets and lakeside properties at the north and south edges. Consider the elevation as well as walking distance when choosing your base.</p>
+        <p className="mt-3 leading-relaxed">Hotels range from the lower town and promenade to hillside streets and lakeside properties at the north and south edges. Consider hills and walking distances when choosing your hotel.</p>
         <div className="mt-5"><AreaMap area={{ name: "Tiberias and the Sea of Galilee waterfront", map: guide.map }} provider="google" googleZoom={13} /></div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
           {guide.locations.map(location => <article key={location.name} className="rounded-xl border bg-card p-4 sm:p-5">

@@ -85,14 +85,14 @@ const hotelNotes: Record<string, HotelNote> = {
   "haifa-nof": {
     kind: "Carmel city hotel",
     summary: "A Carmel Center hotel overlooking Haifa Bay, also known on some booking sites as Haifa Bay View.",
-    bestFor: "Travelers comparing a Carmel address and bay outlook",
+    bestFor: "Travelers looking for panoramic bay views and a convenient Mount Carmel location",
     consider: "Verify 101 Hanassi Avenue if the provider uses the former Haifa Bay View name.",
     beach: "Hilltop view; separate beach journey",
   },
   "haifa-port-inn": {
     kind: "Independent guesthouse",
     summary: "Smaller accommodation on Derech Yafo for exploring downtown and the lower city.",
-    bestFor: "Independent travellers looking for simple accommodation in downtown Haifa",
+    bestFor: "Independent travelers looking for simple accommodation in downtown Haifa",
     consider: "Check room facilities, bathroom type and reception hours if you're arriving late.",
     beach: "Downtown; travel to a swimming beach",
   },
@@ -188,7 +188,7 @@ function trackedExpediaBrowseLink(pageKey: string) {
 }
 
 const bookingTips = [
-  { title: "Consider Haifa's steep hills", text: "A nearby point on the map may be up a steep slope. Check walks, steps and the Carmelit or bus connection." },
+  { title: "Consider Haifa's steep hills", text: "Even short walks in Haifa can involve steep hills. Check walks, steps and the Carmelit or bus connection." },
   { title: "Confirm your beach plan", text: "For beach days, choose the southern seafront. Mount Carmel hotels offer bay views with a separate journey to the shore." },
   { title: "Choose the right room for your group", text: "Check all guest ages, bed arrangements, connecting rooms and any adults-only policy before paying." },
   { title: "Compare actual facilities", text: "Pools, plunge pools, spa treatments and children's activities can have different seasons or access rules." },
@@ -384,7 +384,7 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
 
       <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
         <h2 id="location-h" className="text-3xl">Haifa hotel areas & getting around</h2>
-        <p className="mt-3 leading-relaxed">Haifa stretches from the port and German Colony up to the Carmel and along the southern beachfront. Use the map to orient yourself, and the individual hotel links above to find each entrance.</p>
+        <p className="mt-3 leading-relaxed">Haifa stretches from the port and German Colony up to the Carmel and along the southern beachfront.</p>
         <div className="mt-5"><AreaMap area={{ name: "Haifa hotel areas", map: guide.map }} provider="google" googleZoom={12} /></div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
           {guide.locations.map(location => <article key={location.name} className="rounded-xl border bg-card p-4 sm:p-5">

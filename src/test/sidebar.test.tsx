@@ -209,7 +209,7 @@ describe("shared sidebar navigation", () => {
       ["Israel travel tips", travelGuidePaths.travelTips],
       ["Best time to visit Israel", travelGuidePaths.bestTime],
       ["Holidays & events", travelGuidePaths.calendar],
-      ["Choosing an eSIM for Israel", travelGuidePaths.esim],
+      ["Best eSIM for Israel", travelGuidePaths.esim],
     ]);
     expect(planning.compareDocumentPosition(within(guides).getByRole("link", { name: "What to eat in Israel" })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const itineraries = within(guides).getByRole("list", { name: "Trip lengths" });
@@ -226,10 +226,10 @@ describe("shared sidebar navigation", () => {
       ["How to get to Tel Aviv", "/travel-blog/ben-gurion-airport-to-tel-aviv/"],
       ["How to get to Haifa", "/travel-blog/ben-gurion-airport-to-haifa/"],
       ["How to get to Ein Bokek", "/travel-blog/ben-gurion-airport-to-ein-bokek/"],
-      ["Ben Gurion Airport Taxis", "/travel-blog/ben-gurion-airport-taxis/"],
+      ["Ben Gurion Airport taxis", "/travel-blog/ben-gurion-airport-taxis/"],
       ["Traveling from Ben Gurion Airport on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/"],
       ["Sherut from Ben Gurion Airport", "/travel-blog/sherut-in-israel/"],
-      ["Ben Gurion arrival tips", "/travel-blog/ben-gurion-airport-arrival-tips/"],
+      ["Ben Gurion Airport arrival tips", "/travel-blog/ben-gurion-airport-arrival-tips/"],
     ];
     expect(within(airportGuides).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual(expected);
     const gettingAround = within(guides).getByRole("list", { name: "Getting around guides" });
@@ -254,8 +254,8 @@ describe("shared sidebar navigation", () => {
     const guides = screen.getByRole("region", { name: "Travel guides" });
     for (const [label, path] of [
       ["Is there Uber in Israel?", "uber-in-israel"],
-      ["Choosing an eSIM for Israel", "best-esim-for-israel"],
-      ["Ben Gurion arrival tips", "ben-gurion-airport-arrival-tips"],
+      ["Best eSIM for Israel", "best-esim-for-israel"],
+      ["Ben Gurion Airport arrival tips", "ben-gurion-airport-arrival-tips"],
     ] as const) {
       const link = within(guides).getByRole("link", { name: label });
       expect(link).toHaveAttribute("href", `/travel-blog/${path}/`);
@@ -336,7 +336,7 @@ describe("shared sidebar navigation", () => {
       expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
       expect(within(guides).queryByRole("button", { name: label })).not.toBeInTheDocument();
     }
-    fireEvent.click(within(guides).getByRole("link", { name: /Choosing an eSIM for Israel/ }));
+    fireEvent.click(within(guides).getByRole("link", { name: /Best eSIM for Israel/ }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/best-esim-for-israel/"));
 

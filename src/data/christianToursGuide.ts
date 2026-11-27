@@ -32,7 +32,7 @@ export const christianAreas: ChristianArea[] = [
     id: "jerusalem", name: "Jerusalem", title: "Jerusalem: the Passion, Crucifixion and Resurrection",
     image: "/images/attractions/old-jerusalem-via-dolorosa.webp", alt: "Via Dolorosa in Jerusalem's Old City",
     intro: "Jerusalem is the natural starting point for many pilgrimages. The Church of the Holy Sepulchre is revered by several Christian traditions as the place of Jesus' crucifixion, burial and resurrection. The Via Dolorosa is a traditional Stations of the Cross route, not a historically verified street-by-street account.",
-    planning: "Allow a full day for the Old City and selected Mount of Olives or Mount Zion stops; a second day gives space for prayer, services and unhurried visits. The Old City is largely on foot, with stone steps and uneven lanes.",
+    planning: "Allow a full day for the Old City and selected Mount of Olives or Mount Zion stops; a second day gives space for prayer, services and unhurried visits. Explore the Old City on foot, allowing for stone steps and uneven lanes.",
     sites: [
       {name:"Church of the Holy Sepulchre",note:"Calvary and the traditional tomb of Christ",to:"/travel-blog/churches-in-jerusalem/"},
       {name:"Via Dolorosa",note:"The traditional Stations of the Cross",to:"/attractions/via-dolorosa/"},
@@ -58,8 +58,8 @@ export const christianAreas: ChristianArea[] = [
   {
     id:"nazareth",name:"Nazareth",title:"Nazareth: the Annunciation and Jesus' early life",
     image:"/images/attractions/annunciation-upper-basilica.webp",alt:"Inside the Basilica of the Annunciation in Nazareth",
-    intro:"Nazareth combines living Christian communities with churches linked to the Annunciation and the early life of Jesus. The Basilica of the Annunciation is the headline stop; smaller churches and the old market reward a slower walk.",
-    planning:"Give Nazareth at least half a day. Cana and Mount Precipice can be added when transport and opening times allow; they are not part of one continuous pedestrian route.",
+    intro:"Nazareth combines living Christian communities with churches linked to the Annunciation and the early life of Jesus. The Basilica of the Annunciation is the main attraction, alongside smaller churches and Nazareth's old market.",
+    planning:"Give Nazareth at least half a day. Allow additional travel time to visit Cana and Mount Precipice.",
     sites:[
       {name:"Basilica of the Annunciation",note:"A major Catholic pilgrimage church",to:"/attractions/basilica-of-the-annunciation/"},
       {name:"St Joseph's Church",note:"Associated by tradition with the Holy Family",mapPlace:"Church of Saint Joseph, Nazareth, Israel"},
@@ -72,8 +72,8 @@ export const christianAreas: ChristianArea[] = [
   {
     id:"galilee",name:"Sea of Galilee",title:"Sea of Galilee: teachings, villages and lakeside churches",
     image:"/images/attractions/capernaum-synagogue.webp",alt:"Ancient synagogue ruins at Capernaum by the Sea of Galilee",
-    intro:"A day around the Sea of Galilee connects towns, archaeological remains and churches traditionally associated with Jesus' ministry. Capernaum, Tabgha, the Mount of Beatitudes and Magdala lie in different locations around the lake, not inside one park.",
-    planning:"Allow a substantial day to visit a sensible cluster of sites. Depending on your starting point, an overnight stay near the lake can make this much more comfortable than a long return trip from Jerusalem.",
+    intro:"A day around the Sea of Galilee connects towns, archaeological remains and churches traditionally associated with Jesus' ministry. Capernaum, Tabgha, the Mount of Beatitudes and Magdala are separate visitor sites around the lake.",
+    planning:"Allow a full day to explore the lakeside sites. I recommend staying overnight near the lake if you're travelling from Jerusalem.",
     sites:[
       {name:"Capernaum",note:"Ancient village and synagogue remains",to:"/attractions/capernaum/"},
       {name:"Tabgha",note:"Multiplication of Loaves and Fishes and Primacy traditions",to:"/attractions/tabgha/"},
@@ -108,7 +108,7 @@ export const christianAreas: ChristianArea[] = [
     id:"carmel",name:"Haifa & Carmel",title:"Haifa and Mount Carmel: a different Christian tradition",
     image:"/images/attractions/haifa-stella-maris.webp",alt:"Stella Maris Carmelite monastery in Haifa",
     intro:"On the Mediterranean coast, the Stella Maris monastery in Haifa is linked with Carmelite spirituality and the prophet Elijah. Deir al-Mukhraqa (Muhraqa), on another part of the Carmel ridge, is traditionally associated with Elijah's contest described in the Book of Kings.",
-    planning:"Stella Maris and Muhraqa are two monasteries in different parts of Mount Carmel. Allow time to drive between the two monasteries and check their opening hours.",
+    planning:"Stella Maris and Muhraqa are in different parts of Mount Carmel. Allow time to drive between them and check their opening hours.",
     sites:[
       {name:"Stella Maris, Haifa",note:"Carmelite monastery overlooking the Mediterranean",officialUrl:"https://www.carmelholylanddco.org/contacts/",mapPlace:"Stella Maris Monastery, Haifa, Israel"},
       {name:"Deir al-Mukhraqa, Mount Carmel",note:"Traditional site linked with Elijah",officialUrl:"https://www.carmelholylanddco.org/who-we-are/the-discalced-carmelites-in-the-holy-land/",mapPlace:"Deir al-Mukhraqa Carmelite Monastery, Daliyat al-Karmel, Israel"},
@@ -207,7 +207,7 @@ export const christianFaqs = [
   {q:"Where was Jesus traditionally baptized?",a:"Christian tradition associates the baptism of Jesus with the lower Jordan near Qasr al-Yahud. Yardenit, at the southern end of the Sea of Galilee, is a modern designated baptism site and a different location."},
   {q:"Do I need a licensed tour guide for Christian sightseeing?",a:"You can visit many sites independently. A licensed guide can explain the history and religious significance of the places you visit. I provide private transportation; professional guiding should be arranged separately."},
   {q:"Can tourists visit churches on Sundays?",a:"Often yes, but Sunday services and local worship have priority and some areas may be temporarily restricted. Check the particular church's schedule and whether a service is open to visitors."},
-  {q:"What should I wear when visiting churches?",a:"Modest clothing covering shoulders and knees is a sensible default. Some monasteries and sacred spaces have stricter rules; carry a scarf or additional layer and follow the site's signs."},
+  {q:"What should I wear when visiting churches?",a:"Wear modest clothing that covers your shoulders and knees. Some monasteries and sacred spaces have stricter rules; carry a scarf or additional layer and follow the site's signs."},
   {q:"Can I see Christian sites without renting a car?",a:"Yes. Jerusalem's Old City is mostly on foot, and organised day trips serve major regions. Public transport can cover some connections, but isolated church sites, steep approaches and changes of schedule may justify a driver or guided tour."},
   {q:"What is the best season for a Holy Land pilgrimage?",a:"Spring and autumn are often pleasant for walking, although religious holidays bring crowds and special schedules. Summer can be very hot, particularly around the Jordan Valley. Check each church's calendar and your preferred travel dates."},
   {q:"Is a baptism ceremony included in a Jordan River tour?",a:"A visit to the river site may be sightseeing only. Arrange your ceremony and confirm clergy, robes, changing facilities, group bookings and any fees."},

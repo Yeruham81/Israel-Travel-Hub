@@ -71,9 +71,9 @@ export const airportHubPhotoSrc: Record<string, string> = {
 export const airportDestinationCards = airportTransferRates.map((rate) => ({ ...rate, photo: { ...(airportHomepageRoutePhotos[rate.id] ?? airportTransferPhotos[rate.id]!), hubSrc: airportHubPhotoSrc[rate.id] } }));
 
 export const airportTransferBenefits = [
-  { title: "Agreed price, no extra charges", text: "The full fare is confirmed in advance, with no unexpected charges added later." },
-  { title: "Flight tracking", text: "Flight status is monitored so pickup can be coordinated with the actual landing time." },
-  { title: "Free cancellation up to 24 hours", text: "Direct bookings can be cancelled free of charge up to 24 hours before the scheduled pickup." },
+  { title: "Agreed price, no extra charges", text: "I'll confirm the full fare before you book, with no unexpected charges added later." },
+  { title: "Flight tracking", text: "I track your flight and adjust pickup timing to your arrival." },
+  { title: "Free cancellation up to 24 hours", text: "You can cancel a direct booking free of charge up to 24 hours before pickup." },
 ];
 
 export const airportTransferChecklist = [
@@ -92,7 +92,7 @@ export const airportTransferFaqs = [
   { q: "Where will I meet my driver at Ben Gurion Airport?", a: "For an airport pickup, I'll confirm your terminal meeting point and pickup instructions with the booking details. Follow those instructions after collecting your luggage." },
   { q: "How can I pay for my airport transfer?", a: "I'll confirm the available payment methods and when payment is due in writing before your booking is finalized." },
   { q: "Can I arrange a transfer on Shabbat or late at night?", a: "Send your travel date and time. I'll confirm availability, the vehicle and any night, Shabbat or holiday surcharge in your personal quote." },
-  { q: "When is my transfer booking confirmed?", a: "An inquiry does not reserve a vehicle. I'll confirm the full price, availability, pickup location and payment arrangements in writing before your booking is finalized." },
+  { q: "When is my transfer booking confirmed?", a: "Your booking is confirmed in writing once we agree on availability, the full fare, pickup location and payment terms." },
 ];
 
 export const airportRelatedLinks = [

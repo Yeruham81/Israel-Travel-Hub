@@ -75,9 +75,9 @@ describe("Accommodation booking hub",()=>{
   expect(upcomingAreaCard.querySelector("a")).toBeNull();
   expect(container.querySelectorAll('a[href^="/travel-blog/where-to-stay"], a[href^="/travel-blog/best-hotels"], a[href^="/travel-blog/best-dead-sea"]')).toHaveLength(5);
   expect(areaGuides).toHaveTextContent("Not sure where to base yourself?");
-  expect(areaGuides).toHaveTextContent("most popular neighborhoods and best areas to stay in Israel");
-  expect(areaGuides).toHaveTextContent("practical tips");
-  expect(areaGuides).toHaveTextContent("handpicked hotel recommendations");
+  expect(areaGuides).toHaveTextContent("Explore my destination guides");
+  expect(areaGuides).toHaveTextContent("practical advice on neighborhoods");
+  expect(areaGuides).toHaveTextContent("recommended hotels");
   expect(areaGuides.querySelectorAll("img")).toHaveLength(0);
  });
  it("shows hotel styles that lead to the actual area or category catalogues",()=>{
@@ -165,7 +165,7 @@ describe("Accommodation booking hub",()=>{
     "/travel-blog/best-hotels-in-tiberias/",
     "/travel-blog/best-dead-sea-hotels/",
   ]);
-  expect(guides).toHaveTextContent("Weigh German Colony charm, Carmel views and beach access");
+  expect(guides).toHaveTextContent("Compare hotels in Haifa's German Colony, on Mount Carmel and along the beachfront.");
   expect(screen.getByTestId("hub-header").querySelector("[data-guide-intro]")).toHaveTextContent(
     "Find the right place to stay in Israel, from Jerusalem's historic neighborhoods and Tel Aviv's beaches to Haifa, the Sea of Galilee and the Dead Sea."
   );

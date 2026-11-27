@@ -52,11 +52,11 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Stables, granary and daily life">
         <p>The buildings traditionally identified as stables contain stone troughs and features associated with keeping horses. A large circular stone-lined pit served as a granary, with grain remains helping archaeologists understand its use.</p>
-        <p>Some royal dates and attributions have been debated, so I prefer to focus on what the surviving buildings can tell us about transport, storage and the administration of an important city.</p>
+        <p>Archaeologists debate the dates of some buildings and which kings commissioned them. The surviving structures help explain how the city managed transport, storage and administration.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The underground water system">
         <p>One of Tel Megiddo's most memorable sights is the water system: a deep rock-cut shaft and a tunnel leading towards a spring outside the ancient city walls. It allowed residents to collect water while remaining protected during a siege.</p>
-        <p>The marked underground route has <strong>183 steps down</strong> to the shaft and <strong>80 steps up</strong> at the other end of the tunnel, according to the park's official audio guide. You emerge at a different point from where you entered; follow the signed path back towards the Canaanite gate and the start of the visit.</p>
+        <p>The marked underground route has <strong>183 steps down</strong> to the shaft and <strong>80 steps up</strong> at the other end of the tunnel. You emerge at a different point from where you entered; follow the signed path back towards the Canaanite gate and the start of the visit.</p>
         <p>The descent is optional. If stairs or enclosed spaces are difficult for your group, follow the above-ground trail instead. Check with park staff that the underground section is open and where to rejoin your group.</p>
       </AttractionHighlight>
       <AttractionHighlight
@@ -70,7 +70,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Tel Megiddo is a managed national park with a visitor centre, museum displays and an introductory film. The Israel Nature and Parks Authority publishes seasonal hours, entry fees and advance visit coordination on the <a href={telMegiddoSite.sources.park} target="_blank" rel="noopener noreferrer" className={inlineLink}>official park page</a>.</p>
+      <p>Tel Megiddo is a managed national park with a visitor center, museum displays and an introductory film. The Israel Nature and Parks Authority publishes seasonal hours, entry fees and advance visit coordination on the <a href={telMegiddoSite.sources.park} target="_blank" rel="noopener noreferrer" className={inlineLink}>official park page</a>.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="tel-megiddo-visitor-hours">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Opening hours</h3>
@@ -78,7 +78,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Summer, Friday:</strong> {telMegiddoSite.hours.summerFriday}.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Winter, Sunday–Thursday and Saturday:</strong> {telMegiddoSite.hours.winterRegular}.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Winter, Friday:</strong> {telMegiddoSite.hours.winterFriday}.</p>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Last admission is one hour before closing.</strong> On some holiday eves, including Yom Kippur eve, the park lists an earlier <strong>13:00 closing time</strong>. Holiday-eve opening hours can differ from Friday hours; confirm the schedule for your date on the official park page.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Last admission is one hour before closing.</strong> On some holiday eves, including Yom Kippur eve, the park has an earlier <strong>13:00 closing time</strong>. Holiday-eve opening hours can differ from Friday hours; confirm the schedule for your date on the official park page.</p>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Admission and contact</h3>
@@ -95,7 +95,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
           <li><strong>Footwear:</strong> Wear comfortable shoes with grip for uneven archaeological surfaces and steps.</li>
           <li><strong>Weather:</strong> Much of the mound is open to the sun. Bring drinking water and sun protection in warmer months.</li>
           <li><strong>Accessibility:</strong> Parts of the park have adapted visitor routes, but not every excavation or underground section is step-free. Ask about the route that suits your needs.</li>
-          <li><strong>Facilities:</strong> The official site lists a museum, explanatory film and visitor services near the entrance.</li>
+          <li>Facilities include a museum, an explanatory film and visitor services near the entrance.</li>
         </ul>
       </div>
     </div>
@@ -107,7 +107,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or with a driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Follow Route 66 towards the signed entrance of Tel Megiddo National Park. There is parking at the visitor centre. Allow time to check in and walk from the entrance to the excavated areas, especially if you have other northern Israel stops planned.</p>
+            <p className="mt-2 text-sm leading-relaxed">Follow Route 66 towards the signed entrance of Tel Megiddo National Park. There is parking at the visitor center. Allow time to check in and walk from the entrance to the excavated areas, especially if you have other northern Israel stops planned.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Driving directions to Tel Megiddo <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -133,7 +133,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-xl font-semibold">A rewarding visit to Tel Megiddo</h3>
         <p className="mt-3 text-sm leading-relaxed sm:text-base">Plan approximately <strong>1.5–2 hours</strong> for the museum introduction, ancient gates, excavations and viewpoints. Leave extra time if you watch the film, explore the whole marked route and enter the water system.</p>
         <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li>Begin at the visitor centre and museum to understand the sequence of cities.</li>
+          <li>Begin at the visitor center and museum to understand the sequence of cities.</li>
           <li>Follow the marked trail through the city gates, temples, granary and stables.</li>
           <li>Enjoy the valley viewpoints and choose whether to take the optional water-system route.</li>
         </ol>
@@ -182,9 +182,9 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
     </div>
   ),
   faqs: [
-    { q: "How much does Tel Megiddo cost?", a: "The park currently lists ₪31 for standard adult admission and ₪16 for children. Check the official price list for discounts and updates." },
+    { q: "How much does Tel Megiddo cost?", a: "Standard admission is ₪31 for adults and ₪16 for children. Check the official price list for discounts and updates." },
     { q: "What are the opening hours?", a: "The park generally opens at 08:00. Summer closing is 17:00 (16:00 Fridays), while winter closing is 16:00 (15:00 Fridays). Last admission is one hour before closing, and holiday schedules can be shorter." },
-    { q: "Should I reserve my visit?", a: "Using the parks authority's official coordination system is recommended to secure a time and receive updates about your visit." },
+    { q: "Should I reserve my visit?", a: "I recommend booking through the official park website to reserve a time and receive updates about your visit." },
     { q: "How long should I spend at Tel Megiddo?", a: "Allow roughly 1.5–2 hours for the main archaeological site, with extra time if you take the underground water-system route and watch the introductory film." },
     { q: "Can everyone visit the underground water system?", a: "No. The underground route has a steep descent and ascent. A surface route is available for visitors who prefer to skip it." },
     { q: "Can visitors who cannot use stairs still enjoy Tel Megiddo?", a: "Yes, there are adapted areas above ground. Ask the park which route is currently accessible and skip the underground steps if they are unsuitable." },

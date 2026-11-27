@@ -62,12 +62,12 @@ export const telAvivExperiences: TelAvivExperience[]=[
     additionalOfficial:{label:"Nahalat Binyamin Arts & Crafts Fair - official website",url:"https://nachalatbinyamin-tlv.com/en/"}
   },
   {
-    id:"neve-tzedek",title:"Explore Neve Tzedek's historic lanes",shortTitle:"Neve Tzedek",area:"South-central Tel Aviv",category:"Architecture & neighbourhoods",
-    bestFor:"Historic streets, boutiques and relaxed cafés",time:"1–2 hours",entry:"Neighbourhood streets free; exhibitions and performances vary",
+    id:"neve-tzedek",title:"Explore Neve Tzedek's historic lanes",shortTitle:"Neve Tzedek",area:"South-central Tel Aviv",category:"Architecture & neighborhoods",
+    bestFor:"Historic streets, boutiques and relaxed cafés",time:"1–2 hours",entry:"Neighborhood streets free; exhibitions and performances vary",
     description:"Neve Tzedek developed outside old Jaffa before Tel Aviv was founded. Its restored houses, colourful doorways, galleries and pedestrian-friendly side streets invite a slower wander. The Suzanne Dellal Centre adds a cultural landmark in the heart of the area.",
-    practical:"This is a residential neighbourhood as well as a visitor destination. Please respect local privacy. Galleries, shops, the Suzanne Dellal programme and the old railway-station compound set their own schedules. Plan exhibition or performance visits around their opening times.",
+    practical:"This is a residential neighborhood as well as a visitor destination. Please respect local privacy. Galleries, shops, the Suzanne Dellal programme and the old railway-station compound set their own schedules. Plan exhibition or performance visits around their opening times.",
     tip:"I'd combine Neve Tzedek with Jaffa, the old railway-station area or a food stop at Carmel Market.",
-    transport:"Walk from Jaffa or the southern centre. You can also reach Neve Tzedek by light rail or bus.",
+    transport:"Walk from Jaffa or the southern center. You can also reach Neve Tzedek by light rail or bus.",
     image:{src:neve,alt:"Restored historic houses and intimate streets of Neve Tzedek"},
     mapLinks:[{label:"Suzanne Dellal Centre",query:"Suzanne Dellal Centre Neve Tzedek Tel Aviv Israel"},{label:"Neve Tzedek",query:"Neve Tzedek Tel Aviv Israel"}],
     official:{label:"Neve Tzedek heritage - Suzanne Dellal Centre",url:"https://suzannedellal.org.il/en/neve-tzedek/"}
@@ -87,39 +87,39 @@ export const telAvivExperiences: TelAvivExperience[]=[
     id:"tel-aviv-art-museum",title:"Visit the Tel Aviv Museum of Art",shortTitle:"Art museum",area:"Cultural district",category:"Museums & exhibitions",
     bestFor:"Art, architecture and an indoor alternative",time:"2–3 hours",entry:"Museum admission applies; some events require separate booking",
     description:"The Tel Aviv Museum of Art combines Israeli and international modern and contemporary works with striking architecture and rotating exhibitions. It's my first choice for enjoying art on a particularly hot or rainy day.",
-    practical:"Check the exhibition programme, current opening hours, ticket rules and last-entry time directly with the museum. Check exhibition dates and any separate admission or guided-tour arrangements.",
+    practical:"Check exhibition dates, opening hours and last entry with the museum, along with any separate tickets or guided-tour arrangements.",
     tip:"I'd reserve an unhurried couple of hours and explore the surrounding cultural district only if you still have energy.",
-    transport:"The museum is east of the beachfront around Shaul HaMelech Boulevard. Use a bus, taxi or a longer walk from the central neighbourhoods.",
+    transport:"The museum is east of the beachfront around Shaul HaMelech Boulevard. Use a bus, taxi or a longer walk from the central neighborhoods.",
     image:{src:"/images/tel-aviv-attractions/tel-aviv-museum-of-art.webp",alt:"Entrance façade and sculpture outside Tel Aviv Museum of Art"},
     guide:{label:"My museums in Tel Aviv guide",to:"/travel-blog/museums-in-tel-aviv/"},
     official:{label:"Tel Aviv Museum of Art - official visitor information",url:"https://www.tamuseum.org.il/en/visit/"},
     mapLinks:[{label:"Tel Aviv Museum of Art",query:"Tel Aviv Museum of Art 27 Shaul Hamelech Tel Aviv Israel"}]
   },
   {
-    id:"florentin",title:"Discover Florentin and Levinsky Market",shortTitle:"Florentin & Levinsky",area:"Southern Tel Aviv",category:"Street art & neighbourhood food",
+    id:"florentin",title:"Discover Florentin and Levinsky Market",shortTitle:"Florentin & Levinsky",area:"Southern Tel Aviv",category:"Street art & neighborhood food",
     bestFor:"Urban culture, murals and speciality food shops",time:"1½–2½ hours",entry:"Street walk free; food and guided activities extra",
-    description:"Florentin offers a different Tel Aviv mood, with workshops, cafés, old industrial façades and a changing street-art scene. Close by, Levinsky Market is known for spices, speciality food stores, coffee and small places to taste Mediterranean and Middle Eastern flavours.",
+    description:"Florentin is known for its workshops, cafés, old industrial façades and ever-changing street art. Close by, Levinsky Market is known for spices, speciality food stores, coffee and small places to taste Mediterranean and Middle Eastern flavours.",
     practical:"Florentin's street art is constantly changing, with new murals appearing regularly. Some streets are busy working areas and should be explored respectfully. Market shop hours vary; many close for Shabbat, while restaurants and bars may follow different schedules.",
     tip:"I'd choose a guided street-art or food walk if you want stories behind the area, or wander independently with no fixed list of murals.",
-    transport:"The area is accessible on foot from Neve Tzedek and the southern city centre. Check light-rail and bus stops for a more direct arrival.",
-    image:{src:florentin,alt:"Graffiti, cafés and distinctive streets in the Florentin neighbourhood"},
+    transport:"The area is accessible on foot from Neve Tzedek and the southern city center. Check light-rail and bus stops for a more direct arrival.",
+    image:{src:florentin,alt:"Graffiti, cafés and distinctive streets in the Florentin neighborhood"},
     mapLinks:[{label:"Florentin street art",query:"Florentin Tel Aviv Israel"},{label:"Levinsky Market",query:"Levinsky Market Tel Aviv Israel"}]
   },
   {
     id:"sarona",title:"Combine Sarona's historic houses and food market",shortTitle:"Sarona Market",area:"East-central Tel Aviv",category:"Food & heritage",
     bestFor:"Food stalls, restored buildings and a relaxed break",time:"1–2 hours",entry:"Public compound free; food purchases extra",
-    description:"Sarona blends restored nineteenth-century buildings and landscaped pedestrian paths with a modern indoor food market. It is an easy food-focused stop, with a different atmosphere from the bustle of Carmel Market and convenient access from the eastern city centre.",
-    practical:"The open-air heritage compound and the indoor market are different spaces; individual stalls, businesses and exhibitions have their own opening hours. For a food-focused visit, check when the market's food stalls are open.",
+    description:"Sarona blends restored nineteenth-century buildings and landscaped pedestrian paths with a modern indoor food market. It is an easy food-focused stop, with a different atmosphere from the bustle of Carmel Market and convenient access from the eastern city center.",
+    practical:"The restored buildings and indoor food market have different visiting hours. Check when the stalls, shops and exhibitions you want to visit are open.",
     tip:"I'd plan Sarona as a lunch or early-evening stop near the museum or business district, not as a replacement for the street-market atmosphere at Carmel.",
     transport:"The complex is east of Rothschild and close to the Azrieli and Hashalom area; walking, buses and taxis are practical depending on your starting point.",
     image:{src:"/images/tel-aviv-attractions/sarona-market.webp",alt:"Glass entrance to Sarona Market in Tel Aviv"},
     mapLinks:[{label:"Sarona Market",query:"Sarona Market Tel Aviv Israel"},{label:"Sarona heritage compound",query:"Sarona Compound Tel Aviv Israel"}]
   },
   {
-    id:"dizengoff",title:"Spend time around Dizengoff Square",shortTitle:"Dizengoff Square",area:"City centre",category:"Urban squares & shopping streets",
+    id:"dizengoff",title:"Spend time around Dizengoff Square",shortTitle:"Dizengoff Square",area:"City center",category:"Urban squares & shopping streets",
     bestFor:"Cafés, local design and people-watching",time:"1–2 hours",entry:"Public square free; shops and activities extra",
-    description:"Dizengoff Square and the surrounding central streets show another side of the city: neighbourhood cafés, shops, design stores and a lively everyday street scene. The square itself is a convenient meeting point when exploring central Tel Aviv.",
-    practical:"Explore the neighbourhood on foot and enjoy its cafés, shops and architecture. Shops, occasional markets and events vary by date. Be aware of cycling lanes and road crossings, particularly when walking with children.",
+    description:"Dizengoff Square and the surrounding central streets show another side of the city: neighborhood cafés, shops, design stores and a lively everyday street scene. The square itself is a convenient meeting point when exploring central Tel Aviv.",
+    practical:"Explore the neighborhood on foot and enjoy its cafés, shops and architecture. Shops, occasional markets and events vary by date. Be aware of cycling lanes and road crossings, particularly when walking with children.",
     tip:"I'd combine Dizengoff with the central beaches or a visit to the museum, depending on the weather and how much time you have.",
     transport:"Walk from the central seafront or use local buses; the square is not a suburban rail stop.",
     image:{src:dizengoff,alt:"Dizengoff Square and the surrounding central Tel Aviv streets"},
@@ -128,8 +128,8 @@ export const telAvivExperiences: TelAvivExperience[]=[
   {
     id:"tel-aviv-port",title:"Walk through Tel Aviv Port and the northern waterfront",shortTitle:"Tel Aviv Port",area:"Northern waterfront",category:"Waterfront & recreation",
     bestFor:"Families, casual dining and seaside walks",time:"1½–3 hours",entry:"Public waterfront free; businesses and activities charge",
-    description:"The redeveloped Tel Aviv Port, often called Namal Tel Aviv, offers broad seafront boardwalks, cafés and shops. Nearby Yarkon Park offers walking and cycling paths, open lawns and recreational facilities away from the busy city centre.",
-    practical:"For swimming, choose a designated beach with lifeguard service. Choose a designated beach for entering the sea. Activities and equipment hire in the park are operated separately, with their own booking conditions.",
+    description:"The redeveloped Tel Aviv Port, often called Namal Tel Aviv, offers broad seafront boardwalks, cafés and shops. Nearby Yarkon Park offers walking and cycling paths, open lawns and recreational facilities away from the busy city center.",
+    practical:"Swim only at a designated beach while lifeguards are on duty. Check prices and booking conditions for park activities and equipment hire with the individual operators.",
     tip:"I'd save the port and nearby Yarkon Park for a second day or a relaxed family afternoon.",
     transport:"The port is north of the central beachfront. Use a bus, taxi, bicycle or a longer promenade walk depending on your starting point.",
     image:{src:"/images/tel-aviv-attractions/tel-aviv-port.webp",alt:"Aerial view of Tel Aviv Port's boardwalk, buildings and the mouth of the Yarkon River"},
@@ -149,7 +149,7 @@ export const telAvivMapPoints=[
  {id:"tel-aviv-port",name:"Tel Aviv Port",label:"Port",lat:32.0974,lon:34.773,query:"Namal Tel Aviv Port Israel"}
 ] as const;
 export const telAvivRoutes=[
- {title:"First time in Tel Aviv",kind:"Old Jaffa, neighbourhoods & the sea",allow:"Full day, around 7–9 hours including breaks",ids:["old-jaffa","neve-tzedek","carmel-market","beaches"],text:"Start in Old Jaffa, wander through Neve Tzedek and Carmel Market, then finish with a central beach or sunset promenade walk. Allow extra time if exploring museums inside Jaffa.",tip:"I'd avoid adding the northern port to this walking day. The route is more enjoyable with time for food and a rest."},
+ {title:"First time in Tel Aviv",kind:"Old Jaffa, neighborhoods & the sea",allow:"Full day, around 7–9 hours including breaks",ids:["old-jaffa","neve-tzedek","carmel-market","beaches"],text:"Start in Old Jaffa, wander through Neve Tzedek and Carmel Market, then finish with a central beach or sunset promenade walk. Allow extra time if exploring museums inside Jaffa.",tip:"I'd avoid adding the northern port to this walking day. The route is more enjoyable with time for food and a rest."},
  {title:"Architecture, cafés and art",kind:"A central city culture day",allow:"About 5–7 hours depending on museum time",ids:["white-city","dizengoff","tel-aviv-art-museum","sarona"],text:"Explore Rothschild's International Style buildings, have a coffee near Dizengoff, visit the museum, and consider Sarona for food afterwards.",tip:"Allow travel time between the museum, Sarona and the earlier stops."},
  {title:"Markets and local culture",kind:"Food & street art",allow:"Half to full day, depending on tastings",ids:["carmel-market","neve-tzedek","florentin"],text:"Begin at Carmel Market, head southwest to Neve Tzedek, then finish farther east in Florentin and Levinsky Market. A guided food or street-art experience can replace part of the self-guided walk.",tip:"Choose a weekday when food markets are active. On Friday, allow for earlier closures before Shabbat. The route can also be walked in reverse."}
 ] as const;
@@ -162,11 +162,11 @@ export const telAvivRouteNavigation = [
 ] as const;
 
 export const telAvivFaqs=[
- {q:"What are the must-see attractions in Tel Aviv on a first visit?",a:"I'd prioritise Old Jaffa, one central Mediterranean beach, Carmel Market and a neighbourhood walk through Neve Tzedek or Rothschild Boulevard. With another day, choose a museum, Florentin or the northern port."},
+ {q:"What are the must-see attractions in Tel Aviv on a first visit?",a:"I'd prioritise Old Jaffa, one central Mediterranean beach, Carmel Market and a neighborhood walk through Neve Tzedek or Rothschild Boulevard. With another day, choose a museum, Florentin or the northern port."},
  {q:"Can I see Tel Aviv in one day?",a:"You can enjoy several central highlights in a full day, but the city stretches from Old Jaffa to the northern waterfront. Choose a route by area and allow time for food and breaks."},
- {q:"Which attractions are free?",a:"Public beaches and promenades, Old Jaffa's streets, the Rothschild architectural walk, neighbourhoods and the port waterfront are generally free to explore. Museums, performances, purchases and guided activities are separate."},
- {q:"What can I do on Shabbat (Saturday)?",a:"On Shabbat, enjoy the seafront, public squares and neighbourhood walks. Many markets close and regular public transport is limited. The free Na’im BeSofash weekend shuttle serves parts of greater Tel Aviv on Fridays and Saturdays; check its current routes and times with the municipality. Also check lifeguard hours and the city’s event calendar."},
- {q:"How should I get around Tel Aviv?",a:"Walking is ideal within neighbourhoods, but buses, the Red Line light rail, taxis and cycling can help with longer distances. Rail stations are inland, away from the beach. Choose the transport option that suits each leg of your journey."},
+ {q:"Which attractions are free?",a:"Public beaches and promenades, Old Jaffa's streets, the Rothschild architectural walk, neighborhoods and the port waterfront are generally free to explore. Museums, performances, purchases and guided activities are separate."},
+ {q:"What can I do on Shabbat (Saturday)?",a:"On Shabbat, enjoy the seafront, public squares and neighborhood walks. Many markets close and regular public transport is limited. The free Na’im BeSofash weekend shuttle serves parts of greater Tel Aviv on Fridays and Saturdays; check its current routes and times with the municipality. Also check lifeguard hours and the city’s event calendar."},
+ {q:"How should I get around Tel Aviv?",a:"Walking is ideal within neighborhoods, but buses, the Red Line light rail, taxis and cycling can help with longer distances. Rail stations are inland, away from the beach. Choose the transport option that suits each leg of your journey."},
  {q:"Are the beaches and Old Jaffa accessible?",a:"Some promenade and waterfront routes are relatively accessible, but historic Jaffa has slopes, steps and cobblestones. Each beach has different accessible facilities; check the specific entrance and arrangements in advance."}
 ];
 export const telAvivEditorialOverview: Attraction={
@@ -175,11 +175,11 @@ export const telAvivEditorialOverview: Attraction={
   region:"Tel Aviv & Jaffa",
   image:telAvivAttractionsHero,
   duration:"One to three days",
-  intro:"Tel Aviv is made for exploring on foot: seaside promenades, Old Jaffa's stone lanes, local markets, museums and energetic neighbourhoods provide different experiences within one city.",
+  intro:"Tel Aviv is made for exploring on foot: seaside promenades, Old Jaffa's stone lanes, local markets, museums and energetic neighborhoods provide different experiences within one city.",
   takeaway:"I recommend choosing three or four nearby places for one day and saving the farther northern waterfront for a separate outing.",
   highlights:telAvivExperiences.map(e=>({name:e.title,description:e.description,tip:e.tip})),
   arrival:telAvivExperiences.map(e=>e.transport),
-  planning:["Use supervised bathing beaches and check lifeguard information.","Group nearby neighbourhoods to minimise transport time.","Check cultural venues, markets and public transport around Shabbat and holidays."],
+  planning:["Use supervised bathing beaches and check lifeguard information.","Group nearby neighborhoods to minimise transport time.","Check cultural venues, markets and public transport around Shabbat and holidays."],
   faqs:telAvivFaqs,
   official:telAvivExperiences.flatMap(e=>[...(e.official?[{label:e.official.label,url:e.official.url}]:[]),...(e.additionalOfficial?[{label:e.additionalOfficial.label,url:e.additionalOfficial.url}]:[])])
 };

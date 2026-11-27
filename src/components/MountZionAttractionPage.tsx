@@ -110,7 +110,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The central Mount Zion area is free to walk through. Each religious compound and museum manages its own opening hours and admission. These are published reference times; services, <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link> and local arrangements may change access.</p>
+      <p>You can explore Mount Zion's public streets for free. Each church, religious site and museum sets its own visiting hours and admission fees. Religious services, <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link> and local arrangements may affect the published visiting hours or access.</p>
       <div role="region" aria-label="Mount Zion opening hours and admission comparison" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" data-testid="mount-zion-hours-fees">
         <table className="w-full min-w-[790px] border-collapse text-left text-sm">
           <caption className="sr-only">Opening hours, admission and visitor notes for seven Mount Zion sites</caption>
@@ -140,7 +140,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>For the central landmarks, start at Zion Gate. St Peter in Gallicantu and the Catholic cemetery have their own hillside approaches; choose a suitable pickup point when visiting either one.</p>
+      <p>Start at Zion Gate for the main landmarks. If visiting St Peter in Gallicantu or the Catholic cemetery, plan your pickup point around each site's separate hillside entrance.</p>
       <div className="grid gap-3 sm:grid-cols-3" data-testid="mount-zion-access-points">
         <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Zion Gate</h3><p className="mt-2 text-sm">Starting point for the Cenacle, David’s Tomb and Dormition Abbey.</p><a href={zionGateDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving to the gate area <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
         <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">St Peter in Gallicantu</h3><p className="mt-2 text-sm">Reach the sanctuary from Hebron Road for a convenient lower-hillside arrival.</p><a href={gallicantuDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving directions <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>

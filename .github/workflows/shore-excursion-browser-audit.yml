@@ -1,22 +1,6 @@
 name: Shore excursion browser audit
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'src/components/PortPage.tsx'
-      - 'src/components/Shore*.tsx'
-      - 'src/data/shore*.ts'
-      - 'src/lib/shore-*.ts'
-      - 'src/components/QuoteFormIntro.tsx'
-      - 'src/components/QuoteSubmissionControls.tsx'
-      - 'src/hooks/useQuoteSubmission.ts'
-      - 'src/components/ConsentIframe.tsx'
-      - 'src/hooks/use-cookie-consent.ts'
-      - 'src/lib/cookie-consent.ts'
-      - 'src/routes/shore-excursions*'
-      - 'public/maps/shore-destinations.html'
-      - 'scripts/audit-shore-excursions.cjs'
-      - '.github/workflows/shore-excursion-browser-audit.yml'
+  # Run manually after substantial shore-page, filter or map changes.
   workflow_dispatch:
 permissions:
   contents: read

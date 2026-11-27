@@ -14,8 +14,8 @@ describe("homepage marketing copy and service sections", () => {
     const { container } = render(<HomeHero />);
     expect(screen.getByRole("heading", { level: 1, name: "Discover Israel, Travel Smarter" })).toBeInTheDocument();
     expect(screen.getByText("Your journey starts here")).toBeInTheDocument();
-    expect(container.textContent).toContain("From airport arrivals and getting around to memorable day trips");
-    expect(container.textContent).toContain("make the most of your time in Israel.");
+    expect(container.textContent).toContain("Find local advice on airport transfers, getting around Israel, day trips");
+    expect(container.textContent).toContain("places to stay and sights to visit.");
     const headline = screen.getByRole("heading", { level: 1, name: "Discover Israel, Travel Smarter" });
     expect(headline).toHaveClass("md:text-5xl", "lg:max-w-none", "lg:whitespace-nowrap");
     expect(headline.nextElementSibling).toHaveClass("mt-3");

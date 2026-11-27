@@ -129,7 +129,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
     navLabel: "Sea of Galilee & Jordan River",
     image: attractionHubPhotos.galilee,
     cards: [
-      { id: "sea-of-galilee", title: "The Sea of Galilee", description: "Lake Kinneret, supervised beaches, Tiberias, boats and practical day planning.", to: "/attractions/sea-of-galilee/", photo: { src: galileeLakeCard, alt: "The Sea of Galilee with the surrounding hills" } },
+      { id: "sea-of-galilee", title: "The Sea of Galilee", description: "Lake Kinneret, swimming beaches, Tiberias and boat trips.", to: "/attractions/sea-of-galilee/", photo: { src: galileeLakeCard, alt: "The Sea of Galilee with the surrounding hills" } },
       attraction("capernaum", "Capernaum", "Explore the ancient synagogue, Peter’s house and lakeside ruins.", attractionHubPhotos.galilee.src),
       attraction("tabgha", "Tabgha", "Lakeside churches, mosaics and biblical traditions.", attractionHubPhotos.galilee.src),
       attraction("mount-of-beatitudes", "Mount of Beatitudes", "A peaceful hilltop church and lake panorama.", attractionHubPhotos.galilee.src),
@@ -181,7 +181,7 @@ export const attractionRelatedGuides: {
 }[] = [
   {
     title: "Jerusalem travel guide",
-    description: "Old City highlights, neighbourhoods and memorable viewpoints.",
+    description: "Old City landmarks, neighborhoods and panoramic viewpoints.",
     to: travelGuidePaths.jerusalem,
     photo: travelGuidePhotos.jerusalem,
   },

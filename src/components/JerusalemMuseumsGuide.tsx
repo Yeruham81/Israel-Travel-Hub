@@ -23,7 +23,7 @@ const updatedAt = "2026-11-20";
 const related = [
   {title:"Jerusalem travel guide",to:"/travel-blog/jerusalem-travel-guide/" as const,note:"My practical introduction to the city and its sights",image:jerusalemPhoto,alt:"Jerusalem city view"},
   {title:"Explore the Old City",to:"/attractions/old-city-jerusalem/" as const,note:"City gates, historic streets and places to visit",image:oldCityPhoto,alt:"Jerusalem Old City"},
-  {title:"Where to stay in Jerusalem",to:"/travel-blog/where-to-stay-in-jerusalem/" as const,note:"Neighbourhoods and hotel areas for your visit",image:mamillaPhoto,alt:"Mamilla area of Jerusalem"},
+  {title:"Where to stay in Jerusalem",to:"/travel-blog/where-to-stay-in-jerusalem/" as const,note:"Neighborhoods and hotel areas for your visit",image:mamillaPhoto,alt:"Mamilla area of Jerusalem"},
   {title:"Shopping in Jerusalem",to:"/travel-blog/shopping-in-jerusalem/" as const,note:"Markets, crafts and shopping streets around the city",image:mahanePhoto,alt:"Mahane Yehuda market in Jerusalem"},
   {title:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/" as const,note:"My guide to churches, pilgrimage routes and practical visiting tips",image:museumHero,alt:"Historic Jerusalem churches"},
   {title:"How to get to Bethlehem",to:"/travel-blog/jerusalem-to-bethlehem/" as const,note:"Practical travel options and planning advice",image:bethlehemPhoto,alt:"Bethlehem pilgrimage site"},
@@ -142,7 +142,7 @@ const faqs=[
   {q:"Do I need a reservation for Yad Vashem?",a:"Entry is free. Reserve a Holocaust History Museum entry slot online to secure your preferred time; walk-in entry depends on availability. Children under ten cannot enter the Holocaust History Museum."},
   {q:"Can I visit the Rockefeller Archaeological Museum?",a:"Rockefeller is closed to regular walk-in visitors. Occasionally organised, pre-booked tours may be available; check with Tower of David or the current operator before making plans."},
   {q:"Which Jerusalem museums are best for children?",a:"The Bloomfield Science Museum is particularly interactive, while Time Elevator is a multimedia attraction for older children. Ask about minimum ages, languages and booked time slots."},
-  {q:"Which museums are close enough to combine?",a:"The Israel Museum and Bible Lands Museum are close together, and the city-centre museums around Nahalat Shiva and Hillel Street are walkable. Yad Vashem and the Old City need separate travel arrangements."},
+  {q:"Which museums are close enough to combine?",a:"The Israel Museum and Bible Lands Museum are close together, and the city-center museums around Nahalat Shiva and Hillel Street are walkable. Yad Vashem and the Old City need separate travel arrangements."},
   {q:"Are Jerusalem museums open on Shabbat and Jewish holidays?",a:"Some open on Saturdays, including the Israel Museum and Museum for Islamic Art, while others close. Fridays and holiday eves often have shorter hours. Check the official museum calendar before visiting."},
   {q:"Is the Time Elevator a museum?",a:"It is a separate, immersive audiovisual attraction. I include it because it can be an entertaining history stop, particularly for families."},
 ];
@@ -155,7 +155,7 @@ export function JerusalemMuseumsGuide(){
       <GuideHeroLayout image={<GuideHeroMedia src={museumHero} alt="Rockefeller Museum courtyard and tower in Jerusalem"/>}>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Jerusalem · Museums, history and culture</p>
         <h1 className="guide-page-title mt-2">Best Museums in Jerusalem</h1>
-        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From archaeology and art to Holocaust remembrance and hands-on science, Jerusalem offers very different museum experiences. In my guide, I compare the options, visitor arrangements and neighbourhoods to help you plan a rewarding visit.</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">Jerusalem's museums range from art and archaeology to Holocaust remembrance and hands-on science. I've grouped them by area and included admission prices, opening hours and booking advice to help you choose.</p>
         <PageUpdated date={updatedAt}/>
       </GuideHeroLayout>
       <AuthorCard/>
@@ -191,7 +191,7 @@ export function JerusalemMuseumsGuide(){
       </div>
     </section>
     <section id="by-area" aria-labelledby="by-area-heading" className="mt-12 scroll-mt-24">
-      <SectionHeading id="by-area" title="Explore museums by area" intro="Use these neighbourhood groups to plan realistically. Choose one major museum or a few smaller nearby venues, allowing for transport."/>
+      <SectionHeading id="by-area" title="Explore museums by area" intro="Choose one major museum or a few smaller museums in the same area. Allow time to travel between them."/>
       {museumAreas.map((area,index)=><section key={area.id} id={"area-"+area.id} aria-label={area.name} className="mt-9 scroll-mt-24">
         <h3 className="text-2xl font-semibold">{area.name}</h3>
         <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
@@ -221,23 +221,23 @@ export function JerusalemMuseumsGuide(){
       <div className="grid gap-4 md:grid-cols-3">{[
         {title:"Museum Row: art and archaeology",time:"Half to full day",steps:["Israel Museum – choose two or three highlights","Bible Lands Museum if time and energy permit","Relax with a café break"],note:"Bloomfield is an alternative to a second traditional museum for families."},
         {title:"Jaffa Gate and the Old City",time:"Around half a day",steps:["Tower of David Jerusalem Museum","Walk through Jaffa Gate into the Old City","Optional Time Elevator show in Mamilla"],note:"The show is a separate, timed ticketed attraction."},
-        {title:"Central Jerusalem cultural walk",time:"Around half a day",steps:["Hebrew Music Museum in Nahalat Shiva","Museum of Tolerance or Italian Jewish Art Museum","Explore the city-centre streets afterwards"],note:"Check tour schedules first: these venues may not share opening days."}
+        {title:"Central Jerusalem cultural walk",time:"Around half a day",steps:["Hebrew Music Museum in Nahalat Shiva","Museum of Tolerance or Italian Jewish Art Museum","Explore the city-center streets afterwards"],note:"Check tour schedules first: these venues may not share opening days."}
       ].map(route=><div key={route.title} className="rounded-xl border bg-card p-5"><p className="text-xs font-semibold uppercase tracking-wide text-primary">{route.time}</p><h3 className="mt-1 text-lg font-bold">{route.title}</h3><ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm leading-relaxed">{route.steps.map(step=><li key={step}>{step}</li>)}</ol><p className="mt-3 text-sm text-muted-foreground">{route.note}</p></div>)}</div>
     </section>
     <section id="practical" aria-labelledby="practical-heading" className="mt-12 scroll-mt-24">
       <SectionHeading id="practical" title="My practical museum-planning tips"/>
       <div className="grid gap-4 md:grid-cols-2">
         <div className="rounded-xl border p-5"><h3 className="font-bold">Tickets and languages</h3><p className="mt-2 text-sm leading-relaxed">Book timed visits at Yad Vashem, Bloomfield, Begin Center and multimedia venues ahead. For the Time Elevator, arrange English audio by phone; other guided tours may have language-specific dates.</p></div>
-        <div className="rounded-xl border p-5"><h3 className="font-bold">Distances and transport</h3><p className="mt-2 text-sm leading-relaxed">Museum Row is west of the city centre, Yad Vashem is farther west, and Tower of David is by Jaffa Gate. Walk between nearby museums and use public transport or taxis for longer journeys. My <Link to="/travel-blog/jerusalem-travel-guide/" className="font-semibold text-primary hover:underline">Jerusalem guide</Link> has more advice.</p></div>
+        <div className="rounded-xl border p-5"><h3 className="font-bold">Distances and transport</h3><p className="mt-2 text-sm leading-relaxed">Museum Row is west of the city center, Yad Vashem is farther west, and Tower of David is by Jaffa Gate. Walk between nearby museums and use public transport or taxis for longer journeys. My <Link to="/travel-blog/jerusalem-travel-guide/" className="font-semibold text-primary hover:underline">Jerusalem guide</Link> has more advice.</p></div>
         <div className="rounded-xl border p-5"><h3 className="font-bold">Shabbat and holidays</h3><p className="mt-2 text-sm leading-relaxed">Many museums close early on Fridays, and Saturday opening hours vary. <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Jewish holidays and holiday eves</Link> may affect visitor hours and public transport.</p></div>
         <div className="rounded-xl border p-5"><h3 className="font-bold">Age guidance and accessibility</h3><p className="mt-2 text-sm leading-relaxed">The Holocaust History Museum at Yad Vashem is for ages 10+. Certain Museum of Tolerance exhibitions are for ages 16+. Contact the museum for details about accessible entrances and walking distances.</p></div>
       </div>
-      <div className="mt-5"><PlanningTip>I generally prefer one substantial museum and time to enjoy its surrounding neighbourhood. Set aside time for a calm, unhurried visit to Yad Vashem.</PlanningTip></div>
+      <div className="mt-5"><PlanningTip>I generally prefer one substantial museum and time to enjoy its surrounding neighborhood. Set aside time for a calm, unhurried visit to Yad Vashem.</PlanningTip></div>
       <MuseumMap/>
     </section>
     <FaqList faqs={faqs}/>
     <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
-      <SectionHeading id="explore-more" title="Explore more of Jerusalem" intro="Continue planning with my Jerusalem city guides, neighbourhoods and day trips."/>
+      <SectionHeading id="explore-more" title="Explore more of Jerusalem" intro="Continue planning with my Jerusalem city guides, neighborhoods and day trips."/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=><Link key={item.to} to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20"><img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span></span></Link>)}</div>
     </section>
     <HomeContactForm showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy("Jerusalem")}/>

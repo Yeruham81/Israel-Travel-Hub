@@ -48,8 +48,8 @@ describe("private driver page and inquiry", () => {
     expect(within(serviceOverview).getByRole("heading", { name: "Private driver service in Israel: travel on your own terms" })).toBeInTheDocument();
     expect(within(serviceOverview).getByRole("heading", { name: "Who is a private driver suitable for?" })).toBeInTheDocument();
     expect(serviceOverview).toHaveTextContent("couples, families, groups of friends");
-    expect(serviceOverview).toHaveTextContent("business travellers");
-    expect(serviceOverview).toHaveTextContent("licensed tour guiding");
+    expect(serviceOverview).toHaveTextContent("business travelers");
+    expect(serviceOverview).toHaveTextContent(/licensed guides and other extras are arranged separately unless confirmed in the quote/i);
     expect(serviceOverview).toHaveTextContent(/entrance tickets/i);
     expect(serviceOverview.compareDocumentPosition(container.querySelector("#journeys")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getAllByTestId("driver-journey-card")).toHaveLength(3);
@@ -60,7 +60,7 @@ describe("private driver page and inquiry", () => {
     const header = screen.getByTestId("hub-header");
     expect(header).toContainElement(screen.getByRole("heading", { level: 1 }));
     expect(within(header).getByTestId("guide-hero-media")).toBeInTheDocument();
-    expect(within(header).getByRole("link", { name: "Request a personal quote" })).toHaveAttribute("href", "#request-quote");
+    expect(within(header).getByRole("link", { name: "Get a quote" })).toHaveAttribute("href", "#request-quote");
     expect(within(header).getByTestId("author-card")).toBeInTheDocument();
     expect(screen.getAllByTestId("author-card")).toHaveLength(1);
     expect(screen.queryByText("Plan the day before requesting a quote")).not.toBeInTheDocument();
@@ -81,7 +81,7 @@ describe("private driver page and inquiry", () => {
     expect(privateDriverFaqs).toHaveLength(6);
     expect(screen.getByRole("region", { name: "Frequently asked questions" })).toHaveTextContent("How do payment, cancellation and extra hours work?");
     const afterFaq = screen.getByTestId("driver-after-faq-cta");
-    expect(within(afterFaq).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "#request-quote");
+    expect(within(afterFaq).getByRole("link", { name: "Get a quote" })).toHaveAttribute("href", "#request-quote");
     expect(screen.queryByText("Photo credits")).not.toBeInTheDocument();
     expect(privateDriverHero.alt).toMatch(/Car travelling on a winding road/);
     const guides = screen.getAllByTestId("driver-guide-card");
@@ -127,8 +127,8 @@ describe("private driver page and inquiry", () => {
     expect(screen.getByLabelText("Additional requests")).toBeInTheDocument();
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
-    expect(screen.getByRole("status")).toHaveTextContent("I will reply soon to the email address you provided.");
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("I'll reply soon to the email address you provided.");
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     const data = JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body));
@@ -137,7 +137,7 @@ describe("private driver page and inquiry", () => {
     choose(0);
     expect(screen.getByRole("button", { name: "Send quote request" })).toBeEnabled();
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    await screen.findByText("Thank you for contacting me");
+    await screen.findByText("Thank you for your message");
     expect(fetchSpy).toHaveBeenCalledTimes(2);
     fireEvent.change(screen.getByLabelText("Final drop-off *"), { target: { value: "A different hotel" } });
     expect(screen.getByRole("button", { name: "Send quote request" })).toBeEnabled();
@@ -167,13 +167,13 @@ describe("private driver request validation", () => {
     expect(validateDriverQuote({ ...good, date: "2026-02-31" }, now)).toContain("Choose a valid pickup date.");
     expect(validateDriverQuote({ ...good, date: "2026-10-17", time: "15:00" }, now)).toContain("That pickup time has already passed today in Israel.");
     expect(validateDriverQuote({ ...good, time: "24:00" }, now)).toContain("Enter a valid pickup time in Israel local time, or leave it open.");
-    expect(validateDriverQuote({ ...good, date: "2026-10-17" }, new Date("2026-10-17T22:30:00Z"))).toContain("Choose a pickup date that is not in the past in Israel.");
+    expect(validateDriverQuote({ ...good, date: "2026-10-17" }, new Date("2026-10-17T22:30:00Z"))).toContain("Choose today or a future pickup date.");
   });
   it("rejects missing route/itinerary, unknown services, invalid party sizes, overlong details and missing consent", () => {
     expect(validateDriverQuote({ ...good, pickup: "", dropoff: "", consent: false }, now)).toHaveLength(3);
     for (const serviceId of ["day-hire", "multi-stop"]) expect(validateDriverQuote({ ...good, serviceId }, now)).toContain("Describe the stops or priorities for your journey.");
     expect(validateDriverQuote({ ...good, serviceId: "invalid", passengers: "1.5", notes: "a".repeat(1501) }, now)).toHaveLength(3);
-    for (const passengers of ["0", "100", ""]) expect(validateDriverQuote({ ...good, passengers }, now)).toContain("Enter passengers between 1 and 99, including children.");
+    for (const passengers of ["0", "100", ""]) expect(validateDriverQuote({ ...good, passengers }, now)).toContain("Enter the total number of passengers, including children (1–99).");
   });
   it("preserves special characters and multiline requests in encoded drafts without injecting subject headers", () => {
     const draft = buildDriverQuoteDraft({ ...good, name: "Jamie\r\nBcc: test@example.com", pickup: "מלון & Spa #2", notes: "Seat for age 3\nTwo large bags + stroller" });

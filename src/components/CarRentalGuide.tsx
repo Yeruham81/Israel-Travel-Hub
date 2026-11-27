@@ -46,7 +46,7 @@ export function CarRentalGuide() {
       <OnThisPage sections={sections} />
 
       <Section id="car-needed" title="When is renting a car in Israel worth it?">
-        <p>I start with the places you want to visit and how much flexibility you enjoy. A car is particularly useful for rural accommodation, viewpoints and a series of stops spread across a region. In the main cities, parking and traffic can take up time you would rather spend sightseeing.</p>
+        <p>A rental car is especially useful if you're staying in the countryside or visiting several attractions in one region. In the main cities, traffic and parking can take time away from sightseeing.</p>
         <RentalTable caption="Choosing transport for your Israel trip" headers={["Your trip", "A practical choice", "My planning tip"]} rows={rentalDecisionRows} />
         <p>A mixed plan can work especially well: take an <Link to="/airport-transfers/" className={inline}>airport transfer</Link>, enjoy your first city, then collect a car for the next part of the trip. My <Link to="/travel-blog/getting-around-israel/" className={inline}>guide to getting around Israel</Link> compares the transport options.</p>
       </Section>
@@ -65,7 +65,7 @@ export function CarRentalGuide() {
           </div>
           <div className="rounded-xl border bg-card p-5">
             <h3 className="flex items-center gap-2 text-xl font-semibold"><CarFront className="h-5 w-5 shrink-0 text-primary" aria-hidden />A branch in the city</h3>
-            <p className="mt-3">A Tel Aviv, Jerusalem or other city branch can suit a later start after sightseeing. Check the branch address, opening hours and how you will reach it with your luggage.</p>
+            <p className="mt-3">If you're spending a few days in Tel Aviv, Jerusalem or another city first, consider renting a car when you leave. Check the branch address, opening hours and how to get there with your luggage.</p>
             <p className="mt-3">For Shabbat, holidays, early departures and late arrivals, confirm the exact collection and return arrangements. If you finish in another city, compare the one-way fee and the available return hours.</p>
           </div>
         </div>
@@ -84,7 +84,7 @@ export function CarRentalGuide() {
       </Section>
 
       <Section id="costs" title="Compare the whole rental cost">
-        <p>Use the total for your actual trip when comparing offers. A lower daily rate can come with a different mileage allowance, excess, fuel policy or collection fee.</p>
+        <p>Compare the total rental price for your dates, not just the daily rate. Check mileage allowances, insurance excess, fuel policies and pickup fees.</p>
         <RentalTable caption="Car rental costs to compare before booking" headers={["Cost or condition", "What to compare", "Before you book"]} rows={rentalCostRows} />
         <p>The rental company may block or charge a security deposit on your card, in addition to the rental price. For taxes, have the supplier confirm your eligibility and the items included in any exemption.</p>
         <p><RentalComparisonLink placement="cost-comparison" className={inline}>Compare rental offers for your route and dates</RentalComparisonLink>.</p>
@@ -93,9 +93,9 @@ export function CarRentalGuide() {
       <Section id="insurance" title="Insurance, excess and deposit: understand the difference">
         <div className="grid gap-4 lg:grid-cols-3">
           {[
-            ["Included protection", "Read the damage, theft and third-party cover included in the offer, together with its exclusions. Ask how any credit-card protection you plan to use fits the supplier’s requirements."],
+            ["Included protection", "Check which damage, theft and third-party insurance the rental includes and what it excludes. If you plan to use your credit card's rental insurance, check whether the rental company accepts it."],
             ["Excess or deductible", "This is the amount you may have to pay toward a covered claim under the rental agreement. Check the amount and which types of damage the cover includes."],
-            ["Security deposit", "The supplier holds or collects this amount under its payment conditions. Check the required card, available limit and release procedure before collection."],
+            ["Security deposit", "The rental company blocks or charges a deposit on your card. Before pickup, check which card you need, how much available credit is required and when the deposit will be released."],
           ].map(([title, text]) => <div key={title} className="rounded-xl border bg-card p-5"><h3 className="flex items-center gap-2 text-xl font-semibold">{title === "Security deposit" && <CreditCard className="h-5 w-5 shrink-0 text-primary" aria-hidden />}{title}</h3><p className="mt-3">{text}</p></div>)}
         </div>
         <p>DiscoverCars describes its optional <a href="https://www.discovercars.com/help/articles/protection-coverage/discovercars-full-coverage/do-i-need-to-leave-a-security-deposit-if-i-purchase-full-coverage-online" target="_blank" rel="noopener noreferrer" className={inline}>Full Coverage as reimbursement protection</a>: eligible charges are paid to the supplier first and then claimed back under the product’s terms. The supplier’s deposit still applies. Compare this with any excess-reduction option offered at the rental desk, including the price, exclusions and documents needed for a claim.</p>
@@ -104,7 +104,7 @@ export function CarRentalGuide() {
       <Section id="vehicle-driving" title="Choose a suitable car and plan the driving">
         <div className="rounded-xl border bg-secondary/30 p-5">
           <h3 className="flex items-center gap-2 text-xl font-semibold"><Luggage className="h-5 w-5 shrink-0 text-primary" aria-hidden />Leave room for people and luggage</h3>
-          <p className="mt-3">Choose by passenger numbers and suitcase space, then check the transmission, air conditioning and requested child seats. A compact car is convenient for urban parking; more luggage or a family trip may justify a larger category. Read how the supplier defines “or similar” when choosing a vehicle group.</p>
+          <p className="mt-3">Choose a car with enough seats and luggage space. Check whether it has a manual or automatic gearbox, air conditioning and any child seats you requested. A compact car is easier to park in cities; families or travellers with more luggage may need a larger car. Check what the rental company means by “or similar” before choosing a vehicle category.</p>
         </div>
         <p><strong>Parking:</strong> check hotel parking before arrival, then follow local signs and the payment instructions at each street or car park. A booked parking space can make a city stay much easier.</p>
         <p><strong>Navigation and fuel:</strong> use your preferred navigation app, save key addresses and keep a charging cable handy. Check the fuel type and return policy at collection; plan fuel stops before longer desert journeys. My <Link to="/travel-blog/best-esim-for-israel/" className={inline}>Israel eSIM guide</Link> can help you arrange mobile data.</p>

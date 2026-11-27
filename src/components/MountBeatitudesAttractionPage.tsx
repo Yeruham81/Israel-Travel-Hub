@@ -43,18 +43,17 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
         title="The octagonal Church of the Beatitudes"
         image={{ src: "/images/attractions/beatitudes-church-gardens.jpg", alt: "The domed octagonal Church of the Beatitudes seen through flowering gardens and palm trees" }}
       >
-        <p>The small sanctuary, designed by Italian architect Antonio Barluzzi, is the centrepiece of the visit. Its eight sides reflect the eight Beatitudes at the beginning of the Sermon on the Mount.</p>
+        <p>The octagonal church was designed by Italian architect Antonio Barluzzi. Its eight sides reflect the eight Beatitudes at the beginning of the Sermon on the Mount.</p>
         <p>Step inside to see the central altar, the dome and the Latin Beatitudes written in the upper windows. Visit during quieter hours to enjoy the peaceful atmosphere inside the church.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The shaded colonnade and lake views"
         image={{ src: "/images/attractions/beatitudes-colonnade-lake.webp", alt: "Arched stone colonnade at the Church of the Beatitudes opening towards gardens and the Sea of Galilee" }}
       >
-        <p>Walk around the arches encircling the church. The shaded arches offer beautiful views over the Sea of Galilee.</p>
-        <p>I recommend spending a few extra minutes enjoying the peaceful surroundings.</p>
+        <p>The shaded colonnade surrounding the church offers beautiful views over the Sea of Galilee.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Gardens and views over the Sea of Galilee">
-        <p>Walk through the landscaped gardens to enjoy the quiet setting and views over the lake. Some outdoor areas are reserved for organised prayer and services, so give groups their space.</p>
+        <p>Walk through the landscaped gardens to enjoy the quiet setting and views over the lake. Respect the outdoor areas reserved for group prayer and religious services.</p>
         <p>Some garden paths are sloping or include steps.</p>
         <figure className="mt-3 overflow-hidden rounded-lg border border-border/70">
           <img src="/images/attractions/beatitudes-sea-view.webp" alt="Panoramic view of the Sea of Galilee and green hills from the Mount of Beatitudes gardens" loading="lazy" decoding="async" width={768} height={249} className="block h-auto w-full object-cover" />
@@ -79,7 +78,6 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Entrance fee</h3>
           <p className="mt-3 text-lg font-semibold">{visit.entryPerPerson} per person</p>
-          <p className="mt-2 text-sm leading-relaxed">Allow time to explore the church, colonnade and gardens during the visiting hours.</p>
         </article>
       </div>
       <AttractionPracticalTip>
@@ -152,7 +150,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Many organised Galilee tours include the Mount of Beatitudes, Tabgha and Capernaum. Compare departure points and included stops when choosing a tour.</p>
+      <p>Many Galilee tours combine the Mount of Beatitudes with Tabgha and Capernaum. Compare departure points and itineraries to find a suitable tour.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="beatitudes-galilee-tours-card">
           <img src="/images/attractions/sea-of-galilee.webp" alt="Sea of Galilee landscape representing guided tours in northern Israel" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />

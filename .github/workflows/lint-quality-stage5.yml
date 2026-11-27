@@ -1,4 +1,4 @@
-name: Stage 5.5b - validate systematic source assertion migration
+name: Stage 5.5b - resume after editorial sync and validate format trial
 on:
   push:
     branches: [audit/lint-quality-stage5]
@@ -33,7 +33,7 @@ jobs:
       - name: Prepare current main reference
         run: |
           mkdir -p "$RUNNER_TEMP/unused-audit"
-          git worktree add --detach "$RUNNER_TEMP/main-reference" 72ab55bf70ecbcc28eab1712bcd2020cab5c9b80
+          git worktree add --detach "$RUNNER_TEMP/main-reference" 3252d8096c9ae78242df837bc890f55fe7cf6c36
           cd "$RUNNER_TEMP/main-reference"
           bash scripts/install-ci-dependencies.sh
           bash scripts/build-validated-static.sh
@@ -186,15 +186,33 @@ jobs:
           git add -- src/test src/data
           git -c user.name='CI test trial' -c user.email='ci@example.invalid' commit -m 'Temporary assertion migration for verification only'
       - name: Verify adapted tests against existing unformatted components
-        run: VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
-      - name: Trial formatting of tracked components, hooks and libraries
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/unused-audit"
+          git diff --quiet
+          VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
+          git status --short | tee "$out/post-baseline-test-status.txt"
+          git diff --binary > "$out/post-baseline-test-generated.patch"
+          python3 - <<'PY'
+          import subprocess
+          actual=set(subprocess.check_output(['git','diff','--name-only','-z']).decode().split('\0'))-{''}
+          allowed={'src/data/generated/guide-directory.ts','src/routeTree.gen.ts'}
+          print('TRACKED CHANGES AFTER TESTS',sorted(actual))
+          unexpected=actual-allowed
+          assert not unexpected, ('Unexpected test modifications',sorted(unexpected))
+          PY
+          # Tests generate derived code; preserve the diagnostic patch and reset
+          # only the known generated files, never authored source.
+          git restore --worktree -- src/data/generated/guide-directory.ts src/routeTree.gen.ts
+          git diff --quiet
+      - name: Trial formatting of components, libraries and resynchronized routes
         shell: bash
         run: |
           set -euo pipefail
           out="$RUNNER_TEMP/unused-audit"
           git rev-parse HEAD > "$out/trial-base.txt"
           git diff --quiet
-          git ls-files -z src/components src/hooks src/lib src/router.tsx src/server.ts src/start.ts > "$out/scope.bin"
+          git ls-files -z src/components src/hooks src/lib src/router.tsx src/server.ts src/start.ts src/routes src/route-heads > "$out/scope.bin"
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import path from 'node:path';
@@ -219,10 +237,10 @@ jobs:
           }
           fs.writeFileSync(path.join(out,'scope.json'),JSON.stringify(all,null,2));
           fs.writeFileSync(path.join(out,'changed.json'),JSON.stringify(changed,null,2));
-          console.log('FORMAT TRIAL SUMMARY',JSON.stringify({scanned:all.length,changed:changed.length,componentFiles:changed.filter(p=>p.startsWith('src/components/')).length,hookFiles:changed.filter(p=>p.startsWith('src/hooks/')).length,libraryFiles:changed.filter(p=>p.startsWith('src/lib/')).length,entryFiles:changed.filter(p=>/^src\/[^/]+$/.test(p)).length,idempotent:true}));
+          console.log('FORMAT TRIAL SUMMARY',JSON.stringify({scanned:all.length,changed:changed.length,componentFiles:changed.filter(p=>p.startsWith('src/components/')).length,hookFiles:changed.filter(p=>p.startsWith('src/hooks/')).length,libraryFiles:changed.filter(p=>p.startsWith('src/lib/')).length,entryFiles:changed.filter(p=>/^src\/[^/]+$/.test(p)).length,routeFiles:changed.filter(p=>p.startsWith('src/routes/')||p.startsWith('src/route-heads/')).length,idempotent:true}));
           JS
           git diff --check
-          git diff --binary -- src/components src/hooks src/lib src/router.tsx src/server.ts src/start.ts > "$out/stage-5-5b.patch"
+          git diff --binary -- src/components src/hooks src/lib src/router.tsx src/server.ts src/start.ts src/routes src/route-heads > "$out/stage-5-5b.patch"
           git diff --numstat > "$out/numstat.tsv"
           git diff --stat | tail -n 1
           sha256sum "$out/stage-5-5b.patch"

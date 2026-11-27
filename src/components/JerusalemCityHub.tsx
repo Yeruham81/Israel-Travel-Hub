@@ -94,7 +94,7 @@ export function JerusalemCityHubPage(){
       <GuideHeroLayout image={<GuideHeroMedia src={hero.src} alt={hero.alt} width={640} height={400}/>}>
         <p className="text-xs font-bold uppercase tracking-wide text-primary">My guide to planning Jerusalem</p>
         <h1 className="guide-page-title mt-2">{JERUSALEM_HUB_TITLE}</h1>
-        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">I recommend exploring Jerusalem one area at a time, choosing the sites that interest you most. Use this guide to choose what matters to you, decide how many days to stay, and find my detailed Jerusalem guides, tours and transport advice.</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">I recommend exploring Jerusalem one area at a time. My guide will help you decide what to see, how long to stay, where to book a hotel and how to get around.</p>
         <PageUpdated date={JERUSALEM_HUB_UPDATED}/>
       </GuideHeroLayout>
       <AuthorCard/>
@@ -112,15 +112,15 @@ export function JerusalemCityHubPage(){
       </div>
       <div className="mt-5 rounded-xl border border-primary/20 bg-secondary/40 p-4 sm:p-5" id="quick-answer" aria-label="Quick answer">
         <h2 className="text-lg font-bold">Where I'd start</h2>
-        <p className="mt-2 leading-relaxed">For a first visit, I'd spend one day getting to know the <Link className={linkClass} to="/attractions/old-city-jerusalem/">Old City</Link>, including the <Link className={linkClass} to="/attractions/via-dolorosa/">Via Dolorosa</Link> if Christian pilgrimage interests you; use a second day for the <Link className={linkClass} to="/attractions/mount-of-olives/">Mount of Olives</Link> or a <Link className={linkClass} to="/travel-blog/museums-in-jerusalem/">museum</Link>, then leave time for <Link className={linkClass} to="/travel-blog/shopping-in-jerusalem/">Mahane Yehuda</Link> and the neighbourhoods. Keep a day trip outside Jerusalem separate from a full city day.</p>
+        <p className="mt-2 leading-relaxed">For a first visit, I'd spend one day getting to know the <Link className={linkClass} to="/attractions/old-city-jerusalem/">Old City</Link>, including the <Link className={linkClass} to="/attractions/via-dolorosa/">Via Dolorosa</Link> if Christian pilgrimage interests you; use a second day for the <Link className={linkClass} to="/attractions/mount-of-olives/">Mount of Olives</Link> or a <Link className={linkClass} to="/travel-blog/museums-in-jerusalem/">museum</Link>, then leave time for <Link className={linkClass} to="/travel-blog/shopping-in-jerusalem/">Mahane Yehuda</Link> and the neighborhoods. Keep a day trip outside Jerusalem separate from a full city day.</p>
       </div>
     </section>
     <OnThisPage sections={sections}/>
 
-    <CardGrid id="choose" title="Explore Jerusalem by interest" intro="Choose the subject that interests you. Each illustrated card opens a detailed guide with attractions, logistics and further links, so you can go deeper without reading the same information twice." items={jerusalemTopicCards}/>
+    <CardGrid id="choose" title="Explore Jerusalem by interest" intro="My guides cover the Old City, hillside churches, museums, markets and other places to visit." items={jerusalemTopicCards}/>
 
     <section id="how-many-days" aria-labelledby="how-many-days-h" className="mt-12 scroll-mt-24">
-      <Heading id="how-many-days" title="How many days do you need in Jerusalem?" intro="My suggestions are flexible starting points, not fixed hourly itineraries. Prioritise the experiences you care about and leave time for the walking between them."/>
+      <Heading id="how-many-days" title="How many days do you need in Jerusalem?" intro="Choose the sights that interest you most and allow time to walk between them."/>
       <div className="grid gap-4 md:grid-cols-3" data-testid="jerusalem-day-plans">
         {jerusalemDayPlans.map(plan=><article key={plan.label} className="flex min-w-0 flex-col rounded-xl border bg-card p-4 sm:p-5">
           <p className="text-xs font-bold uppercase tracking-wide text-primary">{plan.label}</p>
@@ -130,13 +130,13 @@ export function JerusalemCityHubPage(){
           <div className="mt-auto flex flex-wrap gap-x-4 gap-y-2 pt-4">{plan.links.map(link=>link.to==="#day-trips"?<a key={link.title} href="#day-trips" className="text-xs font-semibold text-primary underline underline-offset-4">{link.title}</a>:<Link key={link.title} to={link.to} className="text-xs font-semibold text-primary underline underline-offset-4">{link.title}</Link>)}</div>
         </article>)}
       </div>
-      <Tip>On a first day, I'd choose the Old City gate that makes sense for your priorities and mobility. A route with fewer stops can be more rewarding than a list of famous places you only see from outside.</Tip>
+      <Tip>Choose your starting gate according to the places you want to visit and your mobility needs. A route with fewer stops can be more rewarding than a list of famous places you only see from outside.</Tip>
     </section>
 
     <TourCards group={jerusalemTourGroups[0]}/>
 
     <section id="where-to-stay" aria-labelledby="where-to-stay-h" className="mt-12 scroll-mt-24">
-      <Heading id="where-to-stay" title="Where should you stay in Jerusalem?" intro="The best neighbourhood depends on your interests, how you arrive and how much walking you want. These are area-level suggestions, not recommendations for individual hotels."/>
+      <Heading id="where-to-stay" title="Where should you stay in Jerusalem?" intro="Choose a neighborhood based on the places you want to visit, transport options and how far you're comfortable walking."/>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="jerusalem-stay-areas">
         {jerusalemStayAreas.map(area=><article key={area.to} className="editorial-card-link group overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20">
           <Link to={area.to} className="flex h-full flex-col p-4 focus-visible:outline-2 focus-visible:outline-primary" aria-label={"Explore hotels in "+area.name}>
@@ -152,7 +152,7 @@ export function JerusalemCityHubPage(){
         <Link to="/travel-blog/where-to-stay-in-jerusalem/" className="editorial-card-link group flex flex-col rounded-xl border border-primary/20 bg-secondary/40 p-4 hover:border-primary/60">
           <span className="text-xs font-semibold uppercase tracking-wide text-primary">Choose your area</span>
           <strong className="mt-1 text-base">Where to Stay in Jerusalem</strong>
-          <span className="mt-2 text-sm leading-relaxed text-muted-foreground">My detailed comparison of the city's six most useful neighbourhoods for visitors.</span>
+          <span className="mt-2 text-sm leading-relaxed text-muted-foreground">My detailed comparison of the city's six most useful neighborhoods for visitors.</span>
           
         </Link>
         <Link to="/accommodation/jerusalem/" className="editorial-card-link group flex flex-col rounded-xl border border-primary/20 bg-secondary/40 p-4 hover:border-primary/60">
@@ -181,7 +181,7 @@ export function JerusalemCityHubPage(){
       </div>
     </section>
 
-    <CardGrid id="day-trips" title="Day trips from Jerusalem" intro="The Dead Sea, Bethlehem, Jericho and the coast are separate journeys with different access requirements. I'd choose one main destination per day, then check the realistic travel time and return." items={jerusalemDayTripCards}/>
+    <CardGrid id="day-trips" title="Day trips from Jerusalem" intro="I'd choose one main destination per day, whether it's the Dead Sea, Bethlehem, Jericho or the coast. Check access requirements, journey times and return transport." items={jerusalemDayTripCards}/>
     <TourCards group={jerusalemTourGroups[1]}/>
 
     <section id="practical" aria-labelledby="practical-h" className="mt-12 scroll-mt-24">
@@ -190,10 +190,10 @@ export function JerusalemCityHubPage(){
         {[
           {title:"Plan for hills and uneven ground",description:"Old City cobbles, stairways and steep approaches on the Mount of Olives can make short map distances deceptive. Ask about accessible entrances, steps and steep sections along your route."},
           {title:"Treat worship sites respectfully",description:"Cover shoulders and knees where required, keep voices low and respect prayers, security checks and local photography rules. Different religious compounds set their own visitor access."},
-          {title:"Check holidays and local events",description:"Shabbat, Jewish holidays and Christian or Muslim festivals affect services, shopping and visitor hours in different ways. Use the actual travel dates before making a detailed plan."},
-          {title:"Check museum and attraction details",description:"Individual museums, tours and historic sites use their own tickets, visiting windows and reservations. Follow the dedicated guide to confirm the operator's current information."},
+          {title:"Check holidays and local events",description:"Check whether Shabbat, Jewish holidays or Christian and Muslim festivals fall during your visit, as they can affect transport, shopping and attraction hours."},
+          {title:"Check museum and attraction details",description:"Check each museum or historic site's opening hours and ticket requirements, and reserve guided tours or timed visits in advance where required."},
           {title:"Prepare for warm afternoons and cool evenings",description:"Jerusalem's elevation brings seasonal variation. Carry water, wear comfortable shoes and bring a layer suited to the local weather."},
-          {title:"Check current travel advice",description:"Conditions can change. Review the relevant official travel advisories, local guidance and your insurer's terms before travelling; avoid treating old reassurance as a current safety assessment."},
+          {title:"Check current travel advice",description:"Before travelling, check the latest official travel advisories, local guidance and your travel insurance conditions."},
         ].map(item=><article key={item.title} className="rounded-xl border bg-card p-4"><h3 className="font-bold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p></article>)}
       </div>
       <p className="mt-4 text-sm leading-relaxed text-muted-foreground">For specific church visiting arrangements, the <a className={linkClass} href="https://www.cicts.org/our-services/" target="_blank" rel="noopener noreferrer">Christian Information Center</a> publishes information about church visits. Confirm admission and worship arrangements with the relevant site before you travel.</p>
@@ -201,7 +201,7 @@ export function JerusalemCityHubPage(){
     </section>
 
     <FaqList faqs={[...jerusalemHubFaqs]}/>
-    <CardGrid id="explore-more" title="Plan the next part of your Israel trip" intro="Jerusalem may be the centre of your visit or one stop on a wider route. These guides help with time, holidays and practical preparation." items={jerusalemMoreGuides}/>
+    <CardGrid id="explore-more" title="Plan the next part of your Israel trip" intro="Jerusalem may be the center of your visit or one stop on a wider route. These guides help with time, holidays and practical preparation." items={jerusalemMoreGuides}/>
 
     <HomeContactForm showTripadvisorBesidePortraitMobile guide={{
       heading:"Need a private driver for your Jerusalem trip?",

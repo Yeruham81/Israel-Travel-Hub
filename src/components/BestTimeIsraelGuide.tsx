@@ -81,7 +81,7 @@ function MonthMatrix(){
   const visible=filter==="all"?monthFits:monthFits.filter(month=>month.season===filter);
   const activeMonth=visible.find(month=>month.month===selectedMonth);
   return <section id="months" aria-labelledby="months-heading" className="mt-12 scroll-mt-24">
-    <SectionHeading id="months" title="Choose your month at a glance" intro="These are broad seasonal tendencies for typical outdoor comfort, not weather forecasts, price predictions or safety advice. Compare the activities you care about, then look at the region and specific travel dates."/>
+    <SectionHeading id="months" title="Choose your month at a glance" intro="This table compares typical seasonal conditions for outdoor activities across Israel. Choose your travel dates according to your preferred destinations and activities."/>
     <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label="Filter the month comparison by season">
       {(["all",...seasonNames] as const).map(value=><button type="button" key={value} aria-pressed={filter===value} onClick={()=>{setFilter(value);setSelectedMonth(null);}} className={"min-h-10 rounded-full border px-3.5 py-1.5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-primary "+(filter===value?"border-primary bg-primary text-primary-foreground":"bg-card hover:bg-secondary")}>{value==="all"?"All months":seasonLabels[value]}</button>)}
     </div>
@@ -103,14 +103,14 @@ function MonthMatrix(){
       {activeMonth ? <>
         <h3 className="text-base font-bold">My planning note for {activeMonth.month}</h3>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">{activeMonth.insight}</p>
-      </> : <p className="text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Want month-specific advice?</strong> Select any month in the left column to see one practical planning note without scrolling through twelve separate cards.</p>}
+      </> : <p className="text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Monthly travel recommendations</strong> Select a month for my seasonal travel recommendations.</p>}
     </div>
   </section>;
 }
 function RegionCards(){
   const icons=[Compass,Waves,Mountain,Sun,Mountain] as const;
   return <section id="regions" aria-labelledby="regions-heading" className="mt-12 scroll-mt-24">
-    <SectionHeading id="regions" title="Best time to visit each region" intro="I choose the month after choosing the places. A week in Jerusalem and the Galilee needs different planning from a seaside holiday in Eilat or an exposed hike near Masada."/>
+    <SectionHeading id="regions" title="Best time to visit each region" intro="I recommend choosing your travel dates according to the regions you want to visit, from Jerusalem and the Galilee to the beaches of Eilat and the desert around Masada."/>
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {regions.map((region,i)=>{const Icon=icons[i]!;return <article key={region.id} className="flex min-w-0 flex-col rounded-xl border bg-card p-4 sm:p-5">
         <div className="flex items-start gap-2"><span className="rounded-lg bg-secondary p-2 text-primary"><Icon className="h-5 w-5" aria-hidden="true"/></span><div><h3 className="text-lg font-bold leading-snug">{region.name}</h3><p className="mt-1 text-xs font-semibold text-primary">{region.goodMonths}</p></div></div>
@@ -148,7 +148,7 @@ function HolidayAndWeather(){
       <article className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="text-lg font-bold">Holidays can change the entire day</h3>
         <p className="mt-2 text-sm leading-relaxed">Passover and the autumn Jewish holidays change dates on the Gregorian calendar every year. Shabbat begins on Friday evening. During some holidays and on Shabbat, public transport is limited or unavailable, and individual attractions and shops may close or change hours. Easter and major religious celebrations also affect visits to churches and heritage sites.</p>
-        <p className="mt-3 text-sm leading-relaxed">I recommend checking the specific dates before booking a hotel, a tour or an airport arrival. A busy holiday can be rewarding, but it needs a different travel plan.</p>
+        <p className="mt-3 text-sm leading-relaxed">I recommend checking the specific dates before booking a hotel, a tour or an airport arrival. Religious holidays offer opportunities to experience local traditions, with advance planning for transport, accommodation and sightseeing.</p>
         <div className="mt-4 text-sm"><Link className="font-semibold text-primary hover:underline" to="/travel-blog/calendar-of-events/">Israel’s calendar of events</Link></div>
       </article>
       <article className="rounded-xl border bg-card p-4 sm:p-5">
@@ -210,7 +210,7 @@ export function BestTimeIsraelGuide(){
     <CuratedTours/>
     <FaqList faqs={guide.faqs}/>
     <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
-      <SectionHeading id="explore-more" title="Explore Israel by season and region" intro="These guides help you connect the time of year with the places and activities you actually want to experience."/>
+      <SectionHeading id="explore-more" title="Explore Israel by season and region"/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=><GuideCard key={item.to} item={item}/>)}</div>
     </section>
     <section id="next-trip" aria-labelledby="next-trip-heading" className="mt-12 scroll-mt-24">
@@ -224,7 +224,7 @@ export function BestTimeIsraelGuide(){
       placeholder:"Travel dates, places to visit, pickup location, passengers or your question…"
     }}/>
     <SourcesDisclosure>
-      <p className="leading-relaxed">Seasonal recommendations describe typical patterns, not precise forecasts. I recommend checking these official resources for your dates:</p>
+      <p className="leading-relaxed">For weather forecasts and current conditions during your visit, consult these official resources:</p>
       <ul className="mt-2 list-disc space-y-1 pl-5">
         <li><External href="https://ims.gov.il/en/ClimateAtlas">Israel Meteorological Service - climate atlas</External></li>
         <li><External href="https://ims.gov.il/en/warning">Israel Meteorological Service - current warnings</External></li>

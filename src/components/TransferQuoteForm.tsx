@@ -74,7 +74,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
                     <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Flight departure date *" : "Flight arrival date *"}<Input name="date" type="date" required value={fields.date} onChange={(e) => update("date", e.target.value)} className={fieldClass} /></label>
                     <label className="min-w-0 text-sm font-medium">{airportDropoff ? "Flight departure time *" : "Flight arrival time *"}<Input name="time" type="time" required value={fields.time} onChange={(e) => update("time", e.target.value)} className={fieldClass} /></label>
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground">Enter your flight's arrival or departure date and time in Israel local time, especially for flights after midnight.</p>
+                  <p className="mt-2 text-xs text-muted-foreground">Enter your flight date and time in Israel's local time zone, paying particular attention to flights after midnight.</p>
                 </div>
                 <div>
                   <div className="grid gap-4 sm:grid-cols-2" data-testid="quote-fields-destination">
@@ -88,7 +88,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
                   <label className="min-w-0 text-xs font-medium sm:text-sm">Suitcases *<Input name="suitcases" type="number" min={0} max={40} step={1} required value={fields.suitcases} onChange={(e) => update("suitcases", e.target.value)} className={`${fieldClass} px-2 sm:px-3`} /></label>
                   <label className="min-w-0 text-xs font-medium sm:text-sm">Carry-ons *<Input name="carryOns" type="number" min={0} max={40} step={1} required value={fields.carryOns} onChange={(e) => update("carryOns", e.target.value)} className={`${fieldClass} px-2 sm:px-3`} /></label>
                 </div>
-                {Number(fields.passengers) > 4 && <p className="rounded-lg bg-secondary p-3 text-sm">For more than four passengers, ask for a group quote. The published car starting prices do not apply to your whole group.</p>}
+                {Number(fields.passengers) > 4 && <p className="rounded-lg bg-secondary p-3 text-sm">For groups of more than four passengers, I'll provide a customized quote for a suitable vehicle.</p>}
                 <label className="block min-w-0 text-sm font-medium">Additional requests<Textarea name="notes" maxLength={1500} rows={3} placeholder="Children's ages, strollers, extra luggage, accessibility needs or a return-trip request" value={fields.notes} onChange={(e) => update("notes", e.target.value)} className="mt-2 w-full bg-background text-base" /></label>
               </div>
               <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(e) => update("consent", e.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this quote request. <PrivacyInformationLink /></span></label>

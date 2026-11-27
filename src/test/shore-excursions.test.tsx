@@ -140,7 +140,7 @@ describe("shore excursions", () => {
       expect(card).not.toHaveTextContent(/From ILS|Per vehicle/);
       expect(card).toHaveTextContent("Full day · Customized itinerary · Private car & driver");
       expect(card.querySelector("article")).toHaveClass("sm:flex-row");
-      expect(within(card).getByRole("link", { name: `Request a quote: ${itinerary.destination} from ${port.name}` })).toHaveAttribute("href", "#request-quote");
+      expect(within(card).getByRole("link", { name: `Get a quote: ${itinerary.destination} from ${port.name}` })).toHaveAttribute("href", "#request-quote");
     });
     expect(container.querySelector("#itineraries")!.compareDocumentPosition(container.querySelector("#request-quote")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     // Exact category-page order: catalog (external then private), planning, FAQ, local, practical, contact.
@@ -149,7 +149,7 @@ describe("shore excursions", () => {
     expect(nodes.every(Boolean)).toBe(true);
     for (let i = 1; i < nodes.length; i++) expect(nodes[i - 1]!.compareDocumentPosition(nodes[i]!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getByLabelText("Departure & return port")).toHaveValue(`${port.name} Port`);
-    const itineraryField = screen.getByLabelText("Requested itinerary *").closest("label");
+    const itineraryField = screen.getByLabelText("Preferred itinerary *").closest("label");
     const passengersField = screen.getByLabelText("Passengers *").closest("label");
     expect(itineraryField).not.toHaveClass("sm:col-span-2");
     expect(passengersField).not.toHaveClass("sm:col-span-2");
@@ -195,8 +195,8 @@ describe("shore excursions", () => {
     const Page = route.options.component!;
     render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     const itinerary = port.itineraries[0]!;
-    fireEvent.click(screen.getByRole("link", { name: `Request a quote: ${itinerary.destination} from ${port.name}` }));
-    expect(screen.getByLabelText("Requested itinerary *")).toHaveValue(itinerary.id);
+    fireEvent.click(screen.getByRole("link", { name: `Get a quote: ${itinerary.destination} from ${port.name}` }));
+    expect(screen.getByLabelText("Preferred itinerary *")).toHaveValue(itinerary.id);
     fireEvent.click(screen.getByRole("button", { name: "Send excursion request" }));
     expect(screen.getByRole("alert")).toHaveTextContent("Enter your cruise ship's name");
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie & family" } });
@@ -207,20 +207,20 @@ describe("shore excursions", () => {
     fireEvent.change(screen.getByLabelText("Expected disembarkation time *"), { target: { value: "08:00" } });
     fireEvent.change(screen.getByLabelText("Ship's all-aboard time *"), { target: { value: "18:00" } });
     fireEvent.change(screen.getByLabelText("Passengers *"), { target: { value: "6" } });
-    expect(screen.getByText(/I can arrange a suitable van or minibus for larger groups/)).toBeInTheDocument();
+    expect(screen.getByText(/Vans and minibuses are available for larger groups/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send excursion request" }));
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your message")).toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: port.title, request: { kind: "shore", portId: id, fields: { ship: "Example Voyager", date: "2099-11-01", pickupTime: "08:00", allAboardDate: "2099-11-01", allAboardTime: "18:00", passengers: "6", itineraryId: itinerary.id, consent: true } } });
     expect(localStorage.length).toBe(0);
-    fireEvent.click(screen.getByRole("link", { name: `Request a quote: ${port.itineraries[1]!.destination} from ${port.name}` }));
+    fireEvent.click(screen.getByRole("link", { name: `Get a quote: ${port.itineraries[1]!.destination} from ${port.name}` }));
     expect(screen.getByRole("button", { name: "Send excursion request" })).toBeEnabled();
-    fireEvent.change(screen.getByLabelText("Requested itinerary *"), { target: { value: "other" } });
-    expect(screen.getByLabelText("Requested itinerary *")).toHaveValue("other");
+    fireEvent.change(screen.getByLabelText("Preferred itinerary *"), { target: { value: "other" } });
+    expect(screen.getByLabelText("Preferred itinerary *")).toHaveValue("other");
     expect(screen.getByLabelText("Your itinerary or destinations *")).toBeRequired();
   });
 
@@ -229,7 +229,7 @@ describe("shore excursions", () => {
     const valid = { ...emptyShoreQuote, name: "Jamie", email: "j@example.com", ship: "Voyager", date: "2026-10-18", pickupTime: "08:00", allAboardDate: "2026-10-18", allAboardTime: "18:00", itineraryId: "haifa-akko", consent: true };
     expect(validateShoreQuote(valid, "haifa", now)).toEqual([]);
     expect(validateShoreQuote({ ...valid, date: "2026-02-30" }, "haifa", now)).toContain("Choose a valid excursion date.");
-    expect(validateShoreQuote({ ...valid, date: "2026-10-16" }, "haifa", now).join(" ")).toMatch(/past in Israel/);
+    expect(validateShoreQuote({ ...valid, date: "2026-10-16" }, "haifa", now).join(" ")).toMatch(/Choose today or a future excursion date/);
     expect(validateShoreQuote({ ...valid, date: "2026-10-17", pickupTime: "20:59" }, "haifa", now).join(" ")).toMatch(/already passed today in Israel/);
     expect(validateShoreQuote({ ...valid, allAboardTime: "07:30" }, "haifa", now).join(" ")).toMatch(/All-aboard must be later/);
     expect(validateShoreQuote({ ...valid, allAboardDate: "2026-10-19", allAboardTime: "07:30" }, "haifa", now)).toEqual([]);

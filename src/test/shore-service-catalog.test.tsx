@@ -248,7 +248,7 @@ describe("port service catalog", () => {
     expect(tourGrid).toHaveClass("lg:grid-cols-3");
     expect(privateGrid.children.length).toBeGreaterThan(0);
     expect(screen.queryByTestId("shore-companion-card")).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "request a custom route" })).toHaveAttribute("href", "#request-quote");
+    expect(screen.getByRole("link", { name: "Contact me for a customized itinerary" })).toHaveAttribute("href", "#request-quote");
     expect(within(tourGrid).queryByLabelText("Rating 4.9 out of 5 from 29 reviews")).toBeNull();
   });
 

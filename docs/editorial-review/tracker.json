@@ -1,0 +1,1095 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "72ab55bf70ecbcc28eab1712bcd2020cab5c9b80",
+  "groups": [
+    {
+      "id": 1,
+      "name": "Home, about and private services"
+    },
+    {
+      "id": 2,
+      "name": "Airport transfers and airport journey guides"
+    },
+    {
+      "id": 3,
+      "name": "Taxi and public transport guides"
+    },
+    {
+      "id": 4,
+      "name": "Israel itineraries"
+    },
+    {
+      "id": 5,
+      "name": "Jerusalem guides and attractions"
+    },
+    {
+      "id": 6,
+      "name": "Tel Aviv guides and attractions"
+    },
+    {
+      "id": 7,
+      "name": "Haifa, Akko, Caesarea and northern Israel"
+    },
+    {
+      "id": 8,
+      "name": "Dead Sea, Masada, Negev and Eilat"
+    },
+    {
+      "id": 9,
+      "name": "Christian sites, pilgrimage and baptism"
+    },
+    {
+      "id": 10,
+      "name": "Accommodation and neighbourhood guides"
+    },
+    {
+      "id": 11,
+      "name": "Tours and shore excursions"
+    },
+    {
+      "id": 12,
+      "name": "General travel guides and legal pages"
+    },
+    {
+      "id": 13,
+      "name": "Shared components and interactive text"
+    }
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "group": 1,
+      "status": "verified",
+      "reviewedSnapshot": "6f6a7a2636921d3e343dde259340805b0c6e63f04cced0717281d000fdcbc935",
+      "changes": 7,
+      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "184a017d2fa556ae63c01b460bac0038ec197b95ecbcdc415958612e87188861"
+    },
+    {
+      "path": "/about-me/",
+      "group": 1,
+      "status": "verified",
+      "reviewedSnapshot": "d697b6d0b923a557ae7c7a6c84d841114792044cae7fafb9a99bd5d09d584799",
+      "changes": 14,
+      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "ea17d374935ccb47ef9a186293b34b3898187c26cbd23f36474ccb2e368283d3"
+    },
+    {
+      "path": "/accommodation/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/dead-sea/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 4,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/dead-sea/family/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/dead-sea/spa/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/haifa/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/haifa/boutique/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/haifa/family/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/jerusalem/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 4,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/jerusalem/downtown/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/jerusalem/east-jerusalem/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/jerusalem/german-colony-baka/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/jerusalem/mahane-yehuda-nachlaot/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/jerusalem/mamilla-king-david/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/jerusalem/old-city/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tel-aviv/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 4,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tel-aviv/beachfront/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tel-aviv/dizengoff-city-center/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tel-aviv/florentin/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tel-aviv/jaffa/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tel-aviv/kerem-hateimanim/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tel-aviv/neve-tzedek/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tel-aviv/old-north-port/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tel-aviv/rothschild-boulevard/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tiberias/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 7,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tiberias/family/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/accommodation/tiberias/luxury/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/airport-transfers/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "09e98468367804662a1a8ef6f85dcab6c3212258685afeea36e0fb7fdd269432",
+      "changes": 6,
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "984c08a978a55f74cdf5fafb669c4ecf6e0d85e03b979a17dab5ae2843c91663"
+    },
+    {
+      "path": "/airport-transfers/ein-bokek/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "74e9a064e0cc603f54a9cb92a4e2ee917727360dc1c3a25a2b092e3c4157d03b",
+      "changes": 10,
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "f416e4b4cd93cb4872c114fd334720ef2e79d4f995469b005e1b1c862d755e4e"
+    },
+    {
+      "path": "/airport-transfers/haifa/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "0c04632b7fb91bafdfe2bb21b91ca808ace89ee8db783fa75004377978a261f4",
+      "changes": 11,
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "97041e8c320bb4a553be25d678fba97f62d047408d5c3be1a9dc527023c23cd2"
+    },
+    {
+      "path": "/airport-transfers/jerusalem/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "6ba3904568a05ee3b0b713ffc8fa9e2a4927ec5500b215374b08da9077fac70f",
+      "changes": 9,
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "9c66bdfe3ffb5685789a67312c6bc20d3923388e60581966f09d454acc322d1a"
+    },
+    {
+      "path": "/airport-transfers/tel-aviv/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "f482283948bc7db21fc0aba9ad24bc87d56829f8eee76778f22da60d05cf083d",
+      "changes": 8,
+      "notes": "Complete static corpus reviewed. Shared transfer copy counted on each affected page; unique replacements in commit diff. Prices, cancellation terms, links and layout preserved. Await targeted regression and post-edit extraction. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "2ffa7c534ac51e7adbdb3cd0e7f0c0553853d6c09707ceda73701400241c5fce"
+    },
+    {
+      "path": "/attractions/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 7,
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/attractions/akko-acre/",
+      "group": 7,
+      "status": "verified",
+      "reviewedSnapshot": "8683af55f0b2c19739d879ee7eb15609a9779c5163ca937c678a9f66ab4a2bae",
+      "changes": 7,
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending. Full Project Validation 45998626471 and Hostinger deployment 45999080007 passed.",
+      "postEditSnapshot": "d828c183dc145681fbac0a96ff98e25191e4c4df096335a9f378676f99d88e3e"
+    },
+    {
+      "path": "/attractions/basilica-of-the-annunciation/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy;  Initial corpus run 46002584454 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/attractions/caesarea/",
+      "group": 7,
+      "status": "verified",
+      "reviewedSnapshot": "db8d855a62a8a2c97719abf8cec4e069c8f9b92a6f1155a2a71c3da94c2351e4",
+      "changes": 3,
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending. Full Project Validation 45998626471 and Hostinger deployment 45999080007 passed.",
+      "postEditSnapshot": "63bd2c914c254c8383742105f09bac05828caa1616a830e30ba54f28c46fc004"
+    },
+    {
+      "path": "/attractions/capernaum/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 7,
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy;  Initial corpus run 46002972945 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/attractions/dead-sea/",
+      "group": 8,
+      "status": "verified",
+      "reviewedSnapshot": "9aca4c726104018b31b99a699c222f06168e9bcc007c8cf1527fda3f573c81ee",
+      "changes": 7,
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance.  Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded.",
+      "postEditSnapshot": "24252609734fd49f5e2f989fa58b3fe13a75aa1b872717608db9be3803b28151"
+    },
+    {
+      "path": "/attractions/eilat/",
+      "group": 8,
+      "status": "verified",
+      "reviewedSnapshot": "9c6ccea1702fda1123af87feecec3f0d590daf8c39b246a09242892e8599d1e0",
+      "changes": 6,
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links.  User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/attractions/ein-gedi/",
+      "group": 8,
+      "status": "verified",
+      "reviewedSnapshot": "193516268cafba9b38b1aeee6ba22ff4791316d819919a86019014c30c68bfa9",
+      "changes": 6,
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance.  Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded.",
+      "postEditSnapshot": "b252c01026682b164f787905b430c5caf0c3d53be1a80439f4a499d1f2820bf8"
+    },
+    {
+      "path": "/attractions/haifa/",
+      "group": 7,
+      "status": "verified",
+      "reviewedSnapshot": "ec426fd530ab63c542e453016b18b82a21f7e2e5b899669b70aa814a7dfd0953",
+      "changes": 6,
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending. Full Project Validation 45998626471 and Hostinger deployment 45999080007 passed.",
+      "postEditSnapshot": "5a633049eb50ec04ddd4a2039cacc2d4f0b70e11a833fce3043f9de705195f99"
+    },
+    {
+      "path": "/attractions/jaffa/",
+      "group": 6,
+      "status": "verified",
+      "reviewedSnapshot": "ae1e396568cd4eb28153bceb357c6077f71cc3713a02acb1a6843f785d76e527",
+      "changes": 5,
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending. Full Project Validation 45997274558 and Hostinger deployment 45997750452 passed.",
+      "postEditSnapshot": "73d1d366c38d330e0318a388ca26a947fa747b6d5d90980e9b14f224a70926dc"
+    },
+    {
+      "path": "/attractions/magdala/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 7,
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy;  Initial corpus run 46002972945 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/attractions/masada/",
+      "group": 8,
+      "status": "verified",
+      "reviewedSnapshot": "1a904b33e5107dc330b79f63298b5c3919b8d71bf16e2bbe6935be29fbced58b",
+      "changes": 6,
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance.  Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded.",
+      "postEditSnapshot": "d956bfd3fcf8dc11c9ac9a40eae0a9b1e282594b0369d6ebd13168e15a638c9d"
+    },
+    {
+      "path": "/attractions/mitzpe-ramon-crater/",
+      "group": 8,
+      "status": "verified",
+      "reviewedSnapshot": "4c12b18f8052a24ea5abcb35d660a4be64e1b253260e96c81a71448481a35147",
+      "changes": 5,
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links.  User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/attractions/mount-of-beatitudes/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy;  Initial corpus run 46002972945 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/attractions/mount-of-olives/",
+      "group": 5,
+      "status": "verified",
+      "reviewedSnapshot": "f4d5434486601ae6fd878310ce27f9ffc32df71ce9714acb9f1231c948ff0f71",
+      "changes": 6,
+      "notes": "Reviewed rendered visitor guide from artifact 15190479263. Retained religious traditions, hours, prices, routes, accessibility and links. Await approval and targeted regression. Targeted regression and extraction passed in run 45988832492; awaiting approval and production deployment. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending. Full Project Validation 45996023487 and Hostinger deployment 45996461186 passed.",
+      "postEditSnapshot": "1fc76f58d0656e1daf0ae5f73543b990bb977758783e14a68b5f806a482b633c"
+    },
+    {
+      "path": "/attractions/mount-precipice/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy;  Initial corpus run 46002584454 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/attractions/mount-tabor/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy;  Initial corpus run 46002584454 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/attractions/mount-zion/",
+      "group": 5,
+      "status": "verified",
+      "reviewedSnapshot": "36562303fb27d0645b67a08ab01f80d2c79fe5bde46512620f1bb365c6513ee1",
+      "changes": 5,
+      "notes": "Reviewed rendered visitor guide from artifact 15190479263. Retained religious traditions, hours, prices, routes, accessibility and links. Await approval and targeted regression. Targeted regression and extraction passed in run 45988832492; awaiting approval and production deployment. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending. Full Project Validation 45996023487 and Hostinger deployment 45996461186 passed.",
+      "postEditSnapshot": "d56da50455f6e06cad58300dffb96288fb4a04713829ccd1882f846ff1c5c3aa"
+    },
+    {
+      "path": "/attractions/old-city-jerusalem/",
+      "group": 5,
+      "status": "verified",
+      "reviewedSnapshot": "4cf81006a5aa9b173bba95f5340fd4becc5ac0ae5dfb307d7690d11e15c17948",
+      "changes": 4,
+      "notes": "Read full prerendered corpus from artifact 15193336079. Simplified visitor instructions, descriptions and route labels, preserving hours, admission, traditions, links and historical uncertainty. Await regression and approval. Targeted regression and corpus extraction passed in run 45994945086; awaiting approval and production deployment. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending. Full Project Validation 45996023487 and Hostinger deployment 45996461186 passed.",
+      "postEditSnapshot": "555e7c2dc027c4b5a4790d1b1591d8b2f8482682acd6af237578b4de5b763698"
+    },
+    {
+      "path": "/attractions/qasr-el-yahud/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All group 9C edits approved and applied; source copy reviewed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/attractions/rosh-hanikra/",
+      "group": 7,
+      "status": "verified",
+      "reviewedSnapshot": "42cfe24dc94c1f7c2acd530c640d110504edc1685c687432c4e5745f6737c7ad",
+      "changes": 5,
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending. Full Project Validation 45998626471 and Hostinger deployment 45999080007 passed.",
+      "postEditSnapshot": "d2307f1690b20437f79542646382cfd4331d4459f6cc246e8ebcc8b07b8d2f70"
+    },
+    {
+      "path": "/attractions/sea-of-galilee/",
+      "group": 7,
+      "status": "verified",
+      "reviewedSnapshot": "c9c40dc4b1c469eaa99918221d3a2c03e220ab9828c40d0bb90858eae4df6b80",
+      "changes": 6,
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending. Full Project Validation 45998626471 and Hostinger deployment 45999080007 passed.",
+      "postEditSnapshot": "02e5a8d179938c9193850699c3cbe41aa00fda6eb61f493241c355decf4493b2"
+    },
+    {
+      "path": "/attractions/tabgha/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy;  Initial corpus run 46002972945 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/attractions/tel-megiddo/",
+      "group": 7,
+      "status": "verified",
+      "reviewedSnapshot": "31dc97818623627516be210da1d62f0abfc73d8e0f7c7e3b605b09d64f272973",
+      "changes": 5,
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending. Full Project Validation 45998626471 and Hostinger deployment 45999080007 passed.",
+      "postEditSnapshot": "19c43c6021a18a1ff62ae44f480d276fad3537093a873b33655f916b6eb26fda"
+    },
+    {
+      "path": "/attractions/via-dolorosa/",
+      "group": 5,
+      "status": "verified",
+      "reviewedSnapshot": "cb6dbbdf6359c31d98855d4af0b392d105e27c9a8aa0a17e36a63eb69ee303d3",
+      "changes": 6,
+      "notes": "Read full prerendered corpus from artifact 15193336079. Simplified visitor instructions, descriptions and route labels, preserving hours, admission, traditions, links and historical uncertainty. Await regression and approval. Targeted regression and corpus extraction passed in run 45994945086; awaiting approval and production deployment. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending. Full Project Validation 45996023487 and Hostinger deployment 45996461186 passed.",
+      "postEditSnapshot": "5c451f6b05f2406c2051b00d7157071b56fbdecb817c64260079e29d5df7971f"
+    },
+    {
+      "path": "/attractions/yardenit/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All group 9C edits approved and applied; source copy reviewed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/car-rental/",
+      "group": 3,
+      "status": "verified",
+      "reviewedSnapshot": "b069dbe96d1ad73dd228878262e2c31cdc5335420abb4c32d816379558ff932c",
+      "changes": 8,
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
+    },
+    {
+      "path": "/privacy-policy/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 14,
+      "notes": "Group 12C approved style revisions plus explicit user instructions: active form delivery and consent-gated GA4, generic email processor disclosure, remove duplication, 24-hour cancellation in Terms; update document dates to 2026-11-27. Regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/private-driver-in-israel/",
+      "group": 1,
+      "status": "verified",
+      "reviewedSnapshot": "5aef686b20f9f05a322417791b59805f26cd1f569ef8765a5fc142377db80e8a",
+      "changes": 14,
+      "notes": "Full static corpus reviewed. Quotes, credit/legal meaning, headings, layout and links retained; shared and client-only controls scheduled in group 13. Await post-edit corpus and targeted regression verification. Targeted regression and corpus extraction passed in run 45983991524; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "099ef373b017bf704bce1ea8b01daa0972f1563e803db9e400dd4ea8a317fbeb"
+    },
+    {
+      "path": "/shore-excursions/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 8,
+      "notes": "All eight page-specific group 11C edits approved and applied; Regression and rendered corpus verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/shore-excursions/ashdod/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 10,
+      "notes": "All eight page-specific group 11C edits approved and applied; Four shared port-page edits also applied, counted once across both port pages (two allocated to each for aggregate tracking). Regression and rendered corpus verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/shore-excursions/haifa/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 10,
+      "notes": "All eight page-specific group 11C edits approved and applied; Four shared port-page edits also applied, counted once across both port pages (two allocated to each for aggregate tracking). Regression and rendered corpus verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/terms-of-use/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 14,
+      "notes": "Group 12C approved style revisions plus explicit user instructions: active form delivery and consent-gated GA4, generic email processor disclosure, remove duplication, 24-hour cancellation in Terms; update document dates to 2026-11-27. Regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/tours/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 4,
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/tours/bethlehem-jericho-jordan-river/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/tours/caesarea-haifa-acre/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/tours/eilat-red-sea/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 7,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/tours/food-market-tours/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/tours/golan-heights/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/tours/jerusalem/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/tours/masada-dead-sea/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/tours/nazareth-sea-of-galilee/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/tours/negev-desert-ramon-crater/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All group 11B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009940270 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/tours/tel-aviv-jaffa/",
+      "group": 11,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 5,
+      "notes": "All group 11A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46009073133 passed; dedicated tour regression verification pending. Final editorial corpus 46011415115, full validation 46011423911, shore browser audit 46011423906 and affiliate verification 46011423965 passed; merged PR #102 (31c5e39). Main validation 46011833957 and Hostinger deployment 46012208418 succeeded."
+    },
+    {
+      "path": "/travel-blog/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 7,
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/travel-blog/attractions-in-tel-aviv/",
+      "group": 6,
+      "status": "verified",
+      "reviewedSnapshot": "46598bdd36a1bc5c3410e09db7f89204aa8b33747066ab5dc47e545c0dffed93",
+      "changes": 8,
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending. Full Project Validation 45997274558 and Hostinger deployment 45997750452 passed.",
+      "postEditSnapshot": "cef664530f371797d80e5a6d6d12affcd24c4766bb9a46102546be64423d2171"
+    },
+    {
+      "path": "/travel-blog/baptism-in-the-jordan-river/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All group 9C edits approved and applied; source copy reviewed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/travel-blog/beaches-in-tel-aviv/",
+      "group": 6,
+      "status": "verified",
+      "reviewedSnapshot": "786baf3469f87ff6a4f4cb1f64fd46fdccaa03811c8c886d54e758dad0730374",
+      "changes": 7,
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. User approved all edits with direct wording for free parking at North Tzuk. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending. Full Project Validation 45997274558 and Hostinger deployment 45997750452 passed.",
+      "postEditSnapshot": "0dc221ea282e3705a92a7f8d404a296dab3a26de868a7ee711c69ae96ecba6f7"
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-arrival-tips/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "2a30fc79a0dae9b4631f0343e6155e83436b81e2fa29fe8885e1c2514adae4a7",
+      "changes": 7,
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-taxis/",
+      "group": 3,
+      "status": "verified",
+      "reviewedSnapshot": "808256da15593a69705ca29ebe524cd597e3cd260570e39fa78a219ddcc0d877",
+      "changes": 6,
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-to-ein-bokek/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "35802add688bff724edb31a7b50e93b94047618c59a2e6c35964f31d2f8638b5",
+      "changes": 8,
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-to-haifa/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "1d66c3502ce91649ba03be271618d62eeb53cf385d9e68887dd71bd4e51d6115",
+      "changes": 7,
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "9f13f165fd62e52ef33a1dc6422b466fa3bacd3d68ddce7418f5da9c13b128fa",
+      "changes": 5,
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
+    },
+    {
+      "path": "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "bf659861b05dd125737dc37c70875254200585befcc3484f4052c776b458b9d9",
+      "changes": 8,
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
+    },
+    {
+      "path": "/travel-blog/best-dead-sea-hotels/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/travel-blog/best-esim-for-israel/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 7,
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/travel-blog/best-hotels-in-haifa/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/travel-blog/best-hotels-in-tiberias/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/travel-blog/best-time-to-visit-israel/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 8,
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/travel-blog/calendar-of-events/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 7,
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/travel-blog/christian-tours-in-israel/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 8,
+      "notes": "All group 9C edits approved and applied; source copy reviewed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/travel-blog/churches-in-jerusalem/",
+      "group": 5,
+      "status": "verified",
+      "reviewedSnapshot": "c97adc22ae60c2a3e5ade9b227a2a7ba7a4559d57a9071fab29115103b86ef48",
+      "changes": 15,
+      "notes": "Read full prerendered corpus from artifact 15193336079. Simplified visitor instructions, descriptions and route labels, preserving hours, admission, traditions, links and historical uncertainty. Await regression and approval. Targeted regression and corpus extraction passed in run 45994945086; awaiting approval and production deployment. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending. Full Project Validation 45996023487 and Hostinger deployment 45996461186 passed.",
+      "postEditSnapshot": "60c183d310608ac8b561df5a55dbf78bb9beda5dbb63b938f645379c57a29afc"
+    },
+    {
+      "path": "/travel-blog/dead-sea-attractions/",
+      "group": 8,
+      "status": "verified",
+      "reviewedSnapshot": "06b38441b2e3419a461393d1c9eef2a870c767c940d647f8ddc364ab049ceb53",
+      "changes": 7,
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links.  User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/travel-blog/from-ben-gurion-airport-on-shabbat/",
+      "group": 2,
+      "status": "verified",
+      "reviewedSnapshot": "4683f566b07e4532e3c081281eb2033c7b7641bd280db3092d5cb6851baadfa3",
+      "changes": 9,
+      "notes": "Complete prerendered text and attributes reviewed, including tables, FAQs and source labels. Shared form and author components reserved for group 13. Await regression and post-edit extraction. Targeted regression and extraction passed in run 45984635355; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
+    },
+    {
+      "path": "/travel-blog/getting-around-israel/",
+      "group": 3,
+      "status": "verified",
+      "reviewedSnapshot": "1501b58451eff4671f58bd9288ae4d08f46b8c7a1f3ca8f64f5ede352a188cad",
+      "changes": 5,
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
+    },
+    {
+      "path": "/travel-blog/getting-around-tel-aviv/",
+      "group": 3,
+      "status": "verified",
+      "reviewedSnapshot": "52dac4edf14520a177406c33d53700216241acbc474884e37d677b878aa229c6",
+      "changes": 6,
+      "notes": "Complete prerendered content reviewed from run 45985558365, including tables, FAQs, sources and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published."
+    },
+    {
+      "path": "/travel-blog/israel-itinerary-10-days/",
+      "group": 4,
+      "status": "verified",
+      "reviewedSnapshot": "461298d9918168ab6c57e6b00632dfdb3f9888fb42d88ce034ed95ca4cd4b9d4",
+      "changes": 5,
+      "notes": "Reviewed prerendered itinerary content from artifact 15190479263; edited daily descriptions, advice and FAQs while retaining route, dates, attractions, lodging and booking links. Await regression. Full Project Validation 45988710773 and Hostinger deployment 45989167383 passed.",
+      "postEditSnapshot": "0317c88e366f1109501f06e363ec4aa1ae0f16645c1fc55d2f1f1fd2ec8b66f9"
+    },
+    {
+      "path": "/travel-blog/israel-itinerary-3-days/",
+      "group": 4,
+      "status": "verified",
+      "reviewedSnapshot": "c473808427dfc990ff443b152a4d36b5bf85b90602f9ffef521eb77e56ce89df",
+      "changes": 7,
+      "notes": "Reviewed prerendered itinerary content from artifact 15190479263; edited daily descriptions, advice and FAQs while retaining route, dates, attractions, lodging and booking links. Await regression. Full Project Validation 45988710773 and Hostinger deployment 45989167383 passed.",
+      "postEditSnapshot": "b3777b00bd94c48c1018e83ebe3f5c8f964cf96341de36aeaf1cc71b0656af18"
+    },
+    {
+      "path": "/travel-blog/israel-itinerary-5-days/",
+      "group": 4,
+      "status": "verified",
+      "reviewedSnapshot": "5f104250477fa73f157cb04ae52853b28180af7a28f35495821f6a2c77480887",
+      "changes": 5,
+      "notes": "Reviewed prerendered itinerary content from artifact 15190479263; edited daily descriptions, advice and FAQs while retaining route, dates, attractions, lodging and booking links. Await regression. Full Project Validation 45988710773 and Hostinger deployment 45989167383 passed.",
+      "postEditSnapshot": "95eae841e644f8631f638c966b2fde447bb020b806e5755237569557f440eb9e"
+    },
+    {
+      "path": "/travel-blog/israel-itinerary-7-days/",
+      "group": 4,
+      "status": "verified",
+      "reviewedSnapshot": "7c185171ac6c225b20b9350708507fe9737146d936f2a360f6beb2619129abf4",
+      "changes": 6,
+      "notes": "Reviewed prerendered itinerary content from artifact 15190479263; edited daily descriptions, advice and FAQs while retaining route, dates, attractions, lodging and booking links. Await regression. Full Project Validation 45988710773 and Hostinger deployment 45989167383 passed.",
+      "postEditSnapshot": "28391f5a40f6aafe51d613d55c5db612a27e26f630aae0669667719170742a36"
+    },
+    {
+      "path": "/travel-blog/israel-tours-for-seniors/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 9,
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/travel-blog/israel-travel-tips/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 9,
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/travel-blog/jerusalem-to-bethlehem/",
+      "group": 9,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 8,
+      "notes": "All group 9C edits approved and applied; source copy reviewed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/travel-blog/jerusalem-to-the-dead-sea/",
+      "group": 8,
+      "status": "verified",
+      "reviewedSnapshot": "b8d765ca58e217e6fbe7bd5c475102a106e2a52133cd1067092fcdd281d9ba18",
+      "changes": 6,
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links.  User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
+    },
+    {
+      "path": "/travel-blog/jerusalem-travel-guide/",
+      "group": 5,
+      "status": "verified",
+      "reviewedSnapshot": "9c686cb8acdf04d30434930d0ace09c064a7517beb141ec3759c5ddff1f6a324",
+      "changes": 8,
+      "notes": "Reviewed prerendered visitor content from artifact 15195815819; streamlined introductions, practical advice, museum descriptions and shopping guidance. No changes to prices, hours, map, links, or official sources. Await regression and approval. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending. Full Project Validation 45996023487 and Hostinger deployment 45996461186 passed.",
+      "postEditSnapshot": "9b32df34d57ec18cd55fc69112ff529cf0f4edb645c7012aeff557f2075b439d"
+    },
+    {
+      "path": "/travel-blog/museums-in-haifa/",
+      "group": 7,
+      "status": "verified",
+      "reviewedSnapshot": "42205ae80fcc8196e52ca7ba2da58f46882352cbc12ea84770f484e971a9ef55",
+      "changes": 10,
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval. Targeted regression and corpus passed in run 45998188726; approved and merged to main; production validation pending. Full Project Validation 45998626471 and Hostinger deployment 45999080007 passed.",
+      "postEditSnapshot": "0ad1581056e1796b7bdf460ad93fd2aa2ecf40fb4ad3f5139f29c0c3b1eedf04"
+    },
+    {
+      "path": "/travel-blog/museums-in-jerusalem/",
+      "group": 5,
+      "status": "verified",
+      "reviewedSnapshot": "a91a60d7f7bec1e829d010c5cc520a63e324618e5bf5467be60a4f1c10486104",
+      "changes": 9,
+      "notes": "Reviewed prerendered visitor content from artifact 15195815819; streamlined introductions, practical advice, museum descriptions and shopping guidance. No changes to prices, hours, map, links, or official sources. Await regression and approval. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending. Full Project Validation 45996023487 and Hostinger deployment 45996461186 passed.",
+      "postEditSnapshot": "9785f48542bb82f98bb8fc030e19accb0b9a4602cea90f6c207a4c306ffa4c9c"
+    },
+    {
+      "path": "/travel-blog/museums-in-tel-aviv/",
+      "group": 6,
+      "status": "verified",
+      "reviewedSnapshot": "18b2f325e7612479b680d7307de0d125cd4211ef4cc338b17247bf8f918bfba8",
+      "changes": 9,
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending. Full Project Validation 45997274558 and Hostinger deployment 45997750452 passed.",
+      "postEditSnapshot": "5dc95991514fa49330ddbabbc50f972dafac82a62643554f1d5384e35928f62e"
+    },
+    {
+      "path": "/travel-blog/sherut-in-israel/",
+      "group": 3,
+      "status": "verified",
+      "reviewedSnapshot": "ebaf8ae268d42c471a8630bb4c4ec49db0ca3728262ad34f5a502709e3ff5886",
+      "changes": 5,
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "c2602a7491b98043750f11663c5960d38a28828046a83db3cfba73071b78274c"
+    },
+    {
+      "path": "/travel-blog/shopping-in-jerusalem/",
+      "group": 5,
+      "status": "verified",
+      "reviewedSnapshot": "8575629c80bc974ff3160a816bea2f4b05ede2f099fc0749772baa49b397a5a0",
+      "changes": 10,
+      "notes": "Reviewed prerendered visitor content from artifact 15195815819; streamlined introductions, practical advice, museum descriptions and shopping guidance. No changes to prices, hours, map, links, or official sources. Await regression and approval. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending. Full Project Validation 45996023487 and Hostinger deployment 45996461186 passed.",
+      "postEditSnapshot": "275de2d3c64d35136796d85ee83b6e92544d6252e2e547f0942cb3272229368d"
+    },
+    {
+      "path": "/travel-blog/taxi-fares-in-israel/",
+      "group": 3,
+      "status": "verified",
+      "reviewedSnapshot": "8c82571b45931d47e927117036941da742ef3c16a6230c0b1d52b91db982c313",
+      "changes": 4,
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "dc18d70a6f7f484bf9c763518f704505b6957a3106047869f0a7e6c78177cb99"
+    },
+    {
+      "path": "/travel-blog/taxis-in-israel/",
+      "group": 3,
+      "status": "verified",
+      "reviewedSnapshot": "583d7de06ef4d9e066079cffce8550cc755139587d4c6cb6f9a299a164e3709f",
+      "changes": 4,
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "b7929afe8c96322d71d140059d862e41e6ab80f21956bd4b5fc5cb92d81916bc"
+    },
+    {
+      "path": "/travel-blog/top-10-things-to-do-in-israel/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 9,
+      "notes": "All group 12A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012260999 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/travel-blog/uber-in-israel/",
+      "group": 3,
+      "status": "verified",
+      "reviewedSnapshot": "6e58521b6d9f73463d1215747e20169cceb43e0517fb9d4e56fa51cd691b7fab",
+      "changes": 4,
+      "notes": "Prerendered page content reviewed, including comparison tables, FAQs, source labels and attributes. Shared controls reserved for group 13. Await targeted regression and post-edit extraction. Targeted regression and extraction passed in run 45985558365; final cross-site verification pending. Full Project Validation 45987179395 and Hostinger deployment 45987507167 passed; approved edits published.",
+      "postEditSnapshot": "d20d0715da0f1609ae294a15a7f7154f2c6f7c964d47b761857ec6f29fbc08d3"
+    },
+    {
+      "path": "/travel-blog/what-to-eat-in-israel/",
+      "group": 12,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 9,
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending. Final editorial corpus 46013546526 and full validation 46013567784 passed; merged PR #103 (bbf4835), main validation 46013950839 and Hostinger deployment 46014288693 succeeded."
+    },
+    {
+      "path": "/travel-blog/where-to-stay-in-jerusalem/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    },
+    {
+      "path": "/travel-blog/where-to-stay-in-tel-aviv/",
+      "group": 10,
+      "status": "verified",
+      "reviewedSnapshot": null,
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending. Final editorial corpus 46007705762, full validation 46007715218 and cookie audit 46007715458 passed; merged PR #101 (3850215), main validation 46008346758 and Hostinger deployment 46008764999 succeeded."
+    }
+  ],
+  "shared": [
+    {
+      "name": "Header, desktop and mobile navigation, footer",
+      "group": 13,
+      "status": "edited",
+      "changes": 15,
+      "notes": "15 approved group 13A copy edits, including About me in both navigation locations and Back to homepage on both error screens; user requested Best Dead Sea hotels. Regression verification pending. Initial corpus 46014975147 failed on three stale copy assertions; updated those assertions without changing regression intent. Editorial corpus 46015882661 succeeded on ac2eba9; final full validation pending. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
+    },
+    {
+      "name": "Cookie consent and preferences",
+      "group": 13,
+      "status": "edited",
+      "changes": 16,
+      "notes": "Applied 16 approved wording changes plus essential terminology consistency. Retained disclosure of similar technologies and advertising measurement. At user request Accept all spans first row with filled primary styling and larger text; Accept essential and Manage preferences remain visible, high contrast, directly accessible, minimum 44px height in second row. Consent logic unchanged. User advised that disproportionate prominence may create regulatory risk. Updated unit/browser audit selectors; verification pending. Editorial corpus 46015882661 succeeded on ac2eba9; final full validation pending. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
+    },
+    {
+      "name": "Floating contact and share controls",
+      "group": 13,
+      "status": "edited",
+      "changes": 4,
+      "notes": "Approved 4 share copy changes. User explicitly retained Contact me — jump to the inquiry form and Share; no changes to contact button or native share label. Verification pending. Editorial corpus including dedicated sharing tests 46016387134 passed. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
+    },
+    {
+      "name": "Forms, validation, success and error states",
+      "group": 13,
+      "status": "edited",
+      "changes": 23,
+      "notes": "All 23 approved group 13D edits applied, including user's preferred reply-soon acknowledgement. Shared sending text and passenger validations updated in both relevant contexts; form rules, schema, submission behavior unchanged. Verification pending. Initial corpus 46016861847 reported 34 failures in six files caused by stale field, confirmation and validation-message expectations. Matched those expectations to approved text without changing test logic. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
+    },
+    {
+      "name": "Expandable and dynamically loaded content, filters, calendars and widgets",
+      "group": 13,
+      "status": "edited",
+      "changes": 21,
+      "notes": "All 21 approved group 13E copy changes applied; filter functions, links, prices, currency rates and widget behavior preserved. Final validation pending. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending. Shore browser audit 46018159531 failed on obsolete UI selectors; corrected both labels. At user's approval, audit retained for manual execution only after material changes; normal full validation and cookie audit remain unchanged. Manual audit not yet verified."
+    }
+  ]
+}

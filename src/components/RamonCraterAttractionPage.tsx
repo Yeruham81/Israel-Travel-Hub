@@ -50,7 +50,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight title="Ramon Crater Visitor Center">
-        <p>Start at the visitor center on the crater rim. Its exhibitions combine the story of Israeli astronaut Ilan Ramon with the geology, wildlife and natural history of the makhtesh. The exhibitions help explain how this remarkable desert landscape was formed.</p>
+        <p>Start at the visitor center on the crater rim. Its exhibitions tell the story of Israeli astronaut Ilan Ramon and explain the makhtesh's geological formation, wildlife and natural history.</p>
         <p>Allow roughly an hour for the indoor experience and reserve an entry time. You can enjoy many of the surrounding viewpoints without a visitor-center ticket. <a href={official.center} target="_blank" rel="noopener noreferrer" className={inlineLink}>Visitor information and reservations</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Camel Hill and the crater-rim viewpoints" image={{ src: camelHillPhoto, alt: "Rocky viewpoint at Camel Hill overlooking the Negev landscape" }}>
@@ -58,7 +58,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
         <p>Both viewpoints are ideal for a short visit with little walking. Keep to the marked approaches and stay clear of exposed cliff edges.</p>
       </AttractionHighlight>
       <AttractionHighlight title="HaMinsara — the Carpentry Shop" image={{ src: minsaraPhoto, alt: "Rectangular and hexagonal sandstone prisms at HaMinsara in Ramon Crater" }}>
-        <p>HaMinsara is a short geological walk famous for polygonal stone columns that resemble pieces of timber. These unusual rock formations are well worth the short walk.</p>
+        <p>HaMinsara is a short walking trail known for its polygonal stone columns, which resemble pieces of timber.</p>
         <p>Access is via a short track from Route 40, south of Mitzpe Ramon. <a href={official.minsara} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the official approach and walking information</a>.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Ramon Colors National Park" image={{ src: widePhoto, alt: "Wide desert landscape showing the rocky slopes of Makhtesh Ramon" }}>
@@ -84,7 +84,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The <strong>visitor center</strong>, the <strong>free rim viewpoints</strong> and the <strong>outdoor crater routes</strong> are separate experiences. Only the indoor center has the admission fees and operating hours shown below.</p>
+      <p>The prices and hours below apply to the <strong>visitor center</strong>. The <strong>rim viewpoints</strong> are free to visit, and <strong>outdoor crater routes</strong> have their own access conditions.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="ramon-hours-prices">
         <article className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">Visitor center hours</h3></div>
@@ -112,7 +112,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="ramon-booking">
         <h3 className="font-serif text-xl font-semibold">Reserve the visitor center</h3>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">Advance reservations are required for indoor exhibitions. The link opens the official site, where you can choose an available entry time; the crater itself can be enjoyed from outdoor viewpoints without this booking.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">Advance reservations are required for indoor exhibitions. Book your entry time using the link below.</p>
         <a href={official.center} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Visitor center — information & reservations <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
       </div>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="ramon-safety">
@@ -154,7 +154,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Route 40 connects Be'er Sheva, Mitzpe Ramon and the desert farther south. A <Link to="/car-rental/" className={inlineLink}>rental car</Link> or <a href="#contact" className={inlineLink}>private driver</a> is the easiest way to link different crater stops. Check road conditions before taking a dirt track. Parking beside the visitor center is paid; the park authority lists free parking at the Hai Ramon lot.</p>
+            <p className="mt-2 text-sm leading-relaxed">Route 40 connects Be'er Sheva, Mitzpe Ramon and the desert farther south. A <Link to="/car-rental/" className={inlineLink}>rental car</Link> or <a href="#contact" className={inlineLink}>private driver</a> is the easiest way to link different crater stops. Check road conditions before taking a dirt track. Parking beside the visitor center is paid. Free parking is available at the Hai Ramon lot.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By bus</h3></div>

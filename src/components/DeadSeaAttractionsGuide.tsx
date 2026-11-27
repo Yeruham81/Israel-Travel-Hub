@@ -179,7 +179,7 @@ export function DeadSeaAttractionsGuide() {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Dead Sea · Nature, heritage & experiences</p>
           <h1 className="guide-page-title mt-2">Dead Sea Attractions: Best Things to Do in Israel's Dead Sea Region</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">
-            The Dead Sea is more than a place to float. I recommend pairing its shoreline with one or two well-chosen desert, historical or nature stops. This guide will help you compare ten experiences, pick a realistic route and find the right entrance before setting out.
+            I recommend combining a Dead Sea beach visit with one or two nearby historic sites or nature trails. Here are ten places and experiences to help you plan your visit.
           </p>
           <PageUpdated date={updatedAt}/>
         </GuideHeroLayout>
@@ -188,12 +188,12 @@ export function DeadSeaAttractionsGuide() {
 
       <section aria-labelledby="first-visit-h" className="mt-8 rounded-xl border border-primary/20 bg-secondary/40 p-5 sm:p-6">
         <h2 id="first-visit-h" className="text-xl font-bold">What I'd choose for a first visit</h2>
-        <p className="mt-2 leading-relaxed">I'd start with <a href="#masada" className={linkClass}>Masada</a> and a supervised <a href="#ein-bokek-beach" className={linkClass}>Ein Bokek beach</a> if the travel day allows. For a quieter nature day, choose an appropriate open route at <a href="#ein-gedi" className={linkClass}>Ein Gedi</a> or <a href="#nahal-bokek" className={linkClass}>Nahal Bokek</a>. The northern sites of Qumran and Einot Tsukim make more sense as a separate outing.</p>
+        <p className="mt-2 leading-relaxed">I'd start with <a href="#masada" className={linkClass}>Masada</a> and a supervised <a href="#ein-bokek-beach" className={linkClass}>Ein Bokek beach</a> if the travel day allows. For a quieter nature day, choose an appropriate open route at <a href="#ein-gedi" className={linkClass}>Ein Gedi</a> or <a href="#nahal-bokek" className={linkClass}>Nahal Bokek</a>. Visit Qumran and Einot Tsukim together on a separate trip along the northern shore.</p>
       </section>
       <OnThisPage sections={sections}/>
 
       <section id="choose" aria-labelledby="choose-h" className="mt-10 scroll-mt-24">
-        <Heading id="choose" title="Choose what to see and do" intro="Ten different ways to enjoy the Dead Sea region. Choose what interests you, then follow the card to the detailed visitor tips."/>
+        <Heading id="choose" title="Choose what to see and do" intro="Choose from beaches, historic sites, nature trails and desert activities."/>
         <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-5" data-testid="deadsea-quick-picks">
           {stops.map((stop,index)=>{
             const Icon=icons[index]!;
@@ -208,7 +208,7 @@ export function DeadSeaAttractionsGuide() {
       </section>
 
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
-        <Heading id="compare" title="Compare all ten Dead Sea experiences" intro="Use this overview to match your interests, access requirements and available time. The suggested durations exclude travel between stops."/>
+        <Heading id="compare" title="Compare all ten Dead Sea experiences" intro="Compare admission, access and visiting times. Allow extra time for travel between stops."/>
         
         <div role="region" aria-label="Dead Sea attractions comparison" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
           <table className="w-full min-w-[800px] table-fixed border-collapse text-left text-sm">

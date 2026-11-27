@@ -115,21 +115,21 @@ export function SeniorToursGuide(){
     <GuideHeroLayout image={<GuideHeroMedia src={seniorHero.src} mobileSrc={seniorHero.mobileSrc} alt={seniorHero.alt} compact/>}>
      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Private travel · Flexible day trips</p>
      <h1 className="guide-page-title mt-2">Israel Tours for Seniors: Private Day Trips at Your Own Pace</h1>
-     <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">I'm Moshe Barak. I help older visitors explore Israel with private transport, comfortable day trips and a pace that suits them. Tell me what you want to see and how far you enjoy walking; I'll help you plan a journey around your needs.</p>
+     <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">I'm Moshe Barak. I arrange comfortable private day trips for senior travelers, with flexible itineraries tailored to your interests and mobility needs. Tell me about your preferred destinations and walking distances, and I'll help plan your trip.</p>
      <PageUpdated date={seniorUpdatedAt}/>
     </GuideHeroLayout>
     <AuthorCard/>
    </header>
 
    <section id="overview" aria-labelledby="overview-heading" className="mt-10 scroll-mt-24">
-    <Heading id="overview" title="See Israel at your own pace" intro="Every traveler has their own pace. Some guests enjoy long walks; others prefer shorter sightseeing stops and frequent places to sit. I plan around what works for you."/>
+    <Heading id="overview" title="See Israel at your own pace" intro="I'll tailor your itinerary to your preferred walking distances, sightseeing pace and time for breaks."/>
     <p className="leading-relaxed">A private vehicle gives you more control over your day: convenient pickup, time for coffee or lunch, shorter walks where possible and the option to skip a stop when you are tired. I'll help you check walking routes, terrain and visitor facilities before choosing the places that best suit you.</p>
     <div className="mt-5"><Tip>Tell me what you enjoy doing and what makes a day comfortable for you. We can plan active sightseeing, shorter visits or a relaxed mix of both.</Tip></div>
    </section>
    <OnThisPage sections={sections}/>
 
    <section id="private-driver" aria-labelledby="private-driver-heading" className="mt-12 scroll-mt-24">
-    <Heading id="private-driver" title="What makes a private driver useful for senior visitors?" intro="Personalized transport can help you shape the day around your energy, preferred departure time and the destinations you care most about."/>
+    <Heading id="private-driver" title="Benefits of a private driver for senior travelers" intro="Personalized transport can help you shape the day around your energy, preferred departure time and the destinations you care most about."/>
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{seniorTransportPreferences.map((item,i)=><div key={item.title} className="rounded-xl border bg-card p-5"><div className="flex items-center gap-2 text-primary">{i===0?<CarFront className="h-5 w-5" aria-hidden="true"/>:i===1?<Clock3 className="h-5 w-5" aria-hidden="true"/>:i===2?<PersonStanding className="h-5 w-5" aria-hidden="true"/>:i===3?<MapPin className="h-5 w-5" aria-hidden="true"/>:i===4?<ShieldCheck className="h-5 w-5" aria-hidden="true"/>:<HeartHandshake className="h-5 w-5" aria-hidden="true"/>}<h3 className="font-semibold text-foreground">{item.title}</h3></div><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.text}</p></div>)}</div>
    </section>
 
@@ -173,7 +173,7 @@ export function SeniorToursGuide(){
    <FaqList faqs={seniorFaqs}/>
 
    <section id="explore-sites" aria-labelledby="explore-sites-heading" className="mt-12 scroll-mt-24">
-    <Heading id="explore-sites" title="Explore destinations before choosing your route" intro="Use my detailed attraction guides to decide where you most want to spend time. I will help you combine the locations into a sensible drive."/>
+    <Heading id="explore-sites" title="Explore destinations before choosing your route" intro="Explore my attraction guides and choose your preferred stops. I'll help arrange a convenient driving route."/>
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{seniorSites.map(item=><PhotoLink key={item.to} item={item}/>)}</div>
    </section>
    <section id="travel-guides" aria-labelledby="travel-guides-heading" className="mt-12 scroll-mt-24">
