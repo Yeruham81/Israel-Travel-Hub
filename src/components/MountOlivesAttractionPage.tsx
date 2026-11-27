@@ -140,7 +140,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>It is useful to distinguish between the <strong>upper ridge</strong> around the Seven Arches lookout and the <strong>lower sites</strong> around Gethsemane. Transport to one does not place you at the entrance of the other.</p>
+      <p>For the panorama, head to the <strong>upper ridge</strong> near Seven Arches. If you're going straight to Gethsemane or the other <strong>lower sites</strong>, ask to be dropped off at the foot of the hill.</p>
       <div className="grid gap-3 sm:grid-cols-3" data-testid="mount-olives-access-points">
         <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Seven Arches viewpoint</h3><p className="mt-2 text-sm">Best starting point for the panorama and a downhill walk.</p><a href={viewpointDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving directions <ArrowUpRight className="inline h-4 w-4"/></a></article>
         <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Gethsemane</h3><p className="mt-2 text-sm">Lower pickup point near the Church of All Nations and Tomb of Mary.</p><a href={gethsemaneDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving directions <ArrowUpRight className="inline h-4 w-4"/></a></article>
@@ -204,7 +204,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
         </ul>
         <p className="mt-3 text-sm leading-relaxed">Google Maps may suggest a different path from the traditional <strong>Palm Sunday Road</strong>. Check pedestrian signs and each church's actual entrance, or see the <a href={official.trailGuide} target="_blank" rel="noopener noreferrer" className={inlineLink}>Mount of Olives walking route from Enjoy Jerusalem</a>.</p>
       </div>
-      <AttractionPracticalTip>For a fuller church visit, Tuesday or Thursday currently offers the best chance of combining Pater Noster with St Mary Magdalene's short morning hours. Confirm both. My <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Jerusalem Old City guide</Link> covers the quarters and gates, and the <Link to="/attractions/via-dolorosa/" className={inlineLink}>Via Dolorosa walking guide</Link> follows the Stations of the Cross inside the walls.</AttractionPracticalTip>
+      <AttractionPracticalTip>Tuesday or Thursday morning currently offers the best chance to visit both Pater Noster and St Mary Magdalene. Confirm their opening hours before visiting. My <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Jerusalem Old City guide</Link> covers the quarters and gates, and the <Link to="/attractions/via-dolorosa/" className={inlineLink}>Via Dolorosa walking guide</Link> follows the Stations of the Cross inside the walls.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (

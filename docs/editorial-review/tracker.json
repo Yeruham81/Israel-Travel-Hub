@@ -442,10 +442,10 @@
     {
       "path": "/attractions/mount-of-olives/",
       "group": 5,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "f4d5434486601ae6fd878310ce27f9ffc32df71ce9714acb9f1231c948ff0f71",
+      "changes": 6,
+      "notes": "Reviewed rendered visitor guide from artifact 15190479263. Retained religious traditions, hours, prices, routes, accessibility and links. Await approval and targeted regression."
     },
     {
       "path": "/attractions/mount-precipice/",
@@ -466,10 +466,10 @@
     {
       "path": "/attractions/mount-zion/",
       "group": 5,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "36562303fb27d0645b67a08ab01f80d2c79fe5bde46512620f1bb365c6513ee1",
+      "changes": 5,
+      "notes": "Reviewed rendered visitor guide from artifact 15190479263. Retained religious traditions, hours, prices, routes, accessibility and links. Await approval and targeted regression."
     },
     {
       "path": "/attractions/old-city-jerusalem/",
