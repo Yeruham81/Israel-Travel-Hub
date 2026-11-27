@@ -1100,7 +1100,8 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
     {
       label: "Wishing Bridge",
       credit: "Dr. Avishai Teicher / PikiWiki Israel · CC BY 2.5; resized and converted to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_14029_Wishing_Bridge_in_Old_Jaffa.JPG",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_14029_Wishing_Bridge_in_Old_Jaffa.JPG",
       licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
     },
   ],

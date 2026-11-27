@@ -496,7 +496,10 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
           ))}
         </ul>
       </SourcesDisclosure>
-      <PhotoCreditsDisclosure entries={content.photoCredits ?? []} testId="attraction-photo-credits" />
+      <PhotoCreditsDisclosure
+        entries={content.photoCredits ?? []}
+        testId="attraction-photo-credits"
+      />
     </main>
   );
 }

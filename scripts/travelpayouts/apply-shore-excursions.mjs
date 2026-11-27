@@ -35,7 +35,8 @@ for (const item of data.results) {
   )
     throw Error("Invalid tracking domain " + item.id);
   const product = registry(source).shore(item.id);
-  if (product.platform !== item.platform || product.url !== item.url) throw Error("Product URL or platform changed: " + item.id);
+  if (product.platform !== item.platform || product.url !== item.url)
+    throw Error("Product URL or platform changed: " + item.id);
   const next = setTracking(source, item.id, target.href);
   if (next === source) continue;
   source = next;

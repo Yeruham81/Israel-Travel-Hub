@@ -1080,30 +1080,35 @@ export const haifaDestinationContent: AttractionDestinationContent = {
     {
       label: "German Colony",
       credit: "Lizzy Shaanan / PikiWiki Israel · CC BY 2.5; resized and converted to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:150421_haifa_-_ben_gurion_boulevard_PikiWiki_Israel.jpg",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:150421_haifa_-_ben_gurion_boulevard_PikiWiki_Israel.jpg",
       licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
     },
     {
       label: "Wadi Nisnas",
       credit: "Adam Jones · CC BY-SA 2.0; resized and converted to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Street_Scene_-_Wadi_Nisnas_Neighborhood_-_Haifa_-_Israel_-_01_(5690594824).jpg",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:Street_Scene_-_Wadi_Nisnas_Neighborhood_-_Haifa_-_Israel_-_01_(5690594824).jpg",
       licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
     },
     {
       label: "Turkish Market",
       credit: "Shlomo Roded / PikiWiki Israel · CC BY 2.5; resized and converted to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:110861_haifa_-_the_turkish_market_PikiWiki_Israel.jpg",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:110861_haifa_-_the_turkish_market_PikiWiki_Israel.jpg",
       licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
     },
     {
       label: "Bat Galim",
       credit: "Michal Freiman / PikiWiki Israel · CC BY 2.5; resized and converted to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:111718_haifa,_a_view_of_the_bat_galim_neighborhood_PikiWiki_Israel.jpg",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:111718_haifa,_a_view_of_the_bat_galim_neighborhood_PikiWiki_Israel.jpg",
       licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
     },
     {
       label: "Legacy image archive",
-      credit: "The original photo rights of the site's legacy archive remain under separate review.",
+      credit:
+        "The original photo rights of the site's legacy archive remain under separate review.",
     },
   ],
   sources: [

@@ -871,7 +871,8 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         entries={photoCredits.map(({ label, photo }) => ({
           label,
           credit: photo.credit,
-          sourceUrl: photo.sourceUrl && !isPublisherUrl(photo.sourceUrl) ? photo.sourceUrl : undefined,
+          sourceUrl:
+            photo.sourceUrl && !isPublisherUrl(photo.sourceUrl) ? photo.sourceUrl : undefined,
           licenseUrl: photo.licenseUrl,
         }))}
         testId="itinerary-photo-credits"

@@ -77,5 +77,9 @@ export function AreaMap({
 export function areaPhotoCreditEntries(areas: NeighborhoodStayGuide[]) {
   return areas
     .filter((area) => !isPublisherUrl(area.photo.sourceUrl))
-    .map((area) => ({ label: area.name, credit: area.photo.credit, sourceUrl: area.photo.sourceUrl }));
+    .map((area) => ({
+      label: area.name,
+      credit: area.photo.credit,
+      sourceUrl: area.photo.sourceUrl,
+    }));
 }

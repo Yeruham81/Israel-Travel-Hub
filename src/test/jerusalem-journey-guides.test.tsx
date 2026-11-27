@@ -158,7 +158,10 @@ describe("Jerusalem independent day-trip planning guides", () => {
       "https://creativecommons.org/licenses/by-sa/4.0/",
     );
     expect(screen.getByTestId("bethlehem-tour-options")).not.toHaveTextContent("Armineaghayan");
-    expect(container.querySelector("#sources")!.compareDocumentPosition(credits) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(
+      container.querySelector("#sources")!.compareDocumentPosition(credits) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
     expect(
       container.querySelectorAll(
         "#buses [role='note'], #private-taxi [role='note'], #visit-return [role='note']",

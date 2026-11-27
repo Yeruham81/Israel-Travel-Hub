@@ -400,7 +400,10 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
         <StayTripLinks region={g.id} currentPath={g.path} />
         <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.city)} />
         <SourceList ids={g.sourceIds} />
-        <CityHotelPhotoCredits city={g.id === "telaviv" ? "telaviv" : "jerusalem"} extraEntries={areaPhotoCreditEntries(areas)} />
+        <CityHotelPhotoCredits
+          city={g.id === "telaviv" ? "telaviv" : "jerusalem"}
+          extraEntries={areaPhotoCreditEntries(areas)}
+        />
       </article>
     </main>
   );

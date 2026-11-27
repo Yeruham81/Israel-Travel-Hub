@@ -78,7 +78,10 @@ contents = setTracking(contents, "airport-welcome", hub);
 for (const [pageId, slug] of pages.slice(1)) {
   const result = await create(chosen, "airport_" + slug + "_welcome");
   console.log("Welcome " + pageId + ": " + (result.trackingUrl ? "approved" : result.error));
-  if (result.trackingUrl) contents = setTracking(contents, "airport-welcome@" + pageId, result.trackingUrl, { allowInsert: true });
+  if (result.trackingUrl)
+    contents = setTracking(contents, "airport-welcome@" + pageId, result.trackingUrl, {
+      allowInsert: true,
+    });
 }
 await writeFile(file, contents, "utf8");
 console.log("Welcome Pickups verified tracking URLs staged");

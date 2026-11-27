@@ -914,9 +914,16 @@ export function HaifaMuseumsGuide() {
               </OfficialLink>
             </li>
           </ul>
-
         </SourcesDisclosure>
-        <PhotoCreditsDisclosure entries={haifaMuseumPhotoCredits.map((photo) => ({ label: photo.label, credit: photo.author + " · " + photo.license + "; cropped, resized and converted to WebP", sourceUrl: photo.sourceUrl, licenseUrl: photo.licenseUrl }))} />
+        <PhotoCreditsDisclosure
+          entries={haifaMuseumPhotoCredits.map((photo) => ({
+            label: photo.label,
+            credit:
+              photo.author + " · " + photo.license + "; cropped, resized and converted to WebP",
+            sourceUrl: photo.sourceUrl,
+            licenseUrl: photo.licenseUrl,
+          }))}
+        />
       </article>
     </main>
   );

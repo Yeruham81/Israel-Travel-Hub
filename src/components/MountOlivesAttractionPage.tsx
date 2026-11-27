@@ -694,7 +694,8 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
     {
       label: "Jewish cemetery photograph",
       credit: "Berthold Werner / Wikimedia Commons · CC BY-SA 3.0; resized and compressed to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_Mount_of_Olives_BW_2010-09-20_07-57-31.JPG",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:Jerusalem_Mount_of_Olives_BW_2010-09-20_07-57-31.JPG",
       licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
     },
   ],

@@ -46,7 +46,10 @@ for (const item of data.results) {
 }
 for (const [key, url] of replacements) {
   if (!url) continue;
-  contents = setTracking(contents, key, url, { allowInsert: key.includes("@"), allowReplace: key.includes("@") });
+  contents = setTracking(contents, key, url, {
+    allowInsert: key.includes("@"),
+    allowReplace: key.includes("@"),
+  });
 }
 await writeFile(filename, contents, "utf8");
 console.log(

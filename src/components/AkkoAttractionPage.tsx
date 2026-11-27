@@ -1207,20 +1207,24 @@ export const akkoDestinationContent: AttractionDestinationContent = {
   photoCredits: [
     {
       label: "Turkish Bath",
-      credit: "Zeev Stein / PikiWiki Israel (Turkish Bath) · CC BY 2.5; resized and converted to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:108248_el_basha_hammam_in_acre_PikiWiki_Israel.jpg",
+      credit:
+        "Zeev Stein / PikiWiki Israel (Turkish Bath) · CC BY 2.5; resized and converted to WebP",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:108248_el_basha_hammam_in_acre_PikiWiki_Israel.jpg",
       licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
     },
     {
       label: "Market",
       credit: "Yaniv Ben-Arie (market) · CC BY-SA 2.0; resized and converted to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:The_market_in_Acre_(Akko)_(373226896).jpg",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:The_market_in_Acre_(Akko)_(373226896).jpg",
       licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
     },
     {
       label: "Treasures in the Wall Museum",
       credit: "Adam Jones (museum collection) · CC BY-SA 2.0; resized and converted to WebP",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Antique_Padlocks_-_Treasures_in_the_Wall_Museum_-_Akko_(Acre)_-_Israel.jpg",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:Antique_Padlocks_-_Treasures_in_the_Wall_Museum_-_Akko_(Acre)_-_Israel.jpg",
       licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
     },
     {

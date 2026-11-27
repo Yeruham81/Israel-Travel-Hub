@@ -928,12 +928,35 @@ export function TelAvivMuseumsGuide() {
             ))}
           </ul>
         </SourcesDisclosure>
-        <PhotoCreditsDisclosure entries={[
-  { label: "Bauhaus Center", credit: "Itzuvit · CC BY-SA 3.0; resized and compressed to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Bauhaus_Center_Tel_Aviv.JPG", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
-  { label: "Bialik House", credit: "Ori Lubin; resized and compressed to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Bialik_Bldg.jpg" },
-  { label: "Bauhaus-era building (illustrating White City architecture in the Liebling Haus entry)", credit: "Talmoryair · CC BY 3.0; resized and compressed to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Bauhaus_Tel-Aviv_museum.jpg", licenseUrl: "https://creativecommons.org/licenses/by/3.0/" },
-  { label: "Rubin Museum", credit: "Yoram Shoval · CC BY-SA 4.0; resized and compressed to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Rubin_Museum_Tel_Aviv,_Room_39.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
-]} />
+        <PhotoCreditsDisclosure
+          entries={[
+            {
+              label: "Bauhaus Center",
+              credit: "Itzuvit · CC BY-SA 3.0; resized and compressed to WebP",
+              sourceUrl: "https://commons.wikimedia.org/wiki/File:Bauhaus_Center_Tel_Aviv.JPG",
+              licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+            },
+            {
+              label: "Bialik House",
+              credit: "Ori Lubin; resized and compressed to WebP",
+              sourceUrl: "https://commons.wikimedia.org/wiki/File:Bialik_Bldg.jpg",
+            },
+            {
+              label:
+                "Bauhaus-era building (illustrating White City architecture in the Liebling Haus entry)",
+              credit: "Talmoryair · CC BY 3.0; resized and compressed to WebP",
+              sourceUrl: "https://commons.wikimedia.org/wiki/File:Bauhaus_Tel-Aviv_museum.jpg",
+              licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
+            },
+            {
+              label: "Rubin Museum",
+              credit: "Yoram Shoval · CC BY-SA 4.0; resized and compressed to WebP",
+              sourceUrl:
+                "https://commons.wikimedia.org/wiki/File:Rubin_Museum_Tel_Aviv,_Room_39.jpg",
+              licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+            },
+          ]}
+        />
       </article>
     </main>
   );
