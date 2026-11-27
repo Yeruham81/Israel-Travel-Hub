@@ -560,10 +560,10 @@
     {
       "path": "/privacy-policy/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 14,
+      "notes": "Group 12C approved style revisions plus explicit user instructions: active form delivery and consent-gated GA4, generic email processor disclosure, remove duplication, 24-hour cancellation in Terms; update document dates to 2026-11-27. Regression verification pending."
     },
     {
       "path": "/private-driver-in-israel/",
@@ -601,10 +601,10 @@
     {
       "path": "/terms-of-use/",
       "group": 12,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 14,
+      "notes": "Group 12C approved style revisions plus explicit user instructions: active form delivery and consent-gated GA4, generic email processor disclosure, remove duplication, 24-hour cancellation in Terms; update document dates to 2026-11-27. Regression verification pending."
     },
     {
       "path": "/tours/",
@@ -790,7 +790,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/best-hotels-in-haifa/",
@@ -814,7 +814,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 8,
-      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/calendar-of-events/",
@@ -822,7 +822,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/christian-tours-in-israel/",
@@ -915,7 +915,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 9,
-      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/israel-travel-tips/",
@@ -1036,7 +1036,7 @@
       "status": "edited",
       "reviewedSnapshot": null,
       "changes": 9,
-      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending."
+      "notes": "All group 12B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus 46012604207 passed; dedicated final regression verification pending."
     },
     {
       "path": "/travel-blog/where-to-stay-in-jerusalem/",
