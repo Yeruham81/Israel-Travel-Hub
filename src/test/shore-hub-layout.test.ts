@@ -63,8 +63,8 @@ describe("compact shore excursions hub", () => {
     expect(page).toContain("shorePlanningSteps.map");
     expect(page).toContain("shoreHubGuides.map");
     expect(page).toContain("SourceList");
-    expect(page.indexOf("<SourceList")).toBeGreaterThan(page.indexOf("Photo credits"));
-    expect(page).toContain("GuidePhotoCredit");
+    expect(page.indexOf("<PhotoCreditsDisclosure")).toBeGreaterThan(page.indexOf("<SourceList"));
+    expect(page).toContain("photoCreditEntries(photos)");
     expect(page).toContain("jsonLd({");
     expect(page).toContain('path: "/shore-excursions/"');
     expect(page).toContain('className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3"');

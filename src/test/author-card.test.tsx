@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { Route as AboutRoute } from "@/routes/about-me";
-import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { PhotoCreditsDisclosure, photoCreditEntries } from "@/components/PhotoCreditsDisclosure";
 import { SourceList } from "@/components/Guide";
 import { formatCheckDate, getSource, isPublisherUrl, mosheBarakAuthor } from "@/data/registry";
 
@@ -137,18 +137,17 @@ describe("independent author identity and page credits", () => {
       credit: "Illustrative scene; check the real route and terms.",
     };
     const { container } = render(
-      <>
-        <GuidePhotoCredit photo={owned} />
-        <GuidePhotoCredit photo={illustration} />
-        <GuidePhotoCredit photo={external} />
-      </>,
+      <PhotoCreditsDisclosure entries={photoCreditEntries([owned, illustration, external])} />,
     );
     expect(container.querySelector(`a[href="${owned.sourceUrl}"]`)).toBeNull();
-    expect(screen.getByRole("link", { name: /Photographer/ })).toHaveAttribute(
+    const disclosure = screen.getByTestId("page-photo-credits");
+    expect(disclosure).not.toHaveAttribute("open");
+    expect(disclosure).toHaveTextContent(external.credit);
+    expect(within(disclosure).getByText("Photo source")).toHaveAttribute(
       "href",
       external.sourceUrl,
     );
-    expect(screen.getByRole("link", { name: /Licence/ })).toHaveAttribute(
+    expect(within(disclosure).getByText("Licence")).toHaveAttribute(
       "href",
       external.licenseUrl,
     );

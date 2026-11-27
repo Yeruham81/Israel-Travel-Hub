@@ -18,7 +18,13 @@ describe("Ramon Crater upgraded attraction guide", () => {
     expect(new Set(content.nearby!.map((x) => x.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(5);
-    expect(content.sources).toHaveLength(8);
+    expect(content.sources).toHaveLength(6);
+    expect(content.photoCredits).toHaveLength(2);
+    for (const credit of content.photoCredits ?? []) {
+      expect(credit.sourceUrl).toContain("commons.wikimedia.org");
+      expect(credit.licenseUrl).toBe("https://creativecommons.org/licenses/by-sa/3.0/");
+      expect(credit.credit).toBeTruthy();
+    }
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell).toContain("<AuthorCard />");
     expect(attractionHubCards.some((card) => card.to === content.path)).toBe(true);
