@@ -85,11 +85,11 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
   ),
   itineraryContent: (
     <div className="mt-4 space-y-4">
-      <p>The traditional walk follows approximately 600 metres of Old City lanes, with turns, slopes and individual station markers.</p>
+      <p>The traditional walk covers about 600 metres through winding, sometimes steep Old City lanes. Look for the numbered station markers along the way.</p>
       <div className="grid gap-3 md:grid-cols-3" data-testid="via-dolorosa-visit-choices">
         <article className="rounded-xl border bg-card p-4"><p className="text-xs font-bold uppercase tracking-wide text-primary">About 45–60 minutes</p><h3 className="mt-2 text-lg font-semibold">Walk the street stations</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Start near Al-Umariyya School, follow Stations I–IX through the market streets, and reach the Holy Sepulchre entrance.</p></article>
         <article className="rounded-xl border bg-card p-4"><p className="text-xs font-bold uppercase tracking-wide text-primary">About 1.5–2 hours</p><h3 className="mt-2 text-lg font-semibold">All fourteen stations</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Follow the outside stations and continue into Calvary and the Holy Sepulchre, allowing time for brief pauses and the tomb shrine.</p></article>
-        <article className="rounded-xl border bg-card p-4"><p className="text-xs font-bold uppercase tracking-wide text-primary">2.5–3 hours or more</p><h3 className="mt-2 text-lg font-semibold">A deeper pilgrimage visit</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Include the Flagellation chapels, Ecce Homo, archaeological remains and a longer visit to the Holy Sepulchre.</p></article>
+        <article className="rounded-xl border bg-card p-4"><p className="text-xs font-bold uppercase tracking-wide text-primary">2.5–3 hours or more</p><h3 className="mt-2 text-lg font-semibold">A longer pilgrimage visit</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Include the Flagellation chapels, Ecce Homo, archaeological remains and a longer visit to the Holy Sepulchre.</p></article>
       </div>
       <ViaDolorosaRouteMap />
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="via-dolorosa-station-table">
@@ -118,7 +118,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The outdoor Stations of the Cross run along public Old City streets and are free to follow. Churches, chapels and museums along the route operate on their own schedules.</p>
+      <p>You can follow the outdoor Stations of the Cross for free. Churches, chapels and museums along the route have their own visiting hours.</p>
       <div role="region" tabIndex={0} aria-label="Via Dolorosa admission and visiting hours" data-testid="via-dolorosa-hours" className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
         <table className="w-full min-w-[790px] border-collapse text-left text-sm">
           <caption className="sr-only">Via Dolorosa visiting hours and admission arrangements</caption>
@@ -163,7 +163,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
     <div className="mt-4 space-y-3">
       <p><strong>Via Dolorosa</strong> means the “Sorrowful Way.” The traditional fourteen Stations of the Cross commemorate episodes in the Christian accounts and devotional retellings of Jesus' path to crucifixion, death and burial.</p>
       <p>Christian pilgrims have followed changing routes across Jerusalem for many centuries. Franciscan devotion helped establish the station tradition, while the familiar itinerary and its markers developed gradually through medieval and later periods. Today's streets and buildings date from different periods in Jerusalem's history.</p>
-      <p>The route's meaning is principally devotional: the exact first-century path and the location of Pilate's judgment cannot be identified with certainty from the present street pattern. The Franciscan <a href={official.stations} target="_blank" rel="noopener noreferrer" className={inlineLink}>Terra Sancta Museum station guide</a> explains the history and associated chapels in detail.</p>
+      <p>The Via Dolorosa is a route of Christian devotion. Today's streets cannot establish the exact path Jesus took in the first century or the location of Pilate's judgment. The Franciscan <a href={official.stations} target="_blank" rel="noopener noreferrer" className={inlineLink}>Terra Sancta Museum station guide</a> explains the history and associated chapels in detail.</p>
       <p>The <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Jerusalem churches guide</Link> places the Via Dolorosa beside other Christian sites across the city, while my <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Old City visitor guide</Link> covers the surrounding quarters and markets.</p>
     </div>
   ),
@@ -199,7 +199,7 @@ export const viaDolorosaDestinationContent: AttractionDestinationContent = {
     {q:"Is the Via Dolorosa free?",a:"Walking the public street stations and entering the Holy Sepulchre is generally free. Some museums, exhibitions and associated facilities charge separately."},
     {q:"When is the Friday Stations of the Cross procession?",a:"The Christian Information Center currently publishes a regular Franciscan procession at 16:00 in summer and 15:00 in winter, beginning at the Church of the Flagellation. Confirm local arrangements on the intended day."},
     {q:"Which gate is best for the Via Dolorosa?",a:"Lion's Gate is a convenient approach to the early stations. Damascus Gate offers access through the Muslim Quarter; Jaffa Gate or New Gate work well when finishing near the Holy Sepulchre."},
-    {q:"Can I follow the Via Dolorosa with a wheelchair or stroller?",a:"Some sections are possible, depending on the route and mobility equipment, but steps, slopes, narrow entrances and busy lanes are common. Plan individual stops and check accessible access to the Holy Sepulchre in advance."},
+    {q:"Can I follow the Via Dolorosa with a wheelchair or stroller?",a:"Some sections can be reached by wheelchair or stroller, but expect steps, slopes, narrow entrances and crowded lanes. Check suitable routes to individual stations and accessible entrances to the Holy Sepulchre before your visit."},
   ],
   nearby: [
     {label:"Jerusalem's Old City",to:"/attractions/old-city-jerusalem/",note:"See the city gates, four quarters and major landmarks around the walk."},

@@ -48,10 +48,10 @@ const tours = [
 ];
 const faqs = [
   {q:"Which churches are essential on a first visit to Jerusalem?",a:"For most first visits, I would prioritise the Church of the Holy Sepulchre and selected stops along the Via Dolorosa. Add Gethsemane on the Mount of Olives or Dormition Abbey on Mount Zion if your time and interests allow."},
-  {q:"Can I visit all the major churches in one day?",a:"Not comfortably. The churches are spread across four areas, with different opening hours, religious services and walking distances. Focus on churches in one or two nearby neighbourhoods."},
+  {q:"Can I visit all the major churches in one day?",a:"I recommend focusing on one or two areas per day. Allow time for walking between churches, their different opening hours and religious services."},
   {q:"Are Jerusalem churches free to enter?",a:"Many offer free general entry, but some compounds, archaeological areas and towers charge separately. St Anne, Pater Noster, the Chapel of the Ascension and the Redeemer tower have published admission charges."},
   {q:"Is the Garden Tomb the same place as the Church of the Holy Sepulchre?",a:"No. They are separate places. The Holy Sepulchre is the traditional site of the crucifixion and resurrection for numerous historic churches; the Garden Tomb is a different site popular with some Protestant visitors."},
-  {q:"Is the Mount of Olives walk accessible to everyone?",a:"No. The slope is steep, paths can be uneven and some compounds have stairs. A drive to an upper viewpoint can avoid the uphill climb, but the descent may still be difficult. Confirm accessibility for specific sites."},
+  {q:"Is the Mount of Olives walk accessible to everyone?",a:"The Mount of Olives has steep slopes, uneven paths and stairs at some churches. You can drive to an upper viewpoint to avoid the climb, but the descent can still be difficult. Check accessibility at each site before visiting."},
   {q:"Can tourists attend a religious service or arrange group prayer?",a:"Visitor opening hours apply to sightseeing. Contact the church directly to arrange group prayer, private ceremonies or attendance at religious services."},
   {q:"Do holidays affect church opening times?",a:"Yes. Christian feast days, Holy Week, worship services, Jewish holidays and special events may change access. Check the relevant church and Israel's events calendar before travelling."},
 ];
@@ -154,7 +154,7 @@ export function JerusalemChurchesGuide(){
     </section>
     <OnThisPage sections={sections}/>
     <section id="choose" aria-labelledby="choose-heading" className="mt-10 scroll-mt-24">
-      <Heading id="choose" title="Choose churches by area" intro="Jerusalem's churches are clustered across four different neighbourhoods. Select the area that best fits your interests and time."/>
+      <Heading id="choose" title="Choose churches by area" intro="Choose from four areas of Jerusalem, depending on which churches you want to visit and how much time you have."/>
       <div className="grid gap-3 sm:grid-cols-2">{churchAreas.map(a=><a key={a.id} href={"#"+a.id} className="editorial-card-link rounded-xl border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-secondary/20"><span className="mb-3 inline-block h-1.5 w-12 rounded-full" style={{backgroundColor:a.color}} aria-hidden="true"/><h3 className="text-lg font-semibold">{a.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.intro}</p></a>)}</div>
       <div role="region" aria-label="Compare Jerusalem church visiting areas" tabIndex={0} className="mt-5 overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
         <table className="w-full min-w-[650px] text-left text-sm">
@@ -172,16 +172,16 @@ export function JerusalemChurchesGuide(){
     <ChurchMap/>
     {churchAreas.map((area,index)=><section key={area.id} id={area.id} aria-labelledby={area.id+"-heading"} className="mt-12 scroll-mt-24">
       <Heading id={area.id} title={area.title} intro={area.intro}/>
-      {index===0&&<Tip>The <strong>Via Dolorosa</strong> is a traditional route through the Old City, not a single church. The early Stations of the Cross and the Holy Sepulchre are different stops; follow my <Link to="/attractions/old-city-jerusalem/" className="font-semibold text-primary underline">Old City guide</Link> for the wider walking context.</Tip>}
+      {index===0&&<Tip>Follow the <strong>Via Dolorosa</strong> from the early Stations of the Cross near Lion's Gate to the Holy Sepulchre. See my <Link to="/attractions/old-city-jerusalem/" className="font-semibold text-primary underline">Old City guide</Link> for nearby landmarks and walking routes.</Tip>}
       {index===1&&<Tip>I usually suggest a vehicle to an upper Mount of Olives viewpoint, then a downhill walk if suitable. Consult my <Link to="/attractions/mount-of-olives/" className="font-semibold text-primary underline">Mount of Olives visitor guide</Link> for the hill's access and pickup options.</Tip>}
       <div className="mt-5 grid gap-5">{jerusalemChurches.filter(c=>c.area===area.id).map(c=><ChurchCard key={c.id} church={c}/>)}</div>
-      {index===2&&<p className="mt-4 text-sm leading-relaxed text-muted-foreground">The Cenacle is included as an important Christian heritage site, although it is not a church. My <Link to="/attractions/mount-zion/" className="font-semibold text-primary underline">Mount Zion guide</Link> covers these places in more detail.</p>}
+      {index===2&&<p className="mt-4 text-sm leading-relaxed text-muted-foreground">The Cenacle, or Upper Room, is an important Christian heritage site rather than an active church. My <Link to="/attractions/mount-zion/" className="font-semibold text-primary underline">Mount Zion guide</Link> covers these places in more detail.</p>}
     </section>)}
     <section id="routes" aria-labelledby="routes-heading" className="mt-12 scroll-mt-24">
-      <Heading id="routes" title="Three realistic ways to plan your visit"/>
+      <Heading id="routes" title="Three suggested church visits"/>
       <div className="grid gap-4 md:grid-cols-3">{[
         {time:"Half day",title:"Old City Christian highlights",steps:["Begin near Lion's Gate with St Anne and selected Stations of the Cross","Follow part of the Via Dolorosa","Allow plenty of time at the Holy Sepulchre"],note:"Queues at the Edicule may be long. Choose fewer stops if you join services."},
-        {time:"Full day",title:"Old City and one nearby cluster",steps:["Visit the Holy Sepulchre in the morning","Add Mount Zion churches OR a Mount of Olives hillside route","Leave extra time for a transfer and hillside walking"],note:"For a more relaxed day, choose either Mount Zion or the Mount of Olives after visiting the Old City."},
+        {time:"Full day",title:"Old City and nearby churches",steps:["Visit the Holy Sepulchre in the morning","Add Mount Zion churches OR a Mount of Olives hillside route","Leave extra time for a transfer and hillside walking"],note:"For a more relaxed day, choose either Mount Zion or the Mount of Olives after visiting the Old City."},
         {time:"Another half day",title:"Ein Karem village churches",steps:["Travel to Ein Karem separately","Visit St John the Baptist and the Church of the Visitation","Enjoy time in the neighbourhood before returning"],note:"Allow for the Visitation's uphill approach and midday closing."}
       ].map(r=><div key={r.title} className="rounded-xl border bg-card p-5"><p className="text-xs font-bold uppercase tracking-wide text-primary">{r.time}</p><h3 className="mt-2 text-lg font-bold">{r.title}</h3><ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">{r.steps.map(s=><li key={s}>{s}</li>)}</ol><p className="mt-4 text-sm text-muted-foreground">{r.note}</p></div>)}</div>
     </section>
@@ -217,7 +217,7 @@ export function JerusalemChurchesGuide(){
     </section>
     <HomeContactForm showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy("Jerusalem")}/>
     <SourcesDisclosure>
-      <p className="mb-3 text-sm leading-relaxed">Visiting hours and admission information: Christian Information Center shrine listing updated 15 September 2026, supplemented by church operators. These times are published guidance, not real-time opening guarantees.</p>
+      <p className="mb-3 text-sm leading-relaxed">Visiting hours and admission information come from the Christian Information Center's listing updated 15 September 2026 and the individual churches. Confirm visiting hours before you go.</p>
       <ul className="space-y-2 text-sm">
         <li><OutLink href={churchesSourceUrl}>Christian Information Center - church hours and entrance information</OutLink></li>
         <li><OutLink href="https://www.dormitio.net/">Dormition Abbey - official website</OutLink></li>

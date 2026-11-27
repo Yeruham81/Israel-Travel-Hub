@@ -32,7 +32,7 @@ export const viaDolorosaSite = {
     { n: 6, name: "Veronica wipes Jesus' face", place: "Westward Via Dolorosa market lane", note: "Traditional site near a wall marker and the chapel associated with Veronica." },
     { n: 7, name: "Jesus falls for the second time", place: "Via Dolorosa / Khan al-Zeit market crossing", note: "Watch for the chapel at the busy junction." },
     { n: 8, name: "Jesus addresses the women of Jerusalem", place: "Al-Khanqa (Khanqa as-Salahiyya) lane", note: "The station is marked on a wall near the Greek monastery." },
-    { n: 9, name: "Jesus falls for the third time", place: "Coptic Orthodox monastery approach", note: "A short deviation toward the Coptic/Deir al-Sultan area above the church." },
+    { n: 9, name: "Jesus falls for the third time", place: "Coptic Orthodox monastery approach", note: "Take a short detour toward the Coptic monastery and Deir al-Sultan above the church." },
     { n: 10, name: "Jesus is stripped of his garments", place: "Church of the Holy Sepulchre — Calvary area", note: "The last five stations are commemorated inside the church." },
     { n: 11, name: "Jesus is nailed to the cross", place: "Holy Sepulchre — Calvary", note: "Within the elevated Calvary chapels." },
     { n: 12, name: "Jesus dies on the cross", place: "Holy Sepulchre — Calvary", note: "The main Calvary altar is a major prayer site." },

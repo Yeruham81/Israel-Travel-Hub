@@ -85,7 +85,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Tower of David Jerusalem Museum and Jaffa Gate" image={{ src: photos.tower, alt: "Ancient stone fortress, towers and courtyards at the Tower of David near Jaffa Gate" }}>
         <p>Just inside Jaffa Gate, the Tower of David's citadel offers an excellent introduction to the city's long history through archaeology, exhibitions and views from the fortress. The nearby gate is also a practical starting point for exploring the Christian and Armenian Quarters.</p>
-        <p>Allow around 60–90 minutes for the museum. The main visitor entrance is opposite Jaffa Gate Plaza, near the exit from Mamilla Avenue, rather than through the historic Jaffa Gate passage. Museum tickets are separate from other Old City attractions. <a href={official.towerEntrance} target="_blank" rel="noopener noreferrer" className={inlineLink}>Find the museum entrance</a> and <a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>check tickets and hours</a>.</p>
+        <p>Allow around 60–90 minutes for the museum. Enter the museum from opposite Jaffa Gate Plaza, near the exit from Mamilla Avenue. Museum tickets are separate from other Old City attractions. <a href={official.towerEntrance} target="_blank" rel="noopener noreferrer" className={inlineLink}>Find the museum entrance</a> and <a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>check tickets and hours</a>.</p>
         <p>From Jaffa Gate, you can also explore the quieter Armenian Quarter and the Cathedral of St. James. The cathedral usually welcomes visitors during brief prayer services. The surrounding monastery is closed to general visitors. <a href={official.stJames} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the visitor arrangements</a> before going.</p>
         <p className="text-xs font-semibold text-muted-foreground">Museum admission: {info.towerAdult} adult; Jaffa Gate itself is free</p>
       </AttractionHighlight>
@@ -199,7 +199,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
         </article>
         <article className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2"><Footprints className="size-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">On foot</h3></div>
-          <p className="mt-2 text-sm leading-relaxed">Walking is the easiest way to reach most landmarks. The alleys have stairs, changing gradients and smooth stone paving; allow time for breaks and queues at major sites.</p>
+          <p className="mt-2 text-sm leading-relaxed">Walking is the easiest way to reach most landmarks. Expect stairs, slopes and smooth stone paving, and allow time for breaks and queues at major sites.</p>
         </article>
       </div>
       <AttractionPracticalTip>For pickup after a walking tour, agree on a named gate and a nearby road-accessible meeting point. Share the location with your driver before entering the Old City.</AttractionPracticalTip>
@@ -261,12 +261,12 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
           <a href="https://www.google.com/maps/dir/?api=1&origin=Lions%20Gate%20Jerusalem&destination=Church%20of%20All%20Nations%20Gethsemane%20Jerusalem&travelmode=walking" target="_blank" rel="noopener noreferrer" className="rounded-lg border bg-secondary/20 p-3 text-sm font-semibold text-primary hover:border-primary/50">Lion's Gate to Gethsemane <ArrowUpRight className="inline size-4" aria-hidden="true"/></a>
         </div>
       </div>
-      <AttractionPracticalTip>For the most enjoyable walking day, plan your fixed-time booking first and build the remaining stops around it. Allow extra time for prayer services, holiday crowds and security queues.</AttractionPracticalTip>
+      <AttractionPracticalTip>If you've booked a timed tour or museum visit, plan your walk around it. Allow extra time for prayer services, holiday crowds and security queues.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (
     <div className="mt-4 space-y-4">
-      <p>Jerusalem’s Old City is a small area with an exceptionally layered history. Its streets and sacred buildings reflect Jewish, Christian, Muslim and Armenian traditions, while its everyday markets and neighbourhoods remain active parts of the city.</p>
+      <p>Centuries of Jewish, Christian, Muslim and Armenian history are visible in the Old City's streets and sacred buildings. Its markets and residential neighbourhoods remain part of everyday life in Jerusalem.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <article className="rounded-xl border bg-card p-4"><h3 className="font-semibold">Christian Quarter</h3><p className="mt-2 text-sm leading-relaxed">The Church of the Holy Sepulchre, pilgrim routes, chapels and guesthouses are connected by market lanes near Jaffa Gate and New Gate.</p></article>
         <article className="rounded-xl border bg-card p-4"><h3 className="font-semibold">Muslim Quarter</h3><p className="mt-2 text-sm leading-relaxed">A lively network of souks, historic homes, religious institutions and early Stations of the Cross extends south from Damascus Gate.</p></article>
