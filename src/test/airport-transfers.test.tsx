@@ -170,7 +170,7 @@ describe("private Ben Gurion transfers", () => {
     expect(checklist).toHaveTextContent("if you need them.");
     expect(checklist).not.toHaveTextContent("if your party needs them.");
     expect(within(benefits).getByText(/I track your flight and adjust pickup timing/)).toBeInTheDocument();
-    expect(within(benefits).getByText(/Direct bookings can be cancelled free/)).toBeInTheDocument();
+    expect(within(benefits).getByText(/cancel a direct booking free of charge up to 24 hours before pickup/i)).toBeInTheDocument();
     for (const link of [...within(related).getAllByRole("link"), ...within(planning).getAllByRole("link")]) {
       const path = link.getAttribute("href")!;
       expect(router.matchRoutes(path).at(-1)?.routeId.replace(/\/$/, "")).toBe(path.replace(/\/$/, ""));
@@ -320,7 +320,7 @@ describe("private Ben Gurion transfers", () => {
     }
     const providerSection = screen.getByRole("region", { name: "Prefer to book online?" });
     expect(providerSection).toHaveTextContent("You can also search for an airport transfer on one of the booking websites below.");
-    expect(providerSection).toHaveTextContent("Each provider sets its own prices and terms.");
+    expect(providerSection).toHaveTextContent("Each independent booking website sets its own prices and terms.");
     expect(screen.getByTestId("airport-external-providers-note")).toHaveTextContent("Each independent booking website sets its own prices and terms. Check the details before booking.");
     expect(banners.every(banner => Boolean(banner.querySelector(".self-center")))).toBe(true);
     act(() => saveCookieConsent(ALL_CATEGORIES));

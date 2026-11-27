@@ -33,7 +33,7 @@ describe("four dedicated airport transfer routes", () => {
     expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("I confirm the full price before booking.");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("Per vehicle · up to 4 passengers");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("One-way weekday airport pickup");
-    expect(screen.getByTestId("airport-route-fx-note").previousElementSibling).toHaveTextContent("Returns, larger vehicles and extra stops receive a personal quote.");
+    expect(screen.getByTestId("airport-route-fx-note").previousElementSibling).toHaveTextContent(/quote return trips, larger vehicles and extra stops separately/i);
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(route.driveTime);
     expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveAttribute("href", "#request-quote");
     expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveClass("bg-primary");
@@ -127,8 +127,8 @@ describe("four dedicated airport transfer routes", () => {
     expect(banners).toHaveLength(4);
     expect(banners.every(banner => Boolean(banner.querySelector(".self-center")))).toBe(true);
     expect(platformSection).toHaveTextContent("You can also search for a private transfer to " + guide.city + " on one of the booking websites below.");
-    expect(platformSection).toHaveTextContent("Each provider sets its own prices and terms.");
-    expect(platformSection).toHaveTextContent("Please review all details carefully before booking.");
+    expect(platformSection).toHaveTextContent("Each independent booking website sets its own prices and terms.");
+    expect(platformSection).toHaveTextContent("Check the details before booking.");
     expect(within(platformSection).getByTestId("airport-external-providers-note")).toBeInTheDocument();
     expect(platformSection.compareDocumentPosition(container.querySelector("#faq")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     for (const [index, platform] of platformLinks.entries()) {

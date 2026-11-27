@@ -16,9 +16,7 @@ jobs:
     timeout-minutes: 15
     env:
       CI: "true"
-      HOSTINGER_STATIC_BUILD: "true"
-      VITE_CANONICAL_ORIGIN: https://www.israel-taxi.com
-      VITE_INDEXABLE: "true"
+      VITE_INDEXABLE: "false"
     steps:
       - uses: actions/checkout@v7
         with:
@@ -35,6 +33,10 @@ jobs:
       - name: Verify reviewed group regression tests
         run: bun run test src/test/home-hero-copy.test.tsx src/test/homepage-structure.test.tsx src/test/about-page.test.tsx src/test/private-driver.test.tsx src/components/HomeHero.test.ts src/test/airport-transfers.test.tsx src/test/airport-routes.test.tsx
       - name: Build static HTML
+        env:
+          HOSTINGER_STATIC_BUILD: "true"
+          VITE_CANONICAL_ORIGIN: https://www.israel-taxi.com
+          VITE_INDEXABLE: "true"
         run: bash scripts/build-validated-static.sh
       - name: Verify and extract every canonical page
         env:
