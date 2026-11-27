@@ -17,12 +17,12 @@ import accommodationPhoto from "@/assets/home/hotel-room.webp";
 import driverPhoto from "@/assets/home/road-trip.webp";
 
 const exploreLinks = [
-  { title: "Attractions & experiences", description: "Historic landmarks, natural wonders and places worth exploring.", to: "/attractions/", action: "See attractions", photo: { src: attractionsPhoto, alt: "Ancient ruins on the Mediterranean coast at Caesarea" } },
-  { title: "Tours & day trips", description: "Guided sightseeing, city walks and unforgettable days out.", to: "/tours/", action: "Browse tours", photo: { src: toursPhoto, alt: "Travellers on a guided sightseeing tour in Israel" } },
+  { title: "Attractions & experiences", description: "Historic landmarks, nature reserves and archaeological sites.", to: "/attractions/", action: "See attractions", photo: { src: attractionsPhoto, alt: "Ancient ruins on the Mediterranean coast at Caesarea" } },
+  { title: "Tours & day trips", description: "Guided sightseeing, walking tours and full-day excursions.", to: "/tours/", action: "Browse tours", photo: { src: toursPhoto, alt: "Travellers on a guided sightseeing tour in Israel" } },
   { title: "Shore excursions", description: "Discover Israel's highlights from Ashdod or Haifa cruise ports.", to: "/shore-excursions/", action: "View excursions", photo: { src: shorePhoto, alt: "Cruise ship at an Israeli Mediterranean port" } },
   { title: "Airport transfers", description: "Arrange a comfortable private pickup from Ben Gurion Airport.", to: "/airport-transfers/", action: "Explore transfers", photo: { src: airportPhoto, alt: "Aircraft at Ben Gurion Airport terminal" } },
   { title: "Where to stay", description: "Choose a hotel area that fits your itinerary and travel style.", to: "/accommodation/", action: "Find accommodation", photo: { src: accommodationPhoto, alt: "Comfortable hotel room ready for guests" } },
-  { title: "Private driver", description: "Enjoy a flexible day of sightseeing with your own driver.", to: "/private-driver-in-israel/", action: "Plan a private day", photo: { src: driverPhoto, alt: "Scenic drive through the Israeli countryside" } },
+  { title: "Private driver", description: "Explore Israel at your own pace with a private car and driver.", to: "/private-driver-in-israel/", action: "Plan a private day", photo: { src: driverPhoto, alt: "Scenic drive through the Israeli countryside" } },
 ] as const;
 
 const tripPlanningLinks = [
@@ -31,7 +31,7 @@ const tripPlanningLinks = [
   { title: "Getting around Israel", description: "Trains, buses, taxis and intercity trips.", to: travelGuidePaths.israel, icon: TrainFront },
   { title: "Israel holidays & events", description: "Festivals and special dates to plan around.", to: travelGuidePaths.calendar, icon: CalendarDays },
   { title: "Travel eSIM for Israel", description: "Stay connected throughout your trip.", to: travelGuidePaths.esim, icon: Smartphone },
-  { title: "7-day Israel itinerary", description: "Ideas for a week of memorable highlights.", to: "/travel-blog/israel-itinerary-7-days/", icon: MapPinned },
+  { title: "7-day Israel itinerary", description: "A week exploring Israel's main attractions.", to: "/travel-blog/israel-itinerary-7-days/", icon: MapPinned },
 ] as const;
 
 /** Short labels for topic chips; the shared topic names used by articles stay unchanged. */
@@ -69,7 +69,7 @@ function Guides() {
   }
   const photos = [...new Map(guideDirectory.flatMap(guide => guide.photo ? [[guide.photo.src, guide.photo] as const] : [])).values()].filter(hasPublicPhotoCredit);
   return <main className="mx-auto max-w-6xl px-4 pb-8">
-    <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }]} eyebrow="Useful answers for your Israel trip" title="Travel guides & practical tips" intro="Prepare for arrival, choose how to get around and explore destinations, day trips, religious heritage and local markets. Choose a topic below to find useful guides for your trip." />
+    <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }]} eyebrow="Local travel advice & destination guides" title="Travel guides & practical tips" intro="My travel guides cover airport arrivals, transport, accommodation, sightseeing, religious heritage and local markets across Israel." />
     <nav aria-label="Filter guides by topic" className="mt-6 rounded-xl border bg-secondary/25 px-3 py-3 sm:mt-8 sm:px-4">
       <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
         <span className="mr-1 shrink-0 text-xs font-semibold text-muted-foreground">Show:</span>

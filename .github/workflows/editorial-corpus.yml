@@ -40,7 +40,7 @@ jobs:
         run: bash scripts/build-validated-static.sh
       - name: Verify and extract every canonical page
         env:
-          EDITORIAL_LOG_GROUP: ${{ inputs.log_group || '11' }}
+          EDITORIAL_LOG_GROUP: ${{ inputs.log_group || '12' }}
         run: node scripts/export-editorial-review.mjs
       - uses: actions/upload-artifact@v4
         with:

@@ -43,7 +43,7 @@ const essentials = [
   { title: "Travel advisories", detail: "Review official advice and emergency instructions.", href: "#safety" },
   { title: "Insurance", detail: "Confirm medical, disruption and activity exclusions.", href: "#safety" },
   { title: "Dates & weather", detail: "Match your regions and activities to the season.", href: "#when-to-go" },
-  { title: "Airport journey", detail: "Plan the last leg to your accommodation.", href: "#arriving" },
+  { title: "Airport journey", detail: "Arrange transport from the airport to your accommodation.", href: "#arriving" },
   { title: "Shabbat & holidays", detail: "Check Friday, Saturday and holiday schedules.", href: "#shabbat" },
   { title: "Realistic itinerary", detail: "Allow for traffic, walking and hotel changes.", href: "#plan-your-stay" },
   { title: "Getting around", detail: "Check trains, buses, taxis and private transport.", href: "#getting-around" },
@@ -104,14 +104,14 @@ export function IsraelTravelTipsGuide() {
         <GuideHeroLayout image={<GuideHeroMedia src={travelTipsHero.src} alt={travelTipsHero.alt} width={640} height={400}/>}>
           <p className="text-xs font-bold uppercase tracking-wider text-primary">My practical guide for first-time visitors</p>
           <h1 className="guide-page-title mt-2">{TRAVEL_TIPS_TITLE}</h1>
-          <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">Israel may be small, but transport schedules, religious holidays, regional weather and airport procedures can make a difference to your trip. Here are the practical tips I share with visitors, from planning your first day to getting around with confidence.</p>
+          <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">Planning a trip to Israel involves choosing the right season, understanding local transport and taking religious holidays into account. Here are my practical tips for planning your stay, arriving at Ben Gurion Airport and getting around Israel.</p>
           <PageUpdated date={TRAVEL_TIPS_UPDATED}/>
         </GuideHeroLayout>
         <AuthorCard/>
       </header>
 
       <section id="essentials" className="mt-8 scroll-mt-24" aria-labelledby="essentials-heading">
-        <Heading id="essentials-heading" intro="Start here if you have only a few minutes. Each tip links to its explanation further down the page.">10 essential Israel travel tips</Heading>
+        <Heading id="essentials-heading">10 essential Israel travel tips</Heading>
         <div className="grid gap-3 sm:grid-cols-2" data-testid="essential-tips">
           {essentials.map((tip, index) => <a key={tip.title} href={tip.href} className={`${index >= 5 ? "hidden sm:flex" : "flex"} gap-3 rounded-xl border bg-card p-4 transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary`}>
             <span className="text-sm font-bold tabular-nums text-primary">{String(index + 1).padStart(2, "0")}</span><div className="min-w-0"><h3 className="font-bold">{tip.title}</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tip.detail}</p></div><ArrowUpRight aria-hidden="true" className="ml-auto h-4 w-4 shrink-0 text-primary"/>
@@ -131,7 +131,7 @@ export function IsraelTravelTipsGuide() {
       <OnThisPage sections={sections}/>
 
       <section id="before-you-travel" className="mt-11 scroll-mt-24" aria-labelledby="before-title">
-        <Heading id="before-title" intro="A few checks before you pay for flights or accommodation can prevent expensive changes later.">Before you travel</Heading>
+        <Heading id="before-title" intro="Before booking flights and accommodation, review entry requirements, travel advisories and insurance coverage.">Before you travel</Heading>
         <Topic id="entry" title="Check entry requirements and ETA-IL">
           <p>Entry rules depend on your nationality, passport and immigration status. Travelers from eligible visa-exempt countries generally need an approved <a href="https://israel-entry.piba.gov.il/" target="_blank" rel="noopener noreferrer" className={linkClass}>ETA-IL</a> before starting their journey; other visitors may need a visa. Apply directly through the official government portal.</p>
           <p>The Population and Immigration Authority recommends applying at least 72 hours <strong>before making flight, hotel or other travel bookings</strong>, allowing time for processing or corrections. An ETA-IL can be valid for up to two years or until your passport expires, whichever comes first; permitted stays and admission remain subject to the applicable rules and border decision. Recheck the portal shortly before departure.</p>
@@ -159,21 +159,21 @@ export function IsraelTravelTipsGuide() {
         </Topic>
         <Topic id="shabbat" title="Plan around Shabbat and Jewish holidays">
           <p>Shabbat begins on Friday evening and ends on Saturday evening, with times changing through the year. Trains and most regular bus services usually stop during this period; many businesses and attractions also close or reduce hours. Transport can stop well before sunset on Friday and resume after Shabbat ends.</p>
-          <p>Some communities have limited weekend shuttle networks, including the <a href="https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" target="_blank" rel="noopener noreferrer" className={linkClass}>Tel Aviv-area Na'im Busofash service</a>. Taxis and private drivers may operate, subject to availability. These networks are not substitutes for regular national rail or bus service.</p>
+          <p>Some communities have limited weekend shuttle networks, including the <a href="https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" target="_blank" rel="noopener noreferrer" className={linkClass}>Tel Aviv-area Na'im Busofash service</a>. Taxis and private drivers may operate, subject to availability. These weekend shuttle networks operate on limited local and regional routes.</p>
           <p>When arriving or changing hotels on Friday or Saturday, verify your exact route, opening hours, luggage needs and check-in arrangements. My <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className={linkClass}>airport travel on Shabbat guide</Link> explains the options, while <Link to="/travel-blog/calendar-of-events/" className={linkClass}>Israel's calendar of events</Link> helps with holiday dates.</p>
         </Topic>
         <Tip>For Friday arrivals, check your flight's scheduled landing time against the final train or bus and any transfer to your hotel.</Tip>
       </section>
 
       <section id="plan-your-stay" className="mt-12 scroll-mt-24" aria-labelledby="plan-title">
-        <Heading id="plan-title" intro="A shorter, well-paced route is often more enjoyable than spending half your trip changing hotels.">Plan your stay</Heading>
+        <Heading id="plan-title" intro="I recommend choosing a few convenient places to stay and allowing enough time for sightseeing in each region.">Plan your stay</Heading>
         <Topic title="Decide how long to stay and what to prioritize">
           <p>For a first visit, seven to ten days can cover Jerusalem and Tel Aviv plus some time in the Dead Sea or northern Israel without rushing. Three days is better spent in one area; five days can combine the two main cities and perhaps a day trip. Leave time for traffic, meals, queues, check-in and journeys between stops.</p>
           <p>Compare my <Link to="/travel-blog/israel-itinerary-3-days/" className={linkClass}>3-day</Link>, <Link to="/travel-blog/israel-itinerary-5-days/" className={linkClass}>5-day</Link>, <Link to="/travel-blog/israel-itinerary-7-days/" className={linkClass}>7-day</Link> and <Link to="/travel-blog/israel-itinerary-10-days/" className={linkClass}>10-day</Link> travel plans. Reserve timed admission or special tours where needed, and recheck religious-site access before traveling.</p>
         </Topic>
         <div id="where-to-stay" className="mt-9 scroll-mt-24" aria-labelledby="stays-title">
           <h3 id="stays-title" className="text-xl font-bold">Where to stay in Israel</h3>
-          <p className="mt-2 leading-relaxed">Jerusalem and Tel Aviv make convenient first-trip bases, but one or two nights elsewhere can reduce long return drives. Choose the location according to your main sights and the transport you plan to use.</p>
+          <p className="mt-2 leading-relaxed">Jerusalem and Tel Aviv are convenient bases for a first visit. Overnight stays in the Galilee or the Dead Sea region can reduce driving time. Choose the location according to your main sights and the transport you plan to use.</p>
           <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="israel-stay-cards">
             {bases.map(base => <PhotoCard key={base.name} name={base.name} image={base.image} alt={base.alt} description={base.description} href={base.href} cta={base.cta}/>)}
           </ul>
@@ -181,7 +181,7 @@ export function IsraelTravelTipsGuide() {
         <Topic id="getting-around" title="Choose transport by journey, not by habit">
           <p>Israel Railways connects major destinations, while buses cover many additional towns and sights. Jerusalem and Tel Aviv also have local transit and light rail. Check transport schedules for your travel dates with <a href="https://rail.co.il/?lan=en" target="_blank" rel="noopener noreferrer" className={linkClass}>Israel Railways</a> and the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={linkClass}>national public transport planner</a>, especially on Fridays, holidays and late evenings.</p>
           <p>Use a <strong>Rav-Kav card or an authorized payment app</strong> for ordinary public transport where supported. Some bus operators accept contactless bank cards on selected routes, but it is not a universal replacement. Validate each trip as required, including before boarding light rail.</p>
-          <p>Licensed taxis are helpful for shorter rides and luggage; a <Link to="/private-driver-in-israel/" className={linkClass}>private driver</Link> can suit multi-stop days, families or travellers needing an easier pace. Rental cars are useful in some rural areas but can add parking and traffic hassles in major city centers. Review my <Link to="/travel-blog/getting-around-israel/" className={linkClass}>getting around Israel guide</Link> and <Link to="/travel-blog/sherut-in-israel/" className={linkClass}>sherut guide</Link> before relying on an old shared-taxi route.</p>
+          <p>Licensed taxis are helpful for shorter rides and luggage; a <Link to="/private-driver-in-israel/" className={linkClass}>private driver</Link> can suit multi-stop days, families or travellers needing an easier pace. Rental cars are convenient for exploring rural areas, while public transport and taxis help avoid parking difficulties and traffic in major cities. Review my <Link to="/travel-blog/getting-around-israel/" className={linkClass}>getting around Israel guide</Link> and <Link to="/travel-blog/sherut-in-israel/" className={linkClass}>sherut guide</Link> before relying on an old shared-taxi route.</p>
         </Topic>
         <Tip>Allow more time than a map's fastest driving estimate when planning intercity days. Traffic, vehicle access to historic areas, parking and walking can add substantial time.</Tip>
       </section>
