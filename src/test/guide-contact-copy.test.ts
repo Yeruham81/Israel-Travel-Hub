@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import ts from "typescript";
 import { describe, expect, it } from "vitest";
 import { guideContactCopy, type GuideContactKind } from "@/lib/guide-contact";
 
@@ -40,7 +41,20 @@ describe("attraction contact introductions promote transport instead of generic 
 
   it.each(pages)("%s offers a private transfer or day trip with a driver", page => {
     const src = readFileSync(`src/components/${page}AttractionPage.tsx`, "utf8");
-    const contact = src.match(/contactIntroduction: "([^"\n]+)"/)?.[1];
+    const tree = ts.createSourceFile(page + ".tsx", src, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+    const introductions: string[] = [];
+    function visit(node: ts.Node) {
+      if (ts.isPropertyAssignment(node) &&
+          (ts.isIdentifier(node.name) || ts.isStringLiteral(node.name)) &&
+          node.name.text === "contactIntroduction" &&
+          ts.isStringLiteralLike(node.initializer)) {
+        introductions.push(node.initializer.text);
+      }
+      ts.forEachChild(node, visit);
+    }
+    visit(tree);
+    expect(introductions, page).toHaveLength(1);
+    const contact = introductions[0];
     expect(contact, page).toBeTruthy();
     expect(contact, page).toMatch(/private (?:transfer|transport|driver|day trip|journey)|day trip with a driver|transport with a driver/i);
     expect(contact, page).not.toMatch(/general planning information|have a question about visiting/i);

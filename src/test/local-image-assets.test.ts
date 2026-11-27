@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, relative, resolve } from "node:path";
+import ts from "typescript";
 import { attractionGuides } from "@/data/attractionGuides";
 import { travelGuides } from "@/data/travelGuides";
 
@@ -23,6 +24,54 @@ const remoteImagePatterns = [
   /(?:images\.unsplash\.com|source\.unsplash\.com|images\.pexels\.com|cdn\.pixabay\.com)/i,
 ];
 
+/** Exempt only a literal map iframe src and the specific GA4 script assignment.
+ * All other remote image assignments and legacy image hosts remain prohibited. */
+function remoteImageViolations(file: string, source: string): number[] {
+  const exempt: Array<[number, number]> = [];
+  if (/\.tsx?$/.test(file)) {
+    const tree = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true);
+    const visit = (node: ts.Node) => {
+      if (ts.isJsxAttribute(node) && node.name.getText(tree) === "src") {
+        const element = node.parent.parent;
+        if (ts.isJsxOpeningElement(element) || ts.isJsxSelfClosingElement(element)) {
+          const tag = element.tagName.getText(tree);
+          const literal = node.initializer && (ts.isJsxExpression(node.initializer) ? node.initializer.expression : node.initializer);
+          if ((tag === "iframe" || tag === "ConsentIframe") && literal && ts.isStringLiteralLike(literal) &&
+              /^https:\/\/maps\.google\.com\//.test(literal.text)) {
+            exempt.push([node.getStart(tree), node.end]);
+          }
+        }
+      }
+      if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+          ts.isPropertyAccessExpression(node.left) && node.left.expression.getText(tree) === "script" &&
+          node.left.name.text === "src" && ts.isStringLiteralLike(node.right) &&
+          /^https:\/\/www\.googletagmanager\.com\/gtag\/js(?:\?|$)/.test(node.right.text)) {
+        exempt.push([node.getStart(tree), node.end]);
+      }
+      // GA4's URL includes an interpolated measurement ID.
+      if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+          ts.isPropertyAccessExpression(node.left) && node.left.expression.getText(tree) === "script" &&
+          node.left.name.text === "src" && ts.isTemplateExpression(node.right) &&
+          /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?/.test(node.right.head.text)) {
+        exempt.push([node.getStart(tree), node.end]);
+      }
+      ts.forEachChild(node, visit);
+    };
+    visit(tree);
+  }
+  let inspected = source;
+  for (const [start, end] of exempt.sort((a, b) => b[0] - a[0])) {
+    inspected = inspected.slice(0, start) + inspected.slice(start, end).replace(/[^\r\n]/g, " ") + inspected.slice(end);
+  }
+  const violations = new Set<number>();
+  for (const pattern of remoteImagePatterns) {
+    for (const match of inspected.matchAll(new RegExp(pattern.source, pattern.flags + "g"))) {
+      violations.add(source.slice(0, match.index).split(/\r?\n/).length);
+    }
+  }
+  return [...violations].sort((a, b) => a - b);
+}
+
 describe("local-only image asset policy", () => {
   it("never reintroduces the retired Old City photo in cards or responsive assets", () => {
     const retiredImports = [
@@ -38,17 +87,23 @@ describe("local-only image asset policy", () => {
     }
     expect(offenders).toEqual([]);
   });
+  it("distinguishes multiline map iframes and scripts from actual remote images", () => {
+    const map = '<ConsentIframe\n  src="https://maps.google.com/maps?q=Akko"\n/>';
+    const script = 'script.src = "https://www.googletagmanager.com/gtag/js?id=G-TEST";';
+    expect(remoteImageViolations("probe.tsx", map)).toEqual([]);
+    expect(remoteImageViolations("probe.ts", script)).toEqual([]);
+    expect(remoteImageViolations("probe.tsx", '<img\n src="https://maps.google.com/maps?q=Akko"\n/>')).not.toEqual([]);
+    expect(remoteImageViolations("probe.tsx", '<img src=\n"https://example.org/remote.webp" />')).not.toEqual([]);
+    expect(remoteImageViolations("probe.tsx", map + '\n<img src="https://example.org/remote.webp"/>')).not.toEqual([]);
+    expect(remoteImageViolations("probe.tsx", '<ConsentIframe src="https://images.unsplash.com/photo-test"/>')).not.toEqual([]);
+  });
+
   it("never hotlinks images in authored source", () => {
     const violations: string[] = [];
     for (const file of sourceFiles(srcRoot)) {
-      const lines = readFileSync(file, "utf8").split(/\r?\n/);
-      lines.forEach((line, index) => {
-        // An explicitly loaded GA4 JavaScript file is a script resource, not an image hotlink.
-        const isGa4ScriptLoader = /\bscript\.src\s*=/.test(line) && line.includes("googletagmanager.com/gtag/js");
-        if (remoteImagePatterns.some(regex => regex.test(line)) && !isGa4ScriptLoader && !(/<(?:iframe|ConsentIframe)\b/.test(line) && /https:\/\/maps\.google\.com\//.test(line))) {
-          violations.push(`${relative(process.cwd(), file)}:${index + 1}`);
-        }
-      });
+      for (const line of remoteImageViolations(file, readFileSync(file, "utf8"))) {
+        violations.push(relative(process.cwd(), file) + ":" + line);
+      }
     }
     expect(violations).toEqual([]);
   });

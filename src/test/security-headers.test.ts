@@ -107,12 +107,12 @@ describe("SSR response security headers", () => {
     expect(server).toContain(
       "withSecurityHeaders(await normalizeCatastrophicSsrResponse(response), request)",
     );
-    expect(server).toContain("withSecurityHeaders(new Response(renderErrorPage()");
+    expect(server).toMatch(/withSecurityHeaders\(\s*new Response\(\s*renderErrorPage\(\)/);
     const headers = readFileSync("src/lib/security-headers.server.ts", "utf8");
     expect(headers).toContain("base-uri 'self'; object-src 'none'");
-    expect(headers).not.toMatch(/headers\.set\(["']strict-transport-security["']/i);
+    expect(headers).not.toMatch(/headers\.set\(\s*["']strict-transport-security["']/i);
     expect(headers).not.toMatch(
-      /headers\.set\(["']content-security-policy["'],\s*["'][^"'\n]*(?:script-src|default-src)/i,
+      /headers\.set\(\s*["']content-security-policy["'],\s*["'][^"'\n]*(?:script-src|default-src)/i,
     );
   });
 });
