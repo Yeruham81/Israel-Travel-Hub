@@ -53,6 +53,7 @@ jobs:
           const files=fs.readFileSync(path.join(out,'script-scope.bin'),'utf8').split('\0').filter(file=>rootConfigs.has(file)||/^scripts\/.*\.(?:[cm]?[jt]s|[jt]sx|json)$/.test(file));
           if(files.length!==60)throw Error('Unexpected script/config inventory: '+files.length);
           const isJson=file=>file.endsWith('.json')||file==='.prettierrc';
+          const isDeclaration=file=>/\.d\.(?:ts|mts|cts)$/.test(file);
           const included=[], excluded=[], changed=[], differences=[], stability=[], unstable=[], pending=new Map();
           // Compare parsed, emitted JavaScript with comments removed and
           // normalized output, rather than stripping spaces from literals.
@@ -128,7 +129,13 @@ jobs:
           if(cycles.status!=='cycle'||cycles.passes!==2||cycles.cycleStart!==0)throw Error('Formatter cycle self-test failed');
           const limited=await stabilize('a',async x=>x+'a');
           if(limited.status!=='limit'||limited.passes!==5)throw Error('Formatter limit self-test failed');
+          if(!isDeclaration('scripts/example.d.mts')||!isDeclaration('example.d.ts')||!isDeclaration('example.d.cts')||isDeclaration('example.mts'))throw Error('Declaration classifier self-test failed');
+          if(!await equivalent('export function f(x?:string):Promise<string[]>;','export function f(x?: string): Promise<string[]>;'))throw Error('Declaration formatting self-test failed');
+          for(const altered of ['export function f(x:string):Promise<string[]>;','export function f(x?:number):Promise<string[]>;','export function f(x?:string):Promise<number[]>;']){
+            if(await equivalent('export function f(x?:string):Promise<string[]>;',altered))throw Error('Declaration change detection self-test failed');
+          }
           for(const file of files){
+            console.log('CHECK FORMAT: '+file);
             const before=fs.readFileSync(file,'utf8');
             const info=await prettier.getFileInfo(file,{ignorePath:'.prettierignore'});
             if(info.ignored||!info.inferredParser)throw Error('Unexpected ignored or unsupported script/config: '+file);
@@ -147,6 +154,17 @@ jobs:
             if(isJson(file)){
               const textEqual=JSON.stringify(JSON.parse(before))===JSON.stringify(JSON.parse(after));
               if(!textEqual){differences.push({file,textEqual:false,astEqual:false});console.error('JSON DATA CHANGED: '+file);}
+              if(before!==after){pending.set(file,after);changed.push(file);}
+              continue;
+            }
+            // Declaration modules have no runtime JS output. Verify the
+            // complete original type syntax instead of calling transpileModule.
+            if(isDeclaration(file)){
+              const textEqual=(await canonical(before))===(await canonical(after));
+              const astEqual=fingerprint(before)===fingerprint(after);
+              differences.push({file,textEqual,astEqual,kind:'declaration-source'});
+              if(!textEqual&&!astEqual)console.error('UNRESOLVED DECLARATION DIFFERENCE: '+file);
+              else console.log('VERIFIED DECLARATION SOURCE: '+file+' canonical='+textEqual+' AST='+astEqual);
               if(before!==after){pending.set(file,after);changed.push(file);}
               continue;
             }
