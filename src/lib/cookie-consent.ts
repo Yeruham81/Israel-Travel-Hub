@@ -73,6 +73,28 @@ function notify() {
   listeners.forEach(listener => listener());
   window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
 }
+/** Optional anonymous server receipt. Disabled until /admin/ is installed and privacy notice reviewed. */
+function recordConsentSelection(choice: CookieConsent): void {
+  if (import.meta.env.VITE_CONSENT_LEDGER_ENABLED !== "true") return;
+  try {
+    const body = JSON.stringify({
+      eventId: crypto.randomUUID(),
+      policyVersion: "2026-11-27",
+      sourcePath: window.location.pathname,
+      categories: choice.categories,
+    });
+    // Consent storage must never depend on success of this supplementary log.
+    void fetch("/admin/consent.php", {
+      method: "POST",
+      credentials: "omit",
+      cache: "no-store",
+      keepalive: true,
+      headers: { "Content-Type": "application/json" },
+      body,
+    }).catch(() => {});
+  } catch { /* No optional analytics or tracking is started by a logging failure. */ }
+}
+
 export function saveCookieConsent(categories: CookieCategories) {
   const next: CookieConsent = { version: 2, categories: { analytics: categories.analytics === true, external: categories.external === true, marketing: categories.marketing === true, advertising: categories.advertising === true }, expiresAt: Date.now() + CONSENT_LIFETIME };
   try { window.localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(next)); memoryOnly = undefined; }
@@ -81,6 +103,7 @@ export function saveCookieConsent(categories: CookieCategories) {
     try { window.localStorage.removeItem(COOKIE_CONSENT_KEY); } catch { /* Use the explicit choice for this document only. */ }
   }
   notify();
+  recordConsentSelection(next);
 }
 function refresh(event?: StorageEvent) {
   if (event && event.key !== null && event.key !== COOKIE_CONSENT_KEY) return;
