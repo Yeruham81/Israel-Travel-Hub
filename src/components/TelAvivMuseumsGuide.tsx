@@ -283,12 +283,12 @@ export function TelAvivMuseumsGuide() {
       <section id="practical" aria-labelledby="practical-heading" className="mt-12 scroll-mt-24">
         <SectionHeading id="practical" title="My practical museum-planning tips" />
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-xl border p-5"><h3 className="font-bold">Tickets and language</h3><p className="mt-2 text-sm leading-relaxed">Check official websites for current admission, final entry time, English interpretation and age guidance. Structured experiences like the Palmach Museum require a booked time; the City Museum and Steinhardt sell tickets online.</p></div>
+          <div className="rounded-xl border p-5"><h3 className="font-bold">Tickets and language</h3><p className="mt-2 text-sm leading-relaxed">Check admission prices, last entry, English-language options and age guidance on each museum's website. Book a time for the Palmach Museum; the City Museum and Steinhardt also sell tickets online.</p></div>
           <div className="rounded-xl border p-5"><h3 className="font-bold">Transport between museums</h3><p className="mt-2 text-sm leading-relaxed">Walk between the Bialik Square venues, but allow transit time for Ramat Aviv. Check buses, Israel Railways and the Red Line light rail on my <Link to="/travel-blog/getting-around-tel-aviv/" className="font-semibold text-primary underline-offset-4 hover:underline">getting around Tel Aviv guide</Link>.</p></div>
           <div className="rounded-xl border p-5"><h3 className="font-bold">Weekends and holidays</h3><p className="mt-2 text-sm leading-relaxed">Museums have different Friday and Saturday hours. <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline-offset-4 hover:underline">Jewish holidays and holiday eves</Link> may affect admissions, opening hours and public transport.</p></div>
           <div className="rounded-xl border p-5"><h3 className="font-bold">Accessibility and family visits</h3><p className="mt-2 text-sm leading-relaxed">Some historic buildings have steps or narrow interiors. Check wheelchair routes, lifts, stroller arrangements and family programmes directly with the museum before setting out.</p></div>
         </div>
-        <div className="mt-5"><PlanningTip>My preferred approach is one substantial museum, a nearby lighter visit if time permits, and a walk or meal afterwards. It is a more enjoyable day than a rushed checklist.</PlanningTip></div>
+        <div className="mt-5"><PlanningTip>I recommend spending time at one major museum, adding a smaller one nearby if time permits, and finishing with a walk or meal.</PlanningTip></div>
         <MuseumMap />
       </section>
 
@@ -305,7 +305,7 @@ export function TelAvivMuseumsGuide() {
       </section>
       <HomeContactForm showTripadvisorBesidePortraitMobile guide={neighborhoodTripContactCopy("Tel Aviv")} />
       <SourcesDisclosure>
-        <p className="mb-3 text-sm leading-relaxed">I use official museum and operator pages for visitor arrangements. Opening hours, temporary closures, admission and exhibitions may change. Please confirm the details with the venue for your visit date.</p>
+        <p className="mb-3 text-sm leading-relaxed">The official museum websites below provide current opening hours, admission prices, exhibitions and closure notices.</p>
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Photo credits for the four added museum photographs (resized and compressed to WebP): <a href="https://commons.wikimedia.org/wiki/File:Bauhaus_Center_Tel_Aviv.JPG" target="_blank" rel="noopener noreferrer" className="underline">Bauhaus Center - Itzuvit, CC BY-SA 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Bialik_Bldg.jpg" target="_blank" rel="noopener noreferrer" className="underline">Bialik House - Ori Lubin</a>; <a href="https://commons.wikimedia.org/wiki/File:Bauhaus_Tel-Aviv_museum.jpg" target="_blank" rel="noopener noreferrer" className="underline">Bauhaus-era building - Talmoryair, CC BY 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Rubin_Museum_Tel_Aviv,_Room_39.jpg" target="_blank" rel="noopener noreferrer" className="underline">Rubin Museum - Yoram Shoval, CC BY-SA 4.0</a>. The historic Bauhaus Museum photograph illustrates the White City architecture discussed in the Liebling Haus entry.</p>
         <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
           {museums.map(museum => <li key={museum.id}><OfficialLink href={museum.url}>{museum.name}</OfficialLink></li>)}

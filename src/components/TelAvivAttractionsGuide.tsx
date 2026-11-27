@@ -185,7 +185,7 @@ export function TelAvivAttractionsGuide(){
    <GuideHeroLayout image={<GuideHeroMedia src={telAvivAttractionsHero.src} alt={telAvivAttractionsHero.alt}/>}>
     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Tel Aviv & Jaffa · Attractions & local experiences</p>
     <h1 className="guide-page-title mt-2">Best Things to Do in Tel Aviv: Attractions & Local Experiences</h1>
-    <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From Old Jaffa's stone lanes to sandy beaches, food markets, Bauhaus streets and lively neighbourhoods, Tel Aviv offers many different experiences. I've chosen ten highlights and practical walking routes to help you make the most of your time without crossing the city needlessly.</p>
+    <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From Old Jaffa's stone lanes to sandy beaches, food markets and Bauhaus architecture, these are ten of my favourite places and experiences in Tel Aviv. I've also suggested walking routes that combine nearby sights.</p>
     <PageUpdated date={telAvivAttractionsUpdatedAt}/>
    </GuideHeroLayout>
    <AuthorCard/>
@@ -230,14 +230,14 @@ export function TelAvivAttractionsGuide(){
     </div>
   </section>
   <section id="explore" aria-labelledby="explore-h" className="mt-12 scroll-mt-24">
-    <Heading id="explore" title="Ten attractions and experiences I recommend" intro="I've chosen a mix of neighbourhoods, landmarks, markets, beaches and culture. Explore the places that interest you; you can follow the detailed guides where available."/>
+    <Heading id="explore" title="Ten attractions and experiences I recommend" intro="Explore the city's neighbourhoods, landmarks, markets, beaches and museums."/>
     <div className="grid gap-5" data-testid="tel-aviv-detailed-experience-cards">
       {stops.map((stop,i)=><ExperienceCard key={stop.id} stop={stop} num={i+1}/>)}
     </div>
   </section>
   <div className="mt-6"><Tip>Old Jaffa, Neve Tzedek, Carmel Market and the central beaches work well as a combined walking day. The northern port and the museum district are better planned as additional areas, especially when travelling with children or in hot weather.</Tip></div>
   <section id="map" aria-labelledby="map-h" className="mt-12 scroll-mt-24">
-    <Heading id="map" title="Map of the ten Tel Aviv attractions" intro="See how the city stretches from Old Jaffa in the south to the northern port. Pins are for orientation; each attraction card also links to the precise place on Google Maps."/>
+    <Heading id="map" title="Map of the ten Tel Aviv attractions" intro="See where the attractions are, from Old Jaffa in the south to the northern port. For directions, use the Google Maps links in each attraction's description."/>
     <div className="overflow-hidden rounded-xl border bg-card">
      <div className="flex flex-col gap-3 border-b p-4 sm:flex-row sm:items-end">
       <label htmlFor="tel-aviv-attractions-map-select" className="min-w-0 flex-1 text-sm font-semibold">Focus on a place
@@ -256,7 +256,7 @@ export function TelAvivAttractionsGuide(){
     </div>
   </section>
   <section id="routes" aria-labelledby="routes-h" className="mt-12 scroll-mt-24">
-    <Heading id="routes" title="How I'd plan a day in Tel Aviv" intro="These flexible combinations keep neighbouring places together. Times include breaks but depend on your interests, walking pace and transport."/>
+    <Heading id="routes" title="How I'd plan a day in Tel Aviv" intro="These routes combine nearby sights. The suggested times include breaks and depend on how long you spend at each stop."/>
     <div className="grid gap-4 lg:grid-cols-3">
       {telAvivRoutes.map((route,i)=><article key={route.title} className="flex flex-col rounded-xl border bg-card p-5">
        <p className="text-xs font-semibold uppercase tracking-wide text-primary">Route idea {i+1} · {route.kind}</p>

@@ -26,8 +26,8 @@ export const telAvivBeaches: TelAvivBeach[] = [
   {
     id: "tzuk-north", name: "North Tzuk Beach", area: "Northern coast",
     detailPhoto: { src: "/images/tel-aviv-beaches/tzuk-north.webp", alt: "Sandy North Tzuk Beach with coastal cliffs and the Herzliya skyline", width: 706, height: 530 },
-    bestFor: "Spacious northern beach", summary: "At Tel Aviv's northern edge near Herzliya, North Tzuk offers lawns, shade shelters and a different pace from the hotel-lined promenade. The municipality lists free parking near the entrance.",
-    tip: "The municipality says that the approach is only partly accessible because of a slope. Check the exact accessible route before travelling.",
+    bestFor: "Spacious northern beach", summary: "At Tel Aviv's northern edge near Herzliya, North Tzuk offers lawns, shade shelters and a quieter setting than the central beaches. The municipality lists free parking near the entrance.",
+    tip: "The slope on the approach limits wheelchair access, according to the municipality. Check the accessible route before travelling.",
     access: "Far north; bus, taxi or car is usually more convenient from central hotels.",
     accessShort: "Northern edge", highlights: "Lawns · Shade · Free parking", lat: 32.14376, lon: 34.79094,
     official: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Hatzuk.aspx"
@@ -146,7 +146,7 @@ export const telAvivBeaches: TelAvivBeach[] = [
   {
     id: "givat-aliya", name: "Givat Aliya Beach", area: "Southern coast and Jaffa",
     detailPhoto: { src: "/images/tel-aviv-beaches/givat-aliya.webp", alt: "Givat Aliya Beach and the stone arches along the Jaffa waterfront", width: 720, height: 405 },
-    bestFor: "A local Jaffa atmosphere", summary: "Farther south in Jaffa, Givat Aliya is known for its seaside setting and distinctive stone arches near the shore. Its stone arches and local Jaffa setting make it a distinctive coastal stop.",
+    bestFor: "A local Jaffa atmosphere", summary: "In southern Jaffa, Givat Aliya is known for its distinctive stone arches near the shore and its neighbourhood atmosphere.",
     tip: "Allow for a separate journey from central Tel Aviv. Follow local signs for the supervised swimming zone and the designated dog area to the south.",
     access: "Southern Jaffa, well beyond Old Jaffa Port.",
     accessShort: "Southern Jaffa", highlights: "Stone arches · Dog area nearby", lat: 32.03884, lon: 34.74486,

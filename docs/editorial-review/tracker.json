@@ -402,10 +402,10 @@
     {
       "path": "/attractions/jaffa/",
       "group": 6,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "ae1e396568cd4eb28153bceb357c6077f71cc3713a02acb1a6843f785d76e527",
+      "changes": 5,
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval."
     },
     {
       "path": "/attractions/magdala/",
@@ -445,7 +445,7 @@
       "status": "edited",
       "reviewedSnapshot": "f4d5434486601ae6fd878310ce27f9ffc32df71ce9714acb9f1231c948ff0f71",
       "changes": 6,
-      "notes": "Reviewed rendered visitor guide from artifact 15190479263. Retained religious traditions, hours, prices, routes, accessibility and links. Await approval and targeted regression. Targeted regression and extraction passed in run 45988832492; awaiting approval and production deployment.",
+      "notes": "Reviewed rendered visitor guide from artifact 15190479263. Retained religious traditions, hours, prices, routes, accessibility and links. Await approval and targeted regression. Targeted regression and extraction passed in run 45988832492; awaiting approval and production deployment. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending.",
       "postEditSnapshot": "1fc76f58d0656e1daf0ae5f73543b990bb977758783e14a68b5f806a482b633c"
     },
     {
@@ -470,7 +470,7 @@
       "status": "edited",
       "reviewedSnapshot": "36562303fb27d0645b67a08ab01f80d2c79fe5bde46512620f1bb365c6513ee1",
       "changes": 5,
-      "notes": "Reviewed rendered visitor guide from artifact 15190479263. Retained religious traditions, hours, prices, routes, accessibility and links. Await approval and targeted regression. Targeted regression and extraction passed in run 45988832492; awaiting approval and production deployment.",
+      "notes": "Reviewed rendered visitor guide from artifact 15190479263. Retained religious traditions, hours, prices, routes, accessibility and links. Await approval and targeted regression. Targeted regression and extraction passed in run 45988832492; awaiting approval and production deployment. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending.",
       "postEditSnapshot": "d56da50455f6e06cad58300dffb96288fb4a04713829ccd1882f846ff1c5c3aa"
     },
     {
@@ -479,7 +479,7 @@
       "status": "edited",
       "reviewedSnapshot": "4cf81006a5aa9b173bba95f5340fd4becc5ac0ae5dfb307d7690d11e15c17948",
       "changes": 4,
-      "notes": "Read full prerendered corpus from artifact 15193336079. Simplified visitor instructions, descriptions and route labels, preserving hours, admission, traditions, links and historical uncertainty. Await regression and approval. Targeted regression and corpus extraction passed in run 45994945086; awaiting approval and production deployment.",
+      "notes": "Read full prerendered corpus from artifact 15193336079. Simplified visitor instructions, descriptions and route labels, preserving hours, admission, traditions, links and historical uncertainty. Await regression and approval. Targeted regression and corpus extraction passed in run 45994945086; awaiting approval and production deployment. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending.",
       "postEditSnapshot": "555e7c2dc027c4b5a4790d1b1591d8b2f8482682acd6af237578b4de5b763698"
     },
     {
@@ -528,7 +528,7 @@
       "status": "edited",
       "reviewedSnapshot": "cb6dbbdf6359c31d98855d4af0b392d105e27c9a8aa0a17e36a63eb69ee303d3",
       "changes": 6,
-      "notes": "Read full prerendered corpus from artifact 15193336079. Simplified visitor instructions, descriptions and route labels, preserving hours, admission, traditions, links and historical uncertainty. Await regression and approval. Targeted regression and corpus extraction passed in run 45994945086; awaiting approval and production deployment.",
+      "notes": "Read full prerendered corpus from artifact 15193336079. Simplified visitor instructions, descriptions and route labels, preserving hours, admission, traditions, links and historical uncertainty. Await regression and approval. Targeted regression and corpus extraction passed in run 45994945086; awaiting approval and production deployment. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending.",
       "postEditSnapshot": "5c451f6b05f2406c2051b00d7157071b56fbdecb817c64260079e29d5df7971f"
     },
     {
@@ -695,10 +695,10 @@
     {
       "path": "/travel-blog/attractions-in-tel-aviv/",
       "group": 6,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "46598bdd36a1bc5c3410e09db7f89204aa8b33747066ab5dc47e545c0dffed93",
+      "changes": 8,
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval."
     },
     {
       "path": "/travel-blog/baptism-in-the-jordan-river/",
@@ -711,10 +711,10 @@
     {
       "path": "/travel-blog/beaches-in-tel-aviv/",
       "group": 6,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "786baf3469f87ff6a4f4cb1f64fd46fdccaa03811c8c886d54e758dad0730374",
+      "changes": 7,
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval."
     },
     {
       "path": "/travel-blog/ben-gurion-airport-arrival-tips/",
@@ -826,7 +826,7 @@
       "status": "edited",
       "reviewedSnapshot": "c97adc22ae60c2a3e5ade9b227a2a7ba7a4559d57a9071fab29115103b86ef48",
       "changes": 15,
-      "notes": "Read full prerendered corpus from artifact 15193336079. Simplified visitor instructions, descriptions and route labels, preserving hours, admission, traditions, links and historical uncertainty. Await regression and approval. Targeted regression and corpus extraction passed in run 45994945086; awaiting approval and production deployment.",
+      "notes": "Read full prerendered corpus from artifact 15193336079. Simplified visitor instructions, descriptions and route labels, preserving hours, admission, traditions, links and historical uncertainty. Await regression and approval. Targeted regression and corpus extraction passed in run 45994945086; awaiting approval and production deployment. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending.",
       "postEditSnapshot": "60c183d310608ac8b561df5a55dbf78bb9beda5dbb63b938f645379c57a29afc"
     },
     {
@@ -935,7 +935,8 @@
       "status": "edited",
       "reviewedSnapshot": "9c686cb8acdf04d30434930d0ace09c064a7517beb141ec3759c5ddff1f6a324",
       "changes": 8,
-      "notes": "Reviewed prerendered visitor content from artifact 15195815819; streamlined introductions, practical advice, museum descriptions and shopping guidance. No changes to prices, hours, map, links, or official sources. Await regression and approval."
+      "notes": "Reviewed prerendered visitor content from artifact 15195815819; streamlined introductions, practical advice, museum descriptions and shopping guidance. No changes to prices, hours, map, links, or official sources. Await regression and approval. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending.",
+      "postEditSnapshot": "9b32df34d57ec18cd55fc69112ff529cf0f4edb645c7012aeff557f2075b439d"
     },
     {
       "path": "/travel-blog/museums-in-haifa/",
@@ -951,15 +952,16 @@
       "status": "edited",
       "reviewedSnapshot": "a91a60d7f7bec1e829d010c5cc520a63e324618e5bf5467be60a4f1c10486104",
       "changes": 9,
-      "notes": "Reviewed prerendered visitor content from artifact 15195815819; streamlined introductions, practical advice, museum descriptions and shopping guidance. No changes to prices, hours, map, links, or official sources. Await regression and approval."
+      "notes": "Reviewed prerendered visitor content from artifact 15195815819; streamlined introductions, practical advice, museum descriptions and shopping guidance. No changes to prices, hours, map, links, or official sources. Await regression and approval. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending.",
+      "postEditSnapshot": "9785f48542bb82f98bb8fc030e19accb0b9a4602cea90f6c207a4c306ffa4c9c"
     },
     {
       "path": "/travel-blog/museums-in-tel-aviv/",
       "group": 6,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "18b2f325e7612479b680d7307de0d125cd4211ef4cc338b17247bf8f918bfba8",
+      "changes": 9,
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval."
     },
     {
       "path": "/travel-blog/sherut-in-israel/",
@@ -976,7 +978,8 @@
       "status": "edited",
       "reviewedSnapshot": "8575629c80bc974ff3160a816bea2f4b05ede2f099fc0749772baa49b397a5a0",
       "changes": 10,
-      "notes": "Reviewed prerendered visitor content from artifact 15195815819; streamlined introductions, practical advice, museum descriptions and shopping guidance. No changes to prices, hours, map, links, or official sources. Await regression and approval."
+      "notes": "Reviewed prerendered visitor content from artifact 15195815819; streamlined introductions, practical advice, museum descriptions and shopping guidance. No changes to prices, hours, map, links, or official sources. Await regression and approval. Targeted regression and extraction passed in run 45995429836; approved and merged to main, production validation pending.",
+      "postEditSnapshot": "275de2d3c64d35136796d85ee83b6e92544d6252e2e547f0942cb3272229368d"
     },
     {
       "path": "/travel-blog/taxi-fares-in-israel/",

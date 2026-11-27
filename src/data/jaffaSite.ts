@@ -8,7 +8,7 @@ export const jaffaSite = {
     src: "/images/attractions/jaffa-panorama.webp",
     alt: "Panoramic view of historic Jaffa and its Mediterranean coastline",
   },
-  intro: "Jaffa is one of my favourite areas to recommend to visitors staying in Tel Aviv. Within a few walkable neighbourhoods you can explore an ancient harbour, Ottoman landmarks, stone alleys, galleries and the lively flea market. I recommend allowing a relaxed half-day: see the historic hill and waterfront, then leave time for a coffee or meal among the market streets.",
+  intro: "Jaffa is one of my favourite places to visit in Tel Aviv. You can explore the ancient harbour, Ottoman landmarks, stone alleys, galleries and flea market on foot. Allow half a day to see the historic hill and waterfront, with time for a coffee or meal near the market.",
   official: {
     oldJaffa: "https://www.oldjaffa.co.il/",
     municipality: "https://www.tel-aviv.gov.il/en/",
