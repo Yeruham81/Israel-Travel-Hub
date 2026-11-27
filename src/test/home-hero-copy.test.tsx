@@ -12,17 +12,32 @@ afterEach(cleanup);
 describe("homepage marketing copy and service sections", () => {
   it("shows a welcoming hero introduction without redundant marketing buttons", () => {
     const { container } = render(<HomeHero />);
-    expect(screen.getByRole("heading", { level: 1, name: "Discover Israel, Travel Smarter" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Discover Israel, Travel Smarter" }),
+    ).toBeInTheDocument();
     expect(screen.getByText("Your journey starts here")).toBeInTheDocument();
-    expect(container.textContent).toContain("Find local advice on airport transfers, getting around Israel, day trips");
+    expect(container.textContent).toContain(
+      "Find local advice on airport transfers, getting around Israel, day trips",
+    );
     expect(container.textContent).toContain("places to stay and sights to visit.");
-    const headline = screen.getByRole("heading", { level: 1, name: "Discover Israel, Travel Smarter" });
+    const headline = screen.getByRole("heading", {
+      level: 1,
+      name: "Discover Israel, Travel Smarter",
+    });
     expect(headline).toHaveClass("md:text-5xl", "lg:max-w-none", "lg:whitespace-nowrap");
     expect(headline.nextElementSibling).toHaveClass("mt-3");
     const caption = screen.getByText("Jerusalem Old City from the Mount of Olives");
     expect(caption).not.toHaveClass("sr-only");
-    expect(caption).toHaveClass("text-left", "text-white/90", "lg:absolute", "lg:bottom-4", "lg:left-8");
-    expect(caption).toHaveStyle({ textShadow: "0 1px 3px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.75)" });
+    expect(caption).toHaveClass(
+      "text-left",
+      "text-white/90",
+      "lg:absolute",
+      "lg:bottom-4",
+      "lg:left-8",
+    );
+    expect(caption).toHaveStyle({
+      textShadow: "0 1px 3px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.75)",
+    });
     expect(caption.parentElement).toHaveClass("mt-14", "md:mt-20");
     expect(screen.getAllByRole("button", { name: /^Show / })).toHaveLength(12);
     expect(screen.queryByRole("button", { name: "Pause slideshow" })).not.toBeInTheDocument();
@@ -37,17 +52,29 @@ describe("homepage marketing copy and service sections", () => {
     // instead of depending on intrinsic image dimensions.
     const picture = container.querySelector("picture");
     expect(picture).toHaveClass("absolute", "inset-0", "h-full", "w-full");
-    expect(picture?.querySelector("img")).toHaveClass("absolute", "inset-0", "h-full", "w-full", "object-cover");
+    expect(picture?.querySelector("img")).toHaveClass(
+      "absolute",
+      "inset-0",
+      "h-full",
+      "w-full",
+      "object-cover",
+    );
     expect(screen.getByRole("group", { name: "Choose a place" })).toBeInTheDocument();
   });
   it("shows service sections without the redundant shortcut navigation under the hero", async () => {
     const router = createRouter({
-      routeTree, context: { queryClient: new QueryClient() },
-      history: createMemoryHistory({ initialEntries: ["/"] }), trailingSlash: "always",
+      routeTree,
+      context: { queryClient: new QueryClient() },
+      history: createMemoryHistory({ initialEntries: ["/"] }),
+      trailingSlash: "always",
     });
     await router.load();
     const View = HomeRoute.options.component!;
-    render(<RouterContextProvider router={router}><View /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <View />
+      </RouterContextProvider>,
+    );
     expect(screen.queryByRole("navigation", { name: "Services" })).not.toBeInTheDocument();
     // The first section follows the hero with compact spacing, without a second menu.
     const firstSection = document.getElementById("transfers")!;
@@ -64,13 +91,23 @@ describe("homepage marketing copy and service sections", () => {
       "Personal Messages from Past Clients",
       "Need a private transfer or day trip in Israel?",
     ];
-    const actualHeadings = screen.getAllByRole("heading", { level: 2 }).map(heading => heading.textContent);
+    const actualHeadings = screen
+      .getAllByRole("heading", { level: 2 })
+      .map((heading) => heading.textContent);
     expect(actualHeadings).toEqual(sectionHeadings);
     const attractionSection = document.getElementById("attractions")!;
-    const tripadvisorSection = screen.getByRole("heading", { name: "What Travelers Say" }).closest("section")!;
+    const tripadvisorSection = screen
+      .getByRole("heading", { name: "What Travelers Say" })
+      .closest("section")!;
     const guidesSectionForOrder = document.getElementById("guides")!;
-    expect(attractionSection.compareDocumentPosition(tripadvisorSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(tripadvisorSection.compareDocumentPosition(guidesSectionForOrder) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(
+      attractionSection.compareDocumentPosition(tripadvisorSection) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      tripadvisorSection.compareDocumentPosition(guidesSectionForOrder) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
 
     // Every broad-category CTA follows its own cards rather than preceding them.
     for (const [sectionId, linkName, target] of [
@@ -85,20 +122,34 @@ describe("homepage marketing copy and service sections", () => {
       expect(button).toHaveAttribute("href", target);
       expect(section.querySelector("header")?.contains(button)).toBe(false);
       expect(section.lastElementChild).toContainElement(button);
-      expect(section.querySelector('[data-testid="service-layout-' + sectionId + '"]')!.compareDocumentPosition(button) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(
+        section
+          .querySelector('[data-testid="service-layout-' + sectionId + '"]')!
+          .compareDocumentPosition(button) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
     }
     // Four airport routes use bold, full-photo destination tiles rather than compact text rows.
     const transferSection = document.getElementById("transfers")!;
-    const transferDestinations = within(transferSection).getByRole("list", { name: "Airport transfer destinations" });
+    const transferDestinations = within(transferSection).getByRole("list", {
+      name: "Airport transfer destinations",
+    });
     expect(transferDestinations).toHaveClass("grid-cols-2", "auto-rows-fr");
-    expect(transferSection.querySelector('[data-testid="service-layout-transfers"]')).toHaveClass("lg:min-h-[280px]", "lg:items-stretch");
-    expect(transferSection.querySelector('[data-testid="service-layout-transfers"]')).not.toHaveClass("lg:h-[280px]");
+    expect(transferSection.querySelector('[data-testid="service-layout-transfers"]')).toHaveClass(
+      "lg:min-h-[280px]",
+      "lg:items-stretch",
+    );
+    expect(
+      transferSection.querySelector('[data-testid="service-layout-transfers"]'),
+    ).not.toHaveClass("lg:h-[280px]");
     const transferCards = within(transferDestinations).getAllByRole("link");
     expect(transferCards).toHaveLength(4);
-    expect(transferCards.map(card => card.textContent?.trim())).toEqual([
-      "To Jerusalem", "To Tel Aviv", "To Haifa", "To Ein Bokek",
+    expect(transferCards.map((card) => card.textContent?.trim())).toEqual([
+      "To Jerusalem",
+      "To Tel Aviv",
+      "To Haifa",
+      "To Ein Bokek",
     ]);
-    expect(transferCards.map(card => card.getAttribute("href"))).toEqual([
+    expect(transferCards.map((card) => card.getAttribute("href"))).toEqual([
       "/airport-transfers/jerusalem/",
       "/airport-transfers/tel-aviv/",
       "/airport-transfers/haifa/",
@@ -110,15 +161,20 @@ describe("homepage marketing copy and service sections", () => {
       expect(within(card).getByRole("img")).toHaveClass("h-full", "w-full", "object-cover");
     }
     expect(within(transferSection).getAllByRole("img")).toHaveLength(5);
-    expect(transferCards.map(card => within(card).getByRole("img").getAttribute("src"))).toEqual([
+    expect(transferCards.map((card) => within(card).getByRole("img").getAttribute("src"))).toEqual([
       "/images/home/transfer-jerusalem-tower-of-david.webp",
       "/images/home/transfer-tel-aviv-beach-skyline.webp",
       "/images/home/transfer-haifa-bahai-gardens.webp",
       "/images/home/transfer-ein-bokek-aerial.webp",
     ]);
-    const transferHeroPhoto = transferSection.querySelector('[data-testid="service-layout-transfers"] > picture > img');
+    const transferHeroPhoto = transferSection.querySelector(
+      '[data-testid="service-layout-transfers"] > picture > img',
+    );
     expect(transferHeroPhoto).toHaveClass("aspect-[16/9]", "lg:h-full");
-    expect(transferHeroPhoto).toHaveAttribute("src", services.find(s => s.id === "transfers")?.feature?.src);
+    expect(transferHeroPhoto).toHaveAttribute(
+      "src",
+      services.find((s) => s.id === "transfers")?.feature?.src,
+    );
     expect(transferHeroPhoto).toHaveAttribute("alt", expect.stringContaining("BEN GURION AIRPORT"));
 
     // Homepage overview buttons and guide card prompts have no trailing arrows.
@@ -148,7 +204,7 @@ describe("homepage marketing copy and service sections", () => {
     const tourList = within(toursSection).getByRole("list", { name: "Tour destinations" });
     const tourTiles = within(tourList).getAllByRole("link");
     expect(tourTiles).toHaveLength(6);
-    expect(tourTiles.map(tile => tile.getAttribute("href"))).toEqual([
+    expect(tourTiles.map((tile) => tile.getAttribute("href"))).toEqual([
       "/tours/jerusalem/",
       "/tours/tel-aviv-jaffa/",
       "/tours/masada-dead-sea/",
@@ -156,7 +212,7 @@ describe("homepage marketing copy and service sections", () => {
       "/tours/nazareth-sea-of-galilee/",
       "/tours/caesarea-haifa-acre/",
     ]);
-    expect(tourTiles.map(tile => tile.textContent?.trim())).toEqual([
+    expect(tourTiles.map((tile) => tile.textContent?.trim())).toEqual([
       "Jerusalem",
       "Tel Aviv & Jaffa",
       "Masada & Dead Sea",
@@ -169,14 +225,18 @@ describe("homepage marketing copy and service sections", () => {
       expect(tile).toHaveClass("group", "relative");
     }
     expect(within(toursSection).getAllByRole("img")).toHaveLength(7); // Guide photo + six destinations
-    expect(toursSection.querySelector('[data-testid="service-layout-tours"]')).toHaveClass("lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]");
+    expect(toursSection.querySelector('[data-testid="service-layout-tours"]')).toHaveClass(
+      "lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]",
+    );
 
     // Six featured attraction destinations use the same image-tile layout as the tour cards.
     const attractionsSection = document.getElementById("attractions")!;
-    const attractionsList = within(attractionsSection).getByRole("list", { name: "Featured attractions" });
+    const attractionsList = within(attractionsSection).getByRole("list", {
+      name: "Featured attractions",
+    });
     const attractionTiles = within(attractionsList).getAllByRole("link");
     expect(attractionTiles).toHaveLength(6);
-    expect(attractionTiles.map(tile => tile.getAttribute("href"))).toEqual([
+    expect(attractionTiles.map((tile) => tile.getAttribute("href"))).toEqual([
       "/attractions/rosh-hanikra/",
       "/attractions/mitzpe-ramon-crater/",
       "/attractions/capernaum/",
@@ -184,7 +244,7 @@ describe("homepage marketing copy and service sections", () => {
       "/attractions/mount-of-olives/",
       "/attractions/eilat/",
     ]);
-    expect(attractionTiles.map(tile => tile.textContent?.trim())).toEqual([
+    expect(attractionTiles.map((tile) => tile.textContent?.trim())).toEqual([
       "Rosh Hanikra",
       "Ramon Crater",
       "Capernaum",
@@ -196,12 +256,16 @@ describe("homepage marketing copy and service sections", () => {
       expect(tile).toHaveClass("group", "relative");
       expect(within(tile).getByRole("img")).toHaveAttribute("loading", "lazy");
     }
-    expect(attractionsSection.querySelector('[data-testid="service-layout-attractions"]')).toHaveClass("lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]");
+    expect(
+      attractionsSection.querySelector('[data-testid="service-layout-attractions"]'),
+    ).toHaveClass("lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]");
     expect(within(attractionsSection).getAllByRole("img")).toHaveLength(7);
 
     // Shore-port images keep a landscape ratio, and both cards align with the shorter ship photo on desktop.
     const shoreSection = document.getElementById("shore-excursions")!;
-    const shoreLayout = shoreSection.querySelector('[data-testid="service-layout-shore-excursions"]')!;
+    const shoreLayout = shoreSection.querySelector(
+      '[data-testid="service-layout-shore-excursions"]',
+    )!;
     // A fixed 280px height lets two text-heavy port cards overflow onto the CTA
     // on wide monitors. Keep 280px as a minimum so the layout grows with its content.
     expect(shoreLayout).toHaveClass("lg:min-h-[280px]", "lg:grid-cols-2", "lg:items-stretch");
@@ -213,10 +277,11 @@ describe("homepage marketing copy and service sections", () => {
     expect(portList).not.toHaveClass("lg:h-full", "lg:grid-rows-2");
     const portLinks = within(portList).getAllByRole("link");
     expect(portLinks).toHaveLength(2);
-    expect(portLinks.map(link => link.getAttribute("href"))).toEqual([
-      "/shore-excursions/ashdod/", "/shore-excursions/haifa/",
+    expect(portLinks.map((link) => link.getAttribute("href"))).toEqual([
+      "/shore-excursions/ashdod/",
+      "/shore-excursions/haifa/",
     ]);
-    expect(portLinks.map(link => link.textContent)).toEqual([
+    expect(portLinks.map((link) => link.textContent)).toEqual([
       expect.stringContaining("From Ashdod Port"),
       expect.stringContaining("From Haifa Port"),
     ]);
@@ -234,11 +299,19 @@ describe("homepage marketing copy and service sections", () => {
 
     // The former bottom destination strip is consolidated into the accommodation section.
     const accommodationSection = document.getElementById("accommodation")!;
-    const destinationGrid = accommodationSection.querySelector<HTMLElement>('[data-testid="service-layout-accommodation"]')!;
+    const destinationGrid = accommodationSection.querySelector<HTMLElement>(
+      '[data-testid="service-layout-accommodation"]',
+    )!;
     const destinationLinks = within(destinationGrid).getAllByRole("link");
     expect(destinationLinks).toHaveLength(5);
     // Only the destination name appears over each accommodation image.
-    for (const [link, destination] of destinationLinks.map((link, i) => [link, ["Jerusalem", "Tel Aviv & Jaffa", "Tiberias & Galilee", "Dead Sea", "Haifa"][i]!] as const)) {
+    for (const [link, destination] of destinationLinks.map(
+      (link, i) =>
+        [
+          link,
+          ["Jerusalem", "Tel Aviv & Jaffa", "Tiberias & Galilee", "Dead Sea", "Haifa"][i]!,
+        ] as const,
+    )) {
       expect(link.textContent?.trim()).toBe(destination);
     }
     for (const removedDescription of [
@@ -250,7 +323,7 @@ describe("homepage marketing copy and service sections", () => {
     ]) {
       expect(accommodationSection).not.toHaveTextContent(removedDescription);
     }
-    expect(destinationLinks.map(link => link.getAttribute("href"))).toEqual([
+    expect(destinationLinks.map((link) => link.getAttribute("href"))).toEqual([
       "/accommodation/jerusalem/",
       "/accommodation/tel-aviv/",
       "/accommodation/tiberias/",
@@ -260,7 +333,7 @@ describe("homepage marketing copy and service sections", () => {
     expect(within(accommodationSection).getAllByRole("img")).toHaveLength(5);
     // The five landscape source images keep more of each destination view than the old portrait crops.
     const stayImages = within(accommodationSection).getAllByRole("img");
-    expect(stayImages.map(image => image.getAttribute("src"))).toEqual([
+    expect(stayImages.map((image) => image.getAttribute("src"))).toEqual([
       "/images/home/accommodation-jerusalem-ai.webp",
       "/images/home/accommodation-tel-aviv-jaffa-ai.webp",
       "/images/home/accommodation-tiberias-galilee-ai.webp",
@@ -271,36 +344,63 @@ describe("homepage marketing copy and service sections", () => {
       expect(image).toHaveClass("aspect-[3/2]", "xl:aspect-[6/5]", "object-cover");
     }
     // Photo cards remain bright; destination titles are white with a text-only shadow, not a background.
-    for (const photoLink of [...transferCards, ...tourTiles, ...attractionTiles, ...destinationLinks]) {
+    for (const photoLink of [
+      ...transferCards,
+      ...tourTiles,
+      ...attractionTiles,
+      ...destinationLinks,
+    ]) {
       expect(photoLink.querySelector('[class*="bg-gradient-to-t"]')).not.toBeInTheDocument();
-      const photoTitle = Array.from(photoLink.querySelectorAll("span")).find(label => label.textContent?.trim() === photoLink.textContent?.trim());
+      const photoTitle = Array.from(photoLink.querySelectorAll("span")).find(
+        (label) => label.textContent?.trim() === photoLink.textContent?.trim(),
+      );
       expect(photoTitle).toHaveClass("text-white");
       expect(photoTitle).not.toHaveClass("bg-background/95");
-      expect(photoTitle).toHaveStyle({ textShadow: "0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.75)" });
+      expect(photoTitle).toHaveStyle({
+        textShadow: "0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.75)",
+      });
     }
-    expect(within(accommodationSection).getByRole("link", { name: /Explore all accommodation/i })).toHaveAttribute("href", "/accommodation/");
+    expect(
+      within(accommodationSection).getByRole("link", { name: /Explore all accommodation/i }),
+    ).toHaveAttribute("href", "/accommodation/");
     expect(screen.queryByText("Where to Base Yourself")).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Popular Destinations" })).not.toBeInTheDocument();
 
     const guidesSection = document.getElementById("guides")!;
-    expect(homeGuideCards.first.find(guide => guide.id === "uber")?.photo?.src).toBe(guideHeroPhotoForPath("/travel-blog/uber-in-israel/")?.src);
-    expect(guidesSection.querySelector('a[href="/travel-blog/uber-in-israel/"] img')).toHaveAttribute("src", guideHeroPhotoForPath("/travel-blog/uber-in-israel/")?.src);
+    expect(homeGuideCards.first.find((guide) => guide.id === "uber")?.photo?.src).toBe(
+      guideHeroPhotoForPath("/travel-blog/uber-in-israel/")?.src,
+    );
+    expect(
+      guidesSection.querySelector('a[href="/travel-blog/uber-in-israel/"] img'),
+    ).toHaveAttribute("src", guideHeroPhotoForPath("/travel-blog/uber-in-israel/")?.src);
     const guideButton = within(guidesSection).getByRole("link", { name: /Browse all guides/i });
     expect(guideButton).toHaveAttribute("href", "/travel-blog/");
     expect(guidesSection.lastElementChild).toContainElement(guideButton);
 
     const aboutMoshe = screen.getByRole("complementary", { name: "About Moshe Barak" });
     expect(within(aboutMoshe).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
-    expect(within(aboutMoshe).getByRole("link", { name: "Read more about me" })).toHaveAttribute("href", "/about-me/");
-    expect(within(aboutMoshe).getByRole("link", { name: /Read Reviews on TripAdvisor/i })).toBeInTheDocument();
+    expect(within(aboutMoshe).getByRole("link", { name: "Read more about me" })).toHaveAttribute(
+      "href",
+      "/about-me/",
+    );
+    expect(
+      within(aboutMoshe).getByRole("link", { name: /Read Reviews on TripAdvisor/i }),
+    ).toBeInTheDocument();
     const homepageContact = document.getElementById("contact")!;
     expect(homepageContact).toBeInTheDocument();
     expect(homepageContact.querySelector('[data-photo-role="contact-portrait"]')).toBeNull();
     expect(homepageContact.querySelector('[data-testid="contact-reviews-row"]')).toBeNull();
-    expect(homepageContact.querySelector('[data-testid="contact-tripadvisor-reviews"] a[href*="tripadvisor"]')).toBeNull();
-    expect(within(homepageContact).getByRole("form", { name: "Homepage contact message" })).toBeInTheDocument();
+    expect(
+      homepageContact.querySelector(
+        '[data-testid="contact-tripadvisor-reviews"] a[href*="tripadvisor"]',
+      ),
+    ).toBeNull();
+    expect(
+      within(homepageContact).getByRole("form", { name: "Homepage contact message" }),
+    ).toBeInTheDocument();
 
-    expect(screen.queryByRole("heading", { name: /Airport Transfers & Private Drivers/i })).not.toBeInTheDocument();
-
+    expect(
+      screen.queryByRole("heading", { name: /Airport Transfers & Private Drivers/i }),
+    ).not.toBeInTheDocument();
   });
 });

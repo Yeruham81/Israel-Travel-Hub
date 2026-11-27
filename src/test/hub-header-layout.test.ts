@@ -31,7 +31,7 @@ describe("consistent top-of-page layout for service and discovery hubs", () => {
     const hub = read("src/components/Guide.tsx");
     expect(hub).toContain('data-testid="hub-header"');
     expect(hub).toContain('<h1 className="guide-page-title mt-3 max-w-4xl">');
-    expect(hub).toContain('data-guide-intro');
+    expect(hub).toContain("data-guide-intro");
   });
 
   it("keeps concise and useful opening paragraphs rather than long promotional banners", () => {

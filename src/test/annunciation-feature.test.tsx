@@ -21,8 +21,8 @@ describe("Basilica of the Annunciation attraction guide", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("Free entry");
-    expect(content.facts.find(f => f.label === "Visitor hours")?.value).toBe("08:00–18:00");
+    expect(content.facts.find((f) => f.label === "Admission")?.value).toBe("Free entry");
+    expect(content.facts.find((f) => f.label === "Visitor hours")?.value).toBe("08:00–18:00");
     expect(travelGuides.annunciation.title).toBe(content.title);
     expect(travelGuides.annunciation.photo).toEqual(site.hero);
     expect(travelGuides.annunciation.updatedAt).toBe(site.updatedAt);
@@ -30,19 +30,26 @@ describe("Basilica of the Annunciation attraction guide", () => {
     expect(travelGuides.annunciation.faqs).toHaveLength(0);
     expect(travelGuides.annunciation.comparison.rows).toHaveLength(0);
     expect(travelGuides.annunciation.sourceIds).toEqual([
-      "m26-annunciation", "m26-annunciation-hours", "m26-annunciation-brochure", "m26-annunciation-parish"
+      "m26-annunciation",
+      "m26-annunciation-hours",
+      "m26-annunciation-brochure",
+      "m26-annunciation-parish",
     ]);
-    const citations = publicSources(travelGuides.annunciation.sourceIds).map(source => source.url);
-    expect(citations).toEqual(content.sources.map(source => source.url));
-    const jsonLd = travelGuideMeta("annunciation").scripts
-      .map(script => JSON.parse(script.children as string))
-      .find(script => script["@type"] === "Article");
+    const citations = publicSources(travelGuides.annunciation.sourceIds).map(
+      (source) => source.url,
+    );
+    expect(citations).toEqual(content.sources.map((source) => source.url));
+    const jsonLd = travelGuideMeta("annunciation")
+      .scripts.map((script) => JSON.parse(script.children as string))
+      .find((script) => script["@type"] === "Article");
     expect(jsonLd.citation).toEqual(citations);
     expect(jsonLd.dateModified).toBe("2026-11-17");
-    expect(attractionHubCards.filter(c => String(c.to) === String(content.path))).toHaveLength(1);
+    expect(attractionHubCards.filter((c) => String(c.to) === String(content.path))).toHaveLength(1);
     expect(shell).toMatch(sourceFragment('["contact", "Contact me"]'));
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
-    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(sourceIndex(shell, "<HomeContactForm"));
+    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(
+      sourceIndex(shell, "<HomeContactForm"),
+    );
   });
 
   it("shows meaningful photos, practical visiting details and six connected attractions", () => {
@@ -84,7 +91,7 @@ describe("Basilica of the Annunciation attraction guide", () => {
     expect(article).toMatch(sourceFragment('data-testid="annunciation-visitor-essentials"'));
     expect(article).toMatch(sourceFragment('href="#contact"'));
     expect(content.nearby).toHaveLength(6);
-    expect(new Set(content.nearby!.map(item => item.to)).size).toBe(6);
+    expect(new Set(content.nearby!.map((item) => item.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(8);
     expect(content.sources).toHaveLength(4);
@@ -101,10 +108,12 @@ describe("Basilica of the Annunciation attraction guide", () => {
       "public/images/attractions/mount-precipice-jezreel-view.webp",
       "src/assets/guides/2026-10/basilica-of-the-annunciation.webp",
     ];
-    const uniqueHashes = new Set(imageFiles.map(path => {
-      expect(existsSync(path), path).toBe(true);
-      return createHash("sha256").update(readFileSync(path)).digest("hex");
-    }));
+    const uniqueHashes = new Set(
+      imageFiles.map((path) => {
+        expect(existsSync(path), path).toBe(true);
+        return createHash("sha256").update(readFileSync(path)).digest("hex");
+      }),
+    );
     expect(uniqueHashes.size).toBe(imageFiles.length);
   });
 });

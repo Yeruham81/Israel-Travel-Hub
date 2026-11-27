@@ -23,8 +23,18 @@ describe("Mount Zion map with all seven pins", () => {
   });
 
   it("shows seven numbered places, with distinct central and lower areas", () => {
-    const ids = ["zion-gate", "dormition", "cenacle", "david-tomb", "holocaust", "gallicantu", "schindler"];
-    const listed = [...component.matchAll(/\{\s*id:\s*"([^"]+)",\s*name:/g)].map(match => match[1]);
+    const ids = [
+      "zion-gate",
+      "dormition",
+      "cenacle",
+      "david-tomb",
+      "holocaust",
+      "gallicantu",
+      "schindler",
+    ];
+    const listed = [...component.matchAll(/\{\s*id:\s*"([^"]+)",\s*name:/g)].map(
+      (match) => match[1],
+    );
     expect(listed).toEqual(ids);
     for (const id of ids) expect(mapPage).toContain(id);
     expect(mapPage).toContain("points.length!==7");

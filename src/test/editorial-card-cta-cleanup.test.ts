@@ -48,10 +48,14 @@ describe("whole-card editorial navigation without redundant CTA footers", () => 
   it("omits repeated explore/read prompts from the related-card template", () => {
     for (const file of editorialCardFiles) {
       const source = read(file);
-      expect(source, file).not.toMatch(/<span className="[^"]+">\s*(Explore my guide|Explore guide|Read my guide)\s*(?:<|\{)/);
+      expect(source, file).not.toMatch(
+        /<span className="[^"]+">\s*(Explore my guide|Explore guide|Read my guide)\s*(?:<|\{)/,
+      );
     }
     const generic = read("src/components/Guide.tsx");
-    expect(generic).not.toContain('className="mt-3 text-sm font-semibold text-primary">Read more</span>');
+    expect(generic).not.toContain(
+      'className="mt-3 text-sm font-semibold text-primary">Read more</span>',
+    );
     const directory = read("src/components/GuideCard.tsx");
     expect(directory).not.toContain(">Read more{showReadMoreArrow");
   });

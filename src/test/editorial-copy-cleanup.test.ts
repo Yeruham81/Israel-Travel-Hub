@@ -8,12 +8,14 @@ describe("visitor-facing editorial copy", () => {
   it("keeps location maps focused on the places being shown", () => {
     const baptism = source("src/components/JordanRiverBaptismGuide.tsx");
     expect(baptism).toContain('pinMode: "locations"');
-    expect(baptism).toContain('waypoints: JSON.stringify(baptismMapLocations)');
+    expect(baptism).toContain("waypoints: JSON.stringify(baptismMapLocations)");
     expect(baptism).not.toContain("maps?saddr=");
     expect(baptism).not.toContain("not a guaranteed travel time or current road access");
 
     const telAviv = source("src/components/TelAvivAttractionsGuide.tsx");
-    expect(telAviv).not.toContain("Map positions are approximate orientation points, not an itinerary");
+    expect(telAviv).not.toContain(
+      "Map positions are approximate orientation points, not an itinerary",
+    );
     const topTen = source("src/components/TopTenIsraelGuide.tsx");
     expect(topTen).not.toContain("not a suggested driving route");
     const churches = source("src/components/JerusalemChurchesGuide.tsx");

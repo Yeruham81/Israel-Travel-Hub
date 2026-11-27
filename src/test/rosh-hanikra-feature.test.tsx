@@ -19,8 +19,8 @@ describe("Rosh Hanikra attraction guide", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Entry")?.value).toBe("₪47 adult");
-    expect(content.facts.find(f => f.label === "Accessibility")?.value).toBe("Partly accessible");
+    expect(content.facts.find((f) => f.label === "Entry")?.value).toBe("₪47 adult");
+    expect(content.facts.find((f) => f.label === "Accessibility")?.value).toBe("Partly accessible");
     expect(attractionGuides["rosh-hanikra"].title).toBe(content.title);
     expect(attractionGuides["rosh-hanikra"].description).toBe(site.description);
     expect(attractionGuides["rosh-hanikra"].image).toEqual(site.hero);
@@ -28,16 +28,18 @@ describe("Rosh Hanikra attraction guide", () => {
     expect(attractionGuides["rosh-hanikra"].arrival).toHaveLength(0);
     expect(attractionGuides["rosh-hanikra"].faqs).toHaveLength(0);
     expect(JSON.stringify(attractionMeta("rosh-hanikra").scripts)).toContain("2026-11-17");
-    const metaCitation = attractionMeta("rosh-hanikra").scripts
-      .map(script => JSON.parse(script.children as string))
-      .find(script => script["@type"] === "Article");
-    expect(metaCitation.citation).toEqual(content.sources.map(source => source.url));
-    expect(attractionHubCards.filter(card => String(card.to) === String(content.path))).toHaveLength(1);
+    const metaCitation = attractionMeta("rosh-hanikra")
+      .scripts.map((script) => JSON.parse(script.children as string))
+      .find((script) => script["@type"] === "Article");
+    expect(metaCitation.citation).toEqual(content.sources.map((source) => source.url));
+    expect(
+      attractionHubCards.filter((card) => String(card.to) === String(content.path)),
+    ).toHaveLength(1);
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
     expect(content.nearby).toHaveLength(6);
-    expect(new Set(content.nearby!.map(item => item.to)).size).toBe(6);
+    expect(new Set(content.nearby!.map((item) => item.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(8);
     expect(content.sources).toHaveLength(5);
@@ -52,7 +54,7 @@ describe("Rosh Hanikra attraction guide", () => {
       "public/images/attractions/rosh-hanikra-railway-tunnel.webp",
       "public/images/attractions/rosh-hanikra-cliffs.webp",
     ];
-    const hashes = imageFiles.map(path => {
+    const hashes = imageFiles.map((path) => {
       expect(existsSync(path), path).toBe(true);
       return createHash("sha256").update(readFileSync(path)).digest("hex");
     });

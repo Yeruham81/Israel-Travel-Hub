@@ -35,7 +35,8 @@ describe("Haifa city-attractions guide", () => {
   });
   it("distinguishes free gardens, booked tours, hillside travel and transport systems", () => {
     const page = readFileSync("src/components/HaifaAttractionPage.tsx", "utf8");
-    for(const address of ["61 Yefe Nof", "80 Hatzionut", "21 Hagefen", "45 Yefe Nof"]) expect(page).toMatch(sourceFragment(address));
+    for (const address of ["61 Yefe Nof", "80 Hatzionut", "21 Hagefen", "45 Yefe Nof"])
+      expect(page).toMatch(sourceFragment(address));
     expect(page).toMatch(sourceFragment("750 stairs"));
     expect(page).toContain("Carmelit");
     expect(page).toContain("Rakavlit");
@@ -45,30 +46,40 @@ describe("Haifa city-attractions guide", () => {
     expect(page).not.toMatch(sourceFragment("Most attractions are free"));
     expect(page).not.toMatch(sourceFragment("walk down through the terraces"));
     expect(page).toMatch(sourceFragment("<ExternalProviderTourCard"));
-    expect(readFileSync("src/components/ExternalProviderTourCard.tsx", "utf8")).toMatch(sourceFragment("rel={relFor(affiliate)}"));
+    expect(readFileSync("src/components/ExternalProviderTourCard.tsx", "utf8")).toMatch(
+      sourceFragment("rel={relFor(affiliate)}"),
+    );
     expect(page).toContain("tour-coast-private-rosh-hanikra-viator@tours-northern-coast");
     expect(page).toContain("tour-caesarea-haifa-akko-getyourguide@tours-northern-coast");
   });
   it("appears in Attractions hub and Haifa & Coast sidebar without the retired alias", () => {
-    const hub = attractionHubRegions.find(r => r.id === "haifa-coast");
-    expect(hub?.cards.filter(c => c.id === "haifa")).toHaveLength(1);
-    expect(hub?.cards.find(c => c.id === "haifa")?.to).toBe("/attractions/haifa/");
-    const nav = attractionSidebarRegions.find(g => g.label === "Haifa & Coast");
+    const hub = attractionHubRegions.find((r) => r.id === "haifa-coast");
+    expect(hub?.cards.filter((c) => c.id === "haifa")).toHaveLength(1);
+    expect(hub?.cards.find((c) => c.id === "haifa")?.to).toBe("/attractions/haifa/");
+    const nav = attractionSidebarRegions.find((g) => g.label === "Haifa & Coast");
     expect(nav && "children" in nav).toBeTruthy();
-    if(nav && "children" in nav) expect(nav.children?.find(x => x.label === "Haifa")?.to).toBe("/attractions/haifa/");
+    if (nav && "children" in nav)
+      expect(nav.children?.find((x) => x.label === "Haifa")?.to).toBe("/attractions/haifa/");
     expect(existsSync("src/routes/travel-blog.haifa.tsx")).toBe(false);
     expect(existsSync("src/routes/attractions.haifa.tsx")).toBe(true);
   });
   it("has canonical metadata, researched references and cached photos", () => {
     const meta = haifaMeta();
-    expect(meta.links.find(l => l.rel === "canonical")?.href).toContain("/attractions/haifa/");
+    expect(meta.links.find((l) => l.rel === "canonical")?.href).toContain("/attractions/haifa/");
     expect(haifaSite.official.bahai).toContain("ganbahai.org.il");
     expect(content.sources).toHaveLength(12);
     expect(content.photoCredits).toBeTruthy();
     const images = [
-      "haifa-bahai-gardens.webp", "haifa-stella-maris.webp", "haifa-cable-car.webp", "haifa-beach.webp",
-      "haifa-german-colony.webp", "haifa-wadi-nisnas.webp", "haifa-turkish-market.webp", "haifa-bat-galim.webp",
+      "haifa-bahai-gardens.webp",
+      "haifa-stella-maris.webp",
+      "haifa-cable-car.webp",
+      "haifa-beach.webp",
+      "haifa-german-colony.webp",
+      "haifa-wadi-nisnas.webp",
+      "haifa-turkish-market.webp",
+      "haifa-bat-galim.webp",
     ];
-    for(const name of images) expect(existsSync("public/images/attractions/" + name), name).toBe(true);
+    for (const name of images)
+      expect(existsSync("public/images/attractions/" + name), name).toBe(true);
   });
 });

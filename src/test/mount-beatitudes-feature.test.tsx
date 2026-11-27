@@ -13,10 +13,10 @@ describe("Mount of Beatitudes individual attraction upgrade", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Morning hours")?.value).toBe("08:00–11:30");
-    expect(content.facts.find(f => f.label === "Afternoon hours")?.value).toBe("14:00–16:30");
-    expect(content.facts.find(f => f.label === "Entrance fee")?.value).toBe("₪10");
-    expect(content.facts.find(f => f.label === "Entrance fee")?.note).toBe("Per person");
+    expect(content.facts.find((f) => f.label === "Morning hours")?.value).toBe("08:00–11:30");
+    expect(content.facts.find((f) => f.label === "Afternoon hours")?.value).toBe("14:00–16:30");
+    expect(content.facts.find((f) => f.label === "Entrance fee")?.value).toBe("₪10");
+    expect(content.facts.find((f) => f.label === "Entrance fee")?.note).toBe("Per person");
     expect(site.visit.entryPerPerson).toBe("₪10");
     expect(content.visitorTitle).toBe("Opening hours, admission and visitor information");
     expect(content.visitorNavLabel).toBe("Hours & admission");
@@ -26,7 +26,7 @@ describe("Mount of Beatitudes individual attraction upgrade", () => {
     expect(attractionGuides["mount-of-beatitudes"].planning).toHaveLength(0);
     expect(attractionGuides["mount-of-beatitudes"].faqs).toHaveLength(0);
     expect(JSON.stringify(attractionMeta("mount-of-beatitudes").scripts)).toContain("2026-11-17");
-    expect(attractionHubCards.filter(c => String(c.to) === String(content.path))).toHaveLength(1);
+    expect(attractionHubCards.filter((c) => String(c.to) === String(content.path))).toHaveLength(1);
   });
 
   it("uses original local site photographs, regional referrals and useful next steps", () => {
@@ -40,7 +40,7 @@ describe("Mount of Beatitudes individual attraction upgrade", () => {
       expect(existsSync("public" + path)).toBe(true);
       expect(article.split(path).length - 1).toBe(1);
     }
-    expect(content.nearby?.map(x => x.to)).toEqual([
+    expect(content.nearby?.map((x) => x.to)).toEqual([
       "/attractions/tabgha/",
       "/attractions/capernaum/",
       "/attractions/magdala/",
@@ -56,7 +56,7 @@ describe("Mount of Beatitudes individual attraction upgrade", () => {
     expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain("three to five stops");
     expect(content.sources).toHaveLength(4);
-    expect(content.sources.every(s => s.url.startsWith("https://"))).toBe(true);
+    expect(content.sources.every((s) => s.url.startsWith("https://"))).toBe(true);
   });
 
   it("uses one pin on Google Maps, clear visiting hours and one shared form", () => {
@@ -68,7 +68,9 @@ describe("Mount of Beatitudes individual attraction upgrade", () => {
     expect(article).toContain('data-testid="beatitudes-location-map"');
     expect(article).toContain('data-testid="beatitudes-visitor-essentials"');
     expect(article).toContain("maps.google.com/maps?q=Church%20of%20the%20Beatitudes");
-    expect(article).toContain("www.google.com/maps/search/?api=1&query=Church%20of%20the%20Beatitudes");
+    expect(article).toContain(
+      "www.google.com/maps/search/?api=1&query=Church%20of%20the%20Beatitudes",
+    );
     expect(article).not.toContain("openstreetmap");
     expect(article).not.toContain("saddr=");
     expect(article).not.toContain("daddr=");
@@ -91,8 +93,14 @@ describe("Mount of Beatitudes individual attraction upgrade", () => {
 
   it("places the lake panorama with the gardens, clarifies contacts and avoids visitor-copy repetition", () => {
     const article = readFileSync("src/components/MountBeatitudesAttractionPage.tsx", "utf8");
-    const highlights = article.slice(article.indexOf("highlightContent: ("), article.indexOf("visitorContent: ("));
-    const visitPlan = article.slice(article.indexOf("itineraryContent: ("), article.indexOf("historyContent: ("));
+    const highlights = article.slice(
+      article.indexOf("highlightContent: ("),
+      article.indexOf("visitorContent: ("),
+    );
+    const visitPlan = article.slice(
+      article.indexOf("itineraryContent: ("),
+      article.indexOf("historyContent: ("),
+    );
     expect(highlights).toContain('title="Gardens and views over the Sea of Galilee"');
     expect(highlights).toContain("/images/attractions/beatitudes-sea-view.webp");
     expect(highlights).toContain("The Sea of Galilee as seen from the Mount of Beatitudes.");
@@ -109,8 +117,13 @@ describe("Mount of Beatitudes individual attraction upgrade", () => {
     expect(article).not.toContain("for visitor arrangements.");
     expect(article).toContain("The site is closed between 11:30 and 14:00");
     expect(article).not.toContain("Avoid the midday closure.");
-    expect(content.faqs?.find(item => item.q === "What are the visiting hours?")?.a).toContain("with a midday closure in between");
-    expect(content.sources.some(item => item.label.includes("prayer, Mass and guesthouse arrangements"))).toBe(true);
+    expect(content.faqs?.find((item) => item.q === "What are the visiting hours?")?.a).toContain(
+      "with a midday closure in between",
+    );
+    expect(
+      content.sources.some((item) =>
+        item.label.includes("prayer, Mass and guesthouse arrangements"),
+      ),
+    ).toBe(true);
   });
-
 });

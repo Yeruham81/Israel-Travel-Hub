@@ -12,13 +12,23 @@ describe("18 attraction destination guides", () => {
   it("defines a complete guide at each unique route without legacy-site links", () => {
     expect(attractionIds).toHaveLength(18);
     expect(new Set(attractionIds).size).toBe(18);
-    const router = createRouter({routeTree,context:{queryClient:new QueryClient()},trailingSlash:"always"});
+    const router = createRouter({
+      routeTree,
+      context: { queryClient: new QueryClient() },
+      trailingSlash: "always",
+    });
     for (const id of attractionIds) {
       const guide = attractionGuides[id];
       expect(guide.title.length).toBeGreaterThan(22);
       // Upgraded individual-attraction guides use dedicated, researched components.
       // Their legacy registry entries hold metadata rather than duplicate body content.
-      if (id !== "capernaum" && id !== "tabgha" && id !== "mount-of-beatitudes" && id !== "mount-tabor" && id !== "rosh-hanikra") {
+      if (
+        id !== "capernaum" &&
+        id !== "tabgha" &&
+        id !== "mount-of-beatitudes" &&
+        id !== "mount-tabor" &&
+        id !== "rosh-hanikra"
+      ) {
         expect(guide.highlights.length).toBeGreaterThanOrEqual(3);
         expect(guide.arrival.length).toBeGreaterThanOrEqual(3);
         expect(guide.faqs.length).toBeGreaterThanOrEqual(3);
@@ -30,8 +40,10 @@ describe("18 attraction destination guides", () => {
       expect(attractionMeta(id).links[0]?.href).toContain(p);
       expect(JSON.stringify(guide)).not.toMatch(/israel-taxi\.com|Original guide|legacy source/i);
       expect(guide.official.length).toBeGreaterThan(0);
-      expect(guide.official.every(entry => /^https:\/\//.test(entry.url))).toBe(true);
-      expect(guide.highlights.every(item => item.name && item.description && item.tip)).toBe(true);
+      expect(guide.official.every((entry) => /^https:\/\//.test(entry.url))).toBe(true);
+      expect(guide.highlights.every((item) => item.name && item.description && item.tip)).toBe(
+        true,
+      );
     }
   });
   it("keeps regional overviews in Travel Guides and individual sites in Attractions", () => {
@@ -40,11 +52,11 @@ describe("18 attraction destination guides", () => {
     for (const id of attractionIds) {
       const url = attractionPath(id);
       if (isRegionalOverview(id)) {
-        expect(attractionItems.some(guide => guide.to === url)).toBe(true);
-        expect(attractionHubCards.some(card => card.to === url)).toBe(false);
+        expect(attractionItems.some((guide) => guide.to === url)).toBe(true);
+        expect(attractionHubCards.some((card) => card.to === url)).toBe(false);
       } else {
-        expect(attractionItems.some(guide => guide.to === url)).toBe(false);
-        expect(attractionHubCards.filter(card => card.to === url)).toHaveLength(1);
+        expect(attractionItems.some((guide) => guide.to === url)).toBe(false);
+        expect(attractionHubCards.filter((card) => card.to === url)).toHaveLength(1);
       }
     }
   });

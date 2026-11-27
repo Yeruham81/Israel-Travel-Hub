@@ -16,14 +16,14 @@ describe("Mount Tabor individual attraction guide", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Summit access")?.value).toBe("Car or local taxi");
+    expect(content.facts.find((f) => f.label === "Summit access")?.value).toBe("Car or local taxi");
     expect(attractionGuides["mount-tabor"].title).toBe(content.title);
     expect(attractionGuides["mount-tabor"].image).toEqual(site.hero);
     expect(attractionGuides["mount-tabor"].highlights).toHaveLength(0);
     expect(attractionGuides["mount-tabor"].arrival).toHaveLength(0);
     expect(attractionGuides["mount-tabor"].faqs).toHaveLength(0);
     expect(JSON.stringify(attractionMeta("mount-tabor").scripts)).toContain("2026-11-17");
-    expect(attractionHubCards.filter(c => String(c.to) === String(content.path))).toHaveLength(1);
+    expect(attractionHubCards.filter((c) => String(c.to) === String(content.path))).toHaveLength(1);
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));

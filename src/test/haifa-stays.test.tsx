@@ -7,7 +7,12 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { HotelDestinationPage } from "@/components/HotelDestinationPage";
 import { HotelCategoryPage } from "@/components/HotelCategoryPage";
 import { haifaStayGuide as destination, hotelCategoryGuides } from "@/data/content";
-import { getSource, linksForPage, providerLinks, haifaHotelRecommendations as hotels } from "@/data/registry";
+import {
+  getSource,
+  linksForPage,
+  providerLinks,
+  haifaHotelRecommendations as hotels,
+} from "@/data/registry";
 import { hotelNav } from "@/data/nav";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";
@@ -18,32 +23,75 @@ import { Route as FamilyRoute } from "@/routes/accommodation.haifa.family";
 import { Route as BoutiqueRoute } from "@/routes/accommodation.haifa.boutique";
 
 vi.mock("@tanstack/react-router", async () => {
-  const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
-  return { ...actual, Link: ({ to, hash, children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement> & { to: string; hash?: string; children?: ReactNode }) => <a href={hash ? `${to}#${hash}` : to} {...props}>{children}</a> };
+  const actual =
+    await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
+  return {
+    ...actual,
+    Link: ({
+      to,
+      hash,
+      children,
+      ...props
+    }: AnchorHTMLAttributes<HTMLAnchorElement> & {
+      to: string;
+      hash?: string;
+      children?: ReactNode;
+    }) => (
+      <a href={hash ? `${to}#${hash}` : to} {...props}>
+        {children}
+      </a>
+    ),
+  };
 });
 
-afterEach(() => { cleanup(); localStorage.clear(); });
+afterEach(() => {
+  cleanup();
+  localStorage.clear();
+});
 const categories = hotelCategoryGuides.filter((guide) => guide.destinationId === destination.id);
 
 describe("Haifa accommodation: location and travel intent before booking", () => {
   it("uses the original destination path with two independent category routes and a global hotel shortcut", () => {
-    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
+    const router = createRouter({
+      routeTree,
+      context: { queryClient: new QueryClient() },
+      trailingSlash: "always",
+    });
     expect(destination.path).toBe("/accommodation/haifa/");
-    for (const path of [destination.path, "/accommodation/haifa/boutique/", "/accommodation/haifa/family/"]) {
-      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path === destination.path ? path : path.replace(/\/$/, ""));
+    for (const path of [
+      destination.path,
+      "/accommodation/haifa/boutique/",
+      "/accommodation/haifa/family/",
+    ]) {
+      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(
+        path === destination.path ? path : path.replace(/\/$/, ""),
+      );
     }
     expect(hotelNav.find((item) => item.label === "Hotels in Haifa")?.to).toBe(destination.path);
   });
 
   it("gives the three pages distinct metadata, canonicals and Haifa breadcrumbs while retaining staging noindex", async () => {
-    const records = [{ route: DestinationRoute, guide: destination }, { route: FamilyRoute, guide: categories.find((g) => g.id === "family")! }, { route: BoutiqueRoute, guide: categories.find((g) => g.id === "boutique")! }];
+    const records = [
+      { route: DestinationRoute, guide: destination },
+      { route: FamilyRoute, guide: categories.find((g) => g.id === "family")! },
+      { route: BoutiqueRoute, guide: categories.find((g) => g.id === "boutique")! },
+    ];
     expect(new Set(records.map(({ guide }) => guide.title)).size).toBe(3);
     expect(new Set(records.map(({ guide }) => guide.metaDescription)).size).toBe(3);
     for (const { route, guide } of records) {
       expect(await route.options.head?.({} as never)).toMatchObject({
-        meta: expect.arrayContaining([{ title: guide.title }, { name: "description", content: guide.metaDescription }, { name: "robots", content: "noindex,nofollow" }]),
+        meta: expect.arrayContaining([
+          { title: guide.title },
+          { name: "description", content: guide.metaDescription },
+          { name: "robots", content: "noindex,nofollow" },
+        ]),
         links: [{ rel: "canonical", href: CANONICAL_ORIGIN + guide.path }],
-        scripts: expect.arrayContaining([expect.objectContaining({ type: "application/ld+json", children: expect.stringContaining(CANONICAL_ORIGIN + destination.path) })]),
+        scripts: expect.arrayContaining([
+          expect.objectContaining({
+            type: "application/ld+json",
+            children: expect.stringContaining(CANONICAL_ORIGIN + destination.path),
+          }),
+        ]),
       });
     }
   });
@@ -57,68 +105,128 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     expect(screen.getByTestId("regional-hotel-count")).toHaveTextContent("Showing 6 of 10 hotels");
     fireEvent.click(screen.getByTestId("regional-hotel-expand"));
     expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(10);
-    for (const hotel of hotels) expect(container.querySelectorAll(`#hotel-${hotel.id}`)).toHaveLength(1);
+    for (const hotel of hotels)
+      expect(container.querySelectorAll(`#hotel-${hotel.id}`)).toHaveLength(1);
     const cards = screen.getAllByTestId("stay-category-card");
     expect(cards).toHaveLength(2);
-    for (const guide of categories) expect(cards.find((card) => card.getAttribute("href") === guide.path)!.querySelector("img")).toHaveAttribute("src", guide.photo.src);
-    const map = new URL(container.querySelector("#location iframe")!.getAttribute("src")!, "https://example.test");
+    for (const guide of categories)
+      expect(
+        cards.find((card) => card.getAttribute("href") === guide.path)!.querySelector("img"),
+      ).toHaveAttribute("src", guide.photo.src);
+    const map = new URL(
+      container.querySelector("#location iframe")!.getAttribute("src")!,
+      "https://example.test",
+    );
     expect(map.hostname).toBe("maps.google.com");
     expect(map.searchParams.get("q")).toBe(`${destination.map.lat},${destination.map.lon}`);
     expect(map.searchParams.get("output")).toBe("embed");
-    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#location")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(container.querySelector('#explore a[href="/shore-excursions/haifa/"]')).toBeInTheDocument();
+    expect(
+      container
+        .querySelector("#book")!
+        .compareDocumentPosition(container.querySelector("#location")!),
+    ).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(
+      container.querySelector('#explore a[href="/shore-excursions/haifa/"]'),
+    ).toBeInTheDocument();
     expect(container.querySelectorAll("main")).toHaveLength(1);
   });
 
-  it.each(categories)("$shortTitle has a distinct comparison with correct parent, sibling and sources", (guide) => {
-    const { container } = render(<HotelCategoryPage guide={guide} destination={destination} />);
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
-    expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(3);
-    expect(screen.getAllByTestId("stay-comparison-row")).toHaveLength(3);
-    for (const column of guide.comparison) expect(screen.getByRole("columnheader", { name: column.label })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: guide.overviewTitle })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: guide.detailTitle })).toBeInTheDocument();
-    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#details")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: "Haifa" })).toHaveAttribute("href", destination.path);
-    expect(screen.getByRole("link", { name: /See the map and compare/ })).toHaveAttribute("href", `${destination.path}#location`);
-    expect(screen.getByRole("link", { name: categories.find((other) => other.id !== guide.id)!.title })).toBeInTheDocument();
-    expect(container.querySelector(`#sources a[href="${getSource("owner-hotels-haifa").url}"]`)).toBeNull();
-    expect(container.querySelector('#sources a[href^="https://"]')).not.toBeNull();
-    for (const id of ["owner-hotels-tiberias", "owner-hotels-deadsea"]) expect(container.querySelector(`#sources a[href="${getSource(id).url}"]`)).toBeNull();
-    expect(container.textContent).not.toMatch(/Ein Bokek|Ein Gedi|Tiberias|Dead Sea/);
-    expect(container.querySelector('a[href^="/tiberias/"], a[href^="/dead-sea/"]')).toBeNull();
-  });
+  it.each(categories)(
+    "$shortTitle has a distinct comparison with correct parent, sibling and sources",
+    (guide) => {
+      const { container } = render(<HotelCategoryPage guide={guide} destination={destination} />);
+      expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
+      expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(3);
+      expect(screen.getAllByTestId("stay-comparison-row")).toHaveLength(3);
+      for (const column of guide.comparison)
+        expect(screen.getByRole("columnheader", { name: column.label })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: guide.overviewTitle })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: guide.detailTitle })).toBeInTheDocument();
+      expect(
+        container
+          .querySelector("#book")!
+          .compareDocumentPosition(container.querySelector("#details")!),
+      ).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      expect(
+        within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", {
+          name: "Haifa",
+        }),
+      ).toHaveAttribute("href", destination.path);
+      expect(screen.getByRole("link", { name: /See the map and compare/ })).toHaveAttribute(
+        "href",
+        `${destination.path}#location`,
+      );
+      expect(
+        screen.getByRole("link", {
+          name: categories.find((other) => other.id !== guide.id)!.title,
+        }),
+      ).toBeInTheDocument();
+      expect(
+        container.querySelector(`#sources a[href="${getSource("owner-hotels-haifa").url}"]`),
+      ).toBeNull();
+      expect(container.querySelector('#sources a[href^="https://"]')).not.toBeNull();
+      for (const id of ["owner-hotels-tiberias", "owner-hotels-deadsea"])
+        expect(container.querySelector(`#sources a[href="${getSource(id).url}"]`)).toBeNull();
+      expect(container.textContent).not.toMatch(/Ein Bokek|Ein Gedi|Tiberias|Dead Sea/);
+      expect(container.querySelector('a[href^="/tiberias/"], a[href^="/dead-sea/"]')).toBeNull();
+    },
+  );
 
   it("preserves exact property tracking and uses page-specific Booking.com Travelpayouts city links", () => {
-    const pages = [{ element: <HotelDestinationPage guide={destination} />, ids: hotels.map((hotel) => hotel.id), pageId: "stay-haifa" }, ...categories.map((guide) => ({ element: <HotelCategoryPage guide={guide} destination={destination} />, ids: guide.picks.map((pick) => pick.hotelId), pageId: `stay-haifa-${guide.id}` }))];
+    const pages = [
+      {
+        element: <HotelDestinationPage guide={destination} />,
+        ids: hotels.map((hotel) => hotel.id),
+        pageId: "stay-haifa",
+      },
+      ...categories.map((guide) => ({
+        element: <HotelCategoryPage guide={guide} destination={destination} />,
+        ids: guide.picks.map((pick) => pick.hotelId),
+        pageId: `stay-haifa-${guide.id}`,
+      })),
+    ];
     for (const page of pages) {
       const { container, unmount } = render(page.element);
-      if (page.pageId === "stay-haifa") fireEvent.click(screen.getByTestId("regional-hotel-expand"));
+      if (page.pageId === "stay-haifa")
+        fireEvent.click(screen.getByTestId("regional-hotel-expand"));
       for (const id of page.ids) {
         const hotel = hotels.find((hotel) => hotel.id === id)!;
         const booking = providerLinks.find((link) => link.id === `hotel-${id}-expedia`)!;
         const card = container.querySelector(`#hotel-${id}`) as HTMLElement;
         expect(card).not.toHaveTextContent("Sponsored link");
-        const link = within(card).getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
+        const link = within(card).getByRole("link", {
+          name: `${booking.ctaLabel} for ${hotel.name}`,
+        });
         expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, page.pageId, id));
         expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
         expect(link).toHaveAttribute("target", "_blank");
         link.addEventListener("click", (event) => event.preventDefault());
         fireEvent.click(link);
-        expect(readOutboundClicks().at(-1)).toMatchObject({ event: "outbound_click", pageId: page.pageId, productId: id, offerId: booking.id });
+        expect(readOutboundClicks().at(-1)).toMatchObject({
+          event: "outbound_click",
+          pageId: page.pageId,
+          productId: id,
+          offerId: booking.id,
+        });
       }
       const browseSection = within(container.querySelector("#more-stays") as HTMLElement);
       if (page.pageId === "stay-haifa") {
         // No direct Booking.com CTA: the city-wide offer must be a tracked Travelpayouts link.
-        expect(browseSection.queryByRole("link", { name: /Check prices on Booking.com/ })).toBeNull();
-        const tracked = linksForPage("stay-haifa-browse").find((link) => link.id === "hotels-haifa-expedia")!;
+        expect(
+          browseSection.queryByRole("link", { name: /Check prices on Booking.com/ }),
+        ).toBeNull();
+        const tracked = linksForPage("stay-haifa-browse").find(
+          (link) => link.id === "hotels-haifa-expedia",
+        )!;
         const browse = browseSection.getByRole("link", { name: /Browse stays on Expedia/ });
         expect(browse).toHaveAttribute("href", hotelBrowseAffiliateUrl(tracked, page.pageId));
         expect(browse).toHaveAttribute("rel", "sponsored noopener noreferrer");
       } else {
         const browse = browseSection.getByRole("link", { name: /Check prices on Booking.com/ });
-        const trackedBooking = page.pageId === "stay-haifa-family"
-          ? "https://booking.tpk.lv/IMJh6Qxg" : "https://booking.tpk.lv/9d6zS3gn";
+        const trackedBooking =
+          page.pageId === "stay-haifa-family"
+            ? "https://booking.tpk.lv/IMJh6Qxg"
+            : "https://booking.tpk.lv/9d6zS3gn";
         expect(browse).toHaveAttribute("href", trackedBooking);
         expect(browse).toHaveAttribute("rel", "sponsored noopener noreferrer");
       }
@@ -131,21 +239,37 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     const { container } = render(<HotelCategoryPage guide={guide} destination={destination} />);
     expect(container.querySelector("#hotel-haifa-botanica")).toBeNull();
     expect(container.querySelector("#hotel-haifa-schumacher")).toBeNull();
-    expect(container.querySelector("#hotel-haifa-leonardo-plaza")).toHaveTextContent("weekends, holidays and July–August");
-    expect(container.querySelector("#hotel-haifa-crowne-plaza")).toHaveTextContent("Check whether the hotel offers a children's activity club");
+    expect(container.querySelector("#hotel-haifa-leonardo-plaza")).toHaveTextContent(
+      "weekends, holidays and July–August",
+    );
+    expect(container.querySelector("#hotel-haifa-crowne-plaza")).toHaveTextContent(
+      "Check whether the hotel offers a children's activity club",
+    );
     const danCarmel = container.querySelector("#hotel-haifa-dan-carmel");
-    expect(danCarmel).toHaveTextContent("selected room categories accommodate two adults and two children");
+    expect(danCarmel).toHaveTextContent(
+      "selected room categories accommodate two adults and two children",
+    );
     expect(danCarmel).toHaveTextContent("Room occupancy and executive-category rules vary.");
-    expect(danCarmel).toHaveTextContent("Certain executive rooms and lounge access have age restrictions separate from family admission.");
+    expect(danCarmel).toHaveTextContent(
+      "Certain executive rooms and lounge access have age restrictions separate from family admission.",
+    );
   });
 
   it("identifies the Bay View/Nof name difference and makes limited Port Inn verification explicit", () => {
     const { container } = render(<HotelDestinationPage guide={destination} />);
     fireEvent.click(screen.getByTestId("regional-hotel-expand"));
-    expect(container.querySelector("#hotel-haifa-nof")).toHaveTextContent("Nof Hotel (Haifa Bay View)");
-    expect(container.querySelector("#hotel-haifa-nof")).toHaveTextContent("now presented by Nara Hotels as Nof Hotel");
+    expect(container.querySelector("#hotel-haifa-nof")).toHaveTextContent(
+      "Nof Hotel (Haifa Bay View)",
+    );
+    expect(container.querySelector("#hotel-haifa-nof")).toHaveTextContent(
+      "now presented by Nara Hotels as Nof Hotel",
+    );
     expect(getSource("hotel-haifa-nof-official").url).toBe("https://www.nara-hotels.com/nof");
-    expect(getSource("hotel-haifa-port-inn-official").note).toMatch(/name and downtown address only/);
-    expect(hotels.find((hotel) => hotel.id === "haifa-port-inn")!.resortFacts.spa).toMatch(/No resort-spa or pool facilities assumed/);
+    expect(getSource("hotel-haifa-port-inn-official").note).toMatch(
+      /name and downtown address only/,
+    );
+    expect(hotels.find((hotel) => hotel.id === "haifa-port-inn")!.resortFacts.spa).toMatch(
+      /No resort-spa or pool facilities assumed/,
+    );
   });
 });

@@ -21,24 +21,38 @@ describe("owner voice throughout the public site", () => {
   it("uses first-person guide references rather than a fictitious editorial team", () => {
     for (const file of coreEditorial) {
       const copy = source(file);
-      expect(copy, file).not.toMatch(/\bour (?:guide|guides|airport|private|fare|fares|accommodation|taxi|Israel|travel|car rental|Sherut|churches|events)/i);
+      expect(copy, file).not.toMatch(
+        /\bour (?:guide|guides|airport|private|fare|fares|accommodation|taxi|Israel|travel|car rental|Sherut|churches|events)/i,
+      );
       expect(copy, file).not.toMatch(/\bwe (?:recommend|offer|provide|may earn|do not show)/i);
     }
     expect(source("src/data/content.ts")).toContain("open on our dates?");
     expect(getAirportRouteGuide("jerusalem").intro).toContain("Send me your flight");
-    expect(airportJourneyGuides["ein-bokek"].options.find(o => o.id === "rental")?.paragraphs.join(" ")).toContain("on DiscoverCars' Israel rental search");
+    expect(
+      airportJourneyGuides["ein-bokek"].options
+        .find((o) => o.id === "rental")
+        ?.paragraphs.join(" "),
+    ).toContain("on DiscoverCars' Israel rental search");
   });
 
   it("keeps contextual link anchor phrases synchronized after first-person edits", () => {
     for (const guide of Object.values(travelGuides)) {
-      for (const section of guide.sections) for (const link of section.inlineLinks || []) {
-        expect(section.paragraphs.some(p => p.includes(link.text)), guide.id + ":" + link.text).toBe(true);
-      }
+      for (const section of guide.sections)
+        for (const link of section.inlineLinks || []) {
+          expect(
+            section.paragraphs.some((p) => p.includes(link.text)),
+            guide.id + ":" + link.text,
+          ).toBe(true);
+        }
     }
     for (const guide of Object.values(airportJourneyGuides)) {
-      for (const option of guide.options) for (const link of option.inlineLinks || []) {
-        expect(option.paragraphs.some(p => p.includes(link.text)), guide.id + ":" + link.text).toBe(true);
-      }
+      for (const option of guide.options)
+        for (const link of option.inlineLinks || []) {
+          expect(
+            option.paragraphs.some((p) => p.includes(link.text)),
+            guide.id + ":" + link.text,
+          ).toBe(true);
+        }
     }
   });
 
@@ -48,12 +62,18 @@ describe("owner voice throughout the public site", () => {
     expect(form).not.toContain("This is an inquiry, not a confirmed booking.");
     expect(form).not.toContain("This is an inquiry, not a confirmed taxi booking.");
     expect(form).not.toContain("Private transport requires a separate quote and confirmation.");
-    expect(form).not.toContain("Private transport is subject to a separate quote and confirmation.");
+    expect(form).not.toContain(
+      "Private transport is subject to a separate quote and confirmation.",
+    );
   });
 
   it("keeps the affiliate disclosure in the footer, not inside editorial or provider cards", () => {
-    expect(source("src/components/Layout.tsx")).toContain("This website contains affiliate links. I may earn a commission");
-    expect(source("src/components/Layout.tsx")).toContain("Some images on this website were generated using artificial intelligence.");
+    expect(source("src/components/Layout.tsx")).toContain(
+      "This website contains affiliate links. I may earn a commission",
+    );
+    expect(source("src/components/Layout.tsx")).toContain(
+      "Some images on this website were generated using artificial intelligence.",
+    );
     for (const file of [
       "src/components/StayGuideParts.tsx",
       "src/components/AirportBookingPlatforms.tsx",
@@ -70,14 +90,26 @@ describe("owner voice throughout the public site", () => {
       "src/components/TelAvivHotelBrowser.tsx",
       "src/routes/about-me.tsx",
     ]) {
-      expect(source(file), file).not.toMatch(/Sponsored link|Affiliate link|earn me a commission|sponsored booking link/i);
+      expect(source(file), file).not.toMatch(
+        /Sponsored link|Affiliate link|earn me a commission|sponsored booking link/i,
+      );
     }
-    expect(source("src/components/HomeContactForm.tsx")).toContain("Travel date, pickup point, destinations, passengers and luggage");
-    expect(source("src/routes/private-driver-in-israel.tsx")).toContain("Tell me your plans and I\x27ll prepare a personal quote");
-    expect(source("src/routes/airport-transfers.index.tsx")).not.toContain("Request a personal quote");
+    expect(source("src/components/HomeContactForm.tsx")).toContain(
+      "Travel date, pickup point, destinations, passengers and luggage",
+    );
+    expect(source("src/routes/private-driver-in-israel.tsx")).toContain(
+      "Tell me your plans and I\x27ll prepare a personal quote",
+    );
+    expect(source("src/routes/airport-transfers.index.tsx")).not.toContain(
+      "Request a personal quote",
+    );
     expect(source("src/routes/terms-of-use.tsx")).toContain("contact me at {email}");
-    expect(source("src/components/AirportRoutePage.tsx")).toContain("I confirm the full price before booking.");
+    expect(source("src/components/AirportRoutePage.tsx")).toContain(
+      "I confirm the full price before booking.",
+    );
     expect(source("src/components/PortPage.tsx")).toContain("<ShoreQuoteForm");
-    expect(source("src/components/PortPage.tsx")).not.toContain("Request an itinerary from {port.name}");
+    expect(source("src/components/PortPage.tsx")).not.toContain(
+      "Request an itinerary from {port.name}",
+    );
   });
 });

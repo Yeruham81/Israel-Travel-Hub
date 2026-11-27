@@ -14,7 +14,12 @@ describe("home mobile performance optimizations", () => {
     expect(root).not.toContain("fonts.gstatic.com");
     expect(root).toMatch(/rel:\s*"preload",\s*href:\s*siteSansUrl\b/);
     expect(root).toMatch(/rel:\s*"preload",\s*href:\s*siteSerifUrl\b/);
-    for (const filename of ["instrument-sans-latin-wght-normal.woff2", "newsreader-latin-400.woff2", "newsreader-latin-600.woff2", "newsreader-latin-400-italic.woff2"]) {
+    for (const filename of [
+      "instrument-sans-latin-wght-normal.woff2",
+      "newsreader-latin-400.woff2",
+      "newsreader-latin-600.woff2",
+      "newsreader-latin-400-italic.woff2",
+    ]) {
       expect(bytes(`src/assets/fonts/${filename}`)).toBeGreaterThan(5000);
       expect(css).toContain(`./assets/fonts/${filename}`);
       expect(css).not.toContain(`url("/fonts/${filename}")`);
@@ -27,33 +32,48 @@ describe("home mobile performance optimizations", () => {
 
   it("keeps compact home cards lazy-loaded with the destination hero and thumbnail fallback", () => {
     const homepage = read("src/routes/index.tsx");
-    const compact = homepage.slice(homepage.indexOf("function CompactCard("), homepage.indexOf("function AirportTransferCard("));
-    expect(compact).toContain("guideHeroPhotoForPath(String(c.to))?.src ?? c.img.thumb ?? c.img.src");
+    const compact = homepage.slice(
+      homepage.indexOf("function CompactCard("),
+      homepage.indexOf("function AirportTransferCard("),
+    );
+    expect(compact).toContain(
+      "guideHeroPhotoForPath(String(c.to))?.src ?? c.img.thumb ?? c.img.src",
+    );
     expect(compact).toMatch(/loading="lazy"\s+decoding="async"/);
     expect(compact).toMatch(/width=\{224\}\s+height=\{160\}/);
     expect(homepage).toContain("<CompactCard key={c.label} c={c} />");
-    const photo = homepage.slice(homepage.indexOf("function PhotoCard("), homepage.indexOf("function CompactCard("));
+    const photo = homepage.slice(
+      homepage.indexOf("function PhotoCard("),
+      homepage.indexOf("function CompactCard("),
+    );
     expect(photo).toContain("guideHeroPhotoForPath(String(c.to))?.src ?? c.img.src");
     expect(photo).toMatch(/loading="lazy"\s+decoding="async"/);
   });
 
   it("uses optimized and clearly labeled AI destination illustrations only in the accommodation gallery", () => {
     const home = read("src/routes/index.tsx");
-    const section = home.slice(home.indexOf("export const accommodationDestinationCards"), home.indexOf("export const services"));
+    const section = home.slice(
+      home.indexOf("export const accommodationDestinationCards"),
+      home.indexOf("export const services"),
+    );
     for (const place of ["jerusalem", "tel-aviv-jaffa", "tiberias-galilee", "dead-sea", "haifa"]) {
       for (const suffix of ["", "-tile"]) {
         const relativePath = `public/images/home/accommodation-${place}-ai${suffix}.webp`;
         expect(bytes(relativePath), relativePath).toBeGreaterThan(5000);
         expect(bytes(relativePath), relativePath).toBeLessThan(110000);
-        expect(section, relativePath).toContain(`/images/home/accommodation-${place}-ai${suffix}.webp`);
+        expect(section, relativePath).toContain(
+          `/images/home/accommodation-${place}-ai${suffix}.webp`,
+        );
       }
     }
     expect(section.match(/AI-generated illustration/g)).toHaveLength(5);
     expect(home).not.toContain("Destination illustrations generated with AI; not photographs");
-    expect(read("src/components/Layout.tsx")).toContain("Some images on this website were generated using artificial intelligence.");
+    expect(read("src/components/Layout.tsx")).toContain(
+      "Some images on this website were generated using artificial intelligence.",
+    );
     expect(home).not.toMatch(/media="\(min-width: 1280px\)"\s+srcSet=\{c\.img\.thumb\}/);
-    expect(home).toContain('xl:aspect-[6/5]');
-    expect(home).not.toContain('xl:aspect-[4/5]');
+    expect(home).toContain("xl:aspect-[6/5]");
+    expect(home).not.toContain("xl:aspect-[4/5]");
   });
 
   it("provides a head preload for the exact LCP image variant, not every slide", () => {
@@ -72,15 +92,17 @@ describe("home mobile performance optimizations", () => {
     const page = read("src/routes/index.tsx");
     const css = read("src/styles.css");
     expect(page).toContain('className="home-offscreen');
-    expect(page).toContain('<TripadvisorReviewsSection />');
-    expect(page).toContain('<PersonalTestimonialsSection />');
-    expect(page).toContain('<HomeContactForm showPortrait={false} showTripadvisorReviews={false} />');
+    expect(page).toContain("<TripadvisorReviewsSection />");
+    expect(page).toContain("<PersonalTestimonialsSection />");
+    expect(page).toContain(
+      "<HomeContactForm showPortrait={false} showTripadvisorReviews={false} />",
+    );
     expect(read("src/components/HomeContactForm.tsx")).toContain("showPortrait = true");
     // The first transfer/service section remains on the normal rendering path.
-    expect(page).toContain('className={`scroll-mt-6 rounded-2xl border p-5 md:p-8');
-    expect(css).toContain('content-visibility: auto;');
-    expect(css).toContain('contain-intrinsic-size: auto 850px;');
-    expect(css).toContain('@media (max-width: 767px)');
+    expect(page).toContain("className={`scroll-mt-6 rounded-2xl border p-5 md:p-8");
+    expect(css).toContain("content-visibility: auto;");
+    expect(css).toContain("contain-intrinsic-size: auto 850px;");
+    expect(css).toContain("@media (max-width: 767px)");
   });
 
   it("defers second hero image until after initial render", () => {
@@ -97,20 +119,40 @@ describe("home mobile performance optimizations", () => {
     expect(slides).toContain("hero-jerusalem-psi-mobile.webp");
     expect(slides).toContain("hero-jerusalem-large.webp");
     // Full-resolution original crops, not enlarged small derivatives.
-    const optimizedSlugs = ["haifa-gardens", "masada-dead-sea", "caesarea-coast", "jerusalem-jaffa-gate", "dead-sea-salt", "eilat-mountains", "jaffa-port", "ramon-crater", "tel-aviv-sarona"];
+    const optimizedSlugs = [
+      "haifa-gardens",
+      "masada-dead-sea",
+      "caesarea-coast",
+      "jerusalem-jaffa-gate",
+      "dead-sea-salt",
+      "eilat-mountains",
+      "jaffa-port",
+      "ramon-crater",
+      "tel-aviv-sarona",
+    ];
     for (const slug of optimizedSlugs) {
-      for (const [variant, budget] of [["large", 480000], ["medium", 300000], ["mobile", 150000]] as const) {
-        const file = variant === "mobile" && ["jaffa-port", "tel-aviv-sarona", "jerusalem-jaffa-gate"].includes(slug)
-          ? `hero-refresh-${slug}-v5-mobile.webp`
-          : `hero-refresh-${slug}-v4-${variant}.webp`;
+      for (const [variant, budget] of [
+        ["large", 480000],
+        ["medium", 300000],
+        ["mobile", 150000],
+      ] as const) {
+        const file =
+          variant === "mobile" &&
+          ["jaffa-port", "tel-aviv-sarona", "jerusalem-jaffa-gate"].includes(slug)
+            ? `hero-refresh-${slug}-v5-mobile.webp`
+            : `hero-refresh-${slug}-v4-${variant}.webp`;
         expect(slides).toContain(file);
         expect(bytes(`src/assets/home/${file}`)).toBeLessThanOrEqual(budget);
       }
     }
     expect(slides).toContain("hero-refresh-tel-aviv-coastline-v3-mobile.webp");
-    expect(bytes("src/assets/home/hero-refresh-tel-aviv-coastline-v3-mobile.webp")).toBeLessThan(145000);
+    expect(bytes("src/assets/home/hero-refresh-tel-aviv-coastline-v3-mobile.webp")).toBeLessThan(
+      145000,
+    );
     expect(slides).toContain("highDensity: true");
-    expect(carousel).toContain('s.highDensity ? s.srcMedium + " 1x, " + s.src + " 2x" : s.srcMedium');
+    expect(carousel).toContain(
+      's.highDensity ? s.srcMedium + " 1x, " + s.src + " 2x" : s.srcMedium',
+    );
     expect(slides).toContain('pos: "center 68%"');
     expect(carousel).toContain('media="(max-width: 767px)"');
     for (const place of ["jerusalem", "haifa", "tel-aviv", "masada", "caesarea", "galilee"]) {
@@ -135,22 +177,37 @@ describe("home mobile performance optimizations", () => {
       expect(bytes(`${base}-feature.webp`)).toBeLessThan(bytes(`${base}.webp`));
       expect(home).toContain(`${name}-feature.webp`);
     }
-    expect(home).toContain('import benGurionApronPhoto from "@/assets/airport-transfers/airport.webp"');
-    expect(home).toMatch(/feature:\s*\{\s*src:\s*benGurionApronPhoto,\s*mobile:\s*benGurionApronPhotoMobile,\s*alt:/);
-    expect(home).not.toMatch(/feature:\s*\{\s*src:\s*"\/images\/travel-blog\/taxi-in-tel-aviv\.webp"/);
+    expect(home).toContain(
+      'import benGurionApronPhoto from "@/assets/airport-transfers/airport.webp"',
+    );
+    expect(home).toMatch(
+      /feature:\s*\{\s*src:\s*benGurionApronPhoto,\s*mobile:\s*benGurionApronPhotoMobile,\s*alt:/,
+    );
+    expect(home).not.toMatch(
+      /feature:\s*\{\s*src:\s*"\/images\/travel-blog\/taxi-in-tel-aviv\.webp"/,
+    );
     expect(bytes("src/assets/airport-transfers/airport.webp")).toBeGreaterThan(10000);
     expect(bytes("public/images/home/uber-in-israel-phone-question.webp")).toBeGreaterThan(10000);
     expect(bytes("public/images/home/uber-in-israel-phone-question.webp")).toBeLessThan(30000);
-    expect(home).toMatch(/first:\s*guideDirectory\.filter\(\s*\(guide\)\s*=>\s*\["uber",\s*"esim",\s*"arrival"\]\.includes\(guide\.id\),?\s*\)/);
+    expect(home).toMatch(
+      /first:\s*guideDirectory\.filter\(\s*\(guide\)\s*=>\s*\["uber",\s*"esim",\s*"arrival"\]\.includes\(guide\.id\),?\s*\)/,
+    );
     expect(home).not.toContain("hotel-room-feature.webp");
     expect(home).not.toContain("/images/guides/taxi-in-tel-aviv.webp");
     expect(home).not.toContain("airport-pickup");
-    const gallery = home.slice(home.indexOf("export const accommodationDestinationCards"), home.indexOf("export const services"));
+    const gallery = home.slice(
+      home.indexOf("export const accommodationDestinationCards"),
+      home.indexOf("export const services"),
+    );
     for (const place of ["jerusalem", "tel-aviv-jaffa", "tiberias-galilee", "dead-sea", "haifa"]) {
       const base = `public/images/home/accommodation-${place}-ai`;
       expect(bytes(`${base}-tile.webp`)).toBeLessThan(bytes(`${base}.webp`));
       expect(bytes(`${base}-tile.webp`)).toBeLessThan(40000);
-      expect(gallery).toMatch(new RegExp(String.raw`src:\s*"/images/home/accommodation-${place}-ai\.webp",\s*thumb:\s*"/images/home/accommodation-${place}-ai-tile\.webp"`));
+      expect(gallery).toMatch(
+        new RegExp(
+          String.raw`src:\s*"/images/home/accommodation-${place}-ai\.webp",\s*thumb:\s*"/images/home/accommodation-${place}-ai-tile\.webp"`,
+        ),
+      );
     }
     expect(home).toContain("cards: accommodationDestinationCards");
     expect(home).toContain("<PhotoCard c={card} />");
@@ -162,33 +219,47 @@ describe("home mobile performance optimizations", () => {
 
   it("keeps homepage service images and cards within the mobile grid even if an image fails", () => {
     const home = read("src/routes/index.tsx");
-    expect(home.match(/grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch/g)).toHaveLength(1);
+    expect(
+      home.match(/grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch/g),
+    ).toHaveLength(1);
     expect(home.match(/grid min-w-0 grid-cols-1 content-start gap-3/g)).toHaveLength(1);
-    expect(home.split('aspect-[16/10] h-full min-h-64 w-full min-w-0')).toHaveLength(2);
+    expect(home.split("aspect-[16/10] h-full min-h-64 w-full min-w-0")).toHaveLength(2);
     expect(home).toContain('<li className="min-w-0">');
-    expect(home).toContain('grid w-full min-w-0 grid-cols-[96px_minmax(0,1fr)]');
-    expect(home).toContain('aria-label={s.id === "tours" ? "Tour destinations" : "Featured attractions"}');
+    expect(home).toContain("grid w-full min-w-0 grid-cols-[96px_minmax(0,1fr)]");
+    expect(home).toContain(
+      'aria-label={s.id === "tours" ? "Tour destinations" : "Featured attractions"}',
+    );
     expect(home).toContain('aria-label="Airport transfer destinations"');
-    expect(home).toContain('lg:min-h-[280px] lg:grid-cols-2 lg:items-stretch');
-    for (const name of ["jerusalem-tower-of-david", "tel-aviv-beach-skyline", "haifa-bahai-gardens", "ein-bokek-aerial"]) {
+    expect(home).toContain("lg:min-h-[280px] lg:grid-cols-2 lg:items-stretch");
+    for (const name of [
+      "jerusalem-tower-of-david",
+      "tel-aviv-beach-skyline",
+      "haifa-bahai-gardens",
+      "ein-bokek-aerial",
+    ]) {
       const path = `public/images/home/transfer-${name}.webp`;
       expect(bytes(path), path).toBeGreaterThan(10000);
       expect(bytes(path), path).toBeLessThan(100000);
     }
-    expect(home).toContain('aspect-[16/9] overflow-hidden min-[480px]:aspect-auto');
-    expect(home).toContain('lg:min-h-[280px] lg:grid-cols-2 lg:items-stretch');
+    expect(home).toContain("aspect-[16/9] overflow-hidden min-[480px]:aspect-auto");
+    expect(home).toContain("lg:min-h-[280px] lg:grid-cols-2 lg:items-stretch");
     expect(home).toMatch(/auto-rows-fr gap-3"\s+aria-label="Shore excursions by port"/);
-    expect(home).toContain('line-clamp-2 text-sm leading-snug text-muted-foreground');
+    expect(home).toContain("line-clamp-2 text-sm leading-snug text-muted-foreground");
   });
 
   it("serves smaller transfer pictures on phones without changing desktop photos", () => {
     const home = read("src/routes/index.tsx");
-    expect(home).toContain('mobile?: string');
+    expect(home).toContain("mobile?: string");
     expect(home).toMatch(/media="\(max-width: 767px\)"\s+srcSet=\{c\.img\.mobile\}/);
     expect(home).toContain('<picture className="absolute inset-0 block">');
     expect(home).toContain('type="image/webp"');
     expect(home).toMatch(/loading="lazy"\s+decoding="async"/);
-    for (const slug of ["jerusalem-tower-of-david", "tel-aviv-beach-skyline", "haifa-bahai-gardens", "ein-bokek-aerial"]) {
+    for (const slug of [
+      "jerusalem-tower-of-david",
+      "tel-aviv-beach-skyline",
+      "haifa-bahai-gardens",
+      "ein-bokek-aerial",
+    ]) {
       const original = `public/images/home/transfer-${slug}.webp`;
       const mobile = `public/images/home/transfer-${slug}-mobile.webp`;
       expect(bytes(mobile), slug).toBeLessThan(bytes(original));
@@ -198,8 +269,8 @@ describe("home mobile performance optimizations", () => {
     }
     const timnaOriginal = bytes("src/assets/home/timna-park-feature.jpg");
     const timnaOptimized = bytes("src/assets/home/timna-park-feature-optimized.webp");
-    expect(timnaOptimized).toBeLessThan(timnaOriginal * .75);
-    expect(home).toContain('timna-park-feature-optimized.webp');
+    expect(timnaOptimized).toBeLessThan(timnaOriginal * 0.75);
+    expect(home).toContain("timna-park-feature-optimized.webp");
   });
 
   it("uses right-sized mobile tour, feature and LCP images", () => {
@@ -229,13 +300,23 @@ describe("home mobile performance optimizations", () => {
     ]) {
       expect(bytes(name), name).toBeGreaterThan(5000);
     }
-    expect(bytes("src/assets/home/guided-tour-feature-mobile.webp")).toBeLessThan(bytes("src/assets/home/guided-tour-feature.webp"));
-    expect(bytes("src/assets/airport-transfers/airport-mobile.webp")).toBeLessThan(bytes("src/assets/airport-transfers/airport.webp"));
-    expect(bytes("src/assets/home/hero-jerusalem-psi-mobile.webp")).toBeLessThan(bytes("src/assets/home/hero-jerusalem-sm-optimized.webp"));
+    expect(bytes("src/assets/home/guided-tour-feature-mobile.webp")).toBeLessThan(
+      bytes("src/assets/home/guided-tour-feature.webp"),
+    );
+    expect(bytes("src/assets/airport-transfers/airport-mobile.webp")).toBeLessThan(
+      bytes("src/assets/airport-transfers/airport.webp"),
+    );
+    expect(bytes("src/assets/home/hero-jerusalem-psi-mobile.webp")).toBeLessThan(
+      bytes("src/assets/home/hero-jerusalem-sm-optimized.webp"),
+    );
     expect(hero).toContain("hero-jerusalem-psi-mobile.webp");
     const head = read("src/route-heads/index.head.tsx");
-    expect(head).toContain('import lcpHeroMobile from "@/assets/home/hero-jerusalem-psi-mobile.webp"');
-    expect(head).toMatch(/href:\s*lcpHeroMobile,\s*media:\s*"\(max-width: 767px\)",\s*fetchPriority:\s*"high"/);
+    expect(head).toContain(
+      'import lcpHeroMobile from "@/assets/home/hero-jerusalem-psi-mobile.webp"',
+    );
+    expect(head).toMatch(
+      /href:\s*lcpHeroMobile,\s*media:\s*"\(max-width: 767px\)",\s*fetchPriority:\s*"high"/,
+    );
     expect(homepage).toContain("bethlehemTourPhotoMobile");
     expect(homepage).toContain("guidedTourMobile");
     expect(homepage).toContain("benGurionApronPhotoMobile");
@@ -258,7 +339,7 @@ describe("home mobile performance optimizations", () => {
     const reviews = read("src/components/HomeTestimonials.tsx");
     expect(reviews).toContain('src="/images/tripadvisor.svg"');
     expect(reviews).not.toContain("cdn.simpleicons.org");
-    expect(read("public/images/tripadvisor.svg")).toContain('<svg');
+    expect(read("public/images/tripadvisor.svg")).toContain("<svg");
     const carousel = read("src/components/TripadvisorReviewCarousel.tsx");
     // Individual cards no longer repeat the Tripadvisor logo; the compact header does.
     expect(carousel).toContain("tripadvisorProfileUrl");

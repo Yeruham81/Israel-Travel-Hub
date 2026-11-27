@@ -1,6 +1,11 @@
 import { readRouteSource } from "@/test-utils/read-route-source";
 import { describe, expect, it } from "vitest";
-import { shoreHubExperiences, shoreHubFaqs, shorePlanningSteps, shoreTourFormats } from "@/data/shoreHub";
+import {
+  shoreHubExperiences,
+  shoreHubFaqs,
+  shorePlanningSteps,
+  shoreTourFormats,
+} from "@/data/shoreHub";
 import { shoreHubGuides } from "@/data/shoreReading";
 
 const page = readRouteSource("src/routes/shore-excursions.index.tsx");
@@ -46,7 +51,12 @@ describe("compact shore excursions hub", () => {
     expect(page).toContain("Discover Israel's main attractions");
     expect(page).not.toContain("Pickup arrangements differ:");
     expect(page).not.toContain("Ashdod is a useful starting point");
-    expect(shoreHubExperiences.every(experience => new Set(experience.links.map(link => link.portId)).size === experience.links.length)).toBe(true);
+    expect(
+      shoreHubExperiences.every(
+        (experience) =>
+          new Set(experience.links.map((link) => link.portId)).size === experience.links.length,
+      ),
+    ).toBe(true);
     expect(shoreHubFaqs.length).toBeGreaterThanOrEqual(6);
     expect(page).toContain("shoreHubExperiences.map");
     expect(page).toContain("shoreTourFormats.map");

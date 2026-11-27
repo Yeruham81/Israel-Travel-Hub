@@ -1,7 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, attractionRelatedGuides } from "@/data/attractionsHub";
+import {
+  attractionHubCards,
+  attractionHubPhotos,
+  attractionHubRegions,
+  attractionPlanningPaths,
+  attractionRelatedGuides,
+} from "@/data/attractionsHub";
 import { readFileSync, existsSync } from "node:fs";
-import { attractionHubCardImageSets, attractionHubRegionImageSets, attractionHubRelatedImageSets } from "@/data/attractionHubResponsivePhotos";
+import {
+  attractionHubCardImageSets,
+  attractionHubRegionImageSets,
+  attractionHubRelatedImageSets,
+} from "@/data/attractionHubResponsivePhotos";
 import { attractionIds, attractionPath, isRegionalOverview } from "@/data/attractionGuideTypes";
 import { travelGuidePaths } from "@/data/registry";
 
@@ -9,7 +19,9 @@ describe("Attractions hub redesign", () => {
   it("provides seven navigable regions of individual attraction cards with optional cultural guide links", () => {
     expect(attractionHubRegions).toHaveLength(7);
     expect(new Set(attractionHubRegions.map((region) => region.id)).size).toBe(7);
-    expect(attractionHubRegions.find((region) => region.id === "nazareth-lower-galilee")?.title).toBe("Nazareth & Galilee");
+    expect(
+      attractionHubRegions.find((region) => region.id === "nazareth-lower-galilee")?.title,
+    ).toBe("Nazareth & Galilee");
     expect(new Set(attractionHubRegions.map((region) => region.summary)).size).toBe(7);
     for (const region of attractionHubRegions) {
       expect(region.title.length).toBeGreaterThan(4);
@@ -19,11 +31,24 @@ describe("Attractions hub redesign", () => {
       expect((region.navLabel ?? region.title).length).toBeLessThan(33);
       expect(region.image.src).toMatch(/^\/images\/attractions\/.*\.webp$/);
       expect(region.cards.length).toBeGreaterThanOrEqual(1);
-      expect(region.cards.every(card => String(card.to).startsWith("/attractions/"))).toBe(true);
+      expect(region.cards.every((card) => String(card.to).startsWith("/attractions/"))).toBe(true);
       expect(region.relatedGuides.length).toBeLessThanOrEqual(3);
-      expect(region.relatedGuides.every(link => ["/travel-blog/", "/tours/"].some(prefix => String(link.to).startsWith(prefix)))).toBe(true);
-      expect(region.relatedGuides.every(link => !/transport|transfer|hotel|stay|rent|taxi|getting-around|shabbat/i.test(String(link.to)))).toBe(true);
-      expect(new Set(region.relatedGuides.map(link => String(link.to))).size).toBe(region.relatedGuides.length);
+      expect(
+        region.relatedGuides.every((link) =>
+          ["/travel-blog/", "/tours/"].some((prefix) => String(link.to).startsWith(prefix)),
+        ),
+      ).toBe(true);
+      expect(
+        region.relatedGuides.every(
+          (link) =>
+            !/transport|transfer|hotel|stay|rent|taxi|getting-around|shabbat/i.test(
+              String(link.to),
+            ),
+        ),
+      ).toBe(true);
+      expect(new Set(region.relatedGuides.map((link) => String(link.to))).size).toBe(
+        region.relatedGuides.length,
+      );
     }
   });
 
@@ -70,19 +95,33 @@ describe("Attractions hub redesign", () => {
   it("uses six photo-based related guides and six compact icon-based planning links", () => {
     expect(attractionRelatedGuides).toHaveLength(6);
     expect(attractionPlanningPaths).toHaveLength(6);
-    expect(new Set(attractionRelatedGuides.map(item => String(item.to))).size).toBe(6);
-    expect(new Set(attractionRelatedGuides.map(item => item.photo.src)).size).toBe(6);
-    expect(new Set(attractionPlanningPaths.map(item => String(item.to))).size).toBe(6);
+    expect(new Set(attractionRelatedGuides.map((item) => String(item.to))).size).toBe(6);
+    expect(new Set(attractionRelatedGuides.map((item) => item.photo.src)).size).toBe(6);
+    expect(new Set(attractionPlanningPaths.map((item) => String(item.to))).size).toBe(6);
     for (const guide of attractionRelatedGuides) {
       expect(guide.title.length).toBeGreaterThan(6);
       expect(guide.description.length).toBeGreaterThan(25);
       expect(guide.photo.src).toBeTruthy();
       expect(guide.photo.alt).toBeTruthy();
-      expect(String(guide.to).startsWith("/travel-blog/") || String(guide.to).startsWith("/attractions/")).toBe(true);
+      expect(
+        String(guide.to).startsWith("/travel-blog/") ||
+          String(guide.to).startsWith("/attractions/"),
+      ).toBe(true);
     }
-    expect(attractionPlanningPaths.map(item => item.id)).toEqual(["transport", "seasons", "hotels", "tips", "calendar", "esim"]);
-    expect(attractionPlanningPaths.find(item => item.id === "hotels")?.to).toBe("/accommodation/");
-    expect(attractionPlanningPaths.find(item => item.id === "transport")?.to).toBe(travelGuidePaths.israel);
+    expect(attractionPlanningPaths.map((item) => item.id)).toEqual([
+      "transport",
+      "seasons",
+      "hotels",
+      "tips",
+      "calendar",
+      "esim",
+    ]);
+    expect(attractionPlanningPaths.find((item) => item.id === "hotels")?.to).toBe(
+      "/accommodation/",
+    );
+    expect(attractionPlanningPaths.find((item) => item.id === "transport")?.to).toBe(
+      travelGuidePaths.israel,
+    );
     for (const item of attractionPlanningPaths) {
       expect(item.title).toBeTruthy();
       expect(item.description.length).toBeGreaterThan(20);
@@ -96,7 +135,9 @@ describe("Attractions hub redesign", () => {
     expect(page).toContain("Plan your trip to Israel");
     expect(page).toContain("attractionRelatedGuides.map");
     expect(page).toContain("attractionPlanningPaths.map");
-    expect(page).toMatch(/<img\s+src=\{\s*guideHeroPhotoForPath\(String\(guide\.to\)\)\?\.src\s*\?\?\s*guide\.photo\.src\s*\}/);
+    expect(page).toMatch(
+      /<img\s+src=\{\s*guideHeroPhotoForPath\(String\(guide\.to\)\)\?\.src\s*\?\?\s*guide\.photo\.src\s*\}/,
+    );
     expect(page).toMatch(/<Icon\s+aria-hidden\b/);
     expect(page).not.toContain("More ways to plan your trip");
     expect(page).not.toContain('data-testid="attractions-planning-card"');
@@ -114,24 +155,43 @@ describe("Attractions hub redesign", () => {
       if (isRegionalOverview(id)) expect(paths).not.toContain(attractionPath(id));
       else expect(paths).toContain(attractionPath(id));
     }
-    for (const id of ["megiddo", "precipice", "annunciation", "magdala", "yardenit", "qasr"] as const) {
+    for (const id of [
+      "megiddo",
+      "precipice",
+      "annunciation",
+      "magdala",
+      "yardenit",
+      "qasr",
+    ] as const) {
       expect(paths).toContain(travelGuidePaths[id]);
     }
     expect(paths).toContain("/attractions/caesarea/");
     expect(paths).toContain("/attractions/masada/");
     expect(paths).toContain("/attractions/dead-sea/");
-    expect(paths.every(path => path.startsWith("/attractions/"))).toBe(true);
+    expect(paths.every((path) => path.startsWith("/attractions/"))).toBe(true);
   });
 
   it("keeps overview guides in planning links and individual sites in attraction cards", () => {
     const jerusalem = attractionHubRegions.find((region) => region.id === "jerusalem")!;
-    expect(jerusalem.cards.some((card) => card.to === travelGuidePaths.jerusalemShopping)).toBe(false);
-    expect(jerusalem.relatedGuides.map(item => item.to)).toEqual([travelGuidePaths.jerusalemChurches, "/travel-blog/museums-in-jerusalem/", travelGuidePaths.jerusalemShopping]);
-    expect(jerusalem.relatedGuides.every(link => !String(link.to).startsWith("/tours/"))).toBe(true);
-    const galilee = attractionHubRegions.find(region => region.id === "sea-of-galilee")!;
-    expect(galilee.cards.some(card => card.to === travelGuidePaths.baptism)).toBe(false);
-    expect(galilee.relatedGuides.some(link => link.to === travelGuidePaths.baptism)).toBe(true);
-    expect(attractionHubRegions.find((region) => region.id === "haifa-coast")?.relatedGuides.some((link) => link.to === travelGuidePaths.haifaMuseums)).toBe(true);
+    expect(jerusalem.cards.some((card) => card.to === travelGuidePaths.jerusalemShopping)).toBe(
+      false,
+    );
+    expect(jerusalem.relatedGuides.map((item) => item.to)).toEqual([
+      travelGuidePaths.jerusalemChurches,
+      "/travel-blog/museums-in-jerusalem/",
+      travelGuidePaths.jerusalemShopping,
+    ]);
+    expect(jerusalem.relatedGuides.every((link) => !String(link.to).startsWith("/tours/"))).toBe(
+      true,
+    );
+    const galilee = attractionHubRegions.find((region) => region.id === "sea-of-galilee")!;
+    expect(galilee.cards.some((card) => card.to === travelGuidePaths.baptism)).toBe(false);
+    expect(galilee.relatedGuides.some((link) => link.to === travelGuidePaths.baptism)).toBe(true);
+    expect(
+      attractionHubRegions
+        .find((region) => region.id === "haifa-coast")
+        ?.relatedGuides.some((link) => link.to === travelGuidePaths.haifaMuseums),
+    ).toBe(true);
   });
 
   it("uses locally hosted selected WordPress photographs rather than live legacy image URLs", () => {
@@ -153,12 +213,17 @@ describe("Attractions hub redesign", () => {
 
 describe("attractions landing responsive image delivery", () => {
   const nativeOptimizedWebp = (src: string) => {
-    const localPath = src.startsWith("/images/") ? "public" + src : src.startsWith("/src/assets/") ? src.slice(1) : "";
+    const localPath = src.startsWith("/images/")
+      ? "public" + src
+      : src.startsWith("/src/assets/")
+        ? src.slice(1)
+        : "";
     if (!localPath || !existsSync(localPath)) return false;
     const file = readFileSync(localPath);
     return file.subarray(0, 4).toString() === "RIFF" && file.length < 180_000;
   };
-  const parseWidths = (srcset: string) => srcset.split(", ").map(value => Number(value.match(/ (\d+)w$/)?.[1]));
+  const parseWidths = (srcset: string) =>
+    srcset.split(", ").map((value) => Number(value.match(/ (\d+)w$/)?.[1]));
 
   it("retains every original source and gives all 25 large cards native-resolution fallback", () => {
     expect(attractionHubCards).toHaveLength(25);
@@ -172,7 +237,10 @@ describe("attractions landing responsive image delivery", () => {
       }
       expect(srcset, card.id).toBeTruthy();
       const widths = parseWidths(srcset);
-      expect(widths.every(width => Number.isInteger(width) && width > 0), card.id).toBe(true);
+      expect(
+        widths.every((width) => Number.isInteger(width) && width > 0),
+        card.id,
+      ).toBe(true);
       expect(new Set(widths).size, card.id).toBe(widths.length);
       expect(widths, card.id).toEqual([...widths].sort((a, b) => a - b));
       expect(srcset.includes(card.photo.src) || card.id === "akko-acre", card.id).toBe(true);
@@ -182,14 +250,19 @@ describe("attractions landing responsive image delivery", () => {
   it("preserves region and guide sources and responsive breakpoints", () => {
     for (const region of attractionHubRegions) {
       expect(attractionHubRegionImageSets[region.image.src], region.id).toBeTruthy();
-      expect(parseWidths(attractionHubRegionImageSets[region.image.src]!).length).toBeGreaterThan(0);
+      expect(parseWidths(attractionHubRegionImageSets[region.image.src]!).length).toBeGreaterThan(
+        0,
+      );
     }
     for (const guide of attractionRelatedGuides) {
       const srcset = attractionHubRelatedImageSets[guide.photo.src] ?? "";
       if (!srcset && nativeOptimizedWebp(guide.photo.src)) continue;
       expect(srcset, guide.title).toBeTruthy();
       const widths = parseWidths(srcset);
-      expect(widths.every(width => Number.isInteger(width) && width > 0), guide.title).toBe(true);
+      expect(
+        widths.every((width) => Number.isInteger(width) && width > 0),
+        guide.title,
+      ).toBe(true);
       expect(new Set(widths).size, guide.title).toBe(widths.length);
     }
     const page = readFileSync("src/routes/attractions.index.tsx", "utf8");
@@ -197,10 +270,14 @@ describe("attractions landing responsive image delivery", () => {
     expect(page).toContain('sizes="(min-width: 1280px) 365px');
     expect(page).toContain("srcSet={attractionHubRegionImageSets[region.image.src]}");
     expect(page).toContain('sizes="(min-width: 640px) 144px, 80px"');
-    expect(page).toMatch(/srcSet=\{\s*attractionHubRelatedImageSets\[\s*guideHeroPhotoForPath\(String\(guide\.to\)\)\?\.src\s*\?\?\s*guide\.photo\.src\s*\]\s*\}/);
+    expect(page).toMatch(
+      /srcSet=\{\s*attractionHubRelatedImageSets\[\s*guideHeroPhotoForPath\(String\(guide\.to\)\)\?\.src\s*\?\?\s*guide\.photo\.src\s*\]\s*\}/,
+    );
     expect(page).toContain('sizes="(min-width: 640px) 112px, 96px"');
     expect(page).toMatch(/<img\s+src=\{photo\.src\}/);
     expect(page).toMatch(/<img\s+src=\{region\.image\.src\}/);
-    expect(page).toMatch(/<img\s+src=\{\s*guideHeroPhotoForPath\(String\(guide\.to\)\)\?\.src\s*\?\?\s*guide\.photo\.src\s*\}/);
+    expect(page).toMatch(
+      /<img\s+src=\{\s*guideHeroPhotoForPath\(String\(guide\.to\)\)\?\.src\s*\?\?\s*guide\.photo\.src\s*\}/,
+    );
   });
 });

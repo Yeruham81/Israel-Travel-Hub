@@ -73,7 +73,9 @@ describe("Full-width editorial detail cards", () => {
   it("shows all Tel Aviv beaches as full-width rows with a right-hand photograph", () => {
     const page = readComponent("TelAvivBeachesGuide");
     expect(page).toMatch(sourceFragment('data-detailed-card="horizontal"'));
-    expect(page).toMatch(sourceFragment('className="mt-4 grid gap-3" data-testid="beach-detailed-cards"'));
+    expect(page).toMatch(
+      sourceFragment('className="mt-4 grid gap-3" data-testid="beach-detailed-cards"'),
+    );
     expect(page).toMatch(sourceFragment("lg:grid-cols-[minmax(0,1fr)_250px]"));
     expect(page).toMatch(sourceFragment("lg:col-start-2 lg:row-start-1"));
     expect(page).toMatch(sourceFragment("lg:col-start-1 lg:row-start-1"));

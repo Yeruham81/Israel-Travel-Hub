@@ -15,17 +15,18 @@ describe("Ramon Crater upgraded attraction guide", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.facts).toHaveLength(6);
     expect(content.nearby).toHaveLength(6);
-    expect(new Set(content.nearby!.map(x => x.to)).size).toBe(6);
+    expect(new Set(content.nearby!.map((x) => x.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(5);
     expect(content.sources).toHaveLength(8);
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell).toContain("<AuthorCard />");
-    expect(attractionHubCards.some(card => card.to === content.path)).toBe(true);
+    expect(attractionHubCards.some((card) => card.to === content.path)).toBe(true);
     const meta = ramonCraterMeta();
-    expect(meta.links.find(link => link.rel === "canonical")?.href).toContain(content.path);
-    const article = meta.scripts.map(x => JSON.parse(x.children as string))
-      .find(x => x["@type"] === "Article");
+    expect(meta.links.find((link) => link.rel === "canonical")?.href).toContain(content.path);
+    const article = meta.scripts
+      .map((x) => JSON.parse(x.children as string))
+      .find((x) => x["@type"] === "Article");
     expect(article.dateModified).toBe("2026-11-18");
     expect(article.citation).toContain(site.sources.haiRamon);
   });

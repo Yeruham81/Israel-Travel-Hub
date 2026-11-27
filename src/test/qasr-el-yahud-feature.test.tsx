@@ -16,25 +16,31 @@ describe("Qasr el-Yahud upgraded attraction guide", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe(site.updatedAt);
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(x => x.label === "Admission")?.value).toBe("Free");
-    expect(content.facts.find(x => x.label === "Time needed")?.value).toBe("45–90 minutes");
+    expect(content.facts.find((x) => x.label === "Admission")?.value).toBe("Free");
+    expect(content.facts.find((x) => x.label === "Time needed")?.value).toBe("45–90 minutes");
     expect(content.visitorNavLabel).toBe("Visit information");
     expect(content.nearby).toHaveLength(6);
-    expect(content.nearby?.map(x => x.to)).toContain("/attractions/yardenit/");
-    expect(content.nearby?.map(x => x.to)).toContain("/attractions/masada/");
-    expect(content.nearby?.map(x => x.to)).toContain("/attractions/old-city-jerusalem/");
+    expect(content.nearby?.map((x) => x.to)).toContain("/attractions/yardenit/");
+    expect(content.nearby?.map((x) => x.to)).toContain("/attractions/masada/");
+    expect(content.nearby?.map((x) => x.to)).toContain("/attractions/old-city-jerusalem/");
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(8);
     expect(content.sources).toHaveLength(6);
-    expect(attractionHubCards.filter(x => x.to === content.path)).toHaveLength(1);
+    expect(attractionHubCards.filter((x) => x.to === content.path)).toHaveLength(1);
     expect(shell).toMatch(sourceFragment('["contact", "Contact me"]'));
     expect(shell).toMatch(sourceFragment("<AuthorCard />"));
-    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(sourceIndex(shell, "<HomeContactForm"));
+    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(
+      sourceIndex(shell, "<HomeContactForm"),
+    );
     const meta = qasrElYahudMeta();
-    expect(meta.links.find(x => x.rel === "canonical")?.href).toContain("/attractions/qasr-el-yahud/");
-    const article = meta.scripts.map(x => JSON.parse(x.children as string)).find(x => x["@type"] === "Article");
+    expect(meta.links.find((x) => x.rel === "canonical")?.href).toContain(
+      "/attractions/qasr-el-yahud/",
+    );
+    const article = meta.scripts
+      .map((x) => JSON.parse(x.children as string))
+      .find((x) => x["@type"] === "Article");
     expect(article.dateModified).toBe("2026-11-17");
-    expect(article.citation).toEqual(content.sources.map(x => x.url));
+    expect(article.citation).toEqual(content.sources.map((x) => x.url));
   });
 
   it("displays the verified free admission, mandatory booking and seasonal hours", () => {
@@ -56,12 +62,16 @@ describe("Qasr el-Yahud upgraded attraction guide", () => {
     expect(page).toMatch(sourceFragment("cover shoulders and knees"));
     expect(page).toMatch(sourceFragment("does not provide clergy"));
     expect(page).toMatch(sourceFragment("official ceremony guidelines"));
-    expect(page).toMatch(sourceFragment("Group ceremonies and special events may require advance approval"));
+    expect(page).toMatch(
+      sourceFragment("Group ceremonies and special events may require advance approval"),
+    );
     expect(page).toMatch(sourceFragment("changing rooms and hot showers"));
     expect(page).toMatch(sourceFragment("immersion in the river is not accessible"));
     expect(page).toMatch(sourceFragment("former minefield hazards"));
     expect(page).toContain("controlled");
-    expect(page).toMatch(sourceFragment("confirm that your agreement and insurance permit the exact route"));
+    expect(page).toMatch(
+      sourceFragment("confirm that your agreement and insurance permit the exact route"),
+    );
     expect(page).toMatch(sourceFragment("Kasr el Yahud – The Baptismal Site – The Jordan Pass"));
     expect(page).toContain("BusFront");
     expect(page).not.toContain("Footprints");

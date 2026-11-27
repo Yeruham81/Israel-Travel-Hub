@@ -2,7 +2,12 @@ import { describe, expect, it } from "vitest";
 import { jerusalemAreaGuides, telAvivAreaGuides, hotelCategoryGuides } from "@/data/content";
 import { airportJourneyGuides } from "@/data/airportJourneyGuides";
 import { getShorePort } from "@/data/shoreExcursions";
-import { areaArrivalSignals, areaDecisionNotes, categoryDecisionExamples, destinationBaseChoices } from "@/data/localEditorialInsights";
+import {
+  areaArrivalSignals,
+  areaDecisionNotes,
+  categoryDecisionExamples,
+  destinationBaseChoices,
+} from "@/data/localEditorialInsights";
 
 describe("round two original planning content", () => {
   it("covers all existing Jerusalem and Tel Aviv neighborhood guides without generic empty notes", () => {
@@ -31,7 +36,9 @@ describe("round two original planning content", () => {
   });
 
   it("has a separate concrete scenario for each existing focused hotel guide", () => {
-    const focused = hotelCategoryGuides.filter((guide) => ["deadsea", "tiberias", "haifa"].includes(guide.destinationId));
+    const focused = hotelCategoryGuides.filter((guide) =>
+      ["deadsea", "tiberias", "haifa"].includes(guide.destinationId),
+    );
     expect(focused).toHaveLength(6);
     for (const guide of focused) {
       const example = categoryDecisionExamples[`${guide.destinationId}:${guide.id}`]!;

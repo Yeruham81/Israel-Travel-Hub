@@ -12,7 +12,8 @@ function sourceFiles(): string[] {
       for (const entry of readdirSync(path)) {
         const next = join(path, entry);
         if (statSync(next).isDirectory()) visit(next);
-        else if (/\.(?:tsx?|jsx?|html)$/.test(next) && !/\.test\.[tj]sx?$/.test(next)) files.push(next);
+        else if (/\.(?:tsx?|jsx?|html)$/.test(next) && !/\.test\.[tj]sx?$/.test(next))
+          files.push(next);
       }
     };
     visit(root);
@@ -26,7 +27,9 @@ describe("official transit links and map provider policy", () => {
       const source = readFileSync(path, "utf8");
       const links = source.match(/https:\/\/(?:route\.)?bus\.gov\.il(?:\/[^\s"'`<>]*)?/g) ?? [];
       for (const url of links) {
-        expect(url, `Unexpected public transport URL in ${relative(".", path)}`).toBe("https://bus.gov.il/en/home");
+        expect(url, `Unexpected public transport URL in ${relative(".", path)}`).toBe(
+          "https://bus.gov.il/en/home",
+        );
       }
     }
   });
@@ -43,11 +46,14 @@ describe("official transit links and map provider policy", () => {
       expect(map).toContain("new maplibregl.Marker");
       expect(map).toContain(`points.length!==${pins}`);
     }
-    const approved = new Set(allowed.map(x => x.path));
+    const approved = new Set(allowed.map((x) => x.path));
     for (const path of sourceFiles()) {
       if (approved.has(path.replace(/\\/g, "/"))) continue;
       const source = readFileSync(path, "utf8");
-      expect(/openstreetmap\.org|(?:unpkg\.com\/)?leaflet(?:@|\/|\.js|\.css)/i.test(source), `Unexpected map provider in ${relative(".", path)}`).toBe(false);
+      expect(
+        /openstreetmap\.org|(?:unpkg\.com\/)?leaflet(?:@|\/|\.js|\.css)/i.test(source),
+        `Unexpected map provider in ${relative(".", path)}`,
+      ).toBe(false);
     }
   });
 });

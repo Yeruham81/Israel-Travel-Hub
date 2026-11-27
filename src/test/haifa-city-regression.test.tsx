@@ -1,16 +1,24 @@
 import { describe, expect, it } from "vitest";
 import { destinationSectionHeadings } from "@/components/AttractionDestinationPage";
-import { carmelWalkingRoute, downtownWalkingRoute, downtownFullRoute, haifaDestinationContent, haifaTourPlacements } from "@/components/HaifaAttractionPage";
+import {
+  carmelWalkingRoute,
+  downtownWalkingRoute,
+  downtownFullRoute,
+  haifaDestinationContent,
+  haifaTourPlacements,
+} from "@/components/HaifaAttractionPage";
 import { jaffaDestinationContent } from "@/components/JaffaAttractionPage";
 import { affiliateConfig, tourBookingOffers } from "@/data/registry";
 
 describe("Haifa and Jaffa city guide regression", () => {
   it("uses destination-specific headings without changing Jaffa", () => {
     expect(destinationSectionHeadings(haifaDestinationContent.placeName)).toEqual({
-      food: "Where to eat in Haifa", practical: "Practical tips for visiting Haifa",
+      food: "Where to eat in Haifa",
+      practical: "Practical tips for visiting Haifa",
     });
     expect(destinationSectionHeadings(jaffaDestinationContent.placeName)).toEqual({
-      food: "Where to eat in Jaffa", practical: "Practical tips for visiting Jaffa",
+      food: "Where to eat in Jaffa",
+      practical: "Practical tips for visiting Jaffa",
     });
     expect(haifaDestinationContent.transportTitle).toBe("Getting to and around Haifa");
   });
@@ -28,16 +36,26 @@ describe("Haifa and Jaffa city guide regression", () => {
   });
   it("matches each tour card to the registered provider product ID and Travelpayouts platform", () => {
     expect(haifaTourPlacements).toHaveLength(3);
-    expect(new Set(haifaTourPlacements.map(t => t.image)).size).toBe(3);
-    const codes: Record<string, string> = { "coast-private-rosh-hanikra": "368992P3", "caesarea-haifa-akko": "22120", "north-coast-small-group": "58143P8" };
+    expect(new Set(haifaTourPlacements.map((t) => t.image)).size).toBe(3);
+    const codes: Record<string, string> = {
+      "coast-private-rosh-hanikra": "368992P3",
+      "caesarea-haifa-akko": "22120",
+      "north-coast-small-group": "58143P8",
+    };
     for (const card of haifaTourPlacements) {
       expect(card.productCode).toBe(codes[card.id]);
       const partner = card.platform === "Viator" ? "viator" : "getyourguide";
-      const offer = tourBookingOffers.find(o => o.productId === card.id && o.partnerId === partner);
+      const offer = tourBookingOffers.find(
+        (o) => o.productId === card.id && o.partnerId === partner,
+      );
       expect(offer, card.title).toBeDefined();
       expect(offer!.publicUrl).toContain(partner + ".com");
-      expect(offer!.publicUrl).toContain(partner === "viator" ? card.productCode : "-t" + card.productCode);
-      expect(affiliateConfig[card.affiliateKey]?.trackingUrl).toContain("https://" + partner + ".tpm.li/");
+      expect(offer!.publicUrl).toContain(
+        partner === "viator" ? card.productCode : "-t" + card.productCode,
+      );
+      expect(affiliateConfig[card.affiliateKey]?.trackingUrl).toContain(
+        "https://" + partner + ".tpm.li/",
+      );
       expect(card.title).toContain("Haifa");
       expect(card.duration).toBeTruthy();
       expect(card.priceFrom).toMatch(/^From /);

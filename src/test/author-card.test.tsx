@@ -11,16 +11,40 @@ import { formatCheckDate, getSource, isPublisherUrl, mosheBarakAuthor } from "@/
 afterEach(cleanup);
 
 async function pageAt(path: string) {
-  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
+  const router = createRouter({
+    routeTree,
+    context: { queryClient: new QueryClient() },
+    history: createMemoryHistory({ initialEntries: [path] }),
+    trailingSlash: "always",
+  });
   await router.load();
   const id = router.matchRoutes(path).at(-1)!.routeId;
   const Page = router.routesById[id]!.options.component!;
-  return render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+  return render(
+    <RouterContextProvider router={router}>
+      <Page />
+    </RouterContextProvider>,
+  );
 }
 
 describe("independent author identity and page credits", () => {
   it("shows one real portrait, experience statement and exact review profile across the page families", async () => {
-    const paths = ["/", "/travel-blog/", "/accommodation/", "/airport-transfers/", "/private-driver-in-israel/", "/shore-excursions/haifa/", "/shore-excursions/ashdod/", "/travel-blog/uber-in-israel/", "/airport-transfers/jerusalem/", "/travel-blog/where-to-stay-in-jerusalem/", "/accommodation/tel-aviv/jaffa/", "/travel-blog/best-hotels-in-haifa/", "/accommodation/dead-sea/spa/", "/attractions/caesarea/"];
+    const paths = [
+      "/",
+      "/travel-blog/",
+      "/accommodation/",
+      "/airport-transfers/",
+      "/private-driver-in-israel/",
+      "/shore-excursions/haifa/",
+      "/shore-excursions/ashdod/",
+      "/travel-blog/uber-in-israel/",
+      "/airport-transfers/jerusalem/",
+      "/travel-blog/where-to-stay-in-jerusalem/",
+      "/accommodation/tel-aviv/jaffa/",
+      "/travel-blog/best-hotels-in-haifa/",
+      "/accommodation/dead-sea/spa/",
+      "/attractions/caesarea/",
+    ];
     for (const path of paths) {
       const { container, unmount } = await pageAt(path);
       const cards = screen.getAllByTestId("author-card");
@@ -36,47 +60,98 @@ describe("independent author identity and page credits", () => {
       expect(card.children[1]).toHaveClass("col-start-2", "min-w-0");
       expect(card.children[2]).toHaveClass("col-start-2", "lg:col-start-3", "lg:row-start-1");
       expect(within(card).getByRole("img", { name: "Moshe Barak" })).toHaveAttribute("width", "64");
-      expect(card, path).toHaveTextContent("Over 20 years helping travelers get around Israel, discover its highlights, and plan the perfect trip.");
+      expect(card, path).toHaveTextContent(
+        "Over 20 years helping travelers get around Israel, discover its highlights, and plan the perfect trip.",
+      );
       const reviews = within(card).getByRole("link", { name: /Read Reviews on TripAdvisor/ });
       expect(reviews, path).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
       expect(reviews).toHaveAttribute("target", "_blank");
       expect(reviews).toHaveAttribute("rel", "noopener noreferrer");
       const labelLines = reviews.querySelectorAll("span.flex.flex-col > span");
-      expect(Array.from(labelLines, (line) => line.textContent)).toEqual(["Read Reviews on", "TripAdvisor"]);
+      expect(Array.from(labelLines, (line) => line.textContent)).toEqual([
+        "Read Reviews on",
+        "TripAdvisor",
+      ]);
       expect(labelLines[1]).toHaveClass("text-sm", "font-bold");
       expect(reviews.querySelector('span[aria-hidden="true"]')).toHaveClass("bg-[#34E0A1]");
-      expect(reviews.querySelector('img[src="/images/tripadvisor-owl-black.svg"]')).toHaveAttribute("width", "28");
+      expect(reviews.querySelector('img[src="/images/tripadvisor-owl-black.svg"]')).toHaveAttribute(
+        "width",
+        "28",
+      );
       if (path === "/") {
-        expect(within(card).getByRole("link", { name: "Read more about me" })).toHaveAttribute("href", "/about-me/");
+        expect(within(card).getByRole("link", { name: "Read more about me" })).toHaveAttribute(
+          "href",
+          "/about-me/",
+        );
         expect(card).not.toHaveTextContent("About Moshe Barak");
         const contact = container.querySelector("#contact") as HTMLElement;
         expect(contact).toBeInTheDocument();
         expect(contact.querySelector('[data-testid="contact-reviews-row"]')).toBeNull();
         expect(contact.querySelector('[data-photo-role="contact-portrait"]')).toBeNull();
-        expect(within(contact).queryByRole("link", { name: /Read Reviews on TripAdvisor/i })).toBeNull();
-        expect(within(card).getAllByRole("link", { name: /Read Reviews on TripAdvisor/i })).toHaveLength(1);
+        expect(
+          within(contact).queryByRole("link", { name: /Read Reviews on TripAdvisor/i }),
+        ).toBeNull();
+        expect(
+          within(card).getAllByRole("link", { name: /Read Reviews on TripAdvisor/i }),
+        ).toHaveLength(1);
       } else {
-        expect(within(card).getByRole("link", { name: "Moshe Barak" })).toHaveAttribute("href", "/about-me/#moshe-barak");
+        expect(within(card).getByRole("link", { name: "Moshe Barak" })).toHaveAttribute(
+          "href",
+          "/about-me/#moshe-barak",
+        );
         if (path === "/about-me/") {
-          expect(within(container.querySelector("#contact") as HTMLElement).getByRole("link", { name: /Read Reviews on TripAdvisor/i })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
+          expect(
+            within(container.querySelector("#contact") as HTMLElement).getByRole("link", {
+              name: /Read Reviews on TripAdvisor/i,
+            }),
+          ).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
         }
       }
       expect(card).not.toHaveTextContent(/5\.0|five stars|\d+ reviews|licensed guide/i);
       expect(container.querySelector('a[href*="israel-taxi.com/wp-content/"]'), path).toBeNull();
       expect(container.querySelector('#sources a[href*="israel-taxi.com"]'), path).toBeNull();
-      expect(container.textContent, path).not.toMatch(/editorial team|Adapted from|Source checks and limitations below|Image from the original publisher guide/);
+      expect(container.textContent, path).not.toMatch(
+        /editorial team|Adapted from|Source checks and limitations below|Image from the original publisher guide/,
+      );
       unmount();
     }
   });
 
   it("keeps required external photo attribution and removes owned-image migration credits", () => {
-    const owned = { src: "/photo.jpg", alt: "Owned photograph", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/photo.jpg", credit: "Image from the original publisher guide" };
-    const external = { src: "/commons.jpg", alt: "Licensed photograph", sourceUrl: "https://commons.wikimedia.org/wiki/File:Example.jpg", credit: "Photographer · CC BY-SA 4.0 · resized", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" };
-    const illustration = { src: "/illustration.webp", alt: "Illustration of an airport pickup", credit: "Illustrative scene; check the real route and terms." };
-    const { container } = render(<><GuidePhotoCredit photo={owned} /><GuidePhotoCredit photo={illustration} /><GuidePhotoCredit photo={external} /></>);
+    const owned = {
+      src: "/photo.jpg",
+      alt: "Owned photograph",
+      sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/photo.jpg",
+      credit: "Image from the original publisher guide",
+    };
+    const external = {
+      src: "/commons.jpg",
+      alt: "Licensed photograph",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Example.jpg",
+      credit: "Photographer · CC BY-SA 4.0 · resized",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    };
+    const illustration = {
+      src: "/illustration.webp",
+      alt: "Illustration of an airport pickup",
+      credit: "Illustrative scene; check the real route and terms.",
+    };
+    const { container } = render(
+      <>
+        <GuidePhotoCredit photo={owned} />
+        <GuidePhotoCredit photo={illustration} />
+        <GuidePhotoCredit photo={external} />
+      </>,
+    );
     expect(container.querySelector(`a[href="${owned.sourceUrl}"]`)).toBeNull();
-    expect(screen.getByRole("link", { name: /Photographer/ })).toHaveAttribute("href", external.sourceUrl);
-    expect(screen.getByRole("link", { name: /Licence/ })).toHaveAttribute("href", external.licenseUrl);
+    expect(screen.getByRole("link", { name: /Photographer/ })).toHaveAttribute(
+      "href",
+      external.sourceUrl,
+    );
+    expect(screen.getByRole("link", { name: /Licence/ })).toHaveAttribute(
+      "href",
+      external.licenseUrl,
+    );
     expect(container.textContent).not.toContain("original publisher");
     expect(container.textContent).not.toContain("Illustrative scene");
   });
@@ -94,7 +169,10 @@ describe("independent author identity and page credits", () => {
     fireEvent.click(summary);
     expect(disclosure).toHaveAttribute("open");
     expect(reference).toBeVisible();
-    expect(screen.getByRole("link", { name: /Tel Aviv-Yafo Municipality/ })).toHaveAttribute("href", getSource("guide-weekend-711").url);
+    expect(screen.getByRole("link", { name: /Tel Aviv-Yafo Municipality/ })).toHaveAttribute(
+      "href",
+      getSource("guide-weekend-711").url,
+    );
     expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
     fireEvent.click(summary);
     expect(disclosure).not.toHaveAttribute("open");
@@ -107,11 +185,21 @@ describe("independent author identity and page credits", () => {
   it("connects the visible local author biography to Person metadata without inventing review ratings", async () => {
     const { container } = await pageAt("/about-me/");
     expect(container.querySelector("#moshe-barak")).toHaveTextContent("Moshe Barak");
-    expect(screen.getByRole("heading", { level: 1, name: "Let me help you discover Israel" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Let me help you discover Israel" }),
+    ).toBeInTheDocument();
     const head = await AboutRoute.options.head?.({} as never);
-    const schemas = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
-    const schema = schemas.flatMap(item => Array.isArray(item["@graph"]) ? item["@graph"] : [item]).find((item) => item["@type"] === "Person");
-    expect(schema).toMatchObject({ name: "Moshe Barak", url: expect.stringMatching(/\/about-me\/#moshe-barak$/), sameAs: [mosheBarakAuthor.reviewsUrl] });
+    const schemas = head!.scripts!.flatMap((script) =>
+      typeof script?.children === "string" ? [JSON.parse(script.children)] : [],
+    );
+    const schema = schemas
+      .flatMap((item) => (Array.isArray(item["@graph"]) ? item["@graph"] : [item]))
+      .find((item) => item["@type"] === "Person");
+    expect(schema).toMatchObject({
+      name: "Moshe Barak",
+      url: expect.stringMatching(/\/about-me\/#moshe-barak$/),
+      sameAs: [mosheBarakAuthor.reviewsUrl],
+    });
     expect(schema.aggregateRating).toBeUndefined();
     expect(schema.review).toBeUndefined();
     expect(head!.meta).toContainEqual({ name: "robots", content: "noindex,nofollow" });

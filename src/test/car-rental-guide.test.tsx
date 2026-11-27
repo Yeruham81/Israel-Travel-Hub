@@ -15,11 +15,22 @@ afterEach(cleanup);
 
 describe("car rental guide and Travelpayouts search", () => {
   it("offers practical planning, real tables, six related guides and tracked comparison links", async () => {
-    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: ["/car-rental/"] }), trailingSlash: "always" });
+    const router = createRouter({
+      routeTree,
+      context: { queryClient: new QueryClient() },
+      history: createMemoryHistory({ initialEntries: ["/car-rental/"] }),
+      trailingSlash: "always",
+    });
     await router.load();
-    const { container } = render(<RouterContextProvider router={router}><CarRentalGuide /></RouterContextProvider>);
+    const { container } = render(
+      <RouterContextProvider router={router}>
+        <CarRentalGuide />
+      </RouterContextProvider>,
+    );
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Car Rental in Israel");
-    for (const link of within(screen.getByRole("navigation", { name: "On this page" })).getAllByRole("link")) {
+    for (const link of within(
+      screen.getByRole("navigation", { name: "On this page" }),
+    ).getAllByRole("link")) {
       expect(container.querySelector(link.getAttribute("href")!)).not.toBeNull();
     }
     const documents = container.querySelector("#documents") as HTMLElement;
@@ -33,18 +44,27 @@ describe("car rental guide and Travelpayouts search", () => {
     const related = within(container).getByRole("region", { name: "Plan your trip around Israel" });
     const summaries = related.querySelectorAll(".line-clamp-2");
     expect(summaries).toHaveLength(6);
-    expect(Array.from(summaries).every(summary => (summary.textContent?.length || 0) <= 80)).toBe(true);
+    expect(Array.from(summaries).every((summary) => (summary.textContent?.length || 0) <= 80)).toBe(
+      true,
+    );
     const tables = screen.getAllByRole("table");
     expect(tables).toHaveLength(2);
     for (const table of tables) {
       expect(table).not.toHaveClass("hidden");
       expect(table.parentElement).toHaveClass("overflow-x-auto");
     }
-    expect(container.querySelector('[data-testid="stay-trip-photo-grid"]')?.children).toHaveLength(6);
-    expect(container.querySelector('[data-testid="stay-trip-photo-grid"]')).toHaveClass("grid-cols-2", "lg:grid-cols-3");
+    expect(container.querySelector('[data-testid="stay-trip-photo-grid"]')?.children).toHaveLength(
+      6,
+    );
+    expect(container.querySelector('[data-testid="stay-trip-photo-grid"]')).toHaveClass(
+      "grid-cols-2",
+      "lg:grid-cols-3",
+    );
     for (const source of carRentalSources) expect(getSource(source.id)?.url).toBe(source.url);
     expect(guideHeroPhotoForPath("/car-rental/")).toEqual(carRentalHero);
-    const referrals = Array.from(container.querySelectorAll<HTMLAnchorElement>('a[href*="discovercars.tpm.li"]'));
+    const referrals = Array.from(
+      container.querySelectorAll<HTMLAnchorElement>('a[href*="discovercars.tpm.li"]'),
+    );
     expect(referrals).toHaveLength(2);
     for (const link of referrals) {
       const url = new URL(link.href);
@@ -60,7 +80,11 @@ describe("car rental guide and Travelpayouts search", () => {
     expect(alternative.nextElementSibling).toBe(contactSection);
     expect(contactSection.nextElementSibling).toBe(related);
     expect(within(alternative).queryByRole("link")).not.toBeInTheDocument();
-    expect(within(contactSection).getByRole("heading", { name: "Need a private driver for your Israel journey?" })).toBeInTheDocument();
+    expect(
+      within(contactSection).getByRole("heading", {
+        name: "Need a private driver for your Israel journey?",
+      }),
+    ).toBeInTheDocument();
     expect(within(form).getByRole("textbox", { name: "Full name *" })).toBeRequired();
     expect(within(form).getByRole("textbox", { name: "Email address *" })).toBeRequired();
     expect(within(form).getByRole("textbox", { name: "Subject *" })).toHaveValue("");
@@ -71,18 +95,43 @@ describe("car rental guide and Travelpayouts search", () => {
 
   it("uses the official campaign, publisher and airport default inside an isolated local frame", () => {
     render(<DiscoverCarsSearchWidget />);
-    expect(screen.getByTitle("DiscoverCars car rental search")).toHaveAttribute("src", "/widgets/discovercars.html");
-    const html = new DOMParser().parseFromString(readFileSync("public/widgets/discovercars.html", "utf8"), "text/html");
-    const src = new URL(html.querySelector<HTMLScriptElement>("script[data-consent-src]")!.dataset["consentSrc"]!);
+    expect(screen.getByTitle("DiscoverCars car rental search")).toHaveAttribute(
+      "src",
+      "/widgets/discovercars.html",
+    );
+    const html = new DOMParser().parseFromString(
+      readFileSync("public/widgets/discovercars.html", "utf8"),
+      "text/html",
+    );
+    const src = new URL(
+      html.querySelector<HTMLScriptElement>("script[data-consent-src]")!.dataset["consentSrc"]!,
+    );
     expect(src.origin).toBe("https://tpwgt.com");
-    expect(Object.fromEntries(src.searchParams)).toMatchObject({ campaign_id: "117", promo_id: "3873", trs: "406243", shmarker: "622032.car_rental_widget", location: "israel/tel-aviv/tlv", locale: "en" });
-    expect(html.querySelector('meta[name="robots"]')?.getAttribute("content")).toBe("noindex,nofollow");
+    expect(Object.fromEntries(src.searchParams)).toMatchObject({
+      campaign_id: "117",
+      promo_id: "3873",
+      trs: "406243",
+      shmarker: "622032.car_rental_widget",
+      location: "israel/tel-aviv/tlv",
+      locale: "en",
+    });
+    expect(html.querySelector('meta[name="robots"]')?.getAttribute("content")).toBe(
+      "noindex,nofollow",
+    );
   });
 
   it("accepts height changes only from its own same-origin frame and removes the frame on unmount", () => {
     const { unmount } = render(<DiscoverCarsSearchWidget />);
     const frame = screen.getByTitle("DiscoverCars car rental search") as HTMLIFrameElement;
-    const resize = (origin: string, source: Window | null, height: number) => fireEvent(window, new MessageEvent("message", { origin, source, data: { type: "itt-discovercars-height", height } }));
+    const resize = (origin: string, source: Window | null, height: number) =>
+      fireEvent(
+        window,
+        new MessageEvent("message", {
+          origin,
+          source,
+          data: { type: "itt-discovercars-height", height },
+        }),
+      );
     resize("https://unrelated.example", frame.contentWindow, 700);
     resize(window.location.origin, window, 700);
     resize(window.location.origin, frame.contentWindow, NaN);
@@ -98,8 +147,18 @@ describe("car rental guide and Travelpayouts search", () => {
   it("keeps a tracked alternative available when the provider reports a loading error", () => {
     render(<DiscoverCarsSearchWidget />);
     const frame = screen.getByTitle("DiscoverCars car rental search") as HTMLIFrameElement;
-    fireEvent(window, new MessageEvent("message", { origin: window.location.origin, source: frame.contentWindow, data: { type: "itt-discovercars-error" } }));
+    fireEvent(
+      window,
+      new MessageEvent("message", {
+        origin: window.location.origin,
+        source: frame.contentWindow,
+        data: { type: "itt-discovercars-error" },
+      }),
+    );
     expect(screen.getByRole("status")).toHaveTextContent("temporarily unavailable");
-    expect(screen.getByRole("link", { name: "Compare car rental prices" })).toHaveAttribute("rel", "sponsored noopener noreferrer");
+    expect(screen.getByRole("link", { name: "Compare car rental prices" })).toHaveAttribute(
+      "rel",
+      "sponsored noopener noreferrer",
+    );
   });
 });

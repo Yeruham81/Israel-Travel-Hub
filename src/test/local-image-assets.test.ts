@@ -8,7 +8,7 @@ import { travelGuides } from "@/data/travelGuides";
 const srcRoot = resolve(process.cwd(), "src");
 
 function sourceFiles(directory: string): string[] {
-  return readdirSync(directory, { withFileTypes: true }).flatMap(item => {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((item) => {
     const path = join(directory, item.name);
     if (item.isDirectory()) return item.name === "test" ? [] : sourceFiles(path);
     return /\.(tsx?|css)$/.test(item.name) && item.name !== "routeTree.gen.ts" ? [path] : [];
@@ -35,24 +35,40 @@ function remoteImageViolations(file: string, source: string): number[] {
         const element = node.parent.parent;
         if (ts.isJsxOpeningElement(element) || ts.isJsxSelfClosingElement(element)) {
           const tag = element.tagName.getText(tree);
-          const literal = node.initializer && (ts.isJsxExpression(node.initializer) ? node.initializer.expression : node.initializer);
-          if ((tag === "iframe" || tag === "ConsentIframe") && literal && ts.isStringLiteralLike(literal) &&
-              /^https:\/\/maps\.google\.com\//.test(literal.text)) {
+          const literal =
+            node.initializer &&
+            (ts.isJsxExpression(node.initializer) ? node.initializer.expression : node.initializer);
+          if (
+            (tag === "iframe" || tag === "ConsentIframe") &&
+            literal &&
+            ts.isStringLiteralLike(literal) &&
+            /^https:\/\/maps\.google\.com\//.test(literal.text)
+          ) {
             exempt.push([node.getStart(tree), node.end]);
           }
         }
       }
-      if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
-          ts.isPropertyAccessExpression(node.left) && node.left.expression.getText(tree) === "script" &&
-          node.left.name.text === "src" && ts.isStringLiteralLike(node.right) &&
-          /^https:\/\/www\.googletagmanager\.com\/gtag\/js(?:\?|$)/.test(node.right.text)) {
+      if (
+        ts.isBinaryExpression(node) &&
+        node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+        ts.isPropertyAccessExpression(node.left) &&
+        node.left.expression.getText(tree) === "script" &&
+        node.left.name.text === "src" &&
+        ts.isStringLiteralLike(node.right) &&
+        /^https:\/\/www\.googletagmanager\.com\/gtag\/js(?:\?|$)/.test(node.right.text)
+      ) {
         exempt.push([node.getStart(tree), node.end]);
       }
       // GA4's URL includes an interpolated measurement ID.
-      if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
-          ts.isPropertyAccessExpression(node.left) && node.left.expression.getText(tree) === "script" &&
-          node.left.name.text === "src" && ts.isTemplateExpression(node.right) &&
-          /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?/.test(node.right.head.text)) {
+      if (
+        ts.isBinaryExpression(node) &&
+        node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+        ts.isPropertyAccessExpression(node.left) &&
+        node.left.expression.getText(tree) === "script" &&
+        node.left.name.text === "src" &&
+        ts.isTemplateExpression(node.right) &&
+        /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?/.test(node.right.head.text)
+      ) {
         exempt.push([node.getStart(tree), node.end]);
       }
       ts.forEachChild(node, visit);
@@ -61,7 +77,10 @@ function remoteImageViolations(file: string, source: string): number[] {
   }
   let inspected = source;
   for (const [start, end] of exempt.sort((a, b) => b[0] - a[0])) {
-    inspected = inspected.slice(0, start) + inspected.slice(start, end).replace(/[^\r\n]/g, " ") + inspected.slice(end);
+    inspected =
+      inspected.slice(0, start) +
+      inspected.slice(start, end).replace(/[^\r\n]/g, " ") +
+      inspected.slice(end);
   }
   const violations = new Set<number>();
   for (const pattern of remoteImagePatterns) {
@@ -92,10 +111,21 @@ describe("local-only image asset policy", () => {
     const script = 'script.src = "https://www.googletagmanager.com/gtag/js?id=G-TEST";';
     expect(remoteImageViolations("probe.tsx", map)).toEqual([]);
     expect(remoteImageViolations("probe.ts", script)).toEqual([]);
-    expect(remoteImageViolations("probe.tsx", '<img\n src="https://maps.google.com/maps?q=Akko"\n/>')).not.toEqual([]);
-    expect(remoteImageViolations("probe.tsx", '<img src=\n"https://example.org/remote.webp" />')).not.toEqual([]);
-    expect(remoteImageViolations("probe.tsx", map + '\n<img src="https://example.org/remote.webp"/>')).not.toEqual([]);
-    expect(remoteImageViolations("probe.tsx", '<ConsentIframe src="https://images.unsplash.com/photo-test"/>')).not.toEqual([]);
+    expect(
+      remoteImageViolations("probe.tsx", '<img\n src="https://maps.google.com/maps?q=Akko"\n/>'),
+    ).not.toEqual([]);
+    expect(
+      remoteImageViolations("probe.tsx", '<img src=\n"https://example.org/remote.webp" />'),
+    ).not.toEqual([]);
+    expect(
+      remoteImageViolations("probe.tsx", map + '\n<img src="https://example.org/remote.webp"/>'),
+    ).not.toEqual([]);
+    expect(
+      remoteImageViolations(
+        "probe.tsx",
+        '<ConsentIframe src="https://images.unsplash.com/photo-test"/>',
+      ),
+    ).not.toEqual([]);
   });
 
   it("never hotlinks images in authored source", () => {
@@ -129,14 +159,14 @@ describe("local-only image asset policy", () => {
 
   it("keeps every attraction and travel-guide image on the project's own origin", () => {
     const allImages = [
-      ...Object.values(attractionGuides).flatMap(guide => guide.image ? [guide.image.src] : []),
-      ...Object.values(travelGuides).flatMap(guide => [
+      ...Object.values(attractionGuides).flatMap((guide) => (guide.image ? [guide.image.src] : [])),
+      ...Object.values(travelGuides).flatMap((guide) => [
         ...(guide.photo?.src ? [guide.photo.src] : []),
-        ...guide.sections.flatMap(section => section.photo?.src ? [section.photo.src] : []),
+        ...guide.sections.flatMap((section) => (section.photo?.src ? [section.photo.src] : [])),
       ]),
     ];
     expect(allImages.length).toBeGreaterThan(60);
-    expect(allImages.filter(src => /^https?:\/\//i.test(src))).toEqual([]);
-    expect(allImages.every(src => src.startsWith("/"))).toBe(true);
+    expect(allImages.filter((src) => /^https?:\/\//i.test(src))).toEqual([]);
+    expect(allImages.every((src) => src.startsWith("/"))).toBe(true);
   });
 });

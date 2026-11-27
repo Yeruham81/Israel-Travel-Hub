@@ -19,23 +19,30 @@ describe("Mount Zion full attraction guide", () => {
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(7);
     expect(content.sources).toHaveLength(11);
-    expect(attractionHubCards.filter(card => card.to === content.path)).toHaveLength(1);
+    expect(attractionHubCards.filter((card) => card.to === content.path)).toHaveLength(1);
     const meta = mountZionMeta();
-    expect(meta.links.some(link => link.rel === "canonical" && link.href?.includes(content.path))).toBe(true);
-    const article = meta.scripts.map(script => JSON.parse(script.children as string)).find(schema => schema["@type"] === "Article");
+    expect(
+      meta.links.some((link) => link.rel === "canonical" && link.href?.includes(content.path)),
+    ).toBe(true);
+    const article = meta.scripts
+      .map((script) => JSON.parse(script.children as string))
+      .find((schema) => schema["@type"] === "Article");
     expect(article.dateModified).toBe(mountZionSite.updatedAt);
-    expect(article.citation).toEqual(content.sources.map(source => source.url));
+    expect(article.citation).toEqual(content.sources.map((source) => source.url));
   });
 
   it("preserves seven verified landmarks and locally stored site-specific photos", () => {
     const page = readFileSync("src/components/MountZionAttractionPage.tsx", "utf8");
     const map = readFileSync("src/components/MountZionMap.tsx", "utf8");
     expect(mountZionEditorialUpdate.stops).toHaveLength(7);
-    const photos = mountZionEditorialUpdate.stops.flatMap(stop => stop.image ? [stop.image] : []);
+    const photos = mountZionEditorialUpdate.stops.flatMap((stop) =>
+      stop.image ? [stop.image] : [],
+    );
     expect(photos).toHaveLength(7);
-    expect(new Set(photos.map(photo => photo.src)).size).toBe(7);
+    expect(new Set(photos.map((photo) => photo.src)).size).toBe(7);
     for (const photo of photos) {
-      if (photo.src.startsWith("/images/")) expect(existsSync("public" + photo.src), photo.src).toBe(true);
+      if (photo.src.startsWith("/images/"))
+        expect(existsSync("public" + photo.src), photo.src).toBe(true);
     }
     expect(page).toContain("orderedStops.map");
     expect(page).toContain("mobileImageFirst");
@@ -70,20 +77,24 @@ describe("Mount Zion full attraction guide", () => {
   it("provides current, operator-specific Sunday and museum visiting information", () => {
     expect(mountZionSite.hours).toHaveLength(7);
     expect(mountZionSite.official.mountZionMap).toContain("Mount-Zion-map-english.pdf");
-    const tomb = mountZionSite.hours.find(site => site.name === "David’s Tomb");
-    const grave = mountZionSite.hours.find(site => site.name === "Oskar Schindler’s grave");
+    const tomb = mountZionSite.hours.find((site) => site.name === "David’s Tomb");
+    const grave = mountZionSite.hours.find((site) => site.name === "Oskar Schindler’s grave");
     expect(tomb?.time).toContain("09:00–sunset");
     expect(grave?.time).toContain("09:00–16:00");
-    const abbey = mountZionSite.hours.find(site => site.name === "Dormition Abbey");
-    const gallicantu = mountZionSite.hours.find(site => site.name === "St Peter in Gallicantu");
-    const museum = mountZionSite.hours.find(site => site.name.includes("Chamber of the Holocaust"));
+    const abbey = mountZionSite.hours.find((site) => site.name === "Dormition Abbey");
+    const gallicantu = mountZionSite.hours.find((site) => site.name === "St Peter in Gallicantu");
+    const museum = mountZionSite.hours.find((site) =>
+      site.name.includes("Chamber of the Holocaust"),
+    );
     expect(abbey?.time).toContain("Sunday 11:30–17:00");
     expect(gallicantu?.time).toContain("closed Sunday");
     expect(museum?.time).toContain("Sun–Thu 09:00–14:00");
-    expect(content.sources.some(x => x.url === mountZionSite.official.dormition)).toBe(true);
-    expect(content.sources.some(x => x.url === mountZionSite.official.mountZionMap)).toBe(true);
-    expect(content.sources.some(x => x.url === mountZionSite.official.gallicantu)).toBe(true);
-    expect(content.sources.some(x => x.url === mountZionSite.official.holocaustChamber)).toBe(true);
-    expect(new Set(content.sources.map(source => source.url)).size).toBe(content.sources.length);
+    expect(content.sources.some((x) => x.url === mountZionSite.official.dormition)).toBe(true);
+    expect(content.sources.some((x) => x.url === mountZionSite.official.mountZionMap)).toBe(true);
+    expect(content.sources.some((x) => x.url === mountZionSite.official.gallicantu)).toBe(true);
+    expect(content.sources.some((x) => x.url === mountZionSite.official.holocaustChamber)).toBe(
+      true,
+    );
+    expect(new Set(content.sources.map((source) => source.url)).size).toBe(content.sources.length);
   });
 });

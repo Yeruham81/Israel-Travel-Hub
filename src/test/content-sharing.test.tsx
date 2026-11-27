@@ -130,7 +130,10 @@ it("renders all eight local icons and correct destinations with the current page
     LinkedIn: "www.linkedin.com",
   };
   for (const [label, host] of Object.entries(expected)) {
-    const link = screen.getByRole("link", { name: label === "WhatsApp" || label === "Telegram" ? `Share via ${label}` : `Share on ${label}` });
+    const link = screen.getByRole("link", {
+      name:
+        label === "WhatsApp" || label === "Telegram" ? `Share via ${label}` : `Share on ${label}`,
+    });
     const target = new URL(link.getAttribute("href")!);
     expect(target.hostname).toBe(host);
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
@@ -153,7 +156,9 @@ it("copies the public link and announces success only after the clipboard succee
   vi.stubGlobal("navigator", { clipboard: { writeText } });
   render(<ContentSharePanel pathname={path} />);
   fireEvent.click(screen.getByRole("button", { name: "Copy link" }));
-  await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Link copied to clipboard."));
+  await waitFor(() =>
+    expect(screen.getByRole("status")).toHaveTextContent("Link copied to clipboard."),
+  );
   expect(writeText).toHaveBeenCalledExactlyOnceWith(`${CANONICAL_ORIGIN}${path}`);
   expect(screen.getByRole("button", { name: "Copied!" })).toBeInTheDocument();
 });

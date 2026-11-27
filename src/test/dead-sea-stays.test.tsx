@@ -17,31 +17,72 @@ import { Route as SpaRoute } from "@/routes/accommodation.dead-sea.spa";
 import { Route as FamilyRoute } from "@/routes/accommodation.dead-sea.family";
 
 vi.mock("@tanstack/react-router", async () => {
-  const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
-  return { ...actual, Link: ({ to, hash, children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement> & { to: string; hash?: string; children?: ReactNode }) => <a href={hash ? `${to}#${hash}` : to} {...props}>{children}</a> };
+  const actual =
+    await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
+  return {
+    ...actual,
+    Link: ({
+      to,
+      hash,
+      children,
+      ...props
+    }: AnchorHTMLAttributes<HTMLAnchorElement> & {
+      to: string;
+      hash?: string;
+      children?: ReactNode;
+    }) => (
+      <a href={hash ? `${to}#${hash}` : to} {...props}>
+        {children}
+      </a>
+    ),
+  };
 });
 
-afterEach(() => { cleanup(); localStorage.clear(); });
-const categories = hotelCategoryGuides.filter((guide) => guide.destinationId === deadSeaStayGuide.id);
+afterEach(() => {
+  cleanup();
+  localStorage.clear();
+});
+const categories = hotelCategoryGuides.filter(
+  (guide) => guide.destinationId === deadSeaStayGuide.id,
+);
 
 describe("Dead Sea destination → travel intent → booking", () => {
   it("preserves the original destination URL and gives both category guides independent routes", () => {
-    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
+    const router = createRouter({
+      routeTree,
+      context: { queryClient: new QueryClient() },
+      trailingSlash: "always",
+    });
     for (const path of [deadSeaStayGuide.path, ...categories.map((guide) => guide.path)]) {
-      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path === deadSeaStayGuide.path ? path : path.replace(/\/$/, ""));
+      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(
+        path === deadSeaStayGuide.path ? path : path.replace(/\/$/, ""),
+      );
     }
   });
 
   it("each intent page has its own title, description, canonical and breadcrumb while staging remains noindex", async () => {
-    const records = [{ route: DestinationRoute, guide: deadSeaStayGuide }, { route: SpaRoute, guide: categories.find((g) => g.id === "spa")! }, { route: FamilyRoute, guide: categories.find((g) => g.id === "family")! }];
+    const records = [
+      { route: DestinationRoute, guide: deadSeaStayGuide },
+      { route: SpaRoute, guide: categories.find((g) => g.id === "spa")! },
+      { route: FamilyRoute, guide: categories.find((g) => g.id === "family")! },
+    ];
     expect(new Set(records.map(({ guide }) => guide.title)).size).toBe(3);
     expect(new Set(records.map(({ guide }) => guide.metaDescription)).size).toBe(3);
     for (const { route, guide } of records) {
       const head = await route.options.head?.({} as never);
       expect(head).toMatchObject({
-        meta: expect.arrayContaining([{ title: guide.title }, { name: "description", content: guide.metaDescription }, { name: "robots", content: "noindex,nofollow" }]),
+        meta: expect.arrayContaining([
+          { title: guide.title },
+          { name: "description", content: guide.metaDescription },
+          { name: "robots", content: "noindex,nofollow" },
+        ]),
         links: [{ rel: "canonical", href: CANONICAL_ORIGIN + guide.path }],
-        scripts: expect.arrayContaining([expect.objectContaining({ type: "application/ld+json", children: expect.stringContaining(CANONICAL_ORIGIN + guide.path) })]),
+        scripts: expect.arrayContaining([
+          expect.objectContaining({
+            type: "application/ld+json",
+            children: expect.stringContaining(CANONICAL_ORIGIN + guide.path),
+          }),
+        ]),
       });
     }
   });
@@ -63,40 +104,79 @@ describe("Dead Sea destination → travel intent → booking", () => {
       expect(within(card).getByRole("heading", { name: guide.shortTitle })).toBeInTheDocument();
     }
     const map = container.querySelector("#location iframe")!;
-    expect(new URL(map.getAttribute("src")!, "https://example.test").hostname).toBe("maps.google.com");
-    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#location")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(new URL(map.getAttribute("src")!, "https://example.test").hostname).toBe(
+      "maps.google.com",
+    );
+    expect(
+      container
+        .querySelector("#book")!
+        .compareDocumentPosition(container.querySelector("#location")!),
+    ).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(container.querySelectorAll("main")).toHaveLength(1);
-    for (const hotel of deadSeaHotelRecommendations) expect(container.querySelectorAll(`#hotel-${hotel.id}`)).toHaveLength(1);
+    for (const hotel of deadSeaHotelRecommendations)
+      expect(container.querySelectorAll(`#hotel-${hotel.id}`)).toHaveLength(1);
   });
 
-  it.each(categories)("$shortTitle answers a distinct intent before showing its own hotel shortlist", (guide) => {
-    const { container } = render(<HotelCategoryPage guide={guide} destination={deadSeaStayGuide} />);
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
-    expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(guide.id === "spa" ? 5 : 4);
-    expect(screen.getAllByTestId("stay-comparison-row")).toHaveLength(guide.picks.length);
-    for (const column of guide.comparison) expect(screen.getByRole("columnheader", { name: column.label })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: guide.detailTitle })).toBeInTheDocument();
-    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#details")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: "Dead Sea" })).toHaveAttribute("href", deadSeaStayGuide.path);
-    expect(screen.getByRole("link", { name: /See the map and compare/ })).toHaveAttribute("href", `${deadSeaStayGuide.path}#location`);
-    const sibling = categories.find((g) => g.id !== guide.id)!;
-    expect(screen.getByRole("link", { name: sibling.title })).toHaveAttribute("href", sibling.path);
-    expect(container.querySelectorAll("main")).toHaveLength(1);
-  });
+  it.each(categories)(
+    "$shortTitle answers a distinct intent before showing its own hotel shortlist",
+    (guide) => {
+      const { container } = render(
+        <HotelCategoryPage guide={guide} destination={deadSeaStayGuide} />,
+      );
+      expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
+      expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(
+        guide.id === "spa" ? 5 : 4,
+      );
+      expect(screen.getAllByTestId("stay-comparison-row")).toHaveLength(guide.picks.length);
+      for (const column of guide.comparison)
+        expect(screen.getByRole("columnheader", { name: column.label })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: guide.detailTitle })).toBeInTheDocument();
+      expect(
+        container
+          .querySelector("#book")!
+          .compareDocumentPosition(container.querySelector("#details")!),
+      ).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      expect(
+        within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", {
+          name: "Dead Sea",
+        }),
+      ).toHaveAttribute("href", deadSeaStayGuide.path);
+      expect(screen.getByRole("link", { name: /See the map and compare/ })).toHaveAttribute(
+        "href",
+        `${deadSeaStayGuide.path}#location`,
+      );
+      const sibling = categories.find((g) => g.id !== guide.id)!;
+      expect(screen.getByRole("link", { name: sibling.title })).toHaveAttribute(
+        "href",
+        sibling.path,
+      );
+      expect(container.querySelectorAll("main")).toHaveLength(1);
+    },
+  );
 
   it("all property bookings preserve publisher tracking and the correct analytics page", () => {
     for (const guide of categories) {
-      const { unmount } = render(<HotelCategoryPage guide={guide} destination={deadSeaStayGuide} />);
+      const { unmount } = render(
+        <HotelCategoryPage guide={guide} destination={deadSeaStayGuide} />,
+      );
       for (const pick of guide.picks) {
         const hotel = deadSeaHotelRecommendations.find((hotel) => hotel.id === pick.hotelId)!;
         const booking = providerLinks.find((link) => link.id === `hotel-${hotel.id}-expedia`)!;
         const link = screen.getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
-        expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, `stay-deadsea-${guide.id}`, hotel.id));
+        expect(link).toHaveAttribute(
+          "href",
+          hotelAffiliateUrl(booking, `stay-deadsea-${guide.id}`, hotel.id),
+        );
         expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
         expect(link).toHaveAttribute("target", "_blank");
         link.addEventListener("click", (event) => event.preventDefault());
         fireEvent.click(link);
-        expect(readOutboundClicks().at(-1)).toMatchObject({ event: "outbound_click", pageId: `stay-deadsea-${guide.id}`, productId: hotel.id, offerId: booking.id });
+        expect(readOutboundClicks().at(-1)).toMatchObject({
+          event: "outbound_click",
+          pageId: `stay-deadsea-${guide.id}`,
+          productId: hotel.id,
+          offerId: booking.id,
+        });
       }
       unmount();
     }
@@ -104,10 +184,14 @@ describe("Dead Sea destination → travel intent → booking", () => {
 
   it("family recommendations exclude age-restricted hotels and explain spa access separately", () => {
     const family = categories.find((guide) => guide.id === "family")!;
-    const { container } = render(<HotelCategoryPage guide={family} destination={deadSeaStayGuide} />);
+    const { container } = render(
+      <HotelCategoryPage guide={family} destination={deadSeaStayGuide} />,
+    );
     expect(container.querySelector("#hotel-ds-kayma")).toBeNull();
     expect(container.querySelector("#hotel-ds-oasis")).toBeNull();
     expect(container.querySelector("#hotel-ds-noga")).toHaveTextContent("Spa entry is 16+");
-    expect(screen.getByRole("heading", { name: "What all-inclusive means here" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "What all-inclusive means here" }),
+    ).toBeInTheDocument();
   });
 });

@@ -18,12 +18,16 @@ describe("Yardenit individual attraction upgrade", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("Free entry");
-    expect(content.facts.find(f => f.label === "Visitor hours")?.value).toBe("Confirm with Yardenit");
+    expect(content.facts.find((f) => f.label === "Admission")?.value).toBe("Free entry");
+    expect(content.facts.find((f) => f.label === "Visitor hours")?.value).toBe(
+      "Confirm with Yardenit",
+    );
     expect(travelGuides.yardenit.updatedAt).toBe(site.updatedAt);
     expect(travelGuides.yardenit.title).toBe(content.title);
     expect(JSON.stringify(travelGuideMeta("yardenit").scripts)).toContain("2026-11-17");
-    expect(attractionHubCards.filter(item => String(item.to) === String(content.path))).toHaveLength(1);
+    expect(
+      attractionHubCards.filter((item) => String(item.to) === String(content.path)),
+    ).toHaveLength(1);
     expect(article).toMatch(sourceFragment("Baptism ends before site closing"));
     expect(content.glanceNote).toBeUndefined();
     expect(article).toMatch(sourceFragment("There is no resident priest"));
@@ -36,14 +40,18 @@ describe("Yardenit individual attraction upgrade", () => {
     expect(article).toMatch(sourceFragment("Bring a towel, dry clothes"));
     expect(article).toMatch(sourceFragment("established in <strong>1981 by Kibbutz Kinneret"));
     expect(article).toMatch(sourceFragment("more than 80 languages and dialects"));
-    expect(article).toMatch(sourceFragment("Pilgrims in white robes taking part in a group baptism"));
+    expect(article).toMatch(
+      sourceFragment("Pilgrims in white robes taking part in a group baptism"),
+    );
     expect(article).toMatch(sourceFragment('to="/car-rental/"'));
     expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toMatch(sourceFragment('href="#contact"'));
     expect(article).toMatch(sourceFragment('to="/tours/nazareth-sea-of-galilee/"'));
     expect(shell).toMatch(sourceFragment('["contact", "Contact me"]'));
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
-    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(sourceIndex(shell, "<HomeContactForm"));
+    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(
+      sourceIndex(shell, "<HomeContactForm"),
+    );
   });
   it("uses local photos without repeating the hero and keeps relevant links", () => {
     expect(existsSync("src/assets/guides/yardenit.jpg")).toBe(true);
@@ -53,12 +61,12 @@ describe("Yardenit individual attraction upgrade", () => {
     expect(article.split(photo).length - 1).toBe(1);
     expect(content.nearby).toHaveLength(6);
     expect(content.planningLinks).toHaveLength(6);
-    expect(new Set(content.nearby?.map(item => String(item.to))).size).toBe(6);
+    expect(new Set(content.nearby?.map((item) => String(item.to))).size).toBe(6);
     expect(content.faqs?.length).toBeGreaterThanOrEqual(6);
     expect(content.sources).toHaveLength(5);
-    expect(content.sources.every(item => item.url.startsWith("https://"))).toBe(true);
+    expect(content.sources.every((item) => item.url.startsWith("https://"))).toBe(true);
     expect(site.sources.wall).toBe("https://www.yardenit.com/wall-of-new-life/");
-    expect(content.nearby?.map(item => item.to)).toEqual([
+    expect(content.nearby?.map((item) => item.to)).toEqual([
       "/attractions/magdala/",
       "/attractions/tabgha/",
       "/attractions/capernaum/",

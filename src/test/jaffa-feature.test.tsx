@@ -21,16 +21,19 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(content.itineraryTitle).toMatch(/walking routes/i);
     expect(content.navigationSections).toHaveLength(12);
     expect(content.navigationSections?.[0]).toEqual(["visit-plan", "Walking routes & map"]);
-    expect(content.navigationSections?.find(entry => entry[0] === "history")).toBeTruthy();
-    expect(content.navigationSections?.find(entry => entry[0] === "trip-planning")).toBeTruthy();
-    expect(content.navigationSections?.find((entry) => entry[0] === "food")).toEqual(["food", "Food & cafés"]);
+    expect(content.navigationSections?.find((entry) => entry[0] === "history")).toBeTruthy();
+    expect(content.navigationSections?.find((entry) => entry[0] === "trip-planning")).toBeTruthy();
+    expect(content.navigationSections?.find((entry) => entry[0] === "food")).toEqual([
+      "food",
+      "Food & cafés",
+    ]);
     expect(content.navigationSections?.at(-1)).toEqual(["contact", "Contact me"]);
     expect(content.foodContent).toBeTruthy();
     expect(content.practicalContent).toBeTruthy();
     expect(content.visitorContent).toBeTruthy();
     expect(content.transportContent).toBeTruthy();
     expect(content.nearby).toHaveLength(6);
-    expect(new Set(content.nearby!.map(x => x.to)).size).toBe(6);
+    expect(new Set(content.nearby!.map((x) => x.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.sources.length).toBeGreaterThanOrEqual(7);
     expect(component.match(/<AttractionHighlight(?:\s|\n)/g)).toHaveLength(10);
@@ -54,19 +57,25 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(component).not.toMatch(sourceFragment("Ilana Goor Museum on Google Maps"));
     expect(component).toContain("Mazal%20Dagim%20Street");
     expect(component).toContain("HaPisga%20Garden");
-    expect(component).not.toMatch(sourceFragment("waypoints=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel%7CKedumim"));
+    expect(component).not.toMatch(
+      sourceFragment("waypoints=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel%7CKedumim"),
+    );
     // Two complete walking routes plus the existing Clock Tower arrival-directions link.
-    expect(component.match(/https:\/\/www\.google\.com\/maps\/dir\/\?api=1/g)!.length).toBeGreaterThanOrEqual(7);
+    expect(
+      component.match(/https:\/\/www\.google\.com\/maps\/dir\/\?api=1/g)!.length,
+    ).toBeGreaterThanOrEqual(7);
     expect(component).toMatch(sourceFragment('data-testid="jaffa-transport"'));
     expect(component).toContain("Shalma");
     expect(component).toMatch(sourceFragment("DAN KAL"));
-    expect(component).toMatch(sourceFragment("href=\"#contact\""));
+    expect(component).toMatch(sourceFragment('href="#contact"'));
   });
 
   it("has canonical SEO, original image assets and verified operator references", () => {
     const meta = jaffaMeta();
-    expect(meta.links.find(x => x.rel === "canonical")?.href).toContain(content.path);
-    const article = meta.scripts.map(x => JSON.parse(x.children as string)).find(x => x["@type"] === "Article");
+    expect(meta.links.find((x) => x.rel === "canonical")?.href).toContain(content.path);
+    const article = meta.scripts
+      .map((x) => JSON.parse(x.children as string))
+      .find((x) => x["@type"] === "Article");
     expect(article.dateModified).toBe(jaffaSite.updatedAt);
     expect(article.citation).toContain(jaffaSite.official.municipalWalkingMap);
     const component = readFileSync("src/components/JaffaAttractionPage.tsx", "utf8");
@@ -82,16 +91,24 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(jaffaSite.official.municipalWalkMapShort).toMatch(/\.pdf$/);
     expect(jaffaSite.official.weekendBuses).toContain("naimbesofash");
     expect(component).toMatch(sourceFragment("2 Marzouk & Azar St"));
-    expect(component).toMatch(sourceFragment("position: \"38% center\""));
+    expect(component).toMatch(sourceFragment('position: "38% center"'));
     expect(jaffaSite.official.touristInformation).toBe("https://visit.tel-aviv.gov.il/info/about");
     expect(jaffaSite.official.municipalWalkingGuide).toContain("oldjaffatour.aspx");
     expect(component).toMatch(sourceFragment("Uri Geller Museum"));
     expect(component).toContain("/travel-blog/calendar-of-events/");
     const names = [
-      "jaffa-panorama.webp", "jaffa-clock-tower.webp", "jaffa-mahmoudiya-mosque.webp",
-      "jaffa-kedumim-square.webp", "jaffa-st-peters-church.webp", "jaffa-zodiac-alleys.webp",
-      "jaffa-summit-garden.webp", "jaffa-port.webp", "jaffa-flea-market.webp",
-      "jaffa-ilana-goor-museum.webp", "jaffa-nalagaat-center.webp", "jaffa-food.webp",
+      "jaffa-panorama.webp",
+      "jaffa-clock-tower.webp",
+      "jaffa-mahmoudiya-mosque.webp",
+      "jaffa-kedumim-square.webp",
+      "jaffa-st-peters-church.webp",
+      "jaffa-zodiac-alleys.webp",
+      "jaffa-summit-garden.webp",
+      "jaffa-port.webp",
+      "jaffa-flea-market.webp",
+      "jaffa-ilana-goor-museum.webp",
+      "jaffa-nalagaat-center.webp",
+      "jaffa-food.webp",
     ];
     expect(new Set(names).size).toBe(names.length);
     for (const name of names) {
@@ -101,11 +118,15 @@ describe("Jaffa multi-stop city attractions guide", () => {
 
   it("does not insert invented all-city opening hours or admission fees", () => {
     const component = readFileSync("src/components/JaffaAttractionPage.tsx", "utf8");
-    expect(component).toMatch(sourceFragment("Jaffa is a historic port city and part of modern Tel Aviv–Yafo"));
+    expect(component).toMatch(
+      sourceFragment("Jaffa is a historic port city and part of modern Tel Aviv–Yafo"),
+    );
     expect(component).not.toMatch(sourceFragment("The photo shows the coastal vista"));
     expect(component).not.toMatch(sourceFragment("For help planning your walk, the city lists a"));
     expect(component).toMatch(sourceFragment("bronze plaques depicting the twelve zodiac signs"));
-    expect(component).toMatch(sourceFragment("Museums, cultural performances and optional tours set their own prices"));
+    expect(component).toMatch(
+      sourceFragment("Museums, cultural performances and optional tours set their own prices"),
+    );
     expect(component).not.toMatch(sourceFragment("15–30 NIS"));
     expect(component).toMatch(sourceFragment("Sun–Thu & Sat 10:00–16:00"));
     expect(component).not.toMatch(sourceFragment("Built in 1906"));
@@ -127,13 +148,29 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(registry).toContain("tour-old-jaffa-walk-viator@attractions-jaffa");
     expect(registry).toContain("tour-tel-aviv-jaffa-small-group-viator@attractions-jaffa");
     expect(registry).toContain("tour-jaffa-carmel-walk-getyourguide@attractions-jaffa");
-    expect(component).toMatch(sourceFragment('title="Google Maps overview of the Jaffa Clock Tower, historic hill and nearby parking areas"'));
-    const products = ["old-jaffa-walk", "tel-aviv-jaffa-small-group", "jaffa-carmel-walk"].map(id => tourProducts.find(tour => tour.id === id)!);
-    expect(products.map(tour => tour.rating?.value)).toEqual([4.1, 4.6, 4.8]);
-    expect(products.map(tour => tour.rating?.count)).toEqual([16, 9, 62]);
+    expect(component).toMatch(
+      sourceFragment(
+        'title="Google Maps overview of the Jaffa Clock Tower, historic hill and nearby parking areas"',
+      ),
+    );
+    const products = ["old-jaffa-walk", "tel-aviv-jaffa-small-group", "jaffa-carmel-walk"].map(
+      (id) => tourProducts.find((tour) => tour.id === id)!,
+    );
+    expect(products.map((tour) => tour.rating?.value)).toEqual([4.1, 4.6, 4.8]);
+    expect(products.map((tour) => tour.rating?.count)).toEqual([16, 9, 62]);
     const reviewedOn = new Date("2026-11-23T12:00:00Z");
-    expect(tourSnapshotPrice(offersForTour("old-jaffa-walk", "attractions-jaffa")[0]!, reviewedOn)?.amount).toBe(60);
-    expect(tourSnapshotPrice(offersForTour("tel-aviv-jaffa-small-group", "attractions-jaffa")[0]!, reviewedOn)?.amount).toBe(169);
-    expect(tourSnapshotPrice(offersForTour("jaffa-carmel-walk", "attractions-jaffa")[0]!)).toBeUndefined();
+    expect(
+      tourSnapshotPrice(offersForTour("old-jaffa-walk", "attractions-jaffa")[0]!, reviewedOn)
+        ?.amount,
+    ).toBe(60);
+    expect(
+      tourSnapshotPrice(
+        offersForTour("tel-aviv-jaffa-small-group", "attractions-jaffa")[0]!,
+        reviewedOn,
+      )?.amount,
+    ).toBe(169);
+    expect(
+      tourSnapshotPrice(offersForTour("jaffa-carmel-walk", "attractions-jaffa")[0]!),
+    ).toBeUndefined();
   });
 });

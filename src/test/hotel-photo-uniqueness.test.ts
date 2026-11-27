@@ -2,13 +2,14 @@ import { describe, expect, it } from "vitest";
 import { hotelsInCityCatalog, cityHotelPhoto } from "@/data/cityHotelCatalog";
 import { resortHotelPhoto, resortHotelPhotos } from "@/data/resortHotelPhotos";
 import { supplementalHotelPhotos } from "@/data/supplementalHotelPhotos";
-import { deadSeaHotelRecommendations, tiberiasHotelRecommendations, haifaHotelRecommendations } from "@/data/registry";
+import {
+  deadSeaHotelRecommendations,
+  tiberiasHotelRecommendations,
+  haifaHotelRecommendations,
+} from "@/data/registry";
 
 describe("unique hotel photo mapping across all destinations", () => {
-  const cityHotels = [
-    ...hotelsInCityCatalog("jerusalem"),
-    ...hotelsInCityCatalog("telaviv"),
-  ];
+  const cityHotels = [...hotelsInCityCatalog("jerusalem"), ...hotelsInCityCatalog("telaviv")];
   const resortHotels = [
     ...deadSeaHotelRecommendations,
     ...tiberiasHotelRecommendations,

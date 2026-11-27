@@ -3,76 +3,169 @@ import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanst
 import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { renderToString } from "react-dom/server";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { CompactCurrencyEquivalents, CurrencyRatesContext, CurrencyRatesProvider, ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
-import { airportTransferRates, initialReferenceFx, referenceFxConfig, type ExchangeRateSnapshot } from "@/data/registry";
+import {
+  CompactCurrencyEquivalents,
+  CurrencyRatesContext,
+  CurrencyRatesProvider,
+  ExchangeRateNote,
+  PriceDisplay,
+} from "@/components/CurrencyRates";
+import {
+  airportTransferRates,
+  initialReferenceFx,
+  referenceFxConfig,
+  type ExchangeRateSnapshot,
+} from "@/data/registry";
 import { routeTree } from "@/routeTree.gen";
 import { Route as TransfersRoute } from "@/routes/airport-transfers.index";
 import { Route as JerusalemRoute } from "@/routes/airport-transfers.jerusalem";
 import { Route as HaifaShoreRoute } from "@/routes/shore-excursions.haifa";
 
 const checkTime = Date.parse("2026-10-17T20:00:00Z");
-const rates = (): ExchangeRateSnapshot => ({ ...initialReferenceFx, checkedAt: new Date().toISOString(), ilsPerUnit: { USD: 4, EUR: 5 } });
-const flush = () => act(async () => { await vi.advanceTimersByTimeAsync(0); });
-beforeEach(() => { vi.useFakeTimers(); vi.setSystemTime(checkTime); localStorage.clear(); vi.spyOn(document, "visibilityState", "get").mockReturnValue("visible"); });
-afterEach(() => { cleanup(); localStorage.clear(); vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
+const rates = (): ExchangeRateSnapshot => ({
+  ...initialReferenceFx,
+  checkedAt: new Date().toISOString(),
+  ilsPerUnit: { USD: 4, EUR: 5 },
+});
+const flush = () =>
+  act(async () => {
+    await vi.advanceTimersByTimeAsync(0);
+  });
+beforeEach(() => {
+  vi.useFakeTimers();
+  vi.setSystemTime(checkTime);
+  localStorage.clear();
+  vi.spyOn(document, "visibilityState", "get").mockReturnValue("visible");
+});
+afterEach(() => {
+  cleanup();
+  localStorage.clear();
+  vi.useRealTimers();
+  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
+});
 
 describe("international price estimates", () => {
   it("server-renders the ILS charge and rounded estimates with three distinct decorative currency icons", () => {
     const result = { rates: rates(), status: "fresh" as const, loading: false };
-    const html = renderToString(<CurrencyRatesContext.Provider value={result}><PriceDisplay amount={550} /><ExchangeRateNote /></CurrencyRatesContext.Provider>);
+    const html = renderToString(
+      <CurrencyRatesContext.Provider value={result}>
+        <PriceDisplay amount={550} />
+        <ExchangeRateNote />
+      </CurrencyRatesContext.Provider>,
+    );
     expect(html).toContain("ILS ");
-    render(<CurrencyRatesContext.Provider value={result}><PriceDisplay amount={550} /><ExchangeRateNote /></CurrencyRatesContext.Provider>);
+    render(
+      <CurrencyRatesContext.Provider value={result}>
+        <PriceDisplay amount={550} />
+        <ExchangeRateNote />
+      </CurrencyRatesContext.Provider>,
+    );
     const price = screen.getByTestId("currency-price");
     expect(price).toHaveTextContent("From ILS 550");
     expect(price.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ USD 138");
     expect(price.querySelector('[data-currency="EUR"]')).toHaveTextContent("≈ EUR 110");
-    expect([...price.querySelectorAll('[aria-hidden="true"]')].map((icon) => icon.textContent)).toEqual(["₪", "$", "€"]);
-    expect(new Set([...price.querySelectorAll('[aria-hidden="true"]')].map((icon) => icon.className)).size).toBe(3);
+    expect(
+      [...price.querySelectorAll('[aria-hidden="true"]')].map((icon) => icon.textContent),
+    ).toEqual(["₪", "$", "€"]);
+    expect(
+      new Set([...price.querySelectorAll('[aria-hidden="true"]')].map((icon) => icon.className))
+        .size,
+    ).toBe(3);
     const note = screen.getByTestId("exchange-rate-note");
-    expect(note).toHaveTextContent("Charged in ILS. USD and EUR amounts are approximate estimates only.");
-    expect(note).not.toHaveTextContent(/Bank of Israel|dated|Rates are checked daily|last saved rates|temporarily unavailable/i);
+    expect(note).toHaveTextContent(
+      "Charged in ILS. USD and EUR amounts are approximate estimates only.",
+    );
+    expect(note).not.toHaveTextContent(
+      /Bank of Israel|dated|Rates are checked daily|last saved rates|temporarily unavailable/i,
+    );
     expect(note.querySelector("a, time")).toBeNull();
     expect(html).not.toContain("Bank of Israel");
   });
 
   it.each([
     { label: "airport hub", path: "/airport-transfers/", route: TransfersRoute, count: 0 },
-    { label: "dedicated airport route", path: "/airport-transfers/jerusalem/", route: JerusalemRoute, count: 0 },
-    { label: "compact shore-excursion cards", path: "/shore-excursions/haifa/", route: HaifaShoreRoute, count: 0 },
-  ])("retains appropriate ILS fares and optional estimates on $label", async ({ path, route, count }) => {
-    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
-    await router.load();
-    const Page = route.options.component!;
-    const { container } = render(<RouterContextProvider router={router}><CurrencyRatesContext.Provider value={{ rates: rates(), status: "fresh", loading: false }}><Page /></CurrencyRatesContext.Provider></RouterContextProvider>);
-    const prices = screen.queryAllByTestId("currency-price");
-    expect(prices).toHaveLength(count);
-    for (const price of prices) {
-      const amount = Number(price.dataset["ils"]);
-      expect(price).toHaveTextContent(`ILS ${amount.toLocaleString("en-US")}`);
-      expect(price.querySelector('[data-currency="USD"]')).toHaveTextContent(`≈ USD ${Math.round(amount / 4).toLocaleString("en-US")}`);
-      expect(price.querySelector('[data-currency="EUR"]')).toHaveTextContent(`≈ EUR ${Math.round(amount / 5).toLocaleString("en-US")}`);
-      expect(price).toHaveTextContent("charged in ILS");
-    }
-    if (path === "/airport-transfers/") {
-      const other = container.querySelector('[data-destination="other"]')!;
-      expect(other).toHaveTextContent("Another destination?");
-      expect(container.querySelectorAll('[data-testid="airport-destination-card"]')).toHaveLength(12);
-      expect(other.querySelector('[data-testid="currency-price"]')).toBeNull();
-    } else if (path === "/airport-transfers/jerusalem/") {
-      const ratePanel = screen.getByTestId("route-starting-rate");
-      expect(ratePanel).toHaveTextContent("From ₪550");
-      const estimate = within(ratePanel).getByTestId("compact-currency-estimate");
-      expect(estimate.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ $138");
-      expect(estimate.querySelector('[data-currency="EUR"]')).toHaveTextContent("€110");
-      expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("I confirm the full price before booking. The ILS fare includes any applicable night, weekend or holiday surcharge; USD and EUR estimates use current exchange rates.");
-    }
-  });
+    {
+      label: "dedicated airport route",
+      path: "/airport-transfers/jerusalem/",
+      route: JerusalemRoute,
+      count: 0,
+    },
+    {
+      label: "compact shore-excursion cards",
+      path: "/shore-excursions/haifa/",
+      route: HaifaShoreRoute,
+      count: 0,
+    },
+  ])(
+    "retains appropriate ILS fares and optional estimates on $label",
+    async ({ path, route, count }) => {
+      const router = createRouter({
+        routeTree,
+        context: { queryClient: new QueryClient() },
+        history: createMemoryHistory({ initialEntries: [path] }),
+        trailingSlash: "always",
+      });
+      await router.load();
+      const Page = route.options.component!;
+      const { container } = render(
+        <RouterContextProvider router={router}>
+          <CurrencyRatesContext.Provider
+            value={{ rates: rates(), status: "fresh", loading: false }}
+          >
+            <Page />
+          </CurrencyRatesContext.Provider>
+        </RouterContextProvider>,
+      );
+      const prices = screen.queryAllByTestId("currency-price");
+      expect(prices).toHaveLength(count);
+      for (const price of prices) {
+        const amount = Number(price.dataset["ils"]);
+        expect(price).toHaveTextContent(`ILS ${amount.toLocaleString("en-US")}`);
+        expect(price.querySelector('[data-currency="USD"]')).toHaveTextContent(
+          `≈ USD ${Math.round(amount / 4).toLocaleString("en-US")}`,
+        );
+        expect(price.querySelector('[data-currency="EUR"]')).toHaveTextContent(
+          `≈ EUR ${Math.round(amount / 5).toLocaleString("en-US")}`,
+        );
+        expect(price).toHaveTextContent("charged in ILS");
+      }
+      if (path === "/airport-transfers/") {
+        const other = container.querySelector('[data-destination="other"]')!;
+        expect(other).toHaveTextContent("Another destination?");
+        expect(container.querySelectorAll('[data-testid="airport-destination-card"]')).toHaveLength(
+          12,
+        );
+        expect(other.querySelector('[data-testid="currency-price"]')).toBeNull();
+      } else if (path === "/airport-transfers/jerusalem/") {
+        const ratePanel = screen.getByTestId("route-starting-rate");
+        expect(ratePanel).toHaveTextContent("From ₪550");
+        const estimate = within(ratePanel).getByTestId("compact-currency-estimate");
+        expect(estimate.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ $138");
+        expect(estimate.querySelector('[data-currency="EUR"]')).toHaveTextContent("€110");
+        expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent(
+          "I confirm the full price before booking. The ILS fare includes any applicable night, weekend or holiday surcharge; USD and EUR estimates use current exchange rates.",
+        );
+      }
+    },
+  );
 
   it("adds a single discreet USD/EUR line below each of the eleven ILS airport hub fares", async () => {
-    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: ["/airport-transfers/"] }), trailingSlash: "always" });
+    const router = createRouter({
+      routeTree,
+      context: { queryClient: new QueryClient() },
+      history: createMemoryHistory({ initialEntries: ["/airport-transfers/"] }),
+      trailingSlash: "always",
+    });
     await router.load();
     const Page = TransfersRoute.options.component!;
-    const { container } = render(<RouterContextProvider router={router}><CurrencyRatesContext.Provider value={{ rates: rates(), status: "fresh", loading: false }}><Page /></CurrencyRatesContext.Provider></RouterContextProvider>);
+    const { container } = render(
+      <RouterContextProvider router={router}>
+        <CurrencyRatesContext.Provider value={{ rates: rates(), status: "fresh", loading: false }}>
+          <Page />
+        </CurrencyRatesContext.Provider>
+      </RouterContextProvider>,
+    );
     const estimates = screen.getAllByTestId("compact-currency-estimate");
     expect(estimates).toHaveLength(11);
     for (const rate of airportTransferRates) {
@@ -82,24 +175,42 @@ describe("international price estimates", () => {
       expect(estimate.parentElement).toHaveClass("min-w-0");
       expect(estimate.parentElement).not.toHaveClass("hidden", "sm:block");
       expect(estimate).toHaveAttribute("data-ils", String(rate.price.amount));
-      expect(estimate.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ $" + Math.round(rate.price.amount / 4).toLocaleString("en-US"));
-      expect(estimate.querySelector('[data-currency="EUR"]')).toHaveTextContent(`€${Math.round(rate.price.amount / 5).toLocaleString("en-US")}`);
+      expect(estimate.querySelector('[data-currency="USD"]')).toHaveTextContent(
+        "≈ $" + Math.round(rate.price.amount / 4).toLocaleString("en-US"),
+      );
+      expect(estimate.querySelector('[data-currency="EUR"]')).toHaveTextContent(
+        `€${Math.round(rate.price.amount / 5).toLocaleString("en-US")}`,
+      );
       expect(card).toHaveTextContent(`From ₪${rate.price.amount.toLocaleString("en-US")}`);
       expect(estimate.querySelectorAll('[aria-hidden="true"]')).toHaveLength(1);
     }
     const other = container.querySelector('[data-destination="other"]')!;
     expect(other.querySelector('[data-testid="compact-currency-estimate"]')).toBeNull();
-    expect(screen.getByTestId("airport-fx-note")).toHaveTextContent("I confirm the full fare, including any night, weekend or holiday surcharge, in advance in ILS. USD and EUR estimates use current exchange rates.");
+    expect(screen.getByTestId("airport-fx-note")).toHaveTextContent(
+      "I confirm the full fare, including any night, weekend or holiday surcharge, in advance in ILS. USD and EUR estimates use current exchange rates.",
+    );
     expect(screen.getAllByTestId("airport-fx-note")).toHaveLength(1);
   });
 
   it("omits compact USD/EUR estimates when exchange rates are missing or expired", () => {
-    const unavailable = renderToString(<CurrencyRatesContext.Provider value={{ rates: null, status: "unavailable", loading: false }}><CompactCurrencyEquivalents amount={550} /></CurrencyRatesContext.Provider>);
+    const unavailable = renderToString(
+      <CurrencyRatesContext.Provider value={{ rates: null, status: "unavailable", loading: false }}>
+        <CompactCurrencyEquivalents amount={550} />
+      </CurrencyRatesContext.Provider>,
+    );
     expect(unavailable).not.toContain("compact-currency-estimate");
     const outdated = { ...rates(), publishedAt: "2026-09-01" };
-    const expired = renderToString(<CurrencyRatesContext.Provider value={{ rates: outdated, status: "cached", loading: false }}><CompactCurrencyEquivalents amount={550} /></CurrencyRatesContext.Provider>);
+    const expired = renderToString(
+      <CurrencyRatesContext.Provider value={{ rates: outdated, status: "cached", loading: false }}>
+        <CompactCurrencyEquivalents amount={550} />
+      </CurrencyRatesContext.Provider>,
+    );
     expect(expired).not.toContain("compact-currency-estimate");
-    render(<CurrencyRatesContext.Provider value={{ rates: rates(), status: "fresh", loading: false }}><CompactCurrencyEquivalents amount={550} /></CurrencyRatesContext.Provider>);
+    render(
+      <CurrencyRatesContext.Provider value={{ rates: rates(), status: "fresh", loading: false }}>
+        <CompactCurrencyEquivalents amount={550} />
+      </CurrencyRatesContext.Provider>,
+    );
     const fresh = screen.getByTestId("compact-currency-estimate");
     expect(fresh.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ $138");
     expect(fresh.querySelector('[data-currency="EUR"]')).toHaveTextContent("€110");
@@ -107,9 +218,15 @@ describe("international price estimates", () => {
   });
 
   it("does not fetch on the price-free homepage and activates after navigation to priced routes", async () => {
-    const fetchImpl = vi.fn<typeof fetch>().mockImplementation(async () => Response.json({ rates: rates(), status: "fresh" }));
+    const fetchImpl = vi
+      .fn<typeof fetch>()
+      .mockImplementation(async () => Response.json({ rates: rates(), status: "fresh" }));
     vi.stubGlobal("fetch", fetchImpl);
-    const page = (enabled: boolean) => <CurrencyRatesProvider enabled={enabled}><PriceDisplay amount={550} /></CurrencyRatesProvider>;
+    const page = (enabled: boolean) => (
+      <CurrencyRatesProvider enabled={enabled}>
+        <PriceDisplay amount={550} />
+      </CurrencyRatesProvider>
+    );
     const rendered = render(page(false));
     await flush();
     expect(fetchImpl).not.toHaveBeenCalled();
@@ -117,18 +234,33 @@ describe("international price estimates", () => {
     rendered.rerender(page(true));
     await flush();
     expect(fetchImpl).toHaveBeenCalledTimes(1);
-    expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("138");
+    expect(
+      screen.getByTestId("currency-price").querySelector('[data-currency="USD"]'),
+    ).toHaveTextContent("138");
   });
 
   it("shares one request across prices, persists public rates across reloads and refreshes after 24 hours", async () => {
-    const fetchImpl = vi.fn<typeof fetch>().mockImplementation(async () => Response.json({ rates: rates(), status: "fresh" }));
+    const fetchImpl = vi
+      .fn<typeof fetch>()
+      .mockImplementation(async () => Response.json({ rates: rates(), status: "fresh" }));
     vi.stubGlobal("fetch", fetchImpl);
-    const content = <CurrencyRatesProvider><PriceDisplay amount={550} /><PriceDisplay amount={330} /><ExchangeRateNote /></CurrencyRatesProvider>;
+    const content = (
+      <CurrencyRatesProvider>
+        <PriceDisplay amount={550} />
+        <PriceDisplay amount={330} />
+        <ExchangeRateNote />
+      </CurrencyRatesProvider>
+    );
     const first = render(content);
     await flush();
     expect(fetchImpl).toHaveBeenCalledTimes(1);
-    expect(fetchImpl).toHaveBeenCalledWith(referenceFxConfig.endpoint, expect.objectContaining({ credentials: "omit", signal: expect.anything() }));
-    expect(screen.getAllByTestId("currency-price")[0]!.querySelector('[data-currency="USD"]')).toHaveTextContent("138");
+    expect(fetchImpl).toHaveBeenCalledWith(
+      referenceFxConfig.endpoint,
+      expect.objectContaining({ credentials: "omit", signal: expect.anything() }),
+    );
+    expect(
+      screen.getAllByTestId("currency-price")[0]!.querySelector('[data-currency="USD"]'),
+    ).toHaveTextContent("138");
     const saved = JSON.parse(localStorage.getItem(referenceFxConfig.storageKey)!);
     expect(saved.rates.ilsPerUnit).toEqual({ USD: 4, EUR: 5 });
     expect(Object.keys(saved)).toEqual(["rates", "status", "nextCheckAt"]);
@@ -136,7 +268,9 @@ describe("international price estimates", () => {
     render(content);
     await flush();
     expect(fetchImpl).toHaveBeenCalledTimes(1);
-    await act(async () => { await vi.advanceTimersByTimeAsync(referenceFxConfig.refreshMs + 1); });
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(referenceFxConfig.refreshMs + 1);
+    });
     expect(fetchImpl).toHaveBeenCalledTimes(2);
     expect(screen.getByTestId("exchange-rate-note")).not.toHaveTextContent("unavailable");
   });
@@ -149,44 +283,86 @@ describe("international price estimates", () => {
       checkedAt: new Date().toISOString(),
       ilsPerUnit: { USD: 4, EUR: 5 },
     };
-    const mockedFetch = vi.fn<typeof fetch>()
+    const mockedFetch = vi
+      .fn<typeof fetch>()
       .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
       .mockResolvedValueOnce(Response.json({ rates: live, status: "fresh" }));
     vi.stubGlobal("fetch", mockedFetch);
-    render(<CurrencyRatesProvider><PriceDisplay amount={550} /></CurrencyRatesProvider>);
+    render(
+      <CurrencyRatesProvider>
+        <PriceDisplay amount={550} />
+      </CurrencyRatesProvider>,
+    );
     await flush();
     expect(mockedFetch).toHaveBeenCalledTimes(2);
-    expect(mockedFetch).toHaveBeenNthCalledWith(1, referenceFxConfig.endpoint, expect.objectContaining({ credentials: "omit" }));
-    expect(mockedFetch).toHaveBeenNthCalledWith(2, referenceFxConfig.publicSnapshotUrl, expect.objectContaining({ credentials: "omit" }));
-    expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("≈ USD 138");
-    expect(screen.getByTestId("currency-price").querySelector('[data-currency="EUR"]')).toHaveTextContent("≈ EUR 110");
+    expect(mockedFetch).toHaveBeenNthCalledWith(
+      1,
+      referenceFxConfig.endpoint,
+      expect.objectContaining({ credentials: "omit" }),
+    );
+    expect(mockedFetch).toHaveBeenNthCalledWith(
+      2,
+      referenceFxConfig.publicSnapshotUrl,
+      expect.objectContaining({ credentials: "omit" }),
+    );
+    expect(
+      screen.getByTestId("currency-price").querySelector('[data-currency="USD"]'),
+    ).toHaveTextContent("≈ USD 138");
+    expect(
+      screen.getByTestId("currency-price").querySelector('[data-currency="EUR"]'),
+    ).toHaveTextContent("≈ EUR 110");
   });
 
   it("uses the built-in same-origin snapshot when GitHub cannot be reached by the browser", async () => {
     vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
-    const live = { ...initialReferenceFx, publishedAt: "2026-10-25", checkedAt: new Date().toISOString(), ilsPerUnit: { USD: 4, EUR: 5 } };
-    const mockedFetch = vi.fn<typeof fetch>()
+    const live = {
+      ...initialReferenceFx,
+      publishedAt: "2026-10-25",
+      checkedAt: new Date().toISOString(),
+      ilsPerUnit: { USD: 4, EUR: 5 },
+    };
+    const mockedFetch = vi
+      .fn<typeof fetch>()
       .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
       .mockRejectedValueOnce(new TypeError("Cross-origin request blocked"))
       .mockResolvedValueOnce(Response.json({ rates: live, status: "cached" }));
     vi.stubGlobal("fetch", mockedFetch);
-    render(<CurrencyRatesProvider><PriceDisplay amount={550} /></CurrencyRatesProvider>);
+    render(
+      <CurrencyRatesProvider>
+        <PriceDisplay amount={550} />
+      </CurrencyRatesProvider>,
+    );
     await flush();
     expect(mockedFetch).toHaveBeenCalledTimes(3);
-    expect(mockedFetch).toHaveBeenNthCalledWith(3, referenceFxConfig.localSnapshotUrl, expect.objectContaining({ credentials: "omit" }));
-    expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("≈ USD 138");
+    expect(mockedFetch).toHaveBeenNthCalledWith(
+      3,
+      referenceFxConfig.localSnapshotUrl,
+      expect.objectContaining({ credentials: "omit" }),
+    );
+    expect(
+      screen.getByTestId("currency-price").querySelector('[data-currency="USD"]'),
+    ).toHaveTextContent("≈ USD 138");
   });
 
   it("rejects a stale public snapshot after an API 503", async () => {
     vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
-    const mockedFetch = vi.fn<typeof fetch>()
+    const mockedFetch = vi
+      .fn<typeof fetch>()
       .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
       .mockResolvedValueOnce(Response.json({ rates: initialReferenceFx, status: "fresh" }));
     vi.stubGlobal("fetch", mockedFetch);
-    render(<CurrencyRatesProvider><PriceDisplay amount={550} /></CurrencyRatesProvider>);
+    render(
+      <CurrencyRatesProvider>
+        <PriceDisplay amount={550} />
+      </CurrencyRatesProvider>,
+    );
     await flush();
     expect(mockedFetch).toHaveBeenCalledTimes(3);
-    expect(mockedFetch).toHaveBeenNthCalledWith(3, referenceFxConfig.localSnapshotUrl, expect.objectContaining({ credentials: "omit" }));
+    expect(mockedFetch).toHaveBeenNthCalledWith(
+      3,
+      referenceFxConfig.localSnapshotUrl,
+      expect.objectContaining({ credentials: "omit" }),
+    );
     const price = screen.getByTestId("currency-price");
     expect(price).toHaveTextContent("Currency conversions temporarily unavailable");
     expect(price.querySelector('[data-currency="USD"]')).toBeNull();
@@ -206,31 +382,64 @@ describe("international price estimates", () => {
       checkedAt: "2026-10-20T19:30:00Z",
       ilsPerUnit: { USD: 3.5, EUR: 4 },
     };
-    localStorage.setItem(referenceFxConfig.storageKey, JSON.stringify({
-      rates: previouslySaved, status: "cached", nextCheckAt: Date.now() - 1000,
-    }));
-    const fetched = vi.fn<typeof fetch>()
+    localStorage.setItem(
+      referenceFxConfig.storageKey,
+      JSON.stringify({
+        rates: previouslySaved,
+        status: "cached",
+        nextCheckAt: Date.now() - 1000,
+      }),
+    );
+    const fetched = vi
+      .fn<typeof fetch>()
       .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
       .mockResolvedValueOnce(Response.json({ rates: newer, status: "fresh" }));
     vi.stubGlobal("fetch", fetched);
-    render(<CurrencyRatesProvider><PriceDisplay amount={560} /></CurrencyRatesProvider>);
+    render(
+      <CurrencyRatesProvider>
+        <PriceDisplay amount={560} />
+      </CurrencyRatesProvider>,
+    );
     await flush();
     expect(fetched).toHaveBeenCalledTimes(2);
-    expect(fetched).toHaveBeenNthCalledWith(2, referenceFxConfig.publicSnapshotUrl, expect.anything());
-    expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("≈ USD 160");
-    expect(screen.getByTestId("currency-price").querySelector('[data-currency="EUR"]')).toHaveTextContent("≈ EUR 140");
-    expect(JSON.parse(localStorage.getItem(referenceFxConfig.storageKey)!).rates.publishedAt).toBe("2026-10-20");
+    expect(fetched).toHaveBeenNthCalledWith(
+      2,
+      referenceFxConfig.publicSnapshotUrl,
+      expect.anything(),
+    );
+    expect(
+      screen.getByTestId("currency-price").querySelector('[data-currency="USD"]'),
+    ).toHaveTextContent("≈ USD 160");
+    expect(
+      screen.getByTestId("currency-price").querySelector('[data-currency="EUR"]'),
+    ).toHaveTextContent("≈ EUR 140");
+    expect(JSON.parse(localStorage.getItem(referenceFxConfig.storageKey)!).rates.publishedAt).toBe(
+      "2026-10-20",
+    );
   });
 
   it("keeps a dated saved estimate after a failed check and retries without changing the ILS amount", async () => {
     vi.stubGlobal("fetch", vi.fn<typeof fetch>().mockRejectedValue(new Error("Offline")));
-    render(<CurrencyRatesProvider><PriceDisplay amount={550} /><ExchangeRateNote /></CurrencyRatesProvider>);
+    render(
+      <CurrencyRatesProvider>
+        <PriceDisplay amount={550} />
+        <ExchangeRateNote />
+      </CurrencyRatesProvider>,
+    );
     await flush();
     expect(screen.getByTestId("currency-price")).toHaveTextContent("ILS 550");
-    expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("178");
-    expect(screen.getByTestId("exchange-rate-note")).toHaveTextContent("Charged in ILS. USD and EUR amounts are approximate estimates only.");
-    expect(JSON.parse(localStorage.getItem(referenceFxConfig.storageKey)!).rates.checkedAt).toBe(initialReferenceFx.checkedAt);
-    await act(async () => { await vi.advanceTimersByTimeAsync(referenceFxConfig.retryMs); });
+    expect(
+      screen.getByTestId("currency-price").querySelector('[data-currency="USD"]'),
+    ).toHaveTextContent("178");
+    expect(screen.getByTestId("exchange-rate-note")).toHaveTextContent(
+      "Charged in ILS. USD and EUR amounts are approximate estimates only.",
+    );
+    expect(JSON.parse(localStorage.getItem(referenceFxConfig.storageKey)!).rates.checkedAt).toBe(
+      initialReferenceFx.checkedAt,
+    );
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(referenceFxConfig.retryMs);
+    });
     // Each failed refresh attempts the same-origin API, the live public
     // GitHub snapshot, and finally the bundled same-origin snapshot.
     expect(fetch).toHaveBeenCalledTimes(6);
@@ -238,25 +447,52 @@ describe("international price estimates", () => {
 
   it("hides expired conversions and never shows zero or NaN estimates when data is unavailable", async () => {
     vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
-    localStorage.setItem(referenceFxConfig.storageKey, JSON.stringify({ rates: initialReferenceFx, status: "fresh", nextCheckAt: Date.now() + referenceFxConfig.refreshMs }));
-    vi.stubGlobal("fetch", vi.fn<typeof fetch>().mockResolvedValue(new Response("Unavailable", { status: 503 })));
-    render(<CurrencyRatesProvider><PriceDisplay amount={550} /><ExchangeRateNote /></CurrencyRatesProvider>);
+    localStorage.setItem(
+      referenceFxConfig.storageKey,
+      JSON.stringify({
+        rates: initialReferenceFx,
+        status: "fresh",
+        nextCheckAt: Date.now() + referenceFxConfig.refreshMs,
+      }),
+    );
+    vi.stubGlobal(
+      "fetch",
+      vi.fn<typeof fetch>().mockResolvedValue(new Response("Unavailable", { status: 503 })),
+    );
+    render(
+      <CurrencyRatesProvider>
+        <PriceDisplay amount={550} />
+        <ExchangeRateNote />
+      </CurrencyRatesProvider>,
+    );
     await flush();
     const price = screen.getByTestId("currency-price");
     expect(price).toHaveTextContent("ILS 550");
     expect(price.querySelector('[data-currency="USD"]')).toBeNull();
     expect(price.querySelector('[data-currency="EUR"]')).toBeNull();
     expect(price).not.toHaveTextContent(/NaN|Infinity/);
-    expect(screen.getByTestId("exchange-rate-note")).toHaveTextContent("Charged in ILS. USD and EUR amounts are approximate estimates only.");
+    expect(screen.getByTestId("exchange-rate-note")).toHaveTextContent(
+      "Charged in ILS. USD and EUR amounts are approximate estimates only.",
+    );
     expect(localStorage.getItem(referenceFxConfig.storageKey)).toBeNull();
   });
 
   it("supports blocked browser storage and resumes an overdue check when the visitor returns to the tab", async () => {
-    vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => { throw new Error("Storage blocked"); });
-    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => { throw new Error("Storage blocked"); });
-    const fetchImpl = vi.fn<typeof fetch>().mockImplementation(async () => Response.json({ rates: rates(), status: "fresh" }));
+    vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+      throw new Error("Storage blocked");
+    });
+    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+      throw new Error("Storage blocked");
+    });
+    const fetchImpl = vi
+      .fn<typeof fetch>()
+      .mockImplementation(async () => Response.json({ rates: rates(), status: "fresh" }));
     vi.stubGlobal("fetch", fetchImpl);
-    render(<CurrencyRatesProvider><PriceDisplay amount={550} /></CurrencyRatesProvider>);
+    render(
+      <CurrencyRatesProvider>
+        <PriceDisplay amount={550} />
+      </CurrencyRatesProvider>,
+    );
     await flush();
     expect(fetchImpl).toHaveBeenCalledTimes(1);
     vi.setSystemTime(checkTime + referenceFxConfig.refreshMs + 1);

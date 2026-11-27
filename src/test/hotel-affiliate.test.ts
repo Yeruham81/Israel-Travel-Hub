@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { affiliateConfig, linksForPage, providerLinks } from "@/data/registry";
 import { neighborhoodHotelAdditions } from "@/data/neighborhoodHotels";
-import { hotelAffiliateUrl, hotelBrowseAffiliateUrl, hotelBrowseSubId, hotelClickSubId } from "@/lib/hotel-affiliate";
+import {
+  hotelAffiliateUrl,
+  hotelBrowseAffiliateUrl,
+  hotelBrowseSubId,
+  hotelClickSubId,
+} from "@/lib/hotel-affiliate";
 
 const pilot = [
   ["jlm-ibis", "downtown", "https://expedia.tpm.li/nKcakttc"],
@@ -33,7 +38,14 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
       const expectedShortLink = affiliateConfig[key]?.trackingUrl;
       expect(booking?.providerName, key).toBe("Expedia");
       expect(expectedShortLink, key).toMatch(
-        ["jlm-paamonim", "jlm-eldan", "jlm-christ-church", "jlm-brown-machne", "jlm-national-hotel", "jlm-dan-boutique"].includes(hotel.id)
+        [
+          "jlm-paamonim",
+          "jlm-eldan",
+          "jlm-christ-church",
+          "jlm-brown-machne",
+          "jlm-national-hotel",
+          "jlm-dan-boutique",
+        ].includes(hotel.id)
           ? /^https:\/\/expedia\.tpk\.lv\/[a-zA-Z0-9]{8}$/
           : /^https:\/\/expedia\.tpm\.li\/[a-zA-Z0-9]{8}$/,
       );
@@ -50,7 +62,9 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
       const sourcePage = offer.pageIds[0]!;
       const destination = new URL(hotelAffiliateUrl(offer, sourcePage, hotelId));
       expect(["expedia.tpm.li", "expedia.tpk.lv"]).toContain(destination.hostname);
-      expect(destination.searchParams.getAll("sub_id")).toEqual([hotelClickSubId(sourcePage, hotelId)]);
+      expect(destination.searchParams.getAll("sub_id")).toEqual([
+        hotelClickSubId(sourcePage, hotelId),
+      ]);
       expect(destination.origin + destination.pathname).toBe(offer.url);
     }
   });
@@ -71,7 +85,9 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
   });
 
   it("tracks city/area/category searches by the source page and the search destination, not a hotel", () => {
-    const offers = providerLinks.filter((link) => /^(?:hotels|area|category)-[a-z0-9-]+-expedia$/.test(link.id));
+    const offers = providerLinks.filter((link) =>
+      /^(?:hotels|area|category)-[a-z0-9-]+-expedia$/.test(link.id),
+    );
     // Includes six Haifa category/city partner links added to the original 27 browse offers.
     expect(offers).toHaveLength(33);
     for (const booking of offers) {
@@ -87,19 +103,40 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
     const area = hotelBrowseAffiliateUrl(sample, "stay-area-mamilla");
     const city = hotelBrowseAffiliateUrl(sample, "stay-jerusalem");
     expect(area).not.toBe(city);
-    expect(new URL(area).searchParams.get("sub_id")).toBe("itt_stay_area_mamilla_area_mamilla_expedia");
-    expect(new URL(city).searchParams.get("sub_id")).toBe("itt_stay_jerusalem_area_mamilla_expedia");
+    expect(new URL(area).searchParams.get("sub_id")).toBe(
+      "itt_stay_area_mamilla_area_mamilla_expedia",
+    );
+    expect(new URL(city).searchParams.get("sub_id")).toBe(
+      "itt_stay_jerusalem_area_mamilla_expedia",
+    );
   });
 
   it("leaves unrelated Expedia hotel deep links and other partner links untouched by general browse tracking", () => {
     const base = "https://expedia.tpm.li/nKcakttc";
-    expect(hotelBrowseAffiliateUrl({ id: "hotel-jlm-ibis-expedia", url: base, isAffiliate: true }, "stay-jerusalem")).toBe(base);
-    expect(hotelBrowseAffiliateUrl({ id: "area-downtown-expedia", url: "https://www.expedia.com/foo", isAffiliate: false }, "stay-area-downtown")).toBe("https://www.expedia.com/foo");
-    expect(hotelBrowseAffiliateUrl({ id: "airport-kiwitaxi", url: "https://kiwitaxi.tpm.li/anything", isAffiliate: true }, "stay-jerusalem")).toBe("https://kiwitaxi.tpm.li/anything");
+    expect(
+      hotelBrowseAffiliateUrl(
+        { id: "hotel-jlm-ibis-expedia", url: base, isAffiliate: true },
+        "stay-jerusalem",
+      ),
+    ).toBe(base);
+    expect(
+      hotelBrowseAffiliateUrl(
+        { id: "area-downtown-expedia", url: "https://www.expedia.com/foo", isAffiliate: false },
+        "stay-area-downtown",
+      ),
+    ).toBe("https://www.expedia.com/foo");
+    expect(
+      hotelBrowseAffiliateUrl(
+        { id: "airport-kiwitaxi", url: "https://kiwitaxi.tpm.li/anything", isAffiliate: true },
+        "stay-jerusalem",
+      ),
+    ).toBe("https://kiwitaxi.tpm.li/anything");
   });
 
   it("distinguishes the same hotel in the city catalog and neighborhood guide", () => {
-    const booking = linksForPage("stay-area-mamilla").find((item) => item.id === "hotel-jlm-waldorf-expedia")!;
+    const booking = linksForPage("stay-area-mamilla").find(
+      (item) => item.id === "hotel-jlm-waldorf-expedia",
+    )!;
     const area = new URL(hotelAffiliateUrl(booking, "stay-area-mamilla", "jlm-waldorf"));
     const city = new URL(hotelAffiliateUrl(booking, "stay-jerusalem", "jlm-waldorf"));
     expect(area.origin + area.pathname).toBe(booking.url);
@@ -110,17 +147,23 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
   });
 
   it("distinguishes two hotels on the same page", () => {
-    expect(hotelClickSubId("stay-area-downtown", "jlm-ibis"))
-      .toBe("itt_stay_area_downtown_jlm_ibis");
-    expect(hotelClickSubId("stay-area-downtown", "jlm-ibis-styles"))
-      .toBe("itt_stay_area_downtown_jlm_ibis_styles");
+    expect(hotelClickSubId("stay-area-downtown", "jlm-ibis")).toBe(
+      "itt_stay_area_downtown_jlm_ibis",
+    );
+    expect(hotelClickSubId("stay-area-downtown", "jlm-ibis-styles")).toBe(
+      "itt_stay_area_downtown_jlm_ibis_styles",
+    );
   });
 
   it("replaces the previous short-link SubID without leaving duplicates", () => {
-    const url = hotelAffiliateUrl({
-      url: "https://expedia.tpm.li/Xyz123?sub_id=old_hotel_only&foo=bar",
-      isAffiliate: true,
-    }, "stay-jerusalem", "jlm-ibis");
+    const url = hotelAffiliateUrl(
+      {
+        url: "https://expedia.tpm.li/Xyz123?sub_id=old_hotel_only&foo=bar",
+        isAffiliate: true,
+      },
+      "stay-jerusalem",
+      "jlm-ibis",
+    );
     const result = new URL(url);
     expect(result.searchParams.getAll("sub_id")).toEqual(["itt_stay_jerusalem_jlm_ibis"]);
     expect(result.searchParams.get("foo")).toBe("bar");
@@ -128,9 +171,13 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
 
   it("does not modify non-affiliate hotel links or unrelated providers", () => {
     const direct = "https://www.expedia.com/Hotel.h17228236.Hotel-Information";
-    expect(hotelAffiliateUrl({ url: direct, isAffiliate: false }, "stay-area-downtown", "jlm-ibis")).toBe(direct);
+    expect(
+      hotelAffiliateUrl({ url: direct, isAffiliate: false }, "stay-area-downtown", "jlm-ibis"),
+    ).toBe(direct);
     const external = "https://another-provider.example/partner?campaign=1";
-    expect(hotelAffiliateUrl({ url: external, isAffiliate: true }, "stay-jerusalem", "jlm-ibis")).toBe(external);
+    expect(
+      hotelAffiliateUrl({ url: external, isAffiliate: true }, "stay-jerusalem", "jlm-ibis"),
+    ).toBe(external);
     expect(() => hotelClickSubId("", "jlm-ibis")).toThrow();
   });
 });

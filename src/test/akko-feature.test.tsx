@@ -20,7 +20,7 @@ describe("Old Akko heritage attractions guide", () => {
     expect(content.intro).toBe(akkoSite.intro);
     expect(content.facts).toHaveLength(6);
     expect(content.nearby).toHaveLength(6);
-    expect(new Set(content.nearby!.map(x=>x.to)).size).toBe(6);
+    expect(new Set(content.nearby!.map((x) => x.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(5);
     expect(content.itineraryBeforeHighlights).toBe(true);
@@ -28,15 +28,18 @@ describe("Old Akko heritage attractions guide", () => {
     expect(content.foodContent).toBeTruthy();
     expect(content.practicalContent).toBeTruthy();
     expect(component.match(/<AttractionHighlight\s+mobileImageFirst/g)).toHaveLength(8);
-    expect(attractionHubCards.find(card => card.to === content.path)?.photo.src).toBe(akkoSite.hero.src);
+    expect(attractionHubCards.find((card) => card.to === content.path)?.photo.src).toBe(
+      akkoSite.hero.src,
+    );
     expect(content.sources.length).toBeGreaterThanOrEqual(6);
-    expect(attractionHubCards.filter(card => card.to === content.path)).toHaveLength(1);
+    expect(attractionHubCards.filter((card) => card.to === content.path)).toHaveLength(1);
     expect(component.match(/<AttractionHighlight(?:\s|\n)/g)).toHaveLength(8);
     expect(component).toMatch(sourceFragment('data-testid="akko-walking-routes"'));
     const meta = akkoMeta();
-    expect(meta.links.find(x => x.rel === "canonical")?.href).toContain(content.path);
-    const article = meta.scripts.map(x => JSON.parse(x.children as string))
-      .find(x => x["@type"] === "Article");
+    expect(meta.links.find((x) => x.rel === "canonical")?.href).toContain(content.path);
+    const article = meta.scripts
+      .map((x) => JSON.parse(x.children as string))
+      .find((x) => x["@type"] === "Article");
     expect(article.dateModified).toBe("2026-11-23");
     expect(article.citation).toContain(akkoSite.official.accessibility);
   });
@@ -103,9 +106,18 @@ describe("Old Akko heritage attractions guide", () => {
       "tour-north-coast-small-group-viator@attractions-akko-acre",
       "tour-caesarea-haifa-akko-getyourguide@attractions-akko-acre",
       "tour-coast-coach-tel-aviv-viator@attractions-akko-acre",
-    ]) expect(registry).toMatch(sourceFragment(id));
-    expect(["north-coast-small-group", "caesarea-haifa-akko", "coast-coach-tel-aviv"].map(id => tourProducts.find(tour => tour.id === id)?.rating?.value)).toEqual([5, 4.3, 4.4]);
-    expect(["north-coast-small-group", "caesarea-haifa-akko", "coast-coach-tel-aviv"].map(id => tourProducts.find(tour => tour.id === id)?.rating?.count)).toEqual([6, 750, 409]);
+    ])
+      expect(registry).toMatch(sourceFragment(id));
+    expect(
+      ["north-coast-small-group", "caesarea-haifa-akko", "coast-coach-tel-aviv"].map(
+        (id) => tourProducts.find((tour) => tour.id === id)?.rating?.value,
+      ),
+    ).toEqual([5, 4.3, 4.4]);
+    expect(
+      ["north-coast-small-group", "caesarea-haifa-akko", "coast-coach-tel-aviv"].map(
+        (id) => tourProducts.find((tour) => tour.id === id)?.rating?.count,
+      ),
+    ).toEqual([6, 750, 409]);
   });
 
   it("hosts distinct optimized images locally for all eight attractions", () => {
@@ -119,7 +131,7 @@ describe("Old Akko heritage attractions guide", () => {
       "akko-treasures-museum.webp",
       "akko-ramchal-synagogue.webp",
     ];
-    for(const name of names) {
+    for (const name of names) {
       expect(existsSync("public/images/attractions/" + name), name).toBe(true);
     }
     expect(new Set(names).size).toBe(8);

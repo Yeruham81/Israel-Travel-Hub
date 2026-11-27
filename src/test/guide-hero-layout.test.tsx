@@ -11,27 +11,44 @@ afterEach(cleanup);
 describe("shared guide hero layout", () => {
   it("keeps the title and introduction alongside a small photo on desktop", () => {
     render(
-      <GuideHeroLayout image={
-        <GuideHeroMedia src="/images/jerusalem.webp" alt="View across Jerusalem" caption="Jerusalem from above">
-          <p>Image credit</p>
-        </GuideHeroMedia>
-      }>
+      <GuideHeroLayout
+        image={
+          <GuideHeroMedia
+            src="/images/jerusalem.webp"
+            alt="View across Jerusalem"
+            caption="Jerusalem from above"
+          >
+            <p>Image credit</p>
+          </GuideHeroMedia>
+        }
+      >
         <h1>Travel to Jerusalem</h1>
         <p data-guide-intro>A practical guide for visitors.</p>
-      </GuideHeroLayout>
+      </GuideHeroLayout>,
     );
     const layout = screen.getByTestId("guide-hero-layout");
     const titleColumn = layout.children[0] as HTMLElement;
     const photoColumn = layout.children[1] as HTMLElement;
     expect(layout).toHaveClass("grid", "lg:grid-cols-[minmax(0,1.85fr)_minmax(0,0.9fr)]");
-    expect(within(titleColumn).getByRole("heading", { level: 1 })).toHaveTextContent("Travel to Jerusalem");
+    expect(within(titleColumn).getByRole("heading", { level: 1 })).toHaveTextContent(
+      "Travel to Jerusalem",
+    );
     expect(within(titleColumn).getByText("A practical guide for visitors.")).toBeInTheDocument();
-    expect(within(photoColumn).getByRole("img", { name: "View across Jerusalem" })).toBeInTheDocument();
+    expect(
+      within(photoColumn).getByRole("img", { name: "View across Jerusalem" }),
+    ).toBeInTheDocument();
     expect(screen.getByText("Jerusalem from above")).toBeInTheDocument();
     expect(screen.getByText("Image credit")).toBeInTheDocument();
     const photo = screen.getByRole("img", { name: "View across Jerusalem" });
     expect(photo).toHaveAttribute("fetchpriority", "high");
-    expect(photo).toHaveClass("aspect-[16/9]", "lg:aspect-[4/3]", "max-h-[300px]", "lg:max-h-[260px]", "w-full", "object-cover");
+    expect(photo).toHaveClass(
+      "aspect-[16/9]",
+      "lg:aspect-[4/3]",
+      "max-h-[300px]",
+      "lg:max-h-[260px]",
+      "w-full",
+      "object-cover",
+    );
     expect(screen.getByTestId("guide-hero-media")).toHaveClass("max-w-2xl", "lg:max-w-none");
   });
 
@@ -45,12 +62,16 @@ describe("shared guide hero layout", () => {
     const css = source("src/styles.css");
     expect(css).toContain(".guide-hero-layout.guide-hero-photo-expanded");
     expect(css).toContain("minmax(0, 1.72fr) minmax(0, 1fr)");
-    expect(source("src/components/GuideHeroMedia.tsx")).toContain('layout.classList.toggle(');
+    expect(source("src/components/GuideHeroMedia.tsx")).toContain("layout.classList.toggle(");
     expect(source("src/components/GuideHeroMedia.tsx")).not.toContain("line-clamp");
   });
 
   it("allows image-free guides to retain full headline width", () => {
-    render(<GuideHeroLayout><h1>Guide without a photograph</h1></GuideHeroLayout>);
+    render(
+      <GuideHeroLayout>
+        <h1>Guide without a photograph</h1>
+      </GuideHeroLayout>,
+    );
     const layout = screen.getByTestId("guide-hero-layout");
     expect(layout.children).toHaveLength(1);
     expect(layout.className).not.toContain("lg:grid-cols-");

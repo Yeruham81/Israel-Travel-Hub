@@ -19,8 +19,8 @@ describe("Mount Precipice attraction guide", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("Free");
-    expect(content.facts.find(f => f.label === "When to visit")?.value).toBe("During daylight");
+    expect(content.facts.find((f) => f.label === "Admission")?.value).toBe("Free");
+    expect(content.facts.find((f) => f.label === "When to visit")?.value).toBe("During daylight");
     expect(travelGuides.precipice.title).toBe(content.title);
     expect(travelGuides.precipice.description).toBe(site.description);
     expect(travelGuides.precipice.photo).toEqual(site.hero);
@@ -33,14 +33,16 @@ describe("Mount Precipice attraction guide", () => {
       "m26-precipice-jesus-trail",
       "m26-precipice-nazareth-tourism",
     ]);
-    const citations = publicSources(travelGuides.precipice.sourceIds).map(source => source.url);
-    expect(citations).toEqual(content.sources.map(source => source.url));
-    const articleMetadata = travelGuideMeta("precipice").scripts
-      .map(script => JSON.parse(script.children as string))
-      .find(script => script["@type"] === "Article");
+    const citations = publicSources(travelGuides.precipice.sourceIds).map((source) => source.url);
+    expect(citations).toEqual(content.sources.map((source) => source.url));
+    const articleMetadata = travelGuideMeta("precipice")
+      .scripts.map((script) => JSON.parse(script.children as string))
+      .find((script) => script["@type"] === "Article");
     expect(articleMetadata.citation).toEqual(citations);
     expect(JSON.stringify(travelGuideMeta("precipice").scripts)).toContain("2026-11-17");
-    expect(attractionHubCards.filter(card => String(card.to) === String(content.path))).toHaveLength(1);
+    expect(
+      attractionHubCards.filter((card) => String(card.to) === String(content.path)),
+    ).toHaveLength(1);
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
@@ -82,7 +84,7 @@ describe("Mount Precipice attraction guide", () => {
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs?.length).toBeGreaterThanOrEqual(6);
     expect(content.sources).toHaveLength(3);
-    expect(new Set(content.nearby!.map(item => item.to)).size).toBe(6);
+    expect(new Set(content.nearby!.map((item) => item.to)).size).toBe(6);
     expect(article).not.toContain("These are options, not a checklist");
     expect(article).not.toContain("Worth knowing");
   });

@@ -16,24 +16,41 @@ export function sourceFragment(fragment: string): RegExp {
   const classTail = fragment.match(/^([\w:-]+(?: [\w:-]+)*)"\s+([\w-]+)="([^"]*)"$/);
   if (classTail) {
     return new RegExp(
-      '(?:^|(?<=[\\s"]))' + escapeRegExp(classTail[1]!) + '"\\s+' +
-      escapeRegExp(classTail[2]!) + '\\s*=\\s*"' + escapeRegExp(classTail[3]!) + '"',
+      '(?:^|(?<=[\\s"]))' +
+        escapeRegExp(classTail[1]!) +
+        '"\\s+' +
+        escapeRegExp(classTail[2]!) +
+        '\\s*=\\s*"' +
+        escapeRegExp(classTail[3]!) +
+        '"',
     );
   }
   const jsxLike = /^<\/?[\w]|^[\w-]+\s*=\s*["'{]/.test(fragment);
-  const isCode = /[<>{}=]|^\s*\[|=>|\b[\w$]+:\s*["'\d]|\b[\w$]+\.[\w$]+\(|\b(?:const|return)\s/.test(fragment);
+  const isCode =
+    /[<>{}=]|^\s*\[|=>|\b[\w$]+:\s*["'\d]|\b[\w$]+\.[\w$]+\(|\b(?:const|return)\s/.test(fragment);
   if (!isCode) {
-    return new RegExp(fragment.split(/(\s+)/).map(part => /^\s+$/.test(part) ? visibleSpace + "+" : escapeRegExp(part)).join(""));
+    return new RegExp(
+      fragment
+        .split(/(\s+)/)
+        .map((part) => (/^\s+$/.test(part) ? visibleSpace + "+" : escapeRegExp(part)))
+        .join(""),
+    );
   }
 
   // Quoted strings are atomic: do not permit changes to literal URLs,
   // CSS class names, text, identifiers or property values.
-  const tokens = fragment.match(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|===|!==|=>|&&|\|\||\?\?|==|!=|<=|>=|\?\.|\.\.\.|[\p{L}\p{N}_$]+|\s+|./gsu) ?? [];
-  const items: Array<{token: string; before: boolean; pattern?: string}> = [];
+  const tokens =
+    fragment.match(
+      /"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|===|!==|=>|&&|\|\||\?\?|==|!=|<=|>=|\?\.|\.\.\.|[\p{L}\p{N}_$]+|\s+|./gsu,
+    ) ?? [];
+  const items: Array<{ token: string; before: boolean; pattern?: string }> = [];
   let space = false;
   for (const token of tokens) {
-    if (/^\s+$/.test(token)) { space = true; continue; }
-    items.push({token, before: space});
+    if (/^\s+$/.test(token)) {
+      space = true;
+      continue;
+    }
+    items.push({ token, before: space });
     space = false;
   }
   const identifier = /^[\p{L}_$][\p{L}\p{N}_$]*$/u;
@@ -41,45 +58,102 @@ export function sourceFragment(fragment: string): RegExp {
   for (let i = 0; i < items.length; i++) {
     const a = items[i];
     if (!a) continue;
-    if (a.token === "(" && identifier.test(items[i+1]?.token ?? "") &&
-        items[i+2]?.token === ")" && items[i+3]?.token === "=>") {
-      const name = items[i+1]!.token;
-      items.splice(i, 3, {token: name, before: a.before, pattern: "(?:" + escapeRegExp(name) + "|\\(\\s*" + escapeRegExp(name) + "\\s*\\))"});
-    } else if (identifier.test(a.token) && items[i+1]?.token === "=>") {
+    if (
+      a.token === "(" &&
+      identifier.test(items[i + 1]?.token ?? "") &&
+      items[i + 2]?.token === ")" &&
+      items[i + 3]?.token === "=>"
+    ) {
+      const name = items[i + 1]!.token;
+      items.splice(i, 3, {
+        token: name,
+        before: a.before,
+        pattern: "(?:" + escapeRegExp(name) + "|\\(\\s*" + escapeRegExp(name) + "\\s*\\))",
+      });
+    } else if (identifier.test(a.token) && items[i + 1]?.token === "=>") {
       a.pattern = "(?:" + escapeRegExp(a.token) + "|\\(\\s*" + escapeRegExp(a.token) + "\\s*\\))";
     }
   }
-  const flexible = new Set(["=", ":", ",", "{", "}", "(", ")", "[", "]", "?", "=>", "===", "!==", "==", "!=", "&&", "||", "??", "+"]);
+  const flexible = new Set([
+    "=",
+    ":",
+    ",",
+    "{",
+    "}",
+    "(",
+    ")",
+    "[",
+    "]",
+    "?",
+    "=>",
+    "===",
+    "!==",
+    "==",
+    "!=",
+    "&&",
+    "||",
+    "??",
+    "+",
+  ]);
   let result = "";
   for (let i = 0; i < items.length; i++) {
     const current = items[i]!;
-    const previous = items[i-1];
-    const next = items[i+1];
+    const previous = items[i - 1];
+    const next = items[i + 1];
     if (previous) {
       const jsxBranch = ["=>", "&&", "?", ":"].includes(previous.token) && current.token === "<";
       if (jsxBranch) {
         result += "\\s*(?:\\(\\s*)?";
       } else if (previous.token === ">" && current.token === "<" && !current.before) {
         result += codeSpace;
-      } else if (jsxLike && (current.token === ">" || (current.token === "/" && next?.token === ">") || (previous.token === ">" && !current.before))) {
+      } else if (
+        jsxLike &&
+        (current.token === ">" ||
+          (current.token === "/" && next?.token === ">") ||
+          (previous.token === ">" && !current.before))
+      ) {
         result += codeSpace;
       } else if (current.before) {
-        result += flexible.has(previous.token) || flexible.has(current.token) || current.token === ">" || current.token === "/" ?
-          visibleSpace + "*" : visibleSpace + "+";
-      } else if (flexible.has(previous.token) || flexible.has(current.token) || (previous.token === "/" && current.token === ">")) {
+        result +=
+          flexible.has(previous.token) ||
+          flexible.has(current.token) ||
+          current.token === ">" ||
+          current.token === "/"
+            ? visibleSpace + "*"
+            : visibleSpace + "+";
+      } else if (
+        flexible.has(previous.token) ||
+        flexible.has(current.token) ||
+        (previous.token === "/" && current.token === ">")
+      ) {
         result += codeSpace;
       }
       // Prettier may add a legal trailing comma to an object literal or
       // function call split over multiple lines. Never allow it in JSX props.
-      if ((current.token === "}" && /\b[\w$]+:\s*[^=]/.test(fragment) && previous.token !== "," && previous.token !== "{") ||
-          (current.token === ")" && fragment.includes("(") && previous.token !== "," && previous.token !== "(" && previous.token !== "=>")) {
+      if (
+        (current.token === "}" &&
+          /\b[\w$]+:\s*[^=]/.test(fragment) &&
+          previous.token !== "," &&
+          previous.token !== "{") ||
+        (current.token === ")" &&
+          fragment.includes("(") &&
+          previous.token !== "," &&
+          previous.token !== "(" &&
+          previous.token !== "=>")
+      ) {
         result += "(?:,\\s*)?";
       }
     }
     result += current.pattern ?? escapeRegExp(current.token);
     // A closing JSX tag may be followed by a formatter-added closing paren.
-    if (current.token === ">" && previous?.token === "/" && next && [")", "}"].includes(next.token) &&
-        /(?:=>|&&|\?)\s*\(?\s*</.test(fragment)) result += "(?:\\s*\\))?";
+    if (
+      current.token === ">" &&
+      previous?.token === "/" &&
+      next &&
+      [")", "}"].includes(next.token) &&
+      /(?:=>|&&|\?)\s*\(?\s*</.test(fragment)
+    )
+      result += "(?:\\s*\\))?";
   }
   return new RegExp(result);
 }

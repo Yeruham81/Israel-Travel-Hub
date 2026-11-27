@@ -8,32 +8,56 @@ import { travelGuides } from "@/data/travelGuides";
 import { travelGuideMeta } from "@/components/TravelGuide";
 
 const transportGuideIds = [
-  "taxis", "taxiFares", "airportTaxis", "uber",
-  "sherut", "shabbat", "israel", "telAviv",
+  "taxis",
+  "taxiFares",
+  "airportTaxis",
+  "uber",
+  "sherut",
+  "shabbat",
+  "israel",
+  "telAviv",
 ] as const;
 
 const canonical = (head: { links?: { rel: string; href: string }[] }) =>
-  head.links?.find(link => link.rel === "canonical")?.href;
+  head.links?.find((link) => link.rel === "canonical")?.href;
 
 describe("transport cluster: twelve editorial guides and four private landings", () => {
   it("gives all sixteen pages unique titles, descriptions, routes and self-canonicals", () => {
     const pages = [
-      ...transportGuideIds.map(id => {
+      ...transportGuideIds.map((id) => {
         const guide = travelGuides[id];
-        return { intent: "informational", path: travelGuidePaths[id], title: guide.title, description: guide.description, head: travelGuideMeta(id) };
+        return {
+          intent: "informational",
+          path: travelGuidePaths[id],
+          title: guide.title,
+          description: guide.description,
+          head: travelGuideMeta(id),
+        };
       }),
-      ...airportJourneyIds.map(id => {
+      ...airportJourneyIds.map((id) => {
         const guide = airportJourneyGuides[id];
-        return { intent: "comparison", path: guide.path, title: guide.title, description: guide.description, head: airportJourneyMeta(id) };
+        return {
+          intent: "comparison",
+          path: guide.path,
+          title: guide.title,
+          description: guide.description,
+          head: airportJourneyMeta(id),
+        };
       }),
-      ...airportTransferRoutes.map(route => {
+      ...airportTransferRoutes.map((route) => {
         const guide = getAirportRouteGuide(route.id);
-        return { intent: "private", path: guide.path, title: guide.title, description: guide.description, head: airportRouteMeta(route.id) };
+        return {
+          intent: "private",
+          path: guide.path,
+          title: guide.title,
+          description: guide.description,
+          head: airportRouteMeta(route.id),
+        };
       }),
     ];
     expect(pages).toHaveLength(16);
-    expect(new Set(pages.map(p => p.path)).size).toBe(16);
-    expect(new Set(pages.map(p => p.title)).size).toBe(16);
+    expect(new Set(pages.map((p) => p.path)).size).toBe(16);
+    expect(new Set(pages.map((p) => p.title)).size).toBe(16);
     for (const page of pages) {
       expect(page.title.length).toBeGreaterThan(20);
       expect(page.description.length).toBeGreaterThan(70);
@@ -41,7 +65,9 @@ describe("transport cluster: twelve editorial guides and four private landings",
       expect(page.head.meta).toContainEqual({ name: "robots", content: "noindex,nofollow" });
       if (page.intent === "private") {
         expect(page.title).toMatch(/^Private transfer/);
-        expect(JSON.parse(page.head.scripts!.at(-1)!.children).mainEntity.serviceType).toBe("Private airport transfer");
+        expect(JSON.parse(page.head.scripts!.at(-1)!.children).mainEntity.serviceType).toBe(
+          "Private airport transfer",
+        );
       } else if (page.intent === "comparison") {
         expect(page.title).toMatch(/Ben Gurion Airport to (?:Jerusalem|Tel Aviv|Haifa|Ein Bokek)/i);
         expect(JSON.parse(page.head.scripts!.at(-1)!.children)["@type"]).toBe("Article");
@@ -56,12 +82,17 @@ describe("transport cluster: twelve editorial guides and four private landings",
       const privateGuide = getAirportRouteGuide(privateId);
       expect(guide.privatePath).toBe(privateGuide.path);
       expect(guide.path).not.toBe(privateGuide.path);
-      expect(guide.options.map(option => option.id)).toEqual(expect.arrayContaining(["rail", "taxi", "private"]));
-      expect(guide.options.filter(o => o.id === "private")).toHaveLength(1);
+      expect(guide.options.map((option) => option.id)).toEqual(
+        expect.arrayContaining(["rail", "taxi", "private"]),
+      );
+      expect(guide.options.filter((o) => o.id === "private")).toHaveLength(1);
       expect(guide.faqs.length).toBeGreaterThanOrEqual(id === "jerusalem" ? 7 : 9);
       for (const option of guide.options) {
         for (const link of option.inlineLinks || []) {
-          expect(option.paragraphs.join(" ").split(link.text).length - 1, id + ": " + link.text).toBe(1);
+          expect(
+            option.paragraphs.join(" ").split(link.text).length - 1,
+            id + ": " + link.text,
+          ).toBe(1);
           expect(link.to).not.toBe(guide.path);
         }
       }
@@ -69,7 +100,10 @@ describe("transport cluster: twelve editorial guides and four private landings",
         expect(guide.trainIntro.includes(link.text), id + ": station link " + link.text).toBe(true);
       }
       for (const link of guide.weekendLinks || []) {
-        expect(guide.weekend.join(" ").split(link.text).length - 1, id + ": weekend link " + link.text).toBe(1);
+        expect(
+          guide.weekend.join(" ").split(link.text).length - 1,
+          id + ": weekend link " + link.text,
+        ).toBe(1);
       }
     }
   });
@@ -77,8 +111,8 @@ describe("transport cluster: twelve editorial guides and four private landings",
   it("uses contextual internal links in every major city/taxi/public-transport editorial page", () => {
     for (const id of transportGuideIds) {
       const guide = travelGuides[id];
-      const contextual = guide.sections.flatMap(section =>
-        (section.inlineLinks || []).map(link => ({ section, link }))
+      const contextual = guide.sections.flatMap((section) =>
+        (section.inlineLinks || []).map((link) => ({ section, link })),
       );
       expect(contextual.length, id + " should have in-paragraph links").toBeGreaterThan(0);
       for (const { section, link } of contextual) {
@@ -98,12 +132,12 @@ describe("transport cluster: twelve editorial guides and four private landings",
     expect(guide.title).toMatch(/^Ben Gurion Airport to Ein Bokek.*Train.*Bus.*Taxi/);
     expect(guide.answer).toMatch(/Jerusalem.*486.*444/s);
     expect(guide.trainIntro).toMatch(/voucher/);
-    expect(guide.options.map(o => o.id)).not.toContain("alternative");
-    expect(guide.options.find(o => o.id === "rail")?.paragraphs.join(" ")).not.toMatch(/\b421\b/);
-    expect(guide.faqs.some(faq => faq.q.includes("bus 421"))).toBe(true);
-    expect(guide.options.find(o => o.id === "rail")?.cost).toContain("₪40");
-    expect(guide.options.find(o => o.id === "taxi")?.cost).toMatch(/meter/i);
-    expect(guide.options.every(option => (option.inlineLinks?.length || 0) > 0)).toBe(true);
+    expect(guide.options.map((o) => o.id)).not.toContain("alternative");
+    expect(guide.options.find((o) => o.id === "rail")?.paragraphs.join(" ")).not.toMatch(/\b421\b/);
+    expect(guide.faqs.some((faq) => faq.q.includes("bus 421"))).toBe(true);
+    expect(guide.options.find((o) => o.id === "rail")?.cost).toContain("₪40");
+    expect(guide.options.find((o) => o.id === "taxi")?.cost).toMatch(/meter/i);
+    expect(guide.options.every((option) => (option.inlineLinks?.length || 0) > 0)).toBe(true);
     expect(guide.photos?.station.alt).toContain("Terminal 3");
     expect(guide.photos?.onward.alt).toContain("Dead Sea");
     expect(guide.sources).toHaveLength(9);
@@ -111,8 +145,14 @@ describe("transport cluster: twelve editorial guides and four private landings",
     expect(guide.weekend.join(" ")).toMatch(/Shabbat/);
     expect(guide.related).toHaveLength(6);
     expect(guide.planNext).toHaveLength(4);
-    expect(guide.options.every(option => Boolean(option.comparison?.advantages && option.comparison?.drawbacks))).toBe(true);
-    expect(guide.related.some(link => link.to === "/travel-blog/jerusalem-to-the-dead-sea/")).toBe(true);
+    expect(
+      guide.options.every((option) =>
+        Boolean(option.comparison?.advantages && option.comparison?.drawbacks),
+      ),
+    ).toBe(true);
+    expect(
+      guide.related.some((link) => link.to === "/travel-blog/jerusalem-to-the-dead-sea/"),
+    ).toBe(true);
   });
 
   it("keeps the Tel Aviv local transport hub distinct from the airport-only article", () => {
@@ -120,14 +160,27 @@ describe("transport cluster: twelve editorial guides and four private landings",
     expect(guide.title).toMatch(/^Getting Around Tel Aviv: Buses, Red Line/);
     expect(guide.title).not.toMatch(/2026|2027/);
     expect(guide.updatedAt).toBe("2026-11-24");
-    expect(guide.sections.map(section => section.id)).toEqual([
-      "choose", "paying", "red-line", "national-rail",
-      "taxis", "bikes", "shabbat", "accessibility",
+    expect(guide.sections.map((section) => section.id)).toEqual([
+      "choose",
+      "paying",
+      "red-line",
+      "national-rail",
+      "taxis",
+      "bikes",
+      "shabbat",
+      "accessibility",
     ]);
-    expect(guide.sections.filter(section => (section.inlineLinks?.length || 0) > 0).length).toBeGreaterThanOrEqual(5);
+    expect(
+      guide.sections.filter((section) => (section.inlineLinks?.length || 0) > 0).length,
+    ).toBeGreaterThanOrEqual(5);
     expect(guide.faqs).toHaveLength(8);
-    expect(guide.sections.find(section => section.id === "national-rail")?.inlineLinks).toEqual(expect.arrayContaining([
-      { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
-    ]));
+    expect(guide.sections.find((section) => section.id === "national-rail")?.inlineLinks).toEqual(
+      expect.arrayContaining([
+        {
+          text: "Ben Gurion Airport to Tel Aviv guide",
+          to: "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+        },
+      ]),
+    );
   });
 });

@@ -2,7 +2,12 @@ import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { telAvivAreaGuides } from "@/data/content";
 import { hotelsForArea, linksForPage } from "@/data/registry";
-import { hotelAffiliateUrl, hotelBrowseAffiliateUrl, hotelClickSubId, hotelBrowseSubId } from "@/lib/hotel-affiliate";
+import {
+  hotelAffiliateUrl,
+  hotelBrowseAffiliateUrl,
+  hotelClickSubId,
+  hotelBrowseSubId,
+} from "@/lib/hotel-affiliate";
 import { TelAvivHotelTile } from "@/components/TelAvivHotelBrowser";
 
 describe("Tel Aviv neighborhood hotel-page parity and Travelpayouts links", () => {
@@ -20,7 +25,9 @@ describe("Tel Aviv neighborhood hotel-page parity and Travelpayouts links", () =
         const key = `hotel-${hotel.id}-expedia`;
         const booking = linksForPage(pageId).find((offer) => offer.id === key);
         expect(booking?.isAffiliate, key).toBe(true);
-        expect(booking?.url, key).toMatch(/^https:\/\/expedia\.(?:tpm\.li|tpk\.lv)\/[A-Za-z0-9]{8}$/);
+        expect(booking?.url, key).toMatch(
+          /^https:\/\/expedia\.(?:tpm\.li|tpk\.lv)\/[A-Za-z0-9]{8}$/,
+        );
         const url = new URL(hotelAffiliateUrl(booking!, pageId, hotel.id));
         expect(url.searchParams.getAll("sub_id")).toEqual([hotelClickSubId(pageId, hotel.id)]);
       }
@@ -30,7 +37,9 @@ describe("Tel Aviv neighborhood hotel-page parity and Travelpayouts links", () =
       const browseBooking = browse[0]!;
       expect(browseBooking.isAffiliate).toBe(true);
       const browseUrl = new URL(hotelBrowseAffiliateUrl(browseBooking, pageId));
-      expect(browseUrl.searchParams.getAll("sub_id")).toEqual([hotelBrowseSubId(pageId, browseBooking.id)]);
+      expect(browseUrl.searchParams.getAll("sub_id")).toEqual([
+        hotelBrowseSubId(pageId, browseBooking.id),
+      ]);
     }
     expect(seen.size).toBe(32);
   });
@@ -41,7 +50,9 @@ describe("Tel Aviv neighborhood hotel-page parity and Travelpayouts links", () =
     const pageId = `stay-area-${area.id}`;
     const booking = linksForPage(pageId).find((offer) => offer.id === `hotel-${hotel.id}-expedia`)!;
     const html = renderToStaticMarkup(
-      <ul><TelAvivHotelTile hotel={hotel} pageId={pageId} showArea={false} stacked /></ul>,
+      <ul>
+        <TelAvivHotelTile hotel={hotel} pageId={pageId} showArea={false} stacked />
+      </ul>,
     );
     expect(html).toContain('data-testid="hotel-recommendation"');
     expect(html).toContain("aspect-[16/9] w-full object-cover");

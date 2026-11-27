@@ -6,11 +6,18 @@ import einGediWaterfall from "@/assets/guides/dead-sea-excursions/ein-gedi-water
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 
 vi.mock("@tanstack/react-router", async () => {
-  const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
+  const actual =
+    await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
   return {
     ...actual,
-    Link: ({ to, children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement> & { to: string; children?: ReactNode }) => (
-      <a href={to} {...props}>{children}</a>
+    Link: ({
+      to,
+      children,
+      ...props
+    }: AnchorHTMLAttributes<HTMLAnchorElement> & { to: string; children?: ReactNode }) => (
+      <a href={to} {...props}>
+        {children}
+      </a>
     ),
   };
 });
@@ -29,7 +36,13 @@ describe("hotel and neighborhood guide navigation", () => {
     expect(within(local).getAllByRole("link")).toHaveLength(localCount);
     expect(within(onward).getAllByRole("link")).toHaveLength(6);
     expect(within(local).getAllByRole("img")).toHaveLength(localCount);
-    if (region === "jerusalem" || region === "telaviv" || region === "haifa" || region === "deadsea" || region === "tiberias") {
+    if (
+      region === "jerusalem" ||
+      region === "telaviv" ||
+      region === "haifa" ||
+      region === "deadsea" ||
+      region === "tiberias"
+    ) {
       expect(local).toHaveClass("grid-cols-2", "lg:grid-cols-3");
       expect(onward).toHaveClass("grid-cols-2", "lg:grid-cols-3");
     }
@@ -49,10 +62,18 @@ describe("hotel and neighborhood guide navigation", () => {
       expect(image).toHaveAttribute("height", "375");
     }
 
-    const localTitle = within(wrapper).getByRole("heading", { name: `Explore more around ${stayGuideGroups[region].name}` });
-    const onwardTitle = within(wrapper).getByRole("heading", { name: "Plan the rest of your trip" });
-    expect(localTitle.compareDocumentPosition(onwardTitle) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(within(wrapper).getAllByRole("heading", { name: "Plan the rest of your trip" })).toHaveLength(1);
+    const localTitle = within(wrapper).getByRole("heading", {
+      name: `Explore more around ${stayGuideGroups[region].name}`,
+    });
+    const onwardTitle = within(wrapper).getByRole("heading", {
+      name: "Plan the rest of your trip",
+    });
+    expect(
+      localTitle.compareDocumentPosition(onwardTitle) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      within(wrapper).getAllByRole("heading", { name: "Plan the rest of your trip" }),
+    ).toHaveLength(1);
     expect(container.textContent).not.toContain("More ways to plan your stay");
   });
 
@@ -72,46 +93,88 @@ describe("hotel and neighborhood guide navigation", () => {
     expect(travelLinks[1]).toHaveAttribute("href", "/travel-blog/jerusalem-to-bethlehem/");
     expect(travelLinks[2]).toHaveAttribute("href", "/travel-blog/jerusalem-to-the-dead-sea/");
     expect(travelLinks[3]).toHaveAttribute("href", "/travel-blog/getting-around-israel/");
-    expect(travelLinks.map((item) => item.getAttribute("href"))).not.toContain("/travel-blog/day-trips-from-jerusalem/");
+    expect(travelLinks.map((item) => item.getAttribute("href"))).not.toContain(
+      "/travel-blog/day-trips-from-jerusalem/",
+    );
   });
 
   it("includes six useful Tiberias-area guides and six onward travel cards", () => {
-    render(<StayTripLinks region="tiberias" currentPath="/travel-blog/best-hotels-in-tiberias/" presentation="guide" />);
+    render(
+      <StayTripLinks
+        region="tiberias"
+        currentPath="/travel-blog/best-hotels-in-tiberias/"
+        presentation="guide"
+      />,
+    );
     const local = within(screen.getByTestId("stay-local-photo-grid")).getAllByRole("link");
     const onward = within(screen.getByTestId("stay-trip-photo-grid")).getAllByRole("link");
     expect(local).toHaveLength(6);
     expect(onward).toHaveLength(6);
-    expect(local.map(item => item.getAttribute("href"))).toContain("/attractions/sea-of-galilee/");
-    expect(local.map(item => item.getAttribute("href"))).toContain("/attractions/yardenit/");
-    expect(local.map(item => item.getAttribute("href"))).toContain("/attractions/mount-of-beatitudes/");
-    expect(onward.map(item => item.getAttribute("href"))).toContain("/attractions/mount-tabor/");
-    expect(onward.map(item => item.getAttribute("href"))).toContain("/tours/nazareth-sea-of-galilee/");
-    expect(new Set([...local, ...onward].map(item => item.querySelector("img")?.getAttribute("src"))).size).toBe(12);
+    expect(local.map((item) => item.getAttribute("href"))).toContain(
+      "/attractions/sea-of-galilee/",
+    );
+    expect(local.map((item) => item.getAttribute("href"))).toContain("/attractions/yardenit/");
+    expect(local.map((item) => item.getAttribute("href"))).toContain(
+      "/attractions/mount-of-beatitudes/",
+    );
+    expect(onward.map((item) => item.getAttribute("href"))).toContain("/attractions/mount-tabor/");
+    expect(onward.map((item) => item.getAttribute("href"))).toContain(
+      "/tours/nazareth-sea-of-galilee/",
+    );
+    expect(
+      new Set([...local, ...onward].map((item) => item.querySelector("img")?.getAttribute("src")))
+        .size,
+    ).toBe(12);
   });
 
   it("shows six Dead Sea destination guides and six distinct onward guides", () => {
-    render(<StayTripLinks region="deadsea" currentPath="/travel-blog/best-dead-sea-hotels/" presentation="guide" />);
+    render(
+      <StayTripLinks
+        region="deadsea"
+        currentPath="/travel-blog/best-dead-sea-hotels/"
+        presentation="guide"
+      />,
+    );
     const local = within(screen.getByTestId("stay-local-photo-grid")).getAllByRole("link");
     const onward = within(screen.getByTestId("stay-trip-photo-grid")).getAllByRole("link");
     expect(local).toHaveLength(6);
     expect(onward).toHaveLength(6);
-    expect(local.map(link => link.getAttribute("href"))).toContain("/tours/masada-dead-sea/");
-    expect(local.map(link => link.getAttribute("href"))).toContain("/attractions/qasr-el-yahud/");
-    const einGedi = local.find(link => link.getAttribute("href") === "/attractions/ein-gedi/")!;
-    const attractions = local.find(link => link.getAttribute("href") === "/travel-blog/dead-sea-attractions/")!;
-    const masada = local.find(link => link.getAttribute("href") === "/attractions/masada/")!;
+    expect(local.map((link) => link.getAttribute("href"))).toContain("/tours/masada-dead-sea/");
+    expect(local.map((link) => link.getAttribute("href"))).toContain("/attractions/qasr-el-yahud/");
+    const einGedi = local.find((link) => link.getAttribute("href") === "/attractions/ein-gedi/")!;
+    const attractions = local.find(
+      (link) => link.getAttribute("href") === "/travel-blog/dead-sea-attractions/",
+    )!;
+    const masada = local.find((link) => link.getAttribute("href") === "/attractions/masada/")!;
     expect(einGedi.querySelector("img")).toHaveAttribute("src", einGediWaterfall);
-    expect(einGedi.querySelector("img")).toHaveAttribute("alt", expect.stringContaining("Waterfall"));
-    expect(attractions.querySelector("img")).toHaveAttribute("src", guideHeroPhotoForPath("/travel-blog/dead-sea-attractions/")!.src);
-    expect(attractions.querySelector("img")).toHaveAttribute("alt", guideHeroPhotoForPath("/travel-blog/dead-sea-attractions/")!.alt);
-    expect(attractions.querySelector("img")!.getAttribute("src")).not.toBe(masada.querySelector("img")!.getAttribute("src"));
-    expect(onward.map(link => link.getAttribute("href"))).toContain("/travel-blog/calendar-of-events/");
+    expect(einGedi.querySelector("img")).toHaveAttribute(
+      "alt",
+      expect.stringContaining("Waterfall"),
+    );
+    expect(attractions.querySelector("img")).toHaveAttribute(
+      "src",
+      guideHeroPhotoForPath("/travel-blog/dead-sea-attractions/")!.src,
+    );
+    expect(attractions.querySelector("img")).toHaveAttribute(
+      "alt",
+      guideHeroPhotoForPath("/travel-blog/dead-sea-attractions/")!.alt,
+    );
+    expect(attractions.querySelector("img")!.getAttribute("src")).not.toBe(
+      masada.querySelector("img")!.getAttribute("src"),
+    );
+    expect(onward.map((link) => link.getAttribute("href"))).toContain(
+      "/travel-blog/calendar-of-events/",
+    );
   });
 
   it("removes a link to the currently displayed page without repeating it elsewhere", () => {
-    render(<StayTripLinks region="jerusalem" currentPath="/travel-blog/jerusalem-to-the-dead-sea/" />);
+    render(
+      <StayTripLinks region="jerusalem" currentPath="/travel-blog/jerusalem-to-the-dead-sea/" />,
+    );
     const links = within(screen.getByTestId("stay-trip-planning")).getAllByRole("link");
-    expect(links.map((item) => item.getAttribute("href"))).not.toContain("/travel-blog/jerusalem-to-the-dead-sea/");
+    expect(links.map((item) => item.getAttribute("href"))).not.toContain(
+      "/travel-blog/jerusalem-to-the-dead-sea/",
+    );
     expect(new Set(links.map((item) => item.getAttribute("href"))).size).toBe(links.length);
   });
 });

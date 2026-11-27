@@ -16,24 +16,28 @@ describe("Caesarea upgraded attraction guide", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe(site.updatedAt);
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("₪46 adult");
-    expect(content.facts.find(f => f.label === "Park hours")?.value).toBe("From 08:00");
+    expect(content.facts.find((f) => f.label === "Admission")?.value).toBe("₪46 adult");
+    expect(content.facts.find((f) => f.label === "Park hours")?.value).toBe("From 08:00");
     expect(content.visitorNavLabel).toBe("Tickets & hours");
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell).toContain("<AuthorCard />");
     expect(shell).toContain("<SourcesDisclosure>");
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
-    expect(attractionHubCards.filter(card => card.to === content.path)).toHaveLength(1);
+    expect(attractionHubCards.filter((card) => card.to === content.path)).toHaveLength(1);
     expect(content.nearby).toHaveLength(6);
-    expect(new Set(content.nearby!.map(item => item.to)).size).toBe(6);
+    expect(new Set(content.nearby!.map((item) => item.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(8);
     expect(content.sources).toHaveLength(7);
     const meta = caesareaMeta();
-    expect(meta.links.find(link => link.rel === "canonical")?.href).toContain("/attractions/caesarea/");
-    const article = meta.scripts.map(script => JSON.parse(script.children as string)).find(script => script["@type"] === "Article");
+    expect(meta.links.find((link) => link.rel === "canonical")?.href).toContain(
+      "/attractions/caesarea/",
+    );
+    const article = meta.scripts
+      .map((script) => JSON.parse(script.children as string))
+      .find((script) => script["@type"] === "Article");
     expect(article.dateModified).toBe("2026-11-17");
-    expect(article.citation).toEqual(content.sources.map(source => source.url));
+    expect(article.citation).toEqual(content.sources.map((source) => source.url));
   });
 
   it("shows verified 2026 park rates, closing rules and separate harbor arrangements", () => {
@@ -93,8 +97,8 @@ describe("Caesarea upgraded attraction guide", () => {
       "public/images/attractions/caesarea-aqueduct-arches.svg",
     ]) {
       const imageMarkup = readFileSync(path, "utf8");
-      expect(imageMarkup).toContain('<image ');
-      expect(imageMarkup).toContain('data:image/webp;base64,');
+      expect(imageMarkup).toContain("<image ");
+      expect(imageMarkup).toContain("data:image/webp;base64,");
     }
     expect(article).toContain('data-testid="caesarea-coastal-panorama"');
     expect(article).toContain("coastPanorama");

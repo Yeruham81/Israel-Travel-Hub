@@ -12,7 +12,9 @@ describe("instant navigation scrolling", () => {
   it("keeps only the selected blue filter chip compact across shared filter panels", () => {
     const css = readFileSync(resolve(process.cwd(), "src/styles.css"), "utf8");
     const baseChip = css.match(/ {2}\.chip \{([\s\S]*?)\n {2}\}/)?.[1];
-    const selectedChip = css.match(/ {2}\.chip\[aria-pressed="true"\], \.chip\[aria-current="true"\], \.chip\[aria-current="page"\] \{([\s\S]*?)\n {2}\}/)?.[1];
+    const selectedChip = css.match(
+      / {2}\.chip\[aria-pressed="true"\], \.chip\[aria-current="true"\], \.chip\[aria-current="page"\] \{([\s\S]*?)\n {2}\}/,
+    )?.[1];
     expect(baseChip).toContain("min-height: 2.5rem");
     expect(baseChip).toContain("padding: .5rem .75rem");
     expect(selectedChip).toContain("min-height: 2.125rem");
@@ -42,6 +44,6 @@ describe("instant navigation scrolling", () => {
     const router = readFileSync(resolve(process.cwd(), "src/router.tsx"), "utf8");
     const toc = readFileSync(resolve(process.cwd(), "src/components/Guide.tsx"), "utf8");
     expect(router).toMatch(/scrollRestoration:\s*true/);
-    expect(toc).toContain('href={`#${id}`}');
+    expect(toc).toContain("href={`#${id}`}");
   });
 });

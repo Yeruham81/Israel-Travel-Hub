@@ -15,25 +15,29 @@ describe("Ein Gedi upgraded attraction guide", () => {
     expect(content.title).toBe(site.title);
     expect(content.intro).toBe(site.intro);
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(x => x.label === "Admission")?.value).toBe("₪31 adult");
+    expect(content.facts.find((x) => x.label === "Admission")?.value).toBe("₪31 adult");
     expect(content.visitorNavLabel).toBe("Trails & tickets");
     expect(content.nearby).toHaveLength(6);
-    expect(content.nearby?.some(x => x.to === "/attractions/old-city-jerusalem/")).toBe(true);
-    expect(new Set(content.nearby!.map(x => x.to)).size).toBe(6);
+    expect(content.nearby?.some((x) => x.to === "/attractions/old-city-jerusalem/")).toBe(true);
+    expect(new Set(content.nearby!.map((x) => x.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(5);
     expect(content.sources).toHaveLength(5);
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell).toContain("<AuthorCard />");
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
-    const card = attractionHubCards.find(x => x.to === content.path);
+    const card = attractionHubCards.find((x) => x.to === content.path);
     expect(card?.photo).toEqual(einGediCardPhoto);
     expect(site.hero).toEqual(einGediCardPhoto);
     const meta = einGediMeta();
-    expect(meta.links.find(link => link.rel === "canonical")?.href).toContain("/attractions/ein-gedi/");
-    const article = meta.scripts.map(x => JSON.parse(x.children as string)).find(x => x["@type"] === "Article");
+    expect(meta.links.find((link) => link.rel === "canonical")?.href).toContain(
+      "/attractions/ein-gedi/",
+    );
+    const article = meta.scripts
+      .map((x) => JSON.parse(x.children as string))
+      .find((x) => x["@type"] === "Article");
     expect(article.dateModified).toBe("2026-11-18");
-    expect(article.citation).toEqual(content.sources.map(x => x.url));
+    expect(article.citation).toEqual(content.sources.map((x) => x.url));
   });
 
   it("shows correct tickets, reservations, flood updates, cutoffs and separate entrances", () => {

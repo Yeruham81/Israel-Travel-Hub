@@ -4,19 +4,36 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { HotelDestinationPage } from "@/components/HotelDestinationPage";
 import { regionalHotelAreas } from "@/components/ResortHotelBrowser";
-import { deadSeaStayGuide, haifaStayGuide, tiberiasStayGuide, hotelCategoryGuides } from "@/data/content";
+import {
+  deadSeaStayGuide,
+  haifaStayGuide,
+  tiberiasStayGuide,
+  hotelCategoryGuides,
+} from "@/data/content";
 import { accommodationEditorial } from "@/data/accommodationEditorial";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { hotelBooking, resortHotel } from "@/components/StayGuideParts";
 
 vi.mock("@tanstack/react-router", async () => {
-  const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
+  const actual =
+    await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
   return {
     ...actual,
-    Link: ({ to, hash, children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement> & {
-      to: string; hash?: string; children?: ReactNode;
-    }) => <a href={hash ? to + "#" + hash : to} {...props}>{children}</a>,
+    Link: ({
+      to,
+      hash,
+      children,
+      ...props
+    }: AnchorHTMLAttributes<HTMLAnchorElement> & {
+      to: string;
+      hash?: string;
+      children?: ReactNode;
+    }) => (
+      <a href={hash ? to + "#" + hash : to} {...props}>
+        {children}
+      </a>
+    ),
   };
 });
 afterEach(cleanup);
@@ -26,7 +43,9 @@ const destinations = [haifaStayGuide, tiberiasStayGuide, deadSeaStayGuide];
 describe.each(destinations)("Regional accommodation: $name", (guide) => {
   const ids = guide.groups.flatMap((group) => group.hotelIds);
   const areas = regionalHotelAreas[guide.id]!;
-  const categoryGuides = hotelCategoryGuides.filter((category) => category.destinationId === guide.id);
+  const categoryGuides = hotelCategoryGuides.filter(
+    (category) => category.destinationId === guide.id,
+  );
 
   it("places the six-card booking catalog first while retaining all unique hotels and location groups", () => {
     expect(new Set(ids).size).toBe(ids.length);
@@ -36,10 +55,25 @@ describe.each(destinations)("Regional accommodation: $name", (guide) => {
     const { container } = render(<HotelDestinationPage guide={guide} />);
     const catalog = screen.getByTestId("regional-hotel-browser");
     expect(within(catalog).getAllByTestId("hotel-recommendation")).toHaveLength(6);
-    expect(within(catalog).getByTestId("regional-hotel-count")).toHaveTextContent(`Showing 6 of ${ids.length} hotels`);
-    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#categories")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(container.querySelector("#categories")!.compareDocumentPosition(container.querySelector("#location")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(container.querySelector("#location iframe")).toHaveAttribute("src", expect.stringContaining("https://maps.google.com/maps?"));
+    expect(within(catalog).getByTestId("regional-hotel-count")).toHaveTextContent(
+      `Showing 6 of ${ids.length} hotels`,
+    );
+    expect(
+      container
+        .querySelector("#book")!
+        .compareDocumentPosition(container.querySelector("#categories")!) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      container
+        .querySelector("#categories")!
+        .compareDocumentPosition(container.querySelector("#location")!) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(container.querySelector("#location iframe")).toHaveAttribute(
+      "src",
+      expect.stringContaining("https://maps.google.com/maps?"),
+    );
 
     fireEvent.click(within(catalog).getByRole("button", { name: `Show all ${ids.length} hotels` }));
     const cards = within(catalog).getAllByTestId("hotel-recommendation");
@@ -48,8 +82,9 @@ describe.each(destinations)("Regional accommodation: $name", (guide) => {
       const card = cards.find((node) => node.id === `hotel-${id}`)!;
       expect(card).toBeDefined();
       const offer = hotelBooking(id)!;
-      expect(within(card).getByRole("link", { name: `${offer.ctaLabel} for ${resortHotel(id).name}` }))
-        .toHaveAttribute("href", hotelAffiliateUrl(offer, `stay-${guide.id}`, id));
+      expect(
+        within(card).getByRole("link", { name: `${offer.ctaLabel} for ${resortHotel(id).name}` }),
+      ).toHaveAttribute("href", hotelAffiliateUrl(offer, `stay-${guide.id}`, id));
     }
     expect(new Set(cards.map((card) => card.id)).size).toBe(ids.length);
   });
@@ -57,27 +92,41 @@ describe.each(destinations)("Regional accommodation: $name", (guide) => {
   it("supports style and location filters, combined filtering and alphabetical sorting", () => {
     render(<HotelDestinationPage guide={guide} />);
     const catalog = screen.getByTestId("regional-hotel-browser");
-    const styles = within(catalog).getByRole("group", { name: `Filter ${guide.name} hotels by style` });
-    const locations = within(catalog).getByRole("group", { name: `Filter ${guide.name} hotels by location` });
+    const styles = within(catalog).getByRole("group", {
+      name: `Filter ${guide.name} hotels by style`,
+    });
+    const locations = within(catalog).getByRole("group", {
+      name: `Filter ${guide.name} hotels by location`,
+    });
     const firstGroup = guide.groups[0]!;
     const firstArea = areas[0]!;
     const firstButton = within(styles).getAllByRole("button")[1]!;
     fireEvent.click(firstButton);
     expect(firstButton).toHaveAttribute("aria-pressed", "true");
-    expect(within(catalog).getAllByTestId("hotel-recommendation")).toHaveLength(firstGroup.hotelIds.length);
+    expect(within(catalog).getAllByTestId("hotel-recommendation")).toHaveLength(
+      firstGroup.hotelIds.length,
+    );
     if (firstGroup.guidePath) {
-      expect(within(catalog).getByRole("link", { name: /Compare .* hotels in detail/ })).toHaveAttribute("href", firstGroup.guidePath);
+      expect(
+        within(catalog).getByRole("link", { name: /Compare .* hotels in detail/ }),
+      ).toHaveAttribute("href", firstGroup.guidePath);
     }
 
     fireEvent.click(within(locations).getByRole("button", { name: firstArea.label }));
     const intersection = firstGroup.hotelIds.filter((id) => firstArea.hotelIds.includes(id));
-    expect(within(catalog).queryAllByTestId("hotel-recommendation")).toHaveLength(intersection.length);
+    expect(within(catalog).queryAllByTestId("hotel-recommendation")).toHaveLength(
+      intersection.length,
+    );
     fireEvent.click(within(catalog).getByRole("button", { name: `View all ${guide.name} hotels` }));
     expect(within(catalog).getAllByTestId("hotel-recommendation")).toHaveLength(6);
 
-    fireEvent.change(within(catalog).getByRole("combobox", { name: "Sort hotels" }), { target: { value: "name" } });
+    fireEvent.change(within(catalog).getByRole("combobox", { name: "Sort hotels" }), {
+      target: { value: "name" },
+    });
     fireEvent.click(within(catalog).getByRole("button", { name: `Show all ${ids.length} hotels` }));
-    const names = within(catalog).getAllByTestId("hotel-recommendation").map((item) => item.querySelector("h3")!.textContent!);
+    const names = within(catalog)
+      .getAllByTestId("hotel-recommendation")
+      .map((item) => item.querySelector("h3")!.textContent!);
     expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b)));
   });
 
@@ -107,6 +156,8 @@ it("keeps every style mapped once and exactly three location zones in all region
     expect(regionalHotelAreas[guide.id]).toHaveLength(3);
     expect(new Set(guide.groups.map((group) => group.id)).size).toBe(guide.groups.length);
     const officialIds = guide.groups.flatMap((group) => group.hotelIds);
-    expect(new Set(regionalHotelAreas[guide.id]!.flatMap((area) => area.hotelIds))).toEqual(new Set(officialIds));
+    expect(new Set(regionalHotelAreas[guide.id]!.flatMap((area) => area.hotelIds))).toEqual(
+      new Set(officialIds),
+    );
   }
 });

@@ -7,20 +7,36 @@ import { travelGuides } from "@/data/travelGuides";
 
 afterEach(cleanup);
 
-const sections = Array.from({ length: 17 }, (_, index) => [
-  `section-${index + 1}`,
-  `Long descriptive section title number ${index + 1}`,
-] as const);
+const sections = Array.from(
+  { length: 17 },
+  (_, index) =>
+    [`section-${index + 1}`, `Long descriptive section title number ${index + 1}`] as const,
+);
 
 describe("compact On this page navigation", () => {
   it("makes the jump-link panel visible without changing filters elsewhere", () => {
     render(<OnThisPage sections={sections.slice(0, 6)} />);
     const nav = screen.getByRole("navigation", { name: "On this page" });
-    expect(nav).toHaveClass("on-this-page", "rounded-xl", "border", "border-primary/25", "bg-secondary/40", "shadow-sm");
-    expect(nav.querySelector("ul.grid")).toHaveClass("grid-cols-2", "sm:grid-cols-3", "lg:grid-cols-4");
+    expect(nav).toHaveClass(
+      "on-this-page",
+      "rounded-xl",
+      "border",
+      "border-primary/25",
+      "bg-secondary/40",
+      "shadow-sm",
+    );
+    expect(nav.querySelector("ul.grid")).toHaveClass(
+      "grid-cols-2",
+      "sm:grid-cols-3",
+      "lg:grid-cols-4",
+    );
     const links = within(nav).getAllByRole("link");
     expect(links).toHaveLength(6);
-    expect(links.every(link => link.classList.contains("chip") && link.classList.contains("chip-dense"))).toBe(true);
+    expect(
+      links.every(
+        (link) => link.classList.contains("chip") && link.classList.contains("chip-dense"),
+      ),
+    ).toBe(true);
     const css = readFileSync("src/styles.css", "utf8");
     const buttonStyles = css.match(/\.on-this-page \.chip \{([^}]*)\}/)?.[1] ?? "";
     expect(buttonStyles).toContain("min-height: 2.375rem");
@@ -37,7 +53,12 @@ describe("compact On this page navigation", () => {
     const nav = screen.getByRole("navigation", { name: "On this page" });
     const link = within(nav).getByRole("link", { name: fullLabel });
     expect(link).toHaveTextContent(fullLabel);
-    expect(link).not.toHaveClass("truncate", "whitespace-nowrap", "overflow-hidden", "text-ellipsis");
+    expect(link).not.toHaveClass(
+      "truncate",
+      "whitespace-nowrap",
+      "overflow-hidden",
+      "text-ellipsis",
+    );
     expect(link.querySelector("span")).toHaveClass("min-w-0");
 
     const css = readFileSync("src/styles.css", "utf8");
@@ -49,7 +70,8 @@ describe("compact On this page navigation", () => {
     expect(wrappingStyles).toContain("white-space: normal");
     expect(wrappingStyles).toContain("overflow-wrap: anywhere");
     expect(wrappingStyles).toContain("max-width: 100%");
-    const mobileStyles = css.match(/@media \(max-width: 639px\) \{\s*\.on-this-page \.chip \{([^}]*)\}/)?.[1] ?? "";
+    const mobileStyles =
+      css.match(/@media \(max-width: 639px\) \{\s*\.on-this-page \.chip \{([^}]*)\}/)?.[1] ?? "";
     expect(mobileStyles).toContain("font-size: .8125rem");
     expect(mobileStyles).toContain("padding: .4rem .45rem");
     expect(mobileStyles).not.toContain("max-height");
@@ -63,12 +85,15 @@ describe("compact On this page navigation", () => {
     const chips = [...grid.children] as HTMLElement[];
     expect(chips).toHaveLength(17);
     for (const [index, chip] of chips.entries()) {
-      const expected = index >= 15 ? "hidden" : index >= 12 ? "xl:block" : index >= 10 ? "lg:block" : "min-w-0";
+      const expected =
+        index >= 15 ? "hidden" : index >= 12 ? "xl:block" : index >= 10 ? "lg:block" : "min-w-0";
       expect(chip).toHaveClass(expected);
     }
     expect(chips.slice(0, 10).every((chip) => !chip.classList.contains("hidden"))).toBe(true);
     expect(chips[10]).toHaveClass("hidden", "lg:block");
-    expect(container.querySelector('nav[aria-label="On this page"]')).not.toHaveClass("overflow-x-auto");
+    expect(container.querySelector('nav[aria-label="On this page"]')).not.toHaveClass(
+      "overflow-x-auto",
+    );
   });
 
   it("keeps every section reachable in an accessible, compact overflow menu", () => {
@@ -81,18 +106,34 @@ describe("compact On this page navigation", () => {
     expect(details).toHaveAttribute("open");
     const menu = details.querySelector("ul")!;
     expect(menu.querySelectorAll("a")).toHaveLength(17);
-    expect(menu.querySelector('a[href="#section-17"]')).toHaveTextContent("Long descriptive section title number 17");
+    expect(menu.querySelector('a[href="#section-17"]')).toHaveTextContent(
+      "Long descriptive section title number 17",
+    );
   });
 
   it("shows short, meaningful labels while keeping full accessible titles and the overflow list", () => {
     const pairs = [
-      ["passport-control", "What happens at passport control in Ben Gurion Airport?", "Passport control"],
-      ["intercity-trains", "How can tourists use Israel Railways between cities?", "Intercity trains"],
-      ["hillsides-and-heritage", "Add the Mount of Olives, Mount Zion or Ein Karem", "Mounts & Ein Karem"],
+      [
+        "passport-control",
+        "What happens at passport control in Ben Gurion Airport?",
+        "Passport control",
+      ],
+      [
+        "intercity-trains",
+        "How can tourists use Israel Railways between cities?",
+        "Intercity trains",
+      ],
+      [
+        "hillsides-and-heritage",
+        "Add the Mount of Olives, Mount Zion or Ein Karem",
+        "Mounts & Ein Karem",
+      ],
       ["booking-without-app", "How can I get a taxi without Gett or Yango?", "Without an app"],
       ["new-topic", "An unusually long heading about the local area", "New topic"],
     ] as const;
-    const { container } = render(<OnThisPage sections={pairs.map(([id, full]) => [id, full] as const)} />);
+    const { container } = render(
+      <OnThisPage sections={pairs.map(([id, full]) => [id, full] as const)} />,
+    );
     const nav = screen.getByRole("navigation", { name: "On this page" });
     for (const [id, full, short] of pairs) {
       const chip = nav.querySelector(`ul.grid a[href="#${id}"]`);
@@ -114,7 +155,11 @@ describe("compact On this page navigation", () => {
   });
 
   it("omits Sources from visible jump links and All sections, without removing other sections", () => {
-    const withSources = [...sections.slice(0, 12), ["sources", "Sources"] as const, ...sections.slice(12)];
+    const withSources = [
+      ...sections.slice(0, 12),
+      ["sources", "Sources"] as const,
+      ...sections.slice(12),
+    ];
     const { container } = render(<OnThisPage sections={withSources} />);
     const nav = screen.getByRole("navigation", { name: "On this page" });
     expect(within(nav).queryByRole("link", { name: "Sources" })).not.toBeInTheDocument();
@@ -132,12 +177,19 @@ describe("compact On this page navigation", () => {
   it("keeps the bottom Sources disclosure collapsed and user-expandable", () => {
     render(
       <>
-        <OnThisPage sections={[["overview", "Overview"], ["sources", "Sources"]]} />
+        <OnThisPage
+          sections={[
+            ["overview", "Overview"],
+            ["sources", "Sources"],
+          ]}
+        />
         <main>
           <section aria-label="Overview">Guide details</section>
-          <SourcesDisclosure><a href="https://example.org/reference">Official reference</a></SourcesDisclosure>
+          <SourcesDisclosure>
+            <a href="https://example.org/reference">Official reference</a>
+          </SourcesDisclosure>
         </main>
-      </>
+      </>,
     );
     const nav = screen.getByRole("navigation", { name: "On this page" });
     expect(within(nav).getAllByRole("link")).toHaveLength(1);
@@ -148,7 +200,9 @@ describe("compact On this page navigation", () => {
     expect(sources).toHaveTextContent("Official reference");
     fireEvent.click(sources.querySelector("summary")!);
     expect(details).toHaveAttribute("open");
-    expect(within(sources as HTMLElement).getByRole("link", { name: "Official reference" })).toHaveAttribute("href", "https://example.org/reference");
+    expect(
+      within(sources as HTMLElement).getByRole("link", { name: "Official reference" }),
+    ).toHaveAttribute("href", "https://example.org/reference");
   });
 
   it("filters Sources before computing the compact menu overflow threshold", () => {
@@ -157,7 +211,9 @@ describe("compact On this page navigation", () => {
     const nav = screen.getByRole("navigation", { name: "On this page" });
     expect(nav.querySelector("details")).toBeNull();
     expect(nav.querySelector("ul.grid")?.children).toHaveLength(10);
-    rerender(<OnThisPage sections={[["sources", "Source references"], ...sections.slice(0, 10)]} />);
+    rerender(
+      <OnThisPage sections={[["sources", "Source references"], ...sections.slice(0, 10)]} />,
+    );
     expect(nav.querySelector('a[href="#sources"]')).toBeNull();
     expect(nav.querySelector("details")).toBeNull();
   });

@@ -20,7 +20,9 @@ describe("Tel Megiddo attraction guide", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "World Heritage")?.value).toBe("UNESCO since 2005");
+    expect(content.facts.find((f) => f.label === "World Heritage")?.value).toBe(
+      "UNESCO since 2005",
+    );
     expect(travelGuides.megiddo.title).toBe(site.title);
     expect(travelGuides.megiddo.description).toBe(site.description);
     expect(travelGuides.megiddo.photo).toEqual(site.hero);
@@ -34,17 +36,19 @@ describe("Tel Megiddo attraction guide", () => {
       "m26-unesco-tels",
       "m26-megiddo-water-system",
     ]);
-    const citations = publicSources(travelGuides.megiddo.sourceIds).map(source => source.url);
-    expect(citations).toEqual(content.sources.map(source => source.url));
-    const articleLd = travelGuideMeta("megiddo").scripts
-      .map(script => JSON.parse(script.children as string))
-      .find(script => script["@type"] === "Article");
+    const citations = publicSources(travelGuides.megiddo.sourceIds).map((source) => source.url);
+    expect(citations).toEqual(content.sources.map((source) => source.url));
+    const articleLd = travelGuideMeta("megiddo")
+      .scripts.map((script) => JSON.parse(script.children as string))
+      .find((script) => script["@type"] === "Article");
     expect(articleLd.citation).toEqual(citations);
     expect(articleLd.dateModified).toBe("2026-11-17");
-    expect(attractionHubCards.filter(c => String(c.to) === String(content.path))).toHaveLength(1);
+    expect(attractionHubCards.filter((c) => String(c.to) === String(content.path))).toHaveLength(1);
     expect(shell).toMatch(sourceFragment('["contact", "Contact me"]'));
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
-    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(sourceIndex(shell, "<HomeContactForm"));
+    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(
+      sourceIndex(shell, "<HomeContactForm"),
+    );
   });
 
   it("shows accurate visitor essentials, transport and three nonrepeating local images", () => {
@@ -64,13 +68,17 @@ describe("Tel Megiddo attraction guide", () => {
     expect(article).toMatch(sourceFragment("Last admission is one hour before closing."));
     expect(article).toMatch(sourceFragment("183 steps down"));
     expect(article).toMatch(sourceFragment("80 steps up"));
-    expect(article).toMatch(sourceFragment("follow the signed path back towards the Canaanite gate"));
+    expect(article).toMatch(
+      sourceFragment("follow the signed path back towards the Canaanite gate"),
+    );
     expect(article).toMatch(sourceFragment("The descent is optional"));
     expect(article).toMatch(sourceFragment("official Trip Talk audio guide"));
     expect(article).toMatch(sourceFragment("https://www.parks.org.il/category/megiddo-trip-talk/"));
     expect(article).toMatch(sourceFragment("stop 55407"));
     expect(article).toMatch(sourceFragment("13:00 closing time"));
-    expect(article).toMatch(sourceFragment("Holiday-eve opening hours can differ from Friday hours"));
+    expect(article).toMatch(
+      sourceFragment("Holiday-eve opening hours can differ from Friday hours"),
+    );
     expect(article).not.toMatch(sourceFragment("<AttractionPracticalTip>"));
     expect(article.split("183 steps down").length - 1).toBe(1);
     expect(article).toMatch(sourceFragment("183 steps down"));
@@ -88,7 +96,7 @@ describe("Tel Megiddo attraction guide", () => {
     expect(article).toMatch(sourceFragment("UNESCO-listed Biblical Tels"));
     expect(article).toContain("telMegiddoSite.sources.unesco");
     expect(content.nearby).toHaveLength(6);
-    expect(new Set(content.nearby!.map(item => item.to)).size).toBe(6);
+    expect(new Set(content.nearby!.map((item) => item.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(8);
     expect(content.sources).toHaveLength(4);

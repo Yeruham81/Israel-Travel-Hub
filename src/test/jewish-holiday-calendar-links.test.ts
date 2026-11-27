@@ -12,8 +12,10 @@ describe("Holiday and special-date guide links", () => {
     expect(travelGuidePaths.calendar).toBe(liveGuide);
     expect(existsSync("src/routes/travel-blog.calendar-of-events.tsx")).toBe(true);
     expect(existsSync("src/routes/travel-blog.israel-holidays.tsx")).toBe(false);
-    expect(guideDirectory.some(guide => guide.id === "calendar" && guide.to === liveGuide)).toBe(true);
-    expect(guideDirectory.some(guide => guide.id === "israel-holidays")).toBe(false);
+    expect(guideDirectory.some((guide) => guide.id === "calendar" && guide.to === liveGuide)).toBe(
+      true,
+    );
+    expect(guideDirectory.some((guide) => guide.id === "israel-holidays")).toBe(false);
   });
 
   it.each([
@@ -34,7 +36,7 @@ describe("Holiday and special-date guide links", () => {
     "src/data/taxiGuideCluster.ts",
     "src/data/travelGuides.ts",
     "src/routes/accommodation.index.tsx",
-  ])("points %s to the consolidated guide, with no retired URL", path => {
+  ])("points %s to the consolidated guide, with no retired URL", (path) => {
     const content = source(path);
     expect(content, path).toContain(liveGuide);
     expect(content, path).not.toContain(retiredRoute);

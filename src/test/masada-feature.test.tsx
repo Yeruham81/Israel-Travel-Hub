@@ -16,18 +16,18 @@ describe("Masada upgraded attraction guide", () => {
     expect(content.title).toBe(site.title);
     expect(content.intro).toBe(site.intro);
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Entry")?.value).toBe("₪37 adult");
+    expect(content.facts.find((f) => f.label === "Entry")?.value).toBe("₪37 adult");
     expect(content.visitorNavLabel).toBe("Tickets & hours");
     expect(content.nearby).toHaveLength(6);
-    expect(content.nearby?.map(x => x.to)).toContain("/attractions/mount-of-olives/");
-    expect(content.nearby?.map(x => x.to)).toContain("/attractions/mount-zion/");
-    expect(content.nearby?.map(x => x.to)).toContain("/attractions/ein-gedi/");
-    expect(new Set(content.nearby!.map(x => x.to)).size).toBe(content.nearby!.length);
+    expect(content.nearby?.map((x) => x.to)).toContain("/attractions/mount-of-olives/");
+    expect(content.nearby?.map((x) => x.to)).toContain("/attractions/mount-zion/");
+    expect(content.nearby?.map((x) => x.to)).toContain("/attractions/ein-gedi/");
+    expect(new Set(content.nearby!.map((x) => x.to)).size).toBe(content.nearby!.length);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(8);
     expect(content.sources).toHaveLength(8);
-    expect(attractionHubCards.filter(card => card.to === content.path)).toHaveLength(1);
-    const einGediCard = attractionHubCards.find(card => card.to === "/attractions/ein-gedi/");
+    expect(attractionHubCards.filter((card) => card.to === content.path)).toHaveLength(1);
+    const einGediCard = attractionHubCards.find((card) => card.to === "/attractions/ein-gedi/");
     expect(einGediCard?.photo).toEqual(einGediCardPhoto);
     expect(attractionGuides["ein-gedi"].image).toEqual(einGediCardPhoto);
     expect(einGediCardPhoto.src).toContain("ein-gedi-waterfall.webp");
@@ -36,10 +36,12 @@ describe("Masada upgraded attraction guide", () => {
     expect(shell).toContain("<AuthorCard />");
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
     const meta = masadaMeta();
-    expect(meta.links.find(l => l.rel === "canonical")?.href).toContain("/attractions/masada/");
-    const article = meta.scripts.map(script => JSON.parse(script.children as string)).find(s => s["@type"] === "Article");
+    expect(meta.links.find((l) => l.rel === "canonical")?.href).toContain("/attractions/masada/");
+    const article = meta.scripts
+      .map((script) => JSON.parse(script.children as string))
+      .find((s) => s["@type"] === "Article");
     expect(article.dateModified).toBe("2026-11-17");
-    expect(article.citation).toEqual(content.sources.map(s => s.url));
+    expect(article.citation).toEqual(content.sources.map((s) => s.url));
   });
 
   it("shows accurate admission and cable prices, weather and east-west access", () => {
@@ -60,7 +62,9 @@ describe("Masada upgraded attraction guide", () => {
     expect(site.visit.nightShowJulyAugust).toBe("21:00");
     expect(site.visit.nightShowSeptemberOctober).toBe("20:30");
     expect(site.visit.nightShowNovemberDecember).toBe("19:30");
-    expect(site.sources.complexAccess).toBe("https://en.parks.org.il/national-parks-and-nature-reserves-location/");
+    expect(site.sources.complexAccess).toBe(
+      "https://en.parks.org.il/national-parks-and-nature-reserves-location/",
+    );
     expect(page).toContain("groups of more than 30");
     expect(page).toContain("Child, ages 5–18");
     expect(page).toContain("Adult in group (more than 30)");
@@ -104,7 +108,8 @@ describe("Masada upgraded attraction guide", () => {
       "src/assets/home/masada-cable-car-wide.webp",
       "src/assets/home/hero-refresh-masada-dead-sea-v4-large.webp",
       "src/assets/dead-sea/landscape.webp",
-    ]) expect(existsSync(path), path).toBe(true);
+    ])
+      expect(existsSync(path), path).toBe(true);
     expect(page).toContain('data-testid="masada-wide-panorama"');
     expect(page).toContain("desertShorePhoto");
     expect(page).not.toContain("einGediPhoto");

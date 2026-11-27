@@ -26,19 +26,30 @@ describe("consent-aware Dead Sea affiliate click measurement", () => {
     analytics.gtag = gtag;
     recordAffiliateTourClick(event);
     expect(gtag).toHaveBeenCalledWith("event", "outbound_click", {
-      page_id: event.pageId, product_id: event.productId, offer_id: event.offerId,
-      provider: event.provider, link_url: event.linkUrl,
+      page_id: event.pageId,
+      product_id: event.productId,
+      offer_id: event.offerId,
+      provider: event.provider,
+      link_url: event.linkUrl,
     });
     const saved = JSON.parse(localStorage.getItem("itt_outbound_clicks_v1") || "[]");
-    expect(saved[0]).toMatchObject({ event: "outbound_click", pageId: event.pageId, productId: event.productId });
+    expect(saved[0]).toMatchObject({
+      event: "outbound_click",
+      pageId: event.pageId,
+      productId: event.productId,
+    });
   });
 
   it("uses the GTM dataLayer when gtag is not installed", () => {
     analytics.dataLayer = [];
     recordAffiliateTourClick(event);
     expect(analytics.dataLayer).toContainEqual({
-      event: "outbound_click", page_id: event.pageId, product_id: event.productId,
-      offer_id: event.offerId, provider: event.provider, link_url: event.linkUrl,
+      event: "outbound_click",
+      page_id: event.pageId,
+      product_id: event.productId,
+      offer_id: event.offerId,
+      provider: event.provider,
+      link_url: event.linkUrl,
     });
   });
 

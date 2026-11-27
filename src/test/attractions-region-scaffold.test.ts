@@ -6,8 +6,8 @@ import { travelGuidePaths } from "@/data/registry";
 import { repeatedPhotos } from "@/lib/photo-uniqueness";
 
 describe("Attractions regional scaffold and reciprocal navigation", () => {
-  const ids = attractionHubRegions.map(region => region.id);
-  const regionalAnchors = Object.values(regionalAttractionLinks).map(region => region.hash);
+  const ids = attractionHubRegions.map((region) => region.id);
+  const regionalAnchors = Object.values(regionalAttractionLinks).map((region) => region.hash);
 
   it("has one real section per region, without empty or placeholder guide links", () => {
     expect(ids).toHaveLength(7);
@@ -16,22 +16,29 @@ describe("Attractions regional scaffold and reciprocal navigation", () => {
     expect([...ids].sort()).toEqual([...regionalAnchors].sort());
     for (const region of attractionHubRegions) {
       expect(region.cards.length).toBeGreaterThanOrEqual(1);
-      expect(region.cards.every(card => String(card.to).startsWith("/"))).toBe(true);
-      expect(new Set(region.cards.map(card => String(card.to))).size).toBe(region.cards.length);
+      expect(region.cards.every((card) => String(card.to).startsWith("/"))).toBe(true);
+      expect(new Set(region.cards.map((card) => String(card.to))).size).toBe(region.cards.length);
       expect(region.relatedGuides.length).toBeLessThanOrEqual(3);
-      expect(region.relatedGuides.every(link => ["/travel-blog/", "/tours/"].some(prefix => String(link.to).startsWith(prefix)))).toBe(true);
-      expect(region.relatedGuides.every(link => !region.cards.some(card => link.to === card.to))).toBe(true);
+      expect(
+        region.relatedGuides.every((link) =>
+          ["/travel-blog/", "/tours/"].some((prefix) => String(link.to).startsWith(prefix)),
+        ),
+      ).toBe(true);
+      expect(
+        region.relatedGuides.every((link) => !region.cards.some((card) => link.to === card.to)),
+      ).toBe(true);
     }
   });
 
   it("links each appropriate tour category to its real attraction region without creating tour routes", () => {
     for (const [id, links] of Object.entries(attractionRegionsForTours)) {
       expect(id in tourCategoryPaths).toBe(true);
-      expect(links?.every(link => ids.includes(link.hash))).toBe(true);
-      expect(new Set(links?.map(link => link.hash)).size).toBe(links?.length);
+      expect(links?.every((link) => ids.includes(link.hash))).toBe(true);
+      expect(new Set(links?.map((link) => link.hash)).size).toBe(links?.length);
     }
-    expect(attractionRegionsForTours["nazareth-galilee"]?.map(link => link.hash)).toEqual([
-      "nazareth-lower-galilee", "sea-of-galilee",
+    expect(attractionRegionsForTours["nazareth-galilee"]?.map((link) => link.hash)).toEqual([
+      "nazareth-lower-galilee",
+      "sea-of-galilee",
     ]);
     expect(attractionRegionsForTours["northern-coast"]?.[0]?.hash).toBe("haifa-coast");
     expect(attractionRegionsForTours["eilat-red-sea"]?.[0]?.hash).toBe("negev-eilat");
@@ -39,18 +46,32 @@ describe("Attractions regional scaffold and reciprocal navigation", () => {
   });
 
   it("provides region-specific arrival and journey links without touching guide article copy", () => {
-    const byId = Object.fromEntries(attractionHubRegions.map(region => [region.id, region]));
-    expect(byId["tel-aviv-jaffa"]!.relatedGuides.some(link => link.to === travelGuidePaths.telAvivBeaches)).toBe(true);
+    const byId = Object.fromEntries(attractionHubRegions.map((region) => [region.id, region]));
+    expect(
+      byId["tel-aviv-jaffa"]!.relatedGuides.some(
+        (link) => link.to === travelGuidePaths.telAvivBeaches,
+      ),
+    ).toBe(true);
     expect(byId["nazareth-lower-galilee"]!.relatedGuides).toEqual([]);
-    expect(byId["dead-sea-masada"]!.relatedGuides.some(link => link.to === travelGuidePaths.jerusalemDeadSea)).toBe(true);
-    expect(byId["tel-aviv-jaffa"]!.relatedGuides.some(link => link.to === travelGuidePaths.telAvivMuseums)).toBe(true);
-    expect(byId["sea-of-galilee"]!.relatedGuides.some(link => link.to === travelGuidePaths.baptism)).toBe(true);
+    expect(
+      byId["dead-sea-masada"]!.relatedGuides.some(
+        (link) => link.to === travelGuidePaths.jerusalemDeadSea,
+      ),
+    ).toBe(true);
+    expect(
+      byId["tel-aviv-jaffa"]!.relatedGuides.some(
+        (link) => link.to === travelGuidePaths.telAvivMuseums,
+      ),
+    ).toBe(true);
+    expect(
+      byId["sea-of-galilee"]!.relatedGuides.some((link) => link.to === travelGuidePaths.baptism),
+    ).toBe(true);
   });
 
   it("keeps one photograph per distinct card and regional header", () => {
     const photos = [
-      ...attractionHubRegions.map(region => region.image.src),
-      ...attractionHubCards.map(card => card.photo.src),
+      ...attractionHubRegions.map((region) => region.image.src),
+      ...attractionHubCards.map((card) => card.photo.src),
     ];
     expect(repeatedPhotos(photos)).toEqual([]);
   });

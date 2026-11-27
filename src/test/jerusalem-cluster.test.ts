@@ -6,8 +6,19 @@ import { jerusalemConnections } from "@/components/JerusalemClusterLinks";
 import { jerusalemAffiliatePageIds } from "@/components/JerusalemPartnerOffers";
 import { repeatedPhotos } from "@/lib/photo-uniqueness";
 
-const editorialIds = ["jerusalem", "jerusalemChurches", "jerusalemShopping", "bethlehem", "jerusalemDeadSea"] as const;
-const placeIds = ["old-city-jerusalem", "museums-in-jerusalem", "mount-of-olives", "mount-zion"] as const;
+const editorialIds = [
+  "jerusalem",
+  "jerusalemChurches",
+  "jerusalemShopping",
+  "bethlehem",
+  "jerusalemDeadSea",
+] as const;
+const placeIds = [
+  "old-city-jerusalem",
+  "museums-in-jerusalem",
+  "mount-of-olives",
+  "mount-zion",
+] as const;
 
 describe("Jerusalem content and reciprocal guide cluster", () => {
   it("retains all canonical Jerusalem destination, specialist and travel guides", () => {
@@ -15,8 +26,18 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
       const guide = travelGuides[id];
       expect(guide.id).toBe(id);
       expect(travelGuidePaths[id]).toMatch(/^\/travel-blog\/.+\/$/);
-      expect(guide.updatedAt).toBe(id === "jerusalemChurches" || id === "jerusalem" ? "2026-11-21" : id === "jerusalemShopping" ? "2026-11-20" : id === "jerusalemDeadSea" ? "2026-11-24" : id === "bethlehem" ? "2026-11-24" : "2026-11-21");
-      expect(new Set(guide.sections.map(section => section.id)).size).toBe(guide.sections.length);
+      expect(guide.updatedAt).toBe(
+        id === "jerusalemChurches" || id === "jerusalem"
+          ? "2026-11-21"
+          : id === "jerusalemShopping"
+            ? "2026-11-20"
+            : id === "jerusalemDeadSea"
+              ? "2026-11-24"
+              : id === "bethlehem"
+                ? "2026-11-24"
+                : "2026-11-21",
+      );
+      expect(new Set(guide.sections.map((section) => section.id)).size).toBe(guide.sections.length);
       expect(guide.sections.length).toBeGreaterThanOrEqual(id === "jerusalemDeadSea" ? 5 : 6);
       expect(jerusalemConnections[id].length).toBeGreaterThanOrEqual(3);
     }
@@ -28,18 +49,29 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
   });
 
   it("restores the museum and shopping topics missing in the shortened WordPress migration", () => {
-    const museums = attractionGuides["museums-in-jerusalem"].highlights.map(h => h.name);
+    const museums = attractionGuides["museums-in-jerusalem"].highlights.map((h) => h.name);
     expect(museums.length).toBeGreaterThanOrEqual(12);
-    for (const name of ["Israel Museum", "Yad Vashem", "Tower of David", "Bible Lands", "Rockefeller", "Islamic Art", "Science Museum", "Begin", "Friends of Zion", "Time Elevator"]) {
-      expect(museums.some(museum => museum.includes(name))).toBe(true);
+    for (const name of [
+      "Israel Museum",
+      "Yad Vashem",
+      "Tower of David",
+      "Bible Lands",
+      "Rockefeller",
+      "Islamic Art",
+      "Science Museum",
+      "Begin",
+      "Friends of Zion",
+      "Time Elevator",
+    ]) {
+      expect(museums.some((museum) => museum.includes(name))).toBe(true);
     }
     const shopping = travelGuides.jerusalemShopping;
     for (const keyword of ["shop-hutzot", "shop-bezalel", "shop-cardo", "shop-mahane"]) {
-      expect(shopping.sections.some(section => section.id === keyword)).toBe(true);
+      expect(shopping.sections.some((section) => section.id === keyword)).toBe(true);
     }
     expect(shopping.sections).toHaveLength(10);
     expect(shopping.comparison.rows).toHaveLength(10);
-    expect(shopping.services.some(x => x.to === "/tours/food-market-tours/")).toBe(true);
+    expect(shopping.services.some((x) => x.to === "/tours/food-market-tours/")).toBe(true);
   });
 
   it("uses meaningful inline hyperlinks inside the new editorial content, not only in related-links lists", () => {
@@ -48,17 +80,30 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
       if (id === "bethlehem") {
         // The rebuilt travel guide places official operator links next to the relevant transport advice
         // and uses dedicated linked tour and follow-up cards instead of duplicating an editorial appendix.
-        expect(sections.some(section => section.richParagraphs?.some(spans => spans.some(span => Boolean(span.href))) || (section.externalLinks?.length || 0) > 0 || (section.links?.length || 0) > 0)).toBe(true);
-        expect(sections.find(section => section.id === "private-taxi")?.links).toBeUndefined();
+        expect(
+          sections.some(
+            (section) =>
+              section.richParagraphs?.some((spans) => spans.some((span) => Boolean(span.href))) ||
+              (section.externalLinks?.length || 0) > 0 ||
+              (section.links?.length || 0) > 0,
+          ),
+        ).toBe(true);
+        expect(sections.find((section) => section.id === "private-taxi")?.links).toBeUndefined();
       } else {
-        expect(sections.some(section => section.inlineLinks?.some(link => section.paragraphs.some(text => text.includes(link.text))))).toBe(true);
+        expect(
+          sections.some((section) =>
+            section.inlineLinks?.some((link) =>
+              section.paragraphs.some((text) => text.includes(link.text)),
+            ),
+          ),
+        ).toBe(true);
       }
     }
   });
 
   it("connects guide↔tour, guide↔transport and guide↔accommodation in both directions", () => {
     const has = (source: keyof typeof jerusalemConnections, target: string) =>
-      jerusalemConnections[source].some(link => String(link.to) === target);
+      jerusalemConnections[source].some((link) => String(link.to) === target);
     expect(has("jerusalem", "/tours/jerusalem/")).toBe(true);
     expect(has("tour-jerusalem", travelGuidePaths.jerusalem)).toBe(true);
     expect(has("jerusalem", "/travel-blog/ben-gurion-airport-to-jerusalem/")).toBe(true);
@@ -75,17 +120,29 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
 
   it("keeps every internal link unique and allows no old-site redirects", () => {
     for (const [key, links] of Object.entries(jerusalemConnections)) {
-      const paths = links.map(link => String(link.to));
+      const paths = links.map((link) => String(link.to));
       expect(new Set(paths).size, key).toBe(paths.length);
-      expect(paths.every(path => path.startsWith("/")), key).toBe(true);
-      expect(paths.every(path => !path.startsWith("//")), key).toBe(true);
+      expect(
+        paths.every((path) => path.startsWith("/")),
+        key,
+      ).toBe(true);
+      expect(
+        paths.every((path) => !path.startsWith("//")),
+        key,
+      ).toBe(true);
     }
   });
 
   it("does not show duplicate photographs within each edited Jerusalem guide", () => {
     for (const id of editorialIds) {
       const g = travelGuides[id];
-      expect(repeatedPhotos([g.photo.src, ...g.sections.flatMap(section => section.photo ? [section.photo.src] : [])]), id).toEqual([]);
+      expect(
+        repeatedPhotos([
+          g.photo.src,
+          ...g.sections.flatMap((section) => (section.photo ? [section.photo.src] : [])),
+        ]),
+        id,
+      ).toEqual([]);
     }
   });
 
@@ -93,6 +150,6 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
     const slots = Object.values(jerusalemAffiliatePageIds);
     expect(slots.length).toBe(9);
     expect(new Set(slots).size).toBe(slots.length);
-    expect(slots.every(slot => /^jerusalem-/.test(slot!))).toBe(true);
+    expect(slots.every((slot) => /^jerusalem-/.test(slot!))).toBe(true);
   });
 });

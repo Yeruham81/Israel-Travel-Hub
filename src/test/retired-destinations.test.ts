@@ -19,10 +19,15 @@ describe("removed Destinations directory", () => {
     expect(server).not.toContain("redirectRetiredDestinations");
   });
   it("keeps navigation, homepage, planning links and XML sitemap free of the removed URL", async () => {
-    const nav = allNavGroups.flatMap(group => group.items.flatMap(item =>
-      "to" in item ? [item.to, ...((item.children ?? []).map(child => child.to))] : []));
+    const nav = allNavGroups.flatMap((group) =>
+      group.items.flatMap((item) =>
+        "to" in item ? [item.to, ...(item.children ?? []).map((child) => child.to)] : [],
+      ),
+    );
     expect(nav).not.toContain("/destinations/");
-    expect(attractionPlanningPaths.some(item => String(item.to) === "/destinations/")).toBe(false);
+    expect(attractionPlanningPaths.some((item) => String(item.to) === "/destinations/")).toBe(
+      false,
+    );
     const home = readFileSync("src/routes/index.tsx", "utf8");
     expect(home).toContain('hub: { label: "Explore all accommodation", to: "/accommodation/" }');
     expect(home).not.toContain('to="/destinations/"');

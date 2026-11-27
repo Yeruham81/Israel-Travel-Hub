@@ -17,9 +17,17 @@ describe("Attraction On this page contact labels", () => {
     const travelGuide = file("src/components/TravelGuide.tsx");
     expect(travelGuide).toContain('["contact", "Contact me"]');
     expect(travelGuide).not.toContain("Contact Moshe");
-    const attractionIdsInTravelGuide = ["annunciation", "magdala", "precipice", "qasr", "megiddo", "yardenit"] as const;
-    for (const id of attractionIdsInTravelGuide) expect(travelGuidePaths[id].startsWith("/attractions/")).toBe(true);
+    const attractionIdsInTravelGuide = [
+      "annunciation",
+      "magdala",
+      "precipice",
+      "qasr",
+      "megiddo",
+      "yardenit",
+    ] as const;
+    for (const id of attractionIdsInTravelGuide)
+      expect(travelGuidePaths[id].startsWith("/attractions/")).toBe(true);
     expect(travelGuidePaths.jerusalemDeadSea.startsWith("/travel-blog/")).toBe(true);
-    expect(attractionIds.filter(id => !isRegionalOverview(id)).length).toBeGreaterThan(0);
+    expect(attractionIds.filter((id) => !isRegionalOverview(id)).length).toBeGreaterThan(0);
   });
 });

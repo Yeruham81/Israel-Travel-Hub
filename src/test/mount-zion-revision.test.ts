@@ -16,23 +16,30 @@ describe("Mount Zion visitor guide revision", () => {
   });
 
   it("names real bus stops, lines, and live planning resources", () => {
-    const bus = data.transport.find(entry => /bus 38/i.test(entry.title));
+    const bus = data.transport.find((entry) => /bus 38/i.test(entry.title));
     expect(bus?.text).toMatch(/Har Tsiyon\/Ma'ale HaShalom/);
     expect(bus?.text).toMatch(/Zion Gate\/Habad/);
     expect(bus?.text).toMatch(/route 2/i);
     expect(bus?.links).toHaveLength(2);
-    expect(bus?.links?.some(link => link.url.includes("moovitapp.com"))).toBe(true);
+    expect(bus?.links?.some((link) => link.url.includes("moovitapp.com"))).toBe(true);
   });
 
   it("has distinct personal visitor tips and avoids combative religious-history language", () => {
     expect(data.stops).toHaveLength(7);
-    expect(data.stops.every(stop => stop.tipLabel && stop.visit.length > 50)).toBe(true);
-    expect(new Set(data.stops.map(stop => stop.tipLabel)).size).toBeGreaterThan(4);
-    const text = [attraction.intro, attraction.takeaway, ...data.history, ...data.stops.flatMap(x => [x.description, x.visit])].join(" ");
-    expect(text).not.toMatch(/unproven|not physical proof|do not need to book|not a promise|not established archaeologically/i);
-    expect(data.stops.some(stop => /Last Supper/i.test(stop.name))).toBe(true);
-    expect(data.stops.some(stop => /Dormition/i.test(stop.name))).toBe(true);
-    expect(data.stops.some(stop => /Schindler/i.test(stop.name))).toBe(true);
+    expect(data.stops.every((stop) => stop.tipLabel && stop.visit.length > 50)).toBe(true);
+    expect(new Set(data.stops.map((stop) => stop.tipLabel)).size).toBeGreaterThan(4);
+    const text = [
+      attraction.intro,
+      attraction.takeaway,
+      ...data.history,
+      ...data.stops.flatMap((x) => [x.description, x.visit]),
+    ].join(" ");
+    expect(text).not.toMatch(
+      /unproven|not physical proof|do not need to book|not a promise|not established archaeologically/i,
+    );
+    expect(data.stops.some((stop) => /Last Supper/i.test(stop.name))).toBe(true);
+    expect(data.stops.some((stop) => /Dormition/i.test(stop.name))).toBe(true);
+    expect(data.stops.some((stop) => /Schindler/i.test(stop.name))).toBe(true);
   });
 
   it("uses accurate site-specific image files migrated from the original guide", () => {
@@ -42,20 +49,20 @@ describe("Mount Zion visitor guide revision", () => {
       ["St Peter in Gallicantu", "st-peter-in-gallicantu.webp"],
     ]);
     for (const [name, filename] of expected) {
-      const stop = data.stops.find(s => s.name === name);
+      const stop = data.stops.find((s) => s.name === name);
       expect(stop?.image?.src).toBe(`/images/jerusalem/mount-zion/${filename}`);
       expect(stop?.image?.alt.length).toBeGreaterThan(30);
       expect(existsSync(resolve(process.cwd(), "public", stop!.image!.src.slice(1)))).toBe(true);
     }
-    expect(data.stops.filter(s => s.image).length).toBeGreaterThanOrEqual(3);
+    expect(data.stops.filter((s) => s.image).length).toBeGreaterThanOrEqual(3);
   });
 
   it("uses local photos only, with a natural aspect ratio in the page", () => {
-    const images = [attraction.image, ...data.stops.flatMap(x => x.image ? [x.image] : [])];
+    const images = [attraction.image, ...data.stops.flatMap((x) => (x.image ? [x.image] : []))];
     expect(images.length).toBeGreaterThanOrEqual(2);
-    expect(images.every(img => Boolean(img?.src && img.alt))).toBe(true);
-    expect(images.every(img => !/^https?:\/\//i.test(img?.src || ""))).toBe(true);
+    expect(images.every((img) => Boolean(img?.src && img.alt))).toBe(true);
+    expect(images.every((img) => !/^https?:\/\//i.test(img?.src || ""))).toBe(true);
     expect(attraction.faqs).toHaveLength(7);
-    expect(attraction.faqs?.some(faq => /Sunday/i.test(faq.q))).toBe(true);
+    expect(attraction.faqs?.some((faq) => /Sunday/i.test(faq.q))).toBe(true);
   });
 });

@@ -18,8 +18,8 @@ describe("editorial prose links", () => {
 
   it("keeps plain link text and an accessible new-tab description in the senior guide", () => {
     expect(seniors).toMatch(sourceFragment('rel="noopener noreferrer"'));
-    expect(seniors).toMatch(sourceFragment('(opens in a new tab)'));
-    expect(seniors).not.toMatch(sourceFragment('<ExternalLink'));
+    expect(seniors).toMatch(sourceFragment("(opens in a new tab)"));
+    expect(seniors).not.toMatch(sourceFragment("<ExternalLink"));
   });
 
   it("removes top-of-article detours and repeats, retaining the floating-contact destination", () => {
@@ -29,9 +29,14 @@ describe("editorial prose links", () => {
       "The private driver provides transportation and agreed stops",
       "Ask Moshe about your day",
       "I cannot assume or guarantee an accessible vehicle",
-    ]) expect(seniors).not.toMatch(sourceFragment(text));
+    ])
+      expect(seniors).not.toMatch(sourceFragment(text));
     expect(seniors).toMatch(sourceFragment('href="#contact"'));
-    expect(seniors).toMatch(sourceFragment('heading:"Need a private driver for a comfortable day trip?"'));
-    expect(seniors).toMatch(sourceFragment("I arrange comfortable private day trips with a driver in Israel"));
+    expect(seniors).toMatch(
+      sourceFragment('heading:"Need a private driver for a comfortable day trip?"'),
+    );
+    expect(seniors).toMatch(
+      sourceFragment("I arrange comfortable private day trips with a driver in Israel"),
+    );
   });
 });

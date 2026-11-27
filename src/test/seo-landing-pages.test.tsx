@@ -24,14 +24,23 @@ export const landingPaths = [
 ] as const;
 
 async function inspectLanding(path: string) {
-  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
+  const router = createRouter({
+    routeTree,
+    context: { queryClient: new QueryClient() },
+    history: createMemoryHistory({ initialEntries: [path] }),
+    trailingSlash: "always",
+  });
   await router.load();
   const match = router.matchRoutes(path).at(-1);
   const route = match ? router.routesById[match.routeId] : undefined;
   const Page = route?.options.component;
   if (!Page || !route) throw new Error(`Missing landing: ${path}`);
   const head = await route.options.head?.({} as never);
-  const html = renderToString(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+  const html = renderToString(
+    <RouterContextProvider router={router}>
+      <Page />
+    </RouterContextProvider>,
+  );
   const document = new DOMParser().parseFromString(html, "text/html");
   return { router, head, document };
 }
@@ -39,14 +48,35 @@ async function inspectLanding(path: string) {
 describe("ten search-intent landing pages", () => {
   it("keeps launch configuration separate from staging and removes the root override", async () => {
     const root = await Root.options.head?.({} as never);
-    expect(root?.meta?.filter((item) => item && "name" in item && item.name === "robots")).toHaveLength(0);
-    const opts = { title: "Private pickup", description: "Arrange your party's pickup", path: landingPaths[0], crumbs: [{ name: "Home", path: "/" }] };
-    expect(pageMeta(opts, siteConfig({})).meta).toContainEqual({ name: "robots", content: "noindex,nofollow" });
-    const production = pageMeta(opts, siteConfig({ VITE_CANONICAL_ORIGIN: "https://www.israel-taxi.com///", VITE_INDEXABLE: "true" }));
-    expect(production.links).toEqual([{ rel: "canonical", href: "https://www.israel-taxi.com" + landingPaths[0] }]);
+    expect(
+      root?.meta?.filter((item) => item && "name" in item && item.name === "robots"),
+    ).toHaveLength(0);
+    const opts = {
+      title: "Private pickup",
+      description: "Arrange your party's pickup",
+      path: landingPaths[0],
+      crumbs: [{ name: "Home", path: "/" }],
+    };
+    expect(pageMeta(opts, siteConfig({})).meta).toContainEqual({
+      name: "robots",
+      content: "noindex,nofollow",
+    });
+    const production = pageMeta(
+      opts,
+      siteConfig({
+        VITE_CANONICAL_ORIGIN: "https://www.israel-taxi.com///",
+        VITE_INDEXABLE: "true",
+      }),
+    );
+    expect(production.links).toEqual([
+      { rel: "canonical", href: "https://www.israel-taxi.com" + landingPaths[0] },
+    ]);
     expect(production.meta).toContainEqual({ name: "robots", content: "index,follow" });
     expect(production.scripts[0]?.children).toContain("https://www.israel-taxi.com/");
-    expect(pageMeta(opts, siteConfig({ VITE_INDEXABLE: "false" })).meta).toContainEqual({ name: "robots", content: "noindex,nofollow" });
+    expect(pageMeta(opts, siteConfig({ VITE_INDEXABLE: "false" })).meta).toContainEqual({
+      name: "robots",
+      content: "noindex,nofollow",
+    });
   });
 
   it("safely encodes structured text without changing its meaning", () => {
@@ -67,8 +97,14 @@ describe("ten search-intent landing pages", () => {
   });
 
   it("keeps Shabbat terminal and restart coverage on the dedicated guide", () => {
-    expect(travelGuides.shabbat.sections.map((section) => section.id)).toEqual(expect.arrayContaining(["weekend-711", "terminal-transfer", "destinations", "restart"]));
-    expect(travelGuides.shabbat.sections.find((section) => section.id === "destinations")?.inlineLinks?.map((link) => link.to)).toContain("/travel-blog/ben-gurion-airport-to-jerusalem/");
+    expect(travelGuides.shabbat.sections.map((section) => section.id)).toEqual(
+      expect.arrayContaining(["weekend-711", "terminal-transfer", "destinations", "restart"]),
+    );
+    expect(
+      travelGuides.shabbat.sections
+        .find((section) => section.id === "destinations")
+        ?.inlineLinks?.map((link) => link.to),
+    ).toContain("/travel-blog/ben-gurion-airport-to-jerusalem/");
     expect(travelGuides.israel.related).toContain("shabbat");
     expect(travelGuides.taxis.nextSteps?.map((link) => link.to)).toContain(landingPaths[4]);
   });
@@ -76,30 +112,53 @@ describe("ten search-intent landing pages", () => {
   it("keeps hotel location decisions separate from room inventory and corrects route referral descriptions", () => {
     expect(cityStayGuides.jerusalem.areas).toHaveLength(6);
     expect(cityStayGuides.telaviv.areas).toHaveLength(8);
-    expect(deadSeaStayGuide.locations.map((location) => location.name)).toEqual(["Ein Bokek", "Neve Zohar & the southern hotel district", "Ein Gedi"]);
+    expect(deadSeaStayGuide.locations.map((location) => location.name)).toEqual([
+      "Ein Bokek",
+      "Neve Zohar & the southern hotel district",
+      "Ein Gedi",
+    ]);
     for (const city of [cityStayGuides.jerusalem, cityStayGuides.telaviv]) {
-      expect(city.faqs.find((faq) => faq.q.startsWith("How do I get"))?.a).toContain("private airport-to-");
-      expect(city.faqs.find((faq) => faq.q.startsWith("How do I get"))?.a).not.toMatch(/guide for the licensed taxi rank/);
+      expect(city.faqs.find((faq) => faq.q.startsWith("How do I get"))?.a).toContain(
+        "private airport-to-",
+      );
+      expect(city.faqs.find((faq) => faq.q.startsWith("How do I get"))?.a).not.toMatch(
+        /guide for the licensed taxi rank/,
+      );
     }
   });
 
   it("has unique accurate metadata, self URLs and truthful schemas for exactly ten pages", async () => {
-    const titles: string[] = [], descriptions: string[] = [];
+    const titles: string[] = [],
+      descriptions: string[] = [];
     for (const [index, path] of landingPaths.entries()) {
       const { head, document } = await inspectLanding(path);
       const meta = head?.meta || [];
       const title = meta.find((item) => item && "title" in item)?.title;
-      const description = meta.find((item) => item && "name" in item && item.name === "description");
-      if (!title || !description || !("content" in description) || !description.content) throw new Error(`Missing metadata ${path}`);
-      titles.push(title); descriptions.push(description.content);
-      expect(meta.filter((item) => item && "name" in item && item.name === "robots"), path).toEqual([{ name: "robots", content: "noindex,nofollow" }]);
-      expect(head?.links?.filter((link) => link?.rel === "canonical"), path).toEqual([{ rel: "canonical", href: CANONICAL_ORIGIN + path }]);
+      const description = meta.find(
+        (item) => item && "name" in item && item.name === "description",
+      );
+      if (!title || !description || !("content" in description) || !description.content)
+        throw new Error(`Missing metadata ${path}`);
+      titles.push(title);
+      descriptions.push(description.content);
+      expect(
+        meta.filter((item) => item && "name" in item && item.name === "robots"),
+        path,
+      ).toEqual([{ name: "robots", content: "noindex,nofollow" }]);
+      expect(
+        head?.links?.filter((link) => link?.rel === "canonical"),
+        path,
+      ).toEqual([{ rel: "canonical", href: CANONICAL_ORIGIN + path }]);
       expect(meta).toContainEqual({ property: "og:url", content: CANONICAL_ORIGIN + path });
       expect(meta).toContainEqual({ property: "og:title", content: title });
       expect(meta).toContainEqual({ property: "og:description", content: description.content });
       expect(meta).toContainEqual({ name: "twitter:card", content: "summary_large_image" });
-      const ogImages = meta.filter((item) => item && "property" in item && item.property === "og:image");
-      const twitterImages = meta.filter((item) => item && "name" in item && item.name === "twitter:image");
+      const ogImages = meta.filter(
+        (item) => item && "property" in item && item.property === "og:image",
+      );
+      const twitterImages = meta.filter(
+        (item) => item && "name" in item && item.name === "twitter:image",
+      );
       expect(ogImages, path).toHaveLength(1);
       expect(twitterImages, path).toHaveLength(1);
       const ogImage = ogImages[0] && "content" in ogImages[0] ? ogImages[0].content : "";
@@ -107,15 +166,27 @@ describe("ten search-intent landing pages", () => {
       expect(twitterImages[0]).toMatchObject({ name: "twitter:image", content: ogImage });
       expect(description.content.length, path).toBeLessThanOrEqual(165);
       expect(document.querySelectorAll("h1"), path).toHaveLength(1);
-      expect(document.querySelector("h1")?.textContent).toBe(path === landingPaths[4] ? travelGuides.shabbat.title : title);
-      const schemas = (head?.scripts || []).flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
+      expect(document.querySelector("h1")?.textContent).toBe(
+        path === landingPaths[4] ? travelGuides.shabbat.title : title,
+      );
+      const schemas = (head?.scripts || []).flatMap((script) =>
+        typeof script?.children === "string" ? [JSON.parse(script.children)] : [],
+      );
       expect(schemas.filter((schema) => schema["@type"] === "BreadcrumbList")).toHaveLength(1);
-      const primary = schemas.find((schema) => schema["@type"] === (index < 4 ? "WebPage" : "Article"));
+      const primary = schemas.find(
+        (schema) => schema["@type"] === (index < 4 ? "WebPage" : "Article"),
+      );
       expect(primary?.author?.name).toBe("Moshe Barak");
       expect(primary?.[index < 4 ? "url" : "mainEntityOfPage"]).toBe(CANONICAL_ORIGIN + path);
       expect(primary?.datePublished).toBeUndefined();
-      expect(JSON.stringify(schemas)).not.toMatch(/"(?:aggregateRating|review|offers)"|"@type":"(?:Product|FAQPage)"/);
-      if (index < 4) expect(primary.mainEntity).toMatchObject({ "@type": "Service", serviceType: "Private airport transfer" });
+      expect(JSON.stringify(schemas)).not.toMatch(
+        /"(?:aggregateRating|review|offers)"|"@type":"(?:Product|FAQPage)"/,
+      );
+      if (index < 4)
+        expect(primary.mainEntity).toMatchObject({
+          "@type": "Service",
+          serviceType: "Private airport transfer",
+        });
       else {
         expect(primary.dateModified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
         const image = document.querySelector(`img[src="${new URL(primary.image).pathname}"]`);
@@ -126,27 +197,48 @@ describe("ten search-intent landing pages", () => {
     expect(new Set(descriptions).size).toBe(10);
   }, 30000);
 
-  it.each(landingPaths)("renders useful crawlable information and valid next steps at %s", async (path) => {
-    const { router, document } = await inspectLanding(path);
-    const main = document.querySelector("main");
-    if (!main) throw new Error("Missing main content");
-    const links = [...main.querySelectorAll<HTMLAnchorElement>('a[href^="/"]')];
-    expect(new Set(links.map((link) => new URL(link.getAttribute("href") || "/", "https://test.example").pathname)).size).toBeGreaterThanOrEqual(2);
-    for (const link of links) {
-      const pathname = new URL(link.getAttribute("href") || "/", "https://test.example").pathname;
-      if (pathname.startsWith("/maps/")) {
-        expect(existsSync(`public${pathname}`), pathname).toBe(true);
-        continue;
+  it.each(landingPaths)(
+    "renders useful crawlable information and valid next steps at %s",
+    async (path) => {
+      const { router, document } = await inspectLanding(path);
+      const main = document.querySelector("main");
+      if (!main) throw new Error("Missing main content");
+      const links = [...main.querySelectorAll<HTMLAnchorElement>('a[href^="/"]')];
+      expect(
+        new Set(
+          links.map(
+            (link) => new URL(link.getAttribute("href") || "/", "https://test.example").pathname,
+          ),
+        ).size,
+      ).toBeGreaterThanOrEqual(2);
+      for (const link of links) {
+        const pathname = new URL(link.getAttribute("href") || "/", "https://test.example").pathname;
+        if (pathname.startsWith("/maps/")) {
+          expect(existsSync(`public${pathname}`), pathname).toBe(true);
+          continue;
+        }
+        expect(
+          router.matchRoutes(pathname).at(-1)?.routeId.replace(/\/$/, "") || "/",
+          pathname,
+        ).toBe(pathname.replace(/\/$/, "") || "/");
       }
-      expect(router.matchRoutes(pathname).at(-1)?.routeId.replace(/\/$/, "") || "/", pathname).toBe(pathname.replace(/\/$/, "") || "/");
-    }
-    for (const link of main.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
-      const hash = link.getAttribute("href") || "";
-      expect(document.getElementById(hash.slice(1)), hash).not.toBeNull();
-    }
-    const info = main.querySelector(path.startsWith("/airport-transfers/") ? "#journey-details" : path.includes("where-to-stay") ? "#choose" : path.includes("best-dead-sea") ? "#choose" : "#quick-answer");
-    expect(info?.textContent?.length).toBeGreaterThan(100);
-    const form = main.querySelector("form");
-    if (form && info) expect(info.compareDocumentPosition(form) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-  });
+      for (const link of main.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
+        const hash = link.getAttribute("href") || "";
+        expect(document.getElementById(hash.slice(1)), hash).not.toBeNull();
+      }
+      const info = main.querySelector(
+        path.startsWith("/airport-transfers/")
+          ? "#journey-details"
+          : path.includes("where-to-stay")
+            ? "#choose"
+            : path.includes("best-dead-sea")
+              ? "#choose"
+              : "#quick-answer",
+      );
+      expect(info?.textContent?.length).toBeGreaterThan(100);
+      const form = main.querySelector("form");
+      if (form && info)
+        expect(info.compareDocumentPosition(form) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    },
+  );
 });

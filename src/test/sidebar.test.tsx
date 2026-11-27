@@ -9,7 +9,12 @@ import { accommodationDestinations } from "@/data/content";
 import { tourCategories, tourCategoryPaths } from "@/data/tours";
 import { travelGuidePaths, airportTransferRoutes, airportTransferRates } from "@/data/registry";
 import { attractionHubRegions } from "@/data/attractionsHub";
-import { allNavGroups, attractionSidebarGuideLabels, attractionSidebarRegions, airportTransferNav } from "@/data/nav";
+import {
+  allNavGroups,
+  attractionSidebarGuideLabels,
+  attractionSidebarRegions,
+  airportTransferNav,
+} from "@/data/nav";
 
 afterEach(cleanup);
 
@@ -26,42 +31,69 @@ async function navigationRouter(path = "/") {
 
 describe("shared sidebar navigation", () => {
   it("keeps the lightweight global menu synchronized with the authoritative catalogs", () => {
-    expect(airportTransferNav.children.slice(0,-1)).toEqual(airportTransferRoutes.map(route => ({
-      label: route.id === "dead-sea" ? "To Ein Bokek at the Dead Sea" : `To ${airportTransferRates.find(rate => rate.id === route.id)!.destination}`,
-      to: route.path,
-    })));
-    const tours = allNavGroups.find(group => group.title === "Tours & trips")!.items[0]!;
-    expect("children" in tours && tours.children).toEqual(tourCategories.map(category => ({label:category.shortTitle,to:tourCategoryPaths[category.id]})));
-    expect(attractionSidebarRegions).toEqual(attractionHubRegions.map(region => ({
-      label: region.navLabel ?? region.title, to: "/attractions/", toggleOnly: true,
-      childrenLabel: `${region.title} attractions`, toggleLabel: `Toggle ${region.navLabel ?? region.title} attractions`,
-      children: region.cards.map(card => ({label: attractionSidebarGuideLabels[card.id] ?? card.title, to:card.to})),
-    })));
+    expect(airportTransferNav.children.slice(0, -1)).toEqual(
+      airportTransferRoutes.map((route) => ({
+        label:
+          route.id === "dead-sea"
+            ? "To Ein Bokek at the Dead Sea"
+            : `To ${airportTransferRates.find((rate) => rate.id === route.id)!.destination}`,
+        to: route.path,
+      })),
+    );
+    const tours = allNavGroups.find((group) => group.title === "Tours & trips")!.items[0]!;
+    expect("children" in tours && tours.children).toEqual(
+      tourCategories.map((category) => ({
+        label: category.shortTitle,
+        to: tourCategoryPaths[category.id],
+      })),
+    );
+    expect(attractionSidebarRegions).toEqual(
+      attractionHubRegions.map((region) => ({
+        label: region.navLabel ?? region.title,
+        to: "/attractions/",
+        toggleOnly: true,
+        childrenLabel: `${region.title} attractions`,
+        toggleLabel: `Toggle ${region.navLabel ?? region.title} attractions`,
+        children: region.cards.map((card) => ({
+          label: attractionSidebarGuideLabels[card.id] ?? card.title,
+          to: card.to,
+        })),
+      })),
+    );
   });
 
   it("shows All attractions and exactly seven collapsible geographic areas", async () => {
     const router = await navigationRouter();
-    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <GlobalNav />
+      </RouterContextProvider>,
+    );
     const section = screen.getByRole("region", { name: "Attractions" });
     const all = within(section).getByRole("link", { name: "All attractions" });
     expect(all).toHaveAttribute("href", "/attractions/");
     const buttons = within(section).getAllByRole("button");
     expect(buttons).toHaveLength(7);
-    expect(buttons.map(button => button.textContent?.trim())).toEqual(
-      attractionHubRegions.map(region => region.navLabel ?? region.title),
+    expect(buttons.map((button) => button.textContent?.trim())).toEqual(
+      attractionHubRegions.map((region) => region.navLabel ?? region.title),
     );
     expect(within(section).getAllByRole("link")).toHaveLength(1);
     for (const region of attractionHubRegions) {
-      const button = within(section).getByRole("button", { name: `Toggle ${region.navLabel ?? region.title} attractions` });
+      const button = within(section).getByRole("button", {
+        name: `Toggle ${region.navLabel ?? region.title} attractions`,
+      });
       expect(button).toHaveAttribute("aria-expanded", "false");
       fireEvent.click(button);
       expect(button).toHaveAttribute("aria-expanded", "true");
       const list = within(section).getByRole("list", { name: `${region.title} attractions` });
       expect(list).toBeVisible();
       expect(within(list).getAllByRole("link")).toHaveLength(region.cards.length);
-      region.cards.forEach(card => {
+      region.cards.forEach((card) => {
         const label = attractionSidebarGuideLabels[card.id] ?? card.title;
-        expect(within(list).getByRole("link", { name: label })).toHaveAttribute("href", String(card.to));
+        expect(within(list).getByRole("link", { name: label })).toHaveAttribute(
+          "href",
+          String(card.to),
+        );
       });
       fireEvent.click(button);
       expect(button).toHaveAttribute("aria-expanded", "false");
@@ -71,17 +103,35 @@ describe("shared sidebar navigation", () => {
 
   it("lists all 25 approved individual attractions in the right region, never overview guides", () => {
     const expected = [
-      { id: "jerusalem", slugs: ["old-city-jerusalem", "via-dolorosa", "mount-of-olives", "mount-zion"] },
+      {
+        id: "jerusalem",
+        slugs: ["old-city-jerusalem", "via-dolorosa", "mount-of-olives", "mount-zion"],
+      },
       { id: "tel-aviv-jaffa", slugs: ["jaffa"] },
       { id: "haifa-coast", slugs: ["haifa", "akko-acre", "caesarea", "rosh-hanikra"] },
-      { id: "nazareth-lower-galilee", slugs: ["basilica-of-the-annunciation", "mount-tabor", "mount-precipice", "tel-megiddo"] },
-      { id: "sea-of-galilee", slugs: ["sea-of-galilee", "capernaum", "tabgha", "mount-of-beatitudes", "magdala", "yardenit"] },
+      {
+        id: "nazareth-lower-galilee",
+        slugs: ["basilica-of-the-annunciation", "mount-tabor", "mount-precipice", "tel-megiddo"],
+      },
+      {
+        id: "sea-of-galilee",
+        slugs: [
+          "sea-of-galilee",
+          "capernaum",
+          "tabgha",
+          "mount-of-beatitudes",
+          "magdala",
+          "yardenit",
+        ],
+      },
       { id: "dead-sea-masada", slugs: ["dead-sea", "masada", "ein-gedi", "qasr-el-yahud"] },
       { id: "negev-eilat", slugs: ["mitzpe-ramon-crater", "eilat"] },
     ];
-    expect(attractionHubRegions.map(region => region.id)).toEqual(expected.map(region => region.id));
+    expect(attractionHubRegions.map((region) => region.id)).toEqual(
+      expected.map((region) => region.id),
+    );
     expect(attractionSidebarRegions).toHaveLength(expected.length);
-    const group = allNavGroups.find(group => group.title === "Attractions");
+    const group = allNavGroups.find((group) => group.title === "Attractions");
     expect(group?.items[0]).toEqual({ label: "All attractions", to: "/attractions/" });
     expect(group?.items.slice(1)).toEqual(attractionSidebarRegions);
     const allPaths: string[] = [];
@@ -90,33 +140,47 @@ describe("shared sidebar navigation", () => {
       const region = attractionHubRegions[index]!;
       expect(region.id).toBe(entry.id);
       expect("children" in sidebar).toBe(true);
-      const paths = "children" in sidebar ? (sidebar.children ?? []).map(child => String(child.to)) : [];
-      const expectedPaths = entry.slugs.map(slug => `/attractions/${slug}/`);
+      const paths =
+        "children" in sidebar ? (sidebar.children ?? []).map((child) => String(child.to)) : [];
+      const expectedPaths = entry.slugs.map((slug) => `/attractions/${slug}/`);
       expect(paths).toEqual(expectedPaths);
-      expect(region.cards.map(card => String(card.to))).toEqual(expectedPaths);
-      expect(paths.every(path => path.startsWith("/attractions/"))).toBe(true);
+      expect(region.cards.map((card) => String(card.to))).toEqual(expectedPaths);
+      expect(paths.every((path) => path.startsWith("/attractions/"))).toBe(true);
       allPaths.push(...paths);
     }
     expect(allPaths).toHaveLength(25);
     expect(new Set(allPaths).size).toBe(25);
     expect(Object.keys(attractionSidebarGuideLabels).sort()).toEqual(
-      attractionHubRegions.flatMap(region => region.cards.map(card => card.id)).sort(),
+      attractionHubRegions.flatMap((region) => region.cards.map((card) => card.id)).sort(),
     );
   });
 
   it("automatically opens an area's attraction list on a matching page", async () => {
     const router = await navigationRouter("/attractions/mount-zion/");
-    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <GlobalNav />
+      </RouterContextProvider>,
+    );
     const section = screen.getByRole("region", { name: "Attractions" });
     const jerusalem = within(section).getByRole("button", { name: "Toggle Jerusalem attractions" });
     expect(jerusalem).toHaveAttribute("aria-expanded", "true");
     const links = within(section).getByRole("list", { name: "Jerusalem attractions" });
-    expect(within(links).getByRole("link", { name: "Mount Zion" })).toHaveAttribute("aria-current", "page");
-    expect(within(section).getByRole("button", { name: "Toggle Tel Aviv & Jaffa attractions" })).toHaveAttribute("aria-expanded", "false");
+    expect(within(links).getByRole("link", { name: "Mount Zion" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(
+      within(section).getByRole("button", { name: "Toggle Tel Aviv & Jaffa attractions" }),
+    ).toHaveAttribute("aria-expanded", "false");
   });
   it("always shows all tour categories without a toggle and places the Bethlehem journey under guides", async () => {
     const router = await navigationRouter();
-    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <GlobalNav />
+      </RouterContextProvider>,
+    );
     const trips = screen.getByRole("region", { name: "Tours & trips" });
     expect(within(trips).queryByRole("button")).not.toBeInTheDocument();
     const categories = within(trips).getByRole("list", { name: "Tour categories" });
@@ -130,20 +194,35 @@ describe("shared sidebar navigation", () => {
     expect(trips.querySelector('a[href="/tours/bethlehem-from-jerusalem/"]')).toBeNull();
     expect(trips.querySelector(`a[href="${travelGuidePaths.bethlehem}"]`)).toBeNull();
     const guides = screen.getByRole("region", { name: "Travel guides" });
-    expect(within(guides).getByRole("link", { name: "How to get from Jerusalem to Bethlehem" })).toHaveAttribute("href", travelGuidePaths.bethlehem);
-    expect(within(guides).getByRole("link", { name: "How to get from Jerusalem to the Dead Sea" })).toHaveAttribute("href", travelGuidePaths.jerusalemDeadSea);
+    expect(
+      within(guides).getByRole("link", { name: "How to get from Jerusalem to Bethlehem" }),
+    ).toHaveAttribute("href", travelGuidePaths.bethlehem);
+    expect(
+      within(guides).getByRole("link", { name: "How to get from Jerusalem to the Dead Sea" }),
+    ).toHaveAttribute("href", travelGuidePaths.jerusalemDeadSea);
   });
 
   it("renders the five topic groups and marks the exact current page", async () => {
     const router = await navigationRouter("/accommodation/jerusalem/");
-    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <GlobalNav />
+      </RouterContextProvider>,
+    );
     const nav = screen.getByRole("navigation", { name: "Explore Israel" });
-    expect(within(nav).getAllByRole("heading").map((heading) => heading.textContent)).toEqual([
-      "Transportation", "Tours & trips", "Accommodation", "Attractions", "Travel guides",
-    ]);
+    expect(
+      within(nav)
+        .getAllByRole("heading")
+        .map((heading) => heading.textContent),
+    ).toEqual(["Transportation", "Tours & trips", "Accommodation", "Attractions", "Travel guides"]);
     expect(within(nav).queryByRole("region", { name: "Popular Links" })).not.toBeInTheDocument();
-    expect(within(nav).getByRole("link", { name: "Hotels in Jerusalem" })).toHaveAttribute("aria-current", "page");
-    expect(within(nav).getByRole("link", { name: "All accommodation" })).not.toHaveAttribute("aria-current");
+    expect(within(nav).getByRole("link", { name: "Hotels in Jerusalem" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(within(nav).getByRole("link", { name: "All accommodation" })).not.toHaveAttribute(
+      "aria-current",
+    );
     expect(within(nav).getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
     const rental = within(nav).getByRole("link", { name: "Rent a car in Israel" });
     expect(rental).not.toHaveAttribute("target");
@@ -153,7 +232,11 @@ describe("shared sidebar navigation", () => {
     expect(links.at(-1)).toHaveTextContent("About");
     expect(nav.textContent).not.toMatch(/[↗→]/);
     const transportation = within(nav).getByRole("region", { name: "Transportation" });
-    expect(within(transportation).getAllByRole("link").map((link) => [link.textContent, link.getAttribute("href")])).toEqual([
+    expect(
+      within(transportation)
+        .getAllByRole("link")
+        .map((link) => [link.textContent, link.getAttribute("href")]),
+    ).toEqual([
       ["Airport transfers", "/airport-transfers/"],
       ["To Jerusalem", "/airport-transfers/jerusalem/"],
       ["To Tel Aviv & Jaffa", "/airport-transfers/tel-aviv/"],
@@ -167,12 +250,34 @@ describe("shared sidebar navigation", () => {
 
   it("emphasizes linked sidebar parents while preserving destinations and visible child guides", async () => {
     const router = await navigationRouter();
-    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <GlobalNav />
+      </RouterContextProvider>,
+    );
 
     const linkedParents = [
-      { section: "Transportation", label: "Airport transfers", path: "/airport-transfers/", list: "Airport transfer destinations", count: 5 },
-      { section: "Tours & trips", label: "Tours & day trips", path: "/tours/", list: "Tour categories", count: tourCategories.length },
-      { section: "Tours & trips", label: "Shore excursions", path: "/shore-excursions/", list: "Shore excursion ports", count: 2 },
+      {
+        section: "Transportation",
+        label: "Airport transfers",
+        path: "/airport-transfers/",
+        list: "Airport transfer destinations",
+        count: 5,
+      },
+      {
+        section: "Tours & trips",
+        label: "Tours & day trips",
+        path: "/tours/",
+        list: "Tour categories",
+        count: tourCategories.length,
+      },
+      {
+        section: "Tours & trips",
+        label: "Shore excursions",
+        path: "/shore-excursions/",
+        list: "Shore excursion ports",
+        count: 2,
+      },
     ];
     const guides = screen.getByRole("region", { name: "Travel guides" });
     const nonLinkHeading = within(guides).getByText("Israel Itineraries");
@@ -191,35 +296,67 @@ describe("shared sidebar navigation", () => {
 
   it("organizes airport, transport, hotel, itinerary and planning guides into ordered topic groups", async () => {
     const router = await navigationRouter();
-    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <GlobalNav />
+      </RouterContextProvider>,
+    );
     const guides = screen.getByRole("region", { name: "Travel guides" });
-    expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/travel-blog/");
-    const headings = ["From Ben Gurion Airport", "Getting Around", "Where to Stay Guides", "Israel Itineraries", "Planning Your Trip"];
+    expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute(
+      "href",
+      "/travel-blog/",
+    );
+    const headings = [
+      "From Ben Gurion Airport",
+      "Getting Around",
+      "Where to Stay Guides",
+      "Israel Itineraries",
+      "Planning Your Trip",
+    ];
     for (const label of headings) {
       expect(within(guides).getByText(label)).toBeVisible();
       expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
       expect(within(guides).queryByRole("button", { name: label })).not.toBeInTheDocument();
     }
     for (let i = 1; i < headings.length; i++) {
-      expect(within(guides).getByText(headings[i - 1]!).compareDocumentPosition(within(guides).getByText(headings[i]!)) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(
+        within(guides)
+          .getByText(headings[i - 1]!)
+          .compareDocumentPosition(within(guides).getByText(headings[i]!)) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
     }
     const planning = within(guides).getByRole("list", { name: "Trip planning guides" });
     expect(planning).toBeVisible();
-    expect(within(planning).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual([
+    expect(
+      within(planning)
+        .getAllByRole("link")
+        .map((link) => [link.textContent, link.getAttribute("href")]),
+    ).toEqual([
       ["Israel travel tips", travelGuidePaths.travelTips],
       ["Best time to visit Israel", travelGuidePaths.bestTime],
       ["Holidays & events", travelGuidePaths.calendar],
       ["Best eSIM for Israel", travelGuidePaths.esim],
     ]);
-    expect(planning.compareDocumentPosition(within(guides).getByRole("link", { name: "What to eat in Israel" })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(
+      planning.compareDocumentPosition(
+        within(guides).getByRole("link", { name: "What to eat in Israel" }),
+      ) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
     const itineraries = within(guides).getByRole("list", { name: "Trip lengths" });
-    expect(within(itineraries).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual([
+    expect(
+      within(itineraries)
+        .getAllByRole("link")
+        .map((link) => [link.textContent, link.getAttribute("href")]),
+    ).toEqual([
       ["Israel in 3 days", "/travel-blog/israel-itinerary-3-days/"],
       ["Israel in 5 days", "/travel-blog/israel-itinerary-5-days/"],
       ["Israel in 7 days", "/travel-blog/israel-itinerary-7-days/"],
       ["Israel in 10 days", "/travel-blog/israel-itinerary-10-days/"],
     ]);
-    const airportGuides = within(guides).getByRole("list", { name: "Ben Gurion Airport arrival guides" });
+    const airportGuides = within(guides).getByRole("list", {
+      name: "Ben Gurion Airport arrival guides",
+    });
     expect(airportGuides).toBeVisible();
     const expected = [
       ["How to get to Jerusalem", "/travel-blog/ben-gurion-airport-to-jerusalem/"],
@@ -227,13 +364,24 @@ describe("shared sidebar navigation", () => {
       ["How to get to Haifa", "/travel-blog/ben-gurion-airport-to-haifa/"],
       ["How to get to Ein Bokek", "/travel-blog/ben-gurion-airport-to-ein-bokek/"],
       ["Ben Gurion Airport taxis", "/travel-blog/ben-gurion-airport-taxis/"],
-      ["Traveling from Ben Gurion Airport on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/"],
+      [
+        "Traveling from Ben Gurion Airport on Shabbat",
+        "/travel-blog/from-ben-gurion-airport-on-shabbat/",
+      ],
       ["Sherut from Ben Gurion Airport", "/travel-blog/sherut-in-israel/"],
       ["Ben Gurion Airport arrival tips", "/travel-blog/ben-gurion-airport-arrival-tips/"],
     ];
-    expect(within(airportGuides).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual(expected);
+    expect(
+      within(airportGuides)
+        .getAllByRole("link")
+        .map((link) => [link.textContent, link.getAttribute("href")]),
+    ).toEqual(expected);
     const gettingAround = within(guides).getByRole("list", { name: "Getting around guides" });
-    expect(within(gettingAround).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual([
+    expect(
+      within(gettingAround)
+        .getAllByRole("link")
+        .map((link) => [link.textContent, link.getAttribute("href")]),
+    ).toEqual([
       ["Getting around Israel", "/travel-blog/getting-around-israel/"],
       ["Getting around Tel Aviv", "/travel-blog/getting-around-tel-aviv/"],
       ["How to get from Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/"],
@@ -242,7 +390,9 @@ describe("shared sidebar navigation", () => {
       ["Taxi fares in Israel", "/travel-blog/taxi-fares-in-israel/"],
       ["Is there Uber in Israel?", "/travel-blog/uber-in-israel/"],
     ]);
-    const links = within(guides).getAllByRole("link").map(link => link.getAttribute("href"));
+    const links = within(guides)
+      .getAllByRole("link")
+      .map((link) => link.getAttribute("href"));
     expect(new Set(links).size).toBe(links.length);
     expect(within(guides).getByRole("list", { name: "Trip lengths" })).toBeVisible();
   });
@@ -250,7 +400,11 @@ describe("shared sidebar navigation", () => {
   it("opens the migrated practical guides inside the portal", async () => {
     const router = await navigationRouter();
     const onNavigate = vi.fn();
-    render(<RouterContextProvider router={router}><GlobalNav onNavigate={onNavigate} /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <GlobalNav onNavigate={onNavigate} />
+      </RouterContextProvider>,
+    );
     const guides = screen.getByRole("region", { name: "Travel guides" });
     for (const [label, path] of [
       ["Is there Uber in Israel?", "uber-in-israel"],
@@ -260,7 +414,7 @@ describe("shared sidebar navigation", () => {
       const link = within(guides).getByRole("link", { name: label });
       expect(link).toHaveAttribute("href", `/travel-blog/${path}/`);
       expect(link).not.toHaveAttribute("target");
-      expect(link.querySelector('[aria-hidden]')).toBeNull();
+      expect(link.querySelector("[aria-hidden]")).toBeNull();
     }
     fireEvent.click(within(guides).getByRole("link", { name: /Is there Uber in Israel/ }));
     expect(onNavigate).toHaveBeenCalledOnce();
@@ -268,25 +422,42 @@ describe("shared sidebar navigation", () => {
 
   it("keeps airport destinations visible on every page and links other destinations to the airport hub", async () => {
     const router = await navigationRouter();
-    const result = render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    const result = render(
+      <RouterContextProvider router={router}>
+        <GlobalNav />
+      </RouterContextProvider>,
+    );
     const transportation = screen.getByRole("region", { name: "Transportation" });
     expect(within(transportation).queryByRole("button")).not.toBeInTheDocument();
-    expect(within(transportation).getByRole("link", { name: "Airport transfers" })).toHaveAttribute("href", "/airport-transfers/");
-    const destinations = within(transportation).getByRole("list", { name: "Airport transfer destinations" });
+    expect(within(transportation).getByRole("link", { name: "Airport transfers" })).toHaveAttribute(
+      "href",
+      "/airport-transfers/",
+    );
+    const destinations = within(transportation).getByRole("list", {
+      name: "Airport transfer destinations",
+    });
     expect(destinations).toBeVisible();
     expect(within(destinations).getAllByRole("link")).toHaveLength(5);
-    expect(within(destinations).getAllByRole("link").at(-1)).toHaveTextContent("To other destinations");
+    expect(within(destinations).getAllByRole("link").at(-1)).toHaveTextContent(
+      "To other destinations",
+    );
     fireEvent.click(within(destinations).getByRole("link", { name: "To Haifa" }));
     await waitFor(() => expect(router.state.location.pathname).toBe("/airport-transfers/haifa/"));
     result.unmount();
-    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <GlobalNav />
+      </RouterContextProvider>,
+    );
     expect(screen.getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
     expect(screen.getByRole("link", { name: "To Haifa" })).toHaveAttribute("aria-current", "page");
     fireEvent.click(screen.getByRole("link", { name: "To other destinations" }));
     await waitFor(() => expect(router.state.location.pathname).toBe("/airport-transfers/"));
     expect(screen.getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
 
-    expect(screen.queryByRole("button", { name: "Choose a shore excursion port" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Choose a shore excursion port" }),
+    ).not.toBeInTheDocument();
     expect(screen.getByRole("list", { name: "Shore excursion ports" })).toBeVisible();
     expect(screen.getByRole("link", { name: "From Ashdod Port" })).toBeVisible();
     expect(screen.getByRole("link", { name: "From Haifa Port" })).toBeVisible();
@@ -294,20 +465,37 @@ describe("shared sidebar navigation", () => {
 
   it("uses the same groups in the mobile drawer and closes it after service and guide navigation", async () => {
     const router = await navigationRouter();
-    render(<RouterContextProvider router={router}><SiteHeader /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <SiteHeader />
+      </RouterContextProvider>,
+    );
     const trigger = screen.getByRole("button", { name: "Menu" });
-    const brand = screen.getByRole("link", { name: /Israel Taxi\s*&\s*Travel\s*Moshe Barak\s*\(home\)/i });
+    const brand = screen.getByRole("link", {
+      name: /Israel Taxi\s*&\s*Travel\s*Moshe Barak\s*\(home\)/i,
+    });
     expect(brand).toHaveAttribute("href", "/");
-    expect(brand.querySelector("span.font-serif.whitespace-nowrap")).toHaveTextContent("Israel Taxi & Travel");
+    expect(brand.querySelector("span.font-serif.whitespace-nowrap")).toHaveTextContent(
+      "Israel Taxi & Travel",
+    );
     const byline = within(brand).getByTestId("wordmark-byline");
     expect(byline).toHaveTextContent("Moshe Barak");
-    expect(byline).toHaveClass("font-sans", "font-bold", "text-primary", "w-full", "justify-center", "items-center");
+    expect(byline).toHaveClass(
+      "font-sans",
+      "font-bold",
+      "text-primary",
+      "w-full",
+      "justify-center",
+      "items-center",
+    );
     expect(byline.querySelectorAll("span")).toHaveLength(2);
     expect(byline.lastElementChild).toHaveTextContent("Moshe Barak");
     const taxiIcon = within(byline).getByTestId("custom-taxi-icon");
     expect(taxiIcon).toHaveClass("bg-primary");
     expect(taxiIcon).toHaveAttribute("aria-hidden", "true");
-    expect(taxiIcon).toHaveStyle({ mask: "url(/images/taxi-byline.png) center / contain no-repeat" });
+    expect(taxiIcon).toHaveStyle({
+      mask: "url(/images/taxi-byline.png) center / contain no-repeat",
+    });
     expect(trigger).toHaveClass("shrink-0", "whitespace-nowrap", "px-3");
     fireEvent.click(trigger);
     let dialog = await screen.findByRole("dialog");
@@ -318,9 +506,14 @@ describe("shared sidebar navigation", () => {
     expect(within(nav).getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
     expect(within(nav).getByRole("list", { name: "Tour categories" })).toBeVisible();
     for (const label of ["Airport transfers", "Tours & day trips", "Shore excursions"]) {
-      expect(within(nav).getByRole("link", { name: label })).toHaveClass("font-semibold", "text-foreground");
+      expect(within(nav).getByRole("link", { name: label })).toHaveClass(
+        "font-semibold",
+        "text-foreground",
+      );
     }
-    expect(within(nav).queryByRole("button", { name: "Show tour categories" })).not.toBeInTheDocument();
+    expect(
+      within(nav).queryByRole("button", { name: "Show tour categories" }),
+    ).not.toBeInTheDocument();
     expect(within(nav).queryByText("Popular Links")).not.toBeInTheDocument();
     fireEvent.click(within(nav).getByRole("link", { name: "Private driver service" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
@@ -330,30 +523,47 @@ describe("shared sidebar navigation", () => {
     dialog = await screen.findByRole("dialog");
     nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
     const guides = within(nav).getByRole("region", { name: "Travel guides" });
-    expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/travel-blog/");
-    for (const label of ["From Ben Gurion Airport", "Getting Around", "Where to Stay Guides", "Israel Itineraries", "Planning Your Trip"]) {
+    expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute(
+      "href",
+      "/travel-blog/",
+    );
+    for (const label of [
+      "From Ben Gurion Airport",
+      "Getting Around",
+      "Where to Stay Guides",
+      "Israel Itineraries",
+      "Planning Your Trip",
+    ]) {
       expect(within(guides).getByText(label)).toBeVisible();
       expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
       expect(within(guides).queryByRole("button", { name: label })).not.toBeInTheDocument();
     }
     fireEvent.click(within(guides).getByRole("link", { name: /Best eSIM for Israel/ }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/best-esim-for-israel/"));
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/travel-blog/best-esim-for-israel/"),
+    );
 
     fireEvent.click(trigger);
     dialog = await screen.findByRole("dialog");
     fireEvent.click(within(dialog).getByRole("link", { name: "To Jerusalem" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    await waitFor(() => expect(router.state.location.pathname).toBe("/airport-transfers/jerusalem/"));
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/airport-transfers/jerusalem/"),
+    );
 
     fireEvent.click(trigger);
     dialog = await screen.findByRole("dialog");
     nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
     expect(within(nav).queryByRole("region", { name: "Religious sites" })).not.toBeInTheDocument();
-    const airportGuides = within(nav).getByRole("list", { name: "Ben Gurion Airport arrival guides" });
+    const airportGuides = within(nav).getByRole("list", {
+      name: "Ben Gurion Airport arrival guides",
+    });
     fireEvent.click(within(airportGuides).getByRole("link", { name: "How to get to Ein Bokek" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/ben-gurion-airport-to-ein-bokek/"));
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/travel-blog/ben-gurion-airport-to-ein-bokek/"),
+    );
   });
 });
 
@@ -361,18 +571,29 @@ describe("accommodation destination hub", () => {
   it("presents five hotel destinations and separate guide links", async () => {
     const router = await navigationRouter("/accommodation/");
     const Hotels = HotelsRoute.options.component!;
-    render(<RouterContextProvider router={router}><Hotels /></RouterContextProvider>);
+    render(
+      <RouterContextProvider router={router}>
+        <Hotels />
+      </RouterContextProvider>,
+    );
     const cards = screen.getAllByTestId("accommodation-destination-card");
     expect(cards).toHaveLength(5);
     expect(cards.map((card) => within(card).getByRole("heading").textContent)).toEqual([
-      "Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Haifa", "Hotels in Tiberias", "Dead Sea hotels",
+      "Hotels in Jerusalem",
+      "Hotels in Tel Aviv",
+      "Hotels in Haifa",
+      "Hotels in Tiberias",
+      "Dead Sea hotels",
     ]);
     for (const card of cards) {
       expect(within(card).getByRole("img")).toHaveAttribute("src");
       expect(within(card).getByRole("img").getAttribute("alt")).not.toBe("");
-      expect(card.textContent).not.toMatch(/compare\s+(?:\d+|six|eight|ten|eleven)\s+(?:hotels|areas)/i);
+      expect(card.textContent).not.toMatch(
+        /compare\s+(?:\d+|six|eight|ten|eleven)\s+(?:hotels|areas)/i,
+      );
       const href = card.getAttribute("href")!;
-      if (href.startsWith("/")) expect(router.matchRoutes(href.split("#")[0]!).at(-1)?.routeId).toBe(href.split("#")[0]!);
+      if (href.startsWith("/"))
+        expect(router.matchRoutes(href.split("#")[0]!).at(-1)?.routeId).toBe(href.split("#")[0]!);
     }
     expect(screen.queryByText("Guide image sources")).not.toBeInTheDocument();
     expect(document.querySelector('a[href*="israel-taxi.com/wp-content/"]')).toBeNull();
@@ -381,9 +602,21 @@ describe("accommodation destination hub", () => {
   it("retains the accommodation URL and a concise city-hotel description", async () => {
     const head = await HotelsRoute.options.head?.({} as never);
     expect(head).toMatchObject({
-      meta: expect.arrayContaining([expect.objectContaining({ name: "description", content: expect.stringContaining("Jerusalem") })]),
-      links: expect.arrayContaining([expect.objectContaining({ rel: "canonical", href: expect.stringMatching(/\/accommodation\/$/) })]),
+      meta: expect.arrayContaining([
+        expect.objectContaining({
+          name: "description",
+          content: expect.stringContaining("Jerusalem"),
+        }),
+      ]),
+      links: expect.arrayContaining([
+        expect.objectContaining({
+          rel: "canonical",
+          href: expect.stringMatching(/\/accommodation\/$/),
+        }),
+      ]),
     });
-    expect(new Set(accommodationDestinations.map((destination) => destination.photo.src)).size).toBe(5);
+    expect(
+      new Set(accommodationDestinations.map((destination) => destination.photo.src)).size,
+    ).toBe(5);
   });
 });

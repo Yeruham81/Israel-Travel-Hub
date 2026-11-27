@@ -4,18 +4,39 @@ import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { NeighborhoodStayPage } from "@/components/NeighborhoodStayPage";
 import { HotelCategoryPage } from "@/components/HotelCategoryPage";
-import { jerusalemAreaGuides, telAvivAreaGuides, hotelCategoryGuides, haifaStayGuide, tiberiasStayGuide, deadSeaStayGuide, neighborhoodGuidesForCity } from "@/data/content";
+import {
+  jerusalemAreaGuides,
+  telAvivAreaGuides,
+  hotelCategoryGuides,
+  haifaStayGuide,
+  tiberiasStayGuide,
+  deadSeaStayGuide,
+  neighborhoodGuidesForCity,
+} from "@/data/content";
 import { accommodationEditorial } from "@/data/accommodationEditorial";
 import { hotelsForArea } from "@/data/registry";
 import { mosheBarakAuthor } from "@/data/site-identity";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 
 vi.mock("@tanstack/react-router", async () => {
-  const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
+  const actual =
+    await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
   return {
     ...actual,
-    Link: ({ to, hash, children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement> & { to: string; hash?: string; children?: ReactNode }) =>
-      <a href={hash ? to + "#" + hash : to} {...props}>{children}</a>,
+    Link: ({
+      to,
+      hash,
+      children,
+      ...props
+    }: AnchorHTMLAttributes<HTMLAnchorElement> & {
+      to: string;
+      hash?: string;
+      children?: ReactNode;
+    }) => (
+      <a href={hash ? to + "#" + hash : to} {...props}>
+        {children}
+      </a>
+    ),
   };
 });
 afterEach(cleanup);
@@ -47,33 +68,50 @@ describe.each(allAreas)("Neighborhood subpage: $name", (area) => {
     expect(container.querySelector("#area-guide")).toBeInTheDocument();
     expect(container.querySelector("#location")).toBeInTheDocument();
     const overview = container.querySelector("#overview") as HTMLElement;
-    expect(within(overview).getByRole("heading", { name: `Choosing a hotel in ${area.shortName}` })).toBeInTheDocument();
+    expect(
+      within(overview).getByRole("heading", { name: `Choosing a hotel in ${area.shortName}` }),
+    ).toBeInTheDocument();
     expect(within(overview).getByText(area.overview[2]!)).toBeInTheDocument();
     expect(within(overview).queryByText(area.overview[0]!)).toBeNull();
     expect(within(overview).queryByText(area.overview[1]!)).toBeNull();
-    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    const hotelGrid = within(container.querySelector("#book") as HTMLElement).getByTestId("neighborhood-hotel-grid");
+    expect(
+      container
+        .querySelector("#book")!
+        .compareDocumentPosition(container.querySelector("#overview")!) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    const hotelGrid = within(container.querySelector("#book") as HTMLElement).getByTestId(
+      "neighborhood-hotel-grid",
+    );
     expect(hotelGrid).toHaveClass("min-[360px]:grid-cols-2", "xl:grid-cols-3");
     const hotels = within(hotelGrid).getAllByTestId("hotel-recommendation");
     expect(hotels).toHaveLength(5);
     const local = hotelsForArea(area.id, area.cityId);
-    expect(hotels.slice(0, local.length).map((card) => card.querySelector("h3")?.textContent)).toEqual(local.map((hotel) => hotel.name));
+    expect(
+      hotels.slice(0, local.length).map((card) => card.querySelector("h3")?.textContent),
+    ).toEqual(local.map((hotel) => hotel.name));
     if (area.cityId === "telaviv") {
       expect(local).toHaveLength(4);
       expect(hotels[4]).toHaveTextContent("Nearby ·");
     } else {
       expect(local).toHaveLength(5);
     }
-    const relatedGrid = within(container.querySelector("#other-areas") as HTMLElement).getByTestId("related-neighborhood-grid");
-    expect(relatedGrid).toHaveClass("grid-cols-2", area.cityId === "jerusalem" ? "lg:grid-cols-3" : "lg:grid-cols-4");
+    const relatedGrid = within(container.querySelector("#other-areas") as HTMLElement).getByTestId(
+      "related-neighborhood-grid",
+    );
+    expect(relatedGrid).toHaveClass(
+      "grid-cols-2",
+      area.cityId === "jerusalem" ? "lg:grid-cols-3" : "lg:grid-cols-4",
+    );
     const links = within(relatedGrid).getAllByRole("link");
     const siblings = neighborhoodGuidesForCity(area.cityId);
     expect(links).toHaveLength(siblings.length);
     expect(new Set(links.map((link) => link.getAttribute("href"))).size).toBe(siblings.length);
-    const city = area.cityId === "jerusalem" ? "/accommodation/jerusalem/" : "/accommodation/tel-aviv/";
+    const city =
+      area.cityId === "jerusalem" ? "/accommodation/jerusalem/" : "/accommodation/tel-aviv/";
     expect(links[links.length - 1]).toHaveAttribute("href", city);
     expect(links.slice(0, -1).map((link) => link.getAttribute("href"))).toEqual(
-      siblings.filter((item) => item.id !== area.id).map((item) => item.path)
+      siblings.filter((item) => item.id !== area.id).map((item) => item.path),
     );
     for (const link of links.slice(0, -1)) {
       const target = siblings.find((item) => item.path === link.getAttribute("href"));
@@ -101,17 +139,41 @@ describe.each(hotelCategoryGuides)("Hotel category subpage: $title", (category) 
     const table = container.querySelector("#compare table") as HTMLElement;
     expect(table).toBeInTheDocument();
     expect(within(table).getAllByTestId("stay-comparison-row")).toHaveLength(category.picks.length);
-    const cards = within(container.querySelector("#book") as HTMLElement).getAllByTestId("hotel-recommendation");
-    expect(cards.map((card) => card.id)).toEqual(category.picks.map((pick) => "hotel-" + pick.hotelId));
+    const cards = within(container.querySelector("#book") as HTMLElement).getAllByTestId(
+      "hotel-recommendation",
+    );
+    expect(cards.map((card) => card.id)).toEqual(
+      category.picks.map((pick) => "hotel-" + pick.hotelId),
+    );
     expect(new Set(cards.map((card) => card.id)).size).toBe(cards.length);
-    expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#compare")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(container.querySelector("#compare")!.compareDocumentPosition(container.querySelector("#book")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#details")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    const editorialPath = accommodationEditorial[category.destinationId as "haifa" | "tiberias" | "deadsea"].path;
+    expect(
+      container
+        .querySelector("#overview")!
+        .compareDocumentPosition(container.querySelector("#compare")!) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      container
+        .querySelector("#compare")!
+        .compareDocumentPosition(container.querySelector("#book")!) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      container
+        .querySelector("#book")!
+        .compareDocumentPosition(container.querySelector("#details")!) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    const editorialPath =
+      accommodationEditorial[category.destinationId as "haifa" | "tiberias" | "deadsea"].path;
     expect(container.querySelector('a[href="' + destination.path + '"]')).toBeInTheDocument();
     expect(container.querySelector('a[href="' + editorialPath + '"]')).toBeInTheDocument();
     const relatedCards = screen.getByTestId("stay-trip-planning");
-    expect(within(relatedCards).getByTestId("stay-local-photo-grid").querySelectorAll("a")).toHaveLength(6);
-    expect(within(relatedCards).getByTestId("stay-trip-photo-grid").querySelectorAll("a")).toHaveLength(6);
+    expect(
+      within(relatedCards).getByTestId("stay-local-photo-grid").querySelectorAll("a"),
+    ).toHaveLength(6);
+    expect(
+      within(relatedCards).getByTestId("stay-trip-photo-grid").querySelectorAll("a"),
+    ).toHaveLength(6);
   });
 });

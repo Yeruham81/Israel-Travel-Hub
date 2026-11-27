@@ -18,7 +18,7 @@ function mountSection(id: string, withForm = true) {
   if (withForm) section.appendChild(document.createElement("form"));
   const formTop = { value: 1400 };
   vi.spyOn(section, "getBoundingClientRect").mockImplementation(
-    () => ({ top: formTop.value } as DOMRect),
+    () => ({ top: formTop.value }) as DOMRect,
   );
   main.appendChild(section);
   document.body.appendChild(main);
@@ -102,11 +102,15 @@ describe("floating Contact me shortcut", () => {
 
     formTop.value = 550;
     fireEvent.scroll(window);
-    await waitFor(() => expect(screen.queryByTestId("floating-contact-button")).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByTestId("floating-contact-button")).not.toBeInTheDocument(),
+    );
 
     formTop.value = -100;
     fireEvent.scroll(window);
-    await waitFor(() => expect(screen.queryByTestId("floating-contact-button")).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByTestId("floating-contact-button")).not.toBeInTheDocument(),
+    );
   });
 
   it("detects an inquiry form added later by a route or lazy component", async () => {

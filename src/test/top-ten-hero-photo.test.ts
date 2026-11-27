@@ -19,11 +19,16 @@ describe("Top Ten Israel guide hero and all inbound cards", () => {
   });
 
   it("keeps the page hero identical to directory and related guide card images", () => {
-    const component = readFileSync(resolve(process.cwd(), "src/components/TopTenIsraelGuide.tsx"), "utf8");
+    const component = readFileSync(
+      resolve(process.cwd(), "src/components/TopTenIsraelGuide.tsx"),
+      "utf8",
+    );
     expect(component).toContain("src={topTenIsraelHero.src}");
     expect(component).toContain("alt={topTenIsraelHero.alt}");
     expect(travelGuides.topTen.photo).toEqual(topTenIsraelHero);
-    expect(guideDirectory.find(entry => String(entry.to) === route)?.photo).toEqual(topTenIsraelHero);
+    expect(guideDirectory.find((entry) => String(entry.to) === route)?.photo).toEqual(
+      topTenIsraelHero,
+    );
     expect(guideHeroPhotoForPath(route)).toEqual(topTenIsraelHero);
   });
 });

@@ -1,25 +1,43 @@
-import {existsSync,readFileSync} from "node:fs";
-import {describe,expect,it} from "vitest";
-import {haifaMuseumAreas,haifaMuseums,haifaAdditionalMuseums,haifaMuseumMapPoints} from "@/data/haifaMuseums";
-import {haifaMuseumPhotos,haifaMuseumPhotoCredits} from "@/data/haifaMuseumPhotos";
+import { existsSync, readFileSync } from "node:fs";
+import { describe, expect, it } from "vitest";
+import {
+  haifaMuseumAreas,
+  haifaMuseums,
+  haifaAdditionalMuseums,
+  haifaMuseumMapPoints,
+} from "@/data/haifaMuseums";
+import { haifaMuseumPhotos, haifaMuseumPhotoCredits } from "@/data/haifaMuseumPhotos";
 
-describe("Haifa museums editorial guide",()=>{
-  it("covers ten independently identifiable museums without mislabelling parks and gardens",()=>{
+describe("Haifa museums editorial guide", () => {
+  it("covers ten independently identifiable museums without mislabelling parks and gardens", () => {
     expect(haifaMuseums).toHaveLength(10);
-    expect(new Set(haifaMuseums.map(m=>m.id)).size).toBe(10);
-    const ids=new Set(haifaMuseums.map(m=>m.id));
-    for(const id of ["art","city","railway","madatech","struck","tikotin","mane-katz","hecht","maritime","naval"]) {
-      expect(ids.has(id),id).toBe(true);
+    expect(new Set(haifaMuseums.map((m) => m.id)).size).toBe(10);
+    const ids = new Set(haifaMuseums.map((m) => m.id));
+    for (const id of [
+      "art",
+      "city",
+      "railway",
+      "madatech",
+      "struck",
+      "tikotin",
+      "mane-katz",
+      "hecht",
+      "maritime",
+      "naval",
+    ]) {
+      expect(ids.has(id), id).toBe(true);
     }
     expect(haifaMuseumAreas).toHaveLength(4);
     expect(haifaAdditionalMuseums).toHaveLength(2);
-    expect(haifaMuseums.some(m=>/Bahá|Sculpture Garden|Computer Museum/i.test(m.name))).toBe(false);
+    expect(haifaMuseums.some((m) => /Bahá|Sculpture Garden|Computer Museum/i.test(m.name))).toBe(
+      false,
+    );
   });
-  it("preserves the precise distinctions between the maritime museums, free Hecht and closed Mane-Katz",()=>{
-    const maritime=haifaMuseums.find(m=>m.id==="maritime")!;
-    const naval=haifaMuseums.find(m=>m.id==="naval")!;
-    const hecht=haifaMuseums.find(m=>m.id==="hecht")!;
-    const mane=haifaMuseums.find(m=>m.id==="mane-katz")!;
+  it("preserves the precise distinctions between the maritime museums, free Hecht and closed Mane-Katz", () => {
+    const maritime = haifaMuseums.find((m) => m.id === "maritime")!;
+    const naval = haifaMuseums.find((m) => m.id === "naval")!;
+    const hecht = haifaMuseums.find((m) => m.id === "hecht")!;
+    const mane = haifaMuseums.find((m) => m.id === "mane-katz")!;
     expect(maritime.address).toContain("198 Allenby");
     expect(naval.address).toContain("204 Allenby");
     expect(naval.url).toContain("museums.mod.gov.il");
@@ -28,51 +46,57 @@ describe("Haifa museums editorial guide",()=>{
     expect(mane.closureNote).toMatch(/Closed for renovation/);
     expect(mane.booking).toMatch(/Do not plan an interior visit/);
   });
-  it("uses real operator information, not stale free-weekend claims or guessed private-museum admission",()=>{
-    for(const m of haifaMuseums){
+  it("uses real operator information, not stale free-weekend claims or guessed private-museum admission", () => {
+    for (const m of haifaMuseums) {
       expect(m.url).toMatch(/^https:\/\//);
-      expect(m.address,m.id).toBeTruthy();
-      expect(m.openingDays,m.id).toBeTruthy();
-      expect(m.admission,m.id).toBeTruthy();
-      expect(m.booking,m.id).toBeTruthy();
-      expect(m.tip,m.id).toBeTruthy();
-      expect(m.highlights.length,m.id).toBeGreaterThanOrEqual(2);
+      expect(m.address, m.id).toBeTruthy();
+      expect(m.openingDays, m.id).toBeTruthy();
+      expect(m.admission, m.id).toBeTruthy();
+      expect(m.booking, m.id).toBeTruthy();
+      expect(m.tip, m.id).toBeTruthy();
+      expect(m.highlights.length, m.id).toBeGreaterThanOrEqual(2);
     }
-    expect(haifaMuseums.find(m=>m.id==="madatech")!.booking).toContain("advance");
-    const source=readFileSync("src/data/haifaMuseums.ts","utf8");
+    expect(haifaMuseums.find((m) => m.id === "madatech")!.booking).toContain("advance");
+    const source = readFileSync("src/data/haifaMuseums.ts", "utf8");
     expect(source).not.toContain("Entrance is free on Fridays and Saturdays");
   });
-  it("uses ten distinct local photos and credits the three licensed Wikimedia sources",()=>{
-    const unique=new Set<string>();
-    for(const museum of haifaMuseums){
-      const photo=haifaMuseumPhotos[museum.id]!;
-      expect(photo,museum.id).toBeDefined();
-      expect(photo.src,museum.id).toMatch(/^\/images\/haifa-museums\/[a-z-]+\.webp$/);
-      expect(existsSync("public"+photo.src),museum.id).toBe(true);
-      for(const width of [360,560]){
-        const variant=photo.src.replace(/\.webp$/, "-"+width+".webp");
-        expect(existsSync("public"+variant),museum.id+" "+width+"w").toBe(true);
+  it("uses ten distinct local photos and credits the three licensed Wikimedia sources", () => {
+    const unique = new Set<string>();
+    for (const museum of haifaMuseums) {
+      const photo = haifaMuseumPhotos[museum.id]!;
+      expect(photo, museum.id).toBeDefined();
+      expect(photo.src, museum.id).toMatch(/^\/images\/haifa-museums\/[a-z-]+\.webp$/);
+      expect(existsSync("public" + photo.src), museum.id).toBe(true);
+      for (const width of [360, 560]) {
+        const variant = photo.src.replace(/\.webp$/, "-" + width + ".webp");
+        expect(existsSync("public" + variant), museum.id + " " + width + "w").toBe(true);
       }
-      expect(photo.width,museum.id).toBeGreaterThan(0);
-      expect(photo.height,museum.id).toBeGreaterThan(0);
-      expect(photo.alt,museum.id).toBeTruthy();
-      expect(unique.has(photo.src),museum.id).toBe(false);
+      expect(photo.width, museum.id).toBeGreaterThan(0);
+      expect(photo.height, museum.id).toBeGreaterThan(0);
+      expect(photo.alt, museum.id).toBeTruthy();
+      expect(unique.has(photo.src), museum.id).toBe(false);
       unique.add(photo.src);
     }
     expect(unique.size).toBe(10);
-    expect(haifaMuseumPhotoCredits.map(c=>c.id).sort()).toEqual(["hecht","mane-katz","struck"]);
-    for(const credit of haifaMuseumPhotoCredits){
+    expect(haifaMuseumPhotoCredits.map((c) => c.id).sort()).toEqual([
+      "hecht",
+      "mane-katz",
+      "struck",
+    ]);
+    for (const credit of haifaMuseumPhotoCredits) {
       expect(credit.author).toBeTruthy();
       expect(credit.sourceUrl).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
       expect(credit.licenseUrl).toMatch(/^https:\/\/creativecommons\.org\/licenses\//);
     }
-    expect(readFileSync("src/components/HaifaMuseumsGuide.tsx","utf8")).toContain("haifaMuseumPhotoCredits.map");
+    expect(readFileSync("src/components/HaifaMuseumsGuide.tsx", "utf8")).toContain(
+      "haifaMuseumPhotoCredits.map",
+    );
   });
-  it("uses the same wide-card visual system as Jerusalem and Tel Aviv",()=>{
-    const haifa=readFileSync("src/components/HaifaMuseumsGuide.tsx","utf8");
-    const telAviv=readFileSync("src/components/TelAvivMuseumsGuide.tsx","utf8");
-    const jerusalem=readFileSync("src/components/JerusalemMuseumsGuide.tsx","utf8");
-    for(const fragment of [
+  it("uses the same wide-card visual system as Jerusalem and Tel Aviv", () => {
+    const haifa = readFileSync("src/components/HaifaMuseumsGuide.tsx", "utf8");
+    const telAviv = readFileSync("src/components/TelAvivMuseumsGuide.tsx", "utf8");
+    const jerusalem = readFileSync("src/components/JerusalemMuseumsGuide.tsx", "utf8");
+    for (const fragment of [
       'data-museum-card="horizontal"',
       "lg:grid-cols-[minmax(0,1fr)_270px]",
       "lg:col-start-2 lg:row-start-1",
@@ -83,40 +107,42 @@ describe("Haifa museums editorial guide",()=>{
       "lg:min-w-[360px]",
       'loading="lazy"',
       'decoding="async"',
-    ]){
-      expect(haifa,fragment).toContain(fragment);
-      expect(telAviv,fragment).toContain(fragment);
-      expect(jerusalem,fragment).toContain(fragment);
+    ]) {
+      expect(haifa, fragment).toContain(fragment);
+      expect(telAviv, fragment).toContain(fragment);
+      expect(jerusalem, fragment).toContain(fragment);
     }
-    expect(haifa).not.toContain("md:grid-cols-2\">{museums.filter");
+    expect(haifa).not.toContain('md:grid-cols-2">{museums.filter');
     expect(haifa).toContain('neighborhoodTripContactCopy("Haifa")');
-    expect(haifa).toContain('guideHeroPhotoForPath(item.to)');
+    expect(haifa).toContain("guideHeroPhotoForPath(item.to)");
     expect(haifa).toContain("MuseumMap");
     expect(haifa).toContain("srcSet=");
     expect(haifa).toContain('sizes="(min-width: 1024px) 270px, calc(100vw - 32px)"');
-    expect(haifa).toContain('src={museumMapUrl}');
-    expect(haifa).toContain('haifa-museum-map-focus');
+    expect(haifa).toContain("src={museumMapUrl}");
+    expect(haifa).toContain("haifa-museum-map-focus");
     expect(haifa).not.toContain("maps.google.com/maps?q=");
     expect(haifa).toContain("https://www.google.com/maps/dir/?api=1&destination=");
     expect(haifa).not.toContain("Architectural illustration, not a photograph");
   });
-  it("plots the ten distinct Haifa museum coordinates, including the renovation closure",()=>{
+  it("plots the ten distinct Haifa museum coordinates, including the renovation closure", () => {
     expect(haifaMuseumMapPoints).toHaveLength(10);
-    const ids=new Set<string>();
-    const coordinates=new Set<string>();
-    for(const point of haifaMuseumMapPoints){
-      expect(point.lat,point.id).toBeGreaterThan(32.75);
-      expect(point.lat,point.id).toBeLessThan(32.85);
-      expect(point.lon,point.id).toBeGreaterThan(34.95);
-      expect(point.lon,point.id).toBeLessThan(35.04);
-      expect(ids.has(point.id),point.id).toBe(false);
+    const ids = new Set<string>();
+    const coordinates = new Set<string>();
+    for (const point of haifaMuseumMapPoints) {
+      expect(point.lat, point.id).toBeGreaterThan(32.75);
+      expect(point.lat, point.id).toBeLessThan(32.85);
+      expect(point.lon, point.id).toBeGreaterThan(34.95);
+      expect(point.lon, point.id).toBeLessThan(35.04);
+      expect(ids.has(point.id), point.id).toBe(false);
       ids.add(point.id);
-      const key=point.lat+","+point.lon;
-      expect(coordinates.has(key),point.id).toBe(false);
+      const key = point.lat + "," + point.lon;
+      expect(coordinates.has(key), point.id).toBe(false);
       coordinates.add(key);
     }
-    expect(haifaMuseumMapPoints.filter(point=>point.closed).map(point=>point.id)).toEqual(["mane-katz"]);
-    const html=readFileSync("public/maps/haifa-museums.html","utf8");
+    expect(haifaMuseumMapPoints.filter((point) => point.closed).map((point) => point.id)).toEqual([
+      "mane-katz",
+    ]);
+    const html = readFileSync("public/maps/haifa-museums.html", "utf8");
     expect(html).toContain("museums.length !== 10");
     expect(html).toContain("cluster:true");
     expect(html).toContain("getClusterExpansionZoom");
@@ -124,8 +150,8 @@ describe("Haifa museums editorial guide",()=>{
     expect(html).toContain("haifa-museum-map-selected");
     expect(html).toContain("Closed for renovation");
   });
-  it("routes Haifa museums to its upgraded editorial page rather than the retired generic renderer",()=>{
-    const route=readFileSync("src/routes/travel-blog.museums-in-haifa.tsx","utf8");
+  it("routes Haifa museums to its upgraded editorial page rather than the retired generic renderer", () => {
+    const route = readFileSync("src/routes/travel-blog.museums-in-haifa.tsx", "utf8");
     expect(route).toContain("component: HaifaMuseumsGuide");
     expect(route).not.toContain('<TravelGuidePage id="haifaMuseums"');
   });

@@ -8,13 +8,22 @@ import { routeTree } from "@/routeTree.gen";
 import { CANONICAL_ORIGIN, INDEXABLE } from "@/lib/site";
 
 async function legalDocument(path: string) {
-  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
+  const router = createRouter({
+    routeTree,
+    context: { queryClient: new QueryClient() },
+    history: createMemoryHistory({ initialEntries: [path] }),
+    trailingSlash: "always",
+  });
   await router.load();
   const match = router.matchRoutes(path).at(-1)!;
   expect(match.routeId).not.toBe("__root__");
   const route = router.routesById[match.routeId]!;
   const Page = route.options.component!;
-  const html = renderToString(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+  const html = renderToString(
+    <RouterContextProvider router={router}>
+      <Page />
+    </RouterContextProvider>,
+  );
   return { doc: new DOMParser().parseFromString(html, "text/html"), route, router };
 }
 
@@ -39,73 +48,121 @@ describe("current legal documents", () => {
     }
     const head = await route.options.head?.({} as never);
     expect(head!.links).toContainEqual({ rel: "canonical", href: CANONICAL_ORIGIN + path });
-    expect(head!.meta).toContainEqual({ name: "robots", content: INDEXABLE ? "index,follow" : "noindex,nofollow" });
+    expect(head!.meta).toContainEqual({
+      name: "robots",
+      content: INDEXABLE ? "index,follow" : "noindex,nofollow",
+    });
     expect(JSON.stringify(head)).not.toMatch(/"@type":"(?:Offer|Product|Article)"/);
   });
 
   it("explains current data flows and treats the planned integrations conditionally", async () => {
     const { doc } = await legalDocument("/privacy-policy/");
-    expect(doc.getElementById("enquiries")?.textContent).toContain("Providing this information is voluntary");
-    expect(doc.getElementById("enquiries")?.textContent).toContain("All bookings require separate confirmation");
-    expect(doc.getElementById("enquiries")?.textContent).toContain("send the entered details directly through this website");
-    expect(doc.getElementById("enquiries")?.textContent).toContain("does not save those inquiry fields in browser storage");
+    expect(doc.getElementById("enquiries")?.textContent).toContain(
+      "Providing this information is voluntary",
+    );
+    expect(doc.getElementById("enquiries")?.textContent).toContain(
+      "All bookings require separate confirmation",
+    );
+    expect(doc.getElementById("enquiries")?.textContent).toContain(
+      "send the entered details directly through this website",
+    );
+    expect(doc.getElementById("enquiries")?.textContent).toContain(
+      "does not save those inquiry fields in browser storage",
+    );
     const recipients = doc.getElementById("recipients")?.textContent || "";
     expect(recipients).toContain("a transactional email service");
     expect(recipients).toContain("business mailbox hosted by Hostinger Email");
     expect(recipients).toContain("does not subscribe you to marketing communications");
     expect(doc.body.textContent).not.toMatch(/Brevo/i);
-    expect(doc.getElementById("responsibility")?.textContent).toContain("Contact and quote forms are active");
-    expect(doc.getElementById("enquiries")?.textContent).toContain("A success message appears only after the email service accepts the message");
+    expect(doc.getElementById("responsibility")?.textContent).toContain(
+      "Contact and quote forms are active",
+    );
+    expect(doc.getElementById("enquiries")?.textContent).toContain(
+      "A success message appears only after the email service accepts the message",
+    );
     expect(doc.getElementById("storage")?.textContent).toContain("up to 200 outbound-link clicks");
     expect(doc.getElementById("storage")?.textContent).toContain("does not upload the record");
-    expect(doc.getElementById("storage")?.textContent).toContain("continuing to browse, is not a substitute");
+    expect(doc.getElementById("storage")?.textContent).toContain(
+      "continuing to browse, is not a substitute",
+    );
     const planned = doc.getElementById("analytics-advertising")?.textContent || "";
     expect(planned).toContain("Cookie settings cover all optional services");
     expect(planned).toContain("only after you approve their category");
-    expect(planned).toContain("Google Analytics is active on the production website and runs only after you grant Analytics permission");
+    expect(planned).toContain(
+      "Google Analytics is active on the production website and runs only after you grant Analytics permission",
+    );
     expect(planned).toContain("Advertising is currently inactive");
     expect(planned).toContain("The website may include outbound booking links");
     expect(planned).toContain("when it loads");
     expect(planned).toContain("change or withdraw");
     expect(planned).toContain("fonts used for this website are served locally");
-    expect(doc.getElementById("payments")?.textContent).toContain("does not currently process online payments");
-    expect(doc.getElementById("payments")?.textContent).toContain("If online payment facilities are enabled later");
+    expect(doc.getElementById("payments")?.textContent).toContain(
+      "does not currently process online payments",
+    );
+    expect(doc.getElementById("payments")?.textContent).toContain(
+      "If online payment facilities are enabled later",
+    );
     expect(doc.getElementById("rights")?.textContent).toContain("request access or correction");
-    expect(doc.getElementById("children-photos-changes")?.textContent).toContain("separate permission");
+    expect(doc.getElementById("children-photos-changes")?.textContent).toContain(
+      "separate permission",
+    );
   });
 
   it("keeps shekel pricing, conditional future checkout and mandatory rights clear", async () => {
     const { doc } = await legalDocument("/terms-of-use/");
     const prices = doc.getElementById("prices-payments")?.textContent || "";
-    expect(prices).toContain("Prices and charges for services I provide are in Israeli shekels (ILS)");
-    expect(prices).toContain("Prices for services offered by external providers may be displayed in foreign currencies");
-    expect(prices).toContain("provider presenting a price is solely responsible for that price and its own payment terms");
+    expect(prices).toContain(
+      "Prices and charges for services I provide are in Israeli shekels (ILS)",
+    );
+    expect(prices).toContain(
+      "Prices for services offered by external providers may be displayed in foreign currencies",
+    );
+    expect(prices).toContain(
+      "provider presenting a price is solely responsible for that price and its own payment terms",
+    );
     expect(prices).toContain("The amount payable remains in Israeli shekels (ILS)");
-    expect(prices).toContain("Payments for confirmed bookings are currently arranged outside the website");
+    expect(prices).toContain(
+      "Payments for confirmed bookings are currently arranged outside the website",
+    );
     expect(prices).toContain("service charges will remain in ILS");
     const cancellation = doc.getElementById("cancellations")?.textContent || "";
     expect(cancellation).toContain("24 hours or more before the scheduled pickup");
     expect(cancellation).toContain("full refund of the deposit and other advance payments");
-    expect(cancellation).toContain("less than 24 hours before pickup, the deposit is not refundable and other advance payments are refundable");
+    expect(cancellation).toContain(
+      "less than 24 hours before pickup, the deposit is not refundable and other advance payments are refundable",
+    );
     expect(cancellation).toContain("Israel's local time zone");
     expect(cancellation).not.toContain("12 hours");
-    expect(doc.getElementById("commercial-features")?.textContent).toContain("Google Analytics is active on the production website subject to Analytics consent");
+    expect(doc.getElementById("commercial-features")?.textContent).toContain(
+      "Google Analytics is active on the production website subject to Analytics consent",
+    );
     expect(cancellation).toContain("mandatory statutory right takes priority");
     expect(cancellation).toContain("other cancellation method available to you by law");
-    expect(doc.getElementById("journey-arrangements")?.textContent).toContain("Licensed guiding, admission tickets, meals, parking, tolls and other extras are included only when specified in the accepted offer");
+    expect(doc.getElementById("journey-arrangements")?.textContent).toContain(
+      "Licensed guiding, admission tickets, meals, parking, tolls and other extras are included only when specified in the accepted offer",
+    );
     expect(doc.getElementById("content-and-conduct")?.textContent).toContain("separate permission");
-    expect(doc.getElementById("rights-and-availability")?.textContent).toContain("cannot lawfully be excluded or limited");
-    expect(doc.body.textContent).not.toMatch(/\$40|\$1\b|VAT excluded|exclusive jurisdiction of.*Tel Aviv/i);
+    expect(doc.getElementById("rights-and-availability")?.textContent).toContain(
+      "cannot lawfully be excluded or limited",
+    );
+    expect(doc.body.textContent).not.toMatch(
+      /\$40|\$1\b|VAT excluded|exclusive jurisdiction of.*Tel Aviv/i,
+    );
   });
 
   it("includes both documents in the shared homepage footer as local, same-tab links", async () => {
     const { router } = await legalDocument("/");
-    const html = renderToString(<RouterContextProvider router={router}><SiteFooter /></RouterContextProvider>);
+    const html = renderToString(
+      <RouterContextProvider router={router}>
+        <SiteFooter />
+      </RouterContextProvider>,
+    );
     const doc = new DOMParser().parseFromString(html, "text/html");
     const links = [...doc.querySelectorAll('footer nav[aria-label="Legal"] a')];
-    expect(links.map(link => [link.textContent, link.getAttribute("href")])).toEqual([
-      ["Privacy Policy", "/privacy-policy/"], ["Terms of Use", "/terms-of-use/"],
+    expect(links.map((link) => [link.textContent, link.getAttribute("href")])).toEqual([
+      ["Privacy Policy", "/privacy-policy/"],
+      ["Terms of Use", "/terms-of-use/"],
     ]);
-    expect(links.every(link => !link.hasAttribute("target"))).toBe(true);
+    expect(links.every((link) => !link.hasAttribute("target"))).toBe(true);
   });
 });

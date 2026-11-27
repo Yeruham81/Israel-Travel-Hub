@@ -7,13 +7,16 @@ import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 describe("Jerusalem churches editorial guide", () => {
   it("covers twenty distinct sites grouped across four church-visiting areas", () => {
     expect(jerusalemChurches).toHaveLength(20);
-    expect(churchAreas.map(a => a.id)).toEqual(["old", "olives", "zion", "karem"]);
-    expect(new Set(jerusalemChurches.map(c => c.id)).size).toBe(20);
-    expect(jerusalemChurches.filter(c => c.feature).length).toBeGreaterThanOrEqual(4);
+    expect(churchAreas.map((a) => a.id)).toEqual(["old", "olives", "zion", "karem"]);
+    expect(new Set(jerusalemChurches.map((c) => c.id)).size).toBe(20);
+    expect(jerusalemChurches.filter((c) => c.feature).length).toBeGreaterThanOrEqual(4);
     for (const church of jerusalemChurches) {
-      expect(church.photoAlt.length,church.id).toBeGreaterThan(16);
-      if(church.officialUrl)expect(church.officialUrl).toMatch(/^https:\/\//);
-      expect(churchAreas.some(a => a.id === church.area), church.id).toBe(true);
+      expect(church.photoAlt.length, church.id).toBeGreaterThan(16);
+      if (church.officialUrl) expect(church.officialUrl).toMatch(/^https:\/\//);
+      expect(
+        churchAreas.some((a) => a.id === church.area),
+        church.id,
+      ).toBe(true);
       expect(church.description.length, church.id).toBeGreaterThan(40);
       expect(church.tradition, church.id).toBeTruthy();
       expect(church.hours, church.id).toBeTruthy();
@@ -22,7 +25,7 @@ describe("Jerusalem churches editorial guide", () => {
     }
   });
   it("uses bounded coordinates and only real locally hosted site images", () => {
-    const photos = jerusalemChurches.filter(c => c.photo);
+    const photos = jerusalemChurches.filter((c) => c.photo);
     expect(photos).toHaveLength(20);
     const used = new Set<string>();
     for (const c of jerusalemChurches) {
@@ -39,14 +42,16 @@ describe("Jerusalem churches editorial guide", () => {
     }
   });
   it("qualifies access arrangements and separates non-church heritage sites", () => {
-    const cenacle = jerusalemChurches.find(c => c.id === "cenacle")!;
+    const cenacle = jerusalemChurches.find((c) => c.id === "cenacle")!;
     expect(cenacle.tradition).toContain("not an active church");
-    expect(jerusalemChurches.find(c => c.id === "pater-noster")?.hours).toContain("Temporary");
-    expect(jerusalemChurches.find(c => c.id === "st-james")?.tip).toContain("worship");
-    expect(jerusalemChurches.find(c => c.id === "mary-tomb")?.tip).toContain("staircase");
-    expect(jerusalemChurches.find(c => c.id === "dormition")?.hours).toContain("Sun 11:30–17:00");
-    expect(jerusalemChurches.find(c => c.id === "gallicantu")?.tip).toContain("accessible itinerary");
-    expect(jerusalemChurches.filter(c => c.officialUrl).length).toBeGreaterThanOrEqual(14);
+    expect(jerusalemChurches.find((c) => c.id === "pater-noster")?.hours).toContain("Temporary");
+    expect(jerusalemChurches.find((c) => c.id === "st-james")?.tip).toContain("worship");
+    expect(jerusalemChurches.find((c) => c.id === "mary-tomb")?.tip).toContain("staircase");
+    expect(jerusalemChurches.find((c) => c.id === "dormition")?.hours).toContain("Sun 11:30–17:00");
+    expect(jerusalemChurches.find((c) => c.id === "gallicantu")?.tip).toContain(
+      "accessible itinerary",
+    );
+    expect(jerusalemChurches.filter((c) => c.officialUrl).length).toBeGreaterThanOrEqual(14);
   });
   it("has map focus, accurate related-page photos and centrally registered affiliate links", () => {
     const component = readFileSync("src/components/JerusalemChurchesGuide.tsx", "utf8");
@@ -79,9 +84,13 @@ describe("Jerusalem churches editorial guide", () => {
       expect(affiliateConfig[key]?.trackingUrl).toContain("sub_id=churches_jerusalem_");
     }
     for (const path of [
-      "/attractions/old-city-jerusalem/", "/attractions/mount-of-olives/",
-      "/attractions/mount-zion/", "/travel-blog/jerusalem-to-bethlehem/",
-      "/travel-blog/jerusalem-travel-guide/", "/travel-blog/calendar-of-events/",
-    ]) expect(guideHeroPhotoForPath(path)?.src, path).toBeTruthy();
+      "/attractions/old-city-jerusalem/",
+      "/attractions/mount-of-olives/",
+      "/attractions/mount-zion/",
+      "/travel-blog/jerusalem-to-bethlehem/",
+      "/travel-blog/jerusalem-travel-guide/",
+      "/travel-blog/calendar-of-events/",
+    ])
+      expect(guideHeroPhotoForPath(path)?.src, path).toBeTruthy();
   });
 });

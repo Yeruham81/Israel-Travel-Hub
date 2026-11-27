@@ -19,7 +19,9 @@ describe("personal inquiry intro matches the approved TripAdvisor layout", () =>
     );
     const intro = view.container.querySelector('[data-testid="quote-form-intro"]')!;
     const photo = intro.querySelector("img")!;
-    const reviews = screen.getByRole("link", { name: /Read Reviews on TripAdvisor for Moshe Barak/ });
+    const reviews = screen.getByRole("link", {
+      name: /Read Reviews on TripAdvisor for Moshe Barak/,
+    });
     expect(photo.getAttribute("alt")).toBeTruthy();
     expect(reviews).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
     expect(reviews).toHaveAttribute("target", "_blank");
@@ -39,17 +41,21 @@ describe("attraction contact panels share the approved mobile TripAdvisor layout
     "src/components/TopTenIsraelGuide.tsx",
   ];
 
-  it.each(attractions)("%s enables the photo-and-reviews row on mobile", path => {
+  it.each(attractions)("%s enables the photo-and-reviews row on mobile", (path) => {
     const source = readFileSync(path, "utf8");
     expect(source).toMatch(/<HomeContactForm\b[^>]*\bshowTripadvisorBesidePortraitMobile\b/);
   });
 
   it("keeps the shared contact description below the photo and reviews, without forcing desktop nowrap", () => {
     const source = readFileSync("src/components/HomeContactForm.tsx", "utf8");
-    expect(source).toMatch(sourceFragment('showTripadvisorBesidePortraitMobile ? "flex-nowrap md:flex-wrap" : "flex-wrap"'));
+    expect(source).toMatch(
+      sourceFragment(
+        'showTripadvisorBesidePortraitMobile ? "flex-nowrap md:flex-wrap" : "flex-wrap"',
+      ),
+    );
     const rowAt = sourceIndex(source, 'data-testid="contact-reviews-row"');
     const reviewsAt = sourceIndex(source, 'data-testid="contact-tripadvisor-reviews"');
-    const textAt = sourceIndex(source, '{guide?.introduction');
+    const textAt = sourceIndex(source, "{guide?.introduction");
     expect(rowAt).toBeGreaterThanOrEqual(0);
     expect(reviewsAt).toBeGreaterThan(rowAt);
     expect(textAt).toBeGreaterThan(reviewsAt);
@@ -81,15 +87,18 @@ describe("all travel-guide contact layouts", () => {
     "HaifaHotelEditorialGuide",
   ] as const;
 
-  it.each(sharedGuideComponents)("%s places TripAdvisor reviews next to the portrait on mobile", component => {
-    const source = readFileSync(`src/components/${component}.tsx`, "utf8");
-    expect(source).toMatch(/<HomeContactForm\b[^>]*\bshowTripadvisorBesidePortraitMobile\b/);
-  });
+  it.each(sharedGuideComponents)(
+    "%s places TripAdvisor reviews next to the portrait on mobile",
+    (component) => {
+      const source = readFileSync(`src/components/${component}.tsx`, "utf8");
+      expect(source).toMatch(/<HomeContactForm\b[^>]*\bshowTripadvisorBesidePortraitMobile\b/);
+    },
+  );
 
   it("adds the missing contact form to the Haifa hotels editorial page", () => {
     const route = readFileSync("src/routes/travel-blog.best-hotels-in-haifa.tsx", "utf8");
     const page = readFileSync("src/components/HaifaHotelEditorialGuide.tsx", "utf8");
-    expect(route).toMatch(sourceFragment('<HaifaHotelEditorialGuide guide={g} />'));
+    expect(route).toMatch(sourceFragment("<HaifaHotelEditorialGuide guide={g} />"));
     expect(page).toMatch(sourceFragment('["contact", "Contact me"]'));
     expect(page).toMatch(sourceFragment("HomeContactForm showTripadvisorBesidePortraitMobile"));
     expect(page).toMatch(sourceFragment("Need a private transfer to Haifa?"));

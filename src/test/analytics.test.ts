@@ -7,18 +7,39 @@ const production = { origin: "https://www.israel-taxi.com", indexable: true };
 type Browser = Window & { dataLayer?: IArguments[]; gtag?: (...args: unknown[]) => void };
 function browser(origin = production.origin) {
   const location = new URL(origin);
-  if (!location.search) { location.search = "?email=visitor%40example.com"; location.hash = "contact"; }
+  if (!location.search) {
+    location.search = "?email=visitor%40example.com";
+    location.hash = "contact";
+  }
   return { location, document, localStorage } as unknown as Browser;
 }
-function commands(win: Browser) { return (win.dataLayer ?? []).map(value => Array.from(value)); }
-function views(win: Browser) { return commands(win).filter(value => value[0] === "event" && value[1] === "page_view"); }
+function commands(win: Browser) {
+  return (win.dataLayer ?? []).map((value) => Array.from(value));
+}
+function views(win: Browser) {
+  return commands(win).filter((value) => value[0] === "event" && value[1] === "page_view");
+}
 
-beforeEach(() => { localStorage.clear(); document.querySelectorAll("#ith-ga4").forEach(node => node.remove()); });
-afterEach(() => { vi.restoreAllMocks(); localStorage.clear(); document.querySelectorAll("#ith-ga4").forEach(node => node.remove()); });
+beforeEach(() => {
+  localStorage.clear();
+  document.querySelectorAll("#ith-ga4").forEach((node) => node.remove());
+});
+afterEach(() => {
+  vi.restoreAllMocks();
+  localStorage.clear();
+  document.querySelectorAll("#ith-ga4").forEach((node) => node.remove());
+});
 
 describe("single GA4 installation and page-view owner", () => {
   it("does not initialize GA4 for an advertising-only preference", () => {
-    localStorage.setItem(ANALYTICS_CONSENT_KEY, JSON.stringify({ version: 2, categories: { ...NECESSARY_ONLY, advertising: true }, expiresAt: Date.now() + 3600000 }));
+    localStorage.setItem(
+      ANALYTICS_CONSENT_KEY,
+      JSON.stringify({
+        version: 2,
+        categories: { ...NECESSARY_ONLY, advertising: true },
+        expiresAt: Date.now() + 3600000,
+      }),
+    );
     const win = browser();
     createAnalytics(win, production).page("/", "Home");
     expect(win.dataLayer).toBeUndefined();
@@ -30,7 +51,7 @@ describe("single GA4 installation and page-view owner", () => {
     analytics.setChoice("granted");
     analytics.page("/", "Home");
     analytics.setChoice("denied");
-    const consent = commands(win).filter(command => command[0] === "consent");
+    const consent = commands(win).filter((command) => command[0] === "consent");
     expect(consent.length).toBeGreaterThan(1);
     for (const command of consent) expect(command[2]).toMatchObject(GOOGLE_AD_CONSENT_DENIED);
   });
@@ -62,7 +83,10 @@ describe("single GA4 installation and page-view owner", () => {
     analytics.setChoice("granted");
     analytics.setChoice("granted");
     expect(views(win)).toHaveLength(1);
-    expect(views(win)[0]![2]).toMatchObject({ page_location: production.origin + "/about-me/", send_to: GA4_MEASUREMENT_ID });
+    expect(views(win)[0]![2]).toMatchObject({
+      page_location: production.origin + "/about-me/",
+      send_to: GA4_MEASUREMENT_ID,
+    });
   });
 
   it("initializes once, disables automatic load views and counts navigation/back exactly once", () => {
@@ -75,15 +99,24 @@ describe("single GA4 installation and page-view owner", () => {
     analytics.page("/travel-blog/", "Guides rerender");
     analytics.page("/", "Home after back");
     expect(views(win)).toHaveLength(3);
-    const configs = commands(win).filter(value => value[0] === "config");
+    const configs = commands(win).filter((value) => value[0] === "config");
     expect(configs).toHaveLength(1);
-    expect(configs[0]).toEqual(["config", GA4_MEASUREMENT_ID, expect.objectContaining({ send_page_view: false })]);
+    expect(configs[0]).toEqual([
+      "config",
+      GA4_MEASUREMENT_ID,
+      expect.objectContaining({ send_page_view: false }),
+    ]);
     expect(document.querySelectorAll("#ith-ga4")).toHaveLength(1);
-    expect(document.getElementById("ith-ga4")).toHaveAttribute("src", `https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`);
+    expect(document.getElementById("ith-ga4")).toHaveAttribute(
+      "src",
+      `https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`,
+    );
   });
 
   it("excludes query data, anchors and external referrer paths from custom measurement", () => {
-    vi.spyOn(document, "referrer", "get").mockReturnValue("https://www.google.com/search?q=visitor@example.com");
+    vi.spyOn(document, "referrer", "get").mockReturnValue(
+      "https://www.google.com/search?q=visitor@example.com",
+    );
     const win = browser();
     const analytics = createAnalytics(win, production);
     analytics.setChoice("granted");
@@ -91,7 +124,10 @@ describe("single GA4 installation and page-view owner", () => {
     analytics.page("/car-rental/?topic=changed#other", "Car rental");
     analytics.page("https://another.example.com/path/", "External");
     expect(views(win)).toHaveLength(1);
-    expect(views(win)[0]![2]).toMatchObject({ page_location: production.origin + "/car-rental/", page_referrer: "https://www.google.com" });
+    expect(views(win)[0]![2]).toMatchObject({
+      page_location: production.origin + "/car-rental/",
+      page_referrer: "https://www.google.com",
+    });
     expect(JSON.stringify(commands(win))).not.toContain("visitor@");
     expect(JSON.stringify(commands(win))).not.toContain("#contact");
   });
@@ -103,19 +139,29 @@ describe("single GA4 installation and page-view owner", () => {
     analytics.setChoice("denied");
     expect(document.getElementById("ith-ga4")).toBeNull();
     expect(createAnalytics(browser(), production).getChoice()).toBe("denied");
-    localStorage.setItem(ANALYTICS_CONSENT_KEY, JSON.stringify({ choice: "granted", expiresAt: Date.now() - 1 }));
+    localStorage.setItem(
+      ANALYTICS_CONSENT_KEY,
+      JSON.stringify({ choice: "granted", expiresAt: Date.now() - 1 }),
+    );
     expect(createAnalytics(browser(), production).getChoice()).toBe("unknown");
     analytics.setChoice("granted");
     expect(views(win)).toHaveLength(1);
   });
 
   it("preserves named campaign attribution while excluding arbitrary query fields", () => {
-    const win = browser(production.origin + "/?utm_source=newsletter&utm_medium=email&utm_campaign=Autumn&email=visitor@example.com");
+    const win = browser(
+      production.origin +
+        "/?utm_source=newsletter&utm_medium=email&utm_campaign=Autumn&email=visitor@example.com",
+    );
     const analytics = createAnalytics(win, production);
     analytics.page("/", "Home");
     analytics.setChoice("granted");
-    const config = commands(win).find(value => value[0] === "config")!;
-    expect(config[2]).toMatchObject({ campaign_source: "newsletter", campaign_medium: "email", campaign_name: "Autumn" });
+    const config = commands(win).find((value) => value[0] === "config")!;
+    expect(config[2]).toMatchObject({
+      campaign_source: "newsletter",
+      campaign_medium: "email",
+      campaign_name: "Autumn",
+    });
     expect(JSON.stringify(commands(win))).not.toContain("visitor@");
   });
 
@@ -130,10 +176,12 @@ describe("single GA4 installation and page-view owner", () => {
     analytics.lead("contact", "new-reference");
     win.gtag?.("event", "outbound_click", { provider: "test" });
     expect(commands(win)).toHaveLength(count);
-    expect((win as unknown as Record<string, unknown>)[`ga-disable-${GA4_MEASUREMENT_ID}`]).toBe(true);
+    expect((win as unknown as Record<string, unknown>)[`ga-disable-${GA4_MEASUREMENT_ID}`]).toBe(
+      true,
+    );
     analytics.setChoice("granted");
     expect(views(win)).toHaveLength(2);
-    expect(commands(win).filter(value => value[0] === "config")).toHaveLength(1);
+    expect(commands(win).filter((value) => value[0] === "config")).toHaveLength(1);
   });
 
   it("deduplicates accepted enquiries without sending the reference or enquiry fields", () => {
@@ -144,8 +192,12 @@ describe("single GA4 installation and page-view owner", () => {
     analytics.setChoice("granted");
     analytics.lead("contact", "private-reference");
     analytics.lead("contact", "private-reference");
-    const leads = commands(win).filter(value => value[0] === "event" && value[1] === "generate_lead");
-    expect(leads).toEqual([["event", "generate_lead", { send_to: GA4_MEASUREMENT_ID, form_type: "contact" }]]);
+    const leads = commands(win).filter(
+      (value) => value[0] === "event" && value[1] === "generate_lead",
+    );
+    expect(leads).toEqual([
+      ["event", "generate_lead", { send_to: GA4_MEASUREMENT_ID, form_type: "contact" }],
+    ]);
     expect(JSON.stringify(commands(win))).not.toContain("private-reference");
   });
 
@@ -153,7 +205,9 @@ describe("single GA4 installation and page-view owner", () => {
     const win = browser();
     const analytics = createAnalytics(win, production);
     analytics.setChoice("granted");
-    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => { throw new Error("Storage full"); });
+    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+      throw new Error("Storage full");
+    });
     analytics.setChoice("denied");
     expect(analytics.getChoice()).toBe("denied");
     expect(createAnalytics(browser(), production).getChoice()).toBe("unknown");

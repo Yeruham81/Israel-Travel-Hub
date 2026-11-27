@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { carRentalAffiliateUrl, carRentalSubId, DISCOVERCARS_ISRAEL_AFFILIATE_URL, isCarRentalRoute } from "@/lib/car-rental-affiliate";
+import {
+  carRentalAffiliateUrl,
+  carRentalSubId,
+  DISCOVERCARS_ISRAEL_AFFILIATE_URL,
+  isCarRentalRoute,
+} from "@/lib/car-rental-affiliate";
 
 describe("DiscoverCars Israel affiliate tracking", () => {
   it("uses the verified Travelpayouts short link, not an untracked provider URL", () => {

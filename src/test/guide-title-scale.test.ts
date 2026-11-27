@@ -29,8 +29,12 @@ describe("guide page title typography", () => {
     const css = source("src/styles.css");
     expect(css).toMatch(/\.guide-page-title\s*\{[^}]*font-size:\s*2rem;/s);
     expect(css).toMatch(/\.guide-page-title\s*\{[^}]*text-wrap:\s*balance;/s);
-    expect(css).toMatch(/@media \(min-width:\s*640px\)\s*\{\s*\.guide-page-title\s*\{\s*font-size:\s*2\.25rem;/);
-    expect(css).toMatch(/@media \(min-width:\s*768px\)\s*\{\s*\.guide-page-title\s*\{\s*font-size:\s*2\.625rem;/);
+    expect(css).toMatch(
+      /@media \(min-width:\s*640px\)\s*\{\s*\.guide-page-title\s*\{\s*font-size:\s*2\.25rem;/,
+    );
+    expect(css).toMatch(
+      /@media \(min-width:\s*768px\)\s*\{\s*\.guide-page-title\s*\{\s*font-size:\s*2\.625rem;/,
+    );
     expect(source("src/components/HomeHero.tsx")).not.toContain("guide-page-title");
   });
 

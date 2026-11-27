@@ -14,17 +14,21 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Archaeological park")?.value).toBe("08:00–17:30");
-    expect(content.facts.find(f => f.label === "Duc In Altum")?.value).toBe("08:00–18:00");
-    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("₪20 (ages 13+)");
-    expect(content.facts.find(f => f.label === "Admission")?.note).toBe("₪17 per visitor in groups of 10+");
+    expect(content.facts.find((f) => f.label === "Archaeological park")?.value).toBe("08:00–17:30");
+    expect(content.facts.find((f) => f.label === "Duc In Altum")?.value).toBe("08:00–18:00");
+    expect(content.facts.find((f) => f.label === "Admission")?.value).toBe("₪20 (ages 13+)");
+    expect(content.facts.find((f) => f.label === "Admission")?.note).toBe(
+      "₪17 per visitor in groups of 10+",
+    );
     expect(content.visitorTitle).toBe("Opening hours, tickets and visitor information");
     expect(content.visitorNavLabel).toBe("Hours & tickets");
     expect(travelGuides.magdala.updatedAt).toBe(site.updatedAt);
     expect(travelGuides.magdala.title).toBe(content.title);
     expect(travelGuides.magdala.description).toBe(site.description);
     expect(JSON.stringify(travelGuideMeta("magdala").scripts)).toContain("2026-11-17");
-    expect(attractionHubCards.filter(item => String(item.to) === String(content.path))).toHaveLength(1);
+    expect(
+      attractionHubCards.filter((item) => String(item.to) === String(content.path)),
+    ).toHaveLength(1);
   });
 
   it("uses distinct local Magdala photographs for the hero and illustrated attractions", () => {
@@ -43,7 +47,7 @@ describe("Magdala individual attraction guide upgrade", () => {
       expect(article.split(src).length - 1, src).toBe(1);
     }
     expect(content.sources).toHaveLength(6);
-    expect(content.sources.every(s => s.url.startsWith("https://"))).toBe(true);
+    expect(content.sources.every((s) => s.url.startsWith("https://"))).toBe(true);
   });
 
   it("provides confirmed admission prices, a Google Maps pin and current official contacts", () => {
@@ -54,8 +58,12 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(article).toMatch(sourceFragment('data-testid="magdala-hours-tickets"'));
     expect(article).toMatch(sourceFragment('data-testid="magdala-location-map"'));
     expect(article).toMatch(sourceFragment('data-testid="magdala-visitor-essentials"'));
-    expect(article).toMatch(sourceFragment("maps.google.com/maps?q=Magdala%20Archaeological%20Park"));
-    expect(article).toMatch(sourceFragment("www.google.com/maps/search/?api=1&query=Magdala%20Archaeological%20Park"));
+    expect(article).toMatch(
+      sourceFragment("maps.google.com/maps?q=Magdala%20Archaeological%20Park"),
+    );
+    expect(article).toMatch(
+      sourceFragment("www.google.com/maps/search/?api=1&query=Magdala%20Archaeological%20Park"),
+    );
     expect(article).not.toContain("openstreetmap.org");
     expect(article).not.toMatch(sourceFragment("saddr="));
     expect(article).not.toMatch(sourceFragment("daddr="));
@@ -72,7 +80,11 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(site.visit.groupAdmissionPrice).toBe("₪17");
     expect(site.visit.groupMinimumSize).toBe(10);
     expect(article).toMatch(sourceFragment("Visitors over age 12"));
-    expect(article).toMatch(sourceFragment("Contact the visitor center for group rates, additional ticket prices and guided tours."));
+    expect(article).toMatch(
+      sourceFragment(
+        "Contact the visitor center for group rates, additional ticket prices and guided tours.",
+      ),
+    );
     expect(site.visit.visitorEmail).toBe("visit@magdala.org");
     expect(article).toContain("visit.visitorEmail");
     expect(site.visit.prayerEmail).toBe("ducinaltum@magdala.org");
@@ -81,7 +93,9 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(site.visit.prayerPhoneHref).toBe("+972533261622");
     expect(shell).toMatch(sourceFragment('["contact", "Contact me"]'));
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
-    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(sourceIndex(shell, "<HomeContactForm"));
+    expect(sourceIndex(shell, "<SourcesDisclosure>")).toBeGreaterThan(
+      sourceIndex(shell, "<HomeContactForm"),
+    );
   });
 
   it("plans a manageable Galilee day, with relevant places and six follow-up guides", () => {
@@ -98,8 +112,10 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(article).toMatch(sourceFragment("floor incorporates first-century paving stones"));
     expect(article).toMatch(sourceFragment("ancient marketplace near the harbour"));
     expect(site.sources.stoneCatalogue).toContain("metmuseum.org");
-    expect(content.sources.some(source => source.label.includes("Magdala Stone catalogue"))).toBe(true);
-    expect(content.nearby?.map(item => item.to)).toEqual([
+    expect(content.sources.some((source) => source.label.includes("Magdala Stone catalogue"))).toBe(
+      true,
+    );
+    expect(content.nearby?.map((item) => item.to)).toEqual([
       "/attractions/tabgha/",
       "/attractions/capernaum/",
       "/attractions/mount-of-beatitudes/",

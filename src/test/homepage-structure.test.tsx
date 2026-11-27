@@ -4,39 +4,60 @@ import { afterEach, vi } from "vitest";
 import { HomeTestimonials } from "@/components/HomeTestimonials";
 import { serviceDomains, allNavGroups } from "@/data/nav";
 import { accommodationDestinationCards } from "@/routes/index";
-import { customerTestimonials, tripadvisorReviews, tripadvisorProfileUrl, tripadvisorSnapshot } from "@/data/homeReviews";
+import {
+  customerTestimonials,
+  tripadvisorReviews,
+  tripadvisorProfileUrl,
+  tripadvisorSnapshot,
+} from "@/data/homeReviews";
 
-afterEach(() => { cleanup(); vi.useRealTimers(); });
+afterEach(() => {
+  cleanup();
+  vi.useRealTimers();
+});
 
 describe("homepage navigation and review sources", () => {
   it("sends all five homepage accommodation cards to their accommodation city pages", () => {
-    expect(accommodationDestinationCards.map(card => card.to)).toEqual([
+    expect(accommodationDestinationCards.map((card) => card.to)).toEqual([
       "/accommodation/jerusalem/",
       "/accommodation/tel-aviv/",
       "/accommodation/tiberias/",
       "/accommodation/dead-sea/",
       "/accommodation/haifa/",
     ]);
-    expect(accommodationDestinationCards.every(card => !String(card.to).startsWith("/travel-blog/"))).toBe(true);
+    expect(
+      accommodationDestinationCards.every((card) => !String(card.to).startsWith("/travel-blog/")),
+    ).toBe(true);
   });
   it("keeps six ordered primary entries and rental only in the sidebar", () => {
-    expect(serviceDomains.map(x => x.label)).toEqual(["Airport transfers", "Tours & day trips", "Shore excursions", "Accommodation", "Attractions", "Travel guides"]);
-    expect(serviceDomains.map(x => x.to)).not.toContain("/car-rental/");
-    expect(serviceDomains.map(x => x.to)).not.toContain("/tickets/");
-    const sidebar = allNavGroups.flatMap(group => group.items.filter(item => "to" in item));
-    expect(sidebar.some(x => "to" in x && x.to === "/car-rental/")).toBe(true);
-    expect(sidebar.flatMap(x => "to" in x ? [x.to] : [])).not.toContain("/tickets/");
+    expect(serviceDomains.map((x) => x.label)).toEqual([
+      "Airport transfers",
+      "Tours & day trips",
+      "Shore excursions",
+      "Accommodation",
+      "Attractions",
+      "Travel guides",
+    ]);
+    expect(serviceDomains.map((x) => x.to)).not.toContain("/car-rental/");
+    expect(serviceDomains.map((x) => x.to)).not.toContain("/tickets/");
+    const sidebar = allNavGroups.flatMap((group) => group.items.filter((item) => "to" in item));
+    expect(sidebar.some((x) => "to" in x && x.to === "/car-rental/")).toBe(true);
+    expect(sidebar.flatMap((x) => ("to" in x ? [x.to] : []))).not.toContain("/tickets/");
   });
   it("keeps credited review excerpts concise, balanced and linked to Tripadvisor", () => {
     expect(tripadvisorReviews).toHaveLength(6);
-    const excerptLengths = tripadvisorReviews.filter((review) => "excerpt" in review).map(review => review.excerpt.split(/\s+/).length);
+    const excerptLengths = tripadvisorReviews
+      .filter((review) => "excerpt" in review)
+      .map((review) => review.excerpt.split(/\s+/).length);
     expect(Math.max(...excerptLengths) - Math.min(...excerptLengths)).toBeLessThanOrEqual(6);
-    expect(excerptLengths.every(length => length >= 27 && length <= 33)).toBe(true);
-    expect(tripadvisorReviews.filter(review => "summary" in review)).toHaveLength(0);
-    expect(new Set(tripadvisorReviews.map(review => review.author)).size).toBe(6);
+    expect(excerptLengths.every((length) => length >= 27 && length <= 33)).toBe(true);
+    expect(tripadvisorReviews.filter((review) => "summary" in review)).toHaveLength(0);
+    expect(new Set(tripadvisorReviews.map((review) => review.author)).size).toBe(6);
     expect(customerTestimonials).toHaveLength(4);
-    expect(customerTestimonials.every(review => review.photo.includes("/assets/testimonials/"))).toBe(true);
-    expect(new Set(customerTestimonials.map(review => review.photo)).size).toBe(4);
+    expect(
+      customerTestimonials.every((review) => review.photo.includes("/assets/testimonials/")),
+    ).toBe(true);
+    expect(new Set(customerTestimonials.map((review) => review.photo)).size).toBe(4);
     expect(tripadvisorSnapshot).toMatchObject({ rating: 5, reviewCount: 11 });
     expect(tripadvisorProfileUrl).toMatch(/^https:\/\/www\.tripadvisor\.com\//);
   });
@@ -50,11 +71,17 @@ describe("homepage navigation and review sources", () => {
     expect(cards).toHaveTextContent("Janet");
     expect(screen.getByRole("heading", { name: "What Travelers Say" })).toBeInTheDocument();
 
-    const reviewSection = screen.getByRole("heading", { name: "What Travelers Say" }).closest("section")!;
+    const reviewSection = screen
+      .getByRole("heading", { name: "What Travelers Say" })
+      .closest("section")!;
     expect(reviewSection.querySelector(".bg-navy")).toBeNull();
     const controls = screen.getByRole("group", { name: "Choose a TripAdvisor review" });
     expect(within(controls).getAllByRole("button")).toHaveLength(tripadvisorReviews.length);
-    expect(screen.queryByRole("button", { name: /Previous Tripadvisor reviews|Next Tripadvisor reviews|Pause Tripadvisor reviews|Play Tripadvisor reviews/ })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", {
+        name: /Previous Tripadvisor reviews|Next Tripadvisor reviews|Pause Tripadvisor reviews|Play Tripadvisor reviews/,
+      }),
+    ).not.toBeInTheDocument();
 
     act(() => vi.advanceTimersByTime(6000));
     expect(cards).toHaveTextContent("Yaniv B");
@@ -69,11 +96,14 @@ describe("homepage navigation and review sources", () => {
     expect(dot).toHaveAttribute("aria-pressed", "true");
   });
 
-
   it("shows compact, dot-only personal testimonials with the correct photograph for each client", () => {
     render(<HomeTestimonials />);
-    const personal = screen.getByRole("heading", { name: "Personal Messages from Past Clients" }).closest("section")!;
-    const tripadvisor = screen.getByRole("heading", { name: "What Travelers Say" }).closest("section")!;
+    const personal = screen
+      .getByRole("heading", { name: "Personal Messages from Past Clients" })
+      .closest("section")!;
+    const tripadvisor = screen
+      .getByRole("heading", { name: "What Travelers Say" })
+      .closest("section")!;
     expect(personal).toHaveClass("mt-8", "sm:mt-10");
     expect(personal.firstElementChild).toHaveClass("rounded-2xl", "bg-card", "shadow-sm");
     expect(tripadvisor.firstElementChild).toHaveClass("rounded-2xl", "bg-card", "shadow-sm");
@@ -85,21 +115,34 @@ describe("homepage navigation and review sources", () => {
     const dots = within(controls).getAllByRole("button");
     expect(dots).toHaveLength(customerTestimonials.length);
     for (const client of customerTestimonials) {
-      const dot = within(controls).getByRole("button", { name: "Show testimonial from " + client.author });
+      const dot = within(controls).getByRole("button", {
+        name: "Show testimonial from " + client.author,
+      });
       fireEvent.click(dot);
       expect(dot).toHaveAttribute("aria-pressed", "true");
       const carousel = screen.getByTestId("original-testimonial-carousel");
       expect(carousel).toHaveClass("gap-4", "p-4", "bg-background");
       const photo = carousel.querySelector("img");
       expect(photo).toHaveAttribute("src", client.photo);
-      expect(photo).toHaveAttribute("alt", "Photo featured alongside the testimonial from " + client.author);
+      expect(photo).toHaveAttribute(
+        "alt",
+        "Photo featured alongside the testimonial from " + client.author,
+      );
       expect(photo).toHaveClass("max-w-[160px]");
-      expect(carousel.querySelector("blockquote")).toHaveClass("text-[0.9375rem]", "leading-relaxed");
+      expect(carousel.querySelector("blockquote")).toHaveClass(
+        "text-[0.9375rem]",
+        "leading-relaxed",
+      );
       expect(carousel).toHaveTextContent(client.author);
       expect(carousel).toHaveTextContent(client.quote);
     }
-    fireEvent.click(within(controls).getByRole("button", { name: "Show testimonial from " + customerTestimonials[0]!.author }));
-    expect(screen.getByTestId("original-testimonial-carousel").querySelector("img")).toHaveAttribute("src", customerTestimonials[0]!.photo);
+    fireEvent.click(
+      within(controls).getByRole("button", {
+        name: "Show testimonial from " + customerTestimonials[0]!.author,
+      }),
+    );
+    expect(
+      screen.getByTestId("original-testimonial-carousel").querySelector("img"),
+    ).toHaveAttribute("src", customerTestimonials[0]!.photo);
   });
-
 });
