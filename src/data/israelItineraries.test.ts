@@ -1030,11 +1030,11 @@ describe("migrated Israel itineraries", () => {
     );
     expect(view).toMatch(sourceFragment("Tips for transport and hotel planning"));
     expect(view).toMatch(sourceFragment("Adjust this itinerary to your trip"));
-    expect(view).toMatch(sourceFragment("Photo credits &amp; licences"));
+    expect(view).toContain("<PhotoCreditsDisclosure");
     expect(view).toContain("hasPublicPhotoCredit");
     expect(view).toMatch(sourceFragment("list-disc space-y-4"));
     expect(sourceIndex(view, "<SourcesDisclosure>")).toBeLessThan(
-      sourceIndex(view, "Photo credits &amp; licences"),
+      sourceIndex(view, "<PhotoCreditsDisclosure"),
     );
   });
 

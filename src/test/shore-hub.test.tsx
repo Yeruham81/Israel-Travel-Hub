@@ -127,7 +127,7 @@ describe("Israel shore excursion hub", () => {
       ]),
     );
     expect(screen.queryByText(/Pickup arrangements differ:/)).not.toBeInTheDocument();
-    const credits = screen.getByText("Photo credits").closest("details");
+    const credits = screen.getByText("Photo credits & licences").closest("details");
     expect(credits).not.toBeNull();
     expect(credits?.hasAttribute("open")).toBe(false);
     expect(credits?.querySelectorAll('a[href*="creativecommons.org"]').length).toBeGreaterThan(0);
