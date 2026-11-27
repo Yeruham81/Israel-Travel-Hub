@@ -49,12 +49,12 @@ export function HomeContactForm({ context = "homepage", guide, showPortrait = tr
           <fieldset disabled={submission.isSending} className="min-w-0 space-y-5">
           {error && <p role="alert" className="rounded-lg border border-destructive p-3 text-sm text-destructive">{error}</p>}
           <div className="grid gap-5 sm:grid-cols-2">
-            <label className="text-sm font-medium">Your name *<Input name="name" autoComplete="name" required maxLength={120} value={name} onChange={e => update(setName, e.target.value)} className="mt-2 h-11 bg-background" /></label>
+            <label className="text-sm font-medium">Full name *<Input name="name" autoComplete="name" required maxLength={120} value={name} onChange={e => update(setName, e.target.value)} className="mt-2 h-11 bg-background" /></label>
             <label className="text-sm font-medium">Email address *<Input name="email" type="email" autoComplete="email" required maxLength={254} value={email} onChange={e => update(setEmail, e.target.value)} className="mt-2 h-11 bg-background" /></label>
           </div>
-          <label className="block text-sm font-medium">Subject *<Input name="subject" required maxLength={160} value={subject} onChange={e => update(setSubject, e.target.value)} placeholder="What would you like to ask?" className="mt-2 h-11 bg-background" /></label>
+          <label className="block text-sm font-medium">Subject *<Input name="subject" required maxLength={160} value={subject} onChange={e => update(setSubject, e.target.value)} placeholder="Message subject" className="mt-2 h-11 bg-background" /></label>
           <label className="block text-sm font-medium">Your message *<Textarea name="message" required maxLength={4000} rows={5} value={message} onChange={e => update(setMessage, e.target.value)} placeholder={guide?.placeholder ?? (context === "taxis" ? "Your route, travel date, passengers, luggage or question…" : "Travel date, pickup point, destinations, passengers and luggage…")} className="mt-2 bg-background" /></label>
-          <label className="flex items-start gap-3 text-sm leading-relaxed"><input type="checkbox" name="consent" checked={consent} onChange={e => { setConsent(e.target.checked); submission.reset(); }} required className="mt-1 size-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak to respond to my enquiry. <PrivacyInformationLink />.</span></label>
+          <label className="flex items-start gap-3 text-sm leading-relaxed"><input type="checkbox" name="consent" checked={consent} onChange={e => { setConsent(e.target.checked); submission.reset(); }} required className="mt-1 size-4 shrink-0 accent-primary" /><span>I agree to share my details with Moshe Barak for the purpose of responding to my inquiry. <PrivacyInformationLink />.</span></label>
           <QuoteSubmissionControls submission={submission} label="Send message" message />
           <p className="text-xs text-muted-foreground">All bookings require confirmation.</p>
           </fieldset>

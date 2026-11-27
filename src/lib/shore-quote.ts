@@ -23,7 +23,7 @@ export function validateShoreQuote(v: ShoreQuoteFields, portId: ShorePortId, now
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()) || v.email.length > 254) errors.push("Enter a valid email address.");
   if (!v.ship.trim() || v.ship.length > 120) errors.push("Enter your cruise ship's name.");
   if (!validDate(v.date)) errors.push("Choose a valid excursion date.");
-  else if (v.date < today.date) errors.push("Choose an excursion date that is not in the past in Israel.");
+  else if (v.date < today.date) errors.push("Choose today or a future excursion date.");
   if (!validTime(v.pickupTime)) errors.push("Enter the expected disembarkation time in Israel local time.");
   else if (v.date === today.date && v.pickupTime < `${String(Math.floor(today.minutes / 60)).padStart(2, "0")}:${String(today.minutes % 60).padStart(2, "0")}`) errors.push("That disembarkation time has already passed today in Israel.");
   if (!validDate(v.allAboardDate)) errors.push("Choose a valid all-aboard date.");
@@ -32,7 +32,7 @@ export function validateShoreQuote(v: ShoreQuoteFields, portId: ShorePortId, now
   if (!shoreExcursionRates.some((rate) => rate.id === v.itineraryId && rate.portId === portId) && v.itineraryId !== "other") errors.push("Choose an itinerary from this port.");
   if (v.itineraryId === "other" && !v.otherItinerary.trim()) errors.push("Describe your requested itinerary or destination.");
   const passengers = Number(v.passengers);
-  if (!v.passengers.trim() || !Number.isInteger(passengers) || passengers < 1 || passengers > 99) errors.push("Enter passengers between 1 and 99, including children.");
+  if (!v.passengers.trim() || !Number.isInteger(passengers) || passengers < 1 || passengers > 99) errors.push("Enter the total number of passengers, including children (1–99).");
   if (v.notes.length > 1500 || v.otherItinerary.length > 250 || v.phone.length > 50 || v.country.length > 100) errors.push("Shorten the additional details to the limits shown in the form.");
   if (!v.consent) errors.push("Confirm that you agree to share your details with Moshe for this request.");
   return errors;

@@ -1075,14 +1075,14 @@
       "group": 13,
       "status": "edited",
       "changes": 4,
-      "notes": "Approved 4 share copy changes. User explicitly retained Contact me — jump to the inquiry form and Share; no changes to contact button or native share label. Verification pending."
+      "notes": "Approved 4 share copy changes. User explicitly retained Contact me — jump to the inquiry form and Share; no changes to contact button or native share label. Verification pending. Editorial corpus including dedicated sharing tests 46016387134 passed."
     },
     {
       "name": "Forms, validation, success and error states",
       "group": 13,
-      "status": "pending",
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "changes": 23,
+      "notes": "All 23 approved group 13D edits applied, including user's preferred reply-soon acknowledgement. Shared sending text and passenger validations updated in both relevant contexts; form rules, schema, submission behavior unchanged. Verification pending."
     },
     {
       "name": "Expandable and dynamically loaded content, filters, calendars and widgets",
