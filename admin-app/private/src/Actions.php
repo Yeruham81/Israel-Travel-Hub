@@ -95,7 +95,7 @@ function handle_action(array $user): never {
     }
     if ($action === 'create_user') {
         require_permission($user, 'users');
-        create_user($actor, text_input('username', 64), text_input('password', 200), text_input('role', 20));
+        create_user($actor, text_input('username', 64), password_input('password'), text_input('role', 20));
         notice('New user created.');
         redirect('users');
     }
@@ -107,7 +107,7 @@ function handle_action(array $user): never {
     }
     if ($action === 'reset_password') {
         require_permission($user, 'users');
-        change_user_password($actor, $id, text_input('password', 200));
+        change_user_password($actor, $id, password_input('password'));
         notice('Password changed. Previous sessions are invalidated.');
         redirect('users');
     }
