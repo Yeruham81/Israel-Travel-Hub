@@ -690,29 +690,14 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
       icon: "region",
     },
   ],
-  photoCredits: (
-    <p>
-      Jewish cemetery photograph:{" "}
-      <a
-        href="https://commons.wikimedia.org/wiki/File:Jerusalem_Mount_of_Olives_BW_2010-09-20_07-57-31.JPG"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        Berthold Werner / Wikimedia Commons
-      </a>{" "}
-      ·{" "}
-      <a
-        href="https://creativecommons.org/licenses/by-sa/3.0/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        CC BY-SA 3.0
-      </a>{" "}
-      · resized and compressed to WebP.
-    </p>
-  ),
+  photoCredits: [
+    {
+      label: "Jewish cemetery photograph",
+      credit: "Berthold Werner / Wikimedia Commons · CC BY-SA 3.0; resized and compressed to WebP",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_Mount_of_Olives_BW_2010-09-20_07-57-31.JPG",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    },
+  ],
   sources: [
     {
       label: "Christian Information Center - Holy Land church hours and fees",

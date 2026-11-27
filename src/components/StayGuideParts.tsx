@@ -161,5 +161,5 @@ export function StayBrowseLink({
 export function StayPhotoCredits({ photos }: { photos: StayGuidePhoto[] }) {
   const unique = [...new Map(photos.filter((photo) => Boolean(photo.sourceUrl?.trim()) && !isPublisherUrl(photo.sourceUrl))
     .map((photo) => [photo.sourceUrl, photo])).values()];
-  return <PhotoCreditsDisclosure entries={unique.map((photo) => ({ label: photo.label, credit: photo.credit, sourceUrl: photo.sourceUrl }))} />;
+  return <PhotoCreditsDisclosure entries={unique.map((photo) => ({ label: photo.label, sourceUrl: photo.sourceUrl }))} />;
 }

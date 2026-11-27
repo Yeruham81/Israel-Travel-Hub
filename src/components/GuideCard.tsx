@@ -73,16 +73,8 @@ export function GuidePhotoCredit({
       )}
     </p>
   );
-  // Keep attribution and licence links accessible, without showing technical metadata below photos.
-  if (insideDisclosure) return attribution;
-  return (
-    <details className="mt-2 text-xs text-muted-foreground">
-      <summary className="w-fit cursor-pointer rounded px-1 py-1 text-xs font-medium underline-offset-2 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-primary">
-        Photo credits &amp; licence
-      </summary>
-      <div className="pb-2 pl-1">{attribution}</div>
-    </details>
-  );
+  // Attribution fragments must only be used inside the page-level disclosure.
+  return insideDisclosure ? attribution : null;
 }
 
 export function GuideCard({
