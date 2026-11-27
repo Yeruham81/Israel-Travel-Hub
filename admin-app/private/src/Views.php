@@ -153,33 +153,37 @@ function render_consents(): void {
 }
 function render_redirects(): void {
     $rows=query_all('SELECT * FROM admin_redirects ORDER BY updated_at DESC LIMIT 200');
+    $choice = $_GET['edit'] ?? '';
+    $editing = is_string($choice) ? query_one('SELECT * FROM admin_redirects WHERE source_path = ?', [$choice]) : null;
     ?><div class="notice-strip"><strong>301 rule registry</strong><span> Rules can be saved and approved here. They do not change Apache redirects until the reviewed export is applied through GitHub.</span></div>
-    <div class="split-grid"><section class="panel"><h2>Add or update 301 redirect</h2>
+    <div class="split-grid"><section class="panel"><h2><?= $editing ? 'Edit 301 redirect' : 'Add 301 redirect' ?></h2>
     <form class="editor-form" method="post"><?=csrf_field()?><input type="hidden" name="action" value="redirect">
-    <label>Old path<input name="source_path" placeholder="/old-guide/" maxlength="500" required></label>
-    <label>Destination path<input name="target_path" placeholder="/travel-blog/new-guide/" maxlength="500" required></label>
-    <label>Approval<?php form_select('state',['draft'=>'Draft','approved'=>'Approved for export'],'draft');?></label>
-    <button type="submit" class="primary">Save redirect</button></form></section>
+    <label>Old path<input name="source_path" placeholder="/old-guide/" maxlength="500" value="<?=escape($editing['source_path'] ?? '')?>" required></label>
+    <label>Destination path<input name="target_path" placeholder="/travel-blog/new-guide/" list="site-pages" maxlength="500" value="<?=escape($editing['target_path'] ?? '')?>" required></label>
+    <label>Approval<?php form_select('state',['draft'=>'Draft','approved'=>'Approved for export'],(string)($editing['state']??'draft'));?></label>
+    <?php site_paths_datalist(); ?><button type="submit" class="primary">Save redirect</button></form></section>
     <section class="panel"><div class="panel-heading"><h2>Managed rules</h2><a href="/admin/?export=redirects">Download approved JSON</a></div>
     <?php if (!$rows): ?><p class="empty-state">No managed rules yet. Existing server rules continue to operate unchanged.</p>
     <?php else: ?><div class="table-scroll"><table><thead><tr><th>Source</th><th>Destination</th><th>State</th><th></th></tr></thead><tbody>
     <?php foreach($rows as $r): ?><tr><td><code><?=escape($r['source_path'])?></code></td><td><code><?=escape($r['target_path'])?></code></td><td><span class="status"><?=escape($r['state'])?></span></td>
-    <td><form method="post" onsubmit="" class="inline-form"><?=csrf_field()?><input type="hidden" name="action" value="delete_redirect"><input type="hidden" name="source_path" value="<?=escape($r['source_path'])?>"><button class="text-danger" type="submit">Remove</button></form></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section></div><?php
+    <td><a href="/admin/?page=redirects&amp;edit=<?=escape(rawurlencode($r['source_path']))?>">Edit</a><form method="post" class="inline-form"><?=csrf_field()?><input type="hidden" name="action" value="delete_redirect"><input type="hidden" name="source_path" value="<?=escape($r['source_path'])?>"><button class="text-danger" type="submit">Remove</button></form></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section></div><?php
 }
 function render_seo(): void {
     $rows=query_all('SELECT * FROM admin_seo_overrides ORDER BY updated_at DESC LIMIT 200');
+    $choice = $_GET['edit'] ?? '';
+    $editing = is_string($choice) ? query_one('SELECT * FROM admin_seo_overrides WHERE page_path = ?', [$choice]) : null;
     ?><div class="notice-strip"><strong>Static SEO publishing</strong><span> Page changes are proposals until approved JSON is integrated into the static build. Current live meta tags are not overridden from this database.</span></div>
-    <section class="panel"><h2>Page SEO fields</h2><form method="post" class="editor-form seo-grid"><?=csrf_field()?><input type="hidden" name="action" value="seo">
-    <label>Page path<input name="page_path" maxlength="500" placeholder="/travel-blog/uber-in-israel/" required></label>
-    <label>Meta title<input name="meta_title" maxlength="140" required></label>
-    <label class="wide">Meta description<textarea name="meta_description" maxlength="330" rows="3" required></textarea></label>
-    <label>Open Graph title (optional)<input name="og_title" maxlength="140"></label>
-    <label>Open Graph description (optional)<input name="og_description" maxlength="330"></label>
-    <label>Robots<?php form_select('robots',['index,follow'=>'Index, follow','noindex,follow'=>'Noindex, follow','noindex,nofollow'=>'Noindex, nofollow'],'index,follow');?></label>
-    <label>Approval<?php form_select('state',['draft'=>'Draft','approved'=>'Approved for export'],'draft');?></label>
-    <div><button class="primary" type="submit">Save SEO fields</button></div></form></section>
+    <section class="panel"><h2><?= $editing ? 'Edit page SEO' : 'Page SEO fields' ?></h2><form method="post" class="editor-form seo-grid"><?=csrf_field()?><input type="hidden" name="action" value="seo">
+    <label>Page path<input name="page_path" list="site-pages" maxlength="500" placeholder="/travel-blog/uber-in-israel/" value="<?=escape($editing['page_path'] ?? '')?>" required></label>
+    <label>Meta title<input name="meta_title" maxlength="140" value="<?=escape($editing['meta_title'] ?? '')?>" required></label>
+    <label class="wide">Meta description<textarea name="meta_description" maxlength="330" rows="3" required><?=escape($editing['meta_description'] ?? '')?></textarea></label>
+    <label>Open Graph title (optional)<input name="og_title" maxlength="140" value="<?=escape($editing['og_title'] ?? '')?>"></label>
+    <label>Open Graph description (optional)<input name="og_description" maxlength="330" value="<?=escape($editing['og_description'] ?? '')?>"></label>
+    <label>Robots<?php form_select('robots',['index,follow'=>'Index, follow','noindex,follow'=>'Noindex, follow','noindex,nofollow'=>'Noindex, nofollow'],(string)($editing['robots']??'index,follow'));?></label>
+    <label>Approval<?php form_select('state',['draft'=>'Draft','approved'=>'Approved for export'],(string)($editing['state']??'draft'));?></label>
+    <div><?php site_paths_datalist(); ?><button class="primary" type="submit">Save SEO fields</button></div></form></section>
     <section class="panel"><div class="panel-heading"><h2>Managed SEO changes</h2><a href="/admin/?export=seo">Download approved JSON</a></div>
-    <?php if(!$rows): ?><p class="empty-state">No SEO overrides. The site's existing React metadata remains the source of truth.</p><?php else: ?><div class="table-scroll"><table><thead><tr><th>Page</th><th>Meta title</th><th>Robots</th><th>State</th><th></th></tr></thead><tbody><?php foreach($rows as $r): ?><tr><td><code><?=escape($r['page_path'])?></code></td><td><?=escape($r['meta_title'])?></td><td><?=escape($r['robots'])?></td><td><span class="status"><?=escape($r['state'])?></span></td><td><form class="inline-form" method="post"><?=csrf_field()?><input type="hidden" name="action" value="delete_seo"><input type="hidden" name="page_path" value="<?=escape($r['page_path'])?>"><button class="text-danger" type="submit">Remove</button></form></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section><?php
+    <?php if(!$rows): ?><p class="empty-state">No SEO overrides. The site's existing React metadata remains the source of truth.</p><?php else: ?><div class="table-scroll"><table><thead><tr><th>Page</th><th>Meta title</th><th>Robots</th><th>State</th><th></th></tr></thead><tbody><?php foreach($rows as $r): ?><tr><td><code><?=escape($r['page_path'])?></code></td><td><?=escape($r['meta_title'])?></td><td><?=escape($r['robots'])?></td><td><span class="status"><?=escape($r['state'])?></span></td><td><a href="/admin/?page=seo&amp;edit=<?=escape(rawurlencode($r['page_path']))?>">Edit</a><form class="inline-form" method="post"><?=csrf_field()?><input type="hidden" name="action" value="delete_seo"><input type="hidden" name="page_path" value="<?=escape($r['page_path'])?>"><button class="text-danger" type="submit">Remove</button></form></td></tr><?php endforeach; ?></tbody></table></div><?php endif; ?></section><?php
 }
 function render_jobs(): void {
     $github = github_recent_runs();
