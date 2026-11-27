@@ -699,7 +699,7 @@ describe("tours hub and SEO category pages", () => {
     fireEvent.change(message, { target: { value: "Two travelers in January" } });
     const owner = screen.getAllByTestId("owner-tour-card")[0]!;
     const title = owner.querySelector("h3")!.textContent!;
-    fireEvent.click(within(owner).getByRole("link", { name: /^Request a quote/ }));
+    fireEvent.click(within(owner).getByRole("link", { name: /^Get a quote/ }));
     await waitFor(() => expect(subject).toHaveValue(title));
     expect(message).toHaveValue("Two travelers in January");
   });

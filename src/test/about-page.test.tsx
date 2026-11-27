@@ -42,7 +42,7 @@ describe("one personal About Moshe Barak page", () => {
     expect(collage).toHaveAttribute("width", "681");
     expect(collage).toHaveAttribute("height", "341");
     expect(collage.className).not.toContain("object-cover");
-    const reviews = screen.getByRole("region", { name: "Tripadvisor traveler reviews" });
+    const reviews = screen.getByRole("region", { name: "TripAdvisor traveler reviews" });
     expect(collage.compareDocumentPosition(reviews) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const methodology = screen.getByRole("region", { name: "Experience behind my travel guides" });
     expect(methodology.querySelectorAll("p")).toHaveLength(1);
@@ -63,22 +63,22 @@ describe("one personal About Moshe Barak page", () => {
     const router = await aboutRouter();
     vi.useFakeTimers();
     renderAbout(router);
-    const carousel = screen.getByRole("region", { name: "Tripadvisor traveler reviews" });
+    const carousel = screen.getByRole("region", { name: "TripAdvisor traveler reviews" });
     const cards = within(carousel).getByTestId("tripadvisor-review-cards");
     expect(cards.querySelectorAll("article")).toHaveLength(3);
     expect(cards).toHaveTextContent(tripadvisorReviews[0]!.excerpt);
     act(() => vi.advanceTimersByTime(6000));
     expect(cards).toHaveTextContent(tripadvisorReviews[3]!.excerpt);
     expect(cards).not.toHaveTextContent(tripadvisorReviews[0]!.excerpt);
-    const dots = within(carousel).getByRole("group", { name: "Choose a Tripadvisor review" });
+    const dots = within(carousel).getByRole("group", { name: "Choose a TripAdvisor review" });
     expect(within(dots).getAllByRole("button")).toHaveLength(6);
     expect(within(carousel).queryByRole("button", { name: "Pause Tripadvisor reviews" })).not.toBeInTheDocument();
-    fireEvent.click(within(dots).getByRole("button", { name: "Show Tripadvisor review from Marc" }));
+    fireEvent.click(within(dots).getByRole("button", { name: "Show TripAdvisor review from Marc" }));
     expect(cards).toHaveTextContent(tripadvisorReviews[4]!.excerpt);
     const paused = cards.textContent;
     act(() => vi.advanceTimersByTime(18000));
     expect(cards.textContent).toBe(paused);
-    expect(screen.getByRole("link", { name: "Read all my Tripadvisor reviews" })).toHaveAttribute("href", tripadvisorProfileUrl);
+    expect(screen.getByRole("link", { name: "Read all my TripAdvisor reviews" })).toHaveAttribute("href", tripadvisorProfileUrl);
   });
 
   it("removes the retired route without redirecting old addresses", async () => {

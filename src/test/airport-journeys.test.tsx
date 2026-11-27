@@ -44,7 +44,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelector('a[href*="#request-quote"]')).not.toBeNull();
       if (id !== "jerusalem") expect(doc.querySelector('aside a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
       else expect(doc.querySelector('#option-private a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
-      expect(doc.querySelector("#comparison")?.textContent).toContain("Public-transport fares shown");
+      expect(doc.querySelector("#comparison")?.textContent).toContain("Standard adult one-way public transport fares");
       const decisionTable = doc.querySelector<HTMLTableElement>("#comparison table");
       expect(decisionTable).not.toBeNull();
       expect([...decisionTable!.querySelectorAll("thead th")].map(th => th.textContent)).toEqual(["Option", "Travel time", "Cost", "Best for", "Availability"]);
@@ -230,7 +230,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(comparison.textContent).toContain("Varies");
     expect(comparison.textContent).toContain("From ₪");
     const priceNote = comparison.parentElement?.nextElementSibling?.textContent || "";
-    expect(priceNote).toMatch(/^Public-transport fares shown/);
+    expect(priceNote).toMatch(/^Standard adult one-way public transport fares/);
     expect(priceNote.length).toBeLessThan(370);
     expect(doc.querySelectorAll("#options h4").length).toBeGreaterThanOrEqual(1);
     expect(doc.querySelector("#options")?.textContent).not.toContain("Before choosing this option");

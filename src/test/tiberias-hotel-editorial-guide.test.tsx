@@ -55,7 +55,7 @@ describe("Tiberias hotel editorial", () => {
     }
     expect(resortHotelPhoto("tib-tiberia").src).not.toBe(tiberiasStayGuide.photo.src);
     expect(container.querySelector("#location iframe")).toHaveAttribute("src", expect.stringMatching(/^https:\/\/maps\.google\.com\/maps\?.*z=13/));
-    expect(container).toHaveTextContent("full board or all-inclusive");
+    expect(container).toHaveTextContent("The hotel currently offers full-board accommodation.");
     expect(container).toHaveTextContent("Guests must be aged 12 or older");
     expect(screen.getAllByTestId("tiberias-hotel-facility-notice")).toHaveLength(3);
     expect(container).toHaveTextContent("The private beach closed on October 4, 2026");

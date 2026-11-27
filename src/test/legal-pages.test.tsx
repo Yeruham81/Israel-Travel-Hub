@@ -48,7 +48,7 @@ describe("current legal documents", () => {
     expect(doc.getElementById("enquiries")?.textContent).toContain("Providing this information is voluntary");
     expect(doc.getElementById("enquiries")?.textContent).toContain("All bookings require separate confirmation");
     expect(doc.getElementById("enquiries")?.textContent).toContain("send the entered details directly through this website");
-    expect(doc.getElementById("enquiries")?.textContent).toContain("does not save those enquiry fields in browser storage");
+    expect(doc.getElementById("enquiries")?.textContent).toContain("does not save those inquiry fields in browser storage");
     const recipients = doc.getElementById("recipients")?.textContent || "";
     expect(recipients).toContain("a transactional email service");
     expect(recipients).toContain("business mailbox hosted by Hostinger Email");
