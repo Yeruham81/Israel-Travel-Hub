@@ -12,9 +12,9 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
   RewriteEngine On
   # The only PHP entrypoint is index.php; no private PHP is copied here.
-  RewriteRule ^(?!index\.php$).*\.php$ - [F,L,NC]
+  RewriteRule ^(?!(?:index|consent)\.php$).*\.php$ - [F,L,NC]
   RewriteRule ^assets/ - [L]
-  RewriteRule ^index\.php$ - [L]
+  RewriteRule ^(?:index|consent)\.php$ - [L]
   RewriteRule ^$ index.php [L]
   RewriteRule . - [R=404,L]
 </IfModule>
