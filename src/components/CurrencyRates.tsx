@@ -111,6 +111,7 @@ export function CurrencyRatesProvider({
             credentials: "omit",
             cache: "no-store",
             signal: request.signal,
+            redirect: "error",
           });
           if (!response.ok) throw new Error("Currency estimates unavailable");
           const body = await response.text();
@@ -123,16 +124,9 @@ export function CurrencyRatesProvider({
         try {
           data = await loadRates(referenceFxConfig.endpoint);
         } catch {
-          // Always check the independently updated public snapshot if the
-          // same-origin API fails, even when an older cached quote is still usable.
-          // The publication-date guard below prevents any downgrade.
-          try {
-            data = await loadRates(referenceFxConfig.publicSnapshotUrl);
-          } catch {
-            // This built-in snapshot does not need CORS or any backend.
-            // It is only accepted while the original publication is valid.
-            data = await loadRates(referenceFxConfig.localSnapshotUrl);
-          }
+          // Use the validated snapshot shipped on this origin. Never contact an
+          // external host from the browser, even when the API is unavailable.
+          data = await loadRates(referenceFxConfig.localSnapshotUrl);
         }
         if (!data.rates) throw new Error("No usable currency data");
         if (

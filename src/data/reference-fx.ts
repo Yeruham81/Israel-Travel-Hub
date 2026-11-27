@@ -13,10 +13,8 @@ export const referenceFxConfig = {
   // server-side fallback when another hosting runtime cannot reach Bank of Israel.
   // Update this URL if the Hostinger staging domain is retired.
   fallbackUrl: "https://saddlebrown-guanaco-454061.hostingersite.com/api/exchange-rates/",
-  // Browser-readable official-rate snapshot, refreshed independently by GitHub Actions.
-  // This avoids relying on server-to-server access from the SSR runtime.
-  publicSnapshotUrl:
-    "https://raw.githubusercontent.com/Yeruham81/Israel-Travel-Hub/main/public/data/boi-exchange-rates.json",
+  // Official-rate snapshot refreshed by GitHub Actions and served on the
+  // website's own origin after deployment.
   localSnapshotUrl: "/data/boi-exchange-rates.json",
   endpoint: "/api/exchange-rates/",
   refreshMs: 24 * 60 * 60 * 1000,
