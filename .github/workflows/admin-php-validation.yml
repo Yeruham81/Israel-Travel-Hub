@@ -1,0 +1,43 @@
+name: Admin - PHP security and schema validation
+
+on:
+  pull_request:
+    paths:
+      - 'admin-app/**'
+      - '.github/workflows/admin-php-validation.yml'
+  push:
+    branches:
+      - 'feature/secure-admin-dashboard-20261127'
+
+permissions:
+  contents: read
+
+jobs:
+  php-validation:
+    name: Lint secure server admin
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up supported PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql, mbstring
+          coverage: none
+      - name: PHP lint
+        run: |
+          set -euo pipefail
+          find admin-app -name '*.php' -type f -print0 | xargs -0 -n1 php -l
+      - name: Validate security-sensitive invariants
+        run: |
+          set -euo pipefail
+          test ! -e admin-app/private/config.php
+          test -f admin-app/web/.htaccess
+          grep -q 'DirectoryIndex index.php' admin-app/web/.htaccess
+          grep -q "session.cookie_httponly" admin-app/private/src/Core.php
+          grep -q "password_hash" admin-app/private/src/Auth.php
+          grep -q "audit" admin-app/private/src/Actions.php
+          php admin-app/tests/validation.php
