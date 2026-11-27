@@ -50,7 +50,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
         <section id="areas" aria-labelledby="areas-h" className="mt-12 scroll-mt-28">
           <h2 id="areas-h" className="text-2xl font-semibold sm:text-3xl">Choose your Jerusalem neighborhood</h2>
           <p className="mt-3 w-full text-pretty leading-relaxed text-muted-foreground">
-            Browse hotel shortlists in six Jerusalem neighborhoods. Use the travel-style filters to find an area, then open its hotel page to compare properties and booking options.
+            Explore hotels in six Jerusalem neighborhoods and filter by your preferred travel style.
           </p>
           <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Choose areas by travel style">
             <button
@@ -92,7 +92,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <div className="flex gap-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 dark:border-amber-400/20 dark:bg-amber-500/5">
               <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
-              <p className="text-sm leading-relaxed"><strong>Think about the last walk.</strong> Jerusalem is hilly, and the nearest taxi stop or light-rail station may still be uphill from your hotel.</p>
+              <p className="text-sm leading-relaxed"><strong>Consider the walk to your hotel.</strong> Jerusalem is hilly, and the nearest taxi stop or light-rail station may still be uphill from your hotel.</p>
             </div>
             <div className="flex gap-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 dark:border-amber-400/20 dark:bg-amber-500/5">
               <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
@@ -103,7 +103,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
 
         <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-28">
           <h2 id="compare-h" className="text-2xl font-semibold sm:text-3xl">Compare areas in Jerusalem</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Compare the accommodation range and luggage access, then open the matching hotel shortlist. My Where to Stay guide covers the neighborhoods in greater detail.</p>
+          <p className="mt-2 text-sm text-muted-foreground">Compare accommodation styles and luggage access across Jerusalem's neighborhoods. My Where to Stay guide explores each area in greater detail.</p>
           <div className="mt-4 overflow-hidden rounded-2xl border bg-card">
             <div className="overflow-x-auto" role="region" aria-label="Jerusalem neighborhood comparison" tabIndex={0}>
               <table className="w-full min-w-[680px] text-left text-sm">

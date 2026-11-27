@@ -77,210 +77,210 @@
     {
       "path": "/accommodation/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/dead-sea/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 4,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/dead-sea/family/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/dead-sea/spa/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/haifa/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/haifa/boutique/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/haifa/family/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/jerusalem/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 4,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/jerusalem/downtown/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/jerusalem/east-jerusalem/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/jerusalem/german-colony-baka/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/jerusalem/mahane-yehuda-nachlaot/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/jerusalem/mamilla-king-david/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/jerusalem/old-city/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10B page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005612383 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 4,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/beachfront/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/dizengoff-city-center/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/florentin/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/jaffa/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/kerem-hateimanim/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/neve-tzedek/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/old-north-port/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tel-aviv/rothschild-boulevard/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 5,
+      "notes": "All five group 10C page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006122099 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tiberias/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 7,
+      "notes": "All group 10A page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46005170412 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tiberias/family/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/accommodation/tiberias/luxury/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10D page-specific edits approved and applied; regression and rendered corpus verification pending. Initial editorial corpus run 46006638206 passed; dedicated accommodation regression verification pending."
     },
     {
       "path": "/airport-transfers/",
@@ -347,10 +347,10 @@
     {
       "path": "/attractions/basilica-of-the-annunciation/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending. Initial corpus run 46002584454 passed; dedicated group 9 regression verification pending."
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy;  Initial corpus run 46002584454 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/attractions/caesarea/",
@@ -364,35 +364,35 @@
     {
       "path": "/attractions/capernaum/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending. Initial corpus run 46002972945 passed; dedicated group 9 regression verification pending."
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy;  Initial corpus run 46002972945 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/attractions/dead-sea/",
       "group": 8,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "9aca4c726104018b31b99a699c222f06168e9bcc007c8cf1527fda3f573c81ee",
       "changes": 7,
-      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval. Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; combined release verification pending.",
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance.  Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded.",
       "postEditSnapshot": "24252609734fd49f5e2f989fa58b3fe13a75aa1b872717608db9be3803b28151"
     },
     {
       "path": "/attractions/eilat/",
       "group": 8,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "9c6ccea1702fda1123af87feecec3f0d590daf8c39b246a09242892e8599d1e0",
       "changes": 6,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; combined release verification pending."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links.  User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/attractions/ein-gedi/",
       "group": 8,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "193516268cafba9b38b1aeee6ba22ff4791316d819919a86019014c30c68bfa9",
       "changes": 6,
-      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval. Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; combined release verification pending.",
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance.  Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded.",
       "postEditSnapshot": "b252c01026682b164f787905b430c5caf0c3d53be1a80439f4a499d1f2820bf8"
     },
     {
@@ -416,35 +416,35 @@
     {
       "path": "/attractions/magdala/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 7,
-      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending. Initial corpus run 46002972945 passed; dedicated group 9 regression verification pending."
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy;  Initial corpus run 46002972945 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/attractions/masada/",
       "group": 8,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "1a904b33e5107dc330b79f63298b5c3919b8d71bf16e2bbe6935be29fbced58b",
       "changes": 6,
-      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance. Await regression and approval. Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; combined release verification pending.",
+      "notes": "Reviewed rendered copy from artifact 15196477909; simplified practical guidance, removed redundant source attribution; retained dated trail conditions, admission, hours, safety and accessibility guidance.  Targeted regression and extraction passed in run 45998806714; user approved. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded.",
       "postEditSnapshot": "d956bfd3fcf8dc11c9ac9a40eae0a9b1e282594b0369d6ebd13168e15a638c9d"
     },
     {
       "path": "/attractions/mitzpe-ramon-crater/",
       "group": 8,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "4c12b18f8052a24ea5abcb35d660a4be64e1b253260e96c81a71448481a35147",
       "changes": 5,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; combined release verification pending."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links.  User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/attractions/mount-of-beatitudes/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending. Initial corpus run 46002972945 passed; dedicated group 9 regression verification pending."
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy;  Initial corpus run 46002972945 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/attractions/mount-of-olives/",
@@ -458,18 +458,18 @@
     {
       "path": "/attractions/mount-precipice/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending. Initial corpus run 46002584454 passed; dedicated group 9 regression verification pending."
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy;  Initial corpus run 46002584454 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/attractions/mount-tabor/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy; full rendered corpus and targeted regression verification pending. Initial corpus run 46002584454 passed; dedicated group 9 regression verification pending."
+      "notes": "User approved all six page-specific edits in group 9A. Reviewed source component copy;  Initial corpus run 46002584454 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/attractions/mount-zion/",
@@ -492,10 +492,10 @@
     {
       "path": "/attractions/qasr-el-yahud/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 9C edits approved and applied; source copy reviewed; rendered corpus and regression verification pending."
+      "notes": "All group 9C edits approved and applied; source copy reviewed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/attractions/rosh-hanikra/",
@@ -518,10 +518,10 @@
     {
       "path": "/attractions/tabgha/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy; full rendered corpus and regression verification pending. Initial corpus run 46002972945 passed; dedicated group 9 regression verification pending."
+      "notes": "User approved all group 9B page-specific edits. Reviewed source component copy;  Initial corpus run 46002972945 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/attractions/tel-megiddo/",
@@ -544,10 +544,10 @@
     {
       "path": "/attractions/yardenit/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 9C edits approved and applied; source copy reviewed; rendered corpus and regression verification pending."
+      "notes": "All group 9C edits approved and applied; source copy reviewed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/car-rental/",
@@ -714,10 +714,10 @@
     {
       "path": "/travel-blog/baptism-in-the-jordan-river/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 6,
-      "notes": "All group 9C edits approved and applied; source copy reviewed; rendered corpus and regression verification pending."
+      "notes": "All group 9C edits approved and applied; source copy reviewed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/travel-blog/beaches-in-tel-aviv/",
@@ -779,10 +779,10 @@
     {
       "path": "/travel-blog/best-dead-sea-hotels/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending."
     },
     {
       "path": "/travel-blog/best-esim-for-israel/",
@@ -795,18 +795,18 @@
     {
       "path": "/travel-blog/best-hotels-in-haifa/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending."
     },
     {
       "path": "/travel-blog/best-hotels-in-tiberias/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending."
     },
     {
       "path": "/travel-blog/best-time-to-visit-israel/",
@@ -827,10 +827,10 @@
     {
       "path": "/travel-blog/christian-tours-in-israel/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 8,
-      "notes": "All group 9C edits approved and applied; source copy reviewed; rendered corpus and regression verification pending."
+      "notes": "All group 9C edits approved and applied; source copy reviewed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/travel-blog/churches-in-jerusalem/",
@@ -844,10 +844,10 @@
     {
       "path": "/travel-blog/dead-sea-attractions/",
       "group": 8,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "06b38441b2e3419a461393d1c9eef2a870c767c940d647f8ddc364ab049ceb53",
       "changes": 7,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; combined release verification pending."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links.  User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/travel-blog/from-ben-gurion-airport-on-shabbat/",
@@ -928,18 +928,18 @@
     {
       "path": "/travel-blog/jerusalem-to-bethlehem/",
       "group": 9,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": null,
       "changes": 8,
-      "notes": "All group 9C edits approved and applied; source copy reviewed; rendered corpus and regression verification pending."
+      "notes": "All group 9C edits approved and applied; source copy reviewed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/travel-blog/jerusalem-to-the-dead-sea/",
       "group": 8,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "b8d765ca58e217e6fbe7bd5c475102a106e2a52133cd1067092fcdd281d9ba18",
       "changes": 6,
-      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links. Await regression and approval. User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; combined release verification pending."
+      "notes": "Reviewed rendered copy from artifact 15197461503; simplified visitor guidance and redundant attribution, retained access and safety conditions, prices, hours and links.  User approved all group 8B changes; regression verification pending. Group 8B editorial corpus run 46001443612 passed; Combined editorial corpus 46004071140 and full project validation 46004080824 passed; merged via PR #100 at fbfbbc6. Main validation 46004645491 passed. Hostinger deployment 46005094248 succeeded."
     },
     {
       "path": "/travel-blog/jerusalem-travel-guide/",
@@ -1041,18 +1041,18 @@
     {
       "path": "/travel-blog/where-to-stay-in-jerusalem/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending."
     },
     {
       "path": "/travel-blog/where-to-stay-in-tel-aviv/",
       "group": 10,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All six group 10E page-specific edits approved and applied; comprehensive accommodation regression and rendered corpus verification pending."
     }
   ],
   "shared": [

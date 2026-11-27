@@ -101,7 +101,7 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
   },
   "tib-tiberia": {
     kind: "Small central hotel",
-    summary: "A simple private-room hotel in Tiberias' historic center, handy for town sightseeing.",
+    summary: "A simple hotel offering private rooms in Tiberias' historic center, within easy reach of local attractions.",
     bestFor: "Independent travellers looking for a private hotel room",
     consider: "Confirm reception hours, stairs or lift access and room facilities.",
     beach: "Central town base; walk to the lakefront",
@@ -255,7 +255,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
       <section id="choose" className="mt-10 scroll-mt-32" aria-labelledby="choose-h">
         <p className="eyebrow">Choose your Tiberias stay</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Tiberias hotel suits you?</h2>
-        <p className="mt-4 max-w-4xl leading-relaxed">I recommend choosing a hotel around the kind of holiday you want: a luxurious lakeside break, family activities, a convenient central base or simple accommodation for exploring the Galilee.</p>
+        <p className="mt-4 max-w-4xl leading-relaxed">I recommend a lakeside hotel for relaxation, a resort with children's facilities for a family holiday, or central accommodation for sightseeing around the Galilee.</p>
         <Link to="/accommodation/tiberias/" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary" data-testid="editorial-all-hotels-link">
           Browse all Tiberias hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
         </Link>
@@ -362,7 +362,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
 
       <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
         <h2 id="location-h" className="text-3xl">Tiberias hotel areas & getting around</h2>
-        <p className="mt-3 leading-relaxed">Hotels range from the lower town and promenade to hillside streets and lakeside properties at the north and south edges. Consider the elevation as well as walking distance when choosing your base.</p>
+        <p className="mt-3 leading-relaxed">Hotels range from the lower town and promenade to hillside streets and lakeside properties at the north and south edges. Consider hills and walking distances when choosing your hotel.</p>
         <div className="mt-5"><AreaMap area={{ name: "Tiberias and the Sea of Galilee waterfront", map: guide.map }} provider="google" googleZoom={13} /></div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
           {guide.locations.map(location => <article key={location.name} className="rounded-xl border bg-card p-4 sm:p-5">
