@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use function ITH\Admin\{web_security, session_start_securely, current_user, render_login,
-    render_header, render_module, render_footer, assert_post_csrf, text_input,
+    render_header, render_module, render_footer, assert_post_csrf, text_input, password_input,
     login, handle_action, export_registry, require_permission, notice, redirect};
 
 $privateSrc = dirname(__DIR__, 2) . '/private-admin/src/';
@@ -22,7 +22,7 @@ try {
         if ($action === 'login') {
             assert_post_csrf();
             $username = text_input('username', 64);
-            $password = text_input('password', 512);
+            $password = password_input('password');
             if (login($username, $password)) redirect('dashboard');
             http_response_code(401);
             render_login('Incorrect username or password, or too many attempts. Please retry later.');
