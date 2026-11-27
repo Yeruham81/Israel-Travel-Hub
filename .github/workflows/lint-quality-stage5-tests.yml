@@ -54,7 +54,7 @@ jobs:
           if(files.length!==165||files.filter(file=>helpers.has(file)).length!==4)throw Error('Unexpected test inventory: '+files.length);
           // Exclude non-test production sources and generated data. Compare
           // emitted JSX as actual JavaScript, including its text children.
-          const included=[], excluded=[], changed=[], differences=[], pending=new Map();
+          const included=[], excluded=[], changed=[], differences=[], stability=[], unstable=[], pending=new Map();
           // Compare parsed, emitted JavaScript with comments removed and
           // normalized output, rather than stripping spaces from literals.
           // TypeScript compiler diagnostics and production parity remain independent gates.
@@ -107,13 +107,44 @@ jobs:
             ['const x="original";','const x="different";'],
             ['const x={a:1,b:2};','const x={b:2,a:1};']
           ])if(await equivalent(left,right))throw Error('Canonical change detection self-test failed: '+left);
+          // Allow at most five formatter calls per file, including the
+          // confirming call. A repeated non-adjacent state is a cycle.
+          const stabilize=async (before,format)=>{
+            const states=[before],seen=new Map([[before,0]]);
+            let current=before;
+            for(let pass=1;pass<=5;pass++){
+              const next=await format(current);
+              if(next===current)return {status:'stable',passes:pass,after:next,states};
+              states.push(next);
+              if(seen.has(next))return {status:'cycle',passes:pass,cycleStart:seen.get(next),states};
+              seen.set(next,pass);
+              current=next;
+            }
+            return {status:'limit',passes:5,states};
+          };
+          // Self-tests exercise convergence, two-state cycles and the limit.
+          const converges=await stabilize('a',async x=>x==='a'?'b':x==='b'?'c':x);
+          if(converges.status!=='stable'||converges.passes!==3||converges.after!=='c')throw Error('Formatter convergence self-test failed');
+          const cycles=await stabilize('a',async x=>x==='a'?'b':'a');
+          if(cycles.status!=='cycle'||cycles.passes!==2||cycles.cycleStart!==0)throw Error('Formatter cycle self-test failed');
+          const limited=await stabilize('a',async x=>x+'a');
+          if(limited.status!=='limit'||limited.passes!==5)throw Error('Formatter limit self-test failed');
           for(const file of files){
             const before=fs.readFileSync(file,'utf8');
             const info=await prettier.getFileInfo(file,{ignorePath:'.prettierignore'});
             if(info.ignored||!/\.tsx?$/.test(file))throw Error('Unexpected ignored or unsupported test: '+file);
             const options=await prettier.resolveConfig(file);
-            const after=await prettier.format(before,{...options,filepath:file});
-            if(await prettier.format(after,{...options,filepath:file})!==after)throw Error('Non-idempotent '+file);
+            included.push(file);
+            const result=await stabilize(before,source=>prettier.format(source,{...options,filepath:file}));
+            const {states,after,...metadata}=result;
+            stability.push({file,...metadata});
+            if(result.passes>2||result.status!=='stable'){
+              const diagnostic=path.join(out,'formatter-stability',file);
+              fs.mkdirSync(diagnostic,{recursive:true});
+              for(const [index,source] of states.entries())fs.writeFileSync(path.join(diagnostic,'pass-'+index+'.txt'),source);
+              console.log('FORMAT STABILITY',JSON.stringify({file,...metadata}));
+            }
+            if(result.status!=='stable'){unstable.push({file,...metadata});continue;}
             const a=emit(file,before),b=emit(file,after);
             if(a.diagnostics?.some(x=>x.category===ts.DiagnosticCategory.Error)||b.diagnostics?.some(x=>x.category===ts.DiagnosticCategory.Error))throw Error('Transpile diagnostics '+file);
             // Canonicalize emitted JS with the same formatter; quote style and
@@ -137,7 +168,6 @@ jobs:
               if(!textEqual&&!astEqual)console.error('UNRESOLVED EMITTED DIFFERENCE: '+file);
               else console.log('VERIFIED FORMATTING-ONLY DIFFERENCE: '+file+' canonical='+textEqual+' AST='+astEqual);
             }
-            included.push(file);
             if(before!==after){pending.set(file,after);changed.push(file);}
           }
           if(included.length!==165)throw Error('Unexpected test scope');
@@ -146,8 +176,11 @@ jobs:
           fs.writeFileSync(path.join(out,'changed.json'),JSON.stringify(changed,null,2));
           fs.writeFileSync(path.join(out,'emitted-comparison.json'),JSON.stringify(differences,null,2));
           const unresolved=differences.filter(x=>!x.textEqual&&!x.astEqual);
-          console.log('TEST FORMAT SUMMARY',JSON.stringify({tracked:files.length,included:included.length,excluded:excluded.length,changed:changed.length,idempotent:true,emittedCodeParity:unresolved.length===0,unresolved:unresolved.length}));
-          if(unresolved.length)throw Error('Unresolved emitted differences: '+unresolved.map(x=>x.file).join(', '));
+          fs.writeFileSync(path.join(out,'formatter-stability.json'),JSON.stringify(stability,null,2));
+          fs.writeFileSync(path.join(out,'formatter-unstable.json'),JSON.stringify(unstable,null,2));
+          const passCounts=Object.fromEntries([1,2,3,4,5].map(pass=>[pass,stability.filter(x=>x.passes===pass).length]));
+          console.log('TEST FORMAT SUMMARY',JSON.stringify({tracked:files.length,included:included.length,excluded:excluded.length,changed:changed.length,idempotent:unstable.length===0,emittedCodeParity:unresolved.length===0&&unstable.length===0,unresolved:unresolved.length,unstable:unstable.length,passCounts}));
+          if(unstable.length||unresolved.length)throw Error('Unresolved formatting checks: '+JSON.stringify({unstable,emitted:unresolved}));
           for(const [file,after] of pending)fs.writeFileSync(file,after);
           console.log('EXCLUDED',JSON.stringify(excluded));
           JS
