@@ -13,7 +13,7 @@ import { Link } from "@tanstack/react-router";
 import { CalendarDays, CloudSun, Lightbulb, Smartphone, TrainFront, Utensils } from "lucide-react";
 import { Breadcrumbs, FaqList, SourceList, OnThisPage } from "@/components/Guide";
 import { RelatedGuideCards } from "@/components/ShoreReadingGuides";
-import { GuidePhotoCredit } from "@/components/GuideCard";
+import { PhotoCreditsDisclosure, photoCreditEntries } from "@/components/PhotoCreditsDisclosure";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { MoreTourCategories, TourCruiseCallout } from "@/components/TourDiscovery";
 import { TourCatalog } from "@/components/TourCatalog";
@@ -47,7 +47,6 @@ import {
   type TourSearch,
 } from "@/lib/tours";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
-import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 
 export function tourCategoryMeta(id: TourCategoryId) {
@@ -97,19 +96,7 @@ export function TourPhotoCredits({
 }: {
   photos: { src: string; alt: string; sourceUrl?: string; credit?: string; licenseUrl?: string }[];
 }) {
-  const unique = [
-    ...new Map(photos.filter(hasPublicPhotoCredit).map((photo) => [photo.src, photo])).values(),
-  ];
-  return unique.length ? (
-    <details className="mt-10 rounded-xl border p-4 text-sm">
-      <summary className="cursor-pointer font-semibold">Image credits</summary>
-      <div className="mt-3 space-y-3">
-        {unique.map((photo) => (
-          <GuidePhotoCredit key={photo.src} photo={photo} insideDisclosure />
-        ))}
-      </div>
-    </details>
-  ) : null;
+  return <PhotoCreditsDisclosure entries={photoCreditEntries(photos)} />;
 }
 
 const jerusalemPlanningIcons = {

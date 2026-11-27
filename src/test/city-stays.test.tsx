@@ -264,7 +264,7 @@ describe.each([
           container
             .querySelector("#sources")!
             .compareDocumentPosition(screen.getByTestId("neighborhood-hotel-photo-credits")) &
-            Node.DOCUMENT_POSITION_PRECEDING,
+            Node.DOCUMENT_POSITION_FOLLOWING,
         ).toBeTruthy();
       }
       expect(

@@ -7,12 +7,14 @@ import {
 } from "@/data/content";
 import { areaDecisionNotes } from "@/data/localEditorialInsights";
 import { hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
-import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
+import { hotelsInCityCatalog } from "@/data/cityHotelCatalog";
 import { JerusalemHotelTile } from "@/components/JerusalemHotelBrowser";
 import { JerusalemNeighborhoodGuideCallout } from "@/components/JerusalemNeighborhoodGuideCallout";
 import { TelAvivNeighborhoodGuideCallout } from "@/components/TelAvivNeighborhoodGuideCallout";
 import { TelAvivHotelTile } from "@/components/TelAvivHotelBrowser";
-import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
+import { AreaMap, areaPhotoCreditEntries } from "@/components/AreaMap";
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
+import { hotelPhotoCreditEntries } from "@/components/CityHotelPhotoCredits";
 import { GuideHeader, OnThisPage, Section, FaqList, SourceList } from "@/components/Guide";
 import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { StayTripLinks } from "@/components/StayTripLinks";
@@ -475,55 +477,11 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           showTripadvisorBesidePortraitMobile
           guide={neighborhoodTripContactCopy(isJerusalem ? "Jerusalem" : "Tel Aviv")}
         />
-        <AreaPhotoCredit areas={[area]} />
-        <div className="mt-5">
-          <details
-            className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground"
-            data-testid="neighborhood-hotel-photo-credits"
-          >
-            <summary className="cursor-pointer font-semibold text-foreground">
-              Illustrative photo credits & licenses
-            </summary>
-            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-              {hotels.map((hotel) => {
-                const image = cityHotelPhoto(hotel);
-                return (
-                  <li key={hotel.id}>
-                    <span className="font-medium text-foreground">{hotel.name}: </span>
-                    {image.sourceUrl ? (
-                      <a
-                        href={image.sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline underline-offset-2"
-                      >
-                        {image.credit}
-                        <span className="sr-only"> (opens in a new tab)</span>
-                      </a>
-                    ) : (
-                      image.credit
-                    )}
-                    {image.licenseUrl && (
-                      <>
-                        {" "}
-                        ·{" "}
-                        <a
-                          href={image.licenseUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="underline underline-offset-2"
-                        >
-                          License<span className="sr-only"> (opens in a new tab)</span>
-                        </a>
-                      </>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </details>
-        </div>
         <SourceList ids={[...city.sourceIds, ...hotels.map((hotel) => hotel.sourceId)]} />
+        <PhotoCreditsDisclosure
+          entries={[...areaPhotoCreditEntries([area]), ...hotelPhotoCreditEntries(hotels)]}
+          testId="neighborhood-hotel-photo-credits"
+        />
       </article>
     </main>
   );

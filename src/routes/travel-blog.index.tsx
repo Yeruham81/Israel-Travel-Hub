@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type { MouseEvent } from "react";
 import { BookOpen, CalendarDays, MapPinned, Smartphone, Sun, TrainFront } from "lucide-react";
-import { GuideCard, GuidePhotoCredit } from "@/components/GuideCard";
+import { GuideCard } from "@/components/GuideCard";
+import { PhotoCreditsDisclosure, photoCreditEntries } from "@/components/PhotoCreditsDisclosure";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { HubHeader } from "@/components/Guide";
 
@@ -303,17 +304,7 @@ function Guides() {
         </section>
       </div>
 
-      <details className="mt-10 rounded-xl border p-5">
-        <summary className="cursor-pointer text-sm font-medium">Guide image credits</summary>
-        <ul className="mt-3 space-y-3">
-          {photos.map((photo) => (
-            <li key={photo.src}>
-              <span className="text-sm">{photo.alt}</span>
-              <GuidePhotoCredit photo={photo} />
-            </li>
-          ))}
-        </ul>
-      </details>
+      <PhotoCreditsDisclosure entries={photoCreditEntries(photos)} />
     </main>
   );
 }

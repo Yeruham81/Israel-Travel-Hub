@@ -11,7 +11,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { HubHeader } from "@/components/Guide";
-import { GuidePhotoCredit } from "@/components/GuideCard";
+import { PhotoCreditsDisclosure, photoCreditEntries } from "@/components/PhotoCreditsDisclosure";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import {
@@ -290,18 +290,7 @@ function Attractions() {
             })}
           </ul>
         </section>
-        {creditedRelatedPhotos.length > 0 && (
-          <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground">
-            <summary className="cursor-pointer font-semibold">Photo credits</summary>
-            <ul className="mt-3 space-y-3">
-              {creditedRelatedPhotos.map((photo) => (
-                <li key={photo.src}>
-                  <GuidePhotoCredit photo={photo} insideDisclosure />
-                </li>
-              ))}
-            </ul>
-          </details>
-        )}
+        <PhotoCreditsDisclosure entries={photoCreditEntries(creditedRelatedPhotos)} />
       </div>
     </main>
   );

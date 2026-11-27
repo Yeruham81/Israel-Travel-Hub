@@ -1204,84 +1204,32 @@ export const akkoDestinationContent: AttractionDestinationContent = {
     { label: "Old Akko - classic walking route", url: official.oldCityRoute },
     { label: "UNESCO - Old City of Acre", url: official.unesco },
   ],
-  photoCredits: (
-    <p>
-      <strong>Photographs:</strong>{" "}
-      <a
-        href="https://commons.wikimedia.org/wiki/File:108248_el_basha_hammam_in_acre_PikiWiki_Israel.jpg"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        Zeev Stein / PikiWiki Israel (Turkish Bath)
-      </a>
-      {" - "}
-      <a
-        href="https://creativecommons.org/licenses/by/2.5/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        CC BY 2.5
-      </a>
-      ;{" "}
-      <a
-        href="https://commons.wikimedia.org/wiki/File:The_market_in_Acre_(Akko)_(373226896).jpg"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        Yaniv Ben-Arie (market)
-      </a>
-      {" - "}
-      <a
-        href="https://creativecommons.org/licenses/by-sa/2.0/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        CC BY-SA 2.0
-      </a>
-      ;{" "}
-      <a
-        href="https://commons.wikimedia.org/wiki/File:Antique_Padlocks_-_Treasures_in_the_Wall_Museum_-_Akko_(Acre)_-_Israel.jpg"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        Adam Jones (museum collection)
-      </a>
-      {" - "}
-      <a
-        href="https://creativecommons.org/licenses/by-sa/2.0/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        CC BY-SA 2.0
-      </a>
-      ;{" "}
-      <a
-        href="https://commons.wikimedia.org/wiki/File:Acco_Ramhal_Synagogue_IMG_0281.JPG"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        Deror Avi (Ramchal Synagogue)
-      </a>
-      {" - "}
-      <a
-        href="https://creativecommons.org/licenses/by-sa/3.0/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={inlineLink}
-      >
-        CC BY-SA 3.0
-      </a>
-      . Images resized and converted to WebP. The image files retain their original Creative Commons
-      licenses.
-    </p>
-  ),
+  photoCredits: [
+    {
+      label: "Turkish Bath",
+      credit: "Zeev Stein / PikiWiki Israel (Turkish Bath) · CC BY 2.5; resized and converted to WebP",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:108248_el_basha_hammam_in_acre_PikiWiki_Israel.jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
+    },
+    {
+      label: "Market",
+      credit: "Yaniv Ben-Arie (market) · CC BY-SA 2.0; resized and converted to WebP",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:The_market_in_Acre_(Akko)_(373226896).jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+    },
+    {
+      label: "Treasures in the Wall Museum",
+      credit: "Adam Jones (museum collection) · CC BY-SA 2.0; resized and converted to WebP",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Antique_Padlocks_-_Treasures_in_the_Wall_Museum_-_Akko_(Acre)_-_Israel.jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+    },
+    {
+      label: "Ramchal Synagogue",
+      credit: "Deror Avi (Ramchal Synagogue) · CC BY-SA 3.0; resized and converted to WebP",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Acco_Ramhal_Synagogue_IMG_0281.JPG",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    },
+  ],
 };
 
 export function AkkoAttractionPage() {

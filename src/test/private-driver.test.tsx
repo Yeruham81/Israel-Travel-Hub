@@ -166,7 +166,7 @@ describe("private driver page and inquiry", () => {
       "href",
       "#request-quote",
     );
-    expect(screen.queryByText("Photo credits")).not.toBeInTheDocument();
+    expect(screen.queryByText("Photo credits & licences")).not.toBeInTheDocument();
     expect(privateDriverHero.alt).toMatch(/Car travelling on a winding road/);
     const guides = screen.getAllByTestId("driver-guide-card");
     expect(guides).toHaveLength(6);
@@ -287,7 +287,7 @@ describe("shared photo-credit links", () => {
         ]}
       />,
     );
-    expect(absent.queryByText("Photo credits")).not.toBeInTheDocument();
+    expect(absent.queryByText("Photo credits & licences")).not.toBeInTheDocument();
     absent.unmount();
     const credited = render(
       <StayPhotoCredits
@@ -302,12 +302,15 @@ describe("shared photo-credit links", () => {
         ]}
       />,
     );
-    expect(credited.getByText("Photo credits")).toBeInTheDocument();
-    expect(credited.getByRole("link", { name: /Photographer credit/ })).toHaveAttribute(
+    expect(credited.getByText("Photo credits & licences")).toBeInTheDocument();
+    const disclosure = credited.getByTestId("page-photo-credits");
+    expect(disclosure).not.toHaveAttribute("open");
+    expect(disclosure).toHaveTextContent("Photographer credit");
+    expect(credited.getByText("Photo source")).toHaveAttribute(
       "href",
       "https://commons.wikimedia.org/wiki/File:Example.jpg",
     );
-    expect(credited.queryByRole("link", { name: /No external credit/ })).not.toBeInTheDocument();
+    expect(disclosure).not.toHaveTextContent("No external credit");
   });
 });
 

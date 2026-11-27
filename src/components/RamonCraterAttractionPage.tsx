@@ -771,14 +771,11 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
     { label: "Israel Nature and Parks Authority - Nahal Ardon trail", url: official.ardon },
     { label: "Israel Nature and Parks Authority - Hai Ramon status", url: official.haiRamon },
     { label: "DarkSky International - Ramon Crater Dark Sky Park", url: official.darkSky },
-    {
-      label: "Photo credit - HaMinsara columns (Yuvalr, CC BY-SA 3.0; resized)",
-      url: "https://commons.wikimedia.org/wiki/File:Sandy_rectangular_and_hexagonal_prisms_at_the_centre_of_Makhtesh_Ramon_-_Ha-Minsara_(The_Carpentry_Shop),_Israel.jpg",
-    },
-    {
-      label: "Photo credit - fat sand rat (SuperJew, CC BY-SA 3.0; resized)",
-      url: "https://commons.wikimedia.org/wiki/File:Fat_Sand_Rat.jpg",
-    },
+
+  ],
+  photoCredits: [
+    { label: "HaMinsara columns", credit: "Yuvalr · CC BY-SA 3.0; resized", sourceUrl: "https://commons.wikimedia.org/wiki/File:Sandy_rectangular_and_hexagonal_prisms_at_the_centre_of_Makhtesh_Ramon_-_Ha-Minsara_(The_Carpentry_Shop),_Israel.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
+    { label: "Fat sand rat", credit: "SuperJew · CC BY-SA 3.0; resized", sourceUrl: "https://commons.wikimedia.org/wiki/File:Fat_Sand_Rat.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
   ],
 };
 

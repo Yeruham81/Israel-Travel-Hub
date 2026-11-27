@@ -1,3 +1,4 @@
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { ArrowUpRight, CalendarDays, ExternalLink, Lightbulb, MapPin, Route } from "lucide-react";
@@ -713,19 +714,10 @@ export function ChristianToursGuide() {
                 <External href={source.url}>{source.title}</External>
               </li>
             ))}
-            <li>
-              Sea of Galilee photograph:{" "}
-              <External href="https://commons.wikimedia.org/wiki/File:Tiberias_from_the_Sea_of_Galilee_(5809646279).jpg">
-                Ian Scott / Wikimedia Commons
-              </External>{" "}
-              ·{" "}
-              <External href="https://creativecommons.org/licenses/by-sa/2.0/">
-                CC BY-SA 2.0
-              </External>
-              ; resized to WebP.
-            </li>
+
           </ul>
         </SourcesDisclosure>
+        <PhotoCreditsDisclosure entries={[{ label: "Sea of Galilee photograph", credit: "Ian Scott / Wikimedia Commons · CC BY-SA 2.0; resized to WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Tiberias_from_the_Sea_of_Galilee_(5809646279).jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" }]} />
       </article>
     </main>
   );

@@ -1,3 +1,4 @@
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { ConsentIframe } from "@/components/ConsentIframe";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
@@ -913,33 +914,9 @@ export function HaifaMuseumsGuide() {
               </OfficialLink>
             </li>
           </ul>
-          <div className="mt-4 border-t pt-3 text-xs leading-relaxed text-muted-foreground">
-            <p>Photo credits (cropped, resized and converted to WebP):</p>
-            <ul className="mt-2 space-y-1">
-              {haifaMuseumPhotoCredits.map((photo) => (
-                <li key={photo.id}>
-                  <a
-                    href={photo.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    {photo.label}
-                  </a>{" "}
-                  - {photo.author} ·{" "}
-                  <a
-                    href={photo.licenseUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    {photo.license}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+
         </SourcesDisclosure>
+        <PhotoCreditsDisclosure entries={haifaMuseumPhotoCredits.map((photo) => ({ label: photo.label, credit: photo.author + " · " + photo.license + "; cropped, resized and converted to WebP", sourceUrl: photo.sourceUrl, licenseUrl: photo.licenseUrl }))} />
       </article>
     </main>
   );

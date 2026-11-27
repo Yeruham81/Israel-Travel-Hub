@@ -247,7 +247,7 @@ describe("shore excursions", () => {
       }
       // Photo credits stay available in one footer disclosure, not repeated below the hero photo.
       expect(container.querySelector("header figure details")).toBeNull();
-      const credits = screen.getByText("Image credits").closest("details");
+      const credits = screen.getByText("Photo credits & licences").closest("details");
       expect(credits).not.toBeNull();
       expect(credits).not.toHaveAttribute("open");
       expect(credits?.querySelectorAll('a[href*="creativecommons.org"]').length).toBeGreaterThan(0);

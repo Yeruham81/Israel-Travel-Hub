@@ -1,3 +1,4 @@
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { type LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { SiteLink as Link } from "@/components/SiteLink";
@@ -866,53 +867,15 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
           ))}
         </ul>
       </SourcesDisclosure>
-      {photoCredits.length > 0 && (
-        <details
-          className="mt-3 rounded-xl border bg-card text-sm text-muted-foreground"
-          data-testid="itinerary-photo-credits"
-        >
-          <summary className="cursor-pointer px-4 py-3 font-semibold text-foreground">
-            Photo credits &amp; licences
-          </summary>
-          <ul className="space-y-2 border-t px-4 py-4">
-            {photoCredits.map(({ label, photo }) => {
-              const source =
-                photo.sourceUrl && !isPublisherUrl(photo.sourceUrl) ? photo.sourceUrl : undefined;
-              return (
-                <li key={photo.src}>
-                  <strong className="font-medium text-foreground">{label}:</strong>{" "}
-                  {source ? (
-                    <a
-                      href={source}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline underline-offset-2"
-                    >
-                      {photo.credit || "Photo source"}
-                    </a>
-                  ) : (
-                    photo.credit || "Photo source"
-                  )}
-                  {photo.licenseUrl && (
-                    <>
-                      {" "}
-                      ·{" "}
-                      <a
-                        href={photo.licenseUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline underline-offset-2"
-                      >
-                        Licence
-                      </a>
-                    </>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </details>
-      )}
+      <PhotoCreditsDisclosure
+        entries={photoCredits.map(({ label, photo }) => ({
+          label,
+          credit: photo.credit,
+          sourceUrl: photo.sourceUrl && !isPublisherUrl(photo.sourceUrl) ? photo.sourceUrl : undefined,
+          licenseUrl: photo.licenseUrl,
+        }))}
+        testId="itinerary-photo-credits"
+      />
     </main>
   );
 }
