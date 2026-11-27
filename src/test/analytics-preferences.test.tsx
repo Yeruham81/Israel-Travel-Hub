@@ -19,7 +19,22 @@ it("offers all three choices on preview too and reopens settings after necessary
   expect(screen.getByRole("dialog", { name: "Cookie settings" })).toBeVisible();
   const all = screen.getByRole("button", { name: "Accept all" });
   const necessary = screen.getByRole("button", { name: "Accept essential" });
-  expect(all.className).toBe(necessary.className);
+  const manage = screen.getByRole("button", { name: "Manage preferences" });
+  expect(all).toBeVisible();
+  expect(necessary).toBeVisible();
+  expect(manage).toBeVisible();
+  expect(all).toBeEnabled();
+  expect(necessary).toBeEnabled();
+  expect(manage).toBeEnabled();
+  expect(all).toHaveClass("col-span-2", "min-h-14", "bg-primary", "text-primary-foreground");
+  expect(necessary).toHaveClass("min-h-11", "border-primary", "text-primary");
+  expect(manage).toHaveClass("min-h-11", "border-primary", "text-primary");
+  expect(necessary).not.toHaveClass("col-span-2");
+  expect(manage).not.toHaveClass("col-span-2");
+  expect(all.parentElement).toBe(necessary.parentElement);
+  expect(all.parentElement).toBe(manage.parentElement);
+  expect(necessary.compareDocumentPosition(all) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
+  expect(manage.compareDocumentPosition(necessary) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
   fireEvent.click(necessary);
   expect(readStoredConsent(localStorage)?.categories).toEqual(NECESSARY_ONLY);
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
@@ -31,7 +46,7 @@ it("offers all three choices on preview too and reopens settings after necessary
 it("saves independent category choices and keeps necessary storage always on", async () => {
   await showPreferences();
   fireEvent.click(screen.getByRole("button", { name: "Manage preferences" }));
-  expect(screen.getByText(/Always on/)).toBeVisible();
+  expect(screen.getByText(/always active/i)).toBeVisible();
   const boxes = screen.getAllByRole("checkbox");
   expect(boxes).toHaveLength(4);
   boxes.forEach(box => expect(box).not.toBeChecked());

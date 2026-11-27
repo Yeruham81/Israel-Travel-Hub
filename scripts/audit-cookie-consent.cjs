@@ -94,6 +94,13 @@ const consentKey = "ith:cookie-consent:v1";
     const box = await page.getByRole("button", { name: label, exact: true }).boundingBox();
     assert(box && box.x >= 0 && box.x + box.width <= 390 && box.y >= 0 && box.y + box.height <= 844, "Mobile choice visible: " + label);
   }
+  const acceptBox = await page.getByRole("button", { name: "Accept all", exact: true }).boundingBox();
+  const essentialBox = await page.getByRole("button", { name: "Accept essential", exact: true }).boundingBox();
+  const manageBox = await page.getByRole("button", { name: "Manage preferences", exact: true }).boundingBox();
+  assert(acceptBox && essentialBox && manageBox, "All three consent choices remain visible");
+  assert(acceptBox.width > essentialBox.width && acceptBox.width > manageBox.width, "Accept all spans first row");
+  assert(essentialBox.y >= acceptBox.y + acceptBox.height && manageBox.y >= acceptBox.y + acceptBox.height, "Both secondary choices are directly below Accept all");
+  assert(Math.abs(essentialBox.y - manageBox.y) < 2, "Secondary choices share a row");
   await necessary();
   assert(await page.locator("#main form").count() > 0, "Enquiry form remains available");
   assert(await page.locator('a[href*="tpm.li"]').count() > 0, "Affiliate click-out remains available");
