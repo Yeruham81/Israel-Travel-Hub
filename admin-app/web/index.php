@@ -9,6 +9,7 @@ $privateSrc = dirname(__DIR__, 2) . '/private-admin/src/';
 require_once $privateSrc . 'Core.php';
 require_once $privateSrc . 'Auth.php';
 require_once $privateSrc . 'Actions.php';
+require_once $privateSrc . 'Operations.php';
 require_once $privateSrc . 'Views.php';
 
 web_security();
