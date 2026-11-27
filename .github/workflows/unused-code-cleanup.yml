@@ -7,6 +7,7 @@ permissions:
   contents: read
 jobs:
   synchronized-verification-and-stage3:
+    if: ${{ !contains(github.event.head_commit.message, '[apply-verified-stage3]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -231,3 +232,56 @@ jobs:
           name: unused-code-stage-3-proposal
           path: ${{ runner.temp }}/unused-audit/
           if-no-files-found: warn
+
+  apply-verified-stage3:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/audit/unused-code-cleanup' && contains(github.event.head_commit.message, '[apply-verified-stage3]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: audit/unused-code-cleanup
+          persist-credentials: true
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: unused-code-stage-3-proposal
+          path: ${{ runner.temp }}/verified-stage3
+          run-id: 45969162088
+          github-token: ${{ github.token }}
+      - name: Persist only the exact validated test cleanup
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git diff --name-only b57013159d93cda7c9f7d283dafa81700c350b9b HEAD)" = ".github/workflows/unused-code-cleanup.yml"
+          patch="$RUNNER_TEMP/verified-stage3/stage-3.patch"
+          echo "e9262589c87c705be1e210a51c82d6fd0425d32ef1429ffec1af7ea85982b16d  $patch" | sha256sum -c -
+          git apply --index --check "$patch"
+          git apply --index "$patch"
+          git diff --cached --check
+          python3 - "$patch" <<'PY'
+          import pathlib, re, subprocess, sys
+          patch = pathlib.Path(sys.argv[1]).read_text()
+          expected = {}
+          for block in patch.split("diff --git ")[1:]:
+              name = re.match(r'a/(.*?) b/(.*?)\n', block)
+              index = re.search(r'^index ([0-9a-f]+)\.\.([0-9a-f]+) 100644$', block, re.M)
+              assert name and index and name[1] == name[2], "Invalid patch entry"
+              assert name[1].startswith("src/test/")
+              expected[name[1]] = index[2]
+          files = subprocess.check_output(["git", "diff", "--cached", "--name-only", "-z"]).decode().split("\0")
+          assert set(filter(None, files)) == set(expected) and len(expected) == 7
+          for path, sha in expected.items():
+              blob = subprocess.check_output(["git", "rev-parse", ":" + path], text=True).strip()
+              assert blob.startswith(sha), path
+          print("VERIFIED SOURCE BLOBS", len(expected))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Apply verified stage 3 test cleanup"
+          git push origin HEAD:refs/heads/audit/unused-code-cleanup
+          git rev-parse HEAD
