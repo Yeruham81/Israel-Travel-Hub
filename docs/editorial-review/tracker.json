@@ -1061,35 +1061,35 @@
       "group": 13,
       "status": "edited",
       "changes": 15,
-      "notes": "15 approved group 13A copy edits, including About me in both navigation locations and Back to homepage on both error screens; user requested Best Dead Sea hotels. Regression verification pending. Initial corpus 46014975147 failed on three stale copy assertions; updated those assertions without changing regression intent. Editorial corpus 46015882661 succeeded on ac2eba9; final full validation pending."
+      "notes": "15 approved group 13A copy edits, including About me in both navigation locations and Back to homepage on both error screens; user requested Best Dead Sea hotels. Regression verification pending. Initial corpus 46014975147 failed on three stale copy assertions; updated those assertions without changing regression intent. Editorial corpus 46015882661 succeeded on ac2eba9; final full validation pending. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
     },
     {
       "name": "Cookie consent and preferences",
       "group": 13,
       "status": "edited",
       "changes": 16,
-      "notes": "Applied 16 approved wording changes plus essential terminology consistency. Retained disclosure of similar technologies and advertising measurement. At user request Accept all spans first row with filled primary styling and larger text; Accept essential and Manage preferences remain visible, high contrast, directly accessible, minimum 44px height in second row. Consent logic unchanged. User advised that disproportionate prominence may create regulatory risk. Updated unit/browser audit selectors; verification pending. Editorial corpus 46015882661 succeeded on ac2eba9; final full validation pending."
+      "notes": "Applied 16 approved wording changes plus essential terminology consistency. Retained disclosure of similar technologies and advertising measurement. At user request Accept all spans first row with filled primary styling and larger text; Accept essential and Manage preferences remain visible, high contrast, directly accessible, minimum 44px height in second row. Consent logic unchanged. User advised that disproportionate prominence may create regulatory risk. Updated unit/browser audit selectors; verification pending. Editorial corpus 46015882661 succeeded on ac2eba9; final full validation pending. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
     },
     {
       "name": "Floating contact and share controls",
       "group": 13,
       "status": "edited",
       "changes": 4,
-      "notes": "Approved 4 share copy changes. User explicitly retained Contact me — jump to the inquiry form and Share; no changes to contact button or native share label. Verification pending. Editorial corpus including dedicated sharing tests 46016387134 passed."
+      "notes": "Approved 4 share copy changes. User explicitly retained Contact me — jump to the inquiry form and Share; no changes to contact button or native share label. Verification pending. Editorial corpus including dedicated sharing tests 46016387134 passed. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
     },
     {
       "name": "Forms, validation, success and error states",
       "group": 13,
       "status": "edited",
       "changes": 23,
-      "notes": "All 23 approved group 13D edits applied, including user's preferred reply-soon acknowledgement. Shared sending text and passenger validations updated in both relevant contexts; form rules, schema, submission behavior unchanged. Verification pending. Initial corpus 46016861847 reported 34 failures in six files caused by stale field, confirmation and validation-message expectations. Matched those expectations to approved text without changing test logic."
+      "notes": "All 23 approved group 13D edits applied, including user's preferred reply-soon acknowledgement. Shared sending text and passenger validations updated in both relevant contexts; form rules, schema, submission behavior unchanged. Verification pending. Initial corpus 46016861847 reported 34 failures in six files caused by stale field, confirmation and validation-message expectations. Matched those expectations to approved text without changing test logic. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending."
     },
     {
       "name": "Expandable and dynamically loaded content, filters, calendars and widgets",
       "group": 13,
       "status": "edited",
       "changes": 21,
-      "notes": "All 21 approved group 13E copy changes applied; filter functions, links, prices, currency rates and widget behavior preserved. Final validation pending."
+      "notes": "All 21 approved group 13E copy changes applied; filter functions, links, prices, currency rates and widget behavior preserved. Final validation pending. Group 13 regression corpus 46018149453, full validation 46018159611, consent browser audit 46018159403 and affiliate audit 46018159544 passed on 81cd6b6. Final merge/deploy pending. Shore browser audit 46018159531 failed on obsolete UI selectors; corrected both labels. At user's approval, audit retained for manual execution only after material changes; normal full validation and cookie audit remain unchanged. Manual audit not yet verified."
     }
   ]
 }

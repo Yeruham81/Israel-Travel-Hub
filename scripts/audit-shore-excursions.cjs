@@ -35,7 +35,7 @@ fs.mkdirSync(output, { recursive: true });
   async function open(page, path) {
     const response = await page.goto(base + path, { waitUntil: "domcontentloaded" });
     assert(response?.ok(), "page loads successfully: " + path);
-    await page.getByRole("button", { name: "Accept necessary", exact: true }).click();
+    await page.getByRole("button", { name: "Accept essential", exact: true }).click();
   }
   try {
     for (const width of [390, 1440]) {
@@ -76,7 +76,7 @@ fs.mkdirSync(output, { recursive: true });
           await page.waitForFunction(() => !!document.querySelector('#request-quote select[name="itinerary"]')?.value);
           const selectedLabel = await select.locator("option:checked").textContent();
           assert(label.includes("Request a quote: " + selectedLabel + " from "), "correct itinerary selected");
-          await page.locator("#my-private-days").getByRole("link", { name: "request a custom route" }).click();
+          await page.locator("#my-private-days").getByRole("link", { name: "Contact me for a customized itinerary" }).click();
           await page.waitForFunction(() => document.querySelector('#request-quote select[name="itinerary"]')?.value === "other");
           await form.locator('input[name="otherItinerary"]').waitFor();
           await form.getByRole("button", { name: "Send excursion request", exact: true }).click();
@@ -100,7 +100,7 @@ fs.mkdirSync(output, { recursive: true });
           await inside.locator(".shore-pin").first().click();
           await inside.locator(".maplibregl-popup-content").waitFor();
           await page.locator("footer").getByRole("button", { name: "Cookie settings", exact: true }).click();
-          await page.getByRole("button", { name: "Accept necessary", exact: true }).click();
+          await page.getByRole("button", { name: "Accept essential", exact: true }).click();
           await frame.waitFor({ state: "detached" });
         });
       }
