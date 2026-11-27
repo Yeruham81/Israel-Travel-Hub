@@ -44,7 +44,7 @@ export const privateDriverBenefits = [
   { title: "A clear quote before booking", text: "I'll confirm your route, vehicle and total price before you book." },
 ];
 export const privateDriverFaqs = [
-  { q: "How is my private driver quote calculated?", a: "The price depends on your route, date, vehicle size, hours and special requests. I'll confirm the total and explain what's included, including stops, waiting time and any parking or tolls, before you book." },
+  { q: "How is my private driver quote calculated?", a: "The price depends on your route, date, vehicle size, hours and special requests. Before you book, I'll confirm the total price and explain whether it covers stops, waiting time, parking and tolls." },
   { q: "Can I add stops or change the route during the journey?", a: "Yes, if the driver is available. Changes on the day may affect the price, so please discuss them with me first. Planning your stops in advance helps you make the most of your time." },
   { q: "Is a licensed tour guide included?", a: "A licensed guide is arranged separately from your private driver. Tell me which sites you'd like to visit and your preferred language, and I'll check the options." },
   { q: "Can I request a larger vehicle, child seats or accessibility support?", a: "Please include your group size, children's ages, luggage and any accessibility needs. I'll check which vehicles and equipment are available for your date." },

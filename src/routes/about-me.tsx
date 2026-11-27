@@ -96,7 +96,7 @@ function MosheAbout() {
 
     <section id="methodology" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-10" aria-labelledby="methodology-heading">
       <h2 id="methodology-heading" className="text-2xl">Experience behind my travel guides</h2>
-      <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">My website draws on years of experience traveling around Israel and feedback from thousands of clients. I share what I've learned in my <Link to="/travel-blog/" className="font-semibold text-primary underline underline-offset-4">Israel travel guides</Link> to help you plan your visit.</p>
+      <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">My website draws on years of experience traveling around Israel and first-hand feedback from thousands of clients. I share what I've learned in my <Link to="/travel-blog/" className="font-semibold text-primary underline underline-offset-4">Israel travel guides</Link> to help you plan your visit.</p>
     </section>
 
     <section className="border-t bg-secondary/30 py-10 sm:py-12" aria-labelledby="direct-contact-heading">

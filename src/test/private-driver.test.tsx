@@ -49,7 +49,7 @@ describe("private driver page and inquiry", () => {
     expect(within(serviceOverview).getByRole("heading", { name: "Who is a private driver suitable for?" })).toBeInTheDocument();
     expect(serviceOverview).toHaveTextContent("couples, families, groups of friends");
     expect(serviceOverview).toHaveTextContent("business travellers");
-    expect(serviceOverview).toHaveTextContent("licensed tour guiding");
+    expect(serviceOverview).toHaveTextContent(/licensed guides and other extras are arranged separately unless confirmed in the quote/i);
     expect(serviceOverview).toHaveTextContent(/entrance tickets/i);
     expect(serviceOverview.compareDocumentPosition(container.querySelector("#journeys")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getAllByTestId("driver-journey-card")).toHaveLength(3);
