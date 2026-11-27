@@ -55,6 +55,9 @@ jobs:
       - name: Install dependencies
         run: bash scripts/install-ci-dependencies.sh
 
+      - name: Test rendered photo attribution audit
+        run: node --test scripts/verify-photo-credits.test.mjs
+
       # TanStack Router regenerates routeTree.gen.ts at build time.
       # Build first so type-checking sees any newly added file routes.
       - name: Build production version
