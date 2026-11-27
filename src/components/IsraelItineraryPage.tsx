@@ -380,7 +380,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     </section>
     <HomeContactForm key={id} showTripadvisorBesidePortraitMobile guide={{
       ...guideContactCopy(g.title, "itinerary"),
-      eyebrow: "Contact Me",
+      eyebrow: "Contact me",
       heading: "Need a Private Driver for Your Israel Trip?",
       introduction: "Tell me your travel dates, pickup location, destinations and number of passengers. I'll reply personally about arranging private transport for your journey.",
       placeholder: "Travel dates, pickup point, destinations, passengers and luggage…",

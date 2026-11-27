@@ -25,7 +25,7 @@ export function OwnerTourSection({ tours, compact = false, onRequestQuote }: { t
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
               <p className="mt-2 text-xs text-muted-foreground">{tour.length === "full-day" ? "Full day · Customized itinerary" : tour.duration} · Private car &amp; driver</p>
             </div>
-            <a href="#contact" onClick={() => onRequestQuote?.(tour)} aria-label={"Request a quote for " + tour.title} className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center">Request a quote</a>
+            <a href="#contact" onClick={() => onRequestQuote?.(tour)} aria-label={"Get a quote for " + tour.title} className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center">Get a quote</a>
           </div>
         </article>
       </li> : <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex h-full min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card">
@@ -41,7 +41,7 @@ export function OwnerTourSection({ tours, compact = false, onRequestQuote }: { t
           </dl>
           <p className="mt-3 text-xs text-primary">{tour.destinationIds.map(placeLabel).join(" · ")}</p>
           <div className="mt-auto pt-4"><div className="border-t pt-4">{tour.price ? <><PriceDisplay amount={tour.price.amount} /><p className="mt-2 text-xs text-muted-foreground">Per vehicle · up to {tour.price.maxPartySize} · transport only</p></> : <><p className="text-lg font-semibold">Customized quote for your itinerary</p><p className="mt-1 text-xs text-muted-foreground">Route, vehicle and full price agreed before booking</p></>}</div>
-            <Link to="/private-driver-in-israel/" search={{ tour: tour.id }} hash="request-quote" className="btn btn-primary mt-4 w-full" aria-label={`Request a quote for ${tour.title}`}>Get a quote</Link>
+            <Link to="/private-driver-in-israel/" search={{ tour: tour.id }} hash="request-quote" className="btn btn-primary mt-4 w-full" aria-label={`Get a quote for ${tour.title}`}>Get a quote</Link>
           </div>
         </article>
       </li>)}

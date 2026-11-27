@@ -62,7 +62,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
       </GuideHeroLayout>
       <AuthorCard />
     </header>
-    <OnThisPage sections={[["itineraries","Shore excursions"],["shore-planning","Compare destinations"],["shore-map","Destination map"],["port-pickup","Port pickup"],["return-to-ship","Return to the ship"],["faq","FAQ"],["shore-local","Related guides"],["request-quote","Contact Me"]]}/>
+    <OnThisPage sections={[["itineraries","Shore excursions"],["shore-planning","Compare destinations"],["shore-map","Destination map"],["port-pickup","Port pickup"],["return-to-ship","Return to the ship"],["faq","FAQ"],["shore-local","Related guides"],["request-quote","Contact me"]]}/>
     <ShoreServiceCatalog portId={id} filters={filters} onFilterChange={onFilterChange} itineraryId={itineraryId} onSelectItinerary={setItineraryId} />
     <ShorePortPlanning id={id} name={port.name}/>
     <section id="port-pickup" aria-labelledby="port-pickup-h" className="mt-12 scroll-mt-24">

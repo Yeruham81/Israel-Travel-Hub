@@ -22,13 +22,13 @@ export const jerusalemMuseumAreas: {id:JerusalemMuseumArea;name:string;intro:str
   },
   {
     "id": "central",
-    "name": "City centre, Nahalat Shiva & Musrara",
+    "name": "City center, Nahalat Shiva & Musrara",
     "intro": "Several smaller heritage museums and multimedia attractions are within walking distance of Hillel Street and Nahalat Shiva. Museum on the Seam is farther north."
   },
   {
     "id": "south",
     "name": "Talbiya & the Hinnom Valley",
-    "intro": "The Museum for Islamic Art and Menachem Begin Heritage Center are south of the city centre. Allow enough time for each museum and the journey between them."
+    "intro": "The Museum for Islamic Art and Menachem Begin Heritage Center are south of the city center. Allow enough time for each museum and the journey between them."
   }
 ];
 export const jerusalemMuseums: JerusalemMuseumEntry[] = [
@@ -36,7 +36,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "israel",
     "name": "The Israel Museum, Jerusalem",
     "area": "west",
-    "neighbourhood": "Museum Row · Givat Ram",
+    "neighborhood": "Museum Row · Givat Ram",
     "address": "11 Ruppin Boulevard, Jerusalem",
     "mapLocation": {
       "lat": 31.7725,
@@ -63,7 +63,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "bible",
     "name": "Bible Lands Museum Jerusalem",
     "area": "west",
-    "neighbourhood": "Museum Row · Givat Ram",
+    "neighborhood": "Museum Row · Givat Ram",
     "address": "21 Shmuel Stefan Wise Street, Jerusalem",
     "mapLocation": {
       "lat": 31.774905,
@@ -89,7 +89,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "science",
     "name": "Bloomfield Science Museum",
     "area": "west",
-    "neighbourhood": "Museum Row · Givat Ram",
+    "neighborhood": "Museum Row · Givat Ram",
     "address": "3 Museum Boulevard, Jerusalem",
     "mapLocation": {
       "lat": 31.778395,
@@ -117,7 +117,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "yad",
     "name": "Yad Vashem – Holocaust History Museum",
     "area": "west",
-    "neighbourhood": "Mount of Remembrance · western Jerusalem",
+    "neighborhood": "Mount of Remembrance · western Jerusalem",
     "address": "Mount of Remembrance, Jerusalem",
     "mapLocation": {
       "lat": 31.774207,
@@ -130,7 +130,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "admission": "Free entry to the museum and memorial campus",
     "openingDays": "Sun–Thu and Friday mornings; closed Sat and Jewish holidays",
     "booking": "Reserve a free museum entry slot online; walk-ins depend on availability",
-    "intro": "Israel's Holocaust remembrance centre combines the Holocaust History Museum with monuments, archives, survivor testimony and contemplative spaces across its campus.",
+    "intro": "Israel's Holocaust remembrance center combines the Holocaust History Museum with monuments, archives, survivor testimony and contemplative spaces across its campus.",
     "highlights": [
       "Holocaust History Museum and Hall of Names",
       "Children's Memorial and the Avenue of the Righteous"
@@ -145,7 +145,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "tower",
     "name": "Tower of David Jerusalem Museum",
     "area": "old",
-    "neighbourhood": "Jaffa Gate · Old City",
+    "neighborhood": "Jaffa Gate · Old City",
     "address": "Tower of David Citadel, Jaffa Gate, Jerusalem",
     "mapLocation": {
       "lat": 31.7767,
@@ -172,7 +172,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "rockefeller",
     "name": "Rockefeller Archaeological Museum",
     "area": "old",
-    "neighbourhood": "Sultan Suleiman Street · near Herod's Gate",
+    "neighborhood": "Sultan Suleiman Street · near Herod's Gate",
     "address": "27 Sultan Suleiman Street, Jerusalem",
     "mapLocation": {
       "lat": 31.7837,
@@ -198,7 +198,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "time",
     "name": "Time Elevator Jerusalem",
     "area": "old",
-    "neighbourhood": "Mamilla · near Jaffa Gate",
+    "neighborhood": "Mamilla · near Jaffa Gate",
     "address": "6 Yitzhak Kariv Street, Mamilla, Jerusalem",
     "mapLocation": {
       "lat": 31.7774953,
@@ -225,7 +225,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "prison",
     "name": "Museum of the Underground Prisoners",
     "area": "central",
-    "neighbourhood": "Russian Compound",
+    "neighborhood": "Russian Compound",
     "address": "1 Mish'ol HaGvura, Russian Compound, Jerusalem",
     "mapLocation": {
       "lat": 31.78191,
@@ -243,14 +243,14 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
       "Original prison cells and escape story",
       "Historical displays about the Mandate period"
     ],
-    "tip": "Pair the museum with a walk through the Russian Compound and city-centre streets.",
+    "tip": "Pair the museum with a walk through the Russian Compound and city-center streets.",
     "url": "https://museums.mod.gov.il/sites/Jerusalem/AboutUs/Pages/About.aspx"
   },
   {
     "id": "friends",
     "name": "Friends of Zion Museum",
     "area": "central",
-    "neighbourhood": "Nahalat Shiva · city centre",
+    "neighborhood": "Nahalat Shiva · city center",
     "address": "20 Yosef Rivlin Street, Jerusalem",
     "mapLocation": {
       "lat": 31.780167,
@@ -275,7 +275,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "tolerance",
     "name": "Museum of Tolerance Jerusalem",
     "area": "central",
-    "neighbourhood": "Hillel Street · city centre",
+    "neighborhood": "Hillel Street · city center",
     "address": "32 Hillel Street, Jerusalem",
     "mapLocation": {
       "lat": 31.779129,
@@ -288,7 +288,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "admission": "Guided English exhibition tour ₪35–50 depending on ticket type",
     "openingDays": "Guided tours on selected Sun–Fri dates; closed Sat",
     "booking": "Book a dated guided tour; exhibition age guidance may apply",
-    "intro": "A contemporary exhibition and cultural centre devoted to human dignity, dialogue and identity, with themed gallery tours and changing public programmes.",
+    "intro": "A contemporary exhibition and cultural center devoted to human dignity, dialogue and identity, with themed gallery tours and changing public programmes.",
     "highlights": [
       "Guided tours of current exhibitions",
       "Contemporary cultural and social themes"
@@ -303,7 +303,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "music",
     "name": "Hebrew Music Museum",
     "area": "central",
-    "neighbourhood": "Nahalat Shiva · city centre",
+    "neighborhood": "Nahalat Shiva · city center",
     "address": "10 Yoel Moshe Salomon Street, Jerusalem",
     "mapLocation": {
       "lat": 31.780637,
@@ -330,7 +330,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "italian",
     "name": "Nahon Museum of Italian Jewish Art",
     "area": "central",
-    "neighbourhood": "Hillel Street · city centre",
+    "neighborhood": "Hillel Street · city center",
     "address": "25 Hillel Street, Jerusalem",
     "mapLocation": {
       "lat": 31.780202,
@@ -356,7 +356,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "seam",
     "name": "Museum on the Seam",
     "area": "central",
-    "neighbourhood": "Musrara · seam-line area",
+    "neighborhood": "Musrara · seam-line area",
     "address": "4 Heil HaHandasa Street, Jerusalem",
     "mapLocation": {
       "lat": 31.786352,
@@ -382,7 +382,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "islamic",
     "name": "Museum for Islamic Art",
     "area": "south",
-    "neighbourhood": "Talbiya · HaPalmach Street",
+    "neighborhood": "Talbiya · HaPalmach Street",
     "address": "2 HaPalmach Street, Jerusalem",
     "mapLocation": {
       "lat": 31.768585,
@@ -408,7 +408,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "id": "begin",
     "name": "Menachem Begin Heritage Center",
     "area": "south",
-    "neighbourhood": "Near the Old City · Hinnom Valley",
+    "neighborhood": "Near the Old City · Hinnom Valley",
     "address": "6 Nahon Street, Jerusalem",
     "mapLocation": {
       "lat": 31.769344,
@@ -421,7 +421,7 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
     "admission": "Adult ₪30; senior, student and child ₪25",
     "openingDays": "Sun–Thu 09:00–16:30; Fri until 12:30; closed Sat",
     "booking": "Pre-book a guided multimedia museum tour",
-    "intro": "A multimedia presentation traces Menachem Begin's life from Poland to his leadership in Israel and the peace agreement with Egypt, alongside the centre's educational collections.",
+    "intro": "A multimedia presentation traces Menachem Begin's life from Poland to his leadership in Israel and the peace agreement with Egypt, alongside the center's educational collections.",
     "highlights": [
       "Personal archives and multimedia biography",
       "Israel's modern political and diplomatic history"

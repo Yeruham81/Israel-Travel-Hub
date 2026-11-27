@@ -70,7 +70,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Tel Megiddo is a managed national park with a visitor centre, museum displays and an introductory film. The Israel Nature and Parks Authority publishes seasonal hours, entry fees and advance visit coordination on the <a href={telMegiddoSite.sources.park} target="_blank" rel="noopener noreferrer" className={inlineLink}>official park page</a>.</p>
+      <p>Tel Megiddo is a managed national park with a visitor center, museum displays and an introductory film. The Israel Nature and Parks Authority publishes seasonal hours, entry fees and advance visit coordination on the <a href={telMegiddoSite.sources.park} target="_blank" rel="noopener noreferrer" className={inlineLink}>official park page</a>.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="tel-megiddo-visitor-hours">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Opening hours</h3>
@@ -107,7 +107,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or with a driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Follow Route 66 towards the signed entrance of Tel Megiddo National Park. There is parking at the visitor centre. Allow time to check in and walk from the entrance to the excavated areas, especially if you have other northern Israel stops planned.</p>
+            <p className="mt-2 text-sm leading-relaxed">Follow Route 66 towards the signed entrance of Tel Megiddo National Park. There is parking at the visitor center. Allow time to check in and walk from the entrance to the excavated areas, especially if you have other northern Israel stops planned.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Driving directions to Tel Megiddo <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -133,7 +133,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-xl font-semibold">A rewarding visit to Tel Megiddo</h3>
         <p className="mt-3 text-sm leading-relaxed sm:text-base">Plan approximately <strong>1.5–2 hours</strong> for the museum introduction, ancient gates, excavations and viewpoints. Leave extra time if you watch the film, explore the whole marked route and enter the water system.</p>
         <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li>Begin at the visitor centre and museum to understand the sequence of cities.</li>
+          <li>Begin at the visitor center and museum to understand the sequence of cities.</li>
           <li>Follow the marked trail through the city gates, temples, granary and stables.</li>
           <li>Enjoy the valley viewpoints and choose whether to take the optional water-system route.</li>
         </ol>

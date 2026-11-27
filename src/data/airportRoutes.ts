@@ -23,9 +23,9 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     journeyText: "Allow around 45–60 minutes or more after pickup from Ben Gurion Airport, depending on traffic and your hotel. Add time for passport control and baggage collection before the drive.",
     areasTitle: "Where in Jerusalem are you staying?",
     areas: [
-      { title: "City centre, Mamilla & King David Street", text: "Include the hotel name and the entrance used for vehicle arrivals. Mamilla and King David Street hotels may have a separate luggage or reception entrance." },
+      { title: "City center, Mamilla & King David Street", text: "Include the hotel name and the entrance used for vehicle arrivals. Mamilla and King David Street hotels may have a separate luggage or reception entrance." },
       { title: "Inside or beside the Old City", text: "Ask your hotel which Old City gate or unloading point your driver can reach, and allow time to walk from there." },
-      { title: "East Jerusalem & residential neighbourhoods", text: "Provide the full street address and entrance, plus a location pin for apartments or buildings with several entrances." },
+      { title: "East Jerusalem & residential neighborhoods", text: "Provide the full street address and entrance, plus a location pin for apartments or buildings with several entrances." },
     ],
     example: {
       title: "If your room is inside the Old City",

@@ -85,7 +85,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
                     <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
                     <p className="mt-2 text-xs text-muted-foreground">Full day · Customized itinerary · Private car &amp; driver</p>
                   </div>
-                  <a href="#request-quote" onClick={() => onSelectItinerary(itinerary.id)} className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center" aria-label={"Request a quote: " + itinerary.destination + " from " + port.name}>Request a quote</a>
+                  <a href="#request-quote" onClick={() => onSelectItinerary(itinerary.id)} className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center" aria-label={"Get a quote: " + itinerary.destination + " from " + port.name}>Get a quote</a>
                 </div>
               </article>
             </li>;

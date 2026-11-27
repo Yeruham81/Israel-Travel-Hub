@@ -125,7 +125,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     booking: "General entry is free; confirm access to particular galleries and groups in advance.",
     intro: "The Reuben and Edith Hecht Museum is inside the University of Haifa campus. Archaeological finds, ancient crafts, the Ma'agan Michael shipwreck and art galleries make it a rewarding stop for visitors interested in the region's long history.",
     highlights: ["Archaeology from the Canaanite period onwards and displays of ancient daily life.", "The ancient Ma'agan Michael ship exhibition and art collections."],
-    tip: "Allow time for the journey to the university high above the centre. I recommend visiting the Hecht Museum separately from Tikotin and the German Colony.",
+    tip: "Allow time for the journey to the university high above the center. I recommend visiting the Hecht Museum separately from Tikotin and the German Colony.",
     url: "https://mushecht.haifa.ac.il/", featured: true
   },
   {

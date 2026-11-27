@@ -94,15 +94,15 @@ const tiberiasHotelNotes: Record<string, HotelEditorNote> = {
   },
   "tib-emily": {
     kind: "Small city hotel",
-    summary: "A small hotel near the city centre offering bed-and-breakfast accommodation.",
-    bestFor: "Travellers looking for a convenient place to stay while exploring the Galilee",
+    summary: "A small hotel near the city center offering bed-and-breakfast accommodation.",
+    bestFor: "Travelers looking for a convenient place to stay while exploring the Galilee",
     consider: "Check meal options, parking availability and access to the swimming pool.",
     beach: "Near the waterfront; check swimming access",
   },
   "tib-tiberia": {
     kind: "Small central hotel",
     summary: "A simple hotel offering private rooms in Tiberias' historic center, within easy reach of local attractions.",
-    bestFor: "Independent travellers looking for a private hotel room",
+    bestFor: "Independent travelers looking for a private hotel room",
     consider: "Confirm reception hours, stairs or lift access and room facilities.",
     beach: "Central town base; walk to the lakefront",
   },

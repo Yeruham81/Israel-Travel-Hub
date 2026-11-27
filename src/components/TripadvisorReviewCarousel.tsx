@@ -26,7 +26,7 @@ function ReviewCard({ review }: { review: TripadvisorReview }) {
       </div>
       <blockquote cite={tripadvisorProfileUrl} className="mt-3 flex-1 text-[0.9375rem] leading-relaxed">“{review.excerpt}”</blockquote>
       <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 self-start text-xs font-semibold text-primary underline-offset-4 hover:underline">
-        Read on Tripadvisor <ExternalLink size={12} aria-hidden />
+        Read on TripAdvisor <ExternalLink size={12} aria-hidden />
       </a>
     </article>
   );
@@ -68,7 +68,7 @@ export function TripadvisorReviewCarousel() {
   }, [rotating, index, count]);
 
   return (
-    <section role="region" aria-roledescription="carousel" aria-label="Tripadvisor traveler reviews"
+    <section role="region" aria-roledescription="carousel" aria-label="TripAdvisor traveler reviews"
       onMouseEnter={() => setInteracting(true)}
       onMouseLeave={() => setInteracting(false)}
       onFocusCapture={() => setInteracting(true)}
@@ -82,11 +82,11 @@ export function TripadvisorReviewCarousel() {
           </div>;
         })}
       </div>
-      <div className="flex justify-center gap-1 px-4 pb-2" role="group" aria-label="Choose a Tripadvisor review">
+      <div className="flex justify-center gap-1 px-4 pb-2" role="group" aria-label="Choose a TripAdvisor review">
         {tripadvisorReviews.map((review, i) => (
           <button key={review.author} type="button"
             onClick={() => { setIndex(i); setManuallySelected(true); }}
-            aria-label={"Show Tripadvisor review from " + review.author}
+            aria-label={"Show TripAdvisor review from " + review.author}
             aria-pressed={index === i}
             className="group grid size-8 place-items-center rounded-full focus-visible:ring-2 focus-visible:ring-ring"
           >

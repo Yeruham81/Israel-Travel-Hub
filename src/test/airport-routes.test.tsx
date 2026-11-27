@@ -35,8 +35,8 @@ describe("four dedicated airport transfer routes", () => {
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("One-way weekday airport pickup");
     expect(screen.getByTestId("airport-route-fx-note").previousElementSibling).toHaveTextContent(/quote return trips, larger vehicles and extra stops separately/i);
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(route.driveTime);
-    expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveAttribute("href", "#request-quote");
-    expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveClass("bg-primary");
+    expect(screen.getByRole("link", { name: "Get a quote" })).toHaveAttribute("href", "#request-quote");
+    expect(screen.getByRole("link", { name: "Get a quote" })).toHaveClass("bg-primary");
     const hero = screen.getByTestId("guide-hero-layout");
     expect(within(hero).getByTestId("guide-hero-media").querySelector("img")).toHaveAttribute("src", expect.stringMatching(/transfer-/));
     const updateLine = within(hero).getByText(/^Updated/);

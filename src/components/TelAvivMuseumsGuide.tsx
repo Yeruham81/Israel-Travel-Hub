@@ -28,7 +28,7 @@ const related = [
   { title: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" as const, note: "Buses, trains, the light rail and other transport", image: dizengoffPhoto, alt: "A street scene in central Tel Aviv" },
   { title: "Beaches in Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/" as const, note: "Relax with a seaside walk after visiting a museum", image: beachPhoto, alt: "Tel Aviv's Mediterranean beachfront" },
   { title: "Israel events calendar", to: "/travel-blog/calendar-of-events/" as const, note: "Festivals, cultural events and seasonal activities", image: museumHero, alt: "Israel events" },
-  { title: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const, note: "Compare neighbourhoods and hotels for your visit", image: beachfrontPhoto, alt: "Beachfront and hotels in Tel Aviv" },
+  { title: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const, note: "Compare neighborhoods and hotels for your visit", image: beachfrontPhoto, alt: "Beachfront and hotels in Tel Aviv" },
 ];
 
 function OfficialLink({ href, children }: { href: string; children: ReactNode }) {
@@ -107,7 +107,7 @@ function MuseumCard({ museum }: { museum: MuseumEntry }) {
       </div>
       <div className={`grid w-full gap-2 text-sm lg:w-auto lg:min-w-[360px] ${showTicket ? "sm:grid-cols-2" : "sm:grid-cols-1"}`}>
         {showTicket && <a href={museum.id === "palmach" ? "tel:+97235459800" : museum.ticketUrl!} target={museum.id === "palmach" ? undefined : "_blank"} rel={museum.id === "palmach" ? undefined : "noopener noreferrer"} className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2.5 text-center font-semibold text-primary-foreground transition-opacity hover:opacity-90">{ticketLabel}{museum.id !== "palmach" && <><ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></>}</a>}
-        <a href={museum.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-100 px-3 py-2.5 text-center font-semibold text-sky-950 hover:bg-sky-200">{museum.id === "bauhaus" || museum.id === "liebling" ? "Official centre website" : "Official museum website"}<ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>
+        <a href={museum.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-100 px-3 py-2.5 text-center font-semibold text-sky-950 hover:bg-sky-200">{museum.id === "bauhaus" || museum.id === "liebling" ? "Official center website" : "Official museum website"}<ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>
       </div>
     </div>
   </article>;
@@ -265,7 +265,7 @@ export function TelAvivMuseumsGuide() {
       </section>
 
       <section id="museum-routes" aria-labelledby="museum-routes-heading" className="mt-12 scroll-mt-24">
-        <SectionHeading id="museum-routes" title="Plan a museum day in Tel Aviv" intro="Here are three manageable ideas, with enough time to enjoy the exhibitions and the neighbourhood around them." />
+        <SectionHeading id="museum-routes" title="Plan a museum day in Tel Aviv" intro="Here are three manageable ideas, with enough time to enjoy the exhibitions and the neighborhood around them." />
         <div className="grid gap-4 md:grid-cols-3">
           {[
             { title: "Bialik Square cultural walk", time: "Around half a day", steps: ["Tel Aviv–Yafo City Museum", "Rubin Museum", "Liebling Haus or Bialik House"], note: "Mostly walkable, with cafés and central streets nearby." },

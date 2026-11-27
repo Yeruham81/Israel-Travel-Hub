@@ -3,7 +3,7 @@
 export type ShoppingPlace = {
   id: string;
   name: string;
-  district: "Old City & Mamilla" | "City centre & markets" | "South Jerusalem";
+  district: "Old City & Mamilla" | "City center & markets" | "South Jerusalem";
   bestFor: string;
   area: string;
   when: string;
@@ -62,7 +62,7 @@ export const jerusalemShoppingPlaces: ShoppingPlace[] = [
     official: { label: "Artists' Colony website", href: "https://artistscolony.co.il/" },
   },
   {
-    id: "mahane", name: "Mahane Yehuda Market", district: "City centre & markets",
+    id: "mahane", name: "Mahane Yehuda Market", district: "City center & markets",
     bestFor: "Food, spices, produce & market atmosphere", area: "Jaffa Road / Agripas",
     when: "Morning for produce; Friday early", highlights: "Food stalls · Spices · Street food",
     description: "Mahane Yehuda is where I would send food lovers first. The market is full of produce sellers, spices, baked goods, specialty food stalls and places to eat. Its evening restaurant and bar scene is quite different from daytime food shopping.",
@@ -73,8 +73,8 @@ export const jerusalemShoppingPlaces: ShoppingPlace[] = [
     official: { label: "Market information", href: "https://en.machne.co.il/" },
   },
   {
-    id: "ben-yehuda", name: "Ben Yehuda Street", district: "City centre & markets",
-    bestFor: "Central shopping & easy browsing", area: "Jerusalem city centre",
+    id: "ben-yehuda", name: "Ben Yehuda Street", district: "City center & markets",
+    bestFor: "Central shopping & easy browsing", area: "Jerusalem city center",
     when: "Daytime and early evening", highlights: "Pedestrian streets · Gift shops · Cafés",
     description: "Ben Yehuda Street is a convenient shopping stop in central Jerusalem. Browse gift shops, casual fashion and cafés, with Jaffa Road and King George Street nearby.",
     practical: "Combine Ben Yehuda Street with nearby central streets, or continue west to Mahane Yehuda for food shopping.",
@@ -83,23 +83,23 @@ export const jerusalemShoppingPlaces: ShoppingPlace[] = [
     photo: { src: images + "ben-yehuda.webp", alt: "Shops and pedestrian space on Ben Yehuda Street in Jerusalem" },
   },
   {
-    id: "bezalel", name: "Bezalel Arts Fair", district: "City centre & markets",
+    id: "bezalel", name: "Bezalel Arts Fair", district: "City center & markets",
     bestFor: "Handmade designs & Friday art stalls", area: "Bezalel and Shatz pedestrian streets",
     when: "Usually Friday; check this week's notice", highlights: "Jewellery · Prints · Ceramics",
     description: "The Friday arts fair brings makers and small stalls to the Bezalel and Shatz pedestrian-street area. Look for jewellery, ceramics, photography, woodwork, prints and independent design.",
     practical: "The organiser lists the fair on Fridays on Bezalel pedestrian street. I recommend checking the organiser's latest announcement for the hours and any schedule changes before making a dedicated trip.",
-    gettingThere: "The Bezalel/Shatz pedestrian streets in the city centre, near the Nahalat Shiva and central-city walking areas.",
+    gettingThere: "The Bezalel/Shatz pedestrian streets in the city center, near the Nahalat Shiva and central-city walking areas.",
     lat: 31.7797, lon: 35.2149,
     photo: { src: images + "bezalel-arts-fair.webp", alt: "Jerusalem arts fair stall with original paintings and handmade artwork" },
     official: { label: "Arts fair organiser & dates", href: "https://edisonhafakot.co.il/he/fairline/3" },
   },
   {
     id: "emek-refaim", name: "Emek Refaim Street", district: "South Jerusalem",
-    bestFor: "Neighbourhood boutiques & cafés", area: "German Colony",
-    when: "Combine with a relaxed neighbourhood walk", highlights: "Local shops · Cafés · Design",
-    description: "Emek Refaim has a calmer neighbourhood feel, with cafés, small shops and restaurants in the German Colony. It's ideal for a leisurely stroll, boutique shopping and a coffee break.",
+    bestFor: "Neighborhood boutiques & cafés", area: "German Colony",
+    when: "Combine with a relaxed neighborhood walk", highlights: "Local shops · Cafés · Design",
+    description: "Emek Refaim has a calmer neighborhood feel, with cafés, small shops and restaurants in the German Colony. It's ideal for a leisurely stroll, boutique shopping and a coffee break.",
     practical: "Combine it with a German Colony walk or a visit to the First Station nearby. Check opening hours with individual shops.",
-    gettingThere: "South of the city centre in the German Colony; buses and taxis may be more convenient than a long walk.",
+    gettingThere: "South of the city center in the German Colony; buses and taxis may be more convenient than a long walk.",
     lat: 31.7620, lon: 35.2212,
     photo: { src: images + "emek-refaim.webp", alt: "Shops and street scene on Emek Refaim in Jerusalem" },
   },
@@ -116,10 +116,10 @@ export const jerusalemShoppingPlaces: ShoppingPlace[] = [
   },
   {
     id: "malha", name: "Malha Mall", district: "South Jerusalem",
-    bestFor: "Indoor shopping & major chains", area: "Malha neighbourhood",
+    bestFor: "Indoor shopping & major chains", area: "Malha neighborhood",
     when: "A separate shopping outing", highlights: "Indoor mall · Fashion · Chain stores",
     description: "Malha Mall brings Israeli and international brands together under one roof, making it a good choice in any weather.",
-    practical: "It is outside the historic centre, so allow for the journey each way. Check the mall directory and the opening hours of the specific store you plan to visit.",
+    practical: "It is outside the historic center, so allow for the journey each way. Check the mall directory and the opening hours of the specific store you plan to visit.",
     gettingThere: "On Agudat Sport Beitar Street in southwest Jerusalem; take a bus, taxi or drive.",
     lat: 31.7507, lon: 35.1910,
     photo: { src: images + "malha.webp", alt: "Interior shopping galleries at Malha Mall in Jerusalem" },
@@ -138,6 +138,6 @@ export const shoppingTopPicks = [
 ] as const;
 export const shoppingDistricts = [
   { id: "old", title: "Old City & Mamilla", intro: "Combine historic market streets with modern shopping near Jaffa Gate." },
-  { id: "centre", title: "City centre & markets", intro: "Food stalls, pedestrian shopping and independent design close to central transport." },
-  { id: "south", title: "South Jerusalem", intro: "Neighbourhood boutiques, a cultural complex and an indoor mall on separate routes." },
+  { id: "center", title: "City center & markets", intro: "Food stalls, pedestrian shopping and independent design close to central transport." },
+  { id: "south", title: "South Jerusalem", intro: "Neighborhood boutiques, a cultural complex and an indoor mall on separate routes." },
 ] as const;

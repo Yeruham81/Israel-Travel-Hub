@@ -60,7 +60,7 @@ describe("Tiberias hotel editorial", () => {
     expect(screen.getAllByTestId("tiberias-hotel-facility-notice")).toHaveLength(3);
     expect(container).toHaveTextContent("The private beach closed on October 4, 2026");
     expect(container).toHaveTextContent("The seasonal outdoor pool is closed from November 1, 2026");
-    expect(container).toHaveTextContent("currently says stays run on a full-board basis rather than all-inclusive");
+    expect(container).toHaveTextContent("currently offers full-board stays");
     expect(container).not.toHaveTextContent("Select a hotel name to jump");
   });
 

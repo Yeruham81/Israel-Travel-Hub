@@ -47,7 +47,7 @@ const related=[
  {title:"Museums in Tel Aviv",to:"/travel-blog/museums-in-tel-aviv/" as const,description:"Art, archaeology and indoor culture",image:relatedMuseum,alt:"Exterior of a Tel Aviv museum"},
  {title:"Getting around Tel Aviv",to:"/travel-blog/getting-around-tel-aviv/" as const,description:"Buses, the Red Line, walking and taxis",image:relatedTransport,alt:"Bus serving central Tel Aviv"},
  {title:"Israel travel tips",to:"/travel-blog/israel-travel-tips/" as const,description:"My essential planning advice for visitors",image:relatedDayTrips,alt:"Travel planning in Israel"},
- {title:"Where to stay in Tel Aviv",to:"/travel-blog/where-to-stay-in-tel-aviv/" as const,description:"Compare neighbourhoods and hotels",image:relatedHotels,alt:"A street in a central Tel Aviv accommodation area"},
+ {title:"Where to stay in Tel Aviv",to:"/travel-blog/where-to-stay-in-tel-aviv/" as const,description:"Compare neighborhoods and hotels",image:relatedHotels,alt:"A street in a central Tel Aviv accommodation area"},
 ];
 const planning=[
  {title:"3 days in Israel",to:"/travel-blog/israel-itinerary-3-days/" as const,description:"A shorter journey around the highlights",image:threeDays,alt:"Jerusalem skyline"},
@@ -58,12 +58,12 @@ const planning=[
  {title:"Best time to visit Israel",to:"/travel-blog/best-time-to-visit-israel/" as const,description:"Compare seasons and weather",image:seasonPhoto,alt:"Landscape showing a season in Israel"}
 ];
 const affiliateTours=[
- {id:"tour-jaffa-carmel-walk-getyourguide@tours-tel-aviv-jaffa",provider:"GetYourGuide",title:"Tel Aviv Urban Walk: Architecture, Food & Street Art",description:"A guided city experience combining neighbourhood culture, streets and local flavours",image:tourCity,alt:"The Tel Aviv skyline and urban coastline",duration:"Confirm with provider",meeting:"Check selected meeting point",fromUsd:null,ratingLabel:null},
+ {id:"tour-jaffa-carmel-walk-getyourguide@tours-tel-aviv-jaffa",provider:"GetYourGuide",title:"Tel Aviv Urban Walk: Architecture, Food & Street Art",description:"A guided city experience combining neighborhood culture, streets and local flavours",image:tourCity,alt:"The Tel Aviv skyline and urban coastline",duration:"Confirm with provider",meeting:"Check selected meeting point",fromUsd:null,ratingLabel:null},
  {id:"tour-old-jaffa-walk-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Old Jaffa & Flea Market Walking Tour",description:"A compact walking tour of Jaffa's stone streets, harbour and flea market",image:tourJaffa,alt:"Historic stone buildings in Jaffa",duration:"1 hr 30 min",meeting:"Yefet St 7, Jaffa",fromUsd:59,ratingLabel:"4.5 · 13 reviews"},
  {id:"tour-carmel-market-food-tour-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Carmel Market Food-Tasting Tour",description:"Local flavours and food tastings at Carmel Market and Kerem HaTeimanim. This is a tasting walk, not a cooking workshop.",image:"/images/tel-aviv-attractions/carmel-food-tasting.webp",alt:"A colourful stall of olives, pickles and spices at Carmel Market",duration:"3 hours",meeting:"HaCarmel St 43",fromUsd:145,ratingLabel:"5.0 · 143 reviews"},
  {id:"tour-tel-aviv-street-art-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Tel Aviv Street Art & Graffiti Tour",description:"Discover the changing graffiti and urban-art scene with a local guide",image:"/images/tel-aviv-attractions/florentin-graffiti.webp",alt:"A real graffiti mural on Florentin Street in Tel Aviv",duration:"2 hours",meeting:"Meeting point varies",fromUsd:65,ratingLabel:"4.9 · 77 reviews"},
  {id:"tour-neve-tzedek-walk-getyourguide@tours-tel-aviv-jaffa",provider:"GetYourGuide",title:"Neve Tzedek Cultural Walking Tour",description:"Explore restored historic streets, galleries and the Suzanne Dellal Center with a local guide",image:tourPhotos["neve-tzedek-walk"]!.src,alt:tourPhotos["neve-tzedek-walk"]!.alt,duration:"1½ hours",meeting:"Shabazi Street; confirm your selected starting point",fromUsd:null,ratingLabel:null},
- {id:"tour-tel-aviv-cycling-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Tel Aviv Guided Cycling Tour",description:"Explore waterfront paths and neighbourhood landmarks by bike; check the route, cycling requirements and inclusions",image:tourPhotos["tel-aviv-cycling"]!.src,alt:tourPhotos["tel-aviv-cycling"]!.alt,duration:"About 3 hours",meeting:"Confirm the departure location with the operator",fromUsd:null,ratingLabel:null},
+ {id:"tour-tel-aviv-cycling-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Tel Aviv Guided Cycling Tour",description:"Explore waterfront paths and neighborhood landmarks by bike; check the route, cycling requirements and inclusions",image:tourPhotos["tel-aviv-cycling"]!.src,alt:tourPhotos["tel-aviv-cycling"]!.alt,duration:"About 3 hours",meeting:"Confirm the departure location with the operator",fromUsd:null,ratingLabel:null},
 ] as const;
 /** Google Maps opens an ordinary walking itinerary; visitors can adjust transit on the map. */
 function walkingDirectionsUrl(index:number){
@@ -210,11 +210,11 @@ export function TelAvivAttractionsGuide(){
     </div>
   </section>
   <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
-    <Heading id="compare" title="Compare ten Tel Aviv attractions" intro="Use this overview to choose by area, visiting time and admission type. Allow additional time to get between neighbourhoods."/>
+    <Heading id="compare" title="Compare ten Tel Aviv attractions" intro="Use this overview to choose by area, visiting time and admission type. Allow additional time to get between neighborhoods."/>
     
         <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
       <table className="w-full min-w-[760px] table-fixed border-collapse text-left text-sm">
-        <caption className="sr-only">Compare ten attractions by neighbourhood, suggested duration and admission</caption>
+        <caption className="sr-only">Compare ten attractions by neighborhood, suggested duration and admission</caption>
         <thead className="bg-secondary/60"><tr>
          <th scope="col" className="w-[28%] border-b px-3 py-3">Experience</th>
          <th scope="col" className="w-[19%] border-b px-3 py-3">Area</th>
@@ -230,7 +230,7 @@ export function TelAvivAttractionsGuide(){
     </div>
   </section>
   <section id="explore" aria-labelledby="explore-h" className="mt-12 scroll-mt-24">
-    <Heading id="explore" title="Ten attractions and experiences I recommend" intro="Explore the city's neighbourhoods, landmarks, markets, beaches and museums."/>
+    <Heading id="explore" title="Ten attractions and experiences I recommend" intro="Explore the city's neighborhoods, landmarks, markets, beaches and museums."/>
     <div className="grid gap-5" data-testid="tel-aviv-detailed-experience-cards">
       {stops.map((stop,i)=><ExperienceCard key={stop.id} stop={stop} num={i+1}/>)}
     </div>
@@ -279,12 +279,12 @@ export function TelAvivAttractionsGuide(){
   <section id="tips" aria-labelledby="tips-h" className="mt-12 scroll-mt-24">
     <Heading id="tips" title="My practical tips for sightseeing in Tel Aviv" intro="A little planning goes a long way in a coastal city where outdoor activities, cultural hours and weekend transport can differ."/>
     <div className="grid gap-4 md:grid-cols-2">
-      <div className="rounded-xl border bg-card p-5"><Footprints aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Plan by neighbourhood</h3><p className="mt-2 text-sm leading-relaxed">Jaffa, Neve Tzedek and Carmel Market fit naturally together. The port and northern park are farther away. Group nearby sights into the same outing.</p></div>
+      <div className="rounded-xl border bg-card p-5"><Footprints aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Plan by neighborhood</h3><p className="mt-2 text-sm leading-relaxed">Jaffa, Neve Tzedek and Carmel Market fit naturally together. The port and northern park are farther away. Group nearby sights into the same outing.</p></div>
       <div className="rounded-xl border bg-card p-5"><Waves aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Check beach safety</h3><p className="mt-2 text-sm leading-relaxed">Use designated swimming areas with active lifeguard services and follow flags and sea conditions. <Link to="/travel-blog/beaches-in-tel-aviv/" className="font-semibold text-primary hover:underline">Compare beach facilities</Link>.</p></div>
       <div className="rounded-xl border bg-card p-5"><CalendarDays aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Look at the calendar</h3><p className="mt-2 text-sm leading-relaxed">Carmel Market and many shops change their hours before Shabbat; museums and performances have separate schedules. My <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Israel calendar of events</Link> explains holidays and special dates.</p></div>
       <div className="rounded-xl border bg-card p-5"><Train aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Choose transport for the actual route</h3><p className="mt-2 text-sm leading-relaxed">Buses, the Red Line light rail, taxis and walking can work better than a car in central Tel Aviv. On Fridays and Saturdays the free <External url="https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/PublicTransportaiton.aspx">Na'im BeSofash weekend shuttle</External> serves parts of the metropolitan area; check current routes and schedules before relying on it. Rail stations are inland. See my <Link to="/travel-blog/getting-around-tel-aviv/" className="font-semibold text-primary hover:underline">transport guide</Link>.</p></div>
       <div className="rounded-xl border bg-card p-5"><ShieldCheck aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Plan for sun and access</h3><p className="mt-2 text-sm leading-relaxed">Carry drinking water, dress for heat and use sun protection. Old Jaffa has steep and uneven sections, while beach-access arrangements differ. Check accessibility for your chosen route.</p></div>
-      <div className="rounded-xl border bg-card p-5"><BedDouble aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Stay in a convenient area</h3><p className="mt-2 text-sm leading-relaxed">A hotel near the central beach or one of the walkable districts can simplify sightseeing. Compare neighbourhoods with my <Link to="/travel-blog/where-to-stay-in-tel-aviv/" className="font-semibold text-primary hover:underline">Tel Aviv accommodation guide</Link>.</p></div>
+      <div className="rounded-xl border bg-card p-5"><BedDouble aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Stay in a convenient area</h3><p className="mt-2 text-sm leading-relaxed">A hotel near the central beach or one of the walkable districts can simplify sightseeing. Compare neighborhoods with my <Link to="/travel-blog/where-to-stay-in-tel-aviv/" className="font-semibold text-primary hover:underline">Tel Aviv accommodation guide</Link>.</p></div>
     </div>
   </section>
   <div className="mt-5"><Tip>For arrivals from Ben Gurion Airport, check the correct railway station, luggage access and final connection. My <Link to="/travel-blog/ben-gurion-airport-to-tel-aviv/" className="font-semibold text-primary hover:underline">airport-to-Tel Aviv guide</Link> compares the main options.</Tip></div>
@@ -302,7 +302,7 @@ export function TelAvivAttractionsGuide(){
     heading:"Need a private transfer or day trip in Tel Aviv?",
     introduction:"I'm Moshe Barak. I arrange private airport transfers, private rides and day trips with a driver in Israel. Tell me your dates, pickup point, group size and where you would like to go, and I'll reply personally about transport options.",
     subject:"",
-    placeholder:"Pickup location, travel date, number of travellers and the sights you would like to visit…",
+    placeholder:"Pickup location, travel date, number of travelers and the sights you would like to visit…",
   }}/>
   <SourcesDisclosure>
     <p className="mb-3 text-sm leading-relaxed">For the latest admission details, lifeguard services, exhibitions and special dates, I recommend checking the relevant authority or operator shortly before you visit.</p>

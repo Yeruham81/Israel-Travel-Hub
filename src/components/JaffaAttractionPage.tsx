@@ -110,7 +110,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <p>The <a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ilana Goor Museum</a>, at 4 Mazal Dagim Street, combines an eclectic art collection with a historic building and sea views. See the <a href="#visitor-info" className={inlineLink}>visitor table</a> for published hours, adult admission and official discounts.</p>
         <p>Other small galleries and studios are scattered throughout the old town. The <a href={official.uriGeller} target="_blank" rel="noopener noreferrer" className={inlineLink}>Uri Geller Museum</a> at 7 Mazal Arieh Street offers guided group or private visits. Make an <strong>advance reservation</strong> and check age guidance when booking.</p>
       </AttractionHighlight>
-      <AttractionHighlight mobileImageFirst title="Na Laga'at Center" image={{ src: photos.nalagaat, alt: "Na Laga'at cultural centre at the Jaffa Port complex" }}>
+      <AttractionHighlight mobileImageFirst title="Na Laga'at Center" image={{ src: photos.nalagaat, alt: "Na Laga'at cultural center at the Jaffa Port complex" }}>
         <p>The <a href={official.nalagaat} target="_blank" rel="noopener noreferrer" className={inlineLink}>Na Laga'at Center</a> near Jaffa Port presents accessible cultural experiences, including theatre, workshops and dining in darkness at the BlackOut restaurant.</p>
         <p>Book a performance, workshop or dinner in advance.</p>
       </AttractionHighlight>
@@ -154,7 +154,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
             <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Ilana Goor Museum</th><td className="px-3 py-3 align-top">Sun–Thu & Sat 10:00–16:00; Fri 10:00–14:00</td><td className="px-3 py-3 align-top">₪45 adult</td><td className="px-3 py-3 align-top"><a href={official.museum} target="_blank" rel="noopener noreferrer" className={inlineLink}>Museum admission, discounts and updates</a></td></tr>
             <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Uri Geller Museum</th><td className="px-3 py-3 align-top">Advance reservations</td><td className="px-3 py-3 align-top">By booked visit</td><td className="px-3 py-3 align-top"><a href={official.uriGeller} target="_blank" rel="noopener noreferrer" className={inlineLink}>Arrange guided visit</a></td></tr>
             <tr className="border-b"><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Na Laga'at Center</th><td className="px-3 py-3 align-top">By programme</td><td className="px-3 py-3 align-top">By activity</td><td className="px-3 py-3 align-top"><a href={official.nalagaat} target="_blank" rel="noopener noreferrer" className={inlineLink}>Performances, workshops and dining</a></td></tr>
-            <tr><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Jaffa tourist information centre</th><td className="px-3 py-3 align-top">Sun–Thu 09:00–17:30; Fri 09:00–16:00; Sat 10:00–16:00</td><td className="px-3 py-3 align-top">Free visitor information</td><td className="px-3 py-3 align-top">2 Marzouk & Azar St · +972 3-681-4466 · <a href={official.touristInformation} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official details</a></td></tr>
+            <tr><th scope="row" className="sticky left-0 z-10 bg-card px-3 py-3 align-top font-semibold">Jaffa tourist information center</th><td className="px-3 py-3 align-top">Sun–Thu 09:00–17:30; Fri 09:00–16:00; Sat 10:00–16:00</td><td className="px-3 py-3 align-top">Free visitor information</td><td className="px-3 py-3 align-top">2 Marzouk & Azar St · +972 3-681-4466 · <a href={official.touristInformation} target="_blank" rel="noopener noreferrer" className={inlineLink}>Official details</a></td></tr>
           </tbody>
         </table>
       </div>
@@ -162,7 +162,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Accessibility and family visits</h3>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">The port promenade and parts of the surrounding streets offer relatively level approaches, while the historic hill has slopes, stone paving, steps and narrow passages. If you're visiting with a wheelchair or stroller, I recommend starting with the flatter streets around the port.</p>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">For a booked Na Laga'at activity, consult the centre's <a href={official.nalagaatAccess} target="_blank" rel="noopener noreferrer" className={inlineLink}>accessibility arrangements</a> in advance.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">For a booked Na Laga'at activity, consult the center's <a href={official.nalagaatAccess} target="_blank" rel="noopener noreferrer" className={inlineLink}>accessibility arrangements</a> in advance.</p>
       </article>
     </div>
   ),
@@ -226,13 +226,13 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
   historyContent: (
     <div className="mt-4 space-y-3">
       <p>Jaffa, historically known as Joppa, has been a Mediterranean port and gateway to the region for thousands of years. It appears in ancient texts and in biblical and Christian traditions, including the story of Jonah and accounts connected to Peter.</p>
-      <p>The streets visible today reflect many layers: medieval remains, Ottoman-era mosques and commercial buildings, churches, and more recent neighbourhoods. Modern Jaffa is also home to diverse communities and active cultural life. The port, Clock Tower and market show different parts of this history during one compact walk.</p>
+      <p>The streets visible today reflect many layers: medieval remains, Ottoman-era mosques and commercial buildings, churches, and more recent neighborhoods. Modern Jaffa is also home to diverse communities and active cultural life. The port, Clock Tower and market show different parts of this history during one compact walk.</p>
       <p>The <a href={official.oldJaffa} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old Jaffa development authority</a> and the <a href={official.municipality} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tel Aviv–Yafo municipality</a> provide further information about the historic district.</p>
     </div>
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>These guided walks explore Old Jaffa or combine the old town with Tel Aviv neighbourhoods and markets. Compare meeting points, walking distances and inclusions. Check current prices and reviews on the booking website.</p>
+      <p>These guided walks explore Old Jaffa or combine the old town with Tel Aviv neighborhoods and markets. Compare meeting points, walking distances and inclusions. Check current prices and reviews on the booking website.</p>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="jaffa-tour-cards">
         {jaffaTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-jaffa" />)}
       </ul>
@@ -248,11 +248,11 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
     { q: "Is Jaffa part of Tel Aviv?", a: "Yes. Jaffa and Tel Aviv form the same municipality, Tel Aviv–Yafo. Jaffa is the older port and historic district at the southern end of the city's coastline." },
   ],
   nearby: [
-    { label: "Things to do in Tel Aviv", to: "/travel-blog/attractions-in-tel-aviv/", note: "Explore markets, neighbourhoods, culture and coastal sights." },
+    { label: "Things to do in Tel Aviv", to: "/travel-blog/attractions-in-tel-aviv/", note: "Explore markets, neighborhoods, culture and coastal sights." },
     { label: "Beaches in Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/", note: "Find popular beaches and advice for a seafront day." },
     { label: "Museums in Tel Aviv", to: "/travel-blog/museums-in-tel-aviv/", note: "Art, heritage and family-friendly museum ideas." },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", note: "Match your travel dates with the activities you want." },
-    { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Compare neighbourhoods and hotel areas." },
+    { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Compare neighborhoods and hotel areas." },
     { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/", note: "Learn about the light rail, buses and walking routes." },
   ],
   planningLinks: [
@@ -274,7 +274,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
     { label: "Old Jaffa - Jaffa Port parking information (Hebrew)", url: official.jaffaPortParking },
     { label: "Jaffa Flea Market - visitor information and trading hours", url: official.fleaMarketHours },
     { label: "Tel Aviv–Yafo municipality - Naim BaSofash weekend buses (Hebrew)", url: official.weekendBuses },
-    { label: "Visit Tel Aviv - Jaffa tourist information centre (English)", url: official.touristInformation },
+    { label: "Visit Tel Aviv - Jaffa tourist information center (English)", url: official.touristInformation },
     { label: "Old Jaffa - St. Peter's Church (Hebrew)", url: official.church },
     { label: "Ilana Goor Museum - visiting information", url: official.museum },
     { label: "Uri Geller Museum - arranged visits", url: official.uriGeller },

@@ -83,7 +83,7 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(container).not.toHaveTextContent("Compare other properties on the booking provider");
     expect(screen.getAllByTestId("deadsea-hotel-facility-notice")).toHaveLength(2);
     expect(container).toHaveTextContent("As of November 2026, the operator lists the water park and thermal mineral pools as temporarily closed");
-    expect(container).toHaveTextContent("As of November 2026, the operator lists the spa Jacuzzi and hotel gym as temporarily closed for upgrades.");
+    expect(container).toHaveTextContent("As of November 2026, the spa Jacuzzi and hotel gym are temporarily closed for upgrades.");
     expect(container).not.toHaveTextContent("Select a hotel name to jump");
     expect(container).not.toHaveTextContent("Current room prices and availability are checked on the booking provider");
     expect(new Set(cards.map(card => card.querySelector("img")?.getAttribute("src"))).size).toBe(11);

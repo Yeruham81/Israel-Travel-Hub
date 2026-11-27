@@ -48,7 +48,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
       checkedAt={PRIVATE_DRIVER_CHECK_DATE}
       image={<GuideHeroMedia src={privateDriverHero.src} alt={privateDriverHero.alt} />}
       imageLayout="guide"
-      actions={<a href="#request-quote" onClick={focusQuote} className="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>}
+      actions={<a href="#request-quote" onClick={focusQuote} className="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Get a quote</a>}
     />
 
     <div className="mx-auto max-w-5xl px-4">
@@ -57,7 +57,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
         <div className="mt-3 max-w-4xl space-y-4 text-[15px] leading-7 sm:text-base">
           <p>Choose your pickup location, sightseeing stops and final destination. I'll help plan the timing so you can travel at your own pace.</p>
           <h3 className="pt-1 text-lg font-semibold">Who is a private driver suitable for?</h3>
-          <p>I arrange transport for solo travellers, couples, families, groups of friends and business travellers. If you have mobility needs or extra luggage, let me know so I can check which vehicles are suitable.</p>
+          <p>I arrange transport for solo travelers, couples, families, groups of friends and business travelers. If you have mobility needs or extra luggage, let me know so I can check which vehicles are suitable.</p>
           <p><strong>What is included?</strong> Your quote covers private transport, with the route, vehicle, pickup details, agreed waiting time and total price. Entrance tickets, licensed guides and other extras are arranged separately unless confirmed in the quote.</p>
         </div>
       </section>
@@ -101,7 +101,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
           <p className="text-sm font-semibold">Have a route in mind?</p>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Share your date, stops and group size, and I'll help you plan a private journey.</p>
         </div>
-        <a href="#request-quote" onClick={focusQuote} className="inline-flex min-h-9 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:self-center">Request a quote</a>
+        <a href="#request-quote" onClick={focusQuote} className="inline-flex min-h-9 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:self-center">Get a quote</a>
       </div>
 
       <section id="travel-guides" aria-labelledby="guides-h" className="mt-9 scroll-mt-24">

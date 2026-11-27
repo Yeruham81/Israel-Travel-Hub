@@ -1,11 +1,11 @@
 export const accommodationEditorial = {
   jerusalem: { path: "/travel-blog/where-to-stay-in-jerusalem/", title: "Where to Stay in Jerusalem: Choose Your Base",
-    description: "Compare Jerusalem neighbourhoods for Old City access, transport, food and local atmosphere before choosing hotels.",
+    description: "Compare Jerusalem neighborhoods for Old City access, transport, food and local atmosphere before choosing hotels.",
     intro: "Jerusalem's hills, historic neighborhoods and Old City entrances make hotel location particularly important. I'll help you choose between the city center, the Old City and quieter residential neighborhoods.",
     tip: "For a first visit, consider the walk to the Old City gates, the light rail, evening dining and where a taxi can stop with your luggage." },
   telaviv: { path: "/travel-blog/where-to-stay-in-tel-aviv/", title: "Where to Stay in Tel Aviv: Beaches & Neighborhoods",
     description: "Compare Tel Aviv and Jaffa neighborhoods for beaches, food markets, nightlife and transport before booking.",
-    intro: "From Mediterranean beaches and historic Jaffa to the cafés of Rothschild Boulevard, Tel Aviv offers a wide variety of places to stay. I'll help you choose the neighbourhood that best suits your visit.",
+    intro: "From Mediterranean beaches and historic Jaffa to the cafés of Rothschild Boulevard, Tel Aviv offers a wide variety of places to stay. I'll help you choose the neighborhood that best suits your visit.",
     tip: "Decide how often you want to walk to the sea, which neighborhoods you will visit in the evening and whether you need convenient public transport." },
   haifa: { path: "/travel-blog/best-hotels-in-haifa/", title: "Best Hotels in Haifa: Where to Stay",
     description: "Compare 10 Haifa hotels by location, travel style, beach access and facilities, from the German Colony and Mount Carmel to the southern coast.",

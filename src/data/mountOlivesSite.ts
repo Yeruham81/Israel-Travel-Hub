@@ -29,6 +29,6 @@ export const mountOlivesSite = {
     { name: "Church of St Mary Magdalene", time: "Tue, Thu & Sat 10:00–12:00", admission: "Check on arrival", note: "Short visiting window; separate entrance" },
     { name: "Church of All Nations (Gethsemane)", time: "Daily 07:30–18:00 Apr–Sep; 07:30–17:00 Oct–Mar", admission: "Generally free", note: "Last entry about 10 minutes before closing; grotto hours differ" },
     { name: "Tomb of the Virgin Mary", time: "Generally 08:00–18:00", admission: "Check on arrival", note: "Long staircase to the underground church" },
-    { name: "Mount of Olives Jewish cemetery", time: "Access varies by cemetery section and purpose", admission: "No general sightseeing ticket", note: "Active burial grounds; the information centre is temporarily closed" },
+    { name: "Mount of Olives Jewish cemetery", time: "Access varies by cemetery section and purpose", admission: "No general sightseeing ticket", note: "Active burial grounds; the information center is temporarily closed" },
   ],
 } as const;

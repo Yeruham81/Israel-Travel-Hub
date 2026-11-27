@@ -10,7 +10,7 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
   const base = { subject: "" };
   switch (kind) {
     case "sherut":
-      return { ...base, eyebrow: "Contact Me", heading: "Need a Private Airport Transfer?",
+      return { ...base, eyebrow: "Contact me", heading: "Need a Private Airport Transfer?",
         introduction: "Tell me your flight details, destination, travel date, passengers and luggage. I'll reply personally about arranging your private pickup.",
         placeholder: "Flight details, destination, date, passengers and luggage…" };
     case "shabbat":
@@ -20,7 +20,7 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
     case "airport":
       return { ...base, heading: "Need a private airport pickup?",
         introduction: "I'm Moshe Barak. I arrange private airport pickups and transfers from Ben Gurion Airport. Tell me your flight date, destination, passengers and luggage, and I'll reply personally about your transfer.",
-        placeholder: "Arrival date, destination, travellers, luggage or your question…" };
+        placeholder: "Arrival date, destination, travelers, luggage or your question…" };
     case "transport":
       return { ...base, heading: "Need a private transfer or driver in Israel?",
         introduction: "I'm Moshe Barak. I arrange private transfers, city-to-city rides and day trips with a driver. Tell me your pickup point, destinations, travel date and group size, and I'll reply personally.",
@@ -40,7 +40,7 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
     case "connectivity":
       return { ...base, heading: "Need a private transfer during your Israel trip?",
         introduction: "I'm Moshe Barak. I arrange private airport transfers and day trips with a driver in Israel. Tell me your travel dates, pickup location, destinations and number of passengers, and I'll reply personally.",
-        placeholder: "Travel dates, destinations, number of travellers or your question…" };
+        placeholder: "Travel dates, destinations, number of travelers or your question…" };
     default:
       return { ...base, heading: "Need a private driver for your Israel trip?",
         introduction: "I'm Moshe Barak. I arrange private transfers and sightseeing journeys with a driver in Israel. Tell me your pickup point, travel dates, destinations and group size, and I'll reply personally.",

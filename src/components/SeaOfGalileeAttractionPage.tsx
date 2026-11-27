@@ -142,7 +142,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
       <p>For a panoramic viewpoint, <External href={sources.arbel}>Arbel National Park</External> overlooks the lake from the west. Choose a short visit to the viewpoint or allow more time for a hike. Cliff-edge trails can be steep and may close in unsuitable weather.</p>
     </AttractionHighlight>
     <AttractionHighlight title="The Jordan River and Yardenit" image={{ src: lakeView, alt: "Green hills and lake scenery of the Galilee region" }}>
-      <p>The Jordan River flows out of the southern end of the Sea of Galilee. <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> is a managed baptismal visitor site south of the lake, while <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link> on the western shore combines archaeology with a modern pilgrimage centre.</p>
+      <p>The Jordan River flows out of the southern end of the Sea of Galilee. <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> is a managed baptismal visitor site south of the lake, while <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link> on the western shore combines archaeology with a modern pilgrimage center.</p>
       <p>If you're planning a baptism ceremony at Yardenit, arrange the religious service in advance.</p>
     </AttractionHighlight>
   </div>,
@@ -176,7 +176,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     <div className="grid gap-3 sm:grid-cols-2">
       <article className="rounded-xl border bg-card p-4">
         <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><CarFront className="size-5 text-primary" aria-hidden="true" />By car or private driver</h3>
-        <p className="mt-2 text-sm leading-relaxed">A car gives the most flexibility for the northern heritage sites, beaches and eastern shore. Approaches from the centre of Israel generally use Route 6 or other northbound highways, with Routes 77, 90 and 92 around the lake depending on the destination.</p>
+        <p className="mt-2 text-sm leading-relaxed">A car gives the most flexibility for the northern heritage sites, beaches and eastern shore. Approaches from the center of Israel generally use Route 6 or other northbound highways, with Routes 77, 90 and 92 around the lake depending on the destination.</p>
         <p className="mt-2 text-sm leading-relaxed">Leave time for traffic and site opening hours. A <Link to="/private-driver-in-israel/" className={inlineLink}>private driver</Link> can be practical for a full-day route with several stops.</p>
         <div className="mt-2"><External href={maps.tiberias}>Directions to Tiberias</External></div>
       </article>
@@ -253,7 +253,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     { q: "Is the Sea of Galilee a sea or a lake?", a: "It is a freshwater lake, known in Hebrew as Lake Kinneret. Its shore and waters lie below sea level." },
     { q: "Can I swim in the Sea of Galilee?", a: "Yes, at designated beaches in the supervised bathing area during active lifeguard shifts. Some natural shorelines are not authorised for swimming, even if they are open for walking." },
     { q: "Are Sea of Galilee beaches free?", a: "Some Kinneret authority beaches offer free pedestrian entry but charge for parking or extras. Other municipal or private facilities may charge admission. Check the specific beach." },
-    { q: "What is the best town to stay in?", a: "Tiberias is usually the most practical base for hotels, restaurants and bus connections. Smaller lakeside communities can suit travellers looking for a quieter overnight stay." },
+    { q: "What is the best town to stay in?", a: "Tiberias is usually the most practical base for hotels, restaurants and bus connections. Smaller lakeside communities can suit travelers looking for a quieter overnight stay." },
     { q: "How long should I spend around the lake?", a: "Allow half a day for a beach and Tiberias or a full day for a selection of the northern heritage sites. Two days lets you explore more slowly and include viewpoints or a boat trip." },
     { q: "Can I visit Capernaum and Tabgha in one day?", a: "Yes. Capernaum, Tabgha and the Mount of Beatitudes are close to one another and can easily be visited on the same day, depending on their opening hours." },
     { q: "Can I reach the Sea of Galilee without a car?", a: "Tiberias has intercity bus services, but many lakeside sights need further transport. Check routes and the last return bus before committing to a multi-stop day." },
@@ -266,7 +266,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     { label: "Capernaum", to: "/attractions/capernaum/", note: "Ancient synagogue and lakeside archaeology" },
     { label: "Tabgha", to: "/attractions/tabgha/", note: "Mosaic church and biblical traditions" },
     { label: "Mount of Beatitudes", to: "/attractions/mount-of-beatitudes/", note: "Church gardens and sweeping lake views" },
-    { label: "Magdala", to: "/attractions/magdala/", note: "Archaeological remains and pilgrimage centre" },
+    { label: "Magdala", to: "/attractions/magdala/", note: "Archaeological remains and pilgrimage center" },
     { label: "Yardenit", to: "/attractions/yardenit/", note: "Managed baptismal site on the Jordan River" },
     { label: "Mount Tabor", to: "/attractions/mount-tabor/", note: "A nearby Galilee heritage destination" },
   ],

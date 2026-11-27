@@ -71,7 +71,7 @@ export const CONFIRMED_EVENTS:ConfirmedEvent[] = [
   {
     id:"open-house-jerusalem-2026",title:"Open House Jerusalem 2026",
     from:"2026-10-22",to:"2026-10-24",region:"jerusalem",
-    location:"Buildings and neighbourhoods across Jerusalem",category:"arts",
+    location:"Buildings and neighborhoods across Jerusalem",category:"arts",
     description:"Architecture and heritage visits to buildings and spaces not normally open to the public.",
     visitorNote:"Visits are free, but many tours need advance registration. Check the chosen building's time and access rules.",
     sourceUrl:"https://batim.itraveljerusalem.com/en/",checkedAt:EVENT_CHECK_DATE,

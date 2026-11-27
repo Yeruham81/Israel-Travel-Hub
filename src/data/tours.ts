@@ -358,7 +358,7 @@ export const tourCategories: TourCategory[] = [
     photo: { src: telAvivTourHero, alt: "Panoramic view of Tel Aviv's Mediterranean coast and skyline" }, match: { destinations: ["tel-aviv"] },
     paragraphs: ["I recommend exploring Tel Aviv and Jaffa through their distinctive neighborhoods: historic Jaffa, Neve Tzedek, the White City's architecture, Florentin's street art and Carmel Market's food stalls. Choose between guided walking tours, cycling tours and self-guided audio tours.", "Most guided walks start at a designated meeting point. Confirm where your tour ends and whether food, bicycle equipment or museum admission is included. I offer flexible private transport between your preferred stops. Professional guiding can be arranged separately."],
     choices: [
-      { title: "Old Jaffa & city highlights", text: "Explore Jaffa's historic streets, the Mediterranean coastline and Tel Aviv's charming neighbourhoods." },
+      { title: "Old Jaffa & city highlights", text: "Explore Jaffa's historic streets, the Mediterranean coastline and Tel Aviv's charming neighborhoods." },
       { title: "Street art & local stories", text: "Explore colorful murals and local street art on a guided walk through the city. Ideal when you already know the city's main landmarks." },
       { title: "Markets & tastings", text: "Discover local culinary traditions through market tastings, with food and dietary options varying by tour." },
     ],
@@ -520,7 +520,7 @@ export const tourCategories: TourCategory[] = [
   {
     id: "food-markets", title: "Food & market tours in Israel", shortTitle: "Food & markets",
     description: "Compare Jerusalem and Tel Aviv food tours, Mahane Yehuda and Levinsky Market tastings, Carmel Market cooking, and private culinary walks.",
-    intro: "Discover Israeli food through the markets, neighbourhoods and people who make it. Compare tastings in Jerusalem’s Mahane Yehuda Market with culinary walks, market visits and a cooking workshop in Tel Aviv.",
+    intro: "Discover Israeli food through the markets, neighborhoods and people who make it. Compare tastings in Jerusalem’s Mahane Yehuda Market with culinary walks, market visits and a cooking workshop in Tel Aviv.",
     photo: migration["what-to-eat-in-israel"], match: { tags: ["food"] },
     paragraphs: [
       "Jerusalem's Mahane Yehuda tours concentrate on the stalls and food traditions of one bustling market; Tel Aviv options range from Levinsky and Carmel Market tastings to a longer Jaffa-to-Carmel walk and a hands-on cooking workshop.",

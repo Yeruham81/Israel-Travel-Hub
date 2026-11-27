@@ -12,18 +12,18 @@ const email = <a href={`mailto:${airportTransferContact.email}`}>{airportTransfe
 const sections: LegalSection[] = [
   { id: "scope", title: "The website and its operator", content: <>
     <p>I am Moshe Barak, the operator of Israel Taxi &amp; Travel. This website provides travel guides, information about my private transport services and links to independent travel providers. These roles are identified separately.</p>
-    <p>These terms govern use of this website and explain how direct-service enquiries are handled. A confirmed booking also has its accepted written quote and booking conditions. Mandatory legal rights take priority over a conflicting term. My <Link to="/privacy-policy/">Privacy Policy</Link> explains the handling of information, and <Link to="/about-me/" hash="methodology">About Moshe Barak</Link> describes my background and the experience behind my travel guides.</p>
+    <p>These terms govern use of this website and explain how direct-service inquiries are handled. A confirmed booking also has its accepted written quote and booking conditions. Mandatory legal rights take priority over a conflicting term. My <Link to="/privacy-policy/">Privacy Policy</Link> explains the handling of information, and <Link to="/about-me/" hash="methodology">About Moshe Barak</Link> describes my background and the experience behind my travel guides.</p>
   </> },
-  { id: "enquiries-confirmation", title: "Enquiries and booking confirmation", content: <>
-    <p>An adult with authority to make the arrangements should submit an enquiry or book for a group. Please supply accurate contact, pickup, destination, date, passenger and luggage details, and tell me about material changes.</p>
-    <p>Pressing a form's Send button submits your details directly through the website for email delivery. Wait for the on-page confirmation; if sending is unavailable or cannot be confirmed, the form displays an error. Submitting an enquiry or receiving an automatic acknowledgement does not confirm a booking. All bookings require separate confirmation.</p>
+  { id: "inquiries-confirmation", title: "Inquiries and booking confirmation", content: <>
+    <p>An adult with authority to make the arrangements should submit an inquiry or book for a group. Please supply accurate contact, pickup, destination, date, passenger and luggage details, and tell me about material changes.</p>
+    <p>Pressing a form's Send button submits your details directly through the website for email delivery. Wait for the on-page confirmation; if sending is unavailable or cannot be confirmed, the form displays an error. Submitting an inquiry or receiving an automatic acknowledgement does not confirm a booking. All bookings require separate confirmation.</p>
     <p>Before accepting a direct-service booking, agree the supplier and contact details, itinerary, vehicle requirements, price, inclusions, payment arrangements and relevant cancellation terms in writing. Availability is subject to confirmation. Please keep your booking confirmation and contact me about any discrepancies before traveling.</p>
   </> },
   { id: "prices-payments", title: "Prices, currency and payment", content: <>
     <p>My published starting rates are indicative and subject to the stated route, passenger, vehicle, time and other conditions. Availability and the final price for your journey are confirmed separately. The written offer should set out the total payable, applicable taxes and unavoidable charges before you accept it, including any agreed additional waiting, overtime or optional stops.</p>
     <p>Prices and charges for services I provide are in Israeli shekels (ILS). Prices displayed in other currencies are approximate conversions for reference. The amount payable remains in Israeli shekels (ILS). If your bank or card issuer converts an ILS charge into your account's currency, its own exchange rate and disclosed fees may apply.</p>
     <p>Prices for services offered by external providers may be displayed in foreign currencies, including in advertisements, banners, links or widgets on this website. The external provider presenting a price is solely responsible for that price and its own payment terms. Check the provider's final total, currency, taxes, charges and cancellation conditions before booking.</p>
-    <p>If a deposit is required, its amount, due date and effect on confirmation must be stated in the booking offer. Payments for confirmed bookings are currently arranged outside the website. Do not send card numbers, security codes or banking passwords in an enquiry.</p>
+    <p>If a deposit is required, its amount, due date and effect on confirmation must be stated in the booking offer. Payments for confirmed bookings are currently arranged outside the website. Do not send card numbers, security codes or banking passwords in an inquiry.</p>
     <p>If online checkout or payment facilities are introduced for my services, my service charges will remain in ILS. The merchant, payment provider, total, applicable taxes and charges, and booking or cancellation conditions will be shown before you confirm payment. The process will explain whether the payment requests a new booking or pays for an existing one. The payment provider's terms also apply to its service, without replacing my own obligations or your statutory rights.</p>
   </> },
   { id: "cancellations", title: "Cancellation, changes and refunds", content: <>
@@ -41,7 +41,7 @@ const sections: LegalSection[] = [
   </> },
   { id: "external-providers", title: "Independent providers and referrals", content: <>
     <p>Hotel, tour, attraction and transport providers reached through this website may be independent operators or booking platforms. Check which business performs the service, which business takes the booking, the full price, availability, inclusions, accessibility and cancellation terms before committing.</p>
-    <p>Entering information in my enquiry form does not automatically pass it to an independent booking platform. Following an external booking link or entering information in a provider widget is a separate interaction. The relevant provider's contract and privacy notice apply to that interaction, alongside any mandatory legal protections.</p>
+    <p>Entering information in my inquiry form does not automatically pass it to an independent booking platform. Following an external booking link or entering information in a provider widget is a separate interaction. The relevant provider's contract and privacy notice apply to that interaction, alongside any mandatory legal protections.</p>
     <p>Information about my own transport prices, reviews or cancellation terms should not be assumed to apply to a different operator. I remain responsible for my own statements and legal obligations; describing another business as independent does not remove obligations the law places on me.</p>
   </> },
   { id: "commercial-features", title: "External booking services and widgets", content: <>
@@ -51,7 +51,7 @@ const sections: LegalSection[] = [
   </> },
   { id: "travel-information", title: "Using the travel information", content: <>
     <p>I aim to provide useful local context, identify sources and distinguish confirmed information from estimates or uncertainty. Guides are general planning information. Operating schedules, fares, access conditions and entry or safety requirements may change after a page is reviewed.</p>
-    <p>Check the appropriate official authority or operator for your date and circumstances. A guide does not replace personalised legal, medical, immigration or other professional advice. Hotel shortlists are editorial selections; they are not claims that I have personally stayed at every property. Tell me if you find an error so it can be reviewed.</p>
+    <p>Check the appropriate official authority or operator for your date and circumstances. A guide does not replace personalized legal, medical, immigration or other professional advice. Hotel shortlists are editorial selections; they are not claims that I have personally stayed at every property. Tell me if you find an error so it can be reviewed.</p>
   </> },
   { id: "content-and-conduct", title: "Content, photographs and acceptable use", content: <>
     <p>Content and images belong to their respective rights holders. Some photographs and other material are used under third-party licences described in the credits. Nothing in these terms removes a permission available under an applicable licence or law. For reuse beyond those permissions, obtain the appropriate rights holder's consent.</p>
@@ -65,7 +65,7 @@ const sections: LegalSection[] = [
   { id: "law-changes-contact", title: "Applicable law, updates and contact", content: <>
     <p>Israeli law applies to these website terms, subject to mandatory protections or jurisdiction rules that may apply to you. Disputes may be brought before a court with lawful jurisdiction; these terms do not require you to waive a forum or remedy that the law guarantees.</p>
     <p>The date at the top of this page identifies the current version of these terms. Updates address future use and new features. Updating a web page does not by itself retrospectively change the price or conditions of an already confirmed booking; any change must have a valid contractual or legal basis.</p>
-    <p>For a question, correction, service issue or cancellation, contact me at {email}. Include enough information to identify the relevant enquiry or booking, and keep a copy of important correspondence.</p>
+    <p>For a question, correction, service issue or cancellation, contact me at {email}. Include enough information to identify the relevant inquiry or booking, and keep a copy of important correspondence.</p>
   </> },
 ];
 

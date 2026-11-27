@@ -36,7 +36,7 @@ type Service = { id: string; eyebrow: string; tagline: string; title: string; te
 
 
 export const accommodationDestinationCards: Card[] = [
-  { label: "Jerusalem", text: "Old City, city centre & boutique hotels", to: "/accommodation/jerusalem/", img: { src: "/images/home/accommodation-jerusalem-ai.webp", thumb: "/images/home/accommodation-jerusalem-ai-tile.webp", alt: "AI-generated illustration of Jerusalem's Old City walls and skyline" } },
+  { label: "Jerusalem", text: "Old City, city center & boutique hotels", to: "/accommodation/jerusalem/", img: { src: "/images/home/accommodation-jerusalem-ai.webp", thumb: "/images/home/accommodation-jerusalem-ai-tile.webp", alt: "AI-generated illustration of Jerusalem's Old City walls and skyline" } },
   { label: "Tel Aviv & Jaffa", text: "Beachfront, Jaffa & city hotels", to: "/accommodation/tel-aviv/", img: { src: "/images/home/accommodation-tel-aviv-jaffa-ai.webp", thumb: "/images/home/accommodation-tel-aviv-jaffa-ai-tile.webp", alt: "AI-generated illustration of Old Jaffa and the Tel Aviv coast" } },
   { label: "Tiberias & Galilee", text: "Lakeside, luxury & family hotels", to: "/accommodation/tiberias/", img: { src: "/images/home/accommodation-tiberias-galilee-ai.webp", thumb: "/images/home/accommodation-tiberias-galilee-ai-tile.webp", alt: "AI-generated illustration of the Tiberias waterfront beside the Sea of Galilee" } },
   { label: "Dead Sea", text: "Spa retreats & beachfront resorts", to: "/accommodation/dead-sea/", img: { src: "/images/home/accommodation-dead-sea-ai.webp", thumb: "/images/home/accommodation-dead-sea-ai-tile.webp", alt: "AI-generated illustration of Dead Sea resort hotels, salt shore and desert mountains" } },

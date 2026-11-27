@@ -273,11 +273,11 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     map: { lat: 31.7655, lon: 35.219, bounds: [35.208, 31.7515, 35.230, 31.777], reference: "Emek Refaim / German Colony and Baka" },
     overview: [
       "The German Colony and Baka are neighboring residential areas south of central Jerusalem. Emek Refaim is the German Colony's main café and shopping street, while Baka extends farther south and east around Bethlehem Road. Hotels at the northern end of the German Colony are closer to the Old City than accommodation farther south in Baka.",
-      "Both neighborhoods are well suited to families, repeat visitors and longer stays. Historic stone buildings, neighbourhood cafés and quiet residential side streets offer a relaxed base after sightseeing. Accommodation includes a large luxury hotel and apartments with extra living space.",
-      "These neighbourhoods are farther from the main tourist attractions. Use buses or taxis for longer journeys to the sights, particularly from southern Baka. Ask the hotel about current construction near Emek Refaim and the First Station, including noise, pedestrian routes and vehicle access.",
+      "Both neighborhoods are well suited to families, repeat visitors and longer stays. Historic stone buildings, neighborhood cafés and quiet residential side streets offer a relaxed base after sightseeing. Accommodation includes a large luxury hotel and apartments with extra living space.",
+      "These neighborhoods are farther from the main tourist attractions. Use buses or taxis for longer journeys to the sights, particularly from southern Baka. Ask the hotel about current construction near Emek Refaim and the First Station, including noise, pedestrian routes and vehicle access.",
     ],
     highlights: [
-      { name: "Emek Refaim", text: "The neighbourhood's main street is lined with cafés, restaurants and historic stone buildings." },
+      { name: "Emek Refaim", text: "The neighborhood's main street is lined with cafés, restaurants and historic stone buildings." },
       { name: "First Station area & Train Track Park", text: "Explore the northern German Colony and enjoy a walk along the former railway tracks. Check which sections are currently open." },
       { name: "Baka & Bethlehem Road", text: "Quiet residential streets, local cafés and restaurants offer a relaxed setting for longer stays." },
     ],
@@ -288,7 +288,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     arrivalTips: ["Ask about street works, room orientation and the latest vehicle approach shortly before arrival.", "For Baka, plan transport to central sights as part of your daily budget.", "Arrange late apartment check-in and confirm the exact entrance, which may be on a side street."],
     bookingTips: ["For a family suite, confirm separate bedrooms, sofa beds, kitchen equipment and maximum occupancy.", "Check parking terms and any seasonal pool restrictions for the exact property and date."],
     faqs: [
-      { q: "Are the German Colony and Baka the same neighbourhood?", a: "They are adjoining areas. The German Colony centers on Emek Refaim and is closer to the First Station; Baka stretches farther south and east around Bethlehem Road." },
+      { q: "Are the German Colony and Baka the same neighborhood?", a: "They are adjoining areas. The German Colony centers on Emek Refaim and is closer to the First Station; Baka stretches farther south and east around Bethlehem Road." },
       { q: "Can I walk to the Old City?", a: "Many visitors staying in the northern German Colony can walk to the Old City. From farther south in Baka, a bus or taxi may be easier. Check the walking route from your hotel." },
       { q: "How should I check construction disruption?", a: "Ask your accommodation shortly before arrival about its entrance, nearby roadworks, bus stops and the outlook of your room." },
     ],
@@ -408,7 +408,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
       "Accommodation within the historic core is limited, and booking platforms often include properties just beyond it. Lilienblum, Herzl and Yehuda HaLevi streets connect Neve Tzedek with the wider southern center. Hotels on these surrounding streets offer convenient access to Neve Tzedek and the livelier southern city center. Narrow streets and limited parking also make the exact entrance important.",
     ],
     highlights: [
-      { name: "Shabazi Street", text: "The neighbourhood's main street, lined with boutiques, cafés and charming side streets." },
+      { name: "Shabazi Street", text: "The neighborhood's main street, lined with boutiques, cafés and charming side streets." },
       { name: "Suzanne Dellal area", text: "Historic buildings and courtyards around the dance and cultural center form a useful neighborhood landmark; check events separately." },
       { name: "Charles Clore Park & the southern promenade", text: "The nearby coast offers a route toward Jaffa and a break from the enclosed neighborhood streets." },
     ],
@@ -510,7 +510,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     ],
     gettingAround: [
       "The beach is around 10–15 minutes on foot from many addresses, sometimes closer from the western lanes. Check your actual route: an apartment on Nachalat Binyamin is east of the residential quarter, while a place closer to the sea gives a different starting point.",
-      "With narrow streets, pedestrian areas and limited parking, the neighbourhood is best explored on foot. Ask for a vehicle-accessible meeting point and the last stretch with luggage. Confirm your hotel's arrival arrangements and transport for the day you arrive.",
+      "With narrow streets, pedestrian areas and limited parking, the neighborhood is best explored on foot. Ask for a vehicle-accessible meeting point and the last stretch with luggage. Confirm your hotel's arrival arrangements and transport for the day you arrive.",
     ],
     arrivalTips: ["Confirm whether your stay is in the quarter or on the Carmel Market / Nachalat Binyamin edge.", "Ask how far the taxi stop is from your entrance, especially in pedestrian streets.", "Check lift access and any early-morning delivery or nightlife noise near your room."],
     bookingTips: ["For an apartment, confirm the exact unit, minimum stay, cleaning and on-site support.", "For a quieter stay, check room orientation, street noise and included services."],
@@ -565,14 +565,14 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     quickPicks: [
       { areaId: "downtown", label: "Best for a first visit", description: "Restaurants, light rail and walkable sights" },
       { areaId: "mamilla", label: "Old City access & upscale stays", description: "Landmark hotels near Jaffa Gate" },
-      { areaId: "german-colony", label: "Best for a residential stay", description: "Neighbourhood cafés and quieter streets" },
+      { areaId: "german-colony", label: "Best for a residential stay", description: "Neighborhood cafés and quieter streets" },
     ],
     path: "/accommodation/jerusalem/",
     title: "Hotels in Jerusalem: My Picks by Neighborhood",
     metaDescription: "Browse my selected Jerusalem hotels in Downtown, Mamilla, the Old City and other areas. Filter hotel picks by neighborhood and check booking options.",
     intro: "Explore my recommended Jerusalem hotels, from lively Downtown and Mamilla to the historic Old City and quieter residential neighborhoods.",
     overview: [
-      "Most first-time visitors want to be within walking distance of the Old City gates. The western city centre gives that plus restaurants and the light rail; staying inside the walls is atmospheric but involves stairs, cobbles and limited vehicle access.",
+      "Most first-time visitors want to be within walking distance of the Old City gates. The western city center gives that plus restaurants and the light rail; staying inside the walls is atmospheric but involves stairs, cobbles and limited vehicle access.",
       "From Friday afternoon to Saturday evening much of West Jerusalem slows down for Shabbat: many restaurants and public transport pause. East Jerusalem and the Old City's Christian and Muslim quarters keep a different rhythm. Plan meals and arrivals with that in mind.",
       "For a first trip without a car, compare Downtown and Mamilla before choosing an Old City address: a short map distance can still involve uphill walking, steps or a luggage drop-off outside the walls. Check your hotel entrance, not just the neighborhood name.",
     ],
@@ -586,7 +586,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       "Read the cancellation deadline and whether taxes are included in the total",
     ],
     faqs: [
-      { q: "Is it better to stay inside or outside the Old City?", a: "Inside is atmospheric and close to the sights but has limited vehicle access, steps and fewer amenities. Outside, the city centre or East Jerusalem keeps you walkable with easier taxi access." },
+      { q: "Is it better to stay inside or outside the Old City?", a: "Inside is atmospheric and close to the sights but has limited vehicle access, steps and fewer amenities. Outside, the city center or East Jerusalem keeps you walkable with easier taxi access." },
       { q: "What changes on Shabbat?", a: "From Friday afternoon to Saturday evening many West Jerusalem businesses and most public transport pause. Ask your accommodation about check-in, elevators and meals, and plan transfers in advance." },
       { q: "Which areas suit families or travelers who need easier access?", a: "Downtown and Mamilla offer hotel choices close to transport, restaurants and popular sights, while the German Colony and Baka have a quieter residential feel. Step-free access varies by property and street, especially near the Old City. Check the actual entrance, lifts, room layout and taxi drop-off before booking." },
       { q: "How do I get from Ben Gurion Airport to my hotel?", a: "Use my private airport-to-Jerusalem transfer page for hotel drop-offs and a quote request. For neutral transport choices, read Getting around Israel; for a Friday-night or Saturday arrival, read my airport-on-Shabbat guide." },
@@ -628,7 +628,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       "Read the cancellation deadline and whether taxes are included",
     ],
     faqs: [
-      { q: "Beach or city centre for a first visit?", a: "Both work; the city is compact. Beachfront suits relaxed days and families, while Rothschild and Dizengoff suit food and nightlife. Jaffa adds historic atmosphere." },
+      { q: "Beach or city center for a first visit?", a: "Both work; the city is compact. Beachfront suits relaxed days and families, while Rothschild and Dizengoff suit food and nightlife. Jaffa adds historic atmosphere." },
       { q: "Do I need a car in Tel Aviv?", a: "Usually not. Walking, bikes, buses and taxis cover most needs and parking is difficult. Rent a car when you leave the city instead." },
       { q: "Where can I find hotel recommendations for each area?", a: "Open any of the eight neighborhood guides above. Each guide introduces the neighborhood, nearby attractions, transport options and my hotel recommendations. You can also compare Tel Aviv hotels here using the area filters; check actual rates and booking terms on the provider site." },
       { q: "How do I get from Ben Gurion Airport?", a: "Use my private airport-to-Tel Aviv transfer page for an arranged hotel pickup. For walking, buses, rail and taxis during your stay, read Getting around Tel Aviv; check the airport-on-Shabbat guide for weekend arrivals." },
@@ -666,7 +666,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       "Read the cancellation deadline and whether taxes are included",
     ],
     faqs: [
-      { q: "Tiberias or a countryside stay?", a: "Tiberias suits travellers without a car and those who want restaurants nearby. Countryside guesthouses around the lake are quieter and scenic but usually need a car or driver." },
+      { q: "Tiberias or a countryside stay?", a: "Tiberias suits travelers without a car and those who want restaurants nearby. Countryside guesthouses around the lake are quieter and scenic but usually need a car or driver." },
       { q: "Can I visit the Galilee without driving?", a: "Yes, with a tour or a private driver. Buses exist but are slower between scattered sites. See tours and private transport options." },
       { q: "Do you list specific hotels?", a: "The Tiberias destination guide now compares ten hotels and hostels, with focused family and luxury guides. Property information is checked against primary operator sources; room rates and availability are confirmed on the booking site." },
       { q: "When is it hottest?", a: "Midsummer at lake level can be very hot. Plan outdoor sightseeing for mornings and evenings and check your accommodation's cooling and pool." },
@@ -786,7 +786,7 @@ export const deadSeaStayGuide: HotelStayDestination = {
     { id: "spa", title: "Spa-focused hotels", intro: "Nevo and Oasis offer different wellness breaks: a broad full-service resort versus an age-restricted spa setting. The detailed guide also compares Herods, Milos and Noga by facilities, access and booking conditions.", hotelIds: ["ds-nevo", "ds-oasis"], photo: deadSeaPhotos.sunbeds, guidePath: "/accommodation/dead-sea/spa/", guideLabel: "Compare Dead Sea spa hotels" },
     { id: "family", title: "Hotels for families with children", intro: "Compare an all-inclusive resort with a water park against a central beachfront hotel with a choice of meal plans. For more options, the family guide also covers Noga and Leonardo Plaza and the questions to ask for your children's ages.", hotelIds: ["ds-leonardo-club", "ds-vert"], photo: deadSeaPhotos.pool, guidePath: "/accommodation/dead-sea/family/", guideLabel: "Compare Dead Sea family hotels" },
     { id: "value", title: "Value & practical resort alternatives", intro: "Compare Noga in Ein Bokek and Leonardo Plaza in the southern resort district by room rates, meals, included facilities and beach access.", hotelIds: ["ds-noga", "ds-leonardo-plaza"], photo: deadSeaPhotos.beach, browsePageId: "stay-deadsea-value-browse" },
-    { id: "ein-gedi", title: "Nature-focused stays near Ein Gedi", intro: "I recommend these two options for travellers who want to explore Ein Gedi's nature reserve and surrounding desert. Ein Gedi Hotel adds gardens and a spa; the HI hostel offers a simpler base near the nature-reserve area. Check current access to the places you plan to visit.", hotelIds: ["ds-ein-gedi", "ds-hi-ein-gedi"], photo: deadSeaPhotos.einGedi, browsePageId: "stay-deadsea-ein-gedi-browse" },
+    { id: "ein-gedi", title: "Nature-focused stays near Ein Gedi", intro: "I recommend these two options for travelers who want to explore Ein Gedi's nature reserve and surrounding desert. Ein Gedi Hotel adds gardens and a spa; the HI hostel offers a simpler base near the nature-reserve area. Check current access to the places you plan to visit.", hotelIds: ["ds-ein-gedi", "ds-hi-ein-gedi"], photo: deadSeaPhotos.einGedi, browsePageId: "stay-deadsea-ein-gedi-browse" },
   ],
   checklist: [
     "Confirm the hotel is on the Israeli shore and check its exact location",

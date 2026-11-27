@@ -83,7 +83,7 @@ describe("private Ben Gurion transfers", () => {
       const quoteButton = within(card).getByRole("link", { name: /^(Get a quote|Request a quote|Get a quote Request a quote)$/ });
       expect(quoteButton).toHaveAttribute("href", "#request-quote");
       expect(within(quoteButton).getByText("Get a quote")).toHaveClass("sm:hidden");
-      expect(within(quoteButton).getByText("Request a quote")).toHaveClass("hidden", "sm:inline");
+      expect(within(quoteButton).getByText("Get a quote")).toHaveClass("hidden", "sm:inline");
       expect(quoteButton).toHaveClass("bg-primary", "text-primary-foreground", "whitespace-nowrap", "shadow-sm", "min-h-11", "px-2", "sm:px-3");
       expect(quoteButton).toHaveClass("min-h-11");
       expect(quoteButton).not.toHaveClass("bg-primary/10");
@@ -133,7 +133,7 @@ describe("private Ben Gurion transfers", () => {
     expect(updateLine.querySelector("time")).toHaveAttribute("datetime", "2026-11-23");
     expect(rateTerms.querySelector("time")).toBeNull();
     expect(updateLine.compareDocumentPosition(popular)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(within(hubHeader).queryByRole("link", { name: "Request a personal quote" })).not.toBeInTheDocument();
+    expect(within(hubHeader).queryByRole("link", { name: "Get a quote" })).not.toBeInTheDocument();
   });
 
   it("uses the lean content order and preserves booking links, benefits, FAQ and guide navigation", async () => {

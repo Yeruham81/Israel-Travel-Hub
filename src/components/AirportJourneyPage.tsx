@@ -427,7 +427,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link to={g.privatePath} className="inline-flex min-h-11 items-center rounded-lg border border-primary/35 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary">Private transfer details</Link>
-            <a href="#request-quote" className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90">Request a quote</a>
+            <a href="#request-quote" className="inline-flex min-h-11 items-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90">Get a quote</a>
           </div>
         </aside>}
       </Section>
