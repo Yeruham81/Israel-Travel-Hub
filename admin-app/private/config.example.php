@@ -13,4 +13,6 @@ return [
     'db_password' => 'YOUR_DATABASE_PASSWORD',
     // Run: php -r 'echo bin2hex(random_bytes(32)), PHP_EOL;'
     'audit_hmac_secret' => 'REPLACE_WITH_A_RANDOM_64_CHARACTER_HEX_VALUE',
+    // Optional: fine-grained token limited to GitHub Actions READ-ONLY.
+    'github_read_token' => '',
 ];
