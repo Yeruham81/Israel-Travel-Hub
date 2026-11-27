@@ -140,7 +140,7 @@ export function ChristianToursGuide(){
    </section>
 
    <section id="destinations" aria-labelledby="destinations-heading" className="mt-12 scroll-mt-24">
-     <Heading id="destinations" title="The main Christian pilgrimage destinations" intro="Seven regional overviews with links to my detailed attraction and transport guides. The sites follow different Christian traditions and are grouped into regional visits."/>
+     <Heading id="destinations" title="The main Christian pilgrimage destinations" intro="Explore Christian pilgrimage destinations across seven regions of Israel and the West Bank, with my detailed visitor and transport guides."/>
      <div className="mb-6 grid grid-cols-2 gap-2 rounded-xl border bg-secondary/20 p-3 sm:grid-cols-4">{christianAreas.map(area=><a key={area.id} href={"#"+area.id} className="flex min-h-10 items-center gap-1 rounded-lg border bg-card px-3 py-2 text-sm font-semibold text-primary hover:border-primary/40 hover:bg-secondary">{area.name}<ArrowUpRight className="ml-auto h-3.5 w-3.5 shrink-0" aria-hidden="true"/></a>)}</div>
      <div className="space-y-6">{christianAreas.map(area=><AreaCard key={area.id} area={area}/>)}</div>
      <div className="mt-5"><Tip><strong>Two distinct Jordan River sites:</strong> Qasr al-Yahud near Jericho is traditionally associated with Jesus' baptism, while Yardenit is an organised modern visitor site near the Sea of Galilee. Read my <Link to="/travel-blog/baptism-in-the-jordan-river/" className={link}>baptism site comparison</Link> before choosing.</Tip></div>

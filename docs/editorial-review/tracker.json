@@ -492,10 +492,10 @@
     {
       "path": "/attractions/qasr-el-yahud/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All group 9C edits approved and applied; source copy reviewed; rendered corpus and regression verification pending."
     },
     {
       "path": "/attractions/rosh-hanikra/",
@@ -544,10 +544,10 @@
     {
       "path": "/attractions/yardenit/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All group 9C edits approved and applied; source copy reviewed; rendered corpus and regression verification pending."
     },
     {
       "path": "/car-rental/",
@@ -714,10 +714,10 @@
     {
       "path": "/travel-blog/baptism-in-the-jordan-river/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 6,
+      "notes": "All group 9C edits approved and applied; source copy reviewed; rendered corpus and regression verification pending."
     },
     {
       "path": "/travel-blog/beaches-in-tel-aviv/",
@@ -827,10 +827,10 @@
     {
       "path": "/travel-blog/christian-tours-in-israel/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 8,
+      "notes": "All group 9C edits approved and applied; source copy reviewed; rendered corpus and regression verification pending."
     },
     {
       "path": "/travel-blog/churches-in-jerusalem/",
@@ -928,10 +928,10 @@
     {
       "path": "/travel-blog/jerusalem-to-bethlehem/",
       "group": 9,
-      "status": "pending",
+      "status": "edited",
       "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "changes": 8,
+      "notes": "All group 9C edits approved and applied; source copy reviewed; rendered corpus and regression verification pending."
     },
     {
       "path": "/travel-blog/jerusalem-to-the-dead-sea/",

@@ -200,7 +200,7 @@ export const journeyDestinationGuides = {
   "updatedAt": "2026-11-24",
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
   "description": "Travel from Jerusalem to Bethlehem by bus 231 or 234, licensed private driver, taxi or tour. Learn about Checkpoint 300, travel documents and return options.",
-  "intro": "Bethlehem is only a short distance from Jerusalem, but getting there requires some planning. Here's how to travel by bus, taxi or organised tour, and what to check before you leave.",
+  "intro": "Bethlehem is a short journey from Jerusalem. Here's how to get there by bus, taxi or organised tour, including crossing arrangements and entry requirements.",
   "answer": "For independent travellers, bus 231 usually reaches Bab al-Zaqaq, closer to central Bethlehem. Bus 234 ends at Checkpoint 300, where eligible passengers can cross on foot when the checkpoint is open and continue by local taxi. Authorised tour vehicles have separate crossing arrangements; confirm access and the return before setting out.",
   "topics": [
     "transportation",
@@ -311,13 +311,13 @@ export const journeyDestinationGuides = {
       "id": "buses",
       "title": "By bus: choose line 231 or 234",
       "paragraphs": [
-        "Buses to Bethlehem leave from the East Jerusalem bus station near Damascus Gate, not Jerusalem Central Bus Station. The Christian Information Center's East Jerusalem bus guide identifies the boarding area.",
+        "Buses to Bethlehem depart from the East Jerusalem bus station near Damascus Gate. The Christian Information Center's East Jerusalem bus guide identifies the boarding area.",
         "South Buses publishes an ₪8 standard cash fare and an ₪8 Rav-Kav fare for journeys up to 15 km. Rav-Kav passengers must validate on each ride; the operator also describes 90-minute transfers under the ticket rules. Check your bus fare and return departure times."
       ],
       "richParagraphs": [
         [
           {
-            "text": "Buses to Bethlehem leave from the East Jerusalem bus station near Damascus Gate, not Jerusalem Central Bus Station. The "
+            "text": "Buses to Bethlehem depart from the East Jerusalem bus station near Damascus Gate. The "
           },
           {
             "text": "Christian Information Center's East Jerusalem bus guide",
@@ -352,7 +352,7 @@ export const journeyDestinationGuides = {
           "id": "bus-231",
           "title": "Bus 231: via Beit Jala towards central Bethlehem",
           "paragraphs": [
-            "Bus 231 serves the Bab al-Zaqaq / Beit Jala Road stop, closer to central Bethlehem than Checkpoint 300. Journey planners estimate around 20–30 minutes from the East Jerusalem terminal in ordinary traffic; allow more at busy times.",
+            "Bus 231 serves the Bab al-Zaqaq / Beit Jala Road stop, closer to central Bethlehem than Checkpoint 300. The journey from the East Jerusalem terminal takes approximately 20–30 minutes in normal traffic. Allow extra time during busy periods.",
             "Get off at Bab al-Zaqaq / Beit Jala Road. Manger Square and the Church of the Nativity are roughly 1 km away, so continue on foot if comfortable or take a short local taxi ride."
           ]
         },
@@ -360,7 +360,7 @@ export const journeyDestinationGuides = {
           "id": "bus-234",
           "title": "Bus 234: via Checkpoint 300",
           "paragraphs": [
-            "Bus 234 travels from Nevi'im Terminal to Checkpoint 300 / Bethlehem Road, taking about 15–20 minutes in normal traffic. For an independent trip, eligible passengers can use the pedestrian crossing when it is operating, then arrange a local taxi or pickup for Manger Square. The bus itself does not go to the church.",
+            "Bus 234 travels from Nevi'im Terminal to Checkpoint 300 / Bethlehem Road, taking about 15–20 minutes in normal traffic. For an independent trip, eligible passengers can use the pedestrian crossing when it is operating, then arrange a local taxi or pickup for Manger Square.",
             "Bus 234 still terminates at Checkpoint 300. Agree a meeting point with your local driver or guide, and leave extra time for checks and your return bus to Jerusalem."
           ]
         }
@@ -392,7 +392,7 @@ export const journeyDestinationGuides = {
       "id": "tours",
       "title": "Organised day trips and guided Bethlehem visits",
       "paragraphs": [
-        "A half-day tour of Bethlehem avoids the need to arrange local buses and transfers yourself. Private tours offer more flexibility, while full-day tours may include other destinations.",
+        "A half-day tour of Bethlehem simplifies transport and crossing arrangements. Private tours offer more flexibility, while full-day tours may include other destinations.",
         "Some tours use different drivers or guides for the journey and the sightseeing in Bethlehem."
       ],
       "sourceIds": [
@@ -433,14 +433,14 @@ export const journeyDestinationGuides = {
       "id": "visit-return",
       "title": "Plan a half-day visit and the journey back",
       "paragraphs": [
-        "Half a day is usually enough to see Bethlehem's main central sites. Allow extra time for church queues, transport and any additional stops.",
+        "Half a day is usually enough to visit Bethlehem's main attractions. Allow extra time for church queues, transport and any additional stops.",
         "The Church of the Nativity is a UNESCO World Heritage site. The Christian Information Center lists temporary basilica hours of 05:00–17:00. The Grotto of the Nativity has separate visiting hours during restoration: 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday. Check both schedules before travelling.",
         "Agree on your return pickup time and location in advance. Allow extra time for checkpoints and transport connections."
       ],
       "richParagraphs": [
         [
           {
-            "text": "Half a day is usually enough to see Bethlehem's main central sites. Allow extra time for church queues, transport and any additional stops."
+            "text": "Half a day is usually enough to visit Bethlehem's main attractions. Allow extra time for church queues, transport and any additional stops."
           }
         ],
         [
@@ -533,7 +533,7 @@ export const journeyDestinationGuides = {
     "faqs": [
     {
       "q": "What is the cheapest way to travel from Jerusalem to Bethlehem?",
-      "a": "An East Jerusalem bus is normally the lowest-cost option. South Buses currently publishes an ₪8 fare for journeys up to 15 km; confirm the fare for your exact ride. Line 231 stops at Bab al-Zaqaq, while eligible passengers on line 234 continue from Checkpoint 300 after crossing."
+      "a": "An East Jerusalem bus is normally the lowest-cost option. The standard bus fare for journeys up to 15 km is ₪8. Line 231 stops at Bab al-Zaqaq, while eligible passengers on line 234 continue from Checkpoint 300 after crossing."
     },
     {
       "q": "Is bus 231 or bus 234 better for the Church of the Nativity?",
@@ -561,7 +561,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Is there a train from Jerusalem to Bethlehem?",
-      "a": "Bethlehem has no passenger railway service. Travel by bus from East Jerusalem, an authorised private vehicle or an organised tour."
+      "a": "There is no train service to Bethlehem. You can travel by bus from East Jerusalem, authorised private vehicle or organised tour."
     },
     {
       "q": "Can I visit Bethlehem on Saturday?",

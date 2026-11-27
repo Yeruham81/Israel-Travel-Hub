@@ -47,17 +47,17 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
         image={{ src: ceremonyPhoto, alt: "Christian pilgrims gathering for a baptism ceremony beside the lower Jordan River at Qasr el-Yahud" }}
       >
         <p>Walk down to the riverbank to see the Jordan River and the steps where baptism ceremonies take place. The place is associated by tradition with Jesus' baptism by John the Baptist and remains important to pilgrims from many churches.</p>
-        <p>You can also come simply to observe, reflect or pray. If a ceremony is in progress, leave space for participants and ask permission before taking close-up photographs.</p>
+        <p>Visitors are also welcome to observe, reflect or pray. If a ceremony is in progress, leave space for participants and ask permission before taking close-up photographs.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="River terraces and places for reflection"
         image={{ src: riverbankPhoto, alt: "Visitor terraces, shade structures and the Jordan River at the Qasr el-Yahud site" }}
       >
         <p>Look across the narrow river to the opposite, Jordanian bank. The riverbank has shaded areas and steps leading down to the baptism site.</p>
-        <p>The site has been improved with a wider river deck, a prayer area and renewed visitor facilities. Stick to the marked public area and follow the attendants' instructions at the water.</p>
+        <p>The site features a wider river deck, a prayer area and renovated visitor facilities. Stick to the marked public area and follow the attendants' instructions at the water.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Monasteries and the Jordan Valley landscape">
-        <p>Historic Christian monasteries and chapels dot the Jordan Valley, reflecting centuries of religious life and pilgrimage. Some were established in the Byzantine period and still lend the landscape its distinctive character.</p>
+        <p>Historic Christian monasteries and chapels dot the Jordan Valley, reflecting centuries of religious life and pilgrimage. Some date back to the Byzantine period.</p>
         <p>Enjoy views of the Jordan River, desert vegetation and historic monasteries from the designated visitor area. Ask the site staff whether guided visits to the nearby monasteries are available.</p>
       </AttractionHighlight>
     </div>
@@ -79,7 +79,7 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
         </article>
         <article className="rounded-xl border bg-card p-4" data-testid="qasr-free-reservation">
           <div className="flex items-center gap-2"><Ticket className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-serif text-xl font-semibold">Free entry — reserve first</h3></div>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Admission is <strong>free for all ages</strong>. Since {visit.registerSince}, the operator has required registration before arriving at the site.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Admission is <strong>free for all ages</strong>. Advance registration has been required since {visit.registerSince}.</p>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">Book your visit through the official Qasr el-Yahud website. Reservation dates normally open <strong>up to two weeks in advance</strong>; dates farther ahead may not appear yet. Booking the visit does not include a baptism ceremony or transport.</p>
           <a href={official.operatorEnglish} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Book a free Qasr el-Yahud visit <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
         </article>
@@ -138,7 +138,7 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
           <li>Arrive for your <strong>reserved visit</strong>, park and make your way into the designated riverbank area.</li>
           <li>Pause at the <strong>river viewpoint and prayer space</strong>, watching any ceremonies respectfully.</li>
           <li>Visit the <strong>designated baptism steps</strong> if you have arranged an immersion or ceremony.</li>
-          <li>Use the changing facilities if needed and allow time to leave before the site's closing time.</li>
+          <li>Use the changing facilities if needed and leave before the site closes.</li>
         </ol>
         <p className="mt-3 text-sm leading-relaxed sm:text-base">A planned group baptism can take longer, especially when participants need to change and prepare. Allow additional time for the road approach and any access checks.</p>
       </div>
@@ -158,7 +158,7 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
     <div className="mt-4 space-y-3">
       <p>Christian tradition connects this stretch of the Jordan River with the baptism of Jesus by John the Baptist. The area also carries Jewish and biblical traditions relating to the crossing of the Jordan by Joshua and the prophet Elijah.</p>
       <p>Monastic communities developed along the river from the Byzantine period onward. Pilgrimages continued through different periods of regional history, and the river remains a shared landscape of memory and religious practice.</p>
-      <p>Today the river remains a place for prayer, baptism and shared heritage, linking the historical landscape with the religious lives of the visitors who arrive each year.</p>
+      <p>Today, pilgrims continue to visit the river for prayer and baptism.</p>
     </div>
   ),
   tourContent: (
