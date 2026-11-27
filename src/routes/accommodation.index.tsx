@@ -25,7 +25,7 @@ const areaGuideCards = [
   },
   {
     id: "haifa", eyebrow: "Coast & Carmel", title: "Haifa",
-    description: "Weigh German Colony charm, Carmel views and beach access before choosing a hotel.",
+    description: "Compare hotels in Haifa's German Colony, on Mount Carmel and along the beachfront.",
     cta: "Find your ideal base", to: accommodationEditorial.haifa.path as NonNullable<LinkProps["to"]>,
   },
   {
@@ -35,7 +35,7 @@ const areaGuideCards = [
   },
   {
     id: "deadsea", eyebrow: "Desert & wellness", title: "Dead Sea",
-    description: "Understand Ein Bokek, nearby resorts and Ein Gedi, from beach access to spa facilities.",
+    description: "Compare beach resorts, spa hotels and nature-focused stays in Ein Bokek, Neve Zohar and Ein Gedi.",
     cta: "Compare resort areas", to: accommodationEditorial.deadsea.path as NonNullable<LinkProps["to"]>,
   },
   {
@@ -106,7 +106,7 @@ function AccommodationHub() {
       <section id="where-to-stay-guides" aria-labelledby="where-to-stay-guides-h" className="mt-10 scroll-mt-24" data-testid="accommodation-area-guides">
         <h2 id="where-to-stay-guides-h" className="text-2xl font-semibold">Not sure where to base yourself?</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Explore my guides to the most popular neighborhoods and best areas to stay in Israel, with practical tips and handpicked hotel recommendations.
+          Explore my destination guides, with practical advice on neighborhoods and recommended hotels.
         </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" aria-label="Where to stay guides by destination">
           {areaGuideCards.map(guide => {
@@ -155,7 +155,7 @@ function AccommodationHub() {
       <section id="planning" aria-labelledby="planning-h" className="mt-10 scroll-mt-24">
         <h2 id="planning-h" className="text-2xl font-semibold">Plan the rest of your trip</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Find helpful guides to arriving, getting around and planning overnight stops across Israel.
+          Plan your airport arrival, local transport and overnight stops across Israel.
         </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {planningGuides.map(guide => <li key={guide.title}>
