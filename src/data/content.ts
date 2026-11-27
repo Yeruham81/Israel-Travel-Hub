@@ -112,23 +112,23 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     photo: { src: downtownPhoto, alt: "Pedestrians and light-rail tracks on Jaffa Road in central Jerusalem", sourceUrl: "" },
     map: { lat: 31.7816, lon: 35.2199, bounds: [35.2105, 31.7765, 35.2295, 31.7875], reference: "Zion Square / Jaffa Road" },
     overview: [
-      "Downtown is the modern center west of the Old City, around Jaffa Road, Zion Square, Ben Yehuda Street and the lanes of Nahalat Shiva. Downtown lies outside the Old City walls, within walking distance of the historic sights.",
-      "Downtown Jerusalem is a convenient choice for first-time visitors, with attractions, shops and restaurants nearby. You can start the morning at a café, walk toward Jaffa Gate, and return to restaurants and shopping streets in the evening. Jaffa Road's light rail is useful for moving along the center toward the market and the station area; check its current service for your dates.",
+      "Downtown is the modern center west of the Old City, around Jaffa Road, Zion Square, Ben Yehuda Street and the lanes of Nahalat Shiva. The historic sights of the Old City are within walking distance.",
+      "Downtown Jerusalem is a convenient choice for first-time visitors, with attractions, shops and restaurants nearby. You can start the morning at a café, walk toward Jaffa Gate, and return to restaurants and shopping streets in the evening. The light rail along Jaffa Road connects the city center with Mahane Yehuda Market and the railway station.",
       "Rooms overlooking busy pedestrian streets can be noisier than rooms facing an inner courtyard. If quiet nights or parking matter more than restaurants and walkability, compare the German Colony or a specific hotel away from the busiest streets before deciding.",
     ],
     highlights: [
-      { name: "Jaffa Road & Zion Square", text: "A useful point of orientation, with light-rail stops and cafés along the surrounding streets." },
+      { name: "Jaffa Road & Zion Square", text: "A central meeting point surrounded by cafés and light-rail stops." },
       { name: "Ben Yehuda & Nahalat Shiva", text: "Pedestrian shopping streets and historic stone lanes for an easy evening walk close to your hotel." },
       { name: "Jaffa Gate & the Old City", text: "Head east for the Old City. The walk depends on your starting street, hills and the gate you need." },
     ],
     gettingAround: [
-      "From the eastern side of Downtown, allow roughly 10–15 minutes to walk to Jaffa Gate; hotels farther west take longer. Mahane Yehuda is usually a walk of about 10–20 minutes or a short light-rail journey. Walking times vary depending on your hotel's location.",
+      "From the eastern side of Downtown, allow roughly 10–15 minutes to walk to Jaffa Gate; hotels farther west take longer. Mahane Yehuda is usually a walk of about 10–20 minutes or a short light-rail journey.",
       "From Jerusalem–Yitzhak Navon station, take the light rail or a taxi to your hotel. Many central streets are pedestrianized, so confirm the nearest permitted taxi stop. For a Shabbat arrival, check the actual transport service and your hotel's check-in instructions in advance.",
     ],
     arrivalTips: ["Ask for the closest vehicle-accessible entrance.", "Check the walking route from your light-rail stop with luggage.", "Light sleepers should ask about inward-facing rooms and nearby bars."],
     bookingTips: ["Check whether breakfast is included in the room rate you choose.", "If you have a car, get the car park's exact location and total charge in writing."],
     faqs: [
-      { q: "Is Downtown the same as Jerusalem's Old City?", a: "No. Downtown is outside the walls, mainly around Jaffa Road and Ben Yehuda Street. You walk east toward Jaffa Gate to enter the Old City." },
+      { q: "Is Downtown the same as Jerusalem's Old City?", a: "Downtown is located west of the Old City walls, around Jaffa Road and Ben Yehuda Street. Walk east toward Jaffa Gate to enter the Old City." },
       { q: "Is this a good area without a rental car?", a: "Yes, it is a practical base for walking and the light rail. Check current timetables and plan Friday-evening and Saturday journeys separately." },
       { q: "Which part is quieter?", a: "Noise varies by street and room orientation. Ask the hotel about nearby bars and deliveries. A higher-floor or inward-facing room may be quieter." },
     ],
@@ -145,8 +145,8 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     map: { lat: 31.7765, lon: 35.2254, bounds: [35.217, 31.7700, 35.233, 31.7810], reference: "Mamilla Avenue / King David Street" },
     overview: [
       "Mamilla and the northern part of King David Street form a hotel district immediately west of the Old City. Mamilla's pedestrian avenue leads toward Jaffa Gate, while King Solomon Street and King David Street connect some of Jerusalem's best-known luxury properties.",
-      "The appeal is the combination of location and hotel facilities. You can explore the Old City on foot and return to a modern room, restaurants or a spa, depending on the hotel you choose. Downtown is also accessible on foot, so you do not have to spend every meal in a luxury hotel restaurant.",
-      "This is one of the city's more expensive areas. Mamilla is known for its upscale hotels, elegant shopping avenue and restaurants. Hotels farther south along King David Street are still convenient, but add walking time compared with a property immediately beside Mamilla Avenue.",
+      "The district combines easy access to the Old City with upscale hotel facilities. You can explore the Old City on foot and return to a modern room, restaurants or a spa, depending on the hotel you choose. Downtown's cafés and restaurants are also within walking distance.",
+      "This is one of the city's more expensive areas. Mamilla is known for its upscale hotels, elegant shopping avenue and restaurants. Hotels farther south along King David Street require a slightly longer walk to the Old City.",
     ],
     highlights: [
       { name: "Mamilla Avenue", text: "An open-air pedestrian shopping avenue connecting the modern hotel district with Jaffa Gate." },
@@ -155,13 +155,13 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     ],
     gettingAround: [
       "Most hotels in this district are roughly 5–15 minutes on foot from Jaffa Gate, with the exact distance depending on how far south you stay. Check the walking route to the Old City gate and continue from there to your attraction.",
-      "Hotel entrances outside the walls generally make an arrival with luggage simpler than a stay deep inside the Old City. Still, confirm the entrance and parking arrangements, particularly during holidays, events or road closures. Check the distance from your hotel to the nearest light-rail stop.",
+      "Hotels outside the Old City walls generally offer easier vehicle access when arriving with luggage. Still, confirm the entrance and parking arrangements, particularly during holidays, events or road closures. Check the distance from your hotel to the nearest light-rail stop.",
     ],
     arrivalTips: ["Use the hotel's street entrance as your airport transfer destination.", "If traveling with children, check how the walk to Jaffa Gate works with a stroller.", "Confirm Friday-evening and Saturday check-in and meal arrangements directly."],
     bookingTips: ["If you want an Old City view, book a room that specifically includes one.", "Check pool opening dates, children's access and whether spa treatments cost extra."],
     faqs: [
       { q: "Am I staying inside the Old City?", a: "No. Mamilla and King David Street are outside the western walls. The advantage is being close to Jaffa Gate while retaining the facilities and vehicle access of a modern hotel district." },
-      { q: "Do all rooms have an Old City view?", a: "No. Views vary by hotel, building, floor and room category. Only rely on a view that is explicitly included in the room description you book." },
+      { q: "Do all rooms have an Old City view?", a: "Old City views vary by hotel, building, floor and room category. Book a room that specifically includes an Old City view." },
       { q: "Is Mamilla a good choice for a short first visit?", a: "It can be, especially if convenient Old City access matters more than the lowest room rate. Downtown offers another central base with a wider mix of accommodation styles." },
     ],
   },
@@ -176,9 +176,9 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     photo: { src: "/images/attractions/old-jerusalem-cardo.webp", alt: "Narrow stone-paved shopping passage in Jerusalem's Old City", sourceUrl: "" },
     map: { lat: 31.7767, lon: 35.2332, bounds: [35.2259, 31.7709, 35.2413, 31.7833], reference: "Old City, inside the walls" },
     overview: [
-      "The Old City is the most immersive option if Jerusalem's history and religious sites are the focus of your visit. Its Christian, Armenian, Jewish and Muslim quarters contain sacred places, market lanes and residential streets within the same walls. Staying here lets you experience the lanes before and after the busiest sightseeing hours.",
-      "Accommodation is mainly in historic hotels, religious guesthouses and smaller properties. A courtyard, rooftop or historic building can be a memorable part of the stay, but facilities and accessibility vary considerably. Decide which quarter fits your plans before choosing a hotel name.",
-      "The main difficulty is reaching your hotel with luggage. Even a short walk can be difficult with luggage or a stroller because of stairs, steep streets, crowds and uneven paving. Visitors who need reliable step-free access or door-to-door vehicle arrival should consider accommodation outside the walls and confirm specific arrangements with the hotel.",
+      "Staying in the Old City puts Jerusalem's historic and religious landmarks on your doorstep. Its Christian, Armenian, Jewish and Muslim quarters contain sacred places, market lanes and residential streets within the same walls. Staying here lets you experience the lanes before and after the busiest sightseeing hours.",
+      "Accommodation is mainly in historic hotels, religious guesthouses and smaller properties. Many properties feature historic architecture, courtyards or rooftops, with varying facilities and accessibility. Decide which quarter fits your plans before choosing a hotel name.",
+      "Stairs, steep streets, crowds and uneven paving can make even short walks challenging with luggage or a stroller. Visitors who need reliable step-free access or door-to-door vehicle arrival should consider accommodation outside the walls and confirm specific arrangements with the hotel.",
     ],
     highlights: [
       { name: "Christian & Armenian quarters", text: "Explore around Jaffa Gate, the Church of the Holy Sepulchre and the historic lanes between the quarters." },
@@ -186,8 +186,8 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
       { name: "Muslim Quarter & Via Dolorosa", text: "Market streets and religious landmarks create a busy daytime atmosphere, with access rules varying by site." },
     ],
     gettingAround: [
-      "The nearest suitable gate is more useful than a general 'Old City' address. Jaffa Gate connects with Mamilla and western Jerusalem; Damascus Gate serves the northern side; Zion and Dung gates may suit parts of the Jewish Quarter. Ask the hotel which arrival route is currently appropriate.",
-      "Travel between sites mainly on foot and allow extra time beyond a map's distance estimate. Vehicle restrictions and site-entry arrangements can change. A hotel with an elevator does not make the surrounding approach step-free, so discuss the whole route if accessibility is important.",
+      "Plan your arrival through the gate most convenient for your hotel. Jaffa Gate connects with Mamilla and western Jerusalem; Damascus Gate serves the northern side; Zion and Dung gates may suit parts of the Jewish Quarter. Ask the hotel which arrival route is currently appropriate.",
+      "Travel between sites mainly on foot and allow extra time beyond a map's distance estimate. Vehicle restrictions and site-entry arrangements can change. If you need step-free access, confirm both the route to the hotel and accessibility within the building.",
     ],
     arrivalTips: ["Get the exact gate, permitted drop-off and walking instructions from the hotel before you travel.", "Ask whether luggage help can be arranged and whether it has a separate charge.", "Check stairs both inside the building and on the approach from the gate."],
     bookingTips: ["Ask the hotel whether it has an elevator and whether you can reach your room without using stairs.", "Ask about evening reception, nearby food options and the room's outlook before booking."],
@@ -208,9 +208,9 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     photo: { src: marketPhoto, alt: "Agripas Street beside Mahane Yehuda Market in Jerusalem", sourceUrl: "" },
     map: { lat: 31.7845, lon: 35.211, bounds: [35.201, 31.7777, 35.2198, 31.7905], reference: "Mahane Yehuda Market / Nachlaot" },
     overview: [
-      "Mahane Yehuda Market sits around Jaffa Road and Agripas Street, immediately west of Downtown. Nachlaot extends into the historic lanes alongside it, with stone houses, small courtyards and synagogues. The two names often appear together in hotel descriptions, but the exact street makes a considerable difference.",
-      "During the day, explore the market's bakeries, fresh produce stalls, spice shops and small restaurants. In the evening, the market becomes a lively area for dining and nightlife. A stay facing the market can be lively and convenient, while a property a few streets into Nachlaot may feel much more residential.",
-      "Boutique hotels and apartment-style stays work well here, particularly if food and neighbourhood life matter more than being next to an Old City gate. If you're staying for several days, consider an apartment with a well-equipped kitchen. This area is less suitable if you want consistently quiet surroundings or extensive facilities in a large resort-style hotel.",
+      "Mahane Yehuda Market sits around Jaffa Road and Agripas Street, immediately west of Downtown. Nachlaot extends into the historic lanes alongside it, with stone houses, small courtyards and synagogues. Hotels beside the market and properties in Nachlaot's residential lanes offer different experiences.",
+      "During the day, explore the market's bakeries, fresh produce stalls, spice shops and small restaurants. In the evening, the market becomes a lively area for dining and nightlife. Stay beside the market for nightlife and dining, or explore the quieter residential lanes of Nachlaot.",
+      "Boutique hotels and apartments are ideal for enjoying the local food scene and neighborhood atmosphere. If you're staying for several days, consider an apartment with a well-equipped kitchen. For quieter surroundings or extensive hotel facilities, consider the German Colony.",
     ],
     highlights: [
       { name: "Mahane Yehuda Market", text: "Food shopping, bakeries and casual meals by day, with a different restaurant and bar scene in the evening." },
@@ -225,7 +225,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     bookingTips: ["For an apartment, confirm the kitchen equipment, cleaning schedule and any separate cleaning fee.", "Read recent guest reviews for information about noise, stairs and accessibility."],
     faqs: [
       { q: "Should I stay beside the market or inside Nachlaot?", a: "Beside the market is convenient for food and nightlife. A side street in Nachlaot can feel more residential, but access and noise still depend on the specific building and room." },
-      { q: "Is the market open throughout Shabbat?", a: "Do not plan on normal market trading from Friday afternoon through Saturday. Individual restaurants and bars keep their own hours; check the businesses you intend to use." },
+      { q: "Is the market open throughout Shabbat?", a: "Most market stalls close on Friday afternoon and remain closed during Shabbat. Individual restaurants and bars keep their own hours; check the businesses you intend to use." },
       { q: "Is an apartment useful for a longer stay?", a: "It can be, especially if you want to buy food at the market and prepare meals. Verify the exact kitchen, sleeping arrangement, stairs and check-in process before paying." },
     ],
   },
@@ -240,9 +240,9 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     photo: { src: eastJerusalemPhoto, alt: "Damascus Gate, the northern entrance to Jerusalem's Old City", sourceUrl: "https://commons.wikimedia.org/wiki/File:Damaskustor_BW_2.jpg", credit: "Berthold Werner · Public domain · Resized and converted to WebP" },
     map: { lat: 31.7873, lon: 35.2311, bounds: [35.224, 31.7807, 35.240, 31.7952], reference: "Nablus Road / northern Old City hotel district" },
     overview: [
-      "For this accommodation guide, East Jerusalem means the hotel cluster just north and northeast of the Old City: Damascus Gate, Nablus Road, Salah ad-Din Street, St. George's Cathedral and the American Colony area. Check the walking distance to the Old City from your chosen hotel.",
-      "The area is known for its Palestinian restaurants, bakeries, local shops and historic buildings. The district is particularly convenient for Christian pilgrims visiting the Garden Tomb and entering the Old City through Damascus Gate. Several historic hotels also offer accommodation in traditional buildings.",
-      "For a quieter stay, consider hotels with gardens farther north of the busy streets around Damascus Gate. Choose a hotel according to its location, access and proximity to the sights you plan to visit. It is less convenient for travelers who mainly want western Downtown's bars or Mahane Yehuda.",
+      "Hotels north and northeast of the Old City are concentrated around Damascus Gate, Nablus Road, Salah ad-Din Street, St. George's Cathedral and the American Colony area. Check the walking distance to the Old City from your chosen hotel.",
+      "The area is known for its Palestinian restaurants, bakeries, local shops and historic buildings. The district is particularly convenient for Christian pilgrims visiting the Garden Tomb and entering the Old City through Damascus Gate. Several hotels occupy historic buildings with traditional architecture.",
+      "For a quieter stay, consider hotels with gardens farther north of the busy streets around Damascus Gate. Downtown is a more convenient base for Mahane Yehuda Market and West Jerusalem's nightlife.",
     ],
     highlights: [
       { name: "Damascus Gate", text: "A major northern entrance to the Old City's market lanes and the Muslim and Christian quarters." },
@@ -257,7 +257,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     bookingTips: ["Allow more travel time from the Mount of Olives and outlying neighborhoods to Damascus Gate.", "In heritage buildings, room layouts can vary; compare the room category and accessibility."],
     faqs: [
       { q: "Does every East Jerusalem hotel have easy Old City access?", a: "No. The name covers a large area. This guide focuses on the northern Old City hotel district; properties on the Mount of Olives or farther out can involve substantially different journeys." },
-      { q: "Is this area convenient for Christian pilgrims?", a: "The northern hotel district is useful for the Garden Tomb, Damascus Gate and several Christian institutions. The best base still depends on the specific churches and sites in your itinerary." },
+      { q: "Is this area convenient for Christian pilgrims?", a: "The northern hotel district is particularly convenient for visiting the Garden Tomb, Damascus Gate and nearby Christian institutions." },
       { q: "Will shops and restaurants be open on Saturday?", a: "Many shops and restaurants in East Jerusalem remain open on Saturdays, although opening hours vary. Confirm the places you plan to use and arrange transport separately." },
     ],
   },
@@ -273,16 +273,16 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     map: { lat: 31.7655, lon: 35.219, bounds: [35.208, 31.7515, 35.230, 31.777], reference: "Emek Refaim / German Colony and Baka" },
     overview: [
       "The German Colony and Baka are neighboring residential areas south of central Jerusalem. Emek Refaim is the German Colony's main café and shopping street, while Baka extends farther south and east around Bethlehem Road. Hotels at the northern end of the German Colony are closer to the Old City than accommodation farther south in Baka.",
-      "This is an appealing base for families, repeat visitors and longer stays. Historic stone buildings, neighbourhood cafés and quiet residential side streets offer a relaxed base after sightseeing. Accommodation includes a large luxury hotel and apartments with extra living space.",
+      "Both neighborhoods are well suited to families, repeat visitors and longer stays. Historic stone buildings, neighbourhood cafés and quiet residential side streets offer a relaxed base after sightseeing. Accommodation includes a large luxury hotel and apartments with extra living space.",
       "These neighbourhoods are farther from the main tourist attractions. Use buses or taxis for longer journeys to the sights, particularly from southern Baka. Ask the hotel about current construction near Emek Refaim and the First Station, including noise, pedestrian routes and vehicle access.",
     ],
     highlights: [
       { name: "Emek Refaim", text: "The neighbourhood's main street is lined with cafés, restaurants and historic stone buildings." },
       { name: "First Station area & Train Track Park", text: "Explore the northern German Colony and enjoy a walk along the former railway tracks. Check which sections are currently open." },
-      { name: "Baka & Bethlehem Road", text: "Residential streets and neighbourhood food options suit travelers who prefer space and a longer local stay." },
+      { name: "Baka & Bethlehem Road", text: "Quiet residential streets, local cafés and restaurants offer a relaxed setting for longer stays." },
     ],
     gettingAround: [
-      "From the northern German Colony, the walk toward Jaffa Gate can be roughly 15–25 minutes, depending on the hotel and route. Accommodation farther into Baka generally adds distance and is better treated as a bus-or-taxi base. Hills and a stroller can change what feels comfortably walkable.",
+      "From the northern German Colony, the walk toward Jaffa Gate can be roughly 15–25 minutes, depending on the hotel and route. From southern Baka, buses and taxis offer convenient connections to central Jerusalem. Allow extra walking time for hills, especially when traveling with a stroller.",
       "For an airport transfer, get the hotel's current recommended approach and precise entrance. Street works can change access around Emek Refaim and nearby roads. Check current bus and light-rail services, especially for a Shabbat arrival.",
     ],
     arrivalTips: ["Ask about street works, room orientation and the latest vehicle approach shortly before arrival.", "For Baka, plan transport to central sights as part of your daily budget.", "Arrange late apartment check-in and confirm the exact entrance, which may be on a side street."],
@@ -290,7 +290,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     faqs: [
       { q: "Are the German Colony and Baka the same neighbourhood?", a: "They are adjoining areas. The German Colony centers on Emek Refaim and is closer to the First Station; Baka stretches farther south and east around Bethlehem Road." },
       { q: "Can I walk to the Old City?", a: "Many visitors staying in the northern German Colony can walk to the Old City. From farther south in Baka, a bus or taxi may be easier. Check the walking route from your hotel." },
-      { q: "How should I check construction disruption?", a: "Ask your accommodation shortly before arrival about its entrance, nearby roadworks, bus stops and the outlook of your room. A city-wide construction notice may not describe the effect on your particular stay." },
+      { q: "How should I check construction disruption?", a: "Ask your accommodation shortly before arrival about its entrance, nearby roadworks, bus stops and the outlook of your room." },
     ],
   },
 ];
