@@ -1,4 +1,4 @@
-name: Unused code cleanup - stage 2 components and data
+name: Unused code cleanup - synchronized verification and stage 3
 on:
   push:
     branches: [audit/unused-code-cleanup]
@@ -6,8 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  components-data-proposal:
-    if: ${{ !contains(github.event.head_commit.message, '[apply-verified-stage2]') }}
+  synchronized-verification-and-stage3:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -20,6 +19,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-node@v7
         with:
           node-version: "24"
@@ -28,198 +28,31 @@ jobs:
         with:
           bun-version: "1.4.4"
       - run: bash scripts/install-ci-dependencies.sh
-      - name: Build baseline and validate types
+      - name: Build current main reference
         run: |
-          bash scripts/build-validated-static.sh
-          npx tsc --noEmit --pretty false
           mkdir -p "$RUNNER_TEMP/unused-audit"
-          cp -a .output/public "$RUNNER_TEMP/unused-audit-before"
-      - name: Collect baseline and propose components and data cleanup
-        shell: bash
-        run: |
-          out="$RUNNER_TEMP/unused-audit"
-          status=0
-          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters > "$out/before.txt" 2>&1 || status=$?
-          cat "$out/before.txt"
-          if [[ "$status" -gt 2 ]]; then exit "$status"; fi
-          node --input-type=module <<'JS'
-          import ts from 'typescript';
-          import fs from 'node:fs';
-          import path from 'node:path';
-          const config = ts.findConfigFile('.', ts.sys.fileExists);
-          const raw = ts.readConfigFile(config, ts.sys.readFile);
-          if (raw.error) throw new Error('Cannot read tsconfig');
-          const parsed = ts.parseJsonConfigFileContent(raw.config, ts.sys, path.dirname(config), { noUnusedLocals: true, noUnusedParameters: true, noEmit: true });
-          if (parsed.errors.length) throw new Error('Cannot parse tsconfig');
-          const targets = new Set([6133,6192,6196,6198,6199]);
-          const manifest=[];
-          const relative=file=>path.relative(process.cwd(),file.fileName).replaceAll(path.sep,'/');
-          const scope=file=>/^src\/(components|data)\//.test(relative(file))&&!/^src\/data\/generated\//.test(relative(file))&&!file.isDeclarationFile;
-          if(parsed.options.verbatimModuleSyntax!==false) throw Error('Review module emission settings');
-          const emitOptions={...parsed.options,noEmit:false,declaration:false,declarationMap:false,sourceMap:false,inlineSourceMap:false,inlineSources:false,incremental:false,composite:false};
-          function emittedModules(text, filename) {
-            const output=ts.transpileModule(text,{compilerOptions:emitOptions,fileName:filename}).outputText;
-            const sf=ts.createSourceFile('emit.js',output,ts.ScriptTarget.Latest,true,ts.ScriptKind.JS);
-            return new Set(sf.statements.filter(ts.isImportDeclaration).map(n=>n.moduleSpecifier.text));
-          }
-          function assertModules(oldText,newText,filename,allowed=new Set()) {
-            const next=emittedModules(newText,filename);
-            for(const mod of emittedModules(oldText,filename)) if(!next.has(mod)&&!allowed.has(mod)) throw Error('Runtime module removed: '+filename+' '+mod);
-          }
-          const first=ts.createProgram(parsed.fileNames,parsed.options);
-          const firstDiags=ts.getPreEmitDiagnostics(first);
-          function reviewed(file,name,oldText,newText,allowed=new Set()) {
-            const sf=first.getSourceFiles().find(f=>relative(f)===file);
-            if(!sf||!firstDiags.some(d=>d.file===sf&&d.code===6133&&ts.flattenDiagnosticMessageText(d.messageText,' ').includes("'"+name+"'"))) throw Error('Reviewed declaration no longer diagnosed: '+file+' '+name);
-            const source=fs.readFileSync(file,'utf8');
-            if(source.split(oldText).length!==2) throw Error('Reviewed source changed: '+file+' '+name);
-            const result=source.replace(oldText,newText);
-            assertModules(source,result,file,allowed);
-            fs.writeFileSync(file,result);
-            manifest.push({file,kind:'reviewed unused declaration',removed:[name]});
-          }
-          // Keep the public prop type intact: callers may still pass cardPhoto.
-          reviewed('src/components/GuideCard.tsx','cardPhoto','headingLevel = 2, cardPhoto, compactHomeLayout','headingLevel = 2, compactHomeLayout');
-          // Remove only the dead helper and unused callback argument.
-          const beachFile='src/components/TelAvivBeachesGuide.tsx';
-          const beach=first.getSourceFiles().find(f=>relative(f)===beachFile);
-          const tip=beach.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='Tip');
-          if(!tip||tip.modifiers?.length||!tip.getText(beach).includes('className="flex gap-3 rounded-xl border border-amber-300/50')) throw Error('Review Tip helper');
-          reviewed(beachFile,'Tip',tip.getText(beach)+'\n','');
-          reviewed(beachFile,'index','areas.map((area, index) => {','areas.map((area) => {');
-          // Private helper only, all existing calls have exactly three arguments.
-          const hubFile='src/data/attractionsHub.ts';
-          const hub=first.getSourceFiles().find(f=>relative(f)===hubFile);
-          let callCount=0;
-          function checkCalls(n) {
-            if(ts.isCallExpression(n)&&ts.isIdentifier(n.expression)&&n.expression.text==='editorialAttraction') {
-              if(n.arguments.length!==3) throw Error('Review editorialAttraction call');
-              callCount++;
-            }
-            ts.forEachChild(n,checkCalls);
-          }
-          checkCalls(hub);
-          if(callCount!==6) throw Error('Review editorialAttraction call count');
-          reviewed(hubFile,'photoOverride','const editorialAttraction = (id: TravelGuideId, title: string, description: string, photoOverride?: { src: string; alt: string })','const editorialAttraction = (id: TravelGuideId, title: string, description: string)');
-          // L is a local pure object factory. Confirm its exact implementation.
-          const itineraryFile='src/data/israelItineraries.ts';
-          if(!fs.readFileSync(itineraryFile,'utf8').includes('const L = (label: string, to: InternalPath): ItineraryLink => ({ label, to });')) throw Error('Review itinerary factory');
-          reviewed(itineraryFile,'deadSeaHotels','const deadSeaHotels = L("Dead Sea hotel areas", "/travel-blog/best-dead-sea-hotels/");\n','');
-          reviewed(itineraryFile,'baptism','const baptism = L("Qasr el-Yahud visit guide", "/attractions/qasr-el-yahud/");\n','');
-          const taxiFile='src/data/taxiGuideCluster.ts';
-          if(!fs.readFileSync(taxiFile,'utf8').includes('import roadTrip from "@/assets/home/road-trip.webp";')) throw Error('Review image dependency');
-          reviewed(taxiFile,'intercityPhoto','const intercityPhoto = { src: roadTrip, alt: "Illustration of a vehicle traveling on a road through the Israeli landscape" };\n','',new Set(['@/assets/home/road-trip.webp']));
-          function cleanLine(file,node) {
-            const a=node.getStart(file), b=node.end;
-            const lineStart=file.text.lastIndexOf('\n',a-1)+1;
-            const lineEnd=file.text.indexOf('\n',b);
-            if(!file.text.slice(lineStart,a).trim()&&lineEnd>=0&&!file.text.slice(b,lineEnd).trim()) return {a:lineStart,b:lineEnd+1,replacement:''};
-            return {a,b,replacement:''};
-          }
-          const printer=ts.createPrinter({newLine:ts.NewLineKind.LineFeed});
-          for(let round=1;round<=5;round++) {
-            const program=ts.createProgram(parsed.fileNames,parsed.options);
-            const groups=new Map();
-            for(const d of ts.getPreEmitDiagnostics(program)) {
-              if(!d.file||d.start==null||!targets.has(d.code)||!scope(d.file)) continue;
-              if(!groups.has(d.file)) groups.set(d.file,[]);
-              groups.get(d.file).push(d);
-            }
-            let count=0;
-            for(const [file,ds] of groups) {
-              const edits=[];
-              for(const node of file.statements) {
-                if(!ts.isImportDeclaration(node)||!node.importClause||node.attributes||node.assertClause) continue;
-                const a=node.getStart(file),b=node.end,original=file.text.slice(a,b);
-                if(/\/\*|\/\//.test(original)) continue;
-                const within=ds.filter(d=>d.start>=a&&d.start<b);
-                if(!within.length) continue;
-                const clause=node.importClause,bindings=clause.namedBindings;
-                const names=[];
-                if(clause.name) names.push(clause.name);
-                if(bindings&&ts.isNamedImports(bindings)) names.push(...bindings.elements);
-                if(bindings&&ts.isNamespaceImport(bindings)) names.push(bindings.name);
-                const isUnused=n=>within.some(d=>[6133,6196].includes(d.code)&&d.start>=n.getStart(file)&&d.start<n.end);
-                const whole=within.some(d=>d.code===6192)||names.length>0&&names.every(n=>isUnused(n)||names.length===1&&within.some(d=>[6133,6196].includes(d.code)));
-                let edit,removed;
-                if(whole) {
-                  edit=cleanLine(file,node); removed=names;
-                } else if(bindings&&ts.isNamedImports(bindings)) {
-                  removed=bindings.elements.filter(isUnused);
-                  const remaining=bindings.elements.filter(n=>!removed.includes(n));
-                  if(!removed.length||!remaining.length) continue;
-                  edit={a:bindings.getStart(file),b:bindings.end,replacement:printer.printNode(ts.EmitHint.Unspecified,ts.factory.updateNamedImports(bindings,remaining),file)};
-                } else continue;
-                const proposed=file.text.slice(0,edit.a)+edit.replacement+file.text.slice(edit.b);
-                assertModules(file.text,proposed,file.fileName);
-                edits.push(edit);
-                manifest.push({round,file:relative(file),kind:'unused import',module:node.moduleSpecifier.getText(file),removed:removed.map(n=>n.getText(file))});
-              }
-              if(!edits.length) continue;
-              let source=file.text;
-              for(const e of edits.sort((a,b)=>b.a-a.a)) source=source.slice(0,e.a)+e.replacement+source.slice(e.b);
-              assertModules(file.text,source,file.fileName);
-              fs.writeFileSync(file.fileName,source);
-              count+=edits.length;
-            }
-            console.log('ROUND',round,'EDITS',count);
-            if(!count) break;
-          }
-          fs.writeFileSync(path.join(process.env.RUNNER_TEMP,'unused-audit','manifest.json'),JSON.stringify(manifest,null,2));
-          console.log('PROPOSED COMPONENT AND DATA EDITS',JSON.stringify(manifest,null,2));
-          JS
-          git diff --check
-          git diff -- src/components src/data > "$out/stage-2.patch"
-          sha256sum "$out/stage-2.patch"
-          git diff --stat
-      - name: Validate candidate diagnostics
-        run: |
-          out="$RUNNER_TEMP/unused-audit"
-          status=0
-          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters > "$out/after.txt" 2>&1 || status=$?
-          cat "$out/after.txt"
-          if [[ "$status" -gt 2 ]]; then exit "$status"; fi
-          python3 - <<'PY'
-          import pathlib, os, re, collections
-          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'unused-audit'
-          unused={6133,6192,6196,6198,6199}
-          def read(name):
-              counter=collections.Counter()
-              for line in (root/name).read_text().splitlines():
-                  m=re.match(r'^(.*?)\(\d+,\d+\): error TS(\d+): (.*)$',line)
-                  if m:
-                      counter[(m[1],int(m[2]),m[3])]+=1
-                  elif re.search(r'error TS\d+:',line):
-                      raise SystemExit('Unclassified compiler diagnostic: '+line)
-              return counter
-          before,after=read('before.txt'),read('after.txt')
-          def group(p):
-              if p.startswith(('src/routes/','src/route-heads/')): return 'routes'
-              if p.startswith(('src/components/','src/data/')): return 'components/data'
-              if p.startswith('src/test/') or '.test.' in p or '.spec.' in p: return 'tests'
-              return 'other'
-          for label, items in [('BEFORE',before),('AFTER',after)]:
-              print(label,'unused',sum(n for (p,c,m),n in items.items() if c in unused),'other',sum(n for (p,c,m),n in items.items() if c not in unused))
-              print(label,'groups',dict(collections.Counter({g:sum(n for (p,c,m),n in items.items() if c in unused and group(p)==g) for g in ('routes','components/data','tests','other')})))
-          remaining=sum(n for (p,c,m),n in after.items() if c in unused and group(p)=='routes')
-          print('REMAINING ROUTE DIAGNOSTICS',remaining)
-          assert sum(n for (p,c,m),n in before.items() if c in unused and group(p)=='routes')==0, 'Stage 1 baseline regressed'
-          assert sum(n for (p,c,m),n in before.items() if c in unused and group(p)=='components/data')==65, 'Stage 2 baseline changed'
-          assert remaining==0, 'Route cleanup regressed'
-          assert sum(n for (p,c,m),n in after.items() if c in unused and group(p)=='components/data')==0, 'Stage 2 not yet complete'
-          assert sum(n for (p,c,m),n in after.items() if c in unused and group(p)=='tests')==10, 'Test diagnostics changed unexpectedly'
-          new=after-before
-          if new:
-              print('NEW DIAGNOSTICS',new)
-              raise SystemExit('Candidate introduced new diagnostics')
-          PY
-          npx tsc --noEmit --pretty false
-      - name: Build candidate and run regression suite
+          git worktree add --detach "$RUNNER_TEMP/main-reference" 2025c690113c3c833e6a344f49269c789ded38df
+          cd "$RUNNER_TEMP/main-reference"
+          bash scripts/install-ci-dependencies.sh
+          bash scripts/build-validated-static.sh
+      - name: Validate synchronized stage 1 and 2 baseline
         run: |
           bash scripts/build-validated-static.sh
           node scripts/verify-hostinger-static-export.mjs --editorial
+          npx tsc --noEmit --pretty false
+          status=0
+          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters > "$RUNNER_TEMP/unused-audit/before.txt" 2>&1 || status=$?
+          cat "$RUNNER_TEMP/unused-audit/before.txt"
+          test "$status" -le 2
+          python3 - <<'PY'
+          import pathlib, os, re
+          lines=(pathlib.Path(os.environ['RUNNER_TEMP'])/'unused-audit'/'before.txt').read_text().splitlines()
+          assert len(lines)==10 and all(re.match(r'^src/test/.*\(\d+,\d+\): error TS6133:', l) for l in lines), 'Unexpected baseline diagnostics'
+          print('STAGES 1 AND 2: ZERO UNUSED DIAGNOSTICS; TESTS: 10')
+          PY
+          cp -a .output/public "$RUNNER_TEMP/unused-audit-before"
           VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
-      - name: Compare all emitted HTML and SEO files
+      - name: Verify synchronized stages 1 and 2 against updated main
         run: |
           cat > "$RUNNER_TEMP/unused-audit/compare.py" <<'PY'
           import collections, hashlib, json, pathlib, re, sys, xml.etree.ElementTree as ET
@@ -350,71 +183,51 @@ jobs:
           if issues: sys.exit(1)
           print("PASS: page content, metadata, schema, links, forms, public helpers, assets and legacy marker scan")
           PY
-          python3 "$RUNNER_TEMP/unused-audit/compare.py" "$RUNNER_TEMP/unused-audit-before" .output/public
+          python3 "$RUNNER_TEMP/unused-audit/compare.py" "$RUNNER_TEMP/main-reference/.output/public" .output/public
           git diff --check
           git diff --stat
+      - name: Propose stage 3 only after synchronized stages pass
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          root=pathlib.Path('src/test')
+          def replace(name, old, new):
+              path=root/name
+              source=path.read_text()
+              assert source.count(old)==1, 'Unexpected test source: '+name+' '+old
+              path.write_text(source.replace(old,new,1))
+          # Keep the render calls and all test assertions.
+          for title in [
+              'selects the clicked destination in the form and handles groups and other addresses',
+              'validates required fields, then sends all journey details directly without browser storage',
+              'keeps the details and shows an honest error if direct sending is unavailable',
+          ]:
+              prefix='  it("'+title+'", async () => {\n'
+              replace('airport-transfers.test.tsx',prefix+'    const { container } = await renderAirport();',prefix+'    await renderAirport();')
+          for name in ['dead-sea-stays.test.tsx','haifa-stays.test.tsx','tiberias-stays.test.tsx']:
+              replace(name,'import { affiliateConfig, ','import { ')
+          replace('jerusalem-journey-guides.test.tsx','affiliateConfig, tourBookingOffers, travelGuidePaths','affiliateConfig, travelGuidePaths')
+          replace('shore-hub-layout.test.ts','import { readFileSync } from "node:fs";\n','')
+          replace('shore-hub-layout.test.ts','import { resolve } from "node:path";\n','')
+          replace('transportation.test.tsx','render, screen, waitFor, within','render, screen, within')
+          PY
+          git diff --check
+          git diff -- src/test > "$RUNNER_TEMP/unused-audit/stage-3.patch"
+          sha256sum "$RUNNER_TEMP/unused-audit/stage-3.patch"
+          git diff --stat -- src/test
+      - name: Validate zero unused diagnostics and complete regression suite
+        run: |
+          set -o pipefail
+          npx tsc --noEmit --pretty false --noUnusedLocals --noUnusedParameters 2>&1 | tee "$RUNNER_TEMP/unused-audit/after.txt"
+          VITE_INDEXABLE=false HOSTINGER_STATIC_BUILD=false bun run test
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs --editorial
+          python3 "$RUNNER_TEMP/unused-audit/compare.py" "$RUNNER_TEMP/unused-audit-before" .output/public
+          git diff --check
       - name: Save diagnostics and proposed patch
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: unused-code-stage-2-proposal
+          name: unused-code-stage-3-proposal
           path: ${{ runner.temp }}/unused-audit/
           if-no-files-found: warn
-
-
-  apply-verified-stage2:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/audit/unused-code-cleanup' && contains(github.event.head_commit.message, '[apply-verified-stage2]') }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: write
-      actions: read
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: audit/unused-code-cleanup
-          persist-credentials: true
-          fetch-depth: 0
-      - uses: actions/download-artifact@v4
-        with:
-          name: unused-code-stage-2-proposal
-          path: ${{ runner.temp }}/verified-stage2
-          run-id: 45967509176
-          github-token: ${{ github.token }}
-      - name: Apply exactly the validated stage 2 patch to the audit branch
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          test "$(git diff --name-only c72bef556ded607db5a6dcbcd682c3b5161efcc1 HEAD)" = ".github/workflows/unused-code-cleanup.yml"
-          patch="$RUNNER_TEMP/verified-stage2/stage-2.patch"
-          echo "675087e18e6ef4bf372d64408719506a2fab3e2ba2a2e34fbd3d5d443cd51fab  $patch" | sha256sum -c -
-          git apply --index --check --exclude=src/data/generated/guide-directory.ts "$patch"
-          git apply --index --exclude=src/data/generated/guide-directory.ts "$patch"
-          git diff --cached --check
-          python3 - "$patch" <<'PY'
-          import pathlib, re, subprocess, sys
-          patch = pathlib.Path(sys.argv[1]).read_text()
-          expected = {}
-          for block in patch.split("diff --git ")[1:]:
-              name = re.match(r'a/(.*?) b/(.*?)\n', block)
-              index = re.search(r'^index ([0-9a-f]+)\.\.([0-9a-f]+) 100644$', block, re.M)
-              assert name and index and name[1] == name[2], "Invalid patch entry"
-              assert name[1].startswith(("src/components/", "src/data/"))
-              if name[1] == "src/data/generated/guide-directory.ts":
-                  print("EXCLUDED BUILD-GENERATED FILE", name[1])
-                  continue
-              assert not name[1].startswith("src/data/generated/")
-              expected[name[1]] = index[2]
-          files = subprocess.check_output(["git", "diff", "--cached", "--name-only", "-z"]).decode().split("\0")
-          assert set(filter(None, files)) == set(expected) and len(expected) == 29
-          for path, sha in expected.items():
-              blob = subprocess.check_output(["git", "rev-parse", ":" + path], text=True).strip()
-              assert blob.startswith(sha), path
-          print("VERIFIED SOURCE BLOBS", len(expected))
-          PY
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Apply verified stage 2 components and data cleanup"
-          git push origin HEAD:refs/heads/audit/unused-code-cleanup
-          git rev-parse HEAD

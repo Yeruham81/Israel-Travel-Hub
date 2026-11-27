@@ -6,8 +6,8 @@ import timnaParkFeature from "@/assets/home/timna-park-feature-optimized.webp";
 import guidedTour from "@/assets/home/guided-tour-feature.webp";
 import guidedTourMobile from "@/assets/home/guided-tour-feature-mobile.webp";
 import cruisePort from "@/assets/home/cruise-port-feature.webp";
-import ashdodPort from "@/assets/home/ashdod-port.webp";
-import haifaPort from "@/assets/home/haifa-port.webp";
+import ashdodPort from "@/assets/shore-excursions/ashdod-shore-excursions.webp";
+import haifaPort from "@/assets/shore-excursions/haifa-shore-excursions.webp";
 import { tourCategoryPaths } from "@/data/tours";
 import bethlehemTourPhoto from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";
 import bethlehemTourPhotoMobile from "@/assets/guides/2026-10/jerusalem-to-bethlehem-mobile.webp";
@@ -75,8 +75,8 @@ export const services: Service[] = [
     text: "Make the most of your time ashore with excursions from Israel’s cruise ports, from historic landmarks and cultural highlights to unforgettable day trips.",
     feature: { src: cruisePort, alt: "Illustrative cruise passengers walking along a harbour quay toward a waiting minivan (not a specific ship or operator)" },
     cards: [
-      { label: "From Ashdod Port", text: "Explore Jerusalem, Tel Aviv–Jaffa, Masada or the Dead Sea from Ashdod.", cta: "Explore Ashdod excursions", to: "/shore-excursions/ashdod/", img: { src: ashdodPort, alt: "Aerial view of Ashdod Port" } },
-      { label: "From Haifa Port", text: "Discover Akko, Nazareth and the Galilee, or visit Jerusalem from Haifa.", cta: "Explore Haifa excursions", to: "/shore-excursions/haifa/", img: { src: haifaPort, alt: "Haifa Port and Haifa Bay seen from Mount Carmel" } },
+      { label: "From Ashdod Port", text: "Explore Jerusalem, Tel Aviv–Jaffa, Masada or the Dead Sea from Ashdod.", cta: "Explore Ashdod excursions", to: "/shore-excursions/ashdod/", img: { src: ashdodPort, alt: "Cruise ships alongside the quays at Ashdod Port" } },
+      { label: "From Haifa Port", text: "Discover Akko, Nazareth and the Galilee, or visit Jerusalem from Haifa.", cta: "Explore Haifa excursions", to: "/shore-excursions/haifa/", img: { src: haifaPort, alt: "Cruise ship at Haifa Port with the city skyline at dusk" } },
     ],
     hub: { label: "Explore all shore excursions", to: "/shore-excursions/" },
   },
@@ -281,7 +281,7 @@ function Home() {
       <details className="mx-auto mb-10 mt-10 max-w-6xl px-4 text-sm text-muted-foreground">
         <summary className="inline-block min-h-8 cursor-pointer rounded px-1 py-1.5 font-medium hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Photo credits</summary>
         <ul className="mt-3 space-y-1.5">
-          {photoCredits.filter((credit) => !isPublisherUrl(credit.sourceUrl)).map((c) => (
+          {photoCredits.filter((credit) => !isPublisherUrl(credit.sourceUrl) && credit.asset !== "ashdod-port" && credit.asset !== "haifa-port").map((c) => (
             <li key={c.asset}>
               {c.sourceUrl ? <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">{c.subject}</a> : c.subject}
               {c.author && <> by {c.author}</>}
