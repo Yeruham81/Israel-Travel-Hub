@@ -14,7 +14,8 @@ export function israelSubmissionTime(instant: Date): string {
 /** The API uses a verified email address, while displaying the form visitor's name. */
 export function safeEmailSenderName(name: string): string {
   // eslint-disable-next-line no-control-regex -- Strip control characters from the displayed email sender name.
-  return name.replace(/[\u0000-\u001f\u007f]/g, " ").replace(/\s+/g, " ").trim().slice(0, 120);
+  const senderControlCharacters = /[\u0000-\u001f\u007f]/g;
+  return name.replace(senderControlCharacters, " ").replace(/\s+/g, " ").trim().slice(0, 120);
 }
 
 function escapeHtml(value: string): string {

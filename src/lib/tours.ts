@@ -10,7 +10,8 @@ export function parseTourSearch(raw: Record<string, unknown>): TourSearch {
   const format = raw["format"] === "shared" || raw["format"] === "private" || raw["format"] === "independent" ? raw["format"] : undefined;
   const length = raw["length"] === "short" || raw["length"] === "full-day" ? raw["length"] : undefined;
   // eslint-disable-next-line no-control-regex -- Strip control characters from the search query before using it.
-  const q = typeof raw["q"] === "string" ? raw["q"].replace(/[\u0000-\u001f\u007f]/g, "").slice(0, 80) : undefined;
+  const queryControlCharacters = /[\u0000-\u001f\u007f]/g;
+  const q = typeof raw["q"] === "string" ? raw["q"].replace(queryControlCharacters, "").slice(0, 80) : undefined;
   const sort = raw["sort"] === "duration" || raw["sort"] === "title" ? raw["sort"] : undefined;
   return { ...(origin && { origin }), ...(destination && { destination }), ...(tag && { tag }), ...(format && { format }), ...(length && { length }), ...(q?.trim() && { q }), ...(sort && { sort }) };
 }

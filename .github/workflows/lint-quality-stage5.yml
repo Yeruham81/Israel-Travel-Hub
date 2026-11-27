@@ -1,4 +1,4 @@
-name: Stage 5.5b - apply validated route format and trial components
+name: Stage 5.5b - retry component format trial
 on:
   push:
     branches: [audit/lint-quality-stage5]
@@ -6,63 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  apply-validated:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: write
-      actions: read
-    outputs:
-      commit_sha: ${{ steps.apply.outputs.commit_sha }}
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          persist-credentials: true
-      - uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          run-id: 45983490496
-          name: stage-5-5a-format-trial
-          path: ${{ runner.temp }}/validated-route-format
-      - name: Verify and commit only the previously validated patch
-        id: apply
-        shell: bash
-        run: |
-          set -euo pipefail
-          base="6eac91fcef2bbf1e379199860e53c6afaff3fc06"
-          reference="72ab55bf70ecbcc28eab1712bcd2020cab5c9b80"
-          branch="audit/lint-quality-stage5"
-          artifact="$RUNNER_TEMP/validated-route-format"
-          patch="$artifact/stage-5-5a.patch"
-          test "$(cat "$artifact/trial-base.txt")" = "$base"
-          printf '%s  %s\n' '27b75377a736120ce5f61886c1e2e121f4f5a035b955e5085adcb72cac52dca4' "$patch" | sha256sum -c -
-          test "$(git diff --name-only "$base" HEAD)" = ".github/workflows/lint-quality-stage5.yml"
-          test "$(git rev-parse HEAD)" = "$(git ls-remote origin "refs/heads/$branch" | cut -f1)"
-          test "$reference" = "$(git ls-remote origin refs/heads/main | cut -f1)"
-          git diff --quiet
-          git apply --check --index "$patch"
-          git apply --index "$patch"
-          python3 - <<'PY'
-          import os, pathlib, json, subprocess
-          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'validated-route-format'
-          expected=set(json.loads((root/'changed.json').read_text()))
-          actual=set(subprocess.check_output(['git','diff','--cached','--name-only','-z']).decode().split('\0'))-{''}
-          assert actual==expected and len(actual)==243
-          assert all(p.startswith(('src/routes/','src/route-heads/')) and p.endswith(('.ts','.tsx')) for p in actual)
-          print('PASS: exactly 243 validated route and metadata files')
-          PY
-          git diff --cached --check
-          git diff --cached --binary -- src/routes src/route-heads > "$RUNNER_TEMP/applied-route-format.patch"
-          cmp "$patch" "$RUNNER_TEMP/applied-route-format.patch"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Apply verified Prettier formatting to 243 route and metadata files (stage 5.5a)"
-          git push origin "HEAD:refs/heads/$branch"
-          printf 'commit_sha=%s\n' "$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-          echo "APPLIED_VALIDATED_FORMAT $(git rev-parse HEAD)"
   trial:
-    needs: apply-validated
     permissions:
       contents: read
     runs-on: ubuntu-24.04
@@ -76,7 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: ${{ needs.apply-validated.outputs.commit_sha }}
           persist-credentials: false
           fetch-depth: 0
       - uses: actions/setup-node@v7
