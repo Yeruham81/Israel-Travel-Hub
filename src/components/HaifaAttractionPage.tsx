@@ -207,7 +207,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Wadi Nisnas: market and neighbourhood art"
         image={{ src: pictures.wadi, alt: "Stone buildings and street life in the Wadi Nisnas neighbourhood of Haifa", mobileContain: true }}>
-        <p>Wadi Nisnas is a traditional Arab neighbourhood known for its market streets, local food shops and street art. It offers a different side of Haifa from the manicured gardens and waterfront.</p>
+        <p>Wadi Nisnas is a traditional Arab neighbourhood known for its market streets, local food shops and street art.</p>
         <p>I would browse the market during the day, try a local pastry or hummus and look for the artwork along the streets. Respect residential entrances and ask before photographing people. Market stalls have independent opening hours, including on Sundays.</p>
         {directions("Wadi Nisnas Market, Haifa, Israel")}
       </AttractionHighlight>
@@ -231,7 +231,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Dado–Zamir Beach and the southern coast"
         image={{ src: pictures.beach, alt: "Sandy Mediterranean beach and shore promenade on Haifa's southern coast" }}>
-        <p>Haifa's southern coastline offers a long promenade, cafés and accessible approaches near Dado–Zamir and Carmel Beach. The atmosphere is more about the sea than city sightseeing, making this a good extra stop for families or a relaxed afternoon.</p>
+        <p>Haifa's southern coastline offers a long promenade, cafés and accessible approaches near Dado–Zamir and Carmel Beach. I recommend this area for a family outing or a relaxed afternoon by the sea.</p>
         <p>Swim only at officially designated beaches while lifeguards are on duty. Check the <a href={official.haifaBeaches} target="_blank" rel="noopener noreferrer" className={inlineLink}>municipal beach service and water-quality notices (Hebrew)</a>, particularly outside the normal bathing season.</p>
         {directions("Dado Beach, Haifa, Israel")}
       </AttractionHighlight>
@@ -285,7 +285,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
         </article>
         <article className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Opening times vary by site</h3></div>
-          <p className="mt-2 text-sm leading-relaxed">The German Colony and public promenades are not confined to museum hours. Stalls, cafés, religious sites and attractions have their own schedules; some have shorter opening days. <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link> and Bahá’í holy days can affect visits.</p>
+          <p className="mt-2 text-sm leading-relaxed">You can explore the German Colony and public promenades throughout the day. Stalls, cafés, religious sites and attractions have their own opening hours. <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link> and Bahá’í holy days can affect visits.</p>
         </article>
       </div>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
@@ -300,7 +300,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4" data-testid="haifa-transport">
-      <p>Haifa has several distinct transport systems. Before setting out, identify whether your next stop is uphill, downtown or on the coast. I would not recommend walking up the whole Carmel slope simply because two landmarks appear close on a map.</p>
+      <p>Check whether your next stop is uphill, downtown or on the coast. I recommend using the Carmelit, a bus or a taxi for steep climbs, even between landmarks that look close on the map.</p>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
@@ -317,7 +317,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><TramFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">Two different cable-car systems</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The short <a href={official.touristCableCar} className={inlineLink} target="_blank" rel="noopener noreferrer">tourist cable car</a> connects <strong>Stella Maris and Bat Galim</strong>. The longer public-transport <strong>Rakavlit</strong> connects the Check Post area with the Technion and University of Haifa. They serve different journeys; check each operator's schedule and price before relying on it.</p>
+            <p className="mt-2 text-sm leading-relaxed">The short <a href={official.touristCableCar} className={inlineLink} target="_blank" rel="noopener noreferrer">tourist cable car</a> connects <strong>Stella Maris and Bat Galim</strong>. The longer public-transport <strong>Rakavlit</strong> connects the Check Post area with the Technion and University of Haifa. Check the timetable and fare for the cable car you plan to use.</p>
             <img src={pictures.cableCar} alt="Red tourist cable-car cabin above the Haifa coastline" loading="lazy" decoding="async" className="mt-3 aspect-[16/9] w-full max-w-sm rounded-lg object-cover" width={400} height={225}/>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -344,7 +344,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-lg font-semibold">Talpiot Market</h3>
-          <p className="mt-2 text-sm">In Hadar, the historic Talpiot Market area mixes produce, food businesses and independent dining spots. Its geography is different from Wadi Nisnas, so plan a separate detour.</p>
+          <p className="mt-2 text-sm">In Hadar, the historic Talpiot Market area offers fresh produce, food shops and independent restaurants. Allow time to travel there from Wadi Nisnas.</p>
           {directions("Talpiot Market, Sirkin Street, Haifa, Israel", "Find Talpiot Market")}
         </article>
         <article className="rounded-xl border bg-card p-4">

@@ -38,7 +38,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     booking: "General visits usually do not require booking; check current exhibitions.",
     intro: "Haifa's principal contemporary-art museum presents changing Israeli and international exhibitions in a historic building at the meeting point of Hadar and Wadi Nisnas. The displays vary, so I would check what's on before choosing a visit.",
     highlights: ["Rotating contemporary exhibitions, including photography, video and installation art.", "A good cultural stop to combine with Wadi Nisnas and the lower-city streets."],
-    tip: "Look at the current exhibition programme first. This museum is about changing displays, so one visit can feel very different from another.",
+    tip: "Check the current exhibition programme before choosing when to visit.",
     url: "https://www.hma.org.il/eng", featured: true
   },
   {
@@ -63,7 +63,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     intro: "Inside the historic Haifa East station complex, the Railway Museum traces rail travel from Ottoman and British Mandate lines to the modern railway system. Its surviving locomotives and carriages are the main draw.",
     highlights: ["Historic engines, passenger carriages and railway equipment.", "The story of the old Jezreel Valley Railway and Haifa East station."],
     highlightsForFamilies: "Families interested in trains often enjoy this more than a conventional history gallery.",
-    tip: "The museum entrance is not at Haifa Merkaz HaShmona station. Use the museum's own arrival directions and leave extra time to reach Haifa East.",
+    tip: "The museum entrance is at historic Haifa East station. Follow the museum's arrival directions and allow time to get there.",
     url: "https://rail.co.il/?lan=en&page=museum", ticketUrl: "https://rail.co.il/?lan=en&page=museum-hours", featured: true
   },
   {
@@ -98,7 +98,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     admission: "Adult ₪40 on the municipal price list; discounts and combined tickets vary.",
     openingDays: "Sun, Tue–Wed, Sat 10:00–16:00; Thu 10:00–18:00; Fri 10:00–14:00. Mon closed.",
     booking: "General visits usually do not require booking; check workshops and special events separately.",
-    intro: "A dedicated museum of Japanese art on the Carmel ridge, Tikotin shows prints, ceramics, textiles and other works through changing exhibitions. It offers a different cultural experience from Haifa's history and maritime collections.",
+    intro: "A dedicated museum of Japanese art on the Carmel ridge, Tikotin shows prints, ceramics, textiles and other works through changing exhibitions.",
     highlights: ["Japanese prints, decorative arts and thoughtfully curated temporary displays.", "Japanese cultural events and workshops on selected dates."],
     tip: "Pair it with a Carmel Centre walk and a viewpoint. Check if a special workshop is scheduled during your stay.",
     url: "https://www.tmja.org.il/eng", featured: true
@@ -166,7 +166,7 @@ export const haifaAdditionalMuseums = [
   {
     name: "Israeli Personal Computer Museum",
     place: "Haifa Bay area",
-    note: "Appeared in the original guide, but I could not verify regular public opening or ticket arrangements. Contact the operator and confirm the current address before making a special visit.",
+    note: "Contact the operator in advance to confirm whether the museum is open to visitors, its address and ticket arrangements.",
     url: "https://www.google.com/maps/search/?api=1&query=Israeli+Personal+Computer+Museum+Haifa"
   },
   {

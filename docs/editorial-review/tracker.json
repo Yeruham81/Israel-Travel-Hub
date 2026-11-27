@@ -341,7 +341,8 @@
       "status": "edited",
       "reviewedSnapshot": "8683af55f0b2c19739d879ee7eb15609a9779c5163ca937c678a9f66ab4a2bae",
       "changes": 7,
-      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval."
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge.",
+      "postEditSnapshot": "d828c183dc145681fbac0a96ff98e25191e4c4df096335a9f378676f99d88e3e"
     },
     {
       "path": "/attractions/basilica-of-the-annunciation/",
@@ -357,7 +358,8 @@
       "status": "edited",
       "reviewedSnapshot": "db8d855a62a8a2c97719abf8cec4e069c8f9b92a6f1155a2a71c3da94c2351e4",
       "changes": 3,
-      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval."
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge.",
+      "postEditSnapshot": "63bd2c914c254c8383742105f09bac05828caa1616a830e30ba54f28c46fc004"
     },
     {
       "path": "/attractions/capernaum/",
@@ -394,18 +396,18 @@
     {
       "path": "/attractions/haifa/",
       "group": 7,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "ec426fd530ab63c542e453016b18b82a21f7e2e5b899669b70aa814a7dfd0953",
+      "changes": 6,
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval."
     },
     {
       "path": "/attractions/jaffa/",
       "group": 6,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "ae1e396568cd4eb28153bceb357c6077f71cc3713a02acb1a6843f785d76e527",
       "changes": 5,
-      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending.",
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending. Full Project Validation 45997274558 and Hostinger deployment 45997750452 passed.",
       "postEditSnapshot": "73d1d366c38d330e0318a388ca26a947fa747b6d5d90980e9b14f224a70926dc"
     },
     {
@@ -497,15 +499,16 @@
       "status": "edited",
       "reviewedSnapshot": "42cfe24dc94c1f7c2acd530c640d110504edc1685c687432c4e5745f6737c7ad",
       "changes": 5,
-      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval."
+      "notes": "Reviewed rendered visitor text from artifact 15196182688, streamlined descriptions and practical instructions; preserved hours, fares, admission rules, safety/accessibility warnings and links. Await regression and approval. Targeted regression and extraction passed in run 45997482525; awaiting production merge.",
+      "postEditSnapshot": "d2307f1690b20437f79542646382cfd4331d4459f6cc246e8ebcc8b07b8d2f70"
     },
     {
       "path": "/attractions/sea-of-galilee/",
       "group": 7,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "c9c40dc4b1c469eaa99918221d3a2c03e220ab9828c40d0bb90858eae4df6b80",
+      "changes": 6,
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval."
     },
     {
       "path": "/attractions/tabgha/",
@@ -518,10 +521,10 @@
     {
       "path": "/attractions/tel-megiddo/",
       "group": 7,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "31dc97818623627516be210da1d62f0abfc73d8e0f7c7e3b605b09d64f272973",
+      "changes": 5,
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval."
     },
     {
       "path": "/attractions/via-dolorosa/",
@@ -696,10 +699,10 @@
     {
       "path": "/travel-blog/attractions-in-tel-aviv/",
       "group": 6,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "46598bdd36a1bc5c3410e09db7f89204aa8b33747066ab5dc47e545c0dffed93",
       "changes": 8,
-      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending.",
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending. Full Project Validation 45997274558 and Hostinger deployment 45997750452 passed.",
       "postEditSnapshot": "cef664530f371797d80e5a6d6d12affcd24c4766bb9a46102546be64423d2171"
     },
     {
@@ -713,10 +716,10 @@
     {
       "path": "/travel-blog/beaches-in-tel-aviv/",
       "group": 6,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "786baf3469f87ff6a4f4cb1f64fd46fdccaa03811c8c886d54e758dad0730374",
       "changes": 7,
-      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. User approved all edits with direct wording for free parking at North Tzuk. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending.",
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. User approved all edits with direct wording for free parking at North Tzuk. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending. Full Project Validation 45997274558 and Hostinger deployment 45997750452 passed.",
       "postEditSnapshot": "0dc221ea282e3705a92a7f8d404a296dab3a26de868a7ee711c69ae96ecba6f7"
     },
     {
@@ -944,10 +947,10 @@
     {
       "path": "/travel-blog/museums-in-haifa/",
       "group": 7,
-      "status": "pending",
-      "reviewedSnapshot": null,
-      "changes": 0,
-      "notes": ""
+      "status": "edited",
+      "reviewedSnapshot": "42205ae80fcc8196e52ca7ba2da58f46882352cbc12ea84770f484e971a9ef55",
+      "changes": 10,
+      "notes": "Reviewed prerendered visitor copy from artifact 15197260443; simplified wording, removed redundant attribution and repetition, retained prices, hours, accessibility, safety warnings and historic distinctions. Await regression and approval."
     },
     {
       "path": "/travel-blog/museums-in-jerusalem/",
@@ -961,10 +964,10 @@
     {
       "path": "/travel-blog/museums-in-tel-aviv/",
       "group": 6,
-      "status": "edited",
+      "status": "verified",
       "reviewedSnapshot": "18b2f325e7612479b680d7307de0d125cd4211ef4cc338b17247bf8f918bfba8",
       "changes": 9,
-      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending.",
+      "notes": "Reviewed rendered guide from artifact 15195677100; removed repetition and clarified visitor advice. Retained prices, opening hours, beach safety rules, links and page structure. Await regression and approval. Targeted regression and extraction passed in run 45996978931; approved and merged to main; production validation pending. Full Project Validation 45997274558 and Hostinger deployment 45997750452 passed.",
       "postEditSnapshot": "5dc95991514fa49330ddbabbc50f972dafac82a62643554f1d5384e35928f62e"
     },
     {

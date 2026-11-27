@@ -122,7 +122,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     { icon: "highlights", label: "Best for", value: "Scenery & heritage", note: "Beaches, boat trips and Christian sites" },
     { icon: "access", label: "Main base", value: "Tiberias", note: "Hotels, buses, restaurants and lakeside walks" },
   ],
-  glanceNote: <><strong>For a first visit, I recommend either a relaxing day by the lake or exploring the historic sites along its northern shore.</strong> Combine both only when your transport and opening hours make it practical.</>,
+  glanceNote: <><strong>For a first visit, I recommend either a relaxing day by the lake or exploring the historic sites along its northern shore.</strong> If you want to combine the two, allow time for travel between the beach and the historic sites and check their opening hours.</>,
   highlightContent: <div className="mt-4 space-y-3">
     <AttractionHighlight title="Walk along the Tiberias waterfront" image={{ src: waterfront, alt: "Tiberias waterfront and the Sea of Galilee" }}>
       <p>Tiberias is the region's most convenient base, with lakeside views, hotels, restaurants and bus connections. Start at the promenade for a relaxed introduction, then explore the town or continue to a supervised beach.</p>
@@ -132,14 +132,14 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
       <p>Lake Kinneret is a freshwater lake, ideal for swimming at its designated beaches. Facilities, lifeguard shifts, parking, camping and entry policies vary considerably between beaches.</p>
       <p>I recommend considering <External href={sources.tzemach}>Tzemach Beach</External> on the southern shore, <External href={sources.hukok}>Hukok North</External> on the northwestern shore and <External href={sources.kursi}>Kursi</External> on the eastern shore. Check the beach authority's notices before setting out.</p>
     </AttractionHighlight>
-    <AttractionPracticalTip><strong>Swim at designated bathing beaches with operating lifeguard services.</strong> Swimming is prohibited along some stretches of the shoreline. For example, the <External href={sources.unsafeShore}>Nahal Amud estuary</External> is a natural shoreline where the authorities prohibit swimming.</AttractionPracticalTip>
+    <AttractionPracticalTip><strong>Swim at designated bathing beaches with operating lifeguard services.</strong> Swimming is prohibited along some stretches of the shoreline. For example, the <External href={sources.unsafeShore}>Nahal Amud estuary</External> is a natural shoreline where swimming is prohibited.</AttractionPracticalTip>
     <AttractionHighlight title="See Capernaum, Tabgha and the Mount of Beatitudes">
       <p>The northwestern shore is especially rewarding for visitors interested in New Testament history. <Link to="/attractions/capernaum/" className={inlineLink}>Capernaum</Link> has lakeside archaeological remains, <Link to="/attractions/tabgha/" className={inlineLink}>Tabgha</Link> is associated with the multiplication of the loaves and fishes, and the <Link to="/attractions/mount-of-beatitudes/" className={inlineLink}>Mount of Beatitudes</Link> offers a hilltop sanctuary with lake views.</p>
       <p>Choose two or three nearby sites, allowing time for separate entrances, religious services and local opening arrangements.</p>
     </AttractionHighlight>
     <AttractionHighlight title="Boat trips and lake views" image={{ src: sunrise, alt: "Sunlight reflecting across Lake Kinneret at Tiberias" }}>
       <p>Enjoy views of the surrounding hills and lakeside villages on a boat trip across the Sea of Galilee. Cruises depart from designated jetties, including in the Tiberias area, but routes and departure schedules depend on operators and season.</p>
-      <p>For a panoramic viewpoint, <External href={sources.arbel}>Arbel National Park</External> overlooks the lake from the west. Cliff-edge routes can be steep and may close in unsuitable weather; a short viewpoint visit is different from the full hike.</p>
+      <p>For a panoramic viewpoint, <External href={sources.arbel}>Arbel National Park</External> overlooks the lake from the west. Choose a short visit to the viewpoint or allow more time for a hike. Cliff-edge trails can be steep and may close in unsuitable weather.</p>
     </AttractionHighlight>
     <AttractionHighlight title="The Jordan River and Yardenit" image={{ src: lakeView, alt: "Green hills and lake scenery of the Galilee region" }}>
       <p>The Jordan River flows out of the southern end of the Sea of Galilee. <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> is a managed baptismal visitor site south of the lake, while <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link> on the western shore combines archaeology with a modern pilgrimage centre.</p>
@@ -152,7 +152,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
       <article className="rounded-xl border bg-card p-4">
         <h3 className="font-serif text-lg font-semibold">Tzemach Beach</h3>
         <p className="mt-2 text-sm"><strong>Southern shore · Free entry</strong></p>
-        <p className="mt-2 text-sm leading-relaxed">A designated quiet beach with accessible facilities. The authority lists supervised bathing during its swimming season, normally 09:00–17:00. Camping is prohibited here.</p>
+        <p className="mt-2 text-sm leading-relaxed">A designated quiet beach with accessible facilities. During the swimming season, lifeguards are normally on duty from 09:00 to 17:00. Camping is prohibited here.</p>
         <div className="mt-3 space-y-2 text-sm"><External href={sources.tzemach}>Beach rules and facilities</External><div><External href={maps.tzemach}>Get directions</External></div></div>
       </article>
       <article className="rounded-xl border bg-card p-4">
@@ -164,12 +164,12 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
       <article className="rounded-xl border bg-card p-4">
         <h3 className="font-serif text-lg font-semibold">Kursi Beach</h3>
         <p className="mt-2 text-sm"><strong>Eastern shore · Free on foot</strong></p>
-        <p className="mt-2 text-sm leading-relaxed">A quieter managed shoreline with shade, showers and accessible bathing equipment. Parking is charged by the beach authority.</p>
+        <p className="mt-2 text-sm leading-relaxed">A quieter managed shoreline with shade, showers and accessible bathing equipment. Parking is paid.</p>
         <div className="mt-3 space-y-2 text-sm"><External href={sources.kursi}>Beach rules and facilities</External><div><External href={maps.kursi}>Get directions</External></div></div>
       </article>
     </div>
     <AttractionPracticalTip>Swimming is permitted only in the designated area when lifeguards are working. Check seasonal notices, water-quality alerts and weather before entering. Unsupervised shores are not a substitute, even when the gate or promenade is open.</AttractionPracticalTip>
-    <p className="text-sm leading-relaxed">A beach's admission policy, paid parking, camping permission and accessibility are separate questions. The Kinneret Cities Association operates a public information hotline at <strong>*55477</strong> for current beach details.</p>
+    <p className="text-sm leading-relaxed">Check each beach's admission fees, parking charges, camping rules and accessible facilities. The Kinneret Cities Association operates a public information hotline at <strong>*55477</strong> for current beach details.</p>
   </div>,
   transportContent: <div className="mt-4 space-y-3">
     <p>Use a specific destination such as Tiberias, Tzemach Beach or Capernaum when planning transport. The lake has a long shoreline, and attractions on different sides can take much longer to connect than a map suggests.</p>
