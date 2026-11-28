@@ -1,12 +1,12 @@
 import { mosheBarakAuthor } from "@/data/site-identity";
-import { CANONICAL_ORIGIN } from "@/lib/site";
+import { authorEntityId } from "@/lib/site";
 
 export function authorLd() {
   return {
     "@type": "Person",
-    "@id": `${CANONICAL_ORIGIN}/about-me/#moshe-barak`,
+    "@id": authorEntityId(),
     name: mosheBarakAuthor.name,
-    url: `${CANONICAL_ORIGIN}/about-me/#moshe-barak`,
+    url: authorEntityId(),
     description: [mosheBarakAuthor.experience, mosheBarakAuthor.bio].filter(Boolean).join(" "),
     sameAs: [mosheBarakAuthor.reviewsUrl],
   };

@@ -1,4 +1,5 @@
 import defaultSharePhoto from "@/assets/home/jerusalem-old-city.webp";
+import { mosheBarakAuthor } from "@/data/site-identity";
 
 /** Only the permanent www domain may be indexed, even if a preview is misconfigured. */
 export const PRODUCTION_CANONICAL_ORIGIN = "https://www.israel-taxi.com";
@@ -22,6 +23,31 @@ export const CANONICAL_ORIGIN = SITE_CONFIG.origin;
 export const INDEXABLE = SITE_CONFIG.indexable;
 
 export const SITE_NAME = "Israel Taxi & Travel";
+export const ORGANIZATION_LOGO_PATH = "/images/organization-logo.webp";
+
+export function organizationPublisherLd(origin = CANONICAL_ORIGIN) {
+  return {
+    "@type": "Organization",
+    "@id": `${origin}/#organization`,
+    name: SITE_NAME,
+    url: `${origin}/`,
+  };
+}
+
+export function authorEntityId(origin = CANONICAL_ORIGIN) {
+  return `${origin}/about-me/#moshe-barak`;
+}
+
+export function organizationLd(origin = CANONICAL_ORIGIN) {
+  return {
+    ...organizationPublisherLd(origin),
+    description: "Private airport transfers, travel planning and practical Israel travel guides.",
+    sameAs: [mosheBarakAuthor.reviewsUrl],
+    founder: { "@id": authorEntityId(origin) },
+    areaServed: { "@type": "Country", name: "Israel" },
+    logo: `${origin}${ORGANIZATION_LOGO_PATH}`,
+  };
+}
 
 export type Crumb = { name: string; path: string };
 
@@ -29,7 +55,14 @@ export type Crumb = { name: string; path: string };
 export function jsonLd(value: unknown) {
   return {
     type: "application/ld+json",
-    children: JSON.stringify(value)
+    // Give every existing site-publisher declaration the same canonical entity ID.
+    // External publishers and reference-only nodes are deliberately left untouched.
+    children: JSON.stringify(value, (key, item) => {
+      if (key === "publisher" && item?.["@type"] === "Organization" && item.name === SITE_NAME) {
+        return { ...item, ...organizationPublisherLd() };
+      }
+      return item;
+    })
       .replaceAll("<", "\\u003c")
       .replaceAll(">", "\\u003e")
       .replaceAll("&", "\\u0026"),

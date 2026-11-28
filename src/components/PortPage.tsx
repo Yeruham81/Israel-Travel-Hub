@@ -11,7 +11,7 @@ import { ShoreQuoteForm } from "@/components/ShoreQuoteForm";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { getShoreCatalog, getShorePort } from "@/data/shoreExcursions";
 import { publicSources, shorePorts, travelGuidePaths, type ShorePortId } from "@/data/registry";
-import { CANONICAL_ORIGIN, SITE_NAME, pageMeta } from "@/lib/site";
+import { CANONICAL_ORIGIN, jsonLd, organizationPublisherLd, pageMeta } from "@/lib/site";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { authorLd } from "@/lib/author";
@@ -49,22 +49,19 @@ export function shorePortMeta(id: ShorePortId) {
     ...meta,
     scripts: [
       ...meta.scripts,
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: port.title,
-          description: port.description,
-          mainEntityOfPage: `${CANONICAL_ORIGIN}${port.path}`,
-          inLanguage: "en",
-          dateModified: SHORE_EXCURSION_UPDATED_DATE,
-          author: authorLd(),
-          publisher: { "@type": "Organization", name: SITE_NAME },
-          image: imageUrl,
-          citation: publicSources(shoreSourceIds(id)).map((source) => source.url),
-        }).replaceAll("<", "\\u003c"),
-      },
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: port.title,
+        description: port.description,
+        mainEntityOfPage: `${CANONICAL_ORIGIN}${port.path}`,
+        inLanguage: "en",
+        dateModified: SHORE_EXCURSION_UPDATED_DATE,
+        author: authorLd(),
+        publisher: organizationPublisherLd(),
+        image: imageUrl,
+        citation: publicSources(shoreSourceIds(id)).map((source) => source.url),
+      }),
     ],
   };
 }

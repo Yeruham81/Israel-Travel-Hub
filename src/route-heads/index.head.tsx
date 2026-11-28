@@ -1,7 +1,7 @@
 import lcpHeroMobile from "@/assets/home/hero-jerusalem-psi-mobile.webp";
 import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
-import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
+import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, organizationLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 
 export const routeHead = () => {
@@ -29,14 +29,7 @@ export const routeHead = () => {
             inLanguage: "en",
             publisher: { "@id": CANONICAL_ORIGIN + "/#organization" },
           },
-          {
-            "@type": "Organization",
-            "@id": CANONICAL_ORIGIN + "/#organization",
-            name: SITE_NAME,
-            url: CANONICAL_ORIGIN + "/",
-            description:
-              "Private airport transfers, travel planning and practical Israel travel guides.",
-          },
+          organizationLd(),
           authorLd(),
         ],
       }),
