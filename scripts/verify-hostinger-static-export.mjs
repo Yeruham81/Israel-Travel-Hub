@@ -815,7 +815,7 @@ assert.equal(logo.toString("ascii", 0, 4), "RIFF");
 assert.equal(logo.toString("ascii", 8, 12), "WEBP");
 let logoWidth = 0;
 let logoHeight = 0;
-for (let offset = 12; offset + 8 <= logo.length; ) {
+for (let offset = 12; offset + 8 <= logo.length;) {
   const chunk = logo.toString("ascii", offset, offset + 4);
   const size = logo.readUInt32LE(offset + 4);
   const data = offset + 8;
