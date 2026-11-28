@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { routeHead } from "@/route-heads/index.head";
 import { routeHead as carRentalHead } from "@/route-heads/car-rental.head";
+import { shorePortMeta } from "@/components/PortPage";
 import { authorLd } from "@/lib/author";
 import {
   CANONICAL_ORIGIN,
@@ -45,6 +46,14 @@ describe("canonical organization identity", () => {
     expect(articles).toHaveLength(1);
     expect(articles[0].author).toEqual(authorLd());
     expect(articles[0].publisher).toEqual(organizationPublisherLd());
+  });
+
+  it.each(["ashdod", "haifa"] as const)("uses the central publisher for %s", (port) => {
+    const { scripts } = shorePortMeta(port);
+    const nodes = scripts.map((script) => JSON.parse(script.children));
+    const article = nodes.find((node) => node["@type"] === "Article");
+    expect(article.author).toEqual(authorLd());
+    expect(article.publisher).toEqual(organizationPublisherLd());
   });
 
   it("does not rewrite a third-party organization", () => {
