@@ -12,7 +12,8 @@ import { mosheBarakAuthor } from "@/data/site-identity";
 
 describe("canonical organization identity", () => {
   it("includes the approved profile, founder, country and logo in the homepage graph", () => {
-    const graph = routeHead().scripts.flatMap((script) => JSON.parse(script.children)["@graph"] ?? []);
+    const { scripts } = routeHead();
+    const graph = scripts.flatMap((script) => JSON.parse(script.children)["@graph"] ?? []);
     const organizations = graph.filter((node) => node["@type"] === "Organization");
     expect(organizations).toHaveLength(1);
     expect(organizations[0]).toEqual(organizationLd());
@@ -37,7 +38,11 @@ describe("canonical organization identity", () => {
   });
 
   it("does not rewrite a third-party organization", () => {
-    const publisher = { "@type": "Organization", name: "Other publisher", url: "https://example.com" };
+    const publisher = {
+      "@type": "Organization",
+      name: "Other publisher",
+      url: "https://example.com",
+    };
     expect(JSON.parse(jsonLd({ publisher }).children).publisher).toEqual(publisher);
   });
 
