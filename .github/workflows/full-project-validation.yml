@@ -96,7 +96,7 @@ jobs:
           set -euo pipefail
           node --input-type=module <<'JS'
           import fs from "node:fs";
-          import { execFileSync } from "node:child_process";
+          import { execFileSync, spawnSync } from "node:child_process";
           import prettier from "prettier";
 
           const generated = new Set([
@@ -161,7 +161,12 @@ jobs:
               checked++;
               if (source === formatted) continue;
               if (deferred.has(file)) exceptions.push(file);
-              else failures.push(file);
+              else {
+                failures.push(file);
+                const diff = spawnSync("diff", ["-u", "--label", file, "--label", file + " (Prettier)", file, "-"], { input: formatted, encoding: "utf8" });
+                if (diff.stdout) console.error(diff.stdout);
+                if (diff.stderr) console.error(diff.stderr);
+              }
             } catch (error) {
               failures.push(file + " (parser error: " + error.message + ")");
             }

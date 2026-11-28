@@ -8,8 +8,9 @@ function altProblem(value) {
   if (value === null || value === undefined) return "missing alt attribute";
   const text = value.trim();
   if (!text) return "empty alt text";
+  const plain = /^(?:image|photo(?:graph)?|picture|illustration|thumbnail|placeholder|img)[.!]?$/i;
   if (
-    /^(?:image|photo|photograph|picture|illustration|thumbnail|placeholder|img)[.!]?$/i.test(text) ||
+    plain.test(text) ||
     /^(?:https?:\/\/|data:image\/)/i.test(text) ||
     /\.(?:avif|gif|jpe?g|png|svg|webp)$/i.test(text)
   ) {
@@ -108,7 +109,13 @@ export function verifyImageAlts({ root, paths }) {
   }
   walk("src");
   console.log(
-    `Image alt source audit: ${sourceFiles} files, ${sourceImages} JSX images, ${issues.length} issues.`,
+    "Image alt source audit: " +
+      sourceFiles +
+      " files, " +
+      sourceImages +
+      " JSX images, " +
+      issues.length +
+      " issues.",
   );
 
   let images = 0;
@@ -121,7 +128,13 @@ export function verifyImageAlts({ root, paths }) {
     issues.push(...result.issues);
   }
   console.log(
-    `Image alt HTML audit: ${paths.size} sitemap pages, ${images} images, ${decorative} decorative.`,
+    "Image alt HTML audit: " +
+      paths.size +
+      " sitemap pages, " +
+      images +
+      " images, " +
+      decorative +
+      " decorative.",
   );
   console.log(`Image alt audit total issues: ${issues.length}.`);
   for (const issue of issues) console.error(issue);
