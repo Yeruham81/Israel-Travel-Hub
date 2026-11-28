@@ -854,8 +854,7 @@ for (const route of paths) {
       identityIssues.push("Article publisher name: " + route);
     if (node.publisher?.url !== organization.url)
       identityIssues.push("Article publisher URL: " + route);
-    if (node.author?.["@id"] !== person["@id"])
-      identityIssues.push("Article author ID: " + route);
+    if (node.author?.["@id"] !== person["@id"]) identityIssues.push("Article author ID: " + route);
     articleCount++;
   }
 }
