@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { routeHead } from "@/route-heads/index.head";
+import { routeHead as carRentalHead } from "@/route-heads/car-rental.head";
 import { authorLd } from "@/lib/author";
 import {
   CANONICAL_ORIGIN,
@@ -35,6 +36,15 @@ describe("canonical organization identity", () => {
       publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
     };
     expect(JSON.parse(jsonLd(article).children).publisher).toEqual(organizationPublisherLd());
+  });
+
+  it("identifies the author and publisher on the car rental Article", () => {
+    const articles = carRentalHead()
+      .scripts.map((script) => JSON.parse(script.children))
+      .filter((node) => node["@type"] === "Article");
+    expect(articles).toHaveLength(1);
+    expect(articles[0].author).toEqual(authorLd());
+    expect(articles[0].publisher).toEqual(organizationPublisherLd());
   });
 
   it("does not rewrite a third-party organization", () => {

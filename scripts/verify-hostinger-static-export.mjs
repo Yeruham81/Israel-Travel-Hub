@@ -844,17 +844,24 @@ assert.deepEqual(
   "Organization logo must reuse the approved taxi sign photograph",
 );
 let articleCount = 0;
+const identityIssues = [];
 for (const route of paths) {
   for (const node of structuredNodes(route)) {
     if (node["@type"] !== "Article") continue;
-    assert.equal(node.publisher?.["@id"], organization["@id"], "Article publisher: " + route);
-    assert.equal(node.publisher?.name, organization.name, "Article publisher name: " + route);
-    assert.equal(node.publisher?.url, organization.url, "Article publisher URL: " + route);
-    assert.equal(node.author?.["@id"], person["@id"], "Article author: " + route);
+    if (node.publisher?.["@id"] !== organization["@id"])
+      identityIssues.push("Article publisher ID: " + route);
+    if (node.publisher?.name !== organization.name)
+      identityIssues.push("Article publisher name: " + route);
+    if (node.publisher?.url !== organization.url)
+      identityIssues.push("Article publisher URL: " + route);
+    if (node.author?.["@id"] !== person["@id"])
+      identityIssues.push("Article author ID: " + route);
     articleCount++;
   }
 }
 assert(articleCount > 0, "No Article schemas verified");
+for (const issue of identityIssues) console.error(issue);
+assert.equal(identityIssues.length, 0, "Article identity audit failed");
 console.log(
   "Organization identity verified: " +
     articleCount +

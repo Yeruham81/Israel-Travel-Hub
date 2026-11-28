@@ -47,6 +47,7 @@ import {
   type TourSearch,
 } from "@/lib/tours";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
+import { authorLd } from "@/lib/author";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 
 export function tourCategoryMeta(id: TourCategoryId) {
@@ -76,7 +77,7 @@ export function tourCategoryMeta(id: TourCategoryId) {
         name: title,
         description,
         url: CANONICAL_ORIGIN + path,
-        author: { "@type": "Person", name: "Moshe Barak", url: CANONICAL_ORIGIN + "/about-me/" },
+        author: authorLd(),
         mainEntity: {
           "@type": "ItemList",
           itemListElement: toursForCategory(id).map((tour, index) => ({

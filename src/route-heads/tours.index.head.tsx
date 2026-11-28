@@ -6,6 +6,7 @@ import {
   toursHubTitle,
 } from "@/data/tours";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
+import { authorLd } from "@/lib/author";
 
 const hero = toursHubHero;
 export const routeHead = () => {
@@ -30,7 +31,7 @@ export const routeHead = () => {
         name: toursHubTitle,
         description: toursHubDescription,
         url: CANONICAL_ORIGIN + "/tours/",
-        author: { "@type": "Person", name: "Moshe Barak", url: CANONICAL_ORIGIN + "/about-me/" },
+        author: authorLd(),
         mainEntity: {
           "@type": "ItemList",
           itemListElement: tourCategories.map((category, index) => ({

@@ -4,7 +4,8 @@ import {
   carRentalDescription,
   carRentalHero,
 } from "@/data/carRentalGuide";
-import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
+import { CANONICAL_ORIGIN, jsonLd, organizationPublisherLd, pageMeta } from "@/lib/site";
+import { authorLd } from "@/lib/author";
 
 export const routeHead = () => {
   const head = pageMeta({
@@ -30,7 +31,8 @@ export const routeHead = () => {
         dateModified: CAR_RENTAL_UPDATED,
         mainEntityOfPage: `${CANONICAL_ORIGIN}/car-rental/`,
         image: new URL(carRentalHero.src, CANONICAL_ORIGIN).href,
-        author: { "@type": "Person", name: "Moshe Barak", url: `${CANONICAL_ORIGIN}/about-me/` },
+        author: authorLd(),
+        publisher: organizationPublisherLd(),
       }),
     ],
   };
