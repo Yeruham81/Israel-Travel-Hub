@@ -800,6 +800,70 @@ const crumbs = findSchema(aboutSchema, "BreadcrumbList");
 assert.equal(website.url, origin + "/");
 assert.equal(organization.url, origin + "/");
 assert.equal(website.publisher["@id"], organization["@id"]);
+assert.equal(organization["@id"], origin + "/#organization");
+assert.equal(organization.name, "Israel Taxi & Travel");
+assert.deepEqual(organization.sameAs, [
+  "https://www.tripadvisor.com/Attraction_Review-g293984-d14803612-Reviews-Moshe_Barak-Tel_Aviv_Tel_Aviv_District.html",
+]);
+assert.deepEqual(organization.founder, { "@id": person["@id"] });
+assert.deepEqual(organization.areaServed, { "@type": "Country", name: "Israel" });
+assert.equal(organization.logo, origin + "/images/organization-logo.webp");
+assert.deepEqual(person.sameAs, organization.sameAs);
+const logoFile = join(root, "images/organization-logo.webp");
+const logo = readFileSync(logoFile);
+assert.equal(logo.toString("ascii", 0, 4), "RIFF");
+assert.equal(logo.toString("ascii", 8, 12), "WEBP");
+let logoWidth = 0;
+let logoHeight = 0;
+for (let offset = 12; offset + 8 <= logo.length; ) {
+  const chunk = logo.toString("ascii", offset, offset + 4);
+  const size = logo.readUInt32LE(offset + 4);
+  const data = offset + 8;
+  if (chunk === "VP8X" && size >= 10) {
+    logoWidth = logo.readUIntLE(data + 4, 3) + 1;
+    logoHeight = logo.readUIntLE(data + 7, 3) + 1;
+    break;
+  }
+  if (chunk === "VP8 " && size >= 10) {
+    logoWidth = logo.readUInt16LE(data + 6) & 0x3fff;
+    logoHeight = logo.readUInt16LE(data + 8) & 0x3fff;
+    break;
+  }
+  if (chunk === "VP8L" && size >= 5) {
+    const dimensions = logo.readUInt32LE(data + 1);
+    logoWidth = (dimensions & 0x3fff) + 1;
+    logoHeight = ((dimensions >>> 14) & 0x3fff) + 1;
+    break;
+  }
+  offset = data + size + (size % 2);
+}
+assert(logoWidth >= 112 && logoHeight >= 112, "Organization logo must be at least 112x112");
+assert.deepEqual(
+  logo,
+  readFileSync("src/assets/guides/israeli-taxi-roof-sign.webp"),
+  "Organization logo must reuse the approved taxi sign photograph",
+);
+let articleCount = 0;
+for (const route of paths) {
+  for (const node of structuredNodes(route)) {
+    if (node["@type"] !== "Article") continue;
+    assert.equal(node.publisher?.["@id"], organization["@id"], "Article publisher: " + route);
+    assert.equal(node.publisher?.name, organization.name, "Article publisher name: " + route);
+    assert.equal(node.publisher?.url, organization.url, "Article publisher URL: " + route);
+    assert.equal(node.author?.["@id"], person["@id"], "Article author: " + route);
+    articleCount++;
+  }
+}
+assert(articleCount > 0, "No Article schemas verified");
+console.log(
+  "Organization identity verified: " +
+    articleCount +
+    " articles, " +
+    logoWidth +
+    "x" +
+    logoHeight +
+    " logo.",
+);
 assert.equal(about.url, origin + "/about-me/");
 assert.equal(about.isPartOf["@id"], website["@id"]);
 assert.equal(about.mainEntity["@id"], person["@id"]);
