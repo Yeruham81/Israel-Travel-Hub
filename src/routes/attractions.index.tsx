@@ -130,7 +130,7 @@ function Attractions() {
               src={region.image.src}
               srcSet={attractionHubRegionImageSets[region.image.src]}
               sizes="(min-width: 640px) 144px, 80px"
-              alt=""
+              alt={region.image.alt}
               width={240}
               height={160}
               loading="lazy"

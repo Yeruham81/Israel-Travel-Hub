@@ -85,6 +85,8 @@ function MosheAbout() {
               <img
                 src="/images/tripadvisor-owl-black.svg"
                 alt=""
+                aria-hidden="true"
+                data-decorative-image="true"
                 width={28}
                 height={28}
                 className="size-7"

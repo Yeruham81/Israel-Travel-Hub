@@ -30,6 +30,7 @@ describe("Attractions hub redesign", () => {
       // Sea of Galilee & Jordan River is an intentional descriptive menu label.
       expect((region.navLabel ?? region.title).length).toBeLessThan(33);
       expect(region.image.src).toMatch(/^\/images\/attractions\/.*\.webp$/);
+      expect(region.image.alt.trim()).not.toBe("");
       expect(region.cards.length).toBeGreaterThanOrEqual(1);
       expect(region.cards.every((card) => String(card.to).startsWith("/attractions/"))).toBe(true);
       expect(region.relatedGuides.length).toBeLessThanOrEqual(3);
@@ -89,6 +90,7 @@ describe("Attractions hub redesign", () => {
     expect(page).toContain("hasPublicPhotoCredit");
     expect(page).toContain('data-testid="attraction-region-guides"');
     expect(page).toContain("region.relatedGuides.length > 0");
+    expect(page).toContain("alt={region.image.alt}");
     expect(page).toContain("More {region.navLabel ?? region.title} travel guides");
   });
 

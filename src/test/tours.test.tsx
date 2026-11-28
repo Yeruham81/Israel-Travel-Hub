@@ -311,6 +311,8 @@ describe("tours hub and SEO category pages", () => {
         (item) => item.id === category.getAttribute("data-category-id"),
       )!;
       expect(category.querySelector("img")).toHaveAttribute("src", originalCategory.photo.src);
+      expect(originalCategory.photo.alt.trim()).not.toBe("");
+      expect(category.querySelector("img")).toHaveAttribute("alt", originalCategory.photo.alt);
       expect(category.querySelector("img")).toHaveAttribute("loading", "lazy");
       expect(category.querySelectorAll("a")).toHaveLength(1);
       const link = category.querySelector("a")!;

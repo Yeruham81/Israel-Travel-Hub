@@ -29,6 +29,8 @@ export function TripadvisorReviewsSection({ personal = false }: { personal?: boo
             <img
               src="/images/tripadvisor.svg"
               alt=""
+              aria-hidden="true"
+              data-decorative-image="true"
               width={20}
               height={20}
               loading="lazy"
