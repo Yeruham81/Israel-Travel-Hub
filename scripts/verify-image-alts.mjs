@@ -12,8 +12,9 @@ function altProblem(value) {
     /^(?:image|photo|photograph|picture|illustration|thumbnail|placeholder|img)[.!]?$/i.test(text) ||
     /^(?:https?:\/\/|data:image\/)/i.test(text) ||
     /\.(?:avif|gif|jpe?g|png|svg|webp)$/i.test(text)
-  )
+  ) {
     return "generic alt text or image filename";
+  }
   return null;
 }
 
@@ -46,8 +47,9 @@ function literalValue(attribute) {
   const value = attribute?.initializer;
   if (!value) return undefined;
   if (ts.isStringLiteral(value)) return value.text;
-  if (ts.isJsxExpression(value) && value.expression && ts.isStringLiteralLike(value.expression))
+  if (ts.isJsxExpression(value) && value.expression && ts.isStringLiteralLike(value.expression)) {
     return value.expression.text;
+  }
   return undefined;
 }
 
@@ -71,7 +73,9 @@ export function auditImageSource(text, path) {
       const line = source.getLineAndCharacterOfPosition(node.getStart(source)).line + 1;
       const location = `${path}:${line}`;
       if (marked) {
-        if (value !== "" || !hidden) issues.push(location + ": invalid decorative image exemption");
+        if (value !== "" || !hidden) {
+          issues.push(location + ": invalid decorative image exemption");
+        }
       } else if (!alt || !alt.initializer) {
         issues.push(location + ": missing alt attribute");
       } else if (value !== undefined) {
