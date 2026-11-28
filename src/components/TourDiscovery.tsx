@@ -81,7 +81,7 @@ export function TourCategoryExplorer() {
                     src={category.photo.src}
                     srcSet={stage5PhotoSrcSet(category.photo.src)}
                     sizes="(min-width: 640px) 112px, 96px"
-                    alt=""
+                    alt={category.photo.alt}
                     width={160}
                     height={192}
                     loading="lazy"

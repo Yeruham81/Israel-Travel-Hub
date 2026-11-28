@@ -244,7 +244,10 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
         const layouts = container.querySelectorAll('[data-testid="jerusalem-area-layout"]');
         expect(layouts).toHaveLength(6);
         for (const section of sections) {
-          expect(section.querySelector("figure img")).toHaveAttribute("alt", "");
+          expect(section.querySelector("figure img")).toHaveAttribute(
+            "alt",
+            section.querySelector("figure figcaption")?.textContent?.trim(),
+          );
           expect(section.querySelector("figure figcaption")?.textContent).toBeTruthy();
         }
         for (const layout of layouts) {
@@ -338,7 +341,10 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
             "telaviv-editorial-hotel-card",
           );
           expect(hotelCards).toHaveLength(2);
-          expect(section.querySelector("figure img")).toHaveAttribute("alt", "");
+          expect(section.querySelector("figure img")).toHaveAttribute(
+            "alt",
+            section.querySelector("figure figcaption")?.textContent?.trim(),
+          );
           expect(section.querySelector("figure figcaption")?.textContent).toBeTruthy();
           expect(section.querySelector('[data-testid="telaviv-area-map"]')).toHaveClass(
             "mt-6",

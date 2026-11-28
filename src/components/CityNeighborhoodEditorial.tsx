@@ -571,7 +571,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
                       <figure className="overflow-hidden rounded-xl border bg-secondary/20">
                         <img
                           src={photo.src}
-                          alt=""
+                          alt={photo.alt}
                           width={755}
                           height={503}
                           loading="lazy"

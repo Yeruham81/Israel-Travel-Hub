@@ -16,6 +16,8 @@ export function TripadvisorReviewsButton({ className = "" }: { className?: strin
         <img
           src="/images/tripadvisor-owl-black.svg"
           alt=""
+          aria-hidden="true"
+          data-decorative-image="true"
           width={28}
           height={28}
           loading="lazy"
